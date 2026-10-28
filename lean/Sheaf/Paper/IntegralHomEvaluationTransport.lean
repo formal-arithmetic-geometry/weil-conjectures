@@ -77,6 +77,11 @@ theorem transportedCounit_naturality (X : Scheme.{u})
         transportedCounit X R a S e K' W =
       a.tensor.map (Prod.mkHom f (𝟙 _)) ≫
         transportedCounit X R a S e K W := by
-  sorry
+  with_unfolding_all
+    simp only [transportedCounit]
+    erw [e.hom.naturality_assoc, e.hom.naturality_assoc]
+    congr 1
+    simpa [swapTensor, CoefficientClosedStructure.tensor] using
+      S.evaluation_naturality K K' W f
 
 end WeilConjectures.IntegralHom

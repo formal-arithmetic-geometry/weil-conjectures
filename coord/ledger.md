@@ -20690,3 +20690,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:06 L: merged deliver/Q7/Sheaf.Paper.AdicReindexingTensorIntegral (stage 3; reviewer PASS; first push; landing 20261028T020657-L-2536317 (interface); batch 20261028T020127; modules 2; new nodes 1; change records: coord/changes/adic-reindexing-tensor-integral.md)
 - 02:06 L: merged deliver/Q8/Sheaf.Paper.AdicReindexingUnitContraction (stage 3; reviewer PASS; first push; landing 20261028T020659-L-2536594 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:07 L: merged deliver/Q9/Sheaf.Paper.FiniteQuotientLayerTensorDerivedHomologyComparison (stage 3; reviewer PASS; first push; landing 20261028T020700-L-2536935 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:07 L: merged deliver/R1/Sheaf.Paper.IntegralHomEvaluationTransport (stage 3; reviewer PASS; first push; landing 20261028T020701-L-2537117 (proof); batch 20261028T020127; modules 1; new nodes 0)
