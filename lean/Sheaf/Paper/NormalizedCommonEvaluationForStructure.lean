@@ -6,7 +6,7 @@ Authors: SHEAF group Q5
 module
 
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluation
-import Sheaf.Paper.NormalizedRationalEvaluationNaturality
+import Sheaf.Paper.NormalizedCommonEvaluationNaturality
 
 /-! # Naturality of common-stage Hom-first evaluation
 
@@ -36,20 +36,12 @@ Source: Bhatt--Scholze, Lemma 3.4.11 and Proposition 6.8.14; the pair-naturality
 argument of lem-sf-adic-common-stage-hom-transpose, step 6
 (blueprint: lem-sf-normalized-common-evaluation-naturality).
 
-Proof: evaluation is inverse transposition of the identity. The normalization hS
-therefore computes its representative by the rational inverse transpose of the
-identity, conjugated by the specified Hom and tensor comparisons. For P, Q and g,
-represent both components of g and the two evaluations over one finite field that
-contains the original entry fields and the composita defining both Hom objects
-and both tensor objects. Enlarge the field to represent all these finitely many
-arrows simultaneously. The internal-Hom and tensor representative formulas
-identify their maps with the finite rational maps, conjugated by the same
-comparisons. At that field use normalizedRationalEvaluation_naturality. Cancel
-adjacent comparisons and their inverses, then take the common-stage class. The
-normalization hS holds at every further extension, so these representatives
-compute the specified evaluations. No individual transition need be faithful.
-Identity and zero arrows, repeated fields, and arbitrary localized sums are
-included because rational evaluation naturality already holds for those. -/
+Proof: the uniqueness clause of podCommonClosed_existsUnique identifies S with
+podCommonClosed, since both satisfy the same finite-stage normalization. Replace
+S by this equal closed structure and apply normalizedCommonEvaluation_naturality.
+This equality identifies the whole transpose, so its inverse at the identity,
+and hence evaluation, also agrees. The canonical naturality theorem covers
+arbitrary permitted pairs and pair morphisms without extra hypotheses. -/
 theorem normalizedCommonEvaluationForStructure_naturality
     (S : PodPartialClosed (commonStageDerivedTensor l Ω X)
       (commonStageHomPairs l Ω X) (commonStageDerivedInternalHom l Ω X))
@@ -60,6 +52,10 @@ theorem normalizedCommonEvaluationForStructure_naturality
       S.evaluation Q =
     (commonStageDerivedTensor l Ω X).map
         (Prod.mkHom (𝟙 ((commonStageDerivedInternalHom l Ω X).obj P)) g.hom.1.unop) ≫
-      S.evaluation P ≫ g.hom.2 := by sorry
+      S.evaluation P ≫ g.hom.2 := by
+  have hU := (podCommonClosed_existsUnique l Ω X).unique hS
+    (podCommonClosed_existsUnique l Ω X).exists.choose_spec
+  rw [hU]
+  exact normalizedCommonEvaluation_naturality l Ω X P Q g
 
 end WeilConjectures
