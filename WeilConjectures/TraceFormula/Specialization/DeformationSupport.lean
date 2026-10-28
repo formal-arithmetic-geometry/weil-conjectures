@@ -73,15 +73,15 @@ lemma comap_ker_eq_top_of_disjoint [IsSeparated X.hom] (x : RationalPoint X) (g 
   rw [Scheme.Hom.support_ker, x.left.isClosedEmbedding.isClosed_range.closure_eq] at hz'
   exact Set.disjoint_left.mp hx ⟨z, rfl⟩ hz'
 
-variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k' ≠ ℓ)]
-  [LocallyOfFiniteType X.hom]
+variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
 /-- **Nearby cycles of the deformation kill complexes supported away from `I`**: for a closed
 immersion `g : Z ⟶ X` with `g⁻¹ I = 𝒪_Z`, `Ψ_X(Rg_* M) ≅ Rg'_* Ψ_Z(M) = 0`, by proper base change
 for nearby cycles, the special fibre of the deformation of `Z` along `g⁻¹ I` being empty. -/
-theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafData) (g : Z ⟶ X)
+theorem isZero_deformationNearbyCycles_obj_lowerStar_obj [Fact (ringChar k' ≠ ℓ)]
+    (I : X.left.IdealSheafData) (g : Z ⟶ X)
     [IsClosedImmersion g.left] (hI : I.comap g.left = ⊤)
     (hM : (deformationModel X I k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
