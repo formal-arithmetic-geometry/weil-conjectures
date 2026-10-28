@@ -1,0 +1,108 @@
+{
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Morphism equality induction, avoiding equality comparison of whole derived functors."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionRealization",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "def-sf-morphism-pullback-congruence",
+ "kind": "definition",
+ "title": "Morphism-indexed pullback equality transport",
+ "statement": "For an ambient proper/open calculus c [def-sf-ambient-proper-open-calculus] and an equality h:f=g of scheme-indexing morphisms, define morphismPullbackCongr c h:c.P(f)≅c.P(g) by equality induction on h, with identity isomorphism in the reflexive case. It agrees with the prescribed c.pCongr h, which transports along congrArg c.P h.",
+ "stmt_deps": [
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition coherence: equality transport of the pullback index; Stacks 03CB."
+ },
+ "proof": [
+  {
+   "text": "Eliminate h at the level of indexing morphisms. In the reflexive case the pullback functors are the same and Iso.refl constructs the required natural isomorphism. To compare with pCongr, eliminate h again; both constructions reduce to Iso.refl. Thus every component is exactly the specified equality transport, including identity maps and empty schemes.",
+   "uses": [
+    "def-sf-ambient-proper-open-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Equality transport in the composition clause.",
+   "via": [
+    "lem-sf-finite-projection-composition-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eqToIso.*congrArg|leftDerivedUpperStarCongr",
+   "results": "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+   "date": "2026-10-28",
+   "verdict": "Keep the transport indexed by the original morphism equality; prove agreement with eqToIso by equality induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToIso",
+   "results": "CategoryTheory.eqToIso; CategoryTheory.eqToIso_refl; CategoryTheory.eqToIso.hom; CategoryTheory.eqToIso.inv; CategoryTheory.eqToIso_trans; CategoryTheory.eqToIso_map_trans; CategoryTheory.eqToIso_map; CategoryTheory.Equivalence.induced_counitIso",
+   "date": "2026-10-28",
+   "verdict": "Keep the transport indexed by the original morphism equality; prove agreement with eqToIso by equality induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equality isomorphism for a functor agrees with transport by induction on the original equality",
+   "results": "CategoryTheory.Functor.congr_hom; CategoryTheory.Functor.congr_map; CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_refl; CategoryTheory.dcongr_arg; CategoryTheory.GradedObject.comapEq_hom_app; CategoryTheory.Functor.hcongr_hom; CategoryTheory.Pi.evalCompEqToEquivalenceFunctor_hom; Functor.mapEquiv_refl",
+   "date": "2026-10-28",
+   "verdict": "Keep the transport indexed by the original morphism equality; prove agreement with eqToIso by equality induction."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PullbackEqualityTransport",
+  "file": "lean/Sheaf/SixFunctors/PullbackEqualityTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.morphismPullbackCongr",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.morphismPullbackCongr",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.morphismPullbackCongr_eq"
+  ],
+  "statement": "def morphismPullbackCongr\n    {G : Type*} [Category G] {geo : G ⥤ Scheme.{u}} (c : Calculus G geo)\n    {X Y : G} {f g : X ⟶ Y} (h : f = g) : c.P f ≅ c.P g",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
+ }
+}

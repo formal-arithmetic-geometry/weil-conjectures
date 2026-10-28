@@ -7,10 +7,11 @@ module
 
 public import Sheaf.Paper.SixFunctorOperationDatumStages
 public import Sheaf.Paper.ProEtaleCompositionTowerDefinitions
+public import Sheaf.Paper.FiniteSupportCandidateComposition
 
 /-! # The specified candidate compact-support compositor
 
-This is the unchanged construction formerly in CartesianCompactSupportCompositor.
+This is the four-factor construction formerly in CartesianCompactSupportCompositor.
 It is shared by the Cartesian assembly and its canonical site square so both use
 one declaration without unfolding the four comparison factors.
 Source: Stacks Project, Tags 0F7J and 0F7K
@@ -42,11 +43,18 @@ def candidateCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   letI := cf.hasCompactification
   letI := cg.hasCompactification
   letI := cfg.hasCompactification
-  (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cg).map
-      ((towerCandidateComparison Λ cf (HasCompactification.compactification f)).hom.app K) ≫
-    (towerCandidateComparison Λ cg (HasCompactification.compactification g)).hom.app
-      ((originCompactSupport Λ f).obj K) ≫
-    (originCompositionAmbient Λ f g).hom.app K ≫
-    (towerCandidateComparison Λ (HasCompactification.compactification (f ≫ g)) cfg).hom.app K
+  (WeilConjectures.CompactSupportFiniteProjection.finiteSupportCandidateCompositionCore
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Y).ι
+    (originCompactSupport Λ f)
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cf)
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cg)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g)
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) cfg)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (f ≫ g))
+    (towerCandidateComparison Λ cf (HasCompactification.compactification f))
+    (towerCandidateComparison Λ cg (HasCompactification.compactification g))
+    (originCompositionAmbient Λ f g)
+    (towerCandidateComparison Λ (HasCompactification.compactification (f ≫ g)) cfg).symm).hom.app K
 
 end AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly

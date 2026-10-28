@@ -29,11 +29,12 @@
    "elementary": true
   },
   {
-   "text": "Reuse the proved private fixed_factor_projection_refl from the iteration-pasting module. Generalize the total composite to a map f with equality f = j ≫ q, and eliminate that equality in the entire realization-pasting statement. At reflexivity the pullback transport is the identity, so the factor-projection identity gives the realized total edge. Finally cancel the target conjugation in component. The identity-transport calculation is proved at arbitrary categories and functors before specialization.",
+   "text": "Reuse the proved private fixed_factor_projection_refl from the iteration-pasting module. Generalize the total composite to a map f with equality f = j ≫ q, and eliminate that equality in the entire realization-pasting statement. At reflexivity the pullback transport is the identity, so the factor-projection identity gives the realized total edge. Finally cancel the target conjugation in component. The identity-transport calculation is proved at arbitrary categories and functors before specialization. Use a proved private adapter for morphismPullbackCongr when applying this identity to binaryPullCast. Eliminate the indexing morphism equality; at reflexivity this transport and pCongr are both the identity, so the existing scalar_factor_realization applies without changing its signature.",
    "uses": [
     "def-sf-constructible-projection-mates",
     "def-sf-composition-projection-data",
-    "lem-sf-finite-projection-binary-iteration-triangle-pasting"
+    "lem-sf-finite-projection-binary-iteration-triangle-pasting",
+    "def-sf-morphism-pullback-congruence"
    ],
    "elementary": true
   },
@@ -47,16 +48,17 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-composition-projection-mate",
-  "lem-sf-finite-projection-composition-realization",
-  "lem-sf-finite-projection-binary-iteration-triangle-pasting",
+  "def-sf-composition-projection-data",
   "def-sf-constructible-projection-mates",
-  "def-sf-composition-projection-data"
+  "def-sf-morphism-pullback-congruence",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-finite-projection-binary-iteration-triangle-pasting",
+  "lem-sf-finite-projection-composition-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Composition coherence: explicit raw triangle realization and faithful reflection; proof completed by E4, 2026-10-28."
+  "place": "Composition coherence: explicit raw triangle realization and faithful reflection; proof completed by E4, 2026-10-28. Forced transport adapter by T3, 2026-10-28; all existing signatures retained."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -100,13 +102,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
-  "result": "pass",
-  "landing": "20261027T205921-L-1634030",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
  }
 }

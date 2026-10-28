@@ -1,0 +1,133 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: realization of the same specified projection maps and support compositors."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: realization of the same specified projection maps and support compositors."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionRealization",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The explicitly constructed binary composition endpoint comparisons.",
+   "via": [
+    "lem-sf-finite-projection-composition-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "def-sf-finite-projection-composition-data",
+ "kind": "definition",
+ "title": "Fixed coordinates for binary composition endpoints",
+ "statement": "The fixedScalarTensorData is the existing ordinary tensor data. realizedPullTargetIso and realizedTriangleTargetIso transport the explicit target isomorphisms along a pullback isomorphism and along the raw triangle respectively; their hom theorems give these exact composites. binaryFirst, binarySecond and binaryTotal are the three supplied factor compactifications. binaryPullCast is the morphism-indexed equality transport, proved equal to pCongr. binaryTargetComparison and binaryIterationTargetComparison use exactly these maps after the prescribed target and iteration comparisons. iteration_realization_factors is the existing iteration realization at the two factor compactifications. BinaryCompositionRealization is the proposition structure with precisely the two source and target equations in lem-sf-finite-projection-composition-realization. These are the existing definitions and signatures relocated verbatim into a separate module for compilation.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-composition-projection-data",
+  "lem-sf-finite-projection-iteration-realization",
+  "def-sf-morphism-pullback-congruence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the fixed tensor data, the two generic target transports, the three factor compactifications, and the two concrete target transports by the existing formulas. The forward hom formulas follow by reduction of isomorphism composition. Specialize iteration_realization to the first and second factor compactifications for iteration_realization_factors. Finally form the proposition structure from exactly the original source and target equations. This module only relocates the previously existing declarations; no comparison, signature or field equation changes.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates",
+    "def-sf-composition-projection-data",
+    "lem-sf-finite-projection-iteration-realization",
+    "def-sf-morphism-pullback-congruence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-composition-projection-data",
+  "lem-sf-finite-projection-iteration-realization",
+  "def-sf-morphism-pullback-congruence"
+ ],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Conjugating projection transformations by equivalences preserves iteration of two functors",
+   "results": "Function conjugation and generic category-equivalence results; no result about these prescribed derived support realizations.",
+   "date": "2026-10-27",
+   "verdict": "These existing project-specific constructions are relocated unchanged; generic categorical operations supply their maps and hom formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso; CategoryTheory.NatTrans.naturality",
+   "results": "Found equivalence unit, counit triangle and naturality statements; none specialize directly to the project-defined support normalizations.",
+   "date": "2026-10-27",
+   "verdict": "These existing project-specific constructions are relocated unchanged; generic categorical operations supply their maps and hom formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*composition|composition.*projection; iteration.*realization; finiteCompositionNormalization",
+   "results": "Mathlib has no compact-support comparison. The project has raw compositionProjectionMate, cartesianCompactSupportCompositor and finiteCompositionNormalization, but no equation identifying the iteration endpoints used here. Blueprint search for projection realization gave no matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "These existing project-specific constructions are relocated unchanged; generic categorical operations supply their maps and hom formulas."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionCompositionData",
+  "file": "lean/Sheaf/Paper/FiniteProjectionCompositionData.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.BinaryCompositionRealization",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData",
+   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData_eq",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso",
+   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryFirst",
+   "WeilConjectures.CompactSupportFiniteProjection.binarySecond",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryTotal",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryPullCast",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryTargetComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.iteration_realization_factors",
+   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison_hom",
+   "WeilConjectures.CompactSupportFiniteProjection.BinaryCompositionRealization"
+  ],
+  "statement": "structure BinaryCompositionRealization\n    (sq : IsPullback b.hom.left q.hom.left p.hom.left i.hom.left)\n    (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left)\n    (ha : letI := Padic.finite_coefficientExtensionRing C.l E n hn\n      IsIso (alpha (ordinary D\n        (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) j b q p i s hb)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
+ }
+}

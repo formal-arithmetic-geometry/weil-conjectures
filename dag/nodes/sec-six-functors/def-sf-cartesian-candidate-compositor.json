@@ -6,8 +6,8 @@
  },
  "proof_origin": {
   "by": "agent",
-  "document": "lean/Sheaf/SixFunctors/CartesianCompactSupportCompositor.lean",
-  "place": "The existing candidateCompositor construction, relocated without changing its signature, attributes or body"
+  "document": "lean/Sheaf/SixFunctors/CartesianCandidateCompositor.lean",
+  "place": "The same four comparison factors constructed using finiteSupportCandidateCompositionCore, whose generic component formula gives their original composite."
  },
  "mathlib_searches": [
   {
@@ -66,10 +66,11 @@
  "statement": "For a finite commutative coefficient ring A and quasi-compact morphisms f:X -> Y and g:Y -> Z, let c_f,c_g,c_gf be compactifications of f,g,f g. For an object K of the full bounded-below etale-origin category on X, define candidateCompositor to be the four-factor composite of the c_g image of the comparison c_f to the chosen f candidate, the c_g to chosen g candidate comparison at originCompactSupport f K, the canonical originCompositionAmbient f g, and the comparison from the chosen composite candidate to c_gf. The comparisons and canonical composition are those of [def-sf-origin-candidate-comparison, thm-sf-comp-composition]. This is the existing construction relocated verbatim into a shared module; it selects no new maps.",
  "proof": [
   {
-   "text": "Compose the four specified comparison components in their given order. The endpoint compatibilities are the definitions of originCompactSupport and of compact support for the chosen compactification. This is a concrete construction, identical to its earlier declaration in the assigned module.",
+   "text": "Apply the existing generic four-factor constructor to the two candidate comparisons, the canonical origin compositor, and the inverse of the final forward comparison. Its component formula composes exactly the four specified maps, because the inverse of that inverse is the original forward comparison. No map or chosen compactification changes.",
    "uses": [
     "def-sf-origin-candidate-comparison",
-    "thm-sf-comp-composition"
+    "thm-sf-comp-composition",
+    "lem-sf-finite-support-candidate-composition"
    ],
    "elementary": true
   }
@@ -80,7 +81,8 @@
  ],
  "proof_deps": [
   "def-sf-origin-candidate-comparison",
-  "thm-sf-comp-composition"
+  "thm-sf-comp-composition",
+  "lem-sf-finite-support-candidate-composition"
  ],
  "lean": {
   "existing": false,
@@ -103,13 +105,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-0f2d5",
-  "group": "F5",
+  "reviewer": "C-cb367",
+  "group": "T3",
   "result": "fix",
-  "landing": "20261027T034638-L-3669558",
+  "landing": "20261028T055804-L-809833",
   "kind": "interface",
-  "note": "independent cc review: item proof + 2 new sorry lemmas + verbatim candidateCompositor move against clone, FiniteSiteTower.paste and alpha defs; sandbox compile incl. importer ProjectionCompatibleTriangleAssembly OK; axioms OK"
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
  }
 }

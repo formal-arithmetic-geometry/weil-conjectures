@@ -192,6 +192,30 @@ private theorem scalar_factor_realization
   exact (congrArg (fun z ↦ p ≫ z) ht).trans
     (h.trans (congrArg (fun z ↦ sc ≫ R.map z) hq))
 
+/-- The same factor calculation for morphism-indexed pullback transport. -/
+private theorem scalar_factor_realization_morphism
+    {X V Y : SixFunctorSpace D} (j : X ⟶ V) (q : V ⟶ Y)
+    [IsOpenImmersion ((geometry D).map j)] [IsProper ((geometry D).map q)]
+    (f : X ⟶ Y) (hf : f = j ≫ q)
+    (k : FixedDerived (C := C) (E := E) (n := n) X)
+    (l : FixedDerived (C := C) (E := E) (n := n) Y)
+    {N : Type v} [Category N]
+    (R : FixedDerived (C := C) (E := E) (n := n) Y ⥤ N)
+    {a b : N} (p : a ⟶ b)
+    (sc : a ⟶ R.obj (((t₀).tensor Y).obj (((compact c₀ j q).obj k), l)))
+    (tc : b ≅ R.obj ((compact c₀ j q).obj
+      (((t₀).tensor X).obj (k, (((c₀).P f).obj l)))))
+    (h : p ≫ tc.hom = sc ≫ R.map
+      (fixedComponent (D := D) (C := C) (E := E) (n := n) (hn := hn) f
+        (sixFunctorFactorCompactification j q
+          ‹IsOpenImmersion ((geometry D).map j)› ‹IsProper ((geometry D).map q)› f hf) k l)) :
+    p ≫ (realizedPullTargetIso R (compact c₀ j q)
+      ((fixedTensor (C := C) (E := E) (n := n) X).obj k)
+      ((morphismPullbackCongr c₀ hf).app l) tc).hom =
+      sc ≫ R.map (projection c₀ t₀ j q k l) := by
+  cases hf
+  exact scalar_factor_realization (hn := hn) j q (j ≫ q) rfl k l R p sc tc h
+
 end TotalFactorPasting
 
 private theorem total_component_realization
@@ -245,7 +269,7 @@ private theorem total_component_realization
     (targetComparison S (f ≫ g) cfg K L)
     (RZ.functor.map
       (fixedComponent (C := C) (E := E) (n := n) (hn := hn) (f ≫ g) cfg k l))
-  exact scalar_factor_realization (hn := hn) (j ≫ b) (p ≫ s) (f ≫ g)
+  exact scalar_factor_realization_morphism (hn := hn) (j ≫ b) (p ≫ s) (f ≫ g)
     (by
       change (j ≫ q) ≫ (i ≫ s) = (j ≫ b) ≫ (p ≫ s)
       simp only [Category.assoc]

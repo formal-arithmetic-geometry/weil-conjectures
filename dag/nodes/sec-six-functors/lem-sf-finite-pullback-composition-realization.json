@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-finite-pullback-composition-realization",
+ "kind": "statement",
+ "title": "Unary pullback composition in fixed coefficient coordinates",
+ "statement": "For finite operation stage S [def-sf-operation-stages], maps f:X→Y and g:Y→Z, and bounded constructible N, apply inverse coefficient realization to the intrinsic pullback compositor. Following it by the fixed pullback realization for f at g*N and then by fixed pullback of the realization for g equals the fixed realization for fg followed by the canonical leftDerivedUpperStarComp. The comparison maps are the prescribed fixedPullRealization [def-sf-constructible-projection-mates]. This is an equality of unary pullback arrows and involves neither tensor nor compact support.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: realization of the same specified projection maps and support compositors."
+ },
+ "proof": [
+  {
+   "text": "Apply inverse realization to finitePullCompositionNormalization. Expand pullRealization into the exact localization comparison for the inverse coefficient equivalence, inverse image, and forward coefficient equivalence. Associativity and naturality of mapDerivedCategoryCompIso identify the realized intrinsic compositor with localized upperStarComp and the middle equivalence unit.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the inverse coefficient unit through the inner pullback comparison by naturality and cancel the adjacent unit and inverse. Expand leftDerivedUpperStarComp into its exact-to-left-derived comparisons; cancel these against the fixedPullComparison factors in fixedPullRealization. This gives the stated equality. All operations are exact, so zero objects, empty schemes, identity maps, and exponent one use the same identities. Present the canonical compositor by the pComp field of the ordinary calculus; its definition is leftDerivedUpperStarComp.",
+   "uses": [
+    "def-sf-constructible-projection-mates",
+    "def-sf-ambient-proper-open-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-ambient-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Unary pullback part of the coefficient-unit cancellation in the composition sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|leftDerivedFunctorCompIso",
+   "results": "",
+   "date": "2026-10-28",
+   "verdict": "Use the prescribed finite normalization and exact localization comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a pullback composition comparison through an equivalence and cancel the equivalence unit",
+   "results": "CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackComp; CategoryTheory.Limits.pullbackComparison_comp_fst; CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso; CategoryTheory.Limits.pullbackComparison",
+   "date": "2026-10-28",
+   "verdict": "Use the prescribed finite normalization and exact localization comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso, CategoryTheory.Functor.map",
+   "results": "CategoryTheory.Equivalence.functor_unitIso_comp; CategoryTheory.Equivalence.changeFunctor_unitIso_hom_app; CategoryTheory.Equivalence.changeFunctor_unitIso_inv_app; CategoryTheory.Iso.compInverseIso_hom_app; CategoryTheory.Iso.compInverseIso_inv_app; CategoryTheory.Iso.isoCompInverse_hom_app; CategoryTheory.Iso.isoCompInverse_inv_app; CategoryTheory.Iso.isoInverseOfIsoFunctor_hom_app",
+   "date": "2026-10-28",
+   "verdict": "Use the prescribed finite normalization and exact localization comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionRealization",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition sentence: unary pullback part of coefficient realization.",
+   "via": [
+    "lem-sf-finite-projection-binary-square",
+    "lem-sf-finite-projection-composition-transport",
+    "lem-sf-finite-projection-composition-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackCompositionRealization",
+  "file": "lean/Sheaf/Paper/FinitePullbackCompositionRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.fixedPullRealization_composition",
+  "statement": "theorem fixedPullRealization_composition\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (N : sixFunctorFiniteCategory D C E n hn Z) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)\n    let RX := realization (C := C) (E := E) (n := n) (hn := hn) X\n    let RZ := realization (C := C) (E := E) (n := n) (hn := hn) Z\n    let IX := (intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι\n    RX.inverse.map (IX.map ((S.finite.pullComposition f g).hom.app N)) ≫\n      (fixedPullRealization S f ((S.finite.pull g).obj N) ≪≫\n        (fixedDerivedPull (C := C) (E := E) (n := n) f).mapIso\n          (fixedPullRealization S g N)).hom =\n    (fixedPullRealization S (f ≫ g) N).hom ≫\n      ((ordinary D A).pComp f g).hom.app\n        (RZ.inverse.obj N.obj)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
+ }
+}

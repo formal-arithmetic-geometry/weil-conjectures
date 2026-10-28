@@ -6,6 +6,7 @@ Authors: SHEAF group B6
 module
 
 public import Sheaf.Paper.ConstructibleProjectionMates
+public import Sheaf.Paper.UnitTensorRealization
 
 /-! # Realizing an iteration of two finite projection maps
 
@@ -57,11 +58,8 @@ def iterationTensorComparison :=
   let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
   let TX := fixedTensor (C := C) (E := E) (n := n) X
   let Pf := fixedDerivedPull (C := C) (E := E) (n := n) f
-  (RX.unitIso.app
-    (((TX.obj (RX.inverse.obj K.obj)).obj
-      (RX.inverse.obj ((torPull S f).obj ((torPull S g).obj L)).obj)))).symm ≪≫
-    (TX.obj (RX.inverse.obj K.obj)).mapIso
-      (fixedPullRealization S f
+  unitTensorRealization RX TX (RX.inverse.obj K.obj)
+    (fixedPullRealization S f
         ⟨((torPull S g).obj L).obj, ((torPull S g).obj L).property.1⟩ ≪≫
         Pf.mapIso (fixedPullRealization S g ⟨L.obj, L.property.1⟩))
 
@@ -134,6 +132,15 @@ private theorem map_iso_tensor_trans
     H.map (u ≪≫ T.mapIso (v ≪≫ w)).hom =
       H.map (u ≪≫ T.mapIso v).hom ≫ H.map (T.map w.hom) := by
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+
+private theorem map_unit_tensor_trans
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (R : A ≌ B) (H : A ⥤ C) (T : A ⥤ A ⥤ A) (k : A)
+    {b : B} {c d : A} (e : R.inverse.obj b ≅ c) (h : c ≅ d) :
+    H.map (unitTensorRealization R T k (e ≪≫ h)).hom =
+      H.map (unitTensorRealization R T k e).hom ≫ H.map ((T.obj k).map h.hom) := by
+  unfold unitTensorRealization
+  exact map_iso_tensor_trans H (T.obj k) (R.unitIso.app _).symm e h
 
 private theorem inverse_conjugation
     {A B : Type*} [Category A] [Category B] (R : A ≌ B)
@@ -402,9 +409,7 @@ theorem iteration_realization :
   have hty := (TY.map (fixedSupportRealization S f cf K).hom).naturality
     (fixedPullRealization S g ⟨L.obj, L.property.1⟩).hom
   have htyg := map_two_eq G hty
-  have hsplit := map_iso_tensor_trans (F ⋙ G) (TX.obj k)
-    (RX.unitIso.app ((TX.obj k).obj
-      (RX.inverse.obj ((torPull S f).obj ((torPull S g).obj L)).obj))).symm
+  have hsplit := map_unit_tensor_trans RX (F ⋙ G) TX k
     (fixedPullRealization S f
       ⟨((torPull S g).obj L).obj, ((torPull S g).obj L).property.1⟩)
     (Pf.mapIso (fixedPullRealization S g ⟨L.obj, L.property.1⟩))

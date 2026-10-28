@@ -7,7 +7,9 @@
   "def-sf-operation-stages",
   "def-sf-constructible-projection-mates",
   "def-sf-composition-projection-data",
-  "lem-sf-finite-projection-iteration-realization"
+  "lem-sf-finite-projection-iteration-realization",
+  "def-sf-morphism-pullback-congruence",
+  "def-sf-finite-projection-composition-data"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
@@ -15,39 +17,58 @@
  },
  "proof": [
   {
-   "text": "Apply the already stated originSupportComparison_composition at K and at its tensor input, using domains for constructibility. Expand originSupportComparison and cancel the tower candidate comparisons to obtain the binary support normalization at the three factor compactifications. This reuses the finiteCompositionNormalization argument already isolated in the origin-normalization node.",
+   "text": "Use the proved fixedSupportComparison_composition_app from origin support normalization. Compare the two generic four-factor constructors by congruence in their final isomorphism argument, using symmetry of the canonical candidate comparison. The Cartesian compositor theorem then identifies this map with raw alpha on the supplied triangle. Cancel coefficient units to obtain forward support normalization.",
    "uses": [
     "lem-sf-finite-support-origin-binary-normalization",
-    "def-sf-operation-stages"
+    "lem-sf-cartesian-compact-support-compositor",
+    "lem-sf-finite-support-candidate-composition",
+    "def-sf-origin-candidate-comparison",
+    "lem-amb-etale-compact-comparisons",
+    "def-sf-cartesian-candidate-compositor"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the canonical origin compositor on this Cartesian triangle with raw alpha by cartesianCompactSupportCompositor. Apply the uncurried fixed-scalar tensor to the product morphism (alpha at K, identity at the fixed presentation of L), and realize this forward-normalization equation to obtain the source equality.",
+   "text": "Apply the proved binary_composition_source, the existing source endpoint now checked in the endpoint helper module. It tensors forward support normalization with the fixed presentation of L and uses the explicit source comparisons.",
    "uses": [
-    "lem-sf-cartesian-compact-support-compositor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Expand the explicit iteration tensor comparison. Substitute finitePullCompositionNormalization and use the coefficient equivalence triangle identities. Functoriality of the product isomorphism with identity at K gives the raw tensor image of trianglePull, with its final binaryPullCast. This proves the target equality without a projection map.",
-   "uses": [
-    "def-sf-operation-stages",
-    "lem-sf-finite-projection-iteration-realization"
+    "lem-sf-finite-projection-composition-source"
    ],
    "elementary": true
+  },
+  {
+   "text": "Apply fixedPullRealization_composition and tensor in the second slot. Cancel the coefficient unit by naturality; the inverse pullback compositor in trianglePull cancels, leaving binaryPullCast. Prove this cancellation at the level of natural isomorphisms before evaluating it at the input. Paste this tensor equation with naturality of the two support realizations and naturality of alpha to obtain the target endpoint equality. The morphism-indexed construction of binaryPullCast is proved equal to the original pCongr transport, so the specified map is preserved. Package the inverse-unit and tensor factors by unitTensorRealization before specializing the coefficient equivalence. Identify the underlying restricted pullback compositor before applying the realized tensor map, so no large derived object conversion is needed in this application.",
+   "uses": [
+    "lem-sf-finite-pullback-composition-realization",
+    "def-sf-composition-projection-data",
+    "lem-sf-finite-projection-iteration-realization",
+    "def-sf-morphism-pullback-congruence",
+    "def-sf-unit-tensor-realization",
+    "def-sf-operation-stages",
+    "def-sf-finite-projection-composition-data"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-finite-support-origin-binary-normalization",
+  "def-sf-cartesian-candidate-compositor",
+  "def-sf-composition-projection-data",
+  "def-sf-finite-projection-composition-data",
+  "def-sf-morphism-pullback-congruence",
   "def-sf-operation-stages",
+  "def-sf-origin-candidate-comparison",
+  "def-sf-unit-tensor-realization",
+  "lem-amb-etale-compact-comparisons",
   "lem-sf-cartesian-compact-support-compositor",
-  "lem-sf-finite-projection-iteration-realization"
+  "lem-sf-finite-projection-composition-source",
+  "lem-sf-finite-projection-iteration-realization",
+  "lem-sf-finite-pullback-composition-realization",
+  "lem-sf-finite-support-candidate-composition",
+  "lem-sf-finite-support-origin-binary-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Explicit coefficient-unit cancellation in the composition sentence."
+  "place": "Explicit forward support normalization and tensor endpoint pasting; unary pullback cancellation isolated."
  },
  "mathlib_searches": [
   {
@@ -108,27 +129,12 @@
   "file": "lean/Sheaf/Paper/FiniteProjectionCompositionRealization.lean",
   "declaration": "WeilConjectures.CompactSupportFiniteProjection.binary_composition_realization",
   "declarations": [
-   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData",
-   "WeilConjectures.CompactSupportFiniteProjection.fixedScalarTensorData_eq",
-   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso",
-   "WeilConjectures.CompactSupportFiniteProjection.realizedPullTargetIso_hom",
-   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso",
-   "WeilConjectures.CompactSupportFiniteProjection.realizedTriangleTargetIso_hom",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryFirst",
-   "WeilConjectures.CompactSupportFiniteProjection.binarySecond",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryTotal",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryPullCast",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryTargetComparison",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison",
-   "WeilConjectures.CompactSupportFiniteProjection.iteration_realization_factors",
-   "WeilConjectures.CompactSupportFiniteProjection.binaryIterationTargetComparison_hom",
-   "WeilConjectures.CompactSupportFiniteProjection.BinaryCompositionRealization",
    "WeilConjectures.CompactSupportFiniteProjection.binary_composition_realization"
   ],
   "statement": "theorem binary_composition_realization\n    (sq : IsPullback b.hom.left q.hom.left p.hom.left i.hom.left)\n    (K : sixFunctorFiniteCategory D C E n hn X)\n    (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left)\n    (ha : letI := Padic.finite_coefficientExtensionRing C.l E n hn\n      IsIso (alpha (ordinary D\n        (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) j b q p i s hb)) :\n    BinaryCompositionRealization S j b q p i s hb sq K L ha",
   "branch": "sheaf-dag",
-  "by": "B6",
-  "date": "2026-10-27"
+  "by": "T3",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -141,13 +147,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B6",
-  "result": "pass",
-  "landing": "20261027T050540-L-235778",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
  }
 }

@@ -1,0 +1,99 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coefficient transport: cancellation of the tensor-input coefficient unit."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Inverse coefficient unit followed by the tensor of the prescribed pullback comparison."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionRealization",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Coefficient-unit cancellation at the tensor input.",
+   "via": [
+    "lem-sf-finite-projection-iteration-realization",
+    "lem-sf-finite-projection-composition-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "def-sf-unit-tensor-realization",
+ "kind": "definition",
+ "title": "The coefficient unit and tensor comparison",
+ "statement": "For categories A and B, an equivalence R:A≌B, a curried tensor functor T:A→A→A, k,a,c:A and an isomorphism e:a≅c, unitTensorRealization is the isomorphism R⁻¹(R(T(k,a)))≅T(k,c) obtained by the inverse unit of R followed by T(k,e).",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Take the inverse equivalence unit at T(k,a), then compose it with the result of applying T(k,-) to e. Both endpoints are explicitly stated and both factors are supplied isomorphisms. This constructs the comparison without choosing an object or postponing a proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Equivalence.unitIso|Functor.mapIso_trans",
+   "results": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean; Mathlib/Algebra/Homology/ShortComplex/FunctorEquivalence.lean; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean; Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean; Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean; Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean; Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean; Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean",
+   "date": "2026-10-28",
+   "verdict": "Construct the explicit inverse unit and tensor map using these existing categorical operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel an equivalence unit and map an isomorphism by a tensor functor",
+   "results": "CategoryTheory.Equivalence.unitIso_hom_app_tensor_comp_inverse_map_δ_functor; CategoryTheory.Equivalence.unit_app_tensor_comp_inverse_map_δ_functor; CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse; CategoryTheory.Equivalence.unitIso_hom_app_tensor_comp_inverse_map_δ_functor_assoc; CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse; CategoryTheory.Equivalence.unit_app_tensor_comp_inverse_map_δ_functor_assoc; CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor; CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse_assoc",
+   "date": "2026-10-28",
+   "verdict": "Construct the explicit inverse unit and tensor map using these existing categorical operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-28",
+   "verdict": "Construct the explicit inverse unit and tensor map using these existing categorical operations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UnitTensorRealization",
+  "file": "lean/Sheaf/Paper/UnitTensorRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.unitTensorRealization",
+  "statement": "def unitTensorRealization\n    {A B : Type*} [Category A] [Category B] (R : A ≌ B)\n    (T : A ⥤ A ⥤ A) (k : A) {a c : A} (e : a ≅ c) :\n    R.inverse.obj (R.functor.obj ((T.obj k).obj a)) ≅\n      (T.obj k).obj c",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-cb367",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T055804-L-809833",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-finite-projection-composition-realization node and the base item module against the delivered item, Data/EndpointProofs/PullbackComposition/UnitTensor/PullbackEqualityTransport modules, the 3 adapted unclaimed modules, change records and the 4 importers OK in 3b"
+ }
+}
