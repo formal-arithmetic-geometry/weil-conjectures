@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-integral-hom-representative-uncurry",
+ "kind": "statement",
+ "title": "Unsigned uncurrying and derived comparison on integral Hom representatives",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme and R a commutative ring sheaf on its pro-etale site, with the indicated sheafification and local-bijection criteria. Use the module complexes, K-flat predicate, and Hom-model map of [def-sf-integral-hom-reduction-models], and a closed coefficient structure S and tensor models T of [def-coef-ringed-tensor-hom-model]. For K-flat complexes P,L, any complex I, and any chain map phi:P -> Hom(L,I), there is a chain map a:Tot(P tensor L) -> I. On the summand of degrees p,q with p+q=k it sends x tensor y to the p,q,k Hom-product projection of phi(x), evaluated at y, with no sign. Under the fixed tensor comparison, Q(a) is the inverse transpose of Q(phi) followed by the fixed Hom-model map. The product projections are those of [lem-sc-hom-complex-projections].",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sc-hom-complex-projections"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension; representative evaluation normalization"
+ },
+ "proof": [
+  {
+   "text": "Uncurry phi using the existing chain equivalence between total-tensor maps and Hom-complex maps. Its component formula is unsigned evaluation in the order P tensor L.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose phi with the fixed injective-resolution augmentation and apply T.uncurry_model. Equality on every pure tensor in every total summand identifies the chain map supplied there with chain uncurrying of the augmented phi. This extensionality follows by total-coproduct extensionality, module sheafification adjunction, and ordinary tensor generation.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of chain uncurrying identifies the augmented uncurry with the original uncurry followed by the augmentation. Localize and compose with the inverse localized augmentation; its product is the identity. The definition of homModelMap then gives the stated derived comparison.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2: tensor-Hom representative calculation, expanded into chain uncurrying and cancellation of the resolution augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain map into the Hom complex uncarries to evaluation on total tensor and computes the derived tensor Hom adjunction.",
+   "results": "8 hits. No matching Mathlib theorem for the prescribed ringed-site Hom-complex projections and fixed derived comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hits. No matching Mathlib theorem for the prescribed ringed-site Hom-complex projections and fixed derived comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_apply|ιTensorObj_internalHomEquiv_symm_f",
+   "results": "0 hits. No matching Mathlib theorem for the prescribed ringed-site Hom-complex projections and fixed derived comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorPresentationEvaluation",
+  "date": "2026-10-28",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-reduction-target",
+   "place": "paragraph 2: unsigned representative evaluation before the Koszul swap",
+   "via": [
+    "new-sf-integral-hom-reduction-target-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomRepresentativeUncurry",
+  "file": "lean/Sheaf/Paper/IntegralHomRepresentativeUncurry.lean",
+  "declaration": "WeilConjectures.IntegralHom.representative_uncurry_evaluation",
+  "statement": "theorem representative_uncurry_evaluation (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{t + 1, t, u, (max u (t + 1)) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R)) (T : CoefficientTensorModels.{u, t + 1, t, (max u (t + 1)) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y) R S) (P L I : CochainComplex (Modules.{t, u} Y R) ℤ) (hP : flat.{t, u} Y R P) (hL : flat.{t, u} Y R L) (φ : P ⟶ homComplex (R := R) L I) : ∃ a : (coefficientTotalTensor.{u, t + 1, t} (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, L) ⟶ I, (∀ (p q k : ℤ) (h : p + q = k) (h' : q + p = k) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : (P.X p).val.obj U) (y : (L.X q).val.obj U), (a.f k).val.app U (coefficientTensorGenerator.{u, t + 1, t} (AlgebraicGeometry.Scheme.ProEt.topology Y) R P L p q k h U x y) = (((φ.f p ≫ homComplexπ L I p q k h').val.app U x).app (op (Over.mk (𝟙 U.unop)))) y) ∧ T.comparison.hom.app (⟨P, hP⟩, ⟨L, hL⟩) ≫ (S.transpose (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj I)).symm (DerivedCategory.Q.map φ ≫ homModelMap.{t, u} Y R L I) = DerivedCategory.Q.map a",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-28",
+  "note": "Fully proved helper, extracted after eliminating expensive large-type rewrites so every delivered module compiles individually within the time limit. No new sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3429e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261028T072439-L-1949508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3429e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261028T072439-L-1949508",
+  "kind": "interface",
+  "note": "independent cc review: corrected finite_tensor_presentation_evaluation (∃adj from RingedDerivedTensorSymmetryModel, any R) against node new-sf-integral-hom-reduction-target-evaluation, its change record and the sole caller reduction_target_exists / TensorPresentation; axioms clean on all 3 modules"
+ }
+}
