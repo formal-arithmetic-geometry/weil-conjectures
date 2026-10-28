@@ -1,0 +1,142 @@
+{
+ "id": "new-lem-coef-rational-verdier-completed-interchange-canonical",
+ "kind": "statement",
+ "title": "Completed normalized interchange is the canonical integral braiding",
+ "statement": "For one integral dualizing datum A with a symmetry natural in both variables, the explicit completion conjugate completedInterchange A on integral constructible objects equals the canonical pullbackTensorIntegralBraiding of the completed integral tensor.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 3, signed transposition and completion conjugation"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-verdier-pairing-calculus",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "Transport the strict-system braiding through the completed tensor model. Its reduction square is the adjunction counit naturality square, so uniqueness identifies it with the canonical constructible integral braiding.",
+   "uses": [
+    "def-pod-integral-tensor-constraints",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 3, signed transposition and completion conjugation"
+   }
+  },
+  {
+   "text": "Make the supplied natural swap into a natural transformation. On good representatives, cancel the ordinary tensor presentation and completed tensor comparison, and use their representative equations and completion_signed_representative. The product localization universal property extends this equality to all derived inputs.",
+   "uses": [
+    "lem-coef-rational-verdier-completion-signed-representative",
+    "def-sf-integral-verdier-models",
+    "def-sf-rational-verdier-data",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 3, signed transposition and completion conjugation"
+   }
+  },
+  {
+   "text": "At constructible inputs compose the natural transformation identity with the inverse completion map. Its inverse-hom identity gives the claimed equality of completedInterchange with the canonical braiding.",
+   "uses": [
+    "lem-coef-rational-verdier-pairing-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 3, signed transposition and completion conjugation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-integral-tensor-constraints",
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-rational-verdier-completion-signed-representative",
+  "def-sf-integral-verdier-models",
+  "def-sf-rational-verdier-data",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-rational-verdier-pairing-calculus"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Canonicalization bridge used by the scalar-interchange proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations agreeing on K-flat representatives",
+   "results": "Localization.natTrans₂_ext and localization universal-property extensionality.",
+   "date": "2026-10-28",
+   "verdict": "used localization extensionality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "Localization.natTrans_ext compares natural transformations on a localization functor.",
+   "date": "2026-10-28",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(symmetr|braid)|signed.*completion",
+   "results": "No existing completion signed-square theorem; canonical braiding normalization found in CompletedTensorHomTranspose and reproved locally.",
+   "date": "2026-10-28",
+   "verdict": "one chain-level gap remains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierScalarInterchange",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-scalar-interchange",
+   "place": "Signed transposition and completion conjugation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierCompletedInterchangeCanonical",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierCompletedInterchangeCanonical.lean",
+  "declaration": "WeilConjectures.RationalVerdier.completedInterchange_eq_integralBraiding",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28",
+  "statement": "theorem completedInterchange_eq_integralBraiding\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (w : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (A : Datum D l hl X E w)\n    (hA : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l E X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' M').hom =\n        (A.symmetry.swap K M).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f))\n    (K M : sfIntegralConstructibleCategory l E X) :\n    completedInterchange D l hl X E w A K M =\n      (pullbackTensorIntegralBraiding l E X (hW := units D l hl X) K M).hom"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T034955-L-3575799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T034955-L-3575799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

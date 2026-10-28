@@ -6,6 +6,8 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.SixFunctors.RationalVerdierPairingCalculus
+import Sheaf.SixFunctors.RationalVerdierCompletedInterchangeCanonical
+import Sheaf.Paper.IntegralBraidingScalarExtensionSquare
 
 /-! # Scalar extension respects the normalized signed interchange
 
@@ -74,7 +76,12 @@ theorem integral_scalar_interchange
       (@integralTensorScalarComparison l _ E _ _ _ L _ _ _ i X
           (units D l hl X) K M).hom ≫
         completedInterchange D l hl X L wL B
-          ((integralScalar l X E L i).obj K) ((integralScalar l X E L i).obj M) := by sorry
+          ((integralScalar l X E L i).obj K) ((integralScalar l X E L i).obj M) := by
+  rw [completedInterchange_eq_integralBraiding D l hl X E wE A hA K M]
+  rw [completedInterchange_eq_integralBraiding D l hl X L wL B hB
+    ((integralScalar l X E L i).obj K) ((integralScalar l X E L i).obj M)]
+  exact @integralBraidingScalarExtensionSquare l _ E L _ _ _ _ _ _ i X
+    (units D l hl X) K M
 
 private theorem map_heq {C : Type*} [Category* C] {C' : Type*} [Category* C']
     (F : C ⥤ C') {K M K' M' : C} (hK : K = K') (hM : M = M')

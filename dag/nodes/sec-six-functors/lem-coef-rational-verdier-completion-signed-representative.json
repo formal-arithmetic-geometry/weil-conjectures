@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-rational-verdier-completion-signed-representative",
+ "kind": "statement",
+ "title": "Signed completion square on flat-term K-flat representatives",
+ "statement": "For good cochain representatives P,Q [lem-pur-integral-operations-well-defined], let s be any chain map from their total tensor to the reversed total tensor with the homogeneous Koszul formula (-1)^(ij). The fixed quotient-normalized completionChain [def-sf-rational-verdier-data] intertwines Q(s) and the strict-system signed swap transported by the completed tensor model [def-pur-completed-pullback-tower-realizations], with the specified integralCompletedTensorComparison components. This is a one-field representative equation; no scalar extension, dualizing datum, constructibility or inverse completion comparison is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 3, signed transposition and completion conjugation"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-hom-reduction-models",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "The pure tensor formula determines s by summand inclusions and sheaf tensor generators. In each positive quotient the strict signed swap has the same formula, and quotient images commute with the degree-product sign. The completion map has exactly these quotient coordinates and zero shifted mapping-fiber coordinate. Mapping-fiber coordinates and product projections detect equality, giving a compatible strict Roos chain square.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-rational-verdier-data",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 3, signed transposition and completion conjugation"
+   }
+  },
+  {
+   "text": "Apply the derived quotient functor and the full strict tensor-model normalization. The reduction-model comparison, strict-system braiding and reduction/limit adjunction express the completed map as completedSignedSwap conjugated by integralCompletedTensorComparison. This proves the stated derived representative equality. The calculation holds for zero complexes and the empty site as well.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 3, signed transposition and completion conjugation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-rational-verdier-data",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Chain representative part of signed transposition and completion, before localization and invertible conjugation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations agreeing on K-flat representatives",
+   "results": "Localization.natTrans₂_ext and localization universal-property extensionality.",
+   "date": "2026-10-28",
+   "verdict": "used localization extensionality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "Localization.natTrans_ext compares natural transformations on a localization functor.",
+   "date": "2026-10-28",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(symmetr|braid)|signed.*completion",
+   "results": "No existing completion signed-square theorem; canonical braiding normalization found in CompletedTensorHomTranspose and reproved locally.",
+   "date": "2026-10-28",
+   "verdict": "one chain-level gap remains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierScalarInterchange",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-scalar-interchange",
+   "place": "Signed transposition and completion, restricted to good cochain representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierCompletionSignedRepresentative",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierCompletionSignedRepresentative.lean",
+  "declaration": "WeilConjectures.RationalVerdier.completion_signed_representative",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.completedSignedSwap",
+   "WeilConjectures.RationalVerdier.completion_signed_representative"
+  ],
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28",
+  "statement": "theorem completion_signed_representative\n    (P Q : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (s : (constructibleTensorTotal l E X).obj (P.obj, Q.obj) ⟶\n      (constructibleTensorTotal l E X).obj (Q.obj, P.obj))\n    (hs : ∀ (i j : ℤ) (U : X.ProEtᵒᵖ)\n      (x : (P.obj.X i).val.obj U) (y : (Q.obj.X j).val.obj U),\n      (s.f (i + j)).val.app U (IntegralHom.totalPair.{u, u}\n        X (completedIntegralCommRingSheafUnrestricted l E X) P.obj Q.obj i j U x y) =\n        (i * j).negOnePow •\n          (eqToHom (congrArg\n            (fun k : ℤ ↦ ((constructibleTensorTotal l E X).obj (Q.obj, P.obj)).X k)\n              (add_comm j i))).val.app U\n            (IntegralHom.totalPair.{u, u} X\n              (completedIntegralCommRingSheafUnrestricted l E X) Q.obj P.obj j i U y x)) :\n    DerivedCategory.Q.map s ≫\n        DerivedCategory.Q.map ((completionChain D l hl X E).app (Q.obj, P.obj)) =\n      DerivedCategory.Q.map ((completionChain D l hl X E).app (P.obj, Q.obj)) ≫\n        (integralCompletedTensorComparison l E X).inv.app (P, Q) ≫\n        (completedSignedSwap l E X).hom.app\n          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n        (integralCompletedTensorComparison l E X).hom.app (Q, P)"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T034955-L-3575799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T034955-L-3575799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
