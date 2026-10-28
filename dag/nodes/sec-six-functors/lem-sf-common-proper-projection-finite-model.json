@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-common-proper-projection-finite-model",
+ "kind": "statement",
+ "title": "Finite-stage tensor and adjunction normalization for the common proper pull/push",
+ "statement": "In the finite-field geometric-base-change setting of [def-sf-native-proper-projection-comparison-data], let p be proper and fix one finite coefficient field E in the common-stage system [def-weil-algebraically-closed-coefficients]. Write F for its coefficient field and IX,IY for the finite-stage inclusions. There are a right adjoint G of rationalDerivedPullback, a specified adjunction, tensor inclusion isomorphisms tX,tY, and pull/push inclusion isomorphisms a,b comparing the finite adjunction with geometricCommonStageAdjunction. The tensor square identifies the included canonical rational pullback/tensor comparison with the canonical common-stage one, using tX,tY,a. The counit square is IX(ε_K)=a_(G K) followed by commonPull(b_K) followed by the common counit at IX K. These are normalization equations only: no projection map and no assertion of projection invertibility is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "compatibility paragraph; finite common-stage coefficient transition and units/counits"
+ },
+ "stmt_deps": [
+  "def-sf-native-proper-projection-comparison-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Localize the integral pull/direct adjunction at each finite coefficient field. Finite scalar change has invertible right-adjoint mates. Their counit equation and coherence descend the adjunction through the common-stage quotient. Uniqueness of the right adjoint identifies its descended right functor with the specified geometricCommonStageDirectImage and supplies the displayed counit equation.",
+   "uses": [
+    "lem-sf-rational-direct-image-adjunctions",
+    "lem-sf-rational-direct-image-coefficient-compatibility",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-stage tensor and pullback representative formulas give tX,tY and a. Their naturality is the scalar-extension associativity/cocycle equation. Insert these formulas in the defining representative of canonicalCommonStagePullbackTensor: both paths are the included canonicalRationalPullbackTensor with the same endpoint comparisons. Cancel adjacent inverse comparisons. This tensor calculation uses no projection invertibility.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-direct-image-adjunctions",
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "def-weil-derived-direct-image",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "compatibility paragraph; finite common-stage coefficient transition and units/counits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient stage inclusions preserve tensor products and adjunction counits",
+   "results": "Eight hits including CoalgCat counit_tensorObj, Module.Finite.tensorProduct, and tensorProductAdjunction.",
+   "date": "2026-10-28",
+   "verdict": "No common-stage sheaf category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient stage inclusions preserve tensor products and adjunction counits",
+   "results": "Eight hits including Adjunction.map_μ_comp_counit_app_tensor and module scalar-extension counit formulas.",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal adjunction results do not construct the project stage comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "Twelve generic mates correspondence results, including mateEquiv_counit.",
+   "date": "2026-10-28",
+   "verdict": "Useful for the counit calculation; no tensor/common-stage normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|map_rightAdjointProjectionMap",
+   "results": "Nineteen Mathlib hits, chiefly Adjunction.Unique and applications.",
+   "date": "2026-10-28",
+   "verdict": "Right adjoint uniqueness supplies the comparison only after constructing the finite-stage descended adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryProperProjectionInvertible",
+  "date": "2026-10-28",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: proper-factor projection; compatibility paragraph; finite common-stage coefficient transition and units/counits",
+   "via": [
+    "lem-sf-ordinary-proper-projection-invertible",
+    "lem-sf-native-proper-projection-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProperProjectionFiniteModel",
+  "file": "lean/Sheaf/Paper/CommonProperProjectionFiniteModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.properCommonProjection_finiteStageComparison",
+  "statement": "theorem properCommonProjection_finiteStageComparison [IsProper p]\n    (hl : IsUnit (l : AlgebraicClosure k₀))\n    [∀ x : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber,\n      Invertible (l : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField x)]\n    [∀ y : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber,\n      Invertible (l : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField y)]\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :\n    let F := AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E\n    let X := (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber\n    let W := (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber\n    let f := NativeBaseChange.geometricMap k₀ p\n    let IX := GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := X) E\n    let IY := GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := W) E\n    let FC := commonStageDerivedPullback l (PadicAlgCl l) f\n    let GC := properCommonPush k₀ l p hl\n    let TCX := commonStageDerivedTensor l (PadicAlgCl l) X\n    let TCY := commonStageDerivedTensor l (PadicAlgCl l) W\n    ∃ (G : sfRationalConstructibleCategory l F X ⥤ sfRationalConstructibleCategory l F W)\n      (adj : rationalDerivedPullback l F f ⊣ G)\n      (tX : (IX.prod IX) ⋙ TCX ≅ rationalDerivedTensor l F X ⋙ IX)\n      (tY : (IY.prod IY) ⋙ TCY ≅ rationalDerivedTensor l F W ⋙ IY)\n      (a : rationalDerivedPullback l F f ⋙ IX ≅ IY ⋙ FC)\n      (b : G ⋙ IY ≅ IX ⋙ GC),\n      (∀ P Q : sfRationalConstructibleCategory l F W,\n        IX.map (canonicalRationalPullbackTensor l F f P Q).hom ≫\n          tX.inv.app ((rationalDerivedPullback l F f).obj P,\n            (rationalDerivedPullback l F f).obj Q) ≫\n          TCX.map (Prod.mkHom (a.hom.app P) (a.hom.app Q)) =\n        a.hom.app ((rationalDerivedTensor l F W).obj (P, Q)) ≫\n          FC.map (tY.inv.app (P, Q)) ≫\n          (canonicalCommonStagePullbackTensor l (PadicAlgCl l) f\n            (IY.obj P) (IY.obj Q)).hom) ∧\n      ∀ K : sfRationalConstructibleCategory l F X,\n        IX.map (adj.counit.app K) = a.hom.app (G.obj K) ≫\n          FC.map (b.hom.app K) ≫\n          (geometricCommonStageAdjunction l (PadicAlgCl l)\n            (AlgebraicClosure k₀) hl f).counit.app (IX.obj K)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T055812-L-811254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T055812-L-811254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -21053,3 +21053,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/T6/Sheaf.Paper.PodReindexingComparisonCoreHomData (stage 3; reviewer PASS; first push; landing 20261028T055809-L-810572 (interface); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/T7/Sheaf.Paper.PodReindexingComparisonCoreTensorData (stage 3; reviewer PASS; first push; landing 20261028T055810-L-810858 (interface); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/T9/Sheaf.WeilSheaf.NativeExceptionalHomTransport (stage 3; reviewer PASS; first push; landing 20261028T055811-L-811057 (interface); batch 20261028T055556; modules 2; new nodes 1)
+- 05:58 L: merged deliver/U1/Sheaf.Paper.OrdinaryProperProjectionInvertible (stage 3; reviewer PASS; first push; landing 20261028T055812-L-811254 (interface); batch 20261028T055556; modules 3; new nodes 2)

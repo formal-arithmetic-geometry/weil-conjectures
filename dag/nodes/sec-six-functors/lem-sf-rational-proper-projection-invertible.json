@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-rational-proper-projection-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the proper counit projection at one finite rational coefficient field",
+ "statement": "Let l be prime, E/Q_l a finite extension, k a field with l invertible, and f:X→Y a proper k-morphism between finite-type k-schemes, with residue-unit instances on X,Y. In the raw rational constructible categories of [def-weil-rationalization-karoubi], use the normalized pullback, tensor and pullback/tensor comparison [def-weil-derived-pullback-tensor-hom, def-pur-completed-pullback-tensor-comparison]. For every right adjoint G of rationalDerivedPullback and every specified adjunction a, and arbitrary rational constructible K on X and L on Y, the transpose under a of μ_(G K,L) followed by ε_K tensor identity is invertible. This is the identity-open proper counit factor of [def-exchange-projection], with no common-stage category or ordinary realization in the conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "finite-field-coefficient paragraph and compatibility paragraph; proper specialization via (identity,f)"
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Each object of the raw scalar localization has an integral representative. The residue Tor criterion gives finite Tor intervals for these bounded constructible representatives. Apply the integral projection theorem to the identity-open compactification of the proper map. Identity extension is an equivalence; its tensor projection is invertible and can be canceled, so the integral proper counit factor is invertible. This argument uses only finite type over a field, prime invertibility and properness; the base field need not be finite.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "thm-sf-pf-adic",
+    "def-exchange-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize this arrow and its inverse. The localized tensor and pullback comparisons and units/counits identify it with the normalized rational proper counit factor. The raw rational Hom formula extends the equality to arbitrary rational morphisms.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the localized integral right adjoint with G by the unique adjunction-compatible isomorphism. Its counit equation conjugates the two projection mates through isomorphisms. Cancel them to obtain the assertion for the supplied adjunction a.",
+   "uses": [
+    "lem-sf-rational-direct-image-adjunctions",
+    "def-exchange-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "thm-sf-pf-adic",
+  "def-exchange-projection",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-fix-operation-reduction",
+  "lem-sf-rational-direct-image-adjunctions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "finite-field-coefficient paragraph and compatibility paragraph; proper specialization via (identity,f)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper derived projection formula over a finite extension of the l adic numbers",
+   "results": "Eight unrelated adic completion and linear projection hits.",
+   "date": "2026-10-28",
+   "verdict": "No normalized finite rational counit projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper derived projection formula over a finite extension of the l adic numbers",
+   "results": "Eight unrelated BDeRhamPlus and adic completion hits.",
+   "date": "2026-10-28",
+   "verdict": "No normalized finite rational counit projection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMap\"",
+   "results": "Zero hits.",
+   "date": "2026-10-28",
+   "verdict": "The project-specific projection identifier is absent."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap",
+   "results": "Zero Mathlib hits.",
+   "date": "2026-10-28",
+   "verdict": "Use the project integral/rational projection route, with identity-open normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryProperProjectionInvertible",
+  "date": "2026-10-28",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: proper-factor projection; finite-field-coefficient paragraph and compatibility paragraph; proper specialization via (identity,f)",
+   "via": [
+    "lem-sf-ordinary-proper-projection-invertible",
+    "lem-sf-native-proper-projection-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalProperProjectionInvertible",
+  "file": "lean/Sheaf/Paper/RationalProperProjectionInvertible.lean",
+  "declaration": "WeilConjectures.rationalProperProjection_isIso",
+  "statement": "theorem rationalProperProjection_isIso\n    (k : Type u) [Field k] (hl : IsUnit (l : k))\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f]\n    (G : sfRationalConstructibleCategory l E X ⥤ sfRationalConstructibleCategory l E Y)\n    (a : rationalDerivedPullback l E f ⊣ G)\n    (K : sfRationalConstructibleCategory l E X)\n    (L : sfRationalConstructibleCategory l E Y) :\n    IsIso (rationalProperProjection l E f G a K L)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.rationalProperProjection",
+   "WeilConjectures.rationalProperProjection_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T055812-L-811254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T055812-L-811254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

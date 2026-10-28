@@ -17,18 +17,19 @@
  ],
  "proof": [
   {
-   "text": "Lift M and N through the locally finite realization using its exact essential-image clause; boundedConstructible already supplies their native lifts and section-derived comparison isomorphisms. Choose one finite coefficient field containing models for both common-stage objects. Apply the field projection theorem and the supplied-domain compactification construction to (identity,p). The identity-open tensor map is the identity under the unit comparison, so the resulting invertible map is the properCommonProjection counit mate. Finite Tor amplitude is automatic at the coefficient field stages.",
+   "text": "Use R.image and S.image to lift boundedConstructible inputs to common-stage objects, with ordinary comparison isomorphisms. Choose the compositum of their coefficient stages. The finite-stage tensor/counit normalization and finite rational proper projection invertibility imply invertibility of the common-stage proper counit mate by the generic adjunction projection square. Naturality transports this along the stage-enlargement isomorphisms. No arbitrary operation package is postulated.",
    "uses": [
-    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-common-proper-projection-finite-model",
+    "lem-sf-rational-proper-projection-invertible",
+    "def-sf-locally-finite-adic-realization-data",
     "def-weil-algebraically-closed-coefficients",
-    "def-weil-finite-tor-amplitude",
-    "thm-sf-pf-field",
-    "def-exchange-projection"
+    "lem-pur-common-stage-pullback-tensor-naturality",
+    "def-pur-completed-pullback-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Substitute the tensor and counit normalization equations of C in this mate, equivalently use the unit equation in its unit/direct-image expression. The ordinary realization of the common-stage projection is the ordinary projection mate conjugated by the specified tensor, pull and push isomorphisms. The realization preserves inverses. Naturality of the counit mate conjugates back along the lifting isomorphisms, proving invertibility for M and N. This includes arbitrary bounded constructible complexes, not only lisse objects or objects of one degree.",
+   "text": "Reverse the tensor normalization of C, then apply the generic adjunction projection square with C.counit. The ordinary image of the common-stage invertible projection is conjugated to the ordinary proper projection on the lifted inputs. Cancel the tensor and pull/push isomorphisms. Naturality of the counit projection transports along the ordinary lifting isomorphisms to M,N. The proof is complete from the two finite-stage statements.",
    "uses": [
     "lem-sf-adic-proper-adjunction-realization",
     "lem-sf-adic-qbar-constructible-realization"
@@ -37,17 +38,19 @@
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
+  "lem-sf-common-proper-projection-finite-model",
+  "lem-sf-rational-proper-projection-invertible",
+  "def-sf-locally-finite-adic-realization-data",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-finite-tor-amplitude",
+  "lem-pur-common-stage-pullback-tensor-naturality",
+  "def-pur-completed-pullback-tensor-comparison",
   "lem-sf-adic-proper-adjunction-realization",
-  "lem-sf-adic-qbar-constructible-realization",
-  "thm-sf-pf-field"
+  "lem-sf-adic-qbar-constructible-realization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Strict subargument of lem-sf-native-proper-projection-realization: Steps 6--7, ordinary invertibility only."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Finite coefficient invertibility and comparison factored out; explicit projection square and naturality transports in U1 Lean proof."
  },
  "mathlib_searches": [
   {
@@ -118,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-b8c5f",
-  "group": "R1",
-  "result": "fix",
-  "landing": "20261028T020703-L-2537399",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T055812-L-811254",
   "kind": "interface",
-  "note": "independent cc review: item proof and the 2 new sorry statements (models = the old structure's fields without invertibility; ordinary proper projection invertibility) against the item node, the new nodes, the old structure and dependency owners; scratch compile of the 4-module set with #print axioms (sorryAx only from the 2 new holes); 0 importers"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
