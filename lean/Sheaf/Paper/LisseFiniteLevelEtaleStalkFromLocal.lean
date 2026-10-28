@@ -41,6 +41,10 @@ theorem lisse_finite_level_etale_stalk_from_local_section
       (localIsomorphismRestriction X B V).obj D)) :
     Nonempty ((pointSmallEtale x).sheafFiber.obj
       (derivedLocalIsomorphismSheaf A D)) := by
-  sorry
+  rcases h with ⟨e⟩
+  let P := derivedLocalIsomorphismPresheaf A D
+  let η := CategoryTheory.toSheafify X.smallEtaleTopology P
+  refine ⟨((pointSmallEtale x).presheafFiber.map η)
+    ((pointSmallEtale x).toPresheafFiber V v P e)⟩
 
 end AlgebraicGeometry.Scheme
