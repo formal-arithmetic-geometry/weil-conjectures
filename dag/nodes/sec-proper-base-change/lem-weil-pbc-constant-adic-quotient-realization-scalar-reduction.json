@@ -5,9 +5,9 @@
   "place": "Tag 09C6, consecutive quotient balancing"
  },
  "proof_origin": {
-  "by": "stage-3 worker G9",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, consecutive quotient balancing"
+  "by": "stage-3 worker A9",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/categories.tex",
+  "place": "Tags 0D6D and 0B65; direct consecutive coefficient square, constant realization scalar extension, finite coefficient naturality and inverse-image scalar mate. All four component comparisons are proved in the existing library."
  },
  "mathlib_match": null,
  "status": "split",
@@ -37,17 +37,43 @@
  ],
  "proof": [
   {
-   "text": "Paste the canonical quotient scalar comparison with the derived constant realization scalar-extension comparison and identify the coefficient maps by completion evaluation.",
+   "text": "The actual maps from A/I^(n+1) and A/I^(n+2) to the corresponding completion quotients are bijective by the proved quotient_map_bijective helper of ConstantAdicQuotientScalarComparison. Their consecutive square commutes on representatives. Localize its restriction-composition isomorphism and apply inverse-mate invertibility along the two coefficient equivalences.",
    "uses": [
     "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "lem-sfb-constant-realization-derived-scalar-extension"
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use constant_square_mate_isIso, the already proved specialization of constantRealizationDerivedScalarExtension to the pro-etale site, for the ordinary consecutive finite quotient ring map.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of pbcLevelConstantComparison for the consecutive quotient arrow identifies the square between the constant finite ring sheaves and pbcAdicRings. Compose pbcRestrictComp in the two directions, localize, and use inverse-mate invertibility along the finite coefficient equivalences.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved inverseImage_mate_isIso helper of ConstantAdicQuotientScalarComparison to the consecutive coefficient arrow and W.hom composed with g. Expand each exact quotient realization with mapDerivedCategoryCompIso and compose the four inverse-mate component isomorphisms, mapping them through the remaining functors. This gives exactly the displayed isomorphism for E′.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "lem-sfb-constant-realization-derived-scalar-extension"
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "mathlib_searches": [
   {
@@ -82,10 +108,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G9",
+  "group": "A9",
   "result": "pass",
-  "landing": "20261028T020433-L-2510559",
-  "kind": "interface",
+  "landing": "20261028T034653-L-3529470",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
