@@ -21,19 +21,21 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleStratifiedCounit
 This file defines the intrinsic notion of constructibility of sheaves of `Λ`-modules on the
 small pro-étale site of a scheme `X` (blueprint `def-weil-finite-torsion-constructibility`): a
 sheaf is constructible if, on the strata of a stratification of `X`, it is locally constant with
-finite stalks. Locally constant with finite stalks means that the pullbacks along the members
-of a pro-étale covering family are constant sheaves of finite `Λ`-modules.
+finitely generated stalks. Locally constant with finitely generated stalks means that the
+pullbacks along the members of a pro-étale covering family are constant sheaves of finitely
+generated `Λ`-modules.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant`: locally constant with finite
-  stalks.
+- `AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant`: locally constant with finitely
+  generated stalks.
 - `AlgebraicGeometry.ProEtale.IsConstructible`: constructible.
 
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj`: the comparison
-  pullback `ν^*` of a finite locally constant étale sheaf is locally constant with finite stalks.
+  pullback `ν^*` of a finite locally constant étale sheaf is locally constant with finitely
+  generated stalks.
 - `AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj`: `ν^*` preserves
   constructibility.
 - `ProEtale.isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`
@@ -55,21 +57,21 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Blueprint `def-weil-finite-torsion-constructibility`: a sheaf `F` of `Λ`-modules on the
-small pro-étale site of `X` is *locally constant with finite stalks* if there is a pro-étale
-covering family `g i : W i ⟶ X` such that every pullback `(g i)^* F` is the constant sheaf of a
-finite `Λ`-module. -/
+small pro-étale site of `X` is *locally constant with finitely generated stalks* if there is a
+pro-étale covering family `g i : W i ⟶ X` such that every pullback `(g i)^* F` is the constant
+sheaf of a finitely generated `Λ`-module (Stacks 09AJ). -/
 def IsFiniteLocallyConstant {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),
     Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧
-      ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
+      ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Module.Finite Λ M ∧
         Nonempty (((g i)^*[ModuleCat.{u + 1} Λ]).obj F ≅
           (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)
 
 /-- Blueprint `def-weil-finite-torsion-constructibility`: a sheaf `F` of `Λ`-modules on the
 small pro-étale site of `X` is *constructible* if there is a finite partition of `X` into
 locally closed constructible subschemes on each of which the restriction of `F` is locally
-constant with finite stalks. -/
+constant with finitely generated stalks. -/
 def IsConstructible {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ S : Stratification X, ∀ i : Fin S.n,
@@ -79,7 +81,7 @@ section Comparison
 
 variable {Λ}
 
-/-- Being locally constant with finite stalks is invariant under isomorphism. -/
+/-- Being locally constant with finitely generated stalks is invariant under isomorphism. -/
 theorem isFiniteLocallyConstant_of_iso {X : Scheme.{u}}
     {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
     (hF : IsFiniteLocallyConstant Λ F) : IsFiniteLocallyConstant Λ G := by
@@ -112,11 +114,11 @@ noncomputable def comparisonUpperStarConstantSheafIso (X : Scheme.{u}) :
     (constantSheafAdj (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) (ProEt.isTerminalMkId X))
 
 /-- The comparison pullback `ν^*` of a finite locally constant étale sheaf is locally constant
-with finite stalks. An étale cover trivialising `G` is a pro-étale cover, `ν^*` commutes with the
-pullbacks along its members and sends constant sheaves to constant sheaves; the values of the
-constant sheaves are finite on the nonempty members, as `G` has finitely generated stalks and `Λ`
-is finite. -/
-theorem isFiniteLocallyConstant_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
+with finitely generated stalks. An étale cover trivialising `G` is a pro-étale cover, `ν^*`
+commutes with the pullbacks along its members and sends constant sheaves to constant sheaves; the
+values of the constant sheaves are finitely generated on the nonempty members, as `G` has finitely
+generated stalks. -/
+theorem isFiniteLocallyConstant_comparisonUpperStar_obj {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
@@ -145,7 +147,7 @@ theorem isFiniteLocallyConstant_comparisonUpperStar_obj [Finite Λ] {X : Scheme.
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) e.symm
     have : Nonempty (𝒰₀.X i) := hi
     have : Module.Finite Λ M := moduleFinite_of_isFiniteSheaf_constantSheaf (Y := 𝒰₀.X i) M
-    exact ⟨M, Module.finite_of_finite Λ,
+    exact ⟨M, this,
       ⟨(comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (𝒰₀.f i)).app G ≪≫
         (ν^*(𝒰₀.X i)[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
         (comparisonUpperStarConstantSheafIso Λ (𝒰₀.X i)).app M⟩⟩
@@ -153,7 +155,7 @@ theorem isFiniteLocallyConstant_comparisonUpperStar_obj [Finite Λ] {X : Scheme.
 /-- The comparison pullback `ν^*` of a constructible étale sheaf is constructible: on the strata
 of a stratification for `G`, it is `ν^*` of a finite locally constant sheaf, `ν^*` commuting with
 the pullbacks to the strata. -/
-theorem isConstructible_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
+theorem isConstructible_comparisonUpperStar_obj {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
@@ -166,6 +168,20 @@ theorem isConstructible_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
   exact isFiniteLocallyConstant_of_iso
     ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (S.immersion i)).app G).symm
     (isFiniteLocallyConstant_comparisonUpperStar_obj _)
+
+/-- At a finite coefficient ring, the values of a locally constant sheaf with finitely generated
+stalks are finite. -/
+theorem IsFiniteLocallyConstant.exists_finite [Finite Λ] {X : Scheme.{u}}
+    {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstant Λ F) :
+    ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),
+      Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧
+        ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
+          Nonempty (((g i)^*[ModuleCat.{u + 1} Λ]).obj F ≅
+            (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M) := by
+  obtain ⟨ι, W, g, hg, h⟩ := hF
+  refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+  obtain ⟨M, _, e⟩ := h i
+  exact ⟨M, Module.finite_of_finite Λ, e⟩
 
 variable (Λ) in
 /-- Compatibility required from `sec-proetale-coefficients` (to be proved there):
@@ -180,7 +196,8 @@ sheaves on its small pro-étale site. As `ν^*` is fully faithful
 `AlgebraicGeometry.ProEtale.faithful_comparisonUpperStar`), this says that a pro-étale sheaf is
 constructible if and only if it is `ν^*` of a constructible étale sheaf. That `ν^*` preserves
 constructibility is `isConstructible_comparisonUpperStar_obj`; the essential surjectivity is the
-content of the lemma. -/
+content of the lemma (Stacks, Tag 09AK, which holds for Noetherian `Λ`; the proof here uses
+that `Λ` is finite). -/
 theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ]
     {T : Scheme.{u}} {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :
     IsConstructible Λ F ↔
@@ -189,11 +206,12 @@ theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_
   constructor
   · rintro ⟨S, hS⟩
     let G := (ν_*(T)[ModuleCat.{u + 1} Λ]).obj F
-    have := isIso_comparison_counit_of_finite_stratification Λ S F hS
+    have := isIso_comparison_counit_of_finite_stratification Λ S F fun i ↦ (hS i).exists_finite
     let e : (ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F :=
       asIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) T).counit.app F)
     refine ⟨G, ⟨S, fun i ↦ ?_⟩, ⟨e⟩⟩
     apply isFiniteLocallyConstantSheaf_of_comparison_finite_models Λ
+    apply IsFiniteLocallyConstant.exists_finite
     apply isFiniteLocallyConstant_of_iso
       ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ)
         (S.immersion i)).app G)

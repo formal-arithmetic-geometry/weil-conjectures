@@ -531,10 +531,14 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
           boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
             (C ⊗ D) := by
-    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal := isMonoidal_boundedConstructible
-      (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
-    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+    have := hP.locallyOfFiniteType
+    have := hP.quasiCompact
+    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
+    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
+    have : IsNoetherian P.total := {}
+    exact fun C D hC hD ↦
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges

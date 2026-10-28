@@ -45,51 +45,6 @@ variable {k : Type u} [Field k] {k' : Type u} [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X.left X'.left}
   {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
-section Restrict
-
-instance [LocallyOfFiniteType X'.hom] (V : M.total.Opens) :
-    LocallyOfFiniteType (M.restrictSpecialFibre V).hom :=
-  inferInstanceAs (LocallyOfFiniteType ((M.i ⁻¹ᵁ V).ι ≫ X'.hom))
-
-instance [IsSeparated X'.hom] (V : M.total.Opens) :
-    IsSeparated (M.restrictSpecialFibre V).hom :=
-  inferInstanceAs (IsSeparated ((M.i ⁻¹ᵁ V).ι ≫ X'.hom))
-
-instance [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] (V : M.total.Opens) :
-    QuasiCompact (M.restrictSpecialFibre V).hom := by
-  have : IsLocallyNoetherian X'.left := LocallyOfFiniteType.isLocallyNoetherian X'.hom
-  have : CompactSpace X'.left := QuasiCompact.compactSpace_of_compactSpace X'.hom
-  have : IsNoetherian X'.left := ⟨⟩
-  exact inferInstanceAs (QuasiCompact ((M.i ⁻¹ᵁ V).ι ≫ X'.hom))
-
-/-- The open immersion `i⁻¹ V ⟶ X'` of special fibres of the restriction of a model to an open
-`V` of its total space, as a morphism of `k'`-schemes. -/
-noncomputable def restrictSpecialFibreι (V : M.total.Opens) : M.restrictSpecialFibre V ⟶ X' :=
-  Over.homMk (M.i ⁻¹ᵁ V).ι rfl
-
-instance (V : M.total.Opens) : IsOpenImmersion (M.restrictSpecialFibreι V).left :=
-  inferInstanceAs (IsOpenImmersion (M.i ⁻¹ᵁ V).ι)
-
-/-- The restriction of a trait model over the base to an open `V` of its total space with
-quasi-compact inclusion is a trait model over the base. -/
-lemma IsTraitModelOfBase.restrictOpen (h : M.IsTraitModelOfBase k q g) (V : M.total.Opens)
-    [QuasiCompact V.ι] :
-    (M.restrictOpen V).IsTraitModelOfBase (X' := M.restrictSpecialFibre V) k (V.ι ≫ q)
-      ((M.j ⁻¹ᵁ V).ι ≫ g) := by
-  obtain ⟨e, he, he'⟩ := h.exists_comp_ε
-  obtain ⟨u, _, hu₁, hu₂⟩ := h.exists_openImmersion
-  refine ⟨h.isTraitModelOver.restrictOpen V, ⟨V.ι ≫ e, ?_, ?_⟩, (M.j ⁻¹ᵁ V).ι ≫ u,
-    inferInstance, ?_, ?_⟩
-  · change (M.j ∣_ V) ≫ V.ι ≫ e = (M.j ⁻¹ᵁ V).ι ≫ M.ε
-    rw [morphismRestrict_ι_assoc, he]
-  · change V.ι ≫ e ≫ X.hom = (V.ι ≫ q) ≫ traitToBase k k'
-    rw [he', Category.assoc]
-  · rw [Category.assoc, hu₁]
-    rfl
-  · rw [Category.assoc, hu₂]
-
-end Restrict
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
