@@ -16,16 +16,44 @@
  ],
  "proof": [
   {
-   "text": "Expand epsilon into inverse kappa factors and the ordinary inverse-image counit. Apply the actual kappa composition theorem, transport across the inverse identity, and use the normalized identity unit.",
+   "text": "Normalize the inverse-image identity on constant sections. The sheafification naturality square identifies the identity coefficient map with canonical restriction; the completed coefficient limit has the same identity by its projection equations. Construct the linear module identity from this coefficient equation. On arbitrary sections, the normalized inverse-image compositor followed by identity transport equals inverse image of this unit; the compositor for inverse g followed by g and the same transported unit equals the specified module counit. Both section equations are equalities of restrictions along identity-on-scheme site maps.",
    "uses": [
     "lem-trf-integral-inverse-image-comparison-composition",
-    "lem-trf-normalized-integral-geometric-coherence",
-    "lem-weil-isomorphism-comparison-natural"
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-sf-integral-identity-compositor-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact-derived transformation pasting transfers the module unit equation to precisely the specified mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. Functoriality of localized natural isomorphisms transfers the inverse-composition/counit equation. Equality transport is defined by elimination on the equality of scheme morphisms, and its derived image is the corresponding derived equality transport.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply kappa composition to two identity scheme maps and postcompose with pullback of the normalized completed unit. Naturality of the actual kappa at this unit rewrites the result as G(kappa followed by unit) followed by kappa. The completed target unit law and equality transport rewrite the other side as the inverse-image compositor followed by identity transport and kappa. Step 2 identifies this with G(the ordinary unit) followed by kappa. On a constructible object kappa is invertible, and the ordinary identity inverse image is faithful, so cancel to obtain kappa followed by the completed unit equal to the ordinary unit. This proves identity normalization from composition and naturality instead of assuming an additional normalization theorem.",
+   "uses": [
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-trf-normalized-integral-geometric-coherence",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand epsilon into the two inverse kappa factors and the ordinary inverse-image counit. Precomposition by A cancels both inverse pairs, giving that counit. For the other side substitute the kappa composition law for inverse g followed by g, cancel the completed compositor with its inverse, and transport kappa through inverse-g composed with g equal to identity. Step 3 replaces identity kappa followed by the completed unit by the ordinary unit; step 2 identifies the resulting inverse-image composite with the same counit. Convert the resulting equality to HEq.",
+   "uses": [
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-sf-integral-identity-compositor-sections",
+  "lem-sp-exact-derived-transformation-pasting",
   "lem-trf-integral-inverse-image-comparison-composition",
   "lem-trf-normalized-integral-geometric-coherence",
   "lem-weil-isomorphism-comparison-natural"
@@ -33,7 +61,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-  "place": "Precomposition portion of the Weil-structures cancellation calculation."
+  "place": "Weil-structures paragraph, parent steps 4--6; W6 proves the ordinary unit sectionwise and deduces kappa identity normalization from the existing composition and naturality equations."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -79,9 +107,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "W6",
   "result": "pass",
-  "landing": "20261028T020800-L-2547853",
+  "landing": "20261028T055823-L-813408",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

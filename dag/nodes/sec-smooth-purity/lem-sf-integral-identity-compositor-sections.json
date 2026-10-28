@@ -1,0 +1,96 @@
+{
+ "id": "lem-sf-integral-identity-compositor-sections",
+ "kind": "statement",
+ "title": "Section-normalized identity compositor",
+ "statement": "Two module identity isomorphisms whose sections are the canonical identity restrictions intertwine the section-normalized inverse-image compositor with inverse image of the unit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph, identity normalization step."
+ },
+ "stmt_deps": [
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-pod-pullback-identities-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the normalized identity compositor on each module and section; the compositor equation and the two supplied section normalization equations reduce both sides to the same restriction map, then extensionality proves the natural transformation equality.",
+   "uses": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-trf-integral-inverse-image-comparison-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-trf-integral-inverse-image-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Identity normalization section; sectionwise equality of restrictions."
+ },
+ "mathlib_searches": [
+  {
+   "kind": "leanfinder",
+   "query": "identity compositor inverse image"
+  },
+  {
+   "kind": "loogle",
+   "query": "Functor.leftUnitor"
+  },
+  {
+   "kind": "grep",
+   "query": "moduleComposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-automorphism-cancellation-precomposition",
+   "place": "private identity compositor helper",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralIdentityCompositorSections",
+  "file": "lean/Sheaf/Paper/IntegralIdentityCompositorSections.lean",
+  "declaration": "WeilConjectures.integralIdentityCompositorSections",
+  "statement": "theorem integralIdentityCompositorSections\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})\n    (e : inverseImageIntegralModules l E (𝟙 X) ≅ 𝟭 (integralTowerModules l E X))\n    (r : inverseImageIntegralModules l E ((𝟙 X) ≫ (𝟙 X)) ≅\n      𝟭 (integralTowerModules l E X))\n    (he : ∀ (M : integralTowerModules l E X) (U : X.ProEt)\n      (x : ((inverseImageIntegralModules l E (𝟙 X)).obj M).val.obj (op U)),\n      (e.hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapId (P := @WeaklyEtale) ⊤ X (𝟙 X)\n          rfl).inv.app U).op x)\n    (hr : ∀ (M : integralTowerModules l E X) (U : X.ProEt)\n      (x : ((inverseImageIntegralModules l E ((𝟙 X) ≫ (𝟙 X))).obj M).val.obj (op U)),\n      (r.hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapId (P := @WeaklyEtale) ⊤ X\n          ((𝟙 X) ≫ (𝟙 X)) (Category.id_comp (𝟙 X))).inv.app U).op x) :\n    (integralInverseImageComposition l E (𝟙 X) (𝟙 X)).hom ≫ r.hom =\n      (Functor.whiskerRight e.hom (inverseImageIntegralModules l E (𝟙 X)) ≫\n        (Functor.leftUnitor (inverseImageIntegralModules l E (𝟙 X))).hom) ≫ e.hom",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAutomorphismCancellationPrecomposition",
+  "date": "2026-10-28",
+  "group": "W6"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261028T055823-L-813408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261028T055823-L-813408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
