@@ -128,6 +128,16 @@ end PowModel
 
 section GenericUnit
 
+/-- If `F(a ≫ b ≫ c) = F(d ≫ e)` with `b`, `c`, `F d`, `e` invertible, then `F a` is invertible. -/
+lemma isIso_map_of_map_comp_eq {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {P Q R S T : C} {a : P ⟶ Q} {b : Q ⟶ R} {c : R ⟶ S} {d : P ⟶ T} {e : T ⟶ S}
+    (h : a ≫ b ≫ c = d ≫ e) [IsIso b] (hc : IsIso c) (hd : IsIso (F.map d)) [IsIso e] :
+    IsIso (F.map a) := by
+  have h' := congr(F.map $h)
+  simp only [Functor.map_comp] at h'
+  have : IsIso (F.map a ≫ F.map b ≫ F.map c) := by rw [h']; infer_instance
+  exact IsIso.of_isIso_comp_right (F.map a) (F.map b ≫ F.map c)
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- If a morphism of models `M ⟶ N` over the identity of `X` has invertible morphisms of total spaces
@@ -143,6 +153,41 @@ theorem NearbyCyclesModel.isIso_unit_of_hom {X X' Y' : Scheme.{u}} {M : NearbyCy
     rw [h]; infer_instance
   exact isIso_of_isIso_leftDerivedUpperStar_map Λ c _
     (IsIso.of_isIso_comp_right (L((c)^*⟦Λ⟧).map (N.unit Λ)) ((ψ.pullbackExchange Λ).app (𝟙_ _)))
+
+/-- The unit of `L(𝟙)^* ⊣ R(𝟙)_*` is an isomorphism. -/
+lemma isIso_derivedUpperStarLowerStarAdjunction_id_unit (X : Scheme.{u}) :
+    IsIso (derivedUpperStarLowerStarAdjunction Λ (𝟙 X)).unit := by
+  have : (L((𝟙 X)^*⟦Λ⟧)).Full := Functor.Full.of_iso (leftDerivedUpperStarId Λ X).symm
+  have : (L((𝟙 X)^*⟦Λ⟧)).Faithful := Functor.Faithful.of_iso (leftDerivedUpperStarId Λ X).symm
+  exact (derivedUpperStarLowerStarAdjunction Λ (𝟙 X)).unit_isIso_of_L_fully_faithful
+
+/-- **Restricted specialization unit from the proper exchange**: let `φ : M ⟶ N` be a morphism of
+models over the identity of `X`, with morphism `f'` of special fibres, whose pushforward exchange
+is invertible at the unit and such that the specialization unit of `M` is invertible. If the unit
+`Λ ⟶ Rf'_* Lf'^* Λ` becomes invertible after `Le^*`, so does the specialization unit of `N`. -/
+theorem NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange {X X' Y' T : Scheme.{u}}
+    {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel X Y'} {f' : X' ⟶ Y'}
+    (φ : M.Hom N (𝟙 X) f')
+    (hχ : IsIso ((φ.pushforwardExchange Λ).app (L((𝟙 X)^*⟦Λ⟧).obj (𝟙_ _))))
+    (hM : IsIso (M.unit Λ)) (e : T ⟶ Y')
+    (he : IsIso (L((e)^*⟦Λ⟧).map ((derivedUpperStarLowerStarAdjunction Λ f').unit.app (𝟙_ _)))) :
+    IsIso (L((e)^*⟦Λ⟧).map (N.unit Λ)) := by
+  have := isIso_derivedUpperStarLowerStarAdjunction_id_unit Λ X
+  exact isIso_map_of_map_comp_eq L((e)^*⟦Λ⟧)
+    (φ.unit_comp_map_unit_comp_pushforwardExchange_app Λ) hχ he
+
+/-- Restriction along `r ≫ e` with `r` a universal homeomorphism detects isomorphisms after
+restriction along `e`. -/
+lemma isIso_leftDerivedUpperStar_map_of_comp {A B C : Scheme.{u}} (r : A ⟶ B) (e : B ⟶ C)
+    [IsUniversalHomeomorphism r]
+    {K L : DerivedCategory (Mod (Sheaf (ProEt.topology C) Ab.{u + 1}) (condensedRingObj Λ C))}
+    (g : K ⟶ L) (h : IsIso (L((r ≫ e)^*⟦Λ⟧).map g)) : IsIso (L((e)^*⟦Λ⟧).map g) := by
+  refine isIso_of_isIso_leftDerivedUpperStar_map Λ r _ ?_
+  have hn := (leftDerivedUpperStarComp Λ r e).hom.naturality g
+  have : IsIso ((leftDerivedUpperStarComp Λ r e).hom.app K ≫
+      L((r)^*⟦Λ⟧).map (L((e)^*⟦Λ⟧).map g)) := by
+    erw [← hn]; infer_instance
+  exact IsIso.of_isIso_comp_left ((leftDerivedUpperStarComp Λ r e).hom.app K) _
 
 end GenericUnit
 
@@ -162,5 +207,87 @@ theorem isIso_thickOriginPowSourceModel_unit :
     (isIso_deformationModel_polyAffineThickOrigin_one_unit k')
 
 end Unit
+
+section Geometry
+
+variable (k : Type u) [Field k] (k' : Type u) [Field k'] [Algebra k k'] {m : ℕ} (hm : m ≠ 0)
+
+/-- The origin, as a rational point of the centre `V(x^m)`. -/
+noncomputable abbrev thickOriginRationalPoint (m : ℕ) (hm : 0 < m) :
+    point k ⟶ centre (polyAffine k 1) (polyAffineThickOrigin k m) :=
+  Over.homMk (thickOriginPoint k hm) (thickOriginPoint_hom k hm)
+
+/-- The rational point of the zero section of the special fibre of `𝒟_{V(x^m)}`. -/
+noncomputable abbrev thickOriginZeroSectionPoint (m : ℕ) (hm : 0 < m) :
+    Spec (.of k') ⟶
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').left :=
+  constantFamilySpecialPoint k' (thickOriginRationalPoint k m hm)
+
+instance (m : ℕ) [NeZero m] :
+    IsUniversalHomeomorphism
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom := by
+  have := isUniversalHomeomorphism_centre_polyAffineThickOrigin k
+    (Nat.pos_of_ne_zero (NeZero.ne m))
+  exact inferInstanceAs (IsUniversalHomeomorphism (pullback.snd _ _))
+
+instance (m : ℕ) [NeZero m] :
+    Subsingleton
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').left :=
+  ⟨fun _ _ ↦ (deformationSpecialFibre (centre (polyAffine k 1)
+    (polyAffineThickOrigin k m)) ⊥ k').hom.isHomeomorph.injective (Subsingleton.elim _ _)⟩
+
+/-- The rational point `w = c(e(0))` of the thickened special fibre of the power model. -/
+noncomputable abbrev thickOriginPowPoint : Spec (.of k') ⟶ (thickOriginPowSpecialFibre k k' hm).left :=
+  thickOriginZeroSectionPoint k k' 1 one_pos ≫
+    (zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k 1) k').left ≫
+      thickOriginSpecialFibreToPow k k' hm
+
+/-- Its image `o = ν_s(w)` in the special fibre of `𝒟_{V(x^m)}`. -/
+noncomputable abbrev thickOriginPowImagePoint :
+    Spec (.of k') ⟶ (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').left :=
+  thickOriginPowPoint k k' hm ≫ (thickOriginPowSpecialFibreMap k k' hm).left
+
+lemma thickOriginSpecialFibreToPow_powSpecialFibreMap :
+    thickOriginSpecialFibreToPow k k' hm ≫ (thickOriginPowSpecialFibreMap k k' hm).left =
+      deformationSpecialFibrePowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
+        (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
+        (deformationSpacePowMap_deformationSpaceToAffineLine _)
+        (traitPowMap_traitToAffineLine k k' hm) :=
+  pullback.lift_fst _ _ _
+
+lemma thickOriginPowImagePoint_hom :
+    thickOriginPowImagePoint k k' hm ≫
+      (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').hom = 𝟙 _ := by
+  simp only [thickOriginPowImagePoint, thickOriginPowPoint, Category.assoc]
+  rw [reassoc_of% thickOriginSpecialFibreToPow_powSpecialFibreMap, deformationSpecialFibrePowMap]
+  erw [pullback.lift_snd]
+  rw [Over.w, constantFamilySpecialPoint_hom]
+
+/-- The image point `o` lies on the zero section: it is the zero-section point of `V(x^m)`. -/
+lemma thickOriginPowImagePoint_eq :
+    thickOriginPowImagePoint k k' hm = thickOriginZeroSectionPoint k k' m
+      (Nat.pos_of_ne_zero hm) ≫
+        (zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k m) k').left := by
+  have : NeZero m := ⟨hm⟩
+  refine Scheme.ext_of_comp_eq_id_of_apply_eq
+    (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').hom
+    (thickOriginPowImagePoint_hom k k' hm) (by rw [Category.assoc, Over.w,
+      constantFamilySpecialPoint_hom]) ?_
+  obtain ⟨ζ, hζ⟩ := deformationSpecialFibrePowMap_mem_range_zeroSectionSpecialFibreMap k' hm
+    (polyAffine k 1) (fun U ↦ (siteIdeal_polyAffineThickOrigin k m U).le)
+    (traitPowMap_traitToAffineLine k k' hm) (Nat.pos_of_ne_zero hm)
+    (thickOriginZeroSectionPoint k k' 1 one_pos (IsLocalRing.closedPoint k'))
+  have hr : thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)
+      (IsLocalRing.closedPoint k') = ζ := Subsingleton.elim _ _
+  have hc (x) : (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginSpecialFibreToPow k k' hm x) =
+      deformationSpecialFibrePowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
+        (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
+        (deformationSpacePowMap_deformationSpaceToAffineLine _)
+        (traitPowMap_traitToAffineLine k k' hm) x := by
+    rw [← Scheme.Hom.comp_apply, thickOriginSpecialFibreToPow_powSpecialFibreMap]
+  simp only [thickOriginPowImagePoint, thickOriginPowPoint, Scheme.Hom.comp_apply]
+  rw [hc, hr, hζ]
+
+end Geometry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
