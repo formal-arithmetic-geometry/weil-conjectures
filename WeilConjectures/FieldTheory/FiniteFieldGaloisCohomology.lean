@@ -99,7 +99,8 @@ omit [Fintype k] in
 variable (k Ω) in
 /-- An algebraically closed extension of a finite field contains a subextension of every finite
 degree. -/
-theorem exists_intermediateField_finrank_eq [Finite k] [IsAlgClosed Ω] {N : ℕ} (hN : N ≠ 0) :
+private theorem exists_intermediateField_finrank_eq [Finite k] [IsAlgClosed Ω]
+    {N : ℕ} (hN : N ≠ 0) :
     ∃ E : IntermediateField k Ω, FiniteDimensional k E ∧ finrank k E = N := by
   have : NeZero N := ⟨hN⟩
   have : Fact (ringChar k).Prime := ⟨CharP.char_is_prime k _⟩
