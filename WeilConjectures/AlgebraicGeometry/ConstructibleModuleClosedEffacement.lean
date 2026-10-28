@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Effacing constructible finite module coefficients on a closed subscheme
 

@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomologyHigh
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomologyPullback
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Higher cohomology across a dense open -/
 

@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeil
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # The Weil group of a curve over a finite field

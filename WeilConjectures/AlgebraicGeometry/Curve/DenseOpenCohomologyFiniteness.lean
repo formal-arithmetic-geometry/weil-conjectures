@@ -15,6 +15,7 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBoundaryCohomology
 import WeilConjectures.SixFunctors.Etale.Gabber
 import Mathlib.GroupTheory.QuotientGroup.Finite
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 @[expose] public section
 

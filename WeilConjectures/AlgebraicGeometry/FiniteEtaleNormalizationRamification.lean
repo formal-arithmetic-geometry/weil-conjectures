@@ -12,6 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalSmooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Normalizing a finite étale cover of a punctured curve: a ramification index prime to `ℓ`

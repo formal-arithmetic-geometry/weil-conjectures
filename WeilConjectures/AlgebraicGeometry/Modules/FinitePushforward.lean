@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
@@ -19,6 +18,12 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 import all Mathlib.AlgebraicGeometry.Morphisms.FlatRank  -- for unfolding `Scheme.Hom.finrank`
+import Mathlib.Topology.Algebra.InfiniteSum.Order
+import Mathlib.Data.EReal.Operations
+import Mathlib.Topology.MetricSpace.Bounded
+import Mathlib.Algebra.Order.Module.Field
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-!
 # The pushforward of the structure sheaf along a finite morphism

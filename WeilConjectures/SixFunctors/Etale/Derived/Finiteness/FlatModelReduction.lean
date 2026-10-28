@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Reduction of a bounded flat model on the étale site

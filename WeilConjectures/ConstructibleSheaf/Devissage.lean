@@ -10,6 +10,8 @@ public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 public import WeilConjectures.Topology.StratificationDense
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Dévissage of a constructible sheaf

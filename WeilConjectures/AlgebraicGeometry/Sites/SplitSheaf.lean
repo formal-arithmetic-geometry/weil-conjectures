@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import Mathlib.GroupTheory.FiniteAbelian.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Sheaves on a field split by a Galois extension

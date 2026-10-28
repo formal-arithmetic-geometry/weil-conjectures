@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -16,6 +15,14 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
 public import WeilConjectures.Mathlib.RingTheory.Localization.Ideal
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
+import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+import WeilConjectures.Compactification.Defs
+import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Hilbert schemes of curves

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Restricting lisse Weil sheaves to an open subcurve

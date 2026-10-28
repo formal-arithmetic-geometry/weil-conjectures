@@ -8,7 +8,6 @@ module
 public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection

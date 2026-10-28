@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.CupProduct
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import Mathlib.Topology.Algebra.InfiniteSum.Order
+import Mathlib.Data.EReal.Operations
+import Mathlib.Topology.MetricSpace.Bounded
+import Mathlib.Algebra.Order.Module.Field
 
 /-!
 # Serre duality on a curve as a trace pairing

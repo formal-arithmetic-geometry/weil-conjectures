@@ -24,6 +24,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.RepresentationTheory.IntegralModel
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Local systems: the Galois correspondence and the lisse sheaf–representation dictionary

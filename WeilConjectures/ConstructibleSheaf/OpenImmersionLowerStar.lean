@@ -11,6 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Constructibility of direct images along open immersions

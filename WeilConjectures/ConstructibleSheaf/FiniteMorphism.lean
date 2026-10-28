@@ -18,6 +18,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.AlgebraicGeometry.GenericFinitePushforward
 import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Finite direct images of constructible sheaves on Noetherian schemes

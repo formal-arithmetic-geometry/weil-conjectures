@@ -22,6 +22,7 @@ import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Finite.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Integral pushforward maps detecting a prescribed point

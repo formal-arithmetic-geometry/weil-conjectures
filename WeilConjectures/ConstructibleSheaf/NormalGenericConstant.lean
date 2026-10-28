@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Constant sheaves on a normal Noetherian scheme

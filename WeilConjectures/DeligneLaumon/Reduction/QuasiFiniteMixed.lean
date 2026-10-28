@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
-public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants

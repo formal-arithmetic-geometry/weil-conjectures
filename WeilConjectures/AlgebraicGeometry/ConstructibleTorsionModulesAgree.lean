@@ -16,6 +16,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves

@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.Noetherian
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Sheaves are filtered colimits of constructible subsheaves (Stacks 03SA)

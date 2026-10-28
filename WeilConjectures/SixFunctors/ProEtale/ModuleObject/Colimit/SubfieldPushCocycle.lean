@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Mathlib.Algebra.Category.AlgCat.TensorAlgebra
 
 /-!
 # The cocycle condition for (Push) along the finite subextensions

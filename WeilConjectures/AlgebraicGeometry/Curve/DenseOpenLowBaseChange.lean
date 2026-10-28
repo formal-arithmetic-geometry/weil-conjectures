@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenClosedTerm
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import Mathlib.Algebra.FiveLemma
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Dense-open field-extension comparison ingredients -/
 

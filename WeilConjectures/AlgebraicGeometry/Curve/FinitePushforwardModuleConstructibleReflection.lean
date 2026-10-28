@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import all WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardCoefficientControl
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleLocallyConstantStrata
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Constructibility reflected by finite direct image on curves
 

@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import WeilConjectures.SixFunctors.OpenClosed.Complex
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChangeBoundary
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Dense-open field-extension comparison ingredients -/
 

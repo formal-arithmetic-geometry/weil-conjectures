@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 @[expose] public section
 universe u
 open CategoryTheory

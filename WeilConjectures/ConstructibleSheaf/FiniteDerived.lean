@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.ConstructibleSheaf.ExtensionByZero
 public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Derived finite direct images and constructibility

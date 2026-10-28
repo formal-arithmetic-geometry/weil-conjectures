@@ -15,6 +15,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
 import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Cokernels of monomorphisms in the normalization comparison

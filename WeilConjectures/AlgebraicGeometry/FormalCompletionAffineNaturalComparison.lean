@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
 import WeilConjectures.AlgebraicGeometry.FormalCompletionAffineQuotients
 import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
-import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
+public import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients
 
 /-!
 # Finite-pushforward embeddings over a field

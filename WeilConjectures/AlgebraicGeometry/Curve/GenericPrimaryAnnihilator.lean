@@ -12,6 +12,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 import WeilConjectures.RepresentationTheory.SylowModuleFiltration
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 /-!
 # A uniform annihilator from a finite primary geometric stalk
 

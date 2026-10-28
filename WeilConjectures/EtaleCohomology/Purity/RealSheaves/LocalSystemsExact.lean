@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subcategory
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Exactness of the Galois correspondence for finite local systems

@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
-
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -38,6 +37,7 @@ import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteStrata
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriek
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Extensions by zero of constant sheaves over a Noetherian base are constructible

@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
+public import Mathlib.CategoryTheory.EffectiveEpi.Comp
 
 /-!
 # Resolutions by twists on the projective line

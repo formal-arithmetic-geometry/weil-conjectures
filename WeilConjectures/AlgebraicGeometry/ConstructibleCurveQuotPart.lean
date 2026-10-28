@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleIntegralCoefficients
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 @[expose] public section
 universe u

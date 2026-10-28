@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyBaseChangeSquare
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Surjectivity of additive cohomology tensor pullback -/
 

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Fiber
 import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-! # The boundary of a dense open after field extension
 

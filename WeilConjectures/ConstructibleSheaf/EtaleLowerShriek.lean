@@ -6,6 +6,7 @@ Authors: Claude
 module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
 public import WeilConjectures.ConstructibleSheaf.FiniteEtalePushforward
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Constructibility of extensions by zero along étale maps

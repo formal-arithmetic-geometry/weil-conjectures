@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 

@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.IntegralConstantModulePushforwardColimit
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
+public import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients
 
 /-!
 # Finite-stage factorization of maps to integral constant pushforwards

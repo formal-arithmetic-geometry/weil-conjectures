@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardLimit
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitSystem
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

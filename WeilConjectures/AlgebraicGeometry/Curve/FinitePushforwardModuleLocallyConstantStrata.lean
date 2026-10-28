@@ -17,6 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.Data.Fin.VecNotation
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Locally constant source strata for a finite direct image
 

@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Vanishing for a dense-open closed complement after open restriction
 

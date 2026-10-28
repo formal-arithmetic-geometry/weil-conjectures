@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.CoherentSheaf
 public import WeilConjectures.Mathlib.RingTheory.RingHom.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
 
 /-!
 # Riemann–Roch for coherent sheaves on a curve

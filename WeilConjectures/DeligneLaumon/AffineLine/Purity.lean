@@ -18,6 +18,7 @@ public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 
 /-!
 # The generic Fourier sheaf is pure of some weight

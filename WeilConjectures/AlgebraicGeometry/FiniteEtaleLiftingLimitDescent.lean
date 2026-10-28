@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
@@ -17,6 +16,9 @@ import WeilConjectures.RingTheory.HenselizationPairGRing
 import WeilConjectures.RingTheory.PairHenselization
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingLimitDescentCore
+public import WeilConjectures.RingTheory.GRing
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Reduction of finite étale lifting to henselian G-rings

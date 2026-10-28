@@ -8,13 +8,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChange
-import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenAssertions
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.SixFunctors.OpenClosed.Exact

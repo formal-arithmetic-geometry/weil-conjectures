@@ -29,6 +29,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSectio
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import WeilConjectures.Compactification.Defs
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # Ample invertible modules and the Hilbert degree

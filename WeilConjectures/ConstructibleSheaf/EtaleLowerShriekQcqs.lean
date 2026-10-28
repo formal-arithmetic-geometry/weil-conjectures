@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekAffine
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.MayerVietoris
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Extensions by zero along quasi-compact separated étale maps are constructible

@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 @[expose] public section
 universe u
 open CategoryTheory

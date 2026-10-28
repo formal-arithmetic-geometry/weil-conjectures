@@ -11,6 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients
 /-!
 # Bounded flat models
 

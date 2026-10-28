@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSh
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Constructible sheaves are quotients of sums of `j_{V!} Λ_V`

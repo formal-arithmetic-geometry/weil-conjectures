@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.RationalPointBaseChangeStalk
 import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 import WeilConjectures.AlgebraicGeometry.DensePoints
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Local orders at rational points after extension of algebraically closed fields

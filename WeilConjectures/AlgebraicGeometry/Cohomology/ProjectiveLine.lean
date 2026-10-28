@@ -6,13 +6,17 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import Mathlib.Topology.Algebra.InfiniteSum.Order
+import Mathlib.Data.EReal.Operations
+import Mathlib.Topology.MetricSpace.Bounded
+import Mathlib.Algebra.Order.Module.Field
 
 /-!
 # Coherent cohomology of the projective line and of smooth projective curves

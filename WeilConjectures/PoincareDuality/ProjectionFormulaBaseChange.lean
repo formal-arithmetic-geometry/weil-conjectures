@@ -6,11 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
-public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.LowerShriekCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
+import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
+public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
+import WeilConjectures.TraceFormula.OpenPieceCoherence
 
 /-!
 

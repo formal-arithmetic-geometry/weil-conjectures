@@ -11,6 +11,9 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.StalkCardinality
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+public import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Constructible sheaves on Noetherian schemes

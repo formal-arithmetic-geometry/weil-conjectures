@@ -9,6 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.FiniteDerived
 public import WeilConjectures.ConstructibleSheaf.FiniteConstantModel
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Constructibility inputs of the Künneth formula

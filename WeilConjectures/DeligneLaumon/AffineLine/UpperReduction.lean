@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.FiniteLength

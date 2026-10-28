@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # The iterated addition morphism `X^d ⟶ Hilb^d_{X/k}`

@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenComplementPullbackVanishing
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 @[expose] public section
 

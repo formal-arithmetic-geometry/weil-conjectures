@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveCohomologyBaseChangeSquare
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Kernel of additive cohomology tensor pullback -/
 

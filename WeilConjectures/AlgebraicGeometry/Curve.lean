@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-!
 # Curves, their genus, and the Picard group of a curve

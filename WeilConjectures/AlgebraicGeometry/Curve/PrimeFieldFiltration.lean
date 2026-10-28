@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Finite prime-field filtrations of constructible module sheaves
 

@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MittagLefflerArtinian
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Towers of finite locally constant sheaves are Mittag-Leffler

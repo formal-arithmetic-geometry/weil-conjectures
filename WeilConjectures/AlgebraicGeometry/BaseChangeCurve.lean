@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.BaseChangeDimensionExtension
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Base change of a curve
