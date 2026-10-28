@@ -14,11 +14,11 @@
  ],
  "proof": [
   {
-   "text": "Expand the integral component formula at both coefficient fields and the common_field equations of R and S. Compute the common-stage pullback on isoToStage using its prescribed representative formula. This reduces the square to completion-unit scalar compatibility and the square of balanced scalar reindexing.",
+   "text": "Factor each explicit integral component into the source comparison realizationReindexSource, inverse IntegralReindex.derived, and derived inverse image of S.integral inverse. This follows by unfolding the concrete composite. The common_field equation of S, transported to the localized integral representative, gives ordinary_scalar_arrow.",
    "uses": [
-    "lem-sf-adic-realization-reindex-components",
-    "def-sf-adic-realization-isomorphism-data",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-sf-adic-realization-integral-reindex",
+    "lem-sf-adic-reindex-scalar-source",
+    "def-sf-adic-realization-isomorphism-data"
    ],
    "elementary": false,
    "source": {
@@ -27,12 +27,12 @@
    }
   },
   {
-   "text": "Use the finite-free completion map and the specified scalar-extension comparison of inverse image. The completion-unit normalization identifies the entire-cone maps, including their zero shifted coordinates. On constructible inputs they are invertible; invert their scalar square and whisker by native scalar extension. The podCompletedToTower construction is the same inverse-image-of-unit followed by inverse limit/model identifications.",
+   "text": "Apply the source scalar square. Naturality of (I L).derived.inv moves the completion map past that component. Apply the ambient balanced scalar square to the remaining three consecutive factors. Expand S common_field and cancel S.integral(E)^−1≫S.integral(E). This proves the scalar square for the canonical arrow ending at Q_L(integralTransition K).",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-isomorphism-comparison-scalar-extension",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "lem-pod-derived-automorphism-hom-evaluation"
+    "lem-sf-adic-reindex-scalar-source",
+    "lem-sf-adic-reindex-balanced-scalar",
+    "def-sf-adic-reindex-scalar-maps",
+    "def-sf-native-adic-reindexing-data"
    ],
    "elementary": false,
    "source": {
@@ -41,11 +41,10 @@
    }
   },
   {
-   "text": "The sections equations of I(E) and I(L) identify the remaining balanced maps on pure tensor generators: both multiply the same coefficient scalars and associate the tensor factors. The coefficient_scalar equations identify the structural maps. The representative equations transport this cochain equality through the actual derived computation counits. Raw localization preserves this equality and the component specification of the rational comparison supplies the displayed c_L.",
+   "text": "The canonical arrow is isoToStage followed by inclusion of an equality transport. The specified rational comparison component at Q_L(integralTransition K) equals the integral comparison component. Substitute this component equality. Apply the generic endpoint-transport lemma to the stage-object equality: its proof eliminates that equality, where the included eqToHom is the identity and the canonical arrow is isoToStage. This yields precisely the original scalar square.",
    "uses": [
-    "def-sf-native-adic-reindexing-data",
     "lem-sf-adic-realization-reindex-components",
-    "def-weil-rationalization-karoubi"
+    "lem-sf-adic-reindex-scalar-source"
    ],
    "elementary": false,
    "source": {
@@ -55,20 +54,18 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-adic-realization-reindex-components",
+  "lem-sf-adic-realization-integral-reindex",
+  "lem-sf-adic-reindex-scalar-source",
   "def-sf-adic-realization-isomorphism-data",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-isomorphism-comparison-scalar-extension",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-sf-adic-reindex-balanced-scalar",
+  "def-sf-adic-reindex-scalar-maps",
   "def-sf-native-adic-reindexing-data",
-  "def-weil-rationalization-karoubi"
+  "lem-sf-adic-realization-reindex-components"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. The explicit Lean transport and assembly are by F3."
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. Explicit factorization, naturality, cancellation, and endpoint transport proved in Lean by G8; source/completion and ambient balancing steps isolated separately."
  },
  "mathlib_searches": [
   {
@@ -145,9 +142,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261028T034741-L-3540126",
+  "landing": "20261028T055656-L-794613",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

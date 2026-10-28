@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-adic-reindex-balanced-scalar",
+ "kind": "statement",
+ "title": "Ambient balanced derived tensors commute with scalar reindexing",
+ "statement": "Fix l prime, an arbitrary scheme isomorphism g:X→Y, native realizations R,S, a function-normalized RingReindex B, finite fields E≤L, and independently normalized IntegralReindex data IE,IL. For every ambient derived integral module K at E on Y, a_X(G_E K)^−1≫nativeExtend_R,L(b_K)≫IL.derived^−1(T_Y K) = IE.derived^−1(K)≫derivedPull(B)(a_Y(K)^−1). Here T is ordinary universal derived scalar extension, G is ordinary completed-ring inverse image, b is the explicitly constructed completedScalarReindex from [def-sf-adic-reindex-scalar-maps], and a_X,a_Y are pbcReductionNormalization for the coefficient_scalar equations. There is no constructibility, completion map, common-stage category, invertibility-of-l hypothesis, or realization integral comparison in this square.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+ },
+ "stmt_deps": [
+  "def-sf-adic-reindex-scalar-maps",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative of K. Use IE.representative and IL.representative to express their derived components through pbcComplexCounit, the exact inverse-image factors, and their cochain balance maps. Expand the normalized scalar model and pbcReductionNormalization through their universal cochain counits.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "def-sf-adic-reindex-scalar-maps",
+    "lem-weil-isomorphism-comparison-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "At a site object apply the section formulas of IE and IL to a pure coefficient tensor. Both composites reindex the same section x and multiply the same scalars. R.coefficient_scalar and S.coefficient_scalar identify the composed structural maps, and B.functions fixes reindexing of the coefficient functions. Associativity of multiplication and the balanced tensor relation identify the two section values. Pure tensors generate the presheaf tensor, so the sheafification universal property gives equality of module maps; degreewise extensionality gives equality of cochain maps.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "def-sf-adic-realization-isomorphism-data",
+    "def-sf-adic-reindex-scalar-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "The representative equations and natural cochain counits descend this equality through the good-complex localization. Transport along the representative isomorphism gives the formula for every ambient K. This argument uses ordinary scalar tensors throughout and never cancels an ambient completion unit.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "def-sf-adic-reindex-scalar-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-adic-reindex-scalar-maps",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. The detailed tensor, endpoint-transport, and completion calculation is extracted by G8 from Steps 1–3 of lem-sf-adic-realization-reindex-scalar."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension tensor associator commutes with exact inverse image normalized on pure tensors",
+   "results": "8 hits, including ModuleCat.extendScalarsComp_hom_app_one_tmul and ModuleCat.extendScalars_assoc'. They express ordinary module tensor associativity, but not the sheaf-derived or completion comparison here.",
+   "date": "2026-10-28",
+   "verdict": "No exact result for these prescribed sheaf and derived comparison maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, including CategoryTheory.NatTrans.naturality and the pullback/pushout cone isoMk lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Used for the categorical assembly, not an existing normalized scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Ss]calar.*[Cc]omparison|scalar.*[Rr]eindex",
+   "results": "One unrelated Mathlib regulator hit. Searches in lean/Sheaf and lean/WeilConjectures found the declared comparison interfaces, but no assertion of either mixed square below.",
+   "date": "2026-10-28",
+   "verdict": "These library-specific normalized scalar maps have no Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationReindexScalar",
+  "date": "2026-10-28",
+  "group": "G8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient enlargement in the finite-stage reindexing comparison: Ambient balanced derived tensors commute with scalar reindexing",
+   "via": [
+    "lem-sf-adic-realization-reindex-scalar",
+    "lem-sf-adic-realization-comparison-descent",
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexBalancedScalar",
+  "file": "lean/Sheaf/Paper/AdicReindexBalancedScalar.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.integralReindex_balanced_scalar",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.integralReindex_balanced_scalar"
+  ],
+  "statement": "theorem integralReindex_balanced_scalar (l : ℕ) [Fact l.Prime]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y)\n    (B : RingReindex l X g R S)\n    (E L : Index l (PadicAlgCl l)) (h : E ≤ L)\n    (IE : IntegralReindex l X g B E) (IL : IntegralReindex l X g B L)\n    (K : DerivedCategory (integralTowerModules l (Coefficient.{u} l (PadicAlgCl l) E) Y)) :\n    let i := coefficientInclusion l (PadicAlgCl l) E L h\n    let C := Coefficient.{u} l (PadicAlgCl l)\n    let aX := pbcReductionNormalization (completedCoefficientMap l (C E) (C L) i X)\n      (coefficientMap l X R L) (coefficientMap l X R E) (R.coefficient_scalar E L h)\n    let aY := pbcReductionNormalization (completedCoefficientMap l (C E) (C L) i Y)\n      (coefficientMap l Y S L) (coefficientMap l Y S E) (S.coefficient_scalar E L h)\n    (aX ((podCompletedDerivedInverseImage l (C E) g).obj K)).inv ≫\n      (pbcDerivedExtend (coefficientMap l X R L)).map\n        ((completedScalarReindex l (C E) (C L) i g).hom.app K) ≫\n      IL.derived.inv.app ((completedDerivedScalarExtension l (C E) (C L) i Y).obj K) =\n    IE.derived.inv.app K ≫ (derivedPull l X g B).map (aY K).inv",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261028T055656-L-794613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261028T055656-L-794613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
