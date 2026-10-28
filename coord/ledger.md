@@ -20558,3 +20558,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:02 L: merged deliver/D2/Sheaf.Paper.RationalP1ScalarChernQHomologyCriterion (stage 3; reviewer PASS; first push; landing 20261028T020243-L-2485437 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:02 L: merged deliver/D3/Sheaf.Paper.CoefficientDerivedSectionsCore (stage 3; reviewer PASS; first push; landing 20261028T020244-L-2485556 (interface); batch 20261028T020127; modules 3; new nodes 2; change records: coord/changes/sections-core-decomposition.md)
 - 02:02 L: merged deliver/D3/Sheaf.SixFunctors.OpenTensorProjectionMateCanonical (stage 3; reviewer PASS; first push; landing 20261028T020245-L-2485798 (proof); batch 20261028T020127; modules 1; new nodes 0)
+- 02:02 L: merged deliver/D4/Sheaf.Paper.CoefficientDerivedSectionsScalarHomZero (stage 3; reviewer PASS; first push; landing 20261028T020246-L-2485929 (interface); batch 20261028T020127; modules 2; new nodes 1)

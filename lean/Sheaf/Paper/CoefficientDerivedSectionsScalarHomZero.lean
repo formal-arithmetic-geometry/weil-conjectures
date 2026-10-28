@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSectionsScalarHomZeroRepresentative
 
 /-! The H-zero scalar normalization extracted from the coefficient-sections package.
 (blueprint: lem-coef-derived-sections-scalar-hom-zero)

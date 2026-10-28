@@ -1,0 +1,120 @@
+{
+ "id": "lem-coef-derived-sections-normalization-scalar-hom-zero-representative",
+ "kind": "statement",
+ "title": "Representative transpose for H-zero scalar normalization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For a chosen K-flat complex P and a complex M representing finite derived input, the normalized finite enriched scalar transpose has the displayed H-zero Hom identity on every degree-zero class for the quotient images Q(P) and Q(M).",
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-hom-zero-cycle-class",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03CZ, 079P and 08JA; representative transpose calculation before transport to arbitrary derived objects."
+ },
+ "proof": [
+  {
+   "text": "Choose the fixed K-injective replacement of M. The finite tensor normalization and closed uncurrying equation identify the enriched comparison with the ordinary extension/restriction transpose on the product Hom complex. Apply the fixed zero-cycle and representative-evaluation normalizations to obtain the displayed equation on every degree-zero class.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-coef-actual-scalar-derived-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining transport from quotient images Q(P), Q(M) to arbitrary derived inputs uses K-flat resolutions and naturality, and is a separate step of the parent statement.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-global-sections",
+  "lem-coef-actual-scalar-derived-pair",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Extracted representative part of the H-zero scalar transpose calculation."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-sections-normalization-scalar-hom-zero",
+   "place": "Strictly smaller representative-input step.",
+   "via": [
+    "lem-coef-derived-sections-normalization-scalar-hom-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSectionsScalarHomZeroRepresentative",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSectionsScalarHomZeroRepresentative.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSectionsScalarHomZero_representative",
+  "declarations": [
+   "WeilConjectures.coefficientDerivedSectionsScalarHomZero_representative"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28",
+  "statement": "theorem coefficientDerivedSectionsScalarHomZero_representative (R : CoefficientDerivedSystemReduction l E W) (hF : CoefficientFiniteTensorNormalization l E W R) (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ) (P : CochainComplex (scalarReductionSource l E W) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) P) (M : CochainComplex (normalizedDVRModules l E W n) ℤ) (P' : DerivedCategory (scalarReductionSource l E W)) (M' : normalizedDVRDerived l E W n) (hP' : P' = DerivedCategory.Q.obj P) (hM' : M' = DerivedCategory.Q.obj M) : ∀ (x : (DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).obj ((coefficientIntegralGlobalHom l E W).obj (op P', (coefficientFiniteDerivedRestriction l E W n).obj M'))), coefficientFiniteHomEquiv l E W n _ _ ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map ((coefficientIntegralSections l E W).map (coefficientEnrichedAdjunctionMap R.integralClosed (R.finiteClosed n) (coefficientFiniteDerivedExtension l E W n) (coefficientFiniteAdjunction l E W n) (R.finiteTensor n) P' M') ≫ (D.scalarSections n).hom.app ((coefficientFiniteInternalHom l E W n).obj (op ((coefficientFiniteDerivedExtension l E W n).obj P'), M'))) x) = ((coefficientFiniteAdjunction l E W n).homEquiv P' M').symm (coefficientIntegralHomEquiv l E W P' _ x)"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSectionsScalarHomZero",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar adjunction H-zero representative transpose on K-flat complexes",
+   "results": "Generic derived adjunction and Hom-complex hits; no exact coefficient declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat tensor Hom transpose derived category zero homology coefficient scalar extension",
+   "results": "Generic tensor-Hom and K-flat hits; no exact displayed equation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n coefficientFiniteHomEquiv.*coefficientIntegralHomEquiv Mathlib",
+   "results": "No Mathlib declaration for the project-specific coefficient normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261028T020246-L-2485929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261028T020246-L-2485929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
