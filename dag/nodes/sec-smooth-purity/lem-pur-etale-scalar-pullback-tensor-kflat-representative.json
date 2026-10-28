@@ -16,26 +16,52 @@
  },
  "proof": [
   {
-   "text": "Evaluate both composites on homogeneous local pure tensors. The scalar/pullback representative square and the scalar and geometric pullback tensor squares send ((p tensor q) tensor b) to (f*p tensor b) tensor (f*q tensor 1). The balancing relation moves b between the factors, while the total-complex differential and Koszul signs agree term by term. Sheafification preserves the equality, proving the representative morphisms agree.",
+   "text": "The ordinary scalar/pullback isomorphism is monoidal: it is the conjugate of the monoidal direct-image/restriction identity. Pass to cochains using their homogeneous tensor inclusions. After precomposing each degree component with a mapped homogeneous inclusion, naturality of the isomorphism and the explicit tensor comparison formula reduce the equation to the ordinary monoidal square. The degreewise functor-composition maps are the specified scalarSheafPullbackComplexIso. Thus the two composite ordinary tensor comparisons commute with the cochain scalar/pullback isomorphism.",
+   "uses": [
+    "lem-pur-scalar-sheaf-tensor-pullback",
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the all-complex scalar tensor normalization with the geometric tensor counit normalization, in both orders. Naturality of the second tensor comparison and the second representative transformation gives the tensor normalization for each composite. The composite representatives are LB(rY(P));rB(EY(P)) and SX(rA(P));rX(FA(P)).",
    "uses": [
     "def-pur-exceptional-coefficient-normalizations",
+    "lem-pur-upper-star-tensor-cochain-representative",
+    "lem-pur-etale-scalar-pullback-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K-flat P, the first composite representative is invertible: rY(P) is invertible on K-flat inputs and the geometric representative is invertible on every input. The scalar/pullback normalization and invertibility of its cochain and derived isomorphisms therefore imply invertibility of the second composite representative. Apply this also to P tensor R, which is K-flat. The source localization tensorator is invertible on K-flat P. The second composite tensor normalization now implies that (rG(P) tensor rG(R));mu_Q(GP,GR) is invertible, since its precomposition by the derived composite tensor comparison is invertible.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-existence",
     "lem-pur-etale-scalar-mate-projection",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-pur-exceptional-coefficient-normalizations",
+    "lem-pur-upper-star-tensor-cochain-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired tensor equation with this invertible representative comparison. Substitute the two composite tensor normalizations. Naturality moves the scalar/pullback transformation across the source localization tensorator. Its defining normalization at P, R, and P tensor R moves it across the representatives. Lax tensor naturality for Q reduces equality to Q of the ordinary cochain square established in step 1. Cancel the invertible comparison. The termwise-flatness hypotheses are retained but are not needed by this argument.",
+   "uses": [
+    "lem-pur-etale-scalar-mate-projection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-scalar-sheaf-tensor-pullback",
+  "def-pur-scalar-pullback-representative-data",
   "def-pur-exceptional-coefficient-normalizations",
-  "lem-pur-etale-scalar-mate-projection",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-pur-upper-star-tensor-cochain-representative",
+  "lem-pur-etale-scalar-pullback-existence",
+  "lem-pur-etale-scalar-mate-projection"
  ],
  "proof_origin": {
-  "by": "B4 stage 3 split",
+  "by": "N2 stage 3 proof",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4, 0G7E and 0GL6; flat K-flat representative tensor calculation"
+  "place": "Tags 07A4, 0G7E and 0GL6; categorical transport and cancellation of normalized tensor comparisons"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -102,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261027T205804-L-1616464",
+  "landing": "20261028T055723-L-800885",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
