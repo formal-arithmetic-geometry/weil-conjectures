@@ -28,7 +28,7 @@ The two base-change morphisms are the exchange morphisms of the pullback compari
 one on bounded constructible complexes is the restriction of the ambient one
 (`CategoryTheory.Adjunction.exchangeRight_restrictFullyFaithful_app_hom`), the pullback
 comparison on bounded constructible complexes being the ambient one
-(`ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison_hom_app_hom_eq`).
+(`ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl`).
 -/
 
 @[expose] public section
@@ -56,7 +56,7 @@ set_option maxHeartbeats 1000000 in
 /-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
 constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
 square of schemes. -/
-lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq
+lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl
     (sq : CommSq g' f' f g) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
       K).hom =
@@ -96,7 +96,7 @@ lemma isIso_baseChangeMap_app_of_isIso_exchangeRight (sq : CommSq g' f' f g)
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
         K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
           (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq,
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl,
       pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
