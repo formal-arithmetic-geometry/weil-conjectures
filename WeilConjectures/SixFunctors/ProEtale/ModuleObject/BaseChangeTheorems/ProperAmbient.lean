@@ -82,7 +82,8 @@ set_option maxHeartbeats 1000000 in
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
 constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
 former (`Adjunction.exchangeRight_restrictFullyFaithful_app_hom`). -/
-lemma isIso_baseChangeMap_app_of_isIso_exchangeRight (sq : CommSq g' f' f g)
+lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
+    (sq : CommSq g' f' f g)
     (sq' : CommSq g'.left f'.left f.left g.left) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hres : IsIso ((Adjunction.exchangeRight
       (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
@@ -142,7 +143,7 @@ theorem isIso_baseChangeMap_app_padicAlgCl_of_isProper [IsProper f.left]
     ⟨⟨K, hK⟩, rfl⟩
   have h := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq
   rw [boundedConstructibleBaseChange_eq_exchangeRight] at h
-  exact isIso_baseChangeMap_app_of_isIso_exchangeRight ℓ sq.toCommSq sq' K
+  exact isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight ℓ sq.toCommSq sq' K
     (NatIso.isIso_app_of_isIso _ K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
