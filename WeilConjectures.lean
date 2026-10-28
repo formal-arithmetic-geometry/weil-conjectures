@@ -1248,6 +1248,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Components
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.FieldPoints
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.FieldPointsPi
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.LinearForm
@@ -9517,6 +9518,7 @@ public import WeilConjectures.FourierTransform.AffineSpace.UnitVanishing
 public import WeilConjectures.FourierTransform.ArtinSchreier
 public import WeilConjectures.FourierTransform.ArtinSchreierCohomology
 public import WeilConjectures.FourierTransform.Classical
+public import WeilConjectures.FourierTransform.ClassicalAffineSpace
 public import WeilConjectures.FourierTransform.Composition
 public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Inversion
@@ -14294,6 +14296,7 @@ public import WeilConjectures.WeilSheaf.FiniteLowerStar
 public import WeilConjectures.WeilSheaf.FinitePointCohomology
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.FourierAffineSpace
 public import WeilConjectures.WeilSheaf.FourierBaseLinear
 public import WeilConjectures.WeilSheaf.FourierFirstFormula
 public import WeilConjectures.WeilSheaf.FourierInversion
@@ -14311,12 +14314,14 @@ public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisseComm
 public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
 public import WeilConjectures.WeilSheaf.FourierInversion.Vanishing
 public import WeilConjectures.WeilSheaf.FourierPlancherel
+public import WeilConjectures.WeilSheaf.FourierPlancherelAffineSpace
 public import WeilConjectures.WeilSheaf.FourierStalk
 public import WeilConjectures.WeilSheaf.FourierStalkFibre
 public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.Transform
 public import WeilConjectures.WeilSheaf.FourierTrace
+public import WeilConjectures.WeilSheaf.FourierTraceAffineSpace
 public import WeilConjectures.WeilSheaf.FourierTraceAux
 public import WeilConjectures.WeilSheaf.FrobeniusDerived
 public import WeilConjectures.WeilSheaf.FrobeniusTwist
