@@ -13153,6 +13153,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
@@ -13274,6 +13275,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
@@ -13424,6 +13427,7 @@ public import WeilConjectures.SixFunctors.ProEtale.SeparableClosureCover
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk
 public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarPreservesLimits
 public import WeilConjectures.SixFunctors.ProEtale.UpperStarSectionsFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology

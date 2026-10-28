@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicIntegers
 public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
@@ -21,7 +23,7 @@ cartesian. By smooth base change, its pullback exchange `α_{f̃} : Lf_s^* Ψ_Y 
 isomorphism on bounded constructible `ℚ̄_ℓ`-complexes
 (`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth`).
 
-## Sorried input
+## Proof
 
 `ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth` (the smooth half
 of blueprint `det-sp-nearby-cycles-exchanges` (1), applied to the smooth morphism of deformation
@@ -30,14 +32,12 @@ models of blueprint `det-sp-dnc-base-change` (3)) is reduced, by
 and `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth` (locally on the source a smooth
 morphism is étale over an affine space), to smooth base change along the projections
 `𝔸ⁿ_𝒴 ⟶ 𝒴` for the inclusion `j` of the geometric generic fibre,
-`ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app`, which is `sorry`ed
-(blueprint `sbc-thm-bounded-derived-smooth-base-change`). What remains is the transfer to
-`ℚ̄_ℓ`-coefficients: smooth base change for qcqs pushforward is proved for finite coefficients
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth_of_finite`), but the passage
-`𝔽_E → 𝒪_E → ℚ̄_ℓ` needs derived Nakayama and the compatibility of the changes of coefficients
-with `Rj_*` for the non-finite-type `j`, whereas the available derived Nakayama
-(`ProEtale.isIso_of_isIso_derivedReduction_map`) only covers bounded constructible complexes and
-`Rj_*` of a complex on the geometric generic fibre is not constructible.
+`ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app`. The morphism `j`
+is not of finite type, so neither side of that base change is constructible. It is deduced from
+an integral model `K₀` of `K`: the integral base change map is invertible by derived Nakayama
+for derived complete complexes
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_smooth`), and the passage
+`𝒪_E → ℚ̄_ℓ` is `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers`.
 
 -/
 
@@ -57,24 +57,35 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Smooth base change along affine spaces for the geometric generic fibre** (blueprint
-`sbc-thm-bounded-derived-smooth-base-change`, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`): for the inclusion
-`j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation model `𝒴 = 𝒟_I Y` and the cartesian
-square of `j` along `π`, the base change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` is invertible at
-`Lε^* K` for every bounded constructible `ℚ̄_ℓ`-complex `K` on `Y`.
+/-- The geometric generic fibre of a deformation model is noetherian: it is of finite type over
+the field `Ω`. -/
+lemma isNoetherian_deformationGeneric {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
+    [QuasiCompact Y.hom] (I : Y.left.IdealSheafData) :
+    IsNoetherian (deformationModel Y I k').generic := by
+  have : IsLocallyNoetherian (deformationGeneric Y I k') :=
+    LocallyOfFiniteType.isLocallyNoetherian
+      (pullback.snd (deformationTotalToTrait Y I k') (traitGenericPoint k'))
+  have : CompactSpace (deformationGeneric Y I k') :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (pullback.snd (deformationTotalToTrait Y I k') (traitGenericPoint k'))
+  exact ⟨⟩
 
-This is the input that remains: `j` is not of finite type (it is a base change of the geometric
-generic point `Spec Ω ⟶ Spec k'⟦t⟧` of the trait), so the finite-type smooth base change
-`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth` does not apply. What is
-missing is the transfer to `ℚ̄_ℓ`-coefficients in the formalism of module objects over
-`condensedRingObj`: smooth base change for the pushforward along a qcqs morphism is proved there
-for finite coefficients (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth_of_finite` in
-`SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/SmoothFinite.lean`, transported from
-`ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_torsion`), and the passage
-`𝔽_E → 𝒪_E → ℚ̄_ℓ` needs derived Nakayama together with the compatibility of the changes of
-coefficients with `Rj_*`. The available derived Nakayama
-(`ProEtale.isIso_of_isIso_derivedReduction_map`) only covers bounded constructible complexes,
-and `Rj_*` of a complex on the geometric generic fibre is not constructible. -/
+/-- **Smooth base change along affine spaces for the geometric generic fibre** (the case of the
+projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴` of the smooth base change used in blueprint
+`det-sp-nearby-cycles-exchanges` (1)): for the inclusion `j : 𝒴_Ω ⟶ 𝒴` of the geometric generic
+fibre of the deformation model `𝒴 = 𝒟_I Y` and the cartesian square of `j` along `π`, the base
+change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` is invertible at `Lε^* K` for every bounded
+constructible `ℚ̄_ℓ`-complex `K` on `Y`.
+
+The morphism `j` is not of finite type. As in the proof of blueprint `sk-thm-sbc-coefficients`,
+`K` has an integral model `K₀` over some `𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel`),
+the pullback `Lε^*` commutes with the extensions of scalars `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`
+(`ProEtale.CondensedRing.derivedPullIso`), the base change morphism at `ℚ̄_ℓ ⊗ᴸ (E ⊗ᴸ Lε^* K₀)`
+is invertible as soon as the integral one at `Lε^* K₀` is
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers`), and the integral
+one is invertible by integral smooth base change
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_smooth`), the geometric generic
+fibre being noetherian and `Lε^* K₀` bounded constructible. -/
 theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (I : Y.left.IdealSheafData) (n : ℕ)
@@ -85,8 +96,57 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.o
       (IsPullback.of_hasPullback (deformationModel Y I k').j
         (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
           (deformationModel Y I k').total)).toCommSq).app
-      ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) :=
-  sorry
+      ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) := by
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  have : IsNoetherian Y.left := ⟨⟩
+  have := isNoetherian_deformationGeneric k' I
+  have : CompactSpace (deformationModel Y I k').total :=
+    QuasiCompact.compactSpace_of_compactSpace (deformationTotalToTrait Y I k')
+  have : QuasiSeparatedSpace (deformationModel Y I k').total :=
+    quasiSeparatedSpace_of_quasiSeparated (deformationTotalToTrait Y I k')
+  have : QuasiCompact (deformationModel Y I k').j :=
+    inferInstanceAs (QuasiCompact (pullback.fst (deformationTotalToTrait Y I k')
+      (traitGenericPoint k')))
+  have : QuasiSeparated (deformationModel Y I k').j :=
+    inferInstanceAs (QuasiSeparated (pullback.fst (deformationTotalToTrait Y I k')
+      (traitGenericPoint k')))
+  have hℓ : IsUnit (ℓ : Γ((deformationModel Y I k').total, ⊤)) := by
+    have hk : IsUnit (ℓ : k) := by
+      refine IsUnit.mk0 _ fun h ↦ (Fact.out : ringChar k ≠ ℓ) ?_
+      exact (Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar k).Prime) Fact.out).1
+        ((ringChar.spec k ℓ).1 h)
+    simpa using (hk.map (ΓSpecIso (.of k)).inv.hom).map
+      (deformationTotalToBase Y I k' ≫ Y.hom).appTop.hom
+  obtain ⟨E, K₀, ⟨e⟩⟩ := ProEtale.exists_padicAlgCl_iso_integralModel Y.left ℓ ⟨K, hK⟩
+  have hM₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme
+    (Profinite.padicIntegersRingObj ℓ E.1) (deformationModel Y I k').ε K₀.obj K₀.property
+  have h₀ := isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E
+    (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
+    (IsPullback.of_hasPullback _ _) hℓ _ hM₀
+  have : ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+      K₀.obj).IsGE hM₀.1.1.choose := hM₀.1.1.choose_spec
+  have h₁ := isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers ℓ E
+    (IsPullback.of_hasPullback (deformationModel Y I k').j
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
+        (deformationModel Y I k').total)).toCommSq _ hM₀.1.1.choose this h₀
+  let i : (L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K ≅
+      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        _)).leftDerivedFunctor.obj
+        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+          _)).leftDerivedFunctor.obj
+          ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
+            K₀.obj)) :=
+    (L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
+        ((boundedConstructible _).ι.mapIso e).symm ≪≫
+      (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        (deformationModel Y I k').ε).symm.app _ ≪≫
+      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+        _)).leftDerivedFunctor.mapIso
+        ((derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+          (deformationModel Y I k').ε).symm.app K₀.obj)
+  rw [NatTrans.isIso_app_iff_of_iso _ i]
+  exact h₁
 
 /-- **The smooth exchange of nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (1),
 smooth case, for the morphism of deformation models of blueprint `det-sp-dnc-base-change` (3);
