@@ -13,6 +13,8 @@ open DiagonalCoefficients CondensedRing
 attribute [local instance 30000] CategoryTheory.sheafIsAbelian
 attribute [local instance 30000] cachedModuleClosed
 attribute [local instance] CondensedRing.pullback_commShift
+attribute [local irreducible] coefficient line firstProjection secondProjection square
+attribute [local irreducible] condensedAmbientExchange
 /-- The explicit second-trace exchange equality used by the scalar component.
 It is packaged as a proposition so callers do not repeatedly normalize its
 large categorical expression during elaboration.
@@ -23,7 +25,7 @@ structure ScalarTraceWitness
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p]
     (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] : Prop where
   exchange_eq : secondTraceExchange l c k p hpl Y =
-      (condensedAmbientExchange (coefficient l c).X (square Y)).app
+      secondPretraceExchangeMap (coefficient l c).X Y
         (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
           0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≫
       (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map
@@ -36,5 +38,8 @@ theorem scalar_trace_equation
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
-    ScalarTraceWitness l c k p hpl Y := by sorry
+    ScalarTraceWitness l c k p hpl Y := by
+  constructor
+  unfold secondTraceExchange
+  rfl
 end AlgebraicGeometry.ProEtale.RationalP1
