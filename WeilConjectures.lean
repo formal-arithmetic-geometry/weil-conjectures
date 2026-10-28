@@ -12601,7 +12601,6 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
-public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.CohomologyVanishing
@@ -13846,7 +13845,6 @@ public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
-public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartesian
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
@@ -13983,7 +13981,6 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginBaseChange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
-public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
