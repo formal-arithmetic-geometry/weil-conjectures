@@ -43,6 +43,9 @@ degree-zero quotient unit, followed by resolution independence.
 Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
 (blueprint: lem-sf-integral-hom-tower-components-augmentation).
 -/
+/- STATEMENT-DISPUTED: the universally quantified isomorphism `e` is independent of
+   the family `θ`; replacing `e` by a nontrivial automorphism preserves all hypotheses
+   but changes the displayed augmentation equation. -/
 theorem reductionTower_components_augmentation
     (K : completedIntegralDerivedCategory l E Y D hl)
     (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
