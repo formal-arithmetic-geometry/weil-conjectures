@@ -15,50 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Write A = Sh(C,J,Set) and B = Sh(C',J',Set). The existing sheaf algebraic-structures equivalence identifies sheaves of commutative rings on each site with commutative ring objects in A and B, and its composites with the internal-object forgetful functors are the ordinary underlying-sheaf functors. Thus it is legitimate to construct the lift on internal commutative ring objects and transport it back to ring sheaves.",
+   "text": "Apply sheaves_algebraicStructures_objects to J and K and take the commutative-ring branches. The strict inverse identities give equivalences eJ and eK with equality-induced unit and counit. On each site, evaluate the supplied section-operation formulas to identify addition, multiplication, zero and one as equations of sheaf morphisms. For the inverse functor, precompose binary equations with the invertible tensor of the forward forgetful comparison, then use the strict inverse identity; for constants use the same identity directly.",
    "uses": [
     "lem-weil-pbc-sheaf-algebraic-structures-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, functoriality of algebraic structures"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the adjunction-lifts-group-ring-objects theorem to L ⊣ V. Its finite-product hypothesis is exactly the assumed preservation of finite limits, so finite products and the terminal object are preserved. The theorem supplies lifted functors on commutative ring objects, a lifted adjunction, the underlying functor equalities, and the operation-transport equations for addition, zero, negation, multiplication and one.",
+   "text": "Apply Adjunction.liftsGroupRingObjects to adj and take its ring branch LF, RF, a, the forgetful equalities, operation equations and hom-equivalence formula. Set rings=(FJ ⋙ LF) ⋙ GK and Vrings=(FK ⋙ RF) ⋙ GJ. Compose eJ.toAdjunction, a and eK.symm.toAdjunction, then reassociate the right functor. Combining the forgetful equalities gives the natural comparison isomorphisms e and v.",
    "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV, construction of algebraic structures under a finite-limit-preserving inverse image"
-   }
+   "elementary": false
   },
   {
-   "text": "Transport the lifted functors and their adjunction across the two sheaf/ring-object isomorphisms from Step 1. Call the transported functors rings and V_rings. The underlying functor equality for the lifted left functor gives, at each source ring sheaf R, an isomorphism e_R : L(|R|) ≅ |rings.obj(R)|. Because it is the component of a functor equality, e_R is natural in every ring morphism. The operation-transport equations from Step 2, transported through the sheaf/ring-object isomorphisms, say exactly that e_R identifies addition, multiplication, zero and one (and the additive inverse) with the canonical finite-product and terminal-object comparisons for L.",
+   "text": "For each ring sheaf, combine the source forward-operation comparison, LF operation transport, and target inverse-operation comparison. All underlying comparisons are equality-induced isomorphisms; equality induction reduces their combination to cancellation of the canonical product or terminal comparison and its inverse. This proves the four required operation equations.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi): the discussion before it (structure maps transported through f^{-1}, which commutes with finite limits) and the proof of (2), rings as sextuples"
-   }
+   "elementary": false
   },
   {
-   "text": "The lifted adjunction hom-equivalence in Step 2 transports across the same isomorphisms, so rings ⊣ V_rings. Under the underlying-sheaf identifications and e_R, its hom bijection is the original L ⊣ V hom bijection. Naturality of e and the transported operation equations give the stated ring naturality and operation clauses, while the transported unit and counit are the units and counits of the ring adjunction. This proves every clause of the assertion.",
+   "text": "For f : rings R → S define g : LF(FJ R) → FK S by composing the inverse target counit comparison with FK.map f. Expand the hom-equivalence of the composed adjunction. Naturality of the source inverse forgetful comparison expresses its underlying morphism as the lifted hom-equivalence with the source and target equality transports. Apply the supplied ring-branch hom-equivalence equation. Equality induction, equivalently naturality in the two arguments of adj.homEquiv, removes these transports. Naturality of the target forward forgetful comparison identifies the resulting input with e_R followed by the underlying map of f.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), proof of (2): adjointness from adjointness of the set-based functors"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -66,9 +51,9 @@
   "lem-weil-pbc-sheaf-algebraic-structures-objects"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi) and the discussion preceding it"
+  "place": "Tag 00YV, discussion before proposition-functoriality-algebraic-structures-topoi and proof of (2), rings as sextuples; Lean transport argument by A4, 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -206,5 +191,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Matched every node clause to the Lean: small sites in a common universe; L ⊣ V with PreservesFiniteLimits; rings ⊣ Vrings; natural iso e whose naturality is the displayed φ-equation; four add/mul/zero/one equations through the Mathlib cartesian prodComparisonIso/preservesTerminalIso, consistent with liftsGroupRingObjects (e = eL⁻¹); hom-equivalence clause with explicit v, which the counit case fixes in terms of e and a. Helpers ringSheafAdd/Mul/Zero/One have real sectionwise data, are listed and docstringed, and have no public duplicate. lean.statement matches the file verbatim; node changes only in lean; universes match citer lem-route-inverse-image-data-exists; proof is sorry only; theorem docstring carries all 4 steps. Edge cases: empty site, identity adjunction, zero ring. Not recompiled (2026-10-21 rule). Advisory: item source.place still mentions 03D2 (stage-1 metadata)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261028T020131-L-2470541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
