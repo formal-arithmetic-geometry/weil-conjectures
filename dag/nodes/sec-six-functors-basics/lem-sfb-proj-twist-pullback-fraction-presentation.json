@@ -15,31 +15,47 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01MY and 01N2; explicit standard-open tensor and denominator calculations written by Z8"
+  "place": "Tags 01MY, 01N2 and 01M7; explicit coefficient-span and balanced tensor argument implemented by H5, using existing affine pullback and twist quasi-coherence statements"
  },
  "proof": [
   {
-   "text": "Extend the grading by zero to negative degrees and shift by j. The single-twist fraction charts and their scalar and restriction laws identify the actual twist with the associated graded-module sheaf on the standard-open basis; use uniqueness of basis extension. The associated sheaf theorem then proves its quasi-coherence. Fractions are realized as actual twist sections with their pointwise prime-localization formula.",
+   "text": "Use twistChartFraction_representative to put each element of H over one power of f. The shifted degree relation gives degreeZeroFractions membership, so twist_fraction_realization gives an actual section with the prescribed pointwise values. These values determine the section uniquely, hence define an additive map e:H→Γ(U,twist j) compatible with R-scaling through the coefficient ring section. It is surjective by twist_fraction_descent: for a nonempty chart the nonzero denominator determines its degree; negative shifted numerator degree gives zero. For an empty chart basicOpen_localization_detection makes the localized element zero.",
    "uses": [
-    "lem-sc-proj-single-twist-basic-open-fractions",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+    "lem-sfb-proj-twist-fraction-tensor",
+    "lem-sc-proj-twist-fraction-realization",
+    "lem-sc-proj-twist-fraction-descent",
+    "lem-sc-proj-basic-open-localization-detection"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine tensor-pullback section comparison on U,V. The homogeneous-localization coefficient comparison, transported by β, identifies the target chart ring with S⊗ the source chart ring. Tensor associativity and contraction give the required surjective additive presentation. Its pure-tensor formula follows from the normalized adjunction unit and the affine section comparison.",
+   "text": "On V, the S-coefficient sections span the target chart ring D as a module over C=Γ(U,O). Indeed every degree-zero target fraction has a numerator in a graded piece of B. Expand this numerator using hgraded. An image numerator gives the image under r.appLE of the corresponding source fraction. Multiplying a numerator by s∈S multiplies the section by its coefficient section. The C-span of coefficient sections is stable under those multiplications, by span induction and multiplication of coefficients. The standard-open ring isomorphism and fraction surjectivity finish the spanning claim. This uses the Mathlib basicOpenIsoAway, Away.mk_surjective and awayToSection_comp_appLE directly; no chart-ring base-change isomorphism is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "From e and the coefficient ring map b:S→D construct an additive balanced map q:S⊗_R H→Γ(U,twist j)⊗_C D by q(s⊗z)=e(z)⊗b(s). Compatibility with R follows from β(1⊗a)=ψ(a), tensor balancing and the scalar law for e. Tensor induction and the coefficient spanning claim prove q surjective: move each C-scalar on the second factor into the first, then lift that section through e. These are the proved private tensor_coefficient_presentation and chart_coefficients_span helpers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply isQuasicoherent_twist and the affine tensor-pullback section theorem to U,V. Compose its bijective additive map with q. Its pure-tensor formula, together with the normalization in exists_tensorPullbackAdjunction, gives precisely the coefficient times the restriction of tensorPullbackSection. The section e(z) has the already established localization value formula. The composite is surjective, as required.",
    "uses": [
+    "lem-sfb-proj-twist-quasicoherent",
     "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-nagata-homogeneous-localization-scalar-extension"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-proj-single-twist-basic-open-fractions",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-sfb-proj-twist-fraction-tensor",
+  "lem-sc-proj-twist-fraction-realization",
+  "lem-sc-proj-twist-fraction-descent",
+  "lem-sc-proj-basic-open-localization-detection",
+  "lem-sfb-proj-twist-quasicoherent",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-nagata-homogeneous-localization-scalar-extension"
+  "lem-pc-module-pullback-adjunction"
  ],
  "mathlib_match": null,
  "mathlib_searches": [
@@ -167,10 +183,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Z8",
+  "group": "H5",
   "result": "pass",
-  "landing": "20261028T055834-L-815707",
-  "kind": "interface",
+  "landing": "20261028T072418-L-1944275",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
