@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-canonical-derived-pullback-section-unit",
+ "kind": "lemma",
+ "title": "The canonical derived section comparison at the tensor unit",
+ "statement": "Let Λ be a commutative condensed ring, let g:X→S and p:S→X be morphisms of schemes, and let h:g≫p=𝟙 X. Use the total module-object derived pullbacks of sk-def-sfb-module-derived-pushpull and their canonical derived tensor units of def-sfb-derived-tensor-modules. Let c:L(g≫p)^*≅Lp^*⋙Lg^* be the canonical pullback compositor, t:L(g≫p)^*≅L(𝟙 X)^* the equality isomorphism induced by h, and i:L(𝟙 X)^*≅Id the canonical identity comparison. Let s:Lp^*⋙Lg^*≅Id be identified with c.symm≪≫t≪≫i by its defining equality. Write e_f:Lf^*(𝟙)≅𝟙 for the canonical unit comparison. Then s.hom.app(𝟙)=Lg^*.map(e_p.hom)≫e_g.hom. No properness, finiteness or nonemptiness assumption is required.",
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-derived-tensor-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity; the unit component of the canonical section comparison. Published component equations: WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperStarUnitCoherence.lean, leftDerivedUpperStarComp_hom_app_unit and leftDerivedUpperStarId_hom_app_unit."
+ },
+ "proof": [
+  {
+   "text": "For endomorphisms f,k of X and h:f=k, equality induction shows that the canonical equality transport between their derived pullbacks, evaluated at the tensor unit and followed by the unit comparison for k, is the unit comparison for f. The Lean proof substitutes k and uses the identity composition law.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-derived-tensor-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the published identity unit equation at X and the published composition unit equation to g and p. At the unit, the compositor followed by Lg.map of the unit comparison for p and the unit comparison for g is the comparison for g composed with p. Equality induction from the first step identifies equality transport followed by the identity comparison with that same map.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-derived-tensor-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the proposed equation with the invertible component of the compositor. Expand composition and inverse of natural isomorphisms. Cancel the compositor with its inverse, and substitute the two equations from the preceding step. Canceling that invertible component proves the desired formula. All three steps are proved in Lean; no new obligation is left.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Regard the compositor with its type expressed using the named total derived pullbacks. The supplied equality identifies s with this same canonical composite as a natural isomorphism. Equality of natural isomorphisms gives equality of their components at the unit; apply the component formula just proved. This keeps whole-functor comparisons separate from evaluation at an object.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-derived-tensor-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-derived-tensor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity; the unit component of the canonical section comparison. Published component equations: WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperStarUnitCoherence.lean, leftDerivedUpperStarComp_hom_app_unit and leftDerivedUpperStarId_hom_app_unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived pullback isomorphism for a section is compatible with the tensor unit",
+   "results": "Eight hits, including SheafOfModules.pullbackObjUnitToUnit and Scheme.Modules.pseudofunctor_left_unitality/right_unitality.",
+   "date": "2026-10-28",
+   "verdict": "These are underived or scheme-module constructions; use the existing source-library derived unit equations and a proved categorical cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.comp_η",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.comp_η in Mathlib.CategoryTheory.Monoidal.Functor.",
+   "date": "2026-10-28",
+   "verdict": "Identifies the explicit composite unit; the helper states the explicit unit-map formula, so only categorical isomorphism cancellation is needed here."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStar.*unit|OplaxMonoidal.comp_η",
+   "results": "No Mathlib hits. Local source search located the two published equations in UpperStarUnitCoherence.lean.",
+   "date": "2026-10-28",
+   "verdict": "Reuse those proved source facts; no exact new mathematical obligation is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalSectionProjectionCorePrecomposition",
+  "date": "2026-10-28",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-canonical-section-projection-core-precomposition",
+   "place": "Unit component of the section comparison in the direct categorical proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalPullbackSectionUnit",
+  "file": "lean/Sheaf/Paper/CanonicalPullbackSectionUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.canonicalDerivedPullbackSectionUnit",
+  "statement": "theorem canonicalDerivedPullbackSectionUnit {X S : Scheme.{u}}\n    (g : X ⟶ S) (p : S ⟶ X) (h : g ≫ p = 𝟙 X)\n    (s : moduleObjectDerivedPullback Λ p ⋙ moduleObjectDerivedPullback Λ g ≅\n      𝟭 (DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))))\n    (hs : s = (leftDerivedUpperStarComp Λ g p).symm ≪≫\n      eqToIso (congrArg (fun f : X ⟶ X ↦ moduleObjectDerivedPullback Λ f) h) ≪≫\n        leftDerivedUpperStarId Λ X) :\n    s.hom.app (𝟙_ (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))) =\n      (upperStar Λ g).leftDerivedFunctor.map (leftDerivedUpperStarUnitIso Λ p).hom ≫\n        (leftDerivedUpperStarUnitIso Λ g).hom",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261028T072446-L-1950637",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261028T072446-L-1950637",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
