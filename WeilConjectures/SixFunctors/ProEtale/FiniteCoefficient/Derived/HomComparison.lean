@@ -90,7 +90,7 @@ by the exact functor `ν^*` to a flat model of `ν^* K'`, as `ν^*` preserves fl
 (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). The blueprint's hypotheses that
 `K'` be bounded constructible and that the exponent of `Λ` be invertible on `X` are not
 needed. -/
-theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}}
+theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K') :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
@@ -101,7 +101,7 @@ omit [Finite Λ] in
 comparison, clause (i).
 
 The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`. -/
-theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}}
+theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
     {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK' : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K') :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
@@ -120,7 +120,7 @@ strong monoidal, and it preserves flat sheaves
 (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`), so this is
 `DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff`. The blueprint's hypothesis that `K`
 be bounded below is not needed. -/
-theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} (a b : ℤ)
+theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} [IsNoetherianRing Λ] (a b : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K) ↔
       Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K :=
@@ -135,7 +135,7 @@ Let `K'` be a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor amplitude in 
 This is the reverse implication of `torAmplitudeIn_mapDerivedCategory_iff`; the blueprint's
 hypotheses that `K'` be bounded below, that `ν^* K'` be bounded constructible and that the
 exponent of `Λ` be invertible on `X` are not needed. -/
-theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}}
+theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K')) :
