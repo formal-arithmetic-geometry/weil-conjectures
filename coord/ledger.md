@@ -21105,3 +21105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/E6/Sheaf.SixFunctors.IntegralDualizingSystemTraceExistence (stage 3; reviewer PASS; first push; landing 20261028T072403-L-1941188 (interface); batch 20261028T072331; modules 3; new nodes 2)
 - 07:24 L: merged deliver/E7/Sheaf.SixFunctors.NormalizedDVRQuotientSystemRealization (stage 3; reviewer PASS; first push; landing 20261028T072404-L-1941665 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:24 L: merged deliver/E8/Sheaf.Paper.AmbientSquareAssembly (stage 3; reviewer PASS; first push; landing 20261028T072405-L-1941985 (interface); batch 20261028T072331; modules 1; new nodes 0; change records: coord/changes/E8-ambient-square-assembly-node.md)
+- 07:24 L: merged deliver/E8/Sheaf.SixFunctors.OpenClosedCompactScalar (stage 3; reviewer PASS; first push; landing 20261028T072406-L-1942349 (interface); batch 20261028T072331; modules 1; new nodes 0)
