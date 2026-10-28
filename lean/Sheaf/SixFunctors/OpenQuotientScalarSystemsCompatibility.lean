@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarSystemsComponents
+import Sheaf.SixFunctors.OpenQuotientScalarSystemsNaturality
 
 /-! # Strict-system scalar compatibility for an open quotient
 
@@ -31,7 +33,9 @@ theorem openQuotientScalarSystemsCompatibility
     (o : IntegralOpenReduction.Operations l E j) :
     Nonempty ((IntegralOpenReduction.systemExtension l E j o).mapHomologicalComplex (.up ℤ) ⋙
         forgetSystems l E X ≅
-      forgetSystems l E U ⋙ extendTower l E j o) := by
-  sorry
+      forgetSystems l E U ⋙ extendTower l E j o)  := by
+  obtain ⟨α⟩ := openQuotientScalarSystemsComponents l E j o
+  exact ⟨NatIso.ofComponents α
+    (openQuotientScalarSystemsNaturality l E j o α)⟩
 
 end WeilConjectures.OpenTensorQuotient
