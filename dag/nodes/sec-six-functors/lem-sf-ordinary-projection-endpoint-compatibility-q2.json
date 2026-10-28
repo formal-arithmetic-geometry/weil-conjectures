@@ -2,7 +2,7 @@
  "id": "lem-sf-ordinary-projection-endpoint-compatibility-q2",
  "kind": "statement",
  "title": "Pasted compatibility of ordinary projection endpoint comparisons",
- "statement": "For endpoint comparison data at the finite level, the source and target isomorphisms satisfy the commutative projection square equation.",
+ "statement": "For arbitrary completed integral derived inputs and a compactification, finite scalar reduction of the ordinary compactification projection is isomorphic as an arrow to the realized fixed-scalar finite compactification projection. Thus its endpoint isomorphisms are constructed together and satisfy the projection square; no compatibility of arbitrary independent endpoint isomorphisms is claimed.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
   "place": "Proper projection paragraph: reduction of the actual canonical projection is the torsion projection map; pasted with the open projection of def-exchange-projection."
@@ -13,19 +13,32 @@
   "def-exchange-projection",
   "def-sp-finite-ring-compact-support-projection-map",
   "def-weil-proetale-inverse-image",
-  "lem-sf-ordinary-projection-endpoint-iso-data-q2"
+  "def-sp-finite-intrinsic-direct-adjunction"
  ],
  "proof": [
   {
-   "text": "This is the corresponding endpoint construction/pasting step from the ordinary projection reduction proof, retained as an independently provable statement for arbitrary inputs.",
+   "text": "Remove the invertible open projection factor from the completed compactification arrow. Apply the generic projection mate square with the scalar/tensor comparisons. Scalar-pullback tensor coherence proves its compatibility hypothesis. The proved quotient_proper_mate in QcqsCompactSupportFiniteMates gives invertibility, and properComparison_mate in ProperScalarComposition identifies it with the geometric mate used by the projection square.",
    "uses": [
-    "lem-pbc-completed-scalar-projection-perfect-iso",
+    "lem-qcqs-compact-support-finite-mates",
+    "lem-sf-proper-scalar-composition",
+    "lem-sf-scalar-pull-tensor-coefficient-coherence",
+    "lem-sp-categorical-projection-mate-square",
     "def-pur-integral-compact-support-coefficient-data",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-sf-open-projection-factor-coefficient-change",
-    "lem-sf-projection-scalar-square",
+    "def-sf-compact-support-scalar-tensor-balancing",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact open scalar comparison to identify the reduced open input. Apply the finite proper projection realization, transport its input by the canonical finite open realization, then restore the fixed-scalar open projection factor. This yields the realized finite coordinate projection at the pbc scalar inputs. Finally apply the reduced-input normalization theorem, obtained from finiteReductionIso and naturality of the finite projection in both variables, and compose the arrow isomorphisms.",
+   "uses": [
     "lem-sf-finite-scalar-proper-projection-presentation",
-    "def-sp-finite-ring-compact-support-projection-map"
+    "def-sp-finite-ring-compact-support-projection-map",
+    "lem-pur-open-coefficient-comparison-isomorphism",
+    "lem-sf-finite-projection-operation-presentation",
+    "lem-sf-ordinary-projection-reduced-input-normalization-m4",
+    "def-pur-finite-compact-support-scalar-data",
+    "def-sf-compact-support-scalar-tensor-balancing"
    ],
    "elementary": false
   }
@@ -33,7 +46,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
-  "place": "Endpoint comparison decomposition."
+  "place": "M4: arrow-isomorphism route through the proper factor; open postcomposition is invertible."
  },
  "mathlib_searches": [
   {
@@ -82,16 +95,22 @@
   "branch": "sheaf-dag",
   "by": "Q2",
   "date": "2026-10-28",
-  "statement": "theorem integralOrdinaryProjection_endpointCompatibility\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))\n    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))\n    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (L : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ)\n    (d : IntegralOrdinaryProjectionEndpointData l E c aX aZ aY K L n) :\n    let A := Padic.coefficientExtensionRing l E (n + 1)\n    letI : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    d.s.hom ≫ ((sfIntrinsicDerivedEquivalence Y A).functor.map\n        (((ProEtale.projectionMapOfCompactification\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app\n            ((sfIntrinsicDerivedEquivalence X A).inverse.obj\n              ((scalarReductionDerivedExtension l E X n).obj K))).app\n            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj\n              ((scalarReductionDerivedExtension l E Y n).obj L)))) =\n      ((scalarReductionDerivedExtension l E Y n).map\n      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY\n        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L)) ≫ d.t.hom"
+  "statement": "theorem integralOrdinaryProjection_endpointCompatibility\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))\n    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))\n    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (L : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ) :\n    let A := Padic.coefficientExtensionRing l E (n + 1)\n    letI : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    Nonempty (Arrow.mk ((scalarReductionDerivedExtension l E Y n).map\n      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY\n        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L)) ≅\n      Arrow.mk ((sfIntrinsicDerivedEquivalence Y A).functor.map\n        (((ProEtale.projectionMapOfCompactification\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app\n            ((sfIntrinsicDerivedEquivalence X A).inverse.obj\n              ((scalarReductionDerivedExtension l E X n).obj K))).app\n            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj\n              ((scalarReductionDerivedExtension l E Y n).obj L)))))"
  },
  "proof_deps": [
-  "lem-pbc-completed-scalar-projection-perfect-iso",
+  "lem-qcqs-compact-support-finite-mates",
+  "lem-sf-proper-scalar-composition",
+  "lem-sf-scalar-pull-tensor-coefficient-coherence",
+  "lem-sp-categorical-projection-mate-square",
   "def-pur-integral-compact-support-coefficient-data",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-sf-open-projection-factor-coefficient-change",
-  "lem-sf-projection-scalar-square",
   "lem-sf-finite-scalar-proper-projection-presentation",
-  "def-sp-finite-ring-compact-support-projection-map"
+  "def-sp-finite-ring-compact-support-projection-map",
+  "lem-pur-open-coefficient-comparison-isomorphism",
+  "lem-sf-finite-projection-operation-presentation",
+  "lem-sf-ordinary-projection-reduced-input-normalization-m4",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -106,17 +125,54 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "U3",
-  "result": "pass",
-  "landing": "20261028T020808-L-2548864",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.integralOrdinaryProjection_endpointCompatibility"
+  "reviewer": "C-83ef1",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T072430-L-1946465",
+  "kind": "interface",
+  "note": "independent cc review: corrected endpointCompatibility (Nonempty Arrow iso) against the false old ∀ s,t statement, its node and change record, the adapted consumer ArrowComparison and importer Reduction (sandbox compile OK); new reducedInputsNormalization hole against finiteReductionIso + bifunctor naturality (true)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "M4 stage 3",
+  "old_statement": "For endpoint comparison data at the finite level, the source and target isomorphisms satisfy the commutative projection square equation.",
+  "what": "The two fields of IntegralOrdinaryProjectionEndpointData are independent isomorphisms. Twisting the target field by a nontrivial automorphism preserves all hypotheses but destroys the asserted square. The source asks for the existence of compatible comparisons, not compatibility of arbitrary endpoints. Replace the universal claim by a constructed arrow isomorphism and adapt its sole consumer without changing that consumer statement.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+   "place": "Proper projection paragraph: reduction of the actual canonical projection is the torsion projection map; pasted with the open projection of def-exchange-projection."
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-pur-integral-compact-support-coefficient-data",
+   "def-weil-integral-derived-reduction",
+   "def-exchange-projection",
+   "def-sp-finite-ring-compact-support-projection-map",
+   "def-weil-proetale-inverse-image",
+   "lem-sf-ordinary-projection-endpoint-iso-data-q2"
   ],
-  "sorry_after": [
-   "WeilConjectures.integralOrdinaryProjection_endpointCompatibility"
+  "old_proof": [
+   {
+    "text": "This is the corresponding endpoint construction/pasting step from the ordinary projection reduction proof, retained as an independently provable statement for arbitrary inputs.",
+    "uses": [
+     "lem-pbc-completed-scalar-projection-perfect-iso",
+     "def-pur-integral-compact-support-coefficient-data",
+     "lem-weil-pbc-ringed-exchange-tensor-coherence",
+     "lem-sf-open-projection-factor-coefficient-change",
+     "lem-sf-projection-scalar-square",
+     "lem-sf-finite-scalar-proper-projection-presentation",
+     "def-sp-finite-ring-compact-support-projection-map"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pbc-completed-scalar-projection-perfect-iso",
+   "def-pur-integral-compact-support-coefficient-data",
+   "lem-weil-pbc-ringed-exchange-tensor-coherence",
+   "lem-sf-open-projection-factor-coefficient-change",
+   "lem-sf-projection-scalar-square",
+   "lem-sf-finite-scalar-proper-projection-presentation",
+   "def-sp-finite-ring-compact-support-projection-map"
   ]
  }
 }

@@ -115,9 +115,9 @@ theorem integralOrdinaryProjection_endpointComparisons
     := by
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-  obtain ⟨d⟩ := integralOrdinaryProjection_endpointIsoData l E c aX aZ aY K L n
-  refine ⟨d.s, d.t, ?_⟩
-  exact integralOrdinaryProjection_endpointCompatibility l E c aX aZ aY K L n d
+  obtain ⟨e⟩ := integralOrdinaryProjection_endpointCompatibility l E c aX aZ aY K L n
+  refine ⟨Arrow.leftFunc.mapIso e, Arrow.rightFunc.mapIso e, ?_⟩
+  exact e.hom.w
 
 theorem integralOrdinaryProjection_reduction_arrowComparison
     (l : ℕ) [Fact l.Prime]

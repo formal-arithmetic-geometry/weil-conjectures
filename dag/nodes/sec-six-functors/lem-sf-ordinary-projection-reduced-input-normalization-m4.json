@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-ordinary-projection-reduced-input-normalization-m4",
+ "kind": "statement",
+ "title": "Normalization of the two reduced finite projection inputs",
+ "statement": "For completed integral inputs K on X and L on Y, finite scalar extension using pbcDerivedExtend and using scalarReductionDerivedExtension gives canonically isomorphic realized finite projection arrows. The source is the realized tensor-coordinate finite projection at the inverse realizations of the pbc scalar inputs; the target is the realized native finite projection at the inverse realizations of the normalized scalar inputs. This is only finite input transport, and involves no completed projection arrow, proper scalar mate or open scalar comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-exchanges/def-exchange-projection.md",
+  "place": "Naturality in both inputs of the compactification projection, together with the canonical finiteReductionIso in IntegralCompactSupportCoefficientComparison."
+ },
+ "stmt_deps": [
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-integral-derived-reduction",
+  "def-sf-constructible-projection-mates",
+  "def-sp-finite-ring-compact-support-projection-map",
+  "def-weil-proetale-inverse-image",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate finiteReductionIso at K and L. Map these isomorphisms through the inverse intrinsic realizations to obtain isomorphisms of the two native finite inputs. Naturality of the compactification projection in its first and second variables produces a commutative square. Its endpoint maps are the source and target bifunctors applied in order to the two input isomorphisms, hence are isomorphisms. The source arrow is projectionTensorCoordinateComponent by its defining equation. Map the resulting arrow isomorphism through the forward intrinsic realization. The endpoints and arrows are the displayed ones. The same argument includes zero inputs, empty schemes, the residue quotient and identity compactifications.",
+   "uses": [
+    "def-pur-finite-compact-support-scalar-data",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-exchanges/def-exchange-projection.md",
+  "place": "M4: input transport by canonical finiteReductionIso and naturality of the published compactification projection; no proper or completed projection statement in this part."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of bifunctors induces an isomorphism between its arrow components along isomorphisms in both inputs",
+   "results": "8 hits including Functor.bifunctorComp₁₂Iso, GradedObject.mapBifunctorMapMapIso, NatTrans.isIso_app_iff_of_iso, NatTrans.naturality_1 and naturality_2. These supply generic naturality ingredients, not this finite scalar input specialization.",
+   "date": "2026-10-28",
+   "verdict": "use naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"naturality_app\"",
+   "results": "12 hits including CategoryTheory.NatTrans.naturality_app and naturality_app_assoc, which give the generic first-variable square. The second-variable square is ordinary naturality.",
+   "date": "2026-10-28",
+   "verdict": "generic ingredients found"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorArrowIso|finiteReductionIso",
+   "results": "0 search-tool hits. Repository rg finds the proved private bifunctorArrowIso in FiniteProjectionOperationPresentation and the canonical finiteReductionIso in IntegralCompactSupportCoefficientComparison. The specialized compiled input-transport statement is not present.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic ingredients; isolate specialization"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ordinary-projection-endpoint-compatibility-q2",
+   "place": "Final input normalization after proper/open scalar reduction and finite realization; strictly one part of the complete projection arrow comparison."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryProjectionEndpointNormalization",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryProjectionEndpointNormalization.lean",
+  "declaration": "WeilConjectures.integralOrdinaryProjection_reducedInputsNormalization",
+  "statement": "theorem integralOrdinaryProjection_reducedInputsNormalization\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ)\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (L : DerivedCategory (scalarReductionSource l E Y)) :\n    let A := Padic.coefficientExtensionRing l E (n + 1)\n    letI : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    let a := PurCompactSupport.reduction l E (n + 1) (Nat.succ_pos n)\n    Nonempty (Arrow.mk ((sfIntrinsicDerivedEquivalence Y A).functor.map\n      (projectionTensorCoordinateComponent (ModuleCat.{u + 1} (ULift.{u + 1} A)) c\n        ((sfIntrinsicDerivedEquivalence X A).inverse.obj\n          ((pbcDerivedExtend (a.map X)).obj K))\n        ((sfIntrinsicDerivedEquivalence Y A).inverse.obj\n          ((pbcDerivedExtend (a.map Y)).obj L)))) ≅\n      Arrow.mk ((sfIntrinsicDerivedEquivalence Y A).functor.map\n        (((ProEtale.projectionMapOfCompactification\n          (ModuleCat.{u + 1} (ULift.{u + 1} A)) c).app\n            ((sfIntrinsicDerivedEquivalence X A).inverse.obj\n              ((scalarReductionDerivedExtension l E X n).obj K))).app\n            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj\n              ((scalarReductionDerivedExtension l E Y n).obj L)))))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-83ef1",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T072430-L-1946465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-83ef1",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T072430-L-1946465",
+  "kind": "interface",
+  "note": "independent cc review: corrected endpointCompatibility (Nonempty Arrow iso) against the false old ∀ s,t statement, its node and change record, the adapted consumer ArrowComparison and importer Reduction (sandbox compile OK); new reducedInputsNormalization hole against finiteReductionIso + bifunctor naturality (true)"
+ }
+}
