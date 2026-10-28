@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
-import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.SixFunctors.RationalVerdierIntegralCocycle
+import Sheaf.SixFunctors.RationalVerdierLocalizedComposition
 
 /-! # Associator equation for rational Verdier comparisons
 
@@ -72,6 +72,11 @@ theorem extension_composition_equation
         a.hom.app (A.dual.obj (op K)) ≫
           eFH.comparison.hom.app (op K) ≫
             C.dual.map (a.hom.app K).op := by
-  sorry
+  have hcomp :=
+    integral_comparison_cocycle D l hl X F G H i j wF wG wH A B C
+  intro K
+  rcases K with ⟨K⟩
+  exact localized_extension_composition D l hl X F G H i j wF wG wH A B C a hnorm
+    eFG eGH eFH hFG hGH hFH hcomp K
 
 end WeilConjectures.RationalVerdier
