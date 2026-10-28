@@ -15,30 +15,49 @@
  },
  "proof": [
   {
-   "text": "Construct the inverse-limit identification from the finite quotient realizations of completed coefficients. The finite constant equations fix the map on constant sections, and the residue equations identify every finite quotient with the native locally finite coefficient quotient. Localize this identification and compose with the normalized rational inclusion into the native ring sheaf; the resulting data form a CoefficientPresentation.",
+   "text": "Apply continuousCoefficientCompletion to E and T. It supplies the integral continuous-function sheaf as the limit of the positive constant residue tower, with each finite comparison fixed on constants and each projection given by pointwise reduction.",
    "uses": [
-    "def-sf-locally-finite-adic-compact-support-data",
-    "def-sf-locally-finite-adic-realization-data",
-    "def-pur-integral-compact-support-coefficient-data"
+    "lem-weil-pbc-continuous-coefficient-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Section 6.8; normalized presentation construction"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Identify the commutative residue tower, after forgetting commutativity, with integralCoefficientSheafSystem. The components are identity maps, and consecutive quotient maps agree. The forgetful functor on ring sheaves is fully faithful and preserves limits. Its preimage of the canonical limit isomorphism identifies finiteCoefficientLimit with completedIntegralCommRingSheafUnrestricted. The limit-isomorphism projection equations prove that this isomorphism preserves every recorded residue projection.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-pbc-continuous-coefficient-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use continuousCoefficientLocalization for the normalized localization isomorphism, and integralRationalCoefficientMap with its pointwise normalization for the integral inclusion.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct rational inclusion by sending s to the function x ↦ i(s(x)). The spectral norm makes E a normed Q_l-algebra, so the linear map i is continuous by finite dimensionality. Its image is a finite-dimensional Q_l-subspace; hence the composite is locally finite. The sheaf/presheaf monoidal comparison identities identify the native ring unit and multiplication with the pointwise ones. Pointwise operations then prove the ring-map equations, and precomposition proves naturality. This construction has the required pointwise normalization, including on the empty object. Assemble these data into CoefficientPresentation, transporting the completion residue equations using the projection-preserving isomorphism from step 2.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-locally-finite-adic-compact-support-data",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-localization",
   "def-sf-locally-finite-adic-realization-data",
-  "def-pur-integral-compact-support-coefficient-data"
+  "def-sf-locally-finite-adic-compact-support-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K8",
+  "group": "Z5",
   "date": "2026-10-28",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2 and Section 6.8; fixed-scheme normalized presentation construction"
+  "place": "Lemma 6.8.2(1),(2) and Definition 6.8.1; reuse the existing normalized completion/localization theorems and explicitly construct finite-field postcomposition."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -86,9 +105,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K8",
+  "group": "Z5",
   "result": "pass",
-  "landing": "20261028T020547-L-2524389",
+  "landing": "20261028T035026-L-3582046",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
