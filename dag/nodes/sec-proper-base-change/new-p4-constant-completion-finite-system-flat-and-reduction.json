@@ -9,18 +9,40 @@
  },
  "proof": [
   {
-   "text": "The scalar tower and the surjectivity of A → A/I^(n+1) force the given module structure to be the canonical one induced by the sheafification unit. Fix R = A/I^(m+1) and U, and let G(M) be the sections over U of the sheafified constant presheaf with value the R-module M, so G(R) is the m-th term at U. G is additive and left exact (constant presheaf and sheafification exact, sections left exact) and preserves surjections: a surjection of sets p : M → N has a set-theoretic section s, and the constant sheaf of types (which commutes with the forgetful functor) splits G(p). Hence G is exact and M ⊗_R G(R) → G(M) is an isomorphism for finitely presented M (compare on a presentation). Flatness: for an ideal a of the Noetherian ring R, a ⊗_R G(R) → G(R) is G(a) → G(R), injective. Reduction: G(R) ⊗_A A/I^(n+1) = G(R) ⊗_R A/I^(min(m,n)+1) ≅ G(A/I^(min(m,n)+1)), the (min m n)-th term, and on b ⊗ mk a this is a • (transition b), the transition being G of the quotient map.",
+   "text": "For R = A/I^(n+1), the given scalar tower forces mk(a) acting on a section to equal a acting on that section. Naturality of the sheafification unit identifies the latter action with multiplication by the constant R-section mk(a). Since every element of R has a representative a, the identity additive equivalence from the given section module to the canonical R-section module is R-linear.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the already proved ringSectionsFlat helper in ConstantCompletionFlatAndQuotientsFlatness: its ringModuleLinearEquiv identifies the constant ring sections with the sections of the constant regular R-module. Apply the flat-section clause of constantModule_section_properties over the Noetherian ring R, then transport flatness along the identity linear equivalence of the previous step. Only this finite-level helper is used, not the completed-flatness theorem.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Let B be the sections of the constant A-ring sheaf, eta:A->B its sheafification unit, and f_k:B->S_k the actual finite quotient section map. The existing constant quotient theorem says that f_k is surjective with kernel (I^(k+1)).map eta. The quotient cone identity gives q composed with f_m = f_min for the actual transition q:S_m->S_min. In particular q is surjective. Mapping its kernel back and forth across the surjection f_m gives ker(q) = (ker(f_min)).map f_m.",
+   "uses": [
+    "new-h2-constant-completion-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structural map A->S_m is f_m composed with eta. If n<=m, the previous kernel identity is directly ker(q)=(I^(n+1)).map(A->S_m). If m<=n, the image of I^(m+1) is zero because it is the image of ker(f_m), and I^(n+1)<=I^(m+1), so the same identity holds with both sides zero. Compose Mathlib Algebra.TensorProduct.quotIdealMapEquivTensorQuot (inverted and restricted to A), Ideal.quotientEquivAlgOfEq for this kernel equality, and Ideal.quotientKerAlgEquivOfSurjective. On b tensor mk(a) the composite is q(a smul b)=a smul q(b), by A-linearity of the actual transition.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "new-h2-constant-completion-quotient"
+ ],
  "proof_origin": {
   "by": "worker",
-  "item": "Sheaf.Paper.ConstantCompletionFiniteSystemProperties",
-  "group": "P4",
+  "item": "Sheaf.Paper.ConstantCompletionFiniteSystemFlatAndReduction",
+  "group": "U9",
   "date": "2026-10-28",
-  "description": "Strictly smaller flatness and tensor-reduction component isolated from the repaired theorem."
+  "description": "Reuse the proved finite-level ring-section flatness helper. Compute the actual transition kernel from the already proved constant quotient kernel formula and assemble the canonical tensor reduction using Mathlib quotient and first-isomorphism equivalences. No new holes or intermediate statements."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -65,11 +87,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-9be59",
-  "group": "P4",
-  "result": "fix",
-  "landing": "20261028T020622-L-2530190",
-  "kind": "interface",
-  "note": "independent cc review: finiteSystem_properties repaired statement + proof and split node finite-system-flat-and-reduction against node, old false statement, sectionwise_adic_algebra_limit hypotheses, and the 2 forced importer adaptations"
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T034953-L-3575428",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

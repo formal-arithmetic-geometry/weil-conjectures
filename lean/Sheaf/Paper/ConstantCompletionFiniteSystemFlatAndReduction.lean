@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.Paper.ConstantCompletionFiniteSystemModules
+import all Sheaf.Paper.ConstantCompletionFlatAndQuotientsFlatness
+import Sheaf.Paper.ConstantCompletionFlatAndQuotientsQuotient
+import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! The non-elementary flatness and tensor-reduction part of the finite constant
 completion tower.
@@ -49,5 +52,89 @@ theorem finiteSystem_flat_and_reduction (J : GrothendieckTopology C) (A : Type u
           e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a •
             adicTransition J A (finiteSystemUnder J A I) m (min m n)
               (Nat.min_le_left m n) U b) := by
-  sorry
+  constructor
+  · intro n U
+    let R := A ⧸ I ^ (n + 1)
+    let B := adicTerm J A (finiteSystemUnder J A I) n U
+    have : IsScalarTower A R B := htower n U
+    let η : R →+* B :=
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))).app U).hom
+    let α : A →+* B :=
+      ((quotient J A I n).hom.app U).hom.comp
+        ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app U).hom
+    let e : B ≃ₗ[R] (constant J R).obj.obj U :=
+      { AddEquiv.refl B with
+        map_smul' := by
+          intro r b
+          obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective r
+          change (algebraMap A R a) • b = _
+          rw [IsScalarTower.algebraMap_smul R]
+          change _ = η (Ideal.Quotient.mk _ a) * b
+          change α a * b = _
+          congr 1
+          exact (ConcreteCategory.congr_hom (congr_app
+            (toSheafify_naturality J ((Functor.const Cᵒᵖ).map
+              (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) U) a).symm }
+    have : Module.Flat R ((constant J R).obj.obj U) := ringSectionsFlat J R U
+    exact Module.Flat.of_linearEquiv e
+  · intro m n U
+    let S := finiteSystemUnder J A I
+    let B := (constant J A).obj.obj U
+    let η : A →+* B :=
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app U).hom
+    let f (k : ℕ) : B →+* adicTerm J A S k U :=
+      ((quotient J A I k).hom.app U).hom
+    have hf (k : ℕ) : Function.Surjective (f k) :=
+      (flat_and_quotients_quotient J A I k U.unop).1
+    have hker (k : ℕ) : RingHom.ker (f k) = (I ^ (k + 1)).map η := by
+      rw [(flat_and_quotients_quotient J A I k U.unop).2]
+      change Ideal.span (Set.range (fun a : ↥(I ^ (k + 1)) ↦ η a)) =
+        Ideal.span (η '' (↑(I ^ (k + 1)) : Set A))
+      congr 1
+      ext x
+      simp
+    have hscalar (k : ℕ) : (f k).comp η = algebraMap A (adicTerm J A S k U) := rfl
+    have hcomp (k l : ℕ) (h : l ≤ k) :
+        (adicTransition J A S k l h U).toRingHom.comp (f k) = f l := by
+      have hcone := (quotientCone J A I).w (homOfLE h).op
+      exact congrArg (fun g ↦ (g.hom.app U).hom) hcone
+    let q := adicTransition J A S m (min m n) (Nat.min_le_left m n) U
+    have hq : Function.Surjective q := by
+      intro y
+      obtain ⟨x, rfl⟩ := hf (min m n) y
+      exact ⟨f m x, RingHom.congr_fun (hcomp m (min m n) (Nat.min_le_left m n)) x⟩
+    have hmap (k : ℕ) : (RingHom.ker (f k)).map (f m) =
+        (I ^ (k + 1)).map (algebraMap A (adicTerm J A S m U)) := by
+      rw [hker, Ideal.map_map, hscalar]
+    have hqker : RingHom.ker q =
+        (I ^ (n + 1)).map (algebraMap A (adicTerm J A S m U)) := by
+      calc
+        RingHom.ker q = ((RingHom.ker q).comap (f m)).map (f m) :=
+          (Ideal.map_comap_of_surjective (f m) (hf m) _).symm
+        _ = (RingHom.ker (f (min m n))).map (f m) := by
+          change ((RingHom.ker q.toRingHom).comap (f m)).map (f m) = _
+          rw [RingHom.comap_ker]
+          change (RingHom.ker ((adicTransition J A S m (min m n)
+            (Nat.min_le_left m n) U).toRingHom.comp (f m))).map (f m) = _
+          rw [hcomp]
+        _ = (I ^ (n + 1)).map (algebraMap A (adicTerm J A S m U)) := by
+          by_cases h : n ≤ m
+          · rw [Nat.min_eq_right h, hmap]
+          · have hmn : m ≤ n := Nat.le_of_not_ge h
+            rw [Nat.min_eq_left hmn, hmap]
+            have hm : (I ^ (m + 1)).map (algebraMap A (adicTerm J A S m U)) = ⊥ := by
+              rw [← hmap, Ideal.map_eq_bot_iff_le_ker]
+            have hn : (I ^ (n + 1)).map (algebraMap A (adicTerm J A S m U)) = ⊥ :=
+              eq_bot_iff.mpr ((Ideal.map_mono
+                (Ideal.pow_le_pow_right (Nat.add_le_add_right hmn 1))).trans hm.le)
+            rw [hm, hn]
+    let e :=
+      ((Algebra.TensorProduct.quotIdealMapEquivTensorQuot
+        (adicTerm J A S m U) (I ^ (n + 1))).symm.restrictScalars A).trans
+        ((Ideal.quotientEquivAlgOfEq A hqker.symm).trans
+          (Ideal.quotientKerAlgEquivOfSurjective hq))
+    refine ⟨e.toLinearEquiv, ?_⟩
+    intro b a
+    change q (a • b) = a • q b
+    exact q.toLinearMap.map_smul a b
 end CategoryTheory.ConstantCompletion
