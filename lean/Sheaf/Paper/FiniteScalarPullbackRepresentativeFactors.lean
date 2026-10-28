@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteScalarOrdinaryPullbackComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
+import Sheaf.Paper.FiniteScalarPullbackRepresentativeFactorsFactorized
 
 /-! # Representative factors of the scalar inverse mate
 
@@ -133,7 +134,10 @@ theorem finiteScalarPullback_representative_factors_core
       (proEtaleRingDerivedPullbackFactors p (proEtaleConstantRing Y R)
         (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).hom.app
           (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P) := by
-  sorry
+  rw [← exact_factors_eq_counit_local
+    (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) P]
+  simpa only [Functor.map_comp, Category.assoc] using
+    finiteScalarPullback_representative_factors_factorized R p P
 
 theorem finiteScalarPullback_representative_factors
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)

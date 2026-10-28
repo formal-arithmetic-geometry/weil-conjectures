@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-finite-scalar-pullback-representative-factors-factorized",
+ "kind": "statement",
+ "title": "Factorized derived inverse mate normalization",
+ "statement": "For finite R, p:X→Y, and a cochain complex P of fixed-scalar modules on Y, the expanded representative equation holds with the exact-derived inverse-image isomorphism and mapDerivedCategoryFactors displayed separately before replacing their composite by the left-derived counit. This is the strict intermediate used to prove the counit-form equation.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-pullback-comparison",
+  "def-sf-finite-scalar-ordinary-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E; factorized derived mate normalization"
+ },
+ "proof": [
+  {
+   "text": "Expand the fixed inverse-image factor as the composite of the left-derived-to-exact-derived isomorphism and mapDerivedCategoryFactors; the resulting factorized chain is the normalized ordinary inverse mate square.",
+   "uses": [
+    "def-sf-finite-scalar-pullback-comparison",
+    "def-sf-finite-scalar-ordinary-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact-derived mate normalization and identify the termwise factors with finiteScalarOrdinaryPullbackComparison, yielding the displayed factorized equation.",
+   "uses": [
+    "lem-pur-exact-derived-mate",
+    "lem-finite-realization-direct-image-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-pullback-comparison",
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-pur-exact-derived-mate",
+  "lem-finite-realization-direct-image-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E; factorized derived mate normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorIsoMapDerivedCategory mapDerivedCategoryFactors counit",
+   "results": "No direct Mathlib source match; the project API is used from the derived-counit module.",
+   "verdict": "Use the local exact counit factorization API.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "factorized derived inverse mate equation exact derived counit finite scalar pullback",
+   "results": "Found generic derived epsilon factorization and mate equivalence declarations, but no specialized scalar pullback equation.",
+   "verdict": "Generic mate APIs do not replace the project-specific factorized statement.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedFunctorIsoMapDerivedCategory mapDerivedCategoryFactors",
+   "results": "Unavailable for the project-specific identifier; no direct Mathlib hit.",
+   "verdict": "Use the local declaration and retain this as a project theorem.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarPullbackRepresentativeFactors",
+  "date": "2026-10-28",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-pullback-representative-factors",
+   "place": "Factorized derived inverse mate normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarPullbackRepresentativeFactorsFactorized",
+  "file": "lean/Sheaf/Paper/FiniteScalarPullbackRepresentativeFactorsFactorized.lean",
+  "declaration": "WeilConjectures.finiteScalarPullback_representative_factors_factorized",
+  "statement": "theorem finiteScalarPullback_representative_factors_factorized (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y) (P : CochainComplex (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) : (sfIntrinsicDerivedEquivalence X R).functor.map ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Q.obj P)) ≫ (sfIntrinsicDerivedEquivalence X R).functor.map ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapDerivedCategoryFactors.hom.app P) ≫ (sfIntrinsicModuleEquivalence X R).functor.mapDerivedCategoryFactors.hom.app (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((mapHomologicalComplexCompIso (finiteScalarOrdinaryPullbackComparison R p) (.up ℤ)).inv.app P) = (finiteScalarPullbackComparison R p).inv.app (DerivedCategory.Q.obj P) ≫ (proEtaleConstantRingDerivedPullback R p).map ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app P) ≫ (proEtaleRingDerivedPullbackFactors p (proEtaleConstantRing Y R) (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).hom.app (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261028T020753-L-2546725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261028T020753-L-2546725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
