@@ -14,6 +14,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
 public import Sheaf.Paper.OrdinaryCompletedIntegralPullback
 import Sheaf.Paper.IntegralResidueTor
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionInvertibility
 
 /-!
 # Scalar transpose of the canonical integral exceptional formula
@@ -437,7 +438,16 @@ theorem beta_isIso (W : Scheme.{u}) [W.Over (Spec (.of D.k))]
       (completedIntegralCommRingSheafUnrestricted l L W))
     (K : sfIntegralConstructibleCategory l E W) :
     IsIso (IntegralFiniteExtension.beta l E L i W D hl wE wL a b K.obj K.property.1) := by
-  sorry
+  obtain ⟨_, hu, hv⟩ :=
+    IntegralFiniteExtension.comparison_invertibility l E L i W D hl wE wL a b
+  let := hu
+  let := hv K wE.omega
+  unfold IntegralFiniteExtension.beta
+  let : IsIso (Prod.mkHom
+      (𝟙 (op ((integralScalarExtensionOfUniverses l E L i W).obj K.obj)))
+      (IntegralFiniteExtension.u l E L i W D hl wE wL)) :=
+    (isIso_prod_iff _ _).mpr ⟨inferInstance, hu⟩
+  infer_instance
 
 /-- The specified scalar beta, viewed as an isomorphism using its invertibility theorem.
 Source: blueprint beta convention
