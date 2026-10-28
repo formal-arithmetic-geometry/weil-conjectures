@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-point-integral-reduction-hom-tower",
+ "kind": "lemma",
+ "title": "Scalar Hom tower of an integral constructible complex at the point",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, and a finite extension E of Q_l. On s = Spec D.k, let S be any normalized derived reduction calculus and T any recorded coefficient tensor-Hom model. Restricted derived sections of quotient-linear Hom from S.reduction(N) into T.systemClosed's unit are naturally isomorphic, contravariantly in integral constructible N, to integralDualizingCoefficientHomTower applied to the actual derived integral R-module sections of N. This statement contains no compact support, compactification or exceptional inverse image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "def-coef-integral-dualizing-support-system-hom",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "The integral point reconstruction counit identifies N with extension of its actual R-module sections C. Use a flat-term K-flat model P of C, and the simultaneous reduction model of S, to realize its quotient-system reduction by constant extension of P and the actual quotient projections.",
+   "uses": [
+    "lem-pod-point-sections-reconstruction",
+    "lem-pod-point-sections-derived-reduction",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar internal-Hom adjunction on the sequence site and point extension/sections adjunction. Specializing to the quotient unit gives Hom_R(P,I_n), where I is one simultaneous K-injective resolution of the actual quotient R-module tower. The tensor model identifies the target unit with the regular quotient sheaf, retaining every quotient map.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-coef-hom-tower-scalar-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniqueness comparisons of localization identify this strict Hom tower with integralDualizingCoefficientHomTower. Naturality on complexes and inversion of quasi-isomorphisms gives the natural functor comparison; no family of evaluated isomorphisms is lifted.",
+   "uses": [
+    "lem-coef-hom-tower-scalar-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-point-sections-reconstruction",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-coef-hom-tower-scalar-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "Extracted a separate genuine step from the support-system scalar comparison; the full proof and edge cases are in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar adjunction between quotient compact support system Hom and integral compact sections Hom tower",
+   "results": "Eight results, including the condensed locally constant module adjunction; no comparison for the project sequence-site functors.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Reuse the recorded scalar internal-Hom adjunction and point reconstruction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve results for uniqueness of adjoints and its unit/counit equations. These compare reduction presentations but do not prove the support or section comparison.",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical glue only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "point.*reduction.*hom.*tower|support.*reduction.*comparison",
+   "results": "msearch: OK, zero hits. Local searches read IntegralCompactSupportPrescribedReductions, PointSectionsReconstruction, PointSectionsDerivedReduction, CoefHomTowerScalarModel, and the two original statement modules.",
+   "date": "2026-10-28",
+   "verdict": "Existing declarations provide the finite and representative ingredients, but neither required strict functor comparison is stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-support-system-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSupportSystemHomComparison",
+  "date": "2026-10-28",
+  "group": "Q9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PointIntegralReductionHomTower",
+  "file": "lean/Sheaf/SixFunctors/PointIntegralReductionHomTower.lean",
+  "declaration": "WeilConjectures.point_integral_reduction_hom_tower",
+  "statement": "theorem point_integral_reduction_hom_tower\n    (S : CoefficientDerivedSystemCalculus l E (Spec (.of D.k)))\n    (T : CoefficientDerivedSystemTensors l E (Spec (.of D.k))) :\n    Nonempty ((sfIntegralConstructible l E (Spec (.of D.k))).ι.op ⋙ S.reduction.op ⋙\n      (Functor.curry.obj (coefficientSequenceInternalHom l E (Spec (.of D.k)))).flip.obj\n        T.systemClosed.monoidal.tensorUnit ⋙ coefPairingSections l E (Spec (.of D.k)) ≅\n      ((sfIntegralConstructible l E (Spec (.of D.k))).ι ⋙\n        integralDualizingDerivedSections l E (Spec (.of D.k))).op ⋙\n          integralDualizingCoefficientHomTower l E)",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261028T055739-L-803815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261028T055739-L-803815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
