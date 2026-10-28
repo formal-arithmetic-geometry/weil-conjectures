@@ -1,0 +1,160 @@
+{
+ "id": "lem-sf-finite-ring-endpoint-cancellation",
+ "kind": "statement",
+ "title": "Cancel fixed coordinates in the explicit finite endpoint word",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "For finite coefficients, a compactification refinement r:c→d, a witnessed origin O and the coefficient-composition equality hg for the outer proper maps, the specified explicit finiteFixedRefinementOpenIso gives the intrinsicRefinement endpoint-coordinate equation. This is only the endpoint equation: there is no existential witness, no open-unit equation, and no hi assumption.",
+ "stmt_deps": [
+  "def-sf-finite-ring-fixed-coordinates",
+  "def-weil-frobenius-witnessed-compactification",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+  "place": "First two paragraphs: the inverse proper/open comparison followed by the proper direct-image compositor; its finite intrinsic ring-sheaf coordinate identification. Stacks sites-modules.tex Tags 03D6 and 03DI, more-etale.tex Tag 0F7B."
+ },
+ "proof": [
+  {
+   "text": "Apply finiteFixedPushIso_composition to r.hom and d.g. Insert the explicit finiteFixedRefinementOpenIso and cancel its inner inverse pairs by naturality. At the endpoints use finiteFixedEndpointModelAt to identify the remaining coordinates. Associate the fixed compositor at the object, postcompose with the inverse endpoint coordinate at d, and cancel its inverse pairs.",
+   "uses": [
+    "lem-sf-finite-ring-fixed-push-composition",
+    "lem-sf-finite-ring-endpoint-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+    "place": "First two paragraphs: the inverse proper/open comparison followed by the proper direct-image compositor; its finite intrinsic ring-sheaf coordinate identification. Stacks sites-modules.tex Tags 03D6 and 03DI, more-etale.tex Tag 0F7B."
+   }
+  },
+  {
+   "text": "Expand recordedRefinementCore and apply recordedCore_intrinsic, or unfold intrinsicRefinement using its original category instances. This identifies the remaining fixed word with the specified intrinsic refinement. The open-unit equation is not used.",
+   "uses": [
+    "def-weil-frobenius-witnessed-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+    "place": "First two paragraphs: the inverse proper/open comparison followed by the proper direct-image compositor; its finite intrinsic ring-sheaf coordinate identification. Stacks sites-modules.tex Tags 03D6 and 03DI, more-etale.tex Tag 0F7B."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-ring-fixed-push-composition",
+  "lem-sf-finite-ring-endpoint-pasting",
+  "def-weil-frobenius-witnessed-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+  "place": "Explicit finite presentation coordinate construction and the indicated component of the first two paragraphs.",
+  "group": "J1",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Iso.trans_assoc|mapIso_symm",
+   "results": [
+    "Mathlib/CategoryTheory/HomCongr.lean",
+    "Mathlib/CategoryTheory/Conj.lean",
+    "Mathlib/CategoryTheory/Conj.lean",
+    "Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean",
+    "Mathlib/CategoryTheory/Iso.lean",
+    "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+    "Mathlib/CategoryTheory/Comma/StructuredArrow/Final.lean",
+    "Mathlib/CategoryTheory/Endomorphism.lean"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic isomorphism cancellation is available; no theorem directly identifies this finite intrinsic endpoint word. The remaining project-specific statement is the endpoint component of the original conjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.symm_self_id",
+   "results": [
+    "CategoryTheory.Iso.symm_self_id"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic isomorphism cancellation is available; no theorem directly identifies this finite intrinsic endpoint word. The remaining project-specific statement is the endpoint component of the original conjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel endpoint isomorphisms to identify a refinement map transported through an equivalence",
+   "results": [
+    "HomotopicalAlgebra.AttachCells.reindex_m",
+    "HomotopicalAlgebra.AttachCells.reindex_π",
+    "HomotopicalAlgebra.AttachCells.reindex_g₁",
+    "ComplexShape.Embedding.AreComplementary.desc.aux_trans",
+    "InverseSystem.PEquivOn.compat",
+    "Ctop.ofEquiv_val",
+    "InverseSystem.pEquivOn_apply_eq",
+    "InverseSystem.pEquivOnSucc"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic isomorphism cancellation is available; no theorem directly identifies this finite intrinsic endpoint word. The remaining project-specific statement is the endpoint component of the original conjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancel endpoint coordinate isomorphisms in a proper refinement compositor to obtain the intrinsic refinement map",
+   "results": [
+    "DiscreteQuotient.ofLE_map",
+    "CategoryTheory.Meq.refine_apply",
+    "Trivialization.coordChangeHomeomorph_coe",
+    "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+    "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc",
+    "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso",
+    "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom",
+    "AlgebraicGeometry.Scheme.GlueData.ι_isoCarrier_inv"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic categorical or sheaf lemmas; none states this project-specific coordinate identity."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingRefinementCoordinatesCore",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-finite-ring-refinement-coordinates-canonical",
+   "place": "Cancel fixed coordinates in the explicit finite endpoint word",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRingEndpointCancellation",
+  "file": "lean/Sheaf/Paper/FiniteRingEndpointCancellation.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.finiteFixedEndpointCancellation",
+  "statement": "theorem finiteFixedEndpointCancellation\n    (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ)\n    {X Y : Scheme.{w}} {f : X ⟶ Y} {c d : Compactification f}\n    (r : c.Refinement d)\n    (O : FrobeniusExchange.CompactOrigin\n      (Padic.coefficientExtensionRing l E (n + 1)) X)\n    (hg : (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).pull (r.hom ≫ d.g) =\n      proEtaleRingCompositeCoefficients r.hom d.g\n        ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).ring Y)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).ring d.Z)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).ring c.Z)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).pull d.g)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).pull r.hom)) :\n      ((PurCompactSupport.geometricPushComposition\n        (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) r.hom d.g hg ≪≫\n      eqToIso (congrArg (fun h ↦ PurCompactSupport.push\n        (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) h) r.hom_g)).symm.app _) ≪≫\n      (PurCompactSupport.push\n        (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) d.g).mapIso\n          (finiteFixedRefinementOpenIso l E n r O).symm ≪≫\n      (PurCompactSupport.finiteImageIso l E n d).app O.K =\n    (PurCompactSupport.finiteImageIso l E n c).app O.K ≪≫\n      FrobeniusExchange.intrinsicRefinement\n        (Padic.coefficientExtensionRing l E (n + 1)) r O",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261028T055706-L-796124",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261028T055706-L-796124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

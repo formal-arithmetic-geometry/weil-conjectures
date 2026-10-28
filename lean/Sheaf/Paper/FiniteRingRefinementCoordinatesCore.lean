@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
 public import Sheaf.Paper.FrobeniusWitnessedCompactification
+import Sheaf.Paper.FiniteRingFixedOpenNormalization
+import Sheaf.Paper.FiniteRingEndpointCancellation
 
 /-! # Canonical finite proper/open coordinate witness
 
@@ -82,6 +84,8 @@ theorem finite_ring_refinement_coordinates_canonical
     (PurCompactSupport.finiteImageIso l E n c).app O.K ≪≫
       FrobeniusExchange.intrinsicRefinement
         (Padic.coefficientExtensionRing l E (n + 1)) r O := by
-  sorry
+  refine ⟨finiteFixedRefinementOpenIso l E n r O,
+    finiteFixedRefinementOpenIso_normalization l E n r O hi, ?_⟩
+  exact finiteFixedEndpointCancellation l E n r O hg
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

@@ -17,11 +17,10 @@
  },
  "proof": [
   {
-   "text": "Construct the canonical constant-coefficient proper/open comparison by finiteOpenIso and finiteDirectImage_eq, transport it through the retained witness, and use the open-unit equation.",
+   "text": "Construct finiteFixedRefinementOpenIso from the specified finite open, direct-image and fixed proper/open comparisons. Its open-adjunction normalization is finiteFixedRefinementOpenIso_normalization.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "lem-weil-pbc-proper-open-comparison-proetale",
-    "def-weil-frobenius-witnessed-compactification"
+    "def-sf-finite-ring-fixed-coordinates",
+    "lem-sf-finite-ring-fixed-open-normalization"
    ],
    "elementary": false,
    "source": {
@@ -30,10 +29,9 @@
    }
   },
   {
-   "text": "Expand the proper compositor and intrinsicRefinement definitions, then cancel the finite open and direct-image coordinate isomorphisms by naturality and the adjunction triangle identities.",
+   "text": "Apply finiteFixedEndpointCancellation to the constructed witness and hg. This supplies the separate endpoint clause; combine it with the open-unit normalization to construct the required existential conjunction.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "def-weil-frobenius-witnessed-compactification"
+    "lem-sf-finite-ring-endpoint-cancellation"
    ],
    "elementary": false,
    "source": {
@@ -43,14 +41,16 @@
   }
  ],
  "proof_deps": [
-  "def-weil-frobenius-witnessed-compactification",
-  "lem-pur-compact-support-integral-coefficient-comparison",
-  "lem-weil-pbc-proper-open-comparison-proetale"
+  "def-sf-finite-ring-fixed-coordinates",
+  "lem-sf-finite-ring-fixed-open-normalization",
+  "lem-sf-finite-ring-endpoint-cancellation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
-  "place": "Canonical finite proper/open witness and coordinate cancellation."
+  "place": "Construct the explicit finite open witness and combine the independent open-unit and endpoint-coordinate obligations, corresponding to the first two paragraphs.",
+  "group": "J1",
+  "date": "2026-10-28"
  },
  "mathlib_match": null,
  "mathlib_searches": [],
@@ -94,12 +94,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B7",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261027T205813-L-1617744",
+  "landing": "20261028T055706-L-796124",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
