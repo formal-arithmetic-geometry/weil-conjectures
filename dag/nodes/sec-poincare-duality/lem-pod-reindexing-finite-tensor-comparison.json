@@ -1,0 +1,147 @@
+{
+ "id": "lem-pod-reindexing-finite-tensor-comparison",
+ "kind": "statement",
+ "title": "Normalized reindexing of a finite total tensor",
+ "statement": "theorem podReindexingFiniteTensorComparison\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] (n : ℕ)\n    (P Q : CochainComplex (integralTowerModules l E Y) ℤ)\n    (P' Q' : CochainComplex (integralTowerModules l E X) ℤ)\n    (a : (isoReductionFiniteComplex l E g n).obj\n        ((unrestrictedIntegralFiniteComplex l E Y n).obj P) ≅\n      (unrestrictedIntegralFiniteComplex l E X n).obj P')\n    (b : (isoReductionFiniteComplex l E g n).obj\n        ((unrestrictedIntegralFiniteComplex l E Y n).obj Q) ≅\n      (unrestrictedIntegralFiniteComplex l E X n).obj Q') :\n    ∃ e : (isoReductionIntegralComplex l E g).obj\n        ((integralOperationsTensorLevel l E Y n).obj (P, Q)) ≅\n      (integralOperationsTensorLevel l E X n).obj (P', Q'),\n    ∀ (p q : ℤ) (U : X.ProEt)\n      (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X p).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U)))\n      (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q).X q).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U))),\n      ((e.hom.f (p + q)).val.app (op U))\n          (integralOperationsTotalTensorSection l E Y n P Q p q\n            (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n        integralOperationsTotalTensorSection l E X n P' Q' p q (op U)\n          ((a.hom.f p).val.app (op U) x) ((b.hom.f q).val.app (op U) y)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; ordinary finite tensor comparison before strict tower transition compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pod-isomorphism-reduction-reindexing",
+  "def-pur-integral-operation-complex-models",
+  "def-pur-integral-finite-tensor-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite closed structure and K-flat tensor model from the coefficient evaluation calculus to instantiate the existing tensor-chain comparison data at some n. Its pure-tensor formula fixes the finite chain map. The coefficient normalization equates its coefficient isomorphism with the constant-section isomorphism defining isoReductionFiniteComplex; transport the entire normalized assertion along this equality of coefficient isomorphisms.",
+   "uses": [
+    "lem-pod-reindexing-comparison-core-tensor-data",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the projection-normalized restriction-of-scalars square to identify the completed reindexing of the restricted finite tensor with the restriction of its finite reindexing. Lift this square to complexes, then compose with the finite tensor-chain isomorphism and with the total tensor of the two given chain isomorphisms a and b.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the module-sheafification unit with the underlying abelian-sheafification unit, so the coefficient tensor generator equals integralOperationsTotalTensorSection. The restriction comparison acts identically on sections. Its equation, tensorChain_pure, and the total tensor map generator formula give the required composite equation. All components are isomorphisms, including at n=0 and for zero complexes.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-comparison-core-tensor-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "agent-written",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; ordinary finite tensor comparison before strict tower transition compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence commuting with tensor induces an isomorphism of direct sum total tensor cochain complexes",
+   "results": [
+    "TensorProduct.directSum_symm_lof_tmul",
+    "TensorProduct.directSumLeft",
+    "TensorProduct.directSumRight'",
+    "HomologicalComplex.ιTensorObj",
+    "TensorProduct.directSum",
+    "PiTensorProduct.ofDirectSumEquiv_tprod_lof",
+    "PiTensorProduct.ofDirectSumEquiv_tprod_apply",
+    "HomologicalComplex.tensorObj"
+   ],
+   "date": "2026-10-28",
+   "verdict": "The results do not supply the normalized reindexing of a restricted finite total tensor. The proof instead uses the already stated project tensor-chain data and the restriction-of-scalars square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorMapObj",
+   "results": [],
+   "date": "2026-10-28",
+   "verdict": "The results do not supply the normalized reindexing of a restricted finite total tensor. The proof instead uses the already stated project tensor-chain data and the restriction-of-scalars square."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*[Bb]ifunctor|[Bb]ifunctor.*[Mm]ap",
+   "results": [
+    "Mathlib/Algebra/Homology/Monoidal.lean",
+    "Mathlib/Algebra/Homology/Monoidal.lean",
+    "Mathlib/Algebra/Homology/Monoidal.lean",
+    "Mathlib/Algebra/Homology/Monoidal.lean",
+    "Mathlib/Algebra/Homology/Monoidal.lean",
+    "Mathlib/Algebra/Homology/Bifunctor.lean",
+    "Mathlib/Algebra/Homology/Bifunctor.lean",
+    "Mathlib/Algebra/Homology/Bifunctor.lean"
+   ],
+   "date": "2026-10-28",
+   "verdict": "The results do not supply the normalized reindexing of a restricted finite total tensor. The proof instead uses the already stated project tensor-chain data and the restriction-of-scalars square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingStrictTensorTowersGenerators",
+  "date": "2026-10-28",
+  "group": "S5"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-strict-tensor-towers-generators",
+   "place": "Finite-level normalized tensor comparison; no inter-level compatibility."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingFiniteTensorComparison",
+  "file": "lean/Sheaf/Paper/PodReindexingFiniteTensorComparison.lean",
+  "declaration": "WeilConjectures.podReindexingFiniteTensorComparison",
+  "statement": "theorem podReindexingFiniteTensorComparison\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] (n : ℕ)\n    (P Q : CochainComplex (integralTowerModules l E Y) ℤ)\n    (P' Q' : CochainComplex (integralTowerModules l E X) ℤ)\n    (a : (isoReductionFiniteComplex l E g n).obj\n        ((unrestrictedIntegralFiniteComplex l E Y n).obj P) ≅\n      (unrestrictedIntegralFiniteComplex l E X n).obj P')\n    (b : (isoReductionFiniteComplex l E g n).obj\n        ((unrestrictedIntegralFiniteComplex l E Y n).obj Q) ≅\n      (unrestrictedIntegralFiniteComplex l E X n).obj Q') :\n    ∃ e : (isoReductionIntegralComplex l E g).obj\n        ((integralOperationsTensorLevel l E Y n).obj (P, Q)) ≅\n      (integralOperationsTensorLevel l E X n).obj (P', Q'),\n    ∀ (p q : ℤ) (U : X.ProEt)\n      (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X p).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U)))\n      (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q).X q).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U))),\n      ((e.hom.f (p + q)).val.app (op U))\n          (integralOperationsTotalTensorSection l E Y n P Q p q\n            (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n        integralOperationsTotalTensorSection l E X n P' Q' p q (op U)\n          ((a.hom.f p).val.app (op U) x) ((b.hom.f q).val.app (op U) y)",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261028T034937-L-3573028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261028T034937-L-3573028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
