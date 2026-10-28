@@ -117,16 +117,18 @@ lemma continuousMapSheafMulConst_hom_app_apply (t : T) (U : V.ProEtᵒᵖ)
 
 end MulConst
 
-variable (V : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
-  (ϖ : PadicAlgCl.integers ℓ E.1)
+variable (V : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+  (ϖ : PadicAlgCl.integers ℓ E)
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The comparison `𝒪_{E,V} ≅ C(-, 𝒪_E)_V` carries the multiplication by `ϖ` to the
 multiplication by the constant `ϖ`. -/
 lemma padicIntegersMulLeft_comp_continuousMapComparison :
-    letI := normedFieldOfAlgebra ℓ E.1
-    padicIntegersMulLeft V ℓ E ϖ ≫ continuousMapComparison V (integers ℓ E.1) =
-      continuousMapComparison V (integers ℓ E.1) ≫ continuousMapSheafMulConst V ϖ := by
-  let := normedFieldOfAlgebra ℓ E.1
+    letI := normedFieldOfAlgebra ℓ E
+    padicIntegersMulLeft V ℓ E ϖ ≫ continuousMapComparison V (integers ℓ E) =
+      continuousMapComparison V (integers ℓ E) ≫ continuousMapSheafMulConst V ϖ := by
+  let := normedFieldOfAlgebra ℓ E
   rw [padicIntegersMulLeft, continuousMapComparison,
     ← Adjunction.homEquiv_naturality_left_symm, ← Adjunction.homEquiv_naturality_right_symm]
   congr 1
@@ -136,39 +138,40 @@ variable {ϖ}
 /-- On the sheaf `U ↦ C(U, 𝒪_E)`, the map `(xₙ)ₙ ↦ (xₙ - ϖ x_{n+1})ₙ` of the countable power is an
 isomorphism, for `ϖ ∈ 𝔪_E`. -/
 theorem isIso_sub_powShift_continuousMapSheafMulConst
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E.1)) :
-    letI := normedFieldOfAlgebra ℓ E.1
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E)) :
+    letI := normedFieldOfAlgebra ℓ E
     IsIso (𝟙 _ - powShift (continuousMapSheafMulConst V ϖ)) := by
-  let := normedFieldOfAlgebra ℓ E.1
-  have := compactSpace_integers ℓ E.1
+  let := normedFieldOfAlgebra ℓ E
+  have := compactSpace_integers ℓ E
   refine Sheaf.isIso_sub_powShift_of_bijective _ fun U ↦ ?_
-  have hT (x : integers ℓ E.1) : ‖x‖ ≤ 1 :=
-    NNReal.coe_le_coe.2 ((mem_integers_iff ℓ E.1 x).1 x.2)
-  have ht : ‖ϖ‖ < 1 := norm_lt_one_of_mem_maximalIdeal ℓ E.1 hϖ
-  have hc : CompleteSpace (integers ℓ E.1) := complete_of_compact
+  have hT (x : integers ℓ E) : ‖x‖ ≤ 1 :=
+    NNReal.coe_le_coe.2 ((mem_integers_iff ℓ E x).1 x.2)
+  have ht : ‖ϖ‖ < 1 := norm_lt_one_of_mem_maximalIdeal ℓ E hϖ
+  have hc : CompleteSpace (integers ℓ E) := complete_of_compact
   have key := ContinuousMap.bijective_sub_const_mul_succ (W := U.unop.left) hT ht
-  let e : (ℕ → ULift.{u + 1} C(U.unop.left, integers ℓ E.1)) ≃
-      (ℕ → C(U.unop.left, integers ℓ E.1)) :=
+  let e : (ℕ → ULift.{u + 1} C(U.unop.left, integers ℓ E)) ≃
+      (ℕ → C(U.unop.left, integers ℓ E)) :=
     Equiv.piCongrRight fun _ ↦ Equiv.ulift
   exact e.symm.bijective.comp (key.comp e.bijective)
 
 /-- On the abelian sheaf `𝒪_{E,V}`, the map `(xₙ)ₙ ↦ (xₙ - ϖ x_{n+1})ₙ` of the countable power is
 an isomorphism, for `ϖ ∈ 𝔪_E`. -/
 theorem isIso_sub_powShift_padicIntegersMulLeft
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E.1)) :
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E)) :
     IsIso (𝟙 _ - powShift (padicIntegersMulLeft V ℓ E ϖ)) := by
-  let := normedFieldOfAlgebra ℓ E.1
+  let := normedFieldOfAlgebra ℓ E
+  have := isUltrametricDist_ofAlgebra ℓ E
   have := isIso_sub_powShift_continuousMapSheafMulConst V ℓ E hϖ
-  exact (isIso_sub_powShift_iff_of_iso (asIso (continuousMapComparison V (integers ℓ E.1)))
+  exact (isIso_sub_powShift_iff_of_iso (asIso (continuousMapComparison V (integers ℓ E)))
     (padicIntegersMulLeft_comp_continuousMapComparison V ℓ E ϖ)).2 this
 
 /-- **`𝒪_{E,V}` is complete with respect to `ϖ ∈ 𝔪_E`**: on the countable power of the regular
 `𝒪_{E,V}`-module, `(xₙ)ₙ ↦ (xₙ - ϖ x_{n+1})ₙ` is an isomorphism. -/
 theorem isIso_sub_powShift_padicIntegersCenter_unit
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E.1)) :
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E)) :
     IsIso (𝟙 _ - powShift ((padicIntegersCenter V ℓ E ϖ).app
       (𝟙_ (Mod (Sheaf (ProEt.topology V) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) V))))) := by
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) V))))) := by
   refine Mod.isIso_sub_powShift_of_isIso_hom _ ?_
   rw [Mod.regularEndCenter_app, Mod.regularEndSMul_unit, padicIntegersRegularEnd_hom]
   exact isIso_sub_powShift_padicIntegersMulLeft V ℓ E hϖ
@@ -177,9 +180,9 @@ theorem isIso_sub_powShift_padicIntegersCenter_unit
 countable power of a finitely presented `𝒪_{E,V}`-module, `(xₙ)ₙ ↦ (xₙ - ϖ x_{n+1})ₙ` is an
 isomorphism. -/
 theorem isIso_sub_powShift_padicIntegersCenter_of_isFinitelyPresented
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E.1))
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E))
     {M : Mod (Sheaf (ProEt.topology V) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) V)}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) V)}
     (hM : Mod.IsFinitelyPresented _ M) :
     IsIso (𝟙 _ - powShift ((padicIntegersCenter V ℓ E ϖ).app M)) := by
   obtain ⟨n, m, f, ⟨e⟩⟩ := hM

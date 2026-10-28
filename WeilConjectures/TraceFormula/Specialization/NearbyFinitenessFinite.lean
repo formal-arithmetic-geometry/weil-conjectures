@@ -36,9 +36,8 @@ The proof:
   bounded constructible complexes.
 
 The proper exchange is `sorry`ed upstream
-(`WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`), as are the finiteness of
-proper direct images and the topological input on separably closed points
-(`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`).
+(`WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`), as is the finiteness of
+proper direct images.
 
 -/
 
