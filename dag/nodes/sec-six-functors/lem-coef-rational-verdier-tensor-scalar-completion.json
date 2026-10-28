@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-rational-verdier-tensor-scalar-completion",
+ "kind": "statement",
+ "title": "Scalar extension respects normalized tensor completion",
+ "statement": "Let E to L be a finite coefficient-field embedding on a separated finite-type scheme X over the fixed finite-field datum. For arbitrary normalized ordinary tensor presentations a and b and Completion maps cE and cL, and any integral constructible K and M, inverse target tensor completion followed by the inverse ordinary scalar tensorator and scalar completion at a.tensor(K,M) equals the inverse completed tensor scalar comparison followed by completed scalar extension of inverse source tensor completion. This is the tensor-only square: it involves no internal Hom, dualizing object, evaluation, or rational localization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "first paragraph (finite-free scalar extension and cofinal completion); evaluation paragraph, ordinary-to-completed tensor identification"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-finite-extension-models",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives for K and M. Normalize the ordinary tensorator by s tensor (x tensor y) mapping to (s tensor x) tensor (1 tensor y). The Completion representative equations and the scalar completion equation identify both composites on every positive quotient coordinate; the shifted mapping-fiber coordinate is zero on both paths. Pure homogeneous tensors, sheafification, total-tensor coproduct inclusions and the two mapping-fiber coordinates detect equality. Descend through the K-flat localization and transport by naturality to the original inputs. Invert the constructible completion maps; the definition of scalarTensorCompleted gives the displayed inverse square.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "def-sf-integral-finite-extension-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-finite-extension-models",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "finite freeness, normalized completion, and evaluation paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension internal Hom comparison defined as the transpose of evaluation commutes with evaluation and tensor scalar comparison",
+   "result": "ModuleCat.ihom_ev_app, CategoryTheory.expComparison_ev and ordinary module adjunction results. They supply general transpose calculus but not this normalized derived completion square.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "result": "The general counit identity exists and is used for the evaluation part of the parent proof; it does not identify normalized completion tensorators.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorCompleted|tensor_scalar_completion",
+   "result": "Search service returned no hits. Local rg finds scalarTensorCompleted in IntegralOperationsScalarComparisons and its restriction in FiniteRationalDerivedOperations, but no square relating arbitrary Completion presentations to the ordinary tensorator.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierComparisonEvaluationIntegral",
+  "date": "2026-10-28",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "Paragraph 3: the tensor-completion subcalculation in the comparison/evaluation square, before internal-Hom evaluation and rational localization",
+   "via": [
+    "lem-coef-rational-verdier-comparison-evaluation-integral",
+    "lem-coef-rational-verdier-comparison-evaluation",
+    "lem-coef-rational-verdier-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierTensorScalarCompletion",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierTensorScalarCompletion.lean",
+  "declaration": "WeilConjectures.RationalVerdier.tensor_scalar_completion",
+  "statement": "theorem tensor_scalar_completion\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L)\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X))\n    (b : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l L X))\n    (cE : Completion D l hl X E a) (cL : Completion D l hl X L b)\n    (K M : sfIntegralConstructibleCategory l E X) :\n    (@asIso _ _ _ _ (cL.map.app\n      (((integralScalar l X E L i).obj K).obj, ((integralScalar l X E L i).obj M).obj))\n      (cL.invertible ((integralScalar l X E L i).obj K)\n        ((integralScalar l X E L i).obj M))).inv ≫\n      b.tensor.map (Prod.mkHom\n        (IntegralFiniteExtension.completion l E L i X K.obj K.property.1).inv\n        (IntegralFiniteExtension.completion l E L i X M.obj M.property.1).inv) ≫\n      (PurCompactSupport.scalarTensor (completedCoefficientMap l E L i X)\n        (IntegralFiniteExtension.tensorModel X a)\n        (IntegralFiniteExtension.tensorModel X b)).inv.app (K.obj, M.obj) ≫\n      (completedScalarComparison l E L i X).app (a.tensor.obj (K.obj, M.obj)) =\n    (@integralTensorScalarComparison l _ E _ _ _ L _ _ _ i X (units D l hl X) K M).inv.hom ≫\n      (integralScalarExtensionOfUniverses l E L i X).map\n        (@asIso _ _ _ _ (cE.map.app (K.obj, M.obj)) (cE.invertible K M)).inv",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261028T034655-L-3529834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261028T034655-L-3529834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,11 +17,20 @@
  ],
  "proof": [
   {
-   "text": "Uncurry the internal-Hom comparison and evaluate it on an integral representative. The inverse tensor-Hom adjunction turns the defining homMap into scalar-extended ordinary evaluation, while postcomposition with the canonical u gives the beta map. The completion representative equations identify this composite with the completed scalar tensorator on K-flat models; localization preserves the equality and the endpoint identifications are exactly the HEq normalizations hu and hb.",
+   "text": "Uncurry the actual homMap under the supplied adjunction. First-variable evaluation naturality transports the scalar-completion isomorphisms, giving the ordinary v-evaluation identity; counit naturality after internal Hom of u gives beta-evaluation. Naturality of the tensor completion map moves beta across inverse tensor completion. The tensor-only scalar/completion square and naturality of completedScalarComparison identify this with completed scalar extension of the integral completed evaluation.",
    "uses": [
     "def-sf-integral-finite-extension-models",
     "def-sf-integral-finite-extension-core",
-    "def-sf-integral-hom-reduction-models",
+    "lem-coef-integral-finite-extension",
+    "lem-sf-integral-hom-evaluation-naturality",
+    "lem-coef-rational-verdier-tensor-scalar-completion",
+    "lem-coef-rational-verdier-localized-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize that integral equality. Use the rational tensor object and pure-tensor map specifications, the scalar extension object and pure-map specifications, and A.objects/B.objects to identify all endpoints. Transport hb through the tensor functor and B.evaluation_integral; transport A.evaluation_integral through scalar extension. Identify the inverse rational tensorator with the localized inverse integral tensorator by the hom normalization and inverse uniqueness. Compose the resulting HEqs with hu and the localized equality.",
+   "uses": [
     "def-sf-rational-verdier-data",
     "def-weil-derived-pullback-tensor-hom",
     "def-weil-rationalization-karoubi"
@@ -32,17 +41,20 @@
  "proof_deps": [
   "def-sf-integral-finite-extension-models",
   "def-sf-integral-finite-extension-core",
-  "def-sf-integral-hom-reduction-models",
+  "lem-coef-integral-finite-extension",
+  "lem-sf-integral-hom-evaluation-naturality",
+  "lem-coef-rational-verdier-tensor-scalar-completion",
+  "lem-coef-rational-verdier-localized-evaluation",
   "def-sf-rational-verdier-data",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-rationalization-karoubi"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X2",
+  "group": "B2",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "Paragraph 3, integral representative substep split from the objectwise evaluation proof."
+  "place": "paragraph 3, evaluation by transposition; integral finite-extension evaluation paragraph"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -87,12 +99,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261027T234355-L-118361",
+  "landing": "20261028T034655-L-3529834",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
