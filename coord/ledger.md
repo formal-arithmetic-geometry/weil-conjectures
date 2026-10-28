@@ -20465,3 +20465,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:22 L: returned deliver/K6/Sheaf.Paper.ScalarPullbackRoosCoordinates (reviewer RETURN: (reviewer C-1e40d, head 1e40d7fad) E2: scalarPullbackRoosCoordinates_generator is false — it quantifies over every iso q)
 - 00:23 L: returned deliver/P7/Sheaf.CategoryTheory.NativeHomSignedShiftLaws (reviewer RETURN: (reviewer C-c1773, head c1773f63b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Nativ)
 - 00:23 L: returned deliver/U4/Sheaf.Paper.CommonStageInternalHomRepresentative (reviewer RETURN: (reviewer C-fbc19, head fbc191faf) No proof: value_transport (the only sorry) unchanged; prove it, or put the missing co)
+- 00:28 L: returned deliver/G8/Sheaf.Paper.ScalarTowerTensorLimitTransportAssembly (reviewer RETURN: (reviewer C-2a591, head 2a5916a2f) D1/G2: StrictEquationAssembly's sorry is scalarTowerTensorLimitSquare_of_derivedSigma)
