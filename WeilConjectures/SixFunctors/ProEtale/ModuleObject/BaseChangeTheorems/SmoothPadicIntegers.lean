@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
@@ -137,38 +136,5 @@ theorem isIso_baseChangeMap_app_padicIntegers_of_smooth [Smooth p] [QuasiCompact
   normalize_precoherent
   intro r₃ t
   exact t r₃
-
-/-- A natural transformation invertible at an object is invertible at every isomorphic object. -/
-lemma _root_.CategoryTheory.NatTrans.isIso_app_of_iso_of_isIso {C D : Type*} [Category* C]
-    [Category* D] {F G : C ⥤ D} (β : F ⟶ G) {A B : C} (e : Nonempty (A ≅ B))
-    (h : IsIso (β.app A)) :
-    IsIso (β.app B) :=
-  (NatTrans.isIso_app_iff_of_iso β e.some).1 h
-
-variable (ℓ) in
-/-- **From integral to `ℚ̄_ℓ`-coefficients.** For a commutative square whose vertical morphisms are
-quasi-compact and quasi-separated, on a topologically noetherian `W`, if the base change map with
-coefficients `𝒪_E` is invertible at every bounded constructible `𝒪_E`-complex for every finite
-subextension `E`, then the base change map with coefficients `ℚ̄_ℓ` is invertible at every bounded
-constructible `ℚ̄_ℓ`-complex: the latter has an integral model
-(`ProEtale.exists_padicAlgCl_iso_integralModel`). -/
-theorem isIso_baseChangeMap_app_padicAlgCl_of_integralModel [QuasiCompact g] [QuasiSeparated g]
-    [QuasiCompact h] [QuasiSeparated h] [TopologicalSpace.NoetherianSpace W]
-    (sq : CommSq e h g p) (K : PadicAlgClConstructible W ℓ)
-    (hK : ∀ (E : FiniteIntermediateField ℓ)
-      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W)),
-      IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq).app K₀.obj)) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq).app K.obj) := by
-  obtain ⟨E, K₀, ⟨i⟩⟩ := exists_padicAlgCl_iso_integralModel W ℓ K
-  have : K₀.obj.IsGE K₀.property.1.1.choose := K₀.property.1.1.choose_spec
-  have h₁ := isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers ℓ E sq _ _ this (hK E K₀)
-  have i' : (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-      W)).leftDerivedFunctor.obj
-      ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-        W)).leftDerivedFunctor.obj K₀.obj) ≅ K.obj := (boundedConstructible _).ι.mapIso i
-  -- `h₁` and the goal carry different proofs of `Precoherent Profinite`
-  have h₂ := NatTrans.isIso_app_of_iso_of_isIso (B := K.obj) _
-    (by exact_mod_proofs (⟨i'⟩ : Nonempty _)) h₁
-  exact_mod_proofs h₂
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIso
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
-public import WeilConjectures.Mathlib.CategoryTheory.Center.DerivedCategory
+public import WeilConjectures.CategoryTheory.Center.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal

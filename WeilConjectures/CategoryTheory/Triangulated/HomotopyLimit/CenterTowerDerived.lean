@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 public import WeilConjectures.CategoryTheory.Abelian.PowShift
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
-public import WeilConjectures.Mathlib.CategoryTheory.Center.DerivedCategory
+public import WeilConjectures.CategoryTheory.Center.DerivedCategory
 
 /-!
 # Complete objects of the heart of a derived category

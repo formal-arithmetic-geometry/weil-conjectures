@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.PowShift
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
-public import WeilConjectures.Mathlib.Analysis.Normed.Ring.ContinuousMapSubMulShift
+public import WeilConjectures.Analysis.Normed.Ring.ContinuousMapSubMulShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCoefficientSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 

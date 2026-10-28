@@ -92,7 +92,7 @@ lemma bijective_lan_map_of_isColimit_cofan (hψ : ProEt.IsHull (V.hom ≫ g) W�
     exact hψ' i
   obtain ⟨hc⟩ := ProEt.nonempty_isColimit_cofan_of_isHull (fun i ↦ (f i).left) hf (V.hom ≫ g) hψ
     hψ'' s hs
-  have hρ := bijective_of_isLimit_fan _ (isLimitSectionsFanOfIsColimitCofan F s hc)
+  have hρ := bijective_moduleCat_of_isLimit_fan _ (isLimitSectionsFanOfIsColimitCofan F s hc)
   have : IsIso (hullLanMap g hψ F.obj) := isIso_hullLanMap g hψ F.obj
   have hθ : Function.Bijective (hullLanMap g hψ F.obj) :=
     (ConcreteCategory.isIso_iff_bijective _).1 inferInstance

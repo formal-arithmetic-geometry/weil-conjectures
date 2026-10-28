@@ -63,7 +63,7 @@ open Scheme
 variable {R : Type (u + 1)} [Ring R]
 
 /-- A limit fan of modules is a product on underlying types. -/
-lemma bijective_of_isLimit_fan {ι : Type u} {A : ModuleCat.{u + 1} R}
+lemma bijective_moduleCat_of_isLimit_fan {ι : Type u} {A : ModuleCat.{u + 1} R}
     {B : ι → ModuleCat.{u + 1} R} (f : ∀ i, A ⟶ B i) (h : IsLimit (Fan.mk A f)) :
     Function.Bijective (fun x i ↦ f i x) := by
   have h' := Fan.isLimitMapConeEquiv (forget _) _ _ (isLimitOfPreserves (forget _) h)
