@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-rational-braiding-scalar-extension-square",
+ "kind": "statement",
+ "title": "Rational Koszul braiding commutes with the prescribed scalar comparison",
+ "statement": "Let ℓ be prime, Ω an algebraic closure of Q_ℓ, and W a scheme on which ℓ is invertible in every residue field. For finite coefficient indices E ≤ L, the prescribed rational scalar extension and normalized tensor scalar comparison commute with the prescribed rational Koszul braiding: for all A,B, λ_{EL;B,A} ∘ F_{EL}(σ^E_{A,B}) = σ^L_{F_{EL}A,F_{EL}B} ∘ λ_{EL;A,B}.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ (signed total symmetry), with the scalar-extension refinement in the normalized common-stage tensor paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-pod-integral-tensor-constraints",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the prescribed rational scalar extension, rational tensor comparison, and rational braiding on their defining localized representatives. The comparison and braiding components are the localizations of the prescribed integral comparison and integral braiding, while scalar extension sends a localized pure tensor a ⊗ f to the image scalar tensored with the integral scalar extension of f.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-sf-rational-common-tensor-symmetries",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On integral representatives, the two composites are equal by [lem-pur-integral-braiding-scalar-extension-square]. Bilinearity and the balancing relation of raw scalar localization extend this equality to all localized morphisms and preserve it for E = L and ramified extensions.",
+   "uses": [
+    "lem-pur-integral-braiding-scalar-extension-square",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-integral-braiding-scalar-extension-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, normalized common-stage tensor paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "braiding.*scalar|scalar.*braiding",
+   "results": "No direct theorem for this prescribed completed rational comparison; generic localization APIs do not establish the normalized comparison square.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scalar extension preserves Koszul braiding completed derived tensor",
+   "results": "No theorem matching the prescribed constructible rational comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map braiding scalar tensor comparison",
+   "results": "Only generic braided-functor naturality, with no prescribed scalar comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalBraidingScalarCompatibility",
+  "date": "2026-10-28",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-rational-braiding-scalar-compatibility",
+   "place": "Strictly smaller second conjunct extracted from the scalar compatibility clause",
+   "via": [
+    "lem-pur-rational-braiding-scalar-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalBraidingScalarSquare",
+  "file": "lean/Sheaf/Paper/RationalBraidingScalarSquare.lean",
+  "declaration": "WeilConjectures.rationalBraidingScalarExtensionSquare",
+  "statement": "theorem rationalBraidingScalarExtensionSquare\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω]\n    (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    ∀ (E L : AlgebraicallyClosedCoefficients.Index l Ω) (hEL : E ≤ L),\n      ∀ (A B : sfRationalConstructibleCategory l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W),\n        (sfRationalScalarExtension l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W 0\n          (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n          (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL)).map\n            (pullbackTensorRationalBraiding l\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W A B).hom ≫\n          (rationalTensorScalarComparison l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n            (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL) W).hom.app\n            (B, A) =\n        (rationalTensorScalarComparison l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n            (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL) W).hom.app\n            (A, B) ≫\n          (pullbackTensorRationalBraiding l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W\n            ((sfRationalScalarExtension l\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W 0\n              (Nat.Prime.ne_zero (Fact.out : l.Prime))\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n              (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL)).obj A)\n            ((sfRationalScalarExtension l\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W 0\n              (Nat.Prime.ne_zero (Fact.out : l.Prime))\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n              (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL)).obj B)).hom",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T020705-L-2537870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T020705-L-2537870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

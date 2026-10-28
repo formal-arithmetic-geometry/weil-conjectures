@@ -4,6 +4,9 @@ public import Sheaf.Paper.FiniteRationalDerivedOperations
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.AlgebraicallyClosedCoefficients
+import Sheaf.Paper.LocalizedTensorBraidingNaturality
+import Sheaf.Paper.IntegralBraidingNaturality
+import Sheaf.Paper.RationalBraidingScalarSquare
 
 /-!
 # Naturality and scalar compatibility of rational tensor braiding
@@ -84,6 +87,16 @@ theorem rationalBraidingScalarCompatibility
               (Nat.Prime.ne_zero (Fact.out : l.Prime))
               (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
               (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L hEL)).obj B)).hom) := by
-  sorry
+  intro E L hEL
+  constructor
+  · intro A A' B B' a b
+    exact localizedTensorBraiding_naturality
+      l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W
+      (by
+        intro M M' N N' f g
+        exact pullbackTensorIntegralBraiding_naturality l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) W
+          M M' N N' f g) A A' B B' a b
+  · exact rationalBraidingScalarExtensionSquare l Ω W E L hEL
 
 end WeilConjectures

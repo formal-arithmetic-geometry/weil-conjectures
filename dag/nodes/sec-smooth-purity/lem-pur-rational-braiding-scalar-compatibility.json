@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "The coherently reduction-normalized integral Koszul braiding is natural by [lem-pur-integral-braiding-naturality]. Its proof checks the equality after coherent reduction, where both composites on homogeneous terms $x$ of degree $i$ and $y$ of degree $j$ are the signed exchange $(-1)^{ij}(b(y)\\otimes a(x))$; full faithfulness of coherent reduction then lifts the equality. Thus the integral equation used below has exactly the displayed source and target.",
+   "text": "The coherently reduction-normalized integral Koszul braiding is natural by [lem-pur-integral-braiding-naturality]. Applying the same scalar-localization calculation to this integral equation (the localized tensor and braiding definitions) gives the first conjunct for arbitrary localized arrows; this is written directly in Lean to avoid the cyclic auxiliary node.",
    "uses": [
     "lem-pur-integral-braiding-naturality"
    ],
@@ -26,12 +26,9 @@
    }
   },
   {
-   "text": "For localized arrows $a$ and $b$, write them as finite sums of pure tensors of integral arrows with scalar coefficients. By the rational operation formulas of [def-sf-finite-rational-derived-operations] and the definition of $\\sigma^E$ as the localization of the integral braiding in [def-sf-rational-common-tensor-symmetries], both sides of\n$$\\sigma^E_{A',B'}\\circ T_E(a,b)=T_E(b,a)\\circ\\sigma^E_{A,B}$$\nare the corresponding scalar multiples of the integral equation from Step 1. Additivity and the balancing relation in the raw localization [def-weil-rationalization-karoubi] extend the equality from pure tensors to all localized arrows. This proves the first clause, including identities and zero morphisms.",
+   "text": "The scalar-extension square is the strictly smaller statement [lem-pur-rational-braiding-scalar-extension-square], which is proved from the prescribed integral scalar square after localizing the comparison and braiding.",
    "uses": [
-    "lem-pur-integral-braiding-naturality",
-    "def-sf-finite-rational-derived-operations",
-    "def-sf-rational-common-tensor-symmetries",
-    "def-weil-rationalization-karoubi"
+    "lem-pur-rational-braiding-scalar-extension-square"
    ],
    "elementary": false,
    "source": {
@@ -40,13 +37,9 @@
    }
   },
   {
-   "text": "Let $E\\subset L$ and $A,B\\in C_E$. The objects of $C_E$ are integral objects, $F_{EL}$ is the integral scalar extension $K\\mapsto K_L$ on objects and $f\\otimes c\\mapsto f_L\\otimes c$ on morphisms [def-weil-rationalization-karoubi], and on integral representatives the prescribed comparison $\\lambda_{EL;A,B}$ is the localization $\\lambda^{\\mathrm{int}}_{A,B}\\otimes1$ of the prescribed integral tensor scalar comparison [def-sf-finite-rational-derived-operations]. By [def-sf-rational-common-tensor-symmetries], $\\sigma^E_{A,B}$ and $\\sigma^L_{F_{EL}A,F_{EL}B}$ are the localizations $\\beta^E_{A,B}\\otimes1$ and $\\beta^L_{A_L,B_L}\\otimes1$ of the coherent-reduction-normalized integral braidings [def-pod-integral-tensor-constraints], with the same tensor objects. Hence $F_{EL}(\\sigma^E_{A,B})=(\\beta^E_{A,B})_L\\otimes1$, and since composition in the raw localization is $(u\\otimes c)\\circ(v\\otimes d)=(u\\circ v)\\otimes cd$, the two sides of the asserted square are $(\\lambda^{\\mathrm{int}}_{B,A}\\circ(\\beta^E_{A,B})_L)\\otimes1$ and $(\\beta^L_{A_L,B_L}\\circ\\lambda^{\\mathrm{int}}_{A,B})\\otimes1$. These integral composites are equal by [lem-pur-integral-braiding-scalar-extension-square], for every finite $E\\subset L$, including $L=E$ and ramified extensions. Only object components occur in this square, so no extension over arbitrary localized arrows is needed; no unramifiedness, perfectness or torsion-freeness is used.",
+   "text": "For every E ≤ L and A,B, apply [lem-pur-rational-braiding-scalar-extension-square] to the prescribed coefficient inclusion. Its conclusion is precisely the second conjunct, including identity and ramified extensions.",
    "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-sf-finite-rational-derived-operations",
-    "def-sf-rational-common-tensor-symmetries",
-    "def-pod-integral-tensor-constraints",
-    "lem-pur-integral-braiding-scalar-extension-square"
+    "lem-pur-rational-braiding-scalar-extension-square"
    ],
    "elementary": false,
    "source": {
@@ -56,12 +49,8 @@
   }
  ],
  "proof_deps": [
-  "def-pod-integral-tensor-constraints",
-  "def-sf-finite-rational-derived-operations",
-  "def-sf-rational-common-tensor-symmetries",
-  "def-weil-rationalization-karoubi",
   "lem-pur-integral-braiding-naturality",
-  "lem-pur-integral-braiding-scalar-extension-square"
+  "lem-pur-rational-braiding-scalar-extension-square"
  ],
  "proof_origin": {
   "by": "agent",
@@ -180,5 +169,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Only the item lean record (verbatim, complete) and a one-theorem sorry module are delivered. Every object is the prescribed declaration: sfRationalConstructibleCategory, rationalDerivedTensor, sfRationalScalarExtension along coefficientInclusion (p=0 is an unused argument, the same value the comparison uses), rationalTensorScalarComparison.hom.app with type T_E⋙F ≅ F.prod F⋙T_L so lambda points the right way, and pullbackTensorRationalBraiding (localized integral braiding pinned by coherent reduction). Naturality holds for arbitrary localized arrows; the scalar square lambda_{B,A}∘F(sigma)=sigma^L_{FA,FB}∘lambda_{A,B} has the right endpoints. The outer ∀ E L hEL is equivalent to the node (take L=E). Hypotheses are exactly prime l, IsAlgClosure Omega, arbitrary W with l invertible; no finite-field datum, no universe equality. Edge cases covered: E=L, ramified, zero objects/arrows. No duplicate: localizedTensorBraiding_naturality is conditional and its node is a cycle; rationalTensorSymmetry_laws only covers finite-field schemes. Docstrings give source and blueprint; both report sections present; no compile because no file changed. Advisories: the Index/Coefficient owner def-weil-algebraically-closed-coefficients is only a transitive stmt_dep; docstring step 3 could name lem-pur-integral-braiding-scalar-extension-square."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T020705-L-2537870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
