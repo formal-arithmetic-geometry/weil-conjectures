@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-integral-root-power-generators-local-span",
+ "kind": "statement",
+ "title": "Recursive integral root sections locally span positive powers",
+ "statement": "Fix a prime l, a finite extension E/Q_l and a scheme T. For a family G_d(V,a,x) satisfying the degree-zero, degree-one and successor root recursion equations of lem-weil-integral-root-power-generators, every section of the d-th coefficient tensor power becomes, on a covering sieve, a finite linear combination of sections G_d(V,a,x).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, Tags 03EK and 03EL; local generation by sheafification and tensor induction"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "At degree zero the tensor power is the coefficient sheaf, so the given degree-zero formula supplies the spanning family.",
+   "uses": [
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At degree one, use the sheafification unit for scalar extension. Tensor-product induction expresses every presheaf section as a finite sum of scalar/root tensors, and the degree-one equation identifies each with a displayed G section.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For degree d+2, the tensor power is the sheafification of the presheaf tensor product of degree d+1 and degree one; the sheafification unit is locally surjective, so it suffices to treat pure tensors of sections that locally lie in the respective spans. Refine the two local spans to a common covering sieve, expand bilinearly (moving scalars of either factor out by balancing), and use the successor equation for G. The resulting finite sums lie in the displayed submodule span on the common refinement; the local span is stable under restriction because restriction maps generators to generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, Tags 03EK and 03EL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local span of sheaf tensor sections after a covering sieve",
+   "results": "No exact root-power match; generic sheaf separation and tensor induction APIs are used in the parent extensionality theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presheaf.IsLocallySurjective Submodule.span tensor",
+   "results": "Generic sheafification and tensor lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generatorSpan localSpan tensor_mem_localSpan",
+   "results": "PositiveRootTensorProduct contains a private analogous construction, but it imports the parent item and cannot be reused without a cycle.",
+   "date": "2026-10-28",
+   "verdict": "private analogue only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRootPowerGenerators",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-integral-root-power-generators",
+   "place": "local generation subargument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRootPowerLocalGeneration",
+  "file": "lean/Sheaf/Paper/IntegralRootPowerLocalGeneration.lean",
+  "declaration": "WeilConjectures.integralRootPower_local_spanning",
+  "statement": "theorem integralRootPower_local_spanning\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u})\n    (G : ∀ (d : ℕ) (V : T.ProEtᵒᵖ)\n      (_a : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj V),\n      (Fin d → (purTwistZlOne T l).obj.obj V) →\n        (coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))\n          (purTwistIntegralModule T l E) d).val.obj V)\n    (hzero : ∀ V a x, G 0 V a x = a)\n    (hone : ∀ V a x, G 1 V a (fun _ ↦ x) =\n      @SMul.smul _ _ (purTwistIntegralAction T l E V).toSMul a\n          (purTwistIntegralTensor T l E V 1 x))\n    (hsucc : ∀ d V a x, G (d + 2) V a x =\n      SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1}\n        (coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))\n          (purTwistIntegralModule T l E) (d + 1))\n        (purTwistIntegralModule T l E) V (G (d + 1) V a (fun i ↦ x i.castSucc))\n        (purTwistIntegralTensor T l E V 1 (x (Fin.last (d + 1))))) :\n    IntegralRootPowerLocallySpans l E T G",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.integralRootPower_local_spanning",
+   "WeilConjectures.IntegralRootPowerLocallySpans"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-df4f8",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261028T020537-L-2522761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-df4f8",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261028T020537-L-2522761",
+  "kind": "interface",
+  "note": "independent cc review: integralRootPower_hom_ext + two new split statements against nodes lem-weil-integral-root-power-generators(-local-span,-local-ext) and the private proof in Sheaf.Paper.PositiveRootTensorProduct; importer FrobeniusCoefficientTwistsCanonical compiled"
+ }
+}

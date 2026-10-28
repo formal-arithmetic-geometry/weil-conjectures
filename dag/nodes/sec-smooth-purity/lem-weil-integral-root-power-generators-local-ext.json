@@ -1,0 +1,95 @@
+{
+ "id": "lem-weil-integral-root-power-generators-local-ext",
+ "kind": "statement",
+ "title": "Local spanning implies integral root power map extensionality",
+ "statement": "For a family of sections G whose values locally span every coefficient tensor power, two morphisms out of a fixed positive tensor power that agree on all displayed G sections are equal.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product, sheaf separatedness and linear span argument (Tags 03EK and 03EL)"
+ },
+ "stmt_deps": [
+  "lem-weil-integral-root-power-generators-local-span"
+ ],
+ "proof": [
+  {
+   "text": "Apply sheaf and presheaf hom extensionality. For a section z, take the covering sieve on which its restriction lies in the span supplied by local generation.",
+   "uses": [
+    "lem-weil-integral-root-power-generators-local-span"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use target sheaf separatedness to compare restrictions and induct on Submodule.span. Zero, addition and scalar cases follow from linearity; the generator case is exactly the assumed equality on G.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-root-power-generators-local-span"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PresheafOfModules.hom_ext isSheaf.isSeparated Submodule.span_induction",
+   "results": "Existing generic APIs match this argument; no root-specific extensionality theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "generic APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRootPowerGenerators",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-integral-root-power-generators",
+   "place": "extensionality after local generation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRootPowerLocalGeneration",
+  "file": "lean/Sheaf/Paper/IntegralRootPowerLocalGeneration.lean",
+  "declaration": "WeilConjectures.integralRootPower_hom_ext_of_locallySpans",
+  "statement": "theorem integralRootPower_hom_ext_of_locallySpans\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u})\n    (G : ∀ (d : ℕ) (V : T.ProEtᵒᵖ)\n      (_a : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj V),\n      (Fin d → (purTwistZlOne T l).obj.obj V) →\n        (coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))\n          (purTwistIntegralModule T l E) d).val.obj V)\n    (hgen : IntegralRootPowerLocallySpans l E T G)\n    (d : ℕ) (N : proEtaleRingModules T (completedIntegralCommRingSheafUnrestricted l E T))\n    (f g : coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))\n      (purTwistIntegralModule T l E) d ⟶ N)\n    (h : ∀ V a x, f.val.app V (G d V a x) = g.val.app V (G d V a x)) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-df4f8",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261028T020537-L-2522761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-df4f8",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261028T020537-L-2522761",
+  "kind": "interface",
+  "note": "independent cc review: integralRootPower_hom_ext + two new split statements against nodes lem-weil-integral-root-power-generators(-local-span,-local-ext) and the private proof in Sheaf.Paper.PositiveRootTensorProduct; importer FrobeniusCoefficientTwistsCanonical compiled"
+ }
+}

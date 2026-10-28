@@ -6,6 +6,7 @@ Authors: SHEAF group B9
 module
 
 public import Sheaf.Paper.CoefficientTwistsDetailed
+import Sheaf.Paper.IntegralRootPowerLocalGeneration
 
 /-! # Local generation of integral root powers
 
@@ -56,7 +57,7 @@ theorem integralRootPower_hom_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u})
-    (G : ∀ (d : ℕ) (V : T.ProEtᵒᵖ) (a : (completedIntegralCoefficientSheafUnrestricted l E
+    (G : ∀ (d : ℕ) (V : T.ProEtᵒᵖ) (_a : (completedIntegralCoefficientSheafUnrestricted l E
       T).obj.obj V),
       (Fin d → (purTwistZlOne T l).obj.obj V) →
         (coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))
@@ -75,6 +76,8 @@ theorem integralRootPower_hom_ext
     (f g : coefficientTwistPower T (R := (completedIntegralCommRingSheafUnrestricted l E T))
       (purTwistIntegralModule T l E) d ⟶ N)
     (h : ∀ V a x, f.val.app V (G d V a x) = g.val.app V (G d V a x)) :
-    f = g := by sorry
+    f = g := by
+  apply integralRootPower_hom_ext_of_locallySpans l E T G
+    (integralRootPower_local_spanning l E T G hzero hone hsucc) d N f g h
 
 end WeilConjectures
