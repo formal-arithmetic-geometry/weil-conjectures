@@ -34,9 +34,9 @@
   "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
  },
  "proof_origin": {
-  "by": "G4 stage 3 decomposition",
+  "by": "H9 stage 3",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+  "place": "Construction 5.25 and Proposition 5.26; explicit conjugation of the given integral adjunction, qcqs left reduction and one right-reduction remainder."
  },
  "id": "new-lem-sf-exceptional-ring-transport-post-functor-data",
  "kind": "statement",
@@ -47,19 +47,35 @@
  ],
  "proof": [
   {
-   "text": "Transport the strict-system adjunction through the endpoint reconstruction equivalences, use the normalized reconstruction calculus for the reduction comparisons, and identify finite evaluations through the strict-system realization.",
+   "text": "Conjugate the supplied integral F and G by the inverse endpoint reconstruction equivalences. Compose their adjunctions using realizedAdjunction. Cancel the two equivalence unit isomorphisms to obtain realizeF and realizeG; cancel the source unit to obtain reductionF and reductionG. These are explicit functor and isomorphism constructions.",
    "uses": [
-    "lem-sf-exceptional-system-transport",
-    "lem-pur-normalized-reconstruction-adjunction-calculus",
-    "lem-sf-integral-compactification-system-realization"
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify reconstruction followed by finite evaluation with actual scalar reduction, using evaluation_eq, reduction and reductionEvaluation. Whisker the integral left realization with quotient extension; apply the qcqs compact-support finite comparison and then the inverse finite left realization. Fully faithful finite inclusion lifts this ambient composite to the left evaluation comparison.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-qcqs-compact-support-finite-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the right functor use the one-field right finite-reduction comparison. Whisker both finite comparisons by the source inverse reconstruction, then cancel its counit using invFunIdAssoc. Assemble all nine fields. Neither the integral operation/realization choices nor a new choice of system functors is used.",
+   "uses": [
+    "lem-sf-exceptional-integral-right-reduction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-exceptional-system-transport",
   "lem-pur-normalized-reconstruction-adjunction-calculus",
-  "lem-sf-integral-compactification-system-realization"
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-sf-exceptional-integral-right-reduction"
  ],
  "lean": {
   "existing": false,
@@ -85,9 +101,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "H9",
   "result": "pass",
-  "landing": "20261028T020426-L-2509093",
+  "landing": "20261028T034812-L-3549886",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

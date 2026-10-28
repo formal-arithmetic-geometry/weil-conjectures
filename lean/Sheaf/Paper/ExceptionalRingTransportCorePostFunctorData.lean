@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCoreReconstruction
+import Sheaf.Paper.ExceptionalIntegralRightReduction
+import Sheaf.Paper.QcqsCompactSupportFiniteComparison
 
 /-! # Functor and comparison fields for exceptional integral transport
 
@@ -71,6 +73,67 @@ structure TransportCorePostFunctorData
       (reconstruction E false).evaluation n ⋙
         (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩)).G
 
+private def reconstructionFiniteReduction
+    (l : ℕ) [Fact l.Prime] (E : FieldStage.{u} l) (T : Scheme.{u})
+    (R : Reconstruction l E T) (n : ℕ) :
+    R.equivalence.functor ⋙ R.evaluation n ⋙
+        (finiteTorConstructible l E.carrier (n + 1) (Nat.succ_pos n) T).ι ≅
+      (finiteTorConstructibleIntegral l E.carrier T).ι ⋙
+        pbcDerivedExtend (PurCompactSupport.projection l E.carrier (n + 1)
+          (Nat.succ_pos n) T) :=
+  Functor.isoWhiskerLeft R.equivalence.functor (eqToIso (R.evaluation_eq n)) ≪≫
+    Functor.isoWhiskerRight (eqToIso R.reduction)
+      (coefficientSequenceDerivedEvaluation l E.carrier T n) ≪≫
+    Functor.isoWhiskerLeft (finiteTorConstructibleIntegral l E.carrier T).ι
+      (R.calculus.reductionEvaluation n) ≪≫
+    Functor.isoWhiskerLeft (finiteTorConstructibleIntegral l E.carrier T).ι
+      (PurCompactSupport.finiteReductionIso l E.carrier T n).symm
+
+private def conjugateRealization
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (eX : A ≌ B) (eY : C ≌ D) (F : A ⥤ C) :
+    F ≅ PurReconstruction.realized eX eY
+      (PurReconstruction.realized eX.symm eY.symm F) :=
+  (eX.funInvIdAssoc (F ⋙ eY.functor ⋙ eY.inverse) ≪≫
+    Functor.isoWhiskerLeft F eY.unitIso.symm ≪≫ F.rightUnitor).symm
+
+private def integralLeftEvaluation
+    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
+    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (E : FieldStage.{u} l) (n : ℕ)
+    (A : Operation.{u} l Ω X Y (.integral E))
+    (B : Operation.{u} l Ω X Y (.finite E ⟨n + 1, Nat.succ_pos n⟩))
+    (leftA : LeftRealization.{u} l Ω c (.integral E) A)
+    (leftB : LeftRealization.{u} l Ω c (.finite E ⟨n + 1, Nat.succ_pos n⟩) B)
+    (RX : Reconstruction l E X) (RY : Reconstruction l E Y) :
+    A.F ⋙ RY.equivalence.functor ⋙ RY.evaluation n ≅
+      RX.equivalence.functor ⋙ RX.evaluation n ⋙ B.F := by
+  let q := Functor.whiskerLeft (finiteTorConstructibleIntegral l E.carrier X).ι
+    (PurCompactSupport.comparison
+      (PurCompactSupport.reduction l E.carrier (n + 1) (Nat.succ_pos n)) c)
+  have : IsIso q := by
+    exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ q
+      (fun K ↦ (sfQcqsCompactSupport_finiteComparison l E.carrier D.k
+        (PurCompactSupport.coefficientPrimeUnit l D hl) c ⟨K.obj, K.property.1⟩).2 n)
+  exact ((finiteTorConstructible l E.carrier (n + 1) (Nat.succ_pos n) Y).fullyFaithfulι
+    |>.whiskeringRight (finiteTorConstructibleIntegralCategory l E.carrier X)).preimageIso
+      (Functor.isoWhiskerLeft A.F (reconstructionFiniteReduction l E Y RY n) ≪≫
+        Functor.isoWhiskerRight leftA
+          (pbcDerivedExtend (PurCompactSupport.projection l E.carrier (n + 1)
+            (Nat.succ_pos n) Y)) ≪≫
+        asIso q ≪≫
+        Functor.isoWhiskerRight (reconstructionFiniteReduction l E X RX n).symm
+          (PurCompactSupport.image
+            (PurCompactSupport.finite l E.carrier (n + 1) (Nat.succ_pos n)) c) ≪≫
+        Functor.isoWhiskerLeft (RX.equivalence.functor ⋙ RX.evaluation n) leftB.symm)
+
+set_option linter.unusedVariables false in
 /-- The strict-system transport and normalized reconstruction calculus produce
 all transported functors, adjunctions, evaluations, and the integral-left
 comparison once the reconstruction and realization choices are fixed.
@@ -100,8 +163,44 @@ theorem exists_exceptional_transport_post_functor_data
       IntegralSystemRealization.Realizations l E.carrier D (operations E)) :
     Nonempty (TransportCorePostFunctorData l Ω D hl c operation left reconstruction
       operations realizations) := by
-  sorry
+  classical
+  let eX (E : FieldStage.{u} l) := (reconstruction E true).equivalence
+  let eY (E : FieldStage.{u} l) := (reconstruction E false).equivalence
+  let F (E : FieldStage.{u} l) :=
+    PurReconstruction.realized (eX E).symm (eY E).symm (operation (.integral E)).F
+  let G (E : FieldStage.{u} l) :=
+    PurReconstruction.realized (eY E).symm (eX E).symm (operation (.integral E)).G
+  have h (E : FieldStage.{u} l) :=
+    exists_exceptional_integral_right_reduction l Ω D hl f c E
+      (operation (.integral E))
+      (fun n ↦ operation (.finite E ⟨n + 1, Nat.succ_pos n⟩))
+      (left (.integral E)) (fun n ↦ left (.finite E ⟨n + 1, Nat.succ_pos n⟩))
+      (reconstruction E true) (reconstruction E false)
+  refine ⟨{
+    F := F
+    G := G
+    adjunction := fun E ↦ PurReconstruction.realizedAdjunction
+      (eX E).symm (eY E).symm (operation (.integral E)).adjunction
+    realizeF := fun E ↦ conjugateRealization (eX E) (eY E) (operation (.integral E)).F
+    realizeG := fun E ↦ conjugateRealization (eY E) (eX E) (operation (.integral E)).G
+    reductionF := fun E ↦ ((eX E).funInvIdAssoc
+      ((operation (.integral E)).F ⋙ (eY E).functor)).symm
+    reductionG := fun E ↦ ((eY E).funInvIdAssoc
+      ((operation (.integral E)).G ⋙ (eX E).functor)).symm
+    evaluationF := fun E n ↦
+      Functor.isoWhiskerLeft (eX E).inverse
+        (integralLeftEvaluation l Ω D hl f c E n (operation (.integral E))
+          (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩))
+          (left (.integral E)) (left (.finite E ⟨n + 1, Nat.succ_pos n⟩))
+          (reconstruction E true) (reconstruction E false)) ≪≫
+        (eX E).invFunIdAssoc ((reconstruction E true).evaluation n ⋙
+          (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩)).F)
+    evaluationG := fun E n ↦
+      Functor.isoWhiskerLeft (eY E).inverse ((h E).some n) ≪≫
+        (eY E).invFunIdAssoc ((reconstruction E false).evaluation n ⋙
+          (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩)).G) }⟩
 
+set_option linter.unusedVariables false in
 /-- The coherent integral realization supplies the remaining integral-left
 comparison for each field stage.  This is the one-field remainder of the
 transport package isolated above.
@@ -132,7 +231,13 @@ theorem exists_exceptional_transport_integral_left
         PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙
           sfCompactSupportFiniteIntegralFunctor l D.k
             (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier) := by
-  sorry
+  refine ⟨fun E ↦ ?_⟩
+  exact ((sfIntegralConstructible l E.carrier Y).fullyFaithfulι.whiskeringRight
+    (finiteTorConstructibleIntegralCategory l E.carrier X)).preimageIso
+      (left (.integral E) ≪≫ Functor.isoWhiskerLeft
+        (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X)
+        (sfQcqsCompactSupportRealization l E.carrier D.k
+          (PurCompactSupport.coefficientPrimeUnit l D hl) c))
 
 
 end WeilConjectures.ExceptionalIntegralScalar

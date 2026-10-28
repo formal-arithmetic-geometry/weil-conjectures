@@ -20832,3 +20832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/H4/Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompNatTrans (stage 3; reviewer PASS; first push; landing 20261028T034809-L-3549330 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/H6/Sheaf.Paper.DiagonalFiniteUnitPushCore (stage 3; reviewer PASS; first push; landing 20261028T034810-L-3549515 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/H8/Sheaf.Paper.DiagonalTraceRootProjectionTransport (stage 3; reviewer PASS; first push; landing 20261028T034811-L-3549730 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:48 L: merged deliver/H9/Sheaf.Paper.ExceptionalRingTransportCorePostFunctorData (stage 3; reviewer PASS; first push; landing 20261028T034812-L-3549886 (interface); batch 20261028T034643; modules 2; new nodes 1)

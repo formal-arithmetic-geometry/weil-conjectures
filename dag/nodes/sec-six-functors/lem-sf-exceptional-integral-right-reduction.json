@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-exceptional-integral-right-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of a fixed integral exceptional right adjoint",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a prime $\\ell$, a coefficient closure $\\Omega$, a finite-field datum $D$ with $\\ell\\ne D.p$, finite-type $D.k$-schemes $X,Y$, a separated finite-type $D.k$-morphism $f:X\\to Y$ and a compactification $c$, in the setting of [new-lem-sf-exceptional-ring-transport-reconstructions]. Fix one field stage $E$, an integral adjunction $A$, finite adjunctions $B_n$ at exponent $n+1$, and ambient compact-support left realizations of $A$ and all $B_n$. Let $R_X,R_Y$ be arbitrary endpoint Reconstruction records, and put $r_{T,n}=R_T.equivalence.functor\\,R_T.evaluation(n)$. Then there is a family of natural isomorphisms $A.G\\,r_{X,n}\\cong r_{Y,n}\\,B_n.G$ for all $n\\ge0$. Only this right reduction comparison is asserted: no system functors, adjunction, realization comparisons or integral-left package are chosen.",
+ "stmt_deps": [
+  "new-lem-sf-exceptional-ring-transport-reconstructions"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemma 5.22, Proposition 5.24, Construction 5.25 and Proposition 5.26(3)."
+ },
+ "proof": [
+  {
+   "text": "Identify r_T,n after the full finite inclusion with actual derived extension of completed coefficients to the quotient of exponent n+1. Compose the reconstruction reduction equation, its evaluation equation and the calculus reductionEvaluation isomorphism; these are functor isomorphisms, not just object identifications.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary etale system exceptional adjunction and its transported pro-etale system adjunction. Lemma 5.22 gives its finite right evaluation, Proposition 5.24 preserves normalization, and the finite exceptional operations give the constructible and Tor domains. Restrict to normalized constructible systems with common bounds, retaining the actual unit and counit.",
+   "uses": [
+    "lem-sf-exceptional-system-transport",
+    "lem-sf-exceptional-finite-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate through actual reduction and total limit. The supplied ambient left realizations identify both resulting left functors with the fixed compact-support left functors by full faithfulness. Uniqueness of right adjoints identifies the right functors, and the finite evaluation map of the system adjunction yields precisely A.G r_X,n ≅ r_Y,n B_n.G. This is Proposition 5.26(3). All comparisons are natural before evaluation; empty schemes give zero comparisons.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-exceptional-system-transport",
+  "lem-sf-exceptional-finite-operations",
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "proof_origin": {
+  "by": "H9 stage 3",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemma 5.22, Proposition 5.24, Construction 5.25 and Proposition 5.26(3). The missing right finite-reduction step isolated after proving categorical conjugation and left reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptional.*reduction|reduction.*exceptional|normalized.*coefficient.*system",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No exact match: the hits are generic derived functors or unrelated algebraic reduction, not finite coefficient compatibility of exceptional adjoints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo a uniformizer commutes with exceptional inverse image on constructible complexes of finite Tor amplitude",
+   "results": "8 hits: WeierstrassCurve.IsGoodReduction.congr_simp, LinearMap.reduceModIdeal, AdicCompletion.transitionMap_comp_reduceModIdeal, CategoryTheory.Functor.mapDerivedCategoryFactors, LinearMap.reduceModIdeal_apply, AdicCompletion.map_val_apply, Tactic.ReduceModChar.reduce_mod_char!, Tactic.ReduceModChar.derive",
+   "date": "2026-10-28",
+   "verdict": "No exact match: the hits are generic derived functors or unrelated algebraic reduction, not finite coefficient compatibility of exceptional adjoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction modulo a uniformizer commutes with exceptional inverse image on constructible complexes of finite Tor amplitude",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, PreTilt.mk_comp_untilt_eq_coeff_zero, AdicCompletion.transitionMap_comp_reduceModIdeal, BDeRham, PreTilt.exists_smodEq_untiltAux, PreTilt.mk_untilt_eq_coeff_zero, PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod, WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+   "date": "2026-10-28",
+   "verdict": "No exact match: the hits are generic derived functors or unrelated algebraic reduction, not finite coefficient compatibility of exceptional adjoints."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCorePostFunctorData",
+  "group": "H9",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sf-exceptional-ring-transport-post-functor-data",
+   "place": "The right finite evaluation comparison after explicitly constructing the transported adjunction by conjugation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralRightReduction",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralRightReduction.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_integral_right_reduction",
+  "statement": "theorem exists_exceptional_integral_right_reduction\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] (c : Compactification f)\n    (E : FieldStage.{u} l)\n    (integral : Operation.{u} l Ω X Y (.integral E))\n    (finite : ∀ n : ℕ, Operation.{u} l Ω X Y (.finite E ⟨n + 1, Nat.succ_pos n⟩))\n    (leftIntegral : LeftRealization.{u} l Ω c (.integral E) integral)\n    (leftFinite : ∀ n : ℕ,\n      LeftRealization.{u} l Ω c (.finite E ⟨n + 1, Nat.succ_pos n⟩) (finite n))\n    (RX : Reconstruction l E X) (RY : Reconstruction l E Y) :\n    Nonempty (∀ n : ℕ,\n      integral.G ⋙ RX.equivalence.functor ⋙ RX.evaluation n ≅\n        RY.equivalence.functor ⋙ RY.evaluation n ⋙ (finite n).G)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261028T034812-L-3549886",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261028T034812-L-3549886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
