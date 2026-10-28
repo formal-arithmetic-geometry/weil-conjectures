@@ -17,39 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Compare the completed constant-section map followed by R.integralIso.hom with the continuous constant-section map. R.finite_normalization identifies both maps after each finite quotient, and R.integral_normalization identifies those quotients with the reductions of continuous integral functions. The normalized inverse-limit comparison makes the reduction maps jointly monic, proving equality of these integral ring-sheaf maps and in particular equality of their uniformizer sections.",
+   "text": "Compute the projections of the canonical completed scalar map from its limit normalization. For an integral coefficient z, apply R.integral_normalization to R.integralIso(z), cancel the integral isomorphism with its inverse, and use R.finite_normalization. The resulting residues equal the residues of z. The injective valuation-ring-to-positive-residue-limit equivalence proves that R.integralIso sends each completed scalar to the continuous constant function z. This argument is pointwise and also applies to empty test objects.",
    "uses": [
     "lem-per-rational-module-realization-functor",
-    "lem-weil-pbc-continuous-coefficient-completion"
+    "def-weil-pbc-rational-category",
+    "lem-sfb-integers-profinite-tower",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-sfb-integral-completed-coefficient-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the integral ring-sheaf isomorphism at the matching uniformizer sections. Inverse section maps exist by the localization universal property; uniqueness gives naturality and the inverse identities. Sheafify and compose with R.localizationIso. R.localization_normalization and R.inclusion_normalization identify the coefficient-unit composite on every integral numerator, hence as a ring-sheaf map.",
+   "text": "Evaluate R.integralIso on each test object. Its ring equivalence takes the powers of the completed uniformizer section onto the powers of the continuous constant uniformizer section. Mathlib IsLocalization.ringEquivOfRingEquiv gives sectionwise localization isomorphisms. Prove naturality by IsLocalization.ringHom_ext, reducing it to naturality of R.integralIso on integral numerators. Apply presheafToSheaf.mapIso and compose with R.localizationIso. Naturality of toSheafify and the two pointwise normalizations R.localization_normalization and R.inclusion_normalization prove the specified unit equation.",
    "uses": [
     "lem-per-rational-module-realization-functor",
-    "lem-weil-pbc-continuous-coefficient-localization"
+    "def-weil-pbc-ringed-section-localization"
    ],
    "elementary": false
   },
   {
-   "text": "The resulting isomorphism takes localized constant integral coefficients to constant field coefficients. Both scalar maps from A[1/t] agree on A. Uniqueness of localization and the canonical equivalence A[1/t] = E make them equal on every fraction. Apply the inverse ring-sheaf map to obtain the inverse formula.",
+   "text": "The constant-presheaf sheafification adjunction identifies rationalModuleConstantMap on constant generators with continuous constant functions. The canonical pbcRationalCoefficientEquiv agrees on integral generators with the valuation-ring inclusion, by ringEquivOfRingEquiv_eq and the coefficient-field localization algebra equivalence. Compare the two sectionwise ring maps from A[1/t] by IsLocalization.ringHom_ext: on an integral generator the localized coefficient map is the localization unit, and the preceding unit equation, integral scalar comparison and R.inclusion_normalization give equality. Apply c.inv and the component of c.hom_inv_id to obtain the required inverse formula for every fraction.",
    "uses": [
-    "lem-weil-l-adic-integers-localization-uniformizer"
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-per-rational-continuous-coefficient-derived-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-per-rational-module-realization-functor",
-  "lem-weil-pbc-continuous-coefficient-completion",
-  "lem-weil-pbc-continuous-coefficient-localization",
-  "lem-weil-l-adic-integers-localization-uniformizer"
+  "def-weil-pbc-rational-category",
+  "lem-sfb-integers-profinite-tower",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-per-rational-continuous-coefficient-derived-localization"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent V9",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2(1)-(2), pp. 58-59; coefficient change implicit in Proposition 6.8.14(2), p. 62."
+  "place": "Lemma 6.8.2(1)-(2), pp. 58-59; coefficient change implicit in Proposition 6.8.14(2), p. 62. Explicit Lean proof by normalized residues, sectionwise localization and sheafification; no new intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -135,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F8",
+  "group": "V9",
   "result": "pass",
-  "landing": "20261027T180606-L-3879621",
+  "landing": "20261028T081803-L-2783598",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
