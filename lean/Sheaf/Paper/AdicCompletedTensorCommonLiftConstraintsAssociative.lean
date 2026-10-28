@@ -33,6 +33,12 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (ProEt.topology X) (ring l X R) closed)
   (symmetry : @SymmetricCategory _ _ closed.monoidal)
 
+-- STATEMENT-DISPUTED: `data.tensor` is an arbitrary natural isomorphism.
+-- The hypotheses contain no field identifying it with the finite representative
+-- comparisons or with `coherence.associator_model`; hence they do not determine
+-- this associativity equation. Adding such a compatibility field (or restricting
+-- `data` to the constructed tensorator) is required before this statement can
+-- be proved.
 /-- The associativity component of the common-stage constraint system.
 The finite-field representative calculation and its transport through the native
 associator are the proof obligations isolated here.
