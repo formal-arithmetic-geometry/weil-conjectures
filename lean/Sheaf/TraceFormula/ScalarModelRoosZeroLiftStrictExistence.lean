@@ -55,8 +55,13 @@ theorem scalarModelRoosZeroLift_strict_exists
     ∃ h : scalarModelRoosZeroLiftType l E L F ι j X SL P D,
       scalarModelRoosZeroLiftZero l E L F ι j X SL P D h ∧
       scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h := by
-  apply scalarModelRoosZeroLift_core l E L F ι j X SL ρL ρF b P D f
-  intro i
-  sorry
+  obtain ⟨f₀, hf₀, hcoord₀⟩ := scalarModelRoosZeroLift_strictify l E L ι X P D f
+  obtain ⟨h, hh, hcoord⟩ := scalarModelRoosZeroLift_core
+    l E L F ι j X SL ρL ρF b P D f₀ hf₀
+  refine ⟨h, hh, ?_⟩
+  intro n i U s t x y hxy
+  apply hcoord n i U s t x y
+  rw [hcoord₀ n i U]
+  exact hxy
 
 end WeilConjectures
