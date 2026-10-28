@@ -6,6 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.Paper.PodCompletionReindexShifts
+import Sheaf.Paper.PodTensorSignedShiftDescent
 
 /-! # Signed tensor shift models
 
@@ -62,6 +63,13 @@ theorem podReindexingTensorSignedShiftModels
     ∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X,
       SY.Generators l E ∧ SX.Generators l E ∧
       SY.Model l E D.shiftSource ∧ SX.Model l E D.shiftTarget := by
-  sorry
+  have _tensorLaws := hT
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, hY, hX, _⟩ := hD
+  obtain ⟨LY, RY, mY⟩ := podTensorSignedShiftDescent l E Y D.shiftSource hY
+  obtain ⟨LX, RX, mX⟩ := podTensorSignedShiftDescent l E X D.shiftTarget hX
+  exact ⟨podTensorSignedShiftOfDerived l E Y LY RY,
+    podTensorSignedShiftOfDerived l E X LX RX,
+    podTensorSignedShiftOfDerived_generators l E Y LY RY,
+    podTensorSignedShiftOfDerived_generators l E X LX RX, mY, mX⟩
 
 end WeilConjectures

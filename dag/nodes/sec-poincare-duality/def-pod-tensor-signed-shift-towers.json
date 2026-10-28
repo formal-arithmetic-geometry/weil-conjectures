@@ -1,0 +1,119 @@
+{
+ "id": "def-pod-tensor-signed-shift-towers",
+ "kind": "definition",
+ "title": "Strict tensor shift towers with prescribed derived slots",
+ "statement": "Under the coefficient and scheme assumptions of [def-pod-tensor-finite-signed-shifts], assemble its fixed finite left and right shifts into strict tower isomorphisms using the adjacent quotient equations [lem-pod-tensor-finite-shift-transitions]. Their components at n are exactly the concrete finite maps. Define the types of the still-to-be-supplied derived left and right shift fields and podTensorSignedShiftOfDerived, whose strict fields are these constructions and whose derived fields are its parameters. The proved finite formulas [lem-pod-tensor-finite-signed-shift-laws] show that for every choice of those parameters, this structure satisfies the Generators law of [def-pod-completion-reindex-shifts].",
+ "stmt_deps": [
+  "def-pod-tensor-finite-signed-shifts",
+  "lem-pod-tensor-finite-signed-shift-laws",
+  "lem-pod-tensor-finite-shift-transitions"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Use the generic proved constructor podTowerIsoOfAdjacent to assemble component isomorphisms and adjacent squares into an isomorphism of inverse sequences. Apply it to the explicit finite left and right shifts, using the corresponding quotient-transition equations. This checks the natural-isomorphism argument generically rather than repeatedly expanding the large coefficient-tower expressions. Package those towers, the proved good-shift preservation, and the supplied derived fields into the original record. Its generator laws are exactly the proved finite generator formulas.",
+   "uses": [
+    "def-pod-tensor-finite-signed-shifts",
+    "lem-pod-tensor-finite-signed-shift-laws",
+    "lem-pod-tensor-finite-shift-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-tensor-finite-signed-shifts",
+  "lem-pod-tensor-finite-signed-shift-laws",
+  "lem-pod-tensor-finite-shift-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of cochain complexes commutes with shift with Koszul sign",
+   "results": "Found CochainComplex.mapBifunctorShift₁Iso, mapBifunctorShift₂Iso and the first-factor inclusion formula. These provide the finite maps, but not strict quotient compatibility or completed-tensor descent.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorShift\"",
+   "results": "11 hits, including both shift isomorphisms, their summand formulas and naturality. No project-specific quotient tower or completion model.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift|fullyFaithfulWhiskeringLeft",
+   "results": "10 hits, in Mathlib.Algebra.Homology.BifunctorShift and Mathlib.CategoryTheory.Localization.Predicate (fullyFaithfulWhiskeringLeft). Used native finite tensor shift comparisons; derived normalization remains project-specific.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShiftModels",
+  "date": "2026-10-28",
+  "group": "S9"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5; shift comparison for the completed integral tensor on flat-term K-flat representatives.",
+   "via": [
+    "lem-pod-reindexing-tensor-signed-shifts-core-models-r3"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorSignedShiftTowers",
+  "file": "lean/Sheaf/Paper/PodTensorSignedShiftTowers.lean",
+  "declaration": "WeilConjectures.podTensorSignedShiftLeftTower",
+  "declarations": [
+   "WeilConjectures.podTowerIsoOfAdjacent",
+   "WeilConjectures.podTensorSignedShiftLeftTower",
+   "WeilConjectures.podTensorSignedShiftRightTower",
+   "WeilConjectures.PodTensorDerivedShiftLeft",
+   "WeilConjectures.PodTensorDerivedShiftRight",
+   "WeilConjectures.podTensorSignedShiftOfDerived",
+   "WeilConjectures.podTensorSignedShiftOfDerived_generators"
+  ],
+  "statement": "def podTensorSignedShiftLeftTower (W : Scheme.{u})\n    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :\n    (integralOperationsTensorTowerFunctor l E W).obj (P.obj⟦r⟧, Q.obj) ≅\n      podShiftTower ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) r",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

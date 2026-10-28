@@ -1,0 +1,109 @@
+{
+ "id": "lem-pod-tensor-finite-signed-shift-laws",
+ "kind": "statement",
+ "title": "Homogeneous generator formulas for the concrete finite tensor shifts",
+ "statement": "For a prime l, a finite extension E of Q_l, and a scheme W in the same universe, the explicit finite maps [def-pod-tensor-finite-signed-shifts] satisfy PodTensorFiniteShiftGenerators. For all cochain complexes P,Q, quotient levels n, homogeneous degrees p,q, integer shifts r, site objects U and sections x,y, the first-factor map sends the (p,q) pure tensor to the (p+r,q) pure tensor, and the second-factor map sends it to (-1)^(p*r) times the (p,q+r) pure tensor. Heterogeneous equality only transports the equal total-degree indices.",
+ "stmt_deps": [
+  "def-pod-tensor-finite-signed-shifts"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Insert the ordinary reduction shift isomorphism into Mathlib’s first- or second-factor total tensor shift. The ordinary shift comparisons have identity components; the native total tensor inclusion formulas give coefficients one and (-1)^(p*r), respectively. Apply the resulting module-map equality to the pure tensor section. Transport along equality of the total indices; scalar restriction leaves the underlying section maps unchanged. The proof is implemented by finiteShiftLeft_generators and finiteShiftRight_generators, using the already proved TensorTotalProof.totalTensor_map.",
+   "uses": [
+    "def-pod-tensor-finite-signed-shifts",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-tensor-finite-signed-shifts",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of cochain complexes commutes with shift with Koszul sign",
+   "results": "Found CochainComplex.mapBifunctorShift₁Iso, mapBifunctorShift₂Iso and the first-factor inclusion formula. These provide the finite maps, but not strict quotient compatibility or completed-tensor descent.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorShift\"",
+   "results": "11 hits, including both shift isomorphisms, their summand formulas and naturality. No project-specific quotient tower or completion model.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift|fullyFaithfulWhiskeringLeft",
+   "results": "10 hits, in Mathlib.Algebra.Homology.BifunctorShift and Mathlib.CategoryTheory.Localization.Predicate (fullyFaithfulWhiskeringLeft). Used native finite tensor shift comparisons; derived normalization remains project-specific.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShiftModels",
+  "date": "2026-10-28",
+  "group": "S9"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5; shift comparison for the completed integral tensor on flat-term K-flat representatives.",
+   "via": [
+    "lem-pod-reindexing-tensor-signed-shifts-core-models-r3"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorFiniteSignedShiftLaws",
+  "file": "lean/Sheaf/Paper/PodTensorFiniteSignedShiftLaws.lean",
+  "declaration": "WeilConjectures.podTensorFiniteSignedShiftGenerators",
+  "declarations": [
+   "WeilConjectures.podTensorFiniteSignedShiftGenerators"
+  ],
+  "statement": "theorem podTensorFiniteSignedShiftGenerators (W : Scheme.{u}) :\n    PodTensorFiniteShiftGenerators l E W",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

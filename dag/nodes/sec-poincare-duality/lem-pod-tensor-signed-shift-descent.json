@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-tensor-signed-shift-descent",
+ "kind": "statement",
+ "title": "Derived descent of already constructed strict signed tensor shifts",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W in the same universe. For any signed Roos shift rho on the completed coefficient module category satisfying both coordinate laws [def-pod-completion-reindex-models], there exist derived left and right shift fields L,R such that podTensorSignedShiftOfDerived l E W L R [def-pod-tensor-signed-shift-towers] satisfies Model l E rho [def-pod-completion-reindex-shifts]. Thus every representative equation uses the already fixed strict tower maps and the supplied rho, for every good P,Q and every compatible presentation eP,eQ,ePprime,eQprime,a,b. This theorem constructs no finite or strict tower shift data and does not assert the finite generator calculation.",
+ "stmt_deps": [
+  "def-pod-tensor-signed-shift-towers",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-shifts"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "On pairs of good representatives compose the tensor representative comparison, the fixed strict shift map, the supplied signed Roos comparison, the localization shift and the inverse shifted tensor representative comparison. The finite summand formulas prove naturality in both representatives. Naturality of rho follows by testing its two cone coordinates using its laws. Fully faithful precomposition by the product good-complex localization extends these natural isomorphisms uniquely to the derived tensor. Precompose with arbitrary shifted-input identifications and apply naturality to all four presentation isomorphisms. The two compatibility hypotheses in Model identify those isomorphisms with the localization shift, yielding both displayed equations.",
+   "uses": [
+    "def-pod-tensor-signed-shift-towers",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-tensor-signed-shift-towers",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; signed shifts of the same representative-normalized tensor operation. Supporting calculation: Stacks homology.tex, definition-shift-cochain, and more-algebra.tex, item-shift-tensor; descent: sites-cohomology.tex, lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of cochain complexes commutes with shift with Koszul sign",
+   "results": "Found CochainComplex.mapBifunctorShift₁Iso, mapBifunctorShift₂Iso and the first-factor inclusion formula. These provide the finite maps, but not strict quotient compatibility or completed-tensor descent.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorShift\"",
+   "results": "11 hits, including both shift isomorphisms, their summand formulas and naturality. No project-specific quotient tower or completion model.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift|fullyFaithfulWhiskeringLeft",
+   "results": "10 hits, in Mathlib.Algebra.Homology.BifunctorShift and Mathlib.CategoryTheory.Localization.Predicate (fullyFaithfulWhiskeringLeft). Used native finite tensor shift comparisons; derived normalization remains project-specific.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShiftModels",
+  "date": "2026-10-28",
+  "group": "S9"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5; shift comparison for the completed integral tensor on flat-term K-flat representatives.",
+   "via": [
+    "lem-pod-reindexing-tensor-signed-shifts-core-models-r3"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorSignedShiftDescent",
+  "file": "lean/Sheaf/Paper/PodTensorSignedShiftDescent.lean",
+  "declaration": "WeilConjectures.podTensorSignedShiftDescent",
+  "declarations": [
+   "WeilConjectures.podTensorSignedShiftDescent"
+  ],
+  "statement": "theorem podTensorSignedShiftDescent (W : Scheme.{u})\n    (ρ : PodSignedRoosShift (scalarReductionSource l E W)) (hρ : ρ.Laws) :\n    ∃ L : PodTensorDerivedShiftLeft l E W, ∃ R : PodTensorDerivedShiftRight l E W,\n      (podTensorSignedShiftOfDerived l E W L R).Model l E ρ",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261028T034938-L-3573338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
