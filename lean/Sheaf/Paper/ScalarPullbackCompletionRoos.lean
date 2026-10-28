@@ -5,6 +5,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ScalarPullbackRoosCoordinates
+import all Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.Paper.ScalarCompletionPresentationNormalization
+import Sheaf.Paper.FixedCalculusScalarModel
+import Sheaf.Paper.ScalarPullbackStrictTower
+import Sheaf.Paper.IntegralScalarRoosCounitNormalization
+import Sheaf.Paper.IntegralScalarOrdinaryModelComparison
+import all Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
+import Sheaf.Paper.ScalarRoosFunctorNaturality
+import all Sheaf.Paper.ScalarRoosComparison
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
@@ -27,6 +37,42 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (ι : E →ₐ[ℚ_[l]] L)
 
 
+attribute [local irreducible] HasDerivedCategory.standard
+  integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
+  integralDerivedPullback integralOrdinaryScalar integralComparisonSequenceScalarPullback
+  completedIntegralCommRingSheafUnrestricted
+  integralOperationsRoos integralOperationsRoosMap scalarRoosMap
+
+attribute [local implicit_reducible] integralScalarExtension integralScalarExtensionOfUniverses
+  integralComparisonDerivedSequenceScalar completedOrdinaryScalarComplex
+  integralScalarComplexFunctor integralOperationsGoodLocalization
+  integralOperationsRoosFunctor integralOperationsPullbackComplexFunctor
+  NatIso.mapHomologicalComplex Functor.mapHomologicalComplex
+  integralOperationsPullbackOnGood integralComparisonSequencePullback
+  integralComparisonDerivedSequencePullback HomologicalComplex.asFunctor
+  HomologicalComplex.complexOfFunctorsToFunctorToComplex
+
+
+
+private theorem bridge_naturality (F : Type u) [Field F] [Algebra ℚ_[l] F]
+    [FiniteDimensional ℚ_[l] F] (X : Scheme.{u})
+    (ρF : IntegralComparisonRoosModel l F X)
+    {C D : CochainComplex (coefficientSequenceModules l F X) ℤ} (g : C ⟶ D) :
+    (coefficientSequenceLimit l F X).map (DerivedCategory.Q.map g) ≫
+        (integralComparisonRoosBridge l F X ρF D).hom =
+      (integralComparisonRoosBridge l F X ρF C).hom ≫
+        DerivedCategory.Q.map (integralOperationsRoosMap
+          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+            (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).map g))) := by
+  let U := (coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)
+  let b := Functor.isoWhiskerRight
+      (coefficientSequenceRestriction l F X).mapDerivedCategoryFactors
+      (coefficientConstantTowerLimit l F X) ≪≫
+    Functor.isoWhiskerLeft U ρF.comparison
+  with_unfolding_all exact b.hom.naturality g
+
+set_option maxHeartbeats 800000 in
+-- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
 stage3-pur-scalar-pullback-right-roos-normalized.
@@ -135,6 +181,161 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
       (integralOrdinaryScalar l E L ι (W true)).mapDerivedCategoryFactors.hom.app
         ((integralOperationsPullbackComplexFunctor.{u, u} l E f).obj P.obj) ≫
       DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj) := by
-  sorry
+  classical
+  dsimp only
+  let X := W true
+  let F := integralDerivedPullback l E f
+  let O := integralOrdinaryDerivedScalar l E L ι X
+  let A := integralComparisonDerivedSequenceScalar l E L ι X
+  let T := coefficientSequenceLimit l L X
+  let S := ME.calculus true
+  let χ := scalarCompletion l E L ι X
+  let SD := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
+    (.up ℤ)).obj D
+  let rD := T.mapIso (A.mapIso eD ≪≫ εD) ≪≫
+    integralComparisonRoosBridge l L X ρ SD ≪≫
+    DerivedCategory.Q.mapIso (integralOperationsRoosFunctor.mapIso qD)
+  obtain ⟨SX⟩ := fixedCalculusScalarModel l E L ι X S ρ
+  have hs := scalarCompletionPresentationNormalization l E L ι X S ρ SX
+    R D eD κD hpD hcD εD hεD qD hqD
+  let B := integralComparisonDerivedSequencePullback l E f
+  let H := ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C
+  let cp := (integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.hom.app C
+  let TE := coefficientSequenceLimit l E X
+  let z := B.map ((ME.calculus false).reduction.map eP.inv ≫ eC.hom) ≫ cp
+  let γ := eR.hom ≫ (ME.pullback f).realization.hom.app K ≫ TE.map z
+  have hAdj : S.reduction.map γ ≫ S.adjunction.counit.app (DerivedCategory.Q.obj H) =
+      S.reduction.map eR.hom ≫ pullbackReduction l E W ME f K ≫ z := by
+    have hz := S.adjunction.counit.naturality z
+    change S.reduction.map (TE.map z) ≫
+      S.adjunction.counit.app (DerivedCategory.Q.obj H) =
+      S.adjunction.counit.app _ ≫ z at hz
+    dsimp only [γ, pullbackReduction]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hz]
+  obtain ⟨qE, hqE, hME⟩ := (ME.pullback f).normalization P C eC κ hp hc
+  let CE := ((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj H
+  let SH := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
+    (.up ℤ)).obj H
+  let CL := ((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj SH
+  let a : CE.asFunctor ⋙ completedOrdinaryScalarComplex l E L ι X ⟶ CL.asFunctor :=
+    { app n := ScalarRoosLiftProof.levelChange l E L ι X H n.unop
+      naturality n m h := ScalarRoosLiftProof.levelChange_horizontal l E L ι X H h }
+  obtain ⟨t, e, ht, he, hχmodel⟩ := integralScalarOrdinaryModelComparison l E L ι X
+  have hCounit := integralScalarRoosCounitNormalization l E L ι X S (ME.roos true) ρ SX t e he
+    hχmodel H a (fun n i U s x ↦
+      ScalarRoosLiftProof.scalarComponent_tensor l E L ι X (H.X i) n U s x)
+  let σ := (NatIso.mapHomologicalComplex
+    (integralComparisonSequenceScalarPullback l E L ι f) (.up ℤ)).hom.app C
+  let σ' : SH ⟶
+      ((integralComparisonSequencePullback l L f).mapHomologicalComplex (.up ℤ)).obj
+        (((integralComparisonSequenceScalarModel l E L ι (W false)).E.mapHomologicalComplex
+          (.up ℤ)).obj C) := σ
+  let τ := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+    (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).map σ')
+  have hσ := bridge_naturality l L X ρ σ
+  have hγ : γ = eR.hom ≫ F.map eP.inv ≫
+      (integralDerivedPullbackComparison l E f).hom.app P ≫
+      DerivedCategory.Q.map (integralOperationsRoosMap qE.inv) ≫
+      (integralComparisonRoosBridge l E X (ME.roos true) H).inv := by
+    let b := integralComparisonRoosBridge l E X (ME.roos true) H
+    let qe := DerivedCategory.Q.mapIso (integralOperationsRoosFunctor.mapIso qE)
+    have hnat := (ME.pullback f).realization.hom.naturality eP.inv
+    dsimp only [Functor.comp_map] at hnat
+    have hγcomp : γ ≫ b.hom ≫ qe.hom =
+        eR.hom ≫ F.map eP.inv ≫ (integralDerivedPullbackComparison l E f).hom.app P := by
+      dsimp only [γ, z, b, qe, Iso.trans_hom, Functor.mapIso_hom]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← Category.assoc ((ME.pullback f).realization.hom.app K), ← hnat]
+      simp only [Category.assoc]
+      rw [hME]
+    change γ = eR.hom ≫ F.map eP.inv ≫
+      (integralDerivedPullbackComparison l E f).hom.app P ≫ qe.inv ≫ b.inv
+    apply (cancel_mono (b.hom ≫ qe.hom)).1
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+      Category.comp_id] using hγcomp
+  -- The strict tower square identifies the resulting scalar/Roos chain.
+  have hchain :
+      ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).map
+          (integralOperationsRoosMap qE.inv) ≫
+        (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app (integralOperationsRoos CE.asFunctor) ≫
+        scalarRoosMap (completedOrdinaryScalarExtension l E L ι X) CE.asFunctor ≫
+        integralOperationsRoosMap a ≫ integralOperationsRoosMap τ ≫
+        integralOperationsRoosMap q.hom = scalarPullbackChain l E L ι f P.obj := by
+    let G := integralOrdinaryScalar l E L ι X
+    let b := Functor.whiskerLeft CE.asFunctor
+      (NatIso.mapHomologicalComplex t (.up ℤ)).hom
+    let c := Functor.whiskerRight qE.inv (G.mapHomologicalComplex (.up ℤ))
+    have hb : c ≫ b ≫ a ≫ τ ≫ q.hom = (scalarPullbackTower l E L ι f).app P.obj :=
+      scalarPullbackStrictTower l E L ι f P C κ qE hqE q hq t ht a
+        (fun n i U s x ↦
+          ScalarRoosLiftProof.scalarComponent_tensor l E L ι X (H.X i) n U s x)
+    have htNat := scalarRoos_functor_naturality G
+      (completedOrdinaryScalarExtension l E L ι X) t.hom CE.asFunctor
+    have hqNat := scalarRoosNaturality G qE.inv
+    calc
+      _ = (G.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosMap qE.inv) ≫
+          scalarRoosMap G CE.asFunctor ≫ integralOperationsRoosMap b ≫
+          integralOperationsRoosMap a ≫ integralOperationsRoosMap τ ≫
+          integralOperationsRoosMap q.hom := by
+        change _ ≫ (NatTrans.mapHomologicalComplex t.hom (.up ℤ)).app _ ≫ _ = _
+        rw [reassoc_of% htNat]
+        rfl
+      _ = scalarRoosMap G ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) ≫
+          integralOperationsRoosMap c ≫ integralOperationsRoosMap b ≫
+          integralOperationsRoosMap a ≫ integralOperationsRoosMap τ ≫
+          integralOperationsRoosMap q.hom := by
+        rw [← Category.assoc, hqNat]
+        simp only [Category.assoc]
+        rfl
+      _ = scalarRoosMap G ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) ≫
+          integralOperationsRoosMap (c ≫ b ≫ a ≫ τ ≫ q.hom) := by
+        simp only [integralOperationsRoosMap_comp]
+      _ = _ := by rw [hb]; rfl
+  change _ ≫ _ ≫ rD.inv ≫ _ ≫ _ = _
+  rw [reassoc_of% hs]
+  let ε := S.adjunction.counit.app (DerivedCategory.Q.obj H)
+  let c := scalarPullbackRoosCoordinate l E L ι f P C (ME.calculus false) ρ K eP eC q
+  have hCoord :
+      T.map (A.map (S.reduction.map eR.hom ≫ pullbackReduction l E W ME f K)) ≫ c =
+      T.map (A.map (S.reduction.map γ ≫ ε)) ≫
+        T.map ((integralComparisonSequenceScalarModel l E L ι X).ε.app H) ≫
+        (integralComparisonRoosBridge l L X ρ SH).hom ≫
+        DerivedCategory.Q.map (integralOperationsRoosMap τ) ≫
+        DerivedCategory.Q.map (integralOperationsRoosMap q.hom) := by
+    dsimp only [c, scalarPullbackRoosCoordinate]
+    simp only [Functor.map_comp, Category.assoc]
+    have hσa := reassoc_of% hσ
+    dsimp only [σ] at hσa
+    rw [hσa]
+    have hadj := congrArg (fun g ↦ T.map (A.map g)) hAdj
+    simp only [Functor.map_comp] at hadj
+    dsimp only [z] at hadj
+    simp only [Functor.map_comp] at hadj
+    simp only [Category.assoc] at hadj
+    rw [← reassoc_of% hadj]
+    rfl
+  change χ.app _ ≫ SX.realization.hom.app _ ≫ _ ≫ c = _
+  rw [hCoord]
+  have hNat := SX.realization.hom.naturality γ
+  dsimp only [Functor.comp_map] at hNat
+  have hχNat := χ.naturality γ
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hNat]
+  change _ ≫ (integralScalarExtension l E L ι X).map γ ≫ _ = _
+  rw [← reassoc_of% hχNat]
+  rw [hγ]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hCounit]
+  simp only [Functor.map_comp, Category.assoc]
+  have hfac := (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.naturality
+    (integralOperationsRoosMap qE.inv)
+  dsimp only [Functor.comp_map] at hfac
+  rw [reassoc_of% hfac]
+  have hQ := congrArg (fun g ↦ DerivedCategory.Q.map g) hchain
+  simp only [Functor.map_comp] at hQ
+  rw [hQ]
+  rfl
+
 
 end WeilConjectures.ScalarExtensionTower

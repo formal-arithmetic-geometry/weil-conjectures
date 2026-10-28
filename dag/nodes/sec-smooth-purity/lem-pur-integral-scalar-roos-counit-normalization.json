@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-integral-scalar-roos-counit-normalization",
+ "kind": "statement",
+ "title": "Normalized scalar Roos counit in the ordinary integral scalar model",
+ "statement": "Fix l,E,L,iota,X, a coefficient calculus S, Roos models rhoE and rhoL, a normalized scalar realization SX, and ordinary and derived model comparisons t and e. Assume e identifies the cochain counits and the scalar-completion maps [lem-trf-integral-scalar-ordinary-model-comparison]. For a sequence complex H and a strict scalar tower map a with the coefficient-reduction tensor formula, the normalized scalar Roos counit equation holds in the ordinary integral scalar model: the inverse E Roos bridge, scalar completion, SX, scalar of the system counit, scalar cochain counit, and L Roos bridge compose to the ordinary scalar derived factor followed by Q of t, scalarRoosMap, and Roos(a).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 06YY and 0941; universal derived scalar comparisons and counits."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-integral-scalar-ordinary-model-comparison",
+  "def-sf-additive-roos-map"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the scalar-completion model comparison on the total limit and use naturality of the derived model comparison across the inverse E Roos bridge. Apply the existing whole-system scalar Roos counit normalization. Replace the cochain counit using the supplied comparison equation; functoriality and associativity give the ordinary integral scalar factors.",
+   "uses": [
+    "lem-trf-scalar-model-roos-counit-normalization",
+    "lem-trf-integral-scalar-ordinary-model-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scalar-model-roos-counit-normalization",
+  "lem-trf-integral-scalar-ordinary-model-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 06YY and 0941; universal derived scalar comparisons and counits."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]ullback|[Rr]oos.*[Ss]calar",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality APIs support the proof; no theorem states this project-specific normalized quotient/Roos compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal Roos comparison is natural in an additive functor and scalar extension commutes with pullback quotient towers",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, localCohomology.diagramComp, CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, CondensedMod.hom_naturality_apply, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicTopology.DoldKan.Q_f_naturality_assoc, AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality APIs support the proof; no theorem states this project-specific normalized quotient/Roos compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the additive Roos complex comparison under natural transformations of additive functors",
+   "results": "8 hits: CategoryTheory.NatTrans.mapHomotopyCategory, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.ShortComplex.homologyMap_mapNatTrans, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.ShortComplex.mapNatTrans, CategoryTheory.NatTrans.mapHomologicalComplex, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality APIs support the proof; no theorem states this project-specific normalized quotient/Roos compatibility."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullbackCompletionRoos",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former proof step 6: normalized scalar-extension comparisons and compatibility with pullback and quotient transitions, via the completion/Roos calculation.",
+   "via": [
+    "lem-pur-scalar-pullback-completion-roos",
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarRoosCounitNormalization",
+  "file": "lean/Sheaf/Paper/IntegralScalarRoosCounitNormalization.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.integralScalarRoosCounitNormalization",
+  "statement": "theorem integralScalarRoosCounitNormalization (X : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρE : IntegralComparisonRoosModel l E X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (SX : IntegralComparisonScalarModel l E L ι X S ρL)\n    (t : integralOrdinaryScalar l E L ι X ≅ completedOrdinaryScalarExtension l E L ι X)\n    (e : integralOrdinaryDerivedScalar l E L ι X ≅\n      completedDerivedScalarExtension l E L ι X)\n    (he : ∀ P : CochainComplex (integralTowerModules l E X) ℤ,\n      e.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit l E L ι X P =\n        (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app P ≫\n          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P))\n    (hχ : e.hom ≫ completedScalarComparison l E L ι X = scalarCompletion l E L ι X)\n    (H : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (a : (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj H).asFunctor\n        ⋙ completedOrdinaryScalarComplex l E L ι X ⟶\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex\n          (.up ℤ)).obj H)).asFunctor)\n    (ha : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n      (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)\n      (x : (H.X i).val.obj (op (n, U.unop))),\n      ((a.app (op n)).f i).val.app U\n        (completedScalarTensorSection l E L ι X\n          (((coefficientSequenceRestriction l E X).obj (H.X i)).obj (op n)) U s\n          (integralComparisonRestrictedSection l E X (H.X i) n U x)) =\n        integralComparisonRestrictedSection l L X\n          ((integralComparisonSequenceScalarModel l E L ι X).E.obj (H.X i)) n U\n          (integralComparisonSequenceTensorSection l E L ι X (H.X i) (op (n, U.unop))\n            ((completedIntegralCommRingProjectionUnrestricted l L X n).hom.app U s) x)) :\n    let Z := integralOperationsRoos\n      (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj H).asFunctor\n    (integralOrdinaryDerivedScalar l E L ι X).map\n        (integralComparisonRoosBridge l E X ρE H).inv ≫\n      (scalarCompletion l E L ι X).app\n        ((coefficientSequenceLimit l E X).obj (DerivedCategory.Q.obj H)) ≫\n      SX.realization.hom.app\n        ((coefficientSequenceLimit l E X).obj (DerivedCategory.Q.obj H)) ≫\n      (coefficientSequenceLimit l L X).map\n        ((integralComparisonDerivedSequenceScalar l E L ι X).map\n          (S.adjunction.counit.app (DerivedCategory.Q.obj H))) ≫\n      (coefficientSequenceLimit l L X).map\n        ((integralComparisonSequenceScalarModel l E L ι X).ε.app H) ≫\n      (integralComparisonRoosBridge l L X ρL _).hom =\n    (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app Z ≫\n      DerivedCategory.Q.map ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app Z ≫\n        scalarRoosMap (completedOrdinaryScalarExtension l E L ι X)\n          (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj H).asFunctor\n          ≫ integralOperationsRoosMap a)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T081759-L-2782488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T081759-L-2782488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
