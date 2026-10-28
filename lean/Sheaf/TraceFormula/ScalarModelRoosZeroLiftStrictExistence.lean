@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftStrictification
 
 /-! # Strict scalar Roos lift without a chosen coordinate presentation -/
 
@@ -54,6 +55,8 @@ theorem scalarModelRoosZeroLift_strict_exists
     ∃ h : scalarModelRoosZeroLiftType l E L F ι j X SL P D,
       scalarModelRoosZeroLiftZero l E L F ι j X SL P D h ∧
       scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h := by
+  apply scalarModelRoosZeroLift_core l E L F ι j X SL ρL ρF b P D f
+  intro i
   sorry
 
 end WeilConjectures
