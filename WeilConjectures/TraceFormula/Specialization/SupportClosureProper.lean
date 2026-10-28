@@ -249,9 +249,12 @@ lemma isProper_deformationSpaceProdLift_of_le {C : Over (Spec (.of k))} (p : C �
         rfl)) (by simp)
   have : Mono g := by
     refine ⟨fun a b hab ↦ pullback.hom_ext ?_ (pullback.hom_ext ?_ ?_)⟩
-    · simpa [g] using congr($hab ≫ pullback.fst _ _ ≫ pullback.snd _ _)
-    · simpa [g] using congr($hab ≫ pullback.fst _ _ ≫ pullback.fst _ _)
-    · simpa [g] using congr($hab ≫ pullback.snd _ _ ≫ pullback.fst _ _)
+    · simpa [g, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase]
+        using congr($hab ≫ pullback.fst _ _ ≫ pullback.snd _ _)
+    · simpa [g, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase]
+        using congr($hab ≫ pullback.fst _ _ ≫ pullback.fst _ _)
+    · simpa [g, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase]
+        using congr($hab ≫ pullback.snd _ _ ≫ pullback.fst _ _)
   have e : Θ ≫ g = IdealSheafData.deformationSpaceToFibreProduct _ _ Z k₁ k₂ ≫
       pullback.map _ _ _ _ _ _ (𝟙 _) ((Category.comp_id _).trans s₁.symm)
         ((Category.comp_id _).trans s₂.symm) := by
