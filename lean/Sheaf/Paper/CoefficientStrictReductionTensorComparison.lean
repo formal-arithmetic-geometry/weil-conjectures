@@ -33,7 +33,7 @@ theorem coefficientStrictReductionTensorComparison_exists
     (R : CoefficientDerivedSystemReduction l E W) :
     Nonempty (R.integralClosed.tensor ⋙ R.reduction ≅
       R.reduction.prod R.reduction ⋙ R.systemClosed.tensor) := by
-  sorry
+  exact ⟨R.reductionTensor⟩
 
 /-- A chosen strict reduction comparison has the simultaneous representative
 normalization square. This is the normalization part after the comparison map
@@ -41,6 +41,9 @@ has been constructed; the finite projections are the prescribed scalar tensor
 maps on every flat-term K-flat pair.
 Source: Stacks 06YS, 06YY, 07A4 and 0941, representative tensor descent.
 (blueprint: lem-coef-strict-reduction-tensor-normalization-fixed). -/
+-- STATEMENT-DISPUTED: an arbitrary comparison μ need not have the prescribed
+-- ordinary scalar tensor normalization. The signature omits the docstring
+-- requirement that μ be supplied by the strict pullback construction.
 theorem coefficientStrictReductionTensorNormalization_of
     (R : CoefficientDerivedSystemReduction l E W)
     (μ : R.integralClosed.tensor ⋙ R.reduction ≅

@@ -21046,3 +21046,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:57 L: merged deliver/S9/Sheaf.Paper.IntrinsicSiteHomTransportChain (stage 3; reviewer PASS; first push; landing 20261028T055759-L-808604 (interface); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/T1/Sheaf.Paper.AffineSpaceIsoTraceCore (stage 3; reviewer PASS; first push; landing 20261028T055800-L-808996 (interface); batch 20261028T055556; modules 2; new nodes 1)
 - 05:58 L: merged deliver/T3/Sheaf.Paper.AutomorphismConstructibleStageEquivalence (stage 3; reviewer PASS; first push; landing 20261028T055801-L-809456 (interface); batch 20261028T055556; modules 4; new nodes 3)
+- 05:58 L: merged deliver/T3/Sheaf.Paper.CoefficientStrictReductionTensorComparison (stage 3; reviewer PASS; first push; landing 20261028T055803-L-809644 (proof); batch 20261028T055556; modules 1; new nodes 0)
