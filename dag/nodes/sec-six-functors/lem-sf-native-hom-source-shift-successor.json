@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-native-hom-source-shift-successor",
+ "kind": "statement",
+ "title": "The degree-one recurrence for opposite source-Hom mates",
+ "statement": "In the setting of [def-sf-native-hom-source-shift-data], additionally assume tensoring is additive in both variables. Fix M in D and write H(X)=ihom(X.unop,M) on the triangulated opposite D^op. Write b_n(X) for the raw siteHomOppositeSourceShift(X.unop,n) evaluated at M. For every integer m and X in D^op, b_(m+1)(X)=(-1)^m times H(shiftFunctorAdd_op(m,1).hom_X) followed by b_1(X[m]), the shift by 1 of b_m(X), and shiftFunctorAdd(m,1).inv_(H(X)). Only the second parameter 1 is asserted; this statement contains neither the zero law nor arbitrary two-parameter addition nor the quadratic-sign correction.",
+ "stmt_deps": [
+  "def-sf-native-hom-source-shift-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC, tensor-Hom adjunction and lemma-RHom-triangulated; explicit native mate calculation, agent expansion."
+ },
+ "proof": [
+  {
+   "text": "Use the defining left maps a(K,r)=c(K,r) followed by t(K,r) inverse of [def-sf-native-hom-source-shift-data]. Compare the direct left map for r=-(m+1) with the two maps for r=-m and r=-1. Expand c and t by their CommShift addition equations. Apply CommShift₂Int.comm once to interchange the parameter shift -m with the argument shift -1. Its scalar is (-1)^((-m)(-1))=(-1)^m, and its shiftComm term restores the opposite shift order. All remaining shift comparison factors cancel by naturality and the shift-addition associativity equation. This is the degree-one specialization of step 2 of lem-sf-native-hom-signed-shift-laws; it is the remaining tensor calculation, not an assumed shift structure on internal Hom.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply conjugateEquiv_comp to the left composite and the tensor-Hom adjunctions. Whiskered tensor maps transpose to whiskered source-Hom mates. The shift adjunction triangle identities cancel the adjacent unit/counit pairs. The tensor map of the parameter compositor transposes to precomposition by shiftFunctorAdd on D^op; the output compositor becomes shiftFunctorAdd.inv on D. Move the integer unit scalar through the additive functors. Finally perform the specified transports -(-m)=m and -(-1)=1. The result is exactly the displayed degree-one recurrence, including when m is negative. At m=0 the zero unitors cancel; at m=-1 this states the signed inverse relation.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-hom-source-shift-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P7",
+  "date": "2026-10-28",
+  "note": "Degree-one specialization of the existing source-mate tensor interchange calculation. All other cases are proved by integer induction in the parent module."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint mates of the two shifts of a closed monoidal bifunctor satisfy zero and addition coherence for the contravariant internal Hom functor",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.exp.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.MonoidalClosed.pre, CategoryTheory.Monoidal.Reflective.closed",
+   "date": "2026-10-28",
+   "verdict": "No exact source-parameter successor mate law. Generic mate composition and shift unit/associativity APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*CommShift|conjugateEquiv.*comp|shiftFunctorAdd.*adj",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact source-parameter successor mate law. Generic mate composition and shift unit/associativity APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-28",
+   "verdict": "No exact source-parameter successor mate law. Generic mate composition and shift unit/associativity APIs are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent isomorphisms commuting with all integer shifts follow from the zero law and the successor addition law with the second parameter equal to one",
+   "results": "8 hits: CategoryTheory.Functor.CommShift.isoZero_isoAdd'_, CategoryTheory.CommShift₂Setup.int, CategoryTheory.Functor.CommShift.isoAdd'_isoZero, CategoryTheory.TwistShiftData.commShift, CategoryTheory.Functor.commShiftIso_zero', CategoryTheory.TwistShiftData, CategoryTheory.CommShift₂Setup.ε, CategoryTheory.shiftComm",
+   "date": "2026-10-28",
+   "verdict": "No exact source-parameter successor mate law. Generic mate composition and shift unit/associativity APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monoidal closed category with tensor compatible with integer shifts in both variables, compute the right adjoint mate of the source shift at m+1 from those at m and 1",
+   "results": "8 hits: CategoryTheory.leftAdjointMate, CategoryTheory.rightAdjointMate, CategoryTheory.comp_rightAdjointMate_assoc, CategoryTheory.comp_rightAdjointMate, CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app, CategoryTheory.Adjunction.rightAdjointCommShift, CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso, CategoryTheory.Adjunction.RightAdjointCommShift.iso'",
+   "date": "2026-10-28",
+   "verdict": "No exact source-parameter successor mate law. Generic mate composition and shift unit/associativity APIs are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.NativeHomSignedShiftLaws",
+  "date": "2026-10-28",
+  "group": "P7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: internal Hom is triangulated in the first variable and the exact comparison pullback carries triangles to triangles, so the comparison maps form morphisms of triangles. This node supplies the native signed shifts used in that clause.",
+   "via": [
+    "lem-sf-native-derived-hom-signed-exact",
+    "lem-sf-site-hom-comparison-thick",
+    "lem-sf-native-hom-signed-shift-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeHomSourceShiftSuccessor",
+  "file": "lean/Sheaf/CategoryTheory/NativeHomSourceShiftSuccessor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.siteHom_opposite_source_shift_successor",
+  "statement": "theorem siteHom_opposite_source_shift_successor (M : D) (m : ℤ) (X : Dᵒᵖ) :\n    (siteHomOppositeSourceShift X.unop (m + 1)).hom.app M =\n      m.negOnePow •\n        ((MonoidalClosed.internalHom.flip.obj M).map\n            ((shiftFunctorAdd Dᵒᵖ m 1).hom.app X) ≫\n          (siteHomOppositeSourceShift (X⟦m⟧).unop 1).hom.app M ≫\n          ((siteHomOppositeSourceShift X.unop m).hom.app M)⟦(1 : ℤ)⟧' ≫\n          (shiftFunctorAdd D m 1).inv.app ((ihom X.unop).obj M))",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-0b1c7",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261028T020631-L-2532616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-0b1c7",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261028T020631-L-2532616",
+  "kind": "interface",
+  "note": "independent cc review: 0b1c7ea1 delivery vs prior head c1773f63 (byte-identical Lean and nodes) and clone; item signature and 4 moved defs vs clone; successor hole vs item addition law at n=1; 2 direct importers compiled against delivered modules"
+ }
+}

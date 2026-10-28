@@ -17,30 +17,50 @@
  "id": "lem-sf-native-hom-signed-shift-laws",
  "title": "Zero and addition laws for the explicit signed source-Hom mates",
  "statement": "Let D be a preadditive closed monoidal category with additive tensor, additive integer shifts and a CommShift₂Int structure on its tensor bifunctor. For M in D put H(K)=ihom(K,M), a functor D^op→D, with the triangulated opposite shift K[n]=K[-n]. Let a_n(K)=(-1)^(n(n+1)/2) times the right-adjoint mate siteHomOppositeSourceShift(K,n), evaluated at M, including its specified transport -(-n)=n. Then a_0 is the canonical zero-shift comparison. For every m,n and X in D^op, a_(m+n)(X)=H(shiftFunctorAdd_op(m,n).hom_X)≫a_n(X[m])≫S_n(a_m(X))≫shiftFunctorAdd(m,n).inv_(H(X)). These are equations of the prescribed maps, without assuming a CommShift structure on H or claiming triangulatedness.",
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sf-native-hom-source-shift-data"
+ ],
  "proof": [
   {
-   "text": "Put T_K=L↦K⊗L, c_K^r:S_r T_K≅T_K S_r and t_K^r:T_(S_r K)≅T_K S_r. The raw source-Hom shift is the right-adjoint mate of a_K^r=c_K^r≫(t_K^r)⁻¹, with adjunction S_r T_K ⊣ ihom(K) S_(-r). This is the existing explicit construction, not a chosen shift structure. At r=0 substitute the zero laws for c and t. At L the composite a_K^0 becomes (K◁(S_0≅Id).hom_L) followed by ((S_0≅Id).inv_K▷L); the middle shift unitor and its inverse cancel. Taking its mate, the shift-adjunction unit-counit identities give pre((S_0≅Id).inv_K) followed by the inverse zero unitor on ihom(K). The opposite zero-unitor formula gives exactly the stated isoZero component. Since q(0)=0, the scalar is 1.",
-   "uses": [],
-   "elementary": true
+   "text": "Prove naturality of the left tensor comparison from the two tensor-shift naturality identities. Apply conjugateEquiv_comp and conjugateEquiv_whiskerLeft to transpose this into source-Hom naturality, and transport -(-n)=n. Scalar multiplication then gives naturality of the prescribed signed components. Assemble these components into explicit natural isomorphisms e(n); no data is selected from an existence theorem.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data"
+   ],
+   "elementary": false
   },
   {
-   "text": "For addition expand the two successive mates using conjugateEquiv_comp and the units and counits of S_r⊣S_(-r). Move the parameter shift past the argument shift once. Before taking mates the only nonidentical subcomposites are c_(K[m])^n(L)≫S_n(t_K^m(L)) and t_K^m(L[n])≫S_m(c_K^n(L))≫shiftComm(K⊗L,m,n)⁻¹. The CommShift₂Int.comm identity says the former is the latter followed by (-1)^(m*n). All c/c and t/t composites combine by their CommShift addition laws. The shift-adjunction triangles cancel adjacent units and counits; the remaining shiftComm changes the reversed opposite shifts to the ordinary order. With r=-m and s=-n, their product has parity m*n. Thus the raw opposite mate at m+n is (-1)^(m*n) times H(shiftFunctorAdd_op.hom) followed by the raw n-mate at X[m], the shifted raw m-mate, and shiftFunctorAdd.inv on H(X). Additivity of tensor and ihom allows the scalar to pass through transposition.",
-   "uses": [],
-   "elementary": true
+   "text": "At zero unfold the tensor parameter comparison and use both CommShift zero laws. Their middle zero unitors cancel. Expand the right-adjoint mate using conjugateEquiv_apply_app. Naturality of coevaluation cancels the remaining shifted zero unitor and its inverse. Naturality of the inverse zero unitor identifies the resulting map with pre(zeroUnitor.inv_K) followed by zeroUnitor.inv on ihom(K,M). The opposite-category zero-unitor formula identifies this with CommShift.isoZero. The quadratic scalar at zero is 1. This entire calculation is proved in Lean.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data"
+   ],
+   "elementary": false
   },
   {
-   "text": "Write q(t)=t(t+1)/2. The three integers t(t+1), for t=m,n,m+n, are even. Expanding (m+n)(m+n+1)=m(m+1)+n(n+1)+2mn and dividing the exact equality by 2 gives q(m+n)=q(m)+q(n)+mn for all integers, including negative ones. Multiplying the raw mate equation of the previous step by (-1)^q(m+n) cancels the extra (-1)^mn. Scalar composition in a preadditive category and additivity of shifts give precisely the displayed addition equation. At zero the preceding calculation applies. These prove the two assertions.",
-   "uses": [],
-   "elementary": true
+   "text": "Use [lem-sf-native-hom-source-shift-successor], the raw recurrence with second parameter 1. The exact integer identity q(m+1)=q(m)+m+1 follows by expanding (m+1)(m+2)=m(m+1)+2(m+1) and dividing by 2. Therefore (-1)^q(m+1) times (-1)^m equals (-1) times (-1)^q(m). Additivity of the shift and bilinearity of composition turn the raw recurrence into e(m+1)=isoAdd(e(m),e(1)). The scalar identity and this conversion are proved in Lean.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data",
+    "lem-sf-native-hom-source-shift-successor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix m and prove e(m+n)=isoAdd(e(m),e(n)) by integer induction on n. The base n=0 is the zero law and isoAdd right unitality. The forward step is the successor law plus isoAdd associativity. For the backward step compare both candidate isomorphisms after adding e(1); associativity and the already known next case identify these sums. Cancel the invertible shift-addition maps and e(1), and use faithfulness of the degree-one shift to cancel that functor. This proves the previous case and hence all negative n. Evaluate the natural-isomorphism equality at X to obtain the exact original addition formula. All induction, cancellation and final assembly are complete Lean proofs.",
+   "uses": [
+    "def-sf-native-hom-source-shift-data",
+    "lem-sf-native-hom-source-shift-successor"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sf-native-hom-source-shift-data",
+  "lem-sf-native-hom-source-shift-successor"
+ ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "P7",
   "date": "2026-10-28",
-  "note": "Explicit expansion of the native mate/cone calculations in the assigned proof, preserving the unit route."
+  "note": "Proved zero and naturality directly by mates; reduced arbitrary addition to the raw degree-one recurrence by a proved quadratic-sign identity and integer induction using isoAdd associativity and faithful shift cancellation."
  },
  "mathlib_searches": [
   {
@@ -87,13 +107,9 @@
   "by": "C3",
   "date": "2026-10-28",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.siteHomTensorParameterShift",
-   "AlgebraicGeometry.ProEtale.siteHomSourceShift",
-   "AlgebraicGeometry.ProEtale.siteHomOppositeSourceShift",
-   "AlgebraicGeometry.ProEtale.siteHomSignedSourceComponent",
    "AlgebraicGeometry.ProEtale.siteHom_signed_source_shift_laws"
   ],
-  "note": "The three pre-existing source-shift definitions are moved verbatim from the assigned module and publicly reexported there. Only the two displayed zero/addition equations are left unproved. Naturality is proved by private helpers in the assigned module."
+  "note": "The four map definitions are publicly reexported from NativeHomSourceShiftData. The theorem has its original signature; zero and the full integer-induction assembly are proved, with one strictly narrower raw degree-one recurrence left in NativeHomSourceShiftSuccessor."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -106,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-f80ad",
-  "group": "C3",
+  "reviewer": "C-0b1c7",
+  "group": "P7",
   "result": "fix",
-  "landing": "20261027T233823-L-4120299",
+  "landing": "20261028T020631-L-2532616",
   "kind": "interface",
-  "note": "independent cc review: item nativeDerivedHom_signed_exact (signature identical to clone) + new modules NativeHomSignedShiftLaws/NativeHomLocalizedConeBoundary vs their nodes, change record and the 2 direct importers (both compiled OK against the delivery)"
+  "note": "independent cc review: 0b1c7ea1 delivery vs prior head c1773f63 (byte-identical Lean and nodes) and clone; item signature and 4 moved defs vs clone; successor hole vs item addition law at n=1; 2 direct importers compiled against delivered modules"
  }
 }
