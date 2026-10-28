@@ -40,7 +40,33 @@
  ],
  "proof": [
   {
-   "text": "Apply the coefficient-model lemma to the given $E\\subset F$, $f$, $c$ and $M$. It supplies compatible finite-free models, preserves the uniform Tor domain and types both integral compact-support values. [lem-pur-compact-support-coefficient-models].",
+   "text": "D3: For integralCoefficientComparison, finiteFreeCompletedScalarComparison identifies ordinary completed scalar extension with strict integral scalar extension on the derived-complete input. Apply intrinsic integral constructibility preservation. The completed coefficient projection square and two derived tensor associators identify every equal-exponent reduction with finite scalar extension of the input reduction. scalarExtension_tor then retains the same uniform Tor interval; no ramification witness is needed for this argument. This complete scalar-domain proof is extracted to FiniteTorIntegralCompletedScalarExtension so the assembly theorem only applies it.",
+   "uses": [
+    "lem-pur-finite-tor-integral-completed-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "D3: Apply finiteFreeDirectImageCoherence to the completed target coefficient basis. Convert finite products to finite coproducts and the ULift basis. The iterated-mates identity and conjugates of the identity right adjoints transport its invertibility to the specified properComparison. Combine it with openComparison_isIso through comparison_factorization. This proves the actual integral scalar comparison invertible, independently of the derived-limit realization and of the disputed arbitrary-Change finiteProperComparison_isIso statement. The lower FiniteFreeRestrictionDirectImageMate module carries the proved column/mate calculation so it compiles independently; unfolding properComparison identifies exactly its conclusion.",
+   "uses": [
+    "lem-pur-finite-free-restriction-direct-image-mate",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-open-coefficient-comparison-isomorphism",
+    "lem-pur-compact-support-comparison-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "D3: The remaining bare proper/open realization is integralProperOpen_isDerivedLimit. Apply it separately to M over E and to its now-proved finite-Tor scalar extension over F. sfIntegralCompactSupport_constructible applies directly to these two triangles and proves both output-domain clauses. For E, exists_isDerivedLimit_and_iso compares the ambient vertex with the chosen vertex underlying sfIntegralCompactSupportValue, proving the final Nonempty identification. The single new hole is exactly this derived-limit realization; the coefficient-domain and mate-invertibility parts are complete Lean proofs.",
+   "uses": [
+    "lem-pur-integral-proper-open-derived-limit",
+    "lem-weil-derived-limit-existence",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the remaining projection-normalized recorded identification, the stronger coefficient-model lemma supplies finite quotient models and the normalized natural identification. D3 proves the primary theorem's domain and bare object-identification clauses separately in the preceding three steps; this stronger normalization remains unfinished.",
    "uses": [
     "lem-pur-compact-support-coefficient-models"
    ],
@@ -171,31 +197,37 @@
   }
  ],
  "proof_deps": [
-  "def-pur-integral-compact-support-coefficient-data",
-  "def-sf-compact-support-scalar-tensor-balancing",
-  "def-sf-projection-tensor-coefficient-comparison",
+  "lem-pur-finite-tor-integral-completed-scalar-extension",
+  "lem-pur-finite-free-restriction-direct-image-mate",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-open-coefficient-comparison-isomorphism",
+  "lem-pur-compact-support-comparison-factorization",
+  "lem-pur-integral-proper-open-derived-limit",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-integral-compact-support-constructible",
   "lem-pur-compact-support-coefficient-models",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-compact-support-finite-proper-comparison-iso",
   "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-compact-support-strict-scalar-refinement",
   "lem-pur-compact-support-scalar-projection-identification",
+  "lem-pur-compact-support-strict-scalar-composition",
   "lem-pur-compact-support-scalar-shift-normalization",
   "lem-pur-compact-support-restriction-shift",
-  "lem-pur-compact-support-finite-proper-comparison-iso",
-  "lem-pur-compact-support-strict-scalar-composition",
-  "lem-pur-compact-support-strict-scalar-mate",
-  "lem-pur-compact-support-strict-scalar-refinement",
-  "lem-tw-ordinary-completed-integral-pullback",
-  "lem-weil-integral-constructible-triangulated",
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-wf-constructible-tensor-koszul-unit",
+  "def-sf-projection-tensor-coefficient-comparison",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-pbc-uniform-complete-triangulated",
-  "lem-wf-constructible-tensor-koszul-unit",
-  "lem-pur-completed-quotient-proper-mate",
-  "lem-pur-open-coefficient-comparison-isomorphism",
-  "lem-pur-compact-support-comparison-factorization"
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-completed-quotient-proper-mate"
  ],
  "proof_origin": {
-  "by": "B7",
+  "by": "D3",
   "date": "2026-10-28",
-  "note": "Partial proof delivery: reductionComparison_isIso is proved from the completed-to-finite quotient proper mate and the existing open comparison via comparison_factorization. The lower mate argument is reused in an acyclic proved module. Earlier R4 ordinary tensor/open comparison steps and J4/J1 domain/shift steps, and all unfinished proof steps, are retained."
+  "note": "Partial proof delivery: integralCoefficientComparison is reduced to the strictly smaller proper/open derived-limit realization. Scalar preservation and actual scalar-mate invertibility are proved. Previous B7 reductionComparison_isIso and R4/J4/J1 proofs remain unchanged; all other coherence obligations remain. The new proof avoids cyclic imports of the coefficient-model and finite-free-proper comparison modules by using their lower independent interfaces. The fully proved inverse restriction/direct-image mate calculation is extracted to its own acyclic module for compile time; this adds no hole. The scalar-domain clause is likewise a fully proved lower module. The already proved projectionDomain_complete uses the derived-limit constructibility theorem directly instead of specializing all five scalar comparison clauses to the identity extension."
  },
  "mathlib_searches": [
   {
@@ -542,9 +574,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B7",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261028T034702-L-3531116",
+  "landing": "20261028T055631-L-782357",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

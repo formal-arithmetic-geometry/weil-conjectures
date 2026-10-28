@@ -20973,3 +20973,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:56 L: merged deliver/C5/Sheaf.Paper.FrobeniusIntegralRootTransportModuleLift (stage 3; reviewer PASS; first push; landing 20261028T055627-L-780344 (proof); batch 20261028T055556; modules 1; new nodes 0)
 - 05:56 L: merged deliver/C6/Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor (stage 3; reviewer PASS; first push; landing 20261028T055629-L-781288 (interface); batch 20261028T055556; modules 13; new nodes 12)
 - 05:56 L: merged deliver/C7/Sheaf.Paper.FrobeniusIntegralRootTransportModuleUnit (stage 3; reviewer PASS; first push; landing 20261028T055630-L-781826 (proof); batch 20261028T055556; modules 1; new nodes 0)
+- 05:56 L: merged deliver/D3/Sheaf.Paper.IntegralCompactSupportCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261028T055631-L-782357 (interface); batch 20261028T055556; modules 4; new nodes 3)

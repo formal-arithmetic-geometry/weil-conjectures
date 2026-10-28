@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-finite-tor-integral-completed-scalar-extension",
+ "kind": "lemma",
+ "title": "Ordinary completed integral scalar extension preserves uniform finite Tor constructibility",
+ "statement": "Fix a prime l, an integer p different from l, finite extensions E and F of Q_l, an algebra inclusion i:E -> F, and any scheme X. If M in the derived category of completed integral E-coefficient sheaves is integrally constructible and its finite reductions have one uniform finite Tor interval, then ordinary derived scalar extension of M along the actual completed coefficient inclusion is integrally constructible over F and has the same uniform finite Tor interval. No finite-type, geometric-base, ramification-index or compactification hypothesis is required. The finite exponents are the existing n+1 convention.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.5--6.6; finite-free completed scalar comparison, together with Stacks Tag 06YY for derived scalar transitivity and finite scalar Tor preservation."
+ },
+ "proof": [
+  {
+   "text": "Use intrinsic-to-legacy completeness for an auxiliary finite-field datum of prime characteristic greater than l. This gives unrestricted derived completeness of the input without geometric assumptions on X.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-free completed scalar comparison is invertible on this complete input. Transport the intrinsic scalar-constructibility theorem along that comparison to obtain constructibility for ordinary derived extension along the actual completed coefficient map.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every n use completedScalarReductionComparison at the same exponent n+1 on E and F. The existing finite scalar-extension Tor theorem preserves the input interval [a,b]. In its test-object factorization compose the presenting isomorphism with the reduction/scalar comparison. This transports the Tor-amplitude predicate to the actual reduced output with precisely the original bounds at every n. Combine with constructibility.",
+   "uses": [
+    "lem-pur-adic-scalar-extension-tor-bound",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-adic-scalar-extension-tor-bound",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-28",
+  "note": "Fully proved extraction of the first clause of integralCoefficientComparison. The reduction comparison and scalar Tor proof are already existing private proved helpers imported through proof-only import all. Extracted after profiling to keep the assembly module comfortably below sixty seconds; no new mathematical obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarExtension_tor|completedScalarReductionComparison",
+   "results": "{\"t\": \"2026-10-28T04:28:01Z\", \"tool\": \"grep\", \"query\": \"scalarExtension_tor|completedScalarReductionComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "No direct Mathlib theorem includes completed pro-etale coefficients, their specified reduction functors and one uniform Tor interval. Use the existing project finite-free comparison, scalar constructibility, and finite scalar Tor preservation, then transport along isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.prop_of_iso",
+   "results": "{\"t\": \"2026-10-28T04:28:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.prop_of_iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.prop_of_iso\"], \"digest\": \"317c90d851a7c1e8\"}",
+   "date": "2026-10-28",
+   "verdict": "No direct Mathlib theorem includes completed pro-etale coefficients, their specified reduction functors and one uniform Tor interval. Use the existing project finite-free comparison, scalar constructibility, and finite scalar Tor preservation, then transport along isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar extension preserves a uniform Tor amplitude of the reductions of a derived complete integral constructible sheaf",
+   "results": "{\"t\": \"2026-10-28T04:28:02Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scalar extension preserves a uniform Tor amplitude of the reductions of a derived complete integral constructible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"CondensedMod.IsSolid\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"DerivedCategory.isGE_Q_obj_iff\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"f7a28b8b0f6158a7\"}",
+   "date": "2026-10-28",
+   "verdict": "No direct Mathlib theorem includes completed pro-etale coefficients, their specified reduction functors and one uniform Tor interval. Use the existing project finite-free comparison, scalar constructibility, and finite scalar Tor preservation, then transport along isomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient transport: the scalar-domain clause of sk-thm-purity-transport Step 3.",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTorIntegralCompletedScalarExtension",
+  "file": "lean/Sheaf/Paper/FiniteTorIntegralCompletedScalarExtension.lean",
+  "declaration": "WeilConjectures.finiteTorIntegralCompletedScalarExtension",
+  "statement": "theorem finiteTorIntegralCompletedScalarExtension\n    (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F) (X : Scheme.{u})\n    (M : DerivedCategory (scalarReductionSource l E X))\n    (hM : finiteTorConstructibleIntegral l E X M) :\n    finiteTorConstructibleIntegral l F X\n      ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T055631-L-782357",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T055631-L-782357",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -59,6 +59,9 @@ import WeilConjectures.AlgebraicGeometry.DimensionFiniteTypeField
 import Sheaf.Paper.IntegralCompactSupportRestrictionShift
 import Sheaf.Paper.FiniteProperComparisonIso
 import Sheaf.Paper.CompletedQuotientProperMate
+import Sheaf.Paper.FiniteFreeRestrictionDirectImageMate
+import Sheaf.Paper.IntegralProperOpenDerivedLimit
+import Sheaf.Paper.FiniteTorIntegralCompletedScalarExtension
 
 /-! # Integral compact-support coefficient comparison
 
@@ -1183,6 +1186,28 @@ theorem coefficientPrimeUnit (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) :
   exact isUnit_iff_ne_zero.mpr
     (CharP.cast_ne_zero_of_ne_of_prime _ (Fact.out : l.Prime) hl.symm)
 
+section CompletedScalarProof
+
+private theorem completedSupportMate_of_finiteFree {R S : Coefficients.{u}}
+    (a : Change R S) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (d : ℕ)
+    (hfree : Nonempty
+      ((pbcRestrict (a.map Y)).obj
+          (SheafOfModules.unit ((adicLisseForget Y).obj (S.ring Y))) ≅
+        ∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget Y).obj (R.ring Y))))
+    (M : DerivedCategory (pbcModules X (R.ring X))) :
+    IsIso ((comparison a c).app M) := by
+  have : IsIso (properComparison a c.g) := by
+    unfold properComparison
+    exact finiteFreeRestrictionDirectImageMate_isIso a c.g d hfree
+  have := openComparison_isIso a c.i M
+  rw [comparison_factorization]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local semireducible] reductionDerivedChange completedAdicDerivedChange
+
 /-- On the asserted finite-Tor domain the canonical integral coefficient comparison
 is invertible, and its actual source and target are constructible complete objects.
 The map is ordinary derived tensor, defined above by the normalized scalar adjunction.
@@ -1192,42 +1217,18 @@ Source: blueprint sk-thm-purity-transport, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
 
-Proof:
-1. The integer ring of F is finite free over that of E: completeness and finiteness
-modulo the uniformizer imply finiteness, and torsion-free finite DVR modules are free.
-An integral basis simultaneously checks finite freeness at every retained level en.
-2. Finite-free-completed-scalar-comparison identifies ordinary tensor with the specified
-strict-tower scalar extension, including its completion unit. Constant-completion
-equivalence transports the calculation to discrete integral coefficients.
-3. At every level the proper comparison is the counit-tensor mate and the open
-comparison is the open-unit mate. Finite free tensor is exact; additive proper image
-preserves the resulting finite biproducts, proving both finite maps invertible.
-4. Construct these mates on the small ringed diagram sites using simultaneous K-flat
-replacements and separately derived proper image. Thus their composite is a strict
-system map and respects the quotient transitions before taking any limit.
-5. The total strict inverse-limit functor, its normalized Roos comparison and the
-explicit arithmetic-subsequence block map give the integral comparison. Finite free
-tensor commutes with its products and cone. Levelwise cones are zero; exact total
-limit therefore makes the comparison invertible.
-6. Normalized DVR tower effectivity identifies every projection adjunct with the
-specified finite comparison. The finite coefficient-change theorem supplies the
-normalization, and its transition cocycle supplies further quotient compatibility.
-7. Scalar tensor preserves the uniform Tor interval by balancing against any module
-over any target quotient. Integral scalar and compact-support constructibility give
-the stated complete constructible source and target.
-8. Common compactification refinements commute with the strict mates by their proper
-counit and open-unit normalizations; applying total limit proves independence.
-9. The completed projection reflector computation identifies the integral proper
-projection with the limit of the finite ones, preserving its completion unit.
-10. Completed extension by zero and direct-image/limit coherence identify the open
-factor and the proper factor. Consequently the scalar comparison intertwines the
-actual integral compact-support projection, without inferring equality from reductions.
-11. The coefficient composite is strict tensor balancing on both proper and open
-factors. Diagram-site mates and total limit preserve its associativity and unit.
-12. Derived adjunction shifts make the proper counit comparison commute with shifts;
-the degreewise open map has no added sign. This descends through the same strict limit.
-13. For F=E the tensor multiplication and completeness units give identity; for three
-fields mate pasting gives precisely the displayed coefficient composition law. -/
+Proof: ordinary completed scalar extension preserves integral constructibility and
+one uniform finite Tor interval by the finite-free scalar comparison and the finite
+quotient scalar Tor theorem. The lower finite-free direct-image column calculation,
+transported between scalar adjunctions by conjugation, makes the specified proper
+mate invertible. The existing open mate is invertible, and comparison factorization
+therefore proves invertibility of their ordered composite. For each coefficient field
+the ambient proper/open object is a derived limit of the finite support tower.
+The existing derived-limit constructibility theorem makes both output objects
+constructible. Finally the recorded integral compact-support object is another
+vertex of the same derived-limit triangle, so derived-limit uniqueness up to
+isomorphism gives the final existence clause. The remaining declarations below
+separately assert the stronger projection and coherence normalizations. -/
 theorem integralCoefficientComparison
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -1250,7 +1251,33 @@ theorem integralCoefficientComparison
       Nonempty ((image (completed l E) c).obj M ≅
         (sfIntegralCompactSupportValue l E D.k
           (coefficientPrimeUnit l D hl) c ⟨M, hM.1⟩).obj) := by
-  sorry
+  have hF := finiteTorIntegralCompletedScalarExtension D.p l hl E F i X M hM
+  let hunit := coefficientPrimeUnit l D hl
+  letI : HasCountableProducts (DerivedCategory (scalarReductionSource l E Y)) :=
+    integralOperationsDerivedCountableProducts l E Y
+  letI : HasCountableProducts (DerivedCategory (scalarReductionSource l F Y)) :=
+    integralOperationsDerivedCountableProducts l F Y
+  have hlimE := integralProperOpen_isDerivedLimit l E D hunit f c M hM
+  have hlimF := integralProperOpen_isDerivedLimit l F D hunit f c _ hF
+  have hEout := sfIntegralCompactSupport_constructible l E c D.k hunit
+    M hM.1 _ hlimE
+  have hFout := sfIntegralCompactSupport_constructible l F c D.k hunit
+    _ hF.1 _ hlimF
+  have hreal : Nonempty ((image (completed l E) c).obj M ≅
+      (sfIntegralCompactSupportValue l E D.k hunit c ⟨M, hM.1⟩).obj) := by
+    let h := (exists_isDerivedLimit_and_iso
+      (fun n : ℕ ↦ sfCompactSupportTerm l E c M n)
+      (fun n : ℕ ↦ sfCompactSupportTransition l E c M n)).1
+    exact (exists_isDerivedLimit_and_iso
+      (fun n : ℕ ↦ sfCompactSupportTerm l E c M n)
+      (fun n : ℕ ↦ sfCompactSupportTransition l E c M n)).2 _ _
+        hlimE (Classical.choose_spec h)
+  refine ⟨hF, hEout, hFout, ?_, hreal⟩
+  exact completedSupportMate_of_finiteFree (completedChange l E F i) c
+    (completedScalarRelativeDegree l E F i)
+    (finiteFreeCompletedScalarComparison l E F i Y).1 M
+
+end CompletedScalarProof
 
 /-- Completed coefficient multiplication is identity for the identity field inclusion.
 Source: Bhatt--Scholze, Lemma 6.8.2(1)
@@ -1854,7 +1881,11 @@ theorem projectionDomain_complete (c : Compactification f)
     (show IsUnit (l : Y.residueField y) from by
       simpa only [map_natCast] using
         ((primeUnit Y).map (Y.presheaf.germ ⊤ y trivial).hom).map (Y.residue y).hom).invertible
-  have hPM := (integralCoefficientComparison l E E (AlgHom.id ℚ_[l] E) D hl f c M hM).2.1
+  letI : HasCountableProducts (DerivedCategory (scalarReductionSource l E Y)) :=
+    integralOperationsDerivedCountableProducts l E Y
+  have hPM := sfIntegralCompactSupport_constructible l E c D.k
+    (coefficientPrimeUnit l D hl) M hM.1 _
+    (integralProperOpen_isDerivedLimit l E D (coefficientPrimeUnit l D hl) f c M hM)
   have hPN := projectionPullConstructible l E f
     (exists_topologicalKrullDim_le (X ↘ Spec (.of D.k)))
     (exists_topologicalKrullDim_le (Y ↘ Spec (.of D.k)))

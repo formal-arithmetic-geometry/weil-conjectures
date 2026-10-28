@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-finite-free-restriction-direct-image-mate",
+ "kind": "lemma",
+ "title": "The explicit finite-free scalar mate of restriction and direct image",
+ "statement": "Let R and S be coefficient systems and a:R -> S a compatible change [def-pur-integral-compact-support-coefficient-data]. For any scheme morphism g:U -> V and natural d, suppose the S_V unit restricted to R_V is isomorphic to the product of d copies of the R_V unit. Take the canonical derived restriction/direct-image isomorphism and its inverse scalar-adjunction mate, for the specified pbcDerivedScalarAdjunction left adjoints on U and V. This explicit natural transformation is invertible. There are no properness, constructibility or boundedness assumptions. This is the expanded mate expression underlying properComparison, without depending on the higher compact-support comparison module.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56, equation-projection-formula-map, and 07A6, lemma-adjoint; finite free case of lemma-projection-formula. The normalized existing direct-image comparison is lem-sp-finite-free-direct-image-coherence."
+ },
+ "proof": [
+  {
+   "text": "Identify the given finite product with the finite coproduct, then reindex by ULift(Fin d). Instantiate the coefficient-square records of [lem-sp-finite-free-direct-image-coherence] using R.pull g, S.pull g and a.square g. The theorem supplies normalized scalar models and invertibility of their specified direct-image comparison. Its finite-basis column proof includes d=0 and all unbounded inputs.",
+   "uses": [
+    "lem-sp-finite-free-direct-image-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv to the balancing square defining that comparison. By definition balancing is the inverse conjugate of the published restriction/direct-image isomorphism. The iterated mate is therefore exactly its inverse. Invertibility has now been proved for the inverse scalar mate in the normalized models.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the identity transformations of the two exact scalar restriction functors to obtain isomorphisms from the normalized left adjoints to pbcDerivedExtend. The mate/conjugate vertical-composition identities show that the two inverse scalar mates differ only by whiskering with these isomorphisms. At each input one side is a composite of isomorphisms; cancel the other isomorphism to prove invertibility of the displayed explicit inverse scalar mate. This is the private categorical helper inverseMate_isIso_of_isIso, fully proved in the module.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-28",
+  "note": "The proved mate-transport argument follows lem-pur-finite-free-proper-scalar-comparison, but concludes directly about the expanded inverse mate, making this lower module independent of IntegralCompactSupportCoefficientComparison. Extracted after reducing expensive copied scalar helpers and an equality transport still left the item at 63.8 seconds; the independent mate calculation itself had 9.84 seconds of type checking."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_id|conjugateEquiv.*comp",
+   "results": "{\"t\": \"2026-10-28T03:49:09Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_id|conjugateEquiv.*comp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"4e148d881bcc94ca\"}",
+   "date": "2026-10-28",
+   "verdict": "The Mathlib mate/conjugate composition identities transport invertibility between scalar adjoints. The finite-free column calculation is the existing finiteFreeDirectImageCoherence theorem; no additional mathematical hole is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-28T03:49:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-28",
+   "verdict": "The Mathlib mate/conjugate composition identities transport invertibility between scalar adjoints. The finite-free column calculation is the existing finiteFreeDirectImageCoherence theorem; no additional mathematical hole is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of scalar extension adjunction mates agrees with the mate for the composite adjunction",
+   "results": "{\"t\": \"2026-10-28T03:49:11Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of scalar extension adjunction mates agrees with the mate for the composite adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.comp_leftAdjointMate\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.comp_rightAdjointMate\"], \"digest\": \"37675defedd86c8c\"}",
+   "date": "2026-10-28",
+   "verdict": "The Mathlib mate/conjugate composition identities transport invertibility between scalar adjoints. The finite-free column calculation is the existing finiteFreeDirectImageCoherence theorem; no additional mathematical hole is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient transport: the finite-free proper factor in sk-thm-purity-transport Step 3.",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeRestrictionDirectImageMate",
+  "file": "lean/Sheaf/Paper/FiniteFreeRestrictionDirectImageMate.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.finiteFreeRestrictionDirectImageMate_isIso",
+  "statement": "theorem finiteFreeRestrictionDirectImageMate_isIso {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (g : U ⟶ V) (d : ℕ)\n    (hfree : Nonempty\n      ((pbcRestrict (a.map V)).obj\n          (SheafOfModules.unit ((adicLisseForget V).obj (S.ring V))) ≅\n        ∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget V).obj (R.ring V)))) :\n    IsIso (((mateEquiv (pbcDerivedScalarAdjunction (a.map U))\n      (pbcDerivedScalarAdjunction (a.map V))).symm\n        (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedDirectImage g\n          (R.ring V) (S.ring V) (R.ring U) (S.ring U)\n          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T055631-L-782357",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T055631-L-782357",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
