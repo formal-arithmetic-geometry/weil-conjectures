@@ -58,7 +58,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {S W Y X : Scheme.{u}} {p : X ⟶ S} {g : W ⟶ S} {e : Y ⟶ W} {h : Y ⟶ X}
 
 omit [Fact ℓ.Prime] in
@@ -84,12 +85,12 @@ first derived reduction of `K`, a bounded constructible complex of étale origin
 lemma isIso_derivedReduction_map_exchangeRight_app_of_smooth [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] [IsNoetherian W] (sq : IsPullback e h g p) (hℓ : IsUnit (ℓ : Γ(S, ⊤)))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W) K) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W) K) :
     IsIso ((derivedReduction X ℓ E).map ((Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) g)
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) h)
-      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq)).app K)) := by
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) g)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) h)
+      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq)).app K)) := by
   have : K.IsGE hK.1.1.choose := hK.1.1.choose_spec
   have α := (nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E sq.toCommSq K
     hK.1.1.choose).some
@@ -109,28 +110,28 @@ theorem isIso_baseChangeMap_app_padicIntegers_of_smooth [Smooth p] [QuasiCompact
     [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [IsNoetherian W]
     (sq : IsPullback e h g p) (hℓ : IsUnit (ℓ : Γ(S, ⊤)))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W) K) :
-    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq).app K) := by
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W) K) :
+    IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq).app K) := by
   have hK₀ : derivedCompleteIntegers ℓ E W K := derivedCompleteIntegers_of_boundedConstructible hK
   have hsrc := derivedCompleteIntegers_leftDerivedUpperStar_obj p
     (derivedCompleteIntegers_rightDerivedLowerStar_obj g hK₀)
   have htgt := derivedCompleteIntegers_rightDerivedLowerStar_obj h
     (derivedCompleteIntegers_leftDerivedUpperStar_obj e hK₀)
   have r₁ := isIso_derivedReduction_map_exchangeRight_app_of_smooth ℓ E p sq hℓ K hK
-  have hsrc' : derivedCompleteIntegers ℓ E X ((R((g)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙
-      L((p)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) := by
+  have hsrc' : derivedCompleteIntegers ℓ E X ((R((g)_*⟦Profinite.padicIntegersRingObj ℓ E⟧) ⋙
+      L((p)^*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K) := by
     rw [Functor.comp_obj]; exact hsrc
-  have htgt' : derivedCompleteIntegers ℓ E X ((L((e)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙
-      R((h)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) := by
+  have htgt' : derivedCompleteIntegers ℓ E X ((L((e)^*⟦Profinite.padicIntegersRingObj ℓ E⟧) ⋙
+      R((h)_*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K) := by
     rw [Functor.comp_obj]; exact htgt
   have r₃ : IsIso ((Adjunction.exchangeRight
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) g)
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) h)
-      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq)).app K) :=
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) g)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) h)
+      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq)).app K) :=
     isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map _ hsrc' htgt' r₁
   have t := isIso_baseChangeMap_app_of_isIso_exchangeRight
-    (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq K
+    (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq K
   -- the two statements carry different proofs of `Precoherent Profinite`
   revert r₃ t
   normalize_precoherent
