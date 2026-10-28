@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
 
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaNormalization
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaMate
+
 /-! The normalized beta part of the finite-free derived comparison.
 (blueprint: lem-sfb-finite-free-scalar-derived-comparison-beta)
 -/
@@ -58,6 +61,9 @@ theorem finiteFreeScalarDerivedComparison_beta
           (moduleObjectDerivedPushforward Λ.X f).map ((β X).inv.app K) =
         projection Λ f (DerivedCategory.Q.obj (complex Λ S Y))
           (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K) := by
-  sorry
+  have h := finiteFreeScalarDerivedComparison_beta_normalized D a S t hS r e₁ e₂
+  rcases h with ⟨β, hβ, hpull⟩
+  refine ⟨β, hβ, hpull, ?_⟩
+  exact finiteFreeScalarDerivedComparison_beta_mate D a S t β hβ hpull
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar

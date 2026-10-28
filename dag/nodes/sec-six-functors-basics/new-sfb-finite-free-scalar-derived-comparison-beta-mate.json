@@ -1,0 +1,100 @@
+{
+ "id": "new-sfb-finite-free-scalar-derived-comparison-beta-mate",
+ "kind": "statement",
+ "title": "Mate identity for normalized beta",
+ "statement": "Mate substep: for a beta satisfying the specified augmentation normalization and pullback equation, the conjugated actual scalar mate equals the displayed scalar-first projection.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties paragraphs"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-finite-scalar-model-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Transport the normalized section adjunctions through coefficient change and apply the ring-sheaf change-adjunction identity. Substitute the pullback square and use beta naturality at the geometric counit to obtain the projection equality.",
+   "uses": [
+    "new-sfb-finite-free-scalar-derived-comparison-beta-normalized",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-sfb-finite-free-scalar-derived-comparison-beta-normalized",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteFreeScalarDerivedComparison_beta",
+   "results": "Only the target declaration; no existing theorem supplies this strict subpackage.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-free-scalar-derived-comparison-beta",
+   "place": "strict substep"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaMate",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarDerivedComparisonBetaMate.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarDerivedComparison_beta_mate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarDerivedComparison_beta_mate"
+  ],
+  "statement": "theorem finiteFreeScalarDerivedComparison_beta_mate (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ)) (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X)) (β : ∀ Z : Scheme.{u}, tensorLeft (DerivedCategory.Q.obj (complex Λ S Z)) ≅ scalarSixChange a Z ⋙ restriction a Z) (hβ : ∀ Z, AugmentationNormalized a S t Z (β Z)) (hpull : ∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)), (scalarSixPull Λ f).map ((β Y).hom.app K) ≫ (derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f).inv.app ((scalarSixChange a Y).obj K) ≫ (restriction a X).map ((D.theta a f).inv.app K) = tensorPull Λ f (DerivedCategory.Q.obj (complex Λ S Y)) K ≫ ((modelPull Λ S f).hom ⊗ₘ 𝟙 ((scalarSixPull Λ f).obj K)) ≫ (β X).hom.app ((scalarSixPull Λ f).obj K)) : ∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X)), (β Y).hom.app ((moduleObjectDerivedPushforward Λ.X f).obj K) ≫ (restriction a Y).map (gamma D a f K) ≫ (restrictionPush D a f).hom.app ((scalarSixChange a X).obj K) ≫ (moduleObjectDerivedPushforward Λ.X f).map ((β X).inv.app K) = projection Λ f (DerivedCategory.Q.obj (complex Λ S Y)) (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeScalarDerivedComparisonBeta",
+  "date": "2026-10-28",
+  "group": "V8"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T020832-L-2552555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T020832-L-2552555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
