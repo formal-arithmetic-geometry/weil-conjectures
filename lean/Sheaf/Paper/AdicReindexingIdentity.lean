@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicReindexingIdentityFiniteCertificate
+import Sheaf.Paper.AdicReindexingIdentityAssembly
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -51,6 +53,8 @@ theorem normalized_reindexing_identity
         Functor.mapDerivedCategoryIdIso _).hom.app
           ((ordinary l T.base.left (C.data T).realization).obj M) =
     (ordinary l T.base.left (C.data T).realization).map ((C.sourceId T).hom.app M)) := by
-  sorry
+  obtain ⟨h_certificate⟩ := normalized_reindexing_identity_finite l D C
+    h_moduleId_sections h_integral_normalization
+  exact normalized_reindexing_identity_from_finite l D C h_certificate h_sourceId_unit
 
 end WeilConjectures.AdicQbarRealization

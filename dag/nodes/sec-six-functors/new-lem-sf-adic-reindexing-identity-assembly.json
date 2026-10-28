@@ -1,0 +1,102 @@
+{
+ "id": "new-lem-sf-adic-reindexing-identity-assembly",
+ "kind": "statement",
+ "title": "Assembly from finite-stage identity",
+ "statement": "A finite-stage identity certificate extends along the directed coefficient system; with the source-unit equation this gives the normalized reindexing identity for every common-stage object.",
+ "stmt_deps": [
+  "new-lem-sf-adic-reindexing-identity-finite-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, identity paragraph"
+ },
+ "proof": [
+  {
+   "text": "Represent an arbitrary pair by its finite coefficient stage, transport the finite certificate along the directed-stage maps, and use naturality of the comparison. The source-unit equation identifies the transported source composite with the identity, yielding the displayed equation.",
+   "uses": [
+    "new-lem-sf-adic-reindexing-identity-finite-certificate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-lem-sf-adic-reindexing-identity-finite-certificate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic realization identity normalization finite-stage comparison cancellation",
+   "results": "No native match; only generic category identities.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity comparison finite coefficient stage derived realization",
+   "results": "No project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized_reindexing_identity_finite",
+   "results": "none before this split.",
+   "date": "2026-10-28",
+   "verdict": "new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingIdentity",
+  "date": "2026-10-28",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-functoriality-id",
+   "place": "identity paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingIdentityAssembly",
+  "file": "lean/Sheaf/Paper/AdicReindexingIdentityAssembly.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_identity_from_finite",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-28",
+  "statement": "theorem normalized_reindexing_identity_from_finite\n    (C : FamilyCore l D)\n    (h_certificate : NormalizedReindexingFiniteCertificate l D C)\n    (h_sourceId_unit : ∀ (T : GeometricSpace D)\n          (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left),\n        letI := (C.data T).units\n        HEq\n          ((pullbackTensorCommonComposition l (PadicAlgCl l)\n              (𝟙 T.base.left) (𝟙 T.base.left) M).hom ≫\n            (C.sourceId T).hom.app\n              ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))\n          (𝟙 ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))) :\n    (∀ (T : GeometricSpace D)\n      (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left),\n    letI := (C.data T).units\n    (C.comparison T T (Iso.refl _)).hom.app M ≫\n      (Functor.mapDerivedCategoryNatIso (C.moduleId T) ≪≫\n        Functor.mapDerivedCategoryIdIso _).hom.app\n          ((ordinary l T.base.left (C.data T).realization).obj M) =\n    (ordinary l T.base.left (C.data T).realization).map ((C.sourceId T).hom.app M))"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261028T020557-L-2525939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261028T020557-L-2525939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
