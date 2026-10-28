@@ -20457,3 +20457,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:44 L: merged deliver/NB/lem-pur-integral-tensor-associator-naturality (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T233735; landing 20261027T234409-NB-125449 (proof)
 - 23:51 L: returned deliver/NA/lem-pur-system-scalar-associator-coherence (reviewer RETURN: L: independent stage-2 immutable head 582e13ba9830: Two faults. (1) H3: SE/SL.systemClosed.monoidal is a free MonoidalCa)
 - 00:06 L: returned deliver/ND/lem-pur-compact-support-strict-scalar-composition-prelude (reviewer RETURN: I read the item, unit sk-thm-sf-compatibility, the parent and every cited statement, along with the Lean the steps descr)
+- 00:10 L: returned deliver/NA/lem-pur-scalar-reduction-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head 1e02355b5635: H6/H3: scalarReductionTransposeNormalization is a tautology — arbitr)
