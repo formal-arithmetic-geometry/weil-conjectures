@@ -8,7 +8,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.Triangulated.Generators
 import all Sheaf.SixFunctors.BrownHypothesesSmall
 import Sheaf.SixFunctorsBasics.BrownHypothesesStructural
-import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.PadicConstantLocalModelTor
+import Sheaf.Paper.StratifiedTorIntervalDevissage
+import Sheaf.Paper.CohomologyTorInterval
 import Sheaf.Paper.IntegralConstructibleCompactness
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 import WeilConjectures.CategoryTheory.CompactObjectsThick
@@ -1005,6 +1007,46 @@ theorem brownHypothesesFor_iff_compact_of_admissible
   · exact Or.inr (Or.inr (Or.inr (Or.inl h)))
   · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
 
+/-- Integral constructible complexes have finite Tor amplitude, directly from their
+finite scalar resolutions and bounded cohomology. This uses no finite-ring examples
+or six-functor preservation results. -/
+private theorem brownHypotheses_integral_ctf_eq_bc
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
+    (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X ⊓
+      fun K ↦ DerivedCategory.finiteTorAmplitude _ K) =
+        constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X := by
+  let Λ := Profinite.padicIntegersRingObj ℓ E
+  have hmod (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) (hM : IsConstantModelConstructible Λ X M) :
+      DerivedCategory.torAmplitudeIn _ (-1) 0
+        ((DerivedCategory.singleFunctor _ 0).obj M) := by
+    apply torAmplitudeIn_of_constructible_of_uniform_local_model ℓ (Mon.mk Λ)
+      (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))) (-1) 0 (by omega) ?_ X M hM
+    intro T N hN
+    exact padic_constant_local_model_tor ℓ Λ (-1)
+      (Or.inl ⟨rfl, Or.inr ⟨E, ⟨Iso.refl _⟩⟩⟩) T N hN
+  funext K
+  apply propext
+  constructor
+  · exact And.left
+  · intro hK
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+    have ha' : K.IsGE (min a b) :=
+      (DerivedCategory.isGE_iff K _).mpr fun q hq ↦
+        (DerivedCategory.isGE_iff K a).mp ha q
+          (lt_of_lt_of_le hq (min_le_left _ _))
+    refine ⟨hK, min a b - 1, b, ?_⟩
+    have ht := torAmplitudeIn_of_cohomology_interval X (Mon.mk Λ) K
+      (min a b) b (-1) 0 (min_le_right _ _) (by omega) (fun q hq ↦ ?_)
+      (fun q _ ↦ hmod _ (hK.2 q))
+    · simpa only [sub_eq_add_neg, add_zero] using ht
+    · by_cases hqa : q < min a b
+      · exact (DerivedCategory.isGE_iff K _).mp ha' q hqa
+      · exact (DerivedCategory.isLE_iff K b).mp hb q (by
+          simp only [Set.mem_Icc] at hq
+          omega)
+
 open scoped CategoryTheory.Obj in
 /-- For integral coefficients, Brown's hypotheses are equivalent to a bound on Ext
 from each constructible sheaf, uniform over the second constructible sheaf.
@@ -1048,10 +1090,8 @@ theorem brownHypothesesFor_padicIntegers_iff_ext_bounded
     (X ↘ Spec (.of k))
   have hcoeff : IsLocalizingAdmissibleCoefficient ℓ Λ :=
     Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
-  have hctf := (localizingClosure_ctf_equals_bc ℓ X Λ
-    (Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩)))).1
-  have heq : S = B := hctf.2.2.1
-  have hL : L = localizingClosure B := hctf.2.2.2.1
+  have heq : S = B := brownHypotheses_integral_ctf_eq_bc ℓ E X
+  have hL : L = localizingClosure B := congrArg localizingClosure heq
   constructor
   · intro hB
     let H : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
