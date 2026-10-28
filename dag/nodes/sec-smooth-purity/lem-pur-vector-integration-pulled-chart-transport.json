@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-vector-integration-pulled-chart-transport",
+ "kind": "lemma",
+ "title": "Single-frame prefix transport along an arbitrary scheme map",
+ "statement": "Given a frame e for a rank-d bundle F over V⊆S and an arbitrary Noetherian W with k:W→V and j=k V.ι, restriction of the frame exchange/coefficient/compact-comparison prefix along k, followed by affine unit base change, equals the direct Cartesian prefix for affineTraceMap(k) followed by the inverse frame, over j. The inverse-frame square remains Cartesian. There is only one frame and no trace counit.",
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof": [
+  {
+   "text": "Paste the affine tower square and inverse-frame square to obtain the pulled-chart Cartesian square.",
+   "uses": [
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Inverse square pasting, naturality and ordered Tate pullback composition identify the coefficients.",
+   "uses": [
+    "lem-pur-vector-integration-base-coefficient-composition",
+    "lem-amb-vector-integration-restricted-chart-coefficient-core",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use compact-support exchange pasting, its naturality, and the tower/ordinary comparison equation; combine the identified coefficient maps.",
+   "uses": [
+    "lem-amb-affine-trace-unit-compact-base-change",
+    "lem-amb-affine-linear-exchange-coherence",
+    "lem-amb-vector-integration-cartesian-prefix-action",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "lem-pur-vector-integration-base-coefficient-composition",
+  "lem-amb-vector-integration-cartesian-prefix-action",
+  "lem-amb-vector-integration-restricted-chart-coefficient-core",
+  "lem-amb-affine-trace-unit-compact-base-change",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: base change of the specified vector-bundle trace"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local vector bundle trace commutes with base change using affine counit and compact support exchange",
+   "results": "Only topological vector-bundle results; no algebraic trace match.",
+   "date": "2026-10-28",
+   "verdict": "use the existing algebraic chart and exchange APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality found; this gives the categorical rewriting steps, not the geometric statement.",
+   "date": "2026-10-28",
+   "verdict": "use generic naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationCartesianPrefix|affineTraceUnitBaseChange|baseChange.*[Cc]hart|transition_spec",
+   "results": "Cartesian prefix action, open-only chart transport, affine unit base change, and transition_spec found. General coefficient composition was proved privately in OrderedTateExactOpenComposition.",
+   "date": "2026-10-28",
+   "verdict": "generalize the existing calculation; retain only the missing coordinate step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalTrace",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-vector-integration-base-local-trace",
+   "place": "geometric local trace exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationPulledChartTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationPulledChartTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_pulled_chart_transport",
+  "statement": "theorem vectorIntegration_pulled_chart_transport\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (V : S.Opens) (e : VectorBundleZeroSection.Trivialization S d F V)\n    (W : Scheme.{u}) [IsNoetherian W] (k : W ⟶ V.toScheme)\n    (j : W ⟶ S) (ha : j = k ≫ V.ι) :\n    letI : IsAffineHom (VectorBundleZeroSection.π S d F) :=\n      (vectorIntegration_geometry S d F).1\n    letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d F) :=\n      (vectorIntegration_geometry S d F).2.1\n    letI : TopologicalSpace.NoetherianSpace V.toScheme :=\n      V.ι.isOpenEmbedding.isInducing.noetherianSpace\n    letI : IsNoetherian V.toScheme :=\n      { toIsLocallyNoetherian := inferInstance\n        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) k V.ι j\n      ha).hom.app (vectorIntegrationSource A N hA S d F) ≫\n      (ordinaryFinitePullback A k).map\n        ((rightDerivedLowerShriekBaseChangeMap A\n          (vectorIntegrationChart_isPullback S d F V e)).app\n            (vectorIntegrationCoefficient A N hA S d F) ≫\n          (rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n            (affineTraceProjection V.toScheme d)).map\n              (vectorIntegrationChartCoefficient A N hA t S hS d F V e).hom ≫\n          (affineLinearCompactComparison N hN A hA V.toScheme\n            (affineTracePullbackInvertible N V.ι hS) d).inv) ≫\n      (affineTraceExchange A k d\n        ((affineTraceRight A N hA V.toScheme d).obj (ordinaryFiniteUnit A V.toScheme)) ≫\n        (affineTraceLeft A W d).map\n          (affineTraceRightBaseChange A N hA t k\n            (affineTracePullbackInvertible N V.ι hS) d (ordinaryFiniteUnit A V.toScheme)).hom ≫\n        (affineTraceLeft A W d).map\n          ((affineTraceRight A N hA W d).map\n            (ordinaryFiniteUnitPullback A k).hom)) =\n    vectorIntegrationCartesianPrefix N hN A hA t (VectorBundleZeroSection.π S d F)\n      j (affineTracePullbackInvertible N j hS) d\n      (affineTraceMap k d ≫ vectorIntegrationChart S d F V e)\n      (vectorIntegrationPulledChart_isPullback S d F V e W k j ha)\n      (affineLinearBaseCoefficient A N hA S d)\n      (vectorIntegrationBaseCoefficientPullback A N hA t j hS d)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Etale.vectorIntegrationPulledChart_isPullback",
+   "AlgebraicGeometry.Etale.vectorIntegration_pulled_chart_transport"
+  ]
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: base change and independence of the frame"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T034701-L-3530774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T034701-L-3530774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

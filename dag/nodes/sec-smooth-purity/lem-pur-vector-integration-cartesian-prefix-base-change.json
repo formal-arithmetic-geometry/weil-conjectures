@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-vector-integration-cartesian-prefix-base-change",
+ "kind": "lemma",
+ "title": "Pasting a Cartesian affine prefix with arbitrary base change",
+ "statement": "For a Cartesian square of separated finite-type morphisms p:X→S and p′:X′→T over f:T→S, and an arbitrary Cartesian affine chart q:A^d_W→X′ over j:W→T, applying pullback of the square exchange with canonical descended coefficient transport and then the chart prefix equals the inverse base compositor followed by the Cartesian prefix for the pasted chart into X over j f. The coefficient is the ordered shifted Tate coefficient. No vector bundle, frame or counit occurs.",
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof": [
+  {
+   "text": "Naturality moves the coefficient comparison through the chart exchange, and compact-support pasting combines the two exchanges.",
+   "uses": [
+    "lem-amb-affine-linear-exchange-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take inverses in pullback-square pasting; naturality and normalized ordered Tate pullback composition identify the composite coefficient.",
+   "uses": [
+    "lem-pur-vector-integration-base-coefficient-composition",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functoriality of compact support combines the coefficient factors with the common compact comparison, giving the pasted Cartesian prefix.",
+   "uses": [
+    "lem-amb-vector-integration-cartesian-prefix-action",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action",
+  "lem-pur-vector-integration-base-coefficient-composition",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: base change of the specified vector-bundle trace"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local vector bundle trace commutes with base change using affine counit and compact support exchange",
+   "results": "Only topological vector-bundle results; no algebraic trace match.",
+   "date": "2026-10-28",
+   "verdict": "use the existing algebraic chart and exchange APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality found; this gives the categorical rewriting steps, not the geometric statement.",
+   "date": "2026-10-28",
+   "verdict": "use generic naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationCartesianPrefix|affineTraceUnitBaseChange|baseChange.*[Cc]hart|transition_spec",
+   "results": "Cartesian prefix action, open-only chart transport, affine unit base change, and transition_spec found. General coefficient composition was proved privately in OrderedTateExactOpenComposition.",
+   "date": "2026-10-28",
+   "verdict": "generalize the existing calculation; retain only the missing coordinate step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalTrace",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-vector-integration-base-local-trace",
+   "place": "geometric local trace exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationCartesianPrefixBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationCartesianPrefixBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegrationCartesianPrefix_baseChange",
+  "statement": "theorem vectorIntegrationCartesianPrefix_baseChange\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {X X' S T W : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian X'] [IsNoetherian S] [IsNoetherian T]\n    [IsNoetherian W]\n    (p : X ⟶ S) (p' : X' ⟶ T) (f : T ⟶ S) (v : X' ⟶ X)\n    [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] [HasCompactification p]\n    [IsSeparated p'] [LocallyOfFiniteType p'] [QuasiCompact p'] [HasCompactification p']\n    (sq : IsPullback v p' p f) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (j : W ⟶ T) (hW : IsUnit (N : Γ(W, ⊤)))\n    (q : affineTraceTower W d ⟶ X')\n    (sqW : IsPullback q (affineTraceProjection W d) p' j)\n    (m : W ⟶ S) (hm : m = j ≫ f)\n    (z : affineTraceTower W d ⟶ X) (hz : z = q ≫ v)\n    (sqZ : IsPullback z (affineTraceProjection W d) p m) :\n    let L := affineLinearBaseCoefficient A N hA S d\n    let L' := affineLinearBaseCoefficient A N hA T d\n    let c := (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).symm.app L ≪≫\n      (ordinaryFinitePullback A p').mapIso\n        (vectorIntegrationBaseCoefficientPullback A N hA t f hS d)\n    (ordinaryFinitePullback A j).map\n        ((rightDerivedLowerShriekBaseChangeMap A sq).app\n          ((ordinaryFinitePullback A p).obj L) ≫\n          (rightDerivedLowerShriek (ModuleCat.{u + 1} A) p').map c.hom) ≫\n      vectorIntegrationCartesianPrefix N hN A hA t p' j hW d q sqW L'\n        (vectorIntegrationBaseCoefficientPullback A N hA t j\n          (affineTracePullbackInvertible N f hS) d) =\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f m hm).inv.app _ ≫\n      vectorIntegrationCartesianPrefix N hN A hA t p m hW d z sqZ L\n        (vectorIntegrationBaseCoefficientPullback A N hA t m hS d)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: base change and independence of the frame"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T034701-L-3530774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T034701-L-3530774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
