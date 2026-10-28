@@ -6,6 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.Paper.LisseTowerPulledScalar
+import Sheaf.Paper.LisseTowerLocalizedConstantsModel
+import Sheaf.Paper.LisseTowerLocalizedConstantsNormalization
 
 /-! # Constant complexes in the localized fixed realization
 
@@ -86,6 +88,9 @@ theorem lisseTower_localized_constants
           ((normalizationConstant S.smallEtaleTopology).obj E')) ≫ (c n E').hom =
       (c (n + 1) E).hom ≫
         (constantAdicFiniteRealization g d).map (lisseTowerAlgebraArrow d n k) := by
-  sorry
+  dsimp
+  obtain ⟨model⟩ := lisseTower_localized_constants_model g a b d
+  refine ⟨model, ?_⟩
+  exact lisseTower_localized_constants_normalization g a b d model
 
 end AlgebraicGeometry.Scheme

@@ -15,37 +15,36 @@
  ],
  "proof": [
   {
-   "text": "work first with ordinary module sheaves. The constant-sheaf adjunction identifies etale constants followed by comparison and inverse image along a and b with constants on Z. Restrict algebraic scalars along constantAdicQuotientMap and apply associated-module-sheafification. Its adjunction identifies this functor with constant modules on X pulled to Z, with the actual inverse-image finite ring; the coefficient identification is exactly lisseTowerFiniteCoefficientIso. This gives the model comparison, natural in the algebraic module. Apply the construction termwise to complexes and localize with mapDerivedCategoryCompIso to obtain model on every E.",
+   "text": "Apply the model-existence sublemma to obtain a family of comparison isomorphisms for every finite level and every algebraic complex.",
    "uses": [
-    "def-weil-pbc-lisse-tower-etale-descent-data",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-derived-local-isomorphism-sheaf"
+    "lem-weil-pbc-lisse-tower-localized-constants-model"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a semilinear arrow k, before localization the constant/quotient restriction square commutes on every constant generator x: both composites carry x to k(x). The scalar square used in lisseTowerPulledScalarIso is the uniquely section-normalized one, so its underlying abelian map has this same action. The two further restriction compositors are pbcDerivedRestrictComp on sheaves and restrictScalarsComp' on algebraic modules. Localizing their ordinary generator equality produces precisely the normalizationConstantRestrict and localProEtaleComparisonCoefficients factors in localProEtaleNormalization of normalizationConstantArrow k, with those compositors. Finally use the identity-on-constant-sections normalization that defines constantAdicQuotientRightIso. Conjugating the localized equality by its inverse gives the displayed equation and lisseTowerAlgebraArrow, including its two inverse compositors. All functors are exact here. The argument uses arbitrary modules and complexes and therefore also includes zero objects and empty schemes.",
+   "text": "Apply the normalized-transition sublemma to this supplied family. It proves the displayed equation for every semilinear algebraic arrow with the specified scalar, restriction and right-isomorphism compositors.",
    "uses": [
-    "lem-weil-pbc-lisse-tower-pulled-scalar",
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "def-weil-pbc-constant-adic-finite-diagram-data",
-    "def-weil-pbc-derived-local-isomorphism-sheaf"
+    "lem-weil-pbc-lisse-tower-localized-constants-normalization"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Pair the family with the equation, unfolding the leading let-bound functor L.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-localized-constants-model",
+    "lem-weil-pbc-lisse-tower-localized-constants-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-lisse-tower-etale-descent-data",
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "lem-weil-pbc-lisse-tower-pulled-scalar",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "def-weil-pbc-constant-adic-finite-diagram-data"
+  "lem-weil-pbc-lisse-tower-localized-constants-model",
+  "lem-weil-pbc-lisse-tower-localized-constants-normalization"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites Tags 03CY and 03DA; Sites Tag 0H7J; Cohomology on Sites Tag 06YY. Localized-realization step 1 on constants and step 3 on arbitrary algebraic arrows."
+  "place": "Modules on Sites Tags 03CY and 03DA; Sites Tag 0H7J; Cohomology on Sites Tag 06YY. The target is assembled from the constant-model existence and its normalized semilinear transition equation."
  },
  "mathlib_searches": [
   {
@@ -125,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "J8",
   "result": "pass",
-  "landing": "20261027T234123-L-4073",
+  "landing": "20261028T020524-L-2520568",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-localized-constants-model",
+ "kind": "statement",
+ "title": "Constant model family for localized fixed realization",
+ "statement": "For schemes X,Z,T,S, maps g:Z→X, a:T→S and b:Z→T, and an adic coefficient datum d, let L_n be fixed realization after pro-etale inverse image along b. There is a family model_n(E) identifying L_n applied to the normalized constant comparison of every algebraic B_n-complex E with constantAdicQuotientRealization(g,d,n)(E).",
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites Tags 03CY and 03DA; Sites Tag 0H7J; Cohomology on Sites Tag 06YY. Constant-sheaf comparison, finite coefficient transport and exact localization."
+ },
+ "proof": [
+  {
+   "text": "Construct the ordinary constant-sheaf comparison using the constant-sheaf and inverse-image adjunctions, transport it across the finite coefficient identification, apply it termwise to complexes and localize with the derived composition isomorphisms.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-derived-local-isomorphism-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; Sites Tag 0H7J; Tag 06YY, constant-sheaf adjunction and derived inverse-image comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of constant module sheaves commutes with comparison and coefficient restriction",
+   "results": "No exact normalized finite-coefficient comparison found; the local project APIs are the relevant interfaces.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constant sheaf inverse image derived category natural isomorphism",
+   "results": "General constant-sheaf adjunction declarations found, but no theorem with this concrete coefficient presentation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localProEtaleComparison constantAdicQuotientRealization",
+   "results": "Existing definitions and scalar-comparison APIs found; no duplicate theorem matching either split statement.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalizedConstants",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-tower-localized-constants",
+   "place": "strict model-existence part of the localized constant comparison",
+   "via": [
+    "lem-weil-pbc-lisse-tower-localized-constants"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerLocalizedConstantsModel",
+  "file": "lean/Sheaf/Paper/LisseTowerLocalizedConstantsModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_localized_constants_model",
+  "statement": "theorem lisseTower_localized_constants_model\n    {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :\n    let L (j : ℕ) := (ProEtale.upperStar\n      (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) b).mapDerivedCategory ⋙\n        lisseTowerFixedRealization g d j\n    Nonempty (∀ (n : ℕ)\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))),\n    (L n).obj ((localProEtaleComparison a\n      (lisseTowerEtaleRing d n)).obj\n        ((normalizationConstant S.smallEtaleTopology).obj E)) ≅\n      (constantAdicQuotientRealization g d n).obj E)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T020524-L-2520568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T020524-L-2520568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
