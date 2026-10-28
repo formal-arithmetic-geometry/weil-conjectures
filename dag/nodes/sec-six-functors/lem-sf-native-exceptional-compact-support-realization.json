@@ -14,11 +14,10 @@
  },
  "proof": [
   {
-   "text": "Choose the native ring and section geometry and the canonical completed coefficient changes. The latter agree with every CoefficientPresentation.integralMap, hence with the source and target maps. At each finite subfield E, use S.ring.rationalLeft to identify the specified rational left functor with sfCompactSupportFiniteFunctor. On an integral finite-Tor representative use its integral compact-support realization and the two supplied realization.integral isomorphisms. These identify the two finite-stage composite functors with completed compact support followed by coefficient extension and coefficient extension followed by native compact support.",
+   "text": "Choose native geometry and canonical completed-to-native coefficient changes. Their prescribed maps agree with both supplied realization coefficient maps. The structural map from the finite base field makes l a unit in each residue field of X.",
    "uses": [
     "lem-sf-native-compact-support-geometry",
-    "lem-sf-native-completed-coefficient-change",
-    "def-weil-integral-rational-qbar-compact-support"
+    "lem-sf-native-completed-coefficient-change"
    ],
    "elementary": false,
    "source": {
@@ -27,11 +26,9 @@
    }
   },
   {
-   "text": "Between the last two functors take the actual proper/open scalar mate. Its factorization has the exact open tensor comparison and the proper scalar counit mate; native_compact_support_scalar_mate_invertible makes it invertible on integral finite-Tor inputs. Residue Tor identifies every integral constructible input with such an input. The section equivalence reflects isomorphisms, producing a natural isomorphism on the full integral category. Extend it through raw scalar localization to the rational stage. Naturality for integral arrows and their inverse uniformizer powers proves naturality for every rational morphism.",
+   "text": "For each finite field E apply systemFiniteComparison. It constructs the actual integral scalar map, proves its invertibility using residue Tor and the native scalar mate, and extends it uniquely to rational arrows by raw localization.",
    "uses": [
-    "lem-sf-native-compact-support-scalar-mate-invertible",
-    "lem-coef-integral-residue-tor",
-    "lem-real-raw-localization-natural-iso"
+    "lem-sf-native-exceptional-compact-support-finite"
    ],
    "elementary": false,
    "source": {
@@ -40,10 +37,10 @@
    }
   },
   {
-   "text": "Check finite-field transition compatibility before descending. Insert the source and target common_field formulas and the S.fields.rational_normalized equation. After conjugation by the integral realization and integralLeft_normalized isomorphisms, both paths are the proper/open scalar mate for the composite coefficient map: on a flat tensor representative both send b tensor a tensor m to ba tensor m. The coefficient square, the balanced tensor associator and the triangle identities for the proper counit identify the proper terms; the unit-normalized tensor formula identifies the open terms. The identity extension inserts the tensor unit. Localize this equality on integral representatives. Compose with S.common.commonComparison; S.common.commonCocycleLeft then gives compatibility with the actual common-stage isoToStage maps.",
+   "text": "Apply systemFiniteTransition to the chosen finite comparisons and their unique raw-localization component formulas. It proves compatibility with every actual isoToStage map from the integral scalar normalizations, without constructing any new finite comparison.",
    "uses": [
-    "def-sf-locally-finite-adic-realization-data",
-    "lem-sf-constructible-exceptional-adjunction-coefficients"
+    "lem-sf-native-exceptional-compact-support-finite",
+    "lem-sf-native-exceptional-compact-support-integral-transition"
    ],
    "elementary": false,
    "source": {
@@ -52,7 +49,7 @@
    }
   },
   {
-   "text": "At a common-stage object A use the component of the A.stage comparison at A.obj. Every morphism has a representative over a common finite stage. Factor that representative into the source transition, a same-stage arrow and the inverse target transition. The preceding compatibility and rational-stage naturality prove naturality. Apply NatIso.ofComponents to these invertible components; its inverse is obtained stagewise. This works unchanged for zero objects and empty schemes and yields the claimed isomorphism for the specified realizations.",
+   "text": "Apply stageComparison_naturality to these finite natural isomorphisms and their transition equations. NatIso.ofComponents assembles their invertible components into the desired isomorphism for the originally specified source, target and S.",
    "uses": [
     "lem-sf-stage-comparison-naturality"
    ],
@@ -64,14 +61,10 @@
   }
  ],
  "proof_deps": [
-  "def-sf-locally-finite-adic-realization-data",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-coef-integral-residue-tor",
-  "lem-real-raw-localization-natural-iso",
-  "lem-sf-constructible-exceptional-adjunction-coefficients",
   "lem-sf-native-compact-support-geometry",
-  "lem-sf-native-compact-support-scalar-mate-invertible",
   "lem-sf-native-completed-coefficient-change",
+  "lem-sf-native-exceptional-compact-support-finite",
+  "lem-sf-native-exceptional-compact-support-integral-transition",
   "lem-sf-stage-comparison-naturality"
  ],
  "proof_origin": {
@@ -165,9 +158,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P8",
+  "group": "U6",
   "result": "pass",
-  "landing": "20261028T034912-L-3566719",
+  "landing": "20261028T055816-L-812000",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
