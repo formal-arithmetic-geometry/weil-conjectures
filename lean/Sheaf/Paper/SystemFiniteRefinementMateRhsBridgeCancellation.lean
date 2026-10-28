@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.SystemFiniteRefinementMateCanonical
 public import Sheaf.Paper.SystemFiniteEvaluationCoordinates
-import Sheaf.SixFunctors.AmbientProperOpenCalculus
+public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
 
 /-! # Canonical bridge cancellation for the finite refinement mate
 
@@ -31,6 +30,20 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCategory
   Functor.rightDerivedFunctor
+
+private theorem insertBridgeFactors
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    (R : B ⥤ C) (F : C ⥤ D) {U : C} {V W : B}
+    (p : U ≅ R.obj V) (s : V ≅ W)
+    {T₀ T₁ T₂ T₃ : D} (a : T₀ ⟶ T₁) (b : T₁ ⟶ F.obj U)
+    (c : F.obj U ⟶ T₂) (d : T₂ ⟶ T₃) :
+    a ≫ b ≫ c ≫ d =
+      a ≫ b ≫ F.map p.hom ≫ F.map (R.map s.hom) ≫
+        F.map (R.map s.inv ≫ p.inv) ≫ c ≫ d := by
+  rw [F.map_comp, Category.assoc,
+    ← F.map_comp_assoc (R.map s.hom) (R.map s.inv), ← R.map_comp,
+    s.hom_inv_id, R.map_id, F.map_id, Category.id_comp,
+    ← F.map_comp_assoc p.hom p.inv, p.hom_inv_id, F.map_id, Category.id_comp]
 
 /-- Cancelling the identity canonical bridge and expanding the finite push and shriek
 coordinates leaves the evaluated system mate with its canonical bridge factors.
@@ -82,6 +95,10 @@ theorem rhsCoreBridgeCancellation (D : FiniteFieldDatum.{u}) (o : Operations l E
             ((Operations.shriek l E o c.i).obj M)) ≫
       (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫
       RW.functor.map ((ProperOpenPush A r.hom).map (fixedShriek l E o m c.i M).hom) := by
-  sorry
+  exact insertBridgeFactors
+    (SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) r.hom)
+    (coefficientSequenceDerivedEvaluation l E d.Z m)
+    ((z.canonicalBridge.push l E r.hom).app ((Operations.shriek l E o c.i).obj M))
+    ((z.canonicalBridge.shriek l E c.i).app M) _ _ _ _
 
 end WeilConjectures.IntegralSystemRealization.FiniteCoordinates
