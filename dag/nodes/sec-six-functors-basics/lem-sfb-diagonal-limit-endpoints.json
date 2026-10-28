@@ -14,66 +14,58 @@
  ],
  "proof": [
   {
-   "text": "The cokernel universal properties of D.ordinary identify the source tower with the supported finite constant tower, preserving quotient units and transitions. Closed direct image is exact and commutes with limits; its ordinary limit is the restricted completed constant. Its canonical generator gives exactly the displayed source projection equation.",
+   "text": "Apply the normalized ordinary supported-limit lemma to D.ordinary. This gives s and exactly its integer-generator projection identity, without using any derived or completeness hypothesis.",
    "uses": [
-    "def-sfb-diagonal-system-interface",
-    "lem-exc-proetale-closed-exact",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+    "lem-sfb-diagonal-supported-ordinary-limit"
    ],
    "elementary": false
   },
   {
-   "text": "Forgetting scalars creates the root limit. Apply the canonical preserved-limit comparison and the limit isomorphism induced by roots; the inverse has exactly the required underlying map. Root transitions are epimorphic because ell is invertible, and supported quotient transitions are epimorphic by closed exactness.",
+   "text": "An additive map into an ell^(n+1)-torsion Z_ell-module is Z_ell-linear: approximate a p-adic scalar by its integer residue and kill the prime-power error. Apply this sectionwise to the inverse of diagonalRootLimitComparison followed by each H projection. The lifted cone has a limit lift t; faithful scalar forgetting and preservation of limits identify its underlying map with that inverse and reflect its invertibility.",
    "uses": [
-    "def-sfb-diagonal-limit-interface",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-exc-proetale-closed-exact"
+    "lem-sfb-diagonal-root-limit-linear"
    ],
    "elementary": false
   },
   {
-   "text": "Use the Milnor comparison to identify ordinary limits of these two epimorphic towers with total derived limits. Choose a normalized DiagonalRlim from the total right derived data. Uniqueness of total right derived functors identifies its unit with this comparison. Compose with a and b, and the canonical shift comparison, to obtain the two specified isomorphisms.",
+   "text": "Construct normalized right-derived limit data and projections using the total right-derived universal property. Quotient transitions are epic because their composites with the quotient epimorphisms are epic; root transitions are epic since ell is invertible on the surface. The sheaf Milnor difference is epic and products are exact. Its kernel inclusion into the Roos fibre is a quasi-isomorphism. The normalized Roos comparison identifies this with the derived unit of L. Thus both canonical ordinary-to-derived maps are invertible; composing with s,t,a,b and the shift comparisons proves the two prescribed comparison maps invertible.",
    "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "det-pe-milnor-epimorphic",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "det-pe-products-exact",
+    "lem-pur-twist-root-transitions",
+    "lem-weil-pbc-exact-products-roos-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "DiagonalCompletionSpec identifies these total limits with derived-complete outputs after forgetting constant scalars. Transport orthogonality through the endpoint isomorphisms. The flat constant-completion equivalence and its principal-ideal criterion give intrinsic orthogonality over the completed ring as well. This proves completeness in both categories without constructing any morphism between the endpoints.",
+   "text": "Apply the proved generic finite_tower_limit_orthogonality theorem to the completed-to-constant scalar restriction functor, the ordinary source and root towers, and s,t. Their levels are annihilated by the corresponding powers of ell. Scalar restriction is exact, preserves products, and reflects isomorphisms. Exact countable products hold in both categories and their universe-correct Grothendieck instances provide K-injective resolutions. Specialize its shift to two to obtain exactly the four asserted orthogonality properties.",
    "uses": [
-    "def-sfb-diagonal-system-interface",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-sfb-constant-principal-complete-orthogonality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Each finite root group is annihilated by ell^(n+1), so its constant Z_l action factors through Z_l/ell^(n+1)=Z/ell^(n+1); the underlying root isomorphisms are consequently linear. The flat coefficient comparisons Z to constant Z_l and constant Z_l to the completed coefficient sheaf preserve all finite quotients. Complete-object equivalences first reflect completeness into constant coefficients and then transfer it to completed coefficients.",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-sfb-finite-tower-limit-orthogonality",
+    "det-pe-products-exact",
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "def-sfb-diagonal-limit-interface"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sfb-diagonal-limit-interface",
-  "def-sfb-diagonal-system-interface",
   "det-pe-milnor-epimorphic",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-exc-proetale-closed-exact",
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-sfb-constant-principal-complete-orthogonality",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "det-pe-products-exact",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-pur-twist-root-transitions",
+  "lem-sfb-diagonal-root-limit-linear",
+  "lem-sfb-diagonal-supported-ordinary-limit",
+  "lem-sfb-finite-tower-limit-orthogonality",
+  "lem-weil-pbc-exact-products-roos-comparison",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "proof_origin": {
   "kind": "adapted",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
-  "place": "paragraph (1), ordinary and total inverse limits; paragraph (3), completeness of both endpoints",
-  "by": "X3"
+  "place": "paragraphs (1) and (3); W3 uses direct finite-torsion telescope orthogonality in place of complete-object equivalences",
+  "by": "W3"
  },
  "mathlib_searches": [
   {
@@ -141,9 +133,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261028T035013-L-3579330",
+  "landing": "20261028T055822-L-813154",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

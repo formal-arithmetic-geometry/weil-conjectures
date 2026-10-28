@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-finite-tower-limit-orthogonality",
+ "kind": "statement",
+ "title": "Derived orthogonality of finite-torsion tower limits",
+ "statement": "Let A and B be abelian categories with countable products, exact countable products, chosen derived categories, and K-injective resolutions. Suppose B has limits of inverse natural-number towers. Let F:A -> B be additive, exact, preserve countable products and reflect isomorphisms. Fix a natural scalar l, an integer shift n, objects P,Q of A, and towers S,H in B whose r-th levels are annihilated by l^(r+1). If F(P) is isomorphic to lim S and F(Q) is isomorphic to lim H, then the degree-zero single P and the n-shifted single Q are right orthogonal to l-invertible objects in D(A). Their images under the derived F are right orthogonal to l-invertible objects in D(B). No primeness or epimorphic-transition assumption is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraphs (1) and (3), completeness of finite-torsion inverse limits; the telescope argument of Stacks 099L/099M"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "On a countable power define delta as identity minus l times the shift. If l^e kills M, the l-shift is nilpotent and delta has the finite geometric inverse. Countable powers preserve limits, so delta is invertible on limits of the finite-torsion towers. Transport through the two ordinary limit isomorphisms. Product preservation identifies F(delta) with delta on F(M); conservativity reflects its invertibility to P and Q.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Exact countable products and K-injective resolutions imply that DerivedCategory.Q preserves countable products: use the proved DerivedCategory.isLimitFanQ and its instance in WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit. The canonical singleFunctorIsoCompQ therefore makes the single-object embedding preserve them. Given a map from an l-invertible object, successively divide it by l and lift the resulting sequence to the countable product. Delta kills this lift. Since delta is invertible, the lift and its zeroth component vanish, proving orthogonality.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Shift equivalences preserve l-invertibility and transport the Hom subsingleton assertion. The canonical mapDerivedCategorySingleFunctor and commShiftIso comparisons identify the derived images with the single objects of F(P) and F(Q), with the specified shift. These isomorphisms transport the two orthogonality assertions to the derived restriction images. The cases l=0 or l=1 force the finite tower levels to be zero and satisfy the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "finite-torsion telescope; proved helpers in DiagonalCompletedLineCompleteAux and DerivedCategory.isLimitFanQ in the adopted source library",
+  "by": "W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact countable products, the inverse limit of objects killed by increasing powers of l is right orthogonal in the derived category to objects on which l is invertible",
+   "results": "Eight hits: derived t-structures and K-injective or K-projective orthogonality, but no finite-torsion tower completeness theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use the explicit difference-operator argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent, IsUnit (1 - _)",
+   "results": "One hit: IsNilpotent.isUnit_one_sub in Mathlib.RingTheory.Nilpotent.Basic.",
+   "date": "2026-10-28",
+   "verdict": "Use this to invert the finite-torsion difference operator."
+  },
+  {
+   "tool": "grep",
+   "query": "sequenceDifference|complete_of_difference|orthogonal.*shift|isLimitFanQ in DiagonalCompletedLineCompleteAux and source DerivedCategory/TowerLimit",
+   "results": "Existing proved private telescope helpers are in a module depending on the final diagonal theorem, so importing it creates a cycle. The source isLimitFanQ and its product-preservation instance have no such dependency.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the source product theorem; prove the generic telescope helpers in this new module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalLimitEndpoints",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (3), intrinsic completeness of the two endpoints",
+   "via": [
+    "lem-sfb-diagonal-limit-endpoints"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteTowerLimitOrthogonality",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteTowerLimitOrthogonality.lean",
+  "declaration": "CategoryTheory.finite_tower_limit_orthogonality",
+  "statement": "theorem finite_tower_limit_orthogonality\n    {A : Type a} [Category.{v} A] [Abelian A] [HasCountableProducts A]\n    [HasExactLimitsOfShape (Discrete ℕ) A] [HasDerivedCategory.{w} A]\n    [Abelian.HasKInjectiveResolutions A]\n    {B : Type b} [Category B] [Abelian B] [HasCountableProducts B]\n    [HasLimitsOfShape ℕᵒᵖ B] [HasExactLimitsOfShape (Discrete ℕ) B]\n    [HasDerivedCategory.{w} B] [Abelian.HasKInjectiveResolutions B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesLimitsOfShape (Discrete ℕ) F] [F.ReflectsIsomorphisms]\n    (l : ℕ) (n : ℤ) (P Q : A) (S H : ℕᵒᵖ ⥤ B)\n    (s : F.obj P ≅ limit S) (t : F.obj Q ≅ limit H)\n    (hS : ∀ n : ℕ, l ^ (n + 1) • 𝟙 (S.obj (op n)) = 0)\n    (hH : ∀ n : ℕ, l ^ (n + 1) • 𝟙 (H.obj (op n)) = 0) :\n    (∀ V : DerivedCategory A, IsIso (l • 𝟙 V) →\n      Subsingleton (V ⟶ (DerivedCategory.singleFunctor A 0).obj P)) ∧\n    (∀ V : DerivedCategory A, IsIso (l • 𝟙 V) →\n      Subsingleton (V ⟶ ((DerivedCategory.singleFunctor A 0).obj Q)⟦n⟧)) ∧\n    (∀ V : DerivedCategory B, IsIso (l • 𝟙 V) →\n      Subsingleton (V ⟶ F.mapDerivedCategory.obj\n        ((DerivedCategory.singleFunctor A 0).obj P))) ∧\n    (∀ V : DerivedCategory B, IsIso (l • 𝟙 V) →\n      Subsingleton (V ⟶ F.mapDerivedCategory.obj\n        (((DerivedCategory.singleFunctor A 0).obj Q)⟦n⟧)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261028T055822-L-813154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261028T055822-L-813154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
