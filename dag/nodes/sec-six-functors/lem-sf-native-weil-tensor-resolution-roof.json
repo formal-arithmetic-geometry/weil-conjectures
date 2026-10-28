@@ -53,29 +53,37 @@
  ],
  "proof": [
   {
-   "text": "Use the homotopy-category calculus of fractions to obtain a common refinement of the two complexes over the given map.",
+   "text": "Use the existing module-object functorial flat cover on A = ProEtale.AdicSheaf l Y. Reduce the resulting LeftResolution of the inclusion of flat objects, obtaining the explicit resolutionFunctor and its natural quasi-isomorphism resolutionNatTrans. Tensor preserves integer-indexed colimits by closedness and symmetry; these colimits are exact because A is Grothendieck abelian. The source theorem LeftResolution.kFlat_resolutionFunctor_obj gives categorical K-flatness of each resolution value. This uses the same reduced resolution API as the unbounded K-flat existence node, retaining its functoriality on complexes.",
    "uses": [
-    "lem-pc-kflat-resolution"
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-sfb-unbounded-kflat-resolution-existence"
    ],
    "elementary": false
   },
   {
-   "text": "Resolve the refinement source by a K-flat complex and compose its augmentation with the refinement legs; two-out-of-three gives the quasi-isomorphisms and the refinement equality gives the displayed homotopy.",
+   "text": "For each resolution value P and acyclic N, the zero map from the zero complex to N is a quasi-isomorphism. Categorical K-flatness makes its image under tensorRight P a quasi-isomorphism. Additivity makes the source tensor zero acyclic, hence N tensor P is acyclic. Transfer exactness in every degree through GenericOrdinaryTensor.ordinaryTotalIso(P,N), from the ordinary total to N tensor P, to obtain NativeOrdinaryKFlat l Y P.",
    "uses": [
-    "lem-pc-kflat-resolution"
+    "lem-sf-native-ordinary-tensor-representatives"
    ],
    "elementary": false
+  },
+  {
+   "text": "For g:Q to Q-prime take K and K-prime to be the values of the same reduced resolutionFunctor and u its image of g. The two components of resolutionNatTrans are quasi-isomorphisms. Their naturality square commutes strictly, and Homotopy.ofEq turns this equality into the required chain homotopy.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution"
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-unbounded-kflat-resolution-existence",
+  "lem-sf-native-ordinary-tensor-representatives"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "J2",
+  "group": "M3",
   "date": "2026-10-28",
-  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Native tensor transport, geometric tensor part of step 1; K-flat replacement extension."
+  "document": "lean/WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean; lean/Sheaf/Paper/NativeOrdinaryTensorRepresentatives.lean; Stacks Tags 06YS and 06YU",
+  "place": "LeftResolution.kFlat_resolutionFunctor_obj and resolutionNatTrans.naturality; GenericOrdinaryTensor.ordinaryTotalIso. The existing functorial resolution construction avoids the homotopy-category common-refinement step."
  },
  "lean": {
   "existing": false,
@@ -101,9 +109,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261028T020513-L-2517744",
+  "landing": "20261028T034835-L-3558134",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
