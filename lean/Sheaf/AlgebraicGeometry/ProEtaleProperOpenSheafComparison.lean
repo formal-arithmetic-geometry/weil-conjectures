@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleProperOpenCounitMono
+import Sheaf.AlgebraicGeometry.ProEtaleProperOpenCounitEpi
 
 /-!
 # Proper/open comparison for all pro-etale module sheaves
@@ -152,7 +154,12 @@ theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
       ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
         proEtaleConstantModuleDirectImage p A).obj M)) := by
-  sorry
+  let f := (sfIntrinsicExtensionByZeroAdjunction i A).counit.app
+    ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
+      proEtaleConstantModuleDirectImage p A).obj M)
+  letI : Mono f := sfProperOpenCounit_mono A p i M
+  letI : Epi f := sfProperOpenCounit_epi A p i M
+  exact isIso_of_mono_of_epi f
 
 
 /-- Proper direct image commutes with open extension by zero for every pro-etale module
@@ -243,10 +250,10 @@ theorem sfProperOpenSheafComparison_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [Is
   apply (NatTrans.isIso_iff_isIso_app _).mpr
   intro M
   dsimp only [sfProperOpenSheafComparison]
+  have hc := sfProperOpenCounit_isIso A p i M
   letI : IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
       ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
-        proEtaleConstantModuleDirectImage p A).obj M)) :=
-    sfProperOpenCounit_isIso A p i M
+        proEtaleConstantModuleDirectImage p A).obj M)) := hc
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
