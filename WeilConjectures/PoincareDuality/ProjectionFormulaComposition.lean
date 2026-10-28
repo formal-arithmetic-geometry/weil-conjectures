@@ -182,6 +182,14 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_eq_shriekProjection_
         (boundedConstructibleOpenImmersionLowerShriek _ ℓ c.overI).map (K ◁ e.inv.app B))
     (boundedConstructibleExchangeFormalism_pbComp'_compactification_comp ℓ c).symm
 
+
+/-- The composition isomorphisms of the pullbacks in the exchange formalism are those of the
+bounded constructible pullbacks. -/
+lemma boundedConstructibleExchangeFormalism_pbComp_homMk (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (𝔽).pbComp (SepFinType.homMk f) (SepFinType.homMk g) =
+      boundedConstructibleUpperStarComp _ ℓ f g :=
+  rfl
+
 end Composite
 
 end AlgebraicGeometry.ProEtale.CondensedRing

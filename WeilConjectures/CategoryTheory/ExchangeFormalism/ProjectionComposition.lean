@@ -35,8 +35,8 @@ open CategoryTheory MonoidalCategory Functor.OplaxMonoidal
 namespace CategoryTheory.ExchangeFormalism
 
 variable {𝒞 : Type u} [Category.{v} 𝒞] {𝒪 : MorphismProperty 𝒞}
-  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪) [∀ X, MonoidalCategory (F.obj X)]
-  [∀ {X Y : 𝒞} (f : X ⟶ Y), (F.pb f).Monoidal]
+  (F : ExchangeFormalism.{w, v₁} 𝒞 𝒪) [instMonoidal : ∀ X, MonoidalCategory (F.obj X)]
+  [instMonoidalPb : ∀ {X Y : 𝒞} (f : X ⟶ Y), (F.pb f).Monoidal]
 
 /-- The exceptional projection morphism `PF_{i,p} : p_* i_! K ⊗ B ⟶ p_* i_! (K ⊗ h^* B)` of a
 factorization `X ⟶[i] W ⟶[p] S` of `h`: the projection morphism of `p^* ⊣ p_*`, the inverse of the
@@ -305,5 +305,36 @@ theorem compIso_hom_app_whiskerRight_comp_shriekProjection
   congr 2
   exact congrArg (F.pf T.p₂).map (F.exchange_whiskerRight_comp_projectionMorphism_triangle hδ
     T.i₁ T.p₁ T.i₂ T.p₂ T.q T.r T.i T.p f g hf hg T.i_q T.r_p T.w hfg K B)
+
+/-- `compIso_hom_app_whiskerRight_comp_shriekProjection` with the exceptional projection
+morphisms and the composition isomorphism of the pullbacks replaced by morphisms equal to them,
+so that it applies to morphisms given in another form without unfolding them. -/
+theorem compIso_hom_app_whiskerRight_comp_of_eq
+    (hδ : ∀ {X Y Z : 𝒞} (f : X ⟶ Y) (g : Y ⟶ Z) (M N : F.obj Z),
+      δ (F.pb (f ≫ g)) M N ≫ ((F.pbComp f g).hom.app M ⊗ₘ (F.pbComp f g).hom.app N) =
+        (F.pbComp f g).hom.app (M ⊗ N) ≫ (F.pb f).map (δ (F.pb g) M N) ≫
+          δ (F.pb f) ((F.pb g).obj M) ((F.pb g).obj N))
+    [∀ {X Y : 𝒞} (j : X ⟶ Y) [Fact (𝒪 j)] (K : F.obj X) (N : F.obj Y),
+      IsIso ((F.shAdj j).projectionComparison K N)]
+    {X Y S : 𝒞} (T : ShriekTriangle 𝒪 X Y S)
+    [hbc : IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
+    [hex : IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
+    {f : X ⟶ Y} {g : Y ⟶ S} (hf : T.i₁ ≫ T.p₁ = f) (hg : T.i₂ ≫ T.p₂ = g)
+    (hfg : T.i ≫ T.p = f ≫ g) (K : F.obj X) (B : F.obj S)
+    (a : (F.shriek T.i T.p).obj K ⊗ B ⟶ (F.shriek T.i T.p).obj (K ⊗ (F.pb (f ≫ g)).obj B))
+    (ha : a = F.shriekProjection T.i T.p (f ≫ g) hfg K B)
+    (b : (F.shriek T.i₂ T.p₂).obj ((F.shriek T.i₁ T.p₁).obj K) ⊗ B ⟶
+      (F.shriek T.i₂ T.p₂).obj ((F.shriek T.i₁ T.p₁).obj K ⊗ (F.pb g).obj B))
+    (hb : b = F.shriekProjection T.i₂ T.p₂ g hg ((F.shriek T.i₁ T.p₁).obj K) B)
+    (c : (F.shriek T.i₁ T.p₁).obj K ⊗ (F.pb g).obj B ⟶
+      (F.shriek T.i₁ T.p₁).obj (K ⊗ (F.pb f).obj ((F.pb g).obj B)))
+    (hc : c = F.shriekProjection T.i₁ T.p₁ f hf K ((F.pb g).obj B))
+    (s : (F.pb (f ≫ g)).obj B ⟶ (F.pb g ⋙ F.pb f).obj B)
+    (hs : s = (F.pbComp f g).hom.app B) :
+    (F.compIso T).hom.app K ▷ B ≫ a ≫ (F.shriek T.i T.p).map (K ◁ s) =
+      b ≫ (F.shriek T.i₂ T.p₂).map c ≫
+        (F.compIso T).hom.app (K ⊗ (F.pb f).obj ((F.pb g).obj B)) := by
+  subst ha hb hc hs
+  exact F.compIso_hom_app_whiskerRight_comp_shriekProjection hδ T hf hg hfg K B
 
 end CategoryTheory.ExchangeFormalism
