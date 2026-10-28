@@ -2,10 +2,8 @@ module
 
 public import Sheaf.SixFunctors.CoefFinitePairingEvaluationData
 public import Sheaf.Paper.FiniteCoefficientPoint
-import Sheaf.Paper.SemilinearDerivedSections
-import Sheaf.Paper.SemilinearOperationsExistence
-import Sheaf.Paper.SemilinearSystemsExistence
-import Sheaf.SixFunctors.OpenTensorNormalization
+import Sheaf.SixFunctors.CoefFiniteEvaluationExistence
+import Sheaf.SixFunctors.CoefFiniteProjectionWordEvaluation
 
 /-! # Finite normalization of the system projection-evaluation word
 
@@ -193,6 +191,26 @@ theorem pairingFiniteNormalization
     (_hl : IsUnit (l : k)) (c : Compactification a)
     (m : Model l E c) (s : ScalarSpecialization l E m) :
     ∀ n : ℕ, ∃ e : FiniteEvaluation l E m s n, e.PairingEquation := by
-  sorry
+  intro n
+  obtain ⟨e⟩ := finiteEvaluation_exists l E k X Y a _hl c m s n
+  refine ⟨e, ?_⟩
+  intro K N
+  have hword := finiteProjectionWord_evaluation l E e K N
+  have hnat := e.integral.derived.hom.naturality
+    (Prod.mkHom (s.comparison.hom.app (op K, N)) (𝟙 (s.supportTower K)))
+  dsimp only [Functor.comp_map, Functor.prod_map] at hnat
+  simp only [ScalarSpecialization.transported, Functor.map_comp, Category.assoc]
+  dsimp only [FiniteEvaluation.support, FiniteEvaluation.quotientSupport]
+  rw [hword]
+  erw [← Category.assoc, hnat]
+  simp only [Category.assoc]
+  simp only [FiniteEvaluation.homComparison, Iso.trans_hom, Functor.mapIso_hom,
+    Category.assoc]
+  rw [← Functor.map_comp_assoc]
+  congr 2
+  congr 1
+  simp [FiniteEvaluation.reducedSupport, FiniteEvaluation.support,
+    FiniteEvaluation.quotientSupport, coefHomPointEvaluation, Functor.map_comp, Category.assoc]
+
 
 end WeilConjectures.CoefProjectionEvaluation

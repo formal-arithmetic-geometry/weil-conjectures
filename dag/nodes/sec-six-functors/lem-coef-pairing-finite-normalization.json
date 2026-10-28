@@ -34,98 +34,48 @@
  ],
  "proof": [
   {
-   "text": "Use the ordinary derived system calculus of [lem-coef-semilinear-derived-sections] on the small vertical sequence sites. The coefficient maps are the actual quotient maps, so no flatness assumption is needed. The object $M=L\\rho_X^*\\operatorname{const}K$ is cartesian: under the scalar-extension composition and reduction cocycle of [lem-coef-semilinear-system-existence], its reduction adjunct is the associativity identification $(K\\otimes^L_{R_X}(A_m)_X)\\otimes^L_{(A_m)_X}(A_n)_X\\cong K\\otimes^L_{R_X}(A_n)_X$. Thus the cartesian-first-input Hom evaluation theorem applies to $D=R\\mathcal Hom(M,N)$, although $N$ is arbitrary. Exact evaluation gives $D_n\\cong R\\mathcal Hom_{(A_n)_X}(K_n,N_n)$ and carries its evaluation morphism to the finite one. Derived point sections then give $h_n\\cong R\\operatorname{Hom}_{X,A_n}(K_n,N_n)$ by the same geometric evaluation comparison.",
+   "text": "For each n, take a finite comparison witness e from [lem-sf-coef-finite-evaluation-existence]. This constructs the normalized comparisons only, without assuming the pairing equation.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-coef-semilinear-system-existence"
+    "lem-sf-coef-finite-evaluation-existence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Proof paragraph 2, finite adjunctions and their specified coefficient comparisons; Stacks sites-cohomology.tex, Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map).",
+    "note": "Agent-formulated subargument extracted from lem-coef-pairing-finite-normalization, not a verbatim assertion of Stacks or the blueprint."
    }
   },
   {
-   "text": "For $f=p$ and for the point-sections morphisms $g_X,g_Y$, apply the unit/counit and transpose compatibilities in [lem-coef-semilinear-derived-sections]. With the canonical tensor and pull/push comparisons understood, evaluation sends $Rf_*(t)\\eta_f$, the transpose of any $t:Lf^*C\\to E$, to $Rf_{*,n}(t_n)\\eta_{f,n}$. Taking $t=(\\varepsilon_{f,E}\\otimes1)\\mu_f$ therefore gives the finite projection mate; in particular $e_n\\pi_{p;j_!M,L}=\\pi_{p,n;j_!K_n,L_n}$ and its defining adjoint is exactly $(\\varepsilon_{p,j_!K_n}\\otimes1)\\mu_p$. The same formula for $g_Y$ gives the finite sections projection mate, and for $g_X$ it identifies the sections counit. These are identities of the specified maps, rather than just isomorphisms of their sources and targets.",
+   "text": "Apply [lem-sf-coef-finite-projection-word-evaluation] to e,K,N. It evaluates Model.beta before the full-system scalar-Hom transport, including the reduction-unit Hom and support comparisons.",
    "uses": [
-    "lem-coef-semilinear-derived-sections"
+    "lem-sf-coef-finite-projection-word-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Proof paragraph 2, finite adjunctions and their specified coefficient comparisons; Stacks sites-cohomology.tex, Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map).",
+    "note": "Agent-formulated subargument extracted from lem-coef-pairing-finite-normalization, not a verbatim assertion of Stacks or the blueprint."
    }
   },
   {
-   "text": "Evaluate the actual open tensor comparison using [lem-coef-support-open-tensor-model]. Its chain component is the sheafification of $u\\otimes l\\mapsto u\\otimes l|_X$, so its evaluation is the same map over $(A_n)_Z$. The pullback-composition comparison and $g_X=g_Ya$ identify $La_n^*Lg_{Y,n}^*h_n$ with $Lg_{X,n}^*h_n$; the composition and transpose compatibilities of [lem-coef-semilinear-derived-sections] preserve this identification and its counit. Consequently the evaluated map $v_{M,N}$ in [lem-coef-system-projection-evaluation] is $K_n\\otimes^L La_n^*Lg_{Y,n}^*h_n\\to K_n\\otimes^L D_n\\to N_n$, with the first arrow induced by the finite sections counit and the second by the recorded symmetry followed by finite closed evaluation. The signed symmetry is unchanged under exact tensor evaluation.",
-   "uses": [
-    "lem-coef-support-open-tensor-model",
-    "lem-coef-semilinear-derived-sections",
-    "lem-coef-system-projection-evaluation"
-   ],
-   "elementary": false,
+   "text": "Expand ScalarSpecialization.transported. Functoriality of coefficient evaluation moves its scalar-Hom tensor map before the untransported word equality. Naturality of e.integral.derived moves that tensor map through tensor evaluation. Compose the two resulting finite tensor maps by functoriality; identity on the support factor cancels, and the first factor becomes exactly e.homComparison. This proves PairingEquation for every K,N and the existential conclusion.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
-   }
-  },
-  {
-   "text": "Apply [lem-coef-semilinear-operations-existence] to the map of ring towers $R^{\\mathrm{const}}\\to\\mathcal A$ on the singleton site. This supplies the ScalarSystems comparison of [def-coef-semilinear-derived-calculus], normalized by scalar-adjunction transpose. Hence evaluation identifies $L\\rho_0^*\\dashv\\rho_{0*}$, including unit and counit, with $A_n\\otimes_R^L-\\dashv\\operatorname{Res}_n$. Evaluating the defining scalar word $c_{H,B}=\\rho_{0*}(1\\otimes\\varepsilon_{\\rho_0,B})\\pi_{\\rho_0}$ of [lem-coef-system-projection-evaluation] therefore gives\n$$\\operatorname{Res}_nH_n\\otimes_R^L\\operatorname{Res}_nB_n\\xrightarrow{\\pi_{r_n}}\\operatorname{Res}_n(H_n\\otimes_{A_n}^L Lr_n^*\\operatorname{Res}_nB_n)\\xrightarrow{\\operatorname{Res}_n(1\\otimes\\varepsilon_{r_n,B_n})}\\operatorname{Res}_n(H_n\\otimes_{A_n}^LB_n),$$\nwhere $r_n$ is the scalar morphism for $R\\to A_n$. This is the canonical scalar-balancing map: its scalar-adjunction transpose is the tensor of the two extension-restriction counits after the strong tensor comparison. This last description follows by substituting $\\pi_{r_n}=Rr_{n*}((\\varepsilon\\otimes1)\\mu)\\eta$ and the triangle identity. No preservation of K-injectives by varying-ring evaluation is used.",
-   "uses": [
-    "lem-coef-semilinear-operations-existence",
-    "def-coef-semilinear-derived-calculus",
-    "lem-coef-system-projection-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
-   }
-  },
-  {
-   "text": "Specialize [lem-coef-system-projection-evaluation] at $U=M$. Its final clause fixes $\\mathsf H_N(K)$ and its Hom comparison to be those of [lem-coef-hom-tower-scalar-model]. Use that theorem with $W=X$: its representative $I$ is resolved in constant-$R_X$ towers, and its finite input $K_n=K\\otimes^L_{R_X}(A_n)_X$ is exactly this item's input. Substitute steps 1–4 in the specified word $\\widetilde\\beta_{M,N}=\\rho_{0*}(q_{M,N}\\circ\\sigma_{h,b_M})\\circ c_{h,b_M}$ of [lem-coef-system-projection-evaluation]. Functoriality of evaluation preserves the order of composition. Its first arrow is the scalar balancing of step 4. After it, the symmetry puts $b_{M,n}$ before $h_n$; the sections projection mate gives derived sections of $F_nK_n\\otimes^LLg_{Y,n}^*h_n$; the proper projection mate followed by the evaluated open comparison gives derived sections of $F_n(K_n\\otimes^LLa_n^*Lg_{Y,n}^*h_n)$; finally step 3 gives derived sections of $F_nN_n$. By the defining word of [def-exchange-projection], the proper/open portion is $\\operatorname{PF}^c_{a,K_n,Lg_{Y,n}^*h_n}=Rp_{*,n}(\\gamma)\\circ\\pi_{p;j_!K_n,Lg_{Y,n}^*h_n}$, the ambient compact-support projection, with the same symmetry convention: its $\\pi_p$ is the evaluated mate of step 2, and its open factor is the open-immersion projection map named in that definition, followed by $Lj^*Lp^*\\cong La^*$. By [lem-sf-open-tensor-normalization], for the constant finite ring $A_n$ its canonical $\\gamma$ is precisely that named open-immersion projection map, and by [lem-coef-support-open-tensor-model] this canonical $\\gamma$ is the evaluation of the system open comparison used in step 3. Thus this composite is precisely the second arrow asserted in the statement, preceded by scalar balancing.",
-   "uses": [
-    "lem-coef-system-projection-evaluation",
-    "def-exchange-projection",
-    "lem-coef-hom-tower-scalar-model",
-    "lem-sf-open-tensor-normalization",
-    "lem-coef-support-open-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
-   }
-  },
-  {
-   "text": "For the Hom comparison fixed in step 5, use [lem-coef-hom-tower-scalar-model]: its full-system isomorphism $\\mathsf H_N(K)\\cong\\rho_{0*}h$ has finite comparison for derived scalar extension along $R_X\\to(A_n)_X$, normalized by the actual reduction unit; its scalar internal-Hom comparison carries evaluation, after the scalar-extension unit, to restricted quotient-linear evaluation. Thus transporting $\\widetilde\\beta$ along it does not insert a further automorphism into the finite word just computed. The compact-support comparison of [lem-coef-support-open-tensor-model] identifies $e_nB_K$ with $R\\Gamma(Y,F_nK_n)$, including direct-image composition and scalar restriction. For $B_N$ the same equality $e_nRg_{Y*}^{\\mathcal Q}Rp_*^{\\mathcal Q}j_!N\\cong R\\Gamma(Y,Rp_{*,n}j_!N_n)$ follows from geometric evaluation in [lem-coef-semilinear-derived-sections], which applies to arbitrary $N$. These comparisons carry all units, counits and pullback compositions used in steps 2–5 to the finite ones. The required equality for $e_n\\beta_{K,N}$ follows. It was obtained by evaluating an already specified system composite; no reconstruction from compatible finite maps occurs.",
-   "uses": [
-    "lem-coef-hom-tower-scalar-model",
-    "lem-coef-support-open-tensor-model",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map); agent specialization to the sequence-site word of blueprint prop-coef-integral-dualizing, proof paragraph 2."
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Proof paragraph 2, finite adjunctions and their specified coefficient comparisons; Stacks sites-cohomology.tex, Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map).",
+    "note": "Agent-formulated subargument extracted from lem-coef-pairing-finite-normalization, not a verbatim assertion of Stacks or the blueprint."
    }
   }
  ],
  "proof_deps": [
-  "def-coef-semilinear-derived-calculus",
-  "def-exchange-projection",
-  "lem-coef-hom-tower-scalar-model",
-  "lem-coef-semilinear-derived-sections",
-  "lem-coef-semilinear-operations-existence",
-  "lem-coef-semilinear-system-existence",
-  "lem-coef-support-open-tensor-model",
-  "lem-coef-system-projection-evaluation",
-  "lem-sf-open-tensor-normalization"
+  "lem-sf-coef-finite-evaluation-existence",
+  "lem-sf-coef-finite-projection-word-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Proof paragraph 2: specified natural maps before limits; word-by-word specialization using existing system calculus and Stacks 07A6, 0B56."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Proof paragraph 2; witness construction and untransported word isolated, scalar-Hom transport proved by naturality of tensor evaluation."
  },
  "mathlib_searches": [
   {
@@ -231,9 +181,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-open-tensor-normalization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-22",
   "by": "L",
@@ -269,5 +217,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Re-delivery of 67c3 after a global-build return. The only change from the 67c3 reviewer FIX is in CoefFiniteProjectionEvaluationData.lean: FiniteSectionsComposition.normalization is now @DerivedCompositionNormalization with explicit category placeholders and the instances finitePushAdditive and finiteSectionsAdditive. Argument order checked against the signature at CoefficientProjectionAdjunctionData.lean:140; same form as the landed SectionsComposition.normalization; the proposition is unchanged. The other two modules are byte-identical to 67c3. The item node is identical. The def-coef-finite-projection-evaluation-data node equals the 67c3 fix JSON (adds FiniteSectionsComposition and FiniteModel.composition) plus review metadata; the pairing-data node changed only in review metadata. No stmt_dep changed between the deliveries. The mathematics re-confirmed: the pairing equation is balance, then signed symmetry, then q (sections mate, proper counit mate + finiteGamma + compositor, F_n(v)), and the comparisons are pinned. The finite symmetry and composition are pinned intrinsically, as in the 67c3 FIX. The sole sorry is the item theorem; no hollow definitions; docstrings carry source places; the report has Worker report, Second reading by NJ and the repair section. Not recompiled because no file changed; the worker reports scompile OK in 24.7, 37.7 and 5.1 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261028T072447-L-1950857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
