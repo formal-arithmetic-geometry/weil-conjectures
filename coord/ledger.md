@@ -20858,3 +20858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/M9/Sheaf.SixFunctors.CoefFiniteRealizationRestrictionSquare (stage 3; reviewer PASS; first push; landing 20261028T034852-L-3559517 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/N1/Sheaf.Paper.SystemFiniteRefinementMateRhsCore (stage 3; reviewer PASS; first push; landing 20261028T034853-L-3559670 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/N1/Sheaf.TraceFormula.NestedChosenScalarTensorValExt (stage 3; reviewer PASS; first push; landing 20261028T034854-L-3559843 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:48 L: merged deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (stage 3; reviewer PASS; first push; landing 20261028T034856-L-3560188 (interface); batch 20261028T034643; modules 3; new nodes 2)
