@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientNormalizedReductionModelExistence
+import Sheaf.Paper.CoefficientFiniteQuotientCalculusExistence
 
 /-! # Core normalized coefficient reduction witness
 
@@ -42,6 +44,8 @@ theorem coefficientNormalizedReductionCore (T : CoefficientDerivedSystemTensors 
     ∃ R : CoefficientDerivedSystemReduction l E W,
       R.toCoefficientDerivedSystemTensors = T ∧
       Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) := by
-  sorry
+  obtain ⟨R, hR⟩ := coefficientNormalizedReductionModel_exists l E W T
+  obtain ⟨Q⟩ := coefficientFiniteQuotientCalculus_exists l E W T
+  exact ⟨R, hR, ⟨hR.symm ▸ Q⟩⟩
 
 end WeilConjectures

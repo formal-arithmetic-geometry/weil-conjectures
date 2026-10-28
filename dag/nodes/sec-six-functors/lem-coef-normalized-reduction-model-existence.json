@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-normalized-reduction-model-existence",
+ "kind": "statement",
+ "title": "Existence of the normalized coefficient reduction model",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "statement": "For every coefficient tensor record T there exists a coefficient derived-system reduction record R whose tensor subrecord is T.",
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-sequence-site",
+  "def-weil-integral-reduction-tower",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-actual-scalar-derived-pair"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4, 07A6 and 0941; sequence projection and scalar-extension construction"
+ },
+ "proof": [
+  {
+   "text": "Apply the sequence projection derived adjunction and its limit projections to the completed coefficient ring and quotient tower. Transport the resulting adjunction through the strict-system sequence equivalence, identify finite evaluations with the actual scalar-derived pairs, and retain the prescribed tensor record T. The unit and counit projection equations, K-flat model and normalization fields are the transported equations.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-coef-actual-scalar-derived-pair"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-actual-scalar-derived-pair"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A6 and 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoefficientDerivedSystemReduction construction",
+   "results": "No existing theorem; the evaluation-data module supplies only the record.",
+   "date": "2026-10-28",
+   "verdict": "No existing theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CoefficientDerivedSystemReduction",
+   "results": "No specialized match.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient sequence reduction adjunction",
+   "results": "No specialized match.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionCore",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models-core",
+   "place": "Independent reduction-record construction split",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedReductionModelExistence",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedReductionModelExistence.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedReductionModel_exists",
+  "statement": "theorem coefficientNormalizedReductionModel_exists (T : CoefficientDerivedSystemTensors l E W) : ∃ R : CoefficientDerivedSystemReduction l E W, R.toCoefficientDerivedSystemTensors = T",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T020146-L-2472167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T020146-L-2472167",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
