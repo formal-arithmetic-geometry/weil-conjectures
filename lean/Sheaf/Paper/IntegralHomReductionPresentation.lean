@@ -5,9 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.IntegralHomReductionComponents
+import Sheaf.Paper.IntegralHomReductionNormalization
 
 /-! # One normalized integral reduction presentation
 
@@ -48,6 +47,9 @@ field of `ReductionPresentation`.
 theorem reduction_presentation_exists_at
     (a : TensorPresentation.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ) :
-    Nonempty (ReductionPresentation l E Y D hl a n) := by sorry
+    Nonempty (ReductionPresentation l E Y D hl a n) := by
+  obtain ⟨target⟩ := reduction_target_exists l E Y n
+  obtain ⟨m, _⟩ := reduction_normalization_exists l E Y D hl a n target
+  exact ⟨m⟩
 
 end WeilConjectures.IntegralHom
