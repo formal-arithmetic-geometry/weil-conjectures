@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- A finite morphism which is an isomorphism over a dense open of a reduced curve
 induces an injection on its cohomological Brauer group.
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
 lem-sc-brauer-zero-all-curves.md, Proof, Step 2 (normalization).
 (blueprint: lem-sc-brauer-finite-modification-injection)
 

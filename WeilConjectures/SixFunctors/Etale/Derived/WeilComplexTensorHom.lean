@@ -54,7 +54,7 @@ covariant variable. These are the Weil-category bifunctors of the blueprint.
 ## Implementation notes
 
 The blueprint states these facts for the Weil category `WeilD(X₀, E)` of pairs `(K, φ_K)` with
-`K ∈ D^b_c(X, E)`, `E` a finite extension of `ℚ_ℓ` (`def-wf-weil-category`). The `E`-adic
+`K ∈ D^b_c(X, E)`, `E` a finite extension of `ℚ_ℓ`. The `E`-adic
 categories `D^b_c(X, E)` are not available as categories carrying a derived tensor product and
 internal hom; the Weil category is modelled here by the strict Weil complexes of
 `sk-def-sf-weil-complexes` at a finite coefficient ring `Λ`, on which both operations exist and

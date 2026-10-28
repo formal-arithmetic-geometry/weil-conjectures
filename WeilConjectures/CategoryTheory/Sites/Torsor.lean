@@ -1063,7 +1063,7 @@ projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to
 Only the existence of a bijection is recorded. It is obtained from an injective resolution
 `0 → G → I → Q → 0`: both sides are identified with the cokernel of `Γ(I) → Γ(Q)`
 (`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
-(blueprint: `lem-sc-ext-torsor`) -/
+(blueprint: `lem-sc-torsor-h1`) -/
 theorem nonempty_equiv_ext_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (Abelian.Ext ((constantSheaf J AddCommGrpCat.{w}).obj
       (AddCommGrpCat.of (ULift ℤ))) G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=

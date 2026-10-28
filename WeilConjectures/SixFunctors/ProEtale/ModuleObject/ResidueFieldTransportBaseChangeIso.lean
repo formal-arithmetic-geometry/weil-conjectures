@@ -34,8 +34,6 @@ open Scheme CondensedRing PadicAlgCl
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
--- see `residueFieldDerivedUpperStarIso_cube`
 /-- **The base-change morphism and residue field module sheaves.** Assume that
 `residueFieldDerivedUpperStarIso` is compatible with the composition of derived pullbacks along
 `f' ≫ g` and `g' ≫ f`. Then `D(G_{Y'})` of the base-change morphism
@@ -77,7 +75,9 @@ theorem nonempty_arrowIso_map_exchangeRight_residueField (sq : CommSq g' f' f g)
     ?_
     (residueFieldDerivedPushHom ℓ E f) rfl (residueFieldDerivedPushHom ℓ E f') rfl M
     inferInstance inferInstance
-  · exact key
-  · exact residueFieldDerivedUpperStarIso_cube sq H₁ H₂
+  -- The types differ from the goal only in instance arguments; at default transparency the
+  -- unifier unfolds the morphisms of the derived categories instead (minutes).
+  · with_reducible_and_instances exact key
+  · with_reducible_and_instances exact residueFieldDerivedUpperStarIso_cube sq H₁ H₂
 
 end AlgebraicGeometry.ProEtale

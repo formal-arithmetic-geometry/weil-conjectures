@@ -15,7 +15,7 @@ At the integral stage `Λ = 𝒪_E` an object is a normalized system `K = (K_n)_
 objects `K_n ∈ D(Y_ét, 𝒪_E ⧸ 𝔪ⁿ⁺¹)` (`AlgebraicGeometry.Etale.NormalizedTower`), realized as the
 derived limit `R lim_n K_n`. The adic purity isomorphism is the realization of the
 finite-level purity isomorphisms `γ_{f,K_n}`, which form a morphism of normalized systems by
-the finite reduction of purity (blueprint `thm-pur-adic-reconstruction`).
+the finite reduction of purity.
 
 ## Main statements
 
@@ -77,7 +77,7 @@ noncomputable abbrev upperShriekLevel (K : NormalizedTower I Y) (n : ℕ) :
     𝐃(X, R ⧸ I ^ (n + 1)) :=
   (R(f)^![(R ⧸ I ^ (n + 1))]).obj (K.obj n)
 
-/-- Blueprint `thm-pur-adic-reconstruction`: Adic reconstruction (reconstruction step only)
+/-- Adic reconstruction (reconstruction step only)
 
 Let `K = (K_n)_n` be a normalized system on `Y` (`AlgebraicGeometry.Etale.NormalizedTower`,
 levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`). Let `S` and

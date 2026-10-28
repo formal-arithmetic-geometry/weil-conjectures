@@ -25,7 +25,7 @@ that the rank-one Weil sheaf it defines is punctually `ι`-pure of weight
 
 The proof of finiteness follows the blueprint. The values of `χ` on `π₁(C)` lie in a finite
 extension `E / ℚ_ℓ` (`sk-p-real-integral`); some power `χ ^ N` takes values in `1 + ℓ² 𝒪_E`, on
-which the logarithm is an injective homomorphism (`sk-d-real-log`). The coordinates of
+which the logarithm is an injective homomorphism (`det-d-real-log`). The coordinates of
 `log ∘ χ ^ N` in a `ℚ_ℓ`-basis of `E` are continuous homomorphisms `π₁(C) → ℚ_ℓ` invariant
 under conjugation by the Frobenius lift, hence zero
 (`AlgebraicGeometry.WeilGroup.eq_one_of_conj_invariant`).

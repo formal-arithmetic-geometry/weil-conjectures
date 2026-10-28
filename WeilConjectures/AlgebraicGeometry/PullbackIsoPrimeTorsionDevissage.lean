@@ -53,7 +53,7 @@ negative-degree term by zero. The five lemma (`lem-weil-pbc-five-lemma`) gives
 bijectivity for `G`.
 4. Apply step 3 to every `F[n]`. Cohomology commutes with this filtered colimit
 on both qcqs schemes (`lem-weil-pbc-cohomology-filtered-colimit`), and inverse
-image preserves colimits (`lem-weil-pbc-inverse-image-preserves-colimits`).
+image preserves colimits.
 Naturality makes the pullback maps a morphism of directed systems; their inverses
 are compatible too, so their colimit map is bijective. The canonical comparison
 isomorphisms identify this map with pullback on the colimit. Finally use naturality

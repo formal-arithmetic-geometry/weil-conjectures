@@ -69,7 +69,7 @@ The proof is that of
 projection formula for `p₂` at `p₁^* K ⊗ᴸ 𝒦_ψ[r]` (bounded constructible, `𝒦_ψ` being lisse of
 rank one) and `π'^* N` (in `Dᵇctf`) given by
 `AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`.
-(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`) -/
+(sketch blueprint: `prop-base-linear`; blueprint: `prop-base-linear`) -/
 theorem nonempty_iso_fourierTransform_tensor (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
@@ -103,7 +103,7 @@ from the base is the base change of the transform of the unit,
 for `N ∈ Dᵇctf(S, Λ)`, naturally in `N`. It is
 `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor` at `K = Λ_V`, composed with the
 left unitor `Λ_V ⊗ᴸ π^* N ≅ π^* N`.
-(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (1)) -/
+(sketch blueprint: `prop-base-linear`; blueprint: `prop-base-linear`, clause (1)) -/
 theorem nonempty_iso_fourierTransform_mapDerivedCategory (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructibleFiniteTor Λ S).ι ⋙
@@ -143,7 +143,7 @@ with an invertible complex pulled back from the base: it is
 `Dᵇctf(S, Λ)`, composed with the identifications `π^* Λ_S(m) ≅ Λ_V(m)` and
 `π'^* Λ_S(m) ≅ Λ_{V'}(m)`. That the isomorphism is one of Weil complexes when `K` carries a Weil
 structure is `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`.
-(sketch blueprint: `sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (2)) -/
+(sketch blueprint: `prop-base-linear`; blueprint: `prop-base-linear`, clause (2)) -/
 theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ)
     (b : Γ(pullback π π', ⊤)) (r m : ℤ) :
     Nonempty ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ⋙

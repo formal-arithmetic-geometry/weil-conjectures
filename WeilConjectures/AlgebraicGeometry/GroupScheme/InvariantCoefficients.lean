@@ -14,7 +14,8 @@ import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 # Coefficients of infinitesimal right translations
 
 Source: the invariant-extension argument in the Lie-ring paragraph of
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint
+`def-wf-lie-algebra-derivation`.
 -/
 
 @[expose] public section

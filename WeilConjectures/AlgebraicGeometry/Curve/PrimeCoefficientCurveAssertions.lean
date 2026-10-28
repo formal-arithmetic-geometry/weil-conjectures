@@ -67,8 +67,8 @@ points; their smooth-curve calculations follow [thm-sc-main]. For an open j:U ->
 intersect X_a. If U_a is empty, its extension by zero is zero and all assertions hold. Otherwise
 U_a is dense in the irreducible X_a; apply [lem-weil-pbc-curve-assertions-dense-open] to its
 constant sheaf, which is constructible and killed by r. This gives the assertions for extension by
-zero from U_a. Their finite pushforwards along i_a satisfy the assertions by
-[lem-weil-pbc-curve-assertions-finite-pushforward]. The stalk formula for
+zero from U_a. Their finite pushforwards along i_a satisfy the assertions by the
+finite-pushforward case of the curve assertions. The stalk formula for
 [def-weil-pbc-extension-by-zero] identifies j_! of the constant sheaf with the finite direct sum
 of these pushforwards. Split short exact sequences and [lemma-weil-pbc-eight-curve-devissage]
 assemble the sum. Zero-dimensional pieces also follow from step 1.
@@ -78,8 +78,7 @@ lemma-weil-pbc-smooth-curve-artin-schreier, thm-sc-main, def-sc-constant-sheaves
 def-weil-pbc-constructible-torsion, def-weil-pbc-extension-by-zero,
 lem-weil-pbc-curve-assertions-dense-open, lemma-weil-pbc-eight-curve-devissage,
 lem-weil-pbc-noetherian-finitely-many-components, lem-sc-smooth-normal,
-lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-closed-immersion-finite,
-lem-weil-pbc-curve-assertions-finite-pushforward.
+lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-closed-immersion-finite.
 
 3. Reduced case for $j_!\mathbf F_\ell$ (Stacks Lemma 0A3Q). Claim: if $X$ is a reduced separated
 finite-type $k$-scheme with $\dim X\le1$, $j:U\hookrightarrow X$ an open immersion and $\ell$ a
@@ -88,10 +87,10 @@ prime, then $\mathcal C(X,j_!\underline{\mathbf Z/\ell})$ holds. Proof. By
 $X^\nu$ of dimension $\le1$, a finite morphism $\nu:X^\nu\to X$ and a dense open
 $j':X'\hookrightarrow X$ with $\nu^{-1}(X')\to X'$ an isomorphism. Let
 $j^\nu:U^\nu=\nu^{-1}(U)\hookrightarrow X^\nu$. By step 2, $\mathcal
-C(X^\nu,j^\nu_!\underline{\mathbf Z/\ell})$ holds, hence by
-[lem-weil-pbc-curve-assertions-finite-pushforward] so does $\mathcal
-C(X,\nu_*j^\nu_!\underline{\mathbf Z/\ell})$. Over $X'$ the two sheaves agree: for $W\to X'$
-etale, $(\nu_*E)(W)=E(W\times_X X^\nu)$ [def-weil-pbc-direct-image] and
+C(X^\nu,j^\nu_!\underline{\mathbf Z/\ell})$ holds, hence by the finite-pushforward case of the
+curve assertions so does $\mathcal C(X,\nu_*j^\nu_!\underline{\mathbf Z/\ell})$. Over $X'$ the
+two sheaves agree: for $W\to X'$ etale, $(\nu_*E)(W)=E(W\times_X X^\nu)$
+[def-weil-pbc-direct-image] and
 $W\times_XX^\nu=W\times_{X'}\nu^{-1}(X')\cong W$, while extension by zero commutes with
 restriction to opens (stalk formula of [def-weil-pbc-extension-by-zero]); hence
 $j'^{-1}\nu_*j^\nu_!\underline{\mathbf Z/\ell}\cong j'^{-1}j_!\underline{\mathbf Z/\ell}$ (both
@@ -106,8 +105,7 @@ C(X,j'_!j'^{-1}\nu_*j^\nu_!\underline{\mathbf Z/\ell})=\mathcal
 C(X,j'_!j'^{-1}j_!\underline{\mathbf Z/\ell})$, which gives $\mathcal C(X,j_!\underline{\mathbf
 Z/\ell})$.
 
-Dependency nodes: lem-weil-pbc-reduced-curve-normalization,
-lem-weil-pbc-curve-assertions-finite-pushforward, def-weil-pbc-direct-image,
+Dependency nodes: lem-weil-pbc-reduced-curve-normalization, def-weil-pbc-direct-image,
 def-weil-pbc-extension-by-zero, def-weil-pbc-constructible-torsion,
 lem-weil-pbc-finite-pushforward-constructible-noetherian,
 lem-weil-pbc-curve-assertions-dense-open.
@@ -159,7 +157,7 @@ dense, its image is the whole inverse image. A surjective open immersion is an i
 proving the cartesian assertion without identifying schemes merely by their underlying sets.
 
 Dependency nodes: thm-pqf-zmt-factorization, etale-proposition-etale-reduced,
-def-nagata-scheme-theoretic-closure, def-weil-pbc-scheme-reduction,
+def-nagata-scheme-theoretic-image, def-weil-pbc-scheme-reduction,
 lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-composition,
 lem-weil-pbc-finite-over-separated-finite-type, lem-weil-pbc-integral-incomparability,
 lem-weil-pbc-finite-permanence-over-separated, lem-weil-pbc-finite-closed-map-finite-fibres,
@@ -170,11 +168,11 @@ cartesian square of step 5 (open immersions $j'$, $j$; $\bar f$ finite; $v$ its 
 [lemma-weil-pbc-finite-pushforward-extension-zero] says that the comparison morphism
 $\beta:j_!v_*E\to\bar f_*j'_!E$ of [def-weil-pbc-finite-open-comparison] is an isomorphism for
 every abelian sheaf $E$ on $V_{\Et}$. With $E=v^{-1}G$ this gives $j_!v_*v^{-1}G\cong\bar
-f_*j'_!v^{-1}G$. By [lem-weil-pbc-curve-assertions-finite-pushforward] for the finite $\bar f:Y\to
-X$, it suffices to prove $\mathcal C(Y,j'_!v^{-1}G)$.
+f_*j'_!v^{-1}G$. By the finite-pushforward case of the curve assertions for the finite
+$\bar f:Y\to X$, it suffices to prove $\mathcal C(Y,j'_!v^{-1}G)$.
 
 Dependency nodes: lemma-weil-pbc-finite-pushforward-extension-zero,
-def-weil-pbc-finite-open-comparison, lem-weil-pbc-curve-assertions-finite-pushforward.
+def-weil-pbc-finite-open-comparison.
 
 7. Filtration and reduction to the constant sheaf (Stacks Lemma 03SD, end). Let $0=E_0\subset
 E_1\subset\cdots\subset E_m=v^{-1}G$ be the filtration of step 4, with

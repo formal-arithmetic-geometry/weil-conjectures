@@ -180,7 +180,7 @@ containing $F_0$ and $\beta$ [lem-weil-pbc-separable-first-purely-inseparable], 
 finite and separable algebraic. Hence $\operatorname{Spec}F_1\to\operatorname{Spec}F_0$ is etale
 [lem-weil-pbc-finite-separable-extension-etale]. $A_0$ and $\bar\Lambda$ are local rings whose
 only prime is the maximal ideal [lem-weil-pbc-artinian-local-unique-prime], hence henselian
-[lem-weil-pbc-local-dimension-zero-henselian]. By the essential surjectivity in [lem-weil-pbc-
+[lem-weil-pbc-henselian-of-nil-maximal-ideal]. By the essential surjectivity in [lem-weil-pbc-
 henselian-finite-etale-equivalence] for $A_0$ and the finite etale $F_0$-algebra $F_1$ there is
 a finite etale $A_0$-algebra $D'$ with an $F_0$-algebra isomorphism $D'/\mathfrak m_{A_0}D'\cong
 F_1$. $D'$ is finite over $A_0$, hence Noetherian [lem-weil-pbc-finite-type-algebra-noetherian];
@@ -189,7 +189,7 @@ local ring $D'$, which is Artinian [lem-weil-pbc-noetherian-local-quotient-artin
 residue field $F_1$, and $A_0\to D'$ is local.
 Uses: lem-weil-pbc-separable-first-purely-inseparable, def-weil-pbc-separable-algebraic-
 extension, lem-weil-pbc-finite-separable-extension-etale, lem-weil-pbc-artinian-local-unique-
-prime, lem-weil-pbc-local-dimension-zero-henselian, lem-weil-pbc-henselian-finite-etale-
+prime, lem-weil-pbc-henselian-of-nil-maximal-ideal, lem-weil-pbc-henselian-finite-etale-
 equivalence, lem-weil-pbc-finite-type-algebra-noetherian, lem-weil-pbc-noetherian-local-
 quotient-artinian-local.
 

@@ -51,7 +51,7 @@ open MvPolynomial
 /-- Let `r ≥ 0`. A field `K` has *property `Cᵣ`* if every homogeneous polynomial form
 `F ∈ K[x₁, …, x_N]` of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero in
 `K ^ N`, that is, there is `x : Fin N → K` with `x ≠ 0` and `F(x) = 0`.
-(blueprint: `sk-def-cr`, `def-sc-cr-field`) -/
+(blueprint: `def-sc-cr-field`) -/
 class IsCField (K : Type*) [Field K] (r : ℕ) : Prop where
   /-- A homogeneous form of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero. -/
   exists_ne_zero_and_eval_eq_zero {N d : ℕ} (F : MvPolynomial (Fin N) K)
@@ -71,7 +71,7 @@ theorem IsCField.mono {r s : ℕ} (hrs : r ≤ s) [h : IsCField K r] : IsCField 
 
 /-- An algebraically closed field is `C₀`: a homogeneous form of positive degree in at least two
 variables has a nontrivial zero.
-(blueprint: `sk-def-cr`) -/
+(blueprint: `def-sc-cr-field`) -/
 instance IsAlgClosed.isCField_zero [IsAlgClosed K] : IsCField K 0 where
   exists_ne_zero_and_eval_eq_zero {N d} F hF hd hN := by
     rw [pow_zero] at hN
@@ -125,7 +125,7 @@ instance IsAlgClosed.isCField_zero [IsAlgClosed K] : IsCField K 0 where
     simp [hd.ne']
 
 /-- An algebraically closed field is quasi-algebraically closed, since `C₀` implies `C₁`.
-(blueprint: `sk-def-cr`) -/
+(blueprint: `def-sc-cr-field`) -/
 instance IsAlgClosed.isQuasiAlgClosed [IsAlgClosed K] : IsQuasiAlgClosed K :=
   IsCField.mono zero_le_one
 
@@ -246,7 +246,7 @@ theorem IsQuasiAlgClosed.finrank_eq_one_of_isCentral (K D : Type*) [Field K] [Is
 
 /-- The Brauer group of a quasi-algebraically closed field vanishes: every central simple
 algebra over `K` is a matrix algebra over `K`.
-(blueprint: `lem-sc-c1-brauer-trivial`, `sk-prop-tsen`) -/
+(blueprint: `lem-sc-c1-brauer-trivial`, `lem-sc-tsen`) -/
 theorem IsQuasiAlgClosed.subsingleton_brauerGroup (K : Type u) [Field K] [IsQuasiAlgClosed K] :
     Subsingleton (BrauerGroup.{u, u} K) := by
   let one : CSA.{u, u} K := ⟨.of K K⟩

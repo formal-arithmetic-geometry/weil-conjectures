@@ -98,7 +98,7 @@ component the open is dense. Use `lemma-weil-pbc-smooth-curve-kummer-localizatio
 r invertible in k and `lemma-weil-pbc-smooth-curve-artin-schreier` otherwise; these are
 the characteristic branches of `thm-sc-main`. Apply
 `lem-weil-pbc-curve-assertions-dense-open` to pass to extension by zero.
-4. Apply `lem-weil-pbc-curve-assertions-finite-pushforward` to the component inclusions,
+4. Apply the finite-pushforward case of the curve assertions to the component inclusions,
 and `lemma-weil-pbc-eight-curve-devissage` to assemble their finite direct sum.
 The quotient coefficient sheaf is the constant prime-field module sheaf, and all
 comparison maps respect that coefficient identification. Package the witnesses and

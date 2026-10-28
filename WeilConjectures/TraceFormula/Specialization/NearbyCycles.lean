@@ -42,7 +42,8 @@ This file defines
 and states the two theorems on nearby cycles that Varshavsky's vanishing argument uses:
 * Gabber's Künneth formula and the commutation of nearby cycles with Verdier duality, in the form
   `Ψ_{X×X}(K ⊠ D K) ≅ Ψ_X K ⊠ D Ψ_X K`
-  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`);
+  (`ProEtale.CondensedRing.nonempty_specializationProd_externalProduct_iso`, proved downstream
+  once the dualizing maps of nearby cycles are constructed);
 * Verdier's zero-section theorem: the specialization `Sp_{X,x}(K) = Ψ_X K` restricted to the zero
   section vanishes if `K_x` does
   (`ProEtale.CondensedRing.isZero_upperStar_zeroSection_specialization`). It is deduced from its
@@ -194,50 +195,20 @@ instance isIso_specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAl
     (isTraitProduct_deformationProdModel k' x.left.ker) K.property L.property
   exact isIso_homMk_aux _
 
-/-- **Nearby cycles commute with Verdier duality** (Gabber; Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`), for the
-specialization to the normal cone: `Sp_{X,x}(D_X K) ≅ D(Sp_{X,x} K)`. Here
-`Sp_{X,x} = Li^* Rj_* Lε^*` with `ε : X_Ω ⟶ X` the base change to the geometric
-generic point; the duality on the geometric generic fibre `X_Ω` is relative to `Ω`, and
-`Lε^* D_X ≅ D_{X_Ω} Lε^*` on bounded constructible complexes since `ε` is a base change of
-fields. This only asserts that some isomorphism exists, which is weaker than the node: the node
-asserts that the canonical map `δ_{X,M}`, the adjoint of `θ_X ∘ S_X ev ∘ μ_X`, is an
-isomorphism. It is the instance of `NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso` for
-the deformation model, whose geometric generic fibre is the base change of `X`
-(`ProEtale.CondensedRing.isPullback_deformationModel_ε`). -/
-theorem nonempty_specialization_verdierDual_iso
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specialization k' x).obj (verdierDual ℓ K) ≅
-      verdierDual ℓ ((specialization k' x).obj K)) :=
-  NearbyCyclesModel.nonempty_nearbyCycles_verdierDual_iso ℓ
-    (q := deformationTotalToTrait X x.left.ker k') (g := deformationGenericToPoint X x.left.ker k')
-    (.of_isPullback ⟨inferInstance, inferInstance, inferInstance, IsPullback.of_hasPullback _ _,
-      isPullback_deformationSpecialFibre X _ k'⟩ ⟨deformationTotalToBase X _ k', rfl,
-        deformationTotalToBase_hom X _ k'⟩
-      (isPullback_deformationModel_ε k' x.left.ker)) K
-
-/-- **Nearby cycles of the universal kernel**: the specialization of the universal kernel
-`K ⊠ D K` is the universal kernel of the specialization,
-`Ψ_{X×X}(K ⊠ D_X K) ≅ Ψ_X K ⊠ Ψ_X D_X K ≅ Ψ_X K ⊠ D Ψ_X K`, by Gabber's Künneth formula
-(`ProEtale.CondensedRing.isIso_specializationKunnethMap`, blueprint
-`sk-prop-tf-nearby-external-kunneth`) and the commutation of nearby cycles with Verdier duality
-(`ProEtale.CondensedRing.nonempty_specialization_verdierDual_iso`, blueprint
-`sk-prop-tf-nearby-duality-foundation`). -/
-theorem nonempty_specializationProd_externalProduct_iso
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((specializationProd k' x).obj (externalProduct ℓ K (verdierDual ℓ K)) ≅
-      externalProduct ℓ ((specialization k' x).obj K)
-        (verdierDual ℓ ((specialization k' x).obj K))) :=
-  have e := nonempty_specialization_verdierDual_iso (ℓ := ℓ) k' x K
-  ⟨(asIso (specializationKunnethMap (ℓ := ℓ) k' x K _)).symm ≪≫
-    whiskerLeftIso _ ((boundedConstructibleUpperStar _ ℓ _).mapIso e.some)⟩
-
 end ZeroSection
 
 namespace Correspondence
 
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C} (hc : c.IsContractingAt y)
+
+variable (k' c y) in
+/-- The *specialized complex* `Ψ_X K = Sp_{X,x}(K)` on the normal cone `N_x X ⊗ k'` of
+`x = c₁(y)`: the specialization of `K` at `x`, the complex of the specialized correspondence
+(`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialCorrespondence`). -/
+noncomputable def specialComplex :
+    Dᵇc((deformationSpecialFibre X (y ≫ c.c₁).left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  (specialization k' (y ≫ c.c₁)).obj K
 
 namespace IsContractingAt
 
@@ -248,7 +219,7 @@ specialization `Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special 
 deformation of `c` to the normal cones (blueprint `det-tf-contracting-vanishing`). Its coefficient
 map plays no role in the vanishing argument and is taken to be zero. -/
 noncomputable def specialCorrespondence :
-    Correspondence ℓ ((specialization k' (y ≫ c.c₁)).obj K) where
+    Correspondence ℓ (c.specialComplex k' y) where
   C := deformationSpecialFibre c.C y.left.ker k'
   c₁ := hc.specialLeg₁ k'
   c₂ := hc.specialLeg₂ k'

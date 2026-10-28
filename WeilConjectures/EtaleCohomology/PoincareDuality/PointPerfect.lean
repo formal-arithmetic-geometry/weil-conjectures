@@ -426,8 +426,7 @@ lemma finite_and_hasInvertibleExponent_of_eq_bot (h : I = ⊥) :
 **`RΓ_c(X, K)` is perfect at the integral stage.** Let `Λ` be a principal ideal domain, complete
 for an ideal `I` with `Λ/I` finite of exponent invertible in `k`; this is the integral stage
 `Λ = 𝒪_E`, `I = 𝔪_E` for `E` finite over `ℚ_ℓ`. For `K ∈ D^b_c(X, Λ)`, the integral compactly
-supported cohomology is perfect. Following the blueprint
-(`def-weil-integral-rational-qbar-compact-support`), the integral `Ra_! K` is the derived limit
+supported cohomology is perfect. Following the blueprint, the integral `Ra_! K` is the derived limit
 `R lim_n Ra_!(K) ⊗ᴸ Λ/Iⁿ ≅ R lim_n Ra_!(K ⊗ᴸ Λ/Iⁿ)` of the finite-level compactly supported direct
 images, given here by any homotopy limit cone `c` of the tower of reductions of the étale
 `Ra_! K`; the integral `RΓ_c(X, K)` is `RΓ(Spec k, c.pt)`.

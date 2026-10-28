@@ -10,6 +10,8 @@ public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
+import WeilConjectures.WeilSheaf.Bidual
+import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -18,7 +20,7 @@ For a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-scheme
 the direct image with compact support `Rf₀!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) has a right adjoint `Rf^!` on Weil
 complexes; this is the constructible adjunction `Rf_! ⊣ Rf^!` of the six-functor chapter
-(`thm-coef-qbar-verdier`), stated here as
+(`det-pd-biduality-coefficients`), stated here as
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek`. The exceptional inverse image
 `AlgebraicGeometry.WeilComplex.upperShriek f` is *defined* as that right adjoint, which is how
 the blueprint characterizes it (`def-weil-exceptional-inverse-image`); so that no data is chosen
@@ -32,7 +34,7 @@ The statements of the duality theory for Weil complexes that the boundary dualit
 `sec-deligne-laumon-a1` uses belong to the chapters on the six functors and on smooth purity;
 they are stated here with `sorry`, each with the blueprint node it renders:
 
-- `thm-coef-qbar-verdier`: the adjunction `Rf₀! ⊣ Rf^!`, the fact that `𝔻_X` preserves Weil
+- `det-pd-biduality-coefficients`: the adjunction `Rf₀! ⊣ Rf^!`, the fact that `𝔻_X` preserves Weil
   complexes, its exactness, biduality `K ≅ 𝔻_X 𝔻_X K` and `Rf^! ≅ 𝔻_X f^* 𝔻_Y`;
 - `fix-cor-verdier-exchange`: `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X`;
 - `cor-pur-adic-and-rational-smooth-dualizing-complexes`: `ω_X ≅ ℚ̄_ℓ(d)[2d]` for `X` smooth of
@@ -65,10 +67,10 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The proper exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the constructible
-adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper morphism
-`g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes has a
-right adjoint `Rg^!`. The general case
+/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
+constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper
+morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
+has a right adjoint `Rg^!`. The general case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
@@ -96,7 +98,7 @@ abbrev HasUpperShriek : Prop :=
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
-/-- **The constructible exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the
+/-- **The constructible exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
 constructible adjunction `Rf_! ⊣ Rf^!`"; the exceptional inverse image itself is defined at the
 finite stage as `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`): for a
 separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes of finite type, the direct image
@@ -151,13 +153,13 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k₀`-scheme of finite type `X`: the
 exceptional inverse image of the constant Weil sheaf `ℚ̄_ℓ` on `Spec k₀` along the structure
-morphism (blueprint: `thm-coef-qbar-verdier`, `fix-cor-verdier-exchange`). -/
+morphism (blueprint: `det-pd-biduality-coefficients`, `fix-cor-verdier-exchange`). -/
 noncomputable def dualizingComplex : WeilComplex k₀ l X :=
   (upperShriek (X ↘ Spec (CommRingCat.of k₀))).obj
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))
 
 variable {X} in
-/-- **The Verdier dual preserves Weil complexes** (blueprint: `thm-coef-qbar-verdier`, the
+/-- **The Verdier dual preserves Weil complexes** (blueprint: `det-pd-biduality-coefficients`, the
 duality `D_{X,ℚ̄_ℓ} : D^b_c(X, ℚ̄_ℓ)ᵒᵖ ⥤ D^b_c(X, ℚ̄_ℓ)` is the internal hom into
 `ω_{X,ℚ̄_ℓ} = Ra_X^! ℚ̄_ℓ`): the derived internal hom `RHom(K, ω_X)` of a Weil complex `K` into
 the dualizing complex is a Weil complex. -/
@@ -168,7 +170,7 @@ theorem objectProperty_derivedHom_dualizingComplex (K : WeilComplex k₀ l X) :
 
 /-- The Verdier dual `𝔻_X K = RHom(K, ω_X)` of Weil complexes on a separated `k₀`-scheme of
 finite type `X`, the derived internal hom into the dualizing complex
-(blueprint: `thm-coef-qbar-verdier`, `fix-cor-verdier-exchange`). -/
+(blueprint: `det-pd-biduality-coefficients`, `fix-cor-verdier-exchange`). -/
 noncomputable def verdierDual : (WeilComplex k₀ l X)ᵒᵖ ⥤ WeilComplex k₀ l X :=
   ObjectProperty.lift _
     ((ObjectProperty.ι _).op ⋙ ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj)
@@ -180,15 +182,15 @@ lemma verdierDual_obj_obj (K : (WeilComplex k₀ l X)ᵒᵖ) :
       (ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.unop.obj) :=
   rfl
 
-/-- **Verdier biduality** (blueprint: `thm-coef-qbar-verdier`, "evaluation and biduality
+/-- **Verdier biduality** (blueprint: `det-pd-biduality-coefficients`, "evaluation and biduality
 descend, giving a natural isomorphism `K ≅ D_{X,ℚ̄_ℓ} D_{X,ℚ̄_ℓ} K`"). -/
 theorem nonempty_iso_verdierDual_rightOp_comp_verdierDual :
     Nonempty (𝟭 (WeilComplex k₀ l X) ≅ (verdierDual k₀ l X).rightOp ⋙ verdierDual k₀ l X) :=
   sorry
 
 open Pretriangulated.Opposite in
-/-- **The Verdier dual is exact** (blueprint: `thm-coef-qbar-verdier`, "an exact `ℚ̄_ℓ`-linear
-anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
+/-- **The Verdier dual is exact** (blueprint: `det-pd-biduality-coefficients`, "an exact
+`ℚ̄_ℓ`-linear anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
 triangles of `(WeilComplex X)ᵒᵖ` to distinguished triangles. -/
 theorem exists_commShift_isTriangulated_verdierDual :
     ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated := by
@@ -215,7 +217,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [HasUpperShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The exceptional inverse image as a conjugate of the pullback** (blueprint:
-`thm-coef-qbar-verdier`, "`Rf^! = D_X f^* D_Y`"): `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`. -/
+`det-pd-biduality-coefficients`, "`Rf^! = D_X f^* D_Y`"): `Rf^! L ≅ 𝔻_X f^* 𝔻_Y L`. -/
 theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex k₀ l Y) :
     Nonempty ((upperShriek f).obj L ≅
       (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) :=
@@ -262,8 +264,14 @@ a lisse Weil sheaf `P`, a locally free `ℚ̄_ℓ,X̄`-module of finite rank, an
 theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
     (N : WeilComplex k₀ l X) :
     Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅
-      (ProEtaleWeilSheaf.derivedHom k₀ l X N.obj).obj (op (WeilSheaf.toComplex.obj P).obj)) :=
-  sorry
+      (ProEtaleWeilSheaf.derivedHom k₀ l X N.obj).obj (op (WeilSheaf.toComplex.obj P).obj)) := by
+  obtain ⟨e⟩ := WeilSheaf.nonempty_iso_dual_dual P hP
+  obtain ⟨c, _, _, _, hc⟩ :=
+    ProEtaleWeilSheaf.derivedHom_single_resolution (k₀ := k₀) (l := l) (X := X)
+  obtain ⟨d, _⟩ := hc P.obj N.obj N.property.1.1
+  let e' := (WeilSheaf.objectProperty k₀ l X).ι.mapIso e
+  let h := (ProEtaleWeilSheaf.ihomBifunctor k₀ l X).mapIso e'.op
+  exact ⟨(Functor.rightDerivedFunctorNatIso h).app N.obj ≪≫ d.symm⟩
 
 end Lisse
 

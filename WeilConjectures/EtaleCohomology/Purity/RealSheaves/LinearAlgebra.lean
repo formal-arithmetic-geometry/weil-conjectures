@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 # Weights of eigenvalues, Frobenius modules, reality and semisimplification
 
 This file collects the finite-dimensional linear algebra of weights used in the purity theorem
-for real lisse Weil sheaves (blueprint subsections `sk-p-real-operations`, `sk-r-real-linear`
+for real lisse Weil sheaves (blueprint subsections `p-real-operations`, `sk-r-real-linear`
 and `sk-p-real-semi`).
 
 * An element `α` of a field `E` with an embedding `ι : E →+* ℂ` has *weight* `w` relative to

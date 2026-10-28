@@ -27,7 +27,7 @@ invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`; that they 
 structure sheaves of the standard cover, unique up to unique isomorphism, is
 `AlgebraicGeometry.ProjectiveLine.nonempty_twistData` (blueprint
 `lem-sc-p1-twist-exists`). The cohomology of the twists on `ℙ¹_k` is the case `d = 1` of
-Serre's computation of the cohomology of `ℙᵈ_k`, `sk-thm-picard-pn`.
+Serre's computation of the cohomology of `ℙᵈ_k`, `det-thm-picard-pn`.
 
 ## Main statements
 

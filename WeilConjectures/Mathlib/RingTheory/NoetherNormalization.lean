@@ -50,10 +50,10 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 
 ## Blueprint
 
-- `sk-i-real-normalization`: Noether normalization.
+- `det-i-real-normalization`: Noether normalization.
 - `lem-zl-noether-normalization-field`: Mathlib's `exists_finite_inj_algHom_of_fg`.
 - `lem-zl-noether-normalization-dimension`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
-- `sk-i-geometry`: dimension drop.
+- `det-i-geometry`: dimension drop.
 - `lem-zl-spread-normalization`: `Algebra.FiniteType.exists_finite_aeval_away`.
 - `lem-pc-dim-base-change`: `ringKrullDim_tensorProduct_of_finiteType`.
 -/
@@ -102,7 +102,7 @@ theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
     exact_mod_cast (ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin).symm.trans hB
   exact ⟨g, hg, hfin⟩
 
-/-- Blueprint `sk-i-real-normalization`: One-dimensional Noether normalization.
+/-- Blueprint `det-i-real-normalization`: One-dimensional Noether normalization.
 
 A finitely generated algebra `B` of Krull dimension one over a field `K` admits an injective
 `K`-algebra map from the polynomial ring `K[T]` making `B` a finite module.
@@ -121,7 +121,7 @@ theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
 
 /-- A proper closed subset of an irreducible affine variety has strictly smaller dimension: for a
 finitely generated domain `A` over a field and a nonzero prime `P` of `A`,
-`dim (A ⧸ P) < dim A`. (blueprint: `sk-i-geometry`) -/
+`dim (A ⧸ P) < dim A`. (blueprint: `det-i-geometry`) -/
 theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing A] [IsDomain A]
     [Algebra k A] [Algebra.FiniteType k A] (P : Ideal A) [P.IsPrime] (hP : P ≠ ⊥) :
     ringKrullDim (A ⧸ P) < ringKrullDim A :=

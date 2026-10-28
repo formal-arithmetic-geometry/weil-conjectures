@@ -72,7 +72,7 @@ variable {K : Type u} [Field K] {C : Scheme.{u}}
 
 A Jacobian torsion datum for a proper smooth geometrically integral curve `p : C₀ ⟶ Spec K`
 over a finite field and a prime `l` consists of an abelian variety `J₀` over `K` representing the
-degree-zero relative Picard functor `Pic⁰_{C₀/K}` (blueprint `sk-def-av-jacobian`), together with
+degree-zero relative Picard functor `Pic⁰_{C₀/K}` (blueprint `def-sc-jacobian`), together with
 a compatible system of isomorphisms
 
 `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]`

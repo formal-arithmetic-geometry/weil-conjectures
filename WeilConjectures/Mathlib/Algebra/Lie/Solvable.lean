@@ -22,7 +22,7 @@ preserved by isomorphisms; in particular it is a characteristic ideal.
 
 ## Blueprint
 
-The blueprint subsection `sk-d-lie` consists of definitions and facts already in Mathlib:
+The blueprint subsection `det-d-lie` consists of definitions and facts already in Mathlib:
 * `def-wf-lie-algebra`: `LieRing`/`LieAlgebra`, `LieIdeal`, `LieAlgebra.derivedSeries`,
   `LieAlgebra.IsSolvable`, the quotient `L ⧸ I`, `LieModule`, `LieModule.toEnd`;
 * `def-wf-semisimple-lie-algebra`: `LieAlgebra.HasTrivialRadical`;

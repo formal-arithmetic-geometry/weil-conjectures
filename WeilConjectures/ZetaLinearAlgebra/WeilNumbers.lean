@@ -37,7 +37,7 @@ section Defs
 
 variable {K : Type*} [Field K] [Algebra ℚ K]
 
-/-- Blueprints `def-weil-numbers` and `sk-def-roots`: `α` is a *`q`-Weil number of weight `w`* if
+/-- Blueprints `def-weil-numbers` and `det-def-roots`: `α` is a *`q`-Weil number of weight `w`* if
 it is algebraic
 over `ℚ` and every `ℚ`-embedding `τ : ℚ(α) → ℂ` satisfies `‖τ α‖ = q ^ (w / 2)`. -/
 def IsWeilNumber (q : ℕ) (w : ℝ) (α : K) : Prop :=
