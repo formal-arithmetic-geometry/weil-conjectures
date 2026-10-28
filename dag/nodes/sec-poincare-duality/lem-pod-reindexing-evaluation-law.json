@@ -9,26 +9,51 @@
  },
  "proof": [
   {
-   "text": "Choose flat-term K-flat and K-injective representatives. Apply the one-sided chain-transpose equation, then use chain_projection and tensorChain_pure on pure generators. Sheafification extensionality and localization transport the equality to arbitrary derived objects.",
+   "text": "For K-flat P and K-injective I choose a K-flat resolution A → Hom(P,I). Its localized map followed by the inverse fixed Hom model is an isomorphism A_Q → RHom(P_Q,I_Q). This lets us test the desired evaluation equality after the tensor of that isomorphism and the identity of P_Q.",
    "uses": [
-    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary chain tensor-Hom equivalence to uncurry A → Hom(P,I). On reindexing, the Hom projection equation chain_projection and the tensor-generator equation tensorChain_pure identify both chain maps on every pure tensor. Sheafification and total-complex extensionality prove equality of the chain maps.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-pod-reindexing-coherence-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientTensorCurry_normalize on both sites to the chain maps. The fixed K-injective Hom model is precisely the augmentation expression in that theorem. Combine these two equations with tensor_model, derived_model, and naturality of podReindexingDerivedFactors. Naturality of the closed counit in both variables cancels the representative isomorphisms and proves the evaluation law for P_Q and I_Q.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "def-pod-reindexing-coherence-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived M is isomorphic to the localization of a K-flat resolution, and every derived N to that of a K-injective resolution. Transport the representative evaluation equality along these isomorphisms, using the tensor and Hom comparison naturality and the two-variable evaluation identity of the closed structure.",
+   "uses": [
+    "lem-pc-kflat-resolution",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-sf-coefficient-tensor-curry-normalization"
+    "def-pod-reindexing-coherence-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-hom-kflat-chain-transpose",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sf-coefficient-tensor-curry-normalization"
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-pod-reindexing-coherence-data",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N4",
+  "group": "E4",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Step 4"
+  "place": "Step 4; componentwise tensor-Hom normalization and transport along resolutions, implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -96,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261027T234124-L-4700",
+  "landing": "20261028T020328-L-2495494",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
