@@ -13304,6 +13304,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowe
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProFiniteEtaleTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
@@ -14004,6 +14005,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisation
+public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisationUnit
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariants
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariantsUnit
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
