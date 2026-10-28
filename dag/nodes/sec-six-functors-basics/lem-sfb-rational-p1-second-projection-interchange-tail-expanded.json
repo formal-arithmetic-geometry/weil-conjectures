@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-rational-p1-second-projection-interchange-tail-expanded",
+ "kind": "statement",
+ "title": "Expanded fixed projection-tail cancellation",
+ "statement": "After eliminating the unused local bindings and expanding `secondForwardProjection`, the fixed composite of `secondTraceStrengthTail`, the twisted `secondExtractProjection`, and `twistProjectionMap` is the explicit projection-map composite.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-second-pretrace-data",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "lem-sfb-rational-p1-second-projection-interchange-core"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: monoidal strength naturality and cancellation of the fixed projection tail."
+ },
+ "proof": [
+  {
+   "text": "Unfold the fixed maps, cancel the inverse and forward tensorShiftIso pairs, use the canonical self-square pullback comparison and normalized line comparisons, and reassociate the projection formula composite.",
+   "uses": [
+    "def-sfb-rational-p1-second-pretrace-data",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "lem-sfb-rational-p1-second-projection-interchange-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-p1-second-pretrace-data",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "lem-sfb-rational-p1-second-projection-interchange-core"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: explicit fixed projection-tail cancellation after removing unused let bindings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of a monoidal strength with an arbitrary second tensor morphism",
+   "results": "No direct match for the fixed derived-category interface.",
+   "date": "2026-10-28",
+   "verdict": "The generic coherence step is isolated as a project theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensor associator braiding monoidal functor naturality",
+   "results": "Generic coherence lemmas only; no fixed rational P1 map.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "secondTraceStrengthTail projection tail",
+   "results": "No existing declaration.",
+   "date": "2026-10-28",
+   "verdict": "New split is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondProjectionInterchangeTail",
+  "date": "2026-10-28",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-projection-interchange-tail",
+   "place": "Explicit fixed projection-tail cancellation after unfolding the forward projection.",
+   "via": [
+    "lem-sfb-rational-p1-second-projection-interchange-tail"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondProjectionTailCore",
+  "file": "lean/Sheaf/Paper/RationalP1SecondProjectionTailCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_projection_tail_cancellation_expanded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.second_projection_tail_cancellation_expanded"
+  ],
+  "statement": "theorem second_projection_tail_cancellation_expanded\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (K : DerivedCategory (Modules (coefficient l c).X Y)) :\n    let Λ := (coefficient l c).X\n    let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)\n    let H := twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))\n    let Q := (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj\n      (((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n        (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n    let T := (((DerivedCategory.singleFunctor\n      (Modules Λ (diagonalSurface Y)) 0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n    secondTraceStrengthTail Λ Y (line l c (ProjectiveLine Y)) K Q ≫\n        H.map (secondExtractProjection l c k p hpl Y K) ≫\n        twistProjectionMap Λ (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj (H.obj (F.obj K))) =\n      (projectionMap Λ (secondProjection Y))\n        (H.obj (F.obj K)) T ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (tensorHom (secondPullComparison l c k p hpl Y K).inv (𝟙 T) ≫\n            (tensorShiftIso Λ (diagonalSurface Y) (line l c (diagonalSurface Y))\n              ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj (H.obj (F.obj K)))).hom)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261028T020856-L-2558231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261028T020856-L-2558231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

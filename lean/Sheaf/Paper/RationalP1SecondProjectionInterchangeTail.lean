@@ -5,6 +5,7 @@ Released under Apache 2.0 license.
 module
 
 public import Sheaf.Paper.RationalP1SecondProjectionInterchangeCore
+import Sheaf.Paper.RationalP1SecondProjectionTailCore
 
 /-! Cancellation of the fixed Tate projection tail. -/
 
@@ -12,6 +13,7 @@ public import Sheaf.Paper.RationalP1SecondProjectionInterchangeCore
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u
@@ -52,6 +54,8 @@ theorem second_projection_tail_cancellation
           (secondLineComparison l c k p hpl Y)
           ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj (H.obj (F.obj K))) =
       secondForwardProjection l c k p hpl Y K := by
-  sorry
+  dsimp
+  simpa only [secondForwardProjection] using
+    (second_projection_tail_cancellation_expanded l c k p hpl Y K)
 
 end AlgebraicGeometry.ProEtale.RationalP1
