@@ -6,6 +6,9 @@ module
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.PurTwistSheaves
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+public import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
+import Sheaf.Paper.FrobeniusIntegralRootTransportModuleLift
+import Sheaf.Paper.FrobeniusIntegralRootTransportModuleUnit
 
 /-! # Module adjunction glue for integral root transport
 
@@ -19,6 +22,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
@@ -73,6 +77,52 @@ theorem frobeniusIntegralRootTransport_moduleGlue
             (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l
               E).pull g)).unit.app (purTwistIntegralModule Y l E)).val.app (op V) t) =
         φ.hom.app (op V) t := by
-  sorry
+  obtain ⟨f, hf⟩ := frobeniusIntegralRootTransport_moduleLift l E g φ hscalar
+  let adj := proEtaleRingModuleAdjunction g
+    (completedIntegralCommRingSheafUnrestricted l E Y)
+    (completedIntegralCommRingSheafUnrestricted l E X)
+    ((PurCompactSupport.completed l E).pull g)
+  have hunit : IsIso ((SheafOfModules.toSheaf _).map (adj.unit.app
+      (purTwistIntegralModule Y l E))) :=
+    frobeniusIntegralRootTransport_moduleUnit_isIso l E g
+  have hcomp : (SheafOfModules.toSheaf _).map (adj.unit.app
+      (purTwistIntegralModule Y l E)) ≫
+      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).map
+        ((SheafOfModules.toSheaf _).map f) = φ := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    ext t
+    exact hf V.unop t
+  have hmap : IsIso ((SheafOfModules.toSheaf _).map f) := by
+    have h := proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0}
+      g AddCommGrpCat.{u + 1}
+    letI : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).IsEquivalence := h.1
+    letI : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).IsEquivalence :=
+      (proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).isEquivalence_right_of_isEquivalence_left
+    have hc : IsIso ((SheafOfModules.toSheaf _).map (adj.unit.app
+        (purTwistIntegralModule Y l E)) ≫
+        (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).map
+          ((SheafOfModules.toSheaf _).map f)) := by
+      rw [hcomp]
+      exact hφ
+    have hd : IsIso ((proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).map
+        ((SheafOfModules.toSheaf _).map f)) :=
+      IsIso.of_isIso_comp_left
+        ((SheafOfModules.toSheaf _).map (adj.unit.app
+          (purTwistIntegralModule Y l E)))
+        ((proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).map
+          ((SheafOfModules.toSheaf _).map f))
+    exact isIso_of_reflects_iso ((SheafOfModules.toSheaf _).map f)
+      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1})
+  have hfiso : IsIso f := by
+    exact isIso_of_reflects_iso f (SheafOfModules.toSheaf _)
+  let e : (proEtaleRingModulePullback g (completedIntegralCommRingSheafUnrestricted l E Y)
+      (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l E).pull
+        g)).obj (purTwistIntegralModule Y l E) ≅
+      (purTwistIntegralModule X l E) := asIso f
+  refine ⟨e, ?_⟩
+  intro V t
+  exact hf V t
 
 end WeilConjectures

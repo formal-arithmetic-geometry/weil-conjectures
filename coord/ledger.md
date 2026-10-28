@@ -20912,3 +20912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/V5/Sheaf.WeilSheaf.CoefficientShiftedTateComparison (stage 3; reviewer PASS; first push; landing 20261028T034958-L-3576334 (interface); batch 20261028T034643; modules 5; new nodes 4)
 - 03:50 L: merged deliver/V6/Sheaf.Paper.ComparisonNormalizationReflectsUniversal (stage 3; reviewer PASS; first push; landing 20261028T034959-L-3576591 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:50 L: merged deliver/V8/Sheaf.Paper.FrobeniusIntegralRootTransportAux (stage 3; reviewer PASS; first push; landing 20261028T035001-L-3576748 (interface); batch 20261028T034643; modules 4; new nodes 3)
+- 03:50 L: merged deliver/V9/Sheaf.Paper.FrobeniusIntegralRootTransportModuleGlue (stage 3; reviewer PASS; first push; landing 20261028T035002-L-3577017 (interface); batch 20261028T034643; modules 3; new nodes 2)

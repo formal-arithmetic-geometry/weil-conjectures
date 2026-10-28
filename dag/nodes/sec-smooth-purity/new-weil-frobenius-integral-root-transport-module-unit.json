@@ -1,0 +1,88 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; module adjunction and sheafification"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusIntegralRootTransportModuleGlue",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-weil-frobenius-integral-root-transport-module-glue",
+   "place": "Auxiliary step extracted from the module glue proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "new-weil-frobenius-integral-root-transport-module-unit",
+ "title": "Module adjunction unit isomorphism for an isomorphic scheme map",
+ "statement": "For an isomorphism of schemes, the underlying additive sheaf map of the canonical module adjunction unit is an isomorphism.",
+ "proof": [
+  {
+   "text": "The inverse-image functor on pro-etale sheaves is an equivalence for an isomorphic scheme map. Transport this equivalence through the coefficient-ring comparison and reflect the unit along the underlying sheaf functor.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; module adjunction and sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusIntegralRootTransportModuleUnit",
+  "file": "lean/Sheaf/Paper/FrobeniusIntegralRootTransportModuleUnit.lean",
+  "declaration": "WeilConjectures.frobeniusIntegralRootTransport_moduleUnit_isIso",
+  "statement": "theorem frobeniusIntegralRootTransport_moduleUnit_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] : IsIso ((SheafOfModules.toSheaf _).map ((proEtaleRingModuleAdjunction g (completedIntegralCommRingSheafUnrestricted l E Y) (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l E).pull g)).unit.app (purTwistIntegralModule Y l E)))",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "group": "V9",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; module adjunction and sheafification"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T035002-L-3577017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T035002-L-3577017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
