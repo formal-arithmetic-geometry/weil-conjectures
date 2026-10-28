@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J and 093M; associated module sheafification Tag 03CY."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicOrdinaryScalarModel",
+  "date": "2026-10-28",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-ordinary-scalar-model",
+   "place": "Rank-one comparison and finite-presentation extension below the ordinary scalar model lemma.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-ordinary-scalar-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between constant quotient module sheaf and completed scalar extension",
+   "results": "General constant sheaf and scalar-extension declarations; no theorem matching the chart-level rank-one comparison.",
+   "date": "2026-10-28",
+   "verdict": "No existing declaration has the required source and target functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor source target Iso ModuleCat restrictScalars",
+   "results": "General ModuleCat.restrictScalars and NatIso constructors only; no finite completed scalar comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdicOrdinaryScalar|completed.*constant.*quotient",
+   "results": "Only the item module contains this chart-level comparison; the completed reduction declarations are lower-level inputs.",
+   "date": "2026-10-28",
+   "verdict": "The split obligations are new project statements."
+  }
+ ],
+ "id": "new-s3-finite-perfect-adic-ordinary-scalar-compatibility",
+ "title": "Finite-presentation extension of ordinary scalar compatibility",
+ "statement": "For the ordinary source and target functors of [new-s3-finite-perfect-adic-ordinary-scalar-components], any family of isomorphisms whose consecutive square commutes on the rank-one quotient module has the same commuting square for every quotient module.",
+ "proof": [
+  {
+   "text": "Use the exactness and finite-coproduct preservation of the ordinary source and target to transport the assumed rank-one square to finite free modules.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-scalar-realization",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite free presentation of a quotient module and cokernel naturality descend the square to the given module.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-scalar-realization",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093M and 03CY, extension from free presentations."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicOrdinaryScalarCompatibility",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicOrdinaryScalarCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicOrdinaryScalar_compatibility",
+  "statement": "theorem finitePerfectAdicOrdinaryScalar_compatibility\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)\n    (f : W ⟶ finitePerfectAdicChartObject V U)\n    (e : ∀ n : ℕ, finitePerfectAdicOrdinaryScalarSource X d V U W f n ≅\n      finitePerfectAdicOrdinaryScalarTarget X d W n)\n    (hunit : ∀ (n : ℕ),\n      (e (n + 1)).hom.app\n          ((ModuleCat.restrictScalars\n            (Ideal.Quotient.factorPowSucc d.ideal (n + 1))).obj\n            (ModuleCat.of (A ⧸ d.ideal ^ (n + 1))\n              (A ⧸ d.ideal ^ (n + 1)))) ≫\n        (finitePerfectAdicOrdinaryScalarTargetStep X d W n).hom.app\n          (ModuleCat.of (A ⧸ d.ideal ^ (n + 1))\n            (A ⧸ d.ideal ^ (n + 1))) =\n      (finitePerfectAdicOrdinaryScalarSourceStep X d V U W f n).hom.app\n          (ModuleCat.of (A ⧸ d.ideal ^ (n + 1))\n            (A ⧸ d.ideal ^ (n + 1))) ≫\n        (e n).hom.app\n          (ModuleCat.of (A ⧸ d.ideal ^ (n + 1))\n            (A ⧸ d.ideal ^ (n + 1)))) :\n    ∀ (n : ℕ) (N : ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))),\n      (e (n + 1)).hom.app\n          ((ModuleCat.restrictScalars\n            (Ideal.Quotient.factorPowSucc d.ideal (n + 1))).obj N) ≫\n        (finitePerfectAdicOrdinaryScalarTargetStep X d W n).hom.app N =\n      (finitePerfectAdicOrdinaryScalarSourceStep X d V U W f n).hom.app N ≫\n        (e n).hom.app N",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-28"
+ },
+ "stmt_deps": [
+  "new-s3-finite-perfect-adic-ordinary-scalar-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261028T035029-L-3582625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261028T035029-L-3582625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
