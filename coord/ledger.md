@@ -20945,3 +20945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:49 L: returned deliver/D4/Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsSymmetric (reviewer RETURN: (the landing tools, head 3c999a16a) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
 - 05:49 L: returned deliver/H3/Sheaf.Paper.RationalP1ScalarChernSomeRaw (reviewer RETURN: (the landing tools, head 77e91819a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 05:49 L: returned deliver/K3/Sheaf.Paper.IntegralHomEvaluationTransport (reviewer RETURN: (the landing tools, head c64b3f697) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
+- 05:49 L: returned deliver/U1/Sheaf.Paper.IntegralHomComparisonUncurry (reviewer RETURN: (the landing tools, head 3a96c43db) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
