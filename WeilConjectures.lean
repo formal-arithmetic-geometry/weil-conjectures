@@ -14089,6 +14089,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegralInput
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothUnit
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenImmersionLowerShriekComp
@@ -14110,6 +14111,7 @@ public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExcha
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
+public import WeilConjectures.TraceFormula.Specialization.SmoothBaseChangePadicAlgCl
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
 public import WeilConjectures.TraceFormula.Specialization.StructuralProduct
