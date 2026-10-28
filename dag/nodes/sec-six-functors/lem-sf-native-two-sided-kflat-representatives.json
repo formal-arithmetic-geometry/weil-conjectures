@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-native-two-sided-kflat-representatives",
+ "kind": "statement",
+ "title": "Native derived objects admit two-sided K-flat representatives",
+ "statement": "Let k₀ be a finite field, l a prime unequal to its characteristic, and X a separated finite-type k₀-scheme. Every object M of DerivedCategory(ProEtaleWeilSheaf k₀ l X) is isomorphic to Q(P) for a cochain complex P satisfying NativeIsKFlat k₀ l X [def-sf-native-derived-tensor-layer], namely preservation of quasi-isomorphisms under nativeTensorTotal in either variable.",
+ "stmt_deps": [
+  "def-sf-native-derived-tensor-layer"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas lemma-K-flat-resolution (06YS) and lemma-K-flat-quasi-isomorphism (06YN), transported by the native ringed equivalence"
+ },
+ "proof": [
+  {
+   "text": "Choose the native additive ringed equivalence b before deriving tensors; the finite-type hypotheses are exactly those required by this bridge.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor-Hom adjunction is a parametrized adjunction for nativeTensorBifunctor. Its additivity follows by evaluating the proved additivity of the flipped bifunctor. Obtain the normalized underived comparison and its total chain comparison with the actual Koszul scalar sign.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data",
+    "lem-sf-native-weil-tensor-ringed-chain-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a complex K representing M. Resolve b(K) by a ringed K-flat complex L with quasi-isomorphism q:L→b(K). Set P=b.inverse(L); compose b.inverse(q) with the equivalence unit inverse to get r:P→K. Exact equivalences preserve quasi-isomorphisms, so r is one.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an abstract additive equivalence and a chain comparison, transport acyclicity through the equivalence. The signed total flip, chain comparison and a fixed model isomorphism identify both native tensor directions with the ringed tensor; symmetry and ringed K-flatness give both acyclicity conclusions. A private helper proves these two preservation tests before specializing to the native data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any quasi-isomorphism f, its cone is acyclic. The tensor mapping-cone comparison in each variable identifies the corresponding tensor of its cone with the cone of the tensor of f. Thus P satisfies both native preservation tests. Localize r and compose its isomorphism with Q(K)≅M. Zero objects and the empty scheme require no exceptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-ringed-bridge",
+  "lem-sf-native-weil-tensor-ringed-underived-data",
+  "lem-sf-native-weil-tensor-ringed-chain-data",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas lemma-K-flat-resolution (06YS) and lemma-K-flat-quasi-isomorphism (06YN), transported by the native ringed equivalence; explicit categorical proof in the delivered Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every derived sheaf module has a K flat complex representative",
+   "results": "8 hits, including DerivedCategory.instEssSurjCochainComplexIntQ and flat-module exactness.",
+   "date": "2026-10-28",
+   "verdict": "Essential surjectivity of Q supplies an arbitrary complex; the native two-sided K-flat property still needs proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorFlipIso",
+   "results": "8 hits, including the signed total flip and its naturality.",
+   "date": "2026-10-28",
+   "verdict": "Use the flip to match the reversed native ringed comparison; no native representative theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Kk][Ff]lat|[Kk][Ff]lat.*representative|mapBifunctorMappingCone",
+   "results": "No Mathlib match. Local source search finds the ringed independent-coefficient resolution and the two tensor mapping-cone comparisons.",
+   "date": "2026-10-28",
+   "verdict": "Transport the existing ringed resolution and use the existing generic cone isomorphisms; a new proved native theorem is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorUnitNormalization",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native open tensor normalization: Lemmas lemma-K-flat-resolution (06YS) and lemma-K-flat-quasi-isomorphism (06YN), transported by the native ringed equivalence",
+   "via": [
+    "new-lem-sf-native-open-tensor-unit-normalization",
+    "lem-sf-native-open-tensor-normalization",
+    "lem-sf-native-open-tensor-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeTwoSidedKFlatRepresentatives",
+  "file": "lean/Sheaf/Paper/NativeTwoSidedKFlatRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_two_sided_kflat_representatives",
+  "statement": "theorem native_two_sided_kflat_representatives\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :\n    ∃ P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,\n      NativeIsKFlat k₀ l X P ∧ Nonempty (DerivedCategory.Q.obj P ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T072344-L-1936616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T072344-L-1936616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

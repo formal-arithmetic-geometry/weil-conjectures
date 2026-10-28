@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-open-tensor-unit-totalization",
+ "kind": "statement",
+ "title": "Totalization preserves the open tensor unit equation",
+ "statement": "Let A and B be abelian categories with countable coproducts, E:A→B and R:B→A additive adjoints, and F and G additive bifunctors on A and B. Suppose the sheaf comparison γ:G(EM,N)≅E(F(M,RN)) has adjoint transpose F(η_M,id) followed by the inverse of the specified restriction isomorphism ρ:R(G(M,N))≅F(RM,RN). Suppose total complex comparisons Γ and Ρ have the prescribed homogeneous summand formulas for γ and ρ. Then for every pair of unbounded cochain complexes P,T, F_total(η_P,id) followed by Ρ_(EP,T)^(-1) and R_complex(Γ_(P,T)) equals the termwise adjunction unit at F_total(P,RT).",
+ "stmt_deps": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-j-shriek-and-tensor, totalization and adjoint transpose of its natural comparison"
+ },
+ "proof": [
+  {
+   "text": "Equality of chain maps is detected in every degree. The coproduct insertions of the homogeneous (p,q) summands jointly detect maps out of a tensor total, including the zero and unbounded cases.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the restriction summand identity with its inverse. It states that the tensor insertion followed by the inverse total restriction equals the inverse sheaf restriction followed by R of the original insertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Write the sheaf transpose using the adjunction unit and postcompose with R(γ.hom). Cancellation of γ.inv followed by γ.hom gives F(η,id) followed by ρ.inv and R(γ.hom) equal to η at F(M,RN).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Move F_total(η,id) through a homogeneous insertion by bifunctor naturality; substitute the inverse restriction summand identity and then the Γ summand identity. The preceding sheaf equation leaves η followed by R(E(insertion)). Naturality of η identifies this with insertion followed by the termwise unit. Joint detection finishes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma lemma-j-shriek-and-tensor, totalization and adjoint transpose of its natural comparison; explicit categorical proof in the delivered Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit compatibility of an adjunction and a tensor product comparison descends to derived categories from K flat complexes",
+   "results": "8 hits, including Adjunction.derived_unit and unit_app_tensor_comp_map_δ.",
+   "date": "2026-10-28",
+   "verdict": "Generic derived-adjunction and monoidal-unit formulas; none supplies the specified representative squares and total summand normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 generic adjunction hits.",
+   "date": "2026-10-28",
+   "verdict": "Use the unit formula for homEquiv; no complete normalization result."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(unit|naturality)|unit.*homEquiv",
+   "results": "25 hits.",
+   "date": "2026-10-28",
+   "verdict": "Adjunction API available; no totalization or representative-transport statement of this form."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorUnitNormalization",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native open tensor normalization: Lemma lemma-j-shriek-and-tensor, totalization and adjoint transpose of its natural comparison",
+   "via": [
+    "new-lem-sf-native-open-tensor-unit-normalization",
+    "lem-sf-native-open-tensor-normalization",
+    "lem-sf-native-open-tensor-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.OpenTensorUnitTotalization",
+  "file": "lean/Sheaf/CategoryTheory/OpenTensorUnitTotalization.lean",
+  "declaration": "CategoryTheory.openTensorUnitTotalization",
+  "statement": "theorem openTensorUnitTotalization\n    (sheafGamma : ∀ M N, (G.obj (E.obj M)).obj N ≅ E.obj ((F.obj M).obj (R.obj N)))\n    (sheafRestriction : ∀ M N, R.obj ((G.obj M).obj N) ≅\n      (F.obj (R.obj M)).obj (R.obj N))\n    (hsheaf : ∀ M N, adj.homEquiv _ _ (sheafGamma M N).inv =\n      (F.map (adj.unit.app M)).app (R.obj N) ≫\n        (sheafRestriction (E.obj M) N).inv)\n    (totalGamma : ∀ P T,\n      (G.map₂CochainComplex.obj\n          ((E.mapHomologicalComplex (.up ℤ)).obj P)).obj T ≅\n        (E.mapHomologicalComplex (.up ℤ)).obj\n          ((F.map₂CochainComplex.obj P).obj ((R.mapHomologicalComplex (.up ℤ)).obj T)))\n    (totalRestriction : ∀ P T,\n      (R.mapHomologicalComplex (.up ℤ)).obj ((G.map₂CochainComplex.obj P).obj T) ≅\n      (F.map₂CochainComplex.obj ((R.mapHomologicalComplex (.up ℤ)).obj P)).obj\n        ((R.mapHomologicalComplex (.up ℤ)).obj T))\n    (hgamma : ∀ P T (p q n : ℤ) (h : p + q = n),\n      HomologicalComplex.ιMapBifunctor\n          ((E.mapHomologicalComplex (.up ℤ)).obj P) T G (.up ℤ) p q n h ≫\n        (totalGamma P T).hom.f n =\n      (sheafGamma (P.X p) (T.X q)).hom ≫ E.map\n        (HomologicalComplex.ιMapBifunctor P\n          ((R.mapHomologicalComplex (.up ℤ)).obj T) F (.up ℤ) p q n h))\n    (hrho : ∀ P T (p q n : ℤ) (h : p + q = n),\n      R.map (HomologicalComplex.ιMapBifunctor P T G (.up ℤ) p q n h) ≫\n          (totalRestriction P T).hom.f n =\n        (sheafRestriction (P.X p) (T.X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            ((R.mapHomologicalComplex (.up ℤ)).obj P)\n            ((R.mapHomologicalComplex (.up ℤ)).obj T) F (.up ℤ) p q n h)\n    (P : CochainComplex A ℤ) (T : CochainComplex B ℤ) :\n    (F.map₂CochainComplex.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app P)).app\n        ((R.mapHomologicalComplex (.up ℤ)).obj T) ≫\n      (totalRestriction ((E.mapHomologicalComplex (.up ℤ)).obj P) T).inv ≫\n      (R.mapHomologicalComplex (.up ℤ)).map (totalGamma P T).hom =\n    (adj.mapHomologicalComplex (.up ℤ)).unit.app\n      ((F.map₂CochainComplex.obj P).obj ((R.mapHomologicalComplex (.up ℤ)).obj T))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T072344-L-1936616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T072344-L-1936616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
