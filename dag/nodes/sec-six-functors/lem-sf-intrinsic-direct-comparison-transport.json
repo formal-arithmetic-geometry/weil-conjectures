@@ -14,24 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Use naturality of the section-normalized derived direct-image comparisons, then cancel the equivalence unit and counit in the transported adjunction square.",
+   "text": "For a comparison c: e₁.functor ⋙ R′ ≅ R ⋙ e₀.functor, expand the definition of sfIntrinsicTransportRight. Naturality of e₀.counitIso.inv moves its component past e₀.functor.map(e₀.inverse.map(-)); the equivalence triangle e₀.counitIso_functor_comp then cancels the remaining unit. This proves the single-comparison normalization at every object N.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the single-comparison normalization to N=e₁.functor.obj M and append R.map(e₁.unitIso.inv.app M). Naturality of c moves this unit inverse across c; functoriality and e₁.counitIso_functor_comp cancel it with the source counit inverse. This recovers c.hom.app M.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized identity to the f comparison. Use naturality of the g comparison to move its resulting morphism across the comparison square, and apply the first identity to the g comparison. For any natural transformation α: Rf ⋙ Rg ⟶ Rgf, its naturality moves the last source-unit inverse past α. Functoriality combines the resulting maps into exactly sfIntrinsicAmbientCoordinate. Specialize α to conjugateEquiv of k.hom; conjugateIsoEquiv has this hom by definition.",
    "uses": [
     "def-sp-finite-intrinsic-direct-adjunction",
-    "def-sp-finite-intrinsic-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "def-weil-pbc-proetale-operations"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-finite-intrinsic-direct-adjunction",
-  "def-sp-finite-intrinsic-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "def-weil-pbc-proetale-operations"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "Comparison transport isolated from the fixed compositor target."
+  "place": "Comparison-square naturality substep: a complete abstract equivalence calculation using naturality, functoriality, and the equivalence triangle identities; specialized to the fixed-scalar conjugate."
  },
  "mathlib_searches": [
   {
@@ -99,10 +111,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261028T034824-L-3553357",
-  "kind": "interface",
+  "landing": "20261028T081736-L-2776505",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
