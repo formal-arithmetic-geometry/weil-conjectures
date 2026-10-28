@@ -6,7 +6,6 @@ Authors: SHEAF group P7
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
-import Sheaf.Paper.NormalizedOriginComparisonCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionUnit
 
@@ -159,6 +158,30 @@ theorem finiteDualizingRealizationRestriction_unit (n : ℕ)
           (ProEtale.normalizedOriginRestrictionUnit X.smallEtaleTopology _
             (finiteDualizingQuotient_id l E n)) ≪≫
           Functor.mapDerivedCategoryIdIso _).hom.app K) := by
-  sorry
+  unfold finiteDualizingRealizationRestriction finiteDualizingRealization
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_inv, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  rw [fd_derivedRestrictionUnit' X _ _ (finiteDualizingQuotient_id l E n)]
+  let U := (ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} (finiteDualizingCoeff l E n)) X).mapDerivedCategory
+  have hi := congrArg (fun e => e.hom.app (U.obj K))
+    (finiteDualizingIntrinsicRestriction_unit l E X n)
+  dsimp at hi
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.associator_inv_app, Iso.trans_hom,
+    Functor.whiskerRight_comp, Iso.trans_inv, Functor.whiskerLeft_comp, Category.assoc,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.id_comp, Functor.associator_hom_app, Category.comp_id,
+    Functor.comp_map]
+  have hi' := hi
+  simp only [Category.comp_id] at hi'
+  rw [hi']
+  simp only [Functor.map_comp]
+  rw [← Functor.map_comp]
+  rw [← Functor.map_comp]
+  simp
+
+
+
 
 end WeilConjectures
