@@ -162,7 +162,8 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_cont
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
   have := isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper ℓ
     c'.overG E
-  have : (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c').IsLeftAdjoint :=
+  have : (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
+      c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
       ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c'.overG).IsLeftAdjoint
   have := isLeftAdjoint_rightDerivedLowerShriekBoundedConstructible_of_iso
@@ -201,7 +202,8 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
   have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper ℓ
     c'.overG E
-  have : (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c').IsLeftAdjoint :=
+  have : (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
+      c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
       PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E c'.overG).IsLeftAdjoint
   have := isLeftAdjoint_rightDerivedLowerShriekBoundedConstructible_of_iso

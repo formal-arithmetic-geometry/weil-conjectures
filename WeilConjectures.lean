@@ -8929,6 +8929,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.IsIsoOfCones
 public import WeilConjectures.CategoryTheory.Triangulated.IsoLocusContravariant
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureRepresentable
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingDetermination
 public import WeilConjectures.CategoryTheory.Triangulated.MateTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.MilnorBoundaryFactorization
@@ -13347,6 +13348,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
@@ -13361,6 +13364,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Topologi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingRestriction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
