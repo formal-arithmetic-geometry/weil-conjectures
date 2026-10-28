@@ -141,15 +141,18 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
-    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := isProper_left_of_isProper_of_isSeparated _
-  have : IsProper (componentSpecialFibreMap k' j hb).left := isProper_left_of_isProper_of_isSeparated _
+    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
+    isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (componentSpecialFibreMap k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫
     (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k').left :=
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
     supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
-  have : IsProper (hc.componentSpecialLift k' j hb).left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (hc.componentSpecialLift k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
       (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
         (hc.specialFixedLocus k').d) ≫
