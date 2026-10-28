@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.IntegralSystemCanonicalBridge
 public import Sheaf.Paper.TensorReductionStrictComparison
+import Sheaf.SixFunctors.CanonicalReductionTensorPullComplexComponentBridge
 
 /-! # Degreewise ordinary reduction and total tensor pullback
 
@@ -59,6 +60,13 @@ theorem canonicalReductionTensorPullComplex_component
           (coefficientSequenceCommRingSheaf l E U)).map
           (Prod.mkHom (a.reductionPullComplex l E f P)
             (a.reductionPullComplex l E f Q))).f n := by
-  sorry
+  dsimp only
+  apply canonicalReductionTensorPullComplex_component_bridge l E a f P Q n
+  · intro m
+    exact tensorReductionStrictMap_component l E V P Q m
+  · intro m
+    exact tensorReductionStrictMap_component l E U
+      (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj P)
+      (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj Q) m
 
 end WeilConjectures.IntegralSystemRealization
