@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNakayama
