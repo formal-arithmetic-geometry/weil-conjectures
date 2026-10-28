@@ -13,28 +13,51 @@
  ],
  "proof": [
   {
-   "text": "Pull each supplied coordinate comparison through the finite-scalar restriction functors on a pro-etale chart and then along a map to X. Exactness and the strict quotient representative identify the resulting object with the restricted completed quotient tower.",
+   "text": "The completed scalar map has its specified residue normalization. Evaluate the scalar-compatibility square on a constant A-section and use surjectivity of A to A/I^(n+1), together with naturality of the constant sheafification unit. This proves that phi_n carries every fixed quotient scalar to the canonical finite-coefficient scalar section.",
    "uses": [
-    "lem-weil-pbc-finite-perfect-adic-marked-origin"
+    "lem-weil-pbc-completed-adic-koszul-unit-chain-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the slice-to-site functor at W with restriction along f, U.hom and V.hom. Its identity underlying scheme maps give a natural isomorphism with Over.forget W, by the two over-category triangle equations. Thus the chart coordinates, restricted to U and W and transported back to the slice, are the constant-scalar restriction of the actual finite-ring module on that slice. The preceding normalized scalar equality identifies its action with the scalar presentation used by finitePerfectAdicSliceModules. The associated-module sheafification adjunction counit is an isomorphism, so realization cancels this restriction. Finally restriction along the completed projection commutes with restriction to W, componentwise.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-finite-perfect-adic-scalar-realization",
+    "def-weil-pbc-finite-coefficient-slice-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the comparisons through the scalar slice equivalences and use the associated-module sheafification comparison of [lem-weil-pbc-finite-perfect-adic-scalar-coherence]. This supplies the displayed family of actual isomorphisms, including empty charts and zero coefficients.",
+   "text": "All ordinary functors just used are additive and exact, including slice restriction. Localize their natural isomorphism using mapDerivedCategoryNatIso and the composition comparison. Replace inverse image along U.hom by localization restriction, and map the supplied e_n through inverse image and scalar realization. This yields the realized etale object isomorphic to the slice restriction of the quotient reduction with its completed action forgotten.",
    "uses": [
-    "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+    "def-weil-pbc-finite-perfect-adic-scalar-realization",
+    "def-weil-pbc-finite-coefficient-slice-restriction",
+    "def-weil-pbc-ringed-derived-restriction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply completedAdicFiniteReduction_comparison to identify quotient reduction followed by exact scalar restriction with evaluation of the derived strict reduction tower. The localization counit Q.objObjPreimageIso, mapped by derived evaluation, followed by mapDerivedCategoryFactors identifies this evaluation with Q of the corresponding level of the specified strict representative. Apply exact slice restriction. The composite is the required actual(U,W,f,n); pair this family with True.intro. No boundedness, further etale-origin choice, transition descent or scalar-transition coherence is used.",
+   "uses": [
+    "def-weil-pbc-derived-reduction-model-data",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-perfect-adic-marked-origin",
-  "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-finite-perfect-adic-scalar-realization",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-derived-reduction-model-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, using the fixed-scalar realization and balancing of Tag 06YY."
+  "place": "Tag 09C6 (lemma-connected-adic-lisse), fixed finite quotient realization; associated-module sheafification counit in Modules on Sites Tag 03CY; exact localization and quotient reduction comparison in Tag 06YY."
  },
  "mathlib_searches": [
   {
@@ -101,10 +124,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W5",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261028T020843-L-2554893",
-  "kind": "interface",
+  "landing": "20261028T034743-L-3540297",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
