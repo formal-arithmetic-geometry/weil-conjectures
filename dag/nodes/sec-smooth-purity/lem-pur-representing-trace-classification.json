@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-representing-trace-classification",
+ "kind": "statement",
+ "title": "Classification and normalization of representing traces",
+ "statement": "Let C and D be categories, F:C→D a functor, M an object of C, and U an object of D. Call t:F(M)→U representing when, for every K in C, the function a↦F(a)≫t from Hom(K,M) to Hom(F(K),U) is bijective. (1) If F⊣G and e:M≅G(U), then F(e.hom)≫ε_U is representing; it is the unique representing t whose adjunct is e.hom. (2) If t is representing, then t' is representing if and only if there exists a unique e:M≅M such that F(e.hom)≫t=t'. (3) Given one representing t, there is a unique representing trace if and only if every automorphism of M has hom equal to id_M. (4) Given equivalences E_K:Hom(K,M)≃Hom(F(K),U) satisfying E_K(a≫b)=F(a)≫E_L(b), there exists a unique representing t satisfying F(a)≫t=E_K(a) for all K and a; it is E_M(id_M). These assertions also hold for zero objects and arbitrary category and Hom universes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 3: only the specified counit-preserving comparison is unique; explicit trace composite in def-pur-smooth-trace and naturality in det-sp-trace-basic (1)."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For a specified isomorphism e to the right-adjoint value, compose postcomposition by e.hom with the inverse adjunction equivalence. Its counit formula is the asserted Hom function, hence it is bijective. Injectivity of the adjunction equivalence proves uniqueness with the prescribed adjunct.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precomposition by a source automorphism preserves each representing bijection, by composing it with a↦a≫e.hom, whose inverse is a↦a≫e.inv.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent t prime using t and t using t prime at K=M, obtaining a and b. Functoriality and the two representing injections imply a≫b=id and b≫a=id. This constructs an automorphism. Injectivity at M proves its uniqueness; the converse is the preceding step.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A unique trace makes every transformed trace equal to the original; its representing injection forces every automorphism to be identity. Conversely the classification and identity condition make every representing trace equal to the original.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For normalized E take t=E_M(id_M). Naturality with b=id gives its normalization and identifies every Hom function with E_K. Evaluation at id_M gives uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 3: only the specified counit-preserving comparison is unique; explicit trace composite in def-pur-smooth-trace and naturality in det-sp-trace-basic (1).; fully proved in Lean, with no new admitted statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits for the generic adjunction Hom equivalence and its inverse counit formula. No classification of all representing traces.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counits representing Hom functors correspond to isomorphisms with the right adjoint; uniqueness requires a specified natural equivalence",
+   "results": "8 hits, principally rightAdjointUniq counit-preservation equations. No torsor classification for a fixed representing object.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_yoneda_map_bijective|ofHomEquiv",
+   "results": "25 Mathlib hits: generic Yoneda and adjunction construction. Local searches also found private representing-pair helpers in SmoothPurity.Defs, but not the classification theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.TraceExistence",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "via": [
+    "lem-route-smooth-trace-representing-unique"
+   ],
+   "place": "Step 3: only the specified counit-preserving comparison is unique; explicit trace composite in def-pur-smooth-trace and naturality in det-sp-trace-basic (1)."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.RepresentingTraceClassification",
+  "file": "lean/Sheaf/SmoothPurity/RepresentingTraceClassification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.representingTrace_of_iso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.representingTrace_of_iso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_trace_of_orientation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.representingTrace_precompose_iso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.representingTrace_iff_existsUnique_iso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_representingTrace_iff",
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_trace_of_normalized_pairing"
+  ],
+  "statement": "theorem representingTrace_of_iso\n    {G : D ⥤ C} (adj : F ⊣ G) (e : M ≅ G.obj U) :\n    ∀ K : C, Function.Bijective\n      (fun a : K ⟶ M ↦ F.map a ≫ F.map e.hom ≫ adj.counit.app U)",
+  "statements": [
+   "theorem representingTrace_of_iso\n    {G : D ⥤ C} (adj : F ⊣ G) (e : M ≅ G.obj U) :\n    ∀ K : C, Function.Bijective\n      (fun a : K ⟶ M ↦ F.map a ≫ F.map e.hom ≫ adj.counit.app U)",
+   "theorem existsUnique_trace_of_orientation\n    {G : D ⥤ C} (adj : F ⊣ G) (e : M ≅ G.obj U) :\n    ∃! t : F.obj M ⟶ U,\n      (∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t)) ∧\n      adj.homEquiv M U t = e.hom",
+   "theorem representingTrace_precompose_iso\n    (t : F.obj M ⟶ U)\n    (ht : ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t))\n    (e : M ≅ M) :\n    ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ (F.map e.hom ≫ t))",
+   "theorem representingTrace_iff_existsUnique_iso\n    (t : F.obj M ⟶ U)\n    (ht : ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t))\n    (t' : F.obj M ⟶ U) :\n    (∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t')) ↔\n      ∃! e : M ≅ M, F.map e.hom ≫ t = t'",
+   "theorem existsUnique_representingTrace_iff\n    (t : F.obj M ⟶ U)\n    (ht : ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t)) :\n    (∃! t' : F.obj M ⟶ U,\n      ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t')) ↔\n      ∀ e : M ≅ M, e.hom = 𝟙 M",
+   "theorem existsUnique_trace_of_normalized_pairing\n    (E : ∀ K : C, (K ⟶ M) ≃ (F.obj K ⟶ U))\n    (hE : ∀ (K L : C) (a : K ⟶ L) (b : L ⟶ M),\n      E K (a ≫ b) = F.map a ≫ E L b) :\n    ∃! t : F.obj M ⟶ U,\n      (∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t)) ∧\n      ∀ (K : C) (a : K ⟶ M), F.map a ≫ t = E K a"
+  ],
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

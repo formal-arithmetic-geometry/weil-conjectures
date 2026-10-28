@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-native-normalized-trace-system",
+ "kind": "statement",
+ "title": "The native smooth map has normalized finite traces and integral reconstruction",
+ "statement": "Let ell be prime and k a field of positive characteristic unequal to ell. Let f:X→Y be a k-morphism between separated finite-type k-schemes, smooth of pure relative dimension d. Then there exist quasi-compactness and separatedness witnesses for f, a compactification c of f, and Noetherian witnesses for X and Y such that ReconstructionResult(ell,f,d,c) of [lem-pur-condensed-tate-integral-tower] holds. For the same witnesses there exist positive finite levels s_n:Level(ell,n+1,f,d) and quotient ReductionData r_{b,a} for every a≤b [def-pur-finite-smooth-adjunction-data] such that (1) each finite ordinary smooth trace represents Hom into f^*(-)(d)[2d], on every ordinary derived source test and every bounded constructible finite-Tor target test; (2) every pro-etale finite trace satisfies exactly the actual counit quotient equation of [lem-pur-finite-trace-quotient-counit] for r_{b,a}. The ReconstructionResult is retained intact, so these same supplied finite levels and quotient maps can be used in its universally quantified normalized Tate/unit reconstruction clause. This is only the finite and integral input package; it asserts no unnormalized condensed trace uniqueness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--2: retain the finite representing traces, their actual counit reduction equations, and the normalized integral reconstruction for the native morphism."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-condensed-tate-integral-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply condensedTateIntegralTower to the actual native smooth morphism. Retain its compactification, finiteness witnesses and entire ReconstructionResult. Its first clause supplies all positive finite levels and quotient reduction data; reindex them by n+1.",
+   "uses": [
+    "lem-pur-condensed-tate-integral-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each chosen positive level apply finiteTrace_pairing. For each pair a≤b and each pro-etale constructible finite-Tor target apply finiteTrace_quotient_counit to those same supplied ReductionData. Keep the unmodified reconstruction assertion alongside these equations.",
+   "uses": [
+    "lem-pur-finite-trace-quotient-counit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-condensed-tate-integral-tower",
+  "lem-pur-finite-trace-quotient-counit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--2: retain the finite representing traces, their actual counit reduction equations, and the normalized integral reconstruction for the native morphism.; fully proved in Lean, with no new admitted statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized finite smooth-purity trace system and its root tower admit integral reconstruction preserving counit quotient maps",
+   "results": "8 hits concerning algebraic field traces, not the geometric system.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothTrace\"",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedTateIntegralTower|FiniteSmoothSystem|ReconstructionResult",
+   "results": "0 Mathlib hits. The project provides condensedTateIntegralTower and its normalized finite-system clause; they are reused, not restated as admitted lemmas.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.TraceExistence",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "via": [
+    "lem-route-smooth-trace-representing-unique"
+   ],
+   "place": "Steps 1--2: retain the finite representing traces, their actual counit reduction equations, and the normalized integral reconstruction for the native morphism."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.NativeTraceSystem",
+  "file": "lean/Sheaf/SmoothPurity/NativeTraceSystem.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace_nativeSystem",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace_nativeSystem"
+  ],
+  "statement": "theorem smoothTrace_nativeSystem\n    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]\n    (hchar : 0 < ringChar k)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f] :\n    ∃ (hfq : QuasiCompact f) (hfs : IsSeparated f) (c : Compactification f)\n      (hX : IsNoetherian X) (hY : IsNoetherian Y),\n      let := hfq\n      let := hfs\n      let := c.hasCompactification\n      let := hX\n      let := hY\n      ReconstructionResult ell f d hfq hfs c hX hY ∧\n      ∃ (s : ∀ n : ℕ, Level ell (n + 1) f d)\n        (r : ∀ (b a : ℕ) (hab : a ≤ b),\n          ReductionData (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n            f d (s b) (s a)),\n        (∀ (n : ℕ) (K : Etale.DerivedCategoryModule (coefficient.{u} ell (n + 1)) Y),\n          Etale.DerivedCategory.boundedConstructibleFiniteTor (coefficient ell (n + 1)) Y K →\n          ∀ Q : Etale.DerivedCategoryModule (coefficient.{u} ell (n + 1)) X,\n            Function.Bijective\n              (fun v : Q ⟶ (puritySource (coefficient ell (n + 1)) f\n                (line (coefficient ell (n + 1)) (ell ^ (n + 1))\n                  (CharP.cast_eq_zero _ _) X d)).obj K ↦\n                (Etale.rightDerivedLowerShriek\n                  (ModuleCat.{u + 1} (coefficient ell (n + 1))) f).map v ≫\n                  trace (coefficient ell (n + 1)) f\n                    (line (coefficient ell (n + 1)) (ell ^ (n + 1))\n                      (CharP.cast_eq_zero _ _) X d) (s n).alpha K)) ∧\n        ∀ (b a : ℕ) (hab : a ≤ b),\n          let A := coefficient.{u} ell (b + 1)\n          let B := coefficient.{u} ell (a + 1)\n          let phi := FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1)\n          let LA := line A (ell ^ (b + 1)) (CharP.cast_eq_zero _ _) X d\n          let LB := line B (ell ^ (a + 1)) (CharP.cast_eq_zero _ _) X d\n          ∀ (K : proCategory A Y), IsCtf A Y K →\n            (proCompact B f).map\n                ((proScalar phi X).map (proGamma A f LA (s b).alpha K)) ≫\n              proCompactCoefficientInverse phi f ((exceptional A f).obj K) ≫\n                (proScalar phi Y).map (proCounit A f K) =\n            (proCompact B f).map (proLambda f d (r b a hab).twist K) ≫\n              proTrace B f LB (s a).alpha ((proScalar phi Y).obj K)",
+  "statements": [
+   "theorem smoothTrace_nativeSystem\n    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]\n    (hchar : 0 < ringChar k)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f] :\n    ∃ (hfq : QuasiCompact f) (hfs : IsSeparated f) (c : Compactification f)\n      (hX : IsNoetherian X) (hY : IsNoetherian Y),\n      let := hfq\n      let := hfs\n      let := c.hasCompactification\n      let := hX\n      let := hY\n      ReconstructionResult ell f d hfq hfs c hX hY ∧\n      ∃ (s : ∀ n : ℕ, Level ell (n + 1) f d)\n        (r : ∀ (b a : ℕ) (hab : a ≤ b),\n          ReductionData (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n            f d (s b) (s a)),\n        (∀ (n : ℕ) (K : Etale.DerivedCategoryModule (coefficient.{u} ell (n + 1)) Y),\n          Etale.DerivedCategory.boundedConstructibleFiniteTor (coefficient ell (n + 1)) Y K →\n          ∀ Q : Etale.DerivedCategoryModule (coefficient.{u} ell (n + 1)) X,\n            Function.Bijective\n              (fun v : Q ⟶ (puritySource (coefficient ell (n + 1)) f\n                (line (coefficient ell (n + 1)) (ell ^ (n + 1))\n                  (CharP.cast_eq_zero _ _) X d)).obj K ↦\n                (Etale.rightDerivedLowerShriek\n                  (ModuleCat.{u + 1} (coefficient ell (n + 1))) f).map v ≫\n                  trace (coefficient ell (n + 1)) f\n                    (line (coefficient ell (n + 1)) (ell ^ (n + 1))\n                      (CharP.cast_eq_zero _ _) X d) (s n).alpha K)) ∧\n        ∀ (b a : ℕ) (hab : a ≤ b),\n          let A := coefficient.{u} ell (b + 1)\n          let B := coefficient.{u} ell (a + 1)\n          let phi := FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1)\n          let LA := line A (ell ^ (b + 1)) (CharP.cast_eq_zero _ _) X d\n          let LB := line B (ell ^ (a + 1)) (CharP.cast_eq_zero _ _) X d\n          ∀ (K : proCategory A Y), IsCtf A Y K →\n            (proCompact B f).map\n                ((proScalar phi X).map (proGamma A f LA (s b).alpha K)) ≫\n              proCompactCoefficientInverse phi f ((exceptional A f).obj K) ≫\n                (proScalar phi Y).map (proCounit A f K) =\n            (proCompact B f).map (proLambda f d (r b a hab).twist K) ≫\n              proTrace B f LB (s a).alpha ((proScalar phi Y).obj K)"
+  ],
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,6 +12,8 @@ public import Sheaf.Targets.PoincareTateBoundedConstructible
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.Paper.CondensedQbarCoefficientConstruction
+import Sheaf.SmoothPurity.RepresentingTraceClassification
+import Sheaf.SmoothPurity.NativeTraceSystem
 
 /-! The representing trace required by condensed smooth purity.
 
@@ -35,6 +37,36 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+/-- The declared finite and integral input steps apply to the actual underlying
+morphism of schemes. The native-system theorem retains all finite trace quotient
+counit equations for this same compactification. This lemma extracts only the
+reconstruction conclusion; it constructs no arbitrary trace or orientation data.
+Source: def-route-smooth-trace, Steps 1--2, and sk-thm-purity-transport, Steps 1--2. -/
+private theorem smoothTrace_nativeReconstructionInputs
+    (ell : ℕ) [Fact ell.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ ell)] {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (d : ℕ) (hsm : SmoothOfRelativeDimension d f.left) :
+    ∃ (hfq : QuasiCompact f.left) (hfs : IsSeparated f.left)
+      (c : Compactification f.left) (hX : IsNoetherian X.left) (hY : IsNoetherian Y.left),
+      Scheme.PurityIntegralTower.ReconstructionResult ell f.left d hfq hfs c hX hY := by
+  let : X.left.Over (Spec (.of k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of k)) := ⟨Y.hom⟩
+  let : f.left.IsOver (Spec (.of k)) := ⟨Over.w f⟩
+  let : IsSeparated (X.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated X.hom)
+  let : LocallyOfFiniteType (X.left ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType X.hom)
+  let : QuasiCompact (X.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact X.hom)
+  let : IsSeparated (Y.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated Y.hom)
+  let : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType Y.hom)
+  let : QuasiCompact (Y.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact Y.hom)
+  have := hsm
+  obtain ⟨hfq, hfs, c, hX, hY, hrec, _⟩ :=
+    smoothTrace_nativeSystem ell k (Fact.out : (ringChar k).Prime).pos f.left d
+  exact ⟨hfq, hfs, c, hX, hY, hrec⟩
+
 section Counterexample
 
 private theorem no_unique_representing_trace
@@ -43,26 +75,7 @@ private theorem no_unique_representing_trace
     ¬ ∃! t : F.obj M ⟶ U,
       ∀ K : C, Function.Bijective (fun a : K ⟶ M ↦ F.map a ≫ t) := by
   rintro ⟨t, ht, huniq⟩
-  have ht' : ∀ K : C, Function.Bijective
-      (fun a : K ⟶ M ↦ F.map a ≫ (F.map e.hom ≫ t)) := by
-    intro K
-    have heq : (fun a : K ⟶ M ↦ F.map a ≫ (F.map e.hom ≫ t)) =
-        (fun a : K ⟶ M ↦ F.map a ≫ t) ∘ (fun a : K ⟶ M ↦ a ≫ e.hom) := by
-      funext a
-      simp only [Function.comp_apply, Functor.map_comp, Category.assoc]
-    rw [heq]
-    apply (ht K).comp
-    constructor
-    · intro a b h
-      exact (cancel_mono e.hom).1 h
-    · intro a
-      exact ⟨a ≫ e.inv, by simp⟩
-  have h : F.map e.hom ≫ t = t := huniq _ ht'
-  apply he
-  apply (ht M).injective
-  change F.map e.hom ≫ t = F.map (𝟙 M) ≫ t
-  rw [F.map_id, Category.id_comp]
-  exact h
+  exact he ((existsUnique_representingTrace_iff F t ht).1 ⟨t, ht, huniq⟩ e)
 
 private theorem neg_id_ne_of_faithful {C D : Type*} [Category C] [Category D]
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Faithful] [F.Additive]

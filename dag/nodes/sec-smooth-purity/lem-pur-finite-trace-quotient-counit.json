@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-finite-trace-quotient-counit",
+ "kind": "statement",
+ "title": "Representing finite traces preserve the actual quotient counits",
+ "statement": "Let A and B be finite commutative rings, N,M positive integers with N=0 in A and M=0 in B, and φ:A→B a ring homomorphism. Let f:X→Y be a quasi-compact separated compactifiable morphism of Noetherian schemes and d a nonnegative integer. Let a and b be normalized SmoothLevel data over A and B, and let r be ReductionData between them [def-pur-finite-smooth-adjunction-data], with the actual maps of [def-pur-finite-smooth-canonical-maps] and [def-pur-finite-smooth-coefficient-arrows]. First, for every ordinary bounded constructible finite-Tor K on Y and every ordinary derived test Q on X, v↦Rf_!(v)≫trace_A(K) is a bijection from Hom(Q,f_A^*K(d)[2d]) to Hom(Rf_!Q,K). Second, write S_X,S_Y for scalar extension, F_B for pro-etale compact support over B, γ_A and γ_B for the two pro-etale purity maps, λ for r's purity-source comparison, c for its exceptional coefficient map, b^{-1} for the actual inverse compact-support coefficient comparison on the exceptional value, and ε_A for the actual pro-etale exceptional counit. For every pro-etale constructible finite-Tor K on Y, the following equality of actual arrows holds: F_B(S_X(γ_A(K)))≫b^{-1}≫S_Y(ε_A(K)) = F_B(λ_K)≫trace_B(S_Y K). In particular this is an equality of counits, not just an isomorphism of their source objects.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1 and 4: reduction of smooth traces, using the actual exceptional counit identity of sk-lem-sp-reduction and the trace formula of def-pur-smooth-trace."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "SmoothLevel.ordinary_isIso makes the specified gamma invertible. Its actual counit transpose is the definition of trace. Apply the generic representing-trace theorem to this isomorphism and the ordinary exceptional adjunction.",
+   "uses": [
+    "lem-pur-representing-trace-classification",
+    "def-pur-finite-smooth-adjunction-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pro_counit field gives F_B(c_K)≫ε_B=b^{-1}≫S_Y(ε_A). Substitute this equation into the left side. Functoriality combines the two F_B factors. The pro_purity field identifies S_X(γ_A)≫c_K with λ_K≫γ_B. Expand functoriality and the definition of proTrace to obtain the right side.",
+   "uses": [
+    "def-pur-finite-smooth-adjunction-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-representing-trace-classification",
+  "def-pur-finite-smooth-adjunction-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1 and 4: reduction of smooth traces, using the actual exceptional counit identity of sk-lem-sp-reduction and the trace formula of def-pur-smooth-trace.; fully proved in Lean, with no new admitted statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient smooth purity trace commutes with coefficient reduction by the exceptional counit mate",
+   "results": "8 hits including mateEquiv_counit and mateEquiv_counit_symm; no geometric finite trace quotient theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits, including the functoriality formula used in the proof.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "proTrace|pro_counit|finiteTrace_quotient_counit",
+   "results": "0 Mathlib hits. Local source inspection found proTrace and the ReductionData.pro_purity/pro_counit fields, which are combined here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.TraceExistence",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "via": [
+    "lem-route-smooth-trace-representing-unique"
+   ],
+   "place": "Steps 1 and 4: reduction of smooth traces, using the actual exceptional counit identity of sk-lem-sp-reduction and the trace formula of def-pur-smooth-trace."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.FiniteTraceQuotientCounit",
+  "file": "lean/Sheaf/SmoothPurity/FiniteTraceQuotientCounit.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteTrace_pairing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteTrace_pairing",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteTrace_quotient_counit"
+  ],
+  "statement": "theorem finiteTrace_pairing\n    {A : Type (u + 1)} [CommRing A] [Finite A]\n    {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0}\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] (d : ℕ)\n    (s : SmoothLevel A N hN hA f d) (K : DerivedCategoryModule A Y)\n    (hK : DerivedCategory.boundedConstructibleFiniteTor A Y K)\n    (Q : DerivedCategoryModule A X) :\n    Function.Bijective (fun a : Q ⟶ (puritySource A f (line A N hA X d)).obj K ↦\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map a ≫\n        trace A f (line A N hA X d) s.alpha K)",
+  "statements": [
+   "theorem finiteTrace_pairing\n    {A : Type (u + 1)} [CommRing A] [Finite A]\n    {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0}\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] (d : ℕ)\n    (s : SmoothLevel A N hN hA f d) (K : DerivedCategoryModule A Y)\n    (hK : DerivedCategory.boundedConstructibleFiniteTor A Y K)\n    (Q : DerivedCategoryModule A X) :\n    Function.Bijective (fun a : Q ⟶ (puritySource A f (line A N hA X d)).obj K ↦\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map a ≫\n        trace A f (line A N hA X d) s.alpha K)",
+   "theorem finiteTrace_quotient_counit\n    {A B : Type (u + 1)} [CommRing A] [Finite A] [CommRing B] [Finite B]\n    {phi : A →+* B} {N M : ℕ} {hN : 0 < N} {hM : 0 < M}\n    {hA : (N : A) = 0} {hB : (M : B) = 0}\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] (d : ℕ)\n    {a : SmoothLevel A N hN hA f d} {b : SmoothLevel B M hM hB f d}\n    (r : ReductionData phi f d a b) (K : proCategory A Y) (hK : IsCtf A Y K) :\n    (proCompact B f).map\n        ((proScalar phi X).map (proGamma A f (line A N hA X d) a.alpha K)) ≫\n      proCompactCoefficientInverse phi f ((exceptional A f).obj K) ≫\n        (proScalar phi Y).map (proCounit A f K) =\n    (proCompact B f).map (proLambda f d r.twist K) ≫\n      proTrace B f (line B M hB X d) b.alpha ((proScalar phi Y).obj K)"
+  ],
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T055614-L-774515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
