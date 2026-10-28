@@ -115,7 +115,10 @@ lemma isZero_upperStar_of_distTriang_unit {Z U : Over (Spec (.of k))}
       ℓ j).unit.app N) c ∈ distTriang _) :
     IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj F) := by
   let adj := boundedConstructibleUpperStarLowerStarAdjunction ℓ j
-  have := isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion ℓ j
+  have : IsIso adj.counit :=
+    (Adjunction.Triple.mk
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ j) adj).isIso_unit_iff_isIso_counit.1 inferInstance
   have h : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
       (adj.unit.app N)) := isIso_of_comp_hom_eq_id _ (adj.left_triangle_components N)
   exact Triangle.isZero₁_of_isIso₂ _
