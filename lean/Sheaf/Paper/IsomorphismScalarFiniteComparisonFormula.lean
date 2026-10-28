@@ -6,6 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import Sheaf.Paper.IsomorphismScalarFiniteComparisonExtension
 
 /-! # Finite scalar comparison formula
 
@@ -54,6 +55,7 @@ theorem finite_formula_exists
         (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
           (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n,
       FiniteFormula l E L ι g bfin := by
-  sorry
+  obtain ⟨bfin, hunit⟩ := finite_formula_unit_exists l E L ι g b hb
+  exact ⟨bfin, finite_formula_of_unit l E L ι g bfin hunit⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor

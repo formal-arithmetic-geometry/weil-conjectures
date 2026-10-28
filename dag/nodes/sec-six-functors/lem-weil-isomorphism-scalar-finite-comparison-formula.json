@@ -34,15 +34,23 @@
  "statement": "theorem finite_formula_exists\n    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅\n      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)\n    (hb : CompletedFormula l E L ι g b) :\n    ∃ bfin : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅\n          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n,\n      FiniteFormula l E L ι g bfin",
  "proof": [
   {
-   "text": "The balanced finite comparison is constructed by reassociation and coefficient transport; its pure-tensor formula is checked using the normalized completed formula.",
+   "text": "Apply the unit-case finite comparison theorem to the supplied completed comparison, obtaining a finite comparison whose formula has middle coefficient equal to one.",
    "uses": [
-    "lem-weil-isomorphism-scalar-quotient-chain-squares"
+    "lem-weil-isomorphism-scalar-finite-comparison-formula-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalar linearity and the balancing relation to extend the unit formula to arbitrary middle finite coefficients.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-finite-comparison-formula-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-isomorphism-scalar-quotient-chain-squares"
+  "lem-weil-isomorphism-scalar-finite-comparison-formula-unit",
+  "lem-weil-isomorphism-scalar-finite-comparison-formula-extension"
  ],
  "proof_origin": {
   "by": "worker",
@@ -73,12 +81,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261027T234317-L-95132",
+  "landing": "20261028T020541-L-2523357",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
