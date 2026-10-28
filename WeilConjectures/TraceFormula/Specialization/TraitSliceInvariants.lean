@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
