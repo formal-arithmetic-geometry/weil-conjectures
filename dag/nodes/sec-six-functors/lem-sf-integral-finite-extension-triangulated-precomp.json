@@ -2,15 +2,16 @@
  "id": "lem-sf-integral-finite-extension-triangulated-precomp",
  "kind": "statement",
  "title": "Triangulatedness after derived-quotient precomposition",
- "statement": "For l, E, L, ι, X and any CommShift c on integralScalarExtensionOfUniverses l E L ι X, the composite DerivedCategory.Qh ⋙ integralScalarExtensionOfUniverses l E L ι X is IsTriangulated with the induced shift.",
+ "statement": "For l, E, L, ι, X and the chosen scalar functor of [def-weil-integral-scalar-extension], there exists a coherent shift c on integralScalarExtensionOfUniverses l E L ι X for which DerivedCategory.Qh ⋙ integralScalarExtensionOfUniverses l E L ι X is triangulated.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
   "place": "Paragraphs 1-5: finite-free Roos cones, signed shifts, and localization transport before descent."
  },
  "proof_origin": {
-  "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
-  "place": "Paragraphs 1-5: finite-free Roos cones, signed shifts, and localization transport before descent."
+  "place": "First paragraph: finite-free termwise scalar extension and total derived limits preserve distinguished triangles.",
+  "by": "worker",
+  "note": "F7: chain-level termwise cone exactness, resolving-class localization, and transport along the normalized uniqueness isomorphism."
  },
  "mathlib_searches": [
   {
@@ -40,34 +41,58 @@
   "same_as": []
  },
  "stmt_deps": [
-  "def-weil-integral-scalar-extension",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "def-weil-integral-scalar-extension"
  ],
  "proof": [
   {
-   "text": "Prove the strict Roos cone and localization composite preserves distinguished triangles, with the selected coherent shift.",
+   "text": "Express the scalar complex as the cone of 1-s on the termwise product of the ordinary scalar functors, followed by shift [-1]. The product-complex comparison is natural and intertwines 1-s. Apply the termwise-cone homotopy exactness theorem and then the triangulated shift and homotopy-to-derived quotient.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "def-trf-integral-scalar-tower-functors",
+    "lem-sf-termwise-cone-homotopy-exact",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every complex functorially by a flat-term K-flat complex. The scalar well-definedness theorem shows that scalar complexes invert quasi-isomorphisms between these representatives; lift homotopy morphisms through the full homotopy quotient and use the natural comparison to obtain the required isomorphism condition.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-a1-flat-term-kflat-complex",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply leftDerived_from_resolvingClass to the exact homotopy functor. Its counit is invertible on the good representatives, hence gives a normalized comparison for the derived functor. The uniqueness clause of integralScalarExtensionWellDefined identifies it with the selected scalar functor. Transport the exact shift along that isomorphism and compose with Qh.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-integral-scalar-extension",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "def-trf-integral-scalar-tower-functors",
+  "lem-sf-termwise-cone-homotopy-exact",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-a1-flat-term-kflat-complex",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-integral-operations-well-defined"
  ],
  "lean": {
   "existing": false,
   "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionTriangulatedPrecomp",
   "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionTriangulatedPrecomp.lean",
   "declaration": "WeilConjectures.IntegralFiniteExtension.comparison_precomp_triangulated",
-  "statement": "theorem comparison_precomp_triangulated\n    (c : (integralScalarExtensionOfUniverses l E L ι X).CommShift ℤ) :\n    let _ := c\n    (DerivedCategory.Qh ⋙ integralScalarExtensionOfUniverses l E L ι X).IsTriangulated",
+  "statement": "theorem comparison_precomp_triangulated :\n    ∃ (c : (integralScalarExtensionOfUniverses l E L ι X).CommShift ℤ),\n      letI := c\n      (DerivedCategory.Qh ⋙ integralScalarExtensionOfUniverses l E L ι X).IsTriangulated",
   "branch": "sheaf-dag",
-  "by": "T1",
+  "by": "F7",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -83,11 +108,49 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
-  "result": "pass",
-  "landing": "20261028T034940-L-3573633",
+  "reviewer": "C-ed52c",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261028T072412-L-1943251",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item/parent/new nodes and change record vs delivered Lean (Precomp, InvertibilityTriangulated, TermwiseConeHomotopyExact) and clone; 3b importer CoefIntegralFiniteExtensionInvertibility OK"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F7 stage 2",
+  "old_statement": "For l, E, L, ι, X and any CommShift c on integralScalarExtensionOfUniverses l E L ι X, the composite DerivedCategory.Qh ⋙ integralScalarExtensionOfUniverses l E L ι X is IsTriangulated with the induced shift.",
+  "what": "Coherence of a shift comparison does not imply exactness. Twist an exact comparison by (-1)^n. For identity coefficient extension at l=3 on complete coefficient modules, the triangle of the nonsplit sequence Z_3 --3--> Z_3 --> F_3 has nonzero connecting class delta. The twisted comparison sends its last arrow to -delta with the first two arrows fixed; since 2 delta is nonzero this is not distinguished. The blueprint requires existence of an exact shift, not exactness for every coherent shift.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+   "place": "First paragraph: finite-free termwise scalar extension and total derived limits preserve distinguished triangles."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-finite-extension-triangulated-isTriangulated",
+    "holds": true,
+    "note": "Adapted in the same delivery: obtain the exact shift existentially, and descend with the precomposition exactness for that same shift. The final existential conclusion is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-integral-scalar-extension",
+   "lem-pur-derived-change-of-rings",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  ],
+  "old_proof": [
+   {
+    "text": "Prove the strict Roos cone and localization composite preserves distinguished triangles, with the selected coherent shift.",
+    "uses": [
+     "def-weil-integral-scalar-extension",
+     "lem-pur-derived-change-of-rings",
+     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-integral-scalar-extension",
+   "lem-pur-derived-change-of-rings",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  ]
  }
 }

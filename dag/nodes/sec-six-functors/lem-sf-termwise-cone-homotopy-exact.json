@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-termwise-cone-homotopy-exact",
+ "kind": "statement",
+ "title": "The termwise cone of an additive natural transformation is exact on homotopy categories",
+ "statement": "Let $A,B$ be preadditive categories with zero objects and binary biproducts [def-weil-preadditive-category], and suppose $B$ has countable coproducts. Let $F,G:A\\to B$ be additive functors and $\\tau:F\\to G$ a natural transformation. Define a functor $C_\\tau$ on integer cochain complexes by $C_\\tau(P)=\\operatorname{Cone}(\\tau_P:F(P)\\to G(P))$, with differential on $F(P)^{n+1}\\oplus G(P)^n$ given by $(-d_Fx,\\tau x+d_Gy)$ and maps induced diagonally by $F(f),G(f)$. There exist a functor $H:K(A)\\to K(B)$, a natural isomorphism $\\pi_A H\\cong C_\\tau\\pi_B$, and a coherent integer shift comparison making $H$ triangulated [def-weil-triangulated-category]. Here $\\pi$ denotes the quotient by chain homotopy. Neither boundedness, abelian structure, exactness of $F,G$, nor preservation of quasi-isomorphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-cone and definition-distinguished-triangle; two-column specialization of the total-complex argument in the first paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "The category of additive functors A to B is preadditive, with zero functor and pointwise binary biproducts. To verify closure under limits, compose a proposed additivity equation with each pointwise limit projection; naturality and additivity of every diagram functor prove it, and joint monicity gives the equation. Evaluation E:(A ⥤+ B) → (A ⥤ B) is additive in each variable.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In that additive-functor category form k=Cone(τ[0]:F[0]→G[0]). Countable coproducts in B supply all totalizations for E. Apply fixed-argument total-bifunctor exactness to obtain H=Tot_E(k,-) on homotopy categories with its coherent exact shift.",
+   "uses": [
+    "lem-sf-total-bifunctor-homotopy-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each P, distributing totalization across the first-variable mapping cone gives Tot_E(k,P) ≅ Cone(Tot_E(τ[0],P)). The degree-zero single-complex comparisons identify its two endpoints with F(P),G(P), and their commuting-square equation identifies the cone map with τ_P. Apply the cone isomorphism of a commuting square. Naturality is checked on the two cone inclusions: the inverse comparison inserts the source in first degree -1 and the target in degree 0; the total-map formulas and evaluation naturality make both equations equal. Thus these comparisons form a natural isomorphism from totalization to C_τ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Whisker that natural isomorphism with π_B and compose it with the homotopy-quotient comparison of the total bifunctor. Package this comparison with H and the shift and triangulatedness already supplied by fixed-argument exactness. This yields the asserted existential without choosing any data from an unproved theorem. Zero functors, τ=0, unbounded complexes and zero categories satisfy the same formulas.",
+   "uses": [
+    "lem-sf-total-bifunctor-homotopy-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-preadditive-category",
+  "lem-sf-total-bifunctor-homotopy-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-cone and definition-distinguished-triangle; two-column specialization of the total-complex argument in the first paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mapping cone of a natural transformation of additive functors on complexes induces a triangulated functor on homotopy categories",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingConeCompTriangleh, HomotopyCategory.spectralObjectMappingCone, CochainComplex.mappingCone.triangleh, CochainComplex.mappingCone.mapTriangleIso, HomotopyCategory.instIsTriangulatedIntUp, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isTriangulated_of_precomp",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.isTriangulated_of_precomp'",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "cone.*[Tt]riangulated|[Tt]riangulated.*cone",
+   "results": "13 hits: Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of a natural transformation between additive functors, applied termwise to cochain complexes, induces a triangulated functor on homotopy categories",
+   "results": "8 hits: CochainComplex.mappingCone, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, HomotopyCategory.composableArrowsFunctor_obj, HomotopyCategory.composableArrowsFunctor_map, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CategoryTheory.NatTrans.mapHomotopyCategory_app",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionTriangulatedPrecomp",
+  "date": "2026-10-28",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "First proof paragraph: finite-free termwise scalar extension and derived inverse limits preserve the triangulated structure. The present result supplies the signed Roos-cone step.",
+   "via": [
+    "lem-sf-integral-finite-extension-triangulated-precomp"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TermwiseConeHomotopyExact",
+  "file": "lean/Sheaf/Algebra/Homology/TermwiseConeHomotopyExact.lean",
+  "declaration": "CochainComplex.termwiseCone_homotopy_exact",
+  "declarations": [
+   "CochainComplex.termwiseCone",
+   "CochainComplex.termwiseCone_homotopy_exact"
+  ],
+  "statement": "theorem termwiseCone_homotopy_exact [HasZeroObject A] [HasBinaryBiproducts A]\n    [HasZeroObject B] [HasCountableCoproducts B] (F G : A ⥤ B) [F.Additive] [G.Additive]\n    (τ : F ⟶ G) :\n    ∃ (H : HomotopyCategory A (.up ℤ) ⥤ HomotopyCategory B (.up ℤ))\n      (_ : HomotopyCategory.quotient A (.up ℤ) ⋙ H ≅\n        termwiseCone F G τ ⋙ HomotopyCategory.quotient B (.up ℤ))\n      (c : H.CommShift ℤ), letI := c; H.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-28",
+  "note": "The cone functor has concrete object and diagonal-map data. All helpers and the public exactness theorem are proved; no sorry is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ed52c",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261028T072412-L-1943251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ed52c",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261028T072412-L-1943251",
+  "kind": "interface",
+  "note": "independent cc review: item/parent/new nodes and change record vs delivered Lean (Precomp, InvertibilityTriangulated, TermwiseConeHomotopyExact) and clone; 3b importer CoefIntegralFiniteExtensionInvertibility OK"
+ }
+}

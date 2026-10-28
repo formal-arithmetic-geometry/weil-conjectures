@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-total-bifunctor-homotopy-exact",
+ "kind": "statement",
+ "title": "Fixed-argument exactness of totalized additive bifunctors",
+ "statement": "Let $C_1,C_2,D$ be preadditive categories [def-weil-preadditive-category], with zero objects and binary biproducts in $C_2,D$. Let $E:C_1\\to(C_2\\to D)$ be additive separately in both variables. Assume every direct-sum totalization $\\operatorname{Tot}_E(P,Q)$ of integer cochain complexes exists. Its degree $n$ is $\\bigoplus_{p+q=n}E(P^p,Q^q)$ and its differential on the $(p,q)$ summand is $E(d_P,1)+(-1)^pE(1,d_Q)$. Passing chain maps and homotopies through these formulas gives a bifunctor on homotopy categories. For each $P$ in the homotopy category of $C_1$, its fixed-first-argument functor from $K(C_2)$ to $K(D)$ is triangulated [def-weil-triangulated-category] with the signed integer shift comparison induced by totalization. The homotopy quotient comparison is the one induced by the chain-level totalization.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-cone, definition-distinguished-triangle and proposition-homotopy-category-triangulated (additive-category cone conventions); general totalized-bifunctor proof is the adopted lean/WeilConjectures/FromJoel/Algebra/Homology/BifunctorTriangulated.lean, lines 39-77 and 92-104."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the bifunctor termwise and form the direct-sum total with the displayed differential. Additivity and naturality cancel the mixed terms of d squared. Applying the bifunctor to a chain homotopy and inserting the total sign gives a homotopy, so the construction descends to both homotopy quotients. In the varying second variable, extracting an integer shift multiplies the summand of first degree p by (-1)^(np); multiplication of these signs proves the zero and addition laws.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a chain map f in the second variable, distribute the total coproduct over the two summands of Cone(f). Identify Tot(P,Cone(f)) with Cone(Tot(P,f)), inserting (-1)^p on the summand from the shifted source of f. Direct substitution in the four differential blocks proves it is a chain isomorphism. It intertwines the cone inclusion and the signed boundary using the shift comparison just specified. Thus the image of a standard cone triangle is isomorphic to a standard cone triangle. Passing to homotopy and using invariance of distinguished triangles under isomorphism proves triangulatedness. This is precisely the proved mapping-cone triangle isomorphism and instance in the adopted source file.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-cone, definition-distinguished-triangle and proposition-homotopy-category-triangulated (additive-category cone conventions); general totalized-bifunctor proof is the adopted lean/WeilConjectures/FromJoel/Algebra/Homology/BifunctorTriangulated.lean, lines 39-77 and 92-104."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A totalized additive bifunctor induces a functor on homotopy categories that is triangulated in each variable",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.map₂CochainComplex, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.map₂HomologicalComplex, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁_assoc, CategoryTheory.Functor.instAdditiveOfIsHomological",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.bifunctorMapHomotopyCategory",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.bifunctorMapHomotopyCategory'",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorMapHomotopyCategory|mapBifunctorMappingCone",
+   "results": "0 hits:",
+   "date": "2026-10-28",
+   "verdict": "No exact match in Mathlib; the adopted source library supplies the general total-bifunctor theorem, and the termwise-cone comparison is proved here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionTriangulatedPrecomp",
+  "date": "2026-10-28",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "First proof paragraph: finite-free termwise scalar extension and derived inverse limits preserve the triangulated structure. The present result supplies the signed Roos-cone step.",
+   "via": [
+    "lem-sf-integral-finite-extension-triangulated-precomp"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated",
+  "file": "lean/WeilConjectures/FromJoel/Algebra/Homology/BifunctorTriangulated.lean",
+  "declaration": "HomotopyCategory.instIsTriangulatedIntUpObjFunctorBifunctorMapHomotopyCategory",
+  "statement": "instance (K₁ : HomotopyCategory C₁ (.up ℤ)) [HasZeroObject C₂] [HasBinaryBiproducts C₂] :\n    ((F.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ)).obj K₁).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-28",
+  "note": "Existing, fully proved adopted-source instance; no source file is edited. Its generated name was checked with #synth in scratchpad/TotalName.lean. It uses the fixed totalization shift and quotient comparison, not an arbitrary CommShift."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ed52c",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261028T072412-L-1943251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ed52c",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261028T072412-L-1943251",
+  "kind": "interface",
+  "note": "independent cc review: item/parent/new nodes and change record vs delivered Lean (Precomp, InvertibilityTriangulated, TermwiseConeHomotopyExact) and clone; 3b importer CoefIntegralFiniteExtensionInvertibility OK"
+ }
+}
