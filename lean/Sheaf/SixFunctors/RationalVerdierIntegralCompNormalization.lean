@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
-import Sheaf.Paper.SfScalarExtensionComposition
+import Sheaf.Paper.CompletedScalarCanonicalAssociatorFormula
 
 /-! # Identification of the integral scalar associator representatives
 
@@ -50,6 +50,7 @@ theorem integral_comp_normalization_bridge
         (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))
         (Y := (integralScalar l X F H (j.comp i)).obj K)
         (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom := by
-  sorry
+  apply ObjectProperty.hom_ext
+  exact completedScalarCanonicalAssociatorFormula l F G H i j X K
 
 end WeilConjectures.RationalVerdier
