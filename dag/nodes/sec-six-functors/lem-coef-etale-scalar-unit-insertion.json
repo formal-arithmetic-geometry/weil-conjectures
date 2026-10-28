@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-etale-scalar-unit-insertion",
+ "kind": "statement",
+ "title": "Regular etale scalar unit as exact adjunction insertion",
+ "status": "split",
+ "statement": "Let A and B be commutative rings in the coefficient universe, let φ : A → B be a unital ring map, and let T be any scheme. For the published ordinary-etale derived scalar extension and its representative-normalized unit isomorphism [def-pur-exceptional-coefficient-normalizations], transport the unit hom along the canonical single/unit isomorphisms on both sides. The resulting arrow is the exact adjunction insertion [def-sp-exact-degree-zero-adjoint-interface], using the published derived adjunction to actual restriction of scalars, of the ordinary lax restriction unit. There is no flatness, boundedness or finite-type hypothesis.",
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraphs 1--3, ordinary regular-unit normalization and passage to derived coefficients"
+ },
+ "proof": [
+  {
+   "text": "The ordinary oplax unit of sheafified scalar extension is the adjunction transpose of the ordinary lax unit of restriction. Apply the ordinary hom equivalence to its inverse to identify its adjunct with that lax unit.",
+   "uses": [
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The published unitIso has its UnitNormalization property. Its cochain representative is definitionally the representative formed from the same ordinary and derived scalar adjunctions. Apply the normalized exact-single adjunction comparison to this normalization and the ordinary unit identity.",
+   "uses": [
+    "lem-coef-normalized-scalar-unit-single",
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-coef-normalized-scalar-unit-single"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "P2: ordinary monoidal adjunction unit and specialization of the proved normalized representative/single comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves on the small etale site, the derived scalar extension unit comparison is the exact single adjunction transpose of restriction of scalars unit",
+   "results": "Ordinary ModuleCat adjunction unit formulas and sheaf restriction definitions; no exact derived comparison.",
+   "date": "2026-10-28",
+   "verdict": "The project representative-normalized derived unit needs its specialization calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "singleFunctorObjUnitIso",
+   "results": "No hits; unknown identifier in the search index.",
+   "date": "2026-10-28",
+   "verdict": "This is a project comparison, not a Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitIso.*adjointInsertion|normalizedScalarUnit.*adjointInsertion",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-28",
+   "verdict": "No existing exact comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteDualizingQuotientNormalization",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Regular unit normalization, paragraphs 1--3",
+   "via": [
+    "lem-coef-dualizing-quotient-normalization",
+    "lem-coef-dualizing-compact-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleScalarUnitInsertion",
+  "file": "lean/Sheaf/SixFunctors/EtaleScalarUnitInsertion.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarUnit_eq_adjointInsertion",
+  "statement": "theorem scalarUnit_eq_adjointInsertion\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u}) :\n    (Etale.scalarExtension φ T).map\n        (_root_.DerivedCategory.singleFunctorObjUnitIso\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).hom ≫\n      (Etale.ExceptionalCoefficients.unitIso φ T).hom ≫\n        (_root_.DerivedCategory.singleFunctorObjUnitIso\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))).inv =\n      SheafExactDegreeZero.adjointInsertion\n        (Sheaf.restrictScalars T.smallEtaleTopology φ)\n        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))\n        (Functor.LaxMonoidal.ε (Sheaf.restrictScalars T.smallEtaleTopology φ))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261028T034900-L-3564271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261028T034900-L-3564271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
