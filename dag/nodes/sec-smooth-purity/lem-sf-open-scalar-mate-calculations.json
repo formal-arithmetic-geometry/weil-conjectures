@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-open-scalar-mate-calculations",
+ "kind": "statement",
+ "title": "Intrinsic open coefficient comparison as a pasted adjunction mate",
+ "statement": "For an open immersion and finite coefficient maps, the published intrinsic open scalar comparison [def-sf-compact-support-restriction-data] has adjunction mate equal to the inverse of its transported coefficient square [def-sf-open-scalar-restriction-data]. Inverse realization comparisons and fixed open comparisons satisfy the composition equations needed to paste this square. The stated open-unit normalization follows from the mate unit equation [lem-weil-extension-by-zero-adjunction].",
+ "stmt_deps": [
+  "def-sf-compact-support-restriction-data",
+  "def-sf-open-scalar-restriction-data",
+  "lem-weil-extension-by-zero-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV, 03DA, 03DI and 03CY; the existing sectionwise sheafification and adjunction-mate calculations, separated into a compile-sized proof module."
+ },
+ "proof": [
+  {
+   "text": "Apply the mate equivalence to the sectionwise realization composition and fixed open normalization equations. Its compatibility with horizontal composition yields the inverse-realization and fixed-open composition laws.",
+   "uses": [
+    "lem-sf-open-scalar-realization-calculations",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the published open comparison into its inverse-realization, fixed open and realization squares. The mate identities for the three factors and compatibility with pasting identify its mate with the inverse transported coefficient square. The mate unit equation then gives the open-unit normalization.",
+   "uses": [
+    "def-sf-compact-support-restriction-data",
+    "def-sf-open-scalar-restriction-data",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-scalar-realization-calculations",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-sf-compact-support-restriction-data",
+  "def-sf-open-scalar-restriction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Existing proved realization and mate calculations extracted without changing their statements or mathematical proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ii]d|[Uu]nit.*leftAdjointUniq",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/Algebra/Algebra/Epi.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/RestrictScalars.lean; Mathlib/LinearAlgebra/Matrix/Basis.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves commutes with open restriction and its extension by zero adjunction unit",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit; PresheafOfModules.restrictScalarsObj; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.RestrictionCoextensionAdj.unit'; PresheafOfModules.restrictScalars; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Section-normalized finite coefficient comparison used by compact-support transitions.",
+   "via": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenScalarRestrictionAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.open_mate",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.inverse_realization_mate",
+   "AlgebraicGeometry.Scheme.inverse_realization_comp",
+   "AlgebraicGeometry.Scheme.realization_inv_comp",
+   "AlgebraicGeometry.Scheme.forward_realization_mate",
+   "AlgebraicGeometry.Scheme.fixed_open_mate",
+   "AlgebraicGeometry.Scheme.fixed_open_comp",
+   "AlgebraicGeometry.Scheme.open_mate",
+   "AlgebraicGeometry.Scheme.open_normalized"
+  ],
+  "statement": "theorem open_mate {U Z : Scheme.{u}} (j : U ⟶ Z)\n    [IsOpenImmersion j] (φ : A →+* B) :\n    mateEquiv (sfIntrinsicExtensionByZeroAdjunction j B)\n        (sfIntrinsicExtensionByZeroAdjunction j A)\n        (TwoSquare.mk _ _ _ _ (sfOpenRestriction j φ).hom) =\n      TwoSquare.mk _ _ _ _ (sfOpenRestrictionCoefficientSquare j φ).inv ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
+ }
+}

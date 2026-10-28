@@ -10,6 +10,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 import Sheaf.CategoryTheory.EquivalenceAdjunctionComparison
 import all Sheaf.CategoryTheory.DerivedExactSquareComposition
 import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionAux
 
 /-! # The intrinsic realization of the open scalar comparison -/
 

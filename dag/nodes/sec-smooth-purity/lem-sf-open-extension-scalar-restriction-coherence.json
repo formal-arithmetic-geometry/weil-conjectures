@@ -22,7 +22,8 @@
    "uses": [
     "def-weil-extension-by-zero",
     "lem-weil-extension-by-zero-adjunction",
-    "def-pc-sheaf-restrict-scalars"
+    "def-pc-sheaf-restrict-scalars",
+    "lem-sf-open-scalar-realization-calculations"
    ],
    "elementary": true,
    "source": {
@@ -34,7 +35,9 @@
    "text": "The published realization comparison preserves each section. Consequently its comparison for a composite coefficient map is the composite of the two comparisons followed by the specified intrinsic scalar compositor. The inverse realization comparison is its adjunction mate, so the same composition law holds for the inverse realization comparisons. Paste the fixed open square with these two realization squares. Compatibility of mates with pasting identifies its mate with the inverse of sfOpenRestrictionCoefficientSquare. The mate unit equation proves the asserted normalization. Injectivity of the open adjunction hom equivalence, followed by cancellation of the coefficient-square component, proves uniqueness.",
    "uses": [
     "lem-weil-extension-by-zero-adjunction",
-    "def-pc-sheaf-restrict-scalars"
+    "def-pc-sheaf-restrict-scalars",
+    "def-sf-open-scalar-restriction-data",
+    "lem-sf-open-scalar-mate-calculations"
    ],
    "elementary": true,
    "source": {
@@ -85,6 +88,9 @@
   "def-weil-extension-by-zero",
   "lem-weil-extension-by-zero-adjunction",
   "def-pc-sheaf-restrict-scalars",
+  "lem-sf-open-scalar-realization-calculations",
+  "def-sf-open-scalar-restriction-data",
+  "lem-sf-open-scalar-mate-calculations",
   "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-pod-derived-exact-square-composition",
@@ -227,10 +233,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence",
   "declaration": "AlgebraicGeometry.Scheme.sfOpenRestriction_normalized_unique",
   "declarations": [
-   "AlgebraicGeometry.Scheme.sfOpenRestrictionCoefficientSquare",
-   "AlgebraicGeometry.Scheme.sfOpenFixedRestrictionId",
-   "AlgebraicGeometry.Scheme.sfOpenCoefficientRestrictionId",
-   "AlgebraicGeometry.Scheme.SfOpenRestrictionNormalized",
    "AlgebraicGeometry.Scheme.sfOpenRestriction_normalized_unique",
    "AlgebraicGeometry.Scheme.sfOpenRestriction_coefficient_comp",
    "AlgebraicGeometry.Scheme.sfOpenRestriction_coefficient_id",
@@ -247,7 +249,7 @@
   "by": "NM",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The remaining clauses are the coefficient, cochain and derived composition/identity theorems in lean.declarations. All use the published sfOpenRestriction and scalar associators. SfOpenRestrictionNormalized is the presheaf-identity condition expressed on the open-adjunction unit (the nonzero extension-presheaf generators); zero-source components are unique. The added landed adjunction dependency supplies exactly that existing unit. The existing comparison definitions are imported from the parent module, so adding a reverse proof import there would close an import cycle and must be omitted."
+  "note": "The comparison definitions now reside in ProEtaleOpenScalarRestrictionData, publicly reexported here, and the proved private mate calculations in ProEtaleOpenScalarRestrictionAux and ProEtaleOpenScalarRestrictionRealizationAux. Splitting these unchanged declarations keeps each module within the compile-time limit. The compact-support comparison data is imported from SfCompactSupportRestrictionData, allowing the parent to import the open cocycle without a cycle. All mathematical clauses and public signatures are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -258,13 +260,13 @@
   "note": "All node clauses are rendered in the Lean: finite rings A,B,C; arbitrary open immersion with no extra assumptions; canonical rho at sheaf and derived level (sfCoefficientRestrictionComp / sfDerivedCoefficientRestrictionComp); e = published sfOpenRestriction with a genuine normalized-and-unique clause (the predicate fixes the adjoint transpose through the recorded j_! -| j^* unit and the canonical square q, equivalent to identity on the extension presheaves); derived e via mapDerivedCategorySquareIso; cocycle at sheaf, cochain (Z-indexed) and derived level, orientation checked; identity laws with real identifications. Mechanical finding: the statement uses the unit of the adjunction constructed by lem-weil-extension-by-zero-adjunction (its Lean record is a def of the adjunction), so it genuinely depends on the theorem's conclusion: PASS on that point. No hollow definitions, all theorems sorry, docstrings and blueprint tags present, lean.statement verbatim, no duplicate, item not yet stated live. Compile: nt_compile hit its 60 s limit at load ~255; lcompile with a 560 s limit gave rc 0, clean, 419 s. Advisory: Sheaf.Paper.SfCompactSupportRestrictionOfScalars, which defines sfOpenRestriction and the scalar-composition maps, is not named by any node's lean record."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q9",
-  "result": "pass",
-  "landing": "20261021T120503-L-3902287",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
  }
 }

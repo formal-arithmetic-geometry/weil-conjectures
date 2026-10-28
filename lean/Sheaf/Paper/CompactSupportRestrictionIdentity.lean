@@ -7,6 +7,7 @@ module
 public import Sheaf.Paper.CompactSupportCoefficientPresentation
 import Sheaf.Paper.CompactSupportScalarDirectNormalization
 import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionRealizationAux
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Identity normalization of the compact-support restriction comparison

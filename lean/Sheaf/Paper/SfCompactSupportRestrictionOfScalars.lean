@@ -11,304 +11,131 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
-/-!
-# Compact-support direct image and finite coefficient restriction
+public import Sheaf.Paper.SfCompactSupportRestrictionData
+import Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionRealizationAux
+import all Sheaf.AlgebraicGeometry.FiniteFreeDirectImageBalancingCoherence
+import Sheaf.Paper.CompactSupportScalarDirectNormalization
 
-Source: Bhatt--Scholze, Sections 6.5 and 6.7; Stacks Tags 03DI, 0D6E and 0D6J
-(blueprint: lem-sf-compact-support-restriction-of-scalars).
+/-! # Composition of finite compact-support scalar comparisons
 
-All comparisons are normalized before choosing them: realization preserves sections,
-extension by zero uses the adjunction unit, and derived direct image uses its
-K-injective comparison. Thus the compactification and coefficient map enter the actual
-functors and maps.
--/
+Source: Stacks Tags 03DI and 0D6E
+(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
 
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
-
--- Lift the scalar and the section to a common cover to compare the two actions.
-private theorem sheafify_restrict_smul
-    {D : Type (u + 1)} [Category.{u} D] {J : GrothendieckTopology D}
-    {R₀ S₀ : Dᵒᵖ ⥤ RingCat.{u + 1}} {R S : Sheaf J RingCat.{u + 1}}
-    (α : R₀ ⟶ R.obj) (β : S₀ ⟶ S.obj)
-    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
-    [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]
-    (γ : R₀ ⟶ S₀) (δ : R ⟶ S) (h : α ≫ δ.hom = γ ≫ β)
-    (M : PresheafOfModules.{u + 1} R₀) (N : PresheafOfModules.{u + 1} S₀)
-    (F G : Sheaf J AddCommGrpCat.{u + 1}) (η : M.presheaf ⟶ F.obj)
-    (ζ : N.presheaf ⟶ G.obj)
-    [Presheaf.IsLocallyInjective J η] [Presheaf.IsLocallySurjective J η]
-    [Presheaf.IsLocallyInjective J ζ] [Presheaf.IsLocallySurjective J ζ]
-    (τ : M.presheaf ⟶ N.presheaf) (f : F ⟶ G)
-    (hτ : ∀ (U : Dᵒᵖ) (r : R₀.obj U) (x : M.obj U),
-      τ.app U (r • x) = @SMul.smul _ (N.obj U) inferInstance (γ.app U r) (τ.app U x))
-    (hf : η ≫ f.hom = τ ≫ ζ) (U : Dᵒᵖ) (r : R.obj.obj U) (x : F.obj.obj U) :
-    f.hom.app U (PresheafOfModules.Sheafify.smul α η r x) =
-      PresheafOfModules.Sheafify.smul β ζ (δ.hom.app U r) (f.hom.app U x) := by
-  have hf' (V : Dᵒᵖ) (y : M.obj V) :
-      f.hom.app V (η.app V y) = ζ.app V (τ.app V y) :=
-    ConcreteCategory.congr_hom (NatTrans.congr_app hf V) y
-  apply G.isSeparated _ _ (J.intersection_covering
-    (Presheaf.imageSieve_mem J α r) (Presheaf.imageSieve_mem J η x))
-  rintro V i ⟨⟨r₀, hr₀⟩, ⟨x₀, hx₀⟩⟩
-  rw [← NatTrans.naturality_apply f.hom i.op,
-    PresheafOfModules.Sheafify.map_smul_eq α η _ _ i.op r₀ hr₀ x₀ hx₀, hf']
-  rw [PresheafOfModules.Sheafify.map_smul_eq β ζ _ _ i.op
-    (γ.app _ r₀) (by
-      have hh := ConcreteCategory.congr_hom (NatTrans.congr_app h (Opposite.op V)) r₀
-      change δ.hom.app _ (α.app _ r₀) = β.app _ (γ.app _ r₀) at hh
-      rw [← hh, hr₀]
-      exact NatTrans.naturality_apply δ.hom i.op r) (τ.app _ x₀) (by
-      rw [← hf', hx₀]
-      exact NatTrans.naturality_apply f.hom i.op x)]
-  exact congrArg (ζ.app _) (hτ _ r₀ x₀)
-
-private theorem lift_module_iso
-    {D : Type (u + 1)} [Category.{u} D] {J : GrothendieckTopology D}
-    {R : Sheaf J RingCat.{u + 1}}
-    {E : Type*} [Category* E] (F G : E ⥤ SheafOfModules.{u + 1} R)
-    (e : F ⋙ SheafOfModules.toSheaf R ≅ G ⋙ SheafOfModules.toSheaf R)
-    (he : ∀ (M : E) (U : Dᵒᵖ) (r : R.obj.obj U) (x : (F.obj M).val.obj U),
-      (e.hom.app M).hom.app U (r • x) =
-        @SMul.smul _ ((G.obj M).val.obj U) inferInstance r
-          ((e.hom.app M).hom.app U x)) :
-    ∃! i : F ≅ G, ∀ (M : E) (U : Dᵒᵖ) (x : (F.obj M).val.obj U),
-      (i.hom.app M).val.app U x = (e.hom.app M).hom.app U x := by
-  let η : F ⟶ G :=
-    { app M := ⟨PresheafOfModules.homMk (e.hom.app M).hom (he M)⟩
-      naturality := by
-        intro M N f
-        apply (SheafOfModules.toSheaf R).map_injective
-        exact e.hom.naturality f }
-  have hη (M : E) : (SheafOfModules.toSheaf R).map (η.app M) = e.hom.app M := by
-    ext U x
-    rfl
-  have : IsIso η := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro M
-    have : IsIso ((SheafOfModules.toSheaf R).map (η.app M)) := by
-      rw [hη]
-      infer_instance
-    exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf R)
-  refine ⟨asIso η, ?_, ?_⟩
-  · intro M U x
-    rfl
-  · intro i hi
-    apply Iso.ext
-    ext M U x
-    exact hi M U x
-
-private noncomputable abbrev moduleRealization
-    {D : Type (u + 1)} [Category.{u} D] (J : GrothendieckTopology D)
-    [HasWeakSheafify J AddCommGrpCat.{u + 1}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    (Λ : Type (u + 1)) [Ring Λ] (R : Sheaf J RingCat.{u + 1})
-    (α : (Functor.const Dᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
-    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :=
-  sheafToPresheaf J (ModuleCat.{u + 1} Λ) ⋙
-    AlgebraicGeometry.ProEtale.finiteCoefficientModulePresheaf D Λ ⋙
-    PresheafOfModules.sheafification α
-
-private theorem realization_restrict_smul
-    {D : Type (u + 1)} [Category.{u} D] (J : GrothendieckTopology D)
-    [HasWeakSheafify J AddCommGrpCat.{u + 1}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {Λ₁ Λ₂ : Type (u + 1)} [CommRing Λ₁] [CommRing Λ₂]
-    (R S : Sheaf J RingCat.{u + 1})
-    (α : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₁) ⟶ R.obj)
-    (β : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₂) ⟶ S.obj)
-    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
-    [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]
-    (φ : Λ₁ →+* Λ₂) (δ : R ⟶ S)
-    (hs : α ≫ δ.hom = (Functor.const Dᵒᵖ).map (RingCat.ofHom φ) ≫ β) :
-    ∀ (M : Sheaf J (ModuleCat.{u + 1} Λ₂)) (U : Dᵒᵖ)
-      (r : R.obj.obj U) (x : ((moduleRealization J Λ₂ S β).obj M).val.obj U),
-      @SMul.smul _ (((SheafOfModules.restrictScalars.{u + 1} δ).obj
-        ((moduleRealization J Λ₂ S β).obj M)).val.obj U) inferInstance r x =
-      @SMul.smul _ (((moduleRealization J Λ₁ R α).obj
-        ((sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ)).obj M)).val.obj U)
-        inferInstance r x := by
-  intro M U r x
-  let M₁ := (AlgebraicGeometry.ProEtale.finiteCoefficientModulePresheaf D Λ₁).obj
-    ((sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ)).obj M).obj
-  let M₂ := (AlgebraicGeometry.ProEtale.finiteCoefficientModulePresheaf D Λ₂).obj M.obj
-  exact (sheafify_restrict_smul α β ((Functor.const Dᵒᵖ).map (RingCat.ofHom φ)) δ hs
-    M₁ M₂ ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj M₁.presheaf)
-    ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj M₂.presheaf)
-    (toSheafify J _) (toSheafify J _) (𝟙 _) (𝟙 _) (by intro V a y; rfl)
-    (by simp only [Category.id_comp]; rfl) U r x).symm
-
-private theorem realization_restrict_existsUnique
-    {D : Type (u + 1)} [Category.{u} D] (J : GrothendieckTopology D)
-    [HasWeakSheafify J AddCommGrpCat.{u + 1}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    {Λ₁ Λ₂ : Type (u + 1)} [CommRing Λ₁] [CommRing Λ₂]
-    (R S : Sheaf J RingCat.{u + 1})
-    (α : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₁) ⟶ R.obj)
-    (β : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₂) ⟶ S.obj)
-    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
-    [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]
-    (φ : Λ₁ →+* Λ₂) (δ : R ⟶ S)
-    (hs : α ≫ δ.hom = (Functor.const Dᵒᵖ).map (RingCat.ofHom φ) ≫ β) :
-    ∃! e : moduleRealization J Λ₂ S β ⋙ SheafOfModules.restrictScalars.{u + 1} δ ≅
-        sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ) ⋙ moduleRealization J Λ₁ R α,
-      ∀ (M : Sheaf J (ModuleCat.{u + 1} Λ₂)) (U : Dᵒᵖ)
-        (x : ((moduleRealization J Λ₂ S β).obj M).val.obj U),
-        (e.hom.app M).val.app U x = x := by
-  exact lift_module_iso
-    (moduleRealization J Λ₂ S β ⋙ SheafOfModules.restrictScalars.{u + 1} δ)
-    (sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ) ⋙ moduleRealization J Λ₁ R α)
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intro M N f; ext U x; rfl))
-    (realization_restrict_smul J R S α β φ δ hs)
-
 namespace AlgebraicGeometry.Scheme
 
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
-/-- Fixed scalar restriction on the pro-etale site. Source: Stacks Tag 03DA
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable abbrev sfFixedRestriction (T : Scheme.{u}) (φ : A →+* B) :=
-  sheafCompose (ProEt.topology T) (ModuleCat.restrictScalars.{u + 1} φ.ulift)
+omit [Finite A] [Finite B] [Finite C] in
+/-- Cancel the sectionwise coefficient compositor against its inverse. -/
+private theorem restrictionComp_inv_apply (T : Scheme.{u})
+    (φ : A →+* B) (ψ : B →+* C)
+    (M : proEtaleRingModules T (proEtaleConstantRing T C)) (V : T.ProEtᵒᵖ)
+    (x : M.val.obj V) :
+    ((sfCoefficientRestrictionComp T φ ψ).inv.app M).val.app V x = x := by
+  have he := congrArg (fun k :
+      (proEtaleCoefficientRestrictScalars T (ψ.comp φ)).obj M ⟶
+        (proEtaleCoefficientRestrictScalars T (ψ.comp φ)).obj M ↦ k.val.app V x)
+    ((sfCoefficientRestrictionComp T φ ψ).inv_hom_id_app M)
+  simpa only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    restriction_comp_apply, SheafOfModules.id_val, PresheafOfModules.id_app,
+    ModuleCat.id_apply] using he
 
-/-- Realization commutes with scalar restriction by the identity on the sheafified
-underlying abelian presheaf. Source: Stacks Tags 00YV and 03DA
-(blueprint: lem-sf-compact-support-restriction-of-scalars).
-Proof: the two input abelian presheaves agree. Module sheafification has precisely
-abelian sheafification as its underlying sheaf. The actions agree on constant scalar
-sections by naturality of the coefficient unit and hence on all locally constant
-sections. Identity is therefore linear and natural, and sectionwise identity is unique. -/
-theorem sfRealizationRestriction_existsUnique (T : Scheme.{u}) (φ : A →+* B) :
-    ∃! e : (sfIntrinsicModuleEquivalence T B).functor ⋙
-        proEtaleCoefficientRestrictScalars T φ ≅
-      sfFixedRestriction T φ ⋙ (sfIntrinsicModuleEquivalence T A).functor,
-      ∀ (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
-        (U : T.ProEtᵒᵖ)
-        (x : (((sfIntrinsicModuleEquivalence T B).functor.obj M).val.obj U)),
-        (e.hom.app M).val.app U x = x := by
-  let φ' : ULift.{u + 1, u} A →+* ULift.{u + 1, u} B := φ.ulift
-  let δ := (sheafCompose (ProEt.topology T)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-        (CommRingCat.ofHom φ'))
-  apply realization_restrict_existsUnique (ProEt.topology T) _ _
-    (ProEtale.finiteCoefficientIntrinsicScalarMap T A)
-    (ProEtale.finiteCoefficientIntrinsicScalarMap T B) φ' δ
-  exact (congrArg (fun k ↦ Functor.whiskerRight k
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-      (toSheafify_naturality (ProEt.topology T)
-        ((Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom φ')))).symm
+/-- The ordinary direct-image comparisons preserve sections by their normalization. -/
+private theorem imageRestriction_apply {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (φ : A →+* B) (M : proEtaleRingModules Z (proEtaleConstantRing Z B))
+    (V : Y.ProEtᵒᵖ) (x : M.val.obj ((proEtaleBaseChange g).op.obj V)) :
+    ((proEtaleCoefficientDirectImageComparison g φ).hom.app M).val.app V x = x := by
+  exact (proEtaleCoefficientDirectImageComparison_existsUnique g φ).choose_spec.1 M V x
 
-/-- The sectionwise normalized realization comparison. Source: Stacks Tag 00YV
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfRealizationRestriction (T : Scheme.{u}) (φ : A →+* B) :=
-  (sfRealizationRestriction_existsUnique T φ).exists.choose
+omit [Finite A] in
+/-- Direct image acts on a morphism by evaluating it over the base change. -/
+private theorem directImage_map_apply {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    {M N : proEtaleRingModules Z (proEtaleConstantRing Z A)} (f : M ⟶ N)
+    (V : Y.ProEtᵒᵖ) (x : ((proEtaleConstantModuleDirectImage g A).obj M).val.obj V) :
+    ((proEtaleConstantModuleDirectImage g A).map f).val.app V x =
+      f.val.app ((proEtaleBaseChange g).op.obj V) x := rfl
 
-/-- The inverse-equivalence coefficient square, obtained by unit and counit from the
-normalized realization square. Source: Stacks Tag 00YV
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfInverseRealizationRestriction (T : Scheme.{u}) (φ : A →+* B) :
-    proEtaleCoefficientRestrictScalars T φ ⋙ (sfIntrinsicModuleEquivalence T A).inverse ≅
-      (sfIntrinsicModuleEquivalence T B).inverse ⋙ sfFixedRestriction T φ :=
-  Functor.isoWhiskerRight (sfIntrinsicModuleEquivalence T B).counitIso.symm
-      (proEtaleCoefficientRestrictScalars T φ ⋙ (sfIntrinsicModuleEquivalence T A).inverse) ≪≫
-    Functor.isoWhiskerLeft (sfIntrinsicModuleEquivalence T B).inverse
-      (Functor.isoWhiskerRight (sfRealizationRestriction T φ)
-        (sfIntrinsicModuleEquivalence T A).inverse) ≪≫
-    Functor.isoWhiskerLeft
-      ((sfIntrinsicModuleEquivalence T B).inverse ⋙ sfFixedRestriction T φ)
-      (sfIntrinsicModuleEquivalence T A).unitIso.symm
-
-/-- Fixed-scalar extension by zero commutes with restriction: both sides are left
-adjoint to the same objectwise composite of open restriction and coextension.
-The left-adjoint uniqueness map is normalized by the adjunction units.
-Source: Stacks Tag 03DI (blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfFixedOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
-    [IsOpenImmersion j] (φ : A →+* B) :
-    sfFixedRestriction X φ ⋙
-        ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ≅
-      ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j ⋙
-        sfFixedRestriction Z φ :=
-  ((Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) φ.ulift).comp
-      (ProEtale.openImmersionLowerShriekAdjunction
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j)).leftAdjointUniq
-    ((ProEtale.openImmersionLowerShriekAdjunction
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).comp
-      (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Z) φ.ulift))
-
-/-- The intrinsic extension-by-zero coefficient square, transported by the canonical
-realization equivalences. Source: Stacks Tags 03DI and 00YV
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
-    [IsOpenImmersion j] (φ : A →+* B) :
-    proEtaleCoefficientRestrictScalars X φ ⋙ sfIntrinsicExtensionByZero j A ≅
-      sfIntrinsicExtensionByZero j B ⋙ proEtaleCoefficientRestrictScalars Z φ :=
-  Functor.isoWhiskerRight (sfInverseRealizationRestriction X φ)
-      (ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
-        (sfIntrinsicModuleEquivalence Z A).functor) ≪≫
-    Functor.isoWhiskerLeft (sfIntrinsicModuleEquivalence X B).inverse
-      (Functor.isoWhiskerRight (sfFixedOpenRestriction j φ)
-        (sfIntrinsicModuleEquivalence Z A).functor) ≪≫
-    Functor.isoWhiskerLeft
-      ((sfIntrinsicModuleEquivalence X B).inverse ⋙
-        ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j)
-      (sfRealizationRestriction Z φ).symm
-
-/-- Derived direct-image coefficient comparison selected with the full K-injective
-normalization of the recorded direct-image theorem. That normalization determines the
-natural isomorphism on every K-injective representative and hence after localization.
-Source: Stacks Tags 0D6E and 0D6J
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfDerivedImageRestriction {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-    (φ : A →+* B) :
-    (proEtaleCoefficientRestrictScalars Z φ).mapDerivedCategory ⋙
-        proEtaleConstantDerivedDirectImage g A ≅
-      proEtaleConstantDerivedDirectImage g B ⋙
-        (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory :=
-  (proEtaleDerivedDirectImage_restrictScalars g φ).choose
-
-/-- The specified compact-support comparison is the extension-by-zero square followed
-by the direct-image square, with no change of compactification. Source: Bhatt--Scholze,
-Lemma 6.7.7; Stacks Tags 03DI and 0D6E
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f) (φ : A →+* B) :
-    (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙
-        sfAmbientCompactSupportCandidate A c ≅
-      sfAmbientCompactSupportCandidate B c ⋙
-        (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory :=
-  Functor.isoWhiskerRight (Functor.mapDerivedCategorySquareIso (sfOpenRestriction c.i φ))
-      (proEtaleConstantDerivedDirectImage c.g A) ≪≫
-    Functor.isoWhiskerLeft (sfIntrinsicExtensionByZero c.i B).mapDerivedCategory
-      (sfDerivedImageRestriction c.g φ)
-
-/-- The normalized scalar-restriction composition map, using the shared sectionwise
-identity comparison for commutative ring sheaves. Source: Stacks Tag 03DA
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfCoefficientRestrictionComp (T : Scheme.{u})
+/-- The inverse direct-image comparisons paste by uniqueness of their derived unit
+normalizations. Source: Stacks Tag 0D6E. -/
+private theorem derivedImageRestriction_inv_comp {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (φ : A →+* B) (ψ : B →+* C) :
-    proEtaleCoefficientRestrictScalars T ψ ⋙ proEtaleCoefficientRestrictScalars T φ ≅
-      proEtaleCoefficientRestrictScalars T (ψ.comp φ) :=
-  pbcRestrictComp
-    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-      (CommRingCat.ofHom φ.ulift))
-    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-      (CommRingCat.ofHom ψ.ulift))
-    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-      (CommRingCat.ofHom (ψ.comp φ).ulift))
-    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_comp _ _).symm
+    (sfDerivedImageRestriction g (ψ.comp φ)).symm =
+      Functor.isoWhiskerLeft (proEtaleConstantDerivedDirectImage g C)
+          (sfDerivedCoefficientRestrictionComp Y φ ψ).symm ≪≫
+        (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (sfDerivedImageRestriction g ψ).symm
+          (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory ≪≫
+        Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (proEtaleCoefficientRestrictScalars Z ψ).mapDerivedCategory
+          (sfDerivedImageRestriction g φ).symm ≪≫
+        (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (sfDerivedCoefficientRestrictionComp Z φ ψ)
+          (proEtaleConstantDerivedDirectImage g A) := by
+  apply FiniteFreeDirectImage.rightTower
+    (proEtaleConstantModuleDirectImage g A) (proEtaleConstantModuleDirectImage g B)
+    (proEtaleConstantModuleDirectImage g C)
+    (proEtaleCoefficientRestrictScalars Y φ) (proEtaleCoefficientRestrictScalars Y ψ)
+    (proEtaleCoefficientRestrictScalars Y (ψ.comp φ))
+    (proEtaleCoefficientRestrictScalars Z φ) (proEtaleCoefficientRestrictScalars Z ψ)
+    (proEtaleCoefficientRestrictScalars Z (ψ.comp φ))
+    (sfCoefficientRestrictionComp Y φ ψ) (sfCoefficientRestrictionComp Z φ ψ)
+    (sfDerivedImageRestriction g φ).symm (sfDerivedImageRestriction g ψ).symm
+    (sfDerivedImageRestriction g (ψ.comp φ)).symm
+    (proEtaleCoefficientDirectImageComparison g φ)
+    (proEtaleCoefficientDirectImageComparison g ψ)
+    (proEtaleCoefficientDirectImageComparison g (ψ.comp φ))
+  · intro P
+    exact WeilConjectures.compactSupportScalarDirectNormalization g φ P
+  · intro P
+    exact WeilConjectures.compactSupportScalarDirectNormalization g ψ P
+  · intro P
+    exact WeilConjectures.compactSupportScalarDirectNormalization g (ψ.comp φ) P
+  · intro M
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    ext x
+    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+    erw [directImage_map_apply, restriction_comp_apply]
+    change ((proEtaleCoefficientDirectImageComparison g φ).hom.app
+      ((proEtaleCoefficientRestrictScalars Z ψ).obj M)).val.app V
+        (((proEtaleCoefficientDirectImageComparison g ψ).hom.app M).val.app V
+          (((sfCoefficientRestrictionComp Y φ ψ).inv.app
+            ((proEtaleConstantModuleDirectImage g C).obj M)).val.app V x)) =
+      ((proEtaleCoefficientDirectImageComparison g (ψ.comp φ)).hom.app M).val.app V x
+    rw [restrictionComp_inv_apply, imageRestriction_apply, imageRestriction_apply,
+      imageRestriction_apply]
 
-/-- The termwise derived scalar composition map. Source: Stacks Tag 015F
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
-noncomputable def sfDerivedCoefficientRestrictionComp (T : Scheme.{u})
-    (φ : A →+* B) (ψ : B →+* C) :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (sfCoefficientRestrictionComp T φ ψ)
+/-- Invert the inverse comparison cocycle and cancel the source compositor. -/
+private theorem derivedImageRestriction_comp {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+    (φ : A →+* B) (ψ : B →+* C) (K : proEtaleDerivedCategory Z C) :
+    (proEtaleConstantDerivedDirectImage g A).map
+        ((sfDerivedCoefficientRestrictionComp Z φ ψ).hom.app K) ≫
+      (sfDerivedImageRestriction g (ψ.comp φ)).hom.app K =
+    (sfDerivedImageRestriction g φ).hom.app
+        ((proEtaleCoefficientRestrictScalars Z ψ).mapDerivedCategory.obj K) ≫
+      (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory.map
+        ((sfDerivedImageRestriction g ψ).hom.app K) ≫
+      (sfDerivedCoefficientRestrictionComp Y φ ψ).hom.app
+        ((proEtaleConstantDerivedDirectImage g C).obj K) := by
+  have hi := congrArg (fun e ↦ e.inv.app K) (derivedImageRestriction_inv_comp g φ ψ)
+  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.comp_id] at hi
+  rw [hi]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- The compact-support coefficient comparisons compose for composable ring maps.
-The comparison itself is defined above as precisely the extension-by-zero comparison
+The comparison in SfCompactSupportRestrictionData is the extension-by-zero comparison
 followed by the ordinary derived direct-image comparison.
 Source: Bhatt--Scholze, Sections 6.5 and 6.7; Stacks Tags 03DI, 0D6E and 0D6J
 (blueprint: lem-sf-compact-support-restriction-of-scalars).
@@ -334,6 +161,37 @@ theorem sfCompactSupportRestriction_comp
         ((sfCompactSupportRestriction c ψ).hom.app K) ≫
       (sfDerivedCoefficientRestrictionComp Y φ ψ).hom.app
         ((sfAmbientCompactSupportCandidate C c).obj K) := by
-  sorry
+  have ho := sfOpenRestriction_derived_comp c.i φ ψ K
+  have hp := derivedImageRestriction_comp c.g φ ψ
+    ((sfIntrinsicExtensionByZero c.i C).mapDerivedCategory.obj K)
+  have hn := (sfDerivedImageRestriction c.g φ).hom.naturality
+    ((sfOpenRestrictionDerived c.i ψ).hom.app K)
+  change (proEtaleConstantDerivedDirectImage c.g A).map
+      ((sfIntrinsicExtensionByZero c.i A).mapDerivedCategory.map
+        ((sfDerivedCoefficientRestrictionComp X φ ψ).hom.app K)) ≫
+    (proEtaleConstantDerivedDirectImage c.g A).map
+      ((sfOpenRestrictionDerived c.i (ψ.comp φ)).hom.app K) ≫
+    (sfDerivedImageRestriction c.g (ψ.comp φ)).hom.app
+      ((sfIntrinsicExtensionByZero c.i C).mapDerivedCategory.obj K) =
+    ((proEtaleConstantDerivedDirectImage c.g A).map
+        ((sfOpenRestrictionDerived c.i φ).hom.app
+          ((proEtaleCoefficientRestrictScalars X ψ).mapDerivedCategory.obj K)) ≫
+      (sfDerivedImageRestriction c.g φ).hom.app
+        ((sfIntrinsicExtensionByZero c.i B).mapDerivedCategory.obj
+          ((proEtaleCoefficientRestrictScalars X ψ).mapDerivedCategory.obj K))) ≫
+    (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory.map
+      ((proEtaleConstantDerivedDirectImage c.g B).map
+          ((sfOpenRestrictionDerived c.i ψ).hom.app K) ≫
+        (sfDerivedImageRestriction c.g ψ).hom.app
+          ((sfIntrinsicExtensionByZero c.i C).mapDerivedCategory.obj K)) ≫
+    (sfDerivedCoefficientRestrictionComp Y φ ψ).hom.app
+      ((proEtaleConstantDerivedDirectImage c.g C).obj
+        ((sfIntrinsicExtensionByZero c.i C).mapDerivedCategory.obj K))
+  simp only [Category.assoc, Functor.map_comp]
+  rw [← Functor.map_comp_assoc, ho, Functor.map_comp, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [hp]
+  simp only [Functor.comp_map] at hn
+  erw [reassoc_of% hn]
 
 end AlgebraicGeometry.Scheme

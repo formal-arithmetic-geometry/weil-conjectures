@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.FiniteCompactSupportScalarTransportData
 import all Sheaf.Paper.OpenScalarSiteCoherence
 import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionRealizationAux
 import all Sheaf.SixFunctors.EtaleOpenTensorDefs
 
 /-! # The fixed-coefficient open scalar comparison -/

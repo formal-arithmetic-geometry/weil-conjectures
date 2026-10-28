@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-compact-support-restriction-data",
+ "kind": "definition",
+ "title": "Normalized finite coefficient comparison data before compact-support coherence",
+ "statement": "For schemes T, open immersions $j:X\\to Z$ and maps $\\varphi:A\\to B$ of finite commutative rings, use the fixed-coefficient and intrinsic constant-ring module sheaves [def-weil-extension-by-zero], restriction of scalars [def-pc-sheaf-restrict-scalars], and the ordinary K-injective direct image [lem-weil-proetale-direct-image-restriction-of-scalars]. Define sfFixedRestriction as fixed-coefficient restriction. The unique sectionwise identity realization comparison sfRealizationRestriction and its unit/counit inverse square sfInverseRealizationRestriction transport the unit-normalized left-adjoint comparison sfFixedOpenRestriction to sfOpenRestriction. Define sfDerivedImageRestriction to be the specified K-injective-normalized coefficient comparison. For a compactification c of f [def-weil-compactifications-refinements], sfCompactSupportRestriction is the exact derived open square followed by the derived direct-image square. Finally sfCoefficientRestrictionComp is the sectionwise identity coefficient compositor and sfDerivedCoefficientRestrictionComp its exact localization. These are the existing constructions, with no coefficient-composition law for compact support asserted here.",
+ "stmt_deps": [
+  "def-weil-extension-by-zero",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sfb-finite-extension-by-zero"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03DI; Tag 00YV for the sectionwise realization, and sites-cohomology.tex Tags 0D6E and 0D6J for the specified derived comparison."
+ },
+ "proof": [
+  {
+   "text": "Construct the realization comparison from the unique sectionwise linear lift; its inverse is the unit/counit mate. The fixed open comparison is the uniqueness isomorphism of the composite left adjoints. Use the specified K-injective direct-image comparison and paste the two squares.",
+   "uses": [
+    "lem-sf-realization-restriction-linear-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-realization-restriction-linear-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV and 03DA for realization; existing unit-normalized and K-injective-normalized comparison definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived_comp|leftAdjointUniq",
+   "results": "Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic derived comparison and adjunction API only; the existing project constructions are moved unchanged, not duplicated."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.rightDerived_comp",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp",
+   "date": "2026-10-28",
+   "verdict": "Generic derived comparison and adjunction API only; the existing project constructions are moved unchanged, not duplicated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of normalized right derived functor comparisons under exact restriction of scalars",
+   "results": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "date": "2026-10-28",
+   "verdict": "Generic derived comparison and adjunction API only; the existing project constructions are moved unchanged, not duplicated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized compact support restriction of coefficients defined by realization extension by zero and right derived direct image",
+   "results": "HasCompactSupport.tsupport_extend_zero; HasCompactSupport.extend_zero; Finsupp.subtypeDomain_extendDomain; TestFunction.hasCompactSupport'; Finsupp.restrictSupportEquiv; Finsupp.restrictSupportEquiv_apply; Function.locallyFinsuppWithin.restrict; Finsupp.supportedEquivFinsupp",
+   "date": "2026-10-28",
+   "verdict": "Search returned topological compact support results, not the finite-coefficient comparisons. Blueprint search for compact-support restriction found only def-trf-admissibility; these definitions already belonged to the parent node and are extracted, not duplicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite-level coefficient comparisons needed for the tower transition maps; definitions separated from their composition proof.",
+   "via": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCompactSupportRestrictionData",
+  "file": "lean/Sheaf/Paper/SfCompactSupportRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfFixedRestriction",
+   "AlgebraicGeometry.Scheme.sfRealizationRestriction_existsUnique",
+   "AlgebraicGeometry.Scheme.sfRealizationRestriction",
+   "AlgebraicGeometry.Scheme.sfInverseRealizationRestriction",
+   "AlgebraicGeometry.Scheme.sfFixedOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfDerivedImageRestriction",
+   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
+   "AlgebraicGeometry.Scheme.sfCoefficientRestrictionComp",
+   "AlgebraicGeometry.Scheme.sfDerivedCoefficientRestrictionComp"
+  ],
+  "statement": "def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) (φ : A →+* B) :\n    (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙\n        sfAmbientCompactSupportCandidate A c ≅\n      sfAmbientCompactSupportCandidate B c ⋙\n        (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
+ }
+}

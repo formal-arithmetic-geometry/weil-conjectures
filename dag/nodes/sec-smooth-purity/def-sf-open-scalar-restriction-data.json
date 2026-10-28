@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-open-scalar-restriction-data",
+ "kind": "definition",
+ "title": "Specified coefficient square and open-unit normalization",
+ "statement": "For an open immersion $j:U\\hookrightarrow Z$ [def-weil-open-immersion] and finite coefficient map $\\varphi:A\\to B$, use the section-normalized realization comparisons [def-sf-compact-support-restriction-data] and intrinsic open restriction and extension by zero [def-weil-extension-by-zero]. Define sfOpenRestrictionCoefficientSquare by transporting the identity fixed-scalar restriction square through the realization comparisons. Define sfOpenFixedRestrictionId to be the sectionwise identity for the identity coefficient map; transport it through realization and the counit to obtain sfOpenCoefficientRestrictionId. Define SfOpenRestrictionNormalized to be the displayed open-adjunction unit equation [lem-weil-extension-by-zero-adjunction] with sfOpenRestrictionCoefficientSquare. These are the four existing definitions, with unchanged names and bodies; their uniqueness and coherence laws remain in the original coherence module.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-sf-compact-support-restriction-data",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03CY; open adjunction unit and section-normalized restriction of scalars."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ii]d|[Uu]nit.*leftAdjointUniq",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/Algebra/Algebra/Epi.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/RestrictScalars.lean; Mathlib/LinearAlgebra/Matrix/Basis.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic module scalar and adjunction API only. The four existing project definitions are extracted without changing their bodies, rather than constructing new comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves commutes with open restriction and its extension by zero adjunction unit",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit; PresheafOfModules.restrictScalarsObj; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.RestrictionCoextensionAdj.unit'; PresheafOfModules.restrictScalars; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-28",
+   "verdict": "Generic module scalar and adjunction API only. The four existing project definitions are extracted without changing their bodies, rather than constructing new comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-28",
+   "verdict": "Generic module scalar and adjunction API only. The four existing project definitions are extracted without changing their bodies, rather than constructing new comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Coefficient comparisons for finite-level compact-support transition maps; existing open comparison data separated for compilation.",
+   "via": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenScalarRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfOpenRestrictionCoefficientSquare",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfOpenRestrictionCoefficientSquare",
+   "AlgebraicGeometry.Scheme.sfOpenFixedRestrictionId",
+   "AlgebraicGeometry.Scheme.sfOpenCoefficientRestrictionId",
+   "AlgebraicGeometry.Scheme.SfOpenRestrictionNormalized"
+  ],
+  "statement": "def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)\n    [IsOpenImmersion j] (φ : A →+* B) :\n    proEtaleCoefficientRestrictScalars Z φ ⋙ sfIntrinsicOpenRestriction j A ≅\n      sfIntrinsicOpenRestriction j B ⋙ proEtaleCoefficientRestrictScalars U φ ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
+ }
+}

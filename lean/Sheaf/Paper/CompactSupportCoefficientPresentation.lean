@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 
 /-! # Canonical types for finite coefficient restriction comparisons
 

@@ -2,10 +2,10 @@
  "id": "lem-weil-compact-support-scalar-direct-normalization",
  "kind": "statement",
  "title": "Unit normalization of the specified scalar direct-image comparison",
- "statement": "Let $g:Z\\to Y$ be a morphism of schemes and $\\varphi:A\\to B$ a map of finite commutative rings. For the ordinary direct-image functors $F=g_*^B$, $H=g_*^A$, scalar restrictions $x=\\operatorname{Res}_\\varphi^Z$, $y=\\operatorname{Res}_\\varphi^Y$, and the ordinary identity-on-sections comparison $c:F;y\\cong x;H$ [lem-weil-proetale-direct-image-restriction-of-scalars], the inverse of the specified comparison sfDerivedImageRestriction [lem-sf-compact-support-restriction-of-scalars] is unitNormalized [lem-pur-derived-square-normalization-naturality]. Explicitly, for every cochain complex $I$, $Dy(\\eta_F(I));\\chi^{-1}_{QI};RH(x_{\\mathrm{fac},I})=y_{\\mathrm{fac},FI};Q(c_I);\\eta_H(xI)$. No preservation of K-injectives by restriction is assumed.",
+ "statement": "Let $g:Z\\to Y$ be a morphism of schemes and $\\varphi:A\\to B$ a map of finite commutative rings. For the ordinary direct-image functors $F=g_*^B$, $H=g_*^A$, scalar restrictions $x=\\operatorname{Res}_\\varphi^Z$, $y=\\operatorname{Res}_\\varphi^Y$, and the ordinary identity-on-sections comparison $c:F;y\\cong x;H$ [lem-weil-proetale-direct-image-restriction-of-scalars], the inverse of the specified comparison sfDerivedImageRestriction [def-sf-compact-support-restriction-data] is unitNormalized [lem-pur-derived-square-normalization-naturality]. Explicitly, for every cochain complex $I$, $Dy(\\eta_F(I));\\chi^{-1}_{QI};RH(x_{\\mathrm{fac},I})=y_{\\mathrm{fac},FI};Q(c_I);\\eta_H(xI)$. No preservation of K-injectives by restriction is assumed.",
  "stmt_deps": [
   "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-compact-support-restriction-data",
   "lem-pur-derived-square-normalization-naturality"
  ],
  "source": {
@@ -17,7 +17,7 @@
    "text": "Choose the all-complex unit-normalized coefficient comparison supplied by coefficientDerivedComparison_exists. On a K-injective B-complex J choose a K-injective replacement j of its A-restriction. Naturality of the target derived unit and the normalization equation express its inverse through the same localized direct-image replacement map as proEtaleDerivedDirectImage_restrictScalars. Cancel the latter quasi-isomorphism and the two localization isomorphisms to identify this inverse with sfDerivedImageRestriction on QJ. Naturality and K-injective representatives extend the equality to every derived object. Substitute it in the all-complex unit equation.",
    "uses": [
     "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-sf-compact-support-restriction-of-scalars",
+    "def-sf-compact-support-restriction-data",
     "lem-pur-derived-square-normalization-naturality"
    ],
    "elementary": false
@@ -25,7 +25,7 @@
  ],
  "proof_deps": [
   "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-compact-support-restriction-data",
   "lem-pur-derived-square-normalization-naturality"
  ],
  "proof_origin": {
@@ -103,13 +103,61 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C9",
-  "result": "pass",
-  "landing": "20261027T034626-L-3667110",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "P4 stage 2",
+  "old_statement": "Let $g:Z\\to Y$ be a morphism of schemes and $\\varphi:A\\to B$ a map of finite commutative rings. For the ordinary direct-image functors $F=g_*^B$, $H=g_*^A$, scalar restrictions $x=\\operatorname{Res}_\\varphi^Z$, $y=\\operatorname{Res}_\\varphi^Y$, and the ordinary identity-on-sections comparison $c:F;y\\cong x;H$ [lem-weil-proetale-direct-image-restriction-of-scalars], the inverse of the specified comparison sfDerivedImageRestriction [lem-sf-compact-support-restriction-of-scalars] is unitNormalized [lem-pur-derived-square-normalization-naturality]. Explicitly, for every cochain complex $I$, $Dy(\\eta_F(I));\\chi^{-1}_{QI};RH(x_{\\mathrm{fac},I})=y_{\\mathrm{fac},FI};Q(c_I);\\eta_H(xI)$. No preservation of K-injectives by restriction is assumed.",
+  "what": "Replace the reference to the compact-support composition node by the node owning the same specified direct-image comparison after extraction. This corrects the definition dependency without changing the mathematical statement.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 0D6E and 0D6J; comparison of the right-derived unit equation with its K-injective resolution equation."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-compact-support-restriction-identity",
+    "holds": true,
+    "note": "Only ownership of sfDerivedImageRestriction changes to the extracted data node; its definition and the unit-normalization theorem are unchanged."
+   },
+   {
+    "id": "lem-fix-etale-origin-restriction-pullback-cube",
+    "holds": true,
+    "note": "Only ownership of sfDerivedImageRestriction changes to the extracted data node; its definition and the unit-normalization theorem are unchanged."
+   },
+   {
+    "id": "lem-weil-compact-support-native-direct-transition",
+    "holds": true,
+    "note": "Only ownership of sfDerivedImageRestriction changes to the extracted data node; its definition and the unit-normalization theorem are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-weil-proetale-direct-image-restriction-of-scalars",
+   "lem-sf-compact-support-restriction-of-scalars",
+   "lem-pur-derived-square-normalization-naturality"
+  ],
+  "old_proof": [
+   {
+    "text": "Choose the all-complex unit-normalized coefficient comparison supplied by coefficientDerivedComparison_exists. On a K-injective B-complex J choose a K-injective replacement j of its A-restriction. Naturality of the target derived unit and the normalization equation express its inverse through the same localized direct-image replacement map as proEtaleDerivedDirectImage_restrictScalars. Cancel the latter quasi-isomorphism and the two localization isomorphisms to identify this inverse with sfDerivedImageRestriction on QJ. Naturality and K-injective representatives extend the equality to every derived object. Substitute it in the all-complex unit equation.",
+    "uses": [
+     "lem-weil-proetale-direct-image-restriction-of-scalars",
+     "lem-sf-compact-support-restriction-of-scalars",
+     "lem-pur-derived-square-normalization-naturality"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-proetale-direct-image-restriction-of-scalars",
+   "lem-sf-compact-support-restriction-of-scalars",
+   "lem-pur-derived-square-normalization-naturality"
+  ]
  }
 }

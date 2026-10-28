@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
+public import Sheaf.Paper.SfCompactSupportRestrictionData
 public import Sheaf.CategoryTheory.DerivedExactSquareCoherence
 import all Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
 

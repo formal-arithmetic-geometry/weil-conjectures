@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-realization-restriction-linear-lift",
+ "kind": "statement",
+ "title": "Unique sectionwise linear lift for coefficient realization",
+ "statement": "For a site with module sheafification [def-weil-presheaf-modules-sheafification], two locally bijective coefficient presentations and a compatible homomorphism of commutative coefficient rings, module realization followed by restriction of scalars [def-pc-sheaf-restrict-scalars] is uniquely isomorphic to fixed-scalar restriction followed by module realization, with identity on every underlying sheafified section. This is the generic proved calculation used by the finite pro-etale realization comparison.",
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV, 03DA, 03DI and 03CY; the existing sectionwise sheafification and adjunction-mate calculations, separated into a compile-sized proof module."
+ },
+ "proof": [
+  {
+   "text": "Lift a scalar and a module section to one common covering sieve. The two actions agree there by scalar compatibility and the given presheaf linearity. Separatedness gives the equality after sheafification.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip the identity on the common underlying abelian sheaf with the resulting linearity proof. Naturality holds on sections. The faithful forgetful functor reflects its invertibility. Equality on all sections gives uniqueness.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Existing proved realization and mate calculations extracted without changing their statements or mathematical proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ii]d|[Uu]nit.*leftAdjointUniq",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/Algebra/Algebra/Epi.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/RestrictScalars.lean; Mathlib/LinearAlgebra/Matrix/Basis.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves commutes with open restriction and its extension by zero adjunction unit",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit; PresheafOfModules.restrictScalarsObj; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.RestrictionCoextensionAdj.unit'; PresheafOfModules.restrictScalars; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-28",
+   "verdict": "The generic scalar-restriction and mate API supplies the tools used by these already proved project calculations; no duplicate of their realization-normalized conclusion was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Section-normalized finite coefficient comparison used by compact-support transitions.",
+   "via": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCoefficientRealizationAux",
+  "file": "lean/Sheaf/Paper/SfCoefficientRealizationAux.lean",
+  "declaration": "realization_restrict_existsUnique",
+  "declarations": [
+   "sheafify_restrict_smul",
+   "lift_module_hom",
+   "lift_module_hom_app",
+   "lift_module_iso",
+   "moduleRealization",
+   "realization_restrict_smul",
+   "realization_restrict_existsUnique"
+  ],
+  "statement": "theorem realization_restrict_existsUnique\n    {D : Type (u + 1)} [Category.{u} D] (J : GrothendieckTopology D)\n    [HasWeakSheafify J AddCommGrpCat.{u + 1}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    {Λ₁ Λ₂ : Type (u + 1)} [CommRing Λ₁] [CommRing Λ₂]\n    (R S : Sheaf J RingCat.{u + 1})\n    (α : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₁) ⟶ R.obj)\n    (β : (Functor.const Dᵒᵖ).obj (RingCat.of Λ₂) ⟶ S.obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]\n    [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]\n    (φ : Λ₁ →+* Λ₂) (δ : R ⟶ S)\n    (hs : α ≫ δ.hom = (Functor.const Dᵒᵖ).map (RingCat.ofHom φ) ≫ β) :\n    ∃! e : moduleRealization J Λ₂ S β ⋙ SheafOfModules.restrictScalars.{u + 1} δ ≅\n        sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ) ⋙ moduleRealization J Λ₁ R α,\n      ∀ (M : Sheaf J (ModuleCat.{u + 1} Λ₂)) (U : Dᵒᵖ)\n        (x : ((moduleRealization J Λ₂ S β).obj M).val.obj U),\n        (e.hom.app M).val.app U x = x ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-16504",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T034905-L-3565737",
+  "kind": "interface",
+  "note": "independent cc review: item, data and coherence-split Lean against the published originals (byte-identical moved defs, 29 coherence decls same bodies), proof against node lem-sf-compact-support-restriction-of-scalars; sandbox rebuild with stale intermediates: all 14 delivered modules plus 28 of 37 direct importers compile; axioms clean"
+ }
+}

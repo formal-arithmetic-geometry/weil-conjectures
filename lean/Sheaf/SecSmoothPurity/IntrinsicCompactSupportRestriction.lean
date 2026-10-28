@@ -9,6 +9,7 @@ public import Sheaf.SecSmoothPurity.ReductionDirectImageComparison
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 import all Sheaf.AlgebraicGeometry.FiniteFreeDirectImageBalancingCoherence
 import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence
+import all Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionRealizationAux
 
 /-!
 # Intrinsic compact-support restriction of scalars
