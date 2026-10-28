@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-finite-base-change-left-tensor-transport",
+ "kind": "statement",
+ "title": "Fixed coordinates of the final tensor and pullback-square transport",
+ "statement": "With finite-field and coefficient data D,C,E,n >= 1, a six-functor datum S [def-sf-operation-stages], compactified Cartesian square Q, bounded constructible K on X and finite-Tor constructible L on Y, put M=K tensor f-star L [def-sf-constructible-projection-mates]. Let d be the inverse tensor realization followed by tensoring the fixed f pullback realization of L. Let mid be supportRealization on g-prime-star M followed by the realized f-prime-support image of fixedPullRealization for g-prime composed with derived g-prime pullback of d. The intrinsic image of f-prime-support applied to Mu for g-prime followed by tensoring the restricted pull-square comparison, postcomposed with SquareTarget [def-sf-finite-base-change-realization-paths], equals mid followed by realization of fixed f-prime-support of the canonical fixed target map (fixed tensor monoidality followed by tensoring inverse square comparison). This equation has no projection component or exchange map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: first route and its tensor and pullback-square comparisons"
+ },
+ "stmt_deps": [
+  "def-sf-finite-base-change-realization-paths",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of supportRealization to move the final tensor transport into fixed support coordinates. Expand the prescribed Mu. Cancel its inverse fixed-pull comparisons against the tensor comparisons in SquareTarget; move the equivalence-unit comparison through the tensor map by unit naturality.",
+   "uses": [
+    "def-sf-finite-base-change-realization-paths",
+    "def-sf-constructible-projection-mates",
+    "def-sf-operation-stages"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write r_h for fixedPullRealization along h and tau for the restricted square transport. Apply finitePullCompositionNormalization for (g-prime,f) and (f-prime,g), and transport their common composite-map realization along Q.squareComm. Cancelling that realization identifies tau followed by r_f-prime at g-star L and f-prime-star of r_g with r_g-prime at f-star L followed by g-prime-star of r_f and then the inverse canonical derived square comparison. Tensor this equality with the fixed first input. Naturality of fixed tensor monoidality in its second input moves r_f through it. Functoriality now gives the fixed target map under support. The same identities cover zero objects, identity maps and empty schemes, without finite Tor on K.",
+   "uses": [
+    "def-sf-finite-base-change-realization-paths",
+    "def-sf-constructible-projection-mates",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-base-change-realization-paths",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages"
+ ],
+ "proof_origin": {
+  "by": "D6 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: first route and its tensor and pullback-square comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sixFunctorProjectionFinite_left_route_expansion|finiteProjection.*projection",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "Use generic naturality and equivalence-unit identities with the prescribed project comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso",
+   "results": "CategoryTheory.Equivalence.refl_unitIso, CategoryTheory.Equivalence.unitIso, CategoryTheory.Equivalence.symm_counitIso, CategoryTheory.Equivalence.symm_unitIso, CategoryTheory.ObjectProperty.fullSubcategoryCongr_unitIso, CategoryTheory.Functor.asEquivalence_unitIso_hom_app, CategoryTheory.Functor.asEquivalence_unitIso_inv_app, CategoryTheory.Equivalence.ext",
+   "date": "2026-10-28",
+   "verdict": "Use generic naturality and equivalence-unit identities with the prescribed project comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of equivalence unit and transported natural transformations in a commutative diagram",
+   "results": "CategoryTheory.Equivalence.unit_naturality_assoc, CategoryTheory.Equivalence.unit_naturality, CategoryTheory.NatTrans.naturality, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.Equivalence.unitInv_naturality_assoc, CategoryTheory.MorphismProperty.naturalityProperty, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.Equivalence.unit",
+   "date": "2026-10-28",
+   "verdict": "Use generic naturality and equivalence-unit identities with the prescribed project comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteExpansion",
+  "date": "2026-10-28",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph: first route and its tensor and pullback-square comparisons",
+   "via": [
+    "lem-sf-finite-base-change-left-route-expansion",
+    "lem-sf-finite-base-change-left-route-calculation",
+    "lem-sf-finite-base-change-route-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionFiniteBaseChangeLeftTensorTransport",
+  "file": "lean/Sheaf/Paper/ProjectionFiniteBaseChangeLeftTensorTransport.lean",
+  "declaration": "WeilConjectures.sixFunctorProjectionFinite_left_tensor_transport",
+  "statement": "theorem sixFunctorProjectionFinite_left_tensor_transport\n    (S : SixFunctorDatum D C E n hn) (Q : SixFunctorCompactifiedSquare D)\n    (K : sixFunctorFiniteCategory D C E n hn Q.X)\n    (L : finiteTorConstructibleCategory C.l E n hn Q.Y.obj.left) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)\n    let RX := realization (C := C) (E := E) (n := n) (hn := hn) Q.X\n    let RY := realization (C := C) (E := E) (n := n) (hn := hn) Q.Y\n    let R' := realization (C := C) (E := E) (n := n) (hn := hn) Q.Y'\n    let TX := fixedTensor (C := C) (E := E) (n := n) Q.X\n    let U := fixedDerivedPull (C := C) (E := E) (n := n) Q.g'\n    let F := sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n)\n      (Q.compactification.ofIsPullback Q.square)\n    let I := (intrinsicFiniteTorsionConstructible C.l E n hn Q.Y'.obj.left).ι\n    let M := ((partialTensor S.toSixFunctorFiniteOperations Q.X).obj K).obj\n      ((torPull S.toSixFunctorFiniteOperations Q.f).obj L)\n    let d := sixFunctorProjectionFiniteTensorRealization S Q.X K\n        ((torPull S.toSixFunctorFiniteOperations Q.f).obj L) ≪≫\n      (TX.obj (RX.inverse.obj K.obj)).mapIso\n        (fixedPullRealization S.toSixFunctorFiniteOperations Q.f ⟨L.obj, L.property.1⟩)\n    let mid := supportRealization S.toSixFunctorFiniteOperations Q.f'\n        (Q.compactification.ofIsPullback Q.square) ((S.finite.pull Q.g').obj M) ≪≫\n      R'.functor.mapIso (F.mapIso\n        (fixedPullRealization S.toSixFunctorFiniteOperations Q.g' M ≪≫ U.mapIso d))\n    I.map ((S.finite.support Q.f' (Q.compactification.ofIsPullback Q.square)).map\n      ((sixFunctorProjectionFiniteMu S Q.g' K\n          ((torPull S.toSixFunctorFiniteOperations Q.f).obj L)).hom ≫\n        ((partialTensor S.toSixFunctorFiniteOperations Q.X').obj\n          ((S.finite.pull Q.g').obj K)).map\n          ((torPullComposition S.toSixFunctorFiniteOperations Q.g' Q.f L).inv ≫\n            ObjectProperty.homMk (eqToHom (congrArg\n              (fun f ↦ ((torPull S.toSixFunctorFiniteOperations f).obj L).obj)\n              Q.squareComm)) ≫\n            (torPullComposition S.toSixFunctorFiniteOperations Q.f' Q.g L).hom))) ≫\n      (sixFunctorProjectionFiniteSquareTarget S Q K L).hom =\n    mid.hom ≫ R'.functor.map (F.map\n      (FiniteProjectionExchange.target A Q.square (RX.inverse.obj K.obj)\n        (RY.inverse.obj L.obj)))",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261028T034726-L-3537944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261028T034726-L-3537944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
