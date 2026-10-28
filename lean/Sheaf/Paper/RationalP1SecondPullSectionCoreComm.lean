@@ -7,6 +7,7 @@ module
 public import Sheaf.Paper.RationalP1SecondPullComparison
 public import Sheaf.Paper.ProjectivePullSectionCompatibility
 public import Sheaf.Paper.ProjectiveDiagonalPullback
+import Sheaf.Paper.RationalP1SecondPullSectionCoreConjugate
 
 /-! The morphism equation underlying the untwisted diagonal restriction. -/
 
@@ -25,7 +26,6 @@ open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] coefficient line twist firstProjection secondProjection
 attribute [local irreducible] square
-attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
@@ -52,6 +52,7 @@ theorem second_pull_section_core_comm
         (by unfold secondProjection; exact pullback.diagonal_snd _)).hom.app
         ((moduleObjectDerivedPullback (coefficient l c).X
           (ProjectiveLine Y ↘ Y)).obj K) := by
-  sorry
+  rw [second_pull_section_core_conjugate l c k p hpl Y K]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 end AlgebraicGeometry.ProEtale.RationalP1

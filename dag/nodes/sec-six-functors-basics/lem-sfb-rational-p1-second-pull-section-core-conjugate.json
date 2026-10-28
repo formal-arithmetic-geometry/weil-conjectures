@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-rational-p1-second-pull-section-core-conjugate",
+ "kind": "lemma",
+ "title": "Conjugated untwisted diagonal comparison",
+ "statement": "For the rational projective-line square, the diagonal pullback of the inverse ambient square comparison equals the second pull-section identification followed by the inverse of the first pull-section identification.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, first factor before the Tate twist."
+ },
+ "proof": [
+  {
+   "text": "Expand the ambient square comparison into normalized inverse-image compositors. Restrict along the diagonal, use diagonal followed by each projection equal to the identity, and cancel the identity compositor.",
+   "uses": [
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, first factor before the Tate twist."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "section_core_conjugate",
+   "results": "No existing declaration found in lean/Sheaf or lean/WeilConjectures.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullback comparison diagonal section compositor",
+   "results": "No exact match for the derived module-object statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback square comparison restricted to diagonal section",
+   "results": "No exact match for the condensed module-object statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "stmt_deps": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPullSectionCoreComm",
+  "date": "2026-10-28",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-pull-section-core-comm",
+   "place": "The conjugated comparison used to prove the comm field."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondPullSectionCoreConjugate",
+  "file": "lean/Sheaf/Paper/RationalP1SecondPullSectionCoreConjugate.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section_core_conjugate",
+  "statement": "theorem second_pull_section_core_conjugate (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] (K : DerivedCategory (Modules (coefficient l c).X Y)) : (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y)).map ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv = (pullSectionIso (coefficient l c).X Y (secondProjection Y) (by unfold secondProjection; exact pullback.diagonal_snd _)).hom.app ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K) ≫ (pullSectionIso (coefficient l c).X Y (firstProjection Y) (by unfold firstProjection; exact pullback.diagonal_fst _)).inv.app ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261028T055636-L-784531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261028T055636-L-784531",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
