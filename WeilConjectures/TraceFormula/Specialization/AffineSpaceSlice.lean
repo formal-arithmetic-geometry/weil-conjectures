@@ -5,16 +5,15 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.RingTheory.Algebraic.Basic
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 
 /-!
 
 # Coordinate generic slices of affine spaces over the trait
 
-Let `k'` be a field, `S = Spec k'⟦t⟧`, and let `K = k'(x)^alg`
-(`AlgebraicGeometry.coordinateSliceField`) be an algebraic closure of the rational function field
-in one variable, with the transcendental element `x` (`AlgebraicGeometry.coordinateSliceElement`).
+Let `k'` be a field, `S = Spec k'⟦t⟧`, and let `K` be a field over `k'` with an element `x`
+(for the slices, `K = k'(x)^alg` with `x` transcendental: `AlgebraicGeometry.traitSliceField`
+and `AlgebraicGeometry.traitSliceCoord`).
 For a coordinate `i : Fin (n + 1)` of `𝔸ⁿ⁺¹_S`, the morphism `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S`
 (`AlgebraicGeometry.affineSpaceSlice`) over the trait map `Spec K⟦t⟧ ⟶ S` sends the `i`-th
 coordinate to the constant `x` and the other coordinates to the coordinates of `𝔸ⁿ_{K⟦t⟧}` in
@@ -40,26 +39,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-variable (k' : Type u) [Field k']
-
-/-- The residue field `K = k'(x)^alg` of the coordinate generic slices: an algebraic closure of
-the rational function field `k'(x)`. -/
-abbrev coordinateSliceField : Type u :=
-  AlgebraicClosure (FractionRing (Polynomial k'))
-
-/-- The transcendental element `x ∈ k'(x)^alg` of the coordinate generic slices. -/
-noncomputable def coordinateSliceElement : coordinateSliceField k' :=
-  algebraMap (FractionRing (Polynomial k')) (coordinateSliceField k')
-    (algebraMap (Polynomial k') (FractionRing (Polynomial k')) Polynomial.X)
-
-/-- The element `x` of the coordinate generic slices is transcendental over `k'`. -/
-lemma transcendental_coordinateSliceElement :
-    Transcendental k' (coordinateSliceElement k') := by
-  rw [coordinateSliceElement, transcendental_algebraMap_iff (FaithfulSMul.algebraMap_injective _ _),
-    transcendental_algebraMap_iff (IsFractionRing.injective _ _)]
-  exact Polynomial.transcendental_X k'
-
-variable {k'} {K : Type u} [Field K] [Algebra k' K] (n : ℕ) (i : Fin (n + 1)) (x : K)
+variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] (n : ℕ) (i : Fin (n + 1))
+  (x : K)
 
 /-- The coordinates of the coordinate generic slice `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S`: the constant `x`
 in position `i`, and the coordinates of `𝔸ⁿ_{K⟦t⟧}` in the other positions. -/

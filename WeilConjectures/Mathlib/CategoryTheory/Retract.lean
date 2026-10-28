@@ -23,7 +23,18 @@ open Limits
 
 variable {C : Type*} [Category* C] [Preadditive C] {X Y : C}
 
-/-- A retract `X` of `Y` is the cokernel of the idempotent endomorphism `𝟙 Y - r ≫ i` of `Y`. -/
+/-- A retract `X` of `Y` (with `i : X ⟶ Y`, `r : Y ⟶ X`, `i ≫ r = 𝟙 X`) is the cokernel of the
+idempotent endomorphism `𝟙 Y - r ≫ i` of `Y`: the isomorphism is `i ≫ π`, and its inverse
+is induced by `r`, which kills `𝟙 Y - r ≫ i`.
+```
+         𝟙 Y - r ≫ i         π
+    Y ─────────────────▶ Y ─────▶ cokernel (𝟙 Y - r ≫ i)
+                         │              │
+                       r │              │ cokernel.desc r
+                         ▼              ▼
+                         X ════════════ X
+```
+-/
 noncomputable def isoCokernel (e : Retract X Y) [HasCokernel (𝟙 Y - e.r ≫ e.i)] :
     X ≅ cokernel (𝟙 Y - e.r ≫ e.i) where
   hom := e.i ≫ cokernel.π _

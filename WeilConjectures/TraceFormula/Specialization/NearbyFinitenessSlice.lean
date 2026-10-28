@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 
 /-!
@@ -33,19 +34,23 @@ geometric generic fibres of the coordinate projections of the special fibre. The
   groups `I_{S'} ⟶ I_S`, a pro-`p` group (SGA 4½, [Th. finitude], Lemme 3.3), and the nearby
   cycles do not change under the extension of traits `S' ⟶ Spec K⟦t⟧` (loc. cit., 3.7). Since
   `P` is pro-`p` and `p ≠ ℓ`, the averaging over `P` splits the inclusion of the invariants.
-* **criterion** (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_slices`):
-  if the restrictions `Lhᵢ,ₛ^* Ψ B` to all the coordinate slices are bounded constructible,
-  then so is `Ψ B`. The points of `𝔸ⁿ⁺¹_{k'}` outside the images of all the slices `hᵢ,ₛ` are
-  the closed points; by Deligne's argument (loc. cit., proof of 3.2; see also the ind-holonomic
-  analogue in D. Abe, *Around the nearby cycle functor for arithmetic 𝒟-modules*, §2) the cohomology
-  sheaves of `Ψ B` are extensions of sums of skyscrapers at closed points by constructible
-  sheaves, and the skyscraper parts are finite by the finiteness of
+* **criterion**
+  (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices`): if the
+  restrictions `Lhᵢ,ₛ^* Ψ B` to all the coordinate slices are bounded constructible, then so is
+  `Ψ B`. It is stated, and needed, only for the extensions by zero `v_! L` of lisse sheaves on
+  the generic fibre to which the dévissage reduces, in the case not covered by the proper
+  exchange (the support meets the special fibre and is not quasi-finite over `S`). The points of
+  `𝔸ⁿ⁺¹_{k'}` outside the images of all the slices `hᵢ,ₛ` are the closed points; by Deligne's
+  argument (loc. cit., proof of 3.2; see also the ind-holonomic analogue in D. Abe, *Around the
+  nearby cycle functor for arithmetic 𝒟-modules*, §2) the cohomology sheaves of `Ψ B` are
+  extensions of sums of skyscrapers at closed points by constructible sheaves, and the skyscraper
+  parts are finite by the finiteness of
   `RΓ(ℙⁿ⁺¹_s, Ψ_{ℙⁿ⁺¹} j_! B) = RΓ(ℙⁿ⁺¹_η̄, j_! B)` (proper exchange and Deligne's finiteness
   over the field `η̄`).
 
 Together with the trait case `n = 0`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`)
-they prove the finiteness theorem by induction on `n`
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`), the dévissage to
+lisse sheaves and the proper-exchange cases, they prove the finiteness theorem by induction on `n`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj`).
 
 ## Unfinished
@@ -83,18 +88,18 @@ variable (k') in
 /-- The coordinate generic slice `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S` (`K = k'(x)^alg`,
 `AlgebraicGeometry.affineSpaceSlice`) as a morphism of the total spaces of the standard models. -/
 noncomputable def affineSpaceSliceTotal (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (coordinateSliceField k') n).total ⟶ (affineSpaceModel k' (n + 1)).total :=
-  affineSpaceSlice n i (coordinateSliceElement k')
+    (affineSpaceModel (traitSliceField k') n).total ⟶ (affineSpaceModel k' (n + 1)).total :=
+  affineSpaceSlice n i (traitSliceCoord k')
 
 variable (k') in
 /-- The coordinate generic slice of the special fibre `hᵢ,ₛ : 𝔸ⁿ_K ⟶ 𝔸ⁿ⁺¹_{k'}`
 (`AlgebraicGeometry.affineSpaceSliceSpecial`) as a morphism of the special fibres of the standard
 models. -/
 noncomputable def affineSpaceSliceSpecialFibre (n : ℕ) (i : Fin (n + 1)) :
-    (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait (coordinateSliceField k')) ↘
-      trait (coordinateSliceField k'))).left ⟶
+    (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
+      trait (traitSliceField k'))).left ⟶
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')).left :=
-  affineSpaceSliceSpecial n i (coordinateSliceElement k')
+  affineSpaceSliceSpecial n i (traitSliceCoord k')
 
 variable (k') in
 /-- The coordinate generic slice of the geometric generic fibres
@@ -102,10 +107,10 @@ variable (k') in
 `Spec Ω_K ⟶ Spec Ω` (`AlgebraicGeometry.traitGenericPointMap`) of the geometric generic points of
 `Spec K⟦t⟧` and `S`, with fields `Ω_K = (Frac K⟦t⟧)^alg` and `Ω = (Frac k'⟦t⟧)^alg`. -/
 noncomputable def affineSpaceSliceGeneric (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (coordinateSliceField k') n).generic ⟶
+    (affineSpaceModel (traitSliceField k') n).generic ⟶
       (affineSpaceModel k' (n + 1)).generic :=
   pullback.lift (pullback.fst _ _ ≫ affineSpaceSliceTotal k' n i)
-    (pullback.snd _ _ ≫ traitGenericPointMap k' (coordinateSliceField k')) (by
+    (pullback.snd _ _ ≫ traitGenericPointMap k' (traitSliceField k')) (by
       rw [Category.assoc, affineSpaceSliceTotal, affineSpaceSlice_over, pullback.condition_assoc,
         Category.assoc, traitGenericPoint_traitMap])
 
@@ -115,7 +120,7 @@ model of `𝔸ⁿ_{K⟦t⟧}` over `Spec K⟦t⟧` to the standard model of `�
 `hᵢ` of the total spaces, `hᵢ,ₛ` of the special fibres, and of the geometric generic fibres. -/
 @[simps]
 noncomputable def affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (coordinateSliceField k') n).geometric.Hom
+    (affineSpaceModel (traitSliceField k') n).geometric.Hom
       (affineSpaceModel k' (n + 1)).geometric (affineSpaceSliceTotal k' n i)
       (affineSpaceSliceSpecialFibre k' n i) where
   total := affineSpaceSliceTotal k' n i
@@ -156,20 +161,23 @@ theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : 
       ((L((affineSpaceSliceSpecialFibre k' n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
         (((affineSpaceModel k' (n + 1)).geometric.nearbyCycles
           (Profinite.padicAlgClRingObj ℓ)).obj B))
-      (((affineSpaceModel (coordinateSliceField k') n).geometric.nearbyCycles
+      (((affineSpaceModel (traitSliceField k') n).geometric.nearbyCycles
         (Profinite.padicAlgClRingObj ℓ)).obj
           ((L((affineSpaceSliceTotal k' n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B))) :=
   have := isSplitMono_pullbackExchange_app_affineSpaceSliceHom n i hB
   ⟨⟨_, retraction (((affineSpaceSliceHom k' n i).pullbackExchange
     (Profinite.padicAlgClRingObj ℓ)).app B), IsSplitMono.id _⟩⟩
 
-/-- **Deligne's criterion on the coordinate slices** (SGA 4½, [Th. finitude], proof of Thm. 3.2):
-if for every coordinate `i` and every bounded constructible complex `B` on `𝔸ⁿ⁺¹_S`, the
-restriction `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the geometric generic fibre of the `i`-th
-coordinate projection of the special fibre is bounded constructible, then the nearby cycles of
-every bounded constructible complex on `𝔸ⁿ⁺¹_S` are bounded constructible. See the module
-docstring; `sorry`ed. -/
-theorem boundedConstructible_nearbyCycles_affineSpace_of_slices (n : ℕ)
+/-- **Deligne's criterion on the coordinate slices, core case** (SGA 4½, [Th. finitude], proof of
+Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible complex `B` on
+`𝔸ⁿ⁺¹_S`, the restriction `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the geometric generic fibre of the
+`i`-th coordinate projection of the special fibre is bounded constructible. Then the nearby cycles
+of the extension by zero `v_! L = Rc_* j_{W!} Rc'_* L` of a lisse sheaf `L` along a locally
+closed immersion `v : E ⟶ 𝔸ⁿ⁺¹_S` into the generic fibre are bounded constructible, in the case
+not covered by the proper exchange: the closed subscheme `D` meets the special fibre and no
+closed subscheme of `D` containing `W` is quasi-finite over `S`. See the module docstring;
+`sorry`ed. -/
+theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
     (h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
         Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -179,14 +187,24 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_slices (n : ℕ)
         ((L((affineSpaceSliceSpecialFibre k' n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
           (((affineSpaceModel k' (n + 1)).geometric.nearbyCycles
             (Profinite.padicAlgClRingObj ℓ)).obj B)))
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
-      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        (affineSpaceModel k' (n + 1)).total))}
-    (hB : boundedConstructible _ B) :
+    (D : Scheme.{u}) (c : D ⟶ (affineSpaceModel k' (n + 1)).total) [IsClosedImmersion c]
+    (hc : ¬ Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base))
+    (W : D.Opens)
+    (hqf : ¬ ∃ (D' : Scheme.{u}) (ι : D' ⟶ D), IsClosedImmersion ι ∧
+      (W : Set D) ⊆ Set.range ι.base ∧
+      LocallyQuasiFinite (ι ≫ c ≫ (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')))
+    (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' (n + 1)) (E : Scheme.{u})
+    (c' : E ⟶ W) [IsClosedImmersion c'] (hc' : Surjective c')
+    (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
+    (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')).left)
       (((affineSpaceModel k' (n + 1)).geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        B) :=
+        ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+          (D((W.ι)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            ((R((c')_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+              ((DerivedCategory.singleFunctor _ 0).obj L))))) :=
   sorry
 
 end NearbyCyclesModel
