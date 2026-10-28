@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.AlgebraicGeometry.ContinuousAffineEtaleLattice
@@ -59,20 +60,14 @@ private theorem etale_lattice_of_finite_affine_lattices
     (hcover : ∀ x : X, ∃ (i : I) (y : Y i), p i y = x)
     (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})
       (condensedRingObj Λ (Y i)))
-    (hM : ∀ i, ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (Y i), ∀ t : D.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f t)).obj
-        (condensedRingObj Λ (Y i)))
-        (((ProEtale.upperStar Ab.{u + 1} (D.f t)).mapMod _).obj (M i)))
+    (hM : ∀ i, IsLocallyFree (condensedRingObj Λ (Y i)) (M i))
     (e : ∀ i, Nonempty ((Mod.extendScalars (coefficientMap φ (Y i))).obj (M i) ≅
       (upperStar Λ' (p i)).obj P)) :
     ∃ (U : Scheme.{u}) (p : U ⟶ X), Etale p ∧ Surjective p ∧
       CompactSpace U ∧ QuasiSeparatedSpace U ∧
       ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
           (condensedRingObj (Λ) U),
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (Λ) U))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      (IsLocallyFree (condensedRingObj (Λ) U) M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (φ) U)).obj M ≅
         (CondensedRing.upperStar (Λ') p).obj P) := by
   obtain ⟨hf, hs, hc, hq⟩ := finite_affine_etale_cover_geometry X Y p hcover
@@ -124,28 +119,19 @@ theorem continuousLisse_etale_lattice
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) :
     ∃ (U : Scheme.{u}) (p : U ⟶ X), Etale p ∧ Surjective p ∧
       CompactSpace U ∧ QuasiSeparatedSpace U ∧
       ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
           (condensedRingObj (integralCoeff ℓ E) U),
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (integralCoeff ℓ E) U))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      (IsLocallyFree (condensedRingObj (integralCoeff ℓ E) U) M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P) := by
   classical
   let Q : ∀ U : Scheme.{u}, (U ⟶ X) → Prop := fun U p ↦
     ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
           (condensedRingObj (integralCoeff ℓ E) U),
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (integralCoeff ℓ E) U))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      (IsLocallyFree (condensedRingObj (integralCoeff ℓ E) U) M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P)
   obtain ⟨I, hI, Y, p, hY, hp, hcover, hQ⟩ :=

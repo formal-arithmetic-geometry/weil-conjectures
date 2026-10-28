@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralTransport
 import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralGluing
@@ -99,7 +100,7 @@ theorem continuousConstructible_integral_stratum (X : Scheme.{u})
     obtain ⟨M, hM, ⟨e⟩⟩ := hS s
     exact pullbackCoefficient_model (integralCoeff ℓ E)
       (Profinite.continuousMapRingObj E) (integralScalarMap ℓ E)
-      (X := Y) (Y := S.domain s) (S.immersion s) P M hM e
+      (X := Y) (Y := S.domain s) (S.immersion s) P M hM.isConstructibleModuleObject e
   obtain ⟨N, hN, ⟨e⟩⟩ := continuousConstructible_integral_gluing ℓ E Y P S hmodels
   exact model_transport (X := Y)
     (R := (ProEtale.upperStar Ab.{u + 1} i).obj (condensedRingObj (integralCoeff ℓ E) X))

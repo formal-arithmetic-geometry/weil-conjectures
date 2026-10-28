@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import all WeilConjectures.AlgebraicGeometry.ContinuousLissePullbackSystem
 import all WeilConjectures.AlgebraicGeometry.ContinuousLisseCoefficientDescent
 import WeilConjectures.AlgebraicGeometry.ContinuousEtaleLocalLattices
@@ -33,15 +34,11 @@ private theorem continuousLisse_stratified_lattices_of_system
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) :
     ∃ S : Scheme.Stratification X, ∀ s : Fin S.n,
       ∃ M : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1})
           (condensedRingObj (integralCoeff ℓ E) (S.domain s)),
-        ProEtale.IsConstructibleModuleObject
-          (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧
+        IsLocallyFree (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧
         Nonempty ((Mod.extendScalars
           (coefficientMap (integralScalarMap ℓ E) (S.domain s))).obj M ≅
             (CondensedRing.upperStar (Profinite.continuousMapRingObj E)
@@ -69,7 +66,7 @@ private theorem continuousLisse_stratified_lattices_of_system
     (X := X) (U := U) (V := V) (W := S.domain s) p j r q
     (Limits.pullback.condition (f := p) (g := j)) P hP M hM e
 
-/-- A locally finite free rational sheaf admits lisse integral lattices after a finite
+/-- A locally finite free rational sheaf admits locally free integral lattices after a finite
 stratification. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
 (auxiliary; not a blueprint node)
 
@@ -80,27 +77,21 @@ of these affines is quasi-compact and quasi-separated; its map to the base is et
 and surjective. The local lattices assemble on that disjoint union. Stratify the
 base so this cover becomes finite etale. Pull back the lattice to each resulting
 cover, using the coefficient and inverse-image composition isomorphisms.
-Finite etale lattice descent gives a lisse integral model on each stratum, without
-requiring a descent datum on the supplied lattice. A locally finite free integral
-module is locally finitely presented and hence constructible, using the singleton
-stratification. On empty strata or in rank zero use the zero module. This theorem
-supplies the stratum models only: reconstructing the original sheaf by extensions
-is the separate integral gluing theorem. -/
+Finite etale lattice descent gives a locally free integral model on each stratum,
+without requiring a descent datum on the supplied lattice. On empty strata or in rank
+zero use the zero module. This theorem supplies the stratum models only: reconstructing
+the original sheaf by extensions is the separate integral gluing theorem. -/
 theorem continuousLisse_stratified_lattices
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) :
     ∃ S : Scheme.Stratification X, ∀ s : Fin S.n,
       ∃ M : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1})
           (condensedRingObj (integralCoeff ℓ E) (S.domain s)),
-        ProEtale.IsConstructibleModuleObject
-          (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧
+        IsLocallyFree (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧
         Nonempty ((Mod.extendScalars
           (coefficientMap (integralScalarMap ℓ E) (S.domain s))).obj M ≅
             (CondensedRing.upperStar (Profinite.continuousMapRingObj E)

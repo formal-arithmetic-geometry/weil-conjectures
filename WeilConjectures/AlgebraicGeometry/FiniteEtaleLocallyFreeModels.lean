@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
@@ -23,49 +24,6 @@ open CategoryTheory Limits Opposite Preadditive
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-private abbrev FreeAt {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    {Y : Scheme.{u}} (f : Y ⟶ X) : Prop :=
-  Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} f).obj R)
-    (((ProEtale.upperStar Ab.{u + 1} f).mapMod R).obj M)
-
-private noncomputable def normalizedPullbackIso
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) :
-    upperStar Λ f ≅ (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ X) ⋙
-      Mod.comap (inv (condensedPullbackHom Λ f)) :=
-  Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
-
-private lemma free_standardPullback
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : FreeAt (condensedRingObj Λ X) M f) :
-    Mod.IsFree (condensedRingObj Λ Y) ((upperStar Λ f).obj M) := by
-  exact free_map (Mod.extendScalars (condensedPullbackHom Λ f))
-    ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).app _ ≪≫
-      Mod.regularIsoOfIsIso (condensedPullbackHom Λ f)) hM
-
-private theorem freeAt_iff_standard
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    FreeAt (condensedRingObj Λ X) M f ↔
-      Mod.IsFree (condensedRingObj Λ Y) ((upperStar Λ f).obj M) := by
-  refine ⟨free_standardPullback Λ f M, ?_⟩
-  intro h
-  let α := condensedPullbackHom Λ f
-  let e := (normalizedPullbackIso Λ f).app M
-  obtain ⟨n, ⟨b⟩⟩ := h
-  have h' : Mod.IsFree _ ((Mod.comap (inv α)).obj
-      (((ProEtale.upperStar Ab.{u + 1} f).mapMod _).obj M)) :=
-    ⟨n, ⟨e.symm ≪≫ b⟩⟩
-  obtain ⟨m, ⟨c⟩⟩ := free_comap α h'
-  let j := (Mod.comapComp α (inv α)).symm ≪≫
-    Mod.comapCongr (show α ≫ inv α = 𝟙 _ by simp) ≪≫ Mod.comapId _
-  exact ⟨m, ⟨(j.app _).symm ≪≫ c⟩⟩
 
 private theorem finiteCommonCover
     {X : Scheme.{u}} {I : Type v} [Finite I]
@@ -115,20 +73,13 @@ private theorem finiteProduct_free
       (g := fun _ : Fin (Fintype.card J) ↦ Mod.regular R)
       (Fintype.equivFin J) (fun _ ↦ Iso.refl _)⟩⟩
 
-private abbrev LocFree
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
-  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-    ∀ s, Mod.IsFree (condensedRingObj Λ (C.X s)) ((upperStar Λ (C.f s)).obj M)
-
 private theorem free_standard_refine
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (g : Y ⟶ X) (f : Z ⟶ Y)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (h : Mod.IsFree (condensedRingObj Λ Y) ((upperStar Λ g).obj M)) :
     Mod.IsFree (condensedRingObj Λ Z) ((upperStar Λ (f ≫ g)).obj M) := by
-  obtain ⟨n, ⟨e⟩⟩ := free_standardPullback Λ f _ (free_pullback f h)
+  obtain ⟨n, ⟨e⟩⟩ := IsFree.upperStar Λ f h
   exact ⟨n, ⟨(upperStarComp Λ f g).app M ≪≫ e⟩⟩
 
 -- Keep the member property abstract while reducing the pullback-cover construction.
@@ -141,29 +92,16 @@ private theorem exists_cover_pullback_property
       ∀ s : D.I₀, Q (D.X s) (D.f s) :=
   ⟨C.pullback₁ f, hQ⟩
 
-private theorem locFree_pullback
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : LocFree Λ X M) : LocFree Λ Y ((upperStar Λ f).obj M) := by
-  obtain ⟨C, hC⟩ := hM
-  apply exists_cover_pullback_property f C
-    (fun Z g ↦ Mod.IsFree (condensedRingObj Λ Z)
-      ((upperStar Λ g).obj ((upperStar Λ f).obj M)))
-  intro s
-  have h := free_standard_refine Λ (C.f s) (pullback.snd f (C.f s)) M (hC s)
-  rw [← pullback.condition] at h
-  exact free_of_iso h ((upperStarComp Λ (pullback.fst f (C.f s)) f).app M)
-
 private theorem locFree_product
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {I : Type v} [Finite I]
     (M : I → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : ∀ i, LocFree Λ X (M i)) : LocFree Λ X (∏ᶜ M) := by
+    (hM : ∀ i, IsLocallyFree (condensedRingObj Λ X) (M i)) :
+    IsLocallyFree (condensedRingObj Λ X) (∏ᶜ M) := by
   classical
-  obtain ⟨D, hD⟩ := Classical.skolem.mp hM
+  obtain ⟨D, hD⟩ := Classical.skolem.mp fun i ↦ (isLocallyFree_iff (M i)).1 (hM i)
   obtain ⟨C, hC⟩ := finiteCommonCover D
-  refine ⟨C, ?_⟩
+  refine (isLocallyFree_iff _).2 ⟨C, ?_⟩
   intro s
   let H := upperStar Λ (C.f s)
   have h (i : I) : Mod.IsFree (condensedRingObj Λ (C.X s)) (H.obj (M i)) := by
@@ -173,26 +111,18 @@ private theorem locFree_product
   exact free_of_iso (finiteProduct_free (fun i ↦ H.obj (M i)) h)
     (PreservesProduct.iso H M).symm
 
-private theorem locFree_iso
-    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (e : M ≅ N) (hN : LocFree Λ X N) : LocFree Λ X M := by
-  obtain ⟨C, hC⟩ := hN
-  refine ⟨C, fun s ↦ ?_⟩
-  obtain ⟨n, ⟨b⟩⟩ := hC s
-  exact ⟨n, ⟨(upperStar Λ (C.f s)).mapIso e ≪≫ b⟩⟩
-
 private theorem locFree_of_cover
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
-    (h : ∀ s, LocFree Λ (C.X s) ((upperStar Λ (C.f s)).obj M)) : LocFree Λ X M := by
+    (h : ∀ s, IsLocallyFree (condensedRingObj Λ (C.X s)) ((upperStar Λ (C.f s)).obj M)) :
+    IsLocallyFree (condensedRingObj Λ X) M := by
+  apply (isLocallyFree_iff M).2
   apply exists_cover_of_local_property C
     (fun Y f ↦ Mod.IsFree (condensedRingObj Λ Y) ((upperStar Λ f).obj M))
   intro s
-  obtain ⟨D, hD⟩ := h s
+  obtain ⟨D, hD⟩ := (isLocallyFree_iff _).1 (h s)
   refine ⟨D, fun t ↦ ?_⟩
   exact free_of_iso (hD t) ((upperStarComp Λ (D.f t) (C.f s)).app M).symm
 
@@ -355,9 +285,10 @@ private theorem locFree_push_of_comparison
     (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))
     (ε : (upperStar Λ g).obj ((lowerStar Λ p).obj M) ≅
       ∏ᶜ (fun j ↦ (upperStar Λ (t j)).obj M))
-    (hM : LocFree Λ U M) : LocFree Λ Y ((upperStar Λ g).obj ((lowerStar Λ p).obj M)) := by
-  exact locFree_iso (Λ := Λ) ε (locFree_product Λ _
-    (fun j ↦ locFree_pullback Λ (t j) M hM))
+    (hM : IsLocallyFree (condensedRingObj Λ U) M) :
+    IsLocallyFree (condensedRingObj Λ Y) ((upperStar Λ g).obj ((lowerStar Λ p).obj M)) := by
+  exact IsLocallyFree.of_iso ε.symm (locFree_product Λ _
+    (fun j ↦ hM.upperStar Λ (t j)))
 
 private theorem locFree_unitCokernel_of_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -370,8 +301,8 @@ private theorem locFree_unitCokernel_of_comparison
     (hε : ∀ j, (upperStar Λ g).map ((upperStarLowerStarAdjunction Λ p).unit.app P) ≫
       ε.hom ≫ Pi.π (fun j ↦ (upperStar Λ (t j)).obj ((upperStar Λ p).obj P)) j =
         (a₀ j).hom.app P)
-    (hP : LocFree Λ X P) :
-    LocFree Λ Y ((upperStar Λ g).obj
+    (hP : IsLocallyFree (condensedRingObj Λ X) P) :
+    IsLocallyFree (condensedRingObj Λ Y) ((upperStar Λ g).obj
       (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P))) := by
   classical
   let H := upperStar Λ g
@@ -399,8 +330,8 @@ private theorem locFree_unitCokernel_of_comparison
     cokernel.mapIso _ _ (Iso.refl A) b
       (hδ.trans (Category.id_comp _).symm) ≪≫ d ≪≫
       biproduct.isoProduct (fun _ : {j : Fin n // j ≠ j₀} ↦ A)
-  exact locFree_iso (Λ := Λ) e (locFree_product Λ _
-    (fun _ ↦ locFree_pullback Λ g P hP))
+  exact IsLocallyFree.of_iso e.symm (locFree_product Λ _
+    (fun _ ↦ hP.upperStar Λ g))
 
 /-- Finite etale pushforward and the quotient by its unit preserve local finite freeness.
 
@@ -430,20 +361,12 @@ theorem finiteEtale_locallyFree_models
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
     [IsFinite p] [Etale p] [Surjective p] :
     (∀ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U),
-      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : C.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ U))
-          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj M)) →
-      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))
-          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj ((lowerStar Λ p).obj M))) ∧
+      (IsLocallyFree (condensedRingObj Λ U) M) →
+      IsLocallyFree (condensedRingObj Λ X) ((lowerStar Λ p).obj M)) ∧
     (∀ P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X),
-      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))
-          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) →
-      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))
-          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj
-            (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P)))) := by
+      (IsLocallyFree (condensedRingObj Λ X) P) →
+      IsLocallyFree (condensedRingObj Λ X)
+        (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P))) := by
   classical
   obtain ⟨Y, hY⟩ := Classical.skolem.mp (exists_split_sections p)
   obtain ⟨g, hg'⟩ := Classical.skolem.mp hY
@@ -456,35 +379,29 @@ theorem finiteEtale_locallyFree_models
   obtain ⟨w, hc⟩ := Classical.skolem.mp hw'
   constructor
   · intro M hM
-    have h : LocFree Λ U M := by
-      obtain ⟨D, hD⟩ := hM
-      exact ⟨D, fun s ↦ free_standardPullback Λ (D.f s) M (hD s)⟩
-    have hB : LocFree Λ X ((lowerStar Λ p).obj M) := by
+    have hB : IsLocallyFree (condensedRingObj Λ X) ((lowerStar Λ p).obj M) := by
       obtain ⟨C, hC⟩ := exists_etale_cover_with_property Y g y hg hy
-        (fun Z f ↦ LocFree Λ Z ((upperStar Λ f).obj ((lowerStar Λ p).obj M))) (by
+        (fun Z f ↦ IsLocallyFree (condensedRingObj Λ Z)
+          ((upperStar Λ f).obj ((lowerStar Λ p).obj M))) (by
           intro x
           have : Etale (g x) := hg x
           obtain ⟨ε, hε⟩ := localProductComparison Λ p (g x) (n x) (t x) (w x) (hc x)
-          exact locFree_push_of_comparison Λ p (g x) (n x) (t x) M (ε M) h)
+          exact locFree_push_of_comparison Λ p (g x) (n x) (t x) M (ε M) hM)
       exact locFree_of_cover _ C hC
-    obtain ⟨C', hC'⟩ := hB
-    exact ⟨C', fun s ↦ (freeAt_iff_standard Λ (C'.f s) _).mpr (hC' s)⟩
+    exact hB
   · intro P hP
-    have h : LocFree Λ X P := by
-      obtain ⟨D, hD⟩ := hP
-      exact ⟨D, fun s ↦ free_standardPullback Λ (D.f s) P (hD s)⟩
-    have hQ : LocFree Λ X (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P)) := by
+    have hQ : IsLocallyFree (condensedRingObj Λ X)
+        (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P)) := by
       obtain ⟨C, hC⟩ := exists_etale_cover_with_property Y g y hg hy
-        (fun Z f ↦ LocFree Λ Z ((upperStar Λ f).obj
+        (fun Z f ↦ IsLocallyFree (condensedRingObj Λ Z) ((upperStar Λ f).obj
           (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P)))) (by
           intro x
           have : Etale (g x) := hg x
           obtain ⟨ε, hε⟩ := localProductComparison Λ p (g x) (n x) (t x) (w x) (hc x)
           exact locFree_unitCokernel_of_comparison Λ p (g x) (n x) (hn x) (t x)
             (fun j ↦ (eqToIso (congrArg (upperStar Λ) (w x j))).symm ≪≫
-              upperStarComp Λ (t x j) p) P (ε ((upperStar Λ p).obj P)) (hε P) h)
+              upperStarComp Λ (t x j) p) P (ε ((upperStar Λ p).obj P)) (hε P) hP)
       exact locFree_of_cover _ C hC
-    obtain ⟨C', hC'⟩ := hQ
-    exact ⟨C', fun s ↦ (freeAt_iff_standard Λ (C'.f s) _).mpr (hC' s)⟩
+    exact hQ
 
 end AlgebraicGeometry.ProEtale.CondensedRing

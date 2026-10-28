@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import all WeilConjectures.AlgebraicGeometry.ContinuousLissePullbackSystem
 import all WeilConjectures.AlgebraicGeometry.ContinuousLisseStratumDescent
 import WeilConjectures.AlgebraicGeometry.ContinuousFiniteEtaleLatticeDescent
@@ -28,15 +29,15 @@ private theorem continuousLisse_coefficient_lattice_on_stratum
     [IsFinite q] [Etale q] [Surjective q] (w : r ≫ p = q ≫ j)
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : LocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)
     (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) U))
-    (hM : LocallyFree (condensedRingObj (integralCoeff ℓ E) U) M)
+    (hM : IsLocallyFree (condensedRingObj (integralCoeff ℓ E) U) M)
     (e : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
       (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P) :
     ∃ N : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
         (condensedRingObj (integralCoeff ℓ E) W),
-      ProEtale.IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) W) N ∧
+      IsLocallyFree (condensedRingObj (integralCoeff ℓ E) W) N ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) W)).obj N ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) j).obj P) := by
   exact @continuousLisse_lattice_on_stratum

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingLocalFreeness
 import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingScalarExtension
 import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingRestriction
@@ -69,10 +70,7 @@ theorem continuousModuleEncoding_lattice_compatibility
     (X : Scheme.{u})
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) :
     ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).IsFiniteLocallyFree ∧
     ∀ (Y : Scheme.{u}) (f : Y ⟶ X) [Etale f]
       (M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y)
@@ -81,11 +79,8 @@ theorem continuousModuleEncoding_lattice_compatibility
       Nonempty ((SheafOfModules.changeOfRings (lisseIntegerToField ℓ E Y) M).val ≅
         (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj
           ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val) →
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (integralCoeff ℓ E) Y))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj
-            ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M))) ∧
+      IsLocallyFree (condensedRingObj (integralCoeff ℓ E) Y)
+        ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)).obj
           ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M) ≅
         (upperStar (Profinite.continuousMapRingObj E) f).obj P) := by

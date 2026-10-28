@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import WeilConjectures.AlgebraicGeometry.CondensedQcqsPushforwardContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
@@ -52,9 +53,7 @@ theorem condensed_finite_free_derived_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))
-        (((upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ X)).obj P))
+    (hP : IsLocallyFree (condensedRingObj Λ X) P)
     : ∃ H :
         Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
           Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X),

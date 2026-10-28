@@ -54,20 +54,14 @@ private theorem coefficientWithAbsLift_isometry (l : ℕ) [Fact l.Prime]
   intro x
   exact (coefficientLiftAbsoluteValue l E x.ofAbs).symm
 
-private theorem coefficientIntegers_mem (l : ℕ) [Fact l.Prime] (E : Type*) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (x : E) :
-    x ∈ Padic.coefficientExtensionIntegers l E ↔
-      Padic.coefficientExtensionAbsoluteValue l E x ≤ 1 :=
-  (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
-
 private noncomputable def coefficientWithAbsLiftIntegerRingEquiv (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     latticeCoefficientIntegers l (ULift.{u} E) ≃+* Padic.coefficientExtensionIntegers l E :=
   (coefficientWithAbsLiftRingEquiv l E).restrict _ _ (by
     intro x
     change x.ofAbs ∈ Padic.coefficientExtensionIntegers l (ULift.{u} E) ↔ _
-    rw [coefficientIntegers_mem, coefficientIntegers_mem, coefficientLiftAbsoluteValue]
+    rw [Padic.mem_coefficientExtensionIntegers, Padic.mem_coefficientExtensionIntegers,
+      coefficientLiftAbsoluteValue]
     rfl)
 
 private theorem coefficientWithAbsLiftInteger_isometry (l : ℕ) [Fact l.Prime]

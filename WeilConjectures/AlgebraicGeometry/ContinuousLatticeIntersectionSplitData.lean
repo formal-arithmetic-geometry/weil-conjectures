@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousLatticeIntersection
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
@@ -285,17 +286,11 @@ theorem continuousLatticeIntersection_splitData
     (X : Scheme.{u})
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P))
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)
     {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]
     (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) U))
-    (hM : ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-        (condensedRingObj (integralCoeff ℓ E) U))
-        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M))
+    (hM : IsLocallyFree (condensedRingObj (integralCoeff ℓ E) U) M)
     (e : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
       (upperStar (Profinite.continuousMapRingObj E) p).obj P) :
     ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,

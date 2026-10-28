@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralImage
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 import WeilConjectures.ConstructibleSheaf.Devissage
 import all WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-!
 # Assembling ordinary integral models along a finite stratification
@@ -209,7 +210,8 @@ private theorem closed_push_constructible
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
     (hM : IsConstructibleModuleObject (condensedRingObj Λ Z) M) :
     IsConstructibleModuleObject (condensedRingObj Λ X) ((i)_*⟦Λ⟧.obj M) := by
-  have hc := moduleCounitOfAbelian Λ i (ProEtale.abelian_closed_support i j hij).1
+  have hc := moduleCounitOfAbelian Λ i
+    (ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i)
   apply ProEtale.constructible_of_restrictions j i (by simp only [hij, compl_compl])
   · apply constructible_of_extend_iso (condensedPullbackHom Λ j)
     exact ProEtale.constructible_of_isZero _ _ (openRestrictionPushforwardZero Λ i j hij M)
@@ -226,7 +228,7 @@ private theorem supported_unit
     (hM : IsZero ((j)^*⟦Λ⟧.obj M)) :
     IsIso ((upperStarLowerStarAdjunction Λ i).unit.app M) := by
   apply moduleUnitOfAbelian Λ i M
-  apply (ProEtale.abelian_closed_support i j hij).2
+  apply ProEtale.abelian_closed_support i j hij
   exact ((Mod.forget _).map_isZero hM).of_iso
     ((profinitePointModuleForgetPullbackIso Λ j).app M).symm
 
@@ -320,7 +322,7 @@ private theorem integral_model_of_supported_restriction
   have hunitM := supported_unit (Profinite.continuousMapRingObj E) i j hij (T.obj M) hz
   have hunitF := supported_unit (Profinite.continuousMapRingObj E) i j hij F hF
   have hc := moduleCounitOfAbelian (integralCoeff ℓ E) i
-    (ProEtale.abelian_closed_support i j hij).1
+    (ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i)
   let er := ((pullIso (integralScalarMap ℓ E) i).app M).symm ≪≫
     (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Z)).mapIso
       (asIso ((upperStarLowerStarAdjunction (integralCoeff ℓ E) i).counit.app N)) ≪≫ e

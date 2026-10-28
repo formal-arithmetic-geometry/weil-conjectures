@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeDerivedHom
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # Filtered continuity after the finite locally free derived Hom calculation -/
@@ -60,9 +61,7 @@ theorem condensed_finite_free_hom_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))
-        (((upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ X)).obj P))
+    (hP : IsLocallyFree (condensedRingObj Λ X) P)
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
     (N : I ⥤ CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

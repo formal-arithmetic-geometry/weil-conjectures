@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.CondensedQcqsPushforwardContinuity
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # The degree-zero consequence of qcqs pushforward continuity -/
@@ -17,35 +17,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 universe u
 open CategoryTheory Limits Abelian
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-
-namespace CategoryTheory.Functor
-
-/-- Degree zero of the derived functor on single complexes is the original left exact
-functor, naturally in the module.
-Source: the injective-resolution computation of the zeroth right derived functor.
-(auxiliary; not a blueprint node) -/
-noncomputable def singleComplexRightDerivedZeroIso
-    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    [EnoughInjectives C] [HasKInjectiveResolutions C]
-    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] :
-    HomologicalComplex.single C (.up ℤ) 0 ⋙ DerivedCategory.Q ⋙
-      F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor D 0 ≅ F :=
-  (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (DerivedCategory.singleFunctorIsoCompQ C 0).symm
-      (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor D 0) ≪≫
-    Functor.isoWhiskerRight (DerivedCategory.Plus.singleFunctorιIso C 0).symm
-      (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor D 0) ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C 0)
-      ((Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight F.rightDerivedFunctorPlusCompatibility.symm
-          (DerivedCategory.homologyFunctor D 0) ≪≫
-        Functor.associator _ _ _) ≪≫
-    F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0 ≪≫
-    F.rightDerivedZeroIsoSelf
-
-end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -93,6 +64,9 @@ theorem lowerStar_preservesFilteredColimit
   have : PreservesColimit D S := inferInstance
   have : PreservesColimit D (S ⋙ T) := comp_preservesColimit S T
   exact preservesColimit_of_natIso D
-    (Functor.singleComplexRightDerivedZeroIso (lowerStar Λ f))
+    ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (DerivedCategory.singleFunctorIsoCompQ A 0).symm
+        ((lowerStar Λ f).rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ 0) ≪≫
+      (lowerStar Λ f).singleFunctorCompRightDerivedFunctorCompHomologyFunctorZeroIso)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

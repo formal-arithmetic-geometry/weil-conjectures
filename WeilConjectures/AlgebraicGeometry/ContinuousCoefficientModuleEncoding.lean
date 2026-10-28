@@ -161,7 +161,7 @@ Bhatt--Scholze, Section 6.8.
 lemma lisseFieldSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [hE : NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
-    lisseFieldSheaf ℓ E X = lisseContinuousCommRingSheaf X E := by
+    lisseFieldSheaf ℓ E X = latticeCoefficientSheaf X E := by
   have ht := congrArg
     (fun m : MetricSpace E ↦ m.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace)
     (spectralMetric_eq ℓ E)
@@ -179,11 +179,7 @@ lemma continuousIntegers_eq (ℓ : ℕ) [Fact ℓ.Prime]
     [FiniteDimensional ℚ_[ℓ] E] :
     continuousIntegers ℓ E = Padic.coefficientExtensionIntegers ℓ E := by
   ext x
-  have hm := (Padic.extension_integers_dvr ℓ E
-    (Padic.coefficientExtensionAbsoluteValue ℓ E)
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec.1 x
-  change x ∈ Padic.coefficientExtensionIntegers ℓ E ↔ _ at hm
-  rw [hm]
+  rw [Padic.mem_coefficientExtensionIntegers]
   change ‖x‖₊ ≤ 1 ↔ spectralNorm ℚ_[ℓ] E x ≤ 1
   rw [← NNReal.coe_le_coe]
   change ‖x‖ ≤ 1 ↔ spectralNorm ℚ_[ℓ] E x ≤ 1
@@ -197,7 +193,7 @@ Bhatt--Scholze, Section 6.8.
 lemma lisseIntegerSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [hE : NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
-    lisseIntegerSheaf ℓ E X = lisseContinuousCommRingSheaf X (continuousIntegers ℓ E) := by
+    lisseIntegerSheaf ℓ E X = latticeCoefficientSheaf X (continuousIntegers ℓ E) := by
   have ht := congrArg
     (fun m : MetricSpace E ↦ m.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace)
     (spectralMetric_eq ℓ E)
@@ -473,8 +469,8 @@ lemma lisseScalar_square (ℓ : ℕ) [Fact ℓ.Prime]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
     (lisseIntegerToField ℓ E X) ≫ eqToHom (lisseFieldSheaf_eq ℓ E X) =
       eqToHom (lisseIntegerSheaf_eq ℓ E X) ≫
-        (show lisseContinuousCommRingSheaf X (continuousIntegers ℓ E) ⟶
-          lisseContinuousCommRingSheaf X E from
+        (show latticeCoefficientSheaf X (continuousIntegers ℓ E) ⟶
+          latticeCoefficientSheaf X E from
           ⟨{ app := fun U ↦ CommRingCat.ofHom
                 ((continuousMapRingPresheafMap X (continuousIntegers ℓ E).subtype
                   continuous_subtype_val).app U).hom

@@ -12,8 +12,15 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.ConstructibleSheaf.FreeLifting
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 
-/-! # Exactness of integral scalar localization -/
+/-! # Exactness of integral scalar localization
+
+The private presheaf-level telescope (`localizationSequence`, `localizationCocone`, …) is still
+used by the telescope files through `import all`; exactness itself is proved with the base
+`Mod.smulSequence` API.
+-/
 
 @[expose] public section
 
@@ -180,83 +187,92 @@ private theorem schemeCoefficientIso_naturality (X : Scheme.{u}) :
   simp only [pointCoefficientIso, Iso.hom_inv_id_assoc]
   rfl
 
-/-- Integral-to-E scalar extension is exact: its restricted regular coefficient module is
-an ℕ-filtered colimit of regular integral modules, with transition multiplication by ℓ.
-Source: Bhatt--Scholze, Lemma 6.8.2; the compact-test coefficient localization theorem.
-(auxiliary; not a blueprint node).
+/-- The map `c_k = ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲`, where `φ` is the inclusion `integralScalarMap`.
+Source: Bhatt--Scholze, Lemma 6.8.2
+(auxiliary; not a blueprint node). -/
+noncomputable def integralScalarMapInvPow (k : ℕ) :
+    integralCoeff.{u} ℓ E ⟶ Profinite.continuousMapRingObj E :=
+  integralScalarMap ℓ E ≫ Profinite.continuousMapRingObjMulLeft E ((ℓ : E)⁻¹ ^ k)
 
-Proof. On a compact profinite test S, the nth map sends a to a/ℓⁿ. Every continuous
-E-valued function has one common denominator by compactness, and the inclusion of the
-integral coefficient ring is injective. These maps therefore form a colimit cocone.
-Exact monoidal sheafification and inverse image from the point preserve this cocone
-and identify each stage with the regular integral module on X. Filtered colimits of
-flat objects are flat. Tensoring with this restricted regular module is thus exact;
-the faithful exact forgetful functor identifies it with scalar extension. -/
+lemma integralScalarMapInvPow_zero :
+    integralScalarMapInvPow.{u} ℓ E 0 = integralScalarMap ℓ E := by
+  rw [integralScalarMapInvPow, pow_zero, Profinite.continuousMapRingObjMulLeft_one,
+    Category.comp_id]
+
+lemma nsmul_integralScalarMapInvPow_succ (k : ℕ) :
+    ℓ • integralScalarMapInvPow.{u} ℓ E (k + 1) = integralScalarMapInvPow ℓ E k := by
+  rw [integralScalarMapInvPow, integralScalarMapInvPow, ← Preadditive.comp_nsmul,
+    Profinite.nsmul_continuousMapRingObjMulLeft, pow_succ', ← _root_.mul_assoc,
+    mul_inv_cancel₀ (ell_ne_zero ℓ E), _root_.one_mul]
+
+/-- **`E̲ = colim(𝒪̲_E --ℓ--> 𝒪̲_E --ℓ--> ⋯)`** for the closed unit ball `𝒪_E` of a normed
+extension `E` of `ℚ_ℓ`: the maps `ℓ⁻ᵏ φ` exhibit `E̲` as the sequential colimit of the
+multiplications by `ℓ` on `𝒪̲_E`. This is base
+`Profinite.isColimitPadicIntegersRingObjSmulSequenceCocone` for a general normed `E`. Sectionwise,
+every continuous map from a profinite set to `E` has a common denominator `ℓⁿ`
+(`continuousIntegralFunctions_isLocalization`), and the maps `ℓ⁻ᵏ φ` are injective.
+Source: Bhatt--Scholze, Lemma 6.8.2
+(auxiliary; not a blueprint node). -/
+noncomputable def isColimitIntegralCoeffSmulSequenceCocone :
+    IsColimit (Mod.smulSequenceCocone ℓ (integralScalarMapInvPow.{u} ℓ E)
+      (nsmul_integralScalarMapInvPow_succ ℓ E)) := by
+  have hℓ := ell_ne_zero ℓ E
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget Ab.{u + 1})
+  have : ReflectsColimitsOfShape ℕ (forget Ab.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  refine isColimitOfReflects (sheafToPresheaf _ _) ?_
+  refine evaluationJointlyReflectsColimits _ fun S ↦
+    isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    obtain ⟨x⟩ := x
+    let φ := (continuousIntegers ℓ E).subtype.compLeftContinuous S.unop continuous_subtype_val
+    let := φ.toAlgebra
+    have hloc := continuousIntegralFunctions_isLocalization ℓ E S.unop
+    obtain ⟨n, a, ha⟩ := IsLocalization.Away.surj
+      (ContinuousMap.const S.unop (ℓ : continuousIntegers ℓ E)) x
+    refine ⟨n, ULift.up a, ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+    have ha' := congrArg (fun f : C(S.unop, E) ↦ f s) ha
+    change x s * (ℓ : E) ^ n = (a s : E) at ha'
+    have key : (ℓ : E)⁻¹ ^ n * (a s : E) = x s := by
+      rw [← ha', inv_pow, inv_mul_eq_iff_eq_mul₀ (pow_ne_zero n hℓ), mul_comm]
+    first
+      | exact key
+      | exact key.symm
+  · intro k x y h
+    refine ⟨k, 𝟙 k, ?_⟩
+    rw [CategoryTheory.Functor.map_id]
+    obtain ⟨x⟩ := x
+    obtain ⟨y⟩ := y
+    have hk : (ℓ : E)⁻¹ ^ k ≠ 0 := pow_ne_zero _ (inv_ne_zero hℓ)
+    have h' (s : S.unop) :
+        (ℓ : E)⁻¹ ^ k * (x s : E) = (ℓ : E)⁻¹ ^ k * (y s : E) :=
+      congrArg (fun z : ULift.{u + 1} C(S.unop, E) ↦ z.down s) h
+    obtain rfl : x = y := ContinuousMap.ext fun s ↦ Subtype.ext (mul_left_cancel₀ hk (h' s))
+    rfl
+
+/-- Integral-to-E scalar extension is exact. `E_X = p_X^* E̲` is the sequential colimit of the
+multiplications by `ℓ` on `𝒪_{E,X} = p_X^* 𝒪̲_E` (`isColimitIntegralCoeffSmulSequenceCocone`,
+preserved by the additive left adjoint `p_X^*`), so base
+`Mod.preservesFiniteLimits_extendScalars_of_isColimit` applies. This is the proof of base
+`preservesFiniteLimits_extendScalars_padicIntegersToPadicSubfield` for a general normed `E`.
+Source: Bhatt--Scholze, Lemma 6.8.2
+(auxiliary; not a blueprint node). -/
 @[instance] theorem integralScalarExtension_exact (X : Scheme.{u}) :
     PreservesFiniteLimits
       (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)) := by
-  let := Functor.functorCategoryMonoidalClosed Profinite.{u}ᵒᵖ Ab.{u + 1}
-  have : (upperStarFromPoint X).IsLeftAdjoint :=
-    (pointUpperStarLowerStarAdjunction.comp
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
-  let L := schemeCoefficientFunctor X
-  let R := coefficientPresheaf.{u} (continuousIntegers ℓ E)
-  let S := coefficientPresheaf.{u} E
-  let A := condensedRingObj (integralCoeff ℓ E) X
-  let B := condensedRingObj (Profinite.continuousMapRingObj E) X
-  let a := schemeCoefficientIso X (continuousIntegers ℓ E)
-  let b := schemeCoefficientIso X E
-  let φ := integralPresheafMap.{u} ℓ E
-  let ψ := coefficientMap (integralScalarMap ℓ E) X
-  have : IsMonHom a.hom := by
-    change @IsMonHom _ _ _ _ _ (L.monObjObj R) _ a.hom
-    rw [Functor.monObjObj_comp]
-    exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _
-      (pointCoefficientIso (continuousIntegers ℓ E)).hom
-  have : IsMonHom a.inv := by infer_instance
-  have : IsMonHom b.hom := by
-    change @IsMonHom _ _ _ _ _ (L.monObjObj S) _ b.hom
-    rw [Functor.monObjObj_comp]
-    exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _
-      (pointCoefficientIso E).hom
-  let F := L.mapMod R ⋙ Mod.comap a.inv
-  have : L.Additive := by
-    exact rightExactFunctor_le_additiveFunctor _ _ _ (by
-      rw [rightExactFunctor_iff]
-      infer_instance)
-  have : (L.mapMod R).Additive := ⟨fun {M N f g} ↦
-    Mod.hom_ext _ _ (L.map_add (f := f.hom) (g := g.hom))⟩
-  have : PreservesColimitsOfShape ℕ (L.mapMod R) := by
-    have : PreservesColimitsOfShape ℕ
-        (L.mapMod R ⋙ Mod.forget (L.obj R)) :=
-      inferInstanceAs (PreservesColimitsOfShape ℕ (Mod.forget R ⋙ L))
-    exact preservesColimitsOfShape_of_reflects_of_preserves _ (Mod.forget (L.obj R))
-  let er : F.obj (Mod.regular R) ≅ Mod.regular A :=
-    (Mod.comap a.inv).mapIso (mappedRegularIso L R) ≪≫
-      restrictedRegularIso a.inv (𝟙 A) a (by exact a.inv_hom_id) ≪≫ (Mod.comapId A).app _
-  let es : F.obj ((Mod.comap φ).obj (Mod.regular S)) ≅
-      (Mod.comap ψ).obj (Mod.regular B) :=
-    (Mod.comap a.inv).mapIso
-      ((L.mapModComapIso φ).app (Mod.regular S) ≪≫
-        (Mod.comap (L.map φ)).mapIso (mappedRegularIso L S)) ≪≫
-      (Mod.comapComp a.inv (L.map φ)).symm.app (Mod.regular (L.obj S)) ≪≫
-      restrictedRegularIso (a.inv ≫ L.map φ) ψ b (by
-        rw [Category.assoc, schemeCoefficientIso_naturality, Iso.inv_hom_id_assoc])
-  have hc := isColimitOfPreserves F (localizationCoconeIsColimit.{u} ℓ E)
-  let D := localizationSequence.{u} ℓ E ⋙ F
-  have hD (n : ℕ) : ObjectProperty.flat (D.obj n) :=
-    ObjectProperty.prop_of_iso _ er.symm (ObjectProperty.flat_of_tensorIso
-      (λ_ (Mod.regular A)))
-  have : AB5OfSize.{0, 0} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) A) :=
-    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} _
-  have hflat : ObjectProperty.flat ((Mod.comap ψ).obj (Mod.regular B)) :=
-    ObjectProperty.prop_of_iso _
-      (colimit.isoColimitCocone ⟨F.mapCocone (localizationCocone ℓ E), hc⟩ ≪≫ es)
-      (ObjectProperty.flat_colimit D hD)
-  have : PreservesFiniteLimits (tensorLeft ((Mod.comap ψ).obj (Mod.regular B))) :=
-    hflat.1.1
-  have : PreservesFiniteLimits (Mod.extendScalars ψ ⋙ Mod.forget B) :=
-    preservesFiniteLimits_of_natIso (Mod.extendForgetTensorIso ψ).symm
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (Mod.forget B)
+  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    adj.leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  have := Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+  have := AB5OfSize_of_univLE.{0, 0} (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+  exact Mod.preservesFiniteLimits_extendScalars_of_isColimit _
+    (Mod.isColimitSmulSequenceCoconeMap (upperStarFromPoint X) _
+      (isColimitIntegralCoeffSmulSequenceCocone ℓ E))
+    (by rw [integralScalarMapInvPow_zero])
 
 end AlgebraicGeometry.ProEtale.CondensedRing

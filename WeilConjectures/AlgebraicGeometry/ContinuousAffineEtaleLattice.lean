@@ -6,8 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.AlgebraicGeometry.ContinuousLocallyFreePullback
 import WeilConjectures.AlgebraicGeometry.LisseLatticeEtaleLocal
 import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingLattices
 
@@ -65,24 +66,18 @@ theorem continuousLisse_affine_etale_lattice
     (X : Scheme.{u})
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) (x : X) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) (x : X) :
     ∃ (U : Scheme.{u}) (p : U ⟶ X), IsAffine U ∧ Etale p ∧ x ∈ Set.range p ∧
     ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
         (condensedRingObj (integralCoeff ℓ E) U),
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (integralCoeff ℓ E) U))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      (IsLocallyFree (condensedRingObj (integralCoeff ℓ E) U) M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P) := by
   classical
   have hlocal : ∃ (Y : Scheme.{u}) (q : Y ⟶ X), Etale q ∧ x ∈ Set.range q ∧
       ∃ M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
           (condensedRingObj (integralCoeff ℓ E) Y),
-        LocallyFree (condensedRingObj (integralCoeff ℓ E) Y) M ∧
+        IsLocallyFree (condensedRingObj (integralCoeff ℓ E) Y) M ∧
         Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)).obj M ≅
           (upperStar (Profinite.continuousMapRingObj E) q).obj P) := by
     let L := (continuousFieldModuleEquivalence ℓ E X).functor.obj P
@@ -101,7 +96,7 @@ theorem continuousLisse_affine_etale_lattice
   let f := A.f i
   let N := (upperStar (integralCoeff ℓ E) f).obj M
   refine ⟨A.X i, f ≫ q, inferInstance, inferInstance, ⟨z, ?_⟩, N,
-    locallyFree_upperStar _ f hM, ⟨?_⟩⟩
+    IsLocallyFree.upperStar _ f hM, ⟨?_⟩⟩
   · rw [Scheme.Hom.comp_apply, hz, hy]
   · exact (pullIso (integralScalarMap ℓ E) f).app M ≪≫
       (upperStar (Profinite.continuousMapRingObj E) f).mapIso e ≪≫

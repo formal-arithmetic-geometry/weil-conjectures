@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import all WeilConjectures.AlgebraicGeometry.IntegralConstructibleKernels
 
 /-! # Integral matrix kernels with locally free rational cokernel -/
@@ -19,25 +20,18 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private abbrev LocalFree {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
-  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-    Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).obj M)
-
 private theorem localFree_of_free {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : Mod.IsFree R M) : LocalFree R M := by
+    (h : Mod.IsFree R M) : IsLocallyFree R M := by
   exact ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ free_pullback _ h⟩
 
 private theorem localFree_of_cover {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
-    (h : ∀ i, LocalFree ((ProEtale.upperStar Ab.{u + 1} (C.f i)).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} (C.f i)).mapMod R).obj M)) : LocalFree R M := by
+    (h : ∀ i, IsLocallyFree ((ProEtale.upperStar Ab.{u + 1} (C.f i)).obj R)
+      (((ProEtale.upperStar Ab.{u + 1} (C.f i)).mapMod R).obj M)) : IsLocallyFree R M := by
   choose V hV using h
   refine ⟨C.bind V, fun ij ↦ ?_⟩
   rcases ij with ⟨i, j⟩
@@ -48,7 +42,7 @@ private theorem localFree_of_comap {X : Scheme.{u}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
     (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
-    (h : LocalFree R ((Mod.comap φ).obj M)) : LocalFree S M := by
+    (h : IsLocallyFree R ((Mod.comap φ).obj M)) : IsLocallyFree S M := by
   exact locally_free_of_iso (locally_free_comap (inv φ) h)
     ((Mod.comapEquivalenceOfIsIso φ).unitIso.app M).symm
 
@@ -70,28 +64,17 @@ theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]
       (condensedRingObj (integralCoeff ℓ E) X)) (a : A ⟶ B)
     (hA : Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) A)
     (hB : Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) B)
-    (hLF : ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj
-          (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj
-          ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj
-            (cokernel a)))) :
-    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (integralCoeff ℓ E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj (kernel a)) := by
+    (hLF : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X)
+      ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj (cokernel a))) :
+    IsLocallyFree (condensedRingObj (integralCoeff ℓ E) X) (kernel a) := by
   have H (n : ℕ) : ∀ (X : Scheme.{u})
       (A B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (integralCoeff ℓ E) X)) (a : A ⟶ B),
       Nonempty (A ≅ Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n) →
       Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) B →
-      (∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj
-            (condensedRingObj (Profinite.continuousMapRingObj E) X))
-          (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj
-            ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj
-              (cokernel a)))) →
-      LocalFree (condensedRingObj (integralCoeff ℓ E) X) (kernel a) := by
+      IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X)
+        ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj (cokernel a)) →
+      IsLocallyFree (condensedRingObj (integralCoeff ℓ E) X) (kernel a) := by
     induction n using Nat.strong_induction_on with
     | h n IH =>
       intro X A B a hA hB hLF
@@ -104,7 +87,7 @@ theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]
       let α := condensedPullbackHom (integralCoeff ℓ E) (V.f k)
       let J := Mod.comap (D := Sheaf (Scheme.ProEt.topology (V.X k)) Ab.{u + 1}) (inv α)
       let T := F ⋙ J
-      have hT : LocalFree R' (kernel (T.map a)) := by
+      have hT : IsLocallyFree R' (kernel (T.map a)) := by
         rcases hV k with hz | ⟨m, hmn, A₁, B₁, iA, hB₁, p, hp, hunit, r, c, d, eA, eB, he⟩
         · rw [show T.map a = 0 from hz]
           exact locally_free_of_iso (localFree_of_free
@@ -146,10 +129,7 @@ theorem integralMatrixKernel_locallyFree_of_rational_epi
     (f : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶
       Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) m)
     [Epi ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).map f)] :
-    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (integralCoeff ℓ E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj (kernel f)) := by
+    IsLocallyFree (condensedRingObj (integralCoeff ℓ E) X) (kernel f) := by
   let L := Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)
   let S := condensedRingObj (Profinite.continuousMapRingObj E) X
   have hQ : IsZero (L.obj (cokernel f)) :=

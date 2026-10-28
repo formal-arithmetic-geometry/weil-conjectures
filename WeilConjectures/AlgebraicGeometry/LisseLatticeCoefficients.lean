@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+public import WeilConjectures.AlgebraicGeometry.LatticeSheafBasic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
@@ -32,19 +33,6 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The commutative-ring version of the existing continuous-function ring sheaf.
-Source: Bhatt--Scholze, Definition 6.8.1
-(auxiliary; not a blueprint node). -/
-noncomputable def lisseContinuousCommRingSheaf (X : Scheme.{u}) (T : Type)
-    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
-    Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  ⟨{ obj := fun U ↦ CommRingCat.of (ULift.{u + 1} C(U.unop.left, T))
-     map := fun f ↦ CommRingCat.ofHom ((continuousMapRingPresheaf X T).map f).hom
-     map_id := fun _ ↦ rfl
-     map_comp := fun _ _ ↦ rfl },
-   Presheaf.isSheaf_of_isSheaf_comp _ _ (forget₂ CommRingCat RingCat)
-     (isSheaf_continuousMapRingPresheaf X T)⟩
-
 /-- The continuous coefficient sheaf, with the canonical extension of the p-adic norm.
 Source: Bhatt--Scholze, Definition 6.8.1
 (auxiliary; not a blueprint node). -/
@@ -52,7 +40,7 @@ noncomputable def lisseFieldSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
-  lisseContinuousCommRingSheaf X E
+  latticeCoefficientSheaf X E
 
 /-- The integral coefficient sheaf, with the topology induced from the coefficient field.
 Source: Bhatt--Scholze, Definition 6.8.1
@@ -61,7 +49,7 @@ noncomputable def lisseIntegerSheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
-  lisseContinuousCommRingSheaf X (Padic.coefficientExtensionIntegers l E)
+  latticeCoefficientSheaf X (Padic.coefficientExtensionIntegers l E)
 
 /-- Postcomposition with the valuation-ring inclusion is the scalar extension map.
 Source: Bhatt--Scholze, Proposition 6.8.4(6)

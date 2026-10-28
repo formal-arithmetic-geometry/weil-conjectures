@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import Mathlib.Topology.ContinuousMap.Algebra
@@ -32,7 +33,7 @@ isomorphism without making arbitrary choices of bases for integral modules.
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
@@ -54,21 +55,6 @@ Proof: specialize the existing small-site local-bijectivity instance. -/
 local instance latticeWEqualsOver (X : Scheme.{u}) (U : X.ProEt) :
     ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
   infer_instance
-
-/-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
-same sections and precomposition maps as `continuousMapRingPresheaf`.
-Source: Bhatt--Scholze, Proposition 6.8.4(6)
-(auxiliary; not a blueprint node). -/
-noncomputable def latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
-    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
-    X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} where
-  obj V := CommRingCat.of (ULift.{u + 1} C(V.unop.left, T))
-  map f := CommRingCat.ofHom
-    (ULift.ringEquiv.symm.toRingHom.comp
-      (((ContinuousMap.compRightAlgHom ℤ T f.unop.left.base.hom).toRingHom).comp
-        ULift.ringEquiv.toRingHom))
-  map_id _ := rfl
-  map_comp _ _ := rfl
 
 /-- Restriction of the scalar-extension ring map to the localized site.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), slice restrictions
@@ -124,51 +110,32 @@ noncomputable def IntegralLatticePair.image {X : Scheme.{u}}
         ((1 : (S.over U).obj.obj T) ⊗ₜ[(R.over U).obj.obj T,
           ((latticeScalarMap a U).hom.app T).hom] m))
 
-/-- Continuous coefficients satisfy the sheaf axiom.
-Source: Bhatt--Scholze, Lemma 4.2.12 and Proposition 6.8.4(6)
-(auxiliary; not a blueprint node).
-Proof: forget to sets and identify the presheaf with the lifted restriction of
-`continuousMapPresheaf T`. Mathlib's fpqc continuous-function descent theorem makes this
-a sheaf. The pro-etale topology is contained in the fpqc topology. Restriction and the
-universe lift preserve the sheaf condition, and the forgetful functor from commutative
-rings reflects it. Thus the same functions form a sheaf of commutative rings. -/
-theorem isSheaf_latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
-    [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
-    Presheaf.IsSheaf (Scheme.ProEt.topology X) (latticeCoefficientPresheaf X T) := by
-  rw [Presheaf.isSheaf_iff_isSheaf_comp (Scheme.ProEt.topology X)
-    (latticeCoefficientPresheaf X T) (forget CommRingCat.{u + 1})]
-  let e : latticeCoefficientPresheaf X T ⋙ forget CommRingCat.{u + 1} ≅
-      (Scheme.ProEt.forget X ⋙ Over.forget X).op ⋙
-        continuousMapPresheaf T ⋙ uliftFunctor.{u + 1} :=
-    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
-  rw [Presheaf.isSheaf_of_iso_iff e]
-  refine Functor.op_comp_isSheaf_of_isSheaf
-    (F := Scheme.ProEt.forget X ⋙ Over.forget X)
-    (J := Scheme.ProEt.topology X) (K := Scheme.proetaleTopology) _ ?_
-  rw [isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff,
-    ← isSheaf_iff_isSheaf_of_type]
-  exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
-    Scheme.proetaleTopology_le_fpqcTopology
-
-/-- The continuous coefficient sheaf, with its commutative-ring structure retained.
+/-- The continuous coefficient sheaf `U ↦ C(U, T)`: base `continuousMapRingSheaf X T` with its
+commutative-ring structure retained. Its sections and restriction maps are those of
+`continuousMapRingPresheaf X T`, and the sheaf condition is reflected from it along
+`forget₂ CommRingCat RingCat`.
 Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
 (auxiliary; not a blueprint node). -/
-noncomputable def latticeCoefficientSheaf (X : Scheme.{u}) (T : Type u)
+noncomputable def latticeCoefficientSheaf (X : Scheme.{u}) (T : Type w)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
-    Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  ⟨latticeCoefficientPresheaf X T, isSheaf_latticeCoefficientPresheaf X T⟩
+    Sheaf (Scheme.ProEt.topology X) CommRingCat.{max (u + 1) w} :=
+  ⟨{ obj := fun U ↦ CommRingCat.of (ULift.{u + 1} C(U.unop.left, T))
+     map := fun f ↦ CommRingCat.ofHom ((continuousMapRingPresheaf X T).map f).hom
+     map_id := fun _ ↦ rfl
+     map_comp := fun _ _ ↦ rfl },
+   Presheaf.isSheaf_of_isSheaf_comp _ _ (forget₂ CommRingCat RingCat)
+     (isSheaf_continuousMapRingPresheaf X T)⟩
 
-/-- The coefficient map is postcomposition with the specified continuous ring map.
+/-- The coefficient map is postcomposition with the specified continuous ring map, i.e. base
+`continuousMapRingPresheafMap` on the commutative-ring lift.
 Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.4(6)
 (auxiliary; not a blueprint node). -/
-noncomputable def latticeCoefficientSheafMap (X : Scheme.{u}) {T T' : Type u}
+noncomputable def latticeCoefficientSheafMap (X : Scheme.{u}) {T T' : Type w}
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TopologicalSpace T'] [CommRing T'] [IsTopologicalRing T']
     (f : T →+* T') (hf : Continuous f) :
     latticeCoefficientSheaf X T ⟶ latticeCoefficientSheaf X T' :=
-  ⟨{ app := fun _ ↦ CommRingCat.ofHom
-       (ULift.ringEquiv.symm.toRingHom.comp
-         ((f.compLeftContinuous _ hf).comp ULift.ringEquiv.toRingHom))
+  ⟨{ app := fun U ↦ CommRingCat.ofHom ((continuousMapRingPresheafMap X f hf).app U).hom
      naturality := fun _ _ _ ↦ rfl }⟩
 
 /-- The given valuation subring in the field equipped with its canonical absolute value.

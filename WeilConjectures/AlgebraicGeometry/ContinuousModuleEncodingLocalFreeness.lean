@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import WeilConjectures.AlgebraicGeometry.LisseLatticeCoefficientNormalization
 import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingSliceFreeness
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
@@ -49,10 +50,7 @@ theorem continuousRing_locallyFree_iff
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T) X)) :
-    (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj T) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) ↔
+    (IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj T) X) P) ↔
       ((continuousRingModuleEquivalence X T).functor.obj P).IsFiniteLocallyFree := by
   classical
   let R := continuousMapRingSheaf X T
@@ -146,10 +144,7 @@ theorem continuousField_locallyFree
     (X : Scheme.{u})
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (Profinite.continuousMapRingObj E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    (hP : IsLocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P) :
     ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).IsFiniteLocallyFree := by
   let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
   let : TotallySeparatedSpace E :=
@@ -179,11 +174,8 @@ theorem continuousInteger_inverse_locallyFree
     (M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf ℓ E X)))
     [M.IsFiniteLocallyFree] :
-    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
-        (condensedRingObj (integralCoeff ℓ E) X))
-        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj
-          ((continuousIntegerModuleEquivalence ℓ E X).inverse.obj M)) := by
+    IsLocallyFree (condensedRingObj (integralCoeff ℓ E) X)
+      ((continuousIntegerModuleEquivalence ℓ E X).inverse.obj M) := by
   let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
   let : TotallySeparatedSpace E :=
     totallySeparatedSpace_iff_exists_isClopen.mpr fun x y h ↦ by

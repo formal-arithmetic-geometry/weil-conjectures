@@ -36,9 +36,7 @@ theorem isOpen_latticeCoefficientIntegers (l : ℕ) [Fact l.Prime]
   apply (latticeCoefficientIntegers l E).toAddSubgroup.isOpen_of_mem_nhds (g := 0)
   apply Filter.mem_of_superset (Metric.ball_mem_nhds (0 : K) zero_lt_one)
   intro x hx
-  have hO := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1
-  apply (hO _).mpr
+  apply (Padic.mem_coefficientExtensionIntegers l E _).mpr
   change ‖x‖ ≤ 1
   have hx' : ‖x‖ < 1 := by simpa only [Metric.mem_ball, dist_zero_right] using hx
   exact hx'.le

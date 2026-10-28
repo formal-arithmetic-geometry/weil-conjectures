@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.AlgebraicGeometry.ContinuousLocallyFreePullback
@@ -33,10 +34,10 @@ private lemma locallyFree_of_extendScalars {X : Scheme.{u}}
     [MonObj R] [MonObj T] [IsCommMonObj R]
     (φ : R ⟶ T) [IsMonHom φ] [IsIso φ]
     {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (hP : LocallyFree T ((Mod.extendScalars φ).obj P)) : LocallyFree R P := by
-  exact locallyFree_of_iso ((Mod.comapEquivalenceOfIsIso φ).counitIso.app P)
-    (locallyFree_comap φ
-      (locallyFree_of_iso ((Mod.extendScalarsIsoComapInv φ).app P) hP))
+    (hP : IsLocallyFree T ((Mod.extendScalars φ).obj P)) : IsLocallyFree R P := by
+  exact IsLocallyFree.of_iso ((Mod.comapEquivalenceOfIsIso φ).counitIso.app P)
+    (IsLocallyFree.comap φ
+      (IsLocallyFree.of_iso ((Mod.extendScalarsIsoComapInv φ).app P) hP))
 
 private lemma module_isZero_of_underlying
     {X : Scheme.{u}} {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
@@ -204,30 +205,24 @@ theorem continuousLattice_finite_coproduct_of_coefficients
     {I : Type u} [Finite I] (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X)
     (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})
       (condensedRingObj (Λ) (Y i)))
-    (hM : ∀ i, ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (Y i), ∀ s : D.I₀,
-      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-        (condensedRingObj (Λ) (Y i)))
-        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj (M i)))
+    (hM : ∀ i, IsLocallyFree (condensedRingObj (Λ) (Y i)) (M i))
     (e : ∀ i, Nonempty
       ((Mod.extendScalars (coefficientMap (φ) (Y i))).obj (M i) ≅
         (CondensedRing.upperStar (Λ') (p i)).obj P)) :
     ∃ M : Mod (Sheaf (Scheme.ProEt.topology (∐ Y)) Ab.{u + 1})
         (condensedRingObj (Λ) (∐ Y)),
-      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y), ∀ s : D.I₀,
-        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
-          (condensedRingObj (Λ) (∐ Y)))
-          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      (IsLocallyFree (condensedRingObj (Λ) (∐ Y)) M) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (φ) (∐ Y))).obj M ≅
         (CondensedRing.upperStar (Λ') (Sigma.desc p)).obj P) := by
   classical
   let G := fun i ↦ (openImmersionLowerShriek Λ (Sigma.ι Y i)).obj (M i)
   let N := ⨁ G
   refine ⟨N, ?_, ?_⟩
-  · have hlocal (i : I) : LocallyFree
+  · have hlocal (i : I) : IsLocallyFree
         ((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).obj (condensedRingObj Λ (∐ Y)))
         (((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).mapMod _).obj N) := by
       apply locallyFree_of_extendScalars (condensedPullbackHom Λ (Sigma.ι Y i))
-      exact locallyFree_of_iso (nonempty_pull_biproduct_shriek_iso Λ Y M i).some.symm (hM i)
+      exact IsLocallyFree.of_iso (nonempty_pull_biproduct_shriek_iso Λ Y M i).some.symm (hM i)
     choose D hD using hlocal
     let C : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y) :=
       { I₀ := I

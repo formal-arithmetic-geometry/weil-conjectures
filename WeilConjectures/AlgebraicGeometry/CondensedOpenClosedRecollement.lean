@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 import WeilConjectures.Algebra.Homology.FunctorialBoundedInjectiveResolution
 
 import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
@@ -757,7 +758,7 @@ theorem condensed_open_closed_recollement
           (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnit.app
             ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) := by
   classical
-  obtain ⟨hAb, hAbsupport⟩ := ProEtale.abelian_closed_support i j hij
+  have hAb := ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i
   have hi := moduleCounitOfAbelian Λ i hAb
   have hjunit := openUnitIsIso Λ j
   have hzeroji := openRestrictionPushforwardZero Λ i j hij
@@ -772,7 +773,7 @@ theorem condensed_open_closed_recollement
       IsIso ((upperStarLowerStarAdjunction Λ i).unit.app M) := by
     intro M hjM
     apply moduleUnitOfAbelian Λ i M
-    apply hAbsupport
+    apply ProEtale.abelian_closed_support i j hij
     exact ((Mod.forget _).map_isZero hjM).of_iso
       ((profinitePointModuleForgetPullbackIso Λ j).app M).symm
   have hjcounit : IsIso (upperStarLowerStarAdjunction Λ j).counit :=

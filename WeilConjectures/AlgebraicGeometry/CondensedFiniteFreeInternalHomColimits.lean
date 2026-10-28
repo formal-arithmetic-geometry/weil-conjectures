@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
@@ -345,9 +346,7 @@ zero and empty schemes. -/
 theorem condensed_locally_free_ihom_preservesColimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj R)
-        (((upperStar Ab.{u + 1} (C.f s)).mapMod R).obj P)) :
+    (hP : IsLocallyFree R P) :
     PreservesColimitsOfSize.{u + 1, u + 1} (Mod.ihom P) := by
   obtain ⟨C, hC⟩ := hP
   have (s : C.I₀) : WeaklyEtale (C.f s) :=
