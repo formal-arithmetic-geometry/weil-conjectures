@@ -9,6 +9,8 @@ public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
 public import Sheaf.Paper.FiniteQuotientLayerTensorComplex
 public import Sheaf.Paper.FinitePerfectQuotientModelData
 
+import Sheaf.Paper.FiniteQuotientLayerTensorDerivedSliceComparison
+
 /-! # Derived chart homology comparison for the finite quotient layer
 
 Source: Stacks Project, sites-cohomology.tex, Tags 094I and 06YU.
@@ -22,6 +24,19 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
+
+private theorem homology_iso_of_derived_iso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+    [PreservesFiniteColimits F] [HasDerivedCategory C] [HasDerivedCategory D]
+    {K L : DerivedCategory C} (e : Nonempty (F.mapDerivedCategory.obj K ≅
+      F.mapDerivedCategory.obj L)) (q : ℤ) :
+    Nonempty (F.obj ((DerivedCategory.homologyFunctor C q).obj K) ≅
+      F.obj ((DerivedCategory.homologyFunctor C q).obj L)) := by
+  obtain ⟨e⟩ := e
+  exact ⟨(F.mapDerivedCategoryHomologyFunctorIso q).app K ≪≫
+    (DerivedCategory.homologyFunctor D q).mapIso e ≪≫
+      ((F.mapDerivedCategoryHomologyFunctorIso q).app L).symm⟩
 
 /--
 The chartwise homology of the actual layer agrees with the chartwise homology of
@@ -69,6 +84,22 @@ theorem finiteQuotient_layer_tensor_derived_homology_comparison
               (DerivedCategory.Q.obj
                 (finiteModelConstantComplex X _
                   (finiteQuotientLayerTensorComplex d.ideal n P)))))) := by
-  sorry
+  intro q
+  let R := completedAdicFiniteRing X d (n + 1)
+  let U := (toProEt X).obj Z
+  let F := SheafOfModules.overFunctor.{t + 1} R U
+  let _ : F.Additive := (ringedOverFunctor_exactGeneral R U).1
+  let _ : PreservesFiniteLimits F := (ringedOverFunctor_exactGeneral R U).2.1
+  let _ : PreservesFiniteColimits F := (ringedOverFunctor_exactGeneral R U).2.2
+  let K := finiteQuotientLayerObject X d M n
+  let L := (completedAdicDerivedChange X (φ (n + 1))).obj
+    (DerivedCategory.Q.obj
+      (finiteModelConstantComplex X _
+        (finiteQuotientLayerTensorComplex d.ideal n P)))
+  have hKL : Nonempty (F.mapDerivedCategory.obj K ≅ F.mapDerivedCategory.obj L) := by
+    simpa only [F, R, U, ringedDerivedRestrictionGeneral] using
+      finiteQuotient_layer_tensor_derived_slice_comparison X d φ hφ hcompat M b n Z P
+        hPb hP e
+  exact homology_iso_of_derived_iso F hKL q
 
 end AlgebraicGeometry.Scheme

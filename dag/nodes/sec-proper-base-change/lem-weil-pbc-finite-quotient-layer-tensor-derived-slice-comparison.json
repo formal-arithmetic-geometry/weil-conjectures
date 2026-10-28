@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-layer-tensor-derived-slice-comparison",
+ "kind": "statement",
+ "title": "Derived slice comparison for the finite quotient layer",
+ "statement": "For an adic coefficient datum with compatible finite coefficient isomorphisms, a residue chart complex P that is bounded above and termwise projective, and the supplied residue chart isomorphism e, the derived restriction to the etale chart of the actual finite quotient layer is isomorphic to the derived restriction of the coefficient-changed constant realization of the explicit ideal-layer tensor complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094I and 06YU, derived tensor balancing before homology"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-quotient-layer-tensor-complex",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the kernel of the successive quotient with the ideal-power layer, balance the derived tensor using the compatible coefficient maps, and transport the supplied residue-chart isomorphism through derived tensor descent. Exact restriction to the chart preserves the comparison.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "def-weil-pbc-finite-quotient-layer-tensor-complex",
+    "def-weil-pbc-finite-perfect-quotient-model-data",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-quotient-layer-tensor-complex",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094I and 06YU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact functor derived category homology commutation natural isomorphism",
+   "results": "Found Functor.mapDerivedCategoryHomologyFunctorIso in the derived-category exact-functor API; it transports a derived-object isomorphism to homology after applying an exact functor.",
+   "date": "2026-10-28",
+   "verdict": "Use the exact-functor homology transport in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryHomologyFunctorIso",
+   "results": "The declaration gives H_C ⋙ F ≅ F.mapDerivedCategory ⋙ H_D for additive functors preserving finite limits and colimits.",
+   "date": "2026-10-28",
+   "verdict": "Exact match for the homology transport glue."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso",
+   "results": "Mathlib and the project use this declaration in derived exact-functor comparisons; no more specialized finite-layer derived slice comparison exists.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate of the split derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientLayerTensorDerivedHomologyComparison",
+  "date": "2026-10-28",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-quotient-layer-tensor-homology-comparison",
+   "place": "Derived-object comparison before the homology transport step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientLayerTensorDerivedSliceComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientLayerTensorDerivedSliceComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_derived_slice_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_derived_slice_comparison"
+  ],
+  "statement": "theorem finiteQuotient_layer_tensor_derived_slice_comparison\n    (X : Scheme.{t})\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (b : ℤ) (n : ℕ) (Z : X.Etale)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ)\n    (hPb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (0 + 1)) (P.X i))\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d 0).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ 0)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    Nonempty\n      ((ringedDerivedRestrictionGeneral (completedAdicFiniteRing X d (n + 1))\n          ((toProEt X).obj Z)).obj (finiteQuotientLayerObject X d M n) ≅\n        (ringedDerivedRestrictionGeneral (completedAdicFiniteRing X d (n + 1))\n          ((toProEt X).obj Z)).obj\n          ((completedAdicDerivedChange X (φ (n + 1))).obj\n            (DerivedCategory.Q.obj\n              (finiteModelConstantComplex X _\n                (finiteQuotientLayerTensorComplex d.ideal n P)))))",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261028T020700-L-2536935",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261028T020700-L-2536935",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
