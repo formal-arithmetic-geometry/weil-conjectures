@@ -1,0 +1,40 @@
+/- Copyright (c) 2026 The SHEAF contributors. -/
+module
+public import Sheaf.Paper.RationalP1ScalarChernMaps
+public import Sheaf.Paper.DerivedCalculationInstances
+import all Sheaf.Paper.DerivedExchangeExactNormalization
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+namespace AlgebraicGeometry.ProEtale.RationalP1
+open DiagonalCoefficients CondensedRing
+attribute [local instance 30000] CategoryTheory.sheafIsAbelian
+attribute [local instance 30000] cachedModuleClosed
+attribute [local instance] CondensedRing.pullback_commShift
+/-- The explicit second-trace exchange equality used by the scalar component.
+It is packaged as a proposition so callers do not repeatedly normalize its
+large categorical expression during elaboration.
+(blueprint: lem-sfb-scalar-trace-equation) -/
+structure ScalarTraceWitness
+    (l : ℕ) [Fact l.Prime]
+    (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p]
+    (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] : Prop where
+  exchange_eq : secondTraceExchange l c k p hpl Y =
+      (condensedAmbientExchange (coefficient l c).X (square Y)).app
+        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
+          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map
+        (firstLineComparisonForTrace l c k p hpl Y).hom
+
+/-- Construct the packaged second-trace exchange witness from the trace
+calculation in the scalar P1 square.
+(blueprint: lem-sfb-scalar-trace-equation) -/
+theorem scalar_trace_equation
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
+    ScalarTraceWitness l c k p hpl Y := by sorry
+end AlgebraicGeometry.ProEtale.RationalP1

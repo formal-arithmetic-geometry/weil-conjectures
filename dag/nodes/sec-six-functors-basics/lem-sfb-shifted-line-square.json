@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-shifted-line-square",
+ "kind": "statement",
+ "title": "Composition of normalized unshifted rational Tate-line comparisons",
+ "statement": "For a prime l, a finite rational coefficient index c or the algebraic-closure index, and composable scheme arrows f:X→Y and g:Y→Z with l invertible in every residue field of X,Y,Z, let Λ=(coefficient l c).X and L_A=line l c A as in [def-sfb-rational-tate-pullback-comparison]. Then the canonical underived internal-module compositor c_f,g:(f≫g)*≅g*⋙f*, followed by f* of lineComparison(g) and lineComparison(f), equals lineComparison(f≫g). This is an equality of unshifted module maps, before taking degree-zero complexes, derived functors, shifts, exchange mates or adjunction units.",
+ "stmt_deps": [
+  "def-sfb-rational-tate-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity; The integral twist; Rational and algebraic closure, applied to two successive pullbacks. Also canonical-map composition compatibility in the second rational P1 triangle."
+ },
+ "proof": [
+  {
+   "text": "This is a strictly smaller categorical/geometric assembly step isolated from the assigned target; its proof is supplied in the module docstring and will be completed independently.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity; The integral twist; Rational and algebraic closure, applied to two successive pullbacks. Also canonical-map composition compatibility in the second rational P1 triangle.",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback isomorphism for a rational Tate line is compatible with composition of morphisms of schemes",
+   "date": "2026-10-28",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"leftDerivedFunctor\"",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*comp|lineComparison.*comp|pullback.*Tate",
+   "date": "2026-10-28",
+   "results": "25 hits: Mathlib/Topology/Bornology/Basic.lean, Mathlib/Data/Fintype/Inv.lean, Mathlib/Data/Fintype/Inv.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Defs.lean, Mathlib/Order/ConditionallyCompleteLattice/Defs.lean",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "categorical composition and naturality lemma for the stated construction",
+   "date": "2026-10-28",
+   "results": "No direct existing declaration; this split isolates the required project-specific step.",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarP1UnitMateComponent",
+  "date": "2026-10-28",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-chern-base-change-unit-component-core",
+   "place": "Root-normalized line comparison in the categorical unit calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ShiftedLineSquare",
+  "file": "lean/Sheaf/Paper/ShiftedLineSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.shifted_line_square",
+  "statement": "theorem shifted_line_square (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] : (condensedAmbientPullbackComparison (coefficient l c).X (square Y)).hom.app (((DerivedCategory.singleFunctor (Modules (coefficient l c).X Y) 0).obj (line l c Y)) ⟦(2 : ℤ)⟧) ≫ (moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).map (scalarQLineIso l c k p hpl Y).hom ≫ (firstLineComparisonForTrace l c k p hpl Y).hom = (moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y)).map (scalarQLineIso l c k p hpl Y).hom ≫ (secondLineComparison l c k p hpl Y).hom",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.shifted_line_square"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

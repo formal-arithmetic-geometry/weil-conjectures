@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-scalar-component-from-trace",
+ "kind": "statement",
+ "title": "Scalar twisted-unit component from the explicit trace witness",
+ "statement": "For the scalar P1 setup, an explicit witness of the second-trace exchange equality implies the twisted-unit exchange component equation. The witness is a strictly smaller intermediate proposition than the component equation.",
+ "stmt_deps": [
+  "lem-sfb-scalar-trace-equation",
+  "lem-sfb-ambient-twisted-unit-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K."
+ },
+ "proof": [
+  {
+   "text": "Expand the twisted unit and trace exchange, apply the ambient twisted-unit mate to the square, and use the shifted line-square calculation. The remaining second-trace exchange is supplied by the explicit witness hypothesis.",
+   "uses": [
+    "lem-sfb-scalar-trace-equation",
+    "lem-sfb-ambient-twisted-unit-mate",
+    "lem-sfb-ambient-square-assembly",
+    "lem-sfb-shifted-line-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-trace-equation",
+  "lem-sfb-ambient-twisted-unit-mate",
+  "lem-sfb-ambient-square-assembly",
+  "lem-sfb-shifted-line-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Intermediate assembly from the explicit second-trace witness.",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit and Chern class split the derived direct image on a projective line, with trace values zero and one",
+   "date": "2026-10-27",
+   "results": "Eight hits: projective resolutions, linear algebra direct-sum traces, and split maps of cochain complexes. No projective-line Chern splitting or sheaf trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line Chern splitting normalized trace commutes with pullback base change",
+   "date": "2026-10-27",
+   "results": "Eight hits on normalized field traces, elliptic curves and LinearMap.trace_baseChange. None for the derived geometric trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biprod\", \"desc\"",
+   "date": "2026-10-27",
+   "results": "biprod.desc, inl_desc, inr_desc and their reassociations. These are used for the categorical assembly; they do not construct the geometric generators.",
+   "verdict": "Use Mathlib biproduct calculus for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*Chern|chern.*trace",
+   "date": "2026-10-27",
+   "results": "No Mathlib matches. In the project, DiagonalCompletedChernLift constructs normalized completed adjuncts, DiagonalTraceTwistedSplittingComponents proves the strict-system components, and DiagonalUniformizerTraceChernDegree proves completed Chern degree privately. DiagonalTowerCoefficients.baseChange needs two families and completed cycle systems not present in this item.",
+   "verdict": "Separate the intrinsic splittings from geometric preservation of their actual generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarP1UnitMateComponent",
+  "date": "2026-10-28",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity, scalar trace base change before tensoring with q*K.",
+   "via": [
+    "lem-sfb-rational-p1-second-scalar-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarComponentFromTrace",
+  "file": "lean/Sheaf/Paper/ScalarComponentFromTrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_component_from_trace",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.scalar_component_from_trace"
+  ],
+  "statement": "theorem scalar_component_from_trace (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] (htrace : ScalarTraceWitness l c k p hpl Y) : let Λ := (coefficient l c).X let L := line l c let T := fun X : Scheme.{u} ↦ ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧ let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y)) (scalarQLineIso l c k p hpl Y) let u₂ := scalarTwistedUnit Λ (secondProjection Y) (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y) let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) F.map uq ≫ secondTraceExchange l c k p hpl Y = (scalarQLineIso l c k p hpl Y).hom ≫ u₂"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

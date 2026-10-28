@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-rational-tate-line-comparison-composition",
+ "kind": "statement",
+ "title": "Composition of normalized unshifted rational Tate-line comparisons",
+ "statement": "For a prime l, a finite rational coefficient index c or the algebraic-closure index, and composable scheme arrows f:X→Y and g:Y→Z with l invertible in every residue field of X,Y,Z, let Λ=(coefficient l c).X and L_A=line l c A as in [def-sfb-rational-tate-pullback-comparison]. Then the canonical underived internal-module compositor c_f,g:(f≫g)*≅g*⋙f*, followed by f* of lineComparison(g) and lineComparison(f), equals lineComparison(f≫g). This is an equality of unshifted module maps, before taking degree-zero complexes, derived functors, shifts, exchange mates or adjunction units.",
+ "stmt_deps": [
+  "def-sfb-rational-tate-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity; The integral twist; Rational and algebraic closure, applied to two successive pullbacks. Also canonical-map composition compatibility in the second rational P1 triangle."
+ },
+ "proof": [
+  {
+   "text": "Transpose both internal-module maps and forget their actions. The linePull_existsUnique characterization reduces their equality to the composition equation for the normalized underlying abelian comparisons. The underived module compositor is obtained by conjugating the direct-image compositor, so the adjunct of the iterated composite is the iterated adjunct with that compositor.",
+   "uses": [
+    "def-sfb-rational-tate-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the integral comparison, postcompose with every finite root projection. The formulas in spIntegralComparison_existsUnique reduce the comparison to tensoring the coefficient comparison with restriction of roots. Restriction of roots along a composite equals iterated restriction; the coefficient comparison has the same composition law. The monoidal inverse-image compositor respects their tensor product. The inverse-limit universal property identifies the integral maps.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite rational field, use the rational_scalar equation for each of the two arrows and their composite. On the scalar-extension quotient the two composites agree by the integral equation and monoidality of the inverse-image compositor. The scalar-extension adjunction, equivalently its quotient universal property for the semilinear maps, gives equality of the rational comparisons.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the algebraic closure, precompose with every finite-field coprojection and use qbar_coprojection for the three scheme arrows. The rational equations identify every composite, and the colimit universal property proves the closure equation. Faithfulness of forgetting module actions and the pullback adjunction bijection prove equality of the original line homomorphisms.",
+   "uses": [
+    "def-sfb-rational-tate-pullback-comparison",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-tate-pullback-comparison",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity; The integral twist; Rational and algebraic closure, applied to two successive pullbacks. Also canonical-map composition compatibility in the second rational P1 triangle.",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback isomorphism for a rational Tate line is compatible with composition of morphisms of schemes",
+   "date": "2026-10-28",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"leftDerivedFunctor\"",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*comp|lineComparison.*comp|pullback.*Tate",
+   "date": "2026-10-28",
+   "results": "25 hits: Mathlib/Topology/Bornology/Basic.lean, Mathlib/Data/Fintype/Inv.lean, Mathlib/Data/Fintype/Inv.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Order/ConditionallyCompleteLattice/Defs.lean, Mathlib/Order/ConditionallyCompleteLattice/Defs.lean",
+   "verdict": "No matching composition law for the project-specific normalized internal-module rational Tate line. Exact-functor single and shift compatibilities are used separately in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "categorical composition and naturality lemma for the stated construction",
+   "date": "2026-10-28",
+   "results": "No direct existing declaration; this split isolates the required project-specific step.",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarP1UnitMateComponent",
+  "date": "2026-10-28",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-chern-base-change-unit-component-core",
+   "place": "Root-normalized line comparison in the categorical unit calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalTateLineComposition",
+  "file": "lean/Sheaf/Paper/RationalTateLineComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.lineComparison_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.lineComparison_comp"
+  ],
+  "statement": "theorem lineComparison_comp\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ x : Y, Invertible (l : Y.residueField x)]\n    [∀ x : Z, Invertible (l : Z.residueField x)] :\n    (CondensedRing.upperStarComp (coefficient l c).X f g).hom.app (line l c Z) ≫\n        (CondensedRing.upperStar (coefficient l c).X f).map (lineComparison l c g).hom ≫\n        (lineComparison l c f).hom = (lineComparison l c (f ≫ g)).hom",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261028T020141-L-2471562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

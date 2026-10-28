@@ -13,25 +13,33 @@
  },
  "proof": [
   {
-   "text": "Expand scalarTwistedUnit and secondTraceExchange as the adjunction units, the ambient exchange mate, and the root-normalized line comparisons. Apply the unit_mateEquiv identity for the two derived adjunctions and the naturality of the ambient exchange; the remaining line comparison is the prescribed secondLineComparison. This is the categorical unit component and does not use completed Chern normalization.",
+   "text": "Apply scalar_component_from_trace and supply its explicit ScalarTraceWitness using scalar_trace_equation. The witness isolates the second-trace exchange equality; the assembly theorem combines it with the ambient twisted-unit mate and the shifted line-square compatibility.",
    "uses": [
-    "def-weil-pbc-ambient-ringed-exchange",
-    "def-sfb-rational-p1-scalar-chern-maps",
-    "lem-sfb-rational-p1-second-pretrace"
+    "lem-sfb-scalar-component-from-trace",
+    "lem-sfb-scalar-trace-equation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sfb-rational-tate-line-comparison-composition",
+  "def-sfb-rational-tate-pullback-comparison",
   "def-weil-pbc-ambient-ringed-exchange",
+  "lem-z8-shifted-composite-comparison",
+  "lem-sfb-derived-exchange-exact-normalization",
+  "def-sfb-rational-p1-second-pretrace-data",
   "def-sfb-rational-p1-scalar-chern-maps",
-  "lem-sfb-rational-p1-second-pretrace"
+  "lem-sfb-ambient-square-assembly",
+  "lem-sfb-ambient-twisted-unit-mate",
+  "lem-sfb-shifted-line-square",
+  "lem-sfb-scalar-trace-equation",
+  "lem-sfb-scalar-component-from-trace"
  ],
  "proof_origin": {
-  "by": "G3",
+  "by": "agent",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Second identity, unit component after removing unused Chern data"
+  "place": "Second identity, unit component: explicit transfer from unshifted Tate-line composition through single complexes, shifts and the unit mate."
  },
  "mathlib_searches": [
   {
@@ -108,12 +116,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "A5",
   "result": "pass",
-  "landing": "20261027T210006-L-1642702",
+  "landing": "20261028T020141-L-2471562",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
