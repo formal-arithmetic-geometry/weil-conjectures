@@ -62,6 +62,13 @@ representatives; extension to arbitrary derived objects is a separate step. -/
 -- formulas while changing the associator by a coboundary, so those formulas cannot
 -- imply this equation. The representative theorem is therefore retained as a
 -- disputed obligation until that interface is repaired.
+-- This is an interface defect rather than a missing tactic: the calculus is selected
+-- by an existence witness, so it is not definitionally the native calculus supplied
+-- by `ringedDerived_closed_symmetric_monoidal`. A proof would therefore need either
+-- an explicit `RingedDerivedTensorCoherence` field on the selected witness or an
+-- equality identifying that witness with the native one. Neither is present here.
+-- STATEMENT-DISPUTED: under the current interface the displayed equality is not
+-- determined by the hypotheses, and remains open until that coherence is recorded.
 theorem completedPullbackTensor_associativity_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (A B C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}

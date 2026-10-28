@@ -20534,3 +20534,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: merged deliver/B3/Sheaf.Paper.PodReindexingTensorFamilyTensorConstraints (stage 3; reviewer PASS; first push; landing 20261028T020155-L-2474922 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:01 L: merged deliver/B3/Sheaf.SixFunctorsBasics.BrownHypotheses (stage 3; reviewer PASS; after a return; landing 20261028T020157-L-2475363 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:01 L: merged deliver/B3/Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitWitness (stage 3; reviewer PASS; first push; landing 20261028T020158-L-2475982 (interface); batch 20261028T020127; modules 3; new nodes 2)
+- 02:02 L: merged deliver/B4/Sheaf.Paper.CompletedPullbackTensorAssociativityRepresentatives (stage 3; reviewer PASS; first push; landing 20261028T020204-L-2477209 (proof); batch 20261028T020127; modules 1; new nodes 0)
