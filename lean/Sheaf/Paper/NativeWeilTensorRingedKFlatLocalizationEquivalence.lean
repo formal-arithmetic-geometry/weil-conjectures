@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.NativeWeilTensorRingedBridgeData
 import Mathlib.CategoryTheory.Localization.Construction
+import Sheaf.CategoryTheory.RightFractionDenseSubcategory
+import Sheaf.Paper.NativeWeilTensorRingedKFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Equivalence field of native K-flat localization
@@ -47,6 +49,34 @@ theorem native_weil_tensor_ringed_kflat_localization_equivalence
     (Localization.Construction.lift
       ((ObjectProperty.ι (NativeTensorKFlat k₀ l X T)) ⋙ DerivedCategory.Q)
       hInv).IsEquivalence := by
-  sorry
+  let P : ObjectProperty (CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :=
+    NativeTensorKFlat k₀ l X T
+  let W₀ := HomologicalComplex.quasiIso
+    (ProEtaleWeilSheaf k₀ l X) (.up ℤ)
+  let W := W₀.inverseImage P.ι
+  let L := P.ι ⋙ DerivedCategory.Q
+  have hdata := native_weil_tensor_ringed_kflat_resolution T
+  have hcalc : W₀.HasRightCalculusOfFractions := by
+    simpa [W₀] using hdata.1
+  have hres : ∀ K : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,
+      ∃ (P' : P.FullSubcategory) (s : P.ι.obj P' ⟶ K), W₀ s := by
+    simpa [P, W₀] using hdata.2
+  have hQ : (DerivedCategory.Q :
+      CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤
+        DerivedCategory (ProEtaleWeilSheaf k₀ l X)).IsLocalization W₀ := by
+    infer_instance
+  have hdense := rightFractionDenseSubcategory W₀ hcalc P hres
+    (DerivedCategory.Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤
+      DerivedCategory (ProEtaleWeilSheaf k₀ l X)) W.Q
+  have hInv' : W.IsInvertedBy L := by
+    simpa [W, P, W₀] using hInv
+  obtain ⟨F, hF, ⟨e₀⟩⟩ := hdense.2
+  let G := Localization.Construction.lift L hInv'
+  let _ : Localization.Lifting W.Q W L F := ⟨e₀⟩
+  let _ : Localization.Lifting W.Q W L G :=
+    Localization.liftingConstructionLift L hInv'
+  let e : F ≅ G :=
+    Localization.liftNatIso W.Q W L L F G (Iso.refl L)
+  exact Functor.isEquivalence_of_iso e
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

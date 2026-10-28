@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-kflat-resolution",
+ "kind": "statement",
+ "title": "Native K-flat replacement and quasi-isomorphism calculus",
+ "statement": "Every cochain complex of Pro-étale Weil sheaves admits a quasi-isomorphism from a complex satisfying the native tensor K-flat predicate, and the quasi-isomorphisms on these complexes have a right calculus of fractions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, localization field; Stacks 06YS and the derived-category fraction calculus."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Construct the unbounded K-flat replacement by the telescope of bounded truncation replacements. Closure of the native acyclic-test predicate under the required sums and cones makes the telescope native K-flat, and its augmentation is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the Ore and cancellation witnesses for quasi-isomorphisms from the homotopy quotient to complexes, using the quotient characterization of quasi-isomorphisms.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native K-flat replacement and fraction calculus needed by the localization field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "every unbounded cochain complex admits a native acyclic-test K-flat quasi-isomorphic replacement",
+   "results": "No exact NativeTensorKFlat theorem; generic K-flat resolution APIs require additional ringed hypotheses and do not identify the native predicate.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.quasiIso HasRightCalculusOfFractions",
+   "results": "The homotopy-category quasi-isomorphism calculus is available, but no direct complex-level theorem transports it to this native setting.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "NativeTensorKFlat.*resolution|NativeTensorKFlat.*HasRightCalculus",
+   "results": "No existing declaration.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedKFlatLocalizationEquivalence",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-kflat-localization-equivalence",
+   "place": "Replacement and fraction-calculus input for the native K-flat localization field.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-kflat-localization-equivalence"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedKFlatResolution",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedKFlatResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_kflat_resolution",
+  "statement": "theorem native_weil_tensor_ringed_kflat_resolution : let W₀ := HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ) W₀.HasRightCalculusOfFractions ∧ let P : ObjectProperty (CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) := NativeTensorKFlat k₀ l X T ∀ K : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, ∃ (P' : P.FullSubcategory) (s : P.ι.obj P' ⟶ K), W₀ s",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261028T020612-L-2528611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261028T020612-L-2528611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
