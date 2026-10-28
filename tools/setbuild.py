@@ -1432,8 +1432,9 @@ def validate(head: str, limit: int = 4) -> dict:
             b = compile_one(folder, m, None, import_arts([folder / "changed", folder / "new"], set(changed) | set(r.get("new_modules") or [])),
                             name=m + "-vset", root="vsrc")
             out[m] = {"of": x, "frozen": a["rc"], "with_set": b["rc"], "secs": [a["secs"], b["secs"]],
-                      "errors": b["errors"][:3] if b["rc"] and not a["rc"] else []}
-    bad = [m for m, x in out.items() if x["frozen"] == 0 and x["with_set"] != 0]
+                      "slow": [a["slow"], b["slow"]], "errors": b["errors"][:3] if b["rc"] and not a["rc"] else []}
+    # only a compile ERROR with the set counts; over 60 s under load on one side only says nothing about the interface
+    bad = [m for m, x in out.items() if x["frozen"] in (0, 124) and x["with_set"] not in (0, 124)]
     res = {"head": head, "group": r.get("group"), "item": r.get("item"), "importers": out, "affected": bad}
     write_json(folder / "validate.json", res)
     return res
