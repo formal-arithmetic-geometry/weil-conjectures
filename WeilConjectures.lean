@@ -13351,6 +13351,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegersModPowReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralDerivedLimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
@@ -13378,6 +13379,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoher
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegersPowShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
