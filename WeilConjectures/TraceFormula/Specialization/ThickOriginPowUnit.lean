@@ -140,9 +140,9 @@ lemma isIso_map_of_map_comp_eq {C D : Type*} [Category C] [Category D] (F : C �
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- If a morphism of models `M ⟶ N` over the identity of `X` has invertible morphisms of total spaces
-and of geometric generic fibres, and its morphism of special fibres is a universal homeomorphism,
-the specialization unit of `N` is invertible as soon as that of `M` is. -/
+/-- If a morphism of models `M ⟶ N` over the identity of `X` has invertible morphisms of total
+spaces and of geometric generic fibres, and its morphism of special fibres is a universal
+homeomorphism, the specialization unit of `N` is invertible as soon as that of `M` is. -/
 theorem NearbyCyclesModel.isIso_unit_of_hom {X X' Y' : Scheme.{u}} {M : NearbyCyclesModel X X'}
     {N : NearbyCyclesModel X Y'} {c : X' ⟶ Y'} (ψ : M.Hom N (𝟙 X) c) [IsIso ψ.total]
     [IsIso ψ.generic] [IsUniversalHomeomorphism c] (hM : IsIso (M.unit Λ)) :
@@ -237,14 +237,16 @@ instance (m : ℕ) [NeZero m] :
     (polyAffineThickOrigin k m)) ⊥ k').hom.isHomeomorph.injective (Subsingleton.elim _ _)⟩
 
 /-- The rational point `w = c(e(0))` of the thickened special fibre of the power model. -/
-noncomputable abbrev thickOriginPowPoint : Spec (.of k') ⟶ (thickOriginPowSpecialFibre k k' hm).left :=
+noncomputable abbrev thickOriginPowPoint :
+    Spec (.of k') ⟶ (thickOriginPowSpecialFibre k k' hm).left :=
   thickOriginZeroSectionPoint k k' 1 one_pos ≫
     (zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k 1) k').left ≫
       thickOriginSpecialFibreToPow k k' hm
 
 /-- Its image `o = ν_s(w)` in the special fibre of `𝒟_{V(x^m)}`. -/
 noncomputable abbrev thickOriginPowImagePoint :
-    Spec (.of k') ⟶ (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').left :=
+    Spec (.of k') ⟶
+      (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').left :=
   thickOriginPowPoint k k' hm ≫ (thickOriginPowSpecialFibreMap k k' hm).left
 
 lemma thickOriginSpecialFibreToPow_powSpecialFibreMap :
@@ -279,7 +281,8 @@ lemma thickOriginPowImagePoint_eq :
     (thickOriginZeroSectionPoint k k' 1 one_pos (IsLocalRing.closedPoint k'))
   have hr : thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)
       (IsLocalRing.closedPoint k') = ζ := Subsingleton.elim _ _
-  have hc (x) : (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginSpecialFibreToPow k k' hm x) =
+  have hc (x) :
+      (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginSpecialFibreToPow k k' hm x) =
       deformationSpecialFibrePowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
         (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
         (deformationSpacePowMap_deformationSpaceToAffineLine _)
@@ -449,7 +452,8 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin (hm : m ≠ 0) :
     (thickOriginPowModelHom k k' hm) hχ hM (thickOriginPowImagePoint k k' hm) he
   rw [thickOriginPowImagePoint_eq] at ho
   have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm) ≫
-      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom) := by
+      (deformationSpecialFibre (centre (polyAffine k 1)
+        (polyAffineThickOrigin k m)) ⊥ k').hom) := by
     rw [constantFamilySpecialPoint_hom]; infer_instance
   have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)) :=
     IsUniversalHomeomorphism.of_comp _
