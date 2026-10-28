@@ -28,7 +28,28 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
 open GeneralAlgebraicallyClosedCoefficients
 
+/-- Postcomposition by a nontrivial automorphism gives a distinct isomorphism with the
+same source and target.  This is the elementary obstruction to a square asserted for an
+arbitrary family of isomorphisms: a normalization or a naturality condition is required.
+-/
+private theorem iso_postcompose_nontrivial
+    {C : Type u} [Category C] {A B : C} (a : A ≅ B) (u : B ≅ B)
+    (hu : u.hom ≠ 𝟙 B) : a ≪≫ u ≠ a := by
+  intro h
+  have hh := congrArg (fun q : A ≅ B ↦ a.inv ≫ q.hom) h
+  apply hu
+  simpa [Category.assoc] using hh
+
 /-- Canonical transition square for a stagewise rational target comparison.
+
+STATEMENT-DISPUTED: the family `a` is quantified as an arbitrary family of natural
+isomorphisms.  The hypotheses impose no compatibility with the stage transitions or with
+the two rational comparison composites.  By `iso_postcompose_nontrivial`, any component
+can be replaced by postcomposition with a nontrivial automorphism while preserving its
+source and target; the displayed square then changes on the corresponding side.  A valid
+statement must construct the canonical family together with its transition naturality
+(or add that compatibility as a hypothesis).
+
 Source: the final scalar-compatibility paragraph of the exceptional-adjunction
 construction (blueprint: lem-sf-compact-support-target-rational-comparison).
 
