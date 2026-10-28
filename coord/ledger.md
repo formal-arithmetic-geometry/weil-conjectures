@@ -21076,3 +21076,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/NB/lem-per-finite-tor-internal-hom-any-field (stage 2; reviewer FIX; parallel immutable checks); batch 20261028T055556; landing 20261028T055836-NB-816931 (proof)
 - 06:32 L: returned deliver/K3/Sheaf.Paper.IntegralHomEvaluationTransport (reviewer RETURN: (reviewer C-3f397, head 3f397d2e4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralHomEva)
 - 07:05 L: returned deliver/J1/Sheaf.Paper.CompactSupportTargetRationalCanonicalSquare (reviewer RETURN: (reviewer C-3ac3e, head 3ac3e8d27) Stage-3 no-split rule / 2b unforced adaptation: the ConstructibleCompactSupportTarget)
+- 07:16 L: returned deliver/B9/Sheaf.Paper.CommonStagePullbackCompComponent (reviewer RETURN: (the landing tools, head 810657bba) the delivery did not land: import cycle: Sheaf.Paper.CommonStagePullbackCompComponen)
