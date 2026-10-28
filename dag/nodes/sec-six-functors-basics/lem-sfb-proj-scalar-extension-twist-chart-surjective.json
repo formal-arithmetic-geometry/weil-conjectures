@@ -11,7 +11,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 clause (3), complete standard-open proof; strict injective/surjective components of the chart bijectivity argument"
+  "place": "Tag 01N2 clause (3), direct standard-open surjectivity calculation using homogeneous fractions of Tags 01MY, 01MN and 01M7; implemented by Z9"
  },
  "mathlib_match": null,
  "status": "split",
@@ -46,10 +46,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "Z9",
   "result": "pass",
-  "landing": "20261028T020620-L-2529910",
-  "kind": "interface",
+  "landing": "20261028T055835-L-816066",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "merged_into": null,
@@ -58,23 +58,23 @@
  "statement": "Under the hypotheses of lem-sfb-proj-scalar-extension-twist-chart-basic, for every positive-degree homogeneous f, the prescribed twist map on the complete standard open D₊(ψ(f)) is surjective.",
  "proof": [
   {
-   "text": "Identify chart sections with shifted homogeneous localized modules and use the affine tensor-section and homogeneous localization scalar-extension equivalences to lift every target fraction. The pointwise formula hη identifies the lift with η.app.",
+   "text": "An empty target chart has only the zero section. Otherwise apply twist_fraction_descent to represent the target section by b/(ψ(f))^m. Since the denominator avoids a chart prime it is nonzero, and uniqueness of homogeneous degree identifies its degree as m*n. A negative shifted numerator degree forces b=0.",
    "uses": [
-    "lem-nagata-homogeneous-localization-scalar-extension",
-    "lem-sc-proj-single-twist-basic-open-fractions",
-    "lem-sfb-graded-module-localization-scalar-extension",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+    "lem-sc-proj-twist-fraction-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonnegative shifted degree, hgraded expresses b in the S-span of images ψ(a) of source homogeneous numerators. Induct on that span. For a generator use twist_fraction_realization on a/f^m and pull back its section; hη and the localRingHom fraction formula compute its image as ψ(a)/(ψ(f))^m. Lift zero and sums additively. Lift scalar multiples by multiplying the lift with the regular chart section given by the degree-zero element algebraMap S B c. Its pointwise value is c/1, so O-linearity of η gives the required scalar multiple. Pointwise equality of fractions proves equality with the original section.",
+   "uses": [
+    "lem-sc-proj-twist-fraction-realization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-nagata-homogeneous-localization-scalar-extension",
-  "lem-sc-proj-single-twist-basic-open-fractions",
-  "lem-sfb-graded-module-localization-scalar-extension",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists"
+  "lem-sc-proj-twist-fraction-descent",
+  "lem-sc-proj-twist-fraction-realization"
  ],
  "lean": {
   "existing": false,
