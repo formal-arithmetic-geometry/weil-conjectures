@@ -9,27 +9,60 @@
  },
  "stmt_deps": [
   "lem-sfb-constant-realization-reflects-isomorphism",
-  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison"
  ],
  "proof": [
   {
-   "text": "Use the completion quotient comparison to move the realized isomorphism to the coefficient-level constant realization. Exactness of the stalk functor and constant-section detection on the supplied nonempty etale chart force the kernel and cokernel to vanish. The derived isomorphism criterion then yields IsIso for the original coefficient map.",
+   "text": "On W.left, let U be the identity pro-etale object. Its empty sieve is not covering: every generating pro-etale covering family is jointly surjective, so the supplied point has a preimage in a member. If two constants have equal sheafified sections at U, the sheafification unit makes their equalizer sieve covering. If the constants differ this sieve is empty, a contradiction. Naturality of the unit then proves that the ordinary constant functor to sheaves of B-modules on W.left is faithful, for B = A/I^(n+1). This is the private proved helper constantSheaf_faithful_of_point; it does not require connectedness or nonzero B.",
    "uses": [
-    "lem-sfb-constant-realization-reflects-isomorphism",
-    "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write C for constantAdicQuotientModules X d n, P for the ordinary identified-coefficient module pullback along h = W.hom followed by g, and Q for restriction of scalars along constantAdicQuotientMap. Restriction along the pulled-back finite coefficient comparison commutes with P by proEtaleRingRestrictionPullbackInv_isIso. The proved relativeEncoding helper of the finite-pullback-constructibility module identifies pullback followed by constant-scalar restriction with fixed-module sheaf inverse image. The proved constantEncodingNatIso helper of the adic-lisse-relative-restriction module identifies constant module sheafification followed by that restriction with the ordinary constant-sheaf functor. Cancel the coefficient comparison and its inverse using proEtaleScalarEquivalence.counitIso. Finally uniqueness of left adjoints, using globalSectionsLowerStarIso, identifies inverse image of a constant sheaf with the constant sheaf on W.left. Whiskering these four natural isomorphisms gives (C followed by P followed by the two coefficient encodings) naturally isomorphic to Q followed by the constant-sheaf functor on W.left. These helpers are already proved in their imported modules; their constructibility and adic-lissity main theorems are not invoked.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-finite-pullback-constructibility",
+    "lem-weil-pbc-adic-lisse-relative-restriction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars Q is faithful for every ring map, so step 1 makes the right side of the comparison in step 2 faithful. Transport faithfulness across that natural isomorphism and cancel the postcomposed encoding functor to show C followed by P is faithful. A faithful functor reflects monomorphisms and epimorphisms; since the coefficient module category is abelian and balanced, this ordinary realization reflects isomorphisms. Neither bijectivity of the completion-quotient map nor a lifting of arbitrary realized morphisms is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both C and P are exact. Functor.mapDerivedCategoryCompIso identifies the given realization with the derived functor of C followed by P. Apply Functor.mapDerivedCategoryHomologyFunctorIso to each integer-indexed homology functor: the hypothesis implies that the ordinary realization of H^i(f) is invertible. Step 3 reflects this to invertibility of H^i(f) for every i. DerivedCategory.isIso_iff then proves IsIso f in the unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-constant-realization-reflects-isomorphism",
-  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "lem-weil-pbc-adic-lisse-relative-restriction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
-  "by": "W5 stage-3 split",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 093J and 03Q3, the nonempty-chart stalk detection part",
-  "note": "The source item needs reflection as a separate step after morphism extraction."
+  "by": "E9 stage-3 proof",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093J (exact constants); sites.tex Tags 00WB and 00WK (local equality under sheafification); derived.tex Tags 015F and 05RT (exact derived homology and its isomorphism criterion).",
+  "note": "Direct faithful-exact ordinary realization proof. Uses existing proved coefficient-encoding helpers and the standard derived homology comparison, with no new split theorem and no change to the Lean statement."
  },
  "mathlib_searches": [
   {
@@ -98,9 +131,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W5",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261028T035006-L-3577503",
+  "landing": "20261028T055643-L-788871",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
