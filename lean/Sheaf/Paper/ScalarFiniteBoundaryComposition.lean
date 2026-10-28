@@ -90,6 +90,16 @@ finiteRootMap fixes the target endpoint. Naturality of the shifted single
 comparisons transports the equality to degree two, yielding the displayed
 composition identity. Empty schemes and zero arrows satisfy the same formulas.
 -/
+private theorem finiteBoundaryEquality_comp {D : Type u} [Category D]
+    {X X' Y Y' : D} (q : X ⟶ X') (r : Y ⟶ Y')
+    {a : X' ⟶ Y'} {beta : X ⟶ Y}
+    (h : finiteBoundaryEquality q r a beta) :
+    q ≫ a = beta ≫ r := by
+  rcases h with ⟨a', beta', ha, hb, hab⟩
+  have ha' : a' = a := eq_of_heq ha
+  have hb' : beta' = beta := eq_of_heq hb
+  simpa [ha', hb'] using hab
+
 theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)
@@ -104,11 +114,8 @@ theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]
       scalarFiniteBoundary_integral l E c f n ≫
         (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
           (finiteRootMap l E T n)⟦(2 : ℤ)⟧' := by
-  rcases scalarFiniteBoundary_boundaryEquality l E c hc f n with
-    ⟨a, b, ha, hb, hab⟩
-  have ha' : a = scalarFiniteBoundary_eval l E c f n := eq_of_heq ha
-  have hb' : b = scalarFiniteBoundary_integral l E c f n := eq_of_heq hb
-  simpa [ha', hb'] using hab
+  exact finiteBoundaryEquality_comp _ _
+    (scalarFiniteBoundary_boundaryEquality l E c hc f n)
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
