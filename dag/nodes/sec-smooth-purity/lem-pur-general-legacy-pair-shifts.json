@@ -203,5 +203,37 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c5e514139 (reviewer sub-agent of L); spot-checked: Read the item and the new node lem-pur-associative-stage-family-descent in full, every cited statement, the parent def-weil-algebraically-closed-coefficients (its step 4 cites the item), unit sk-def-sf-operations (uses=[], steps=[], so no route constraint), the qlbar-two-colimit blueprint section and the verbatim old argument 7, and the Lean source it follows (AlgebraicallyClosedCoefficients.lean:505-540 and 825-955; StageSystem/Functor.lean:1-256). Item statement and stmt_deps are unchanged; the categories are the fixed legacy presentations, with no identification with the datum-free system. Step 1: the associator shift equation is exactly NatTrans.CommShift for α : T_LM T_EL ⇒ T_EM; lem-weil-scalar-associator-shifts covers arbitrary algebra maps between the small models; equality elimination works because σ is defined for every algebra map. Step 2: the helper's tower with Φ = S_n and b = σ is literally the step 1 equation, and the conjugation formula matches shiftRepresentative. Step 3: expanding CommShift.zero and CommShift.add gives exactly the helper's compatibility condition c∘U(η) = η∘b, for the zero-shift family against the identity family and for the (m+n)-shift family against the composite family. Step 4: each coherence diagram is j_E of the stage diagram; β = 1. Step 5: additivity follows from common-stage representatives and the native group law of hom-coordinates; the zero pair from 1 = j_E(0) = 0. Step 6: θ is represented by α_ELL; composing at stage L and cancelling σ with the (E,L,L) associator equation gives θ_{K[n]}, valid for E = L. New node: checked true directly (representative independence matches tr_mapAt, transformation naturality matches Hom.mapAt_naturality, identity and composite families descend); it matches the Lean StageSystem.Morphism API; tested on a singleton index with non-identity T_ii and on non-faithful transitions. It is not a duplicate: lem-sbc-coherent-pair-functor-descent needs U_EE = 1 and b_EE = 1, prop-weil-pbc-descent-functors needs unit equations, and the other descent nodes have unit cocycles or fixed categories. It is not a restated clause of the item. Form B1-B9 OK; searches recorded with three kinds of tool. proof_deps equals the union of uses. No SGA. No tool_uses needed (unconstrained unit). Advisory: the new node has no lean_audit field, though the report says it records the declarations; the statement of lem-weil-scalar-extension-exact-triangulated says only 'preserves shifts', while its proof builds the coherent CommShift ℤ comparisons the item uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists",
+  "declarations": [
+   "WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.shiftPair",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.shiftRepresentative",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.hasShift",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.shiftAdditive",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.inclusionCommShift",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.inclusion_additive",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.zero_exists",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.transitionIso_commShift",
+   "CategoryTheory.StageSystem.PairCategory.shiftFunctor_obj",
+   "CategoryTheory.StageSystem.PairCategory.shiftFunctor_map_mkHom",
+   "CategoryTheory.StageSystem.ι_commShiftIso_hom_app"
+  ],
+  "statement": "theorem shift_exists :\n    ∃ s : HasShift (Pair D l hl Ω Y) ℤ,\n      (fun [shiftInst : HasShift (Pair D l hl Ω Y) ℤ] ↦\n        (∀ n : ℤ, (shiftFunctor (Pair D l hl Ω Y) n).Additive) ∧\n        (∀ (n : ℤ) (A : Pair D l hl Ω Y),\n          (shiftFunctor (Pair D l hl Ω Y) n).obj A = shiftPair n A) ∧\n        (∀ (n : ℤ) (A B : Pair D l hl Ω Y) (L : Index l Ω)\n          (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : StageHom A B ⟨L, hA, hB⟩),\n          HEq ((shiftFunctor (Pair D l hl Ω Y) n).map (ofHom A B L hA hB f))\n            (ofHom (shiftPair n A) (shiftPair n B) L hA hB\n              (shiftRepresentative n A B L hA hB f))) ∧\n        ∃ c : ∀ E : Index l Ω, (inclusion E : Stage D l hl Ω Y E ⥤ _).CommShift ℤ,\n          (fun [commInst : ∀ E : Index l Ω,\n              (inclusion E : Stage D l hl Ω Y E ⥤ _).CommShift ℤ] ↦\n            ∀ (n : ℤ) (E : Index l Ω) (K : Stage D l hl Ω Y E),\n              HEq (((inclusion E : Stage D l hl Ω Y E ⥤ _).commShiftIso n).hom.app K)\n                (𝟙 ((inclusion E : Stage D l hl Ω Y E ⥤ _).obj\n                  ((shiftFunctor (Stage D l hl Ω Y E) n).obj K)))) (commInst := c))\n        (shiftInst := s)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-28",
+  "existing": true,
+  "note": "Exact existing legacy-presentation declaration family. shift_exists supplies coherent integer shifts, the literal pair and conjugated representative formulas, additivity for the specified colimit Hom groups and identity-component inclusion comparisons. hasShift is its exhibited native witness; shiftAdditive, inclusionCommShift and transitionIso_commShift use that same witness. zero_exists supplies a zero pair; inclusion_additive together with Functor.map_isZero sends every stage zero to a zero pair. The generic shift formulas and identity-component lemma are public imports of this module. Stage and transition are exactly rationalConstructibleCategory and rationalScalarExtension on the named boundedConstructibleDerivedCompleteIntegralCategory presentation, with Shrink coefficient fields. No comparison with the intrinsic sfIntegralConstructible/sfRationalConstructibleCategory presentation is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2b069a38",
+  "group": "NB",
+  "result": "pass",
+  "note": "existing:true record for AlgebraicallyClosedCoefficients.shift_exists; only the lean field changed and the statement is verbatim (script check). All clauses match: older presentation (rationalConstructibleCategory/rationalScalarExtension over Shrink models with conjugated inclusion); σ = uniquely pinned rationalConstructibleScalarCommShift; (E,K)[n] formula; conjugated representative σ⁻¹∘u[n]∘σ; additivity transported via preadditive_eq_native; ∃ inclusion CommShift with HEq-𝟙 components; zero pairs via inclusion_additive + Functor.map_isZero; θ square = transitionIso_commShift with the same instances, expanding to the node's equation; E=L allowed; universes d,u,v independent. No current node owns the old declarations (parent moved to General*), so no dual owner. Advisories: zero clause has no standalone declaration; 3 upstream StageSystem lemmas listed in declarations; scalar-exact dependency recorded with its newer Lean while the legacy σ is used as the item prescribes."
  }
 }
