@@ -7,6 +7,10 @@ module
 public import Sheaf.Paper.DiagonalTraceSupportedSourceConeNormalization
 public import Sheaf.Paper.DiagonalTraceFiniteCartierNormalization
 public import Sheaf.Paper.DiagonalTraceFiniteBoundaryEquation
+import Sheaf.Paper.DiagonalTraceSupportedFiniteBoundarySource
+import Sheaf.Paper.DiagonalTraceSupportedFiniteBoundaryTarget
+import Sheaf.Paper.DiagonalTraceSupportedFiniteBoundaryNormalization
+import Sheaf.Paper.DiagonalTraceSupportedFiniteBoundaryCombine
 
 /-! # The finite Chern equation for a normalized strict supported Cartier class -/
 
@@ -96,6 +100,12 @@ theorem diagonalTrace_supportedFiniteBoundary
     (p : ExtDerivedPresentation (D.E.obj (diagonalIntegralSource Y)) H)
     (hp : p.Presents xi)
     (L₀ L : DiagonalRlim (DiagonalMod l (diagonalSurface Y))) (n : ℕ) :
-    finiteBoundaryEquation l Y D H p s c r k e L₀ L n := by sorry
+    finiteBoundaryEquation l Y D H p s c r k e L₀ L n  := by
+  obtain ⟨a, ha⟩ := diagonalTrace_supportedFiniteBoundary_sourceStep
+    l Y hY D H roots xi hxi s hs c r k e he p hp L₀ L n
+  exact diagonalTrace_supportedFiniteBoundary_combine
+    l Y hY D H s c r k e p L₀ L n a ha
+    (diagonalTrace_supportedFiniteBoundary_targetStep l Y hY c hn hc r k n a L _
+      (diagonalTrace_supportedFiniteBoundary_cartierKummer l Y hY n))
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

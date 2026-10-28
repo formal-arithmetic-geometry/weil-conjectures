@@ -28,51 +28,39 @@
  ],
  "proof": [
   {
-   "text": "The source generator equation and DiagonalSourceNormalization pin the n-th source map to the canonical positive finite quotient. completedSupportedUnit sends one to the supported section one. Projecting xi and applying its finite-cycle equation therefore gives exactly the positive finite Cartier class with its integral generator.",
+   "text": "Apply the source projection theorem using hxi, hs, he and hp. It produces a normalized finite frame and identifies the supported source composite with the fixed reduced Cartier arrow.",
    "uses": [
-    "det-prop-diagonal-tower-limit",
-    "def-sfb-diagonal-trace-completed-supported-unit"
+    "lem-sfb-diagonal-trace-supported-finite-boundary-source-step"
    ],
    "elementary": false
   },
   {
-   "text": "Cartier reduction existence and uniqueness, with the site comparison, identify this class with the etale supported Kummer class. The supported Kummer Chern realization identifies the composite with the constant-to-support unit as the positive Chern class of the dual diagonal ideal, diagonalPic(Y).",
+   "text": "The residue Cartier Kummer theorem, a direct specialization of the proved Cartier site comparison, supplies the geometric Chern equation for this reduced class.",
    "uses": [
-    "lem-sp-cartier-reduction-existence",
-    "lem-asd-supported-kummer-chern-realization",
-    "def-sp-tower-class-diagonal"
+    "lem-sfb-diagonal-trace-supported-finite-boundary-cartier-kummer"
    ],
    "elementary": false
   },
   {
-   "text": "Apply FiniteChernNormalization at diagonalPic(Y) and n. k.coefficient_one, k.line_tensor, and the normalization of e identify the finite endpoint maps with this Kummer calculation; Chern.Normalized fixes the boundary and scalar comparisons. Regularity of l on the completed coefficient ring and its actual finite quotient identify derived reduction of its unit with the finite unit, with adjunct the actual coefficient projection. Use that reduction adjunction and then scalar_unit_ext_bijective to recover equality of the coefficient-linear arrows from the integral adjuncts. Finally diagonalTrace_exactConeComparison_projection identifies the input with k.unitMap(L) followed by L.projection(n).",
+   "text": "Apply the coefficient comparison theorem with hn, hc and that geometric Chern equation. Substitute its equality into the source equation to obtain finiteBoundaryEquation. Use the proved typed assembly lemma to transport the endpoint equality through the named predicates.",
    "uses": [
-    "def-sp-tower-class-finite",
-    "def-sp-tower-class-chern",
-    "def-sfb-diagonal-trace-coefficients",
-    "lem-sp-scalar-unit-ext-bijective",
-    "lem-sfb-diagonal-trace-exact-cone-projection"
+    "lem-sfb-diagonal-trace-supported-finite-boundary-target-step",
+    "lem-sfb-diagonal-trace-supported-finite-boundary-combination"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-diagonal-trace-coefficients",
-  "def-sfb-diagonal-trace-completed-supported-unit",
-  "def-sp-tower-class-chern",
-  "def-sp-tower-class-diagonal",
-  "def-sp-tower-class-finite",
-  "det-prop-diagonal-tower-limit",
-  "lem-asd-supported-kummer-chern-realization",
-  "lem-sfb-diagonal-trace-exact-cone-projection",
-  "lem-sp-cartier-reduction-existence",
-  "lem-sp-scalar-unit-ext-bijective"
+  "lem-sfb-diagonal-trace-supported-finite-boundary-source-step",
+  "lem-sfb-diagonal-trace-supported-finite-boundary-cartier-kummer",
+  "lem-sfb-diagonal-trace-supported-finite-boundary-target-step",
+  "lem-sfb-diagonal-trace-supported-finite-boundary-combination"
  ],
  "proof_origin": {
   "kind": "adapted",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
-  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
-  "by": "D4"
+  "place": "paragraph (2), proof steps 1–3, corrected decomposition after reviewer C-a12ff",
+  "by": "G4"
  },
  "mathlib_searches": [
   {
@@ -140,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-a4ee8",
-  "group": "D4",
-  "result": "fix",
-  "landing": "20261027T233852-L-4126810",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034757-L-3544066",
   "kind": "interface",
-  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

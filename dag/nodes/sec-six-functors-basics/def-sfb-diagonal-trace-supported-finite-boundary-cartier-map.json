@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-diagonal-trace-supported-finite-boundary-cartier-map",
+ "kind": "definition",
+ "title": "The finite forget-support Cartier arrow in normalized coefficient coordinates",
+ "statement": "Let a be a normalized finite frame [def-sfb-diagonal-trace-supported-finite-boundary-frame], L a derived-limit model, and z a degree-two residue-coefficient Cartier class supported on the diagonal [def-sfb-geo-cartier-interface]. Define a.cartierMap to be the actual coefficient projection k.unitMap(L) followed by L.projection(n), the source coordinates [def-sfb-diagonal-trace-supported-finite-boundary-unit-coordinates], the finite constant-to-diagonal-supported unit, the exact scalar-restriction image of z, and the inverse target coordinates [def-sfb-diagonal-trace-supported-finite-boundary-line-coordinates]. This fixes a morphism from the restricted completed unit to the evaluated restricted coefficient Tate line shifted by two.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-supported-finite-boundary-frame",
+  "def-sfb-diagonal-trace-supported-finite-boundary-unit-coordinates",
+  "def-sfb-diagonal-trace-supported-finite-boundary-line-coordinates",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-geo-cartier-interface",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "G4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cycle class of an effective Cartier divisor composed with the constant to supported unit is its first Chern class",
+   "results": "8 hits, including CochainComplex.HomComplex.Cocycle.coe_units_smul and Polynomial.isUnit_primPart_C; no geometric Cartier/Chern comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use project Cartier reduction site comparison, not a Mathlib replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Cartier divisor, forgetting supports of the finite cycle class is the first Chern class of its divisor line bundle",
+   "results": "8 hits, including StructureSheaf.normalize_finite_fraction_representation and exists_eq_pow_mul_of_isAffineOpen; no supported class comparison.",
+   "date": "2026-10-28",
+   "verdict": "No direct Mathlib route."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: mapExactFunctor, mapExactFunctor_mk₀, mapExactFunctor_comp and exact-functor transport APIs.",
+   "date": "2026-10-28",
+   "verdict": "Use these canonical exact comparison maps in the finite frame."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_unit_ext_bijective|mapDerivedCategorySingleFunctor; cartierReducedPro; GeoCartierChernEquation",
+   "results": "Mathlib exact single/evaluation APIs; project CartierReductionSiteComparison.cartier_reduction_site_comparison already proves the reduced-class geometric Chern clause. Source projection and coefficient-linear comparison are not stated separately.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the proved middle clause; split only the two distinct remaining comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceSupportedFiniteBoundary",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "finite supported boundary calculation, proof steps 1–3",
+   "via": [
+    "lem-sfb-diagonal-trace-supported-finite-boundary",
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceSupportedFiniteBoundaryMaps",
+  "file": "lean/Sheaf/Paper/DiagonalTraceSupportedFiniteBoundaryMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.SupportedFiniteBoundaryFrame.cartierMap",
+  "statement": "def SupportedFiniteBoundaryFrame.cartierMap (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤))) [DiagonalTraceLocalizations l (diagonalSurface Y)] (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) (diagonalSurface Y)) (r : Restriction l (ULift.{u} (Padic l)) (diagonalSurface Y)) (k : Coefficients l (ULift.{u} (Padic l)) (diagonalSurface Y) c r) (n : ℕ) (a : SupportedFiniteBoundaryFrame l Y hY c r k n) (L : DiagonalRlim (DiagonalMod l (diagonalSurface Y))) (z : GeoCartierClass (diagonalResidue.{u} l n) (l ^ (n + 1)) (cartierResidue_cast l (n + 1)) (diagonalImmersion Y)) : (diagonalCompletedUnderlying l (diagonalSurface Y)).obj (completedUnit l (diagonalSurface Y)) ⟶ (((evaluation ℕᵒᵖ (DiagonalMod l (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj (r.F.mapDerivedCategory.obj ((SpTowerClasses.line l (ULift.{u} (Padic l)) c)⟦(2 : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034757-L-3544066",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034757-L-3544066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
