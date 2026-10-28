@@ -20938,3 +20938,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/Z9/Sheaf.CategoryTheory.NativeHomSourceShiftSuccessor (stage 3; reviewer PASS; first push; landing 20261028T035030-L-3582766 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 04:00 L: returned deliver/F1/Sheaf.Paper.CompletedPullbackTensorAssociativityRepresentatives (reviewer RETURN: (reviewer C-b17be, head b17be25b3) A1 / point 2 (stale base, reverts landed work): G2's landing 732f845f2df (2026-10-28 )
 - 04:21 L: returned deliver/J7/Sheaf.Paper.RationalSmoothPurityCanonical (reviewer RETURN: (reviewer C-dc21c, head dc21c2a78) Stage 3 §4 / brief 5 (H1 shape): drop the unforced timing extractions CanonicalSmooth)
+- 05:07 L: returned deliver/M9/Sheaf.SixFunctors.RationalVerdierCompletionSignedRepresentative (reviewer RETURN: (reviewer C-7aed6, head 7aed6bc56) D1/D2: the split theorem is the item restated (postcomposed with an isomorphism), so )
