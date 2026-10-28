@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.NativeWeilTensorRingedModel
 public import Sheaf.Paper.NativeWeilTensorForgetKFlat
 public import Sheaf.Algebra.Homology.RingedForgetTensorDescent
+import Mathlib.Tactic.NormNum
 
 /-! # Coherence component of the native ringed derived square
 
@@ -20,6 +21,33 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+
+/-- A symmetric, invertible scalar tensorator can preserve the degree-zero unit
+and still fail the associator equation. This checks the missing implication in
+this module's proposed proof; it is not a refutation of its geometric statement. -/
+private theorem symmetric_scalar_tensorator_obstruction :
+    ∃ c : ℤ → ℤ → ℚ,
+      (∀ p q, c p q ≠ 0) ∧
+      (∀ p q, c p q = c q p) ∧
+      (∀ p, c 0 p = 1 ∧ c p 0 = 1) ∧
+      c 1 (1 + 2) * c 1 2 ≠ c (1 + 1) 2 * c 1 1 := by
+  let c : ℤ → ℤ → ℚ := fun p q ↦ if p = 1 ∧ q = 1 then -1 else 1
+  refine ⟨c, ?_, ?_, ?_, ?_⟩
+  · intro p q
+    dsimp only [c]
+    split <;> norm_num
+  · intro p q
+    simp only [c, and_comm]
+  · intro p
+    norm_num [c]
+  · norm_num [c]
+
+-- STATEMENT-DISPUTED: hS fixes adjunction and symmetry on representatives, but no
+-- associator or unitor representative normalization. hmonoidal fixes S.monoidal,
+-- not the comparison from its tensor to the displayed ordinary total tensor.
+-- The scalar obstruction above shows why naturality and symmetry cannot supply
+-- that missing associator equation. See report.md for the precise audit.
 
 /-- The remaining coherence component for the native derived tensor comparison.
 
