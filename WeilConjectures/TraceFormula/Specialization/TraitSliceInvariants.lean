@@ -115,12 +115,17 @@ of trait. For bounded constructible `C`:
   representatives of `P' ⧸ V` (Hochschild–Serre for the pro-`p` cover
   `Spec Ω_K ⟶ (Spec K⟦t⟧ ×_S Spec Ω)_red`; `[P' : V]` is a power of `p`, invertible in `ℚ̄_ℓ`).
 
-Unfinished: neither group actions on pro-étale `ℚ̄_ℓ`-sheaves (continuous cohomology of the
-pro-`p` group `P'`, Galois descent along pro-finite étale covers) nor the continuity of the action
-on nearby cycles is formalised; the latter needs Deligne's finiteness theorem for `M''`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`, still
-`sorry`) and the continuity of cohomology along the limit `Spec Ω_K = lim Spec L_U` of the finite
-subextensions, which is not formalised for `ℚ̄_ℓ`-coefficients. -/
+Unfinished. The finite-level splitting is available: for a finite étale Galois cover `g` with
+group `Γ`, the derived unit `G ⟶ Rg_* Lg^* G` is split by the normalized trace, with idempotent
+the average of the `Γ`-action (`ProEtale.CondensedRing.derivedUnit_comp_normalizedTrace`,
+`ProEtale.CondensedRing.nsmul_normalizedTrace_comp_derivedUnit`). What is missing is the passage
+from the pro-`p` cover to a finite level: one needs an open subgroup `V` such that the nearby
+cycles over the finite level `Spec Ω_K / V` already agree with those over `Spec Ω_K`. This is the
+continuity of the action of `P'` on `Ψ_{M''} C`: Deligne's finiteness theorem for `M''`, together
+with the fact that a pro-`p` group acting continuously on a finite `ℚ̄_ℓ`-complex acts through a
+finite quotient. Neither part follows from the formal properties of the pro-étale site: for
+`ℓ`-adic coefficients `Rπ_* π^* G` is not the colimit of the finite levels (continuous versus
+locally constant functions on `P'`). -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
