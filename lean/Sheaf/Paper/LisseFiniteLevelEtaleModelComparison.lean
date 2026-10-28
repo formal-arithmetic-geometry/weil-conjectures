@@ -6,8 +6,12 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
+import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
+import WeilConjectures.ConstructibleSheaf.Pullback
 
-/-! # Fixed-realization comparison for the finite-level etale model
+/-! # Bounded etale models from finite locally constant cohomology models
 
 Source: Stacks Tags 099Y, 099Z and 09B1.
 (blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
@@ -29,46 +33,123 @@ attribute [local irreducible] HasDerivedCategory.standard
   localProEtaleNormalization normalizationConstantArrow etaleIsomorphismNormalizationArrow
   lisseTowerAlgebraArrow lisseTowerFixedRealization
 
-/-- The finite-level etale model has the canonical fixed-realization comparison with
-the pulled-back object.  This is the comparison part of
-`lisse_finite_level_etale_model`, after the etale model and its cohomological
-properties have been supplied.
+private def modelHomologyIso (Z : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] (q : ℤ) :
+    DerivedCategory.homologyFunctor
+        (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)) q ≅
+      (ShrinkHoms.equivalence.{u + 1}
+        (@DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)) _ _
+          (HasDerivedCategory.standard _))).inverse ⋙
+        (@DerivedCategory.homologyFunctor
+          (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)) _ _
+          (HasDerivedCategory.standard _) q) := by
+  let B := Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)
+  let H := @DerivedCategory.homologyFunctor B _ _ (HasDerivedCategory.standard B) q
+  let Q := @DerivedCategory.Q B _ _ (HasDerivedCategory.standard B)
+  let e := ShrinkHoms.equivalence.{u + 1} (@DerivedCategory B _ _ (HasDerivedCategory.standard B))
+  let eQ : DerivedCategory.Q ⋙ e.inverse ≅ Q :=
+    Functor.associator Q e.functor e.inverse ≪≫
+      Functor.isoWhiskerLeft Q e.unitIso.symm ≪≫ Q.rightUnitor
+  exact (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso B (.up ℤ)) B).preimageIso
+      (DerivedCategory.homologyFunctorFactors B q ≪≫
+        (@DerivedCategory.homologyFunctorFactors B _ _
+          (HasDerivedCategory.standard B) q).symm ≪≫
+        Functor.isoWhiskerRight eQ.symm H ≪≫ Functor.associator _ _ _)
 
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z and 09B1.
+private theorem modelClassical_of_iso (Z : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ]
+    {F G : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)}
+    (e : F ≅ G) (hF : ProEtale.IsClassicalModuleFor Z Λ F) :
+    ProEtale.IsClassicalModuleFor Z Λ G := by
+  intro I _ _ P
+  have hmap := ProEtale.continuityMap_natural P e.hom.hom
+  have : IsIso (ProEtale.continuityMap P F.obj) := hF P
+  have : IsIso (Functor.whiskerLeft P.diagram.op e.hom.hom) := by
+    change IsIso (Functor.isoWhiskerLeft P.diagram.op
+      ((sheafToPresheaf _ _).mapIso e)).hom
+    infer_instance
+  apply (isIso_comp_left_iff
+    (colimMap (Functor.whiskerLeft P.diagram.op e.hom.hom)) _).mp
+  rw [hmap]
+  infer_instance
+
+/-- A bounded pro-etale complex whose cohomology has finite locally constant etale
+models has an etale model with the same bounds and finite locally constant cohomology.
+The comparison is the canonical derived counit, so the chosen model is tied to K.
+
+Source: Stacks Project, proetale.tex, lemma-compare-derived (Tag 09B1) and
+lemma-compare-locally-constant-derived (Tag 099Z).
 (blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model-comparison).
 
-Proof: transport each local model through the finite scalar equivalence and use
-naturality under restriction.  Bounded classical derived comparison identifies the
-transported object with the fixed realization of the supplied etale model; the local
-identifications then glue to the displayed global comparison.  Empty bases are
-covered by the unique map from the zero object.
-
-STATEMENT-DISPUTED: `D` is unconstrained by the premises. For the zero choices
-`E := 0` and `N := 0`, the local-model premise can hold, while `D` may be a nonzero
-constant finite locally constant complex concentrated in degree zero; the conclusion
-would then identify its realization with zero. No premise relates `D` to `E`.
--/
+Proof: the cohomology models make K classical. Apply the bounded-below classical
+comparison counit to K and take its derived direct image as D. Exact faithful
+comparison reflects the cohomological bounds. Its cohomology comparison identifies
+comparison(H^q(D)) with comparison(G_q), where G_q is the supplied finite locally
+constant model. Full faithfulness lifts that isomorphism to H^q(D) ≅ G_q, which
+transports finite local constancy. This includes zero rings and empty schemes. -/
 theorem lisse_finite_level_etale_model_comparison
-    (X Y : Scheme.{u}) (g : Y ⟶ X)
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    (U : Y.ProEt) (n : ℕ)
-    (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))
-    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))
-    (D : DerivedCategory
-      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
-    (hDbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
-      IsZero ((DerivedCategory.homologyFunctor _ q).obj D))
-    (hDlisse : ∀ q : ℤ, IsFiniteLocallyConstantSheaf
-      ((DerivedCategory.homologyFunctor _ q).obj D))
-    (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧
-      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →
-        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅
-          (adicTowerPullback (W.hom ≫ g)
-            ((pbcAdicRings X d).obj (op n))).obj N)) :
-    Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj
-        ((ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅
-      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N) := by
-  sorry
+    (Z : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (K : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)))
+    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K))
+    (hcohom : ∀ q : ℤ, ∃ G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsFiniteLocallyConstantSheaf G ∧
+        Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) Z).obj G ≅
+          (DerivedCategory.homologyFunctor _ q).obj K)) :
+    ∃ D : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧
+      (∀ q : ℤ, IsFiniteLocallyConstantSheaf
+        ((DerivedCategory.homologyFunctor _ q).obj D)) ∧
+      Nonempty ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} Λ) Z).mapDerivedCategory.obj D ≅ K) := by
+  classical
+  let : TopologicalSpace Λ := ⊥
+  let : DiscreteTopology Λ := ⟨rfl⟩
+  let F := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) Z
+  obtain ⟨a, b, hab⟩ := hbounded
+  let Kplus : DerivedCategory.Plus
+      (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)) :=
+    ⟨K, a, (DerivedCategory.isGE_iff K a).2 (fun q hq ↦ hab q (Or.inl hq))⟩
+  have hclass : ProEtale.ClassicalPlus Z Λ Kplus := by
+    intro q
+    obtain ⟨G, _, ⟨e⟩⟩ := hcohom q
+    obtain ⟨L, hL, _⟩ := (AlgebraicGeometry.proEtaleClassicalSheaves Z).2.2 Λ
+    have hG : ProEtale.IsClassicalModuleFor Z Λ (F.obj G) := by
+      change ProEtale.IsClassicalModuleFor Z Λ
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) Z).obj G)
+      rw [← hL]
+      exact (L.obj G).property
+    apply modelClassical_of_iso Z Λ (e ≪≫ (modelHomologyIso Z Λ q).app K)
+    exact hG
+  have hunit (L : DerivedCategory.Plus
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      IsIso ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus.unit.app L) := by
+    have := ProEtale.isIso_compactSupportComparisonUnit Z Λ
+    have h := NatIso.isIso_app_of_isIso
+      (ProEtale.derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) Z).unit L
+    change IsIso ((ProEtale.comparisonAdjunction
+      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus.unit.app L) at h
+    rwa [(ProEtale.comparisonAdjunction
+      (ModuleCat.{u + 1} Λ) Z).derivedAdjunctionPlus_eq_derivedPlus] at h
+  let adj := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) Z).derivedPlus
+  have : IsIso (adj.counit.app Kplus) :=
+    (ProEtale.classicalDerivedEquivalence Z Λ hunit).2.1 Kplus hclass
+  let R := (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} Λ) Z).rightDerivedFunctorPlus
+  let D := (R.obj Kplus).obj
+  let e : F.mapDerivedCategory.obj D ≅ K :=
+    DerivedCategory.Plus.ι.mapIso (asIso (adj.counit.app Kplus))
+  refine ⟨D, ⟨a, b, ?_⟩, ?_, ⟨e⟩⟩
+  · intro q hq
+    exact F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+      ((hab q hq).of_iso ((DerivedCategory.homologyFunctor _ q).mapIso e))
+  · intro q
+    obtain ⟨G, hG, ⟨eG⟩⟩ := hcohom q
+    have := hG
+    let eq : F.obj ((DerivedCategory.homologyFunctor _ q).obj D) ≅ F.obj G :=
+      (F.mapDerivedCategoryHomologyFunctorIso q).app D ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫ eG.symm
+    exact IsFiniteLocallyConstantSheaf.of_iso (F.preimageIso eq).symm
 
 end AlgebraicGeometry.Scheme

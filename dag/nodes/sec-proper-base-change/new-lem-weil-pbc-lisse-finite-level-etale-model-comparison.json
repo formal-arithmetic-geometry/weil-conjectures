@@ -5,21 +5,17 @@
   "place": "Tags 099Y, 099Z and 09B1, bounded-below classical comparison and finite locally constant descent"
  },
  "stmt_deps": [
-  "def-weil-pbc-lisse-tower-etale-descent-data",
-  "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-bounded-constructible-tower",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-derived-cohomology-sheaves",
   "def-constructible-finite-locally-constant",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-pullback",
+  "sk-thm-pe-classical-sheaves",
+  "det-pe-classical-definition-continuity-map",
   "thm-weil-pbc-site-comparison",
   "det-pe-classical-derived-equivalence",
-  "lem-sf-proetale-locally-constant-origin",
-  "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lemma-constructible-iso-invariance"
  ],
  "mathlib_searches": [
   {
@@ -66,16 +62,29 @@
  "unit": "sk-thm-properbasechange",
  "id": "new-lem-weil-pbc-lisse-finite-level-etale-model-comparison",
  "title": "The supplied etale model has the fixed-realization isomorphism with the pulled-back object.",
- "statement": "The supplied etale model has the fixed-realization isomorphism with the pulled-back object. The conclusion is the displayed comparison clause of the parent statement.",
+ "statement": "Let Z be any scheme and Λ a finite commutative ring. For a bounded complex K of fixed Λ-module sheaves on Z_proet, use the cohomology functors of [def-weil-derived-cohomology-sheaves]. Suppose that, for every integer q, there is a finite locally constant Λ-module sheaf G_q on Z_et [def-constructible-finite-locally-constant] and an isomorphism ν_Z^*(G_q) ≅ H^q(K), where ν_Z^* is the etale-to-proetale comparison of [def-weil-pbc-site-comparison-morphism]. Then there exists a bounded complex D of Λ-module sheaves on Z_et, all of whose cohomology sheaves are finite locally constant, together with an isomorphism ν_Z^*(D) ≅ K in the derived category. The model is constructed by derived direct image of K; it is not an independently supplied complex.",
  "proof": [
   {
-   "text": "Transport the local marking isomorphisms through exact scalar realization and bounded classical comparison; naturality under restriction lets them glue to the canonical fixed-realization comparison.",
+   "text": "For each q the supplied G_q identifies H^q(K) with an object of the classical module-sheaf subcategory. Use the classical-sheaf equivalence to prove continuity, transport it across the supplied isomorphism, and bridge the standard and small derived-category cohomology functors by localization.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
+    "sk-thm-pe-classical-sheaves",
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a lower bound a and regard K as an object of D^+. The comparison unit is invertible. Classical derived equivalence therefore makes the derived comparison counit at K invertible. Set D = Rν_*(K) and use that counit as the actual derived comparison isomorphism.",
+   "uses": [
     "thm-weil-pbc-site-comparison",
-    "det-pe-classical-derived-equivalence",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+    "det-pe-classical-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact faithful comparison functor commutes with cohomology and reflects zero objects, so D has the same cohomological bounds as K. For each q its cohomology comparison and the supplied model yield ν^*H^q(D) ≅ ν^*G_q. Full faithfulness lifts this to H^q(D) ≅ G_q, and finite local constancy transports across this isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lemma-constructible-iso-invariance"
    ],
    "elementary": false
   }
@@ -83,14 +92,14 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099Y, 099Z and 09B1; strict subclaim split from the parent model proof."
+  "place": "lemma-compare-derived (Tag 09B1), lemma-compare-locally-constant-derived (Tag 099Z); corrected counit construction, with finite-lisse cohomology reflected by full faithfulness."
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.LisseFiniteLevelEtaleModelComparison",
   "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleModelComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_model_comparison",
-  "statement": "theorem lisse_finite_level_etale_model_comparison (X Y : Scheme.{u}) (g : Y ⟶ X) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt) (n : ℕ) (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))) (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))) (D : DerivedCategory (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))) (hDbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) (hDlisse : ∀ q : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ q).obj D)) (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧ ∀ (W : Y.ProEt) (w : W ⟶ U), T w → Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅ (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)) : Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅ (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)",
+  "statement": "theorem lisse_finite_level_etale_model_comparison\n    (Z : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (K : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K))\n    (hcohom : ∀ q : ℤ, ∃ G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ),\n      IsFiniteLocallyConstantSheaf G ∧\n        Nonempty ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) Z).obj G ≅\n          (DerivedCategory.homologyFunctor _ q).obj K)) :\n    ∃ D : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      (∀ q : ℤ, IsFiniteLocallyConstantSheaf\n        ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      Nonempty ((ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} Λ) Z).mapDerivedCategory.obj D ≅ K)",
   "branch": "sheaf-dag",
   "by": "N1",
   "date": "2026-10-28"
@@ -108,17 +117,58 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H9",
-  "result": "pass",
-  "landing": "20261028T020508-L-2516593",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.lisse_finite_level_etale_model_comparison"
+  "reviewer": "C-9e911",
+  "group": "N1",
+  "result": "fix",
+  "landing": "20261028T055722-L-800494",
+  "kind": "interface",
+  "note": "independent cc review: corrected lisse_finite_level_etale_model_comparison (Stacks 09B1/099Z descent of K) and adapted parent lisse_finite_level_etale_model against the clone's nodes, the change record, the 3b importer result and a scratch #print axioms; new inverse-realization-cohomology sorry against its node and the sibling localized-constants lemmas"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "N1 stage 2",
+  "old_statement": "The supplied etale model has the fixed-realization isomorphism with the pulled-back object. The conclusion is the displayed comparison clause of the parent statement.",
+  "what": "The old Lean declaration quantified over an arbitrary etale complex D with only bounded finite-lisse cohomology. No hypothesis related D to E, N, or the local marking isomorphisms. Taking E=N=0 and a nonzero bounded constant D over a nonempty scheme with nonzero finite coefficients disproves its conclusion. The old parent chose D=0 even when its actual pullback could be nonzero. Replace the invalid arbitrary-D comparison by a genuine derived descent theorem for the specified proetale complex K and its etale cohomology models. Adapt the sole parent to apply it to the inverse fixed realization of the actual pullback; the parent statement and target statements stay identical.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "lemma-compare-derived (Tag 09B1) and lemma-compare-locally-constant-derived (Tag 099Z)"
+  },
+  "citers": [
+   {
+    "id": "new-lem-weil-pbc-lisse-finite-level-etale-model",
+    "holds": true,
+    "note": "Its unchanged model-existence statement follows by constructing K from the actual pullback, obtaining bounded lisse cohomology, applying the corrected descent theorem, and composing with the fixed-realization counit. This delivery adapts its proof and dependency route."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.lisse_finite_level_etale_model_comparison"
+  "old_stmt_deps": [
+   "def-weil-pbc-lisse-tower-etale-descent-data",
+   "def-weil-pbc-derived-local-isomorphism-sheaf",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-bounded-constructible-tower",
+   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+   "def-weil-pbc-derived-normalization-arrows",
+   "def-constructible-finite-locally-constant",
+   "def-weil-derived-cohomology-sheaves"
+  ],
+  "old_proof": [
+   {
+    "text": "Transport the local marking isomorphisms through exact scalar realization and bounded classical comparison; naturality under restriction lets them glue to the canonical fixed-realization comparison.",
+    "uses": [
+     "lem-weil-pbc-comparison-pullback",
+     "thm-weil-pbc-site-comparison",
+     "det-pe-classical-derived-equivalence",
+     "lem-sf-proetale-locally-constant-origin",
+     "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-comparison-pullback",
+   "thm-weil-pbc-site-comparison",
+   "det-pe-classical-derived-equivalence",
+   "lem-sf-proetale-locally-constant-origin",
+   "lem-weil-pbc-comparison-finite-local-constancy-reflection"
   ]
  }
 }

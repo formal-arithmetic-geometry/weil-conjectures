@@ -19,28 +19,39 @@
  ],
  "proof": [
   {
-   "text": "Obtain an etale complex with bounded cohomology and finite locally constant cohomology from the finite-level local-model construction.",
+   "text": "Let F be the explicit fixed-realization equivalence at (U.hom ≫ g,d,n), let P be the actual pullback of N, and define K = F.inverse(P). The finite scalar cohomology calculation gives boundedness of K and lisse proetale cohomology from the supplied bounded finite algebraic local models.",
    "uses": [
-    "new-lem-weil-pbc-lisse-finite-level-etale-model-data"
+    "new-lem-weil-pbc-lisse-inverse-realization-cohomology",
+    "def-weil-pbc-lisse-tower-etale-descent-data"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the separate fixed-realization comparison subclaim to the supplied model and assemble the three resulting clauses.",
+   "text": "Apply finite-lisse proetale origin to each H^q(K), obtaining a finite locally constant etale sheaf G_q and ν^*G_q ≅ H^q(K). Apply the corrected bounded classical comparison to K and these cohomology models, giving an etale complex D, its bounds and finite-lisse cohomology, and e:ν^*D ≅ K.",
    "uses": [
+    "lem-sf-proetale-locally-constant-origin",
     "new-lem-weil-pbc-lisse-finite-level-etale-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply F to e and compose with the actual equivalence counit F(F.inverse(P)) ≅ P. This is the required comparison to the original pullback. The etale model is tied to that pullback rather than chosen independently.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-lem-weil-pbc-lisse-finite-level-etale-model-data",
+  "new-lem-weil-pbc-lisse-inverse-realization-cohomology",
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-sf-proetale-locally-constant-origin",
   "new-lem-weil-pbc-lisse-finite-level-etale-model-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099Y, 099Z and 09B1; model construction and fixed-realization comparison split into strict subclaims."
+  "place": "Tags 099Y, 099Z and 09B1; construct the inverse-realization object first, then descend it by its classical cohomology and the canonical derived counit."
  },
  "mathlib_searches": [
   {
@@ -107,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-9e911",
   "group": "N1",
-  "result": "pass",
-  "landing": "20261027T234111-L-4191645",
+  "result": "fix",
+  "landing": "20261028T055722-L-800494",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected lisse_finite_level_etale_model_comparison (Stacks 09B1/099Z descent of K) and adapted parent lisse_finite_level_etale_model against the clone's nodes, the change record, the 3b importer result and a scratch #print axioms; new inverse-realization-cohomology sorry against its node and the sibling localized-constants lemmas"
  }
 }

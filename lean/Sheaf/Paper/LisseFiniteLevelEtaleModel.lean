@@ -6,7 +6,7 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
-import Sheaf.Paper.LisseFiniteLevelEtaleModelProperties
+import Sheaf.Paper.LisseFiniteLevelInverseCohomology
 import Sheaf.Paper.LisseFiniteLevelEtaleModelComparison
 
 /-! # Bounded finite-lisse model at one coefficient level
@@ -73,10 +73,17 @@ theorem lisse_finite_level_etale_model
         ((ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅
         (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N) := by
-  obtain ⟨D, hDbounded, hDlisse⟩ :=
-    lisse_finite_level_etale_model_properties X Y g d U n N E hbounded hfinite hmodels
-  have hcomparison := lisse_finite_level_etale_model_comparison X Y g d U n N E D
-    hDbounded hDlisse hmodels
-  exact ⟨D, hDbounded, hDlisse, hcomparison⟩
+  let F := lisseTowerFixedRealization (U.hom ≫ g) d n
+  let P := (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N
+  let K := F.asEquivalence.inverse.obj P
+  obtain ⟨hKbounded, hKlisse⟩ := lisse_finite_level_inverse_realization_cohomology
+    X Y g d U n N E hbounded hfinite hmodels
+  have hcohom (q : ℤ) :=
+    (proEtale_lisse_origin U.left (lisseTowerEtaleRing d n)).2 _ (hKlisse q)
+  obtain ⟨D, hDbounded, hDlisse, ⟨e⟩⟩ :=
+    lisse_finite_level_etale_model_comparison U.left (lisseTowerEtaleRing d n)
+      K hKbounded hcohom
+  exact ⟨D, hDbounded, hDlisse,
+    ⟨F.mapIso e ≪≫ F.asEquivalence.counitIso.app P⟩⟩
 
 end AlgebraicGeometry.Scheme

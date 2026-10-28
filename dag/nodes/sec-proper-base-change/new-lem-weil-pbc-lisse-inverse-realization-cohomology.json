@@ -1,0 +1,142 @@
+{
+ "id": "new-lem-weil-pbc-lisse-inverse-realization-cohomology",
+ "kind": "statement",
+ "title": "Bounded lisse cohomology of the inverse finite scalar realization",
+ "statement": "Let X and Y be schemes, g:Y→X a morphism, d an adic coefficient datum on A [def-weil-pbc-adic-coefficient-datum], U an object of Y_proet, and n a natural number. Let B_n = lisseTowerEtaleRing(d,n), and let F = lisseTowerFixedRealization(U.hom ≫ g,d,n) be the explicit finite scalar equivalence [def-weil-pbc-lisse-tower-etale-descent-data]. Let N be a derived module over the n-th actual adic coefficient sheaf on X [def-weil-pbc-bounded-constructible-tower], and E a bounded derived B_n-module whose cohomology modules are finitely generated [def-weil-derived-cohomology-sheaves]. Suppose a covering sieve T on U is supplied and every arrow w:W→U in T has an isomorphism constantAdicQuotientRealization(W.hom ≫ g,d,n)(E) ≅ adicTowerPullback(W.hom ≫ g)(N), using the actual constant realization [lem-weil-pbc-constant-adic-quotient-scalar-comparison]. Define K = F.inverse(adicTowerPullback(U.hom ≫ g)(N)). Then K is bounded and, for every integer q, H^q(K) is lisse as a fixed B_n-module sheaf on U.left_proet: it is locally constant and each of its fixed geometric module stalks is finite, in the predicate of [lem-sf-proetale-locally-constant-origin]. No etale complex D or derived etale origin is part of this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-sf-proetale-locally-constant-origin"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-compare-locally-constant (Tag 099Y), local constant model calculation; sites-modules.tex lemma-exactness-pushforward-pullback (Tag 03DC) and lemma-constant-exact (Tag 093J)."
+ },
+ "proof": [
+  {
+   "text": "Use the explicit fixed scalar equivalence and its counit to realize K as the actual pullback. Restrict along each arrow of the covering sieve; inverse-image composition and the finite scalar and constant-complex comparisons identify the restricted K with the constant complex E. These are comparisons of actual derived objects, not merely cohomology groups.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-lisse-tower-localized-constants-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image and constant functors commute with H^q. Thus on that cover H^q(K) becomes the constant H^q(E). Refine the covering sieve to the defining proetale covering family (over affine opens where required). For q outside the supplied bounded window this constant sheaf is zero. Restriction to a covering family detects zero sheaves, so K is bounded, including on the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite coefficient ring B_n makes each finitely generated H^q(E) a finite set. Apply finiteModels_over to the constant models to obtain local constancy in slice sites, and finite_geometricStalk_of_finite_models to obtain finite fixed geometric stalks. Their conjunction is exactly IsLisseProEtaleFixedModuleSheaf. Neither overlap compatibility of independently chosen local markings nor existence of an etale derived model is required.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Local calculation preceding lemma-compare-locally-constant (Tag 099Y), together with exactness of inverse image and constant sheaves in sites-modules.tex (Tags 03DC, 093J)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Ff]aithful|[Ff]inite.*[Ll]ocally.*[Cc]onstant",
+   "results": "20 hits, including Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean. No theorem calculates cohomology of the inverse finite scalar realization from the supplied proetale local models. Repository search found local-model and classical-comparison APIs, but no exact duplicate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a bounded complex with finite constant models on a proetale covering is lisse",
+   "results": "8 hits, including ContinuousCohomology.MultiInd.complex, CondensedSet.LocallyConstant.iso, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone. No theorem calculates cohomology of the inverse finite scalar realization from the supplied proetale local models. Repository search found local-model and classical-comparison APIs, but no exact duplicate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a bounded complex with finite constant models on a proetale covering is lisse",
+   "results": "8 hits, including LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, LightCondAb.ofSheafLightProfinite. No theorem calculates cohomology of the inverse finite scalar realization from the supplied proetale local models. Repository search found local-model and classical-comparison APIs, but no exact duplicate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleModelComparison",
+  "date": "2026-10-28",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "The cohomology calculation needed before descending the actual inverse fixed realization; strict subclaim of the repaired finite-level model construction.",
+   "via": [
+    "new-lem-weil-pbc-lisse-finite-level-etale-model-comparison",
+    "new-lem-weil-pbc-lisse-finite-level-etale-model",
+    "lem-weil-pbc-lisse-finite-level-etale-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelInverseCohomology",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelInverseCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_inverse_realization_cohomology",
+  "statement": "theorem lisse_finite_level_inverse_realization_cohomology\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (U : Y.ProEt) (n : ℕ)\n    (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj E))\n    (hfinite : ∀ q : ℤ, Module.Finite (lisseTowerEtaleRing d n)\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) q).obj E))\n    (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅\n          (adicTowerPullback (W.hom ≫ g)\n            ((pbcAdicRings X d).obj (op n))).obj N)) :\n    let K := (lisseTowerFixedRealization (U.hom ≫ g) d n).asEquivalence.inverse.obj\n      ((adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)\n    (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) ∧\n      (∀ q : ℤ, IsLisseProEtaleFixedModuleSheaf U.left (lisseTowerEtaleRing d n)\n        ((DerivedCategory.homologyFunctor _ q).obj K))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-lisse-tower-localized-constants-model",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9e911",
+  "group": "N1",
+  "result": "fix",
+  "landing": "20261028T055722-L-800494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9e911",
+  "group": "N1",
+  "result": "fix",
+  "landing": "20261028T055722-L-800494",
+  "kind": "interface",
+  "note": "independent cc review: corrected lisse_finite_level_etale_model_comparison (Stacks 09B1/099Z descent of K) and adapted parent lisse_finite_level_etale_model against the clone's nodes, the change record, the 3b importer result and a scratch #print axioms; new inverse-realization-cohomology sorry against its node and the sibling localized-constants lemmas"
+ }
+}
