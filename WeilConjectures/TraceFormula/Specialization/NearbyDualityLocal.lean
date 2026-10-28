@@ -142,19 +142,6 @@ theorem isIso_nearbyDualityMap (D : NearbyDualizingData k k' ℓ) (h : M.IsTrait
   have : IsAffine (M.restrictOpen V).total := hV
   exact isIso_nearbyDualityMap_of_isAffine ℓ D (h.restrictOpen V) K'
 
-/-- **Nearby cycles commute with Verdier duality**: for a trait model `M` over the base,
-`Ψ(D_X K) ≅ D_{X'}(Ψ K)` for every bounded constructible `K`, the duality being relative to `k` on
-`X` and to `k'` on the special fibre. -/
-theorem nonempty_nearbyCycles_verdierDual_iso (h : M.IsTraitModelOfBase k q g)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    Nonempty ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ)).obj
-        (verdierDual ℓ K) ≅
-      verdierDual ℓ ((boundedConstructibleNearbyCycles
-        (h.preservesBoundedConstructible ℓ)).obj K)) :=
-  let ⟨D⟩ := nonempty_nearbyDualizingData k k' ℓ
-  have := isIso_nearbyDualityMap ℓ D h K
-  ⟨asIso (nearbyDualityMap ℓ D h K)⟩
-
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
