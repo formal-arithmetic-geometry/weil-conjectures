@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-! Compatibility of the two presentations of the pro-etale inverse-image map. -/
@@ -35,7 +34,10 @@ theorem integral_site_pullback_integer_endpoint_inverse_image {X Y : Scheme.{u}}
           (AddCommGrpCat.of (ULift.{u + 1} ℤ))) =
       Scheme.proEtaleConstantInverseImageMap f AddCommGrpCat.{u + 1}
         (AddCommGrpCat.of (ULift.{u + 1} ℤ)) := by
-  sorry
+  unfold Scheme.proEtaleConstantInverseImageMap
+  rw [← Adjunction.homEquiv_counit]
+  change _ = ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm _
+  rfl
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
