@@ -11,7 +11,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "Finite-extension evaluation square, normalization and transpose substeps."
+  "place": "Finite-extension evaluation square: inverse transpose of evaluation, naturality of the signed braiding, and scalar compatibility of the braiding; implemented by A4 using the existing rationalHomScalar_transpose and rationalTensorSymmetry_laws declarations."
  },
  "mathlib_searches": [
   {
@@ -65,14 +65,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
+  "reviewer": "C-87237",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261027T234344-L-112337",
+  "landing": "20261028T055601-L-769325",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: scalarEvaluation_of_normalizedCounits proof vs node lem-sf-rational-hom-scalar-evaluation-core; RationalHomScalarTranspose import removal vs clone import graph (cycle via RationalOperations→RationalHomIdentifications→RationalHomScalarEvaluation→Core) and change record; 3b importers 3 OK; axioms checked by scratch compile"
  },
  "mathlib_match": null,
  "id": "lem-sf-rational-hom-scalar-evaluation-core",
@@ -81,17 +81,34 @@
  "statement": "Given permitted rational Hom predicates over E and L, counit maps eE and eL, and hypotheses identifying each with normalizedCounit, the recorded rational tensor and Hom scalar comparisons satisfy the finite scalar evaluation square for every K,M over E.",
  "proof": [
   {
-   "text": "Apply the transpose compatibility of rationalHomScalarComparison to eE. The normalized counit formulas identify the transpose of the left composite with the Hom comparison, while the right composite transposes to the same arrow; injectivity of the closed transpose gives the equality.",
+   "text": "For any partial closed structure, parameter naturality of transpose identifies the inverse transpose of f with tensor(f, identity) followed by evaluation. Prove this elementary identity privately using injectivity of transpose and its inverse identities.",
    "uses": [
-    "lem-sf-rational-hom-normalized-counit",
-    "lem-sf-rational-hom-scalar-transpose"
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply rationalHomScalar_transpose to evaluation at the permitted pair (K,M). Evaluation transposes to the identity, so the scalar-extended evaluation transposes to the Hom scalar comparison. Apply inverse transpose and the preceding identity to obtain the scalar evaluation equation with Hom as the first tensor factor.",
+   "uses": [
+    "lem-coef-rational-hom-scalar-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the supplied counits using their normalization hypotheses. Naturality of the rational signed tensor braiding moves the Hom scalar comparison through the braiding. Substitute the Hom-first evaluation equation, use the scalar-braiding compatibility clause of rationalHomScalar_transpose, and finish with associativity and functoriality.",
+   "uses": [
+    "def-sf-rational-hom-normalized-counit",
+    "lem-coef-rational-tensor-symmetry-laws",
+    "lem-coef-rational-hom-scalar-transpose"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-rational-hom-normalized-counit",
-  "lem-sf-rational-hom-scalar-transpose"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-rational-hom-scalar-transpose",
+  "def-sf-rational-hom-normalized-counit",
+  "lem-coef-rational-tensor-symmetry-laws"
  ],
  "lean": {
   "existing": false,

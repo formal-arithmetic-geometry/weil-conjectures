@@ -6,7 +6,6 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.SixFunctors.RationalVerdier
-public import Sheaf.SixFunctors.RationalOperations
 public import Sheaf.Paper.CompletedTensorHomTranspose
 public import Sheaf.Paper.SitePerfectComplex
 
