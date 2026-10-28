@@ -21189,3 +21189,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:18 L: merged deliver/ND/lem-sf-projection-base-change-common (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
 - 09:19 L: returned deliver/T7/Sheaf.Paper.RationalHomScalarTranspose (reviewer RETURN: (reviewer C-7bf24, head 7bf24a6f5) C6/D4: first conjunct is derived from the sorry'd sfPackageFieldScalarRealization, wh)
 - 10:22 L: returned deliver/T2/Sheaf.Paper.NativeOpenTensorRestrictionForget (reviewer RETURN: (reviewer C-3575b, head 3575ba581) H4 (point 5): delete lean/Sheaf/Paper/NativeTwoSidedKFlatModels.lean and node lem-sf-)
+- 10:30 L: returned deliver/U1/Sheaf.Paper.IntegralHomComparisonUncurry (reviewer RETURN: (reviewer C-eeb0b, head eeb0b10cc) 2b: direct importer Sheaf.Paper.IntegralHomReductionComponents (outside the delivery))
