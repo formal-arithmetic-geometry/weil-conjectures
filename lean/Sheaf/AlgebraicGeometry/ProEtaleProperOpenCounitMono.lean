@@ -7,16 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
-import Sheaf.RingTheory.WContractibleClosedLocalization
-import Sheaf.AlgebraicGeometry.AffineClosedSpecializationLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleProperOpenCounitMonoSection
 
 /-! Monomorphism half of the proper/open pro-etale counit support argument.
 
@@ -46,6 +37,10 @@ theorem sfProperOpenCounit_mono {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     Mono ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
       ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
         proEtaleConstantModuleDirectImage p A).obj M)) := by
-  sorry
+  apply Functor.mono_of_mono_map (SheafOfModules.forget
+    ((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (proEtaleConstantRing T A)))
+  exact sfProperOpenCounit_forget_mono A p i M
 
 end AlgebraicGeometry.Scheme
