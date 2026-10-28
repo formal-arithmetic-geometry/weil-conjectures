@@ -1,0 +1,106 @@
+{
+ "id": "new-sf-integral-hom-reduction-target-evaluation",
+ "kind": "statement",
+ "title": "Finite-level representative evaluation for the target tensor presentation",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix l, E, Y and n and a finite-coefficient closed tensor structure S with coefficient tensor models T and a tensor-Hom adjunction adj. For every K-flat representative pair P,S' and K-injective I, and every chain map q from S' to the internal-Hom complex from P to I, there is a chain map beta from the total tensor of P and S' to I whose sectionwise signed evaluation formula holds and whose derived image is exactly the counit of adj applied to q after the tensor comparison isomorphism.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension; representative evaluation normalization"
+ },
+ "proof": [
+  {
+   "text": "Choose K-flat representatives and a K-injective target. Define beta by the total-complex evaluation formula with the Koszul sign, verify it is a chain map, and identify its derived image with the adjunction counit using the normalized representative comparison.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 2, coefficient extension; representative evaluation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension; representative evaluation normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation map total tensor internal Hom K-flat K-injective derived category",
+   "results": "Generic tensor-Hom and total-complex declarations only; no finite target evaluation theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_tensor_presentation_evaluation",
+   "results": "No existing declaration before this split.",
+   "date": "2026-10-28",
+   "verdict": "new project statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "totalTensor evaluate derived category K-flat K-injective",
+   "results": "Only generic total-complex evaluation declarations; no exact finite presentation theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionComponents",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-reduction-target",
+   "place": "paragraph 2, coefficient extension; representative evaluation normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorPresentationEvaluation",
+  "file": "lean/Sheaf/Paper/FiniteTensorPresentationEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralHom.finite_tensor_presentation_evaluation",
+  "statement": "theorem finite_tensor_presentation_evaluation :\n    ∀ (P I S' : CochainComplex (Modules.{t, u} Y\n      (integralCoefficientCommRingSheaf l E Y n)) ℤ)\n      (hP : flat.{t, u} Y (integralCoefficientCommRingSheaf l E Y n) P)\n      (hS : flat.{t, u} Y (integralCoefficientCommRingSheaf l E Y n) S'),\n      I.IsKInjective →\n      ∀ q : S' ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}\n        (R := integralCoefficientCommRingSheaf l E Y n) P I,\n      ∃ beta : ((totalTensor.{t, u} Y\n          (integralCoefficientCommRingSheaf l E Y n)).obj P).obj S' ⟶ I,\n        (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n          (x : (P.X i).val.obj U) (s : (S'.X j).val.obj U),\n          (beta.f (i + j)).val.app U\n              (totalPair.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)\n                P S' i j U x s) =\n            (i * j).negOnePow • evaluate.{t, u} Y\n              (integralCoefficientCommRingSheaf l E Y n) P I j i U\n              ((q.f j).val.app U s) x) ∧\n        T.comparison.inv.app (⟨P, hP⟩, ⟨S', hS⟩) ≫ DerivedCategory.Q.map beta =\n          S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))\n            (DerivedCategory.Q.map q ≫\n              homModelMap.{t, u} Y\n                (integralCoefficientCommRingSheaf l E Y n) P I)) ≫\n          (adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T034752-L-3543263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T034752-L-3543263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
