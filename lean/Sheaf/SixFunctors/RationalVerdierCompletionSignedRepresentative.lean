@@ -7,6 +7,8 @@ module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
+import Sheaf.SixFunctors.RationalVerdierTensorRoosSignedModel
+import Sheaf.SixFunctors.RationalVerdierCompletionChainNaturality
 
 /-! # The signed completion square on good cochain representatives
 
@@ -24,6 +26,20 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open scoped TensorProduct
 
 namespace WeilConjectures.RationalVerdier
+
+attribute [local implicit_reducible] integralOperationsGoodLocalization
+  integralOperationsTensorOnGood integralOperationsTensorComplexFunctor
+  pullbackTensorSwap IntegralAmbient.tensorTower
+  IntegralOnSlice.Site IntegralOnSlice.topology IntegralOnSlice.restrict IntegralOnSlice.ring
+  PurCompactSupport.completed pullbackTensorReferenceTensor
+attribute [local irreducible] IntegralOnSlice.roosUnit IntegralAmbient.tensorTowerIso
+  strictTensorSignedSwap pullbackTensorCalculus
+  HasDerivedCategory.standard SheafOfModules.monoidalCategory
+  pullbackTensorIntegralTensorModel pullbackTensorReferenceTensorModel
+  integralCompletedTensorComparison integralCompletedTensor
+  integralOperationsTensorTowerFunctor Functor.mapDerivedCategory
+  coefficientSequenceLimit pullbackTensorBraiding
+
 
 /-- The ambient completed swap is the strict-system signed swap transported through
 its recorded completed tensor model. This construction uses no constructibility or
@@ -47,12 +63,43 @@ def completedSignedSwap (l : ℕ) [Fact l.Prime]
     Functor.isoWhiskerLeft (pullbackTensorSwap _)
       (pullbackTensorIntegralTensorModel l E X).symm
 
+private theorem completedSignedSwap_hom_app
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) (A B : DerivedCategory (integralTowerModules l E X)) :
+    (completedSignedSwap l E X).hom.app (A, B) =
+      (pullbackTensorIntegralTensorModel l E X).hom.app (A, B) ≫
+        (coefficientSequenceLimit l E X).map
+          ((pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology X))
+            (coefficientSequenceCommRingSheaf l E X)
+            (pullbackTensorCalculus l E X).systemClosed
+            (pullbackTensorCalculus l E X).systemTensorModel).hom.app
+              ((pullbackTensorCalculus l E X).reduction.obj A,
+               (pullbackTensorCalculus l E X).reduction.obj B)) ≫
+        (pullbackTensorIntegralTensorModel l E X).inv.app (B, A) := by
+  rfl
+
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+private theorem conjugate_square
+    {C : Type*} [Category* C] {A B A' B' U V : C}
+    (c : A ≅ B) (c' : A' ≅ B') (r : U ≅ B) (r' : V ≅ B')
+    (e : A ≅ U) (e' : A' ≅ V) (f : B ⟶ B') (b : U ⟶ V)
+    (he : e = c ≪≫ r.symm) (he' : e' = c' ≪≫ r'.symm)
+    (hf : f ≫ r'.inv = r.inv ≫ b) :
+    f = c.inv ≫ (e.hom ≫ b ≫ e'.inv) ≫ c'.hom := by
+  subst e e'
+  have h := congrArg (fun k ↦ k ≫ r'.hom) hf
+  simpa only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
+    Iso.inv_hom_id, Iso.hom_inv_id, Category.comp_id, Category.id_comp] using h
+
+-- Retain the existing theorem parameters although the proof needs no finite-type assumption.
+set_option linter.unusedSectionVars false in
 /-- On two flat-term K-flat complexes, the quotient-normalized completion map
 intertwines a chain map with the Koszul pure-section formula and the actual ambient
 completed signed swap. No ordinary derived presentation, datum, naturality hypothesis,
@@ -91,6 +138,42 @@ theorem completion_signed_representative
         (integralCompletedTensorComparison l E X).inv.app (P, Q) ≫
         (completedSignedSwap l E X).hom.app
           (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
-        (integralCompletedTensorComparison l E X).hom.app (Q, P) := by sorry
+        (integralCompletedTensorComparison l E X).hom.app (Q, P) := by
+  have ht : (IntegralOnSlice.tower l E X none).map s ≫
+      (IntegralAmbient.tensorTowerIso l E X).hom.app (Q.obj, P.obj) =
+    (IntegralAmbient.tensorTowerIso l E X).hom.app (P.obj, Q.obj) ≫
+      strictTensorSignedSwap l E X P.obj Q.obj := by
+    apply NatTrans.ext
+    funext n
+    exact tensor_tower_signed_coordinate l E X P.obj Q.obj s hs n.unop
+  have hc := completion_natural_of_tower_square D l hl X E P.obj Q.obj s
+    (strictTensorSignedSwap l E X P.obj Q.obj) ht
+  have hd := congrArg DerivedCategory.Q.map hc
+  simp only [Functor.map_comp] at hd
+  have hm := tensor_roos_signed_model l E X P Q
+  have hnorm : pullbackTensorIntegralTensorNormalization l E X
+      (pullbackTensorIntegralTensorModel l E X) := by
+    unfold pullbackTensorIntegralTensorModel pullbackTensorUniqueChoice
+    exact (pullbackTensorIntegralTensorModel_existsUnique l E X).exists.choose_spec
+  have hPQ := hnorm P Q
+  have hQP := hnorm Q P
+  have hb := conjugate_square
+    ((integralCompletedTensorComparison l E X).app (P, Q))
+    ((integralCompletedTensorComparison l E X).app (Q, P))
+    (pullbackTensorReferenceTensorModel l E X P Q)
+    (pullbackTensorReferenceTensorModel l E X Q P)
+    ((pullbackTensorIntegralTensorModel l E X).app
+      (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
+    ((pullbackTensorIntegralTensorModel l E X).app
+      (DerivedCategory.Q.obj Q.obj, DerivedCategory.Q.obj P.obj))
+    _ _ hPQ hQP hm
+  rw [hd]
+  apply congrArg (fun f ↦
+    DerivedCategory.Q.map ((completionChain D l hl X E).app (P.obj, Q.obj)) ≫ f)
+  rw [completedSignedSwap_hom_app]
+  simp only [integralOperationsTensorOnGood, Functor.comp_obj, Functor.prod_obj,
+    ObjectProperty.ι_obj, Iso.app_hom, Iso.app_inv, Category.assoc] at hb ⊢
+  convert hb using 1
+  rfl
 
 end WeilConjectures.RationalVerdier
