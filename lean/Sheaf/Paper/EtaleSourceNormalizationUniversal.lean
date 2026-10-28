@@ -6,6 +6,9 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Paper.EtaleUniversalNormalization
+import all Sheaf.Paper.WitnessCompatibility
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Universal scalar arrows on an etale source
 
@@ -18,6 +21,107 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+private theorem universal_of_isIso_scalarMate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂) {F : A ⥤ C} {G : B ⥤ D}
+    (τ : U₁ ⋙ F ⟶ G ⋙ U₂)
+    [IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans)]
+    {P : A} {N : B} (d : P ⟶ U₁.obj N)
+    (h : StructuredArrow.IsUniversal (StructuredArrow.mk d)) :
+    Nonempty (StructuredArrow.IsUniversal
+      (StructuredArrow.mk (F.map d ≫ τ.app N) : StructuredArrow (F.obj P) U₂)) := by
+  let e := (mkInitialOfLeftAdjoint _ a₁ P).uniqueUpToIso h
+  let α : E₁.obj P ≅ N := (StructuredArrow.proj P U₁).mapIso e
+  have hα : a₁.unit.app P ≫ U₁.map α.hom = d := e.hom.w
+  let m := ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans
+  let t : E₂.obj (F.obj P) ≅ G.obj N := (asIso m).app P ≪≫ G.mapIso α
+  have ht : a₂.unit.app (F.obj P) ≫ U₂.map t.hom = F.map d ≫ τ.app N := by
+    have hu := unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ τ) P
+    change F.map (a₁.unit.app P) ≫ τ.app (E₁.obj P) =
+      a₂.unit.app (F.obj P) ≫ U₂.map (m.app P) at hu
+    simp only [t, Iso.trans_hom, Iso.app_hom, asIso_hom, Functor.mapIso_hom,
+      Functor.map_comp, ← Category.assoc]
+    rw [← hu]
+    have hn := τ.naturality α.hom
+    dsimp only [Functor.comp_map] at hn
+    rw [Category.assoc, ← hn, ← F.map_comp_assoc, hα]
+  let i : (StructuredArrow.mk (a₂.unit.app (F.obj P)) : StructuredArrow (F.obj P) U₂) ≅
+      StructuredArrow.mk (F.map d ≫ τ.app N) := StructuredArrow.isoMk t ht
+  exact ⟨(mkInitialOfLeftAdjoint _ a₂ (F.obj P)).ofIso i⟩
+
+private def normalizationEtaleCoefficientIso (Z : Scheme.{u})
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S) (V : Z.Etale) :
+    Sheaf.restrictScalars Z.smallEtaleTopology q ⋙
+        Etale.upperStar (ModuleCat.{u + 1} R) V.hom ≅
+      Etale.upperStar (ModuleCat.{u + 1} S) V.hom ⋙
+        Sheaf.restrictScalars V.left.smallEtaleTopology q := by
+  letI : (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ V.hom).IsContinuous
+      Z.smallEtaleTopology V.left.smallEtaleTopology :=
+    Etale.isContinuous_overPullback V.hom
+  exact normalizationPullbackIso Z.smallEtaleTopology
+    (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ V.hom)
+    V.left.smallEtaleTopology q
+
+
+set_option synthInstance.maxSize 2048 in
+private theorem etaleNormalizationScalarMate_isIso (Z : Scheme.{u})
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S) (V : Z.Etale) :
+    IsIso (((mateEquiv
+      (ProEtale.scalarDerivedAdjunctionData Z.smallEtaleTopology q).adjunction
+      (ProEtale.scalarDerivedAdjunctionData V.left.smallEtaleTopology q).adjunction).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
+        (normalizationEtaleCoefficientIso Z q V)).hom)).natTrans) := by
+  let c := normalizationEtaleCoefficientIso Z q V
+  have hOrd : IsIso (((mateEquiv
+      (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
+      (ProEtale.scalarAdjunction V.left.smallEtaleTopology q)).symm
+      (TwoSquare.mk _ _ _ _ c.hom)).natTrans) := by
+    let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ V.hom
+    have : F.IsContinuous Z.smallEtaleTopology V.left.smallEtaleTopology :=
+      Etale.isContinuous_overPullback V.hom
+    let aR := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      F (ModuleCat.{u + 1} R) Z.smallEtaleTopology V.left.smallEtaleTopology
+    let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      F (ModuleCat.{u + 1} S) Z.smallEtaleTopology V.left.smallEtaleTopology
+    apply ProEtale.isIso_left_mate_of_iterated
+      (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
+      (ProEtale.scalarAdjunction V.left.smallEtaleTopology q) aR aS
+    let γ := TwoSquare.mk
+      (F.sheafPushforwardContinuous (ModuleCat.{u + 1} S)
+        Z.smallEtaleTopology V.left.smallEtaleTopology)
+      (Sheaf.restrictScalars V.left.smallEtaleTopology q)
+      (Sheaf.restrictScalars Z.smallEtaleTopology q)
+      (F.sheafPushforwardContinuous (ModuleCat.{u + 1} R)
+        Z.smallEtaleTopology V.left.smallEtaleTopology) (𝟙 _)
+    change IsIso ((mateEquiv aS aR ((mateEquiv aS aR).symm γ)).natTrans)
+    rw [Equiv.apply_symm_apply]
+    change IsIso (𝟙 _)
+    infer_instance
+  have : IsIso (((mateEquiv
+      (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
+      (ProEtale.scalarAdjunction V.left.smallEtaleTopology q)).symm
+      (TwoSquare.mk _ _ _ _ c.symm.inv)).natTrans) := by
+    simpa only [Iso.symm_inv] using hOrd
+  have h := ProEtale.derived_mate_isIso_of_flat
+    (A := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R))
+    (B := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} S))
+    (C := Sheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} R))
+    (D := Sheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} S))
+    (ProEtale.scalarAdjunction Z.smallEtaleTopology q)
+    (ProEtale.scalarAdjunction V.left.smallEtaleTopology q)
+    (ProEtale.scalarDerivedAdjunctionData Z.smallEtaleTopology q)
+    (ProEtale.scalarDerivedAdjunctionData V.left.smallEtaleTopology q)
+    (Etale.upperStar (ModuleCat.{u + 1} R) V.hom)
+    (Etale.upperStar (ModuleCat.{u + 1} S) V.hom) c.symm
+  have hs : (Functor.mapDerivedCategoryNatIso c.symm).inv =
+      (Functor.mapDerivedCategoryNatIso c).hom := by
+    simpa only [Iso.symm_symm_eq] using
+      (Functor.mapDerivedCategoryNatIso_symm c.symm).symm
+  simpa only [Functor.mapDerivedCategorySquareIso,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
 /-- An initial coefficient arrow stays initial on every etale source.
 
@@ -51,6 +155,11 @@ theorem etaleSourceNormalization_universal (Z : Scheme.{u})
     (V : Z.Etale) :
     Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk
       (etaleIsomorphismNormalizationArrow Z q δ V))) := by
-  sorry
+  have := etaleNormalizationScalarMate_isIso Z q V
+  exact universal_of_isIso_scalarMate
+    (ProEtale.scalarDerivedAdjunctionData Z.smallEtaleTopology q).adjunction
+    (ProEtale.scalarDerivedAdjunctionData V.left.smallEtaleTopology q).adjunction
+    (Functor.mapDerivedCategorySquareIso
+      (normalizationEtaleCoefficientIso Z q V)).hom δ h.some
 
 end AlgebraicGeometry.Scheme
