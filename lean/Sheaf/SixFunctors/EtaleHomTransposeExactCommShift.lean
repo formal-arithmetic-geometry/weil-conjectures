@@ -5,6 +5,7 @@ module
 
 public import Sheaf.SixFunctors.EtaleHomComparisonModels
 public import Sheaf.SixFunctors.EtaleHomTransposeExactShiftData
+import Sheaf.SixFunctors.EtaleHomTransposeExactCommShiftCore
 
 @[expose] public section
 set_option autoImplicit false
@@ -12,6 +13,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
+
+set_option linter.style.haveILetI false
 
 /-- Evaluation transposes commute with the normalized opposite shifts.
 Source: Stacks Project, Tags 08JC and 08J9; blueprint
@@ -36,6 +39,11 @@ theorem etaleHomComparison_reversedExact_commShift
       ((scalarExtension φ X).obj M) sB) :
     letI := etaleHomScalarCommShift X φ
     NatTrans.CommShift v ℤ := by
-  sorry
+  letI := _chiPhi
+  letI := _chiPsi
+  apply NatTrans.CommShift.of_core
+  intro n
+  exact etaleHomComparison_reversedExact_commShift_core X φ M v hv sA sB
+    _chiPhi _chiPsi hA hB n
 
 end AlgebraicGeometry.Etale
