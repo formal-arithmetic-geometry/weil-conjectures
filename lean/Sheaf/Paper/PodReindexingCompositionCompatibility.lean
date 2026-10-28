@@ -6,6 +6,9 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.Paper.PodCompletionReindexCoherence
+import Sheaf.Paper.PodReindexingCompositionReduction
+import Sheaf.Paper.PodReindexingCompositionLimit
+import Sheaf.Paper.PodReindexingCompositionTensor
 
 /-! # Compatibility of normalized ordinary reindexing
 
@@ -84,6 +87,11 @@ theorem podReindexingCompositionCompatibility
       ((A.composition h f).hom.app M).val.app (op U) x =
         M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)
           (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x) :
-    A.Composition l E := by sorry
+    A.Composition l E := by
+  have hlimit := @podReindexingCompositionLimit l _ E _ _ _ A hcompletion hcomposition
+  have hred := @podReindexingCompositionReduction l _ E _ _ _ A hcompletion hlimit
+  intro V W Z h f _ _ _ _ _
+  exact ⟨hred h f, hlimit h f,
+    podReindexingCompositionTensor l E A hcompletion htensor hcomposition h f⟩
 
 end WeilConjectures

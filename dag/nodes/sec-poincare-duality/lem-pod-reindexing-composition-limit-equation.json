@@ -1,0 +1,129 @@
+{
+ "id": "lem-pod-reindexing-composition-limit-equation",
+ "kind": "statement",
+ "title": "Total-limit equation for section-normalized reindexing composition",
+ "statement": "Fix a prime l and a finite extension E of Q_l in universe u. Let A be a PodReindexFamily l E [def-pod-completion-reindex-coherence]. Write L_W for (podReindexCalculus l E W).reduction, R_W for coefficientSequenceLimit l E W, F_f for podOrdinaryReindex l E f, and P_f for integralComparisonDerivedSequencePullback l E f. Write alpha_f and beta_f for (A.completion f).reduction and .limit, kappa_(h,f) for A.compositionDerived l E h f, and sigma_(h,f) for integralComparisonSystemComposition l E h f [def-trf-integral-comparison-sequence-systems]. Assume PodCompletionReindex.Laws l E f (A.completion f) for every scheme isomorphism between schemes on which l is invertible [def-pod-completion-reindex-models]. Assume A.composition h f acts on every original local section by restriction along the inverse component of MorphismProperty.Over.mapComp h f. Then for every composable h:Z→W, f:W→V of such isomorphisms and every ambient system N in coefficientSequenceDerived l E V, kappa_(h,f)(R_V N) ≫ F_h(beta_f(N)) ≫ beta_h(P_f N) = beta_(h≫f)(N) ≫ R_Z(sigma_(h,f)(N)). No tensor, reduction-composition, identity-composition or completeness assumption is added.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-coherence",
+  "def-pod-completion-reindex-models",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Represent the ambient system by a strict complex C. RestrictedGenerators pins the restricted-tower maps on all original sections to the actual adjunction-unit arrows. The normalized ordinary compositor and the unit normalization of the strict sequence compositor identify the two successive restricted maps with the composite map, including their tower transitions.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-coherence",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the corresponding product maps after every projection: the two paths are the same restrictions along Over.mapComp. RoosFst and RoosSnd give equality of both coordinates, hence of the entire mapping-cocone chain maps. The intermediate Roos models agree on simultaneous K-injectives by their computes formulas; naturality gives their agreement on C. Substitute LimitModel, cancel model isomorphisms, and localize the whole chain-map identity. Natural localization factors give precisely the specified ordinary and system compositors. Transport along a representative isomorphism to every derived system.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coherence",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "identity and composition laws for normalized sheaf reindexing derived completion and completed tensor",
+   "results": "8 hits. LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.sheafToPresheaf_μ, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalLightCondSetLightCondModFree, SheafOfModules.mapFree, LightCondensed.instMonoidalCategoryLightCondMod",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical infrastructure only; no exact normalized whole-system composition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "podReindexingComposition|PodReindexFamily.*Composition",
+   "results": "0 hits. ",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical infrastructure only; no exact normalized whole-system composition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits. CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical infrastructure only; no exact normalized whole-system composition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|unit_mateEquiv|homEquiv_unit",
+   "results": "25 hits. Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical infrastructure only; no exact normalized whole-system composition theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompositionCompatibility",
+  "date": "2026-10-28",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport.",
+   "via": [
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence",
+    "lem-pod-reindexing-composition-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingCompositionLimit",
+  "file": "lean/Sheaf/Paper/PodReindexingCompositionLimit.lean",
+  "declaration": "WeilConjectures.podReindexingCompositionLimit",
+  "statement": "theorem podReindexingCompositionLimit\n    (A : PodReindexFamily l E)\n    (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]\n      [∀ v : V, Invertible (l : V.residueField v)]\n      [∀ w : W, Invertible (l : W.residueField w)],\n      PodCompletionReindex.Laws l E f (A.completion f))\n    (hcomposition : ∀ {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)\n      [IsIso h] [IsIso f] (M : scalarReductionSource l E V) (U : Z.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ f)).obj U))),\n      ((A.composition h f).hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)\n          (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x) :\n    ∀ {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]\n      [∀ v : V, Invertible (l : V.residueField v)]\n      [∀ w : W, Invertible (l : W.residueField w)]\n      [∀ z : Z, Invertible (l : Z.residueField z)],\n      ∀ N : coefficientSequenceDerived l E V,\n        (A.compositionDerived l E h f).hom.app ((coefficientSequenceLimit l E V).obj N) ≫\n          (podOrdinaryReindex l E h).map ((A.completion f).limit.hom.app N) ≫\n          (A.completion h).limit.hom.app ((integralComparisonDerivedSequencePullback l E f).obj N) =\n        (A.completion (h ≫ f)).limit.hom.app N ≫\n          (coefficientSequenceLimit l E Z).map\n            ((integralComparisonSystemComposition l E h f).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T034919-L-3568695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T034919-L-3568695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
