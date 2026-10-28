@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoordinateTraceData
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+import Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoutePrecomp
 /-! The left coordinate route is the canonical Kunneth map after composition. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,5 +33,20 @@ theorem coordinateKunneth_leftRoute_comp_kunneth
       kunnethMap (ModuleCat.{u + 1} A) (pullback.fst f f) (pullback.snd f f)
         f f (pullback.fst f f ≫ f) rfl (pullback.condition (f := f) (g := f)).symm
         M ((pull A f).obj L) := by
-  sorry
+  rw [kunnethMap_eq]
+  conv_rhs => rw [← Category.assoc]
+  change _ ≫ (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A)
+      (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app
+      (tensor A (pullback f f) ((pull A (pullback.fst f f)).obj M)
+        ((pull A (pullback.snd f f)).obj ((pull A f).obj L))) = _ ≫
+    (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A)
+      (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app
+      (tensor A (pullback f f) ((pull A (pullback.fst f f)).obj M)
+        ((pull A (pullback.snd f f)).obj ((pull A f).obj L)))
+  exact (cancel_mono
+    ((rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A)
+      (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app
+      (tensor A (pullback f f) ((pull A (pullback.fst f f)).obj M)
+        ((pull A (pullback.snd f f)).obj ((pull A f).obj L))))).2
+    (coordinateKunneth_leftRoute_precomp A f L M)
 end AlgebraicGeometry.Etale.CoordinateTrace
