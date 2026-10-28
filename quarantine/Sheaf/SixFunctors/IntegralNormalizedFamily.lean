@@ -158,7 +158,10 @@ theorem integralNormalizedFamily_exists
     (fun _ _ _ _ _ _ _ _ _ hh ↦ selectEquation hh) ?_
   intro δ hlimit
   exact (diagonalTower_coefficients ℓ k (ringChar k)
-    (Fact.out : ringChar k ≠ ℓ) Y hY D hcompletion hsystem δ hlimit).imp
+    (Fact.out : ringChar k ≠ ℓ) Y hY D hcompletion hsystem δ (by
+      unfold DiagonalTrace.IsDiagonalLimit DiagonalTrace.FiniteCartierNormalization
+        DiagonalTrace.FiniteRootNormalization DiagonalTrace.finiteCartierClass
+      exact hlimit)).imp
       (fun family hfamily ↦ ⟨hY, aY, aP, aW, δ, hfamily.1⟩)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

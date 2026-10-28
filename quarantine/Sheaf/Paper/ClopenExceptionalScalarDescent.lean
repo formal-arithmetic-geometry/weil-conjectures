@@ -57,6 +57,11 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting
 
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
+
 section Strict
 variable {O O' : Type (u + 1)} [CommRing O] [CommRing O']
   {ell : O} {mu : O'} {phi : O →+* O'} {index : ℕ →o ℕ}
