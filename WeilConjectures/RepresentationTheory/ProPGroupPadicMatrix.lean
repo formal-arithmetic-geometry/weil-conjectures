@@ -61,7 +61,7 @@ theorem isOpen_setOf_pow_dvd (k : ℕ) : IsOpen {x : ℤ_[ℓ] | (ℓ : ℤ_[ℓ
     (Fact.out : ℓ.Prime).ne_zero))
 
 /-- The set of matrices congruent to `1` modulo `ℓ ^ k` entrywise is open. -/
-theorem isOpen_setOf_matrix_sub_one_pow_dvd (n : Type*) [Fintype n] [DecidableEq n] (k : ℕ) :
+theorem isOpen_setOf_matrix_sub_one_pow_dvd (n : Type*) [Finite n] [DecidableEq n] (k : ℕ) :
     IsOpen {M : Matrix n n ℤ_[ℓ] | ∀ i j, (ℓ : ℤ_[ℓ]) ^ k ∣ (M - 1) i j} := by
   simp only [Set.ofPred_forall]
   refine isOpen_iInter_of_finite fun i ↦ isOpen_iInter_of_finite fun j ↦ ?_
