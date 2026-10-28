@@ -2,7 +2,7 @@
  "id": "lem-sf-common-projection-open-pullback-tensor-forward",
  "kind": "statement",
  "title": "Common-stage inclusion preserves the forward open pullback/tensor square",
- "statement": "For the same data as lem-sf-common-projection-open-pullback-tensor, the forward square commutes: inclusion maps the rational open tensor/pullback comparison, then the common tensorator and the common pullback, equal the coefficient pullback comparison, then the common tensorator at the pullback and the common open tensor/pullback comparison. The exact Lean endpoints are the statement of commonProjectionOpenPullbackTensor_forward.",
+ "statement": "For the same data as lem-sf-common-projection-open-pullback-tensor, assume the displayed forward representative compatibility equation for the chosen maps mu and mu'. Then the forward square commutes. The exact Lean endpoints are the statement of commonProjectionOpenPullbackTensor_forward.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
   "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
@@ -14,24 +14,16 @@
  ],
  "proof": [
   {
-   "text": "This is the forward representative equation for the inverse square. It is obtained by evaluating the canonical common-stage pullback/tensor representative formula at the included pair and substituting the rational and common normalization equalities. The remaining transition maps cancel by naturality and the scalar unit.",
-   "uses": [
-    "def-sf-operation-stages",
-    "def-sf-common-projection-tensor-comparison",
-    "def-pur-completed-pullback-tensor-comparison"
-   ],
-   "elementary": false
+   "text": "The conclusion is the premise: introduce the displayed compatibility equation and return it (intro h; exact h). The concrete equation for the common-stage open square is supplied by the caller.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-sf-operation-stages",
-  "def-sf-common-projection-tensor-comparison",
-  "def-pur-completed-pullback-tensor-comparison"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "agent B3",
+  "by": "agent S3",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
-  "place": "Compatibility paragraph; forward tensor/pullback representative equation."
+  "place": "Compatibility paragraph; the repaired forward lemma returns its explicit compatibility premise."
  },
  "mathlib_searches": [
   {
@@ -67,7 +59,7 @@
   "declarations": [
    "WeilConjectures.commonProjectionOpenPullbackTensor_forward"
   ],
-  "statement": "theorem commonProjectionOpenPullbackTensor_forward\n    {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]\n    {A' : Type v} [Category.{w} A'] {B' : Type v'} [Category.{w'} B']\n    {F : A ⥤ B} {F' : A' ⥤ B'} {c : A ⥤ A'} {d : B ⥤ B'}\n    (e : F ⋙ d ≅ c ⋙ F')\n    (TA : A × A ⥤ A) (TB : B × B ⥤ B)\n    (TA' : A' × A' ⥤ A') (TB' : B' × B' ⥤ B')\n    (tA : TA ⋙ c ≅ c.prod c ⋙ TA')\n    (tB : TB ⋙ d ≅ d.prod d ⋙ TB')\n    (M N : A) (mu : F.obj (TA.obj (M, N)) ⟶ TB.obj (F.obj M, F.obj N))\n    (mu' : F'.obj (TA'.obj (c.obj M, c.obj N)) ⟶\n      TB'.obj (F'.obj (c.obj M), F'.obj (c.obj N))) :\n    d.map mu ≫ tB.hom.app (F.obj M, F.obj N) ≫\n        TB'.map (Prod.mkHom (e.hom.app M) (e.hom.app N)) =\n      e.hom.app (TA.obj (M, N)) ≫ F'.map (tA.hom.app (M, N)) ≫ mu' ",
+  "statement": "theorem commonProjectionOpenPullbackTensor_forward\n    {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]\n    {A' : Type v} [Category.{w} A'] {B' : Type v'} [Category.{w'} B']\n    {F : A ⥤ B} {F' : A' ⥤ B'} {c : A ⥤ A'} {d : B ⥤ B'}\n    (e : F ⋙ d ≅ c ⋙ F')\n    (TA : A × A ⥤ A) (TB : B × B ⥤ B)\n    (TA' : A' × A' ⥤ A') (TB' : B' × B' ⥤ B')\n    (tA : TA ⋙ c ≅ c.prod c ⋙ TA')\n    (tB : TB ⋙ d ≅ d.prod d ⋙ TB')\n    (M N : A) (mu : F.obj (TA.obj (M, N)) ⟶ TB.obj (F.obj M, F.obj N))\n    (mu' : F'.obj (TA'.obj (c.obj M, c.obj N)) ⟶\n      TB'.obj (F'.obj (c.obj M), F'.obj (c.obj N))) :\n    d.map mu ≫ tB.hom.app (F.obj M, F.obj N) ≫\n        TB'.map (Prod.mkHom (e.hom.app M) (e.hom.app N)) =\n      e.hom.app (TA.obj (M, N)) ≫ F'.map (tA.hom.app (M, N)) ≫ mu' →\n    d.map mu ≫ tB.hom.app (F.obj M, F.obj N) ≫\n        TB'.map (Prod.mkHom (e.hom.app M) (e.hom.app N)) =\n      e.hom.app (TA.obj (M, N)) ≫ F'.map (tA.hom.app (M, N)) ≫ mu' ",
   "branch": "sheaf-dag",
   "by": "B3",
   "date": "2026-10-28"
@@ -101,19 +93,30 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
-  "result": "pass",
-  "landing": "20261027T234259-L-86676",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.commonProjectionOpenPullbackTensor_forward"
-  ],
-  "sorry_after": [
-   "WeilConjectures.commonProjectionOpenPullbackTensor_forward"
+  "reviewer": "C-ad64b",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261028T020732-L-2542850",
+  "kind": "interface",
+  "note": "independent cc review: forward lemma (repaired P→P, false original via arbitrary mu/mu') + parent adaptation + new compatibility sorry against nodes, change record, SixFunctorOperationDatumStages normalization fields and sibling CommonProjectionPullbackTensorCompatibility"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "S3 stage 2",
+  "old_statement": "For the same data as lem-sf-common-projection-open-pullback-tensor, the forward square commutes: inclusion maps the rational open tensor/pullback comparison, then the common tensorator and the common pullback, equal the coefficient pullback comparison, then the common tensorator at the pullback and the common open tensor/pullback comparison. The exact Lean endpoints are the statement of commonProjectionOpenPullbackTensor_forward.",
+  "what": "The original statement is false without a compatibility hypothesis. Added the displayed equation as an explicit implication premise; the sole concrete caller already supplies this equation through a split representative-compatibility statement.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+   "place": "Compatibility paragraph; the forward equation is used only after the canonical representative equality is established."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-common-projection-open-pullback-tensor",
+    "holds": true,
+    "note": "The parent now obtains the explicit premise from the new concrete representative-compatibility node before applying the generic transport lemma."
+   }
   ]
  }
 }

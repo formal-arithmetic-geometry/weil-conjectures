@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CommonProjectionTensorComparison
 import Sheaf.Paper.CommonProjectionOpenPullbackTensorForward
+import Sheaf.Paper.CommonProjectionOpenPullbackTensorCompatibility
 
 /-! # Inclusion preserves the open tensor/pullback comparison
 
@@ -146,6 +147,7 @@ theorem commonProjectionOpenPullbackTensor
         (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj M)).app
       ((GeneralAlgebraicallyClosedCoefficients.inclusion
         (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj L)))
+    (hs := ?_)
   exact commonProjectionOpenPullbackTensor_forward
     ((H.commonStageComparison E).directAdjunction Q.i).left
     (Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.Z))
@@ -160,5 +162,6 @@ theorem commonProjectionOpenPullbackTensor
         (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj M)).app
       ((GeneralAlgebraicallyClosedCoefficients.inclusion
         (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj L))
+    (commonProjectionOpenPullbackTensor_forward_compatibility H E Q M L)
 
 end WeilConjectures

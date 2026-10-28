@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-common-projection-open-pullback-tensor-forward-compatibility",
+ "kind": "statement",
+ "title": "Concrete common-stage open pullback/tensor representative compatibility",
+ "statement": "For finite-field data D, coefficient data C, common stages H, finite coefficient field E, compactified square Q, and rational inputs M,N on Q.Z, the inclusion of E satisfies the forward open pullback/tensor representative equation: inclusion maps the rational open tensor/pullback comparison, then the common tensorator and common pullback, equal the common comparison at the rational tensor followed by the common tensorator at the pullback and the common open tensor/pullback comparison. The exact Lean endpoints are the statement of commonProjectionOpenPullbackTensor_forward_compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: evaluate the canonical common-stage pullback/tensor representative at the included pair and cancel the transition maps and scalar unit."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-common-projection-tensor-comparison",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the rational and common tensorators and pullback comparisons. Evaluate the canonical common-stage pullback/tensor representative formula at the finite coefficient field E and the included pair M,N. The scalar unit and transition isomorphisms cancel by naturality, yielding the displayed forward equation.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-common-projection-tensor-comparison",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-common-projection-tensor-comparison",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent S3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility paragraph; finite-stage representative equation for the open tensor/pullback square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "common-stage inclusion open tensor pullback compatibility",
+   "results": "No exact match for the named common-stage coefficient categories or open tensor/pullback maps.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ComparisonCompatible openTensorPullback commonStage",
+   "results": "Only the generic ComparisonCompatible predicate was found; no concrete common-stage open square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "commonProjectionOpenPullbackTensor; canonicalCommonStagePullbackTensor; openTensorPullback",
+   "results": "No existing theorem states the concrete common-stage open tensor/pullback representative equation.",
+   "date": "2026-10-28",
+   "verdict": "New concrete compatibility statement required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionOpenPullbackTensorForward",
+  "date": "2026-10-28",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-open-pullback-tensor",
+   "place": "Forward representative equation used in the inverse-square proof.",
+   "via": [
+    "lem-sf-common-projection-open-pullback-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionOpenPullbackTensorCompatibility",
+  "file": "lean/Sheaf/Paper/CommonProjectionOpenPullbackTensorCompatibility.lean",
+  "declaration": "WeilConjectures.commonProjectionOpenPullbackTensor_forward_compatibility",
+  "declarations": [
+   "WeilConjectures.commonProjectionOpenPullbackTensor_forward_compatibility"
+  ],
+  "statement": "theorem commonProjectionOpenPullbackTensor_forward_compatibility\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C)\n    (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (Q : SixFunctorCompactifiedSquare D)\n    (M N : sfRationalConstructibleCategory C.l\n      (AlgebraicallyClosedCoefficients.Coefficient C.l C.Qbar E) Q.Z.obj.left) :\n    (GeneralAlgebraicallyClosedCoefficients.inclusion\n        (l := C.l) (Ω := C.Qbar) (Y := Q.X.obj.left) E).map\n        (((H.coefficientStages E).rationalExchange Q).openTensorPullback.hom.app M |>.app N) ≫\n      (commonProjectionTensorComparison H E Q.X).hom.app\n        ((H.coefficientStages E).rational.pull Q.i |>.obj M,\n          (H.coefficientStages E).rational.pull Q.i |>.obj N) ≫\n      (Functor.uncurry.obj (H.commonStageTensor Q.X)).map\n        (Prod.mkHom\n          (((H.commonStageComparison E).directAdjunction Q.i).left.hom.app M)\n          (((H.commonStageComparison E).directAdjunction Q.i).left.hom.app N)) =\n    (((H.commonStageComparison E).directAdjunction Q.i).left.hom.app\n      ((Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.Z)).obj (M, N))) ≫\n      (H.commonStage.pull Q.i).map\n        ((commonProjectionTensorComparison H E Q.Z).hom.app (M, N)) ≫\n      (((H.commonStageExchange Q).openTensorPullback.hom.app\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj M)).app\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj N))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ad64b",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261028T020732-L-2542850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-ad64b",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261028T020732-L-2542850",
+  "kind": "interface",
+  "note": "independent cc review: forward lemma (repaired P→P, false original via arbitrary mu/mu') + parent adaptation + new compatibility sorry against nodes, change record, SixFunctorOperationDatumStages normalization fields and sibling CommonProjectionPullbackTensorCompatibility"
+ }
+}
