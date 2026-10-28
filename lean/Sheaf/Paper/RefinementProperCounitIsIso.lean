@@ -1,11 +1,6 @@
 module
 
 public import Sheaf.Paper.RefinementOpenRestrictionData
-import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
-import Sheaf.AlgebraicGeometry.ProEtaleOpenPullbackKInjective
-import Sheaf.AlgebraicGeometry.ProEtaleIdentifiedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-! Isomorphism of the proper counit after restriction to the distinguished open. -/
 
@@ -15,6 +10,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.PurCompactSupport
+
 
 variable (R : Coefficients.{u})
   {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
