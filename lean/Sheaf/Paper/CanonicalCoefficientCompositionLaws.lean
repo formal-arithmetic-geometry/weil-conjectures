@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CanonicalCoefficientReduction
+import Sheaf.Paper.CanonicalCoefficientRepresentativeLaws
+import Sheaf.Paper.CoefficientNormalizedTensorAssociativity
+import all Sheaf.Paper.CoefficientNormalizedInternalHomFibers
+import all Sheaf.Algebra.Homology.RingedHomCompositionModel
+import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import all Sheaf.CategoryTheory.RingedSiteDualityMaps
 
 /-! # Internal composition for normalized coefficient tensor presentations
 
@@ -16,7 +22,7 @@ Source: Stacks 0A98, 08JD and 0941.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe a b v w t u
+universe a b v w t u c r
 open CategoryTheory Opposite AlgebraicGeometry
 namespace WeilConjectures.CanonicalCoefficient
 
@@ -32,6 +38,86 @@ def CompositionLaw {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
           (Prod.mkHom (coefficientBaseChangeHom SA SB F μ Q V)
             (coefficientBaseChangeHom SA SB F μ P Q)) ≫
         SB.composition (F.obj P) (F.obj Q) (F.obj V)
+
+section ModelUniqueness
+open CategoryTheory.Limits
+attribute [local instance 4000] HomologicalComplex.monoidalCategory
+attribute [local instance 1000001] RingedDerivedNative.cachedCompose
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+attribute [local instance 2000] SheafOfModules.cochainModulesMonoidal
+  SheafOfModules.cochainModulesSymmetric
+attribute [local irreducible] RingedDerivedNative.chainEquiv
+
+private theorem tensorModels_unique
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{max c v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+    (R : Sheaf J CommRingCat.{max c v r})
+    [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
+    (T U : CoefficientTensorModels.{r, c, v, w} J R S) : T = U := by
+  let : HasLimitsOfSize.{0, 0} (RingedTensorModules.{c, v, r} J R) :=
+    RingedDerivedNative.baseLimits.{c, v, r} J R
+  let : HasColimitsOfSize.{0, 0} (RingedTensorModules.{c, v, r} J R) :=
+    RingedDerivedNative.baseColimits.{c, v, r} J R
+  let : ∀ (X Y : GradedObject ℤ (RingedTensorModules.{c, v, r} J R)), X.HasTensor Y :=
+    RingedDerivedNative.gradedTensor.{c, v, r} J R
+  let : ∀ (W X Y Z : GradedObject ℤ (RingedTensorModules.{c, v, r} J R)),
+      GradedObject.HasTensor₄ObjExt W X Y Z :=
+    RingedDerivedNative.gradedTensorFour.{c, v, r} J R
+  let : ∀ (X Y Z : GradedObject ℤ (RingedTensorModules.{c, v, r} J R)),
+      GradedObject.HasGoodTensor₁₂Tensor X Y Z :=
+    RingedDerivedNative.gradedTensorLeft.{c, v, r} J R
+  let : ∀ (X Y Z : GradedObject ℤ (RingedTensorModules.{c, v, r} J R)),
+      GradedObject.HasGoodTensorTensor₂₃ X Y Z :=
+    RingedDerivedNative.gradedTensorRight.{c, v, r} J R
+  have he : T.comparison = U.comparison := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext X
+    rcases X with ⟨⟨P, hP⟩, ⟨L, hL⟩⟩
+    -- Currying the tensor identity pins down the inverse of each model comparison.
+    let M := (coefficientTotalTensor.{r, c, v} J R).obj (P, L)
+    let φ := (RingedDerivedNative.chainEquiv.{c, v, r} J R P L M) (𝟙 M)
+    have hT := HomCompositionProof.normalized_uncurry.{c, v, r, w} J R S T
+      P L M hP hL φ
+    have hU := HomCompositionProof.normalized_uncurry.{c, v, r, w} J R S U
+      P L M hP hL φ
+    simp only [φ, Equiv.symm_apply_apply] at hT hU
+    rw [CategoryTheory.Functor.map_id] at hT hU
+    let z := (S.transpose (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L)
+      (DerivedCategory.Q.obj M)).symm
+        (DerivedCategory.Q.map φ ≫ ringedHomRepresentativeMap.{c, v, r, w} J R L M)
+    change (T.iso J R S P L hP hL).hom ≫ z = 𝟙 _ at hT
+    change (U.iso J R S P L hP hL).hom ≫ z = 𝟙 _ at hU
+    have hz : z = (T.iso J R S P L hP hL).inv := by
+      apply (cancel_epi (T.iso J R S P L hP hL).hom).mp
+      exact hT.trans (T.iso J R S P L hP hL).hom_inv_id.symm
+    change (T.iso J R S P L hP hL).hom = (U.iso J R S P L hP hL).hom
+    apply (cancel_mono (T.iso J R S P L hP hL).inv).mp
+    rw [hz] at hU
+    exact (T.iso J R S P L hP hL).hom_inv_id.trans hU.symm
+  cases T
+  cases U
+  cases he
+  rfl
+
+private theorem tensorModels_coherence
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{max c v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+    (R : Sheaf J CommRingCat.{max c v r})
+    [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
+    (M : RingedSiteDualityModel.{c, v, r, w} J R)
+    (T : CoefficientTensorModels.{r, c, v, w} J R M.closed) :
+    ∃ β : @SymmetricCategory _ _ M.closed.monoidal,
+      Nonempty (RingedDerivedTensorCoherence.{c, v, r, w} J R M.closed T β) := by
+  -- Equal comparison maps retain all normalized associator and unitor equations.
+  rw [tensorModels_unique J R M.closed T M.models]
+  obtain ⟨K, _⟩ := ringedSiteTensorCoherence J R M
+  exact ⟨M.symmetric, ⟨K⟩⟩
+
+end ModelUniqueness
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
@@ -62,6 +148,33 @@ theorem compositionLaws (S : CoefficientDerivedSystemFibers l E W) :
     let R := reduction l E W S.toCoefficientDerivedSystemReduction
     CompositionLaw R.integralClosed R.systemClosed R.reduction R.reductionTensor ∧
       ∀ n : ℕ, CompositionLaw R.integralClosed (R.finiteClosed n)
-        (coefficientFiniteDerivedExtension l E W n) (R.finiteTensor n) := by sorry
+        (coefficientFiniteDerivedExtension l E W n) (R.finiteTensor n) := by
+  classical
+  let R := reduction l E W S.toCoefficientDerivedSystemReduction
+  have hT : CoefficientDerivedSystemTensorCoherence l E W
+      R.toCoefficientDerivedSystemTensors := by
+    refine ⟨?_, ?_, ?_⟩
+    · exact tensorModels_coherence (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)
+        (IntegralOnSlice.duality l E W none) R.integralTensorModel
+    · exact tensorModels_coherence
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        (coefficientSequenceCommRingSheaf l E W)
+        (Classical.choice (ringedSiteDualityMaps_exists.{t+1, t, u,
+          (max u (t+1))+1} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W))) R.systemTensorModel
+    · intro n
+      exact tensorModels_coherence (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (Classical.choice (ringedSiteDualityMaps_exists.{t+1, t, u,
+          (max u (t+1))+1} (Scheme.ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n))) (R.finiteTensorModel n)
+  have hRep := representativeLaws l E W S
+  obtain ⟨ha, hf⟩ := coefficientNormalizedTensorAssociativity l E W R hT
+    hRep.reduction_tensor hRep.finite_tensor
+  exact ⟨baseChange_composition R.integralClosed R.systemClosed R.reduction
+      R.reductionTensor ha,
+    fun n ↦ baseChange_composition R.integralClosed (R.finiteClosed n)
+      (coefficientFiniteDerivedExtension l E W n) (R.finiteTensor n) (hf n)⟩
 
 end WeilConjectures.CanonicalCoefficient
