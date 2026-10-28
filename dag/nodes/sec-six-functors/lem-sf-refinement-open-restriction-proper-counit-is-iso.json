@@ -13,8 +13,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "R1",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B and 0F7I; clopen distinguished-section calculation."
+  "place": "Tags 0F7B and 0F7I, clopen distinguished-section calculation; implemented using the existing normalized ringed open exchange and reverse clopen adjunction."
  },
  "mathlib_searches": [
   {
@@ -43,23 +45,50 @@
  },
  "proof": [
   {
-   "text": "Form the refinement fibre product over d.Z. The pullback of the c.i-extension by the first projection is extension by zero from the clopen distinguished section induced by c.i. The open restriction counit identifies restriction of the proper direct image with the direct image of this section restriction, and the identified open-closed calculation makes the latter counit invertible. Transport this ordinary counit through the exact K-injective-preserving open pullback and the derived pullback composition comparison.",
+   "text": "Form W = c.Z ×[d.Z] X with projections g and p and section s = (c.i, id). The equations s ≫ g = c.i and s ≫ p = id make s open, and separatedness of the proper projection p makes s closed. Choose RW = g inverse(R.ring c.Z). Complete the given coefficient identifications along the two triangles using inverse-image composition; this supplies cs along s and cp along p, with a coherent ringed Cartesian square. No coherence assumption on R is added.",
    "uses": [
-    "lem-sfb-proetale-open-restriction-counit",
-    "lem-sf-proetale-open-pullback-preserves-kinjective",
-    "lem-sfb-proetale-identified-open-closed",
-    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-compactifications-refinements",
     "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open slice presentation and subterminality make the derived open-extension units for g and s invertible. The general identified-ring ordinaryClopenReverse lemma in IntegralRingedClopenComparison supplies pull(s) left adjoint to extension(s); exact localization gives the reverse derived adjunction. Uniqueness of left adjoints and pull(c.i) ≅ pull(g) ⋙ pull(s) identify pull(g) of the c.i-extension with extension(s).",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation",
+    "lem-sf-integral-ringed-clopen-comparison",
+    "def-weil-exact-derived-adjunction",
+    "lemma-weil-pbc-projection-formula-compactified",
+    "lemma-weil-pbc-projection-formula-open-piece"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite pull(p) ⋙ pull(s) is an equivalence: pullback composition identifies it with pullback along s ≫ p = id with an arbitrary coefficient isomorphism. The isomorphism-of-sites and scalar module equivalences prove that this identity pullback is an equivalence even when its coefficient isomorphism is not the canonical identity. The counit of the composite of the p-adjunction and the reverse s-adjunction is invertible. Its factorization, and full faithfulness of extension(s), imply invertibility of pull(s) applied to the p-counit at every s-extended object.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply open_comparison to the coherent ringed Cartesian square. Its derived mate is invertible. The mate-counit identity expresses the restriction along g of the r.hom-counit, composed with the invertible pullback-square comparison, as pull(p) of this mate followed by the p-counit. Apply pull(s), use the preceding supported-object calculation, cancel the comparison, and transport through pull(c.i) ≅ pull(g) ⋙ pull(s). This proves exactly the specified restricted r.hom-counit invertible. The categorical calculation is the proved private restrictionCounit lemma, with no remaining assumptions or holes.",
+   "uses": [
+    "lem-sf-ringed-restriction-exchange-open-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-proetale-open-restriction-counit",
-  "lem-sf-proetale-open-pullback-preserves-kinjective",
-  "lem-sfb-proetale-identified-open-closed",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
+  "def-weil-compactifications-refinements",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sp-proetale-open-slice-presentation",
+  "lem-sf-integral-ringed-clopen-comparison",
+  "def-weil-exact-derived-adjunction",
+  "lemma-weil-pbc-projection-formula-compactified",
+  "lemma-weil-pbc-projection-formula-open-piece",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-sf-ringed-restriction-exchange-open-descent"
  ],
  "lean": {
   "existing": false,
@@ -86,19 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261028T020342-L-2498760",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.PurCompactSupport.refinementProperCounit_isIso",
-   "WeilConjectures.PurCompactSupport.refinementRestriction_factorization"
-  ],
-  "sorry_after": [
-   "WeilConjectures.PurCompactSupport.refinementProperCounit_isIso",
-   "WeilConjectures.PurCompactSupport.refinementRestriction_factorization"
-  ]
+  "landing": "20261028T034922-L-3569168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
