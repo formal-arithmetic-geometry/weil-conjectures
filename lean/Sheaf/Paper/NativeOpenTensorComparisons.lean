@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.NativeOpenTensorComparisonData
+import Sheaf.Paper.NativeOpenTensorRestrictionDescent
+import Sheaf.Paper.NativeOpenTensorProjectionDescent
 
 /-! # Native open tensor derived comparisons
 
@@ -42,6 +44,8 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
+-- Preserve the original names of the existential witnesses in the statement.
+set_option linter.unusedVariables false in
 /-- The native derived restriction and open tensor comparisons exist.
 
 Source: Stacks 0GL1 and 06YN, localization of the chain comparisons in the
@@ -54,6 +58,8 @@ theorem native_open_tensor_comparisons (s : NativeOpenTensorData k₀ l j) :
     ∃ (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
         (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)
       (gamma : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j), True := by
-  sorry
+  obtain ⟨rho⟩ := native_open_tensor_restriction_comparison k₀ l j s
+  obtain ⟨gamma⟩ := native_open_tensor_projection_comparison k₀ l j s
+  exact ⟨rho, gamma, trivial⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

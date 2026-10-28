@@ -1,0 +1,106 @@
+{
+ "id": "new-sf-native-open-tensor-chains",
+ "kind": "statement",
+ "title": "Natural native open tensor comparisons on cochain complexes",
+ "statement": "For a native open tensor datum s, termwise restriction commutes naturally with the left-first total tensor of any two unbounded native cochain complexes. The total tensor of termwise extension by zero of a U-complex with a Z-complex is naturally isomorphic to termwise extension by zero of the total tensor of the U-complex with the restriction of the Z-complex. These statements concern the actual cochain functors, before localization.",
+ "stmt_deps": [
+  "def-sf-native-derived-tensor-layer",
+  "def-sf-native-open-tensor-operations",
+  "def-sf-native-open-tensor-presentation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product; lemma-j-shriek-and-tensor; totalization of the sheaf comparisons"
+ },
+ "proof": [
+  {
+   "text": "Apply the separately totalized restriction and projection comparisons and combine the two natural isomorphisms.",
+   "uses": [
+    "new-sf-native-open-tensor-chain-restriction",
+    "new-sf-native-open-tensor-chain-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-sf-native-open-tensor-chain-restriction",
+  "new-sf-native-open-tensor-chain-projection"
+ ],
+ "proof_origin": {
+  "by": "A7 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native open tensor proof steps 3--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphisms for derived tensor preserved by exact functor via K-flat complexes",
+   "results": "Found exact functor derived-category factorization APIs; no native open tensor comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use existing factorization and total-complex APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparison",
+   "results": "No Mathlib identifier; the project extends the Mathlib bifunctor construction with this declaration.",
+   "date": "2026-10-28",
+   "verdict": "Use the project extension."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|fullyFaithfulWhiskeringLeft",
+   "results": "Found WeilConjectures.Mathlib.Algebra.Homology.Bifunctor and the Mathlib localization universal property.",
+   "date": "2026-10-28",
+   "verdict": "Totalize with mapBifunctorComparison and its naturality theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorComparisons",
+  "date": "2026-10-28",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sf-native-open-tensor-comparisons",
+   "place": "Totalizing the sheaf comparison, before K-flat localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorChains",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorChains.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_tensor_chains",
+  "statement": "theorem native_open_tensor_chains (s : NativeOpenTensorData k₀ l j) :\n    ∃ (_r : Functor.uncurry.obj (nativeTensorTotal k₀ l Z) ⋙\n          (upperStar k₀ l j).mapHomologicalComplex (.up ℤ) ≅\n        ((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)).prod\n          ((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)) ⋙\n            Functor.uncurry.obj (nativeTensorTotal k₀ l U))\n      (_g : ((extensionByZero k₀ l j).mapHomologicalComplex (.up ℤ)).prod (𝟭 _) ⋙\n          Functor.uncurry.obj (nativeTensorTotal k₀ l Z) ≅\n        (𝟭 _).prod ((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)) ⋙\n          Functor.uncurry.obj (nativeTensorTotal k₀ l U) ⋙\n            (extensionByZero k₀ l j).mapHomologicalComplex (.up ℤ)), True",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261028T072336-L-1935162",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261028T072336-L-1935162",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
