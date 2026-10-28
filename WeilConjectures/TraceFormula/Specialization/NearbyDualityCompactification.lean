@@ -11,6 +11,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityFiniteSupport
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseInduction
+public import WeilConjectures.TraceFormula.Specialization.GenericBaseMeasureSlice
 
 /-!
 
@@ -125,31 +127,14 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k 
 of the trait model `M` over the base are proper, then the duality map `δ_{M,K}` is an isomorphism
 away from finitely many closed points of the special fibre.
 
-Unfinished. By `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap` (local charts,
-closed-point detection by coordinates), it suffices that the duality map of every restriction
-`M|_V` becomes an isomorphism on the special fibre of the generic slice
-`(𝒳_V ×_{𝔸¹_S} Spec K⟦t⟧)_s` of every coordinate (blueprint `det-tf-nearby-duality-slice` and the
-dimension induction). That step identifies the restriction of `δ_{M,K}` with the `P`-invariants of
-the duality map of the slice, `P` the pro-`p` kernel of the map of inertia groups of the strict
-localization of `𝔸¹_S` at a generic point of its special fibre, twisted by `ℚ̄_ℓ(1)[2]`. It needs
-the invariance of nearby cycles under change of trait and the inertia action on nearby cycles
-(SGA 4½, [Th. finitude], §3), and dualizing maps `θ` for the slice models, which are not trait
-models over the base (their geometric generic fibres are slices, not opens, of `X ×_k Spec Ω`);
-none of these is formalised. The last step of the slice argument, that the restriction of an
-isomorphism to the two averaging summands is an isomorphism, is
-`CategoryTheory.isIso_comp_comp_map_op_of_averaging`.
-
-The slice models cannot be made trait models over another base field either. The generic fibre
-of the slice along `b` is `{b = x}` inside `𝒳_{Ω_K}`. Its field of definition contains
-`Frac k'⟦t⟧`, because `b` is a function on `𝒳` whose coefficients have poles in `t` on the
-generic fibre (e.g. `y/t` on a deformation to the normal cone). A base field of a trait model
-over `Spec K⟦t⟧` is a subfield of `K⟦t⟧`, so it contains no element of positive valuation. Only
-coordinates pulled back from `X` give slices that are trait models over the base, over
-`k(x)` with fibre `X ×_{𝔸¹_k} Spec k(x)`. Such coordinates do not detect the closed points of a
-special fibre that `𝒳 ⟶ X ×_k S` contracts. The dimension induction therefore needs the
-dualizing maps `θ` and the theorem for models over arbitrary traits `Spec K⟦t⟧` whose generic
-fibre is a finite-type `Ω_K`-scheme. That means redoing the construction of `θ` and its
-characterisation (`NearbyDualizingData`) in that generality. -/
+This follows from Gabber's theorem for trait models over a generic base
+(`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper_of_measure`, with
+`S = ∅`). That theorem is proved by induction on the transcendence-degree measure
+`AlgebraicGeometry.genericBaseMeasure`, which does not increase under dense compactification
+(`genericBaseMeasure_le_of_isOpenImmersion`) and drops under generic slicing
+(`IsTraitModelOfGenericBase.genericBaseMeasure_genericSliceBase_add_one_le`). The slice step is
+`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase` (blueprint
+`det-tf-nearby-duality-slice`). -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
     (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
     [IsProper (toPoint X).left] [IsProper (toPoint X').left] [IsProper q]
@@ -158,7 +143,11 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
     ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (opensOverι (finsetComplOpens S hS))).map (nearbyDualityMap ℓ D h K)) :=
-  sorry
+  exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper_of_measure ℓ genericBaseMeasure
+    (fun j _ hj ↦ genericBaseMeasure_le_of_isOpenImmersion j hj)
+    (fun h _ hb ↦ h.genericBaseMeasure_genericSliceBase_add_one_le hb
+      (transcendental_traitSliceCoord _))
+    D h hgen K
 
 /-- **Gabber's theorem for proper models** (Illusie, *Autour du théorème de monodromie locale*,
 Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`): if `X`, `X'` and the total space of
