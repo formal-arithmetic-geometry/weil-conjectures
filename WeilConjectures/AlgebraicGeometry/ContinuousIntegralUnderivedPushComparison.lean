@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralModuleTelescope
-import all WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 import WeilConjectures.AlgebraicGeometry.CondensedUnderivedPushforwardContinuity
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationLegs
 
@@ -47,15 +47,15 @@ theorem integralScalarUnderivedPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
   let β := (pushHom a f).app M
   let cX := integralModuleLocalizationCocone ℓ E X M
   let cY := integralModuleLocalizationCocone ℓ E Y (G.obj M)
-  let σ := integralLocalizationSequenceMapIso ℓ G M
+  let σ := Mod.smulSequenceCompIso G M ℓ
   let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
   let g : cY.pt ⟶ d.pt := U.map β ≫ κ.hom.app (LX.obj M)
   let J := (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor
   have : IsFiltered (ULift.{u + 1} ℕ) :=
     IsFiltered.of_equivalence (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.symm
-  have : PreservesColimit (J ⋙ integralLocalizationSequence ℓ M) G :=
+  have : PreservesColimit (J ⋙ Mod.smulSequence M ℓ) G :=
     lowerStar_preservesFilteredColimit (integralCoeff ℓ E) f _
-  have : PreservesColimit (integralLocalizationSequence ℓ M) G :=
+  have : PreservesColimit (Mod.smulSequence M ℓ) G :=
     Functor.Final.preservesColimit_of_comp J
   obtain ⟨hcX⟩ := integralModuleLocalization_isColimit ℓ E X M
   obtain ⟨hcY⟩ := integralModuleLocalization_isColimit ℓ E Y (G.obj M)

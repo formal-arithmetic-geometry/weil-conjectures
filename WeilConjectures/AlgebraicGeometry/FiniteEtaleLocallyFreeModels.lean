@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 import WeilConjectures.AlgebraicGeometry.SplitProEtaleModuleProductMap
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 import all WeilConjectures.AlgebraicGeometry.CondensedQbarLfpCoverComposition

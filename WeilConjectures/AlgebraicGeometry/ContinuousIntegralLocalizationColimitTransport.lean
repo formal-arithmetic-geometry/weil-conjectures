@@ -22,14 +22,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 private noncomputable def sequenceComparison
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     (F : A ⥤ B) [F.Additive] (C : A) (K : B) (e : F.obj C ≅ K) :
-    integralLocalizationSequence ℓ C ⋙ F ⟶ integralLocalizationSequence ℓ K :=
-  NatTrans.ofSequence (fun _ ↦ e.hom) (by
-    intro n
-    simp only [CategoryTheory.Functor.comp_map, integralLocalizationSequence,
-      Functor.ofSequence_map_homOfLE_succ]
-    change F.map (ℓ • 𝟙 C) ≫ e.hom = e.hom ≫ (ℓ • 𝟙 K)
-    rw [F.map_nsmul, F.map_id]
-    simp)
+    Mod.smulSequence C ℓ ⋙ F ⟶ Mod.smulSequence K ℓ where
+  app _ := e.hom
+  naturality _ _ _ := by
+    simp [F.map_nsmul]
 
 omit [Fact ℓ.Prime] in
 /-- Transport colimits from a strict complex telescope along its localization-unit model.
@@ -40,7 +36,7 @@ model vertex isomorphism and its leg equations to identify the cocones. -/
 theorem localizationCocone_isColimit_of_model
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]
-    (K : DerivedCategory A) (c : Cocone (integralLocalizationSequence ℓ K))
+    (K : DerivedCategory A) (c : Cocone (Mod.smulSequence K ℓ))
     (m : IntegralLocalizationComplexModel.{v, w, x} ℓ K c)
     {B : Type y} [Category.{z} B] (F : DerivedCategory A ⥤ B)
     (hcont : ∀ (C : CochainComplex A ℤ) (a : ℤ), C.IsStrictlyGE a →

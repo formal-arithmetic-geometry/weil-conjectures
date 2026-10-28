@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
-import all WeilConjectures.AlgebraicGeometry.ContinuousLissePullbackSystem
-import all WeilConjectures.AlgebraicGeometry.ContinuousLisseStratumDescent
+public import WeilConjectures.AlgebraicGeometry.ContinuousLissePullbackSystem
+import WeilConjectures.AlgebraicGeometry.ContinuousLisseStratumDescent
 import WeilConjectures.AlgebraicGeometry.ContinuousFiniteEtaleLatticeDescent
 
 @[expose] public section
@@ -20,7 +20,11 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private theorem continuousLisse_coefficient_lattice_on_stratum
+/-- `continuousLisse_lattice_on_stratum` for the coefficients `𝒪_E ⟶ E`, with descent of
+lattices along finite étale surjections given by `continuousLisse_finiteEtale_lattice`.
+Source: Bhatt--Scholze, proof of Lemma 6.8.13.
+(auxiliary; not a blueprint node) -/
+theorem continuousLisse_coefficient_lattice_on_stratum
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (D : PullbackSystem.{u} ℓ E)

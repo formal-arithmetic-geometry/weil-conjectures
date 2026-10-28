@@ -36,29 +36,12 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-private lemma scalar_sequence_map
-    {C : Type*} [Category C] [Preadditive C] (ℓ : ℕ) (B : C) (k : ℕ) :
-    (Functor.ofSequence (fun _ ↦ ℓ • 𝟙 B)).map (homOfLE (Nat.zero_le k)) =
-      ℓ ^ k • 𝟙 B := by
-  induction k with
-  | zero => simp; rfl
-  | succ k ih =>
-    rw [show homOfLE (Nat.zero_le (k + 1)) =
-      homOfLE (Nat.zero_le k) ≫ homOfLE (Nat.le_succ k) from rfl,
-      Functor.map_comp, ih, Functor.ofSequence_map_homOfLE_succ]
-    change (ℓ ^ k • 𝟙 B) ≫ (ℓ • 𝟙 B) = ℓ ^ (k + 1) • 𝟙 B
-    simp only [Preadditive.nsmul_comp, Preadditive.comp_nsmul,
-      Category.id_comp, pow_succ, mul_smul]
-    exact smul_comm _ _ _
-
 private lemma scalar_unit_cocone_zero
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     (ℓ : ℕ) {L : A ⥤ B} {U : B ⥤ A} [U.Additive] (adj : L ⊣ U) (K : A)
     [IsIso (ℓ • 𝟙 (L.obj K))] :
     (AlgebraicGeometry.ProEtale.CondensedRing.scalarLocalizationUnitCocone ℓ adj K).ι.app 0 =
       adj.unit.app K := by
-  simp only [AlgebraicGeometry.ProEtale.CondensedRing.scalarLocalizationUnitCocone,
-    NatTrans.ofSequence_app, pow_zero, End.one_def]
   change adj.unit.app K ≫ U.map (𝟙 (L.obj K)) = adj.unit.app K
   rw [U.map_id]
   exact Category.comp_id _
@@ -166,13 +149,11 @@ theorem integral_scalar_map_eq
     Subsingleton.elim _ _
   have hβ : β = α := Subsingleton.elim _ _
   rw [hβ, hα] at hn
-  change f ≫ (integralLocalizationSequence ℓ B.obj).map
-      (homOfLE (show 0 ≤ n.down by omega)) =
-    g ≫ (integralLocalizationSequence ℓ B.obj).map
-      (homOfLE (show 0 ≤ n.down by omega)) at hn
-  have hmap (k : ℕ) : (integralLocalizationSequence ℓ B.obj).map
-      (homOfLE (show 0 ≤ k by omega)) = ℓ ^ k • 𝟙 B.obj :=
-    scalar_sequence_map ℓ B.obj k
+  change f ≫ (Mod.smulSequence B.obj ℓ).map (homOfLE (show 0 ≤ n.down by omega)) =
+    g ≫ (Mod.smulSequence B.obj ℓ).map (homOfLE (show 0 ≤ n.down by omega)) at hn
+  have hmap (k : ℕ) : (Mod.smulSequence B.obj ℓ).map
+      (homOfLE (show 0 ≤ k by omega)) = ℓ ^ k • 𝟙 B.obj := by
+    simp
   rw [hmap] at hn
   exact ⟨n.down, by simpa only [Preadditive.comp_nsmul, Category.comp_id] using hn⟩
 

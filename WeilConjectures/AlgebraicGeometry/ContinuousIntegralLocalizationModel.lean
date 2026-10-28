@@ -32,7 +32,7 @@ structure IntegralLocalizationComplexModel
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]
     (ℓ : ℕ) (K : DerivedCategory A)
-    (c : Cocone (integralLocalizationSequence ℓ K)) where
+    (c : Cocone (Mod.smulSequence K ℓ)) where
   complex : CochainComplex A ℤ
   bound : ℤ
   strictlyGE : complex.IsStrictlyGE bound
@@ -102,15 +102,10 @@ theorem exists_integralLocalization_complex_model (X : Scheme.{u})
     (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence
   let v₀ := hc'.coconePointUniqueUpToIso hcl
   let t := integralLocalizationCocone ℓ E X K
-  let σ := integralLocalizationSequenceMapIso ℓ DerivedCategory.Q C
+  let σ := Mod.smulSequenceCompIso DerivedCategory.Q C ℓ
   let s := (Cocone.precompose σ.inv).obj (DerivedCategory.Q.mapCocone c)
-  let α : integralLocalizationSequence ℓ (DerivedCategory.Q.obj C) ⟶
-      integralLocalizationSequence ℓ K :=
-    NatTrans.ofSequence (fun _ ↦ e.inv) (by
-      intro n
-      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ]
-      change (ℓ • 𝟙 _) ≫ e.inv = e.inv ≫ (ℓ • 𝟙 _)
-      simp)
+  let α : Mod.smulSequence (DerivedCategory.Q.obj C) ℓ ⟶ Mod.smulSequence K ℓ :=
+    Mod.smulSequenceMap e.inv ℓ
   let r := (Cocone.precompose α).obj t
   let g : s.pt ⟶ r.pt := DerivedCategory.Q.map w.hom ≫ z.hom ≫ (L ⋙ U).map e.inv
   have : IsIso (ℓ • 𝟙 r.pt) := by
@@ -124,9 +119,9 @@ theorem exists_integralLocalization_complex_model (X : Scheme.{u})
     simpa only [CategoryTheory.Functor.map_comp, Category.assoc] using h
   have hzero : s.ι.app 0 ≫ g = r.ι.app 0 := by
     simp only [integralLocalizationCocone, scalarLocalizationUnitCocone, Functor.comp_obj,
-      Functor.const_obj_obj, id_eq, Cocone.precompose_obj_pt, integralLocalizationSequenceMapIso,
-      asIso_inv, Functor.mapCocone_pt, Cocone.precompose_obj_ι, NatTrans.comp_app,
-      NatIso.isIso_inv_app, NatTrans.ofSequence_app, IsIso.inv_id, Functor.mapCocone_ι_app,
+      Functor.const_obj_obj, id_eq, Cocone.precompose_obj_pt, Mod.smulSequenceCompIso,
+      NatIso.ofComponents_inv_app, Iso.refl_inv, Functor.mapCocone_pt, Cocone.precompose_obj_ι,
+      NatTrans.comp_app, Mod.smulSequenceMap_app, Functor.mapCocone_ι_app,
       Functor.comp_map, Category.assoc, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
       Category.comp_id, r, α, t, s, σ, g]
     change 𝟙 _ ≫ DerivedCategory.Q.map (c.ι.app 0) ≫
@@ -145,9 +140,9 @@ theorem exists_integralLocalization_complex_model (X : Scheme.{u})
   rw [← Category.assoc, ← DerivedCategory.Q.map_comp,
     IsColimit.comp_coconePointUniqueUpToIso_hom]
   have hh := hlegs n.down
-  simp only [Cocone.precompose_obj_pt, integralLocalizationSequenceMapIso, Functor.comp_obj,
-    asIso_inv, Functor.mapCocone_pt, Functor.const_obj_obj, Cocone.precompose_obj_ι,
-    NatTrans.comp_app, NatIso.isIso_inv_app, NatTrans.ofSequence_app, IsIso.inv_id,
+  simp only [Cocone.precompose_obj_pt, Mod.smulSequenceCompIso, Functor.comp_obj,
+    NatIso.ofComponents_inv_app, Iso.refl_inv, Functor.mapCocone_pt, Functor.const_obj_obj,
+    Cocone.precompose_obj_ι, NatTrans.comp_app, Mod.smulSequenceMap_app,
     Functor.mapCocone_ι_app, Category.assoc, r, α, s, σ] at hh
   exact (Category.id_comp (DerivedCategory.Q.map (c.ι.app n.down) ≫ g)).symm.trans hh
 

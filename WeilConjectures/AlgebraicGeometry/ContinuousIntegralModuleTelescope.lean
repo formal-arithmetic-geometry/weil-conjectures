@@ -6,9 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalization
-import WeilConjectures.AlgebraicGeometry.ContinuousIntegralRegularTelescope
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationLegs
-import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralDenominators
 
 /-! # Tensoring the regular localization telescope with a module -/
 
@@ -42,7 +41,7 @@ is invertible at that vertex, so the zeroth-leg equation determines every leg. -
 noncomputable def integralModuleLocalizationCocone (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) :
-    Cocone (integralLocalizationSequence ℓ M) := by
+    Cocone (Mod.smulSequence M ℓ) := by
   have := module_nsmul_isIso ℓ E X
     ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj M)
   exact scalarLocalizationUnitCocone ℓ
@@ -51,40 +50,32 @@ noncomputable def integralModuleLocalizationCocone (X : Scheme.{u})
 /-- The module localization unit presents scalar extension as its scalar telescope.
 Source: Bhatt--Scholze, Lemma 6.8.2.
 (auxiliary; not a blueprint node).
-Proof. Tensor the explicit regular coefficient colimit with M and identify its
-zeroth leg with the extension unit. Invertibility of ℓ determines the other legs. -/
+Proof. On underlying abelian sheaves, base `Mod.isColimitExtendScalarsCocone`
+(`isColimitIntegralExtendScalarsCocone`) presents `E_X ⊗ M` as the colimit of
+`M --ℓ--> M --ℓ--> ⋯` with zeroth leg the extension unit. Multiplication by ℓ is
+invertible at the vertex, so the zeroth-leg equation identifies every leg with the
+unit cocone; the forgetful functor from modules reflects the colimit. -/
 theorem integralModuleLocalization_isColimit (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) :
     Nonempty (IsColimit (integralModuleLocalizationCocone ℓ E X M)) := by
   let φ := coefficientMap (integralScalarMap ℓ E) X
-  let U := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) φ
-  obtain ⟨c, ⟨hc⟩, e, he⟩ := integralRegularTelescope ℓ E X
-  let t := Mod.extendComapTensorIso φ M
-  let es := (tensorRight M).mapIso e ≪≫ t.symm
-  let q := c.ι.app 0 ≫ e.hom
-  have hq : q.hom = φ := he
-  have hz : (tensorRight M).map (c.ι.app 0) ≫ es.hom =
-      (λ_ M).hom ≫ Mod.extendUnit φ M := by
-    apply (cancel_mono t.hom).1
-    simp only [es, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-      Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    rw [Mod.extendUnit_tensor φ M q hq]
-    rw [← Category.assoc, Iso.hom_inv_id, Category.id_comp, ← Functor.map_comp]
-    rfl
-  obtain ⟨d, ⟨hd⟩, v, hv⟩ := transportRegularTelescope ℓ (tensorRight M) c
-    (isColimitOfPreserves (tensorRight M) hc) (λ_ M) es (𝟭 _) (Mod.extendUnit φ M) hz
+  let F := Mod.forget (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (condensedRingObj (integralCoeff ℓ E) X)
   let target := integralModuleLocalizationCocone ℓ E X M
-  have : IsIso (ℓ • 𝟙 target.pt) := by
-    have h := module_nsmul_isIso ℓ E X ((Mod.extendScalars φ).obj M)
-    change IsIso (ℓ • 𝟙 (U.obj ((Mod.extendScalars φ).obj M)))
-    exact mappedScalar_isIso ℓ U _
-  have hu : (Mod.extendRestrictAdjunction φ).unit.app M = Mod.extendUnit φ M := by
-    change Mod.extendUnit φ M ≫ (Mod.comap φ).map (𝟙 _) = _
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
-  have hzero : d.ι.app 0 ≫ v.hom = target.ι.app 0 := by
-    simpa [target, integralModuleLocalizationCocone, scalarLocalizationUnitCocone, ← hu, φ]
-      using hv
-  exact ⟨hd.ofIsoColimit (Cocone.ext v (integralLocalization_coconeLegs ℓ d target v.hom hzero))⟩
+  let α := Mod.smulSequenceCompIso F M ℓ
+  let d := (Cocone.precompose α.inv).obj (F.mapCocone target)
+  have := module_nsmul_isIso ℓ E X ((Mod.extendScalars φ).obj M)
+  have : IsIso (ℓ • 𝟙 d.pt) := mappedScalar_isIso ℓ (Mod.comap φ ⋙ F) _
+  let c₀ := Mod.extendScalarsCocone φ (nsmul_coefficientMapInvPow_succ ℓ E X) M
+  have hzero : c₀.ι.app 0 ≫ 𝟙 d.pt = d.ι.app 0 := by
+    change Mod.extendScalarsCoconeι φ (coefficientMapInvPow ℓ E X) M 0 ≫ 𝟙 _ =
+      𝟙 _ ≫ ((Mod.extendUnit φ M).hom ≫ 𝟙 _)
+    rw [Category.comp_id, Category.comp_id, Category.id_comp, Mod.extendUnit_hom,
+      Mod.extendScalarsCoconeι, coefficientMapInvPow_zero, IsMonHom.one_hom]
+    rfl
+  have hd : IsColimit d := (isColimitIntegralExtendScalarsCocone ℓ E X M).ofIsoColimit
+    (Cocone.ext (Iso.refl _) (integralLocalization_coconeLegs ℓ c₀ d (𝟙 d.pt) hzero))
+  exact ⟨isColimitOfReflects F ((IsColimit.precomposeInvEquiv α _) hd)⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

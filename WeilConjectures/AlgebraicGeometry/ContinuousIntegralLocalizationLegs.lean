@@ -24,7 +24,7 @@ Proof. Induct on the leg index. Cocone compatibility relates adjacent legs by �
 centrality of integer multiplication moves ℓ to the target, where it cancels. -/
 theorem integralLocalization_coconeLegs (ℓ : ℕ)
     {C : Type u} [Category.{v} C] [Preadditive C]
-    {K : C} (c d : Cocone (integralLocalizationSequence ℓ K))
+    {K : C} (c d : Cocone (Mod.smulSequence K ℓ))
     [IsIso (ℓ • 𝟙 d.pt)] (g : c.pt ⟶ d.pt)
     (hzero : c.ι.app 0 ≫ g = d.ι.app 0) :
     ∀ n, c.ι.app n ≫ g = d.ι.app n := by
@@ -37,12 +37,9 @@ theorem integralLocalization_coconeLegs (ℓ : ℕ)
   | zero => exact hzero
   | succ n ih =>
       apply (cancel_mono (ℓ • 𝟙 d.pt)).1
-      have hc' := c.w (homOfLE (Nat.le_succ n))
-      have hd' := d.w (homOfLE (Nat.le_succ n))
-      simp only [integralLocalizationSequence,
-        Functor.ofSequence_map_homOfLE_succ] at hc' hd'
-      change (ℓ • 𝟙 K) ≫ c.ι.app (n + 1) = c.ι.app n at hc'
-      change (ℓ • 𝟙 K) ≫ d.ι.app (n + 1) = d.ι.app n at hd'
+      have hc' := c.w (homOfLE (Nat.le_add_right n 1))
+      have hd' := d.w (homOfLE (Nat.le_add_right n 1))
+      simp only [Nat.add_sub_cancel_left, pow_one] at hc' hd'
       calc
         (c.ι.app (n + 1) ≫ g) ≫ (ℓ • 𝟙 d.pt) =
             (ℓ • 𝟙 K) ≫ (c.ι.app (n + 1) ≫ g) := (central _).symm

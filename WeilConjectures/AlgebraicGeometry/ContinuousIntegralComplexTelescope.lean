@@ -31,7 +31,7 @@ is colimiting in each degree; evaluation jointly reflects colimits of complexes.
 theorem integralComplexLocalization_colimit (X : Scheme.{u})
     (C : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) ℤ) :
-    ∃ c : Cocone (integralLocalizationSequence ℓ C), Nonempty (IsColimit c) ∧
+    ∃ c : Cocone (Mod.smulSequence C ℓ), Nonempty (IsColimit c) ∧
       ∃ e : c.pt ≅ ((Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
             (coefficientMap (integralScalarMap ℓ E) X)).mapHomologicalComplex (.up ℤ)).obj
           (((Mod.extendScalars
@@ -57,20 +57,19 @@ theorem integralComplexLocalization_colimit (X : Scheme.{u})
     let ev := HomologicalComplex.eval
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (integralCoeff ℓ E) X)) (.up ℤ) n
-    let σ := integralLocalizationSequenceMapIso ℓ ev C
+    let σ := Mod.smulSequenceCompIso ev C ℓ
     let d := (Cocone.precompose σ.inv).obj (ev.mapCocone c)
     let cn := integralModuleLocalizationCocone ℓ E X (C.X n)
     let hn := Classical.choice (integralModuleLocalization_isColimit ℓ E X (C.X n))
     have := module_nsmul_isIso ℓ E X (L.obj (C.X n))
     have : IsIso (ℓ • 𝟙 cn.pt) := mappedScalar_isIso ℓ U _
     have hzero : d.ι.app 0 ≫ 𝟙 _ = cn.ι.app 0 := by
-      simp only [integralLocalizationSequenceMapIso, Functor.comp_obj, asIso_inv,
-        Adjunction.mapHomologicalComplex, Functor.id_obj, scalarLocalizationUnitCocone,
-        Functor.const_obj_obj, Cocone.precompose_obj_pt, Functor.mapCocone_pt,
-        Cocone.precompose_obj_ι, NatTrans.comp_app, NatIso.isIso_inv_app, NatTrans.ofSequence_app,
-        IsIso.inv_id, Functor.mapCocone_ι_app, pow_zero, End.one_def,
-        CategoryTheory.Functor.map_id, Category.comp_id, integralModuleLocalizationCocone, d, σ,
-        c, adj, cn]
+      simp only [Mod.smulSequenceCompIso, Functor.comp_obj, NatIso.ofComponents_inv_app,
+        Iso.refl_inv, Adjunction.mapHomologicalComplex, Functor.id_obj,
+        scalarLocalizationUnitCocone, Functor.const_obj_obj, Cocone.precompose_obj_pt,
+        Functor.mapCocone_pt, Cocone.precompose_obj_ι, NatTrans.comp_app,
+        Functor.mapCocone_ι_app, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
+        Category.comp_id, integralModuleLocalizationCocone, d, σ, c, adj, cn]
       change 𝟙 (C.X n) ≫ (Mod.extendRestrictAdjunction φ).unit.app (C.X n) =
         (Mod.extendRestrictAdjunction φ).unit.app (C.X n)
       exact Category.id_comp _

@@ -25,18 +25,14 @@ Source: universal property of the localization telescope.
 (auxiliary; not a blueprint node) -/
 theorem integralLocalization_zero_isIso (ℓ : ℕ)
     {C : Type*} [Category C] [Preadditive C] (K : C) [IsIso (ℓ • 𝟙 K)]
-    (c : Cocone (integralLocalizationSequence ℓ K)) (hc : IsColimit c)
+    (c : Cocone (Mod.smulSequence K ℓ)) (hc : IsColimit c)
     [IsIso (ℓ • 𝟙 c.pt)] : IsIso (c.ι.app 0) := by
   let t : End K := inv (ℓ • 𝟙 K)
-  let d : Cocone (integralLocalizationSequence ℓ K) :=
-    ⟨K, NatTrans.ofSequence (fun n ↦ t ^ n) (by
-      intro n
-      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
-        Functor.const_obj_map]
-      change (ℓ • 𝟙 K) ≫ t ^ (n + 1) =
-        (t ^ n) ≫ 𝟙 K
-      rw [pow_succ, End.mul_def, ← Category.assoc]
-      simp [t])⟩
+  let d : Cocone (Mod.smulSequence K ℓ) :=
+    Mod.smulSequenceCocone ℓ (fun n ↦ t ^ n) fun n ↦ by
+      rw [← Category.id_comp (t ^ (n + 1)), ← Preadditive.nsmul_comp, pow_succ, End.mul_def,
+        ← Category.assoc]
+      simp [t]
   have hz : d.ι.app 0 = 𝟙 K := rfl
   let g := hc.desc d
   have hg : c.ι.app 0 ≫ g = 𝟙 K := by simp only [g, hc.fac, hz]

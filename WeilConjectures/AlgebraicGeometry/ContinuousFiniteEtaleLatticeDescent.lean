@@ -85,14 +85,14 @@ theorem continuousLisse_finiteEtale_lattice
   classical
   obtain ⟨e⟩ := e
   let N := latticeIntersection (integralScalarMap ℓ E) X P p M e
-  have hN : LocalFree (condensedRingObj (integralCoeff ℓ E) X) N := by
+  have hN : IsLocallyFree (condensedRingObj (integralCoeff ℓ E) X) N := by
     obtain ⟨C, hC⟩ := continuousLatticeIntersection_localModel ℓ E X P hP p M hM e
     apply localFree_of_cover C
     intro s
     obtain ⟨n, m, f, hf, ⟨eN⟩⟩ := hC s
     have := hf
-    have hT := locally_free_of_iso
-      (integralMatrixKernel_locallyFree_of_rational_epi ℓ E (C.X s) n m f) eN.symm
+    have hT :=
+      (integralMatrixKernel_locallyFree_of_rational_epi ℓ E (C.X s) n m f).of_iso eN.symm
     exact localFree_of_comap
       (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s))) hT
   have := continuousLatticeIntersectionRationalization_isIso ℓ E X P p M e

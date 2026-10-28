@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 import WeilConjectures.AlgebraicGeometry.ContinuousEtaleLocalLattices
 import WeilConjectures.AlgebraicGeometry.ContinuousFiniteEtaleLatticeDescent
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 
 /-! # Pullback systems for continuous lisse lattices
 
@@ -26,7 +26,9 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private structure PullbackSystemCore
+/-- A system of pullback functors on integral (`Λ₀`) and rational (`Λ₁`) module objects along
+maps of schemes, compatible with scalar extension along `φ` and preserving local freeness. -/
+structure PullbackSystemCore
     (Λ₀ Λ₁ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]
     (φ : Λ₀ ⟶ Λ₁) [IsMonHom φ] where
@@ -56,7 +58,8 @@ private structure PullbackSystemCore
       (condensedRingObj (Λ₁) X)},
     IsLocallyFree _ P → IsLocallyFree _ ((rational f).obj P)
 
-private noncomputable def canonicalPullbackSystemCore
+/-- The pullback system given by the pullbacks `f^*` of module objects. -/
+noncomputable def canonicalPullbackSystemCore
     (Λ₀ Λ₁ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]
     (φ : Λ₀ ⟶ Λ₁) [IsMonHom φ] : PullbackSystemCore Λ₀ Λ₁ φ where
@@ -68,7 +71,9 @@ private noncomputable def canonicalPullbackSystemCore
   integralFree := IsLocallyFree.upperStar Λ₀
   rationalFree := IsLocallyFree.upperStar Λ₁
 
-private noncomputable def pullbackSystem_scalarSquareIso
+/-- Along a commutative square `r ≫ p = q ≫ j`, an identification of the scalar extension of
+`M` with `p^* P` transports to the pulled-back objects `M'` over `V` and `P'` over `W`. -/
+noncomputable def pullbackSystem_scalarSquareIso
     (Λ₀ Λ₁ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]
     (φ : Λ₀ ⟶ Λ₁) [IsMonHom φ] (D : PullbackSystemCore Λ₀ Λ₁ φ)
@@ -89,12 +94,14 @@ private noncomputable def pullbackSystem_scalarSquareIso
     eqToIso (congrArg (fun f ↦ (D.rational f).obj P) w) ≪≫
     (D.comp q j).app P ≪≫ (D.rational q).mapIso iP.symm
 
-private abbrev PullbackSystem
+/-- Pullback systems for the coefficients `𝒪_E ⟶ E`. -/
+abbrev PullbackSystem
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] :=
   PullbackSystemCore (integralCoeff ℓ E) (Profinite.continuousMapRingObj E)
     (integralScalarMap ℓ E)
 
-private noncomputable def canonicalPullbackSystem
+/-- The pullback system given by the pullbacks `f^*` of module objects over `𝒪_E` and `E`. -/
+noncomputable def canonicalPullbackSystem
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] :
     PullbackSystem.{u} ℓ E :=
   canonicalPullbackSystemCore _ _ (integralScalarMap ℓ E)

@@ -10,6 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralGluing
 import WeilConjectures.AlgebraicGeometry.ContinuousLisseStratifiedLattices
 import Mathlib.Algebra.Field.ULift
+-- Internal transport lemmas are shared with `ContinuousConstructibleIntegralStratum` through a
+-- private import.
+set_option linter.privateModule false
 
 /-! # Integral models on a locally finitely presented stratum
 

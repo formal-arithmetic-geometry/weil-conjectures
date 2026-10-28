@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import all WeilConjectures.AlgebraicGeometry.FiniteEtaleLocallyFreeModels
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralUnderivedPushComparison
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralModuleTelescope
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationLegs
@@ -79,56 +80,60 @@ private theorem weaklyEtaleUnit_mono
     (Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ p))).symm
   infer_instance
 
-private lemma freeAt_refine {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X)
+/-- Freeness of `g^* M` is inherited by `(f ≫ g)^* M`. -/
+private lemma isFree_upperStar_comp {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X)
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : FreeAt R M g) : FreeAt R M (f ≫ g) :=
+    (h : Mod.IsFree _ (((ProEtale.upperStar Ab.{u + 1} g).mapMod R).obj M)) :
+    Mod.IsFree _ (((ProEtale.upperStar Ab.{u + 1} (f ≫ g)).mapMod R).obj M) :=
   (ProEtale.free_pullback_comp_iff f g M).mpr (free_pullback f h)
 
-private theorem commonCompactFreeCover
-    {X : Scheme.{u}}
-    {R S Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
-    [MonObj Q] [IsCommMonObj Q]
-    (A : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
-    (D : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) Q)
-    (hA : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt R A (C.f s))
-    (hB : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt S B (C.f s))
-    (hD : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt Q D (C.f s)) :
+/-- Three properties of maps to `X` that hold on pro-étale covers and are stable under
+precomposition hold together on one cover by affine (hence compact) schemes. -/
+private theorem commonCompactCover {X : Scheme.{u}}
+    (PA PB PD : ∀ {Y : Scheme.{u}}, (Y ⟶ X) → Prop)
+    (hPA : ∀ {Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X), PA g → PA (f ≫ g))
+    (hPB : ∀ {Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X), PB g → PB (f ≫ g))
+    (hPD : ∀ {Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X), PD g → PD (f ≫ g))
+    (hA : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀, PA (C.f s))
+    (hB : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀, PB (C.f s))
+    (hD : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀, PD (C.f s)) :
     ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      CompactSpace (C.X s) ∧ FreeAt R A (C.f s) ∧ FreeAt S B (C.f s) ∧
-        FreeAt Q D (C.f s) := by
+      CompactSpace (C.X s) ∧ PA (C.f s) ∧ PB (C.f s) ∧ PD (C.f s) := by
   obtain ⟨C₁, h₁⟩ := hA
   obtain ⟨C₂, h₂⟩ := hB
   obtain ⟨C₃, h₃⟩ := hD
   let C₁₂ := C₁.bind (fun i ↦ C₂.pullback₁ (C₁.f i))
-  have h₁₂ (s : C₁₂.I₀) : FreeAt R A (C₁₂.f s) ∧ FreeAt S B (C₁₂.f s) := by
+  have h₁₂ (s : C₁₂.I₀) : PA (C₁₂.f s) ∧ PB (C₁₂.f s) := by
     rcases s with ⟨i, j⟩
     constructor
-    · exact freeAt_refine _ _ (h₁ i)
-    · change FreeAt S B (pullback.fst (C₁.f i) (C₂.f j) ≫ C₁.f i)
+    · exact hPA _ _ (h₁ i)
+    · change PB (pullback.fst (C₁.f i) (C₂.f j) ≫ C₁.f i)
       rw [pullback.condition]
-      exact freeAt_refine _ _ (h₂ j)
+      exact hPB _ _ (h₂ j)
   let C₁₂₃ := C₁₂.bind (fun i ↦ C₃.pullback₁ (C₁₂.f i))
-  have h₁₂₃ (s : C₁₂₃.I₀) :
-      FreeAt R A (C₁₂₃.f s) ∧ FreeAt S B (C₁₂₃.f s) ∧ FreeAt Q D (C₁₂₃.f s) := by
+  have h₁₂₃ (s : C₁₂₃.I₀) : PA (C₁₂₃.f s) ∧ PB (C₁₂₃.f s) ∧ PD (C₁₂₃.f s) := by
     rcases s with ⟨i, j⟩
-    refine ⟨freeAt_refine _ _ (h₁₂ i).1, freeAt_refine _ _ (h₁₂ i).2, ?_⟩
-    change FreeAt Q D (pullback.fst (C₁₂.f i) (C₃.f j) ≫ C₁₂.f i)
+    refine ⟨hPA _ _ (h₁₂ i).1, hPB _ _ (h₁₂ i).2, ?_⟩
+    change PD (pullback.fst (C₁₂.f i) (C₃.f j) ≫ C₁₂.f i)
     rw [pullback.condition]
-    exact freeAt_refine _ _ (h₃ j)
+    exact hPD _ _ (h₃ j)
   let C := C₁₂₃.bind (fun i ↦
     (C₁₂₃.X i).affineCover.weaken Scheme.zariskiPrecoverage_le_proetalePrecoverage)
   refine ⟨C, fun s ↦ ?_⟩
   rcases s with ⟨i, j⟩
-  refine ⟨?_, freeAt_refine _ _ (h₁₂₃ i).1,
-    freeAt_refine _ _ (h₁₂₃ i).2.1, freeAt_refine _ _ (h₁₂₃ i).2.2⟩
+  refine ⟨?_, hPA _ _ (h₁₂₃ i).1, hPB _ _ (h₁₂₃ i).2.1, hPD _ _ (h₁₂₃ i).2.2⟩
   change CompactSpace (((C₁₂₃.X i).affineCover).X j)
   infer_instance
+
+/-- The pullback of module objects over `Λ` is the pullback of underlying sheaves followed by
+restriction along the inverse of the comparison of coefficient rings. -/
+private noncomputable def normalizedPullbackIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    upperStar Λ f ≅ (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ X) ⋙
+      Mod.comap (inv (condensedPullbackHom Λ f)) :=
+  Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
 
 private theorem localizedAdjoint_isIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
@@ -166,7 +171,7 @@ private theorem localizedAdjoint_isIso
   have hq' : adjY.unit.app (T.obj B) ≫ UY.map q' = T.map f ≫ k.hom :=
     (adjY.homEquiv (T.obj B) D').apply_symm_apply _
   let c := integralModuleLocalizationCocone ℓ E X B
-  let σ := integralLocalizationSequenceMapIso ℓ T B
+  let σ := Mod.smulSequenceCompIso T B ℓ
   let d₀ := (Cocone.precompose σ.inv).obj (T.mapCocone c)
   let v : d₀.pt ≅ UY.obj D' := T.mapIso (UX.mapIso (asIso q)) ≪≫ k
   let d := d₀.extend v.hom
@@ -181,10 +186,9 @@ private theorem localizedAdjoint_isIso
   have : IsIso (ℓ • 𝟙 d.pt) := mappedScalar_isIso ℓ UY D'
   have hz : c'.ι.app 0 ≫ UY.map q' = d.ι.app 0 := by
     have hz₀ : d₀.ι.app 0 = T.map (adjX.unit.app B) := by
-      simp only [d₀, σ, integralLocalizationSequenceMapIso, asIso_inv,
-        Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app,
-        NatIso.isIso_inv_app, IsIso.inv_id, c, integralModuleLocalizationCocone,
-        scalarLocalizationUnitCocone, NatTrans.ofSequence_app, pow_zero,
+      simp only [d₀, σ, Mod.smulSequenceCompIso, NatIso.ofComponents_inv_app, Iso.refl_inv,
+        Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app, c,
+        integralModuleLocalizationCocone, scalarLocalizationUnitCocone, pow_zero,
         End.one_def, CategoryTheory.Functor.map_id]
       exact Category.id_comp _
     change c'.ι.app 0 ≫ UY.map q' = d₀.ι.app 0 ≫ v.hom
@@ -319,9 +323,14 @@ theorem continuousLatticeIntersection_splitData
           eB.hom ≫ adj.unit.app (Mod.finiteFree R n) =
             T.map (latticePushedEmbedding (integralScalarMap ℓ E) X P p M e) ≫ eD.hom := by
   classical
-  obtain ⟨C, hC⟩ := commonCompactFreeCover
-    P ((lowerStar (integralCoeff ℓ E) p).obj M)
-    (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))
+  obtain ⟨C, hC⟩ := commonCompactCover
+    (fun g ↦ Mod.IsFree _ (((ProEtale.upperStar Ab.{u + 1} g).mapMod _).obj P))
+    (fun g ↦ Mod.IsFree _ (((ProEtale.upperStar Ab.{u + 1} g).mapMod _).obj
+      ((lowerStar (integralCoeff ℓ E) p).obj M)))
+    (fun g ↦ Mod.IsFree _ (((ProEtale.upperStar Ab.{u + 1} g).mapMod _).obj
+      (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))))
+    (fun f g ↦ isFree_upperStar_comp f g) (fun f g ↦ isFree_upperStar_comp f g)
+    (fun f g ↦ isFree_upperStar_comp f g)
     hP ((finiteEtale_locallyFree_models (integralCoeff ℓ E) p).1 M hM)
     ((finiteEtale_locallyFree_models (Profinite.continuousMapRingObj E) p).2 P hP)
   have : Mono ((upperStarLowerStarAdjunction
@@ -342,11 +351,11 @@ theorem continuousLatticeIntersection_splitData
   let k : GX ⋙ T ≅ H ⋙ G :=
     Functor.isoWhiskerLeft GX (normalizedPullbackIso (integralCoeff ℓ E) (C.f s)).symm ≪≫
       (comapUpperStarIso (integralScalarMap ℓ E) (C.f s)).symm
-  obtain ⟨r, ⟨bP⟩⟩ := free_standardPullback (Profinite.continuousMapRingObj E) (C.f s) P hPs
+  obtain ⟨r, ⟨bP⟩⟩ := (isFree_mapMod_iff (Profinite.continuousMapRingObj E) (C.f s) P).1 hPs
   obtain ⟨n, ⟨bB⟩⟩ := free_comap
     (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s))) hBs
-  obtain ⟨m, ⟨bQ⟩⟩ := free_standardPullback (Profinite.continuousMapRingObj E) (C.f s)
-    (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))
+  obtain ⟨m, ⟨bQ⟩⟩ := (isFree_mapMod_iff (Profinite.continuousMapRingObj E) (C.f s)
+    (cokernel ((upperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) p).unit.app P))).1
     hQs
   let eP := bP ≪≫ (integralFreeExtensionIso ℓ E (C.X s) r).symm
   let eQ := (PreservesCokernel.iso H

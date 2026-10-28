@@ -214,7 +214,8 @@ private theorem closed_push_constructible
     (ProEtale.isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i)
   apply ProEtale.constructible_of_restrictions j i (by simp only [hij, compl_compl])
   · apply constructible_of_extend_iso (condensedPullbackHom Λ j)
-    exact ProEtale.constructible_of_isZero _ _ (openRestrictionPushforwardZero Λ i j hij M)
+    exact ProEtale.isConstructibleModuleObject_of_isZero _
+      (openRestrictionPushforwardZero Λ i j hij M)
   · apply constructible_of_extend_iso (condensedPullbackHom Λ i)
     exact _root_.constructible_of_iso
       (asIso ((upperStarLowerStarAdjunction Λ i).counit.app M)).symm hM
@@ -469,9 +470,9 @@ private theorem single_integral_image (X : Scheme.{u})
         · exact _root_.constructible_of_iso
             ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
         · rcases lt_or_gt_of_ne hi with hi | hi
-          · exact ProEtale.constructible_of_isZero _ _
+          · exact ProEtale.isConstructibleModuleObject_of_isZero _
               (DerivedCategory.isZero_of_isGE _ 0 i hi)
-          · exact ProEtale.constructible_of_isZero _ _
+          · exact ProEtale.isConstructibleModuleObject_of_isZero _
               (DerivedCategory.isZero_of_isLE _ 0 i hi)⟩
   refine ⟨K, ⟨?_⟩⟩
   exact (Functor.singleFunctorCompLeftDerivedFunctorIso

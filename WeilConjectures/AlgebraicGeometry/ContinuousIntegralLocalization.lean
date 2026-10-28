@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralImage
-public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
 
 /-! # The localization telescope of integral continuous coefficients -/
 
@@ -20,35 +20,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The sequential diagram obtained by repeatedly multiplying an object by ℓ.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(auxiliary; not a blueprint node). -/
-abbrev integralLocalizationSequence {C : Type v} [Category.{w} C] [Preadditive C] (K : C) :
-    ℕ ⥤ C :=
-  Functor.ofSequence (fun _ ↦ ℓ • 𝟙 K)
-
-/-- Additive functors carry the scalar telescope to the same scalar telescope.
-Source: functoriality of scalar multiplication in a preadditive category.
-(auxiliary; not a blueprint node). -/
-noncomputable def integralLocalizationSequenceMapIso
-    {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
-    (F : A ⥤ B) [F.Additive] (K : A) :
-    integralLocalizationSequence ℓ K ⋙ F ≅ integralLocalizationSequence ℓ (F.obj K) := by
-  let α : integralLocalizationSequence ℓ K ⋙ F ⟶
-      integralLocalizationSequence ℓ (F.obj K) :=
-    NatTrans.ofSequence (fun _ ↦ 𝟙 _) (by
-      intro n
-      simp only [Functor.comp_map, integralLocalizationSequence,
-        Functor.ofSequence_map_homOfLE_succ]
-      change F.map (ℓ • 𝟙 K) ≫ 𝟙 (F.obj K) = 𝟙 (F.obj K) ≫ (ℓ • 𝟙 (F.obj K))
-      rw [F.map_nsmul, F.map_id]
-      simp)
-  have : ∀ n, IsIso (α.app n) := fun n ↦ by
-    change IsIso (𝟙 _)
-    infer_instance
-  have : IsIso α := NatIso.isIso_of_isIso_app α
-  exact asIso α
-
 /-- The localization-unit cocone for an additive adjunction whose localized object
 has invertible multiplication by ℓ.
 Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
@@ -56,24 +27,14 @@ Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
 noncomputable def scalarLocalizationUnitCocone
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     {L : A ⥤ B} {U : B ⥤ A} [U.Additive] (adj : L ⊣ U) (K : A)
-    [IsIso (ℓ • 𝟙 (L.obj K))] : Cocone (integralLocalizationSequence ℓ K) := by
+    [IsIso (ℓ • 𝟙 (L.obj K))] : Cocone (Mod.smulSequence K ℓ) :=
   let t : End (L.obj K) := inv (ℓ • 𝟙 (L.obj K))
-  refine ⟨U.obj (L.obj K), NatTrans.ofSequence
-    (fun n ↦ adj.unit.app K ≫ U.map (t ^ n)) ?_⟩
-  intro n
-  simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
-    Functor.const_obj_map]
-  change (ℓ • 𝟙 K) ≫ (adj.unit.app K ≫ U.map (t ^ (n + 1))) =
-    (adj.unit.app K ≫ U.map (t ^ n)) ≫ 𝟙 _
-  rw [Category.comp_id]
-  have hw : (ℓ • 𝟙 K) ≫ adj.unit.app K =
-      adj.unit.app K ≫ U.map (ℓ • 𝟙 (L.obj K)) := by
-    rw [U.map_nsmul, U.map_id]
-    simp
-  have ht : (ℓ • 𝟙 (L.obj K)) ≫ t ^ (n + 1) = t ^ n := by
-    rw [pow_succ, End.mul_def, ← Category.assoc]
-    simp only [t, IsIso.hom_inv_id, Category.id_comp]
-  rw [← Category.assoc, hw, Category.assoc, ← U.map_comp, ht]
+  Mod.smulSequenceCocone ℓ (fun n ↦ adj.unit.app K ≫ U.map (t ^ n)) fun n ↦ by
+    have ht : (ℓ • 𝟙 (L.obj K)) ≫ t ^ (n + 1) = t ^ n := by
+      rw [pow_succ, End.mul_def, ← Category.assoc]
+      simp only [t, IsIso.hom_inv_id, Category.id_comp]
+    rw [← Preadditive.comp_nsmul, ← U.map_nsmul, ← ht, Preadditive.nsmul_comp,
+      Category.id_comp]
 
 /-- The unit of integral localization, with its nth leg divided by ℓⁿ.
 Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
@@ -81,7 +42,7 @@ Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
 noncomputable def integralLocalizationCocone (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X))) :
-    Cocone (integralLocalizationSequence ℓ K) := by
+    Cocone (Mod.smulSequence K ℓ) := by
   have h := derived_nsmul_isIso ℓ E X ((integralScalarExtension ℓ E X).obj K)
   change IsIso (ℓ • 𝟙
     ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).leftDerivedFunctor.obj K)) at h
@@ -93,6 +54,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
 (auxiliary; not a blueprint node). -/
 abbrev integralLocalizationLiftedSequence {C : Type v} [Category.{w} C] [Preadditive C]
     (K : C) : ULift.{x} ℕ ⥤ C :=
-  (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙ integralLocalizationSequence ℓ K
+  (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙ Mod.smulSequence K ℓ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
