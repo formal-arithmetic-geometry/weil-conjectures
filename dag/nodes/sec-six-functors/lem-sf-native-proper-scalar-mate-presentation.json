@@ -1,0 +1,160 @@
+{
+ "id": "lem-sf-native-proper-scalar-mate-presentation",
+ "kind": "lemma",
+ "title": "Presentation and scalar transitivity for the native proper scalar mate",
+ "statement": "Fix a prime $l$, normalized native inverse-image data NativeRings, a finite unlifted coefficient index $E$, and a completed-to-native Change $a$ agreeing with every normalized integralMap [def-sf-locally-finite-adic-compact-support-data], [def-sf-locally-finite-adic-realization-data]. Write $A_T$ for the completed section-module category for the size model Coefficient $E$, $I_T$ for internal modules over the pulled condensed integers of the original finite field $E$, $F_T$ for internal modules over its pulled condensed field, $B_T$ for internal modules over the finite-subextension-valued pulled condensed algebraic closure, and $N_T$ for native section modules. Write $L_T:D(I_T)\\to D(F_T)$ and $Q_T:D(F_T)\\to D(B_T)$ for the canonical derived extensions [sk-def-sfb-derived-extension-of-scalars], $\\lambda_{g,C}$ for localizedDirectImageComparison [lem-sfb-localized-direct-image-comparison], and $\\beta_{g,K}$ for derivedPushHom for the finite-field inclusion into the algebraic closure [def-sfb-derived-push-hom], [def-sfb-qlbar-subextension-to-qlbar]. For every scheme morphism $g:U\\to V$, there exist additive equivalences $e:A_U\\simeq I_U$ and $d:B_V\\simeq N_V$ such that, for every ordinary unbounded $M\\in D(A_U)$, the arrow $(\\operatorname{properComparison}(a,g))_M$ is isomorphic in $\\operatorname{Arr}(D(N_V))$ to\n$$\nD(d)\\bigl(Q_V(\\lambda_{g,D(e)(M)})\\mathbin{;}\\beta_{g,L_U(D(e)(M))}\\bigr).\n$$\nHere semicolon denotes first the left arrow and then the right arrow. Both derived equivalences are induced by the additive exact ordinary equivalences. This identifies arrows through their source and target coefficient-transport isomorphisms; it asserts no invertibility of either comparison and assumes neither properness nor boundedness.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-sfb-localized-direct-image-comparison",
+  "def-sfb-derived-push-hom",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-sf-native-proper-scalar-mate-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Remark 6.8.15; the formal-properties paragraph of the current blueprint scalar direct-image proof, and the presentation/pasting step of the parent node."
+ },
+ "proof": [
+  {
+   "text": "Use the normalized integral completion comparison and continuous coefficient realization to identify the completed ring for Shrink E with the section ring of the pulled condensed integers of E. Transport the integers through Shrink.algEquiv. The internal/section module equivalence and transport along this ring isomorphism give the additive equivalence e at U. All factors are exact equivalences, so the induced ordinary derived functor exists.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-integral-coefficient-comparison",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the locally finite coefficient-ring realization, including the normalization on every finite-field leg and its precomposition naturality, followed by the internal/section equivalence to obtain the additive exact equivalence d from pulled condensed algebraic-closure modules to native section modules at V.",
+   "uses": [
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite projections identify the integral part of the coefficient presentation; localization normalization identifies integral inclusion, and finite-field normalization identifies rational inclusion. Their composite is a.map by ha. Taking adjoints, both inverse-image coefficient identifications act by precomposition on functions, so they agree with N.pull_normalized and completedPullMap. Consequently the normalized direct-image restriction squares commute under the coefficient identifications.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the two scalar adjunctions through e and d. Balanced derived tensor associativity identifies extension along the composite with the two successive extensions. Paste the two scalar restriction/direct-image squares. The pasted-mates counit normalization identifies their mate with properComparison a g, componentwise on every unbounded M. The source and target transport isomorphisms then form an isomorphism of arrows to d applied to scalar extension of localizedDirectImageComparison followed by derivedPushHom for the finite-field inclusion. No isomorphism assertion about either of those two mates is used.",
+   "uses": [
+    "lem-sfb-pasted-mates-counit-normalization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-integral-coefficient-comparison",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sfb-pasted-mates-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R9",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Remark 6.8.15; the formal-properties paragraph of the current blueprint scalar direct-image proof, and the presentation/pasting step of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a composite of two commutative squares of adjunctions equals the composite of their mates",
+   "results": "CategoryTheory.mateEquiv_hcomp and mateEquiv_square give the abstract pasting calculation; they do not identify the concrete coefficient presentations.",
+   "date": "2026-10-27",
+   "verdict": "Generic category lemmas only; no exact match for the coefficient-presentation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "One match: CategoryTheory.mateEquiv_hcomp. The concrete completion and native ring identifications still have to be supplied.",
+   "date": "2026-10-27",
+   "verdict": "Generic category lemmas only; no exact match for the coefficient-presentation statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_hom_iff_isIso|mapDerivedCategory|mateEquiv",
+   "results": "Arrow.isIso_iff_isIso_of_isIso transports invertibility across the resulting arrow isomorphism; no concrete native coefficient presentation theorem.",
+   "date": "2026-10-27",
+   "verdict": "Generic category lemmas only; no exact match for the coefficient-presentation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A change of ring presentation transports the derived scalar extension pushforward mate to the composite of two coefficient change mates",
+   "results": "Search returned scalar extension transitivity lemmas for ordinary modules and base-change lemmas. No completed/native ringed-topos mate presentation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary scalar associativity only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeProperScalarMateBoundedBelowRestricted",
+  "date": "2026-10-28",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The coefficient-presentation and mate-pasting part of lem-sf-native-proper-scalar-mate-bounded-below-restricted. Inherited paper anchor: cor-coef-verdier-weil-equivariance, common-field comparisons. The formal-properties paragraph of the current scalar direct-image proof supplies mate composition. tools/blueprint_refs.py ancestor returns None for the current module-named created.item chain.",
+   "via": [
+    "lem-sf-native-proper-scalar-mate-bounded-below-restricted",
+    "lem-sf-native-proper-scalar-mate-bounded-below",
+    "lem-sf-native-compact-support-scalar-mate-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeProperScalarMatePresentation",
+  "file": "lean/Sheaf/Paper/NativeProperScalarMatePresentation.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_presentation",
+  "statement": "theorem native_proper_scalar_mate_presentation\n    (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]\n    (E : Index l (PadicAlgCl l))\n    (a : PurCompactSupport.Change (PurCompactSupport.completed l\n      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (ha : ∀ (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),\n      a.map T = C.integralMap l T)\n    {U V : Scheme.{u}} (g : U ⟶ V) :\n    ∃ (e : pbcModules U ((PurCompactSupport.completed l\n          (Coefficient.{u} l (PadicAlgCl l) E)).ring U) ≌\n        Mod (Sheaf (ProEt.topology U) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicIntegersRingObj l E.1) U))\n      (d : Mod (Sheaf (ProEt.topology V) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicAlgClRingObj l) V) ≌\n        pbcModules V ((nativeCoefficients l).ring V))\n      (he : e.functor.Additive) (hd : d.functor.Additive),\n      letI := he\n      letI := hd\n      ∀ M : DerivedCategory (pbcModules U ((PurCompactSupport.completed l\n          (Coefficient.{u} l (PadicAlgCl l) E)).ring U)),\n        Nonempty (Arrow.mk ((PurCompactSupport.properComparison a g).app M) ≅\n          Arrow.mk (d.functor.mapDerivedCategory.map\n            (nativeScalarCondensedComposite l E g\n              (e.functor.mapDerivedCategory.obj M))))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_presentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261028T020720-L-2540660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261028T020720-L-2540660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
