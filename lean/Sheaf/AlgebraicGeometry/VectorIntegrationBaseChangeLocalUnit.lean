@@ -6,6 +6,8 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.VectorTraceGeometry
+import Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalTrace
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
 
 /-! # Degree-zero unit form of local vector integration base change
 
@@ -85,6 +87,85 @@ theorem vectorIntegration_baseChange_local_unit (N : ℕ) (hN : 0 < N)
       (ordinaryFinitePullback A j).map
         ((ordinaryFinitePullback A f).map kS ≫ (ordinaryFiniteUnitPullback A f).hom) ≫
         (ordinaryFiniteUnitPullback A j).hom := by
-  sorry
+  have hcore := vectorIntegration_baseChange_local_trace N hN A hA t f hS r F c hc b hb D
+    V eS U eT W j a g ha hg
+  have hunitT := ordinaryFiniteUnitPullback_comp A a U.ι j ha.symm
+  have hnatT :=
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) a U.ι j ha.symm).hom.naturality kT
+  simp only [Functor.comp_map] at hnatT
+  have hnatS :=
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) g V.ι (g ≫ V.ι) rfl).hom.naturality kS
+  simp only [Functor.comp_map] at hnatS
+  have hnatJF :=
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f (g ≫ V.ι) hg.symm).hom.naturality kS
+  simp only [Functor.comp_map] at hnatJF
+  have hunitJF := ordinaryFiniteUnitPullback_comp A j f (g ≫ V.ι) hg.symm
+  have hunitGV := ordinaryFiniteUnitPullback_comp A g V.ι (g ≫ V.ι) rfl
+  have hright :
+      (ordinaryFinitePullback A j).map
+          ((ordinaryFinitePullback A f).map kS ≫
+            (ordinaryFiniteUnitPullback A f).hom) ≫
+          (ordinaryFiniteUnitPullback A j).hom =
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f (g ≫ V.ι) hg.symm).inv.app _ ≫
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) g V.ι (g ≫ V.ι) rfl).hom.app _ ≫
+          (ordinaryFinitePullback A g).map
+            ((ordinaryFinitePullback A V.ι).map kS ≫
+              (ordinaryFiniteUnitPullback A V.ι).hom) ≫
+          (ordinaryFiniteUnitPullback A g).hom := by
+    apply (cancel_epi
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f (g ≫ V.ι) hg.symm).hom.app _)).mp
+    simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
+    dsimp only [ordinaryFinitePullback] at hnatJF hnatS hunitJF hunitGV ⊢
+    rw [← reassoc_of% hnatJF]
+    rw [hunitJF]
+    rw [← hunitGV, ← reassoc_of% hnatS]
+  calc
+    (ordinaryFinitePullback A j).map (b.hom ≫ kT) ≫
+        (ordinaryFiniteUnitPullback A j).hom =
+      (ordinaryFinitePullback A j).map b.hom ≫
+        (ordinaryFinitePullback A j).map kT ≫
+        (ordinaryFiniteUnitPullback A j).hom := by
+          rw [Functor.map_comp]
+          simp only [Category.assoc]
+    _ = (ordinaryFinitePullback A j).map b.hom ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) a U.ι j ha.symm).hom.app _ ≫
+        (ordinaryFinitePullback A a).map
+          ((ordinaryFinitePullback A U.ι).map kT) ≫
+        (ordinaryFinitePullback A a).map
+          (ordinaryFiniteUnitPullback A U.ι).hom ≫
+        (ordinaryFiniteUnitPullback A a).hom := by
+          rw [← hunitT]
+          dsimp only [ordinaryFinitePullback] at hnatT ⊢
+          rw [reassoc_of% hnatT]
+    _ = (ordinaryFinitePullback A j).map b.hom ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) a U.ι j ha.symm).hom.app _ ≫
+        (ordinaryFinitePullback A a).map
+          ((ordinaryFinitePullback A U.ι).map kT ≫
+            (ordinaryFiniteUnitPullback A U.ι).hom) ≫
+        (ordinaryFiniteUnitPullback A a).hom := by
+          rw [Functor.map_comp]
+          simp only [Category.assoc]
+    _ = (ordinaryFinitePullback A j).map b.hom ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) a U.ι j ha.symm).hom.app _ ≫
+        (ordinaryFinitePullback A a).map
+          (vectorIntegrationLocalTrace N hN A hA t D T
+            (affineTracePullbackInvertible N f hS) r
+            ((Scheme.Modules.tensorPullback f).obj F) U eT) ≫
+        (ordinaryFiniteUnitPullback A a).hom := by rw [hkT]
+    _ = (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f (g ≫ V.ι) hg.symm).inv.app _ ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) g V.ι (g ≫ V.ι) rfl).hom.app _ ≫
+        (ordinaryFinitePullback A g).map
+          (vectorIntegrationLocalTrace N hN A hA t D S hS r F V eS) ≫
+        (ordinaryFiniteUnitPullback A g).hom := hcore
+    _ = (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) j f (g ≫ V.ι) hg.symm).inv.app _ ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) g V.ι (g ≫ V.ι) rfl).hom.app _ ≫
+        (ordinaryFinitePullback A g).map
+          ((ordinaryFinitePullback A V.ι).map kS ≫
+            (ordinaryFiniteUnitPullback A V.ι).hom) ≫
+        (ordinaryFiniteUnitPullback A g).hom := by rw [hkS]
+    _ = (ordinaryFinitePullback A j).map
+        ((ordinaryFinitePullback A f).map kS ≫
+          (ordinaryFiniteUnitPullback A f).hom) ≫
+        (ordinaryFiniteUnitPullback A j).hom := hright.symm
 
 end AlgebraicGeometry.Etale
