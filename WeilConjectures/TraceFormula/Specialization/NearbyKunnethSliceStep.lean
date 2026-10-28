@@ -18,6 +18,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
 
 /-!
 
@@ -178,11 +179,10 @@ automorphisms of the geometric generic point `Spec Ω_K` over `Spec Ω`
 `α_M : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` of `M` and `α_P` of the product `P` are the inclusions of the
 `P'`-invariants: the action factors through a finite quotient of order `n` (a power of `p`), with
 representatives `τ i`, and `α_M`, `α_P` are split monomorphisms whose idempotents are `1/n` times
-the sums of the actions of the `τ i`.
-
-Unfinished: neither base change of `Rj_*` along the slice (which is not weakly étale) nor the
-continuity of the action of `P'` on `ℓ`-adic nearby cycles is formalised for pro-étale
-`ℚ̄_ℓ`-sheaves. -/
+the sums of the actions of the `τ i`. This is
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice` for `M` and for `P`,
+over the intersection of the two subgroups of finite index acting trivially
+(`NearbyCyclesModel.sum_autAction_baseChangeAut_eq_relIndex_nsmul`). -/
 theorem exists_sum_autAction_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -233,8 +233,45 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
           (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')) (τ i)).autAction
             (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
               (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
-                L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
-  sorry
+                L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+  set Λ := Profinite.padicAlgClRingObj ℓ
+  have hPg : boundedConstructible (condensedRingObj Λ P.generic)
+      (L((P.ε)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) := by
+    have : (boundedConstructible (condensedRingObj Λ P.generic)).IsMonoidal :=
+      isMonoidal_boundedConstructible (X := Over.mk (φ₁.generic ≫ gM)) (ℓ := ℓ)
+    exact (boundedConstructible _).prop_of_iso (Functor.Monoidal.μIso L((P.ε)^*⟦Λ⟧) _ _)
+      (ObjectProperty.prop_tensor
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f₁ A hA))
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f₂ B hB)))
+  obtain ⟨VM, _, htM, rM, hrM, havgM⟩ := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
+    hM hb (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ M.ε A hA)
+  obtain ⟨VP, _, htP, rP, hrP, havgP⟩ := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
+    hP (comp_coordinate_fst hb) hPg
+  have : VM.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  have : VP.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  let V := VM ⊓ VP
+  let := Subgroup.fintypeQuotientOfFiniteIndex (H := V)
+  have hcard : ∀ (W : Subgroup (GenericAut k' (traitSliceField k'))) (_ : V ≤ W)
+      [Fintype (GenericAut k' (traitSliceField k') ⧸ W)],
+      Fintype.card (GenericAut k' (traitSliceField k') ⧸ V) =
+        V.relIndex W * Fintype.card (GenericAut k' (traitSliceField k') ⧸ W) := by
+    intro W hW _
+    rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, ← Subgroup.index,
+      ← Subgroup.index, Subgroup.relIndex_mul_index hW]
+  let e := (Fintype.equivFin (GenericAut k' (traitSliceField k') ⧸ V)).symm
+  refine ⟨Fintype.card (GenericAut k' (traitSliceField k') ⧸ V), fun i ↦ (e i).out,
+    Fintype.card_ne_zero, rM, rP, hrM, ?_, hrP, ?_⟩
+  · rw [Equiv.sum_comp e (fun σ ↦ (baseChangeAut hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _) σ.out).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A)),
+      sum_autAction_baseChangeAut_eq_relIndex_nsmul hM b hb _ _ Λ inf_le_left _ htM, ← havgM,
+      hcard VM inf_le_left, mul_nsmul]
+  · rw [Equiv.sum_comp e (fun σ ↦ (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+        (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction Λ
+          (L((𝟙 Z)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))),
+      sum_autAction_baseChangeAut_eq_relIndex_nsmul hP (φ₁.total ≫ b) (comp_coordinate_fst hb) _ _
+        Λ inf_le_right _ htP, ← havgP, hcard VP inf_le_right, mul_nsmul]
 
 set_option maxHeartbeats 800000 in
 -- the square of the Künneth maps of the slice is a large term
