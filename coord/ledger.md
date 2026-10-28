@@ -20865,3 +20865,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/P2/Sheaf.SixFunctors.FiniteDualizingQuotientNormalization (stage 3; reviewer PASS; first push; landing 20261028T034900-L-3564271 (interface); batch 20261028T034643; modules 4; new nodes 3)
 - 03:49 L: merged deliver/P3/Sheaf.Paper.IsomorphismScalarFiniteLeftQuotientFormula (stage 3; reviewer PASS; first push; landing 20261028T034902-L-3564635 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/P3/Sheaf.SixFunctors.IntegralSystemProperOpenTransportBridge (stage 3; reviewer PASS; first push; landing 20261028T034903-L-3564958 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:49 L: merged deliver/P4/Sheaf.Paper.IsomorphismScalarFiniteRightQuotientFormula (stage 3; reviewer PASS; first push; landing 20261028T034904-L-3565384 (interface); batch 20261028T034643; modules 1; new nodes 0)

@@ -4,6 +4,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import all Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import all Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison
 
 /-! # Right finite scalar quotient formula
 
@@ -17,7 +19,7 @@ Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
@@ -30,12 +32,46 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
+attribute [local irreducible] completedScalarChangeData integralScalarReductionWitness
+  completedIntegralCoefficientSheafUnrestricted
+
+private def rightModuleQuotient (n : ℕ) :
+    completedOrdinaryScalarExtension l E L ι Y ⋙ inverseImageIntegralModules l L g ⟶
+      integralScalarReduction l E L ι Y n ⋙ inverseImageFiniteModules l L g n ⋙
+        SheafOfModules.restrictScalars (coefficientProjection l L X n) :=
+  Functor.whiskerRight
+    (show completedOrdinaryScalarExtension l E L ι Y ⟶
+        integralScalarReduction l E L ι Y n ⋙
+          SheafOfModules.restrictScalars (coefficientProjection l L Y n) from
+      { app := fun M ↦ completedScalarModuleArrow l E L ι Y M n
+        naturality := fun _ _ f ↦ completedScalarModuleArrow_naturality l E L ι Y f n })
+    (inverseImageIntegralModules l L g) ≫
+      Functor.whiskerLeft (integralScalarReduction l E L ι Y n)
+        (inverseReductionTransport l L g n)
+
+private def rightComplexQuotient (n : ℕ) :
+    rightComplex l E L ι g ⟶ restrictedRight l E L ι g n where
+  app P :=
+    { f := fun i ↦ (rightModuleQuotient l E L ι g n).app (P.X i)
+      comm' := fun i j _ ↦ ((rightModuleQuotient l E L ι g n).naturality
+        (P.d i j)).symm }
+  naturality := by
+    intro P Q f
+    ext i : 1
+    exact (rightModuleQuotient l E L ι g n).naturality (f.f i)
+
 /-- The right completed-to-finite quotient map and its pure-tensor formula.
 
-The map is obtained from the scalar-extension unit followed by the finite
-projection on the target and transported through inverse image.  The concrete
-presentation transport is the right component of the quotient-chain
-calculation and is isolated as this strictly smaller obligation.
+Use the existing completed scalar quotient map, whose tensor formula already
+includes the transport to the selected finite scalar-extension presentation.
+Apply completed inverse image, then the identity-on-sections comparison between
+inverse image followed by restriction and restriction followed by inverse image.
+The coefficient projection square proves that comparison linear. Naturality
+makes the degreewise maps chain maps, and their tensor formula is unchanged.
+The construction is independent of the completed comparison b and its formula.
+
+Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
+(blueprint: lem-weil-isomorphism-scalar-finite-right-quotient-formula).
 -/
 theorem right_quotient_formula_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
@@ -45,6 +81,11 @@ theorem right_quotient_formula_exists
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶
           (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n,
       RightQuotientFormula l E L ι g vright := by
-  sorry
+  have _ := hb
+  refine ⟨fun n ↦ Functor.whiskerLeft (integralOperationsGoodComplex l E Y).ι
+    (rightComplexQuotient l E L ι g n), ?_⟩
+  intro n P i U s x
+  exact completedScalarModuleArrow_tensor l E L ι Y (P.obj.X i) n
+    (op ((proEtaleIsoPostcompose g).obj U)) s x
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
