@@ -25,8 +25,8 @@ generic fibre is bounded constructible
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`).
 
 This is the common input of the trait-change step of Gabber's Künneth formula (for
-`Spec K⟦t⟧ ⟶ Spec k'⟦t⟧`) and of the slice step of Deligne's finiteness theorem (for the
-completion `Spec K⟦t⟧` of the strict localization of `𝔸¹_S` at the generic point of its special
+`Spec K⟦t⟧ ⟶ Spec k'⟦t⟧`) and of the slice step of Deligne's finiteness theorem (for
+`Spec K⟦t⟧ ⟶ S'`, `S'` the strict localization of `𝔸¹_S` at the generic point of its special
 fibre).
 
 ## Proof outline (Deligne, loc. cit., 3.7–3.9)

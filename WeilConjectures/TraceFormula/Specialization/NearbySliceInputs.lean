@@ -48,7 +48,11 @@ localization as a generic slice trait, and the averaging splitting (M2).
   algebraic over `Frac k'⟦t⟧ ⊆ Frac R`, hence lies in `Ω'`. The repository has the strict
   localization as a limit scheme (`AlgebraicGeometry.Sites.StrictHenselization`) and its
   ind-étaleness, but not that it is a discrete valuation ring, nor its universal property.
-* (M2) is proved on `trace2/nearby-prop-averaging` (#1791), see its docstring.
+* (M2): the finite-level Galois trace of #1791 (`trace2/nearby-prop-averaging`) splits the unit of
+  each finite Galois `p`-cover. Passing to `π` needs either that `P` acts on `Ψ_{S'}` through a
+  finite quotient (true once `Ψ_{X'/S'}(B)` is known to be constructible, i.e. Deligne's finiteness
+  over `S'`, which the induction over the traits `Spec k⟦t⟧` does not provide), or the `ℚ̄_ℓ`-valued
+  Haar average over `P`; neither is formalised.
 
 -/
 
@@ -81,19 +85,20 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **(M2) The pro-`p` averaging splitting on the generic slice trait** (SGA 4½, [Th. finitude],
-Lemme 3.4; proved on `trace2/nearby-prop-averaging`, #1791): for a bounded constructible complex
+Lemme 3.4): for a bounded constructible complex
 `B` on `X = 𝔸ⁿ⁺¹_S`, the pullback exchange of the first factor `toCartesian` of the morphism of
 models `σ : (X ×_{𝔸¹_S} S' over S') ⟶ (X over S)` is a split monomorphism at `B`.
 
 It is `Φ(u)` for `Φ = i^* Rj'_*` (special fibre of `X' = X ×_{𝔸¹_S} S'`, `j'` the inclusion of
 `X' ×_S Ω`) and `u : G ⟶ Rπ_* Lπ^* G` the unit of the change of generic fibres
 `π : X' ×_{S'} Ω' ⟶ X' ×_S Ω`, `G` the restriction of `B`. Here `π` is the base change of
-`Spec Ω' ⟶ Spec k₀`, `k₀ = Ω ⊗_{Frac k'⟦t⟧} Frac R` a field with `Gal(Ω'/k₀)` pro-`p`. With #1791:
-the action of `P` on the `ℓ`-adic constructible `Ψ_{S'}` factors through a finite quotient
-`Gal(L/k₀)`, so `u = uₙ ≫ c` with `uₙ` the unit of the finite Galois `p`-cover `πₙ` at level `L` and
-`Φ(c)` invertible; `uₙ` is split by the normalized trace `normalizedTrace (galoisTrace πₙ)`
-(`CategoryTheory.comp_normalizedTrace`, `ProEtale.unit_comp_galoisTrace`), and
-`CategoryTheory.isSplitMono_map_of_isIso_map` concludes. `sorry`ed. -/
+`Spec Ω' ⟶ Spec k₀`, `k₀ = Ω ⊗_{Frac k'⟦t⟧} Frac R` a field with `P = Gal(Ω'/k₀)` pro-`p`.
+With #1791: if `P` acts on `Ψ_{X'/S'}(B)` through a finite quotient `Gal(L/k₀)` (which holds once
+`Ψ_{X'/S'}(B)` is constructible), then `u = uₙ ≫ c` with `uₙ` the unit of the finite Galois
+`p`-cover `πₙ` at level `L` and `Φ(c)` invertible; `uₙ` is split by the normalized trace
+`normalizedTrace (galoisTrace πₙ)` (`CategoryTheory.comp_normalizedTrace`,
+`ProEtale.unit_comp_galoisTrace`), and `CategoryTheory.isSplitMono_map_of_isIso_map` concludes.
+Without constructibility, the splitting is the `ℚ̄_ℓ`-valued Haar average over `P`. `sorry`ed. -/
 theorem isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom
     (D : GenericSliceTrait k') (n : ℕ) (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
