@@ -50,6 +50,7 @@ Usage:
   tools/setbuild.py report [--hours H]   predictions against what the global build later did with the same heads
   tools/setbuild.py build <G> <module> [--no-judge]   judge (unless told not to) and set-build one delivery branch now
   tools/setbuild.py build <G> <module> --assume-eligible   only the compiles of the set (a test; nothing recorded)
+  tools/setbuild.py validate <head>      shadow check: direct importers of the changed modules, frozen vs with the set
 Settings (environment or coord/sheaf.env): SHEAF_SETBUILD_PAR (4 compiles of one set at once), SHEAF_SETBUILD_SETS (3
 sets at once), SHEAF_SETBUILD_JUDGES (4 judgement sessions at once), SHEAF_SETBUILD_JUDGE_TIMEOUT (900 s),
 SHEAF_FILE_RUN_LIMIT (300 s: how long one compile may run).
@@ -432,14 +433,19 @@ def run_probe(folder: pathlib.Path, mods: list[str], arts: dict) -> tuple[dict, 
     from build import BATCH_PROBE   # noqa: E402
 
     def one(ms, name):
+        # a module-system file with `import all` of the probed modules: their private declarations and proof bodies
+        # are loaded (a plain `public import` shows no `sorry` inside proofs), the private declarations of their
+        # imports are not, so the twin-module collisions of a non-module probe file ("environment already contains",
+        # tools/build.py batch_checks) cannot happen
         f = folder / "src" / f"{name}.lean"
-        f.write_text("import Lean.Elab.Command\n" + "".join(f"import {m}\n" for m in ms)
+        f.write_text("module\nimport Lean.Elab.Command\n" + "".join(f"import all {m}\n" for m in ms)
                      + BATCH_PROBE % ",\n    ".join("`" + m for m in ms))
         sf = folder / f"setup-{name}.json"
-        sf.write_text(json.dumps({"name": name, "isModule": False, "importArts": arts, "dynlibs": [], "plugins": [],
+        sf.write_text(json.dumps({"name": name, "isModule": True, "importArts": arts, "dynlibs": [], "plugins": [],
                                   "options": {}}))
         try:
-            p = subprocess.run([LEANBIN, "--setup", str(sf), str(f)], cwd=folder, capture_output=True, text=True, timeout=600,
+            p = subprocess.run([LEANBIN, "--setup", str(sf), "-R", str(folder / "src"), str(f)], cwd=folder,
+                               capture_output=True, text=True, timeout=600,
                                env=dict(os.environ, LEAN_PATH=":".join(frozen_path()), LEAN_NUM_THREADS="1"))
             out = p.stdout + p.stderr
         except subprocess.TimeoutExpired:
@@ -702,9 +708,17 @@ def fix_overrides(head: str, D_mods: list[dict]) -> dict:
             for m in D_mods if pathlib.PurePosixPath(m["file"]).name in names}
 
 
+_READ = threading.Lock()   # tools/stage3_delivery.py and tools/review_class.py keep module-level caches: one reader at a time
+
+
 def delivery(g: str, item: str, head: str | None = None) -> dict | None:
     """The delivery on its branch, read as the lander reads it (tools/stage3_delivery.py read_delivery), with a
     reviewer's fixed files in place."""
+    with _READ:
+        return _delivery(g, item, head)
+
+
+def _delivery(g: str, item: str, head: str | None = None) -> dict | None:
     import stage2_delivery as s2
     import stage3_delivery as s3
     head = head or git("rev-parse", f"refs/heads/deliver/{g}/{item}").strip()
@@ -743,10 +757,27 @@ def needs_reader(g: str, item: str, D: dict) -> str | None:
     """The class reason when the cc review service reads this delivery (tools/review_class.py), else None."""
     import review_class as rc
     try:
-        cl, why, _h = rc.classify(g, item, D)
+        with _READ:
+            cl, why, _h = rc.classify(g, item, D)
     except Exception as e:  # noqa: BLE001
         return f"class unknown ({e!r})"[:200]
     return None if cl == "AUTO" else f"{cl}: {why}"[:300]
+
+
+def build_slot():
+    """One of SHEAF_SETBUILD_SETS machine-wide slots for a set build (flock on local/sets/slots/<i>.lock)."""
+    n = max(1, int(setting("SHEAF_SETBUILD_SETS", "3")))
+    d = SB / "slots"
+    d.mkdir(parents=True, exist_ok=True)
+    while True:
+        for i in range(n):
+            f = open(d / f"{i}.lock", "w")
+            try:
+                fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return f
+            except OSError:
+                f.close()
+        time.sleep(2)
 
 
 def evaluate(g: str, item: str, head: str, judge: bool = True) -> dict:
@@ -791,7 +822,9 @@ def evaluate(g: str, item: str, head: str, judge: bool = True) -> dict:
     if not eligible(j):
         return done(dict(base, ok=False, phase="not-eligible", why="judged statement-changing or downstream-affecting"))
     allowed = allowed_sorry(dv["D"]["modules"])
+    slot = build_slot()      # held until this process ends
     r = build_set(g, item, head, texts, allowed)
+    slot.close()
     r = dict(base, **r)
     if r.get("phase") == "interface-changed":
         with open(SB / "judgement-wrong.tsv", "a") as f:
@@ -894,6 +927,18 @@ def refresh_newlib() -> None:
 
 # ---------------------------------------------------------------- the daemon
 
+def evaluate_proc(g: str, item: str, head: str) -> dict:
+    """evaluate() in a process of its own (reading a delivery takes 10-25 s of Python and the readers keep
+    module-level caches: processes run in parallel where threads would queue on one lock)."""
+    p = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()), "eval", g, item, head], cwd=ROOT,
+                       capture_output=True, text=True, timeout=7200)
+    for line in reversed(p.stdout.splitlines()):
+        if line.startswith("PHASE "):
+            return {"phase": line.split(" ", 1)[1]}
+    log("eval process failed", g, item, head[:9], (p.stdout + p.stderr)[-400:].replace("\n", " / "))
+    return {"phase": "error"}
+
+
 def daemon() -> int:
     SB.mkdir(parents=True, exist_ok=True)
     lockf = open(SB / "daemon.lock", "w")
@@ -903,9 +948,9 @@ def daemon() -> int:
         print("another daemon runs"); return 1
     (SB / "daemon.pid").write_text(str(os.getpid()))
     log("daemon started, mode", mode())
-    width = int(setting("SHEAF_SETBUILD_SETS", "3")) + int(setting("SHEAF_SETBUILD_JUDGES", "4"))
+    width = int(setting("SHEAF_SETBUILD_SETS", "3")) + int(setting("SHEAF_SETBUILD_JUDGES", "4")) + 4
     ex = cf.ThreadPoolExecutor(max_workers=width)
-    running, tried = {}, {}
+    running, tried, last = {}, {}, {}
     last_new = 0.0
     while True:
         if mode() == "off":
@@ -914,9 +959,10 @@ def daemon() -> int:
             if fut.done():
                 running.pop(h)
                 try:
-                    fut.result()
+                    last[h] = (fut.result() or {}).get("phase")
                 except Exception as e:  # noqa: BLE001
-                    log("evaluate failed", h[:9], repr(e)[:300])
+                    import traceback
+                    log("evaluate failed", h[:9], repr(e)[:300], "|", traceback.format_exc()[-600:].replace("\n", " / "))
         try:
             cands = candidates()
         except Exception as e:  # noqa: BLE001
@@ -939,7 +985,17 @@ def daemon() -> int:
             if time.time() - tried.get(head, 0) < 900:
                 continue
             tried[head] = time.time()
-            running[head] = ex.submit(evaluate, g, item, head)
+            running[head] = ex.submit(evaluate_proc, g, item, head)
+        try:
+            live = {h for _g, _i, h in cands}
+            ph = {}
+            for h in live:
+                k = last.get(h) or ("running" if h in running else "not yet")
+                ph[k] = ph.get(k, 0) + 1
+            write_json(SB / "daemon-state.json", {"time": time.strftime("%FT%TZ", time.gmtime()), "candidates": len(live),
+                                                  "running": len(running), "phases": ph})
+        except Exception:  # noqa: BLE001
+            pass
         if mode() == "on" and time.time() - last_new > 300:
             try:
                 refresh_newlib()
@@ -1019,6 +1075,38 @@ def status() -> int:
     return 0
 
 
+def validate(head: str, limit: int = 4) -> dict:
+    """Shadow check of a passed set's judgement: up to `limit` direct importers of each changed module (frozen
+    sources) compiled against the frozen tree and again with the set's changed modules in front. An importer that
+    compiles against the frozen tree but not with the set would show that downstream IS affected."""
+    r = read_json(RESULTS / f"{head}.json") or {}
+    if not r.get("ok"):
+        return {"head": head, "skipped": r.get("phase")}
+    folder = pathlib.Path(r["folder"])
+    commit = r.get("base") or published_commit()
+    g = library_graph()
+    changed = r.get("changed_modules") or []
+    out = {}
+    for x in changed:
+        imps = sorted(m for m, deps in g.items() if x in deps and m not in r.get("modules", []))[:limit]
+        for m in imps:
+            data = subprocess.run(["git", "show", f"{commit}:lean/{rel_of(m)}"], cwd=ROOT, capture_output=True).stdout
+            if not data:
+                continue
+            pth = folder / "vsrc" / rel_of(m)
+            pth.parent.mkdir(parents=True, exist_ok=True)
+            pth.write_bytes(data)
+            a = compile_one(folder, m, None, {}, name=m + "-vfrozen", root="vsrc")
+            b = compile_one(folder, m, None, import_arts([folder / "changed", folder / "new"], set(changed) | set(r.get("new_modules") or [])),
+                            name=m + "-vset", root="vsrc")
+            out[m] = {"of": x, "frozen": a["rc"], "with_set": b["rc"], "secs": [a["secs"], b["secs"]],
+                      "errors": b["errors"][:3] if b["rc"] and not a["rc"] else []}
+    bad = [m for m, v in out.items() if v["frozen"] == 0 and v["with_set"] != 0]
+    res = {"head": head, "group": r.get("group"), "item": r.get("item"), "importers": out, "affected": bad}
+    write_json(folder / "validate.json", res)
+    return res
+
+
 def main(a: list[str]) -> int:
     if a == ["daemon"]:
         return daemon()
@@ -1026,6 +1114,13 @@ def main(a: list[str]) -> int:
         return status()
     if a and a[0] == "report":
         return report(float(a[a.index("--hours") + 1]) if "--hours" in a else 48)
+    if len(a) == 4 and a[0] == "eval":          # the daemon's worker process
+        r = evaluate(a[1], a[2], a[3])
+        print("PHASE " + str(r.get("phase")))
+        return 0
+    if len(a) == 2 and a[0] == "validate":
+        print(json.dumps(validate(a[1]), indent=1)[:4000])
+        return 0
     if len(a) >= 3 and a[0] == "build":
         g, item = a[1], a[2]
         head = git("rev-parse", f"refs/heads/deliver/{g}/{item}").strip()
