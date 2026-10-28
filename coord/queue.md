@@ -1,29 +1,37 @@
 # Work queue
 
-280 items; claim with `tools/claim.py next <group> [--stage N]`.
+290 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (11)
+## Stage 2: nodes to state (19)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `lem-pur-general-legacy-hom-coordinates` | 1 | state | 2 |
 | `lem-sp-ctf-tower-pullback-reconstruction` | 1 | state | 1 |
+| `lem-per-adic-closed-constructible` | 1 | state | 0 |
+| `lem-per-finite-tor-internal-hom-any-field` | 1 | state | 0 |
 | `lem-pur-system-scalar-associator-coherence` | 1 | state | 0 |
 | `lem-pur-tower-purity-ground-field-retagging` | 1 | state | 0 |
 | `lem-sf-native-ordinary-chain-currying` | 1 | state | 0 |
 | `lem-sf-native-ordinary-model-uniqueness` | 1 | state | 0 |
+| `lem-sf-projection-reduction-common` | 1 | state | 0 |
 | `lem-zl-finite-separable-tensor-primitive-presentation` | 1 | state | 0 |
 | `lem-pur-composition-comparison-scalar-compatibility` | 2 | state | 0 |
 | `lem-pur-integral-scalar-reduction-intertwining` | 2 | state | 0 |
 | `lem-pur-rational-normalized-purity-diagrams` | 2 | state | 0 |
 | `lem-pur-scalar-reduction-transpose-normalization` | 2 | state | 0 |
+| `lem-sf-projection-base-change-common` | 2 | state | 0 |
+| `lem-sf-projection-base-change-integral` | 2 | state | 0 |
+| `lem-sf-projection-base-change-rational` | 2 | state | 0 |
+| `lem-sf-projection-reduction-integral` | 2 | state | 0 |
+| `lem-sf-projection-reduction-rational` | 2 | state | 0 |
 
-Not open yet: 1131 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 1125 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (268)
+## Stage 3: modules to prove (270)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -73,6 +81,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclicBoundaryRestriction` | 9 | 1 | proof | route |
 | `Sheaf.Paper.AmbientPullbackOrdinaryCompositionLaws` | 9 | 2 | proof | route |
 | `Sheaf.Paper.ConstantKoszulQuotientAugmentationIsIso` | 9 | 1 | proof | route |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | 9 | 1 | proof | route |
 | `Sheaf.Paper.AmbientCoefficientSequencePullbackIsoApp` | 10 | 1 | proof | route |
 | `Sheaf.Paper.CoefficientDerivedSectionsCoreData` | 10 | 1 | proof | route |
 | `Sheaf.Paper.CoefficientDerivedSectionsCoreEquations` | 10 | 1 | proof | route |
@@ -127,6 +136,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SfRationalDirectImageCoefficientCompatibility` | 14 | 1 | proof | route |
 | `Sheaf.Paper.SystemDirectImageRoosEvaluation` | 14 | 1 | proof | route |
 | `Sheaf.Paper.SystemDirectImageRoosExistence` | 14 | 1 | proof | route |
+| `Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence` | 14 | 1 | proof | route |
 | `Sheaf.Paper.CommonStagePullbackCompComponent` | 15 | 2 | proof | route |
 | `Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA` | 15 | 5 | proof | route |
 | `Sheaf.Paper.DiagonalCyclicUniformizerSquare` | 15 | 1 | proof | route |
@@ -298,7 +308,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 5 | proof | 1 |
 | `Sheaf.Paper.CompactSupportStrictScalarComposition` | - | 1 | proof | 1 |
 
-## Stage 3: waiting for statements of dependencies (12)
+## Stage 3: waiting for statements of dependencies (11)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -306,7 +316,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.BoundedConstructibleHomSingle` | 3 | 1 | `lem-per-adic-closed-constructible` |
 | `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients` | 6 | 5 | `lem-pur-general-legacy-hom-coordinates` |
-| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | 9 | 1 | `lem-pod-rational-purity-pairing` |
 | `Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible` | 12 | 1 | `lem-zl-finite-separable-tensor-primitive-presentation` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | 12 | 4 | `lem-pur-tower-purity-ground-field-retagging` |
 | `Sheaf.WeilSheaf.NativeSectionClosedForgetful` | 12 | 1 | `lem-sf-native-ordinary-model-uniqueness` |
