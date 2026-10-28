@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-integral-hom-reduction-normalization-data",
+ "kind": "statement",
+ "title": "Sectionwise normalization data for a fixed reduction comparison",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Given source and target TensorPresentations and a derived tensor comparison mu, the flat representative beta maps, its pure-tensor normalization, and the derived counit square exist for every pair of flat complexes.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-integral-hom-reduction-comparison-exists"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Use scalar-extension units x ↦ 1 ⊗ x on K-flat representatives. Balanced tensor associativity gives an invertible chain map and its pure-tensor equation; the left-derived universal property gives the counit square.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-integral-hom-reduction-comparison-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-integral-hom-reduction-comparison-exists"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat scalar extension pure tensor normalization",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived counit square tensor comparison",
+   "results": "Generic adjunction results only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionUnit totalPair normalization",
+   "results": "Only ReductionPresentation field and this split theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionNormalization",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-reduction-normalization",
+   "place": "paragraph 2, coefficient extension",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomReductionNormalizationData",
+  "file": "lean/Sheaf/Paper/IntegralHomReductionNormalizationData.lean",
+  "declaration": "WeilConjectures.IntegralHom.reduction_normalization_data_exists",
+  "statement": "theorem reduction_normalization_data_exists\n    (a : TensorPresentation.{t, u} Y\n      (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ)\n    (target : TensorPresentation.{t, u} Y\n      (integralCoefficientCommRingSheaf l E Y n))\n    (mu : a.tensor ⋙ integralDerivedReduction l E Y D hl n ≅\n      ((integralDerivedReduction l E Y D hl n).prod\n        (integralDerivedReduction l E Y D hl n)) ⋙ target.tensor) :\n    letI : HasDerivedCategory (Modules.{t, u} Y\n      (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _\n    letI : HasDerivedCategory (Modules.{t, u} Y\n      (integralCoefficientCommRingSheaf l E Y n)) := HasDerivedCategory.standard _\n    ∀ (P Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)\n      (hp : flat.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) P)\n      (hq : flat.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) Q),\n      ∃ (hp' : flat.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)\n          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P))\n        (hq' : flat.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)\n          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q))\n        (beta : ((totalTensor.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj\n          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj P)).obj\n          (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj Q) ⟶\n        ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex (.up ℤ)).obj\n          (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q)),\n        IsIso beta ∧\n        (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n          (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),\n          (beta.f (i + j)).val.app U\n              (totalPair.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)\n                (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex\n                  (.up ℤ)).obj P)\n                (((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex\n                  (.up ℤ)).obj Q)\n                i j U ((reductionUnit l E Y D hl n (P.X i)).val.app U x)\n                  ((reductionUnit l E Y D hl n (Q.X j)).val.app U y)) =\n            (reductionUnit l E Y D hl n\n              ((((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q).X\n                (i + j))).val.app U\n              (totalPair.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) P Q i j U x y)) ∧\n        (integralDerivedReduction l E Y D hl n).map\n            (a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫\n          mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n          target.tensor.map (Prod.mkHom (reductionCounit l E Y D hl n P)\n            (reductionCounit l E Y D hl n Q)) ≫\n          target.representative.inv.app (⟨_, hp'⟩, ⟨_, hq'⟩) ≫ DerivedCategory.Q.map beta =\n        reductionCounit l E Y D hl n\n          (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034758-L-3544221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034758-L-3544221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

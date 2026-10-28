@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-integral-hom-reduction-comparison-exists",
+ "kind": "statement",
+ "title": "Derived tensor comparison for a fixed reduction target",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For a source TensorPresentation a and a finite-level target TensorPresentation at level n, there is a natural isomorphism from the derived reduction of a.tensor to the target tensor applied to both derived reductions.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Extend both factors to the finite coefficient sheaf on K-flat representatives. Balanced tensor associativity gives mutually inverse chain maps; the left-derived universal property descends the comparison to the displayed natural isomorphism.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor comparison scalar extension restriction",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived tensor natural isomorphism scalar extension",
+   "results": "Generic tensor adjunction results only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ReductionPresentation mu comparison isomorphism",
+   "results": "No existing declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionNormalization",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-reduction-normalization",
+   "place": "paragraph 2, coefficient extension",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomReductionComparisonExists",
+  "file": "lean/Sheaf/Paper/IntegralHomReductionComparisonExists.lean",
+  "declaration": "WeilConjectures.IntegralHom.reduction_comparison_exists",
+  "statement": "theorem reduction_comparison_exists\n    (a : TensorPresentation.{t, u} Y\n      (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ)\n    (target : TensorPresentation.{t, u} Y\n      (integralCoefficientCommRingSheaf l E Y n)) :\n    Nonempty (a.tensor ⋙ integralDerivedReduction l E Y D hl n ≅\n      ((integralDerivedReduction l E Y D hl n).prod\n        (integralDerivedReduction l E Y D hl n)) ⋙ target.tensor)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034758-L-3544221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T034758-L-3544221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

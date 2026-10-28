@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
+import Sheaf.Paper.IntegralHomReductionComparisonExists
+import Sheaf.Paper.IntegralHomReductionNormalizationData
 
 /-! # Normalization component of an integral reduction presentation
 
@@ -17,6 +19,7 @@ This is the sectionwise and derived counit square required by
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
@@ -48,6 +51,19 @@ theorem reduction_normalization_exists
       (integralCoefficientCommRingSheaf l E Y n)) :
     Nonempty {m : ReductionPresentation l E Y D hl a n //
       m.target = target} := by
-  sorry
+  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
+  letI : HasDerivedCategory (Modules.{t, u} Y
+      (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _
+  letI : HasDerivedCategory (Modules.{t, u} Y
+      (integralCoefficientCommRingSheaf l E Y n)) := HasDerivedCategory.standard _
+  obtain ⟨mu⟩ := reduction_comparison_exists l E Y D hl a n target
+  refine ⟨⟨target, mu, ?_⟩, rfl⟩
+  exact @reduction_normalization_data_exists l _ E _ _ _ Y D hl
+    (essentiallySmallSelf _) (integralCoefficientAbSheafify Y)
+    (integralCoefficientAbLocallyBijective Y) a n target mu
 
 end WeilConjectures.IntegralHom
