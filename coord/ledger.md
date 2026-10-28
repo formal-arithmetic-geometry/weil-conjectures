@@ -20641,3 +20641,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/K2/Sheaf.WeilSheaf.SmoothCoefficientVanishing (stage 3; reviewer PASS; first push; landing 20261028T020536-L-2522528 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:05 L: merged deliver/K3/Sheaf.Paper.IntegralRootPowerGenerators (stage 3; reviewer FIX; first push; landing 20261028T020537-L-2522761 (interface); batch 20261028T020127; modules 2; new nodes 2)
 - 02:05 L: merged deliver/K3/Sheaf.Paper.IsomorphismScalarCompletedPreservesModels (stage 3; reviewer PASS; first push; landing 20261028T020538-L-2522997 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:05 L: merged deliver/K3/Sheaf.WeilSheaf.NativeOpenProperForgetting (stage 3; reviewer PASS; first push; landing 20261028T020540-L-2523168 (proof); batch 20261028T020127; modules 1; new nodes 2)

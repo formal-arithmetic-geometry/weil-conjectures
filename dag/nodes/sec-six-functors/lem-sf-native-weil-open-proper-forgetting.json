@@ -152,7 +152,9 @@
   "def-sfb-right-derived-functor",
   "lem-weil-pbc-kinjective-exact-square-comparison",
   "lem-sfb-grothendieck-k-injective",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-native-weil-open-proper-forgetting-comm-shift",
+  "lem-sf-native-weil-open-proper-forgetting-frobenius"
  ],
  "proof_origin": {
   "by": "worker",
@@ -480,7 +482,9 @@
    "AlgebraicGeometry.NativeWeilOpenProper.ordinaryFrobeniusComparison",
    "AlgebraicGeometry.NativeWeilOpenProper.nativeCompactSupportFrobenius",
    "AlgebraicGeometry.NativeWeilOpenProper.ordinaryCompactSupportFrobenius",
-   "AlgebraicGeometry.NativeWeilOpenProper.open_proper"
+   "AlgebraicGeometry.NativeWeilOpenProper.open_proper",
+   "AlgebraicGeometry.NativeWeilOpenProper.compactificationComparison_commShift",
+   "AlgebraicGeometry.NativeWeilOpenProper.compactificationComparison_frobenius"
   ],
   "file": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
   "statement": "theorem open_proper (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) : (compactificationComparison (k₀ := k₀) (l := l) f c).hom.CommShift ℤ ∧ (∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X), (WeilSheaf.frobeniusPullback k₀ l Y).mapDerivedCategory.map ((compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ≫ (ordinaryCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom = (nativeCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom ≫ (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ∧ (∀ (K L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (v : K ⟶ L), (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ⋙ (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y)).mapDerivedCategory).map v ≫ (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app L = (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K ≫ ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory ⋙ ordinaryCompactSupport (k₀ := k₀) (l := l) f c).map v)",
@@ -499,13 +503,13 @@
   "note": "Re-delivery after RETURN of 9fe287. Statement, proof and proof_deps are unchanged; the stmt_deps swap two theorem nodes for two new existing:true def nodes; the Lean adds 7 declarations and a new Frobenius conjunct. F1 repaired: open_proper states D(P_Y)(c0_K) then the ordinary action (rightDerivedFunctorNatIso of a, termwise open comparison, then F^c of the input theta) equals the native D(strNatIso) at F^W K then c0_K, for every derived K. Types checked; the ordinary action does not use c0, properComparison or compactificationComparison, so the square is a genuine canonical coherence and is true via the common K-injective representative. F2 repaired: def-sf-exact-square-derived-unit-arrows owns KInjectiveExactSquare sourceIso/leftUnit/rightUnit/delta and def-sf-native-sectionwise-module-presentation owns nativeModuleCoefficientIso (.choose of the coefficient-realization theorem, which this node cites)/nativeToOrdinaryModules. Both match the source and have verbatim records; no other owner exists; the item uses no theorem from either module. Re-checked hearts, coefficient clauses, open/proper comparisons, normalization, CommShift, hypotheses, universes, docstrings, sorry-only proofs and the verbatim lean.statement. Advisories: the naturality conjunct is automatic; the LocallyFiniteCoefficientRingRealization import is redundant (H9); the second reading is the worker's own (H11). No compile because no file was changed."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-ef656",
-  "group": "G2",
-  "result": "fix",
-  "landing": "20261027T233943-L-4140677",
-  "kind": "interface",
-  "note": "independent cc review: item NativeOpenProperForgetting.lean + node lem-sf-native-weil-open-proper-forgetting vs clone 088f3a1c and unit sk-prop-sf-biduality-general (realized empty); importer NativeExceptionalHomTransport compiled against fixed item"
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T020540-L-2523168",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

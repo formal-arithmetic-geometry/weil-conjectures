@@ -1,0 +1,119 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeOpenProperForgetting",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-open-proper-forgetting",
+   "place": "Strictly smaller component split from the item proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived compactification comparison commutes with shifts",
+   "results": "No direct match; the search returns only generic derived functor shift APIs, which do not assemble this native comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "NatTrans.CommShift rightDerivedFunctorMapOfNatIsoCompForgetIso",
+   "results": "No direct theorem for this fixed-pair comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationComparison_commShift|compactificationComparison_frobenius",
+   "results": "Only the declarations in this delivery.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native comparison Steps 8--9; the corresponding component of the item proof."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sfb-right-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-kinjective-exact-square-comparison"
+ ],
+ "id": "lem-sf-native-weil-open-proper-forgetting-frobenius",
+ "title": "Compactification comparison intertwines Frobenius",
+ "statement": "Under the hypotheses of `lem-sf-native-weil-open-proper-forgetting`, for every derived native object `K`, the canonical compactification comparison intertwines the independently assembled ordinary compact-support Frobenius action and the native compact-support Frobenius action.",
+ "source": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native comparison Steps 8--9; the corresponding component of the item proof."
+ },
+ "proof": [
+  {
+   "text": "Expand the ordered open/proper comparison on a native K-injective representative. The existing exact-functor, proper-normalization and fixed-pair comparison lemmas identify the two sides; localization and naturality transport the result to all derived objects.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-sfb-right-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-kinjective-exact-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native comparison Steps 8--9; the corresponding component of the item proof."
+   }
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeOpenProperForgetting",
+  "file": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
+  "declaration": "AlgebraicGeometry.NativeWeilOpenProper.compactificationComparison_frobenius",
+  "declarations": [
+   "AlgebraicGeometry.NativeWeilOpenProper.compactificationComparison_frobenius"
+  ],
+  "statement": "theorem compactificationComparison_frobenius\n    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) :\n    ∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n      (WeilSheaf.frobeniusPullback k₀ l Y).mapDerivedCategory.map\n          ((compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ≫\n        (ordinaryCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom =\n      (nativeCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom ≫\n        (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T020540-L-2523168",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T020540-L-2523168",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

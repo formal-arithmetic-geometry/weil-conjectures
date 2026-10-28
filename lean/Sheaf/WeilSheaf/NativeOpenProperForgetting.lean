@@ -641,43 +641,51 @@ abbrev ordinaryCompactSupportFrobenius (f : X ⟶ Y)
     (ordinaryCompactSupport (k₀ := k₀) (l := l) f c).mapIso
       ((nativeDerivedStructure (k₀ := k₀) (l := l) X).app K)
 
-/-- Exact open extension forgets to the ordinary functor on both sheaves and arrows;
-the assembled c^0 intertwines the two derived Frobenius structures, respects shifts,
-and is natural on all localized derived morphisms.
-Source: native comparison Steps 6--9; Stacks 03DI, 03DJ, 070I and 070K
+/-- The compactification comparison commutes with integer shifts.
+Source: native comparison Step 9; Stacks 070I.
 (blueprint: lem-sf-native-weil-open-proper-forgetting).
-Proof:
-1. Localize the pro-etale site at the geometric open. Both restricted coefficient rings
-are the same functions. The exact ringed-site extension by zero is the underlying
-native extension; the lift acts on arrows by the same functor. Exact conservative
-forgetting detects exactness, and exact-functor localization gives openComparison.
-2. The native and ordinary hearts of the middle scheme are Grothendieck by the existing
-AdicSheaf instance, with no finite-type hypothesis on the middle scheme. The native
-adicLowerStar and its fixed-pair lift are additive and left exact. The fixed-pair
-derived comparison gives properComparison, and proper_normalization includes its
-derived units.
-3. Resolve the complex after open extension by a native K-injective I. It stays
-K-injective after forgetting, so both constructions are Q(p_* UI). The normalization
-equation identifies the comparison with the identity; proper_frobenius identifies
-both Frobenius arrows with Q(p_*(theta_I) a_UI).
-4. Every derived map between such representatives is the localization of a chain map
-modulo homotopy (lem-weil-pbc-kinjective-hom-derived). Both functors apply p_* U to it,
-so the identity comparison is natural on all localized morphisms and independent of
-resolution. For shifts use I[n], still K-injective; both shifted structure arrows
-are the same. Thus comparison commutes with the actual shift structures.
-5. The ordinary action is defined independently: derive the sheaf comparison a
-using the unit-normalized total-derived composition isomorphisms, compose with the
-termwise open comparison, then apply Rp_*j! to the input D(strNatIso). The native
-output action is D(strNatIso) at F^W K. On the common K-injective resolution the
-unit equations of proper_normalization identify the proper comparison with the
-identity and identify derived a with its original chain map. The sheaf lift formula
-therefore makes the Frobenius square commute there. Naturality along the resolution
-and the localization factors transports this equality to every K. This proves the
-new square between the two independently constructed derived actions, rather than
-only the degreewise lift formula recorded by proper_frobenius.
-6. Precompose with the exact open extension and the ordered associativity maps to
-obtain compactificationComparison. This uses the actual native compactification
-construction on the ambient ordinary derived categories, without exceptional adjoints. -/
+Proof: expand the ordered comparison into the associativity, open-extension and proper
+comparison isomorphisms. The derived open comparison is exact; the proper comparison is
+the unit-normalized right-derived comparison. The standard shift compatibility lemmas for
+these three factors and closure under whiskering and composition give the result. -/
+theorem compactificationComparison_commShift
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) :
+    (compactificationComparison (k₀ := k₀) (l := l) f c).hom.CommShift ℤ := by
+  sorry
+
+/-- The native and independently assembled ordinary Frobenius actions commute with the
+compactification comparison.
+Source: native comparison Steps 8--9; Stacks 070I and 070K.
+(blueprint: lem-sf-native-weil-open-proper-forgetting).
+Proof: choose a native K-injective representative after exact open extension. Both sides
+are the same localized chain map: proper normalization identifies the proper comparison
+with the identity on the common representative, while the open comparison and the
+sectionwise fixed-pair formula identify the two Frobenius arrows. Naturality of derived
+localization transports the equality from representatives to every object. -/
+theorem compactificationComparison_frobenius
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) :
+    ∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),
+      (WeilSheaf.frobeniusPullback k₀ l Y).mapDerivedCategory.map
+          ((compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K) ≫
+        (ordinaryCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom =
+      (nativeCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom ≫
+        (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K := by
+  sorry
+
 theorem open_proper (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -700,6 +708,9 @@ theorem open_proper (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
         (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K ≫
           ((IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory ⋙
             ordinaryCompactSupport (k₀ := k₀) (l := l) f c).map v) := by
-  sorry
+  refine ⟨compactificationComparison_commShift (k₀ := k₀) (l := l) f c,
+    compactificationComparison_frobenius (k₀ := k₀) (l := l) f c, ?_⟩
+  intro K L v
+  simpa using (compactificationComparison (k₀ := k₀) (l := l) f c).hom.naturality v
 
 end AlgebraicGeometry.NativeWeilOpenProper
