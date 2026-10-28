@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
+import Sheaf.Paper.IntegralSupportOperationRealization
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,6 +33,21 @@ theorem integral_support_adjoint_of_preservation (D : FiniteFieldDatum.{u}) (_hl
     ((finiteTorConstructibleIntegral l E.carrier Y).lift
       ((finiteTorConstructibleIntegral l E.carrier X).ι ⋙
         PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c)
-      hpres).IsLeftAdjoint := by sorry
+      hpres).IsLeftAdjoint := by
+  obtain ⟨A, left⟩ :=
+    exists_integral_support_operation_realization l
+      (AlgebraicClosure (ULift.{u} (Padic l))) D _hl f c E
+  obtain ⟨left⟩ := left
+  let F := (finiteTorConstructibleIntegral l E.carrier Y).lift
+    ((finiteTorConstructibleIntegral l E.carrier X).ι ⋙
+      PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c)
+    hpres
+  let e : A.F ≅ F := NatIso.ofComponents (fun K ↦
+    ObjectProperty.isoMk _ (left.app K)) (by
+      intro K L g
+      apply ObjectProperty.hom_ext
+      exact left.hom.naturality g)
+  let : A.F.IsLeftAdjoint := A.adjunction.isLeftAdjoint
+  exact Functor.isLeftAdjoint_of_iso e
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

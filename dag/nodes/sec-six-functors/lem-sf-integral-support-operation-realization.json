@@ -1,0 +1,83 @@
+{
+ "id": "lem-sf-integral-support-operation-realization",
+ "kind": "statement",
+ "title": "Integral exceptional operation and compact-support realization",
+ "statement": "theorem exists_integral_support_operation_realization\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (E : FieldStage.{u} l) :\n    ∃ A : Operation.{u} l Ω X Y (.integral E),\n      Nonempty (LeftRealization.{u} l Ω c (.integral E) A)",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "integral operation and compact-support realization subargument of Construction 5.25"
+ },
+ "proof": [
+  {
+   "text": "Construct the normalized reduction/total-limit operation on complete finite-Tor categories, transport its system adjunction through the recorded reconstruction equivalences, and identify its ambient realization with the proper/open compact-support image. Full finite-Tor inclusions provide the operation and left realization.",
+   "uses": [
+    "lem-sf-exceptional-system-transport",
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-system-transport",
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "proof_origin": {
+  "by": "V1",
+  "document": "Zheng, Construction 5.25 and Propositions 5.24 and 5.26",
+  "place": "integral operation and compact-support realization subargument"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSupportAdjointOfPreservation",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-support-adjoint-of-preservation",
+   "place": "integral operation and compact-support realization subargument",
+   "via": [
+    "lem-sf-integral-support-adjoint-of-preservation"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSupportOperationRealization",
+  "file": "lean/Sheaf/Paper/IntegralSupportOperationRealization.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_integral_support_operation_realization",
+  "statement": "theorem exists_integral_support_operation_realization\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (E : FieldStage.{u} l) :\n    ∃ A : Operation.{u} l Ω X Y (.integral E),\n      Nonempty (LeftRealization.{u} l Ω c (.integral E) A)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T020823-L-2550898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T020823-L-2550898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
