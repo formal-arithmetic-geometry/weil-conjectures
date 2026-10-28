@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AffineLinearTraceAction
+import Sheaf.Paper.AffineSpaceIsoTraceCore
 
 /-! # The affine-space trace under an arbitrary automorphism over its base -/
 
@@ -47,6 +48,8 @@ theorem affineSpaceIsoTraceInvariance (N : ℕ) (hN : 0 < N)
       (affineTraceProjection S d) (𝟙 S)) :
     affineLinearTraceAction N hN A hA t S hS d e.hom sq ≫
         affineTraceCounit A N hA t D S hS d =
-      affineTraceCounit A N hA t D S hS d := by sorry
+      affineTraceCounit A N hA t D S hS d := by
+  rw [affineSpaceIsoTraceAction_eq_id N hN A hA t S hS d e sq]
+  simp only [Category.id_comp]
 
 end AlgebraicGeometry.Etale
