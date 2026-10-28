@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 
 /-!
@@ -42,20 +43,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-section Abstract
-
-/-- A natural transformation that is a split monomorphism at `Y` is one at any `X ≅ Y`. -/
-lemma _root_.CategoryTheory.NatTrans.isSplitMono_app_of_iso {C D : Type*} [Category C]
-    [Category D] {F G : C ⥤ D}
-    (α : F ⟶ G) {X Y : C} (e : X ≅ Y) (h : IsSplitMono (α.app Y)) :
-    IsSplitMono (α.app X) := by
-  have hX : α.app X = F.map e.hom ≫ α.app Y ≫ G.map e.inv := by
-    rw [α.naturality_assoc, ← G.map_comp, e.hom_inv_id, G.map_id, Category.comp_id]
-  rw [hX]
-  infer_instance
-
-end Abstract
 
 namespace NearbyCyclesModel
 
@@ -105,7 +92,16 @@ lemma isPullback_fromCartesian :
 
 /-- **Pullback exchange through the cartesian model**: if the pullback exchange of
 `fromCartesian` is an isomorphism at `C` and that of `toCartesian` is a split monomorphism at
-`L𝟙^* C`, then the pullback exchange `α_φ` of `φ` is a split monomorphism at `C`. -/
+`L𝟙^* C`, then the pullback exchange `α_φ` of `φ` is a split monomorphism at `C`. By the
+composition law (`NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`), `α_φ` factors, up to
+the composition isomorphisms `c` of derived pullbacks, as
+```
+Lf'^* Ψ_N C ─────────────────────── α_φ(C) ───────────────────────→ Ψ_M (Lf^* C)
+     │ c                                                                  │ Ψ_M c
+     ▼                                                                    ▼
+L𝟙^* Lf'^* Ψ_N C ──L𝟙^* α_from(C)──→ L𝟙^* Ψ_cart (L𝟙^* C) ──α_to(L𝟙^* C)──→ Ψ_M (Lf^* L𝟙^* C)
+```
+-/
 lemma isSplitMono_pullbackExchange_app_of_cartesian'
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -122,7 +118,15 @@ lemma isSplitMono_pullbackExchange_app_of_cartesian'
 
 /-- **Pullback exchange through the cartesian model**: if the pullback exchange of
 `fromCartesian` is an isomorphism at `C` and that of `toCartesian` is a split monomorphism at
-`C`, then the pullback exchange `α_φ` of `φ` is a split monomorphism at `C`. -/
+`C`, then the pullback exchange `α_φ` of `φ` is a split monomorphism at `C`: the hypothesis on
+`α_to` is transported along `L𝟙^* C ≅ C` to the factorisation
+```
+Lf'^* Ψ_N C ─────────────────────── α_φ(C) ───────────────────────→ Ψ_M (Lf^* C)
+     │ c                                                                  │ Ψ_M c
+     ▼                                                                    ▼
+L𝟙^* Lf'^* Ψ_N C ──L𝟙^* α_from(C)──→ L𝟙^* Ψ_cart (L𝟙^* C) ──α_to(L𝟙^* C)──→ Ψ_M (Lf^* L𝟙^* C)
+```
+of `NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_cartesian'`. -/
 lemma isSplitMono_pullbackExchange_app_of_cartesian
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
