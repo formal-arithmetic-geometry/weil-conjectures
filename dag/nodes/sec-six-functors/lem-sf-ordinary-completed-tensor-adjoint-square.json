@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-ordinary-completed-tensor-adjoint-square",
+ "kind": "statement",
+ "title": "Ordinary tensor adjoint comparison and normalized completion square",
+ "statement": "Fix a finite-field datum D, a prime ell different from its characteristic, a separated quasi-compact locally finite-type scheme X over its algebraic closure, and a finite coefficient field E over Q_ell. For every normalized ordinary tensor presentation a [def-sf-integral-hom-reduction-models], every normalized ordinary-to-completed comparison c [def-sf-rational-verdier-data], and integral constructible objects K,N [def-weil-derived-complete-integral-detailed], let S be the integral closed structure of the coefficient calculus [def-pur-completed-pullback-tower-core], and let e_K be the unique counit-preserving comparison a.tensor(K,-) to S.tensor(-,K) from uniqueness of left adjoints to the same internal Hom. Then e_K(N) followed by the canonical completion unit on (N,K) [def-sf-integral-completion-transpose] equals c(K,N) followed by the canonical completed signed braiding [lem-pur-derived-pullback-tensor-constraints]. This is an equation of actual ambient integral tensor maps, without a Hom-constructibility or rational-identification hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 1, normalized integral evaluation and its coefficient comparison; ordinary-to-completed tensor normalization."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-completed-pullback-tower-core",
+  "def-sf-integral-completion-transpose",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary tensor-Hom adjunction of a and the canonical coefficient calculus adjunction to form leftAdjointUniq. On K-flat inputs and K-injective targets the counit normalization of a and the canonical signed evaluation identify this comparison with the K-flat model interchange. The Koszul interchange accounts for precisely the sign in a.evaluation. Test against all K-injective targets to identify the comparison itself.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the comparison with the actual reduction/limit tensor unit on the exchanged inputs. In the two Roos coordinates, compare this map to the supplied completion c followed by the canonical completed braiding: their quotient components are the same signed pure tensor and their shifted components vanish. Tensor-completion-chain uniqueness identifies the augmentations. The representative equation of c and the normalized coefficient calculus comparisons identify the derived maps.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "def-sf-integral-completion-transpose",
+    "lem-sf-tensor-completion-chain-uniqueness",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the equality from simultaneous flat-term K-flat representatives by the product localization. Equivalently use faithful coherent reduction after its normalized tensor comparisons. Resolve both constructible inputs to obtain the displayed component equation. No Hom-pair assumption, target object, duality datum, or rational localization occurs in this step.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-completion-transpose",
+  "lem-sf-tensor-completion-chain-uniqueness",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "E4 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 1, normalized integral evaluation and its coefficient comparison; ordinary-to-completed tensor normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of left adjoints canonical tensor comparison commutes with normalized completion and signed braiding",
+   "results": "Eight generic adjunction uniqueness results, including leftAdjointUniq_hom_app_counit; no normalized completion square.",
+   "date": "2026-10-28",
+   "verdict": "generic result only; no exact completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "results": "Found the generic counit-preservation theorem. It proves the evaluation step once the tensor-completion square is known, but has no completion normalization.",
+   "date": "2026-10-28",
+   "verdict": "generic result only; no exact completion comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*counit|homEquiv_leftAdjointUniq",
+   "results": "Five matches in Mathlib/CategoryTheory/Adjunction/Unique.lean. The actual representative-normalized completion square is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "generic result only; no exact completion comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalHomScalarCounitNormalization",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-hom-counit-normalized-localized-integral",
+   "place": "Integral tensor-completion comparison in the normalization proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryCompletedTensorAdjointSquare",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryCompletedTensorAdjointSquare.lean",
+  "declaration": "WeilConjectures.RationalOperations.ordinaryCompletedTensor_adjoint_square",
+  "statement": "theorem ordinaryCompletedTensor_adjoint_square\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X))\n    (c : RationalVerdier.Completion D l hl X E a)\n    (K N : sfIntegralConstructibleCategory l E X) :\n    ((a.adjunction K.obj).leftAdjointUniq\n      ((pullbackTensorCalculus l E X).integralClosed.adjunction K.obj)).hom.app N.obj ≫\n        podCompletedTensorUnit l E X N.obj K.obj =\n      c.map.app (K.obj, N.obj) ≫\n        (@pullbackTensorIntegralBraiding l _ E _ _ _ X\n          (RationalVerdier.units D l hl X) K N).hom.hom",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261028T072400-L-1940343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261028T072400-L-1940343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
