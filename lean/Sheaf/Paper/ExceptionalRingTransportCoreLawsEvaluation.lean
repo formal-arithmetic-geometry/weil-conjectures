@@ -1,6 +1,9 @@
 /- Copyright (c) 2026 The SHEAF contributors. All rights reserved. -/
 module
 public import Sheaf.Paper.ExceptionalRingTransportCoreData
+import Sheaf.Paper.ExceptionalRingTransportCoreEvaluationUnit
+import Sheaf.Paper.ExceptionalRingTransportCoreEvaluationCounit
+import Sheaf.Paper.ExceptionalRingTransportCoreEvaluationSupport
 /-! Finite-evaluation laws for exceptional integral transport.
 Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
 (blueprint: lem-sf-exceptional-ring-transport-core-evaluation-laws) -/
@@ -65,5 +68,11 @@ theorem exists_exceptional_transport_core_evaluation_laws
     (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
     (d : TransportCoreData l Ω D hl c operation left) :
     Nonempty (TransportCoreEvaluationLaws l Ω D hl c operation left d) := by
-  sorry
+  refine ⟨{
+    evaluation_unit := exceptional_transport_core_evaluation_unit
+      l Ω D hl f c operation left d
+    evaluation_counit := exceptional_transport_core_evaluation_counit
+      l Ω D hl f c operation left d
+    evaluation_support := exceptional_transport_core_evaluation_support
+      l Ω D hl f c operation left d }⟩
 end WeilConjectures.ExceptionalIntegralScalar
