@@ -7142,6 +7142,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationFiniteBa
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationMap
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationOpenImmersion
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationUniversal
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationWeaklyEtale
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianFiber
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianFiniteAlgebraFactor
@@ -10446,6 +10447,7 @@ public import WeilConjectures.RepresentationTheory.OpenStabilizerAdjunction
 public import WeilConjectures.RepresentationTheory.PiTensorProduct
 public import WeilConjectures.RepresentationTheory.PrimaryInvariantExtension
 public import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
+public import WeilConjectures.RepresentationTheory.ProPGroupPadicMatrix
 public import WeilConjectures.RepresentationTheory.ProfiniteInvariants
 public import WeilConjectures.RepresentationTheory.ProfiniteInvariantsDual
 public import WeilConjectures.RepresentationTheory.RepFunctors
@@ -12637,6 +12639,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitI
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCompRetraction
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
