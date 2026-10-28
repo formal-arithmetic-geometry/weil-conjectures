@@ -28,6 +28,10 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.PurCompactSupport
 
 /-- The compact-support restriction square commutes with integer shifts.
+STATEMENT-DISPUTED: the four arbitrary `CommShift` instances do not determine
+compatible shift structures on the two sides of an arbitrary isomorphism.
+For distinct choices of coherent shift structures, an isomorphism need not commute
+with both; an additional compatibility hypothesis (or canonical instances) is required.
 Source: Stacks Tag 07A6; the normalized open/proper scalar square.
 (blueprint: lem-pur-compact-support-restriction-shift).
 Proof: the open restriction comparison is the derived map of the exact
