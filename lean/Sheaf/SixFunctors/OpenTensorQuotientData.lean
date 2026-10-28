@@ -157,8 +157,8 @@ abbrev forgetSystems (W : Scheme.{u}) :=
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   (o : IntegralOpenReduction.Operations l E j)
 
-/-- Scalar restriction commutes with open extension, before localization and naturally
-on the entire strict system, including every quotient transition.
+/-- Generator-normalized scalar restriction for finite open extension. The strict quotient
+transitions are recorded separately by `ScalarComparison`, which uses these finite maps.
 Source: Stacks 03DI, 0E8I (blueprint: lem-sf-open-tensor-quotient-augmentation). -/
 structure ScalarCompatibility where
   finite : ∀ n : ℕ,
@@ -171,12 +171,7 @@ structure ScalarCompatibility where
       (IntegralOpenReduction.finiteExtensionSection l E j o n M V a x) =
     IntegralOpenReduction.extensionSection l E j o
       ((scalarReductionRestriction l E U n).obj M) V a x
-  systems : (IntegralOpenReduction.systemExtension l E j o).mapHomologicalComplex (.up ℤ) ⋙
-      forgetSystems l E X ≅ forgetSystems l E U ⋙ extendTower l E j o
-  evaluation : ∀ (C : CochainComplex (coefficientSequenceModules l E U) ℤ)
-    (n : ℕ) (i : ℤ),
-    HEq (((systems.hom.app C).app (op n)).f i)
-      ((finite n).hom.app ((coefficientSequenceEvaluation l E U n).obj (C.X i)))
+
 
 
 /-- The original degreewise scalar component equation, named to share its type in

@@ -2,13 +2,11 @@
  "stmt_deps": [
   "def-sf-open-tensor-quotient-data"
  ],
- "proof_deps": [
-  "def-sf-open-tensor-quotient-data"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI, 03DJ, 0E8I and 0941; identity on extension summands and coefficient-system assembly."
+  "place": "Withdrawn by R3: independently arbitrary comparisons do not agree. Its sole parent now constructs only the finite normalized data actually used; all strictness is retained in ScalarComparison.iso."
  },
  "mathlib_searches": [
   {
@@ -66,28 +64,7 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 0E8I and 0941; normalized generator equation after coefficient evaluation."
  },
- "proof": [
-  {
-   "text": "Evaluate the strict-system identity on a complex, a coefficient level and a cochain degree. On each\nextension-by-zero generator, both sides are the same unit insertion. The finite scalar comparison and\nsystem comparison are natural, so generator extensionality and sheafification give the equality for all\nsections.",
-   "uses": [
-    "def-sf-open-tensor-quotient-data"
-   ],
-   "elementary": false
-  }
- ],
- "lean": {
-  "existing": false,
-  "module": "Sheaf.SixFunctors.OpenQuotientScalarEvaluationCompatibility",
-  "file": "lean/Sheaf/SixFunctors/OpenQuotientScalarEvaluationCompatibility.lean",
-  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientScalarEvaluationCompatibility",
-  "declarations": [
-   "WeilConjectures.OpenTensorQuotient.openQuotientScalarEvaluationCompatibility"
-  ],
-  "statement": "theorem openQuotientScalarEvaluationCompatibility\n    (o : IntegralOpenReduction.Operations l E j)\n    (finite : ∀ n : ℕ,\n      IntegralOpenReduction.finiteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅\n        scalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o)\n    (systems : (IntegralOpenReduction.systemExtension l E j o).mapHomologicalComplex (.up ℤ) ⋙\n        forgetSystems l E X ≅ forgetSystems l E U ⋙ extendTower l E j o) :\n    ∀ (C : CochainComplex (coefficientSequenceModules l E U) ℤ)\n      (n : ℕ) (i : ℤ),\n      HEq (((systems.hom.app C).app (op n)).f i)\n        ((finite n).hom.app ((coefficientSequenceEvaluation l E U n).obj (C.X i)))",
-  "branch": "sheaf-dag",
-  "by": "G7",
-  "date": "2026-10-28"
- },
+ "proof": [],
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
@@ -99,13 +76,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G7",
-  "result": "pass",
-  "landing": "20261027T233951-L-4144772",
+  "reviewer": "C-0c4cb",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261028T020709-L-2538604",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn false evaluation lemma + pruned ScalarCompatibility.systems/evaluation vs nodes def-sf-open-tensor-quotient-data / lem-sf-open-quotient-scalar-compatibility-data / unit-compatibility, change record, rg consumer audit, 3b (12 OK), #print axioms of openScalarComparison"
  }
 }

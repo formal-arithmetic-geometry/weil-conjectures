@@ -2,7 +2,7 @@
  "id": "lem-sf-open-quotient-scalar-compatibility-data",
  "kind": "statement",
  "title": "Existence of normalized open scalar compatibility data",
- "statement": "For an integral open operation o on j:U→X, there exists ScalarCompatibility l E j o, including its finite comparison, strict-system comparison, and normalized system evaluation equation.",
+ "statement": "For an integral open operation o on j:U→X, there exists ScalarCompatibility l E j o [def-sf-open-tensor-quotient-data], consisting of finite scalar comparisons normalized on every extension-by-zero summand. The strict quotient-tower comparison is supplied separately by ScalarComparison.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03DI, 03DA, 0E8I and 0941; identity on extension summands and system assembly."
@@ -12,27 +12,24 @@
  ],
  "proof": [
   {
-   "text": "Construct the finite comparison family, prove its generator normalization, construct the strict-system comparison, and verify the coefficient-evaluation equation; package these four fields into ScalarCompatibility.",
+   "text": "For each n specialize the generic scalar/open comparison [lem-cbc-ringed-open-scalar-adjunction] to the completed coefficient projection on X. Transport it along the continuous pushforward formulas o.integralFunctor and o.finiteFunctor; o.projections supplies the commuting coefficient square. This transport is implemented by the already proved generic private helper openScalarComparison in IntegralOpenScalarRestrictionComparison, not by its consecutive-finite-quotient theorem. Invert the resulting ordinary comparison to obtain finite. Apply its generator formula and cancel the comparison with its inverse to prove sections. Choose these generator-normalized finite comparisons for all n and package the two fields.",
    "uses": [
-    "lem-sf-open-quotient-scalar-finite-compatibility",
-    "lem-sf-open-quotient-scalar-section-compatibility",
-    "lem-sf-open-quotient-scalar-system-compatibility",
-    "lem-sf-open-quotient-scalar-evaluation-compatibility"
+    "def-sf-open-tensor-quotient-data",
+    "lem-cbc-ringed-open-scalar-adjunction",
+    "lem-sf-integral-open-scalar-restriction-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sf-open-tensor-quotient-data",
-  "lem-sf-open-quotient-scalar-finite-compatibility",
-  "lem-sf-open-quotient-scalar-section-compatibility",
-  "lem-sf-open-quotient-scalar-system-compatibility",
-  "lem-sf-open-quotient-scalar-evaluation-compatibility"
+  "lem-cbc-ringed-open-scalar-adjunction",
+  "lem-sf-integral-open-scalar-restriction-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI, 03DJ, 0E8I and 0941; identity on extension summands, generator normalization and system assembly."
+  "place": "Tags 03DI, 03DA and 0E8I; specialization of the proved generic open/scalar comparison and cancellation of its generator equation."
  },
  "mathlib_searches": [
   {
@@ -106,13 +103,49 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G7",
-  "result": "pass",
-  "landing": "20261027T233951-L-4144772",
+  "reviewer": "C-0c4cb",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261028T020709-L-2538604",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn false evaluation lemma + pruned ScalarCompatibility.systems/evaluation vs nodes def-sf-open-tensor-quotient-data / lem-sf-open-quotient-scalar-compatibility-data / unit-compatibility, change record, rg consumer audit, 3b (12 OK), #print axioms of openScalarComparison"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "R3 stage 2",
+  "old_statement": "For an integral open operation o on j:U→X, there exists ScalarCompatibility l E j o, including its finite comparison, strict-system comparison, and normalized system evaluation equation.",
+  "what": "Prune the unused independent system comparison and its evaluation field. The old universal evaluation theorem is false: finite and systems are independently chosen isomorphisms, so negating just one gives another permitted choice but reverses its component on a nonzero module (identity open over a point, l=3). The actual scalar-unit and tensor-square proofs use only finite generator-normalized comparisons and ScalarComparison.iso, which already preserves all quotient transitions. Construct the finite normalized comparison directly from the proved generic open/scalar comparison; remove the false unused obligation instead of weakening it or assuming normalization.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 0E8I, lemma-j-shriek-and-tensor, with 03DI direct-sum extension generators; sites-cohomology.tex Tag 0GL1 uses the termwise complex extension."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-open-quotient-scalar-unit-compatibility",
+    "holds": true,
+    "note": "The finite generator normalization and strict ScalarComparison are preserved. No proof uses ScalarCompatibility.systems or ScalarCompatibility.evaluation; the constructor and its parent route are updated in this delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct the finite comparison family, prove its generator normalization, construct the strict-system comparison, and verify the coefficient-evaluation equation; package these four fields into ScalarCompatibility.",
+    "uses": [
+     "lem-sf-open-quotient-scalar-finite-compatibility",
+     "lem-sf-open-quotient-scalar-section-compatibility",
+     "lem-sf-open-quotient-scalar-system-compatibility",
+     "lem-sf-open-quotient-scalar-evaluation-compatibility"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sf-open-tensor-quotient-data",
+   "lem-sf-open-quotient-scalar-finite-compatibility",
+   "lem-sf-open-quotient-scalar-section-compatibility",
+   "lem-sf-open-quotient-scalar-system-compatibility",
+   "lem-sf-open-quotient-scalar-evaluation-compatibility"
+  ]
  }
 }

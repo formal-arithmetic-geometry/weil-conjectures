@@ -144,21 +144,18 @@ scalar comparison; no tensor balancing or open tensor square is asserted.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 0E8I; strict towers, Tag 0941.
 (blueprint: lem-sf-open-quotient-scalar-unit-compatibility).
 
-Proof: on the ambient site's slice at the open object, restriction of scalars does
-not change an extension-presheaf summand or its insertion. The identity on these
-summands, followed by sheafification, gives the finite restriction comparison.
-The same identity on whole semilinear systems preserves all coefficient transition
-maps, giving systems and its evaluation equation. Transport with the coefficient
-equivalences in o; their specified pushforward formulas and projection equations
-identify the completed and finite scalar actions. Compose the finite comparison
-with tc.ordinary in each degree. Naturality of its generator formula in coefficient
-quotients makes these maps a strict tower isomorphism r, and gives its components
-field. On an extension summand, tc.generators sends the scalar unit of x to the
-scalar unit of the same x. The restriction comparison is the identity on that
-summand, so this is exactly the extension of the open scalar unit. Summand and
-sheafification extensionality extend the equation to all local sections, and
-complex and tower extensionality give the displayed equation. This calculation
-uses no boundedness or flatness and includes the empty and identity opens. -/
+Proof: on the ambient site's slice at the open object, restriction of scalars does not change an
+extension-presheaf summand or its insertion. The identity on these summands, followed by
+sheafification, gives the finite restriction comparison. Transport with the coefficient
+equivalences in o; their specified pushforward formulas and projection equations identify the
+completed and finite scalar actions. Compose the finite comparison with tc.ordinary in each
+degree. Naturality of its generator formula in coefficient quotients makes these maps a strict
+tower isomorphism r, and gives its components field. On an extension summand, tc.generators sends
+the scalar unit of x to the scalar unit of the same x. The restriction comparison is the identity
+on that summand, so this is exactly the extension of the open scalar unit. Summand and
+sheafification extensionality extend the equation to all local sections, and complex and tower
+extensionality give the displayed equation. This calculation uses no boundedness or flatness and
+includes the empty and identity opens. -/
 theorem openQuotientScalarUnitCompatibility
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o) :

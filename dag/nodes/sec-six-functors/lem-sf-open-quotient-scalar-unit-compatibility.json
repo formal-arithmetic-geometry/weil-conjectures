@@ -2,7 +2,7 @@
  "id": "lem-sf-open-quotient-scalar-unit-compatibility",
  "kind": "statement",
  "title": "Scalar-unit compatibility of strict open reduction towers",
- "statement": "Fix a prime l, a finite extension E of Q_l and an open immersion j:U→X. For any fixed compatible ordinary open operations o and their normalized finite coefficient tensor comparison tc, there exist ScalarCompatibility sc and ScalarComparison r [def-sf-open-tensor-quotient-data]. For every unbounded completed-coefficient complex P on U, the scalar-adjunction unit on j_!P followed by r equals extension of the scalar-adjunction unit on P (using the canonical constant-functor comparison). All strict quotient transitions, finite comparison components and systems evaluation equations are retained. No tensor comparison square, balancing isomorphism or completion presentation is asserted.",
+ "statement": "Fix a prime l, a finite extension E of Q_l and an open immersion j:U→X. For any fixed compatible ordinary open operations o and their normalized finite coefficient tensor comparison tc, there exist ScalarCompatibility sc and ScalarComparison r [def-sf-open-tensor-quotient-data]. For every unbounded completed-coefficient complex P on U, the scalar-adjunction unit on j_!P followed by r equals extension of the scalar-adjunction unit on P (using the canonical constant-functor comparison). All strict quotient transitions and normalized finite comparison components are retained by ScalarComparison; no separate comparison on arbitrary coefficient systems is required. No tensor comparison square, balancing isomorphism or completion presentation is asserted.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 0E8I, lemma-j-shriek-and-tensor; scalar extension and restriction, Tags 03DI and 03EK; strict systems, Tag 0941. Strict cochain specialization."
@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Obtain normalized finite and strict-system scalar compatibility data for o.",
+   "text": "Obtain generator-normalized finite scalar compatibility data for o from the proved generic open/scalar comparison.",
    "uses": [
     "lem-sf-open-quotient-scalar-compatibility-data"
    ],
@@ -124,17 +124,53 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-dc2bf",
-  "group": "Q3",
-  "result": "pass",
-  "landing": "20261027T210203-L-1668970",
+  "reviewer": "C-0c4cb",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261028T020709-L-2538604",
   "kind": "interface",
-  "note": "independent cc review: openQuotientScalarUnitEquation proof and the new ScalarCompatibility.sections field against nodes lem-sf-open-quotient-scalar-unit-equation / def-sf-open-tensor-quotient-data, the change record and 3b importers (8 OK)",
-  "sorry_before": [
-   "WeilConjectures.OpenTensorQuotient.openQuotientScalarUnitEquation"
+  "note": "independent cc review: withdrawn false evaluation lemma + pruned ScalarCompatibility.systems/evaluation vs nodes def-sf-open-tensor-quotient-data / lem-sf-open-quotient-scalar-compatibility-data / unit-compatibility, change record, rg consumer audit, 3b (12 OK), #print axioms of openScalarComparison"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "R3 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E of Q_l and an open immersion j:U→X. For any fixed compatible ordinary open operations o and their normalized finite coefficient tensor comparison tc, there exist ScalarCompatibility sc and ScalarComparison r [def-sf-open-tensor-quotient-data]. For every unbounded completed-coefficient complex P on U, the scalar-adjunction unit on j_!P followed by r equals extension of the scalar-adjunction unit on P (using the canonical constant-functor comparison). All strict quotient transitions, finite comparison components and systems evaluation equations are retained. No tensor comparison square, balancing isomorphism or completion presentation is asserted.",
+  "what": "Prune the unused independent system comparison and its evaluation field. The old universal evaluation theorem is false: finite and systems are independently chosen isomorphisms, so negating just one gives another permitted choice but reverses its component on a nonzero module (identity open over a point, l=3). The actual scalar-unit and tensor-square proofs use only finite generator-normalized comparisons and ScalarComparison.iso, which already preserves all quotient transitions. Construct the finite normalized comparison directly from the proved generic open/scalar comparison; remove the false unused obligation instead of weakening it or assuming normalization.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 0E8I, lemma-j-shriek-and-tensor, with 03DI direct-sum extension generators; sites-cohomology.tex Tag 0GL1 uses the termwise complex extension."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-open-quotient-normalized-cochains",
+    "holds": true,
+    "note": "The finite generator normalization and strict ScalarComparison are preserved. No proof uses ScalarCompatibility.systems or ScalarCompatibility.evaluation; the constructor and its parent route are updated in this delivery."
+   }
   ],
-  "sorry_after": []
+  "old_proof": [
+   {
+    "text": "Obtain normalized finite and strict-system scalar compatibility data for o.",
+    "uses": [
+     "lem-sf-open-quotient-scalar-compatibility-data"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Compose tc with the finite scalar comparison to obtain a strict scalar comparison r.",
+    "uses": [
+     "lem-sf-open-quotient-scalar-comparison-existence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the scalar-unit equation for the fixed sc and r to every cochain complex P.",
+    "uses": [
+     "lem-sf-open-quotient-scalar-unit-equation"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }
