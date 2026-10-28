@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-finite-model-derived-scalar-comparison-transport",
  "kind": "statement",
  "title": "Derived representative transport through coefficient equivalence",
- "statement": "For the data of the finite-model derived scalar comparison, let K be the restriction along ρ⁻¹ of the canonical complex representative of L(Q(P)). Then the finite constant model over D of the composite scalar extension of P is isomorphic in the derived category over D to the finite constant model over D of K.",
+ "statement": "Let X be a scheme and B,C,D commutative rings in universe t. Let q:B → C be a ring homomorphism and ρ:C ≃ D a ring equivalence. Let P be a K-flat B-complex [def-pc-module-kflat-complex]. Let L with counit ε be a total left derived extension along q [def-weil-abstract-derived-category, def-weil-module-base-change]. Let K be restriction along ρ inverse of the canonical complex representative of L(Q(P)). Assuming the D-valued Koszul constant functor preserves zero morphisms, the finite constant model [def-weil-pbc-finite-perfect-quotient-model-data] over D of ordinary scalar extension of P along ρ composed with q is isomorphic in the derived category to the finite constant model of K.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 0D6D and 093J; derived pullback composition and exact coefficient transport"
@@ -10,34 +10,44 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-module-base-change",
-  "def-weil-pbc-finite-perfect-quotient-model-data"
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-pc-module-kflat-complex"
  ],
  "proof": [
   {
-   "text": "Use the IsLeftDerivedFunctor universal property of L to identify its value on Q(P) with the derived extension-of-scalars representative along q.",
+   "text": "Extension of scalars preserves quasi-isomorphisms between K-flat complexes. The K-flat derivability criterion therefore makes the specified derived counit ε invertible on P. Compose with the quotient-to-derived factorization to identify L(Q(P)) with Q(q ⊗ P).",
    "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-derived-module-scalar-adjunction"
+    "lem-pc-extension-kflat-quasi-iso",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction along the ring equivalence inverse is exact and transports the representative. Derived scalar transitivity and the termwise universe-lift comparison identify the resulting D-complex with the composite scalar extension model.",
+   "text": "The inverse coefficient restriction is an exact equivalence. By uniqueness of left adjoints, extension along ρ is its inverse restriction functor. The scalar-extension composition isomorphism identifies extension along ρ composed with q with successive extension followed by this restriction. Apply the derived restriction to the preceding isomorphism and the canonical localization representative.",
    "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-derived-module-scalar-adjunction"
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact constant realization, including ModuleCat.uliftFunctor and restriction along the ULift ring equivalence, to transport this derived isomorphism to the sheaf category. The same exactness proves finiteModel_constantComplex_mapIso. For the caller, the proved unbounded flat-resolution construction gives finiteModel_exists_kFlat_representative; the free-forgetful counit supplies functorial flat epimorphisms in the original module universe.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-pc-source-module-kflat-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-extension-kflat-quasi-iso",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-derived-module-scalar-adjunction"
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pc-source-module-kflat-resolution"
  ],
  "proof_origin": {
-  "by": "V3 stage-3 worker",
-  "document": "Stacks Project, sites-cohomology.tex",
-  "place": "Tags 0D6D and 093J; representative uniqueness and coefficient-equivalence transport."
+  "by": "K1 stage-3 worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 0D6D; sites-modules.tex Tag 093J. K-flat counit computation, exact coefficient transport, and resolution invariance."
  },
  "mathlib_searches": [
   {
@@ -85,10 +95,15 @@
   "module": "Sheaf.Paper.FiniteModelCoefficientTransport",
   "file": "lean/Sheaf/Paper/FiniteModelCoefficientTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.finiteModel_derivedRepresentative_transport",
-  "statement": "theorem finiteModel_derivedRepresentative_transport (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D] (q : B →+* C) (ρ : C ≃+* D) [(koszulConstantFunctor X D).PreservesZeroMorphisms] (P : CochainComplex (ModuleCat.{t} B) ℤ) (L : DerivedCategory (ModuleCat.{t} B) ⥤ DerivedCategory (ModuleCat.{t} C)) (ε : DerivedCategory.Qh ⋙ L ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars q) (ModuleCat.extendRestrictScalarsAdj q).left_adjoint_additive (.up ℤ) ⋙ DerivedCategory.Qh) (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) : let K := ((ModuleCat.restrictScalars.{t} ρ.symm.toRingHom).mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P))) Nonempty ((@DerivedCategory.Q (SheafOfModules.{t + 1} (adicModuleRing X D)) _ _).obj (finiteModelConstantComplex X D (((ModuleCat.extendScalars (ρ.toRingHom.comp q)).mapHomologicalComplex (.up ℤ)).obj P)) ≅ (@DerivedCategory.Q (SheafOfModules.{t + 1} (adicModuleRing X D)) _ _).obj (finiteModelConstantComplex X D K))",
+  "statement": "theorem finiteModel_derivedRepresentative_transport\n    (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D]\n    (q : B →+* C) (ρ : C ≃+* D)\n    [(koszulConstantFunctor X D).PreservesZeroMorphisms]\n    (P : CochainComplex (ModuleCat.{t} B) ℤ)\n    (hP : (HomologicalComplex.quasiIso (ModuleCat.{t} B) (.up ℤ)).kFlat P)\n    (L : DerivedCategory (ModuleCat.{t} B) ⥤ DerivedCategory (ModuleCat.{t} C))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars q)\n        (ModuleCat.extendRestrictScalarsAdj q).left_adjoint_additive\n        (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) :\n    let K := ((ModuleCat.restrictScalars.{t} ρ.symm.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj (DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P)))\n    Nonempty\n      ((@DerivedCategory.Q (SheafOfModules.{t + 1} (adicModuleRing X D)) _ _).obj\n          (finiteModelConstantComplex X D\n            (((ModuleCat.extendScalars (ρ.toRingHom.comp q)).mapHomologicalComplex\n              (.up ℤ)).obj P)) ≅\n        (@DerivedCategory.Q (SheafOfModules.{t + 1} (adicModuleRing X D)) _ _).obj\n          (finiteModelConstantComplex X D K))",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-27"
+  "by": "K1",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteModel_derivedRepresentative_transport",
+   "AlgebraicGeometry.Scheme.finiteModel_constantComplex_mapIso",
+   "AlgebraicGeometry.Scheme.finiteModel_exists_kFlat_representative"
+  ]
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -101,19 +116,51 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261027T210149-L-1665216",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.finiteModel_derivedRepresentative_transport"
+  "reviewer": "C-34e4d",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261028T034822-L-3552048",
+  "kind": "interface",
+  "note": "independent cc review: transport/core/liftComparison statements + nodes vs the K-flat counterexample (ℤ→ℤ/2, (ℤ/2)[0]) and Stacks 06YY/0D6D; item proof vs node steps; axioms of transport + 2 helpers (clean); parent signature unchanged; unclaimed status of adapted modules"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "K1 stage 2",
+  "old_statement": "For the data of the finite-model derived scalar comparison, let K be the restriction along ρ⁻¹ of the canonical complex representative of L(Q(P)). Then the finite constant model over D of the composite scalar extension of P is isomorphic in the derived category over D to the finite constant model over D of K.",
+  "what": "The previous statement compared ordinary scalar extension of an arbitrary complex with derived scalar extension. For ℤ → ℤ/2 and P=(ℤ/2)[0], the derived tensor has nonzero Tor_1, absent from the ordinary tensor. Add the K-flat hypothesis required for this ordinary representative, and keep the arbitrary-input parent theorem by resolving its input.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "lemma-derived-base-change, Tag 06YY; lemma-derived-pullback-composition, Tag 0D6D; compute on a K-flat resolution."
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category",
+   "def-weil-module-base-change",
+   "def-weil-pbc-finite-perfect-quotient-model-data"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.finiteModel_derivedRepresentative_transport"
+  "old_proof": [
+   {
+    "text": "Use the IsLeftDerivedFunctor universal property of L to identify its value on Q(P) with the derived extension-of-scalars representative along q.",
+    "uses": [
+     "lem-weil-pbc-localization-universal-property",
+     "lem-weil-pbc-derived-module-scalar-adjunction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Restriction along the ring equivalence inverse is exact and transports the representative. Derived scalar transitivity and the termwise universe-lift comparison identify the resulting D-complex with the composite scalar extension model.",
+    "uses": [
+     "lem-weil-pbc-localization-universal-property",
+     "lem-weil-pbc-derived-module-scalar-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-localization-universal-property",
+   "lem-weil-pbc-derived-module-scalar-adjunction"
   ]
  }
 }

@@ -5,7 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePerfectQuotientModelData
-import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 
 /-! Transport of the algebraic representative through a coefficient equivalence.
@@ -22,22 +27,10 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Coefficient equivalence transport identifies the algebraic scalar-extension model.
-
-STATEMENT-DISPUTED: the statement has no K-flat (or equivalent) hypothesis on P.
-For a non-flat ring map q and a non-K-flat complex P, ordinary scalar extension
-of P need not represent the derived scalar extension represented by L(Q(P));
-for example q : ℤ →+* ℤ/2 and P := (ℤ/2)[0] produce a nonzero Tor term in the
-left-derived extension that is absent from the ordinary tensor complex.
-
-The restriction functor along the inverse of the ring equivalence is an exact
- equivalence and hence transports the chosen derived representative. Derived
- transitivity identifies the two scalar changes with the composite map. Constant
- realization preserves this transport termwise, including the universe lift.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0D6D and 093J.
+/-- Exact constant realization transports derived isomorphisms.
+Source: Stacks Tag 093J
 (blueprint: lem-weil-pbc-finite-model-derived-scalar-comparison-transport). -/
-private theorem finiteModel_constantComplex_mapIso
+theorem finiteModel_constantComplex_mapIso
     (X : Scheme.{t}) {D : Type t} [CommRing D]
     [(koszulConstantFunctor X D).PreservesZeroMorphisms]
     {A B : CochainComplex (ModuleCat.{t} D) ℤ}
@@ -72,11 +65,55 @@ private theorem finiteModel_constantComplex_mapIso
   exact ⟨(F.mapDerivedCategoryFactors.app A).symm ≪≫
     F.mapDerivedCategory.mapIso e ≪≫ F.mapDerivedCategoryFactors.app B⟩
 
+private theorem finiteModel_hasFunctorialFlatResolution (R : Type t) [CommRing R] :
+    Abelian.HasFunctorialFlatResolution (ModuleCat.{t} R) := by
+  classical
+  let F := ObjectProperty.lift ObjectProperty.flat
+    (CategoryTheory.forget (ModuleCat.{t} R) ⋙ ModuleCat.free R) (fun M ↦ by
+      apply (ModuleCat.flat_iff_flat _).2
+      change Module.Flat R (M →₀ R)
+      infer_instance)
+  refine ⟨{ F := F, π := (ModuleCat.adj R).counit, epi_π_app := ?_ }⟩
+  intro M
+  apply (ModuleCat.epi_iff_surjective _).2
+  intro x
+  refine ⟨ModuleCat.freeMk x, ?_⟩
+  change ModuleCat.freeDesc (𝟙 (CategoryTheory.forget (ModuleCat.{t} R)).obj M)
+    (ModuleCat.freeMk x) = x
+  simp only [ModuleCat.freeDesc_apply]
+  rfl
+
+/-- Every algebraic complex admits a K-flat representative in the same universe.
+Source: Stacks Tag 06YF
+(blueprint: lem-weil-pbc-finite-model-derived-scalar-comparison-transport).
+Proof: the free-forgetful counit gives functorial flat resolutions, whose unbounded
+complex resolution is K-flat and augmented by a quasi-isomorphism. -/
+theorem finiteModel_exists_kFlat_representative (B : Type t) [CommRing B]
+    (P : CochainComplex (ModuleCat.{t} B) ℤ) :
+    ∃ R : CochainComplex (ModuleCat.{t} B) ℤ,
+      (HomologicalComplex.quasiIso (ModuleCat.{t} B) (.up ℤ)).kFlat R ∧
+        Nonempty (DerivedCategory.Q.obj R ≅ DerivedCategory.Q.obj P) := by
+  classical
+  have := finiteModel_hasFunctorialFlatResolution B
+  have : AB5OfSize.{0, 0} (ModuleCat.{t} B) := AB5OfSize_of_univLE.{0, 0, t, t} _
+  obtain ⟨R, f, hf, _, hR⟩ := P.exists_quasiIso_flat_kFlat
+  have : QuasiIso f := hf
+  exact ⟨R, hR, ⟨asIso (DerivedCategory.Q.map f)⟩⟩
+
+/-- Coefficient equivalence transport identifies the scalar-extension model of a
+K-flat complex with the canonical representative of its derived extension.
+Source: Stacks Tags 0D6D, 06YY and 093J
+(blueprint: lem-weil-pbc-finite-model-derived-scalar-comparison-transport).
+Proof: the derived counit is invertible on a K-flat complex. Restriction along the
+inverse equivalence is exact. Scalar-extension composition and uniqueness of left
+adjoints identify it with extension along the composite. Finally apply exact
+constant realization, which includes the prescribed universe lift. -/
 theorem finiteModel_derivedRepresentative_transport
     (X : Scheme.{t}) {B C D : Type t} [CommRing B] [CommRing C] [CommRing D]
     (q : B →+* C) (ρ : C ≃+* D)
     [(koszulConstantFunctor X D).PreservesZeroMorphisms]
     (P : CochainComplex (ModuleCat.{t} B) ℤ)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{t} B) (.up ℤ)).kFlat P)
     (L : DerivedCategory (ModuleCat.{t} B) ⥤ DerivedCategory (ModuleCat.{t} C))
     (ε : DerivedCategory.Qh ⋙ L ⟶
       @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars q)
@@ -92,6 +129,42 @@ theorem finiteModel_derivedRepresentative_transport
               (.up ℤ)).obj P)) ≅
         (@DerivedCategory.Q (SheafOfModules.{t + 1} (adicModuleRing X D)) _ _).obj
           (finiteModelConstantComplex X D K)) := by
-  sorry
+  have : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)) := hL
+  have := finiteModel_hasFunctorialFlatResolution B
+  have : (ModuleCat.extendScalars q).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj q).left_adjoint_additive
+  have := ModuleCat.extendScalars_preservesKFlatQuasiIso q
+  have : AB5OfSize.{0, 0} (ModuleCat.{t} B) := AB5OfSize_of_univLE.{0, 0, t, t} _
+  have hε := ((ModuleCat.extendScalars q).isLeftDerivedFunctor_iff_isIso_app_of_kFlat
+    ε).1 hL P hP
+  have : (ModuleCat.extendScalars (ρ.toRingHom.comp q)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (ρ.toRingHom.comp q)).left_adjoint_additive
+  let F := ModuleCat.extendScalars q
+  let G := ModuleCat.restrictScalars.{t} ρ.symm.toRingHom
+  have : G.IsEquivalence := inferInstance
+  have : PreservesLimits G := Adjunction.isEquivalencePreservesLimits _
+  have : PreservesColimits G := Adjunction.isEquivalence_preservesColimits _
+  let eρ : ModuleCat.extendScalars ρ.toRingHom ≅ G :=
+    (ModuleCat.extendRestrictScalarsAdj ρ.toRingHom).leftAdjointUniq
+      (ModuleCat.restrictScalarsEquivalenceOfRingEquiv ρ.symm).toAdjunction
+  let ecomp : ModuleCat.extendScalars (ρ.toRingHom.comp q) ≅ F ⋙ G :=
+    ModuleCat.extendScalarsComp q ρ.toRingHom ≪≫ Functor.isoWhiskerLeft F eρ
+  let eε : L.obj (DerivedCategory.Q.obj P) ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P) :=
+    L.mapIso ((DerivedCategory.quotientCompQhIso _).app P).symm ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient _ _).obj P)) ≪≫
+      DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
+      (DerivedCategory.quotientCompQhIso (ModuleCat.{t} C)).app
+        ((F.mapHomologicalComplex (.up ℤ)).obj P)
+  let T := DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P))
+  let eT : DerivedCategory.Q.obj T ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P) :=
+    DerivedCategory.Q.objObjPreimageIso _ ≪≫ eε
+  apply finiteModel_constantComplex_mapIso X
+  exact DerivedCategory.Q.mapIso
+    ((Functor.mapHomologicalComplexCompIso ecomp.symm (.up ℤ)).symm.app P) ≪≫
+    (G.mapDerivedCategoryFactors.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj P)).symm ≪≫
+    G.mapDerivedCategory.mapIso eT.symm ≪≫ G.mapDerivedCategoryFactors.app T
 
 end AlgebraicGeometry.Scheme
