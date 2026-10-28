@@ -7,6 +7,7 @@ module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierFunctor
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
+import Sheaf.SixFunctors.CoefQbarVerdierShiftCore
 
 /-! # Compatible shifts for the common-stage dual
 
@@ -21,6 +22,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+set_option linter.style.haveILetI false
 
 universe u v
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -82,6 +84,21 @@ theorem descended_shift_compatibility (F : Finite D l hl Ω X)
               (descendedDual D l hl Ω X F hF) ℤ _ _ _ _ oshift s
           @NatTrans.CommShift _ _ _ _ _ _
             (descendedComparison D l hl Ω X F hF E).hom ℤ _ _ _ cA cB := by
-  sorry
+  classical
+  let t : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
+      (F.datum E).dual.CommShift ℤ := fun E ↦ (F.datum E).exact.choose
+  have ht : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
+      letI := t E
+      (F.datum E).dual.IsTriangulated := by
+    intro E
+    letI := t E
+    exact ⟨fun T hT ↦ (F.datum E).exact.choose_spec T hT⟩
+  obtain ⟨s, hs⟩ := descended_shift_core D l hl Ω X F hF t ht
+  letI := s
+  refine ⟨s, ?_⟩
+  intro E
+  letI := t E
+  refine ⟨t E, ht E, ?_⟩
+  exact hs E
 
 end WeilConjectures.CoefQbarVerdier

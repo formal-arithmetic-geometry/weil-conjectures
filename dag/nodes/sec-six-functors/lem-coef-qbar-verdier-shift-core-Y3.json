@@ -1,0 +1,116 @@
+{
+ "id": "lem-coef-qbar-verdier-shift-core-Y3",
+ "kind": "lemma",
+ "title": "Common-stage shift descent core",
+ "statement": "For finite coherent rational Verdier data, a common-stage integer CommShift exists and each normalized finite-stage comparison is shift-compatible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport: shift coherence for the explicit common-stage dual"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-sf-rational-verdier-data",
+  "lem-coef-qbar-verdier-representative-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical finite internal-Hom shifts and prove the normalized beta shift squares by evaluation transpose.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the compatible finite components to the pair category and verify the zero and addition laws.",
+   "uses": [
+    "lem-coef-qbar-verdier-representative-functor",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-operations",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal finite-representative expansion; shift coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "descent of natural shift comparisons compatible with finite-stage functors",
+   "results": "Generic shift descent APIs only; no project-specific theorem.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "Generic NatTrans.CommShift constructors and lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No theorem for this common-stage dual."
+  },
+  {
+   "tool": "grep",
+   "query": "descendedCommShift|beta.*CommShift",
+   "results": "Generic StageSystem shift implementations only.",
+   "date": "2026-10-28",
+   "verdict": "No existing project theorem closes the core."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierShift",
+  "date": "2026-10-28",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-shift-compatibility",
+   "place": "Strict sublemma: common-stage shift descent core",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierShiftCore",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierShiftCore.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.descended_shift_core",
+  "statement": "theorem descended_shift_core (F : Finite D l hl Ω X)\n    (hF : FiniteCoherent D l hl Ω X F)\n    (t : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n      (F.datum E).dual.CommShift ℤ)\n    (htri : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n      letI := t E\n      (F.datum E).dual.IsTriangulated) :\n    ∃ s : (descendedDual D l hl Ω X F hF).CommShift ℤ,\n      letI := s\n      ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n        letI := t E\n          let J := GeneralAlgebraicallyClosedCoefficients.inclusion (Y := X) E\n          let jshift : J.CommShift ℤ :=\n            GeneralAlgebraicallyClosedCoefficients.inclusionCommShift E\n          let oshift : J.op.CommShift ℤ :=\n            @Pretriangulated.Opposite.commShiftFunctorOpInt _ _ _ _ _ _ J jshift\n          let cA : ((F.datum E).dual ⋙ J).CommShift ℤ :=\n            @Functor.CommShift.comp _ _ _ _ _ _ (F.datum E).dual J ℤ _ _ _ _ (t E) jshift\n          let cB : (J.op ⋙ descendedDual D l hl Ω X F hF).CommShift ℤ :=\n            @Functor.CommShift.comp _ _ _ _ _ _ J.op\n              (descendedDual D l hl Ω X F hF) ℤ _ _ _ _ oshift s\n          @NatTrans.CommShift _ _ _ _ _ _\n            (descendedComparison D l hl Ω X F hF E).hom ℤ _ _ _ cA cB",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261028T035019-L-3580883",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261028T035019-L-3580883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
