@@ -1128,6 +1128,17 @@ def revoke(head: str, reason: str, mark: bool = True) -> None:
         pass
 
 
+def retire_or_revoke(rec: dict, why: str) -> None:
+    """A pass whose head left its branch because the delivery LANDED (the ordinary batch landing merges it; the global
+    build verifies it) is retired: the record goes, the item stays done. Any other reason revokes it."""
+    o = outcome(rec.get("head", "")) if why == "the branch head moved" else None
+    if o and o.get("state") in ("landed", "verified"):
+        (PASSED / f"{rec['head']}.json").unlink(missing_ok=True)
+        log("retired (landed)", rec.get("group"), rec.get("item"), rec.get("head", "")[:9], o.get("batch"), o.get("landing"))
+        return
+    revoke(rec["head"], why)
+
+
 def passed_heads() -> dict:
     """{head: record} of the valid passed sets."""
     if mode() != "on" or not PASSED.is_dir():
@@ -1307,7 +1318,7 @@ def daemon() -> int:
                 for rec in passed_records():           # passes that stopped holding are withdrawn
                     why = valid_pass(rec)
                     if why:
-                        revoke(rec["head"], why)
+                        retire_or_revoke(rec, why)
                 refresh_newlib()
             except Exception as e:  # noqa: BLE001
                 log("pass upkeep failed", repr(e)[:300])

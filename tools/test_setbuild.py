@@ -306,6 +306,20 @@ class Passes(Sandbox):
             sb.landed_text_check(self.head, {"Sheaf/A.lean": "y"})
             self.assertFalse((sb.PASSED / f"{self.head}.json").exists())
 
+    def test_landed_head_is_retired_not_reworked(self):
+        sb.write_json(sb.PASSED / f"{self.head}.json", self.rec)
+        calls = []
+        with mock.patch.object(sb, "outcome", lambda h: {"state": "landed", "batch": "B", "landing": "L"}), \
+                mock.patch.object(sb.subprocess, "run", lambda *a, **k: calls.append(a) or mock.Mock(returncode=0)):
+            sb.retire_or_revoke(self.rec, "the branch head moved")
+        self.assertFalse((sb.PASSED / f"{self.head}.json").exists())
+        self.assertEqual(calls, [])                                  # no queue_mark rework
+        sb.write_json(sb.PASSED / f"{self.head}.json", self.rec)
+        with mock.patch.object(sb, "outcome", lambda h: None), mock.patch.object(sb, "refresh_newlib", lambda: None), \
+                mock.patch.object(sb.subprocess, "run", lambda *a, **k: calls.append(a) or mock.Mock(returncode=0)):
+            sb.retire_or_revoke(self.rec, "the branch head moved")
+        self.assertEqual(len(calls), 1)                              # returned/replaced: rework
+
     def test_is_passed_never_for_returned(self):
         sb.write_json(sb.PASSED / f"{self.head}.json", self.rec)
         self.assertTrue(sb.is_passed("G", "Sheaf.A", self.head))
