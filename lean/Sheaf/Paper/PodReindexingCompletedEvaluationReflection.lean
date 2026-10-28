@@ -18,6 +18,8 @@ import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.Paper.PodNormalizedTensorSignedShifts
 import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.Paper.PodReindexingDerivedIdentityNormalization
+import Sheaf.Paper.PodReindexingDerivedCompositionNormalization
 
 /-! # Completed evaluation by reflection and its normalized reindexing
 
@@ -640,6 +642,7 @@ theorem reindexing_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 end
 
 
+
 /-- All completed equations are exactly their ordinary-unit precompositions.
 This applies also after identifying signed shifts, identities and compositors:
 there is a unique extension, so no new completed coherence maps can be chosen.
@@ -656,6 +659,7 @@ theorem coherence_iff (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory 
     (a b : (integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj) :
     a = b ↔ unit l E W M.obj L.obj ≫ a = unit l E W M.obj L.obj ≫ b := by
   exact ⟨congrArg _, fun h ↦ (precompose_bijective l E W M L N).injective h⟩
+
 
 /-- Both signed Hom shifts are the existing ordinary shifts. Their completion transport
 uses the same signed tensor maps and both actual Roos coordinates.
@@ -687,6 +691,407 @@ theorem signed_shifts {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   exact ⟨podNormalized_tensor_signed_shifts l E g A T hA hT, hs c,
     hA.2.2.2.2.2.2.2.2.2.2.1, hA.2.2.2.2.2.2.2.2.2.2.2.1⟩
 
+
+private theorem coefficient_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+        (podReindexingCoefficient l E g none) = isoReductionCompletedMap l E g := by
+  have hπ (W : Scheme.{u}) (n : ℕ) :
+      (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        (completedIntegralCommRingProjectionUnrestricted.{u, u} l E W n) =
+          limit.π (integralCoefficientSheafSystem l E W) (op n) := by rfl
+  have hc := (podReindexingCoefficient_existsUnique l E g).exists.choose_spec
+  have he : (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+        (podReindexingCoefficient l E g none) = isoReductionCompletedMap l E g := by
+    apply (isoReductionCompletedMap_existsUnique l E g).unique
+    · intro n
+      have hn := congrArg
+        ((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map) (hc.2 n)
+      change _ ≫ limit.π (integralCoefficientSheafSystem l E X) (op n) = _
+      have hm : (sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          ((isoSectionwiseInverseImage g CommRingCat.{u + 1}).map
+            (completedIntegralCommRingProjectionUnrestricted l E Y n)) =
+          (isoSectionwiseInverseImage g RingCat.{u + 1}).map
+            ((sheafCompose (ProEt.topology Y)
+              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+              (completedIntegralCommRingProjectionUnrestricted l E Y n)) := rfl
+      simpa only [Functor.map_comp, hm, hπ, hc.1 n, podReindexingCoefficient,
+        Functor.mapIso_hom] using hn
+    · exact (isoReductionCompletedMap_existsUnique l E g).exists.choose_spec
+  exact he
+
+section CoherenceTransport
+
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+set_option backward.defeqAttrib.useBackward true
+
+set_option linter.defProp false in
+@[instance_reducible]
+private def cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
+    [EssentiallySmall.{u + 1} C] :
+    J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
+  exact (equivSmallModel.{u + 1} C).hasSheafCompose J
+    ((equivSmallModel.{u + 1} C).inverse.inducedTopology J)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+
+attribute [local instance 1000001] cachedCompose
+
+attribute [local irreducible] podReindexingCoefficient isoReductionCompletedMap
+
+private abbrev ambientRing (W : Scheme.{u}) :=
+  (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+    (podReindexingRing l E W none)
+
+
+private theorem ordinary_reindex_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    podReindexingFunctor l E g none = isoReductionIntegralInverse l E g := by
+  exact congrArg (fun c : (isoSectionwiseInverseImage g RingCat.{u + 1}).obj
+      (ambientRing l E Y) ≅
+        ambientRing l E X ↦
+      isoSectionwiseModuleInverseImage.{u, u} g c.hom) (coefficient_eq l E g)
+
+
+private def ordinaryReindexIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    podReindexingFunctor l E g none ≅ isoReductionIntegralInverse l E g :=
+  eqToIso (ordinary_reindex_eq l E g)
+
+
+private theorem reindex_exact {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (podReindexingFunctor l E g none).Additive ∧
+      PreservesFiniteLimits (podReindexingFunctor l E g none) ∧
+      PreservesFiniteColimits (podReindexingFunctor l E g none) := by
+  let c := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
+      (podReindexingCoefficient l E g none)
+  exact @isoSectionwiseModuleInverseImage_exact.{u, u} X Y g inferInstance _ _ c.hom
+    c.isIso_hom
+
+private theorem ordinary_exact {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (isoReductionIntegralInverse l E g).Additive ∧
+      PreservesFiniteLimits (isoReductionIntegralInverse l E g) ∧
+      PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
+  (ordinary_reindex_eq l E g) ▸ reindex_exact l E g
+
+private theorem reindex_additive {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (podReindexingFunctor l E g none).Additive := (reindex_exact l E g).1
+
+private theorem reindex_limits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteLimits (podReindexingFunctor l E g none) := (reindex_exact l E g).2.1
+
+private theorem reindex_colimits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteColimits (podReindexingFunctor l E g none) := (reindex_exact l E g).2.2
+
+private theorem ordinary_additive {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (isoReductionIntegralInverse l E g).Additive := (ordinary_exact l E g).1
+
+private theorem ordinary_limits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteLimits (isoReductionIntegralInverse l E g) := (ordinary_exact l E g).2.1
+
+private theorem ordinary_colimits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteColimits (isoReductionIntegralInverse l E g) := (ordinary_exact l E g).2.2
+
+attribute [local instance 1000001] reindex_additive reindex_limits reindex_colimits
+  ordinary_additive ordinary_limits ordinary_colimits
+
+private theorem identity_hom_transport {C : Type*} [Category C]
+    (H : Cᵒᵖ × C ⥤ C) (F G : C ⥤ C) (e : F ≅ G) (k : F ≅ 𝟭 C)
+    (a : G ≅ 𝟭 C) (ha : a = e.symm ≪≫ k) (M N : C)
+    (c : F.obj (H.obj (op M, N)) ≅ H.obj (op (F.obj M), F.obj N)) :
+    ((e.app (H.obj (op M, N))).symm ≪≫ c ≪≫
+      H.mapIso (((e.app M).symm.op).prod (e.app N))).hom ≫
+        H.map (Prod.mkHom ((a.inv.app M).op)
+          (a.hom.app N)) =
+      e.inv.app (H.obj (op M, N)) ≫ c.hom ≫
+        H.map (Prod.mkHom (k.inv.app M).op (k.hom.app N)) := by
+  rw [ha]
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.app_inv,
+    Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Functor.mapIso_hom,
+    Category.assoc]
+  rw [← H.map_comp]
+  congr 2
+  congr 1
+  ext
+  · change (e.inv.app M).op ≫ (k.inv.app M ≫ e.hom.app M).op = (k.inv.app M).op
+    rw [← op_comp, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  · change e.hom.app N ≫ (e.inv.app N ≫ k.hom.app N) = k.hom.app N
+    exact Iso.hom_inv_id_app_assoc e N _
+
+
+private def transportHom {C B : Type*} [Category C] [Category B]
+    (HC : Cᵒᵖ × C ⥤ C) (HB : Bᵒᵖ × B ⥤ B) {F G : C ⥤ B}
+    (e : F ≅ G)
+    (c : ∀ M N : C, F.obj (HC.obj (op M, N)) ≅ HB.obj (op (F.obj M), F.obj N))
+    (M N : C) :=
+  (e.app (HC.obj (op M, N))).symm ≪≫ c M N ≪≫
+    HB.mapIso (((e.app M).symm.op).prod (e.app N))
+
+
+private theorem transportHom_refl_hom {C B : Type*} [Category C] [Category B]
+    (HC : Cᵒᵖ × C ⥤ C) (HB : Bᵒᵖ × B ⥤ B) (F : C ⥤ B)
+    (c : ∀ M N : C, F.obj (HC.obj (op M, N)) ≅ HB.obj (op (F.obj M), F.obj N))
+    (M N : C) :
+    (transportHom HC HB (Iso.refl F) c M N).hom = (c M N).hom := by
+  change 𝟙 _ ≫ (c M N).hom ≫ HB.map (𝟙 _) = _
+  rw [CategoryTheory.Functor.map_id]
+  exact (Category.id_comp ((c M N).hom ≫ 𝟙 _)).trans
+    (Category.comp_id ((c M N).hom))
+
+private theorem hom_compositor_transport {C B D : Type*}
+    [Category C] [Category B] [Category D]
+    (HC : Cᵒᵖ × C ⥤ C) (HB : Bᵒᵖ × B ⥤ B) (HD : Dᵒᵖ × D ⥤ D)
+    (F F' : C ⥤ B) (G G' : B ⥤ D) (V V' : C ⥤ D)
+    (hF : F = F') (hG : G = G') (hV : V = V')
+    (eF : F ≅ F') (eG : G ≅ G') (eV : V ≅ V')
+    (heF : eF = eqToIso hF) (heG : eG = eqToIso hG) (heV : eV = eqToIso hV)
+    (cF : ∀ M N : C, F.obj (HC.obj (op M, N)) ≅ HB.obj (op (F.obj M), F.obj N))
+    (cG : ∀ M N : B, G.obj (HB.obj (op M, N)) ≅ HD.obj (op (G.obj M), G.obj N))
+    (cV : ∀ M N : C, V.obj (HC.obj (op M, N)) ≅ HD.obj (op (V.obj M), V.obj N))
+    (k : V ≅ F ⋙ G) (a : V' ≅ F' ⋙ G')
+    (ha : a = eV.symm ≪≫ k ≪≫
+      Functor.isoWhiskerRight eF G ≪≫ Functor.isoWhiskerLeft F' eG)
+    (hk : ∀ M N : C, (cV M N).hom ≫
+      HD.map (Prod.mkHom (k.inv.app M).op (k.hom.app N)) =
+      k.hom.app (HC.obj (op M, N)) ≫ G.map ((cF M N).hom) ≫
+        (cG (F.obj M) (F.obj N)).hom) (M N : C) :
+    (transportHom HC HD eV cV M N).hom ≫
+      HD.map (Prod.mkHom (a.inv.app M).op (a.hom.app N)) =
+      a.hom.app (HC.obj (op M, N)) ≫
+        G'.map (transportHom HC HB eF cF M N).hom ≫
+        (transportHom HB HD eG cG (F'.obj M) (F'.obj N)).hom := by
+  subst eF
+  subst eG
+  subst eV
+  cases hF
+  cases hG
+  cases hV
+  have hh : a = k := by
+    simpa only [eqToIso_refl, Iso.refl_symm, Functor.isoWhiskerRight_refl,
+      Functor.isoWhiskerLeft_refl, Iso.refl_trans, Iso.trans_refl] using ha
+  rw [hh]
+  simpa only [eqToIso_refl, transportHom_refl_hom] using hk M N
+
+
+
+private theorem raw_identity_ordinary {W : Scheme.{u}}
+    (R : Sheaf (ProEt.topology W) RingCat.{u + 1})
+    (c d : (isoSectionwiseInverseImage (𝟙 W) RingCat.{u + 1}).obj R ≅ R) (hc : c = d)
+    (a : isoSectionwiseModuleInverseImage.{u, u} (𝟙 W) d.hom ≅ 𝟭 _)
+    (k : isoSectionwiseModuleInverseImage.{u, u} (𝟙 W) c.hom ≅ 𝟭 _)
+    (ha : ∀ (M : SheafOfModules.{u + 1} R) (U : W.ProEt)
+      (x : M.val.obj (op ((proEtaleIsoPostcompose (𝟙 W)).obj U))),
+      (a.hom.app M).val.app (op U) x = M.val.map
+        ((PodReindexingCoherence.siteId W).hom.app U).op x)
+    (hk : ∀ (M : SheafOfModules.{u + 1} R) (U : W.ProEt)
+      (x : M.val.obj (op ((proEtaleIsoPostcompose (𝟙 W)).obj U))),
+      HEq ((k.hom.app M).val.app (op U) x)
+        (M.val.map ((PodReindexingCoherence.siteId W).inv.app U).op x)) :
+    eqToIso (congrArg (fun e : (isoSectionwiseInverseImage (𝟙 W) RingCat.{u + 1}).obj R ≅ R ↦
+      isoSectionwiseModuleInverseImage.{u, u} (𝟙 W) e.hom) hc)
+      ≪≫ a = k := by
+  subst hc
+  simp only [eqToIso_refl, Iso.refl_trans]
+  apply Iso.ext
+  ext M U x
+  refine (ha M U.unop x).trans (Eq.trans ?_ (eq_of_heq (hk M U.unop x)).symm)
+  rfl
+
+
+private theorem raw_composition_ordinary {X Y Z : Scheme.{u}}
+    (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
+    (RY : Sheaf (ProEt.topology Y) RingCat.{u + 1})
+    (RX : Sheaf (ProEt.topology X) RingCat.{u + 1})
+    (RZ : Sheaf (ProEt.topology Z) RingCat.{u + 1})
+    (cg dg : (isoSectionwiseInverseImage g RingCat.{u + 1}).obj RY ≅ RX)
+    (ch dh : (isoSectionwiseInverseImage h RingCat.{u + 1}).obj RX ≅ RZ)
+    (cc dc : (isoSectionwiseInverseImage (h ≫ g) RingCat.{u + 1}).obj RY ≅ RZ)
+    (hg : cg = dg) (hh : ch = dh) (hc : cc = dc)
+    (a : isoSectionwiseModuleInverseImage.{u, u} (h ≫ g) dc.hom ≅
+      isoSectionwiseModuleInverseImage.{u, u} g dg.hom ⋙
+        isoSectionwiseModuleInverseImage.{u, u} h dh.hom)
+    (k : isoSectionwiseModuleInverseImage.{u, u} (h ≫ g) cc.hom ≅
+      isoSectionwiseModuleInverseImage.{u, u} g cg.hom ⋙
+        isoSectionwiseModuleInverseImage.{u, u} h ch.hom)
+    (ha : ∀ (M : SheafOfModules.{u + 1} RY) (U : Z.ProEt)
+      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ g)).obj U))),
+      (a.hom.app M).val.app (op U) x = M.val.map
+        ((PodReindexingCoherence.siteComp g h).inv.app U).op x)
+    (hk : ∀ (M : SheafOfModules.{u + 1} RY) (U : Z.ProEt)
+      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ g)).obj U))),
+      HEq ((k.hom.app M).val.app (op U) x)
+        (M.val.map ((PodReindexingCoherence.siteComp g h).inv.app U).op x)) :
+    eqToIso (congrArg (fun e : (isoSectionwiseInverseImage (h ≫ g) RingCat.{u + 1}).obj RY ≅ RZ ↦
+        isoSectionwiseModuleInverseImage.{u, u} (h ≫ g) e.hom) hc)
+      ≪≫ a = k ≪≫
+      Functor.isoWhiskerRight
+        (eqToIso (congrArg (fun e : (isoSectionwiseInverseImage g RingCat.{u + 1}).obj RY ≅ RX ↦
+        isoSectionwiseModuleInverseImage.{u, u} g e.hom) hg))
+          (isoSectionwiseModuleInverseImage.{u, u} h ch.hom) ≪≫
+      Functor.isoWhiskerLeft (isoSectionwiseModuleInverseImage.{u, u} g dg.hom)
+        (eqToIso (congrArg (fun e : (isoSectionwiseInverseImage h RingCat.{u + 1}).obj RX ≅ RZ ↦
+        isoSectionwiseModuleInverseImage.{u, u} h e.hom) hh)) := by
+  subst hg
+  subst hh
+  subst hc
+  simp only [eqToIso_refl, Functor.isoWhiskerRight_refl, Functor.isoWhiskerLeft_refl,
+    Iso.refl_trans, Iso.trans_refl]
+  apply Iso.ext
+  ext M U x
+  exact (ha M U.unop x).trans (eq_of_heq (hk M U.unop x)).symm
+
+attribute [local irreducible] podReindexCalculus HasDerivedCategory.standard
+  Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
+
+attribute [local instance 1000001] HasDerivedCategory.standard
+
+
+private theorem identity_ordinary (A : PodReindexFamily l E) (hA : A.Relabelling l E)
+    (W : Scheme.{u}) (k : PodReindexingCoherence.Identity l E W none) :
+    ordinaryReindexIso l E (𝟙 W) ≪≫ A.identity W = k.ordinary := by
+  exact raw_identity_ordinary (ambientRing l E W)
+    _ _ (coefficient_eq l E (𝟙 W)) (A.identity W) k.ordinary (hA.1 W) k.sections
+
+
+
+private theorem composition_ordinary (A : PodReindexFamily l E) (hA : A.Relabelling l E)
+    {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
+    (k : PodReindexingCoherence.Compositor l E g h none) :
+    ordinaryReindexIso l E (h ≫ g) ≪≫ A.composition h g = k.ordinary ≪≫
+      Functor.isoWhiskerRight (ordinaryReindexIso l E g) (podReindexingFunctor l E h none) ≪≫
+      Functor.isoWhiskerLeft (isoReductionIntegralInverse l E g)
+        (ordinaryReindexIso l E h) := by
+  exact raw_composition_ordinary g h
+    (ambientRing l E Y)
+    (ambientRing l E X)
+    (ambientRing l E Z)
+    _ _ _ _ _ _ (coefficient_eq l E g) (coefficient_eq l E h) (coefficient_eq l E (h ≫ g))
+    (A.composition h g) k.ordinary (hA.2 h g) k.sections
+
+
+
+private theorem identity_derived (A : PodReindexFamily l E) (hA : A.Relabelling l E)
+    (W : Scheme.{u}) (k : PodReindexingCoherence.Identity l E W none) :
+    A.identityDerived l E W = (reindexIso l E (𝟙 W)).symm ≪≫ k.derived := by
+  refine podReindexingDerivedIdentityNormalization (podReindexingFunctor l E (𝟙 W) none)
+    (isoReductionIntegralInverse l E (𝟙 W)) (ordinary_reindex_eq l E (𝟙 W))
+    (reindex_eq l E (𝟙 W)) (A.identity W) k.ordinary k.derived
+    (identity_ordinary l E A hA W k) ?_
+  intro P
+  have hm : (k.complex P).hom =
+      (NatTrans.mapHomologicalComplex k.ordinary.hom (.up ℤ)).app P := by
+    apply HomologicalComplex.hom_ext
+    intro i
+    exact k.degree P i
+  exact (k.model P).trans (congrArg ((podReindexingDerivedFactors l E (𝟙 W) none).hom.app P ≫
+    (podReindexingQ l E W none).map ·) hm)
+
+
+
+private theorem composition_derived (A : PodReindexFamily l E) (hA : A.Relabelling l E)
+    {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
+    (k : PodReindexingCoherence.Compositor l E g h none) :
+    A.compositionDerived l E h g = (reindexIso l E (h ≫ g)).symm ≪≫ k.derived ≪≫
+      Functor.isoWhiskerRight (reindexIso l E g) (podReindexingDerivedFunctor l E h none) ≪≫
+      Functor.isoWhiskerLeft (podOrdinaryReindex l E g) (reindexIso l E h) := by
+  refine podReindexingDerivedCompositionNormalization (podReindexingFunctor l E g none)
+    (isoReductionIntegralInverse l E g) (podReindexingFunctor l E h none)
+    (isoReductionIntegralInverse l E h) (podReindexingFunctor l E (h ≫ g) none)
+    (isoReductionIntegralInverse l E (h ≫ g)) (ordinary_reindex_eq l E g)
+    (ordinary_reindex_eq l E h) (ordinary_reindex_eq l E (h ≫ g))
+    (reindex_eq l E g) (reindex_eq l E h) (reindex_eq l E (h ≫ g))
+    (A.composition h g) k.ordinary k.derived (composition_ordinary l E A hA g h k) ?_
+  intro P
+  have hm : (k.complex P).hom =
+      (NatTrans.mapHomologicalComplex k.ordinary.hom (.up ℤ)).app P := by
+    apply HomologicalComplex.hom_ext
+    intro i
+    exact k.degree P i
+  exact (k.model P).trans (congrArg ((podReindexingDerivedFactors l E (h ≫ g) none).hom.app P ≫
+    (podReindexingQ l E Z none).map ·) hm)
+
+attribute [local irreducible] derivedInternalHomOfUniverses reindexIso podOrdinaryReindex
+  PodReindexFamily.identityDerived PodReindexFamily.compositionDerived
+
+-- Abstract the isomorphisms before specializing the categorical calculation. This keeps
+-- the kernel from unfolding the derived identity and compositor constructions.
+private theorem identity_transport_specialized
+    (W : Scheme.{u}) (c : Comparison l E (𝟙 W))
+    (k : PodReindexingCoherence.Identity l E W none)
+    (e : podReindexingDerivedFunctor l E (𝟙 W) none ≅ podOrdinaryReindex l E (𝟙 W))
+    (a : podOrdinaryReindex l E (𝟙 W) ≅ 𝟭 (D l E W))
+    (ha : a = e.symm ≪≫ k.derived) (M N : D l E W) :
+    ((e.app (hom l E W M N)).symm ≪≫ c.derived.app (op M, N) ≪≫
+      (podReindexingDerivedHom l E W none).mapIso
+        ((e.app M).symm.op.prod (e.app N))).hom ≫
+      (podReindexingDerivedHom l E W none).map
+        (Prod.mkHom (a.inv.app M).op (a.hom.app N)) =
+      e.symm.hom.app (hom l E W M N) ≫ c.derived.hom.app (op M, N) ≫
+        (podReindexingDerivedHom l E W none).map
+          (Prod.mkHom (k.derived.inv.app M).op (k.derived.hom.app N)) := by
+  exact identity_hom_transport (C := D l E W) (podReindexingDerivedHom l E W none)
+    (podReindexingDerivedFunctor l E (𝟙 W) none) (podOrdinaryReindex l E (𝟙 W))
+    e k.derived a ha M N (c.derived.app (op M, N))
+
+private theorem composition_transport_specialized
+    {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
+    (cg : Comparison l E g) (ch : Comparison l E h) (chg : Comparison l E (h ≫ g))
+    (k : PodReindexingCoherence.Compositor l E g h none)
+    (eF : podReindexingDerivedFunctor l E g none ≅ podOrdinaryReindex l E g)
+    (eG : podReindexingDerivedFunctor l E h none ≅ podOrdinaryReindex l E h)
+    (eV : podReindexingDerivedFunctor l E (h ≫ g) none ≅ podOrdinaryReindex l E (h ≫ g))
+    (heF : eF = eqToIso (reindex_eq l E g))
+    (heG : eG = eqToIso (reindex_eq l E h))
+    (heV : eV = eqToIso (reindex_eq l E (h ≫ g)))
+    (a : podOrdinaryReindex l E (h ≫ g) ≅
+      podOrdinaryReindex l E g ⋙ podOrdinaryReindex l E h)
+    (ha : a = eV.symm ≪≫ k.derived ≪≫
+      Functor.isoWhiskerRight eF (podReindexingDerivedFunctor l E h none) ≪≫
+      Functor.isoWhiskerLeft (podOrdinaryReindex l E g) eG)
+    (hk : ∀ M N : D l E Y, chg.derived.hom.app (op M, N) ≫
+      (podReindexingDerivedHom l E Z none).map
+        (Prod.mkHom (k.derived.inv.app M).op (k.derived.hom.app N)) =
+      k.derived.hom.app (hom l E Y M N) ≫
+        (podReindexingDerivedFunctor l E h none).map (cg.derived.hom.app (op M, N)) ≫
+        ch.derived.hom.app
+          (op ((podReindexingDerivedFunctor l E g none).obj M),
+            (podReindexingDerivedFunctor l E g none).obj N))
+    (M N : D l E Y) :
+      ((eV.app (hom l E Y M N)).symm ≪≫ chg.derived.app (op M, N) ≪≫
+        (podReindexingDerivedHom l E Z none).mapIso
+          ((eV.app M).symm.op.prod (eV.app N))).hom ≫
+        (podReindexingDerivedHom l E Z none).map
+          (Prod.mkHom (a.inv.app M).op
+            (a.hom.app N)) =
+      a.hom.app (hom l E Y M N) ≫
+        (podOrdinaryReindex l E h).map
+          ((eF.app (hom l E Y M N)).symm ≪≫ cg.derived.app (op M, N) ≪≫
+          (podReindexingDerivedHom l E X none).mapIso
+            ((eF.app M).symm.op.prod (eF.app N))).hom ≫
+        ((eG.app (hom l E X ((podOrdinaryReindex l E g).obj M)
+          ((podOrdinaryReindex l E g).obj N))).symm ≪≫
+          ch.derived.app (op ((podOrdinaryReindex l E g).obj M),
+            (podOrdinaryReindex l E g).obj N) ≪≫
+          (podReindexingDerivedHom l E Z none).mapIso
+            ((eG.app ((podOrdinaryReindex l E g).obj M)).symm.op.prod
+              (eG.app ((podOrdinaryReindex l E g).obj N)))).hom := by
+  exact hom_compositor_transport (C := D l E Y) (B := D l E X) (D := D l E Z)
+    (podReindexingDerivedHom l E Y none) (podReindexingDerivedHom l E X none)
+    (podReindexingDerivedHom l E Z none)
+    (podReindexingDerivedFunctor l E g none) (podOrdinaryReindex l E g)
+    (podReindexingDerivedFunctor l E h none) (podOrdinaryReindex l E h)
+    (podReindexingDerivedFunctor l E (h ≫ g) none) (podOrdinaryReindex l E (h ≫ g))
+    (reindex_eq l E g) (reindex_eq l E h) (reindex_eq l E (h ≫ g))
+    eF eG eV heF heG heV
+    (fun M N ↦ cg.derived.app (op M, N)) (fun M N ↦ ch.derived.app (op M, N))
+    (fun M N ↦ chg.derived.app (op M, N)) k.derived a
+    ha hk M N
+
+
+
 /-- Transport the canonical identity Hom equation through a relabelling datum.
 Source: Stacks 09A5, 0GMX; blueprint dual-Tate compatibility, Step 6
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection).
@@ -710,7 +1115,10 @@ theorem identity_transport_data
         c.derived.hom.app (op M, N) ≫
         (podReindexingDerivedHom l E W none).map
           (Prod.mkHom (k.derived.inv.app M).op (k.derived.hom.app N)) := by
-  sorry
+  have hh := identity_derived l E A hA W k
+  refine ⟨hh, ?_⟩
+  exact identity_transport_specialized l E W c k (reindexIso l E (𝟙 W))
+    (A.identityDerived l E W) hh M N
 
 /-- The identity part of the ambient Hom coherence. -/
 theorem identity_composition_identity (A : PodReindexFamily l E)
@@ -752,7 +1160,17 @@ theorem identity_composition_composition (A : PodReindexFamily l E)
         (podOrdinaryReindex l E h).map (homComparison l E g cg M N).hom ≫
         (homComparison l E h ch ((podOrdinaryReindex l E g).obj M)
           ((podOrdinaryReindex l E g).obj N)).hom) := by
-  sorry
+  intro X Y Z g h _ _ _ _ _ cg ch chg M N
+  obtain ⟨k, _, hk⟩ := PodReindexingCoherence.composition l E g h none
+    (closed l E X) (closed l E Y) (closed l E Z)
+    (models l E X) (models l E Y) (models l E Z) cg ch chg
+  exact composition_transport_specialized l E g h cg ch chg k
+    (reindexIso l E g) (reindexIso l E h) (reindexIso l E (h ≫ g))
+    (by unfold reindexIso; rfl) (by unfold reindexIso; rfl) (by unfold reindexIso; rfl)
+    (A.compositionDerived l E h g) (composition_derived l E A hA g h k) hk M N
+
+
+end CoherenceTransport
 
 theorem identity_composition (A : PodReindexFamily l E) (hA : A.Relabelling l E) :
     (∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]

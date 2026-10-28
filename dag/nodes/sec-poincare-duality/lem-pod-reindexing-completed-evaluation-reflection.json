@@ -37,9 +37,7 @@
   {
    "text": "Use the ordinary closed adjunction recorded in the coefficient calculus and its fixed signed braiding, then compose with step 1. Naturality of the actual reduction unit, reductionTensor and tensor model makes precomposition natural. The counit naturality equations for the closed adjunction give ordinary currying naturality in all three variables; braiding naturality changes to the required M-first order. Applying ordinary currying to the inverse image of the identity under completed currying gives the evaluation extension equation. Injectivity from step 1 gives uniqueness and coherence_iff.",
    "uses": [
-    "def-coef-derived-system-calculus-data",
-    "lem-pod-reindexing-completed-evaluation-reflection-identity",
-    "lem-pod-reindexing-completed-evaluation-reflection-composition"
+    "def-coef-derived-system-calculus-data"
    ],
    "elementary": false,
    "source": {
@@ -64,9 +62,7 @@
    "text": "Use the tensor-augmentation square to identify F(unit) followed by the completed tensor comparison with the ordinary tensor comparison followed by unit. This turns precomposition with F(unit), through the two tensor isomorphisms, into precompose_bijective at X. Compose its bijectivity with the two isomorphism-induced Hom equivalences. For the transpose formula, use the augmentation square to rewrite unit followed by the inverse completed tensor comparison, then apply ambient ordinary M-first currying to unit followed by b. For evaluation, apply completed currying injectivity after the inverse completed tensor comparison. Naturality of completed currying in its second input takes the Hom comparison to itself, since the transpose of evaluation is the identity; the transpose transport formula makes the other side the same Hom comparison. Finally the ambient Hom comparison is the component of the composite natural isomorphism obtained by whiskering reindexIso, the ordinary comparison, and the opposite/product reindexIso transport. Its naturality proves both Hom variances directly.",
    "uses": [
     "lem-pod-reindexing-tensor-augmentation-square",
-    "lem-pod-reindexing-ordinary-currying",
-    "lem-pod-reindexing-completed-evaluation-reflection-identity",
-    "lem-pod-reindexing-completed-evaluation-reflection-composition"
+    "lem-pod-reindexing-ordinary-currying"
    ],
    "elementary": false,
    "source": {
@@ -87,7 +83,7 @@
    }
   },
   {
-   "text": "For naturality, precompose the two candidate completed evaluation maps with the appropriate ordinary-tensor unit. Naturality of the unit reduces them to the ordinary naturality equation, and injectivity from step 1 makes them equal. For either Hom shift, use the signed comparison $H(M[a],N[b])\\cong H(M,N)\\lbrack b-a\\rbrack$: the unit/tensor lemma commutes with those signed shifts, so precomposition reduces the completed square to the ordinary signed square. For identity and successive isomorphisms the same procedure reduces to $c^0_{gh}=c^0_hF_h(c^0_g)$ and the identity equation; the specified tensor compositors and units agree by the unit/tensor lemma. Each resulting equality follows by the same reflector injectivity, so no choice of a new comparison is involved. Finally the unit/tensor lemma realizes these comparisons on the actual strict systems by reindexing both Roos product coordinates, $1-s$ and the cone shift, compatibly with the unit. Thus these very completion-unit extensions commute with both normalized coordinates. The ambient $c^0$ used throughout was constructed without the internal-Hom constructibility hypothesis; that hypothesis was used only in steps 2-3 to stay in the stated full subcategories. For signed_shifts, apply lem-pod-normalized-tensor-signed-shifts for its completed tensor part, use comparison_exists applied to the given c for its ordinary chain and derived Hom shift part, and project both Roos coordinate clauses from hA. The remaining identity_composition hole retains its original proof plan. The completed reindexing laws are assembled from the augmentation square and the proved ambient currying transport in Steps 4--5.",
+   "text": "For signed_shifts, apply lem-pod-normalized-tensor-signed-shifts for the completed tensor clauses, take the ordinary chain/derived Hom shift law for the given c from comparison_exists, and project the two normalized Roos coordinate clauses from hA. The ambient c is constructed without any internal-Hom constructibility hypothesis; that hypothesis only restricts it to the stated full subcategories. For identity, the proved identity conjunct takes the canonical ambient identity datum, identifies its derived map with the section-normalized family map by the identity-transport node, and substitutes the ambient Hom identity equation. For successive composition, the proved composition conjunct identifies the ordinary coefficient maps by completed projections, compares the raw section-normalized compositors, determines their derived maps from the recorded degree and model equations by localization extensionality, and transports the ambient Hom composition equation through reindex_eq. These are the original comparison maps; no new coherence datum is chosen. The completed reindexing laws remain the augmentation-square and ordinary-currying arguments of Steps 4--5.",
    "uses": [
     "lem-pod-reindexing-evaluation-shift-composition",
     "lem-pod-reindexing-completion-unit-tensor",
@@ -118,9 +114,9 @@
   "lem-pod-reindexing-completed-evaluation-reflection-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "K6 makes the completed reindexing argument explicit: normalized tensor augmentation and ambient ordinary signed currying imply bijectivity, transpose transport and evaluation by naturality and currying injectivity. Identity/composition retains its existing proof plan."
+  "place": "R2: sectionwise normalization, localization uniqueness, and categorical transport of the ambient Hom identity/composition equations."
  },
  "mathlib_searches": [
   {
@@ -308,13 +304,13 @@
   "note": "Read item node, report, module and all 11 stmt_dep records plus the dependency Lean (PodReindexingCompletionUnitTensor/Models/Coherence/TensorModels/Shifts, HomResolutionModel, EvaluationShiftComposition, IsomorphismReductionTower, IntegralDerivedOperations, CompletedPullbackTensorComparison). Records: only the item's lean changed; dep nodes identical to live; lean.statement verbatim; declarations list exact; max line 96. Clauses: unit = actual reduction/limit adjunction unit + pinned reductionTensor + Roos-normalized tensor model; precompose_bijective; M-first ordinaryTranspose via recorded braiding; evaluation = transpose^-1(id) with extension+uniqueness (reflection_laws); c0 = Comparison pinned by derived_model, ambient with no hH; constructible_hom + restrictedComparison (isoMk of the ambient arrow); ReindexingLaws: muc F(eta)=eta mu0, F(unit)-bijectivity, completed evaluation equation, transpose = c0 F(b#), c0 naturality; identity_composition against A.identityDerived/compositionDerived; ShiftLaws/PodReindexSignedShifts/Roos on the same pinned c, A. reindex_eq true (equal projection-fixed ring maps). Edge cases empty/zero/l=2/n=0/all shifts/g=id ok; no stronger hypotheses; no hollow defs; only sorry; docstrings ok; ProEt site. No compile (no file changed). Advisories: signed_shifts and two main-theorem conjuncts restate dep laws (node says 'the ordinary ones'); unused A T c in constructible_hom; base theorem stmt_deps supply plain structures; unused stmt_dep imports; possible duplicate of integralDerivedInternalHom; Second reading is the standard placeholder; downstream parent should reuse unit/evaluation."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261027T234112-L-4192240",
-  "kind": "proof",
+  "landing": "20261028T034924-L-3569479",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

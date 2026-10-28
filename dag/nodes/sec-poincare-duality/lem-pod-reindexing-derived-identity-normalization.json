@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-reindexing-derived-identity-normalization",
+ "kind": "statement",
+ "title": "Derived identity normalization under equality transport",
+ "statement": "Let C be an abelian category with a derived category, F and G exact additive endofunctors, and h:F=G and hd:DF=DG equalities. Let a:G≅Id and k:F≅Id satisfy eqToIso(h) followed by a equals k. If kd:DF≅Id has, on every complex P, hom component F-factors(P) followed by Q of the termwise k component, then Da followed by the derived identity isomorphism equals eqToIso(hd) inverse followed by kd.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 6: canonical identity/composition normalization; localization universal property."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Localization.natTrans_ext reduces equality of the derived natural transformations to components at Q(P). The assumed model equation, mapDerivedCategoryNatIso_fac and the identity-factor formula identify kd with the derived image of k followed by mapDerivedCategoryIdIso.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "Derived natural isomorphism factor, identity and composition normalization lemmas; Localization.natTrans_ext."
+   }
+  },
+  {
+   "text": "Equality induction and mapDerivedCategoryNatIso_refl identify the derived image of eqToIso(h) with eqToIso(hd). Apply mapDerivedCategoryNatIso_trans to the ordinary identity equality, cancel the derived equality isomorphism, and substitute the normalized formula for kd.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "mapDerivedCategoryNatIso_refl, mapDerivedCategoryNatIso_trans and whiskering compatibility."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "R2: proved generic localization and exact-functor transport calculation for Step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor equality and a complex model determine the derived identity natural isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.NatTrans.leftDerived_id. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryIdIso",
+   "results": "6 hits: CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_refl|mapDerivedCategoryNatIso_trans",
+   "results": "0 hits: none. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "date": "2026-10-28",
+  "group": "R2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completed-evaluation-reflection",
+   "place": "Step 6 identity normalization",
+   "via": [
+    "lem-pod-reindexing-completed-evaluation-reflection-identity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedIdentityNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedIdentityNormalization.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedIdentityNormalization",
+  "statement": "theorem podReindexingDerivedIdentityNormalization {C : Type*}\n    [Category C] [Abelian C] [HasDerivedCategory C]\n    (F G : C ⥤ C) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (h : F = G) (hd : F.mapDerivedCategory = G.mapDerivedCategory)\n    (a : G ≅ 𝟭 C) (k : F ≅ 𝟭 C) (kd : F.mapDerivedCategory ≅ 𝟭 _)\n    (hraw : eqToIso h ≪≫ a = k)\n    (hmodel : ∀ P : CochainComplex C ℤ, kd.hom.app (DerivedCategory.Q.obj P) =\n      F.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map\n        ((NatTrans.mapHomologicalComplex k.hom (.up ℤ)).app P)) :\n    Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryIdIso C =\n      (eqToIso hd).symm ≪≫ kd",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T034924-L-3569479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T034924-L-3569479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

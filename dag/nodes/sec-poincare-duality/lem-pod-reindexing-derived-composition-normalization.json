@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-reindexing-derived-composition-normalization",
+ "kind": "statement",
+ "title": "Derived composition normalization under equality transport",
+ "statement": "Let C,B,D be abelian categories with derived categories. Let F,F′:C→B, G,G′:B→D, V,V′:C→D be exact additive functors with equalities hF,hG,hV and equalities hdF,hdG,hdV of their derived functors. Suppose a:V′≅F′⋙G′, k:V≅F⋙G, and eqToIso(hV) followed by a equals k followed by the right whiskering of eqToIso(hF) with G and the left whiskering of eqToIso(hG) with F′. If kd:DV≅DF⋙DG obeys the usual two-factor complex model equation, then Da followed by the derived composition isomorphism equals the inverse of eqToIso(hdV), followed by kd, the right whiskering of eqToIso(hdF) with DG, and the left whiskering of eqToIso(hdG) with DF′. The complex model equation says that kd(Q(P)), followed by DG of the F-factor and the G-factor at F(P), equals the V-factor followed by Q of the termwise k component.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 6: canonical identity/composition normalization; localization universal property."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Localization.natTrans_ext reduces equality to components at Q(P). Cancel the composite of the two invertible complex factors. The assumed model equation, mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac identify kd with the derived image of k followed by the canonical derived composition isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "Derived natural isomorphism factor, identity and composition normalization lemmas; Localization.natTrans_ext."
+   }
+  },
+  {
+   "text": "Equality induction and mapDerivedCategoryNatIso_refl identify the derived images of all three equality isomorphisms. Apply mapDerivedCategoryNatIso_trans to the ordinary composition equality and use mapDerivedCategoryNatIso_isoWhiskerRight and mapDerivedCategoryNatIso_isoWhiskerLeft. Cancel the left derived equality isomorphism and substitute the normalized formula for kd.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+    "place": "mapDerivedCategoryNatIso_refl, mapDerivedCategoryNatIso_trans and whiskering compatibility."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "R2: proved generic localization and exact-functor transport calculation for Step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived composition natural isomorphism is compatible with equality transport and normalized complex factors",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso_isoWhiskerRight",
+   "results": "0 hits: none. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_hom_app_factors|mapDerivedCategoryNatIso_isoWhiskerLeft",
+   "results": "0 hits: none. Existing exact-functor and localization APIs are used in the proof; no theorem states this combined normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match; use existing derived-functor API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "date": "2026-10-28",
+  "group": "R2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completed-evaluation-reflection",
+   "place": "Step 6 composition normalization",
+   "via": [
+    "lem-pod-reindexing-completed-evaluation-reflection-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedCompositionNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedCompositionNormalization.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedCompositionNormalization",
+  "statement": "theorem podReindexingDerivedCompositionNormalization {C B D : Type*}\n    [Category C] [Category B] [Category D] [Abelian C] [Abelian B] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory B] [HasDerivedCategory D]\n    (F F' : C ⥤ B) (G G' : B ⥤ D) (V V' : C ⥤ D)\n    [F.Additive] [F'.Additive] [G.Additive] [G'.Additive] [V.Additive] [V'.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits F'] [PreservesFiniteColimits F']\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    [PreservesFiniteLimits V'] [PreservesFiniteColimits V']\n    (hF : F = F') (hG : G = G') (hV : V = V')\n    (hdF : F.mapDerivedCategory = F'.mapDerivedCategory)\n    (hdG : G.mapDerivedCategory = G'.mapDerivedCategory)\n    (hdV : V.mapDerivedCategory = V'.mapDerivedCategory)\n    (a : V' ≅ F' ⋙ G') (k : V ≅ F ⋙ G)\n    (kd : V.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory)\n    (hraw : eqToIso hV ≪≫ a = k ≪≫ Functor.isoWhiskerRight (eqToIso hF) G ≪≫\n      Functor.isoWhiskerLeft F' (eqToIso hG))\n    (hmodel : ∀ P : CochainComplex C ℤ, kd.hom.app (DerivedCategory.Q.obj P) ≫\n      G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫\n        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =\n      V.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map\n        ((NatTrans.mapHomologicalComplex k.hom (.up ℤ)).app P)) :\n    Functor.mapDerivedCategoryNatIso a ≪≫ Functor.mapDerivedCategoryCompIso F' G' =\n      (eqToIso hdV).symm ≪≫ kd ≪≫\n        Functor.isoWhiskerRight (eqToIso hdF) G.mapDerivedCategory ≪≫\n        Functor.isoWhiskerLeft F'.mapDerivedCategory (eqToIso hdG)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T034924-L-3569479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261028T034924-L-3569479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
