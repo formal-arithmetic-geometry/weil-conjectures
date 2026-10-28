@@ -26,8 +26,8 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, w
 The constructions are the generic ones of those files. The only coefficient-specific input is the
 proper base change theorem for bounded constructible `𝒪_E`-sheaves
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`,
-blueprint `sk-thm-sfb-proper-base-change`), which is `sorry`, as are its `E` and `ℚ̄_ℓ` versions
-(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`).
+blueprint `sk-thm-sfb-proper-base-change`), which is `sorry`; its `E` and `ℚ̄_ℓ` versions
+(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`) are proved.
 
 ## Main statements
 
@@ -87,7 +87,7 @@ isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. Th
 `isIso_boundedConstructibleBaseChange_of_isProper`; it reduces to the étale proper base change
 theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by writing a constructible
 `𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` (Bhatt–Scholze, Section 6.7).
-Currently `sorry`, as are its `E` and `ℚ̄_ℓ` versions. -/
+Currently `sorry`; its `E` and `ℚ̄_ℓ` versions are proved. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange
