@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
+import Sheaf.Paper.CommonStageCompositionFiniteRepresentativeStageEquation
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,6 +65,31 @@ theorem commonStageCompositionFiniteRepresentative {X Y Z : Scheme.{u}}
               (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M)
               (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)).hom)
           (GeneralAlgebraicallyClosedCoefficients.ofHom _ _ L hA hB r) := by
-  sorry
+  let A := (commonStageDerivedPullback l Ω (h ≫ f)).obj
+    ((commonStageDerivedTensor l Ω Y).obj (M, N))
+  let B := (commonStageDerivedTensor l Ω Z).obj
+    ((commonStageDerivedPullback l Ω h).obj
+      ((commonStageDerivedPullback l Ω f).obj M),
+      (commonStageDerivedPullback l Ω h).obj
+        ((commonStageDerivedPullback l Ω f).obj N))
+  let left :=
+    ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z Y (h ≫ f) hZ hY) M N).hom ≫
+      ((@commonStageDerivedTensor l _ Ω _ _ _ Z hZ)).map (Prod.mkHom
+        (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) M).hom)
+        (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) N).hom))
+  let right :=
+    ((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ)
+        (((@commonStageDerivedTensor l _ Ω _ _ _ Y hY)).obj (M, N))).hom ≫
+      ((@commonStageDerivedPullback l _ Ω _ _ _ Z X h hZ hX)).map
+        ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ X Y f hX hY) M N).hom ≫
+      ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z X h hZ hX)
+        (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M)
+        (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)).hom
+  obtain ⟨L, hA, hB, r, hr⟩ :=
+    (GeneralAlgebraicallyClosedCoefficients.representatives A B).1 left
+  refine ⟨L, hA, hB, r, ?_, ?_⟩
+  · exact heq_of_eq hr
+  · exact commonStageCompositionFiniteRepresentative_stageEquation
+      l Ω f h M N L hA hB r (heq_of_eq hr)
 
 end WeilConjectures
