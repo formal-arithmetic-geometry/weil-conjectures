@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import Sheaf.Paper.IsomorphismScalarFiniteLeftQuotientFormula
+import Sheaf.Paper.IsomorphismScalarFiniteRightQuotientFormula
 
 /-! # Finite scalar quotient formulas
 
@@ -56,6 +58,8 @@ theorem quotient_formulas_exists
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶
           (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n,
       RightQuotientFormula l E L ι g vright := by
-  sorry
+  obtain ⟨vleft, hleft⟩ := left_quotient_formula_exists l E L ι g b hb
+  obtain ⟨vright, hright⟩ := right_quotient_formula_exists l E L ι g b hb
+  exact ⟨vleft, hleft, vright, hright⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
