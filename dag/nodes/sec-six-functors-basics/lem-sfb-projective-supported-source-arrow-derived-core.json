@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-projective-supported-source-arrow-derived-core",
+ "kind": "lemma",
+ "title": "Residual derived compatibility for the supported source",
+ "statement": "For a normalized diagonal coefficient diagram d on a projective line, the canonical right-derived single comparison of the supported source, followed by the fixed second direct-image comparison, equals the inverse support normalization followed by the canonical derived section comparison and supported-unit comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, residual compatibility after removing the ordinary support isomorphism."
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the canonical right-derived unit on the supported source. Use the support normalization to identify the ordinary source isomorphism with the closed diagonal followed by the second projection, then transport this equality through the canonical derived pushforward comparison and the conjugate section isomorphism. The resulting residual compatibility is exactly the displayed equation.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-projective-diagonal-pullback",
+    "lem-kun-right-derived-single-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Residual compatibility after support normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supported source derived unit residual compatibility",
+   "results": "No existing theorem states this project-specific compatibility.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "diagonalTraceRightSingle secondDiagramPushIso pushSectionIso",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived unit evaluation supported diagonal source",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveSupportedSourceArrowDerived",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-supported-source-arrow-derived",
+   "place": "Residual compatibility after removing the ordinary support isomorphism.",
+   "via": [
+    "lem-sfb-projective-supported-source-arrow-derived"
+   ]
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectiveSupportedSourceArrowDerived",
+  "file": "lean/Sheaf/Paper/ProjectiveSupportedSourceArrowDerived.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.supported_source_arrow_derived_core",
+  "statement": "theorem supported_source_arrow_derived_core\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    diagonalTraceRightSingle\n          (CondensedRing.lowerStar Λ (secondProjection Y)) d.R₂\n          (source Λ Y) ≫\n        (secondDiagramPushIso Λ Y L d).hom.app\n          ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n            (source Λ Y)) =\n      (DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).map d.support₂.iso.inv ≫\n        (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T034645-L-3528242",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T034645-L-3528242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
