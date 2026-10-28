@@ -14,25 +14,49 @@
  },
  "proof": [
   {
-   "text": "Expand the transpose through the open adjunction. The adjunction triangle identity cancels the open restriction and its inverse transpose. The left-unit law for the proper direct-image compositor, together with the identity refinement morphism and its composition transport, cancels the remaining proper factors, leaving the identity on the compact-support image object.",
+   "text": "The coefficient compatibility hg for identity followed by c.g forces R.pull(identity) to equal the canonical ring inverse-image identity: cancel the invertible inverse-image compositor and inverse image of R.pull(c.g), then use naturality and the identity law for the site compositor.",
    "uses": [
-    "def-sf-constructible-exceptional-coefficient-construction-data",
-    "lem-sf-integral-ringed-clopen-comparison"
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct module direct image along identity by pushforwardCongr₂ for the site pullbackId and the resulting coefficient identity. Its section maps are restriction along pullbackId.inv. The section normalization of modulePushComposition_existsUnique and the two pullbackComp identity laws prove both module direct-image compositor unit laws. Conjugating gives the corresponding module inverse-image laws.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization preserves the two module inverse-image unit laws. For one orientation apply the existing generic derive_right_unit theorem. For the other use the same localization calculation with an explicit transport isomorphism, applying mapDerivedCategoryNatIso to the module identity and its whiskering, and then the derived-composition unitor law. These identify the specified geometric inverse-image compositors with the derived identity comparison.",
+   "uses": [
+    "lem-sfb-flat-scalar-tower-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use restriction_identity_component to identify the identity refinement restriction with pullback of the conjugate identity direct-image comparison. The hypothesis hε, injectivity of the open adjunction Hom-equivalence, and inverse cancellation identify that comparison with ε.inv. The identity_comparison and conjugate_paste_identity calculations, proved privately for arbitrary category universes, identify the geometric proper compositor with its proper pushforward. The final word is therefore an isomorphism inverse followed by its hom.",
+   "uses": [
+    "lem-pur-compact-support-identity-calculus",
+    "lem-pur-compact-support-integral-coefficient-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sf-constructible-exceptional-coefficient-construction-data",
-  "lem-sf-integral-ringed-clopen-comparison"
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-sfb-flat-scalar-tower-coherence",
+  "lem-pur-compact-support-identity-calculus",
+  "lem-pur-compact-support-integral-coefficient-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "item": "Sheaf.Paper.IntegralNormalizedRingRefinementIdentityComponent",
+  "item": "Sheaf.Paper.IntegralNormalizedRingRefinementIdentityCore",
   "date": "2026-10-28",
-  "group": "H7",
+  "group": "W7",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-  "place": "the identity clause, ambient proper/open word after the open-adjunction transpose"
+  "place": "identity refinement calculation; site identity laws, adjunction conjugation, and exact-derived localization"
  },
  "mathlib_searches": [
   {
@@ -99,9 +123,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H7",
+  "group": "W7",
   "result": "pass",
-  "landing": "20261028T020505-L-2516088",
+  "landing": "20261028T035007-L-3577654",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
