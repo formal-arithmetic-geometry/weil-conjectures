@@ -24,6 +24,16 @@
  ],
  "proof": [
   {
+   "text": "For family_existsUnique, extract the shift, source localization, purity isomorphism and source scalar isomorphisms from lem-pur-rational-scalar-comparison-identification. Prove uniqueness separately: good complexes localize essentially surjectively by lem-pur-integral-operations-well-defined, so evaluate SourceLocalizationNormalization on one good resolution of each integral pullback and cancel sourceObjectIdentification. Every raw rational object has an integral finite-Tor representative by lem-coef-integral-residue-tor; invertibility of the coefficient prime in residue fields is furnished by lem-weil-compact-support-normalized-scalar-isomorphisms. Cancel the common source localization in gamma_localization on those representatives to identify gamma. The a_normalization equations identify all a components. Compare the two localization shift squares on each integral representative, cancel the localization and qYShift factors, and obtain equality of every shift natural isomorphism. Function extensionality, structure extensionality and proof irrelevance conclude uniqueness. This Lean proof is complete; the following eight steps remain the plan for iteratedPurityScalarPasting.",
+   "uses": [
+    "lem-pur-rational-scalar-comparison-identification",
+    "lem-pur-integral-operations-well-defined",
+    "lem-coef-integral-residue-tor",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Use [lem-pur-rational-normalized-purity-diagrams] for the domains and the rationalized natural comparisons, not for the desired pasting equations. Every integral representative lies in the uniform finite-Tor domain; all intermediate $H$ and $G$ expressions and their comparison maps are therefore defined. Its single-morphism equation gives, for $h=f,g,gf$ and any input $M$,\n$$b_{h,M}T(\\gamma_{h,E,M})=\\gamma_{h,L,TM}a_{h,M}.$$\nIt also gives naturality in $M$ and the stated unit, successive-extension and shift laws for these very $a,b$. No comparison with a separately chosen purity family or exceptional scalar map is made.",
    "uses": [
     "lem-pur-rational-normalized-purity-diagrams"
@@ -142,12 +152,16 @@
   "lem-weil-integral-twist-base-change",
   "lem-pur-derived-tensor-additive-constraints",
   "lem-weil-completed-scalar-chain-shift",
-  "def-pur-composition-comparisons"
+  "def-pur-composition-comparisons",
+  "lem-pur-rational-scalar-comparison-identification",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-compact-support-normalized-scalar-isomorphisms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-  "place": "Composition-coherence transport paragraph; expanded proof using existing normalized tensor, pullback and purity statements"
+  "place": "Composition-coherence transport paragraph; expanded proof using existing normalized tensor, pullback and purity statements; D4 formalized the normalized-family existence and uniqueness argument, retaining the original eight-step plan for the remaining theorem."
  },
  "mathlib_searches": [
   {
@@ -375,5 +389,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Re-delivery after RETURN bda5 (H13/H4+H2). Both Interface modules deleted; the item imports landed RationalScalarComparisonData + AdicPurityScalarNaturality and every referenced name resolves (Data.lean H:131 G:143 T:148 b:155 coefficientTranspose:228 SourceLocalizationNormalization:360; AdicPurityScalarNaturalityData Field:57 Data:733 composeShift:466). stmt_deps: the theorem lem-pur-rational-scalar-comparison-identification is replaced by def-pur-rational-scalar-comparison-data; relative to live only that node and the new compositor node are added; the item changes only lean and stmt_deps. Compositor module and node byte-identical to bda5 (previously judged sound: real data, node factor order, no purity). Item module diff is only the namespace swap. Re-checked q/A/beta order, both pasting equations with sources and targets, gamma/a/b pinning, edge cases (E=L, towers, d=0/e=0, identity morphisms, empty schemes, K=0, shifts), universe u, verbatim lean.statement, lines <=100, sorry only in theorems. Advisory: Data/Field are owned by def-pur-adic-purity-scalar-naturality-data, reached via the genuinely text-cited theorem lem-pur-adic-purity-scalar-naturality, as in landed siblings. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-1d4e0",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261028T081734-L-2775963",
+  "kind": "interface",
+  "note": "independent cc review: family_existsUnique proof (binder-only alpha-rename, change record) against node lem-pur-iterated-purity-scalar-pasting proof/proof_deps and cited owners; #print axioms scratch compile (sorryAx only via upstream Family/rationalScalarComparisonIdentification); 0 importers"
  }
 }
