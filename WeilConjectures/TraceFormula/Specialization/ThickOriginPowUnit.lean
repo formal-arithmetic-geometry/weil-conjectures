@@ -288,6 +288,174 @@ lemma thickOriginPowImagePoint_eq :
   simp only [thickOriginPowImagePoint, thickOriginPowPoint, Scheme.Hom.comp_apply]
   rw [hc, hr, hζ]
 
+/-- The point `o`, as a morphism of `k'`-schemes. -/
+noncomputable abbrev thickOriginPowImageOver :
+    point k' ⟶ deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k' :=
+  Over.homMk (thickOriginPowImagePoint k k' hm) (thickOriginPowImagePoint_hom k k' hm)
+
+instance : IsSeparated (affineLinePowMap k m) := by
+  unfold affineLinePowMap AffineSpace.linePowMap
+  infer_instance
+
+instance isFinite_thickOriginPowModelHom_total :
+    IsFinite (thickOriginPowModelHom k k' hm).total := by
+  have : IsFinite (thickOriginPowMap k m) := by
+    have : NeZero m := ⟨hm⟩
+    exact isFinite_deformationSpacePowMap_polyAffineThickOrigin k (Nat.pos_of_ne_zero hm)
+  exact isFinite_deformationTotalPowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
+    (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
+    (deformationSpacePowMap_deformationSpaceToAffineLine _) (traitPowMap_traitToAffineLine k k' hm)
+
+instance : IsFinite (thickOriginPowSpecialFibreMap k k' hm).left := by
+  have := isFinite_thickOriginPowModelHom_total k k' hm
+  exact MorphismProperty.of_isPullback (IsPullback.of_hasPullback _ _).flip this
+
+instance : LocallyOfFiniteType (thickOriginPowSpecialFibre k k' hm).hom :=
+  inferInstanceAs (LocallyOfFiniteType ((thickOriginPowSpecialFibreMap k k' hm).left ≫ _))
+
+instance : QuasiCompact (thickOriginPowSpecialFibre k k' hm).hom :=
+  inferInstanceAs (QuasiCompact ((thickOriginPowSpecialFibreMap k k' hm).left ≫ _))
+
+instance : IsSeparated (thickOriginPowSpecialFibre k k' hm).hom :=
+  inferInstanceAs (IsSeparated ((thickOriginPowSpecialFibreMap k k' hm).left ≫ _))
+
+/-- The fibre `F = 𝒲_s ×_{𝒟_s} Spec k'` of the power map over the point `o`. -/
+noncomputable abbrev thickOriginPowFibre : Over (Spec (.of k')) :=
+  pullback (thickOriginPowSpecialFibreMap k k' hm) (thickOriginPowImageOver k k' hm)
+
+lemma isPullback_thickOriginPowFibre_left :
+    IsPullback (pullback.fst (thickOriginPowSpecialFibreMap k k' hm)
+        (thickOriginPowImageOver k k' hm)).left
+      (pullback.snd (thickOriginPowSpecialFibreMap k k' hm) (thickOriginPowImageOver k k' hm)).left
+      (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginPowImagePoint k k' hm) :=
+  (IsPullback.of_hasPullback _ _).map (Over.forget _)
+
+instance : IsFinite (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm)).left :=
+  MorphismProperty.of_isPullback (isPullback_thickOriginPowFibre_left k k' hm) inferInstance
+
+instance : IsClosedImmersion (thickOriginPowImagePoint k k' hm) :=
+  isClosedImmersion_of_comp_eq_id _ _ (thickOriginPowImagePoint_hom k k' hm)
+
+instance : IsClosedImmersion (pullback.fst (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm)).left :=
+  MorphismProperty.of_isPullback (isPullback_thickOriginPowFibre_left k k' hm).flip inferInstance
+
+instance : LocallyOfFiniteType (point k').hom := inferInstanceAs (LocallyOfFiniteType (𝟙 _))
+instance : QuasiCompact (point k').hom := inferInstanceAs (QuasiCompact (𝟙 _))
+instance : IsSeparated (point k').hom := inferInstanceAs (IsSeparated (𝟙 _))
+
+instance : LocallyOfFiniteType (thickOriginPowFibre k k' hm).hom := by
+  rw [← Over.w (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm))]
+  infer_instance
+
+instance : QuasiCompact (thickOriginPowFibre k k' hm).hom := by
+  rw [← Over.w (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm))]
+  infer_instance
+
+instance : IsSeparated (thickOriginPowFibre k k' hm).hom := by
+  rw [← Over.w (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm))]
+  infer_instance
+
+/-- The fibre `F` is a single point: a point of `𝒲_s` over `o` comes from a point of the special
+fibre of `𝒟_{V(x)}` over the zero section of `𝒟_{V(x^m)}`, hence from the zero section of
+`𝒟_{V(x)}`, which is a single point. -/
+instance : Subsingleton (thickOriginPowFibre k k' hm).left := by
+  have : NeZero m := ⟨hm⟩
+  set ν := (thickOriginPowSpecialFibreMap k k' hm).left
+  set e' := (pullback.fst (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm)).left
+  set q := (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm)).left
+  have key (f : (thickOriginPowFibre k k' hm).left) :
+      e' f = thickOriginPowPoint k k' hm (IsLocalRing.closedPoint k') := by
+    obtain ⟨y, hy⟩ := (thickOriginSpecialFibreToPow k k' hm).surjective (e' f)
+    have h₁ : ν (e' f) = thickOriginPowImagePoint k k' hm (q f) := by
+      rw [← Scheme.Hom.comp_apply, (isPullback_thickOriginPowFibre_left k k' hm).w,
+        Scheme.Hom.comp_apply]
+      rfl
+    have h₂ : ν (thickOriginSpecialFibreToPow k k' hm y) =
+        deformationSpecialFibrePowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
+          (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
+          (deformationSpacePowMap_deformationSpaceToAffineLine _)
+          (traitPowMap_traitToAffineLine k k' hm) y := by
+      rw [← Scheme.Hom.comp_apply, thickOriginSpecialFibreToPow_powSpecialFibreMap]
+    have hmem := mem_range_zeroSectionSpecialFibreMap_of_powMap k' hm (polyAffine k 1)
+      (fun U ↦ (siteIdeal_polyAffineThickOrigin k m U).le)
+      (fun U ↦ (siteIdeal_polyAffineThickOrigin k m U).ge)
+      (traitPowMap_traitToAffineLine k k' hm) y (by
+        rw [← h₂, hy, h₁, thickOriginPowImagePoint_eq, Scheme.Hom.comp_apply]
+        exact ⟨_, rfl⟩)
+    obtain ⟨z, rfl⟩ := hmem
+    rw [← hy, thickOriginPowPoint, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply,
+      Subsingleton.elim (thickOriginZeroSectionPoint k k' 1 one_pos _) z]
+  refine ⟨fun a b ↦ e'.isClosedEmbedding.injective ?_⟩
+  rw [key, key]
+
+/-- The section `Spec k' ⟶ F` given by the point `w`. -/
+noncomputable abbrev thickOriginPowFibreSection : point k' ⟶ thickOriginPowFibre k k' hm :=
+  pullback.lift (Over.homMk (thickOriginPowPoint k k' hm) (by
+      refine Eq.trans ?_ (thickOriginPowImagePoint_hom k k' hm)
+      simp only [thickOriginPowImagePoint, Category.assoc]
+      rfl)) (𝟙 _) (by ext; simp [thickOriginPowImagePoint])
+
+instance : IsUniversalHomeomorphism (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
+    (thickOriginPowImageOver k k' hm)).left := by
+  have hs : (thickOriginPowFibreSection k k' hm).left ≫ (pullback.snd
+      (thickOriginPowSpecialFibreMap k k' hm) (thickOriginPowImageOver k k' hm)).left = 𝟙 _ := by
+    rw [← Over.comp_left, thickOriginPowFibreSection, pullback.lift_snd]
+    rfl
+  have : Subsingleton (point k').left := inferInstanceAs (Subsingleton (Spec (.of k')))
+  have : IsClosedImmersion (thickOriginPowFibreSection k k' hm).left :=
+    isClosedImmersion_of_comp_eq_id _ _ hs
+  have : Surjective (thickOriginPowFibreSection k k' hm).left :=
+    ⟨fun _ ↦ ⟨IsLocalRing.closedPoint k',
+      Subsingleton.elim (α := (thickOriginPowFibre k k' hm).left) _ _⟩⟩
+  exact IsUniversalHomeomorphism.of_comp_eq_id hs
+
 end Geometry
+
+section Main
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
+  [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] {m : ℕ}
+
+/-- **The specialization unit of the thick origin on the zero section**: for the deformation `𝒟`
+of `V(x^m) ⊆ 𝔸¹_k` over `Spec k'⟦t⟧`, the restriction `Le^* σ_𝒟` of the specialization unit to
+the zero section is an isomorphism. -/
+theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin (hm : m ≠ 0) :
+    IsIso (L(((zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k m)
+      k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map ((deformationModel (polyAffine k 1)
+        (polyAffineThickOrigin k m) k').unit (Profinite.padicAlgClRingObj ℓ))) := by
+  have : NeZero m := ⟨hm⟩
+  have hK : boundedConstructible _
+      (L((𝟙 (polyAffine k 1).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj (𝟙_ _)) :=
+    (boundedConstructible _).prop_of_iso
+      (leftDerivedUpperStarUnitIso _ (𝟙 (polyAffine k 1).left)).symm
+      (boundedConstructible _).prop_unit
+  have hχ := (thickOriginPowModelHom k k' hm).isIso_pushforwardExchange_app_of_isProper
+    (isPullback_powModelHom_i k' hm _ _ _ _ _ _ _)
+    (isPullback_powModelHom_ε k' hm _ _ _ _ _ _ _ (IdealSheafData.deformationSpacePowMap_proj _))
+    hK
+  have he := isIso_leftDerivedUpperStar_map_unit_app_unit_of_isPullback ℓ
+    (IsPullback.of_hasPullback (thickOriginPowSpecialFibreMap k k' hm)
+      (thickOriginPowImageOver k k' hm))
+  have hM := isIso_thickOriginPowSourceModel_unit (ℓ := ℓ) (k := k) k' hm
+  have ho := NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange _
+    (thickOriginPowModelHom k k' hm) hχ hM (thickOriginPowImagePoint k k' hm) he
+  rw [thickOriginPowImagePoint_eq] at ho
+  have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm) ≫
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom) := by
+    rw [constantFamilySpecialPoint_hom]; infer_instance
+  have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)) :=
+    IsUniversalHomeomorphism.of_comp _
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom
+  exact isIso_leftDerivedUpperStar_map_of_comp _ _ _ _ ho
+
+end Main
 
 end AlgebraicGeometry.ProEtale.CondensedRing
