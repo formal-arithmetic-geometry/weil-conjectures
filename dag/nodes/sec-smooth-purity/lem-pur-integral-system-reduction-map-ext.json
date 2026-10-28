@@ -1,0 +1,87 @@
+{
+ "id": "lem-pur-integral-system-reduction-map-ext",
+ "kind": "statement",
+ "title": "Joint faithfulness of finite quotient evaluations after integral reduction",
+ "statement": "theorem integralSystemReduction_map_ext\n    {X : Scheme.{u}}\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    {A B : sfIntegralConstructibleCategory l E X}\n    (p q : A ⟶ B)\n    (h : ∀ n : ℕ,\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map p) =\n        (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map q)) :\n    (integralSystemReduction l E X).map p =\n      (integralSystemReduction l E X).map q",
+ "stmt_deps": [
+  "def-sf-integral-system-reduction",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "the levelwise extensionality step for the coherent coefficient-system reduction."
+ },
+ "proof": [
+  {
+   "text": "A morphism in the derived category of transition-compatible coefficient systems is represented levelwise on the sequence site. Derived localization is componentwise, so equality at every coefficient level reflects equality of the whole system morphism.",
+   "uses": [
+    "def-sf-integral-system-reduction",
+    "lem-pod-integral-system-reduction-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-reduction",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "the levelwise extensionality step for the coherent coefficient-system reduction."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackTensorCompositionReduced",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-integral-composition-coherence",
+   "via": [
+    "lem-pur-pullback-tensor-integral-composition-coherence"
+   ],
+   "place": "the levelwise extensionality step for the coherent coefficient-system reduction."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSystemReductionMapEx",
+  "file": "lean/Sheaf/Paper/IntegralSystemReductionMapExt.lean",
+  "declaration": "WeilConjectures.integralSystemReduction_map_ext",
+  "statement": "theorem integralSystemReduction_map_ext\n    {X : Scheme.{u}}\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    {A B : sfIntegralConstructibleCategory l E X}\n    (p q : A ⟶ B)\n    (h : ∀ n : ℕ,\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map p) =\n        (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map q)) :\n    (integralSystemReduction l E X).map p =\n      (integralSystemReduction l E X).map q",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T020822-L-2550767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261028T020822-L-2550767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

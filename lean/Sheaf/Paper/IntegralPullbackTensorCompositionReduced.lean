@@ -8,6 +8,8 @@ public import Sheaf.Paper.DerivedPullbackTensorConstraints
 public import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 import Sheaf.Paper.CompletedComparisonQuotientRealization
 import Sheaf.Paper.IntegralPullbackComposition
+import Sheaf.Paper.IntegralPullbackTensorCompositionReducedFiniteStage
+import Sheaf.Paper.IntegralSystemReductionMapExt
 
 /-! The reduced system form of integral pullback/tensor composition coherence.
 
@@ -64,6 +66,8 @@ theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
           ((@canonicalIntegralPullbackTensor l _ E _ _ _ Z X h hZ hX)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom) := by
-  sorry
+  apply integralSystemReduction_map_ext l E
+  intro n
+  exact integralPullbackTensorCompositionReduced_finiteStage l E f h M N n
 
 end WeilConjectures
