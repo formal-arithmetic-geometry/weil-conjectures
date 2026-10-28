@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 
@@ -160,5 +161,41 @@ lemma mem_range_toAlgEquiv_iff
   refine ⟨?_, fun he ↦ ⟨ofAlgEquiv e he, toAlgEquiv_ofAlgEquiv e he⟩⟩
   rintro ⟨σ, rfl⟩ y
   exact toRingAut_traitGenericFieldMap σ y
+
+/-- **Generic automorphisms fix the tame roots of the uniformizer**: every `n`-th root of `t` in
+`Ω_K`, with `n` invertible in `Ω_K`, is fixed by every generic automorphism. These roots come
+from `Ω` up to `n`-th roots of unity, which also come from `Ω`; so the generic automorphisms
+act trivially on the tame extensions `K((t^{1/n}))` of `K((t))`, and `P'` lies in the wild
+inertia. -/
+lemma toRingAut_eq_of_pow_eq_X (σ : GenericAut k' K) {n : ℕ} (hn : 0 < n)
+    (hn' : (n : traitGenericField K) ≠ 0) {z : traitGenericField K}
+    (hz : z ^ n = algebraMap (PowerSeries K) (traitGenericField K) PowerSeries.X) :
+    toRingAut σ z = z := by
+  let φ := traitGenericFieldMap k' K
+  have hφ : Function.Injective φ := φ.injective
+  obtain ⟨w, hw⟩ := IsAlgClosed.exists_pow_nat_eq
+    (algebraMap (PowerSeries k') (traitGenericField k') PowerSeries.X) hn
+  have hz₀ : φ w ^ n = algebraMap (PowerSeries K) (traitGenericField K) PowerSeries.X := by
+    rw [← map_pow, hw]
+    have := congrArg (fun f ↦ f PowerSeries.X) (traitGenericFieldMap_comp_algebraMap k' K)
+    simpa using this
+  have hX : algebraMap (PowerSeries K) (traitGenericField K) PowerSeries.X ≠ 0 := by
+    intro h
+    have hinj : Function.Injective (algebraMap (PowerSeries K) (traitGenericField K)) := by
+      rw [IsScalarTower.algebraMap_eq (PowerSeries K) (FractionRing (PowerSeries K))
+        (traitGenericField K), RingHom.coe_comp]
+      exact (algebraMap (FractionRing (PowerSeries K)) (traitGenericField K)).injective.comp
+        (IsFractionRing.injective _ _)
+    exact PowerSeries.X_ne_zero (hinj (h.trans (map_zero _).symm))
+  have hw0 : φ w ≠ 0 := fun h ↦ hX (by rw [← hz₀, h, zero_pow hn.ne'])
+  have hn'' : (n : traitGenericField k') ≠ 0 := fun h ↦ hn' (by rw [← map_natCast φ, h, map_zero])
+  have : NeZero (n : traitGenericField k') := ⟨hn''⟩
+  have : NeZero n := ⟨hn.ne'⟩
+  obtain ⟨ξ, hξ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (traitGenericField k') n
+  have hξ' : IsPrimitiveRoot (φ ξ) n := hξ.map_of_injective hφ
+  have hζ : (z / φ w) ^ n = 1 := by rw [div_pow, hz, ← hz₀, div_self (pow_ne_zero _ hw0)]
+  obtain ⟨i, -, hi⟩ := hξ'.eq_pow_of_pow_eq_one hζ
+  have hzw : z = φ ξ ^ i * φ w := by rw [hi, div_mul_cancel₀ _ hw0]
+  rw [hzw, map_mul, map_pow, toRingAut_traitGenericFieldMap, toRingAut_traitGenericFieldMap]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
