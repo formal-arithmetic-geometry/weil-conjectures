@@ -20530,3 +20530,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: merged deliver/A9/Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComparison (stage 3; reviewer PASS; first push; landing 20261028T020150-L-2473172 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:01 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison (stage 3; reviewer PASS; first push; landing 20261028T020152-L-2473566 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:01 L: merged deliver/B2/Sheaf.Paper.PodReindexingTensorFamilyIdentityComposition (stage 3; reviewer PASS; first push; landing 20261028T020153-L-2474056 (interface); batch 20261028T020127; modules 3; new nodes 2)
+- 02:01 L: merged deliver/B2/Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitComparison (stage 3; reviewer PASS; first push; landing 20261028T020154-L-2474447 (interface); batch 20261028T020127; modules 2; new nodes 1)
