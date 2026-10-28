@@ -5,7 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
+public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 
