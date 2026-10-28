@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportAdjunctBridge
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,7 +68,14 @@ theorem transportedGamma_adjunct (o : Operations l E) (c : Compositors l E o)
       (o.extension i).adj.homEquiv _ _
           ((transportedGamma l E o b k r p i h).app M) =
         (properOpenLambda l E o c a k r p i h).inv.app M := by
-  sorry
+  intro U V W Z k r p i hk hi qk qi hr hp h M
+  apply (cancel_mono ((b.pull l E i).hom.app
+    ((Operations.shriek l E o k ⋙ Operations.push l E o p).obj M))).1
+  rw [transportedGamma]
+  simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+    Category.assoc]
+  exact transportedGamma_adjunct_bridge l E o c a b k r p i h M
 
 /-- Existence of the adjunct-normalized transported gamma.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
