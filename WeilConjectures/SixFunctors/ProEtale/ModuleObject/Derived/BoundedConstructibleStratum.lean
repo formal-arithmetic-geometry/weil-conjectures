@@ -20,9 +20,10 @@ ring `Λ`, used for dévissages along stratifications:
 * a complex all of whose cohomology sheaves vanish is zero
   (`ProEtale.CondensedRing.isZero_of_forall_isZero_homology`), so every complex on the empty
   scheme is zero (`ProEtale.CondensedRing.isZero_derivedCategory_of_isEmpty'`);
-* a constructible sheaf placed in degree `0` is bounded constructible
-  (`ProEtale.CondensedRing.boundedConstructible_singleFunctor_zero_obj`), and its derived pullback
-  is its pullback placed in degree `0` (`ProEtale.CondensedRing.leftDerivedUpperStarSingleIso`);
+* a constructible sheaf placed in any degree is bounded constructible
+  (`ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj`), and the derived pullback of
+  such a sheaf placed in degree `0` is its pullback placed in degree `0`
+  (`ProEtale.CondensedRing.leftDerivedUpperStarSingleIso`);
 * local finite presentation is transported along commutative squares
   (`ProEtale.CondensedRing.isLocallyFinitelyPresented_upperStar_comp_of_comm`).
 
@@ -118,17 +119,25 @@ noncomputable def leftDerivedUpperStarSingleIso {W X : Scheme.{u}} (g : W ⟶ X)
     (((g)^*⟦Λ⟧).mapDerivedCategorySingleFunctor 0).app F
 
 omit [IsCommMonObj Λ] in
+/-- The shifted constructible sheaves `M[-n]` are bounded constructible complexes. -/
+lemma boundedConstructible_singleFunctor_obj (X : Scheme.{u}) (n : ℤ)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M) :
+    boundedConstructible (condensedRingObj Λ X) ((DerivedCategory.singleFunctor _ n).obj M) := by
+  refine ⟨⟨⟨n, inferInstance⟩, ⟨n, inferInstance⟩⟩, fun i ↦ ?_⟩
+  rcases lt_trichotomy i n with hi | rfl | hi
+  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isGE _ n i hi)
+  · exact IsConstructibleModuleObject.of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ i).app M).symm hM
+  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isLE _ n i hi)
+
+omit [IsCommMonObj Λ] in
 /-- A constructible sheaf placed in degree `0` is bounded constructible. -/
 lemma boundedConstructible_singleFunctor_zero_obj {X : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M) :
-    boundedConstructible (condensedRingObj Λ X) ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun i ↦ ?_⟩
-  rcases lt_trichotomy i 0 with hi | rfl | hi
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isGE _ 0 i hi)
-  · exact IsConstructibleModuleObject.of_iso
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isLE _ 0 i hi)
+    boundedConstructible (condensedRingObj Λ X) ((DerivedCategory.singleFunctor _ 0).obj M) :=
+  boundedConstructible_singleFunctor_obj Λ X 0 M hM
 
 omit [IsCommMonObj Λ] in
 /-- Along a commutative square `a ≫ f = b ≫ g`, if `g^* M` is pro-étale locally finitely
@@ -140,6 +149,5 @@ lemma isLocallyFinitelyPresented_upperStar_comp_of_comm [IsCommMonObj Λ] {P U W
     IsLocallyFinitelyPresented (condensedRingObj Λ P) ((a ≫ f)^*⟦Λ⟧.obj M) :=
   (IsLocallyFinitelyPresented.upperStar Λ b hM).of_iso
     (((upperStarComp Λ b g).app M).symm ≪≫ (upperStarCongr Λ h.symm).app M)
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing

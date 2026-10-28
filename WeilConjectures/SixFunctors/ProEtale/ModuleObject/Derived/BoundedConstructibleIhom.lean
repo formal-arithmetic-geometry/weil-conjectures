@@ -72,19 +72,6 @@ noncomputable def ihomRightDerivedLowerStarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (R((f)_*⟦Λ⟧)).obj ((ihom ((L((f)^*⟦Λ⟧)).obj K)).obj M) :=
   ((derivedUpperStarLowerStarAdjunction Λ f).ihomCompIso K).app M
 
-omit [IsCommMonObj Λ] in
-/-- A constructible module object placed in any degree is bounded constructible. -/
-lemma boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject {X : Scheme.{u}}
-    (n : ℤ) {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M) :
-    boundedConstructible (condensedRingObj Λ X) ((DerivedCategory.singleFunctor _ n).obj M) := by
-  refine ⟨⟨⟨n, inferInstance⟩, ⟨n, inferInstance⟩⟩, fun i ↦ ?_⟩
-  rcases lt_trichotomy i n with hi | rfl | hi
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isGE _ n i hi)
-  · exact IsConstructibleModuleObject.of_iso
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ i).app M).symm hM
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isLE _ n i hi)
-
 /-- The internal hom `RHom(A, L)` from a bounded complex `A` with locally free cohomology sheaves
 to a bounded constructible complex `L` is bounded constructible: by dévissage in `A` this reduces
 to `A = P[q]` with `P` locally free, and `RHom(P[q], L) ≅ P'[-q] ⊗ᴸ L` for the dual `P'[-q]` of
@@ -117,7 +104,7 @@ lemma boundedConstructible_ihom_of_isLocallyFree_homology (hΛ : TensorHypothese
   · obtain ⟨P', hP', ⟨e⟩⟩ := hP.exists_exactPairing_singleFunctor q
     exact (boundedConstructible _).prop_of_iso (MonoidalClosed.ihomObjIsoTensor _ _ L).symm
       (boundedConstructible_tensorObj hΛ.lisseTensorHypotheses
-        (boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject (-q)
+        (boundedConstructible_singleFunctor_obj Λ Z (-q) P'
           hP'.isConstructibleModuleObject) hL)
 
 variable (Λ) in

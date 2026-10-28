@@ -7,10 +7,13 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMap
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
+
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
+import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 
 /-!
 # Tensor products with locally free module objects
@@ -24,7 +27,7 @@ over `Λ_X` (`ProEtale.IsLocallyFree`):
   (`ProEtale.IsLocallyFree.isLocallyFinitelyPresented_tensorObj`,
   `ProEtale.IsLocallyFree.isConstructibleModuleObject_tensorObj`);
 * `P` is flat, so the derived tensor product `P[0] ⊗ᴸ N[n]` is `(P ⊗ N)[n]`
-  (`ProEtale.IsLocallyFree.nonempty_singleFunctor_tensorObj_iso`);
+  (`ProEtale.IsLocallyFree.singleFunctorTensorObjIso`);
 * `P[q]` is dualizable in `D(Mod_{Λ_X})`, with dual `P'[-q]` for a locally free `P'`
   (`ProEtale.IsLocallyFree.exists_exactPairing_singleFunctor`).
 
@@ -40,129 +43,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
-
-/-! ### Free module objects -/
-
-namespace CategoryTheory.Mod
-
-section Free
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
-  {D : Type*} [Category* D] [MonoidalCategory D] [Abelian D] [MonoidalPreadditive D]
-  {S : D} [MonObj S] [PreservesFiniteColimits (MonoidalCategory.tensorLeft S)]
-
-omit [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)] in
-/-- Being free of finite rank is invariant under isomorphism of module objects. -/
-lemma IsFree.of_iso {M N : Mod C R} (e : M ≅ N) (h : IsFree R M) : IsFree R N := by
-  obtain ⟨n, ⟨e'⟩⟩ := h
-  exact ⟨n, ⟨e.symm ≪≫ e'⟩⟩
-
-omit [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
-  [PreservesFiniteColimits (MonoidalCategory.tensorLeft S)] in
-/-- An additive functor `F : Mod_R ⥤ Mod_S` with `F R ≅ S` preserves free module objects of
-finite rank. -/
-lemma IsFree.map (F : Mod C R ⥤ Mod D S) [F.Additive] (e : F.obj (regular R) ≅ regular S)
-    {M : Mod C R} (h : IsFree R M) : IsFree S (F.obj M) := by
-  obtain ⟨n, ⟨e'⟩⟩ := h
-  exact ⟨n, ⟨F.mapIso e' ≪≫ finiteFreeIsoMap F e n⟩⟩
-
-omit [PreservesFiniteColimits (MonoidalCategory.tensorLeft S)] in
-variable (S) in
-/-- A direct sum of `m` copies of `Sᵏ` is `S^{m k}`. -/
-noncomputable def finiteFreeFiniteFreeIso (m k : ℕ) :
-    (⨁ fun _ : Fin m ↦ finiteFree S k) ≅ finiteFree S (m * k) :=
-  biproductBiproductIso (fun _ : Fin m ↦ Fin k) (fun _ _ ↦ regular S) ≪≫
-    biproduct.whiskerEquiv (f := fun _ : (Σ _ : Fin m, Fin k) ↦ regular S)
-      (g := fun _ : Fin (m * k) ↦ regular S)
-      ((Equiv.sigmaEquivProd _ _).trans finProdFinEquiv) (fun _ ↦ Iso.refl _)
-
-/-- An additive right exact functor `F : Mod_R ⥤ Mod_S` sending `R` to a free module object of
-finite rank preserves finitely presented module objects: it sends a presentation
-`Rᵐ ⟶ Rⁿ ⟶ M ⟶ 0` to a presentation `S^{m k} ⟶ S^{n k} ⟶ F M ⟶ 0`. -/
-lemma IsFinitelyPresented.map_of_isFree (F : Mod C R ⥤ Mod D S) [F.Additive]
-    [PreservesFiniteColimits F] (hF : IsFree S (F.obj (regular R))) {M : Mod C R}
-    (h : IsFinitelyPresented R M) : IsFinitelyPresented S (F.obj M) := by
-  obtain ⟨k, ⟨e⟩⟩ := hF
-  let en (m : ℕ) : F.obj (finiteFree R m) ≅ finiteFree S (m * k) :=
-    F.mapBiproduct _ ≪≫ biproduct.mapIso (fun _ ↦ e) ≪≫ finiteFreeFiniteFreeIso S m k
-  obtain ⟨n, m, f, ⟨e'⟩⟩ := h
-  exact ⟨n * k, m * k, (en m).inv ≫ F.map f ≫ (en n).hom,
-    ⟨F.mapIso e' ≪≫ PreservesCokernel.iso _ f ≪≫
-      cokernel.mapIso _ _ (en m) (en n) (by simp)⟩⟩
-
-end Free
-
-/-- Restriction of scalars along an isomorphism of algebra objects preserves free module objects
-of finite rank. -/
-lemma IsFree.comap {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C]
-    [MonoidalPreadditive C] [MonoidalClosed C] {R S : C} [MonObj R] [MonObj S]
-    [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
-    [PreservesFiniteColimits (MonoidalCategory.tensorLeft S)] (φ : R ⟶ S) [IsMonHom φ]
-    [IsIso φ] {N : Mod C S} (h : IsFree S N) : IsFree R ((comap φ).obj N) := by
-  obtain ⟨n, ⟨e⟩⟩ := h
-  exact ⟨n, ⟨(Mod.comap φ).mapIso e ≪≫ finiteFreeIsoComap φ n⟩⟩
-
-end CategoryTheory.Mod
-
-/-! ### Exact pairings of direct sums -/
-
-namespace CategoryTheory
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C]
-
-/-- The binary biproduct of two objects with right duals is paired with the biproduct of the
-duals. -/
-@[instance_reducible]
-noncomputable def exactPairingBiprod [HasBinaryBiproducts C] (X Y : C) [HasRightDual X]
-    [HasRightDual Y] : ExactPairing (X ⊞ Y) (Xᘁ ⊞ Yᘁ) where
-  coevaluation' := η_ X Xᘁ ≫ (biprod.inl ⊗ₘ biprod.inl) + η_ Y Yᘁ ≫ (biprod.inr ⊗ₘ biprod.inr)
-  evaluation' := (biprod.fst ⊗ₘ biprod.fst) ≫ ε_ X Xᘁ + (biprod.snd ⊗ₘ biprod.snd) ≫ ε_ Y Yᘁ
-  coevaluation_evaluation' := by
-    simp only [MonoidalPreadditive.whiskerLeft_add, MonoidalPreadditive.add_whiskerRight,
-      Preadditive.add_comp, Preadditive.comp_add, whiskerLeft_coevaluation_evaluation,
-      biprod.inl_fst, biprod.inl_snd, biprod.inr_fst, biprod.inr_snd,
-      MonoidalCategory.whiskerLeft_id, id_whiskerRight, MonoidalPreadditive.whiskerLeft_zero,
-      MonoidalPreadditive.zero_whiskerRight, zero_comp, comp_zero, add_zero, zero_add,
-      Category.id_comp, ExactPairing.coevaluation_evaluation_assoc, whiskerRight_id,
-      id_whiskerLeft, Category.assoc, Iso.inv_hom_id_assoc]
-    rw [← Preadditive.comp_add, ← Category.assoc biprod.fst, ← Category.assoc biprod.snd,
-      ← Preadditive.add_comp, biprod.total, Category.id_comp]
-  evaluation_coevaluation' := by
-    simp only [MonoidalPreadditive.whiskerLeft_add, MonoidalPreadditive.add_whiskerRight,
-      Preadditive.add_comp, Preadditive.comp_add, whiskerRight_coevaluation_evaluation,
-      biprod.inl_fst, biprod.inl_snd, biprod.inr_fst, biprod.inr_snd,
-      MonoidalCategory.whiskerLeft_id, id_whiskerRight, MonoidalPreadditive.whiskerLeft_zero,
-      MonoidalPreadditive.zero_whiskerRight, zero_comp, comp_zero, add_zero, zero_add,
-      Category.id_comp, ExactPairing.evaluation_coevaluation_assoc, whiskerRight_id,
-      id_whiskerLeft, Category.assoc, Iso.inv_hom_id_assoc]
-    rw [← Preadditive.comp_add, ← Category.assoc biprod.fst, ← Category.assoc biprod.snd,
-      ← Preadditive.add_comp, biprod.total, Category.id_comp]
-
-/-- A zero object is paired with itself, with zero evaluation and coevaluation. -/
-@[instance_reducible]
-noncomputable def exactPairingOfIsZero {Z : C} (hZ : IsZero Z) : ExactPairing Z Z where
-  coevaluation' := 0
-  evaluation' := 0
-  coevaluation_evaluation' := (hZ.of_iso (ρ_ Z)).eq_of_src _ _
-  evaluation_coevaluation' := (hZ.of_iso (λ_ Z)).eq_of_src _ _
-
-/-- The direct sum `𝟙ʳ` of `r` copies of the unit is self-dual. -/
-@[instance_reducible]
-noncomputable def exactPairingBiproductUnit [HasFiniteBiproducts C] [HasBinaryBiproducts C] :
-    (r : ℕ) → ExactPairing (⨁ fun _ : Fin r ↦ 𝟙_ C) (⨁ fun _ : Fin r ↦ 𝟙_ C)
-  | 0 => exactPairingOfIsZero
-      ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ fun i ↦ i.elim0))
-  | r + 1 =>
-    letI : HasRightDual (⨁ fun _ : Fin r ↦ 𝟙_ C) :=
-      { rightDual := ⨁ fun _ : Fin r ↦ 𝟙_ C, exact := exactPairingBiproductUnit r }
-    letI : HasRightDual (⨁ fun _ : Fin 1 ↦ 𝟙_ C) :=
-      { rightDual := ⨁ fun _ : Fin 1 ↦ 𝟙_ C
-        exact := exactPairingCongr (biproductUniqueIso _) (biproductUniqueIso _) }
-    letI := exactPairingBiprod (⨁ fun _ : Fin r ↦ 𝟙_ C) (⨁ fun _ : Fin 1 ↦ 𝟙_ C)
-    exactPairingCongr (biprodBiproductFinIso _ r 1).symm (biprodBiproductFinIso _ r 1).symm
-
-end CategoryTheory
 
 /-! ### Pullbacks of free module objects -/
 
@@ -214,7 +94,10 @@ lemma isFree_of_exactPairing {W : Scheme.{u}} {S : Sheaf (Scheme.ProEt.topology 
     [MonObj S] [IsCommMonObj S] {M D : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) S}
     [ExactPairing M D] (hM : Mod.IsFree S M) : Mod.IsFree S D := by
   obtain ⟨n, ⟨e⟩⟩ := hM
-  exact ⟨n, ⟨rightDualIso (exactPairingCongrLeft e.symm) (exactPairingBiproductUnit n)⟩⟩
+  let p : ExactPairing (⨁ fun _ : Fin n ↦ 𝟙_ (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) S))
+      (⨁ fun _ : Fin n ↦ 𝟙_ (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) S)) :=
+    Bicone.exactPairing (biproduct.isBilimit _) (biproduct.isBilimit _)
+  exact ⟨n, ⟨rightDualIso (exactPairingCongrLeft e.symm) p⟩⟩
 
 /-- A right dual of a locally free module object is locally free: the restrictions to the
 members of a cover are strong monoidal, hence preserve exact pairings. -/
@@ -301,16 +184,6 @@ lemma isLocallyFinitelyPresented_tensorObj_of_isFree {X : Scheme.{u}}
 
 /-! ### Main statements -/
 
-omit [IsCommMonObj Λ] in
-variable {Λ} in
-/-- Local freeness is invariant under isomorphism. -/
-lemma IsLocallyFree.of_iso {X : Scheme.{u}}
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (e : M ≅ N) (hM : IsLocallyFree (condensedRingObj Λ X) M) :
-    IsLocallyFree (condensedRingObj Λ X) N :=
-  let ⟨𝒰, h𝒰⟩ := hM
-  ⟨𝒰, fun i ↦ (h𝒰 i).of_iso (((ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod _).mapIso e)⟩
-
 /-- The pullback `g^*` of module objects over `Λ` preserves local freeness. -/
 lemma IsLocallyFree.upperStar {W X : Scheme.{u}} (g : W ⟶ X)
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
@@ -351,24 +224,30 @@ lemma IsLocallyFree.isConstructibleModuleObject_tensorObj {X : Scheme.{u}}
     (Functor.Monoidal.μIso ((S.immersion a)^*⟦Λ⟧) P N)
 
 variable {Λ} in
+/-- A locally free module object is flat: it is dualizable. -/
+theorem IsLocallyFree.flat {X : Scheme.{u}}
+    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (hP : IsLocallyFree (condensedRingObj Λ X) P) : ObjectProperty.flat P :=
+  ObjectProperty.flat_of_isDualizable hP.isDualizable
+
+variable {Λ} in
 /-- A locally free module object `P` is flat, so the derived tensor product of `P[0]` and
 `N[n]` is `(P ⊗ N)[n]`. -/
-lemma IsLocallyFree.nonempty_singleFunctor_tensorObj_iso {X : Scheme.{u}}
+noncomputable def IsLocallyFree.singleFunctorTensorObjIso {X : Scheme.{u}}
     {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (hP : IsLocallyFree (condensedRingObj Λ X) P)
     (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (n : ℤ) :
-    Nonempty ((DerivedCategory.singleFunctor _ 0).obj P ⊗
+    (DerivedCategory.singleFunctor _ 0).obj P ⊗
         (DerivedCategory.singleFunctor _ n).obj N ≅
-      (DerivedCategory.singleFunctor _ n).obj (P ⊗ N)) :=
-  ⟨tensorIso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app P)
+      (DerivedCategory.singleFunctor _ n).obj (P ⊗ N) :=
+  tensorIso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app P)
       ((DerivedCategory.singleFunctorIsoCompQ _ n).app N) ≪≫
     DerivedCategory.QObjTensorQObjIsoOfKFlatLeft _ _
-      ((CochainComplex.kFlat_single_obj_iff_flat P 0).2
-        (ObjectProperty.flat_of_isDualizable hP.isDualizable)) ≪≫
+      ((CochainComplex.kFlat_single_obj_iff_flat P 0).2 hP.flat) ≪≫
     DerivedCategory.Q.mapIso
       ((CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor _) P).app _ ≪≫
         (HomologicalComplex.singleMapHomologicalComplex (tensorLeft P) (.up ℤ) n).app N) ≪≫
-    ((DerivedCategory.singleFunctorIsoCompQ _ n).app (P ⊗ N)).symm⟩
+    ((DerivedCategory.singleFunctorIsoCompQ _ n).app (P ⊗ N)).symm
 
 variable {Λ} in
 /-- A locally free module object `P` placed in degree `q` is dualizable in `D(Mod_{Λ_X})`: it has

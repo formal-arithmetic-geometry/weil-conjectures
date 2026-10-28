@@ -8429,6 +8429,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComa
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.FreeCokernelPowTower
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
@@ -8515,6 +8516,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
+public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Biproduct
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.FiniteBiproductUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
@@ -13225,7 +13227,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoe
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantRegularEnd
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerivedAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseHypotheses
@@ -13277,6 +13281,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
@@ -13313,6 +13318,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructureAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible

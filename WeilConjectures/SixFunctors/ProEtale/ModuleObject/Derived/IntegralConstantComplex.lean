@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.FromJoel.Algebra.Homology.Double
+import WeilConjectures.CategoryTheory.Monoidal.Rigid.Biproduct
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 
 /-!

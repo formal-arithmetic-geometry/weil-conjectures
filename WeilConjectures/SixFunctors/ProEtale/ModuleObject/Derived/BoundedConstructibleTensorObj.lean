@@ -80,7 +80,7 @@ lemma boundedConstructible_singleFunctor_tensorObj_of_isLocallyFree {Z : Scheme.
     boundedConstructible (condensedRingObj Λ Z) ((DerivedCategory.singleFunctor _ 0).obj P ⊗ L) :=
   boundedConstructible_obj_of_forall_singleFunctor
     ((curriedTensor _).obj ((DerivedCategory.singleFunctor _ 0).obj P)) (fun N hN ↦
-      (boundedConstructible _).prop_of_iso (hP.nonempty_singleFunctor_tensorObj_iso N 0).some.symm
+      (boundedConstructible _).prop_of_iso (hP.singleFunctorTensorObjIso N 0).symm
         (boundedConstructible_singleFunctor_zero_obj Λ _
           (hP.isConstructibleModuleObject_tensorObj hN))) hL
 

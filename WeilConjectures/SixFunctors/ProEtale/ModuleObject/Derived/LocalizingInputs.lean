@@ -80,8 +80,7 @@ section Integers
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = 𝒪̲_E`.
 If `K, L ∈ D(Mod_{𝒪_{E,X}})` are bounded constructible, then

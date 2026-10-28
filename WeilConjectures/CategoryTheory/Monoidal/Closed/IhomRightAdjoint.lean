@@ -32,7 +32,21 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [MonoidalClose
   {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal]
 
 /-- For an adjunction `F ⊣ G` with `F` strong monoidal, `[K, G Y] ≅ G [F K, Y]`, naturally in
-`Y`: both sides are right adjoint to `Y ↦ F (K ⊗ Y) ≅ F K ⊗ F Y`. -/
+`Y`: both sides are right adjoint to `Y ↦ F (K ⊗ Y) ≅ F K ⊗ F Y`, so they are identified by
+uniqueness of right adjoints.
+```
+             K ⊗ -              F
+        C ─────────────▶ C ─────────────▶ D
+        C ◀───────────── C ◀───────────── D
+             [K, -]             G
+
+             F                F K ⊗ -
+        C ─────────────▶ D ─────────────▶ D
+        C ◀───────────── D ◀───────────── D
+             G               [F K, -]
+```
+The two top rows are isomorphic (`Functor.Monoidal.commTensorLeft`), hence so are the composite
+right adjoints `G ⋙ [K, -]` and `[F K, -] ⋙ G` of the bottom rows. -/
 noncomputable def ihomCompIso (K : C) : G ⋙ ihom K ≅ ihom (F.obj K) ⋙ G :=
   ((ihom.adjunction K).comp adj).rightAdjointUniq
     ((adj.comp (ihom.adjunction (F.obj K))).ofNatIsoLeft (Functor.Monoidal.commTensorLeft F K))

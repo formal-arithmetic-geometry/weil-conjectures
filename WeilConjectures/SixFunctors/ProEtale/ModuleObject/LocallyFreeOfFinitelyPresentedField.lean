@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 import Mathlib.Algebra.Field.ULift
 import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
-import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
+import WeilConjectures.CategoryTheory.ModuleObjects.FreeMap
 
 /-!
 # Locally finitely presented module objects over the field coefficients are locally free
@@ -40,26 +40,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open MonoidalCategory MonObj Limits
 
-/-- Restriction of scalars along an isomorphism of ring objects of pro-étale abelian sheaves
-preserves free module objects of finite rank. -/
-private lemma isFree_comap {X : Scheme.{u}} {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
-    [MonObj R] [MonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S} (h : Mod.IsFree S M) :
-    Mod.IsFree R ((Mod.comap φ).obj M) := by
-  obtain ⟨n, ⟨e⟩⟩ := h
-  exact ⟨n, ⟨(Mod.comap φ).mapIso e ≪≫ Mod.finiteFreeIsoComap φ n⟩⟩
-
-/-- A module object is free if its restriction of scalars along an isomorphism of ring objects
-is free. -/
-private lemma isFree_of_isFree_comap {X : Scheme.{u}}
-    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj S]
-    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
-    (h : Mod.IsFree R ((Mod.comap φ).obj M)) : Mod.IsFree S M := by
-  obtain ⟨n, ⟨e⟩⟩ := isFree_comap (inv φ) h
-  exact ⟨n, ⟨(((Mod.comapComp (inv φ) φ).symm ≪≫ Mod.comapCongr (by simp) ≪≫
-    Mod.comapId S).app M).symm ≪≫ e⟩⟩
-
 /-- Pro-étale local finite presentation is preserved by restriction of scalars along an
 isomorphism of ring objects. -/
 private lemma isLocallyFinitelyPresented_comap {X : Scheme.{u}}
@@ -82,18 +62,8 @@ private lemma IsLocallyFree.comap {X : Scheme.{u}}
     IsLocallyFree R ((Mod.comap φ).obj M) := by
   obtain ⟨𝒰, h⟩ := h
   refine ⟨𝒰, fun i ↦ ?_⟩
-  obtain ⟨n, ⟨e⟩⟩ := isFree_comap ((upperStar Ab.{u + 1} (𝒰.f i)).map φ) (h i)
+  obtain ⟨n, ⟨e⟩⟩ := (h i).comap ((upperStar Ab.{u + 1} (𝒰.f i)).map φ)
   exact ⟨n, ⟨((upperStar Ab.{u + 1} (𝒰.f i)).mapModComapIso φ).app M ≪≫ e⟩⟩
-
-/-- Local freeness is invariant under isomorphism of module objects. -/
-private lemma IsLocallyFree.of_iso {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R} (h : IsLocallyFree R M)
-    (e : M ≅ N) : IsLocallyFree R N := by
-  obtain ⟨𝒰, h⟩ := h
-  refine ⟨𝒰, fun i ↦ ?_⟩
-  obtain ⟨n, ⟨e'⟩⟩ := h i
-  exact ⟨n, ⟨((upperStar Ab.{u + 1} (𝒰.f i)).mapMod R).mapIso e.symm ≪≫ e'⟩⟩
 
 end AlgebraicGeometry.ProEtale
 
@@ -139,7 +109,7 @@ theorem isLocallyFree_of_isLocallyFinitelyPresented_of_noetherianSpace (Z : Sche
   refine ⟨𝒰, fun i ↦ ?_⟩
   let φ := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) (𝒰.f i)
   obtain ⟨r, ⟨e⟩⟩ := h𝒰 i
-  exact isFree_of_isFree_comap (inv φ)
+  exact Mod.IsFree.of_comap (inv φ)
     ⟨r, ⟨((Mod.extendScalarsIsoComapInv φ).app _).symm ≪≫ e⟩⟩
 
 /-- On a scheme with noetherian underlying space, a pro-étale locally finitely presented module
