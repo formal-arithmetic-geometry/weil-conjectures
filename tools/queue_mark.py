@@ -28,8 +28,14 @@ LOCK = ROOT / "coord" / ".queue-mark.lock"
 _COMMENTS = re.compile(r"--[^\n]*|/-.*?-/", re.S)
 
 
-def has_sorry(module: str) -> bool:
+def has_sorry(module: str, source_dir=None) -> bool:
+    """`sorry` in the module's source: the live file, or under `source_dir` (a passed set build's sources,
+    tools/setbuild.py) when given and the file is there"""
     f = ROOT / "lean" / (module.replace(".", "/") + ".lean")
+    if source_dir:
+        g = pathlib.Path(source_dir) / (module.replace(".", "/") + ".lean")
+        if g.is_file():
+            f = g
     try:
         return "sorry" in _COMMENTS.sub("", f.read_text(errors="ignore"))
     except OSError:
@@ -74,13 +80,13 @@ def _drop_locked(gone):
             _replace(t, "".join(tk))
 
 
-def mark(state: str, stage: str, items, note: str = ""):
+def mark(state: str, stage: str, items, note: str = "", source_dir=None):
     stamp = time.strftime("%FT%TZ", time.gmtime())
     with open(LOCK, "w") as lk:
         fcntl.flock(lk, fcntl.LOCK_EX)
         out = []
         for it in items:
-            st = "landed" if state == "done" and "." in it and has_sorry(it) else state
+            st = "landed" if state == "done" and "." in it and has_sorry(it, source_dir) else state
             out.append((it, st))
         with open(STATES, "a") as f:
             for it, st in out:
@@ -117,9 +123,12 @@ def main():
     note = ""
     if "--note" in a:
         i = a.index("--note"); note = a[i + 1]; a = a[:i] + a[i + 2:]
+    src = None
+    if "--source-dir" in a:      # 2026-10-28: a passed set build's sources (tools/setbuild.py)
+        i = a.index("--source-dir"); src = a[i + 1]; a = a[:i] + a[i + 2:]
     if len(a) < 3 or a[0] not in ("reviewed", "done", "rework"):
         print(__doc__); return 2
-    for it, st in mark(a[0], a[1], a[2:], note):
+    for it, st in mark(a[0], a[1], a[2:], note, src):
         print(f"{st}\t{a[1]}\t{it}")
     return 0
 

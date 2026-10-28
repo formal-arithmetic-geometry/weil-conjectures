@@ -599,7 +599,35 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
     return out
 
 
+GEN = ld.B / "publish-gen"
+_GEN_N: list = []
+
+
+def _gen_write(n: int, state: str) -> None:
+    tmp = GEN.with_name(GEN.name + f".tmp{os.getpid()}")
+    tmp.write_text(f"{n} {state}\n")
+    os.replace(tmp, GEN)
+
+
+def gen_begin() -> None:
+    """2026-10-28 (set builds, tools/setbuild.py): local/builds/publish-gen is "N publishing" from before the rsync of
+    a publish until published.json and the verified records are written ("N done", gen_done): a set build reads the
+    frozen tree's version at its start and refuses its result when the version changed by its end."""
+    try:
+        n = int(GEN.read_text().split()[0])
+    except (OSError, ValueError, IndexError):
+        n = 0
+    _GEN_N[:] = [n + 1]
+    _gen_write(n + 1, "publishing")
+
+
+def gen_done() -> None:
+    if _GEN_N:
+        _gen_write(_GEN_N[0], "done")
+
+
 def publish():
+    gen_begin()
     marker = ld.LOCAL / "PUBLISHING"
     marker.write_text(ld.now())
     try:
@@ -924,6 +952,7 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
         result.update(result="green", verified=sorted(ids))
         ld.write_json(ld.B / "last.json", result)
         ld.write_json(ld.B / "published.json", result)
+        gen_done()
         clear_alert()
         print(f"GREEN in {result['seconds']} s; {len(ids)} landing(s) verified; compiled files published.")
         return 0
