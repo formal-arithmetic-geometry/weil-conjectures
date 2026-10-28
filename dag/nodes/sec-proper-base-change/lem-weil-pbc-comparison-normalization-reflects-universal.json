@@ -13,17 +13,19 @@
  ],
  "proof": [
   {
-   "text": "Use K-flat resolutions with flat terms for extension of coefficients in the fixed-ring sheaf category, identified with modules over the constant ring sheaf. Comparison inverse image preserves such resolutions. The two orders of inverse image and scalar extension give the same sheafified tensor complex, with the unit x↦1 tensor x. Hence the inverse scalar mate of the specified restriction square is invertible.",
+   "text": "Identify the displayed localIsomorphismComparisonCoefficients with the inverse of pbcDerivedComparisonRestrict from the existing witness-compatibility module. At the sheaf level comparison_restrict_mate identifies the mate of pbcComparisonRestrict inverse with the identity restriction square; the inverse mates equivalence therefore identifies it with normalizationPullbackMate. Passing through the exact-functor localization comparisons and their symmetry laws gives the equality of the specified derived natural isomorphisms, not merely an unspecified comparison.",
    "uses": [
     "def-weil-pbc-derived-normalization-arrows",
-    "def-weil-pbc-derived-local-isomorphism-sheaf"
+    "def-weil-pbc-derived-local-isomorphism-sheaf",
+    "def-weil-pbc-witness-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "Initiality of the compared arrow says that its scalar adjunct is invertible. By the mate unit identity this adjunct is comparison applied to the etale scalar adjunct, conjugated by the preceding tensor comparison. Comparison inverse image is exact and conservative on sheaves, since its sheaf unit is invertible; applying homology to a cone therefore shows that it reflects derived isomorphisms. Thus the etale adjunct is invertible. Transporting the initial scalar-adjunction unit along it proves the conclusion. This does not require a Tor bound; zero rings, zero complexes and empty schemes are included.",
+   "text": "Use the already proved pbcRestriction_isRightAdjoint to choose both derived scalar adjunctions, and pbcComparisonReductionMap_isIso for invertibility of the left mate m of the identified restriction square. For d:X to U(Y), let t:L(X) to Y be its scalar adjunct. The mate unit identity and naturality of the restriction comparison show that m_X followed by comparison(t) is the scalar adjunct of the specified compared arrow. Its induced structured-arrow morphism joins the initial scalar-adjunction unit to the assumed initial arrow, so it is invertible. Since m_X is invertible, comparison(t) is invertible. The sheaf comparison is faithful by the invertible underived comparison unit. Exactness gives H^n(comparison(t)) = comparison(H^n(t)); faithful exact comparison reflects each homology isomorphism, hence t is invertible in the unbounded derived category. The isomorphism t transports the initial scalar-adjunction unit to d. All generic categorical glue and homology reflection are proved privately in the item module. This argument needs neither a Tor bound nor boundedness of scalar extension, and applies to zero rings and empty schemes.",
    "uses": [
-    "thm-weil-pbc-site-comparison"
+    "def-weil-pbc-witness-compatibility",
+    "lem-weil-pbc-comparison-grothendieck-unit"
    ],
    "elementary": false
   }
@@ -31,12 +33,13 @@
  "proof_deps": [
   "def-weil-pbc-derived-normalization-arrows",
   "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "thm-weil-pbc-site-comparison"
+  "def-weil-pbc-witness-compatibility",
+  "lem-weil-pbc-comparison-grothendieck-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS (K-flat resolutions), 0G7E (pullback preserves K-flat complexes with flat terms), and 0D6D (composition of derived pullbacks). Also proetale.tex Tag 09B1 for exact conservative comparison, or the small etale site Tag 03ED for etale source restriction, respectively."
+  "place": "Tags 06YY, 07A4 and 0G7E, implemented by the existing proved pbcRestriction_isRightAdjoint and pbcComparisonReductionMap_isIso of WitnessCompatibility; Stacks proetale comparison unit, Tag 099T, as proved by isIso_comparisonAdjunction_unit. V6 supplies the exact comparison identification, categorical initiality argument, and unbounded homology reflection."
  },
  "mathlib_searches": [
   {
@@ -119,10 +122,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "V6",
   "result": "pass",
-  "landing": "20261028T020614-L-2528972",
-  "kind": "interface",
+  "landing": "20261028T034959-L-3576591",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
