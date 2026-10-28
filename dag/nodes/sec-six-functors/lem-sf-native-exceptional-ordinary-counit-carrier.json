@@ -1,0 +1,113 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, split into the ordinary carrier/invariance and graded Hom substeps."
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary exceptional counit carrier with Frobenius invariant zero-shift condition",
+   "results": "No exact geometric theorem; this is the carrier interface supplied by the native exceptional construction.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.counit\" \"CyclicDerivedHomInvariants\"",
+   "results": "Standard adjunction counits only; no native cyclic invariant carrier.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "native_exceptional_ordinary_counit_carrier|native_exceptional_ordinary_counit_graded",
+   "results": "These are new declarations; no existing strict substatement was found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Decomposition of the ordinary exceptional counit witness into carrier/invariance and graded bijection statements."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-exceptional-ordinary-counit-witness",
+   "place": "Strict substeps of the fixed-comparison ordinary counit witness.",
+   "via": [
+    "lem-sf-native-exceptional-ordinary-counit-witness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitWitness",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T020158-L-2475982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T020158-L-2475982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "id": "lem-sf-native-exceptional-ordinary-counit-carrier",
+ "kind": "statement",
+ "title": "Fixed-comparison ordinary counit carrier and invariant condition",
+ "statement": "Fix all data of the fixed-comparison ordinary counit witness, including a comparison isomorphism a and L : W D l Y. Then there exist H, e and t satisfying the transported-arrow equation and the ordinary zero-shift invariant condition. No graded Hom bijectivity is asserted.",
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-cyclic-derived-hom-data",
+  "lem-sf-native-exceptional-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use the scalar-normalized Frobenius mate and cyclic derived action realization to obtain H and action-compatible e; define t by the ordinary adjunction counit and verify the transported-arrow and invariant equations by mate and zero-shift coherence.",
+   "uses": [
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-cyclic-derived-action-realization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-native-exceptional-hom-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-scalar-frobenius-counit",
+  "lem-sf-cyclic-derived-action-realization",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-native-exceptional-hom-transport"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitCarrier",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalOrdinaryCounitCarrier.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_ordinary_counit_carrier",
+  "statement": "theorem native_exceptional_ordinary_counit_carrier (R : Family l D)\n    (X Y : Space D) (VX : ForgetModel D l R X) (VY : ForgetModel D l R Y)\n    (f₀ : X.base ⟶ Y.base)\n    [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (S : CoefficientSystem D l f₀) (c : Compactification (geometricMap D f₀))\n    (a : nativeShriek D l f₀ ⋙ VY.functor ≅\n      VX.functor ⋙ (S.ring.operation c .closed).F) (L : W D l Y) :\n    ∃ (H : W D l X)\n      (e : VX.functor.obj H ≅ (S.ring.operation c .closed).G.obj (VY.functor.obj L))\n      (t : WeilComplex.forget.obj ((nativeShriek D l f₀).obj H) ⟶\n        WeilComplex.forget.obj L),\n      ((ProEtale.adicLowerStar l (closureMap D Y)).rightDerivedFunctor ⋙\n        sectionDerived l (geometric D Y).base.left\n          (R.data (geometric D Y)).realization).map t =\n        VY.realization.inv.app ((nativeShriek D l f₀).obj H) ≫\n          (rho D l R Y).map (a.hom.app H ≫ (S.ring.operation c .closed).F.map e.hom ≫\n            (S.ring.operation c .closed).adjunction.counit.app (VY.functor.obj L)) ≫\n          VY.realization.hom.app L ∧\n      (t ≫ (shiftFunctorZero _ ℤ).inv.app (WeilComplex.forget.obj L)) ∈\n        CyclicDerivedHomInvariants (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)\n          ((nativeShriek D l f₀).obj H).obj L.obj",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ }
+}

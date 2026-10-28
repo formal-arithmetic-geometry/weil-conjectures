@@ -6,6 +6,8 @@ Authors: SHEAF group H7
 module
 
 public import Sheaf.WeilSheaf.NativeExceptionalHomTransport
+import Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitCarrier
+import Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitGraded
 
 /-! # Ordinary exceptional counit witness and graded Hom maps
 
@@ -66,6 +68,10 @@ theorem native_exceptional_ordinary_counit_witness (R : Family l D)
       ∀ (K : W D l X) (r : ℤ), Function.Bijective
         (fun v : CyclicDerivedHom (WeilSheaf.frobeniusPullback D.k₀ l X.base.left)
           K.obj H.obj r ↦ counitHomTransport D l f₀ K H r v ≫ t⟦r⟧') := by
-  sorry
+  intro L
+  obtain ⟨H, e, t, ht, hinv⟩ :=
+    native_exceptional_ordinary_counit_carrier D l R X Y VX VY f₀ S c a L
+  refine ⟨H, e, t, ht, hinv, ?_⟩
+  exact native_exceptional_ordinary_counit_graded D l R X Y VX VY f₀ S c a L H e t ht hinv
 
 end WeilConjectures.NativeExceptionalForgetful
