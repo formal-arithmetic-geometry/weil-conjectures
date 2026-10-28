@@ -2,6 +2,8 @@ module
 
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionModels
 public import Sheaf.SixFunctors.DualizingOpenMate
+import Sheaf.Paper.EtaleSystemQuotientNormalization
+import Sheaf.Paper.SfBcAdicRingDomain
 
 /-! # The cross-field dualizing counit on an affine scheme
 
@@ -11,6 +13,7 @@ and lem-coef-finite-dualizing.proof.md, affine closed-chart argument.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralFiniteExtension
@@ -59,6 +62,65 @@ theorem affineCounit_isIso
       (ModuleCat.{u + 1} (finiteDualizingCoeff l L n)) c ⊣ GB) :
     IsIso (Etale.DualizingOpenMate.globalMate
       (RingHom.ulift.{u + 1, u + 1} (integralScalarQuotientMap l E L ι n))
-      c GA GB aA aB) := by sorry
+      c GA GB aA aB) := by
+  let A := finiteDualizingCoeff l E n
+  let B := finiteDualizingCoeff l L n
+  let φ : A →+* B :=
+    RingHom.ulift.{u + 1, u + 1} (integralScalarQuotientMap l E L ι n)
+  let : Finite A := Equiv.ulift.finite_iff.mpr
+    (Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n))
+  let : Finite B := Equiv.ulift.finite_iff.mpr
+    (Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n))
+  have hA : ∃ r : ℕ, (l ^ r : A) = 0 := by
+    refine ⟨n + 1, ?_⟩
+    apply ULift.down_injective
+    have hz := (Scheme.sf_bc_adic_ring_domain l E).2.2.2.2.2.2.2.2.2
+      (n + 1) (Nat.succ_pos n)
+    change (l : Padic.coefficientExtensionRing l E (n + 1)) ^ (n + 1) = 0
+    simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hz.2.1 1
+  have hB : ∃ r : ℕ, (l ^ r : B) = 0 := by
+    refine ⟨n + 1, ?_⟩
+    apply ULift.down_injective
+    change (l : Padic.coefficientExtensionRing l L (n + 1)) ^ (n + 1) = 0
+    have hz := (Scheme.sf_bc_adic_ring_domain l L).2.2.2.2.2.2.2.2.2
+      (n + 1) (Nat.succ_pos n)
+    simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hz.2.1 1
+  letI : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩
+  letI : Y.Over (Spec (.of D.k)) := ⟨aY⟩
+  have : LocallyOfFiniteType (Y ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType aY›
+  have : QuasiCompact (Y ↘ Spec (.of D.k)) := ‹QuasiCompact aY›
+  have : aY.IsOver (Spec (.of D.k)) := ⟨by change aY ≫ 𝟙 _ = aY; exact Category.comp_id _⟩
+  obtain ⟨q, hq, _, _, _, _, _, b, _, hc, _⟩ :=
+    Etale.etaleCoefficientQuotientNormalization D l hl aY c A B hA hB φ GA GB aA aB
+  have hi : IsIso (Etale.ExceptionalCoefficients.compactSupportMap φ c
+      (GA.obj (Etale.constantComplex A (Spec (.of D.k))))) := by
+    change IsIso ((Etale.compactScalarMap φ c).app _)
+    rw [← hq]
+    infer_instance
+  have hinv : Etale.ExceptionalCoefficients.comparisonInverse φ c
+      (GA.obj (Etale.constantComplex A (Spec (.of D.k)))) =
+        q.inv.app (GA.obj (Etale.constantComplex A (Spec (.of D.k)))) := by
+    unfold Etale.ExceptionalCoefficients.comparisonInverse
+    rw [dif_pos hi]
+    apply IsIso.inv_eq_of_hom_inv_id
+    change (Etale.compactScalarMap φ c).app _ ≫ q.inv.app _ = _
+    rw [← hq]
+    exact q.hom_inv_id_app _
+  have hb : aB.homEquiv _ _
+      (q.inv.app (GA.obj (Etale.constantComplex A (Spec (.of D.k)))) ≫
+        (Etale.scalarExtension φ (Spec (.of D.k))).map
+          (aA.counit.app (Etale.constantComplex A (Spec (.of D.k))))) =
+      b.hom.app (Etale.constantComplex A (Spec (.of D.k))) := by
+    apply (aB.homEquiv _ _).symm.injective
+    rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+    exact (hc _).symm
+  have he : Etale.DualizingOpenMate.globalMate φ c GA GB aA aB =
+      b.hom.app (Etale.constantComplex A (Spec (.of D.k))) ≫
+        GB.map (Etale.ExceptionalCoefficients.unitIso φ (Spec (.of D.k))).hom := by
+    unfold Etale.DualizingOpenMate.globalMate
+    rw [hinv, ← Category.assoc, aB.homEquiv_naturality_right, hb]
+  change IsIso (Etale.DualizingOpenMate.globalMate φ c GA GB aA aB)
+  rw [he]
+  infer_instance
 
 end WeilConjectures.IntegralFiniteExtension

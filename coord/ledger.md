@@ -21177,3 +21177,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:17 L: merged deliver/Q9/Sheaf.Paper.AdicProperOrdinaryPushPreservation (stage 3; reviewer PASS; first push; landing 20261028T081757-L-2782144 (proof); batch 20261028T081727; modules 1; new nodes 0)
 - 08:17 L: merged deliver/R1/Sheaf.Paper.ScalarPullbackCompletionRoos (stage 3; reviewer PASS; first push; landing 20261028T081759-L-2782488 (interface); batch 20261028T081727; modules 6; new nodes 5)
 - 08:18 L: merged deliver/U6/Sheaf.Paper.ProjectionFiniteBaseChangeLeftTensorTransport (stage 3; reviewer PASS; first push; landing 20261028T081800-L-2782977 (interface); batch 20261028T081727; modules 1; new nodes 0)
+- 08:18 L: merged deliver/V3/Sheaf.SixFunctors.CoefIntegralFiniteExtensionAffineCounit (stage 3; reviewer PASS; first push; landing 20261028T081801-L-2783346 (interface); batch 20261028T081727; modules 1; new nodes 0)

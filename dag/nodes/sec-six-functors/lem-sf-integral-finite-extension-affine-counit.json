@@ -15,40 +15,38 @@
  },
  "proof": [
   {
-   "text": "For the supplied field embedding, first use the actual cofinal upper quotient O_L/(pi_E^(n+1)) over O_E/(pi_E^(n+1)). It is finite free. The finite-free coefficient theorem gives the counit-compatible dualizing comparison; identify the upper ideal with (pi_L)^(e*(n+1)) using its ramification calculation.",
+   "text": "Put A = ULift(O_E/(pi_E^(n+1))) and B = ULift(O_L/(pi_L^(n+1))). Both are finite and killed by l^(n+1), using the coefficient-ring domain theorem for E and L. Equip Y with the supplied structural map aY; the base has its identity structural map.",
    "uses": [
-    "lem-coef-finite-free-extension"
+    "lem-sf-bc-adic-ring-domain"
    ],
    "elementary": false
   },
   {
-   "text": "Since e is positive, reduce the upper field from exponent e*(n+1) to exponent n+1 using the finite-dualizing quotient theorem. Apply scalar extension to the preceding isomorphism and compose with this quotient comparison. Quotient compatibility and the scalar associator identify this composite with the native counit-defined coefficient mate. In particular no finite freeness of the native quotient map is assumed.",
+   "text": "Apply the single-ring theorem etaleCoefficientQuotientNormalization to the actual native quotient homomorphism, the supplied compactification c, and exactly the supplied adjunctions aA and aB. It gives isomorphisms q and b, q.hom = compactScalarMap, and the counit equation for b. This theorem permits arbitrary maps between finite l-power-torsion rings, so no flatness or reindexing of the native quotient is required.",
    "uses": [
-    "lem-coef-finite-dualizing",
-    "lem-coef-finite-free-extension"
+    "lem-pur-etale-system-quotient-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "Transfer to the supplied compactification and supplied right adjoints by uniqueness of right adjoints. Their counit compatibility, followed by injectivity of the exceptional Hom equivalence, identifies the transferred map with exactly DualizingOpenMate.globalMate. This calculation is only required on affine finite-type schemes. Empty schemes and identity embeddings are included by the same equations.",
+   "text": "At the regular A coefficient unit K, q.hom = compactScalarMap identifies the total comparisonInverse with q.inv.app (GA.obj K): q is invertible, so the zero branch is not used. The counit equation and injectivity of the aB Hom equivalence identify b.hom.app K with the transpose of q inverse followed by scalar extension of the aA counit. Naturality of the Hom equivalence in its target then identifies globalMate exactly with b.hom.app K followed by GB.map of the scalar-unit isomorphism. Both factors are invertible; hence globalMate is invertible. These same equations include the empty scheme and identity coefficient map.",
    "uses": [
-    "def-coef-finite-dualizing-data",
     "lem-coef-dualizing-open-mate"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-coef-finite-free-extension",
-  "lem-coef-finite-dualizing",
-  "def-coef-finite-dualizing-data",
+  "lem-sf-bc-adic-ring-domain",
+  "lem-pur-etale-system-quotient-normalization",
   "lem-coef-dualizing-open-mate"
  ],
  "proof_origin": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
-  "place": "Paragraph 2: finite-free cofinal dualizing comparisons and compatibility with quotient counits.",
+  "place": "Paragraph 2, counit-compatible coefficient comparison; use the already proved single-ring normalization theorem for the native map.",
   "by": "worker",
-  "note": "The affine geometric part of J8's proved local-to-global and scalar-adjunction reduction."
+  "group": "V3",
+  "date": "2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -120,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-74b0e",
-  "group": "J8",
-  "result": "fix",
-  "landing": "20261028T072425-L-1945387",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261028T081801-L-2783346",
   "kind": "interface",
-  "note": "independent cc review: finiteU_isIso proof and new affineCounit_isIso hole against node lem-sf-integral-finite-extension-finite-u-is-invertible, new node lem-sf-integral-finite-extension-affine-counit, change record J8-finite-u-characteristic, the forced caller adaptation and §3b"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
