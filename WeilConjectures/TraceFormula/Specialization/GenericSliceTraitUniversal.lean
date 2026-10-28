@@ -77,7 +77,7 @@ instance weaklyEtale_strictLocalizationToBase_genericSlicePoint :
   exact MorphismProperty.comp_mem _ _ _ this (MorphismProperty.of_isIso @WeaklyEtale _)
 
 /-- The constant coefficient of power series is a local ring map. -/
-instance PowerSeries.isLocalHom_constantCoeff (R : Type*) [CommRing R] :
+instance _root_.PowerSeries.isLocalHom_constantCoeff (R : Type*) [CommRing R] :
     IsLocalHom (PowerSeries.constantCoeff (R := R)) :=
   ⟨fun _ h ↦ PowerSeries.isUnit_iff_constantCoeff.2 h⟩
 
