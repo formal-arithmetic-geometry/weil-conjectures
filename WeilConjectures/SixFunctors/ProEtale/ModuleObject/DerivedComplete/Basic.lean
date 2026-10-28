@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.UpperStarPreservesLimits
@@ -40,7 +40,7 @@ universe u
 
 open CategoryTheory Limits Pretriangulated
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj CategoryTheory.Functor ZeroObject
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -65,22 +65,6 @@ theorem isZero_of_derivedCompleteIntegers_of_isZero_derivedReduction {X : Scheme
     (hK : derivedCompleteIntegers ℓ E X K) (h : IsZero ((derivedReduction X ℓ E).obj K)) :
     IsZero K :=
   (IsZero.iff_id_eq_zero K).2 (hK h (𝟙 K))
-
-/-- The first derived reduction of a complex vanishes if and only if its derived extension of
-scalars along `𝒪_{E,X} ⟶ 𝔽_{E,X}` vanishes. -/
-lemma isZero_derivedReduction_iff {X : Scheme.{u}}
-    (Z : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
-    IsZero ((derivedReduction X ℓ E).obj Z) ↔
-      IsZero ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj Z) := by
-  refine ⟨fun h ↦ ?_, fun h ↦ (residueFieldModuleSheaf X ℓ E).mapDerivedCategory.map_isZero h⟩
-  have h0 : IsZero ((derivedReduction X ℓ E).obj 0) :=
-    (derivedReduction X ℓ E).map_isZero (isZero_zero _)
-  have := isIso_leftDerivedFunctor_map_of_isIso_derivedReduction_map X ℓ E (0 : Z ⟶ 0)
-    (isIso_of_source_target_iso_zero _ h.isoZero h0.isoZero)
-  exact ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.map_isZero
-    (isZero_zero _)).of_iso (asIso
-      ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.map (0 : Z ⟶ 0)))
 
 /-- Complexes with vanishing first derived reduction are closed under shifts. -/
 lemma isZero_derivedReduction_shift {X : Scheme.{u}}
@@ -111,11 +95,11 @@ theorem derivedCompleteIntegers_shift {X : Scheme.{u}}
     (hK : derivedCompleteIntegers ℓ E X K) (n : ℤ) :
     derivedCompleteIntegers ℓ E X (K⟦n⟧) := by
   intro Z hZ f
-  have h := hK (isZero_derivedReduction_shift hZ (-n)) (f⟦-n⟧' ≫
-    (shiftFunctorCompIsoId _ n (-n) (add_neg_cancel n)).hom.app K)
-  rw [← cancel_mono ((shiftFunctorCompIsoId _ n (-n) (add_neg_cancel n)).inv.app K),
-    Category.assoc, Iso.hom_inv_id_app, Category.comp_id, zero_comp] at h
-  exact (shiftFunctor _ (-n)).map_injective (by rw [h, Functor.map_zero])
+  have h : f⟦-n⟧' = 0 := (cancel_mono
+    ((shiftFunctorCompIsoId _ n (-n) (add_neg_cancel n)).hom.app K)).1 (by
+      rw [zero_comp]
+      exact hK (isZero_derivedReduction_shift hZ (-n)) _)
+  exact (shiftFunctor _ (-n)).map_eq_zero_iff.1 h
 
 /-- **Derived Nakayama for morphisms**: a morphism of derived complete complexes whose first
 derived reduction is an isomorphism is an isomorphism (blueprint `sk-lem-pe-derived-nakayama`):
@@ -136,6 +120,15 @@ theorem isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map {X : Sche
   rw [isZero_derivedReduction_iff]
   exact (Triangle.isZero₃_iff_isIso₁ _ hF).2 this
 
+/-- For an adjunction `F ⊣ G` between preadditive categories, if every morphism `F Z ⟶ K`
+vanishes, then so does every morphism `Z ⟶ G K`. -/
+lemma _root_.CategoryTheory.Adjunction.eq_zero_of_forall_eq_zero {C D : Type*} [Category* C]
+    [Category* D] [Preadditive C] [Preadditive D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {Z : C}
+    {K : D} (h : ∀ g : F.obj Z ⟶ K, g = 0) (f : Z ⟶ G.obj K) : f = 0 := by
+  obtain ⟨g, rfl⟩ := (adj.homEquiv _ _).surjective f
+  have := adj.isRightAdjoint
+  rw [h g, Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
+
 /-- The derived pushforward `Rf_*` preserves derived complete complexes: it is right adjoint to
 `Lf^*`, which commutes with the first derived reduction. -/
 theorem derivedCompleteIntegers_rightDerivedLowerStar_obj {W X : Scheme.{u}} (f : W ⟶ X)
@@ -148,11 +141,27 @@ theorem derivedCompleteIntegers_rightDerivedLowerStar_obj {W X : Scheme.{u}} (f 
   have hZ' : IsZero ((derivedReduction W ℓ E).obj
       ((L((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj Z)) := by
     rw [isZero_derivedReduction_iff] at hZ ⊢
-    exact ((L((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).map_isZero hZ).of_iso
+    exact ((L((f)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).map_isZero
+      hZ).of_iso
       ((CondensedRing.derivedUpperStarExtendScalarsIso
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).app Z)
-  have := hK hZ' (((derivedUpperStarLowerStarAdjunction _ f).homEquiv _ _).symm g)
-  rwa [Equiv.symm_apply_eq, Adjunction.homEquiv_apply, Functor.map_zero, comp_zero] at this
+  exact (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+    f).eq_zero_of_forall_eq_zero (hK hZ') g
+
+/-- For a uniformizer `ϖ` of `𝒪_E`, a complex is derived complete if and only if it is complete
+with respect to the central action of `ϖ` on `D(X)`: the complexes with vanishing first derived
+reduction are those on which `ϖ` acts invertibly. -/
+lemma derivedCompleteIntegers_iff_isCenterComplete {X : Scheme.{u}}
+    {ϖ : PadicAlgCl.integers ℓ E.1}
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+    derivedCompleteIntegers ℓ E X K ↔ IsCenterComplete (derivedUniformizer X ℓ E ϖ) K := by
+  constructor
+  · intro hK Z hZ g
+    exact hK ((isZero_derivedReduction_iff_isIso hϖ Z).2 hZ) g
+  · intro hK Z hZ g
+    exact hK ((isZero_derivedReduction_iff_isIso hϖ Z).1 hZ) g
 
 /-- The derived pullback `Lf^*` along a morphism of quasi-compact quasi-separated schemes
 preserves derived complete complexes: it commutes with the derived limit of
@@ -163,7 +172,14 @@ theorem derivedCompleteIntegers_leftDerivedUpperStar_obj {W X : Scheme.{u}} (f :
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
     (hK : derivedCompleteIntegers ℓ E X K) :
     derivedCompleteIntegers ℓ E W
-      ((L((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) :=
-  sorry
+      ((L((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) := by
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  rw [Ideal.submodule_span_eq] at hϖ
+  rw [derivedCompleteIntegers_iff_isCenterComplete hϖ] at hK ⊢
+  exact (hK.map (derivedUniformizer W ℓ E ϖ)
+    (fun K ↦ CatCenter.derivedCategory_app_shift _ K 1)
+    ((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).mapDerivedCategory
+    (CondensedRing.mapDerivedCategory_upperStar_map_derivedUniformizer_app ℓ E ϖ f)).of_iso
+    ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory _ f).symm.app K)
 
 end AlgebraicGeometry.ProEtale
