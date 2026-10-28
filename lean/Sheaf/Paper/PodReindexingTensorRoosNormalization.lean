@@ -69,8 +69,8 @@ theorem podReindexingTensorRoosNormalization
     (hcanonical : PodCompletedTensorReindex.Canonical l E g D T) :
     PodCompletedTensorReindex.Model l E g D T := by
   have hpair := podReindexingTensorRoosNormalization_model_iff_canonical
-    l E g D hD T hgen hnat
-  have hcanon : PodCompletedTensorReindex.Canonical l E g D T := hcanonical
-  exact (And.intro hpair.1 hcanon).1
+    l E g D hD T hgen
+  have _ := hnat
+  exact hpair.mpr (fun P Q hP hQ ↦ hcanonical ⟨_,hP⟩ ⟨_,hQ⟩)
 
 end WeilConjectures

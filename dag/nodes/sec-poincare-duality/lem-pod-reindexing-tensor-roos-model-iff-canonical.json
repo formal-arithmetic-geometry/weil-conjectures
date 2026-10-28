@@ -2,7 +2,7 @@
  "id": "lem-pod-reindexing-tensor-roos-model-iff-canonical",
  "kind": "statement",
  "title": "Strict Roos model and canonical data",
- "statement": "For normalized reindexing data D and a completed tensor reindexing T satisfying the forward generator and strict-tower naturality laws, the strict Roos Model equation and the Canonical equation both hold.",
+ "statement": "For normalized completion reindexing D and a completed tensor reindexing T satisfying the forward generator law, Model holds if and only if the canonical completed tensor equation holds on every pair of actual localized flat-term K-flat representatives whose localized objects are complete constructible. The canonical equation is restricted to these representatives; no naturality of the independently supplied T.tensor is assumed and no global Canonical equation is inferred.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
   "place": "Steps 1 and 5; strict Roos realization before Canonical."
@@ -14,28 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Choose simultaneous flat-term K-flat representatives; identify finite tensor reductions by the generator law, use tower naturality for coherent transitions, and transport the equality through the specified Roos coordinates and localization.",
+   "text": "Use CompleteUnit, together with the equivalence between intrinsic and legacy completeness, to show that the specified ordinary-to-completed comparison is an isomorphism on each complete constructible input. Its tensor is therefore an isomorphism.",
    "uses": [
-    "lem-pod-reindexing-hom-resolution-model",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-integral-operations-well-defined"
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-pod-completion-reindex-models"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-    "place": "Steps 1 and 5."
+    "place": "Steps 1 and 5; strict Roos realization before Canonical."
+   }
+  },
+  {
+   "text": "For each P,Q apply the single-representative strict Roos square to T.tower P Q and the supplied generator equation. In the forward direction substitute Model and cancel the representative comparisons. In the reverse direction substitute the canonical equation, cancel the tensor of the two completion isomorphisms, then cancel the inverse representative comparison. Convert between homogeneous equality and HEq. Quantifying these two implications gives the claimed equivalence.",
+   "uses": [
+    "lem-pod-tensor-roos-representative-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5; strict Roos realization before Canonical."
    }
   }
  ],
  "proof_deps": [
-  "lem-pod-reindexing-hom-resolution-model",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-integral-operations-well-defined"
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-pod-completion-reindex-models",
+  "lem-pod-tensor-roos-representative-square"
  ],
  "proof_origin": {
-  "by": "C1",
+  "by": "agent",
   "document": "lean/Sheaf/Paper/PodReindexingTensorRoosStrict.lean",
-  "place": "Strict Roos calculation before Canonical."
+  "place": "CompleteUnit followed by cancellation of completion and representative isomorphisms."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -61,7 +71,7 @@
   "module": "Sheaf.Paper.PodReindexingTensorRoosStrict",
   "file": "lean/Sheaf/Paper/PodReindexingTensorRoosStrict.lean",
   "declaration": "WeilConjectures.podReindexingTensorRoosNormalization_model_iff_canonical",
-  "statement": "theorem podReindexingTensorRoosNormalization_model_iff_canonical {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hgen : PodCompletedTensorReindex.Generators l E g D T) (hnat : PodCompletedTensorReindex.TowerNaturality l E g D T) : PodCompletedTensorReindex.Model l E g D T ∧ PodCompletedTensorReindex.Canonical l E g D T",
+  "statement": "theorem podReindexingTensorRoosNormalization_model_iff_canonical\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hgen : PodCompletedTensorReindex.Generators l E g D T) :\n    PodCompletedTensorReindex.Model l E g D T ↔\n      ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (hP : sfIntegralConstructible l E Y (DerivedCategory.Q.obj P.obj))\n        (hQ : sfIntegralConstructible l E Y (DerivedCategory.Q.obj Q.obj)),\n        (podOrdinaryToCompleted l E g D).app\n            ((integralCompletedTensor l E Y).obj\n              (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)) ≫\n            ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom =\n          (T.tensor ⟨_,hP⟩ ⟨_,hQ⟩).hom ≫\n            (integralCompletedTensor l E X).map\n              (Prod.mkHom\n                ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))\n                ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj)))",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-28"
@@ -79,11 +89,48 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "C-2de78",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261028T020214-L-2479204",
+  "landing": "20261028T055757-L-808146",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item model_iff_canonical + new square sorry + parent adaptation vs PodCompletionTensorModels/Normalization defs and PodCompletionReindex.Laws; nodes vs Lean signatures; change record vs sole user"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "S7",
+  "old_statement": "For normalized reindexing data D and a completed tensor reindexing T satisfying the forward generator and strict-tower naturality laws, the strict Roos Model equation and the Canonical equation both hold.",
+  "what": "STATEMENT-DISPUTED: the old conjunction is false because Generators and TowerNaturality only involve T.tower, whereas T.tensor is independent data. Replace it by the equivalence actually used by the parent: Model iff the canonical equation on the representatives occurring in Model. Remove the unnecessary TowerNaturality hypothesis. The parent retains its global Canonical hypothesis and its exact original statement.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 1 and 5; strict Roos realization before Canonical."
+  },
+  "citers": [
+   {
+    "id": "lem-pod-reindexing-tensor-roos-normalization",
+    "holds": true,
+    "note": "Apply the reverse implication to hcanonical evaluated on each pair of representatives; the parent signature is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose simultaneous flat-term K-flat representatives; identify finite tensor reductions by the generator law, use tower naturality for coherent transitions, and transport the equality through the specified Roos coordinates and localization.",
+    "uses": [
+     "lem-pod-reindexing-hom-resolution-model",
+     "lem-pur-kflat-total-tensor-model",
+     "lem-pur-integral-operations-well-defined"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+     "place": "Steps 1 and 5."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pod-reindexing-hom-resolution-model",
+   "lem-pur-kflat-total-tensor-model",
+   "lem-pur-integral-operations-well-defined"
+  ]
  }
 }

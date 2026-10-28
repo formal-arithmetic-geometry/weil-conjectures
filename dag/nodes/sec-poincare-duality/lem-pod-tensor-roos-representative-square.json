@@ -1,0 +1,185 @@
+{
+ "id": "lem-pod-tensor-roos-representative-square",
+ "kind": "statement",
+ "title": "Canonical completed tensor comparison on one strict Roos representative",
+ "statement": "Fix a prime $\\ell$, a finite-dimensional extension $E/\\mathbf Q_\\ell$, schemes $X,Y$ in the coefficient universe, an isomorphism $g:X\\to Y$ on which $\\ell$ is invertible at every residue field, and normalized completion reindexing data $D$ satisfying all Laws of [def-pod-completion-reindex-models]. Let $P,Q$ be flat-term K-flat complexes on $Y$ whose localized objects are complete constructible. Let $\\tau$ be an isomorphism from the reindexing of their strict finite tensor-reduction tower to the tensor-reduction tower of their reindexed complexes. Suppose that for every quotient $n$, degrees $p,q$, site object $U$ and sections $x,y$, its degree-$(p+q)$ map sends the homogeneous tensor section of $x,y$ to the homogeneous tensor section of $D.quotient(P)(x),D.quotient(Q)(y)$, as in the Generators formula of [def-pod-completion-tensor-reindex-models]. Write $L$ for reindexing of the completed-tensor representative comparison followed by the localization factorization, $Q(D.roos)$ and $Q(Roos(\\tau))$. Write $e$ for the completed tensor of the two localization factorization isomorphisms followed by the target completed-tensor representative comparison. Write $\\beta$ for the specified ordinary-to-completed pullback map. Then $L\\circ e^{-1}\\circ(\\beta_P\\widehat\\otimes\\beta_Q)=\\beta_{P\\widehat\\otimes Q}\\circ c_{P,Q}$, with composition read left-to-right, where $c$ is the canonical completed pullback/tensor comparison of [def-pur-completed-pullback-tensor-construction]. All representative comparisons are the existing integralCompletedTensorComparison; no independent derived tensor family is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; finite generator comparison and its two-coordinate Roos realization, before comparison with a derived tensor family."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pur-completed-pullback-tensor-construction"
+ ],
+ "proof": [
+  {
+   "text": "At every quotient, use the normalized sectionwise tensor comparison conjugated by D.quotient for P and Q. Compare it with the supplied tower arrow on homogeneous pure-tensor sections. Pure-tensor sheaf extensionality and the direct-sum total inclusions identify the chain maps. The given tower arrow already commutes with every quotient transition.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5; finite generator comparison and its two-coordinate Roos realization, before comparison with a derived tensor family."
+   }
+  },
+  {
+   "text": "Apply the actual Roos functor to this equality of strict towers. D.RoosFst and D.RoosSnd identify both cone coordinates, and D.FiniteModel and D.LimitModel give the specified localization comparisons. Use the fixed pullbackTensorIntegralTensorNormalization from the full integral tensor/Roos realization to identify the completed tensor representative comparisons. On the coherent reduction systems, substitute the defining canonical completed comparison, formed by the full reduction/limit counits and the system tensor comparison. D.Unit, D.Counit and D.PullbackNormalization identify its ordinary-to-completed maps. Transport the two inputs along mapDerivedCategoryFactors and the target tensor comparison to obtain the displayed equation.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pur-completed-pullback-tensor-construction",
+    "lem-pur-integral-tensor-roos-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5; finite generator comparison and its two-coordinate Roos realization, before comparison with a derived tensor family."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-integral-operations-well-defined",
+  "def-pod-completion-reindex-models",
+  "def-pur-completed-pullback-tensor-construction",
+  "lem-pur-integral-tensor-roos-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; finite generator comparison and its two-coordinate Roos realization, before comparison with a derived tensor family."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCocone|mapDerivedCategoryFactors",
+   "results": {
+    "n_hits": 24,
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-28",
+   "verdict": "No exact match: generic derived localization and categorical cancellation results do not identify this prescribed finite-tensor Roos arrow with the completed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.cancel_iso_hom_right",
+   "results": {
+    "n_hits": 1,
+    "top": [
+     "CategoryTheory.Iso.cancel_iso_hom_right"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-28",
+   "verdict": "No exact match: generic derived localization and categorical cancellation results do not identify this prescribed finite-tensor Roos arrow with the completed comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison on derived categories is determined by its localization on K flat complexes and a canonical comparison equation",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-28",
+   "verdict": "No exact match: generic derived localization and categorical cancellation results do not identify this prescribed finite-tensor Roos arrow with the completed comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical completed tensor pullback comparison is the localization of the Roos map on a strict tower of finite tensor reductions of K flat complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp",
+     "TensorProduct.toDirectLimit",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+     "IsLocalization.tensor",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-28",
+   "verdict": "No exact match: generic derived localization and categorical cancellation results do not identify this prescribed finite-tensor Roos arrow with the completed comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorRoosStrict",
+  "date": "2026-10-28",
+  "group": "S7"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: realization of the finite tensor comparison on fixed K-flat representatives.",
+   "via": [
+    "lem-pod-reindexing-tensor-roos-model-iff-canonical",
+    "lem-pod-reindexing-tensor-roos-normalization",
+    "lem-pod-reindexing-tensor-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorRoosRepresentativeSquare",
+  "file": "lean/Sheaf/Paper/PodTensorRoosRepresentativeSquare.lean",
+  "declaration": "WeilConjectures.podTensorRoosRepresentativeSquare",
+  "statement": "theorem podTensorRoosRepresentativeSquare\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (hP : sfIntegralConstructible l E Y (DerivedCategory.Q.obj P.obj))\n    (hQ : sfIntegralConstructible l E Y (DerivedCategory.Q.obj Q.obj))\n    (τ : (podReindexTower l E g).obj\n        ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n      (integralOperationsTensorTowerFunctor l E X).obj\n        (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (n : ℕ) (p q : ℤ) (U : X.ProEt)\n      (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U)))\n      (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n        (op ((proEtaleIsoPostcompose g).obj U))),\n      ((((τ.hom.app (op n)).f (p + q)).val.app (op U)))\n          (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n            (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n        integralOperationsTotalTensorSection l E X n\n          (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n          p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n            ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n    letI : (isoReductionIntegralInverse l E g).Additive :=\n      isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom\n    ((podOrdinaryReindex l E g).map\n          ((integralCompletedTensorComparison l E Y).hom.app (P,Q)) ≫\n        (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app _ ≫\n        DerivedCategory.Q.map\n          ((D.roos ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj))).hom ≫\n            integralOperationsRoosFunctor.map τ.hom)) ≫\n      (integralCompletedTensorComparison l E X).inv.app\n        ((podGoodReindex l E g D).obj P,(podGoodReindex l E g D).obj Q) ≫\n      (integralCompletedTensor l E X).map\n        (Prod.mkHom\n          ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.inv.app P.obj)\n          ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.inv.app Q.obj)) ≫\n      (integralCompletedTensor l E X).map\n        (Prod.mkHom\n          ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))\n          ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))) =\n    (podOrdinaryToCompleted l E g D).app\n        ((integralCompletedTensor l E Y).obj\n          (DerivedCategory.Q.obj P.obj,DerivedCategory.Q.obj Q.obj)) ≫\n      ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-2de78",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261028T055757-L-808146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-2de78",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261028T055757-L-808146",
+  "kind": "interface",
+  "note": "independent cc review: item model_iff_canonical + new square sorry + parent adaptation vs PodCompletionTensorModels/Normalization defs and PodCompletionReindex.Laws; nodes vs Lean signatures; change record vs sole user"
+ }
+}
