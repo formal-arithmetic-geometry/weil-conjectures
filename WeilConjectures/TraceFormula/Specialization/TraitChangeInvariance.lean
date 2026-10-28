@@ -18,8 +18,8 @@ nearby cycles under change of strictly henselian trait
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`, SGA 4½,
 [Th. finitude], Prop. 3.7) therefore applies to the base change `M ×_S Spec K⟦t⟧` of a model of
 finite type over `S = Spec k'⟦t⟧`
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`). This is the first "fact about
-traits" of the blueprint proof of `sk-prop-tf-nearby-external-kunneth`.
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`). This is the
+first "fact about traits" of the blueprint proof of `sk-prop-tf-nearby-external-kunneth`.
 
 -/
 
@@ -72,7 +72,7 @@ of finite type over the strictly henselian trait `S = Spec k'⟦t⟧` and the ch
 (`NearbyCyclesModel.baseChange`) is an isomorphism if the restriction of `A` to the generic fibre
 is bounded constructible. This is the case `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of
 `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`. -/
-theorem isIso_pullbackExchange_baseChangeHom_traitMap
+theorem isIso_pullbackExchange_baseChangeHom_traitMap_of_generic
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
     (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)
