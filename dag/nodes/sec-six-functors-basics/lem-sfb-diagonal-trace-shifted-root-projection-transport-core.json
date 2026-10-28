@@ -1,0 +1,90 @@
+{
+ "id": "lem-sfb-diagonal-trace-shifted-root-projection-transport-core",
+ "kind": "statement",
+ "title": "Core shifted root-projection transport equation",
+ "statement": "theorem diagonalTrace_shiftedRootProjection_transport_core\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasDerivedCategory C]\n    (F : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [F.Additive] [V.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L₀ L : DiagonalRlim B) (P : A) (N : C)\n    (H : ℕᵒᵖ ⥤ B) (J : DerivedCategory (ℕᵒᵖ ⥤ B))\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (t : F.obj P ≅ limit H) (e : H ≅ V.obj N)\n    (π : (Functor.const ℕᵒᵖ).obj (F.obj P) ⟶ V.obj N)\n    (hcone : ∀ n : ℕ, t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) = π.app (op n))\n    (n : ℕ) :\n    (shiftFunctor (DerivedCategory B) (2 : ℤ)).map\n          ((F.mapDerivedCategorySingleFunctor 0).hom.app P ≫\n            (DerivedCategory.singleFunctor B 0).map t.hom ≫ diagonalOrdinaryRlim L₀ H) ≫\n        (Functor.commShiftIso L₀.R (2 : ℤ)).inv.app\n          ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H) ≫\n        L₀.R.map b.inv ≫\n        (L₀.projection n).app J ≫\n        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map\n          (b ≪≫\n            (shiftFunctor (DerivedCategory (ℕᵒᵖ ⥤ B)) (2 : ℤ)).mapIso\n              ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).mapIso e) ≪≫\n            (shiftFunctor (DerivedCategory (ℕᵒᵖ ⥤ B)) (2 : ℤ)).mapIso\n              ((V.mapDerivedCategorySingleFunctor 0).app N).symm ≪≫\n            ((Functor.commShiftIso V.mapDerivedCategory (2 : ℤ)).app\n              ((DerivedCategory.singleFunctor C 0).obj N)).symm).hom =\n      (shiftFunctor (DerivedCategory B) (2 : ℤ)).map\n          ((F.mapDerivedCategorySingleFunctor 0).hom.app P ≫\n            (DerivedCategory.singleFunctor B 0).map (limit.lift (V.obj N) ⟨F.obj P, π⟩) ≫\n            diagonalOrdinaryRlim L (V.obj N) ≫\n            L.R.map ((V.mapDerivedCategorySingleFunctor 0).inv.app N)) ≫\n        (Functor.commShiftIso (V.mapDerivedCategory ⋙ L.R) (2 : ℤ)).inv.app\n          ((DerivedCategory.singleFunctor C 0).obj N) ≫\n        (L.projection n).app\n          (V.mapDerivedCategory.obj\n            (((DerivedCategory.singleFunctor C 0).obj N)⟦(2 : ℤ)⟧))",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-root-system-transport",
+  "lem-sfb-diagonal-trace-exact-cone-projection"
+ ],
+ "proof": [
+  {
+   "text": "Expand the shifted single-limit comparison, strict root transport and shifted exact-cone comparison. Apply the normalized ordinary-limit projection to the single complex of H. Naturality moves the shifted comparison and the system isomorphism through the finite projection; the component equation hcone identifies the resulting cone map with π.app (op n). The canonical single and shift comparisons cancel, leaving the displayed post-shift equation.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-limit-interface",
+    "def-sfb-diagonal-trace-root-system-transport",
+    "lem-sfb-diagonal-trace-exact-cone-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-root-system-transport",
+  "lem-sfb-diagonal-trace-exact-cone-projection"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite projection transport after cancellation of the common source shift",
+  "by": "H8"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceRootProjectionTransport",
+  "date": "2026-10-28",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-root-projection",
+   "place": "generic categorical transport subargument after common source shift cancellation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceShiftedRootProjectionTransportCore",
+  "file": "lean/Sheaf/Paper/DiagonalTraceShiftedRootProjectionTransportCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_shiftedRootProjection_transport_core",
+  "statement": "theorem diagonalTrace_shiftedRootProjection_transport_core\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasDerivedCategory C]\n    (F : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [F.Additive] [V.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L₀ L : DiagonalRlim B) (P : A) (N : C)\n    (H : ℕᵒᵖ ⥤ B) (J : DerivedCategory (ℕᵒᵖ ⥤ B))\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (t : F.obj P ≅ limit H) (e : H ≅ V.obj N)\n    (π : (Functor.const ℕᵒᵖ).obj (F.obj P) ⟶ V.obj N)\n    (hcone : ∀ n : ℕ, t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) = π.app (op n))\n    (n : ℕ) :\n    (shiftFunctor (DerivedCategory B) (2 : ℤ)).map\n          ((F.mapDerivedCategorySingleFunctor 0).hom.app P ≫\n            (DerivedCategory.singleFunctor B 0).map t.hom ≫ diagonalOrdinaryRlim L₀ H) ≫\n        (Functor.commShiftIso L₀.R (2 : ℤ)).inv.app\n          ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H) ≫\n        L₀.R.map b.inv ≫\n        (L₀.projection n).app J ≫\n        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map\n          (b ≪≫\n            (shiftFunctor (DerivedCategory (ℕᵒᵖ ⥤ B)) (2 : ℤ)).mapIso\n              ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).mapIso e) ≪≫\n            (shiftFunctor (DerivedCategory (ℕᵒᵖ ⥤ B)) (2 : ℤ)).mapIso\n              ((V.mapDerivedCategorySingleFunctor 0).app N).symm ≪≫\n            ((Functor.commShiftIso V.mapDerivedCategory (2 : ℤ)).app\n              ((DerivedCategory.singleFunctor C 0).obj N)).symm).hom =\n      (shiftFunctor (DerivedCategory B) (2 : ℤ)).map\n          ((F.mapDerivedCategorySingleFunctor 0).hom.app P ≫\n            (DerivedCategory.singleFunctor B 0).map (limit.lift (V.obj N) ⟨F.obj P, π⟩) ≫\n            diagonalOrdinaryRlim L (V.obj N) ≫\n            L.R.map ((V.mapDerivedCategorySingleFunctor 0).inv.app N)) ≫\n        (Functor.commShiftIso (V.mapDerivedCategory ⋙ L.R) (2 : ℤ)).inv.app\n          ((DerivedCategory.singleFunctor C 0).obj N) ≫\n        (L.projection n).app\n          (V.mapDerivedCategory.obj\n            (((DerivedCategory.singleFunctor C 0).obj N)⟦(2 : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-28"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), normalization and transport through the strict root system; post-shift finite projection equation"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T034811-L-3549730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T034811-L-3549730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

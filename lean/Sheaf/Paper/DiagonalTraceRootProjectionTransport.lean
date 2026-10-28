@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.DiagonalTraceRootTransport
 public import Sheaf.Paper.DiagonalTraceProjectionEquations
+import Sheaf.Paper.DiagonalTraceShiftedRootProjectionTransportCore
 
 /-! # Generic shifted root-projection transport -/
 
@@ -64,7 +65,13 @@ theorem diagonalTrace_shiftedRootProjection_transport
       (diagonalShiftedSingleLimitComparison F L₀ P H J t b)
       (rootSystemTransport V N b e).hom
       (shiftedComparison F.mapDerivedCategory (V.mapDerivedCategory ⋙ L.R)
-        (exactConeComparison F V L P N π) 2 ≫ (L.projection n).app _) := by
-  sorry
+        (exactConeComparison F V L P N π) 2 ≫ (L.projection n).app _)  := by
+  unfold rootProjectionEquation
+  simp only [diagonalShiftedSingleLimitComparison, rootSystemTransport, shiftedComparison,
+    exactConeComparison, Category.assoc]
+  apply (cancel_epi ((F.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
+    ((DerivedCategory.singleFunctor A 0).obj P))).2
+  exact diagonalTrace_shiftedRootProjection_transport_core F V L₀ L P N H J b t e π hcone n
+
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
