@@ -198,4 +198,40 @@ lemma toRingAut_eq_of_pow_eq_X (σ : GenericAut k' K) {n : ℕ} (hn : 0 < n)
   have hzw : z = φ ξ ^ i * φ w := by rw [hi, div_mul_cancel₀ _ hw0]
   rw [hzw, map_mul, map_pow, toRingAut_traitGenericFieldMap, toRingAut_traitGenericFieldMap]
 
+/-- **`P'` is a closed subgroup** of the absolute Galois group of `Frac K⟦t⟧` (Krull topology):
+it is the intersection of the stabilizers of the elements of the image of `Ω`, each the fixing
+subgroup of a finite subextension. In particular `P'` is profinite. -/
+lemma isClosed_range_toAlgEquiv :
+    IsClosed ((toAlgEquiv (k' := k') (K := K)).range :
+      Set (traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K)) := by
+  have h : ((toAlgEquiv (k' := k') (K := K)).range :
+      Set (traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K)) =
+      ⋂ y : traitGenericField k', ((IntermediateField.adjoin (FractionRing (PowerSeries K))
+        {traitGenericFieldMap k' K y}).fixingSubgroup : Set _) := by
+    ext e
+    simp only [SetLike.mem_coe, mem_range_toAlgEquiv_iff, Set.mem_iInter]
+    refine forall_congr' fun y ↦
+      ⟨fun hy ↦ ?_, fun hy ↦ hy ⟨_, IntermediateField.mem_adjoin_simple_self _ _⟩⟩
+    have : Subgroup.zpowers e ≤ (IntermediateField.adjoin (FractionRing (PowerSeries K))
+        {traitGenericFieldMap k' K y}).fixingSubgroup := by
+      rw [← IntermediateField.le_iff_le, IntermediateField.adjoin_le_iff,
+        Set.singleton_subset_iff, SetLike.mem_coe, IntermediateField.mem_fixedField_iff]
+      intro f hf
+      obtain ⟨n, rfl⟩ := Subgroup.mem_zpowers_iff.1 hf
+      clear hf
+      have hy' : e⁻¹ (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y :=
+        (AlgEquiv.symm_apply_eq e).2 hy.symm
+      induction n using Int.induction_on with
+      | zero => simp
+      | succ n ih => rw [zpow_add_one, AlgEquiv.mul_apply, hy, ih]
+      | pred n ih => rw [zpow_sub_one, AlgEquiv.mul_apply, hy', ih]
+    exact this (Subgroup.mem_zpowers e)
+  rw [h]
+  refine isClosed_iInter fun y ↦ ?_
+  have : FiniteDimensional (FractionRing (PowerSeries K))
+      (IntermediateField.adjoin (FractionRing (PowerSeries K))
+        {traitGenericFieldMap k' K y}) :=
+    IntermediateField.adjoin.finiteDimensional (Algebra.IsIntegral.isIntegral _)
+  exact IntermediateField.fixingSubgroup_isClosed _
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
