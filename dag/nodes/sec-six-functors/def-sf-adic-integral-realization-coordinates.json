@@ -1,0 +1,125 @@
+{
+ "id": "def-sf-adic-integral-realization-coordinates",
+ "kind": "definition",
+ "title": "Typed integral realization coordinates",
+ "statement": "integralCoordinateIso is precisely the specified integral realization comparison R.integral E, with source tensorStage l X E followed by ordinary l X R, and target the integral constructible inclusion followed by pbcDerivedExtend of coefficientMap l X R E. It introduces no data or choices. The explicit type prevents proof elaboration from unfolding the large native module equivalence merely to identify its source and target. The proved finite_tensor_coordinates equation extracts N.integral_tensor after postcomposition by the inverse stage tensor isomorphism and the integral realization. The proved integral_pull_coordinates equation expresses the inverse comparison followed by the stage pullback and integral realization as ordinary pullback of the integral realization followed by finiteIntegralPullMap. Both follow by cancelling the specified invertible comparisons.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62; Hemo--Richarz--Scholbach, Lemma 7.9.",
+  "note": "The explicit postcomposition is the cancellation stage in the fixed-field representative calculation."
+ },
+ "stmt_deps": [
+  "def-sf-adic-integral-tensor-coordinates",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-native-adic-finite-normalization"
+ ],
+ "proof": [
+  {
+   "text": "For finite_tensor_coordinates, substitute N.integral_tensor, expand the two displayed stage coordinates, and cancel the mapped stage isomorphism and integral realization inverse.",
+   "uses": [
+    "def-sf-native-adic-finite-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integral_pull_coordinates, substitute integralRealizationAgreement, express its right side as e.hom followed by d.inv and f.inv, and precompose by the comparison homomorphism. Cancel each inverse pair.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-adic-finite-normalization",
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; explicit separation of the finite scalar square from raw coefficient-stage transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of integral realization with tensor products and scheme isomorphism pullback via normalized K-flat representatives",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex",
+   "results": "6 hits; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/Unramified/Finite.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between pullback and realization is compatible with tensor products when its components on integral representatives are normalized scalar extension comparisons",
+   "results": "8 hits; CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.prodComparisonNatIso, IsBaseChange.tensorEquiv, CategoryTheory.Functor.Monoidal.μNatIso, TensorProduct.finsuppScalarLeft_apply_tmul_apply, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.Functor.Monoidal.tensorObjComp",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor-integral-cancelled",
+   "place": "Finite integral scalar square and coefficient-stage transport in its representative calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensorIntegralCancelled",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralRealizationCoordinates",
+  "file": "lean/Sheaf/Paper/AdicIntegralRealizationCoordinates.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.integralCoordinateIso",
+  "statement": "def integralCoordinateIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :\n    tensorStage l X E ⋙ ordinary l X R ≅\n      (sfIntegralConstructible l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).ι ⋙\n        pbcDerivedExtend (coefficientMap l X R E)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.integralCoordinateIso",
+   "WeilConjectures.AdicQbarRealization.finite_tensor_coordinates",
+   "WeilConjectures.AdicQbarRealization.integral_pull_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

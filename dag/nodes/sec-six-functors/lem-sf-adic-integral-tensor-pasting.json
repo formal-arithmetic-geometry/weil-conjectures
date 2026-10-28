@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-adic-integral-tensor-pasting",
+ "kind": "statement",
+ "title": "Pasting a tensor square through integral coordinates",
+ "statement": "Let F:CY→CX be a functor, BY and BX be binary functors, and W:BY⋙F≅F.prod F⋙BX. Suppose coordinate isomorphisms identify the two tensor maps with finite maps bY,bX, the pullback comparison components with finite maps dK,dL,dT, and the intervening common tensor map with a finite map ν. If the finite square commutes and the tensor-map naturality square commutes, then the original tensor square commutes. The precise paths and all endpoints are the arguments hTY,hTX,htail,hcNat,hpT,hfinite,hANat,hpK,hpL of pasteIntegralTensorSquare.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62; Hemo--Richarz--Scholbach, Lemma 7.9.",
+  "note": "Elementary categorical pasting used to assemble the normalized realization square; no new mathematical assumption."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Postcompose with the invertible target coordinate composite sP≫aX≫rXT.hom. Rewrite the left path by htail,hcNat,hpT,hTY and hfinite. Rewrite the right path by hANat,hTX and the two component equations hpK,hpL. Functoriality combines the paired maps; naturality of W identifies the remaining paths. Cancel the invertible target coordinate composite.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; explicit separation of the finite scalar square from raw coefficient-stage transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of integral realization with tensor products and scheme isomorphism pullback via normalized K-flat representatives",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex",
+   "results": "6 hits; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/Unramified/Finite.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between pullback and realization is compatible with tensor products when its components on integral representatives are normalized scalar extension comparisons",
+   "results": "8 hits; CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.prodComparisonNatIso, IsBaseChange.tensorEquiv, CategoryTheory.Functor.Monoidal.μNatIso, TensorProduct.finsuppScalarLeft_apply_tmul_apply, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.Functor.Monoidal.tensorObjComp",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor-integral-cancelled",
+   "place": "Finite integral scalar square and coefficient-stage transport in its representative calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensorIntegralCancelled",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralTensorPasting",
+  "file": "lean/Sheaf/Paper/AdicIntegralTensorPasting.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.pasteIntegralTensorSquare",
+  "statement": "theorem pasteIntegralTensorSquare\n    {CY CX : Type*} [Category* CY] [Category* CX]\n    (F : CY ⥤ CX) (BY : CY × CY ⥤ CY) (BX : CX × CX ⥤ CX)\n    (W : BY ⋙ F ≅ F.prod F ⋙ BX)\n    {yK yL yK₀ yL₀ yS yT yT₀ : CY}\n    {gK gL xK xL eK eL xGS xSG xTJ xTj xGT xTp ePt eT : CX}\n    {rYK : yK ≅ yK₀} {rYL : yL ≅ yL₀} {rYT : yT ≅ yT₀}\n    {rXK : xK ≅ eK} {rXL : xL ≅ eL} {rXT : xTj ≅ eT} {rXPT : xTp ≅ ePt}\n    {μY : BY.obj (yK, yL) ⟶ yS} {aY : yS ⟶ yT}\n    {cS : F.obj yS ⟶ xGS} {cT : F.obj yT ⟶ xGT}\n    {m : xGS ⟶ xSG} {aG : xGS ⟶ xGT} {pT : xGT ⟶ xTp} {ν : ePt ⟶ eT}\n    {pK : gK ⟶ xK} {pL : gL ⟶ xL} {cK : F.obj yK ⟶ gK} {cL : F.obj yL ⟶ gL}\n    {sP : xSG ⟶ xTJ} {μXG : BX.obj (gK, gL) ⟶ xSG}\n    {μXJ : BX.obj (xK, xL) ⟶ xTJ} {aX : xTJ ⟶ xTj}\n    {bY : BY.obj (yK₀, yL₀) ⟶ yT₀} {bX : BX.obj (eK, eL) ⟶ eT}\n    {dT : F.obj yT₀ ⟶ ePt} {dK : F.obj yK₀ ⟶ eK} {dL : F.obj yL₀ ⟶ eL}\n    [IsIso (sP ≫ aX ≫ rXT.hom)]\n    (hTY : μY ≫ aY ≫ rYT.hom = BY.map (Prod.mkHom rYK.hom rYL.hom) ≫ bY)\n    (hTX : μXJ ≫ aX ≫ rXT.hom = BX.map (Prod.mkHom rXK.hom rXL.hom) ≫ bX)\n    (htail : m ≫ sP ≫ aX ≫ rXT.hom = aG ≫ pT ≫ rXPT.hom ≫ ν)\n    (hcNat : F.map aY ≫ cT = cS ≫ aG)\n    (hpT : cT ≫ pT ≫ rXPT.hom = F.map rYT.hom ≫ dT)\n    (hfinite : F.map bY ≫ dT ≫ ν =\n      W.hom.app (yK₀, yL₀) ≫ BX.map (Prod.mkHom dK dL) ≫ bX)\n    (hANat : BX.map (Prod.mkHom pK pL) ≫ μXJ = μXG ≫ sP)\n    (hpK : cK ≫ pK ≫ rXK.hom = F.map rYK.hom ≫ dK)\n    (hpL : cL ≫ pL ≫ rXL.hom = F.map rYL.hom ≫ dL) :\n    F.map μY ≫ cS ≫ m = W.hom.app (yK, yL) ≫ BX.map (Prod.mkHom cK cL) ≫ μXG",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.pasteIntegralTensorSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

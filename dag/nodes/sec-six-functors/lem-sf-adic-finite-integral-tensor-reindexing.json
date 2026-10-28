@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-adic-finite-integral-tensor-reindexing",
+ "kind": "statement",
+ "title": "Finite integral scalar tensor reindexing square",
+ "statement": "Fix a prime l, schemes X,Y with l invertible in their residue fields, an isomorphism g:X→Y, native realizations R,S with tensor data A,C, a function-normalized ring reindexing B, and one finite coefficient index E. Let NX,NY be their finite normalizations, V an integral scalar reindexing and W its ordinary tensor reindexing. Use the maps of [def-sf-adic-integral-tensor-coordinates]. For integral constructible K,L on Y, write P for integral pullback, TY for completed integral tensor, EX,EY for ordinary derived scalar extension, and F for ordinary derived reindexing. Then F(finiteIntegralTensorMap NY K L) followed by finiteIntegralPullMap V (TY(K,L)) and EX(canonicalIntegralPullbackTensor K L) equals W.tensor.hom at (EY K,EY L), followed by A.closed.tensor applied to the two finiteIntegralPullMap components and finiteIntegralTensorMap NX (PK) (PL). No common-stage realization comparison or common-stage tensorator occurs.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62; Hemo--Richarz--Scholbach, Lemma 7.9.",
+  "note": "The explicit postcomposition is the cancellation stage in the fixed-field representative calculation."
+ },
+ "stmt_deps": [
+  "def-sf-adic-integral-tensor-coordinates",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives of K,L. Substitute the two finite representative equations and the integral and tensor reindexing representative equations. On every homogeneous pure section, both balanced routes give the generator with the same coefficient after B.iso. Tensor induction, sheafification and direct-sum totalization give equality of the ordinary chain maps, respecting the signed differential.",
+   "uses": [
+    "def-sf-native-adic-finite-normalization",
+    "def-sf-native-adic-reindexing-data",
+    "def-sf-native-adic-tensor-reindexing",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the entire quotient-completion maps: their product coordinates are the prescribed quotient maps, preserved by scalar reindexing, and their shifted mapping-fiber coordinates are zero. Descend the chain square through the K-flat counits and invert the completion maps on constructible inputs. The canonical integral tensor comparison is the coherent-system limit of the finite comparisons; its conjugating counits are exactly the podCompletedToTowerIso factors in finiteIntegralPullMap. The resulting square is the stated one.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-sf-adic-integral-tensor-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-adic-finite-normalization",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-native-adic-tensor-reindexing",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-sf-adic-integral-tensor-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; explicit separation of the finite scalar square from raw coefficient-stage transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of integral realization with tensor products and scheme isomorphism pullback via normalized K-flat representatives",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex",
+   "results": "6 hits; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/Unramified/Finite.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between pullback and realization is compatible with tensor products when its components on integral representatives are normalized scalar extension comparisons",
+   "results": "8 hits; CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.prodComparisonNatIso, IsBaseChange.tensorEquiv, CategoryTheory.Functor.Monoidal.μNatIso, TensorProduct.finsuppScalarLeft_apply_tmul_apply, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.Functor.Monoidal.tensorObjComp",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor-integral-cancelled",
+   "place": "Finite integral scalar square and coefficient-stage transport in its representative calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensorIntegralCancelled",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteIntegralTensorReindexing",
+  "file": "lean/Sheaf/Paper/AdicFiniteIntegralTensorReindexing.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.finite_integral_tensor_reindexing",
+  "statement": "theorem finite_integral_tensor_reindexing\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (A : At l X R) (C : At l Y S) (B : RingReindex l X g R S)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (NX : FiniteNormalization l X R A E) (NY : FiniteNormalization l Y S C E)\n    (V : IntegralReindex l X g B E) (W : ReindexTensor l X g A C B)\n    (K L : sfIntegralConstructibleCategory l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) Y) :\n    let P := constructibleIntegralPullback l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) g\n    let TY := constructibleIntegralTensor l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) Y\n    let EX := pbcDerivedExtend (coefficientMap l X R E)\n    let EY := pbcDerivedExtend (coefficientMap l Y S E)\n    let F := derivedPull l X g B\n    F.map (finiteIntegralTensorMap l Y S C E NY K L) ≫\n        finiteIntegralPullMap l g R S B E V (TY.obj (K, L)) ≫\n        EX.map (canonicalIntegralPullbackTensor l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) g K L).hom.hom =\n      W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫\n        A.closed.tensor.map (Prod.mkHom\n          (finiteIntegralPullMap l g R S B E V K)\n          (finiteIntegralPullMap l g R S B E V L)) ≫\n        finiteIntegralTensorMap l X R A E NX (P.obj K) (P.obj L)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

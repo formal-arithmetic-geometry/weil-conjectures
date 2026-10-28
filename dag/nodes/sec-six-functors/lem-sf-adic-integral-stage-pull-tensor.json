@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-adic-integral-stage-pull-tensor",
+ "kind": "statement",
+ "title": "Integral-stage coordinates for canonical pullback tensor",
+ "statement": "Fix a prime l, schemes X,Y with l invertible in their residue fields, any morphism g:X→Y, a finite coefficient index E and integral constructible K,L on Y. Use integralStagePullIso p and integralStageTensorIso a of [def-sf-adic-integral-tensor-coordinates]. Write JX,JY for raw rationalization followed by inclusion at E, G for common-stage pullback, SX for common-stage tensor, P for integral pullback, and TY for integral tensor on Y. Then G(aY(K,L).hom), the canonical common-stage pullback tensor hom, and SX(pK.hom,pL.hom), in this order, compose to p(TY(K,L)).hom followed by JX(canonicalIntegralPullbackTensor(K,L).hom) and aX(PK,PL).hom. This is an equation of common-stage arrows without native ordinary realization data.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62; Hemo--Richarz--Scholbach, Lemma 7.9.",
+  "note": "The explicit postcomposition is the cancellation stage in the fixed-field representative calculation."
+ },
+ "stmt_deps": [
+  "def-sf-adic-integral-tensor-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the representative clause of the canonical common-stage comparison at E; the compositum of the two input stages is contained in E. Substitute stageTensorFormula on source and target. The normalized identity scalar unitors cancel the transition comparisons. The remaining arrow is inclusion at E of the rational comparison, whose representative clause is localization of the integral comparison. Functoriality and the literal rational tensor and pullback object equations, exactly the factors of integralStageTensorIso and integralStagePullIso, give the asserted equality. For an implementation, commonStagePullbackNormalizedDescent and StageSystem.Morphism.functor_map_ι identify the pullback on arrows included at E, while commonStagePullbackComparison_self_unit cancels its reflexive transition unitor.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-sf-common-stage-inclusion-tensor-comparison",
+    "def-sf-adic-integral-tensor-coordinates",
+    "lem-pod-common-stage-pullback-normalized-descent",
+    "lem-pur-common-stage-pullback-coefficient-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "def-sf-adic-integral-tensor-coordinates",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-pur-common-stage-pullback-coefficient-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; explicit separation of the finite scalar square from raw coefficient-stage transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of integral realization with tensor products and scheme isomorphism pullback via normalized K-flat representatives",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex",
+   "results": "6 hits; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/Unramified/Finite.lean",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between pullback and realization is compatible with tensor products when its components on integral representatives are normalized scalar extension comparisons",
+   "results": "8 hits; CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.prodComparisonNatIso, IsBaseChange.tensorEquiv, CategoryTheory.Functor.Monoidal.μNatIso, TensorProduct.finsuppScalarLeft_apply_tmul_apply, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.Functor.Monoidal.tensorObjComp",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the native adic coordinate square; generic naturality is used in its assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor-integral-cancelled",
+   "place": "Finite integral scalar square and coefficient-stage transport in its representative calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensorIntegralCancelled",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralStagePullTensor",
+  "file": "lean/Sheaf/Paper/AdicIntegralStagePullTensor.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.integral_stage_pull_tensor",
+  "statement": "theorem integral_stage_pull_tensor\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (K L : sfIntegralConstructibleCategory l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) Y) :\n    let P := constructibleIntegralPullback l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) g\n    let TY := constructibleIntegralTensor l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) Y\n    let JY := tensorStage l Y E\n    let JX := tensorStage l X E\n    let G := commonStageDerivedPullback l (PadicAlgCl l) g\n    let TX := commonStageDerivedTensor l (PadicAlgCl l) X\n    G.map (integralStageTensorIso l Y E K L).hom ≫\n        (canonicalCommonStagePullbackTensor l (PadicAlgCl l) g (JY.obj K) (JY.obj L)).hom ≫\n        TX.map (Prod.mkHom (integralStagePullIso l g E K).hom\n          (integralStagePullIso l g E L).hom) =\n      (integralStagePullIso l g E (TY.obj (K, L))).hom ≫\n        JX.map (canonicalIntegralPullbackTensor l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) g K L).hom ≫\n        (integralStageTensorIso l X E (P.obj K) (P.obj L)).hom",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055657-L-794808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
