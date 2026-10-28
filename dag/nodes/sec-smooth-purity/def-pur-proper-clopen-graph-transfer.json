@@ -1,0 +1,175 @@
+{
+ "id": "def-pur-proper-clopen-graph-transfer",
+ "kind": "definition",
+ "title": "Concrete transfer through the clopen proper graph",
+ "statement": "Let A be a commutative ring, q:W→V proper, v:V→Y etale, f=qv, and c=(i:W→Z,g:Z→Y) a compactification. Put P=Z×_Y V with projections b:P→Z and p:P→V and t=(i,q):W→P. Construct t and prove tb=i and tp=q. It is open, by formal unramifiedness of b and openness of i, and proper, since p is separated and tp=q is proper. Its closed range makes the canonical inclusion t!→t* invertible. Define J_t:Rt*≅Dt! by right-deriving this sheaf isomorphism and using exactness of t!. Prove its unit normalization on every homotopy object. Define H_c:D(i*)≅D(b*)D(t*) by inverse-image composition. For K∈D(W_et,A), define T_K:Rq*K→Rp*Db*Di!K by inverse proper composition Rq*→Rp*Rt*, followed by Rp* of J_t and the t!⊣t* adjunct of η_i,K followed by H_c at Di!K. No compact-support compositor occurs. For finite A, exact proper base change Dv*Rg*→Rp*Db* is invertible.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I, 0F7J; graph support description in etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "The pullback lift has the two stated projection identities. Apply the postcomposition criterion for open immersions to b and properness cancellation to p. Closedness of the range identifies extension by zero and direct image.",
+   "uses": [
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Right-derive the inverse clopen inclusion and use the exact comparison. Naturality of right derivation and the exact comparison unit equation prove graphDerivedIso_unit. Factor Rq* through Rt* and Rp*, then apply the graph adjunct of the open unit.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper base change is invertible for finite coefficients; transport between left-derived and exact inverse image identifies it with exactDerivedBaseChangeMap.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I, 0F7J; graph support description in etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11",
+  "note": "Explicit clopen-graph separation of compositor coherence from sheaf and derived-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The graph of a proper morphism over an etale morphism in the pullback of a compactification is an open and proper immersion, with extension by zero equal to direct image.",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne, AlgebraicGeometry.IsOpenImmersion.opensRange_pullback_fst_of_right, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.instSndScheme. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism followed by an etale morphism has an open and proper graph in the pullback of a compactification, whose direct image equals extension by zero.",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Pullback.range_map. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "grep",
+   "query": "(homEquiv|mate).*(rightDerived|mapDerived)|clopen.*(graph|transfer)",
+   "results": "0 hits: . ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCoreAfterIdentity",
+  "date": "2026-10-28",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proper-first graph unit normalization in the proper/etale composition argument, Tags 0F7B and 0F7J.",
+   "via": [
+    "lem-pur-graph-proper-precomposition-unit-component-core-after-identity",
+    "lem-pur-graph-proper-precomposition-unit-component-core",
+    "lem-pur-graph-proper-precomposition-unit-component",
+    "lem-pur-graph-proper-precomposition-unit",
+    "lem-pur-graph-proper-support-unit",
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower",
+    "lem-pur-graph-proper-interchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperGraphTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperGraphTransfer.lean",
+  "declaration": "AlgebraicGeometry.Etale.ProperGraphTransfer.transfer",
+  "statement": "def transfer (K : DerivedCategoryModule A W) :\n    (rightDerivedLowerStar (ModuleCat.{u + 1} A) q).obj K ⟶\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) (pullback.snd c.g v)).obj\n        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst c.g v)).mapDerivedCategory.obj\n          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph_fst",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph_snd",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph_open",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph_proper",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graph_comparison_isIso",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graphDerivedIso",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graphDerivedIso_unit",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.graphUpperStarIso",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.transfer",
+   "AlgebraicGeometry.Etale.ProperGraphTransfer.baseChange_isIso"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCoreAfterIdentity",
+  "worker": "stage3",
+  "summary": "All data constructed explicitly; graph geometry, comparison unit, and proper-base-change invertibility proved without sorry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary derived direct-image composition."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Established torsion proper base change detects equality after transposition."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T034951-L-3575261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T034951-L-3575261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

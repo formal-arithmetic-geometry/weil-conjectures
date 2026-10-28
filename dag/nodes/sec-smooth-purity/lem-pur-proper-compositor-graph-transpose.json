@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-proper-compositor-graph-transpose",
+ "kind": "statement",
+ "title": "Graph transpose of proper-first compact-support composition",
+ "statement": "Let A be a finite commutative ring, W,V,Y Noetherian, q:W→V proper, v:V→Y separated quasi-compact etale with the chosen compactifications in the Lean signature, and c=(i,g) a compactification of f=qv. Form E:Rq*Dv!≅Di!Rg* from the inverse chosen proper comparison, inverse chosen etale comparison, compact-support compositor, congruence f=qv, and inverse comparison with c, in that order. For every K∈D(W_et,A), transpose E_K under Dv!⊣Dv* and follow it by exact proper base change for P=Z×_Y V. This equals the explicit transfer T_K of [def-pur-proper-clopen-graph-transfer]. There is no sheaf transformation tau, representative complex, or derived-functor unit in the assertion.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I, 0F7J; graph support description in etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11"
+ },
+ "stmt_deps": [
+  "def-pur-proper-clopen-graph-transfer",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Factor q through the clopen graph t. Its proper comparison is right derivation of the inverse sheaf inclusion t!→t*. The compositor on this tower is open/proper interchange followed by proper composition.",
+   "uses": [
+    "def-pur-proper-clopen-graph-transfer",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the interchange under the etale extension/pullback adjunction. Exact proper base change turns it into the graph adjunct of the unit for c.i. Cancel the adjunction triangles and apply proper composition: the result is T_K.",
+   "uses": [
+    "def-pur-proper-clopen-graph-transfer",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tower independence and the common-refinement cocycle identify this calculation with the chosen proper and etale comparisons and the comparison to c.",
+   "uses": [
+    "def-pur-graph-chosen-proper-comparison",
+    "def-pur-graph-chosen-etale-comparison",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proper-clopen-graph-transfer",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I, 0F7J; graph support description in etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11",
+  "note": "Explicit clopen-graph separation of compositor coherence from sheaf and derived-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The transpose of compact support composition for a proper map followed by an etale map equals the clopen graph transfer after proper base change.",
+   "results": "8 hits: Module.Dual.transpose_comp, HasCompactSupport.comp_isClosedEmbedding, Module.Dual.transpose_apply, Matrix.comp_transpose, Matrix.comp_map_transpose, CompactlySupportedContinuousMap.comp, Module.Dual.transpose, AlgebraicGeometry.IsProper.comp_iff. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism followed by an etale morphism has an open and proper graph in the pullback of a compactification, whose direct image equals extension by zero.",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Pullback.range_map. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left. ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  },
+  {
+   "tool": "grep",
+   "query": "(homEquiv|mate).*(rightDerived|mapDerived)|clopen.*(graph|transfer)",
+   "results": "0 hits: . ",
+   "date": "2026-10-28",
+   "verdict": "General geometry or adjunction tools only; no theorem identifying the specified transfer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCoreAfterIdentity",
+  "date": "2026-10-28",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proper-first graph unit normalization in the proper/etale composition argument, Tags 0F7B and 0F7J.",
+   "via": [
+    "lem-pur-graph-proper-precomposition-unit-component-core-after-identity",
+    "lem-pur-graph-proper-precomposition-unit-component-core",
+    "lem-pur-graph-proper-precomposition-unit-component",
+    "lem-pur-graph-proper-precomposition-unit",
+    "lem-pur-graph-proper-support-unit",
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower",
+    "lem-pur-graph-proper-interchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperCompositorGraphTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperCompositorGraphTranspose.lean",
+  "declaration": "AlgebraicGeometry.Etale.properCompositor_graph_transpose",
+  "statement": "theorem properCompositor_graph_transpose\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {W V Y : Scheme.{u}}\n    [IsNoetherian W] [IsNoetherian V] [IsNoetherian Y]\n    (q : W ⟶ V) [IsProper q]\n    (v : V ⟶ Y) [Etale v] [IsSeparated v] [QuasiCompact v]\n    [HasCompactification v] [HasCompactification (q ≫ v)]\n    {f : W ⟶ Y} (hf : f = q ≫ v) [HasCompactification f]\n    (c : Compactification f)\n    (K : DerivedCategoryModule A W) :\n    (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance).homEquiv\n        _ _ ((Functor.isoWhiskerRight (graphChosenProperComparison A q).symm\n            (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≪≫\n          Functor.isoWhiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q)\n            (graphChosenEtaleComparison A v).symm ≪≫\n          unboundedEtaleLowerShriekCompIso A q v ≪≫\n          unboundedEtaleLowerShriekCongr A hf.symm ≪≫\n          (rightDerivedLowerShriekIso A c).symm).hom.app K) ≫\n      (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A)\n        (IsPullback.of_hasPullback c.g v).toCommSq).app\n          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj K) =\n      ProperGraphTransfer.transfer q v hf c A K",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T034951-L-3575261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T034951-L-3575261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
