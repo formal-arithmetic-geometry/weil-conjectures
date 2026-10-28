@@ -273,10 +273,19 @@ private theorem finish_tensor_evaluation
 /-- The kernel-insertion prefix before the terminal first-projection functional.
 Source: the pre-unitor section calculation in the rational projective-line triangle
 (blueprint: lem-sfb-rational-p1-section-evaluation-prefix).
-This is the strict prefix of `first_section_tensor_evaluation_core`: it stops after
-transporting the supported arrow through the first projection and therefore has no
-terminal functional. The proof is the same path-comparison and section/projection
-cancellation calculation, with the final postcomposition omitted. -/
+This is the strict prefix of `first_section_tensor_evaluation_core`, before any
+terminal functional. Proof: expand the kernel insertion and use naturality of the
+path comparison to move its second-direct-image map to the first path. Compatibility
+of the canonical pullback composition comparisons with the two diagonal sections
+identifies the transported section with the first-projection section. The section
+case of projection/composition coherence identifies the inverse diagonal tensor map
+with the right-unitor inverse, the supported coefficient insertion, and the first
+projection map. Projection naturality then replaces the supported coefficient arrow
+by its composite with α. The normalization of d.support₁ and the full derived unit
+d.p₁_unit identify this coefficient insertion with d.support₁.hom transported by
+d.p₁_canonical. Apply the outer direct image and cancel the first projection map
+against its specified inverse hp. The final eqToHom changes only the presentation
+of its target object, using hobj. -/
 theorem first_section_tensor_evaluation_prefix
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})
@@ -302,6 +311,14 @@ theorem first_section_tensor_evaluation_prefix
           (eqToIso d.p₁_canonical).hom.app N ≫
           eqToHom ((congrArg (fun F => F.obj N) d.p₁_canonical).symm.trans hobj))) := by sorry
 
+/-- Cancellation of the first-projection transport before the terminal unitors.
+Source: the first identity in the rational projective-line triangle proof
+(blueprint: lem-sfb-rational-p1-section-evaluation-postprefix).
+Proof: the object-equality loop gives the identity morphism by proof irrelevance.
+The forward and inverse components of eqToIso d.p₁_canonical then cancel. Combine
+the two direct-image maps and the two left whiskerings by functoriality, reassociate,
+and apply this morphism cancellation. This uses no property of the kernel arrow or
+of the functional, and no section/projection or trace identity. -/
 theorem first_section_tensor_evaluation_postprefix
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})
@@ -325,7 +342,17 @@ theorem first_section_tensor_evaluation_postprefix
     (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
       (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
         (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
-          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by sorry
+          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by
+  unfold moduleObjectDerivedPushforward firstProjection at hobj ⊢
+  have hcancel : (eqToIso d.p₁_canonical).hom.app N ≫
+      eqToHom ((congrArg (fun F ↦ F.obj N) d.p₁_canonical).symm.trans hobj) ≫
+      (eqToIso d.p₁_canonical).inv.app N ≫ t = t := by
+    simp only [eqToHom_refl, Category.id_comp, Iso.hom_inv_id_app_assoc]
+  unfold firstNativeFunctional
+  dsimp only [id, moduleObjectDerivedPushforward, firstProjection]
+  rw [← Functor.map_comp, ← MonoidalCategory.whiskerLeft_comp]
+  simp only [Category.assoc]
+  rw [hcancel]
 
 set_option maxHeartbeats 800000 in
 -- Elaborate the native projection and the two canonical direct-image paths.
