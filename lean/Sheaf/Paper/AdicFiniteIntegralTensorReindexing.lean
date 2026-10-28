@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicIntegralTensorCoordinates
+import Sheaf.Paper.AdicTensorPresentationComparison
+import Sheaf.Paper.AdicOrdinaryScalarTensorReindexing
+import Sheaf.Paper.AdicTensorCompletionReindexing
 
 /-! # The finite integral scalar-extension tensor square
 
@@ -22,6 +25,12 @@ open CategoryTheory AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.AdicQbarRealization
 variable (l : ℕ) [Fact l.Prime]
+
+attribute [local irreducible] tensorPresentationComparison tensorPresentationCompletion
+  finiteAmbientScalarTensor podCompletedAmbientTensor pullbackTensorCalculus
+  podCompletedDerivedInverseImage derivedPull coefficientMap
+  integralCompletedTensor finiteIntegralTensorMap finiteIntegralPullMap
+  canonicalIntegralPullbackTensor reductionDerivedChange
 
 /-- Scalar base change respects the normalized completed tensor on one integral
 coefficient field. The displayed equation uses only ordinary scalar extension and integral
@@ -74,6 +83,82 @@ theorem finite_integral_tensor_reindexing
           (finiteIntegralPullMap l g R S B E V K)
           (finiteIntegralPullMap l g R S B E V L)) ≫
         finiteIntegralTensorMap l X R A E NX (P.obj K) (P.obj L) := by
-  sorry
+  let k := AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E
+  let EX := pbcDerivedExtend (coefficientMap l X R E)
+  let EY := pbcDerivedExtend (coefficientMap l Y S E)
+  let F := derivedPull l X g B
+  let H := podCompletedDerivedInverseImage l k g
+  let P := constructibleIntegralPullback l k g
+  let TX := (pullbackTensorCalculus l k X).integralClosed.tensor
+  let TY := (pullbackTensorCalculus l k Y).integralClosed.tensor
+  let UY := constructibleIntegralTensor l k Y
+  let tY := (tensorPresentationCompletion l k Y NY.completion).app (K.obj, L.obj)
+  let tX := (tensorPresentationCompletion l k X NX.completion).app
+    ((P.obj K).obj, (P.obj L).obj)
+  let sY := (finiteAmbientScalarTensor l Y S C E NY).inv.app (K.obj, L.obj)
+  let sX := (finiteAmbientScalarTensor l X R A E NX).inv.app
+    (H.obj K.obj, H.obj L.obj)
+  let sX' := (finiteAmbientScalarTensor l X R A E NX).inv.app
+    ((P.obj K).obj, (P.obj L).obj)
+  let iK := (podCompletedToTowerIso l k g K).hom
+  let iL := (podCompletedToTowerIso l k g L).hom
+  let iT := (podCompletedToTowerIso l k g (UY.obj (K, L))).hom
+  let n := (canonicalIntegralPullbackTensor l k g K L).hom.hom
+  let m := (podCompletedAmbientTensor l k g).hom.app (K.obj, L.obj)
+  have ho := ordinary_scalar_tensor_reindexing l g R S A C B E NX NY V W K.obj L.obj
+  change F.map sY ≫ V.derived.hom.app (TY.obj (K.obj, L.obj)) ≫ EX.map m =
+    W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫
+      A.closed.tensor.map (Prod.mkHom (V.derived.hom.app K.obj) (V.derived.hom.app L.obj)) ≫
+      sX at ho
+  have hc := tensor_completion_reindexing l k g NX.completion NY.completion K L
+  change H.map tY ≫ iT ≫ n = m ≫ TX.map (Prod.mkHom iK iL) ≫ tX at hc
+  have hv := V.derived.hom.naturality tY
+  change F.map (EY.map tY) ≫ V.derived.hom.app (UY.obj (K, L)).obj =
+    V.derived.hom.app (TY.obj (K.obj, L.obj)) ≫ EX.map (H.map tY) at hv
+  have hs := (finiteAmbientScalarTensor l X R A E NX).inv.naturality
+    (Prod.mkHom iK iL)
+  change A.closed.tensor.map (Prod.mkHom (EX.map iK) (EX.map iL)) ≫ sX' =
+    sX ≫ EX.map (TX.map (Prod.mkHom iK iL)) at hs
+  have fY := finiteIntegralTensorMap_factor l Y S C E NY K L
+  change finiteIntegralTensorMap l Y S C E NY K L = sY ≫ EY.map tY at fY
+  have fX := finiteIntegralTensorMap_factor l X R A E NX (P.obj K) (P.obj L)
+  change finiteIntegralTensorMap l X R A E NX (P.obj K) (P.obj L) =
+    sX' ≫ EX.map tX at fX
+  unfold finiteIntegralPullMap
+  change F.map (finiteIntegralTensorMap l Y S C E NY K L) ≫
+      (V.derived.hom.app (UY.obj (K, L)).obj ≫ EX.map iT) ≫ EX.map n =
+    W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫
+      A.closed.tensor.map (Prod.mkHom
+        (V.derived.hom.app K.obj ≫ EX.map iK)
+        (V.derived.hom.app L.obj ≫ EX.map iL)) ≫
+      finiteIntegralTensorMap l X R A E NX (P.obj K) (P.obj L)
+  simp only [fY, fX]
+  calc
+    _ = F.map sY ≫ V.derived.hom.app (TY.obj (K.obj, L.obj)) ≫
+        EX.map (H.map tY ≫ iT ≫ n) := by
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun z ↦ F.map sY ≫ z ≫ EX.map iT ≫ EX.map n) hv
+    _ = F.map sY ≫ V.derived.hom.app (TY.obj (K.obj, L.obj)) ≫
+        EX.map m ≫ EX.map (TX.map (Prod.mkHom iK iL)) ≫ EX.map tX := by
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun z ↦ F.map sY ≫
+          V.derived.hom.app (TY.obj (K.obj, L.obj)) ≫ EX.map z) hc
+    _ = W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫
+        A.closed.tensor.map (Prod.mkHom (V.derived.hom.app K.obj)
+          (V.derived.hom.app L.obj)) ≫ sX ≫
+          EX.map (TX.map (Prod.mkHom iK iL)) ≫ EX.map tX := by
+      simpa only [Category.assoc] using congrArg
+        (fun z ↦ z ≫ EX.map (TX.map (Prod.mkHom iK iL)) ≫ EX.map tX) ho
+    _ = W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫
+        A.closed.tensor.map (Prod.mkHom (V.derived.hom.app K.obj)
+          (V.derived.hom.app L.obj)) ≫
+          A.closed.tensor.map (Prod.mkHom (EX.map iK) (EX.map iL)) ≫ sX' ≫ EX.map tX := by
+      simpa only [Category.assoc] using congrArg
+        (fun z ↦ W.tensor.hom.app (EY.obj K.obj, EY.obj L.obj) ≫
+          A.closed.tensor.map (Prod.mkHom (V.derived.hom.app K.obj)
+            (V.derived.hom.app L.obj)) ≫ z ≫ EX.map tX) hs.symm
+    _ = _ := by
+      simp only [← Category.assoc, ← Functor.map_comp]
+      rfl
 
 end WeilConjectures.AdicQbarRealization

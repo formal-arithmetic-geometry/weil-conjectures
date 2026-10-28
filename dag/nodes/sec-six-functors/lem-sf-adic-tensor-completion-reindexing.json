@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-adic-tensor-completion-reindexing",
+ "kind": "statement",
+ "title": "Integral quotient-completion tensor reindexing square",
+ "statement": "Fix l, a finite extension k of Q_l, schemes X,Y with l invertible, an isomorphism g:X to Y, and normalized tensor completion presentations NX,NY [def-sf-constructible-tensor-completion-presentation]. Write tauX,tauY for tensorPresentationCompletion [def-sf-adic-tensor-presentation-comparison], H for completed exact integral reindexing, TX for the ambient ordinary tensor on X, P for constructible integral pullback and TY for constructible completed tensor. For constructible K,L, H(tauY(K,L)) followed by podCompletedToTowerIso(TY(K,L)).hom and canonicalIntegralPullbackTensor(K,L).hom.hom equals podCompletedAmbientTensor.hom(K,L), followed by TX(podCompletedToTowerIso(K).hom,podCompletedToTowerIso(L).hom) and tauX(PK,PL). No native realization or scalar extension appears.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 6.8.14 and Remark 6.8.15; Stacks 06YS and 07A4. The indicated subargument of the parent finite integral scalar tensor square."
+ },
+ "stmt_deps": [
+  "def-sf-adic-tensor-presentation-comparison",
+  "def-sf-constructible-tensor-completion-presentation",
+  "def-sf-adic-integral-tensor-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous good K-flat representatives. The normalized presentation comparisons identify their ordinary total tensors with the fixed ambient tensor. Reindex each quotient of the tensor tower, preserving both the pure generator quotient map and every strict transition. The first normalization clause gives equal product coordinates; the second gives zero shifted coordinates. Product and mapping-fiber extensionality give the entire chain equality, not just an equality detected by derived quotient evaluations.",
+   "uses": [
+    "def-sf-constructible-tensor-completion-presentation",
+    "def-sf-adic-tensor-presentation-comparison",
+    "lem-pod-tensor-roos-representative-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the whole-chain equality through the good localizations. The coherent-system limit comparison defining the canonical integral pullback tensor transports the unit and counit. Its complete-input identification is exactly podCompletedToTowerIso. Substitute on the tensor and both inputs and cancel the specified counits; obtain the equation. Zero and torsion inputs use the same quotient maps, without inverting a uniformizer.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "def-sf-adic-integral-tensor-coordinates",
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-pod-reindexing-tensor-augmentation-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-tensor-completion-presentation",
+  "def-sf-adic-tensor-presentation-comparison",
+  "lem-pod-tensor-roos-representative-square",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "def-sf-adic-integral-tensor-coordinates",
+  "lem-sf-integral-tensor-pullback-augmentation",
+  "lem-pod-reindexing-tensor-augmentation-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-28",
+  "note": "Separated proper subargument of the parent, preserving its statement. See declaration docstring for the full representative proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with tensor products and inverse image along scheme isomorphism, normalized chain comparisons",
+   "results": "8 hits: AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized adic square. Use the existing good-complex rigidity and naturality APIs; separate the ordinary generator calculation from quotient completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized adic square. Use the existing good-complex rigidity and naturality APIs; separate the ordinary generator calculation from quotient completion."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex",
+   "results": "6 hits: Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean, Mathlib/RingTheory/Unramified/Finite.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized adic square. Use the existing good-complex rigidity and naturality APIs; separate the ordinary generator calculation from quotient completion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor comparison descends uniquely from K-flat representatives and commutes with scalar extension and pullback",
+   "results": "8 hits: CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.FaithfullyFlat.instTensorProduct, LinearMap.tensorKerEquiv_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Module.Flat.iff_flat_tensorProduct, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm, LinearMap.tensorEqLocusEquiv_apply",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized adic square. Use the existing good-complex rigidity and naturality APIs; separate the ordinary generator calculation from quotient completion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ordinary scalar and integral quotient-completion steps of lem-sf-adic-finite-integral-tensor-reindexing. No imported blueprint ancestor (blueprint_refs.py ancestor).",
+   "via": [
+    "lem-sf-adic-finite-integral-tensor-reindexing",
+    "lem-sf-adic-reindexing-tensor-integral-cancelled",
+    "lem-sf-adic-reindexing-tensor-integral",
+    "lem-sf-adic-reindexing-tensor-compatibility",
+    "lem-sf-adic-reindexing-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFiniteIntegralTensorReindexing",
+  "date": "2026-10-28",
+  "group": "Y3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicTensorCompletionReindexing",
+  "file": "lean/Sheaf/Paper/AdicTensorCompletionReindexing.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.tensor_completion_reindexing",
+  "statement": "theorem tensor_completion_reindexing\n    (k : Type u) [Field k] [Algebra (Padic l) k] [FiniteDimensional (Padic l) k]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (NX : ConstructibleTensorCompletionPresentation l k X)\n    (NY : ConstructibleTensorCompletionPresentation l k Y)\n    (K L : sfIntegralConstructibleCategory l k Y) :\n    let H := podCompletedDerivedInverseImage l k g\n    let TX := (pullbackTensorCalculus l k X).integralClosed.tensor\n    let TY := constructibleIntegralTensor l k Y\n    let P := constructibleIntegralPullback l k g\n    H.map ((tensorPresentationCompletion l k Y NY).app (K.obj, L.obj)) ≫\n        (podCompletedToTowerIso l k g (TY.obj (K, L))).hom ≫\n        (canonicalIntegralPullbackTensor l k g K L).hom.hom =\n      (podCompletedAmbientTensor l k g).hom.app (K.obj, L.obj) ≫\n        TX.map (Prod.mkHom (podCompletedToTowerIso l k g K).hom\n          (podCompletedToTowerIso l k g L).hom) ≫\n        (tensorPresentationCompletion l k X NX).app ((P.obj K).obj, (P.obj L).obj)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261028T081806-L-2784264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261028T081806-L-2784264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
