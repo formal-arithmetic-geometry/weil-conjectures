@@ -6,6 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.FiniteDualizingRestrictionTransportCore
 
 /-! # Transport of finite-coefficient restriction coherence -/
 
@@ -79,6 +80,15 @@ theorem finiteDualizingRealizationRestriction_transport
         ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app
           ((ProEtale.comparisonUpperStar
             (ModuleCat (finiteDualizingCoeff l E n)) X).mapDerivedCategory.obj K)) := by
-  sorry
+  let Cn := ProEtale.comparisonUpperStar
+    (ModuleCat (finiteDualizingCoeff l E n)) X
+  let CK := Cn.mapDerivedCategory.obj K
+  have hcore := finiteDualizingRealizationRestriction_transport_core
+    l E X hrm hmn K
+  have hpost := congrArg (fun f ↦
+      f ≫ (normalizedDVRRes l E X hrm).map
+        ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app CK)) hcore
+  simpa only [Category.assoc] using hpost
+
 
 end WeilConjectures

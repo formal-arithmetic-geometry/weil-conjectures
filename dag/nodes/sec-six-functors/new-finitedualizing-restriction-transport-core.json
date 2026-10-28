@@ -1,0 +1,116 @@
+{
+ "id": "new-finitedualizing-restriction-transport-core",
+ "kind": "statement",
+ "title": "Comparison-site core of finite dualizing restriction transport",
+ "statement": "For n ≤ m ≤ r and every K at finite coefficient level n, the comparison-site and intrinsic factors of the finite dualizing restriction transport agree before appending the final normalized n ≤ m restriction component.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Final sentence: comparison pasting subdiagram before the final normalized restriction component"
+ },
+ "stmt_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-witness-compatibility",
+  "lem-coef-dualizing-intrinsic-restriction-comp"
+ ],
+ "proof": [
+  {
+   "text": "Paste the ordinary comparison restriction square for the composite quotient, localize it to derived categories, and transport it through the intrinsic restriction comparison. This is the displayed equality before the final normalized restriction map is appended.",
+   "uses": [
+    "def-coef-finite-dualizing-data",
+    "def-coef-normalized-dvr-tower",
+    "def-weil-pbc-witness-compatibility",
+    "lem-coef-dualizing-intrinsic-restriction-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Final sentence: comparison pasting subdiagram before the final normalized restriction component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-witness-compatibility",
+  "lem-coef-dualizing-intrinsic-restriction-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Final sentence: comparison pasting subdiagram before the final normalized restriction component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite dualizing restriction transport comparison core",
+   "results": "No exact public theorem; specialized finite dualizing statement is new.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapDerivedCategorySquareIso composition restriction scalars comparison",
+   "results": "Generic square-composition lemmas are available, but no theorem with these finite dualizing objects.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizingRealizationRestriction_transport_core",
+   "results": "No prior declaration; this split is unique.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-realization-restriction-transport",
+   "place": "Comparison pasting subdiagram before final normalized restriction component"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteDualizingRestrictionTransportCore",
+  "file": "lean/Sheaf/SixFunctors/FiniteDualizingRestrictionTransportCore.lean",
+  "declaration": "WeilConjectures.finiteDualizingRealizationRestriction_transport_core",
+  "statement": "theorem finiteDualizingRealizationRestriction_transport_core {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) (K : Etale.DerivedCategoryModule (finiteDualizingCoeff l E n) X) : (sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (r + 1))).functor.map ((ProEtale.pbcDerivedComparisonRestrict X (finiteDualizingQuotient l E (hmn.trans hrm))).inv.app K) ≫ (sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (r + 1))).functor.map ((Sheaf.derivedRestrictScalarsCompIso (ProEt.topology X) (finiteDualizingQuotient_comp l E hrm hmn)).inv.app ((ProEtale.comparisonUpperStar (ModuleCat (finiteDualizingCoeff l E n)) X).mapDerivedCategory.obj K)) ≫ (finiteDualizingIntrinsicRestriction l E X hrm).inv.app ((Sheaf.derivedRestrictScalars (ProEt.topology X) (finiteDualizingQuotient l E hmn)).obj ((ProEtale.comparisonUpperStar (ModuleCat (finiteDualizingCoeff l E n)) X).mapDerivedCategory.obj K)) = (sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (r + 1))).functor.map ((ProEtale.comparisonUpperStar (ModuleCat (finiteDualizingCoeff l E r)) X).mapDerivedCategory.map ((Sheaf.derivedRestrictScalarsCompIso X.smallEtaleTopology (finiteDualizingQuotient_comp l E hrm hmn)).inv.app K)) ≫ (sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (r + 1))).functor.map ((ProEtale.pbcDerivedComparisonRestrict X (finiteDualizingQuotient l E hrm)).inv.app ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteDualizingQuotient l E hmn)).obj K)) ≫ (finiteDualizingIntrinsicRestriction l E X hrm).inv.app ((ProEtale.comparisonUpperStar (ModuleCat (finiteDualizingCoeff l E m)) X).mapDerivedCategory.obj ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteDualizingQuotient l E hmn)).obj K)) ≫ (normalizedDVRRes l E X hrm).map ((sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (m + 1))).functor.map ((ProEtale.pbcDerivedComparisonRestrict X (finiteDualizingQuotient l E hmn)).inv.app K))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteDualizingRestrictionTransport",
+  "date": "2026-10-28",
+  "group": "X8"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261028T020909-L-2561163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261028T020909-L-2561163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
