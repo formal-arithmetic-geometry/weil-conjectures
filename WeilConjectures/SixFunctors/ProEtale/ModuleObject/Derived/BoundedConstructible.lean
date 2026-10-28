@@ -11,6 +11,8 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleHomClosure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleHomSingle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
@@ -776,18 +778,23 @@ instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
   sorry
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+instance isMonoidalClosed_boundedConstructible
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
-  sorry
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_hom_closure _ X.left (boundedConstructible_hom_single ℓ X)
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the
@@ -873,18 +880,22 @@ instance isMonoidal_boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
   sorry
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
 point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
-  sorry
+      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_hom_closure _ X.left (boundedConstructible_hom_single ℓ E X)
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full
@@ -975,8 +986,8 @@ instance isMonoidal_boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
   sorry
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude],
@@ -984,10 +995,14 @@ set_option linter.overlappingInstances false in
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed :=
-  sorry
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_hom_closure _ X.left (boundedConstructible_hom_single ℓ E X)
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the

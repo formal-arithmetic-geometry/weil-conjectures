@@ -8069,6 +8069,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableTransfer
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.EquivalenceTensorIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.InternalHomExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.LeftUnitorShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.RightDual
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
@@ -13201,6 +13202,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleHomClosure
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleHomSingle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
