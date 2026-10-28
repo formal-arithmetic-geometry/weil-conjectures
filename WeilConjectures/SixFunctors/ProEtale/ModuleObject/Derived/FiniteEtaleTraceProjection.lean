@@ -65,7 +65,7 @@ lemma μ_sheafToPresheaf_app_comp_μ_localizationRestriction_app
 
 /-- The tensor map of the pushforward, on sections. -/
 @[reassoc]
-lemma μ_sheafToPresheaf_app_comp_μ_lowerStar_app
+lemma μ_sheafToPresheaf_app_comp_μ_lowerStar_app_ab
     (P Q : Sheaf (ProEt.topology Y) Ab.{u + 1}) (U : X.ProEtᵒᵖ) :
     (μ (sheafToPresheaf _ Ab.{u + 1}) ((g)_*[Ab.{u + 1}].obj P)
         ((g)_*[Ab.{u + 1}].obj Q)).app U ≫
@@ -94,7 +94,7 @@ lemma μ_sheafToPresheaf_app_comp_μ_localizationRestriction_comp_lowerStar_app
   rw [comp_μ]
   change _ ≫ (μ (g)_*[Ab.{u + 1}] _ _).hom.app _ ≫
     (μ (localizationRestriction Ab.{u + 1} g inferInstance) P Q).hom.app _ = _
-  erw [μ_sheafToPresheaf_app_comp_μ_lowerStar_app_assoc]
+  erw [μ_sheafToPresheaf_app_comp_μ_lowerStar_app_ab_assoc]
   exact μ_sheafToPresheaf_app_comp_μ_localizationRestriction_app g _ P Q _
 
 /-- The tensor maps of the underlying presheaves of a tensor product of sheaves are natural. -/
