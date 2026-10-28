@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-constant-koszul-quotient-comparison",
+ "kind": "statement",
+ "title": "Unit-preserving comparison of constant or completed strict Koszul and quotient completions",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I\\subset A$ be an ideal. Use the constant and completed coefficient sheaves and their standard derived module categories [def-sfb-constant-completion-coefficient-data]. For $b\\in\\{\\mathrm{false},\\mathrm{true}\\}$ write $\\mathcal O_b=\\underline A$ or $\\lim_n\\underline{A/I^{n+1}}$ and let $C_b$ with unit $\\eta_b$ be the chosen strict quotient-tower completion [def-pur-strict-quotient-completion-data]. Let $r\\geq0$ and $a:\\operatorname{Fin}(r)\\to A$ satisfy $I=(a_i)_i$. For every strict Koszul presentation $K$ for the images of these global generators, let $C_K$ and $u_K$ be its completion functor and degree-zero unit [def-sf-constant-coefficient-koszul-completion-data]. Then there is a natural isomorphism $e:C_K\\simeq C_b$ such that $u_K(M)\\,e_M=\\eta_b(M)$ for every $M\\in D(\\mathcal O_b)$. No completeness, boundedness, exactness of products, or finite quotient perfection hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 099M (lemma-naive-completion), proof; Tag 093M (lemma-completion-flat) for flat completed coefficient extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-sf-constant-coefficient-koszul-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the dual positive tensor Koszul tower with the exterior negative Koszul tower, including its actual diagonal transitions and degree-zero unit. The Noetherian augmentation to A/I^(m+1), constructed by the degree-zero quotient, has pro-zero cone tower. The identity degree-zero map covers the empty generating list.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize constant modules exactly and extend to O_b. The coefficient map is flat (the identity when b=false), and its finite reductions are the specified constant quotient sheaves. These identifications follow from the constant section and sectionwise adic limit theorems. On a flat-term K-flat representative P, apply flatConstantTensorProZeroCones to the augmented map; total right derived inverse limit inverts it and preserves the strict unit equation.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-sectionwise-adic-algebra-limit",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied Koszul presentation and the chosen quotient presentation compute the two limits just compared on each K-flat model. Use uniqueness of total right derived functors to compare their inverse-limit functors. Naturality of the tensor augmentation and resolving-class localization descend the model comparisons to a natural isomorphism on D(O_b). The comparison maps in both presentations and the strict coaugmentation square give the unit identity on models, hence on all objects by essential surjectivity. No reflector or completeness property is used.",
+   "uses": [
+    "def-pur-strict-quotient-completion-data",
+    "def-sf-constant-coefficient-koszul-completion-data",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-sectionwise-adic-algebra-limit",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pc-kflat-resolution",
+  "def-pur-strict-quotient-completion-data",
+  "def-sf-constant-coefficient-koszul-completion-data",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 099M (lemma-naive-completion), proof; Tag 093M (lemma-completion-flat) for flat completed coefficient extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul derived completion is a reflector and agrees with quotient tower completion for a Noetherian ring",
+   "results": "{\"t\": \"2026-10-27T15:20:15Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul derived completion is a reflector and agrees with quotient tower completion for a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.map_injective\", \"AdicCompletion\"], \"digest\": \"cd771ee75a412967\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary adic tensor/completion results and localization isomorphisms do not give the unit-normalized natural comparison of the two strict completion presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingedKoszulLimitPresentation",
+   "results": "{\"t\": \"2026-10-27T15:20:27Z\", \"tool\": \"loogle\", \"query\": \"RingedKoszulLimitPresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingedKoszulLimitPresentation'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary adic tensor/completion results and localization isomorphisms do not give the unit-normalized natural comparison of the two strict completion presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*completion|completion.*koszul",
+   "results": "{\"t\": \"2026-10-27T15:20:27Z\", \"tool\": \"grep\", \"query\": \"koszul.*completion|completion.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary adic tensor/completion results and localization isomorphisms do not give the unit-normalized natural comparison of the two strict completion presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian constant ring sheaf, Koszul tower completion and derived quotient tower completion are naturally isomorphic preserving the augmentation",
+   "results": "{\"t\": \"2026-10-27T15:23:06Z\", \"tool\": \"leansearch\", \"query\": \"For a Noetherian constant ring sheaf, Koszul tower completion and derived quotient tower completion are naturally isomorphic preserving the augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.liftRingHom.congr_simp\", \"DerivedCategory.quotientCompQhIso\", \"HomologicalComplexUpToQuasiIso.quotientCompQhIso\", \"PresheafOfModules.sheafificationCompToSheaf\"], \"digest\": \"bfed5469c7aaaab0\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary adic tensor/completion results and localization isomorphisms do not give the unit-normalized natural comparison of the two strict completion presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionKoszulReflector",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Constant completion equivalence auxiliary, proof step 7: compare the strict Koszul and quotient tower limits and their actual units, before transporting reflector properties.",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletionKoszulQuotientComparison",
+  "file": "lean/Sheaf/Paper/ConstantCompletionKoszulQuotientComparison.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.koszulQuotientComparison",
+  "statement": "theorem koszulQuotientComparison [IsNoetherianRing A] (b : Bool) (r : ℕ)\n    (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)\n    (K : KoszulPresentation J A I b r a) :\n    ∃ e : koszulCompletion J A I K ≅ completion J A I b,\n      ∀ M : D (coefficients J A I b), koszulUnit J A I K M ≫ e.hom.app M =\n        (completionUnit J A I b).app M",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-96ea7",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020411-L-2506833",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-96ea7",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020411-L-2506833",
+  "kind": "interface",
+  "note": "independent cc review: item koszul_quotient_reflector (signature byte-identical) and new hole koszulQuotientComparison against nodes lem-weil-pbc-constant-completion-equivalence / lem-weil-pbc-constant-koszul-quotient-comparison and Core defs; importer ConstantCompletionRestriction compiled OK with the delivered files"
+ }
+}

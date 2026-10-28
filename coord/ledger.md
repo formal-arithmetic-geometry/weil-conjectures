@@ -20592,3 +20592,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: merged deliver/F8/Sheaf.Paper.FiniteProperComparisonIso (stage 3; reviewer PASS; first push; landing 20261028T020404-L-2505519 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:04 L: merged deliver/F9/Sheaf.Paper.IntegralCompactSupportRestrictionShift (stage 3; reviewer PASS; first push; landing 20261028T020405-L-2506032 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:04 L: merged deliver/G1/Sheaf.Paper.CompletedLineTensorCoherence (stage 3; reviewer PASS; first push; landing 20261028T020410-L-2506574 (interface); batch 20261028T020127; modules 1; new nodes 1; change records: coord/changes/beta-evaluation-compatibility.md)
+- 02:04 L: merged deliver/G1/Sheaf.Paper.ConstantCompletionKoszulReflector (stage 3; reviewer PASS; first push; landing 20261028T020411-L-2506833 (interface); batch 20261028T020127; modules 2; new nodes 1)
