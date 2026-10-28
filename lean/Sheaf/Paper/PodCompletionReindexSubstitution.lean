@@ -34,7 +34,7 @@ attribute [local instance 5000] WeilConjectures.coefficientFiniteHasDerived
 attribute [local irreducible] HasDerivedCategory.standard
 
 
-universe t u a b
+universe t u a b s
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
@@ -47,6 +47,30 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-substitution). -/
 def podReindexLocations (X Y : Scheme.{u}) : Bool → Scheme.{u} :=
   fun b ↦ if b then X else Y
+
+/-- Compare a model's tensor codomain with the fixed quotient/Roos tensor codomain.
+The closed-tensor comparison preserves the common internal-Hom adjunction; the
+left-adjoint comparison preserves the common total-limit adjunction. These are
+isomorphisms of presentations, rather than equalities of chosen tensor functors.
+Source: Stacks 07A4, 08J9, 0941; uniqueness of adjoints
+(blueprint: def-pod-completion-reindex-substitution). -/
+def podReindexTensorCodomainComparison {S : Type s} {W : S → Scheme.{u}}
+    (C : CompletedOperations.Models l E W) (a : S) :
+    ((C.calculus a).reduction.prod (C.calculus a).reduction) ⋙
+        CompletedOperations.tensor l E C a ⋙ coefficientSequenceLimit l E (W a) ≅
+      pullbackTensorReferenceTensor l E (W a) :=
+  isoWhiskerRight
+    (isoWhiskerLeft ((C.calculus a).reduction.prod (C.calculus a).reduction)
+        (CoefficientClosedStructure.comparison (C.system a).closed
+          (pullbackTensorCalculus l E (W a)).systemClosed) ≪≫
+      isoWhiskerRight
+        (NatIso.prod
+          (Adjunction.leftAdjointUniq (C.calculus a).adjunction
+            (pullbackTensorCalculus l E (W a)).adjunction)
+          (Adjunction.leftAdjointUniq (C.calculus a).adjunction
+            (pullbackTensorCalculus l E (W a)).adjunction))
+        (pullbackTensorCalculus l E (W a)).systemClosed.tensor)
+    (coefficientSequenceLimit l E (W a))
 
 /-- Substitution for these particular normalized primitives. In addition to the
 expression laws, both calculi, completion augmentations, Roos models and the
@@ -68,10 +92,12 @@ def PodReindexSubstitution {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     HEq (C.completion true) D.completionTarget ∧
     C.roos false = D.sourceRoos ∧ C.roos true = D.targetRoos ∧
     HEq (C.pullback (a := true) (b := false) g).realization D.pullback ∧
-    HEq (qY ≪≫ CompletedOperations.tensorRealization l E C false)
-      (pullbackTensorIntegralTensorModel l E Y) ∧
-    HEq (qX ≪≫ CompletedOperations.tensorRealization l E C true)
-      (pullbackTensorIntegralTensorModel l E X) ∧
+    (qY ≪≫ CompletedOperations.tensorRealization l E C false ≪≫
+      podReindexTensorCodomainComparison l E C false) =
+        pullbackTensorIntegralTensorModel l E Y ∧
+    (qX ≪≫ CompletedOperations.tensorRealization l E C true ≪≫
+      podReindexTensorCodomainComparison l E C true) =
+        pullbackTensorIntegralTensorModel l E X ∧
     (∀ N : coefficientSequenceDerived l E Y,
       IsNormalizedCoefficientSequence l E Y N →
       (podOrdinaryToCompleted l E g D).app ((coefficientSequenceLimit l E Y).obj N) ≫

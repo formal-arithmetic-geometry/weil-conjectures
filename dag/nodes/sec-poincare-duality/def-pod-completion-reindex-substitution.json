@@ -3,10 +3,11 @@
  "kind": "definition",
  "title": "Substitution tied to the selected reindexing systems",
  "status": "split",
- "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite and $g:X\\xrightarrow{\\sim}Y$ with $\\ell$ invertible where constructibility is used. Use [def-pod-completion-tensor-normalization] [lem-pur-completed-operation-tower-substitution]. For selected D,T choose a completed-operation model on the two locations Y,X. Require its calculi, completion comparisons, Roos models and g-pullback realization to be exactly those of D and retain tensor transports qY,qX from the global Roos tensor to the slice tensor, each uniquely fixed by requiring its composite with the model tensor realization to equal the prescribed full strict-tower realization. On every normalized input system require the primitive pullback comparison, preceded by D's ordinary-to-completed map, to equal D.limit. Require T's Roos/canonical normalization and the comparison, simultaneous-substitution and structural laws on this same model. This defines a predicate, not a theorem about unrelated systems.",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite and $g:X\\xrightarrow{\\sim}Y$ with $\\ell$ invertible where constructibility is used. Use [def-pod-completion-tensor-normalization] [lem-pur-completed-operation-tower-substitution]. For selected D,T choose a completed-operation model on the two locations Y,X. Require its calculi, completion comparisons, Roos models and g-pullback realization to be exactly those of D and retain tensor transports qY,qX from the global Roos tensor to the slice tensor, each uniquely fixed by requiring its composite with the model tensor realization and the canonical codomain comparison to equal the prescribed full strict-tower realization. The codomain comparison uses [lem-coef-closed-tensor-comparison]: it is the closed-tensor comparison through the common internal Hom, followed by the unique comparison of the reduction left adjoints to the common total-limit functor. On every normalized input system require the primitive pullback comparison, preceded by D's ordinary-to-completed map, to equal D.limit. Require T's Roos/canonical normalization and the comparison, simultaneous-substitution and structural laws on this same model. This defines a predicate, not a theorem about unrelated systems.",
  "stmt_deps": [
   "def-pod-completion-tensor-normalization",
-  "lem-pur-completed-operation-tower-substitution"
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-coef-closed-tensor-comparison"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
@@ -92,6 +93,7 @@
   "file": "lean/Sheaf/Paper/PodCompletionReindexSubstitution.lean",
   "declarations": [
    "WeilConjectures.podReindexLocations",
+   "WeilConjectures.podReindexTensorCodomainComparison",
    "WeilConjectures.PodReindexSubstitution"
   ]
  },
@@ -111,5 +113,46 @@
   "group": "Q51",
   "result": "pass",
   "note": "Re-delivery after 839c RETURN; F1-F3 repaired. F1: copied canonical-coherence and Fin 3 substitution conjuncts removed; PodReindexFamily with Relabelling (Over.mapId/mapComp section formulas), Identity (reduction/limit/tensor vs integralComparisonSystemUnit), Composition (vs integralComparisonSystemComposition), own TensorConstraints (associator/braiding/unitors; unit iso determined); PodReindexCoefficientTransition.Laws for all L, iota incl. id, with pure-tensor pin and own D/D'/T/T' squares; PodReindexSignedShifts (CommShift of D.reduction/limit, Roos squares, shift generators with (-1)^(pr), Model pins left/right); PodReindexSubstitution ties model C on Bool to D's calculi/Roos/pullback, primitive pullback = D.limit, plus T.Model/Canonical. F2: theorem stmt_deps replaced by existing:true def-pod-isomorphism-reduction-reindexing, def-pod-integral-tensor-constraints, def-pod-scalar-completion-tensor-comparisons; statements verbatim, decls exist, no duplicate owners. F3: RestrictedGenerators pins restricted via the sequence-pullback unit generator along proEtaleIsoCommaArrow, so no sign twist. Statement verbatim; item differs from live only in lean/stmt_deps; no dep records or modules changed; only 2 theorem sorries; docstrings with source/blueprint everywhere; no stronger hypotheses; edge cases (empty schemes, g=id, n=0, incomplete K, all shifts, E=L) fine. No compile (no file changed). Advisories: substitution def node cites theorem lem-pur-completed-operation-tower-substitution instead of def-pur-completed-operation-model-data/-comparison-data; auxiliary evaluation/restriction fields only partly pinned; base-era non-stmt_dep owners; self second reading."
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "C4 stage 2",
+  "old_statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite and $g:X\\xrightarrow{\\sim}Y$ with $\\ell$ invertible where constructibility is used. Use [def-pod-completion-tensor-normalization] [lem-pur-completed-operation-tower-substitution]. For selected D,T choose a completed-operation model on the two locations Y,X. Require its calculi, completion comparisons, Roos models and g-pullback realization to be exactly those of D and retain tensor transports qY,qX from the global Roos tensor to the slice tensor, each uniquely fixed by requiring its composite with the model tensor realization to equal the prescribed full strict-tower realization. On every normalized input system require the primitive pullback comparison, preceded by D's ordinary-to-completed map, to equal D.limit. Require T's Roos/canonical normalization and the comparison, simultaneous-substitution and structural laws on this same model. This defines a predicate, not a theorem about unrelated systems.",
+  "what": "Replace heterogeneous equality between independently chosen tensor codomains by equality after the explicitly constructed canonical codomain isomorphism. Adjunction uniqueness supplies this isomorphism, not equality of the chosen tensor functors. The fixed calculus, completion, Roos and g-pullback pins, the primitive D.limit equation and all expression laws are preserved. This is an interface repair; no assertion is made that the previous stricter HEq condition was proved.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 1 and 5; canonical tensor presentations and automorphism transport; Stacks 07A4, 08J9, 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-pod-reindexing-tensor-substitution",
+    "holds": true,
+    "note": "Uses the same fixed-D model and strict-tower tensor normalization, now expressed after its canonical codomain comparison. The corresponding Lean consumer compiles with the repaired predicate; no hypothesis or mathematical conclusion of this citer is removed."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-substitution-core",
+    "holds": true,
+    "note": "Uses the same fixed-D model and strict-tower tensor normalization, now expressed after its canonical codomain comparison. The corresponding Lean consumer compiles with the repaired predicate; no hypothesis or mathematical conclusion of this citer is removed."
+   },
+   {
+    "id": "lem-pod-reindexing-completion-unit-tensor",
+    "holds": true,
+    "note": "Uses the same fixed-D model and strict-tower tensor normalization, now expressed after its canonical codomain comparison. The corresponding Lean consumer compiles with the repaired predicate; no hypothesis or mathematical conclusion of this citer is removed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pod-completion-tensor-normalization",
+   "lem-pur-completed-operation-tower-substitution"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a89d3",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261028T020232-L-2483787",
+  "kind": "interface",
+  "note": "independent cc review: delivered PodCompletionReindexSubstitution/PodReindexingTensorSubstitutionCore + 2 nodes + change record vs clone sheaf-dag, packet 3b importers, scratch #print axioms, consumer use of PodReindexSubstitution"
  }
 }
