@@ -9761,7 +9761,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
@@ -10125,6 +10124,7 @@ public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.Data.ZMod.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Mathlib.FieldTheory.Finite.Extension
 public import WeilConjectures.Mathlib.FieldTheory.Finite.GaloisField
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
 public import WeilConjectures.Mathlib.FieldTheory.Fixed

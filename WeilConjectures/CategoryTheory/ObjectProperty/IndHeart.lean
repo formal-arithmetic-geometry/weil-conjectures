@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Comma.Final
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.BinaryBiproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
@@ -447,7 +447,7 @@ lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C
       zero := by
         ext k
         exact pullback.lift_snd _ _ _ }
-  have hT : T.Exact := ShortComplex.exact_of_forall_exact_map_evaluation _
+  have hT : T.Exact := (ShortComplex.exact_iff_evaluation _).2
     fun k ↦ (hS.pullback (p.ι.app k)).exact
   have (k : I) : Mono (T.f.app k) := (hS.pullback (p.ι.app k)).mono_f
   have := NatTrans.mono_of_mono_app T.f
