@@ -79,10 +79,8 @@ theorem completed_tensor_common_lift_coherence
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
       (ProEt.topology X) (ring l X R) closed models symmetry) :
     Nonempty (CompletedTensorCommonLiftCoherence l X R closed symmetry) := by
-  obtain ⟨data⟩ := completed_tensor_common_lift_tensor_unit l X R closed models symmetry N
-    coherence
-  obtain ⟨constraints⟩ := completed_tensor_common_lift_constraints l X R closed models symmetry N
-    coherence data
+  obtain ⟨data, ⟨constraints⟩⟩ := completed_tensor_common_lift_constraints l X R
+    closed models symmetry N coherence
   exact ⟨{ tensor := data.tensor
            unit := data.unit
            associative := constraints.associative

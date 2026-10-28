@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-adic-completed-tensor-common-lift-normalized-tensor-unit",
+ "kind": "lemma",
+ "title": "Explicit common-stage tensor data retaining component normalization",
+ "statement": "theorem completed_tensor_common_lift_normalized_tensor_unit\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry) :\n    ∃ data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry,\n      ∀ A B, data.tensor.hom.app (A, B) =\n        (completedTensorCommonComponent l X R closed models N A B).hom",
+ "stmt_deps": [
+  "new-sf-adic-completed-tensor-common-lift-tensor-unit",
+  "def-sf-adic-completed-tensor-common-components",
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-sf-native-adic-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, the actual tensor functor, together with HRS Lemma 7.9 (literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf), the natural finite-field colimit equivalence; the explicit component construction already present in AdicCompletedTensorCommonLiftTensorUnit."
+ },
+ "proof": [
+  {
+   "text": "Obtain the ordinary coefficient-unit comparison and compose it with coherence.unitIso. Form the tensorator by NatIso.ofComponents from completedTensorCommonComponent, using its stated naturality theorem. Package these maps and retain the component equality, which holds by reflexivity. The tensorator is the explicit construction, not a witness chosen from an unnormalized Nonempty statement.",
+   "uses": [
+    "lem-sf-adic-completed-tensor-ordinary-unit",
+    "lem-sf-adic-completed-tensor-common-component-naturality",
+    "def-sf-adic-completed-tensor-common-components"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-completed-tensor-ordinary-unit",
+  "lem-sf-adic-completed-tensor-common-component-naturality",
+  "def-sf-adic-completed-tensor-common-components"
+ ],
+ "proof_origin": {
+  "by": "F1 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, the actual tensor functor, together with HRS Lemma 7.9 (literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf), the natural finite-field colimit equivalence; the explicit component construction already present in AdicCompletedTensorCommonLiftTensorUnit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "construct a natural isomorphism from component isomorphisms and naturality retaining the component equality",
+   "results": "NatIso.ofComponents, ofComponents.app and ofComponents_hom_app; generic component assembly applies.",
+   "date": "2026-10-28",
+   "verdict": "Use NatIso.ofComponents with the existing project components and their naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits headed by NatIso.ofComponents and its component equations.",
+   "date": "2026-10-28",
+   "verdict": "Generic constructor used; no new naturality obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.ofComponents",
+   "results": "25 displayed examples across Mathlib; the existing project construction already uses this constructor.",
+   "date": "2026-10-28",
+   "verdict": "Retain the actual component equality while constructing the same maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsAssociative",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Common-stage tensor lift: construction of the explicit tensorator before verifying its associativity.",
+   "via": [
+    "new-sf-adic-completed-tensor-common-lift-constraints-associative",
+    "new-sf-adic-completed-tensor-common-lift-constraints",
+    "lem-sf-adic-completed-tensor-common-lift-coherence",
+    "lem-sf-adic-completed-tensor-common-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorCommonLiftNormalizedTensorUnit",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorCommonLiftNormalizedTensorUnit.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_normalized_tensor_unit",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_normalized_tensor_unit"
+  ],
+  "statement": "theorem completed_tensor_common_lift_normalized_tensor_unit\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry) :\n    ∃ data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry,\n      ∀ A B, data.tensor.hom.app (A, B) =\n        (completedTensorCommonComponent l X R closed models N A B).hom",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a491a",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T072409-L-1942828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a491a",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T072409-L-1942828",
+  "kind": "interface",
+  "note": "independent cc review: item normalized-hypothesis statement + Constraints ∀→∃ wrapper + new NormalizedTensorUnit construction against the change record, node statements and the clone (base identical); dispute counterexample checked (degree-pair sign twist)"
+ }
+}

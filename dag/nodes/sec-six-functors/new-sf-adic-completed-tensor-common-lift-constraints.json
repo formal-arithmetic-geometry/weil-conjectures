@@ -2,11 +2,12 @@
  "id": "new-sf-adic-completed-tensor-common-lift-constraints",
  "kind": "statement",
  "title": "Constraint equations for the common-stage completed tensor lift",
- "statement": "theorem completed_tensor_common_lift_constraints\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :\n    Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry\n      data.tensor data.unit)",
+ "statement": "theorem completed_tensor_common_lift_constraints\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry) :\n    ∃ data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry,\n      Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry\n        data.tensor data.unit)",
  "stmt_deps": [
   "def-sf-adic-completed-tensor-finite-models",
   "def-sf-native-adic-realization-data",
-  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "new-sf-adic-completed-tensor-common-lift-tensor-unit"
  ],
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
@@ -14,44 +15,34 @@
  },
  "proof": [
   {
-   "text": "Apply the finite-field representative calculation and native associator transport to the tensorator and unit data.",
+   "text": "Construct a tensorator and unit together with the literal common-component normalization using completed_tensor_common_lift_normalized_tensor_unit.",
    "uses": [
-    "new-sf-adic-completed-tensor-common-lift-constraints-associative"
+    "lem-sf-adic-completed-tensor-common-lift-normalized-tensor-unit"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the finite coefficient multiplication calculation and native left-unitor transport to the tensorator and unit data.",
+   "text": "Apply the associativity theorem to those data and the constructed normalization; apply the existing left-unit, right-unit and symmetry declarations to the same data. Package the four equations and return the data together with the constraints. No law for an arbitrary unrelated tensorator or unit is asserted.",
    "uses": [
-    "new-sf-adic-completed-tensor-common-lift-constraints-left-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the finite coefficient multiplication calculation and native right-unitor transport to the tensorator and unit data.",
-   "uses": [
-    "new-sf-adic-completed-tensor-common-lift-constraints-right-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the finite signed-swap calculation and native symmetry transport to the tensorator data.",
-   "uses": [
+    "new-sf-adic-completed-tensor-common-lift-constraints-associative",
+    "new-sf-adic-completed-tensor-common-lift-constraints-left-unit",
+    "new-sf-adic-completed-tensor-common-lift-constraints-right-unit",
     "new-sf-adic-completed-tensor-common-lift-constraints-symmetric"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sf-adic-completed-tensor-common-lift-normalized-tensor-unit",
   "new-sf-adic-completed-tensor-common-lift-constraints-associative",
   "new-sf-adic-completed-tensor-common-lift-constraints-left-unit",
   "new-sf-adic-completed-tensor-common-lift-constraints-right-unit",
   "new-sf-adic-completed-tensor-common-lift-constraints-symmetric"
  ],
  "proof_origin": {
-  "by": "V6 stage 3",
+  "by": "F1 stage 3",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "BS Remark 6.8.15; HRS Lemma 7.9; componentwise finite representative transport."
+  "place": "Remark 6.8.15, the actual tensor functor, together with HRS Lemma 7.9 (literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf), the natural finite-field colimit equivalence; the explicit component construction already present in AdicCompletedTensorCommonLiftTensorUnit."
  },
  "mathlib_searches": [
   {
@@ -105,7 +96,7 @@
   "declarations": [
    "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_constraints"
   ],
-  "statement": "theorem completed_tensor_common_lift_constraints\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :\n    Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry\n      data.tensor data.unit)",
+  "statement": "theorem completed_tensor_common_lift_constraints\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry) :\n    ∃ data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry,\n      Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry\n        data.tensor data.unit)",
   "branch": "sheaf-dag",
   "by": "B5",
   "date": "2026-10-28"
@@ -123,11 +114,64 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V6",
-  "result": "pass",
-  "landing": "20261028T020830-L-2552260",
+  "reviewer": "C-a491a",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T072409-L-1942828",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item normalized-hypothesis statement + Constraints ∀→∃ wrapper + new NormalizedTensorUnit construction against the change record, node statements and the clone (base identical); dispute counterexample checked (degree-pair sign twist)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F1 stage 2",
+  "old_statement": "theorem completed_tensor_common_lift_constraints\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :\n    Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry\n      data.tensor data.unit)",
+  "what": "The old wrapper universally quantified over arbitrary tensor and unit comparisons. Replace this false universal normalization assertion by existence of data satisfying the constraint equations; construct the tensorator with the explicit normalized components. Its sole consumer already needs only existence of a coherent tensorator, and keeps its original signature.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Remark 6.8.15, the actual tensor functor, together with HRS Lemma 7.9 (literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf), the natural finite-field colimit equivalence; the explicit component construction already present in AdicCompletedTensorCommonLiftTensorUnit."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-adic-completed-tensor-common-lift-coherence",
+    "holds": true,
+    "note": "The consumer obtains the existential data and constraints in one step; its public theorem and structure signatures stay identical."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the finite-field representative calculation and native associator transport to the tensorator and unit data.",
+    "uses": [
+     "new-sf-adic-completed-tensor-common-lift-constraints-associative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the finite coefficient multiplication calculation and native left-unitor transport to the tensorator and unit data.",
+    "uses": [
+     "new-sf-adic-completed-tensor-common-lift-constraints-left-unit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the finite coefficient multiplication calculation and native right-unitor transport to the tensorator and unit data.",
+    "uses": [
+     "new-sf-adic-completed-tensor-common-lift-constraints-right-unit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the finite signed-swap calculation and native symmetry transport to the tensorator data.",
+    "uses": [
+     "new-sf-adic-completed-tensor-common-lift-constraints-symmetric"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "new-sf-adic-completed-tensor-common-lift-constraints-associative",
+   "new-sf-adic-completed-tensor-common-lift-constraints-left-unit",
+   "new-sf-adic-completed-tensor-common-lift-constraints-right-unit",
+   "new-sf-adic-completed-tensor-common-lift-constraints-symmetric"
+  ]
  }
 }

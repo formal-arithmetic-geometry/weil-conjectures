@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorCommonLiftTensorUnit
+import Sheaf.Paper.AdicCompletedTensorCommonLiftNormalizedTensorUnit
 import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsAssociative
 import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsLeftUnit
 import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsRightUnit
@@ -79,21 +80,24 @@ chosen field follows from the supplied comparison coherence.
 theorem completed_tensor_common_lift_constraints
     (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
-      (ProEt.topology X) (ring l X R) closed models symmetry)
-    (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :
-    Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry
-      data.tensor data.unit) := by
+      (ProEt.topology X) (ring l X R) closed models symmetry) :
+    ∃ data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry,
+      Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry
+        data.tensor data.unit) := by
+  obtain ⟨data, normalized⟩ := completed_tensor_common_lift_normalized_tensor_unit l X R
+    closed models symmetry N coherence
   have associative := completed_tensor_common_lift_constraints_associative l X R
-    closed models symmetry N coherence data
+    closed models symmetry N coherence data normalized
   have left_unit := completed_tensor_common_lift_constraints_left_unit l X R
     closed models symmetry N coherence data
   have right_unit := completed_tensor_common_lift_constraints_right_unit l X R
     closed models symmetry N coherence data
   have symmetric := completed_tensor_common_lift_constraints_symmetric l X R
     closed models symmetry N coherence data
-  exact ⟨{ associative := associative
-           left_unit := left_unit
-           right_unit := right_unit
-           symmetric := symmetric }⟩
+  refine ⟨data, ⟨?_⟩⟩
+  exact { associative := associative
+          left_unit := left_unit
+          right_unit := right_unit
+          symmetric := symmetric }
 
 end WeilConjectures.AdicQbarRealization
