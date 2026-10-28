@@ -1,0 +1,106 @@
+{
+ "id": "lem-pod-tensor-representative-square-diagram",
+ "kind": "lemma",
+ "title": "Representative RepresentativeSquare in the named diagram",
+ "status": "split",
+ "statement": "For the fixed named scalar/reindexing tensor descent diagram, For each good complex P in the normalized coefficient-transition setup, scalar extension of its reindexing localization factor followed by the scalar factor and localized termwise S equals S.derived at the localization followed by the scalar/reindexing composite factor. Applying this equation in both variables gives the product representative square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Apply the exact-derived composition and natural-isomorphism factor equations separately in both variables. Product extensionality gives the square."
+ },
+ "stmt_deps": [
+  "def-pod-tensor-descent-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Expand the named diagram components, use the component normalization lemma, cancel the explicit associator components when present, and reassociate. The product coefficient square follows by product extensionality from the one-variable component equation.",
+   "uses": [
+    "lem-pod-tensor-representative-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-tensor-representative-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Apply the exact-derived composition and natural-isomorphism factor equations separately in both variables. Product extensionality gives the square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of derived functor comparison factors with a natural isomorphism of exact functors",
+   "results": "Functor.mapDerivedCategoryFactorsh and LocalizerMorphism.rightDerivedFunctorComparison_fac; no explicit four-functor mixed chain square.",
+   "verdict": "Use the adopted exact-functor factor API and naturality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_fac",
+   "results": "Unknown identifier in the Mathlib search index; the adopted source library provides the declaration.",
+   "verdict": "Use the source-library factor equation.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory(NatIso|CompIso)_fac",
+   "results": "No indexed hits. Local source contains the two factor equations used in the proof.",
+   "verdict": "Elementary composition of the existing API.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+   "place": "Apply the exact-derived composition and natural-isomorphism factor equations separately in both variables. Product extensionality gives the square."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionRepresentativeSquareDiagram",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionRepresentativeSquareDiagram.lean",
+  "declaration": "WeilConjectures.podTensorCoefficientRepresentativeSquareDiagram",
+  "declarations": [
+   "WeilConjectures.podTensorCoefficientRepresentativeSquareDiagram"
+  ],
+  "statement": "theorem podTensorCoefficientRepresentativeSquareDiagram\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (_hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (_hT' : PodCompletedTensorReindex.Laws l L g D' T')\n    (S : PodReindexCoefficientTransition l E L ι g D D')\n    (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S) :\n  ∀ P, (podTensorDiagramPairScalar l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).map\n    ((podTensorDiagramPairReindexFactor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).hom.app P) ≫\n      (podTensorDiagramPairScalarFactor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).hom.app\n        (((podTensorDiagramGoodReindex l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).prod\n          (podTensorDiagramGoodReindex l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)).obj P) ≫\n      ((podTensorDiagramTargetLocalization l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).prod\n        (podTensorDiagramTargetLocalization l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)).map\n          ((NatIso.prod (podTensorDiagramGoodTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S\n            _hcore) (podTensorDiagramGoodTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S\n              _hcore)).hom.app P) =\n        (podTensorDiagramPairTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).hom.app\n          (((podTensorDiagramSourceLocalization l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).prod\n            (podTensorDiagramSourceLocalization l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)).obj\n              P) ≫ (podTensorDiagramPairMixedFactor l E g D _hD T _hT L ι D' _hD' T' _hT' S\n                _hcore).hom.app P",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

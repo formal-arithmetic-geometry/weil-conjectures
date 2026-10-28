@@ -1,0 +1,100 @@
+{
+ "id": "def-pod-reindexing-tensor-chain-maps",
+ "kind": "definition",
+ "title": "Explicit tensor Roos reindexing and termwise coefficient maps",
+ "status": "split",
+ "statement": "podReindexTensorChain is the composite of the specified reindexing Roos comparison and the Roos image of the tensor tower comparison. PodReindexCoefficientTransition.complex applies the ordinary coefficient isomorphism term by term to cochain complexes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded scalar compatibility proof"
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-reindex-models",
+  "lem-pur-integral-scalar-finite-comparison-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded scalar compatibility proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension and inverse image commute with tensor products on complexes and their natural comparison maps",
+   "results": "ModuleCat.ExtendScalars.map′, extendScalarsId_inv_app_apply and TensorProduct.AlgebraTensorModule.tensorTensorTensorComm; no specified quotient/Roos square.",
+   "verdict": "Ordinary scalar tools only.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations between bifunctors agree if they agree on essentially surjective representatives",
+   "results": "Localization.natTrans₂_ext and natTrans_ext. Loogle for Functor.EssSurj found objPreimage and objObjPreimageIso.",
+   "verdict": "Use existing general descent; no mixed chain square.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*reindex.*tensor|reindex.*scalar.*tensor; scalarTensorChain; PodCompletedTensorReindex",
+   "results": "msearch grep: zero direct hits. Local rg found coefficient-tower coherence and reindexing generator/Model laws, but no mixed chain equality.",
+   "verdict": "The remaining calculation is on the specified chain maps.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+   "place": "The pure-tensor and signed Roos chain calculation preceding derived localization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingScalarTensorChainSquare",
+  "file": "lean/Sheaf/Paper/PodReindexingScalarTensorChainSquare.lean",
+  "declaration": "WeilConjectures.podReindexTensorChain",
+  "declarations": [
+   "WeilConjectures.podReindexTensorChain",
+   "WeilConjectures.PodReindexCoefficientTransition.complex"
+  ],
+  "statement": "def podReindexTensorChain\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)\n    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory) :\n    (isoReductionIntegralComplex l E g).obj\n        ((integralOperationsTensorComplexFunctor l E Y).obj (P.obj, Q.obj)) ⟶\n      (integralOperationsTensorComplexFunctor l E X).obj\n        (((podGoodReindex l E g D).obj P).obj, ((podGoodReindex l E g D).obj Q).obj)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

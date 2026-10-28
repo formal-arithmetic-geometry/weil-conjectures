@@ -1,0 +1,122 @@
+{
+ "id": "lem-pod-coefficient-exact-square-chain-descent",
+ "kind": "lemma",
+ "title": "Exact-derived chain square with specified comparison factors",
+ "status": "split",
+ "statement": "For four exact additive functors F,G,H,I and an isomorphism F ⋙ G ≅ H ⋙ I, a chain-level mixed square descends to the specified derived functors, with all localization comparison factors retained. The module also constructs the fixed good-complex, localization, reindexing and scalar representative maps used by this descent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; passage from the chain square to the specified exact-derived functors; Stacks 05RU"
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-completion-tensor-reindex-models",
+  "lem-pur-integral-operations-well-defined",
+  "def-pod-reindexing-tensor-chain-maps"
+ ],
+ "proof": [
+  {
+   "text": "Move the localization factor for G past the input chain map by naturality. Combine the three Q-images and apply the assumed chain equation. Split the Q-images. The composition-factor and natural-isomorphism-factor equations identify the initial factors with the specified derived comparison. Move the factor for I past the other input chain map by naturality. Associativity gives the claimed square. The argument uses no invertibility of the chain maps, and includes zero and identity maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; passage from the chain square to the specified exact-derived functors; Stacks 05RU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of derived functor comparison factors with a natural isomorphism of exact functors",
+   "results": "Functor.mapDerivedCategoryFactorsh and LocalizerMorphism.rightDerivedFunctorComparison_fac; no explicit four-functor mixed chain square.",
+   "verdict": "Use the adopted exact-functor factor API and naturality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_fac",
+   "results": "Unknown identifier in the Mathlib search index; the adopted source library provides the declaration.",
+   "verdict": "Use the source-library factor equation.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory(NatIso|CompIso)_fac",
+   "results": "No indexed hits. Local source contains the two factor equations used in the proof.",
+   "verdict": "Elementary composition of the existing API.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+   "place": "Exact-derived comparison coherence following the mixed chain calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionDescentData",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionDescentData.lean",
+  "declaration": "WeilConjectures.podCoefficientExactSquareChain",
+  "declarations": [
+   "WeilConjectures.podTensorReindexAdditive",
+   "WeilConjectures.podTensorScalarZero",
+   "WeilConjectures.podTensorMixedLeftZero",
+   "WeilConjectures.podTensorMixedRightZero",
+   "WeilConjectures.podTensorReindexLimits",
+   "WeilConjectures.podTensorReindexColimits",
+   "WeilConjectures.podTensorScalarGoodFunctor",
+   "WeilConjectures.podTensorScalarGoodComparison",
+   "WeilConjectures.podTensorReindexGoodComparison",
+   "WeilConjectures.podTensorGoodCoefficientTransition",
+   "WeilConjectures.podTensorTensorReindexDerivedChain",
+   "WeilConjectures.podTensorTensorScalarDerivedChain",
+   "WeilConjectures.podTensorTensorMixedDerivedChain",
+   "WeilConjectures.podTensorGoodConstructible",
+   "WeilConjectures.podTensorGoodConstructibleLocalization",
+   "WeilConjectures.podTensorTensorReindexIso",
+   "WeilConjectures.podTensorMixedTensorIso",
+   "WeilConjectures.podCoefficientExactSquareChain"
+  ],
+  "statement": "theorem podCoefficientExactSquareChain\n    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]\n    [Abelian A] [Abelian B] [Abelian C] [Abelian D]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory C] [HasDerivedCategory D]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (G : B ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (H : A ⥤ C) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (I : C ⥤ D) [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]\n    (s : F ⋙ G ≅ H ⋙ I) (K : CochainComplex A ℤ)\n    (P : CochainComplex B ℤ) (Q : CochainComplex C ℤ)\n    (Z Z' : CochainComplex D ℤ)\n    (c : (F.mapHomologicalComplex (.up ℤ)).obj K ⟶ P)\n    (d : (G.mapHomologicalComplex (.up ℤ)).obj P ⟶ Z)\n    (e : (H.mapHomologicalComplex (.up ℤ)).obj K ⟶ Q)\n    (f : (I.mapHomologicalComplex (.up ℤ)).obj Q ⟶ Z') (r : Z ⟶ Z')\n    (hc : (G.mapHomologicalComplex (.up ℤ)).map c ≫ d ≫ r =\n      (NatIso.mapHomologicalComplex s (.up ℤ)).hom.app K ≫\n        (I.mapHomologicalComplex (.up ℤ)).map e ≫ f) :\n    G.mapDerivedCategory.map\n        (F.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map c) ≫\n      G.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map d ≫\n      DerivedCategory.Q.map r =\n    (((F.mapDerivedCategoryCompIso G).symm ≪≫ mapDerivedCategoryNatIso s ≪≫\n        H.mapDerivedCategoryCompIso I).hom.app (DerivedCategory.Q.obj K)) ≫\n      I.mapDerivedCategory.map\n        (H.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map e) ≫\n      I.mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.map f",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

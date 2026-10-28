@@ -1,0 +1,107 @@
+{
+ "id": "lem-pod-tensor-scalar-normalization",
+ "kind": "lemma",
+ "title": "Representative ScalarNormalization",
+ "status": "split",
+ "statement": "For a finite coefficient extension E to L and any good pair P,Q on X, scalar extension of the tensor localization comparison followed by the specified scalar tensor derived chain map equals scalarTensorOrdinary on the localizations followed by the tensor of the scalar localization factors and the target tensor localization comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair."
+ },
+ "stmt_deps": [
+  "lem-pod-coefficient-exact-square-chain-descent",
+  "lem-pod-reindexing-tensor-coefficient-transition-core"
+ ],
+ "proof": [
+  {
+   "text": "Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair. Identity functors and zero complexes satisfy the same equations; there is no nonzero or nonempty hypothesis.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of derived functor comparison factors with a natural isomorphism of exact functors",
+   "results": "Functor.mapDerivedCategoryFactorsh and LocalizerMorphism.rightDerivedFunctorComparison_fac; no explicit four-functor mixed chain square.",
+   "verdict": "Use the adopted exact-functor factor API and naturality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_fac",
+   "results": "Unknown identifier in the Mathlib search index; the adopted source library provides the declaration.",
+   "verdict": "Use the source-library factor equation.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory(NatIso|CompIso)_fac",
+   "results": "No indexed hits. Local source contains the two factor equations used in the proof.",
+   "verdict": "Elementary composition of the existing API.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+   "place": "Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionScalarNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionScalarNormalization.lean",
+  "declaration": "WeilConjectures.podTensorScalarRepresentativeNormalization",
+  "declarations": [
+   "WeilConjectures.podTensorScalarRepresentativeNormalization"
+  ],
+  "statement": "theorem podTensorScalarRepresentativeNormalization\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (_hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (_hT' : PodCompletedTensorReindex.Laws l L g D' T')\n    (S : PodReindexCoefficientTransition l E L ι g D D')\n    (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)\n    (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :\n    (integralOrdinaryDerivedScalar l E L ι X).map\n        ((integralCompletedTensorComparison l E X).hom.app (P, Q)) ≫\n      podTensorTensorScalarDerivedChain l E L ι X P Q =\n    (scalarTensorOrdinary l E L ι X).hom.app\n        (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n      (integralCompletedTensor l L X).map\n        (Prod.mkHom ((integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app P.obj)\n          ((integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app Q.obj)) ≫\n      (integralCompletedTensorComparison l L X).hom.app\n        ((podTensorScalarGoodFunctor l E L ι X).obj P,\n          (podTensorScalarGoodFunctor l E L ι X).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

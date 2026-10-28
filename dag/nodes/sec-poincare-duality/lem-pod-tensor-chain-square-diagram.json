@@ -1,0 +1,124 @@
+{
+ "id": "lem-pod-tensor-chain-square-diagram",
+ "kind": "lemma",
+ "title": "Representative ChainSquare in the named diagram",
+ "status": "split",
+ "statement": "On a pair of good constructible representatives in the fixed diagram, scalar extension of the Roos tensor reindexing representative map followed by the scalar tensor representative map and the tensor of the termwise coefficient transition equals S.derived at the tensor representative followed by the scalar-then-reindex tensor representative map. This is the representative chain square, prior to normalization by completed-tensor comparison isomorphisms and faithful descent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Apply the mixed chain equality before localization. The generic exact-derived chain-square lemma moves the localization factors by naturality and gives the representative equation."
+ },
+ "stmt_deps": [
+  "def-pod-tensor-descent-diagram"
+ ],
+ "proof": [
+  {
+   "text": "At every quotient and homogeneous tensor summand, use the pure-tensor clause for S and generator clauses for T,T′. Balancing identifies the two scalar/reindexing routes. Their Koszul signs and quotient transitions agree. The two product-coordinate equations of the Roos comparisons then give the chain square before localization.",
+   "uses": [
+    "def-pod-completion-tensor-reindex-models",
+    "def-pod-completion-reindex-models",
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-additive-roos-horizontal",
+    "lem-pod-reindexing-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply podCoefficientExactSquareChain to move localization factors through the maps. Its exact-derived comparison formula identifies S.derived. The named tensor representative functor maps the termwise transition by the Q-image of its chain tensor map; unfold these explicit maps to obtain the equation.",
+   "uses": [
+    "lem-pod-coefficient-exact-square-chain-descent",
+    "def-pod-tensor-descent-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-reindex-models",
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-additive-roos-horizontal",
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pod-coefficient-exact-square-chain-descent",
+  "def-pod-tensor-descent-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; Apply the mixed chain equality before localization. The generic exact-derived chain-square lemma moves the localization factors by naturality and gives the representative equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of derived functor comparison factors with a natural isomorphism of exact functors",
+   "results": "Functor.mapDerivedCategoryFactorsh and LocalizerMorphism.rightDerivedFunctorComparison_fac; no explicit four-functor mixed chain square.",
+   "verdict": "Use the adopted exact-functor factor API and naturality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_fac",
+   "results": "Unknown identifier in the Mathlib search index; the adopted source library provides the declaration.",
+   "verdict": "Use the source-library factor equation.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory(NatIso|CompIso)_fac",
+   "results": "No indexed hits. Local source contains the two factor equations used in the proof.",
+   "verdict": "Elementary composition of the existing API.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionTensor",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+   "place": "Apply the mixed chain equality before localization. The generic exact-derived chain-square lemma moves the localization factors by naturality and gives the representative equation."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionChainSquareDiagram",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionChainSquareDiagram.lean",
+  "declaration": "WeilConjectures.podTensorMixedRepresentativeChainSquareDiagram",
+  "declarations": [
+   "WeilConjectures.podTensorMixedRepresentativeChainSquareDiagram"
+  ],
+  "statement": "theorem podTensorMixedRepresentativeChainSquareDiagram\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (_hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (_hT' : PodCompletedTensorReindex.Laws l L g D' T')\n    (S : PodReindexCoefficientTransition l E L ι g D D')\n    (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S) :\n  ∀ P, (podTensorDiagramScalarFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).map\n    ((podTensorDiagramReindexChain l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) P) ≫\n      (podTensorDiagramScalarChain l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)\n        (((podTensorDiagramGoodReindex l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).prod\n          (podTensorDiagramGoodReindex l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)).obj P) ≫\n      (podTensorDiagramTargetRepresentative l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).map\n        ((NatIso.prod (podTensorDiagramGoodTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S\n        _hcore)\n          (podTensorDiagramGoodTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S\n        _hcore)).hom.app P)\n            = (podTensorDiagramDerivedTransition l E g D _hD T _hT L ι D' _hD' T' _hT' S\n              _hcore).hom.app ((podTensorDiagramSourceRepresentative l E g D _hD T _hT L ι D'\n        _hD' T'\n                _hT' S _hcore).obj P) ≫ (podTensorDiagramMixedChain l E g D _hD T _hT L ι D' _hD' T'\n                  _hT' S _hcore) P",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T055629-L-781288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
