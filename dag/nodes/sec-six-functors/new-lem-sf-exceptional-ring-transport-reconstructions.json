@@ -40,20 +40,30 @@
  },
  "proof": [
   {
-   "text": "Apply the normalized reduction/limit reconstruction theorem to the coefficient sequence at each endpoint, restrict to the normalized bounded subcategories, and transport the inherited shift through the specified left realization.",
+   "text": "Apply the endpoint shift-transport result to the supplied proper/open realization family, obtaining a shift witness for each ring stage.",
    "uses": [
-    "lem-pur-normalized-reconstruction-adjunction-calculus"
+    "new-lem-sf-exceptional-ring-transport-left-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every field stage and endpoint, apply the single-endpoint normalized reconstruction result and choose its witness. Assemble these witnesses with the shift family into the TransportCorePreData record.",
+   "uses": [
+    "new-lem-sf-exceptional-ring-transport-endpoint-reconstruction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-normalized-reconstruction-adjunction-calculus"
+  "new-lem-sf-exceptional-ring-transport-left-shifts",
+  "new-lem-sf-exceptional-ring-transport-endpoint-reconstruction"
  ],
  "proof_origin": {
   "by": "G6 stage 3 decomposition",
+  "group": "H3",
+  "date": "2026-10-28",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Construction 5.25 and Proposition 5.26"
+  "place": "Construction 5.25 and Proposition 5.26; assembly of endpoint reconstruction and inherited shift witnesses."
  },
  "lean": {
   "existing": false,
@@ -76,12 +86,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G6",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261027T233948-L-4143113",
+  "landing": "20261028T020445-L-2513485",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalIntegralScalarMates
+import Sheaf.Paper.ExceptionalTransportEndpointReconstruction
+import Sheaf.Paper.ExceptionalTransportLeftShift
 
 /-! # Reconstruction choices for exceptional integral transport
 
@@ -55,6 +57,15 @@ theorem exists_exceptional_transport_reconstructions
     (left : ∀ s : RingStage.{u} l,
       LeftRealization.{u} l Ω c s (operation s)) :
     Nonempty (TransportCorePreData l Ω D hl c operation left) := by
-  sorry
+  classical
+  have hshift : ∀ s : RingStage.{u} l, (left s).hom.CommShift ℤ :=
+    exists_exceptional_transport_left_shifts l Ω D hl f c operation left
+  have hrecon : ∀ E : FieldStage.{u} l, ∀ side : Bool,
+      Nonempty (Reconstruction l E (endpoint X Y side)) := by
+    intro E side
+    exact exists_exceptional_transport_endpoint_reconstruction l E
+  exact ⟨{
+    leftShift := hshift
+    reconstruction := fun E side => (hrecon E side).some }⟩
 
 end WeilConjectures.ExceptionalIntegralScalar
