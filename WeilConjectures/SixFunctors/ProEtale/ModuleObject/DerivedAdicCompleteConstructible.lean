@@ -5,10 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedAdicComplete
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
+public import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdicCompleteHomology
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleDerivedAdicComplete
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CountableProducts
 
 /-!
 
@@ -21,9 +20,10 @@ is the completeness half of the implication (1) ⇒ (2) of blueprint `sk-prop-in
 (section `sec-proetale-coefficients`); the other half, that the first derived reduction is
 bounded constructible, is `ProEtale.boundedConstructible_derivedReduction_obj`.
 
-The derived category of module objects has countable products, since countable products of
-module objects are exact (`ProEtale.CondensedRing.countableAB4Star_mod`,
-`CategoryTheory.derivedCategory_hasCountableProducts`).
+A complex is derived complete if and only if its cohomology objects are
+(`DerivedCategory.isDerivedAdicComplete_iff_homology`, countable products of module objects being
+exact), and constructible module objects are derived complete
+(`ProEtale.isDerivedAdicComplete_of_isConstructibleModuleObject`).
 
 -/
 
@@ -39,17 +39,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
 
-variable (X : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
-  [IsCommMonObj Λ]
-
-/-- The derived category of module objects over a condensed coefficient ring on `X_proét` has
-countable products: countable products of module objects are exact. -/
-instance hasCountableProducts_derivedCategory_mod :
-    HasCountableProducts (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) :=
-  derivedCategory_hasCountableProducts _
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
 /-- **Bounded constructible integral complexes are derived complete** (blueprint
 `sk-prop-integral-criterion`, section `sec-proetale-coefficients`, implication (1) ⇒ (2), the
@@ -63,6 +53,7 @@ theorem isDerivedAdicComplete_of_boundedConstructible [IsNoetherian X]
     (hK : boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
     IsDerivedAdicComplete (ℓ : ℤ) K :=
-  sorry
+  (DerivedCategory.isDerivedAdicComplete_iff_homology K).2 fun p ↦
+    isDerivedAdicComplete_of_isConstructibleModuleObject ℓ E _ (hK.2 p)
 
 end AlgebraicGeometry.ProEtale
