@@ -12,43 +12,51 @@
  ],
  "proof": [
   {
-   "text": "Expand each compactification projection and alpha. Move the inner open tensor morphism through gamma by naturality, and apply the triangle counit normal-form identity retaining the successive pullbacks.",
+   "text": "Work first in an arbitrary Calculus with TensorData. Expand alpha at components and factor both compactification projection words into a raw normal word followed by tensor of a pullback transport. Naturality of pi, delta and the compositors gives these factorizations. For finite coefficients use the existing proved finite triangle normal-form calculation. For systems derive this raw identity directly from properOpenProjectionMateSystems: insert the square isomorphism followed by its inverse, use naturality of gamma to move the inner open tensor map, and use first-variable naturality of the outer projection. The generic triangle_calculation pastes these two identities.",
    "uses": [
+    "def-sf-composition-projection-data",
     "lem-sf-triangle-projection-normal-form",
-    "def-sf-composition-projection-data"
+    "lem-sf-proper-open-projection-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Contract the two successive proper projections by tensor-composition and adjunction conjugation. Contract the open tensor maps by transposing under the composite open adjunction: open-unit normalization and tensor-pullback composition make their transposes equal. No projection map is inverted.",
+   "text": "For proper composition use the proved generic projection_composition_normalized calculation and system_comp in RefinementProjectionProperComposition. A private abstract tensor API converts the curried calculation to TensorData without unfolding derived constructions. At finite coefficients rewrite the three tensor-isomorphism components using tensor_component_hom, then use the actual ambient tensor-composition equation. This preserves the native calculus arguments. For systems the same tensor hypothesis is supplied by ambientProperOpenPasting.",
    "uses": [
-    "lem-sfb-ringed-projection-tensor-composition",
-    "lem-sf-open-tensor-normalization",
+    "lem-sf-refinement-projection-proper-composition",
     "lem-sf-ambient-proper-open-pasting"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of the proper and open compositors contracts the remaining word. Pullback associativity identifies the last transport with trianglePull. Repeat the same intrinsic calculation on simultaneous sequence sites, retaining quotient transitions before evaluation.",
+   "text": "For open composition use properOpenTensor_comp at finite coefficients. For systems, form the composite open tensor isomorphism and transpose its inverse under the composite open adjunction. The projection_transpose normalization, pullback tensor composition and the conjugate open compositor identify it with the native composite open tensor map. These are the generic open_tensor_composite_transpose and open_tensor_transport calculations proved in ProperOpenProjectionMate. Only tensor and compositor isomorphisms are inverted, never a proper projection.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pullback associativity to show that the transport left after the left expansion equals that left after the right expansion. The finite associativity equation is part of ambientProperOpenPasting; the recorded system compositors satisfy integralSystemCompositorAssociativity. Postcompose the normal-form equality by this common transport and apply the two expansions. Everything for systems remains in the intrinsic system category before evaluation.",
    "uses": [
     "lem-sf-ambient-proper-open-pasting",
-    "lem-coef-semilinear-derived-sections"
+    "lem-sf-integral-system-compositor-associativity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-triangle-projection-normal-form",
   "def-sf-composition-projection-data",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-sf-open-tensor-normalization",
+  "lem-sf-triangle-projection-normal-form",
+  "lem-sf-refinement-projection-proper-composition",
   "lem-sf-ambient-proper-open-pasting",
-  "lem-coef-semilinear-derived-sections"
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-integral-system-compositor-associativity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Proper/open support and the composition/refinement counit calculation"
+  "place": "Tags 0F7B--0F7K; blueprint composition/refinement sentence, with explicit categorical contraction and native finite/system compositor calculations (C9, 2026-10-28)"
  },
  "mathlib_searches": [
   {
@@ -132,13 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-78e02",
-  "group": "U7",
-  "result": "fix",
-  "landing": "20261025T144152-L-1203649",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261028T034716-L-3536444",
   "kind": "interface",
-  "note": "independent cc review: Item statement byte-identical to the clone; the 13 moved component declarations are verbatim in CompositionProjectionData (diff); ordinaryProperOpenMateIsIso checked against properOpenMate (Stacks 0F7B, non-Cartesian square, clopen lift); the contraction is the component conjunct of TriangleLaws; all 10 direct importers compile against the delivery; #print axioms has sorryAx only via the two new statements and existing upstream sorries"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
