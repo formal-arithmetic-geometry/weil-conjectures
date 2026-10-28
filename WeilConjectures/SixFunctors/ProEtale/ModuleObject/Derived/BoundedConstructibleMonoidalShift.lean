@@ -68,6 +68,7 @@ noncomputable abbrev commShiftTensorRightFamily (X : Scheme.{u}) :
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
 
 instance commShift_boundedConstructible_curriedTensor_map {K K' :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
