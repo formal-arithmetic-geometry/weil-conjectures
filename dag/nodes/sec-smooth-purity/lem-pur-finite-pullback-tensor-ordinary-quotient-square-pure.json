@@ -15,26 +15,46 @@
  },
  "proof": [
   {
-   "text": "Evaluate both transposed composites on a pure tensor in one bidegree. Naturality of the inverse-image and finite quotient units, hc, hcc, and the four supplied generator normalizations identify the values.",
+   "text": "Use the already proved total_pure_hom_ext helper from ScalarHomTensorCoherence to reduce equality of the transposed maps to their values on every homogeneous pure tensor in bidegree p,q with p+q=i. Expand each transpose by homEquiv_unit using proved private section-transport lemmas; keep direct-image and scalar-restriction section transports explicit.",
    "uses": [
-    "lem-pur-finite-pullback-tensor-kflat-normalization",
     "def-coef-ringed-tensor-hom-model",
-    "def-weil-proetale-inverse-image"
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-scalar-hom-tensor-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "The ordinary unit normalization in pullbackTensorCalculus identifies the scalar-adjunction units with coefficientFiniteQuotientUnitSection. Naturality of this unit moves the quotient image of km past the quotient unit. The supplied hkm and hax generator equations then identify the left path with the total tensor of the two iterated quotient/inverse-image unit sections. The total-tensor map generator formula applies the two components of cc to these factors.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-pur-finite-pullback-tensor-kflat-normalization",
+    "lem-pur-coefficient-total-tensor-map-generators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use hcc to replace the relevant components of cc by c. The given hc identifies both resulting factor sections and also the section on the right path before applying the lower pullback. Naturality of the inverse-image unit moves ay past that unit. The supplied hay and hkn generator equations identify the right path with the same homogeneous tensor. This proves each generator equality and hence the original transposed equality.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-finite-pullback-tensor-kflat-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-finite-pullback-tensor-kflat-normalization",
   "def-coef-ringed-tensor-hom-model",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "def-pur-completed-pullback-tower-core",
+  "lem-pur-finite-pullback-tensor-kflat-normalization",
+  "lem-pur-coefficient-total-tensor-map-generators"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B9",
+  "group": "S4",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 03EL, 06YY and 07A4."
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product, using the ordinary sheafified pure-tensor and unit calculations of Tags 03EL and 06YY."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -86,9 +106,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B9",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261028T020212-L-2478838",
+  "landing": "20261028T055752-L-806493",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
