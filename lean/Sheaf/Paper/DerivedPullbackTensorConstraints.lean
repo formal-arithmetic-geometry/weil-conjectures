@@ -9,6 +9,8 @@ public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.Paper.IntegralPullbackComposition
 
 import all Sheaf.Paper.PullbackTensorReductionCalculus
+import Sheaf.Paper.CommonStagePullbackCompComponent
+import Sheaf.Paper.CommonStagePullbackCompositionLocalization
 import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 import Sheaf.Paper.NormalizedCompletedOperationModels
 import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
@@ -226,6 +228,10 @@ def pullbackTensorRationalComposition {X Y Z : Scheme.{u}}
   ((@pullbackTensorRationalComposition_existsUnique l _ E _ _ _ X Y Z f h hX hY hZ) M).exists.choose
 
 
+section CommonCompositionProof
+attribute [local irreducible] commonStagePullbackCompComponent
+  commonStagePullbackRationalComposition ScalarLocalization.category
+
 /-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
 Source: Stacks 06YS, 07A4, 0941.
 (blueprint: lem-pur-derived-pullback-tensor-constraints-common-composition-existence). -/
@@ -253,7 +259,18 @@ theorem pullbackTensorCommonComposition_exists {X Y Z : Scheme.{u}}
               (commonStagePullbackComparison l Ω f M L hM).inv ≫
             (commonStagePullbackComparison l Ω h
               (commonStagePullbackObject l Ω f M) L hM).inv)) := by
-  sorry
+  refine ⟨commonStagePullbackCompComponent l Ω h f M, ?_⟩
+  intro L hM
+  let K := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L
+  have hu := pullbackTensorRationalComposition_existsUnique l K f h (M.toStage hM)
+  have hi : commonStagePullbackRationalComposition l Ω h f L M hM =
+      pullbackTensorRationalComposition l K f h (M.toStage hM) :=
+    hu.unique (commonStagePullbackRationalComposition_localization l Ω f h M L hM)
+      hu.exists.choose_spec
+  have hs := commonStagePullbackCompComponent_stage_representation l Ω h f M L hM
+  rw [hi] at hs
+  exact hs
+end CommonCompositionProof
 
 /-- Common-stage composition, specified at every larger finite coefficient field.
 Source: Stacks 07A4, 0941; blueprint coefficient conventions
