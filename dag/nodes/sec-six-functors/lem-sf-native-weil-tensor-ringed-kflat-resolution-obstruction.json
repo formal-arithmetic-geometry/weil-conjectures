@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-kflat-resolution-obstruction",
+ "kind": "statement",
+ "title": "The proposed strict native fraction package is false on nonempty schemes",
+ "statement": "Fix a finite field k0, a prime l, and a nonempty k0-scheme X. Let T be any additive bifunctor on native pro-etale Weil sheaves, with the additive partial functors and sum totals used in NativeTensorKFlat [def-sf-native-weil-tensor-presentation]. The conjunction of a strict right calculus of fractions for quasi-isomorphisms on native cochain complexes and K-flat replacement density is false. This refutes the current package without disputing actual K-flat replacement for the normalized tensor. The refutation is independent of the distinct-characteristic assumption in the original section.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/categories.tex",
+  "place": "Tag 014D, cone of an identity and its termwise split inclusion; Tag 04VC, RMS3 cancellation."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Assume the proposed conjunction and retain its first conjunct. Apply the general cone obstruction to the single complex of the native constant coefficient sheaf in degree zero. It is acyclic.",
+   "uses": [
+    "lem-sf-cochain-quasiiso-fraction-obstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The zeroth homology of a single complex is its sole term, so the native constant sheaf would be zero. Forget Frobenius and then adic module structure. These additive functors preserve zero objects. This makes the ordinary adic constant coefficient sheaf zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The geometric fiber of a nonempty scheme over k0 is nonempty (Scheme.Hom.nonempty_geometricFiber). The constant coefficient sheaf there has nonzero section 1, as proved by ProEtale.not_isZero_adicConstantSheaf. This contradiction refutes the package. On an empty scheme the nonzero-section argument is unavailable, exactly as the Nonempty hypothesis records.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-quasiiso-fraction-obstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/categories.tex",
+  "place": "Tag 014D, cone of an identity and its termwise split inclusion; Tag 04VC, RMS3 cancellation.",
+  "note": "A proved counterexample argument, not an additional unresolved resolution obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory.quasiIso",
+   "results": "12 hits; HomotopyCategory.instIsMultiplicativeQuasiIso, HomotopyCategory.quasiIso, HomotopyCategory.respectsIso_quasiIso, HomotopyCategory.homologyFunctor_inverts_quasiIso, HomotopyCategory.quasiIso_eq_quasiIso_map_quotient, HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso, HomotopyCategory.mem_quasiIso_iff, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+   "date": "2026-10-28",
+   "verdict": "No exact obstruction theorem; homotopy-category fraction calculus only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-isomorphisms of cochain complexes have no calculus of fractions before quotienting by homotopy",
+   "results": "8 hits; DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso, HomotopyCategory.quasiIso_eq_quasiIso_map_quotient",
+   "date": "2026-10-28",
+   "verdict": "No exact obstruction theorem; homotopy-category fraction calculus only."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*HasRightCalculusOfFractions|hasRightCalculusOfFractions.*quasiIso",
+   "results": "1 hits; Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact obstruction theorem; homotopy-category fraction calculus only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-isomorphisms on cochain complexes do not satisfy strict right fraction cancellation in a nonzero abelian category",
+   "results": "8 hits; quasiIso_comp, CategoryTheory.ShortComplex.QuasiIso.casesOn, HomotopyCategory.mem_quasiIso_iff, CategoryTheory.ShortComplex.quasiIso_of_comp_left, quasiIso_of_isIso, CategoryTheory.ShortComplex.QuasiIso.mk, quasiIso_of_comp_left, HomologicalComplex.instRespectsIsoQuasiIso",
+   "date": "2026-10-28",
+   "verdict": "No exact obstruction theorem; homotopy-category fraction calculus only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedKFlatResolution",
+  "group": "Q2",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-kflat-resolution",
+   "place": "Counterexample to the strict fraction-calculus clause of the native resolution package.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedKFlatResolution",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedKFlatResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_kflat_resolution_obstruction",
+  "statement": "theorem native_weil_tensor_ringed_kflat_resolution_obstruction [Nonempty X] :\n    ¬ (let W₀ := HomologicalComplex.quasiIso\n        (ProEtaleWeilSheaf k₀ l X) (.up ℤ)\n      W₀.HasRightCalculusOfFractions ∧\n        let P : ObjectProperty (CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :=\n          NativeTensorKFlat k₀ l X T\n        ∀ L : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,\n          ∃ (P' : P.FullSubcategory) (s : P.ι.obj P' ⟶ L), W₀ s)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261028T034916-L-3568131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261028T034916-L-3568131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
