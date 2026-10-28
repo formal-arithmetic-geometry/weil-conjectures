@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-horizontal-mate-transport",
+ "kind": "statement",
+ "title": "Horizontal pasting is invariant under compatible natural isomorphisms",
+ "statement": "For two presentations of the same six-category horizontal rectangle, let the seven edge functors, two composite horizontal functors, two horizontal compositors, and three square natural transformations be related by natural isomorphisms. Assume the two compositor comparison squares and three transformation comparison squares commute. At any object, horizontal pasting in the primed presentation implies horizontal pasting in the unprimed presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Elementary naturality and inverse cancellation in the horizontal transport step."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Postcompose with the invertible bridge at the common target and cancel the source horizontal compositor. Move comparison maps through the two compositor squares, use the three square comparison equations, and move maps across natural transformations by naturality. The resulting equation is the primed pasting equation. Cancel the invertible postcomposition to obtain the original equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Elementary naturality and inverse cancellation in the horizontal transport step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport horizontal pasting of natural transformations through natural isomorphisms between functors",
+   "results": "; 8 hits: CategoryTheory.NatIso.hcomp, CategoryTheory.NatIso.hcomp_hom, CategoryTheory.CatCommSq.hComp_iso_hom_app, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.CatCommSq.vComp_iso_hom_app, CategoryTheory.NatIso.trans_app, CategoryTheory.NatTrans.hcomp, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "; 9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|conjugateIsoEquiv",
+   "results": "; 15 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical bridge between sheaf coefficient system operations preserves open extension composition via adjunction uniqueness and localization",
+   "results": "; 8 hits: CategoryTheory.Sheaf.preservesSheafification_of_adjunction, CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.sheafComposeIso_hom_fac, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, stalkSkyscraperSheafAdjunction, PresheafOfModules.sheafificationAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingHorizontal",
+  "date": "2026-10-28",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Naturality calculation transporting the intrinsic horizontal equation",
+   "via": [
+    "lem-sf-integral-system-proper-open-transport-pasting-horizontal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.HorizontalMateTransport",
+  "file": "lean/Sheaf/SixFunctors/HorizontalMateTransport.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.horizontalMateTransport",
+  "statement": "theorem horizontalMateTransport\n    {A B C D E F : Type*}\n    [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]\n    {K K' : A ⥤ B} {L L' : B ⥤ E} {I I' : C ⥤ D} {J J' : D ⥤ F}\n    {R R' : A ⥤ C} {P P' : B ⥤ D} {Q Q' : E ⥤ F}\n    {Kc Kc' : A ⥤ E} {Ic Ic' : C ⥤ F}\n    {ck' : K' ⋙ L' ≅ Kc'} {ci' : I' ⋙ J' ≅ Ic'}\n    {g₁' : R' ⋙ I' ⟶ K' ⋙ P'} {g₂' : P' ⋙ J' ⟶ L' ⋙ Q'}\n    {g₀' : R' ⋙ Ic' ⟶ Kc' ⋙ Q'}\n    (eK : K ≅ K') (eL : L ≅ L') (eI : I ≅ I') (eJ : J ≅ J')\n    (eR : R ≅ R') (eP : P ≅ P') (eQ : Q ≅ Q')\n    (eKc : Kc ≅ Kc') (eIc : Ic ≅ Ic')\n    (ck : K ⋙ L ≅ Kc) (ci : I ⋙ J ≅ Ic)\n    (g₁ : R ⋙ I ⟶ K ⋙ P) (g₂ : P ⋙ J ⟶ L ⋙ Q)\n    (g₀ : R ⋙ Ic ⟶ Kc ⋙ Q)\n    (hk : ∀ M, ck.hom.app M ≫ eKc.hom.app M =\n      eL.hom.app (K.obj M) ≫ L'.map (eK.hom.app M) ≫ ck'.hom.app M)\n    (hi : ∀ M, ci.hom.app M ≫ eIc.hom.app M =\n      eJ.hom.app (I.obj M) ≫ J'.map (eI.hom.app M) ≫ ci'.hom.app M)\n    (h₁ : ∀ M, g₁.app M ≫ eP.hom.app (K.obj M) ≫ P'.map (eK.hom.app M) =\n      eI.hom.app (R.obj M) ≫ I'.map (eR.hom.app M) ≫ g₁'.app M)\n    (h₂ : ∀ M, g₂.app M ≫ eQ.hom.app (L.obj M) ≫ Q'.map (eL.hom.app M) =\n      eJ.hom.app (P.obj M) ≫ J'.map (eP.hom.app M) ≫ g₂'.app M)\n    (h₀ : ∀ M, g₀.app M ≫ eQ.hom.app (Kc.obj M) ≫ Q'.map (eKc.hom.app M) =\n      eIc.hom.app (R.obj M) ≫ Ic'.map (eR.hom.app M) ≫ g₀'.app M)\n    (M : A) :\n    (ci'.hom.app (R'.obj M) ≫ g₀'.app M ≫ Q'.map (ck'.inv.app M) =\n      J'.map (g₁'.app M) ≫ g₂'.app (K'.obj M)) →\n    ci.hom.app (R.obj M) ≫ g₀.app M ≫ Q.map (ck.inv.app M) =\n      J.map (g₁.app M) ≫ g₂.app (K.obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-28"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3cc60",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261028T081755-L-2781925",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3cc60",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261028T081755-L-2781925",
+  "kind": "interface",
+  "note": "independent cc review: hgamma of integralSystemProperOpenTransportPastingHorizontal with the parent's canonical premise (identical); new nodes' lean records and owner deps with the Lean; scratch set compile with #print axioms (all standard)"
+ }
+}

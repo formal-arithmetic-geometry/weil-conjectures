@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-system-open-compositor-bridge",
+ "kind": "statement",
+ "title": "The canonical integral-system bridge preserves a binary open compositor",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, an Operations package $o$ and its section-normalized Compositors $c$ [def-sf-integral-system-operations], and a section-normalized CanonicalBridge $b$ [def-sf-integral-system-canonical-bridge]. Write $J_j=o.\\mathrm{shriek}(j)$, $J^0_j$ for intrinsic semilinear open extension with scalarRings and scalarTransitions, $e_{j,k}:J_jJ_k\\cong J_{jk}$ for c.openComp, $e^0_{j,k}$ for the intrinsic jComp [def-sf-semilinear-proper-open-comparisons], and $b_j:J_j\\cong J^0_j$ for b.shriek. For arbitrary composable open immersions $j:U\\to V$, $k:V\\to X$ of schemes and every derived coefficient system $M$ on $U$, in diagrammatic composition order, $$e_{j,k}(M)\\gg b_{jk}(M)=b_k(J_jM)\\gg J^0_k(b_j(M))\\gg e^0_{j,k}(M).$$ There is no proper map, proper/open gamma, pasting equation, constructibility restriction or finite-evaluation hypothesis in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons preserve tensor reassociation, evaluation and adjunction units and counits; the binary open-composition case, expanded in the proof of lem-sf-integral-system-proper-open-transport."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sp-semilinear-constant-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use pull_bridge_composition from the proved bridge-push-composition module: the canonical inverse-image bridge preserves the binary pullback compositor.",
+   "uses": [
+    "lem-sf-integral-system-bridge-push-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the pullback comparison through the three open adjunctions. The proved conjugate_composition_injective, bridge_conjugate and conjugate_leftAdjointComp calculations identify adjoint uniqueness and leftAdjointCompIso. Naturality interchanges the two whiskered bridge factors; evaluation at M gives the required equation.",
+   "uses": [
+    "lem-sf-integral-system-bridge-push-composition",
+    "lem-sf-integral-system-ordinary-bridge-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-system-bridge-push-composition",
+  "lem-sf-integral-system-ordinary-bridge-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons preserve tensor reassociation, evaluation and adjunction units and counits; the binary open-composition case, expanded in the proof of lem-sf-integral-system-proper-open-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport horizontal pasting of natural transformations through natural isomorphisms between functors",
+   "results": "; 8 hits: CategoryTheory.NatIso.hcomp, CategoryTheory.NatIso.hcomp_hom, CategoryTheory.CatCommSq.hComp_iso_hom_app, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.CatCommSq.vComp_iso_hom_app, CategoryTheory.NatIso.trans_app, CategoryTheory.NatTrans.hcomp, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "; 9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|conjugateIsoEquiv",
+   "results": "; 15 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical bridge between sheaf coefficient system operations preserves open extension composition via adjunction uniqueness and localization",
+   "results": "; 8 hits: CategoryTheory.Sheaf.preservesSheafification_of_adjunction, CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.sheafComposeIso_hom_fac, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, stalkSkyscraperSheafAdjunction, PresheafOfModules.sheafificationAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-28",
+   "verdict": "No exact match for these project-specific bridge operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingHorizontal",
+  "date": "2026-10-28",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Binary open compositor normalization needed to transport the horizontal proper/open pasting equation",
+   "via": [
+    "lem-sf-integral-system-proper-open-transport-pasting-horizontal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemOpenCompositorBridge",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemOpenCompositorBridge.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemOpenCompositorBridge",
+  "statement": "theorem integralSystemOpenCompositorBridge\n    (o : Operations l E) (c : Compositors l E o) (b : CanonicalBridge l E o)\n    {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)\n    [IsOpenImmersion j] [IsOpenImmersion k] (M : System l E U) :\n    (c.openComp l E j k).hom.app M ≫ (b.shriek l E (j ≫ k)).hom.app M =\n      (b.shriek l E k).hom.app ((Operations.shriek l E o j).obj M) ≫\n        (ProEtale.SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) k).map\n          ((b.shriek l E j).hom.app M) ≫\n        (ProEtale.SemilinearProperOpen.jComp (scalarRings l E) (scalarTransitions l E)\n          j k).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-28"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3cc60",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261028T081755-L-2781925",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3cc60",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261028T081755-L-2781925",
+  "kind": "interface",
+  "note": "independent cc review: hgamma of integralSystemProperOpenTransportPastingHorizontal with the parent's canonical premise (identical); new nodes' lean records and owner deps with the Lean; scratch set compile with #print axioms (all standard)"
+ }
+}

@@ -102,7 +102,7 @@ theorem integralSystemProperOpenTransportPasting (o : Operations l E) (c : Compo
     Nonempty (ProperOpenTransportPasting l E o c a gamma) := by
   refine ⟨{
     vertical := integralSystemProperOpenTransportPastingVertical l E o c a gamma b canonical
-    horizontal := integralSystemProperOpenTransportPastingHorizontal l E o c a gamma
+    horizontal := integralSystemProperOpenTransportPastingHorizontal l E o c a gamma b canonical
     baseChange := integralSystemProperOpenTransportPastingBaseChange l E o c a gamma
   }⟩
 
