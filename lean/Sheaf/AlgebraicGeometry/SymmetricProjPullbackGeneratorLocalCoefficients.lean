@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientData
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.SymmetricProjPullbackGeneratorLocalCoefficientsQ
+import Sheaf.AlgebraicGeometry.SymmetricProjPullbackGeneratorLocalCoefficientsQPrime
 
 /-! Local coefficient charts for the normalized pullback generator relation.
 (blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).

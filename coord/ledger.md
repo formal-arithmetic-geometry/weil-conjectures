@@ -20684,3 +20684,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:06 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransition (stage 3; reviewer PASS; first push; landing 20261028T020637-L-2534107 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:06 L: merged deliver/Q2/Sheaf.Paper.ExceptionalIntegralScalarMates (stage 3; reviewer PASS; first push; landing 20261028T020638-L-2534416 (proof); batch 20261028T020127; modules 1; new nodes 1)
 - 02:06 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistMultiplication (stage 3; reviewer PASS; first push; landing 20261028T020644-L-2534814 (proof); batch 20261028T020127; modules 1; new nodes 0)
+- 02:06 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.SymmetricProjPullbackGeneratorLocalCoefficients (stage 3; reviewer PASS; first push; landing 20261028T020649-L-2535289 (interface); batch 20261028T020127; modules 3; new nodes 2)
