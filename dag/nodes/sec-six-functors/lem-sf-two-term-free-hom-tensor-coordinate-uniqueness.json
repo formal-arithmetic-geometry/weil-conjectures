@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-two-term-free-hom-tensor-coordinate-uniqueness",
+ "kind": "statement",
+ "title": "Signed coordinate map is unique",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "The Hom-product projections and local pure-tensor evaluation imply uniqueness of a chain map satisfying the signed evaluation formula in a fixed degree.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: finite-free coefficient Hom-tensor calculation"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Decompose the total tensor degree into the two surviving coefficient summands, transport each unit summand through the tensor-Hom adjunction, and use the product universal property to assemble the signed coordinate map. The coordinate signs square to one.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free tensor Hom product coordinate isomorphism",
+   "results": "No direct match; existing Hom-complex projections used.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (f.f j)",
+   "results": "General IsIso composition lemmas only.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex projections tensor total",
+   "results": "Existing source-library HomComplexProjections and Bifunctor APIs inspected.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TwoTermFreeHomTensorComponents",
+  "date": "2026-10-28",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-two-term-free-hom-tensor-components",
+   "place": "paragraph 1",
+   "via": [
+    "lem-sf-two-term-free-hom-tensor-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TwoTermFreeHomTensorCoordinateMap",
+  "file": "lean/Sheaf/Algebra/Homology/TwoTermFreeHomTensorCoordinateMap.lean",
+  "declaration": "WeilConjectures.IntegralHom.twoTermFreeHomTensor_coordinate_unique",
+  "statement": "theorem twoTermFreeHomTensor_coordinate_unique (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ) (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k)) (eNeg : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R))) (eZero : Q.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R))) (f g : ((totalTensor Y R).obj (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P (((totalTensor Y R).obj I).obj Q)) (hf : IsSignedHomTensor Y R P I Q f) (j : ℤ) (hg : ∀ (a b p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (v : (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I).X a |>.val.obj U) (z : (Q.X b).val.obj U) (x : (P.X p).val.obj U), evaluate Y R P (((totalTensor Y R).obj I).obj Q) (a + b) p U ((g.f (a + b)).val.app U (totalPair Y R (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I) Q a b U v z)) x = (b * p).negOnePow • (eqToHom (congrArg (fun k : ℤ ↦ (((totalTensor Y R).obj I).obj Q).X k) (add_assoc p a b))).val.app U (totalPair Y R I Q (p + a) b U (evaluate Y R P I a p U v x) z)) : f.f j = g.f j",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261028T020624-L-2530447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261028T020624-L-2530447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

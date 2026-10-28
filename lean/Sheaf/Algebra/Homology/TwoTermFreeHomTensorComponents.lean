@@ -6,6 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
+public import Sheaf.Algebra.Homology.TwoTermFreeHomTensorCoordinateMap
 
 /-! # Components of the two-term free Hom--tensor exchange
 
@@ -25,31 +26,6 @@ namespace WeilConjectures.IntegralHom
 
 variable (Y : AlgebraicGeometry.Scheme.{t})
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
-
-/-- The actual signed evaluation formula for tensoring an internal Hom complex.
-The degree transport only reassociates integer addition.
-Source: Stacks Tags 0A8X and 08J7, homogeneous tensor--Hom evaluation.
-(blueprint: lem-sf-two-term-free-hom-tensor-components). -/
-def IsSignedHomTensor
-    (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
-    (f : ((totalTensor Y R).obj
-        (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶
-      homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P
-        (((totalTensor Y R).obj I).obj Q)) : Prop :=
-  ∀ (a b p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
-    (v : (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I).X a
-      |>.val.obj U)
-    (z : (Q.X b).val.obj U) (x : (P.X p).val.obj U),
-    evaluate Y R P (((totalTensor Y R).obj I).obj Q) (a + b) p U
-        ((f.f (a + b)).val.app U
-          (totalPair Y R
-            (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)
-            Q a b U v z)) x =
-      (b * p).negOnePow •
-        (eqToHom (congrArg
-          (fun k : ℤ ↦ (((totalTensor Y R).obj I).obj Q).X k)
-          (add_assoc p a b))).val.app U
-            (totalPair Y R I Q (p + a) b U (evaluate Y R P I a p U v x) z)
 
 /-- A chain map with the signed evaluation formula is invertible in every degree
 when its coefficient complex has precisely two free rank-one terms.
@@ -86,6 +62,11 @@ theorem twoTermFreeHomTensor_component_isIso
         (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶
       homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P
         (((totalTensor Y R).obj I).obj Q))
-    (hf : IsSignedHomTensor Y R P I Q f) (j : ℤ) : IsIso (f.f j) := by sorry
+    (hf : IsSignedHomTensor Y R P I Q f) (j : ℤ) : IsIso (f.f j) := by
+  obtain ⟨g, hg, hformula⟩ :=
+    twoTermFreeHomTensor_coordinate_exists Y R P I Q hzero eNeg eZero j
+  have hfg := twoTermFreeHomTensor_coordinate_unique Y R P I Q hzero eNeg eZero f g hf j hformula
+  rw [hfg]
+  exact hg
 
 end WeilConjectures.IntegralHom
