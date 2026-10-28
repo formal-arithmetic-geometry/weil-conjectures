@@ -11,6 +11,7 @@ public import Sheaf.CategoryTheory.CyclicDerivedHomData
 
 /-! # The ordinary graded Hom map of native compact support
 
+
 Source: current blueprint, cor-coef-verdier-weil-equivariance.proof.md,
 exceptional-adjunction sentence, expanded by the finite-composite cyclic Hom sequence.
 (blueprint: lem-sf-native-exceptional-hom-transport).
@@ -67,25 +68,71 @@ def counitHomTransport (K H : W D l X) (r : ℤ)
       ((WeilComplex.forget).obj H) ≫
     ((counitForgetComparison D l f₀).inv.app H)⟦r⟧'
 
+/-- The action component of normalized cyclic transport.
+Source: cyclicDerivedHom_finite_composite_functorial, specialized to the native
+open/proper compactification.
+(blueprint: lem-sf-native-exceptional-hom-transport-action).
+Proof: instantiate the finite-composite functoriality theorem with the exact open
+extension and total right-derived proper pushforward. The comparison is the
+unit-normalized compactification comparison; its action square is the first
+component of that theorem. -/
+theorem counitHomTransport_action_compatible
+    (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left))
+    (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left))
+    (hbX : CyclicDerivedHomBoundaryNatural _ bX ∧ CyclicDerivedHomBoundaryNormalized _ bX)
+    (hbY : CyclicDerivedHomBoundaryNatural _ bY ∧ CyclicDerivedHomBoundaryNormalized _ bY)
+    (K H : W D l X) :
+    ∀ r v, counitHomTransport D l f₀ K H r
+        (cyclicDerivedHomAction _ K.obj H.obj r v) =
+      cyclicDerivedHomAction _ ((nativeShriek D l f₀).obj K).obj
+        ((nativeShriek D l f₀).obj H).obj r (counitHomTransport D l f₀ K H r v) := by
+  sorry
+
+/-- The degree-zero forgetting component of normalized cyclic transport.
+Source: cyclicDerivedHom_finite_composite_functorial, specialized to the native
+open/proper compactification.
+(blueprint: lem-sf-native-exceptional-hom-transport-forget).
+Proof: the forgetting square is the second component of finite-composite
+functoriality, with the canonical compactification comparison. -/
+theorem counitHomTransport_forget_compatible
+    (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left))
+    (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left))
+    (hbX : CyclicDerivedHomBoundaryNatural _ bX ∧ CyclicDerivedHomBoundaryNormalized _ bX)
+    (hbY : CyclicDerivedHomBoundaryNatural _ bY ∧ CyclicDerivedHomBoundaryNormalized _ bY)
+    (K H : W D l X) :
+    ∀ v : K ⟶ H, counitHomTransport D l f₀ K H 0
+        (cyclicDerivedForget _ K.obj H.obj v.hom) =
+      cyclicDerivedForget _ ((nativeShriek D l f₀).obj K).obj
+        ((nativeShriek D l f₀).obj H).obj ((nativeShriek D l f₀).map v).hom := by
+  sorry
+
+/-- The normalized boundary component of cyclic transport.
+Source: cyclicDerivedHom_finite_composite_functorial, specialized to the native
+open/proper compactification.
+(blueprint: lem-sf-native-exceptional-hom-transport-boundary).
+Proof: the connecting-map square is the third component of finite-composite
+functoriality; naturality and normalization identify the supplied boundary
+families with the canonical endpoint boundaries. -/
+theorem counitHomTransport_boundary_compatible
+    (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left))
+    (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left))
+    (hbX : CyclicDerivedHomBoundaryNatural _ bX ∧ CyclicDerivedHomBoundaryNormalized _ bX)
+    (hbY : CyclicDerivedHomBoundaryNatural _ bY ∧ CyclicDerivedHomBoundaryNormalized _ bY)
+    (K H : W D l X) :
+    ∀ v : CyclicDerivedHom (WeilSheaf.frobeniusPullback D.k₀ l X.base.left)
+        K.obj H.obj (-1),
+      ((nativeShriek D l f₀).map (ObjectProperty.homMk
+        (bX K.obj H.obj K.property.1 H.property.1 (QuotientAddGroup.mk v)))).hom =
+      bY ((nativeShriek D l f₀).obj K).obj ((nativeShriek D l f₀).obj H).obj
+        ((nativeShriek D l f₀).obj K).property.1 ((nativeShriek D l f₀).obj H).property.1
+        (QuotientAddGroup.mk (counitHomTransport D l f₀ K H (-1) v)) := by
+  sorry
+
 /-- The fixed ordinary map of native compact support preserves the cyclic action,
 forgetting, and the normalized connecting map on quotient representatives.
-
-Source: current blueprint, cor-coef-verdier-weil-equivariance.proof.md, exceptional
-adjunction sentence; lem-sf-native-exceptional-counit-hom-squares, Steps 2--3.
+Source: current blueprint, cor-coef-verdier-weil-equivariance.proof.md.
 (blueprint: lem-sf-native-exceptional-hom-transport).
-
-Proof: use the exact open and total right-derived proper generators of
-cyclicDerivedHom_finite_composite_functorial for the native compactification. The
-open comparison is the localization of the literal sheaf-level equality. The proper
-comparison is characterized by its derived unit on native K-injectives; uniqueness
-identifies it with compactificationComparison, including the coherent shift maps.
-Paste the two generators. The canonical restricted native functor is nativeShriek,
-and the ordinary composite is counitOrdinaryShriek. The finite-composite theorem
-requires boundedness only at source and final target, provided by the Weil complex
-properties. Its action, forgetting and boundary clauses give these three equations.
-Normalization and naturality identify the supplied boundary families with the
-canonical ones. Empty source or target uses the same constructions on zero groups;
-identity compactifications use the canonical unitors, with no new choice of signs. -/
+Proof: combine the action, forgetting and boundary components above. -/
 theorem counitHomTransport_compatible
     (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left))
     (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left))
@@ -106,6 +153,9 @@ theorem counitHomTransport_compatible
         (bX K.obj H.obj K.property.1 H.property.1 (QuotientAddGroup.mk v)))).hom =
       bY ((nativeShriek D l f₀).obj K).obj ((nativeShriek D l f₀).obj H).obj
         ((nativeShriek D l f₀).obj K).property.1 ((nativeShriek D l f₀).obj H).property.1
-        (QuotientAddGroup.mk (counitHomTransport D l f₀ K H (-1) v))) := by sorry
+        (QuotientAddGroup.mk (counitHomTransport D l f₀ K H (-1) v))) := by
+  exact ⟨counitHomTransport_action_compatible D l f₀ bX bY hbX hbY K H,
+    counitHomTransport_forget_compatible D l f₀ bX bY hbX hbY K H,
+    counitHomTransport_boundary_compatible D l f₀ bX bY hbX hbY K H⟩
 
 end WeilConjectures.NativeExceptionalForgetful

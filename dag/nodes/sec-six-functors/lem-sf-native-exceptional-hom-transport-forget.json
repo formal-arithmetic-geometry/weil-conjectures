@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-native-exceptional-hom-transport-forget",
+ "kind": "statement",
+ "title": "Degree-zero forgetting transport for native compact support",
+ "statement": "Specialize the normalized native compact-support cyclic Hom transport statement to its forget component, for the same D, l, f₀, boundary families bX,bY and native Weil complexes K,H.",
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+ },
+ "proof": [
+  {
+   "text": "Apply cyclicDerivedHom_finite_composite_functorial to the exact open extension and total right-derived proper pushforward for the native compactification, then unfold the restricted comparison. This is the forget projection of the resulting functoriality conjunction.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-forgetting",
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-open-proper-forgetting",
+  "lem-sf-cyclic-derived-hom-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "S1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Strict component split of lem-sf-native-exceptional-hom-transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functors of an equivariant exact open extension and a proper pushforward preserve the cyclic derived Hom boundary under the normalized forgetful comparison",
+   "results": "Eight hits concerning Ext maps of exact functors, representation resolutions, classical injective resolutions and Tor functors. None gives the native cyclic boundary comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\"",
+   "results": "Twelve hits for the general HasRightDerivedFunctor and IsRightDerivedFunctor interfaces and total derived functors; none states this native compact-support comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclicDerived|native_exceptional_counit",
+   "results": "No Mathlib hits via msearch. Local searches find CyclicDerivedHomExactSequence and CyclicDerivedLiftedCounitRepresents. The former uses a distinct right-derived implementation; the latter requires an assembled geometric presentation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalHomTransport",
+  "date": "2026-10-28",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-exceptional-hom-transport",
+   "place": "forget component split for staged proof",
+   "via": [
+    "lem-sf-native-exceptional-hom-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalHomTransport",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalHomTransport.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.counitHomTransport_forget_compatible",
+  "statement": "theorem counitHomTransport_forget_compatible (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left)) (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)) (hbX : CyclicDerivedHomBoundaryNatural _ bX ∧ CyclicDerivedHomBoundaryNormalized _ bX) (hbY : CyclicDerivedHomBoundaryNatural _ bY ∧ CyclicDerivedHomBoundaryNormalized _ bY) (K H : W D l X) : ∀ v : K ⟶ H, counitHomTransport D l f₀ K H 0 (cyclicDerivedForget _ K.obj H.obj v.hom) = cyclicDerivedForget _ ((nativeShriek D l f₀).obj K).obj ((nativeShriek D l f₀).obj H).obj ((nativeShriek D l f₀).map v).hom",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T020728-L-2542115",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T020728-L-2542115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
