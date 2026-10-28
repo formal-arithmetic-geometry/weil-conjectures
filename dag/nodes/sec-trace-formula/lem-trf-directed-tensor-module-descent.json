@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-directed-tensor-module-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 1--3, open-base part of step 9, and step 11. This child isolates original steps 1, 2, 3, 4, 5, 6, 7, 8, 11: Normalized degree-one symmetric Proj quotient and affine descent. This child handles Normalized twist descent: Tag 01NR (lemma-glue-relative-proj-twists), object gluing and compatibility, before constructing the graded section morphism. The present prerequisite is only the generic effectivity step (Stacks 01LI) after supplying coherent local modules; all graded-base-change and normalized fraction-comparison work stays in the parent Lean proof.",
+   "via": [
+    "lem-trf-relative-proj-twist-chart-descent-object",
+    "lem-trf-symmetric-proj-glued-sections",
+    "lem-trf-symmetric-proj-affine-comparison",
+    "lem-trf-symmetric-proj-normalized-descent",
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Effective module descent from coherent transitions on a locally directed open cover",
+ "statement": "Let X be a scheme and let U be a universe-small open cover whose indices form a thin category and whose transition maps make it locally directed (as in Mathlib Scheme.Cover.LocallyDirected). For each index i let M_i be a sheaf of modules on U_i. For each arrow f:i→j give an isomorphism t_f:f^*M_j≅M_i for the section-normalized tensor pullback [def-pc-module-pullback]. Suppose t_(f≫g) equals the composite of the equality transport along trans_comp, the normalized pullback composition isomorphism, the pullback of t_g and t_f. Then there exist a sheaf of modules L on X and charts c_i:(U_i→X)^*L≅M_i such that every arrow f:i→j gives c_i by composing the equality transport along trans_map, normalized pullback composition, the pullback of c_j and t_f. This assumes no grading, Proj structure, quasi-coherence or finiteness.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LI, lemma-relative-glueing-sheaves, proof: common refinements and overlap cocycle; general sheaves of modules version using Sheaves Tags 04TN, 00AL, 00AM."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Identify every open immersion of the cover with the inclusion of its open image. Transport M_i to that open. For an inclusion the section-normalized tensor pullback and ordinary restriction are canonically isomorphic by uniqueness of left adjoints to pushforward; the same uniqueness identifies their composition comparisons. Consequently ht is the ordinary restriction composition law. Apply ht to two identity arrows and cancel the invertible transition to obtain the canonical unit law.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each pair i,j, local directedness covers the intersection of the two open images by images of indices k equipped with arrows k→i,k→j. On such a refinement define the transition from M_i to M_j as t(k→i) followed by the inverse of t(k→j). Two refinements of this intersection admit further common refinements pointwise, again by local directedness. On those further refinements ht and cancellation show that the two formulas agree. The morphism gluing and locality clauses of glue_sheaves_of_modules therefore produce a unique overlap map; glue the inverse formulas too, and check both inverse identities locally. On a triple overlap refine simultaneously in all three indices. Cancellation of the middle transition proves the cocycle there, hence on the triple overlap by locality. This also proves the assertions on empty intersections.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the object-gluing clause of glue_sheaves_of_modules to these modules on the open images and their overlap isomorphisms. Obtain a module L and isomorphisms from its restrictions to M_i. For an arrow i→j, refine the overlap using i itself: the overlap map is exactly the transition t(i→j), by the unit law. The overlap compatibility of the glued charts is therefore the required chart square. Transport back along the open-image identifications and the canonical tensor-pullback/restriction comparisons. Their naturality gives precisely the eqToIso and tensorPullbackSectionComp in the displayed conclusion. Empty covers force the scheme empty, where the zero module gives the claim. No quasi-coherence or finiteness is used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LI, lemma-relative-glueing-sheaves, proof: common refinements and overlap cocycle; general sheaves of modules version using Sheaves Tags 04TN, 00AL, 00AM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "glue|descent (Mathlib/Algebra/Category/ModuleCat/Sheaf)",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-27",
+   "verdict": "no exact match: basic sheaf/module constructions, section gluing, presentations or scheme morphism descent; no effectivity for this normalized module pullback datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue sheaves of modules on a locally directed open cover from compatible pullback isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected; AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left; AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected; TopCat.Sheaf.existsUnique_gluing; TopCat.Sheaf.existsUnique_gluing'; AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected",
+   "date": "2026-10-27",
+   "verdict": "no exact match: basic sheaf/module constructions, section gluing, presentations or scheme morphism descent; no effectivity for this normalized module pullback datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "SheafOfModules; SheafOfModules.unit; SheafOfModules.instCategory; SheafOfModules.sections; SheafOfModules.Hom; SheafOfModules.instPreadditive; SheafOfModules.sectionsFunctor; SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-27",
+   "verdict": "no exact match: basic sheaf/module constructions, section gluing, presentations or scheme morphism descent; no effectivity for this normalized module pullback datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules with coherent pullback isomorphisms on a locally directed open cover descend to a global module with compatible local isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules; SheafOfModules.pullback; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjFreeIso.congr_simp; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.QuasicoherentData.mk; ModuleCat.tildeInModuleCat",
+   "date": "2026-10-27",
+   "verdict": "no exact match: basic sheaf/module constructions, section gluing, presentations or scheme morphism descent; no effectivity for this normalized module pullback datum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentObject",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectedTensorModuleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectedTensorModuleDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_directed_tensor_module_descent",
+  "statement": "theorem exists_directed_tensor_module_descent\n    {X : Scheme.{u}} (𝒰 : X.OpenCover.{u}) [Category.{v} 𝒰.I₀]\n    [𝒰.LocallyDirected] [Quiver.IsThin 𝒰.I₀]\n    (M : ∀ i : 𝒰.I₀, (𝒰.X i).Modules)\n    (t : ∀ {i j : 𝒰.I₀} (f : i ⟶ j), (tensorPullback (𝒰.trans f)).obj (M j) ≅ M i)\n    (ht : ∀ {i j k : 𝒰.I₀} (f : i ⟶ j) (g : j ⟶ k),\n      t (f ≫ g) =\n        eqToIso (congrArg (fun a ↦ (tensorPullback a).obj (M k)) (𝒰.trans_comp f g)) ≪≫\n          (tensorPullbackSectionComp (𝒰.trans f) (𝒰.trans g)).app (M k) ≪≫\n          (tensorPullback (𝒰.trans f)).mapIso (t g) ≪≫ t f) :\n    ∃ (L : X.Modules) (chart : ∀ i : 𝒰.I₀, (tensorPullback (𝒰.f i)).obj L ≅ M i),\n      ∀ {i j : 𝒰.I₀} (f : i ⟶ j),\n        eqToIso (congrArg (fun a ↦ (tensorPullback a).obj L) (𝒰.trans_map f).symm) ≪≫\n          (tensorPullbackSectionComp (𝒰.trans f) (𝒰.f j)).app L ≪≫\n          (tensorPullback (𝒰.trans f)).mapIso (chart j) ≪≫ t f = chart i",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261028T020635-L-2533588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261028T020635-L-2533588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
