@@ -54,7 +54,15 @@ theorem second_pull_comparison_inv_expansion
         (secondLineComparison l c k p hpl Y)
         ((moduleObjectDerivedPullback (coefficient l c).X
           (ProjectiveLine Y ↘ Y)).obj K)).symm).inv := by
-  sorry
+  have hp : hproj = (fun x ↦ (residueIsUnit l k p hpl _
+      ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible) :=
+    Subsingleton.elim _ _
+  have hd : hdiag = (fun x ↦ (residueIsUnit l k p hpl _
+      (secondProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible) :=
+    Subsingleton.elim _ _
+  subst hproj hdiag
+  unfold secondPullComparison
+  rfl
 
 /-- The inverse expansion after applying diagonal pullback. This is the form used by
 section restriction, so rewriting does not unfold the large comparison definition. -/
