@@ -526,7 +526,8 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
     have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
     have : IsNoetherian P.total := {}
     exact fun C D hC hD ↦
-      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ) hC hD
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges
