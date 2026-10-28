@@ -8641,6 +8641,7 @@ public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
 public import WeilConjectures.CategoryTheory.Shift.ConnectingLift
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.Shift.ShiftDecomposition
+public import WeilConjectures.CategoryTheory.Shift.ShiftDecompositionIsIso
 public import WeilConjectures.CategoryTheory.ShiftSaturatedIsoLocus
 public import WeilConjectures.CategoryTheory.SimplexMonoPullback
 public import WeilConjectures.CategoryTheory.SimplexPresentationFaithful
@@ -13879,6 +13880,7 @@ public import WeilConjectures.TraceFormula.Specialization.DiagExternalProduct
 public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
+public import WeilConjectures.TraceFormula.Specialization.FinitePointConservative
 public import WeilConjectures.TraceFormula.Specialization.FinitePointReflection
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
@@ -13972,6 +13974,8 @@ public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeFinite
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeSquare
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit

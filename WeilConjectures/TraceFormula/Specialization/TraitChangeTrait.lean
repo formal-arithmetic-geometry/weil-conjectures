@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Iso
 
 /-!
 
@@ -48,35 +49,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-/-! ### Abstract lemma -/
-
-namespace CategoryTheory.ShiftDecomposition
-
-variable {C D : Type*} [Category C] [Preadditive C] [HasShift C ℤ] [Category D] [Preadditive D]
-  [HasShift D ℤ] {F G : C ⥤ D} [F.Additive] [G.Additive] [F.CommShift ℤ] [G.CommShift ℤ]
-
-/-- A natural transformation between additive functors commuting with the shifts which is invertible
-at `E` is invertible at every finite direct sum `P = ⨁ⱼ E⟦nⱼ⟧` of shifts of `E`. -/
-lemma isIso_app_of_commShift (τ : F ⟶ G) [NatTrans.CommShift τ ℤ] {E P : C}
-    (Dc : ShiftDecomposition E P) (h : IsIso (τ.app E)) : IsIso (τ.app P) :=
-  isIso_app τ Dc fun j ↦ by
-    rw [NatTrans.app_shift τ]
-    infer_instance
-
-end CategoryTheory.ShiftDecomposition
-
-namespace CategoryTheory
-
-/-- In an equation `a ≫ b = c ≫ d ≫ e` with `a`, `b`, `c`, `e` invertible, `d` is invertible. -/
-lemma isIso_of_comp_eq_comp_comp {C : Type*} [Category C] {P Q R S T : C} {a : P ⟶ Q}
-    {b : Q ⟶ R} {c : P ⟶ S} {d : S ⟶ T} {e : T ⟶ R} (h : a ≫ b = c ≫ d ≫ e) [IsIso a]
-    [IsIso b] [IsIso c] [IsIso e] : IsIso d := by
-  have : d = inv c ≫ a ≫ b ≫ inv e := by simp [reassoc_of% h]
-  rw [this]
-  infer_instance
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
