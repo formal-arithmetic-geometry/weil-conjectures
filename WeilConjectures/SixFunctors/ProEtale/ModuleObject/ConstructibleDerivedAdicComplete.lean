@@ -114,8 +114,8 @@ lemma isFinitelyPresented_upperStar_opens_ι_comp {X Y U : Scheme.{u}} (i : Y �
 
 /-- The composite `W ⟶ U ⟶ Y ⟶ X` of the inclusion of an affine open, a morphism and a
 morphism from a quasi-compact scheme is quasi-compact. -/
-lemma quasiCompact_opens_ι_comp {X Y U : Scheme.{u}} [IsNoetherian X] (i : Y ⟶ X) (f : U ⟶ Y) (W : U.Opens)
-    (hW : IsAffine W) : QuasiCompact (W.ι ≫ f ≫ i) :=
+lemma quasiCompact_opens_ι_comp {X Y U : Scheme.{u}} [IsNoetherian X] (i : Y ⟶ X) (f : U ⟶ Y)
+    (W : U.Opens) (hW : IsAffine W) : QuasiCompact (W.ι ≫ f ≫ i) :=
   quasiCompact_of_compactSpace _
 
 /-- A point `i (f z)` with `z ∈ W` lies in the range of `W ⟶ U ⟶ Y ⟶ X`. -/
