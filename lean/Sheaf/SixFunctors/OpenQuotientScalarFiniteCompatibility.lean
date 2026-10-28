@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarFiniteCompatibilityGenerator
+import Sheaf.SixFunctors.OpenQuotientScalarFiniteCompatibilityAssembly
 
 /-! # Finite scalar compatibility for an open quotient
 
@@ -32,7 +34,10 @@ theorem openQuotientScalarFiniteCompatibility
     (o : IntegralOpenReduction.Operations l E j) :
     Nonempty (∀ n : ℕ,
       IntegralOpenReduction.finiteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅
-        scalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o) := by
-  sorry
+        scalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o)  := by
+  classical
+  apply openQuotientScalarFiniteCompatibilityAssembly l E j o
+  intro n
+  exact finiteScalarLevelData_exists l E j o n
 
 end WeilConjectures.OpenTensorQuotient

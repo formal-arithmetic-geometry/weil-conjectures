@@ -20885,3 +20885,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/R2/Sheaf.Paper.PodReindexingCompletedEvaluationReflection (stage 3; reviewer PASS; first push; landing 20261028T034924-L-3569479 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:49 L: merged deliver/R3/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransitionFraction (stage 3; reviewer PASS; first push; landing 20261028T034925-L-3569661 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/R4/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransitionRead (stage 3; reviewer PASS; first push; landing 20261028T034926-L-3569925 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:49 L: merged deliver/R4/Sheaf.SixFunctors.OpenQuotientScalarFiniteCompatibility (stage 3; reviewer PASS; first push; landing 20261028T034927-L-3570111 (interface); batch 20261028T034643; modules 3; new nodes 2)
