@@ -13,32 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Use the geometric-stalk equivalence with discrete absolute Galois modules and the section/invariants comparison. For finite $K$, the absolute Galois group is the profinite completion of the integers.",
+   "text": "Use the proved source etaleSheafEquivDiscreteModule and sheafHAddEquivGaloisH, from WeilConjectures.AlgebraicGeometry.Sites.GaloisModule, for the geometric stalk at a separable closure. The point torsion theorem makes the resulting discrete module elementwise torsion. These source results provide the sheaf/Galois equivalence and section/invariants comparison directly.",
    "uses": [
     "lem-exc-abelian-sheaves-gmodules",
     "lem-exc-field-sections-stalk-invariants",
-    "det-base-field-cd-galois-group"
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
    "elementary": false
   },
   {
-   "text": "Every torsion discrete module for the profinite integers is the directed union of finite stable submodules. Continuous cohomology commutes with this directed union and with the colimit over finite cyclic quotients.",
+   "text": "For each open subgroup U, infinite Galois correspondence identifies U with the absolute Galois group of its fixed field E. The extension E/K is finite, so E is a finite field. Transport constant-coefficient cohomology along E.fixingSubgroupContinuousMulEquiv (the proved source DiscreteModule transport lemma).",
    "uses": [
-    "det-base-field-cd-cochains"
+    "def-pd-separable-closure"
    ],
    "elementary": false
   },
   {
-   "text": "For a finite stable module, choose an exponent annihilating it and factor the action through a finite cyclic quotient. Inflation along the quotient map from a cyclic group of order $n$ to one of order $en$ is zero in every degree at least two when the module is killed by $e$. Hence the cyclic quotient colimit vanishes in those degrees.",
+   "text": "For each prime ell, if ell is zero in E, affine Artin-Schreier vanishing gives H²(Spec E, Z/ell)=0; the constant-sheaf Galois comparison gives H²(Gal(Ks/E), Z/ell)=0. Otherwise apply lem-sfb-finite-field-prime-degree-two. Hence constant prime degree-two cohomology vanishes on every open subgroup.",
    "uses": [
-    "det-base-field-cd-inflation"
+    "lem-sc-affine-artin-schreier-vanishing",
+    "lem-sfb-finite-field-prime-degree-two"
    ],
    "elementary": false
   },
   {
-   "text": "Transfer the vanishing from continuous Galois cohomology to étale cohomology of every torsion sheaf, then unfold HasTorsionEtaleCohomologicalDimensionLE.",
+   "text": "Apply the proved all-torsion version of the degree-two criterion, DiscreteModule.subsingleton_H_of_two_le_of_isTorsion in WeilConjectures.RepresentationTheory.DiscreteModule.Torsion. It extends the ell-primary criterion lem-sc-group-cd-one by the finite primary decomposition and finite-stable-submodule union, and shifts all higher degrees using the coinduced cokernel, which remains torsion. This is a generic devissage tool; the finite cyclic/inflation computation remains in the preceding prime degree-two lemma.",
    "uses": [
-    "det-base-field-cd-cochains",
+    "lem-sc-group-cd-one"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer vanishing back to Sheaf.H. Apply nonempty_sheafH_extDerivedIso to identify its abelian-group-valued functor with ordinary derived global sections of the degree-zero sheaf. Unfold the torsion cohomological-dimension predicate; q>1 gives q≥2.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
     "def-sc-etale-torsion-cd"
    ],
    "elementary": false
@@ -47,16 +55,19 @@
  "proof_deps": [
   "lem-exc-abelian-sheaves-gmodules",
   "lem-exc-field-sections-stalk-invariants",
-  "det-base-field-cd-galois-group",
-  "det-base-field-cd-cochains",
-  "det-base-field-cd-inflation",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "def-pd-separable-closure",
+  "lem-sc-affine-artin-schreier-vanishing",
+  "lem-sfb-finite-field-prime-degree-two",
+  "lem-sc-group-cd-one",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "def-sc-etale-torsion-cd"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
-  "place": "finite-field torsion bound, paragraphs Reduction to finite modules through Consequences",
-  "note": "The existing recorded finite-field theorem is in a module that imports the item, creating a cycle; this module states the prerequisite independently for the item proof."
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+  "place": "Reduction to finite modules, Finite modules, and Consequences",
+  "note": "Q9: use the already proved generic all-torsion degree-two criterion and the source Galois/Ext comparisons. Keep the cyclic quotient/inflation argument in the strict subproblem lem-sfb-finite-field-prime-degree-two. Characteristic-primary constant coefficients are discharged by the proved generic affine Artin-Schreier tool. The unit statement and finite cyclic core are preserved."
  },
  "mathlib_searches": [
   {
@@ -129,12 +140,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "Q9",
   "result": "pass",
-  "landing": "20261020T230723-L-604969",
+  "landing": "20261028T072443-L-1950224",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

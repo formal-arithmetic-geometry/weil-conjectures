@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
+import Sheaf.RepresentationTheory.FiniteFieldPrimeCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.GaloisModule
+import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.CategoryTheory.Sites.Point.Torsion
+import WeilConjectures.RepresentationTheory.DiscreteModule.Torsion
 
 /-!
 # Torsion cohomological dimension of a finite base field
@@ -42,6 +48,41 @@ torsion étale sheaf.
 theorem hasTorsionEtaleCohomologicalDimensionLE_one_of_finite_baseField
     (K : Type u) [Field K] [Finite K] :
     HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 1 := by
-  sorry
+  intro F hF q hq
+  let Ω := SeparableClosure K
+  have htwo : ∀ (ℓ : ℕ) [Fact ℓ.Prime] (U : Subgroup Gal(Ω/K)),
+      IsOpen (U : Set Gal(Ω/K)) →
+        Subsingleton (DiscreteModule.H U (DiscreteModule.trivialZMod.{u + 1} U ℓ) 2) := by
+    intro ℓ _ U hU
+    have hE := InfiniteGalois.fixingSubgroup_fixedField_of_isOpen U hU
+    have : FiniteDimensional K (IntermediateField.fixedField U) :=
+      InfiniteGalois.finiteDimensional_fixedField_of_isOpen U hU
+    let E := IntermediateField.fixedField U
+    have : Finite E := Module.finite_of_finite K
+    have : Algebra.IsSeparable E Ω := Algebra.isSeparable_tower_top_of_isSeparable K E Ω
+    have : IsSepClosure E Ω := ⟨inferInstance, inferInstance⟩
+    rw [← hE]
+    have htwoE : Subsingleton (DiscreteModule.H Gal(Ω/E)
+        (DiscreteModule.trivialZMod.{u + 1} Gal(Ω/E) ℓ) 2) := by
+      by_cases hchar : (ℓ : E) = 0
+      · have := (Spec (.of E)).subsingleton_sheafH_constantZMod_of_isAffine ℓ
+          (by simpa using congrArg (ΓSpecIso (.of E)).inv.hom hchar) 2 le_rfl
+        exact (sheafHConstantSheafAddEquivGaloisH E Ω _ 2).symm.injective.subsingleton
+      · exact DiscreteModule.subsingleton_H_two_trivialZMod_of_finiteField E Ω ℓ hchar
+    have := htwoE
+    exact DiscreteModule.subsingleton_H_trivialZMod_of_continuousMulEquiv.{u + 1}
+      E.fixingSubgroupContinuousMulEquiv ℓ 2
+  have htors : ∀ x : ((etaleSheafEquivDiscreteModule K Ω).functor.obj F).obj.V,
+      IsOfFinAddOrder x :=
+    ((pointSmallEtale (specAlgebraMap K Ω)).ulift.{u + 1}).isAddTorsion_sheafFiber hF
+  have := DiscreteModule.subsingleton_H_of_two_le_of_isTorsion htwo _ htors (by omega : 2 ≤ q)
+  have : Subsingleton (CategoryTheory.Sheaf.H F q) :=
+    (sheafHAddEquivGaloisH K Ω F q).injective.subsingleton
+  have : Subsingleton ((CategoryTheory.Sheaf.functorH.{u + 1}
+      (Spec (.of K)).smallEtaleTopology q).obj F) := by
+    change Subsingleton (CategoryTheory.Sheaf.H F q)
+    infer_instance
+  obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso (Spec (.of K)) q
+  exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
 
 end AlgebraicGeometry.Scheme
