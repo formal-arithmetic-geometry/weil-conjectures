@@ -214,6 +214,12 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
       (L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
         (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
           L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+    have : LocallyOfFiniteType (Over.mk (φ₁.generic ≫ gM)).hom :=
+      MorphismProperty.of_isPullback hP.isPullback_j hP.locallyOfFiniteType
+    have : QuasiCompact (Over.mk (φ₁.generic ≫ gM)).hom :=
+      MorphismProperty.of_isPullback hP.isPullback_j hP.quasiCompact
+    have : IsSeparated (Over.mk (φ₁.generic ≫ gM)).hom :=
+      MorphismProperty.of_isPullback hP.isPullback_j hP.isSeparated
     have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         P.generic)).IsMonoidal :=
       isMonoidal_boundedConstructible (X := Over.mk (φ₁.generic ≫ gM)) (ℓ := ℓ)
