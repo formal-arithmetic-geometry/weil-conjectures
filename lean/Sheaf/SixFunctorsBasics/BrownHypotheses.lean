@@ -6,6 +6,10 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.SixFunctorsBasics.BrownHypothesesDefinitions
+import Sheaf.SixFunctorsBasics.BrownHypothesesCriteria
+import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 
 /-!
 # Hypotheses of Brown representability
@@ -13,7 +17,8 @@ public import Sheaf.SixFunctorsBasics.BrownHypothesesDefinitions
 Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md.
 The original arbitrary-field compactness assertion remains disputed. The bundle lives
 in `BrownHypothesesDefinitions`; proved criteria and conditional obstructions live in
-`BrownHypothesesCriteria`, which this unresolved assertion does not import.
+`BrownHypothesesCriteria`. The integral specialization below retains the finite or
+separably closed base-field hypothesis of the upstream Ext bound.
 -/
 
 @[expose] public section
@@ -35,6 +40,67 @@ attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
 attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
   AlgebraicGeometry.ProEtale.CondensedRing.upperStar
+
+open scoped CategoryTheory.Obj in
+private theorem ordinary_constructible_of_constant_model
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsConstantModelConstructible Λ X M) :
+    IsConstructibleModuleObject (condensedRingObj Λ X) M := by
+  classical
+  rw [IsConstantModelConstructible, if_pos ⟨inferInstance, inferInstance⟩] at hM
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  let φ := condensedPullbackHom Λ (S.immersion a)
+  have h := (hS a).isLocallyFinitelyPresented _
+  unfold CondensedRing.upperStar at h
+  exact lfp_of_comap (inv φ)
+    (lfp_of_iso h ((Mod.extendScalarsIsoComapInv φ).app _))
+
+open scoped CategoryTheory.Obj in
+/-- Integral Brown hypotheses over a finite or separably closed base field.
+The field restriction is explicit; positive characteristic alone does not imply it.
+
+Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraph 2,
+and sk-lem-int-ext, uniform Ext-bound clause, with the field restriction of
+`hasUniformConstructibleExtBound_padicIntegersRingObj` retained.
+(blueprint: lem-sfb-brown-integral-finite-or-separably-closed).
+
+Proof: finite type over a field makes X compact, and separatedness makes it
+quasi-separated. A finite constant presentation on each stratum is a local finite
+presentation after transport across the canonical coefficient isomorphism. Thus the
+upstream Ext bound applies to the actual constant-model constructible sheaves.
+For its single-degree bound n ≤ N use the shifted-Hom bound q > -N; the canonical
+isomorphism N[0][q] ≅ N[-q] identifies the groups. The integral Brown equivalence
+then supplies compactness, the ambient structures, thickness, smallness and generation.
+The empty scheme and zero sheaves require no separate assumption. -/
+theorem brownHypotheses_padicIntegers_of_finite_or_separablyClosed
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] (hk : Finite k ∨ IsSepClosed k) :
+    BrownHypothesesFor (Profinite.padicIntegersRingObj ℓ E) X := by
+  let _ : Fact (ringChar k ≠ ℓ) := ⟨(ringChar.eq k p) ▸ hpℓ⟩
+  let _ : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  let _ : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated
+    (X ↘ Spec (.of k))
+  have hb := CondensedRing.hasUniformConstructibleExtBound_padicIntegersRingObj
+    ℓ E (X ↘ Spec (.of k)) hk
+  apply (brownHypothesesFor_padicIntegers_iff_ext_bounded ℓ E k p hp hpℓ X).mpr
+  intro C
+  obtain ⟨d, hd⟩ := hb C.obj
+    (ordinary_constructible_of_constant_model _ X C.obj C.property)
+  refine ⟨-d, fun N q hq ↦ ?_⟩
+  have hN := ordinary_constructible_of_constant_model _ X N.obj N.property
+  let e := ((DerivedCategory.singleFunctors _).shiftIso q (-q) 0 (by omega)).app N.obj
+  refine ⟨fun f g ↦ ?_⟩
+  apply (cancel_mono e.hom).mp
+  exact (hd N.obj hN (-q) (by omega) (f ≫ e.hom)).trans
+    (hd N.obj hN (-q) (by omega) (g ≫ e.hom)).symm
 
 -- STATEMENT-DISPUTED: The arbitrary-field compactness assertion lacks a finiteness
 -- hypothesis on the base field. The finite/rational compactness dependencies require

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-brown-integral-finite-or-separably-closed",
+ "kind": "statement",
+ "title": "Integral Brown hypotheses over finite or separably closed base fields",
+ "statement": "Let $\\ell$ be prime and $E\\subseteq\\overline{\\mathbf Q}_\\ell$ a finite intermediate extension of $\\mathbf Q_\\ell$. Let $\\Lambda=\\underline{\\mathcal O_E}$ be its condensed ring of integers [def-sfb-padic-integers-condensed-ring]. Let $k$ be a field of characteristic $p>0$ with $p\\ne\\ell$, and let $X$ be a separated finite-type $k$-scheme [sk-def-sfb-dc-setting]. Assume that $k$ is finite or separably closed [def-pc-separably-closed]. Then the full Brown bundle $\\operatorname{BrownHypothesesFor}(\\Lambda,X)$ [lem-sfb-brown-hypotheses-criterion] holds, with the finite constant-model constructibility convention [sk-def-sfb-constructible]. In particular the bounded constructible finite-Tor objects are compact in their replete localizing closure; this assertion retains the additional hypothesis on $k$.",
+ "stmt_deps": [
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "def-pc-separably-closed",
+  "lem-sfb-brown-hypotheses-criterion",
+  "sk-def-sfb-constructible"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2, integral compactness and Brown assembly; sk-lem-int-ext uniform Ext-bound clause, with the finite-or-separably-closed hypothesis of the upstream Lean theorem retained"
+ },
+ "proof": [
+  {
+   "text": "Quasi-compactness of the finite-type structure map over Spec k makes X compact. Separatedness makes X quasi-separated. A finite constant-model constructible sheaf therefore has one finite stratification. On each stratum a finite constant local model is locally finitely presented. Transport local finite presentation across the canonical coefficient isomorphism, using extension of scalars isomorphic to restriction along its inverse. This proves ordinary constructibility in the sense used by the upstream Ext-bound theorem.",
+   "uses": [
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The characteristic identity ringChar k = p gives invertibility of ell. Apply the integral uniform constructible Ext-bound theorem with exactly the retained disjunction that k is finite or separably closed. For each source C it supplies an integer d such that every map from C in degree zero to N in single degree n is zero whenever n <= d, uniformly over constructible N. For q > -d one has -q < d, hence -q <= d. The canonical shift isomorphism N[0][q] is isomorphic to the single complex in degree -q. Postcomposition with this isomorphism identifies the desired Hom group with a zero Hom group, so it is subsingleton. No nonnegativity of d or nonzero-source assumption is needed.",
+   "uses": [
+    "lem-sfb-uniform-constructible-ext-bound-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse implication of the integral Brown-versus-Ext equivalence to these shifted-Hom bounds. It supplies the entire Brown bundle, including ambient structure, thickness, essential smallness, compactness and generation. The original arbitrary-field assertion is not used.",
+   "uses": [
+    "lem-sfb-brown-integral-ext-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-uniform-constructible-ext-bound-integral",
+  "lem-sfb-brown-integral-ext-criterion"
+ ],
+ "proof_origin": {
+  "by": "C3 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2, integral compactness and Brown assembly; sk-lem-int-ext uniform Ext-bound clause, with the finite-or-separably-closed hypothesis of the upstream Lean theorem retained",
+  "note": "Supported integral specialization only. The unrestricted original Brown theorem is unchanged and remains disputed. All proof steps are Lean proofs from existing declared dependencies; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible finite Tor complexes are compact in the localizing subcategory over a finite or separably closed field",
+   "results": "Eight derived-category t-structure, bounded-representative and small Ext infrastructure hits; no exact compact-generation or Brown bundle theorem. Existing project uniform Ext bound and Brown equivalence are reused.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObj\"",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Gg]enerat|[Ff]inite.*[Cc]ohomological",
+   "results": "No Mathlib CategoryTheory hits. Project source search found the integral Brown equivalence and the upstream finite-or-separably-closed uniform Ext bound; both reused. Blueprint Brown and integral compact searches found no existing node for this explicit specialization.",
+   "date": "2026-10-28",
+   "verdict": "existing project inputs reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-28",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "paragraph 2, integral compactness and Brown assembly; sk-lem-int-ext uniform Ext-bound clause, with the finite-or-separably-closed hypothesis of the upstream Lean theorem retained",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypotheses_padicIntegers_of_finite_or_separablyClosed",
+  "statement": "theorem brownHypotheses_padicIntegers_of_finite_or_separablyClosed\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] (hk : Finite k ∨ IsSepClosed k) :\n    BrownHypothesesFor (Profinite.padicIntegersRingObj ℓ E) X",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261028T072348-L-1937428",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261028T072348-L-1937428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
