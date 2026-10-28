@@ -42,7 +42,7 @@ universe u
 
 /-- The conjugate `j_{s ≫ g}^* ≅ j_g^* ⋙ j_s^*` of the composition isomorphism of
 pushforwards, for the restrictions along the localization functors. -/
-noncomputable abbrev localizationRestrictionComp {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y)
+noncomputable abbrev localizationRestrictionCompConjugate {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y)
     (g : Y ⟶ X) [WeaklyEtale s] [WeaklyEtale g] :
     localizationRestriction AddCommGrpCat.{u + 1} (s ≫ g) inferInstance ≅
       localizationRestriction AddCommGrpCat.{u + 1} g inferInstance ⋙
@@ -126,7 +126,7 @@ lemma localizationUnitTransport_hom_app {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g 
           ((localizationRestriction AddCommGrpCat.{u + 1} g inferInstance).obj H)) ≫
       (lowerStarComp AddCommGrpCat.{u + 1} s g).hom.app _ ≫
       (s ≫ g)_*[AddCommGrpCat.{u + 1}].map
-        ((localizationRestrictionComp s g).inv.app H)).hom.app (op V) =
+        ((localizationRestrictionCompConjugate s g).inv.app H)).hom.app (op V) =
       H.obj.map (((MorphismProperty.Over.mapComp (Q := ⊤) (inferInstance : WeaklyEtale s)
         (inferInstance : WeaklyEtale g)).hom.app
           ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (s ≫ g)).obj V) ≫
@@ -233,7 +233,7 @@ lemma localizationUnitTransport_eq {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g : Y �
           ((localizationRestriction AddCommGrpCat.{u + 1} g inferInstance).obj H)) ≫
       (lowerStarComp AddCommGrpCat.{u + 1} s g).hom.app _ ≫
       (s ≫ g)_*[AddCommGrpCat.{u + 1}].map
-        ((localizationRestrictionComp s g).inv.app H) =
+        ((localizationRestrictionCompConjugate s g).inv.app H) =
       baseChangeTransportSheafHom s g rfl H := by
   refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ?_))
   rw [localizationUnitTransport_hom_app, mapComp_hom_app_comp_map_pullbackComp_hom_app]
@@ -287,7 +287,7 @@ theorem unitTransport_eq_baseChangeTransportSheafHom {X Y Y' : Scheme.{u}} (s : 
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (s ≫ g))
     (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} (s ≫ g) inferInstance)
     (lowerStarComp AddCommGrpCat.{u + 1} s g).hom (upperStarComp AddCommGrpCat.{u + 1} s g)
-    (localizationRestrictionComp s g) hc hc' H, ← localizationUnitTransport_eq]
+    (localizationRestrictionCompConjugate s g) hc hc' H, ← localizationUnitTransport_eq]
   simp only [Category.assoc]
   rfl
 
