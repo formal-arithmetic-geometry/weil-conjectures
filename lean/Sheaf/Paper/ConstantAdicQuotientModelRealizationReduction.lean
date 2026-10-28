@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
 public import Sheaf.Paper.ConstantRealizationDerivedScalarExtension
+import Sheaf.Paper.ConstantAdicQuotientRealizationScalarReduction
+import Sheaf.Paper.ConstantAdicQuotientRealizationTowerTransition
 
 /-! # Reduction of the consecutive realization comparison to the lower tower level
 
@@ -53,6 +55,13 @@ theorem constantAdicQuotient_model_realization_reduction
             (Nat.le_succ (n + 1))))).obj E') ≅
       (adicTowerPullback (W.hom ≫ g)
         ((pbcAdicRings X d).obj (op n))).obj (M.level n)) := by
-  sorry
+  rcases constantAdicQuotient_realization_scalar_reduction X Y g d n W _w E' with
+    ⟨hscalar⟩
+  rcases adicTowerPullback_consecutive_transition_iso X Y g d M n W _w with
+    ⟨htower⟩
+  rcases e' with ⟨e'⟩
+  exact ⟨hscalar ≪≫
+    Functor.mapIso (pbcDerivedExtend ((adicTowerInverseImage (W.hom ≫ g)).map
+      (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))) e' ≪≫ htower⟩
 
 end AlgebraicGeometry.Scheme

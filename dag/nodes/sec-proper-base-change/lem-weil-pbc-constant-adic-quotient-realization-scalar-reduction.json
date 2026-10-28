@@ -1,0 +1,91 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, consecutive quotient balancing"
+ },
+ "proof_origin": {
+  "by": "stage-3 worker G9",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, consecutive quotient balancing"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantAdicQuotientModelRealizationReduction",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-adic-quotient-model-realization-reduction",
+   "place": "Tag 09C6, coefficient and tower substeps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-constant-adic-quotient-realization-scalar-reduction",
+ "title": "Scalar restriction comparison for consecutive constant quotient realizations",
+ "statement": "Scalar restriction comparison for consecutive constant quotient realizations.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-sfb-constant-realization-derived-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Paste the canonical quotient scalar comparison with the derived constant realization scalar-extension comparison and identify the coefficient maps by completion evaluation.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-sfb-constant-realization-derived-scalar-extension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constantAdicQuotientRealization scalar extension pbcDerivedExtend",
+   "results": "No existing declaration gives this consecutive quotient substep; it is a strict component of the parent transport.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantAdicQuotientRealizationScalarReduction",
+  "file": "lean/Sheaf/Paper/ConstantAdicQuotientRealizationScalarReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantAdicQuotient_realization_scalar_reduction",
+  "statement": "theorem constantAdicQuotient_realization_scalar_reduction\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (n : ℕ) (W : Y.Etale) (_w : W.left)\n    (E' : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1 + 1)))) :\n    let q : (AdicCompletion d.ideal A ⧸\n        (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1 + 1)) →+*\n        (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)) :=\n      Ideal.Quotient.factor (Ideal.pow_le_pow_right\n        (I := d.ideal.map (algebraMap A (AdicCompletion d.ideal A)))\n        (Nat.le_succ (n + 1)))\n    let Rn := constantAdicQuotientRealization (W.hom ≫ g) d n\n    let Rnp := constantAdicQuotientRealization (W.hom ≫ g) d (n + 1)\n    let T := pbcDerivedExtend ((adicTowerInverseImage (W.hom ≫ g)).map\n      (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))\n    Nonempty (Rn.obj ((CategoryTheory.ConstantScalarRealization.moduleDerivedExtension q).obj E') ≅\n      T.obj (Rnp.obj E'))",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T020433-L-2510559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T020433-L-2510559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
