@@ -14,44 +14,60 @@
  ],
  "proof": [
   {
-   "text": "Recursively represent the successor finite derived morphism by a source roof, using DerivedCategory.right_fac. Start with any representative of T.M 0; choose each next roof middle complex as the next representative. Scalar restriction is exact. This is the same finiteModel construction already used by NormalizedDVRAdicConeModel.",
+   "text": "Apply the canonical constant-tower Roos theorem to T.tower. Its specified total limit M and product of canonical projections satisfy the Roos triangle. Normalized DVR effectivity gives invertible finite counit comparisons c_n from the derived scalar extensions of M to T.M n, with its all-quotient transition equation.",
+   "uses": [
+    "lem-coef-constant-tower-roos",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the derived coefficient-system reduction N of M from the coefficient evaluation calculus. The Roos triangle makes adjacent canonical projections compatible; induct on the larger index, using localization of evaluation identity and composition, to obtain compatibility for every n <= m. Compose with the canonical restricted-evaluation isomorphisms. The reduction adjunction unit-projection formula and the finite adjunction Hom equivalence identify the transition of N with the canonical reduction transition. Compose the inverses of c_n with the finite reduction-evaluation isomorphisms; the two canonical transition equations imply compatibility of these finite isomorphisms b_n.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-sequence-roos-model",
+    "lem-coef-constant-tower-roos",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a cochain complex Q representing N via essential surjectivity of the derived localization. Transport b_n along its localization isomorphism; naturality of the localized quotient transitions gives the asserted all-pair equations for a_n. This is only the representative of the already constructed quotient-system object, not an arbitrary witness used in a definition.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-coef-normalized-dvr-tower"
+    "def-coef-ringed-sequence-site"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compose the quotient-linear successor chain maps, and transpose their degree and system indices. The equivalence from strict ring systems to modules on the quotient ringed sequence site gives Q. The roof isomorphisms give a_n. The roof equation proves successor compatibility; induction using the restriction composition and T.tau_comp proves the displayed square for every pair, including the identity using T.tau_refl.",
+   "text": "Compose T.evaluationIso with completed scalar restriction of a_n and the inverse canonical restricted-evaluation isomorphism. The restricted-transition square and T.tower_tau make this family commute with successor transitions. Sequential tower evaluation fullness supplies a morphism realizing this fixed family. Each evaluated morphism is an isomorphism; exact evaluation commutes with derived homology, so each homology map is componentwise invertible and hence invertible as a natural transformation. The derived isomorphism criterion makes the lifted morphism an isomorphism.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict Q along the completion projections. Their limit-cone identity identifies its finite evaluations and transitions with the restrictions of Q_n. Compose the restricted a_n with T.evaluationIso. The displayed coherence and T.tower_tau give a compatible family of completed-coefficient derived evaluation isomorphisms. Sequential tower fullness lifts this fixed family and its isomorphism criterion gives the asserted tower isomorphism.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-sequential-tower-evaluation-full"
+    "lem-coef-sequence-roos-model",
+    "lem-pur-normalized-dvr-tower-evaluation-full",
+    "def-coef-normalized-dvr-tower",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-coef-normalized-dvr-tower",
-  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-constant-tower-roos",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-sequence-roos-model",
   "def-coef-ringed-sequence-site",
-  "lem-weil-pbc-sequential-tower-evaluation-full"
+  "def-weil-abstract-derived-category",
+  "lem-pur-normalized-dvr-tower-evaluation-full",
+  "def-coef-normalized-dvr-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q8",
+  "group": "E7",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
-  "note": "A strictly smaller independent part of the parent: geometric quotient-system realization, with no Hom functor comparison."
+  "note": "Closed the realization hole using the supplied normalization: canonical Roos limit, DVR effectivity, actual coefficient-system reduction and compatible tower evaluation fullness. No new holes or public declarations."
  },
  "mathlib_searches": [
   {
@@ -121,9 +137,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q8",
+  "group": "E7",
   "result": "pass",
-  "landing": "20261028T055738-L-803618",
+  "landing": "20261028T072404-L-1941665",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
