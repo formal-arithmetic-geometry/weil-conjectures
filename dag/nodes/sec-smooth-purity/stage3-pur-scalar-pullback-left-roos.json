@@ -13,36 +13,43 @@
  ],
  "proof": [
   {
-   "text": "Precompose with the scalar-completion isomorphism on E-pullback(K), cancelling the inverse in scalarPullbackCompleted. Move the remaining scalar-completion map at Y through the L-pullback realization by naturality. Normalize SY on (P,C,eC,kappa), and normalize L-pullback on ordinary scalar(P), choosing a good replacement where necessary; the whole-system transposes compare the replacements. The ordinary scalar/pullback comparison is normalized by the canonical scalarPullbackChain on P.",
+   "text": "Transport the coherent presentation at Y to ordinary scalar P and sequence scalar C, with its finite tensor-unit formula and the equality expressing the reduction of scalar completion. Normalize ML.pullback on this L-coefficient presentation. The tensor-unit formula shows that its strict comparison has ScalarPullbackQuotientFormula; strict generator uniqueness identifies it with the supplied q.",
    "uses": [
-    "def-trf-integral-comparison-realization-models",
-    "lem-pur-integral-operations-scalar-extension-pullback-clause",
-    "def-pod-scalar-completion-tensor-comparisons",
-    "lem-trf-coherent-primitive-reduction-presentation"
+    "lem-pur-scalar-completion-quotient-presentation",
+    "lem-pur-scalar-pullback-quotient-ext",
+    "def-trf-integral-comparison-realization-models"
    ],
    "elementary": false
   },
   {
-   "text": "The scalar-completion augmentation is tensor unit in the unshifted coordinate and zero in the shifted coordinate. The formula for q identifies the resulting strict quotient maps on nested tensor-unit/pullback generators; linearity and sheafification give their equality before derived localization. Preserve all transition maps, apply the Roos functor, and use Roos bridge naturality. Transport along eP and cancel the source scalar-completion isomorphism to obtain precisely scalarPullbackRoosChain.",
+   "text": "Use kappa to detect K-flatness of C on its levels. The normalized derived scalar/pullback system isomorphism computes on C. Its inverse and naturality move the explicit scalarPullbackRoosCoordinate to the route through L-pullback of scalar(C), with the same Roos bridge and q.",
    "uses": [
-    "stage3-pur-scalar-pullback-roos-coordinates",
-    "def-trf-integral-comparison-sequence-systems"
+    "lem-pur-scalar-pullback-roos-coordinate-system",
+    "stage3-pur-scalar-pullback-roos-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit and scalar realization make scalarReduction natural. Move eP inverse and scalarCompletion through the L-pullback realization, apply the transported-presentation equality, and apply ML pullback normalization. Finally unfold scalarPullbackCompleted, move eP through the ordinary comparison, and use scalarPullbackOrdinaryNormalization. This gives exactly scalarPullbackRoosChain.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "def-trf-integral-comparison-realization-models"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-scalar-completion-quotient-presentation",
+  "lem-pur-scalar-pullback-quotient-ext",
   "def-trf-integral-comparison-realization-models",
-  "lem-pur-integral-operations-scalar-extension-pullback-clause",
-  "def-pod-scalar-completion-tensor-comparisons",
-  "lem-trf-coherent-primitive-reduction-presentation",
+  "lem-pur-scalar-pullback-roos-coordinate-system",
   "stage3-pur-scalar-pullback-roos-coordinates",
-  "def-trf-integral-comparison-sequence-systems"
+  "lem-pur-integral-operations-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions."
+  "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); scalar/pullback realization calculation, step 8 of lem-pur-scalar-extension-tower-coherence. Specialized coordinate formulas are the agent's expansion using the project normalization definitions. G6 formalizes the naturality, adjunction and normalization assembly; only the source-side presentation transport is split off."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -113,12 +120,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "G6",
   "result": "pass",
-  "landing": "20261027T234253-L-83762",
+  "landing": "20261028T020429-L-2509497",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
