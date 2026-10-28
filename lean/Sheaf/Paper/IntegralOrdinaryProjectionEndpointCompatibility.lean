@@ -29,7 +29,10 @@ attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupS
 
 -- STATEMENT-DISPUTED: the endpoint data stores arbitrary source and target
 -- isomorphisms, so composing `d.t` with a nontrivial automorphism can break this
--- equation. The compatibility law is not derivable from the stated hypotheses.
+-- equation. More explicitly, if `α` is an automorphism of the target endpoint,
+-- replacing `d.t` by `d.t ≪≫ α` preserves the `IntegralOrdinaryProjectionEndpointData`
+-- fields but changes the right-hand side in general. The compatibility law is not
+-- derivable from the stated hypotheses.
 /-- The endpoint comparisons intertwine the reduced completed projection with the
 finite intrinsic projection.
 Source: the proper/open scalar comparison and constant-scalar realization in
