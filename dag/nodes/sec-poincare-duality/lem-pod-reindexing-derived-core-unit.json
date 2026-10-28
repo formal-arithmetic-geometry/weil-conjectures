@@ -1,0 +1,112 @@
+{
+ "id": "lem-pod-reindexing-derived-core-unit",
+ "kind": "statement",
+ "title": "Derived unit law",
+ "statement": "For raw derived comparison data, the assembled comparison satisfies the Unit predicate.",
+ "stmt_deps": [
+  "lem-pod-reindexing-strict-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent."
+ },
+ "proof": [
+  {
+   "text": "Transport the ordinary adjunction unit through the reduction and limit comparisons using the strict quotient normalization.",
+   "uses": [
+    "lem-pod-reindexing-derived-core-data",
+    "lem-pod-reindexing-strict-comparisons",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-trf-primitive-quotient-realization-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-derived-core-data",
+  "lem-pod-reindexing-strict-comparisons",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-trf-primitive-quotient-realization-comparisons"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingDerivedComparisonsCore",
+  "date": "2026-10-28",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-derived-comparisons",
+   "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent.",
+   "via": [
+    "lem-pod-reindexing-derived-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedUnit",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedUnit.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedCoreData_unit",
+  "statement": "theorem podReindexingDerivedCoreData_unit\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (S : PodReindexingStrictData l E g) (hS : S.Laws l E g SY SX)\n    (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),\n      integralOperationsGoodComplex l E Y P → ∀ n : ℕ,\n      (isoReductionFiniteComplex l E g n).obj (unrestrictedTowerFiniteComplex l E Y n P) ≅\n        unrestrictedTowerFiniteComplex l E X n\n          ((isoReductionIntegralComplex l E g).obj P))\n    (hβ : podReindexingCoreQuotientGenerators l E g β)\n    (htransition : podReindexingCoreQuotientTransition l E g β)\n    (CY : IntegralOnSlice.completion l E Y none ≅\n      (podReindexCalculus l E Y).reduction ⋙ coefficientSequenceLimit l E Y)\n    (CX : IntegralOnSlice.completion l E X none ≅\n      (podReindexCalculus l E X).reduction ⋙ coefficientSequenceLimit l E X)\n    (Q : PodReindexingDerivedCoreData l E g) :\n    PodCompletionReindex.Unit l E g\n      (Q.assemble l E g SY SX S β CY CX)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived reindexing comparison core",
+   "results": "No exact project package; use the strict comparison and coefficient calculus declarations.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback normalization derived Roos realization",
+   "results": "No exact displayed predicate; the five laws are the split interfaces.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodCompletionReindex ReductionEvaluation LimitProjection FiniteModel LimitModel",
+   "results": "Found the project predicates in PodCompletionReindexModels.",
+   "date": "2026-10-28",
+   "verdict": "project declarations used"
+  }
+ ],
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261028T020137-L-2471110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261028T020137-L-2471110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

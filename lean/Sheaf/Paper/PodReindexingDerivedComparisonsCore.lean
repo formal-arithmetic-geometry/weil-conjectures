@@ -6,6 +6,12 @@ Authors: SHEAF group Z5
 module
 
 public import Sheaf.Paper.PodReindexingStrictComparisons
+import Sheaf.Paper.PodReindexingDerivedCoreDataExistence
+import Sheaf.Paper.PodReindexingDerivedReductionEvaluation
+import Sheaf.Paper.PodReindexingDerivedLimitProjection
+import Sheaf.Paper.PodReindexingDerivedUnit
+import Sheaf.Paper.PodReindexingDerivedFiniteModel
+import Sheaf.Paper.PodReindexingDerivedLimitModel
 
 /-! # Localization of the normalized strict reindexing comparisons
 
@@ -213,6 +219,34 @@ theorem podReindexingDerivedComparisonsCore
       (podReindexCalculus l E X).reduction ⋙ coefficientSequenceLimit l E X) :
     ∃ R : PodReindexingDerivedData l E g,
       R.CoreLaws l E g SY SX S β CY CX := by
-  sorry
+  obtain ⟨Q⟩ := podReindexingDerivedCoreData_exists l E g SY SX S hS β hβ htransition CY CX
+  let R : PodReindexingDerivedData l E g :=
+    { reduction := Q.reduction
+      limit := Q.limit
+      evaluation := Q.evaluation
+      restriction := Q.restriction
+      finite := Q.finite
+      sourceRoos := Q.sourceRoos
+      targetRoos := Q.targetRoos
+      pullback := Q.pullback }
+  have hReduction := podReindexingDerivedCoreData_reductionEvaluation
+    l E g SY SX S hS β hβ htransition CY CX Q
+  have hProjection := podReindexingDerivedCoreData_limitProjection
+    l E g SY SX S hS β hβ htransition CY CX Q
+  have hUnit := podReindexingDerivedCoreData_unit
+    l E g SY SX S hS β hβ htransition CY CX Q
+  have hFinite := podReindexingDerivedCoreData_finiteModel
+    l E g SY SX S hS β hβ htransition CY CX Q
+  have hLimit := podReindexingDerivedCoreData_limitModel
+    l E g SY SX S hS β hβ htransition CY CX Q
+  refine ⟨R, ?_⟩
+  change PodCompletionReindex.ReductionEvaluation l E g (R.assemble l E g SY SX S β CY CX) ∧
+    PodCompletionReindex.LimitProjection l E g (R.assemble l E g SY SX S β CY CX) ∧
+    PodCompletionReindex.Unit l E g (R.assemble l E g SY SX S β CY CX) ∧
+    PodCompletionReindex.FiniteModel l E g (R.assemble l E g SY SX S β CY CX) ∧
+    PodCompletionReindex.LimitModel l E g (R.assemble l E g SY SX S β CY CX)
+  simpa [R, PodReindexingDerivedData.assemble,
+    PodReindexingDerivedCoreData.assemble] using
+    And.intro hReduction (And.intro hProjection (And.intro hUnit (And.intro hFinite hLimit)))
 
 end WeilConjectures

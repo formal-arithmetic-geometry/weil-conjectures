@@ -20519,3 +20519,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: merged deliver/A2/Sheaf.Paper.PodReindexingShiftDerivedPart (stage 3; reviewer PASS; first push; landing 20261028T020129-L-2469293 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:01 L: merged deliver/A3/Sheaf.Paper.PodReindexingStrictTensorTowers (stage 3; reviewer PASS; first push; landing 20261028T020130-L-2470406 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:01 L: merged deliver/A4/Sheaf.CategoryTheory.InverseImageRingFunctor (stage 3; reviewer PASS; first push; landing 20261028T020131-L-2470541 (interface); batch 20261028T020127; modules 1; new nodes 0; change records: coord/changes/inverse-image-ring-functor-proof-imports.md)
+- 02:01 L: merged deliver/A4/Sheaf.Paper.PodReindexingDerivedComparisonsCore (stage 3; reviewer PASS; first push; landing 20261028T020137-L-2471110 (interface); batch 20261028T020127; modules 8; new nodes 7)
