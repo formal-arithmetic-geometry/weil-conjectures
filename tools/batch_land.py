@@ -808,8 +808,17 @@ class Pre:
 
 # ---------------------------------------------------------------- the landing, under the lock
 
+LAND_T: dict = {}     # 2026-10-28: seconds per phase of land_one over one batch (logged with the batch)
+
+
+def _lt(k: str, t0: float) -> float:
+    t = time.time(); LAND_T[k] = LAND_T.get(k, 0.0) + t - t0
+    return t
+
+
 def land_one(plan: dict, batch_id: str) -> dict:
     """Write, register and commit one delivery. Called with coord/.merge.lock held."""
+    _t = time.time()
     if (BD / 'proof-imports.json').exists(): raise Wait('proof-import cycle is committing')
     g, item, head, D, reviewer = plan["group"], plan["item"], plan["head"], plan["D"], plan["reviewer"]
     br = md.branch_of(g, item)
@@ -845,7 +854,9 @@ def land_one(plan: dict, batch_id: str) -> dict:
     
     rels += [r for r in roots_add if r not in rels]
     is_set = len(mods) > 1 or bool(roots_add)
+    _t = _lt("prepare", _t)
     r = subprocess.run([sys.executable, "tools/landing.py", "begin", "L", *rels], cwd=ROOT, capture_output=True, text=True)
+    _t = _lt("landing_begin", _t)
     if r.returncode != 0:
         raise Wait("landing.py begin: " + (r.stderr or r.stdout).strip()[:300])
     landing = r.stdout.strip().splitlines()[-1]
@@ -859,8 +870,10 @@ def land_one(plan: dict, batch_id: str) -> dict:
                 p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
         for rel, text in roots_add.items():
             (li.LEAN / rel).write_text(text)
+        _t = _lt("write", _t)
         r = subprocess.run([sys.executable, "tools/landing.py", "finish", landing] + (["--set"] if is_set else []),
                            cwd=ROOT, capture_output=True, text=True)
+        _t = _lt("landing_finish", _t)
         if r.returncode != 0:
             raise md.Fail("landing.py finish: " + (r.stderr or r.stdout).strip()[:300])
         done = True
@@ -916,8 +929,10 @@ def land_one(plan: dict, batch_id: str) -> dict:
         book["claim"] = (claim, claim_text)
         dlog = ROOT / "coord" / "deliveries.log"
         book["dlog"] = (dlog, dlog.read_text() if dlog.exists() else "")
+        _t = _lt("nodes", _t)
         subprocess.run([sys.executable, "tools/claim.py", "done", g, item,
                         f"delivered by {g} on {br}, merged by L (reviewer {reviewer})"], cwd=ROOT, capture_output=True)
+        _t = _lt("claim_done", _t)
         book["ledger"] = md.ledger_line(
             f"merged {br} (stage 3; reviewer {plan['verdict']}; {'after a return' if returned else 'first push'}; "
             f"landing {landing} ({kind}); batch {batch_id}; modules {len(mods)}; new nodes "
@@ -930,6 +945,7 @@ def land_one(plan: dict, batch_id: str) -> dict:
         note = ROOT / "coord" / "repair-notes" / (item + ".json")
         if note.exists() and md.git("status", "--porcelain", "--", note.relative_to(ROOT).as_posix()).strip():
             paths.append(note.relative_to(ROOT).as_posix())
+        _t = _lt("ledger", _t)
         md.git_retry("add", "-A", "--", *paths)
         md.git_retry("commit", "-q", f"--author={author}", "-m",
                      f"Prove {item} ({g}, reviewed by {reviewer})\n\nDelivered by group {g} ({br}); landing "
@@ -940,9 +956,11 @@ def land_one(plan: dict, batch_id: str) -> dict:
         subprocess.run([sys.executable, "tools/landing.py", "revert" if done else "abort", landing]
                        + (["the batch landing did not commit"] if done else []), cwd=ROOT, capture_output=True)
         raise
+    _t = _lt("git_commit", _t)
     sha = md.git("rev-parse", "HEAD")
     md.git("branch", "-D", br, check=False)
     marker(g, item).unlink(missing_ok=True)
+    _t = _lt("after", _t)
     if g.startswith('XR'):
         jp = repairs.JOBS / (g[2:] + '.json'); job = repairs.read(jp)
         if job:
@@ -1095,7 +1113,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     if md.git("symbolic-ref", "-q", "--short", "HEAD", check=False) != md.MAIN:
         raise md.Fail(f"the working tree is not on {md.MAIN}")
     batch_id = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
-    entries, back, held = [], [], 0.0
+    entries, back, held, lwait = [], [], 0.0, 0.0
     landing_marker = BD / 'landing.json'
     write_json(landing_marker, {'id': batch_id, 'started': ld.now()})
     tl = time.time()
@@ -1134,6 +1152,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
             if cycle: raise Wait("import cycle: " + " -> ".join(cycle))
             lock_started = time.time()
             with md.merge_lock():
+                lwait += time.time() - lock_started
                 e = land_one(plan, batch_id)
                 restore_after_fix(plan, log)
             held += time.time() - lock_started
@@ -1157,6 +1176,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         try:
             lock_started = time.time()
             with md.merge_lock():
+                lwait += time.time() - lock_started
                 e = s2b.land_one(plan, batch_id)
             held += time.time() - lock_started
             write_json(landing_marker, {"id": batch_id, "started": ld.now(), "entries": entries + [e]})
@@ -1179,15 +1199,42 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         landing_marker.unlink(missing_ok=True)
         return None
     b = {"id": batch_id, "time": ld.now(), "round": 0, "handled": [], "entries": entries,
-         "check_seconds": round(t1 - t0, 1), "lock_seconds": round(held, 1)}
+         "check_seconds": round(t1 - t0, 1), "lock_seconds": round(held, 1), "lock_wait_seconds": round(lwait, 1),
+         "write_seconds": round(time.time() - t1, 1), "land_phases": {k: round(v, 1) for k, v in LAND_T.items()}}
+    LAND_T.clear()
     if target == NEXT:
         b["pipelined_on"] = (read_json(OPEN) or {}).get("id")
     write_json(target, b)
     landing_marker.unlink(missing_ok=True)
     log(f"batch {batch_id}: {len(entries)} landed (checks {b['check_seconds']} s without a lock, lock held "
-        f"{b['lock_seconds']} s); the global build verifies it"
+        f"{b['lock_seconds']} s of which {b['lock_wait_seconds']} s waiting for it, writes {b['write_seconds']} s in all; "
+        f"land_one {json.dumps(b['land_phases'], sort_keys=True)}); the global build verifies it"
         + (f" (pipelined on the build of batch {b['pipelined_on']})" if target == NEXT else ""))
     return b
+
+
+def prerun_pairs(cache: dict, cands: list[dict], log) -> None:
+    """2026-10-28 (the owner: the next build should start within ~2 min of the last one; the pair compiles took 5-6 min
+    of every gap): while a build runs, the linked pairs among the candidates already checked are compiled ahead
+    (tools/batch_pairs.py prerun: background threads, the single-file slots at nice 19, no wait), so that the landing
+    compiles only the newcomers' pairs and the pairs the in-flight batch touched. SHEAF_BATCH_PAIR_PRERUN=0: off."""
+    if os.environ.get("SHEAF_BATCH_PAIR_PRERUN", "1") != "1" or "_pre" not in cache:
+        return
+    pre = cache["_pre"]
+    ok = [r[1] for r in (pre.done.get(c["head"]) for c in cands) if r and r[0] == "ok"]
+    if not ok:
+        return
+
+    def graph():
+        g = pre.import_graph if pre.import_graph is not None else pre.snapshot()
+        for x in ok:
+            g = cycles.overlay(g, {m["module"]: m["text"] for m in x["D"]["modules"]})
+        return g
+    try:
+        import batch_pairs as bp
+        bp.prerun(ok, graph, log)
+    except Exception as exc:  # noqa: BLE001   the landing compiles the pairs itself
+        log("batch pairs ahead of the landing failed |", repr(exc)[:300])
 
 
 def pending_merge_jobs(pre, cands, log) -> None:
@@ -2979,6 +3026,13 @@ def step(cache: dict, log) -> str:
                 log(f"batch {b['id']}: {len(left)} landing(s) blocked by a failure they did not write stay in the merge "
                     "queue; the batch closes")
     if not b and retry_round_open():
+        if "_pre" in cache:         # 2026-10-28: the checks and pair compiles of the next batch go on meanwhile
+            try:
+                cands = candidates(cache)
+                cache["_pre"].pump(cands)
+                prerun_pairs(cache, cands, log)
+            except Exception as exc:  # noqa: BLE001
+                log("checks ahead of the landing failed |", repr(exc)[:300])
         return "waiting"            # the next batch lands when the retry round is green (retry_round_open)
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
@@ -3017,6 +3071,7 @@ def step(cache: dict, log) -> str:
         cands = candidates(cache)
         cache["_pre"].pump(cands)
         pending_merge_jobs(cache["_pre"], cands, log)
+        prerun_pairs(cache, cands, log)
     if b.get("triage"):
         t = b["triage"]
         v = read_json(pathlib.Path(t["dir"]) / "verdict.json")

@@ -28,6 +28,14 @@ What (tools/batch_land.py land_batch calls split() on the checked stage-3 plans,
      B fails without A too: not this check's verdict (the batch lands as before).
   The compiles run on SHEAF_BATCH_PAIR_PARALLEL (4) background threads of the lander; a batch waits for them at most
   SHEAF_BATCH_PAIR_TOTAL s (300), unfinished pairs count as not decided and go on compiling for the next step.
+  4. Ahead of the landing (2026-10-28, the owner: the 5-6 min of pair compiles between two builds left the machine's
+     global build idle): while a build runs, tools/batch_land.py step() calls prerun() on the candidates already checked;
+     it queues the compiles of their linked pairs on the same background threads (same slots, nice 19) without waiting,
+     at most every SHEAF_BATCH_PAIR_PRERUN_EVERY s (120) and again after 600 s with an unchanged candidate set. Each
+     result records the published build it compiled against (`pub`, local/builds/published.json). A decided result is
+     reused while no module of either delivery is, or imports, a module that changed between its `pub` and the build
+     published now (the in-flight batch); otherwise the pair is compiled again. Results without `pub` are reused as
+     before.
 
     tools/batch_pairs.py links <groupA>/<sha> <groupB>/<sha> ...     dry: the links between landed commits (each commit
                                                                      vs its first parent), no compile
@@ -45,6 +53,46 @@ WAIT = float(os.environ.get("SHEAF_BATCH_PAIR_WAIT", "10800"))
 PARALLEL = int(os.environ.get("SHEAF_BATCH_PAIR_PARALLEL", "4"))
 BG_TOTAL = int(os.environ.get("SHEAF_BATCH_PAIR_CALL", "1800"))    # one pair's compiles, in the background
 ROLES = ("item", "adapted", "new", "restored", "deleted")
+PUBLISHED = pathlib.Path(ROOT) / "local" / "builds" / "published.json"
+PRERUN_EVERY = float(os.environ.get("SHEAF_BATCH_PAIR_PRERUN_EVERY", "120"))
+PRERUN_SAME = 600.0     # an unchanged candidate set is looked at again after this (INFRA / SLOW results are retried)
+
+
+def published_commit() -> str | None:
+    """the commit of the build published now (the compiles run against it)"""
+    try:
+        return json.loads(PUBLISHED.read_text()).get("commit") or None
+    except (OSError, ValueError, AttributeError):
+        return None
+
+
+_CHANGED: dict = {}
+
+
+def changed_modules(old: str, new: str) -> set | None:
+    """lean/ modules that differ between two commits; None when git cannot tell"""
+    k = (old, new)
+    if k not in _CHANGED:
+        import subprocess
+        r = subprocess.run(["git", "diff", "--name-only", old, new, "--", "lean/"], cwd=ROOT, capture_output=True, text=True)
+        _CHANGED.clear() if len(_CHANGED) > 32 else None
+        _CHANGED[k] = None if r.returncode else {p[len("lean/"):-len(".lean")].replace("/", ".")
+                                                  for p in r.stdout.split() if p.endswith(".lean")}
+    return _CHANGED[k]
+
+
+def stale(r: dict | None, mods: set, graph: dict, cur: str | None, memo: dict) -> bool:
+    """True when the result `r` was compiled against a published build older than `cur` and one of `mods` (both
+    deliveries' modules) is, or imports, a module changed since (memo: per old pub, the changed modules and their
+    importers in `graph`)."""
+    old = (r or {}).get("pub")
+    if not old or not cur or old == cur:
+        return False
+    if old not in memo:
+        ch = changed_modules(old, cur)
+        memo[old] = None if ch is None else (set(ch) | rm.li.downstream(set(ch), graph))
+    aff = memo[old]
+    return aff is None or bool(mods & aff)
 
 
 def changes_of(D: dict) -> dict:
@@ -226,13 +274,14 @@ def _bg_worker() -> None:
                 return
             k, a, b, x, compile = _BG["queue"].pop(0)
         try:
+            pub = published_commit()      # the build this compile reads (an older one if it is replaced meanwhile)
             try:
                 r = compile(a["texts"], b["texts"], x["modules"], time.time() + BG_TOTAL,
                             a_old={m: v[0] for m, v in a["changes"].items()})
             except Exception as e:  # noqa: BLE001
                 r = {"with": "INFRA", "with_out": repr(e)[:300], "without": None}
             old = _read(DIR / f"{k}.json") or {}
-            _write(DIR / f"{k}.json", dict(r, first=old.get("first") or time.time(), a=a["name"], b=b["name"],
+            _write(DIR / f"{k}.json", dict(r, pub=pub, first=old.get("first") or time.time(), a=a["name"], b=b["name"],
                                           modules=x["modules"], via=x["via"], time=time.strftime("%FT%T%z")))
         except Exception:  # noqa: BLE001   a result that cannot be written is compiled again next time
             pass
@@ -241,9 +290,8 @@ def _bg_worker() -> None:
                 _BG["busy"].discard(k)
 
 
-def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None, now=time.time) -> tuple:
-    """plans: checked stage-3 plans in landing order; graph: the import graph with every plan's texts in place.
-    Returns (plans that land, [(plan, why)] that wait, [(plan, why)] returned to their groups)."""
+def _links_for(plans: list[dict], graph: dict, source=None) -> tuple:
+    """(parties, links, graph with the pending parties' imports) of the plans in landing order"""
     if source is None:
         import importer_compile as ic
         source = ic.source
@@ -259,6 +307,48 @@ def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None
     L = links(parties, g)
     # a pending A belongs only to the plan it was recorded for
     L = [x for x in L if parties[x["a"]].get("landing") or parties[x["a"]].get("for") == parties[x["b"]]["plan"]["head"]]
+    return parties, L, g
+
+
+_PRE = {"sig": None, "t": 0.0}
+
+
+def prerun(plans: list[dict], graph, log, compile=compile_pair, source=None) -> int:
+    """While the global build runs: queue (no wait) the compiles of the linked pairs among `plans` (the checked
+    candidates, in candidate order) whose result is missing, undecided or stale. `graph`: the import graph with the
+    plans' texts in place, or a function returning it (called only when the pre-run is due). Returns the number queued."""
+    sig = (tuple(sorted(p["head"] for p in plans)), published_commit())
+    dt = time.time() - _PRE["t"]
+    if dt < PRERUN_EVERY or (sig == _PRE["sig"] and dt < PRERUN_SAME):
+        return 0
+    _PRE["sig"], _PRE["t"] = sig, time.time()
+    if len(plans) < 1:
+        return 0
+    t0 = time.time()
+    parties, L, g = _links_for(plans, graph() if callable(graph) else graph, source)
+    cur, memo, jobs, have = sig[1], {}, [], 0
+    for x in L:
+        a, b = parties[x["a"]], parties[x["b"]]
+        k = pair_key(a["texts"], b["texts"])
+        x["key"] = k
+        r = _read(DIR / f"{k}.json")
+        if decided(r) and not stale(r, set(a["texts"]) | set(b["texts"]), g, cur, memo):
+            have += 1; continue
+        if _busy([k]):
+            continue
+        jobs.append((k, a, b, x))
+    if jobs:
+        _submit(jobs, compile)
+    if L:
+        log(f"batch pairs ahead of the landing: {len(L)} linked pair(s) among {len(plans)} checked candidate(s), "
+            f"{have} decided, {len(jobs)} queued ({time.time() - t0:.0f} s)")
+    return len(jobs)
+
+
+def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None, now=time.time) -> tuple:
+    """plans: checked stage-3 plans in landing order; graph: the import graph with every plan's texts in place.
+    Returns (plans that land, [(plan, why)] that wait, [(plan, why)] returned to their groups)."""
+    parties, L, g = _links_for(plans, graph, source)
     if not L:
         return plans, [], []
     t0 = now()
@@ -269,11 +359,15 @@ def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None
         except OSError:
             pass
     res, todo = {}, []
+    cur, memo, mods_of = published_commit(), {}, {}
     for x in L:
         a, b = parties[x["a"]], parties[x["b"]]
         k = pair_key(a["texts"], b["texts"])
         x["key"] = k
+        mods_of[k] = set(a["texts"]) | set(b["texts"])
         r = _read(DIR / f"{k}.json")
+        if decided(r) and stale(r, mods_of[k], g, cur, memo):
+            r = {"first": t0}               # compiled against an older build that the in-flight batch changed: again
         if decided(r):
             res[k] = r
         else:
@@ -292,7 +386,7 @@ def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None
             time.sleep(0.5)
         for x in todo:
             r = _read(DIR / f"{x['key']}.json")
-            if r:
+            if r and not (decided(r) and stale(r, mods_of[x["key"]], g, cur, memo)):
                 res[x["key"]] = dict(r, first=res[x["key"]]["first"])
 
     out_wait, out_ret, record = {}, {}, set()

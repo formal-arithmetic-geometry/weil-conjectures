@@ -145,6 +145,64 @@ def test_pending_dropped_when_a_not_on_main():
     assert not (bp.DIR / "pending" / ("k8" * 20 + ".json")).exists()
 
 
+def _prerun(plans, stub, main=MAIN):
+    import time
+    bp._PRE.update(sig=None, t=0.0)
+    logs = []
+    n = bp.prerun(plans, lambda: combined(plans, main), lambda *a: logs.append(" ".join(map(str, a))), compile=stub,
+                  source=main.get)
+    t_end = time.time() + 30
+    while time.time() < t_end and bp._busy([bp.pair_key(bp.texts_of(a["D"]), bp.texts_of(b["D"])) for a in plans for b in plans]):
+        time.sleep(0.05)
+    return n, logs
+
+
+def test_prerun_compiles_ahead_and_the_landing_reuses_it():
+    fresh()
+    pub = bp.published_commit
+    bp.published_commit = lambda: "P1"
+    try:
+        stub = Stub(with_="OK")
+        n, logs = _prerun([E5(), C1(), K8()], stub)
+        assert n == 1 and len(stub.calls) == 1, (n, stub.calls, logs)
+        assert "ahead of the landing" in logs[0], logs
+        n2, _ = _prerun([E5(), C1(), K8()], stub)          # decided: nothing queued again
+        assert n2 == 0 and len(stub.calls) == 1
+        (land, waits, rets), _ = run([E5(), C1(), K8()], stub)
+        assert [p["group"] for p in land] == ["E5", "C1", "K8"] and not waits and not rets
+        assert len(stub.calls) == 1, stub.calls             # the landing compiled nothing
+    finally:
+        bp.published_commit = pub
+
+
+def test_result_of_an_older_build_is_compiled_again_only_when_the_batch_touched_it():
+    fresh()
+    pub, chg = bp.published_commit, bp.changed_modules
+    try:
+        bp.published_commit = lambda: "P1"
+        stub = Stub(with_="OK")
+        _prerun([E5(), K8()], stub)
+        assert len(stub.calls) == 1
+        # the in-flight batch changed an unrelated module: the result stands
+        bp.published_commit = lambda: "P2"
+        bp.changed_modules = lambda a, b: {"Sheaf.Other"}
+        (land, waits, rets), _ = run([E5(), K8()], stub)
+        assert [p["group"] for p in land] == ["E5", "K8"] and len(stub.calls) == 1, stub.calls
+        # it changed a module K8 imports: compiled again against the new build
+        bp.published_commit = lambda: "P3"
+        bp.changed_modules = lambda a, b: {"Sheaf.ChainData"}
+        (land, waits, rets), _ = run([E5(), K8()], stub)
+        assert [p["group"] for p in land] == ["E5", "K8"] and len(stub.calls) == 2, stub.calls
+        # git cannot tell: compiled again
+        bp.published_commit = lambda: "P4"
+        bp.changed_modules = lambda a, b: None
+        bp._CHANGED.clear()
+        run([E5(), K8()], stub)
+        assert len(stub.calls) == 3, stub.calls
+    finally:
+        bp.published_commit, bp.changed_modules = pub, chg
+
+
 if __name__ == "__main__":
     bad = 0
     for k, f in sorted(globals().items()):
