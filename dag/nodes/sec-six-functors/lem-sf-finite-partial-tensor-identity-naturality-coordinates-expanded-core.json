@@ -1,0 +1,83 @@
+{
+ "id": "lem-sf-finite-partial-tensor-identity-naturality-coordinates-expanded-core",
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "title": "Core expanded fixed-coordinate scalar calculation",
+ "statement": "After applying naturality of the fixed pullback coordinate comparison, the remaining tensor-coordinate, upper-star comparison, and final fixed pullback factors satisfy the displayed scalar naturality equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Naturality coordinate calculation after fixed-coordinate expansion."
+ },
+ "proof": [
+  {
+   "text": "Use naturality of tensorCoordinates, the derived upper-star tensor comparison, the fixed tensor map, and the inverse realization unit; compose the equations associatively.",
+   "uses": [
+    "def-sf-finite-projection-fixed-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-projection-fixed-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Naturality coordinate calculation."
+ },
+ "mathlib_searches": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinatesExpandedCore",
+  "file": "lean/Sheaf/Paper/FinitePartialTensorIdentityNaturalityCoordinatesExpandedCore.lean",
+  "declaration": "WeilConjectures.finitePartialTensor_identityNaturality_coordinates_expanded_core",
+  "declarations": [
+   "WeilConjectures.finitePartialTensor_identityNaturality_coordinates_expanded_core"
+  ],
+  "statement": "theorem finitePartialTensor_identityNaturality_coordinates_expanded_core\n    (S : SixFunctorFiniteOperations D C E n hn) (X : SixFunctorSpace D) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let U := S.finite.pull (𝟙 X)\n    let V := CompactSupportFiniteProjection.torPull S (𝟙 X)\n    let T := Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor S X)\n    ∀ (M M' : sixFunctorFiniteCategory D C E n hn X)\n      (L L' : finiteTorConstructibleCategory C.l E n hn X.obj.left)\n      (f : M ⟶ M') (g : L ⟶ L'),\n      (CompactSupportFiniteProjection.fixedPullRealization S (𝟙 X)\n          (T.obj (M, L))).hom ≫\n        (CompactSupportFiniteProjection.fixedDerivedPull\n          (C := C) (E := E) (n := n) (𝟙 X)).map\n          ((CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)\n            (hn := hn) X).map (T.map (Prod.mkHom f g))) ≫\n        (CompactSupportFiniteProjection.fixedDerivedPull\n          (C := C) (E := E) (n := n) (𝟙 X)).map\n          (CompactSupportFiniteProjection.tensorCoordinates S X M' L').hom ≫\n        ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison\n          (ModuleCat.{u + 1} (ULift.{u + 1}\n          (Padic.coefficientExtensionRing C.l E n))) ((𝟙 X : X ⟶ X).hom.left)).app\n          ((CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)\n            (hn := hn) X).obj M')).app\n          ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj L'.obj) ≫\n        ((CompactSupportFiniteProjection.fixedTensor (C := C) (E := E) (n := n) X).map\n          (CompactSupportFiniteProjection.fixedPullRealization S (𝟙 X) M').inv).app\n          ((CompactSupportFiniteProjection.fixedDerivedPull\n            (C := C) (E := E) (n := n) (𝟙 X)).obj\n            ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj L'.obj)) =\n      (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)\n          (hn := hn) X).map\n          (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫\n        (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)\n          (hn := hn) X).map (T.map (Prod.mkHom (U.map f) (V.map g))) ≫\n        (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-partial-tensor-identity-naturality-coordinates-expanded",
+   "place": "scalar core after fixed pullback naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinatesExpanded",
+  "date": "2026-10-28",
+  "group": "H3"
+ },
+ "stmt_deps": [
+  "def-sf-finite-projection-fixed-coordinates",
+  "def-sf-finite-partial-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261028T034806-L-3546891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261028T034806-L-3546891",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

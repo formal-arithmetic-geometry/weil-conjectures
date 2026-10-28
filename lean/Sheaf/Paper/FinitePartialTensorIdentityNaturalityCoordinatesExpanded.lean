@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePullbackTensorFixedCoordinates
+import Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinatesExpandedCore
 
 /-! The remaining scalar naturality calculation after expanding the pullback tensor
 comparison in fixed coordinates.
@@ -23,6 +24,8 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   {E : Type u} [Field E] [Algebra (Padic C.l) E]
   [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
 
+set_option maxHeartbeats 800000 in
+-- The expanded categorical reassociation needs additional elaboration heartbeats.
 /-- After replacing the left comparison by `pullbackTensor_fixed_coordinates`,
 all remaining factors satisfy the required naturality equation.  This is the
 fixed scalar calculation: tensor coordinates, the upper-star tensor comparison,
@@ -63,6 +66,22 @@ theorem finitePartialTensor_identityNaturality_coordinates_expanded
         (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
           (hn := hn) X).map (T.map (Prod.mkHom (U.map f) (V.map g))) ≫
         (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom := by
-  sorry
+  dsimp only
+  intro M M' L L' f g
+  simp only [Functor.uncurry_obj_map, Functor.uncurry_obj_obj,
+    CompactSupportFiniteProjection.targetCoordinates, Iso.trans_hom,
+    Functor.mapIso_hom]
+  have hpull := (CompactSupportFiniteProjection.pullCoordinatesIso S (𝟙 X)).hom.naturality
+    (((CompactSupportFiniteProjection.partialTensor S X).map f).app L ≫
+      ((CompactSupportFiniteProjection.partialTensor S X).obj M').map g)
+  simp only [Functor.comp_map] at hpull
+  have hcoord := CompactSupportFiniteProjection.pullCoordinatesIso_hom_app S (𝟙 X)
+    (((CompactSupportFiniteProjection.partialTensor S X).obj M).obj L)
+  have hcoord' := CompactSupportFiniteProjection.pullCoordinatesIso_hom_app S (𝟙 X)
+    (((CompactSupportFiniteProjection.partialTensor S X).obj M').obj L')
+  rw [hcoord, hcoord'] at hpull
+  rw [reassoc_of% hpull]
+  exact finitePartialTensor_identityNaturality_coordinates_expanded_core S X M M' L L' f g
+
 
 end WeilConjectures

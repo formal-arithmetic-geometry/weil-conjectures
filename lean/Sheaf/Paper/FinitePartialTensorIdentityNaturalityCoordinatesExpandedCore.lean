@@ -1,0 +1,67 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.Paper.FinitePullbackTensorFixedCoordinates
+
+/-! Core scalar naturality equation after fixed pullback-coordinate naturality.
+(blueprint: lem-sf-finite-partial-tensor-identity-naturality-coordinates-expanded-core) -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+
+universe u
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures
+open CompactSupportFiniteProjection
+
+variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
+  {E : Type u} [Field E] [Algebra (Padic C.l) E]
+  [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
+
+/-- The scalar naturality calculation after applying naturality of the fixed-coordinate
+pullback comparison. This is the remaining tensor-coordinate and upper-star square.
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and the fixed-coordinate
+expansion in `pullbackTensor_fixed_coordinates`.
+(blueprint: lem-sf-finite-partial-tensor-identity-naturality-coordinates-expanded-core) -/
+theorem finitePartialTensor_identityNaturality_coordinates_expanded_core
+    (S : SixFunctorFiniteOperations D C E n hn) (X : SixFunctorSpace D) :
+    letI := Padic.finite_coefficientExtensionRing C.l E n hn
+    let U := S.finite.pull (𝟙 X)
+    let V := CompactSupportFiniteProjection.torPull S (𝟙 X)
+    let T := Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor S X)
+    ∀ (M M' : sixFunctorFiniteCategory D C E n hn X)
+      (L L' : finiteTorConstructibleCategory C.l E n hn X.obj.left)
+      (f : M ⟶ M') (g : L ⟶ L'),
+      (CompactSupportFiniteProjection.fixedPullRealization S (𝟙 X)
+          (T.obj (M, L))).hom ≫
+        (CompactSupportFiniteProjection.fixedDerivedPull
+          (C := C) (E := E) (n := n) (𝟙 X)).map
+          ((CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+            (hn := hn) X).map (T.map (Prod.mkHom f g))) ≫
+        (CompactSupportFiniteProjection.fixedDerivedPull
+          (C := C) (E := E) (n := n) (𝟙 X)).map
+          (CompactSupportFiniteProjection.tensorCoordinates S X M' L').hom ≫
+        ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison
+          (ModuleCat.{u + 1} (ULift.{u + 1}
+          (Padic.coefficientExtensionRing C.l E n))) ((𝟙 X : X ⟶ X).hom.left)).app
+          ((CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+            (hn := hn) X).obj M')).app
+          ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj L'.obj) ≫
+        ((CompactSupportFiniteProjection.fixedTensor (C := C) (E := E) (n := n) X).map
+          (CompactSupportFiniteProjection.fixedPullRealization S (𝟙 X) M').inv).app
+          ((CompactSupportFiniteProjection.fixedDerivedPull
+            (C := C) (E := E) (n := n) (𝟙 X)).obj
+            ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj L'.obj)) =
+      (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+          (hn := hn) X).map
+          (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫
+        (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+          (hn := hn) X).map (T.map (Prod.mkHom (U.map f) (V.map g))) ≫
+        (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom := by
+  sorry
+
+end WeilConjectures
