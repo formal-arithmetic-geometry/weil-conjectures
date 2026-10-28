@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorCommonLiftTensorUnit
+import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsAssociative
+import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsLeftUnit
+import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsRightUnit
+import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsSymmetric
 
 /-! Constraint equations for the common-stage completed tensor lift.
 (blueprint: new-sf-adic-completed-tensor-common-lift-constraints).
@@ -79,6 +83,17 @@ theorem completed_tensor_common_lift_constraints
     (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :
     Nonempty (CompletedTensorCommonLiftConstraints l X R closed models symmetry
       data.tensor data.unit) := by
-  sorry
+  have associative := completed_tensor_common_lift_constraints_associative l X R
+    closed models symmetry N coherence data
+  have left_unit := completed_tensor_common_lift_constraints_left_unit l X R
+    closed models symmetry N coherence data
+  have right_unit := completed_tensor_common_lift_constraints_right_unit l X R
+    closed models symmetry N coherence data
+  have symmetric := completed_tensor_common_lift_constraints_symmetric l X R
+    closed models symmetry N coherence data
+  exact ⟨{ associative := associative
+           left_unit := left_unit
+           right_unit := right_unit
+           symmetric := symmetric }⟩
 
 end WeilConjectures.AdicQbarRealization

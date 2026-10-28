@@ -1,0 +1,125 @@
+{
+ "id": "new-sf-adic-completed-tensor-common-lift-constraints-right-unit",
+ "kind": "statement",
+ "title": "Right-unit component for the common-stage completed tensor lift",
+ "statement": "theorem completed_tensor_common_lift_constraints_right_unit\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) :\n    ∀ A : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X,\n      closed.tensor.map (Prod.mkHom (𝟙 _) data.unit.hom) ≫\n          data.tensor.hom.app (A, pullbackTensorCommonUnit l (PadicAlgCl l) X) ≫\n          (ordinary l X R).map (pullbackTensorCommonRightUnitor l (PadicAlgCl l) X A).hom =\n        (closed.monoidal.rightUnitor ((ordinary l X R).obj A)).hom",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "proof": [
+  {
+   "text": "Represent the selected constraint diagram at a finite coefficient field, apply the corresponding native coherence equation, and transport through common-stage comparison and independence under finite extension.",
+   "uses": [
+    "def-sf-adic-completed-tensor-finite-models",
+    "def-sf-native-adic-realization-data",
+    "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "proof_origin": {
+  "by": "V6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient field tensor associator transport constraint equation",
+   "results": "No exact declaration; only generic categorical coherence APIs.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory associator tensor map natural isomorphism",
+   "results": "Only generic monoidal coherence declarations; no common-stage tensorator result.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed tensor common-stage finite representative constraint",
+   "results": "No exact declaration in the library.",
+   "date": "2026-10-28",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonLiftConstraints",
+  "date": "2026-10-28",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sf-adic-completed-tensor-common-lift-constraints",
+   "place": "Right-unit component equation",
+   "via": [
+    "new-sf-adic-completed-tensor-common-lift-constraints"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsRightUnit",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorCommonLiftConstraintsRightUnit.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_constraints_right_unit",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_constraints_right_unit"
+  ],
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-28",
+  "statement": "theorem completed_tensor_common_lift_constraints_right_unit (N : ∀ E, CompletedTensorFiniteModel l X R closed models E) (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1} (ProEt.topology X) (ring l X R) closed models symmetry) (data : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) : ∀ A : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X, closed.tensor.map (Prod.mkHom (𝟙 _) data.unit.hom) ≫ data.tensor.hom.app (A, pullbackTensorCommonUnit l (PadicAlgCl l) X) ≫ (ordinary l X R).map (pullbackTensorCommonRightUnitor l (PadicAlgCl l) X A).hom = (closed.monoidal.rightUnitor ((ordinary l X R).obj A)).hom"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; the corresponding finite representative constraint equation."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261028T020830-L-2552260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261028T020830-L-2552260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
