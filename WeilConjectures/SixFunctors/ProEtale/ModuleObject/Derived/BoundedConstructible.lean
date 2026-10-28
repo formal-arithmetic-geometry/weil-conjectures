@@ -11,6 +11,8 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorClosure
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorSingle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
@@ -763,8 +765,8 @@ include ℓ k
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 form a monoidal subcategory of
@@ -772,9 +774,16 @@ form a monoidal subcategory of
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
-    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
-  sorry
+instance isMonoidal_boundedConstructible
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [Fact (ringChar k ≠ ℓ)] :
+    (boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_tensor_closure _ X.left
+    (CondensedRing.boundedConstructible_tensor_single ℓ X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -859,8 +868,8 @@ variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are
@@ -868,10 +877,15 @@ stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidal_boundedConstructible
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
-      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
-  sorry
+      (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_tensor_closure _ X.left
+    (ContinuousMapRingObj.boundedConstructible_tensor_single ℓ E X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -960,8 +974,8 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
--- hypotheses are restated as binders; they repeat section variables.
+-- An instance keeps only the section variables its statement mentions, so its hypotheses are
+-- restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves form a monoidal subcategory of
 `D(Mod_{𝒪_{E,X}})` for the derived tensor product: they contain the unit
@@ -970,10 +984,15 @@ is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of 
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidal_boundedConstructible
     [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
-  sorry
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  exact boundedConstructible_tensor_closure _ X.left
+    (PadicIntegersRingObj.boundedConstructible_tensor_single ℓ E X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
