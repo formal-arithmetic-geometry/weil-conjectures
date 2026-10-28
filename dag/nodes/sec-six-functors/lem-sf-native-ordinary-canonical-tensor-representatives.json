@@ -1,0 +1,178 @@
+{
+ "id": "lem-sf-native-ordinary-canonical-tensor-representatives",
+ "kind": "statement",
+ "title": "Canonical localization normalization of ordinary tensor representatives",
+ "statement": "Let l be prime and Y any scheme. In the native module category A of [def-sf-native-weil-closed-models], use the canonical derived monoidal structure on D(A). There exist a symmetric structure beta, isomorphisms model(P,Q): Q(Q) tensor Q(P) ≅ Q(ordinaryTensorTotal(P,Q)) whenever P is NativeOrdinaryKFlat, and complex isomorphisms swap(P,Q): ordinaryTensorTotal(P,Q) ≅ ordinaryTensorTotal(Q,P) for all P,Q. The model is natural on complex maps f:P→P' and g:Q→Q' whenever P and P' are K-flat. The swap satisfies NativeOrdinarySignedSwap, and for K-flat P,Q, beta(Q(Q),Q(P)) followed by model(Q,P) equals model(P,Q) followed by Q(swap(P,Q)). This statement mentions no internal Hom or adjunction. Moreover the same chosen model admits complex isomorphisms kappa(P,Q): ordinaryTensorTotal(P,Q) ≅ Q tensor P. On each (p,q) summand, after precomposing with the balanced quotient tensorPi, kappa is (-1)^(pq) times the canonical inclusion of Q^q tensor P^p in the standard total Q tensor P. For K-flat P,Q the chosen model map is, as a heterogeneous equality, exactly the canonical lax localization tensorator mu(qQ,qP) followed by q(kappa(P,Q) inverse). The canonical monoidal structure and its tensorator are those of [lem-sf-ringed-derived-native-tensor]. No arbitrary adjunction normalization is used to infer associator coherence.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 0FPT: K-flat resolution, derived tensor localization and its symmetric monoidal structure; native tensor transport, geometric tensor part of step 3."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the explicit ordinaryTotalIso, ordinaryModel and ordinarySwap constructed in the proof of [lem-sf-native-ordinary-tensor-representatives], together with their proved naturality, signed swap and braiding equations. This selects the actual constructed witnesses, not an arbitrary witness of the existential statement.",
+   "uses": [
+    "lem-sf-native-ordinary-tensor-representatives",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose ordinaryTotalIso_ι with the balanced quotient tensorPi. The equation NativeAux.tensorComponent_π identifies the underived tensor comparison with the canonical quotient tensorObjPi. Pull the integer sign through composition. This gives the displayed summand formula.",
+   "uses": [
+    "lem-sf-native-hom-precomposition-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hom of ordinaryModel is definitionally the lax localization tensorator followed by Q.map of ordinaryTotalIso inverse. Thus the required heterogeneous equality holds by reflexivity, in particular on pairs of K-flat inputs.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-ordinary-tensor-representatives",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-native-hom-precomposition-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 0FPT: K-flat resolution, derived tensor localization and its symmetric monoidal structure; native tensor transport, geometric tensor part of step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Monoidal.*(transport|ofIso)|monoidal.*(transport|ofIso)",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Subcategory.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+     "Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal functor tensor comparison coherence from normalized tensor Hom adjunction on derived complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq",
+     "CategoryTheory.Functor.Monoidal.map_tensor",
+     "CategoryTheory.Functor.Monoidal.commTensorRight",
+     "CategoryTheory.Functor.Monoidal.commTensorLeft",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.Monoidal.InducingFunctorData.μIso",
+     "CategoryTheory.Tor'_obj_map",
+     "CategoryTheory.Tor_map"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Functor.Monoidal.instId",
+     "CategoryTheory.Functor.Monoidal",
+     "CategoryTheory.Equivalence.instMonoidalFunctorRefl",
+     "CategoryTheory.Equivalence.instMonoidalInverseRefl",
+     "CategoryTheory.Functor.instMonoidalProdDiag",
+     "CategoryTheory.Functor.CoreMonoidal.toMonoidal",
+     "CategoryTheory.Functor.Monoidal.toLaxMonoidal",
+     "CategoryTheory.Functor.Monoidal.toOplaxMonoidal"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor localization comparison and associator coherence on K flat complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "HomologicalComplex.associator",
+     "CategoryTheory.Localization.Monoidal.associator",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+     "CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc",
+     "HasDerivedCategory.standard",
+     "DerivedCategory.Q",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareNativeCoherence",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance.proof.md, geometric tensor and evaluation/transposition paragraph; representative component of native tensor transport step 3.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-derived-square-native-coherence",
+    "lem-sf-native-weil-tensor-ringed-derived-square-native-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryCanonicalTensorRepresentatives",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryCanonicalTensorRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_canonical_tensor_representatives",
+  "statement": "theorem native_ordinary_canonical_tensor_representatives (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :\n    ∃ β : SymmetricCategory (DerivedCategory (ProEtale.AdicSheaf l Y)),\n    ∃ model : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n      NativeOrdinaryKFlat l Y P →\n        (DerivedCategory.Q.obj Q ⊗ DerivedCategory.Q.obj P ≅\n          DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q)),\n    ∃ swap : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n      ordinaryTensorTotal l Y P Q ≅ ordinaryTensorTotal l Y Q P,\n      (∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (hP' : NativeOrdinaryKFlat l Y P')\n        (f : P ⟶ P') (g : Q ⟶ Q'),\n        (DerivedCategory.Q.map g ⊗ₘ DerivedCategory.Q.map f) ≫ (model P' Q' hP').hom =\n          (model P Q hP).hom ≫ DerivedCategory.Q.map\n            (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ))) ∧\n      NativeOrdinarySignedSwap l Y swap ∧\n      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (hQ : NativeOrdinaryKFlat l Y Q),\n        (β.toBraidedCategory.braiding (DerivedCategory.Q.obj Q)\n            (DerivedCategory.Q.obj P)).hom ≫ (model Q P hQ).hom =\n          (model P Q hP).hom ≫ DerivedCategory.Q.map (swap P Q).hom) ∧\n    (∃ κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n        ordinaryTensorTotal l Y P Q ≅ Q ⊗ P,\n      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n),\n        Mod.tensorπ (Q.X q) (P.X p) ≫\n            (HomologicalComplex.ιMapBifunctor P Q (ordinaryTensorBifunctor l Y)\n              (.up ℤ) p q n hpq).hom ≫ ((κ P Q).hom.f n).hom =\n          (p * q).negOnePow •\n            (Mod.tensorObjπ (Q.X q) (P.X p) ≫\n              (HomologicalComplex.ιTensorObj Q P q p n hqp).hom)) ∧\n      ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (_hQ : NativeOrdinaryKFlat l Y Q),\n        HEq (model P Q hP).hom\n          (Functor.LaxMonoidal.μ DerivedCategory.Q Q P ≫\n            DerivedCategory.Q.map (κ P Q).inv))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-908bb",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261028T055807-L-810289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-908bb",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261028T055807-L-810289",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules/nodes + adapted NativeWeilClosedModels/NativeOrdinaryClosedTensorModels against clone, change record users vs computed users, 3b (32/32 OK), sandbox compile of changed defs + 2 exposed transitive users, #print axioms"
+ }
+}

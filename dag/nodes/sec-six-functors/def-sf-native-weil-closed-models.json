@@ -2,7 +2,7 @@
  "id": "def-sf-native-weil-closed-models",
  "kind": "definition",
  "title": "Native row-sign closed comparison interface",
- "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and a scheme $X$ over $k_0$ [def-weil-finite-field-fiber, def-weil-frobenius-detailed]. Use the actual native category of Frobenius-fixed pro-etale coefficient modules and its derived category [def-weil-endofunctor-fixed-pair-category, def-weil-abstract-derived-category]. Define the ordinary sheaf-Hom bifunctor by precomposition and postcomposition, and the curried ordinary tensor by Mod.tensorLeft. Let $U$ be the termwise derived forgetful functor. A NativeClosedHomModels consists of native and ordinary derived Hom bifunctors, their source-slice identifications with the recorded bifunctorRHom, and natural product-total Hom models for arbitrary source and K-injective target, in the native row-sign convention. A NativeClosedComparison equips these models with closed monoidal structures, coefficient units in degree zero, symmetries, the ordinary K-flat total-tensor and unsigned adjunction normalization, and invertible natural tensor and Hom comparisons for $U$. Its Compatible predicate requires the Hom arrow to be the transpose of mapped evaluation, its projectionwise representative square, tensor unit and associativity coherence, preservation of symmetry and evaluation, and naturality and preservation of the bidual arrow defined by transposing evaluation after symmetry. These are precisely the pre-existing definitions extracted verbatim from NativeWeilClosedForgetful; no construction or normalization is altered.",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and a scheme $X$ over $k_0$ [def-weil-finite-field-fiber, def-weil-frobenius-detailed]. Use the actual native category of Frobenius-fixed pro-etale coefficient modules and its derived category [def-weil-endofunctor-fixed-pair-category, def-weil-abstract-derived-category]. Define the ordinary sheaf-Hom bifunctor by precomposition and postcomposition, and the curried ordinary tensor by Mod.tensorLeft. Let $U$ be the termwise derived forgetful functor. A NativeClosedHomModels consists of native and ordinary derived Hom bifunctors, their source-slice identifications with the recorded bifunctorRHom, and natural product-total Hom models for arbitrary source and K-injective target, in the native row-sign convention. A NativeClosedComparison equips these models with closed monoidal structures, coefficient units in degree zero, symmetries, the ordinary K-flat total-tensor, unsigned adjunction normalization, and canonical localization-tensorator normalization, and invertible natural tensor and Hom comparisons for $U$. Its Compatible predicate requires the Hom arrow to be the transpose of mapped evaluation, its projectionwise representative square, tensor unit and associativity coherence, preservation of symmetry and evaluation, and naturality and preservation of the bidual arrow defined by transposing evaluation after symmetry. The final clause of NativeOrdinaryTensorModels retains the actual canonical localization normalization: there are signed balanced total isomorphisms kappa(P,Q): ordinaryTensorTotal(P,Q) ≅ Q tensor P, equal on the (p,q) balanced summand to (-1)^(pq) times the canonical inclusion, and the chosen model on pairs of K-flat inputs is heterogeneously equal to the canonical lax localization tensorator followed by q(kappa inverse). This clause is satisfied by the explicit existing construction and excludes arbitrary symmetric noncocycle rescalings of the model relative to the fixed monoidal structure.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
   "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
@@ -118,13 +118,265 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-556bf",
-  "group": "V6",
-  "result": "pass",
-  "landing": "20261025T124141-L-1939079",
+  "reviewer": "C-908bb",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261028T055807-L-810289",
   "kind": "interface",
-  "note": "independent cc review: delivered item + 4 new modules/nodes against clone (byte-identical moved defs and unchanged item statement), node statements vs Lean, 6 direct importers compiled in sandbox, #print axioms"
+  "note": "independent cc review: item + 3 new modules/nodes + adapted NativeWeilClosedModels/NativeOrdinaryClosedTensorModels against clone, change record users vs computed users, 3b (32/32 OK), sandbox compile of changed defs + 2 exposed transitive users, #print axioms"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "T4 stage 3",
+  "old_statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and a scheme $X$ over $k_0$ [def-weil-finite-field-fiber, def-weil-frobenius-detailed]. Use the actual native category of Frobenius-fixed pro-etale coefficient modules and its derived category [def-weil-endofunctor-fixed-pair-category, def-weil-abstract-derived-category]. Define the ordinary sheaf-Hom bifunctor by precomposition and postcomposition, and the curried ordinary tensor by Mod.tensorLeft. Let $U$ be the termwise derived forgetful functor. A NativeClosedHomModels consists of native and ordinary derived Hom bifunctors, their source-slice identifications with the recorded bifunctorRHom, and natural product-total Hom models for arbitrary source and K-injective target, in the native row-sign convention. A NativeClosedComparison equips these models with closed monoidal structures, coefficient units in degree zero, symmetries, the ordinary K-flat total-tensor and unsigned adjunction normalization, and invertible natural tensor and Hom comparisons for $U$. Its Compatible predicate requires the Hom arrow to be the transpose of mapped evaluation, its projectionwise representative square, tensor unit and associativity coherence, preservation of symmetry and evaluation, and naturality and preservation of the bidual arrow defined by transposing evaluation after symmetry. These are precisely the pre-existing definitions extracted verbatim from NativeWeilClosedForgetful; no construction or normalization is altered.",
+  "what": "The previous predicate only normalized a model relative to an arbitrary chosen closed adjunction and Hom representatives. It did not identify that model with the fixed monoidal localization tensorator. The H4 audit exposed this missing associator/unit normalization. Retain the canonical construction already used in the ordinary existence proof, rather than deriving coherence from signed symmetry alone.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YS, 06YU and 0FPT: K-flat resolution, derived tensor localization and its symmetric monoidal structure; native tensor transport, geometric tensor part of step 3."
+  },
+  "citers": [
+   {
+    "id": "def-sf-native-proper-projection-comparison-data",
+    "holds": true,
+    "note": "Uses nativeForget and its termwise/derived factorizations, whose definitions are unchanged. No ordinary tensor-model normalization is altered in this definition."
+   },
+   {
+    "id": "def-sf-native-weil-tensor-presentation",
+    "holds": true,
+    "note": "Uses the native/ordinary categories, underived tensor-Hom, NativeAdjunctionNormalization or chain models. These definitions are unchanged; its own data do not acquire the new NativeOrdinaryTensorModels clause."
+   },
+   {
+    "id": "def-sf-native-weil-tensor-ringed-bridge",
+    "holds": true,
+    "note": "Uses the native/ordinary categories, underived tensor-Hom, NativeAdjunctionNormalization or chain models. These definitions are unchanged; its own data do not acquire the new NativeOrdinaryTensorModels clause."
+   },
+   {
+    "id": "lem-route-native-section-closed-forgetful",
+    "holds": true,
+    "note": "The NativeClosedComparison existence conclusion gains the canonical ordinaryTensorModels clause. The ordinary existence constructor now proves that clause, and the existing comparison construction retains its witness. All Compatible laws are unchanged."
+   },
+   {
+    "id": "lem-sf-native-action-site-hom-comparison",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-closed-transposition",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-coefficient-tensor-comparison",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-geometric-tensor-comparison",
+    "holds": true,
+    "note": "The ambient geometric tensor-isomorphism conclusion is unchanged. Its proof constructs an ordinary closed model using the existence constructor, now with the additional proved canonical clause; no assumption on its derived inputs changes."
+   },
+   {
+    "id": "lem-sf-native-hom-evaluation-square-all-sources",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-hom-representative-existence",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-hom-representative-uniqueness",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-inverse-hom-square",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-normalized-ordinary-hom",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-ordinary-chain-currying",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-ordinary-closed-tensor-models",
+    "holds": true,
+    "note": "Its existence conclusion gains the canonical clause. The delivery supplies a complete proof of that clause from the explicit existing tensor construction and adapts the constructor, with no new sorry."
+   },
+   {
+    "id": "lem-sf-native-ordinary-model-uniqueness",
+    "holds": true,
+    "note": "The statement fixes S,R and assumes only NativeAdjunctionNormalization, which is unchanged. Its chosen-witness corollary still follows from the preserved normalization conjunct; no canonical-model hypothesis is needed for uniqueness."
+   },
+   {
+    "id": "lem-sf-native-ordinary-representative-currying",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-ordinary-tensor-identification",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-ordinary-tensor-representatives",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-hom-closed-structure",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-hom-right-adjoint",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-ringed-presentation",
+    "holds": true,
+    "note": "Uses the native/ordinary categories, underived tensor-Hom, NativeAdjunctionNormalization or chain models. These definitions are unchanged; its own data do not acquire the new NativeOrdinaryTensorModels clause."
+   },
+   {
+    "id": "lem-sf-native-weil-ringed-tensor-model",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-adjoints",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-chain",
+    "holds": true,
+    "note": "Uses the native/ordinary categories, underived tensor-Hom, NativeAdjunctionNormalization or chain models. These definitions are unchanged; its own data do not acquire the new NativeOrdinaryTensorModels clause."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-coherence",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-constraint-lifts",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-evaluation",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-geometry",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-lift",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-resolution-model-data",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-resolution-model-naturality",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-resolution-model-transport",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-resolution-roof",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-comparison",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-native-coherence",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-native-data",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-naturality",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension",
+    "holds": true,
+    "note": "The supplied hS data now require the canonical localization clause. The earlier normalization and signed-swap conjuncts remain available. Existing model construction and forwarding proofs remain valid; this item uses the new clause explicitly to fix ordinaryModel before representative descent."
+   },
+   {
+    "id": "lem-sf-native-weil-tensor-ringed-transport",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-native-weil-underived-tensor",
+    "holds": true,
+    "note": "Uses the native/ordinary categories, underived tensor-Hom, NativeAdjunctionNormalization or chain models. These definitions are unchanged; its own data do not acquire the new NativeOrdinaryTensorModels clause."
+   },
+   {
+    "id": "lem-sf-native-weil-unit-mate-iso",
+    "holds": true,
+    "note": "Its NativeOrdinaryTensorModels hypothesis is explicitly strengthened to retain the canonical localization model. Its original clauses and geometric hypotheses stay available, so the stated use holds. The concrete ordinary existence theorem supplies the stronger witness to geometric consumers."
+   },
+   {
+    "id": "lem-sf-weil-native-row-hom-comparison",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-weil-native-row-hom-data",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-weil-native-row-hom-eta-eq",
+    "holds": true,
+    "note": "Uses the unchanged Hom representatives, NativeAdjunctionNormalization, ordinary tensor totals or generic closed/evaluation definitions. The statement and its use of those definitions do not depend on the newly retained canonical-model conjunct."
+   },
+   {
+    "id": "lem-sf-weil-native-tensor-transport",
+    "holds": true,
+    "note": "The NativeClosedComparison existence conclusion gains the canonical ordinaryTensorModels clause. The ordinary existence constructor now proves that clause, and the existing comparison construction retains its witness. All Compatible laws are unchanged."
+   }
+  ]
  }
 }

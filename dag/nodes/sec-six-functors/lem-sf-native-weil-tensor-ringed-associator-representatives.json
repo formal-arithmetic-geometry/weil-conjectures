@@ -1,0 +1,205 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-associator-representatives",
+ "kind": "statement",
+ "title": "Associator equation on three native K-flat representatives",
+ "statement": "Fix a finite field k0, a prime l different from its characteristic and a scheme X over k0. Use the native and ordinary coefficient module categories, their derived categories, Hom models M, a closed ordinary structure S with its symmetric structure beta and equality to the canonical derived monoidal structure [def-sf-native-weil-closed-models]. Fix the reversed-curried native tensor T and its underived adjunction, the forgetting isomorphism e with its uncurrying formula, and a chain-total comparison with its exact summand formula. Fix a native ringed bridge b [def-sf-native-weil-tensor-ringed-bridge], its normalized complex comparison A [lem-sf-native-weil-tensor-ringed-complexes], the ringed closed tensor models and coherent symmetries on both ringed sites [lem-sf-ringed-derived-closed-symmetric-monoidal], and a ringed forgetting TensorComparison d [lem-sf-ringed-forget-tensor-descent]. Use the transported native monoidal structure [def-sf-native-weil-tensor-ringed-structure] and its normalized K-flat model [def-sf-native-weil-tensor-ringed-model]. Let ordinaryModel be a one-K-flat ordinary tensor-total isomorphism natural in both representative arguments. Assume the canonical normalization: there are isomorphisms kappa(P,Q): ordinaryTensorTotal(P,Q) ≅ Q tensor P, whose restriction to every balanced (p,q) summand is (-1)^(pq) times the standard total inclusion, such that on pairs of ordinary K-flat complexes ordinaryModel.hom is heterogeneously equal to the canonical lax localization tensorator followed by q(kappa inverse). Let t be a natural tensor-forgetting isomorphism satisfying the full representative square, with forgetting preserving native K-flatness [lem-sf-native-weil-tensor-forget-kflat]. Write m for the transported native monoidal structure, F for nativeForget, and q for native derived localization. Use the coherence equations of [def-sf-ringed-forget-tensor-transposition-data]. Then for every three native K-flat complexes P,Q,N, the associativity equation for t and the existing associators holds at qP,qQ,qN: F(alpha_m) followed by t(qP,qQ tensor_m qN), then 1 tensor_S t(qQ,qN), equals t(qP tensor_m qQ,qN), then t(qP,qQ) tensor_S 1, then alpha_S. No coherence at arbitrary derived objects and no unit or symmetry equation is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 0FPT: K-flat resolution, derived tensor localization and its symmetric monoidal structure; native tensor transport, geometric tensor part of step 3."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-weil-tensor-ringed-structure",
+  "lem-sf-ringed-forget-tensor-descent",
+  "lem-sf-native-weil-tensor-ringed-complexes",
+  "def-sf-native-weil-tensor-ringed-model",
+  "lem-sf-native-weil-tensor-forget-kflat",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Replace the three native K-flat complexes, after b.native, by flat-term K-flat resolutions on the ringed site. Transport back along the equivalence of complexes. Quasi-isomorphisms become isomorphisms after localization. The chain comparisons and their summand formulas fix the image of every tensor factor, including signs.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-complexes",
+    "lem-sf-ringed-forget-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied canonical normalization for ordinaryModel and hmonoidal. Naturality and resolution in the second argument extend the needed comparison equations from pairs of K-flat complexes to one-K-flat pairs. The underlying balanced signed total comparison is determined by its summands.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand hforget for the two inner and two outer tensor pairs. Apply cB.associator_model and the associativity equation of the canonical lax localization tensorator. On a triple summand, A.uncurry, he and b.hom_square identify the underived comparisons across b.square. The remaining equation is b.underived.coherence.associativity. The signs agree because pq+(p+q)r=qr+p(q+r). Balanced tensor and coproduct extensionality prove equality of the chain maps.",
+   "uses": [
+    "def-sf-native-weil-tensor-ringed-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-ringed-complexes",
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain equality and cancel the inner and outer model isomorphisms. Naturality transfers the equation back from the flat-term replacements. Only associativity on qP,qQ,qN is asserted; no unit, symmetry or all-object extension is part of this lemma.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-ringed-complexes",
+  "lem-sf-ringed-forget-tensor-descent",
+  "def-sf-native-weil-closed-models",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-sf-native-weil-tensor-ringed-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 0FPT: K-flat resolution, derived tensor localization and its symmetric monoidal structure; native tensor transport, geometric tensor part of step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Monoidal.*(transport|ofIso)|monoidal.*(transport|ofIso)",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Subcategory.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+     "Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Functor.lean"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal functor tensor comparison coherence from normalized tensor Hom adjunction on derived complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq",
+     "CategoryTheory.Functor.Monoidal.map_tensor",
+     "CategoryTheory.Functor.Monoidal.commTensorRight",
+     "CategoryTheory.Functor.Monoidal.commTensorLeft",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.Monoidal.InducingFunctorData.μIso",
+     "CategoryTheory.Tor'_obj_map",
+     "CategoryTheory.Tor_map"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Functor.Monoidal.instId",
+     "CategoryTheory.Functor.Monoidal",
+     "CategoryTheory.Equivalence.instMonoidalFunctorRefl",
+     "CategoryTheory.Equivalence.instMonoidalInverseRefl",
+     "CategoryTheory.Functor.instMonoidalProdDiag",
+     "CategoryTheory.Functor.CoreMonoidal.toMonoidal",
+     "CategoryTheory.Functor.Monoidal.toLaxMonoidal",
+     "CategoryTheory.Functor.Monoidal.toOplaxMonoidal"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor localization comparison and associator coherence on K flat complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "HomologicalComplex.associator",
+     "CategoryTheory.Localization.Monoidal.associator",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+     "CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc",
+     "HasDerivedCategory.standard",
+     "DerivedCategory.Q",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal localization and associator facts found; no exact native normalized representative comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareNativeCoherence",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance.proof.md, geometric tensor and evaluation/transposition paragraph; representative component of native tensor transport step 3.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-derived-square-native-coherence",
+    "lem-sf-native-weil-tensor-ringed-derived-square-native-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedAssociatorRepresentatives",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedAssociatorRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_associator_representatives",
+  "statement": "theorem native_weil_tensor_ringed_associator_representatives\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤\n      ProEtaleWeilSheaf k₀ l X)\n    [T.Additive] [∀ P, (T.obj P).Additive]\n    (adj : T ⊣₂ ihomBifunctor k₀ l X)\n    (e : Functor.uncurry.obj T ⋙\n        Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ≅\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).prod\n        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) ⋙\n          Functor.uncurry.obj\n            (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))\n    (he : ∀ (P Q I : ProEtaleWeilSheaf k₀ l X)\n      (f : Q ⟶ ((ihomBifunctor k₀ l X).obj (op P)).obj I),\n      e.inv.app (P, Q) ≫\n          (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map\n            (((adj.adj P).homEquiv Q I).symm f) =\n        ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f)\n    [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]\n    (chain : ∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,\n      ((Endofunctor.IsoAlgebra.forget\n        (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj\n          (CochainComplex.mapBifunctor P Q T) ≅\n        ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q))\n    (hchain : ∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)\n      (p q n : ℤ) (h : p + q = n),\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map\n          (HomologicalComplex.ιMapBifunctor P Q T (.up ℤ) p q n h) ≫\n            (chain P Q).hom.f n =\n        e.hom.app (P.X p, Q.X q) ≫ HomologicalComplex.ιMapBifunctor\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q)\n          (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n          (.up ℤ) p q n h)\n    (b : NativeWeilTensorRingedBridge k₀ l X)\n    [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)]\n    [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.K b.Q)]\n    (A : NativeWeilRingedTensorComplexes b T adj)\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β)\n    (SB : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.J b.R))\n    (TB : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.J b.R SB)\n    (βB : @SymmetricCategory _ _ SB.monoidal)\n    (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)\n    (SA : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.K b.Q))\n    (TA : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.K b.Q SA)\n    (βA : @SymmetricCategory _ _ SA.monoidal)\n    (cA : RingedDerivedTensorCoherence b.K b.Q SA TA βA)\n    (d : RingedForgetTensorTransposition.TensorComparison\n      b.J b.R b.K b.Q b.forget b.underived SB TB βB cB SA TA βA cA)\n    (ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n        (_ : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P),\n          S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅\n            DerivedCategory.Q.obj\n              (ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P Q))\n    (hcanonical : ∃ κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ,\n        ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P Q ≅ Q ⊗ P,\n      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l\n          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n        (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n),\n        Mod.tensorπ (Q.X q) (P.X p) ≫\n            (HomologicalComplex.ιMapBifunctor P Q\n              (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n              (.up ℤ) p q n hpq).hom ≫ ((κ P Q).hom.f n).hom =\n          (p * q).negOnePow •\n            (Mod.tensorObjπ (Q.X q) (P.X p) ≫\n              (HomologicalComplex.ιTensorObj Q P q p n hqp).hom)) ∧\n      ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l\n          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n        (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P)\n        (_hQ : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber Q),\n        HEq (ordinaryModel P Q hP).hom\n          (Functor.LaxMonoidal.μ DerivedCategory.Q Q P ≫\n            DerivedCategory.Q.map (κ P Q).inv))\n    (_hnaturality : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l\n          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n          (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P)\n          (hP' : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P')\n          (f : P ⟶ P') (g : Q ⟶ Q'),\n        S.tensor.map\n            (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))\n            (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P'))\n            (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫\n            (ordinaryModel P' Q' hP').hom =\n          (ordinaryModel P Q hP).hom ≫ DerivedCategory.Q.map\n            (HomologicalComplex.mapBifunctorMap f g\n              (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n              (.up ℤ)))\n    (t : @MonoidalCategory.tensor _ _ (nativeWeilRingedMonoidal b SB) ⋙\n        nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    (hforget : (∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)\n      (hP : NativeTensorKFlat k₀ l X T P),\n    (nativeForget k₀ l X).map (nativeWeilRingedTensorModel b T adj A SB TB βB cB P Q hP).hom ≫\n        ((Endofunctor.IsoAlgebra.forget\n          (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app\n            (CochainComplex.mapBifunctor P Q T)) ≫\n        DerivedCategory.Q.map (chain P Q).hom =\n      t.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≫\n        S.tensor.map\n          (X := ((nativeForget k₀ l X).obj (DerivedCategory.Q.obj Q),\n            (nativeForget k₀ l X).obj (DerivedCategory.Q.obj P)))\n          (Y := (DerivedCategory.Q.obj\n            (((Endofunctor.IsoAlgebra.forget\n              (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q),\n            DerivedCategory.Q.obj\n            (((Endofunctor.IsoAlgebra.forget\n              (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)))\n          (Prod.mkHom\n            ((Endofunctor.IsoAlgebra.forget\n              (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app Q)\n            ((Endofunctor.IsoAlgebra.forget\n              (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app P)) ≫\n        (ordinaryModel\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Endofunctor.IsoAlgebra.forget\n            (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q)\n          (native_weil_tensor_forget_kflat k₀ l X T chain P hP)).hom)) :\n    ∀ (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ),\n      NativeTensorKFlat k₀ l X T P → NativeTensorKFlat k₀ l X T Q →\n      NativeTensorKFlat k₀ l X T N →\n      let m := nativeWeilRingedMonoidal b SB\n      let F := nativeForget k₀ l X\n      F.map (m.associator (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)\n          (DerivedCategory.Q.obj N)).hom ≫\n          t.hom.app (DerivedCategory.Q.obj P,\n            m.tensorObj (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj N)) ≫\n          S.tensor.map\n            (X := (F.obj (DerivedCategory.Q.obj P),\n              F.obj (m.tensorObj (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj N))))\n            (Y := (F.obj (DerivedCategory.Q.obj P),\n              S.tensor.obj (F.obj (DerivedCategory.Q.obj Q), F.obj (DerivedCategory.Q.obj N))))\n            (𝟙 _, t.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj N)) =\n        t.hom.app (m.tensorObj (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q),\n            DerivedCategory.Q.obj N) ≫\n          S.tensor.map\n            (X := (F.obj (m.tensorObj (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)),\n              F.obj (DerivedCategory.Q.obj N)))\n            (Y := (S.tensor.obj (F.obj (DerivedCategory.Q.obj P), F.obj (DerivedCategory.Q.obj Q)),\n              F.obj (DerivedCategory.Q.obj N)))\n            (t.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q), 𝟙 _) ≫\n          (S.monoidal.associator (F.obj (DerivedCategory.Q.obj P))\n            (F.obj (DerivedCategory.Q.obj Q)) (F.obj (DerivedCategory.Q.obj N))).hom",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-908bb",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261028T055807-L-810289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-908bb",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261028T055807-L-810289",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules/nodes + adapted NativeWeilClosedModels/NativeOrdinaryClosedTensorModels against clone, change record users vs computed users, 3b (32/32 OK), sandbox compile of changed defs + 2 exposed transitive users, #print axioms"
+ }
+}

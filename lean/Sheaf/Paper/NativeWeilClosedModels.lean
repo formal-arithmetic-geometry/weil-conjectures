@@ -5,6 +5,7 @@ Authors: SHEAF group Q25
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
@@ -31,7 +32,7 @@ set_option autoImplicit false
 
 universe u a b
 
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open WeilConjectures
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -357,6 +358,9 @@ def NativeAdjunctionNormalization
 
 /-- The ordinary derived tensor and symmetry on total K-flat representatives.
 The reversed order reflects Mod.tensorLeft: its value at (P,Q) is Q tensor P.
+The final clause fixes the model to the canonical localization tensorator, using
+its signed balanced-tensor comparison on every summand. It rules out arbitrary
+symmetric rescalings of the model relative to the fixed monoidal structure.
 Source: Stacks Tag 06YS and native comparison proof, step 5
 (blueprint: lem-sf-weil-native-closed-forgetful). -/
 def NativeOrdinaryTensorModels (Y : Scheme.{u})
@@ -378,7 +382,22 @@ def NativeOrdinaryTensorModels (Y : Scheme.{u})
       (hP : NativeOrdinaryKFlat l Y P) (hQ : NativeOrdinaryKFlat l Y Q),
       (β.toBraidedCategory.braiding (DerivedCategory.Q.obj Q)
           (DerivedCategory.Q.obj P)).hom ≫ (model Q P hQ).hom =
-        (model P Q hP).hom ≫ DerivedCategory.Q.map (swap P Q).hom)
+        (model P Q hP).hom ≫ DerivedCategory.Q.map (swap P Q).hom) ∧
+    (∃ κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
+        ordinaryTensorTotal l Y P Q ≅ Q ⊗ P,
+      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
+        (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n),
+        Mod.tensorπ (Q.X q) (P.X p) ≫
+            (HomologicalComplex.ιMapBifunctor P Q (ordinaryTensorBifunctor l Y)
+              (.up ℤ) p q n hpq).hom ≫ ((κ P Q).hom.f n).hom =
+          (p * q).negOnePow •
+            (Mod.tensorObjπ (Q.X q) (P.X p) ≫
+              (HomologicalComplex.ιTensorObj Q P q p n hqp).hom)) ∧
+      ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
+        (hP : NativeOrdinaryKFlat l Y P) (_hQ : NativeOrdinaryKFlat l Y Q),
+        HEq (model P Q hP).hom
+          (Functor.LaxMonoidal.μ DerivedCategory.Q Q P ≫
+            DerivedCategory.Q.map (κ P Q).inv))
 
 /-- Closed structures on the specified native and ordinary Hom models, and
 natural derived comparisons. Their compatibility assertions are stated separately

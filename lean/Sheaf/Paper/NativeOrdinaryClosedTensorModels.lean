@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.NativeWeilClosedModels
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-import Sheaf.Paper.NativeOrdinaryTensorRepresentatives
+import Sheaf.Paper.NativeOrdinaryCanonicalTensorRepresentatives
 import Sheaf.Paper.NativeOrdinaryRepresentativeCurrying
 
 /-! # Ordinary tensor on prescribed product-Hom representatives
@@ -106,13 +106,14 @@ theorem native_ordinary_closed_tensor_models
       S.monoidal =
         (inferInstance : MonoidalCategory (DerivedCategory (ProEtale.AdicSheaf l Y))) ∧
       NativeOrdinaryTensorModels l Y H R S β := by
-  obtain ⟨β, model, swap, hn, hswap, hβ⟩ := native_ordinary_tensor_representatives l Y
+  obtain ⟨β, model, swap, hn, hswap, hβ, hcanonical⟩ :=
+    native_ordinary_canonical_tensor_representatives l Y
   obtain ⟨e, he, hmodel⟩ := native_ordinary_representative_currying l Y H R model hn
   obtain ⟨⟨m, adj, ev⟩, hm, ht⟩ := closed_of_natural_currying H e he
   dsimp only [CoefficientClosedStructure.monoidal] at hm
   subst m
   let S : CoefficientClosedStructure H := ⟨inferInstance, adj, ev⟩
-  refine ⟨S, β, rfl, model, swap, ?_, hswap, hβ⟩
+  refine ⟨S, β, rfl, model, swap, ?_, hswap, hβ, hcanonical⟩
   intro P Q I hP hQ hI φ
   obtain ⟨ψ, hψ, hloc⟩ := hmodel P Q I hP hQ hI φ
   refine ⟨ψ, hψ, ?_⟩
