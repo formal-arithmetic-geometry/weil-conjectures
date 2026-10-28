@@ -21186,3 +21186,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:18 L: merged deliver/NC/lem-sf-projection-reduction-common (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
 - 08:18 L: merged deliver/NE/lem-sf-projection-base-change-integral (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
 - 08:18 L: merged deliver/NG/lem-sf-projection-reduction-integral (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
+- 08:18 L: merged deliver/ND/lem-sf-projection-base-change-common (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
