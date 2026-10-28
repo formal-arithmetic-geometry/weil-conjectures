@@ -12,14 +12,14 @@
  },
  "proof": [
   {
-   "text": "Transpose both internal-module maps and forget their actions. The linePull_existsUnique characterization reduces their equality to the composition equation for the normalized underlying abelian comparisons. The underived module compositor is obtained by conjugating the direct-image compositor, so the adjunct of the iterated composite is the iterated adjunct with that compositor.",
+   "text": "Use the normalized linePullIso adjunct equation from linePull_existsUnique. Transpose the iterated module composite using homEquiv_comp_conjugateEquiv_app and conjugateIsoEquiv_upperStarComp. Naturality of the two adjunction bijections, lowerStar_map_hom, and lowerStarComp_hom_app_hom identify its forgotten adjunct with the iterated abelian adjunct. Thus any composition equation for the normalized abelian comparisons gives the required module equation by faithfulness and injectivity of the adjunction.",
    "uses": [
     "def-sfb-rational-tate-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For the integral comparison, postcompose with every finite root projection. The formulas in spIntegralComparison_existsUnique reduce the comparison to tensoring the coefficient comparison with restriction of roots. Restriction of roots along a composite equals iterated restriction; the coefficient comparison has the same composition law. The monoidal inverse-image compositor respects their tensor product. The inverse-limit universal property identifies the integral maps.",
+   "text": "The abelian compositor is conjugate to the pushforward compositor. For coefficients, condensedPushforwardHom_comp and injectivity of adjunction give the pullback composition equation. For roots, transpose and use existsUnique_proEtaleRootsOfUnityDirectImageMap: on each section the composite is restriction through the two pullback projections and the canonical pullback associativity map. The equation Over.pullbackComp_left_fst_fst identifies their composite with the single projection, and functoriality of appTop identifies the restrictions.",
    "uses": [
     "det-prop-sfb-cartesian-coefficients-twists",
     "sk-prop-sfb-cartesian-coefficients"
@@ -27,7 +27,14 @@
    "elementary": false
   },
   {
-   "text": "For a finite rational field, use the rational_scalar equation for each of the two arrows and their composite. On the scalar-extension quotient the two composites agree by the integral equation and monoidality of the inverse-image compositor. The scalar-extension adjunction, equivalently its quotient universal property for the semilinear maps, gives equality of the rational comparisons.",
+   "text": "Monoidality of the abelian inverse-image compositor and naturality of its tensor comparison show that composition of tensor comparisons is the tensor product of the two composite comparisons. Apply the projection equations integralComparison_π for f, g and f≫g. The compositor naturality square moves each finite projection through the two successive pullbacks; the coefficient and root composition laws give equality at that level. The preserved-limit hom_ext lemma integral_maps_ext proves equality of integral comparisons.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite field E, precompose with the inverse image of the scalar-extension quotient Mod.extendπ, which is epimorphic. The rational_scalar equations give the corresponding naturality squares. Pasting these squares expresses the iterated rational comparison on the quotient as the tensor product of the coefficient and integral iterated comparisons followed by the target quotient. The tensor composition equation and the preceding integral equation identify this with rational_scalar for f≫g. Cancel the epimorphism.",
    "uses": [
     "det-prop-sfb-cartesian-coefficients-twists",
     "sk-prop-sfb-cartesian-coefficients"
@@ -35,7 +42,7 @@
    "elementary": false
   },
   {
-   "text": "For the algebraic closure, precompose with every finite-field coprojection and use qbar_coprojection for the three scheme arrows. The rational equations identify every composite, and the colimit universal property proves the closure equation. Faithfulness of forgetting module actions and the pullback adjunction bijection prove equality of the original line homomorphisms.",
+   "text": "For Qbar, use preservation by inverse image of the actual abelian finite-field colimit and its hom_ext principle. Paste the qbar_coprojection squares for f and g; each finite-field component is the rational composition equation followed by the target coprojection. The qbar_coprojection equation for f≫g gives equality on all components. Finally split the coefficient index and apply the module lifting argument of step 1. The private abelianComparison selector identifies each branch with its existing rational or closure map; the normalization helper unfolds lineComparison while keeping the large coefficient structures folded.",
    "uses": [
     "def-sfb-rational-tate-pullback-comparison",
     "sk-prop-sfb-cartesian-coefficients"
@@ -130,9 +137,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A5",
+  "group": "F5",
   "result": "pass",
-  "landing": "20261028T020141-L-2471562",
+  "landing": "20261028T034745-L-3540970",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
