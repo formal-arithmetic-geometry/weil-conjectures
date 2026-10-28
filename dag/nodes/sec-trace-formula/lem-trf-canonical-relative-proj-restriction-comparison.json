@@ -15,16 +15,37 @@
  },
  "proof": [
   {
-   "text": "For an affine open V of U, the sections of E|_U over V are those of E over the image of V, so the canonical graded algebra of Sym(E|_U) agrees on V with that of Sym(E), compatibly with restrictions. Both relative Proj schemes are glued from the charts Proj(Sym(E)(V)) along the same transitions, and over affine V the preimage of V in the global relative Proj is this chart; the chart embeddings glue to an isomorphism over U, which commutes with the structural morphisms chart by chart.",
-   "uses": [],
-   "elementary": false
+   "text": "For an affine open V of U, the restricted section module is the original section module on the image of V. Mathlib restricts scalars through the inverse appIso; for the inclusion of an open subscheme this appIso is the identity. Prove equality of these bundled modules. Transport the symmetric algebra, its grading, and its map to the affine spectrum across this equality. Any two grading decompositions coincide, since both invert the same summation map.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the top affine open T of the affine scheme U. The source-library isPullback_relProjι for the restricted graded algebra shows that its top chart embedding is an isomorphism, since the inclusion of T is an isomorphism. For the global graded algebra, compare isPullback_relProjι on the image of T with Mathlib isPullback_morphismRestrict. Uniqueness of pullbacks identifies this global chart with the inverse image of the image of T. Transport along the equality that the image of T is U.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the inverse top-chart embedding, the symmetric-section chart comparison, and the global restriction-chart isomorphism. Naturality of fromSpec along the open inclusion proves compatibility of the two chart structure maps. Use the chart equations relProjι_relProjHom, cancel the isomorphic top-chart embedding on the source and the monomorphism U.ι on the target, and obtain the required equation over U.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-trf-canonical-symmetric-graded-algebra",
+  "lemma-nagata-relative-proj-exists"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemmas 01WB and 01WC, affine-local comparison"
+  "group": "Q3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NQ, lemma-glue-relative-proj, affine chart property; single top-chart specialization for an affine open, using the source-library isPullback_relProjι and Mathlib restriction."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -67,11 +88,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-3e2b5",
-  "group": "P1",
-  "result": "fix",
-  "landing": "20261028T020617-L-2529383",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261028T034917-L-3568290",
   "kind": "interface",
-  "note": "independent cc review: canonicalRelativeProj_restrict_proper and the new exists_canonicalRelativeProj_restrict_iso against nodes lem-trf-canonical-relative-proj-proper-local / -restriction-comparison, WeilConjectures RelativeProj gluing (isPullback_relProjι), and the importer CanonicalRelativeProjProper (recompiled OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
