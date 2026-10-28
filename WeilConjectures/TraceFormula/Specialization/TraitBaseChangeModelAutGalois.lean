@@ -57,6 +57,7 @@ noncomputable def toRingAut : GenericAut k' K →* RingAut (traitGenericField K)
     rw [Spec.preimage_comp]
     rfl
 
+/-- Generic automorphisms are determined by their action on `Ω_K`. -/
 lemma toRingAut_injective : Function.Injective (toRingAut (k' := k') (K := K)) := by
   intro σ τ h
   refine ext ?_
@@ -64,5 +65,53 @@ lemma toRingAut_injective : Function.Injective (toRingAut (k' := k') (K := K)) :
   congr 1
   ext x
   exact RingEquiv.congr_fun h x
+
+end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
+
+variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
+
+/-- A generic automorphism fixes the image of `K⟦t⟧` in `Ω_K`. -/
+lemma toRingAut_algebraMap (σ : GenericAut k' K) (a : PowerSeries K) :
+    toRingAut σ (algebraMap (PowerSeries K) (traitGenericField K) a) =
+      algebraMap (PowerSeries K) (traitGenericField K) a := by
+  have h := congrArg Spec.preimage σ.over_trait
+  rw [traitGenericPoint, Spec.preimage_comp, Spec.preimage_map] at h
+  exact congrArg (fun f ↦ f.hom a) h
+
+/-- A generic automorphism fixes the image of `Ω` in `Ω_K`. -/
+lemma toRingAut_traitGenericFieldMap (σ : GenericAut k' K) (y : traitGenericField k') :
+    toRingAut σ (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y := by
+  have h := congrArg Spec.preimage σ.over_base
+  rw [traitGenericPointMap, Spec.preimage_comp, Spec.preimage_map] at h
+  exact congrArg (fun f ↦ f.hom y) h
+
+/-- A generic automorphism fixes the field of fractions `Frac K⟦t⟧` inside `Ω_K`. -/
+lemma toRingAut_algebraMap_fractionRing (σ : GenericAut k' K)
+    (a : FractionRing (PowerSeries K)) :
+    toRingAut σ (algebraMap (FractionRing (PowerSeries K)) (traitGenericField K) a) =
+      algebraMap (FractionRing (PowerSeries K)) (traitGenericField K) a := by
+  have := congrArg (fun f : FractionRing (PowerSeries K) →+* traitGenericField K ↦ f a)
+    (IsLocalization.ringHom_ext (nonZeroDivisors (PowerSeries K))
+      (j := ((toRingAut σ : traitGenericField K ≃+* _) : traitGenericField K →+* _).comp
+        (algebraMap (FractionRing (PowerSeries K)) (traitGenericField K)))
+      (k := algebraMap (FractionRing (PowerSeries K)) (traitGenericField K)) (by
+        ext b
+        simp only [RingHom.coe_comp, Function.comp_apply, RingHom.coe_coe]
+        rw [← IsScalarTower.algebraMap_apply, toRingAut_algebraMap]))
+  exact this
+
+/-- A generic automorphism as an automorphism of `Ω_K` over `Frac K⟦t⟧`, an element of the
+absolute Galois group of `Frac K⟦t⟧` (with its Krull topology). -/
+noncomputable def toAlgEquiv : GenericAut k' K →*
+    (traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K) where
+  toFun σ := AlgEquiv.ofRingEquiv (f := toRingAut σ) (toRingAut_algebraMap_fractionRing σ)
+  map_one' := by ext; simp
+  map_mul' _ _ := by ext; simp
+
+/-- Generic automorphisms are determined by their action on `Ω_K`. -/
+lemma toAlgEquiv_injective : Function.Injective (toAlgEquiv (k' := k') (K := K)) :=
+  fun _ _ h ↦ toRingAut_injective (RingEquiv.ext fun x ↦ AlgEquiv.congr_fun h x)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
