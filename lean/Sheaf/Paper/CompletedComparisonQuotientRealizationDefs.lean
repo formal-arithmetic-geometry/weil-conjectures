@@ -5,7 +5,7 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.Paper.CompletedPullbackTensorComparison
+public import Sheaf.Paper.CompletedPullbackTensorIntegralConstruction
 public import Sheaf.Paper.QuotientExpressionStrictKFlatTowers
 public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.Paper.IntegralCoherenceTower

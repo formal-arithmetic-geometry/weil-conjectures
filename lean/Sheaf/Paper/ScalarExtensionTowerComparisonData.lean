@@ -13,7 +13,7 @@ import all Sheaf.Paper.IntegralComparisonSequenceSystems
 import all Sheaf.Paper.IntegralTensorReductionTowerComparison
 import Sheaf.CategoryTheory.SystemScalarGenerators
 import all Sheaf.Paper.ScalarExtensionTensorUnit
-import all Sheaf.Paper.CompletedPullbackTensorComparison
+import all Sheaf.Paper.CompletedPullbackTensorIntegralConstruction
 
 /-! # Normalized comparisons on strict quotient models
 

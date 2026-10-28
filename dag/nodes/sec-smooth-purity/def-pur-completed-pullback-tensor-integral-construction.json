@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-completed-pullback-tensor-integral-construction",
+ "kind": "definition",
+ "title": "Canonical integral pullback/tensor coherent-counit construction",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, and $f:X\\to Y$ a scheme morphism with $\\ell$ invertible at all points of $X$ and $Y$. Use the fixed integral operations and constructible categories of [def-weil-derived-pullback-tensor-hom] and the coherent reduction, tensor, inverse image and total-limit realizations of [def-pur-completed-pullback-tower-realizations]. For constructible inputs $M,N$, the coherent reduction/limit counits on their tensor and on the two pulled-back reduction systems are invertible. Define the reference comparison by applying the actual total-limit functor to the coherent pullback/tensor comparison, conjugated by these specified counits. Define $\\mu^I_{f,M,N}$ by conjugating this reference comparison with the fixed integral pullback and tensor realization isomorphisms, then restricting to the full constructible subcategory. This is the existing canonicalIntegralPullbackTensor construction, extracted verbatim; no additional choice or scalar compatibility assertion is included.",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-trf-integral-pullback-descent-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 21.18.4 (Tag 07A4, label lemma-pullback-tensor-product), for the morphism of ringed topoi (X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar levels follow the level-by-level definitions of the operations in def-weil-derived-pullback-tensor-hom"
+ },
+ "proof": [
+  {
+   "text": "The tensor counit theorem and the pullback counit theorem give the three invertible coherent counits. Uniqueness of the sequence ring map identifies its inverse-image interface with the integral comparison sequence pullback. Compose the actual total-limit images and the fixed realization isomorphisms exactly as in the existing definitions. The full subcategory restriction preserves this isomorphism.",
+   "uses": [
+    "lem-pur-completed-pullback-tensor-counit",
+    "lem-pur-completed-pullback-tensor-pullback-counit",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-pullback-tensor-counit",
+  "lem-pur-completed-pullback-tensor-pullback-counit",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Literal extraction of the three existing declarations and the proved sequence-ring identification; no change to the constructed morphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension commutes with the canonical pullback tensor comparison for derived sheaves",
+   "results": "Eight sheaf-pullback adjunction and free-module results, including SheafOfModules.pullbackComp; none is the completed comparison construction.",
+   "date": "2026-10-28",
+   "verdict": "No direct replacement for the project completed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve adjunction-uniqueness results, including CategoryTheory.Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app; no completed tensor scalar square. The existing project quotient realization lemmas give the needed route.",
+   "date": "2026-10-28",
+   "verdict": "No direct replacement for the project completed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]ullback.*[Tt]ensor|[Tt]ensor.*[Pp]ullback.*scalar",
+   "results": "Zero hits from msearch grep. Repository search found the existing completed quotient realization lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No direct replacement for the project completed comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback tensor comparison is compatible with extension of scalars",
+   "results": "Eight hits, including TensorProduct.AlgebraTensorModule.distribBaseChange, scalar localization base-change equivalences and TensorProduct.map; none is the completed derived sheaf comparison.",
+   "date": "2026-10-28",
+   "verdict": "General algebraic base-change API exists; use the existing normalized project quotient realization lemmas for the completed comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorConstruction",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism induced by geometric Frobenius and the sentence \"These actions commute with finite reduction and scalar extension\": the inherited parent route uses the normalized derived pullback/tensor comparison to construct and identify this tensor-induced Weil isomorphism.",
+   "via": [
+    "def-pur-completed-pullback-tensor-construction",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorIntegralConstruction",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorIntegralConstruction.lean",
+  "declaration": "WeilConjectures.canonicalIntegralPullbackTensor",
+  "declarations": [
+   "WeilConjectures.pullbackTensorComparisonCounits",
+   "WeilConjectures.pullbackTensorReferenceComparison",
+   "WeilConjectures.canonicalIntegralPullbackTensor"
+  ],
+  "statement": "def canonicalIntegralPullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :\n    (@IntegralPullbackTensorComparison l _ E _ _ _ X Y f hX hY)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
+  "kind": "interface",
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+ }
+}

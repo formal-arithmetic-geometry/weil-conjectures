@@ -6,32 +6,27 @@ Authors: SHEAF group Q45
 module
 
 
+public import Sheaf.Paper.CompletedPullbackTensorIntegralConstruction
+public import Sheaf.Paper.CompletedPullbackTensorCoherentConstruction
 public import Sheaf.Paper.FinitePullbackTensorComparison
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import all Sheaf.Paper.FinitePullbackTensorUnitRepresentatives
-import Sheaf.Paper.CompletedPullbackTensorAssociativityRepresentatives
-import Sheaf.Paper.CompletedPullbackTensorUnitFromAssociativity
-import Sheaf.Paper.CompletedPullbackTensorSignedRepresentatives
-import all Sheaf.Paper.CompletedPullbackTensorEvaluationRepresentatives
-import all Sheaf.Paper.CompletedPullbackTensorProofImplementations
-import Sheaf.Paper.IntegralComparisonSequenceSystems
-import Sheaf.Paper.FiniteQuotientPullbackDescent
-import all Sheaf.Paper.StrictScalarPullbackComparison
-import Sheaf.Paper.CompletedPullbackTensorTensorCounit
-import Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives
-import all Sheaf.Paper.FinitePullbackTensorComparison
-import Sheaf.Paper.CompletedPullbackTensorPullbackCounit
-import all Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import all Sheaf.AlgebraicGeometry.ProEtaleOperations
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-
-
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
+import all Sheaf.Paper.CompletedPullbackTensorCoherentConstruction
+import Sheaf.Paper.CompletedComparisonQuotientNormalization
+import Sheaf.Paper.CompletedComparisonCanonicalIdentification
+import Sheaf.Paper.CompletedComparisonScalarLimitImage
+import all Sheaf.Paper.IntegralOperationsWellDefined
+import all Sheaf.Paper.CompletedPullbackTensorProofImplementations
+import Sheaf.Paper.FiniteQuotientPullbackDescent
+import Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives
+import all Sheaf.Paper.FinitePullbackTensorComparison
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+
 /-! # Integral and rational pullback/tensor constructions
 
 Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
@@ -74,500 +69,6 @@ attribute [local irreducible] Scheme.residueField
   CategoryTheory.Functor.mapDerivedCategory
 
 
-section CoherentSystems
-
-open CategoryTheory.Limits CategoryTheory.Functor Opposite
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-
-private theorem pullbackTensorSequenceRing_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    pullbackTensorSequenceRing l E f = integralComparisonSequenceRingMap l E f := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    apply (pullbackTensorSequenceRing_existsUnique l E f).unique
-    · exact (pullbackTensorSequenceRing_existsUnique l E f).exists.choose_spec
-    · intro n U
-      rfl
-
-attribute [local irreducible] pullbackTensorIntegralTensorNormalization
-
-/-- The systems used in the integral comparison are normalized, so the actual
-reduction/limit counits on them are invertible.
-Source: Stacks 0941; Bhatt--Scholze 3.4.12 (blueprint:
-def-pur-completed-pullback-tensor-construction).
-Proof: the reduction systems of constructible inputs are normalized. Tensor and
-constant-coefficient inverse image preserve the Cartesian quotient comparisons
-by their flat K-flat models, including ramified transitions. The normalized DVR
-effectivity theorem identifies the displayed counits as equivalences. -/
-theorem pullbackTensorComparisonCounits {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [_hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [_hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    (M N : sfIntegralConstructibleCategory l E Y) :
-    IsIso ((pullbackTensorCalculus l E Y).adjunction.counit.app
-      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj
-        ((pullbackTensorCalculus l E Y).reduction.obj M.obj,
-          (pullbackTensorCalculus l E Y).reduction.obj N.obj))) ∧
-    IsIso ((pullbackTensorCalculus l E X).adjunction.counit.app
-      ((pullbackTensorSequenceDerived l E f).obj
-        ((pullbackTensorCalculus l E Y).reduction.obj M.obj))) ∧
-    IsIso ((pullbackTensorCalculus l E X).adjunction.counit.app
-      ((pullbackTensorSequenceDerived l E f).obj
-        ((pullbackTensorCalculus l E Y).reduction.obj N.obj))) := by
-  have hY' : ∀ y : Y, IsUnit (l : Y.residueField y) :=
-    fun y ↦ isUnit_of_invertible (l : Y.residueField y)
-  have hX' : ∀ x : X, IsUnit (l : X.residueField x) :=
-    fun x ↦ isUnit_of_invertible (l : X.residueField x)
-  have h₁ := completedPullbackTensor_tensor_counit l E Y hY'
-    (pullbackTensorCalculus l E Y) M.obj N.obj
-  have heq : pullbackTensorSequenceInverse l E f =
-      integralComparisonSequencePullback l E f := by
-    unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
-    congr 1
-    unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
-    rw [pullbackTensorSequenceRing_eq]
-    rfl
-  have h₂ := completedPullbackTensor_pullback_counit l E f hX' hY'
-    (pullbackTensorCalculus l E X) (pullbackTensorCalculus l E Y)
-    (pullbackTensorSequenceInverse l E f) heq M.obj
-  have h₃ := completedPullbackTensor_pullback_counit l E f hX' hY'
-    (pullbackTensorCalculus l E X) (pullbackTensorCalculus l E Y)
-    (pullbackTensorSequenceInverse l E f) heq N.obj
-  refine ⟨?_, ?_, ?_⟩
-  · exact h₁
-  · exact h₂
-  · exact h₃
-
-/-- The integral comparison in coherent coordinates is exactly Rlim of the
-canonical system comparison, conjugated only by the specified coherent counits.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tensor-construction). -/
-def pullbackTensorReferenceComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    (M N : sfIntegralConstructibleCategory l E Y) :
-    (pullbackTensorReferencePullback l E f).obj
-      ((pullbackTensorReferenceTensor l E Y).obj (M.obj,N.obj)) ≅
-    (pullbackTensorReferenceTensor l E X).obj
-      ((pullbackTensorReferencePullback l E f).obj M.obj,
-        (pullbackTensorReferencePullback l E f).obj N.obj) := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    exact letI := ((@pullbackTensorComparisonCounits l _ E _ _ _ X Y f hX hY) M N).1
-      letI := ((@pullbackTensorComparisonCounits l _ E _ _ _ X Y f hX hY) M N).2.1
-      letI := ((@pullbackTensorComparisonCounits l _ E _ _ _ X Y f hX hY) M N).2.2
-      (coefficientSequenceLimit l E X).mapIso
-        ((pullbackTensorSequenceDerived l E f).mapIso
-          (asIso ((pullbackTensorCalculus l E Y).adjunction.counit.app
-            ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj
-              ((pullbackTensorCalculus l E Y).reduction.obj M.obj,
-                (pullbackTensorCalculus l E Y).reduction.obj N.obj))))) ≪≫
-      (coefficientSequenceLimit l E X).mapIso
-        ((pullbackTensorSystemComparison l E f).app
-          ((pullbackTensorCalculus l E Y).reduction.obj M.obj,
-            (pullbackTensorCalculus l E Y).reduction.obj N.obj)) ≪≫
-      (coefficientSequenceLimit l E X).mapIso
-        ((pullbackTensorCalculus l E X).systemClosed.tensor.mapIso
-          (Iso.prod
-            (asIso ((pullbackTensorCalculus l E X).adjunction.counit.app
-              ((pullbackTensorSequenceDerived l E f).obj
-                ((pullbackTensorCalculus l E Y).reduction.obj M.obj)))).symm
-            (asIso ((pullbackTensorCalculus l E X).adjunction.counit.app
-              ((pullbackTensorSequenceDerived l E f).obj
-                ((pullbackTensorCalculus l E Y).reduction.obj N.obj)))).symm))
-
-attribute [local irreducible] pullbackTensorReferenceComparison
-
-/-- The canonical completed integral comparison, transported from the actual
-coherent-system Rlim map to the recorded completed operations and their full
-constructible subcategories.
-Source: Stacks 07A4 and 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
-def canonicalIntegralPullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
-    (@IntegralPullbackTensorComparison l _ E _ _ _ X Y f hX hY) := fun M N ↦
-  ObjectProperty.isoMk _
-    ((pullbackTensorIntegralPullbackModel l E f).app
-        ((integralCompletedTensor l E Y).obj (M.obj,N.obj)) ≪≫
-      (pullbackTensorReferencePullback l E f).mapIso
-        ((pullbackTensorIntegralTensorModel l E Y).app (M.obj,N.obj)) ≪≫
-      (@pullbackTensorReferenceComparison l _ E _ _ _ X Y f hX hY) M N ≪≫
-      (pullbackTensorReferenceTensor l E X).mapIso
-        (Iso.prod ((pullbackTensorIntegralPullbackModel l E f).app M.obj).symm
-          ((pullbackTensorIntegralPullbackModel l E f).app N.obj).symm) ≪≫
-      ((pullbackTensorIntegralTensorModel l E X).app
-        ((integralDerivedPullback l E f).obj M.obj,
-          (integralDerivedPullback l E f).obj N.obj)).symm)
-
-
-/-- The finite inverse image in the strict integral tower is the intrinsic inverse
-image, with equality on the actual adjunction-unit sections.
-Source: Stacks 00YV, 03D2 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: both right adjoints take sections over the same base-change object with
-the same constant coefficient action. The identity of right adjoints induces
-this comparison of left adjoints. Its unit formula characterizes it uniquely. -/
-theorem pullbackTensorLevelIntrinsic_existsUnique {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (n : ℕ) :
-    ∃! e : integralOperationsLevelPullback l E f n ≅
-      sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f,
-      ∀ (M : normalizedDVRModules l E Y n) (U : Y.ProEt)
-        (x : M.val.obj (op U)),
-        (e.hom.app M).val.app (op ((proEtaleBaseChange f).obj U))
-          (((coefficientProEtaleModuleAdjunction.{u, u} f
-            (CommRingCat.of (ULift.{u + 1}
-              (finiteCoefficientRing l E (n + 1))))).unit.app M).val.app (op U) x) =
-        ((sfIntrinsicConstantModuleAdjunction f
-          (finiteCoefficientRing l E (n + 1))).unit.app M).val.app (op U) x := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    let A := finiteCoefficientRing l E (n + 1)
-    let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} f
-      (CommRingCat.of (ULift.{u + 1} A))
-    let adj₂ : sfIntrinsicPullback A f ⊣
-        coefficientProEtaleModuleDirectImage.{u, u} f
-          (CommRingCat.of (ULift.{u + 1} A)) :=
-      sfIntrinsicConstantModuleAdjunction f A
-    refine ⟨adj₁.leftAdjointUniq adj₂, ?_, ?_⟩
-    · intro M U x
-      exact congrArg (fun a ↦ a.val.app (op U) x)
-        (Adjunction.unit_leftAdjointUniq_hom_app adj₁ adj₂ M)
-    · intro e he
-      apply Iso.ext
-      apply NatTrans.ext
-      funext M
-      apply (adj₁.homEquiv M _).injective
-      rw [Adjunction.homEquiv_leftAdjointUniq_hom_app, Adjunction.homEquiv_unit]
-      ext U x
-      exact he M U.unop x
-
-/-- The unit-normalized realization of the finite pullback used by the strict tower.
-Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tensor-construction). -/
-def pullbackTensorLevelIntrinsic {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  pullbackTensorUniqueChoice (pullbackTensorLevelIntrinsic_existsUnique l E f n)
-
-private theorem localizationIso_existsUnique
-    {C D E : Type*} [Category C] [Category D] [Category E]
-    (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
-    (F G : C ⥤ E) (F' G' : D ⥤ E)
-    (a : L ⋙ F' ≅ F) (b : L ⋙ G' ≅ G) (c : F ≅ G) :
-    ∃! e : F' ≅ G', ∀ P : C,
-      e.hom.app (L.obj P) ≫ b.hom.app P = a.hom.app P ≫ c.hom.app P := by
-  letI : Localization.Lifting L W F F' := ⟨a⟩
-  letI : Localization.Lifting L W G G' := ⟨b⟩
-  let e := Localization.liftNatIso L W F G F' G' c
-  have he (P : C) :
-      e.hom.app (L.obj P) ≫ b.hom.app P = a.hom.app P ≫ c.hom.app P := by
-    dsimp only [e, Localization.liftNatIso_hom]
-    rw [Localization.liftNatTrans_app]
-    change (a.hom.app P ≫ c.hom.app P ≫ b.inv.app P) ≫ b.hom.app P = _
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply Localization.natTrans_ext L W
-  intro P
-  apply (cancel_mono (b.hom.app P)).1
-  exact (he' P).trans (he P).symm
-
-private theorem derivedCompositeIso_existsUnique
-    {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
-    [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
-    [HasDerivedCategory C₁] [HasDerivedCategory C₂]
-    [HasDerivedCategory D₁] [HasDerivedCategory D₂]
-    (A : C₁ ⥤ C₂) (B : C₂ ⥤ D₂) (C : C₁ ⥤ D₁) (D D₀ : D₁ ⥤ D₂)
-    [A.Additive] [B.Additive] [C.Additive] [D.Additive] [D₀.Additive]
-    [PreservesFiniteLimits A] [PreservesFiniteColimits A]
-    [PreservesFiniteLimits B] [PreservesFiniteColimits B]
-    [PreservesFiniteLimits C] [PreservesFiniteColimits C]
-    [PreservesFiniteLimits D] [PreservesFiniteColimits D]
-    (c₁ : A.mapHomologicalComplex (.up ℤ) ⋙ B.mapHomologicalComplex (.up ℤ) ≅
-      C.mapHomologicalComplex (.up ℤ) ⋙ D₀.mapHomologicalComplex (.up ℤ)) (c₂ : D₀ ≅ D) :
-    ∃! e : A.mapDerivedCategory ⋙ B.mapDerivedCategory ≅
-      C.mapDerivedCategory ⋙ D.mapDerivedCategory,
-      ∀ P : CochainComplex C₁ ℤ,
-        e.hom.app (DerivedCategory.Q.obj P) ≫
-            D.mapDerivedCategory.map (C.mapDerivedCategoryFactors.hom.app P) ≫
-            D.mapDerivedCategoryFactors.hom.app
-              ((C.mapHomologicalComplex (.up ℤ)).obj P) =
-          B.mapDerivedCategory.map (A.mapDerivedCategoryFactors.hom.app P) ≫
-            B.mapDerivedCategoryFactors.hom.app
-              ((A.mapHomologicalComplex (.up ℤ)).obj P) ≫
-            DerivedCategory.Q.map (c₁.hom.app P) ≫
-            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c₂ (.up ℤ)).hom.app
-              ((C.mapHomologicalComplex (.up ℤ)).obj P)) := by
-  exact completedPullbackDerivedCompositeIso_existsUnique A B C D D₀ c₁ c₂
-
-attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
-  pullbackTensorSequenceDerived in
-attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic in
-/-- The full cochain normalization of finite evaluation, kept behind a named predicate so
-selecting its unique isomorphism does not repeatedly type-check the full square.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
-def pullbackTensorDerivedEvaluationNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
-    (e : pullbackTensorSequenceDerived l E f ⋙
-        coefficientSequenceDerivedEvaluation l E X n ≅
-      coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f) : Prop :=
-  ∀ P : CochainComplex (coefficientSequenceModules l E Y) ℤ,
-        e.hom.app (DerivedCategory.Q.obj P) ≫
-          (finiteDerivedPullback l E n f).map
-            ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app P) ≫
-          (sfIntrinsicPullback
-            (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =
-        (coefficientSequenceDerivedEvaluation l E X n).map
-          ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P) ≫
-          (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫
-          DerivedCategory.Q.map ((pullbackTensorInverseEvaluationComplex l E f n).inv.app P) ≫
-          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex
-            (pullbackTensorLevelIntrinsic l E f n) (.up ℤ)).hom.app
-              (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P))
-
-attribute [local irreducible] pullbackTensorDerivedEvaluationNormalization
-
-attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
-  pullbackTensorSequenceDerived in
-attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic in
-/-- Evaluating the system inverse image gives the finite intrinsic inverse image;
-the comparison is fixed on all cochain representatives by the two ordinary units.
-Source: Stacks 0941, 03D2 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: apply the exact evaluation functor to a cochain representative. The
-ordinary inverse-image/evaluation mate and the unit-normalized intrinsic
-realization give the displayed chain comparison. Exact localization descends
-it uniquely, since every derived object is represented by a complex. -/
-theorem pullbackTensorDerivedEvaluation_existsUnique {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (n : ℕ) :
-    ∃! e : pullbackTensorSequenceDerived l E f ⋙
-        coefficientSequenceDerivedEvaluation l E X n ≅
-      coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f,
-      pullbackTensorDerivedEvaluationNormalization l E f n e := by
-  unfold pullbackTensorDerivedEvaluationNormalization
-  let D : normalizedDVRModules l E Y n ⥤ normalizedDVRModules l E X n :=
-    sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f
-  letI : D.Additive :=
-    sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f
-  letI : PreservesFiniteLimits D :=
-    sfIntrinsicPullback_preservesFiniteLimits (finiteCoefficientRing l E (n + 1)) f
-  letI : PreservesFiniteColimits D :=
-    sfIntrinsicPullback_preservesFiniteColimits (finiteCoefficientRing l E (n + 1)) f
-  letI := integralOperationsLevelPullback_additive l E f n
-  exact derivedCompositeIso_existsUnique (pullbackTensorSequenceInverse l E f)
-    (coefficientSequenceEvaluation l E X n) (coefficientSequenceEvaluation l E Y n) D
-    (integralOperationsLevelPullback l E f n)
-    (pullbackTensorInverseEvaluationComplex l E f n).symm
-    (pullbackTensorLevelIntrinsic l E f n)
-
-/-- The actual evaluation comparison, including its fixed cochain normalization.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
-def pullbackTensorDerivedEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  pullbackTensorUniqueChoice (pullbackTensorDerivedEvaluation_existsUnique l E f n)
-
-private theorem coherentTensor_representatives
-    (W : Scheme.{u}) (M : coefficientSequenceDerived l E W) :
-    ∃ P : CochainComplex (coefficientSequenceModules l E W) ℤ,
-      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-        (J := coefficientSequenceTopology (ProEt.topology W))
-        (R := coefficientSequenceCommRingSheaf l E W) P ∧
-        Nonempty (DerivedCategory.Q.obj P ≅ M) := by
-  let q := DerivedCategory.Q (C := coefficientSequenceModules l E W)
-  let K := q.objPreimage M
-  obtain ⟨P, a, hP, _, ha, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients K
-  let : QuasiIso a := ha
-  exact ⟨P, hP, ⟨asIso (q.map a) ≪≫ q.objObjPreimageIso M⟩⟩
-
-private theorem tensorNatTrans_ext_resolving
-    {B : Type*} [Category* B] {D : Type*} [Category* D]
-    {E : Type*} [Category* E] (q : B ⥤ D) (P : ObjectProperty B)
-    (res : ∀ X : D, ∃ Y : B, P Y ∧ Nonempty (q.obj Y ≅ X))
-    {F G : D × D ⥤ E} (a b : F ⟶ G)
-    (h : ∀ Y Z : B, P Y → P Z → a.app (q.obj Y, q.obj Z) =
-      b.app (q.obj Y, q.obj Z)) : a = b := by
-  apply NatTrans.ext
-  funext X
-  obtain ⟨Y, hY, ⟨eY⟩⟩ := res X.1
-  obtain ⟨Z, hZ, ⟨eZ⟩⟩ := res X.2
-  let e := Iso.prod eY eZ
-  apply (cancel_epi (F.map e.hom)).1
-  rw [a.naturality, b.naturality, h Y Z hY hZ]
-
-
-section CoherentEvaluation
-attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
-attribute [local irreducible] pullbackTensorSystemComparison pullbackTensorDerivedEvaluation
-  pullbackTensorSequenceDerived pullbackTensorSequenceInverse
-  finitePullbackTensorConstructionIso canonicalFinitePullbackTensor
-
-/-- The coherent comparison whose limit defines μI evaluates to the same μF at
-EVERY finite level, under the canonical tensor and inverse-image comparisons.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on a flat K-flat pair both routes are the totalization of the identical
-ordinary section formula. The evaluation tensor comparison and inverse-image
-comparison preserve these sections by their normalizations. K-flat descent
-therefore proves the equation on arbitrary coherent derived inputs. -/
-theorem pullbackTensorSystemComparison_evaluation {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (n : ℕ)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
-    (M N : coefficientSequenceDerived l E Y) :
-    (coefficientSequenceDerivedEvaluation l E X n).map
-      ((pullbackTensorSystemComparison l E f).hom.app (M,N)) ≫
-      ((pullbackTensorCalculus l E X).evaluationTensor n).hom.app
-        ((pullbackTensorSequenceDerived l E f).obj M,
-          (pullbackTensorSequenceDerived l E f).obj N) ≫
-      (finiteIntrinsicDerivedTensor l E X n).map
-        (Prod.mkHom ((pullbackTensorDerivedEvaluation l E f n).hom.app M)
-          ((pullbackTensorDerivedEvaluation l E f n).hom.app N)) =
-    (pullbackTensorDerivedEvaluation l E f n).hom.app
-      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M,N)) ≫
-      (finiteDerivedPullback l E n f).map
-        (((pullbackTensorCalculus l E Y).evaluationTensor n).hom.app (M,N)) ≫
-      ((@canonicalFinitePullbackTensor l _ E _ _ _ X Y f n hX hY)
-        ((coefficientSequenceDerivedEvaluation l E Y n).obj M)
-        ((coefficientSequenceDerivedEvaluation l E Y n).obj N)).hom := by
-  unfold canonicalFinitePullbackTensor
-  exact completedPullbackTensor_evaluation_descent l E f n
-    (pullbackTensorLevelIntrinsic l E f n)
-    ((pullbackTensorLevelIntrinsic_existsUnique l E f n).exists.choose_spec)
-    (pullbackTensorDerivedEvaluation l E f n) (by
-      unfold pullbackTensorDerivedEvaluation pullbackTensorUniqueChoice
-      simpa only [pullbackTensorDerivedEvaluationNormalization] using
-        (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec)
-    (coherentTensor_representatives l E Y) M N
-
-end CoherentEvaluation
-
-section CoherentAssociativity
-attribute [local irreducible] pullbackTensorCalculus pullbackTensorSequenceDerived
-  pullbackTensorSystemComparison pullbackTensorSequenceInverse
-
-/-- Associativity for the actual coherent μ whose derived limit is the integral μ.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on three simultaneous flat K-flat representatives the two maps send
-(x tensor y) tensor z to f*x tensor (f*y tensor f*z). The total reassociation
-preserves the signed differential and all sequence restrictions. Localize this
-equality of coherent complexes; applying the actual limit functor preserves it. -/
-theorem pullbackTensorSystemComparison_associativity {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (M N P : coefficientSequenceDerived l E Y) :
-    (pullbackTensorSequenceDerived l E f).map
-      ((pullbackTensorCalculus l E Y).systemClosed.monoidal.associator M N P).hom ≫
-      (pullbackTensorSystemComparison l E f).hom.app
-        (M,(pullbackTensorCalculus l E Y).systemClosed.tensor.obj (N,P)) ≫
-      (pullbackTensorCalculus l E X).systemClosed.tensor.map
-        (Prod.mkHom (𝟙 _) ((pullbackTensorSystemComparison l E f).hom.app (N,P))) =
-    (pullbackTensorSystemComparison l E f).hom.app
-      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M,N),P) ≫
-      (pullbackTensorCalculus l E X).systemClosed.tensor.map
-        (Prod.mkHom ((pullbackTensorSystemComparison l E f).hom.app (M,N)) (𝟙 _)) ≫
-      ((pullbackTensorCalculus l E X).systemClosed.monoidal.associator
-        ((pullbackTensorSequenceDerived l E f).obj M)
-        ((pullbackTensorSequenceDerived l E f).obj N)
-        ((pullbackTensorSequenceDerived l E f).obj P)).hom := by
-  letI : MonoidalCategory (coefficientSequenceDerived l E Y) :=
-    (pullbackTensorCalculus l E Y).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l E X) :=
-    (pullbackTensorCalculus l E X).systemClosed.monoidal
-  let F := pullbackTensorSequenceDerived l E f
-  let μ := pullbackTensorSystemComparison l E f
-  let a := assocLeftPath F μ
-  let b := assocRightPath F μ
-  have hab : a = b := tripleNatTrans_ext_resolving DerivedCategory.Q
-    (CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (J := coefficientSequenceTopology (ProEt.topology Y))
-      (R := coefficientSequenceCommRingSheaf l E Y))
-    (coherentTensor_representatives l E Y) a b (by
-      intro A B C hA hB hC
-      exact completedPullbackTensor_associativity_representatives l E f A B C hA hB hC)
-  exact NatTrans.congr_app hab (M,N,P)
-
-end CoherentAssociativity
-
-section CoherentBraiding
-attribute [local irreducible] pullbackTensorCalculus pullbackTensorSequenceDerived
-  pullbackTensorSystemComparison pullbackTensorBraiding pullbackTensorSequenceInverse
-
-attribute [local implicit_reducible] pullbackTensorSwap in
-/-- Koszul braiding for the same coherent μ before taking its derived limit.
-Source: Stacks 06YS, 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: both maps take a homogeneous generator x tensor y of degrees p,q to
-(-1)^(pq) f*y tensor f*x. The equality respects every sequence restriction and
-descends through the specified K-flat tensor models. Its image under the actual
-limit, scalar localization, and common-stage maps gives the higher-level equation. -/
-theorem pullbackTensorSystemComparison_braiding {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (M N : coefficientSequenceDerived l E Y) :
-    (pullbackTensorSequenceDerived l E f).map
-      ((pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology Y))
-        (coefficientSequenceCommRingSheaf l E Y)
-        (pullbackTensorCalculus l E Y).systemClosed
-        (pullbackTensorCalculus l E Y).systemTensorModel).hom.app (M,N)) ≫
-      (pullbackTensorSystemComparison l E f).hom.app (N,M) =
-    (pullbackTensorSystemComparison l E f).hom.app (M,N) ≫
-      (pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology X))
-        (coefficientSequenceCommRingSheaf l E X)
-        (pullbackTensorCalculus l E X).systemClosed
-        (pullbackTensorCalculus l E X).systemTensorModel).hom.app
-          ((pullbackTensorSequenceDerived l E f).obj M,
-            (pullbackTensorSequenceDerived l E f).obj N) := by
-  let F := pullbackTensorSequenceDerived l E f
-  let TY := (pullbackTensorCalculus l E Y).systemClosed.tensor
-  let TX := (pullbackTensorCalculus l E X).systemClosed.tensor
-  let μ := pullbackTensorSystemComparison l E f
-  let σY := pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology Y))
-    (coefficientSequenceCommRingSheaf l E Y)
-    (pullbackTensorCalculus l E Y).systemClosed
-    (pullbackTensorCalculus l E Y).systemTensorModel
-  let σX := pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology X))
-    (coefficientSequenceCommRingSheaf l E X)
-    (pullbackTensorCalculus l E X).systemClosed
-    (pullbackTensorCalculus l E X).systemTensorModel
-  let a : TY ⋙ F ⟶ pullbackTensorSwap _ ⋙ (F.prod F) ⋙ TX :=
-    Functor.whiskerRight σY.hom F ≫
-      Functor.whiskerLeft (pullbackTensorSwap _) μ.hom
-  let b : TY ⋙ F ⟶ pullbackTensorSwap _ ⋙ (F.prod F) ⋙ TX :=
-    μ.hom ≫ Functor.whiskerLeft (F.prod F) σX.hom
-  have hab : a = b := tensorNatTrans_ext_resolving DerivedCategory.Q
-    (CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
-      (J := coefficientSequenceTopology (ProEt.topology Y))
-      (R := coefficientSequenceCommRingSheaf l E Y))
-    (coherentTensor_representatives l E Y) a b (by
-      intro P Q hP hQ
-      exact completedPullbackTensor_signed_representatives l E f P Q hP hQ)
-  exact NatTrans.congr_app hab (M,N)
-
-end CoherentBraiding
-
-section CoherentUnit
-universe a b c d
-open MonoidalCategory
-
-/-- Both unit equations for the coherent μ used to define the integral comparison.
-Source: Stacks 03EL, 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: the associativity comparison and the coherent unit representative are
-combined by the monoidal unit extraction lemma. -/
-theorem pullbackTensorSystemComparison_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃ ε : (pullbackTensorSequenceDerived l E f).obj
-        (pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit ≅
-      (pullbackTensorCalculus l E X).systemClosed.monoidal.tensorUnit,
-      ∀ M : coefficientSequenceDerived l E Y,
-        ((pullbackTensorSystemComparison l E f).hom.app
-          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit,M) ≫
-          (pullbackTensorCalculus l E X).systemClosed.tensor.map
-            (Prod.mkHom ε.hom (𝟙 _)) ≫
-          ((pullbackTensorCalculus l E X).systemClosed.monoidal.leftUnitor
-            ((pullbackTensorSequenceDerived l E f).obj M)).hom =
-        (pullbackTensorSequenceDerived l E f).map
-          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.leftUnitor M).hom) ∧
-        ((pullbackTensorSystemComparison l E f).hom.app
-          (M,(pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit) ≫
-          (pullbackTensorCalculus l E X).systemClosed.tensor.map
-            (Prod.mkHom (𝟙 _) ε.hom) ≫
-          ((pullbackTensorCalculus l E X).systemClosed.monoidal.rightUnitor
-            ((pullbackTensorSequenceDerived l E f).obj M)).hom =
-        (pullbackTensorSequenceDerived l E f).map
-          ((pullbackTensorCalculus l E Y).systemClosed.monoidal.rightUnitor M).hom) := by
-  exact completedPullbackTensor_unit_of_associativity l E f
-    (pullbackTensorSystemComparison_associativity l E f)
-
-end CoherentUnit
-
-end CoherentSystems
 
 section QuotientCompatibility
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -976,6 +477,7 @@ end CommonComparison
 
 
 section ScalarCompatibility
+attribute [local irreducible] pullbackTensorCalculus
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
@@ -1010,7 +512,30 @@ theorem canonicalIntegralPullbackTensor_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj M)
         ((sfConstructibleIntegralScalarExtension 0 l
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj N)).hom := by
-  sorry
+  classical
+  let q := integralOperationsGoodLocalization l E Y
+  let weak := (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E Y).ι
+  have : q.IsLocalization weak := integralOperationsGoodLocalization_isLocalization l E Y
+  have : q.EssSurj := Localization.essSurj q weak
+  let inputs : Fin 3 → sfIntegralConstructibleCategory l E Y := ![M, N, M]
+  let P (i : Fin 3) := q.objPreimage (inputs i).obj
+  let φ (i : Fin 3) : DerivedCategory.Q.obj (P i).obj ≅ (inputs i).obj :=
+    q.objObjPreimageIso (inputs i).obj
+  obtain ⟨good, invertible, _hnorm, _hpres, _hnatural⟩ :=
+    CompletedQuotient.completedComparisonQuotientNormalization l E (𝟙 X) f inputs P φ
+  have hcanonical := (CompletedQuotient.completedComparisonCanonicalIdentification
+    l E L (𝟙 X) f inputs P φ good invertible).1
+  have hscalar := (CompletedQuotient.completedComparisonScalarLimitImage
+    l E L ι (𝟙 X) f inputs P φ good invertible).2
+  unfold CompletedQuotient.ScalarLimitImage at hscalar
+  obtain ⟨ρX, ρY, SX, SY, goodL, invertibleL, _hsquare, hcanonicalL, hpaths⟩ := hscalar
+  have h := hpaths (CompletedQuotient.scalarLeft l E L ι f
+    (CompletedQuotient.quotient l E (P 0).obj)
+    (CompletedQuotient.quotient l E (P 1).obj)).hom (Or.inl rfl)
+  rw [hcanonical, hcanonicalL] at h
+  apply ObjectProperty.hom_ext
+  exact h.2.symm.trans h.1
 
 section RationalScalarProof
 

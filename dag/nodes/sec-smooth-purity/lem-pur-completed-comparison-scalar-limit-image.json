@@ -2,7 +2,7 @@
  "id": "lem-pur-completed-comparison-scalar-limit-image",
  "kind": "statement",
  "title": "Scalar closure and normalized comparison limit image",
- "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. Fix also $\\iota:E\\to L$. For any GoodExpressions and invertibility proofs for the E substitutions, every ScalarGenerated expression is ScalarGood, and ScalarLimitImage holds: there are normalized L Roos/scalar models and invertible recursive L substitutions; the two actual strict scalar routes are equal; their limit image is the prescribed canonical L comparison; and each route yields both specified completed scalar/pullback/tensor composites.",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. Fix also $\\iota:E\\to L$. For any GoodExpressions and invertibility proofs for the E substitutions, every ScalarGenerated expression is ScalarGood, and ScalarLimitImage holds: there are normalized L Roos/scalar models and invertible recursive L substitutions; the two actual strict scalar routes are equal; their limit image is the prescribed canonical L comparison; and each route yields both specified completed scalar/pullback/tensor composites. The canonical integral comparison used here is the coherent-counit construction of [def-pur-completed-pullback-tensor-integral-construction]; scalar compatibility of that comparison is not assumed.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
@@ -20,7 +20,7 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-completed-pullback-tensor-integral-construction",
   "def-weil-integral-scalar-extension",
   "lem-pur-integral-operations-scalar-extension",
   "def-pur-strict-quotient-expressions",
@@ -139,13 +139,55 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-64d64",
-  "group": "Y3",
-  "result": "pass",
-  "landing": "20261025T101942-L-3760431",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement vs sheaf-dag (byte-identical); relocated Defs vs old item body (only declared GoodExpressions abbrev + strictMap explicit tensorHom); three sorry lemmas vs item conjuncts (exact sub-conjunctions); item node proof_deps vs Lean proof"
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "T3 stage 2",
+  "old_statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. Fix also $\\iota:E\\to L$. For any GoodExpressions and invertibility proofs for the E substitutions, every ScalarGenerated expression is ScalarGood, and ScalarLimitImage holds: there are normalized L Roos/scalar models and invertible recursive L substitutions; the two actual strict scalar routes are equal; their limit image is the prescribed canonical L comparison; and each route yields both specified completed scalar/pullback/tensor composites.",
+  "what": "Dependency precision after the integral constructor extraction: the unchanged canonical integral morphism is needed here, not the common-stage comparison and its scalar-compatibility proof. Refer to its new definition node to remove the artificial dependency cycle. Every Lean signature and definition is unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-completed-comparison-quotient-realization",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pur-completed-comparison-quotient-realization-data",
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-completed-integral-coefficients",
+   "def-coef-normalized-dvr-tower",
+   "def-weil-integral-reduction-tower",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "def-pur-integral-derived-operations",
+   "def-weil-derived-complete-integral-detailed",
+   "def-pc-kflat-complex",
+   "def-pc-flat-sheaf-modules",
+   "lem-pur-cochain-pullback-tensor-coherence",
+   "def-pur-completed-pullback-tensor-comparison",
+   "def-weil-integral-scalar-extension",
+   "lem-pur-integral-operations-scalar-extension",
+   "def-pur-strict-quotient-expressions",
+   "def-pur-completed-operation-comparison-data",
+   "def-trf-integral-comparison-realization-models",
+   "def-pur-strict-quotient-expression-data",
+   "def-pur-integral-coherence-data",
+   "def-pur-coefficient-extension-reduction-data",
+   "def-pur-coefficient-reduction-presentation",
+   "def-pur-scalar-extension-tower-data"
+  ]
  }
 }

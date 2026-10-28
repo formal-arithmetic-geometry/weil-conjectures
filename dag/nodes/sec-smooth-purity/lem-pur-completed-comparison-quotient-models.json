@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-completed-comparison-quotient-models",
+ "kind": "lemma",
+ "title": "Normalized quotient models and invertible recursive substitutions",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, and $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ scheme morphisms with $\\ell$ invertible at every point. Use the expression syntax, good-complex category, fixed quotient construction and recursive substitutions of [def-pur-completed-comparison-quotient-realization-data], together with the fixed completed operations of [def-weil-derived-pullback-tensor-hom]. Given three constructible inputs $M_i$, prescribed flat-term K-flat good representatives $P_i$ and isomorphisms $Q(P_i)\\cong M_i$, every strict expression in their actual quotient systems is good at each finite level and is a normalized coefficient sequence. There exist proofs of goodness and invertibility for every recursive substitution from the specified completed expression to the total limit of that strict expression; the prescribed counit reduction of each substitution is invertible. Each input quotient has the fixed finite-level coefficient reduction presentation. This is precisely the model and invertibility part of completed quotient normalization, with its already-proved construction; the separate naturality assertion is not included.",
+ "stmt_deps": [
+  "def-pur-completed-comparison-quotient-realization-data",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Normalized quotient expressions and recursive substitution. Stacks 07A2, 0G7E, 07A4 and 0941."
+ },
+ "proof": [
+  {
+   "text": "For each prescribed good representative apply lem-pur-completed-quotient-reduction-presentation to its actual ordinary quotient complex and the fixed comparison/evaluation isomorphisms. Its evaluation isomorphisms transport finite K-flatness and flat terms; levelwiseFlatModels gives SystemGood. The unit, tensor and pullback preservation lemmas of lem-pur-quotient-expression-strict-kflat-towers give GoodExpressions and finite Good by induction. Apply quotientExpressionKFlatOperations to these exact input complexes, their presentation transitions and Generated constructor proofs, obtaining normalization of every strictValue expression.",
+   "uses": [
+    "lem-pur-completed-quotient-reduction-presentation",
+    "lem-pur-quotient-expression-strict-kflat-towers",
+    "lem-pur-quotient-expression-kflat-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert intrinsic constructible completeness to unrestricted completeness via lem-sf-derived-complete-legacy-comparison, choosing an auxiliary finite-field characteristic different from l. Unrestricted normalized reconstruction inverts the actual leaf unit and the actual counit on every normalized expression. Recursive induction proves invertibility of substituteInputs: the units are identities; tensors and pullbacks are composites of the fixed primitive realization, functorial images of the two invertible coherent reductions, and the fixed K-flat or exact-pullback isomorphism. Hence substitution and its specified counit reduction are invertible.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pod-unrestricted-normalized-reconstruction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-quotient-reduction-presentation",
+  "lem-pur-quotient-expression-strict-kflat-towers",
+  "lem-pur-quotient-expression-kflat-normalization",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pod-unrestricted-normalized-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Verbatim extraction of the proved good-model and invertible-substitution helpers, assembled by the same normalization proof without its naturality conjunct."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat flat term quotient tower models yield normalized coefficient systems and invertible recursive tensor pullback reconstruction substitutions",
+   "results": "Eight flat-module results including Module.Flat.tfae_equational_criterion, Module.Flat.instTensorProduct and Module.Flat.iff_preservesFiniteLimits_tensorLeft; none states the project quotient-system normalization.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; extract the existing complete model proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsIso",
+   "results": "Twelve hits in Mathlib.CategoryTheory.IsoCat about isomorphisms of categories; none is the normalized quotient-model statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence|GoodExpressions|substituteInputs",
+   "results": "Zero Mathlib hits. The prescribed objects and substitutions belong to the existing project library.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorConstruction",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism induced by geometric Frobenius and the sentence \"These actions commute with finite reduction and scalar extension\": the inherited parent route uses the normalized derived pullback/tensor comparison to construct and identify this tensor-induced Weil isomorphism.",
+   "via": [
+    "def-pur-completed-pullback-tensor-construction",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedComparisonQuotientNormalizationModels",
+  "file": "lean/Sheaf/Paper/CompletedComparisonQuotientNormalizationModels.lean",
+  "declaration": "WeilConjectures.CompletedQuotient.completedComparisonQuotientModels",
+  "statement": "theorem completedComparisonQuotientModels\n    {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (M : Fin 3 → sfIntegralConstructibleCategory l E Y)\n    (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (φ : ∀ i : Fin 3, DerivedCategory.Q.obj (P i).obj ≅ (M i).obj)\n    :\n    ∃ (good : GoodExpressions l E h f P)\n      (_invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),\n        IsIso (substitution l E P (fun i ↦ (M i).obj) φ good A)),\n    (∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),\n      (∀ n : ℕ, StrictQuotient.Good l E\n        (strictValue l E (fun i ↦ quotient l E (P i).obj) A) n) ∧\n      IsNormalizedCoefficientSequence l E W\n        (DerivedCategory.Q.obj (strictValue l E (fun i ↦ quotient l E (P i).obj) A)) ∧\n      IsIso (reduction l E (substitution l E P (fun i ↦ (M i).obj) φ good A))) ∧\n    (∀ i : Fin 3, CoefficientReductionPresentation l E Y\n      (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemReduction\n      (P i).obj (P i).property.1 (quotient l E (P i).obj)\n      ((pullbackTensorReductionModel l E Y).app (P i))\n      (fun n ↦ ((pullbackTensorReductionEvaluationComplex l E Y n).app (P i).obj).symm))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
+  "kind": "interface",
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+ }
+}

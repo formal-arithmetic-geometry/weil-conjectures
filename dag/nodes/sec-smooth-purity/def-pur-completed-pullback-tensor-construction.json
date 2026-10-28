@@ -6,45 +6,6 @@
  },
  "proof": [
   {
-   "text": "For sequence continuity use integralComparisonSequenceBaseChange_continuous. Construct the uniquely specified sequence ring map as integralComparisonSequenceRingMap; its sections are definitionally the prescribed coefficient maps, and sheaf and natural-transformation extensionality prove uniqueness. Identify the selected sequence ring map with this map by uniqueness. The right-adjoint and exactness declarations for integralComparisonSequenceDirectImage and integralComparisonSequencePullback then prove the corresponding sequence-operation properties. Apply the proved canonical evaluation lemma integralComparisonSequenceDirectEvaluation_existsUnique, which is separated into its own module for compile time. Its proof composes the two module-pushforward composition isomorphisms with pushforwardCongr. The two coefficient morphisms agree on every section because the sequence ring map is the canonical constant-section map. Its resulting comparison is the identity on sections, and sectionwise extensionality proves its uniqueness without the arbitrary-ring-map helper.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "def-coef-ringed-sequence-site",
-    "lem-pur-integral-comparison-sequence-direct-evaluation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Ordinary coherent limit preserves limits: evaluation of coefficientSequenceRestriction is coefficientSequenceEvaluation followed by scalarReductionRestriction. The first is a continuous module pushforward and has a left adjoint in the specified universes; the second is right adjoint to scalar extension. Evaluation jointly detects preservation of limits, and the constant-tower limit preserves limits. The category of sequence modules is Grothendieck abelian in universe u+1. Its small coseparator, completeness and well-poweredness permit the special adjoint functor theorem, proving pullbackTensorOrdinaryLimit_rightAdjoint. Additivity and the Roos augmentation then follow by the existing argument: scalar restriction and constant-tower limit are additive, and the projection equations make the augmentation killed by one minus shift.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pur-ringed-site-module-pullback-exists-universes"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Ordinary coherent limit is the composition of additive scalar restriction and additive constant-tower limit. Its left adjoint is additive by the preadditive adjunction criterion. For the Roos augmentation, compose with each product projection and each complex degree. The resulting equation is exactly the compatibility of the ordinary limit projections with the consecutive transition; hence the composite with 1 minus shift is zero, as is the differential of the zero cochain.",
-   "uses": [
-    "def-coef-ringed-sequence-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The finite intrinsic pullback comparison is leftAdjointUniq for the coefficientProEtaleModuleAdjunction and sfIntrinsicConstantModuleAdjunction: their right adjoints coincide definitionally. The unit equation follows from unit_leftAdjointUniq_hom_app. Conversely the prescribed section equations determine the adjunction transpose, hence every hom component and the natural isomorphism.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the inverse evaluation comparison on cochain complexes with the finite intrinsic realization. The exact-functor factorization isomorphisms give liftings for both composites through DerivedCategory.Q. Localization.liftNatIso descends the cochain comparison. Its component formula gives the required representative square. Cancel the target factorization and use Localization.natTrans_ext to prove uniqueness.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false
-  },
-  {
    "text": "Localize the canonical integral pullback/tensor isomorphism. The chosen rational pullback and tensor functors have the integral object formulas specified by their existsUnique characterizations. Conjugate the localized isomorphism by these object equalities. conj_eqToHom_iff_heq gives the required equality of homs; Iso.ext gives uniqueness. The other existing normalization, compatibility, and descent theorems remain named proof obligations in this module with their existing source proofs in their docstrings.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
@@ -53,19 +14,9 @@
    "elementary": false
   },
   {
-   "text": "Apply the split tensor counit theorem to the two reduced inputs. Identify the sequence inverse image with the existing exact derived pullback and apply the split pullback counit theorem to each input. Assemble the three component isomorphism instances into the displayed conjunction.",
+   "text": "Import the unchanged comparison-counit theorem and the canonical integral constructor from the extracted integral construction module. That module proves the tensor and two pullback counit invertibilities and constructs the original conjugated coherent-limit comparison; the assigned module re-exports these declarations.",
    "uses": [
-    "lem-pur-completed-pullback-tensor-counit",
-    "lem-pur-completed-pullback-tensor-pullback-counit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For inverse-image evaluation, take the inverse mate of the canonical direct-image evaluation isomorphism under pullbackTensorSequenceAdjunction and coefficientProEtaleModuleAdjunction. sequenceModulePullbackEvaluation_isIso proves that this mate is invertible for the actual sequence and finite ring sheaves and their evaluation identifications. unit_mateEquiv_symm identifies its finite Hom transpose with the required evaluated sequence unit. Injectivity of that Hom equivalence, followed by natural-transformation and isomorphism extensionality, proves uniqueness. No additional proof obligation is introduced.",
-   "uses": [
-    "lem-sf-sequence-module-pullback-evaluation",
-    "def-coef-ringed-sequence-site",
-    "def-weil-proetale-inverse-image"
+    "def-pur-completed-pullback-tensor-integral-construction"
    ],
    "elementary": false
   },
@@ -92,7 +43,7 @@
    "elementary": false
   },
   {
-   "text": "Import the coherent reduction and strict tower realization declarations from CompletedPullbackTowerRealizations, preserving their original signatures and constructions. This compile-time extraction retains all existing normalization obligations under the same declaration names. The main module publicly re-exports them and retains the original private sequence-ring equality for import-all consumers.",
+   "text": "Import the coherent reduction and strict tower realization declarations from CompletedPullbackTowerRealizations, preserving their original signatures and constructions. This compile-time extraction retains all existing normalization obligations under the same declaration names. The main module publicly re-exports them and the extracted integral construction supplies the original private sequence-ring equality for the remaining import-all consumer.",
    "uses": [
     "def-pur-completed-pullback-tower-realizations"
    ],
@@ -117,47 +68,6 @@
    "elementary": false
   },
   {
-   "text": "For pullbackTensorSystemComparison_braiding, form the two paths as natural transformations on the product of coherent derived categories. K-flat resolution of an arbitrary complex, followed by the derived quotient of its quasi-isomorphism, supplies an isomorphic K-flat representative of each input. Apply completedPullbackTensor_signed_representatives on each pair of representatives. Naturality and cancellation along their product isomorphism show the two natural transformations are equal on all inputs. Evaluate their equality at (M,N). The representative signed-generator calculation and all comparison cancellations are fully proved in the new module; no new proof obligation is introduced.",
-   "uses": [
-    "lem-pur-completed-pullback-tensor-signed-representatives",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For coherent associativity, form the left and right associativity paths as natural transformations on triples. Apply the existing generic tripleNatTrans_ext_resolving helper of FinitePullbackTensorUnitRepresentatives with DerivedCategory.Q and the K-flat predicate. The existing K-flat resolution theorem supplies a representative isomorphism for each input; the new representative calculation identifies the two components on those triples. Naturality along the product of the three representative isomorphisms and cancellation gives equality everywhere. Evaluating at (M,N,P) proves the unchanged coherent associativity equation.",
-   "uses": [
-    "lem-pur-completed-pullback-tensor-associativity-representatives",
-    "lem-pc-kflat-resolution",
-    "lem-pur-finite-pullback-tensor-unit-representatives"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For pullbackTensorSystemComparison_unit, apply completedPullbackTensor_unit_of_associativity to the coherent associativity theorem proved here. The helper contains the unchanged coherent unit representative construction and generic unit extraction argument. This isolates the already-proved unit step to keep each file within the required compile limit; it adds no proof obligation.",
-   "uses": [
-    "lem-pur-completed-pullback-tensor-unit-from-associativity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For pullbackTensorSystemComparison_evaluation, construct its two paths as natural transformations between the coherent tensor/pullback/evaluation bifunctors. Every coherent derived object is isomorphic to the quotient of a K-flat complex by exists_isKFlatResolutionIndependentCoefficients. On such a pair apply completedPullbackTensor_evaluation_representatives with the existing unit-normalized pullbackTensorLevelIntrinsic and cochain-normalized pullbackTensorDerivedEvaluation; both normalization hypotheses follow from their existing existsUnique specifications. Naturality along the pair of representative isomorphisms and cancellation of the source functor image extend equality to arbitrary M,N. This is a decomposition: the representative calculation remains one narrower proof obligation. A proved private component equation identifies the finite natural isomorphism with its constructed component, allowing local irreducibility barriers to avoid repeated unfolding of that construction. The complete naturality descent is implemented as a proved private helper in the representative module to reduce elaboration in the parent; the parent supplies the existing representative existence and canonical normalizations. Existing proved implementations of exact-composite localization, the quotient-unit comparison, and K-flat pullback preservation are retained as proved private helpers in CompletedPullbackTensorProofImplementations, with the original parent declarations applying them and keeping identical signatures.",
-   "uses": [
-    "lem-pur-completed-pullback-tensor-evaluation-representatives",
-    "lem-pc-kflat-resolution",
-    "def-pur-completed-pullback-tower-realizations",
-    "def-pur-finite-pullback-tensor-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The normalized exact-composite localization argument is supplied by completedPullbackDerivedCompositeIso_existsUnique, preserving the original derivedCompositeIso_existsUnique signature through its complete proof wrapper. The ordinary quotient-unit and K-flat pullback arguments remain complete private implementations in the same helper module. No new proof obligation is introduced by this implementation split.",
-   "uses": [
-    "lem-pur-completed-pullback-exact-composite"
-   ],
-   "elementary": false
-  },
-  {
    "text": "For canonicalFinitePullbackTensor_quotient, express the two composites as natural transformations on the product of finite derived categories, using finitePullbackTensorConstructionIso, the quotient tensorators and the uniquely normalized quotient/pullback comparison. Flat-term K-flat resolutions provide representative isomorphisms for both inputs. Apply finitePullbackTensor_quotient_representatives to the existing unit-normalized ordinary comparison and its cochain extension; its degree equation is reflexive and its derived counit square is precisely the existing existsUnique specification. Naturality along the pair of resolution isomorphisms and cancellation extend equality to all inputs. Evaluate the natural-transformation equality at (M,N). This is a decomposition: the strictly narrower representative calculation remains a named obligation in a new module.",
    "uses": [
     "lem-pur-finite-pullback-tensor-quotient-representatives",
@@ -166,21 +76,30 @@
     "lem-pur-finite-quotient-pullback-descent"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the integral scalar square, take three inputs (M,N,M) and good K-flat representatives using essential surjectivity of integralOperationsGoodLocalization. Apply completedComparisonQuotientNormalization at (identity_X,f) to obtain good expressions and invertible substitutions. completedComparisonCanonicalIdentification identifies the E strict comparison transport with the prescribed canonical integral comparison. completedComparisonScalarLimitImage identifies the L strict comparison transport and gives both completed scalar composites as the same conjugated total-limit arrow. Choose the strict left route, rewrite the two canonical identifications, and compose the two equalities. Full-subcategory hom extensionality gives the original scalar square. No new proof obligation is introduced.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-integral-construction",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-completed-comparison-quotient-normalization",
+    "lem-pur-completed-comparison-canonical-identification",
+    "lem-pur-completed-comparison-scalar-limit-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Publicly import the extracted coherent construction module. It contains the original normalized finite evaluation and coherent evaluation, associativity, braiding and unit proofs; the quotient descent uses its existing proved private resolving-isomorphism naturality helper through import all. This changes no comparison or proof obligation and keeps the profiled parent file within the compile limit.",
+   "uses": [
+    "lem-pur-completed-pullback-tensor-coherent-construction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-trf-integral-comparison-sequence-systems",
-  "def-coef-ringed-sequence-site",
-  "lem-pur-integral-comparison-sequence-direct-evaluation",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pur-ringed-site-module-pullback-exists-universes",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-localization-universal-property",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-rationalization-karoubi",
-  "lem-pur-completed-pullback-tensor-counit",
-  "lem-pur-completed-pullback-tensor-pullback-counit",
-  "lem-sf-sequence-module-pullback-evaluation",
+  "def-pur-completed-pullback-tensor-integral-construction",
   "lem-sfb-algebraic-inverse-image-kflat",
   "lem-sfb-proetale-enough-points",
   "lem-pur-kflat-change-of-rings-all-independent",
@@ -194,15 +113,15 @@
   "def-pur-completed-pullback-tower-realizations",
   "lem-pur-strict-scalar-pullback-comparison",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-completed-pullback-tensor-signed-representatives",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-finite-pullback-tensor-quotient-representatives",
   "lem-pc-kflat-resolution",
-  "lem-pur-completed-pullback-tensor-associativity-representatives",
-  "lem-pur-finite-pullback-tensor-unit-representatives",
-  "lem-pur-completed-pullback-tensor-unit-from-associativity",
-  "lem-pur-completed-pullback-tensor-evaluation-representatives",
   "def-pur-finite-pullback-tensor-comparison",
-  "lem-pur-completed-pullback-exact-composite",
-  "lem-pur-finite-pullback-tensor-quotient-representatives"
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-completed-comparison-quotient-normalization",
+  "lem-pur-completed-comparison-canonical-identification",
+  "lem-pur-completed-comparison-scalar-limit-image",
+  "lem-pur-completed-pullback-tensor-coherent-construction"
  ],
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
@@ -225,10 +144,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C1",
-  "date": "2026-10-27",
+  "group": "T3",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Existing construction and proofs extracted without changing any signature or definition; the integral scalar theorem remains the original proof obligation."
+  "place": "Existing construction and proofs retained; integral scalar compatibility assembled from the existing normalized strict quotient realization theorems."
  },
  "mathlib_searches": [
   {
@@ -277,19 +196,8 @@
  },
  "lean": {
   "module": "Sheaf.Paper.CompletedPullbackTensorConstruction",
-  "declaration": "WeilConjectures.canonicalIntegralPullbackTensor",
+  "declaration": "WeilConjectures.canonicalIntegralPullbackTensor_scalar",
   "declarations": [
-   "WeilConjectures.pullbackTensorComparisonCounits",
-   "WeilConjectures.pullbackTensorReferenceComparison",
-   "WeilConjectures.canonicalIntegralPullbackTensor",
-   "WeilConjectures.pullbackTensorLevelIntrinsic_existsUnique",
-   "WeilConjectures.pullbackTensorLevelIntrinsic",
-   "WeilConjectures.pullbackTensorDerivedEvaluation_existsUnique",
-   "WeilConjectures.pullbackTensorDerivedEvaluation",
-   "WeilConjectures.pullbackTensorSystemComparison_evaluation",
-   "WeilConjectures.pullbackTensorSystemComparison_associativity",
-   "WeilConjectures.pullbackTensorSystemComparison_braiding",
-   "WeilConjectures.pullbackTensorSystemComparison_unit",
    "WeilConjectures.pullbackTensorFiniteAdditive",
    "WeilConjectures.pullbackTensorQuotientAdditive",
    "WeilConjectures.pullbackTensorQuotientOrdinary_existsUnique",
@@ -307,16 +215,15 @@
    "WeilConjectures.canonicalFinitePullbackTensor_quotient_condition",
    "WeilConjectures.canonicalIntegralPullbackTensor_scalar_condition",
    "WeilConjectures.canonicalRationalPullbackTensor_scalar_condition",
-   "WeilConjectures.pullbackTensorDerivedEvaluationNormalization",
    "WeilConjectures.pullbackTensorQuotientNormalization"
   ],
   "file": "lean/Sheaf/Paper/CompletedPullbackTensorConstruction.lean",
-  "statement": "def canonicalIntegralPullbackTensor {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :\n    (@IntegralPullbackTensorComparison l _ E _ _ _ X Y f hX hY)",
+  "statement": "theorem canonicalIntegralPullbackTensor_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    (M N : sfIntegralConstructibleCategory l E Y) :\n    (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n      E L ι X).map ((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M N).hom ≫\n      (integralTensorScalarComparison l E L ι X\n        (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)\n        (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom ≫\n      ((@constructibleIntegralTensor l _ L _ _ _ X hX)).map\n        (Prod.mkHom (integralPullbackScalarComparison l E L ι f M).hom\n          (integralPullbackScalarComparison l E L ι f N).hom) =\n    (integralPullbackScalarComparison l E L ι f\n      (((@constructibleIntegralTensor l _ E _ _ _ Y hY)).obj (M,N))).hom ≫\n      ((@constructibleIntegralPullback l _ L _ _ _ X Y f hX hY)).map\n        (integralTensorScalarComparison l E L ι Y M N).hom ≫\n      ((@canonicalIntegralPullbackTensor l _ L _ _ _ X Y f hX hY)\n        ((sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj M)\n        ((sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj N)).hom",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-27",
   "existing": false,
-  "note": "Literal extraction of existing declarations, not newly chosen data. The original item publicly reexports this module."
+  "note": "Literal extraction of existing declarations, not newly chosen data. The original item publicly reexports this module. T3: the three integral constructor declarations now live in the publicly re-exported integral-construction module; the scalar theorem is proved from the existing strict quotient realization lemmas."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -329,13 +236,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-70a42",
-  "group": "C1",
+  "reviewer": "C-03463",
+  "group": "T3",
   "result": "fix",
-  "landing": "20261027T180501-L-3865412",
+  "landing": "20261028T034944-L-3574173",
   "kind": "interface",
-  "note": "independent cc review: delivered Construction module against the clone's CompletedPullbackTensorComparison (verbatim move, re-exported); item proof and Naturality against nodes and deps; all 10 direct importers compiled against the delivered modules (all OK)"
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
  }
 }

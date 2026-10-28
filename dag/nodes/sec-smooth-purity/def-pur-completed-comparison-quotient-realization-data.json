@@ -2,7 +2,7 @@
  "id": "def-pur-completed-comparison-quotient-realization-data",
  "kind": "definition",
  "title": "Actual quotient, substitution and scalar transport data",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a finite coefficient extension $\\iota:E\\to L$, and schemes $Z\\xrightarrow{h}X\\xrightarrow{f}Y$. Use the existing completed operations, normalized strict coefficient systems, K-flat representatives and scalar realization models from [def-weil-l-adic-coefficient-extension], [def-pur-completed-pullback-tensor-comparison], [def-pur-strict-quotient-expression-data], [def-pur-integral-coherence-data] and [def-pur-scalar-extension-tower-data]. The quotient of a representative is its actual ordinary coherent reduction complex. Translate each finite typed strict quotient expression to the completed-expression syntax and evaluate it by the specified completed operations. The substitution at an input is the actual reconstruction unit followed by the reduction of the inverse representative isomorphism and the quotient reduction model. Units use identities; tensor and pullback use the primitive Roos-normalized comparison, the coherent counit reductions of the input substitutions, and the prescribed K-flat complex models. For a substitution $\\beta:K\\to\\mathcal L(A)$ define $r(\\beta)=\\mathcal R(\\beta)\\,\\epsilon_A$. For a strict arrow $v:A\\to B$, transport is $\\beta_A\\mathcal L(Qv)\\beta_B^{-1}$. GoodExpressions means whole-system flat-term K-flatness for every interpreted finite expression. NaturalSubstitution and NaturalComparison are the naturality equations for these specified maps. StrictCoherence asserts the strong monoidal signed symmetry and composable-pullback laws for these same strict comparisons. ScalarGenerated is the inductively generated two-coefficient family under input, unit, tensor, pullback and actual scalar extension; ScalarGood requires finite flat K-flatness and normalized whole systems. Scalar substitution is the scalar realization followed by the derived scalar image of the actual reduction and its prescribed scalar-complex comparison. ScalarBeta uses that leaf map in the same recursive substitution. ScalarLimitImage equates the two strict scalar routes and identifies their total-limit images with the fixed completed pullback/tensor scalar composites, using the specified E and L substitutions. ScalarIdentity, ScalarComposition and ScalarAssociation are exactly the existing strict scalar tower unit, composition and balanced quotient-model assertions. All named constructions are the existing formulas, relocated without any change of object, morphism or predicate.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a finite coefficient extension $\\iota:E\\to L$, and schemes $Z\\xrightarrow{h}X\\xrightarrow{f}Y$. Use the existing completed operations, normalized strict coefficient systems, K-flat representatives and scalar realization models from [def-weil-l-adic-coefficient-extension], [def-pur-completed-pullback-tensor-integral-construction], [def-pur-strict-quotient-expression-data], [def-pur-integral-coherence-data] and [def-pur-scalar-extension-tower-data]. The quotient of a representative is its actual ordinary coherent reduction complex. Translate each finite typed strict quotient expression to the completed-expression syntax and evaluate it by the specified completed operations. The substitution at an input is the actual reconstruction unit followed by the reduction of the inverse representative isomorphism and the quotient reduction model. Units use identities; tensor and pullback use the primitive Roos-normalized comparison, the coherent counit reductions of the input substitutions, and the prescribed K-flat complex models. For a substitution $\\beta:K\\to\\mathcal L(A)$ define $r(\\beta)=\\mathcal R(\\beta)\\,\\epsilon_A$. For a strict arrow $v:A\\to B$, transport is $\\beta_A\\mathcal L(Qv)\\beta_B^{-1}$. GoodExpressions means whole-system flat-term K-flatness for every interpreted finite expression. NaturalSubstitution and NaturalComparison are the naturality equations for these specified maps. StrictCoherence asserts the strong monoidal signed symmetry and composable-pullback laws for these same strict comparisons. ScalarGenerated is the inductively generated two-coefficient family under input, unit, tensor, pullback and actual scalar extension; ScalarGood requires finite flat K-flatness and normalized whole systems. Scalar substitution is the scalar realization followed by the derived scalar image of the actual reduction and its prescribed scalar-complex comparison. ScalarBeta uses that leaf map in the same recursive substitution. ScalarLimitImage equates the two strict scalar routes and identifies their total-limit images with the fixed completed pullback/tensor scalar composites, using the specified E and L substitutions. ScalarIdentity, ScalarComposition and ScalarAssociation are exactly the existing strict scalar tower unit, composition and balanced quotient-model assertions. All named constructions are the existing formulas, relocated without any change of object, morphism or predicate.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Actual quotient, substitution and scalar transport data. Stacks 07A2, 0G7E, 07A4 and 0941."
@@ -19,7 +19,7 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-completed-pullback-tensor-integral-construction",
   "def-weil-integral-scalar-extension",
   "lem-pur-integral-operations-scalar-extension",
   "def-pur-strict-quotient-expressions",
@@ -143,13 +143,74 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-64d64",
-  "group": "Y3",
-  "result": "pass",
-  "landing": "20261025T101942-L-3760431",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement vs sheaf-dag (byte-identical); relocated Defs vs old item body (only declared GoodExpressions abbrev + strictMap explicit tensorHom); three sorry lemmas vs item conjuncts (exact sub-conjunctions); item node proof_deps vs Lean proof"
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "T3 stage 2",
+  "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a finite coefficient extension $\\iota:E\\to L$, and schemes $Z\\xrightarrow{h}X\\xrightarrow{f}Y$. Use the existing completed operations, normalized strict coefficient systems, K-flat representatives and scalar realization models from [def-weil-l-adic-coefficient-extension], [def-pur-completed-pullback-tensor-comparison], [def-pur-strict-quotient-expression-data], [def-pur-integral-coherence-data] and [def-pur-scalar-extension-tower-data]. The quotient of a representative is its actual ordinary coherent reduction complex. Translate each finite typed strict quotient expression to the completed-expression syntax and evaluate it by the specified completed operations. The substitution at an input is the actual reconstruction unit followed by the reduction of the inverse representative isomorphism and the quotient reduction model. Units use identities; tensor and pullback use the primitive Roos-normalized comparison, the coherent counit reductions of the input substitutions, and the prescribed K-flat complex models. For a substitution $\\beta:K\\to\\mathcal L(A)$ define $r(\\beta)=\\mathcal R(\\beta)\\,\\epsilon_A$. For a strict arrow $v:A\\to B$, transport is $\\beta_A\\mathcal L(Qv)\\beta_B^{-1}$. GoodExpressions means whole-system flat-term K-flatness for every interpreted finite expression. NaturalSubstitution and NaturalComparison are the naturality equations for these specified maps. StrictCoherence asserts the strong monoidal signed symmetry and composable-pullback laws for these same strict comparisons. ScalarGenerated is the inductively generated two-coefficient family under input, unit, tensor, pullback and actual scalar extension; ScalarGood requires finite flat K-flatness and normalized whole systems. Scalar substitution is the scalar realization followed by the derived scalar image of the actual reduction and its prescribed scalar-complex comparison. ScalarBeta uses that leaf map in the same recursive substitution. ScalarLimitImage equates the two strict scalar routes and identifies their total-limit images with the fixed completed pullback/tensor scalar composites, using the specified E and L substitutions. ScalarIdentity, ScalarComposition and ScalarAssociation are exactly the existing strict scalar tower unit, composition and balanced quotient-model assertions. All named constructions are the existing formulas, relocated without any change of object, morphism or predicate.",
+  "what": "Dependency precision after the integral constructor extraction: the unchanged canonical integral morphism is needed here, not the common-stage comparison and its scalar-compatibility proof. Refer to its new definition node to remove the artificial dependency cycle. Every Lean signature and definition is unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Actual quotient, substitution and scalar transport data. Stacks 07A2, 0G7E, 07A4 and 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-completed-comparison-canonical-identification",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   },
+   {
+    "id": "lem-pur-completed-comparison-quotient-normalization",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   },
+   {
+    "id": "lem-pur-completed-comparison-quotient-realization",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   },
+   {
+    "id": "lem-pur-completed-comparison-scalar-limit-image",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   },
+   {
+    "id": "lem-pur-completed-quotient-reduction-presentation",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-completed-integral-coefficients",
+   "def-coef-normalized-dvr-tower",
+   "def-weil-integral-reduction-tower",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "def-pur-integral-derived-operations",
+   "def-weil-derived-complete-integral-detailed",
+   "def-pc-kflat-complex",
+   "def-pc-flat-sheaf-modules",
+   "lem-pur-cochain-pullback-tensor-coherence",
+   "def-pur-completed-pullback-tensor-comparison",
+   "def-weil-integral-scalar-extension",
+   "lem-pur-integral-operations-scalar-extension",
+   "def-pur-strict-quotient-expressions",
+   "def-pur-completed-operation-comparison-data",
+   "def-trf-integral-comparison-realization-models",
+   "def-pur-strict-quotient-expression-data",
+   "def-pur-integral-coherence-data",
+   "def-pur-coefficient-extension-reduction-data",
+   "def-pur-coefficient-reduction-presentation",
+   "def-pur-scalar-extension-tower-data"
+  ]
  }
 }

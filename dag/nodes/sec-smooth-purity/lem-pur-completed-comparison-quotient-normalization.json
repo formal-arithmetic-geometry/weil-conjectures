@@ -2,7 +2,7 @@
  "id": "lem-pur-completed-comparison-quotient-normalization",
  "kind": "statement",
  "title": "Normalized quotient expressions and recursive substitution",
- "statement": "Fix a prime $\\ell$, a finite extension $E$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. There exist GoodExpressions and invertibility proofs for all recursive substitutions such that each expression is finite-level flat K-flat and a normalized whole coefficient system, and its coherent counit reduction is invertible. For each input the prescribed ordinary quotient tower, reduction-model isomorphism and evaluation isomorphisms give a CoefficientReductionPresentation. The recursive substitutions are natural in every compatible simultaneous map of representatives and derived inputs, with the exact equation NaturalSubstitution.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. There exist GoodExpressions and invertibility proofs for all recursive substitutions such that each expression is finite-level flat K-flat and a normalized whole coefficient system, and its coherent counit reduction is invertible. For each input the prescribed ordinary quotient tower, reduction-model isomorphism and evaluation isomorphisms give a CoefficientReductionPresentation. The recursive substitutions are natural in every compatible simultaneous map of representatives and derived inputs, with the exact equation NaturalSubstitution. The canonical integral comparison used here is the coherent-counit construction of [def-pur-completed-pullback-tensor-integral-construction]; scalar compatibility of that comparison is not assumed.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Normalized quotient expressions and recursive substitution. Stacks 07A2, 0G7E, 07A4 and 0941."
@@ -20,7 +20,7 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
   "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-completed-pullback-tensor-integral-construction",
   "def-weil-integral-scalar-extension",
   "lem-pur-integral-operations-scalar-extension",
   "def-pur-strict-quotient-expressions",
@@ -34,19 +34,9 @@
  ],
  "proof": [
   {
-   "text": "For each prescribed good representative apply lem-pur-completed-quotient-reduction-presentation to its actual ordinary quotient complex and the fixed comparison/evaluation isomorphisms. Its evaluation isomorphisms transport finite K-flatness and flat terms; levelwiseFlatModels gives SystemGood. The unit, tensor and pullback preservation lemmas of lem-pur-quotient-expression-strict-kflat-towers give GoodExpressions and finite Good by induction. Apply quotientExpressionKFlatOperations to these exact input complexes, their presentation transitions and Generated constructor proofs, obtaining normalization of every strictValue expression.",
+   "text": "Apply completedComparisonQuotientModels to the prescribed representatives and their identifications. This supplies good expressions, invertible substitutions, normalized finite models and the existing reduction presentations; no representatives or comparison maps are replaced.",
    "uses": [
-    "lem-pur-completed-quotient-reduction-presentation",
-    "lem-pur-quotient-expression-strict-kflat-towers",
-    "lem-pur-quotient-expression-kflat-normalization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Convert intrinsic constructible completeness to unrestricted completeness via lem-sf-derived-complete-legacy-comparison, choosing an auxiliary finite-field characteristic different from l. Unrestricted normalized reconstruction inverts the actual leaf unit and the actual counit on every normalized expression. Recursive induction proves invertibility of substituteInputs: the units are identities; tensors and pullbacks are composites of the fixed primitive realization, functorial images of the two invertible coherent reductions, and the fixed K-flat or exact-pullback isomorphism. Hence substitution and its specified counit reduction are invertible.",
-   "uses": [
-    "lem-sf-derived-complete-legacy-comparison",
-    "lem-pod-unrestricted-normalized-reconstruction"
+    "lem-pur-completed-comparison-quotient-models"
    ],
    "elementary": false
   },
@@ -59,17 +49,15 @@
   }
  ],
  "proof_deps": [
-  "lem-pod-unrestricted-normalized-reconstruction",
-  "lem-pur-completed-quotient-reduction-presentation",
-  "lem-pur-quotient-expression-kflat-normalization",
-  "lem-pur-quotient-expression-strict-kflat-towers",
-  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-completed-comparison-quotient-models",
   "lem-sf-ringed-derived-tensor-hom-adjunction"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
-  "place": "H8 direct proof for the prescribed ordinary quotient complexes. Constructor induction and actual adjunction/natural-isomorphism calculations; only the single-input presentation compatibility is isolated."
+  "place": "Separate the existing proved model construction from its existing naturality proof after profiling; assemble the original unchanged theorem from these two parts."
  },
  "mathlib_searches": [
   {
@@ -144,13 +132,60 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H8",
-  "result": "pass",
-  "landing": "20261027T131455-L-2940877",
+  "reviewer": "C-03463",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261028T034944-L-3574173",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "T3 stage 2",
+  "old_statement": "Fix a prime $\\ell$, a finite extension $E$ of $\\mathbf Q_\\ell$, composable scheme morphisms $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ with $\\ell$ invertible at every point, three constructible derived-complete integral objects $M_i$ on $Y$, arbitrary flat-term K-flat representatives $P_i$, and isomorphisms $Q(P_i)\\cong M_i$. Use the exact quotient complexes, finite expressions, substitutions and transports of [def-pur-completed-comparison-quotient-realization-data]. There exist GoodExpressions and invertibility proofs for all recursive substitutions such that each expression is finite-level flat K-flat and a normalized whole coefficient system, and its coherent counit reduction is invertible. For each input the prescribed ordinary quotient tower, reduction-model isomorphism and evaluation isomorphisms give a CoefficientReductionPresentation. The recursive substitutions are natural in every compatible simultaneous map of representatives and derived inputs, with the exact equation NaturalSubstitution.",
+  "what": "Dependency precision after the integral constructor extraction: the unchanged canonical integral morphism is needed here, not the common-stage comparison and its scalar-compatibility proof. Refer to its new definition node to remove the artificial dependency cycle. Every Lean signature and definition is unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+   "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Normalized quotient expressions and recursive substitution. Stacks 07A2, 0G7E, 07A4 and 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-completed-comparison-quotient-realization",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   },
+   {
+    "id": "lem-sf-integral-published-counit-evaluation",
+    "holds": true,
+    "note": "The same canonical integral morphism and the same normalized strict data are used; only the defining node reference is made precise."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pur-completed-comparison-quotient-realization-data",
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-completed-integral-coefficients",
+   "def-coef-normalized-dvr-tower",
+   "def-weil-integral-reduction-tower",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "def-pur-integral-derived-operations",
+   "def-weil-derived-complete-integral-detailed",
+   "def-pc-kflat-complex",
+   "def-pc-flat-sheaf-modules",
+   "lem-pur-cochain-pullback-tensor-coherence",
+   "def-pur-completed-pullback-tensor-comparison",
+   "def-weil-integral-scalar-extension",
+   "lem-pur-integral-operations-scalar-extension",
+   "def-pur-strict-quotient-expressions",
+   "def-pur-completed-operation-comparison-data",
+   "def-trf-integral-comparison-realization-models",
+   "def-pur-strict-quotient-expression-data",
+   "def-pur-integral-coherence-data",
+   "def-pur-coefficient-extension-reduction-data",
+   "def-pur-coefficient-reduction-presentation",
+   "def-pur-scalar-extension-tower-data"
+  ]
  }
 }
