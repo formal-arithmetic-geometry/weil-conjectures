@@ -1,0 +1,84 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
+ },
+ "stmt_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Localization extension and component pasting"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionComp",
+  "date": "2026-10-28",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-intrinsic-restriction-comp",
+   "place": "Localization extension and component pasting"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-dualizing-intrinsic-restriction-comp-qh-x7",
+ "kind": "statement",
+ "title": "Qh representative intrinsic restriction composition",
+ "statement": "For every cochain complex representative P at level n, the intrinsic finite-dualizing restriction composition equation holds after applying the derived localization functor Q.",
+ "proof": [
+  {
+   "text": "On a representative complex, the section-normalized comparison maps are characterized on scalar-unit sections. Quotient representatives compose, and the exact localization compositor transports the resulting square.",
+   "uses": [
+    "def-coef-finite-dualizing-data",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompQh",
+  "file": "lean/Sheaf/SixFunctors/FiniteDualizingIntrinsicRestrictionCompQh.lean",
+  "declaration": "WeilConjectures.finiteDualizingIntrinsicRestriction_comp_Qh",
+  "statement": "theorem finiteDualizingIntrinsicRestriction_comp_Qh {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) (P : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat (finiteDualizingCoeff l E n))) ℤ) : (finiteDualizingIntrinsicRestriction l E X (hmn.trans hrm)).inv.app (DerivedCategory.Q.obj P) ≫ (normalizedDVRResComp l E X hrm hmn).inv.app ((sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (n + 1))).functor.obj (DerivedCategory.Q.obj P)) = (sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing l E (r + 1))).functor.map ((Sheaf.derivedRestrictScalarsCompIso (ProEt.topology X) (finiteDualizingQuotient_comp l E hrm hmn)).inv.app (DerivedCategory.Q.obj P)) ≫ (finiteDualizingIntrinsicRestriction l E X hrm).inv.app ((Sheaf.derivedRestrictScalars (ProEt.topology X) (finiteDualizingQuotient l E hmn)).obj (DerivedCategory.Q.obj P)) ≫ (normalizedDVRRes l E X hrm).map ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T020858-L-2558766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T020858-L-2558766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

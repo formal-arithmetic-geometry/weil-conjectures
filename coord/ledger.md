@@ -20744,3 +20744,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:08 L: merged deliver/X3/Sheaf.Paper.PullbackTensorIntegralUnitUniqueness (stage 3; reviewer PASS; first push; landing 20261028T020850-L-2556684 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:08 L: merged deliver/X5/Sheaf.Paper.RationalP1SecondProjectionInterchangeCore (stage 3; reviewer PASS; first push; landing 20261028T020851-L-2556970 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:08 L: merged deliver/X6/Sheaf.Paper.RationalP1SecondProjectionInterchangeTail (stage 3; reviewer PASS; first push; landing 20261028T020856-L-2558231 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:09 L: merged deliver/X7/Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionComp (stage 3; reviewer PASS; first push; landing 20261028T020858-L-2558766 (interface); batch 20261028T020127; modules 4; new nodes 3)

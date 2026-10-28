@@ -6,6 +6,8 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompNatTrans
+import Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompQh
 
 /-! # Intrinsic finite-coefficient restriction coherence -/
 
@@ -49,6 +51,16 @@ theorem finiteDualizingIntrinsicRestriction_comp
             (finiteDualizingQuotient l E hmn)).obj K) ≫
         (normalizedDVRRes l E X hrm).map
           ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app K) := by
-  sorry
+  obtain ⟨rhs, hcomp, hrhs⟩ :=
+    finiteDualizingIntrinsicRestriction_comp_natTrans_exists l E X hrm hmn
+  have hcompK := congr_app hcomp K
+  have hlhs :
+      (finiteDualizingIntrinsicRestriction l E X (hmn.trans hrm)).inv.app K ≫
+          (normalizedDVRResComp l E X hrm hmn).inv.app
+            ((sfIntrinsicDerivedEquivalence X
+              (Padic.coefficientExtensionRing l E (n + 1))).functor.obj K) =
+        (finiteDualizingIntrinsicRestrictionCompLhs l E X hrm hmn).app K := by
+    rfl
+  exact hlhs.trans (hcompK.trans (hrhs K))
 
 end WeilConjectures
