@@ -35,6 +35,21 @@ bound for `ℚ̄_ℓ` from the finite subextensions
 extensions `E` of `ℚ_ℓ` are reduced to subextensions of `ℚ̄_ℓ` by choosing an embedding
 (`ProEtale.hasUniformConstructibleExtBound_continuousMapRingObj_of_finiteIntermediateField`,
 `ProEtale.hasUniformConstructibleExtBound_padicIntegersRingObj_of_finiteIntermediateField`).
+
+## Compatibilities from other sections
+
+The bounds use the following existing statements of other blueprint nodes:
+
+* `AlgebraicGeometry.Etale.smoothGenericDirectImage` (blueprint
+  `lem-asd-smooth-generic-direct-image`, for `thm-fin-deligne-generic-open`), through the
+  finite-coefficient bound
+  `ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor`;
+* `ProEtale.isLocalization_boundedConstructibleExtendScalars` (blueprint
+  `sk-thm-sfb-rationalization-comparison`), for the integral models of constructible `E`-sheaves;
+* `ProEtale.constructibleCocone_essSurjObj`, `ProEtale.constructibleCocone_homSurj`,
+  `ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj` and
+  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj` (blueprint
+  `sk-thm-sfb-qlbar-two-colimit`), for `ℚ̄_ℓ`.
 -/
 
 @[expose] public section
