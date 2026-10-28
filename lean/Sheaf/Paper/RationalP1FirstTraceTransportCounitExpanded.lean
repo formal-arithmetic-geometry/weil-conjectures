@@ -11,6 +11,8 @@ public import Sheaf.Paper.LocalizingClosure
 public import Sheaf.Paper.DiagonalCoefficientReference
 public import Sheaf.Paper.RationalP1SecondPretraceData
 
+import Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram
+
 /-! # Expanded counit equality for the terminal first projective-line trace
 
 Source: the Kunneth and trace base-change calculation in the first rational projective-line
@@ -133,6 +135,10 @@ theorem rationalP1_first_trace_transport_counit_expanded
       (((DerivedCategory.singleFunctor
           (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
             (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-      (diagram l c Y family).trace₁ h₁ := by sorry
+      (diagram l c Y family).trace₁ h₁ := by
+  let _ := reference
+  let _ := hM
+  exact rationalP1_first_trace_transport_counit_expanded_for_diagram l c k p hpl Y
+    (diagram l c Y family) M hq hb hp h₁
 
 end AlgebraicGeometry.ProEtale.RationalP1
