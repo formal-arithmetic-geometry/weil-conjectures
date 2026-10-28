@@ -42,6 +42,10 @@ def finiteProperComparison {R S : Coefficients.{u}} (a : Change R S)
           (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans
 
 /-- Invertibility of the proper finite coefficient comparison on every object.
+
+STATEMENT-DISPUTED: `Change R S` has no finite-freeness hypothesis. The existing
+finite-free mate theorem requires an explicit finite-free basis, and scalar mates
+of arbitrary restriction/direct-image isomorphisms are not generally invertible.
 Source: Stacks Tags 0GL5 and 0GL6.
 (blueprint: lem-pur-compact-support-finite-proper-comparison-iso).
 Proof: finite free scalar extension turns the proper restriction map into a

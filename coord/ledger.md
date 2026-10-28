@@ -20589,3 +20589,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: merged deliver/F5/Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute (stage 3; reviewer PASS; first push; landing 20261028T020400-L-2503807 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:04 L: merged deliver/F6/Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute (stage 3; reviewer PASS; first push; landing 20261028T020401-L-2504419 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:04 L: merged deliver/F7/Sheaf.AlgebraicGeometry.ProperShriekCompSupportsCanonical (stage 3; reviewer PASS; first push; landing 20261028T020402-L-2504936 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:04 L: merged deliver/F8/Sheaf.Paper.FiniteProperComparisonIso (stage 3; reviewer PASS; first push; landing 20261028T020404-L-2505519 (proof); batch 20261028T020127; modules 1; new nodes 0)
