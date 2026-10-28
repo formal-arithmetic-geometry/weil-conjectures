@@ -74,7 +74,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 private theorem selectEquation
     {Z : Sort*} {p q r s t : Prop} {f : Z → Prop}
     (h : p ∧ q ∧ r ∧ s ∧ (∃! z, f z) ∧ t) : ∃ z, f z := by
-  obtain ⟨z, hz, _⟩ := h.2.2.2.2.1
+  obtain ⟨z, hz, -⟩ := h.2.2.2.2.1
   exact ⟨z, hz⟩
 
 -- Move the completed arrow outside the dependent presentation in abstract logic.
@@ -86,33 +86,21 @@ private theorem selectPresentation
     {F : ∀ a b c d, E a b c d → Sort*}
     {G : ∀ a b c d e, F a b c d e → Sort*}
     {H : ∀ a b c d e f, G a b c d e f → Sort*}
-    {I : ∀ a b c d e f g, H a b c d e f g → Sort*} {Z : Sort*}
+    {I : ∀ a b c d e f g, H a b c d e f g → Sort*} {Z : Sort*} {Result : Prop}
     {p q r : ∀ a b c d, E a b c d → Prop}
     {s t v : ∀ a b c d e f g h, I a b c d e f g h → Prop}
     {w : ∀ a b c d e f g h, I a b c d e f g h → Z → Prop}
     (convert : ∀ a b c d e f g h i, v a b c d e f g h i →
       ∃ z, w a b c d e f g h i z)
     (data : ∃ a b c d e, p a b c d e ∧ q a b c d e ∧ r a b c d e ∧
-      ∃ f g h i, s a b c d e f g h i ∧ t a b c d e f g h i ∧ v a b c d e f g h i) :
-    ∃ z, ∃ a b c d e, p a b c d e ∧ q a b c d e ∧ r a b c d e ∧
-      ∃ f g h i, (s a b c d e f g h i ∧ t a b c d e f g h i ∧
-        v a b c d e f g h i) ∧ w a b c d e f g h i z := by
+      ∃ f g h i, s a b c d e f g h i ∧ t a b c d e f g h i ∧ v a b c d e f g h i)
+    (conclude : ∀ z, (∃ a b c d e, p a b c d e ∧ q a b c d e ∧ r a b c d e ∧
+      ∃ f g h i, (s a b c d e f g h i ∧ t a b c d e f g h i ∧ v a b c d e f g h i) ∧
+        w a b c d e f g h i z) →
+      Result) : Result := by
   obtain ⟨a, b, c, d, e, hp, hq, hr, f, g, h, i, hs, ht, hv⟩ := data
   obtain ⟨z, hz⟩ := convert a b c d e f g h i hv
-  exact ⟨z, a, b, c, d, e, hp, hq, hr, f, g, h, i, ⟨hs, ht, hv⟩, hz⟩
-
--- Convert the normalized limit presentation before specializing localization choices.
-private theorem selectDiagonalLimit (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤)))
-    [DiagonalTraceLocalizations ℓ (diagonalSurface Y)]
-    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
-    (h : DiagonalCompletedLimitSpec ℓ Y hY D) :
-    ∃ δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y,
-      DiagonalTrace.IsDiagonalLimit ℓ Y hY D δ := by
-  unfold DiagonalCompletedLimitSpec at h
-  unfold DiagonalTrace.IsDiagonalLimit DiagonalTrace.FiniteCartierNormalization
-    DiagonalTrace.FiniteRootNormalization DiagonalTrace.finiteCartierClass
-  exact selectPresentation (data := h)
-    (fun _ _ _ _ _ _ _ _ _ hh ↦ selectEquation hh)
+  exact conclude z ⟨a, b, c, d, e, hp, hq, hr, f, g, h, i, ⟨hs, ht, hv⟩, hz⟩
 
 /-- The coefficient family comes from one completed whole-system diagonal class and
 its three normalized traces. Source: diagonal tower coefficients, clauses (1)--(3).
@@ -166,9 +154,14 @@ theorem integralNormalizedFamily_exists
   have hsystem := hd.2
   have hLim := diagonalTower_limit ℓ k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y hY
     D hcompletion hsystem
-  obtain ⟨δ, hlimit⟩ := selectDiagonalLimit ℓ Y hY D hLim
+  refine selectPresentation (data := hLim)
+    (fun _ _ _ _ _ _ _ _ _ hh ↦ selectEquation hh) ?_
+  intro δ hlimit
   exact (diagonalTower_coefficients ℓ k (ringChar k)
-    (Fact.out : ringChar k ≠ ℓ) Y hY D hcompletion hsystem δ hlimit).imp
+    (Fact.out : ringChar k ≠ ℓ) Y hY D hcompletion hsystem δ (by
+      unfold DiagonalTrace.IsDiagonalLimit DiagonalTrace.FiniteCartierNormalization
+        DiagonalTrace.FiniteRootNormalization DiagonalTrace.finiteCartierClass
+      exact hlimit)).imp
       (fun family hfamily ↦ ⟨hY, aY, aP, aW, δ, hfamily.1⟩)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

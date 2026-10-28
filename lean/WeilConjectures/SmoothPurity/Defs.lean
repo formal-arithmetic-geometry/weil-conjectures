@@ -16,6 +16,7 @@ import Sheaf.Paper.FinitePuritySourceUnitReduction
 import Sheaf.SmoothPurity.OpenDimensionObstruction
 import Sheaf.SmoothPurity.PointUnitNonzero
 import Sheaf.SmoothPurity.TraceExistence
+import Sheaf.SmoothPurity.TraceNonuniqueness
 
 /-!
 
@@ -133,6 +134,11 @@ noncomputable def tateTwistDerivedZeroIso (ℓ : ℕ) [Fact ℓ.Prime] (T : Sche
 
 section Purity
 
+-- Keep abstract categorical calculations from expanding the sheaf-module models.
+attribute [local irreducible] DerivedCategory.monoidalClosed Mod.monoidalClosed
+  Mod.monoidalCategory Mod.monoidalCategoryStruct upperStarFromPoint
+  Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
+
 attribute [local irreducible] Scheme.PurityIntegralTower.ReconstructionResult
   boundedConstructibleLowerShriek boundedConstructibleUpperShriek
   boundedConstructibleUpperShriekAdjunction
@@ -147,6 +153,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- Blueprint `sk-def-sp-trace`: the **trace map** `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a
 morphism `f` smooth of pure relative dimension `d` (SGA 4, Exposé XVIII, Théorème 2.9). Its
 construction is not formalized: see the module docstring for the properties that are assumed. -/
+-- STATEMENT-DISPUTED: the witness theorem used below omits the finite orientation
+-- normalization. smoothTrace_representing_not_unique_at_point proves that its actual
+-- representing-pair predicate has distinct witnesses, even for an identity map.
 @[no_expose]
 noncomputable def smoothTrace :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
@@ -160,6 +169,8 @@ noncomputable def smoothTrace :
         (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) rfl).choose
   else
     0
+
+attribute [local irreducible] smoothTrace
 
 /-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`: the adjoint of the trace `Tr_f` for
 `Rf_! ⊣ Rf^!`. -/
@@ -209,6 +220,17 @@ private theorem smoothTrace_openComparison_counit
     (boundedConstructibleUpperShriekAdjunction _ ℓ j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom K
 
+/-- Naturality carries a unit comparison to any preceding morphism.
+Source: the formal counit calculations in the open-normalization and composition
+nodes. Expand the mapped composite once and use naturality of the comparison. -/
+private theorem smoothTrace_map_unit_square
+    {C D : Type*} [Category C] [Category D] (F H : C ⥤ D) (b : F ⟶ H)
+    {K U V : C} {L : D} (u : U ⟶ V) (c : F.obj V ⟶ L) (r : H.obj U ⟶ L)
+    (hu : F.map u ≫ c = b.app U ≫ r) (t : K ⟶ U) :
+    F.map (t ≫ u) ≫ c = b.app K ≫ H.map t ≫ r := by
+  rw [Functor.map_comp, Category.assoc, hu, ← Category.assoc, b.naturality,
+    Category.assoc]
+
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Include the actual monoidal unit map in open counit normalization.
 Source: `lem-route-smooth-purity-iso-zero-of-is-open-immersion`, Steps 2--3.
@@ -231,10 +253,8 @@ private theorem smoothTrace_openUnit_counit (j : X ⟶ Y) [IsOpenImmersion j.lef
       ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ j)).hom ≫
         ((boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).app (𝟙_ _)).inv) ≫
       _ = _
-  rw [Functor.map_comp, Category.assoc, smoothTrace_openComparison_counit ℓ j]
-  rw [← Category.assoc,
-    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.naturality,
-    Category.assoc]
+  exact smoothTrace_map_unit_square _ _ _ _ _ _
+    (smoothTrace_openComparison_counit ℓ j (𝟙_ _)) _
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Rewrite an arbitrary trace followed by the open unit and exceptional counit
@@ -260,10 +280,8 @@ private theorem smoothTrace_openComposite_counit
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).hom ≫
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
         (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) := by
-  rw [Functor.map_comp, Category.assoc, smoothTrace_openUnit_counit ℓ j]
-  rw [← Category.assoc,
-    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.naturality,
-    Category.assoc]
+  exact smoothTrace_map_unit_square _ _ _ _ _ _
+    (smoothTrace_openUnit_counit ℓ j) t
 
 /-- The finite diagonal/deformation data and the normalized integral Tate and unit towers
 needed to construct the smooth trace exist for the actual underlying map of `f`.
@@ -381,6 +399,34 @@ private theorem smoothTrace_finiteInverseQuotientSquare
   simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using
     (smoothTrace_finiteQuotientSquare ℓ f d b a hab sb sa r).symm
 
+/-- Invert a coefficient-linear square without expanding its objects or functors.
+Source: the inverse quotient step of `lem-route-is-iso-smooth-purity-map`.
+Map the inverse, cancel the two invertible sides, and use the forward square. -/
+private theorem smoothTrace_inverse_reduction_square
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B : C} {U V W : D} (a : A ⟶ B) [IsIso a] (b : V ⟶ U) [IsIso b]
+    (x : F.obj B ⟶ W) (y : W ⟶ U) (z : F.obj A ⟶ V)
+    (h : F.map a ≫ x ≫ y = z ≫ b) :
+    F.map (inv a) ≫ z = x ≫ y ≫ inv b := by
+  rw [Functor.map_inv]
+  apply (IsIso.inv_comp_eq _).2
+  apply (cancel_mono b).1
+  simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using h.symm
+
+/-- Transpose a coefficient-linear square under scalar adjunction.
+Source: `lem-route-is-iso-smooth-purity-map`, the semilinear transition step.
+Apply the Hom equivalence and its two naturality identities to the same square. -/
+private theorem smoothTrace_semilinear_square
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {A B : C} {U V W : D} (a : A ⟶ B)
+    (x : F.obj B ⟶ V) (y : F.obj A ⟶ W) (z : W ⟶ U) (b : U ⟶ V)
+    (h : F.map a ≫ x = y ≫ z ≫ b) :
+    a ≫ adj.homEquiv _ _ x = adj.homEquiv _ _ (y ≫ z) ≫ G.map b := by
+  rw [← Category.assoc] at h
+  have ht := congrArg (adj.homEquiv _ _) h
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right] at ht
+  exact ht
+
 omit [SmoothOfRelativeDimension d f.left] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
@@ -415,11 +461,48 @@ private theorem smoothTrace_reconstructedInverseQuotientSquare
           inv (reconstructedGamma ℓ f.left d M e a (s a)) := by
   let := h.1 b
   let := h.1 a
-  rw [Functor.map_inv]
-  apply (IsIso.inv_comp_eq _).2
-  apply (cancel_mono (reconstructedGamma ℓ f.left d M e a (s a))).1
-  simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using
-    (h.2.1 b a hab).symm
+  exact smoothTrace_inverse_reduction_square _ _ _ _ _ _ (h.2.1 b a hab)
+
+omit [SmoothOfRelativeDimension d f.left] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] in
+open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
+/-- The inverse orientations also intertwine the semilinear quotient transitions.
+Source: `lem-route-is-iso-smooth-purity-map`, Step 2, passing from coefficient-linear
+reduction squares to maps of the actual exceptional systems. Apply the actual
+scalar-extension/restriction Hom equivalence to the inverse quotient square.
+Naturality on its source and target gives the two semilinear composites. No
+lifting of an arbitrary diagram of derived maps is assumed. -/
+private theorem smoothTrace_reconstructedInverseSemilinearSquare
+    [QuasiCompact f.left] [IsSeparated f.left] [HasCompactification f.left]
+    [IsNoetherian X.left] [IsNoetherian Y.left]
+    (s : ∀ n : ℕ, Level ℓ (n + 1) f.left d)
+    (M : AdicTower X.left (datum.{u} ℓ))
+    (e : ∀ n : ℕ,
+      M.level n ≅ (derivedRealization X.left ℓ n).obj (finiteTwist X.left ℓ n d))
+    (h : IdentifiesExceptional ℓ f.left d s M e) (b a : ℕ) (hab : a ≤ b) :
+    letI := h.1 b
+    letI := h.1 a
+    inv (reconstructedGamma ℓ f.left d M e b (s b)) ≫
+        (pbcDerivedScalarAdjunction
+          (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)).homEquiv _ _
+          (pbcReductionNormalization (pbcAdicProjection X.left (datum.{u} ℓ) b)
+            (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)
+            (pbcAdicProjection X.left (datum.{u} ℓ) a)
+            (pbcAdicProjection_comp X.left (datum.{u} ℓ) b a hab)
+            (uniformReconstructionLimit (datum.{u} ℓ) M)).hom =
+      (pbcDerivedScalarAdjunction
+        (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)).homEquiv _ _
+        ((scalarComparison X.left ℓ b a hab).hom.app
+            ((exceptional (coefficient ℓ (b + 1)) f.left).obj (𝟙_ _)) ≫
+          (derivedRealization X.left ℓ a).map (exceptionalReduction ℓ f.left b a hab)) ≫
+        (pbcDerivedRestrict (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)).map
+          (inv (reconstructedGamma ℓ f.left d M e a (s a))) := by
+  let := h.1 b
+  let := h.1 a
+  exact smoothTrace_semilinear_square _ _ _ _ _ _
+    (smoothTrace_reconstructedInverseQuotientSquare ℓ f d s M e h b a hab)
 
 open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
 /-- The native finite system can be chosen together with all root quotient squares
@@ -466,6 +549,75 @@ private theorem smoothTrace_normalizedFiniteSystem :
   refine ⟨s, r, ?_, hrec⟩
   intro b a hab
   exact smoothTrace_finiteQuotientSquare ℓ f d b a hab (s b) (s a) (r b a hab)
+
+
+attribute [local irreducible] Scheme.PurityIntegralTower.Reconstructed
+  Scheme.PurityIntegralTower.ProjectionNormalized
+
+open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
+/-- Extract the actual normalized Tate and unit reconstructions for the native map,
+together with both directions of their finite exceptional comparison. Source:
+`lem-route-is-iso-smooth-purity-map`, Steps 1--2, and `sk-thm-purity-transport`,
+Steps 1--2. Choose the native finite system in the proof, instantiate the retained
+reconstruction theorem with exactly those levels and quotient comparisons, and
+retain its strict-tower and projection-normalization equations. The preceding
+inverse-square calculation supplies compatibility of the inverse comparisons.
+Every witness is extracted inside this proof; no definition chooses these data. -/
+private theorem smoothTrace_normalizedIntegralSystem :
+    ∃ (hfq : QuasiCompact f.left) (hfs : IsSeparated f.left)
+      (c : Compactification f.left) (hX : IsNoetherian X.left) (hY : IsNoetherian Y.left),
+      let := hfq
+      let := hfs
+      let := c.hasCompactification
+      let := hX
+      let := hY
+      ∃ (s : ∀ n : ℕ, Level ℓ (n + 1) f.left d)
+        (r : ∀ (b a : ℕ) (hab : a ≤ b),
+          ReductionData (FiniteReduction.quotient.{u} ℓ (Nat.add_le_add_right hab 1))
+            f.left d (s b) (s a))
+        (hXT : IsUnit (ℓ : Γ(X.left, ⊤))) (hYT : IsUnit (ℓ : Γ(Y.left, ⊤)))
+        (M : AdicTower X.left (datum.{u} ℓ)) (L : AdicTower Y.left (datum.{u} ℓ))
+        (eM : ∀ n : ℕ,
+          M.level n ≅ (derivedRealization X.left ℓ n).obj (finiteTwist X.left ℓ n d))
+        (eL : ∀ n : ℕ, L.level n ≅ (derivedRealization Y.left ℓ n).obj (𝟙_ _))
+        (hM : M.tower = strictDerivedTower X.left ℓ d)
+        (hL : L.tower = strictDerivedTower Y.left ℓ 0),
+        ProjectionNormalized X.left ℓ hXT d M eM hM ∧
+        ProjectionNormalized Y.left ℓ hYT 0 L
+          (fun n ↦ eL n ≪≫
+            (derivedRealization Y.left ℓ n).mapIso (finiteZeroIso Y.left ℓ n).symm) hL ∧
+        Reconstructed X.left ℓ (fun n ↦ finiteTwist X.left ℓ n d)
+          (fun b a hab ↦ proTwistMap d (r b a hab).twist) (-(2 * (d : ℤ))) M eM ∧
+        Reconstructed Y.left ℓ (fun n ↦ (𝟙_ (proCategory (coefficient ℓ (n + 1)) Y.left)))
+          (fun b a hab ↦ (unitReduction Y.left ℓ b a hab).hom) 0 L eL ∧
+        ∃ hE : IdentifiesExceptional ℓ f.left d s M eM,
+          ∀ (b a : ℕ) (hab : a ≤ b),
+            letI := hE.1 b
+            letI := hE.1 a
+            (pbcDerivedExtend (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)).map
+                (inv (reconstructedGamma ℓ f.left d M eM b (s b))) ≫
+              (pbcReductionNormalization (pbcAdicProjection X.left (datum.{u} ℓ) b)
+                (pbcAdicQuotient X.left (datum.{u} ℓ) b a hab)
+                (pbcAdicProjection X.left (datum.{u} ℓ) a)
+                (pbcAdicProjection_comp X.left (datum.{u} ℓ) b a hab)
+                (uniformReconstructionLimit (datum.{u} ℓ) M)).hom =
+              (scalarComparison X.left ℓ b a hab).hom.app
+                  ((exceptional (coefficient ℓ (b + 1)) f.left).obj (𝟙_ _)) ≫
+                (derivedRealization X.left ℓ a).map (exceptionalReduction ℓ f.left b a hab) ≫
+                  inv (reconstructedGamma ℓ f.left d M eM a (s a)) := by
+  obtain ⟨hfq, hfs, c, hX, hY, s, r, _, hrec⟩ :=
+    smoothTrace_normalizedFiniteSystem ℓ f d
+  let := hfq
+  let := hfs
+  let := c.hasCompactification
+  let := hX
+  let := hY
+  unfold ReconstructionResult at hrec
+  obtain ⟨hXT, hYT, M, L, eM, eL, hM, hL, hpM, hpL, hrM, hrL, hE⟩ := hrec.2 s r
+  refine ⟨hfq, hfs, c, hX, hY, s, r, hXT, hYT, M, L, eM, eL, hM, hL,
+    hpM, hpL, hrM, hrL, hE, ?_⟩
+  intro b a hab
+  exact smoothTrace_reconstructedInverseQuotientSquare ℓ f d s M eM hE b a hab
 
 end FiniteNative
 
@@ -617,6 +769,31 @@ private theorem smoothTrace_conjugate_adjunct
     Category.assoc, conjugateEquiv_counit, ← Category.assoc, b.naturality,
     Category.assoc, ← adj₁.homEquiv_counit, Equiv.symm_apply_apply]
 
+/-- Compute the composite-adjunction square with abstract categorical data.
+Source: `lem-route-smooth-purity-iso-comp-open-immersion`, the mate calculation.
+Transport the left comparison under the adjunctions and apply the two Hom
+naturality laws. Keeping the data abstract avoids unfolding geometric functors. -/
+private theorem smoothTrace_composite_adjunct_square
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
+    {J : C ⥤ E} {K : E ⥤ C}
+    (adjf : F ⊣ G) (adjj : H ⊣ I) (adjh : J ⊣ K) (c : J ≅ F ⋙ H)
+    {M : C} {U : D} {V : E} (t : F.obj M ⟶ U) (s : J.obj M ⟶ V)
+    (q : U ⟶ I.obj V)
+    (h : c.inv.app M ≫ s = H.map (t ≫ q) ≫ adjj.counit.app V) :
+    adjh.homEquiv _ _ s ≫
+        (conjugateEquiv adjh (adjf.comp adjj) c.inv).app V =
+      adjf.homEquiv _ _ t ≫ G.map q := by
+  have ht := congrArg ((adjf.comp adjj).homEquiv M V) h
+  rw [smoothTrace_conjugate_adjunct adjh (adjf.comp adjj)] at ht
+  have hr : (adjf.comp adjj).homEquiv _ _
+      (H.map (t ≫ q) ≫ adjj.counit.app V) = adjf.homEquiv _ _ t ≫ G.map q := by
+    rw [Adjunction.comp_homEquiv]
+    change adjf.homEquiv _ _ (adjj.homEquiv _ V _) = _
+    rw [← adjj.homEquiv_counit _ _ (t ≫ q),
+      (adjj.homEquiv _ V).apply_symm_apply (t ≫ q), adjf.homEquiv_naturality_right]
+  exact ht.trans hr
+
 omit [SmoothOfRelativeDimension d f.left] in
 /-- A normalized trace transitivity equation gives the exceptional-compositor
 square for the actual purity maps. Source:
@@ -640,26 +817,11 @@ private theorem smoothPurityMap_comp_of_trace_transitivity
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).hom.app (𝟙_ _) =
       smoothPurityMap ℓ f d ≫
         (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map q := by
-  let adjf := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f
-  let adjj := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j
-  let adjh := boundedConstructibleUpperShriekAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ j)
-  have h := congrArg ((adjf.comp adjj).homEquiv
-    (boundedConstructibleTateTwist ℓ X d (2 * d)) (𝟙_ _)) htrace
-  rw [smoothTrace_conjugate_adjunct adjh (adjf.comp adjj)] at h
-  have hr : (adjf.comp adjj).homEquiv _ _
-        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
-            (smoothTrace ℓ f d ≫ q) ≫ adjj.counit.app (𝟙_ _)) =
-      smoothPurityMap ℓ f d ≫
-        (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map q := by
-    rw [Adjunction.comp_homEquiv]
-    change adjf.homEquiv _ _
-      (adjj.homEquiv _ (𝟙_ (Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) _) = _
-    rw [← adjj.homEquiv_counit _ _ (smoothTrace ℓ f d ≫ q),
-      (adjj.homEquiv _ (𝟙_ (Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).apply_symm_apply
-        (smoothTrace ℓ f d ≫ q), adjf.homEquiv_naturality_right]
-    rfl
-  exact h.trans hr
+  exact smoothTrace_composite_adjunct_square
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f)
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ j))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f j) _ _ q htrace
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- The formal last step of the normalized trace construction. Once the geometric
@@ -764,6 +926,23 @@ private theorem smoothPurityMap_point_dimension_one_not_isIso [IsSepClosed k] :
   exact smoothPurityMap_not_isIso_of_open ℓ _ 1 (by decide)
     (not_isZero_unit_on_separablyClosed_point ℓ k)
 
+
+/-- The actual geometric-point Hom pairing does not specify a unique trace.
+Source: `def-route-smooth-trace`, the missing finite orientation normalization.
+Apply the independent sign counterexample, which uses neither the chosen smooth
+trace nor the disputed smooth-purity instance. -/
+private theorem smoothTrace_representing_not_unique_at_point [IsSepClosed k] :
+    ¬ ∃! t :
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (𝟙 (Over.mk (𝟙 (Spec (.of k)))))).obj
+            (𝟙_ (Dᵇc((Over.mk (𝟙 (Spec (.of k)))).left)⟦
+              Profinite.padicAlgClRingObj ℓ⟧)) ⟶ 𝟙_ _,
+      ∀ K : Dᵇc((Over.mk (𝟙 (Spec (.of k)))).left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+        Function.Bijective (fun a : K ⟶ 𝟙_ _ ↦
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+            (𝟙 (Over.mk (𝟙 (Spec (.of k)))))).map a ≫ t) := by
+  exact not_existsUnique_representing_trace_at_point ℓ (k := k)
+
 end PointObstruction
 
 /-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
@@ -812,6 +991,38 @@ private theorem smoothPurityIso_eq_of_reconstructed_trace
   rw [h]
   exact hinv
 
+/-- Invert a common-source comparison square in an arbitrary category.
+Source: the final inversion step of the open-composition node. Cancel the
+common-source isomorphism and use its supplied comparison equation. -/
+private theorem smoothTrace_inverse_comparison_square
+    {C : Type*} [Category C] {M A B : C}
+    (cf : M ≅ A) (ch : M ≅ B) (r : B ≅ A)
+    (h : ch.hom ≫ r.hom = cf.hom) : ch.inv = r.hom ≫ cf.inv := by
+  apply (cancel_epi ch.hom).1
+  rw [ch.hom_inv_id, ← Category.assoc, h, cf.hom_inv_id]
+
+/-- Map the inverse common-source comparison without unfolding the functor.
+Source: the same final inversion step, after the constructible inclusion.
+First invert the abstract square, then use functoriality of mapped isomorphisms. -/
+private theorem smoothTrace_map_inverse_comparison_square
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) {M A B : C}
+    (cf : M ≅ A) (ch : M ≅ B) (r : B ≅ A)
+    (h : ch.hom ≫ r.hom = cf.hom) :
+    F.mapIso ch.symm = F.mapIso r ≪≫ F.mapIso cf.symm := by
+  have he : ch.symm = r ≪≫ cf.symm :=
+    Iso.ext (smoothTrace_inverse_comparison_square cf ch r h)
+  rw [he, Functor.mapIso_trans]
+
+/-- Cancel a mapped inverse unit comparison in an abstract square.
+Source: the map-square to isomorphism-square step of the composition node.
+Compose with the mapped forward unit comparison and use functoriality. -/
+private theorem smoothTrace_comp_eq_of_map_inv
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) {U V : C}
+    (e : U ≅ V) {M N : D} (a : M ⟶ N) (b : N ⟶ F.obj U) (c : M ⟶ F.obj V)
+    (h : a ≫ b = c ≫ F.map e.inv) : a ≫ b ≫ F.map e.hom = c := by
+  rw [← Category.assoc, h, Category.assoc, ← F.map_comp, e.inv_hom_id,
+    F.map_id, Category.comp_id]
+
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Inverting a common-source comparison square gives the required open-composition
 formula for purity. Source: `lem-route-smooth-purity-iso-comp-open-immersion`, Step 8.
@@ -846,14 +1057,17 @@ private theorem smoothPurityIso_comp_of_reconstructed_traces
     (hcomp : ch.hom ≫ r.hom = cf.hom) :
     smoothPurityIso ℓ (f ≫ j) d =
       (ObjectProperty.ι _).mapIso r ≪≫ smoothPurityIso ℓ f d := by
-  rw [smoothPurityIso_eq_of_reconstructed_trace ℓ (f ≫ j) d a ch hh,
-    smoothPurityIso_eq_of_reconstructed_trace ℓ f d a cf hf]
-  have hinv : ch.inv = r.hom ≫ cf.inv := by
-    apply (cancel_epi ch.hom).1
-    rw [ch.hom_inv_id, ← Category.assoc, hcomp, cf.hom_inv_id]
-  apply Iso.ext
-  simp only [Functor.mapIso_hom, Iso.symm_hom, Iso.trans_hom]
-  rw [hinv, Functor.map_comp, Category.assoc]
+  let I := (boundedConstructible
+    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+  have hh' := smoothPurityIso_eq_of_reconstructed_trace ℓ (f ≫ j) d a ch hh
+  have hf' := smoothPurityIso_eq_of_reconstructed_trace ℓ f d a cf hf
+  calc
+    smoothPurityIso ℓ (f ≫ j) d = I.mapIso ch.symm ≪≫ a := hh'
+    _ = (I.mapIso r ≪≫ I.mapIso cf.symm) ≪≫ a :=
+      congrArg (fun e ↦ e ≪≫ a) (smoothTrace_map_inverse_comparison_square I cf ch r hcomp)
+    _ = I.mapIso r ≪≫ (I.mapIso cf.symm ≪≫ a) := Iso.trans_assoc _ _ _
+    _ = I.mapIso r ≪≫ smoothPurityIso ℓ f d :=
+      congrArg (fun e ↦ I.mapIso r ≪≫ e) hf'.symm
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Complete the zero-dimensional normalization from its explicit trace formula.
@@ -943,11 +1157,12 @@ theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map e.hom ≫
         adj.counit.app U := by
     have heq : smoothTrace ℓ j 0 = hE.choose := by
-      simp [smoothTrace, hsm]
+      rw [smoothTrace, dif_pos (show Nonempty (SmoothOfRelativeDimension 0 j.left)
+        from ⟨hsm⟩)]
     rw [heq]
     exact hE.unique hE.choose_spec.1 (representing_trace_of_iso adj e)
   smoothPurityIso_zero_of_trace_formula ℓ j
-    (by simpa [a, A, c, e, adj] using htrace)
+    htrace
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Invert the actual purity-map square obtained from trace transitivity.
@@ -980,23 +1195,10 @@ private theorem smoothPurityIso_comp_of_trace_transitivity
     G.mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j)
   have hm := smoothPurityMap_comp_of_trace_transitivity ℓ f d j
     (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv htrace
-  change smoothPurityMap ℓ (f ≫ j) d ≫
-      (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).hom.app (𝟙_ _) =
-    smoothPurityMap ℓ f d ≫
-      G.map (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv at hm
   have hs : smoothPurityMap ℓ (f ≫ j) d ≫ r.hom = smoothPurityMap ℓ f d := by
-    change smoothPurityMap ℓ (f ≫ j) d ≫
-        (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).hom.app (𝟙_ _) ≫
-          G.map (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).hom = _
-    rw [← Category.assoc, hm, Category.assoc, ← G.map_comp, Iso.inv_hom_id,
-      G.map_id, Category.comp_id]
-  have hi : inv (smoothPurityMap ℓ (f ≫ j) d) = r.hom ≫ inv (smoothPurityMap ℓ f d) := by
-    apply (cancel_epi (smoothPurityMap ℓ (f ≫ j) d)).1
-    rw [IsIso.hom_inv_id, ← Category.assoc, hs, IsIso.hom_inv_id]
-  have he : (asIso (smoothPurityMap ℓ (f ≫ j) d)).symm =
-      r ≪≫ (asIso (smoothPurityMap ℓ f d)).symm := Iso.ext hi
-  unfold smoothPurityIso
-  rw [he, Functor.mapIso_trans]
+    exact smoothTrace_comp_eq_of_map_inv G _ _ _ _ hm
+  exact smoothTrace_map_inverse_comparison_square (ObjectProperty.ι _)
+    (asIso (smoothPurityMap ℓ f d)) (asIso (smoothPurityMap ℓ (f ≫ j) d)) r hs
 
 /-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity
 with composition with an open immersion**: for `f` smooth of pure relative dimension `d` and an

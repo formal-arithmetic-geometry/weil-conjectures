@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-geometric-point-trace-not-unique",
+ "kind": "statement",
+ "title": "The geometric-point compact-support pairing does not determine a unique trace",
+ "statement": "Let ℓ be prime, and let k be a separably closed field whose characteristic is prime and different from ℓ. Put S = Spec k, viewed as a finite-type separated scheme over itself [sk-def-sfb-dc-setting]. Let Λ be the condensed Qbar_ℓ coefficient ring [prop-weil-pbc-qbar-condensed-two-colimit], let D be its bounded constructible derived module category on S, and let U be the tensor unit. For the identity map j of S, let F = Rj_! [sk-def-sfb-dc-lower-shriek]. There is not a unique morphism t : F(U) → U such that for every K in D the map Hom(K,U) → Hom(F(K),U), a ↦ F(a) followed by t, is bijective. Thus the representing-pair property alone does not specify a trace; finite orientation normalization is essential.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--3 and def-route-smooth-trace: finite diagonal/deformation orientation must be retained in the reconstructed trace. This is the sign-automorphism edge-case test of an unnormalized representing-pair predicate."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-dc-lower-shriek"
+ ],
+ "proof": [
+  {
+   "text": "The negative identity of the regular condensed coefficient module is distinct from its identity. Evaluate any alleged equality on the singleton profinite set and on the constant section one, then evaluate the underlying finite-intermediate-field-valued function. This would give minus one equals one in the characteristic-zero field Qbar_ℓ, a contradiction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pullback from condensed modules to the separably closed point is an equivalence and is strong monoidal. It is additive and faithful, so the negative identity remains distinct on the pulled-back unit and hence on the native module unit. The degree-zero single functor is faithful; its comparison with the derived tensor unit carries the same sign inequality to the ambient derived category. The bounded constructible inclusion is additive and faithful and sends its unit to that ambient unit, giving the inequality in D.",
+   "uses": [
+    "lem-pe-point-module-pullback-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity open immersion, the canonical open-unit comparison is an isomorphism e : U ≅ Rj^! U. Under Rj_! ⊣ Rj^!, the counit transpose t of e represents all the indicated Hom functors. Precomposing e by the sign automorphism gives t prime = F(-id_U) followed by t. Every corresponding Hom map is still bijective, since composition with the sign automorphism is bijective. If the two traces were equal, injectivity of the original pairing at K=U would force -id_U=id_U, contradicting the preceding step. Therefore uniqueness fails. No smoothTrace choice, unnormalized uniqueness theorem, or unconditional smooth-purity instance is used.",
+   "uses": [
+    "sk-def-sfb-dc-upper-shriek",
+    "sk-def-sfb-dc-lower-shriek"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-point-module-pullback-equivalence",
+  "sk-def-sfb-dc-upper-shriek",
+  "sk-def-sfb-dc-lower-shriek"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-28",
+  "kind": "proved normalization counterexample",
+  "note": "The actual native geometric-point pairing, not a replacement purity route. All lemmas in this module are proved; no holes are added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial automorphism of a representing object gives distinct traces with bijective adjunction Hom pairings",
+   "results": "8 hits, including CategoryTheory.Adjunction.representableBy_homEquiv.",
+   "date": "2026-10-28",
+   "verdict": "Use the adjunction Hom equivalence and elementary automorphism composition; no ready-made native counterexample."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
+   "results": "12 hits including ofNatIsoLeft, ofNatIsoRight and their homEquiv comparison lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Transport lemmas do not express nonuniqueness; prove the generic automorphism argument directly."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique.*represent|represent.*unique|homEquiv_naturality_left",
+   "results": "25 Mathlib hits, including naturality examples; local searches found the disputed TraceExistence predicate and the existing private representing_trace_of_iso proof.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the categorical proof and prove sign nontriviality from the actual coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SmoothPurity.Defs",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-route-smooth-trace",
+   "via": [
+    "lem-route-is-iso-smooth-purity-map",
+    "nt-target-smooth-purity-qbar"
+   ],
+   "place": "Normalization edge-case test for the trace choice; not a replacement for the finite purity route."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.TraceNonuniqueness",
+  "file": "lean/Sheaf/SmoothPurity/TraceNonuniqueness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.not_existsUnique_representing_trace_at_point",
+  "statement": "theorem not_existsUnique_representing_trace_at_point [IsSepClosed k] :\n    letI : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=\n      inferInstanceAs (LocallyOfFiniteType (𝟙 (Spec (.of k))))\n    letI : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=\n      inferInstanceAs (QuasiCompact (𝟙 (Spec (.of k))))\n    letI : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=\n      inferInstanceAs (IsSeparated (𝟙 (Spec (.of k))))\n    ¬ ∃! t :\n        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ\n          (𝟙 (Over.mk (𝟙 (Spec (.of k)))))).obj\n            (𝟙_ (Dᵇc((Over.mk (𝟙 (Spec (.of k)))).left)⟦\n              Profinite.padicAlgClRingObj ℓ⟧)) ⟶ 𝟙_ _,\n      ∀ K : Dᵇc((Over.mk (𝟙 (Spec (.of k)))).left)⟦Profinite.padicAlgClRingObj ℓ⟧,\n        Function.Bijective (fun a : K ⟶ 𝟙_ _ ↦\n          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ\n            (𝟙 (Over.mk (𝟙 (Spec (.of k)))))).map a ≫ t)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-6f969",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T034647-L-3528504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-6f969",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T034647-L-3528504",
+  "kind": "interface",
+  "note": "independent cc review: Defs.lean, IntegralNormalizedFamily.lean and TraceNonuniqueness.lean vs clone (proof-only/private changes; new public theorem vs node lean.statement verbatim; #print axioms: sorryAx only from upstream sorried upper-shriek adjunction/unit iso); 3b 10/10 importers OK; INF original timed 51 s"
+ }
+}
