@@ -20473,3 +20473,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:47 L: returned deliver/S9/Sheaf.SixFunctors.CoefIntegralFiniteExtensionPureTensor (reviewer RETURN: (reviewer C-94182, head 941823a4e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.CoefInte)
 
 - 08:58 L: batch 20261027T233735 dependency take-out
+- 01:04 L: returned deliver/A2/WeilConjectures.SmoothPurity.Defs (reviewer RETURN: (the landing tools, head ea3eff068) the delivery did not land: missing import source modules: Sheaf.SmoothPurity.TraceNo)
