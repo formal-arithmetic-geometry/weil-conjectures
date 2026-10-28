@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-diagonal-finite-underlying-iso-lift",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Lifting underlying finite sheaf isomorphisms to p-adic modules",
+ "statement": "Let ell be prime, n a natural number, W a scheme, N a sheaf of ULift(Z_ell)-modules and Q a sheaf of ULift(Z/ell^(n+1))-modules [def-sfb-diagonal-system-interface]. For every isomorphism e:U(N)≅forget(Q), there exists a p-adic-linear isomorphism t:N≅F_n(Q) whose underlying hom, followed by the inverse finite-forgetting comparison [lem-sfb-diagonal-evaluation-unit], is exactly e.hom. The conclusion also records the same underlying-map identification directly as HEq. The theorem kummer_finite_kernel_lift packages these lifts for the actual Tate objects: whenever roots followed by normalized root isomorphisms equals the prescribed a_n, the lifts satisfy kummerRootNormalization and their underlying maps followed by inverse sigma equal a_n.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-evaluation-unit",
+  "def-sfb-kummer-strict-adjunct-data",
+  "lem-sfb-pure-kernel-triangle-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), coefficient action on the surviving kernel, and step (4), finite forgetting normalization."
+ },
+ "proof": [
+  {
+   "text": "The restriction of Q to p-adic scalars is killed sectionwise by ell^(n+1). The underlying isomorphism e transports this annihilator to N.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a p-adic scalar a use its integer approximation z=appr(a,n+1). PadicInt.appr_spec writes a-z as ell^(n+1) times a p-adic scalar. On both annihilated modules a therefore acts by z. Every additive map commutes with this integer action and hence with a; this proves linearity of e and its inverse on every section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Assemble the resulting sectionwise ModuleCat homomorphisms; naturality is the original additive naturality. Their composites are identities by faithfulness of underlying additive maps. The finite-forgetting comparison has identity underlying components, yielding the specified equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At every level apply the proved finite-torsion lift. The supplied normalized-root equation and the equality of r_n with the canonical root map identify the lift with roots followed by the canonical root map. Compose its heterogeneous equality with that ordinary equality to obtain precisely kummerRootNormalization. This packages the finite lifts as FiniteKernelLift.",
+   "uses": [
+    "def-sfb-kummer-strict-adjunct-data",
+    "lem-sfb-pure-kernel-triangle-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-kummer-strict-adjunct-data",
+  "lem-sfb-pure-kernel-triangle-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), coefficient action on the surviving kernel, and step (4), finite forgetting normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), coefficient action on the surviving kernel, and step (4), finite forgetting normalization.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteUnderlyingIsoLift",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteUnderlyingIsoLift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_finite_underlying_iso_lift",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonal_finite_underlying_iso_lift",
+   "AlgebraicGeometry.ProEtale.kummer_finite_kernel_lift"
+  ],
+  "statement": "theorem diagonal_finite_underlying_iso_lift (ℓ n : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (N : DiagonalMod ℓ W)\n    (Q : Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))\n    (e : (diagonalForget ℓ W).obj N ≅\n      (cartierForget (diagonalResidue.{u} ℓ n) W).obj Q) :\n    ∃ t : N ≅ (diagonalFiniteToPadic ℓ n W).obj Q,\n      (diagonalForget ℓ W).map t.hom ≫ (diagonalFiniteForgetIso ℓ n W).inv.app Q =\n        e.hom ∧ HEq ((diagonalForget ℓ W).map t.hom) e.hom",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

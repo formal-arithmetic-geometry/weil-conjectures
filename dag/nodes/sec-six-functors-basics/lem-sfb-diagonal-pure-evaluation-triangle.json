@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-diagonal-pure-evaluation-triangle",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Evaluated pure reduction multiplication triangle",
+ "statement": "Let ell be prime, W any scheme, D a diagonal derived reduction and eta its quotient-normalized evaluated units [def-sfb-diagonal-system-interface, lem-sfb-diagonal-evaluation-unit]. Let M be any integral pro-etale sheaf and b:T(M[1])≅H[2] a supplied pure-system comparison. There are arrows d_n:U(H_n)→M such that (ell^(n+1), eta_n followed by the canonical evaluated comparison of b, single(d_n)[2] followed by shift addition) is a distinguished triangle on single(M)[1], and U(H_(n+1)→H_n) followed by d_n equals d_(n+1) followed by ell. No roots, finite Tate lines or Kummer classes occur.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-evaluation-unit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution of M[1]. Nonzero integer multiplication is mono on its terms and exact p-adic extension preserves it. At level n identify the scalar-extended quotient with the integral quotient using Z_ell/ell^(n+1)=Z/ell^(n+1), compatibly with the quotient unit. The degreewise short exact sequence gives the multiplication triangle.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-constant-two-term-resolution",
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On this resolving class the supplied derived counit is invertible by uniqueness of the pointwise left-derived functor. The complexes equation for eta identifies the quotient arrow after transport to M[1]. Compose with the supplied b and exact evaluation comparisons. Full faithfulness of the single functor followed by shift two writes the last arrow uniquely as single(d_n)[2] followed by shift addition.",
+   "uses": [
+    "lem-sfb-diagonal-evaluation-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the same resolution at consecutive levels. The morphism of multiplication short exact sequences has components ell on the first object, identity on the second, and the quotient transition on the third. Naturality of their connecting arrows, transport by b, and faithfulness of shifted singles give the displayed equality for d_n. This proves naturality without detecting arbitrary derived arrows levelwise.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-constant-two-term-resolution",
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-evaluation-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalPureEvaluationTriangle",
+  "file": "lean/Sheaf/Paper/DiagonalPureEvaluationTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_pure_evaluation_triangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalPureEvaluationIso",
+   "AlgebraicGeometry.ProEtale.PureEvaluationTriangle",
+   "AlgebraicGeometry.ProEtale.diagonal_pure_evaluation_triangle"
+  ],
+  "statement": "theorem diagonal_pure_evaluation_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n)\n    (M : DiagonalAb W) (H : DiagonalSystems ℓ W)\n    (b : D.T.obj (((DerivedCategory.singleFunctor (DiagonalAb W) 0).obj M)⟦(1 : ℤ)⟧) ≅\n      ((DerivedCategory.singleFunctor (DiagonalSystems ℓ W) 0).obj H)⟦(2 : ℤ)⟧) :\n    PureEvaluationTriangle ℓ (diagonalScalarExtension ℓ W) (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D η M H b",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

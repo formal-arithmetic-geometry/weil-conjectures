@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-kummer-compared-kernel-triangle",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Signed Kummer triangle and its roots transitions",
+ "statement": "Let ell be prime and invertible on a scheme W. Put M=comparison(G_m), R_n=mu_(ell^(n+1)), P_n=forget((Z/ell^(n+1))(1)), and kappa_n the compared Kummer class [def-sfb-kummer-strict-adjunct-data, def-sfb-cartier-reduction-data]. There are isomorphisms r_n:R_n≅P_n whose hom is the actual cartierProRootMap, and monomorphisms i_n:P_n→M. The triangle on single(M)[1] has arrows ell^(n+1), negative kappa_n[1] followed by inverse shift addition, and single(-i_n)[2] followed by shift addition. It is distinguished. The actual root transition followed by r_n and i_n equals r_(n+1) followed by i_(n+1) and ell. This assertion uses no derived reduction or supplied pure comparison.",
+ "stmt_deps": [
+  "def-sfb-kummer-strict-adjunct-data",
+  "def-sfb-cartier-reduction-data",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-pure-kernel-triangle-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target Kummer kernel, and step (4), the sign of the shifted Kummer boundary."
+ },
+ "proof": [
+  {
+   "text": "At each level use the proved Kummer kernel-level theorem. It supplies the actual root-map isomorphism r_n, a monic i_n, the signed distinguished triangle, and the equality r_n followed by i_n followed by the units comparison equals the actual roots inclusion.",
+   "uses": [
+    "lem-sfb-kummer-compared-kernel-level"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the successor equation compose both sides with the units comparison, which is an isomorphism. Rewrite the normalized inclusions from the level theorem. The actual roots-power transition followed by the lower inclusion is the upper inclusion followed by ell. Naturality of integer multiplication through the units comparison identifies the two sides. Cancel that monomorphism. All data were obtained in theorem proofs, not in a definition chosen from an unproved existence assertion.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-sfb-cartier-reduction-data",
+    "lem-sfb-kummer-kernel-transition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kummer-compared-kernel-level",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-cartier-reduction-data",
+  "lem-sfb-kummer-kernel-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (3) and (4): pointwise Kummer triangles and normalized inclusions, followed by the actual roots-power identity and cancellation of the units comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), target Kummer kernel, and step (4), the sign of the shifted Kummer boundary.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerComparedKernelTriangle",
+  "file": "lean/Sheaf/Paper/KummerComparedKernelTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_compared_kernel_triangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.kummer_compared_kernel_triangle"
+  ],
+  "statement": "theorem kummer_compared_kernel_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)] :\n    let M := (comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf\n    let R := Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime)\n    let P := fun n ↦ (cartierForget (diagonalResidue.{u} ℓ n) W).obj\n      (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n        (cartierResidue_cast ℓ (n + 1)) W)\n    let F := DerivedCategory.singleFunctor (DiagonalAb W) 0\n    KernelTriangleData ℓ M R P\n      (fun n ↦ cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n        (cartierResidue_cast ℓ (n + 1)) W (pow_pos (Fact.out : ℓ.Prime).pos _)\n        (by simpa using hW.pow (n + 1)))\n      (fun n ↦ -((kummerComparedUnit ℓ W hW n).hom⟦(1 : ℤ)⟧' ≫\n        (shiftFunctorAdd (DerivedCategory (DiagonalAb W)) (1 : ℤ) 1).inv.app (F.obj (P n))))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

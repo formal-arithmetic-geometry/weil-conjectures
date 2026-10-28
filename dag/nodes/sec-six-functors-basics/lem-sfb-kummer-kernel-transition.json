@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "id": "lem-sfb-kummer-kernel-transition",
+ "title": "Transitions through normalized root inclusions",
+ "statement": "Let ell be prime, W a scheme, M an integral pro-etale sheaf, and P_n integral sheaves. Suppose q:M≅G_m and r_n:mu_(ell^(n+1))≅P_n are isomorphisms, and i_n:P_n→M satisfy r_n followed by i_n followed by q equal to the actual roots inclusion. Then the actual roots tower transition followed by r_n and i_n equals r_(n+1) followed by i_(n+1) followed by ell on M. [def-sfb-diagonal-system-interface, def-pur-roots-of-unity-sheaf]",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-proetale-units-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), the actual power-ell roots transitions."
+ },
+ "proof": [
+  {
+   "text": "The actual power-ell transition followed by the lower inclusion is the upper inclusion followed by multiplication by ell on units. This is the sectionwise power identity for the actual roots tower.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired equation by q. Substitute the two prescribed inclusion formulas and use the power identity. Multiplication by ell commutes with q in any preadditive category. Cancel the monic isomorphism q. This needs no derived category, Tate line, or scalar normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), the actual power-ell roots transitions."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), the actual power-ell roots transitions.",
+   "via": [
+    "lem-sfb-kummer-compared-kernel-triangle",
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerKernelTransition",
+  "file": "lean/Sheaf/Paper/KummerKernelTransition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_kernel_transition",
+  "statement": "theorem kummer_kernel_transition (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (M : DiagonalAb W) (P : ℕ → DiagonalAb W)\n    (q : M ≅ Scheme.proEtaleUnitsSheaf W)\n    (r : ∀ n, Scheme.proEtaleRootsOfUnitySheaf W (ℓ ^ (n + 1)) ≅ P n)\n    (i : ∀ n, P n ⟶ M)\n    (hin : ∀ n, (r n).hom ≫ i n ≫ q.hom =\n      Scheme.proEtaleRootsOfUnityInclusion W (ℓ ^ (n + 1))) :\n    ∀ n, (Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime)).map\n      (homOfLE (Nat.le_succ n)).op ≫ (r n).hom ≫ i n =\n      (r (n + 1)).hom ≫ i (n + 1) ≫ (ℓ • 𝟙 M)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.kummer_kernel_transition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

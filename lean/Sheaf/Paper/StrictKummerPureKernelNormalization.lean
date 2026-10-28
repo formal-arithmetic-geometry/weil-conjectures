@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.DiagonalEvaluationUnit
 public import Sheaf.Paper.KummerStrictAdjunctData
+public import Sheaf.Paper.KummerPureKernelNormalizationStatement
+import Sheaf.Paper.KummerNormalizationComponents
 
 /-! # Identification and normalization of the surviving Kummer cohomology
 Source: diagonal tower system proof, steps (3) and (4).
@@ -26,43 +28,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   comparisonUpperStar cartierUnitsComparison cartierRootsComparison cartierRootsIso
   cartierProKummerUnit cartierProRootMap diagonalFiniteToPadic diagonalForget
   diagonalScalarExtension diagonalScalarAdjunction
-
-/-- Roots identifications and the evaluated unit equation for a supplied pure
-strict-system comparison. This definition constructs no data. -/
-@[irreducible] def KummerPureKernelNormalization
-    {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
-    [Category B] [abB : Abelian B]
-    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
-    [HasExt.{w} (ℕᵒᵖ ⥤ B)]
-    (ℓ : ℕ) (L : A ⥤ B) (U : B ⥤ A) (ad : L ⊣ U)
-    [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    (D : DiagonalDerivedReduction ℓ L)
-    (C : ℕ → Type*) [catC : ∀ n, Category (C n)]
-    (F : ∀ n, C n ⥤ B)
-    (V : ∀ n, C n ⥤ A)
-    (M : A) (rootsTower : ℕᵒᵖ ⥤ A) (P : ∀ n, C n)
-    (κ : ∀ n, Ext M ((V n).obj (P n)) 1)
-    (rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ rootsTower) →
-      ∀ n, (H.obj (op n) ≅ (F n).obj (P n)) → Prop)
-    (σ : ∀ n, V n ≅ F n ⋙ U) (η : ∀ n, DiagonalEvaluationUnit U ad D n)
-    : Prop :=
-    ∀ (H : ℕᵒᵖ ⥤ B)
-    (b : D.T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H)⟦(2 : ℤ)⟧),
-    ∃ (roots : H ⋙ U ≅ rootsTower)
-      (t : ∀ n, H.obj (op n) ≅ (F n).obj (P n)),
-      (∀ n, rootNorm H roots n (t n)) ∧
-      ∀ n, (η n).unit.app (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≫
-        (diagonalEvaluationForget U n).mapDerivedCategory.map b.hom ≫
-        ((diagonalEvaluationForget U n).mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
-          ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H) ≫
-        (((diagonalEvaluationForget U n).mapDerivedCategorySingleFunctor 0).hom.app
-          H)⟦(2 : ℤ)⟧' ≫
-        ((DerivedCategory.singleFunctor A 0).map
-          (U.map (t n).hom ≫ (σ n).inv.app (P n)))⟦(2 : ℤ)⟧' =
-        -((κ n).hom⟦(1 : ℤ)⟧' ≫
-          (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app
-            ((DerivedCategory.singleFunctor A 0).obj ((V n).obj (P n))))
 
 /-- Identify the surviving cohomology with roots, including its scalar action
 and the unit equation, after a pure strict-system comparison has been supplied.
@@ -101,22 +66,20 @@ theorem strict_kummer_pure_kernel_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W 
     (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))
     (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)
       (diagonalScalarAdjunction ℓ W) D n) :
-  KummerPureKernelNormalization
+  strictKummerPureKernelNormalizationStatement ℓ W hW D η := by
+  exact kummer_normalization_of_coefficients
     (A := DiagonalAb W) (B := DiagonalMod ℓ W)
     (abA := diagonalAbSheafAbelian W) (abB := diagonalModuleSheafAbelian _ W)
     (hA := kummerAbHasExt W)
-    ℓ (diagonalScalarExtension ℓ W) (diagonalForget ℓ W)
-    (diagonalScalarAdjunction ℓ W) D
-    (fun n => Sheaf (Scheme.ProEt.topology W)
-      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))
-    (fun n => diagonalFiniteToPadic ℓ n W)
-    (fun n => cartierForget (diagonalResidue.{u} ℓ n) W)
-    ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)
-    (Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime))
-    (fun n => geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-      (cartierResidue_cast ℓ (n + 1)) W)
-    (fun n => kummerComparedUnit ℓ W hW n)
-    (kummerRootNormalization ℓ W hW)
-    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η := by sorry
+    (catA := inferInstanceAs (Category (DiagonalAb W)))
+    (catB := inferInstanceAs (Category (DiagonalMod ℓ W)))
+    (hDerA := inferInstanceAs (HasDerivedCategory.{u + 1} (DiagonalAb W)))
+    (hDerSys := inferInstanceAs (HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)))
+    (hSys := inferInstanceAs (HasExt.{u + 1} (DiagonalSystems ℓ W)))
+    (strictKummerNormalizationCoefficients ℓ W hW)
+    ℓ (diagonalScalarExtension ℓ W) (diagonalScalarAdjunction ℓ W) D η
+    (strict_kummer_kernel_triangles ℓ W hW)
+    (strict_kummer_evaluation_triangles ℓ W hW D η)
+    (strict_kummer_coefficient_lift ℓ W hW)
 
 end AlgebraicGeometry.ProEtale

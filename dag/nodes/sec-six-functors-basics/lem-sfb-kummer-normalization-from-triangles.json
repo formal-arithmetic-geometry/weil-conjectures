@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoTriangleOfIso|ofOpSequence",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂",
+   "results": "5 hits: CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₂",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two distinguished triangles with the same multiplication map give natural isomorphic kernels by monic inclusions",
+   "results": "8 hits: CategoryTheory.Limits.kernelCompMono, CategoryTheory.Limits.kernelIsoOfEq_hom_comp_ι_assoc, CategoryTheory.Limits.kernelSubobject_comp_mono_isIso, CategoryTheory.Limits.kernelIsoOfEq_inv_comp_ι_assoc, CategoryTheory.Limits.kernelIsoOfEq_hom_comp_ι, CategoryTheory.Limits.lift_comp_kernelIsoOfEq_hom_assoc, CategoryTheory.Limits.lift_comp_kernelIsoOfEq_inv_assoc, CategoryTheory.Limits.kernelCompMono_inv",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "id": "lem-sfb-kummer-normalization-from-triangles",
+ "title": "Kummer pure normalization from multiplication triangles and scalar lifting",
+ "statement": "Fix the data of KummerPureKernelNormalization: abelian categories A and B, exact additive U:B→A with left adjoint L, derived reduction D and evaluated units eta, a sheaf M, a root tower R, finite coefficient categories C_n with Tate objects P_n and forgetting comparison sigma, Ext classes kappa_n, and root-normalization predicates. Suppose KernelTriangleData gives the signed Kummer multiplication triangles and the actual root-inclusion transitions. Suppose every supplied pure comparison b:T(M[1])≅H[2] gives PureEvaluationTriangle, and FiniteKernelLift supplies the ordinary coefficient lift with the stated root normalization. Then KummerPureKernelNormalization holds: the roots form a natural isomorphism, their coefficient lifts obey the prescribed root normalization, and the evaluated unit equation equals the negative shifted Kummer boundary. This module also carries the unchanged definition KummerPureKernelNormalization previously in the assigned module. KummerNormalizationCoefficients records the actual input data over the given categories C_n, and its Normalized property is the same generic proposition applied to those fields; the proved kummer_normalization_of_coefficients criterion shares these parameters when specializing. The Kernel, PureTriangles and FiniteLift definitions are exactly the three input properties applied to these fields; they introduce no assertion or chosen data.",
+ "stmt_deps": [
+  "lem-sfb-diagonal-pure-evaluation-triangle",
+  "lem-sfb-pure-kernel-triangle-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), common kernel and natural transitions, and step (4), fixed second arrow and sign."
+ },
+ "proof": [
+  {
+   "text": "For a supplied H and b, unpack the evaluated multiplication triangles and signed kernel triangles. Apply the generic triangle-comparison theorem to obtain the natural roots identification, level isomorphisms, and second-arrow equations.",
+   "uses": [
+    "lem-sfb-diagonal-pure-evaluation-triangle",
+    "lem-sfb-pure-kernel-triangle-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supplied ordinary coefficient lift, substitute its underlying-map formula in the second-arrow equations, and expand the explicitly constructed evaluation comparison. This yields exactly the negative shifted Ext equation in the unchanged normalization definition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient record has given coefficient categories C and actual fields for their category structures, the functors, sheaf, tower, Tate objects, Ext classes, normalization predicate, forgetting comparison and root maps. Its Normalized property is the unchanged generic proposition applied to these fields. Apply the proved criterion to those projections to obtain kummer_normalization_of_coefficients. This shares parameters without choosing data or changing any assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-pure-evaluation-triangle",
+  "lem-sfb-pure-kernel-triangle-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), common kernel and natural transitions, and step (4), fixed second arrow and sign."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), common kernel and natural transitions, and step (4), fixed second arrow and sign.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerPureKernelNormalizationData",
+  "file": "lean/Sheaf/Paper/KummerPureKernelNormalizationData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_normalization_of_triangles",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KummerPureKernelNormalization",
+   "AlgebraicGeometry.ProEtale.kummer_normalization_of_triangles",
+   "AlgebraicGeometry.ProEtale.KummerNormalizationCoefficients",
+   "AlgebraicGeometry.ProEtale.KummerNormalizationCoefficients.Normalized",
+   "AlgebraicGeometry.ProEtale.kummer_normalization_of_coefficients",
+   "AlgebraicGeometry.ProEtale.KummerNormalizationCoefficients.Kernel",
+   "AlgebraicGeometry.ProEtale.KummerNormalizationCoefficients.PureTriangles",
+   "AlgebraicGeometry.ProEtale.KummerNormalizationCoefficients.FiniteLift"
+  ],
+  "statement": "theorem kummer_normalization_of_triangles\n    {A B : Type*} [catA : Category A] [abA : Abelian A] [hA : HasExt.{w} A]\n    [catB : Category B] [abB : Abelian B]\n    [hDerA : HasDerivedCategory.{w} A] [hDerSys : HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]\n    [hSys : HasExt.{w} (ℕᵒᵖ ⥤ B)]\n    (ℓ : ℕ) (L : A ⥤ B) (U : B ⥤ A) (ad : L ⊣ U)\n    [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    (D : DiagonalDerivedReduction ℓ L)\n    (C : ℕ → Type*) [catC : ∀ n, Category (C n)]\n    (TateF : ∀ n, C n ⥤ B) (V : ∀ n, C n ⥤ A)\n    (M : A) (R : ℕᵒᵖ ⥤ A) (P : ∀ n, C n)\n    (κ : ∀ n, Ext M ((V n).obj (P n)) 1)\n    (rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ R) →\n      ∀ n, (H.obj (op n) ≅ (TateF n).obj (P n)) → Prop)\n    (σ : ∀ n, V n ≅ TateF n ⋙ U) (η : ∀ n, DiagonalEvaluationUnit U ad D n)\n    (rootMap : ∀ n, R.obj (op n) ⟶ (V n).obj (P n))\n    (hkernel : KernelTriangleData ℓ M R (fun n ↦ (V n).obj (P n)) rootMap\n      (fun n ↦ -((κ n).hom⟦(1 : ℤ)⟧' ≫\n        (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app\n          ((DerivedCategory.singleFunctor A 0).obj ((V n).obj (P n))))))\n    (htriangle : ∀ (H : ℕᵒᵖ ⥤ B)\n      (b : D.T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≅\n        ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H)⟦(2 : ℤ)⟧),\n      PureEvaluationTriangle ℓ L U ad D η M H b)\n    (hlift : FiniteKernelLift U R C TateF V P σ rootMap rootNorm) :\n    KummerPureKernelNormalization (abA := abA) (abB := abB) (hA := hA)\n      ℓ L U ad D C TateF V M R P κ rootNorm σ η",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

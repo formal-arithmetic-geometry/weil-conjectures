@@ -12,7 +12,8 @@
   "def-pur-roots-of-unity-sheaf",
   "def-sfb-geo-cartier-interface",
   "def-sfb-cartier-reduction-data",
-  "def-sfb-kummer-strict-adjunct-data"
+  "def-sfb-kummer-strict-adjunct-data",
+  "def-sfb-kummer-pure-kernel-normalization-statement"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
@@ -20,52 +21,28 @@
  },
  "proof": [
   {
-   "text": "For the supplied comparison b:T(M[1])≅H[2], compute H as the surviving kernel of a common K-flat prime-power reduction. Compare with the constant two-term resolution. Kummer exactness and exact site comparison identify the underlying kernel with roots. The (ell,1) resolution transition induces the actual ell-power roots transition, so these identifications form an isomorphism of towers.",
+   "text": "The actual coefficient record has the signed Kummer Kernel property and the ordinary root-normalized FiniteLift property. Its PureTriangles property follows, for each supplied H and b, from the arbitrary-sheaf multiplication-triangle computation. The concrete component theorems package these already stated arguments with the actual record parameters.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-constant-two-term-resolution",
-    "lem-amb-kummer-any-base",
-    "lem-sp-cartier-reduction-site-comparison",
-    "def-pur-roots-of-unity-sheaf"
+    "lem-sfb-kummer-normalization-components"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient action on this kernel factors through the quotient Z/ell^(n+1), and the canonical roots-to-line map is linear for that action. The fixed-scalar versus constant-ring-sheaf equivalence gives finite-level isomorphisms t. Transport the kernel comparisons through H^(-2)(b) inverse, choosing the negative kernel comparison simultaneously at every level. This proves the underlying-map normalization and preserves the transition maps.",
+   "text": "Apply kummer_normalization_of_coefficients to these three properties. Its proof compares the two distinguished multiplication triangles, lifts the third isomorphism by full faithfulness of shifted singles, proves naturality by monic cancellation, and uses the scalar lift to obtain the precise negative shifted unit equation. Expanding the real coefficient record and named conclusion gives exactly the former concrete normalization proposition.",
    "uses": [
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
-    "def-sfb-geo-cartier-interface",
-    "def-sfb-cartier-reduction-data"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On the same resolution the complexes equation of the supplied evaluated unit is the quotient map. The normalized divisible-extension calculation identifies it with the positive Kummer connecting morphism, preceded by comparison on units. Shift once and insert the inverse shift-addition comparison. The negative kernel identification gives the required negative sign. Transport through the supplied b and its induced kernel isomorphisms; no equation is claimed for independent choices of roots and t.",
-   "uses": [
-    "lem-sfb-diagonal-evaluation-unit",
-    "lem-sfb-divisible-extension-derived-reduction",
-    "def-sfb-kummer-strict-adjunct-data"
+    "lem-sfb-kummer-normalization-from-triangles"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-constant-two-term-resolution",
-  "lem-amb-kummer-any-base",
-  "lem-sp-cartier-reduction-site-comparison",
-  "def-pur-roots-of-unity-sheaf",
-  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
-  "def-sfb-geo-cartier-interface",
-  "def-sfb-cartier-reduction-data",
-  "lem-sfb-diagonal-evaluation-unit",
-  "lem-sfb-divisible-extension-derived-reduction",
-  "def-sfb-kummer-strict-adjunct-data"
+  "lem-sfb-kummer-normalization-components",
+  "lem-sfb-kummer-normalization-from-triangles"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
-  "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units."
+  "place": "Steps (3) and (4): comparison of multiplication triangles, monic cancellation for transitions, and finite p-adic scalar lifting."
  },
  "mathlib_searches": [
   {
@@ -118,13 +95,13 @@
   "file": "lean/Sheaf/Paper/StrictKummerPureKernelNormalization.lean",
   "declaration": "AlgebraicGeometry.ProEtale.strict_kummer_pure_kernel_normalization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.KummerPureKernelNormalization",
    "AlgebraicGeometry.ProEtale.strict_kummer_pure_kernel_normalization"
   ],
-  "statement": "theorem strict_kummer_pure_kernel_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n) :\n  KummerPureKernelNormalization\n    (A := DiagonalAb W) (B := DiagonalMod ℓ W)\n    (abA := diagonalAbSheafAbelian W) (abB := diagonalModuleSheafAbelian _ W)\n    (hA := kummerAbHasExt W)\n    ℓ (diagonalScalarExtension ℓ W) (diagonalForget ℓ W)\n    (diagonalScalarAdjunction ℓ W) D\n    (fun n => Sheaf (Scheme.ProEt.topology W)\n      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))\n    (fun n => diagonalFiniteToPadic ℓ n W)\n    (fun n => cartierForget (diagonalResidue.{u} ℓ n) W)\n    ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)\n    (Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime))\n    (fun n => geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n      (cartierResidue_cast ℓ (n + 1)) W)\n    (fun n => kummerComparedUnit ℓ W hW n)\n    (kummerRootNormalization ℓ W hW)\n    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η",
+  "statement": "theorem strict_kummer_pure_kernel_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n) :\n  strictKummerPureKernelNormalizationStatement ℓ W hW D η",
   "branch": "sheaf-dag",
   "by": "A5",
-  "date": "2026-10-28"
+  "date": "2026-10-28",
+  "note": "The conclusion is definitionally identical to the previous concrete specialization, now named by a real proposition definition to share its canonical category parameters. Binders and universes are unchanged. See coord/changes/a7-kummer-normalization-concrete-statement.md."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -137,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A5",
-  "result": "pass",
-  "landing": "20261027T205743-L-1610648",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
  }
 }

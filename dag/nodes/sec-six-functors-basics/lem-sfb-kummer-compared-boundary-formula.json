@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "id": "lem-sfb-kummer-compared-boundary-formula",
+ "title": "Compared Kummer Ext class as the actual single boundary",
+ "statement": "Let ell be prime and invertible on a scheme W and fix n>=0, with the canonical Ext structure and chosen derived category of integral pro-etale sheaves [lem-sfb-canonical-sheaf-ext]. The hom of kappa_n [def-sfb-kummer-strict-adjunct-data] is single(cartierUnitsComparison) followed by the single connecting boundary of the actual short exact Kummer complex [def-sfb-cartier-reduction-data], followed by single(cartierProRootMap)[1].",
+ "stmt_deps": [
+  "lem-sfb-canonical-sheaf-ext",
+  "def-sfb-kummer-strict-adjunct-data",
+  "def-sfb-cartier-reduction-data",
+  "def-pur-proetale-units-sheaf",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4), the positive Kummer connecting class preceded by comparison on units."
+ },
+ "proof": [
+  {
+   "text": "Expand the definitions of the compared Kummer class and its two degree-zero endpoint factors. Ext.comp_hom, Ext.mk0_hom and the two shifted-Hom composition formulas turn these into composition of the corresponding single maps. The extClass_hom theorem identifies the remaining hom with the actual short-exact-sequence boundary. The typed intermediate Ext class keeps the actual kernel and units sheaves fixed throughout.",
+   "uses": [
+    "def-sfb-cartier-reduction-data",
+    "def-sfb-kummer-strict-adjunct-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-kummer-strict-adjunct-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4), the positive Kummer connecting class preceded by comparison on units."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (4), the positive Kummer connecting class preceded by comparison on units.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerComparedBoundaryFormula",
+  "file": "lean/Sheaf/Paper/KummerComparedBoundaryFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_compared_boundary_formula",
+  "statement": "theorem kummer_compared_boundary_formula (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)] (n : ℕ) :\n    let F := DerivedCategory.singleFunctor (DiagonalAb W) 0\n    let hS := cartierProKummer_exact W (ℓ ^ (n + 1))\n      (pow_pos (Fact.out : ℓ.Prime).pos _) (by simpa using hW.pow (n + 1))\n    let δ : F.obj (Scheme.proEtaleUnitsSheaf W) ⟶\n        (F.obj (Scheme.proEtaleRootsOfUnitySheaf W (ℓ ^ (n + 1))))⟦(1 : ℤ)⟧ := hS.singleδ\n    (kummerComparedUnit ℓ W hW n).hom = F.map (cartierUnitsComparison W) ≫ δ ≫\n      (F.map (cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n        (cartierResidue_cast ℓ (n + 1)) W (pow_pos (Fact.out : ℓ.Prime).pos _)\n        (by simpa using hW.pow (n + 1))))⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

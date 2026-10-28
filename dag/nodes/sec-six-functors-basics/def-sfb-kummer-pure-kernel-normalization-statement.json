@@ -1,0 +1,114 @@
+{
+ "kind": "definition",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isoTriangleOfIso|ofOpSequence",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂",
+   "results": "5 hits: CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_hom_hom₂, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₁, CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂_inv_hom₂",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two distinguished triangles with the same multiplication map give natural isomorphic kernels by monic inclusions",
+   "results": "8 hits: CategoryTheory.Limits.kernelCompMono, CategoryTheory.Limits.kernelIsoOfEq_hom_comp_ι_assoc, CategoryTheory.Limits.kernelSubobject_comp_mono_isIso, CategoryTheory.Limits.kernelIsoOfEq_inv_comp_ι_assoc, CategoryTheory.Limits.kernelIsoOfEq_hom_comp_ι, CategoryTheory.Limits.lift_comp_kernelIsoOfEq_hom_assoc, CategoryTheory.Limits.lift_comp_kernelIsoOfEq_inv_assoc, CategoryTheory.Limits.kernelCompMono_inv",
+   "date": "2026-10-28",
+   "verdict": "Use isoTriangleOfIso12, full-faithful preimageIso, and ofOpSequence. No existing result packages the natural comparison with the two prescribed arrow equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "id": "def-sfb-kummer-pure-kernel-normalization-statement",
+ "title": "Named concrete pure Kummer normalization proposition",
+ "statement": "Fix a prime ell, a scheme W on which ell is invertible, derived categories for the integral sheaves and strict p-adic systems, the canonical Ext structures [lem-sfb-canonical-sheaf-ext], a derived reduction D and evaluated units eta [lem-sfb-diagonal-evaluation-unit]. The proposition strictKummerPureKernelNormalizationStatement is exactly the specialization of KummerPureKernelNormalization [lem-sfb-kummer-normalization-from-triangles] to the scalar extension, forgetting functors and finite coefficient categories [def-sfb-diagonal-system-interface], actual roots tower [def-pur-roots-of-unity-sheaf], finite Tate lines [def-sfb-geo-cartier-interface] and compared Kummer class and root normalization [def-sfb-kummer-strict-adjunct-data]. The real record strictKummerNormalizationCoefficients contains exactly the former explicit coefficient parameters. Expanding its fields and the Normalized definition gives the former displayed conclusion of strict_kummer_pure_kernel_normalization by definitional equality. No data is chosen from a theorem.",
+ "stmt_deps": [
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-diagonal-evaluation-unit",
+  "lem-sfb-kummer-normalization-from-triangles",
+  "def-sfb-diagonal-system-interface",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-geo-cartier-interface",
+  "def-sfb-kummer-strict-adjunct-data",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), common kernel and natural transitions, and step (4), fixed second arrow and sign."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), common kernel and natural transitions, and step (4), fixed second arrow and sign.",
+   "via": [
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerPureKernelNormalizationStatement",
+  "file": "lean/Sheaf/Paper/KummerPureKernelNormalizationStatement.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.strictKummerPureKernelNormalizationStatement",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.strictKummerNormalizationCoefficients",
+   "AlgebraicGeometry.ProEtale.strictKummerPureKernelNormalizationStatement"
+  ],
+  "statement": "def strictKummerPureKernelNormalizationStatement (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28"
+ },
+ "import_flags": [],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}

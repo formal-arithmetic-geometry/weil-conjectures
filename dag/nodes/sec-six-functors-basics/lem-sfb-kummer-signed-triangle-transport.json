@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of divisible abelian sheaves identifies the surviving kernel with roots of unity and the unit with the Kummer connecting morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.H, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, CategoryTheory.Sheaf.instAddCommGroupH, IsDedekindDomain.selmerGroup.fromUnit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*normalization|kummer.*unit|homologyConcentratedIn",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every additive homomorphism between modules killed by p^n is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.toZModLinearMap, PadicInt.nthHom, PadicInt.lift, PadicInt.limNthHom, PadicInt.toZModPow, WittVector.toPadicInt, PadicInt.toZModHom, AddMonoidHom.coe_toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "Generic APIs only; no theorem giving the specialized multiplication-triangle, Kummer normalization, or p-adic sheaf lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerPureKernelNormalization",
+  "group": "A7",
+  "date": "2026-10-28"
+ },
+ "id": "lem-sfb-kummer-signed-triangle-transport",
+ "title": "Transport of the signed Kummer triangle",
+ "statement": "For a positive integer k invertible on W, endpoint isomorphisms a:M≅G_m and r:mu_k≅P transport the actual Kummer sequence. If q is its connecting arrow under those isomorphisms, there is a monic i:P→M whose signed multiplication triangle (k,-q[1],-i[2]) is distinguished, and r followed by i and a is the actual roots inclusion. [def-sfb-diagonal-system-interface, def-sfb-cartier-reduction-data]",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), transport of the Kummer kernel, and step (4), rotation and shift sign."
+ },
+ "proof": [
+  {
+   "text": "Transport the actual Kummer short exact sequence through a on both unit terms and through inverse r on its kernel. Short exactness is invariant under the resulting isomorphism of short complexes. Its inclusion i is monic, and the defining formula for i gives r followed by i followed by a equal to the original inclusion.",
+   "uses": [
+    "def-sfb-cartier-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the single-object connecting arrow identifies the transported boundary with q. Rotate its distinguished single-object triangle and shift by one. Correct the first object with negative identity and the third with shift addition. The shifted triangle has positive k, negative shifted q, and negative i shifted twice. These are generic abelian/triangulated category calculations and do not use finite residue coefficients or a derived reduction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cartier-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), transport of the Kummer kernel, and step (4), rotation and shift sign."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), transport of the Kummer kernel, and step (4), rotation and shift sign.",
+   "via": [
+    "lem-sfb-kummer-compared-kernel-level",
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerSignedTriangleTransport",
+  "file": "lean/Sheaf/Paper/KummerSignedTriangleTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_signed_kummer_triangle",
+  "statement": "theorem proEtale_signed_kummer_triangle\n    (W : Scheme.{u}) [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    (k : ℕ) (hk : 0 < k) (hW : IsUnit (k : Γ(W, ⊤)))\n    (M P : DiagonalAb W) (a : M ≅ Scheme.proEtaleUnitsSheaf W)\n    (r : Scheme.proEtaleRootsOfUnitySheaf W k ≅ P)\n    (q : (DerivedCategory.singleFunctor (DiagonalAb W) 0).obj M ⟶\n      ((DerivedCategory.singleFunctor (DiagonalAb W) 0).obj P)⟦(1 : ℤ)⟧)\n    (hq : q = (DerivedCategory.singleFunctor (DiagonalAb W) 0).map a.hom ≫\n      (cartierProKummer_exact W k hk hW).singleδ ≫\n      ((DerivedCategory.singleFunctor (DiagonalAb W) 0).map r.hom)⟦(1 : ℤ)⟧') :\n    let F := DerivedCategory.singleFunctor (DiagonalAb W) 0\n    ∃ i : P ⟶ M, Mono i ∧\n      Pretriangulated.Triangle.mk (k • 𝟙 ((F.obj M)⟦(1 : ℤ)⟧))\n        (-(q⟦(1 : ℤ)⟧' ≫\n          (shiftFunctorAdd (DerivedCategory (DiagonalAb W)) (1 : ℤ) 1).inv.app (F.obj P)))\n        ((F.map (-i))⟦(2 : ℤ)⟧' ≫\n          (shiftFunctorAdd (DerivedCategory (DiagonalAb W)) (1 : ℤ) 1).hom.app (F.obj M)) ∈\n        distTriang (DerivedCategory (DiagonalAb W)) ∧\n      r.hom ≫ i ≫ a.hom = Scheme.proEtaleRootsOfUnityInclusion W k",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proEtale_signed_kummer_triangle"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-a904e",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261028T020145-L-2471939",
+  "kind": "interface",
+  "note": "independent cc review: item node + 11 new nodes and change records against 12 delivered modules; moved def compared byte-for-byte with clone; named conclusion checked definitionally equal to the old one; 12 modules compiled in a scratch copy with #print axioms; importer StrictKummerUnitNormalization compiled OK (23 s)"
+ }
+}
