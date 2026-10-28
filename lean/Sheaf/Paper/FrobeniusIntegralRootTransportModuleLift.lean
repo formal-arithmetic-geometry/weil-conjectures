@@ -62,6 +62,36 @@ theorem frobeniusIntegralRootTransport_moduleLift
             (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l
               E).pull g)).unit.app (purTwistIntegralModule Y l E)).val.app (op V) t) =
         φ.hom.app (op V) t := by
-  sorry
+  classical
+  let R := completedIntegralCommRingSheafUnrestricted l E Y
+  let S := completedIntegralCommRingSheafUnrestricted l E X
+  let c := (PurCompactSupport.completed l E).pull g
+  have hc : proEtaleRingDirectImageMap g R S c = sfCompletedCoefficientMap l E g := by
+    change (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app R ≫
+      (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map
+        (PurCompactSupport.completedPullMap l E g) = _
+    exact ((proEtaleSheafAdjunction g CommRingCat.{u + 1}).homEquiv_unit _ _
+      (PurCompactSupport.completedPullMap l E g)).symm.trans
+        (Equiv.apply_symm_apply _ _)
+  let ψ : purTwistIntegralModule Y l E ⟶
+      (proEtaleRingModuleDirectImage g R S c).obj (purTwistIntegralModule X l E) :=
+    { val := PresheafOfModules.homMk φ.hom (by
+        intro U a t
+        change φ.hom.app U
+          (@SMul.smul _ _ (purTwistIntegralAction Y l E U).toSMul a t) =
+          @SMul.smul _ _
+            (purTwistIntegralAction X l E ((proEtaleBaseChange g).op.obj U)).toSMul
+            ((proEtaleRingDirectImageMap g R S c).hom.app U a)
+            (φ.hom.app U t)
+        rw [hc]
+        exact hscalar U.unop a t) }
+  let adj := proEtaleRingModuleAdjunction g R S c
+  let f := (adj.homEquiv _ _).symm ψ
+  refine ⟨f, ?_⟩
+  intro V t
+  have h : adj.unit.app (purTwistIntegralModule Y l E) ≫
+      (proEtaleRingModuleDirectImage g R S c).map f = ψ := by
+    exact (adj.homEquiv_unit _ _ f).symm.trans (Equiv.apply_symm_apply _ ψ)
+  exact congrArg (fun k ↦ k.val.app (op V) t) h
 
 end WeilConjectures

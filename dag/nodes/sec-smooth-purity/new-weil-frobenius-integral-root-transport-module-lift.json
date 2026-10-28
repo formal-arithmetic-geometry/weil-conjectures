@@ -33,21 +33,32 @@
  "statement": "The scalar semilinear additive map admits a morphism from the canonical module pullback whose underlying sheaf map satisfies the adjunction-unit section formula.",
  "proof": [
   {
-   "text": "Transpose the scalar-semilinear additive map through the canonical module adjunction. The resulting module morphism has the displayed underlying section formula by the adjunction hom-equivalence.",
+   "text": "The inverse-image coefficient map in PurCompactSupport.completed is the inverse adjoint of sfCompletedCoefficientMap. Applying the sheaf adjunction hom-equivalence and its unit formula therefore identifies proEtaleRingDirectImageMap with sfCompletedCoefficientMap.",
    "uses": [
-    "def-pur-twist-sheaves",
     "def-pur-integral-compact-support-coefficient-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL; module adjunction and sheafification"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use PresheafOfModules.homMk on the given additive sheaf morphism. Its linearity condition is precisely hscalar after rewriting by the coefficient-map equality, so this constructs a morphism from the integral Tate module to its module direct image.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse hom-equivalence of proEtaleRingModuleAdjunction to this module morphism. The adjunction unit identity and Equiv.apply_symm_apply identify its direct-image composite with the original morphism; evaluation on each section gives the required formula.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
   "def-pur-twist-sheaves",
-  "def-pur-integral-compact-support-coefficient-data"
+  "def-weil-pbc-proetale-operations"
  ],
  "lean": {
   "existing": false,
@@ -61,9 +72,10 @@
  },
  "proof_origin": {
   "by": "worker",
-  "group": "V9",
+  "group": "C5",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL; module adjunction and sheafification"
+  "place": "lemma-adjoint-push-pull-modules (Tag 03EL); Mathlib Adjunction.homEquiv_unit and PresheafOfModules.homMk"
  },
  "reviewed": {
   "date": "2026-10-28",
@@ -79,10 +91,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V9",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261028T035002-L-3577017",
-  "kind": "interface",
+  "landing": "20261028T055627-L-780344",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
