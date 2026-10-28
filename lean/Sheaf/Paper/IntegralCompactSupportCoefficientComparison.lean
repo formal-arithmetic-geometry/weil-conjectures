@@ -224,7 +224,23 @@ scalar adjunctions; the triangle identities give precisely NatTrans.CommShift. -
 theorem comparison_commShift {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (comparison a c).CommShift ℤ := by
-  sorry
+  letI : (pbcDerivedRestrict (a.map X)).CommShift ℤ :=
+    (pbcDerivedScalarAdjunction (a.map X)).rightAdjointCommShift ℤ
+  letI : (pbcDerivedRestrict (a.map Y)).CommShift ℤ :=
+    (pbcDerivedScalarAdjunction (a.map Y)).rightAdjointCommShift ℤ
+  have hAdjX := (pbcDerivedScalarAdjunction (a.map X)).commShift_of_leftAdjoint ℤ
+  have hAdjY := (pbcDerivedScalarAdjunction (a.map Y)).commShift_of_leftAdjoint ℤ
+  letI : (pbcDerivedScalarAdjunction (a.map X)).CommShift ℤ := hAdjX
+  letI : (pbcDerivedScalarAdjunction (a.map Y)).CommShift ℤ := hAdjY
+  letI : (image R c).CommShift ℤ := imageCommShift R c
+  letI : (image S c).CommShift ℤ := imageCommShift S c
+  have hres : NatTrans.CommShift (restriction a c).hom ℤ :=
+    restriction_commShift a c
+  unfold comparison
+  exact inverse_mate_shift
+    (pbcDerivedScalarAdjunction (a.map X))
+    (pbcDerivedScalarAdjunction (a.map Y))
+    (TwoSquare.mk _ _ _ _ (restriction a c).hom)
 /-- Ordinary tensor associativity, fixed by the two tensor-unit normalized adjunctions.
 Source: Stacks Tag 06YY
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
