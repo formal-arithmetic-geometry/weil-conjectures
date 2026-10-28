@@ -10088,6 +10088,7 @@ public import WeilConjectures.Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 public import WeilConjectures.Mathlib.GroupTheory.CosetCover
 public import WeilConjectures.Mathlib.GroupTheory.Exponent
 public import WeilConjectures.Mathlib.GroupTheory.GroupAction.Quotient
+public import WeilConjectures.Mathlib.GroupTheory.Index
 public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.GroupTheory.SpecificGroups.Cyclic
 public import WeilConjectures.Mathlib.LinearAlgebra.Basis.Exact
@@ -12575,6 +12576,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
@@ -12582,6 +12584,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExcha
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCompRetraction
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
@@ -13971,6 +13974,7 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
@@ -13990,6 +13994,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal

@@ -167,8 +167,9 @@ theorem isIso_pullbackExchange_baseChangeHom_traitMap
       (Category.comp_id _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) :=
   sorry
 
-set_option maxHeartbeats 800000 in
--- the statement involves the nearby cycles of the slice of the product
+set_option maxHeartbeats 2000000 in
+-- the statement and the averages over the product involve the nearby cycles of the slice of the
+-- product
 include hM hP hb in
 /-- **The generic-slicing identification of nearby cycles with invariants** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2); SGA 4½,
