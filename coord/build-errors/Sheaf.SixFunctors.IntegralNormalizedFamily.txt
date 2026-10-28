@@ -1,3 +1,190 @@
-# global build 2026-10-27T15:04:20Z of ef41adbe62: Sheaf.SixFunctors.IntegralNormalizedFamily failed
-error: Sheaf/SixFunctors/IntegralNormalizedFamily.lean: bad import 'Sheaf.Paper.DiagonalCoefficientReference'
-error: Sheaf/SixFunctors/IntegralNormalizedFamily.lean: bad import 'Sheaf.Paper.DiagonalTowerCoefficients'
+# global build 2026-10-28T00:56:21Z of 375085fafa: Sheaf.SixFunctors.IntegralNormalizedFamily failed
+error: Sheaf/SixFunctors/IntegralNormalizedFamily.lean:161:61: Application type mismatch: The argument
+  hlimit
+has type
+  ∃ a b c d e,
+    c.hom = diagonalDerivedSingleCounit ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)) D (diagonalIntegralSource Y) ∧
+      e.hom = c.inv ≫ D.T.map (diagonalIntegralBoundary Y).hom ≫ d.hom ∧
+        (fun H roots c ↦
+              diagonalFiniteCycleNormalization (D.ordinary.E.obj (diagonalIntegralSource Y)) H c
+                (fun n ↦
+                  (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
+                    ((diagonalImmersion Y)_*[ModuleCat (diagonalResidue ℓ n)].obj
+                      (geoCartierConstant (diagonalResidue ℓ n) (ProjectiveLine Y))))
+                (fun n ↦
+                  (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
+                    (geoCartierLine (diagonalResidue ℓ n) (ℓ ^ (n + 1)) ⋯ (diagonalSurface Y)))
+                (fun n s ↦ DiagonalSourceNormalization ℓ Y D.ordinary n s)
+                (fun n t ↦
+                  (diagonalForget ℓ (diagonalSurface Y)).map t.hom ≍
+                    roots.hom.app (Opposite.op n) ≫
+                      cartierProRootMap (diagonalResidue ℓ n) (ℓ ^ (n + 1)) ⋯ (diagonalSurface Y) ⋯ ⋯)
+                fun n ↦
+                diagonalExactFunctorExtImage (diagonalFiniteToPadic ℓ n (diagonalSurface Y))
+                  (cartierResidueReducedPro ℓ ⋯ (n + 1) (diagonalImmersion Y) ⋯ ⋯))
+            a b e ∧
+          ∃ f g h i,
+            ((fun s₀ ↦
+                    ∀ (n : ℕ),
+                      diagonalCompletedGenerator ℓ Y ≫
+                          (diagonalForget ℓ (diagonalSurface Y)).map
+                            (s₀.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (Opposite.op n)) =
+                        (diagonalScalarAdjunction ℓ (diagonalSurface Y)).unit.app (diagonalIntegralSource Y) ≫
+                          (diagonalForget ℓ (diagonalSurface Y)).map ((D.ordinary.π n).app (diagonalIntegralSource Y)))
+                  h ∧
+                (fun H roots t₀ ↦
+                      (diagonalForget ℓ (diagonalSurface Y)).map t₀.hom ≍
+                        (diagonalRootLimitComparison ℓ (diagonalSurface Y) H roots).inv)
+                    a b i ∧
+                  IsIso
+                      (diagonalSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                        (diagonalCompletedSource ℓ Y) (D.ordinary.E.obj (diagonalIntegralSource Y))
+                        (D.T.obj
+                          ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                            (diagonalIntegralSource Y)))
+                        h c) ∧
+                    IsIso
+                        (diagonalShiftedSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                          ((diagonalSurface Y).purTwistZlModule ℓ) a
+                          (D.T.obj
+                            ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y))) ↑1).obj
+                              ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                (diagonalComparisonUnits Y))))
+                          i d) ∧
+                      (∀ (V : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y))),
+                          IsIso (ℓ • 𝟙 V) →
+                            Subsingleton
+                              (V ⟶
+                                (DerivedCategory.singleFunctor (DiagonalCompleted ℓ (diagonalSurface Y)) 0).obj
+                                  (diagonalCompletedSource ℓ Y))) ∧
+                        (∀ (V : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y))),
+                            IsIso (ℓ • 𝟙 V) →
+                              Subsingleton
+                                (V ⟶
+                                  (shiftFunctor (DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y))) 2).obj
+                                    ((DerivedCategory.singleFunctor (DiagonalCompleted ℓ (diagonalSurface Y)) 0).obj
+                                      ((diagonalSurface Y).purTwistZlModule ℓ)))) ∧
+                          (∃! z,
+                              D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map z ≫
+                                  diagonalShiftedSingleLimitComparison
+                                    (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                    ((diagonalSurface Y).purTwistZlModule ℓ) a
+                                    (D.T.obj
+                                      ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y))) ↑1).obj
+                                        ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                          (diagonalComparisonUnits Y))))
+                                    i d =
+                                diagonalSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                    (diagonalCompletedSource ℓ Y) (D.ordinary.E.obj (diagonalIntegralSource Y))
+                                    (D.T.obj
+                                      ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                        (diagonalIntegralSource Y)))
+                                    h c ≫
+                                  f.R.map (D.T.map (diagonalIntegralBoundary Y).hom)) ∧
+                            ∀
+                              (δ :
+                                (DerivedCategory.singleFunctor (DiagonalCompleted ℓ (diagonalSurface Y)) 0).obj
+                                    (diagonalCompletedSource ℓ Y) ⟶
+                                  (shiftFunctor (DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y))) 2).obj
+                                    ((DerivedCategory.singleFunctor (DiagonalCompleted ℓ (diagonalSurface Y)) 0).obj
+                                      ((diagonalSurface Y).purTwistZlModule ℓ))),
+                              D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map δ ≫
+                                    diagonalShiftedSingleLimitComparison
+                                      (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                      ((diagonalSurface Y).purTwistZlModule ℓ) a
+                                      (D.T.obj
+                                        ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y))) ↑1).obj
+                                          ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                            (diagonalComparisonUnits Y))))
+                                      i d =
+                                  diagonalSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                      (diagonalCompletedSource ℓ Y) (D.ordinary.E.obj (diagonalIntegralSource Y))
+                                      (D.T.obj
+                                        ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                          (diagonalIntegralSource Y)))
+                                      h c ≫
+                                    f.R.map (D.T.map (diagonalIntegralBoundary Y).hom) →
+                                ∀ (n : ℕ),
+                                  ∃ a_2 b,
+                                    D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map
+                                            ((g.unit n).app
+                                              ((DerivedCategory.singleFunctor (DiagonalCompleted ℓ (diagonalSurface Y))
+                                                    0).obj
+                                                (diagonalCompletedSource ℓ Y))) ≫
+                                          a_2.hom =
+                                        diagonalSingleLimitComparison
+                                            (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                            (diagonalCompletedSource ℓ Y) (D.ordinary.E.obj (diagonalIntegralSource Y))
+                                            (D.T.obj
+                                              ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                                (diagonalIntegralSource Y)))
+                                            h c ≫
+                                          (f.projection n).app
+                                            (D.T.obj
+                                              ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                                                (diagonalIntegralSource Y))) ∧
+                                      D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map
+                                              ((g.unit n).app
+                                                ((shiftFunctor
+                                                      (DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y))) 2).obj
+                                                  ((DerivedCategory.singleFunctor
+                                                        (DiagonalCompleted ℓ (diagonalSurface Y)) 0).obj
+                                                    ((diagonalSurface Y).purTwistZlModule ℓ)))) ≫
+                                            b.hom =
+                                          diagonalShiftedSingleLimitComparison
+                                              (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                                              ((diagonalSurface Y).purTwistZlModule ℓ) a
+                                              (D.T.obj
+                                                ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y)))
+                                                      ↑1).obj
+                                                  ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y))
+                                                        0).obj
+                                                    (diagonalComparisonUnits Y))))
+                                              i d ≫
+                                            (f.projection n).app
+                                              (D.T.obj
+                                                ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y)))
+                                                      ↑1).obj
+                                                  ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y))
+                                                        0).obj
+                                                    (diagonalComparisonUnits Y)))) ∧
+                                        D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map
+                                            (((fun n ↦
+                                                    g.derived.T ⋙
+                                                      D((CategoryTheory.evaluation ℕᵒᵖ
+                                                              (DiagonalCompleted ℓ (diagonalSurface Y))).obj
+                                                          (Opposite.op n)))
+                                                  n).map
+                                              δ) =
+                                          a_2.hom ≫
+                                            ((fun n ↦
+                                                      D((CategoryTheory.evaluation ℕᵒᵖ
+                                                              (DiagonalMod ℓ (diagonalSurface Y))).obj
+                                                          (Opposite.op n)))
+                                                    n).map
+                                                (D.T.map (diagonalIntegralBoundary Y).hom) ≫
+                                              b.inv) ∧
+              D(diagonalCompletedRestriction ℓ (diagonalSurface Y)).map δ ≫
+                  diagonalShiftedSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                    ((diagonalSurface Y).purTwistZlModule ℓ) a
+                    (D.T.obj
+                      ((shiftFunctor (DerivedCategory (DiagonalAb (diagonalSurface Y))) ↑1).obj
+                        ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                          (diagonalComparisonUnits Y))))
+                    i d =
+                diagonalSingleLimitComparison (diagonalCompletedRestriction ℓ (diagonalSurface Y)) f
+                    (diagonalCompletedSource ℓ Y) (D.ordinary.E.obj (diagonalIntegralSource Y))
+                    (D.T.obj
+                      ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface Y)) 0).obj
+                        (diagonalIntegralSource Y)))
+                    h c ≫
+                  f.R.map (D.T.map (diagonalIntegralBoundary Y).hom)
+but is expected to have type
+  DiagonalTrace.IsDiagonalLimit ℓ Y hY D δ
+in the application
+  diagonalTower_coefficients ℓ k (ringChar k) Fact.out Y hY D hcompletion hsystem δ hlimit
+
+Note: The following definitions were not unfolded because their definition is not exposed:
+  equivShrink ↦ 12
+  Shrink ↦ 1
+error: Lean exited with code 1
