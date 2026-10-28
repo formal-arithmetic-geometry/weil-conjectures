@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -511,8 +512,9 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (fun a ↦ (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
     (boundedConstructibleUpperStarId_hom_app_unit ℓ _)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b) hx (iterate_carrier _ m)
+    (fun a b ↦ by exact_mod_proofs boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
+    (fun a b ↦ by exact_mod_proofs boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
+    hx (iterate_carrier _ m)
     _ _ _
 
 end WeilBoundedConstructible
