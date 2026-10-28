@@ -767,7 +767,9 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
+-- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
+set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 form a monoidal subcategory of
@@ -875,7 +877,9 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
+-- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
+set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are
