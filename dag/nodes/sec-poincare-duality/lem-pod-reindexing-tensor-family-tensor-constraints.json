@@ -12,26 +12,60 @@
  },
  "proof": [
   {
-   "text": "Evaluate the associator, braiding and unitor diagrams on homogeneous quotient generators, where they reduce to associativity, the Koszul sign, and the coefficient unit; then descend through the fixed tensor models and naturality.",
+   "text": "On each complete constructible object, the specified ordinary-to-completed map is an isomorphism: the complete-unit clause of hcompletion inverts the adjunction unit, ordinary reindexing preserves that isomorphism, and the two remaining factors are components of the given limit and pullback isomorphisms. Use the intrinsic/legacy completeness equivalence to supply the complete-input predicate. Restrict these components and their naturality to the constructible full subcategories.",
    "uses": [
-    "lem-pur-isomorphism-inverse-image-tensor-hom",
-    "lem-pur-integral-operations-well-defined",
-    "def-pod-isomorphism-reduction-reindexing"
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Canonical clause of htensor says precisely that this natural isomorphism intertwines the given tensor comparison with the canonical integral completed pullback comparison. Package the latter as a natural isomorphism using its proved naturality.",
+   "uses": [
+    "def-pod-completion-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the canonical associativity and braiding equations across the natural isomorphism. Tensor bifunctoriality and naturality of the target associator and braiding identify the transported paths. The existing general reduced_associativity and reduced_braiding calculations apply with identity reduction functors. Associator naturality follows from the existing faithful-reduction calculation and the normalized reduction equation.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-constraints",
+    "lem-pur-rational-pullback-tensor-associator-natural",
+    "lem-pur-reduced-pullback-tensor-naturality",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the canonical integral pullback unit isomorphism and precompose it with the ordinary-to-completed component at the source unit. For either unitor, postcompose the required equation with the invertible ordinary-to-completed component of its input. Naturality of the target unitor, tensor bifunctoriality, the Canonical clause and the canonical unitor equation give equality. Cancel the component. Left-unitor naturality is reflected by faithful coherent reduction; use the existing proved integral right-unitor naturality calculation for the right side. These arguments require no nonzero object or inhabited scheme.",
+   "uses": [
+    "lem-pur-pullback-tensor-integral-unit-coherence",
+    "lem-pur-common-stage-tensor-right-unitor-natural",
+    "lem-pur-derived-pullback-tensor-constraints"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-pur-integral-operations-well-defined",
-  "def-pod-isomorphism-reduction-reindexing"
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coherence",
+  "def-pod-completion-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-derived-pullback-tensor-constraints",
+  "lem-pur-rational-pullback-tensor-associator-natural",
+  "lem-pur-reduced-pullback-tensor-naturality",
+  "lem-pur-pullback-tensor-integral-unit-coherence",
+  "lem-pur-common-stage-tensor-right-unitor-natural"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
+  "group": "B3",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5: strict tensor-generator coherence."
+  "place": "Steps 1 and 5; shorter route transporting the already normalized canonical integral tensor coherence along the specified ordinary-to-completed natural isomorphism."
  },
  "mathlib_searches": [
   {
@@ -99,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261027T234153-L-20794",
+  "landing": "20261028T020155-L-2474922",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
