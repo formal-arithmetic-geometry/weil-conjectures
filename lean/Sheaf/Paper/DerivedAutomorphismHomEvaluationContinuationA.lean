@@ -10,38 +10,27 @@ public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.Paper.DerivedPullbackTensorIso
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
-
-import Mathlib.CategoryTheory.Adjunction.Additive
-import all Sheaf.Paper.IsomorphismReductionTower
-import Sheaf.Paper.PurInverseImageTensorHom
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.PodReindexingHomCoefficientDescent
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
-import Sheaf.Paper.CompletedOperationTowerSubstitution
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.WeilCompletedTensorReflector
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import all Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
-import Sheaf.Paper.SfDerivedCompleteLegacyComparison
-
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluationBase
-
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationABase
+
+import all Sheaf.Paper.IsomorphismReductionTower
+import Sheaf.Paper.PodReindexingHomCoefficientDescent
 import Sheaf.Paper.PodIntegralHomComparisonIsIso
 import Sheaf.Paper.PodIntegralHomComparisonNaturality
 import Sheaf.Paper.PodIntegralHomComparisonEvaluation
 import Sheaf.Paper.PodIntegralHomComparisonTranspose
+import all Sheaf.AlgebraicGeometry.ProEtale.FiniteComparisonIsomorphism
+import all Sheaf.Paper.FiniteCoefficientHomChange
+import all Sheaf.Paper.CompletedPullbackTowerCore
+import Sheaf.Paper.IntegralComparisonSequenceSystems
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -320,19 +309,175 @@ def podSystemHomComparison :=
 /-- System reindexing preserves internal Hom and the actual system evaluation,
 transposes and internal composition, without inferring equality from evaluations.
 Source: node proof step 12.
-Proof: reindex the sequence site while fixing its index. This is an exact
-module equivalence, with inverse reindexing; it preserves K-injectives and
-K-flats by transporting null homotopies and acyclic tensor tests. The Hom
-product comparison and tensor comparison commute with the signed differential.
-Evaluation is the same chain map before localization. Currying gives every
-transpose and composition equation on the derived system category itself.
+Proof: identify the ordinary sequence inverse image with the integral-comparison
+pullback by their common ring map. Its derived composition and identity
+isomorphisms exhibit inverse reindexing as a quasi-inverse. For every test
+object in the image, the two closed adjunctions, full faithfulness and the
+tensor comparison identify postcomposition with the Hom comparison as a
+bijection. Essential surjectivity extends this to all test objects, so Yoneda
+proves invertibility. Naturality and transposition are the general closed
+adjunction calculations. The recorded tensor associativity and unit identities
+construct a strong monoidal structure with exactly the prescribed tensorator;
+the general evaluation/composition calculation then gives all remaining laws.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
 theorem podSystemHomComparison_laws :
     (∀ M N, IsIso (podSystemHomComparison l E g M N)) ∧
     CoefficientEvaluationCompatible (pullbackTensorCalculus l E Y).systemClosed
       (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)
         (pullbackTensorSystemComparison l E g) := by
-  sorry
+  let SA := (pullbackTensorCalculus l E Y).systemClosed
+  let SB := (pullbackTensorCalculus l E X).systemClosed
+  let F := pullbackTensorSequenceDerived l E g
+  let μ := pullbackTensorSystemComparison l E g
+  change (∀ M N, IsIso (coefficientBaseChangeHom SA SB F μ M N)) ∧
+    CoefficientEvaluationCompatible SA SB F μ
+  have hF : F ≅ integralComparisonDerivedSequencePullback l E g := by
+    have heq : pullbackTensorSequenceInverse l E g =
+        integralComparisonSequencePullback l E g := by
+      unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
+      congr 1
+      unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
+      rw [pullbackTensorSequenceRing_eq]
+    exact Functor.mapDerivedCategoryNatIso (eqToIso heq)
+  have hH : (integralComparisonDerivedSequencePullback l E g).IsEquivalence := by
+    let H := integralComparisonDerivedSequencePullback l E g
+    let G := integralComparisonDerivedSequencePullback l E (inv g)
+    let a : H ⋙ G ≅ 𝟭 _ :=
+      (integralComparisonSystemComposition l E (inv g) g).symm ≪≫
+        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
+          (IsIso.inv_hom_id g)) ≪≫ integralComparisonSystemUnit l E Y
+    let b : G ⋙ H ≅ 𝟭 _ :=
+      (integralComparisonSystemComposition l E g (inv g)).symm ≪≫
+        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
+          (IsIso.hom_inv_id g)) ≪≫ integralComparisonSystemUnit l E X
+    exact (CategoryTheory.Equivalence.mk H G a.symm b).isEquivalence_functor
+  have : F.IsEquivalence := Functor.isEquivalence_of_iso hF.symm
+  refine ⟨?_, ?_⟩
+  · intro M N
+    have hL (L : coefficientSequenceDerived l E Y) : Function.Bijective
+        (fun x : F.obj L ⟶ F.obj ((coefficientSequenceInternalHom l E Y).obj (op M, N)) ↦
+          x ≫ coefficientBaseChangeHom SA SB F μ M N) := by
+      let e := (SA.transpose L M N).symm.trans
+        ((Functor.FullyFaithful.ofFullyFaithful F).homEquiv.trans
+          ((Iso.homCongr (μ.app (L, M)) (Iso.refl (F.obj N))).trans
+            (SB.transpose _ _ _)))
+      have he (x : L ⟶ (coefficientSequenceInternalHom l E Y).obj (op M, N)) :
+          e x = F.map x ≫ coefficientBaseChangeHom SA SB F μ M N := by
+        dsimp only [e, Equiv.trans_apply, Iso.homCongr, Equiv.coe_fn_mk,
+          Functor.FullyFaithful.homEquiv, Iso.refl_hom]
+        rw [Category.comp_id]
+        change SB.transpose _ _ _ (μ.inv.app (L, M) ≫
+          F.map ((SA.transpose L M N).symm x)) = _
+        simpa only [Equiv.apply_symm_apply] using
+          (finiteChange_transpose SA SB F μ L M N ((SA.transpose L M N).symm x)).symm
+      have hbij : Function.Bijective
+          (fun x : L ⟶ (coefficientSequenceInternalHom l E Y).obj (op M, N) ↦
+            F.map x ≫ coefficientBaseChangeHom SA SB F μ M N) := by
+        simpa only [← he] using e.bijective
+      constructor
+      · intro x y hxy
+        obtain ⟨x₀, rfl⟩ := F.map_surjective x
+        obtain ⟨y₀, rfl⟩ := F.map_surjective y
+        exact congrArg F.map (hbij.1 hxy)
+      · intro y
+        obtain ⟨x, hx⟩ := hbij.2 y
+        exact ⟨F.map x, hx⟩
+    apply isIso_of_yoneda_map_bijective
+    intro T
+    let e := F.objObjPreimageIso T
+    constructor
+    · intro x y hxy
+      apply (cancel_epi e.hom).mp
+      apply (hL (F.objPreimage T)).1
+      simpa only [Category.assoc] using congrArg (fun z ↦ e.hom ≫ z) hxy
+    · intro y
+      obtain ⟨x, hx⟩ := (hL (F.objPreimage T)).2 (e.hom ≫ y)
+      refine ⟨e.inv ≫ x, ?_⟩
+      change (e.inv ≫ x) ≫ coefficientBaseChangeHom SA SB F μ M N = y
+      change x ≫ coefficientBaseChangeHom SA SB F μ M N = e.hom ≫ y at hx
+      rw [Category.assoc, hx, Iso.inv_hom_id_assoc]
+  let := SA.monoidal
+  let := SB.monoidal
+  have hright {A B : coefficientSequenceDerived l E X} (f : A ⟶ B)
+      (P : coefficientSequenceDerived l E X) :
+      SB.tensor.map (Prod.mkHom f (𝟙 P)) = SB.monoidal.whiskerRight f P :=
+    @MonoidalCategory.tensorHom_id _ _ SB.monoidal A B f P
+  have hleft (P : coefficientSequenceDerived l E X)
+      {A B : coefficientSequenceDerived l E X} (f : A ⟶ B) :
+      SB.tensor.map (Prod.mkHom (𝟙 P) f) = SB.monoidal.whiskerLeft P f :=
+    @MonoidalCategory.id_tensorHom _ _ SB.monoidal P A B f
+  obtain ⟨ε, hε⟩ := pullbackTensorSystemComparison_unit l E g
+  let s : F.CoreMonoidal := Functor.CoreMonoidal.mk' ε.symm
+    (fun M N ↦ (μ.app (M, N)).symm)
+    (by
+      intro M N f P
+      have hn := μ.hom.naturality (Prod.mkHom f (𝟙 P))
+      dsimp only [Functor.comp_map, Functor.prod_map] at hn
+      rw [(pullbackTensorSequenceDerived l E g).map_id] at hn
+      rw [hright] at hn
+      simpa only [F, SA, SB, μ, CoefficientClosedStructure.tensor,
+        Iso.symm_inv, Iso.app_hom,
+        MonoidalCategory.tensor_map,
+        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
+        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using hn.symm)
+    (by
+      intro M N P f
+      have hn := μ.hom.naturality (Prod.mkHom (𝟙 P) f)
+      dsimp only [Functor.comp_map, Functor.prod_map] at hn
+      rw [(pullbackTensorSequenceDerived l E g).map_id] at hn
+      rw [hleft] at hn
+      simpa only [F, SA, SB, μ, CoefficientClosedStructure.tensor,
+        Iso.symm_inv, Iso.app_hom,
+        MonoidalCategory.tensor_map,
+        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
+        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using hn.symm)
+    (by
+      intro M N P
+      simpa only [Iso.symm_inv, Iso.app_hom, CoefficientClosedStructure.tensor,
+        Functor.comp_obj, Functor.prod_obj,
+        MonoidalCategory.tensor_obj, MonoidalCategory.tensor_map,
+        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
+        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using
+        (pullbackTensorSystemComparison_associativity l E g M N P).symm)
+    (by
+      intro M
+      have h := (hε M).1
+      rw [hright] at h
+      apply (cancel_epi (F.map (SA.monoidal.leftUnitor M).hom)).1
+      apply (cancel_mono (SB.monoidal.leftUnitor (F.obj M)).hom).1
+      simpa only [F, SA, SB, μ, Category.assoc,
+        ← (pullbackTensorSequenceDerived l E g).map_comp_assoc, Iso.hom_inv_id,
+        (pullbackTensorSequenceDerived l E g).map_id,
+        Iso.symm_inv, Iso.app_hom,
+        Category.id_comp, Iso.inv_hom_id, Category.comp_id,
+        CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
+        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
+        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using h.symm)
+    (by
+      intro M
+      have h := (hε M).2
+      rw [hleft] at h
+      apply (cancel_epi (F.map (SA.monoidal.rightUnitor M).hom)).1
+      apply (cancel_mono (SB.monoidal.rightUnitor (F.obj M)).hom).1
+      simpa only [F, SA, SB, μ, Category.assoc,
+        ← (pullbackTensorSequenceDerived l E g).map_comp_assoc, Iso.hom_inv_id,
+        (pullbackTensorSequenceDerived l E g).map_id,
+        Iso.symm_inv, Iso.app_hom,
+        Category.id_comp, Iso.inv_hom_id, Category.comp_id,
+        CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
+        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
+        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
+        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using h.symm)
+  exact finiteChange_compatible SA SB F μ ⟨s, fun _ _ ↦ rfl⟩
 end Systems
 
 
@@ -463,8 +608,12 @@ unchanged. The canonical isomorphism from intrinsic inverse image to sectionwise
 reindexing sends its adjunction-unit section to restriction along the counit
 of postcomposition/base-change. The completed ring map commutes with the finite
 projection, so the same section map is linear for the completed action.
-The unit determines the comparison uniquely; inverse site reindexing gives
-its inverse, and local generation by unit sections proves naturality.
+The unit determines the comparison uniquely: the finite inverse image is an
+equivalence, so its adjunction unit is invertible. Cancel its section maps to
+compare transformations on base-changed objects. Base change is itself an
+equivalence of sites, so faithful precomposition extends this equality to every
+object. The left-adjoint uniqueness comparison supplies the normalized map,
+and the scalar-restriction square supplies its completed scalar action.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
 theorem podFiniteRestrictionOrdinary_existsUnique (n : ℕ) :
     ∃! e : sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) g ⋙
@@ -477,7 +626,73 @@ theorem podFiniteRestrictionOrdinary_existsUnique (n : ℕ) :
             (finiteCoefficientRing l E (n + 1))).unit.app M).val.app (op V)) x))
           ((M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
             (inferInstance : WeaklyEtale g) trivial).counit.app V).op) x) := by
-  sorry
+  have he : podCompletedRingMap l E g = (isoReductionCompletedMap l E g).hom := by
+    apply limit.hom_ext
+    intro k
+    rw [podCompletedRingMap, limit.lift_π]
+    exact ((isoReductionCompletedMap_existsUnique l E g).exists.choose_spec k.unop).symm
+  have hF : podCompletedModuleInverseImage l E g = isoReductionIntegralInverse l E g := by
+    exact congrArg (fun c ↦ isoSectionwiseModuleInverseImage.{u, u} g c.hom)
+      (show asIso (podCompletedRingMap l E g) = isoReductionCompletedMap l E g from
+        Iso.ext he)
+  rw [hF]
+  let a := sfIntrinsicConstantModuleAdjunction g (finiteCoefficientRing l E (n + 1))
+  let b := AlgebraicGeometry.ProEtale.finiteSectionwiseAdjunction.{u, u} l E g n
+  let c := a.leftAdjointUniq b
+  obtain ⟨s, hs⟩ := isoReduction_restrictionSquare.{u, u} l E g n
+  have hsInv (M : normalizedDVRModules l E Y n) (U : X.ProEtᵒᵖ)
+      (x : M.val.obj ((proEtaleIsoPostcompose g).op.obj U)) :
+      (s.inv.app M).val.app U x = x := by
+    have hi := moduleIso_hom_inv_apply (s.app M) U x
+    change (s.inv.app M).val.app U ((s.hom.app M).val.app U x) = x at hi
+    rw [hs] at hi
+    exact hi
+  let e := Functor.isoWhiskerRight c (scalarReductionRestriction l E X n) ≪≫ s.symm
+  have hn (M : normalizedDVRModules l E Y n) (V : Y.ProEt)
+      (x : M.val.obj (op V)) :
+      ((e.hom.app M).val.app (op ((proEtaleBaseChange g).obj V)))
+          (((a.unit.app M).val.app (op V)) x) =
+        (M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+          (inferInstance : WeaklyEtale g) trivial).counit.app V).op) x := by
+    change (s.inv.app M).val.app _
+      ((c.hom.app M).val.app _ ((a.unit.app M).val.app (op V) x)) = _
+    rw [hsInv]
+    exact congrArg (fun z ↦ z.val.app (op V) x)
+      (Adjunction.unit_leftAdjointUniq_hom_app a b M)
+  refine ⟨e, fun M V x ↦ heq_of_eq (hn M V x), ?_⟩
+  intro e' he'
+  have hpost : (MorphismProperty.Over.map ⊤
+      (inferInstance : WeaklyEtale g)).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence g).1
+  let siteAdj := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g
+    (inferInstance : WeaklyEtale g) trivial
+  have : (proEtaleBaseChange g).IsEquivalence :=
+    siteAdj.isEquivalence_right_of_isEquivalence_left
+  have hb : Functor.IsEquivalence
+      (AlgebraicGeometry.ProEtale.inverseImageFiniteModules.{u, u} l E g n) :=
+    isoReduction_equivalence.{u, u} g _
+  have : (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) g).IsEquivalence :=
+    Functor.isEquivalence_of_iso c.symm
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply (PresheafOfModules.toPresheaf _).map_injective
+  have : IsIso (a.unit.app M).val :=
+    inferInstanceAs (IsIso ((SheafOfModules.forget _).map (a.unit.app M)))
+  have hlevel (V : Y.ProEt) :
+      ((PresheafOfModules.toPresheaf _).map (e'.hom.app M).val).app
+          (op ((proEtaleBaseChange g).obj V)) =
+        ((PresheafOfModules.toPresheaf _).map (e.hom.app M).val).app
+          (op ((proEtaleBaseChange g).obj V)) := by
+    apply (cancel_epi
+      (((PresheafOfModules.toPresheaf _).map (a.unit.app M).val).app (op V))).1
+    ext x
+    exact (eq_of_heq (he' M V x)).trans (hn M V x).symm
+  apply ((Functor.whiskeringLeft _ _ AddCommGrpCat).obj (proEtaleBaseChange g).op).map_injective
+  apply NatTrans.ext
+  funext V
+  exact hlevel V.unop
 
 /-- The uniquely section-normalized ordinary coefficient restriction comparison.
 Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
