@@ -65,14 +65,6 @@ Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`: the
   isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `E`- and `ℚ̄_ℓ`-sheaves.
 
-## Proofs
-
-- `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: for a
-  cartesian square, `Lh^* i₁_! K` is the extension by zero of `K` along `i` (first for abelian
-  sheaves, then for module objects, derived categories and bounded constructible categories), so
-  the counit of `i_! ⊣ Li^*` is an isomorphism at it, and the unit of `i₁_! ⊣ Li₁^*` is an
-  isomorphism since `i₁_!` is fully faithful.
-
 ## Sorried input
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward`
@@ -167,8 +159,15 @@ private theorem isIso_counit_app_upperStar_obj_openImmersionLowerShriek
     (isIso_linearOpenImmersionLowerShriekAdjunction_counit_app_of_isIso Λ j' _ hAb)
 
 /-- The derived version of `isIso_counit_app_upperStar_obj_openImmersionLowerShriek`: for a
-cartesian square as there, the counit of the derived adjunction `j'_! ⊣ j'^*` at
-`D(j_! ⋙ g^*) K` is an isomorphism. -/
+cartesian square of schemes
+```
+X' --j'--> Z'
+|g'        |g
+v          v
+X  --j---> Z
+```
+with `j` and `j'` open immersions, and `K` in `D(X, Λ)`, the counit of the derived adjunction
+`j'_! ⊣ j'^*` at `D(j_! ⋙ g^*) K` is an isomorphism. -/
 private theorem isIso_derivedCounit_app_upperStar_obj_openImmersionLowerShriek
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z X' Z' : Scheme.{u}}
@@ -217,8 +216,14 @@ variable {X Z X' Z' : Over (Spec (.of k))}
 variable {j g j' g'}
 
 /-- The bounded constructible version of
-`isIso_counit_app_upperStar_obj_openImmersionLowerShriek`: for a cartesian square of open
-immersions `j`, `j'` and morphisms `g`, `g'` over `Spec k`, the counit of `j'_! ⊣ Lj'^*` at
+`isIso_counit_app_upperStar_obj_openImmersionLowerShriek`: for a cartesian square over `Spec k`
+```
+X' --j'--> Z'
+|g'        |g
+v          v
+X  --j---> Z
+```
+with `j` and `j'` open immersions, and `K` in `Dᵇc(X, Λ)`, the counit of `j'_! ⊣ Lj'^*` at
 `Lg^* j_! K` is an isomorphism. -/
 private theorem isIso_boundedConstructibleCounit_app_upperStar_obj_openImmersionLowerShriek
     (sq : IsPullback g' j' j g)
@@ -346,8 +351,10 @@ X --i--> Z
 v        v
 X --i₁-> Z₁
 ```
-is cartesian: since `h⁻¹(X) = X`, on stalks at points of `Z_proét` both sides are the stalk of
-`K` at points of `X` and vanish outside `X`. -/
+is cartesian. Since `h⁻¹(X) = X`, `Lh^* i₁_! K` is the extension by zero of `K` along `i` (first
+for abelian sheaves, then for module objects, derived categories and bounded constructible
+categories), so the counit of `i_! ⊣ Li^*` is an isomorphism at it; the unit of `i₁_! ⊣ Li₁^*` is
+an isomorphism since `i₁_!` is fully faithful. The comparison is the composite of these steps. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
