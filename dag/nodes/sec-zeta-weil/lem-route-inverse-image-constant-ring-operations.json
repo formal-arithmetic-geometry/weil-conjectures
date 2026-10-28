@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Identify the underlying constant ring sheaf with the constant set sheaf using constantCommuteCompose and its equation with the sheafification unit. On the constant set sheaf of A×A, the maps induced by the two projections give an isomorphism to the product of two copies of the constant ring set sheaf, since constant set sheafification preserves finite products.",
+   "text": "Identify the underlying constant ring sheaf with the constant set sheaf by constantCommuteCompose. Define constantMap by applying the constant-set functor to any function into A and then the inverse comparison. Naturality of the sheafification unit and sheafComposeIso_hom_fac identify this map on unit sections. The map coeffPair induced by the two projections A×A→A is an isomorphism: factor it through the Types binary-product isomorphism, the product comparison for the constant-set functor, and the product of the underlying-set comparison isomorphisms. Set sheafification preserves finite products.",
    "uses": [
     "lem-pc-sites-sheafification-underlying-sets",
     "lem-weil-pbc-sheafification-sets-exact",
@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "The maps induced by addition and multiplication, after the same underlying-set comparison, have sections equal to the sum or product of the two projection maps. Prove the morphism identities after precomposing with the sheafification unit; there they are exactly preservation of addition and multiplication by the ring-valued sheafification unit. Its universal property gives the identities globally.",
+   "text": "Define addMap and mulMap pointwise for two maps of set sheaves into a ring sheaf. Their naturality is the preservation of operations by the restriction ring homomorphisms. The constant map of the sum, respectively product, of two functions equals addMap, respectively mulMap, of their constant maps. Prove these morphism identities by sheafify_hom_ext, checking the unit sections with the preceding unit equation and the ring-homomorphism properties of the ring-valued sheafification unit.",
    "uses": [
     "lem-pc-sites-sheafification-underlying-sets",
     "def-weil-pbc-sheafification"
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Use naturality of κ for the two projections, addition, and multiplication to compare these diagrams after L. Apply the ringAdd and ringMul graph equations of e to the pair sheaf. The pair comparison, its image under L, and the finite-product comparison for L are isomorphisms, so every pair of sections of RI is tested. Conjugate by e to obtain the addition and multiplication identities for f.",
+   "text": "Naturality of κ for every function g:X→A gives L(constantMap_C(g));κ_A^ring = κ_X;constantMap_D(g), by cancelling the source underlying-set comparison with its inverse. The morphism L(coeffPair);prodComparison(L);(e×e) is an isomorphism from L of the constant pair sheaf to |RI|×|RI|. Evaluating its inverse on the sectionwise pair (x,y) provides a test section p whose two projections are x and y. Apply e.ringAdd or e.ringMul to the constant maps of the two projections and the corresponding operation, using the source identities from step 2. Compose with f=e⁻¹;κ_A^ring, cancel e;e⁻¹, and use the naturality equations and target identity from step 2. This gives f(x+y)=f(x)+f(y) and f(xy)=f(x)f(y).",
    "uses": [
     "lem-route-inverse-image-constant-set-comparison",
     "lem-weil-pbc-sheafification-sets-exact"
@@ -52,11 +52,10 @@
    }
   },
   {
-   "text": "For zero and one use the constant singleton sheaf and its maps selecting 0 and 1. Naturality of κ for these functions and terminality transport their constant sections; ringZero and ringOne of e give the corresponding constants in RI. Conjugating gives f(0)=0 and f(1)=1. The argument imposes no nonzero-ring or nonempty-cover assumption.",
+   "text": "Use the endomorphism z of the source underlying constant ring sheaf that is identically one. The normalization of the canonical comparison on constant sections implies κ_A^ring(L(z)(p))=1 for every p. Apply e.ringOne and evaluate at p=e⁻¹(1). Since e is injective and e(L(z)(p))=1=e(p), obtain L(z)(p)=p, hence f(1)=1. Finally the additive identity at (0,0), followed by cancellation in the target additive group, gives f(0)=0. This uses neither a nonzero ring nor a nonempty-cover assumption.",
    "uses": [
-    "lem-route-inverse-image-constant-set-comparison",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "lem-route-inverse-image-constant-section-comparison",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -70,12 +69,13 @@
   "lem-weil-pbc-sheafification-sets-exact",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
-  "lem-route-inverse-image-constant-set-comparison"
+  "lem-route-inverse-image-constant-set-comparison",
+  "lem-route-inverse-image-constant-section-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+  "place": "Tag 0H7J (example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi); finite-product argument implemented by F1, with the existing normalization theorem for one and additive cancellation for zero."
  },
  "mathlib_searches": [
   {
@@ -160,11 +160,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-18ad5",
-  "group": "B3",
-  "result": "fix",
-  "landing": "20261028T055609-L-772760",
-  "kind": "interface",
-  "note": "independent cc review: item inverseImageConstantComparison + 4 new modules/nodes against node lem-route-inverse-image-constant-comparison, change record, importer GeometricRingInverseImage (sandbox compile OK)"
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261028T072408-L-1942542",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
