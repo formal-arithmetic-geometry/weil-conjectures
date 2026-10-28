@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-common-stage-tensor-triangle",
+ "kind": "statement",
+ "title": "Triangle identity for the prescribed common-stage tensor",
+ "statement": "Fix a prime l, a scheme X on which l is invertible at every residue field, and an algebraic closure Omega of Q_l. In the common-stage coefficient category [def-weil-algebraically-closed-coefficients], use the tensor T [def-weil-derived-pullback-tensor-hom], and the prescribed unit U, associator alpha and unitors lambda,rho [lem-pur-derived-pullback-tensor-constraints]. For every A,B, alpha(A,U,B).hom followed by T(id_A,lambda(B).hom) equals T(rho(A).hom,id_B). These are the prescribed maps, with no additional monoidal structure or choice of constraints.",
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized coefficient tensor constructions. The formal triangle transport is an agent-written categorical calculation, using Mathlib CategoryTheory.MonoidalCategory.triangle."
+ },
+ "proof": [
+  {
+   "text": "Use the natural integral tensor reduction comparison and faithful coherent reduction. After postcomposing with the invertible outer tensor comparison, substitute the prescribed reduction equations for the integral associator and both unitors. Associator naturality moves the unit-reduction comparison to the unit input of the coherent-system associator. Its monoidal triangle identity proves the reduced equation; cancel the comparison and use faithfulness.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-constraints",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pur-common-stage-tensor-right-unitor-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the actual integral-to-rational functor to this equality. The rational tensor object equality and the pure scalar tensor formula with both scalars equal to one identify its tensor maps with rational tensor maps. The prescribed rational associator and unitors are the localizations of their integral counterparts. Heterogeneous congruence and functoriality therefore give the rational triangle.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose one finite field containing the stages of ((A tensor U) tensor B), A tensor (U tensor B), and A tensor B. Their component stages are also contained. The prescribed common-stage associator and unitor equations, and the tensor Hom formula, give representatives at this field. Compose representatives at the same field. Cancel inner comparison isomorphisms. Rational associator naturality in the unit-stage comparison changes the middle input to the rational unit; the rational triangle then identifies the representatives. Their common-stage classes agree. Empty schemes and zero inputs use the same identities.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-constraints",
+    "lem-pur-rational-pullback-tensor-associator-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-constraints",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-common-stage-tensor-right-unitor-natural",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-rational-pullback-tensor-associator-natural"
+ ],
+ "proof_origin": {
+  "by": "agent; G2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; agent-written faithful reduction, rational localization and common-stage representative calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"triangle_assoc\"",
+   "results": "{\"t\": \"2026-10-28T06:21:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"triangle_assoc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Bicategory.triangle_assoc_comp_left\", \"CategoryTheory.Bicategory.triangle_assoc_comp_left_inv\", \"CategoryTheory.Bicategory.triangle_assoc_comp_right\", \"CategoryTheory.Bicategory.triangle_assoc_comp_right_inv\", \"CategoryTheory.Bicategory.triangle_assoc\", \"CategoryTheory.Bicategory.triangle_assoc_comp_left_inv_assoc\", \"CategoryTheory.Bicategory.triangle_assoc_comp_right_assoc\", \"CategoryTheory.Bicategory.triangle_assoc_comp_right_inv_assoc\"], \"digest\": \"c982ca4dc231004e\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical triangle/transport APIs exist, but no exact match for the prescribed project common-stage tensor. The proof reflects the integral equation and transports the existing normalized representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangle identity for the associator and unitors of a tensor product transported through a faithful functor to a monoidal category",
+   "results": "{\"t\": \"2026-10-28T06:27:20Z\", \"tool\": \"leanfinder\", \"query\": \"Triangle identity for the associator and unitors of a tensor product transported through a faithful functor to a monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.map_δ_μ_assoc\", \"CategoryTheory.Functor.Monoidal.map_μ_δ_assoc\", \"CategoryTheory.Functor.Monoidal.map_ε_η_assoc\", \"CategoryTheory.Functor.Monoidal.map_η_ε_assoc\", \"CategoryTheory.Functor.Monoidal.map_δ_μ\", \"CategoryTheory.Functor.Monoidal.map_μ_δ\", \"CategoryTheory.obj_zero_map_μ_app_assoc\", \"CategoryTheory.Functor.Monoidal.μ_δ_assoc\"], \"digest\": \"6a2c647d0a3e1af3\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical triangle/transport APIs exist, but no exact match for the prescribed project common-stage tensor. The proof reflects the integral equation and transports the existing normalized representatives."
+  },
+  {
+   "tool": "grep",
+   "query": "triangle|tensorHom_id",
+   "results": "{\"t\": \"2026-10-28T06:27:47Z\", \"tool\": \"grep\", \"query\": \"triangle|tensorHom_id\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\"], \"digest\": \"f52fd9a94ce0023c\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical triangle/transport APIs exist, but no exact match for the prescribed project common-stage tensor. The proof reflects the integral equation and transports the existing normalized representatives."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsRightUnit",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The common-stage right-unit comparison follows from associativity and the left-unit comparison by the triangle equation.",
+   "via": [
+    "new-sf-adic-completed-tensor-common-lift-constraints-right-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageTensorTriangle",
+  "file": "lean/Sheaf/Paper/CommonStageTensorTriangle.lean",
+  "declaration": "WeilConjectures.commonStageTensor_triangle",
+  "statement": "theorem commonStageTensor_triangle\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (A B : generalAlgebraicallyClosedConstructibleCategory l Ω X) :\n    (pullbackTensorCommonAssociator l Ω X A (pullbackTensorCommonUnit l Ω X) B).hom ≫\n        (commonStageDerivedTensor l Ω X).map\n          (Prod.mkHom (𝟙 A) (pullbackTensorCommonLeftUnitor l Ω X B).hom) =\n      (commonStageDerivedTensor l Ω X).map\n        (Prod.mkHom (pullbackTensorCommonRightUnitor l Ω X A).hom (𝟙 B))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T081740-L-2777495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T081740-L-2777495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

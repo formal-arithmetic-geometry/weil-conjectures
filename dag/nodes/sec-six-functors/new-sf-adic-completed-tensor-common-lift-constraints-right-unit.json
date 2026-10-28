@@ -10,32 +10,35 @@
  ],
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: CompletedTensorCommonLiftTensorUnit records arbitrary tensor and unit isomorphisms. The new proved obstruction shows that the asserted universal right-unit law is incompatible with any nonidentity automorphism of the native tensor unit. N and coherence contain no equation mentioning data, so they do not supply the missing normalization. A proof of the original claim cannot proceed until the selected data and the parent constraints claims are repaired. The subsequent finite-model plan applies only to normalized comparison data.",
+   "text": "The universal assertion is still conditional on the pending, disputed left-unit and associativity declarations: this reduction does not repair arbitrary comparison data. Use their components at (U,U) and (A,U,U), respectively, where U is the prescribed common-stage tensor unit. The helper right_unit_of_left_associativity is an independently proved categorical implication with these equations as explicit hypotheses.",
    "uses": [
-    "lem-sf-adic-completed-tensor-right-unit-not-universal"
+    "new-sf-adic-completed-tensor-common-lift-constraints-left-unit",
+    "new-sf-adic-completed-tensor-common-lift-constraints-associative"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the selected constraint diagram at a finite coefficient field, apply the corresponding native coherence equation, and transport through common-stage comparison and independence under finite extension.",
+   "text": "Use the triangle identity for the prescribed common-stage associator and unitors at (A,U). Tensor the desired equation on the right by ordinary(U), which is faithful since data.unit identifies ordinary(U) with the native tensor unit. Postcompose with the invertible tensorator at (A,U). Naturality of the tensorator and the common-stage triangle turn the left side into the left side of associativity at (A,U,U).",
    "uses": [
-    "def-sf-adic-completed-tensor-finite-models",
-    "def-sf-native-adic-realization-data",
-    "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+    "lem-pur-common-stage-tensor-triangle"
    ],
    "elementary": false
+  },
+  {
+   "text": "On the other side of associativity, slide the unit comparison through the native associator by naturality. The left-unit equation at U and the native monoidal triangle reduce it to the tensor of the native right unitor. Cancel the tensorator and use faithfulness of tensoring by ordinary(U) to obtain the required right-unit equation. No finite-representative right-unit statement, nonzero hypothesis, or normalization field is introduced.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-adic-completed-tensor-finite-models",
-  "def-sf-native-adic-realization-data",
-  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
-  "lem-sf-adic-completed-tensor-right-unit-not-universal"
+  "new-sf-adic-completed-tensor-common-lift-constraints-left-unit",
+  "new-sf-adic-completed-tensor-common-lift-constraints-associative",
+  "lem-pur-common-stage-tensor-triangle"
  ],
  "proof_origin": {
-  "by": "D3 stage 3; statement obstruction formalized, original proof unresolved",
+  "by": "agent; G2 categorical reduction with the original normalization defect explicitly retained",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "BS Remark 6.8.15; HRS Lemma 7.9; the corresponding finite representative constraint equation."
+  "place": "BS Remark 6.8.15; elementary strong-tensor-functor cancellation using associativity, left unitality and the monoidal triangle. The imported left-unit and associativity declarations remain pending and disputed."
  },
  "mathlib_searches": [
   {
@@ -124,16 +127,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261028T055646-L-790474",
+  "landing": "20261028T081740-L-2777495",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_constraints_right_unit"
-  ],
-  "sorry_after": [
-   "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_constraints_right_unit"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
