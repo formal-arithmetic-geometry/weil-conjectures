@@ -73,6 +73,7 @@ theorem datum_exists
         (A.symmetry.swap K L).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f) := by
   obtain ⟨A, hflat⟩ := datum_of_integral_kflat D l hl X E wE
     (integral_verdier_biduality D l hl E X wE.omega wE.reduction)
-  exact ⟨A, datum_naturality_of_kflat D l hl X E wE A hflat⟩
+  obtain ⟨A', _, hnatural⟩ := datum_naturality_of_kflat D l hl X E wE A hflat
+  exact ⟨A', hnatural⟩
 
 end WeilConjectures.RationalVerdier

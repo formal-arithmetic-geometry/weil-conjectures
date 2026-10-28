@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Descent of signed symmetry naturality from K-flat representatives",
- "statement": "For a normalized rational Verdier datum, if its signed symmetry is natural on K-flat chain representatives, then it is natural in both variables for arbitrary derived maps in the ordinary tensor presentation.",
+ "statement": "Given a normalized rational Verdier datum A whose signed symmetry is natural on K-flat chain representatives, there exists a normalized rational Verdier datum A' with the same ordinary tensor presentation and a re-chosen biduality isomorphism such that the signed symmetry of A' is natural in both variables for arbitrary derived maps.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
   "place": "paragraphs 1--2; recorded DAG proof steps 2--5"
@@ -24,9 +24,10 @@
  ],
  "proof": [
   {
-   "text": "Replace each derived object by a K-flat representative and lift each derived map to a roof. Transport the chain-level commutative square along representative isomorphisms; roof independence follows from functoriality of the derived localization.",
+   "text": "Choose K-flat resolutions of every derived object. The K-flat naturality hypothesis extends to all derived maps between K-flat objects, through roofs with a K-flat middle term. Conjugate the swap by the resolutions: the result is natural for arbitrary derived maps and agrees with the given swap on K-flat pairs, so the Koszul representative clause still holds. Keep every field that does not read the swap, ordinary presentation included. With the natural swap, delta is the standard biduality map, natural and invertible on integral constructible objects by integral Verdier biduality. Its localization, extended to rational maps by the pure-tensor and linearity clauses, is the re-chosen bidual.",
    "uses": [
-    "def-sf-rational-verdier-data"
+    "def-sf-rational-verdier-data",
+    "thm-coef-integral-verdier"
    ],
    "elementary": false,
    "source": {
@@ -36,12 +37,13 @@
   }
  ],
  "proof_deps": [
-  "def-sf-rational-verdier-data"
+  "def-sf-rational-verdier-data",
+  "thm-coef-integral-verdier"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "paragraphs 1--2; coefficient-localization decomposition."
+  "place": "paragraphs 1--2; corrected transport formulation"
  },
  "mathlib_searches": [
   {
@@ -89,7 +91,7 @@
   "module": "Sheaf.SixFunctors.RationalVerdierDatumNaturality",
   "file": "lean/Sheaf/SixFunctors/RationalVerdierDatumNaturality.lean",
   "declaration": "WeilConjectures.RationalVerdier.datum_naturality_of_kflat",
-  "statement": "theorem datum_naturality_of_kflat\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (A : Datum D l hl X E wE)\n    (hflat : ∀ (P P' Q Q' : CochainComplex (IntegralHom.Modules.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X)) ℤ)\n        (hP : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) P)\n        (hP' : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) P')\n        (hQ : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) Q)\n        (hQ' : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) Q')\n        (f : P ⟶ P') (g : Q ⟶ Q'),\n        A.ordinary.tensor.map (Prod.mkHom (DerivedCategory.Q.map f)\n          (DerivedCategory.Q.map g)) ≫\n            (A.symmetry.swap (DerivedCategory.Q.obj P') (DerivedCategory.Q.obj Q')).hom =\n          (A.symmetry.swap (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫\n            A.ordinary.tensor.map (Prod.mkHom (DerivedCategory.Q.map g)\n              (DerivedCategory.Q.map f))) :\n    ∀ (K L K' L' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l E X))\n      (f : K ⟶ K') (g : L ⟶ L'),\n      A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' L').hom =\n        (A.symmetry.swap K L).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f)",
+  "statement": "theorem datum_naturality_of_kflat\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (A : Datum D l hl X E wE)\n    (hflat : ∀ (P P' Q Q' : CochainComplex (IntegralHom.Modules.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X)) ℤ)\n        (hP : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) P)\n        (hP' : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) P')\n        (hQ : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) Q)\n        (hQ' : IntegralHom.flat.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X) Q')\n        (f : P ⟶ P') (g : Q ⟶ Q'),\n        A.ordinary.tensor.map (Prod.mkHom (DerivedCategory.Q.map f)\n          (DerivedCategory.Q.map g)) ≫\n            (A.symmetry.swap (DerivedCategory.Q.obj P') (DerivedCategory.Q.obj Q')).hom =\n          (A.symmetry.swap (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫\n            A.ordinary.tensor.map (Prod.mkHom (DerivedCategory.Q.map g)\n              (DerivedCategory.Q.map f))) :\n    ∃ A' : Datum D l hl X E wE,\n      A'.ordinary = A.ordinary ∧\n      ∀ (K L K' L' : IntegralHom.Derived.{u, u} X\n          (completedIntegralCommRingSheafUnrestricted l E X))\n        (f : K ⟶ K') (g : L ⟶ L'),\n        A'.ordinary.tensor.map (Prod.mkHom f g) ≫ (A'.symmetry.swap K' L').hom =\n          (A'.symmetry.swap K L).hom ≫\n            A'.ordinary.tensor.map (Prod.mkHom g f)",
   "branch": "sheaf-dag",
   "by": "W4",
   "date": "2026-10-28"
@@ -105,19 +107,43 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-2e8d4",
-  "group": "B8",
-  "result": "pass",
-  "landing": "20261027T233815-L-4117647",
-  "kind": "proof",
-  "note": "independent cc review: STATEMENT-DISPUTED comment on datum_naturality_of_kflat checked against SignedSymmetry (IntegralVerdierModels:78), Datum fields (RationalVerdierModels:116-170) and the one importer RationalVerdierDatum:74-76; counterexample: negating swap at a non-flat non-constructible pair keeps hflat/representative/bidual_integral and breaks the conclusion",
-  "sorry_before": [
-   "WeilConjectures.RationalVerdier.datum_naturality_of_kflat"
+  "reviewer": "C-88925",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261028T055608-L-772182",
+  "kind": "interface",
+  "note": "independent cc review: corrected ∃A' statement of datum_naturality_of_kflat vs Datum/SignedSymmetry fields (RationalVerdierModels, IntegralVerdierModels:78), node lean.statement, forced 2-line adaptation of datum_exists, change record, 3b (no FAIL)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "B2 stage 2",
+  "old_statement": "For a normalized rational Verdier datum, if its signed symmetry is natural on K-flat chain representatives, then it is natural in both variables for arbitrary derived maps in the ordinary tensor presentation.",
+  "what": "The original statement quantified naturality for the input datum A. Its SignedSymmetry representative field constrains swaps only on literal K-flat representatives, so negating a non-K-flat component preserves hflat and all stored fields while falsifying the conclusion. The corrected statement permits the transported swap and its dependent biduality field to be re-chosen.",
+  "source": {
+   "document": "coord/brief-stage3.md",
+   "place": "§4; reviewer C-f3ce5 repair instruction"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-rational-verdier-datum",
+    "holds": true,
+    "note": "The parent datum_exists still cites this corrected transport theorem."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.RationalVerdier.datum_naturality_of_kflat"
+  "old_proof": [
+   {
+    "text": "Replace each derived object by a K-flat representative and lift each derived map to a roof. Transport the chain-level commutative square along representative isomorphisms; roof independence follows from functoriality of the derived localization.",
+    "uses": [
+     "def-sf-rational-verdier-data"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+     "place": "paragraphs 1--2; recorded DAG proof steps 2--5"
+    }
+   }
   ]
  }
 }
