@@ -221,5 +221,22 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-0ca3a19bb (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. One commit; the statement is unchanged and matches the Lean sixFunctorProjectionRationalReductionSquare (ProjectionFormulaCoherence.lean:1153-1197); no new nodes; proof_deps equals the union of the step uses. Route: prop-sf-pf-coherence.proof.md ends 'The last clause is [prop-sf-pf-reduction] (1)', and the Compatibility paragraph of thm-sf-pf-field.proof.md:5-13 (localization carries PF to PF, respecting associativity) is the route. The unit cites sk-thm-sf-pf-field. Step 1: raw rationalization keeps the objects (def-weil-rationalization-karoubi). The hypotheses of lem-sf-projection-reduction-integral (separated f, compactification c, arbitrary K0, L0, N0, no finite-Tor) match the item. Step 2: def-sf-operation-stages makes the rationalization comparisons identities. lem-sf-rational-projection-tensor-compatibility gives an eqToIso tensor comparison and the compact-support PF square for arbitrary integral K, L; it is used at the three correct pairs. Rational mu is the localization of the integral mu (def-pur-completed-pullback-tensor-comparison; matches Lean RationalMu). The rational associator is the localized integral one (Lean pullbackTensorRationalAssociator). Q(v⊗w)=Qv⊗Qw comes from the def-weil-derived-pullback-tensor-hom formula. Advisory: the family hypotheses of lem-pur-bilinear-comparison-coefficient-descent are not checked, but the raw-localization part used is elementary. Step 3: endpoint maps are identities or eqToIso, so the middle comparisons cancel; only equality preservation and cancellation of the invertible b_s are used. Step 4: E is a field, so J=0 or J=E, giving N=1 or N=0. Edge cases checked: N=0, N=1, torsion representatives, f=id, X empty. Not a duplicate of lem-sf-rational-projection-comparison-equations, which states the pentagon, composition and refinement equations. Tool uses accepted: lem-sf-rational-projection-tensor-compatibility and lem-pur-bilinear-comparison-coefficient-descent, both generic localization tools outside the route."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "declaration": "WeilConjectures.sixFunctorProjection_reduction_rational",
+  "statement": "theorem sixFunctorProjection_reduction_rational (S : SixFunctorDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left]\n    (c : Compactification f.hom.left) (K : sfRationalConstructibleCategory C.l E X.obj.left)\n    (L N : sfRationalConstructibleCategory C.l E Y.obj.left) :\n    sixFunctorProjectionRationalReductionSquare S f c K L N",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-28",
+  "existing": true
+ },
+ "reviewed_lean": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d0e58b6a",
+  "group": "NH",
+  "result": "pass",
+  "note": "Only change: existing:true lean record on WeilConjectures.sixFunctorProjection_reduction_rational (ProjectionFormulaCoherence.lean:1192); statement verbatim, module in published build, other node fields identical to live. Clause check: S, separated f in SixFunctorSpace, compactification c, K/L/N in sfRationalConstructibleCategory, arbitrary N (no finite-Tor/quotient restriction); predicate LHS (P(K,L)⊗1_N)≫P(K⊗UL,N), RHS aY≫P(K,L⊗N)≫F(1⊗μ)≫F(aX⁻¹), separate F-images. P = datum's ExchangeProjectionStage projection; aT = eqToIso conjugation of pullbackTensorRationalAssociator (localized canonical integral associator); μ = conjugated canonicalRationalPullbackTensor. Invertible letI derived from datum, not hypotheses. Edge cases N=0/1, f=id, empty X OK. Report has real Worker report and Second reading by NH. No compile (nothing changed). Maintainer notes only: parent prop-sf-pf-coherence dual owner; RationalReductionSquare/RationalMu/TensorAssociator owned only by theorem parent (cycle, uncitable); pullbackTensorRationalAssociator owner lem-pur-derived-pullback-tensor-constraints not in stmt_deps closure (stage-1 gap; H2 bars a theorem stmt_dep at S2)."
  }
 }
