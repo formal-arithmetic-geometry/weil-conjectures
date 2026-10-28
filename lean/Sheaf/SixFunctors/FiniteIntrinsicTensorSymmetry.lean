@@ -6,6 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.SixFunctors.FiniteIntrinsicTensorRealization
+import Sheaf.SixFunctors.FiniteIntrinsicTensorSymmetryExtension
 
 /-! # Signed tensor realization for finite constant coefficients
 
@@ -73,6 +74,8 @@ theorem finiteIntrinsicTensorSymmetry
         (s.swap ((sfIntrinsicDerivedEquivalence X B).functor.obj K)
           ((sfIntrinsicDerivedEquivalence X B).functor.obj L)).hom ≫
             (finiteIntrinsicTensorRealization X B a).hom.app (L, K) := by
-  sorry
+  apply finiteIntrinsicTensorSymmetry_extension X B a s hs b hb
+  intro P Q hP hQ
+  exact finiteIntrinsicTensorSymmetry_resolving X B a s hs b hb P Q hP hQ
 
 end WeilConjectures.IntegralVerdier
