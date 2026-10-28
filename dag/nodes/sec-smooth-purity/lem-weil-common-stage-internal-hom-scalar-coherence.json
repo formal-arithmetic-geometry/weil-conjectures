@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-common-stage-internal-hom-scalar-coherence",
+ "kind": "statement",
+ "title": "Finite-stage normalized rational Hom scalar coherence",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a scheme W, finite coefficient stages E ≤ L ≤ M, and a permitted rational Hom pair P at E. Let H denote the specified rational derived internal Hom, let R_h be the specified rational scalar functor, and let scalarPairs_h extend the two entries of P (oppositely in the first entry). The specified comparison defines a natural isomorphism rawComparison_h : H_E followed by R_h ≅ scalarPairs_h followed by H_L. Let scalarPairsAssoc_{h,k}(P) be the pair isomorphism given by the inverse first and forward second components of the prescribed scalar associator. Then R_k(rawComparison_h(P).hom) followed by rawComparison_k(scalarPairs_h(P)).hom followed by H_M(scalarPairsAssoc_{h,k}(P).hom) equals the prescribed scalar associator on H_E(P), followed by rawComparison_{h.trans k}(P).hom.",
+ "source": {
+  "document": "lean/Sheaf/Paper/SpecifiedHomScalarTower.lean",
+  "place": "specifiedHomScalarRational_tower, transported through the coefficient-inclusion composition law and the specified associator of GeneralAlgebraicallyClosedCoefficientStages; finite-stage part of the common-stage internal-Hom coherence argument."
+ },
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct scalarPairs by extending its two entries and arrows with the prescribed scalar functor; functoriality is componentwise. Bundle rationalHomScalarComparison into rawComparison by specifiedHomScalarRational_naturality, with the reversed first arrow. Construct scalarPairsAssoc from the inverse first and forward second associator components. These are explicit constructions, including identity inclusions and zero objects.",
+   "uses": [
+    "lem-zl-specified-hom-scalar-rational-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniqueness specification identifies the stage associator with scalarAssociator. Generalize the finite Hom tower to any equal associator, substitute that equality, and substitute the direct algebra map using the coefficient-inclusion composition law. scalarAssociator then reduces to sfRationalScalarComp followed by an identity equality isomorphism. The desired equation is exactly specifiedHomScalarRational_tower.",
+   "uses": [
+    "lem-zl-specified-hom-scalar-rational-tower",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module also supplies proved private categorical calculations for the consuming coherence proof: substitution of equal stage-transition data, naturality of a comparison corrected by input isomorphisms, assembly of comparison tower equations, and cancellation in the conjugated square. Each calculation uses only functoriality, naturality, associativity and inverse-isomorphism cancellation. The private input corrections are inverse transition identifications followed by stage associators. Their naturality follows by cancellation, and their tower law follows from the stage cocycle and the inverse transition-identification tower equation.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-specified-hom-scalar-rational-naturality",
+  "lem-zl-specified-hom-scalar-rational-tower",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "S1",
+  "date": "2026-10-28",
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomCoherenceLemmas.lean",
+  "place": "Complete proof from the existing scalar Hom naturality and tower declarations; no sorry is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom comparison commutes with a tower of extensions of coefficient fields",
+   "results": "Eight field-theory restriction/lifting results, including galLift_comp and AlgHom.restrictNormal_comp; none states the specified derived Hom coherence.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Found NatTrans.naturality for the componentwise naturality calculation; no project-specific scalar Hom tower.",
+   "date": "2026-10-28",
+   "verdict": "general naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "specifiedHomScalarRational_tower|rationalHomScalarComparison",
+   "results": "No Mathlib declaration matches the project-specific normalized comparisons.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageInternalHomCoherence",
+  "date": "2026-10-28",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-common-stage-internal-hom-coherence",
+   "place": "The finite-stage scalar tower and its naturality, used in proof steps 1 and 2; this support statement is proved, not left as a new obligation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInternalHomCoherenceLemmas",
+  "file": "lean/Sheaf/Paper/CommonStageInternalHomCoherenceLemmas.lean",
+  "declaration": "WeilConjectures.CommonStageInternalHom.rationalHomComparison_tower",
+  "declarations": [
+   "WeilConjectures.CommonStageInternalHom.scalarPairs",
+   "WeilConjectures.CommonStageInternalHom.rawComparison",
+   "WeilConjectures.CommonStageInternalHom.scalarPairsAssoc",
+   "WeilConjectures.CommonStageInternalHom.rationalHomComparison_tower"
+  ],
+  "statement": "theorem rationalHomComparison_tower {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M)\n    (P : (constructibleRationalHomPairs l (Coefficient.{u} l Ω E) W).FullSubcategory) :\n    (transition l Ω W L M k).map ((rawComparison l Ω W h).hom.app P) ≫\n      (rawComparison l Ω W k).hom.app ((scalarPairs l Ω W h).obj P) ≫\n      (rationalDerivedInternalHom l (Coefficient.{u} l Ω M) W).map\n        (scalarPairsAssoc l Ω W h k P).hom =\n      (associator l Ω W E L M h k).hom.app\n        ((rationalDerivedInternalHom l (Coefficient.{u} l Ω E) W).obj P) ≫\n          (rawComparison l Ω W (h.trans k)).hom.app P ",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfba0",
+  "group": "S1",
+  "result": "fix",
+  "landing": "20261028T055750-L-805869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfba0",
+  "group": "S1",
+  "result": "fix",
+  "landing": "20261028T055750-L-805869",
+  "kind": "interface",
+  "note": "independent cc review: commonStageHomComparison_hom_square proof and new node lem-weil-common-stage-internal-hom-scalar-coherence against the Lean; SpecifiedHomScalarTower import narrowing against the import graph (cycle DPTH→Descent→Representative→Coherence) and 3b importers"
+ }
+}

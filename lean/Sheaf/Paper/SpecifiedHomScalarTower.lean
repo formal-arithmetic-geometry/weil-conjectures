@@ -3,7 +3,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
-public import Sheaf.Paper.DerivedPullbackTensorHom
+public import Sheaf.Paper.FiniteRationalDerivedOperations
+public import Sheaf.Paper.SfScalarExtensionComposition
 /-! Rational tower coherence for the specified Hom comparison.
 (blueprint: lem-zl-specified-hom-scalar-evaluation). -/
 @[expose] public noncomputable section
