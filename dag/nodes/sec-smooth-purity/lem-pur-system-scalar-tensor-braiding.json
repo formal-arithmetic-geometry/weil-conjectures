@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-system-scalar-tensor-braiding",
+ "kind": "statement",
+ "title": "Derived whole-system scalar tensorator preserves Koszul symmetry",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, an algebra map $\\iota:E\\to L$ and a scheme $W$ on which $\\ell$ is invertible in every residue field. Let $\\mathscr D_D$ be the ordinary derived category of the entire coefficient sequence site for $D=E,L$, let $J_D$ be the closed tensor of the published coefficient calculus, and let $\\beta_D$ be its signed derived symmetry determined by the fixed K-flat tensor models. Let $H:\\mathscr D_E\\to\\mathscr D_L$ be the prescribed derived extension through the actual quotient-ring maps, and let $\\sigma:J_E;H\\simeq(H,H);J_L$ be its representative-normalized tensorator. For every $M,N\\in\\mathscr D_E$ one has $H(\\beta_E(M,N));\\sigma_{N,M}=\\sigma_{M,N};\\beta_L(HM,HN)$. No completed tensor or constructible integral braiding occurs in this statement.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section sign-rules, item-flip-tensor-product; Stacks 07A4, scalar tensor comparison"
+ },
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-braiding",
+  "stage3-pur-derived-scalar-tensor-normalization",
+  "stage3-pur-normalized-scalar-tower-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "On entire-system complexes compare the strict scalar tensorator with the signed swaps on homogeneous generators. Use the scalar adjunction to test a map after insertion of one. Both routes give the same swapped tensor with sign (-1)^(pq). Tensor sheafification and total summand extensionality give equality of chain maps.",
+   "uses": [
+    "stage3-pur-normalized-scalar-tower-comparisons",
+    "def-pur-finite-pullback-tensor-braiding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose flat-term K-flat representatives. The model equation for derivedSigma and the two defining braiding model equations reduce the derived square to the strict square. Cancel the invertible tensor models and derived scalar counits, using naturality. Extend to arbitrary system objects by the representative isomorphisms.",
+   "uses": [
+    "stage3-pur-derived-scalar-tensor-normalization",
+    "def-pur-finite-pullback-tensor-braiding",
+    "lem-pc-kflat-resolution",
+    "lem-pur-completed-pullback-tensor-signed-representatives",
+    "lem-pur-completed-pullback-tensor-coherent-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-pullback-tensor-braiding",
+  "lem-pc-kflat-resolution",
+  "lem-pur-completed-pullback-tensor-coherent-construction",
+  "lem-pur-completed-pullback-tensor-signed-representatives",
+  "stage3-pur-derived-scalar-tensor-normalization",
+  "stage3-pur-normalized-scalar-tower-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section sign-rules, item-flip-tensor-product; Stacks 07A4, scalar tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension tensorator commutes with signed braidings on derived categories of sheaves of modules",
+   "results": "Lean Finder found sheaf monoidal and braided instances, but no comparison-normalized derived-system result.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality",
+   "results": "Loogle found the counit naturality theorem and two lifting variants. This supplies categorical glue, not either specialized normalized comparison.",
+   "date": "2026-10-28",
+   "verdict": "supporting generic lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSigma|scalarReduction.*isIso|scalar.*[Bb]raiding",
+   "results": "msearch returned no hits. Local rg located scalar tower tensor normalization and limit-square declarations, but no ready restriction-level scalar tensor reduction equation.",
+   "date": "2026-10-28",
+   "verdict": "supporting interfaces only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReducedIntegralBraidingScalarExtensionSquare",
+  "date": "2026-10-28",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-braiding-scalar-extension-square",
+   "place": "The reduced scalar square: separate compatibility of the scalar tensorator with reduction from its signed-symmetry calculation.",
+   "via": [
+    "lem-pur-integral-braiding-scalar-extension-square",
+    "lem-pur-integral-braiding-scalar-extension-square-reduced"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemScalarTensorBraiding",
+  "file": "lean/Sheaf/Paper/SystemScalarTensorBraiding.lean",
+  "declaration": "WeilConjectures.systemScalarTensorBraiding",
+  "statement": "theorem systemScalarTensorBraiding\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (M N : coefficientSequenceDerived l E W) :\n    let H := integralComparisonDerivedSequenceScalar l E L ι W\n    let σ := ScalarExtensionTower.derivedSigma l E L ι W\n      (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)\n    H.map ((pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W)\n        (pullbackTensorCalculus l E W).systemClosed\n        (pullbackTensorCalculus l E W).systemTensorModel).hom.app (M, N)) ≫\n      σ.hom.app (N, M) =\n    σ.hom.app (M, N) ≫\n      (pullbackTensorBraiding (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l L W)\n        (pullbackTensorCalculus l L W).systemClosed\n        (pullbackTensorCalculus l L W).systemTensorModel).hom.app\n          (H.obj M, H.obj N)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T072441-L-1949797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T072441-L-1949797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-coherent-reduction",
+ "kind": "statement",
+ "title": "Coherent scalar tensor reduction square without braidings",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$, an algebra map $\\iota:E\\to L$, and a scheme $W$ with $\\ell$ invertible in every residue field. Let $F$ be the prescribed completed scalar extension on bounded constructible complete integral objects, $R_E,R_L$ the specified coherent reductions, $T_E,T_L$ the completed tensors, $J_E,J_L$ their specified whole-system closed tensors, and $H$ the derived whole-system scalar extension. Write $a_D(M,N):R_D T_D(M,N)\\simeq J_D(R_DM,R_DN)$ for the prescribed tensor reduction comparisons and $\\sigma:J_E;H\\simeq(H,H);J_L$ for the representative-normalized derived scalar tensorator. There exists a natural isomorphism $p:F;R_L\\simeq R_E;H$ such that, for every constructible pair $M,N$, $R_L(\\lambda_{M,N});a_L(FM,FN);J_L(p_M,p_N)=p_{T_E(M,N)};H(a_E(M,N));\\sigma_{R_EM,R_EN}$. Here $\\lambda$ is the prescribed integral tensor scalar comparison. This is an equation of entire derived coefficient systems, with no braiding involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; coherent scalar and tensor reduction from the scalar tower realization"
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-pod-integral-tensor-constraints",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "stage3-pur-derived-scalar-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized Roos models for the two published calculi and the primitive scalar realization. The transported scalar-normalization theorem and normalized-sequence counit effectivity make its coherent reduction an isomorphism. Whiskering the realization and counit gives a natural transformation on the ambient category; restrict it and form the natural isomorphism p.",
+   "uses": [
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "lem-pur-coefficient-extension-reduction-model",
+    "stage3-trf-transported-scalar-normalized",
+    "lem-trf-ambient-comparison-system-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensorModelRealization with the same published calculus on each side. Adjunction.leftAdjointUniq_refl and the closed-tensor self-comparison formula identify its coherent tensorReduction with pullbackTensorIntegralReductionTensor. Apply the generic reduction_of_limit_square calculation to scalarTowerTensorLimitSquare. Rewrite the two tensor reductions and unfold the restricted scalar comparison to obtain the stated square.",
+   "uses": [
+    "stage3-pur-scalar-tensor-model-normalization",
+    "stage3-pur-scalar-tensor-limit-square",
+    "lem-pur-scalar-extension-tower-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-trf-ambient-comparison-system-existence",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "stage3-pur-scalar-tensor-limit-square",
+  "stage3-pur-scalar-tensor-model-normalization",
+  "stage3-trf-transported-scalar-normalized"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 07A4 and 0941; current scalar tower tensor limit square, coherent counit naturality and transported scalar normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coherent reduction of completed scalar extension commutes with the derived tensor comparison through the normalized scalar and tensor reduction isomorphisms",
+   "results": "AdicCompletion tensor naturality and ModuleCat extendScalarsComp lemmas; no theorem for the prescribed coherent-system comparisons.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality",
+   "results": "Loogle found the counit naturality theorem and two lifting variants. This supplies categorical glue, not either specialized normalized comparison.",
+   "date": "2026-10-28",
+   "verdict": "supporting generic lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSigma|scalarReduction.*isIso|scalar.*[Bb]raiding",
+   "results": "msearch returned no hits. Local rg located scalar tower tensor normalization and limit-square declarations, but no ready restriction-level scalar tensor reduction equation.",
+   "date": "2026-10-28",
+   "verdict": "supporting interfaces only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReducedIntegralBraidingScalarExtensionSquare",
+  "date": "2026-10-28",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-braiding-scalar-extension-square",
+   "place": "The reduced scalar square: separate compatibility of the scalar tensorator with reduction from its signed-symmetry calculation.",
+   "via": [
+    "lem-pur-integral-braiding-scalar-extension-square",
+    "lem-pur-integral-braiding-scalar-extension-square-reduced"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorCoherentReduction",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorCoherentReduction.lean",
+  "declaration": "WeilConjectures.integralScalarTensorCoherentReduction",
+  "statement": "theorem integralScalarTensorCoherentReduction\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    let F := sfConstructibleIntegralScalarExtension 0 l\n      (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W\n    let R := integralSystemReduction l E W\n    let Q := integralSystemReduction l L W\n    let H := integralComparisonDerivedSequenceScalar l E L ι W\n    ∃ p : F ⋙ Q ≅ R ⋙ H, ∀ M N : sfIntegralConstructibleCategory l E W,\n      Q.map (integralTensorScalarComparison l E L ι W M N).hom ≫\n        (pullbackTensorIntegralReductionTensor l L W (F.obj M) (F.obj N)).hom ≫\n        (pullbackTensorCalculus l L W).systemClosed.tensor.map\n          (Prod.mkHom (p.hom.app M) (p.hom.app N)) =\n      p.hom.app ((constructibleIntegralTensor l E W).obj (M, N)) ≫\n        H.map (pullbackTensorIntegralReductionTensor l E W M N).hom ≫\n        (ScalarExtensionTower.derivedSigma l E L ι W\n          (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)).hom.app\n            (R.obj M, R.obj N)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T072441-L-1949797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T072441-L-1949797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
