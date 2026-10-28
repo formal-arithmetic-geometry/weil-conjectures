@@ -16,9 +16,32 @@
  ],
  "proof": [
   {
-   "text": "Expand IntegralFiniteExtension.beta as the scalar-extended evaluation transpose followed by the canonical dualizing map. Naturality of the tensor-Hom adjunction, the scalar tensorator formula on pure tensors, and naturality of the internal Hom map identify the two transposes. Localization preserves that identity, and the endpoint equations together with hc identify the supplied c-components.",
+   "text": "For arbitrary tensor-Hom adjunctions, uncurry composition with internal-Hom precomposition. The first-variable evaluation naturality equation and tensor functoriality identify this with tensoring the source arrow before uncurrying. Apply this to the evaluation transpose defining homMap. Naturality of the inverse scalar tensorator in each argument, followed by the source evaluation naturality equation, proves first-variable naturality of homMap.",
    "uses": [
-    "def-sf-integral-finite-extension-core",
+    "def-sf-integral-finite-extension-models",
+    "lem-sf-integral-hom-evaluation-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
+   }
+  },
+  {
+   "text": "Use naturality of completedScalarComparison and cancellation of its invertible components to move source arrows across the inverse completion maps. Functoriality of the target internal Hom moves the same square through its contravariant completion inverse and covariant completion map. Conjugating homMap naturality gives v naturality. Postcomposition with internal Hom into the fixed dualizing arrow u commutes with precomposition, so beta is natural on integral arrows.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
+   }
+  },
+  {
+   "text": "Use the object and pure-tensor equations of A.dual, B.dual and rational scalar extension. They identify the two mapped arrows with the image of the coefficient tensored with the corresponding integral dual and scalar arrows. The supplied equations hc identify the comparison components with one tensored with beta. The raw-localization composition formula reduces the desired equation to the image coefficient tensored with integral beta naturality. No faithfulness of localization or finite reduction is used.",
+   "uses": [
     "def-sf-rational-verdier-data",
     "def-weil-rationalization-karoubi"
    ],
@@ -30,13 +53,15 @@
   }
  ],
  "proof_deps": [
+  "def-sf-integral-finite-extension-models",
+  "lem-sf-integral-hom-evaluation-naturality",
   "def-sf-integral-finite-extension-core",
   "def-sf-rational-verdier-data",
   "def-weil-rationalization-karoubi"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
+  "group": "U3",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
   "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
@@ -112,12 +137,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261027T234358-L-119779",
+  "landing": "20261028T020809-L-2549058",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

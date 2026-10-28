@@ -20721,3 +20721,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:08 L: merged deliver/U1/Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition (stage 3; reviewer PASS; first push; landing 20261028T020801-L-2548009 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:08 L: merged deliver/U2/Sheaf.SixFunctors.RationalDualFormulaAdjunction (stage 3; reviewer PASS; first push; landing 20261028T020807-L-2548587 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:08 L: merged deliver/U3/Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility (stage 3; reviewer PASS; first push; landing 20261028T020808-L-2548864 (proof); batch 20261028T020127; modules 1; new nodes 0)
+- 02:08 L: merged deliver/U3/Sheaf.SixFunctors.RationalVerdierIntegralBetaNaturality (stage 3; reviewer PASS; first push; landing 20261028T020809-L-2549058 (interface); batch 20261028T020127; modules 1; new nodes 0)
