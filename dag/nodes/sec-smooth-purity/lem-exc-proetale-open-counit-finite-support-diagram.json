@@ -1,0 +1,186 @@
+{
+ "id": "lem-exc-proetale-open-counit-finite-support-diagram",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proper/open degree-zero support input to prop-exc-base-change-proper, Steps 3--4; finite representatives, smaller-open lifting and counit naturality (Steps 9--11)",
+   "via": [
+    "lem-exc-proetale-proper-open-counit-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-support diagram for open counits under a qcqs direct image",
+ "statement": "Let $A$ be a finite commutative ring, $p:V\\to T$ quasi-compact and quasi-separated, $i:W\\hookrightarrow T$ an open immersion, $M$ a constant-$A$ module sheaf on $V\\times_TW$, and $Q\\to T$ an affine pro-etale test object. Let $k:V\\times_TW\\to V$, $F=p_*k_!M$, and $c:i_!i^*F\\to F$ the specified intrinsic counit. For each $y\\in F(Q)$ there exist a quasi-compact open $O\\subseteq Q$ contained in $Q\\times_TW$, a module sheaf $M_0$ on $(V\\times_TQ)\\times_QO$, and $y_0\\in F_0(Q)$, where $p_Q:V\\times_TQ\\to Q$, $k_0:(V\\times_TQ)\\times_QO\\to V\\times_TQ$, $F_0=p_{Q,*}k_{0,!}M_0$. If $c_0:O_!O^*F_0\\to F_0$ is the intrinsic counit, there exist additive group homomorphisms $a:\\Gamma(Q,O_!O^*F_0)\\to(i_!i^*F)(Q)$ and $b:\\Gamma(Q,F_0)\\to F(Q)$ such that $c_Q(a(x))=b((c_0)_Q(x))$ for all $x$ and $b(y_0)=y$. No surjectivity of either counit is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Localize at the affine pro-etale test object Q. Weakly etale localization and open-extension base change identify the target section with a section of the extension by zero on V times_T Q. This scheme is quasi-compact and quasi-separated since p is qcqs and Q is affine.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  },
+  {
+   "text": "The sheafification unit is locally surjective. The pro-etale covering condition gives finitely many affine representatives over this qcqs scheme. Every nonzero zero-extension representative factors through the pulled-back open. Its quasi-compact image in Q lies in the inverse image of W; cover these finitely many images by finitely many principal opens inside that open. Their union O is quasi-compact. Empty supports give O empty. Restrict the localized M to the inverse image of O to obtain M_0.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  },
+  {
+   "text": "Lift the local representatives to the smaller extension by zero, taking zero on all other representatives. The smaller-to-larger extension map is monic by presheaf zero extension and exact sheafification, so these lifts agree on overlaps and glue. Push forward the smaller-open inclusion and apply the localization comparison to obtain an additive section map b and y_0 with b(y_0)=y.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  },
+  {
+   "text": "Extend the restriction of the smaller-open inclusion from O into the inverse image of W, then use localization, to construct the additive map a on the sources of the counits. Adjunction transposition, naturality and the triangle identities show that c(a(x))=b(c_0(x)) for every x. This is a commuting square, with no lifting or surjectivity assertion about c or c_0. Properness has not been used.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-extension-by-zero",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero along a quasi compact open immersion is supported on the open and the counit is surjective on affine global sections",
+   "results": "Scheme.Hom.app_surjective and Scheme.Modules.restrictAdjunction facts concern structure sheaves or the Zariski site; no pro-etale constant-module support statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an open extension by zero over a quasi compact quasi separated scheme comes from a smaller quasi compact open",
+   "results": "Quasi-compact scheme and structure-sheaf localization results; none constructs a smaller-open diagram for arbitrary pro-etale module sheaves.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"surjective\"",
+   "results": "PresheafOfModules.epi_of_surjective and locally-surjective criteria supply categorical consequences, not the geometric section-lifting or finite-support diagram.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'counit.*(surjective|support)|support.*counit|extension.by.zero.*(quasi.compact|surject)' Mathlib/Algebra/Category/ModuleCat Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry",
+   "results": "No matches in the project Mathlib source directories.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProperOpenCounitEpi",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenCounitFiniteSupportDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenCounitFiniteSupportDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfOpenCounit_finiteSupportDiagram",
+  "statement": "theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)\n    [QuasiCompact p] [QuasiSeparated p] (i : W ⟶ T) [IsOpenImmersion i]\n    (M : proEtaleRingModules (pullback p i)\n      (proEtaleConstantRing (pullback p i) A)) (Q : T.ProEt) [IsAffine Q.left] :\n    let F := (sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙\n      proEtaleConstantModuleDirectImage p A).obj M\n    let c := (sfIntrinsicExtensionByZeroAdjunction i A).counit.app F\n    ∀ y : F.val.obj (op Q),\n      ∃ (O : Q.left.Opens) (_ : IsCompact (O : Set Q.left))\n        (_ : (O : Set Q.left) ⊆ Q.hom ⁻¹' Set.range i)\n        (M₀ : proEtaleRingModules (pullback (pullback.snd p Q.hom) O.ι)\n          (proEtaleConstantRing (pullback (pullback.snd p Q.hom) O.ι) A)),\n        let F₀ := (sfIntrinsicExtensionByZero\n          (pullback.fst (pullback.snd p Q.hom) O.ι) A ⋙\n            proEtaleConstantModuleDirectImage (pullback.snd p Q.hom) A).obj M₀\n        let c₀ := (sfIntrinsicExtensionByZeroAdjunction O.ι A).counit.app F₀\n        ∃ (a : ((sfIntrinsicExtensionByZero O.ι A).obj\n            ((sfIntrinsicOpenRestriction O.ι A).obj F₀)).val.obj (op (ProEt.mk (𝟙 Q.left))) →+\n              ((sfIntrinsicExtensionByZero i A).obj\n                ((sfIntrinsicOpenRestriction i A).obj F)).val.obj (op Q))\n          (b : F₀.val.obj (op (ProEt.mk (𝟙 Q.left))) →+ F.val.obj (op Q))\n          (y₀ : F₀.val.obj (op (ProEt.mk (𝟙 Q.left)))),\n          (∀ x, c.val.app (op Q) (a x) =\n            b (c₀.val.app (op (ProEt.mk (𝟙 Q.left))) x)) ∧ b y₀ = y",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261028T055726-L-801268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261028T055726-L-801268",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

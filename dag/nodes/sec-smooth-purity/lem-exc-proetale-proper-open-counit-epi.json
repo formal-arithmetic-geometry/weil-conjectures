@@ -32,62 +32,54 @@
  ],
  "proof": [
   {
-   "text": "The finite principal-open and specialization-localization argument gives local lifts of every section of the proper direct image. These lifts glue by sheaf separatedness, proving local surjectivity and hence epimorphy.",
+   "text": "For an affine pro-etale test object Q and target section y, apply the finite-support diagram theorem. A proper morphism is quasi-compact and quasi-separated, so its hypotheses hold. Obtain a quasi-compact open O in Q, a module M_0 on the pulled-back proper source over O, commuting additive maps a and b, and y_0 mapping to y.",
    "uses": [
-    "def-weil-extension-by-zero",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-wcontractible-closed-localization",
-    "lem-weil-pbc-affine-closed-specialization-localization",
-    "lem-weil-pbc-proetale-shriek-specialization-zero",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-exc-proetale-open-counit-finite-support-diagram",
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AE and 09AG"
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  },
+  {
+   "text": "The map p_Q is proper by base change. Apply the affine quasi-compact-open global-section lifting theorem to p_Q, O and M_0. Choose x with c_0(x)=y_0. Then c(a(x))=b(c_0(x))=b(y_0)=y, proving surjectivity on every affine test object.",
+   "uses": [
+    "lem-exc-proetale-proper-qc-open-counit-sections",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
+   }
+  },
+  {
+   "text": "For an arbitrary test object, its affine open cover is a pro-etale cover. Affine surjectivity therefore implies local surjectivity of the underlying morphism of abelian sheaves. The site epimorphism criterion makes that morphism epic, and the faithful forgetful functor from module sheaves reflects epimorphisms. This is the private Lean lemma epi_of_surjective_affine.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE and 09AG; the affine support argument recorded in Steps 3--11 of lem-exc-proetale-proper-open-sheaf-comparison"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-extension-by-zero",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-open-immersion-base-change",
+  "lem-exc-proetale-open-counit-finite-support-diagram",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-wcontractible-closed-localization",
-  "lem-weil-pbc-affine-closed-specialization-localization",
-  "lem-weil-pbc-proetale-shriek-specialization-zero",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-exc-proetale-proper-qc-open-counit-sections",
+  "lem-weil-pbc-proper-base-change",
   "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Surjectivity half of the affine proper/open support argument (Tags 09AE and 09AG)"
+  "place": "Affine support argument (Tags 09AE and 09AG), decomposed into finite-support diagrams and quasi-compact-open global lifting; final affine-cover and epi assembly proved in Lean by N4"
  },
  "mathlib_searches": [
   {
@@ -146,9 +138,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261028T020152-L-2473566",
+  "landing": "20261028T055726-L-801268",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

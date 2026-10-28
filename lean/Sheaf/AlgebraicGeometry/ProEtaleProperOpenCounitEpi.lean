@@ -7,22 +7,14 @@ module
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
-import Sheaf.RingTheory.WContractibleClosedLocalization
-import Sheaf.AlgebraicGeometry.AffineClosedSpecializationLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleProperQcOpenCounitSections
+import Sheaf.AlgebraicGeometry.ProEtaleOpenCounitFiniteSupportDiagram
 
 /-! Epimorphism half of the proper/open pro-etale counit support argument.
 
 Source: Stacks, Tags 09AE and 09AG; blueprint
 `lem-exc-proetale-proper-open-counit-isiso`.
-(blueprint: lem-exc-proetale-proper-open-counit-isiso-epi)
+(blueprint: lem-exc-proetale-proper-open-counit-epi)
 -/
 
 @[expose] public section
@@ -31,11 +23,41 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
+
+omit [Finite A] in
+private theorem epi_of_surjective_affine {T : Scheme.{u}}
+    {F G : proEtaleRingModules T (proEtaleConstantRing T A)} (f : F ⟶ G)
+    (hf : ∀ (Q : T.ProEt), IsAffine Q.left →
+      Function.Surjective (f.val.app (op Q))) : Epi f := by
+  let H := SheafOfModules.toSheaf
+    ((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing T A))
+  suffices he : Epi (H.map f) from H.epi_of_epi_map he
+  have hlocal : Presheaf.IsLocallySurjective (ProEt.topology T) (H.map f).hom := by
+    constructor
+    intro Q y
+    let V (j : Q.left.affineCover.I₀) : T.ProEt :=
+      ProEt.mk (Q.left.affineCover.f j ≫ Q.hom)
+    let a (j : Q.left.affineCover.I₀) : V j ⟶ Q :=
+      MorphismProperty.Over.homMk (Q.left.affineCover.f j)
+    have hcover : Sieve.ofArrows V a ∈ ProEt.topology T Q := by
+      apply Precoverage.generate_mem_toGrothendieck
+      change (Presieve.ofArrows V a).map (ProEt.forget T ⋙ Over.forget T) ∈
+        proetalePrecoverage Q.left
+      rw [Presieve.map_ofArrows]
+      exact Scheme.zariskiPrecoverage_le_propQCPrecoverage _ Q.left.affineCover.mem₀
+    apply (ProEt.topology T).superset_covering _ hcover
+    rw [Sieve.ofArrows, Sieve.generate_le_iff, Presieve.ofArrows_le_iff]
+    intro j
+    have hV : IsAffine (V j).left := inferInstanceAs (IsAffine (Spec _))
+    obtain ⟨x, hx⟩ := hf (V j) hV (G.val.map (a j).op y)
+    exact ⟨x, hx⟩
+  exact Sheaf.epi_of_isLocallySurjective (H.map f)
 
 /-- The proper/open counit is epic; this is the surjectivity part of the
 finite-principal-open and specialization-localization argument. -/
@@ -46,6 +68,14 @@ theorem sfProperOpenCounit_epi {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     Epi ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
       ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
         proEtaleConstantModuleDirectImage p A).obj M)) := by
-  sorry
+  apply epi_of_surjective_affine A
+  intro Q hQ y
+  let : IsAffine Q.left := hQ
+  let : IsAffine ((𝟭 Scheme).obj Q.left) := hQ
+  obtain ⟨O, hO, _hOW, M₀, a, b, y₀, hcomm, hy⟩ :=
+    sfOpenCounit_finiteSupportDiagram A p i M Q y
+  obtain ⟨x, hx⟩ := sfProperQcOpenCounit_sections_surjective A
+    (pullback.snd p Q.hom) O hO M₀ y₀
+  exact ⟨a x, (hcomm x).trans ((congrArg b hx).trans hy)⟩
 
 end AlgebraicGeometry.Scheme
