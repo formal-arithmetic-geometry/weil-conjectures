@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-native-proper-section-tensor-models",
+ "kind": "statement",
+ "title": "Normalized native section tensor models",
+ "statement": "Fix a finite field k₀, a prime l different from its characteristic, separated finite-type k₀-schemes Z and Y and a k₀-morphism p : Z → Y. Let R and S be locally finite realizations on their actual geometric fibers, with l invertible at all residue fields, whose section functors are equivalences. Let O be Proper.Operations for the geometric base change of p, including its precomposition coefficient map and its normalized module and derived adjunctions. Let A and B be the normalized At tensor structures for R and S, C a Proper.TensorComparison for O,A,B, and J a NativeProperSectionAdjunctionModels as specified by [lem-sf-native-proper-section-adjunction-models]. Then there exist ProperSectionTensor structures TZ and TY and a NativeProjectionTensorComparison balanced. For every pair M,N of native derived objects on Y, section forgetting of balanced.mu followed by TZ.tensor and A.closed.tensor of the two J.pull maps equals J.pull at the native tensor followed by ordinary derived pullback of TY.tensor and C.tensor. All generator, K-flatness, sheaf-forget and representative normalizations in the three tensor structures are retained. This asserts no realization-family existence and constructs no new direct-image comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E; balanced pure tensor formulas and K-flat pullback, with the normalization in native proper-projection model Step 4"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-native-proper-projection-comparison-data",
+  "def-sf-native-proper-coefficient-operations",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-native-proper-tensor-comparison",
+  "def-sf-native-projection-tensor-comparison-data",
+  "lem-sf-native-proper-section-adjunction-models"
+ ],
+ "proof": [
+  {
+   "text": "The pullback/tensor comparison $\\mu^W$ is a native derived arrow. On sheaves the balanced comparison and its inverse are\n$$b\\otimes(x\\otimes y)\\longmapsto(b\\otimes x)\\otimes(1\\otimes y),\\qquad (b\\otimes x)\\otimes(c\\otimes y)\\longmapsto bc\\otimes(x\\otimes y).$$\nThe balancing relations make them inverse, and the diagonal Frobenius action commutes with these formulas since the coefficient maps commute with Frobenius. Apply them on equivariant K-flat flat-term resolutions and use direct-sum total tensor with differential $d\\otimes1+(-1)^i1\\otimes d$. The ordinary ringed pullback theorem says the underlying pulled-back resolutions are K-flat; their equivariant pullbacks are K-flat too: tensoring with an acyclic equivariant complex becomes tensoring with its acyclic underlying complex, and forgetting detects acyclicity. Consequently the formulas descend to the derived tensors defining $\\mu^W$. The forgetful tensor comparison is induced by precisely these summands, so $U_Z(\\mu^W)$ is the ordinary balanced derived pullback/tensor comparison, including its naturality on derived arrows.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-forget-tensor-transposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); balanced formulas with diagonal Frobenius action"
+   }
+  },
+  {
+   "text": "Construct the section tensor comparison by the identity on balanced sheaf tensors, and totalize on every (i,j) summand with the signed differential. Exact orbit induction and the section equivalence transfer the two K-flat tests. Thus localization gives ProperSectionTensor at source and target with the generator and representative equations. The sheaf comparison is fixed by its pure tensor formula, so no scalar automorphism is free.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction models fix push on K-injective representatives by the identity section map. Their counit square consequently fixes pull as the left adjoint mate of that normalized push comparison. Compute the desired tensor square on simultaneous K-flat resolutions. The two composites take each coefficient-balanced pure tensor to the same pure tensor, with the same totalization summand. The representative equations for C,TZ,TY and balanced retain that equality after localization and naturality extends it to all M,N.",
+   "uses": [
+    "lem-sf-native-proper-section-adjunction-models",
+    "def-sf-native-proper-tensor-comparison",
+    "def-sf-native-proper-projection-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-proper-projection-comparison-data",
+  "def-sf-native-proper-tensor-comparison",
+  "lem-sf-native-proper-section-adjunction-models",
+  "lem-sf-ringed-forget-tensor-transposition",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Step 4 of native proper-projection models: balanced sheaf tensor, K-flat totalization and pullTensor square; Stacks 07A4, 0G7E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact forgetting equivariant module sheaves derived tensor product K flat resolution comparison",
+   "results": "OK 8 hits; Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, SheafOfModules.forget, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-28",
+   "verdict": "No declaration states this normalized comparison in the project-specific native section coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact forgetting of equivariant sheaves preserves tensor complexes and K flat derived pullback tensor comparison squares",
+   "results": "OK 8 hits; SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-28",
+   "verdict": "No declaration states this normalized comparison in the project-specific native section coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "properSection|preservesKInjectiveComplexes",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-28",
+   "verdict": "No declaration states this normalized comparison in the project-specific native section coordinates."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeProperProjectionModels",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 4 of native proper-projection models: balanced sheaf tensor, K-flat totalization and pullTensor square; Stacks 07A4, 0G7E",
+   "via": [
+    "lem-sf-native-proper-projection-models",
+    "lem-sf-native-proper-projection-realization",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeProperSectionTensorModels",
+  "file": "lean/Sheaf/Paper/NativeProperSectionTensorModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_section_tensor_models",
+  "statement": "theorem native_proper_section_tensor_models\n    (hR : (sectionFunctor l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber R).IsEquivalence)\n    (hS : (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber S).IsEquivalence) :\n    ∃ (TZ : ProperSectionTensor k₀ l Z R A) (TY : ProperSectionTensor k₀ l Y S B)\n      (balanced : NativeProjectionTensorComparison k₀ l p),\n    ∀ M N,\n    (properSectionDerived k₀ l Z R).map (balanced.mu.hom.app (M, N)) ≫\n      TZ.tensor.hom.app\n        ((nativeOpenPull k₀ l p).obj M, (nativeOpenPull k₀ l p).obj N) ≫\n      A.closed.tensor.map (Prod.mkHom (J.pull.hom.app M) (J.pull.hom.app N)) =\n    J.pull.hom.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫\n      (ContinuousRational.derivedPull\n        (NativeBaseChange.geometricMap k₀ p) O.coefficient).map\n          (TY.tensor.hom.app (M, N)) ≫\n      C.tensor.hom.app\n        ((properSectionDerived k₀ l Y S).obj M,\n          (properSectionDerived k₀ l Y S).obj N)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T055806-L-810091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T055806-L-810091",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

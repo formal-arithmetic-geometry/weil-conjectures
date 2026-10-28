@@ -27,85 +27,50 @@
  ],
  "proof": [
   {
-   "text": "Identify the two coefficient sheaves and their structural maps by the canonical coefficient-ring isomorphism: locally finite spans and locally finite extension values coincide, and the coefficient-map square is precomposition. Geometric base change preserves properness and separated finite type. Apply the proper-adjunction realization theorem to obtain its family and Comparison, retaining the source and target realization, tensor, finite and Hom data and section-presentation equivalences. The native closed-forgetful comparison supplies the ordinary tensor coordinates.",
+   "text": "Construct the finite-field datum with the given k₀ and its algebraic closure, using FiniteField.card. Package the actual geometric fibers as GeometricSpace objects; their separatedness, local finite type and quasi-compactness are base-change instances. Their actual geometric map is proper by base change. Apply adic_proper_adjunction_realization and retain the two SpaceData objects and its Comparison, including the presentations, finite normalization, Hom laws, tensor data and prime-unit witness.",
    "uses": [
-    "def-sf-native-weil-derived-framework",
-    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-adic-proper-adjunction-realization",
     "lem-sf-adic-qbar-constructible-realization",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-sf-locally-finite-coefficient-ring-realization",
-    "lem-sf-adic-proper-adjunction-realization"
+    "lem-pod-separated-finite-type-base-change"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-    "place": "Step 1, second Hom bijection: identify the native coefficient presentation and the proper-factor domain; BS Proposition 6.8.14"
-   }
+   "elementary": true
   },
   {
-   "text": "The native pullback and pushforward at the sheaf level have underlying functors $p_B^*$ and $p_{*,B}$. The native pullback/Frobenius lemma gives exact ordinary pullback and the mate relation. Native pullback is exact: after applying exact forgetting, the homology of its image of a short exact sequence is the homology after exact ordinary pullback, hence zero; conservative forgetting detects that zero homology. Apply the fixed-pair adjunction lift: its unit and counit have precisely the ordinary module carrier components. In particular its counit on a complex $I$ is termwise $\\varepsilon_I:p_B^*p_{*,B}I\\to I$, with its native Weil structure. The Frobenius resolution theorem supplies equivariant K-injective resolutions, and termwise forgetting preserves them. It also supplies equivariant K-flat resolutions with flat terms, whose underlying complexes are K-flat. These assertions apply to the actual abelian fixed-pair categories, before taking derived categories.",
+   "text": "Apply native_proper_section_adjunction_models to the source and target realization, the Comparison.operations and the two section equivalences. Retain pull, pushSheaf, pushSections, push, pushRepresentative and counit.",
    "uses": [
-    "lem-sf-native-adic-pullback-frobenius-mates",
-    "lem-sf-fixed-pair-adjunction-lift",
-    "lem-sf-weil-frobenius-action-resolutions"
+    "lem-sf-native-proper-section-adjunction-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/WeilSheaf/UpperStarLowerStarAdjunction.lean",
-    "place": "ProEtaleWeilSheaf.upperStarLowerStarAdjunction and its unit/counit carrier formulas, lines 99-135; Stacks 08BJ (derived-lemma-adjoint-preserve-K-injectives)"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $L^W=p_0^*$ and $R^W=Rp_{0*}$. The native adjunction is the derived adjunction of step 2. For a representative $A\\xrightarrow{u}I$ with $I$ equivariant K-injective, the direct-image forgetful comparison identifies both $U_YR^WA$ and $Rp_{*,B}A_B$ with $Qp_{*,B}U_ZI$. On this model the native derived counit is\n$$L^WR^WA=Q(p_0^*p_{0*}I)\\xrightarrow{Q\\varepsilon_I^W}QI\\xrightarrow{(Qu)^{-1}}A.$$\nIndeed step 2 gives exact native pullback. For an acyclic complex $N$, the termwise homotopy adjunction gives $\\operatorname{Hom}_{K}(N,p_{0*}I)=\\operatorname{Hom}_{K}(p_0^*N,I)=0$. Thus $p_{0*}I$ is K-injective too. Maps into $I$ and $p_{0*}I$ both compute derived Hom, so the termwise adjunction is precisely the derived Hom bijection on these models, with the displayed counit. Forgetting this formula gives exactly $(QU_Zu)^{-1}Q\\varepsilon_{U_ZI}$, the ordinary derived counit. For a complex $S$ and an equivariant resolution $v:p_0^*S\\to J$, the derived unit is represented by $S\\xrightarrow{\\eta_S^W}p_{0*}p_0^*S\\xrightarrow{p_{0*}v}p_{0*}J$; forgetting gives the ordinary unit on the same model. Thus both actual units and counits agree under the canonical comparisons, naturally and independently of the chosen resolutions.",
+   "text": "Termwise properSectionForget is the composite of forgetting an IsoAlgebra and the section presentation. The first preserves K-injectives by the exact integer-orbit left adjoint, and the second by being an additive equivalence. Preservation is stable under composition and the canonical mapHomologicalComplexCompIso. This proves the injective field directly.",
    "uses": [
-    "lem-sf-derived-weil-pullback-pushforward-adjunction",
     "lem-sf-fixed-pair-derived-forget-comparison",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "def-sf-native-proper-projection-comparison-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 08BJ (lemma-adjoint-preserve-K-injectives); common-resolution computation of the derived adjunction"
-   }
+   "elementary": true
   },
   {
-   "text": "The pullback/tensor comparison $\\mu^W$ is a native derived arrow. On sheaves the balanced comparison and its inverse are\n$$b\\otimes(x\\otimes y)\\longmapsto(b\\otimes x)\\otimes(1\\otimes y),\\qquad (b\\otimes x)\\otimes(c\\otimes y)\\longmapsto bc\\otimes(x\\otimes y).$$\nThe balancing relations make them inverse, and the diagonal Frobenius action commutes with these formulas since the coefficient maps commute with Frobenius. Apply them on equivariant K-flat flat-term resolutions and use direct-sum total tensor with differential $d\\otimes1+(-1)^i1\\otimes d$. The ordinary ringed pullback theorem says the underlying pulled-back resolutions are K-flat; their equivariant pullbacks are K-flat too: tensoring with an acyclic equivariant complex becomes tensoring with its acyclic underlying complex, and forgetting detects acyclicity. Consequently the formulas descend to the derived tensors defining $\\mu^W$. The forgetful tensor comparison is induced by precisely these summands, so $U_Z(\\mu^W)$ is the ordinary balanced derived pullback/tensor comparison, including its naturality on derived arrows.",
+   "text": "Apply native_proper_section_tensor_models to the same realizations, their At structures, the Comparison.tensor and the normalized adjunction models. Retain sourceTensor, targetTensor, balanced and pullTensor. Assemble these data and the injective proof into NativeProperProjectionModels. No projection-mate inverse or invertibility is used.",
    "uses": [
-    "def-sf-derived-weil-category-and-operations",
-    "lem-sf-weil-frobenius-action-resolutions",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-ringed-forget-tensor-transposition"
+    "lem-sf-native-proper-section-tensor-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); balanced formulas with diagonal Frobenius action"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-derived-weil-category-and-operations",
-  "def-sf-native-weil-derived-framework",
+  "def-sf-native-proper-projection-comparison-data",
   "lem-pod-separated-finite-type-base-change",
   "lem-sf-adic-proper-adjunction-realization",
   "lem-sf-adic-qbar-constructible-realization",
-  "lem-sf-derived-weil-pullback-pushforward-adjunction",
-  "lem-sf-fixed-pair-adjunction-lift",
   "lem-sf-fixed-pair-derived-forget-comparison",
-  "lem-sf-locally-finite-coefficient-ring-realization",
-  "lem-sf-native-adic-pullback-frobenius-mates",
-  "lem-sf-ringed-forget-tensor-transposition",
-  "lem-sf-weil-frobenius-action-resolutions",
-  "lem-sf-weil-native-closed-forgetful",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "lem-sf-native-proper-section-adjunction-models",
+  "lem-sf-native-proper-section-tensor-models"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Strict subargument of lem-sf-native-proper-projection-realization: Steps 1--4, before forming the projection mate."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, proper factor: combine actual geometric-fiber realization, normalized section adjunction and balanced tensor models; K-injective preservation proved by composition."
  },
  "mathlib_searches": [
   {
@@ -177,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-b8c5f",
-  "group": "R1",
-  "result": "fix",
-  "landing": "20261028T020703-L-2537399",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T055806-L-810091",
   "kind": "interface",
-  "note": "independent cc review: item proof and the 2 new sorry statements (models = the old structure's fields without invertibility; ordinary proper projection invertibility) against the item node, the new nodes, the old structure and dependency owners; scratch compile of the 4-module set with #print axioms (sorryAx only from the 2 new holes); 0 importers"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
