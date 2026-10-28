@@ -1,0 +1,123 @@
+{
+ "id": "lem-diagonal-finite-constant-adjunct",
+ "kind": "statement",
+ "title": "Canonical finite constant adjunct characterized by coefficient one",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "statement": "For a commutative ring A, a scheme Y and a module-sheaf map m from the constant rank-one A-module on Y to the ordinary direct image of that module on the projective line, suppose its underlying abelian map takes coefficient one to coefficient one under finiteConstantAbComparison, in the precise displayed monoid-unit equation. Then the single of m followed by the canonical single-object right-derived augmentation, and by the inverse finite unit comparison on the projective line, equals the inverse finite unit comparison on Y followed by finiteUnitAdjunct A Y. This concerns only the native finite constant sheaves; there is no condensed coefficient, realization functor, supplied right-derived model or comparison square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), the finite constant coefficient unit and its canonical derived adjunct"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-coefficient-unit-push"
+ ],
+ "proof": [
+  {
+   "text": "Under the constant-sheaf adjunction, a map from the constant rank-one A-module is determined by the image of coefficient one on terminal sections. The constant/forgetful comparison identifies that coefficient one with the displayed monoid-object unit. The hypothesis therefore identifies m with the ordinary adjunct of the canonical constant-sheaf pullback isomorphism. This uses no nonzero-ring or nonempty-scheme assumption.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the canonical derived counit normalization on a single complex and the triangle identity to this ordinary adjunct. Its derived adjunct is the single of m, then the inverse single/termwise comparison, then the canonical right-derived unit on the single complex. Exactness is needed only for inverse image, not for direct image.",
+   "uses": [
+    "lem-kun-right-derived-single-counit",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand geoP1UnitPullback and the ordinaryFiniteUnitPullback hom formula. Naturality of exact single comparisons and uniqueness of the constant-object left adjoints show that finiteUnitComparison identifies this pullback with the native constant-sheaf pullback. Transport the derived adjunct through these source and target comparisons to obtain the stated equality.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "lem-amb-ordinary-finite-unit-pullback-hom",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-coefficient-unit-push",
+  "lem-kun-right-derived-single-counit",
+  "lem-amb-ordinary-finite-unit-pullback-hom"
+ ],
+ "proof_origin": {
+  "by": "H6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), the finite constant coefficient unit and its canonical derived adjunct",
+  "note": "The finite constant-sheaf/derived-adjunction part of the existing normalized-unit proof, after the ordinary normalization and transport of arbitrary derived models are proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjunction on a constant sheaf in degree zero is the ordinary constant unit followed by the canonical right derived unit",
+   "results": "Eight results concerning constantSheafAdj, its counit and sheafification; no formula combining the project finiteUnitComparison and geoP1UnitPullback.",
+   "date": "2026-10-28",
+   "verdict": "Use constant-sheaf adjunction and the project single-right-derived counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.single_rightDerived_counit",
+   "results": "The Mathlib search service does not know this project identifier; direct source search locates the proved project theorem in Sheaf.CategoryTheory.RightDerivedSingleCounit.",
+   "date": "2026-10-28",
+   "verdict": "The generic project counit formula supplies the single-complex step, but does not state this constant-unit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Uu]nit|finite_constant_adjunct",
+   "results": "Nine Mathlib matches about the ordinary constant-sheaf adjunction; direct rg of the project finds no native finite constant adjunct with these comparisons.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate of the displayed finite constant-sheaf normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalFiniteUnitPushCore",
+  "date": "2026-10-28",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-finite-unit-push-square",
+   "place": "the canonical finite constant-sheaf adjunct after ordinary unit normalization"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteConstantAdjunct",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteConstantAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finite_constant_adjunct_of_one",
+  "statement": "theorem finite_constant_adjunct_of_one\n    (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})\n    (m : geoCartierConstant A Y ⟶\n      (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)).obj\n        (geoCartierConstant A (ProjectiveLine Y)))\n    (h : (@MonObj.one _ _ _ (finiteConstantAbRing A Y)\n        ((sfbConstantRing Y).obj (RingCat.of A)).mon) ≫ (finiteConstantAbComparison A Y).inv ≫\n        (sheafCompose (Scheme.ProEt.topology Y)\n          (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).map m ≫\n        (lowerStar Ab.{u + 1} (ProjectiveLine Y ↘ Y)).map\n          (finiteConstantAbComparison A (ProjectiveLine Y)).hom =\n      Functor.LaxMonoidal.ε (lowerStar Ab.{u + 1} (ProjectiveLine Y ↘ Y)) ≫\n        (lowerStar Ab.{u + 1} (ProjectiveLine Y ↘ Y)).map\n          (@MonObj.one _ _ _ (finiteConstantAbRing A (ProjectiveLine Y))\n        ((sfbConstantRing (ProjectiveLine Y)).obj (RingCat.of A)).mon)) :\n    (DerivedCategory.singleFunctor _ 0).map m ≫\n      DerivedCategory.Q.map\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y))\n          (.up ℤ) 0).inv.app (geoCartierConstant A (ProjectiveLine Y))) ≫\n      (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)).rightDerivedFunctorUnitQ\n        ((HomologicalComplex.single _ (.up ℤ) 0).obj\n          (geoCartierConstant A (ProjectiveLine Y))) ≫\n      (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map\n        (finiteUnitComparison A (ProjectiveLine Y)).inv =\n    (finiteUnitComparison A Y).inv ≫ finiteUnitAdjunct A Y",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T034810-L-3549515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T034810-L-3549515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-diagonal-finite-unit-transport",
+ "kind": "statement",
+ "title": "Transport of a normalized native finite unit through a realization",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "statement": "For schemes X and S, a morphism f, finite realizations eX and eS, a supplied coefficient derived model D and native derived model D', an identification hc with geoP1Pushforward and a FinitePushSquare, let a be an ordinary coefficient map from the regular module on S to the direct image of the regular module on X. Suppose m is a native constant-module map whose ordinary factorization through the realization unit isomorphisms is the given displayed equation, and suppose its canonical single-object derived comparison, transported through hc and the inverse finiteUnitComparison on X, is the inverse finiteUnitComparison on S followed by b. Then the realization of the derived ordinary a followed by the supplied derived square, hc and the target derivedUnit equals the source derivedUnit followed by b.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), transport of the normalized finite coefficient-unit square"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-category",
+  "def-diagonal-coefficient-unit-push"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate singlePushComparison_square at the regular coefficient module on X. Naturality of the exact single comparison moves a through eS. This is done in the proved generic transport_single_unit helper.",
+   "uses": [
+    "def-diagonal-coefficient-unit-push",
+    "def-sfb-diagonal-coefficient-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use singlePushComparison_naturality on eX.unitIso.hom and naturality of eqToIso hc to put the target unit comparison in native coordinates. Map the supplied ordinary factorization equation by the single functor.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the supplied native derived-unit equation with the source exact single comparison and the single of eS.unitIso.hom. Expand the two derivedUnit definitions and specialize the proved generic helper to the actual coefficient and native sheaf categories.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-category",
+  "def-diagonal-coefficient-unit-push"
+ ],
+ "proof_origin": {
+  "by": "H6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), transport of the normalized finite coefficient-unit square",
+  "note": "A completely proved algebraic transport API, factored from the item after profiling its concrete kernel conversions. This node introduces no sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact realization square commutes with right derived units evaluated on single complexes and with specified unit isomorphisms",
+   "results": "Eight hits, including Functor.mapDerivedCategorySingleFunctor, mapDerivedCategoryFactorsh_hom_app, rightDerived_fac_app_assoc and abstract derivability comparisons. The project singlePushComparison_square already states the required single-object square.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing proved project single-object square and Mathlib naturality; no duplicate of the native-unit transport API was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits, headed by CategoryTheory.NatTrans.naturality.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality for the exact single comparison and the model identification."
+  },
+  {
+   "tool": "grep",
+   "query": "singlePushComparison_square|singlePushComparison_naturality",
+   "results": "No Mathlib hits; direct project source search finds both proved declarations in Sheaf.Paper.DiagonalCoefficientUnitPush.",
+   "date": "2026-10-28",
+   "verdict": "Reuse both project declarations rather than rebuilding the comparison square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalFiniteUnitPushCore",
+  "date": "2026-10-28",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-finite-unit-push-square",
+   "place": "paragraph (1), transport of the normalized finite coefficient-unit square"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteUnitTransport",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteUnitTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finite_push_unit_transport",
+  "statement": "theorem finite_push_unit_transport\n    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (A : Type (u + 1)) [CommRing A] {X S : Scheme.{u}} (f : X ⟶ S)\n    (eX : FiniteRealization R A X) (eS : FiniteRealization R A S)\n    (D : DiagonalRightDerived (CondensedRing.lowerStar R f))\n    (D' : DiagonalRightDerived (lowerStar (ModuleCat.{u + 1} A) f))\n    (hc : D'.R = geoP1Pushforward A f) (s : FinitePushSquare R A f eX eS D D')\n    (a : Mod.regular (condensedRingObj R S) ⟶\n      (CondensedRing.lowerStar R f).obj (Mod.regular (condensedRingObj R X)))\n    (b : geoP1Unit A S ⟶ (geoP1Pushforward A f).obj (geoP1Unit A X))\n    (m : geoCartierConstant A S ⟶\n      (lowerStar (ModuleCat.{u + 1} A) f).obj (geoCartierConstant A X))\n    (hm : eS.F.map a ≫ s.ordinary.hom.app _ ≫\n        (lowerStar (ModuleCat.{u + 1} A) f).map eX.unitIso.hom = eS.unitIso.hom ≫ m)\n    (hn : (DerivedCategory.singleFunctor _ 0).map m ≫\n        singlePushComparison D' (geoCartierConstant A X) ≫\n        (eqToIso hc).hom.app\n          ((DerivedCategory.singleFunctor _ 0).obj (geoCartierConstant A X)) ≫\n        (geoP1Pushforward A f).map (finiteUnitComparison A X).inv =\n        (finiteUnitComparison A S).inv ≫ b) :\n    let t := s.derived.iso.hom ≫\n      Functor.whiskerLeft eX.F.mapDerivedCategory (eqToIso hc).hom\n    eS.F.mapDerivedCategory.map\n        ((DerivedCategory.singleFunctor (Modules R S) 0).map a ≫\n          singlePushComparison D (Mod.regular (condensedRingObj R X))) ≫\n        t.app (unit R X) ≫ (geoP1Pushforward A f).map eX.derivedUnit =\n      eS.derivedUnit ≫ b",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T034810-L-3549515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T034810-L-3549515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
