@@ -16,20 +16,43 @@
  },
  "proof": [
   {
-   "text": "At a common coefficient field expand the prescribed common-stage pullback, tensor, comparison, and composition representatives. Cancel adjacent comparison isomorphisms and apply the rational pullback/tensor composition equation at the coefficient field; the quotient representative criterion transports the resulting stage equality to HEq.",
+   "text": "Take K to be the stage of the literal tensor object of M and N. Pullback preserves stages, so every literal object of both routes is defined at K. Use the chosen functors' object normalizations to identify their actual endpoints with these literal objects. The composition and comparison specifications, and the representative formulas for pullback and tensor maps, express each route as the quotient class of a composite at K. Heterogeneous congruence explicitly carries the endpoint equalities through maps and composition.",
    "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the stage category cancel the adjacent comparison isomorphisms. Naturality of the rational pullback compositor moves the tensor endpoint comparison through composition. Naturality of the rational pullback/tensor comparison moves the input pullback comparisons through the second tensor comparison. The rational composition coherence equation now identifies the remaining composites, with identical endpoint conjugations. Apply the quotient constructor to this equality.",
+   "uses": [
+    "lem-pur-common-stage-rational-composition-naturality",
+    "lem-pur-canonical-rational-pullback-tensor-naturality",
     "lem-pur-pullback-tensor-rational-composition-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "The resulting equality of the left and right common-stage routes, followed by the supplied HEq for the left route, gives the HEq for the right route and the original representative r at L. No enlargement or injectivity of scalar extension is required.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-derived-pullback-tensor-constraints",
+  "lem-pur-common-stage-rational-composition-naturality",
+  "lem-pur-canonical-rational-pullback-tensor-naturality",
   "lem-pur-pullback-tensor-rational-composition-coherence"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "P3",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 and 0941; fixed-stage representative descent"
+  "place": "Tags 07A4 and 0941; explicit fixed-stage cancellation using the prescribed representative formulas"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -76,9 +99,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261028T020842-L-2554158",
+  "landing": "20261028T055731-L-802189",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
