@@ -18,24 +18,47 @@
  ],
  "proof": [
   {
-   "text": "Expand each pullbackTensorComparison with pullbackTensor_fixed_coordinates. Expand the target coordinate comparison and the two pullback compositors, then use functoriality, unit naturality and cancellation of the realization units. The remaining fixed-coefficient square is exactly leftDerivedUpperStarTensorComparison_identityComposition.",
+   "text": "Use the prescribed pullback coordinate isomorphisms p and q (q is the restriction to the finite-Tor full subcategory), and the tensor coordinate isomorphism from the inverse coefficient unit. Prove naturality of p and of the tensor coordinate components from pullback comparison naturality and unit naturality. No naturality assertion for q is needed.",
    "uses": [
-    "lem-sf-finite-pullback-tensor-fixed-coordinates",
-    "lem-sf-finite-derived-pullback-tensor-identity-composition",
+    "def-sf-finite-projection-fixed-coordinates",
+    "def-sf-finite-partial-pullback-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply pullbackComposition_fixed_coordinates to the two identity maps, with equality transport along id_comp. Restrict the resulting compositor square to the finite-Tor inclusion for the second input.",
+   "uses": [
+    "lem-sf-finite-pullback-composition-fixed-coordinates",
     "def-sf-finite-projection-fixed-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pullbackTensor_fixed_coordinates and cancellation of the first-input pullback isomorphism to express each finite tensor comparison as a square against the uncurried fixed-scalar tensor comparison.",
+   "uses": [
+    "lem-sf-finite-pullback-tensor-fixed-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved categorical transport lemma pastes the two tensor squares, using naturality of p, the tensor coordinate isomorphism and the fixed-scalar tensor comparison. Cancel their invertible target factors. The remaining equation is leftDerivedUpperStarTensorComparison_identityComposition, transported along id_comp and the explicit equality between the underlying scheme map of the space identity and the scheme identity. Postcompose the resulting equality by targetCoordinates.",
+   "uses": [
+    "lem-sf-finite-derived-pullback-tensor-identity-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sf-finite-projection-fixed-coordinates",
+  "def-sf-finite-partial-pullback-tensor",
+  "lem-sf-finite-pullback-composition-fixed-coordinates",
   "lem-sf-finite-pullback-tensor-fixed-coordinates",
-  "lem-sf-finite-derived-pullback-tensor-identity-composition",
-  "def-sf-finite-projection-fixed-coordinates"
+  "lem-sf-finite-derived-pullback-tensor-identity-composition"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "First paragraph, fixed-coefficient expansion of the identity-composition component calculation."
+  "place": "First paragraph: compatibility of the prescribed pullback composition with coefficient realization, before the tensor identity calculation."
  },
  "mathlib_searches": [
   {
@@ -102,12 +125,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261027T233906-L-4132468",
+  "landing": "20261028T055659-L-795071",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

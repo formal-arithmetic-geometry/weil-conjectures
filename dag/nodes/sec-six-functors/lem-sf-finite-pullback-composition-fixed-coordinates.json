@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-finite-pullback-composition-fixed-coordinates",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "First paragraph: compatibility of the prescribed pullback composition with coefficient realization, before the tensor identity calculation.",
+   "via": [
+    "lem-sf-finite-partial-tensor-identity-fixed-coordinates",
+    "lem-sf-finite-partial-tensor-identity-component",
+    "lem-sf-finite-partial-tensor-identity-composition",
+    "lem-sf-projection-identity-tensor-unit",
+    "lem-sf-projection-identity-proper-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "title": "Fixed coefficient realization preserves finite pullback composition",
+ "statement": "For the finite operation datum S of def-sf-operation-stages and composable f:X→Y and g:Y→Z, let R_X be the coordinates functor of def-sf-finite-projection-fixed-coordinates and p_f(M) the fixedPullRealization isomorphism of def-sf-constructible-projection-mates. For every bounded constructible M at Z, R_X(S.finite.pullComposition(f,g)_M) followed by p_f(S.finite.pull(g)M) and fixedDerivedPull(f)(p_g(M)) equals p_(f≫g)(M) followed by the canonical fixed-scalar leftDerivedUpperStarComp(f,g) at R_Z(M). This asserts compatibility of the specified compositors, without tensor products or a finite-Tor hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph: compatibility of the prescribed pullback composition with coefficient realization, before the tensor identity calculation."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-finite-projection-fixed-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Apply the inverse coefficient realization at X to S.finitePullCompositionNormalization f g M, then expand fixedPullRealization and pullRealization. Move the comparison for g through the comparison for f by naturality.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates",
+    "def-sf-finite-projection-fixed-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand sfIntrinsicDerivedPullbackComp as the derived natural isomorphism of sfIntrinsicPullbackComp followed by mapDerivedCategoryCompIso. Associativity, naturality under whiskering and mapDerivedCategoryNatIso compatibility identify its coefficient-conjugated image with the fixed-scalar exact compositor. The middle unit inserted by sfIntrinsicTransportComp cancels the inverse unit in fixedPullRealization; the equivalence triangle identities cancel the endpoint factors.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand leftDerivedUpperStarComp through leftDerivedFunctorNatIso and leftDerivedFunctorCompIso, and cancel the exact-to-left-derived comparison factors fixedPullComparison. The remaining equality is precisely the statement, with its given finite and fixed-scalar compositors.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-sf-finite-projection-fixed-coordinates",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph: compatibility of the prescribed pullback composition with coefficient realization, before the tensor identity calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coefficient realization equivalence transports derived pullback composition comparison",
+   "results": "Eight results about categorical pullback comparison maps, not geometric inverse image or coefficient realization.",
+   "date": "2026-10-28",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso",
+   "results": "Unknown identifier in the Mathlib search index; the adopted source library provides the exact-derived comparison APIs.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComposition_fixed_coordinates|fixedPullRealization.*comp",
+   "results": "No matches from msearch. Local recursive search found finitePullCompositionNormalization and the existing fixedPullRealization construction, but no theorem combining them with the fixed compositor. Blueprint search for coefficient pullback composition found no blueprint node.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing normalization and comparisons; their compositor compatibility is a new lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityComponentCoordinates",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackCompositionFixedCoordinates",
+  "file": "lean/Sheaf/Paper/FinitePullbackCompositionFixedCoordinates.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.pullbackComposition_fixed_coordinates",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.pullbackComposition_fixed_coordinates"
+  ],
+  "statement": "theorem pullbackComposition_fixed_coordinates\n    (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (M : sixFunctorFiniteCategory D C E n hn Z) :\n    let A := ModuleCat.{u + 1}\n      (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))\n    (coordinates (C := C) (E := E) (n := n) (hn := hn) X).map\n        ((S.finite.pullComposition f g).hom.app M) ≫\n      (fixedPullRealization S f ((S.finite.pull g).obj M)).hom ≫\n      (fixedDerivedPull (C := C) (E := E) (n := n) f).map\n        (fixedPullRealization S g M).hom =\n    (fixedPullRealization S (f ≫ g) M).hom ≫\n      (AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp A f.hom.left g.hom.left).hom.app\n        ((coordinates (C := C) (E := E) (n := n) (hn := hn) Z).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261028T055659-L-795071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261028T055659-L-795071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
