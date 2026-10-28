@@ -1,0 +1,155 @@
+{
+ "id": "new-weil-frobenius-integral-root-scalar",
+ "kind": "statement",
+ "title": "Completed root scalar compatibility in the integral tensor",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ finite, and $g:X\\to Y$ an isomorphism of arbitrary schemes. Use the concrete completed Z_l ring R, root limit L, constant integral ring B and completed integral ring T [def-pur-twist-sheaves, def-pur-twist-coefficient-rings]. Let r be the prescribed inverse-limit root comparison [lem-pur-roots-of-unity-inverse-image-iso], and let c_T be the canonical completed integral coefficient comparison [def-pur-integral-compact-support-coefficient-data]. For every local $a\\in R_Y$, $b\\in B_Y$ and $x\\in L_Y$, the integral tensor of $c_B(b)$ with $r(\\eta(ax))$ equals the completed action of $c_T(c_Y(a))$ on the tensor of $c_B(b)$ with $r(\\eta(x))$, where $c_Y:R_Y\\to T_Y$ is the prescribed completed scalar inclusion. The following Lean formula specifies all objects and actions.\n\ntheorem frobeniusIntegralRootScalar\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose)) :\n    ∀ (V : Y.ProEt) (a : (purTwistZlCompletion Y l).obj.obj (op V))\n      (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n      (x : (purTwistZlOne Y l).obj.obj (op V)),\n      purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n        ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n        (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V)\n                  (@SMul.smul _ _ (purTwistZlAction Y l (op V)).toSMul a x))) =\n      @SMul.smul _ _\n        (purTwistIntegralAction X l E (op ((proEtaleBaseChange g).obj V))).toSMul\n        ((sfCompletedCoefficientMap l E g).hom.app (op V)\n          ((purTwistCompletedScalarMap Y l E).hom.app (op V) a))\n        (purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n          ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n          (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x)))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "def-pur-twist-coefficient-rings"
+ ],
+ "proof": [
+  {
+   "text": "The compatible finite constant Z/l^(n+1) direct-image comparisons define a cone from R_Y to the direct-image coefficient tower. Its limit lift, followed by the inverse right-adjoint limit comparison, constructs rho:R_Y to g_*R_X. limit.lift_pi and limit.post_pi give its finite projection formula. Transition compatibility is constant_naturality applied to the quotient maps.",
+   "uses": [
+    "def-pur-twist-coefficient-rings",
+    "lem-amb-root-tower-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Test root_direct(a*x)=rho(a)*root_direct(x) at every root projection. The coordinate action formula, root_direct_project_value and root_direct_linear reduce it to the projection equation for rho. root_section_ext proves equality of the root-limit sections.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "lem-amb-root-tower-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Prove c_Y followed by c_T equals rho followed by g_*c_X. For a target coefficient projection choose its finite p-adic factor q from the specification of c_Y. The same q factors c_X: compare with its chosen factor by surjectivity of finite p-adic reduction and purTwistZlFiniteFactor_ext. The desired square then reduces to constant_naturality for q and the projection equation for rho. Adjunction and limit extensionality give equality of the maps.",
+   "uses": [
+    "def-pur-twist-coefficient-rings",
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-amb-root-tower-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Use the root scalar equation just proved and the coefficient square. The normalization clause of purTwistIntegralAction moves a completed Z_l scalar from the root factor to the completed integral action. Rewriting root_direct as the adjunct of the prescribed r yields the exact displayed formula.",
+   "uses": [
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-coefficient-rings",
+  "lem-amb-root-tower-pullback-coherence",
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V8",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict",
+  "note": "Complete Lean proof using the existing constructions. Private root/tensor sublemmas reused from AmbRootTowerPullbackCoherence quantify over arbitrary schemes; the public coherence package with its invertibility hypothesis is not applied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of compatible semilinear maps is semilinear, and scalar extension preserves this action on pure tensors.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_symm_of_tmul\", \"TensorProduct.toDirectLimit\", \"SemilinearMapClass.map_smul_inv\", \"TensorProduct.directLimitRight_symm_of_tmul\", \"DirectLimit.instSMul\", \"DirectLimit.instMulActionOfMulActionHomClass\", \"LinearMap.restrictScalarsₗ_apply\", \"TensorProduct.fromDirectLimit\"], \"digest\": \"8aa56005ebc2a96a\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map, TensorProduct.tmul",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.map_tmul\", \"TensorProduct.range_map_eq_span_tmul\", \"TensorProduct.map₂_apply_tmul\", \"TensorProduct.homTensorHomMap_apply\", \"LinearMap.mulLeft_tmul\", \"LinearMap.mulRight_tmul\", \"map_dualTensorHom\", \"TensorProduct.quotientTensorEquiv_apply_tmul_mk\"], \"digest\": \"bdba19a54caacad5\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.post_π|limit.lift_π|limit.hom_ext",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Elements.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesProduct.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean\"], \"digest\": \"84701974102cf122\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions.",
+   "sub": "CategoryTheory/Limits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusIntegralRootTransportAux",
+  "date": "2026-10-28",
+  "group": "V8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism on the Tate-twist construction is induced by the geometric Frobenius convention; its actions commute with finite reduction and scalar extension. Expanded coefficient-twist construction, clause 2: the first integral root line.",
+   "via": [
+    "new-weil-frobenius-integral-root-transport-additive",
+    "lem-weil-frobenius-integral-root-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusIntegralRootScalar",
+  "file": "lean/Sheaf/Paper/FrobeniusIntegralRootScalar.lean",
+  "declaration": "WeilConjectures.frobeniusIntegralRootScalar",
+  "statement": "theorem frobeniusIntegralRootScalar\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose)) :\n    ∀ (V : Y.ProEt) (a : (purTwistZlCompletion Y l).obj.obj (op V))\n      (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n      (x : (purTwistZlOne Y l).obj.obj (op V)),\n      purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n        ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n        (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V)\n                  (@SMul.smul _ _ (purTwistZlAction Y l (op V)).toSMul a x))) =\n      @SMul.smul _ _\n        (purTwistIntegralAction X l E (op ((proEtaleBaseChange g).obj V))).toSMul\n        ((sfCompletedCoefficientMap l E g).hom.app (op V)\n          ((purTwistCompletedScalarMap Y l E).hom.app (op V) a))\n        (purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n          ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n          (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x)))",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "new-weil-frobenius-integral-discrete-transport-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the discrete integral tensor comparison",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ finite, and $g:X\\to Y$ an isomorphism of arbitrary schemes. Use the concrete root limits, constant integral coefficients and tensor sheaves [def-pur-twist-sheaves], and the canonical root comparison [lem-pur-roots-of-unity-inverse-image-iso]. Let $r:g^{-1}L_Y\\to L_X$ be its prescribed inverse-limit comparison and assume it is invertible. Any additive sheaf morphism $\\phi:\\mathcal O_E(1)_Y\\to g_*\\mathcal O_E(1)_X$ sending every local pure tensor $b\\otimes x$ to $c_B(b)\\otimes r(\\eta(x))$ is invertible, where $c_B$ is the constant integral direct-image comparison and $\\eta$ the adjunction unit. This asserts only invertibility of the specified map, not its construction or completed scalar compatibility.\n\ntheorem frobeniusIntegralDiscreteTransport_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose))\n    (hrIso : IsIso r)\n    (φ : (SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E) ⟶\n      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E)))\n    (hform : ∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (x : (purTwistZlOne Y l).obj.obj (op V)),\n        φ.hom.app (op V) (purTwistIntegralTensor Y l E (op V) b x) =\n          purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n            ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n            (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x))) : IsIso φ",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "lem-pur-roots-of-unity-inverse-image-iso"
+ ],
+ "proof": [
+  {
+   "text": "The constant ring comparisons are isomorphisms: each is the adjunction unit followed by the direct image of the canonical constant inverse-image isomorphism. Similarly the adjunct of r is invertible, because both its unit and r are invertible.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Use root_limit_linear and constant_naturality, the proved arbitrary-scheme sublemmas in AmbRootTowerPullbackCoherence, to make the two tensor factors semilinear over the constant Z_l comparison. TensorProduct.congr makes their tensor map bijective on every object. Restrictions commute on pure tensors by naturality of the two factors, hence everywhere by tensor induction.",
+   "uses": [
+    "lem-amb-root-tower-pullback-coherence",
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "The sheafification unit on X is locally bijective; precomposition by the cocontinuous base-change site equivalence preserves local injectivity and surjectivity. The pure-tensor hypothesis proves eta_Y followed by phi equals the raw tensor map followed by this precomposed unit. In the sheafification equivalences W, use two-out-of-three to cancel eta_Y. A map between sheaves in W is an isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-amb-root-tower-pullback-coherence",
+  "def-pur-twist-sheaves"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V8",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict",
+  "note": "Complete Lean proof using the existing constructions. Private root/tensor sublemmas reused from AmbRootTowerPullbackCoherence quantify over arbitrary schemes; the public coherence package with its invertibility hypothesis is not applied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bijective semilinear map on each tensor factor gives an equivalence of tensor products, and sheafification along an equivalence of sites preserves this isomorphism.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toLinearMap_congr\", \"PiTensorProduct.congr\", \"LinearEquiv.congr_trans_lTensor\", \"TensorProduct.congr\", \"TensorProduct.map_bijective\", \"LinearEquiv.lTensor_trans_congr\", \"LinearEquiv.lTensor_trans_rTensor\", \"TensorProduct.AlgebraTensorModule.congr\"], \"digest\": \"77b58835a107b092\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.congr",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.congr\", \"TensorProduct.congr_refl_refl\", \"TensorProduct.toLinearMap_congr\", \"TensorProduct.congr_symm\", \"LinearEquiv.lTensor_trans_rTensor\", \"LinearEquiv.rTensor_trans_lTensor\", \"TensorProduct.congr_tmul\", \"TensorProduct.congr_trans\"], \"digest\": \"91f93c38c7e6bbb8\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|isLocallySurjective_whisker|W_sheafToPresheaf_map_iff_isIso",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/PreservesSheafification.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\"], \"digest\": \"19601583ee369e5d\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions.",
+   "sub": "CategoryTheory/Sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusIntegralRootTransportAux",
+  "date": "2026-10-28",
+  "group": "V8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism on the Tate-twist construction is induced by the geometric Frobenius convention; its actions commute with finite reduction and scalar extension. Expanded coefficient-twist construction, clause 2: the first integral root line.",
+   "via": [
+    "new-weil-frobenius-integral-root-transport-additive",
+    "lem-weil-frobenius-integral-root-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusIntegralDiscreteTransportInvertible",
+  "file": "lean/Sheaf/Paper/FrobeniusIntegralDiscreteTransportInvertible.lean",
+  "declaration": "WeilConjectures.frobeniusIntegralDiscreteTransport_isIso",
+  "statement": "theorem frobeniusIntegralDiscreteTransport_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose))\n    (hrIso : IsIso r)\n    (φ : (SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E) ⟶\n      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E)))\n    (hform : ∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (x : (purTwistZlOne Y l).obj.obj (op V)),\n        φ.hom.app (op V) (purTwistIntegralTensor Y l E (op V) b x) =\n          purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n            ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n            (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x))) : IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

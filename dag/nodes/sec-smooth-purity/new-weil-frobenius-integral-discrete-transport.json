@@ -1,0 +1,143 @@
+{
+ "id": "new-weil-frobenius-integral-discrete-transport",
+ "kind": "statement",
+ "title": "Construction and discrete linearity of integral root transport",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ finite, and $g:X\\to Y$ an isomorphism of arbitrary schemes. Use the concrete root and integral tensor sheaves [def-pur-twist-sheaves] and the canonical completed coefficient comparison $c_T$ [def-pur-integral-compact-support-coefficient-data]. Let $r:g^{-1}L_Y\\to L_X$ be the prescribed inverse-limit root comparison [lem-pur-roots-of-unity-inverse-image-iso], with a proof it is invertible. There is an additive isomorphism $\\phi:\\mathcal O_E(1)_Y\\to g_*\\mathcal O_E(1)_X$ satisfying $\\phi(b\\otimes x)=c_B(b)\\otimes r(\\eta(x))$. For every section t and discrete integral scalar b it also satisfies $\\phi(bt)=c_T(d_Y(b))\\phi(t)$, where $d_Y$ is the constant-to-completed coefficient map. No assertion about arbitrary completed scalars is included.\n\ntheorem frobeniusIntegralDiscreteTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose))\n    (hrIso : IsIso r) :\n    ∃ φ : (SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E) ⟶\n      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E)),\n      IsIso φ ∧\n      (∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (x : (purTwistZlOne Y l).obj.obj (op V)),\n        φ.hom.app (op V) (purTwistIntegralTensor Y l E (op V) b x) =\n          purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n            ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n            (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x))) ∧\n      (∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (t : (purTwistIntegralOne Y l E).val.obj (op V)),\n        φ.hom.app (op V) (b • t) =\n          @SMul.smul _ _\n            (purTwistIntegralAction X l E (op ((proEtaleBaseChange g).obj V))).toSMul\n            ((sfCompletedCoefficientMap l E g).hom.app (op V)\n              ((purTwistIntegralCompletionMap Y l E).hom.app (op V) b))\n            (φ.hom.app (op V) t))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "new-weil-frobenius-integral-discrete-transport-invertible"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing tensor_direct construction to the constant Z_l-to-O_E maps, their commuting direct-image square, and the adjunct root_direct of r. Its balancing hypothesis is exactly the proved root_limit_linear sublemma. tensor_direct_pure gives the displayed formula. Forgetting the discrete O_E module structure is the required additive sheaf map; its underlying groups agree with the completed integral module by definition.",
+   "uses": [
+    "lem-amb-root-tower-pullback-coherence",
+    "def-pur-twist-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Apply the invertibility theorem to this constructed map and its proved pure-tensor formula.",
+   "uses": [
+    "new-weil-frobenius-integral-discrete-transport-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "The constant-to-completed inclusion commutes with the direct-image coefficient map. Transpose by the ring sheaf adjunction and test at each completed coefficient projection; both sides reduce to constant_naturality for O_E to O_E/(pi^(n+1)). The discrete module map is linear, and the normalization clause of purTwistIntegralAction identifies discrete multiplication with the completed action of d_Y(b). This proves the last formula.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-amb-root-tower-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-root-tower-pullback-coherence",
+  "def-pur-twist-sheaves",
+  "new-weil-frobenius-integral-discrete-transport-invertible",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V8",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03EL, lemma-tensor-product-pullback; lemma-adjointness-tensor-restrict",
+  "note": "Complete Lean proof using the existing constructions. Private root/tensor sublemmas reused from AmbRootTowerPullbackCoherence quantify over arbitrary schemes; the public coherence package with its invertibility hypothesis is not applied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules commutes with an equivalence of sites and is determined on pure tensor sections.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.map_tmul\", \"ModuleCat.extendScalars\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"SheafOfModules.restrictScalars\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"SheafOfModules.restrictScalars_obj_val\", \"PresheafOfModules.Sheafify.smul.congr_simp\"], \"digest\": \"570917a99e6e17ee\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map, TensorProduct.tmul",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.map_tmul\", \"TensorProduct.range_map_eq_span_tmul\", \"TensorProduct.map₂_apply_tmul\", \"TensorProduct.homTensorHomMap_apply\", \"LinearMap.mulLeft_tmul\", \"LinearMap.mulRight_tmul\", \"map_dualTensorHom\", \"TensorProduct.quotientTensorEquiv_apply_tmul_mk\"], \"digest\": \"bdba19a54caacad5\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve_mem|isSheaf_of_iso_iff",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean\", \"Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean\"], \"digest\": \"d656a4543ade29d0\"}",
+   "date": "2026-10-28",
+   "verdict": "Useful generic ingredients, not the normalized root and coefficient comparison of this statement. The proof specializes them to the existing project constructions.",
+   "sub": "CategoryTheory/Sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusIntegralRootTransportAux",
+  "date": "2026-10-28",
+  "group": "V8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The natural Weil isomorphism on the Tate-twist construction is induced by the geometric Frobenius convention; its actions commute with finite reduction and scalar extension. Expanded coefficient-twist construction, clause 2: the first integral root line.",
+   "via": [
+    "new-weil-frobenius-integral-root-transport-additive",
+    "lem-weil-frobenius-integral-root-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusIntegralDiscreteTransport",
+  "file": "lean/Sheaf/Paper/FrobeniusIntegralDiscreteTransport.lean",
+  "declaration": "WeilConjectures.frobeniusIntegralDiscreteTransport",
+  "statement": "theorem frobeniusIntegralDiscreteTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (r : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj\n      (purTwistZlOne Y l) ⟶ purTwistZlOne X l)\n    (hr : r = limit.post (proEtaleRootsOfUnityTower Y l Fact.out)\n        (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}) ≫\n      lim.map (((proEtaleRootsOfUnityInverseImageIso g).2.1 l Fact.out).choose))\n    (hrIso : IsIso r) :\n    ∃ φ : (SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E) ⟶\n      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E)),\n      IsIso φ ∧\n      (∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (x : (purTwistZlOne Y l).obj.obj (op V)),\n        φ.hom.app (op V) (purTwistIntegralTensor Y l E (op V) b x) =\n          purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V))\n            ((proEtaleConstantDirectImageMap g CommRingCat.{u + 1}\n              (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).hom.app\n              (op V) b)\n            (r.hom.app (op ((proEtaleBaseChange g).obj V))\n              (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app\n                (purTwistZlOne Y l)).hom.app (op V) x))) ∧\n      (∀ (V : Y.ProEt) (b : (purTwistIntegralConstant Y l E).obj.obj (op V))\n        (t : (purTwistIntegralOne Y l E).val.obj (op V)),\n        φ.hom.app (op V) (b • t) =\n          @SMul.smul _ _\n            (purTwistIntegralAction X l E (op ((proEtaleBaseChange g).obj V))).toSMul\n            ((sfCompletedCoefficientMap l E g).hom.app (op V)\n              ((purTwistIntegralCompletionMap Y l E).hom.app (op V) b))\n            (φ.hom.app (op V) t))",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261028T035001-L-3576748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
