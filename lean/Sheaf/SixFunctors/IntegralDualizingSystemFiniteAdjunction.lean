@@ -1,0 +1,66 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group M7
+-/
+module
+
+public import Sheaf.SixFunctors.IntegralDualizingSupportSystemHom
+
+/-! # Finite exceptional adjunction on the quotient sequence site -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures
+
+variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+  (E : Type u) [Field E] [Algebra (Padic l) E]
+  [FiniteDimensional (Padic l) E]
+  (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+  [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+
+/-- The finite exceptional adjunction, before integral compact support is realized.
+Its target is quotient-system Hom from quotient-system compact support, so this
+comparison contains no derived limit or integral compact-support value.
+
+Source: prop-coef-integral-dualizing, second paragraph, middle displayed comparison
+and compatibility of the exceptional counits with reduction.
+(blueprint: lem-coef-integral-dualizing-system-finite-adjunction).
+
+Proof: compute both sides on simultaneous quotient-system resolutions. The
+ordinary etale internal exceptional adjunction, transported by finite duality
+site comparison, identifies the nth Hom with Hom from finite compact support into
+A_n. Use the projection/evaluation/exceptional-counit transpose that specifies
+the ordinary internal exceptional adjunction. Finite exceptional coefficient
+compatibility and hQ make
+these same transposes commute with every quotient map. Thus they define a map
+of the strict quotient-system Hom complexes, rather than a family lifted after
+evaluation. Naturality of evaluation and of the compact-support projection gives
+naturality in the derived input before localizing. On each bounded constructible
+input, integral residue Tor invariance puts its reductions in the finite-Tor
+domain of finite duality site comparison. Evaluation of the constructed map is that
+finite adjunction and is invertible. Exact evaluation jointly detects
+quasi-isomorphisms, so the strict map is an isomorphism. Zero input and empty
+schemes give zero Hom objects. No common Tor interval for all inputs is used. -/
+theorem integralDualizing_system_finite_adjunction
+    (S : CoefficientDerivedSystemCalculus l E X)
+    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)
+    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)
+    (eQ : ∀ n : ℕ,
+      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅
+        integralDualizingFiniteTerm l E D X n)
+    (hQ : ∀ {m n : ℕ} (h : n ≤ m),
+      (coefficientSequenceDerivedTransition l E X h).app (coefTraceInput l E X Q) ≫
+          (normalizedDVRRes l E X h).map (eQ n).hom =
+        (eQ m).hom ≫
+          (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _
+            (integralDualizingFiniteComparison l E D X hl h)) :
+    Nonempty ((sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q ≅
+      integralDualizingSupportSystemHom D l E X S G) := by
+  sorry
+
+end WeilConjectures

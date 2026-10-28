@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-integral-dualizing-support-system-hom-comparison",
+ "kind": "lemma",
+ "title": "Scalar comparison of compact-support system Hom",
+ "statement": "theorem integralDualizing_support_system_hom_comparison\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S) :\n    Nonempty (integralDualizingSupportSystemHom D l E X S G ≅\n      (integralDualizingCompactSections l E D hl X).op ⋙\n        integralDualizingCoefficientHomTower l E)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-integral-dualizing-support-system-hom",
+  "def-coef-integral-dualizing-mapping-towers"
+ ],
+ "proof": [
+  {
+   "text": "For a fixed constructible input, residue Tor invariance supplies a common finite Tor interval. Choose a finite dimension bound for the finite-type scheme. Prescribed compact-support reduction identifies its quotient-system compact support with the scalar extension of its integral compact-support value. The comparisons use the actual reduction projections and commute with every quotient transition.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-coef-integral-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Point-section reduction identifies the point-system scalar extension with tensor of the actual integral section complex by the quotient ring system. Scalar tensor-restriction adjunction on that sequence site identifies Hom into its regular quotient unit with Hom from constant integral sections into the restricted quotient tower.",
+   "uses": [
+    "lem-pod-point-sections-derived-reduction",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant K-flat input and one simultaneous K-injective resolution of the quotient tower compute this Hom as Hom(P,I_n) with its actual transitions. Uniqueness of the tensor right adjoint and of localization identifies it with integralDualizingCoefficientHomTower. The same comparison commutes with precomposition before localization, proving naturality rather than merely objectwise invertibility.",
+   "uses": [
+    "lem-coef-hom-tower-scalar-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-coef-integral-compact-support",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-coef-hom-tower-scalar-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "Refinement of the finite mapping-complex route into scalar realization, strict finite adjunction, and scalar compact-support comparison; full construction described in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "curry_natural|curry.*injective|uncurry.*injective|curry.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.id_eq, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.comp_eq",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension restriction adjunction identifies Hom from a constant complex into a strict quotient tower with quotient linear Hom from its reductions, naturally in the input",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between strict derived Hom towers induced by finite exceptional adjunctions and coherent dualizing coefficients",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Adjunction.derivedε_fac_app_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Adjunction.derivedη_fac_app_assoc, DerivedCategory.singleFunctorsPostcompQIso",
+   "date": "2026-10-28",
+   "verdict": "No exact match: these are generic localization comparisons, not the finite exceptional comparison on these quotient systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents",
+  "date": "2026-10-28",
+  "group": "M7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingSupportSystemHomComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingSupportSystemHomComparison.lean",
+  "declaration": "WeilConjectures.integralDualizing_support_system_hom_comparison",
+  "statement": "theorem integralDualizing_support_system_hom_comparison\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S) :\n    Nonempty (integralDualizingSupportSystemHom D l E X S G ≅\n      (integralDualizingCompactSections l E D hl X).op ⋙\n        integralDualizingCoefficientHomTower l E)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

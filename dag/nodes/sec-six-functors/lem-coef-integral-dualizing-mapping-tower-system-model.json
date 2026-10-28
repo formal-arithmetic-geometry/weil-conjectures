@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-integral-dualizing-mapping-tower-system-model",
+ "kind": "lemma",
+ "title": "Quotient-system realization and scalar Hom model of a normalized tower",
+ "statement": "theorem integralDualizing_mapping_tower_system_model\n    (T : NormalizedDVRTower l E X D hl) :\n    ∃ (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n      (a : ∀ n : ℕ, T.M n ≅\n        (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q)),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        T.tau h ≫ (normalizedDVRRes l E X h).map (a n).hom =\n          (a m).hom ≫ (coefficientSequenceDerivedTransition l E X h).app\n            (coefTraceInput l E X Q)) ∧\n      ∀ S : CoefficientDerivedSystemCalculus l E X,\n        Nonempty (integralDualizingMappingTower l E X T.tower ≅\n          (sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-tower-evaluation-pairing"
+ ],
+ "proof": [
+  {
+   "text": "Choose Q_0 representing T.M 0. Given Q_n and its identification, represent the successor morphism T.M(n+1) to Res Q_n by a roof in the source finite coefficient category. Its left leg is a quasi-isomorphism; take its middle complex to be Q_(n+1). The right leg is a strict semilinear chain map to Q_n. Compose successors and transpose. The given finite quotient cocycle proves the evaluation comparison a commutes with every transition.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict Q to completed coefficients. Its evaluated objects and transitions are those of T, by a and T.tower_tau. Apply sequentialTowerEvaluation_full to this one compatible family; all components are isomorphisms, so the resulting map of strict derived towers is an isomorphism. There is no choice of a lift varying with the input K.",
+   "uses": [
+    "lem-weil-pbc-sequential-tower-evaluation-full"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any S, sequence-site scalar internal-Hom adjunction identifies Hom(const K,Res Q) with quotient Hom(S.reduction K,Q). The unit-normalized reduction adjunction identifies S.reduction with the same scalar extension. The section-preserving equivalence and the derived section square retain the actual integral action. These comparisons commute with precomposition before localization, and hence give the natural isomorphism in the conclusion.",
+   "uses": [
+    "lem-coef-hom-tower-scalar-model",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-coef-hom-tower-scalar-model",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "Refinement of the finite mapping-complex route into scalar realization, strict finite adjunction, and scalar compact-support comparison; full construction described in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "curry_natural|curry.*injective|uncurry.*injective|curry.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.id_eq, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.comp_eq",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension restriction adjunction identifies Hom from a constant complex into a strict quotient tower with quotient linear Hom from its reductions, naturally in the input",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between strict derived Hom towers induced by finite exceptional adjunctions and coherent dualizing coefficients",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Adjunction.derivedε_fac_app_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Adjunction.derivedη_fac_app_assoc, DerivedCategory.singleFunctorsPostcompQIso",
+   "date": "2026-10-28",
+   "verdict": "No exact match: these are generic localization comparisons, not the finite exceptional comparison on these quotient systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents",
+  "date": "2026-10-28",
+  "group": "M7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingTowerSystemModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingTowerSystemModel.lean",
+  "declaration": "WeilConjectures.integralDualizing_mapping_tower_system_model",
+  "statement": "theorem integralDualizing_mapping_tower_system_model\n    (T : NormalizedDVRTower l E X D hl) :\n    ∃ (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n      (a : ∀ n : ℕ, T.M n ≅\n        (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q)),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        T.tau h ≫ (normalizedDVRRes l E X h).map (a n).hom =\n          (a m).hom ≫ (coefficientSequenceDerivedTransition l E X h).app\n            (coefTraceInput l E X Q)) ∧\n      ∀ S : CoefficientDerivedSystemCalculus l E X,\n        Nonempty (integralDualizingMappingTower l E X T.tower ≅\n          (sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-coef-integral-dualizing-system-finite-adjunction",
+ "kind": "lemma",
+ "title": "Strict quotient-system finite exceptional mapping adjunction",
+ "statement": "theorem integralDualizing_system_finite_adjunction\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)\n    (hQ : ∀ {m n : ℕ} (h : n ≤ m),\n      (coefficientSequenceDerivedTransition l E X h).app (coefTraceInput l E X Q) ≫\n          (normalizedDVRRes l E X h).map (eQ n).hom =\n        (eQ m).hom ≫\n          (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _\n            (integralDualizingFiniteComparison l E D X hl h)) :\n    Nonempty ((sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q ≅\n      integralDualizingSupportSystemHom D l E X S G)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-integral-dualizing-support-system-hom",
+  "lem-coef-finite-dualizing",
+  "lem-coef-tower-evaluation-pairing"
+ ],
+ "proof": [
+  {
+   "text": "On simultaneous quotient-system resolutions use the finite exceptional mapping-complex transpose (projection, evaluation and exceptional counit). Finite duality site comparison identifies it with ordinary etale internal exceptional adjunction. This comparison has quotient-system compact support as its target argument, without any integral compact-support limit.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison",
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite exceptional counit coefficient square and hQ identify each quotient transition with the corresponding transition of this same transpose. Thus the maps are a map of strict system Hom complexes. Naturality of the projection/evaluation word gives naturality in K before localizing; do not lift a family of isomorphisms independently at the finite levels.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Residue Tor invariance puts every reduction of a fixed integral constructible input in the finite-Tor domain. Every evaluated map is transported from the ordinary internal exceptional adjunction and is invertible. Exact tower evaluations detect quasi-isomorphisms, making the already constructed map invertible. This is checked separately for each input; no interval uniform over all inputs is claimed.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-weil-pbc-sequential-tower-evaluation-full",
+    "lem-weil-finite-duality-site-comparison",
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-duality-site-comparison",
+  "prop-asd-internal-adjunction",
+  "lem-coef-finite-exceptional",
+  "lem-coef-finite-dualizing",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-pbc-sequential-tower-evaluation-full"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "Refinement of the finite mapping-complex route into scalar realization, strict finite adjunction, and scalar compact-support comparison; full construction described in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "curry_natural|curry.*injective|uncurry.*injective|curry.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.id_eq, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.comp_eq",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension restriction adjunction identifies Hom from a constant complex into a strict quotient tower with quotient linear Hom from its reductions, naturally in the input",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the project-specific derived quotient-system functors. The generic closed-category currying and ordinary scalar adjunction results do not provide the strict geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between strict derived Hom towers induced by finite exceptional adjunctions and coherent dualizing coefficients",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Adjunction.derivedε_fac_app_assoc, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Adjunction.derivedη_fac_app_assoc, DerivedCategory.singleFunctorsPostcompQIso",
+   "date": "2026-10-28",
+   "verdict": "No exact match: these are generic localization comparisons, not the finite exceptional comparison on these quotient systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents",
+  "date": "2026-10-28",
+  "group": "M7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingSystemFiniteAdjunction",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingSystemFiniteAdjunction.lean",
+  "declaration": "WeilConjectures.integralDualizing_system_finite_adjunction",
+  "statement": "theorem integralDualizing_system_finite_adjunction\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)\n    (hQ : ∀ {m n : ℕ} (h : n ≤ m),\n      (coefficientSequenceDerivedTransition l E X h).app (coefTraceInput l E X Q) ≫\n          (normalizedDVRRes l E X h).map (eQ n).hom =\n        (eQ m).hom ≫\n          (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _\n            (integralDualizingFiniteComparison l E D X hl h)) :\n    Nonempty ((sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q ≅\n      integralDualizingSupportSystemHom D l E X S G)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261028T034850-L-3559188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

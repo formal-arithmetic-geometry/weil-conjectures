@@ -20853,3 +20853,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/M2/Sheaf.Paper.NativeOpenTensorOrdinaryCounitEvaluation (stage 3; reviewer PASS; first push; landing 20261028T034834-L-3558000 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/M3/Sheaf.Paper.NativeOrdinaryTensorModelResolutionRoof (stage 3; reviewer PASS; first push; landing 20261028T034835-L-3558134 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/M4/Sheaf.Paper.NativeOrdinaryTensorModelResolutionTransport (stage 3; reviewer PASS; first push; landing 20261028T034848-L-3558989 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:48 L: merged deliver/M7/Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents (stage 3; reviewer PASS; first push; landing 20261028T034850-L-3559188 (interface); batch 20261028T034643; modules 5; new nodes 4)
