@@ -9,6 +9,7 @@ public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
 
 import Sheaf.Paper.FiniteFreeScalarDerivedComparisonFlatness
 import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBeta
+import Sheaf.Paper.FiniteFreeScalarProjectionTriangle
 
 /-!  # Derived assertions and projection for a specified finite free resolution -/
 
@@ -106,6 +107,12 @@ theorem finiteFreeScalarProjection (Λ : ScalarSixRing.{u})
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X)) :
     IsIso (projection Λ f (DerivedCategory.Q.obj (complex Λ S Y))
       (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K) := by
-  sorry
+  obtain ⟨T, T', φ, hT, hT', hY, hX, h₁, h₂, hφ⟩ :=
+    finiteFreeScalarProjection_triangle Λ S r e₁ e₂ f K
+  have h₃ := CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ φ hT hT' h₁ h₂
+  have h₃' : IsIso (eqToHom hY.symm ≫ φ.hom₃ ≫ eqToHom hX) := by
+    infer_instance
+  rw [hφ hY hX] at h₃'
+  exact h₃' 
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar

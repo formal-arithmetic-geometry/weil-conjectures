@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-finite-free-scalar-projection-triangle",
+ "kind": "statement",
+ "title": "Distinguished-triangle package for the finite-free scalar projection",
+ "statement": "For a commutative condensed ring Λ, a short complex S of point Λ-modules with specified finite biproduct identifications of its first two terms, a scheme morphism f:X→Y, and a derived coefficient K on X, there exist distinguished triangles T and T′ in the derived category over Y and a morphism φ:T→T′ whose first two components are isomorphisms, whose third objects are the source and target of the scalar-first projection after the stated object equalities, and whose transported third component is exactly the projection defined using modelPull.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions: unit, finite sums, and a cone; Stacks Tag 0944"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-finite-scalar-model-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The projection mate is exact in the coefficient variable by the ringed projection-mate exactness theorem. Its component on the tensor unit is the identity, and additivity carries this to each specified finite biproduct. Apply the transformation to the mapping-cone triangle of S.f after exact point pullback. The first two components are isomorphisms, the image triangles are distinguished, and the third component is the scalar-first projection after the normalized modelPull comparison and the canonical tensor braiding.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mapping-cone triangle is distinguished and its image under the exact tensor/direct-image composites is distinguished; the component identities and the projection identification are preserved by the cone comparison.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions: unit, finite sums, and a cone; Stacks Tag 0944"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphism of distinguished triangles with first two components isomorphisms gives third component isomorphism",
+   "results": "Mathlib Pretriangulated.isIso₃_of_isIso₁₂ matches exactly.",
+   "date": "2026-10-28",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
+   "results": "The Mathlib theorem takes two distinguished triangles, a triangle morphism, and IsIso hypotheses on hom₁ and hom₂.",
+   "date": "2026-10-28",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection-mate exactness and finite-free cone triangle in Sheaf.Paper",
+   "results": "ProjectionMateExact provides exactness and normalized triangle-morphism data; FiniteFreeMonoCokernelKFlat provides the normalized mono-cokernel cone and augmentation.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
+  "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+  "how": "Apply to the triangle morphism supplied by this node."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeScalarDerivedComparison",
+  "date": "2026-10-28",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-free-scalar-projection",
+   "place": "The finite-free cone triangle package used in the two-out-of-three step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeScalarProjectionTriangle",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarProjectionTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarProjection_triangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarProjection_triangle"
+  ],
+  "statement": "theorem finiteFreeScalarProjection_triangle\n    (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ)) (r : ℕ)\n    (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))\n    (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X)) :\n    ∃ (T T' : Triangle (DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)))\n      (φ : T ⟶ T'),\n      T ∈ distTriang (DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)) ∧\n      T' ∈ distTriang (DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)) ∧\n      T.obj₃ = DerivedCategory.Q.obj (complex Λ S Y) ⊗\n        (moduleObjectDerivedPushforward Λ.X f).obj K ∧\n      T'.obj₃ = (moduleObjectDerivedPushforward Λ.X f).obj\n        (DerivedCategory.Q.obj (complex Λ S X) ⊗ K) ∧\n      IsIso φ.hom₁ ∧ IsIso φ.hom₂ ∧\n      ∀ (hY : T.obj₃ = DerivedCategory.Q.obj (complex Λ S Y) ⊗\n          (moduleObjectDerivedPushforward Λ.X f).obj K)\n        (hX : T'.obj₃ = (moduleObjectDerivedPushforward Λ.X f).obj\n          (DerivedCategory.Q.obj (complex Λ S X) ⊗ K)),\n        eqToHom hY.symm ≫ φ.hom₃ ≫ eqToHom hX =\n          projection Λ f (DerivedCategory.Q.obj (complex Λ S Y))\n            (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261028T020730-L-2542518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261028T020730-L-2542518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
