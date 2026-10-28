@@ -6,6 +6,8 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModelBase
+import Sheaf.Paper.IsomorphismScalarCompletedFormulaChainData
+import Sheaf.Paper.IsomorphismScalarCompletedFormulaChainNormalization
 
 /-! # Completed pure-tensor comparison
 
@@ -61,6 +63,8 @@ theorem scalar_completed_formula
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :
     ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g,
-      CompletedFormula l E L ι g b := by sorry
+      CompletedFormula l E L ι g b := by
+  obtain ⟨D, b, hb⟩ := completed_formula_chain_data l E L ι g _hX _hY
+  exact ⟨b, completed_formula_chain_normalization l E L ι g D b hb⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor

@@ -1,0 +1,112 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; normalized tensor comparison after inverse-limit transport."
+ },
+ "proof_origin": {
+  "by": "worker",
+  "group": "K2",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; strict cone construction and inverse-limit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarPullbackConeMap CompletedFormula",
+   "results": "No duplicate specialized completed formula; only strict cone data and vocabulary are available.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib or project counterpart."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompletedFormula scalarPullbackConeMap",
+   "results": "No matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact generic theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized inverse-limit scalar pullback pure tensor formula",
+   "results": "Generic limit and tensor APIs only.",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismScalarCompletedModelFormula",
+  "date": "2026-10-28",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-isomorphism-scalar-completed-formula",
+   "place": "The completed pure-tensor comparison proof, split into strict chain data and its inverse-limit normalization.",
+   "via": [
+    "lem-weil-isomorphism-scalar-completed-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-weil-isomorphism-scalar-completed-formula-chain-data",
+ "kind": "lemma",
+ "title": "Strict chain data for the completed scalar comparison",
+ "statement": "theorem completed_formula_chain_data (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ D : ScalarPullbackStrictConeData l E L ι g, ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g, (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, IsIso ((scalarPullbackConeMap l E L ι g D.level D.cone).app P.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, b.hom.app P = (scalarPullbackConeMap l E L ι g D.level D.cone).app P.obj)",
+ "stmt_deps": [
+  "def-weil-isomorphism-scalar-completed-model-vocabulary"
+ ],
+ "proof": [
+  {
+   "text": "Assemble the strict scalar pullback cone, its normalized level map and its invertible cone components on the good subcategory.",
+   "uses": [
+    "lem-weil-scalar-pullback-strict-cone-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-pullback-strict-cone-naturality"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismScalarCompletedFormulaChainData",
+  "file": "lean/Sheaf/Paper/IsomorphismScalarCompletedFormulaChainData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.completed_formula_chain_data",
+  "statement": "theorem completed_formula_chain_data (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ D : ScalarPullbackStrictConeData l E L ι g, ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g, (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, HEq (b.hom.app P) ((scalarPullbackConeMap l E L ι g D.level D.cone).app P.obj))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T020535-L-2522331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T020535-L-2522331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
