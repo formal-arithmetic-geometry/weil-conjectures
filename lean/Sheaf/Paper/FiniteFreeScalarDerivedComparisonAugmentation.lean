@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! Augmentation part of the finite-free scalar comparison.
 (blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
@@ -16,6 +17,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
+set_option linter.unusedVariables false in
 /-- The pulled-back finite-free augmentation is a quasi-isomorphism.
 
 Source: the finite-free mono-cokernel theorem after point pullback and section-module
@@ -31,6 +33,28 @@ theorem finiteFreeScalarDerivedComparison_augmentation
     (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))
     (Z : Scheme.{u}) : QuasiIso (augmentation Λ S Z) := by
-  sorry
+  have : PreservesFiniteLimits (CochainComplex.singleFunctor (PointModules Λ) 0) :=
+    inferInstanceAs
+      (PreservesFiniteLimits (HomologicalComplex.single (PointModules Λ) (.up ℤ) 0))
+  have : PreservesFiniteColimits (CochainComplex.singleFunctor (PointModules Λ) 0) :=
+    inferInstanceAs
+      (PreservesFiniteColimits (HomologicalComplex.single (PointModules Λ) (.up ℤ) 0))
+  have : QuasiIso (CochainComplex.monoCokernelAugmentation S) :=
+    CochainComplex.mappingCone.quasiIso_descShortComplex
+      (hS.map_of_exact (CochainComplex.singleFunctor (PointModules Λ) 0))
+  have : PreservesFiniteLimits pointUpperStar.{u} :=
+    profinite_point_pullback.2.2.2.2.2.2.2.2.1
+  have : PreservesFiniteColimits pointUpperStar.{u} :=
+    profinite_point_pullback.2.2.2.2.2.2.2.2.2.1
+  have : PreservesFiniteLimits (sfbPullbackFromPoint Z) := by
+    change PreservesFiniteLimits (pointUpperStar ⋙ (toSpecZ Z)^*[Ab.{u + 1}])
+    infer_instance
+  have : PreservesFiniteColimits (sfbPullbackFromPoint Z) := by
+    change PreservesFiniteColimits (pointUpperStar ⋙ (toSpecZ Z)^*[Ab.{u + 1}])
+    infer_instance
+  have : PreservesFiniteLimits (pointPull Λ Z) := inferInstance
+  have : PreservesFiniteColimits (pointPull Λ Z) := inferInstance
+  exact HomologicalComplex.quasiIso_map_of_preservesHomology
+    (CochainComplex.monoCokernelAugmentation S) (pointPull Λ Z)
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar
