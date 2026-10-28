@@ -27,6 +27,8 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
 
+-- The fixed interface includes hypotheses used by the two-quotient comparison.
+set_option linter.unusedVariables false in
 /-- A local frame and coefficient formula for the first pulled quotient map.
 
 This is the local standard-open refinement and degree-one fraction calculation
@@ -72,6 +74,24 @@ theorem normalized_pullback_generator_local_coefficients_q
               (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
               E U.1 t)
           q.app Z s = c t • a := by
-  sorry
+  classical
+  intro T M P q U W h x hx
+  have : D.line.IsInvertible := D.invertible
+  have : ((Scheme.Modules.pullback b.relProjComparison).obj D.line).IsInvertible :=
+    inferInstance
+  have : P.IsInvertible := Scheme.Modules.IsInvertible.of_iso
+    (((Scheme.Modules.tensorPullbackSectionAdjunction b.relProjComparison).leftAdjointUniq
+      (Scheme.Modules.pullbackPushforwardAdjunction b.relProjComparison)).symm.app D.line)
+  have : SheafOfModules.IsInvertible.{u, u, u} P :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible P
+  obtain ⟨Z, hxZ, hZW, a, ha⟩ := Scheme.Modules.exists_isFreeGenerator P hx
+  let s (t : Γ(E, U.1)) : Γ(M, Z.1) :=
+    M.presheaf.map (homOfLE (hZW.trans h)).op
+      (Scheme.Modules.tensorPullbackSection
+        (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
+        E U.1 t)
+  refine ⟨Z.1, hZW, hxZ, a, fun t ↦ ha.coeff (q.app Z.1 (s t)), ?_⟩
+  intro t
+  exact (ha.coeff_smul (q.app Z.1 (s t))).symm
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts

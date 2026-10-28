@@ -11,28 +11,36 @@
  },
  "proof": [
   {
-   "text": "Use the affine-pair standard-open refinement and the normalized degree-one Proj fraction formula for the indicated quotient map.",
+   "text": "The ordinary pullback of D.line is invertible by IsInvertible.pullback. The section-normalized tensor pullback and the ordinary pullback are left adjoints of the same pushforward, so leftAdjointUniq gives an isomorphism. Transfer invertibility along its inverse, and then apply IsInvertible.sheafOfModules_isInvertible.",
    "uses": [
-    "def-trf-canonical-symmetric-graded-algebra",
-    "prop-nagata-relative-proj-functoriality",
-    "prop-nagata-proj-standard-open",
-    "lem-trf-line-quotient-pulled-chart-normalization"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "lem-pc-invertible-sheaf-instance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved source-library exists_isFreeGenerator to P and x in W, obtaining an affine open Z contained in W and a free generator a of P on Z. For each base section t, define c(t) to be IsFreeGenerator.coeff of q applied to the restricted pulled section. The identity IsFreeGenerator.coeff_smul, read backwards, is exactly the required equation. This uses no normalization or comparison with the second quotient.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-trf-canonical-symmetric-graded-algebra",
-  "prop-nagata-relative-proj-functoriality",
-  "prop-nagata-proj-standard-open",
-  "lem-trf-line-quotient-pulled-chart-normalization"
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-pc-invertible-sheaf-instance",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
+  "group": "S1",
   "date": "2026-10-28",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Strict stage-3 reduction of the local coefficient/tensor step."
+  "place": "Projective bundles, Tag 01OB: the quotient line is invertible. Use local triviality and the proved source-library free-generator coefficient API, instead of homogeneous fractions."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -78,10 +86,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261028T020649-L-2535289",
-  "kind": "interface",
+  "landing": "20261028T034931-L-3571217",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
