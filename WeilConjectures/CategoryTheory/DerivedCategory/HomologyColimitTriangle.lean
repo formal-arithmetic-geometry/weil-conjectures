@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 
 /-!
 # Colimits of homology along a functor of distinguished triangles
@@ -54,7 +54,7 @@ lemma exact_flip_comp_colim {J : Type*} [Category* J] [HasColimitsOfShape J A]
       ext j
       exact (hG j).toIsComplex.zero i hi⟩
   have h (i : ℕ) (hi : i + 2 ≤ n) : (ComposableArrows.sc G.flip hc i hi).Exact :=
-    ShortComplex.exact_of_forall_exact_map_evaluation _ fun j => (hG j).exact i hi
+    (ShortComplex.exact_iff_evaluation _).2 fun j => (hG j).exact i hi
   exact ⟨⟨fun i hi => ((ComposableArrows.sc G.flip hc i hi).map colim).zero⟩,
     fun i hi => (h i hi).map colim⟩
 

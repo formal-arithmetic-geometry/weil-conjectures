@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.FieldTheory.Finite.Extension
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.Galois.Profinite
 public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import WeilConjectures.Mathlib.FieldTheory.Finite.Extension
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Procyclic
 
@@ -95,20 +95,6 @@ theorem mem_iff_pow_card_pow_finrank_eq (E : IntermediateField k Ω) [FiniteDime
     rw [← Finset.eq_of_subset_of_card_le hS hcard] at hxT
     simpa [S] using hxT
 
-omit [Fintype k] in
-variable (k Ω) in
-/-- An algebraically closed extension of a finite field contains a subextension of every finite
-degree. -/
-private theorem exists_intermediateField_finrank_eq [Finite k] [IsAlgClosed Ω]
-    {N : ℕ} (hN : N ≠ 0) :
-    ∃ E : IntermediateField k Ω, FiniteDimensional k E ∧ finrank k E = N := by
-  have : NeZero N := ⟨hN⟩
-  have : Fact (ringChar k).Prime := ⟨CharP.char_is_prime k _⟩
-  let f : Extension k (ringChar k) N →ₐ[k] Ω := IsAlgClosed.lift
-  let e := AlgEquiv.ofInjectiveField f
-  have : FiniteDimensional k f.fieldRange := e.toLinearEquiv.finiteDimensional
-  exact ⟨f.fieldRange, this, e.toLinearEquiv.finrank_eq.symm.trans (finrank_extension _ _ _)⟩
-
 variable (k Ω) in
 /-- **The characters `Gal(Ω/k) → ℤ / N`.** For `N > 0` there is a continuous homomorphism
 `χ : Gal(Ω/k) → ℤ / N` such that `χ σ = a` if and only if `σ` acts as `x ↦ x ^ (q ^ a)` on the
@@ -118,7 +104,8 @@ theorem exists_continuousMonoidHom_zmod [IsAlgClosed Ω] {N : ℕ} (hN : N ≠ 0
       χ σ = .ofAdd (a : ZMod N) ↔
         ∀ x : Ω, x ^ Fintype.card k ^ N = x → σ x = x ^ Fintype.card k ^ a := by
   classical
-  obtain ⟨E, hEfin, hE⟩ := exists_intermediateField_finrank_eq k Ω hN
+  obtain ⟨E, hE⟩ := exists_intermediateField_finrank_eq k Ω (Nat.pos_of_ne_zero hN)
+  have hEfin : FiniteDimensional k E := Module.finite_of_finrank_pos (hE ▸ Nat.pos_of_ne_zero hN)
   have hmem (x : Ω) : x ∈ E ↔ x ^ Fintype.card k ^ N = x := by
     rw [mem_iff_pow_card_pow_finrank_eq E, hE]
   have : Finite E := Module.finite_of_finite k

@@ -71,28 +71,6 @@ lemma Limits.eq_zero_of_isIso_sub_powShift_of_bijective {C : Type*} [Category* C
   rw [h, zero_comp] at h₀
   exact h₀.symm
 
-section Triangulated
-
-open Pretriangulated
-
-variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
-  [∀ n : ℤ, (CategoryTheory.shiftFunctor C n).Additive] [Pretriangulated C]
-
-/-- In a distinguished triangle `T`, postcomposition with `T.mor₁` is bijective on morphisms out
-of an object `M` without nonzero morphisms to `T.obj₃` and to `T.obj₃⟦-1⟧`. -/
-lemma Pretriangulated.Triangle.bijective_comp_mor₁ {T : Triangle C} (hT : T ∈ distTriang C) {M : C}
-    (h₃ : ∀ g : M ⟶ T.obj₃, g = 0) (h₃' : ∀ g : M ⟶ T.obj₃⟦(-1 : ℤ)⟧, g = 0) :
-    Function.Bijective fun f : M ⟶ T.obj₁ ↦ f ≫ T.mor₁ := by
-  refine ⟨fun f₁ f₂ hf ↦ ?_, fun g ↦ ?_⟩
-  · rw [← sub_eq_zero]
-    obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ _ (inv_rot_of_distTriang _ hT) (f₁ - f₂)
-      (by simpa [sub_eq_zero] using hf)
-    rw [hg, h₃' g, zero_comp]
-  · obtain ⟨f, hf⟩ := Triangle.coyoneda_exact₂ _ hT g (h₃ _)
-    exact ⟨f, hf.symm⟩
-
-end Triangulated
-
 /-- A morphism `X ⟶ Y⟦-n⟧` vanishes if all morphisms `X⟦n⟧ ⟶ Y` do. -/
 lemma eq_zero_of_forall_shift_eq_zero {C : Type*} [Category* C] [Preadditive C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] {X Y : C} {n : ℤ} (h : ∀ g : X⟦n⟧ ⟶ Y, g = 0)
@@ -304,8 +282,8 @@ theorem hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomol
   have := CatCenter.isIso_sub_powShift_derivedCategory_app_Q_obj_single _ B
     (isIso_sub_powShift_padicIntegersCenter_of_isConstructible hϖ' B hB)
   -- postcomposition with `ϖ` is bijective on morphisms `M⟦n⟧ ⟶ B`
-  have hbij := Triangle.bijective_comp_mor₁ hT
-    (M := ((DerivedCategory.singleFunctor _ 0).obj M)⟦n⟧) (fun g ↦ by
+  have hbij := bijective_comp_mor₁ _ hT (((DerivedCategory.singleFunctor _ 0).obj M)⟦n⟧)
+    (fun g ↦ by
       refine eq_zero_of_forall_eq_zero_shift (fun g' ↦ ?_) g
       exact hd _ hY hY₀ (-n) (by omega) g') (fun g ↦ by
       refine eq_zero_of_forall_eq_zero_shift (fun g' ↦ ?_) g
