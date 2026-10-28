@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayam
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
-import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -125,6 +125,8 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral
     simp only [MorphismProperty.isomorphisms.iff]
     infer_instance)
 
+set_option maxHeartbeats 400000 in
+-- the bounded constructible and the ambient forms of the exchange morphism are unified
 /-- Blueprint `sk-lem-sbc-exchange-compatibility` (section `sec-smooth-base-change`), its last
 assertion for the residue map `𝒪_E ⟶ 𝔽_E` to a finite admissible ring of `sk-prop-scalar-six`: for a
 cartesian square of schemes separated and of finite type over `k`
@@ -141,7 +143,11 @@ and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, the scalar comparisons identify the first d
 `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` of the integral base-change morphism with the pro-étale base-change
 morphism `g^* Rf_* ⟶ Rf'_* g'^*` with finite coefficients `𝔽_E` at the first derived reduction of
 `K₀` (`ProEtale.derivedReduction`). Here we only record that the two morphisms are isomorphic as
-arrows. -/
+arrows.
+
+On the ambient derived categories, `BC_sq(K₀)` is the exchange morphism of the pullback
+comparison (`Adjunction.nonempty_arrowIso_map_ι_map_app_of_eq_exchangeRight`), whose first derived
+reduction is computed by `nonempty_arrowIso_derivedReduction_map_exchangeRight`. -/
 theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
@@ -151,12 +157,14 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
       Arrow.mk ((ProEtale.derivedBaseChangeMap
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) hsq.toCommSq).app
         ((derivedReduction X.left ℓ E).obj K₀.obj))) := by
-  -- `BC_sq(K₀)` is the exchange morphism of the pullback comparison on the ambient derived
-  -- categories, whose derived reduction is computed on bounded below complexes
-  have : K₀.obj.IsGE K₀.property.1.1.choose := K₀.property.1.1.choose_spec
-  refine Adjunction.nonempty_arrowIso_map_ι_map_app_of_eq_exchangeRight
+  have ha := K₀.property.1.1.choose_spec
+  have : K₀.obj.IsGE K₀.property.1.1.choose := ha
+  have e := nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E hsq.toCommSq K₀.obj
+    K₀.property.1.1.choose
+  exact Adjunction.nonempty_arrowIso_map_ι_map_app_of_eq_exchangeRight
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f.left)
-    (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f'.left) _
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f'.left)
+    (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) hsq.toCommSq)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f K)
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E.1 f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ f' K)
@@ -164,16 +172,11 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ g K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ g' K)
     (boundedConstructiblePullbackSquareComparison _ ℓ sq)
-    (pullbackSquareComparison_hom_app_hom_lift ℓ _ sq)
+    (by exact_mod_proofs
+      (pullbackSquareComparison_hom_app_hom_lift ℓ (Profinite.padicIntegersRingObj ℓ E.1) sq))
     (PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E.1 sq)
     (PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E.1 sq)
-    (derivedReduction Y'.left ℓ E) K₀ ?_
-  have h := nonempty_arrowIso_derivedReduction_exchangeRight ℓ E hsq.toCommSq K₀.obj
-    K₀.property.1.1.choose
-  -- the two sides carry different proofs of `Precoherent Profinite` and of the commutativity of
-  -- the square
-  normalize_instance_proofs Precoherent Profinite.{u} at h ⊢
-  exact_mod_proofs h
+    (derivedReduction Y'.left ℓ E) K₀ (by transport_mod_proofs e)
 
 /-- The invertibility of an integral base-change morphism reduces to finite coefficients: for a
 cartesian square with noetherian `Y'` and `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`, if the pro-étale base-change
