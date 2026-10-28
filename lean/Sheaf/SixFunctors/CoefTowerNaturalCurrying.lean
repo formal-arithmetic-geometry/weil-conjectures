@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.CategoryTheory.Functor.OfSequence
-import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Paper.QcqsCompactSupportRealization
@@ -25,11 +24,6 @@ public import Sheaf.Paper.FiniteCoefficientPoint
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.SixFunctors.FiniteMappingAdjunction
 public import Mathlib.Topology.KrullDimension
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 
 /-! # Natural currying of the fixed dualizing trace on strict towers
 
@@ -44,7 +38,6 @@ and equalities retain the strict tower index until explicitly evaluated.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
 set_option genInjectivity false
@@ -158,8 +151,8 @@ def coefCurryingTargetEvaluation (n : ℕ) :
 
 /-- The universal derived tower Hom into the fixed quotient tower. Its evaluation
 and bijection specify the right adjoint at that target, uniquely up to the unique
-isomorphism preserving evaluation. The main theorem supplies this model together
-with its simultaneous Hom-complex computation; no construction is assumed as input.
+isomorphism preserving evaluation. This is a data interface; it makes no existence
+assertion.
 Source: blueprint proof paragraph 2; Stacks 08J9
 (blueprint: lem-coef-tower-natural-currying). -/
 structure CoefCurryingHomModel where
@@ -304,9 +297,8 @@ def coefCurryingFiniteC
         (coefCurryingIntegralPointTransport l E D ≪≫ pointComparison))
 
 /-- Construction witnesses for the already specified pairing and coaugmentation.
-All fields are concluded to exist by coefTowerNaturalCurrying; none is an extra
-hypothesis on the scheme or the integral input. Comparisons to the actual compact
-support tower and to its finite projections are retained explicitly.
+This is a data interface; it makes no existence assertion. Comparisons to the
+actual compact-support tower and to its finite projections are retained explicitly.
 Source: blueprint proof paragraph 2 (blueprint: lem-coef-tower-natural-currying). -/
 structure CoefCurryingModels
     (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ)
@@ -530,123 +522,8 @@ def CoefCurryingModels.gamma
 
 end WeilConjectures
 
-namespace WeilConjectures
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-  (D : FiniteFieldDatum.{u}) (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
-  [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
-
-/-- Currying of the fixed trace gives an isomorphism, its specified finite formula,
-and naturality in the derived category of strict towers. The model witnesses are
-conclusions, not extra assumptions on K. All finite arrows are defined by evaluation,
-compact support and the exceptional counit, and the scalar map uses the actual
-compact-support projection. The single trace t is fixed before quantifying over K.
-
-Source: blueprint prop-coef-integral-dualizing, proof paragraph 2 and final paragraph
-(blueprint: lem-coef-tower-natural-currying).
-
-Proof following the seven DAG steps:
-1. Realize strict R-module towers on the point diagram site. The ringed derived
-closed symmetric monoidal calculus supplies tensor-Hom transposition for the existing
-K-flat tensor, with its signed braiding and normalized evaluation counit.
-2. Resolve the constant input by a constant K-flat complex and the entire quotient
-tower by a simultaneous K-injective I. The Hom complex has terms Hom(P,I_n), with
-postcomposition by the transitions of I. Exact evaluation preserves K-injectives,
-so it computes RHom_R(C,A_n), naturally and contravariantly in C.
-3. Use coefTowerEvaluationPairing and compactSupport_tower_coaugmentation to form
-beta after insertion of eta, then compose with the one fixed t. Curry this actual
-composite in the derived tower category: this is CoefCurryingModels.gamma.
-4. Evaluate the counit characterization of currying. The pairing evaluates to the
-ambient projection/evaluation pairing, eta to the actual projection q_n, and t to
-the finite exceptional counit. finiteMappingAdjunction identifies the finite
-transpose with gamma_n. ScalarInternalHomAdjunction identifies precomposition by
-q_n with the canonical scalar adjunction. Thus the evaluated arrow is finiteArrow.
-5. Finite mapping adjunction, the finite compact-support reduction isomorphism and
-scalar adjunction make every evaluated arrow invertible. The isomorphism-detection
-clause of sequentialTowerEvaluation_full makes the already constructed arrow
-invertible. Its lifting clause is not used for gamma.
-6. For f:K to K', dinaturality of beta and naturality of eta identify the two
-uncurried composites H(K') tensor const C(K) to A_bullet. Both use the same t.
-7. Naturality and injectivity of tensor-Hom transposition give the displayed
-naturality equality before evaluating the tower index. -/
--- STATEMENT-DISPUTED: eTrace is an arbitrary R-linear isomorphism of compact-support
--- values. It need not carry the dualizing comparison or its counit. On two disjoint
--- points an invertible matrix can turn the sum trace into projection onto just one
--- component, so the resulting pairing is degenerate on the other component.
-theorem coefTowerNaturalCurrying (hl : l ≠ D.p)
-    (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ)
-    (eQ : ∀ n : ℕ,
-      (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅
-        integralDualizingFiniteTerm l E D X n)
-    (_hQ : ∀ {m n : ℕ} (h : n ≤ m),
-      (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫
-          (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom =
-        (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h)
-    (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
-    (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀)
-    (T : DerivedCategory (scalarReductionSource.{u, u} l E X) ⥤
-      DerivedCategory (pbcTowers (Spec (.of D.k))
-        (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k)))))
-    (e : ∀ n : ℕ, T ⋙ pbcTowerEvaluation (Spec (.of D.k))
-      (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) n ≅
-        compactSupportRestrictedLevel l E (finiteDualizingCompactification D X) n)
-    (_htransition : ∀ (m n : ℕ) (h : n ≤ m)
-      (K : DerivedCategory (scalarReductionSource.{u, u} l E X)),
-      (pbcTowerTransition (Spec (.of D.k))
-        (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app
-          (T.obj K) ≫ (e n).hom.app K =
-        (e m).hom.app K ≫ compactSupportRestrictedTransition l E
-          (finiteDualizingCompactification D X) m n h K)
-    (eTrace : ∀ n : ℕ,
-      (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅
-        coefTraceFiniteValue l E D X n)
-    (t : coefTraceDualizingTower l E D X Q ⟶ coefCurryingTarget l E)
-    (_ht : ∀ n : ℕ,
-      (coefTraceEvaluation l E n).map t ≫ (coefCurryingTargetEvaluation l E n).hom =
-        (eTrace n).hom ≫ coefTraceFiniteCounit l E D X n ≫
-          (coefTraceTargetIso l E D n).hom) :
-    ∃ M : CoefCurryingModels l E D X Q a₀ b₀ T e,
-      M.IsSpecified l E D X Q a₀ b₀ T e ∧
-      (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E)))
-        (P : CochainComplex (ModuleCat.{u + 1} (coefTraceRing l E)) ℤ)
-        (_hP : (HomologicalComplex.quasiIso
-          (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)).kFlat P)
-        (_eP : DerivedCategory.Q.obj P ≅ C)
-        (I : CochainComplex (coefPairingModules l E) ℤ)
-        (_hI : I.IsKInjective) (_eI : DerivedCategory.Q.obj I ≅ coefCurryingTarget l E),
-        Nonempty ((M.hom.hom).obj (op C) ≅
-          DerivedCategory.Q.obj (coefCurryingHomComplex l E P I))) ∧
-      (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (n : ℕ),
-        (coefTraceEvaluation l E n).map (M.hom.evaluation C) ≫
-            (coefCurryingTargetEvaluation l E n).hom =
-          (M.tensorEvaluation n).hom.app
-              ((M.hom.hom).obj (op C),
-                (CoefTower.constant (coefTraceRing l E)).obj C) ≫
-            ((M.homEvaluation n).hom.app (op C) ⊗ₘ
-              (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app C) ≫
-                coefCurryingPointEvaluation l E n C) ∧
-      (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ),
-        (coefTraceEvaluation l E n).map ((M.eta l E D X Q a₀ b₀ T e).app K) ≫
-            (M.supportEvaluation l E D X Q a₀ b₀ T e n).hom.app K.obj =
-          (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app
-              ((coefCurryingIntegralSections l E D X T).obj K.obj) ≫
-            M.finiteProjection l E D X Q a₀ b₀ T e n K) ∧
-      (∀ n : ℕ, (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom) ∧
-      (∀ K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory,
-        IsIso (M.gamma l E D X Q a₀ b₀ T e t K)) ∧
-      (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ),
-        (coefTraceEvaluation l E n).map (M.gamma l E D X Q a₀ b₀ T e t K) ≫
-            (M.homEvaluation n).hom.app
-              (op ((coefCurryingIntegralSections l E D X T).obj K.obj)) =
-          (M.finiteHom n).hom.app (op K.obj) ≫
-            M.finiteArrow l E D X Q a₀ b₀ T e n K) ∧
-      ∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (f : K ⟶ K'),
-        M.gamma l E D X Q a₀ b₀ T e t K' ≫
-            (M.hom.hom).map ((coefCurryingIntegralSections l E D X T).map f.hom).op =
-          (coefPairingHom l E X M.calculus Q).map f.hom.op ≫
-            M.gamma l E D X Q a₀ b₀ T e t K := by
-  sorry
-
-end WeilConjectures
+/- The former `coefTowerNaturalCurrying` theorem is withdrawn: its arbitrary
+`eTrace` did not preserve the dualizing counit and allowed degenerate pairings.
+The coherent comparison used by the current route is stated separately in
+`IntegralDualizingMappingTowerFiniteComparison`. The definitions above remain
+available for the strict tower constructions and finite-adjunction interfaces. -/
