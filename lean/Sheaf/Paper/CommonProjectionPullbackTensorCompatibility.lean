@@ -25,7 +25,7 @@ set_option genInjectivity false
 set_option genSizeOfSpec false
 set_option linter.style.haveILetI false
 
-universe u v w
+universe u v w v' w'
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
@@ -105,6 +105,125 @@ at the chosen finite coefficient stage, and cancel the scalar-unit and transitio
 isomorphisms using the representative equation supplied by `hrep`.
 This is the categorical normalization bridge; its only mathematical input is
 the strictly pointwise finite-stage representative formula. -/
+private theorem normalizedProjectionPullbackTensor_heq
+    {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
+    {F F₀ : B ⥤ A} {TX TX₀ : A ⥤ A ⥤ A} {TY TY₀ : B ⥤ B ⥤ B}
+    (mu : (Functor.postcompose₂.obj F₀).obj TY₀ ≅
+      (((Functor.whiskeringLeft₂ _).obj F₀).obj F₀).obj TX₀)
+    (hF : F₀ = F) (hX : TX₀ = TX) (hY : TY₀ = TY) (M N : B) :
+    HEq (((eqToIso (by rw [hF, hY]) ≪≫ mu ≪≫
+      eqToIso (by rw [hF, hX])).hom.app M).app N) ((mu.hom.app M).app N) := by
+  subst F₀ TX₀ TY₀
+  simp
+
+private theorem projectionTransportTensorComparison_heq
+    {A B : Type*} [Category* A] [Category* B]
+    {F F' : A ⥤ B} {T T' : B ⥤ B ⥤ B} {U U' : A ⥤ A ⥤ A}
+    (hF : F = F') (hT : T = T') (hU : U = U')
+    (φ : (Functor.postcompose₂.obj F).obj U ≅
+      (((Functor.whiskeringLeft₂ B).obj F).obj F).obj T) (M : A) (N : A) :
+    HEq (((projectionTransportTensorComparison hF hT hU φ).hom.app M).app N)
+      (((eqToIso (by rw [hF, hU]) ≪≫ φ ≪≫
+        eqToIso (by rw [hF, hT])).hom.app M).app N) := by
+  subst F'
+  subst T'
+  subst U'
+  unfold projectionTransportTensorComparison
+  simp
+
+private theorem projectionPullbackTensor_heq
+    {D : FiniteFieldDatum.{u}}
+    {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
+    {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X}
+    {Q : SixFunctorCompactifiedSquare D}
+    (A : SixFunctorExchangeData S T Q) (M : B Q.Y) (N : B Q.Y) :
+    HEq (((projectionPullbackTensor A).hom.app M).app N)
+      ((A.stage.tensorPullback.hom.app M).app N) := by
+  unfold projectionPullbackTensor
+  have h₁ := projectionTransportTensorComparison_heq A.properPull A.tensorBar A.tensorY
+    A.stage.tensorPullback M N
+  have h₂ := normalizedProjectionPullbackTensor_heq A.stage.tensorPullback
+    A.properPull A.tensorBar A.tensorY M N
+  exact h₁.trans h₂
+
+/-- The normalization and finite-stage cancellation for one input pair.
+Source: thm-sf-pf-field.proof.md, Compatibility.
+
+The proof expands both curried tensorators at the common stage E, replaces the
+supplied pullback comparisons by their canonical maps, and cancels the scalar
+unit and transition isomorphisms against the finite-stage representative
+formula.  This is one pointwise component of the comparison-compatible square;
+it is strictly smaller than the universally quantified bridge theorem.
+(blueprint: lem-sf-common-projection-pullback-tensor-compatibility-component). -/
+theorem projectionTensorComparisonCompatible_component_of_representative_formula
+    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
+    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)
+    (Q : SixFunctorCompactifiedSquare D)
+    [hZ : ∀ x : Q.Z.obj.left, Invertible (C.l : Q.Z.obj.left.residueField x)]
+    [hY : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x)]
+    (M N : sfRationalConstructibleCategory C.l
+      (AlgebraicallyClosedCoefficients.Coefficient C.l C.Qbar E) Q.Y.obj.left)
+    (hrep : HEq (canonicalCommonStagePullbackTensor C.l C.Qbar Q.p.hom.left
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion
+          (Y := Q.Y.obj.left) E).obj M)
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion
+          (Y := Q.Y.obj.left) E).obj N)).hom
+      (ofHom (commonStagePullbackObject C.l C.Qbar Q.p.hom.left
+          (commonStageTensorObject C.l C.Qbar Q.Y.obj.left
+            ((GeneralAlgebraicallyClosedCoefficients.inclusion
+              (Y := Q.Y.obj.left) E).obj M)
+            ((GeneralAlgebraicallyClosedCoefficients.inclusion
+              (Y := Q.Y.obj.left) E).obj N)))
+        (commonStageTensorObject C.l C.Qbar Q.Z.obj.left
+          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left
+            ((GeneralAlgebraicallyClosedCoefficients.inclusion
+              (Y := Q.Y.obj.left) E).obj M))
+          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left
+            ((GeneralAlgebraicallyClosedCoefficients.inclusion
+              (Y := Q.Y.obj.left) E).obj N)))
+        E (by
+          change E.val ⊔ E.val ≤ E.val
+          exact sup_le le_rfl le_rfl)
+        (by
+          change E.val ⊔ E.val ≤ E.val
+          exact sup_le le_rfl le_rfl)
+        (pullbackTensorAtCommonStage C.l C.Qbar Q.p.hom.left
+          ((GeneralAlgebraicallyClosedCoefficients.inclusion
+            (Y := Q.Y.obj.left) E).obj M)
+          ((GeneralAlgebraicallyClosedCoefficients.inclusion
+            (Y := Q.Y.obj.left) E).obj N) E (by
+            change E.val ⊔ E.val ≤ E.val
+            exact sup_le le_rfl le_rfl)).hom)) :
+    ((GeneralAlgebraicallyClosedCoefficients.inclusion E).map
+        (((projectionPullbackTensor
+          ((H.coefficientStages E).rationalExchange Q)).hom.app M).app N) ≫
+      ((projectionCurriedTensorComparison
+        (GeneralAlgebraicallyClosedCoefficients.inclusion E)
+        ((H.coefficientStages E).rationalTensor Q.Z) (H.commonStageTensor Q.Z)
+        (commonProjectionTensorComparison H E Q.Z)).hom.app
+          (((H.coefficientStages E).rational.pull Q.p).obj M)).app
+        (((H.coefficientStages E).rational.pull Q.p).obj N)) =
+    (((H.commonStageComparison E).directAdjunction Q.p).left.symm.inv.app
+        ((((H.coefficientStages E).rationalTensor Q.Y).obj M).obj N) ≫
+      (H.commonStage.pull Q.p).map
+        (((projectionCurriedTensorComparison
+          (GeneralAlgebraicallyClosedCoefficients.inclusion E)
+          ((H.coefficientStages E).rationalTensor Q.Y) (H.commonStageTensor Q.Y)
+          (commonProjectionTensorComparison H E Q.Y)).hom.app M).app N) ≫
+      ((projectionPullbackTensor (H.commonStageExchange Q)).hom.app
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj M)).app
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj N) ≫
+      ((H.commonStageTensor Q.Z).map
+        (((H.commonStageComparison E).directAdjunction Q.p).left.symm.hom.app M)).app
+          ((H.commonStage.pull Q.p).obj
+            ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj N)) ≫
+      ((H.commonStageTensor Q.Z).obj
+          (((H.coefficientStages E).rational.pull Q.p ⋙
+            (GeneralAlgebraicallyClosedCoefficients.inclusion E)).obj M)).map
+        (((H.commonStageComparison E).directAdjunction Q.p).left.symm.hom.app N)) := by
+  sorry
+
+
 theorem projectionTensorComparisonCompatible_of_representative_formula
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)
@@ -142,7 +261,13 @@ theorem projectionTensorComparisonCompatible_of_representative_formula
       (T := (H.coefficientStages E).rationalTensor) (T' := H.commonStageTensor)
       (H.commonStageComparison E) (commonProjectionTensorComparison H E)
       ((H.coefficientStages E).rationalExchange Q) (H.commonStageExchange Q) := by
-  sorry
+  unfold projectionTensorComparisonCompatible Adjunction.ComparisonCompatible
+  intro M N
+  have hr := @hrep M N E (by
+    change E.val ⊔ E.val ≤ E.val
+    exact sup_le le_rfl le_rfl)
+  exact projectionTensorComparisonCompatible_component_of_representative_formula
+    H E Q M N hr
 
 /-- Finite-stage inclusion preserves the canonical tensor/pullback comparison.
 This is a square for pullback and tensor alone; no support functor, direct image,
