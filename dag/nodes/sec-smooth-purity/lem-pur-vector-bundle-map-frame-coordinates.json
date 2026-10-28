@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-vector-bundle-map-frame-coordinates",
+ "kind": "lemma",
+ "title": "Degree-one coordinates of a linear map in pulled-back module frames",
+ "statement": "Let f:T→S be a morphism of Noetherian schemes, F a rank-r locally free module on S, G a rank-s locally free module on T, and m:f^*F→G any module morphism (not assumed invertible). Let v:V(G)→V(F) satisfy the scalar and generator equations MapSpec for the adjoint of m. Choose module frames eS on V⊆S and eT on U⊆T. Let W be any scheme with a:W→U and g:W→V such that (a U.ι) f=g V.ι. Pull the frames to W using the usual pullback, its composition isomorphism, restriction-to-pullback comparison and canonical free-module pullback isomorphism. Express the pullback of m in these frames as the free-module map c (framedPullbackMap). For any lift k of affineTraceMap(a) followed by the inverse eT chart and v into V(F)|V, the j-th forward eS coordinate of k is sum_i pi_W^*(freeMatrix(c)_{i,j}) x_i. This is an individual degree-one equation for an explicitly given rectangular matrix. It makes no assertion about existence of an invertible matrix or equality of inverse charts.",
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "def-amb-vector-integration-charts",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, symmetric-algebra linear-coordinate calculation; also literature/stacks-project/constructions.tex, sections Relative spectrum and Vector bundles (lemma-spec-properties and lemma-category-vector-bundles)"
+ },
+ "proof": [
+  {
+   "text": "Apply the generator equation of MapSpec to the source frame section. Its module image is the pullback-adjunction image of m. The canonical composition and restriction-to-pullback comparisons identify its pullback to W with the image of the standard j-th source section under framedPullbackMap.",
+   "uses": [
+    "def-pur-vector-trace-geometry",
+    "lem-pc-module-pullback-adjunction",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand this image in the standard global basis of the target free module. The coefficients are freeMatrix(c)_{i,j}. Linearity of the degree-one symmetric-algebra inclusion and its structure-algebra isomorphism carries this finite expansion to the corresponding linear combination of degree-one functions.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-trace-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse target chart takes the target degree-one basis functions to the ordered polynomial coordinates; the affine tower comparison identifies these with affineTraceCoordinate. Restriction via the open inclusion and topIso identifies the source degree-one function with its forward-chart coordinate. Pullback on scalar functions is pi_W.appTop, giving the stated formula. Empty bases yield empty sums; no nonempty or affine condition on W was used.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-vector-trace-geometry",
+  "lem-pc-module-pullback-adjunction",
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-vector-integration-charts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, the generator calculation isolated from the matrix invertibility and inverse-chart comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear morphism of algebraic vector bundles acts on coordinates by the matrix of its module morphism in pulled back frames",
+   "results": "Found LinearMap.toMatrix_mulVec_repr, Module.Basis.toMatrix_map and topological bundle-coordinate results; no algebraic symmetric-algebra bundle comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use existing free-module matrices; the remaining geometric generator equation needs its own statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between symmetric algebra vector bundles pulls back each coordinate to the linear combination given by the matrix of the module morphism",
+   "results": "Found generic symmetric-algebra results (including SymmetricAlgebra.lift_ι_apply) and topological bundle coordinate results; no exact algebraic scheme-map coordinate comparison.",
+   "verdict": "The existing module pullback and symmetric-algebra APIs are the ingredients.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord",
+   "results": "Found AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord.",
+   "verdict": "This evaluates the forward affine chart, but does not compare pulled-back module frames.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfVector_appTop_coord|pullbackObjFreeIso|pullback_map_ιFree",
+   "results": "Found forward affine-coordinate evaluation in Mathlib/AlgebraicGeometry/AffineSpace.lean.",
+   "verdict": "The remaining calculation is naturality of the generator prescription through the canonical pullback comparisons.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeCoordinates",
+  "group": "U3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-vector-integration-base-change-coordinates",
+   "place": "proof Step 3: check each degree-one generator"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorBundleMapFrameCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorBundleMapFrameCoordinates.lean",
+  "declaration": "AlgebraicGeometry.VectorBundleZeroSection.map_frame_coordinates",
+  "statement": "theorem map_frame_coordinates\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]\n    (f : T ⟶ S) (r s : ℕ) (F : S.Modules) (G : T.Modules)\n    [F.IsFiniteLocallyFreeOfRank r] [G.IsFiniteLocallyFreeOfRank s]\n    (m : (Scheme.Modules.pullback f).obj F ⟶ G)\n    (v : VectorBundleZeroSection.scheme T s G ⟶ VectorBundleZeroSection.scheme S r F)\n    (hv : VectorTraceGeometry.MapSpec f r s F G\n      ((Scheme.Modules.pullbackPushforwardAdjunction f).homEquiv _ _ m) v)\n    (V : S.Opens) (eS : Trivialization S r F V)\n    (U : T.Opens) (eT : Trivialization T s G U)\n    (W : Scheme.{u}) (a : W ⟶ U.toScheme) (g : W ⟶ V.toScheme)\n    (h : (a ≫ U.ι) ≫ f = g ≫ V.ι)\n    (k : affineTraceTower W s ⟶ ((π S r F) ⁻¹ᵁ V).toScheme)\n    (hk : k ≫ ((π S r F) ⁻¹ᵁ V).ι =\n      (affineTraceMap a s ≫ Etale.vectorIntegrationChart T s G U eT) ≫ v)\n    (j : Fin r) :\n    (k ≫ trivializationMap S r F V eS).appTop (AffineSpace.coord V.toScheme (ULift.up j)) =\n      ∑ i : Fin s, (affineTraceProjection W s).appTop\n        (Scheme.Modules.freeMatrix (framedPullbackMap f r s F G m V eS U eT a g h)\n          (ULift.up i) (ULift.up j)) * affineTraceCoordinate W s i",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261028T055813-L-811537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261028T055813-L-811537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
