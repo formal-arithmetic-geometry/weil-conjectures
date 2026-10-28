@@ -17,23 +17,44 @@
  },
  "proof": [
   {
-   "text": "Use the explicit fixed scalar equivalence and its counit to realize K as the actual pullback. Restrict along each arrow of the covering sieve; inverse-image composition and the finite scalar and constant-complex comparisons identify the restricted K with the constant complex E. These are comparisons of actual derived objects, not merely cohomology groups.",
+   "text": "Put B=lisseTowerEtaleRing(d,n), F=lisseTowerFixedRealization(U.hom followed by g,d,n), and K=F.inverse of the actual pullback. The equivalence counit identifies F(K) with that actual pullback. By ProEt.mem_topology_iff choose a covering presieve P contained in the supplied model sieve T, and write P as ofArrows(W,w). ProEt.mem_precoverage_iff identifies the underlying scheme arrows w_i.left as a proetalePrecoverage of U.left. Thus the full fpqc covering condition, including empty covers, is retained without choosing geometric points or affine refinements.",
    "uses": [
     "def-weil-pbc-lisse-tower-etale-descent-data",
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each member w_i put a=w_i.left and b=U.hom followed by g. The equation w_i.w gives a followed by b = W_i.hom followed by g. Specialize lisseTower_localized_constants_model to the maps a and id of W_i.left, removing the identity inverse image by its derived identity comparison. This identifies the fixed realization of localProEtaleComparison(a,B)(normalizationConstant(E)) with the supplied constantAdicQuotientRealization model.",
+   "uses": [
     "lem-weil-pbc-lisse-tower-localized-constants-model"
    ],
    "elementary": false
   },
   {
-   "text": "Exact inverse image and constant functors commute with H^q. Thus on that cover H^q(K) becomes the constant H^q(E). Refine the covering sieve to the defining proetale covering family (over affine opens where required). For q outside the supplied bounded window this constant sheaf is zero. Restriction to a covering family detects zero sheaves, so K is bounded, including on the empty scheme.",
+   "text": "Localize the ordinary fixed-realization pullback square using lisseTowerFixedRealizationIso and mapDerivedCategorySquareIso. Apply it to K and then map the counit through ordinary module pullback. Use proEtaleCanonicalPullbackComposition_existsUnique to identify the composite actual pullback with the actual pullback along a followed by b. Its coefficient compatibility follows because the chosen comparison along a is the inverse ring inverse-image compositor, so the compositor and its inverse cancel. Rewrite along w_i.w, paste with the supplied model isomorphism and the inverse comparison from the preceding step, and apply the fully faithful fixed realization preimageIso. This gives an isomorphism from the derived fixed-coefficient pullback of K to localProEtaleComparison(a,B)(normalizationConstant(E)).",
    "uses": [
-    "lem-weil-pbc-exact-functor-bounded-below"
+    "lem-weil-pbc-lisse-tower-fixed-pullback",
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-route-pro-etale-canonical-pullback-composition-exists-unique"
    ],
    "elementary": false
   },
   {
-   "text": "The finite coefficient ring B_n makes each finitely generated H^q(E) a finite set. Apply finiteModels_over to the constant models to obtain local constancy in slice sites, and finite_geometricStalk_of_finite_models to obtain finite fixed geometric stalks. Their conjunction is exactly IsLisseProEtaleFixedModuleSheaf. Neither overlap compatibility of independently chosen local markings nor existence of an etale derived model is required.",
+   "text": "For every q apply homology to the preceding isomorphism. The proved mapDerivedCategoryHomologyFunctorIso for inverse image, comparison inverse image and exact constants moves homology through all three functors. ConstantSheafsheafPullbackIso identifies constants after comparison and after inverse image with constants on W_i.left. Consequently the ordinary inverse image of H^q(K) is the constant sheaf with value H^q(E). This explicitly constructs the cohomology-model isomorphisms, rather than assuming a comparison or any compatibility between local markings.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the supplied bounded window [a,b]. For q outside it, exact constants carry the zero module H^q(E) to zero, so every inverse image of H^q(K) is zero. The source-library upperStarIsoLocalizationRestriction identifies these with ordinary localization restrictions. The proved source-library isIso_of_isIso_localizationRestriction applied to the zero map H^q(K) to zero makes that map invertible globally, hence H^q(K) is zero. This argument uses covering membership, not just joint surjectivity, and applies also when U.left and the covering are empty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each q use the finite coefficient ring B and the supplied Module.Finite hypothesis to obtain Finite H^q(E) by Module.finite_of_finite. The same scheme covering and the cohomology-model isomorphisms satisfy finiteModels_over and finite_geometricStalk_of_finite_models. The first gives precisely the localized constant models in IsLocallyConstantProEtaleFixedModuleSheaf; the second gives finiteness at every fixed geometric point. Their conjunction is IsLisseProEtaleFixedModuleSheaf. No etale derived origin, overlap equation, or extra hypothesis is needed.",
    "uses": [
     "lem-weil-pbc-proetale-finite-model-local-constancy",
     "lem-weil-pbc-proetale-finite-model-stalks"
@@ -44,7 +65,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Local calculation preceding lemma-compare-locally-constant (Tag 099Y), together with exactness of inverse image and constant sheaves in sites-modules.tex (Tags 03DC, 093J)."
+  "place": "N2, 2026-10-28: local constant-model calculation at lemma-compare-locally-constant (Tag 099Y), with exact inverse image and constants from sites-modules.tex (Tags 03DC, 093J). Lean proof reuses the existing localized constant model, fixed pullback and canonical derived composition; exact homology and cover conservativity give the two conclusions."
  },
  "mathlib_searches": [
   {
@@ -113,9 +134,13 @@
  },
  "proof_deps": [
   "def-weil-pbc-lisse-tower-etale-descent-data",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-proetale-site",
   "lem-weil-pbc-lisse-tower-localized-constants-model",
+  "lem-weil-pbc-lisse-tower-fixed-pullback",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "lem-route-pro-etale-canonical-pullback-composition-exists-unique",
   "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-derived-normalization-arrows",
   "lem-weil-pbc-proetale-finite-model-local-constancy",
   "lem-weil-pbc-proetale-finite-model-stalks"
  ],
@@ -132,11 +157,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-9e911",
-  "group": "N1",
-  "result": "fix",
-  "landing": "20261028T055722-L-800494",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261028T081747-L-2779939",
   "kind": "interface",
-  "note": "independent cc review: corrected lisse_finite_level_etale_model_comparison (Stacks 09B1/099Z descent of K) and adapted parent lisse_finite_level_etale_model against the clone's nodes, the change record, the 3b importer result and a scratch #print axioms; new inverse-realization-cohomology sorry against its node and the sibling localized-constants lemmas"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

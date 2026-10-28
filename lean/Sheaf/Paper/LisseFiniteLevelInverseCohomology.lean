@@ -7,6 +7,13 @@ module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
 public import Sheaf.Paper.ProEtaleLisseOrigin
+import Sheaf.Paper.LisseTowerLocalizedConstantsModel
+import Sheaf.Paper.LisseTowerFixedPullback
+import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
+import Sheaf.Paper.ProEtaleFiniteModelLocalConstancy
+import Sheaf.Paper.ProEtaleFiniteModelStalks
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-! # Cohomology of the inverse finite scalar realization
 
@@ -23,7 +30,7 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
 universe u
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits Opposite ZeroObject
 namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] HasDerivedCategory.standard
   pbcDerivedRestrict constantAdicQuotientRealization constantAdicFiniteRealization
@@ -76,6 +83,144 @@ theorem lisse_finite_level_inverse_realization_cohomology
     (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
       IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) ∧
       (∀ q : ℤ, IsLisseProEtaleFixedModuleSheaf U.left (lisseTowerEtaleRing d n)
-        ((DerivedCategory.homologyFunctor _ q).obj K)) := by sorry
+        ((DerivedCategory.homologyFunctor _ q).obj K)) := by
+  classical
+  let B := lisseTowerEtaleRing d n
+  let F := lisseTowerFixedRealization (U.hom ≫ g) d n
+  let N₀ := (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N
+  let K := F.asEquivalence.inverse.obj N₀
+  change (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
+    IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) ∧ _
+  let e : F.obj K ≅ N₀ := F.asEquivalence.counitIso.app N₀
+  obtain ⟨T, hT, hm⟩ := hmodels
+  obtain ⟨P, hP, hPT⟩ := ProEt.mem_topology_iff.mp hT
+  obtain ⟨ι, W, w, rfl⟩ := P.exists_eq_ofArrows
+  have hg : Presieve.ofArrows (fun i ↦ (W i).left) (fun i ↦ (w i).left) ∈
+      Scheme.proetalePrecoverage U.left := by
+    rw [ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hP
+    exact hP
+  have hweak (i : ι) : WeaklyEtale (w i).left :=
+    proetalePrecoverage_le_precoverage_weaklyEtale _ hg ⟨i⟩
+  let (i : ι) : WeaklyEtale (w i).left := hweak i
+  have localModel (i : ι) : Nonempty (
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) (w i).left).mapDerivedCategory.obj K ≅
+      (localProEtaleComparison (w i).left B).obj
+        ((normalizationConstant U.left.smallEtaleTopology).obj E)) := by
+    obtain ⟨em⟩ := hm (W i) (w i) (hPT _ _ ⟨i⟩)
+    let a := (w i).left
+    let b := U.hom ≫ g
+    have hab : a ≫ b = (W i).hom ≫ g := by
+      have h := (w i).w
+      change (w i).left ≫ U.hom = (W i).hom ≫ 𝟙 Y at h
+      erw [Category.comp_id] at h
+      simpa only [a, b, Category.assoc] using congrArg (fun t ↦ t ≫ g) h
+    let F' := lisseTowerFixedRealization ((W i).hom ≫ g) d n
+    let C₀ := (normalizationConstant U.left.smallEtaleTopology).obj E
+    let K₀ := (localProEtaleComparison a B).obj C₀
+    obtain ⟨models⟩ :=
+      lisseTower_localized_constants_model ((W i).hom ≫ g) a (𝟙 (W i).left) d
+    let idD := Functor.mapDerivedCategoryNatIso
+        (ProEtale.upperStarId (ModuleCat.{u + 1} B) (W i).left) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+    have model : F'.obj K₀ ≅
+        (constantAdicQuotientRealization ((W i).hom ≫ g) d n).obj E :=
+      F'.mapIso (idD.app K₀).symm ≪≫ models n E
+    let R := (pbcAdicRings X d).obj (op n)
+    let RT := (adicTowerInverseImage b).obj R
+    let RZ := (adicTowerInverseImage (a ≫ b)).obj R
+    let c := (proEtaleRingInverseImageComp a b).symm.app R
+    let Q := proEtaleRingModulePullback a RT RZ c
+    have hc : Iso.refl RZ = proEtaleRingCompositeCoefficients a b R RT RZ
+        (Iso.refl RT) c := by
+      apply Iso.ext
+      change 𝟙 RZ = (proEtaleRingInverseImageComp a b).hom.app R ≫
+        (adicTowerInverseImage a).map (𝟙 RT) ≫
+          (proEtaleRingInverseImageComp a b).inv.app R
+      erw [(adicTowerInverseImage a).map_id RT, Category.id_comp]
+      exact (Iso.hom_inv_id_app (proEtaleRingInverseImageComp a b) R).symm
+    let comp := (proEtaleCanonicalPullbackComposition_existsUnique a b R RT RZ
+      (Iso.refl RT) c (Iso.refl RZ) hc).exists.choose
+    let sq := (lisseTower_fixed_sheaf_pullback a b d n).some
+    let dsq : (ProEtale.upperStar (ModuleCat.{u + 1} B) a).mapDerivedCategory ⋙
+          lisseTowerFixedRealization (a ≫ b) d n ≅
+        lisseTowerFixedRealization b d n ⋙ Q.mapDerivedCategory :=
+      Functor.isoWhiskerLeft _ (lisseTowerFixedRealizationIso (a ≫ b) d n).symm ≪≫
+        Functor.mapDerivedCategorySquareIso sq ≪≫
+        Functor.isoWhiskerRight (lisseTowerFixedRealizationIso b d n) Q.mapDerivedCategory
+    have actual : (lisseTowerFixedRealization (a ≫ b) d n).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} B) a).mapDerivedCategory.obj K) ≅
+        (adicTowerPullback (a ≫ b) R).obj N :=
+      dsq.app K ≪≫ Q.mapDerivedCategory.mapIso e ≪≫ (comp.app N).symm
+    rw [hab] at actual
+    exact ⟨F'.preimageIso (actual ≪≫ em.symm ≪≫ model.symm)⟩
+  have cohomModel (q : ℤ) (i : ι) : Nonempty (
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) (w i).left).obj
+        ((DerivedCategory.homologyFunctor _ q).obj K) ≅
+      (constantSheaf (ProEt.topology (W i).left) (ModuleCat.{u + 1} B)).obj
+        ((DerivedCategory.homologyFunctor _ q).obj E)) := by
+    obtain ⟨em⟩ := localModel i
+    let R := ProEtale.upperStar (ModuleCat.{u + 1} B) (w i).left
+    let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) U.left
+    let H := constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} B)
+    let comparisonConstants : H ⋙ C ≅
+        constantSheaf (ProEt.topology U.left) (ModuleCat.{u + 1} B) :=
+      Functor.isoWhiskerLeft H
+        (Functor.sheafPullbackConstruction.sheafPullbackIso (toProEt U.left)
+          (ModuleCat.{u + 1} B) U.left.smallEtaleTopology (ProEt.topology U.left)).symm ≪≫
+      (toProEt U.left).constantSheafsheafPullbackIso (ModuleCat.{u + 1} B)
+        U.left.smallEtaleTopology (ProEt.topology U.left)
+        (Etale.isTerminalMkId U.left) (ProEt.isTerminalMkId U.left)
+    let pullConstants : constantSheaf (ProEt.topology U.left) (ModuleCat.{u + 1} B) ⋙ R ≅
+        constantSheaf (ProEt.topology (W i).left) (ModuleCat.{u + 1} B) :=
+      Functor.isoWhiskerLeft _
+        (Functor.sheafPullbackConstruction.sheafPullbackIso (proEtaleBaseChange (w i).left)
+          (ModuleCat.{u + 1} B) (ProEt.topology U.left) (ProEt.topology (W i).left)).symm ≪≫
+      (proEtaleBaseChange (w i).left).constantSheafsheafPullbackIso (ModuleCat.{u + 1} B)
+        (ProEt.topology U.left) (ProEt.topology (W i).left) (ProEt.isTerminalMkId U.left)
+        ((ProEt.isTerminalMkId U.left).isTerminalObj (proEtaleBaseChange (w i).left) _)
+    exact ⟨(R.mapDerivedCategoryHomologyFunctorIso q).app K ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso em ≪≫
+      ((R.mapDerivedCategoryHomologyFunctorIso q).app
+        (C.mapDerivedCategory.obj (H.mapDerivedCategory.obj E))).symm ≪≫
+      R.mapIso (((C.mapDerivedCategoryHomologyFunctorIso q).app
+        (H.mapDerivedCategory.obj E)).symm) ≪≫
+      R.mapIso (C.mapIso (((H.mapDerivedCategoryHomologyFunctorIso q).app E).symm)) ≪≫
+      R.mapIso (comparisonConstants.app _) ≪≫ pullConstants.app _⟩
+  have finiteModels (q : ℤ) : ∃ (ι : Type (u + 1)) (V : ι → Scheme.{u})
+      (f : ∀ i, V i ⟶ U.left),
+      Presieve.ofArrows V f ∈ Scheme.proetalePrecoverage U.left ∧
+        ∀ i, ∃ M : ModuleCat.{u + 1} B, Finite M ∧
+          Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} B) (f i)).obj
+            ((DerivedCategory.homologyFunctor _ q).obj K) ≅
+              (constantSheaf (ProEt.topology (V i)) (ModuleCat.{u + 1} B)).obj M) := by
+    have := hfinite q
+    exact ⟨ι, fun i ↦ (W i).left, fun i ↦ (w i).left, hg,
+      fun i ↦ ⟨_, Module.finite_of_finite B, cohomModel q i⟩⟩
+  constructor
+  · obtain ⟨a, b, hab⟩ := hbounded
+    refine ⟨a, b, fun q hq ↦ ?_⟩
+    let H := (DerivedCategory.homologyFunctor _ q).obj K
+    have hz (i : ι) : IsZero
+        ((ProEtale.upperStar (ModuleCat.{u + 1} B) (w i).left).obj H) := by
+      obtain ⟨ec⟩ := cohomModel q i
+      exact ((constantSheaf (ProEt.topology (W i).left)
+        (ModuleCat.{u + 1} B)).map_isZero (hab q hq)).of_iso ec
+    have : IsIso (0 : H ⟶ 0) := by
+      refine ProEtale.isIso_of_isIso_localizationRestriction
+        (ModuleCat.{u + 1} B) (0 : H ⟶ 0) (fun i ↦ (w i).left) hg fun i ↦ ?_
+      let e := ProEtale.upperStarIsoLocalizationRestriction
+        (ModuleCat.{u + 1} B) (w i).left inferInstance
+      exact isIso_of_source_target_iso_zero _ ((hz i).of_iso (e.app H).symm).isoZero
+        (((ProEtale.upperStar (ModuleCat.{u + 1} B) (w i).left).map_isZero
+          (isZero_zero _)).of_iso (e.app 0).symm).isoZero
+    exact (isZero_zero _).of_iso (asIso (0 : H ⟶ 0))
+  · intro q
+    refine ⟨?_, ?_⟩
+    · obtain ⟨I, V, f, hf, h⟩ := ProEtale.finiteModels_over B _ (finiteModels q)
+      exact ⟨I, V, f, hf, fun i ↦ by
+        obtain ⟨M, _, he⟩ := h i
+        exact ⟨M, he⟩⟩
+    · intro Ω hΩ hΩalg x
+      exact ProEtale.finite_geometricStalk_of_finite_models B _ (finiteModels q) Ω x
 
 end AlgebraicGeometry.Scheme
