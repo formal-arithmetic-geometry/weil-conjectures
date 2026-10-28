@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.RationalP1DiagonalTensor
+import Sheaf.Paper.CanonicalSectionProjectionCorePrecomposition
 
 /-! # Categorical cancellation step for the canonical section projection -/
 
@@ -23,9 +24,21 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] firstProjection secondProjection square
-attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] projectionMap singleUnitIso
 attribute [local irreducible] supportedUnitIso pushSectionIso
+
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
+attribute [local implicit_reducible] ProEtale.sheafMonoidalCategory
+  ProEtale.sheafBraidedCategory ProEtale.sheafSymmetricCategory
+  GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
+  GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
+  GrothendieckTopology.symmetricCategory_sheaf_of_essentiallySmall
+  Sheaf.symmetricCategory Sheaf.braidedCategory
+
+attribute [local instance 4000] CondensedRing.projectionModuleAbelian
+  CondensedRing.projectionModuleMonoidal CondensedRing.projectionModuleHasDerived
+attribute [local instance 5000] CondensedRing.projectionSheafMonoidal
+  CondensedRing.projectionCoefficientMonObj CondensedRing.projectionModuleCategory
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -59,6 +72,7 @@ theorem canonical_section_projection_core_coherence
             (by unfold secondProjection; exact pullback.diagonal_snd _))
           (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M)) ≫
       (pushSectionIso Λ Y).inv.app M = 𝟙 _ := by
-  sorry
+  rw [canonical_section_projection_core_precomposition Λ Y M]
+  simp only [Iso.hom_inv_id_app, Functor.id_obj]
 
 end AlgebraicGeometry.ProEtale.RationalP1

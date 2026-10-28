@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-projective-canonical-section-projection-core-precomposition",
+ "kind": "lemma",
+ "title": "Precomposition form of section projection coherence",
+ "statement": "The canonical section/projection composite equals the canonical pushforward comparison before postcomposition by its inverse.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-section-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity before cancellation."
+ },
+ "proof": [
+  {
+   "text": "Apply ringed projection/composition coherence to the diagonal section and second projection, transport through the fixed internal-module comparison, and evaluate on the regular coefficient.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-section-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Categorical precomposition step."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalSectionProjectionCoreCoherence",
+  "date": "2026-10-28",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-canonical-section-projection-core-coherence",
+   "place": "Precomposition before inverse cancellation",
+   "via": [
+    "lem-sfb-projective-canonical-section-projection-core-coherence"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalSectionProjectionCorePrecomposition",
+  "file": "lean/Sheaf/Paper/CanonicalSectionProjectionCorePrecomposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.canonical_section_projection_core_precomposition",
+  "statement": "theorem canonical_section_projection_core_precomposition\n    (Y : Scheme.{u})\n    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :\n    ((ρ_ M).inv ≫\n      (M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫\n        (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)))) ≫\n      projectionMap Λ (secondProjection Y) M\n        ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj\n          (unit Λ (ProjectiveLine Y))) ≫\n      (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n        (sectionTensorMap Λ (diagonalImmersion Y) (secondProjection Y)\n          (pullSectionIso Λ Y (secondProjection Y)\n            (by unfold secondProjection; exact pullback.diagonal_snd _))\n          (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M)) =\n      (pushSectionIso Λ Y).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261028T035022-L-3581392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261028T035022-L-3581392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
