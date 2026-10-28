@@ -1,0 +1,106 @@
+{
+ "id": "new-lem-sf-ambient-pullback-ordinary-right-unit",
+ "kind": "statement",
+ "title": "Ordinary ambient pullback right-unit law",
+ "statement": "Ordinary ambient pullback right-unit law.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 04VG"
+ },
+ "stmt_deps": [
+  "lem-sf-ambient-pullback-site-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the section-normalized direct-image identity comparison and the corresponding adjunction unit law.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 04VG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary ambient pullback right unit law",
+   "results": "No exact project theorem found; proof uses the declared ambient pullback constructions.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Adjunction leftAdjointCompIso unit",
+   "results": "Generic adjunction coherence only; no exact ambient pullback law.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary_pullback_rightUnit",
+   "results": "Only the split declaration in this delivery.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sf-ambient-pullback-ordinary-composition-laws",
+   "place": "Conjunctive decomposition of ordinary unit laws.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientPullbackOrdinaryCompositionLaws",
+  "file": "lean/Sheaf/Paper/AmbientPullbackOrdinaryCompositionLaws.lean",
+  "declaration": "WeilConjectures.AmbientPullbackTensor.ordinary_pullback_rightUnit",
+  "statement": "theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) : ∀ {X Y : Scheme.{t}} (f : X ⟶ Y) (aX : X ⟶ K) (aY : Y ⟶ K) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (_hf : f ≫ aY = aX) (M : Modules ell E Y s), (pull ell E f s).map ((identity ell E Y s).hom.app M) = (comp ell E f (𝟙 Y) s).hom.app M ≫ eqToHom (congrArg (fun a ↦ (pull ell E a s).obj M) (Category.comp_id f))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackOrdinaryCompositionLaws",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261028T034719-L-3536730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261028T034719-L-3536730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
