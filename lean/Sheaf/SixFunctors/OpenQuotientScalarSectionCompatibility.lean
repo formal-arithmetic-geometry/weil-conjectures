@@ -23,7 +23,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The finite scalar comparison is normalized on every extension-by-zero
+/-- STATEMENT-DISPUTED: `finite` is an arbitrary natural isomorphism, but the
+conclusion requires it to be the specific generator-normalized comparison.
+Composing a valid comparison with the automorphism `-𝟙` at an odd residue
+characteristic changes the image of any nonzero extension generator, so the
+conclusion cannot follow from the stated hypotheses.
+
+The finite scalar comparison is normalized on every extension-by-zero
 summand. Evaluating the comparison on the direct-sum generator gives the same
 section as completed extension by zero after scalar restriction. Source: Stacks
 Project, Tags 03DI and 0E8I.
