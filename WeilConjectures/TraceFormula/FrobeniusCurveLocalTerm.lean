@@ -5,10 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.ContractingGraph
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroQbar
 public import WeilConjectures.TraceFormula.CurveSupportedPairing
 public import WeilConjectures.TraceFormula.GraphPieces
+public import WeilConjectures.TraceFormula.LocalTermPoint
+public import WeilConjectures.TraceFormula.PieceAdditivity
+public import WeilConjectures.TraceFormula.PointNormalization
+public import WeilConjectures.TraceFormula.ProperCompatibility
 
 /-!
 

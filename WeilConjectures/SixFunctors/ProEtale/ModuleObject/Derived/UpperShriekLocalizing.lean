@@ -264,19 +264,6 @@ theorem compactlyGenerates_of_isCompactObj (X : Scheme.{u}) [TopologicalSpace.No
   ⟨.of_isStableUnderShift (exists_skeleton_boundedConstructible Λ X) h,
     ObjectProperty.isIdempotentComplete_localizingClosure _⟩
 
-omit [IsCommMonObj Λ] in
-/-- The shifted constructible sheaves `M[-n]` are bounded constructible complexes. -/
-lemma boundedConstructible_singleFunctor_obj (X : Scheme.{u}) (n : ℤ)
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (hM : IsConstructibleModuleObject (condensedRingObj Λ X) M) :
-    boundedConstructible (condensedRingObj Λ X) ((DerivedCategory.singleFunctor _ n).obj M) := by
-  refine ⟨⟨⟨n, inferInstance⟩, ⟨n, inferInstance⟩⟩, fun i ↦ ?_⟩
-  rcases lt_trichotomy i n with hi | rfl | hi
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isGE _ n i hi)
-  · exact IsConstructibleModuleObject.of_iso
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ i).app M).symm hM
-  · exact isConstructibleModuleObject_of_isZero _ (DerivedCategory.isZero_of_isLE _ n i hi)
-
 /-- A constructible sheaf `M`, placed in degree `0`, as an object of `Loc(Dᵇc(X)⟦Λ⟧)`. -/
 noncomputable abbrev singleLocalizingBoundedConstructible (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
