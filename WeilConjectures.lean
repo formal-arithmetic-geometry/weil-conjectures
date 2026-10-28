@@ -9480,6 +9480,7 @@ public import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 public import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 public import WeilConjectures.FieldTheory.SmoothFractionFieldLocalizations
 public import WeilConjectures.FieldTheory.SpanningSetUnitMatrix
+public import WeilConjectures.FieldTheory.TameLaurentSeries
 public import WeilConjectures.FieldTheory.TensorFieldExtensionGaloisInvariants
 public import WeilConjectures.FieldTheory.TensorOppositeMatrixLifts
 public import WeilConjectures.FieldTheory.TensorProductDiagonal
