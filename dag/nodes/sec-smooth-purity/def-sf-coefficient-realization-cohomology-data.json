@@ -1,0 +1,128 @@
+{
+ "id": "def-sf-coefficient-realization-cohomology-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-coefficient-cohomology-comparison",
+   "place": "Unit-normalized realization data and its explicit cohomology functors"
+  }
+ },
+ "kind": "definition",
+ "title": "Unit-normalized realization data and its explicit cohomology functors",
+ "statement": "With the coefficient and native pair categories [def-sf-coefficient-endpoint-objects, def-sf-native-derived-pair-cohomology], Data consists of an additive ordinary realization to native ordinary derived sheaves, a shift structure and shift-compatible Frobenius comparison, constructibility of all cohomology objects, and an isomorphism at the constant unit. For a supplied Data, define pairs by transport along its Frobenius comparison, pairCohomology by composing with native ordinary pair cohomology, and cohomology by restricting to the full subcategory of constructible Weil sheaves. No realization is chosen in these definitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+ },
+ "stmt_deps": [
+  "def-sf-native-derived-pair-cohomology",
+  "def-weil-finite-field-fiber",
+  "lem-pur-constant-purity-frobenius-square",
+  "def-sf-coefficient-endpoint-objects",
+  "def-weil-constant-weil-structure",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "IsoAlgebra.mapOfNatIso transports the given action. Compose with ordinary pair cohomology. The constructible field proves membership degree by degree, so ObjectProperty.lift gives the native constructible cohomology functor.",
+   "uses": [
+    "def-sf-native-derived-pair-cohomology",
+    "lem-pur-constant-purity-frobenius-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-derived-pair-cohomology",
+  "lem-pur-constant-purity-frobenius-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an exact functor commutes with composition and natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ExactFunctor.whiskeringLeft, CategoryTheory.ExactFunctor.whiskeringRight, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|TateTwist",
+   "results": "8 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit normalized equivariant realization identifies the shifted geometric Tate constant with the native Tate sheaf in its single cohomological degree",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_apply_coe, CompHausLike.LocallyConstant.unitIso, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CompHausLike.LocallyConstant.unit, Ctop.Realizer.ofEquiv_σ, CompHausLike.LocallyConstant.counit. No exact coefficient/native comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CoefficientCohomologyComparison",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CoefficientRealizationData",
+  "file": "lean/Sheaf/WeilSheaf/CoefficientRealizationData.lean",
+  "declaration": "WeilConjectures.CoefficientRealization.Data",
+  "declarations": [
+   "WeilConjectures.CoefficientRealization.Source",
+   "WeilConjectures.CoefficientRealization.Pairs",
+   "WeilConjectures.CoefficientRealization.Native",
+   "WeilConjectures.CoefficientRealization.Data",
+   "WeilConjectures.CoefficientRealization.pairs",
+   "WeilConjectures.CoefficientRealization.pairCohomology",
+   "WeilConjectures.CoefficientRealization.pairCohomology_mem",
+   "WeilConjectures.CoefficientRealization.cohomology"
+  ],
+  "statement": "structure Data",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9f507",
+  "group": "F4",
+  "result": "fix",
+  "landing": "20261028T055647-L-791621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9f507",
+  "group": "F4",
+  "result": "fix",
+  "landing": "20261028T055647-L-791621",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (7 modules) against the clone and the item node; moved defs verbatim vs the change record; 3 direct importers compiled in a sandbox with the delivery; #print axioms on the proved declarations; new-node stmt_deps against the declarations their statements use"
+ }
+}

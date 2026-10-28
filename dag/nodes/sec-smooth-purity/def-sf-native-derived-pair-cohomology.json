@@ -1,0 +1,120 @@
+{
+ "id": "def-sf-native-derived-pair-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-coefficient-cohomology-comparison",
+   "place": "Native derived forgetting and cohomology of ordinary Frobenius pairs"
+  }
+ },
+ "kind": "definition",
+ "title": "Native derived forgetting and cohomology of ordinary Frobenius pairs",
+ "statement": "For a finite field k0, an invertible prime ell and a k0-scheme X, let F be native ordinary Frobenius pullback [def-sf-native-weil-derived-framework]. Define the pair category IsoAlgebra D(F). Apply homology via the canonical exact-functor commutation isomorphism to obtain ordinary Weil sheaves. Exact native forgetting U induces a functor to these derived pairs, with action D(U)D(F) -> D(UF) -> D(U) induced by the termwise structure natural isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "Use mapDerivedCategoryCompIso inverse and mapDerivedCategoryNatIso of strNatIso for theta. Its naturality makes the forgetful morphisms intertwine. For homology apply IsoAlgebra.mapOfNatIso to the exact Frobenius homology comparison. Faithfulness of ordinary forgetting proves the functor laws.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an exact functor commutes with composition and natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ExactFunctor.whiskeringLeft, CategoryTheory.ExactFunctor.whiskeringRight, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|TateTwist",
+   "results": "8 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean. These provide exact homology infrastructure, not the coefficient realization or its normalized Tate endpoint.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit normalized equivariant realization identifies the shifted geometric Tate constant with the native Tate sheaf in its single cohomological degree",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_apply_coe, CompHausLike.LocallyConstant.unitIso, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CompHausLike.LocallyConstant.unit, Ctop.Realizer.ofEquiv_σ, CompHausLike.LocallyConstant.counit. No exact coefficient/native comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CoefficientCohomologyComparison",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativePairCohomology",
+  "file": "lean/Sheaf/WeilSheaf/NativePairCohomology.lean",
+  "declaration": "WeilConjectures.NativePairCohomology.homology",
+  "declarations": [
+   "WeilConjectures.NativePairCohomology.Pairs",
+   "WeilConjectures.NativePairCohomology.homology",
+   "WeilConjectures.NativePairCohomology.theta",
+   "WeilConjectures.NativePairCohomology.native"
+  ],
+  "statement": "def homology (n : ℤ) : Pairs k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9f507",
+  "group": "F4",
+  "result": "fix",
+  "landing": "20261028T055647-L-791621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-9f507",
+  "group": "F4",
+  "result": "fix",
+  "landing": "20261028T055647-L-791621",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean (7 modules) against the clone and the item node; moved defs verbatim vs the change record; 3 direct importers compiled in a sandbox with the delivery; #print axioms on the proved declarations; new-node stmt_deps against the declarations their statements use"
+ }
+}

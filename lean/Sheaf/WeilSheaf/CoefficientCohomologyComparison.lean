@@ -8,122 +8,37 @@ public import Sheaf.Paper.ConstantPurityFrobeniusSquare
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.TateTwist
 
-/-! # Cohomology comparison between coefficient Frobenius pairs and native Weil sheaves
+public import Sheaf.WeilSheaf.CoefficientEndpointObjects
+import Sheaf.WeilSheaf.ExceptionalCoefficientRealization
+import Sheaf.WeilSheaf.RealizedTateCohomology
+import Sheaf.WeilSheaf.NativePairHomologyComparison
 
-This comparison concerns cohomology, not an equivalence of the two derived categories.
-It requires no smoothness. The exceptional endpoint uses the inverse-exchange mate;
-the Tate endpoint uses the root-line Frobenius. Smooth purity is a separate input.
+/-! # Cohomology comparison between coefficient pairs and native Weil sheaves
+
+Cohomology is constructed from ordinary derived pairs. The two endpoint calculations
+are performed before the final restriction to constructible Weil sheaves.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-
 universe u
-
 attribute [local instance 1100] CategoryTheory.instOverClass
-
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 open WeilConjectures.ConstantPurityFrobenius
-
 namespace WeilConjectures.NativeCoefficientCohomology
-
 variable (P : PurityFiniteSetting.{u})
   (X₀ : Over (Spec (.of P.field.k₀)))
   [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]
-
-local instance nativeStructureOver : X₀.hom.IsOver (Spec (.of P.field.k₀)) := by
-  constructor
-  dsimp only [autoParam]
-  change X₀.hom ≫ 𝟙 _ = X₀.hom
-  rw [Category.comp_id]
-
-local instance pointFiniteType : LocallyOfFiniteType (point P.field).hom :=
-  inferInstanceAs (LocallyOfFiniteType (𝟙 (Spec (.of P.field.k₀))))
-local instance pointQuasiCompact : QuasiCompact (point P.field).hom :=
-  inferInstanceAs (QuasiCompact (𝟙 (Spec (.of P.field.k₀))))
-local instance pointSeparated : IsSeparated (point P.field).hom :=
-  inferInstanceAs (IsSeparated (𝟙 (Spec (.of P.field.k₀))))
-local instance pointMapSeparated : IsSeparated (pointMap P.field X₀).left :=
-  inferInstanceAs (IsSeparated X₀.hom)
-local instance pointMapFiniteType : LocallyOfFiniteType (pointMap P.field X₀).left :=
-  inferInstanceAs (LocallyOfFiniteType X₀.hom)
-local instance pointMapQuasiCompact : QuasiCompact (pointMap P.field X₀).left :=
-  inferInstanceAs (QuasiCompact X₀.hom)
-local instance sourceFiniteType :
-    LocallyOfFiniteType ((P.field.geometricFiber X₀).left ↘ Spec (.of P.field.k)) :=
-  (FrobeniusExchange.fiber_finiteType P.field X₀).1
-local instance sourceQuasiCompact :
-    QuasiCompact ((P.field.geometricFiber X₀).left ↘ Spec (.of P.field.k)) :=
-  (FrobeniusExchange.fiber_finiteType P.field X₀).2
-local instance targetFiniteType :
-    LocallyOfFiniteType ((P.field.geometricFiber (point P.field)).left ↘
-      Spec (.of P.field.k)) :=
-  (FrobeniusExchange.fiber_finiteType P.field (point P.field)).1
-local instance targetQuasiCompact :
-    QuasiCompact ((P.field.geometricFiber (point P.field)).left ↘ Spec (.of P.field.k)) :=
-  (FrobeniusExchange.fiber_finiteType P.field (point P.field)).2
-local instance geometricMapOver :
-    (FrobeniusExchange.fiberMap P.field (pointMap P.field X₀)).IsOver
-      (Spec (.of P.field.k)) := zlFiberMap_isOver P.field (pointMap P.field X₀)
-local instance geometricMapSeparated :
-    IsSeparated (FrobeniusExchange.fiberMap P.field (pointMap P.field X₀)) :=
-  (FrobeniusExchange.fiberMap_properties P.field (pointMap P.field X₀)).1
-local instance geometricMapFiniteType :
-    LocallyOfFiniteType (FrobeniusExchange.fiberMap P.field (pointMap P.field X₀)) :=
-  (FrobeniusExchange.fiberMap_properties P.field (pointMap P.field X₀)).2.1
-local instance geometricMapQuasiCompact :
-    QuasiCompact (FrobeniusExchange.fiberMap P.field (pointMap P.field X₀)) :=
-  (FrobeniusExchange.fiberMap_properties P.field (pointMap P.field X₀)).2.2
-local instance sourceUnits : ∀ x : (P.field.geometricFiber X₀).left,
-    Invertible (P.coefficients.l : (P.field.geometricFiber X₀).left.residueField x) :=
-  fun x ↦ sfWeilPrimeInvertible P.field P.coefficients.l P.coefficients.different X₀ x
-local instance targetUnits : ∀ x : (P.field.geometricFiber (point P.field)).left,
-    Invertible (P.coefficients.l :
-      (P.field.geometricFiber (point P.field)).left.residueField x) :=
-  fun x ↦ sfWeilPrimeInvertible P.field P.coefficients.l P.coefficients.different
-    (point P.field) x
-
-/-- The actual coefficient Frobenius pairs on the geometric fibre.
-Source: constant-purity Frobenius square, Q.
-(blueprint: lem-sf-native-coefficient-cohomology-comparison) -/
-abbrev Pairs :=
-  Endofunctor.IsoAlgebra (sourceFrobenius P.field P.coefficients.l
-    P.coefficients.different P.coefficients.Qbar X₀)
-
-variable (c₀ : Compactification X₀.hom)
+  (c₀ : Compactification X₀.hom)
   (S : systems P.field P.coefficients.l P.coefficients.different P.coefficients.Qbar X₀)
-
-/-- The ordinary exceptional constant pair, with the inverse-exchange adjunction mate.
-Source: constant-purity Frobenius square, G(theta_0) e.
-(blueprint: lem-sf-native-coefficient-cohomology-comparison) -/
-def exceptionalConstant : Pairs P X₀ :=
-  let D := P.field
-  let l := P.coefficients.l
-  let hl := P.coefficients.different
-  let Ω := P.coefficients.Qbar
-  let G := (operation D l hl Ω X₀ (point D) (pointMap D X₀) c₀ S .closed).G
-  let K := unit D l hl Ω (D.geometricFiber (point D)).left
-  Endofunctor.IsoAlgebra.mk (G.obj K)
-    ((exceptionalIso D l hl Ω X₀ (point D) (pointMap D X₀) c₀ S).app K ≪≫
-      G.mapIso (constantWeilAlgebraicallyClosedComplex l D hl (point D) Ω).str)
-
-/-- The purity-source pair, with its canonical constant, Tate and shift Frobenius.
-It exists on any separated finite-type model, with no smoothness assumption.
-Source: constant-purity Frobenius square, H(Lambda), theta_H,can.
-(blueprint: lem-sf-native-coefficient-cohomology-comparison) -/
-def twistedConstant (d : ℕ) : Pairs P X₀ :=
-  let D := P.field
-  let l := P.coefficients.l
-  let hl := P.coefficients.different
-  let Ω := P.coefficients.Qbar
-  Endofunctor.IsoAlgebra.mk
-    ((source D l hl Ω X₀ (point D) (pointMap D X₀) d).obj
-      (unit D l hl Ω (D.geometricFiber (point D)).left))
-    (canonicalSourceTheta D l hl Ω X₀ (point D) (pointMap D X₀) d)
 
 variable [Fact (ringChar P.field.k₀ ≠ P.coefficients.l)]
 
+attribute [local instance] nativeStructureOver
+
+-- The original universal adjunction binder is intentionally unused in its conclusion.
+set_option linter.unusedVariables false in
 /-- Cohomology of ordinary coefficient Frobenius pairs has a native Weil-sheaf model.
 The same functors work in every degree, for every native exceptional adjoint, and for
 all nonnegative Tate powers. No smoothness or geometric purity is asserted here.
@@ -177,6 +92,18 @@ theorem coefficient_cohomology_comparison :
         (WeilSheaf.tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d).tensorObj
           (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l X₀.left)
           (WeilSheaf.isLisse_tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d))) := by
-  sorry
+  obtain ⟨R, hR⟩ := exceptional_realization P X₀ c₀ S
+  refine ⟨fun n ↦ CoefficientRealization.cohomology P X₀ R n, ?_, ?_⟩
+  · intro J adj n
+    obtain ⟨e⟩ := hR J adj
+    obtain ⟨h⟩ := NativePairCohomology.native_homology P.field.k₀ P.coefficients.l X₀.left
+      (J.obj (WeilSheaf.toComplex.obj
+        (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l
+          (Spec (.of P.field.k₀))))) n
+    exact ⟨ObjectProperty.isoMk _
+      (h ≪≫ (NativePairCohomology.homology P.field.k₀ P.coefficients.l X₀.left n).mapIso e)⟩
+  · intro d
+    obtain ⟨e⟩ := realized_tate_cohomology P X₀ R d
+    exact ⟨ObjectProperty.isoMk _ e⟩
 
 end WeilConjectures.NativeCoefficientCohomology
