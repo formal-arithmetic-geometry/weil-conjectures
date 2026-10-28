@@ -589,7 +589,7 @@ def mark_failed(fails: dict) -> int:
     return n
 
 
-def precompile(rows: dict, cands: list[str], g: dict, deadline: float, state_path: pathlib.Path = STATE,
+def precompile_calls(rows: dict, cands: list[str], g: dict, deadline: float, state_path: pathlib.Path = STATE,
                mark: bool = True, parallel: int = PARALLEL) -> dict:
     """compile each candidate (with its quarantined imports first, in the same call) against the published build;
     candidates in dependency order (one whose quarantined imports contain another candidate waits for it); results
@@ -710,6 +710,271 @@ def precompile(rows: dict, cands: list[str], g: dict, deadline: float, state_pat
         t.join()
     counts["NOT RUN"] += len(todo)
     return dict(counts)
+
+
+
+# ---------------------------------------------------------------- the shared pre-compile (2026-10-28)
+# 2026-10-28 09:20 (lead): the per-candidate calls (precompile_calls) sent each candidate with its whole quarantined
+# import chain, so a chain of ~100 quarantined modules went through the compile service once per candidate (~85 s per
+# call even with the service's result cache: closure keys, tar transfer and artifact copies for every job), and 683
+# blocked modules trickled back over an hour. The shared pre-compile compiles the union of the candidates' quarantined
+# closures ONCE, in import order, several files at a time (each `lean -j1`, LEAN_NUM_THREADS=1, the 60 s rule, the
+# 120 s run limit), into one output tree per published build, local/rework-drift-cache/<published>/build. A module's
+# compiled files are reused, in this run and in later runs against the same published build, while its key is
+# unchanged: the hash of its text and of the keys of the modules of the tree it imports (<rel>.dkey next to the .olean).
+# Committed library modules whose compiled files the published build lacks are compiled into the same tree first.
+SHARED = os.environ.get("SHEAF_DRIFT_SHARED", "1") != "0"
+SHARED_PARALLEL = int(os.environ.get("SHEAF_DRIFT_SHARED_PARALLEL", "16"))
+CACHE_DIR = ROOT / "local" / "rework-drift-cache"
+ACCEPT = int(os.environ.get("SHEAF_FILE_TIMEOUT", "60"))
+RUN_LIMIT = max(ACCEPT, int(os.environ.get("SHEAF_FILE_RUN_LIMIT", "120")))
+LEAN = ROOT / "lean"
+PUB = LEAN / ".lake" / "build" / "lib" / "lean"
+
+
+def _lean_opts() -> list[str]:
+    """the [leanOptions] of lean/lakefile.toml, as tools/remote_compile_set.py passes them"""
+    out, on = [], False
+    try:
+        lines = (LEAN / "lakefile.toml").read_text().split("\n")
+    except OSError:
+        return out
+    for l in lines:
+        if l.startswith("[leanOptions]"):
+            on = True; continue
+        if l.startswith("["):
+            on = False
+        m = re.match(r"([A-Za-z][\w.]*)\s*=\s*([^#]*)", l) if on else None
+        if m:
+            out.append(f"-D{m.group(1)}={m.group(2).strip().strip(chr(34))}")
+    return out
+
+
+def _upstream(rel: str) -> bool:
+    return rel.startswith("WeilConjectures/") or rel.startswith("Comparator/")
+
+
+def _rel(m: str) -> str:
+    return m.replace(".", "/") + ".lean"
+
+
+def _run_lean(rel: str, src_root: pathlib.Path, out_root: pathlib.Path) -> dict:
+    """compile src_root/rel into out_root (olean and companions): {rc, out, secs}; rc 124 when stopped at RUN_LIMIT"""
+    o = out_root / rel[:-5]
+    o.parent.mkdir(parents=True, exist_ok=True)
+    for x in o.parent.glob(o.name + ".*"):
+        x.unlink()
+    lp = ":".join([str(out_root), str(PUB)] + sorted(str(x) for x in (LEAN / ".lake" / "packages").glob("*/.lake/build/lib/lean")))
+    thp = [str(TOOLS / "thp-off")] if os.access(TOOLS / "thp-off", os.X_OK) else []
+    cmd = ["nice", "-n", "19", *thp, str(pathlib.Path.home() / ".elan" / "bin" / "lean"), "-j1", *_lean_opts(),
+           *([] if _upstream(rel) else ["-DautoImplicit=false"]), "-R", str(src_root),
+           "-o", str(o) + ".olean", "-i", str(o) + ".ilean", str(src_root / rel)]
+    t0 = time.time()
+    try:
+        p = subprocess.run(cmd, cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=lp, LEAN_NUM_THREADS="1"),
+                           capture_output=True, text=True, timeout=RUN_LIMIT)
+        rc, out = p.returncode, (p.stdout or "") + (p.stderr or "")
+    except subprocess.TimeoutExpired as e:
+        rc = 124
+        out = (e.stdout.decode(errors="ignore") if isinstance(e.stdout, bytes) else (e.stdout or "")) + \
+            f"\nNOT ACCEPTED: stopped after {RUN_LIMIT} s\n"
+    secs = round(time.time() - t0, 1)
+    if rc == 0 and secs > ACCEPT:
+        out += f"\nNOT ACCEPTED: compiled in {secs} s > {ACCEPT} s, the limit for one file\n"
+    return {"rc": rc, "out": out, "secs": secs}
+
+
+def shared_plan(cands, rows: dict, g: dict, live: set, has_pub=None, lean_text=None) -> tuple[list[str], dict]:
+    """(modules to compile in import order, {module: source path}): the candidates, their quarantined imports (live
+    rework rows) and the committed library modules on the way that the published build lacks"""
+    import rework
+    has_pub = has_pub or (lambda m: (PUB / (_rel(m)[:-5] + ".olean")).is_file())
+    lean_text = lean_text or (lambda m: (LEAN / _rel(m)).is_file())
+    src: dict = {}
+    st = list(cands)
+    while st:
+        m = st.pop()
+        if m in src:
+            continue
+        if m in live:
+            src[m] = ROOT / ((rows.get(m) or {}).get("quarantine") or rework.qpath(m))
+        elif not has_pub(m) and lean_text(m) and m.startswith(("Sheaf.", "WeilConjectures.", "Weil.", "Comparator.")):
+            src[m] = LEAN / _rel(m)
+        else:
+            continue
+        st.extend(i for i in g.get(m, ()) if i not in src)
+    return topo(set(src), g), src
+
+
+def shared_compile(order: list[str], src: dict, g: dict, tree: pathlib.Path, deadline: float,
+                   parallel: int = SHARED_PARALLEL, run=None, on_result=None) -> dict:
+    """compile `order` (import order) into tree/build from copies in tree/src, `parallel` files at a time, reusing a
+    module whose <rel>.dkey matches its key. Returns {module: {status, rc, out, secs, reused}}; status OK, FAIL, SLOW
+    (compiled, over the 60 s rule), DEP (an import of the tree failed), INFRA, NOT RUN (deadline)."""
+    run = run or _run_lean
+    build, srcroot = tree / "build", tree / "src"
+    inset = set(order)
+    deps = {m: {i for i in g.get(m, ()) if i in inset} for m in order}
+    res: dict = {}
+    keys: dict = {}
+    lock = threading.Lock()
+    todo = list(order)
+    running: set = set()
+    # most dependents first among the ready ones (an import order is kept by ready())
+    wt = collections.Counter()
+    for m in order:
+        for d in deps[m]:
+            wt[d] += 1
+    todo.sort(key=lambda m: -wt[m])
+
+    def key_of(m):
+        h = hashlib.sha256(m.encode())
+        try:
+            h.update(src[m].read_bytes())
+        except OSError:
+            return None
+        for d in sorted(deps[m]):
+            h.update((d + ":" + str(keys.get(d))).encode())
+        return h.hexdigest()
+
+    def work():
+        while True:
+            with lock:
+                if not todo:
+                    return
+                pick = next((m for m in todo if all(d in res for d in deps[m])), None)
+                if pick is None:
+                    wait = True
+                else:
+                    wait = False; todo.remove(pick); running.add(pick)
+            if wait:
+                time.sleep(0.5); continue
+            m = pick
+            bad = [d for d in deps[m] if res[d]["status"] in ("FAIL", "DEP", "INFRA", "NOT RUN")
+                   or (res[d]["status"] == "SLOW" and res[d].get("rc") != 0)]
+            rel = _rel(m)
+            if bad:
+                r = {"status": "DEP" if any(res[d]["status"] in ("FAIL", "DEP", "SLOW") for d in bad) else "INFRA",
+                     "rc": None, "out": f"import {sorted(bad)[0]} did not compile", "secs": 0, "reused": False}
+            elif time.time() > deadline - 60:
+                r = {"status": "NOT RUN", "rc": None, "out": "", "secs": 0, "reused": False}
+            else:
+                with lock:
+                    k = key_of(m)
+                kf = build / (rel[:-5] + ".dkey")
+                ol = build / (rel[:-5] + ".olean")
+                r = None
+                try:
+                    if k and ol.is_file() and kf.read_text().split()[0] == k:
+                        r = {"status": "OK", "rc": 0, "out": "", "secs": float(kf.read_text().split()[1]),
+                             "reused": True}
+                except (OSError, IndexError, ValueError):
+                    r = None
+                if r is None:
+                    sp = srcroot / rel
+                    sp.parent.mkdir(parents=True, exist_ok=True)
+                    try:
+                        sp.write_bytes(src[m].read_bytes())
+                        x = run(rel, srcroot, build)
+                    except OSError as e:
+                        x = {"rc": None, "out": f"source unreadable: {e!r}", "secs": 0}
+                    if x.get("rc") is None:
+                        st = "INFRA"
+                    elif x["rc"] == 0:
+                        st = "SLOW" if x["secs"] > ACCEPT else "OK"
+                    elif x["rc"] == 124:
+                        st = "SLOW"
+                    else:
+                        mm = _MISSING.search(x.get("out") or "")
+                        st = "INFRA" if mm or "environment already contains" in (x.get("out") or "") else "FAIL"
+                    r = dict(x, status=st, reused=False)
+                    try:
+                        if st == "OK" and k:
+                            kf.write_text(f"{k} {x['secs']}\n")
+                        elif kf.exists():
+                            kf.unlink()
+                    except OSError:
+                        pass
+                with lock:
+                    keys[m] = k if r["status"] in ("OK", "SLOW") and r.get("rc") == 0 else None
+            with lock:
+                res[m] = r; running.discard(m)
+            if on_result:
+                on_result(m, r)
+    ths = [threading.Thread(target=work) for _ in range(max(1, parallel))]
+    for t in ths:
+        t.start()
+    for t in ths:
+        t.join()
+    return res
+
+
+def _prune_cache(keep: str) -> None:
+    """keep the output trees of the current and the previous published build"""
+    try:
+        trees = sorted((p for p in CACHE_DIR.iterdir() if p.is_dir()), key=lambda p: p.stat().st_mtime)
+    except OSError:
+        return
+    import shutil
+    for p in trees[:-2]:
+        if p.name != keep and p.resolve().parent == CACHE_DIR.resolve():
+            shutil.rmtree(p, ignore_errors=True)
+
+
+def precompile_shared(rows: dict, cands: list[str], g: dict, deadline: float, state_path: pathlib.Path = STATE,
+                      mark: bool = True, parallel: int = SHARED_PARALLEL) -> dict:
+    """the candidates and their quarantined closures compiled once (shared_plan, shared_compile); every module of the
+    rework rows gets its result in `state_path`; a module failing on its own text becomes an error root (mark_failed)"""
+    import rework
+    live = {m for m in rows if not rework.landed(m)}
+    pub = published()
+    order, src = shared_plan(cands, rows, g, live)
+    tree = CACHE_DIR / (pub[:12] or "none")
+    tree.mkdir(parents=True, exist_ok=True)
+    os.utime(tree)
+    _prune_cache(tree.name)
+    cset = set(cands)
+    counts = collections.Counter()
+    t0 = time.time()
+    log(f"shared pre-compile: {len(cands)} candidate(s), {len(order)} module(s) to compile once "
+        f"({sum(1 for m in order if m in live)} quarantined) into {tree.relative_to(ROOT)}")
+
+    def on_result(m, r):
+        s = r["status"]
+        if m in cset:
+            counts[s] += 1
+        if m in rows and s in ("OK", "FAIL", "SLOW", "INFRA"):
+            b = blob_of(m, rows)
+
+            def put(d):
+                old = d["results"].get(m) or {}
+                tries = (old.get("tries", 0) + 1) if old.get("blob") == b and old.get("status") == "INFRA" else 1
+                d["results"][m] = {"blob": b, "pub": pub, "status": s, "secs": r.get("secs"),
+                                   "time": time.strftime("%FT%TZ", time.gmtime()), "tries": tries,
+                                   "out": (r.get("out") or "")[-3000:], "via": "" if m in cset else "shared"}
+            update_state(put, state_path)
+        if s == "FAIL" and m in rows and mark:
+            try:
+                n = mark_failed({m: (blob_of(m, rows), message(r.get("out") or ""))})
+                log(f"{n} error root(s) marked: {m}")
+            except Exception as exc:  # noqa: BLE001
+                log(f"marking failed roots failed ({exc!r})"[:400])
+        if not r.get("reused"):
+            log(f"{m}: {s} ({r.get('secs')} s, shared)" + (f" | {message(r.get('out') or '')[:300]}"
+                                                           if s in ("FAIL", "SLOW", "INFRA") else ""))
+    res = shared_compile(order, src, g, tree, deadline, parallel, on_result=on_result)
+    reused = sum(1 for r in res.values() if r.get("reused"))
+    log(f"shared pre-compile done in {time.time() - t0:.0f} s: {len(res)} module(s), {reused} reused, "
+        f"candidates {dict(counts)}")
+    return dict(counts)
+
+
+def precompile(rows: dict, cands: list[str], g: dict, deadline: float, state_path: pathlib.Path = STATE,
+               mark: bool = True, parallel: int = PARALLEL) -> dict:
+    """the shared pre-compile (precompile_shared); SHEAF_DRIFT_SHARED=0: one compile-service call per candidate"""
+    if SHARED:
+        return precompile_shared(rows, cands, g, deadline, state_path, mark)
+    return precompile_calls(rows, cands, g, deadline, state_path, mark, parallel)
 
 
 def run(measure: bool = False) -> int:
