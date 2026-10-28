@@ -1,129 +1,126 @@
 {
-  "id": "lem-coef-qbar-verdier-finite-coherence",
-  "kind": "lemma",
-  "title": "Unit and tower equations for the normalized finite Verdier comparisons",
-  "statement": "Fix a finite-field datum D with field k and characteristic p, a prime l different from p, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type scheme X over k. Use the actual raw rational finite stages, scalar extensions, tensor comparisons and common-stage pair category of [def-sf-common-stage-verdier-data]. For every Finite F of [def-sf-common-stage-verdier-data], its specified beta maps satisfy FiniteCoherent: the actual stage-unit equation and actual associator equation, including repeated fields. Such normalized Finite data exist; finiteData_nonempty is the simultaneous rational Verdier construction with the finite Hom identifications.",
-  "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-    "place": "Final coefficient-transport paragraph; core descent retained steps 1--5 and formal retract restriction step 10"
-  },
-  "stmt_deps": [
-    "def-sf-common-stage-verdier-data"
-  ],
-  "proof": [
-    {
-      "text": "Obtain simultaneous rational Verdier data, choose integral dualizing presentations in the existential proof, and specialize the normalized extensions at the coefficient inclusions. Choose finite Hom identifications at the identity field map. Taking beta to be the scalar comparison makes betaNormalized reflexive. This is the preserved finite-data construction, with the original finite_data_exists theorem remaining a wrapper in the item.",
-      "uses": [
-        "thm-coef-rational-verdier",
-        "lem-coef-rational-operations"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Identify beta with the normalized rational scalar comparison using betaNormalized. Apply the rational unit and composition equations to the normalized extensions.",
-      "uses": [
-        "thm-coef-rational-verdier"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Identify the rationalized integral tensor unit and associator with the prescribed stage unitor and associator by their normalizations. The coefficient inclusions compose by their defining laws, so these equations are exactly FiniteCoherent, also when fields coincide.",
-      "uses": [
-        "lem-weil-scalar-extension-composition",
-        "lem-coef-integral-finite-extension",
-        "def-weil-algebraically-closed-coefficients"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-coef-qbar-verdier-finite-coherence",
+ "kind": "lemma",
+ "title": "Unit and tower equations for the normalized finite Verdier comparisons",
+ "statement": "Fix a finite-field datum D with field k and characteristic p, a prime l different from p, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type scheme X over k. Use the actual raw rational finite stages, scalar extensions, tensor comparisons and common-stage pair category of [def-sf-common-stage-verdier-data]. For every Finite F of [def-sf-common-stage-verdier-data], its specified beta maps satisfy FiniteCoherent: the actual stage-unit equation and actual associator equation, including repeated fields. Such normalized Finite data exist; finiteData_nonempty is the simultaneous rational Verdier construction with the finite Hom identifications.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph; core descent retained steps 1--5 and formal retract restriction step 10"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain simultaneous rational Verdier data, choose integral dualizing presentations in the existential proof, and specialize the normalized extensions at the coefficient inclusions. Choose finite Hom identifications at the identity field map. Taking beta to be the scalar comparison makes betaNormalized reflexive. This is the preserved finite-data construction, with the original finite_data_exists theorem remaining a wrapper in the item.",
+   "uses": [
     "thm-coef-rational-verdier",
-    "lem-coef-rational-operations",
-    "lem-weil-scalar-extension-composition",
-    "lem-coef-integral-finite-extension",
-    "def-weil-algebraically-closed-coefficients"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-    "place": "Formal expansion of the corresponding steps of lem-coef-qbar-verdier-core-descent"
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Coherent scalar extension comparisons for finite Verdier duality descend biduality and natural evaluation to a filtered pair category",
-      "results": "8 hits; condensed profinite solid counit and exact-functor Ext maps, no common-stage Verdier result",
-      "date": "2026-10-28",
-      "verdict": "No matching result; use the project stage-system construction and finite rational Verdier interfaces."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.StageSystem.Morphism",
-      "results": "0 hits; identifier not in Mathlib",
-      "date": "2026-10-28",
-      "verdict": "Use the existing project Morphism API."
-    },
-    {
-      "tool": "grep",
-      "query": "Verdier.*(coheren|bidual|evaluation)",
-      "results": "0 hits",
-      "date": "2026-10-28",
-      "verdict": "No Mathlib theorem for these finite coefficient normalization equations."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.SixFunctors.CoefQbarVerdierCore",
-    "date": "2026-10-28",
-    "group": "U4"
+  {
+   "text": "Apply finite_unit_equation to F. Align its proof parameters with the unit clause of FiniteCoherent by proof_irrel, congrArg and Eq.mp. This explicitly transports proofs inside the coefficient instances instead of asking the kernel to unfold them.",
+   "uses": [
+    "lem-coef-qbar-verdier-finite-unit-equation"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-coef-qbar-verdier",
-      "place": "finite common-stage duality, evaluation and formal retract restriction",
-      "via": [
-        "lem-coef-qbar-verdier-core-descent"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-biduality-general",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence",
-    "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierFiniteCoherence.lean",
-    "declaration": "WeilConjectures.CoefQbarVerdier.finite_coherent",
-    "statement": "theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F",
-    "declarations": [
-      "WeilConjectures.CoefQbarVerdier.finite_coherent",
-      "WeilConjectures.CoefQbarVerdier.finiteData_nonempty"
-    ],
-    "branch": "sheaf-dag",
-    "by": "U4",
-    "date": "2026-10-28"
-  },
-  "reviewed": {
-    "date": "2026-10-27",
-    "by": "L",
-    "reviewer": "C-fe296",
-    "group": "U4",
-    "result": "fix",
-    "landing": "20261027T210253-L-1681976",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-27",
-    "by": "L",
-    "reviewer": "C-fe296",
-    "group": "U4",
-    "result": "fix",
-    "landing": "20261027T210253-L-1681976",
-    "kind": "interface",
-    "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
+  {
+   "text": "Apply finite_tower_equation to the same F and use conjunction introduction to combine it with the transported unit clause.",
+   "uses": [
+    "lem-coef-qbar-verdier-finite-tower-equation"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "thm-coef-rational-verdier",
+  "lem-coef-rational-operations",
+  "lem-coef-qbar-verdier-finite-unit-equation",
+  "lem-coef-qbar-verdier-finite-tower-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Finite-data construction and separate unit/tower clauses, assembled with explicit proof-irrelevance transport; maintainer repair in coord/returns/N2.md (2026-10-28 05:55 UTC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension comparisons for finite Verdier duality descend biduality and natural evaluation to a filtered pair category",
+   "results": "8 hits; condensed profinite solid counit and exact-functor Ext maps, no common-stage Verdier result",
+   "date": "2026-10-28",
+   "verdict": "No matching result; use the project stage-system construction and finite rational Verdier interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "0 hits; identifier not in Mathlib",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project Morphism API."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*(coheren|bidual|evaluation)",
+   "results": "0 hits",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib theorem for these finite coefficient normalization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierCore",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "finite common-stage duality, evaluation and formal retract restriction",
+   "via": [
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierFiniteCoherence.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finite_coherent",
+  "statement": "theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.finite_coherent",
+   "WeilConjectures.CoefQbarVerdier.finiteData_nonempty"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261028T072436-L-1948381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

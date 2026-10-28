@@ -7,6 +7,8 @@ module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierData
 import Sheaf.SixFunctors.RationalHomIdentifications
+import Sheaf.SixFunctors.CoefQbarVerdierFiniteUnit
+import Sheaf.SixFunctors.CoefQbarVerdierFiniteTower
 
 /-! # Normalized coherence of the finite Verdier comparisons
 
@@ -88,6 +90,60 @@ comparisons. The defining uniqueness of the rational scalar comparison and
 associator_existsUnique identify a with associator. Substitute in the rational
 tower equation, retaining the heterogeneous equality at its dependent endpoints.
 Both arguments include repeated coefficient fields, the zero object and the empty scheme. -/
-theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F := by sorry
+theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F := by
+  refine ⟨?_, finite_tower_equation D l hl Ω X F⟩
+  have h := finite_unit_equation D l hl Ω X F
+  -- The unit clause of `FiniteCoherent` (elaborated in CoefQbarVerdierData) and the statement of
+  -- `finite_unit_equation` differ only in proof terms: `fieldStage._proof_1` against
+  -- `IsScalarTower.left ..` inside the coefficient instances, and `FiniteCoherent._proof_1` against
+  -- `le_rfl`. A plain `exact h` makes the kernel unfold the instances around them (deterministic
+  -- timeout). Instead each differing proof is replaced by the other through `proof_irrel` and
+  -- `congrArg`, so the kernel only beta-reduces.
+  run_tac do
+    let g ← Lean.Elab.Tactic.getMainGoal
+    g.withContext do
+    let G ← Lean.instantiateMVars (← g.getType)
+    let hd ← Lean.Meta.getLocalDeclFromUserName `h
+    let H ← Lean.instantiateMVars hd.type
+    let mut stack : Array (Lean.Expr × Lean.Expr) := #[(G, H)]
+    let mut pairs : Array (Lean.Expr × Lean.Expr) := #[]
+    while !stack.isEmpty do
+      let (a, b) := stack.back!
+      stack := stack.pop
+      if a == b then continue
+      let a := a.consumeMData
+      let b := b.consumeMData
+      if a.isApp && b.isApp && a.getAppNumArgs == b.getAppNumArgs &&
+          a.getAppFn == b.getAppFn then
+        for x in a.getAppArgs, y in b.getAppArgs do
+          stack := stack.push (x, y)
+      else
+        match a, b with
+        | .forallE _ t1 b1 _, .forallE _ t2 b2 _ =>
+          stack := (stack.push (t1, t2)).push (b1, b2)
+        | .lam _ t1 b1 _, .lam _ t2 b2 _ => stack := (stack.push (t1, t2)).push (b1, b2)
+        | _, _ =>
+          let mut a' := a
+          let mut b' := b
+          while a'.hasLooseBVars && a'.isApp do a' := a'.appFn!
+          while b'.hasLooseBVars && b'.isApp do b' := b'.appFn!
+          unless pairs.contains (a', b') do pairs := pairs.push (a', b')
+    let mut cur := H
+    let mut prf := hd.toExpr
+    for (a, b) in pairs do
+      if a.hasLooseBVars || b.hasLooseBVars then
+        throwError "finite_coherent: a differing subterm is not closed"
+      let T ← Lean.Meta.inferType a
+      unless ← Lean.Meta.isProp T do
+        throwError "finite_coherent: a differing subterm is not a proof"
+      let (M, newCur) ← Lean.Meta.withLocalDeclD `p T fun p => do
+        let body := cur.replace fun e => if e == b then some p else none
+        return (← Lean.Meta.mkLambdaFVars #[p] body,
+          body.replace fun e => if e == p then some a else none)
+      let c := Lean.mkAppN (.const ``congrArg [0, 1])
+        #[T, .sort 0, b, a, M, Lean.mkApp3 (.const ``proof_irrel []) T b a]
+      prf := Lean.mkAppN (.const ``Eq.mp [0]) #[Lean.mkApp M b, Lean.mkApp M a, c, prf]
+      cur := newCur
+    g.assign prf
 
 end WeilConjectures.CoefQbarVerdier
