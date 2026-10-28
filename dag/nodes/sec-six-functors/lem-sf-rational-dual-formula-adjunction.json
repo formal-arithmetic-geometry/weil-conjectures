@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Use the given coefficient system S for its integral adjunction. Change its finite-Tor integral full categories to the entire integral constructible categories using integral_residue_tor and identity-on-underlying-objects equivalences. Transport the left functor through integralLeft.",
+   "text": "Use S.ring.operation at the integral stage. The full inclusion of finite-Tor integral objects is fully faithful and essentially surjective by integral_residue_tor. Its equivalence gives adjunctions on the two full integral categories. Compose these with the supplied adjunction and transport the left functor along S.ring.integralLeft. This is integralAdjunction_exists in Lean.",
    "uses": [
     "def-weil-exceptional-inverse-image",
     "lem-coef-integral-residue-tor"
@@ -26,34 +26,54 @@
    "elementary": false
   },
   {
-   "text": "Use the trace/evaluation characterization FormulaNormalized to obtain the natural canonical formula isomorphism for the given dualizing data. Its inverse Hom operation is currying followed by inverse biduality; naturality gives the natural isomorphism. Transport the integral adjunction along it, so that its identity component satisfies FormulaNormalized. Ordinary tensor on c.Z supplies aZ.",
+   "text": "Choose the ordinary tensor presentation aZ from IntegralHom.models_exist. Apply integralDualFormulaComparison to this presentation, the supplied ordinary presentations and signed symmetry, and the integral adjunction from the previous step. Transport along the resulting natural isomorphism; its conclusion supplies FormulaNormalized with the identity component.",
    "uses": [
-    "lem-coef-dual-formula-scalar-transpose"
+    "lem-sf-integral-hom-models-exist",
+    "lem-sf-integral-dual-formula-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the linear integral Hom bijection and its inverse. The triangle equations localize. The object/pure-map equations in the supplied Verdier data and the coefficient-passage definitions identify both localized functors with the stated ones. The counit is the integral counit tensored with one, yielding the required HEq.",
+   "text": "Functor.hext, the object equations and the pure-arrow equations at coefficient 1 show that each restricted integral dual commutes with rationalization. The corresponding defining equations for rationalDerivedPullback give the same assertion for pullback. Apply Functor.rightOp and Functor.op and compose to obtain formula_localization. For support, the equality follows from LinearMap.baseChange_tmul at coefficient 1. These are equalities of the specified functors, not unspecified comparison isomorphisms.",
    "uses": [
-    "prop-weil-pbc-rational-transport",
-    "def-weil-rationalization-karoubi",
-    "def-sf-rational-verdier-data"
+    "def-sf-rational-verdier-data",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-rational-operation-comparison-data",
+    "def-weil-rationalization-karoubi"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the existing scalar-localization helpers semilinear_all_shift_linear and semilinear_localization_isLocalization to give both Q functors their categorical localization instances at Rationalization.W. Apply Mathlib CategoryTheory.Adjunction.localization to the integral adjunction and the commuting functor equalities. Mathlib Adjunction.localization_counit_app expresses its counit as two equality transports followed by Q of the integral counit. eqToHom_map and eqToHom_comp_heq remove those transports heterogeneously. This is localizeAdjunction and rationalAdjunction_of_integral in Lean.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the rational adjunction, aZ, the transported integral adjunction, its identity normalization and the localized-counit HEq into DualFormulaAdjunctionNormalized.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-rational-verdier-data",
   "def-weil-exceptional-inverse-image",
-  "def-weil-rationalization-karoubi",
-  "lem-coef-dual-formula-scalar-transpose",
   "lem-coef-integral-residue-tor",
-  "prop-weil-pbc-rational-transport"
+  "lem-sf-integral-hom-models-exist",
+  "lem-sf-integral-dual-formula-comparison",
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-rational-operation-comparison-data",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-  "place": "lem-coef-rational-operations, original proof steps 10--11; single-field normalized adjunction only; the precise normalization and descent arguments are given in the theorem docstring."
+  "group": "U2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Integral normalized comparison is the separate geometric step. The full-category transport and single-field rational descent are proved directly in Lean using Mathlib localization of adjunctions and its counit formula."
  },
  "mathlib_searches": [
   {
@@ -140,12 +160,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261027T180848-L-3909906",
+  "landing": "20261028T020807-L-2548587",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
