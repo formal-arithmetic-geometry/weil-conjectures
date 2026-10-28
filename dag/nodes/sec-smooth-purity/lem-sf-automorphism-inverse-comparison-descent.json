@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-automorphism-inverse-comparison-descent",
+ "kind": "statement",
+ "title": "Normalized automorphism inverse comparisons through coefficient descent",
+ "statement": "Fix a finite-field datum D of characteristic p [def-weil-finite-field-fiber], a prime l≠p, an algebraic closure Ω/Q_l, a separated finite-type D.k-scheme T [def-weil-scheme-morphism-properties], and a scheme automorphism e of T. Assume l invertible in every residue field of T. Use the actual integral, rational and common-stage pullbacks [def-weil-derived-pullback-tensor-hom], their coefficient categories [def-weil-algebraically-closed-coefficients], and a normalized comparison system C [def-sf-integral-comparison-system-data]. There exist integral inverse-composition natural isomorphisms a_E: e_E^* ⋙ (e^{-1})_E^* ≅ Id for every finite coefficient field E. Their ambient components are the inverse compositor for (e^{-1},e), followed by transport along e^{-1}e=Id and the specified unit. There also exist rational inverse-composition isomorphisms b_E whose components are the localizations of the components of a_E, and a common-stage inverse-composition isomorphism c whose component at each literal pair (E,K) is the inclusion of (b_E)_K. No arbitrary inverse-equivalence unit replaces the specified compositor and unit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical inverse-composition comparisons at integral, rational and algebraically closed coefficients; the existing inverse-comparisons argument of the automorphism stage-equivalence node."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply isomorphismFieldTransport to e.hom, identify its two invertibility witnesses with the given one by proof irrelevance, and take its finite-stage transport data and common-stage inverse comparison. The finite-stage records supply integral epsilon, rational epsilon and their component normalization.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph: canonical inverse-composition comparisons at integral, rational and algebraically closed coefficients; the existing inverse-comparisons argument of the automorphism stage-equivalence node."
+   }
+  },
+  {
+   "text": "For every finite coefficient field, integralAutomorphismCancellation_normalization identifies the integral epsilon component with the exact inverse compositor followed by equality transport and the unit for C. This gives the required integral family and its normalization for any normalized system C.",
+   "uses": [
+    "lem-sf-integral-automorphism-cancellation-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph: canonical inverse-composition comparisons at integral, rational and algebraically closed coefficients; the existing inverse-comparisons argument of the automorphism stage-equivalence node."
+   }
+  },
+  {
+   "text": "At a finite stage of a literal pair, compare the epsilon of the field-transport family with the independently selected finite witness. Integral component normalization, full-subcategory morphism extensionality, NatTrans.ext and Iso.ext identify these epsilon isomorphisms. Their rational epsilon formulas then identify their rational components. Map that equality through the inclusion functor and compose with the existing common-stage epsilon formula. The resulting isomorphisms are the requested a, b and c.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-sf-integral-automorphism-cancellation-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph: canonical inverse-composition comparisons at integral, rational and algebraically closed coefficients; the existing inverse-comparisons argument of the automorphism stage-equivalence node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-isomorphism-field-transport",
+  "lem-sf-integral-automorphism-cancellation-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical inverse-composition comparisons at integral, rational and algebraically closed coefficients; the existing inverse-comparisons argument of the automorphism stage-equivalence node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "epsilon|inverse.*composition",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "no match: generic pullback or equivalence facts do not specify the integral completed compositor, its raw rationalization and its pair-category inclusion components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism pullback has inverse composition isomorphisms on integral, rationalized and common stage constructible coefficient categories with prescribed localization components",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.ChosenPullbacksAlong.iso_pullback_obj, CategoryTheory.IsPullback.isoIsPullback_inv_fst_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.ChosenPullbacksAlong.isoInv_pullback_obj_hom, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_obj_iso_inv_app, CategoryTheory.Aut.Aut_inv_def, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_fst_app, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left",
+   "verdict": "no match: generic pullback or equivalence facts do not specify the integral completed compositor, its raw rationalization and its pair-category inclusion components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Functor.isEquivalence_refl, CategoryTheory.Functor.IsEquivalence, CategoryTheory.Equivalence.isEquivalence_functor, CategoryTheory.Equivalence.isEquivalence_inverse, CategoryTheory.Functor.asEquivalence, CategoryTheory.Functor.inv, CategoryTheory.Functor.IsEquivalence.essSurj, CategoryTheory.Functor.IsEquivalence.faithful",
+   "verdict": "no match: generic pullback or equivalence facts do not specify the integral completed compositor, its raw rationalization and its pair-category inclusion components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AutomorphismConstructibleStageEquivalence",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: canonical inverse comparisons retained after coefficient extension and common-stage descent.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AutomorphismInverseComparisonDescent",
+  "file": "lean/Sheaf/Paper/AutomorphismInverseComparisonDescent.lean",
+  "declaration": "WeilConjectures.automorphismInverseComparisonDescent",
+  "statement": "theorem automorphismInverseComparisonDescent\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (C : IntegralComparisonSystem.{u} l)\n    (T : Over (Spec (.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom]\n    [QuasiCompact T.hom]\n    [∀ x : T.left, Invertible (l : T.left.residueField x)] (e : Aut T.left) :\n    ∃ a : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],\n        constructibleIntegralPullback l E e.hom ⋙ constructibleIntegralPullback l E e.inv ≅ 𝟭 _,\n      (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n        (K : sfIntegralConstructibleCategory l E T.left),\n        ((a E).hom.app K).hom =\n          ((integralComparisonComposition l E C e.inv e.hom K).symm ≪≫\n            eqToIso (congrArg (fun g ↦ (integralDerivedPullback l E g).obj K.obj)\n              e.inv_hom_id) ≪≫ integralComparisonUnit l E C T.left K).hom) ∧\n      ∃ b : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],\n          rationalDerivedPullback l E e.hom ⋙ rationalDerivedPullback l E e.inv ≅ 𝟭 _,\n        (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n          (K : sfRationalConstructibleCategory l E T.left),\n          HEq ((b E).hom.app K)\n            ((sfRationalConstructibleLocalization l E T.left).map ((a E).hom.app K.obj))) ∧\n        ∃ c : commonStageDerivedPullback l Ω e.hom ⋙\n            commonStageDerivedPullback l Ω e.inv ≅ 𝟭 _,\n          ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω T.left,\n            HEq (c.hom.app K)\n              ((GeneralAlgebraicallyClosedCoefficients.inclusion\n                (l := l) (Ω := Ω) (Y := T.left) K.stage).map\n                ((b (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K.stage)).hom.app\n                  K.obj))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261028T055801-L-809456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261028T055801-L-809456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

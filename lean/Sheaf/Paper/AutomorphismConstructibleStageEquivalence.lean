@@ -24,8 +24,10 @@ import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 import Sheaf.Paper.IsomorphismFieldTransport
 import Sheaf.Paper.SimultaneousIntegralPullbackComparisons
 import Sheaf.Paper.IntegralScalarPullbackCompletionNormalization
-import Sheaf.Paper.IntegralAutomorphismCancellationNormalization
 import Sheaf.Paper.CommonStagePullbackRepresentativeLinearity
+import Sheaf.Paper.AutomorphismSquareStageCompatibility
+import Sheaf.Paper.CommonStagePullbackSquareDescent
+import Sheaf.Paper.AutomorphismInverseComparisonDescent
 import Sheaf.Paper.AutomorphismConstructibleIntegralShiftData
 import Sheaf.Paper.AutomorphismConstructibleIntegralShiftWitness
 import Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback
@@ -992,6 +994,17 @@ def automorphismStageRationalSquare
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+section QbarSquare
+
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] HasDerivedCategory.standard
+  automorphismStageIntegralSquare automorphismStageRationalSquare
+  rationalDerivedPullback commonStageDerivedPullback constructibleIntegralPullback
+  sfRationalConstructibleLocalization integralComparisonComposition
+
 /-- Common-stage b and d have exactly the rational components over each representative's
 coefficient field. Source: Weil-structures paragraph, common-stage b and d
 (blueprint: lem-sf-automorphism-constructible-stage-equivalence).
@@ -1015,7 +1028,19 @@ theorem automorphismStageQbarSquare_existsUnique
             ((automorphismStageRationalSquare l
               (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K.stage)
               C f eX eY h).hom.app K.obj)) := by
-  sorry
+  exact commonStagePullbackSquare_existsUnique l Ω f eX eY
+    (fun E ↦ automorphismStageRationalSquare l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) C f eX eY h)
+    (fun {E L} w K ↦ automorphismSquareStageCompatibility l Ω C f eX eY h
+      (fun E _ _ _ ↦ automorphismStageIntegralSquare l E C f eX eY h)
+      (fun E _ _ _ K ↦ by
+        simpa only [automorphismStageIntegralSquare] using
+          (automorphismStageIntegralSquare_existsUnique l E C f eX eY h).exists.choose_spec K)
+      (fun E _ _ _ ↦ automorphismStageRationalSquare l E C f eX eY h)
+      (fun E _ _ _ K ↦ by
+        simpa only [automorphismStageRationalSquare] using
+          (automorphismStageRationalSquare_existsUnique l E C f eX eY h).exists.choose_spec K)
+      E L w K)
 
 /-- The common-stage square with the exact specified representative normalization.
 Source: Weil-structures paragraph, b and d
@@ -1029,6 +1054,11 @@ def automorphismStageQbarSquare
     (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y) (h : eY.hom ≫ f = f ≫ eX.hom) :=
   (automorphismStageQbarSquare_existsUnique l Ω C f eX eY h).exists.choose
 
+
+end QbarSquare
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The integral inverse-composition comparison uses the actual compositor and identity unit.
 Source: Weil-structures paragraph, inverse automorphism comparisons
@@ -2218,6 +2248,10 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option allowUnsafeReducibility true in
 attribute [local reducible] constructibleIntegralPullback
 
+section InverseComparisons
+
+attribute [local irreducible] integralComparisonComposition integralComparisonUnit
+
 /-- The inverse comparisons at all three infinite coefficient stages have their specified values.
 Applying this to the inverse automorphism gives the other inverse-composition comparison.
 Source: Weil-structures paragraph, canonical inverse comparisons and their descent
@@ -2254,79 +2288,9 @@ theorem automorphismConstructibleStage_inverse_comparisons
                 (l := l) (Ω := Ω) (Y := T.left) K.stage).map
                 ((b (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K.stage)).hom.app
                   K.obj)) := by
-  classical
-  obtain ⟨g, hg, he⟩ : ∃ (g : T.left ⟶ T.left) (hg : IsIso g),
-      e = (letI : IsIso g := hg; asIso g) := by
-    refine ⟨e.hom, inferInstance, ?_⟩
-    apply Iso.ext
-    rfl
-  let : IsIso g := hg
-  cases he
-  let e : Aut T.left := asIso g
-  let i : ∀ x : T.left, Invertible (l : T.left.residueField x) := inferInstance
-  have hft : LocallyOfFiniteType T.hom := inferInstance
-  have hqc : QuasiCompact T.hom := inferInstance
-  let : T.left.Over (Spec (.of D.k)) := ⟨T.hom⟩
-  let : LocallyOfFiniteType (T.left ↘ Spec (.of D.k)) := by
-    set_option backward.isDefEq.respectTransparency true in
-      exact hft
-  let : QuasiCompact (T.left ↘ Spec (.of D.k)) := by
-    set_option backward.isDefEq.respectTransparency true in
-      exact hqc
-  let : IsIso e.hom := ⟨⟨e.inv, e.hom_inv_id, e.inv_hom_id⟩⟩
-  obtain ⟨iX, iY, h⟩ := isomorphismFieldTransport D l (Fact.out : l ≠ D.p) Ω e.hom
-  have hiX : iX = i := Subsingleton.elim _ _
-  have hiY : iY = i := Subsingleton.elim _ _
-  cases hiX
-  cases hiY
-  let : IsIso e.hom := ⟨⟨e.inv, e.hom_inv_id, e.inv_hom_id⟩⟩
-  obtain ⟨hX, hY, hS, _, S, _, _, ⟨A⟩, _⟩ := h
-  let stage (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
-    Classical.choice (hS E).1
-  simp only [automorphismStageIntegralCancel]
-  let cancel (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-      (K : sfIntegralConstructibleCategory l E T.left) :
-      ((constructibleIntegralPullback l E e.hom ⋙
-        constructibleIntegralPullback l E (inv e.hom)).obj K).obj ⟶ K.obj :=
-    (((integralComparisonComposition l E C (inv e.hom) e.hom K).symm ≪≫
-      eqToIso (congrArg (fun f ↦ (integralDerivedPullback l E f).obj K.obj)
-        (IsIso.inv_hom_id e.hom)) ≪≫ integralComparisonUnit l E C T.left K :
-      ((constructibleIntegralPullback l E e.hom ⋙
-        constructibleIntegralPullback l E (inv e.hom)).obj K).obj ≅ K.obj).hom)
-  have hn (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-      (B : IsomorphismFieldTransportStage l E e.hom hX hY)
-      (K : sfIntegralConstructibleCategory l E T.left) :
-      HEq (B.epsilon.hom.app K).hom (cancel E K) := by
-    exact (B.epsilon_formula K).trans
-      (integralAutomorphismCancellation_normalization l E C e.hom K)
-  let a (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
-    (stage E).epsilon
-  let b (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
-    (stage E).rationalEpsilon
-  have hb (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-      (K : sfRationalConstructibleCategory l E T.left) :
-      HEq ((b E).hom.app K)
-        ((sfRationalConstructibleLocalization l E T.left).map ((a E).hom.app K.obj)) :=
-    (stage E).rational_epsilon_formula K
-  refine ⟨a, ?_, b, hb, A.epsilon, ?_⟩
-  · intro E _ _ _ K
-    apply eq_of_heq
-    simpa only [a, cancel, e, asIso_hom, asIso_inv] using hn E (stage E) K
-  · intro K
-    have he : (S K.stage).epsilon =
-        (stage (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K.stage)).epsilon := by
-      apply Iso.ext
-      apply NatTrans.ext
-      funext J
-      apply ObjectProperty.hom_ext
-      exact eq_of_heq ((hn _ (S K.stage) J).trans (hn _ (stage _) J).symm)
-    have hr := (S K.stage).rational_epsilon_formula K.obj
-    rw [he] at hr
-    have hrat : (S K.stage).rationalEpsilon.hom.app K.obj =
-        (b (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω K.stage)).hom.app K.obj :=
-      eq_of_heq (hr.trans (hb _ K.obj).symm)
-    exact (A.epsilon_formula K).trans (heq_of_eq (congrArg
-      ((GeneralAlgebraicallyClosedCoefficients.inclusion
-        (l := l) (Ω := Ω) (Y := T.left) K.stage).map) hrat))
+  simpa only [automorphismStageIntegralCancel] using
+    automorphismInverseComparisonDescent D l Ω C T e
+
+end InverseComparisons
 
 end WeilConjectures

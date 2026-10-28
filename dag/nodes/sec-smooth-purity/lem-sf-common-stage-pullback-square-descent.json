@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-common-stage-pullback-square-descent",
+ "kind": "statement",
+ "title": "Descent of a finite coefficient-compatible pullback square",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l, schemes X,Y with l invertible, f:Y→X, and scheme automorphisms eX,eY. Use the rational and common-stage pullbacks [def-weil-derived-pullback-tensor-hom], finite coefficient categories and stage inclusions [def-weil-algebraically-closed-coefficients], and normalized pullback transitions β [lem-pod-common-stage-pullback-normalized-descent]. Suppose that for every finite coefficient stage E we are given a natural isomorphism b_E: f_E^* ⋙ eY_E^* ≅ eX_E^* ⋙ f_E^*, and that T_Y(b_E) β_f f_L(β_eX) = β_eY eY_L(β_f) b_L(T_X K) for every inclusion E≤L and object K at E, with the object positions as in the Lean statement. Then there is a unique natural isomorphism between the two composites of common-stage pullbacks whose component at the literal pair (E,K) is the inclusion of (b_E)_K. No assertion that a prescribed integral square satisfies the finite compatibility equation is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph, common-stage b and d; descent part of steps 8–9 of lem-sf-automorphism-constructible-stage-equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-common-stage-pullback-normalized-descent"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized descent theorem for f, eX and eY to express the three actual common-stage pullbacks as functors of coherent stage morphisms. The two composite stage morphisms have the rational functor composites as their finite parts. The asserted finite compatibility is exactly the Hom.comm equation between them.",
+   "uses": [
+    "lem-pod-common-stage-pullback-normalized-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph, common-stage b and d; descent part of steps 8–9 of lem-sf-automorphism-constructible-stage-equivalence."
+   }
+  },
+  {
+   "text": "Apply the proved generic descNatTrans construction to this Hom. Its components are inclusions of the finite components. isIso_descNatTrans applies because every finite component is an isomorphism. Conjugate by functorCompIso on both sides to obtain a comparison of the two actual composites of descended functors. These functorCompIso comparisons have identity components, so the prescribed component formula follows.",
+   "uses": [
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph, common-stage b and d; descent part of steps 8–9 of lem-sf-automorphism-constructible-stage-equivalence."
+   }
+  },
+  {
+   "text": "For two such natural isomorphisms every component is the same included finite arrow. NatTrans.ext and Iso.ext therefore identify them, giving uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil-structures paragraph, common-stage b and d; descent part of steps 8–9 of lem-sf-automorphism-constructible-stage-equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-pur-associative-stage-family-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph, common-stage b and d; descent part of steps 8–9 of lem-sf-automorphism-constructible-stage-equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of natural isomorphisms on coefficient stages descends to a natural isomorphism of the common stage categories",
+   "date": "2026-10-28",
+   "results": "OK 8 hits: CategoryTheory.Sigma.natIso, CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap, CategoryTheory.Sigma.descUniq, CategoryTheory.SmallObject.SuccStruct.ofCoconeObjIso_hom_naturality, CategoryTheory.NatIso.ofComponents, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap_hom, CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap_hom",
+   "verdict": "no match: generic natural-isomorphism infrastructure is available, but not this prescribed common-stage pullback normalization. The general stage-system descent API is already proved in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "descNatTrans|descNatIso|StageSystem",
+   "date": "2026-10-28",
+   "results": "OK 0 hits: ",
+   "verdict": "no match: generic natural-isomorphism infrastructure is available, but not this prescribed common-stage pullback normalization. The general stage-system descent API is already proved in the adopted source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "date": "2026-10-28",
+   "results": "OK 12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "verdict": "no match: generic natural-isomorphism infrastructure is available, but not this prescribed common-stage pullback normalization. The general stage-system descent API is already proved in the adopted source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AutomorphismConstructibleStageEquivalence",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: naturality of b and d after passing to algebraically closed coefficients.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackSquareDescent",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackSquareDescent.lean",
+  "declaration": "WeilConjectures.commonStagePullbackSquare_existsUnique",
+  "statement": "theorem commonStagePullbackSquare_existsUnique\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)\n    (b : ∀ E : Index l Ω,\n      rationalDerivedPullback l (Coefficient.{u} l Ω E) f ⋙\n        rationalDerivedPullback l (Coefficient.{u} l Ω E) eY.hom ≅\n      rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom ⋙\n        rationalDerivedPullback l (Coefficient.{u} l Ω E) f)\n    (hb : ∀ {E L : Index l Ω} (w : E ≤ L)\n      (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω X E),\n      ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T w).map\n          ((b E).hom.app K) ≫\n        (commonStagePullbackTransition l Ω f w).hom.app\n          ((rationalDerivedPullback l (Coefficient.{u} l Ω E) eX.hom).obj K) ≫\n        (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).map\n          ((commonStagePullbackTransition l Ω eX.hom w).hom.app K) =\n      ((commonStagePullbackTransition l Ω eY.hom w).hom.app\n          ((rationalDerivedPullback l (Coefficient.{u} l Ω E) f).obj K) ≫\n        (rationalDerivedPullback l (Coefficient.{u} l Ω L) eY.hom).map\n          ((commonStagePullbackTransition l Ω f w).hom.app K)) ≫\n        (b L).hom.app (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T w).obj K)) :\n    ∃! d : commonStageDerivedPullback l Ω f ⋙ commonStageDerivedPullback l Ω eY.hom ≅\n        commonStageDerivedPullback l Ω eX.hom ⋙ commonStageDerivedPullback l Ω f,\n      ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,\n        HEq (d.hom.app K)\n          ((GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := l) (Ω := Ω) (Y := Y) K.stage).map ((b K.stage).hom.app K.obj))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261028T055801-L-809456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261028T055801-L-809456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
