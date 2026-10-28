@@ -11514,6 +11514,7 @@ public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftRetraction
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftStrictlyHenselian
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftWeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
 public import WeilConjectures.RingTheory.ProEtale.EtaleStrictlyHenselianSplitting
@@ -13427,6 +13428,11 @@ public import WeilConjectures.SixFunctors.ProEtale.SeparableClosureCover
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk
 public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarLimits.Affine
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarLimits.AffineCoversSplit
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarLimits.Hull
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarLimits.Sections
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarLimits.SectionsIso
 public import WeilConjectures.SixFunctors.ProEtale.UpperStarPreservesLimits
 public import WeilConjectures.SixFunctors.ProEtale.UpperStarSectionsFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
