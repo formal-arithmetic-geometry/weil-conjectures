@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
 
 /-!
 
@@ -134,7 +135,35 @@ lemma isSplitMono_pullbackExchange_app_of_cartesian
     (NatTrans.isSplitMono_app_of_iso (φ.toCartesian.pullbackExchange Λ) (Y := C)
       ((leftDerivedUpperStarId Λ Y).app C) h₂)
 
+/-- If the morphism of total spaces of `φ` is weakly étale, the pullback exchange of
+`fromCartesian` is an isomorphism (weakly étale base change of `Rj_*`). -/
+lemma isIso_pullbackExchange_fromCartesian_of_weaklyEtale
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    [WeaklyEtale φ.total] : IsIso (φ.fromCartesian.pullbackExchange Λ) :=
+  have : WeaklyEtale φ.fromCartesian.total := ‹WeaklyEtale φ.total›
+  φ.fromCartesian.isIso_pullbackExchange_of_weaklyEtale Λ φ.isPullback_fromCartesian
+
 end Hom
+
+variable {Z Z' : Scheme.{u}} {P : NearbyCyclesModel Z Z'}
+
+/-- **Split pullback exchange of a composite**: let `φ : M ⟶ N` factor as `τ : M ⟶ P` followed by
+`σ : P ⟶ N` (over `f₁ ≫ f₂ = f` and `f₁' ≫ f₂' = f'`). If `α_τ` is an isomorphism at
+`Lf₂^* C` and `α_σ` is a split monomorphism at `C`, then `α_φ` is a split monomorphism at `C`. -/
+lemma Hom.isSplitMono_pullbackExchange_app_of_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {f₁ : X ⟶ Z} {f₁' : X' ⟶ Z'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'} (τ : M.Hom P f₁ f₁')
+    (σ : P.Hom N f₂ f₂') (φ : M.Hom N f f') (h : f₁ ≫ f₂ = f) (h' : f₁' ≫ f₂' = f')
+    (htot : τ.total ≫ σ.total = φ.total) (hgen : τ.generic ≫ σ.generic = φ.generic)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)))
+    (h₁ : IsIso ((τ.pullbackExchange Λ).app (L((f₂)^*⟦Λ⟧).obj C)))
+    (h₂ : IsSplitMono ((σ.pullbackExchange Λ).app C)) :
+    IsSplitMono ((φ.pullbackExchange Λ).app C) := by
+  have e := τ.pullbackExchange_comp_app_of_eq Λ σ φ h h' htot hgen C
+  rw [← Iso.app_hom, ← Functor.mapIso_hom, ← Iso.eq_comp_inv] at e
+  rw [e]
+  infer_instance
 
 end NearbyCyclesModel
 

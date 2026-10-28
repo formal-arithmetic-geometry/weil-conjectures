@@ -13846,6 +13846,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
+public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartesian
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
