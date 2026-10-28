@@ -1,0 +1,115 @@
+{
+ "id": "new-k3-isomorphism-scalar-completed-inverse-good",
+ "kind": "statement",
+ "title": "Inverse image preserves completed flat-term K-flat models",
+ "statement": "For a scheme isomorphism g : X ≅ Y and a finite coefficient field E, every object of integralOperationsGoodComplex l E Y is sent by the prescribed sectionwise completed inverse image to integralOperationsGoodComplex l E X.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA, 06YN and 0G7E; inverse-image part of the proof of lem-weil-isomorphism-scalar-completed-preserves-models."
+ },
+ "stmt_deps": [
+  "def-weil-isomorphism-scalar-completed-model-vocabulary",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Present the sectionwise inverse-image functor as an algebraic inverse image of ringed topoi using the prescribed completed coefficient isomorphism. The site equivalence gives the adjunction and finite-limit preservation. Apply the ringed-topos K-flat pullback theorem to the given independent-coefficient K-flat complex and its flat terms; unfold the definition of integralOperationsGoodComplex to obtain both clauses.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA, 06YN and 0G7E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA, 06YN and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a flat-term K-flat complex along an equivalence of ringed topoi",
+   "results": "No exact specialized declaration; the generic ringed-topos K-flat pullback theorem is the planned route.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKFlatIndependentCoefficients inverseImage flat terms",
+   "results": "Only generic K-flat and flatness criteria; no direct independent-universe sectionwise theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSectionwiseModuleInverseImage_preservesKFlat integralOperationsGoodComplex",
+   "results": "Found same-universe sectionwise K-flat and flat preservation APIs; independent-universe glue is this node.",
+   "date": "2026-10-28",
+   "verdict": "supporting declarations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint_kind": "statement",
+ "blueprint_uses": [],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismScalarCompletedPreservesModelsInverse",
+  "file": "lean/Sheaf/Paper/IsomorphismScalarCompletedPreservesModelsInverse.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.inverseImageIntegralModules_preserves_good",
+  "statement": "theorem inverseImageIntegralModules_preserves_good (P : (integralOperationsGoodComplex l E Y).FullSubcategory) : integralOperationsGoodComplex l E X ((inverseComplex l E g).obj P.obj)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T020538-L-2522997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismScalarCompletedPreservesModels",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-isomorphism-scalar-completed-preserves-models",
+   "place": "Inverse-image clause extracted from the parent preservation lemma.",
+   "via": [
+    "lem-weil-isomorphism-scalar-completed-preserves-models"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T020538-L-2522997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

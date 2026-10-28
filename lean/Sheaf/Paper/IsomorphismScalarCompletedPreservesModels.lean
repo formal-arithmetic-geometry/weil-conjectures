@@ -6,6 +6,8 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModelBase
+import Sheaf.Paper.FiniteFreeScalarCochainProperties
+import Sheaf.Paper.IsomorphismScalarCompletedPreservesModelsInverse
 
 /-! # Preservation of completed flat-term K-flat models
 
@@ -54,6 +56,13 @@ inclusion.
 theorem scalar_completed_preserves_models
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :
-    PreservesModels l E L ι g := by sorry
+    PreservesModels l E L ι g := by
+  intro P
+  obtain ⟨_hprodY, hscalarY, _hcounitY⟩ :=
+    finiteFreeScalarCochainProperties l E L ι Y
+  obtain ⟨_hprodX, hscalarX, _hcounitX⟩ :=
+    finiteFreeScalarCochainProperties l E L ι X
+  have hinv := inverseImageIntegralModules_preserves_good l E g P
+  exact ⟨hinv, hscalarY P, hscalarX ⟨(inverseComplex l E g).obj P.obj, hinv⟩⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
