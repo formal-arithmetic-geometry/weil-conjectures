@@ -18,34 +18,51 @@
  ],
  "proof": [
   {
-   "text": "Apply finite duality site comparison with the finite-Tor constructible first input and bounded constructible second input.",
+   "text": "At exponent n+1, finite_duality_site_comparison makes the ordinary site Hom comparison invertible on the given finite-Tor constructible first input and bounded-constructible second input. Compose its realization with intrinsicSiteHom_transport and the canonical exact-derived composition isomorphism, including the latter on both inputs, to obtain an object isomorphism between inverse image of the etale Hom and the recorded intrinsic Hom. No evaluation compatibility of this object isomorphism is asserted or needed.",
    "uses": [
-    "lem-weil-finite-duality-site-comparison"
+    "lem-weil-finite-duality-site-comparison",
+    "lem-sf-intrinsic-site-hom-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Transport along the existing intrinsic realization/restriction equivalence. Normalize both evaluations and the site tensorator on flat-term K-flat representatives; their transposes agree, identifying the transported map with finiteHomSiteHom.",
+   "text": "The coefficient ring is finite and annihilated by l^(n+1): l belongs to the maximal ideal of its extension integer ring, which the chosen uniformizer generates. Its (n+1)-st power therefore vanishes modulo that ideal power. The distinct prime l is a unit in the algebraic closure of the finite field of characteristic p. Apply finiteComparisonOrdinary_fullyFaithful. Compose with the derived exact realization equivalence and transport by the exact-derived composition isomorphism to obtain full faithfulness of finiteHomNu.",
+   "uses": [
+    "lem-ctf-finite-comparison-ordinary-fully-faithful",
+    "def-sp-finite-coefficient-intrinsic-derived-comparison",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-finite-field-fiber",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private transpose lemma expresses the image of every tensor-Hom adjunct followed by coefficientBaseChangeHom as the intrinsic adjunct after the inverse tensor comparison. Full faithfulness, the two adjunction Hom equivalences and the tensor comparison give a bijection on the Hom sets out of inverse image of the etale Hom. It is exactly postcomposition by the specified arrow. Surjectivity applied to the object isomorphism gives a right inverse after precomposition by its inverse. Injectivity gives the left inverse. This proves invertibility of finiteHomSiteHom. The argument is written in Lean for arbitrary categories, closed structures, tensor comparison and fully faithful functor.",
    "uses": [
     "def-sf-finite-coefficient-site-hom-arrow",
-    "def-sf-finite-coefficient-site-scalar-arrow",
     "def-sf-etale-finite-coefficient-hom-arrow"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The comparison transported across an equivalence is invertible, so its identified intrinsic map is invertible.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-finite-duality-site-comparison",
+  "lem-sf-intrinsic-site-hom-transport",
+  "lem-ctf-finite-comparison-ordinary-fully-faithful",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-field-fiber",
+  "lem-weil-l-adic-extension-integers-dvr",
   "def-sf-finite-coefficient-site-hom-arrow",
-  "def-sf-finite-coefficient-site-scalar-arrow",
   "def-sf-etale-finite-coefficient-hom-arrow"
  ],
- "proof_origin": "Source final evaluation/coherence argument, expanded in the parent node; right-closed categorical calculation written by F1.",
+ "proof_origin": {
+  "by": "worker",
+  "group": "E6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-comparison sentence. Ordinary finite duality supplies the object isomorphism; full faithfulness and the tensor-Hom bijection prove invertibility of the canonical arrow. This avoids the planned evaluation-normalization compatibility obligation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -117,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-af0f4",
-  "group": "F1",
-  "result": "fix",
-  "landing": "20261028T020341-L-2498181",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261028T034737-L-3539491",
   "kind": "interface",
-  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
