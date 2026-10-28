@@ -15,7 +15,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-! # The derived category of sheaves of modules on a scheme
 
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  sk-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category, order 643
+  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category, order 643
 (blueprint: def-pc-derived-category); Stacks Project, Derived Categories, Tag 05RU.
 
 The O_X-modules are the shared carrier `SheafOfModules.{u} (moduleRings X.toRingedSpace)`
@@ -44,7 +44,7 @@ namespace AlgebraicGeometry
 `DerivedCategory` (the localization of cochain complexes at quasi-isomorphisms, morphisms in
 universe `w`) of the abelian category `SheafOfModules.{u} (moduleRings X.toRingedSpace)`.
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  sk-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
+  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
   (blueprint: def-pc-derived-category). -/
 abbrev schemeDerivedCategory (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Type _ :=
@@ -53,7 +53,7 @@ abbrev schemeDerivedCategory (X : Scheme.{u})
 /-- An object `K` of `D(𝒪_X)` has quasi-coherent cohomology sheaves: for every `n : ℤ` the
 cohomology sheaf `H^n(K)` is quasi-coherent (Mathlib's `SheafOfModules.IsQuasicoherent`).
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  sk-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
+  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
   (blueprint: def-pc-derived-category). -/
 def schemeDerivedQCohProperty (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
@@ -65,7 +65,7 @@ def schemeDerivedQCohProperty (X : Scheme.{u})
 /-- The full subcategory `D_QCoh(𝒪_X)` of `D(𝒪_X)` of objects whose cohomology sheaves are
 quasi-coherent.
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  sk-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
+  det-thm-picard-coherence/def-pc-derived-category.md, node def-pc-derived-category
   (blueprint: def-pc-derived-category). -/
 abbrev schemeDerivedQCohCategory (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Type _ :=

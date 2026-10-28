@@ -37,7 +37,7 @@ finite `S`-scheme can be chosen of finite presentation (Stacks Project Tag 0F2N)
 
 ## Blueprint
 
-This file formalises part (i) of `sk-prop-nagata-sketch-zmt`.
+This file formalises part (i) of `lemma-nagata-zmt-open-immersion-affine-factorization`.
 -/
 
 @[expose] public section
@@ -81,10 +81,10 @@ theorem Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion
   exact hgU
 
 /-- **Zariski's Main Theorem, finite factorization** (Stacks Project Tag 05K0; blueprint
-`thm-pqf-zmt-factorization`, statement (i) of blueprint `sk-prop-nagata-sketch-zmt`). A
-separated, quasi-compact, locally quasi-finite morphism `f : X ⟶ S` locally of finite type to a
-quasi-compact quasi-separated scheme factors as a quasi-compact open immersion `j : X ⟶ T`
-followed by a finite morphism `p : T ⟶ S`.
+`thm-pqf-zmt-factorization`, statement (i) of blueprint
+`lemma-nagata-zmt-open-immersion-affine-factorization`). A separated, quasi-compact, locally
+quasi-finite morphism `f : X ⟶ S` locally of finite type to a quasi-compact quasi-separated scheme
+factors as a quasi-compact open immersion `j : X ⟶ T` followed by a finite morphism `p : T ⟶ S`.
 
 By Grothendieck's form of Zariski's Main Theorem, `X` is a quasi-compact open of the relative
 normalization of `S` in `X`, which is integral over `S` and hence a limit of finite

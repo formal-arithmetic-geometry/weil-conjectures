@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MateCounit
 
 /-!
 # Derived pullback, extension and restriction of scalars
@@ -84,45 +85,12 @@ lemma leftDerivedUpperStarRestrictScalarsIso_hom_app_Qh_obj
         (NatTrans.mapHomotopyCategory (upperStarRestrictScalarsIso (algebraMap R S) g).hom
           (.up ℤ)).app K ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv.app K) := by
-  have hsq := Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj
-    (upperStarRestrictScalarsIso (algebraMap R S) g) K
-  have hS := (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh K
-  have hR := (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
-    (((Sheaf.restrictScalars _ (algebraMap R S)).mapHomotopyCategory (.up ℤ)).obj K)
-  have hn := (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorIsoMapDerivedCategory.hom.naturality
-    ((Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S)).mapDerivedCategoryFactorsh.hom.app
-      K)
-  have hsq' : (Functor.mapDerivedCategorySquareIso
-        (upperStarRestrictScalarsIso (algebraMap R S) g)).hom.app (DerivedCategory.Qh.obj K) ≫
-      D(Sheaf.restrictScalars (ProEt.topology Z) (algebraMap R S)).map
-        ((g)^*[ModuleCat S].mapDerivedCategoryFactorsh.hom.app K) ≫
-      (Sheaf.restrictScalars (ProEt.topology Z) (algebraMap R S)).mapDerivedCategoryFactorsh.hom.app
-        (((g)^*[ModuleCat S].mapHomotopyCategory (.up ℤ)).obj K) =
-      D((g)^*[ModuleCat R]).map
-        ((Sheaf.restrictScalars (ProEt.topology Y)
-          (algebraMap R S)).mapDerivedCategoryFactorsh.hom.app K) ≫
-      (g)^*[ModuleCat R].mapDerivedCategoryFactorsh.hom.app
-        (((Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S)).mapHomotopyCategory
-          (.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).hom.app K ≫
-        (NatTrans.mapHomotopyCategory (upperStarRestrictScalarsIso (algebraMap R S) g).hom
-          (.up ℤ)).app K ≫
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv.app K) := by
-    rw [← hsq]
-    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id, Category.id_comp]
-  rw [leftDerivedUpperStarRestrictScalarsIso_hom_app]
-  have hS' : (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat S) g).inv.app
-      (DerivedCategory.Qh.obj K) ≫ (g)^*[ModuleCat S].leftDerivedFunctorCounit.app K =
-      (g)^*[ModuleCat S].mapDerivedCategoryFactorsh.hom.app K := by
-    rw [← hS]
-    exact Iso.inv_hom_id_app_assoc _ _ _
-  simp only [Category.assoc, ← Functor.map_comp_assoc]
-  rw [hS']
-  erw [hsq']
-  dsimp at hn
-  erw [← reassoc_of% hn]
-  erw [reassoc_of% hR]
+  exact Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj_comp_counit
+    (R₁ := Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S))
+    (R₂ := Sheaf.restrictScalars (ProEt.topology Z) (algebraMap R S)) _ _
+    (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh _ _
+    (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
+    (upperStarRestrictScalarsIso (algebraMap R S) g) _ rfl K
 
 omit [IsNoetherianRing R] in
 /-- The counit form of `upperStarRestrictScalarsMap_eq` on homotopy categories. -/
@@ -141,32 +109,12 @@ lemma mapHomotopyCategory_upperStarRestrictScalarsIso_counit
       ((g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ)).map
         (((sheafExtendScalarsAdjunction (algebraMap R S) Y).mapHomotopyCategory (.up ℤ)).counit.app
           K) := by
-  obtain ⟨C, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  have hU (d : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} S)) :
-      (sheafExtendScalars (algebraMap R S) Z).map
-          ((upperStarRestrictScalarsIso (algebraMap R S) g).hom.app d) ≫
-        (sheafExtendScalarsAdjunction (algebraMap R S) Z).counit.app
-          ((g)^*[ModuleCat.{u + 1} S].obj d) =
-      (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv.app
-          ((Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S)).obj d) ≫
-        (g)^*[ModuleCat.{u + 1} S].map
-          ((sheafExtendScalarsAdjunction (algebraMap R S) Y).counit.app d) := by
-    rw [← upperStarRestrictScalarsMap_eq]
-    exact mateEquiv_counit (sheafExtendScalarsAdjunction (algebraMap R S) Y)
-      (sheafExtendScalarsAdjunction (algebraMap R S) Z)
-      (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv d
-  simp only [mapHomotopyCategorySheafExtendScalarsCompUpperStarIso, Iso.trans_inv, Iso.symm_inv,
-    NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
-  erw [Category.id_comp, Category.id_comp, Category.comp_id, Category.comp_id,
-    Adjunction.mapHomotopyCategory_counit_app_quotient,
-    Adjunction.mapHomotopyCategory_counit_app_quotient]
-  simp only [NatTrans.mapHomotopyCategory_app, HomotopyCategory.quotient_obj_as]
-  erw [Functor.mapHomotopyCategory_map, Functor.mapHomotopyCategory_map, ← Functor.map_comp,
-    ← Functor.map_comp]
-  congr 1
-  refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
-  exact hU (C.X n)
+  exact Adjunction.mapHomotopyCategory_map_comp_counit_app (.up ℤ)
+    (sheafExtendScalarsAdjunction (algebraMap R S) Y)
+    (sheafExtendScalarsAdjunction (algebraMap R S) Z)
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g) _ (upperStarRestrictScalarsMap_eq R S g)
+    (R₁ := Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S))
+    (R₂ := Sheaf.restrictScalars (ProEt.topology Z) (algebraMap R S)) _ rfl K
 
 /-- The inverse form of `leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit`. -/
 lemma leftDerivedUpperStarExtendScalarsIso_inv_app_comp_counit
@@ -190,67 +138,17 @@ theorem mateEquiv_leftDerivedUpperStarExtendScalarsIso_inv :
         (leftDerivedSheafExtendScalarsAdjunction R S Z)
         (leftDerivedUpperStarExtendScalarsIso R S g).inv =
       (leftDerivedUpperStarRestrictScalarsIso (algebraMap R S) g).hom := by
-  apply Localization.natTrans_ext DerivedCategory.Qh (HomotopyCategory.quasiIso _ (.up ℤ))
-  intro K
-  apply ((leftDerivedSheafExtendScalarsAdjunction R S Z).homEquiv _ _).symm.injective
-  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
-  rw [← cancel_mono ((g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit.app K)]
-  have hm := mateEquiv_counit (leftDerivedSheafExtendScalarsAdjunction R S Y)
-    (leftDerivedSheafExtendScalarsAdjunction R S Z)
-    (leftDerivedUpperStarExtendScalarsIso R S g).inv (DerivedCategory.Qh.obj K)
-  rw [hm]
-  simp only [Category.assoc]
-  erw [← (leftDerivedSheafExtendScalarsAdjunction R S Z).counit_naturality
-    ((g)^*[ModuleCat S].leftDerivedFunctorCounit.app K)]
-  rw [leftDerivedSheafExtendScalarsAdjunction_counit_app_Qh_obj]
-  erw [leftDerivedSheafExtendScalarsAdjunction_counit_app_Qh_obj R S Z
-    (((g)^*[ModuleCat S].mapHomotopyCategory (.up ℤ)).obj K)]
-  simp only [← Functor.map_comp_assoc]
-  have hΓ : (leftDerivedUpperStarRestrictScalarsIso (algebraMap R S) g).hom.app
-        (DerivedCategory.Qh.obj K) ≫
-      D(sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
-        ((g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit.app K) ≫
-      (sheafCompose (ProEt.topology Z)
-        (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).mapDerivedCategoryFactorsh.hom.app
-        (((g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ)).obj K) =
-    L((g)^*[ModuleCat.{u + 1} R]).map
-        ((sheafCompose (ProEt.topology Y)
-          (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).mapDerivedCategoryFactorsh.hom.app
-            K) ≫
-      (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit.app
-        (((sheafCompose (ProEt.topology Y)
-          (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).mapHomotopyCategory
-            (.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).hom.app K ≫
-        (NatTrans.mapHomotopyCategory (upperStarRestrictScalarsIso (algebraMap R S) g).hom
-          (.up ℤ)).app K ≫
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv.app K) :=
-    leftDerivedUpperStarRestrictScalarsIso_hom_app_Qh_obj R S g K
-  rw [hΓ]
-  have hκ := (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit.naturality
-    ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).hom.app K ≫
-      (NatTrans.mapHomotopyCategory (upperStarRestrictScalarsIso (algebraMap R S) g).hom
-        (.up ℤ)).app K ≫
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).inv.app K)
-  have hβ := (leftDerivedUpperStarExtendScalarsIso R S g).inv.naturality
-    ((sheafCompose (ProEt.topology Y)
-      (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).mapDerivedCategoryFactorsh.hom.app K)
-  have hl := (g)^*[ModuleCat S].leftDerivedFunctorCounit.naturality
-    (((sheafExtendScalarsAdjunction (algebraMap R S) Y).mapHomotopyCategory (.up ℤ)).counit.app K)
-  have hB := leftDerivedUpperStarExtendScalarsIso_inv_app_comp_counit R S g
-    (((sheafCompose (ProEt.topology Y)
-      (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).mapHomotopyCategory (.up ℤ)).obj K)
-  have hH := mapHomotopyCategory_upperStarRestrictScalarsIso_counit R S g K
-  simp only [leftDerivedSheafExtendScalarsUpperStarCounit,
-    leftDerivedUpperStarSheafExtendScalarsCounit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] at hB
-  dsimp at hκ hβ hl
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hβ, cancel_epi]
-  simp only [Functor.map_comp, Category.assoc] at hκ
-  rw [hl, reassoc_of% hB, reassoc_of% hκ]
-  have hH' := congrArg DerivedCategory.Qh.map hH
-  simp only [Functor.map_comp, Category.assoc] at hH' ⊢
-  rw [hH']
+  exact Adjunction.mateEquiv_leftDerived_inv_eq (sheafExtendScalarsAdjunction (algebraMap R S) Y)
+    (sheafExtendScalarsAdjunction (algebraMap R S) Z)
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g)
+    (upperStarRestrictScalarsIso (algebraMap R S) g) (upperStarRestrictScalarsMap_eq R S g)
+    (mapHomotopyCategorySheafExtendScalarsCompUpperStarIso R S g) rfl _ _ _ _
+    (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh _ _
+    (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
+    (leftDerivedSheafExtendScalarsAdjunction R S Y) (leftDerivedSheafExtendScalarsAdjunction R S Z)
+    (leftDerivedSheafExtendScalarsAdjunction_counit_app_Qh_obj R S Y)
+    (leftDerivedSheafExtendScalarsAdjunction_counit_app_Qh_obj R S Z)
+    (leftDerivedUpperStarExtendScalarsIso R S g) _ rfl _ rfl
+    (leftDerivedUpperStarExtendScalarsIso_inv_app_comp_counit R S g) _ rfl
 
 end AlgebraicGeometry.ProEtale

@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardPullbackComparis
 /-!
 # Finite pushforward of the eight curve assertions
 
-Source: Stacks Project, Etale Cohomology, Lemma 0A5D (59.83.5)
-(blueprint: lem-weil-pbc-curve-assertions-finite-pushforward).
+Source: Stacks Project, Etale Cohomology, Lemma 0A5D (59.83.5).
 -/
 
 @[expose] public section
@@ -67,7 +66,7 @@ private theorem finite_lowerStar_torsion {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFin
 
 /-- Finite pushforward preserves torsion and transfers each of the eight curve assertions
 separately, and therefore their conjunction. Source: Stacks Project, Lemma 0A5D,
-Section 03SB (blueprint: lem-weil-pbc-curve-assertions-finite-pushforward).
+Section 03SB.
 
 Abelian sheaves are viewed as modules over `ULift ℤ` through the inverse of the standard
 forgetful equivalence, followed by restriction along `ULift.ringEquiv`. This is only a

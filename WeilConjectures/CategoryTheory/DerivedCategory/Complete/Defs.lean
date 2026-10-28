@@ -390,11 +390,10 @@ lemma DerivedCategory.derivedCompletionCone_pt
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     (DerivedCategory.derivedCompletionCone J I K).pt = K := rfl
 
-/-- Blueprint `def-weil-derived-complete`: Derived complete objects (Stacks 091S), for sheaves
-of modules over the constant ring `R` on a site; the repository realises the integral stage
-`D(Y, 𝒪_E)` on the small étale site with `R = 𝒪_E`, `I = 𝔪_E`
-(`DerivedCategory.derivedCompleteIntegral`). The blueprint's tower `(K ⊗ᴸ A_{E,n})_n` and its
-derived limit (Roos/Milnor triangle) are `DerivedCategory.derivedCompletionCone` and
+/-- Derived complete objects (Stacks 091S), for sheaves of modules over the constant ring `R` on a
+site; the repository realises the integral stage `D(Y, 𝒪_E)` on the small étale site with `R = 𝒪_E`,
+`I = 𝔪_E` (`DerivedCategory.derivedCompleteIntegral`). The blueprint's tower `(K ⊗ᴸ A_{E,n})_n` and
+its derived limit (Roos/Milnor triangle) are `DerivedCategory.derivedCompletionCone` and
 `CategoryTheory.Pretriangulated.IsHomotopyLimit`.
 
 An object `K` of the derived category of sheaves of `R`-modules on `(C, J)` is *derived

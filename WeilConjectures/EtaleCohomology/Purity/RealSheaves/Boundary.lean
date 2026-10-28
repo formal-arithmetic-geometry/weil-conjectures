@@ -43,7 +43,7 @@ points, which is what makes the residue degree `e_s` meaningful.
 
 ## Main definitions
 
-- `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `sk-d-real-boundary`.
+- `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `d-real-boundary`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryStalk` : the boundary stalk `V^{I_s}`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryFrobenius` : the residue Frobenius acting on it.
 - `AlgebraicGeometry.BoundaryDatum.conj` : the boundary datum for another choice of path, and
@@ -86,7 +86,7 @@ open Scheme Etale
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}}
   {p : C ⟶ Spec (.of K)} [IsCurve p] {pU : U ⟶ Spec (.of K)} [IsCurve pU]
 
-/-- Blueprint `sk-d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
 
 A *boundary datum* for a nonempty open `j : U₀ ↪ C₀` of a curve: a restriction
 `AlgebraicGeometry.WeilGroup.Restriction` of Weil groups along `j`, the finiteness of the
@@ -204,7 +204,7 @@ def conj (w : WU.carrier) : BoundaryDatum j WU WC where
 variable (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V]
 
-/-- Blueprint `sk-d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
 
 The boundary stalk of `J = j_* ℱ` at a geometric point over a boundary point `s`: the inertia
 invariants `V^{I_s}` of the local generic stalk `V`. The residue Frobenius lift
@@ -228,7 +228,7 @@ theorem residueFrobenius_mem_boundaryStalk (ρ : Representation (PadicAlgCl l) W
   rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right, map_mul, Module.End.mul_apply]
   exact congrArg _ (hv ⟨h, hh⟩)
 
-/-- Blueprint `sk-d-real-boundary`: Boundary extension and inertia.
+/-- Blueprint `d-real-boundary`: Boundary extension and inertia.
 
 The residue Frobenius `F_s` acting on the boundary stalk `V ^ (I_s)`, the Frobenius of the stalk
 of `j_* ℱ` at a geometric point over the boundary point `s`. -/

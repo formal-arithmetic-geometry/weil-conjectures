@@ -15,7 +15,7 @@ import Mathlib.RingTheory.MvPolynomial.Ideal
 /-!
 # The graded Koszul resolution on two polynomial variables
 
-Source: literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/
+Source: literature/blueprint/master/blueprint/sec-picard-framework/det-thm-picard-duality/
 lem-sc-p1-graded-resolution.md, graded-resolution source note
 (blueprint: lem-sc-p1-koszul-resolution).
 

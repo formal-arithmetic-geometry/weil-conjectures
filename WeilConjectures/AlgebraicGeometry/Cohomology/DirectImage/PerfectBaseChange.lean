@@ -82,7 +82,7 @@ over an affine scheme `S` with Noetherian ring of global sections
 base changes of `f` over `V` are base changes of `p`. The per-degree form is
 `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isFiniteFreeComplex_derivedPushforward [IsProper f] [LocallyOfFinitePresentation f]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
@@ -166,7 +166,7 @@ presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite pr
 
 * locally on `S`, `Rf_* ℱ` is represented by a bounded complex of finite free modules whose
   pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`; this is the
-  classical input `exists_isFiniteFreeComplex_higherDirectImage` of `sk-thm-picard-coherence`
+  classical input `exists_isFiniteFreeComplex_higherDirectImage` of `det-thm-picard-coherence`
   [Stacks, Tag 0B91];
 * over the affine base, `Rf_* ℱ` is represented by the bounded complex `K` of flat `A`-modules
   of `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`, and for every

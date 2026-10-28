@@ -13,7 +13,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.TwoParameterTranslationActi
 # The mixed coefficient of a commutator of right translations
 
 Source: the second coefficient step of the Lie-ring paragraph in
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint
+`def-wf-lie-algebra-derivation`.
 -/
 
 @[expose] public section

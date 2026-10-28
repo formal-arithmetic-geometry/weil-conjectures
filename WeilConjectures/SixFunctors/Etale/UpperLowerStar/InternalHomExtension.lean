@@ -20,7 +20,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 /-! # Internal Hom and étale restriction
 
 Source: `WeilConjectures/ConstructibleSheaf/Monoidal.lean`, coefficient dual argument.
-(blueprint: lem-weil-pbc-etale-pullback-internal-hom)
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ and internal Hom of restrictions have naturally isomorphic sections at every U.
 The section identifications commute with restriction along U' → U (both restrict the
 same sheaf morphism), giving the required sheaf isomorphism. Transport it across the
 localized-site equivalence to the functor Etale.upperStar.
-No finite generation or noetherian hypothesis is needed.
-(blueprint: lem-weil-pbc-etale-pullback-internal-hom) -/
+No finite generation or noetherian hypothesis is needed. -/
 theorem nonempty_etale_upperStar_ihom_iso (f : Y ⟶ X) [Etale f]
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj ((ihom F).obj G) ≅

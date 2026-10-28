@@ -13,11 +13,10 @@ public import Mathlib.CategoryTheory.Idempotents.Biproducts
 # The Karoubi envelope of a triangulated category is triangulated
 
 Let `C` be a triangulated category. The Karoubi envelope `Karoubi C`, with the pretriangulated
-structure of `WeilConjectures.CategoryTheory.Idempotents.Pretriangulated`, satisfies the
-octahedral axiom (blueprint `lem-weil-karoubi-envelope-triangulated`), following Balmer and
-Schlichting. A composable pair `X₁ ⟶ X₂ ⟶ X₃` of `Karoubi C`, padded by zero morphisms on the
-complements `Xᵢ.complement`, is isomorphic to the image of a composable pair of `C`, so it has an
-octahedron; the padding is then removed one object at a time
+structure of `WeilConjectures.CategoryTheory.Idempotents.Pretriangulated`, satisfies the octahedral
+axiom, following Balmer and Schlichting. A composable pair `X₁ ⟶ X₂ ⟶ X₃` of `Karoubi C`, padded by
+zero morphisms on the complements `Xᵢ.complement`, is isomorphic to the image of a composable pair
+of `C`, so it has an octahedron; the padding is then removed one object at a time
 (`CategoryTheory.Triangulated.nonempty_octahedron_of_pad₁` and its variants), using that the
 distinguished triangles of `Karoubi C` are stable under retracts.
 
@@ -70,8 +69,8 @@ lemma biprod_fst_comp_comp_inl_decomposition_hom {P Q : Karoubi C} (u : P ⟶ Q)
 
 end Karoubi
 
-/-- Blueprint `lem-weil-karoubi-envelope-triangulated`, octahedral axiom: the Karoubi envelope of
-a triangulated category satisfies the octahedral axiom (Balmer–Schlichting, Theorem 1.12).
+/-- The Karoubi envelope of a triangulated category satisfies the octahedral axiom
+(Balmer–Schlichting, Theorem 1.12).
 
 A composable pair `X₁ ⟶ X₂ ⟶ X₃` of the envelope, padded by zero maps on the complements
 `Xᵢ.complement`, becomes the image of a composable pair of `C`, which has an octahedron. The

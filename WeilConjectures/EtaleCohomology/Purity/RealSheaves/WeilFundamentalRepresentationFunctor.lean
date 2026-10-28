@@ -113,11 +113,11 @@ end StalkMap
 
 variable (D : WeilMonodromyData B)
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the functor `ℱ ↦ (ℱ_t, ρ_ℱ)` from lisse Weil sheaves to representations of the Weil group,
-sending a lisse Weil sheaf to its Weil fundamental representation
-(`def-wf-fundamental-representation`, `AlgebraicGeometry.WeilGroup.fundamentalRep`) on its stalk
-at the base point, and a morphism to its stalk at the base point. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the functor `ℱ ↦ (ℱ_t, ρ_ℱ)` from lisse Weil
+sheaves to representations of the Weil group, sending a lisse Weil sheaf to its Weil fundamental
+representation (`def-wf-fundamental-representation`, `AlgebraicGeometry.WeilGroup.fundamentalRep`)
+on its stalk at the base point, and a morphism to its stalk at the base point. -/
 noncomputable def fundamentalRepFunctor :
     LisseWeilSheaf K l C ⥤ Rep.{u + 1} (PadicAlgCl l) W.carrier where
   obj X := Rep.of (fundamentalRep M D X.obj X.property)
@@ -169,11 +169,11 @@ lemma fundamentalRepTensorEquiv_naturality {X X' Y Y' : LisseWeilSheaf K l C} (f
   exact tensorStalkLinearMap_stalkMap_tensorHom f.hom g.hom X.property X'.property Y.property
     Y'.property z d
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the Weil fundamental representation is a tensor functor. The identification
-`(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` (`AlgebraicGeometry.WeilGroup.fundamentalRepTensorEquiv`) is an
-isomorphism of bifunctors from pairs of lisse Weil sheaves to representations of the Weil
-group. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the Weil fundamental representation is a tensor
+functor. The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t`
+(`AlgebraicGeometry.WeilGroup.fundamentalRepTensorEquiv`) is an isomorphism of bifunctors from pairs
+of lisse Weil sheaves to representations of the Weil group. -/
 noncomputable def fundamentalRepTensorIso :
     LisseWeilSheaf.tensor K l C ⋙ fundamentalRepFunctor M D ≅
       (fundamentalRepFunctor M D).prod (fundamentalRepFunctor M D) ⋙
@@ -210,9 +210,10 @@ lemma fundamentalRep_adicConstant_apply (w : W.carrier)
     rw [fundamentalRep_frobLift]
     exact congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) h
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the Weil fundamental representation of the constant sheaf `ℚ̄_ℓ` is the trivial representation
-on `ℚ̄_ℓ`: its stalk is a line, on which the Weil group acts trivially. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the Weil fundamental representation of the
+constant sheaf `ℚ̄_ℓ` is the trivial representation on `ℚ̄_ℓ`: its stalk is a line, on which the
+Weil group acts trivially. -/
 noncomputable def fundamentalRepUnitEquiv :
     (fundamentalRep M D (LisseWeilSheaf.unit K l C).obj (LisseWeilSheaf.unit K l C).property).Equiv
       (Representation.trivial (PadicAlgCl l) W.carrier (PadicAlgCl l)) :=

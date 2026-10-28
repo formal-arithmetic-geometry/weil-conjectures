@@ -21,8 +21,7 @@ Following blueprint `def-weil-weil-sheaf-complex`, the `ℚ̄_ℓ`-stage of Weil
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`
 
 over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (`PadicAlgCl.FiniteIntermediateField l`), along the
-extensions of scalars `F ⊗_E -` for `E ⊆ F`
-(blueprint `def-weil-algebraically-closed-coefficients`).
+extensions of scalars `F ⊗_E -` for `E ⊆ F`.
 In this repository the `E`-stages are `AlgebraicGeometry.FieldWeilComplex k₀ E X` and the
 `ℚ̄_ℓ`-stage is realised directly as `AlgebraicGeometry.WeilComplex k₀ l X`, with the functors
 `AlgebraicGeometry.FieldWeilComplex.toWeilComplex` from the `E`-stages

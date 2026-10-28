@@ -16,9 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GenericKummer
 Let `C` be a smooth integral separated connected curve over a field `k`, with generic point
 `η : Spec k(C) ⟶ C`, and let `n` be invertible in `k`. Then the valuations at the closed points
 give an isomorphism `R¹η_* μₙ ≅ ⨁_{x closed} i_{x*} ℤ/n`
-(`AlgebraicGeometry.IsConnectedCurve.genericKummerResidueIso`, blueprint
-`lem-sc-generic-kummer-residues`). The blueprint assumes `k` algebraically closed; this is not
-needed.
+(`AlgebraicGeometry.IsConnectedCurve.genericKummerResidueIso`). The field `k` need not be
+algebraically closed.
 
 This is the case of a curve of `AlgebraicGeometry.Scheme.genericKummerResidueIso`, which holds
 for every integral regular noetherian scheme of dimension one: a smooth curve is regular
@@ -51,9 +50,9 @@ variable (f : C ⟶ Spec (.of k)) [Smooth f] [IsConnectedCurve f] [IsIntegral C]
 
 namespace IsConnectedCurve
 
-/-- **The generic Kummer residue sheaf of a smooth curve** (blueprint
-`lem-sc-generic-kummer-residues`). Let `C` be a smooth integral separated connected curve over a
-field `k`, with generic point `η : Spec k(C) ⟶ C`, and let `n` be invertible in `k`. Then
+/-- **The generic Kummer residue sheaf of a smooth curve**. Let `C` be a smooth integral separated
+connected curve over a field `k`, with generic point `η : Spec k(C) ⟶ C`, and let `n` be invertible
+in `k`. Then
 
 ```
   R¹η_* μₙ ≅ ⨁_{x closed} i_{x*} ℤ/n,
@@ -72,11 +71,10 @@ def genericKummerResidueIso :
   Scheme.genericKummerResidueIso (IsConnectedCurve.krullDim_eq_one (f := f))
     (Scheme.isUnit_natCast_of_ne_zero f hn) c hc
 
-/-- **The generic Kummer residue isomorphism of a smooth curve is given by valuations**
-(blueprint `lem-sc-generic-kummer-residues`): composed with the Kummer coboundary
-`η_* 𝔾ₘ ⟶ R¹η_* μₙ`, it is the divisor map `f ↦ ∑_x ord_x(f) [x]` followed by reduction
-modulo `n`. Here `cD` is any colimit cofan on the family `x ↦ i_{x*} ℤ` of points of
-codimension one, which are the closed points of `C`. -/
+/-- **The generic Kummer residue isomorphism of a smooth curve is given by valuations**: composed
+with the Kummer coboundary `η_* 𝔾ₘ ⟶ R¹η_* μₙ`, it is the divisor map `f ↦ ∑_x ord_x(f) [x]`
+followed by reduction modulo `n`. Here `cD` is any colimit cofan on the family `x ↦ i_{x*} ℤ` of
+points of codimension one, which are the closed points of `C`. -/
 lemma genericKummerResidueIso_spec
     (cD : Cofan fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantInt x.1)
     (hcD : IsColimit cD) :

@@ -55,7 +55,7 @@ we add its description on geometric stalks.
   of `j_! F` at a geometric point outside `U` vanishes
   (blueprint: `def-weil-pbc-extension-by-zero`).
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison_app`: `β` is an isomorphism at every
-  sheaf `G` (blueprint: `lemma-weil-pbc-finite-open-comparison-inverse`).
+  sheaf `G` (blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`).
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison`: `β` is a natural isomorphism
   (blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`).
 -/
@@ -213,7 +213,7 @@ checked on geometric stalks: at a point of `V` the stalk is a stalk of the isomo
 
 The blueprint also describes the inverse explicitly on sections and on geometric stalks;
 here only the existence of the inverse is recorded.
-(blueprint: `lemma-weil-pbc-finite-open-comparison-inverse`) -/
+(blueprint: `lemma-weil-pbc-finite-pushforward-extension-zero`) -/
 lemma Etale.isIso_finiteOpenComparison_app (sq : IsPullback jX v vbar jY)
     (G : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.finiteOpenComparison A sq).app G) := by

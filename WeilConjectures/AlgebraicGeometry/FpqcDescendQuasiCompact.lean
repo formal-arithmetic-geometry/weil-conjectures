@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 # Quasi-compactness descends along flat surjective quasi-compact morphisms
 
 Source: literature/stacks-project/descent.tex, Descent, Lemma Tag 02KQ
-(lemma-descending-property-quasi-compact) (blueprint: lem-weil-pbc-fpqc-descend-quasi-compact).
+(lemma-descending-property-quasi-compact).
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ namespace AlgebraicGeometry
 /-- Quasi-compactness descends along a surjective, quasi-compact morphism (in particular along a
 flat, surjective, quasi-compact one; flatness is not needed).
 
-The proof follows Descent, Lemma Tag 02KQ
-(blueprint: lem-weil-pbc-fpqc-descend-quasi-compact).  For an affine open `U` of `S`,
+The proof follows Descent, Lemma Tag 02KQ.  For an affine open `U` of `S`,
 put `V := g ⁻¹' U`; quasi-compactness of `g` makes `V` quasi-compact.  Put
 `X' := X ×ₛ S'` and `W := f' ⁻¹' V`, where `f'` is the second projection;
 quasi-compactness of `f'` and the quasi-compact-open preimage lemma make `W`

@@ -124,7 +124,7 @@ Class: torsion; decided by compact-support base change and the projection formul
 which need `[Finite Λ]`. The composition law of `Rf_!` is applied
 to `r₁₃ ≫ s₂ = r₂₃ ≫ q₂`, `s₂ : V ×ₛ V'' ⟶ V''` being the second projection, which is why that
 composite is assumed to admit a compactification.
-(sketch blueprint: `sk-lem-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
+(sketch blueprint: `lem-fd-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]

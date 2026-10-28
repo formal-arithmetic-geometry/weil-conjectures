@@ -88,7 +88,7 @@ of the cohomology of a complex of finite free modules is upper semicontinuous in
 lower semicontinuity of the ranks of its differentials
 (`AlgebraicGeometry.Scheme.Modules.exists_finrank_homology_pullback_le`).
 
-(blueprint: `sk-thm-picard-semicon`, `thm-pc-semicontinuity-base-change`) -/
+(blueprint: `det-thm-picard-semicon`, `thm-pc-semicontinuity-base-change`) -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
     UpperSemicontinuous (ℱ.hFiber f q) := by
   intro t m hm
@@ -171,7 +171,7 @@ the rank at a point being the fibre dimension there.
 The rank is only attached to a neighbourhood of each point, not to `T` as a whole: on a
 disconnected base the fibre dimension can be locally constant without being constant.
 
-(blueprint: `sk-thm-picard-semicon`) -/
+(blueprint: `det-thm-picard-semicon`) -/
 theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant [IsReduced T]
     (hℱ : ℱ.IsFlatOver f) (q : ℕ) (hq : IsLocallyConstant (ℱ.hFiber f q)) (t : T) :
     ∃ U : T.Opens, t ∈ U ∧

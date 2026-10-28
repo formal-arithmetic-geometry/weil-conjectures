@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 # Base change, fibres and induced sections
 
 Source: Stacks Project, Tags 01JX, 01K0, 0095; blueprint
-`sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md`
+`sec-abelian-varieties/def-sc-jacobian/def-pc-base-change.md`
 (blueprint: def-pc-base-change).
 
 `(Over.pullback T.hom).obj (Over.mk f)` is `X_T` over `T`: its underlying scheme is

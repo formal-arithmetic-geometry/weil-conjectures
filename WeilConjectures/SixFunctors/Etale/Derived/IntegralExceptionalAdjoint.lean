@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 Let `Λ` be a Noetherian domain, complete for a principal ideal `I = (ϖ)` with `Λ ⧸ I` finite of
 exponent invertible on an algebraically closed field `k` (the integral stage `Λ = 𝒪_E`), and
 `f : X ⟶ Y` a separated morphism of separated `k`-schemes of finite type. This file proves the
-integral exceptional adjoint of blueprint `prop-coef-integral-exceptional-adjoint`
+integral exceptional adjoint
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`): the derived limit
 `G_f L` of the exceptional inverse images of the reductions of `L ∈ Dᵇc(Y, Λ)` lies in
 `Dᵇc(X, Λ)`, is `Rf^! L`, satisfies the dual formula `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L` and has the
@@ -396,7 +396,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- The dual formula of `prop-coef-integral-exceptional-adjoint`: for integral dualizing
+/-- The dual formula for the integral exceptional adjoint: for integral dualizing
 complexes `ω_X`, `ω_Y` and a completed pullback `φ : Lf^* 𝔻_Y L ⟶ N` (an isomorphism modulo
 `ϖ`), the derived limit `c.pt = G_f L` is `𝔻_X N = RHom(N, ω_X)`. It is
 `nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal`
@@ -438,7 +438,7 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
   exact ⟨e.symm ≪≫ e'⟩
 
 include hϖ hI in
-/-- Constructibility and the Tor interval in `prop-coef-integral-exceptional-adjoint`: the
+/-- Constructibility and the Tor interval for the integral exceptional adjoint: the
 derived limit `c.pt = G_f L` lies in `Dᵇc(X, Λ)`, and if the reductions of `L` have Tor amplitude
 in `[a, b]`, those of `G_f L` have Tor amplitude in `[a - 2 dim X, b + 2 dim Y]`. As in the
 blueprint, `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`
@@ -516,8 +516,7 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
 
 include hϖ hI in
 omit [IsDomain Λ] [IsNoetherianRing Λ] [IsAlgClosed k] in
-/-- Clause 1 (reductions) of `prop-coef-integral-exceptional-adjoint`:
-`(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`. -/
+/-- The reductions of the integral exceptional adjoint: `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`. -/
 theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -545,8 +544,7 @@ theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShrie
 
 
 include hϖ hI in
-/-- Clause 3 of `prop-coef-integral-exceptional-adjoint`: the dual formula
-`G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`. -/
+/-- The dual formula for the integral exceptional adjoint: `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`. -/
 theorem nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -573,8 +571,7 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete {X Y : Sch
     hφ₁
 
 include hϖ hI in
-/-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
-constructible complexes.
+/-- The integral exceptional adjoint on constructible complexes.
 
 For a separated finite-type `f : X ⟶ Y` of finite-type `k`-schemes and `L ∈ Dᵇc(Y, Λ)`, put
 `G_f L = R lim_n Res_n Rf_n^! L_n`, the derived limit of the finite exceptional inverse images of
@@ -661,10 +658,10 @@ finite-type `k`-schemes:
   is identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ A_n)`, so that it is
   right adjoint to `Rf_!` on the constructible categories through
   `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`; its reductions are
-  `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)` (`prop-coef-integral-exceptional-adjoint`);
+  `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`;
 * the derived reductions of any object form a normalized tower, and a normalized tower is the
   tower of reductions of its derived limit, which is derived complete
-  (`rem-sf-tower-shapes-occurring`, `lem-coef-normalized-dvr-effectivity`). -/
+  (`lem-coef-normalized-dvr-effectivity`). -/
 theorem preservationMatrix_integral {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]

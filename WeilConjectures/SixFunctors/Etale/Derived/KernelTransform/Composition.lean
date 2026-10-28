@@ -80,7 +80,7 @@ Base change gives `q₁^* Rp₂,! ≅ Rr₂₃,! r₁₂^*`, the projection form
 `s₂` the projections of `V ×ₛ V''`. The projection formula for `r₁₃`, the symmetry of `⊗ᴸ`
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`) and the composition law turn the
 kernel transform of `𝒦' ∗ 𝒦` into the same expression.
-(sketch blueprint: `sk-lem-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
+(sketch blueprint: `lem-fd-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
 theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]

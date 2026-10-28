@@ -765,7 +765,7 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
 
 /-- If `α` is an eigenvalue of the boundary Frobenius of `ℱ` at `s`, then `α ^ 2` is one of
 `ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector
-(`sk-p-linear-spectra`). -/
+(`p-linear-spectra`). -/
 theorem hasEigenvalue_boundaryFrobenius_tprod_self
     {ρ : Representation (PadicAlgCl l) WU.carrier V} {s : ↥((Set.range j.base)ᶜ)}
     {α : PadicAlgCl l} (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :

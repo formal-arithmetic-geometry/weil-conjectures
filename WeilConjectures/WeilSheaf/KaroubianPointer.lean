@@ -10,10 +10,8 @@ public import WeilConjectures.WeilSheaf.Karoubian
 /-!
 # The Weil category is idempotent complete
 
-The blueprint remark `rem-ptr-weil-weil-sheaf-complex-7` records, in the notation of
-`def-weil-weil-sheaf-complex`, that the common-stage Weil category is idempotent complete and
-that the canonical functor into its Karoubi envelope is an exact equivalence; this is
-`lem-weil-weil-complex-qbar-idempotent-complete`
+In the notation of `def-weil-weil-sheaf-complex`, the common-stage Weil category is idempotent
+complete and the canonical functor into its Karoubi envelope is an exact equivalence
 (`AlgebraicGeometry.WeilComplex.isIdempotentComplete`,
 `AlgebraicGeometry.WeilComplex.isEquivalence_toKaroubi_and_isTriangulated`).
 -/
@@ -30,13 +28,11 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `rem-ptr-weil-weil-sheaf-complex-7`: Pointer to the properties of the Weil
-category.
+/-- Pointer to the properties of the Weil category.
 
 In the notation of `def-weil-weil-sheaf-complex`, the common-stage Weil category
 `D^b_{c,W}(Y, ℚ̄_ℓ)` (`AlgebraicGeometry.WeilComplex`) is idempotent complete, and the canonical
-functor into its Karoubi envelope is an exact equivalence. This is blueprint
-`lem-weil-weil-complex-qbar-idempotent-complete`. -/
+functor into its Karoubi envelope is an exact equivalence. -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi :
     IsIdempotentComplete (WeilComplex k₀ l Y) ∧
       (Idempotents.toKaroubi (WeilComplex k₀ l Y)).IsEquivalence ∧

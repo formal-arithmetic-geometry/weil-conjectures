@@ -37,7 +37,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
   (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
   if its pullback to the pro-étale site has.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`
-  (`lem-sf-comparison-tor-amplitude` (ii)): an étale complex whose pullback to the pro-étale
+  (`lem-exc-comparison-tor-interval` (ii)): an étale complex whose pullback to the pro-étale
   site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
   (`thm-sf-hom-comparison-constructible`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
@@ -80,7 +80,7 @@ noncomputable def mapDerivedCategoryComparisonUpperStarUnitIso (X : Scheme.{u}) 
     (_root_.DerivedCategory.singleFunctor _ 0).mapIso (comparisonUpperStarUnitIso Λ X) ≪≫
     _root_.DerivedCategory.singleFunctorObjUnitIso _
 
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (i).
 
 Let `Λ` be a finite ring. If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in
@@ -95,7 +95,7 @@ theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}}
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj _ hKt
 
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (i).
 
 The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`, for a
@@ -124,7 +124,7 @@ theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} (a b : ℤ)
       Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K :=
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff _ a b K
 
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (ii).
 
 Let `Λ` be a finite ring and `K'` a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor

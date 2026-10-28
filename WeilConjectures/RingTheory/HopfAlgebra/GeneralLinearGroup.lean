@@ -40,7 +40,7 @@ so the coordinate ring represents the group functor `R ↦ GL n R`
 
 ## Blueprint
 
-- `sk-d-geometry`: the ambient group `GL(V)` of the algebraic groups block, given by its
+- `det-d-geometry`: the ambient group `GL(V)` of the algebraic groups block, given by its
   Hopf algebra of coordinates.
 -/
 
@@ -58,7 +58,7 @@ noncomputable abbrev genericMatrix : Matrix n n (MvPolynomial (n × n) k) :=
 
 /-- The coordinate ring `k[x_ij, det⁻¹]` of the general linear group `GL_n` over `k`: the
 polynomial ring in the matrix entries, localized away from the determinant.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 abbrev CoordinateRing :=
   Localization.Away (genericMatrix n k).det
 
@@ -220,7 +220,7 @@ theorem mul_antipodeAlgHom_lTensor_comulAlgHom :
   simp [Matrix.one_apply]
 
 /-- The coordinate ring of `GL_n` is a commutative Hopf algebra over `k`.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable instance : HopfAlgebra k (CoordinateRing n k) :=
   HopfAlgebra.ofAlgHom (antipodeAlgHom n k) (mul_antipodeAlgHom_rTensor_comulAlgHom n k)
     (mul_antipodeAlgHom_lTensor_comulAlgHom n k)

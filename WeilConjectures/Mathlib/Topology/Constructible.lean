@@ -31,7 +31,7 @@ set under a morphism of finite presentation is constructible (Chevalley,
 
 ## Blueprint
 
-- `sk-i-geometry`: dense constructible sets.
+- `det-i-geometry`: dense constructible sets.
 - `lem-wf-affine-constructible-open`, clause (2): open pieces of constructible sets.
 -/
 
@@ -64,7 +64,7 @@ theorem Topology.IsConstructible.exists_isOpen_inter_subset_or {X : Type*} [Topo
   | compl s _ h => simpa only [compl_compl, or_comm] using h
 
 /-- A constructible set `s` dense in an irreducible closed set `t` contains a nonempty open subset
-of `t`. (blueprint: `sk-i-geometry`)
+of `t`. (blueprint: `det-i-geometry`)
 
 The Noetherian hypothesis is not needed for the proof. -/
 theorem exists_isOpen_inter_subset_of_isConstructible {X : Type*} [TopologicalSpace X]

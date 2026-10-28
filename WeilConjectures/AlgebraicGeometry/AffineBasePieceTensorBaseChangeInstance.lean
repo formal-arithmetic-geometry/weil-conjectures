@@ -273,7 +273,7 @@ set_option linter.unusedVariables false in
 /-- The fixed test-object affine tensor base-change construction used in the affine reduction.
 
 Source: Stacks Project, Schemes, Tags 01JR and 01I4; Limits, proof of Tag 01ZO.
-(blueprint: lem-weil-pbc-affine-base-piece-tensor-base-change-instance).
+(blueprint: lem-weil-pbc-affine-base-piece-tensor-base-change).
 
 The proof pastes the two pullback squares with the open restriction squares, transports
 both restricted fibre products through the displayed affine charts, and applies the

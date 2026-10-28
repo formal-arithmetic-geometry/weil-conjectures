@@ -86,7 +86,7 @@ quasi-isomorphically to `p'_* Č(g'⁻¹ U, g'^* 𝒢)`
 (`AlgebraicGeometry.Scheme.Modules.derivedPushforwardSingleIsoCechResolution`). The per-degree
 form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S : Scheme.{u}}
     [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
     [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]
@@ -194,7 +194,7 @@ every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` the cohomolog
 `R^q p'_* g'^* 𝒢`. This is the per-degree form of
 `exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : Scheme.{u}}
     [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
     [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]

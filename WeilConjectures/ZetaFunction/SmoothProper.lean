@@ -31,7 +31,7 @@ the functional equation and the Riemann hypothesis, and `Pᵢ` realizes the dete
   `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_two_mul`: the endpoint factors
   `P_{0,ℓ} = 1 - T` and `P_{2d,ℓ} = 1 - qᵈ T` (`prop-endpoints`).
 - `AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`: root purity
-  (`sk-prop-rootpurity`, `prop-weight-purity-roots`).
+  (`thm-weil-final-rh`, `prop-weight-purity-roots`).
 - `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`: the Weil conjectures
   for `X₀`, with the realization of the factors for every `ℓ`.
 -/
@@ -88,7 +88,7 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
-/-- Blueprint `sk-prop-rootpurity` and `prop-weight-purity-roots` (reciprocal roots have the
+/-- Blueprint `thm-weil-final-rh` and `prop-weight-purity-roots` (reciprocal roots have the
 weight-`i` absolute value): for `X₀` smooth, proper and geometrically connected of pure
 dimension `d` and every field embedding `ι : ℚ̄_ℓ → ℂ`, every reciprocal root `α` of `P_{i,ℓ}`
 satisfies `|ι α| = q^{i/2}`; equivalently, `ι P_{i,ℓ}` is pure of weight `i`. The reciprocal

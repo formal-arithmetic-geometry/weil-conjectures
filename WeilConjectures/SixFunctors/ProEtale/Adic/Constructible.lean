@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 # Lisse and constructible `ℓ`-adic sheaves on the pro-étale site
 
 Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
-the blueprint (`def-weil-constructible-heart`, `def-weil-finite-torsion-constructibility`), a
+the blueprint (`def-weil-finite-torsion-constructibility`), a
 sheaf `F` of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf`) if it is pro-étale locally a finite
@@ -33,7 +33,7 @@ of `π₁(X)` with coefficients in a finite extension `E` of `ℚ_ℓ`: the triv
 cover may be taken to be a pro-finite étale Galois cover, whose group acts continuously on the
 fibre `E^n`. In particular a lisse sheaf has a finite field of definition, and the category
 of constructible `ℚ̄_ℓ`-sheaves is the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of the categories of
-constructible `E`-sheaves (`def-weil-algebraically-closed-coefficients`).
+constructible `E`-sheaves.
 
 The strata are only required to be locally closed: on the noetherian schemes of the blueprint
 every locally closed subset is constructible, and with this convention pullback along an
@@ -61,8 +61,7 @@ this is the same as a global finite stratification.
 - The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
   On a locally Noetherian scheme they are also closed under kernels and cokernels
   (`WeilConjectures.SixFunctors.ProEtale.Adic.Abelian`), and they are closed under extensions
-  (`WeilConjectures.SixFunctors.ProEtale.Adic.Extension`), the blueprint
-  `def-weil-constructible-heart`.
+  (`WeilConjectures.SixFunctors.ProEtale.Adic.Extension`).
 -/
 
 @[expose] public section

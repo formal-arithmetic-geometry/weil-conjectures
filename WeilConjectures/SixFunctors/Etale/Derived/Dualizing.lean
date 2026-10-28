@@ -46,7 +46,7 @@ of `Dctf(X, Λ)` by `𝔻_X` (`lem-weil-verdier-preservation-strata`) are proved
 torsion coefficients).
 
 The biduality theorems are stated in the setting of the blueprint's
-`sk-prop-sf-biduality-general` and of `sk-def-sf-setting`: `X` is a separated scheme of finite
+`sk-prop-sf-biduality-general` and of `def-sf-setting`: `X` is a separated scheme of finite
 type over a field `k`, and the coefficients are a finite ring `Λ` whose exponent is invertible on
 `k`. Both hypotheses are needed. Over a singular base biduality fails already for `a = 𝟙`: on a
 nodal curve, with `K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so `𝔻_X 𝔻_X K` has

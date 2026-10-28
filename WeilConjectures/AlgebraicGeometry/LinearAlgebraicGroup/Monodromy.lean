@@ -87,9 +87,9 @@ the monodromy groups and read on `k`-points.
 
 `DegreeDatum`, `RepresentedDegreeDatum` and the attached definitions, among them
 `RepresentedDegreeDatum.arithmeticMonodromy` and `RepresentedDegreeDatum.geometricMonodromy`,
-implement `sk-d-monodromy`; `RepresentedDegreeDatum.geometricMonodromy` also implements
+implement `d-monodromy`; `RepresentedDegreeDatum.geometricMonodromy` also implements
 `def-wf-geometric-monodromy-group`;
-`RepresentedDegreeDatum.IsPositiveCentralPair` implements `sk-d-central`;
+`RepresentedDegreeDatum.IsPositiveCentralPair` implements `d-central`;
 `RepresentedDegreeDatum.arithmeticMonodromy_le_geometricMonodromy`,
 `RepresentedDegreeDatum.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy`,
 `RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy`,
@@ -143,7 +143,7 @@ namespace AlgebraicGeometry.Monodromy
 
 /-- A degree datum: a group `W`, a surjective homomorphism `deg : W → ℤ` and a chosen element
 `γ` of degree one.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 structure DegreeDatum (W : Type*) [Group W] where
   /-- The degree homomorphism. -/
   deg : W →* Multiplicative ℤ
@@ -339,7 +339,7 @@ end DegreeDatum
 `n → k`.
 Its tuple `(ρ, H_geom, G_arith, G^[m])` (`rep`, `geometricMonodromy`, `arithmeticMonodromy`,
 `degreeComponent`) is the monodromy data of `ρ`.
-(blueprint: `sk-d-monodromy`, `def-wf-monodromy-data`) -/
+(blueprint: `d-monodromy`, `def-wf-monodromy-data`) -/
 structure RepresentedDegreeDatum (W : Type*) [Group W] (n k : Type*) [Fintype n] [DecidableEq n]
     [Field k] extends DegreeDatum W where
   /-- The representation. -/
@@ -351,7 +351,7 @@ variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type
 variable (D : RepresentedDegreeDatum W n k)
 
 /-- The subgroup `P = ker deg` of degree-zero elements.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 def degreeZero : Subgroup W := D.deg.ker
 
 instance : D.degreeZero.Normal :=
@@ -359,7 +359,7 @@ instance : D.degreeZero.Normal :=
 
 /-- The arithmetic monodromy group `G = closure ρ(W)`, as a closed subgroup scheme of `GL_n`: the
 Hopf ideal of equations vanishing on `ρ(W)`, which cuts out the reduced Zariski closure.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 noncomputable def arithmeticMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.rep.range : Set (GL n k))
 
@@ -368,7 +368,7 @@ Hopf ideal of equations vanishing on `ρ(P)`, which cuts out the reduced Zariski
 Weil group `W(X₀, s)` (`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, with the degree datum
 `DegreeDatum.ofWeilGroup`) the subgroup `P` is the geometric fundamental group, and this is the
 geometric monodromy group `H_geom` of a representation of the Weil group.
-(blueprint: `sk-d-monodromy`, `def-wf-geometric-monodromy-group`) -/
+(blueprint: `d-monodromy`, `def-wf-geometric-monodromy-group`) -/
 noncomputable def geometricMonodromy : Ideal (CoordinateRing n k) :=
   vanishingIdeal (D.degreeZero.map D.rep : Set (GL n k))
 
@@ -379,13 +379,13 @@ instance : D.geometricMonodromy.IsHopfIdeal k :=
   inferInstanceAs ((vanishingIdeal (D.degreeZero.map D.rep : Set (GL n k))).IsHopfIdeal k)
 
 /-- The image `ρ(W)` of the representation lies in the arithmetic monodromy group.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 theorem range_rep_le_zeroLocus_arithmeticMonodromy :
     D.rep.range ≤ zeroLocus D.arithmeticMonodromy k :=
   subset_zeroLocus_vanishingIdeal D.rep.range
 
 /-- The image `ρ(P)` of the degree-zero subgroup lies in the geometric monodromy group.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 theorem map_rep_degreeZero_le_zeroLocus_geometricMonodromy :
     D.degreeZero.map D.rep ≤ zeroLocus D.geometricMonodromy k :=
   subset_zeroLocus_vanishingIdeal (D.degreeZero.map D.rep)
@@ -399,11 +399,11 @@ theorem rep_mem_zeroLocus_geometricMonodromy {w : W} (hw : w ∈ D.degreeZero) :
   D.map_rep_degreeZero_le_zeroLocus_geometricMonodromy ⟨w, hw, rfl⟩
 
 /-- The Frobenius element `F = ρ(γ)`.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 def frobenius : GL n k := D.rep D.degreeOneElement
 
 /-- The representation of `W` on `n → k` underlying the datum.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 noncomputable def asRepresentation : Representation k W (n → k) where
   toFun w := Matrix.toLinAlgEquiv' (D.rep w : Matrix n n k)
   map_one' := by simp
@@ -415,7 +415,7 @@ theorem asRepresentation_eq : D.asRepresentation = (toRepresentation n k).comp D
 /-- A datum is *semisimple* when `n → k` is a semisimple `W`-representation.  This is an `abbrev`
 so that the underlying class `Representation.IsSemisimpleRepresentation` stays visible to
 instance search.
-(blueprint: `sk-d-monodromy`) -/
+(blueprint: `d-monodromy`) -/
 noncomputable abbrev IsSemisimple : Prop :=
   Representation.IsSemisimpleRepresentation D.asRepresentation
 
@@ -430,7 +430,7 @@ noncomputable abbrev IsGeometricallySemisimple : Prop :=
 of the set `H(k)` with the singleton `{Fᴺ}`. Only `k`-points of `Z(G)` occur, so `Z(G)(k)` is
 written as `centerPoints`, the matrices of `G(k)` commuting with all of `G(k)`; this makes sense
 over any field `k`.
-(blueprint: `sk-d-central`, `d-central`) -/
+(blueprint: `d-central`) -/
 def IsPositiveCentralPair (N : ℕ) (z : GL n k) : Prop :=
   0 < N ∧ z ∈ (centerPoints D.arithmeticMonodromy : Set (GL n k)) ∩
     (zeroLocus D.geometricMonodromy k * {D.frobenius ^ N})

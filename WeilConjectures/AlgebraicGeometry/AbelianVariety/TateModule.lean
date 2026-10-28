@@ -67,7 +67,7 @@ the base `S`: a morphism `φ : A ⟶ B` of underlying schemes lying over `e` (th
 
 For `e = 𝟙 _` these are the homomorphisms of group schemes over `S`; for `e = Spec σ` with
 `σ` an automorphism of a field `k` these are the `σ`-semilinear homomorphisms acting on the Tate
-module (blueprint `sk-def-av-tate`). -/
+module (blueprint `def-wf-abelian-tate-module`). -/
 structure SemilinearGrpHom {S : Scheme.{u}} (e : S ⟶ S) (A B : Over S) [GrpObj A] [GrpObj B]
     where
   /-- The underlying morphism of schemes. -/
@@ -122,7 +122,7 @@ namespace IsAbelianVariety
 variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.of K))) [GrpObj A]
   [IsAbelianVariety A]
 
-/-- Blueprint `sk-def-av-tate`: `ℓ`-adic Tate module.
+/-- Blueprint `def-wf-abelian-tate-module`: `ℓ`-adic Tate module.
 
 The *`ℓ`-adic Tate module* of an abelian variety `A` over `K` is the inverse limit
 `T_ℓ A = lim_n A[ℓ^n](K̄)`, the transition map from level `n + 1` to level `n` being
@@ -225,8 +225,8 @@ noncomputable def pointsAddEquivGeometricPoints [IsAlgClosed K] :
   map_add' P Q := congr_arg Additive.ofMul (MonObj.comp_mul _ P.toMul Q.toMul)
 
 /-- Over an algebraically closed field `K` and for `ℓ ≠ char K`, the group `A(K̄)` is
-`ℓ`-divisible (blueprint `sk-prop-av-divisible`) and its `ℓ`-torsion has order `ℓ ^ (2g)`
-(blueprint `sk-prop-av-ntorsion-etale`). -/
+`ℓ`-divisible (blueprint `lem-sc-isogeny-surjective`) and its `ℓ`-torsion has order `ℓ ^ (2g)`
+(blueprint `lem-sc-ntorsion-etale`). -/
 theorem exists_zsmul_eq_and_natCard_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     (∀ x : Additive (Scheme.specAlgebraicClosure K ⟶ A), ∃ y, (ℓ : ℤ) • y = x) ∧
       Nat.card (AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) (ℓ : ℤ)) =
@@ -255,8 +255,8 @@ This is also the blueprint proposition `prop-av-tate-rank`.
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
 `ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`.
 
-The group `A(K̄)` is `ℓ`-divisible (blueprint `sk-prop-av-divisible`) and its `ℓ`-torsion has
-`ℓ ^ (2g)` elements (blueprint `sk-prop-av-ntorsion-etale`), so this is
+The group `A(K̄)` is `ℓ`-divisible (blueprint `lem-sc-isogeny-surjective`) and its `ℓ`-torsion has
+`ℓ ^ (2g)` elements (blueprint `lem-sc-ntorsion-etale`), so this is
 `AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
 theorem nonempty_linearEquiv_tateModule [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
@@ -281,7 +281,7 @@ section Functoriality
 variable {ℓ A} {B C : Over (Spec (.of K))} [GrpObj B] [IsAbelianVariety B] [GrpObj C]
   [IsAbelianVariety C]
 
-/-- Blueprint `sk-def-av-tate`: the action of homomorphisms on Tate modules.
+/-- Blueprint `def-wf-abelian-tate-module`: the action of homomorphisms on Tate modules.
 
 A homomorphism `f : A ⟶ B` of abelian varieties (for instance an endomorphism of `A`) acts
 componentwise on the Tate modules, `(P_n)_n ↦ (P_n ≫ f)_n`; this is a `ℤ_[ℓ]`-linear map
@@ -306,7 +306,7 @@ theorem tateModuleMap_comp (f : A ⟶ B) (g : B ⟶ C) [IsMonHom f] [IsMonHom g]
   LinearMap.ext fun t ↦ Subtype.ext <| funext fun n ↦ congr_arg Additive.ofMul <|
     (Category.assoc ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul f g).symm
 
-/-- Blueprint `sk-def-av-tate`: the action of homomorphisms on rational Tate modules.
+/-- Blueprint `def-wf-abelian-tate-module`: the action of homomorphisms on rational Tate modules.
 
 The `ℚ_[ℓ]`-linear map `V_ℓ A → V_ℓ B` induced by a homomorphism `f : A ⟶ B` of abelian
 varieties: the base change of `AlgebraicGeometry.IsAbelianVariety.tateModuleMap`. -/
@@ -320,7 +320,7 @@ theorem rationalTateModuleMap_tmul (f : A ⟶ B) [IsMonHom f] (a : ℚ_[ℓ])
       (a ⊗ₜ tateModuleMap f t : rationalTateModule ℓ B) :=
   AddCommGroup.rationalTateModule.map_tmul _ a t
 
-/-- Blueprint `sk-def-av-tate`: the action of semilinear homomorphisms on Tate modules.
+/-- Blueprint `def-wf-abelian-tate-module`: the action of semilinear homomorphisms on Tate modules.
 
 Let `φ : A ⟶ B` be a homomorphism of abelian varieties over `K` which is semilinear over an
 endomorphism `e` of `Spec K` (for instance a semilinear automorphism of `A` over an automorphism
@@ -409,7 +409,7 @@ theorem geometricPointsAddEquiv_eq_mapPoints (σ : Gal(AlgebraicClosure K/K)) :
   AddMonoidHom.ext fun _ ↦ rfl
 
 variable (A) in
-/-- Blueprint `sk-def-av-tate`: the Galois representation on the Tate module.
+/-- Blueprint `def-wf-abelian-tate-module`: the Galois representation on the Tate module.
 
 The group `Gal(K̄/K)` acts on the geometric points `A(K̄)` by coordinates
 (`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`), hence componentwise on the

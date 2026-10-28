@@ -61,18 +61,18 @@ HasInjectiveResolutions (X ×[k] T).Modules`. This hypothesis always holds, sinc
 
 - `AlgebraicGeometry.IsInvertibleDirectImage`: the condition cutting out `F`.
 - `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: the subfunctor `F ⊆ Pic_{X/k,σ}`
-  (blueprint `sk-def-picard-f`, `def-pc-f-subfunctor`).
+  (blueprint `det-def-picard-f`, `def-pc-f-subfunctor`).
 
 ## Main statements
 
 - `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`: the open locus of `T` over
   which a class lies in `F` (blueprint `lem-pc-f-open-subfunctor`).
 - `AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι`: `F` is an open
-  subfunctor of `Pic_{X/k,σ}` (blueprint `sk-lem-picard-f-open`).
+  subfunctor of `Pic_{X/k,σ}` (blueprint `det-lem-picard-f-open`).
 - `AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`: cohomology and base change for `F`
   (blueprint `lem-pc-f-open-subfunctor`).
 - `AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor`: the representability
-  criterion (blueprint `sk-thm-picard-criterion`).
+  criterion (blueprint `det-thm-picard-criterion`).
 -/
 
 @[expose] public section
@@ -153,7 +153,7 @@ open `U' ⊆ U` of `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_i
 and every morphism to `U` factors through `U'`.
 
 This is the subfunctor half of the blueprint's `lem-pc-f-open-subfunctor`, the base-change half
-of `sk-thm-picard-semicon`; it is what makes `AlgebraicGeometry.picardFunctorInvertibleDirectImage`
+of `det-thm-picard-semicon`; it is what makes `AlgebraicGeometry.picardFunctorInvertibleDirectImage`
 a subfunctor.
 
 (blueprint: `lem-pc-f-open-subfunctor`) -/
@@ -185,7 +185,7 @@ Being a `CategoryTheory.Subfunctor`, `F` comes with the inclusion natural transf
 `(picardFunctorInvertibleDirectImage f σ hσ).ι` into
 `(picardFunctorNormalized f σ hσ).toFunctor`.
 
-(blueprint: `sk-def-picard-f`, `def-pc-f-subfunctor`) -/
+(blueprint: `det-def-picard-f`, `def-pc-f-subfunctor`) -/
 noncomputable def picardFunctorInvertibleDirectImage (f : X ⟶ Spec (.of k)) [Flat f]
     [IsProper f] [LocallyOfFinitePresentation f]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
@@ -212,7 +212,7 @@ The proof follows Stacks, Lemma 0B9V: for `ℒ ∈ G(T)` the open `U ⊆ T` of
 property by `AlgebraicGeometry.relative_isOpenImmersion_of_exists_opens`. The morphism `f` is
 flat, being smooth.
 
-(blueprint: `sk-lem-picard-f-open`, `lem-pc-f-open-subfunctor`) -/
+(blueprint: `det-lem-picard-f-open`, `lem-pc-f-open-subfunctor`) -/
 theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι [IsSepClosed k]
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
@@ -253,7 +253,7 @@ applied at the residue fields of the points; the gluing criterion
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over` gives the
 representing scheme, which is a group object by `CategoryTheory.GrpObj.ofRepresentableBy`.
 
-(blueprint: `sk-thm-picard-criterion`, `thm-pc-criterion`) -/
+(blueprint: `det-thm-picard-criterion`, `thm-pc-criterion`) -/
 theorem isRepresentable_of_representable_open_subfunctor
     (G : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u + 1})
     (F : Subfunctor (G ⋙ forget GrpCat.{u + 1}))

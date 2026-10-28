@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 /-!
 # Picard pullback as extension of Jacobian points
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 `lem-sc-piczero-torsion-base-change`, steps 1 and 2.
 -/
 
@@ -31,7 +31,7 @@ set_option autoImplicit false
 
 /-- The degree-zero Picard comparison is extension of points of one abelian variety.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 `lem-sc-piczero-torsion-base-change`, steps 1 and 2.
 (blueprint: lem-sc-piczero-jacobian-point-comparison)
 

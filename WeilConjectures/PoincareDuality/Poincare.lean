@@ -118,7 +118,6 @@ noncomputable def cupProduct :
   Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
     (boundedConstructibleExceptionalProjection ℓ p)
 
-omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality is the trace–cup pairing**: the transpose
 `Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of the Poincaré duality morphism is the cup product
 followed by the trace. -/
@@ -126,7 +125,6 @@ theorem uncurry_poincareMap :
     uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
   Verdier.uncurry_poincareMap _ _ _ _
 
-omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality**: the Poincaré duality morphism
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
 theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by
