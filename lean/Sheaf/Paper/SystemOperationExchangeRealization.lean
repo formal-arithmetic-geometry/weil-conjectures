@@ -28,6 +28,8 @@ public import Sheaf.SixFunctors.OpenTensorNormalization
 import Sheaf.AlgebraicGeometry.VaryingRingOperations
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import Sheaf.Paper.SystemDirectImageRoosPresentation
+import Sheaf.Paper.DerivedLimitTriangleTransport
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import Sheaf.CategoryTheory.SequenceModulePullbackEvaluation
 import Sheaf.Paper.SystemDirectImageEffectivity
@@ -57,7 +59,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u v
-open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Functor
 
 namespace WeilConjectures.FrobeniusExchange
@@ -169,8 +171,6 @@ def finiteTensorExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
 
 
 variable (A : Type u) [CommRing A] [Finite A]
-
-
 
 
 section Systems
@@ -842,7 +842,22 @@ theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
     ∃ hprod : HasProduct (sfDirectImageTerm l E f K.obj),
       ∃ M : @SfIntegralDirectImage l _ E _ _ _ X Y f K.obj hprod,
         M.obj = (integralDirectImage l E f).obj K.obj := by
-  sorry
+  obtain ⟨hprod, L, e, _a, _ha⟩ :=
+    WeilConjectures.systemDirectImage_roosPresentation l E f ((models l E).system X) K.obj
+  let _ := hprod
+  let N := (coefficientSequenceLimit l E Y).obj
+    ((integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj
+      (((models l E).system X).reduction.obj K.obj))
+  let p := e.hom ≫ L.projection
+  let δ := L.boundary ≫ (shiftFunctor _ (1 : ℤ)).map e.inv
+  have hroos : IsDerivedLimitTriangle (sfDirectImageTransition l E f K.obj)
+      N p δ  := derivedLimitTriangleTransport
+    (sfDirectImageTransition l E f K.obj) e L.projection L.boundary L.roos
+  let M : @SfIntegralDirectImage l _ E _ _ _ X Y f K.obj hprod :=
+    { obj := N, projection := p, boundary := δ, roos := hroos }
+  refine ⟨hprod, M, ?_⟩
+  rfl
+
 
 /-- The simultaneous direct-image realization is bounded constructible.
 Source: blueprint integral direct-image paragraph; Bhatt--Scholze 6.5, 6.7
@@ -1298,3 +1313,8 @@ theorem compactIntegral_reduction (c : Compactification f)
 end ConstructibleOperations
 
 end WeilConjectures.FrobeniusExchange
+ 
+ 
+  
+   
+    

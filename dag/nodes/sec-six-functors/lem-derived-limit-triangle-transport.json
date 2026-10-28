@@ -1,0 +1,82 @@
+{
+ "id": "lem-derived-limit-triangle-transport",
+ "kind": "statement",
+ "title": "Transport of a derived-limit triangle along an object isomorphism",
+ "statement": "In a pretriangulated category, a derived-limit triangle remains a derived-limit triangle after transporting its limit object along an isomorphism, with the projection and shifted boundary transported canonically.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Tag 08TC, transport of distinguished triangles under isomorphism"
+ },
+ "proof": [
+  {
+   "text": "Represent the derived-limit triangle as a distinguished triangle and apply the pretriangulated closure under isomorphic triangles using the vertex isomorphism and identity isomorphisms on the product and shifted product vertices.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Tag 08TC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isomorphic_distinguished Triangle.isoMk",
+   "results": "Mathlib pretriangulated API supplies closure under isomorphic distinguished triangles.",
+   "date": "2026-10-28",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemOperationExchangeRealization",
+  "date": "2026-10-28",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "Categorical transport needed to identify the Roos presentation object with the realized direct-image object",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-operation-exchange-realization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedLimitTriangleTransport",
+  "file": "lean/Sheaf/Paper/DerivedLimitTriangleTransport.lean",
+  "declaration": "derivedLimitTriangleTransport",
+  "statement": "theorem derivedLimitTriangleTransport {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] {T : ℕ → C} [HasProduct T] (t : ∀ n, T (n + 1) ⟶ T n) {A B : C} (e : A ≅ B) (p : B ⟶ ∏ᶜ T) (δ : ∏ᶜ T ⟶ B⟦(1 : ℤ)⟧) (h : IsDerivedLimitTriangle t B p δ) : IsDerivedLimitTriangle t A (e.hom ≫ p) (δ ≫ (shiftFunctor C (1 : ℤ)).map e.inv)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261028T020559-L-2526547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261028T020559-L-2526547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
