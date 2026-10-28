@@ -16,10 +16,9 @@
  ],
  "proof": [
   {
-   "text": "Use the DVR of integers of E and its standard quotient resolution: multiplication by a uniformizer power between two free rank-one modules, with augmentation to the quotient.",
+   "text": "Use PrincipalKoszulStrictReplacement.completed_exact for the actual completed coefficient ring, the recorded uniformizer power and the actual quotient projection. This gives a short exact sequence from the unit to the unit to the finite coefficient unit with scalars restricted along the limit projection. The finite-field datum is irrelevant to the construction of the completed ring.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect"
+    "lem-a1-principal-koszul-strict-replacement"
    ],
    "elementary": false,
    "source": {
@@ -28,10 +27,30 @@
    }
   },
   {
-   "text": "Apply the constant-sheaf construction and extend to the completed sheaf. Flatness and the completed reduction identification preserve the augmented resolution and identify its target with the actual restricted finite unit. The terms remain unit modules and a bounded flat complex is K-flat.",
+   "text": "Apply the degree-zero single functor to this short exact sequence and take the mapping cone of its first arrow. The cone term in degree i is U[0]^(i+1) direct sum U[0]^i. The zero-summand biproduct isomorphisms identify its terms in degrees -1 and 0 with the unit; all other terms vanish. These are Mathlib homotopyCofiber.XIsoBiprod, isoBiprodZero, isoZeroBiprod and singleObjXSelf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  },
+  {
+   "text": "The unit is categorically flat. Transport this property along the two coordinate isomorphisms; all other terms are flat because they are zero. The site-sheaf tensor comparison gives IsFlatOnSite for every term. The support calculation gives the upper bound zero, so the independent-coefficient bounded-flat criterion makes the constructed complex K-flat.",
    "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  },
+  {
+   "text": "The single functor is exact. Mathlib mappingCone.descShortComplex gives the augmentation of its short exact image, and mappingCone.quasiIso_descShortComplex makes this augmentation a quasi-isomorphism. Restriction along the actual coefficient projection is exact; its mapCochainComplexSingleFunctor isomorphism identifies the degree-zero restricted unit with the specified restriction of the degree-zero finite unit. Compose the augmentation with the inverse of this isomorphism.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -41,15 +60,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-bounded-above-flat-kflat-site"
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+  "place": "paragraph 1; Y6, 2026-10-28: reuse the existing completed exact coefficient row, then construct the cone and prove its support, unit terms, K-flatness and augmentation using Mathlib. No new split."
  },
  "mathlib_searches": [
   {
@@ -118,10 +137,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K7",
+  "group": "Y6",
   "result": "pass",
-  "landing": "20261028T020546-L-2524164",
-  "kind": "interface",
+  "landing": "20261028T035021-L-3581207",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
