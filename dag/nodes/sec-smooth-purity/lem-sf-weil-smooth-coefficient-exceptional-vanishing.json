@@ -21,29 +21,32 @@
  },
  "proof": [
   {
-   "text": "Construct the normalized coefficient comparison family for the chosen exceptional system and specialize the coefficient smooth-purity isomorphism for the structure morphism to the coefficient unit.",
+   "text": "Base change the structure morphism to the chosen geometric field; smoothness of relative dimension d is stable under base change. Apply RationalSmoothPurityCanonical.commonIso to the coefficient unit. The third equality of constant_purity_frobenius_square is precisely the intertwining equation for this isomorphism. Endofunctor.IsoAlgebra.isoMk therefore gives a proved isomorphism from twistedConstant P X0 d to exceptionalConstant P X0 c0 S. All geometric instances are those inherited from the fixed arithmetic model.",
    "uses": [
-    "lem-sf-adic-qbar-constructible-realization",
-    "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+    "thm-pur-rational-and-qbar-purity",
+    "lem-pur-constant-purity-frobenius-square",
+    "lem-sbc-smooth-relative-dimension-permanence"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient smooth-purity identification is a shifted single Tate line, so its homology vanishes outside -2d; transport this vanishing along the comparison family and retain the native comparison isomorphisms in every degree.",
+   "text": "Obtain one normalized comparison family C with its native exceptional comparison and its all-degree shifted-Tate comparison from lem-sf-coefficient-shifted-tate-comparison. Preserve its first clause verbatim. For n not equal to -2d, WeilSheaf.isZero_homologySheaf_shift_toComplex computes the native cohomology of the shifted Tate sheaf tensor constant as zero; integer arithmetic identifies the excluded degree. Transport this zero object along the Tate comparison, then along C_n applied to the inverse of the proved smooth-purity pair isomorphism. This proves the desired exceptional endpoint vanishing for the same C in every degree.",
    "uses": [
-    "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+    "lem-sf-coefficient-shifted-tate-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-adic-qbar-constructible-realization",
-  "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+  "thm-pur-rational-and-qbar-purity",
+  "lem-pur-constant-purity-frobenius-square",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-coefficient-shifted-tate-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "K2",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
-  "place": "Coefficient-stage smooth purity and native comparison transport."
+  "place": "Smooth specialization, with the Frobenius-pair isomorphism proved in Lean and shifted single-sheaf cohomology computed by the existing native homology-shift theorem."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -81,12 +84,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261027T234250-L-81777",
+  "landing": "20261028T020536-L-2522528",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
