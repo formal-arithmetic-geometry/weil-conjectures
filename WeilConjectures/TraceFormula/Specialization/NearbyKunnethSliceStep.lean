@@ -67,11 +67,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry
 
-/-- The field `K = k'(x)^alg` of the generic slices has the characteristic of `k'`. -/
-lemma ringChar_traitSliceField (k' : Type u) [Field k'] :
-    ringChar (traitSliceField k') = ringChar k' :=
-  (Algebra.ringChar_eq k' (traitSliceField k')).symm
-
 namespace ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
