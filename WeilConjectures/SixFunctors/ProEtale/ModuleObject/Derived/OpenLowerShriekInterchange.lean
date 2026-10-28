@@ -47,10 +47,11 @@ restrictions `Lj^*` and `Lc^*` jointly reflect isomorphisms
   along `c`, `Lc^* Rp'_* (i'_! K) ≅ Rq_* Lc'^* (i'_! K) = 0`, where `c' : Zc' ⟶ Z'` is the
   base change of `c` (`overPullbackObj`), whose range misses `X'`.
 
-The only sorried inputs are proper base change
+It uses proper base change
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper` and its
-`_padicAlgCl` version) and the preservation of bounded constructible complexes by the six
-functors (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`).
+`_padicAlgCl` version); its only sorried input is the preservation of bounded constructible
+complexes by the six functors
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`).
 
 -/
 
