@@ -34,6 +34,7 @@ open Scheme CondensedRing PadicAlgCl
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **The derived residue field transport is compatible with composition**: the isomorphisms
 `residueFieldDerivedUpperStarIso` are compatible with the composition isomorphisms
 `L(p ≫ q)^* ≅ Lq^* ⋙ Lp^*` of derived pullbacks. -/

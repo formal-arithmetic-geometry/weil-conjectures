@@ -98,6 +98,7 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {ℓ E} {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The cube condition of `CategoryTheory.Adjunction.nonempty_arrowIso_map_exchangeRight_app` for
 the derived pullbacks of module objects over `𝔽_E` and of sheaves of `𝔽_E`-modules along a
 commutative square, assuming the compatibility of `residueFieldDerivedUpperStarIso` with the
