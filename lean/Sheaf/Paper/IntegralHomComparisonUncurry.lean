@@ -29,6 +29,10 @@ K-flat representatives, using the signed total tensor and the normalized evaluat
 Source: Stacks Tags 06YY and 08J7; the normalization paragraphs of the integral Hom
 reduction construction (blueprint: lem-sfb-integral-hom-comparison-normalization).
 -/
+private theorem reduction_curry_symm_apply
+    {A B : Type*} (e : A ≃ B) (x : A) : e.symm (e x) = x := by
+  exact e.symm_apply_apply x
+
 theorem integralHomComparison_uncurry_eq
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
