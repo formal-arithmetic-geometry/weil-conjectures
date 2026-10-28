@@ -17,14 +17,12 @@
  ],
  "proof": [
   {
-   "text": "Fix the chosen compactification $X_0\\xrightarrow{j_0}Z_0\\xrightarrow{p_0}Y_0$ of the native framework, so $Rf_{0!}=Rp_{0*}j_{0!}$. Put $A=j_{0!}M$. The native basic comparisons give $A$ bounded constructible; explicitly exactness gives $H^r(A)=j_{0!}H^r(M)$, and extending each finite stratification by the closed complement with rank zero preserves constructibility. Since $p_0$ is proper and $Y_0$ finite type, finite-type composition gives $Z_0$ finite type. The diagonal $Z_0\\to Z_0\\times_{k_0}Z_0$ factors through $Z_0\\times_{Y_0}Z_0$: the first factor is closed by properness and the second is the base change of the closed diagonal of $Y_0$. Closed immersions compose, since quotient ring maps compose to quotient by the inverse-image ideal. Thus $Z_0$ is separated, and geometric base change preserves this scheme domain.",
+   "text": "Use the framework chosen compactification q=(j,p). Its finite-type, quasi-compact and separated structure-map instances are already constructed in NativeCompactProjectionFormula by composition with the proper map p. Quasi-compactness of j follows from q.quasiCompact_openImmersion and quasi-compactness of f. The third clause of nativeWeilBasicComparisons supplies bounded constructibility of exact derived extension by zero. Lift this functor to J: WCder(X) -> WCder(Z), retaining exactly the underlying ambient extension functor.",
    "uses": [
     "def-sf-native-weil-derived-framework",
     "lem-sf-native-weil-basic-comparisons",
     "def-weil-proper-morphism",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-pod-separated-finite-type-base-change"
+    "lem-sfb-finite-type-composition-base-change"
    ],
    "elementary": true,
    "source": {
@@ -33,7 +31,7 @@
    }
   },
   {
-   "text": "Apply the native proper comparison to $(A,T)$ and the native open tensor comparison to $(M,p_0^*T)$. Their natural isomorphisms compose as\n$$Rp_{0*}j_{0!}M\\otimes^LT\\xrightarrow{\\alpha^W}Rp_{0*}(j_{0!}M\\otimes^Lp_0^*T)\\xrightarrow{Rp_{0*}\\gamma^W}Rp_{0*}j_{0!}(M\\otimes^Lj_0^*p_0^*T).$$\nUse the balanced equivariant pullback compositor supplied by the open comparison to identify $j_0^*p_0^*T$ with $f_0^*T$. By the definition of $Rf_{0!}$ this is precisely the chosen compactification projection isomorphism. Each arrow and its inverse lies in the actual ambient derived Weil category and is natural in both derived variables.",
+   "text": "Obtain r from native_proper_projection_realization at p and s,d,c with their compatibility from native_open_derived_tensor at j. Whisker r.projection on the left by J times the identity. Whisker d.gamma on the left by the inclusion of WCder(X) times p* of the inclusion of WCder(Y), then on the right by Rp*. Finally take the product of the identity with the balanced nativeProjectionPullComp, and whisker by derived tensor, j!, and Rp*. Compose the three natural isomorphisms. Their functors are definitionally the ambient images of nativeCompactProjectionLeft and nativeCompactProjectionRight.",
    "uses": [
     "lem-sf-native-proper-projection-realization",
     "lem-sf-native-open-derived-tensor",
@@ -46,7 +44,7 @@
    }
   },
   {
-   "text": "Finally, $Rf_{0!}M$ and $Rf_{0!}(M\\otimes^Lf_0^*T)$ belong to $\\mathrm{WC}^{\\mathrm{der}}(Y_0)$: pullback preservation gives $f_0^*T$, tensor closure gives $M\\otimes^Lf_0^*T$, and compact-support preservation applies to both inputs. Tensor closure also gives $Rf_{0!}M\\otimes^LT$ in that subcategory. Since it is full, the ambient isomorphism and its inverse are morphisms in this subcategory, with their same naturality equations. This proves the entire claimed formula for every bounded constructible derived $T$.",
+   "text": "The existing restricted pullback, tensor and compact-support functors already use the preservation results to place both sides in WCder(Y). Apply the fully faithful right-whiskering of the full inclusion WCder(Y) -> D(W_Y) to take the preimage of the ambient natural isomorphism, restricting its hom, inverse and naturality simultaneously. The preimage has the same underlying hom components. The equation r.projectionMate identifies its first factor with nativeProjectionProperMate; unfolding the whiskered components gives precisely the displayed three-factor equation. Retain s,d,c and their supplied representative/unit compatibility. This works for every bounded constructible T.",
    "uses": [
     "lem-sf-native-weil-pullback-star-preservation",
     "lem-sf-derived-weil-tensor-hom-adjunction",
@@ -62,20 +60,18 @@
  "proof_deps": [
   "def-sf-native-weil-derived-framework",
   "def-weil-proper-morphism",
-  "lem-pod-separated-finite-type-base-change",
   "lem-sf-derived-weil-tensor-hom-adjunction",
   "lem-sf-native-open-derived-tensor",
   "lem-sf-native-proper-projection-realization",
   "lem-sf-native-weil-basic-comparisons",
   "lem-sf-native-weil-pullback-star-preservation",
   "lem-sf-native-weil-shriek-triangulated",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-closed-immersion-base-change"
+  "lem-sfb-finite-type-composition-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
-  "place": "Step 1, second Hom bijection; native compactification assembly, using BS Proposition 6.8.14/Remark 6.8.15 and Stacks 0GL1 for the factors"
+  "place": "Step 1, second Hom bijection; Lean assembly from native proper/open comparisons by whiskering, balanced pullback composition and fully faithful restriction (F2, 2026-10-28)"
  },
  "mathlib_searches": [
   {
@@ -351,5 +347,15 @@
   "group": "NC",
   "result": "fix",
   "note": "7b45 (NC) = NA 770f Lean byte-identical (5 modules, compact node identical; only group fields, item lean.note and report self-check differ); item not live. Maths re-read: actual homEquiv counit mate, complete pinned forget/realization squares, identity-open normalization, arbitrary A,T, IsProper on theorem only, sorry only, lean.statement verbatim; edge cases p=id, A/T=0, empty, multi-degree OK. Import closure re-run vs side-live b252b5a: no path to NativeCompactProjectionFormulaTheorem/WCSTC/DerivedWeilOperations. FIX (770f fixes lost, 7th time): (1) tensor-comparison node stmt_deps += def-sf-native-open-tensor-operations, def-sf-generic-open-tensor-presentation (cited); (2) comparisons node stmt_deps += def-sf-native-weil-closed-models, def-sf-native-open-tensor-operations, def-pur-completed-pullback-tensor-comparison (cited; closes item nativeOpenPull gap); added edges acyclic; (3) H11 report: self-check second reading replaced by real reading. Advisory: compact node lacks cite of new data node and lists nativeConstructibleTensor; geometricMap theorem-owned. No Lean changed, no compile; worker scompile 5 modules <60 s and dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261028T020350-L-2501033",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

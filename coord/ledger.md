@@ -20581,3 +20581,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:03 L: merged deliver/F1/Sheaf.Paper.RefinementProperCounitIsIso (stage 3; reviewer PASS; first push; landing 20261028T020342-L-2498760 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:03 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ProEtaleOpenProperClopenWitness (stage 3; reviewer PASS; first push; landing 20261028T020343-L-2499310 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:03 L: merged deliver/F2/Sheaf.Paper.CoefDualizingClosedChart (stage 3; reviewer PASS; first push; landing 20261028T020345-L-2499727 (proof); batch 20261028T020127; modules 1; new nodes 1)
+- 02:03 L: merged deliver/F2/Sheaf.Paper.NativeCompactProjectionFormulaTheorem (stage 3; reviewer PASS; first push; landing 20261028T020350-L-2501033 (interface); batch 20261028T020127; modules 1; new nodes 0)

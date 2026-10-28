@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Paper.NativeCompactProjectionFormula
+import Sheaf.Paper.NativeProperProjectionRealization
+import Sheaf.WeilSheaf.NativeBasicComparisons
 
 /-! # Compact projection formula theorem
 
@@ -19,6 +21,9 @@ All comparison and compactification definitions are reused from their original m
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+
+attribute [local irreducible] HasDerivedCategory.standard
+  AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedClosedComparison
 
 universe u
 
@@ -39,6 +44,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the normalized comparison records exceeds the default heartbeat budget.
 /-- Compact projection for arbitrary bounded constructible derived Weil inputs.
 The isomorphism is in the full bounded constructible category, natural in both
 variables. Its underlying ambient map is exactly the chosen-compactification
@@ -99,7 +106,38 @@ theorem native_compact_projection_formula :
               (nativeProjectionCompactification k₀ f).i).map
               ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).map
                 (Prod.mkHom (𝟙 M.obj) ((nativeProjectionPullComp k₀ l f).hom.app T.obj)))) := by
-  sorry
+  let q := nativeProjectionCompactification k₀ f
+  let : QuasiCompact q.i := q.quasiCompact_openImmersion inferInstance
+  let E := ProEtaleWeilSheaf.nativeOpenExtension k₀ l q.i
+  let R := (ProEtaleWeilSheaf.lowerStar k₀ l q.g).rightDerivedFunctor
+  let IX := (objectProperty k₀ l X).ι
+  let IY := (objectProperty k₀ l Y).ι
+  let J : WeilComplex k₀ l X ⥤ WeilComplex k₀ l q.Z :=
+    (objectProperty k₀ l q.Z).lift (IX ⋙ E) (fun M ↦
+      (nativeWeilBasicComparisons k₀ l).2.2.1 X q.Z q.i |>.2.2 M.obj M.property)
+  obtain ⟨r⟩ := ProEtaleWeilSheaf.native_proper_projection_realization k₀ l q.g
+  obtain ⟨s, d, c, hc⟩ := ProEtaleWeilSheaf.native_open_derived_tensor k₀ l q.i
+  -- Apply proper projection to the bounded constructible extension of M.
+  let alpha := Functor.isoWhiskerLeft (J.prod (𝟭 (WeilComplex k₀ l Y))) r.projection
+  -- Apply the normalized open comparison to (M, p* T), then push forward.
+  let beta := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft
+      (IX.prod (IY ⋙ ProEtaleWeilSheaf.nativeOpenPull k₀ l q.g)) d.gamma) R
+  -- Replace j* p* by f* using the actual balanced compositor.
+  let pull := Functor.isoWhiskerLeft IY (nativeProjectionPullComp k₀ l f)
+  let delta := Functor.isoWhiskerRight (NatIso.prod (Iso.refl IX) pull)
+    (ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X ⋙ E ⋙ R)
+  let ambient : nativeCompactProjectionLeft k₀ l f ⋙ IY ≅
+      nativeCompactProjectionRight k₀ l f ⋙ IY :=
+    alpha ≪≫ beta ≪≫ delta
+  -- Fullness restricts both arrows and all naturality equations at once.
+  let pi : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f :=
+    ((objectProperty k₀ l Y).fullyFaithfulι.whiskeringRight _).preimageIso ambient
+  refine ⟨r.balanced, s, d, c, pi, hc, ?_⟩
+  intro M T
+  change r.projection.hom.app (J.obj M, T) ≫ _ = _
+  rw [r.projectionMate]
+  rfl
 
 
 end AlgebraicGeometry.WeilComplex
