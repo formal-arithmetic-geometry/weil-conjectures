@@ -24,7 +24,7 @@ open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] projectionMap singleUnitIso
-attribute [local irreducible] pullSectionIso supportedUnitIso pushSectionIso
+attribute [local irreducible] supportedUnitIso pushSectionIso
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]

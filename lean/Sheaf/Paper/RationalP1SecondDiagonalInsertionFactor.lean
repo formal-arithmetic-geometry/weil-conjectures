@@ -240,7 +240,7 @@ private theorem diagonal_tensor_inverse
   simp only [diagonalTensorIso, Iso.symm_inv, asIso_hom, diagonalTensorMap]
 
 attribute [local irreducible] firstProjection secondProjection square
-attribute [local irreducible] pullSectionIso supportedUnitIso pushSectionIso
+attribute [local irreducible] supportedUnitIso pushSectionIso
 attribute [local irreducible] tensorShiftIso diagonalClassMap
 
 set_option maxHeartbeats 800000 in

@@ -89,6 +89,7 @@ set_option maxHeartbeats 800000 in
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
 /-- The canonical section comparison, with no arbitrary isomorphism. Source: blueprint
 unit/counit clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/
+@[no_expose]
 def pullSectionIso (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y)) :
     CondensedRing.moduleObjectDerivedPullback Λ f ⋙
@@ -97,6 +98,20 @@ def pullSectionIso (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveLine Y)
   (CondensedRing.leftDerivedUpperStarComp Λ (diagonalImmersion Y) f).symm ≪≫
     eqToIso (congrArg (fun g ↦ CondensedRing.moduleObjectDerivedPullback Λ g) h) ≪≫
       CondensedRing.leftDerivedUpperStarId Λ (ProjectiveLine Y)
+
+/-- The canonical section comparison is the pullback compositor followed by the
+identity comparison. This equation keeps the construction available without unfolding
+it during unrelated dependent interface checks. Source: blueprint unit/counit clause 1
+(blueprint: def-sfb-projective-diagonal-pullback). -/
+theorem pullSectionIso_eq (Y : Scheme.{u})
+    (f : diagonalSurface Y ⟶ ProjectiveLine Y)
+    (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y)) :
+    pullSectionIso Λ Y f h =
+      (CondensedRing.leftDerivedUpperStarComp Λ (diagonalImmersion Y) f).symm ≪≫
+        eqToIso (congrArg (fun g ↦ CondensedRing.moduleObjectDerivedPullback Λ g) h) ≪≫
+          CondensedRing.leftDerivedUpperStarId Λ (ProjectiveLine Y) := by
+  unfold pullSectionIso
+  rfl
 
 /-- The canonical single/unit comparison in the bundled interface, uniquely fixed by the
 published comparison. Source: blueprint clause 1

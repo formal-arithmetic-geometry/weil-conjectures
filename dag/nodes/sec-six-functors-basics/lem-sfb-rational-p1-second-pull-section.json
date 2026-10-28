@@ -14,43 +14,41 @@
  },
  "proof": [
   {
-   "text": "Expand secondPullComparison into the two pullTwistIso maps and the canonical square comparison on q*K. Compute the latter after Delta using the representative-normalized pullback compositors. Associativity of inverse-image and scalar-extension composition identifies both paths with the pullback of K along q, because Delta p1 = Delta p2 = id. The identity compositor gives the same section comparison on this factor.",
-   "uses": [
-    "def-sfb-rational-p1-second-pull-comparison",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On each root sheaf mu_(ell^n), inverse-image composition sends a local root to the same pulled-back root; both composites Delta pi are identity, so their restrictions agree with identity. These equalities commute with the root transition maps. Hence they pass to the inverse limit, coefficient scalar extension and inversion of ell defining the rational Tate line. For the closure coefficient, check after every finite-subextension coprojection; the colimit universal property gives the same equality. This proves the equality of the two restricted line comparisons, including their single-complex and shift maps.",
+   "text": "Use residueIsUnit with the structural maps from the projective line and its self-product to Spec(k), obtaining invertibility of ell in every residue field. These are precisely the local instances required by the Tate transport data and the comparison expansion.",
    "uses": [
     "def-sfb-rational-tate-pullback-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Combine the two factor equalities using the actual pullback tensor comparison. On flat-term K-flat representatives, the tensor comparison and the pullback compositor both send a pure tensor r tensor (m tensor n) to (r tensor m) tensor (1 tensor n); associativity of scalar multiplication makes the two orders of composition identical. The representative normalizations therefore give the equality after localization. The unrestricted delta_comparison and composition_comparison clauses of ModuleRingedComparison identify these with the fixed internal-module transformations, without using the finite-type wrapper theorem. Apply the natural shift comparison to the same equality, and then compose with the inverse secondPullComparison to obtain the displayed equation.",
+   "text": "Obtain the already stated transport data for the two pull-twist comparisons. Apply the proved generic pull_section_transport calculation to these data and to the comm field of the untwisted section compatibility. This gives the restricted equation for the expanded comparison.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pd-module-ringed-topos-derived-comparison",
-    "def-sfb-rational-p1-second-pull-comparison"
+    "lem-sfb-rational-p1-second-pull-section-transport-data",
+    "lem-sfb-rational-pull-section-transport",
+    "lem-sfb-rational-p1-second-pull-section-core"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the diagonal pullback of the canonical inverse comparison using second_pull_comparison_inv_map_expansion. The transported equation is exactly the single comm field of PullSectionCompatibility.",
+   "uses": [
+    "lem-sfb-rational-p1-second-pull-comparison-inv-map-expansion"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sfb-rational-p1-second-pull-comparison",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-sfb-rational-tate-pullback-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pd-module-ringed-topos-derived-comparison"
+  "lem-sfb-rational-p1-second-pull-section-transport-data",
+  "lem-sfb-rational-pull-section-transport",
+  "lem-sfb-rational-p1-second-pull-section-core",
+  "lem-sfb-rational-p1-second-pull-comparison-inv-map-expansion"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker N2",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
   "place": "Second identity, cancellation on the diagonal before integration.",
-  "note": "Extracted a strict component of the assigned insertion argument; the formal proof remains open."
+  "note": "Combine the existing transport-data, inverse-map-expansion, and untwisted equation declarations through the proved generic categorical transport calculation. The redundant final-assembly and specialized-transport placeholders are unnecessary."
  },
  "mathlib_searches": [
   {
@@ -125,20 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M4",
-  "result": "pass",
-  "landing": "20261027T234105-L-4188207",
+  "reviewer": "C-cd332",
+  "group": "N2",
+  "result": "fix",
+  "landing": "20261028T020608-L-2527929",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section",
-   "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section_core"
-  ]
+  "note": "independent cc review: item proofs and @[no_expose] pullSectionIso against node statements, the published library (kernel timeout reproduced without it) and the 13 importers compiled against the delivered files"
  }
 }

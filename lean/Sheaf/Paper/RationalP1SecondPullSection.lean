@@ -10,8 +10,6 @@ public import Sheaf.Paper.ProjectivePullSectionCompatibility
 import Sheaf.Paper.PullSectionTransport
 import Sheaf.Paper.RationalP1SecondPullSectionTransportData
 import Sheaf.Paper.RationalP1SecondPullComparisonExpansion
-import Sheaf.Paper.RationalP1SecondPullSectionTransportSpecialized
-import Sheaf.Paper.RationalP1SecondPullSectionFinalTransport
 import Sheaf.Paper.RationalP1SecondPullSectionCoreComm
 
 /-! # The second pullback comparison restricted to the diagonal -/
@@ -32,7 +30,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] coefficient line twist firstProjection secondProjection
-attribute [local irreducible] square pullSectionIso
+attribute [local irreducible] square
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] projectionMap singleUnitIso secondLineComparison
 
@@ -62,7 +60,8 @@ theorem second_pull_section_core
       (pullSectionIso (coefficient l c).X Y (secondProjection Y)
         (by unfold secondProjection; exact pullback.diagonal_snd _))
       ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)
-      ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv := by sorry
+      ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv := by
+  exact ⟨second_pull_section_core_comm l c k p hpl Y K⟩
 
 set_option maxHeartbeats 800000 in
 -- The statement compares the fixed derived pullback and tensor interfaces.
@@ -107,6 +106,16 @@ theorem second_pull_section
         (line l c (ProjectiveLine Y))).obj
         ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))
       (secondPullComparison l c k p hpl Y K).inv := by
-  sorry
+  let : ∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x) :=
+    fun x ↦ (residueIsUnit l k p hpl _
+      ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible
+  let : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x) :=
+    fun x ↦ (residueIsUnit l k p hpl _
+      (secondProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible
+  obtain ⟨data, _⟩ := second_pull_section_transport_data l c k p hpl Y K
+  refine ⟨?_⟩
+  rw [second_pull_comparison_inv_map_expansion l c k p hpl Y K]
+  exact pull_section_transport _ _ _ _ _ _ data
+    (second_pull_section_core l c k p hpl Y K).comm
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] coefficient line twist firstProjection secondProjection
-attribute [local irreducible] square pullSectionIso
+attribute [local irreducible] square
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
 /-- The final assembly uses the already isolated transport data and comparison
