@@ -11,9 +11,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.NumberTheory.Padics.Extension
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFreeSMul
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
@@ -433,25 +433,19 @@ section Chart
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- The multiplication by the constant global section `t` on the regular module `T̲` is the
-postcomposition with `x ↦ x * t`. -/
+multiplication by the constant `t`. -/
 private lemma regularLift_continuousMapConstRingHom_hom (t : T) :
     (Mod.regularLift (Mod.regular (Profinite.continuousMapRingObj.{u} T))
       (Profinite.continuousMapConstRingHom T t).hom).hom =
-      Profinite.continuousMapAbMap (AddMonoidHom.mulRight t) (continuous_mul_const t) := by
-  have h := Profinite.continuousMapSMulRightHom_hom.{u} (T := T) (T' := T) continuous_id t
-  have h' : Profinite.continuousMapRingObjAlgebraMap.{u} (T := T) (T' := T) continuous_id =
-      𝟙 _ :=
-    CategoryTheory.Functor.map_id _ _
+      Profinite.continuousMapRingObjMulLeft T t := by
   rw [Mod.regularLift_regular_hom_eq_globalSmul]
-  refine ((Category.id_comp _).symm.trans
-    ((congrArg (· ≫ Mod.globalSmul _ _) h'.symm).trans h.symm)).trans ?_
-  rfl
+  exact Profinite.globalSmul_continuousMapConstRingHom T t
 
 /-- The continuous coefficient realization intertwines the multiplication by a constant `t` on
 `p_X^* C(-, T)` with the multiplication by the constant function `t` on `C(-, T)_X`. -/
-lemma map_continuousMapAbMap_mulRight_comp_chartComparison (X : Scheme.{u}) (t : T) :
+lemma map_continuousMapRingObjMulLeft_comp_chartComparison (X : Scheme.{u}) (t : T) :
     (upperStarFromPoint X).map
-        (Profinite.continuousMapAbMap (AddMonoidHom.mulRight t) (continuous_mul_const t)) ≫
+        (Profinite.continuousMapRingObjMulLeft T t) ≫
       chartComparison X T =
       chartComparison X T ≫ (continuousMultiplier X T (ContinuousMap.const X t)).hom := by
   let adj := pointUpperStarLowerStarAdjunction.comp
@@ -461,7 +455,7 @@ lemma map_continuousMapAbMap_mulRight_comp_chartComparison (X : Scheme.{u}) (t :
   rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
   simp only [chartComparison, adj, Equiv.apply_symm_apply]
   ext S f
-  rfl
+  exact ULift.ext _ _ (ContinuousMap.ext fun _ ↦ mul_comm _ _)
 
 /-- In the continuous coefficient realization, the multiplication by the constant global section
 `t` is the multiplication by the constant function `t`. -/
@@ -477,12 +471,12 @@ lemma regularIsoOfIsIso_conj_constRegularEnd (X : Scheme.{u}) [IsIso (chartCompa
   have h : (constRegularEnd (Profinite.continuousMapRingObj T) X
       (Profinite.continuousMapConstRingHom.{u} T t).hom).hom =
       (upperStarFromPoint X).map
-        (Profinite.continuousMapAbMap (AddMonoidHom.mulRight t) (continuous_mul_const t)) := by
+        (Profinite.continuousMapRingObjMulLeft T t) := by
     rw [constRegularEnd, Mod.regularLift_regular_obj_hom,
       regularLift_continuousMapConstRingHom_hom]
   rw [Mod.comp_hom', Mod.comp_hom']
   erw [h]
-  exact (IsIso.inv_comp_eq _).2 (map_continuousMapAbMap_mulRight_comp_chartComparison T X t)
+  exact (IsIso.inv_comp_eq _).2 (map_continuousMapRingObjMulLeft_comp_chartComparison T X t)
 
 end Chart
 

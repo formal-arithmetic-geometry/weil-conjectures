@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFreeSMul
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
@@ -72,18 +72,13 @@ namespace Profinite
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- The multiplication by the constant global section `t` on the regular module `T̲` is the
-postcomposition with `x ↦ x * t`. -/
+multiplication by the constant `t`. -/
 lemma regularLift_continuousMapConstRingHom_hom (t : T) :
     (Mod.regularLift (Mod.regular (continuousMapRingObj.{u} T))
       (continuousMapConstRingHom T t).hom).hom =
-      continuousMapAbMap (AddMonoidHom.mulRight t) (continuous_mul_const t) := by
-  have h := continuousMapSMulRightHom_hom.{u} (T := T) (T' := T) continuous_id t
-  have h' : continuousMapRingObjAlgebraMap.{u} (T := T) (T' := T) continuous_id = 𝟙 _ :=
-    CategoryTheory.Functor.map_id _ _
+      continuousMapRingObjMulLeft T t := by
   rw [Mod.regularLift_regular_hom]
-  refine ((Category.id_comp _).symm.trans
-    ((congrArg (· ≫ Mod.globalSmul _ _) h'.symm).trans h.symm)).trans ?_
-  rfl
+  exact globalSmul_continuousMapConstRingHom T t
 
 end Profinite
 
@@ -161,7 +156,7 @@ of the multiplication by `x` on `𝒪̲_E`. -/
 lemma padicIntegersRegularEndOfAlgebra_hom_eq_map (x : PadicAlgCl.integers ℓ E) :
     letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
     (padicIntegersRegularEndOfAlgebra X ℓ E x).hom = (upperStarFromPoint X).map
-      (Profinite.continuousMapAbMap (AddMonoidHom.mulRight x) (continuous_mul_const x)) := by
+      (Profinite.continuousMapRingObjMulLeft _ x) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   rw [padicIntegersRegularEndOfAlgebra, Mod.regularLift_regular_obj_hom,
     Profinite.regularLift_continuousMapConstRingHom_hom]
@@ -178,7 +173,8 @@ lemma padicIntegersRegularEndOfAlgebra_mul (x y : PadicAlgCl.integers ℓ E) :
     ← Functor.map_comp]
   congr 1
   ext S a
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ (mul_assoc _ _ _).symm)
+  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦
+    (congrArg (· * _) (mul_comm x y)).trans (mul_assoc _ _ _))
 
 /-- The multiplication by a nonzero `x ∈ 𝒪_E` on `𝒪_{E,X}` is a monomorphism. -/
 lemma mono_padicIntegersRegularEndOfAlgebra {x : PadicAlgCl.integers ℓ E} (hx : x ≠ 0) :
@@ -190,13 +186,13 @@ lemma mono_padicIntegersRegularEndOfAlgebra {x : PadicAlgCl.integers ℓ E} (hx 
   have : PreservesFiniteLimits (upperStarFromPoint X) := by
     unfold upperStarFromPoint
     infer_instance
-  let h := Profinite.continuousMapAbMap.{u} (AddMonoidHom.mulRight x) (continuous_mul_const x)
+  let h := Profinite.continuousMapRingObjMulLeft.{u} _ x
   have hm : Mono h := by
     refine (sheafToPresheaf _ _).mono_of_mono_map ?_
     have (S : Profinite.{u}ᵒᵖ) : Mono (((sheafToPresheaf _ _).map h).app S) := by
       rw [AddCommGrpCat.mono_iff_injective]
       intro a b hab
-      exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_right_cancel₀ hx
+      exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hx
         (congrArg (fun z : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E) ↦ z.down s) hab))
     exact NatTrans.mono_of_mono_app _
   refine (Mod.forget _).mono_of_mono_map ?_
