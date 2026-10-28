@@ -4,7 +4,6 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.SixFunctors.EtaleHomComparisonModels
-public import Sheaf.SixFunctors.EtaleHomTransposeExactShiftData
 import Sheaf.SixFunctors.EtaleHomTransposeExactCommShiftCore
 
 @[expose] public section
@@ -36,7 +35,24 @@ theorem etaleHomComparison_reversedExact_commShift
     (_chiPsi : (EtaleHomRight X φ M).CommShift ℤ)
     (hA : EtaleHomShiftNormalization (ModuleCat.{u + 1} A) X M sA)
     (hB : EtaleHomShiftNormalization (ModuleCat.{u + 1} B) X
-      ((scalarExtension φ X).obj M) sB) :
+      ((scalarExtension φ X).obj M) sB)
+    (hPhi :
+      letI := etaleHomScalarCommShift X φ
+      letI := _chiPhi
+      ∀ (K : DerivedCategoryModule A X) (n : ℤ),
+        ((EtaleHomLeft X φ M).commShiftIso n).hom.app (op K) =
+          (scalarExtension φ X).map ((sA.commShiftIso n).hom.app (op K)) ≫
+            ((scalarExtension φ X).commShiftIso n).hom.app
+              (((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).obj (op K)))
+    (hPsi :
+      letI := etaleHomScalarCommShift X φ
+      letI := _chiPsi
+      ∀ (K : DerivedCategoryModule A X) (n : ℤ),
+        ((EtaleHomRight X φ M).commShiftIso n).hom.app (op K) =
+          ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
+              ((scalarExtension φ X).obj M)).map
+            ((((scalarExtension φ X).commShiftIso (-n)).inv.app K).op) ≫
+          (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K))) :
     letI := etaleHomScalarCommShift X φ
     NatTrans.CommShift v ℤ := by
   letI := _chiPhi
@@ -44,6 +60,6 @@ theorem etaleHomComparison_reversedExact_commShift
   apply NatTrans.CommShift.of_core
   intro n
   exact etaleHomComparison_reversedExact_commShift_core X φ M v hv sA sB
-    _chiPhi _chiPsi hA hB n
+    _chiPhi _chiPsi hA hB hPhi hPsi n
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,111 @@
+{
+ "id": "lem-coef-etale-scalar-tensor-shift-cancellation",
+ "kind": "statement",
+ "title": "Scalar tensor comparison preserves opposite-shift cancellation",
+ "statement": "Let X be a scheme and φ:A→B a homomorphism of commutative rings. Let F be derived scalar extension, σ its canonical adjoint-mate shift, and μ its unique flat-model-normalized binary tensor comparison, as in [lem-coef-etale-tensor-model-comparison]. For derived A-module sheaves K,L and n∈ℤ, write c_A(K,L,n):K[-n]⊗L[n]→K⊗L for the tensor-shift cancellation defined there, and similarly c_B. Then (σ_{K,-n}⊗σ_{L,n});c_B(FK,FL,n);μ(K,L) = μ(K[-n],L[n]);F(c_A(K,L,n)). No internal Hom or evaluation map enters this identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4 and 08JC; K-flat tensor models and signed shifts"
+ },
+ "stmt_deps": [
+  "lem-coef-etale-tensor-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Represent K and L by flat-term K-flat complexes. Their shifts are again flat-term K-flat. The defining model normalization of μ identifies the binary comparison with ordinary scalar balancing. The counit characterization of the adjoint-mate scalar shift identifies σ with termwise extension and reindexing. DerivedCategory.commShiftTensorLeft_eq and DerivedCategory.commShiftTensorRight_eq identify the tensor shifts with cochain reindexing on these models.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each summand of the total tensor complex, both routes first extend scalars and then cancel the shifts -n,n. The two tensor-shift signs occur in the same order; ordinary scalar balancing has degree zero. Hence the maps coincide. Localize using the counit normalization and transport along the representative isomorphisms using naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-tensor-model-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4, 08JC; the tensor-balancing part of the evaluation-transpose shift square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ommShift|[Cc]ommShift.*tensor",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"tensor\"",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived scalar tensor comparison commutes with cancellation of shifts by n and minus n",
+   "results": "Generic shift and cochain comparison APIs; none identifies the normalized scalar tensor comparison with opposite-shift cancellation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomTransposeExactCommShiftCore",
+  "date": "2026-10-28",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2, exactness in the first argument: scalar balancing and the signed tensor reindexing used before transposition",
+   "via": [
+    "lem-coef-etale-hom-transpose-exact-comm-shift-core",
+    "lem-coef-etale-hom-transpose-exact-comm-shift",
+    "lem-coef-etale-hom-transpose-exact",
+    "lem-coef-etale-hom-thick-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleScalarTensorShiftCancellation",
+  "file": "lean/Sheaf/SixFunctors/EtaleScalarTensorShiftCancellation.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleHomTensorComparison_shiftCancellation",
+  "statement": "theorem etaleHomTensorComparison_shiftCancellation\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (X : Scheme.{u}) (φ : A →+* B) (K L : DerivedCategoryModule A X) (n : ℤ) :\n    letI := etaleHomScalarCommShift X φ\n    ((derivedTensor (ModuleCat.{u + 1} B) X).map\n        (((scalarExtension φ X).commShiftIso (-n)).hom.app K)).app\n          ((scalarExtension φ X).obj (L⟦n⟧)) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) X).obj\n        (((scalarExtension φ X).obj K)⟦-n⟧)).map\n          (((scalarExtension φ X).commShiftIso n).hom.app L) ≫\n      etaleHomTensorShiftCancellation (ModuleCat.{u + 1} B) X\n        ((scalarExtension φ X).obj K) ((scalarExtension φ X).obj L) n ≫\n      (etaleHomTensorComparison X φ K L).hom =\n    (etaleHomTensorComparison X φ (K⟦-n⟧) (L⟦n⟧)).hom ≫\n      (scalarExtension φ X).map\n        (etaleHomTensorShiftCancellation (ModuleCat.{u + 1} A) X K L n)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-228f1",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261028T072351-L-1937876",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-228f1",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261028T072351-L-1937876",
+  "kind": "interface",
+  "note": "independent cc review: corrected core/all-degree statements (hPhi/hPsi) against shiftData and IsEtaleHomReversedExact; delivered Lean against its nodes, report and change records"
+ }
+}

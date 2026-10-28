@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-etale-hom-transpose-exact-comm-shift-component",
+ "kind": "statement",
+ "title": "Fixed-degree étale Hom shift component",
+ "statement": "For a scheme X, a homomorphism A→B of commutative rings, a derived A-module sheaf M, the evaluation-transpose comparison v, and evaluation-normalized integer shifts sA,sB of the two contravariant Hom functors: for every derived A-module sheaf K and integer n, (F(sA_n(K)) ; σ_n) ; v_K[n] = v_{K[-n]} ; Hom(σ_{-n}(K)^{-1},FM) ; sB_n(FK), where F is derived scalar extension and σ its canonical shift. This is the degree-n shift square of v for the normalized composite shifts.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JC and 08J9; tensor-Hom transpose shift square"
+ },
+ "stmt_deps": [
+  "lem-coef-etale-tensor-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose with the inverse sB shift and transpose through the tensor–Hom adjunction. The sB evaluation normalization identifies this transpose with signed tensor evaluation.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor cancellation is natural in the second variable: use the CommShift compatibility of the tensor bifunctor maps, naturality of the second-variable tensor shift, and naturality of shiftFunctorCompIsoId.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose with the tensor image of the scalar shift, an isomorphism. Move the shifted comparison through cancellation by the preceding naturality. Replace unshifted evaluation using the transpose equation for v. Apply scalar tensor opposite-shift cancellation, then naturality of the binary comparison in the second variable. The resulting composite is the sA evaluation normalization.",
+   "uses": [
+    "lem-coef-etale-scalar-tensor-shift-cancellation",
+    "lem-coef-etale-tensor-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the tensor image of the scalar shift. Injectivity of the adjunction homEquiv and cancellation of the sB shift give the required component square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-coef-etale-scalar-tensor-shift-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JC and 08J9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CommShiftCore tensor Hom transpose",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommShiftCore tensor",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed degree Hom transpose shift square",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomTransposeExactCommShiftCore",
+  "date": "2026-10-28",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2 fixed-degree transpose shift component",
+   "via": [
+    "lem-coef-etale-hom-transpose-exact-comm-shift-core",
+    "lem-coef-etale-hom-transpose-exact-comm-shift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleHomTransposeExactCommShiftComponent",
+  "file": "lean/Sheaf/SixFunctors/EtaleHomTransposeExactCommShiftComponent.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleHomComparison_reversedExact_commShift_component",
+  "statement": "theorem etaleHomComparison_reversedExact_commShift_component\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)\n    (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)\n    (hv : IsEtaleHomTranspose X φ M v)\n    (sA : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ)\n    (sB : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj\n      ((scalarExtension φ X).obj M)).CommShift ℤ)\n    (hA : EtaleHomShiftNormalization (ModuleCat.{u + 1} A) X M sA)\n    (hB : EtaleHomShiftNormalization (ModuleCat.{u + 1} B) X\n      ((scalarExtension φ X).obj M) sB)\n    (K : DerivedCategoryModule A X) (n : ℤ) :\n    letI := etaleHomScalarCommShift X φ\n    ((scalarExtension φ X).map ((sA.commShiftIso n).hom.app (op K)) ≫\n      ((scalarExtension φ X).commShiftIso n).hom.app\n        (((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).obj (op K))) ≫\n      (v.app (op K))⟦n⟧' =\n    v.app (op (K⟦-n⟧)) ≫\n      ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj\n        ((scalarExtension φ X).obj M)).map\n          ((((scalarExtension φ X).commShiftIso (-n)).inv.app K).op) ≫\n      (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-228f1",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261028T072351-L-1937876",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-228f1",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261028T072351-L-1937876",
+  "kind": "interface",
+  "note": "independent cc review: corrected core/all-degree statements (hPhi/hPsi) against shiftData and IsEtaleHomReversedExact; delivered Lean against its nodes, report and change records"
+ }
+}

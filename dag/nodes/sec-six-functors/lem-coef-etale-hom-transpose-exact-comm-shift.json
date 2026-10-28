@@ -2,7 +2,7 @@
  "id": "lem-coef-etale-hom-transpose-exact-comm-shift",
  "kind": "statement",
  "title": "Shift compatibility of the evaluation transpose",
- "statement": "Given the normalized shift data for the two derived Hom functors and an evaluation-transpose morphism v, the transpose equation forces v to satisfy NatTrans.CommShift in every integer degree.",
+ "statement": "For the evaluation-transpose comparison v of derived scalar internal Hom, give the two Hom functors evaluation-normalized integer shifts sA,sB and give the composite functors shifts chiPhi,chiPsi satisfying the two component equations in IsEtaleHomReversedExact. Then v satisfies NatTrans.CommShift in every integer degree, with respect to these same composite shifts.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 08JA, 08J9 and 08JC: Hom model, evaluation and contravariant exactness"
@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "For each integer n, apply the fixed-degree transpose calculation to obtain NatTrans.CommShiftCore v n.",
+   "text": "For each integer n, pass both composite-shift component equations to the fixed-degree transpose calculation to obtain NatTrans.CommShiftCore v n.",
    "uses": [
     "lem-coef-etale-hom-transpose-exact-comm-shift-core"
    ],
@@ -85,7 +85,7 @@
   "module": "Sheaf.SixFunctors.EtaleHomTransposeExactCommShift",
   "file": "lean/Sheaf/SixFunctors/EtaleHomTransposeExactCommShift.lean",
   "declaration": "AlgebraicGeometry.Etale.etaleHomComparison_reversedExact_commShift",
-  "statement": "theorem etaleHomComparison_reversedExact_commShift\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)\n    (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)\n    (hv : IsEtaleHomTranspose X φ M v)\n    (sA : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ)\n    (sB : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj\n      ((scalarExtension φ X).obj M)).CommShift ℤ)\n    (_chiPhi : (EtaleHomLeft X φ M).CommShift ℤ)\n    (_chiPsi : (EtaleHomRight X φ M).CommShift ℤ)\n    (hA : EtaleHomShiftNormalization (ModuleCat.{u + 1} A) X M sA)\n    (hB : EtaleHomShiftNormalization (ModuleCat.{u + 1} B) X\n      ((scalarExtension φ X).obj M) sB) :\n    letI := etaleHomScalarCommShift X φ\n    NatTrans.CommShift v ℤ",
+  "statement": "theorem etaleHomComparison_reversedExact_commShift\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)\n    (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)\n    (hv : IsEtaleHomTranspose X φ M v)\n    (sA : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ)\n    (sB : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj\n      ((scalarExtension φ X).obj M)).CommShift ℤ)\n    (_chiPhi : (EtaleHomLeft X φ M).CommShift ℤ)\n    (_chiPsi : (EtaleHomRight X φ M).CommShift ℤ)\n    (hA : EtaleHomShiftNormalization (ModuleCat.{u + 1} A) X M sA)\n    (hB : EtaleHomShiftNormalization (ModuleCat.{u + 1} B) X\n      ((scalarExtension φ X).obj M) sB)\n    (hPhi :\n      letI := etaleHomScalarCommShift X φ\n      letI := _chiPhi\n      ∀ (K : DerivedCategoryModule A X) (n : ℤ),\n        ((EtaleHomLeft X φ M).commShiftIso n).hom.app (op K) =\n          (scalarExtension φ X).map ((sA.commShiftIso n).hom.app (op K)) ≫\n            ((scalarExtension φ X).commShiftIso n).hom.app\n              (((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).obj (op K)))\n    (hPsi :\n      letI := etaleHomScalarCommShift X φ\n      letI := _chiPsi\n      ∀ (K : DerivedCategoryModule A X) (n : ℤ),\n        ((EtaleHomRight X φ M).commShiftIso n).hom.app (op K) =\n          ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj\n              ((scalarExtension φ X).obj M)).map\n            ((((scalarExtension φ X).commShiftIso (-n)).inv.app K).op) ≫\n          (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K))) :\n    letI := etaleHomScalarCommShift X φ\n    NatTrans.CommShift v ℤ",
   "branch": "sheaf-dag",
   "by": "R2",
   "date": "2026-10-28"
@@ -103,11 +103,42 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D8",
-  "result": "pass",
-  "landing": "20261028T020311-L-2492675",
+  "reviewer": "C-228f1",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261028T072351-L-1937876",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected core/all-degree statements (hPhi/hPsi) against shiftData and IsEtaleHomReversedExact; delivered Lean against its nodes, report and change records"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "C8 stage 2",
+  "old_statement": "Given the normalized shift data for the two derived Hom functors and an evaluation-transpose morphism v, the transpose equation forces v to satisfy NatTrans.CommShift in every integer degree.",
+  "what": "The old Lean signature allowed arbitrary chiPhi and chiPsi, although hA and hB normalized only sA and sB. Twisting just chiPhi by the character n↦(-1)^n leaves every old premise unchanged and reverses its degree-one square for a nonzero comparison (take identity coefficient change over Q). Thus the arbitrary-structure formulation is false. Add the two composite-shift component equations already supplied by shiftData and already required by IsEtaleHomReversedExact. The final exactness theorem and every target statement keep their signatures.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 08JC (lemma-RHom-triangulated), together with the evaluation-defined comparison in thm-coef-finite-hom, proof paragraph 2"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-etale-hom-transpose-exact",
+    "holds": true,
+    "note": "The caller has both component equations from shiftData; this delivery passes them explicitly. Its intended conclusion is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For each integer n, apply the fixed-degree transpose calculation to obtain NatTrans.CommShiftCore v n.",
+    "uses": [
+     "lem-coef-etale-hom-transpose-exact-comm-shift-core"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Assemble the fixed-degree compatibilities with NatTrans.CommShift.of_core.",
+    "uses": [],
+    "elementary": true
+   }
+  ]
  }
 }

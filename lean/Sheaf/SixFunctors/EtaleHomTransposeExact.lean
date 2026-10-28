@@ -56,7 +56,8 @@ theorem etaleHomComparison_reversedExact
   let _ := etaleHomScalarCommShift X φ
   obtain ⟨sA, sB, chiPhi, chiPsi, hA, hB, hPhi, hPsi, hTriA, hTriB⟩ :=
     etaleHomComparison_reversedExact_shiftData X φ M
-  have hComm := etaleHomComparison_reversedExact_commShift X φ M v hv sA sB chiPhi chiPsi hA hB
+  have hComm := etaleHomComparison_reversedExact_commShift X φ M v hv sA sB
+    chiPhi chiPsi hA hB hPhi hPsi
   exact ⟨sA, sB, chiPhi, chiPsi, hA, hB, hPhi, hPsi, hTriA, hTriB, hComm⟩
 
 end AlgebraicGeometry.Etale
