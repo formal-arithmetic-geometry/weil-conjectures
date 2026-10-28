@@ -6,7 +6,8 @@ Authors: SHEAF group J6
 module
 
 public import Sheaf.Paper.NativeWeilClosedModels
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.NativeOrdinaryTensorModelResolutionTransport
+import Sheaf.Paper.NativeOrdinaryTensorModelResolutionRoof
 
 /-! # Resolution transport data for ordinary tensor models
 
@@ -17,6 +18,7 @@ Source: Stacks 06YS, 06YU, 0FPT; blueprint step 1 of
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -87,6 +89,10 @@ theorem native_ordinary_tensor_model_resolution_data
           (hK' : NativeOrdinaryKFlat l Y K')
           (q : K ⟶ Q) (q' : K' ⟶ Q') (u : K ⟶ K'),
           QuasiIso q ∧ QuasiIso q' ∧ Nonempty (Homotopy (u ≫ q') (q ≫ g))) := by
-  sorry
+  classical
+  obtain ⟨extendedModel, hrestrict, htransport⟩ :=
+    native_ordinary_tensor_model_resolution_transport l Y H S model hkflat
+  obtain hresolution := native_ordinary_tensor_model_resolution_roof l Y
+  exact ⟨extendedModel, hrestrict, htransport, hresolution⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
