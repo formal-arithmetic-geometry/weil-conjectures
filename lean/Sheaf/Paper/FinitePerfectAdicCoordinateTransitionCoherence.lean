@@ -26,6 +26,60 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+/-- The claimed equation at a zero etale arrow forces the actual tower arrow to vanish.
+This is a diagnostic for the missing compatibility hypotheses, not a use of the
+unproved coherence assertion. -/
+private theorem zero_coordinate_coherence_forces_zero
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
+    (K : ∀ n : ℕ, DerivedCategory (Sheaf V.left.smallEtaleTopology
+      (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))))
+    (U : V.left.ProEt) (W : X.ProEt)
+    (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ)
+    (a : (finitePerfectAdicScalarRealization X d V U W f n).obj
+        ((localProEtaleComparison U.hom
+          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj (K n)) ≅
+      (finitePerfectAdicRestrictedTower X d W
+        ((completedAdicReduction X d).obj M)).obj (op n))
+    (b : (finitePerfectAdicScalarRealization X d V U W f (n + 1)).obj
+        ((localProEtaleComparison U.hom
+          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))).obj (K (n + 1))) ≅
+      (finitePerfectAdicRestrictedTower X d W
+        ((completedAdicReduction X d).obj M)).obj (op (n + 1)))
+    (h : (finitePerfectAdicScalarRealization X d V U W f (n + 1)).map
+          (localProEtaleNormalization U.hom
+            (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
+            (0 : K (n + 1) ⟶
+              (normalizationRestrict V.left.smallEtaleTopology
+                (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).obj
+                (K n))) ≫
+        (finitePerfectAdicScalarCoherence X d V U W f n).hom.app
+          ((localProEtaleComparison U.hom
+            (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj (K n)) ≫ a.hom =
+      b.hom ≫ (finitePerfectAdicRestrictedTower X d W
+        ((completedAdicReduction X d).obj M)).map
+          (homOfLE (Nat.le_succ n)).op) :
+    (finitePerfectAdicRestrictedTower X d W
+      ((completedAdicReduction X d).obj M)).map
+        (homOfLE (Nat.le_succ n)).op = 0 := by
+  have hz : localProEtaleNormalization U.hom
+      (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
+      (0 : K (n + 1) ⟶
+        (normalizationRestrict V.left.smallEtaleTopology
+          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).obj
+          (K n)) = 0 := by
+    simp [localProEtaleNormalization]
+  have : (finitePerfectAdicScalarRealization X d V U W f (n + 1)).Additive := by
+    unfold finitePerfectAdicScalarRealization
+    infer_instance
+  rw [hz, Functor.map_zero, zero_comp] at h
+  apply (cancel_epi b.hom).mp
+  simpa only [comp_zero] using h.symm
+
+-- STATEMENT-DISPUTED: dK and actual are arbitrary and have no compatibility hypotheses.
+-- In particular, dK can be identically zero. The private diagnostic above proves that
+-- the conclusion then forces every actual tower transition to be zero. The hypotheses
+-- permit nonzero quotient towers (for example a nonzero finite field with ideal zero).
 /--
 The scalar-realization comparisons intertwine every consecutive transition
 with the strict completed quotient tower.
