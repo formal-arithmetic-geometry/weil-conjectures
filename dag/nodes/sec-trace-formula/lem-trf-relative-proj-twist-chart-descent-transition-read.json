@@ -10,7 +10,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01NR, normalized chart transition compatibility"
+  "place": "Tag 01NR, lemma-glue-relative-proj-twists, chart compatibility; categorical details using Stacks Sheaves Tag 0097 and Mathlib adjunction unit naturality, written by R4"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -37,16 +37,21 @@
  "statement": "Given the chart isomorphisms and a normalized scalar-extension comparison for U ≤ V, with the chart square commuting and the chart preimages identified, the section-normalized transition map intertwines twistChartRead with restriction of sections of L.",
  "proof": [
   {
-   "text": "Expand the normalized tensor-pullback units, use their naturality and the section-normalized composition comparison, then evaluate the commuting chart square on the restricted section.",
+   "text": "Apply Mathlib Adjunction.unit_leftAdjointUniq_hom_app to the normalized tensor-pullback adjunctions for the chart inclusion and transition. Evaluate on a section and use unit naturality for chart V. Substitute the equality of chart morphisms and evaluate the assumed chart square to identify the resulting composite with reading in chart U over the larger base open.",
    "uses": [
-    "lem-sfb-proj-scalar-extension-twist-comparison",
     "def-pc-module-pullback"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The composite of the normalized unit for chart U and chart U itself is a module morphism into the chart pushforward. Its presheaf naturality commutes with restricting the base open from V to U. The assumed equality of chart preimages identifies the resulting restriction with transport: the opens form a thin category, so after substituting their equality the restriction arrow is the identity. Combine this equality with the first calculation.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-proj-scalar-extension-twist-comparison",
   "def-pc-module-pullback"
  ],
  "lean": {
@@ -73,9 +78,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261028T020637-L-2534107",
+  "landing": "20261028T034926-L-3569925",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
