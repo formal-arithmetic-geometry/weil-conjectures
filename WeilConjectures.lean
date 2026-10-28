@@ -8565,6 +8565,7 @@ public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerPivot
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.Preadditive.NatTransIsIso
+public import WeilConjectures.CategoryTheory.Preadditive.TraceSplitting
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.PresheafTensorInternalHom
 public import WeilConjectures.CategoryTheory.Pro.Basic
@@ -8728,6 +8729,7 @@ public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelationsGeneral
 public import WeilConjectures.CategoryTheory.Sites.FlatSubobject
 public import WeilConjectures.CategoryTheory.Sites.FreeModuleSheafConstruction
 public import WeilConjectures.CategoryTheory.Sites.FreeModuleUniversalProperty
+public import WeilConjectures.CategoryTheory.Sites.GaloisDescentTrace
 public import WeilConjectures.CategoryTheory.Sites.GeometricFreeModuleHomEquivalence
 public import WeilConjectures.CategoryTheory.Sites.GeometricMorphism
 public import WeilConjectures.CategoryTheory.Sites.HomSheafAcyclic
@@ -13108,6 +13110,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
 public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel.ConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius

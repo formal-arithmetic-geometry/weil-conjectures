@@ -201,7 +201,8 @@ lemma localizationRestrictionLowerStarAdjunction_unit_app_hom
 
 /-- The unit followed by the trace is multiplication by the order of `Γ`. -/
 lemma unit_comp_galoisTraceRestriction (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g inferInstance).unit.app H ≫
+    (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
+      inferInstance).unit.app H ≫
       galoisTraceRestriction g hρ hmul hgal H = Fintype.card Γ • 𝟙 H := by
   apply (sheafToPresheaf _ _).map_injective
   rw [Functor.map_comp, Functor.map_nsmul]
@@ -216,7 +217,8 @@ lemma unit_comp_galoisTraceRestriction (H : Sheaf (ProEt.topology X) AddCommGrpC
 @[reassoc]
 lemma galoisTraceRestriction_comp_unit (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
     galoisTraceRestriction g hρ hmul hgal H ≫
-      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g inferInstance).unit.app H =
+      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
+        inferInstance).unit.app H =
       ∑ a, galoisActionRestriction g hρ a H := by
   apply (sheafToPresheaf _ _).map_injective
   rw [Functor.map_comp, Functor.map_sum]
@@ -263,7 +265,8 @@ lemma upperStarLowerStarAdjunction_unit_app_comp
     (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H ≫
       (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).hom.app H) =
-      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g inferInstance).unit.app H :=
+      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
+        inferInstance).unit.app H :=
   Adjunction.unit_leftAdjointUniq_hom_app _ _ H
 
 /-- **The unit followed by the trace is the degree**: `u ≫ t = |Γ| • 𝟙` for the unit
@@ -277,10 +280,12 @@ theorem unit_comp_galoisTrace (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1
 
 /-- **The trace followed by the unit is the norm**: `t ≫ u = ∑ a, ρ a`. -/
 theorem galoisTrace_comp_unit (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
-    galoisTrace g hρ hmul hgal H ≫ (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H =
+    galoisTrace g hρ hmul hgal H ≫
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H =
       ∑ a, galoisAction g hρ a H := by
   have h : (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app H =
-      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g inferInstance).unit.app H ≫
+      (localizationRestrictionLowerStarAdjunction AddCommGrpCat.{u + 1} g
+        inferInstance).unit.app H ≫
         (g)_*[AddCommGrpCat.{u + 1}].map ((upperStarIsoRestriction g).inv.app H) := by
     erw [← upperStarLowerStarAdjunction_unit_app_comp_assoc g H]
     rw [← Functor.map_comp, Iso.hom_inv_id_app]
