@@ -1,0 +1,127 @@
+{
+ "id": "lem-pod-identity-limit",
+ "kind": "statement",
+ "title": "Identity compatibility for the total derived limit",
+ "statement": "For prime l, finite E/Q_l and a scheme W on which l is invertible, let A be a reindexing family [def-pod-completion-reindex-coherence]. Suppose its identity completion datum satisfies Laws [def-pod-completion-reindex-models] and its ordinary identity is the specified Over.mapId restriction on all sections. Then on every whole derived coefficient system N, its limit comparison followed by the image of the system identity [def-trf-integral-comparison-sequence-systems] equals the ordinary derived identity at the limit of N.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-coherence",
+  "def-pod-completion-reindex-models",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved restricted-tower identity and generic Roos identity. Use the two Roos coordinate formulas of the completion datum to identify the entire cochain map.",
+   "uses": [
+    "lem-pod-identity-restricted-tower",
+    "lem-pod-identity-roos-map",
+    "def-pod-completion-reindex-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-injective resolutions and the normalization of the two Roos models show their comparison isomorphisms equal. Substitute LimitModel. The derived identity factor formula on complexes, naturality of the normalized limit model, and cancellation give equality after Q. Localization.natTrans_ext then gives the identity on all derived systems.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-pod-completion-reindex-coherence",
+    "def-pod-completion-reindex-models",
+    "lem-pod-identity-derived-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-identity-restricted-tower",
+  "lem-pod-identity-roos-map",
+  "def-pod-completion-reindex-models",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pod-completion-reindex-coherence",
+  "lem-pod-identity-derived-factors"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of mapping cones is determined by both coordinate projections and naturality of products under an isomorphism to the identity functor",
+   "results": "Found mappingCone.ext_to and ext_to_iff, map and mapHomologicalComplexXIso_eq. These give coordinate extensionality, not the section-normalized identity on these strict coefficient towers.",
+   "date": "2026-10-28",
+   "verdict": "Use coordinate extensionality to prove the Roos step; no exact project-specific identity found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.id_X",
+   "results": "Found CochainComplex.mappingCocone.id_X in Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone. It expresses the identity through both cocone coordinates.",
+   "date": "2026-10-28",
+   "verdict": "Used to prove joint monicity of the two coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "podReindexingIdentity|IntegralComparisonRoosModel; direct rg for RoosFst, RoosSnd and RestrictedGenerators",
+   "results": "No existing identity compatibility lemma. Existing IntegralAmbient.roosMap_coordinates supplies the two coordinates of the strict tower map, and IntegralComparisonRealizationModels supplies the whole-system section formulas.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing coordinate and section APIs; isolate only the needed strict tower equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingIdentityCompatibility",
+  "date": "2026-10-28",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5, concrete identity-reindexing calculation",
+   "via": [
+    "lem-pod-reindexing-identity-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodIdentityLimit",
+  "file": "lean/Sheaf/Paper/PodIdentityLimit.lean",
+  "declaration": "WeilConjectures.podIdentityLimit",
+  "statement": "theorem podIdentityLimit (A : PodReindexFamily l E)\n    (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n    (hD : PodCompletionReindex.Laws l E (𝟙 W) (A.completion (𝟙 W)))\n    (ha : ∀ (M : scalarReductionSource l E W) (U : W.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose (𝟙 W)).obj U))),\n      ((A.identity W).hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapId (P := @WeaklyEtale) ⊤ W\n          (𝟙 W) rfl).hom.app U).op x)\n    (N : coefficientSequenceDerived l E W) :\n    (A.completion (𝟙 W)).limit.hom.app N ≫\n        (coefficientSequenceLimit l E W).map ((integralComparisonSystemUnit l E W).hom.app N) =\n      (A.identityDerived l E W).hom.app ((coefficientSequenceLimit l E W).obj N)",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261028T034929-L-3570523",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261028T034929-L-3570523",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
