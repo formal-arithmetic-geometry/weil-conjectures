@@ -1,0 +1,99 @@
+{
+ "id": "stage3-pur-scalar-pullback-roos-coordinates-formula",
+ "kind": "definition",
+ "title": "Tensor-unit formula predicate for scalar/pullback quotient coordinates",
+ "statement": "The predicate ScalarPullbackQuotientFormula records the displayed tensor-unit equation for a strict scalar/pullback quotient coordinate isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY, 07A4 and 0941: the normalized tensor-unit coordinate equation"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-a1-flat-term-kflat-complex",
+  "def-coef-ringed-sequence-site",
+  "def-weil-integral-reduction-tower",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-integral-finite-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict natural isomorphism between a scalar extension pullback tower and an ordinary scalar pullback tower",
+   "results": "No specialized theorem; project comparison declarations are the relevant route.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents natural isomorphism quotient tower",
+   "results": "Generic NatIso constructors only; no project-specific comparison.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackRoos|ordinaryQuotientPullbackTowerComparison|ordinaryQuotientScalarTowerComparison",
+   "results": "The two ordinary quotient comparison declarations are the available strict comparison ingredients.",
+   "date": "2026-10-28",
+   "verdict": "Use project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullbackRoosCoordinates",
+  "date": "2026-10-28",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-scalar-pullback-roos-coordinates",
+   "place": "the tensor-unit formula predicate",
+   "via": [
+    "stage3-pur-scalar-pullback-roos-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullbackQuotientFormula",
+  "file": "lean/Sheaf/Paper/ScalarPullbackQuotientFormula.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.ScalarPullbackQuotientFormula",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.ScalarPullbackQuotientFormula"
+  ],
+  "statement": "def ScalarPullbackQuotientFormula {X Y : Scheme.{u}} (f : X ⟶ Y) (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory) (C : CochainComplex (coefficientSequenceModules.{u, u} l E Y) ℤ) (κ : ∀ n : ℕ, ((coefficientSequenceEvaluation.{u, u} l E Y n).mapHomologicalComplex (.up ℤ)).obj C ≅ (unrestrictedIntegralFiniteComplex.{u, u} l E Y n).obj P.obj) (q : (((coefficientSequenceRestriction.{u, u} l L X).mapHomologicalComplex (.up ℤ)).obj ((((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel.{u, u} l E L ι Y).E.mapHomologicalComplex (.up ℤ)).obj C)))).asFunctor ≅ (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P.obj)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-870c9",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261028T020544-L-2524008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-870c9",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261028T020544-L-2524008",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and new Formula module vs the clone's ScalarPullbackRoosCoordinates (predicate def moved verbatim, item theorem statement byte-identical, still one sorry); new node vs the owners of the names the def uses; direct importers LeftRoos/RightRoos compiled in sandbox against delivered files (OK)"
+ }
+}
