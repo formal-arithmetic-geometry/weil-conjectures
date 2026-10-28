@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
@@ -15,11 +16,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 
 Let `Λ` be a commutative condensed ring, `j : U ⟶ X` a quasi-compact open immersion and
 `i : Z ⟶ X` a closed immersion onto its complement. On the ambient derived category
-`D(Mod_{Λ_X})`, for every complex `K`, the counit `j_! Lj^* K ⟶ K` of `Dj_! ⊣ Lj^*` and the unit
-`K ⟶ Ri_* Li^* K` of `Li^* ⊣ Ri_*` extend to a distinguished triangle
-(`ProEtale.CondensedRing.exists_distTriang_openClosed_derived`).
+`D(Mod_{Λ_X})`, for every complex `K`:
 
-This follows from the joint conservativity of `Lj^*` and `Li^*`
+* the counit `j_! Lj^* K ⟶ K` of `Dj_! ⊣ Lj^*` and the unit `K ⟶ Ri_* Li^* K` of
+  `Li^* ⊣ Ri_*` extend to a distinguished triangle
+  (`ProEtale.CondensedRing.exists_distTriang_openClosed_derived`);
+* if `Lj^* K = 0`, the unit `K ⟶ Ri_* Li^* K` is an isomorphism
+  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero`, in the
+  file `...Derived.BoundedConstructibleClosedPushforward`).
+
+Both follow from the joint conservativity of `Lj^*` and `Li^*`
 (`ProEtale.CondensedRing.jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl`), the full
 faithfulness of `Dj_!` and of `Ri_*`, and the vanishing of `Lj^* Ri_*` and of `Li^* Dj_!`.
 -/

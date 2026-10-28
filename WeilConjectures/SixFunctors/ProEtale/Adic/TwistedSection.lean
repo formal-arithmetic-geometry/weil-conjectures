@@ -65,6 +65,16 @@ lemma upperStarCongr_hom_app_trans {P Y : Scheme.{u}} {a b c : P ⟶ Y} (p : a =
   subst p q
   simp [upperStarCongr]
 
+/-- `upperStarCongr` does not depend on the proof of the equality. The equality is taken between
+the isomorphisms, not between their components, so the kernel compares the proofs instead of
+unfolding the pullback functors. -/
+lemma upperStarCongr_hom_app_eq_comp_id {P Y : Scheme.{u}} {a b : P ⟶ Y} (p q : a = b)
+    (F : Sheaf (Scheme.ProEt.topology Y) A) :
+    (upperStarCongr A p).hom.app F =
+      (upperStarCongr A q).hom.app F ≫ 𝟙 ((b)^*[A].obj ((𝟭 _).obj F)) :=
+  (@congrArg _ _ (upperStarCongr A p) (upperStarCongr A q) (fun e ↦ e.hom.app F) rfl).trans
+    (Category.comp_id _).symm
+
 /-- A germ is the transport along the square `y ≫ w = s ≫ 𝟙` with the trivial base change. -/
 lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {y : P ⟶ W}
     {s : P ⟶ Y} (h : y ≫ w = s) (h' : y ≫ w = s ≫ 𝟙 Y) (F : Sheaf (Scheme.ProEt.topology Y) A) :
@@ -79,7 +89,7 @@ lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {
     upperStarCongr_inv_app]
   congr 1
   rw [← Category.assoc, upperStarCongr_hom_app_trans]
-  exact (Category.comp_id _).symm
+  exact upperStarCongr_hom_app_eq_comp_id A _ _ F
 
 /-- Restricting a global section of `F` along `s` and then taking its germ along `y ≫ s = s` gives
 the restriction along `s`. -/
@@ -257,21 +267,25 @@ theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type 
       ULift.up χ • globalSectionOfModHom θ.hom)
     {n : ℕ} {B : AdicSheaf l S} (m : B ⟶ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l S) [Mono m]
     (p : B ⟶ (z)^*ᵃ[l].obj N) [Epi p] : False := by
-  let A := WeilCoefficients.{u} l
   obtain ⟨e, he0, he⟩ := exists_ne_zero_factorGerm_eq_smul_of_twist hσ hg hz hσz θ χ hθ
-  -- lift `e` to a section `b` of `π^* B`
+  -- lift `e` to a section `b` of `π^* B`; the objects are pinned to the forms in the types of `e`
+  -- and `factorGerm_adicConstantSheaf_apply`, so that the kernel does not unfold `adicUpperStar`
   have hsurj : Function.Surjective ((geometricStalkFunctor l π).map p).hom :=
     (ModuleCat.epi_iff_surjective _).1 inferInstance
-  obtain ⟨b, hb⟩ : ∃ b : (Sheaf.Γ _ A).obj ((π)^*[A].obj B.X),
-      ((Sheaf.Γ _ A).map ((π)^*[A].map p.hom)).hom b = e := hsurj e
+  obtain ⟨b, hb⟩ : ∃ b : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj
+      ((π)^*[WeilCoefficients.{u} l].obj B.X),
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).map ((π)^*[WeilCoefficients.{u} l].map
+        (Y := (z)^*[WeilCoefficients.{u} l].obj N.X) p.hom)).hom b = e := hsurj e
   -- the germ along `σ` fixes `b`, since it fixes the sections of `π^* ℚ̄_ℓⁿ`
-  have hfixB : (factorGerm A hσ B.X).hom b = b := by
+  have hfixB : (factorGerm (WeilCoefficients.{u} l) hσ B.X).hom b = b := by
     obtain ⟨v, hv⟩ :=
-      (bijective_globalSectionOfModHom ((π)^*ᵃ[l].obj B)).2 ((factorGerm A hσ B.X).hom b - b)
+      (bijective_globalSectionOfModHom ((π)^*ᵃ[l].obj B)).2
+        ((factorGerm (WeilCoefficients.{u} l) hσ B.X).hom b - b)
     have hvi (i : Fin n) : v ≫ (π)^*ᵃ[l].map (m ≫ biproduct.π _ i) = 0 := by
       apply (bijective_globalSectionOfModHom _).1
       rw [globalSectionOfModHom_comp, hv, globalSectionOfModHom_zero, map_sub]
-      have hn := congrArg (fun φ ↦ φ.hom b) (factorGerm_naturality A hσ (m ≫ biproduct.π _ i).hom)
+      have hn := congrArg (fun φ ↦ φ.hom b) (factorGerm_naturality (WeilCoefficients.{u} l) hσ
+        (G := adicConstantSheaf l S) (m ≫ biproduct.π _ i).hom)
       rw [ModuleCat.comp_apply, ModuleCat.comp_apply] at hn
       rw [sub_eq_zero]
       exact hn.symm.trans (factorGerm_adicConstantSheaf_apply hσ _)
@@ -284,8 +298,10 @@ theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type 
     have hv0 : v = 0 := (cancel_mono ((π)^*ᵃ[l].map m)).1 (by rw [hvm, zero_comp])
     rw [← sub_eq_zero, ← hv, hv0, globalSectionOfModHom_zero]
   -- hence it fixes `e`
-  have hfix : (factorGerm A hσ ((z)^*[A].obj N.X)).hom e = e := by
-    have hn := congrArg (fun φ ↦ φ.hom b) (factorGerm_naturality A hσ p.hom)
+  have hfix : (factorGerm (WeilCoefficients.{u} l) hσ
+      ((z)^*[WeilCoefficients.{u} l].obj N.X)).hom e = e := by
+    have hn := congrArg (fun φ ↦ φ.hom b) (factorGerm_naturality (WeilCoefficients.{u} l) hσ
+      (G := (z)^*[WeilCoefficients.{u} l].obj N.X) p.hom)
     rw [ModuleCat.comp_apply, ModuleCat.comp_apply, hfixB] at hn
     rw [← hb]
     exact hn

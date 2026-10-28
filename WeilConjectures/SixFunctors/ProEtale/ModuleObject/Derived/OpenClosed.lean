@@ -7,22 +7,25 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedBasic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConservative
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 
 /-!
 
-# Open–closed detection and vanishing on derived categories of module objects over `Λ`
+# Open–closed detection and vanishing on bounded constructible complexes
 
 Let `Λ` be a commutative condensed ring, `j : U ⟶ X` a quasi-compact open immersion and
-`i : Z ⟶ X` a closed immersion onto the complement of its range. This file lifts the statements
-on `D(Mod_{Λ_X})` of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedBasic`
-to the bounded constructible derived categories `Dᵇc(X)⟦Λ⟧`:
+`i : Z ⟶ X` a closed immersion onto the complement of its range. This file lifts the statements on
+the ambient derived categories `D(Mod_{Λ_X})` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConservative` to the bounded
+constructible derived categories `Dᵇc(X)⟦Λ⟧`:
 
 * the restrictions `Lj^*` and `Li^*` jointly reflect isomorphisms
-  (`ProEtale.CondensedRing.isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl`);
+  (`ProEtale.CondensedRing.isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl`, from
+  `ProEtale.CondensedRing.jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl`);
 * `Lg^* (j_! K)` vanishes when the range of `g` misses the range of the open immersion `j`
-  (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek`).
+  (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek`, from
+  `ProEtale.CondensedRing.isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint`).
 
 -/
 

@@ -17,10 +17,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedFinite
 /-!
 # Lisse sheaves are constant on the universal profinite étale cover
 
-Let `Y` be a connected regular Noetherian scheme and `Ỹ_y` its universal profinite étale cover
+Let `Y` be a connected normal Noetherian scheme and `Ỹ_y` its universal profinite étale cover
 at a geometric point `y` (`AlgebraicGeometry.Scheme.UniversalCovers`). Every lisse `ℓ`-adic sheaf
 `G` on `Y_proét` becomes constant on `Ỹ_y`: `G|_{Ỹ_y} ≅ ℚ̄_ℓⁿ`
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_upperStar_universalCover`).
+(`IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk`; the regular
+case is `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_upperStar_universalCover`).
 
 This is the `ℚ̄_ℓ`-part of the blueprint `cor-galois-lisse-representations` in the form needed
 here. The blueprint deduces it from the case of finite coefficients by passing to the
@@ -37,7 +38,8 @@ Bhatt–Scholze (*The pro-étale topology for schemes*, §7.4):
    `AlgebraicGeometry.ProEtale.AdicSheaf.transitionMatrix_comp`).
 2. For every congruence subgroup `K_k ⊆ GL_n(𝒪_E)` (`PadicAlgCl.congruenceSubgroup`), `γ`
    twists the discrete set `GL_n(E) ⧸ K_k` into a pro-étale locally constant sheaf of sets on
-   `Y`, which is constant on `Ỹ_y` (`AlgebraicGeometry.exists_isTwistedSection_universalCover`,
+   `Y`, which is constant on `Ỹ_y`
+   (`AlgebraicGeometry.exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk`,
    Bhatt–Scholze, Lemma 7.4.10). For `k = 0` this is the existence of an `𝒪_E`-lattice, and for
    `k ≥ 1` the triviality on `Ỹ_y` of its reductions modulo `ℓᵏ`.
 3. Sections over the connected `Ỹ_y` are determined by one value
@@ -71,12 +73,15 @@ lemma matrix_ext_eval {T : Type*} [TopologicalSpace T] {n : ℕ}
   Matrix.ext fun i j ↦ Subtype.ext (ContinuousMap.ext fun t ↦ congrFun (congrFun (h t) i) j)
 
 /-- **Lisse sheaves are constant on the universal cover** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected regular Noetherian
-scheme `Y`, the pullback of a lisse `ℓ`-adic sheaf to the universal profinite étale cover `Ỹ_y`
-at a geometric point `y` is isomorphic to `ℚ̄_ℓⁿ` for some `n`. -/
-theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetherian Y]
-    [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] (U : Scheme.UniversalCovers Y Ω)
-    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G : AdicSheaf l Y} (hG : IsAdicLisseSheaf G) :
+`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected normal Noetherian
+scheme `Y` (its local rings are integrally closed domains), the pullback of a lisse `ℓ`-adic
+sheaf to the universal profinite étale cover `Ỹ_y` at a geometric point `y` is isomorphic to
+`ℚ̄_ℓⁿ` for some `n`. -/
+theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk
+    [IsLocallyNoetherian Y] [CompactSpace Y] [ConnectedSpace Y]
+    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
+    (U : Scheme.UniversalCovers Y Ω) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    {G : AdicSheaf l Y} (hG : IsAdicLisseSheaf G) :
     ∃ n : ℕ, Nonempty ((U.proj y)^*ᵃ[l].obj G ≅
       ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)) := by
   classical
@@ -181,7 +186,8 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
     (fun k ↦ congruenceSubgroup_antitone k.le_succ) finite_image_congruenceSubgroup_zero
     exists_limit_congruenceSubgroup (fun _ ↦ eq_one_of_forall_mem_congruenceSubgroup)
     (fun τ hτ hinv x x' ↦ IsTwistedSection.apply_eq_of_preconnectedSpace π τ hτ hinv x x')
-    (fun k x ↦ exists_isTwistedSection_universalCover U y f (hcoc k) x _)
+    (fun k x ↦ exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk hY U y f
+      (hcoc k) x _)
   have hσc (i j : Fin n) := continuous_apply_of_isLocallyConstant_mk σ hσlc i j
   -- 4. the corrected trivialisation over `V ×_Y Ỹ_y` descends
   let H := matrixOfGL (fun x ↦ (σ x)⁻¹) fun i j ↦ (hσc i j).2
@@ -222,5 +228,16 @@ theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetheria
   have hσw := hσ w
   rw [hσw, show ∀ a b : GL (Fin n) E, a⁻¹ * b⁻¹ * (b * a) = 1 from fun a b ↦ by group,
     Units.val_one, Matrix.map_one _ (map_zero _) (map_one _)]
+
+/-- **Lisse sheaves are constant on the universal cover** of a connected regular Noetherian
+scheme `Y`: regular schemes are normal
+(`IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk`). -/
+theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover [IsLocallyNoetherian Y]
+    [CompactSpace Y] [IsRegular Y] [ConnectedSpace Y] (U : Scheme.UniversalCovers Y Ω)
+    (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) {G : AdicSheaf l Y} (hG : IsAdicLisseSheaf G) :
+    ∃ n : ℕ, Nonempty ((U.proj y)^*ᵃ[l].obj G ≅
+      ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)) :=
+  hG.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk
+    (fun _ ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk _⟩) U y
 
 end AlgebraicGeometry.ProEtale

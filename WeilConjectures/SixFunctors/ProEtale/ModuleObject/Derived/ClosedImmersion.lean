@@ -5,24 +5,26 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedBasic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 
 /-!
 
-# Full faithfulness of `Ri_*` on derived categories of module objects
+# Full faithfulness of `Ri_*` on bounded constructible complexes
 
 Let `Λ` be a commutative condensed ring, `i : Z ⟶ X` a closed immersion and `j : U ⟶ X` an open
 immersion. This file proves:
 
-* the derived pushforward `Ri_*` is fully faithful on bounded constructible complexes, i.e. the
-  counit `Li^* Ri_* ⟶ 𝟭` is an isomorphism
+* the derived pushforward `Ri_*` is fully faithful, i.e. the counit `Li^* Ri_* ⟶ 𝟭` is an
+  isomorphism, on bounded constructible complexes
   (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit`), as it
   is on `D(Mod_{Λ_Z})`
-  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion`);
+  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion`,
+  in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful`);
 * `Lj^* Ri_* = 0` on bounded constructible complexes when the ranges of `i` and `j` are disjoint
   (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_lowerStar_obj`), by adjunction
   from `Li^* j_! = 0`.

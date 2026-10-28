@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit
 
 /-!
 
@@ -31,7 +32,8 @@ adjunction `Rf_!(c) ⊣ Rf^!(c)` is the composite of these two adjunctions.
 The only input is that `Rg_*` on bounded constructible complexes is a left adjoint for proper `g`
 (`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
 `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`,
-`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`, `sorry`ed). As the
+`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`; see
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence`). As the
 pushforward on bounded constructible complexes, everything is stated for each of the `ℓ`-adic
 coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E` (in the namespaces `ProEtale.CondensedRing`,
 `ProEtale.CondensedRing.ContinuousMapRingObj` and `ProEtale.CondensedRing.PadicIntegersRingObj`).
@@ -53,13 +55,16 @@ adjunction `Rf_! ⊣ Rf^!` is the adjunction `Rf_!(c) ⊣ Rf^!(c)`.
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`: the adjunction
   `Rf_! ⊣ Rf^!`.
 
-## Sorried input
+## The input
 
 - `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` and
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`:
   for `g` proper, `Rg_*` on bounded constructible `ℚ̄_ℓ`-, `E`- and `𝒪_E`-sheaves is a left
-  adjoint.
+  adjoint. For `k` finite or separably closed this is the restriction to `Dᵇc` of the Brown
+  adjoint on the localizing closures (the `_of_finite_or_isSepClosed` theorems of
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence`); for
+  the other fields it is the `_of_not` theorems there.
 
 ## Implementation notes
 
@@ -97,17 +102,18 @@ variable {Z Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y)
 
-/- `[IsProper g.left]` is a binder of each instance, not a section variable: an instance proved
-by `sorry` does not use it, so as a section variable it would be silently dropped. -/
-
 /-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
 stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism
 `g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
 `Rg^!` along `g` (SGA 4 XVIII, 3.1.4; Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  sorry
+    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed ℓ g
+        hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not ℓ g hk
 
 /-- For a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
 derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
@@ -116,8 +122,12 @@ Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [IsProper g.left] :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed ℓ g
+        E hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not ℓ g E hk
 
 /-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
@@ -127,8 +137,12 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     [IsProper g.left] :
-    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
+    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed ℓ g
+        E hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not ℓ g E hk
 
 end ProperLowerStar
 

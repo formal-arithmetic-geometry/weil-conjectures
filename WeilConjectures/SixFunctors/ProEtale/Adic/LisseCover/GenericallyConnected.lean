@@ -8,25 +8,29 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.FiniteOrbit
 public import WeilConjectures.AlgebraicGeometry.AffineFibreProductTransition
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.AlgebraicGeometry.NormalEtale
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
-# Generic connectedness of pro-étale schemes over regular schemes
+# Generic connectedness of pro-étale schemes over normal schemes
 
-Let `Y` be a regular locally Noetherian scheme with generic point `η`. A limit `W = lim Wᵢ` of
-a cofiltered diagram of affine schemes étale over `Y` is generically connected relative to `η`
-(`AlgebraicGeometry.IsGenericallyConnected`, `AlgebraicGeometry.isGenericallyConnected_of_isLimit`):
-an open neighbourhood of a diagonal point of `W ×_Y W` contains the preimage of an open of some
-`Wᵢ ×_Y Wᵢ` (`W ×_Y W` being the limit of the `Wᵢ ×_Y Wᵢ`), the stage `Wᵢ` is regular, hence
-locally irreducible, and points of an irreducible open of `Wᵢ` lying over `η` are its generic
-point, `Wᵢ ⟶ Y` having discrete fibres.
+Let `Y` be a normal locally Noetherian scheme (its local rings are integrally closed domains)
+with generic point `η`. A limit `W = lim Wᵢ` of a cofiltered diagram of affine schemes étale over
+`Y` is generically connected relative to `η` (`AlgebraicGeometry.IsGenericallyConnected`,
+`AlgebraicGeometry.isGenericallyConnected_of_isLimit`): an open neighbourhood of a diagonal point
+of `W ×_Y W` contains the preimage of an open of some `Wᵢ ×_Y Wᵢ` (`W ×_Y W` being the limit of
+the `Wᵢ ×_Y Wᵢ`), the stage `Wᵢ` is normal (Stacks 033C), so its local rings are domains and it
+is locally irreducible (`AlgebraicGeometry.exists_isOpen_specializes_of_isDomain_stalk`), and
+points of an irreducible open of `Wᵢ` lying over `η` are its generic point, `Wᵢ ⟶ Y` having
+discrete fibres.
 
 Every weakly étale `f : V ⟶ Y` with `V` quasi-compact admits a surjective submersive morphism
 `j : W ⟶ V` from such a `W`, by Stacks 097Z (a weakly étale algebra is ind-étale locally
-ind-étale) (`AlgebraicGeometry.exists_isGenericallyConnected_cover`).
+ind-étale) (`AlgebraicGeometry.exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk`;
+the regular case is `AlgebraicGeometry.exists_isGenericallyConnected_cover`).
 -/
 
 @[expose] public section
@@ -124,32 +128,46 @@ end CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+/-- A connected locally Noetherian scheme whose local rings are integral domains is integral:
+it is irreducible (`AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`) and reduced. This
+applies to connected locally Noetherian normal schemes. -/
+theorem isIntegral_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian X] [ConnectedSpace X]
+    (h : ∀ x : X, IsDomain (X.presheaf.stalk x)) : IsIntegral X :=
+  have := irreducibleSpace_of_isDomain_stalk X h
+  have := isReduced_of_isReduced_stalk X
+  isIntegral_of_irreducibleSpace_of_isReduced X
+
+/-- A locally Noetherian scheme whose local rings are integral domains is locally irreducible:
+every point has an open neighbourhood consisting of specializations of a single point. Indeed
+the connected component of the point is open, and irreducible
+(`AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk`). -/
+lemma exists_isOpen_specializes_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian X]
+    (h : ∀ x : X, IsDomain (X.presheaf.stalk x)) (x : X) :
+    ∃ (O : Set X) (ξ : X), IsOpen O ∧ x ∈ O ∧ ∀ y ∈ O, ξ ⤳ y := by
+  let O : X.Opens := ⟨connectedComponent x, isOpen_connectedComponent⟩
+  have : ConnectedSpace O := Subtype.connectedSpace isConnected_connectedComponent
+  have : IrreducibleSpace O.toScheme := irreducibleSpace_of_isDomain_stalk O fun y ↦
+    have := h y.1
+    MulEquiv.isDomain _ (O.stalkIso y).commRingCatIsoToRingEquiv.toMulEquiv
+  refine ⟨O, O.ι.base (genericPoint O.toScheme), O.isOpen, mem_connectedComponent, ?_⟩
+  intro y hy
+  let y' : O.toScheme := ⟨y, hy⟩
+  have := (genericPoint_specializes y').map O.ι.base.hom.continuous
+  simpa only [Scheme.Opens.ι_apply] using this
+
 /-- A regular locally Noetherian scheme is locally irreducible: every point has an open
-neighbourhood consisting of specializations of a single point. Indeed an affine open
-neighbourhood is a regular Noetherian scheme, hence a finite disjoint union of open integral
-subschemes (`AlgebraicGeometry.IsRegular.exists_isClopen_isIntegral`). -/
+neighbourhood consisting of specializations of a single point, its local rings being domains
+(`AlgebraicGeometry.exists_isOpen_specializes_of_isDomain_stalk`). -/
 lemma IsRegular.exists_isOpen_specializes (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
-    (x : X) : ∃ (O : Set X) (ξ : X), IsOpen O ∧ x ∈ O ∧ ∀ y ∈ O, ξ ⤳ y := by
-  obtain ⟨U, hU, hxU, -⟩ := exists_isAffineOpen_mem_and_subset (X := X) (x := x) (U := ⊤) trivial
-  have : IsAffine U := hU
-  have : IsRegular U := ⟨isRegularLocalRing_stalk_of_etale U.ι fun _ ↦ inferInstance⟩
-  have : IsNoetherian U := ⟨⟩
-  obtain ⟨n, Ua, -, -, hsup, hint⟩ := IsRegular.exists_isClopen_isIntegral U
-  have hx : (⟨x, hxU⟩ : U) ∈ ⨆ a, Ua a := by rw [hsup]; trivial
-  obtain ⟨a, ha⟩ := TopologicalSpace.Opens.mem_iSup.1 hx
-  have := (hint a).1
-  refine ⟨U.ι.base '' (Ua a : Set U), U.ι.base ((Ua a).ι.base (genericPoint (Ua a))),
-    U.ι.isOpenEmbedding.isOpenMap _ (Ua a).isOpen, ⟨_, ha, rfl⟩, ?_⟩
-  rintro _ ⟨y, hy, rfl⟩
-  let y' : (Ua a).toScheme := ⟨y, hy⟩
-  have := ((genericPoint_specializes y').map ((Ua a).ι ≫ U.ι).base.hom.continuous)
-  simpa only [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] using this
+    (x : X) : ∃ (O : Set X) (ξ : X), IsOpen O ∧ x ∈ O ∧ ∀ y ∈ O, ξ ⤳ y :=
+  exists_isOpen_specializes_of_isDomain_stalk X (fun _ ↦ inferInstance) x
 
 /-- **Generic connectedness of pro-étale limits.** Let `h : W ⟶ Y` be a cofiltered limit of
 affine schemes `Dⱼ` over `Y` with locally quasi-finite (e.g. étale) structure maps, and assume
 every point of every `Dⱼ` has an open neighbourhood consisting of specializations of a single
-point (e.g. `Dⱼ` regular). Then `h` is generically connected relative to any point `η` of `Y`
-specializing to every point (`AlgebraicGeometry.IsGenericallyConnected`). -/
+point (e.g. `Dⱼ` locally Noetherian with integral local rings, such as `Dⱼ` normal or regular).
+Then `h` is generically connected relative to any point `η` of `Y` specializing to every point
+(`AlgebraicGeometry.IsGenericallyConnected`). -/
 theorem isGenericallyConnected_of_isLimit {W Y : Scheme.{u}} (h : W ⟶ Y) {J : Type u}
     [SmallCategory J] [IsCofiltered J] {D : J ⥤ Scheme.{u}} {t : D ⟶ (Functor.const J).obj Y}
     {s : (Functor.const J).obj W ⟶ D} (hs : IsLimit (Cone.mk W s))
@@ -234,11 +252,14 @@ lemma IsGenericallyConnectedAt.of_openImmersion {O W Y : Scheme.{u}} (ι : O ⟶
   · rw [← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply, h₁]
   · rw [← Scheme.Hom.comp_apply, pullback.lift_snd, Scheme.Hom.comp_apply, h₂]
 
-/-- The spectrum of an ind-étale algebra over an affine open of a regular locally Noetherian
+/-- The spectrum of an ind-étale algebra over an affine open of a normal locally Noetherian
 scheme `Y` is generically connected over `Y`: it is the limit of a cofiltered diagram of affine
-schemes étale over `Y`, which are regular and locally Noetherian. -/
-lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNoetherian Y]
-    [IsRegular Y] {U : Y.Opens} (hU : IsAffineOpen U) {T : CommRingCat.{u}} (ψ : Γ(Y, U) ⟶ T)
+schemes étale over `Y`, which are locally Noetherian with integral local rings (Stacks 033C,
+`AlgebraicGeometry.Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain`). -/
+lemma isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk {Y : Scheme.{u}}
+    [IsLocallyNoetherian Y]
+    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
+    {U : Y.Opens} (hU : IsAffineOpen U) {T : CommRingCat.{u}} (ψ : Γ(Y, U) ⟶ T)
     (hψ : ψ.hom.IndEtale) {η : Y} (hη : ∀ y, η ⤳ y) :
     IsGenericallyConnected (Spec.map ψ ≫ hU.fromSpec) η := by
   obtain ⟨J, _, _, D, t, s, hs, hts⟩ := proAffineEtale_Spec_iff.mpr hψ
@@ -254,19 +275,31 @@ lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNo
     rw [ht', ← Category.assoc, (hts j).2]) (fun j q ↦ ?_) hη
   have : IsLocallyNoetherian (D.obj j) :=
     LocallyOfFiniteType.isLocallyNoetherian (t.app j ≫ hU.fromSpec)
-  have : IsRegular (D.obj j) :=
-    ⟨isRegularLocalRing_stalk_of_etale (t.app j ≫ hU.fromSpec) fun _ ↦ inferInstance⟩
-  exact IsRegular.exists_isOpen_specializes _ q
+  exact exists_isOpen_specializes_of_isDomain_stalk _ (fun x ↦
+    (Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain
+      (t.app j ≫ hU.fromSpec) hY x).1) q
 
-/-- **Generically connected covers.** Let `Y` be a regular locally Noetherian scheme, `η` a
+/-- The spectrum of an ind-étale algebra over an affine open of a regular locally Noetherian
+scheme `Y` is generically connected over `Y`: regular schemes are normal
+(`AlgebraicGeometry.isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk`). -/
+lemma isGenericallyConnected_SpecMap_comp_fromSpec {Y : Scheme.{u}} [IsLocallyNoetherian Y]
+    [IsRegular Y] {U : Y.Opens} (hU : IsAffineOpen U) {T : CommRingCat.{u}} (ψ : Γ(Y, U) ⟶ T)
+    (hψ : ψ.hom.IndEtale) {η : Y} (hη : ∀ y, η ⤳ y) :
+    IsGenericallyConnected (Spec.map ψ ≫ hU.fromSpec) η :=
+  isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk
+    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) hU ψ hψ hη
+
+/-- **Generically connected covers.** Let `Y` be a normal locally Noetherian scheme, `η` a
 point of `Y` specializing to every point, and `f : V ⟶ Y` weakly étale with `V`
 quasi-compact. There is a flat surjective submersive morphism `j : W ⟶ V` from an affine
 scheme such that `j ≫ f` is generically connected relative to `η`: cover `V` by finitely many
 affine opens `Spec B` mapping to affine opens `Spec R` of `Y`, and take `W = ∐ Spec C` for
 faithfully flat ind-étale `B`-algebras `C` which are ind-étale over `R` (Stacks 097Z,
 `Algebra.WeaklyEtale.exists_indEtale`). -/
-theorem exists_isGenericallyConnected_cover {Y V : Scheme.{u}} [IsLocallyNoetherian Y]
-    [IsRegular Y] (f : V ⟶ Y) [WeaklyEtale f] [CompactSpace V] {η : Y} (hη : ∀ y, η ⤳ y) :
+theorem exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk {Y V : Scheme.{u}}
+    [IsLocallyNoetherian Y]
+    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
+    (f : V ⟶ Y) [WeaklyEtale f] [CompactSpace V] {η : Y} (hη : ∀ y, η ⤳ y) :
     ∃ (W : Scheme.{u}) (j : W ⟶ V), IsAffine W ∧ Flat j ∧ Function.Surjective j.base ∧
       (∀ E : Set V, IsOpen (j.base ⁻¹' E) → IsOpen E) ∧ IsGenericallyConnected (j ≫ f) η := by
   classical
@@ -337,6 +370,17 @@ theorem exists_isGenericallyConnected_cover {Y V : Scheme.{u}} [IsLocallyNoether
         Spec.map (f.appLE (U x) (Vx x) (hle x) ≫ g x) ≫ (hU x).fromSpec := by
       rw [reassoc_of% hιj, hπf]
     rw [this]
-    exact isGenericallyConnected_SpecMap_comp_fromSpec (hU x) _ (hg₃ x) hη q
+    exact isGenericallyConnected_SpecMap_comp_fromSpec_of_isIntegrallyClosed_stalk hY (hU x) _
+      (hg₃ x) hη q
+
+/-- **Generically connected covers** of a regular locally Noetherian scheme: regular schemes
+are normal (`AlgebraicGeometry.exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk`).
+-/
+theorem exists_isGenericallyConnected_cover {Y V : Scheme.{u}} [IsLocallyNoetherian Y]
+    [IsRegular Y] (f : V ⟶ Y) [WeaklyEtale f] [CompactSpace V] {η : Y} (hη : ∀ y, η ⤳ y) :
+    ∃ (W : Scheme.{u}) (j : W ⟶ V), IsAffine W ∧ Flat j ∧ Function.Surjective j.base ∧
+      (∀ E : Set V, IsOpen (j.base ⁻¹' E) → IsOpen E) ∧ IsGenericallyConnected (j ≫ f) η :=
+  exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk
+    (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hη
 
 end AlgebraicGeometry

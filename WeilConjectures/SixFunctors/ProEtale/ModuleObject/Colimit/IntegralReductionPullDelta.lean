@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleShortExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionPullUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -44,6 +45,11 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+-- The generic instance search behind every `L(-)` in the statements below is slow.
+attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod hasGoodTensorTensor₂₃_mod
+  hasColimitsOfShape_int_mod preservesColimitsOfShape_int_curriedTensor_obj_mod
+  preservesColimitsOfShape_int_curriedTensor_flip_obj_mod
 
 section Comap
 
@@ -90,7 +96,7 @@ counits: it is the underived composite of `comapUpperStarIso` and of the inverse
 lemma derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExtendScalarsIso_inv
     (K : HomotopyCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
       (ComplexShape.up ℤ)) :
-    (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app
+    (derivedComapLeftDerivedUpperStarIso a f).hom.app
         (L(Mod.extendScalars (coefficientMap a Y)).obj (DerivedCategory.Qh.obj K)) ≫
       D(Mod.comap (coefficientMap a X)).map
         ((derivedUpperStarExtendScalarsIso a f).inv.app (DerivedCategory.Qh.obj K)) ≫
@@ -139,7 +145,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExten
   have hB := congrArg (D(Mod.comap (coefficientMap a X))).map
     (derivedUpperStarExtendScalarsIso_inv_app_comp_counit a f K)
   simp only [Functor.map_comp] at hB
-  have l1 := (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.naturality
+  have l1 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
   have l2 := (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.naturality
     ((Functor.mapHomotopyCategoryCompIso
@@ -239,8 +245,8 @@ lemma upperStarExtendComapComplexIso_quotient_map
     (HomotopyCategory.quotient _ _).map (upperStarExtendComapComplexIso a f P).hom := by
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app_eq_id]
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app]
   erw [Category.id_comp, Category.id_comp, Category.comp_id]
   simp only [NatTrans.mapHomotopyCategory_app]
   erw [Functor.mapHomotopyCategory_map, ← Functor.map_comp]
@@ -258,7 +264,7 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       (L((f)^*⟦Λ⟧).commShiftIso (1 : ℤ)).hom.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) =
-    (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app
+    (derivedComapLeftDerivedUpperStarIso a f).hom.app
         (L(Mod.extendScalars (coefficientMap a Y)).obj
           (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).inv.app
@@ -320,7 +326,7 @@ theorem upperStar_map_derivedExtendScalarsTriangleδ_app
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
     L((f)^*⟦Λ⟧).map ((Mod.derivedExtendScalarsTriangleδ k wY hY).app M) ≫
       (L((f)^*⟦Λ⟧).commShiftIso (1 : ℤ)).hom.app M =
-    (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.app
+    (derivedComapLeftDerivedUpperStarIso a f).hom.app
         (L(Mod.extendScalars (coefficientMap a Y)).obj M) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).inv.app M) ≫
       (Mod.derivedExtendScalarsTriangleδ k wX hX).app (L((f)^*⟦Λ⟧).obj M) := by
@@ -333,7 +339,7 @@ theorem upperStar_map_derivedExtendScalarsTriangleδ_app
     (CochainComplex.flat_flatResolutionFunctor_obj_X _)
   have n1 := (Mod.derivedExtendScalarsTriangleδ k wY hY).naturality e.hom
   have n2 := (L((f)^*⟦Λ⟧).commShiftIso (1 : ℤ)).hom.naturality e.hom
-  have n3 := (derivedComapLeftDerivedUpperStarIsoOfLevelwise a f).hom.naturality
+  have n3 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
     (L(Mod.extendScalars (coefficientMap a Y)).map e.hom)
   have n4 := (derivedUpperStarExtendScalarsIso a f).inv.naturality e.hom
   have n5 := (Mod.derivedExtendScalarsTriangleδ k wX hX).naturality (L((f)^*⟦Λ⟧).map e.hom)

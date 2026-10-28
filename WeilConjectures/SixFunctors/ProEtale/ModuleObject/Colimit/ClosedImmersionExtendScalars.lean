@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedBasic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
 
 /-!
 # Closed pushforward and extension of scalars
