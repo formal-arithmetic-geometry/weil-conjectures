@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCoreData
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps
 
 /-! The support part of the exceptional integral transport system laws.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
@@ -45,6 +46,17 @@ theorem exists_exceptional_transport_core_system_support_law
         (sequenceProperty l E X).ι ⋙
           IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
             IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g) := by
-  sorry
+  refine ⟨fun E => ?_⟩
+  refine CategoryTheory.Functor.ext
+    (F := d.F E ⋙ (sequenceProperty l E Y).ι)
+    (G := (sequenceProperty l E X).ι ⋙
+      IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
+        IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g) ?_ ?_
+  · intro K
+    exact exceptional_transport_core_system_support_obj
+      l Ω D hl f c operation left d E K
+  · intro K K' u
+    exact exceptional_transport_core_system_support_map
+      l Ω D hl f c operation left d E u
 
 end WeilConjectures.ExceptionalIntegralScalar
