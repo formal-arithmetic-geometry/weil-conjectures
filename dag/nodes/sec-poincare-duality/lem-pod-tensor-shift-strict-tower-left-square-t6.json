@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "id": "lem-pod-tensor-shift-strict-tower-left-square-t6",
+ "title": "Left signed tensor-shift square on strict towers",
+ "statement": "Fix a prime l, a finite coefficient extension E, an isomorphism g:X→Y with l invertible, normalized completion data D and tensor reindexing T satisfying their Laws [def-pod-completion-reindex-models, def-pod-completion-tensor-normalization]. Let SY and SX be signed tensor shifts satisfying their Generators laws [def-pod-completion-reindex-shifts]. For every good pair P,Q and integer r, the left-slot strict tower square described in [def-pod-completion-reindex-shifts] commutes: shifting on Y then reindexing and tensor comparison agrees with tensor comparison, termwise reindexing/shift on the first factor, and shifting on X. This is equality of natural transformations before Roos realization, with the prescribed unsigned first-slot rule.",
+ "proof": [
+  {
+   "text": "Precompose with the inverse tensor comparison on the shifted pair. Evaluate at every quotient and total degree. The proved finite_tensor_ext lemma reduces equality to total tensors of unit reduction generators. Apply the left generator calculation. Complex and natural-transformation extensionality, followed by cancellation of the inverse tensor comparison, give equality of the entire strict tower maps.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-level-reduction",
+    "lem-pod-tensor-shift-strict-tower-left-generator-t6"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "lem-pod-tensor-shift-strict-tower-left-generator-t6"
+ ],
+ "proof_origin": {
+  "by": "T6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares.",
+  "note": "Fully proved square separated after profiling the expanded tower types; no sorry added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor product shift isomorphism under reindexing of complexes and equality on homogeneous pure tensors",
+   "results": "CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁; CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂; HomologicalComplex₂.ι_totalShift₁Iso_hom_f; CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc; HomologicalComplex₂.totalShift₁Iso_hom_naturality; HomologicalComplex₂.totalShift₁Iso_hom_naturality_assoc; HomologicalComplex₂.ι_totalShift₂Iso_hom_f; HomologicalComplex₂.totalShift₂Iso_hom_naturality",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor-shift and extensionality tools; use the existing normalized finite tensor APIs for the strict square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GradedObject, \"ext\"",
+   "results": "CategoryTheory.GradedObject.hom_ext; CategoryTheory.GradedObject.hom_ext_iff; CategoryTheory.GradedObject.mapObj_ext; CategoryTheory.GradedObject.mapObj_ext_iff; CategoryTheory.GradedObject.mapBifunctorMapObj_ext; CategoryTheory.GradedObject.mapBifunctorMapObj_ext_iff; CategoryTheory.GradedObject.mapTrifunctorMapObj_ext; CategoryTheory.GradedObject.mapTrifunctorMapObj_ext_iff",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor-shift and extensionality tools; use the existing normalized finite tensor APIs for the strict square."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*shift|shift.*tensor",
+   "results": "Mathlib/CategoryTheory/Shift/Basic.lean; Mathlib/CategoryTheory/Shift/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor-shift and extensionality tools; use the existing normalized finite tensor APIs for the strict square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodTensorShiftStrictTowerSquares",
+  "date": "2026-10-28",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-tensor-shift-strict-tower-squares-c3",
+   "place": "Left tensor-factor square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorShiftStrictTowerLeftSquare",
+  "file": "lean/Sheaf/Paper/PodTensorShiftStrictTowerLeftSquare.lean",
+  "declaration": "WeilConjectures.podTensorShift_strictTowerLeftSquare",
+  "statement": "theorem podTensorShift_strictTowerLeftSquare\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X)\n    (hSY : SY.Generators l E) (hSX : SX.Generators l E)\n    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory) (r : ℤ) :\n    letI : (isoReductionIntegralInverse l E g).Additive :=\n      isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom\n    let PX := (podGoodReindex l E g D).obj P\n    let QX := (podGoodReindex l E g D).obj Q\n    let TY := integralOperationsTensorTowerFunctor l E Y\n    let TX := integralOperationsTensorTowerFunctor l E X\n    let PYr := (⟨P.obj⟦r⟧, SY.good P r⟩ :\n      (integralOperationsGoodComplex l E Y).FullSubcategory)\n    let L₁ := (podReindexTower l E g).map (SY.leftTower P Q r).hom ≫\n      (podTowerShift l E g (TY.obj (P.obj, Q.obj)) r).hom ≫\n      whiskerRight (T.tower P Q).hom (shiftFunctor _ r)\n    let L₂ := (T.tower PYr Q).hom ≫\n      TX.map (Prod.mkHom (((isoReductionIntegralComplex l E g).commShiftIso r).hom.app P.obj)\n        (𝟙 QX.obj)) ≫ (SX.leftTower PX QX r).hom\n    L₁ = L₂",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261028T034946-L-3574407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261028T034946-L-3574407",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

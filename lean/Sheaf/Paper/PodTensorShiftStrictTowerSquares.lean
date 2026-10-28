@@ -6,6 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.Paper.PodCompletionReindexShifts
+import Sheaf.Paper.PodTensorShiftStrictTowerLeftSquare
+import Sheaf.Paper.PodTensorShiftStrictTowerRightSquare
 
 /-! # Strict tensor towers and signed reindexing -/
 
@@ -91,6 +93,8 @@ theorem podTensorShift_strictTowerSquares
       TX.map (Prod.mkHom (𝟙 PX.obj)
         (((isoReductionIntegralComplex l E g).commShiftIso r).hom.app Q.obj)) ≫
       (SX.rightTower PX QX r).hom
-    L₁ = L₂ ∧ R₁ = R₂ := by sorry
+    L₁ = L₂ ∧ R₁ = R₂ := by
+  exact ⟨podTensorShift_strictTowerLeftSquare l E g D hD T hT SY SX hSY hSX P Q r,
+    podTensorShift_strictTowerRightSquare l E g D hD T hT SY SX hSY hSX P Q r⟩
 
 end WeilConjectures

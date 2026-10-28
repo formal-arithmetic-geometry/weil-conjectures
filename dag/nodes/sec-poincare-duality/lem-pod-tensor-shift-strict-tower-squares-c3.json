@@ -16,34 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Evaluate at a quotient and a total degree. Reindexing is sectionwise relabelling. Use tensor and coproduct extensionality to test the two maps on homogeneous pure tensors. The sheafified-tensor and restricted-scalar generator extensionality is the same one used in the strict tensor construction of integralOperationsWellDefined.",
+   "text": "Apply the fully proved left-slot and right-slot strict tensor-shift square calculations and pair the resulting equalities. Each calculation uses the inverse tensor comparison, the unit finite tensor generator extensionality, and the normalized generator laws; the right-slot calculation includes the Koszul sign.",
    "uses": [
-    "lem-pur-integral-operations-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply T.Generators, SY.Generators and SX.Generators. The first slot gives the same relabelled tensor. The second gives the same tensor multiplied by (-1)^(pr). D.QuotientGenerators identifies the shifted quotient map with the quotient map in degree p+r (or q+r): verify this first on a scalar-tensor generator and use scalar-extension generator extensionality. Thus the two component maps agree. Complex and natural-transformation extensionality prove the entire tower equalities.",
-   "uses": [
-    "def-pod-completion-reindex-models",
-    "def-pod-completion-reindex-shifts",
-    "def-pod-completion-tensor-reindex-models",
-    "def-pod-completion-tensor-normalization"
+    "lem-pod-tensor-shift-strict-tower-left-square-t6",
+    "lem-pod-tensor-shift-strict-tower-right-square-t6"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-integral-operations-well-defined",
-  "def-pod-completion-reindex-models",
-  "def-pod-completion-reindex-shifts",
-  "def-pod-completion-tensor-reindex-models",
-  "def-pod-completion-tensor-normalization"
+  "lem-pod-tensor-shift-strict-tower-left-square-t6",
+  "lem-pod-tensor-shift-strict-tower-right-square-t6"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "T6",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; tensor-factor signed-shift squares. Explicit expansion of the indicated model calculation."
+  "place": "Steps 1 and 5; strict tensor generator calculation, precomposed with the normalized inverse comparison."
  },
  "mathlib_searches": [
   {
@@ -128,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-d7806",
-  "group": "C3",
-  "result": "fix",
-  "landing": "20261028T020229-L-2482936",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261028T034946-L-3574407",
   "kind": "interface",
-  "note": "independent cc review: item statement repair (+Generators/Model laws) vs PodTensorSignedShift/PodReindexSignedShifts defs and parent h₅..h₈; two new sorry leaves vs PodCompletionReindexModels/TensorModels/TensorNormalization laws; node lean.statements vs Lean files; new-node stmt_deps vs declaration owners"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
