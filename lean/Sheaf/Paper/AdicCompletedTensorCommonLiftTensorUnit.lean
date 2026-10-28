@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorFiniteModels
+import Sheaf.Paper.AdicCompletedTensorCommonComponentNaturality
+import Sheaf.Paper.AdicCompletedTensorOrdinaryUnit
 
 /-! Tensorator and unit data for the common-stage completed tensor lift.
 (blueprint: new-sf-adic-completed-tensor-common-lift-tensor-unit).
@@ -55,6 +57,12 @@ theorem completed_tensor_common_lift_tensor_unit
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
       (ProEt.topology X) (ring l X R) closed models symmetry) :
     Nonempty (CompletedTensorCommonLiftTensorUnit l X R closed models symmetry) := by
-  sorry
+  obtain ⟨e⟩ := completedTensorOrdinaryUnit l X R
+  refine ⟨{ tensor := ?_
+            unit := coherence.unitIso ≪≫ e }⟩
+  exact NatIso.ofComponents
+    (fun P ↦ completedTensorCommonComponent l X R closed models N P.1 P.2)
+    (fun f ↦ completedTensorCommonComponent_naturality l X R closed models symmetry N
+      coherence f)
 
 end WeilConjectures.AdicQbarRealization

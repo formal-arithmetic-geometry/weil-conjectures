@@ -1,0 +1,123 @@
+{
+ "id": "def-sf-adic-completed-tensor-common-components",
+ "kind": "definition",
+ "title": "Explicit invertible finite and common-field tensor components",
+ "statement": "def completedTensorCommonComponent\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (P Q : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X) :\n    closed.tensor.obj ((ordinary l X R).obj P, (ordinary l X R).obj Q) ≅\n      (ordinary l X R).obj ((commonStageDerivedTensor l (PadicAlgCl l) X).obj (P, Q))",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-common-stage-inclusion-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument."
+ },
+ "proof": [
+  {
+   "text": "On integral representatives, tensor the two integral realization isomorphisms, invert N.ordinary, apply derived scalar extension to tensorQuotientIso, invert the integral realization at the integral tensor, and apply realization to the inverse tensorIntegralObjectIso. Every factor is an isomorphism.",
+   "uses": [
+    "def-sf-adic-completed-tensor-finite-models",
+    "def-sf-native-adic-realization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary common-stage objects, transport both inputs to their prescribed compositum with isoToStage, use the integral component on the two underlying integral representatives there, apply the existing normalized stageTensor inclusion comparison, and apply common-stage tensor to the inverse input transports. This defines invertible components without choosing a witness of an unproved existence statement.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-common-stage-inclusion-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-common-stage-inclusion-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "Y7 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit finite normalized scalar comparisons and the coefficient unit, split from new-sf-adic-completed-tensor-common-lift-tensor-unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from finite coefficient tensor comparisons by descent along a filtered colimit of categories",
+   "results": "Sifted colimit and tensor-comparison APIs only; no native adic common-stage comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use existing project finite models and explicit components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "CategoryTheory.NatIso.ofComponents constructs a natural isomorphism from invertible natural components.",
+   "date": "2026-10-28",
+   "verdict": "Used to assemble the tensorator; does not supply its naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.ofComponents|natIsoOfComponents",
+   "results": "Generic component assembly APIs; no specialized finite-coefficient compatibility statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonLiftTensorUnit",
+  "date": "2026-10-28",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sf-adic-completed-tensor-common-lift-tensor-unit",
+   "place": "Explicit invertible finite and common-field tensor components",
+   "via": [
+    "new-sf-adic-completed-tensor-common-lift-tensor-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorCommonComponent",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorCommonComponent.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completedTensorCommonComponent",
+  "statement": "def completedTensorCommonComponent\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (P Q : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X) :\n    closed.tensor.obj ((ordinary l X R).obj P, (ordinary l X R).obj Q) ≅\n      (ordinary l X R).obj ((commonStageDerivedTensor l (PadicAlgCl l) X).obj (P, Q))",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.completedTensorIntegralComponent",
+   "WeilConjectures.AdicQbarRealization.completedTensorCommonComponent"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261028T020927-L-2566837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261028T020927-L-2566837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
