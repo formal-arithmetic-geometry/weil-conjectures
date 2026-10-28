@@ -14,24 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Choose the integral E-basis of F supplied by finite freeness. The compatible quotient bases identify each completed F coefficient section with the finite direct sum of completed E coefficient sections indexed by that basis. The multiplication map from the constant F coefficients and the E completion is therefore the universal balanced map. The residue normalization determines this map as completedCoefficientMap, and the universal property of tensor product gives the pushout. Compatibility with the pro-etale restriction maps follows from naturality of the coefficient maps; the empty site object gives zero section rings and the identity field extension gives the identity square.",
+   "text": "Choose an integral basis and the positive ramification relation, then lift them to the coefficient universe. The specified constant-sheaf basis gives a bijection from tuples of constant source sections to constant target sections, whose columns are the constant basis vectors. Evaluating the finite-product comparison supplies the tuple coordinates.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-pur-constant-specified-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the adic basis construction and its injectivity and surjectivity to obtain the analogous finite-sum bijection on completed sections with the same constant columns. The quotient-presentation isomorphisms induce completion isomorphisms. Their finite-projection identities identify the adic scalar map with completedCoefficientMap. Naturality of constantCommuteCompose and the quotient cone identify both constant-to-completion maps. Thus these ring isomorphisms transport the two normalized finite-sum bijections to the exact section rings and maps in the statement.",
    "uses": [
     "lem-pur-adic-basis-limit",
     "lem-weil-completed-integral-finite-free",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a commuting square of commutative rings, suppose a finite list of vectors is a basis on the constant side and its image is a basis on the completed side. Regard the two finite-sum bijections as linear equivalences. They define bases; the canonical tensor multiplication map sends the base-changed first basis to the second, hence is bijective. Turn it into an algebra equivalence and transport the canonical commutative-ring tensor-product pushout through this equivalence. The argument uses no nontriviality hypothesis, so also covers zero section rings and the empty object.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-adic-basis-limit",
   "lem-weil-completed-integral-finite-free",
+  "lem-pur-constant-specified-basis",
+  "lem-pur-adic-basis-limit",
   "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
-  "by": "G1",
+  "by": "W7",
   "date": "2026-10-28",
-  "note": "Strictly smaller split from the objectwise ordinary coefficient comparison: only the sectionwise ring pushout remains to be proved."
+  "note": "Complete Lean proof from the existing normalized finite-basis APIs. Private proved helpers establish sectionwise finite-sum bijectivity and its tensor-pushout consequence; no new proof obligations."
  },
  "mathlib_searches": [
   {
@@ -100,9 +114,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "W7",
   "result": "pass",
-  "landing": "20261028T034749-L-3542367",
+  "landing": "20261028T055824-L-813607",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
