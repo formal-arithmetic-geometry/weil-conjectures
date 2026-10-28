@@ -60,11 +60,6 @@ isomorphism by the étale theorem
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap`: generic base change
   over the field `k` along `X ⨯ Y ⟶ Y`.
 
-## Inputs from other subsections
-
-- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`: proper
-  base change.
-
 -/
 
 @[expose] public section

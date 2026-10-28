@@ -167,9 +167,8 @@ noncomputable def boundedConstructibleNearbyCyclesMonoidal
       exact hμ A B)
   (Functor.CoreMonoidal.ofLaxMonoidal _).toMonoidal
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime]
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [IsSeparated X.hom]
+  [IsSeparated X'.hom] in
 /-- The tensor maps of `NearbyCyclesModel.boundedConstructibleNearbyCyclesMonoidal` are the lax
 tensor maps of nearby cycles. -/
 lemma boundedConstructibleNearbyCyclesMonoidal_μ (hP : M.PreservesBoundedConstructible 𝐐)

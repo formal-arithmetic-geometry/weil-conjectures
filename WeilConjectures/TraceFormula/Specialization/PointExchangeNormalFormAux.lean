@@ -495,12 +495,6 @@ theorem genericRoute_aux {Cs Ds : Type*} {_ : Category Cs} {_ : Category Ds} {ι
   simp only [Category.assoc, Functor.map_comp, eqToHom_refl, Category.comp_id] at g3 ⊢
   rw [g2, g3]
 
-/-- A morphism of `Over S` from a proper object to a separated one is proper. -/
-lemma isProper_left_of_isProper_hom {S : Scheme.{u}} {B Z : Over S} (f : B ⟶ Z) [IsProper B.hom]
-    [IsSeparated Z.hom] : IsProper f.left := by
-  have : IsProper (f.left ≫ Z.hom) := by rw [Over.w f]; infer_instance
-  exact IsProper.of_comp f.left Z.hom
-
 /-- The components of `α ≪≫ β ⋙ H ≪≫ G₂ ⋙ γ` (the shape of `compactificationLowerShriekIso`). -/
 lemma isoTrans_isoWhiskerLeft_hom_app {C D E : Type*} [Category C] [Category D] [Category E]
     {F : C ⥤ E} {G₁ G₂ : C ⥤ D} {H K : D ⥤ E} (α : F ≅ G₁ ⋙ H) (β : G₁ ≅ G₂) (γ : H ≅ K)
