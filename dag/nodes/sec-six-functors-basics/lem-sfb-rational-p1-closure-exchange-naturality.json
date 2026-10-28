@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-rational-p1-closure-exchange-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity, transporting the scalar exchange from a finite rational coefficient field to the algebraic closure; the coefficient functors commute with pullback as in diagonal-tower coefficients (2)-(3).",
+   "via": [
+    "lem-sfb-rational-p1-scalar-chern-base-change-chern-none-canonical",
+    "lem-sfb-rational-p1-scalar-chern-base-change-chern-none",
+    "lem-sfb-rational-p1-scalar-chern-base-change-chern-component",
+    "lem-sfb-rational-p1-scalar-chern-base-change",
+    "lem-sfb-rational-p1-second-scalar-trace",
+    "lem-sfb-rational-p1-second-trace-reordering",
+    "lem-sfb-rational-p1-second-ambient-contraction",
+    "lem-rational-p1-kernel-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-to-closure coefficient naturality of the projective-line exchange",
+ "statement": "theorem closure_exchange_naturality\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (d : Diagram (Profinite.continuousMapRingObj.{u} E.1) Y\n      (fun X ↦ spRationalTwist X l E))\n    (d' : Diagram (Profinite.padicAlgClRingObj.{u} l) Y (fun X ↦ spQbarTwist X l))\n    (s : ScalarCompatibility (Profinite.padicSubfieldRingObjToPadicAlgCl l E) Y\n      (fun X ↦ spRationalTwist X l E) (fun X ↦ spQbarTwist X l)\n      (closureLineMap l E) d d')\n    (x : unit (coefficient l (some E)).X Y ⟶ d.Rq.R.obj\n      (((DerivedCategory.singleFunctor (Modules (coefficient l (some E)).X\n        (ProjectiveLine Y)) 0).obj (line l (some E) (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) :\n    let a := Profinite.padicSubfieldRingObjToPadicAlgCl.{u} l E\n    let x' := extendScalarChern a (ProjectiveLine Y ↘ Y) (s.units Y) s.lineP\n      d.Rq d'.Rq s.q.square x ≫ (eqToIso d'.q_canonical).hom.app _\n    let z := (scalarUnitPullIso (coefficient l (some E)).X Y).inv ≫\n      (moduleObjectDerivedPullback (coefficient l (some E)).X\n        (ProjectiveLine Y ↘ Y)).map (x ≫ (eqToIso d.q_canonical).hom.app _) ≫\n      secondTraceExchange l (some E) k p hpl Y ≫\n      (secondDiagramPushIso _ Y _ d).inv.app _\n    (moduleObjectDerivedPullback (coefficient l none).X\n        (ProjectiveLine Y ↘ Y)).map x' ≫ secondTraceExchange l none k p hpl Y =\n      (scalarUnitPullIso (coefficient l none).X Y).hom ≫\n        extendScalarChern a (secondProjection Y) (s.units (ProjectiveLine Y)) s.lineW\n          d.R₂ d'.R₂ s.p₂.square z ≫ (secondDiagramPushIso _ Y _ d').hom.app _",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle."
+ },
+ "proof": [
+  {
+   "text": "Identify Rq and R2 in each diagram with the canonical right-derived functors using q_canonical and p2_canonical, retaining q_unit and p2_unit. The full-complex normalization of each supplied restriction square determines it uniquely by the right-derived universal property. Hence its scalar mate is the native scalar/direct-image comparison transported by these model identifications.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-diagonal-coefficient-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle."
+   }
+  },
+  {
+   "text": "The native scalar/pullback comparison is conjugate to that restriction/direct-image comparison. Its compatibility with composition follows by deriving the strictly commuting restriction/direct-image composition square and taking conjugates. Apply this to the two routes around the projective-line self-square, including its scheme-morphism equality. Transpose the exchange maps under the target p2 adjunction: their transposes are the pullback-square comparison followed by pullback of the q counit. The scalar push comparisons transpose to inverse scalar pull comparison followed by scalar extension of the same counits. The resulting cube is exactly coefficient_exchange_of_counit_at; thus the native exchanges commute with scalar extension without assuming either exchange invertible.",
+   "uses": [
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle."
+   }
+  },
+  {
+   "text": "Use the supplied Endpoint.normalization equations to identify the unit and shifted line comparisons in the resulting rectangle. The unit comparison sends coefficient one to one. For the line, the finite-to-closure map is the prescribed colimit leg: its pullback compatibility follows from the rational and closure coprojection equation of the Cartesian Tate comparison. Shift this square by two with the canonical commuting-shift isomorphisms. All comparisons use the actual coefficient maps, not a choice of basis of the Tate line.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-scalars",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-sfb-rational-p1-scalar-chern-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle."
+   }
+  },
+  {
+   "text": "Apply naturality of scalar/pullback comparison to x. Combine it with the coefficient/exchange rectangle and the unit and shifted-line squares. Express the finite base-changed adjunct as z by removing scalarUnitPullIso and secondDiagramPushIso from the finite exchange composite. Insert these isomorphisms back after extending coefficients, cancel their inverse pairs, and obtain the displayed equality. This uses no Chern normalization and does not invert an exchange.",
+   "uses": [
+    "def-sfb-rational-p1-scalar-chern-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+    "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-sfb-rational-p1-scalar-chern-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraphs (2) and (3), finite-subextension coefficient extension and its commutation with pullback; normalized exchange calculation in the second rational P1 triangle.",
+  "group": "H2",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with an adjunction base change mate",
+   "date": "2026-10-28",
+   "results": "Eight hits on ordinary algebraic restriction and extension of scalars; none states the internal condensed derived exchange with normalized unit and Tate endpoints.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "date": "2026-10-28",
+   "results": "Twelve hits including CategoryTheory.mateEquiv_hcomp and mateEquiv_vcomp, and conjugate-equivalence composition identities in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "Generic mate pasting is useful; endpoint and scalar/pullback normalization remain a separate argument."
+  },
+  {
+   "tool": "grep",
+   "query": "pushHomOfComapIso|scalar.*[Ee]xchange|[Ee]xchange.*scalar",
+   "date": "2026-10-28",
+   "results": "No Mathlib match from msearch. Project search found the generic proved coefficient_exchange_of_counit_at, derived_pull_comp and push_pull_counit helpers, and CartesianAdicComparison.qbar_coprojection. Bounded-constructible closure exchange is also proved, but does not by itself identify these arbitrary Diagram endpoint maps.",
+   "verdict": "Reuse the generic mate and Cartesian comparison APIs; no exact statement of this endpoint equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNoneCanonical",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ClosureExchangeNaturality",
+  "file": "lean/Sheaf/Paper/RationalP1ClosureExchangeNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.closure_exchange_naturality",
+  "statement": "theorem closure_exchange_naturality\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (d : Diagram (Profinite.continuousMapRingObj.{u} E.1) Y\n      (fun X ↦ spRationalTwist X l E))\n    (d' : Diagram (Profinite.padicAlgClRingObj.{u} l) Y (fun X ↦ spQbarTwist X l))\n    (s : ScalarCompatibility (Profinite.padicSubfieldRingObjToPadicAlgCl l E) Y\n      (fun X ↦ spRationalTwist X l E) (fun X ↦ spQbarTwist X l)\n      (closureLineMap l E) d d')\n    (x : unit (coefficient l (some E)).X Y ⟶ d.Rq.R.obj\n      (((DerivedCategory.singleFunctor (Modules (coefficient l (some E)).X\n        (ProjectiveLine Y)) 0).obj (line l (some E) (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) :\n    let a := Profinite.padicSubfieldRingObjToPadicAlgCl.{u} l E\n    let x' := extendScalarChern a (ProjectiveLine Y ↘ Y) (s.units Y) s.lineP\n      d.Rq d'.Rq s.q.square x ≫ (eqToIso d'.q_canonical).hom.app _\n    let z := (scalarUnitPullIso (coefficient l (some E)).X Y).inv ≫\n      (moduleObjectDerivedPullback (coefficient l (some E)).X\n        (ProjectiveLine Y ↘ Y)).map (x ≫ (eqToIso d.q_canonical).hom.app _) ≫\n      secondTraceExchange l (some E) k p hpl Y ≫\n      (secondDiagramPushIso _ Y _ d).inv.app _\n    (moduleObjectDerivedPullback (coefficient l none).X\n        (ProjectiveLine Y ↘ Y)).map x' ≫ secondTraceExchange l none k p hpl Y =\n      (scalarUnitPullIso (coefficient l none).X Y).hom ≫\n        extendScalarChern a (secondProjection Y) (s.units (ProjectiveLine Y)) s.lineW\n          d.R₂ d'.R₂ s.p₂.square z ≫ (secondDiagramPushIso _ Y _ d').hom.app _",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.closure_exchange_naturality"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNoneCanonical",
+  "worker": "H2",
+  "summary": "Shared finite geometric Chern exchange with the existing finite branch. The only new hole is coefficient/exchange naturality for an arbitrary adjunct, without completed data or Chern normalization. The finite geometric identity is essential to the main proof and is not restated by this node.",
+  "blueprint": "Second identity of det-prop-p1-adjunction-rational-triangle, coefficient transport through the finite-to-closure leg from diagonal-tower coefficients (2)-(3). The unit route and its integration calculation are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coefficient-exchange-mates",
+    "why": "Generic categorical mate transport for the native exchange; does not replace any rational P1 geometric or integration argument."
+   },
+   {
+    "node": "def-weil-pbc-ambient-ringed-exchange",
+    "why": "Definition of the native unit-square-counit exchange used by secondTraceExchange."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Normalized finite and closure Tate pullback comparisons and their coprojection square."
+   },
+   {
+    "node": "def-sfb-diagonal-coefficient-category",
+    "why": "Canonical right-derived model and full-unit normalization data in the statement."
+   },
+   {
+    "node": "def-sfb-diagonal-coefficient-scalars",
+    "why": "ScalarCompatibility and its prescribed unit, line and normalized restriction-square fields."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261028T034804-L-3545409",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261028T034804-L-3545409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
