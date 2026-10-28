@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-adic-completed-tensor-stage-naturality",
+ "kind": "statement",
+ "title": "Fixed-field naturality of the completed tensor component",
+ "statement": "Fix l,X,R,closed,models as in def-sf-adic-completed-tensor-stage-component and a finite coefficient stage E with a single finite model N. The components completedTensorStageComponent at E are natural for every pair of rational constructible E-morphisms, after inclusion in the common-stage category. This statement uses no coefficient enlargement and compares no two finite models.",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-stage-component",
+  "def-sf-adic-completed-tensor-finite-models"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument."
+ },
+ "proof": [
+  {
+   "text": "Apply completedTensorIntegralComponent_natural_iso to get the natural isomorphism after precomposition by the product of the raw scalar localizations. These localizations are categorical localizations at the rationalization morphism property, hence their product is a localization. Full faithfulness of precomposition descends the integral natural isomorphism. Every rational object is the localization of its underlying integral object, so the descended components are precisely completedTensorIntegralComponent. Whisker the existing commonInclusionTensorComparison by ordinary and compose. Its naturality gives exactly the stated equation for completedTensorStageComponent.",
+   "uses": [
+    "lem-sf-adic-completed-tensor-integral-naturality",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-completed-tensor-integral-naturality",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument.",
+  "note": "K1: explicit categorical implementation of the finite normalized realization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedTensorStageComponent|completedTensorCommonComponent|stageTensorFormula",
+   "results": "No specialized declaration. ",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the project finite-model and common-stage constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and coefficient-extension compatibility of the finite-stage completed tensor comparison on rational constructible sheaves",
+   "results": "No specialized declaration. AdicCompletion.ofTensorProduct_naturality, AbstractCompletion.compare, CategoryTheory.GrothendieckTopology.toSheafify_naturality, CategoryTheory.sheafComposeNatTrans_fac, SheafOfModules.freeHomEquiv_comp_apply, TensorProduct.directLimitRight, CategoryTheory.Limits.coprodComparisonNatTrans, Condensed.lanPresheafNatIso",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the project finite-model and common-stage constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed tensor comparison for constructible sheaves at a finite coefficient field, natural in rational maps and compatible with coefficient enlargement",
+   "results": "No specialized declaration. AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AdicCompletion.tensor_map_id_left_eq_map, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the project finite-model and common-stage constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonComponentNaturality",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-field naturality and coefficient-enlargement steps of lem-sf-adic-completed-tensor-common-component-naturality; the native realization obligation has no imported blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-completed-tensor-common-component-naturality",
+    "new-sf-adic-completed-tensor-common-lift-tensor-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorStageNaturality",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorStageNaturality.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completedTensorStageComponent_naturality",
+  "statement": "theorem completedTensorStageComponent_naturality\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (N : CompletedTensorFiniteModel l X R closed models E)\n    {P Q : sfRationalConstructibleCategory l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ×\n      sfRationalConstructibleCategory l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X}\n    (f : P ⟶ Q) :\n    let I := GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := X) E\n    (((ordinary l X R).prod (ordinary l X R)) ⋙ closed.tensor).map\n        ((I.prod I).map f) ≫\n        (completedTensorStageComponent l X R closed models E N Q.1 Q.2).hom =\n      (completedTensorStageComponent l X R closed models E N P.1 P.2).hom ≫\n        (commonStageDerivedTensor l (PadicAlgCl l) X ⋙ ordinary l X R).map\n          ((I.prod I).map f)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261028T034821-L-3551740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261028T034821-L-3551740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

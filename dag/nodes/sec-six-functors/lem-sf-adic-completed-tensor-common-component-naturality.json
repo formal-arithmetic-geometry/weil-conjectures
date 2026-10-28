@@ -14,45 +14,37 @@
  },
  "proof": [
   {
-   "text": "At a fixed field, paste the naturality squares of R.integral, N.ordinary, the normalized completion comparison, and the integral-to-rational tensor identification. The rational tensor generator formula supplies the last square on integral morphisms. Naturality extends by additivity and cancellation of invertible denominator powers to every localized morphism.",
+   "text": "Represent both coordinates of the input arrow over finite fields, then enlarge to a single common upper field. The two exists_mkHom_eq equations and mkHom_eq_isoToStage express the original product arrow as the included rational pair conjugated by endpoint isoToStage isomorphisms.",
    "uses": [
-    "def-sf-adic-completed-tensor-finite-models",
-    "def-sf-adic-completed-tensor-common-components",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a coefficient inclusion, choose good K-flat representatives. Apply the representative equations of the two finite models, replace the completion comparisons by their normalized cochain representatives, and cancel the invertible universal counits. The balance_sections equations identify the resulting maps on all homogeneous pure tensor sections. Tensor generators, local sheafification, and totalization coproduct injections detect their equality. Descend and transport along the good-model isomorphisms; R.common_field identifies the outer comparison maps with the actual common-stage transports.",
+   "text": "Apply completedTensorCommonComponent_stage_transport at the source pair and target pair. These two equations identify the components with the finite-stage components conjugated by those very endpoint isomorphisms.",
    "uses": [
-    "def-sf-adic-completed-tensor-finite-models",
-    "def-sf-native-adic-realization-data",
-    "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+    "lem-sf-adic-completed-tensor-component-stage-transport"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Represent both input arrows at a finite field containing the four endpoint fields. Use the coefficient compatibility squares to rewrite the explicit components there. The normalized stageTensor inclusion formula and the representative formula for commonStageDerivedTensor reduces the result to fixed-field naturality. Cancel endpoint transports. This proves the displayed equality for the constructed maps, without assuming any tensorator exists.",
+   "text": "Apply completedTensorStageComponent_naturality to the represented rational pair at the common finite field. Functoriality and cancellation of inverse endpoint isomorphisms conjugate this finite square into the required square. The private conjugated_square lemma verifies this cancellation in an arbitrary category.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-sf-adic-completed-tensor-common-components",
-    "def-sf-common-stage-inclusion-tensor-comparison"
+    "lem-sf-adic-completed-tensor-stage-naturality"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-adic-completed-tensor-finite-models",
-  "def-sf-adic-completed-tensor-common-components",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-sf-native-adic-realization-data",
-  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
-  "def-sf-common-stage-inclusion-tensor-comparison"
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sf-adic-completed-tensor-component-stage-transport",
+  "lem-sf-adic-completed-tensor-stage-naturality"
  ],
  "proof_origin": {
-  "by": "Y7 stage 3",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Explicit finite normalized scalar comparisons and the coefficient unit, split from new-sf-adic-completed-tensor-common-lift-tensor-unit."
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument.",
+  "note": "K1: complete Lean descent from separate fixed-field naturality and objectwise coefficient-enlargement equations; no target or component definition changed."
  },
  "mathlib_searches": [
   {
@@ -122,9 +114,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y7",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261028T020927-L-2566837",
+  "landing": "20261028T034821-L-3551740",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
