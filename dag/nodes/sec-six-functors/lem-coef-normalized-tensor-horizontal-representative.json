@@ -1,0 +1,81 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Proposition 4.17(a), representative calculation"
+ },
+ "proof": [
+  {
+   "text": "Evaluate both sides on simultaneous flat-term K-flat representatives and compare every total-complex pure-tensor summand using the ordinary unit and tensor comparison normalization. The summand equations and localization give the displayed equality.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-coef-semilinear-tensor-reduction-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-coef-semilinear-tensor-reduction-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Proposition 4.17(a), representative calculation"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedTensorHorizontal",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-tensor-horizontal",
+   "place": "K-flat representative step",
+   "via": [
+    "lem-coef-normalized-tensor-horizontal"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-normalized-tensor-horizontal-representative",
+ "title": "K-flat representative square for normalized tensor horizontality",
+ "statement": "theorem coefficientNormalizedTensorHorizontalRepresentative\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hE : CoefficientEvaluationTensorNormalization l E W R)\n    (Q : CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors)\n    (P V : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (R := coefficientSequenceCommRingSheaf l E W) P)\n    (hV : CochainComplex.IsKFlatIndependentCoefficients\n      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (R := coefficientSequenceCommRingSheaf l E W) V)\n    {m n : ℕ} (h : n ≤ m) :\n    (coefficientFiniteQuotientDerived l E W h).map\n        ((R.evaluationTensor m).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)) ≫\n      (Q.tensor h).hom.app\n        ((coefficientSequenceDerivedEvaluation l E W m).obj (DerivedCategory.Q.obj P),\n          (coefficientSequenceDerivedEvaluation l E W m).obj (DerivedCategory.Q.obj V)) ≫\n      (R.finiteClosed n).tensor.map\n        (Prod.mkHom\n          (coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n            (DerivedCategory.Q.obj P))\n          (coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n            (DerivedCategory.Q.obj V))) =\n    coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n        (R.systemClosed.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)) ≫\n      (R.evaluationTensor n).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedTensorHorizontalRepresentative",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedTensorHorizontalRepresentative.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedTensorHorizontalRepresentative",
+  "statement": "theorem coefficientNormalizedTensorHorizontalRepresentative\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hE : CoefficientEvaluationTensorNormalization l E W R)\n    (Q : CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors)\n    (P V : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (R := coefficientSequenceCommRingSheaf l E W) P)\n    (hV : CochainComplex.IsKFlatIndependentCoefficients\n      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (R := coefficientSequenceCommRingSheaf l E W) V)\n    {m n : ℕ} (h : n ≤ m) :\n    (coefficientFiniteQuotientDerived l E W h).map\n        ((R.evaluationTensor m).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)) ≫\n      (Q.tensor h).hom.app\n        ((coefficientSequenceDerivedEvaluation l E W m).obj (DerivedCategory.Q.obj P),\n          (coefficientSequenceDerivedEvaluation l E W m).obj (DerivedCategory.Q.obj V)) ≫\n      (R.finiteClosed n).tensor.map\n        (Prod.mkHom\n          (coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n            (DerivedCategory.Q.obj P))\n          (coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n            (DerivedCategory.Q.obj V))) =\n    coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h\n        (R.systemClosed.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)) ≫\n      (R.evaluationTensor n).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj V)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T020206-L-2478009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T020206-L-2478009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

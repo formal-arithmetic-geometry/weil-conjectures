@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Paper.CoefficientNormalizedReductionModels
+import Sheaf.Paper.CoefficientNormalizedTensorHorizontalTransport
 
 /-! # Horizontal compatibility of normalized tensor comparisons
 
@@ -59,6 +60,9 @@ theorem coefficientNormalizedTensorHorizontal
           (coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h V)) =
     coefficientSequenceTransitionAdjoint l E W R.toCoefficientDerivedSystemTensors Q h
         (R.systemClosed.tensor.obj (P, V)) ≫
-      (R.evaluationTensor n).hom.app (P, V) := by sorry
+      (R.evaluationTensor n).hom.app (P, V) := by
+  apply coefficientNormalizedTensorHorizontalTransport l E W R hE Q
+  intro P' V' hP' hV' m n h
+  exact coefficientNormalizedTensorHorizontalRepresentative l E W R hE Q P' V' hP' hV' h
 
 end WeilConjectures
