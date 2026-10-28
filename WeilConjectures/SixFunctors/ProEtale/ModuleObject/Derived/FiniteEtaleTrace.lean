@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTransAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
 
@@ -15,11 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.F
 For a finite étale morphism `g : Y ⟶ X` of degree `d`, the classical trace `g_* g^* F ⟶ F`
 composes with the unit `F ⟶ g_* g^* F` to multiplication by `d`; when `d` is invertible in the
 coefficients the unit is thus a split monomorphism. This file shows that the *underived* trace
-suffices to split the unit of the *derived* adjunction `Lg^* ⊣ Rg_*`:
+suffices to split the unit of the *derived* adjunction `Lg^* ⊣ Rg_*`, using the functoriality
+`CategoryTheory.Functor.mapDerivedCategoryNatTrans_comp` and `_id` of derived transformations:
 
-* `CategoryTheory.Functor.mapDerivedCategoryNatTrans_comp` and
-  `CategoryTheory.Functor.mapDerivedCategoryNatTrans_id`: the transformations induced on derived
-  categories by natural transformations of exact functors are functorial;
 * `ProEtale.CondensedRing.isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_retract`:
   if `g` is finite of finite presentation (so that `g_*` is exact) and the identity of `Mod_{Λ_X}`
   is a retract of `g^* ⋙ g_*`, then the unit of `Lg^* ⊣ Rg_*` is a split monomorphism at every
@@ -47,39 +45,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D]
-  {F G H : C ⥤ D} [F.Additive] [G.Additive] [H.Additive]
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-
-/-- The transformation induced on derived categories by a composite of natural transformations
-of exact functors is the composite of the induced transformations. -/
-lemma mapDerivedCategoryNatTrans_comp (τ : F ⟶ G) (τ' : G ⟶ H) :
-    mapDerivedCategoryNatTrans (τ ≫ τ') =
-      mapDerivedCategoryNatTrans τ ≫ mapDerivedCategoryNatTrans τ' := by
-  refine Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) fun K ↦ ?_
-  rw [← cancel_mono (H.mapDerivedCategoryFactors.hom.app K), NatTrans.comp_app, Category.assoc,
-    mapDerivedCategoryNatTrans_fac, mapDerivedCategoryNatTrans_fac,
-    mapDerivedCategoryNatTrans_fac_assoc, NatTrans.mapHomologicalComplex_comp,
-    NatTrans.comp_app, Functor.map_comp]
-
-/-- The transformation induced on derived categories by an identity transformation is the
-identity. -/
-lemma mapDerivedCategoryNatTrans_id :
-    mapDerivedCategoryNatTrans (𝟙 F) = 𝟙 F.mapDerivedCategory := by
-  refine Localization.natTrans_ext DerivedCategory.Q
-    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) fun K ↦ ?_
-  rw [← cancel_mono (F.mapDerivedCategoryFactors.hom.app K), mapDerivedCategoryNatTrans_fac,
-    NatTrans.mapHomologicalComplex_id]
-  simp
-
-end CategoryTheory.Functor
 
 namespace CategoryTheory.Adjunction
 
