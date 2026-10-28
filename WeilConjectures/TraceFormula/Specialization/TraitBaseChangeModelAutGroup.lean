@@ -143,4 +143,16 @@ lemma sum_autAction_baseChangeAut_eq_relIndex_nsmul {U V : Subgroup (GenericAut 
 
 end Model
 
+/-- `Subgroup.card_nsmul_eq_sum_fin_of_le` for endomorphisms of `Ψ (L A)`, with the left-hand side
+stated for `(L ⋙ Ψ) A`, the form in which averaged pullback exchanges occur. -/
+lemma card_nsmul_eq_sum_fin_of_le_aux {G : Type*} [Group G] {DX DS : Type*} [Category DX]
+    [Category DS] [Preadditive DS] (L : DX ⥤ DX) (Ψ : DX ⥤ DS) (A : DX) {U V : Subgroup G}
+    (hUV : U ≤ V) [Fintype (G ⧸ U)] [Fintype (G ⧸ V)]
+    (act : G → (Ψ.obj (L.obj A) ⟶ Ψ.obj (L.obj A))) (hact : ∀ g, ∀ v ∈ V, act (g * v) = act g)
+    (a : (L ⋙ Ψ).obj A ⟶ (L ⋙ Ψ).obj A)
+    (ha : Fintype.card (G ⧸ V) • a = ∑ q : G ⧸ V, act q.out) :
+    Fintype.card (G ⧸ U) • a =
+      ∑ i : Fin (Fintype.card (G ⧸ U)), act ((Fintype.equivFin (G ⧸ U)).symm i).out :=
+  Subgroup.card_nsmul_eq_sum_fin_of_le hUV act hact a ha
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

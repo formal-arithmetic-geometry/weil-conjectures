@@ -58,4 +58,17 @@ lemma sum_quotient_out_eq_relIndex_nsmul {U V : Subgroup G} (hUV : U ≤ V) [Fin
         refine Finset.sum_congr rfl fun q _ ↦ ?_
         simp only [Finset.sum_const, Finset.card_univ, relIndex, index, Nat.card_eq_fintype_card]
 
+/-- **Averages over a smaller subgroup**: if `U ≤ V`, `f` is invariant under right multiplication
+by `V` and `[G : V] • a` is the sum of `f` over representatives of `G ⧸ V`, then `[G : U] • a` is
+the sum of `f` over representatives of `G ⧸ U`, indexed by `Fin [G : U]`. -/
+lemma card_nsmul_eq_sum_fin_of_le {U V : Subgroup G} (hUV : U ≤ V) [Fintype (G ⧸ U)]
+    [Fintype (G ⧸ V)] (f : G → A) (hf : ∀ g, ∀ v ∈ V, f (g * v) = f g) (a : A)
+    (ha : Fintype.card (G ⧸ V) • a = ∑ q : G ⧸ V, f q.out) :
+    Fintype.card (G ⧸ U) • a =
+      ∑ i : Fin (Fintype.card (G ⧸ U)), f ((Fintype.equivFin (G ⧸ U)).symm i).out := by
+  rw [Equiv.sum_comp (Fintype.equivFin (G ⧸ U)).symm (fun q ↦ f q.out),
+    sum_quotient_out_eq_relIndex_nsmul hUV f hf, ← ha, smul_smul,
+    ← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, ← index, ← index,
+    relIndex_mul_index hUV]
+
 end Subgroup

@@ -209,7 +209,6 @@ theorem exists_subgroup_pullbackExchange_sliceDescentHom
               (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) :=
   sorry
 
-set_option maxHeartbeats 1000000 in
 /-- **The generic-slicing identification of nearby cycles with invariants** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2)): for a model `M`
 over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index of the pro-`p` kernel
@@ -257,13 +256,14 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
     (sliceDescentHom (traitSliceCoord k') hM hb) (sliceBaseHom (traitSliceCoord k') hM hb)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
     (Category.id_comp _) (sliceDescentGeneric_comp_sliceGenericMap (traitSliceCoord k') hM hb) A
+    (by exact_mod_proofs hs)
     Finset.univ (Fintype.card (GenericAut k' (traitSliceField k') ⧸ V))
     (fun σ : GenericAut k' (traitSliceField k') ⧸ V ↦ (baseChangeAut hM b hb
       (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction
         (Profinite.padicAlgClRingObj ℓ))
     (fun σ _ _ g ↦ Hom.autAction_naturality _ _ g) r (by exact_mod_proofs hr)
     (by exact_mod_proofs havg)
-  exact by exact_mod_proofs key
+  exact_mod_proofs key
 
 end ProEtale.CondensedRing.NearbyCyclesModel
 

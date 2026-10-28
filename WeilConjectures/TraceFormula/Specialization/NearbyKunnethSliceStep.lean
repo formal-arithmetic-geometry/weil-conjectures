@@ -234,44 +234,67 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
             (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
               (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
                 L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
-  set Λ := Profinite.padicAlgClRingObj ℓ
-  have hPg : boundedConstructible (condensedRingObj Λ P.generic)
-      (L((P.ε)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B)) := by
-    have : (boundedConstructible (condensedRingObj Λ P.generic)).IsMonoidal :=
+  have hPg : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.generic)
+      (L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
+          L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        P.generic)).IsMonoidal :=
       isMonoidal_boundedConstructible (X := Over.mk (φ₁.generic ≫ gM)) (ℓ := ℓ)
-    exact (boundedConstructible _).prop_of_iso (Functor.Monoidal.μIso L((P.ε)^*⟦Λ⟧) _ _)
+    exact (boundedConstructible _).prop_of_iso
+      (Functor.Monoidal.μIso L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _)
       (ObjectProperty.prop_tensor
-        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ P.ε _
-          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f₁ A hA))
-        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ P.ε _
-          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f₂ B hB)))
-  obtain ⟨VM, _, htM, rM, hrM, havgM⟩ := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
-    hM hb (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ M.ε A hA)
-  obtain ⟨VP, _, htP, rP, hrP, havgP⟩ := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
-    hP (comp_coordinate_fst hb) hPg
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A hA))
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B hB)))
+  generalize hC : L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
+    L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B = C at hPg ⊢
+  have hDM := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hM hb (A := A)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
+  have hDP := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hP
+    (comp_coordinate_fst hb) (A := C) hPg
+  obtain ⟨VM, _, htM, rM, hrM, havgM⟩ := hDM
+  obtain ⟨VP, _, htP, rP, hrP, havgP⟩ := hDP
   have : VM.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
   have : VP.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
-  let V := VM ⊓ VP
-  let := Subgroup.fintypeQuotientOfFiniteIndex (H := V)
-  have hcard : ∀ (W : Subgroup (GenericAut k' (traitSliceField k'))) (_ : V ≤ W)
-      [Fintype (GenericAut k' (traitSliceField k') ⧸ W)],
-      Fintype.card (GenericAut k' (traitSliceField k') ⧸ V) =
-        V.relIndex W * Fintype.card (GenericAut k' (traitSliceField k') ⧸ W) := by
-    intro W hW _
-    rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, ← Subgroup.index,
-      ← Subgroup.index, Subgroup.relIndex_mul_index hW]
-  let e := (Fintype.equivFin (GenericAut k' (traitSliceField k') ⧸ V)).symm
-  refine ⟨Fintype.card (GenericAut k' (traitSliceField k') ⧸ V), fun i ↦ (e i).out,
-    Fintype.card_ne_zero, rM, rP, hrM, ?_, hrP, ?_⟩
-  · rw [Equiv.sum_comp e (fun σ ↦ (baseChangeAut hM b hb (traitSlice (traitSliceCoord k'))
-        (traitSlice_over _) σ.out).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj A)),
-      sum_autAction_baseChangeAut_eq_relIndex_nsmul hM b hb _ _ Λ inf_le_left _ htM, ← havgM,
-      hcard VM inf_le_left, mul_nsmul]
-  · rw [Equiv.sum_comp e (fun σ ↦ (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
-        (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction Λ
-          (L((𝟙 Z)^*⟦Λ⟧).obj (L((f₁)^*⟦Λ⟧).obj A ⊗ L((f₂)^*⟦Λ⟧).obj B))),
-      sum_autAction_baseChangeAut_eq_relIndex_nsmul hP (φ₁.total ≫ b) (comp_coordinate_fst hb) _ _
-        Λ inf_le_right _ htP, ← havgP, hcard VP inf_le_right, mul_nsmul]
+  let := Subgroup.fintypeQuotientOfFiniteIndex (H := VM ⊓ VP)
+  have htP' : ∀ τ ∈ VP, (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+      (traitSlice (traitSliceCoord k')) (traitSlice_over _) τ).autAction
+        (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          (C)) = 𝟙 _ :=
+    fun τ hτ ↦ by exact_mod_proofs htP τ hτ
+  refine ⟨Fintype.card (GenericAut k' (traitSliceField k') ⧸ VM ⊓ VP),
+    fun i ↦ ((Fintype.equivFin (GenericAut k' (traitSliceField k') ⧸ VM ⊓ VP)).symm i).out,
+    Fintype.card_ne_zero, rM, rP, ?_, ?_, ?_, ?_⟩
+  · exact_mod_proofs hrM
+  · beta_reduce
+    exact card_nsmul_eq_sum_fin_of_le_aux L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      ((baseChange hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).nearbyCycles
+        (Profinite.padicAlgClRingObj ℓ)) A (inf_le_left : VM ⊓ VP ≤ VM)
+      (fun σ ↦ (baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)
+        σ).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+      (fun σ τ hτ ↦ by rw [autAction_baseChangeAut_mul, htM τ hτ, Category.id_comp])
+      (rM ≫ ((baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A)
+      (by exact_mod_proofs havgM)
+  · exact_mod_proofs hrP
+  · beta_reduce
+    have hP' := card_nsmul_eq_sum_fin_of_le_aux L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      ((baseChange hP (φ₁.total ≫ b) (comp_coordinate_fst hb) (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+      (C) (inf_le_right : VM ⊓ VP ≤ VP)
+      (fun σ ↦ (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+        (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ).autAction
+          (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            (C)))
+      (fun σ τ hτ ↦ by rw [autAction_baseChangeAut_mul, htP' τ hτ, Category.id_comp])
+      (rP ≫ ((baseChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+        (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange
+          (Profinite.padicAlgClRingObj ℓ)).app (C))
+      (by exact_mod_proofs havgP)
+    exact hP'
 
 set_option maxHeartbeats 800000 in
 -- the square of the Künneth maps of the slice is a large term

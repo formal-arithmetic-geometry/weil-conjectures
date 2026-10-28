@@ -102,14 +102,15 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- **Exchanges of a composite and inclusions of invariants**: let `χ : M'' ⟶ M` be the composite
 of `ρ : M'' ⟶ M₁` (over identities) and `ψ : M₁ ⟶ M` (over `𝟙 X`). If the pullback exchange of
 `ψ` at `A` is invertible and that of `ρ` at `L(𝟙)^* A` is split with `n` times its idempotent a
-sum of natural endomorphisms `act i` of `Ψ_{M''}`, then so is the pullback exchange of `χ` at `A`. -/
+sum of natural endomorphisms `act i` of `Ψ_{M''}`, then so is the pullback exchange of `χ` at
+`A`. -/
 lemma exists_retraction_pullbackExchange_of_comp {X X'' X' : Scheme.{u}}
     {M'' M₁ : NearbyCyclesModel X X''} {M : NearbyCyclesModel X X'} {g' : X'' ⟶ X'}
     (ρ : M''.Hom M₁ (𝟙 X) (𝟙 X'')) (ψ : M₁.Hom M (𝟙 X) g') (χ : M''.Hom M (𝟙 X) g')
     (htot : ρ.total ≫ ψ.total = χ.total) (hgen : ρ.generic ≫ ψ.generic = χ.generic)
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
-    [IsIso ((ψ.pullbackExchange Λ).app A)] {ι : Type*} (s : Finset ι) (n : ℕ)
+    (hψ : IsIso ((ψ.pullbackExchange Λ).app A)) {ι : Type*} (s : Finset ι) (n : ℕ)
     (act : ι → ∀ C, (M''.nearbyCycles Λ).obj C ⟶ (M''.nearbyCycles Λ).obj C)
     (hact : ∀ i {C C'} (g : C ⟶ C'),
       act i C ≫ (M''.nearbyCycles Λ).map g = (M''.nearbyCycles Λ).map g ≫ act i C')
@@ -120,6 +121,7 @@ lemma exists_retraction_pullbackExchange_of_comp {X X'' X' : Scheme.{u}}
       ∑ i ∈ s, act i (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj A))) :
     ∃ r', (χ.pullbackExchange Λ).app A ≫ r' = 𝟙 _ ∧
       n • (r' ≫ (χ.pullbackExchange Λ).app A) = ∑ i ∈ s, act i (L((𝟙 X)^*⟦Λ⟧).obj A) := by
+  have := hψ
   have hx := ρ.pullbackExchange_comp_app_of_eq Λ ψ χ (Category.id_comp (𝟙 X))
     (Category.id_comp g') htot hgen A
   have k := retraction_of_comp_aux _ _ _ _ _ _ hx (inv ((ψ.pullbackExchange Λ).app A))
