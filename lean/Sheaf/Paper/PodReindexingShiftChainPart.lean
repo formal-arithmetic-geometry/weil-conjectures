@@ -6,6 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingChainShiftPresentations
+import Sheaf.Paper.PodReindexingChainShiftSquare
 
 /-! # Chain part of signed shift laws for reindexing comparisons
 
@@ -68,6 +70,7 @@ theorem chain_shift_part_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (c : Comparison l E g s SX SY TX TY) :
     ∃ (sX : ChainShift l E X s) (sY : ChainShift l E Y s),
       ChainShiftPart l E g s SX SY TX TY c sX sY := by
-  sorry
+  obtain ⟨sX, sY, _⟩ := chain_shift_presentations l E g s SX SY TX TY c
+  exact ⟨sX, sY, chain_shift_reindexing_square l E g s SX SY TX TY c sX sY⟩
 
 end WeilConjectures.PodReindexingCoherence
