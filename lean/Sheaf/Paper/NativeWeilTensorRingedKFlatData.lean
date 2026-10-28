@@ -54,7 +54,7 @@ argument applies to unbounded complexes and does not use the chosen chain map.
 -/
 theorem native_weil_tensor_ringed_kflat_data :
     Nonempty (NativeWeilRingedTensorKFlatData b T adj) := by
-  refine ⟨{ flat := native_weil_tensor_ringed_kflat_flat b T adj
+  refine ⟨{ flat := native_weil_tensor_ringed_kflat_flat b T
             localization := native_weil_tensor_ringed_kflat_localization T }⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

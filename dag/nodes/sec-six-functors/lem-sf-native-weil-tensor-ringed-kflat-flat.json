@@ -1,194 +1,137 @@
 {
- "id": "lem-sf-native-weil-tensor-ringed-kflat-flat",
- "kind": "statement",
- "title": "K-flat transport through the native ringed equivalence",
- "statement": "Fix b, T and the finite-field hypotheses of lem-sf-native-weil-tensor-ringed-kflat-data, and assume the underived adjunction adj : T ⊣₂ ihomBifunctor k₀ l X from that interface. For every cochain complex P, NativeTensorKFlat P implies that b.native sends P to an independent-coefficient K-flat complex over b.R [def-pc-kflat-complex].",
- "source": {
-  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
- },
- "stmt_deps": [
-  "def-sf-native-weil-tensor-ringed-bridge",
-  "def-pc-kflat-complex"
- ],
- "proof": [
-  {
-   "text": "Apply native_weil_tensor_ringed_underived_data using the supplied tensor-Hom adjunction, then native_weil_tensor_ringed_chain_data at the canonical Koszul sign (-1)^(pq). Only the chain isomorphism is used; its summand and naturality fields are not needed.",
-   "uses": [
-    "lem-sf-native-weil-tensor-ringed-underived-data",
-    "lem-sf-native-weil-tensor-ringed-chain-data"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
-   }
-  },
-  {
-   "text": "Let e be the equivalence b.native applied termwise to cochain complexes. Given a ringed acyclic test N, e.inverse(N) is acyclic because the inverse additive equivalence is exact. NativeTensorKFlat makes T(P,e.inverse(N)) acyclic. Applying b.native preserves acyclicity. Compose the chain isomorphism with coefficientTotalTensor applied to the product of e.counitIso at N and the identity of e(P). The result identifies this acyclic complex with the ringed tensor of N and e(P). ExactAt.of_iso in each degree proves the required independent-coefficient K-flatness. No K-flat replacement or flat-term assertion is used.",
-   "uses": [
-    "def-sf-native-weil-tensor-ringed-bridge"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sf-native-weil-tensor-ringed-underived-data",
-  "lem-sf-native-weil-tensor-ringed-chain-data",
-  "def-sf-native-weil-tensor-ringed-bridge"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "K8",
-  "date": "2026-10-28",
-  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Acyclic-test transport through the complex equivalence, using the existing canonical total comparison; no resolution theorem."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "native tensor K-flatness transport through additive equivalence to ringed sheaf modules",
-   "results": "top: Module.Flat.of_flat_tensorProduct, Module.Flat.baseChange, Module.Flat.iff_flat_tensorProduct, Module.Flat.instTensorProduct, Module.Flat.iff_rTensor_exact', ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_exact, Module.FaithfullyFlat.instTensorProduct",
-   "date": "2026-10-28",
-   "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
-  },
-  {
-   "tool": "loogle",
-   "query": "IsLocalization NativeTensorKFlat",
-   "results": "loogle: Unknown identifier `NativeTensorKFlat`",
-   "date": "2026-10-28",
-   "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
-  },
-  {
-   "tool": "grep",
-   "query": "NativeWeilRingedTensorKFlatData|native_weil_tensor_ringed_kflat",
-   "results": "",
-   "date": "2026-10-28",
-   "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "K-flat localization derived category sheaf modules equivalence",
-   "results": "top: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Module.Flat.localizedModule, Module.flat_of_isLocalized_span, Module.Flat.of_isLocalizedModule, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ, Module.flat_of_isLocalized_maximal, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
-   "date": "2026-10-28",
-   "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
-  },
-  {
-   "tool": "grep",
-   "query": "localizerMorphismKFlat.*IsLocalization|isLocalizedEquivalence_localizerMorphismKFlat",
-   "results": "",
-   "date": "2026-10-28",
-   "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Paper.NativeWeilTensorRingedKFlatData",
-  "date": "2026-10-28",
-  "group": "E8"
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sf-native-weil-tensor-ringed-kflat-data",
-   "place": "Strict decomposition of its flat field.",
-   "via": [
-    "lem-sf-native-weil-tensor-ringed-kflat-data"
-   ]
-  },
-  "same_as": []
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.NativeWeilTensorRingedKFlatFlat",
-  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedKFlatFlat.lean",
-  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_kflat_flat",
-  "statement": "theorem native_weil_tensor_ringed_kflat_flat (adj : T ⊣₂ ihomBifunctor k₀ l X) :\n    ∀ (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ),\n      NativeTensorKFlat k₀ l X T P →\n        CochainComplex.IsKFlatIndependentCoefficients (R := b.R)\n          ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj P)",
-  "branch": "sheaf-dag",
-  "by": "E8",
-  "date": "2026-10-28",
-  "note": "K8 restores the tensor-Hom adjunction binder omitted during the flat-field extraction; the parent already has this datum and its conclusion is unchanged."
- },
- "reviewed": {
-  "date": "2026-10-27",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E8",
-  "result": "pass",
-  "landing": "20261027T205932-L-1635787",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-27",
-  "by": "L",
-  "reviewer": "C-e1101",
-  "group": "K8",
-  "result": "pass",
-  "landing": "20261027T234046-L-4177423",
-  "kind": "interface",
-  "note": "independent cc review: native_weil_tensor_ringed_kflat_flat (+adj) against node lem-sf-native-weil-tensor-ringed-kflat-flat, its statement_change and the change record; KFlatData adaptation against the parent's existing adj; axioms checked on a scratch copy (sorryAx only via the pre-existing chain_data sorry)"
- },
- "statement_change": {
-  "date": "2026-10-28",
-  "by": "K8 stage 2",
-  "old_statement": "Fix b, T and the finite-field hypotheses of lem-sf-native-weil-tensor-ringed-kflat-data. For every cochain complex P, NativeTensorKFlat P implies that b.native sends P to an independent-coefficient K-flat complex over b.R.",
-  "what": "The extraction omitted the tensor-Hom adjunction already assumed by its parent. Additivity alone gives no compatibility between the arbitrary bifunctor T and b.nativeHom; both existing comparison theorems require adj. The source concerns the actual tensor adjoint to the fixed internal Hom. Restore that hypothesis, without changing the K-flat conclusion or any target. Replace the unused resolution statement dependency by the K-flat definition.",
+  "id": "lem-sf-native-weil-tensor-ringed-kflat-flat",
+  "kind": "statement",
+  "title": "K-flat transport through the native ringed equivalence",
+  "statement": "Fix b, T and the finite-field hypotheses of lem-sf-native-weil-tensor-ringed-kflat-data. For every cochain complex P, NativeTensorKFlat P implies that b.native sends P to an independent-coefficient K-flat complex over b.R.",
   "source": {
-   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-   "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
   },
-  "citers": [
-   {
-    "id": "lem-sf-native-weil-tensor-ringed-kflat-data",
-    "holds": true,
-    "note": "The parent already binds adj. Its sole Lean application is adapted by passing this existing argument; its signature and record fields stay identical."
-   },
-   {
-    "id": "lem-sf-native-weil-tensor-ringed-kflat-localization",
-    "holds": false,
-    "note": "The unfinished localization plan assumes a native ringed presentation but its Lean statement binds neither b nor adj. To use this comparison it must restore those inherited data; it currently makes no Lean application of this theorem."
-   }
+  "stmt_deps": [
+    "def-sf-native-weil-tensor-ringed-bridge",
+    "lem-pc-kflat-resolution"
   ],
-  "old_stmt_deps": [
-   "def-sf-native-weil-tensor-ringed-bridge",
-   "lem-pc-kflat-resolution"
-  ],
-  "old_proof": [
-   {
-    "text": "Use the underived Hom comparison in the ringed bridge to identify the native tensor acyclic tests with the coefficient tensor tests after applying the additive equivalence b.native.",
-    "uses": [
-     "def-sf-native-weil-tensor-ringed-bridge"
-    ],
-    "elementary": false,
-    "source": {
-     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-     "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+  "proof": [
+    {
+      "text": "Use the underived Hom comparison in the ringed bridge to identify the native tensor acyclic tests with the coefficient tensor tests after applying the additive equivalence b.native.",
+      "uses": [
+        "def-sf-native-weil-tensor-ringed-bridge"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+        "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+      }
+    },
+    {
+      "text": "Apply the ringed-site K-flat resolution theorem to conclude the independent-coefficient K-flat condition for the transported complex.",
+      "uses": [
+        "lem-pc-kflat-resolution"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+        "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+      }
     }
-   },
-   {
-    "text": "Apply the ringed-site K-flat resolution theorem to conclude the independent-coefficient K-flat condition for the transported complex.",
-    "uses": [
-     "lem-pc-kflat-resolution"
-    ],
-    "elementary": false,
-    "source": {
-     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-     "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
-    }
-   }
   ],
-  "old_proof_deps": [
-   "def-sf-native-weil-tensor-ringed-bridge",
-   "lem-pc-kflat-resolution"
-  ]
- }
+  "proof_deps": [
+    "def-sf-native-weil-tensor-ringed-bridge",
+    "lem-pc-kflat-resolution"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "group": "E8",
+    "date": "2026-10-28",
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Strict flat-field extraction from the native ringed tensor K-flat interface."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "native tensor K-flatness transport through additive equivalence to ringed sheaf modules",
+      "results": "top: Module.Flat.of_flat_tensorProduct, Module.Flat.baseChange, Module.Flat.iff_flat_tensorProduct, Module.Flat.instTensorProduct, Module.Flat.iff_rTensor_exact', ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_exact, Module.FaithfullyFlat.instTensorProduct",
+      "date": "2026-10-28",
+      "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
+    },
+    {
+      "tool": "loogle",
+      "query": "IsLocalization NativeTensorKFlat",
+      "results": "loogle: Unknown identifier `NativeTensorKFlat`",
+      "date": "2026-10-28",
+      "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
+    },
+    {
+      "tool": "grep",
+      "query": "NativeWeilRingedTensorKFlatData|native_weil_tensor_ringed_kflat",
+      "results": "",
+      "date": "2026-10-28",
+      "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "K-flat localization derived category sheaf modules equivalence",
+      "results": "top: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Module.Flat.localizedModule, Module.flat_of_isLocalized_span, Module.Flat.of_isLocalizedModule, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ, Module.flat_of_isLocalized_maximal, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+      "date": "2026-10-28",
+      "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
+    },
+    {
+      "tool": "grep",
+      "query": "localizerMorphismKFlat.*IsLocalization|isLocalizedEquivalence_localizerMorphismKFlat",
+      "results": "",
+      "date": "2026-10-28",
+      "verdict": "No exact match; use the strict interfaces and generic K-flat APIs."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.NativeWeilTensorRingedKFlatData",
+    "date": "2026-10-28",
+    "group": "E8"
+  },
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-biduality-general",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sf-native-weil-tensor-ringed-kflat-data",
+      "place": "Strict decomposition of its flat field.",
+      "via": [
+        "lem-sf-native-weil-tensor-ringed-kflat-data"
+      ]
+    },
+    "same_as": []
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.NativeWeilTensorRingedKFlatFlat",
+    "file": "lean/Sheaf/Paper/NativeWeilTensorRingedKFlatFlat.lean",
+    "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_kflat_flat",
+    "statement": "theorem native_weil_tensor_ringed_kflat_flat :\n    ∀ (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ),\n      NativeTensorKFlat k₀ l X T P →\n        CochainComplex.IsKFlatIndependentCoefficients (R := b.R)\n          ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj P)",
+    "branch": "sheaf-dag",
+    "by": "E8",
+    "date": "2026-10-28"
+  },
+  "reviewed": {
+    "date": "2026-10-27",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "E8",
+    "result": "pass",
+    "landing": "20261027T205932-L-1635787",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-27",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "E8",
+    "result": "pass",
+    "landing": "20261027T205932-L-1635787",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

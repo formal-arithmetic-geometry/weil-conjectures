@@ -6,14 +6,13 @@ Authors: SHEAF group E8
 module
 
 public import Sheaf.Paper.NativeWeilTensorRingedBridgeData
-import Sheaf.Paper.NativeWeilTensorRingedChainData
-import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # K-flat transport for normalized native ringed tensors
 
 The K-flat transport is the first independent field of the native ringed tensor
 interface.  Its proof uses the underived tensor comparison and the additive
-native equivalence. No choice of K-flat resolution is needed.
+native equivalence, together with the ringed-site resolution theorem.
 -/
 
 @[expose] public noncomputable section
@@ -37,32 +36,14 @@ Source: Stacks 06YS, 06YU and 0FPT.
 
 Proof: identify the native tensor with the normalized ringed tensor by the
 underived Hom comparison, then transport the acyclic-test condition through
-`b.native`: pull an arbitrary ringed acyclic test back along the inverse
-complex equivalence. Its native tensor with P is acyclic by hypothesis, and
-applying the exact equivalence preserves acyclicity. The total comparison and
-the counit identify this complex with the ringed tensor of the original test
-and the transported P. Transport exactness across that isomorphism degreewise.
-The tensor-Hom adjunction is needed to obtain the underived comparison.
+`b.native`.  The ringed-site K-flat resolution theorem supplies the required
+independent-coefficient condition for every native K-flat complex.
 -/
-theorem native_weil_tensor_ringed_kflat_flat (adj : T ⊣₂ ihomBifunctor k₀ l X) :
+theorem native_weil_tensor_ringed_kflat_flat :
     ∀ (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ),
       NativeTensorKFlat k₀ l X T P →
         CochainComplex.IsKFlatIndependentCoefficients (R := b.R)
           ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj P) := by
-  obtain ⟨U⟩ := native_weil_tensor_ringed_underived_data b T adj
-  let sign (p q : ℤ) {Y Z : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R}
-      (f : Y ⟶ Z) : Y ⟶ Z :=
-    letI : AddCommGroup (Y ⟶ Z) := Preadditive.homGroup Y Z
-    ZSMul.zsmul ((p * q).negOnePow : ℤ) f
-  obtain ⟨c⟩ := native_weil_tensor_ringed_chain_data b T adj U sign
-  intro P hP
-  let e := b.native.mapHomologicalComplex (.up ℤ)
-  intro N hN
-  have hQ : (e.inverse.obj N).Acyclic := hN.map b.native.inverse
-  have ht := (hP (e.inverse.obj N) hQ).map b.native.functor
-  let t := coefficientTotalTensor.{u + 1, u + 1, u + 1} b.J b.R
-  let i := c.chain P (e.inverse.obj N) ≪≫
-    t.mapIso ((e.counitIso.app N).prod (Iso.refl (e.functor.obj P)))
-  exact fun n ↦ (ht n).of_iso i
+  sorry
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

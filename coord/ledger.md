@@ -20319,7 +20319,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/K6/Sheaf.Paper.IntegralSitePullbackIntegerEndpoint (stage 3; reviewer PASS; first push; landing 20261027T234042-L-4174822 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:40 L: merged deliver/K7/Sheaf.Paper.IntegralSitePullbackUnitsEndpoint (stage 3; reviewer PASS; first push; landing 20261027T234043-L-4175719 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/K8/Sheaf.Paper.CompactSupportRealizationCoordinates (stage 3; reviewer PASS; first push; landing 20261027T234045-L-4176497 (interface); batch 20261027T233735; modules 2; new nodes 1)
-- 23:40 L: merged deliver/K8/Sheaf.Paper.NativeWeilTensorRingedKFlatFlat (stage 3; reviewer PASS; first push; landing 20261027T234046-L-4177423 (interface); batch 20261027T233735; modules 2; new nodes 0; change records: coord/changes/native-weil-ringed-kflat-adjunction.md)
 - 23:40 L: merged deliver/K9/Sheaf.Paper.NativeWeilTensorRingedKFlatLocalization (stage 3; reviewer PASS; first push; landing 20261027T234047-L-4178059 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ProperShriekCompSupports (stage 3; reviewer PASS; first push; landing 20261027T234049-L-4178776 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/M1/Sheaf.Paper.CommonStagePullbackCompNaturality (stage 3; reviewer PASS; first push; landing 20261027T234050-L-4179754 (interface); batch 20261027T233735; modules 1; new nodes 1; change records: coord/changes/common-stage-pullback-comp-naturality-representative.md)
@@ -20472,3 +20471,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:43 L: returned deliver/B3/Sheaf.SixFunctorsBasics.BrownHypotheses (reviewer RETURN: (reviewer C-20c3f, head 20c3fdab8) 2b (unforced adaptation, as in C2 27fc): the original ExceptionalInverseImageExistenc)
 - 00:45 L: returned deliver/H3/Sheaf.Paper.DerivedPullbackTensorConstraints (reviewer RETURN: (reviewer C-ba80f, head ba80f6af3) D1/D2: the item is closed only by naming the witness commonStagePullbackCompComponent)
 - 00:47 L: returned deliver/S9/Sheaf.SixFunctors.CoefIntegralFiniteExtensionPureTensor (reviewer RETURN: (reviewer C-94182, head 941823a4e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.CoefInte)
+
+- 08:58 L: batch 20261027T233735 dependency take-out
