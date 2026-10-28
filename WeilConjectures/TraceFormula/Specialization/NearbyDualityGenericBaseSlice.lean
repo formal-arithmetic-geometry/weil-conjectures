@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityAveraging
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceDualizing
 
 /-!
 

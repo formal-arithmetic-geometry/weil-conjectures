@@ -44,7 +44,8 @@ The following inputs are stated and not proved here:
 * (`det-pd-generic-dualizing-twist` and `det-tf-nearby-duality-slice`, "the map `θ`") the
   dualizing map of `M` restricts along `α` to a dualizing map `Ψ_{M''} c^* ω_{X₁} ⟶ p^* ω_{X'}`
   which is the twist by `ℚ̄_ℓ(1)[2]` of that of `M''`
-  (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`).
+  (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`, in
+  `WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceDualizing`).
 
 -/
 
@@ -462,34 +463,6 @@ theorem isIso_closedHomComparison_genericSliceUpperStar
     IsIso (Verdier.nearbyDualityMap
       (Functor.LaxMonoidal.μ (genericSliceUpperStar (traitSliceCoord k') ℓ h hb))
       (𝟙 ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁))) A) := by
-  sorry
-
-/-- **The dualizing maps and generic slicing** (blueprint `det-tf-nearby-duality-slice`,
-"the twist (1)" and "the map `θ`", with `det-pd-generic-dualizing-twist`). There is a dualizing
-map `θ : Ψ_{M''} c^* ω_{X₁} ⟶ p^* ω_{X'}` of the generic slice model such that
-* `θ` restricts `p^* θ_M` along the slice exchange: `p^* θ_M = θ ∘ α_{ω_{X₁}}`;
-* `θ` is the twist by `ℚ̄_ℓ(1)[2]` of the dualizing map `θ_{M''}` of the family `DK`, through
-  `c^* ω_{X₁} ≅ ω_{X₂}(1)[2]` and `p^* ω_{X'} ≅ ω_{𝒳''_s}(1)[2]`; in particular the duality map
-  for `θ` is an isomorphism wherever `δ_{M''}` is;
-* `θ` is invariant under the automorphisms of the generic slice model which are the identity on
-  its total space (inertia acts trivially on `ℚ̄_ℓ(1)`). -/
-theorem exists_genericSliceDualizingMap (D : NearbyDualizingDataOfGenericBase k' ℓ)
-    (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ) :
-    ∃ θ : (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
-        ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁)) ⟶
-      (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X'),
-      (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).map (D.θ h) =
-          (genericSliceExchange (traitSliceCoord k') ℓ h hb).app (dualizingComplex ℓ X₁) ≫ θ ∧
-        (∀ A : Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦
-            Profinite.padicAlgClRingObj ℓ⟧,
-          IsIso (nearbyDualityMapOfGenericBase ℓ DK
-            (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
-              h.isTraitModelOver) A) →
-          IsIso (genericSliceDualityMap (traitSliceCoord k') ℓ h hb θ A)) ∧
-        ∀ ψ : (genericSliceModel (traitSliceCoord k') hb).Hom
-            (genericSliceModel (traitSliceCoord k') hb) (𝟙 _) (𝟙 _),
-          ψ.total = 𝟙 _ → IsIso ψ.generic →
-            (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ).app _ ≫ θ = θ := by
   sorry
 
 end IsTraitModelOfGenericBase
