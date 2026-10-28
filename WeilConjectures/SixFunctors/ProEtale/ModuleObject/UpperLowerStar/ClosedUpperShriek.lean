@@ -217,6 +217,36 @@ theorem isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl
       _).eq_of_src _ _⟩⟩
   exact (jointlyReflectIsomorphisms_upperStar_of_isCompl Λ i j hij).isIso_of_pairFunctor _ h₁ h₂
 
+/-- The pushforward of module objects along a closed immersion with quasi-compact open complement
+preserves epimorphisms: the cokernel of `i_* φ` vanishes on `Z`, since `i^* i_* φ` is `φ` up to
+the counit isomorphism, and on `U`, since `j^* i_* = 0`. -/
+lemma epi_lowerStar_map_of_isCompl (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {G H : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)}
+    (φ : G ⟶ H) [Epi φ] : Epi ((i)_*⟦Λ⟧.map φ) := by
+  set ε := (upperStarLowerStarAdjunction Λ i).counit
+  have hε : (i)^*⟦Λ⟧.map ((i)_*⟦Λ⟧.map φ) = ε.app G ≫ φ ≫ inv (ε.app H) := by
+    rw [← Category.assoc, IsIso.eq_comp_inv]
+    exact ε.naturality φ
+  have : Epi ((i)^*⟦Λ⟧.map ((i)_*⟦Λ⟧.map φ)) := by
+    rw [hε]
+    infer_instance
+  refine Preadditive.epi_of_isZero_cokernel _ (isZero_of_isZero_upperStar_of_isCompl Λ i j hij _
+    ((isZero_cokernel_of_epi _).of_iso (PreservesCokernel.iso _ _)) ?_)
+  exact (IsZero.of_epi (cokernel.π ((j)^*⟦Λ⟧.map ((i)_*⟦Λ⟧.map φ)))
+    (isZero_upperStar_lowerStar_of_disjoint Λ i j hij.disjoint H)).of_iso
+      (PreservesCokernel.iso _ _)
+
+/-- The pushforward of module objects along a closed immersion with quasi-compact open complement
+is exact: it is left exact as a right adjoint and preserves epimorphisms
+(`ProEtale.CondensedRing.epi_lowerStar_map_of_isCompl`). -/
+theorem preservesFiniteColimits_lowerStar_of_isCompl
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
+    PreservesFiniteColimits (i)_*⟦Λ⟧ := by
+  have : ((i)_*⟦Λ⟧).PreservesEpimorphisms :=
+    ⟨fun φ _ ↦ epi_lowerStar_map_of_isCompl Λ i j hij φ⟩
+  have := Functor.preservesHomology_of_preservesEpis_and_kernels ((i)_*⟦Λ⟧)
+  exact Functor.preservesFiniteColimits_of_preservesHomology _
+
 /-- `i_*`, as a functor to the module objects vanishing on `U`. -/
 noncomputable def lowerStarLift (hij : Disjoint (Set.range i.base) (Set.range j.base)) :
     Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) ⥤

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 
 /-!
@@ -64,7 +65,12 @@ theorem isIndConstructibleHeart_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     IsIndConstructibleHeart (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) :=
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  obtain ⟨hK, hC, hE⟩ := isConstructibleModuleObject_serre_continuousMapRingObj ℓ X E
+  exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
+    (hasConstructibleExtContinuity_continuousMapRingObj ℓ E aX)
 
 /-- Blueprint `sk-lem-constructible-ext-continuity` (1), for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
@@ -97,7 +103,12 @@ theorem isIndConstructibleHeart_padicIntegersRingObj (E : Type) [Field E]
     [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     IsIndConstructibleHeart (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  obtain ⟨hK, hC, hE⟩ := isConstructibleModuleObject_serre_padicIntegersRingObj ℓ X E
+  exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
+    (hasConstructibleExtContinuity_padicIntegersRingObj ℓ E aX)
 
 /-- Blueprint `sk-lem-int-ext` (1), for the coefficient ring `𝒪_E` of a finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
@@ -130,7 +141,12 @@ extensions and direct sums. -/
 theorem isIndConstructibleHeart_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     IsIndConstructibleHeart (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  obtain ⟨hK, hC, hE⟩ := isConstructibleModuleObject_serre_padicAlgClRingObj ℓ X
+  exact isIndConstructibleHeart_of_hasConstructibleExtContinuity _ hK hC hE
+    (hasConstructibleExtContinuity_padicAlgClRingObj ℓ aX)
 
 /-- Blueprint `sk-lem-constructible-ext-continuity` (1), for the coefficient ring `ℚ̄_ℓ` and a
 separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a constructible `ℚ̄_ℓ`-sheaf `C`
