@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaConstruction
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaPullback
 
 /-! Construction and normalization of the finite-free beta comparison.
 (blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-normalized)
@@ -56,6 +58,8 @@ theorem finiteFreeScalarDerivedComparison_beta_normalized
         tensorPull Λ f (DerivedCategory.Q.obj (complex Λ S Y)) K ≫
           ((modelPull Λ S f).hom ⊗ₘ 𝟙 ((scalarSixPull Λ f).obj K)) ≫
           (β X).hom.app ((scalarSixPull Λ f).obj K)) := by
-  sorry
+  obtain ⟨β, hβ⟩ := finiteFreeScalarDerivedComparison_beta_construction D a S t hS r e₁ e₂
+  refine ⟨β, hβ, ?_⟩
+  exact finiteFreeScalarDerivedComparison_beta_pullback D a S t β hβ
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar
