@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-exceptional-realization-right-mate-isIso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent is a native Lean obligation without a blueprint-id ancestor (blueprint_refs.py ancestor prints None). This node realizes the invertibility of the ordinary exceptional right mate by reference transport part of the supplied final exceptional-adjunction argument.",
+   "via": [
+    "lem-sf-exceptional-coefficient-realization",
+    "lem-sf-native-coefficient-cohomology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the ordinary exceptional right mate by reference transport",
+ "statement": "Fix P,X0,c0,S and the normalized left-realization data A of [lem-sf-exceptional-realization-left-models]. For every native functor J with the supplied adjunction F_native ⊣ J, the ordinary natural transformation Adjunction.forgetfulRightMate adj O.adjunction A.left is invertible [lem-sf-forgetful-representing-pair-right-mate], where O is the supplied coefficient exceptional adjunction. This asserts invertibility of the fixed ordinary mate only, without a Frobenius equation or a point-unit specialization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph; the ordinary scalar realization and its left Frobenius square, before transposing the right comparison."
+ },
+ "stmt_deps": [
+  "lem-sf-exceptional-realization-left-models",
+  "lem-sf-forgetful-representing-pair-right-mate"
+ ],
+ "proof": [
+  {
+   "text": "In the reference package, transpose its counit equation. The injectivity of the coefficient adjunction Hom equivalence identifies its right isomorphism with the fixed forgetfulRightMate of its left isomorphism, so this reference right mate is invertible.",
+   "uses": [
+    "def-sf-native-exceptional-forgetful-data",
+    "lem-sf-forgetful-representing-pair-right-mate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph; the ordinary scalar realization and its left Frobenius square, before transposing the right comparison."
+   }
+  },
+  {
+   "text": "The mate b of A.functorComparison is invertible because its two coefficient-change functors are equivalences. For each L, transpose EX(gamma_L) b_(VY L) through the reference adjunction. Naturality of the coefficient comparison and the counit formula give c_(VX J L) EY(a_(J L)^-1) EY(VY(epsilon_native,L)). Insert y at F_native J L and apply left_reference; naturality of y cancels its inverse. The reference counit formula then gives the transpose of x_(J L) gamma_reference,L G_reference(y_L^-1). Injectivity proves equality of these arrows. The latter composite is invertible; cancel b and reflect isomorphisms through EX. This is the complete private right_mate_isIso_of_reference proof in Lean.",
+   "uses": [
+    "lem-sf-exceptional-realization-left-models",
+    "lem-weil-mate-iso-along-equivalences",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph; the ordinary scalar realization and its left Frobenius square, before transposing the right comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "lem-sf-forgetful-representing-pair-right-mate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-exceptional-realization-left-models",
+  "lem-weil-mate-iso-along-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction paragraph; the ordinary scalar realization and its left Frobenius square, before transposing the right comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right mate of a commutative square of left adjoints is invertible after transport along fully faithful equivalences",
+   "results": "CategoryTheory.mateEquiv, isLeftAdjoint_square_lift, CatCommSq.iso and CommSq.right_adjoint. mateEquiv supplies the transposition but does not state the native/reference normalization result.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact ordinary coefficient realization commutes with exceptional inverse image and its equivariant adjunction mate",
+   "results": "CategoryTheory.mateEquiv_apply, mateEquiv_symm_apply, mateEquiv_counit, mateEquiv and iterated_mateEquiv_conjugateEquiv. The library MateIsoAlongEquivalences supplies the coefficient mate isomorphism; the normalized reference-square calculation is proved here.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|rightMate|mapOfNatIso in Mathlib/CategoryTheory/Adjunction/Mates.lean and the project category-theory modules",
+   "results": "mateEquiv_counit and mateEquiv_vcomp provide the equations; Sheaf.CategoryTheory.MateIsoAlongEquivalences supplies isIso_mateEquiv_of_isEquivalence_of_fullyFaithful, and NativeExceptionalForgetfulData.Comparison supplies the reference counit. The actual normalized comparison calculation is not already stated and is proved without sorry.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.ExceptionalCoefficientRealization",
+  "date": "2026-10-28",
+  "group": "K2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.ExceptionalRealizationRightMate",
+  "file": "lean/Sheaf/WeilSheaf/ExceptionalRealizationRightMate.lean",
+  "declaration": "WeilConjectures.NativeCoefficientCohomology.exceptional_realization_right_mate_isIso",
+  "declarations": [
+   "WeilConjectures.NativeCoefficientCohomology.exceptional_realization_right_mate_isIso"
+  ],
+  "statement": "theorem exceptional_realization_right_mate_isIso\n    (A : ExceptionalRealizationLeftData P X₀ c₀ S)\n    (J : WeilComplex P.field.k₀ P.coefficients.l (Spec (.of P.field.k₀)) ⥤\n      WeilComplex P.field.k₀ P.coefficients.l X₀.left)\n    (adj : WeilComplex.derivedLowerShriek P.field.k₀ P.coefficients.l X₀.hom ⊣ J) :\n    IsIso (Adjunction.forgetfulRightMate adj\n      (operation P.field P.coefficients.l P.coefficients.different\n        P.coefficients.Qbar X₀ (point P.field) (pointMap P.field X₀) c₀ S .closed).adjunction\n      A.left)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T081745-L-2779148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T081745-L-2779148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

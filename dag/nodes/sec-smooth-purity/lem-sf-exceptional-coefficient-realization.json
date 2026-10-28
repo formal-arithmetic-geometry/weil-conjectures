@@ -22,10 +22,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the ordinary realization by normalized common-stage realization, coefficient algebraic-closure scalar extension, the section-module equivalence and geometric-fibre algebraic-closure transport. The normalized formulas furnish the additive, shift, Frobenius, constructibility and unit fields.",
+   "text": "Choose the normalized left-realization data A and retain A.source as R. These data concern compact support and native ordinary forgetting; they assert no new exceptional right comparison.",
    "uses": [
-    "lem-sf-adic-qbar-constructible-realization",
-    "def-sf-adic-realization-isomorphism-data"
+    "lem-sf-exceptional-realization-left-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+   }
+  },
+  {
+   "text": "For every supplied J and adjunction, form gamma, the fixed ordinary right mate of A.left. The reference-transport theorem proves that gamma is invertible using the existing reference package and coefficient-change equivalences.",
+   "uses": [
+    "lem-sf-exceptional-realization-right-mate-isIso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+   }
+  },
+  {
+   "text": "Transpose both action-intertwining composites through the coefficient adjunction. Counit naturality and mateEquiv_counit replace the exceptional mate by beta inverse followed by the Frobenius of the counit. Naturality of beta moves gamma past that inverse. Its counit equation replaces F(gamma) followed by the counit by A.left inverse followed by the forgotten native counit. The latter is equivariant by the morphism law of A.targetModel. A.left_frobenius makes the two transposes equal; adjunction injectivity proves the right-action equation. This is the complete private right_mate_intertwines calculation in Lean. The exceptionalIso definition is exactly the inverse-exchange mate.",
+   "uses": [
+    "lem-sf-exceptional-realization-left-models",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-constant-purity-frobenius-square"
    ],
    "elementary": false,
    "source": {
@@ -34,11 +57,11 @@
    }
   },
   {
-   "text": "Use native_exceptional_forgetful at the point constant. Transpose the counit equivariance equation through the ordinary adjunction, using scalar_frobenius_counit for its left comparison. Injectivity of the adjunction Hom equivalence identifies the action with the inverse-exchange mate followed by G(theta0), so the ordinary isomorphism lifts to derived pairs.",
+   "text": "Lift the invertible ordinary mate to coefficient Frobenius pairs using its action equation and reflection of isomorphisms by forgetting. At the native point constant, compose with the image of A.pointUnit. Apply CoefficientRealization.pairs to this composite and precompose the inverse of A.sourceRealization. The private exceptionalConstant_eq_map equation identifies the endpoint with the literal exceptionalConstant definition, proving the required isomorphism.",
    "uses": [
-    "lem-sf-weil-native-exceptional-forgetful",
-    "lem-sf-native-weil-scalar-frobenius-counit",
-    "def-sf-coefficient-endpoint-objects"
+    "lem-sf-exceptional-realization-left-models",
+    "def-sf-coefficient-endpoint-objects",
+    "def-sf-coefficient-realization-cohomology-data"
    ],
    "elementary": false,
    "source": {
@@ -48,16 +71,17 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-adic-qbar-constructible-realization",
-  "def-sf-adic-realization-isomorphism-data",
-  "lem-sf-weil-native-exceptional-forgetful",
-  "lem-sf-native-weil-scalar-frobenius-counit",
-  "def-sf-coefficient-endpoint-objects"
+  "lem-sf-exceptional-realization-left-models",
+  "lem-sf-exceptional-realization-right-mate-isIso",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-constant-purity-frobenius-square",
+  "def-sf-coefficient-endpoint-objects",
+  "def-sf-coefficient-realization-cohomology-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Final exceptional-adjunction paragraph, combined with exact cohomology and the canonical constant/Tate source of the smooth dualizing specialization."
+  "place": "Complete Lean right-mate reference transport, counit transposition, pair lift and point-unit specialization. Only the normalized left-realization construction is split off."
  },
  "mathlib_searches": [
   {
@@ -146,11 +170,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-9f507",
-  "group": "F4",
-  "result": "fix",
-  "landing": "20261028T055647-L-791621",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T081745-L-2779148",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean (7 modules) against the clone and the item node; moved defs verbatim vs the change record; 3 direct importers compiled in a sandbox with the delivery; #print axioms on the proved declarations; new-node stmt_deps against the declarations their statements use"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
