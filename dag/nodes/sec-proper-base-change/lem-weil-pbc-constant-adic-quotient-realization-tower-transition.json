@@ -4,11 +4,7 @@
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09C6, consecutive quotient balancing"
  },
- "proof_origin": {
-  "by": "stage-3 worker G9",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, consecutive quotient balancing"
- },
+ "proof_origin": "Formalized by B5 on 2026-10-28. The proof uses the canonical derived scalar-extension/pullback comparison induced by the pro-etale ring restriction direct-image adjunction, then applies the supplied consecutive normalization isomorphism. The etale chart witness is irrelevant to this tower-only conclusion.",
  "mathlib_match": null,
  "status": "split",
  "created": {
@@ -36,17 +32,22 @@
  ],
  "proof": [
   {
-   "text": "Apply the AdicTower normalization at consecutive indices and transport it through the inverse-image pullback functor; the canonical scalar-extension comparison gives the displayed pulled-back isomorphism.",
+   "text": "Construct the canonical derived scalar-extension/pullback comparison for the quotient map using the pro-etale ring restriction direct-image adjunction and the left-adjoint uniqueness API. Evaluate its inverse at the upper level.",
    "uses": [
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-derived-normalization-arrows"
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the supplied consecutive normalization isomorphism of the adic tower through the pulled-back lower-level derived functor and compose it with the preceding comparison.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-pbc-derived-normalization-arrows"
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "mathlib_searches": [
   {
@@ -81,10 +82,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G9",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261028T020433-L-2510559",
-  "kind": "interface",
+  "landing": "20261028T034658-L-3530322",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

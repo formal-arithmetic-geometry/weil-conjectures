@@ -20,6 +20,20 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
+private noncomputable def pullbackScalarIso {X Y : Scheme.{u}} (g : Y ⟶ X)
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) :
+    pbcDerivedExtend φ ⋙ adicTowerPullback g S ≅
+      adicTowerPullback g R ⋙ pbcDerivedExtend ((adicTowerInverseImage g).map φ) := by
+  let R' := (adicTowerInverseImage g).obj R
+  let S' := (adicTowerInverseImage g).obj S
+  let φ' := (adicTowerInverseImage g).map φ
+  let adjR := (proEtaleRingDerivedOperations_adjunction g R R' (Iso.refl _)).some
+  let adjS := (proEtaleRingDerivedOperations_adjunction g S S' (Iso.refl _)).some
+  let δ := proEtaleRingRestrictionDerivedDirectImage g R S R' S' φ φ'
+    (Iso.refl _) (Iso.refl _) ((Category.id_comp _).trans (Category.comp_id _).symm)
+  exact ((pbcDerivedScalarAdjunction φ).comp adjS).leftAdjointUniq
+    ((adjR.comp (pbcDerivedScalarAdjunction φ')).ofNatIsoRight δ.symm)
+
 /-- The pulled-back consecutive tower transition is an isomorphism.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient
@@ -41,6 +55,11 @@ theorem adicTowerPullback_consecutive_transition_iso
           ((pbcAdicRings X d).obj (op (n + 1)))).obj (M.level (n + 1))) ≅
       (adicTowerPullback (W.hom ≫ g)
         ((pbcAdicRings X d).obj (op n))).obj (M.level n)) := by
-  sorry
+  let f := W.hom ≫ g
+  let q := pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)
+  let e := pullbackScalarIso f q
+  let h := (adicTowerPullback f ((pbcAdicRings X d).obj (op n))).mapIso
+    (M.normalization (n + 1) n (Nat.le_succ n))
+  exact ⟨e.symm.app (M.level (n + 1)) ≪≫ h⟩
 
 end AlgebraicGeometry.Scheme
