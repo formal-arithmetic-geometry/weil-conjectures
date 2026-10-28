@@ -6,7 +6,7 @@ module
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 
 /-! Sectionwise injectivity input for the proper/open counit.
 (blueprint: lem-exc-proetale-proper-open-counit-mono-section)
@@ -34,6 +34,17 @@ theorem sfProperOpenCounit_forget_mono {V W T : Scheme.{u}} (p : V ⟶ T) [IsPro
       ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
         ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
           proEtaleConstantModuleDirectImage p A).obj M))) := by
-  sorry
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  have hmono (N : Sheaf (ProEt.topology T) B) :
+      Mono ((ProEtale.openImmersionLowerShriekAdjunction B i).counit.app N) := by
+    apply ProEtale.mono_of_mono_openImmersionLowerShriekAdjunction_unit_app_comp B i
+    rw [Adjunction.right_triangle_components]
+    exact ⟨fun _ _ h ↦ by simpa using h⟩
+  have (N : proEtaleRingModules T (proEtaleConstantRing T A)) :
+      Mono ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app N) := by
+    dsimp only [sfIntrinsicExtensionByZeroAdjunction]
+    rw [Adjunction.comp_counit_app, Adjunction.comp_counit_app]
+    infer_instance
+  infer_instance
 
 end AlgebraicGeometry.Scheme
