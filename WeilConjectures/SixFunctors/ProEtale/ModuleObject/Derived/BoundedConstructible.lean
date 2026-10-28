@@ -11,7 +11,10 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoefficientTensorHypotheses
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseHypotheses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -96,9 +99,14 @@ coefficient rings, in
 The pullback and the extension by zero preserve bounded constructible complexes
 (`boundedConstructible_leftDerivedUpperStar_obj_of_scheme`,
 `boundedConstructible_openImmersionLowerShriek_obj`). That the derived pushforward does is
-`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`, and so are the instances
+`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`. The theorems
 `isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
-`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
+`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`), used as
+instances, are proved by noetherian induction from the lisse case
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorObj`,
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom`); the second
+one uses the pushforward along open immersions, hence
+`boundedConstructible_rightDerivedLowerStar_obj`.
 
 The pullback and the extension by zero preserve bounded constructible complexes for every `Λ`,
 and are defined for a general condensed ring `Λ`. The other three statements are false for a
@@ -763,8 +771,11 @@ include ℓ k
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
+-- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
+set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 form a monoidal subcategory of
@@ -772,11 +783,19 @@ form a monoidal subcategory of
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hK hL }
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidal_boundedConstructible
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
@@ -784,10 +803,15 @@ are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over
+    (tensorHypotheses_padicAlgClRingObj ℓ).lisseHypotheses X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨A, hA⟩)
+    hK hL⟩
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the
@@ -859,32 +883,46 @@ variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
+-- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
+set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are
 stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj
+        (tensorHypotheses_continuousMapRingObj ℓ E).lisseTensorHypotheses hK hL }
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidal_boundedConstructible
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
 point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over
+    (tensorHypotheses_continuousMapRingObj ℓ E).lisseHypotheses X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
+    hK hL⟩
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full
@@ -960,34 +998,44 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
+-- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
+set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves form a monoidal subcategory of
 `D(Mod_{𝒪_{E,X}})` for the derived tensor product: they contain the unit
 `𝒪_{E,X}` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible
-    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj (lisseHypotheses ℓ E).toLisseTensorHypotheses hK hL }
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidal_boundedConstructible
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible
-    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (lisseHypotheses ℓ E) X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
+    hK hL⟩
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the

@@ -55,6 +55,15 @@ def IsLocallyFree (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
       (((ProEtale.upperStar A (𝒰.f i)).mapMod R).obj M)
 
 variable {R} in
+/-- Local freeness is invariant under isomorphism of module objects. -/
+lemma IsLocallyFree.of_iso {M N : Mod (Sheaf (Scheme.ProEt.topology X) A) R} (e : M ≅ N)
+    (hM : IsLocallyFree R M) : IsLocallyFree R N :=
+  let ⟨𝒰, h𝒰⟩ := hM
+  ⟨𝒰, fun i ↦
+    let ⟨n, ⟨e'⟩⟩ := h𝒰 i
+    ⟨n, ⟨((ProEtale.upperStar A (𝒰.f i)).mapMod R).mapIso e.symm ≪≫ e'⟩⟩⟩
+
+variable {R} in
 /-- A locally free module object is locally finitely presented, a free module object of finite
 rank `R^n` being the cokernel of `0 : R^0 ⟶ R^n`. -/
 lemma IsLocallyFree.isLocallyFinitelyPresented {M : Mod (Sheaf (Scheme.ProEt.topology X) A) R}

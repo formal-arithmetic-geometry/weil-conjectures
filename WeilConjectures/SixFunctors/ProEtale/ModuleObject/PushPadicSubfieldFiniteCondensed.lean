@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
@@ -31,94 +32,7 @@ open CategoryTheory MonoidalCategory MonObj Limits
 
 open scoped CategoryTheory.Obj
 
-namespace CategoryTheory.Mod
-
-/-- The action of a global section on the regular module is invariant under isomorphisms of
-monoid objects. -/
-lemma globalSmul_comp_hom_regular {C : Type*} [Category* C] [MonoidalCategory C] {A B : C}
-    [MonObj A] [MonObj B] (e : A ≅ B) [IsMonHom e.hom] (σ : 𝟙_ C ⟶ A) :
-    globalSmul (σ ≫ e.hom) (regular B) = e.inv ≫ globalSmul σ (regular A) ≫ e.hom := by
-  change (λ_ B).inv ≫ (σ ≫ e.hom) ▷ B ≫ μ[B] = e.inv ≫ ((λ_ A).inv ≫ σ ▷ A ≫ μ[A]) ≫ e.hom
-  rw [Category.assoc, Category.assoc, IsMonHom.mul_hom, MonoidalCategory.tensorHom_def,
-    Category.assoc, leftUnitor_inv_naturality_assoc, ← comp_whiskerRight_assoc,
-    whisker_exchange_assoc, ← whiskerLeft_comp_assoc, Iso.inv_hom_id,
-    MonoidalCategory.whiskerLeft_id, Category.id_comp]
-
-/-- The action of the image `ε ≫ F σ` of a global section on the regular module `F A` is the
-image of the action of `σ` on the regular module `A`, for a lax monoidal functor `F`. -/
-lemma globalSmul_regular_obj {C D : Type*} [Category* C] [MonoidalCategory C] [Category* D]
-    [MonoidalCategory D] (F : C ⥤ D) [F.LaxMonoidal] {A : C} [MonObj A] (σ : 𝟙_ C ⟶ A) :
-    globalSmul (Functor.LaxMonoidal.ε F ≫ F.map σ) (regular (F.obj A)) =
-      F.map (globalSmul σ (regular A)) := by
-  rw [globalSmul, globalSmul, Functor.map_comp, Functor.map_comp,
-    ← Functor.LaxMonoidal.left_unitality_inv, Category.assoc, Category.assoc,
-    ← Functor.LaxMonoidal.μ_natural_left_assoc, comp_whiskerRight_assoc]
-  rfl
-
-end CategoryTheory.Mod
-
 namespace Profinite
-
-section GlobalSmul
-
-variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
-
-/-- On the presheaf `C(-, T)`, the constant global section `t` acts on the regular module by
-multiplication by `t`. -/
-lemma globalSmul_continuousMapConstSection_presheaf (t : T) :
-    Mod.globalSmul ((continuousMapRingPresheaf.{u} T).ringHomΓCompForget₂
-      (continuousMapConstSectionRingHom T) (fun _ _ ↦ rfl) t).hom
-      (Mod.regular (continuousMapRingPresheaf.{u} T ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})) =
-    (continuousMapRingObjMulLeft.{u} T t).hom := by
-  apply (cancel_epi (λ_ _).hom).1
-  simp only [Mod.globalSmul, Iso.hom_inv_id_assoc]
-  ext S : 2
-  refine AddCommGrpCat.hom_ext_toIntLinearMap (TensorProduct.ext' fun n a ↦ ?_)
-  change ((n.down : ULift.{u + 1} C(S.unop, T)) * ULift.up (ContinuousMap.const _ t)) *
-      (show ULift.{u + 1} C(S.unop, T) from a) =
-    ULift.up (ContinuousMap.const _ t * (n.down • (show ULift.{u + 1} C(S.unop, T) from a)).down)
-  apply ULift.ext
-  ext s
-  change ((n.down : C(S.unop, T)) * ContinuousMap.const _ t *
-    (show ULift.{u + 1} C(S.unop, T) from a).down : C(S.unop, T)) s =
-      t * (n.down • (show ULift.{u + 1} C(S.unop, T) from a).down) s
-  simp [zsmul_eq_mul]
-  ring
-
-
-/-- **The constant global section `t` of `T̲ = C(-, T)` acts on the regular module by
-multiplication by `t`.** -/
-lemma globalSmul_continuousMapConstRingHom (t : T) :
-    Mod.globalSmul (continuousMapConstRingHom.{u} T t).hom
-      (Mod.regular (continuousMapRingObj.{u} T)) = continuousMapRingObjMulLeft T t := by
-  let J := coherentTopology Profinite.{u}
-  let e := Sheaf.sheafifyRingPresheafIso.{u + 1, u, u + 1} J (continuousMapRingSheaf.{u} T)
-  let sP := (continuousMapRingPresheaf.{u} T).ringHomΓCompForget₂
-      (continuousMapConstSectionRingHom T) (fun _ _ ↦ rfl) t
-  have hσ : (continuousMapConstRingHom.{u} T t).hom =
-      (Functor.LaxMonoidal.ε (presheafToSheaf J Ab.{u + 1}) ≫
-        (presheafToSheaf J Ab.{u + 1}).map sP.hom) ≫ e.hom := rfl
-  have : IsMonHom e.hom := Sheaf.isMonHom_sheafifyRingPresheafIso_hom.{u + 1, u, u + 1} J _
-  rw [hσ]
-  erw [Mod.globalSmul_comp_hom_regular e]
-  have h₁ : Mod.globalSmul (Functor.LaxMonoidal.ε (presheafToSheaf J Ab.{u + 1}) ≫
-        (presheafToSheaf J Ab.{u + 1}).map sP.hom)
-      (Mod.regular ((presheafToSheaf J Ab.{u + 1}).obj
-        (continuousMapRingPresheaf.{u} T ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}))) =
-      (presheafToSheaf J Ab.{u + 1}).map (Mod.globalSmul sP.hom
-        (Mod.regular (continuousMapRingPresheaf.{u} T ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}))) := by
-    rw [Mod.globalSmul, Mod.globalSmul, Functor.map_comp, Functor.map_comp,
-      ← Functor.LaxMonoidal.left_unitality_inv, Category.assoc, Category.assoc,
-      ← Functor.LaxMonoidal.μ_natural_left_assoc, comp_whiskerRight_assoc]
-    rfl
-  rw [globalSmul_continuousMapConstSection_presheaf] at h₁
-  refine (congrArg (fun g ↦ e.inv ≫ g ≫ e.hom) h₁).trans ?_
-  have h₂ := (sheafificationAdjunction J Ab.{u + 1}).counit.naturality
-    (continuousMapRingObjMulLeft.{u} T t)
-  exact (Iso.inv_comp_eq e).2 h₂
-
-
-end GlobalSmul
 
 section Coordinates
 

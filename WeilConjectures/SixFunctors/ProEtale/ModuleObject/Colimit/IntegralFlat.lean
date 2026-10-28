@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
@@ -49,44 +50,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory MonObj
 
 namespace Profinite
-
-section MulLeft
-
-variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
-
-/-- The multiplication by a constant `t : T` on the condensed abelian group `C(-, T)`. -/
-noncomputable def continuousMapRingObjMulLeft (t : T) :
-    continuousMapRingObj.{u} T ⟶ continuousMapRingObj T :=
-  ⟨{ app _ := AddCommGrpCat.ofHom
-        { toFun a := ULift.up (ContinuousMap.const _ t * a.down)
-          map_zero' := ULift.ext _ _ (mul_zero _)
-          map_add' a b := ULift.ext _ _ (mul_add _ a.down b.down) }
-     naturality _ _ _ := rfl }⟩
-
-lemma continuousMapRingObjMulLeft_app_apply (t : T) (S : Profinite.{u}ᵒᵖ)
-    (a : ULift.{u + 1} C(S.unop, T)) :
-    (continuousMapRingObjMulLeft T t).hom.app S a = ULift.up (ContinuousMap.const _ t * a.down) :=
-  rfl
-
-lemma continuousMapRingObjMulLeft_one :
-    continuousMapRingObjMulLeft.{u} T 1 = 𝟙 _ := by
-  ext S a
-  exact ULift.ext _ _ (one_mul _)
-
-lemma nsmul_continuousMapRingObjMulLeft (n : ℕ) (t : T) :
-    n • continuousMapRingObjMulLeft.{u} T t = continuousMapRingObjMulLeft T (n * t) := by
-  ext S a
-  have h : (n • continuousMapRingObjMulLeft.{u} T t).hom.app S =
-      n • (continuousMapRingObjMulLeft T t).hom.app S :=
-    (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙
-      (evaluation _ _).obj S).map_nsmul
-  refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
-  have hn (v : ULift.{u + 1} C(S.unop, T)) : (n • v).down s = n • v.down s := rfl
-  rw [h]
-  refine (hn _).trans ?_
-  simp [continuousMapRingObjMulLeft_app_apply, nsmul_eq_mul, _root_.mul_assoc]
-
-end MulLeft
 
 open AlgebraicGeometry.ProEtale
 
