@@ -23,20 +23,28 @@
  },
  "proof": [
   {
-   "text": "Apply the generalized arbitrary-diagram counit transport theorem to d = diagram l c Y family. The resulting equation is exactly the assigned equation by definitional substitution.",
+   "text": "Obtain the scalar first trace square for the selected canonical diagram from Family and Reference.",
+   "uses": [
+    "lem-sfb-rational-p1-first-scalar-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the repaired arbitrary-diagram counit transport to this diagram and scalar square. All projection and exchange hypotheses are unchanged.",
    "uses": [
     "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sfb-rational-p1-first-scalar-trace",
   "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "A3",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Specialize the arbitrary-diagram transport theorem to the selected coefficient family."
+  "place": "Supply the essential scalar first-trace square, then specialize the general counit transport."
  },
  "mathlib_searches": [
   {
@@ -87,7 +95,7 @@
   "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_first_trace_transport_counit_expanded",
   "statement": "theorem rationalP1_first_trace_transport_counit_expanded\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (reference : Reference l Y δ family)\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (hM : CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y)) M)\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y)\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)))\n    (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)) ≫\n      counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y))\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq ≫\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M ◁\n        (trace (coefficient l c).X Y (line l c) (diagram l c Y family) ≫\n          (singleUnitIso (coefficient l c).X Y).hom)) ≫\n      (ρ_ ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)).hom =\n    firstTerminalFunctional (coefficient l c).X Y (line l c) (diagram l c Y family) M\n      (((DerivedCategory.singleFunctor\n          (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n            (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n      (diagram l c Y family).trace₁ h₁",
   "branch": "sheaf-dag",
-  "by": "A9",
+  "by": "A3",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -103,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S6",
-  "result": "pass",
-  "landing": "20261028T020745-L-2544546",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
  }
 }

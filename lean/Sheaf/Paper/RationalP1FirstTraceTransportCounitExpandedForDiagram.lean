@@ -6,16 +6,16 @@ Authors: SHEAF group G9
 module
 
 public import Sheaf.Paper.RationalP1SectionEvaluation
-public import Sheaf.Paper.RationalTatePullback
-public import Sheaf.Paper.LocalizingClosure
-public import Sheaf.Paper.DiagonalCoefficientReference
 public import Sheaf.Paper.RationalP1SecondPretraceData
+public import Sheaf.Paper.RationalP1FirstTraceData
+import Sheaf.Paper.RationalP1FirstTracePretrace
+import Sheaf.Paper.RationalP1ProjectionScalarEvaluation
 
 /-! # Expanded counit equality for the terminal first projective-line trace
 
 Source: the Kunneth and trace base-change calculation in the first rational projective-line
 triangle identity, before the diagonal class is inserted.
-(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded).
+(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram).
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +24,6 @@ set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -37,17 +36,22 @@ attribute [local irreducible] moduleObjectDerivedPushforward moduleObjectDerived
 attribute [local irreducible] twist projectionMap singleUnitIso
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientExchange
+attribute [local irreducible] internalMonoidal
+attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
+  CategoryTheory.Mod.monoidalCategory CategoryTheory.Mod.monoidalClosed
+  DerivedCategory.monoidalClosed
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
+-- STATEMENT-DISPUTED (old version): Diagram leaves traceq unrelated to trace₁.
+/-- Expanded counit transport for a diagram satisfying scalar trace base change.
 
-set_option maxHeartbeats 800000 in
--- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
-/-- Expanded counit transport for an arbitrary trace diagram
+Source: the First identity of the rational projective-line triangle proof.
+(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram).
 
-This split theorem generalizes the assigned equality from the selected coefficient
-family and reference to an arbitrary `Diagram` with the same line objects. It removes
-the unused reference, coefficient family, and localizing-closure assumptions, leaving
-the core transport equation as the independent proof obligation.
-(source: lem-sfb-rational-p1-first-trace-transport-counit-expanded) -/
+The scalar trace square is necessary: Diagram does not relate its q trace to its
+first-projection trace. The trace-free Kunneth comparison first transports the
+projection part. Tensoring the scalar square and applying projection unitality
+then gives the asserted terminal trace equation. -/
 theorem rationalP1_first_trace_transport_counit_expanded_for_diagram
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
@@ -73,7 +77,21 @@ theorem rationalP1_first_trace_transport_counit_expanded_for_diagram
     (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M
       (((DerivedCategory.singleFunctor
         (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
-          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))) :
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))
+    (ht : firstTraceExchange (coefficient l c).X Y
+        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
+          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)
+        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))
+          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
+        (secondLineComparison l c k p hpl Y) ≫
+      firstNativeFunctional (coefficient l c).X Y (line l c) d
+        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))
+          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) d.trace₁ ≫
+      (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom =
+      (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (trace (coefficient l c).X Y (line l c) d ≫
+          (singleUnitIso (coefficient l c).X Y).hom) ≫
+        (secondTraceUnitIso (coefficient l c).X Y).hom) :
     (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
       (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj
         ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗
@@ -108,5 +126,57 @@ theorem rationalP1_first_trace_transport_counit_expanded_for_diagram
       (((DerivedCategory.singleFunctor
           (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
             (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-      d.trace₁ h₁ := by sorry
+      d.trace₁ h₁ := by
+  have hf := first_trace_pretrace l c k p hpl Y d M hq hb hp h₁ d.trace₁
+  have hs := projectionMate_scalar_evaluation l c Y M
+    ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj
+      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj
+      (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))
+    _ _
+    ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj
+        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗
+          (((DerivedCategory.singleFunctor
+            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))
+      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map
+        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗
+          (((DerivedCategory.singleFunctor
+            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))
+          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)
+            (line l c (diagonalSurface Y))
+            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫
+        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)
+          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))
+          (secondLineComparison l c k p hpl Y)
+          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫
+        (twist (coefficient l c).X (ProjectiveLine Y)
+          (line l c (ProjectiveLine Y))).map
+          (by
+            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
+            exact @inv _ _ _ _
+              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)))
+    (counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y))
+        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq)
+    ((moduleObjectDerivedPushforward (coefficient l c).X (firstProjection Y)).obj
+      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+      (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))
+    (unit (coefficient l c).X (ProjectiveLine Y))
+    (firstTraceExchange (coefficient l c).X Y
+      (((DerivedCategory.singleFunctor
+        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj
+          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)
+      (((DerivedCategory.singleFunctor
+        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
+      (secondLineComparison l c k p hpl Y))
+    (firstNativeFunctional (coefficient l c).X Y (line l c) d
+      (((DerivedCategory.singleFunctor
+        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) d.trace₁)
+    (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom
+    (trace (coefficient l c).X Y (line l c) d ≫ (singleUnitIso (coefficient l c).X Y).hom) ht
+  exact hs.symm.trans hf
+
 end AlgebraicGeometry.ProEtale.RationalP1

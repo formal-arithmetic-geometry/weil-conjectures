@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-rational-p1-first-scalar-trace",
+ "kind": "statement",
+ "title": "Scalar trace base change to the first projective projection",
+ "statement": "Fix the admissible rational or closure coefficient data $l,c,k,p,Y$, the noetherian and diagonal-trace localization hypotheses, and a coefficient family with its whole-system completed reference [def-sfb-diagonal-coefficient-reference]. Let $d$ be its selected diagram, $T=L_P[2]$, $N=L_W[2]$, $b_T:q^*Rq_*T\\to Rp_{1*}N$ the opposite mate with the root-normalized secondLineComparison [def-sfb-rational-p1-first-trace-data], $t_q:Rq_*T\\to\\mathbf1_Y$ its native q trace followed by singleUnitIso, and $t_1:Rp_{1*}N\\to\\mathbf1_P$ its native first trace followed by singleUnitIso. Then $b_Tt_1=q^*(t_q)u_q$, where $u_q:q^*\\mathbf1_Y\\simeq\\mathbf1_P$ is the canonical monoidal unit comparison. No arbitrary object M or projection-isomorphism assumption is present.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-tate-twisted-projection-comparison",
+  "lem-sfb-rational-p1-section-evaluation",
+  "def-sfb-rational-p1-first-trace-data",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-rational-p1-second-pretrace-data",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-completed-endpoints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "proof": [
+  {
+   "text": "Apply the completed trace-pullback theorem to q and the first projection of its self-product, with reference.tq, reference.t1 and their normalized realizations. The inverse self-square mate and second-line comparison are the two square boundaries.",
+   "uses": [
+    "lem-diagonal-completed-trace-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the completed realization trace squares with the integral, rational, and closure scalar trace squares recorded by Family. Uniqueness of adjunction mates and the ordinary root normalization identify the transported mate with firstTraceExchange. Naturality of the unit comparisons gives the displayed equality. This is the scalar part of the source argument and contains no inverse projection or general M.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-coefficient-diagrams",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-completed-trace-pullback",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "A3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived sheaf projection formula Kunneth exchange opposite mate trace base change projective line",
+   "results": "Eight hits, including Scheme.Modules.pullbackPushforwardAdjunction and sheaf cartesian projection formulas; none gives the derived tensor/exchange or trace square required here.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opposite adjunction mate exchange base change and tensor projection formula",
+   "results": "Eight hits, including CategoryTheory.frobeniusMorphism_mate and rigid left/rightAdjointMate. These concern closed or rigid monoidal categories, not this derived self-square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "firstTraceExchange|first_trace_pretrace|first_scalar_trace",
+   "results": "No matching declaration. Read the native exchange, ringed Kunneth factorizations, TraceBaseChangeFirst, completed trace pullback, and second scalar trace modules. The ringed theorem gives the abstract route; TraceBaseChangeFirst has different twist endpoints and assumes its trace square. The second scalar theorem concerns p2, not the opposite mate for p1.",
+   "date": "2026-10-28",
+   "verdict": "Reuse existing interfaces; retain separate native first trace-free and scalar steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram",
+  "date": "2026-10-28",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity, the Kunneth factorization and scalar trace base-change calculation.",
+   "via": [
+    "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1FirstScalarTrace",
+  "file": "lean/Sheaf/Paper/RationalP1FirstScalarTrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.first_scalar_trace",
+  "statement": "theorem first_scalar_trace\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (reference : Reference l Y δ family) :\n    firstTraceExchange (coefficient l c).X Y\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))\n          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n        (secondLineComparison l c k p hpl Y) ≫\n      firstNativeFunctional (coefficient l c).X Y (line l c) (diagram l c Y family)\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n        (diagram l c Y family).trace₁ ≫\n      (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom =\n    (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (trace (coefficient l c).X Y (line l c) (diagram l c Y family) ≫\n        (singleUnitIso (coefficient l c).X Y).hom) ≫\n      (secondTraceUnitIso (coefficient l c).X Y).hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
+ }
+}

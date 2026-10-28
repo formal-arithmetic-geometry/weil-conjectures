@@ -2,7 +2,7 @@
  "id": "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram",
  "kind": "statement",
  "title": "Expanded counit transport for an arbitrary trace diagram",
- "statement": "For any admissible coefficient data and any diagram d on the selected line objects, the normalized expanded counit transport equality holds under the displayed invertibility hypotheses.",
+ "statement": "For the admissible coefficient and geometric data in the displayed Lean statement, let d be a Diagram with the specified native line objects. In addition to the displayed projection and exchange invertibility hypotheses, assume the scalar first trace base-change square $b_Tt_1=q^*(t_q)u_q$ of [def-sfb-rational-p1-first-trace-data]. Then the normalized expanded counit transport equality holds. This scalar square is essential: Diagram alone places no condition on traceq.",
  "stmt_deps": [
   "def-sfb-projective-diagonal-pullback",
   "def-sfb-projective-diagonal-composition",
@@ -12,9 +12,9 @@
   "def-sfb-diagonal-trace-models",
   "def-sfb-diagonal-completed-endpoints",
   "def-sfb-diagonal-coefficient-category",
-  "sk-def-localizing-closure",
-  "sk-def-sfb-constructible",
-  "lem-sfb-rational-p1-section-evaluation"
+  "lem-sfb-rational-p1-section-evaluation",
+  "def-sfb-rational-p1-first-trace-data",
+  "def-sfb-rational-p1-second-pretrace-data"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
@@ -22,16 +22,28 @@
  },
  "proof": [
   {
-   "text": "This is the generalized Kunneth, projection, and trace transport equation for an arbitrary Diagram. Its proof is the same normalized counit expansion and trace-square calculation as the parent, with no use of a selected coefficient family, a completed reference, or localizing-closure data.",
-   "uses": [],
+   "text": "Apply normalized projection scalar evaluation with the scalar square ht, with A the expanded inverse-exchange prefix and B the counit projection factor. This identifies the counit-and-q-trace path with the evaluated projection-mate path.",
+   "uses": [
+    "lem-sfb-rational-p1-projection-scalar-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Kunneth comparison with its arbitrary functional specialized to d.trace₁. It leaves firstTerminalFunctional folded. Its left path is exactly the same intermediate path as the scalar projection evaluation. Symmetry and transitivity of those two equalities prove the conclusion.",
+   "uses": [
+    "lem-sfb-rational-p1-first-trace-pretrace"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sfb-rational-p1-first-trace-pretrace",
+  "lem-sfb-rational-p1-projection-scalar-evaluation"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "A3",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Generalized arbitrary-diagram counit expansion and trace transport."
+  "place": "First identity: trace-free Kunneth comparison, then scalar trace substitution and projection unitality."
  },
  "mathlib_searches": [
   {
@@ -80,9 +92,9 @@
   "module": "Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram",
   "file": "lean/Sheaf/Paper/RationalP1FirstTraceTransportCounitExpandedForDiagram.lean",
   "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_first_trace_transport_counit_expanded_for_diagram",
-  "statement": "theorem rationalP1_first_trace_transport_counit_expanded_for_diagram\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (d : Diagram (coefficient l c).X Y (line l c))\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y)\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)))\n    (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)) ≫\n      counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y))\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq ≫\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M ◁\n        (trace (coefficient l c).X Y (line l c) d ≫\n          (singleUnitIso (coefficient l c).X Y).hom)) ≫\n      (ρ_ ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)).hom =\n    firstTerminalFunctional (coefficient l c).X Y (line l c) d M\n      (((DerivedCategory.singleFunctor\n          (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n            (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n      d.trace₁ h₁",
+  "statement": "theorem rationalP1_first_trace_transport_counit_expanded_for_diagram\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (d : Diagram (coefficient l c).X Y (line l c))\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y)\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)))\n    (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n    (ht : firstTraceExchange (coefficient l c).X Y\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))\n          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n        (secondLineComparison l c k p hpl Y) ≫\n      firstNativeFunctional (coefficient l c).X Y (line l c) d\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) d.trace₁ ≫\n      (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom =\n      (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (trace (coefficient l c).X Y (line l c) d ≫\n          (singleUnitIso (coefficient l c).X Y).hom) ≫\n        (secondTraceUnitIso (coefficient l c).X Y).hom) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)) ≫\n      counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y))\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq ≫\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M ◁\n        (trace (coefficient l c).X Y (line l c) d ≫\n          (singleUnitIso (coefficient l c).X Y).hom)) ≫\n      (ρ_ ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)).hom =\n    firstTerminalFunctional (coefficient l c).X Y (line l c) d M\n      (((DerivedCategory.singleFunctor\n          (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n            (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n      d.trace₁ h₁",
   "branch": "sheaf-dag",
-  "by": "S6",
+  "by": "A3",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -98,11 +110,28 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S6",
-  "result": "pass",
-  "landing": "20261028T020745-L-2544546",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "A3",
+  "old_statement": "For any admissible coefficient data and any diagram d on the selected line objects, the normalized expanded counit transport equality holds under the displayed invertibility hypotheses.",
+  "what": "STATEMENT-DISPUTED (old version): Diagram.traceq is completely unconstrained by integration1 and integration2. Replacing traceq by zero preserves every Diagram field and every old theorem hypothesis, but makes the left-hand composite zero; for a normalized canonical first trace over a geometric point the right-hand functional is nonzero (on the Chern summand for M the coefficient unit). The claimed arbitrary-diagram generalization omitted the necessary scalar first trace square. Add exactly this square; the only caller supplies it from its already present Family and Reference, preserving the caller and all target statements.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+   "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-rational-p1-first-trace-transport-counit-expanded",
+    "holds": true,
+    "note": "The unchanged caller has Family and Reference. Its proof now supplies first_scalar_trace, so the same original conclusion holds with the same original hypotheses."
+   }
+  ]
  }
 }

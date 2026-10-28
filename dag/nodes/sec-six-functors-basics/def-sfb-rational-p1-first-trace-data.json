@@ -1,0 +1,97 @@
+{
+ "id": "def-sfb-rational-p1-first-trace-data",
+ "kind": "definition",
+ "title": "Opposite self-square exchange on a specified coefficient line",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, $Y$ a scheme, $P=\\mathbf P^1_Y$, $W=P\\times_Y P$, and $q:P\\to Y$, $p_i:W\\to P$ the projections [def-sfb-projective-diagonal-pullback]. For $T\\in D(\\operatorname{Mod}_{\\Lambda_P})$, $N\\in D(\\operatorname{Mod}_{\\Lambda_W})$ and a specified isomorphism $e:p_2^*T\\simeq N$, define $b_T:q^*Rq_*T\\to Rp_{1*}N$ as the mate of the inverse canonical pullback square comparison followed by $Rp_{1*}(e)$. All functors and adjunctions are the native derived module functors; no invertibility of this mate is assumed.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-diagonal-coefficient-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "A3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived sheaf projection formula Kunneth exchange opposite mate trace base change projective line",
+   "results": "Eight hits, including Scheme.Modules.pullbackPushforwardAdjunction and sheaf cartesian projection formulas; none gives the derived tensor/exchange or trace square required here.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opposite adjunction mate exchange base change and tensor projection formula",
+   "results": "Eight hits, including CategoryTheory.frobeniusMorphism_mate and rigid left/rightAdjointMate. These concern closed or rigid monoidal categories, not this derived self-square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "firstTraceExchange|first_trace_pretrace|first_scalar_trace",
+   "results": "No matching declaration. Read the native exchange, ringed Kunneth factorizations, TraceBaseChangeFirst, completed trace pullback, and second scalar trace modules. The ringed theorem gives the abstract route; TraceBaseChangeFirst has different twist endpoints and assumes its trace square. The second scalar theorem concerns p2, not the opposite mate for p1.",
+   "date": "2026-10-28",
+   "verdict": "Reuse existing interfaces; retain separate native first trace-free and scalar steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram",
+  "date": "2026-10-28",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity, the Kunneth factorization and scalar trace base-change calculation.",
+   "via": [
+    "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1FirstTraceData",
+  "file": "lean/Sheaf/Paper/RationalP1FirstTraceData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.firstTraceExchange",
+  "statement": "def firstTraceExchange\n    (T : DerivedCategory (Modules Λ (ProjectiveLine Y)))\n    (N : DerivedCategory (Modules Λ (diagonalSurface Y)))\n    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj T ≅ N) :\n    (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj\n      ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj T) ⟶\n      (moduleObjectDerivedPushforward Λ (firstProjection Y)).obj N",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
+ }
+}

@@ -12,6 +12,7 @@ public import Sheaf.Paper.DiagonalCoefficientReference
 public import Sheaf.Paper.RationalP1SecondPretraceData
 
 import Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram
+import Sheaf.Paper.RationalP1FirstScalarTrace
 
 /-! # Expanded counit equality for the terminal first projective-line trace
 
@@ -140,5 +141,6 @@ theorem rationalP1_first_trace_transport_counit_expanded
   let _ := hM
   exact rationalP1_first_trace_transport_counit_expanded_for_diagram l c k p hpl Y
     (diagram l c Y family) M hq hb hp h₁
+    (first_scalar_trace l c k p hpl Y δ family reference)
 
 end AlgebraicGeometry.ProEtale.RationalP1

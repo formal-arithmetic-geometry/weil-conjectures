@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-rational-p1-first-trace-pretrace",
+ "kind": "statement",
+ "title": "Trace-free Kunneth comparison after cancelling the q projection",
+ "statement": "Fix admissible prime and coefficient data l,c,k,p,hpl,Y with the geometric, noetherian and trace-localization hypotheses of the first rational projective-line identity. Put Λ=(coefficient l c).X, L=line l c, q,p₁,p₂,P,W as in [def-sfb-projective-diagonal-pullback], T=L_P[2], N=L_W[2], and e=secondLineComparison as in [def-sfb-rational-tate-pullback-comparison]. Let d be any Diagram as in [def-sfb-diagonal-trace-models]; it supplies only its canonical first-direct-image identification. For M in D(Mod Λ_P), assume the q projection on (Rq_*M,T), self-square exchange on M, twisted second projection on p₁*M, and first projection on (M,N) are isomorphisms. Let A be the expanded inverse-exchange/inverse-twisted-projection prefix followed by counitProjectionPart. Let λq be the right-factor q projection mate and b_T the opposite exchange of [def-sfb-rational-p1-first-trace-data]. For any functional t:d.R₁.R(N)→1_P, let E=(M tensor firstNativeFunctional(t)) followed by the single-unit comparison and the right unitor. Then A λq Rq_*(M tensor b_T) Rq_*E equals firstTerminalFunctional(d,M,N,t), with the specified inverse first projection. No prescribed trace, diagonal class, Family, Reference, or scalar trace compatibility enters.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-tate-twisted-projection-comparison",
+  "lem-sfb-rational-p1-section-evaluation",
+  "def-sfb-rational-p1-first-trace-data",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-rational-p1-second-pretrace-data",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "proof": [
+  {
+   "text": "Apply the two ringed Kunneth factorizations to M and T, and transport their equality through the canonical module/ringed-topos comparisons. Both paths use their original counit mates.",
+   "uses": [
+    "lem-sfb-ringed-kunneth-factorizations",
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality in e. Expand the twisted second projection and cancel the native tensor-shift comparisons; cancel the assumed isomorphisms in the q and first projection routes. This yields precisely the trace-free identity of the statement.",
+   "uses": [
+    "def-sfb-tate-twisted-projection-comparison",
+    "lem-sfb-rational-p1-section-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the trace-free identity by Rq_* of the arbitrary native first functional, its single-unit comparison, and the right unitor. Functoriality combines the terminal factors into firstTerminalFunctional. The diagram contributes only its first-direct-image identification, with no use of its chosen traces or integration equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-tate-twisted-projection-comparison",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-rational-p1-section-evaluation",
+  "lem-sfb-ringed-kunneth-factorizations"
+ ],
+ "proof_origin": {
+  "by": "A3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the Kunneth factorization and scalar trace base-change calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived sheaf projection formula Kunneth exchange opposite mate trace base change projective line",
+   "results": "Eight hits, including Scheme.Modules.pullbackPushforwardAdjunction and sheaf cartesian projection formulas; none gives the derived tensor/exchange or trace square required here.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opposite adjunction mate exchange base change and tensor projection formula",
+   "results": "Eight hits, including CategoryTheory.frobeniusMorphism_mate and rigid left/rightAdjointMate. These concern closed or rigid monoidal categories, not this derived self-square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "firstTraceExchange|first_trace_pretrace|first_scalar_trace",
+   "results": "No matching declaration. Read the native exchange, ringed Kunneth factorizations, TraceBaseChangeFirst, completed trace pullback, and second scalar trace modules. The ringed theorem gives the abstract route; TraceBaseChangeFirst has different twist endpoints and assumes its trace square. The second scalar theorem concerns p2, not the opposite mate for p1.",
+   "date": "2026-10-28",
+   "verdict": "Reuse existing interfaces; retain separate native first trace-free and scalar steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram",
+  "date": "2026-10-28",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity, the Kunneth factorization and scalar trace base-change calculation.",
+   "via": [
+    "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1FirstTracePretrace",
+  "file": "lean/Sheaf/Paper/RationalP1FirstTracePretrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.first_trace_pretrace",
+  "statement": "theorem first_trace_pretrace\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (d : Diagram (coefficient l c).X Y (line l c))\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y)\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)))\n    (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n    (t : d.R₁.R.obj\n      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n        (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) ⟶\n      unit (coefficient l c).X (ProjectiveLine Y)) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)) ≫\n      counitProjectionPart (coefficient l c).X Y (line l c (ProjectiveLine Y))\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq ≫\n      projectionMateMap (coefficient l c).X (ProjectiveLine Y ↘ Y) M\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n          (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n            (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (M ◁ firstTraceExchange (coefficient l c).X Y\n          (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n            (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)\n          (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n            (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) (secondLineComparison l c k p hpl Y)) ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        ((M ◁ firstNativeFunctional (coefficient l c).X Y (line l c) d\n          (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n        (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) t) ≫\n          (M ◁ (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom) ≫ (ρ_ M).hom) =\n    firstTerminalFunctional (coefficient l c).X Y (line l c) d M\n      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n        (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) t h₁",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
+ }
+}

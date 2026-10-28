@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-rational-p1-projection-scalar-evaluation",
+ "kind": "statement",
+ "title": "Scalar evaluation of the normalized right projection mate",
+ "statement": "Fix a prime l, coefficient option c, and Λ=(coefficient l c).X as in [def-sfb-diagonal-coefficient-category]. Let Y be a scheme, P its projective line, and q:P→Y. Write F=q* and R=Rq_* on the fixed derived module categories, λ for projectionMateMap of [def-sfb-tate-twisted-projection-comparison], and η:F(1_Y)→1_P for secondTraceUnitIso of [def-sfb-rational-p1-second-pretrace-data]. Choose M in D(Mod Λ_P), K,S,T in D(Mod Λ_Y), arrows A:S→T and B:T→RM tensor K, objects V,W in D(Mod Λ_P), and arrows b:FK→V, v:V→W, w:W→1_P, t:K→1_Y satisfying b v w = F(t) η. Then A B λ(M,K) R(M tensor b) R((M tensor v)(M tensor w)ρ_M) = A B (RM tensor t)ρ_RM. The two direct-image factors on the left remain separate. No trace, line, Reference, base-field or invertibility hypothesis is used.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-p1-second-pretrace-data",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-rational-tate-pullback-comparison"
+ ],
+ "source": {
+  "document": "WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal (Stacks Tag 0B56), and the current blueprint rational projective-line First identity",
+  "place": "rightAdjointProjectionMap_rightUnitality; evaluation of the q trace after the Kunneth factorization"
+ },
+ "proof": [
+  {
+   "text": "Tensor the assumed scalar square b ≫ v ≫ w = Fq.map t ≫ u with M, postcompose by its right unitor, and combine whiskerings. Functoriality transports this replacement through Rq. This is purely formal and uses no diagram or trace.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The normalization in projectionMate_existsUnique identifies the fixed projectionMateMap pointwise with the native counit mate. Reduce the fixed tensor bundle to the native tensor for this comparison.",
+   "uses": [
+    "def-sfb-tate-twisted-projection-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write λ_K for the right projection mate. Its naturality gives λ_K Rq_*(1_M tensor q*t) = (1_Rq_*M tensor t) λ_1. At the unit, transpose λ_1 followed by Rq_* of tensoring with the oplax unit and the right unitor through the derived adjunction. The transpose definition is the pullback tensor comparison followed by the counit. Oplax right-unitality, counit naturality and the adjunction triangle reduce this transpose to that of the right unitor of Rq_*M. Injectivity of the adjunction hom-equivalence gives λ_1 Rq_*(evaluation at the unit) = ρ_Rq_*M. Combine with the naturality equation and functoriality. This is also precisely the fully proved generic rightAdjointProjectionMap_rightUnitality calculation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The original derived oplax unit is leftDerivedUpperStarUnitIso.hom. The strong monoidal structure is made from its inverse as the lax unit; hence its inverse unit, cached as secondTraceUnitIso, is the same original map. Transfer along the pointwise projection normalization and the fixed tensor bundle. This yields the literal displayed equation, with no trace inserted.",
+   "uses": [
+    "def-sfb-rational-p1-second-pretrace-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use functoriality to write the scalar evaluation as the two prescribed direct-image factors and precompose both sides by A and B.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-p1-second-pretrace-data"
+ ],
+ "proof_origin": {
+  "by": "A3",
+  "document": "WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal (Stacks Tag 0B56), and the current blueprint rational projective-line First identity",
+  "place": "rightAdjointProjectionMap_rightUnitality; evaluation of the q trace after the Kunneth factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint projection formula evaluation tensor scalar map to monoidal unit right unitality",
+   "results": "Eight hits, including Functor.CoreMonoidal.right_unitality and Functor.LaxMonoidal.right_unitality. These give the generic monoidal laws, not the fixed normalized native projection evaluation.",
+   "date": "2026-10-28",
+   "verdict": "No literal normalized native-interface match; retain this strictly trace-free scalar evaluation step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection map naturality and right unitality counit monoidal adjunction",
+   "results": "Eight hits on adjunction monoidal units and counits, including Adjunction.map_ε_comp_counit_app_unit. None has the projectionMateMap and secondTraceUnitIso endpoints.",
+   "date": "2026-10-28",
+   "verdict": "No literal normalized native-interface match; retain this strictly trace-free scalar evaluation step."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMateMap.*(unit|eval)|scalar_evaluation|rightAdjointProjectionMap_rightUnitality",
+   "results": "No Mathlib hits. Local source reading found the fully proved generic rightAdjointProjectionMap_rightUnitality in the adopted library, and proved private scalar_evaluation in TraceBaseChangeFirst. Instantiating these still requires transport between the fixed and cached native tensor presentations; the isolated generic proof compiled, while this transport timed out or exposed instance mismatches.",
+   "date": "2026-10-28",
+   "verdict": "No literal normalized native-interface match; retain this strictly trace-free scalar evaluation step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstTraceTransportCounitExpandedForDiagram",
+  "date": "2026-10-28",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity: apply the projection formula, then evaluate the pulled scalar trace.",
+   "via": [
+    "lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ProjectionScalarEvaluation",
+  "file": "lean/Sheaf/Paper/RationalP1ProjectionScalarEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.projectionMate_scalar_evaluation",
+  "statement": "theorem projectionMate_scalar_evaluation\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (Y : Scheme.{u})\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (K : DerivedCategory (Modules (coefficient l c).X Y))\n    (S T : DerivedCategory (Modules (coefficient l c).X Y))\n    (A : S ⟶ T)\n    (B : T ⟶ (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M ⊗ K)\n    (V W : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (b : (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K ⟶ V)\n    (v : V ⟶ W) (w : W ⟶ 𝟙_ (DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y))))\n    (t : K ⟶ 𝟙_ (DerivedCategory (Modules (coefficient l c).X Y)))\n    (ht : b ≫ v ≫ w =\n      (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).map t ≫\n        (secondTraceUnitIso (coefficient l c).X Y).hom) :\n    A ≫ B ≫ projectionMateMap (coefficient l c).X (ProjectiveLine Y ↘ Y) M K ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (M ◁ b) ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        ((M ◁ v) ≫ (M ◁ w) ≫ (ρ_ M).hom) =\n      A ≫ B ≫ ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M ◁\n      t) ≫\n        (ρ_ ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b1d28",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261028T072334-L-1934575",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new split statements and firstTraceExchange def against their nodes, the Diagram structure (traceq unconstrained), Reference/Result trace normalization, projectionMateMap/secondTraceUnitIso pinning; caller adaptation against original"
+ }
+}
