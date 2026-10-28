@@ -2,14 +2,14 @@
  "id": "lem-trf-scalar-model-roos-zero-lift-factorization",
  "kind": "statement",
  "title": "Factorization of the normalized scalar Roos lift",
- "statement": "A scalar-extended strict Roos map satisfying the zero-shift and normalized quotient-coordinate identities satisfies the displayed factorization through the completed scalar counit.",
+ "statement": "theorem scalarModelRoosZeroLift_factorization\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)\n    (hf : ∀ i : ℤ, f.f i ≫\n      (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0)\n    (h : scalarModelRoosZeroLiftType l E L F ι j X SL P D)\n    (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)\n    (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :\n    scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 3.5.1 and Stacks 0941"
  },
  "proof": [
   {
-   "text": "Use the canonical factorized lift supplied by the existence step. The zero-shift and quotient-coordinate hypotheses identify it with the given lift by strict Roos uniqueness, and the factorization equation then rewrites the target.",
+   "text": "Apply factorization_exists to f and hf. The supplied lift and given lift have equal first coordinates on nested tensor generators and zero shifted coordinates; strict Roos uniqueness identifies their localizations. Substitute in the supplied factorization.",
    "uses": [
     "lem-trf-scalar-model-roos-zero-lift-factorization-existence",
     "lem-trf-scalar-model-roos-zero-lift-uniqueness"
@@ -18,14 +18,13 @@
   }
  ],
  "proof_deps": [
-  "def-trf-integral-comparison-realization-models",
   "lem-trf-scalar-model-roos-zero-lift-factorization-existence",
   "lem-trf-scalar-model-roos-zero-lift-uniqueness"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Expansion of scalar-model Roos lift factorization"
+  "place": "Proposition 3.5.1; Stacks Tags 06YY and 0941, whole-system scalar counit"
  },
  "mathlib_match": null,
  "status": "split",
@@ -39,11 +38,12 @@
   "branch": "sheaf-dag",
   "by": "U4",
   "date": "2026-10-28",
-  "statement": "theorem scalarModelRoosZeroLift_factorization\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)\n    (h : scalarModelRoosZeroLiftType l E L F ι j X SL P D)\n    (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)\n    (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :\n    scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h"
+  "statement": "theorem scalarModelRoosZeroLift_factorization\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)\n    (hf : ∀ i : ℤ, f.f i ≫\n      (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0)\n    (h : scalarModelRoosZeroLiftType l E L F ι j X SL P D)\n    (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)\n    (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :\n    scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h"
  },
  "stmt_deps": [
   "def-trf-integral-comparison-realization-models",
-  "lem-trf-scalar-model-roos-zero-lift-core"
+  "lem-trf-scalar-model-roos-zero-lift-core",
+  "def-sf-additive-roos-map"
  ],
  "mathlib_searches": [
   {
@@ -96,13 +96,45 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H7",
-  "result": "pass",
-  "landing": "20261027T234006-L-4158107",
+  "reviewer": "C-6a57a",
+  "group": "N2",
+  "result": "fix",
+  "landing": "20261028T055724-L-801094",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 3 adapted modules + new CounitNormalization module and 5 node JSONs against clone base, change record, 3b importer (ScalarModelRoosZeroLift OK) and DAG owners of statement names"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "N2 stage 2",
+  "old_statement": "A scalar-extended strict Roos map satisfying the zero-shift and normalized quotient-coordinate identities satisfies the displayed factorization through the completed scalar counit.",
+  "what": "Restore the source zero-shift hypothesis hf dropped by earlier splits. The coordinate predicate tests only the first product coordinate; an arbitrary source map can carry a nonzero shifted lim^1 class invisible to that predicate. The unchanged outer existence statement already supplies hf. No target or definition changes.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Proposition 3.5.1; Stacks Tags 06YY and 0941, whole-system scalar counit"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-scalar-model-roos-zero-lift-existence",
+    "holds": true,
+    "note": "The unchanged outer existence statement now uses the proved core and factorization_from_coordinates directly; the obsolete dependency on this wrapper is removed in the same delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use the canonical factorized lift supplied by the existence step. The zero-shift and quotient-coordinate hypotheses identify it with the given lift by strict Roos uniqueness, and the factorization equation then rewrites the target.",
+    "uses": [
+     "lem-trf-scalar-model-roos-zero-lift-factorization-existence",
+     "lem-trf-scalar-model-roos-zero-lift-uniqueness"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-trf-integral-comparison-realization-models",
+   "lem-trf-scalar-model-roos-zero-lift-factorization-existence",
+   "lem-trf-scalar-model-roos-zero-lift-uniqueness"
+  ]
  }
 }

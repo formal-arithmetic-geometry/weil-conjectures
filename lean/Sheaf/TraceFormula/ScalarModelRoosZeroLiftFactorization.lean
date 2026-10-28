@@ -62,10 +62,11 @@ zero-shift and quotient-coordinate identities are fixed.
 Source: Stacks 06YY, 0941; Bhatt--Scholze, Proposition 3.5.1.
 (blueprint: lem-trf-scalar-model-roos-zero-lift-factorization)
 
-Proof in words: apply the universal cochain counit to the normalized quotient
-coordinates. Naturality of the realization and Roos bridge identifies the two
-sides on tensor generators; the zero-shift equation removes the signed term,
-and the quotient universal property extends the equality to all sections. -/
+Proof in words: use factorization_exists with the source zero-shift hypothesis hf.
+The resulting lift g has the required coordinates and factorization. The given
+lift h and g agree on nested tensor generators by their coordinate predicates;
+strict Roos uniqueness identifies their localizations. Substitute this equality
+in the factorization for g. -/
 theorem scalarModelRoosZeroLift_factorization
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)
@@ -75,12 +76,16 @@ theorem scalarModelRoosZeroLift_factorization
     (D : CochainComplex (coefficientSequenceModules l L X) ℤ)
     (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos
       (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)
+    (hf : ∀ i : ℤ, f.f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+        (((coefficientSequenceRestriction l L X).mapHomologicalComplex
+          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0)
     (h : scalarModelRoosZeroLiftType l E L F ι j X SL P D)
     (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)
     (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :
     scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h := by
   obtain ⟨g, hg, hcoordg, hfactor⟩ :=
-    scalarModelRoosZeroLift_factorization_exists l E L F ι j X SL ρL ρF b P D f
+    scalarModelRoosZeroLift_factorization_exists l E L F ι j X SL ρL ρF b P D f hf
   have hcoord : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)
       (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
       (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)

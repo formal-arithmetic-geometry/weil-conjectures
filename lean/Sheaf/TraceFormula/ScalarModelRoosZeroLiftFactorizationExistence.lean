@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
-import Sheaf.TraceFormula.ScalarModelRoosZeroLiftStrictExistence
 import Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationFromCoordinates
 
 /-! # Existence of a factorized normalized scalar Roos lift -/
@@ -37,13 +36,10 @@ are normalized and whose localization is the displayed scalar-realization map.
 Source: Stacks 06YY, 0941; Bhatt--Scholze, Proposition 3.5.1.
 (blueprint: lem-trf-scalar-model-roos-zero-lift-factorization-existence)
 
-Proof in words: choose the simultaneous strict quotient presentation used by the
-scalar realization normalization, transpose the compatible quotient family, and
-apply the universal cochain counit.  The resulting strict map has zero shifted
-Roos coordinate, its unshifted coordinates are the quotient coordinates of `f`,
-and the normalization equation identifies its localization with the displayed
-scalar-realization composite.  Tensor balancing and sheafification extend the
-pure-generator calculation to all sections.
+Proof in words: apply the proved strict scalar lift core to f and its zero shifted
+coordinate hf. This supplies a lift h with zero shifted coordinate and the
+quotient-coordinate predicate. Apply factorization_from_coordinates with the
+same hf to obtain the displayed factorization.
 -/
 theorem scalarModelRoosZeroLift_factorization_exists
     (SL : CoefficientDerivedSystemCalculus l L X)
@@ -53,7 +49,11 @@ theorem scalarModelRoosZeroLift_factorization_exists
     (P : (integralOperationsGoodComplex l E X).FullSubcategory)
     (D : CochainComplex (coefficientSequenceModules l L X) ℤ)
     (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos
-      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor) :
+      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)
+    (hf : ∀ i : ℤ, f.f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+        (((coefficientSequenceRestriction l L X).mapHomologicalComplex
+          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0) :
     ∃ h : scalarModelRoosZeroLiftType l E L F ι j X SL P D,
       scalarModelRoosZeroLiftZero l E L F ι j X SL P D h ∧
       scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h ∧
@@ -71,10 +71,10 @@ theorem scalarModelRoosZeroLift_factorization_exists
         (integralComparisonRoosBridge l F X ρF _).hom =
       completedScalarCounit l L F j X
         ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫ DerivedCategory.Q.map h) := by
-  obtain ⟨h, hh, hcoord⟩ := scalarModelRoosZeroLift_strict_exists
-    l E L F ι j X SL ρL ρF b P D f
+  obtain ⟨h, hh, hcoord⟩ := scalarModelRoosZeroLift_core
+    l E L F ι j X SL ρL ρF b P D f hf
   refine ⟨h, hh, hcoord, ?_⟩
   exact scalarModelRoosZeroLift_factorization_from_coordinates
-    l E L F ι j X SL ρL ρF b P D f h hh hcoord
+    l E L F ι j X SL ρL ρF b P D f hf h hh hcoord
 
 end WeilConjectures

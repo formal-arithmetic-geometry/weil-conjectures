@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
 import Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
-import Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorization
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationFromCoordinates
 
 /-! # Existence of the normalized scalar Roos lift
 
@@ -46,11 +46,11 @@ variable (l : ℕ) [Fact l.Prime]
 Source: Stacks 06YY, 0941; Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1;
 steps 1--2 of `lem-trf-scalar-model-roos-zero-lift`.
 
-Proof in words: choose a simultaneous strict quotient presentation, resolve the target
- tower by a K-injective tower, and apply the constant-tower/limit adjunction. The
- resulting transpose has zero shifted coordinate and its unshifted coordinates are
- the quotient coordinates of `f`; the normalized realization and the Roos bridge give
- the displayed factorization. -/
+Proof in words: apply the proved strict core with the supplied source zero-shift
+hypothesis hf. It supplies a lift with zero shifted coordinate and the normalized
+quotient coordinates. Apply factorization_from_coordinates directly to this lift,
+using the same hf. No intermediate factorized-existence or uniqueness wrapper is
+needed. -/
 theorem scalarModelRoosZeroLift_existence
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)
@@ -122,7 +122,7 @@ theorem scalarModelRoosZeroLift_existence
   obtain ⟨h, hh, hcoord⟩ := scalarModelRoosZeroLift_core
     l E L F ι j X SL ρL ρF b P D f hf
   refine ⟨h, hh, hcoord, ?_⟩
-  exact scalarModelRoosZeroLift_factorization
-    l E L F ι j X SL ρL ρF b P D f h hh hcoord
+  exact scalarModelRoosZeroLift_factorization_from_coordinates
+    l E L F ι j X SL ρL ρF b P D f hf h hh hcoord
 
 end WeilConjectures

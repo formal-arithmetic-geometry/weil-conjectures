@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-scalar-model-roos-counit-normalization",
+ "kind": "statement",
+ "title": "Whole-system scalar counit in both Roos coordinates",
+ "statement": "theorem scalarModelRoos_counit_normalization\n    (l : ℕ) [Fact l.Prime]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (a :\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n        D).asFunctor ⋙ completedOrdinaryScalarComplex l L F j X ⟶\n      (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex\n          (.up ℤ)).obj D)).asFunctor)\n    (ha : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n      (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)\n      (x : (D.X i).val.obj (op (n, U.unop))),\n      ((a.app (op n)).f i).val.app U\n        (completedScalarTensorSection l L F j X\n          (((coefficientSequenceRestriction l L X).obj (D.X i)).obj (op n)) U s\n          (integralComparisonRestrictedSection l L X (D.X i) n U x)) =\n        integralComparisonRestrictedSection l F X\n          ((integralComparisonSequenceScalarModel l L F j X).E.obj (D.X i)) n U\n          (integralComparisonSequenceTensorSection l L F j X (D.X i)\n            (op (n, U.unop))\n            ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) x)) :\n    (completedDerivedScalarExtension l L F j X).map\n        (integralComparisonRoosBridge l L X ρL D).inv ≫\n      (completedScalarComparison l L F j X).app\n        ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫\n      b.realization.hom.app\n        ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l L F j X).map\n          (SL.adjunction.counit.app (DerivedCategory.Q.obj D))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSequenceScalarModel l L F j X).ε.app D) ≫\n      (integralComparisonRoosBridge l F X ρF _).hom =\n    completedScalarCounit l L F j X\n      (integralOperationsRoos\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n          D).asFunctor) ≫\n      DerivedCategory.Q.map\n        (scalarRoosMap (completedOrdinaryScalarExtension l L F j X)\n          (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n            D).asFunctor ≫ integralOperationsRoosMap a)",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1; Stacks Tags 06YY and 0941, whole-system scalar counit"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-sf-additive-roos-map",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Choose the ordinary and derived quotient models for the fixed calculus. A coherent good presentation is identified with this quotient model, and the scalar realization normalization gives its generator-normalized strict tensor comparison.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-coherent-quotient-model-comparison",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the whole-system counit by a simultaneous K-injective tower resolution. The normalized Roos bridge carries the compatible limit tuple into the first cocone summand with zero shifted coordinate. The adjunction transpose and cone counit realization retain the entire tower morphism.",
+   "uses": [
+    "lem-trf-roos-adjunction-transpose",
+    "lem-trf-integral-cone-counit-realization",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal ordinary scalar counit and the coefficient-action counit identify this map with scalarRoosMap followed by the Roos map of a, on both cocone summands. Tensor balancing and sheafification show that ha fixes the strict level maps. Naturality and good-complex localization descend the resulting equation to the derived limit of the arbitrary target D.",
+   "uses": [
+    "def-sf-additive-roos-map",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-trf-coherent-quotient-model-comparison",
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-roos-adjunction-transpose",
+  "lem-trf-integral-cone-counit-realization",
+  "def-sf-additive-roos-map",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1; Stacks Tags 06YY and 0941, whole-system scalar counit"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralComparisonReductionCounit_formula|scalarModelRoosZeroLift",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized whole-system scalar counit identity. Use the local scalar/Roos constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized whole-system scalar counit identity. Use the local scalar/Roos constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension and derived limit counit for mapping cocone with zero shifted coordinate",
+   "results": "8 hits: CategoryTheory.Functor.limitIsoOfIsRightKanExtension_hom_π, CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π, CategoryTheory.Functor.ranObjObjIsoLimit_hom_π, CategoryTheory.Functor.limitIsoOfIsRightKanExtension_hom_π_assoc, CategoryTheory.Functor.ranCompLimIso_hom_app, CategoryTheory.Functor.ranObjObjIsoLimit_inv_π, CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π_assoc, CategoryTheory.Functor.ranCompLimIso",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized whole-system scalar counit identity. Use the local scalar/Roos constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*Roos|Roos.*counit",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized whole-system scalar counit identity. Use the local scalar/Roos constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized scalar extension comparison commutes with the counit of a derived inverse limit of a tower of modules",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, LinearEquiv.extendScalarsOfIsLocalizationEquiv, IsAdicComplete.StrictMono.of_comp_lift, comonadicExtendScalars, AdicCompletion.instModuleOfIsScalarTower.congr_simp",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized whole-system scalar counit identity. Use the local scalar/Roos constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationFromCoordinates",
+  "date": "2026-10-28",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage coefficient transport: compatibility of normalized scalar realization with the whole-system adjunction counit before composing a compatible source family",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift-factorization-from-coordinates",
+    "lem-trf-scalar-model-roos-zero-lift-factorization-existence",
+    "lem-trf-scalar-model-roos-zero-lift-factorization",
+    "lem-trf-scalar-model-roos-zero-lift-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosCounitNormalization",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosCounitNormalization.lean",
+  "declaration": "WeilConjectures.scalarModelRoos_counit_normalization",
+  "statement": "theorem scalarModelRoos_counit_normalization\n    (l : ℕ) [Fact l.Prime]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (b : IntegralComparisonScalarModel l L F j X SL ρF)\n    (D : CochainComplex (coefficientSequenceModules l L X) ℤ)\n    (a :\n      (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n        D).asFunctor ⋙ completedOrdinaryScalarComplex l L F j X ⟶\n      (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex\n          (.up ℤ)).obj D)).asFunctor)\n    (ha : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n      (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)\n      (x : (D.X i).val.obj (op (n, U.unop))),\n      ((a.app (op n)).f i).val.app U\n        (completedScalarTensorSection l L F j X\n          (((coefficientSequenceRestriction l L X).obj (D.X i)).obj (op n)) U s\n          (integralComparisonRestrictedSection l L X (D.X i) n U x)) =\n        integralComparisonRestrictedSection l F X\n          ((integralComparisonSequenceScalarModel l L F j X).E.obj (D.X i)) n U\n          (integralComparisonSequenceTensorSection l L F j X (D.X i)\n            (op (n, U.unop))\n            ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) x)) :\n    (completedDerivedScalarExtension l L F j X).map\n        (integralComparisonRoosBridge l L X ρL D).inv ≫\n      (completedScalarComparison l L F j X).app\n        ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫\n      b.realization.hom.app\n        ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l L F j X).map\n          (SL.adjunction.counit.app (DerivedCategory.Q.obj D))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSequenceScalarModel l L F j X).ε.app D) ≫\n      (integralComparisonRoosBridge l F X ρF _).hom =\n    completedScalarCounit l L F j X\n      (integralOperationsRoos\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n          D).asFunctor) ≫\n      DerivedCategory.Q.map\n        (scalarRoosMap (completedOrdinaryScalarExtension l L F j X)\n          (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n            D).asFunctor ≫ integralOperationsRoosMap a)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-6a57a",
+  "group": "N2",
+  "result": "fix",
+  "landing": "20261028T055724-L-801094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-6a57a",
+  "group": "N2",
+  "result": "fix",
+  "landing": "20261028T055724-L-801094",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 adapted modules + new CounitNormalization module and 5 node JSONs against clone base, change record, 3b importer (ScalarModelRoosZeroLift OK) and DAG owners of statement names"
+ }
+}
