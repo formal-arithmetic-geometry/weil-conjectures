@@ -13302,6 +13302,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperPr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
