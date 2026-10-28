@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenProperClopenWitness
 
+import Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclicOpenRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclicBoundaryRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection
+
 /-!
 # Acyclicity from a clopen geometric witness
 
@@ -53,6 +57,15 @@ theorem isZero_higherDirectImage_open_injective_of_proper_of_witness
           ((DerivedCategory.singleFunctor
             (proEtaleRingModules B (proEtaleConstantRing B A)) 0).obj
             ((sfIntrinsicExtensionByZero k A).obj J)))) := by
-  sorry
+  intro q hq
+  apply proEtaleRingModule_isZero_of_open_closed i.closedComplement i
+    (by rw [i.range_closedComplement, compl_compl])
+    (proEtaleConstantRing D A) (proEtaleConstantRing _ A) (proEtaleConstantRing E A)
+    (proEtaleConstantRingComparison i.closedComplement A)
+    (proEtaleConstantRingComparison i A)
+  · exact isZero_openRestriction_higherDirectImage_open_injective_of_proper
+      A p r k i hcomm J q hq
+  · exact isZero_boundaryRestriction_higherDirectImage_open_injective_of_proper
+      A p r k i hcomm J w q hq
 
 end AlgebraicGeometry.Scheme
