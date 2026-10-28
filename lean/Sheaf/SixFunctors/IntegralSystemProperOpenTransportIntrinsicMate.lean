@@ -32,6 +32,6 @@ theorem integralSystemIntrinsicMate
         (scalarRings l E) (scalarTransitions l E) k r p i h))).natTrans.app M =
       (ProEtale.SemilinearProperOpen.gamma (scalarRings l E)
         (scalarTransitions l E) k r p i h).app M := by
-  sorry
+  rfl
 
 end WeilConjectures.IntegralSystemRealization
