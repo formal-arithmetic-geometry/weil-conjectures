@@ -28,11 +28,9 @@ import Sheaf.Paper.PodIntegralHomComparisonNaturality
 import Sheaf.Paper.PodIntegralHomComparisonEvaluation
 import Sheaf.Paper.PodIntegralHomComparisonTranspose
 import all Sheaf.AlgebraicGeometry.ProEtale.FiniteComparisonIsomorphism
-import all Sheaf.Paper.FiniteCoefficientHomChange
-import all Sheaf.Paper.CompletedPullbackTowerCore
-import Sheaf.Paper.IntegralComparisonSequenceSystems
 import Sheaf.Paper.PodRationalClosedExistence
 import Sheaf.Paper.PodRationalClosedUniqueness
+import Sheaf.Paper.PodSystemClosedCompatibility
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -142,6 +140,169 @@ Source: node proof step 14 (blueprint: lem-pod-derived-automorphism-hom-evaluati
 def podRationalClosed := (podRationalClosed_existsUnique l E W).exists.choose
 end RationalClosed
 
+section PartialCalculus
+variable {C : Type a} {D : Type c}
+  [Category.{b} C] [Category.{d} D] [Preadditive C] [Preadditive D]
+  {TC : C × C ⥤ C} {TD : D × D ⥤ D}
+  {J : ObjectProperty (Cᵒᵖ × C)} {K : ObjectProperty (Dᵒᵖ × D)}
+  {HC : J.FullSubcategory ⥤ C} {HD : K.FullSubcategory ⥤ D}
+  (SC : PodPartialClosed TC J HC) (SD : PodPartialClosed TD K HD)
+  (F : C ⥤ D) (h : ∀ P : J.FullSubcategory, K ((F.op.prod F).obj P.obj))
+  (μ : ∀ L M : C, F.obj (TC.obj (L, M)) ≅ TD.obj (F.obj L, F.obj M))
+
+-- Parameter naturality identifies inverse transposition with evaluation.
+private theorem partial_evaluation (P : J.FullSubcategory) :
+    (μ (HC.obj P) P.obj.1.unop).hom ≫
+      TD.map (Prod.mkHom (podPartialHomComparison SC SD F h μ P) (𝟙 _)) ≫
+        SD.evaluation ((podPairPullback F J K h).obj P) = F.map (SC.evaluation P) := by
+  have key (L : D) (Q : K.FullSubcategory) (f : L ⟶ HD.obj Q) :
+      TD.map (Prod.mkHom f (𝟙 _)) ≫ SD.evaluation Q = (SD.transpose L Q).symm f := by
+    apply (SD.transpose L Q).injective
+    rw [SD.parameter_naturality, PodPartialClosed.evaluation,
+      AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply, Category.comp_id]
+  erw [key]
+  rw [podPartialHomComparison, AddEquiv.symm_apply_apply, Iso.hom_inv_id_assoc]
+
+-- A natural tensor comparison preserves all transposes by the evaluation formula.
+private theorem partial_transpose
+    (hμ : ∀ (L L' M : C) (t : L' ⟶ L),
+      TD.map (Prod.mkHom (F.map t) (𝟙 _)) ≫ (μ L M).inv =
+        (μ L' M).inv ≫ F.map (TC.map (Prod.mkHom t (𝟙 _))))
+    (L : C) (P : J.FullSubcategory) (f : TC.obj (L, P.obj.1.unop) ⟶ P.obj.2) :
+    SD.transpose _ _ ((μ L P.obj.1.unop).inv ≫ F.map f) =
+      F.map (SC.transpose L P f) ≫ podPartialHomComparison SC SD F h μ P := by
+  set t := SC.transpose L P f
+  have hev : TC.map (Prod.mkHom t (𝟙 _)) ≫ SC.evaluation P = f := by
+    apply (SC.transpose L P).injective
+    rw [SC.parameter_naturality, PodPartialClosed.evaluation,
+      AddEquiv.apply_symm_apply, Category.comp_id]
+  rw [podPartialHomComparison]
+  erw [← SD.parameter_naturality]
+  congr 1
+  symm
+  erw [reassoc_of% (hμ _ _ _ t)]
+  erw [← F.map_comp, hev]
+  rfl
+end PartialCalculus
+
+section LocalizationHelpers
+open TensorProduct
+variable {R : Type*} [CommRing R] {A : Type*} [Category* A]
+  [Preadditive A] [Linear R A]
+
+private theorem localized_forward (p : R)
+    (L X M N : ScalarLocalization R A p) (X₀ M₀ : A)
+    (hX : X = ⟨X₀⟩) (hM : M = ⟨M₀⟩)
+    (e : (M ⟶ N) ≃+ (L ⟶ X))
+    (e₀ : (M₀ ⟶ N.obj) ≃+ (L.obj ⟶ X₀))
+    (hn : ∀ (a : Localization.Away p) (f : L.obj ⟶ X₀) (q : L ⟶ X),
+      HEq q (a ⊗ₜ[R] f) → HEq (e.symm q) (a ⊗ₜ[R] e₀.symm f))
+    (a : Localization.Away p) (f : M₀ ⟶ N.obj) (q : M ⟶ N)
+    (hq : HEq q (a ⊗ₜ[R] f)) : HEq (e q) (a ⊗ₜ[R] e₀ f) := by
+  cases hX
+  cases hM
+  cases hq
+  apply heq_of_eq
+  apply e.symm.injective
+  rw [AddEquiv.symm_apply_apply]
+  exact ((eq_of_heq (hn a (e₀ f) _ HEq.rfl)).trans
+    (congrArg (fun z ↦ a ⊗ₜ[R] z) (e₀.symm_apply_apply f))).symm
+
+private theorem iso_inv_heq {C : Type*} [Category* C] {X Y X' Y' : C}
+    (hX : X = X') (hY : Y = Y') (e : X ≅ Y) (e' : X' ≅ Y')
+    (h : HEq e.hom e'.hom) : HEq e.inv e'.inv := by
+  subst X' Y'
+  have : e = e' := Iso.ext (eq_of_heq h)
+  cases this
+  rfl
+
+private theorem localized_map_heq (p : R) {B : Type*} [Category* B]
+    [Preadditive B] [Linear R B] (F₀ : A ⥤ B)
+    (F : ScalarLocalization R A p ⥤ ScalarLocalization R B p)
+    (hm : ∀ (K L : A) (f : K ⟶ L) (a : Localization.Away p),
+      HEq (F.map (a ⊗ₜ[R] f : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))
+        (a ⊗ₜ[R] F₀.map f))
+    {K L : ScalarLocalization R A p} {K₀ L₀ : A}
+    (hK : K = ⟨K₀⟩) (hL : L = ⟨L₀⟩)
+    (f : K ⟶ L) (f₀ : K₀ ⟶ L₀)
+    (hf : HEq f ((ScalarLocalization.localization R A p).map f₀)) :
+    HEq (F.map f) ((ScalarLocalization.localization R B p).map (F₀.map f₀)) := by
+  subst K L
+  cases hf
+  exact hm K₀ L₀ f₀ 1
+
+private theorem localized_inverse_identity (p : R)
+    (M N H : ScalarLocalization R A p) (H₀ : A) (hH : H = ⟨H₀⟩)
+    (T : ScalarLocalization R A p × ScalarLocalization R A p ⥤ ScalarLocalization R A p)
+    (T₀ : A × A ⥤ A)
+    (e : ∀ L, (T.obj (L, M) ⟶ N) ≃+ (L ⟶ H))
+    (e₀ : ∀ L, (T₀.obj (L, M.obj) ⟶ N.obj) ≃+ (L ⟶ H₀))
+    (hn : ∀ L (f : L.obj ⟶ H₀) (a : Localization.Away p) (q : L ⟶ H),
+      HEq q (a ⊗ₜ[R] f) → HEq ((e L).symm q) (a ⊗ₜ[R] (e₀ L.obj).symm f)) :
+    HEq ((e H).symm (𝟙 H))
+      ((ScalarLocalization.localization R A p).map ((e₀ H₀).symm (𝟙 H₀))) := by
+  cases hH
+  exact hn _ (𝟙 _) 1 _ HEq.rfl
+
+end LocalizationHelpers
+
+section RationalNormalization
+open TensorProduct
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
+  [∀ w : W, Invertible (l : W.residueField w)]
+
+private theorem rationalEvaluation_localization
+    (P : (constructibleRationalHomPairs l E W).FullSubcategory) :
+    HEq ((podRationalClosed l E W).evaluation P)
+      ((sfRationalConstructibleLocalization l E W).map
+        ((podIntegralClosed l E W).evaluation (integralPairOfRationalHomPair l E W P))) := by
+  exact localized_inverse_identity (Padic.coefficientExtensionUniformizer l E)
+    P.obj.1.unop P.obj.2 ((rationalDerivedInternalHom l E W).obj P)
+    ((constructibleIntegralHom l E W).obj (integralPairOfRationalHomPair l E W P))
+    ((rationalDerivedInternalHom_existsUnique l E W).exists.choose_spec.1 P)
+    (rationalDerivedTensor l E W) (constructibleIntegralTensor l E W)
+    (fun L ↦ (podRationalClosed l E W).transpose L P)
+    (fun L ↦ (podIntegralClosed l E W).transpose L (integralPairOfRationalHomPair l E W P))
+    (fun L f a q hq ↦
+      (podRationalClosed_existsUnique l E W).exists.choose_spec L P f a q hq)
+
+private theorem rationalTranspose_localization
+    (L : sfRationalConstructibleCategory l E W)
+    (P : (constructibleRationalHomPairs l E W).FullSubcategory)
+    (f : (constructibleIntegralTensor l E W).obj (L.obj, P.obj.1.unop.obj) ⟶ P.obj.2.obj)
+    (a : Localization.Away (Padic.coefficientExtensionUniformizer l E))
+    (q : (rationalDerivedTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2)
+    (hq : HEq q (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f)) :
+    HEq ((podRationalClosed l E W).transpose L P q)
+      (a ⊗ₜ[Padic.coefficientExtensionIntegers l E]
+        (podIntegralClosed l E W).transpose L.obj (integralPairOfRationalHomPair l E W P) f) := by
+  exact localized_forward (Padic.coefficientExtensionUniformizer l E)
+    L ((rationalDerivedInternalHom l E W).obj P)
+    ((rationalDerivedTensor l E W).obj (L, P.obj.1.unop)) P.obj.2 _ _
+    ((rationalDerivedInternalHom_existsUnique l E W).exists.choose_spec.1 P)
+    ((rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 (L, P.obj.1.unop))
+    ((podRationalClosed l E W).transpose L P)
+    ((podIntegralClosed l E W).transpose L.obj (integralPairOfRationalHomPair l E W P))
+    (fun a f q hq ↦ (podRationalClosed_existsUnique l E W).exists.choose_spec L P f a q hq)
+    a f q hq
+
+private theorem rationalTranspose_localized
+    (L : sfRationalConstructibleCategory l E W)
+    (P : (constructibleRationalHomPairs l E W).FullSubcategory)
+    (L₀ : sfIntegralConstructibleCategory l E W)
+    (P₀ : (constructibleIntegralHomPairs l E W).FullSubcategory)
+    (hL : L.obj = L₀) (hP : integralPairOfRationalHomPair l E W P = P₀)
+    (f : (constructibleIntegralTensor l E W).obj (L₀, P₀.obj.1.unop) ⟶ P₀.obj.2)
+    (q : (rationalDerivedTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2)
+    (hq : HEq q ((sfRationalConstructibleLocalization l E W).map f)) :
+    HEq ((podRationalClosed l E W).transpose L P q)
+      ((sfRationalConstructibleLocalization l E W).map
+        ((podIntegralClosed l E W).transpose L₀ P₀ f)) := by
+  subst L₀ P₀
+  exact rationalTranspose_localization l E W L P f 1 q hq
+end RationalNormalization
+
 section RationalTransport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -167,6 +328,78 @@ def podRationalHomComparison :=
     (rationalDerivedPullback l E g) (podRationalPairs_pullback l E g)
       (canonicalRationalPullbackTensor l E g)
 
+-- Compare the actual transposes after normalizing the recorded operation objects.
+private theorem rationalComparison_localization
+    (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
+    HEq (podRationalHomComparison l E g P)
+      ((sfRationalConstructibleLocalization l E X).map
+        (podIntegralHomComparison l E g (integralPairOfRationalHomPair l E Y P))) := by
+  let F := rationalDerivedPullback l E g
+  let F₀ := constructibleIntegralPullback l E g
+  let QX := sfRationalConstructibleLocalization l E X
+  let P₀ := integralPairOfRationalHomPair l E Y P
+  let PX := (podPairPullback F _ _ (podRationalPairs_pullback l E g)).obj P
+  let PX₀ := (podPairPullback F₀ _ _ (podIntegralPairs_pullback l E g)).obj P₀
+  let H := (rationalDerivedInternalHom l E Y).obj P
+  let H₀ := (constructibleIntegralHom l E Y).obj P₀
+  have hF (K : sfRationalConstructibleCategory l E Y) :
+      F.obj K = QX.obj (F₀.obj K.obj) :=
+    (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.1 K
+  have hT (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+      (A B : sfRationalConstructibleCategory l E W) :
+      (rationalDerivedTensor l E W).obj (A, B) =
+        (sfRationalConstructibleLocalization l E W).obj
+          ((constructibleIntegralTensor l E W).obj (A.obj, B.obj)) :=
+    (rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 (A, B)
+  have hH : H = (sfRationalConstructibleLocalization l E Y).obj H₀ :=
+    (rationalDerivedInternalHom_existsUnique l E Y).exists.choose_spec.1 P
+  have hH₀ : H.obj = H₀ := by rw [hH]; rfl
+  have hp : integralPairOfRationalHomPair l E X PX = PX₀ := by
+    apply ObjectProperty.FullSubcategory.ext
+    change (op (F.obj P.obj.1.unop).obj, (F.obj P.obj.2).obj) = _
+    rw [hF, hF]
+    rfl
+  have hL : (F.obj H).obj = F₀.obj H₀ := by rw [hF, hH]; rfl
+  have hs : F.obj ((rationalDerivedTensor l E Y).obj (H, P.obj.1.unop)) =
+      QX.obj (F₀.obj ((constructibleIntegralTensor l E Y).obj (H₀, P₀.obj.1.unop))) := by
+    rw [hF, hT, hH]
+    rfl
+  have ht : (rationalDerivedTensor l E X).obj (F.obj H, F.obj P.obj.1.unop) =
+      QX.obj ((constructibleIntegralTensor l E X).obj
+        (F₀.obj H₀, F₀.obj P₀.obj.1.unop)) := by
+    rw [hT, hF, hF, hH]
+    rfl
+  have hn : F.obj P.obj.2 = QX.obj (F₀.obj P₀.obj.2) := hF _
+  let μ₀ := canonicalIntegralPullbackTensor l E g H₀ P₀.obj.1.unop
+  have hμ : HEq (canonicalRationalPullbackTensor l E g H P.obj.1.unop).hom
+      (QX.map μ₀.hom) := by
+    have hc : HEq (canonicalRationalPullbackTensor l E g H P.obj.1.unop).hom
+        (QX.map (canonicalIntegralPullbackTensor l E g H.obj P.obj.1.unop.obj).hom) :=
+      (canonicalRationalPullbackTensor_existsUnique l E g H P.obj.1.unop).exists.choose_spec
+    apply hc.trans
+    dsimp only [μ₀, P₀]
+    rw [hH₀]
+    rfl
+  have hμi := iso_inv_heq hs ht (canonicalRationalPullbackTensor l E g H P.obj.1.unop)
+    (QX.mapIso μ₀) hμ
+  have hev := rationalEvaluation_localization l E Y P
+  have hevm := localized_map_heq (Padic.coefficientExtensionUniformizer l E) F₀ F
+    (fun K L f a ↦
+      (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.2 K L f a)
+    (by
+      rw [hT]
+      change (sfRationalConstructibleLocalization l E Y).obj
+        ((constructibleIntegralTensor l E Y).obj (H.obj, P.obj.1.unop.obj)) = _
+      rw [hH₀]
+      rfl) rfl _ _ hev
+  have harg := heq_comp ht hs hn hμi hevm
+  exact rationalTranspose_localized l E X (F.obj H) PX (F₀.obj H₀) PX₀ hL hp
+    (μ₀.inv ≫ F₀.map ((podIntegralClosed l E Y).evaluation P₀)) _
+    (harg.trans (heq_of_eq (QX.map_comp _ _).symm))
+
+attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
+  rationalDerivedInternalHom constructibleIntegralPullback constructibleIntegralHom
+
 /-- Rational maps are the localized integral maps, and naturality holds for
 arbitrary localized Hom arrows, including sums of pure tensors.
 Source: node proof step 14.
@@ -183,7 +416,45 @@ theorem podRationalHomComparison_laws :
       HEq (podRationalHomComparison l E g P)
         ((sfRationalConstructibleLocalization l E X).map
           (podIntegralHomComparison l E g (integralPairOfRationalHomPair l E Y P))) := by
-  sorry
+  have hI := podIntegralHomComparison_laws l E g
+  let a (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
+      (constructibleIntegralPullback l E g).obj ((constructibleIntegralHom l E Y).obj P) ≅
+        (constructibleIntegralHom l E X).obj
+          ((PodCoefficientDescent.integralPair l E g).obj P) := by
+    have : IsIso (podIntegralHomComparison l E g P) := hI.isIso P
+    exact asIso (podIntegralHomComparison l E g P)
+  let α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
+      PodCoefficientDescent.integralPair l E g ⋙ constructibleIntegralHom l E X :=
+    NatIso.ofComponents a (by
+      intro P Q f
+      exact hI.naturality P Q f)
+  let β := (PodCoefficientDescent.rational_comparison_existsUnique l E g α).exists.choose
+  have hβ := (PodCoefficientDescent.rational_comparison_existsUnique l E g α).exists.choose_spec
+  have hα (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
+      α.hom.app P = podIntegralHomComparison l E g P := rfl
+  have he (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
+      podRationalHomComparison l E g P = β.hom.app P := by
+    have hb := (hβ P).1
+    rw [hα] at hb
+    exact eq_of_heq ((rationalComparison_localization l E g P).trans hb.symm)
+  refine ⟨⟨?_, ?_, ?_, ?_⟩, rationalComparison_localization l E g⟩
+  · intro P
+    change IsIso (podRationalHomComparison l E g P)
+    rw [he]
+    infer_instance
+  · intro P Q f
+    change _ ≫ podRationalHomComparison l E g Q = podRationalHomComparison l E g P ≫ _
+    rw [he, he]
+    exact β.hom.naturality f
+  · exact partial_evaluation _ _ _ _ _
+  · apply partial_transpose
+    obtain ⟨eR, heR⟩ :=
+      (derivedPullbackTensorIso l E g 0 (AlgebraicClosure ℚ_[l])).2.2.2.2.2.2.1
+    intro L L' M t
+    rw [← heR, ← heR, Iso.app_inv, Iso.app_inv]
+    have hn := eR.inv.naturality (Prod.mkHom t (𝟙 M))
+    simpa only [Functor.comp_map, Functor.prod_map,
+      (rationalDerivedPullback l E g).map_id] using hn
 end RationalTransport
 
 
@@ -250,6 +521,10 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
+attribute [local irreducible] commonStageHomPairs
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Isomorphism pullback preserves the permitted common-stage Hom pairs.
 Source: node proof steps 15--16.
 Proof: at the finite compositum use podRationalPairs_pullback, then the
@@ -262,14 +537,13 @@ theorem podCommonPairs_pullback
       (((commonStageDerivedPullback l Ω g).op.prod
         (commonStageDerivedPullback l Ω g)).obj P.obj) := by
   have h := PodCoefficientDescent.common_pair_permitted l Ω g P
-  have hobj := (commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1
+  have hobj (M : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :
+      (commonStageDerivedPullback l Ω g).obj M = commonStagePullbackObject l Ω g M :=
+    (commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1 M
   change commonStageHomPairs l Ω X
     (op ((commonStageDerivedPullback l Ω g).obj P.obj.1.unop),
       (commonStageDerivedPullback l Ω g).obj P.obj.2)
-  change commonStageHomPairs l Ω X
-    (op ((commonStageDerivedPullback_existsUnique l Ω g).exists.choose.obj P.obj.1.unop),
-      (commonStageDerivedPullback_existsUnique l Ω g).exists.choose.obj P.obj.2)
-  rw [hobj P.obj.1.unop, hobj P.obj.2]
+  rw [hobj, hobj]
   exact h
 
 /-- The common-stage comparison is the transpose of the prescribed common-stage
@@ -330,159 +604,7 @@ theorem podSystemHomComparison_laws :
     CoefficientEvaluationCompatible (pullbackTensorCalculus l E Y).systemClosed
       (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)
         (pullbackTensorSystemComparison l E g) := by
-  let SA := (pullbackTensorCalculus l E Y).systemClosed
-  let SB := (pullbackTensorCalculus l E X).systemClosed
-  let F := pullbackTensorSequenceDerived l E g
-  let μ := pullbackTensorSystemComparison l E g
-  change (∀ M N, IsIso (coefficientBaseChangeHom SA SB F μ M N)) ∧
-    CoefficientEvaluationCompatible SA SB F μ
-  have hF : F ≅ integralComparisonDerivedSequencePullback l E g := by
-    have heq : pullbackTensorSequenceInverse l E g =
-        integralComparisonSequencePullback l E g := by
-      unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
-      congr 1
-      unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
-      rw [pullbackTensorSequenceRing_eq]
-    exact Functor.mapDerivedCategoryNatIso (eqToIso heq)
-  have hH : (integralComparisonDerivedSequencePullback l E g).IsEquivalence := by
-    let H := integralComparisonDerivedSequencePullback l E g
-    let G := integralComparisonDerivedSequencePullback l E (inv g)
-    let a : H ⋙ G ≅ 𝟭 _ :=
-      (integralComparisonSystemComposition l E (inv g) g).symm ≪≫
-        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
-          (IsIso.inv_hom_id g)) ≪≫ integralComparisonSystemUnit l E Y
-    let b : G ⋙ H ≅ 𝟭 _ :=
-      (integralComparisonSystemComposition l E g (inv g)).symm ≪≫
-        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
-          (IsIso.hom_inv_id g)) ≪≫ integralComparisonSystemUnit l E X
-    exact (CategoryTheory.Equivalence.mk H G a.symm b).isEquivalence_functor
-  have : F.IsEquivalence := Functor.isEquivalence_of_iso hF.symm
-  refine ⟨?_, ?_⟩
-  · intro M N
-    have hL (L : coefficientSequenceDerived l E Y) : Function.Bijective
-        (fun x : F.obj L ⟶ F.obj ((coefficientSequenceInternalHom l E Y).obj (op M, N)) ↦
-          x ≫ coefficientBaseChangeHom SA SB F μ M N) := by
-      let e := (SA.transpose L M N).symm.trans
-        ((Functor.FullyFaithful.ofFullyFaithful F).homEquiv.trans
-          ((Iso.homCongr (μ.app (L, M)) (Iso.refl (F.obj N))).trans
-            (SB.transpose _ _ _)))
-      have he (x : L ⟶ (coefficientSequenceInternalHom l E Y).obj (op M, N)) :
-          e x = F.map x ≫ coefficientBaseChangeHom SA SB F μ M N := by
-        dsimp only [e, Equiv.trans_apply, Iso.homCongr, Equiv.coe_fn_mk,
-          Functor.FullyFaithful.homEquiv, Iso.refl_hom]
-        rw [Category.comp_id]
-        change SB.transpose _ _ _ (μ.inv.app (L, M) ≫
-          F.map ((SA.transpose L M N).symm x)) = _
-        simpa only [Equiv.apply_symm_apply] using
-          (finiteChange_transpose SA SB F μ L M N ((SA.transpose L M N).symm x)).symm
-      have hbij : Function.Bijective
-          (fun x : L ⟶ (coefficientSequenceInternalHom l E Y).obj (op M, N) ↦
-            F.map x ≫ coefficientBaseChangeHom SA SB F μ M N) := by
-        simpa only [← he] using e.bijective
-      constructor
-      · intro x y hxy
-        obtain ⟨x₀, rfl⟩ := F.map_surjective x
-        obtain ⟨y₀, rfl⟩ := F.map_surjective y
-        exact congrArg F.map (hbij.1 hxy)
-      · intro y
-        obtain ⟨x, hx⟩ := hbij.2 y
-        exact ⟨F.map x, hx⟩
-    apply isIso_of_yoneda_map_bijective
-    intro T
-    let e := F.objObjPreimageIso T
-    constructor
-    · intro x y hxy
-      apply (cancel_epi e.hom).mp
-      apply (hL (F.objPreimage T)).1
-      simpa only [Category.assoc] using congrArg (fun z ↦ e.hom ≫ z) hxy
-    · intro y
-      obtain ⟨x, hx⟩ := (hL (F.objPreimage T)).2 (e.hom ≫ y)
-      refine ⟨e.inv ≫ x, ?_⟩
-      change (e.inv ≫ x) ≫ coefficientBaseChangeHom SA SB F μ M N = y
-      change x ≫ coefficientBaseChangeHom SA SB F μ M N = e.hom ≫ y at hx
-      rw [Category.assoc, hx, Iso.inv_hom_id_assoc]
-  let := SA.monoidal
-  let := SB.monoidal
-  have hright {A B : coefficientSequenceDerived l E X} (f : A ⟶ B)
-      (P : coefficientSequenceDerived l E X) :
-      SB.tensor.map (Prod.mkHom f (𝟙 P)) = SB.monoidal.whiskerRight f P :=
-    @MonoidalCategory.tensorHom_id _ _ SB.monoidal A B f P
-  have hleft (P : coefficientSequenceDerived l E X)
-      {A B : coefficientSequenceDerived l E X} (f : A ⟶ B) :
-      SB.tensor.map (Prod.mkHom (𝟙 P) f) = SB.monoidal.whiskerLeft P f :=
-    @MonoidalCategory.id_tensorHom _ _ SB.monoidal P A B f
-  obtain ⟨ε, hε⟩ := pullbackTensorSystemComparison_unit l E g
-  let s : F.CoreMonoidal := Functor.CoreMonoidal.mk' ε.symm
-    (fun M N ↦ (μ.app (M, N)).symm)
-    (by
-      intro M N f P
-      have hn := μ.hom.naturality (Prod.mkHom f (𝟙 P))
-      dsimp only [Functor.comp_map, Functor.prod_map] at hn
-      rw [(pullbackTensorSequenceDerived l E g).map_id] at hn
-      rw [hright] at hn
-      simpa only [F, SA, SB, μ, CoefficientClosedStructure.tensor,
-        Iso.symm_inv, Iso.app_hom,
-        MonoidalCategory.tensor_map,
-        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
-        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using hn.symm)
-    (by
-      intro M N P f
-      have hn := μ.hom.naturality (Prod.mkHom (𝟙 P) f)
-      dsimp only [Functor.comp_map, Functor.prod_map] at hn
-      rw [(pullbackTensorSequenceDerived l E g).map_id] at hn
-      rw [hleft] at hn
-      simpa only [F, SA, SB, μ, CoefficientClosedStructure.tensor,
-        Iso.symm_inv, Iso.app_hom,
-        MonoidalCategory.tensor_map,
-        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
-        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using hn.symm)
-    (by
-      intro M N P
-      simpa only [Iso.symm_inv, Iso.app_hom, CoefficientClosedStructure.tensor,
-        Functor.comp_obj, Functor.prod_obj,
-        MonoidalCategory.tensor_obj, MonoidalCategory.tensor_map,
-        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
-        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using
-        (pullbackTensorSystemComparison_associativity l E g M N P).symm)
-    (by
-      intro M
-      have h := (hε M).1
-      rw [hright] at h
-      apply (cancel_epi (F.map (SA.monoidal.leftUnitor M).hom)).1
-      apply (cancel_mono (SB.monoidal.leftUnitor (F.obj M)).hom).1
-      simpa only [F, SA, SB, μ, Category.assoc,
-        ← (pullbackTensorSequenceDerived l E g).map_comp_assoc, Iso.hom_inv_id,
-        (pullbackTensorSequenceDerived l E g).map_id,
-        Iso.symm_inv, Iso.app_hom,
-        Category.id_comp, Iso.inv_hom_id, Category.comp_id,
-        CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
-        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
-        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using h.symm)
-    (by
-      intro M
-      have h := (hε M).2
-      rw [hleft] at h
-      apply (cancel_epi (F.map (SA.monoidal.rightUnitor M).hom)).1
-      apply (cancel_mono (SB.monoidal.rightUnitor (F.obj M)).hom).1
-      simpa only [F, SA, SB, μ, Category.assoc,
-        ← (pullbackTensorSequenceDerived l E g).map_comp_assoc, Iso.hom_inv_id,
-        (pullbackTensorSequenceDerived l E g).map_id,
-        Iso.symm_inv, Iso.app_hom,
-        Category.id_comp, Iso.inv_hom_id, Category.comp_id,
-        CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
-        @MonoidalCategory.tensorHom_id _ _ SA.monoidal,
-        @MonoidalCategory.tensorHom_id _ _ SB.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SA.monoidal,
-        @MonoidalCategory.id_tensorHom _ _ SB.monoidal] using h.symm)
-  exact finiteChange_compatible SA SB F μ ⟨s, fun _ _ ↦ rfl⟩
+  exact podSystemClosedCompatibility l E g
 end Systems
 
 

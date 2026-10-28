@@ -1,0 +1,133 @@
+{
+ "id": "lem-pod-system-closed-compatibility",
+ "kind": "statement",
+ "title": "Closed internal Hom compatibility under strict-system isomorphism reindexing",
+ "statement": "Fix a prime l, a finite extension E of Q_l with its specified coefficients [def-weil-l-adic-coefficient-extension], and an isomorphism g:X→Y of schemes [def-weil-scheme-morphism-properties]. Use the strict derived coefficient-system closed structures, pullback functor and tensor comparison of [def-pur-completed-pullback-tower-core] and [def-pur-completed-pullback-tensor-construction], with the evaluation-defined comparison and compatibility interface of [lem-coef-derived-system-evaluation-calculus]. For every pair of strict derived coefficient systems M,N, the evaluation-defined internal-Hom comparison is invertible. The specified pullback and tensor comparison satisfy CoefficientEvaluationCompatible: naturality, evaluation, every transpose and internal composition hold as system-map equations before evaluation or total-limit realization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5: compatibility of duality data with pullback by an automorphism; the strict derived-system enhancement of Stacks 0941 and the underived internal-Hom anchor 0GMX."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "The equality of the strict coefficient ring maps identifies ordinary sequence reindexing with integralComparisonSequencePullback. Derive this identification. The integral comparison identity and composition isomorphisms exhibit reindexing by the inverse scheme isomorphism as a quasi-inverse.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For image test objects, compose the inverse closed transpose, the fully faithful Hom equivalence, transport by the prescribed tensor comparison, and the target closed transpose. Parameter naturality identifies the resulting equivalence with postcomposition by the evaluation-defined internal-Hom comparison. Essential surjectivity extends bijectivity to every test object, so the Yoneda criterion proves invertibility.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor comparison naturality, associativity and unit equations give a core monoidal structure whose tensor isomorphisms are exactly the inverse prescribed comparisons. Apply the general closed-monoidal compatibility calculation to obtain naturality, evaluation, transposition and internal composition as actual system-map equations, before any finite evaluation.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-construction",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-trf-integral-comparison-sequence-systems",
+  "thm-coef-finite-hom",
+  "def-pur-completed-pullback-tensor-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5: compatibility of duality data with pullback by an automorphism; the strict derived-system enhancement of Stacks 0941 and the underived internal-Hom anchor 0GMX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(closedComparison|coefficientBaseChangeHom|isIso_of_yoneda_map_bijective)",
+   "results": "5 hits: Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean",
+   "date": "2026-10-28",
+   "verdict": "No complete project-specific statement match. Use the Yoneda isomorphism criterion and the already proved coefficient closed-monoidal calculation; Cartesian closed comparison results do not provide this strict coefficient-system statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal equivalence between closed categories preserves internal Hom and evaluation",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.instTransported, CategoryTheory.MonoidalClosed.curryHomEquiv', CategoryTheory.MonoidalClosed.closed, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.internalHom, CategoryTheory.cartesianClosedOfEquiv",
+   "date": "2026-10-28",
+   "verdict": "No complete project-specific statement match. Use the Yoneda isomorphism criterion and the already proved coefficient closed-monoidal calculation; Cartesian closed comparison results do not provide this strict coefficient-system statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isIso_of_yoneda_map_bijective",
+   "results": "1 hits: CategoryTheory.isIso_of_yoneda_map_bijective",
+   "date": "2026-10-28",
+   "verdict": "No complete project-specific statement match. Use the Yoneda isomorphism criterion and the already proved coefficient closed-monoidal calculation; Cartesian closed comparison results do not provide this strict coefficient-system statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence with an invertible tensor comparison preserves the evaluation defined internal Hom comparison",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.uncurry_expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv",
+   "date": "2026-10-28",
+   "verdict": "No complete project-specific statement match. Use the Yoneda isomorphism criterion and the already proved coefficient closed-monoidal calculation; Cartesian closed comparison results do not provide this strict coefficient-system statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5, strict-system enhancement of automorphism compatibility",
+   "via": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodSystemClosedCompatibility",
+  "file": "lean/Sheaf/Paper/PodSystemClosedCompatibility.lean",
+  "declaration": "WeilConjectures.podSystemClosedCompatibility",
+  "statement": "theorem podSystemClosedCompatibility :\n    (∀ M N, IsIso (coefficientBaseChangeHom\n      (pullbackTensorCalculus l E Y).systemClosed (pullbackTensorCalculus l E X).systemClosed\n      (pullbackTensorSequenceDerived l E g) (pullbackTensorSystemComparison l E g) M N)) ∧\n    CoefficientEvaluationCompatible (pullbackTensorCalculus l E Y).systemClosed\n      (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)\n        (pullbackTensorSystemComparison l E g)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T055651-L-793783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261028T055651-L-793783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
