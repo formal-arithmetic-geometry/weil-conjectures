@@ -13798,6 +13798,7 @@ public import WeilConjectures.TraceFormula.KunnethVerdierUnit
 public import WeilConjectures.TraceFormula.LefschetzVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.LocalTermPoint
 public import WeilConjectures.TraceFormula.LocalizationFrobenius
 public import WeilConjectures.TraceFormula.LowerShriekCoherence
 public import WeilConjectures.TraceFormula.Main
@@ -14056,6 +14057,7 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.StalkDualizable
+public import WeilConjectures.TraceFormula.StalkFrobeniusGraph
 public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.SupportedClass
 public import WeilConjectures.TraceFormula.SupportedClassNaturality
