@@ -17,28 +17,57 @@
  },
  "proof": [
   {
-   "text": "Construct the coefficient isomorphism level by level from the ringUnderlying and moduleUnderlying comparisons in the algebraic inverse image and the component maps of the ordinary inverse system. The ring addition, multiplication, zero and one equations make the maps linear and send constant integer sections to the corresponding integer sections. The transition equation of the ordinary inverse system assembles the level maps, and the Forget section formulas identify their values with the displayed pointwise equality.",
+   "text": "Every additive sheaf map between modules over the constant residue ring is linear by lem-pur-torsion-sheaf-constant-module, after restriction along purTwistFiniteRingIso. Use Forget.sections, restrictions, transitions and morphisms to transport an additive tower morphism to a presheaf morphism. The levelwise linearity makes its components module morphisms. Naturality is inherited from the additive tower map; Forget.morphisms proves that this is a lift. The same section formulas give faithfulness, so additive tower isomorphisms lift to module-system isomorphisms.",
    "uses": [
-    "lem-sp-tower-integral-abelian-comparison",
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-pur-twist-sheaves",
+    "lem-sp-tower-forget-evaluation",
     "def-sp-tower-class-systems"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n; the coefficient-unit comparison is checked on constant integer sections."
-   }
+   "elementary": "Explicit constructions, transport of equalities, and Mathlib naturality and sheafification universal properties."
+  },
+  {
+   "text": "Identify the forgotten coefficient system with the underlying additive ring tower using Forget.sections and the restriction and transition equations. Apply Mathlib constantCommuteCompose for the composite forgetting functor CommRingCat to RingCat to AddCommGrpCat. Naturality for each residue quotient identifies this with the tower of constant additive residue groups.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": "Explicit constructions, transport of equalities, and Mathlib naturality and sheafification universal properties."
+  },
+  {
+   "text": "The canonical inverse-image map of an additive constant sheaf is an isomorphism: identify it with the unique comparison between two left adjoints to sections over the terminal object. Naturality in additive coefficient homomorphisms assembles these maps into an isomorphism of the residue towers. Conjugate by the preceding coefficient identifications to obtain the canonical abelian coefficient comparison.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": "Explicit constructions, transport of equalities, and Mathlib naturality and sheafification universal properties."
+  },
+  {
+   "text": "The defining section formula of integerGenerator and constantCommuteCompose compatibility with toSheafify show that integerGenerator followed by the coefficient identification is constantSheaf.map of the integer quotient. Naturality of the canonical constant-sheaf comparison for this quotient gives the normalized integer equation. Use sheafify_hom_ext to extend the calculation on constant integer generators to all sections.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": "Explicit constructions, transport of equalities, and Mathlib naturality and sheafification universal properties."
+  },
+  {
+   "text": "Conjugate the canonical abelian coefficient comparison by the inverse of the given component of e. Lift this isomorphism through the fully faithful forgetting functor constructed in the first step. Its image is the conjugated comparison; composition with e cancels the inverse. Substitute the normalized integer equation and evaluate at n, U and x.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": "Explicit constructions, transport of equalities, and Mathlib naturality and sheafification universal properties."
   }
  ],
  "proof_deps": [
-  "lem-sp-tower-integral-abelian-comparison",
-  "def-sp-tower-class-systems"
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-pur-twist-sheaves",
+  "lem-sp-tower-forget-evaluation",
+  "def-sp-tower-class-systems",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "J8",
+  "group": "N1",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n; the coefficient-unit comparison is checked on constant integer sections."
+  "place": "Paragraph (2), integral coefficients; the explicit additive argument also uses Stacks 03CY and Mathlib constant-sheaf and adjunction universal properties."
  },
  "mathlib_searches": [
   {
@@ -102,12 +131,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J8",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261027T234027-L-4165582",
+  "landing": "20261028T020607-L-2527723",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
