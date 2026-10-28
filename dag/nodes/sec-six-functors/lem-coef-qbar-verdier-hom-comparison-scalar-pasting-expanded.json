@@ -1,0 +1,109 @@
+{
+ "id": "lem-coef-qbar-verdier-hom-comparison-scalar-pasting-expanded",
+ "kind": "lemma",
+ "title": "Expanded localComparison scalar pasting square",
+ "statement": "theorem component_extension_expanded\n    (B : Duality D l hl Ω X)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    (L : Index l Ω) (h : K.stage ≤ L)\n    (hs : RationalOperations.HomScalarCompatibility l\n      (Coefficient.{u} l Ω K.stage) X D hl (Coefficient.{u} l Ω L)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K.stage L h)\n      (B.finite.omega K.stage) (B.finite.omega L)\n      (B.finite.datum K.stage) (B.finite.datum L)\n      (B.finite.hom K.stage) (B.finite.hom L)) :\n    B.duality.dual.map ((stageSystem l Ω X).isoToStage K h).hom.op ≫\n        (localComparison l Ω X D hl B K.stage).hom.app (op K.obj) =\n      (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫\n        (homDual l Ω X B.omega (fun M ↦\n          allPairs l Ω X D hl B.finite M B.omega)).map\n          ((stageSystem l Ω X).isoToStage K h).hom.op",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient-transport paragraph; retained thm-coef-qbar-verdier proof step 5."
+ },
+ "stmt_deps": [
+  "def-coef-qbar-verdier-hom-comparison-components",
+  "def-sf-common-stage-verdier-data",
+  "lem-sf-rational-hom-scalar-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Expand the local comparison into the finite duality, scalar Hom evaluation, and omega transition factors; paste their transition equations and cancel the canonical comparison isomorphisms.",
+   "uses": [
+    "def-coef-qbar-verdier-hom-comparison-components",
+    "def-sf-common-stage-verdier-data",
+    "lem-sf-rational-hom-scalar-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-qbar-verdier-hom-comparison-components",
+  "def-sf-common-stage-verdier-data",
+  "lem-sf-rational-hom-scalar-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Retained thm-coef-qbar-verdier proof step 5, expanded finite-stage square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localComparison scalar pasting",
+   "results": "No duplicate declaration beyond the assigned component square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso component scalar comparison square",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite-stage internal Hom scalar transition square",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting",
+  "date": "2026-10-28",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Retained proof step 5: finite-stage scalar Hom pasting before descent.",
+   "via": [
+    "lem-coef-qbar-verdier-hom-comparison-scalar-pasting"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierHomComparisonScalarPasting.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.HomComparison.component_extension_expanded",
+  "statement": "theorem component_extension_expanded\n    (B : Duality D l hl Ω X)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    (L : Index l Ω) (h : K.stage ≤ L)\n    (hs : RationalOperations.HomScalarCompatibility l\n      (Coefficient.{u} l Ω K.stage) X D hl (Coefficient.{u} l Ω L)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K.stage L h)\n      (B.finite.omega K.stage) (B.finite.omega L)\n      (B.finite.datum K.stage) (B.finite.datum L)\n      (B.finite.hom K.stage) (B.finite.hom L)) :\n    B.duality.dual.map ((stageSystem l Ω X).isoToStage K h).hom.op ≫\n        (localComparison l Ω X D hl B K.stage).hom.app (op K.obj) =\n      (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫\n        (homDual l Ω X B.omega (fun M ↦\n          allPairs l Ω X D hl B.finite M B.omega)).map\n          ((stageSystem l Ω X).isoToStage K h).hom.op",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T035018-L-3580686",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T035018-L-3580686",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

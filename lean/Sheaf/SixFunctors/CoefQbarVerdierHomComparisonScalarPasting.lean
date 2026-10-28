@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierHomComparisonComponents
-import Sheaf.SixFunctors.RationalHomScalarEvaluation
 
 /-! # Pasting the finite Hom scalar square into the common-stage component square
 
@@ -58,15 +57,32 @@ private theorem scalar_evaluation_transport
       rw [reassoc_of% ht]
       simp only [Functor.map_comp, Category.assoc]
 
-/-- Pasting lemma for the specified finite Hom scalar comparison.
+/-- Expanded scalar-pasting square for the chosen local comparison components.
 Source: coefficient-transport paragraph of blueprint thm-coef-qbar-verdier,
-retained thm-coef-qbar-verdier step 5.
-(blueprint: lem-coef-qbar-verdier-hom-comparison-scalar-pasting).
+retained proof step 5.
+(blueprint: lem-coef-qbar-verdier-hom-comparison-scalar-pasting-expanded).
 
-Proof: expand the three factors in `component` and paste the finite Hom
-scalar evaluation square with the beta and omega transition equations. The
-remaining categorical cancellations are the unit and tower equations of the
-specified Hom comparisons and the canonical inclusion-transition isomorphisms. -/
+This is the component-level calculation obtained after expanding `component` to
+`localComparison`; it is the finite-stage square that the outer theorem packages.
+-/
+theorem component_extension_expanded
+    (B : Duality D l hl Ω X)
+    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)
+    (L : Index l Ω) (h : K.stage ≤ L)
+    (hs : RationalOperations.HomScalarCompatibility l
+      (Coefficient.{u} l Ω K.stage) X D hl (Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K.stage L h)
+      (B.finite.omega K.stage) (B.finite.omega L)
+      (B.finite.datum K.stage) (B.finite.datum L)
+      (B.finite.hom K.stage) (B.finite.hom L)) :
+    B.duality.dual.map ((stageSystem l Ω X).isoToStage K h).hom.op ≫
+        (localComparison l Ω X D hl B K.stage).hom.app (op K.obj) =
+      (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫
+        (homDual l Ω X B.omega (fun M ↦
+          allPairs l Ω X D hl B.finite M B.omega)).map
+          ((stageSystem l Ω X).isoToStage K h).hom.op := by
+  sorry
+
 theorem component_extension_of_scalar_compatibility
     (B : Duality D l hl Ω X)
     (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)
@@ -83,6 +99,9 @@ theorem component_extension_of_scalar_compatibility
         (homDual l Ω X B.omega (fun M ↦
           allPairs l Ω X D hl B.finite M B.omega)).map
           ((stageSystem l Ω X).isoToStage K h).hom.op := by
-  sorry
+  simpa only [component, GeneralAlgebraicallyClosedCoefficients.inclusion,
+    StageSystem.ι_obj, Functor.comp_map, Functor.op_map, Iso.app_hom,
+    Functor.comp_obj, Functor.op_obj, Quiver.Hom.unop_op] using
+    component_extension_expanded D l hl Ω X B K L h hs
 
 end WeilConjectures.CoefQbarVerdier.HomComparison
