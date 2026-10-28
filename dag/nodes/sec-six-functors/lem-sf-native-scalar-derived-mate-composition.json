@@ -1,0 +1,163 @@
+{
+ "id": "lem-sf-native-scalar-derived-mate-composition",
+ "kind": "lemma",
+ "title": "Composition of the canonical derived scalar mates",
+ "statement": "Let Λ, Γ, Δ be commutative condensed ring objects and b:Λ→Γ, c:Γ→Δ monoid homomorphisms [def-sfb-derived-push-hom]. Suppose that at every scheme the two scalar-extension functors preserve finite limits. Write a_b,T and a_c,T for the canonical derived extension/levelwise restriction adjunctions [def-sfb-derived-extend-levelwise-adjunction]. For any g:U→V and M in D(Mod(Λ_U)), the inverse mate under the composite adjunctions a_b,U.comp a_c,U and a_b,V.comp a_c,V of the horizontally pasted inverse restriction/direct-image squares [def-sfb-derived-comap-lower-star-iso] equals Lc_V.map((derivedPushHom b g).app M) followed by (derivedPushHom c g).app(Lb_U.obj M). No geometric scalar mate is assumed invertible. The canonical adjunction constructors and the component identity are the declarations recorded here. The restriction squares retain the published moduleObjectDerivedPushforward notation [sk-def-sfb-module-derived-pushpull]; these are exactly the usual total right derived lowerStar functors.",
+ "stmt_deps": [
+  "def-sfb-derived-extend-levelwise-adjunction",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-push-hom",
+  "def-sf-native-proper-scalar-mate-data",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties: composition of scalar-change direct-image mates; canonical derived extension/restriction adjunctions and Mathlib mateEquiv_hcomp."
+ },
+ "proof": [
+  {
+   "text": "Construct each adjunction by derivedExtendMapDerivedCategoryAdjunction; the ambient module tensor and resolution structures are those in NativeProperScalarMateData. Its canonical right adjoint is levelwise restriction. Compose the two adjunctions. Retain the published moduleObjectDerivedPushforward names in the restriction square before forming mates; these are exactly the usual right derived lowerStar functors, and do not change the construction.",
+   "uses": [
+    "def-sfb-derived-extend-levelwise-adjunction",
+    "def-sf-native-proper-scalar-mate-data",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the definitions of derivedPushHom and pushHomOfComapIso, each individual inverse mate of the inverse derivedComapLowerStarIso is exactly the specified derivedPushHom. The flatness assumptions supply these comparisons.",
+   "uses": [
+    "def-sfb-derived-push-hom",
+    "def-sfb-derived-comap-lower-star-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib mateEquiv_hcomp to the two individual inverse mates, apply the inverse equivalence to the resulting equality, and evaluate at M. Expand the component of vertical pasting using associator, whiskering and identity component formulas. Substitute the two individual identifications to obtain the displayed successive scalar-extension formula. This is proved entirely in Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-extend-levelwise-adjunction",
+  "def-sf-native-proper-scalar-mate-data",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-derived-push-hom",
+  "def-sfb-derived-comap-lower-star-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties: composition of scalar-change direct-image mates; canonical derived extension/restriction adjunctions and Mathlib mateEquiv_hcomp."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse mates of pasted restriction and derived direct image squares give the composite scalar extension mate for two flat condensed coefficient ring maps",
+   "results": "Eight ordinary scalar transitivity and condensed module naturality matches; none states the unbounded derived mate composition formula.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. The abstract pasting tool is mateEquiv_hcomp."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "One exact match for the abstract pasting identity in Mathlib.CategoryTheory.Adjunction.Mates. It is used in the proof, not a match for the whole concrete statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the abstract Mathlib identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|derivedPushHom|pushHomOfComapIso",
+   "results": "Seven Mathlib mate composition hits, including CategoryTheory/Adjunction/Mates.lean; the derivedPushHom definition is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project definition and Mathlib pasting identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeProperScalarMatePresentation",
+  "date": "2026-10-28",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Formal properties: composition of scalar-change direct-image mates; canonical derived extension/restriction adjunctions and Mathlib mateEquiv_hcomp. Inherited scalar-mate route as recorded by the parent.",
+   "via": [
+    "lem-sf-native-proper-scalar-mate-presentation",
+    "lem-sf-native-proper-scalar-mate-bounded-below-restricted",
+    "lem-sf-native-proper-scalar-mate-bounded-below",
+    "lem-sf-native-compact-support-scalar-mate-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeScalarMateComposition",
+  "file": "lean/Sheaf/Paper/NativeScalarMateComposition.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarDerivedCompositeMate",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarDerivedAdjunction",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarDerivedRestrictionSquare",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarDerivedCompositeAdjunction",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarDerivedCompositeMate"
+  ],
+  "statement": "theorem nativeScalarDerivedCompositeMate\n    {Λ Γ Δ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]\n    [MonObj Δ] [IsCommMonObj Δ]\n    (b : Λ ⟶ Γ) (c : Γ ⟶ Δ) [IsMonHom b] [IsMonHom c]\n    [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap b T))]\n    [∀ T : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap c T))]\n    {U V : Scheme.{u}} (g : U ⟶ V)\n    (M : DerivedCategory (Mod (Sheaf (ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj Λ U))) :\n    ((mateEquiv (nativeScalarDerivedCompositeAdjunction b c U)\n        (nativeScalarDerivedCompositeAdjunction b c V)).symm\n      ((nativeScalarDerivedRestrictionSquare c g).hComp\n        (nativeScalarDerivedRestrictionSquare b g))).natTrans.app M =\n      (Mod.extendScalars (coefficientMap c V)).leftDerivedFunctor.map\n          ((CondensedRing.derivedPushHom b g).app M) ≫\n        (CondensedRing.derivedPushHom c g).app\n          ((Mod.extendScalars (coefficientMap b U)).leftDerivedFunctor.obj M)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-scalar-derived-mate-composition",
+  "worker": "stage3",
+  "summary": "Extract the fully proved generic mate composition calculation after improving definitional conversion; this module adds no sorry. The ordinary ring diagram and derived restriction cube remain the only new unproved statements.",
+  "blueprint": "Formal properties: composition of scalar-change direct-image mates; canonical derived extension/restriction adjunctions and Mathlib mateEquiv_hcomp. Inherited scalar-mate route as recorded by the parent.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-derived-extend-levelwise-adjunction",
+    "why": "Canonical general adjunction or restriction comparison used to prove the composition formula; no bypass of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "def-sf-native-proper-scalar-mate-data",
+    "why": "Canonical general adjunction or restriction comparison used to prove the composition formula; no bypass of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "def-sfb-derived-push-hom",
+    "why": "Canonical general adjunction or restriction comparison used to prove the composition formula; no bypass of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "def-sfb-derived-comap-lower-star-iso",
+    "why": "Canonical general adjunction or restriction comparison used to prove the composition formula; no bypass of the inherited scalar-adjunction route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261028T055605-L-770902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261028T055605-L-770902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

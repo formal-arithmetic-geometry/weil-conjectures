@@ -1,0 +1,183 @@
+{
+ "id": "lem-sf-native-scalar-ring-model",
+ "kind": "lemma",
+ "title": "Natural ordinary ring diagram for completed and native coefficients",
+ "statement": "Fix a prime l, NativeRings l, a finite coefficient index E in PadicAlgCl l, and a Change a from the completed coefficient system of Coefficient E to nativeCoefficients l agreeing with every normalized integralMap [def-sf-locally-finite-adic-compact-support-data], [def-sf-locally-finite-adic-realization-data]. There exists a NativeScalarRingModel l E a: for every scheme T there are isomorphisms from the underlying RingCat-valued completed and native sheaves to the section rings of the pulled condensed integer ring of E and the pulled condensed algebraic closure. They carry a.map to the section-ring map of the composite integer-to-field-to-closure inclusion. For every g:U→V and every site object W, evaluation of both isomorphisms identifies the adjunct of each coefficient inverse-image isomorphism with the condensed precomposition map [lem-sfb-internal-module-operations-transport]. The exact pointwise naturality and scalar equations are the fields of NativeScalarRingModel. Its module equivalences are constructed by ringModuleEquivalenceOfIso followed by the inverse internal/section equivalence [def-weil-pbc-continuous-coefficient-module-encoding]; no derived categories or scalar mates occur in this conclusion.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-sfb-integers-to-subfield-point",
+  "def-sfb-qlbar-subextension-to-qlbar"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties: scalar adjunction mates, composition, and computation of restriction on underlying complexes; coefficient identifications in steps 1–3 of lem-sf-native-proper-scalar-mate-presentation. Also Bhatt–Scholze, Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized continuous integral coefficient comparison to the size model Coefficient E. Transport continuous functions through Shrink.algEquiv. The induced finite-dimensional algebra linear equivalence is bicontinuous over Q_l, and uniqueness of the extension of the absolute value identifies the integer subrings. The inverse-limit description of the pulled condensed integers and section reconstruction give the integral ring isomorphism. The finite quotient projection equations normalize it.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-coefficient-comparison",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the locally finite coefficient-ring realization and the internal-to-section equivalence to obtain the closure ring isomorphism in the opposite direction. Its IsMonHom equation preserves multiplication and one; therefore it is a ring-sheaf isomorphism, not merely an additive isomorphism.",
+   "uses": [
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain a normalized coefficient presentation using coefficientPresentations_exists. The integral finite-quotient normalization, localization normalization, and normalization on each finite-field leg identify their composite with the integralMap of any CoefficientPresentation. The hypothesis ha therefore gives the scalar equation with the composite of the two actual condensed inclusions.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sf-locally-finite-adic-coefficient-presentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjoints of the inverse-image ring maps. The chart naturality and native pull_normalized equations identify both with precomposition of continuous functions. Evaluation on each site object proves integral_natural and closure_natural. This verifies the ring diagram also for identity maps and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-integral-coefficient-comparison",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-locally-finite-adic-coefficient-presentations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties: scalar adjunction mates, composition, and computation of restriction on underlying complexes; coefficient identifications in steps 1–3 of lem-sf-native-proper-scalar-mate-presentation. Also Bhatt–Scholze, Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A completed l-adic coefficient sheaf is naturally isomorphic as a ring sheaf to the section ring of the condensed integer ring, compatible with coefficient inclusions and pullback",
+   "results": "Eight results: StructureSheaf.globalSectionsIso, AdicCompletion.ofAlgEquiv_apply and related general completion/sheafification constructions. None identifies the project’s completed/native coefficient systems.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the coefficient-ring diagram or its derived restriction cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural ring isomorphisms from completed l-adic sheaves and native locally finite coefficient sheaves to section rings of condensed coefficients, compatible with precomposition and scalar inclusion",
+   "results": "Eight results about CondensedMod.ofSheafProfinite and locally constant adjunctions. None identifies completed l-adic or locally finite native rings.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the coefficient-ring diagram or its derived restriction cube."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Rr]ing.*[Ii]so|continuousIntegral.*[Nn]atur|[Ss]ection.*[Cc]omap",
+   "results": "Twenty-five generic section Comap headings, no completion comparison. Also inspected the project’s ContinuousIntegralCoefficientComparison, ContinuousCoefficientRealizations, ProEtaleIntegralCoefficientLimit, and LocallyFiniteCoefficientRingRealization; these supply components, not their normalized ring diagram.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the coefficient-ring diagram or its derived restriction cube."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeProperScalarMatePresentation",
+  "date": "2026-10-28",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Formal properties: scalar adjunction mates, composition, and computation of restriction on underlying complexes; coefficient identifications in steps 1–3 of lem-sf-native-proper-scalar-mate-presentation. Also Bhatt–Scholze, Lemma 6.8.2 and Remark 6.8.15. Inherited anchor: cor-coef-verdier-weil-equivariance, common-field comparisons; blueprint_refs.py ancestor returns None for the module-named created.item chain.",
+   "via": [
+    "lem-sf-native-proper-scalar-mate-presentation",
+    "lem-sf-native-proper-scalar-mate-bounded-below-restricted",
+    "lem-sf-native-proper-scalar-mate-bounded-below",
+    "lem-sf-native-compact-support-scalar-mate-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeScalarRingModel",
+  "file": "lean/Sheaf/Paper/NativeScalarRingModel.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.exists_nativeScalarRingModel",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.nativeScalarSectionMap",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingNaturality",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingModel",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingModel.integralEquivalence",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingModel.closureEquivalence",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.exists_nativeScalarRingModel",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingModel.integralEquivalence_additive",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.NativeScalarRingModel.closureEquivalence_additive"
+  ],
+  "statement": "theorem exists_nativeScalarRingModel\n    (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]\n    (E : Index l (PadicAlgCl l))\n    (a : PurCompactSupport.Change (PurCompactSupport.completed l\n      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (ha : ∀ (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),\n      a.map T = C.integralMap l T) :\n    Nonempty (NativeScalarRingModel l E a)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-scalar-ring-model",
+  "worker": "stage3",
+  "summary": "Split off one genuine component of the assigned proof; no target statement or unit route is changed. The source paragraph is realized by ordinary coefficient diagrams followed by restriction/direct-image compatibility.",
+  "blueprint": "Formal properties: scalar adjunction mates, composition, and computation of restriction on underlying complexes; coefficient identifications in steps 1–3 of lem-sf-native-proper-scalar-mate-presentation. Also Bhatt–Scholze, Lemma 6.8.2 and Remark 6.8.15. Inherited anchor: cor-coef-verdier-weil-equivariance, common-field comparisons; blueprint_refs.py ancestor returns None for the module-named created.item chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-integral-coefficient-comparison",
+    "why": "Generic coefficient-realization, module-operation, or right-derived normalization tool for the ordinary ring diagram and restriction cube. It does not replace a step of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Generic coefficient-realization, module-operation, or right-derived normalization tool for the ordinary ring diagram and restriction cube. It does not replace a step of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic coefficient-realization, module-operation, or right-derived normalization tool for the ordinary ring diagram and restriction cube. It does not replace a step of the inherited scalar-adjunction route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic coefficient-realization, module-operation, or right-derived normalization tool for the ordinary ring diagram and restriction cube. It does not replace a step of the inherited scalar-adjunction route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261028T055605-L-770902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261028T055605-L-770902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
