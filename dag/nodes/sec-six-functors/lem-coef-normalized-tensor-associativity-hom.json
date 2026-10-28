@@ -1,0 +1,150 @@
+{
+ "id": "lem-coef-normalized-tensor-associativity-hom",
+ "kind": "statement",
+ "title": "Forward coherence of the fixed normalized tensor comparisons",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "With the same coefficient reduction data and tensor coherence and normalization hypotheses as lem-coef-normalized-tensor-associativity, the forward tensorator associativity equation holds for R.reductionTensor and every R.finiteTensor(n): F(a_S) followed by μ_{P,Q⊗V} and (1⊗μ_{Q,V}) equals μ_{P⊗Q,V} followed by (μ_{P,Q}⊗1) and a_T, for arbitrary derived inputs P,Q,V.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-normalized-reduction-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the forward strong-monoidal associativity equation underlying the inverse comparison equation."
+ },
+ "proof": [
+  {
+   "text": "Choose simultaneous flat-term K-flat representatives of three inputs and their total tensor products. Apply the representative normalization squares hR and hF and the associator_model fields supplied by hT.",
+   "uses": [
+    "lem-coef-normalized-reduction-models",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every triple pure-tensor summand both routes reassociate to the same scalar-reduced triple tensor with the same signed-total convention. Tensor generators and coproduct extensionality prove equality of the chain maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Localize the chain-map equality and cancel the specified representative isomorphisms. Naturality transports it from the chosen K-flat representatives to arbitrary derived inputs, including zero inputs and index zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-normalized-reduction-models",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; forward strong-monoidal coherence on normalized representatives."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedTensorAssociativity",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-tensor-associativity",
+   "place": "The forward equation is the categorical form whose inverse is the assigned target.",
+   "via": [
+    "lem-coef-normalized-internal-hom-fibers",
+    "lem-coef-normalized-reduction-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedTensorAssociativityHom",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedTensorAssociativityHom.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedTensorAssociativityHom",
+  "statement": "theorem coefficientNormalizedTensorAssociativityHom\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)\n    (hR : CoefficientReductionTensorNormalization l E W R)\n    (hF : CoefficientFiniteTensorNormalization l E W R) :\n    CoefficientTensorHomAssociativity R.integralClosed R.systemClosed R.reduction\n        R.reductionTensor ∧\n      ∀ n : ℕ, CoefficientTensorHomAssociativity R.integralClosed (R.finiteClosed n)\n        (coefficientFiniteDerivedExtension l E W n) (R.finiteTensor n)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.CoefficientTensorHomAssociativity",
+   "WeilConjectures.coefficientNormalizedTensorAssociativityHom"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse tensorator associativity strong monoidal functor",
+   "results": {
+    "n_hits": 1,
+    "top": [
+     "CategoryTheory.Functor.LaxMonoidal.associativity"
+    ],
+    "note": "Generic forward coherence is the standard LaxMonoidal associativity field; no fixed coefficient normalization theorem was found.",
+    "verdict": "No direct fixed-model theorem."
+   },
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.associativity",
+   "results": {
+    "n_hits": 1,
+    "top": [
+     "CategoryTheory.Functor.LaxMonoidal.associativity"
+    ],
+    "note": "Only the generic structure field matched.",
+    "verdict": "No direct fixed-model theorem."
+   },
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "associativity.*tensorator|tensor.*associativity",
+   "results": {
+    "n_hits": 1,
+    "top": [
+     "Sheaf/Algebra/Homology/RingedForgetTensorAssociatorRepresentatives.lean"
+    ],
+    "note": "The ringed representative theorem requires underived comparison data unavailable in this item.",
+    "verdict": "No direct fixed-model theorem."
+   },
+   "date": "2026-10-28"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T020205-L-2477708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T020205-L-2477708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
