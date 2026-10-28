@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-adic-realization-pullback-inclusions",
+ "kind": "statement",
+ "title": "Prescribed pullback on rational stage inclusions and integral localization",
+ "statement": "Fix a prime l, schemes X,Y with l invertible, any morphism g:X→Y and a finite coefficient field E in the fixed algebraic closure. Inclusion of the E-stage followed by the specified common-stage pullback equals the specified rational E-pullback followed by inclusion on X. Integral localization followed by rational pullback equals constructible integral pullback followed by integral localization. If g is an isomorphism, the prescribed completion-unit comparison restricts to a natural isomorphism on integral constructible inputs, with its specified inverse components.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Express common-stage pullback as the functor of its prescribed coherent stage morphism. Apply the inclusion-map formula of a stage-system morphism and functor extensionality, first in abstract categories to avoid expanding derived-category instances.",
+   "uses": [
+    "lem-pod-common-stage-pullback-normalized-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "The object formula of rationalDerivedPullback identifies the localized integral objects. Its pure-tensor map formula at scalar one identifies every localized integral morphism. Heterogeneous functor extensionality proves the second equality.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "For an isomorphism of schemes, restrict the completion-unit map to integral constructible objects. Its prescribed naturality and invertibility produce a natural isomorphism. Record the inverse-component equation as a small API lemma.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-derived-automorphism-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. The explicit Lean transport and assembly are by F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism descends through a localization from compatible natural isomorphisms on integral coefficient representatives",
+   "results": "8 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.Lifting.ofIsos, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.Lifting.ofIsos_iso, CategoryTheory.Localization.Lifting₂.iso', CategoryTheory.Localization.Lifting.iso'",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|natTrans.*[Cc]olimit",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/SmallHom.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Composition.lean, Mathlib/CategoryTheory/Localization/HomEquiv.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationComparisonDescent",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-stage comparison and scalar-square subarguments of lem-sf-adic-realization-comparison-descent",
+   "via": [
+    "lem-sf-adic-realization-comparison-descent",
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicRealizationPullbackInclusions",
+  "file": "lean/Sheaf/Paper/AdicRealizationPullbackInclusions.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.realizationPullback_inclusion_eq",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.realizationPullback_inclusion_eq",
+   "WeilConjectures.AdicQbarRealization.realizationPullback_localization_eq",
+   "WeilConjectures.AdicQbarRealization.realizationCompletionPullbackIso",
+   "WeilConjectures.AdicQbarRealization.realizationCompletionPullbackIso_inv_app"
+  ],
+  "statement": "theorem realizationPullback_inclusion_eq (l : ℕ) [Fact l.Prime]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] (E : Index l (PadicAlgCl l)) :\n    inclusion (l := l) (Ω := PadicAlgCl l) (Y := Y) E ⋙\n        commonStageDerivedPullback l (PadicAlgCl l) g =\n      rationalDerivedPullback l (Coefficient.{u} l (PadicAlgCl l) E) g ⋙\n        inclusion (l := l) (Ω := PadicAlgCl l) (Y := X) E",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-adic-realization-integral-reindex",
+ "kind": "statement",
+ "title": "Constructed integral realization reindexing comparison",
+ "statement": "Fix a prime l, an arbitrary scheme isomorphism g:X→Y with l invertible on both schemes, normalized native realizations R,S, RingReindex B, a finite coefficient field E and IntegralReindex I at E. The literal equalities of pullback with finite-stage inclusion and integral localization, followed by R.integral, inverse completion-unit comparison, inverse I.derived and inverse S.integral, construct a natural isomorphism from Q_E ⋙ inclusion_E ⋙ commonStageDerivedPullback(g) ⋙ ordinary(R) to Q_E ⋙ inclusion_E ⋙ ordinary(S) ⋙ derivedPull(B). Every factor is a specified map, not an arbitrary witness.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "The normalized common-stage pullback is the functor of its coherent stage morphism. The generic inclusion-map formula gives equality of its composite with a stage inclusion and the finite rational pullback followed by inclusion. The integral-object and pure-tensor equations of rationalDerivedPullback similarly prove equality before and after integral localization.",
+   "uses": [
+    "lem-sf-adic-realization-pullback-inclusions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "The natural and constructibly invertible map podCompletedToTower restricts to a natural isomorphism on integral constructible objects. Whisker its inverse by scalar extension, compose with inverse I.derived, and conjugate by R.integral and S.integral. Whiskering the two functor equalities supplies the literal object transports. For the component calculation use their object equalities; proof irrelevance identifies these with the separately prescribed localization object equations. Every factor is a natural isomorphism. Prove the literal component agreement using the abstract heterogeneous component formula and the equality-map transport lemma. Store that proof together with the constructed isomorphism in IntegralRealizationReindexData, keeping its large constructor irreducible and exposing the comparison by a small projection.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "def-sf-native-adic-reindexing-data",
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-realization-pullback-inclusions",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. The explicit Lean transport and assembly are by F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism descends through a localization from compatible natural isomorphisms on integral coefficient representatives",
+   "results": "8 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.Lifting.ofIsos, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.Lifting.ofIsos_iso, CategoryTheory.Localization.Lifting₂.iso', CategoryTheory.Localization.Lifting.iso'",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|natTrans.*[Cc]olimit",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/SmallHom.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Composition.lean, Mathlib/CategoryTheory/Localization/HomEquiv.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationComparisonDescent",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-stage comparison and scalar-square subarguments of lem-sf-adic-realization-comparison-descent",
+   "via": [
+    "lem-sf-adic-realization-comparison-descent",
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicRealizationIntegralReindex",
+  "file": "lean/Sheaf/Paper/AdicRealizationIntegralReindex.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.realizationIntegralReindexData",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.realizationReindexComposite",
+   "WeilConjectures.AdicQbarRealization.realizationReindexComposite_hom",
+   "WeilConjectures.AdicQbarRealization.realizationReindexComposite_core",
+   "WeilConjectures.AdicQbarRealization.realizationReindexComposite_normalized",
+   "WeilConjectures.AdicQbarRealization.IntegralRealizationReindexData",
+   "WeilConjectures.AdicQbarRealization.realizationIntegralReindexData",
+   "WeilConjectures.AdicQbarRealization.realizationIntegralReindex"
+  ],
+  "statement": "def realizationIntegralReindexData :\n    IntegralRealizationReindexData l g R S B E I",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

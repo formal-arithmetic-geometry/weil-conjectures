@@ -20808,3 +20808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:47 L: merged deliver/E9/Sheaf.Paper.AmbientTwistedUnitMate (stage 3; reviewer PASS; first push; landing 20261028T034738-L-3539653 (interface); batch 20261028T034643; modules 1; new nodes 0; change records: coord/changes/E9-ambient-twisted-unit-mate-node.md)
 - 03:47 L: merged deliver/F1/Sheaf.Paper.FiniteFreeScalarDerivedComparisonKFlat (stage 3; reviewer PASS; first push; landing 20261028T034739-L-3539791 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:47 L: merged deliver/F2/Sheaf.Paper.FiniteFreeScalarDerivedComparisonNativeTensor (stage 3; reviewer PASS; first push; landing 20261028T034740-L-3539914 (proof); batch 20261028T034643; modules 1; new nodes 0)
+- 03:47 L: merged deliver/F3/Sheaf.Paper.AdicRealizationComparisonDescent (stage 3; reviewer PASS; first push; landing 20261028T034741-L-3540126 (interface); batch 20261028T034643; modules 5; new nodes 4)

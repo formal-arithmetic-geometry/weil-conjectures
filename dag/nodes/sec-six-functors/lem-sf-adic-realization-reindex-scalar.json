@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-adic-realization-reindex-scalar",
+ "kind": "statement",
+ "title": "Scalar compatibility of the explicit integral reindexing composite",
+ "statement": "Fix a prime l, an arbitrary scheme isomorphism g:X→Y with l invertible on both schemes, native normalized realizations R,S, RingReindex B and IntegralReindex I(E) for every finite coefficient field. For E⊆L and integral constructible K at E, let P=(E,Q_E K) and t=isoToStage(P,E⊆L). The explicit comparison c_E constructed in [lem-sf-adic-realization-reindex-components] satisfies (commonStageDerivedPullback(g)⋙ordinary(R))(t) ≫ c_L(P.toStage) = c_E(K) ≫ (ordinary(S)⋙derivedPull(B))(t). Here c_L is its uniquely specified rational-stage extension. This only asserts the coefficient-enlargement square of already constructed components; it does not construct or assume any common-stage natural isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data",
+  "lem-sf-adic-realization-reindex-components"
+ ],
+ "proof": [
+  {
+   "text": "Expand the integral component formula at both coefficient fields and the common_field equations of R and S. Compute the common-stage pullback on isoToStage using its prescribed representative formula. This reduces the square to completion-unit scalar compatibility and the square of balanced scalar reindexing.",
+   "uses": [
+    "lem-sf-adic-realization-reindex-components",
+    "def-sf-adic-realization-isomorphism-data",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "Use the finite-free completion map and the specified scalar-extension comparison of inverse image. The completion-unit normalization identifies the entire-cone maps, including their zero shifted coordinates. On constructible inputs they are invertible; invert their scalar square and whisker by native scalar extension. The podCompletedToTower construction is the same inverse-image-of-unit followed by inverse limit/model identifications.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  },
+  {
+   "text": "The sections equations of I(E) and I(L) identify the remaining balanced maps on pure tensor generators: both multiply the same coefficient scalars and associate the tensor factors. The coefficient_scalar equations identify the structural maps. The representative equations transport this cochain equality through the actual derived computation counits. Raw localization preserves this equality and the component specification of the rational comparison supplies the displayed c_L.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "lem-sf-adic-realization-reindex-components",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-realization-reindex-components",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-sf-native-adic-reindexing-data",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14, pp. 61–62; Hemo–Richarz–Scholbach Lemma 7.9, p. 22. Explicit assembly of the corresponding finite-coefficient subargument. The explicit Lean transport and assembly are by F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The natural inverse image comparison on derived complete integral sheaves commutes with extension between finite p-adic coefficient fields",
+   "results": "8 hits: BDeRhamPlus, PadicInt.coe_adicCompletionIntegersEquiv_symm_apply, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply, IsAdicComplete.StrictMono.of_comp_lift, PadicInt.coe_adicCompletionIntegersEquiv_apply, IsAdicComplete.StrictMono.of_lift, Padic.adicCompletionEquiv, Rat.HeightOneSpectrum.adicCompletion.padicEquiv",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Ss]calar.*[Cc]omparison|scalar.*[Rr]eindex",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical operations are used in the proof; none states this native comparison or its prescribed scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationComparisonDescent",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-stage comparison and scalar-square subarguments of lem-sf-adic-realization-comparison-descent",
+   "via": [
+    "lem-sf-adic-realization-comparison-descent",
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicRealizationReindexScalar",
+  "file": "lean/Sheaf/Paper/AdicRealizationReindexScalar.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.realizationIntegralReindex_scalar",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.realizationIntegralReindex_scalar"
+  ],
+  "statement": "theorem realizationIntegralReindex_scalar (l : ℕ) [Fact l.Prime]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y)\n    (B : RingReindex l X g R S) (I : ∀ E, IntegralReindex l X g B E)\n    (E L : Index l (PadicAlgCl l)) (h : E ≤ L)\n    (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) Y) :\n    let P := (GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := Y) E).obj\n        ((sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) Y).obj K)\n    let t := (stageSystem l (PadicAlgCl l) Y).isoToStage P h\n    (commonStageDerivedPullback l (PadicAlgCl l) g ⋙ ordinary l X R).map t.hom ≫\n        (realizationRationalReindex l g R S B L (I L)).hom.app (P.toStage h) =\n      (realizationIntegralReindex l g R S B E (I E)).hom.app K ≫\n        (ordinary l Y S ⋙ derivedPull l X g B).map t.hom",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T034741-L-3540126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
