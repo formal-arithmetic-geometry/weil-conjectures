@@ -31,16 +31,31 @@
   "def-pur-strict-scalar-reduction-balancing",
   "def-weil-pbc-bounded-constructible-tower",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "def-pur-finite-compact-support-scalar-data"
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-completed-integral-scalar-data"
  ],
  "proof": [
   {
-   "text": "Unfold constantMap, rewrite composition of the underlying functor maps, and use extensionality of the composed algebra homomorphisms. The ramification equality follows from Ideal.map_map and Ideal.map_pow; the selection identity from e*(n+1)-1+1=e*(n+1) and subsingleton arrows; the associators are defined as leftAdjointUniq and localized whiskerings.",
-   "uses": [],
-   "elementary": true,
+   "text": "Unfold constantMap, rewrite composition of the underlying functor maps, and use extensionality of the composed algebra homomorphisms. The ramification equality follows from Ideal.map_map and Ideal.map_pow: if t O_F = v^e O_F and v O_L = w^h O_L then t O_L = (v O_L)^e = w^{he} O_L. The selection identity is for the ramification indices e,h >= 1 (for e = 0 it fails): with index_e(n) = e(n+1)-1 one has index_h(index_e(n)) = h(e(n+1)-1+1)-1 = he(n+1)-1 = index_{he}(n), using e(n+1) >= 1, and arrows agree because the order category of N has at most one arrow between two objects. The ordinary associator is by definition the left-adjoint-uniqueness isomorphism (leftAdjointUniq) of the composite of the two constant scalar adjunctions, transported along the identity-on-sections restriction compositor; the derived-base associator is its exact localization, and the whole-tower associator is its pointwise whiskering over the index category. The strict derived-tower associator (the exact localization of the whole-tower one) is the canonical composite-adjunction comparison leftAdjointCompIso by the cited tower-associator statement; this is a theorem, not a definition.",
+   "uses": [
+    "lem-pur-strict-scalar-tower-associator"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Auxiliary composition Step 1."
+   }
+  },
+  {
+   "text": "For the completed tensor associator, write c_{L/F}, c_{F/E}, c_{L/E} for the completed coefficient maps. By the defining uniqueness in the completed scalar data, c_{L/E} is the unique map with pi_{L,n} c_{L/E} = ((j i)_n)_Y pi_{E,n} for every n; and pi_{L,n} c_{L/F} c_{F/E} = (j_n)_Y pi_{F,n} c_{F/E} = (j_n)_Y (i_n)_Y pi_{E,n} = ((j i)_n)_Y pi_{E,n}, since the constant-sheaf functor preserves composition. Hence c_{L/F} c_{F/E} = c_{L/E}. The completed associator is, by definition, the left-adjoint-uniqueness isomorphism of the composite of the two derived completed scalar adjunctions with the adjunction for c_{L/E}, taken along this equality; that is the canonical composite-adjunction comparison the item asserts. The completed-scalar-associator localization statement, applied to the finite coefficient tower, moreover identifies this associator, followed by the completed exact model of the composite, with the successive exact-model comparisons followed by the localized ordinary scalar associator, so the same isomorphism is the one used in the strict and constant descriptions.",
+   "uses": [
+    "def-weil-completed-integral-scalar-data",
+    "lem-pur-completed-scalar-associator-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Auxiliary composition Step 1 and Step 9 (completed associator normalization)."
    }
   },
   {
@@ -57,27 +72,33 @@
    }
   },
   {
-   "text": "compositionOpen: apply ordinaryBaseOpenTensor_composition at each index of an ordinary strict tower, conclude by natural-transformation extensionality, and carry the equation through exact localization by the localized open-tensor composition helper of the same module.",
+   "text": "compositionOpen: apply ordinaryBaseOpenTensor_composition at each index of an ordinary strict tower. The strict-scalar-mate statement identifies openTensor with the exact localized ordinaryOpenTensor comparison, and the derived exact-square-composition lemma pastes the resulting natural-isomorphism square through the exact localization. Natural-transformation extensionality then gives the stated equation, including all quotient transitions.",
    "uses": [
-    "lem-pur-ordinary-open-scalar-composition"
+    "lem-pur-ordinary-open-scalar-composition",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pod-derived-exact-square-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Auxiliary composition Steps 1--4 (returned comparison Step 11)."
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), extension-by-zero tensor balancing; agent calculation of its composition through exact localization."
    }
   }
  ],
  "proof_deps": [
+  "def-weil-completed-integral-scalar-data",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-completed-scalar-associator-localization",
+  "lem-pur-ordinary-open-scalar-composition",
   "lem-pur-strict-proper-restriction-composition",
   "lem-pur-strict-scalar-tower-associator",
-  "lem-weil-pbc-mate-pasting",
-  "lem-pur-ordinary-open-scalar-composition"
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Auxiliary strict scalar composition calculations extracted to keep the item module within the compile limit."
+  "place": "Auxiliary strict scalar composition calculations reconstructed from the source module and the existing DAG statements."
  },
  "mathlib_searches": [
   {
@@ -156,10 +177,38 @@
    "results": "{\"t\": \"2026-10-22T06:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction Beck Chevalley mate of pasted coefficient change squares equals the composite mates and is compatible with inverse limit tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"3c2840b7f12c0f46\"}",
    "date": "2026-10-22",
    "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict scalar composition associators and proper open factor equations for finite coefficient field towers",
+   "results": "galLift_comp (Mathlib/RingTheory/IntegralClosure/IntegralRestrict); Mathlib.Tactic.Algebraize.addIsScalarTowerInstanceFromRingHomComp (Mathlib/Tactic/Algebraize); galRestrict'_comp (Mathlib/RingTheory/IntegralClosure/IntegralRestrict); Algebra.EssFiniteType.comp and related declarations. No declaration states the compact-support strict mate composition.",
+   "date": "2026-10-28",
+   "verdict": "no match: hits concern ring-hom composition or scalar towers, not the strict compact-support mate equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp, Algebra.TensorProduct, Ideal.ramificationIdxIn_mul_ramificationIdxIn",
+   "results": "0 hits; loogle reported unknown identifier 'Algebra.TensorProduct'.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|ramificationIdxIn_mul_ramificationIdxIn [CategoryTheory/Adjunction]",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:170 mateEquiv_vcomp; :209 mateEquiv_hcomp; :251-252 and :355 uses. These are abstract mate-pasting lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "generalization: abstract mate pasting is used by the cited proof but does not state this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict scalar composition associators and proper/open factor equations for finite coefficient field towers",
+   "results": "ModuleCat.extendScalars_assoc_assoc (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); Algebra.TensorProduct.assoc (Mathlib.RingTheory.TensorProduct.Maps); scalar-tower instances. No compact-support strict composition declaration.",
+   "date": "2026-10-28",
+   "verdict": "no match: only generic module/tensor associativity results."
   }
  ],
  "mathlib_match": null,
- "status": "finished",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
@@ -209,14 +258,12 @@
   ]
  },
  "reviewed": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-c5fcb",
-  "group": "Q4",
-  "result": "fix",
-  "landing": "20261027T234156-L-22538",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "reviewer": "NT-cc-ND-7ec5538cb",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-7ec5538cb (reviewer sub-agent of L); spot-checked: Re-delivery after the 712fdcd9 RETURN. Every point is repaired: C2 (step 1 now cites lem-pur-strict-scalar-tower-associator and is non-elementary), C4/C1 (step 2 derives c_{L/F}c_{F/E}=c_{L/E} from the uniqueness in def-weil-completed-integral-scalar-data, and completed-associator-localization moved from stmt_deps to proof_deps), E5/C1 (step 4 cites strict-scalar-mate for openTensor=localized ordinaryOpenTensor and lem-pod-derived-exact-square-composition, on the route via sk-lem-finite, for derived pasting), proof_origin is now agent, the unused tool_uses and the unit-record write are gone, and F2 is answered. I read every cited statement, the parent and CompactSupportStrictScalarCompositionPrelude.lean in full: steps 3 and 4 match proper_mate_tower_square (mate-pasting clauses 2 and 3) and localizedOpenTensor_composition. The statement is unchanged and true. Ramification he: tO_L=w^{he}O_L. Index arithmetic h(e(n+1)-1+1)-1=he(n+1)-1 needs e>=1; e,h are ramification indices, and the Lean has he/hh. E=F=L gives identities. No new nodes and no duplicates. completedMap_composition is owned only by an ancestor, so deriving it inside step 2 is correct. The FIX is text only: step 1 now names the whole-tower associator and the bound e,h>=1, step 2 separates the definitional leftAdjointUniq identification from the localization lemma, and step 4's source becomes sites-modules 0E8I. uses and proof_deps are unchanged. I accept no tool_uses; the stale node-level tool_uses field predates this delivery. Advisory: the DAG has a cycle that predates this delivery: def-weil-integral-rational-qbar-compact-support proof_deps -> lem-qcqs-compact-support-strict-reduction-comparison -> ... -> lem-pur-compact-support-integral-coefficient-comparison -> parent -> item. No edge this delivery adds is on it.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-27",
@@ -227,5 +274,12 @@
   "landing": "20261027T234156-L-22538",
   "kind": "interface",
   "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-compact-support-strict-scalar-composition-prelude",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Step 1 now cites the strict tower associator and is non-elementary. Step 2 cites the defining uniqueness of completed scalar maps and uses completed associator localization only as a proof lemma, not a statement dependency. Step 4 names the openTensor localization comparison and derived exact-square pasting. The stale generic tool declarations and unauthorized unit realization were removed; the statement remains unchanged.",
+  "blueprint": "thm-pur-rational-and-qbar-purity, imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; sk-thm-purity-transport Step 3; auxiliary strict scalar composition calculations preceding support realization (returned comparison Step 11)."
  }
 }
