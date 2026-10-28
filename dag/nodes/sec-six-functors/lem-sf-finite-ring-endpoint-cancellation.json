@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Apply finiteFixedPushIso_composition to r.hom and d.g. Insert the explicit finiteFixedRefinementOpenIso and cancel its inner inverse pairs by naturality. At the endpoints use finiteFixedEndpointModelAt to identify the remaining coordinates. Associate the fixed compositor at the object, postcompose with the inverse endpoint coordinate at d, and cancel its inverse pairs.",
+   "text": "Apply the proved categorical helper cancel_endpoint_coordinates. Naturality of the inverse proper compositor moves the source open coordinate; inverse cancellation removes the target open coordinate; naturality of the direct-image comparison moves the inverse fixed proper/open comparison. Supply finiteFixedPushIso_composition for r.hom and d.g, and finiteFixedEndpointModelAt at c and d. Postcompose by the inverse endpoint coordinate at d and cancel.",
    "uses": [
     "lem-sf-finite-ring-fixed-push-composition",
     "lem-sf-finite-ring-endpoint-pasting"
@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "Expand recordedRefinementCore and apply recordedCore_intrinsic, or unfold intrinsicRefinement using its original category instances. This identifies the remaining fixed word with the specified intrinsic refinement. The open-unit equation is not used.",
+   "text": "Unfold finiteFixedRefinementOpenIso and the public intrinsicRefinement definition. Use preservation of isomorphism composition and inverses by functors, normalize association and cancel double inverses. The remaining word is exactly intrinsicRefinement. No open-unit equation is used.",
    "uses": [
     "def-weil-frobenius-witnessed-compactification"
    ],
@@ -47,8 +47,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
-  "place": "Explicit finite presentation coordinate construction and the indicated component of the first two paragraphs.",
-  "group": "J1",
+  "place": "Existing endpoint and compositor declarations, combined by categorical naturality and inverse cancellation; final identification using the public intrinsicRefinement definition.",
+  "group": "Q1",
   "date": "2026-10-28"
  },
  "mathlib_match": null,
@@ -151,9 +151,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261028T055706-L-796124",
+  "landing": "20261028T081753-L-2781453",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
