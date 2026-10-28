@@ -1,0 +1,113 @@
+{
+ "id": "new-w5-finite-perfect-adic-coordinate-transition-coherence",
+ "kind": "statement",
+ "title": "Coherence of finite perfect adic coordinate transitions",
+ "statement": "Given the transition maps of [new-w5-finite-perfect-adic-coordinate-transition-maps] and actual realizations of [new-w5-finite-perfect-adic-coordinate-realizations], the scalar-realization maps satisfy the consecutive-tower equation through the canonical scalar coherence of [lem-weil-pbc-finite-perfect-adic-scalar-coherence].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 06YY, after transport through the comparisons of Tags 09AL and 09C6."
+ },
+ "stmt_deps": [
+  "new-w5-finite-perfect-adic-coordinate-transition-maps",
+  "new-w5-finite-perfect-adic-coordinate-realizations",
+  "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Pull the two coordinate comparisons to every chart and restriction, and apply the naturality equations of the canonical scalar compositor in [lem-weil-pbc-finite-perfect-adic-scalar-coherence].",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lifted square defining each dK_n identifies the transported composite with the strict restricted-tower transition. Cancellation by the comparison isomorphisms gives exactly the displayed equation.",
+   "uses": [
+    "new-w5-finite-perfect-adic-coordinate-transition-maps",
+    "new-w5-finite-perfect-adic-coordinate-realizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-perfect-adic-scalar-coherence",
+  "new-w5-finite-perfect-adic-coordinate-transition-maps",
+  "new-w5-finite-perfect-adic-coordinate-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 06YY, after transport through the comparisons of Tags 09AL and 09C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient derived comparison transition maps universal normalization",
+   "results": "No exact theorem found; the search returns only generic derived comparison and etale normalization APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StructuredArrow.IsUniversal etaleIsomorphismNormalizationArrow",
+   "results": "No theorem combines this structured-arrow universality with finite quotient coordinate descent.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdic_coordinate_transition|actual scalar realization coherence",
+   "results": "The repository contains only the parent statement and independent scalar-coherence declarations; no existing transition theorem matches.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicCoordinateTransitions",
+  "date": "2026-10-28",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-coordinate-transitions",
+   "place": "Finite-perfect coordinate transition argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicCoordinateTransitionCoherence",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicCoordinateTransitionCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_coordinate_transition_coherence",
+  "statement": "theorem finitePerfectAdic_coordinate_transition_coherence (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n) (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ) (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale) (K : ∀ n : ℕ, DerivedCategory (Sheaf V.left.smallEtaleTopology (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))))) (hKplus : ∀ n : ℕ, DerivedCategory.TStructure.t.plus (K n)) (e : ∀ n : ℕ, ((ProEtale.comparisonUpperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) V.left) |>.mapDerivedCategory).obj (K n) ≅ finitePerfectAdicQuotientCoordinates X d φ M V n) (dK : ∀ n : ℕ, K (n + 1) ⟶ (normalizationRestrict V.left.smallEtaleTopology (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).obj (K n)) (actual : ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ), (finitePerfectAdicScalarRealization X d V U W f n).obj ((localProEtaleComparison U.hom (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj (K n)) ≅ (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).obj (op n)) : ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ), (finitePerfectAdicScalarRealization X d V U W f (n + 1)).map (localProEtaleNormalization U.hom (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) (dK n)) ≫ (finitePerfectAdicScalarCoherence X d V U W f n).hom.app ((localProEtaleComparison U.hom (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj (K n)) ≫ (actual U W f n).hom = (actual U W f (n + 1)).hom ≫ (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).map (homOfLE (Nat.le_succ n)).op",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261028T020843-L-2554893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261028T020843-L-2554893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

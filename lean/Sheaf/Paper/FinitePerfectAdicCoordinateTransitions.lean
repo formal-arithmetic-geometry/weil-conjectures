@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicMarkedOrigin
 public import Sheaf.Paper.FinitePerfectAdicScalarCoherence
+import Sheaf.Paper.FinitePerfectAdicCoordinateTransitionMaps
+import Sheaf.Paper.FinitePerfectAdicCoordinateRealizations
+import Sheaf.Paper.FinitePerfectAdicCoordinateTransitionCoherence
 
 /-! # Descending the arrows of already descended finite quotients
 
@@ -96,7 +99,14 @@ theorem finitePerfectAdic_descend_coordinate_transitions
               (K n)) ≫
           (actual U W f n).hom =
         (actual U W f (n + 1)).hom ≫
-          (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).map
-            (homOfLE (Nat.le_succ n)).op) := by sorry
+      (finitePerfectAdicRestrictedTower X d W ((completedAdicReduction X d).obj M)).map
+            (homOfLE (Nat.le_succ n)).op) := by
+  obtain ⟨dK, huniversal⟩ := finitePerfectAdic_coordinate_transition_maps
+    X d φ hφ hcompat M V K hKplus e
+  obtain ⟨actual, _⟩ := finitePerfectAdic_coordinate_realizations
+    X d φ hφ hcompat M V K hKplus e
+  have hactual := finitePerfectAdic_coordinate_transition_coherence
+    X d φ hφ hcompat M V K hKplus e dK actual
+  exact ⟨dK, actual, huniversal, hactual⟩
 
 end AlgebraicGeometry.Scheme

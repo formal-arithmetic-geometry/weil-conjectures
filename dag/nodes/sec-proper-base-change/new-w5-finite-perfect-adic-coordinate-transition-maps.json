@@ -1,0 +1,115 @@
+{
+ "id": "new-w5-finite-perfect-adic-coordinate-transition-maps",
+ "kind": "statement",
+ "title": "Transition maps between finite perfect adic coordinates",
+ "statement": "With the marked finite quotient coordinates of [lem-weil-pbc-finite-perfect-adic-marked-origin], consecutive finite quotient coordinates admit coefficient-restricted maps dK_n. Every dK_n is universal after pullback to an etale source, in the structured-arrow sense used by [lem-weil-pbc-derived-scalar-extension-local-systems].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09C6, with the balancing input of Tag 06YY."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-finite-perfect-adic-marked-origin",
+  "lem-weil-pbc-finite-perfect-adic-scalar-coherence",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-derived-scalar-extension-local-systems",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate each consecutive quotient map by the supplied coordinate isomorphisms and the coefficient-interchange maps. The bounded-below Hom bijection in [lem-weil-pbc-fixed-module-derived-hom-bijection] gives the unique etale preimage dK_n.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use derived tensor balancing and the canonical tensor-pullback mate from [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The normalized transpose is invertible, and exact faithful inverse image reflects this to the required structured-arrow universality, with coefficient functoriality supplied by [lem-weil-pbc-derived-scalar-extension-local-systems].",
+   "uses": [
+    "lem-weil-pbc-derived-scalar-extension-local-systems",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-derived-scalar-extension-local-systems",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09C6, with the balancing input of Tag 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient derived comparison transition maps universal normalization",
+   "results": "No exact theorem found; the search returns only generic derived comparison and etale normalization APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StructuredArrow.IsUniversal etaleIsomorphismNormalizationArrow",
+   "results": "No theorem combines this structured-arrow universality with finite quotient coordinate descent.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdic_coordinate_transition|actual scalar realization coherence",
+   "results": "The repository contains only the parent statement and independent scalar-coherence declarations; no existing transition theorem matches.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicCoordinateTransitions",
+  "date": "2026-10-28",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-coordinate-transitions",
+   "place": "Finite-perfect coordinate transition argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicCoordinateTransitionMaps",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicCoordinateTransitionMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_coordinate_transition_maps",
+  "statement": "theorem finitePerfectAdic_coordinate_transition_maps (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n) (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ) (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale) (K : ∀ n : ℕ, DerivedCategory (Sheaf V.left.smallEtaleTopology (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))))) (hKplus : ∀ n : ℕ, DerivedCategory.TStructure.t.plus (K n)) (e : ∀ n : ℕ, ((ProEtale.comparisonUpperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) V.left) |>.mapDerivedCategory).obj (K n) ≅ finitePerfectAdicQuotientCoordinates X d φ M V n) : ∃ dK : ∀ n : ℕ, K (n + 1) ⟶ (normalizationRestrict V.left.smallEtaleTopology (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).obj (K n), ∀ (n : ℕ) (U : V.left.Etale), Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk (etaleIsomorphismNormalizationArrow V.left (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) (dK n) U)))",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261028T020843-L-2554893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261028T020843-L-2554893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
