@@ -6,6 +6,8 @@ Authors: SHEAF group G8
 module
 
 public import Sheaf.Paper.ScalarTowerTensorLimitStrictWitness
+import all Sheaf.Paper.IntegralOperationsWellDefined
+import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Representative and limit transport
 
@@ -35,6 +37,26 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 attribute [local irreducible]
   integralCompletedTensor scalarReduction tensorReduction
   integralComparisonDerivedSequenceScalar
+
+private theorem transport_all_bridges
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    (q : A ⥤ B) [q.EssSurj] {F G H : B ⥤ C}
+    (a : F ⟶ H) (b : G ⟶ H)
+    (h : ∀ P : A, ∀ β : F.obj (q.obj P) ⟶ G.obj (q.obj P),
+      β ≫ b.app (q.obj P) = a.app (q.obj P))
+    (X : B) (β : F.obj X ⟶ G.obj X) : β ≫ b.app X = a.app X := by
+  let e := q.objObjPreimageIso X
+  have he := h (q.objPreimage X) (F.map e.hom ≫ β ≫ G.map e.inv)
+  apply (cancel_epi (F.map e.hom)).1
+  calc
+    F.map e.hom ≫ (β ≫ b.app X) =
+        (F.map e.hom ≫ β ≫ G.map e.inv) ≫ b.app (q.obj (q.objPreimage X)) ≫
+          H.map e.hom := by
+      simp only [Category.assoc, b.naturality_assoc, ← H.map_comp,
+        e.inv_hom_id, H.map_id, Category.comp_id]
+    _ = a.app (q.obj (q.objPreimage X)) ≫ H.map e.hom := by
+      rw [← Category.assoc, he]
+    _ = F.map e.hom ≫ a.app X := (a.naturality e.hom).symm
 
 /--
 Localization, completion, and total-limit functoriality assemble the square
@@ -106,6 +128,42 @@ theorem scalarTowerTensorLimitSquare_of_representativeTransport
           ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map
             (tensorReduction l E W SE ρE TE M.obj N.obj) ≫
           α.hom.app (SE.reduction.obj M.obj, SE.reduction.obj N.obj)) := by
-  sorry
+  let q := integralOperationsGoodLocalization l E W
+  let V := (HomologicalComplex.quasiIso (integralTowerModules l E W) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E W).ι
+  let : q.IsLocalization V := integralOperationsGoodLocalization_isLocalization l E W
+  let : (q.prod q).EssSurj := Localization.essSurj (q.prod q) (V.prod V)
+  let δ : integralScalarExtensionOfUniverses l E L ι W ⋙ SL.reduction ⟶
+      SE.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι W :=
+    Functor.whiskerRight SY.realization.hom SL.reduction ≫
+      Functor.whiskerLeft (SE.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι W)
+        SL.adjunction.counit
+  let τ : integralCompletedTensor l E W ⋙ SE.reduction ⟶
+      SE.reduction.prod SE.reduction ⋙ SE.systemClosed.tensor :=
+    Functor.whiskerRight TE.realization.hom SE.reduction ≫
+      Functor.whiskerLeft (SE.reduction.prod SE.reduction ⋙ SE.systemClosed.tensor)
+        SE.adjunction.counit
+  let a := Functor.whiskerLeft (integralCompletedTensor l E W) SY.realization.hom ≫
+    Functor.whiskerRight
+      (Functor.whiskerRight τ (integralComparisonDerivedSequenceScalar l E L ι W) ≫
+        Functor.whiskerLeft (SE.reduction.prod SE.reduction) α.hom)
+      (coefficientSequenceLimit l L W)
+  let b := Functor.whiskerLeft
+      ((integralScalarExtensionOfUniverses l E L ι W).prod
+        (integralScalarExtensionOfUniverses l E L ι W)) TL.realization.hom ≫
+    Functor.whiskerRight
+      (Functor.whiskerRight (NatTrans.prod δ δ) SL.systemClosed.tensor)
+      (coefficientSequenceLimit l L W)
+  have h := transport_all_bridges (q.prod q) a b (by
+    intro P β
+    simpa only [a, b, δ, τ, q, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj, Functor.comp_obj,
+      scalarReduction, tensorReduction, integralScalarExtension,
+      integralScalarExtensionOfUniverses] using hRep P.1 P.2 β) (M.obj, N.obj)
+    (scalarTensorCompleted l E L ι W M.obj N.obj M.property.1 N.property.1 hT).hom
+  simpa only [a, b, δ, τ, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj, Functor.comp_obj,
+    scalarReduction, tensorReduction, integralScalarExtension,
+      integralScalarExtensionOfUniverses] using h
 
 end WeilConjectures.ScalarExtensionTower

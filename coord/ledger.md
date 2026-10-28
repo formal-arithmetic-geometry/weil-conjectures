@@ -20766,3 +20766,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: merged deliver/A4/Sheaf.Paper.RingEndpointScalarIdentityNormalization (stage 3; reviewer PASS; first push; landing 20261028T034648-L-3528694 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:46 L: merged deliver/A7/Sheaf.Paper.ScalarTowerTensorLimitRepresentativeTransport (stage 3; reviewer PASS; first push; landing 20261028T034649-L-3528853 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:46 L: merged deliver/A7/Sheaf.SixFunctors.FiniteIntrinsicTensorSymmetry (stage 3; reviewer PASS; first push; landing 20261028T034650-L-3529080 (interface); batch 20261028T034643; modules 3; new nodes 2)
+- 03:46 L: merged deliver/A8/Sheaf.Paper.ScalarTowerTensorLimitStrictEquationAssembly (stage 3; reviewer PASS; first push; landing 20261028T034652-L-3529322 (proof); batch 20261028T034643; modules 1; new nodes 0)
