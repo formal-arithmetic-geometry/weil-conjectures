@@ -1,38 +1,36 @@
 ## What changed
 
-Copied and compiled `Sheaf.SmoothPurity.TraceExistence`. Added an inline explanation of the
-existing `STATEMENT-DISPUTED` marker: for the identity smooth morphism in relative dimension
-zero, postcomposition by any automorphism of the coefficient unit is bijective on every Hom set,
-so the displayed predicate does not determine a unique trace.
+Added and compiled a private categorical lemma showing that postcomposition with an
+isomorphism is bijective on every hom-set. This makes the automorphism obstruction in the
+existing `STATEMENT-DISPUTED` diagnosis explicit while preserving the assigned theorem's
+signature and its proof hole.
 
 ## Proved and sorry left
 
-No sorry was closed. `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_smoothTrace` remains
-one sorry because its uniqueness conclusion is false as stated. No new sorries were added.
+The private lemma `postcomp_bijective_of_iso` is proved. No original sorry was closed:
+`AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_smoothTrace` remains one disputed
+sorry because the displayed uniqueness claim is false without a normalization. No new
+sorry was added.
 
 ## No longer needed
 
-Removed the two unavailable proof-only imports
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek` and
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition`. The statement and
-its current disputed `sorry` do not use either module; retaining them prevented the returned
-delivery from finding their source files on current main.
+None. The statement imports remain necessary for the public signature. No DAG dependency was
+pruned.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The DAG and source docstring ask for an `∃!` representing morphism while the predicate only says
-that postcomposition is bijective. Such a representing morphism is generally unique only after a
-normalization is fixed. For `f = 𝟙 X`, `d = 0`, and `M = U` the identity, every automorphism of the
-unit gives another map satisfying the same bijectivity condition. The source module already marks
-this as `STATEMENT-DISPUTED`; proving a weaker existence theorem here would silently change the
-contract and would not prove the assigned statement.
+The `∃!` clause cannot follow from bijectivity of postcomposition alone. If `e : B ≅ D`,
+postcomposition by `e.hom` is bijective, and the same phenomenon supplies distinct candidate
+traces after composing with automorphisms of the representing object. The identity smooth map
+in relative dimension zero gives the stated edge case. The target statement is preserved and
+remains marked `STATEMENT-DISPUTED`.
 
 ## Related modules compiled before delivery
 
-No related module: no existing module's interface changes, or nothing imports it.
+1 related module(s) compiled against this delivery by deliver3.py: 1 OK.
 
 ```json
-{"capped": false, "direct": 0, "left_out": 0, "own": {"Sheaf.SmoothPurity.TraceExistence": "5c590c5d281b893eb8d55912cb91460b99b0a178"}, "results": {}, "time": "2026-10-28T09:06:38+0800", "transitive": 0, "version": 1}
+{"capped": false, "direct": 1, "left_out": 0, "own": {"Sheaf.SmoothPurity.TraceExistence": "678120b12ce66314e984a9cde42495dc942809e0"}, "results": {"WeilConjectures.SmoothPurity.Defs": {"hash": "bf5789f90d911ab0a7e6484aa9e6fa239ca04954", "status": "OK"}}, "seconds": 111, "time": "2026-10-28T09:37:51+0800", "transitive": 0, "version": 1}
 ```
 
 ## Second reading by A4

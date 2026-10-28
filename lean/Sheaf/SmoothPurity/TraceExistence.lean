@@ -30,6 +30,17 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+private theorem postcomp_bijective_of_iso {C : Type*} [Category C]
+    {A B D : C} (e : B ≅ D) :
+    Function.Bijective (fun f : A ⟶ B => f ≫ e.hom) := by
+  constructor
+  · intro f g h
+    simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using
+      congrArg (fun q => q ≫ e.inv) h
+  · intro z
+    refine ⟨z ≫ e.inv, ?_⟩
+    simp
+
 /-- STATEMENT-DISPUTED: the representing morphism is not unique without a
 normalization that fixes the automorphism of the representing object.  For the
 identity smooth map of relative dimension zero, both the identity and any
