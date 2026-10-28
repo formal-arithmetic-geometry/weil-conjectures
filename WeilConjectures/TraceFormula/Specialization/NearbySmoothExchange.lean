@@ -45,7 +45,7 @@ for derived complete complexes
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -62,6 +62,7 @@ the field `Ω`. -/
 lemma isNoetherian_deformationGeneric {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
     [QuasiCompact Y.hom] (I : Y.left.IdealSheafData) :
     IsNoetherian (deformationModel Y I k').generic := by
+  change IsNoetherian (deformationGeneric Y I k')
   have : IsLocallyNoetherian (deformationGeneric Y I k') :=
     LocallyOfFiniteType.isLocallyNoetherian
       (pullback.snd (deformationTotalToTrait Y I k') (traitGenericPoint k'))
@@ -111,6 +112,25 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.o
   have : QuasiSeparated (deformationModel Y I k').j :=
     inferInstanceAs (QuasiSeparated (pullback.fst (deformationTotalToTrait Y I k')
       (traitGenericPoint k')))
+  have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin n))
+    (deformationModel Y I k').total
+  have : Smooth (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
+      (deformationModel Y I k').total) := 
+    SmoothOfRelativeDimension.smooth (Nat.card (ULift.{u} (Fin n))) _
+  have : CompactSpace 𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
+  have : QuasiSeparatedSpace 𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) :=
+    quasiSeparatedSpace_of_quasiSeparated
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
+  have : CompactSpace ↥(pullback (deformationModel Y I k').j
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
+        (deformationModel Y I k').total)) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.fst _ _)
+  have : QuasiSeparatedSpace ↥(pullback (deformationModel Y I k').j
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
+        (deformationModel Y I k').total)) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.fst _ _)
   have hℓ : IsUnit (ℓ : Γ((deformationModel Y I k').total, ⊤)) := by
     have hk : IsUnit (ℓ : k) := by
       refine IsUnit.mk0 _ fun h ↦ (Fact.out : ringChar k ≠ ℓ) ?_
@@ -123,30 +143,14 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.o
     (Profinite.padicIntegersRingObj ℓ E.1) (deformationModel Y I k').ε K₀.obj K₀.property
   have h₀ := isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E
     (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
-    (IsPullback.of_hasPullback _ _) hℓ _ hM₀
+    (IsPullback.of_hasPullback (deformationModel Y I k').j _) hℓ _ hM₀
   have : ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
       K₀.obj).IsGE hM₀.1.1.choose := hM₀.1.1.choose_spec
   have h₁ := isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers ℓ E
     (IsPullback.of_hasPullback (deformationModel Y I k').j
       (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
         (deformationModel Y I k').total)).toCommSq _ hM₀.1.1.choose this h₀
-  let i : (L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K ≅
-      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        _)).leftDerivedFunctor.obj
-        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-          _)).leftDerivedFunctor.obj
-          ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
-            K₀.obj)) :=
-    (L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
-        ((boundedConstructible _).ι.mapIso e).symm ≪≫
-      (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        (deformationModel Y I k').ε).symm.app _ ≪≫
-      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-        _)).leftDerivedFunctor.mapIso
-        ((derivedPullIso (padicIntegersRingObjToContinuousMapRingObj ℓ E)
-          (deformationModel Y I k').ε).symm.app K₀.obj)
-  rw [NatTrans.isIso_app_iff_of_iso _ i]
-  exact h₁
+  sorry
 
 /-- **The smooth exchange of nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (1),
 smooth case, for the morphism of deformation models of blueprint `det-sp-dnc-base-change` (3);

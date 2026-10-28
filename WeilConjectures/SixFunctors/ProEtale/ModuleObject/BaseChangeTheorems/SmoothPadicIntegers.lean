@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 
 /-!
 # Smooth base change with integral coefficients for quasi-compact quasi-separated pushforward
@@ -59,6 +60,43 @@ open Scheme PadicAlgCl
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
   {S W Y X : Scheme.{u}} {p : X ⟶ S} {g : W ⟶ S} {e : Y ⟶ W} {h : Y ⟶ X}
 
+omit [Fact ℓ.Prime] in
+/-- The base change map is invertible at `K` as soon as the exchange morphism of the pullback
+square comparison is. Stated for an abstract `Λ`: at a concrete coefficient ring, rewriting along
+`baseChangeMap_eq_exchangeRight` makes the unifier compare instances elaborated in different
+contexts. -/
+lemma isIso_baseChangeMap_app_of_isIso_exchangeRight
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq e h g p)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)))
+    (hK : IsIso ((Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction Λ g)
+      (derivedUpperStarLowerStarAdjunction Λ h) (pullbackSquareComparison Λ sq)).app K)) :
+    IsIso ((baseChangeMap Λ sq).app K) := by
+  rw [baseChangeMap_eq_exchangeRight]
+  exact hK
+
+variable (ℓ E p) in
+/-- For a cartesian square with `p` smooth, `g` quasi-compact and quasi-separated, `W` noetherian
+and `ℓ` invertible on `S`, the first derived reduction of the integral exchange morphism at a
+bounded constructible `K` is invertible: it is the base change map with coefficients `𝔽_E` at the
+first derived reduction of `K`, a bounded constructible complex of étale origin. -/
+lemma isIso_derivedReduction_map_exchangeRight_app_of_smooth [Smooth p] [QuasiCompact g]
+    [QuasiSeparated g] [IsNoetherian W] (sq : IsPullback e h g p) (hℓ : IsUnit (ℓ : Γ(S, ⊤)))
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W) K) :
+    IsIso ((derivedReduction X ℓ E).map ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) g)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) h)
+      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq)).app K)) := by
+  have : K.IsGE hK.1.1.choose := hK.1.1.choose_spec
+  have α := (nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E sq.toCommSq K
+    hK.1.1.choose).some
+  have hfin := ProEtale.isIso_derivedBaseChangeMap_app_of_smooth _ p sq ℓ
+    (Fact.out : ℓ.Prime).ne_zero (ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E) hℓ _
+    (ProEtale.boundedConstructible_derivedReduction_obj W ℓ E K hK)
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff α).2 hfin
+
 variable (ℓ E p) in
 /-- **Integral smooth base change for quasi-compact quasi-separated pushforward.** For a
 cartesian square `e ≫ g = h ≫ p` of quasi-compact quasi-separated schemes with `p` smooth, `g`
@@ -78,14 +116,24 @@ theorem isIso_baseChangeMap_app_padicIntegers_of_smooth [Smooth p] [QuasiCompact
     (derivedCompleteIntegers_rightDerivedLowerStar_obj g hK₀)
   have htgt := derivedCompleteIntegers_rightDerivedLowerStar_obj h
     (derivedCompleteIntegers_leftDerivedUpperStar_obj e hK₀)
-  refine isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map _ hsrc htgt ?_
-  have : K.IsGE hK.1.1.choose := hK.1.1.choose_spec
-  obtain ⟨α⟩ := nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E sq.toCommSq K
-    hK.1.1.choose
-  rw [← baseChangeMap_eq_exchangeRight] at α
-  refine ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff α).2 ?_
-  exact ProEtale.isIso_derivedBaseChangeMap_app_of_smooth _ p sq ℓ
-    (Fact.out : ℓ.Prime).ne_zero (ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E) hℓ _
-    (ProEtale.boundedConstructible_derivedReduction_obj W ℓ E K hK)
+  have r₁ := isIso_derivedReduction_map_exchangeRight_app_of_smooth ℓ E p sq hℓ K hK
+  have hsrc' : derivedCompleteIntegers ℓ E X ((R((g)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙
+      L((p)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) := by
+    rw [Functor.comp_obj]; exact hsrc
+  have htgt' : derivedCompleteIntegers ℓ E X ((L((e)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) ⋙
+      R((h)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) := by
+    rw [Functor.comp_obj]; exact htgt
+  have r₃ : IsIso ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) g)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) h)
+      (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq)).app K) :=
+    isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map _ hsrc' htgt' r₁
+  have t := isIso_baseChangeMap_app_of_isIso_exchangeRight
+    (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq K
+  -- the two statements carry different proofs of `Precoherent Profinite`
+  revert r₃ t
+  normalize_precoherent
+  intro r₃ t
+  exact t r₃
 
 end AlgebraicGeometry.ProEtale.CondensedRing
