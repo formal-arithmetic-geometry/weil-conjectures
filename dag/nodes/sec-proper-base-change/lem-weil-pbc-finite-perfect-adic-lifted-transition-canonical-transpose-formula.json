@@ -13,7 +13,32 @@
  },
  "proof": [
   {
-   "text": "Construct the comparison isomorphism between the canonical left adjoint on the lifted coefficient category and the lifted supplied step extension by transporting the scalar-restriction comparison through exact localization. Expand finitePerfectAdicLiftedTransition, apply the defining hom-equivalence unit identity for the comparison, and use naturality to identify the canonical mate with the comparison followed by the image of the supplied mate.",
+   "text": "For a homomorphism q:B→D, define the comparison from the canonical lifted scalar extension of the coefficient lift of P to the coefficient lift of the canonical small scalar extension of P as the transpose of the lifted small adjunction unit followed by finitePerfectAdicAlgebraLiftRestrict.inv. Its naturality follows by applying the large Hom equivalence, then using naturality of the small unit and the exact restriction comparison.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-constant-normalization",
+    "def-sfb-module-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a cochain representative, postcompose this mate with the lifted small scalar-extension representative and its exact localization factor. Applying the large Hom equivalence and the exact-square factorization identity reduces the resulting square to the ordinary unit identity for the inverse lifted tensor comparison. Degreewise this identity sends up(m) to up(1 tensor m) on both sides, so follows by extensionality and reflexivity. The ordinary tensor comparison is the existing natural ULift tensor equivalence.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "lem-weil-pbc-finite-perfect-adic-constant-scalar-extension",
+    "def-sfb-module-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a small K-flat resolution that remains K-flat after coefficient-universe lift. The small and large canonical representative maps are then isomorphisms. The cochain comparison square expresses the mate followed by isomorphisms as an isomorphism, so the mate itself is invertible at this resolution. Its naturality transports invertibility along the resolution augmentation and the canonical representative isomorphism to every small derived object. No boundedness or perfectness hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-coefficient-lift-kflat-resolution",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At T.level(n+1), compose the resulting mate isomorphism with the coefficient lift of leftAdjointUniq from the canonical small scalar extension to T.stepExtension(n). Apply the canonical large Hom equivalence to the required formula. Naturality of the restriction comparison moves the lifted supplied transpose to the small side; the unit equation for leftAdjointUniq changes the canonical unit into T.stepAdjunction(n).unit. The small Hom-equivalence inverse identity then gives exactly T.transition(n), which is the defining lifted transition.",
    "uses": [
     "def-weil-pbc-finite-perfect-adic-tower-data",
     "def-weil-pbc-finite-perfect-adic-constant-normalization"
@@ -22,13 +47,18 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-perfect-adic-tower-data",
-  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-sfb-module-derived-scalar-comparisons",
+  "lem-pod-derived-exact-square-composition",
+  "lem-weil-pbc-finite-perfect-adic-constant-scalar-extension",
+  "lem-weil-pbc-coefficient-lift-kflat-resolution",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-weil-pbc-finite-perfect-adic-tower-data"
  ],
  "proof_origin": {
-  "by": "K2 stage 3",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 06YY and 09C6, explicit mate transport equation"
+  "by": "V8 stage-3 worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; more-algebra.tex Tag 06Y4. Agent-written coefficient-universe mate calculation using existing K-flat resolutions and exact-localization factorization."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -74,9 +104,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "V8",
   "result": "pass",
-  "landing": "20261028T034823-L-3552617",
+  "landing": "20261028T055819-L-812647",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
