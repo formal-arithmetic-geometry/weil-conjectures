@@ -19,32 +19,50 @@
  },
  "proof": [
   {
-   "text": "Construct the natural transformation by restricting the StageAction inclusion comparison to integral objects, extending through rationalization, and transporting along the target and source realization and operation maps. The resulting component is the displayed b/comparison/d factorization.",
+   "text": "The recorded rational compact-support action is the raw tensor extension of its integral action. Construct the natural isomorphism Q_X followed by the rational action to the integral action followed by Q_Y with identity object components. Naturality is the baseChange pure-tensor formula at 1 tensor h.",
+   "uses": [
+    "def-weil-compact-support-finite-action",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the stage-system inclusion comparison and StageAction.finite, followed by P.ring.rationalLeft, to identify the finite source with the recorded rational action. Compose the preceding localization isomorphism, the target integral realization, and inverse sfQcqsCompactSupportRealization. Transport the coefficient functor along ht E. This constructs a natural isomorphism b from the section realization of the integral finite-source functor to integral inclusion followed by completed compact support and native coefficient extension.",
    "uses": [
     "def-sf-locally-finite-adic-compact-support-data",
     "def-sf-constructible-exceptional-coefficient-construction-data",
-    "def-pur-integral-compact-support-coefficient-data",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-rationalization-karoubi"
+    "def-weil-integral-rational-qbar-compact-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Transport coefficient extension along hs E, then compose the inverse source integral realization with inverse operationTransport. This constructs a natural isomorphism d from integral inclusion followed by native coefficient extension and native compact support to the section realization of the integral finite-target functor.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker PurCompactSupport.comparison(change E,c) by the integral full-subcategory inclusion and sandwich it between b.hom and d.hom. The derived section functor is an equivalence, hence postcomposition by it is fully faithful. Lift this natural transformation uniquely through postcomposition. The map-preimage identity, evaluated at each finite-Tor integral input, gives the required factorization with b and d evaluated at that input.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-compact-support-finite-action",
+  "def-weil-rationalization-karoubi",
   "def-sf-locally-finite-adic-compact-support-data",
   "def-sf-constructible-exceptional-coefficient-construction-data",
-  "def-pur-integral-compact-support-coefficient-data",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-rationalization-karoubi"
+  "def-pur-integral-compact-support-coefficient-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; strict decomposition of the parent construction."
+  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; explicit composition of the recorded localization, integral realization, proper/open scalar mate and section equivalence (K1)."
  },
  "mathlib_searches": [
   {
@@ -139,12 +157,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D7",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261027T205907-L-1630480",
+  "landing": "20261028T020527-L-2521143",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
