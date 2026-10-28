@@ -21184,3 +21184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:18 L: merged deliver/Z7/Sheaf.Paper.FiniteClosedShriekDomainPart (stage 3; reviewer PASS; first push; landing 20261028T081807-L-2784582 (proof); batch 20261028T081727; modules 1; new nodes 0)
 - 08:18 L: merged deliver/NF/lem-sf-projection-base-change-rational (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
 - 08:18 L: merged deliver/NC/lem-sf-projection-reduction-common (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
+- 08:18 L: merged deliver/NE/lem-sf-projection-base-change-integral (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
