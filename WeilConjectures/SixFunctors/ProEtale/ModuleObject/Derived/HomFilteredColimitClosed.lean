@@ -94,9 +94,9 @@ lemma nonempty_isColimit_homologyFunctor_mapCocone_rightDerivedFunctor_sectionsW
       fun h ↦ (IsColimit.mapCoconeEquiv (Functor.isoWhiskerRight e₃ _).symm h)) n
   exact h.map fun h ↦ IsColimit.mapCoconeEquiv (Functor.isoWhiskerRight e₁ _) h
 
+omit [IsClosedImmersion i] in
 /-- The cohomology sheaves of `Ri^!₀ (B[0])` commute with `u + 1`-small filtered colimits of
 module objects `B`. -/
-omit [IsClosedImmersion i] in
 lemma nonempty_isColimit_homologyFunctor_mapCocone_rightDerivedFunctor_closedUpperShriek
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
     {B : I ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}

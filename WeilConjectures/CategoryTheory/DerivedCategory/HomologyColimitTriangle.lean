@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 
 /-!
 # Colimits of homology along a functor of distinguished triangles
@@ -40,15 +41,6 @@ open CategoryTheory Limits Pretriangulated
 namespace CategoryTheory
 
 variable {A : Type*} [Category* A] [Abelian A]
-
-/-- A short complex in a functor category is exact if it is exact after evaluation
-at every object. -/
-lemma ShortComplex.exact_of_forall_exact_map_evaluation {J : Type*} [Category* J]
-    (S : ShortComplex (J ⥤ A)) (h : ∀ j, (S.map ((evaluation J A).obj j)).Exact) :
-    S.Exact := by
-  rw [S.exact_iff_isZero_homology]
-  exact Functor.isZero _ fun j => ((S.map _).exact_iff_isZero_homology.1 (h j)).of_iso
-    (S.mapHomologyIso ((evaluation J A).obj j)).symm
 
 namespace ComposableArrows
 

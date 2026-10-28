@@ -23,7 +23,8 @@ into `B[n]`, `B = colim Bᵢ` a filtered colimit of sheaves, factor through some
 (`AlgebraicGeometry.ProEtale.HasConstructibleExtContinuity`), then the ind-constructible sheaves
 are closed under kernels, cokernels, extensions and direct sums
 (`AlgebraicGeometry.ProEtale.isIndConstructibleHeart_of_hasConstructibleExtContinuity`). This is
-the abstract statement `CategoryTheory.ObjectProperty.isClosedUnder_ind_of_homFactorsThroughFilteredColimits`.
+the abstract statement
+`CategoryTheory.ObjectProperty.isClosedUnder_ind_of_homFactorsThroughFilteredColimits`.
 
 We also record that, on a topologically noetherian scheme, the constructible sheaves are closed
 under kernels, cokernels and extensions for the coefficient rings `E`, `𝒪_E` and `ℚ̄_ℓ`
@@ -115,11 +116,14 @@ lemma isConstructibleModuleObject_serre_padicIntegersRingObj (E : Type) [Field E
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] :
     ObjectProperty.IsClosedUnderKernels
-        (IsConstructibleModuleObject (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) ∧
+        (IsConstructibleModuleObject
+          (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) ∧
       ObjectProperty.IsClosedUnderCokernels
-        (IsConstructibleModuleObject (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) ∧
+        (IsConstructibleModuleObject
+          (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) ∧
       ObjectProperty.IsClosedUnderExtensions
-        (IsConstructibleModuleObject (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) := by
+        (IsConstructibleModuleObject
+          (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   let : NormedAlgebra ℚ_[ℓ] E :=
     { norm_smul_le c x := by

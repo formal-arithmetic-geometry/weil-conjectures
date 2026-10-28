@@ -12,9 +12,39 @@ public import Mathlib.CategoryTheory.Comma.Final
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.BinaryBiproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Ind-objects of a Serre-type subcategory
+
+Let `C` be a Grothendieck abelian category and `P` a class of objects of `C` (the constructible
+sheaves) containing zero and closed under kernels, cokernels and extensions, such that for `M`
+in `P`, every morphism `M[0] ⟶ B[n]` in `D(C)` to a filtered colimit `B = colim Bᵢ` factors
+through some `Bᵢ[n]` (`DerivedCategory.HomFactorsThroughFilteredColimits`). We show (blueprint
+`sk-prop-ind-heart` (2)) that the ind-objects `ind P` are closed under kernels, cokernels,
+extensions and direct sums
+(`CategoryTheory.ObjectProperty.isClosedUnder_ind_of_homFactorsThroughFilteredColimits`):
+
+* `det-ind-heart-full-faithfulness`: the objects of `P` are finitely presentable
+  (`DerivedCategory.HomFactorsThroughFilteredColimits.isFinitelyPresentable`); injectivity of
+  `colim Hom(M, Bᵢ) ⟶ Hom(M, colim Bᵢ)` comes from surjectivity applied to the kernels of
+  `M ⟶ Bⱼ`;
+* `det-ind-heart-canonical-presentation`: any presentation of an object of `ind P` is final in
+  the category of morphisms from objects of `P`
+  (`CategoryTheory.ObjectProperty.ColimitOfShape.final_toCostructuredArrow`), so that a morphism
+  between objects of `ind P` is a filtered colimit of morphisms between objects of `P`
+  (`CategoryTheory.ObjectProperty.exists_colimitOfShape_hom`);
+* `det-ind-heart-kernels-cokernels`: filtered colimits being exact, kernels and cokernels are
+  computed termwise (`CategoryTheory.ObjectProperty.ind_isClosedUnderKernels`,
+  `CategoryTheory.ObjectProperty.ind_isClosedUnderCokernels`);
+* `det-ind-heart-filtered-colimits`: `ind P` is closed under binary biproducts and, using
+  `ind (ind P) = ind P`, under direct sums
+  (`CategoryTheory.ObjectProperty.ind_isClosedUnderColimitsOfShape_discrete`);
+* `det-ind-heart-extensions`: an extension of `B = colim Cₖ` by `N` is the filtered colimit of
+  its pullbacks to the `Cₖ`; an extension of `C` in `P` by `N = colim Dᵢ` is, by the case
+  `n = -1` of the factorization property applied to its class `C[0] ⟶ N[0][1]`, a pushout of an
+  extension of `C` by some `Dᵢ` (`CategoryTheory.ObjectProperty.ind_isClosedUnderExtensions`).
 -/
 
 @[expose] public section
@@ -120,17 +150,22 @@ lemma HomFactorsThroughFilteredColimits.exists_shortExact {S : ShortComplex C}
     dsimp at this
     simp [g', this]
   obtain ⟨Z, u, v, hT⟩ := distinguished_cocone_triangle₂ g'
-  obtain ⟨b, hb₁, hb₂⟩ : ∃ b : Z ⟶ (singleFunctor C 0).obj S.X₂, u ≫ b = (singleFunctor C 0).map (p.ι.app i) ≫ (singleFunctor C 0).map S.f ∧
+  obtain ⟨b, hb₁, hb₂⟩ : ∃ b : Z ⟶ (singleFunctor C 0).obj S.X₂,
+      u ≫ b = (singleFunctor C 0).map (p.ι.app i) ≫ (singleFunctor C 0).map S.f ∧
       v = b ≫ (singleFunctor C 0).map S.g := by
     obtain ⟨b, hb₁, hb₂⟩ := complete_distinguished_triangle_morphism₂ _ _ hT
-      hS.singleTriangle_distinguished ((singleFunctor C 0).map (p.ι.app i)) (𝟙 _) (hδ.symm.trans (id_comp _).symm)
+      hS.singleTriangle_distinguished ((singleFunctor C 0).map (p.ι.app i)) (𝟙 _)
+      (hδ.symm.trans (id_comp _).symm)
     exact ⟨b, hb₁, (comp_id _).symm.trans hb₂⟩
-  have : Z.IsLE 0 := TStructure.t.isLE₂ _ hT 0 (inferInstanceAs (((singleFunctor C 0).obj _).IsLE 0))
+  have : Z.IsLE 0 := TStructure.t.isLE₂ _ hT 0
     (inferInstanceAs (((singleFunctor C 0).obj _).IsLE 0))
-  have : Z.IsGE 0 := TStructure.t.isGE₂ _ hT 0 (inferInstanceAs (((singleFunctor C 0).obj _).IsGE 0))
+    (inferInstanceAs (((singleFunctor C 0).obj _).IsLE 0))
+  have : Z.IsGE 0 := TStructure.t.isGE₂ _ hT 0
+    (inferInstanceAs (((singleFunctor C 0).obj _).IsGE 0))
     (inferInstanceAs (((singleFunctor C 0).obj _).IsGE 0))
   obtain ⟨E, ⟨eZ⟩⟩ := Z.exists_iso_singleFunctor_obj_of_isGE_of_isLE 0
-  refine ⟨i, E, (singleFunctor C 0).preimage (u ≫ eZ.hom), (singleFunctor C 0).preimage (eZ.inv ≫ v), (singleFunctor C 0).map_injective ?_,
+  refine ⟨i, E, (singleFunctor C 0).preimage (u ≫ eZ.hom),
+    (singleFunctor C 0).preimage (eZ.inv ≫ v), (singleFunctor C 0).map_injective ?_,
     (singleFunctor C 0).preimage (eZ.inv ≫ b), shortExact_of_distTriang_singleFunctor _ _ g' ?_,
     (singleFunctor C 0).map_injective ?_, (singleFunctor C 0).map_injective ?_⟩
   · simp only [Functor.map_comp, Functor.map_preimage, Functor.map_zero, assoc,
@@ -189,36 +224,6 @@ end CategoryTheory.Limits.ColimitPresentation
 namespace CategoryTheory.ShortComplex
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
-
-/-- A short complex in a functor category is exact if it is exact after evaluation at every
-object. -/
-lemma exact_of_forall_exact_map_evaluation {K : Type*} [Category* K] {S : ShortComplex (K ⥤ C)}
-    (h : ∀ k, (S.map ((evaluation K C).obj k)).Exact) : S.Exact := by
-  rw [exact_iff_isZero_homology]
-  refine Functor.isZero _ fun k ↦ ?_
-  have := h k
-  rw [exact_iff_isZero_homology] at this
-  exact this.of_iso (S.mapHomologyIso ((evaluation K C).obj k)).symm
-
-/-- The pullback of a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0` along a morphism
-`c : Y ⟶ X₃` is a short exact sequence `0 ⟶ X₁ ⟶ X₂ ×_{X₃} Y ⟶ Y ⟶ 0`. -/
-lemma ShortExact.pullback {S : ShortComplex C} (hS : S.ShortExact) {Y : C} (c : Y ⟶ S.X₃) :
-    (ShortComplex.mk (pullback.lift (f := S.g) (g := c) S.f 0 (by simp)) (pullback.snd S.g c)
-      (pullback.lift_snd _ _ _)).ShortExact := by
-  have := hS.mono_f
-  have := hS.epi_g
-  have : Mono (pullback.lift (f := S.g) (g := c) S.f 0 (by simp)) :=
-    mono_of_mono_fac (pullback.lift_fst _ _ _)
-  refine ShortExact.mk' ?_ inferInstance inferInstance
-  rw [exact_iff_exact_up_to_refinements]
-  intro A x hx
-  obtain ⟨A', π, hπ, x₁, hx₁⟩ := hS.exact.exact_up_to_refinements (x ≫ pullback.fst _ _) (by
-    simp only [assoc, pullback.condition]
-    simp only [← assoc, hx, zero_comp])
-  refine ⟨A', π, hπ, x₁, pullback.hom_ext ?_ ?_⟩
-  · rw [assoc, assoc, pullback.lift_fst, ← hx₁]
-  · rw [assoc, assoc, pullback.lift_snd, comp_zero]
-    exact (π ≫= hx).trans comp_zero
 
 /-- Given a morphism from a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ S₃ ⟶ 0` to a short exact
 sequence `0 ⟶ S₁ ⟶ S₂ ⟶ S₃ ⟶ 0` which is the identity on `S₃`, the object `S₂` is the cokernel
@@ -422,8 +427,8 @@ lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C
         ext <;> simp
       map_comp t t' := by
         ext
-        · simp [pullback.lift_fst]
-        · simp [pullback.lift_snd, pullback.lift_snd_assoc] }
+        · simp only [assoc, pullback.lift_fst, comp_id]
+        · simp only [assoc, Functor.map_comp, pullback.lift_snd, pullback.lift_snd_assoc] }
   let T : ShortComplex (I ⥤ C) :=
     { X₁ := (Functor.const I).obj S.X₁
       X₂ := F
@@ -432,15 +437,17 @@ lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C
         { app k := pullback.lift (f := S.g) (g := p.ι.app k) S.f 0 (by simp)
           naturality k k' t := by
             ext
-            · simp [F, pullback.lift_fst]
-            · simp [F, pullback.lift_snd, pullback.lift_snd_assoc] }
+            · simp only [F, Functor.const_obj_map, assoc, pullback.lift_fst, comp_id]
+              exact id_comp _
+            · simp only [F, assoc, pullback.lift_snd, pullback.lift_snd_assoc, zero_comp,
+                comp_zero] }
       g :=
         { app k := pullback.snd _ _
-          naturality k k' t := by simp [F, pullback.lift_snd] }
+          naturality k k' t := by simp only [F, pullback.lift_snd] }
       zero := by
         ext k
         exact pullback.lift_snd _ _ _ }
-  have hT : T.Exact := ShortComplex.exact_of_forall_exact_map_evaluation
+  have hT : T.Exact := ShortComplex.exact_of_forall_exact_map_evaluation _
     fun k ↦ (hS.pullback (p.ι.app k)).exact
   have (k : I) : Mono (T.f.app k) := (hS.pullback (p.ι.app k)).mono_f
   have := NatTrans.mono_of_mono_app T.f
@@ -448,7 +455,8 @@ lemma ind_X₂_of_shortExact_of_pullback (hP : P ≤ isFinitelyPresentable.{w} C
     { pt := S.X₂
       ι :=
         { app k := pullback.fst _ _
-          naturality k k' t := by simp [F, pullback.lift_fst] } }
+          naturality k k' t := by
+            simp only [F, pullback.lift_fst, Functor.const_obj_map] } }
   let φ₁ : S.X₁ ⟶ colimit F := IsColimit.map (isColimitConstCocone I S.X₁) (colimit.cocone F) T.f
   have hφ₁ (k : I) : φ₁ = T.f.app k ≫ colimit.ι F k :=
     (id_comp _).symm.trans
