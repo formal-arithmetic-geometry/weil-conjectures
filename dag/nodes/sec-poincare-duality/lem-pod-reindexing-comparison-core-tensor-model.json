@@ -1,0 +1,106 @@
+{
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "kind": "lemma",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; decomposition of the core assembly."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Comparison core component data",
+   "results": "No existing declaration for this project-specific component package.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "ComparisonCoreHomData",
+   "results": "No match.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized reindexing tensor model data",
+   "results": "No match.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingComparisonCore",
+  "date": "2026-10-28",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-comparison-core",
+   "place": "Steps 1 and 2 decomposition"
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261028T020934-L-2567908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261028T020934-L-2567908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "id": "lem-pod-reindexing-comparison-core-tensor-model",
+ "title": "Tensor model normalization",
+ "statement": "For chosen tensor-chain and tensor comparison, the K-flat representative normalization field admits a choice.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pod-reindexing-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the indicated component data by the corresponding sectionwise comparison, localization and representative normalization argument, then retain the displayed fields.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pod-reindexing-coherence-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pod-reindexing-coherence-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Z9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; component decomposition."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingComparisonCoreTensorModel.",
+  "file": "lean/Sheaf/Paper/PodReindexingComparisonCoreTensorModel.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.comparison_core_tensor_model_exists",
+  "statement": "theorem comparison_core_tensor_model_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]\n    (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (tensorChain : ∀ P L : K l E Y s,\n      (podReindexingComplexFunctor l E g s).obj ((total l E Y s).obj (P, L)) ≅\n        (total l E X s).obj ((podReindexingComplexFunctor l E g s).obj P,\n          (podReindexingComplexFunctor l E g s).obj L))\n    (tensor : SY.tensor ⋙ podReindexingDerivedFunctor l E g s ≅\n      ((podReindexingDerivedFunctor l E g s).prod (podReindexingDerivedFunctor l E g s)) ⋙\n        SX.tensor) :\n    Nonempty (ComparisonCoreTensorModelData l E g s SX SY TX TY tensorChain tensor)",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-28"
+ }
+}

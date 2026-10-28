@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingComparisonCoreHomData
+import Sheaf.Paper.PodReindexingComparisonCoreTensorData
+import Sheaf.Paper.PodReindexingComparisonCoreTensorModel
 
 /-! # Core comparison data for reindexing
 
@@ -44,6 +47,18 @@ theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY) :
     Nonempty (Comparison l E g s SX SY TX TY) := by
-  sorry
+  obtain ⟨h⟩ := comparison_core_hom_data_exists l E g s SX SY TX TY
+  obtain ⟨t⟩ := comparison_core_tensor_data_exists l E g s SX SY TX TY
+  obtain ⟨m⟩ := comparison_core_tensor_model_exists l E g s SX SY TX TY
+    t.tensorChain t.tensor
+  exact ⟨{
+    chain := h.chain
+    chain_projection := h.chain_projection
+    derived := h.derived
+    derived_model := h.derived_model
+    tensorChain := t.tensorChain
+    tensorChain_pure := t.tensorChain_pure
+    tensor := t.tensor
+    tensor_model := m.tensor_model }⟩
 
 end WeilConjectures.PodReindexingCoherence
