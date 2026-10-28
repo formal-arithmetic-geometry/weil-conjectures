@@ -14,24 +14,43 @@
  },
  "proof": [
   {
-   "text": "Extend both factors to the finite coefficient sheaf on K-flat representatives. Balanced tensor associativity gives mutually inverse chain maps; the left-derived universal property descends the comparison to the displayed natural isomorphism.",
+   "text": "Choose the existing simultaneous ScalarHomModels and scalar tensor comparisons for the small pro-etale site at coefficient universe max(u,t+1), using scalarInternalHomAdjunction_exists. The derived categories are the standard localizations at this same coefficient size.",
    "uses": [
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-dc-hom-scalar-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "The ordinary extension in the generic scalar pair and integralReductionChangeOfRings have the same changeOfRings objects and maps, so functor extensionality identifies them. Apply fixedScalarTensorComparison_exists to the prescribed integralDerivedReduction and its universal counit. Its iso field gives the strong tensor comparison for the generic source and target tensors.",
+   "uses": [
+    "lem-sf-scalar-tensor-comparison-transport",
+    "def-weil-integral-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either coefficient sheaf, compose the inverse of the supplied TensorPresentation.representative with the generic CoefficientTensorModels.comparison. This identifies the restrictions of the two tensor functors along the product of the K-flat inclusions followed by Q. The K-flat localization theorem from RingedDerivedTensorHomAdjunction and product localization make this restriction fully faithful. Its preimageIso yields an isomorphism of the two tensor functors on the derived categories.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the source tensor identification by integralDerivedReduction, compose with the generic fixed scalar tensor comparison, and then whisker the inverse target tensor identification by the product of the two reduction functors. This composite is exactly the required natural isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-sf-scalar-tensor-comparison-transport",
+  "def-weil-integral-derived-reduction",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 2, coefficient extension"
+  "by": "P9 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, coefficient extension; existing normalized scalar tensor comparison transported through fully faithful K-flat product localization (Stacks 07A4 and 06YY)."
  },
  "mathlib_searches": [
   {
@@ -97,10 +116,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261028T034758-L-3544221",
-  "kind": "interface",
+  "landing": "20261028T055732-L-802322",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
