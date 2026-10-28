@@ -12,7 +12,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01NR (lemma-glue-relative-proj-twists), object gluing and compatibility"
+  "place": "Tag 01NR; normalized transition assembled from the two split conjuncts"
  },
  "mathlib_searches": [
   {
@@ -78,17 +78,33 @@
  "statement": "Given a module L, chart isomorphisms, and normalized scalar-extension comparisons whose chart squares commute, for every affine U contained in V there is an additive transition on twist sections that intertwines chart reading with restriction and sends each homogeneous section a/1 to res(a)/1.",
  "proof": [
   {
-   "text": "Use the supplied normalized scalar-extension comparison on common affine refinements. Its fraction formula and the commuting chart square give additive transition maps; agreement on refinements gives the reading equation, and the denominator-one case gives the homogeneous-fraction equation.",
+   "text": "Obtain the normalized scalar-extension comparison and commuting chart square from TwistChartCompatibility. Define the transition by the section-normalized pullback unit, the comparison isomorphism, and transport across the equality of chart preimages.",
    "uses": [
     "lem-sfb-proj-scalar-extension-twist-comparison",
     "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the read-compatibility conjunct to obtain the equation intertwining twistChartRead with restriction.",
+   "uses": [
+    "lem-trf-relative-proj-twist-chart-descent-transition-read"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homogeneous-fraction conjunct to obtain the equation on degree-one fractions.",
+   "uses": [
+    "lem-trf-relative-proj-twist-chart-descent-transition-fraction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sfb-proj-scalar-extension-twist-comparison",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-trf-relative-proj-twist-chart-descent-transition-read",
+  "lem-trf-relative-proj-twist-chart-descent-transition-fraction"
  ],
  "lean": {
   "existing": false,
@@ -111,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-79eba",
-  "group": "J1",
-  "result": "fix",
-  "landing": "20261027T234009-L-4159809",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261028T020637-L-2534107",
   "kind": "interface",
-  "note": "independent cc review: item exists_twist_chart_descent and new Object/Transition/Compatibility modules+nodes against node lem-trf-relative-proj-twist-chart-descent, scalarExtension_twist_comparison, return C-2969d, and importers FractionAdd/SPAGL/SymmetricProjGluedSections compiled against the corrected item"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

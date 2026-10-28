@@ -5,24 +5,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentObject
+import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransitionRead
+import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransitionFraction
 
 /-! # Transition part of relative Proj twist descent
 
 Source: Stacks Project, Constructions, Tag 01NR.
-(blueprint: lem-trf-relative-proj-twist-chart-descent).
+(blueprint: lem-trf-relative-proj-twist-chart-descent-transition).
 -/
 
 @[expose] public section
-
 set_option autoImplicit false
-
 universe u
-
 open CategoryTheory Opposite
 open scoped AlgebraicGeometry
-
 namespace AlgebraicGeometry.Scheme.GradedAlgebraData
-
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
 /-- A compatible descended chart family has additive transitions compatible with readings
@@ -31,16 +28,11 @@ and fractions.
 Source: Stacks Project, Constructions, Tag 01NR, compatibility portion of
 `lemma-glue-relative-proj-twists`.
 
-Proof: use the supplied normalized scalar-extension comparison on a common affine
-refinement.  Its
-homogeneous fraction formula sends `a/f^k` to `res(a)/res(f)^k`, so the maps agree on
-further refinements and satisfy the cocycle.  The induced maps on sections are additive;
-the cocycle gives the equation with `twistChartRead`, and setting the denominator to one
-gives the displayed equation for `twistChartFraction`.  The section-normalized tensor
-adjunction identifies the ordinary restriction with the displayed reading map.
+The two compatibility conjuncts are supplied by the named read and fraction lemmas.  The
+transition itself is the section-normalized pullback unit followed by the given scalar
+comparison, transported along the equality of chart opens.
 (blueprint: lem-trf-relative-proj-twist-chart-descent-transition).
-
-The proof is the transition-compatibility component of the parent descent statement. -/
+-/
 theorem exists_twist_chart_descent_transition
     (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,
@@ -58,6 +50,28 @@ theorem exists_twist_chart_descent_transition
         (∀ a : A.grading V 1,
           t (A.twistChartFraction V a) =
             A.twistChartFraction U ⟨A.res h a, (A.res h).map_mem a.property⟩) := by
-  sorry
+  classical
+  intro U V h
+  obtain ⟨θ, hθ, hsq⟩ := hcompat U V h
+  let r := A.relProjFunctor.map (homOfLE h)
+  have hr : r ≫ A.relProjι V = A.relProjι U := by
+    exact A.relProjFunctor_map_relProjι (homOfLE h)
+  have hopen : r ⁻¹ᵁ A.twistChartOpen V = A.twistChartOpen U := by
+    simp only [twistChartOpen, A.relProjHom_preimage,
+      Scheme.Hom.preimage_opensRange, Scheme.Hom.preimage_top]
+  let t : Γ(Proj.twist (A.grading V) 1, A.twistChartOpen V) →+
+      Γ(Proj.twist (A.grading U) 1, A.twistChartOpen U) :=
+    ConcreteCategory.hom
+      (((Scheme.Modules.tensorPullbackSectionAdjunction r).unit.app
+          (Proj.twist (A.grading V) 1)).app (A.twistChartOpen V) ≫
+        (θ 1).hom.app (r ⁻¹ᵁ A.twistChartOpen V) ≫
+        eqToHom (congrArg (fun W => Γ(Proj.twist (A.grading U) 1, W)) hopen))
+  refine ⟨t, ?_, ?_⟩
+  · intro s
+    simpa [t] using
+      (A.twist_chart_transition_read L chart U V h θ hθ hsq hopen s)
+  · intro a
+    simpa [t] using
+      (A.twist_chart_transition_fraction L chart U V h θ hθ hsq hopen a)
 
 end AlgebraicGeometry.Scheme.GradedAlgebraData

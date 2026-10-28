@@ -1,0 +1,82 @@
+{
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NR, compatibility portion of lemma-glue-relative-proj-twists"
+ },
+ "stmt_deps": [
+  "lem-sfb-proj-scalar-extension-twist-comparison",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NR, normalized chart transition compatibility"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransition",
+  "date": "2026-10-28",
+  "group": "Q2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-relative-proj-twist-chart-descent-transition",
+   "place": "split of the read and homogeneous-fraction conjuncts",
+   "via": []
+  }
+ },
+ "id": "lem-trf-relative-proj-twist-chart-descent-transition-fraction",
+ "kind": "statement",
+ "title": "Homogeneous fraction compatibility for relative Proj twist transitions",
+ "statement": "Given the chart isomorphisms and a normalized scalar-extension comparison for U ≤ V, with the chart square commuting and the chart preimages identified, the section-normalized transition map sends every homogeneous degree-one fraction a/1 on V to the fraction res(a)/1 on U.",
+ "proof": [
+  {
+   "text": "Apply the normalized scalar-extension fraction law with denominator one to the unitToTwist section, simplify val_unitToTwist_app_apply, and transport across the chart-preimage equality.",
+   "uses": [
+    "lem-sfb-proj-scalar-extension-twist-comparison",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proj-scalar-extension-twist-comparison",
+  "def-pc-module-pullback"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransitionFraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjTwistChartDescentTransitionFraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.twist_chart_transition_fraction",
+  "statement": "theorem twist_chart_transition_fraction\n    (L : A.relProj.Modules)\n    (chart : ∀ U : S.affineOpens,\n      (Scheme.Modules.tensorPullback (A.relProjι U)).obj L ≅\n        Proj.twist (A.grading U) 1)\n    (U V : S.affineOpens) (h : U ≤ V)\n    (θ : ∀ j : ℤ,\n      (Scheme.Modules.tensorPullback (A.relProjFunctor.map (homOfLE h))).obj\n          (Proj.twist (A.grading V) j) ≅ Proj.twist (A.grading U) j)\n    (hθ : Proj.IsScalarExtensionTwistComparison (A.res h)\n      (A.relProjFunctor.map (homOfLE h)) θ)\n    (hsq :\n      eqToIso (congrArg (fun f ↦\n          (Scheme.Modules.tensorPullback f).obj L)\n        (A.relProjFunctor_map_relProjι (homOfLE h)).symm) ≪≫\n        (Scheme.Modules.tensorPullbackSectionComp\n          (A.relProjFunctor.map (homOfLE h)) (A.relProjι V)).app L ≪≫\n        (Scheme.Modules.tensorPullback (A.relProjFunctor.map (homOfLE h))).mapIso\n          (chart V) ≪≫ θ 1 = chart U)\n    (hopen : A.relProjFunctor.map (homOfLE h) ⁻¹ᵁ A.twistChartOpen V =\n      A.twistChartOpen U) :\n    ∀ a : A.grading V 1,\n      let t : Γ(Proj.twist (A.grading V) 1, A.twistChartOpen V) →+\n          Γ(Proj.twist (A.grading U) 1, A.twistChartOpen U) :=\n        ConcreteCategory.hom\n          (((Scheme.Modules.tensorPullbackSectionAdjunction\n              (A.relProjFunctor.map (homOfLE h))).unit.app\n              (Proj.twist (A.grading V) 1)).app (A.twistChartOpen V) ≫\n            (θ 1).hom.app\n              (A.relProjFunctor.map (homOfLE h) ⁻¹ᵁ A.twistChartOpen V) ≫\n            eqToHom (congrArg\n              (fun W ↦ Γ(Proj.twist (A.grading U) 1, W)) hopen))\n      t (A.twistChartFraction V a) =\n        A.twistChartFraction U ⟨A.res h a, (A.res h).map_mem a.property⟩",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261028T020637-L-2534107",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261028T020637-L-2534107",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
