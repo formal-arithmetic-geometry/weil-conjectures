@@ -6,6 +6,7 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransportFinite
 
 /-! # Finite coefficient gamma transport calculation
 
@@ -17,6 +18,7 @@ projection theorem (blueprint: lem-coef-derived-system-gamma-projection-transpor
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
+set_option linter.unusedVariables false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -67,6 +69,37 @@ theorem coefficientDerivedSystemGammaProjectionTransport_final
       (coefficientFiniteGlobalHom l E W n).map
         (Prod.mkHom ((S.reductionEvaluation n).hom.app P).op
           (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj N))) := by
-  sorry
+  simp only [Functor.comp_obj]
+  have hasIso :
+      (@asIso _ _ _ _ (coefficientEnrichedAdjunctionMap S.integralClosed
+        S.systemClosed S.reduction S.adjunction S.reductionTensor P N)
+        (S.enriched_isIso P N hN)).hom =
+      coefficientEnrichedAdjunctionMap S.integralClosed S.systemClosed S.reduction
+        S.adjunction S.reductionTensor P N := rfl
+  rw [hasIso]
+  have hf := (D.scalarSections n).hom.naturality
+    (S.fiberHom (S.reduction.obj P) N (S.reduction_normalized P) hN n).hom
+  have hr := (D.scalarSections n).hom.naturality
+    ((coefficientFiniteInternalHom l E W n).map
+      (Prod.mkHom ((S.reductionEvaluation n).hom.app P).op
+        (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj N))))
+  simp only [Functor.comp_map] at hf hr
+  have hcore := coefficientDerivedSystemGammaProjectionTransport_finite
+    l E W S D P N hN n
+  have hcore' := congrArg ((coefficientIntegralSections l E W).map) hcore
+  simp only [Functor.map_comp] at hcore'
+  let M := (coefficientFiniteInternalHom l E W n).obj
+    (op ((coefficientSequenceDerivedEvaluation l E W n).obj (S.reduction.obj P)),
+      (coefficientSequenceDerivedEvaluation l E W n).obj N)
+  have hcore'' := congrArg (fun f ↦ f ≫ (D.scalarSections n).hom.app M) hcore'
+  simp only [Category.assoc] at hcore''
+  dsimp [M] at hr
+  rw [hf] at hcore''
+  have hrM := hr
+  rw [hrM] at hcore''
+  simpa only [M, coefficientIntegralGlobalHom, coefficientFiniteGlobalHom,
+    coefficientIntegralInternalHom, coefficientFiniteInternalHom,
+    Functor.comp_obj, Functor.comp_map, Category.assoc] using hcore''
+
 
 end WeilConjectures

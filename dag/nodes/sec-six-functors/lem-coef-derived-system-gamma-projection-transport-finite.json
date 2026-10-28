@@ -1,0 +1,116 @@
+{
+ "id": "lem-coef-derived-system-gamma-projection-transport-finite",
+ "kind": "statement",
+ "title": "Finite unsectioned coefficient gamma transport",
+ "statement": "theorem coefficientDerivedSystemGammaProjectionTransport_finite (S : CoefficientDerivedSystemCalculus l E W) (D : CoefficientDerivedSystemResolutionCoherence l E W S) (P : DerivedCategory (scalarReductionSource l E W)) (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N) (n : ℕ) : coefficientEnrichedAdjunctionMap S.integralClosed S.systemClosed S.reduction S.adjunction S.reductionTensor P N ≫ (coefficientSequenceProjection l E W n).app ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N)) ≫ (coefficientFiniteDerivedRestriction l E W n).map (S.fiberHom (S.reduction.obj P) N (S.reduction_normalized P) hN n).hom = (coefficientIntegralInternalHom l E W).map (Prod.mkHom (𝟙 (op P)) ((coefficientSequenceProjection l E W n).app N)) ≫ coefficientEnrichedAdjunctionMap S.integralClosed (S.finiteClosed n) (coefficientFiniteDerivedExtension l E W n) (coefficientFiniteAdjunction l E W n) (S.finiteTensor n) P ((coefficientSequenceDerivedEvaluation l E W n).obj N) ≫ (coefficientFiniteDerivedRestriction l E W n).map ((coefficientFiniteInternalHom l E W n).map (Prod.mkHom ((S.reductionEvaluation n).hom.app P).op (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj N))))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 08JA, 0D6E and 0941; finite uncurrying, evaluation and naturality calculation"
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-derived-system-projection-models",
+  "lem-coef-enriched-sequence-projection-formula",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite enriched uncurrying identity, the fiber evaluation comparison, and naturality of reduction evaluation in the first variable to identify the two internal-Hom composites.",
+   "uses": [
+    "lem-coef-enriched-sequence-projection-formula",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-sequence-projection-formula",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 08JA, 0D6E and 0941; finite uncurrying and coefficient evaluation transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite enriched projection formula after evaluation internal Hom base change",
+   "results": "No exact coefficient-calculus match; generic enriched projection theorem is the stated route.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.FunctorCategory.enrichedComp_π",
+   "results": "Generic enriched projection declarations only; no coefficient specialization.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientGammaProjection|fiberHom.*reductionEvaluation",
+   "results": "The coefficient fiber and target definitions were read; no existing finite transport theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransportFinal",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-system-gamma-projection-transport-final",
+   "place": "Finite unsectioned fiber/base-change calculation before derived sections",
+   "via": [
+    "lem-coef-enriched-sequence-projection-formula"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransportFinite",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSystemGammaProjectionTransportFinite.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSystemGammaProjectionTransport_finite",
+  "declarations": [
+   "WeilConjectures.coefficientDerivedSystemGammaProjectionTransport_finite"
+  ],
+  "statement": "theorem coefficientDerivedSystemGammaProjectionTransport_finite (S : CoefficientDerivedSystemCalculus l E W) (D : CoefficientDerivedSystemResolutionCoherence l E W S) (P : DerivedCategory (scalarReductionSource l E W)) (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N) (n : ℕ) : coefficientEnrichedAdjunctionMap S.integralClosed S.systemClosed S.reduction S.adjunction S.reductionTensor P N ≫ (coefficientSequenceProjection l E W n).app ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N)) ≫ (coefficientFiniteDerivedRestriction l E W n).map (S.fiberHom (S.reduction.obj P) N (S.reduction_normalized P) hN n).hom = (coefficientIntegralInternalHom l E W).map (Prod.mkHom (𝟙 (op P)) ((coefficientSequenceProjection l E W n).app N)) ≫ coefficientEnrichedAdjunctionMap S.integralClosed (S.finiteClosed n) (coefficientFiniteDerivedExtension l E W n) (coefficientFiniteAdjunction l E W n) (S.finiteTensor n) P ((coefficientSequenceDerivedEvaluation l E W n).obj N) ≫ (coefficientFiniteDerivedRestriction l E W n).map ((coefficientFiniteInternalHom l E W n).map (Prod.mkHom ((S.reductionEvaluation n).hom.app P).op (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261028T020314-L-2493544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261028T020314-L-2493544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
