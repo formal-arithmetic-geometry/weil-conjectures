@@ -20470,3 +20470,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: returned deliver/NA/lem-pur-scalar-reduction-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head c5ed7727f569: H7/H3: the §1(C) correction makes the node easier. The conclusion is)
 - 00:37 L: returned deliver/N4/Sheaf.Paper.AdicAmbientHomEvaluationComparison (reviewer RETURN: (reviewer C-f773b, head f773b5101) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicAmbientHom)
 - 00:43 L: returned deliver/B3/Sheaf.SixFunctorsBasics.BrownHypotheses (reviewer RETURN: (reviewer C-20c3f, head 20c3fdab8) 2b (unforced adaptation, as in C2 27fc): the original ExceptionalInverseImageExistenc)
+- 00:45 L: returned deliver/H3/Sheaf.Paper.DerivedPullbackTensorConstraints (reviewer RETURN: (reviewer C-ba80f, head ba80f6af3) D1/D2: the item is closed only by naming the witness commonStagePullbackCompComponent)
