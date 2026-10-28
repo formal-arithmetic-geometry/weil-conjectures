@@ -6,6 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Paper.ScalarTowerTensorLimitStrictWitness
+import Sheaf.Paper.ScalarTowerTensorLimitStrictEquationAssembly
+import Sheaf.Paper.ScalarTowerTensorLimitRepresentativeTransport
 
 /-! # Assembly of strict scalar/tensor representatives
 
@@ -38,6 +40,7 @@ attribute [local irreducible]
   integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
   pullbackReduction scalarReduction tensorReduction
 
+set_option linter.unusedVariables false in
 /-- Assemble strict representative witnesses into the completed limit square.
 
 This is the localization and total-limit part of the proof.  The hypothesis
@@ -76,6 +79,14 @@ theorem scalarTowerTensorLimitSquare_of_strictWitnesses (W : Scheme.{u})
           ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map
             (tensorReduction l E W SE ρE TE M.obj N.obj) ≫
           α.hom.app (SE.reduction.obj M.obj, SE.reduction.obj N.obj)) := by
-  sorry
+  apply scalarTowerTensorLimitSquare_of_representativeTransport l E L ι W SE SL ρE ρL SY TE TL
+    _hl M N hT α
+  apply scalarTowerTensorLimitSquare_on_good_representatives l E L ι W SE SL ρE ρL SY TE TL α
+  intro P Q hP hQ
+  obtain ⟨w, hwP, hwQ⟩ := hstrict P Q hP hQ
+  obtain ⟨hsP, hsQ, heq⟩ := w.equation P Q hP hQ
+  subst P
+  subst Q
+  exact ⟨hsP, hsQ, heq⟩
 
 end WeilConjectures.ScalarExtensionTower
