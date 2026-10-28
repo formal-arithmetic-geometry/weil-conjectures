@@ -43,6 +43,9 @@ integral objects.  These components are the atomic equalities collected by
 `completed_tensor_common_lift_agreement`.
 Source: BS Remark 6.8.15; HRS Lemma 7.9.
 (blueprint: lem-sf-adic-completed-tensor-common-lift-agreement-component). -/
+/- STATEMENT-DISPUTED: the input `C` contains only an unconstrained tensorator and
+no finite-normalization field relating it to `N`; the claimed equality therefore
+does not follow from the stated hypotheses. -/
 theorem completed_tensor_common_lift_agreement_component
     (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
@@ -70,7 +73,7 @@ theorem completed_tensor_common_lift_agreement_component
           ((sfRationalConstructibleLocalization
             l (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)
           ((sfRationalConstructibleLocalization
-            l (Coefficient.{u} l (PadicAlgCl l) E) X).obj L)).hom) := by
+          l (Coefficient.{u} l (PadicAlgCl l) E) X).obj L)).hom) := by
   sorry
 
 end WeilConjectures.AdicQbarRealization
