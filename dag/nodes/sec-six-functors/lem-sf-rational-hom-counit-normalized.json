@@ -9,9 +9,9 @@
   "def-weil-rationalization-karoubi"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "C4 stage 3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "Finite-extension evaluation square, normalization and transpose substeps."
+  "place": "Finite-extension evaluation square, normalization and rationalization."
  },
  "mathlib_searches": [
   {
@@ -65,12 +65,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261027T234344-L-112337",
+  "landing": "20261028T034712-L-3535152",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
@@ -81,19 +81,15 @@
  "statement": "For every dualizing datum, rational Verdier datum, and HomIdentification h, the counit of h.adjunction at every K,M equals normalizedCounit for h.permitted at K,M.",
  "proof": [
   {
-   "text": "Use h.integral_evaluation on integral representatives and the fact that raw rational objects are unchanged integral representatives under localization. The normalized braiding and closed evaluation are the canonical rationalization of the integral evaluation field.",
+   "text": "Reduce arbitrary rational objects to their unchanged integral representatives. Apply homIdentification_counit_normalized_localized_integral to identify normalizedCounit with the localized completed ordinary evaluation, then use h.integral_evaluation to identify that map with the adjunction counit.",
    "uses": [
-    "def-sf-rational-verdier-data",
-    "def-sf-rational-hom-normalized-counit",
-    "def-weil-rationalization-karoubi"
+    "lem-sf-rational-hom-counit-normalized-localized-integral"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sf-rational-verdier-data",
-  "def-sf-rational-hom-normalized-counit",
-  "def-weil-rationalization-karoubi"
+  "lem-sf-rational-hom-counit-normalized-localized-integral"
  ],
  "lean": {
   "existing": false,

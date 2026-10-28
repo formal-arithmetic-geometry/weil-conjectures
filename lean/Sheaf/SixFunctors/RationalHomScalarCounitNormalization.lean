@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.RationalOperationsData
-public import Sheaf.SixFunctors.RationalHomAdjunction
 public import Sheaf.Paper.CompletedTensorHomTranspose
 
 @[expose] public noncomputable section
@@ -38,17 +37,53 @@ def normalizedCounit
     (@podRationalClosed l _ E _ _ _ X (RationalVerdier.units D l hl X)).evaluation
       ⟨(op K, M), h K M⟩
 
-/-- The supplied Hom identification has the normalized closed counit on every rational
-object. This is the rational extension of its integral evaluation field.
-Source: finite scalar evaluation argument, normalization and localization paragraphs
-(blueprint: lem-sf-rational-hom-scalar-evaluation). -/
+/-- The normalized closed counit on an objectwise localized integral pair agrees with
+ the localization of the completed ordinary evaluation specified by a HomIdentification.
+Source: finite scalar evaluation argument, normalization and localization paragraphs;
+ the rational closed evaluation is the scalar localization of the integral closed
+ evaluation, and the latter is the inverse completion map followed by ordinary counit.
+(blueprint: lem-sf-rational-hom-counit-normalized). -/
+theorem normalizedCounit_localized_integral
+    (w : IntegralFiniteExtension.DualizingDatum l X D hl E)
+    (A : RationalVerdier.Datum D l hl X E w)
+    (h : HomIdentification l E X D hl w A)
+    (K M : sfIntegralConstructibleCategory l E X) :
+    HEq (normalizedCounit D l hl X E h.permitted
+      ((sfRationalConstructibleLocalization l E X).obj K)
+      ((sfRationalConstructibleLocalization l E X).obj M))
+      ((sfRationalConstructibleLocalization l E X).map
+        (ObjectProperty.homMk
+          (X := (@constructibleIntegralTensor l _ E _ _ _ X
+            (RationalVerdier.units D l hl X)).obj
+              (K, (constructibleIntegralHom l E X).obj
+                (integralPairOfRationalHomPair l E X
+                  ⟨(op ((sfRationalConstructibleLocalization l E X).obj K),
+                    (sfRationalConstructibleLocalization l E X).obj M), h.permitted _ _⟩)))
+          (Y := M)
+          ((@asIso _ _ _ _ (A.completion.map.app
+            (K.obj, ((integralDerivedInternalHom l E X).obj (op K.obj, M.obj))))
+            (A.completion.invertible K
+              ((constructibleIntegralHom l E X).obj
+                (integralPairOfRationalHomPair l E X
+                  ⟨(op ((sfRationalConstructibleLocalization l E X).obj K),
+                    (sfRationalConstructibleLocalization l E X).obj M), h.permitted _ _⟩)))).inv ≫
+            (A.ordinary.adjunction K.obj).counit.app M.obj))) := by
+  sorry
+
 theorem homIdentification_counit_normalized
     (w : IntegralFiniteExtension.DualizingDatum l X D hl E)
     (A : RationalVerdier.Datum D l hl X E w)
     (h : HomIdentification l E X D hl w A) :
     ∀ K M : sfRationalConstructibleCategory l E X,
       (h.adjunction K).counit.app M = normalizedCounit D l hl X E h.permitted K M := by
-  sorry
+  intro K M
+  cases K with
+  | mk K =>
+    cases M with
+    | mk M =>
+      apply eq_of_heq
+      exact (h.integral_evaluation K M).trans
+        (normalizedCounit_localized_integral D l hl X E w A h K M).symm
 
 
 end WeilConjectures.RationalOperations
