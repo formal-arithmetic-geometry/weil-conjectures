@@ -62,19 +62,21 @@ sides are `i_N^* Rt_* Rj_{M*} Lε_M^*`. (The `ε`-square cannot be dropped: `Rf_
 with the base change to the geometric generic fibre.) -/
 theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
     [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [IsNoetherian Y] (aY : Y ⟶ Spec (.of k))
-    {X' Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
-    {N : NearbyCyclesModel Y Y'.left} {f : X ⟶ Y} {f' : X'.left ⟶ Y'.left} (φ : M.Hom N f f')
-    (hM : M.IsTraitModel) (hN : N.IsTraitModel) [IsProper φ.total] [IsProper f]
+    {X' : Over (Spec (.of k'))} {Y' : Scheme.{u}} {M : NearbyCyclesModel X X'.left}
+    {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X'.left ⟶ Y'} (φ : M.Hom N f f')
+    (hM : M.IsTraitModel) (hN : ∃ a : Y' ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a))
+    [IsProper φ.total] [IsProper f]
     (hi : IsPullback M.i f' φ.total N.i) (hε : IsPullback M.ε φ.generic f N.ε)
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
     (hK : boundedConstructible _ K) :
     IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) := by
-  have := hN.isNoetherian_generic
-  obtain ⟨q, -, -, -, -, -, -⟩ := hN.exists_isPullback
+  obtain ⟨aN, hN'⟩ := hN
+  have : IsNoetherian N.generic := hN'.isNoetherian_generic
+  obtain ⟨q, -, -, -, -, -, -⟩ := hN'.exists_isPullback
   have h₁ := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ aY
     (N.j ≫ q ≫ traitToBase k' k') φ.commSq_ε hε K hK
-  have h₂ := φ.isIso_baseChangeMap_commSq_i_app_lowerStar hM hN hi _
+  have h₂ := φ.isIso_baseChangeMap_commSq_i_app_lowerStar hM ⟨aN, hN'⟩ hi _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε K hK)
   have h₃ := φ.isIso_pushforwardExchange_app_of_isIso_baseChangeMap
     (Profinite.padicAlgClRingObj ℓ) K (by cast_proofs h₁) (by cast_proofs h₂)
@@ -102,7 +104,7 @@ theorem isIso_pushforwardExchange_app_of_isProper_geometric {X Y : Scheme.{u}}
   have := hN.isNoetherian_total
   obtain ⟨q, -, -, -, -, -, -⟩ := hN.exists_isPullback
   exact φ.isIso_pushforwardExchange_app_of_isProper (q ≫ traitToBase k' k') hM.geometric
-    hN.geometric (by rw [ht]; exact hi) hj.flip hK
+    ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩ (by rw [ht]; exact hi) hj.flip hK
 
 end NearbyCyclesModel.Hom
 

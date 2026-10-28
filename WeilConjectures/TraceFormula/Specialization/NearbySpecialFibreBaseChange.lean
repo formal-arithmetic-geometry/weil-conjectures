@@ -94,21 +94,22 @@ XIII 2.1.7): for a morphism `φ : M ⟶ N` of models of finite type over the tra
 total spaces is proper and whose square of special fibres is cartesian, the base change morphism
 `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the direct image `Rj_{M*} L` of a bounded
 constructible `ℚ̄_ℓ`-complex `L` on the geometric generic fibre of `M`. -/
-theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {Y : Scheme.{u}}
-    {Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
-    {N : NearbyCyclesModel Y Y'.left} {f : X ⟶ Y} {f' : X'.left ⟶ Y'.left} (φ : M.Hom N f f')
-    (hM : M.IsTraitModel) (hN : N.IsTraitModel) [IsProper φ.total]
+theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {Y Y' : Scheme.{u}}
+    {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y}
+    {f' : X'.left ⟶ Y'} (φ : M.Hom N f f') (hM : M.IsTraitModel)
+    (hN : ∃ a : Y' ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a)) [IsProper φ.total]
     (hi : IsPullback M.i f' φ.total N.i)
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.generic) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)))
     (hL : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic) L) :
     IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) φ.commSq_i).app
       ((R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj L)) := by
+  obtain ⟨aN, hN⟩ := hN
   have := hM.isNoetherian_generic
   have := hM.isNoetherian_total
-  have := hN.isNoetherian_total
+  have : IsNoetherian N.total := hN.isNoetherian_total
   have := hM.isClosedImmersion_i
-  have := hN.isClosedImmersion_i
+  have : IsClosedImmersion N.i := hN.isClosedImmersion_i
   have := hM.isAffineHom_j
   have : IsProper f' := MorphismProperty.of_isPullback (P := @IsProper) hi inferInstance
   obtain ⟨E, L₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel_obj ℓ M.generic L hL

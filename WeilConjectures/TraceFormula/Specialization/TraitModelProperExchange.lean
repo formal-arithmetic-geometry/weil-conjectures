@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
@@ -29,8 +30,8 @@ invertible by blueprint `det-sp-nearby-cycles-exchanges` (2),
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
 base change (blueprint `sk-thm-sfb-proper-base-change`,
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`), and by pullback
-exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`), and
+by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
 -/
 
@@ -133,30 +134,6 @@ end Restricted
 
 end NearbyCyclesModel
 
-/-! ### Proper base change -/
-
-section ProperBaseChange
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-- **Proper base change** (blueprint `sk-thm-sfb-proper-base-change`) on the ambient derived
-categories of `ℚ̄_ℓ`-modules: for a cartesian square `g' ≫ p = p' ≫ g` of schemes with `p`
-proper, the base change morphism `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` is an isomorphism for bounded
-constructible `K`. The base `g` is arbitrary (here: the geometric generic point
-`Spec Ω ⟶ Spec k`), unlike
-`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`,
-whose squares are of finite type over a field. -/
-theorem isIso_baseChangeMap_app_of_isProper_padicAlgCl {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y}
-    {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p] (sq : CommSq g' p' p g)
-    (hsq : IsPullback g' p' p g)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) K) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq).app K) :=
-  sorry
-
-end ProperBaseChange
-
 /-! ### The proper exchange of a proper trait model -/
 
 namespace NearbyCyclesModel
@@ -236,7 +213,7 @@ exchanges along identities and base change along identities, with the proper exc
 model of the geometric generic fibre (blueprint `det-sp-nearby-cycles-exchanges` (2)) composed
 with `Ψ_S` of the proper base change morphism of the square of generic fibres. -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
-    [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+    [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (h : M.IsTraitModelOfBase k q g) [IsProper q] [IsProper (toPoint X).left]
     (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -269,7 +246,8 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     (baseChangeMap 𝐐 ⟨hb⟩) (baseChangeMap 𝐐 ⟨hs⟩)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
-  have pbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ ⟨hb⟩ hgen' A hA
+  have pbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ
+    (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
   -- the base change morphisms are invertible
   have : IsIso (baseChangeMap 𝐐 ⟨hs⟩) := by
     have : WeaklyEtale (𝟙 X'.left) := MorphismProperty.id_mem _ _
