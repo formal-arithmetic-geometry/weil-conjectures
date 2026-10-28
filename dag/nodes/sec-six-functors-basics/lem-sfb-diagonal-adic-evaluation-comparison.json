@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-diagonal-adic-evaluation-comparison",
+ "kind": "statement",
+ "title": "Natural evaluation-adjoint comparison for diagonal adic completion",
+ "statement": "For a prime ell and scheme W, take the existing integral simultaneous derived reduction D with DiagonalCompletionSpec, any normalized total derived limit L on constant ell-adic module towers, and any normalized simultaneous derived quotient N on constant ell-adic modules. For each n, let E_n be exact derived evaluation. There is a natural isomorphism beta: D.T followed by L.R, N.T and E_n to D.T followed by E_n. For every integral derived K, the composite of N.unit_n at L.R(D.T(K)) with beta(K) is exactly L.projection_n at D.T(K). This assertion involves no completed coefficient module, completed scalar restriction, supported or Tate endpoint, or lifted morphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), reduction of the limit map via the adjoint of each tower projection"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [
+  {
+   "text": "Identify D.T with the strict K-flat quotient model by the cokernel presentations and uniqueness of pointwise left derived functors. Identify the supplied total right derived limit L with the normalized adic completion model, retaining its projections. The finite quotient has the two-term free resolution, and the adic completion reduction theorem makes the adjoint of the actual limit projection an isomorphism.",
+   "uses": [
+    "lemma-weil-pbc-adic-completion-reduction",
+    "lem-sfb-diagonal-derived-reduction-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify N with the derived quotient of that same constant coefficient module category using its universal counit. Its normalized units identify the comparison with the adjoint of projection, yielding the displayed unit equation. Naturality of the adic comparison on K-flat representatives and localization gives the full natural isomorphism beta on the integral derived category.",
+   "uses": [
+    "lemma-weil-pbc-adic-completion-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-adic-completion-reduction",
+  "lem-sfb-diagonal-derived-reduction-exists"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "by": "X2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), reduction of the limit map via the adjoint of each tower projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite reduction of derived adic completion is isomorphic to the original finite reduction naturally with respect to maps",
+   "results": "8 hits on ordinary AdicCompletion: map_mk, tensor_map_id_left_eq_map, of_bijective, map_id and related ring/module facts.",
+   "date": "2026-10-28",
+   "verdict": "No derived sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion reduction modulo a prime power of the derived inverse limit of reductions is naturally isomorphic to evaluation",
+   "results": "8 hits on AdicCompletion evaluation, to/from completion algebra equivalences and quotient maps.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Reuse the project adicCompletionReduction_isIso after transport between the strict models."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Rr]estrict|[Rr]estrict.*reduction|adic.*[Ee]valuation|completion.*[Rr]eduction in Mathlib/Algebra/Homology and Mathlib/CategoryTheory; project search of DiagonalCompletedReductionData",
+   "results": "No relevant Mathlib match. AdicCompletionReduction has adicCompletionReduction_isIso and adicCompletionReduction_naturality in a different strict K-flat model. DiagonalReductionCompletion proves a completion reflector but does not give finite evaluation-adjoint comparisons.",
+   "date": "2026-10-28",
+   "verdict": "Missing bridge is the normalized comparison with arbitrary supplied D, L and N."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalLimitFiniteReduction",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (3), finite reduction of the completed limit via projection adjoints",
+   "via": [
+    "lem-sfb-diagonal-limit-finite-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalAdicEvaluationComparison",
+  "file": "lean/Sheaf/Paper/DiagonalAdicEvaluationComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_adic_evaluation_comparison",
+  "statement": "theorem diagonal_adic_evaluation_comparison (ℓ : ℕ) [Fact ℓ.Prime]\n    (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (hcompletion : DiagonalCompletionSpec ℓ W D)\n    (L : DiagonalRlim (DiagonalMod ℓ W))\n    (N : DiagonalCompletedReductionData ℓ (DiagonalMod ℓ W)) (n : ℕ) :\n    let E := ((evaluation ℕᵒᵖ (DiagonalMod ℓ W)).obj (op n)).mapDerivedCategory\n    ∃ β : D.T ⋙ L.R ⋙ N.derived.T ⋙ E ≅ D.T ⋙ E,\n      ∀ K : DerivedCategory (DiagonalAb W),\n        (N.unit n).app (L.R.obj (D.T.obj K)) ≫ β.hom.app K =\n          (L.projection n).app (D.T.obj K)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261028T055825-L-813853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261028T055825-L-813853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

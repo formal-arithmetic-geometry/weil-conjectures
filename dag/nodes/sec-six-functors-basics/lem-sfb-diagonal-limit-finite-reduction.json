@@ -14,40 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Construct simultaneous derived reduction on completed coefficient modules using the prescribed cokernels and K-flat resolutions; keep the derived quotient unit normalized against the ordinary quotient map.",
+   "text": "Choose M,N and the natural finite scalar-restriction comparison alpha, preserving quotient units. For each n choose the normalized natural evaluation-adjoint comparison beta for D and L relative to N.",
    "uses": [
-    "def-sfb-diagonal-limit-interface",
-    "lem-sfb-diagonal-derived-reduction-exists"
+    "lem-sfb-diagonal-completed-reduction-restriction",
+    "lem-sfb-diagonal-adic-evaluation-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The two-term free resolution of each finite quotient and tensor associativity identify the finite reduction of Rlim D.T(K) with its evaluation at that level. Compare completed and constant finite quotients, and transport along s,t,a,b. The resulting endpoint isomorphisms are adjoint to the actual derived-limit projections, giving exactly the two quotient-unit equations.",
-   "uses": [
-    "lemma-weil-pbc-adic-completion-reduction",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false
+   "text": "Write B_n=N.T followed by evaluation. Define e at the source as alpha followed by B_n applied to the given source limit isomorphism, followed by beta at the integral source; define g in the same way at the target. Naturality of N.unit and the two comparison unit equations give the required source and target equations.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply naturality of the evaluation-adjoint comparison to D.T(f) for an arbitrary integral morphism f. Substitute the displayed equation relating delta and Rlim(D.T(f)), and compose with the inverse target comparison. This yields the finite map equality for every n. No finite Cartier normalization or existence or uniqueness of delta is used.",
-   "uses": [
-    "lemma-weil-pbc-adic-completion-reduction"
-   ],
-   "elementary": false
+   "text": "Postcompose the finite arrow equation by g.hom. Naturality of alpha moves finite reduction of delta to B_n(F(delta)); functoriality of B_n carries the assumed whole-limit equation to this square. Naturality of beta moves L.R(D.T(f)) to evaluation of D.T(f). Reassociate and cancel g.hom.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sfb-diagonal-limit-interface",
-  "lem-sfb-diagonal-derived-reduction-exists",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lemma-weil-pbc-adic-completion-reduction"
+  "lem-sfb-diagonal-completed-reduction-restriction",
+  "lem-sfb-diagonal-adic-evaluation-comparison"
  ],
  "proof_origin": {
   "kind": "adapted",
+  "by": "X2",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
-  "place": "paragraph (3), reduction of the limit map via the adjoint of each tower projection",
-  "by": "X3"
+  "place": "paragraph (3), pasting the finite scalar and evaluation-adjoint comparisons"
  },
  "mathlib_searches": [
   {
@@ -115,9 +108,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261028T035013-L-3579330",
+  "landing": "20261028T055825-L-813853",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

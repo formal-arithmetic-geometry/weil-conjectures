@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-diagonal-completed-reduction-restriction",
+ "kind": "statement",
+ "title": "Completed scalar restriction commutes with simultaneous derived reduction",
+ "statement": "For a prime ell and a scheme W, with the four derived categories of constant ell-adic modules, their strict towers, completed coefficient modules and their strict towers, there are normalized simultaneous quotient reductions M over the completed category and N over the constant category. For every n, writing F for completed scalar restriction on derived categories and C_n,E_n for derived level evaluations, there is a natural isomorphism M.T followed by C_n and F to F followed by N.T and E_n. Its component at every P carries F(M.unit_n(P)) to N.unit_n(F(P)). This assertion involves no integral input, inverse limit, endpoint identification or arrow between endpoints.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), reduction of the limit map via the adjoint of each tower projection"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary cokernels of multiplication by ell^(n+1) to construct both quotient towers. Exact scalar restriction identifies the quotient maps and transitions. Resolve by flat-term K-flat complexes; multiplication is monic on the coefficient unit and hence on flat terms, so quotient reduction preserves quasi-isomorphisms between regular resolutions. The same resolving-class construction as for integral quotient towers constructs M and N.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite change-of-rings comparison is natural on those K-flat representatives and identifies the quotient insertions. Derive the ordinary square, apply uniqueness of pointwise left derived functors, and descend the quotient-unit square through localization. This gives alpha as a natural isomorphism and its normalized unit equation on every derived completed object.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-derived-reduction-exists",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "by": "X2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), reduction of the limit map via the adjoint of each tower projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar restriction commutes naturally with derived reduction modulo a prime power and preserves the quotient unit",
+   "results": "8 hits: RestrictScalars, Submodule.Quotient.restrictScalarsEquiv and ordinary module constructions; no derived sheaf quotient comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. ConstantCompletionCore.finiteDerivedComparison is a related project theorem on a different coefficient/category model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with simultaneous left derived quotient functors and their quotient units",
+   "results": "8 hits, including Ext.mapExactFunctor_hom, localizer derivability structures, mapDerivedCategory linearity and left-derived functor existence. None constructs the normalized simultaneous quotient comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Mathlib derived uniqueness is a tool for the bridge."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "3 hits: leftDerivedNatIso and its hom/inv equations in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-28",
+   "verdict": "Tool only: it compares supplied derived functors, but does not construct the two quotient functors or prove scalar compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Rr]estrict|[Rr]estrict.*reduction|adic.*[Ee]valuation|completion.*[Rr]eduction in Mathlib/Algebra/Homology and Mathlib/CategoryTheory",
+   "results": "No matches. Project search: only DiagonalTowerLimitInterface defines DiagonalCompletedReductionData; ConstantCompletionCore.finiteDerivedComparison has the relevant normalized scalar tensor square in its separate ringed-site model.",
+   "date": "2026-10-28",
+   "verdict": "A new comparison bridge is needed for the existing diagonal quotient interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalLimitFiniteReduction",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (3), finite reduction of the completed limit via projection adjoints",
+   "via": [
+    "lem-sfb-diagonal-limit-finite-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedReductionRestriction",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedReductionRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_completed_reduction_restriction",
+  "statement": "theorem diagonal_completed_reduction_restriction (ℓ : ℕ) [Fact ℓ.Prime]\n    (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ W)] :\n    let F := diagonalCompletedUnderlying ℓ W\n    let E := fun n : ℕ ↦\n      ((evaluation ℕᵒᵖ (DiagonalMod ℓ W)).obj (op n)).mapDerivedCategory\n    let C := fun n : ℕ ↦\n      ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ W)).obj (op n)).mapDerivedCategory\n    ∃ (M : DiagonalCompletedReduction ℓ W)\n      (N : DiagonalCompletedReductionData ℓ (DiagonalMod ℓ W)),\n      ∀ n : ℕ, ∃ α : M.derived.T ⋙ C n ⋙ F ≅ F ⋙ N.derived.T ⋙ E n,\n        ∀ P : DerivedCategory (DiagonalCompleted ℓ W),\n          F.map ((M.unit n).app P) ≫ α.hom.app P = (N.unit n).app (F.obj P)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261028T055825-L-813853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261028T055825-L-813853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

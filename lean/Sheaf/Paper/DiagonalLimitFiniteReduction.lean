@@ -6,6 +6,8 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.Paper.DiagonalTowerLimitInterface
+import Sheaf.Paper.DiagonalCompletedReductionRestriction
+import Sheaf.Paper.DiagonalAdicEvaluationComparison
 
 /-! # Finite reduction of the completed diagonal limit
 
@@ -92,6 +94,61 @@ theorem diagonal_limit_finite_reduction (ℓ : ℕ) [Fact ℓ.Prime]
           F.map ((M.unit n).app (diagonalCompletedCodomain ℓ Y)) ≫ g.hom =
             diagonalTargetLimitMap ℓ Y D H b L t ≫ (L.projection n).app _ ∧
           F.map ((C n).map (M.derived.T.map δ)) =
-            e.hom ≫ (E n).map (D.T.map f) ≫ g.inv := by sorry
+            e.hom ≫ (E n).map (D.T.map f) ≫ g.inv := by
+  classical
+  have _ := hpℓ
+  have _ := hY
+  let F := diagonalCompletedUnderlying ℓ (diagonalSurface Y)
+  let E := fun n : ℕ ↦
+    ((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory
+  let C := fun n : ℕ ↦
+    ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory
+  obtain ⟨M, N, hα⟩ := diagonal_completed_reduction_restriction ℓ (diagonalSurface Y)
+  refine ⟨M, ?_⟩
+  intro f δ hδ n
+  obtain ⟨α, hαunit⟩ := hα n
+  obtain ⟨β, hβunit⟩ := diagonal_adic_evaluation_comparison ℓ (diagonalSurface Y)
+    D hcompletion L N n
+  let B := N.derived.T ⋙ E n
+  let source := diagonalSourceLimitMap ℓ Y D a L s
+  let target := diagonalTargetLimitMap ℓ Y D H b L t
+  let : IsIso source := hs
+  let : IsIso target := ht
+  let e := α.app (diagonalCompletedDomain ℓ Y) ≪≫
+    B.mapIso (asIso source) ≪≫ β.app _
+  let g := α.app (diagonalCompletedCodomain ℓ Y) ≪≫
+    B.mapIso (asIso target) ≪≫ β.app _
+  refine ⟨e, g, ?_, ?_, ?_⟩
+  · change F.map ((M.unit n).app _) ≫
+      (α.hom.app _ ≫ B.map source ≫ β.hom.app _) = _
+    rw [← Category.assoc, hαunit]
+    rw [← (N.unit n).naturality_assoc source]
+    rw [hβunit]
+    rfl
+  · change F.map ((M.unit n).app _) ≫
+      (α.hom.app _ ≫ B.map target ≫ β.hom.app _) = _
+    rw [← Category.assoc, hαunit]
+    rw [← (N.unit n).naturality_assoc target]
+    rw [hβunit]
+    rfl
+  · apply (cancel_mono g.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    change F.map ((C n).map (M.derived.T.map δ)) ≫
+      (α.hom.app _ ≫ B.map target ≫ β.hom.app _) =
+      (α.hom.app _ ≫ B.map source ≫ β.hom.app _) ≫ (E n).map (D.T.map f)
+    have hαδ := α.hom.naturality δ
+    change F.map ((C n).map (M.derived.T.map δ)) ≫ α.hom.app _ =
+      α.hom.app _ ≫ B.map (F.map δ) at hαδ
+    rw [reassoc_of% hαδ]
+    change α.hom.app _ ≫ B.map (F.map δ) ≫ B.map target ≫ β.hom.app _ = _
+    rw [← B.map_comp_assoc, hδ, B.map_comp_assoc]
+    change α.hom.app _ ≫ B.map source ≫
+      B.map (L.R.map (D.T.map f)) ≫ β.hom.app _ = _
+    have hβf := β.hom.naturality f
+    change B.map (L.R.map (D.T.map f)) ≫ β.hom.app _ =
+      β.hom.app _ ≫ (E n).map (D.T.map f) at hβf
+    rw [hβf]
+    simp only [Category.assoc]
+
 
 end AlgebraicGeometry.ProEtale
