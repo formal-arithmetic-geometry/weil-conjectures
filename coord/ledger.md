@@ -20900,3 +20900,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/T2/Sheaf.Paper.ScalarPullbackRoosCoordinates (stage 3; reviewer PASS; first push; landing 20261028T034942-L-3573822 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:49 L: merged deliver/T3/Sheaf.Paper.CompletedPullbackTensorConstruction (stage 3; reviewer FIX; first push; landing 20261028T034944-L-3574173 (interface); batch 20261028T034643; modules 7; new nodes 3; change records: coord/changes/T3-completed-pullback-tensor-integral-scalar.md)
 - 03:49 L: merged deliver/T6/Sheaf.Paper.PodTensorShiftStrictTowerSquares (stage 3; reviewer PASS; first push; landing 20261028T034946-L-3574407 (interface); batch 20261028T034643; modules 5; new nodes 4)
+- 03:49 L: merged deliver/T7/Sheaf.Paper.PodReindexingShiftDerivedModel (stage 3; reviewer PASS; first push; landing 20261028T034947-L-3574548 (interface); batch 20261028T034643; modules 3; new nodes 2)
