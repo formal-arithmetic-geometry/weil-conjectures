@@ -21150,3 +21150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:25 L: merged deliver/X2/Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetProjectionModelIso (stage 3; reviewer PASS; first push; landing 20261028T072501-L-1954025 (interface); batch 20261028T072331; modules 3; new nodes 0; change records: coord/changes/X2-target-projection-geometric-context.md)
 - 07:25 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ProperShriekCompSupportsCanonicalHelper (stage 3; reviewer PASS; after a return; landing 20261028T072502-L-1954480 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:25 L: merged deliver/NH/lem-sf-projection-reduction-rational (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing - (dag)
+- 07:25 L: merged deliver/NA/lem-per-adic-closed-constructible (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing 20261028T072504-NA-1955179 (proof)
