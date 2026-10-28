@@ -5,6 +5,7 @@ Authors: SHEAF groups Q22, H6, G8, D4, D2
 -/
 module
 
+public import Sheaf.Paper.WeilIndSheafCategory
 public import Sheaf.Paper.SystemOperationExchangeRealization
 public import Sheaf.Paper.CompactificationCoherence
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
@@ -14,7 +15,6 @@ public import WeilConjectures.Compactification.CategoryBaseChange
 public import Sheaf.SixFunctors.FrobeniusSquareCartesian
 public import Sheaf.Paper.PbcActualRingedExchange
 public import Sheaf.AlgebraicGeometry.FrobeniusOpenSquare
-public import Sheaf.Paper.WeilCompactSupportCohomology
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
