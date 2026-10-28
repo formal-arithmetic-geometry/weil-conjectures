@@ -20,11 +20,6 @@ groups is an equivalence. Its right adjoint `p_*` is lax monoidal and the adjunc
 is monoidal, so `p^*` also induces an equivalence `Mod_Λ ⥤ Mod_{p^* Λ}` on module objects over
 any condensed ring `Λ` (blueprint `sk-prop-pe-condensed-point`).
 
-## Main definitions
-
-- `AlgebraicGeometry.ProEtale.upperStarFromPointAdjunction`: the adjunction `p_X^* ⊣ p_{X*}`,
-  where `p_{X*} = π_{X*} ⋙ p_*`.
-
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.isEquivalence_upperStarFromPoint`: for `Ω` separably closed,
@@ -47,25 +42,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-- The adjunction `p_X^* ⊣ p_{X*}` between condensed abelian groups and abelian sheaves on
-`X_proét`, the composite of `p^* ⊣ p_*` and `π_X^* ⊣ π_{X*}`. -/
-noncomputable def upperStarFromPointAdjunction (X : Scheme.{u}) :
-    upperStarFromPoint X ⊣ (toSpecZ X)_*[Ab.{u + 1}] ⋙ pointLowerStar :=
-  pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-
-/-- The adjunction `p_X^* ⊣ p_{X*}` is monoidal, as a composite of monoidal adjunctions. -/
-instance isMonoidal_upperStarFromPointAdjunction (X : Scheme.{u}) :
-    (upperStarFromPointAdjunction X).IsMonoidal := by
-  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-      Functor.Monoidal.toOplaxMonoidal _ :=
-    isMonoidal_upperStarLowerStarAdjunction _ _
-  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _ pointUpperStarLowerStarAdjunction.{u}
-      Functor.Monoidal.toOplaxMonoidal _ :=
-    inferInstanceAs (@Adjunction.IsMonoidal _ _ _ _ _ _ _ _ pointUpperStarLowerStarAdjunction.{u}
-      pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal _)
-  exact Adjunction.isMonoidal_comp _ _
-
 variable (Ω : Type u) [Field Ω] [IsSepClosed Ω]
 
 /-- For `Ω` separably closed, the direct image `p_{Spec Ω *}` to condensed abelian groups is an
@@ -78,18 +54,32 @@ instance isEquivalence_lowerStar_comp_pointLowerStar :
     (coherentTopology Profinite.{u}) (Scheme.ProEt.topology (Spec (.of Ω)))).IsEquivalence
 
 /-- For `Ω` separably closed, the pullback `p^* : Sh(*_proét, Ab) ⥤ Sh((Spec Ω)_proét, Ab)`
-from condensed abelian groups is an equivalence (Bhatt–Scholze, Example 4.1.10). -/
+from condensed abelian groups is an equivalence (Bhatt–Scholze, Example 4.1.10): its right
+adjoint `p_* = π_* ⋙ pointLowerStar` is one. -/
 instance isEquivalence_upperStarFromPoint : (upperStarFromPoint (Spec (.of Ω))).IsEquivalence :=
-  (upperStarFromPointAdjunction (Spec (.of Ω))).isEquivalence_left_of_isEquivalence_right
+  (pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction Ab.{u + 1}
+    (toSpecZ (Spec (.of Ω))))).isEquivalence_left_of_isEquivalence_right
 
 /-- For `Ω` separably closed and a condensed ring `Λ`, the pullback `Mod_Λ ⥤ Mod_{p^* Λ}` from
 condensed `Λ`-modules to module objects over `p^* Λ` on `(Spec Ω)_proét` is an equivalence: the
-module version of the monoidal adjunction `p^* ⊣ p_*` has invertible unit and counit, these
-being computed on the underlying sheaves (blueprint `sk-prop-pe-condensed-point`). -/
+adjunction `p^* ⊣ p_*`, composite of `p^* ⊣ p_*` from the point to `Spec ℤ` and
+`π^* ⊣ π_*`, is monoidal, and its module version has invertible unit and counit, these being
+computed on the underlying sheaves (blueprint `sk-prop-pe-condensed-point`). -/
 instance isEquivalence_mapMod_upperStarFromPoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :
     ((upperStarFromPoint (Spec (.of Ω))).mapMod Λ).IsEquivalence := by
-  let adj := upperStarFromPointAdjunction (Spec (.of Ω))
+  let adj : upperStarFromPoint (Spec (.of Ω)) ⊣ _ :=
+    pointUpperStarLowerStarAdjunction.comp
+      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ (Spec (.of Ω))))
+  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ (Spec (.of Ω))))
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    isMonoidal_upperStarLowerStarAdjunction _ _
+  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _ pointUpperStarLowerStarAdjunction.{u}
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    inferInstanceAs (@Adjunction.IsMonoidal _ _ _ _ _ _ _ _ pointUpperStarLowerStarAdjunction.{u}
+      pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal _)
+  have : adj.IsMonoidal := Adjunction.isMonoidal_comp _ _
   have : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
   have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
   let adjMod := adj.mapModAdjunction Λ
