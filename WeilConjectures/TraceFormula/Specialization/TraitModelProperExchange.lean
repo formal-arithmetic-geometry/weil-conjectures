@@ -246,6 +246,7 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     (baseChangeMap 𝐐 ⟨hb⟩) (baseChangeMap 𝐐 ⟨hs⟩)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
   have pbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ
     (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
   -- the base change morphisms are invertible
