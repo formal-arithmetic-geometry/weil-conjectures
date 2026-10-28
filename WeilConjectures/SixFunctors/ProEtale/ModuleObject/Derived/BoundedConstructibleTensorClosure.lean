@@ -20,8 +20,8 @@ Let `Λ` be a condensed ring and `X` a scheme such that the bounded constructibl
 constructible (`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_unit`). If
 `F ⊗ᴸ G` is bounded constructible for any two constructible sheaves `F`, `G` placed in degree
 `0`, then `K ⊗ᴸ L` is bounded constructible for any two bounded constructible complexes `K`, `L`
-(`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_closure`, the dévissage
-step of blueprint `lem-sfb-dc-tensor-preserves`): dévissage along the truncations
+(`AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible_of_tensor_single`, the
+dévissage step of blueprint `lem-sfb-dc-tensor-preserves`): dévissage along the truncations
 (`AlgebraicGeometry.ProEtale.boundedConstructible_obj_of_forall_singleFunctor`), first in `L`
 (`K ⊗ᴸ -` is triangulated), then in `K` (`- ⊗ᴸ G` is triangulated).
 -/
@@ -92,7 +92,7 @@ Dévissage along the truncations
 (`AlgebraicGeometry.ProEtale.boundedConstructible_obj_of_forall_singleFunctor`): first in the
 second variable, `K ⊗ᴸ -` being triangulated, then in the first variable, `- ⊗ᴸ G` being
 triangulated. -/
-theorem boundedConstructible_tensor_closure
+theorem isMonoidal_boundedConstructible_of_tensor_single
     [(boundedConstructible (condensedRingObj Λ X)).IsTriangulated]
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)),

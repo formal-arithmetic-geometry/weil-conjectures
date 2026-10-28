@@ -782,7 +782,7 @@ instance isMonoidal_boundedConstructible
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   have : IsNoetherian X.left := ⟨⟩
-  exact boundedConstructible_tensor_closure _ X.left
+  exact isMonoidal_boundedConstructible_of_tensor_single _ X.left
     (CondensedRing.boundedConstructible_tensor_single ℓ X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
@@ -884,7 +884,7 @@ instance isMonoidal_boundedConstructible
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   have : IsNoetherian X.left := ⟨⟩
-  exact boundedConstructible_tensor_closure _ X.left
+  exact isMonoidal_boundedConstructible_of_tensor_single _ X.left
     (ContinuousMapRingObj.boundedConstructible_tensor_single ℓ E X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
@@ -991,7 +991,7 @@ instance isMonoidal_boundedConstructible
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   have : IsNoetherian X.left := ⟨⟩
-  exact boundedConstructible_tensor_closure _ X.left
+  exact isMonoidal_boundedConstructible_of_tensor_single _ X.left
     (PadicIntegersRingObj.boundedConstructible_tensor_single ℓ E X)
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
