@@ -6,6 +6,9 @@ Authors: SHEAF group W9
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
+import Sheaf.Paper.LisseTowerLocalizedConstantsModel
+import Sheaf.Paper.LisseTowerFixedPullback
+import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 
 /-! # Local fixed-realization comparison for a finite-level model
 
@@ -67,6 +70,58 @@ theorem lisse_finite_level_fixed_realization_local_model
               ((normalizationConstant U.left.smallEtaleTopology).obj E)) ≅
           (lisseTowerFixedRealization (W.hom ≫ g) d n).obj
             ((localProEtaleComparison w.left (lisseTowerEtaleRing d n)).obj D)) := by
-  sorry
+  classical
+  obtain ⟨e⟩ := hcomparison
+  obtain ⟨T, hT, hm⟩ := hmodels
+  refine ⟨T, hT, fun W w hw ↦ ?_⟩
+  obtain ⟨em⟩ := hm W w hw
+  let a := w.left
+  let b := U.hom ≫ g
+  have hab : a ≫ b = W.hom ≫ g := by
+    have h := w.w
+    change w.left ≫ U.hom = W.hom ≫ 𝟙 Y at h
+    erw [Category.comp_id] at h
+    simpa only [a, b, Category.assoc] using congrArg (fun t ↦ t ≫ g) h
+  let B := lisseTowerEtaleRing d n
+  let F := lisseTowerFixedRealization (W.hom ≫ g) d n
+  let C₀ := (normalizationConstant U.left.smallEtaleTopology).obj E
+  let K₀ := (localProEtaleComparison a B).obj C₀
+  obtain ⟨models⟩ :=
+    lisseTower_localized_constants_model (W.hom ≫ g) a (𝟙 W.left) d
+  let idD := Functor.mapDerivedCategoryNatIso
+      (ProEtale.upperStarId (ModuleCat.{u + 1} B) W.left) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+  have model : F.obj K₀ ≅ (constantAdicQuotientRealization (W.hom ≫ g) d n).obj E :=
+    F.mapIso (idD.app K₀).symm ≪≫ models n E
+  let R := (pbcAdicRings X d).obj (op n)
+  let RT := (adicTowerInverseImage b).obj R
+  let RZ := (adicTowerInverseImage (a ≫ b)).obj R
+  let c := (proEtaleRingInverseImageComp a b).symm.app R
+  let P := proEtaleRingModulePullback a RT RZ c
+  have hc : Iso.refl RZ = proEtaleRingCompositeCoefficients a b R RT RZ
+      (Iso.refl RT) c := by
+    apply Iso.ext
+    change 𝟙 RZ = (proEtaleRingInverseImageComp a b).hom.app R ≫
+      (adicTowerInverseImage a).map (𝟙 RT) ≫
+        (proEtaleRingInverseImageComp a b).inv.app R
+    erw [(adicTowerInverseImage a).map_id RT, Category.id_comp]
+    exact (Iso.hom_inv_id_app (proEtaleRingInverseImageComp a b) R).symm
+  let comp := (proEtaleCanonicalPullbackComposition_existsUnique a b R RT RZ
+    (Iso.refl RT) c (Iso.refl RZ) hc).exists.choose
+  let sq := (lisseTower_fixed_sheaf_pullback a b d n).some
+  let dsq : (ProEtale.upperStar (ModuleCat.{u + 1} B) a).mapDerivedCategory ⋙
+        lisseTowerFixedRealization (a ≫ b) d n ≅
+      lisseTowerFixedRealization b d n ⋙ P.mapDerivedCategory :=
+    Functor.isoWhiskerLeft _ (lisseTowerFixedRealizationIso (a ≫ b) d n).symm ≪≫
+      Functor.mapDerivedCategorySquareIso sq ≪≫
+      Functor.isoWhiskerRight (lisseTowerFixedRealizationIso b d n) P.mapDerivedCategory
+  let K := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B)
+    U.left).mapDerivedCategory.obj D
+  have actual : (lisseTowerFixedRealization (a ≫ b) d n).obj
+      ((ProEtale.upperStar (ModuleCat.{u + 1} B) a).mapDerivedCategory.obj K) ≅
+      (adicTowerPullback (a ≫ b) R).obj N :=
+    dsq.app K ≪≫ P.mapDerivedCategory.mapIso e ≪≫ (comp.app N).symm
+  rw [hab] at actual
+  exact ⟨model ≪≫ em ≪≫ actual.symm⟩
 
 end AlgebraicGeometry.Scheme

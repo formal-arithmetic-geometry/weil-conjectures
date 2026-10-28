@@ -16,26 +16,39 @@
  },
  "proof": [
   {
-   "text": "Refine the supplied model sieve and restrict the fixed-realization comparison along each member. Compose the model marking with the inverse restricted comparison, using the canonical quotient-scalar and inverse-image comparison isomorphisms to identify the source with the normalized constant model.",
+   "text": "Keep the supplied covering sieve T. On a member w:W→U, specialize the existing localized constant-model family to g=W.hom followed by g, a=w.left and b=id_W. The derived identity inverse-image comparison removes b. This identifies the fixed realization of the localized normalized constant E with constantAdicQuotientRealization(W.hom followed by g,d,n)(E).",
    "uses": [
-    "lem-weil-pbc-constant-adic-quotient-realization-iso-lift",
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "thm-weil-pbc-site-comparison"
+    "lem-weil-pbc-lisse-tower-localized-constants-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Set a=w.left and b=U.hom followed by g. Localize the proved ordinary fixed-realization inverse-image square, using lisseTowerFixedRealizationIso to identify its derived functors. Apply its component at comparisonUpperStar(D), then map the supplied comparison through the module inverse image along a. The canonical derived module inverse-image compositor identifies the result with the pullback of N along a followed by b. Its coefficient identification is the identity: the chosen coefficient along a is the inverse ring compositor, and the two ring compositors cancel.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-fixed-pullback",
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-route-pro-etale-canonical-pullback-composition-exists-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation w.w, composed with g, gives a followed by b = W.hom followed by g. Rewrite the actual-object comparison by this equality. Compose the constant-model comparison, the marking supplied by T, and the inverse actual-object comparison. This gives the required isomorphism on every member of T; its original covering proof is unchanged. No refinement, geometric point, nonempty scheme or boundedness argument is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-adic-quotient-realization-iso-lift",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-lisse-tower-localized-constants-model",
+  "lem-weil-pbc-lisse-tower-fixed-pullback",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "lem-route-pro-etale-canonical-pullback-composition-exists-unique"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "W9",
+  "by": "agent",
+  "group": "H9",
   "date": "2026-10-28",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099Y, 099Z, 09B1 and 09BV; transport of a local model marking through the fixed realization."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03DA and 0D6D: specialize the existing constant-model comparison, localize the proved fixed-realization inverse-image square, and paste the actual derived module inverse-image compositor. This is the finite-level transport substep of the original proetale.tex Tags 099Y, 099Z, 09B1 and 09BV argument."
  },
  "mathlib_searches": [
   {
@@ -91,10 +104,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W9",
+  "group": "H9",
   "result": "pass",
-  "landing": "20261028T035010-L-3578440",
-  "kind": "interface",
+  "landing": "20261028T055705-L-795893",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
