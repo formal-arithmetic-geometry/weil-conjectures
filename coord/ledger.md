@@ -20746,3 +20746,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:08 L: merged deliver/X6/Sheaf.Paper.RationalP1SecondProjectionInterchangeTail (stage 3; reviewer PASS; first push; landing 20261028T020856-L-2558231 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:09 L: merged deliver/X7/Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionComp (stage 3; reviewer PASS; first push; landing 20261028T020858-L-2558766 (interface); batch 20261028T020127; modules 4; new nodes 3)
 - 02:09 L: merged deliver/X8/Sheaf.SixFunctors.FiniteDualizingRestrictionTransport (stage 3; reviewer PASS; first push; landing 20261028T020909-L-2561163 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:09 L: merged deliver/Y2/Sheaf.Paper.CoefficientNormalizedEvaluationProjection (stage 3; reviewer PASS; first push; landing 20261028T020914-L-2562024 (interface); batch 20261028T020127; modules 2; new nodes 1)

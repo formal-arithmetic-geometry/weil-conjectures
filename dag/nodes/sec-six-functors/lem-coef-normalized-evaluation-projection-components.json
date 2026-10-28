@@ -1,0 +1,133 @@
+{
+ "id": "lem-coef-normalized-evaluation-projection-components",
+ "kind": "statement",
+ "title": "Componentwise normalized coefficient evaluation projection",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix l, E, W and reduction data R with evaluation tensor normalization hE. For normalized M, n, any adjunction L ⊣ coefficientSequenceDerivedEvaluation n and P, and every q, the finite evaluation of the unit-defined projection is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-normalized-reduction-models"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Proposition 4.17(a), component calculation before joint evaluation detection."
+ },
+ "proof": [
+  {
+   "step": 1,
+   "text": "Identify the actual evaluation tensor comparison with the normalized semilinear comparison on flat-term K-flat representatives using hE.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "For q ≤ n, use scalar tensor reassociation followed by normalized reduction of M; for q > n, use the singleton extension vanishing and preservation of zero by tensor.",
+   "uses": [
+    "lem-coef-semilinear-cartesian-projection",
+    "lem-pur-system-single-derived-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 3,
+   "text": "Transport the representative component isomorphisms through exact evaluation and the derived comparison to the displayed evaluated morphism.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-cartesian-projection",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-pur-system-single-derived-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Proposition 4.17(a); finite-prefix component calculation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite evaluation of normalized coefficient tensor projection",
+   "results": "No exact project declaration; generic tensor and evaluation tools only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso tensor.map adjunction unit evaluation",
+   "results": "Generic adjunction and tensor isomorphism lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinearCartesianProjection coefficientNormalizedEvaluationProjection",
+   "results": "Found generic semilinearCartesianProjection; no coefficient-specialized component theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic theorem requires wrapper transport"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedEvaluationProjection",
+  "date": "2026-10-28",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-evaluation-projection",
+   "place": "Componentwise finite-prefix calculation in proof step 3.",
+   "via": [
+    "lem-coef-normalized-evaluation-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedEvaluationProjectionComponents",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedEvaluationProjectionComponents.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedEvaluationProjection_components",
+  "statement": "theorem coefficientNormalizedEvaluationProjection_components\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hE : CoefficientEvaluationTensorNormalization l E W R)\n    (M : coefficientSequenceDerived l E W)\n    (hM : IsNormalizedCoefficientSequence l E W M) (n : ℕ)\n    (L : normalizedDVRDerived l E W n ⥤ coefficientSequenceDerived l E W)\n    (adj : L ⊣ coefficientSequenceDerivedEvaluation l E W n)\n    (P : normalizedDVRDerived l E W n) (q : ℕ) :\n    IsIso ((coefficientSequenceDerivedEvaluation l E W q).map\n      ((adj.homEquiv _ _).symm\n        ((R.finiteClosed n).tensor.map\n            (Prod.mkHom (adj.unit.app P)\n              (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj M))) ≫\n          (R.evaluationTensor n).inv.app (L.obj P, M))))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T020914-L-2562024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T020914-L-2562024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
