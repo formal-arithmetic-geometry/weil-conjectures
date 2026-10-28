@@ -12,36 +12,28 @@
  },
  "proof": [
   {
-   "text": "For a map of arbitrary second complexes choose the common K-flat roof supplied by the resolution-lift clause.",
-   "uses": [
-    "lem-sf-native-weil-tensor-resolution-model-data"
-   ],
-   "elementary": false
+   "text": "Apply the supplied hresolution hypothesis to g, obtaining K-flat K and K′, quasi-isomorphism augmentations q and q′, a lift a, and a homotopy a ≫ q′ ∼ q ≫ g. DerivedCategory.Q_map_eq_of_homotopy gives equality of the localized augmentation composites.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Expand both sides by the transport equation, apply hkflat to the roof map, and use homotopy invariance of the derived localization to identify the augmentation composites.",
-   "uses": [
-    "lem-sf-native-weil-tensor-resolution-model-data"
-   ],
-   "elementary": false
+   "text": "Prove ordinaryTensorMap_comp privately by the total-complex coproduct inclusions and naturality of the curried tensor. Apply mapBifunctorMapHomotopy₂ to f and the augmentation homotopy, then DerivedCategory.Q_map_eq_of_homotopy, to identify the two localized total-tensor composites.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Cancel the localized quasi-isomorphism factors to obtain naturality in both variables.",
-   "uses": [
-    "lem-sf-native-weil-tensor-resolution-model-data"
-   ],
-   "elementary": false
+   "text": "Precompose the desired square with S.tensor.map(Q.map q, identity). This morphism is invertible because q is a quasi-isomorphism. Functoriality and the localized roof equality move the augmentation to the target. Apply htransport, hkflat on f and a, the total-tensor composite equality, and htransport at the source. Cancel the precomposition to conclude. The elementary cancellation calculation is packaged in the proved private lemma naturality_of_transport.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-sf-native-weil-tensor-resolution-model-data"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "J6",
+  "group": "J3",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Native tensor transport, geometric tensor part of step 1; K-flat replacement extension."
+  "place": "Common-roof transport argument formalized directly from the theorem hypotheses, using Mathlib homotopy invariance and total-complex naturality."
  },
  "mathlib_searches": [
   {
@@ -106,12 +98,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J6",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261027T234023-L-4163300",
+  "landing": "20261028T020517-L-2518923",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

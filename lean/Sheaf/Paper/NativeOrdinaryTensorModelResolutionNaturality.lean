@@ -6,7 +6,7 @@ Authors: SHEAF group J6
 module
 
 public import Sheaf.Paper.NativeWeilClosedModels
-import Sheaf.Paper.NativeOrdinaryTensorModelResolutionData
+import Mathlib.Algebra.Homology.BifunctorHomotopy
 
 /-! # Naturality from ordinary tensor resolution transport
 
@@ -17,10 +17,43 @@ Source: Stacks 06YU and 0FPT; blueprint step 1 of
 
 @[expose] public section
 set_option autoImplicit false
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
+private theorem ordinaryTensorMap_comp (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
+    {P P' P'' Q Q' Q'' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ}
+    (f : P ⟶ P') (f' : P' ⟶ P'') (g : Q ⟶ Q') (g' : Q' ⟶ Q'') :
+    HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ) ≫
+        HomologicalComplex.mapBifunctorMap f' g' (ordinaryTensorBifunctor l Y) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap (f ≫ f') (g ≫ g')
+        (ordinaryTensorBifunctor l Y) (.up ℤ) := by
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp only [HomologicalComplex.comp_f, Category.assoc,
+    HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorMap,
+    Functor.map_comp, NatTrans.comp_app, NatTrans.naturality_assoc]
+
+private theorem naturality_of_transport {D : Type v} [Category.{w} D]
+    {A A' B B' X X' Z Z' : D} (q : A ⟶ B) [Epi q]
+    {q' : A' ⟶ B'} {a : A ⟶ A'} {g : B ⟶ B'}
+    {m : A ⟶ X} {m' : A' ⟶ X'} {e : B ⟶ Z} {e' : B' ⟶ Z'}
+    {tq : X ⟶ Z} {tq' : X' ⟶ Z'} {ta : X ⟶ X'} {tg : Z ⟶ Z'}
+    (hsquare : q ≫ g = a ≫ q') (hsource : q ≫ e = m ≫ tq)
+    (htarget : q' ≫ e' = m' ≫ tq') (hnat : a ≫ m' = m ≫ ta)
+    (htotal : ta ≫ tq' = tq ≫ tg) : g ≫ e' = e ≫ tg := by
+  apply (cancel_epi q).mp
+  calc
+    q ≫ (g ≫ e') = a ≫ (q' ≫ e') := by rw [← Category.assoc, hsquare, Category.assoc]
+    _ = a ≫ (m' ≫ tq') := by rw [htarget]
+    _ = m ≫ (ta ≫ tq') := by rw [← Category.assoc, hnat, Category.assoc]
+    _ = m ≫ (tq ≫ tg) := by rw [htotal]
+    _ = q ≫ (e ≫ tg) := by rw [← Category.assoc, ← hsource, Category.assoc]
+
+-- Preserve the supplied names of hypotheses that only constrain the proof.
+set_option linter.unusedVariables false in
 /-- Resolution transport data imply naturality of the extended ordinary model.
 
 Source: Stacks Tags 06YU and 0FPT, the common-roof comparison argument
@@ -91,6 +124,45 @@ theorem native_ordinary_tensor_model_resolution_naturality
         (extendedModel P Q hP).hom ≫ DerivedCategory.Q.map
           (HomologicalComplex.mapBifunctorMap f g
             (ordinaryTensorBifunctor l Y) (.up ℤ)) := by
-  sorry
+  intro P Q P' Q' hP hP' f g
+  obtain ⟨K, K', hK, hK', q, q', a, hq, hq', ⟨h⟩⟩ := hresolution Q Q' g
+  have hroof : DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q' =
+      DerivedCategory.Q.map q ≫ DerivedCategory.Q.map g := by
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    exact DerivedCategory.Q_map_eq_of_homotopy _ h
+  have htotal :
+      DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorMap f a (ordinaryTensorBifunctor l Y) (.up ℤ)) ≫
+        DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorMap (𝟙 P') q'
+            (ordinaryTensorBifunctor l Y) (.up ℤ)) =
+      DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorMap (𝟙 P) q
+            (ordinaryTensorBifunctor l Y) (.up ℤ)) ≫
+        DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, ordinaryTensorMap_comp,
+      ordinaryTensorMap_comp, Category.comp_id, Category.id_comp]
+    exact DerivedCategory.Q_map_eq_of_homotopy _
+      (HomologicalComplex.mapBifunctorMapHomotopy₂ f h (ordinaryTensorBifunctor l Y) (.up ℤ))
+  have hprod :
+      Prod.mkHom (DerivedCategory.Q.map q) (𝟙 (DerivedCategory.Q.obj P)) ≫
+          Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f) =
+        Prod.mkHom (DerivedCategory.Q.map a) (DerivedCategory.Q.map f) ≫
+          Prod.mkHom (DerivedCategory.Q.map q') (𝟙 (DerivedCategory.Q.obj P')) := by
+    apply Prod.hom_ext
+    · exact hroof.symm
+    · simp
+  have : IsIso (DerivedCategory.Q.map q) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).mpr hq
+  have : IsIso
+      (Prod.mkHom (DerivedCategory.Q.map q) (𝟙 (DerivedCategory.Q.obj P))) :=
+    (isIso_prod_iff _ _).mpr ⟨inferInstance, inferInstance⟩
+  have hsquare := congrArg (fun t ↦ S.tensor.map t) hprod
+  simp only [Functor.map_comp] at hsquare
+  exact naturality_of_transport
+    (S.tensor.map (Prod.mkHom (DerivedCategory.Q.map q) (𝟙 (DerivedCategory.Q.obj P))))
+    hsquare (htransport P Q K hP hK q hq) (htransport P' Q' K' hP' hK' q' hq')
+    (hkflat P K P' K' hP hP' hK hK' f a) htotal
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
