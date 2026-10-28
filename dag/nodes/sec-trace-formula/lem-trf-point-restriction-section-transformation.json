@@ -1,0 +1,105 @@
+{
+ "id": "lem-trf-point-restriction-section-transformation",
+ "kind": "statement",
+ "title": "Unique ordinary linear point-restriction transformation",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-trf-coefficient-conventions]. For any field k, scheme automorphism g of Spec(k), and coefficient option a (finite exponent n+1 when a=some n, or completed integral coefficients when a=none), use the rings, inverse-image functor F_g, section functor Gamma_a and raw restriction map of [def-trf-point-restriction-coordinates]. There is a unique natural transformation Gamma_a → F_g Gamma_a whose map on every module sheaf M and every final-object section x is exactly pointRestrictionRaw(g,a,M)(x). Its components are linear for the transported coefficient action. No algebraic-closure, boundedness, transition or characteristic hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00VE and 00WX as used in lem-weil-point-automorphism-restriction-natural; the prescribed restriction/insertion construction for the point-transport prerequisite. Agent-formulated ordinary natural-transformation part, before passage to complexes."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-point-restriction-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use the scalar normalization established in the coordinate proof of [lem-weil-point-automorphism-restriction-natural]: restriction of a scalar constant equals the inverse coefficient identification applied to that constant. The module presheaf restriction law then proves that raw restriction is linear for the transported target action. Its additivity is the ordinary additive restriction law. Presheaf-module naturality proves naturality of these linear maps. They are pointRestrictionRaw on every element by construction. Any other transformation with those section values has the same component linear map at every module; module-morphism and natural-transformation extensionality prove uniqueness. This argument works for a=none as well as a=some n, g=id, zero modules and fields not algebraically closed, because no exactness assertion is used.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-automorphism-restriction-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00VE and 00WX as used in lem-weil-point-automorphism-restriction-natural; the prescribed restriction/insertion construction for the point-transport prerequisite. Agent-formulated ordinary natural-transformation part, before passage to complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction on final-object sections under a scheme automorphism defines a natural linear transformation after transporting constant coefficients",
+   "results": "8 hits, including Scheme.restrictFunctorΓ and Scheme.restrictFunctorΓ_hom_app. These concern structure-sheaf sections, not this transported coefficient-module restriction transformation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.naturality_apply",
+   "results": "1 generic naturality lemma, used to prove naturality of the constructed linear restriction. It does not construct the coefficient-linear point-restriction transformation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointRestriction.*(Natural|Transformation)|scalar_normalization",
+   "results": "No Mathlib hits. The point-coordinate scalar normalization is a proved private helper of the existing Sheaf.Paper.PointAutomorphismRestrictionNatural module, which this proof imports.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers; the ordinary section-restriction construction used in finite sigma for lem-trf-point-system-transport-descent.",
+   "via": [
+    "lem-trf-point-system-transport-descent"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRestrictionSectionTransformation",
+  "file": "lean/Sheaf/Paper/PointRestrictionSectionTransformation.lean",
+  "declaration": "WeilConjectures.pointRestrictionSectionTransformation_existsUnique",
+  "statement": "theorem pointRestrictionSectionTransformation_existsUnique\n    (k : Type t) [Field k] (g : Spec (.of k) ⟶ Spec (.of k)) [IsIso g] (a : Option ℕ) :\n    ∃! σ : pointRestrictionSections l E k a ⟶\n        pointRestrictionInverseImage l E g a ⋙ pointRestrictionSections l E k a,\n      ∀ (M : SheafOfModules.{max u (t + 1)}\n          (pointRestrictionRing l E (Spec (.of k)) a))\n        (x : M.val.obj (op (ProEt.mk (𝟙 (Spec (.of k)))))),\n        σ.app M x = pointRestrictionRaw l E g a M x",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "independent cc review: W4 4ee680c9 vs published item and vs passed-but-unlanded D4 d32d (6 Lean + 6 nodes byte-identical); Chain/Finite extraction diffed verbatim; 4 direct importers timed against the delivery vs the published build concurrently (WholeRoos 64.9 vs 72.2 s pre-existing SLOW, NCD 52.7 vs 51.2 s, PowerRoos 20.7 s, RoosTransportData 14.7 s); axioms clean"
+ }
+}

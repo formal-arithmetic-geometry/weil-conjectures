@@ -1,0 +1,108 @@
+{
+ "id": "lem-trf-point-restriction-sequence-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation retains point-restriction arrows",
+ "statement": "For a scheme S, an automorphism g of S, a prime ell, a finite coefficient extension E and any strict coefficient system P, let ev_n be finite evaluation on the ringed sequence site [def-coef-ringed-sequence-site]. In the section coordinates [def-trf-point-restriction-coordinates], the raw point restriction of ev_n(P) along g is exactly the underlying map of P on the vertical arrow (id_n, alpha_g), where alpha_g is the arrow from the g-postcomposed final object to the final object. The equality is an equality of functions on final-object sections. The index n denotes exponent n+1. No restriction on transitions or characteristic is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Paragraph 2, coefficient and pullback/unit compatibility; agent-formulated sequence-coordinate identity used in the finite evaluation step of lem-trf-point-system-transport-descent."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib SheafOfModules.forget₂_map_pushforward_obj_val_map to the coefficient-ring identification defining finite evaluation and to alpha_g opposite. This computes its underlying abelian-group restriction map as P on (id_n,alpha_g). Apply congruence to pass from the abelian-group morphism to its underlying function. By definition pointRestrictionRaw is the same restriction map, so the resulting equation is the required one. The calculation holds for g=id, zero objects and arbitrary non-surjective transitions.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-trf-point-restriction-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Paragraph 2, coefficient and pullback/unit compatibility; agent-formulated sequence-coordinate identity used in the finite evaluation step of lem-trf-point-system-transport-descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Underlying restriction map of a coefficient system evaluated at n is its vertical presheaf restriction map",
+   "results": "8 hits, including PresheafOfModules.restriction and restriction_app. These are generic restriction operations, not this coefficient-sequence coordinate identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.forget₂_map_pushforward_obj_val_map",
+   "results": "1 hit in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous, the generic underlying-pushforward identity. The proved statement is its definitional coefficient-sequence specialization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "forget₂_map_pushforward_obj_val_map|pointRestrictionRaw_coefficientSequence",
+   "results": "1 hit, the same generic Mathlib pushforward identity; no coefficient-sequence specialization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers; finite evaluation of the whole-system point transport, inherited through the integral transport prerequisite.",
+   "via": [
+    "lem-trf-point-system-transport-descent"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRestrictionSequenceEvaluation",
+  "file": "lean/Sheaf/Paper/PointRestrictionSequenceEvaluation.lean",
+  "declaration": "WeilConjectures.pointRestrictionRaw_coefficientSequenceEvaluation",
+  "statement": "theorem pointRestrictionRaw_coefficientSequenceEvaluation\n    {S : Scheme.{t}} (g : S ⟶ S) [IsIso g] (n : ℕ)\n    (P : coefficientSequenceModules l E S) :\n    (fun y : P.val.obj (op (n, ProEt.mk (𝟙 S))) ↦\n      pointRestrictionRaw l E g (some n)\n        ((coefficientSequenceEvaluation l E S n).obj P) y) =\n    (fun y ↦ P.val.map (Prod.mkHom (𝟙 n) (pointRestrictionArrow g)).op y)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "independent cc review: W4 4ee680c9 vs published item and vs passed-but-unlanded D4 d32d (6 Lean + 6 nodes byte-identical); Chain/Finite extraction diffed verbatim; 4 direct importers timed against the delivery vs the published build concurrently (WholeRoos 64.9 vs 72.2 s pre-existing SLOW, NCD 52.7 vs 51.2 s, PowerRoos 20.7 s, RoosTransportData 14.7 s); axioms clean"
+ }
+}

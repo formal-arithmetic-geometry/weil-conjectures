@@ -1,0 +1,179 @@
+{
+ "id": "lem-trf-point-system-transport-finite",
+ "kind": "statement",
+ "title": "Finite point-transport construction and normalized evaluation comparisons",
+ "statement": "Fix the coefficient data and Frobenius power h^r of [def-trf-coefficient-conventions], [def-trf-scheme-frobenius] and the strict-system construction [lem-trf-point-system-transport-chain]. Finite coefficients have exponent n+1. Their inverse-image coefficient identifications commute with quotient transitions and completed projections. The finite tensor-unit comparison is invertible on every complex, and its inverse is the inverse-coefficient scalar action on a tensor generator. Finite R-sections are exact. On every finite-coefficient complex K there is a unique linear chain map sigma whose component is the actual final-object point restriction. The finite R-linear transport is sigma followed by the tensor comparison. Actual tensor transitions satisfy the normalized coefficient formula, and finite system evaluation has its two uniquely identity-on-sections normalized comparison isomorphisms. The module constructs the corresponding derived comparisons and finite representative transport by the canonical localization representative and factorization isomorphisms. No boundedness or constructibility is required for these constructions; the equality with actual derived system transport is left to lem-trf-point-system-transport-descent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Clause (3), point-factor prerequisite: finite restriction, coefficient squares, tensor comparison, coefficient transitions, evaluation comparisons and the finite point-transport representative recipe."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-coefficient-tower-operations",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-frobenius-point-transport",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates",
+  "def-pur-integral-finite-pullback",
+  "def-coef-normalized-dvr-tower",
+  "def-sf-scalar-reduction-categories-restriction",
+  "lem-trf-point-system-transport-chain"
+ ],
+ "proof": [
+  {
+   "text": "The finite coefficient square is the specialization of [lem-trf-point-restriction-system-chain-map]; the completed square follows from the defining limit lift. The finite tensor-unit comparison is invertible by [lem-weil-finite-comparison-complex-isomorphism], and linearity of its inverse plus the inverse identities gives its explicit scalar formula. For the finite chain restriction, apply [lem-trf-point-restriction-section-transformation] to h^r and some n. Map that natural transformation to complexes using the existing normalized chain-map extension, and transfer its uniqueness normalization by transitivity of the component equalities. This is a complete proof with no characteristic hypothesis.",
+   "uses": [
+    "lem-trf-point-restriction-system-chain-map",
+    "lem-weil-finite-comparison-complex-isomorphism",
+    "lem-trf-point-restriction-section-transformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact finite section functor is pointRestrictionSections followed by scalar restriction. The independent-universe restriction_sections_exact proof in [lem-weil-point-automorphism-restriction-natural], implementing [lem-weil-point-proetale-sections-exact], preserves finite limits and colimits; scalar restriction also preserves them. These give the exactness instances for the finite coefficient functors.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor transition is the specialization of [lem-trf-point-system-tensor-transition], using the inverse coefficient square and conjugation by the finite tensor comparison. Apply [lem-trf-point-system-ordinary-evaluation-comparisons] to obtain the two identity-on-sections normalized ordinary comparison isomorphisms and their uniqueness. Pass these isomorphisms through exact derived composition and natural-isomorphism comparisons. The finite derived comparison and transport recipe are actual composites using Q.objPreimage, Q.objObjPreimageIso, the factorization isomorphisms, the finite sigma and the tensor comparison. All are definitions, with no existence witness or unproved data introduced. Identity transport, zero objects and arbitrary unbounded complexes are included.",
+   "uses": [
+    "lem-trf-point-system-tensor-transition",
+    "lem-trf-point-system-ordinary-evaluation-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-restriction-system-chain-map",
+  "lem-weil-finite-comparison-complex-isomorphism",
+  "lem-trf-point-restriction-section-transformation",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-trf-point-system-tensor-transition",
+  "lem-trf-point-system-ordinary-evaluation-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Clause (3), point-factor prerequisite: finite restriction, coefficient squares, tensor comparison, coefficient transitions, evaluation comparisons and the finite point-transport representative recipe."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient point transport from normalized restriction and tensor comparison, evaluated through derived representatives",
+   "results": "8 hits, chiefly PolynomialLaw tensor-representative lifting and polynomial tensor identities. None concerns this coefficient-sheaf point transport or its evaluation comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "inverseImageFiniteComparisonComplex_isIso",
+   "results": "No Mathlib hit; unknown identifier. The specialized proved comparison is available in Sheaf.AlgebraicGeometry.ProEtale.FiniteComparisonIsomorphism and is used unchanged.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSigma_existsUnique|finiteTransportDerived|evaluation_existsUnique",
+   "results": "No Mathlib hits. These are the original specialized construction declarations extracted from the assigned item.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers; finite construction and representative recipe before the evaluated descent equation.",
+   "via": [
+    "lem-trf-point-system-transport-descent"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemTransportFinite",
+  "file": "lean/Sheaf/Paper/PointSystemTransportFinite.lean",
+  "declaration": "WeilConjectures.PointSystemTransport.finiteSigma_existsUnique",
+  "declarations": [
+   "WeilConjectures.PointSystemTransport.coefficient_squares",
+   "WeilConjectures.PointSystemTransport.finiteComparison_isIso",
+   "WeilConjectures.PointSystemTransport.finiteComparison_inverse",
+   "WeilConjectures.PointSystemTransport.quotient",
+   "WeilConjectures.PointSystemTransport.finitePullAdditive",
+   "WeilConjectures.PointSystemTransport.finitePullLimits",
+   "WeilConjectures.PointSystemTransport.finitePullColimits",
+   "WeilConjectures.PointSystemTransport.tensorPull",
+   "WeilConjectures.PointSystemTransport.tensorPullAdditive",
+   "WeilConjectures.PointSystemTransport.tensorPullLimits",
+   "WeilConjectures.PointSystemTransport.tensorPullColimits",
+   "WeilConjectures.PointSystemTransport.finiteRSections",
+   "WeilConjectures.PointSystemTransport.finiteRSections_exact",
+   "WeilConjectures.PointSystemTransport.finiteRSectionsAdditive",
+   "WeilConjectures.PointSystemTransport.finiteRSectionsLimits",
+   "WeilConjectures.PointSystemTransport.finiteRSectionsColimits",
+   "WeilConjectures.PointSystemTransport.finiteSectionsAdditive",
+   "WeilConjectures.PointSystemTransport.finiteSigma_existsUnique",
+   "WeilConjectures.PointSystemTransport.finiteSigma",
+   "WeilConjectures.PointSystemTransport.finiteSigmaR",
+   "WeilConjectures.PointSystemTransport.comparisonComplex",
+   "WeilConjectures.PointSystemTransport.mapFiniteComplexComparison",
+   "WeilConjectures.PointSystemTransport.finiteTransportComplex",
+   "WeilConjectures.PointSystemTransport.tensorLevel",
+   "WeilConjectures.PointSystemTransport.insertion",
+   "WeilConjectures.PointSystemTransport.tensorTransition_existsUnique",
+   "WeilConjectures.PointSystemTransport.towerEvaluation",
+   "WeilConjectures.PointSystemTransport.evaluation_existsUnique",
+   "WeilConjectures.PointSystemTransport.evaluationComparisons",
+   "WeilConjectures.PointSystemTransport.sourceEvaluation",
+   "WeilConjectures.PointSystemTransport.targetEvaluation",
+   "WeilConjectures.PointSystemTransport.finiteDerivedComparison",
+   "WeilConjectures.PointSystemTransport.finiteTransportDerived"
+  ],
+  "statement": "theorem finiteSigma_existsUnique (r n : ℕ)\n    (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) :\n    ∃! σ : ((pointRestrictionSections l E D.k (some n)).mapHomologicalComplex\n        (.up ℤ)).obj K ⟶\n      ((pointRestrictionInverseImage.{t, u} l E (pointPower D r).hom (some n) ⋙\n        pointRestrictionSections l E D.k (some n)).mapHomologicalComplex (.up ℤ)).obj K,\n      ∀ (i : ℤ) (x : (K.X i).val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),\n        σ.f i x = pointRestrictionRaw l E (pointPower D r).hom (some n) (K.X i) x",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "independent cc review: W4 4ee680c9 vs published item and vs passed-but-unlanded D4 d32d (6 Lean + 6 nodes byte-identical); Chain/Finite extraction diffed verbatim; 4 direct importers timed against the delivery vs the published build concurrently (WholeRoos 64.9 vs 72.2 s pre-existing SLOW, NCD 52.7 vs 51.2 s, PowerRoos 20.7 s, RoosTransportData 14.7 s); axioms clean"
+ }
+}

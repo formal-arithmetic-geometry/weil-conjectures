@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-point-system-transport-chain",
+ "kind": "statement",
+ "title": "Exact strict point-system functors and normalized chain transport",
+ "statement": "Fix D, ell and E as in [def-trf-coefficient-conventions] and [def-trf-scheme-frobenius]. On the actual coefficient ringed sequence site [def-coef-ringed-sequence-site], postcomposition by the rth geometric Frobenius power defines the strict-system inverse image pull, using the unique sectionwise inverse coefficient identification. This inverse image and whole-tower sections are additive and preserve finite limits and colimits. Their termwise complex functors admit a unique natural chain transformation whose (i,n) component, on sections over the final pro-etale object, is the original presheaf restriction along the vertical point arrow. This statement is for ell different from D.p and r at least one; the functors themselves and their exactness are defined for every r. Site and coefficient universes are independent, and exponent n means n+1. The attached Lean module supplies the unchanged explicit constructions and their normalization theorems, ending with the two derived-functor abbreviations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Clause (3), point-factor prerequisite, steps 1–4: actual reindexing of strict coefficient systems, exact sections, and normalized chain restriction before ordinary derived localization."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates",
+  "def-coef-normalized-dvr-tower",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual product of index identity and pro-etale postcomposition. The uniquely specified coefficient map and normalized chain transformation are those of [lem-trf-point-restriction-system-chain-map], so their uniqueness specifications transfer directly. For exactness of inverse image, the inverse pro-etale postcomposition of [lem-weil-proetale-isomorphism-inverse-image] yields an equivalence on underlying abelian sheaves. Module forgetful functors reflect the preserved finite limits and colimits. For exactness of whole-tower sections, [lem-coef-semilinear-derived-sections] supplies the restriction to finite levels; the independent-universe point-section calculation in [lem-weil-point-automorphism-restriction-natural], implementing [lem-weil-point-proetale-sections-exact], is exact. Scalar restriction and tower whiskering preserve these limits and colimits. Apply these exact functors termwise and transfer the uniquely prescribed chain map. All definitions and proofs in this extracted module are the existing construction, with no new choice or hypothesis. Zero modules, r=0 for the functors, and arbitrary unbounded complexes remain valid.",
+   "uses": [
+    "lem-trf-point-restriction-system-chain-map",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-restriction-system-chain-map",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Clause (3), point-factor prerequisite, steps 1–4: actual reindexing of strict coefficient systems, exact sections, and normalized chain restriction before ordinary derived localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact sections and uniquely normalized chain restriction transport of coefficient module systems under an automorphism of a geometric point",
+   "results": "8 hits including groupCohomology.exists_mul_galRestrict_of_norm_eq_one, field-restriction identities, and Profinite.NobelingProof exactness. None concerns coefficient ringed sequence sites or this normalized system chain map.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PointRestrictionSystem.restriction_system_chain_map",
+   "results": "No Mathlib hit; unknown identifier there. The specialized declaration is already proved in Sheaf.Paper.PointRestrictionSystemChainMap and is used by this existing construction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chainTransport_existsUnique|restriction_system_chain_map",
+   "results": "No Mathlib hits. This is extraction of existing specialized library declarations, not new foundational theory.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers; chain-level strict-system transport before descent.",
+   "via": [
+    "lem-trf-point-system-transport-descent"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemTransportChain",
+  "file": "lean/Sheaf/Paper/PointSystemTransportChain.lean",
+  "declaration": "WeilConjectures.PointSystemTransport.chainTransport_existsUnique",
+  "declarations": [
+   "WeilConjectures.PointSystemTransport.pointPower",
+   "WeilConjectures.PointSystemTransport.reindex",
+   "WeilConjectures.PointSystemTransport.reindexContinuous",
+   "WeilConjectures.PointSystemTransport.sequenceRing",
+   "WeilConjectures.PointSystemTransport.coefficient_existsUnique",
+   "WeilConjectures.PointSystemTransport.coefficient",
+   "WeilConjectures.PointSystemTransport.pull",
+   "WeilConjectures.PointSystemTransport.pull_exact",
+   "WeilConjectures.PointSystemTransport.pullAdditive",
+   "WeilConjectures.PointSystemTransport.pullLimits",
+   "WeilConjectures.PointSystemTransport.pullColimits",
+   "WeilConjectures.PointSystemTransport.sections",
+   "WeilConjectures.PointSystemTransport.sections_exact",
+   "WeilConjectures.PointSystemTransport.sectionsAdditive",
+   "WeilConjectures.PointSystemTransport.sectionsLimits",
+   "WeilConjectures.PointSystemTransport.sectionsColimits",
+   "WeilConjectures.PointSystemTransport.complexSections",
+   "WeilConjectures.PointSystemTransport.transportedComplexSections",
+   "WeilConjectures.PointSystemTransport.HasRestrictionComponents",
+   "WeilConjectures.PointSystemTransport.chainTransport_existsUnique",
+   "WeilConjectures.PointSystemTransport.chainTransport",
+   "WeilConjectures.PointSystemTransport.towerDerived",
+   "WeilConjectures.PointSystemTransport.derivedSections",
+   "WeilConjectures.PointSystemTransport.transportedDerivedSections"
+  ],
+  "statement": "theorem chainTransport_existsUnique (_hl : l ≠ D.p) (r : ℕ) (_hr : 1 ≤ r) :\n    ∃! u : complexSections D l E ⟶ transportedComplexSections D l E r,\n      HasRestrictionComponents D l E r u",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
+  "kind": "interface",
+  "note": "independent cc review: W4 4ee680c9 vs published item and vs passed-but-unlanded D4 d32d (6 Lean + 6 nodes byte-identical); Chain/Finite extraction diffed verbatim; 4 direct importers timed against the delivery vs the published build concurrently (WholeRoos 64.9 vs 72.2 s pre-existing SLOW, NCD 52.7 vs 51.2 s, PowerRoos 20.7 s, RoosTransportData 14.7 s); axioms clean"
+ }
+}

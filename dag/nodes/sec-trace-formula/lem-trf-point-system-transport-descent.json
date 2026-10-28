@@ -23,16 +23,21 @@
   "def-trf-point-restriction-coordinates",
   "def-pur-integral-finite-pullback",
   "def-coef-normalized-dvr-tower",
-  "def-sf-scalar-reduction-categories-restriction"
+  "def-sf-scalar-reduction-categories-restriction",
+  "lem-trf-point-system-transport-chain",
+  "lem-trf-point-system-transport-finite"
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-point-restriction-system-chain-map] with g=h^r. Its continuity and uniquely prescribed coefficient map are definitionally the ones used here, so its uniquely normalized chain map supplies chainTransport_existsUnique. Its finite coefficient naturality and the defining completed limit lift give coefficient_squares. For the finite tensor-unit comparison apply [lem-weil-finite-comparison-complex-isomorphism]; linearity of its inverse and the inverse identities give finiteComparison_inverse. The finite sigma is constructed directly from the scalar normalization and module-restriction naturality in [lem-weil-point-automorphism-restriction-natural], without an unnecessary characteristic hypothesis. The tensor-transition clause is the specialization of the fully proved arbitrary-automorphism result [lem-trf-point-system-tensor-transition], constructed by conjugating the actual completed-linear transition by the normalized finite tensor comparison. This avoids the system-wide tensor-sheafification comparison and its characteristic hypothesis.",
+   "text": "The finite construction described in this step is compiled in [lem-trf-point-system-transport-finite] with the same names, data and statements. The existing chain-level construction is now compiled in [lem-trf-point-system-transport-chain], with its original declaration names and definitions and no change in normalization. Apply [lem-trf-point-restriction-system-chain-map] with g=h^r. Its continuity and uniquely prescribed coefficient map are definitionally the ones used here, so its uniquely normalized chain map supplies chainTransport_existsUnique. Its finite coefficient naturality and the defining completed limit lift give coefficient_squares. For the finite tensor-unit comparison apply [lem-weil-finite-comparison-complex-isomorphism]; linearity of its inverse and the inverse identities give finiteComparison_inverse. For finite sigma, apply the ordinary uniquely normalized natural transformation of [lem-trf-point-restriction-section-transformation], whose construction uses scalar normalization and module-restriction naturality from [lem-weil-point-automorphism-restriction-natural]. Mapping this transformation to complexes and using component extensionality gives finiteSigma_existsUnique, without a characteristic hypothesis. The named ordinary API avoids repeatedly expanding its linearity construction in this module. The tensor-transition clause is the specialization of the fully proved arbitrary-automorphism result [lem-trf-point-system-tensor-transition], constructed by conjugating the actual completed-linear transition by the normalized finite tensor comparison. This avoids the system-wide tensor-sheafification comparison and its characteristic hypothesis.",
    "uses": [
     "lem-trf-point-restriction-system-chain-map",
     "lem-trf-point-system-tensor-transition",
     "lem-weil-finite-comparison-complex-isomorphism",
-    "lem-weil-point-automorphism-restriction-natural"
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-trf-point-restriction-section-transformation",
+    "lem-trf-point-system-transport-chain",
+    "lem-trf-point-system-transport-finite"
    ],
    "elementary": false,
    "source": {
@@ -67,15 +72,21 @@
    }
   },
   {
-   "text": "Evaluate the representative from Step 1 at $n$ and compose with $\\Gamma(j_r)$. Its recipe is restriction, colimit insertion, sheafification and $x\\mapsto x\\otimes1$, precisely [def-weil-frobenius-point-transport] with $h^r$ in place of $g_s$. Part (a) of [def-weil-inverse-image-pullback-comparison] identifies termwise module pullback with derived pullback. System evaluation is exact by [lem-coef-semilinear-derived-sections], and tower evaluation is the exact evaluation localized in [def-trf-coefficient-tower-operations]. These evaluations preserve this representative equation; hence when $C_n$ is bounded constructible it is exactly $\\iota^{(r)}_{C_n}$. Every preceding construction used arbitrary unbounded systems and their original transitions, so none requires cartesianness or a Tor-amplitude bound. The final derived evaluation identity remains unproved in the attached Lean module. G9 proves evaluation_existsUnique by first comparing finite evaluation of the reindexed system with finite inverse image, using the prescribed coefficient components and pushforward composition/congruence. Completed scalar restriction commutes with evaluation by the generic pushforward/restriction identity. On final-object sections the completed projection of the integral constant section is the finite constant quotient section, so the source comparison is identity on carriers. Explicit associators combine these comparisons. Their identity-on-sections normalization gives uniqueness by heterogeneous equality and natural-isomorphism extensionality. tensorTransition_existsUnique is now proved from lem-trf-point-system-tensor-transition; finite_evaluation remains unproved with its existing proof plan retained. The ordinary evaluation construction is isolated as the fully proved arbitrary-automorphism lemma lem-trf-point-system-ordinary-evaluation-comparisons; specialize it to h^r. This is a compilation split, with no additional unproved statement.",
+   "text": "Use the finite representative recipe and comparisons of [lem-trf-point-system-transport-finite]. Evaluate chainTransport at n. The identity-on-sections normalizations of the two ordinary comparisons from [lem-trf-point-system-ordinary-evaluation-comparisons] and the prescribed restriction components from [lem-trf-point-restriction-system-chain-map] identify this chain map with finiteSigmaR, using the vertical restriction identity of [lem-trf-point-restriction-sequence-evaluation]. Prove naturality of finiteSigmaR directly by module-restriction naturality, then descend its natural transformation by [lem-weil-pbc-localization-universal-property]. Apply the general compatibility theorem [lem-trf-exact-derived-square-descent]: for a square of exact functors, the composition and natural-isomorphism factorization equations of [lem-weil-pbc-exact-functor-derived-factorization] show that conjugating a descended transformation by the derived square comparisons is its evaluated descent: use Localization.natTrans_ext on whole system complexes, cancel the factorization isomorphisms, apply naturality, and use the chain-level square. This identifies the evaluated derivedTransport with the descended finite sigma on every ambient derived object. Naturality transports that finite sigma to the localization's chosen representative. In the product of this representative formula with finiteDerivedComparison, the intermediate representative isomorphisms and factorization isomorphisms cancel. Functoriality of Q then combines sigma with the sheafified tensor-unit comparison into finiteTransportComplex, hence gives finiteTransportDerived. This is precisely the recipe of [def-weil-frobenius-point-transport] with h^r, using the finite comparison of [def-weil-inverse-image-pullback-comparison]. The argument retains arbitrary unbounded systems and their original transitions; it uses no faithfulness of derived evaluation, cartesianness, flatness or constructibility.",
    "uses": [
     "def-weil-frobenius-point-transport",
     "def-weil-inverse-image-pullback-comparison",
     "lem-coef-semilinear-derived-sections",
     "def-trf-coefficient-tower-operations",
-    "lem-trf-point-system-ordinary-evaluation-comparisons"
+    "lem-trf-point-system-ordinary-evaluation-comparisons",
+    "lem-trf-point-restriction-system-chain-map",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-trf-point-restriction-sequence-evaluation",
+    "lem-trf-exact-derived-square-descent",
+    "lem-trf-point-system-transport-finite"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
     "place": "Clause (3), point-factor prerequisite to whole-system transport"
@@ -95,12 +106,17 @@
   "def-weil-frobenius-point-transport",
   "def-weil-inverse-image-pullback-comparison",
   "def-trf-coefficient-tower-operations",
-  "lem-trf-point-system-ordinary-evaluation-comparisons"
+  "lem-trf-point-system-ordinary-evaluation-comparisons",
+  "lem-trf-point-restriction-sequence-evaluation",
+  "lem-trf-exact-derived-square-descent",
+  "lem-trf-point-restriction-section-transformation",
+  "lem-trf-point-system-transport-chain",
+  "lem-trf-point-system-transport-finite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Clause (3), whole-system point-transport prerequisite; explicit argument from the cited inverse-image recipe and ordinary derived localization; P3: explicit Mathlib localization descent, reflected exactness through underlying sheaves, finite restriction and comparison inverse proofs (2026-10-26). G9: identity-normalized ordinary evaluation comparison, using finite pushforward congruence and completed scalar restriction; abstract exactness and chain-map extensionality proof optimizations, with the other two remaining clauses unchanged (2026-10-27). D4: tensorTransition_existsUnique specializes the fully proved arbitrary-automorphism transition construction; conjugation and the inverted coefficient square replace the system tensor-sheafification route (2026-10-27)."
+  "place": "Clause (3), whole-system point-transport prerequisite; explicit argument from the cited inverse-image recipe and ordinary derived localization; P3: explicit Mathlib localization descent, reflected exactness through underlying sheaves, finite restriction and comparison inverse proofs (2026-10-26). G9: identity-normalized ordinary evaluation comparison, using finite pushforward congruence and completed scalar restriction; abstract exactness and chain-map extensionality proof optimizations, with the other two remaining clauses unchanged (2026-10-27). D4: tensorTransition_existsUnique specializes the fully proved arbitrary-automorphism transition construction; conjugation and the inverted coefficient square replace the system tensor-sheafification route (2026-10-27). D4 (2026-10-27): completed finite_evaluation by identity-normalized chain evaluation, natural finite-sigma descent, exact derived-square factorization, localization extensionality, and cancellation on chosen representatives; no new unproved statement. D4: after local folding and named APIs removed repeated coefficient unfolding, split the unchanged chain-level construction into its own module to separate kernel checking of that construction from derived evaluation; no statement or definition changed. The finite construction is likewise compiled independently from chain construction and final derived descent; all original definitions and interfaces are preserved."
  },
  "mathlib_searches": [
   {
@@ -248,65 +264,8 @@
   "module": "Sheaf.Paper.PointSystemTransportDescent",
   "declaration": "WeilConjectures.PointSystemTransport.point_system_transport_descent",
   "declarations": [
-   "WeilConjectures.PointSystemTransport.pointPower",
-   "WeilConjectures.PointSystemTransport.reindex",
-   "WeilConjectures.PointSystemTransport.reindexContinuous",
-   "WeilConjectures.PointSystemTransport.sequenceRing",
-   "WeilConjectures.PointSystemTransport.coefficient_existsUnique",
-   "WeilConjectures.PointSystemTransport.coefficient",
-   "WeilConjectures.PointSystemTransport.pull",
-   "WeilConjectures.PointSystemTransport.pull_exact",
-   "WeilConjectures.PointSystemTransport.pullAdditive",
-   "WeilConjectures.PointSystemTransport.pullLimits",
-   "WeilConjectures.PointSystemTransport.pullColimits",
-   "WeilConjectures.PointSystemTransport.sections",
-   "WeilConjectures.PointSystemTransport.sections_exact",
-   "WeilConjectures.PointSystemTransport.sectionsAdditive",
-   "WeilConjectures.PointSystemTransport.sectionsLimits",
-   "WeilConjectures.PointSystemTransport.sectionsColimits",
-   "WeilConjectures.PointSystemTransport.complexSections",
-   "WeilConjectures.PointSystemTransport.transportedComplexSections",
-   "WeilConjectures.PointSystemTransport.HasRestrictionComponents",
-   "WeilConjectures.PointSystemTransport.chainTransport_existsUnique",
-   "WeilConjectures.PointSystemTransport.chainTransport",
-   "WeilConjectures.PointSystemTransport.towerDerived",
-   "WeilConjectures.PointSystemTransport.derivedSections",
-   "WeilConjectures.PointSystemTransport.transportedDerivedSections",
    "WeilConjectures.PointSystemTransport.point_system_transport_descent",
    "WeilConjectures.PointSystemTransport.derivedTransport",
-   "WeilConjectures.PointSystemTransport.coefficient_squares",
-   "WeilConjectures.PointSystemTransport.finiteComparison_isIso",
-   "WeilConjectures.PointSystemTransport.finiteComparison_inverse",
-   "WeilConjectures.PointSystemTransport.quotient",
-   "WeilConjectures.PointSystemTransport.finitePullAdditive",
-   "WeilConjectures.PointSystemTransport.finitePullLimits",
-   "WeilConjectures.PointSystemTransport.finitePullColimits",
-   "WeilConjectures.PointSystemTransport.tensorPull",
-   "WeilConjectures.PointSystemTransport.tensorPullAdditive",
-   "WeilConjectures.PointSystemTransport.tensorPullLimits",
-   "WeilConjectures.PointSystemTransport.tensorPullColimits",
-   "WeilConjectures.PointSystemTransport.finiteRSections",
-   "WeilConjectures.PointSystemTransport.finiteRSections_exact",
-   "WeilConjectures.PointSystemTransport.finiteRSectionsAdditive",
-   "WeilConjectures.PointSystemTransport.finiteRSectionsLimits",
-   "WeilConjectures.PointSystemTransport.finiteRSectionsColimits",
-   "WeilConjectures.PointSystemTransport.finiteSectionsAdditive",
-   "WeilConjectures.PointSystemTransport.finiteSigma_existsUnique",
-   "WeilConjectures.PointSystemTransport.finiteSigma",
-   "WeilConjectures.PointSystemTransport.finiteSigmaR",
-   "WeilConjectures.PointSystemTransport.comparisonComplex",
-   "WeilConjectures.PointSystemTransport.mapFiniteComplexComparison",
-   "WeilConjectures.PointSystemTransport.finiteTransportComplex",
-   "WeilConjectures.PointSystemTransport.tensorLevel",
-   "WeilConjectures.PointSystemTransport.insertion",
-   "WeilConjectures.PointSystemTransport.tensorTransition_existsUnique",
-   "WeilConjectures.PointSystemTransport.towerEvaluation",
-   "WeilConjectures.PointSystemTransport.evaluation_existsUnique",
-   "WeilConjectures.PointSystemTransport.evaluationComparisons",
-   "WeilConjectures.PointSystemTransport.sourceEvaluation",
-   "WeilConjectures.PointSystemTransport.targetEvaluation",
-   "WeilConjectures.PointSystemTransport.finiteDerivedComparison",
-   "WeilConjectures.PointSystemTransport.finiteTransportDerived",
    "WeilConjectures.PointSystemTransport.finite_evaluation"
   ],
   "file": "lean/Sheaf/Paper/PointSystemTransportDescent.lean",
@@ -315,7 +274,7 @@
   "by": "Q10",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Strict-system reindexing, normalized chain transport, ordinary whole-tower localization, coefficient squares, finite comparison inverse, tensor transition formula, and evaluated point-transport normalization are in this unchanged module. Statement dependencies include the definition owners of the sequence-site category, restriction coordinates, finite pullback generators, finite derived category and scalar restriction. The restriction-naturality theorem remains a proof dependency only. Repair of L/H2 at immutable head 7023c01703ec; no mathematical statement correction."
+  "note": "Strict-system reindexing, normalized chain transport, ordinary whole-tower localization, coefficient squares, finite comparison inverse, tensor transition formula, and evaluated point-transport normalization are in this unchanged module. Statement dependencies include the definition owners of the sequence-site category, restriction coordinates, finite pullback generators, finite derived category and scalar restriction. The restriction-naturality theorem remains a proof dependency only. Repair of L/H2 at immutable head 7023c01703ec; no mathematical statement correction. D4: the unchanged declarations through transportedDerivedSections are now owned by lem-trf-point-system-transport-chain and publicly imported from Sheaf.Paper.PointSystemTransportChain; this module retains point_system_transport_descent and the finite recipe/evaluation declarations. The unchanged finite construction from coefficient_squares through finiteTransportDerived is now owned by lem-trf-point-system-transport-finite, re-exported by public import. This item owns the derived descent and final evaluation theorem."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -338,13 +297,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
-  "result": "pass",
-  "landing": "20261026T222615-L-673735",
+  "reviewer": "C-4ee68",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261028T020841-L-2553960",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: W4 4ee680c9 vs published item and vs passed-but-unlanded D4 d32d (6 Lean + 6 nodes byte-identical); Chain/Finite extraction diffed verbatim; 4 direct importers timed against the delivery vs the published build concurrently (WholeRoos 64.9 vs 72.2 s pre-existing SLOW, NCD 52.7 vs 51.2 s, PowerRoos 20.7 s, RoosTransportData 14.7 s); axioms clean"
  }
 }
