@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-exceptional-integral-left-normalization-obstruction",
+ "kind": "statement",
+ "title": "Noncanonical integral-left comparisons obstruct transport normalization",
+ "statement": "Fix all the geometric and coefficient data and an arbitrary TransportCoreData d as in [lem-sf-exceptional-ring-transport-core-data], and use the package TransportCoreNormalizationLaws of [lem-sf-exceptional-ring-transport-core-normalization-laws]. For every E, a normalization package for d forces d.integralLeft(E) to equal the unique comparison of [lem-sf-exceptional-integral-left-normalization-lift]. Consequently a noncanonical value at any E rules out such a package. More explicitly, let α be a nonidentity natural automorphism of the target functor finiteTorIntegralInclusion_X followed by sfCompactSupportFiniteIntegralFunctor(c,E). Replace only d.integralLeft(E) by the canonical comparison followed by α, using a dependent function update. The resulting transport datum has no normalization package. In particular the existence of this α and d refutes the assertion that every transport datum has a normalization package. This statement is conditional on a nonidentity α and does not assert the existence of α for empty schemes or zero functors.",
+ "stmt_deps": [
+  "lem-sf-exceptional-ring-transport-core-data",
+  "lem-sf-exceptional-ring-transport-core-normalization-laws",
+  "lem-sf-exceptional-integral-left-normalization-lift"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25 and Proposition 5.26; agent-expanded fully faithful lift and uniqueness argument for the specified proper/open realization."
+ },
+ "proof": [
+  {
+   "text": "The first field of a normalization package is exactly the component equation of the canonical lift. Apply its uniqueness theorem to identify d.integralLeft(E) with that lift. An assumed inequality therefore contradicts any package.",
+   "uses": [
+    "lem-sf-exceptional-integral-left-normalization-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "After the single-field update, this equality says canonical ≪≫ α = canonical. Pass to hom natural transformations and cancel the canonical isomorphism to get α.hom = identity. Iso.ext gives α = Iso.refl, contradicting the hypothesis. A universal normalization assertion applied to this updated datum contradicts the just-proved obstruction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-integral-left-normalization-lift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Whiskering.lean",
+  "place": "FullyFaithful.preimageIso, map_preimage, map_injective and cancellation of isomorphisms; specialized by E1 to the supplied compact-support realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preimageIso|map_preimage",
+   "results": "Mathlib/Logic/Function/FiberPartition.lean; Mathlib/Logic/Function/FiberPartition.lean; Mathlib/Logic/Function/FiberPartition.lean; Mathlib/Logic/Function/FiberPartition.lean; Mathlib/Logic/Function/FiberPartition.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/Grp/Ulift.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic fully faithful and isomorphism-cancellation APIs are used. No result states this specified integral comparison or the transport-record obstruction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "CategoryTheory.Functor.FullyFaithful.preimageIso; CategoryTheory.Functor.FullyFaithful.preimageIso_hom; CategoryTheory.Functor.FullyFaithful.preimageIso_inv; CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply; CategoryTheory.Equivalence.congrFullSubcategory_counitIso; CategoryTheory.Equivalence.congrFullSubcategory_unitIso; CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq",
+   "date": "2026-10-28",
+   "verdict": "The generic fully faithful and isomorphism-cancellation APIs are used. No result states this specified integral comparison or the transport-record obstruction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism is uniquely determined by its normalization after a fully faithful inclusion",
+   "results": "CategoryTheory.Functor.fullyFaithfulCancelRight; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_eq; CategoryTheory.FreeMonoidalCategory.normalizeIsoAux_hom_app; CategoryTheory.NatIso.cancel_natIso_hom_left; CategoryTheory.FreeMonoidalCategory.fullNormalizeIso; CategoryTheory.NatIso.cancel_natIso_hom_right; CategoryTheory.Cat.Hom.isoMk_toNatIso; CategoryTheory.Cat.Hom.toNatIso_isoMk",
+   "date": "2026-10-28",
+   "verdict": "The generic fully faithful and isomorphism-cancellation APIs are used. No result states this specified integral comparison or the transport-record obstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of lifting a natural isomorphism through a fully faithful functor",
+   "results": "CategoryTheory.Functor.FullyFaithful.preimageIso; CategoryTheory.Functor.fullyFaithfulCancelRight; CategoryTheory.Functor.preimageIso; CategoryTheory.Mat_.liftUnique; CategoryTheory.Functor.FullyFaithful.homNatIso'; CategoryTheory.Functor.FullyFaithful.homNatIso; CategoryTheory.WithTerminal.liftUnique; CategoryTheory.Free.liftUnique",
+   "date": "2026-10-28",
+   "verdict": "The generic fully faithful and isomorphism-cancellation APIs are used. No result states this specified integral comparison or the transport-record obstruction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism satisfying a fixed normalization cannot be composed with a nonidentity automorphism and still satisfy the same normalization",
+   "results": "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_eq; CategoryTheory.FreeMonoidalCategory.normalizeIsoAux_hom_app; CategoryTheory.FreeMonoidalCategory.normalizeIso; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp; CategoryTheory.FreeMonoidalCategory.normalize_naturality; CategoryTheory.FreeMonoidalCategory.normalizeObj_congr; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'; CategoryTheory.FreeMonoidalCategory.normalizeIsoAux",
+   "date": "2026-10-28",
+   "verdict": "The generic fully faithful and isomorphism-cancellation APIs are used. No result states this specified integral comparison or the transport-record obstruction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreLawsNormalization",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-normalization-laws",
+   "place": "Integral-left normalization, the first field of the normalization-law package. Whole-blueprint searches for integral-left and fully faithful lift found no duplicate; the original package supplies the first equation, not this lift/obstruction statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCoreLawsNormalization",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCoreLawsNormalization.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.not_normalization_of_integralLeft_twist",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreNormalizationLaws.integralLeft_eq",
+   "WeilConjectures.ExceptionalIntegralScalar.not_normalization_of_integralLeft_ne",
+   "WeilConjectures.ExceptionalIntegralScalar.not_normalization_of_integralLeft_twist",
+   "WeilConjectures.ExceptionalIntegralScalar.not_forall_normalization_of_integralLeft_twist"
+  ],
+  "statement": "theorem not_normalization_of_integralLeft_twist (E : FieldStage.{u} l)\n    (α : (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k\n          (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier) ≅\n      (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k\n          (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier))\n    (hα : α ≠ Iso.refl _) :\n    letI := Classical.decEq (FieldStage.{u} l)\n    ¬ Nonempty (TransportCoreNormalizationLaws l Ω D hl c operation left\n      { d with\n        integralLeft := Function.update d.integralLeft E\n          (normalizedIntegralLeft l Ω D hl c E\n            (operation (.integral E)) (left (.integral E)) ≪≫ α) })",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261028T020315-L-2493787",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261028T020315-L-2493787",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
