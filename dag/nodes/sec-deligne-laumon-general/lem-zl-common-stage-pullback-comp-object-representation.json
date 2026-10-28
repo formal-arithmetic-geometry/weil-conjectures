@@ -1,0 +1,79 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-object-representation",
+ "kind": "statement",
+ "title": "Common-stage pullback object representation",
+ "statement": "For a scheme map $k:V\\to W$ (residue fields inverting $\\ell$) and a common-stage object $M=(E,K)$ over $W$, the selected common-stage pullback sends $M$ literally to the pair $(E,k^*_E K)$ of the same stage, with $k^*_E$ the rational derived pullback at stage $E$.",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-common-stage-pullback-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "proof": [
+  {
+   "text": "This is the object clause of the defining existence-and-uniqueness statement of common-stage pullback [def-weil-derived-pullback-tensor-hom], applied to the chosen functor.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "P2",
+  "item": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-stage-pullback-comp-naturality-representative",
+   "place": "Finite-stage auxiliary step.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompComponent",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompComponent.lean",
+  "declaration": "WeilConjectures.commonStageDerivedPullback_object_representation",
+  "statement": "theorem commonStageDerivedPullback_object_representation\n    {V W : Scheme.{u}} (k : V ⟶ W)\n    [∀ v : V, Invertible (l : V.residueField v)]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :\n    (commonStageDerivedPullback l Ω k).obj M = commonStagePullbackObject l Ω k M"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "independent cc review: b4572 delivery (byte-identical Lean/nodes to 32ee5) vs commonStageDerivedPullback_existsUnique, rationalDerivedPullback_existsUnique, integralPullbackComposition, item/representative nodes; component+item+WeilIndSheafCategory compiled as a set (exit 0, 44 s importer)"
+ }
+}

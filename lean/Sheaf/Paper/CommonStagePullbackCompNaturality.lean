@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralPullbackComposition
 public import Sheaf.Paper.DerivedPullbackTensorHom
+public import Sheaf.Paper.CommonStagePullbackCompComponent
 
 /-! # Naturality of the normalized common-stage compositor
 
@@ -21,78 +22,34 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory AlgebraicGeometry
+open scoped TensorProduct
 namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 
-/-- The prescribed pullback object on an arbitrary literal common-stage pair.
-Source: blueprint common-stage pullback convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
-theorem commonStagePullbackIntegralObject {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :
-    (commonStageDerivedPullback l Ω f).obj P =
-      (GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
-        ((sfRationalConstructibleLocalization l _ X).obj
-          ((constructibleIntegralPullback l _ f).obj P.obj.obj)) := by
-  refine ((commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 P).trans ?_
-  change (GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
-    ((rationalDerivedPullback l _ f).obj P.obj) = _
-  exact congrArg (GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
-    ((rationalDerivedPullback_existsUnique l _ f).exists.choose_spec.2.1 P.obj)
+private theorem pod_map_heq {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {X Y X' Y' : C} (hx : X = X') (hy : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (h : HEq f g) : HEq (F.map f) (F.map g) := by
+  cases hx; cases hy; cases h; rfl
 
-/-- The component obtained from the specified integral compositor and object equalities.
-Source: Stacks 099N(5), blueprint common-stage composition convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
-def commonStagePullbackCompComponent {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z) :
-    (commonStageDerivedPullback l Ω (f ≫ g)).obj P ≅
-      (commonStageDerivedPullback l Ω f).obj ((commonStageDerivedPullback l Ω g).obj P) :=
-  eqToIso (commonStagePullbackIntegralObject l Ω (f ≫ g) P) ≪≫
-    (GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).mapIso
-      ((sfRationalConstructibleLocalization l _ X).mapIso
-        (((integralPullbackComposition l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)).choose f g).app
-            P.obj.obj)) ≪≫
-    (eqToIso ((congrArg (commonStageDerivedPullback l Ω f).obj
-      (commonStagePullbackIntegralObject l Ω g P)).trans
-        (commonStagePullbackIntegralObject l Ω f
-          ((GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
-            ((sfRationalConstructibleLocalization l _ Y).obj
-              ((constructibleIntegralPullback l _ g).obj P.obj.obj)))))).symm
 
-attribute [local irreducible] commonStagePullbackCompComponent
-  commonStageDerivedPullback constructibleIntegralPullback
 
-/-- The component arrow is exactly the localized integral compositor up to object equality.
-Source: blueprint normalized composition convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
-theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z) :
-    HEq (commonStagePullbackCompComponent l Ω f g P).hom
-      ((GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).map
-        ((sfRationalConstructibleLocalization l _ X).map
-          (((integralPullbackComposition l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)).choose f g).hom.app
-              P.obj.obj))) := by
-  unfold commonStagePullbackCompComponent
-  apply (conj_eqToHom_iff_heq _ _ (commonStagePullbackIntegralObject l Ω (f ≫ g) P)
-    ((congrArg (commonStageDerivedPullback l Ω f).obj
-      (commonStagePullbackIntegralObject l Ω g P)).trans
-        (commonStagePullbackIntegralObject l Ω f
-          ((GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
-            ((sfRationalConstructibleLocalization l _ Y).obj
-              ((constructibleIntegralPullback l _ g).obj P.obj.obj)))))).1
-  simp only [Iso.trans_hom, eqToIso.hom]
-  rfl
+private theorem comp_ofHom_square
+    (W : Scheme.{u})
+    (P Q R S : generalAlgebraicallyClosedConstructibleCategory l Ω W)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (hP : P.stage ≤ L) (hQ : Q.stage ≤ L) (hR : R.stage ≤ L) (hS : S.stage ≤ L)
+    (u : P.toStage hP ⟶ Q.toStage hQ) (v : Q.toStage hQ ⟶ S.toStage hS)
+    (u' : P.toStage hP ⟶ R.toStage hR) (v' : R.toStage hR ⟶ S.toStage hS)
+    (e : u ≫ v = u' ≫ v') :
+    GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ u ≫
+        GeneralAlgebraicallyClosedCoefficients.ofHom Q S L hQ hS v =
+      GeneralAlgebraicallyClosedCoefficients.ofHom P R L hP hR u' ≫
+        GeneralAlgebraicallyClosedCoefficients.ofHom R S L hR hS v' := by
+  simpa only [GeneralAlgebraicallyClosedCoefficients.ofHom,
+    StageSystem.PairCategory.mkHom_comp_mkHom] using
+      congrArg (StageSystem.PairCategory.mkHom L hP hS) e
 
 /-- Naturality for one explicit common-stage representative.
 The representative formula is expanded at a common coefficient stage.  One first
@@ -119,7 +76,41 @@ theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}
         (commonStageDerivedPullback l Ω f).map
           ((commonStageDerivedPullback l Ω g).map
             (GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ r)) := by
-  sorry
+  have compobj (M) :
+      (commonStageDerivedPullback l Ω f).obj
+        ((commonStageDerivedPullback l Ω g).obj M) =
+      commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g M) := by
+    rw [commonStageDerivedPullback_object_representation l Ω g M,
+      commonStageDerivedPullback_object_representation l Ω f
+        (commonStagePullbackObject l Ω g M)]
+  have hleft := heq_comp
+    (commonStageDerivedPullback_object_representation l Ω (f ≫ g) P)
+    (commonStageDerivedPullback_object_representation l Ω (f ≫ g) Q)
+    (compobj Q)
+    (commonStageDerivedPullback_map_representation l Ω (f ≫ g) P Q L hP hQ r)
+    (commonStagePullbackCompComponent_stage_representation l Ω f g Q L hQ)
+  have hm := (pod_map_heq (commonStageDerivedPullback l Ω f)
+      (commonStageDerivedPullback_object_representation l Ω g P)
+      (commonStageDerivedPullback_object_representation l Ω g Q)
+      (commonStageDerivedPullback_map_representation l Ω g P Q L hP hQ r)).trans
+    (commonStageDerivedPullback_map_representation l Ω f
+      (commonStagePullbackObject l Ω g P)
+      (commonStagePullbackObject l Ω g Q) L hP hQ _)
+  have hright := heq_comp
+    (commonStageDerivedPullback_object_representation l Ω (f ≫ g) P)
+    (compobj P) (compobj Q)
+    (commonStagePullbackCompComponent_stage_representation l Ω f g P L hP) hm
+  apply eq_of_heq
+  refine hleft.trans (HEq.trans ?_ hright.symm)
+  apply heq_of_eq
+  refine comp_ofHom_square l Ω X
+    (commonStagePullbackObject l Ω (f ≫ g) P)
+    (commonStagePullbackObject l Ω (f ≫ g) Q)
+    (commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g P))
+    (commonStagePullbackObject l Ω f (commonStagePullbackObject l Ω g Q))
+    L hP hQ hP hQ _ _ _ _ ?_
+  exact
+  commonStagePullbackCompComponent_stage_square l Ω f g L hP hQ r
 
 /-- The normalized integral components descend naturally to common-stage morphisms.
 Source: Stacks 099N(5); blueprint composition proof, first paragraph, and the

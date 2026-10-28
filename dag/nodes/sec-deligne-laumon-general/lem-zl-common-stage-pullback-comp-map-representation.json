@@ -1,0 +1,80 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-map-representation",
+ "kind": "statement",
+ "title": "Common-stage pullback map representation",
+ "statement": "For a scheme map $k:V\\to W$, common-stage objects $M,N$ over $W$, a stage $L$ containing both stages and an arrow $s:M_L\\to N_L$ at stage $L$, the common-stage pullback of the pair-category arrow represented by $s$ at $L$ is (up to the literal object equalities) the arrow represented at $L$ by $c_N^{-1}\\circ k^*_L(s)\\circ c_M$, where $c$ are the recorded pullback comparison isomorphisms of [def-weil-common-stage-pullback-data].",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-common-stage-pullback-data",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "proof": [
+  {
+   "text": "This is the representative clause of the defining existence-and-uniqueness statement of common-stage pullback [def-weil-derived-pullback-tensor-hom], applied to the chosen functor.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "P2",
+  "item": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-stage-pullback-comp-naturality-representative",
+   "place": "Finite-stage auxiliary step.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompComponent",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompComponent.lean",
+  "declaration": "WeilConjectures.commonStageDerivedPullback_map_representation",
+  "statement": "theorem commonStageDerivedPullback_map_representation\n    {V W : Scheme.{u}} (k : V ⟶ W)\n    [∀ v : V, Invertible (l : V.residueField v)]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W)\n    (L : AlgebraicallyClosedCoefficients.Index l Ω)\n    (hM : M.stage ≤ L) (hN : N.stage ≤ L)\n    (s : M.toStage hM ⟶ N.toStage hN) :\n    HEq ((commonStageDerivedPullback l Ω k).map\n      (GeneralAlgebraicallyClosedCoefficients.ofHom M N L hM hN s))\n      (GeneralAlgebraicallyClosedCoefficients.ofHom\n        (commonStagePullbackObject l Ω k M) (commonStagePullbackObject l Ω k N)\n        L hM hN\n        ((commonStagePullbackComparison l Ω k M L hM).hom ≫\n          (rationalDerivedPullback l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) k).map s ≫\n          (commonStagePullbackComparison l Ω k N L hN).inv))"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "independent cc review: b4572 delivery (byte-identical Lean/nodes to 32ee5) vs commonStageDerivedPullback_existsUnique, rationalDerivedPullback_existsUnique, integralPullbackComposition, item/representative nodes; component+item+WeilIndSheafCategory compiled as a set (exit 0, 44 s importer)"
+ }
+}

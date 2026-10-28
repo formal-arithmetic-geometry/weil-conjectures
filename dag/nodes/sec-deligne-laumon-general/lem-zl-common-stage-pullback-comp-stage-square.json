@@ -1,0 +1,80 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-stage-square",
+ "kind": "statement",
+ "title": "Conjugated fixed-stage square",
+ "statement": "At a stage $L$ containing the stages of $P,Q$, for an arrow $r:P_L\\to Q_L$, the conjugated square formed from the pullback comparisons of $gf$, $f$, $g$, the rational compositor at $L$ and the representatives $c\\circ (gf)^*_L r\\circ c^{-1}$ and $c\\circ f^*_L(c\\circ g^*_L r\\circ c^{-1})\\circ c^{-1}$ commutes.",
+ "stmt_deps": [
+  "def-weil-common-stage-pullback-data",
+  "def-sf-finite-rational-derived-operations",
+  "lem-zl-common-stage-pullback-comp-rational-naturality"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "proof": [
+  {
+   "text": "Cancel the inner comparison of $gf$ at $Q$ and the comparison of $f$ at $g^*P$, expand $f^*_L$ of the composite by functoriality, and apply the fixed-stage rational naturality [lem-zl-common-stage-pullback-comp-rational-naturality].",
+   "uses": [
+    "lem-zl-common-stage-pullback-comp-rational-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-common-stage-pullback-comp-rational-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "P2",
+  "item": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-stage-pullback-comp-naturality-representative",
+   "place": "Finite-stage auxiliary step.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompComponent",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompComponent.lean",
+  "declaration": "WeilConjectures.commonStagePullbackCompComponent_stage_square",
+  "statement": "theorem commonStagePullbackCompComponent_stage_square\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    {P Q : generalAlgebraicallyClosedConstructibleCategory l Ω Z}\n    (L : AlgebraicallyClosedCoefficients.Index l Ω)\n    (hP : P.stage ≤ L) (hQ : Q.stage ≤ L)\n    (r : P.toStage hP ⟶ Q.toStage hQ) :\n    ((commonStagePullbackComparison l Ω (f ≫ g) P L hP).hom ≫\n      (rationalDerivedPullback l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g)).map r ≫\n      (commonStagePullbackComparison l Ω (f ≫ g) Q L hQ).inv) ≫\n      ((commonStagePullbackComparison l Ω (f ≫ g) Q L hQ).hom ≫\n        (commonStagePullbackRationalComposition l Ω f g L Q hQ).hom ≫\n        (rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map\n          ((commonStagePullbackComparison l Ω g Q L hQ).inv) ≫\n        (commonStagePullbackComparison l Ω f\n          (commonStagePullbackObject l Ω g Q) L hQ).inv) =\n      ((commonStagePullbackComparison l Ω (f ≫ g) P L hP).hom ≫\n        (commonStagePullbackRationalComposition l Ω f g L P hP).hom ≫\n        (rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map\n          ((commonStagePullbackComparison l Ω g P L hP).inv) ≫\n        (commonStagePullbackComparison l Ω f\n          (commonStagePullbackObject l Ω g P) L hP).inv) ≫\n      ((commonStagePullbackComparison l Ω f\n          (commonStagePullbackObject l Ω g P) L hP).hom ≫\n        (rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map\n          ((commonStagePullbackComparison l Ω g P L hP).hom ≫\n            (rationalDerivedPullback l\n              (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map r ≫\n            (commonStagePullbackComparison l Ω g Q L hQ).inv) ≫\n        (commonStagePullbackComparison l Ω f\n          (commonStagePullbackObject l Ω g Q) L hQ).inv)"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "independent cc review: b4572 delivery (byte-identical Lean/nodes to 32ee5) vs commonStageDerivedPullback_existsUnique, rationalDerivedPullback_existsUnique, integralPullbackComposition, item/representative nodes; component+item+WeilIndSheafCategory compiled as a set (exit 0, 44 s importer)"
+ }
+}

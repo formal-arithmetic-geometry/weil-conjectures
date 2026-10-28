@@ -1,0 +1,85 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-rational-naturality",
+ "kind": "statement",
+ "title": "Fixed-stage rational compositor naturality",
+ "statement": "Fix scheme maps $f:X\\to Y$, $g:Y\\to Z$ and a coefficient stage $L$. The rational compositor $\\rho_K:(gf)^*_L K\\cong f^*_L g^*_L K$ at $L$, defined as the localization of the selected integral compositor of [lem-pod-integral-pullback-composition] conjugated by the literal object equalities of rational pullback, is natural in every rational morphism $v:K\\to J$ at stage $L$: $\\rho_K\\circ (gf)^*_L v=f^*_Lg^*_L v\\circ\\rho_J$ in the order of composition of the category.",
+ "stmt_deps": [
+  "lem-pod-integral-pullback-composition",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "proof": [
+  {
+   "text": "Every rational morphism is a finite sum of pure tensors $c\\otimes a$ with $a$ integral. Rational pullback is additive and sends $c\\otimes a$ to $c\\otimes$ (integral pullback of $a$) [def-sf-finite-rational-derived-operations]; the compositor component is $1\\otimes$ its integral component. On a pure tensor the square is $c\\otimes$ the integral naturality square of the selected compositor [lem-pod-integral-pullback-composition]; additivity extends it to all morphisms.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-pullback-composition",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "P2",
+  "item": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-stage-pullback-comp-naturality-representative",
+   "place": "Finite-stage auxiliary step.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompComponent",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompComponent.lean",
+  "declaration": "WeilConjectures.commonStagePullbackRationalComposition_naturality",
+  "statement": "theorem commonStagePullbackRationalComposition_naturality\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    (L : AlgebraicallyClosedCoefficients.Index l Ω)\n    {K J : generalAlgebraicallyClosedConstructibleCategory l Ω Z}\n    (hK : K.stage ≤ L) (hJ : J.stage ≤ L)\n    (v : K.toStage hK ⟶ J.toStage hJ) :\n    (commonStagePullbackRationalComposition l Ω f g L K hK).hom ≫\n        (rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map\n          ((rationalDerivedPullback l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).map v) =\n      (rationalDerivedPullback l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (f ≫ g)).map v ≫\n        (commonStagePullbackRationalComposition l Ω f g L J hJ).hom",
+  "declarations": [
+   "WeilConjectures.commonStagePullbackRationalComposition",
+   "WeilConjectures.commonStagePullbackRationalComposition_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b4572",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261028T020619-L-2529723",
+  "kind": "interface",
+  "note": "independent cc review: b4572 delivery (byte-identical Lean/nodes to 32ee5) vs commonStageDerivedPullback_existsUnique, rationalDerivedPullback_existsUnique, integralPullbackComposition, item/representative nodes; component+item+WeilIndSheafCategory compiled as a set (exit 0, 44 s importer)"
+ }
+}
