@@ -14,33 +14,44 @@
  ],
  "proof": [
   {
-   "text": "The positive image standard opens form a basis of Proj B under the graded spanning hypothesis.",
+   "text": "Use Mathlib Proj.mapAffineOpenCover psi hpsi. Its indexing family is the positive homogeneous elements of A, and opensRange_awayι identifies its ranges with D_+(psi(f)). Its open-cover axiom gives supremum top; isAffineOpen_basicOpen proves every member affine. Only a cover is asserted.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Both concrete integer twisting sheaves are quasi-coherent. Tensor pullback of the source twist is quasi-coherent by comparison with ordinary module pullback.",
    "uses": [
-    "lem-sfb-proj-scalar-extension-image-basic-open-basis"
+    "lem-sfb-proj-twist-quasicoherent",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On each basis image standard open, apply the complete-chart bijectivity theorem to eta.",
+   "text": "On every member of this affine cover, use the complete-chart bijectivity theorem for the prescribed morphism eta.",
    "uses": [
     "lem-sfb-proj-scalar-extension-twist-chart-basic"
    ],
    "elementary": false
   },
   {
-   "text": "The module morphism is an isomorphism by bijectivity on a basis. Every component on every open, in particular W, is bijective.",
-   "uses": [],
+   "text": "The quasi-coherent affine-cover criterion makes eta an isomorphism. Its component on every open W is then an isomorphism, hence bijective; no image-basis claim is used.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-proj-scalar-extension-image-basic-open-basis",
-  "lem-sfb-proj-scalar-extension-twist-chart-basic"
+  "lem-sfb-proj-twist-quasicoherent",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "lem-sfb-proj-scalar-extension-twist-chart-basic",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
  ],
  "proof_origin": {
-  "by": "worker N3",
+  "by": "worker Q4",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 clause (3), basis reduction from complete standard charts"
+  "place": "Tag 01N2 clause (3); corrected affine-cover argument using Tag 01MB and the quasi-coherent affine-cover isomorphism criterion."
  },
  "mathlib_searches": [
   {
@@ -162,11 +173,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261028T020611-L-2528405",
+  "reviewer": "C-1432c",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055735-L-803123",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn item (counterexample k[x]→k[t][x] checked) and repaired TwistChart proof (mapAffineOpenCover + isQuasicoherent_twist + isIso_of_bijective_on_affine_open_cover) against nodes lem-sfb-proj-scalar-extension-image-basic-open-basis, lem-sfb-proj-scalar-extension-twist-chart, lem-sfb-proj-twist-quasicoherent, change record, 3b importer OK"
  }
 }

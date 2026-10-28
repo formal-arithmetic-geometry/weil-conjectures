@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-proj-twist-quasicoherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of arbitrary integer twists on Proj",
+ "statement": "Let $A$ be a commutative ring with an internal nonnegative grading $A=\\bigoplus_{n\\geq0}A_n$, denoted by $\\mathcal A$; its pieces may be presented by any additive-subgroup class. For every integer $j$, the concrete twisting module sheaf $\\mathcal O_{\\operatorname{Proj}(A)}(j)=\\operatorname{twist}(\\mathcal A,j)$ [def-weil-pbc-proj-twisting-sheaf] on $\\operatorname{Proj}(A)$ [def-nagata-affine-proj] is quasi-coherent [pqf-def-coherent]. Its sections are locally homogeneous fractions with numerator degree minus denominator degree $j$. No generation in degree one, no Noetherian hypothesis, and no positivity condition on $j$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph; Definition 01MN (definition-twist); Lemma 01M7 (lemma-proj-sheaves)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-nagata-affine-proj",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Extend the nonnegative grading to integers by zero in negative degrees and shift by j. Shifting reindexes an internal direct sum, and graded multiplication gives the module compatibility. Apply the graded-module sheaf construction to obtain its quasi-coherent associated sheaf. If the implementation requires AddSubgroup-valued pieces, transport along the identity graded ring maps between the two presentations: they give mutually inverse Proj maps and inverse maps on the homogeneous fractions and on their restrictions. The identity Proj maps send a prime to itself as an underlying ideal and are mutually inverse. At corresponding primes the maps on ordinary localizations are identity maps; the homogeneous membership conditions agree, so the pointwise section maps preserve addition and the structure-sheaf action and commute with restriction. This identifies the concrete twists along the scheme isomorphism, which preserves quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each positive homogeneous f, the single-twist fraction theorem identifies the concrete twist sections with the degree-zero fractions of the shifted ring. The fraction theorem gives additivity, bijectivity, the homogeneous-localization scalar law and the same y/f^m to a^m*y/g^(e*m) restriction formula as the associated sheaf whenever g^e=a*f.",
+   "uses": [
+    "lem-sc-proj-single-twist-basic-open-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The positive homogeneous standard opens form a basis. The compatible chart identifications therefore extend uniquely to an isomorphism of module sheaves. Transport quasi-coherence through this isomorphism. Empty Proj and empty charts are included, and negative j merely gives zero graded pieces where j+n<0.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-sc-proj-single-twist-basic-open-fractions",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "proof_origin": {
+  "by": "worker Q4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB, apply the associated graded-module construction to A(j); Definition 01MN and the concrete fraction identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "twist.*[Qq]uasicoherent|[Qq]uasicoherent.*twist",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-28",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"twist\", \"IsQuasicoherent\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-28",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The twisting sheaf of an arbitrary integer degree on the projective spectrum of a graded ring is quasi coherent",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
+     "AlgebraicGeometry.Proj.ext_iff"
+    ],
+    "digest": "89ecd356d140f9f3"
+   },
+   "date": "2026-10-28",
+   "verdict": "No exact match: the returned declarations construct the Proj structure sheaf, not the quasi-coherence of its concrete integer twists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionImageBasicOpenBasis",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proj-scalar-extension-twist-chart",
+   "place": "Corrected local-to-global argument for the prescribed scalar-extension twist map: quasi-coherence of the two twists, independent of scalar extension.",
+   "via": [
+    "lem-sfb-proj-scalar-extension-image-basic-open-basis"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistQuasicoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistQuasicoherent.lean",
+  "declaration": "AlgebraicGeometry.Proj.isQuasicoherent_twist",
+  "statement": "theorem isQuasicoherent_twist\n    {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (j : ℤ) :\n    (twist 𝒜 j).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-1432c",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055735-L-803123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-1432c",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055735-L-803123",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn item (counterexample k[x]→k[t][x] checked) and repaired TwistChart proof (mapAffineOpenCover + isQuasicoherent_twist + isIso_of_bijective_on_affine_open_cover) against nodes lem-sfb-proj-scalar-extension-image-basic-open-basis, lem-sfb-proj-scalar-extension-twist-chart, lem-sfb-proj-twist-quasicoherent, change record, 3b importer OK"
+ }
+}

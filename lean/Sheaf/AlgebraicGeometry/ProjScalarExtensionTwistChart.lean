@@ -7,15 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistData
 import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic
-import Sheaf.AlgebraicGeometry.ProjScalarExtensionImageBasicOpenBasis
+import Sheaf.AlgebraicGeometry.ProjTwistQuasicoherent
+import Sheaf.AlgebraicGeometry.TensorPullbackQuasiCoherent
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Sheaf.RingTheory.HomogeneousLocalizationScalarExtension
-import Sheaf.Algebra.Module.GradedLocalizationScalarExtension
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.HomOfBasis
-import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.ProjTwistBasicOpenFractions
 
 /-! # The scalar-extension twist map on a single standard chart
 
@@ -93,14 +88,26 @@ theorem scalarExtension_twistMap_basicOpen_bijective
   have _use_hn := hn
   have _use_hW := hW
   let I := Σ n : PNat, 𝒜 (n : ℕ)
-  have hbasis : TopologicalSpace.Opens.IsBasis (Set.range
-      (fun i : I ↦ basicOpen ℬ (ψ (i.2 : A)))) :=
-    scalarExtension_image_basicOpen_isBasis 𝒜 ℬ β ψ hβψ hgraded hψ
+  have hcover : (⨆ i : I, basicOpen ℬ (ψ (i.2 : A))) = ⊤ := by
+    apply top_le_iff.mp
+    intro x hx
+    have hxcover : x ∈ ⨆ i, ((mapAffineOpenCover ψ hψ).openCover.f i).opensRange := by
+      rw [Scheme.OpenCover.iSup_opensRange]
+      trivial
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hxcover
+    change x ∈ (awayι ℬ (ψ i.2.1) (ψ.map_mem i.2.2) i.1.2).opensRange at hi
+    rw [opensRange_awayι] at hi
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i.1, i.2⟩, hi⟩
+  have : (twist 𝒜 j).IsQuasicoherent := isQuasicoherent_twist 𝒜 j
+  have : (twist ℬ j).IsQuasicoherent := isQuasicoherent_twist ℬ j
   have hIso : IsIso η := by
-    apply Scheme.Modules.isIso_of_bijective_app_of_basis hbasis η
-    intro i
-    exact scalarExtension_twistMap_chart_bijective 𝒜 ℬ β ψ hβψ hgraded hψ j η hη
-      (i.1 : ℕ) (i.2 : A) i.2.2 i.1.2
+    apply Hom.isIso_of_bijective_on_affine_open_cover η
+      (fun i : I ↦ basicOpen ℬ (ψ (i.2 : A))) hcover
+    · intro i
+      exact isAffineOpen_basicOpen ℬ (ψ (i.2 : A)) (ψ.map_mem i.2.2) i.1.2
+    · intro i
+      exact scalarExtension_twistMap_chart_bijective 𝒜 ℬ β ψ hβψ hgraded hψ j η hη
+        (i.1 : ℕ) (i.2 : A) i.2.2 i.1.2
   exact ConcreteCategory.bijective_of_isIso (η.app W)
 
 end AlgebraicGeometry.Proj

@@ -12,22 +12,17 @@
  ],
  "proof": [
   {
-   "text": "Use the positive homogeneous standard-open basis on Proj B. For a homogeneous b in ℬ_n, write b as a finite S-linear combination of images ψ(f_i) with f_i in 𝒜_n. In the domain of a homogeneous prime, b not in the prime implies at least one ψ(f_i) is not in it, so each standard neighborhood refines by an image standard open. The irrelevant-ideal hypothesis ensures the resulting opens cover Proj B.",
-   "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-nagata-affine-proj-scalar-extension"
-   ],
-   "elementary": false
+   "text": "STATEMENT-DISPUTED: Let k be a field, R=k, S=k[t], A=k[x] and B=k[t][x], with degree given by the exponent of x and coefficients of degree zero. Take beta to be the canonical scalar-extension isomorphism and psi the coefficient inclusion. Then B_n=S*x^n is the S-span of psi(A_n), and the image of the irrelevant ideal (x) is (x). Every positive homogeneous f in A is c*x^n for c in k. If c=0 its image standard open is empty; otherwise it equals all of Proj B, since c is a unit and every Proj point avoids x. But Proj B is Spec k[t], with the nonempty proper open D(t). Thus these opens cover Proj B but do not form a basis. The old proof incorrectly inferred containment D(psi(f_i)) <= D(b) from a nonzero summand at one prime. Withdraw this false split. Its sole parent now uses the affine image cover from Mathlib Proj.mapAffineOpenCover and quasi-coherence, keeping its statement unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-proj-standard-open-inclusion",
-  "lem-nagata-affine-proj-scalar-extension"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "worker N3",
+  "by": "worker Q4",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2, standard-open basis refinement"
+  "place": "Tag 01N2 gives an image standard-open cover, not an image standard-open basis; counterexample and withdrawal of the false split."
  },
  "mathlib_searches": [
   {
@@ -71,16 +66,6 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionImageBasicOpenBasis",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionImageBasicOpenBasis.lean",
-  "declaration": "AlgebraicGeometry.Proj.scalarExtension_image_basicOpen_isBasis",
-  "statement": "theorem scalarExtension_image_basicOpen_isBasis {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B] [Algebra R S] [Algebra R A] [Algebra S B] (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B) [GradedRing 𝒜] [GradedRing ℬ] (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ) (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a) (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A))) (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜)) : TopologicalSpace.Opens.IsBasis (Set.range (fun i : Σ n : PNat, 𝒜 (n : ℕ) ↦ basicOpen ℬ (ψ (i.2 : A))))",
-  "branch": "sheaf-dag",
-  "by": "N3",
-  "date": "2026-10-28"
- },
  "reviewed": {
   "date": "2026-10-28",
   "by": "L",
@@ -94,11 +79,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261028T020611-L-2528405",
+  "reviewer": "C-1432c",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055735-L-803123",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn item (counterexample k[x]→k[t][x] checked) and repaired TwistChart proof (mapAffineOpenCover + isQuasicoherent_twist + isIso_of_bijective_on_affine_open_cover) against nodes lem-sfb-proj-scalar-extension-image-basic-open-basis, lem-sfb-proj-scalar-extension-twist-chart, lem-sfb-proj-twist-quasicoherent, change record, 3b importer OK"
  }
 }
