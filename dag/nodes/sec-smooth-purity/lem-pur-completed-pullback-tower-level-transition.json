@@ -18,79 +18,86 @@
  },
  "proof": [
   {
-   "text": "Suppress $W$, and write $\\tau_n:B_{n+1}\\to B_n$ and $t_n$ for actual horizontal transitions. For an $A$-module $M$ put $\\nu_n=\\pi_n\\eta^0_M$. The limit-cone identity gives $t_n\\nu_{n+1}=\\nu_n$. The stipulated scalar-adjunction transpose of $a_{n,M}$ says precisely $a_{n,M}(b\\otimes x)=b\\nu_n(x)$ on local pure tensors. Consequently\n$$t_n a_{n+1,M}(b\\otimes x)=\\tau_n(b)\\nu_n(x)=a_{n,M}(\\tau_n(b)\\otimes x).$$\nPure tensors generate the presheaf tensor, and the sheafification universal property extends this equality to the sheaf tensor. Thus $a_n$ intertwines the actual quotient transition with that of $rM$, and its inverse does too, by composing the square with $a_{n+1}^{-1}$ and $a_n^{-1}$. Apply this to every $P^k$ and $Q^k$; naturality of $a_n$ for the differentials makes these comparisons cochain isomorphisms with the same transition squares.",
+   "text": "For each degree, the quotient transition carries the unit of finite scalar extension at n+1 to the unit at n, by its normalized pure-tensor formula and preservation of 1. A completed-linear map between these restricted finite module sheaves is finite-linear after restricting the target along the quotient: the completion projection is locally surjective. Hence the scalar-extension adjunction detects equality after precomposition with its unit. The stipulated transpose equation for the reduction-evaluation isomorphism and the limit-cone identity then prove its adjacent transition square. Apply this degreewise to each input complex.",
    "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, the ringed sequence site and its limit cone; the unit normalization is that of the completed pullback tower core."
+   }
+  },
+  {
+   "text": "Compose this square with the two inverse reduction-evaluation isomorphisms. The resulting equation says that the inverse evaluation comparison carries the actual horizontal section transition to the finite quotient transition. Transporting section types through restriction and evaluation uses exactly the underlying-section characterization of coefficientSequenceRestriction; no claim about lifting derived evaluation maps is involved.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
     "def-coef-ringed-sequence-site",
-    "def-pur-sheaf-tensor-product",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, ordinary restriction and evaluation of the ringed sequence site."
+   }
+  },
+  {
+   "text": "Evaluate the three defining factors of the level comparison on a homogeneous tensor generator: restriction/evaluation identifies the section, the normalized coefficientEvaluationTensorIso sends it to the tensor of the evaluated sections, and the total tensor of the two inverse reduction comparisons applies those inverses to the two factors. Naturality of the sheafification unit and of the direct-sum summand inclusion shows directly that restricting a total tensor generator restricts each factor. The module-sheafification unit and the underlying abelian-sheafification unit agree after forgetting the module action, so the coefficient-generator convention agrees with the prescribed finite tensor-generator convention.",
+   "uses": [
+    "def-pur-completed-pullback-tower-tensor-level",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-coef-evaluation-total-tensor-naturality",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-sfb-ringed-site-duality-maps",
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; the scalar-unit and cone calculation uses exactly the adjunction normalization in the item."
-   }
-  },
-  {
-   "text": "Put $C=r^cP$ and $D=r^cQ$. Evaluation $e_n$ is the inverse image of the vertical inclusion with its identity coefficient identification. Apply lem-pur-cochain-pullback-tensor-coherence to this ringed-topos morphism to obtain a cochain isomorphism\n$$\\kappa_n:e_n\\operatorname{Tot}_s(C,D)\\xrightarrow{\\sim}\\operatorname{Tot}_{B_n}(e_nC,e_nD).$$\nThis is the prescribed evaluation/total-tensor isomorphism: lem-coef-semilinear-tensor-evaluation fixes the ordinary evaluation comparison and its chain summands for the chosen models. On every $(p,q)$ summand both comparisons are that ordinary evaluation comparison; the direct-sum universal property makes the chain maps equal. In particular the inverse-model-chain convention and the displayed forward $\\kappa_n$ agree. The cochain theorem applies to arbitrary unbounded complexes, with the same $(-1)^p$ differential and no flatness assumption.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-coef-semilinear-tensor-evaluation",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex comparison in its proof; representative normalization supplied by the cited semilinear evaluation node."
+    "place": "Tag 07A4, ordinary total tensor construction, and Modules on Sites Tag 03EK, naturality of sheafified tensor generators."
    }
   },
   {
-   "text": "Apply lem-pur-system-cochain-tensor-reduction to $C,D$ and $n\\le n+1$. Its identity identifies the horizontal scalar-extension adjoint of the total-system transition with the scalar tensor comparison followed by the tensor of the two horizontal adjoints, under the prescribed evaluation comparisons. Transpose through the scalar-extension/restriction adjunction. Equivalently, on every evaluated tensor summand the resulting transition is\n$$x\\otimes y\\longmapsto t_n^C(x)\\otimes t_n^D(y).$$\nThus $\\kappa_n$ intertwines the actual total-system transition with this tensor transition, before localization. This uses the cochain identity of the cited node, not a claim that maps of derived evaluations lift. Restrict scalars along $A\\to B_n$: the underlying section maps are unchanged, and $A\\to B_n$ is $A\\to B_{n+1}\\to B_n$, so the same square is an equality of $A$-linear cochain maps.",
+   "text": "Precompose the desired square by the inverse level comparison at n+1. The locally surjective completion projection permits testing completed-linear maps out of the finite total tensor on homogeneous pure-tensor generators. Evaluation on sections is surjective, so choose sequence sections representing the images of the two finite sections under reduction evaluation. Step 3 identifies their inverse image under the level comparison. The source transition restricts each factor; step 2 identifies the resulting inverse-evaluation sections with the two finite quotient transitions. These are exactly the two factors in the prescribed target tensor-transition formula. Thus the two maps agree on every tensor summand in every degree, hence as cochain maps.",
    "uses": [
-    "lem-pur-system-cochain-tensor-reduction",
-    "def-coef-ringed-sequence-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 ordinary total-complex construction and the ringed sequence site preceding Tag 0941; the horizontal tensor-adjoint identity is the statement of the cited cochain-reduction node."
-   }
-  },
-  {
-   "text": "After the specified reordering $J$, define $d_n$ to be $\\operatorname{Res}_n$ of $\\kappa_n$ followed by $\\operatorname{Tot}_{B_n}(a_{n,P}^{-1},a_{n,Q}^{-1})$. This is exactly the component prescribed in the item. Tensor the two transition squares from step 1 and paste them with step 3. The result is\n$$d_n\\,t_n^T=t_n^{B_\\otimes^0}\\,d_{n+1}.$$\nThe target transition is the actual quotient transition: on a $(p,q)$ summand it sends $(b\\otimes x)\\otimes(c\\otimes y)$ to $(\\tau_n(b)\\otimes x)\\otimes(\\tau_n(c)\\otimes y)$. Functoriality of total tensor gives the pasted equality on complexes. The reordering just evaluates the same section maps in the opposite order. This is the displayed adjacent square: level $n+1$ followed by the target transition equals the source transition followed by level $n$.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-integral-derived-operations",
-    "def-pur-completed-pullback-tower-core",
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-integral-finite-tensor-tower",
     "def-pur-completed-pullback-tower-tensor-level",
-    "def-pur-integral-finite-tensor-tower"
+    "lem-coef-evaluation-total-tensor-naturality",
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-sfb-scalar-hom-tensor-coherence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, ringed sequence-site construction preceding lemma-derived-limit-is-ok; elementary pasting of steps 1 and 3 with the specified tower definitions."
+    "place": "Tags 07A4 and 0941, generator computation of the ordinary tensor comparison and its quotient transitions."
    }
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-coef-semilinear-tensor-evaluation",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-system-cochain-tensor-reduction",
-  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-reduction-tower",
   "def-pur-completed-pullback-tower-core",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-realization-models",
   "def-pur-completed-pullback-tower-tensor-level",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-coef-evaluation-total-tensor-naturality",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-weil-presheaf-modules-sheafification",
   "def-pur-integral-finite-tensor-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C2",
+  "group": "B7",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0941 and 07A4"
+  "place": "Tags 07A4 and 0941; direct normalized homogeneous-generator proof"
  },
  "mathlib_searches": [
   {
@@ -150,13 +157,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-30cfe",
-  "group": "C2",
-  "result": "fix",
-  "landing": "20261027T233820-L-4119141",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261028T020209-L-2478291",
   "kind": "interface",
-  "note": "independent cc review: 30cf delivered files vs e7cf delivery (byte-identical) and e7cf fixes; item ∃! vs node lem-pur-coherent-tensor-tower; transition sorry vs its reviewed steps 1-4; importer TensorReductionFiniteProjection SLOW vs published timing"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
