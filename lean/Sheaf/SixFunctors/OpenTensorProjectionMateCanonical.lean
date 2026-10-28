@@ -77,20 +77,29 @@ private theorem canonicalProjectionMate_homEquiv
 
 
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
-This is the chain calculation with the mate fixed by the adjunction; it omits
-any arbitrary natural transformation and is strictly simpler than the final
-resolving-pair theorem. Source: Stacks 0GL1, 07A4 and 06YS--06YT.
-(blueprint: lem-sf-open-tensor-projection-mate-canonical).
-Proof: compute the adjunct on each signed total summand from the ordinary inverse,
-the restriction comparison, and the two summand formulas, then localize. -/
--- STATEMENT-DISPUTED: `ambientModel` and `openModel` are arbitrary one-flat
--- comparison families in this theorem. No naturality or agreement with the
--- simultaneous models is assumed, so changing one component by a nontrivial
--- automorphism changes the right-hand side without changing the left-hand side.
--- The missing `ambientBoth`/`openBoth` and naturality hypotheses occur only in
--- the downstream resolving/descent statements.
--- In particular, the hypotheses permit replacing one component of `ambientModel`
--- by a nontrivial automorphism while leaving every datum on the left unchanged.
+The one-flat comparisons agree with the simultaneous K-flat models; both input
+complexes are flat-term K-flat representatives. Source: Stacks 0GL1, 07A4 and
+06YS--06YT (blueprint: lem-sf-open-tensor-projection-mate-canonical).
+
+Proof: first show that F carries flat modules to flat modules. The ordinary
+projection isomorphisms, their naturality, and symmetry identify tensoring with
+F(M) with the composite of exact G, tensoring with the flat M, and exact F.
+For a K-flat complex C, test F(C) against any acyclic complex P: exact G carries
+P to an acyclic complex, K-flatness of C makes its tensor with G(P) acyclic,
+and exact F preserves acyclicity. The chain projection and tensor symmetry
+identify this with the required acyclicity test for F(C). Thus F(C) is K-flat
+with flat terms. D.pullKFlat and D.pullFlat give the same properties for G(P).
+On each signed total summand, D.ordinaryInverse, hordinary, D.summand and
+restrictionModel.summand identify the adjunct of D.chain.inv with the tensor
+of the cochain adjunction unit and identity followed by restrictionModel.chain.
+Coproduct extensionality gives the cochain equality. Localize it using the
+unit equation for exactDerivedAdjunction and the exact-functor factorization
+isomorphisms. Apply restrictionModel.derived to F(C), P; naturality of the
+simultaneous comparison handles the cochain unit. Finally ambientBoth and
+openBoth replace the supplied comparisons by those simultaneous comparisons.
+The defining hom-equivalence formula for canonicalProjectionMate, followed by
+injectivity of that equivalence and cancellation of the chain isomorphism,
+gives the displayed equation. -/
 theorem openTensorProjection_mate_canonical
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅
@@ -98,9 +107,15 @@ theorem openTensorProjection_mate_canonical
     (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)
     (hordinary : restrictionModel.ordinary = D.pullTensor)
     (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)
+    (ambientBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1}
+      J R A T ambientModel)
     (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')
+    (openBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1}
+      J' R' A' T' openModel)
     (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)
     (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)
+    (hC : CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := R') C)
+    (flatC : flatTerms.{c, v, r} J' R' C)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
     (flatP : flatTerms.{c, v, r} J R P) :
       DerivedCategory.Q.map (D.chain C P).hom ≫

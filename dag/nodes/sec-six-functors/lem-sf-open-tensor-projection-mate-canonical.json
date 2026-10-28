@@ -2,7 +2,7 @@
  "id": "lem-sf-open-tensor-projection-mate-canonical",
  "kind": "lemma",
  "title": "Canonical adjunction-transpose projection identity on resolving pairs",
- "statement": "Under the same ringed-site, tensor-comparison, and cochain hypotheses as the resolving-pair projection lemma, with the projection mate fixed canonically as the adjoint transpose of tensor(unit,identity) followed by the inverse restriction comparison, the displayed chain comparison equation holds for a cochain C and P with P K-flat and flat terms.",
+ "statement": "Under the ringed-site, exact-adjunction, ordinary/cochain open tensor data and normalized restriction-comparison hypotheses of [def-sf-open-tensor-cochain-data] and [def-sf-open-tensor-representative-data], fix one-flat comparison families ambientModel and openModel which agree with the simultaneous K-flat models T and T′. For flat-term K-flat complexes C on the open site and P on the ambient site, the canonical projection mate (the adjoint transpose of tensor(unit,identity) followed by the inverse restriction comparison) satisfies the displayed localized chain projection equation. This is a calculation on resolving pairs, not an assertion for arbitrary unnormalized comparison families or arbitrary C.",
  "stmt_deps": [
   "def-sf-open-tensor-cochain-data",
   "def-sf-open-tensor-representative-data"
@@ -13,7 +13,14 @@
  },
  "proof": [
   {
-   "text": "On each signed total summand, use D.ordinaryInverse, hordinary, and the summand formulas to identify the adjunct of the chain map with the tensor of the adjunction unit and identity followed by the inverse restriction comparison.",
+   "text": "The ordinary projection isomorphisms and exactness of F and G show that F carries flat modules to flat modules: tensoring with F(M) is naturally isomorphic to G followed by tensoring with M and then F. If C is K-flat, use exactness of G on an acyclic test complex, K-flatness of C, exactness of F, the chain projection and tensor symmetry to show F(C) is K-flat. Thus F(C) is a flat-term K-flat representative; D.pullKFlat and D.pullFlat give the corresponding properties of G(P).",
+   "uses": [
+    "def-sf-open-tensor-cochain-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each signed total summand, use D.ordinaryInverse, hordinary, D.summand and restrictionModel.summand to identify the cochain adjunct of D.chain(C,P).inv with totalTensor(unit,identity) followed by restrictionModel.chain(F(C),P). Equality on every coproduct summand gives equality of cochain maps.",
    "uses": [
     "def-sf-open-tensor-cochain-data",
     "def-sf-open-tensor-representative-data"
@@ -21,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "Localize the chain equality through the exact derived adjunction and substitute the supplied one-flat comparison models.",
+   "text": "Localize the cochain equality through the specified exact derived adjunction. Apply restrictionModel.derived to F(C),P and use naturality of the simultaneous comparison at the cochain unit. The ambientBoth and openBoth hypotheses identify the supplied one-flat comparisons with these simultaneous models. Insert the exact-functor factorization isomorphisms and use the defining hom-equivalence formula for the canonical mate. Injectivity of the hom-equivalence and cancellation of the chain isomorphism give the displayed equation.",
    "uses": [
     "def-weil-exact-derived-adjunction",
     "def-sf-open-tensor-representative-data"
@@ -37,7 +44,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, resolving-pair inverse transpose calculation"
+  "place": "Tag 0GL1, resolving-pair inverse transpose calculation with the supplied simultaneous-model normalizations"
  },
  "mathlib_searches": [
   {
@@ -85,10 +92,10 @@
   "module": "Sheaf.SixFunctors.OpenTensorProjectionMateCanonical",
   "file": "lean/Sheaf/SixFunctors/OpenTensorProjectionMateCanonical.lean",
   "declaration": "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical",
-  "statement": "theorem openTensorProjection_mate_canonical\n    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)\n    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)\n    (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)\n    (hordinary : restrictionModel.ordinary = D.pullTensor)\n    (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)\n    (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')\n    (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)\n    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (flatP : flatTerms.{c, v, r} J R P) :\n      DerivedCategory.Q.map (D.chain C P).hom ≫\n        F.mapDerivedCategoryFactors.inv.app ((totalTensor.{c, v, r} J' R').obj\n          (C, (G.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        F.mapDerivedCategory.map ((openModel C ((G.mapHomologicalComplex (.up ℤ)).obj P)\n          (Or.inr (restrictionModel.kflat P hP flatP))).hom) ≫\n        F.mapDerivedCategory.map (A'.tensor.map\n          (Prod.mkHom (𝟙 _) (G.mapDerivedCategoryFactors.inv.app P))) ≫\n        (canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory\n          G.mapDerivedCategory\n          (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj)\n          restriction).app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =\n    (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫\n        A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _))",
+  "statement": "theorem openTensorProjection_mate_canonical\n    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)\n    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)\n    (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)\n    (hordinary : restrictionModel.ordinary = D.pullTensor)\n    (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)\n    (ambientBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1}\n      J R A T ambientModel)\n    (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')\n    (openBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1}\n      J' R' A' T' openModel)\n    (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)\n    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)\n    (hC : CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := R') C)\n    (flatC : flatTerms.{c, v, r} J' R' C)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (flatP : flatTerms.{c, v, r} J R P) :\n      DerivedCategory.Q.map (D.chain C P).hom ≫\n        F.mapDerivedCategoryFactors.inv.app ((totalTensor.{c, v, r} J' R').obj\n          (C, (G.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        F.mapDerivedCategory.map ((openModel C ((G.mapHomologicalComplex (.up ℤ)).obj P)\n          (Or.inr (restrictionModel.kflat P hP flatP))).hom) ≫\n        F.mapDerivedCategory.map (A'.tensor.map\n          (Prod.mkHom (𝟙 _) (G.mapDerivedCategoryFactors.inv.app P))) ≫\n        (canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory\n          G.mapDerivedCategory\n          (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj)\n          restriction).app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =\n    (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫\n        A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _))",
   "branch": "sheaf-dag",
-  "by": "C6",
-  "date": "2026-10-27"
+  "by": "G2",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -103,17 +110,46 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "D3",
+  "reviewer": "C-9ebc6",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261028T020245-L-2485798",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical"
+  "landing": "20261028T055650-L-793403",
+  "kind": "interface",
+  "note": "independent cc review: openTensorProjection_mate_canonical new signature vs node lean.statement, change record Old/New and caller's existing hypotheses; Resolving adaptation vs clone (forced 2-line edit); BothModel/CoefficientTensorModels/OpenTensorCochainData defs vs the docstring proof (statement true, old one false)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G2 stage 2",
+  "old_statement": "Under the same ringed-site, tensor-comparison, and cochain hypotheses as the resolving-pair projection lemma, with the projection mate fixed canonically as the adjoint transpose of tensor(unit,identity) followed by the inverse restriction comparison, the displayed chain comparison equation holds for a cochain C and P with P K-flat and flat terms.",
+  "what": "The previous statement allowed arbitrary one-flat comparison families. Changing only the ambient component by postcomposition with a nontrivial automorphism preserves every listed hypothesis, changes the right side and leaves the left side fixed. Add agreement with the simultaneous models and the flat-term K-flat hypotheses on C already present in the sole caller. This restores the resolving-pair statement intended in the parent; it is a statement repair, not a proof of the former false statement.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tags 07A4 and 06YS--06YT"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-open-tensor-projection-mate-resolving",
+    "holds": true,
+    "note": "Already assumes ambientBoth, openBoth, hC and flatC. Its proof is adapted to pass these arguments; its statement is unchanged."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical"
+  "old_proof": [
+   {
+    "text": "On each signed total summand, use D.ordinaryInverse, hordinary, and the summand formulas to identify the adjunct of the chain map with the tensor of the adjunction unit and identity followed by the inverse restriction comparison.",
+    "uses": [
+     "def-sf-open-tensor-cochain-data",
+     "def-sf-open-tensor-representative-data"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Localize the chain equality through the exact derived adjunction and substitute the supplied one-flat comparison models.",
+    "uses": [
+     "def-weil-exact-derived-adjunction",
+     "def-sf-open-tensor-representative-data"
+    ],
+    "elementary": false
+   }
   ]
  }
 }

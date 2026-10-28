@@ -101,10 +101,6 @@ theorem openTensorProjection_mate_resolving
         alpha.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =
     (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫
         A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _)) := by
-  have _ := ambientBoth
-  have _ := openBoth
-  have _ := hC
-  have _ := flatC
   let canonical := canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory
     G.mapDerivedCategory
     (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj) restriction
@@ -122,6 +118,7 @@ theorem openTensorProjection_mate_resolving
     rw [halpha, hcanonical]
   simpa only [heq] using
     (openTensorProjection_mate_canonical.{c, v, r} J R A T J' R' A' T' F G adj H
-      sectionPull D restriction restrictionModel hordinary ambientModel openModel C P hP flatP)
+      sectionPull D restriction restrictionModel hordinary ambientModel ambientBoth
+      openModel openBoth C P hC flatC hP flatP)
 
 end WeilConjectures.CoefSupportOpenTensor
