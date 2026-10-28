@@ -2,7 +2,6 @@ module
 
 public import Sheaf.Paper.AmbientPullbackTensorData
 import Sheaf.Paper.AmbientPushforwardCompositionSections
-import Sheaf.Paper.AmbientPushforwardIdentitySections
 
 /-! Ordinary pullback associativity and unit laws.
 
@@ -218,6 +217,103 @@ private theorem ordinary_coherence
       Category.id_comp, Category.comp_id, Category.assoc, eqToIso.inv, eqToIso.hom, eqToHom_app]
 
 
+private theorem site_rightUnit
+    {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) (U : Site Y s) :
+    eqToHom (congrArg (fun a ↦ (base a s).obj U) (Category.comp_id f).symm) ≫
+        (baseComp f (𝟙 Y) s).hom.app U =
+      (base f s).map ((baseId Y s).inv.app U) := by
+  have hp (V : Y.ProEt) := NatTrans.congr_app (congrArg Iso.hom
+    (MorphismProperty.Over.pullbackComp_id_right (P := @WeaklyEtale) (Q := ⊤) f)) V
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom, NatTrans.id_app,
+    Category.id_comp] at hp
+  have hq (V : Y.ProEt) :=
+    (pasting_transport (P := @WeaklyEtale) (Q := ⊤) f (𝟙 Y) f
+      (Category.comp_id f).symm V).symm.trans (hp V)
+  cases s with
+  | some n => exact hq U
+  | none =>
+      rcases U with ⟨n, V⟩
+      apply Prod.hom_ext
+      · rfl
+      · exact hq V
+
+private theorem site_leftUnit
+    {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) (U : Site Y s) :
+    eqToHom (congrArg (fun a ↦ (base a s).obj U) (Category.id_comp f).symm) ≫
+        (baseComp (𝟙 X) f s).hom.app U =
+      (baseId X s).inv.app ((base f s).obj U) := by
+  have hp (V : Y.ProEt) := NatTrans.congr_app (congrArg Iso.hom
+    (MorphismProperty.Over.pullbackComp_id_left (P := @WeaklyEtale) (Q := ⊤) f)) V
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Iso.symm_hom, Functor.rightUnitor_inv_app,
+    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom, NatTrans.id_app,
+    Category.id_comp] at hp
+  have hq (V : Y.ProEt) :=
+    (pasting_transport (P := @WeaklyEtale) (Q := ⊤) (𝟙 X) f f
+      (Category.id_comp f).symm V).symm.trans (hp V)
+  cases s with
+  | some n => exact hq U
+  | none =>
+      rcases U with ⟨n, V⟩
+      apply Prod.hom_ext
+      · rfl
+      · exact hq V
+
+private theorem directImage_rightUnit
+    {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
+    (pushComp ell E f (𝟙 Y) s).symm ≪≫
+        eqToIso (congrArg (fun a ↦ push ell E a s) (Category.comp_id f)) =
+      Functor.isoWhiskerLeft (push ell E f s) (pushId ell E Y s) ≪≫
+        Functor.rightUnitor (push ell E f s) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  cases U using Opposite.rec
+  rename_i U
+  ext m
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.comp_apply, Category.comp_id]
+  erw [directImage_transport ell E (Category.comp_id f) s N U]
+  erw [directComp_hom_apply ell E f (𝟙 Y) s N U]
+  erw [(pushId_existsUnique ell E Y s).exists.choose_spec
+    ((push ell E f s).obj N) U m]
+  erw [directImage_obj_map_apply ell E f s N ((baseId Y s).inv.app U)]
+  rw [← PresheafOfModules.map_comp_apply, ← op_comp, site_rightUnit]
+  rfl
+
+private theorem directImage_leftUnit
+    {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
+    (pushComp ell E (𝟙 X) f s).symm ≪≫
+        eqToIso (congrArg (fun a ↦ push ell E a s) (Category.id_comp f)) =
+      Functor.isoWhiskerRight (pushId ell E X s) (push ell E f s) ≪≫
+        Functor.leftUnitor (push ell E f s) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  cases U using Opposite.rec
+  rename_i U
+  ext m
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.comp_apply, Category.comp_id]
+  erw [directImage_transport ell E (Category.id_comp f) s N U]
+  erw [directComp_hom_apply ell E (𝟙 X) f s N U]
+  erw [directImage_map_apply ell E f s ((pushId ell E X s).hom.app N) U]
+  erw [(pushId_existsUnique ell E X s).exists.choose_spec N ((base f s).obj U) m]
+  rw [← PresheafOfModules.map_comp_apply, ← op_comp, site_leftUnit]
+  rfl
+
 /-- Right-unit part of ordinary ambient pullback coherence.
 Source: Stacks 03D3 and 04VG.
 (blueprint: new-lem-sf-ambient-pullback-ordinary-right-unit).
@@ -232,7 +328,20 @@ theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) :
         (comp ell E f (𝟙 Y) s).hom.app M ≫
           eqToHom (congrArg (fun a ↦ (pull ell E a s).obj M)
             (Category.comp_id f)) := by
-  sorry
+  intro X Y f aX aY _ _ _ _ hf M
+  have hh := Adjunction.leftAdjointCompIso_id_comp
+    (adjunction ell E (𝟙 Y) s) (adjunction ell E f s)
+    ((pushComp ell E f (𝟙 Y) s).symm ≪≫
+      eqToIso (congrArg (fun a ↦ push ell E a s) (Category.comp_id f)))
+    (pushId ell E Y s) (directImage_rightUnit ell E f s)
+  rw [mate_transport (fun a ↦ pull ell E a s) (fun a ↦ push ell E a s)
+    (fun a ↦ adjunction ell E a s) (adjunction ell E (𝟙 Y) s)
+    (adjunction ell E f s) (Category.comp_id f)] at hh
+  have hi := NatTrans.congr_app (congrArg Iso.hom hh) M
+  simpa only [comp, identity, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Functor.comp_obj, Functor.id_obj, Category.comp_id,
+    eqToIso.hom, eqToHom_app] using hi.symm
 
 /-- Left-unit part of ordinary ambient pullback coherence.
 Source: Stacks 03D3 and 04VG.
@@ -248,7 +357,20 @@ theorem ordinary_pullback_leftUnit (K : Scheme.{t}) (s : Option ℕ) :
         (comp ell E (𝟙 X) f s).hom.app M ≫
           eqToHom (congrArg (fun a ↦ (pull ell E a s).obj M)
             (Category.id_comp f)) := by
-  sorry
+  intro X Y f aX aY _ _ _ _ hf M
+  have hh := Adjunction.leftAdjointCompIso_comp_id
+    (adjunction ell E f s) (adjunction ell E (𝟙 X) s)
+    ((pushComp ell E (𝟙 X) f s).symm ≪≫
+      eqToIso (congrArg (fun a ↦ push ell E a s) (Category.id_comp f)))
+    (pushId ell E X s) (directImage_leftUnit ell E f s)
+  rw [mate_transport (fun a ↦ pull ell E a s) (fun a ↦ push ell E a s)
+    (fun a ↦ adjunction ell E a s) (adjunction ell E f s)
+    (adjunction ell E (𝟙 X) s) (Category.id_comp f)] at hh
+  have hi := NatTrans.congr_app (congrArg Iso.hom hh) M
+  simpa only [comp, identity, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, Functor.comp_obj, Functor.id_obj, Category.comp_id,
+    eqToIso.hom, eqToHom_app] using hi.symm
 
 
 /-- Ordinary associativity and unit laws for the ambient pullback comparisons.
