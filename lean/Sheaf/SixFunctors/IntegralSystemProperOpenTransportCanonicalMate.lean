@@ -38,6 +38,25 @@ def properOpenTransportMate (o : Operations l E) (b : CanonicalBridge l E o)
           (scalarRings l E) (scalarTransitions l E) k) ≫
       Functor.whiskerLeft (pull l E r) (b.shriek l E k).inv))).natTrans
 
+/-- The transported mate has the prescribed proper/open adjunct.
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
+(blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-adjunct).
+Proof: expand the mate under the canonical bridge, transpose with the open
+adjunction, and cancel the bridge isomorphisms against the defining proper/open
+lambda. The resulting equation is the adjunct characterization of the displayed
+transported mate. -/
+theorem properOpenTransportMate_adjunct (o : Operations l E)
+    (c : Compositors l E o) (a : OpenComparisons l E o c)
+    (b : CanonicalBridge l E o)
+    {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
+    (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) (M : System l E U) :
+    (o.extension i).adj.homEquiv _ _
+        ((properOpenTransportMate l E o b k r p i h).app M) =
+      (properOpenLambda l E o c a k r p i h).inv.app M := by
+  sorry
+
 /-- The adjunct-normalized gamma is this transported mate.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
 (blueprint: lem-sf-integral-system-proper-open-transport-core-canonical-mate-normalized).
@@ -53,6 +72,8 @@ theorem properOpenTransportMate_normalized (o : Operations l E)
     (h : k ≫ p = r ≫ i) (M : System l E U) :
     (h₀.gamma k r p i h).app M =
       (properOpenTransportMate l E o b k r p i h).app M := by
-  sorry
+  apply ((o.extension i).adj.homEquiv _ _).injective
+  rw [h₀.adjunct k r p i h M]
+  exact (properOpenTransportMate_adjunct l E o c a b k r p i h M).symm
 
 end WeilConjectures.IntegralSystemRealization
