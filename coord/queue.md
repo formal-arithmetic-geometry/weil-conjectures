@@ -1,6 +1,6 @@
 # Work queue
 
-329 items; claim with `tools/claim.py next <group> [--stage N]`.
+330 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (0 clusters, 391 modules)
 
@@ -30,7 +30,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1131 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (317)
+## Stage 3: modules to prove (318)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -43,7 +43,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstantCompletionFiniteSystemProperties` | 10 | 1 | disputed | route |
 | `Sheaf.SixFunctors.RationalVerdierDatumNaturality` | 14 | 1 | disputed | route |
 | `Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismNormalization` | 15 | 1 | disputed | route |
-| `Sheaf.SixFunctors.CoefTowerNaturalCurrying` | 18 | 1 | disputed | route |
 | `Sheaf.SixFunctors.OpenTensorProjectionMateCanonical` | 21 | 1 | disputed | route |
 | `Sheaf.Paper.CommonProjectionOpenPullbackTensorForward` | - | 1 | disputed | route |
 | `Sheaf.Paper.FiniteIntrinsicProjectionCompatibility` | - | 1 | disputed | route |
@@ -95,8 +94,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.QuotientSectionPullTransportLocalization` | 11 | 1 | proof | route |
 | `Sheaf.SixFunctors.EtaleHomTransposeExactCommShift` | 11 | 1 | proof | route |
 | `Sheaf.SixFunctors.EtaleHomTransposeExactShiftData` | 11 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelFirstAmbientFormula` | 11 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelFirstTransport` | 11 | 1 | proof | route |
 | `Sheaf.WeilSheaf.SmoothCoefficientVanishing` | 11 | 1 | proof | route |
 | `Sheaf.Paper.CommonConstantUnitFrobenius` | 12 | 1 | proof | route |
 | `Sheaf.Paper.CommonFrobeniusSquareNormalization` | 12 | 1 | proof | route |
@@ -141,7 +138,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RationalP1SectionEvaluation` | 14 | 1 | proof | route |
 | `Sheaf.Paper.ScalarPullbackRoosCoordinates` | 14 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence` | 14 | 1 | proof | route |
-| `Sheaf.SixFunctors.RationalDualFormulaScalarCounit` | 14 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalVerdierCompositionEquation` | 14 | 1 | proof | route |
 | `Sheaf.Paper.AdicReindexingIdentity` | 15 | 1 | proof | route |
 | `Sheaf.Paper.CoefFiniteHomSiteDescent` | 15 | 1 | proof | route |
@@ -160,7 +156,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.CoefQbarFiniteExceptionalScalar` | 15 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefQbarFiniteOmegaStageCoherence` | 15 | 1 | proof | route |
 | `Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition` | 15 | 1 | proof | route |
-| `Sheaf.SixFunctors.RationalDualFormulaAdjunction` | 15 | 1 | proof | route |
+| `Sheaf.SixFunctors.RationalHomScalarEvaluationCore` | 15 | 1 | proof | route |
+| `Sheaf.SixFunctors.RationalVerdierComparisonEvaluationIntegral` | 15 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalVerdierIntegralBetaNaturality` | 15 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalVerdierIntegralCompNormalization` | 15 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalVerdierScalarInterchange` | 15 | 1 | proof | route |
@@ -189,10 +186,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RingEndpointScalarIdentityTransfer` | 16 | 1 | proof | route |
 | `Sheaf.Paper.StrictKummerPureKernelNormalization` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.AffineRestrictionMapIso` | 16 | 1 | proof | route |
-| `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 16 | 5 | proof | route |
 | `Sheaf.SixFunctors.CoefIntegralFiniteExtensionHomMapInvertibility` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefIntegralFiniteExtensionPureTensor` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefIntegralFiniteExtensionTranspose` | 16 | 1 | proof | route |
+| `Sheaf.SixFunctors.CoefIntegralFiniteExtensionUReconstruction` | 16 | 1 | proof | route |
+| `Sheaf.SixFunctors.CoefIntegralFiniteExtensionUReductionIsInvertible` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefQbarFiniteExceptionalCore` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefQbarVerdierShift` | 16 | 1 | proof | route |
@@ -205,6 +203,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComparison` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit` | 16 | 1 | proof | route |
 | `Sheaf.SixFunctors.IntegralVerdierReductionPairingDeltaUncurried` | 16 | 1 | proof | route |
+| `Sheaf.SixFunctors.RationalHomScalarCounitNormalization` | 16 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCoreAfterIdentity` | 17 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelSquares` | 17 | 1 | proof | route |
 | `Sheaf.Paper.AdicCompletedTensorCommonLiftConstraints` | 17 | 1 | proof | route |
@@ -342,9 +341,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw` | 14 | 1 | proof | 1 |
 | `Sheaf.Paper.IntegralAutomorphismCancellationNormalization` | 14 | 1 | proof | 1 |
 | `Sheaf.Paper.PodReindexingCompletedEvaluationReflection` | 15 | 2 | proof | 1 |
+| `Sheaf.SixFunctors.CoefHomTowerScalarModel` | 18 | 8 | proof | 1 |
 | `Sheaf.WeilSheaf.NativeOpenProperForgetting` | 18 | 1 | proof | 1 |
 | `Sheaf.Paper.FiniteHomDomainCalculus` | 22 | 2 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic` | 28 | 1 | proof | 1 |
+| `Sheaf.Algebra.Homology.RingedSiteGlobalRHomDerivedLimits` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 5 | proof | 1 |
 | `Sheaf.Paper.CompactSupportStrictScalarComposition` | - | 2 | proof | 1 |
 | `Sheaf.Paper.NativeProperProjectionRealization` | - | 1 | proof | 1 |
