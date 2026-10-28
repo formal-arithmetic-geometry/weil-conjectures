@@ -6319,6 +6319,7 @@ public import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentImage
 public import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentImageNoetherian
 public import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 public import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnvelope
+public import WeilConjectures.AlgebraicGeometry.ProperFiniteTypeStage
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCohomologyData
 public import WeilConjectures.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
@@ -9960,6 +9961,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
@@ -12136,6 +12138,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCur
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperBaseChangeHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoetherianApproximation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImageLimit

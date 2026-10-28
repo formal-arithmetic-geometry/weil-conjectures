@@ -64,7 +64,7 @@ lemma exists_isLE_rightDerivedLowerStar_singleFunctor_padicIntegers :
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_pullback_le aY p
   refine ⟨d, fun E N hN ↦ ?_⟩
   have := isLE_rightDerivedLowerStar_singleFunctor_padicIntegers_of_isProper ℓ E p d
-    (fun Ω _ _ s ↦ hd Ω s) (residueFieldFiniteness_of_locallyOfFiniteType ℓ p aY E) N hN
+    (fun Ω _ _ s ↦ hd Ω s) (residueFieldFiniteness_of_isNoetherian ℓ p aY E) N hN
   exact_mod_cast this
 
 include aY in

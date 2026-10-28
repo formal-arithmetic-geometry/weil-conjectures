@@ -19,11 +19,9 @@ image of `ν^* K'` is `ν^* Rf_* K'` for bounded below `K'`
 
 * `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar_of_etale`: if the étale
   `Rf_*` preserves bounded constructible complexes, so does the pro-étale one;
-* `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper`: for `f`
-  proper over a scheme of finite type over a field `k` and `Λ` killed by an integer invertible
-  in `k` (blueprint `det-thm-sfb-proper-base-change-finite` (1));
 * `ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`:
-  the same over a noetherian base, from
+  for `f` proper over a noetherian scheme over a field `k` and `Λ` killed by an integer
+  invertible in `k`, from
   `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`.
 -/
 
@@ -59,19 +57,6 @@ theorem boundedConstructible_rightDerivedLowerStar_of_etale {X Y : Scheme.{u}} (
     ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).mapIso e.symm ≪≫
       rightDerivedLowerStarMapDerivedCategoryObjIso _ f K' hK'.1.1).symm
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj (hf K' hK'))
-
-/-- Blueprint `det-thm-sfb-proper-base-change-finite` (1): for a proper morphism `f : X ⟶ Y` to a
-scheme of finite type over a field `k` and a finite ring `Λ` killed by an integer invertible in
-`k`, the pro-étale `Rf_*` preserves bounded constructible complexes of sheaves of `Λ`-modules. -/
-theorem boundedConstructible_rightDerivedLowerStar_of_isProper {k : Type u} [Field k]
-    [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsProper f]
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj K) :=
-  boundedConstructible_rightDerivedLowerStar_of_etale f
-    (fun _ hK' ↦ Etale.boundedConstructible_rightDerivedLowerStar_of_isProper aY f hK') hK
 
 /-- The pro-étale form of
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`:

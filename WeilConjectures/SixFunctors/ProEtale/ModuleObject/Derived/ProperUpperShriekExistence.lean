@@ -138,7 +138,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_cont
     {G : LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y ⥤
       LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X}
     (adj : rightDerivedLowerShriekLocalizing
-      (lowerShriek_continuousMapRingObj_of_finiteType ℓ E aY c) ⊣ G)
+      (lowerShriek_continuousMapRingObj ℓ E aY c) ⊣ G)
     (L : LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y)
     (hL : boundedConstructible _ L.obj) :
     boundedConstructible _ (G.obj L).obj :=
@@ -157,7 +157,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
     {G : LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y ⥤
       LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X}
     (adj : rightDerivedLowerShriekLocalizing
-      (lowerShriek_padicIntegersRingObj_of_finiteType ℓ E aY c) ⊣ G)
+      (lowerShriek_padicIntegersRingObj ℓ E aY c) ⊣ G)
     (L : LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y)
     (hL : boundedConstructible _ L.obj) :
     boundedConstructible _ (G.obj L).obj :=
@@ -173,7 +173,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
     {G : LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y ⥤
       LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X}
     (adj : rightDerivedLowerShriekLocalizing
-      (lowerShriek_padicAlgClRingObj_of_finiteType ℓ aY c) ⊣ G)
+      (lowerShriek_padicAlgClRingObj ℓ aY c) ⊣ G)
     (L : LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y)
     (hL : boundedConstructible _ L.obj) :
     boundedConstructible _ (G.obj L).obj :=
@@ -197,7 +197,7 @@ pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint. 
 theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (hk : Finite k ∨ IsSepClosed k) :
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
-  have hc := lowerShriek_continuousMapRingObj_of_finiteType ℓ E Y.hom
+  have hc := lowerShriek_continuousMapRingObj ℓ E Y.hom
     (Compactification.ofIsProper g.left)
   obtain ⟨G, adj, -⟩ := exists_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj
     ℓ Z.hom Y.hom (Compactification.ofIsProper g.left) hk E
@@ -214,7 +214,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_fini
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     (hk : Finite k ∨ IsSepClosed k) :
     (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
-  have hc := lowerShriek_padicIntegersRingObj_of_finiteType ℓ E Y.hom
+  have hc := lowerShriek_padicIntegersRingObj ℓ E Y.hom
     (Compactification.ofIsProper g.left)
   obtain ⟨G, adj, -⟩ := exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj
     ℓ Z.hom Y.hom (Compactification.ofIsProper g.left) hk E
@@ -229,7 +229,7 @@ closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
 theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed
     (hk : Finite k ∨ IsSepClosed k) :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint := by
-  have hc := lowerShriek_padicAlgClRingObj_of_finiteType ℓ Y.hom
+  have hc := lowerShriek_padicAlgClRingObj ℓ Y.hom
     (Compactification.ofIsProper g.left)
   obtain ⟨G, adj, -⟩ := exists_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
     ℓ Z.hom Y.hom (Compactification.ofIsProper g.left) hk

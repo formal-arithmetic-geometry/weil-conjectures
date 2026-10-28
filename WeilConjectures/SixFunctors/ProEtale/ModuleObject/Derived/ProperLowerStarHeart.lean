@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatNat
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
@@ -49,68 +50,11 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-namespace CategoryTheory
-
-section SigmaComparison
-
-variable {A B E : Type*} [Category* A] [Category* B] [Category* E]
-
-/-- The comparison map `∐ (F ⋙ G)(Xⱼ) ⟶ (F ⋙ G)(∐ Xⱼ)` factors through the comparison maps of
-`G` and `F`. -/
-lemma Limits.sigmaComparison_comp (F : A ⥤ B) (G : B ⥤ E) {J : Type*} (X : J → A)
-    [HasCoproduct X] [HasCoproduct fun j ↦ F.obj (X j)]
-    [HasCoproduct fun j ↦ (F ⋙ G).obj (X j)] [HasCoproduct fun j ↦ G.obj (F.obj (X j))] :
-    sigmaComparison (F ⋙ G) X =
-      sigmaComparison G (fun j ↦ F.obj (X j)) ≫ G.map (sigmaComparison F X) := by
-  ext j
-  dsimp only [sigmaComparison]
-  simp [← G.map_comp]
-
-/-- The comparison map for coproducts is an isomorphism for a functor isomorphic to one for which
-it is. -/
-lemma Limits.isIso_sigmaComparison_of_natIso {F F' : A ⥤ B} (e : F ≅ F') {J : Type*} (X : J → A)
-    [HasCoproduct X] [HasCoproduct fun j ↦ F.obj (X j)] [HasCoproduct fun j ↦ F'.obj (X j)]
-    [IsIso (sigmaComparison F X)] : IsIso (sigmaComparison F' X) :=
-  have := PreservesCoproduct.of_iso_comparison F X
-  have : PreservesColimit (Discrete.functor X) F' := preservesColimit_of_natIso _ e
-  inferInstance
-
-/-- The comparison map for coproducts is an isomorphism for a functor with zero values. -/
-lemma Limits.isIso_sigmaComparison_of_isZero [HasZeroMorphisms B] [HasZeroObject B] (F : A ⥤ B)
-    {J : Type*} (X : J → A) [HasCoproduct X] [HasCoproduct fun j ↦ F.obj (X j)]
-    (hF : ∀ Y, IsZero (F.obj Y)) : IsIso (sigmaComparison F X) :=
-  have h : IsZero (∐ fun j ↦ F.obj (X j)) :=
-    (coproductIsCoproduct _).isZero_pt (Functor.isZero _ fun _ ↦ hF _)
-  ⟨0, h.eq_of_src _ _, (hF _).eq_of_src _ _⟩
-
-end SigmaComparison
-
-end CategoryTheory
-
 namespace DerivedCategory
 
 variable {A : Type*} [Category* A] {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [Abelian.HasKInjectiveResolutions C] {J : Type*} [HasColimitsOfShape (Discrete J) C]
   [HasExactColimitsOfShape (Discrete J) C] [HasColimitsOfShape (Discrete J) (DerivedCategory C)]
-
-/-- A functor to the derived category commutes with a coproduct if and only if all its homology
-functors do. -/
-lemma isIso_sigmaComparison_iff (G : A ⥤ DerivedCategory C) (X : J → A) [HasCoproduct X] :
-    IsIso (sigmaComparison G X) ↔ ∀ n, IsIso (sigmaComparison (G ⋙ homologyFunctor C n) X) := by
-  rw [isIso_iff]
-  refine forall_congr' fun n ↦ ?_
-  rw [sigmaComparison_comp, isIso_comp_left_iff]
-
-/-- The functor `singleFunctor C 0` placing an object in degree `0` commutes with coproducts. -/
-instance isIso_sigmaComparison_singleFunctor (X : J → C) :
-    IsIso (sigmaComparison (singleFunctor C 0) X) := by
-  rw [isIso_sigmaComparison_iff]
-  intro n
-  rcases lt_trichotomy n 0 with hn | rfl | hn
-  · exact isIso_sigmaComparison_of_isZero _ _ fun Y ↦ isZero_of_isGE _ 0 n hn
-  · exact CategoryTheory.Limits.isIso_sigmaComparison_of_natIso
-      (singleFunctorCompHomologyFunctorIso C 0).symm X
-  · exact isIso_sigmaComparison_of_isZero _ _ fun Y ↦ isZero_of_isLE _ 0 n hn
 
 variable {D : Type*} [Category* D] [Abelian D] [HasDerivedCategory D]
   [Abelian.HasKInjectiveResolutions D] [HasColimitsOfShape (Discrete J) D]

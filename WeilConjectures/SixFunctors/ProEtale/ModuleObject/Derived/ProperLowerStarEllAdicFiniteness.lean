@@ -28,11 +28,9 @@ does so with the residue field coefficients `𝔽_{E'}` of the finite subextensi
 * `boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField`: for `ℚ̄_ℓ`.
 
 The residue field input holds over a noetherian `k`-scheme with `ℓ` invertible in `k`
-(`residueFieldFiniteness_of_isNoetherian`, through the `sorry`ed finiteness of proper direct
-images over a noetherian base), and, without it, for `Y` of finite type over a field `k` in which
-`ℓ` is invertible
-(`ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper`), which gives the theorems
-`boundedConstructible_rightDerivedLowerStar_of_isProper_*_of_finiteType`.
+(`residueFieldFiniteness_of_isNoetherian`, from the finiteness of proper direct images over a
+noetherian base), in particular for `Y` of finite type over such a field `k`, which gives the
+theorems `boundedConstructible_rightDerivedLowerStar_of_isProper_*_of_finiteType`.
 -/
 
 @[expose] public section
@@ -152,15 +150,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)] (aY : Y ⟶ Spec (.o
 
 include aY
 
-omit [IsNoetherian Y] in
-/-- Blueprint `det-thm-sfb-proper-base-change-finite` (1) for the residue fields: over a scheme of
-finite type over a field in which `ℓ` is invertible, the residue field input holds. -/
-lemma residueFieldFiniteness_of_locallyOfFiniteType : ResidueFieldFiniteness ℓ p :=
-  fun E _ hL ↦
-    have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
-      inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
-    have := hasInvertibleExponent_residueFieldCoeff ℓ E (𝟙 (Spec (.of k)))
-    ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper aY p hL
+omit [IsNoetherian Y]
 
 /-- Blueprint `det-thm-sfb-proper-base-change-integral` (1): for `p : Z ⟶ Y` proper with `Y` of
 finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into
@@ -172,8 +162,9 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicIntegersRing
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) Z)))
     (hK : boundedConstructible _ K) :
     boundedConstructible _ (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj K) :=
+  have := isNoetherian_of_locallyOfFiniteType aY
   boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField ℓ p E
-    (residueFieldFiniteness_of_locallyOfFiniteType ℓ p aY) K hK
+    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational` (1): for `p : Z ⟶ Y` proper with `Y` of
 finite type over a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into
@@ -184,8 +175,9 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper_continuousMapRing
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))
     (hK : boundedConstructible _ K) :
     boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) :=
+  have := isNoetherian_of_locallyOfFiniteType aY
   boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField ℓ p E
-    (residueFieldFiniteness_of_locallyOfFiniteType ℓ p aY) K hK
+    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
 /-- Blueprint `sk-thm-sfb-proper-base-change`: for `p : Z ⟶ Y` proper with `Y` of finite type over
 a field `k` in which `ℓ` is invertible, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
@@ -194,7 +186,8 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper_padicAlgClRingObj
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Z)))
     (hK : boundedConstructible _ K) :
     boundedConstructible _ (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj K) :=
+  have := isNoetherian_of_locallyOfFiniteType aY
   boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField ℓ p
-    (residueFieldFiniteness_of_locallyOfFiniteType ℓ p aY) K hK
+    (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
 end AlgebraicGeometry.ProEtale.CondensedRing
