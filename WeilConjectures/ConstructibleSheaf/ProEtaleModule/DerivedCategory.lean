@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
