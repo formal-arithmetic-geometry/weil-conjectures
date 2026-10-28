@@ -1,0 +1,106 @@
+{
+ "id": "lem-sfb-rational-p1-scalar-q-splitting-existence",
+ "kind": "statement",
+ "title": "Existence of a complementary scalar q Chern component",
+ "statement": "In the setting of [lem-sfb-rational-p1-scalar-q-homology-criterion], the scalar q Chern arrow admits a complementary shifted line component: there exists v from the shifted scalar line on Y to the derived pushforward of the shifted scalar line on the projective line such that biprod.desc v scalarQChern is an isomorphism.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "lem-sfb-diagonal-completed-chern-splitting"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K; complementary component of the normalized q splitting"
+ },
+ "proof": [
+  {
+   "text": "Apply the completed Chern splitting to r.tq and transport its complementary component through the q realization, finite scalar, rational scalar and closure comparisons. The canonical q pushforward comparison identifies the resulting second component with scalarQChern, and postcomposition with that isomorphism preserves invertibility.",
+   "uses": [
+    "lem-sfb-diagonal-completed-chern-splitting",
+    "def-sfb-rational-p1-scalar-chern-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completed-chern-splitting",
+  "def-sfb-rational-p1-scalar-chern-maps"
+ ],
+ "proof_origin": {
+  "kind": "split",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Complementary component of the q Chern splitting",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "complementary biproduct component for a transported projective-line Chern arrow",
+   "date": "2026-10-28",
+   "results": "No direct geometric theorem; the completed splitting and scalar transport APIs are the available route.",
+   "verdict": "Use the split-off geometric existence statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (biprod.desc v b) derived category",
+   "date": "2026-10-28",
+   "results": "Only generic biproduct transport lemmas.",
+   "verdict": "Use the existing completed splitting theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarQChern biprod.desc complementary",
+   "date": "2026-10-28",
+   "results": "No existing q complementary-component theorem.",
+   "verdict": "New lower statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1ScalarChernQHomologyCriterion",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-q-homology-criterion",
+   "place": "split off the geometric complementary-component step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ScalarChernQSplittingExists",
+  "file": "lean/Sheaf/Paper/RationalP1ScalarChernQSplittingExists.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_q_chern_splitting_exists",
+  "statement": "theorem scalar_q_chern_splitting_exists\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (r : Reference l Y δ family)\n    (a : DiagonalTrace.completedUnit l Y ⟶\n      r.tq.Rc.R.obj ((DiagonalTrace.completedLine l (ProjectiveLine Y)) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l r.tq.toPresentation a) :\n    ∃ v : ((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X Y) 0).obj (line l c Y)) ⟦(2 : ℤ)⟧ ⟶\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n        (((DerivedCategory.singleFunctor\n          (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧),\n      IsIso (biprod.desc v (scalarQChern l c Y r a))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261028T020243-L-2485437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261028T020243-L-2485437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
