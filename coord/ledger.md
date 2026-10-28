@@ -21073,3 +21073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/Z6/Sheaf.SixFunctors.CoefQbarFiniteOmegaTransitionTower (stage 3; reviewer PASS; first push; landing 20261028T055833-L-815346 (proof); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/Z8/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartInjective (stage 3; reviewer PASS; first push; landing 20261028T055834-L-815707 (interface); batch 20261028T055556; modules 3; new nodes 2)
 - 05:58 L: merged deliver/Z9/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartSurjective (stage 3; reviewer PASS; first push; landing 20261028T055835-L-816066 (proof); batch 20261028T055556; modules 1; new nodes 0)
+- 05:58 L: merged deliver/NB/lem-per-finite-tor-internal-hom-any-field (stage 2; reviewer FIX; parallel immutable checks); batch 20261028T055556; landing 20261028T055836-NB-816931 (proof)
