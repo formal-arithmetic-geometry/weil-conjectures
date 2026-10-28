@@ -136,8 +136,8 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
     have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace qP
     have : IsNoetherian P.total := {}
     exact fun C D hC hD ↦
-      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses
-        hC hD
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ) φ₁
       φ₂ heM heN hA hB htensor
   exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
