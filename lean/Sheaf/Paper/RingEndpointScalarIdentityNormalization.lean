@@ -17,6 +17,9 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 attribute [local instance] constructionInclusionShift
 
+/- STATEMENT-DISPUTED: the arbitrary `J` is not constrained to the transported `I.iso`;
+normalization is only available for that canonical isomorphism, and no uniqueness
+principle for natural isomorphisms is available here. -/
 /-- The normalization equation is invariant under the universe reindexing of a ring-stage
 scalar extension. The proof transports the high-universe inclusion map, equality isomorphism,
 and multiplication tensor unitor through the finite and integral category presentations.
