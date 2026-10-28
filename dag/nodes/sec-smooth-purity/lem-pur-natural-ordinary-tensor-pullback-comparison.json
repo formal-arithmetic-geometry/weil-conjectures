@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 07A4; package the component comparisons by NatIso.ofComponents and use ordinary associativity."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Natural ordinary comparison used before the total-chain comparison calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-natural-ordinary-tensor-pullback-comparison",
+ "title": "Natural ordinary pullback tensor comparison retaining forward associativity",
+ "statement": "Let f:X→Y be a scheme morphism in universe u, R and R′ commutative ring sheaves in universe u+1 on their small pro-etale sites and c:f⁻¹R≅R′ as in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let L be the identified ordinary module-sheaf pullback. There exists a natural isomorphism ν:tensor_Y⋙L≅(L×L)⋙tensor_X with ν(M,N) equal to the specified ordinary tensor-pullback comparison. Its forward associativity equation is L(α);ν(M,N⊗H);(1⊗ν(N,H)) = ν(M⊗N,H);(ν(M,N)⊗1);α. This uses no flatness or derived hypotheses.",
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 07A4: naturality and associativity of the ordinary tensor-pullback comparison."
+ },
+ "proof": [
+  {
+   "text": "Construct the natural isomorphism with Mathlib NatIso.ofComponents from the prescribed binary isomorphisms and their existing naturality equation. Evaluation of its forward components is definitional. The forward associativity equation is the proved ordinary pure-triple pullback associativity, applied to those same components. This retains the naturality and associativity assertions in one proved interface.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-ordinary-pullback-tensor-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-ordinary-pullback-tensor-associativity"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct a natural tensor comparison from binary component isomorphisms, retaining associativity of those components",
+   "results": "8 hits, mainly tensorIso constructors and monoidal normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use NatIso.ofComponents and the existing project component comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including ofComponents and its hom_app, inv_app component formulas.",
+   "date": "2026-10-28",
+   "verdict": "Use this exact Mathlib constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.ofComponents",
+   "results": "25 hits of natural-isomorphism constructions in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "The standard constructor gives naturality; the proved project ordinary associativity supplies coherence."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleOrdinaryTensorPullbackNaturalComparison",
+  "file": "lean/Sheaf/Paper/ProEtaleOrdinaryTensorPullbackNaturalComparison.lean",
+  "declaration": "WeilConjectures.proEtaleOrdinaryTensorPullbackNaturalComparison",
+  "statement": "theorem proEtaleOrdinaryTensorPullbackNaturalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R' : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ R') :\n    let L := proEtaleRingModulePullback f R R' c\n    ∃ ν : MonoidalCategory.tensor (proEtaleRingModules Y R) ⋙ L ≅\n        (L.prod L) ⋙ MonoidalCategory.tensor (proEtaleRingModules X R'),\n      (∀ M N, ν.hom.app (M, N) = (proEtaleOrdinaryTensorPullback f R R' c M N).hom) ∧\n      letI := SheafOfModules.monoidalCategory R\n      letI := SheafOfModules.monoidalCategory R'\n      ∀ M N H : proEtaleRingModules Y R,\n        L.map (α_ M N H).hom ≫ ν.hom.app (M, N ⊗ H) ≫\n            (𝟙 (L.obj M) ⊗ₘ ν.hom.app (N, H)) =\n          ν.hom.app (M ⊗ N, H) ≫ (ν.hom.app (M, N) ⊗ₘ 𝟙 (L.obj H)) ≫\n            (α_ (L.obj M) (L.obj N) (L.obj H)).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

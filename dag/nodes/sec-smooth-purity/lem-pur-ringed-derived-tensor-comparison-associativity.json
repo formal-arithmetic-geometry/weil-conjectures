@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-ringed-derived-tensor-comparison-associativity",
+ "title": "Derived tensor comparison associativity from coherent representative squares",
+ "statement": "Let (J,R) and (J′,R′) be ringed sites with the stated sheafification and derived-category universes. Let S,T and S′,T′ be the recorded closed and simultaneous K-flat tensor models, with their ringed derived tensor coherences. Let U be an additive module functor, r its specified derived model with quotient comparison α, and ρ a natural binary derived tensor comparison. Let θ be a natural total tensor comparison satisfying the pure-triple model associativity equation. Suppose every binary K-flat representative square commutes whenever its two images are K-flat. For K-flat A,B,C whose five images U(A),U(B),U(C),U(T(A,B)),U(T(B,C)) are K-flat, ρ satisfies associativity on their derived quotient objects. The conclusion is the usual derived associator equation, with no internal-Hom preservation assumption.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-ringed-tensor-comparison-associativity"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT, 06YU and 07A4: tensor-model associators and derived pullback tensor coherence."
+ },
+ "proof": [
+  {
+   "text": "Use the proved normalized associator representatives and categorical transport API. K-flat total closure supplies the two source and target pair models. Specialize the four binary representative squares. Model naturality supplies the two inner comparison equations; the given chain coherence supplies the chain associativity equation. Apply categorical representative transport and cancel the nested model isomorphisms, obtaining the displayed derived associativity equation.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-ringed-tensor-comparison-associativity",
+    "lem-pur-ringed-tensor-representative-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-ringed-tensor-comparison-associativity",
+  "lem-pur-ringed-tensor-representative-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0FPT, 06YU and 07A4; pasting the four K-flat model squares and cancelling the nested model isomorphisms."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derive monoidal associativity of a derived tensor comparison from four natural K-flat representative squares and chain associativity",
+   "results": "8 hits including localized monoidal associators, tensor composition and monoidal normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing recorded ringed tensor models and a direct naturality-and-cancellation pasting proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "1 exact hit for associator naturality.",
+   "date": "2026-10-28",
+   "verdict": "Use associator naturality in the generic pasting proof."
+  },
+  {
+   "tool": "grep",
+   "query": "associator_naturality",
+   "results": "25 hits in Mathlib monoidal, localization and module categories.",
+   "date": "2026-10-28",
+   "verdict": "The elementary monoidal API suffices; no localization framework change or new axiom is needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "The generic derived model-transport step after chain-level associativity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedDerivedTensorComparisonAssociativity",
+  "file": "lean/Sheaf/Algebra/Homology/RingedDerivedTensorComparisonAssociativity.lean",
+  "declaration": "WeilConjectures.ringedDerivedTensorComparison_associativity",
+  "statement": "theorem ringedDerivedTensorComparison_associativity\n    (U : RingedTensorModules.{c, v, r} J R ⥤ RingedTensorModules.{c', v', r'} J' R')\n    [U.Additive]\n    (rD : DerivedCategory (RingedTensorModules.{c, v, r} J R) ⥤\n      DerivedCategory (RingedTensorModules.{c', v', r'} J' R'))\n    (α : DerivedCategory.Q ⋙ rD ≅ U.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (ρ : ∀ M N, rD.obj (S.tensor.obj (M, N)) ≅ SU.tensor.obj (rD.obj M, rD.obj N))\n    (hρ : ∀ M N M' N' f g,\n      rD.map (S.tensor.map (X := (M, N)) (Y := (M', N')) (f, g)) ≫ (ρ M' N').hom =\n        (ρ M N).hom ≫ SU.tensor.map (rD.map f, rD.map g))\n    (θ : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{r', c', v'} J' R')\n    (hc : RingedTensorComparisonCoherence.{c, v, r, c', v', r'} J R J' R' U θ)\n    {β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R))\n      _ S.monoidal}\n    {βU : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c', v', r'} J' R'))\n      _ SU.monoidal}\n    (K : RingedDerivedTensorCoherence.{c, v, r, d} J R S T β)\n    (KU : RingedDerivedTensorCoherence.{c', v', r', d'} J' R' SU TU βU)\n    (hbin : ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n      (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)\n      (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)\n      (hFP : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n        ((U.mapHomologicalComplex (.up ℤ)).obj P))\n      (hFQ : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n        ((U.mapHomologicalComplex (.up ℤ)).obj Q)),\n      rD.map (T.iso J R S P Q hP hQ).hom ≫\n        (ρ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫\n        SU.tensor.map\n          (X := (rD.obj (DerivedCategory.Q.obj P), rD.obj (DerivedCategory.Q.obj Q)))\n          (Y := (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj P),\n            DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj Q)))\n          (α.hom.app P, α.hom.app Q) =\n      α.hom.app ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) ≫\n        DerivedCategory.Q.map (θ.hom.app (P, Q)) ≫\n        (TU.iso J' R' SU ((U.mapHomologicalComplex (.up ℤ)).obj P)\n          ((U.mapHomologicalComplex (.up ℤ)).obj Q) hFP hFQ).hom)\n    (A B C : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n    (hA : CochainComplex.IsKFlatIndependentCoefficients (R := R) A)\n    (hB : CochainComplex.IsKFlatIndependentCoefficients (R := R) B)\n    (hC : CochainComplex.IsKFlatIndependentCoefficients (R := R) C)\n    (hFA : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n      ((U.mapHomologicalComplex (.up ℤ)).obj A))\n    (hFB : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n      ((U.mapHomologicalComplex (.up ℤ)).obj B))\n    (hFC : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n      ((U.mapHomologicalComplex (.up ℤ)).obj C))\n    (hFAB : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n      ((U.mapHomologicalComplex (.up ℤ)).obj\n        ((coefficientTotalTensor.{r, c, v} J R).obj (A, B))))\n    (hFBC : CochainComplex.IsKFlatIndependentCoefficients (R := R')\n      ((U.mapHomologicalComplex (.up ℤ)).obj\n        ((coefficientTotalTensor.{r, c, v} J R).obj (B, C)))) :\n    let M := DerivedCategory.Q.obj A\n    let N := DerivedCategory.Q.obj B\n    let P := DerivedCategory.Q.obj C\n    rD.map (S.monoidal.associator M N P).hom ≫\n      (ρ M (S.tensor.obj (N, P))).hom ≫\n      SU.tensor.map\n        (X := (rD.obj M, rD.obj (S.tensor.obj (N, P))))\n        (Y := (rD.obj M, SU.tensor.obj (rD.obj N, rD.obj P)))\n        (𝟙 (rD.obj M), (ρ N P).hom) =\n    (ρ (S.tensor.obj (M, N)) P).hom ≫\n      SU.tensor.map\n        (X := (rD.obj (S.tensor.obj (M, N)), rD.obj P))\n        (Y := (SU.tensor.obj (rD.obj M, rD.obj N), rD.obj P))\n        ((ρ M N).hom, 𝟙 (rD.obj P)) ≫\n      (SU.monoidal.associator (rD.obj M) (rD.obj N) (rD.obj P)).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

@@ -6,6 +6,11 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.Paper.FinitePullbackTensorConstruction
+import Sheaf.Paper.ProEtaleCoherentTotalTensorPullbackComparison
+import Sheaf.Algebra.Homology.RingedDerivedTensorComparisonAssociativity
+import Sheaf.Paper.FinitePullbackTensorKFlatRepresentatives
+import all Sheaf.Paper.FinitePullbackTensorKFlatDiagrams
+import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 
 /-! # Associativity on flat K-flat pullback tensor representatives
 
@@ -15,19 +20,94 @@ Source: Stacks Project, Tags 07A4, 06YS and 03EL.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
+set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option synthInstance.maxSize 2048
+set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u
+open CategoryTheory.MonoidalCategory
+open CategoryTheory.RingedForgetTensorTransposition
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
-attribute [local irreducible] Scheme.residueField finiteIntrinsicClosed
-  finiteIntrinsicTensorModels finitePullbackTensorConstruction
+attribute [local irreducible] Scheme.residueField HasDerivedCategory.standard
+  Functor.mapDerivedCategory finitePullbackTensorConstruction
+  finiteIntrinsicClosed finiteIntrinsicTensorModels
+  proEtaleTensorPullbackTotalIso proEtaleTensorPullbackTotal
+  SheafOfModules.monoidalCategory coefficientTensorGenerator
+attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
+  finiteIntrinsicDerivedTensor coefficientTotalTensor coefficientKFlatInclusion
+  coefficientFiniteInternalHom FinitePullbackTensorRep.totalTensor
+  CoefficientClosedStructure.tensor
+attribute [local semireducible] FinitePullbackTensorRep.pull
+attribute [local implicit_reducible] FinitePullbackTensorRep.pull
+
+attribute [local instance 4000] HomologicalComplex.monoidalCategoryStruct
+  HomologicalComplex.monoidalCategory
+attribute [local instance] SheafOfModules.monoidalCategory
+attribute [local irreducible] PresheafOfModules.sheafificationAdjunction
+  SheafOfModules.tensorObjIsoSheafification
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+attribute [local instance] FinitePullbackTensorRep.modules_abelian
+  FinitePullbackTensorRep.modules_derived FinitePullbackTensorRep.ordinary_additive
+  FinitePullbackTensorRep.ordinary_limits FinitePullbackTensorRep.ordinary_colimits
+attribute [local implicit_reducible] FinitePullbackTensorRep.modules_abelian
+  FinitePullbackTensorRep.modules_derived
+
+private theorem canonical_representative_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    [hX : ∀ x : X, Invertible (l : X.residueField x)]
+    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
+    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E Y n) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E Y n) Q)
+    (hFP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E X n)
+      ((FinitePullbackTensorRep.pull l E f n).obj P))
+    (hFQ : CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E X n)
+      ((FinitePullbackTensorRep.pull l E f n).obj Q))
+    {γ : (FinitePullbackTensorRep.pull l E f n).obj
+        ((coefficientTotalTensor.{u, u+1, u} (ProEt.topology Y)
+          (integralCoefficientCommRingSheaf l E Y n)).obj (P, Q)) ⟶
+      (coefficientTotalTensor.{u, u+1, u} (ProEt.topology X)
+        (integralCoefficientCommRingSheaf l E X n)).obj
+          (((FinitePullbackTensorRep.pull l E f n).obj P),
+            ((FinitePullbackTensorRep.pull l E f n).obj Q))}
+    (hγ : γ = (proEtaleTensorPullbackTotalIso f (integralCoefficientCommRingSheaf l E Y n)
+          (integralCoefficientCommRingSheaf l E X n) (pullbackTensorCoefficientIso l E f n)
+          P Q).inv) :
+    (finiteDerivedPullback l E n f).map
+        ((finiteIntrinsicTensorModels l E Y n).iso (ProEt.topology Y)
+          (integralCoefficientCommRingSheaf l E Y n) (finiteIntrinsicClosed l E Y n)
+          P Q hP hQ).hom ≫
+      ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY)
+        (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫
+      (finiteIntrinsicClosed l E X n).tensor.map (Prod.mkHom
+        ((FinitePullbackTensorRep.factors l E f n).hom.app P)
+        ((FinitePullbackTensorRep.factors l E f n).hom.app Q)) =
+    (FinitePullbackTensorRep.factors l E f n).hom.app
+        ((coefficientTotalTensor.{u, u+1, u} (ProEt.topology Y)
+          (integralCoefficientCommRingSheaf l E Y n)).obj (P, Q)) ≫
+      DerivedCategory.Q.map γ ≫
+      ((finiteIntrinsicTensorModels l E X n).iso (ProEt.topology X)
+        (integralCoefficientCommRingSheaf l E X n) (finiteIntrinsicClosed l E X n)
+        ((FinitePullbackTensorRep.pull l E f n).obj P)
+        ((FinitePullbackTensorRep.pull l E f n).obj Q) hFP hFQ).hom := by
+  rw [hγ]
+  have h := finitePullbackTensor_ringed_kflat_square l E f n P Q hP hQ hFP hFQ
+  dsimp only [FinitePullbackTensorRep.tensor, finiteIntrinsicDerivedTensor] at h
+  simp only [comparison_eq] at h
+  exact h
+
+set_option maxHeartbeats 800000 in
+-- The four model squares involve several concrete derived-category instances.
 /-- Associativity for the canonical comparison on localized flat K-flat triples.
 Source: Stacks 07A4, lemma-pullback-tensor-product, its total-tensor construction;
 06YS and 07A2 for the flat K-flat total-tensor representatives.
@@ -69,6 +149,66 @@ theorem finitePullbackTensor_associativity_representatives {X Y : Scheme.{u}}
         ((finiteDerivedPullback l E n f).obj M)
         ((finiteDerivedPullback l E n f).obj N)
         ((finiteDerivedPullback l E n f).obj P)).hom := by
-  sorry
+  let R := integralCoefficientCommRingSheaf l E Y n
+  let R' := integralCoefficientCommRingSheaf l E X n
+  let S := finiteIntrinsicClosed l E Y n
+  let SU := finiteIntrinsicClosed l E X n
+  let T := finiteIntrinsicTensorModels l E Y n
+  let TU := finiteIntrinsicTensorModels l E X n
+  let F := (proEtaleRingModulePullback f R R'
+    (pullbackTensorCoefficientIso l E f n)).mapHomologicalComplex (.up ℤ)
+  let r := finiteDerivedPullback l E n f
+  let t := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y) R
+  let ρ := @finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY
+  obtain ⟨e, he, hc⟩ := proEtaleCoherentTotalTensorPullbackComparison f R R'
+    (pullbackTensorCoefficientIso l E f n)
+  have hρ : ∀ (L M L' M' : proEtaleDerivedCategory Y
+      (finiteCoefficientRing l E (n + 1))) (v : L ⟶ L') (w : M ⟶ M'),
+      r.map (S.tensor.map (v, w)) ≫ (ρ L' M').hom =
+        (ρ L M).hom ≫ SU.tensor.map (r.map v, r.map w) := by
+    intro L M L' M' v w
+    have h := (finitePullbackTensorConstructionIso l E f n).hom.naturality
+      (Prod.mkHom v w)
+    dsimp only [Functor.comp_map, Functor.prod_map] at h
+    simpa only [constructionIso_app, r, S, SU, ρ,
+      finiteIntrinsicDerivedTensor, Prod.mkHom, Functor.comp_obj,
+      Functor.prod_obj] using h
+  have hflat (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ)
+      (hP : proEtaleFlatRepresentatives Y R P)
+      (hQ : proEtaleFlatRepresentatives Y R Q) :
+      proEtaleFlatRepresentatives Y R (t.obj (P, Q)) := by
+    have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+      R P Q hP.1 hQ.1 hP.2 hQ.2
+    exact ⟨h.1, h.2.1⟩
+  have hF (P : CochainComplex (normalizedDVRModules l E Y n) ℤ)
+      (hP : proEtaleFlatRepresentatives Y R P) :
+      proEtaleFlatRepresentatives X R' (F.obj P) := by
+    dsimp only [F, FinitePullbackTensorRep.pull]
+    exact (proEtaleCanonicalTensorPullback f R R' (pullbackTensorCoefficientIso l E f n)
+      (pullbackTensorFiniteModel l E Y n) (pullbackTensorFiniteModel l E X n)).1 P hP
+  have hAB := hflat A B hA hB
+  have hBC := hflat B C hB hC
+  have hFA := (hF A hA).1
+  have hFB := (hF B hB).1
+  have hFC := (hF C hC).1
+  have hFAB := (hF _ hAB).1
+  have hFBC := (hF _ hBC).1
+  have coherent (W : Scheme.{u}) :
+      ∃ β : @SymmetricCategory (normalizedDVRDerived l E W n) _
+          (finiteIntrinsicClosed l E W n).monoidal,
+        Nonempty (RingedDerivedTensorCoherence.{u+1, u, u} (ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n) (finiteIntrinsicClosed l E W n)
+          (finiteIntrinsicTensorModels l E W n) β) := by
+    delta finiteIntrinsicClosed finiteIntrinsicTensorModels
+    exact (coefficientDerivedSystemEvaluationCalculus l E W).choose.finite_tensor_coherence n
+  obtain ⟨β, ⟨K⟩⟩ := coherent Y
+  obtain ⟨βU, ⟨KU⟩⟩ := coherent X
+  exact ringedDerivedTensorComparison_associativity.{u+1, u, u, u+2, u+1, u, u, u+2}
+    (ProEt.topology Y) R S T (ProEt.topology X) R' SU TU
+    (proEtaleRingModulePullback f R R' (pullbackTensorCoefficientIso l E f n))
+    r (FinitePullbackTensorRep.factors l E f n) ρ hρ e.symm hc K KU
+    (fun P Q hP hQ hFP hFQ ↦
+      canonical_representative_square l E f n P Q hP hQ hFP hFQ (he P Q))
+    A B C hA.1 hB.1 hC.1 hFA hFB hFC hFAB hFBC
 
 end WeilConjectures

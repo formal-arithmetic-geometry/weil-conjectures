@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL, 07A4 and 06YN; retain both naturality and component normalization before the chain coherence calculation. The canonical total summand and the elementary inverse-associativity cancellation are used directly, avoiding the cyclic internal-Hom transposition import."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Natural total-comparison normalization in the chain-level step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-coherent-total-tensor-pullback-comparison",
+ "title": "Coherence retained by the natural total tensor pullback comparison",
+ "statement": "For a morphism f:X→Y of schemes in universe u, commutative ring sheaves R on Y_proet and R′ on X_proet in universe u+1 and an identification f⁻¹R≅R′ as in [lem-weil-pbc-proetale-tensor-descent-data], let L be the identified ordinary module pullback. There exists a natural total comparison e:T′(L−,L−)≅L(T(−,−)) whose inverse components equal the specified proEtaleTensorPullbackTotalIso inverse. For any three complexes and any source and target model associators satisfying the pure-triple generator formulas of [def-coef-ringed-tensor-hom-model], the inverse natural comparison satisfies L(a);e⁻¹(P,T(Q,N));T′(1,e⁻¹(Q,N)) = e⁻¹(T(P,Q),N);T′(e⁻¹(P,Q),1);a′. No derived-category or flatness hypotheses are used.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-pur-ringed-tensor-comparison-associativity"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 06YN: natural pullback tensor comparisons and signed total tensor summands."
+ },
+ "proof": [
+  {
+   "text": "Take the existing natural total comparison, retaining its specified inverse components. Normalize every homogeneous summand by the geometric total-generator equation. Form the natural ordinary tensor comparison, use ordinary associativity to obtain its inverse associativity equation, and apply the general summand-normalized ringed chain comparison theorem to each supplied source and target pure-triple model associator. The resulting equality is exactly the inverse-comparison associativity equation.",
+   "uses": [
+    "lem-pur-total-tensor-pullback-comparison-normalization",
+    "lem-pur-natural-ordinary-tensor-pullback-comparison",
+    "lem-pur-ringed-tensor-comparison-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-total-tensor-pullback-comparison-normalization",
+  "lem-pur-natural-ordinary-tensor-pullback-comparison",
+  "lem-pur-ringed-tensor-comparison-associativity"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural total tensor pullback comparison with normalized components and associativity on pure triple model associators",
+   "results": "8 hits, mainly free monoidal normalization and scheme pullback tensorCongr lemmas; no normalized total-complex comparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing natural total comparison and the proved project chain comparison API."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensorComparison_model_chain_associativity",
+   "results": "0 hits; this identifier belongs to the project, not Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing natural total comparison and the proved project chain comparison API."
+  },
+  {
+   "tool": "grep",
+   "query": "totalTensorPullbackIso_exists|tensorComparison_model_chain_associativity",
+   "results": "0 Mathlib hits. Project rg found the existing natural total comparison and abstract model-chain API.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing natural total comparison and the proved project chain comparison API."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoherentTotalTensorPullbackComparison",
+  "file": "lean/Sheaf/Paper/ProEtaleCoherentTotalTensorPullbackComparison.lean",
+  "declaration": "WeilConjectures.proEtaleCoherentTotalTensorPullbackComparison",
+  "statement": "theorem proEtaleCoherentTotalTensorPullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})\n    (R' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ R') :\n    let L := proEtaleRingModulePullback f R R' c\n    ∃ e : ((L.mapHomologicalComplex (.up ℤ)).prod\n        (L.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) R' ≅\n      coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology Y) R ⋙\n        L.mapHomologicalComplex (.up ℤ),\n      (∀ P Q, e.inv.app (P, Q) = (proEtaleTensorPullbackTotalIso f R R' c P Q).inv) ∧\n      RingedTensorComparisonCoherence.{u + 1, u, u, u + 1, u, u}\n        (Scheme.ProEt.topology Y) R (Scheme.ProEt.topology X) R' L e.symm",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

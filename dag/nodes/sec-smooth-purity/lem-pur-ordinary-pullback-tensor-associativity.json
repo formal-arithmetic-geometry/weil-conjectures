@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-ordinary-pullback-tensor-associativity",
+ "title": "Associativity of ordinary pro-etale tensor pullback",
+ "statement": "Let X,Y be schemes in universe u, let f:X→Y be a scheme morphism, and let R and S be commutative ring sheaves with values in universe u+1 on their small pro-etale sites, and c:f⁻¹R≅S. Let L be ordinary module pullback and μ its unit-generator-normalized tensor comparison [def-sp-proetale-ordinary-tensor-pullback-total]. For arbitrary module sheaves M,N,H on Y, L(α(M,N,H)) ; μ(M,N⊗H) ; (1⊗μ(N,H)) = μ(M⊗N,H) ; (μ(M,N)⊗1) ; α(LM,LN,LH), with traversal-order composition. No flatness or derived localization is involved.",
+ "stmt_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; Tag 07A4, lemma-pullback-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Apply the injective adjunction hom-equivalence and use naturality of its unit to move the source associator to the start. Maps from the ordinary triple tensor are detected by local pure triples. On a pure triple use the ordinary associator formula, the unit-generator comparison equation twice, and the tensor-map formula. Both routes give the same reassociated triple of unit images.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-sf-ringed-tensor-associator-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-sf-ringed-tensor-associator-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, binary pullback comparison and pure tensor normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback tensor comparison of sheaves of modules preserves the ordinary associator",
+   "results": "8 hits: SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc, Scheme.Modules.pseudofunctor_associativity and their companion formulas. These concern pullback composition, not tensor associativity.",
+   "date": "2026-10-28",
+   "verdict": "Prove the generator calculation using the existing ordinary comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal associativity",
+   "results": "No hits; unknown constant Functor.Monoidal.",
+   "date": "2026-10-28",
+   "verdict": "No direct specialized match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*associat|tensor.*pullback.*assoc",
+   "results": "11 hits concerning scheme pullback composition and ordinary categorical pullback associativity.",
+   "date": "2026-10-28",
+   "verdict": "No ordinary module tensor coherence theorem for the specified comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Ordinary sheaf tensor associativity step of the representative coherence calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleOrdinaryTensorPullbackAssociativity",
+  "file": "lean/Sheaf/Paper/ProEtaleOrdinaryTensorPullbackAssociativity.lean",
+  "declaration": "WeilConjectures.proEtaleOrdinaryTensorPullback_associativity",
+  "statement": "theorem proEtaleOrdinaryTensorPullback_associativity {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (M N H : proEtaleRingModules Y R) :\n    let L := proEtaleRingModulePullback f R S c\n    let μ := proEtaleOrdinaryTensorPullback f R S c\n    L.map (α_ M N H).hom ≫ (μ M (N ⊗ H)).hom ≫\n      (𝟙 (L.obj M) ⊗ₘ (μ N H).hom) =\n    (μ (M ⊗ N) H).hom ≫ ((μ M N).hom ⊗ₘ 𝟙 (L.obj H)) ≫\n      (α_ (L.obj M) (L.obj N) (L.obj H)).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

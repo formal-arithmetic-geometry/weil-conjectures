@@ -3,7 +3,7 @@
  "kind": "definition",
  "title": "Normalized derived coefficient-system calculus data",
  "status": "split",
- "statement": "A derived coefficient-system calculus is the simultaneous derived tensor-Hom, fiber and quotient-scalar representative data with the stated K-flat evaluation and unit normalizations. Define its enriched scalar-adjunction map by base change of evaluation, the normalized tensor comparison and the scalar adjunction counit, followed by the closed transpose. The setting and constituent notions are those of [def-weil-l-adic-coefficient-extension], [def-pc-scheme], [def-weil-pbc-proetale-site], [def-weil-size-convention], [def-weil-completed-integral-coefficients], [def-weil-sheaf-of-modules-category], [def-pc-sheaf-restrict-scalars], [def-weil-abstract-derived-category], [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-coef-normalized-dvr-tower], [def-weil-integral-reduction-tower], [lem-pc-kflat-resolution], [def-pur-derived-internal-hom], [def-pc-kflat-complex], [def-pc-tensor-complex-sheaves], [lem-pur-derived-change-of-rings], [lem-pur-rhom-global-sections], [lem-weil-derived-scalar-extension-restriction-adjunction], [def-coef-hom-representative-evaluation], [def-coef-hom-zero-cycle-class], [def-coef-ringed-sequence-site], [def-coef-ringed-tensor-hom-model].",
+ "statement": "A derived coefficient-system calculus is the simultaneous derived tensor-Hom, fiber and quotient-scalar representative data with the stated K-flat evaluation and unit normalizations. Define its enriched scalar-adjunction map by base change of evaluation, the normalized tensor comparison and the scalar adjunction counit, followed by the closed transpose. The setting and constituent notions are those of [def-weil-l-adic-coefficient-extension], [def-pc-scheme], [def-weil-pbc-proetale-site], [def-weil-size-convention], [def-weil-completed-integral-coefficients], [def-weil-sheaf-of-modules-category], [def-pc-sheaf-restrict-scalars], [def-weil-abstract-derived-category], [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-coef-normalized-dvr-tower], [def-weil-integral-reduction-tower], [lem-pc-kflat-resolution], [def-pur-derived-internal-hom], [def-pc-kflat-complex], [def-pc-tensor-complex-sheaves], [lem-pur-derived-change-of-rings], [lem-pur-rhom-global-sections], [lem-weil-derived-scalar-extension-restriction-adjunction], [def-coef-hom-representative-evaluation], [def-coef-hom-zero-cycle-class], [def-coef-ringed-sequence-site], [def-coef-ringed-tensor-hom-model]. The finite tensor-Hom fibers retain the closed symmetric monoidal coherence of [def-zl-ringed-derived-closed-symmetric-monoidal-data]: the chosen tensor comparisons identify the intrinsic associator with reassociation of the signed total tensor on K-flat complexes (and likewise retain the native unit and symmetry constraints).",
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
   "def-pc-scheme",
@@ -26,7 +26,8 @@
   "def-coef-hom-representative-evaluation",
   "def-coef-hom-zero-cycle-class",
   "def-coef-ringed-sequence-site",
-  "def-coef-ringed-tensor-hom-model"
+  "def-coef-ringed-tensor-hom-model",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
@@ -123,7 +124,8 @@
   "declaration": "WeilConjectures.CoefficientDerivedSystemCalculus",
   "declarations": [
    "WeilConjectures.CoefficientDerivedSystemCalculus",
-   "WeilConjectures.coefficientEnrichedAdjunctionMap"
+   "WeilConjectures.coefficientEnrichedAdjunctionMap",
+   "WeilConjectures.CoefficientDerivedSystemFibers"
   ],
   "statement": "structure CoefficientDerivedSystemCalculus extends CoefficientDerivedSystemFibers l E W",
   "branch": "newtargets-dag",
@@ -150,13 +152,459 @@
   "note": "F2/R1 closed: _hTensor fixes M.tensorEvaluation n to canonicalTensorEvaluation (new def node def-coef-tower-normalized-tensor-evaluation: unique iso satisfying a real localization-counit equation on all homotopy complexes, chosen from an ∃! lemma with a proof docstring; not hollow; no duplicate in Mathlib or side-live). The level-wise frame/omegaEvaluation/omegaOrigin enter the horizontal only through fβ_r≫ωO_r, which pairingEvaluation (valid on CoefTower.inputs ⊆ finiteTorConstructibleIntegral via _hab) and _hOrigin fix as (fH⊗eB)⁻¹≫δ⁻¹≫ev(beta)≫eTrace. The returned single-level negation is excluded. Remaining freedom is tower-compatible (_hHom, support_finite, _hTrace up to counit-preserving automorphisms), so the square and naturality hold uniformly. R2 closed: finiteMappingAdjunctionAt/_hFiniteMapping and the finiteHorizontalCanonical alias deleted. H, J, C, alpha, tau, quotient, naturality and étale trace conjunct unchanged from accepted heads. Statements verbatim; docstrings with source/blueprint; sorry only in the theorem and the ∃! lemma; not on the dropped-route list. Compile: nt_compile --json timed out at 60 s on the tensor module at load ~290; lcompile run_set at 560 s: both clean (tensor 180-319 s wall/~30 s CPU, item 11.4 s); worker measured 43.7 s, so land at lower load. Advisory: trace-constructions declarations narrowed 25→9; coefTraceInput (and coefPairingHom/Tensor as in earlier heads) are owned only by theorem nodes outside stmt_deps."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-d5e63",
-  "group": "C2",
+  "reviewer": "C-d4e96",
+  "group": "G2",
   "result": "fix",
-  "landing": "20261027T180505-L-3866562",
+  "landing": "20261028T034751-L-3542786",
   "kind": "interface",
-  "note": "independent cc review: delivered item/Data/ResolutionModels/ProjectionFormulas vs clone original (verbatim prefix move + public re-export, statement unchanged); nodes vs Lean; 107 direct importers compiled against delivered set (all OK); axioms clean"
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G2 stage 3",
+  "old_statement": "A derived coefficient-system calculus is the simultaneous derived tensor-Hom, fiber and quotient-scalar representative data with the stated K-flat evaluation and unit normalizations. Define its enriched scalar-adjunction map by base change of evaluation, the normalized tensor comparison and the scalar adjunction counit, followed by the closed transpose. The setting and constituent notions are those of [def-weil-l-adic-coefficient-extension], [def-pc-scheme], [def-weil-pbc-proetale-site], [def-weil-size-convention], [def-weil-completed-integral-coefficients], [def-weil-sheaf-of-modules-category], [def-pc-sheaf-restrict-scalars], [def-weil-abstract-derived-category], [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-coef-normalized-dvr-tower], [def-weil-integral-reduction-tower], [lem-pc-kflat-resolution], [def-pur-derived-internal-hom], [def-pc-kflat-complex], [def-pc-tensor-complex-sheaves], [lem-pur-derived-change-of-rings], [lem-pur-rhom-global-sections], [lem-weil-derived-scalar-extension-restriction-adjunction], [def-coef-hom-representative-evaluation], [def-coef-hom-zero-cycle-class], [def-coef-ringed-sequence-site], [def-coef-ringed-tensor-hom-model].",
+  "what": "The finite monoidal constraints were constructed coherently, but the fiber interface discarded the witness before finiteIntrinsicClosed and finiteIntrinsicTensorModels selected it. Retain that already constructed witness so the chosen intrinsic associator has its required representative normalization.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 0FPT, 06YU and 07A4: the derived monoidal structure is induced by signed total tensor and its native constraints."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-derived-system-gamma-projection-transport",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-normalized-internal-hom-fibers",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-derived-system-projection-formulas",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sf-integral-hom-presentation-evaluation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-derived-system-resolution-models",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-sf-primitive-tensor-realization-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-sf-open-semilinear-tensor-model-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-derived-system-hom-projection-transport",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-normalized-reduction-models",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-native-open-tensor-models-existence",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sf-exceptional-integral-scalar-mates",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-system-projection-evaluation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-coef-derived-system-projection-models",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-pairing-compactification-models",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-coef-tower-evaluation-pairing-constructions",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sf-coefficient-tensor-normalization",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-pairing-hom-representative-comparison",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-support-open-tensor-model",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-finite-adjunction-transition",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-coef-finite-adjunction-transition-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-coef-native-open-tensor-evaluation-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-derived-sections-normalization",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-sf-completed-tensor-constraint-roofs",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-sf-integral-open-reduction-comparison-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-zl-integral-generator-admissibility-inverse",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-zl-finite-counit-restriction-towers",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-completed-operation-model-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-quotient-expression-strict-kflat-towers-tower-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sp-twisted-pullback-reduction-tower",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-strict-scalar-mate-evaluation-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-strict-coefficient-open-reduction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-compact-support-native-realization",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-compact-support-completed-scalar-arrow",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-point-trace-reconstruction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sf-finite-quotient-hom-model-comparison",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sp-twisted-pullback-tate-reduction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-strict-scalar-mate-finite-evaluation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-ramified-image-balancing-evaluation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-compact-support-strict-scalar-mate",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-sp-twisted-pullback-line-membership",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-strict-scalar-finite-evaluation-transport",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-coefficient-extension-reduction-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-weil-compact-support-coefficient-transition",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "stage3-pur-scalar-tensor-model-normalization",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-completed-unit-pullback-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-native-reduction-counit-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-compact-support-scalar-limit-maps",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-geometric-scalar-finite-evaluation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-canonical-integral-completion-models",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-normalized-completion-realization",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-strict-coefficient-proper-reduction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-compact-support-scalar-limit-completed-comparison",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-coefficient-reduction-presentation",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-scalar-extension-tower-data",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-canonical-integral-evaluation-calculus",
+    "holds": true,
+    "note": "Forced adaptation supplies finite_tensor_coherence in CanonicalCoefficient.fibers: uncurrying determines the transported tensor model uniquely, identifying it with the fixed normalized duality model whose constraint completion supplies the witness. Canonical integral calculus compiles, as do its unchanged representative and composition laws."
+   },
+   {
+    "id": "lem-pur-regular-coefficient-coherent-reduction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "def-pur-native-constant-support-model",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-weil-compact-support-reduction-tower-functor",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pur-compact-support-native-effectivity",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-limit-model",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-reindexing-completed-evaluation-reflection",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-primitive-quotient-realizations-transport",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-unrestricted-normalized-reconstruction",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-augmentation-square",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-explicit-scalar-cone-word-coordinates",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-pod-reindexing-reduction-tensor-square",
+    "holds": true,
+    "note": "Existing fiber, tensor-Hom, scalar, and evaluation projections are unchanged. The extra finite constraint witness is supplied by the same resolution-model construction; this use still holds."
+   },
+   {
+    "id": "lem-coef-normalized-evaluation-projection",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-normalized-tensor-associativity",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-evaluation-tensor-comparison-model",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-derived-sections-normalization-scalar-hom-zero",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-derived-sections-normalization-core",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-normalized-reduction-models-normalizations",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-normalized-reduction-models-core",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-derived-system-gamma-projection-transport-final",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-normalized-tensor-horizontal",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-pur-coherent-reference-quotient-comparison",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-pur-compact-support-strict-scalar-composition-support-realization",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "def-pur-canonical-coefficient-reduction",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-pur-canonical-coefficient-composition-laws",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-pur-canonical-coefficient-representative-laws",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "lem-coef-representative-tensor-model-comparison",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   },
+   {
+    "id": "stage3-pod-reindexing-tensor-limit-model-descent",
+    "holds": true,
+    "note": "Rebased compatibility audit: the added proof field does not alter existing data projections. The canonical fiber constructor now supplies its transported finite coherence by uniqueness of evaluation-normalized tensor models; other users retain their existing equations."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-pc-scheme",
+   "def-weil-pbc-proetale-site",
+   "def-weil-size-convention",
+   "def-weil-completed-integral-coefficients",
+   "def-weil-sheaf-of-modules-category",
+   "def-pc-sheaf-restrict-scalars",
+   "def-weil-abstract-derived-category",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "def-coef-normalized-dvr-tower",
+   "def-weil-integral-reduction-tower",
+   "lem-pc-kflat-resolution",
+   "def-pur-derived-internal-hom",
+   "def-pc-kflat-complex",
+   "def-pc-tensor-complex-sheaves",
+   "lem-pur-derived-change-of-rings",
+   "lem-pur-rhom-global-sections",
+   "lem-weil-derived-scalar-extension-restriction-adjunction",
+   "def-coef-hom-representative-evaluation",
+   "def-coef-hom-zero-cycle-class",
+   "def-coef-ringed-sequence-site",
+   "def-coef-ringed-tensor-hom-model"
+  ]
  }
 }

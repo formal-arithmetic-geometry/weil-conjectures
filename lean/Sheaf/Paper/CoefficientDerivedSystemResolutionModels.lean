@@ -329,6 +329,9 @@ theorem coefficientDerivedSystemResolutionModels :
   obtain ⟨C⟩ := coefficientDerivedSectionsNormalization l E W R hF
   let F : CoefficientDerivedSystemFibers l E W :=
     { toCoefficientDerivedSystemReduction := R
+      finite_tensor_coherence := by
+        unfold CoefficientDerivedSystemTensorCoherence at hTR
+        exact hTR.2.2
       reductionTensor_normalization := hR
       finiteTensor_normalization := hF
       evaluationTensor_normalization := hE

@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-ringed-tensor-representative-transport",
+ "title": "Categorical transport and normalization of tensor representative associators",
+ "statement": "For source and target closed monoidal categories, a natural binary comparison ρ, quotient functors q,q′, a representative functor F, and a natural quotient comparison α:q⋙r≅F⋙q′, take four binary comparison squares, source and target representative associators and their model equations, two model naturality equations, and chain associativity. Then ρ satisfies associativity on the three quotient representative objects. The supporting ringed-site model API supplies left and right naturality of the fixed simultaneous tensor comparisons, and the ringed tensor coherence supplies pure-triple associator representatives whose two outer comparisons are these fixed simultaneous comparisons.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT, 06YU and 07A4: tensor-model associators and derived pullback tensor coherence."
+ },
+ "proof": [
+  {
+   "text": "The naturality equations of the fixed simultaneous model comparison specialize to the identity in either input. For a K-flat triple, take the associator model from the ringed tensor coherence. K-flat total closure and tensorIso_both replace the two outer one-K-flat comparisons by the fixed simultaneous comparisons; retain its local pure-triple formula. For categorical transport, paste each inner representative square with its outer square using naturality of ρ. The two associator model equations identify the resulting nested model maps. Transport the chain equality by naturality of α, and cancel the nested model isomorphisms. The resulting equation is exactly associativity of ρ on the quotient representatives.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0FPT, 06YU and 07A4; normalization of K-flat model associators and elementary naturality-and-cancellation transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derive monoidal associativity of a derived tensor comparison from four natural K-flat representative squares and chain associativity",
+   "results": "8 hits including localized monoidal associators, tensor composition and monoidal normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing recorded ringed tensor models and a direct naturality-and-cancellation pasting proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "1 exact hit for associator naturality.",
+   "date": "2026-10-28",
+   "verdict": "Use associator naturality in the generic pasting proof."
+  },
+  {
+   "tool": "grep",
+   "query": "associator_naturality",
+   "results": "25 hits in Mathlib monoidal, localization and module categories.",
+   "date": "2026-10-28",
+   "verdict": "The elementary monoidal API suffices; no localization framework change or new axiom is needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Reusable model normalization and categorical pasting below the generic derived transport step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorRepresentativeTransport",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorRepresentativeTransport.lean",
+  "declaration": "WeilConjectures.coefficientRepresentativeTensorComparison_associativity",
+  "declarations": [
+   "WeilConjectures.coefficientRepresentativeTensorComparison_associativity",
+   "WeilConjectures.coefficientTensorModel_iso_naturality_left",
+   "WeilConjectures.coefficientTensorModel_iso_naturality_right",
+   "WeilConjectures.coefficientTensorModel_associator_representative"
+  ],
+  "statement": "theorem coefficientRepresentativeTensorComparison_associativity\n    (q : V ⥤ D) (qU : W ⥤ E') (F : V ⥤ W)\n    (A : V × V ⥤ V) (AU : W × W ⥤ W) (α : q ⋙ r ≅ F ⋙ qU)\n    (P Q N : V)\n    (γPQ : F.obj (A.obj (P, Q)) ≅ AU.obj (F.obj P, F.obj Q))\n    (γQN : F.obj (A.obj (Q, N)) ≅ AU.obj (F.obj Q, F.obj N))\n    (γL : F.obj (A.obj (A.obj (P, Q), N)) ≅\n      AU.obj (F.obj (A.obj (P, Q)), F.obj N))\n    (γR : F.obj (A.obj (P, A.obj (Q, N))) ≅\n      AU.obj (F.obj P, F.obj (A.obj (Q, N))))\n    (a : A.obj (A.obj (P, Q), N) ≅ A.obj (P, A.obj (Q, N)))\n    (aU : AU.obj (AU.obj (F.obj P, F.obj Q), F.obj N) ≅\n      AU.obj (F.obj P, AU.obj (F.obj Q, F.obj N)))\n    (tPQ : q.obj (A.obj (P, Q)) ≅ S.tensor.obj (q.obj P, q.obj Q))\n    (tQN : q.obj (A.obj (Q, N)) ≅ S.tensor.obj (q.obj Q, q.obj N))\n    (tL : q.obj (A.obj (A.obj (P, Q), N)) ≅\n      S.tensor.obj (q.obj (A.obj (P, Q)), q.obj N))\n    (tR : q.obj (A.obj (P, A.obj (Q, N))) ≅\n      S.tensor.obj (q.obj P, q.obj (A.obj (Q, N))))\n    (uPQ : qU.obj (AU.obj (F.obj P, F.obj Q)) ≅\n      SU.tensor.obj (qU.obj (F.obj P), qU.obj (F.obj Q)))\n    (uQN : qU.obj (AU.obj (F.obj Q, F.obj N)) ≅\n      SU.tensor.obj (qU.obj (F.obj Q), qU.obj (F.obj N)))\n    (uL : qU.obj (AU.obj (AU.obj (F.obj P, F.obj Q), F.obj N)) ≅\n      SU.tensor.obj (qU.obj (AU.obj (F.obj P, F.obj Q)), qU.obj (F.obj N)))\n    (uR : qU.obj (AU.obj (F.obj P, AU.obj (F.obj Q, F.obj N))) ≅\n      SU.tensor.obj (qU.obj (F.obj P), qU.obj (AU.obj (F.obj Q, F.obj N))))\n    (uL₀ : qU.obj (AU.obj (F.obj (A.obj (P, Q)), F.obj N)) ≅\n      SU.tensor.obj (qU.obj (F.obj (A.obj (P, Q))), qU.obj (F.obj N)))\n    (uR₀ : qU.obj (AU.obj (F.obj P, F.obj (A.obj (Q, N)))) ≅\n      SU.tensor.obj (qU.obj (F.obj P), qU.obj (F.obj (A.obj (Q, N)))))\n    (hePQ : r.map tPQ.hom ≫ (rho (q.obj P) (q.obj Q)).hom ≫\n      SU.tensor.map (X := (r.obj (q.obj P), r.obj (q.obj Q)))\n        (Y := (qU.obj (F.obj P), qU.obj (F.obj Q))) (α.hom.app P, α.hom.app Q) =\n      α.hom.app (A.obj (P, Q)) ≫ qU.map γPQ.hom ≫ uPQ.hom)\n    (heQN : r.map tQN.hom ≫ (rho (q.obj Q) (q.obj N)).hom ≫\n      SU.tensor.map (X := (r.obj (q.obj Q), r.obj (q.obj N)))\n        (Y := (qU.obj (F.obj Q), qU.obj (F.obj N))) (α.hom.app Q, α.hom.app N) =\n      α.hom.app (A.obj (Q, N)) ≫ qU.map γQN.hom ≫ uQN.hom)\n    (heL : r.map tL.hom ≫ (rho (q.obj (A.obj (P, Q))) (q.obj N)).hom ≫\n      SU.tensor.map (X := (r.obj (q.obj (A.obj (P, Q))), r.obj (q.obj N)))\n        (Y := (qU.obj (F.obj (A.obj (P, Q))), qU.obj (F.obj N)))\n        (α.hom.app (A.obj (P, Q)), α.hom.app N) =\n      α.hom.app (A.obj (A.obj (P, Q), N)) ≫ qU.map γL.hom ≫ uL₀.hom)\n    (heR : r.map tR.hom ≫ (rho (q.obj P) (q.obj (A.obj (Q, N)))).hom ≫\n      SU.tensor.map (X := (r.obj (q.obj P), r.obj (q.obj (A.obj (Q, N)))))\n        (Y := (qU.obj (F.obj P), qU.obj (F.obj (A.obj (Q, N)))))\n        (α.hom.app P, α.hom.app (A.obj (Q, N))) =\n      α.hom.app (A.obj (P, A.obj (Q, N))) ≫ qU.map γR.hom ≫ uR₀.hom)\n    (hea : tL.hom ≫ S.tensor.map (X := (q.obj (A.obj (P, Q)), q.obj N))\n        (Y := (S.tensor.obj (q.obj P, q.obj Q), q.obj N)) (tPQ.hom, 𝟙 _) ≫\n      (S.monoidal.associator (q.obj P) (q.obj Q) (q.obj N)).hom =\n      q.map a.hom ≫ tR.hom ≫ S.tensor.map\n        (X := (q.obj P, q.obj (A.obj (Q, N))))\n        (Y := (q.obj P, S.tensor.obj (q.obj Q, q.obj N))) (𝟙 _, tQN.hom))\n    (heaU : uL.hom ≫ SU.tensor.map\n        (X := (qU.obj (AU.obj (F.obj P, F.obj Q)), qU.obj (F.obj N)))\n        (Y := (SU.tensor.obj (qU.obj (F.obj P), qU.obj (F.obj Q)), qU.obj (F.obj N)))\n        (uPQ.hom, 𝟙 _) ≫\n      (SU.monoidal.associator (qU.obj (F.obj P)) (qU.obj (F.obj Q)) (qU.obj (F.obj N))).hom =\n      qU.map aU.hom ≫ uR.hom ≫ SU.tensor.map\n        (X := (qU.obj (F.obj P), qU.obj (AU.obj (F.obj Q, F.obj N))))\n        (Y := (qU.obj (F.obj P), SU.tensor.obj (qU.obj (F.obj Q), qU.obj (F.obj N))))\n        (𝟙 _, uQN.hom))\n    (hnL : qU.map (AU.map (X := (F.obj (A.obj (P, Q)), F.obj N))\n        (Y := (AU.obj (F.obj P, F.obj Q), F.obj N)) (γPQ.hom, 𝟙 _)) ≫ uL.hom =\n      uL₀.hom ≫ SU.tensor.map\n        (X := (qU.obj (F.obj (A.obj (P, Q))), qU.obj (F.obj N)))\n        (Y := (qU.obj (AU.obj (F.obj P, F.obj Q)), qU.obj (F.obj N)))\n        (qU.map γPQ.hom, 𝟙 _))\n    (hnR : qU.map (AU.map (X := (F.obj P, F.obj (A.obj (Q, N))))\n        (Y := (F.obj P, AU.obj (F.obj Q, F.obj N))) (𝟙 _, γQN.hom)) ≫ uR.hom =\n      uR₀.hom ≫ SU.tensor.map\n        (X := (qU.obj (F.obj P), qU.obj (F.obj (A.obj (Q, N)))))\n        (Y := (qU.obj (F.obj P), qU.obj (AU.obj (F.obj Q, F.obj N))))\n        (𝟙 _, qU.map γQN.hom))\n    (hc : F.map a.hom ≫ γR.hom ≫ AU.map\n        (X := (F.obj P, F.obj (A.obj (Q, N))))\n        (Y := (F.obj P, AU.obj (F.obj Q, F.obj N))) (𝟙 _, γQN.hom) =\n      γL.hom ≫ AU.map (X := (F.obj (A.obj (P, Q)), F.obj N))\n        (Y := (AU.obj (F.obj P, F.obj Q), F.obj N)) (γPQ.hom, 𝟙 _) ≫ aU.hom) :\n    r.map (S.monoidal.associator (q.obj P) (q.obj Q) (q.obj N)).hom ≫\n      (rho (q.obj P) (S.tensor.obj (q.obj Q, q.obj N))).hom ≫\n      SU.tensor.map (X := (r.obj (q.obj P), r.obj (S.tensor.obj (q.obj Q, q.obj N))))\n        (Y := (r.obj (q.obj P), SU.tensor.obj (r.obj (q.obj Q), r.obj (q.obj N))))\n        (𝟙 _, (rho (q.obj Q) (q.obj N)).hom) =\n      (rho (S.tensor.obj (q.obj P, q.obj Q)) (q.obj N)).hom ≫\n      SU.tensor.map (X := (r.obj (S.tensor.obj (q.obj P, q.obj Q)), r.obj (q.obj N)))\n        (Y := (SU.tensor.obj (r.obj (q.obj P), r.obj (q.obj Q)), r.obj (q.obj N)))\n        ((rho (q.obj P) (q.obj Q)).hom, 𝟙 _) ≫\n      (SU.monoidal.associator (r.obj (q.obj P)) (r.obj (q.obj Q)) (r.obj (q.obj N))).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

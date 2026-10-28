@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CoefficientRingedSequenceSite
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
+public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
@@ -958,6 +959,11 @@ attribute [local irreducible] CoefficientReductionTensorNormalization
 Source: Stacks 0A95, 0941 and node proof steps 6--11
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 structure CoefficientDerivedSystemFibers extends CoefficientDerivedSystemReduction l E W where
+  /-- Retain the finite constraint witnesses used to construct the tensor models. -/
+  finite_tensor_coherence : ∀ n : ℕ,
+    ∃ β : @SymmetricCategory (normalizedDVRDerived l E W n) _ (finiteClosed n).monoidal,
+      Nonempty (RingedDerivedTensorCoherence.{t+1, t, u} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) (finiteClosed n) (finiteTensorModel n) β)
   /-- Reduction's tensor comparison has the simultaneous strict representative formula. -/
   reductionTensor_normalization : CoefficientReductionTensorNormalization l E W
     toCoefficientDerivedSystemReduction

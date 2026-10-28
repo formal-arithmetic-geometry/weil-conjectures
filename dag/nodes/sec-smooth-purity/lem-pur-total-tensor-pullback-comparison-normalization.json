@@ -1,0 +1,107 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL, 07A4 and 06YN; natural total comparison and its total-summand formula. The canonical total summand and the elementary inverse-associativity cancellation are used directly, avoiding the cyclic internal-Hom transposition import."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Normalization of the total comparison before the chain associativity calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-total-tensor-pullback-comparison-normalization",
+ "title": "Natural total tensor pullback comparison with summand normalization",
+ "statement": "For a scheme morphism f:X→Y, commutative ring sheaves R and R′ on their pro-etale sites in universe u+1, and c:f⁻¹R≅R′, write L for the identified module pullback. Let ν:tensor_Y⋙L≅(L×L)⋙tensor_X have the prescribed ordinary tensor-pullback components. There exists a natural total comparison e:T′(L−,L−)≅L(T(−,−)) whose inverse components are the prescribed pointwise total comparisons, and for every pair P,Q and homogeneous total summand p+q=k, L(ι_{p,q});(e⁻¹(P,Q))^k = ν(P^p,Q^q);ι′_{p,q}. No associativity, flatness or derived-category hypothesis is used.",
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-ringed-tensor-comparison-associativity"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 07A4 and 06YN: natural pullback tensor comparisons and signed total tensor summands."
+ },
+ "proof": [
+  {
+   "text": "Take the existing natural total comparison with its component normalization. For an arbitrary homogeneous summand, rewrite the total component and the ordinary natural component by their normalizations. The existing geometric total-coproduct summand identity gives exactly the asserted equation. Retain both the pointwise and summand formulas with that same natural comparison.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data",
+    "lem-pur-proetale-total-tensor-pullback-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-pur-proetale-total-tensor-pullback-generators"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural tensor pullback comparison on total cochain complexes with specified summand components",
+   "results": "8 hits including HomologicalComplex.ιTensorObj, tensorHom and CochainComplex.ιMapBifunctor.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project natural total comparison and its geometric summand formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits including the constructor and its component formulas.",
+   "date": "2026-10-28",
+   "verdict": "The project already supplies the needed natural total comparison; retain its existing component normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "totalTensorPullbackIso_exists|geometric_total_ι",
+   "results": "Remote grep returned no hits. Local rg found the private declarations in ProEtaleTensorPullbackDescentData and ProEtaleTotalTensorPullbackGenerators.",
+   "date": "2026-10-28",
+   "verdict": "Import those existing proved declarations; no new mathematical obligation is necessary."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTotalTensorPullbackComparisonNormalization",
+  "file": "lean/Sheaf/Paper/ProEtaleTotalTensorPullbackComparisonNormalization.lean",
+  "declaration": "WeilConjectures.proEtaleTotalTensorPullbackComparisonNormalization",
+  "statement": "theorem proEtaleTotalTensorPullbackComparisonNormalization\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R' : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ R')\n    (ν : @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R) ⋙\n        proEtaleRingModulePullback f R R' c ≅\n      ((proEtaleRingModulePullback f R R' c).prod\n        (proEtaleRingModulePullback f R R' c)) ⋙\n        @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R'))\n    (hμ : ∀ M N, ν.hom.app (M, N) =\n      (proEtaleOrdinaryTensorPullback f R R' c M N).hom)\n :\n    let L := proEtaleRingModulePullback f R R' c\n    ∃ e : (((proEtaleRingModulePullback f R R' c).mapHomologicalComplex (.up ℤ)).prod\n        ((proEtaleRingModulePullback f R R' c).mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X) R' ≅\n      coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y) R ⋙\n        (proEtaleRingModulePullback f R R' c).mapHomologicalComplex (.up ℤ),\n      (∀ P Q, e.inv.app (P, Q) = (proEtaleTensorPullbackTotalIso f R R' c P Q).inv) ∧\n    ∀ (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)\n      (p q k : ℤ) (h : p + q = k),\n      L.map (RingedForgetTensorTransposition.coefficientTensorSummand.{u + 1, u, u}\n        (Scheme.ProEt.topology Y) R P Q p q k h) ≫\n          (e.inv.app (P, Q)).f k =\n        ν.hom.app (P.X p, Q.X q) ≫\n          RingedForgetTensorTransposition.coefficientTensorSummand.{u + 1, u, u}\n            (Scheme.ProEt.topology X) R' ((L.mapHomologicalComplex (.up ℤ)).obj P)\n              ((L.mapHomologicalComplex (.up ℤ)).obj Q) p q k h",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

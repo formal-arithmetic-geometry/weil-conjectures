@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-ringed-tensor-comparison-associativity",
+ "title": "Associativity for summand-normalized ringed tensor comparisons",
+ "statement": "Let (C,J,R) and (D,J′,R′) be arbitrary ringed sites with the sheafification hypotheses of [def-coef-ringed-tensor-hom-model], retaining independent site and coefficient universes. Let U be an additive functor on their module-sheaf categories, ν a natural tensor comparison satisfying ordinary inverse associativity, and δ the corresponding natural comparison on total cochain tensors satisfying the total-summand equation. For three source complexes P,Q,N and model associators aB,aA on their source and U-image triple, assume the local pure-triple generator formulas. Then U_complex(aB) ; δ(P,T(Q,N)) ; T′(1,δ(Q,N)) = δ(T(P,Q),N) ; T′(δ(P,Q),1) ; aA. No preservation of internal Hom or derived representative assertion is assumed.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 06YU and 0FPT; tensor associativity on total-complex summands."
+ },
+ "proof": [
+  {
+   "text": "Use local pure-triple detection to identify both supplied model associators with the native complex associators. Install the canonical sheaf monoidal structures and expand total-tensor and summand aliases. Apply the abstract model-chain associativity theorem with the ordinary inverse associativity and total-summand formulas. This is solely a chain-level statement.",
+   "uses": [
+    "lem-sf-ringed-tensor-associator-detection",
+    "lem-sf-ringed-forget-model-chain-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-tensor-associator-detection",
+  "lem-sf-ringed-forget-model-chain-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL, 06YU and 0FPT; local triple detection followed by native total-chain associativity. The pure-triple proposition is retained as one proof field in RingedTensorComparisonCoherence to avoid repeated expansion during kernel checking. The canonical total summand and the elementary inverse-associativity cancellation are used directly, avoiding the cyclic internal-Hom transposition import."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A summand normalized tensor comparison between cochain complex functors preserves the associator when the ordinary comparison does",
+   "results": "8 hits including HomologicalComplex.associator, mapBifunctorAssociatorX and its summand formulas. No site-normalized comparison theorem.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing project model-chain theorem and sheaf generator detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.associator",
+   "results": "1 hit, HomologicalComplex.associator in Mathlib.Algebra.Homology.Monoidal.",
+   "date": "2026-10-28",
+   "verdict": "Native associator is reused through the model-chain API."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorAssociator|associator_naturality",
+   "results": "25 hits, including graded-object associator construction and naturality.",
+   "date": "2026-10-28",
+   "verdict": "No prescribed ringed comparison result; combine existing project APIs."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-associativity-representatives",
+   "place": "Chain-level associativity step of the finite representative calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorComparisonAssociativity",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorComparisonAssociativity.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_tensorComparison_associativity",
+  "statement": "theorem ringed_tensorComparison_associativity\n    (ν : @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R) ⋙ U ≅\n      (U.prod U) ⋙ @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R'))\n    (hν : letI := SheafOfModules.monoidalCategory R\n      letI := SheafOfModules.monoidalCategory R'\n      ∀ X Y Z, (ν.inv.app (X, Y) ▷ U.obj Z) ≫ ν.inv.app (X ⊗ Y, Z) ≫\n        U.map (α_ X Y Z).hom = (α_ (U.obj X) (U.obj Y) (U.obj Z)).hom ≫\n          (U.obj X ◁ ν.inv.app (Y, Z)) ≫ ν.inv.app (X, Y ⊗ Z))\n    (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{s, d, vd} J' R')\n    (summand : ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n      (p q n : ℤ) (hpq : p + q = n),\n      U.map (coefficientTensorSummand.{c, v, r} J R P Q p q n hpq) ≫ (chain.hom.app (P, Q)).f n =\n        ν.hom.app (P.X p, Q.X q) ≫\n          coefficientTensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq) :\n    RingedTensorComparisonCoherence J R J' R' U chain",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28",
+  "declarations": [
+   "CategoryTheory.RingedForgetTensorTransposition.coefficientTensorSummand",
+   "CategoryTheory.RingedForgetTensorTransposition.RingedTensorComparisonCoherence",
+   "CategoryTheory.RingedForgetTensorTransposition.ringed_tensorComparison_associativity"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
+  "kind": "interface",
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
+ }
+}

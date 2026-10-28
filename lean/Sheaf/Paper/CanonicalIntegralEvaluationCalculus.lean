@@ -8,6 +8,9 @@ public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 import Sheaf.Paper.CanonicalCoefficientRepresentativeLaws
 import Sheaf.Paper.CanonicalCoefficientCompositionLaws
+import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import all Sheaf.Algebra.Homology.RingedTensorConstraintCompletion
+import all Sheaf.CategoryTheory.RingedSiteDualityMaps
 
 /-! # Coherent reduction with the fixed integral closed tensor
 
@@ -22,7 +25,7 @@ set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe t u
+universe t u c v r w
 open CategoryTheory Opposite AlgebraicGeometry
 namespace WeilConjectures
 section CategoricalComposition
@@ -68,10 +71,58 @@ private theorem parameter_composition (T U P : A) (N N' : B)
 
 end CategoricalComposition
 
+section ModelUniqueness
+variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+  [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+  (R : Sheaf J CommRingCat.{max c v r})
+  [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
+
+attribute [local irreducible] DerivedCategory DerivedCategory.Q HasDerivedCategory.standard
+  coefficientTotalTensor coefficientTensorGenerator coefficientHomResolution
+  coefficientHomResolutionIso coefficientHomResolutionInverse derivedInternalHomOfUniverses
+
+set_option maxHeartbeats 800000 in
+-- Comparison uniqueness uses two large dependent uncurrying squares.
+private theorem tensorModels_unique
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
+    (M N : CoefficientTensorModels.{r, c, v, w} J R S) : M = N := by
+  have he : M.comparison = N.comparison := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext X
+    rcases X with ⟨P, L⟩
+    let I := (coefficientTotalTensor.{r, c, v} J R).obj (P.obj, L.obj)
+    let ξ := S.transpose (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)
+      (DerivedCategory.Q.obj I) (M.iso J R S P.obj L.obj P.property L.property).inv
+    obtain ⟨φ, hφ⟩ := RingedDerivedNative.representativeHom_surjective.{c, v, r, w}
+      J R P.obj L.obj I L.property ξ
+    obtain ⟨ψ, hψ, hm⟩ := M.uncurry_model P L I φ
+    obtain ⟨χ, hχ, hn⟩ := N.uncurry_model P L I φ
+    have hc : ψ = χ := by
+      apply CategoryTheory.tensorGenerator_ext.{c, v, r} J R P.obj L.obj _ ψ χ
+      intro p q k hpq U x y
+      exact (hψ p q k hpq (by omega) U x y).trans
+        (hχ p q k hpq (by omega) U x y).symm
+    rw [hφ] at hm hn
+    dsimp only [ξ] at hm hn
+    rw [Equiv.symm_apply_apply] at hm hn
+    apply (cancel_mono (M.iso J R S P.obj L.obj P.property L.property).inv).mp
+    rw [hc] at hm
+    exact hm.trans hn.symm
+  cases M
+  cases N
+  cases he
+  rfl
+
+end ModelUniqueness
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 namespace CanonicalCoefficient
+
+attribute [local implicit_reducible] coefficientFiniteInternalHom
 
 /-- The new quotient calculus has the old adjunctions and the conjugated tensor maps. -/
 private def quotient (S : CoefficientDerivedSystemFibers l E W) :
@@ -87,6 +138,24 @@ private def quotient (S : CoefficientDerivedSystemFibers l E W) :
 private def fibers (S : CoefficientDerivedSystemFibers l E W) :
     CoefficientDerivedSystemFibers l E W where
   toCoefficientDerivedSystemReduction := reduction l E W S.toCoefficientDerivedSystemReduction
+  finite_tensor_coherence := by
+    intro n
+    let M := Classical.choice (ringedSiteDualityMaps_exists.{t+1, t, u,
+      (max u (t+1))+1} (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n))
+    change ∃ β : @SymmetricCategory _ _ M.closed.monoidal,
+      Nonempty (RingedDerivedTensorCoherence.{t+1, t, u} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) M.closed
+        (tensorModels (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)
+          (S.finiteClosed n) M.closed (S.finiteTensorModel n)) β)
+    have he : tensorModels (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n) M.closed
+        (S.finiteTensorModel n) = M.models :=
+      tensorModels_unique (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) M.closed _ M.models
+    rw [he]
+    obtain ⟨K, _⟩ := CategoryTheory.ringedSiteTensorCoherence
+      (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n) M
+    exact ⟨M.symmetric, ⟨K⟩⟩
   reductionTensor_normalization := (representativeLaws l E W S).reduction_tensor
   finiteTensor_normalization := (representativeLaws l E W S).finite_tensor
   evaluationTensor_normalization := (representativeLaws l E W S).evaluation_tensor

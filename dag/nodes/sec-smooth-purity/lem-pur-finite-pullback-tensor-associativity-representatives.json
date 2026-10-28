@@ -14,43 +14,54 @@
  },
  "proof": [
   {
-   "text": "The total tensors of the flat K-flat complexes A,B and B,C are again flat K-flat. Apply the canonical derived pullback representative square to these pairs and to their iterated total tensors.",
+   "text": "Form the flat K-flat total tensors of A,B and B,C. Ordinary pullback preserves the given flat representatives. Use the arbitrary-K-flat representative square for the two inner pairs and two outer pairs; the latter use the pulled-back total tensors.",
    "uses": [
     "lem-pur-kflat-total-tensor-model",
+    "lem-pur-finite-pullback-tensor-kflat-representatives",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "In tridegree (p,q,r), both ordinary comparison paths send the pullback of (x tensor y) tensor z to f*x tensor (f*y tensor f*z). The reassociator changes parentheses without permuting factors, so no Koszul sign is introduced. The signed differential is unchanged. The tensor universal property, module sheafification and total coproduct injections prove equality of the chain maps.",
+   "text": "Use the proved coherent natural total tensor pullback comparison, retaining both its prescribed inverse components and its associativity on any source and target pure-triple model associators. This performs the ordinary generator, signed-total and native associator calculation before the derived pasting argument, without factor exchanges or extra Koszul signs.",
    "uses": [
-    "def-sp-proetale-ordinary-tensor-pullback-total",
-    "lem-pur-kflat-total-tensor-model"
+    "lem-pur-coherent-total-tensor-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the derived quotient and conjugate by the specified K-flat tensor comparisons and the unit-normalized finite realization. Insert the total-tensor associators representing the intrinsic associators; naturality cancels the intermediate tensor-model and realization conjugations. This gives the displayed equation on the localized flat K-flat triples, without extending it to arbitrary derived objects.",
+   "text": "Retain the existing finite tensor coherence witnesses at the source and target. The generic proved ringed derived model-transport theorem combines these witnesses, the four binary representative squares, model naturality and the chain comparison coherence. Its conclusion is precisely the assigned associativity equation on the quotient objects of A,B,C.",
    "uses": [
     "def-coef-ringed-tensor-hom-model",
-    "def-pur-finite-pullback-tensor-construction"
+    "def-pur-finite-pullback-tensor-construction",
+    "def-coef-derived-system-calculus-data",
+    "lem-coef-derived-system-resolution-models",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-finite-pullback-tensor-kflat-diagrams",
+    "lem-pur-ringed-derived-tensor-comparison-associativity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-kflat-total-tensor-model",
+  "lem-pur-finite-pullback-tensor-kflat-representatives",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-pur-coherent-total-tensor-pullback-comparison",
   "def-coef-ringed-tensor-hom-model",
-  "def-pur-finite-pullback-tensor-construction"
+  "def-pur-finite-pullback-tensor-construction",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-derived-system-resolution-models",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-finite-pullback-tensor-kflat-diagrams",
+  "lem-pur-ringed-derived-tensor-comparison-associativity"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "D2",
-  "date": "2026-10-27",
+  "group": "G2",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Representative coherence calculation of def-pur-finite-pullback-tensor-comparison; Tag 07A4 (lemma-pullback-tensor-product), Tag 07A2 (lemma-tensor-product-K-flat), and Tag 03EL (lemma-tensor-product-pullback)."
+  "place": "Tags 07A4, 07A2, 03EL and 0FPT; binary unit normalization, native signed-total associativity, and localization naturality."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -120,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
-  "result": "pass",
-  "landing": "20261026T222610-L-672941",
+  "reviewer": "C-d4e96",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261028T034751-L-3542786",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item stmt type hash equal pub vs delivered; Fibers.finite_tensor_coherence (Prop) vs change record + hTR.2.2 witness; CanonicalIntegralEvaluationCalculus forced adaptation vs C-89dfb error; 11 delivered + 16 direct importers + 5 named Fibers users compiled in own sandbox (32 OK, <60 s); axioms clean for all new theorems, item sorryAx only via pre-existing upstream sorry; new nodes uses==proof_deps"
  }
 }
