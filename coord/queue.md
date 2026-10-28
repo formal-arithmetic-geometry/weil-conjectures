@@ -1,17 +1,16 @@
 # Work queue
 
-122 items; claim with `tools/claim.py next <group> [--stage N]`.
+123 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (2 clusters, 693 modules)
+## Rework: quarantined by the upstream sync (1 clusters, 689 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.SixFunctors.IntegralNormalizedFamily` | 1 |  | error: Sheaf/SixFunctors/IntegralNormalizedFamily.lean:161:61: Application type mismatch: The argument | hlimit | has type | ∃ a b c d e, | c.hom = diagonalDeri |
-| `Sheaf.Paper.NativeWeilScalarCounitData` | 1 |  | error: NOT ACCEPTED: compiled in 84.6 s > 60 s, the limit for one file (SHEAF_FILE_TIMEOUT). It ran up to 120 s only so that the slow declarations finish and re |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 2, stage 3 6 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 2, stage 3 4 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -30,7 +29,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1134 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (112)
+## Stage 3: modules to prove (114)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -134,6 +133,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.PublishedSystemTensorRepresentativeNormalization` | - | 2 | proof | route |
 | `Sheaf.SixFunctors.TriangleProjectionCompositorContraction` | - | 1 | proof | route |
 | `Sheaf.WeilSheaf.NativeExceptionalHomTransport` | - | 1 | proof | route |
+| `Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitComparison` | - | 1 | proof | route |
+| `Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitWitness` | - | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CompactSupportStrictScalarComposition` | - | 2 | proof | 1 |
 | `Sheaf.Paper.FiniteHomDomainCalculus` | - | 2 | proof | 1 |
