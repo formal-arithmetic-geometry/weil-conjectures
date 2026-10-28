@@ -1,0 +1,107 @@
+{
+ "id": "lem-diagonal-finite-unit-push-square",
+ "kind": "statement",
+ "title": "Normalized finite coefficient-unit square",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "statement": "With the finite realization data, canonical right-derived model and finite push square of lem-diagonal-finite-unit-push, the induced finite coefficient-unit comparison satisfies the displayed derived unit square before cancellation of the finite unit isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), normalized finite push square on the coefficient-one object"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-category",
+  "def-diagonal-coefficient-unit-push"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the normalization equation of the supplied FinitePushSquare on the regular coefficient module. Use the ordinary unit normalization to identify the underlying coefficient map, then cancel the single-complex comparison isomorphisms. The canonical right-derived unit equation hcanonical identifies the remaining derived unit, and the finite adjunction hom-equivalence gives the finiteUnitAdjunct term.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-sfb-diagonal-coefficient-category",
+    "def-diagonal-coefficient-unit-push"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-category",
+  "def-diagonal-coefficient-unit-push"
+ ],
+ "proof_origin": {
+  "by": "H4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), normalized finite push square on the coefficient-one object",
+  "note": "Strict lower step: the uncancelled normalized square used to prove the coefficient-unit adjunct."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived functor comparison square on a single complex",
+   "results": "Generic derived comparison results; no exact normalized finite coefficient square.",
+   "date": "2026-10-28",
+   "verdict": "Use the project FinitePushSquare normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "single object derived unit comparison square",
+   "results": "No exact project-specific match.",
+   "date": "2026-10-28",
+   "verdict": "Use the supplied project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory map unit naturality",
+   "results": "Generic naturality lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "Insufficient alone; retain project normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalFiniteUnitPush",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-finite-unit-push",
+   "place": "paragraph (1), normalized finite push square on the coefficient-one object"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteUnitPushCore",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteUnitPushCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finite_unit_push_square",
+  "statement": "theorem finite_unit_push_square\n    {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]\n    {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})\n    (eY : FiniteRealization R A Y) (eP : FiniteRealization R A (ProjectiveLine Y))\n    (D : DiagonalRightDerived (CondensedRing.lowerStar R (ProjectiveLine Y ↘ Y)))\n    (D' : DiagonalRightDerived (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)))\n    (hc : D'.R = geoP1Pushforward A (ProjectiveLine Y ↘ Y))\n    (hcanonical : IsCanonicalRightDerived\n      (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)) D' hc)\n    (s : FinitePushSquare R A (ProjectiveLine Y ↘ Y) eP eY D D') :\n    let t := s.derived.iso.hom ≫\n      Functor.whiskerLeft eP.F.mapDerivedCategory (eqToIso hc).hom\n    let i : eP.F.mapDerivedCategory.obj (unit R (ProjectiveLine Y)) ≅\n        geoP1Unit A (ProjectiveLine Y) :=\n      (eP.F.mapDerivedCategorySingleFunctor 0).app _ ≪≫\n        (DerivedCategory.singleFunctor _ 0).mapIso eP.unitIso ≪≫\n          (finiteUnitComparison A (ProjectiveLine Y)).symm\n    eY.F.mapDerivedCategory.map (coefficientUnitPush R Y D) ≫\n        t.app (unit R (ProjectiveLine Y)) ≫\n        (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map eP.derivedUnit =\n      eY.derivedUnit ≫ finiteUnitAdjunct A Y ≫\n        (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map\n          (i.inv ≫\n            eP.F.mapDerivedCategory.map (𝟙 (unit R (ProjectiveLine Y))) ≫\n              eP.derivedUnit)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261028T020359-L-2503270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261028T020359-L-2503270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

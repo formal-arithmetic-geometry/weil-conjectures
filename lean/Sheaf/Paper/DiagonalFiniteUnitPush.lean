@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.DiagonalCoefficientFiniteRealization
 public import Sheaf.Paper.DiagonalCoefficientUnitPush
+import Sheaf.Paper.DiagonalFiniteUnitPushCore
 
 /-! # Finite realization of the coefficient-unit arrow
 
@@ -61,7 +62,37 @@ theorem finite_unit_push
     eY.F.mapDerivedCategory.map (coefficientUnitPush R Y D) ≫
         t.app (unit R (ProjectiveLine Y)) ≫
         (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map eP.derivedUnit =
-      eY.derivedUnit ≫
-        finiteUnitAdjunct A Y := by sorry
+    eY.derivedUnit ≫
+        finiteUnitAdjunct A Y := by
+  let t := s.derived.iso.hom ≫
+    Functor.whiskerLeft eP.F.mapDerivedCategory (eqToIso hc).hom
+  let i : eP.F.mapDerivedCategory.obj (unit R (ProjectiveLine Y)) ≅
+      geoP1Unit A (ProjectiveLine Y) :=
+    (eP.F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso eP.unitIso ≪≫
+        (finiteUnitComparison A (ProjectiveLine Y)).symm
+  have hi : i.hom = eP.derivedUnit := by
+    unfold i FiniteRealization.derivedUnit
+    rfl
+  have hicomp : i.inv ≫
+      eP.F.mapDerivedCategory.map (𝟙 (unit R (ProjectiveLine Y))) ≫
+        eP.derivedUnit = 𝟙 _ := by
+    rw [eP.F.mapDerivedCategory.map_id]
+    simp only [Category.id_comp]
+    rw [← hi]
+    exact i.inv_hom_id
+  have h := finite_unit_push_square Y eY eP D D' hc hcanonical s
+  dsimp [t] at h ⊢
+  rw [eP.F.mapDerivedCategory.map_id] at h
+  simp only [Category.id_comp] at h
+  have hj :
+      (((finiteUnitComparison A (ProjectiveLine Y)).hom ≫
+          (DerivedCategory.singleFunctor _ 0).map eP.unitIso.inv) ≫
+        (eP.F.mapDerivedCategorySingleFunctor 0).inv.app
+          (Mod.regular (condensedRingObj R (ProjectiveLine Y)))) ≫
+        eP.derivedUnit = 𝟙 _ := by
+    simpa [i] using hicomp
+  rw [hj, (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map_id] at h
+  simpa only [Category.comp_id, Category.id_comp] using h
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
