@@ -56,6 +56,68 @@ theorem canonicalRationalPullbackTensorComposition_right_localization {X Y Z : S
           (canonicalIntegralPullbackTensor l E h
             ((constructibleIntegralPullback l E f).obj M.obj)
             ((constructibleIntegralPullback l E f).obj N.obj)).hom)) := by
-  sorry
+  let Q := sfRationalConstructibleLocalization l E Z
+  have hF {V W : Scheme.{u}} (g : V ⟶ W)
+      [∀ v : V, Invertible (l : V.residueField v)]
+      [∀ w : W, Invertible (l : W.residueField w)]
+      (K : sfRationalConstructibleCategory l E W) :
+      (rationalDerivedPullback l E g).obj K =
+        (sfRationalConstructibleLocalization l E V).obj
+          ((constructibleIntegralPullback l E g).obj K.obj) :=
+    (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.1 K
+  have hT (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+      (A B : sfRationalConstructibleCategory l E W) :
+      (rationalDerivedTensor l E W).obj (A,B) =
+        (sfRationalConstructibleLocalization l E W).obj
+          ((constructibleIntegralTensor l E W).obj (A.obj,B.obj)) :=
+    (rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 (A,B)
+  have ht : ((rationalDerivedTensor l E Y).obj (M,N)).obj =
+      (constructibleIntegralTensor l E Y).obj (M.obj,N.obj) := by
+    rw [hT]
+    rfl
+  have hf (K : sfRationalConstructibleCategory l E Y) :
+      ((rationalDerivedPullback l E f).obj K).obj =
+        (constructibleIntegralPullback l E f).obj K.obj := by
+    rw [hF]
+    rfl
+  have hcomp (A B : sfIntegralConstructibleCategory l E Y) (hab : A = B) :
+      HEq (Q.map ((pullbackTensorIntegralComposition l E f h).hom.app A))
+        (Q.map ((pullbackTensorIntegralComposition l E f h).hom.app B)) := by
+    subst B
+    rfl
+  have hc := (pullbackTensorRationalComposition_existsUnique l E f h
+    ((rationalDerivedTensor l E Y).obj (M,N))).exists.choose_spec
+  have hc' := hc.trans (hcomp _ _ ht)
+  have hmap {A B : sfRationalConstructibleCategory l E X}
+      {A' B' : sfIntegralConstructibleCategory l E X}
+      (hA : A = (sfRationalConstructibleLocalization l E X).obj A')
+      (hB : B = (sfRationalConstructibleLocalization l E X).obj B')
+      (a : A ⟶ B) (b : A' ⟶ B')
+      (hab : HEq a ((sfRationalConstructibleLocalization l E X).map b)) :
+      HEq ((rationalDerivedPullback l E h).map a)
+        (Q.map ((constructibleIntegralPullback l E h).map b)) := by
+    subst A B
+    cases hab
+    exact (rationalDerivedPullback_existsUnique l E h).exists.choose_spec.2.2 A' B' b 1
+  have hd := (canonicalRationalPullbackTensor_existsUnique l E f M N).exists.choose_spec
+  have hd' := hmap (by rw [hF, hT]; rfl) (by rw [hT, hF, hF]; rfl) _ _ hd
+  have hcomparison (A B A' B' : sfIntegralConstructibleCategory l E X)
+      (ha : A = A') (hb : B = B') :
+      HEq (Q.map (canonicalIntegralPullbackTensor l E h A B).hom)
+        (Q.map (canonicalIntegralPullbackTensor l E h A' B').hom) := by
+    subst A' B'
+    rfl
+  have he := (canonicalRationalPullbackTensor_existsUnique l E h
+    ((rationalDerivedPullback l E f).obj M)
+    ((rationalDerivedPullback l E f).obj N)).exists.choose_spec
+  have he' := he.trans (hcomparison _ _ _ _ (hf M) (hf N))
+  have htail := heq_comp (by rw [hF, hF, hT]; rfl)
+    (by rw [hF, hT, hF, hF]; rfl)
+    (by rw [hT, hF, hF, hF, hF]; rfl) hd' he'
+  have hright := heq_comp (by rw [hF, hT]; rfl)
+    (by rw [hF, hF, hT]; rfl)
+    (by rw [hT, hF, hF, hF, hF]; rfl) hc' htail
+  simpa only [← Functor.map_comp, Q, pullbackTensorRationalComposition,
+    canonicalRationalPullbackTensor] using hright
 
 end WeilConjectures
