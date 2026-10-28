@@ -114,4 +114,51 @@ noncomputable def toAlgEquiv : GenericAut k' K →*
 lemma toAlgEquiv_injective : Function.Injective (toAlgEquiv (k' := k') (K := K)) :=
   fun _ _ h ↦ toRingAut_injective (RingEquiv.ext fun x ↦ AlgEquiv.congr_fun h x)
 
+/-- An automorphism of `Ω_K` over `Frac K⟦t⟧` fixing the image of `Ω` is a generic
+automorphism. -/
+noncomputable def ofAlgEquiv
+    (e : traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K)
+    (he : ∀ y, e (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y) :
+    GenericAut k' K where
+  τ := Spec.map (CommRingCat.ofHom (e : traitGenericField K →+* traitGenericField K))
+  isIso := by
+    have : IsIso (CommRingCat.ofHom (e : traitGenericField K →+* traitGenericField K)) :=
+      ⟨CommRingCat.ofHom (e.symm : traitGenericField K →+* traitGenericField K),
+        by ext; simp, by ext; simp⟩
+    infer_instance
+  over_trait := by
+    rw [traitGenericPoint, ← Spec.map_comp]
+    congr 1
+    ext a
+    change e (algebraMap (PowerSeries K) (traitGenericField K) a) = _
+    rw [IsScalarTower.algebraMap_apply (PowerSeries K) (FractionRing (PowerSeries K)),
+      AlgEquiv.commutes, ← IsScalarTower.algebraMap_apply]
+    rfl
+  over_base := by
+    rw [traitGenericPointMap, ← Spec.map_comp]
+    congr 1
+    ext y
+    exact he y
+
+lemma toAlgEquiv_ofAlgEquiv
+    (e : traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K)
+    (he : ∀ y, e (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y) :
+    toAlgEquiv (ofAlgEquiv e he) = e := by
+  refine AlgEquiv.ext fun x ↦ ?_
+  have h : Spec.preimage (ofAlgEquiv e he).τ =
+      CommRingCat.ofHom (e : traitGenericField K →+* traitGenericField K) :=
+    Spec.preimage_map _
+  exact congrArg (fun f ↦ f.hom x) h
+
+/-- **The generic automorphisms are the Galois group `P' = Gal(Ω_K / Frac K⟦t⟧ · Ω)`**: the
+range of `toAlgEquiv` is the subgroup of the absolute Galois group of `Frac K⟦t⟧` fixing the
+image of `Ω`. -/
+lemma mem_range_toAlgEquiv_iff
+    (e : traitGenericField K ≃ₐ[FractionRing (PowerSeries K)] traitGenericField K) :
+    e ∈ (toAlgEquiv (k' := k') (K := K)).range ↔
+      ∀ y, e (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y := by
+  refine ⟨?_, fun he ↦ ⟨ofAlgEquiv e he, toAlgEquiv_ofAlgEquiv e he⟩⟩
+  rintro ⟨σ, rfl⟩ y
+  exact toRingAut_traitGenericFieldMap σ y
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut
