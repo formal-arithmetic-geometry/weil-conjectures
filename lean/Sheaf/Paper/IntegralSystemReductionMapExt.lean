@@ -9,11 +9,13 @@ import Sheaf.Paper.DerivedCompleteFiniteReductionDetection
 
 /-! Finite quotient evaluations and the Milnor obstruction.
 
-The unrestricted extensionality assertion below is disputed: derived localization
-of coefficient systems does not make finite evaluations jointly faithful.
-The proved finite shifted-Hom criterion records a sufficient condition for the
-Milnor obstruction to vanish.
-(blueprint: lem-pur-integral-system-reduction-map-ext)
+Finite evaluations are not jointly faithful on derived morphisms: for a complete
+target the Milnor kernel `lim¹ Hom(A[1], B_n)` survives, and it is nonzero for
+`A = O_E`, `B = O_E[2]` over `Spec ℚ`. The unrestricted assertion
+`integralSystemReduction_map_ext` was therefore withdrawn (maintainer rollback,
+2026-10-28; node lem-pur-integral-system-reduction-map-ext, no Lean attachment).
+The proved finite shifted-Hom criterion below is a sufficient condition.
+(blueprint: lem-pur-integral-system-reduction-map-ext-finite)
 -/
 
 @[expose] public noncomputable section
@@ -28,37 +30,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
-
-/-- Finite evaluations jointly reflect equality after coherent reduction.
-
-STATEMENT-DISPUTED: on an arbitrary scheme, the Milnor kernel
-`lim¹ Hom(A[1], B_n)` need not vanish. Joint conservativity of finite evaluations
-on objects does not imply joint faithfulness on derived morphisms.
-
-Source of the obstruction: Stacks Project, More on Algebra, Lemma
-`map-into-Rlim`; see the counterexample over `Spec ℚ` in the delivery report.
-(blueprint: lem-pur-integral-system-reduction-map-ext)
-
-The earlier proposed proof identified derived morphisms with families of their
-levelwise images. The Milnor exact sequence has an additional kernel, so this
-argument does not prove the assertion as stated. The theorem below with a finite
-shifted-Hom hypothesis gives a valid sufficient criterion instead.
--/
-theorem integralSystemReduction_map_ext
-    {X : Scheme.{u}}
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    {A B : sfIntegralConstructibleCategory l E X}
-    (p q : A ⟶ B)
-    (h : ∀ n : ℕ,
-      (finiteSystemDerivedEvaluation (integralSystemRings l E)
-          (integralSystemTransition l E) X n).map
-          ((integralSystemReduction l E X).map p) =
-        (finiteSystemDerivedEvaluation (integralSystemRings l E)
-          (integralSystemTransition l E) X n).map
-          ((integralSystemReduction l E X).map q)) :
-    (integralSystemReduction l E X).map p =
-      (integralSystemReduction l E X).map q := by
-  sorry
 
 /-- Finite shifted Hom groups suffice for joint faithfulness of finite evaluations.
 

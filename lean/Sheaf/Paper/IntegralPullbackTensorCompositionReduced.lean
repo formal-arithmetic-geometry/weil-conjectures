@@ -8,18 +8,15 @@ public import Sheaf.Paper.DerivedPullbackTensorConstraints
 public import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 import Sheaf.Paper.CompletedComparisonQuotientRealization
 import Sheaf.Paper.IntegralPullbackComposition
-import Sheaf.Paper.IntegralPullbackTensorCompositionReducedFiniteStage
-import Sheaf.Paper.IntegralSystemReductionMapExt
 
 /-! The reduced system form of integral pullback/tensor composition coherence.
 
-Source: Stacks 07A4 and 0941; the quotient-tower calculation before reflection.
-(blueprint: lem-pur-pullback-tensor-integral-composition-coherence)
+Source: Stacks 07A4 and 0941; the strict quotient-system calculation before reflection.
+(blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
 
-The equality is checked on the normalized finite quotient tower.  The completed
-comparison and the integral pullback compositor are both represented by the
-same pure-tensor map at every quotient stage; transition compatibility makes
-these maps equal in the finite-system derived category.
+The former finite-evaluation proof used a false joint-faithfulness assertion.
+This module retains the required specific equation as an open named theorem.
+The repair must compare whole strict-system representatives before localization.
 -/
 
 @[expose] public noncomputable section
@@ -40,13 +37,25 @@ variable (l : ℕ) [Fact l.Prime]
   [FiniteDimensional (Padic l) E]
 
 /-- Reduced form of the integral pullback/tensor composition equation.
-Source: Stacks 07A4 and 0941; the quotient-tower pure-tensor calculation.
-(blueprint: lem-pur-pullback-tensor-integral-composition-coherence)
+Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
+(blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
 
-The normalized quotient-tower representatives of both sides are identical at
-every finite coefficient level.  Their transition maps commute with the
-pure-tensor pullback formula, so the induced maps in the finite-system derived
-category are equal. -/
+Proof plan: resolve the two inputs simultaneously by flat-term K-flat complexes
+and form their strict quotient systems. Use the unit-normalized system pullback
+compositor, before localization. On every total-tensor summand the two routes
+send a pure tensor to the pair of its pulled-back factors; balancing identifies
+these chain maps, including their horizontal transition maps. Localize this
+single equality of whole systems. Transport along the coherent reduction/tensor
+and reduction/pullback comparisons and cancel their invertible components.
+The normalization of the recorded integral compositor must identify it with this
+coherent compositor on representatives; its finite-evaluation formula alone does
+not establish that identification. Expose or repair that normalization before
+using it here. Then the transported equality is precisely the displayed equation.
+No inference from separate finite derived evaluations is used.
+
+This restores the obligation hidden by the invalid extensionality split; it does
+not assert that the required whole-system normalization has already been proved.
+-/
 theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -65,9 +74,6 @@ theorem integralPullbackTensorCompositionReduced {X Y Z : Scheme.{u}}
             ((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M N).hom ≫
           ((@canonicalIntegralPullbackTensor l _ E _ _ _ Z X h hZ hX)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)
-            (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom) := by
-  apply integralSystemReduction_map_ext l E
-  intro n
-  exact integralPullbackTensorCompositionReduced_finiteStage l E f h M N n
+            (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom) := by sorry
 
 end WeilConjectures

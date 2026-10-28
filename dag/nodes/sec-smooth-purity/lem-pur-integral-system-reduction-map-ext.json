@@ -13,7 +13,7 @@
  },
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: the proposed componentwise-localization argument confuses joint conservativity on objects with joint faithfulness on morphisms. For a complete target the kernel of the map to the inverse limit of finite Hom groups is lim^1 Hom(A[1], B_n), by the Milnor exact sequence. This kernel can be nonzero on Spec Q; the Q1 report constructs an explicit nonzero Roos cokernel class from cyclotomic characters ramified at distinct primes. No proof of the unrestricted assertion is claimed. A separate, proved finite shifted-Hom criterion is recorded in lem-pur-integral-system-reduction-map-ext-finite; it does not discharge this node without its additional hypothesis.",
+   "text": "STATEMENT-DISPUTED: the proposed componentwise-localization argument confuses joint conservativity on objects with joint faithfulness on morphisms. For a complete target the kernel of the map to the inverse limit of finite Hom groups is lim^1 Hom(A[1], B_n), by the Milnor exact sequence. This kernel can be nonzero on Spec Q; the Q1 report constructs an explicit nonzero Roos cokernel class from cyclotomic characters ramified at distinct primes. No proof of the unrestricted assertion is claimed. A separate, proved finite shifted-Hom criterion is recorded in lem-pur-integral-system-reduction-map-ext-finite; it does not discharge this node without its additional hypothesis. Maintainer rollback 2026-10-28 (L): the false Lean declaration is withdrawn from Sheaf.Paper.IntegralSystemReductionMapExt (the module keeps the proved finite criterion) and the specific obligation is restored in lem-pur-pullback-tensor-integral-composition-reduced. This node is kept as a historical disputed statement with no Lean attachment; no proof is claimed.",
    "uses": [
     "def-sf-integral-system-reduction",
     "lem-pod-integral-system-reduction-fully-faithful",
@@ -56,16 +56,7 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.IntegralSystemReductionMapExt",
-  "file": "lean/Sheaf/Paper/IntegralSystemReductionMapExt.lean",
-  "declaration": "WeilConjectures.integralSystemReduction_map_ext",
-  "statement": "theorem integralSystemReduction_map_ext\n    {X : Scheme.{u}}\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    {A B : sfIntegralConstructibleCategory l E X}\n    (p q : A ⟶ B)\n    (h : ∀ n : ℕ,\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map p) =\n        (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map q)) :\n    (integralSystemReduction l E X).map p =\n      (integralSystemReduction l E X).map q",
-  "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-28"
- },
+ "lean": null,
  "reviewed": {
   "date": "2026-10-28",
   "by": "L",
@@ -85,5 +76,32 @@
   "landing": "20261028T055733-L-802513",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "rollback": {
+  "date": "2026-10-28",
+  "by": "L stage 3",
+  "what": "False split withdrawn. The statement asserts that finite quotient evaluations jointly reflect equality of morphisms after coherent reduction, over an arbitrary scheme. The Milnor kernel lim^1 Hom(A[1], B_n) is not reflected. No true restriction of it serves its only citer, whose hypotheses give finite-level equalities only; the finite shifted-Hom version is lem-pur-integral-system-reduction-map-ext-finite.",
+  "counterexample": "X = Spec Q (l invertible), E = Q_l, A = O_E, B = O_E[2] in the integral constructible category. Hom(A, B) = H^2_proet(Spec Q, Z_l) and the Milnor sequence 0 -> lim^1 H^1(Q, Z/l^n) -> H^2(Q, Z_l) -> lim H^2(Q, Z/l^n) -> 0. H^1(Q, Z/l^n) = Hom_cont(Zhat^x, Z/l^n) = sum over p of Z/l^min(v_l(p-1), n) (plus the p = l summand); the image of level n+k in level n is nonzero on the p-summand exactly when k < v_l(p-1), and Dirichlet gives primes with every value of v_l(p-1), so the images never stabilize. The groups are countable and not Mittag-Leffler, hence lim^1 != 0. A nonzero p in that kernel and q = 0 have equal finite evaluations at every n, while integralSystemReduction is faithful (lem-pod-integral-system-reduction-fully-faithful), so the conclusion fails.",
+  "old_lean": {
+   "existing": false,
+   "module": "Sheaf.Paper.IntegralSystemReductionMapExt",
+   "file": "lean/Sheaf/Paper/IntegralSystemReductionMapExt.lean",
+   "declaration": "WeilConjectures.integralSystemReduction_map_ext",
+   "statement": "theorem integralSystemReduction_map_ext\n    {X : Scheme.{u}}\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    {A B : sfIntegralConstructibleCategory l E X}\n    (p q : A ⟶ B)\n    (h : ∀ n : ℕ,\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map p) =\n        (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map q)) :\n    (integralSystemReduction l E X).map p =\n      (integralSystemReduction l E X).map q",
+   "branch": "sheaf-dag",
+   "by": "V1",
+   "date": "2026-10-28"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-pullback-tensor-integral-composition-reduced",
+    "holds": true,
+    "note": "statement unchanged; its proof relied on this false lemma and is reopened (sorry)"
+   }
+  ],
+  "reopened": [
+   "WeilConjectures.integralPullbackTensorCompositionReduced"
+  ],
+  "found_by": "Q1 (dispute, 2026-10-28) and H2 (rollback packet, BLOCKED 15:13 and 15:17 CST)"
  }
 }
