@@ -29,7 +29,11 @@ variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [PreservesFiniteLimits L]
 
-/-- The reduced ordinary comparison agrees with the two normalized transports.
+/- STATEMENT-DISPUTED: The quantified isomorphisms are arbitrary; postcomposing `t`
+with a nontrivial natural automorphism changes the right-hand side while leaving all
+hypotheses true. -/
+
+/- The reduced ordinary comparison agrees with the two normalized transports.
 Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M;
 sites-cohomology.tex, Tag 06YY.
 Proof: evaluate the three maps on the quotient unit, where all insertion maps send
