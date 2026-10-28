@@ -13986,6 +13986,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingConstru
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingExistence
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingOpen
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingUnique
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessFinite
@@ -14022,6 +14023,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExchange
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
+public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
