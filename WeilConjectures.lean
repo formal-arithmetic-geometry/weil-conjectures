@@ -13416,7 +13416,6 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
-public import WeilConjectures.Tactic.AssignModProofs
 public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
@@ -13878,7 +13877,6 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservat
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
-public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchangeOnComponent
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantFamily
@@ -13937,7 +13935,6 @@ public import WeilConjectures.TraceFormula.Specialization.OpenProperLowerShriek
 public import WeilConjectures.TraceFormula.Specialization.OpenProperLowerShriekAbstract
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
-public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAbstract
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
