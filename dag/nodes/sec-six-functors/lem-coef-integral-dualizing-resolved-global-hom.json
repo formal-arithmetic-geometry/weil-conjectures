@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Identify global scalar sections with evaluation at the terminal pro-etale object by the unit-to-sections equivalence and restriction along the actual completion scalar map.",
+   "text": "Evaluate a unit-module morphism at 1 on the final pro-etale object. Its inverse extends a terminal section by restriction and applies unitHomEquiv.symm. Naturality and the sectionwise module action show this is an integral-linear natural isomorphism from the specified linear unit-Hom sections to integralDualizingSections.",
    "uses": [
     "def-sfb-global-rhom-resolved-model",
     "lem-coef-integral-dualizing-roos-model"
@@ -21,9 +21,19 @@
    "elementary": false
   },
   {
-   "text": "Use the internal-Hom comparison natural in complexes and K-injective targets. For a K-flat source the Hom complex is K-injective and ordinary sections compute derived sections. For an arbitrary source resolve it by a K-flat complex; precomposition induces quasi-isomorphisms on internal and global Hom. The canonical derived-sections unit is natural, transferring its invertibility.",
+   "text": "Restrict the proved natural internal-Hom representative comparison to the fixed K-injective I. This gives RHom(Q(-),QI) naturally isomorphic to Q Hom(-,I) before applying derived sections.",
    "uses": [
     "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the canonical derived-sections unit by Hom(-,I). For any source L choose a K-flat resolution P to L; Hom(P,I) is K-injective, so the unit is invertible there. Precomposition is a quasi-isomorphism on sheaf Hom, and on sections at the final object after forgetting integral scalars. The faithful exact module-to-abelian-group functor reflects this latter quasi-isomorphism. Naturality of the unit therefore makes its component at Hom(L,I) invertible. Compose its inverse with the internal-Hom comparison and the termwise scalar-sections isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+    "lem-pur-rhom-well-defined-universes",
+    "lem-pur-hom-complex-sections-quasi-iso-universes"
    ],
    "elementary": false
   }
@@ -31,11 +41,15 @@
  "proof_deps": [
   "def-sfb-global-rhom-resolved-model",
   "lem-coef-integral-dualizing-roos-model",
-  "lem-sfb-derived-internal-hom-sections-model"
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pc-kflat-resolution",
+  "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-pur-hom-complex-sections-quasi-iso-universes"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M5",
+  "group": "D7",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "section-global-RHom (Tag 0B6E), section on internal Hom (Tags 0A95, 0A96), lemma-derived-limit-is-ok (Tag 0941); current blueprint prop-coef-integral-dualizing, second proof paragraph."
@@ -126,9 +140,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M5",
+  "group": "D7",
   "result": "pass",
-  "landing": "20261028T055717-L-798989",
+  "landing": "20261028T072355-L-1938814",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
