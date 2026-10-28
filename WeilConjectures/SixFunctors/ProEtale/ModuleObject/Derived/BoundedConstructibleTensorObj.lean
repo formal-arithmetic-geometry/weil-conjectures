@@ -36,9 +36,13 @@ product
   free and `N` constructible, and `P ⊗ N` is constructible.
 * In general, argue by noetherian induction on the closed subset of `T` supporting a closed
   subscheme `D`. On a nonempty open `V` of `D` and after a surjective closed immersion
-  `c : E ⟶ V`, the cohomology sheaves of `K` are lisse
-  (`ProEtale.CondensedRing.exists_isLocallyFinitelyPresented_homology_upperStar`), hence
-  locally free, so `Lc^* (K ⊗ᴸ L) ≅ Lc^* K ⊗ᴸ Lc^* L` is bounded constructible on `E`, and so is
+  `c : E ⟶ V`, the cohomology sheaves of both `K` and `L` are lisse
+  (`ProEtale.CondensedRing.exists_isLocallyFinitelyPresented_homology_upperStar₂`), so
+  `Lc^* (K ⊗ᴸ L) ≅ Lc^* K ⊗ᴸ Lc^* L` is bounded constructible on `E` by the field `tensorObj` of
+  `ProEtale.CondensedRing.LisseTensorHypotheses` (when lisse sheaves are locally free, this
+  follows from the previous point, a bounded complex with lisse cohomology sheaves being bounded
+  constructible:
+  `ProEtale.CondensedRing.boundedConstructible_of_isLocallyFinitelyPresented_homology`), and so is
   its pushforward `Rc_* Lc^* (K ⊗ᴸ L) ≅ K ⊗ᴸ L|_V` (the closed complement of `c` being empty). On
   the closed complement of `V`, `K ⊗ᴸ L` restricts to the tensor product of the restrictions,
   which is bounded constructible by induction. Bounded constructibility is local for an
@@ -111,17 +115,67 @@ structure TensorHypotheses : Prop where
   isTriangulated (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z] :
     (boundedConstructible (condensedRingObj Λ Z)).IsTriangulated
 
-/-- The open piece of the induction step: if the cohomology sheaves of the pullback of `K` to a
-surjective closed immersion `c : E ⟶ V` are lisse, then `K ⊗ᴸ L` is bounded constructible on `V`
-for every bounded constructible `L`. -/
-lemma boundedConstructible_tensorObj_of_lisse (hΛ : TensorHypotheses Λ) {V E : Scheme.{u}}
+variable (Λ) in
+/-- The hypotheses on the coefficient ring `Λ` used by the noetherian induction proving that the
+bounded constructible complexes are stable under `⊗ᴸ`: on schemes with noetherian underlying
+space, the bounded constructible complexes form a triangulated subcategory, and `A ⊗ᴸ L` is
+bounded constructible for `A` and `L` bounded with pro-étale locally finitely presented (lisse)
+cohomology sheaves. -/
+structure LisseTensorHypotheses : Prop where
+  isTriangulated (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z] :
+    (boundedConstructible (condensedRingObj Λ Z)).IsTriangulated
+  tensorObj (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z]
+    {A L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))}
+    (hA : DerivedCategory.TStructure.t.bounded A)
+    (hA' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
+      ((DerivedCategory.homologyFunctor _ n).obj A))
+    (hL : DerivedCategory.TStructure.t.bounded L)
+    (hL' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
+      ((DerivedCategory.homologyFunctor _ n).obj L)) :
+    boundedConstructible (condensedRingObj Λ Z) (A ⊗ L)
+
+variable (Λ) in
+/-- A bounded complex whose cohomology sheaves are pro-étale locally finitely presented is bounded
+constructible: a locally finitely presented module object is constructible for the trivial
+stratification. -/
+lemma boundedConstructible_of_isLocallyFinitelyPresented_homology {Z : Scheme.{u}}
+    {L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))}
+    (hL : DerivedCategory.TStructure.t.bounded L)
+    (hL' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
+      ((DerivedCategory.homologyFunctor _ n).obj L)) :
+    boundedConstructible (condensedRingObj Λ Z) L :=
+  ⟨hL, fun n ↦ ⟨Scheme.Stratification.trivial Z, fun _ ↦
+    (isLocallyFinitelyPresented_mapMod_iff Λ _ _).2
+      (IsLocallyFinitelyPresented.upperStar Λ (𝟙 Z) (hL' n))⟩⟩
+
+/-- If the locally finitely presented module objects over `Λ` are locally free, the hypotheses
+`ProEtale.CondensedRing.LisseTensorHypotheses` hold, by
+`ProEtale.CondensedRing.boundedConstructible_tensorObj_of_isLocallyFree_homology` (a bounded
+complex with lisse cohomology sheaves being bounded constructible). -/
+theorem TensorHypotheses.lisseTensorHypotheses (hΛ : TensorHypotheses Λ) :
+    LisseTensorHypotheses Λ where
+  isTriangulated := hΛ.isTriangulated
+  tensorObj Z _ _ _ hA hA' hL hL' :=
+    have := hΛ.isTriangulated Z
+    boundedConstructible_tensorObj_of_isLocallyFree_homology hA
+      (fun n ↦ hΛ.isLocallyFree Z _ (hA' n))
+      (boundedConstructible_of_isLocallyFinitelyPresented_homology Λ hL hL')
+
+/-- The open piece of the induction step: if the cohomology sheaves of the pullbacks of the
+bounded constructible complexes `K` and `L` to a surjective closed immersion `c : E ⟶ V` are
+lisse, then `K ⊗ᴸ L` is bounded constructible on `V`. -/
+lemma boundedConstructible_tensorObj_of_lisse (hΛ : LisseTensorHypotheses Λ) {V E : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace V] (c : E ⟶ V) [IsClosedImmersion c] [Surjective c]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
       (condensedRingObj Λ V))}
     (hK : boundedConstructible (condensedRingObj Λ V) K)
     (hKc : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ E)
       ((DerivedCategory.homologyFunctor _ n).obj ((L((c)^*⟦Λ⟧)).obj K)))
-    (hL : boundedConstructible (condensedRingObj Λ V) L) :
+    (hL : boundedConstructible (condensedRingObj Λ V) L)
+    (hLc : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ E)
+      ((DerivedCategory.homologyFunctor _ n).obj ((L((c)^*⟦Λ⟧)).obj L))) :
     boundedConstructible (condensedRingObj Λ V) (K ⊗ L) := by
   have : TopologicalSpace.NoetherianSpace E := c.isClosedEmbedding.isInducing.noetherianSpace
   have := hΛ.isTriangulated E
@@ -139,16 +193,15 @@ lemma boundedConstructible_tensorObj_of_lisse (hΛ : TensorHypotheses Λ) {V E :
     boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ c L hL
   have hE : boundedConstructible (condensedRingObj Λ E) ((L((c)^*⟦Λ⟧)).obj (K ⊗ L)) :=
     (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarTensorIso Λ c).app K |>.app L).symm
-      (boundedConstructible_tensorObj_of_isLocallyFree_homology hcK.1
-        (fun n ↦ hΛ.isLocallyFree E _ (hKc n)) hcL)
+      (hΛ.tensorObj E hcK.1 hKc hcL.1 hLc)
   exact (boundedConstructible _).prop_of_iso
     (asIso ((derivedUpperStarLowerStarAdjunction Λ c).unit.app (K ⊗ L))).symm
     (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion Λ c hE)
 
 /-- **The bounded constructible complexes are stable under the derived tensor product**, for a
-coefficient ring `Λ` satisfying `ProEtale.CondensedRing.TensorHypotheses`, on a scheme with
+coefficient ring `Λ` satisfying `ProEtale.CondensedRing.LisseTensorHypotheses`, on a scheme with
 noetherian underlying space. -/
-theorem boundedConstructible_tensorObj (hΛ : TensorHypotheses Λ) {T : Scheme.{u}}
+theorem boundedConstructible_tensorObj (hΛ : LisseTensorHypotheses Λ) {T : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace T]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T))}
@@ -168,7 +221,8 @@ theorem boundedConstructible_tensorObj (hΛ : TensorHypotheses Λ) {T : Scheme.{
   have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
   rcases isEmpty_or_nonempty D with hD | hD
   · exact boundedConstructible_of_isZero Λ (isZero_derivedCategory_of_isEmpty' Λ _)
-  obtain ⟨V, E, c', ⟨v, hv⟩, _, _, hc'⟩ := exists_isLocallyFinitelyPresented_homology_upperStar hK
+  obtain ⟨V, E, c', ⟨v, hv⟩, _, _, hcK, hcL⟩ :=
+    exists_isLocallyFinitelyPresented_homology_upperStar₂ hK hL
   have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
   have : QuasiCompact V.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
   have hij : Set.range V.closedComplement.base = (Set.range V.ι.base)ᶜ := by
@@ -179,9 +233,11 @@ theorem boundedConstructible_tensorObj (hΛ : TensorHypotheses Λ) {T : Scheme.{
       ((leftDerivedUpperStarTensorIso Λ V.ι).app K |>.app L).symm ?_
     refine boundedConstructible_tensorObj_of_lisse hΛ c'
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ V.ι K hK) (fun n ↦ ?_)
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ V.ι L hL)
-    exact (hc' n).of_iso ((DerivedCategory.homologyFunctor _ n).mapIso
-      ((leftDerivedUpperStarComp Λ c' V.ι).app K))
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ V.ι L hL) (fun n ↦ ?_)
+    · exact (hcK n).of_iso ((DerivedCategory.homologyFunctor _ n).mapIso
+        ((leftDerivedUpperStarComp Λ c' V.ι).app K))
+    · exact (hcL n).of_iso ((DerivedCategory.homologyFunctor _ n).mapIso
+        ((leftDerivedUpperStarComp Λ c' V.ι).app L))
   · -- the closed piece, by induction
     let Z' : TopologicalSpace.Closeds T := ⟨c.base '' Set.range V.closedComplement.base,
       c.isClosedEmbedding.isClosedMap _ V.closedComplement.isClosedEmbedding.isClosed_range⟩

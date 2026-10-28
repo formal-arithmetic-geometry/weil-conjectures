@@ -116,14 +116,39 @@ lemma boundedConstructible_ihom_of_isLocallyFree_homology (hΛ : TensorHypothese
     exact (boundedConstructible _).ext_of_isTriangulatedClosed₂ _ hT' h₃ h₁
   · obtain ⟨P', hP', ⟨e⟩⟩ := hP.exists_exactPairing_singleFunctor q
     exact (boundedConstructible _).prop_of_iso (MonoidalClosed.ihomObjIsoTensor _ _ L).symm
-      (boundedConstructible_tensorObj hΛ
+      (boundedConstructible_tensorObj hΛ.lisseTensorHypotheses
         (boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject (-q)
           hP'.isConstructibleModuleObject) hL)
+
+variable (Λ) in
+/-- The hypotheses on the coefficient ring `Λ` used by the noetherian inductions proving that the
+bounded constructible complexes are stable under `⊗ᴸ` and `RHom`: those of
+`ProEtale.CondensedRing.LisseTensorHypotheses`, and `RHom(A, L)` is bounded constructible for `A`
+bounded with pro-étale locally finitely presented (lisse) cohomology sheaves and `L` bounded
+constructible, on schemes with noetherian underlying space. -/
+structure LisseHypotheses : Prop extends LisseTensorHypotheses Λ where
+  ihom (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z]
+    {A L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))}
+    (hA : DerivedCategory.TStructure.t.bounded A)
+    (hA' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
+      ((DerivedCategory.homologyFunctor _ n).obj A))
+    (hL : boundedConstructible (condensedRingObj Λ Z) L) :
+    boundedConstructible (condensedRingObj Λ Z) ((ihom A).obj L)
+
+/-- If the locally finitely presented module objects over `Λ` are locally free, the hypotheses
+`ProEtale.CondensedRing.LisseHypotheses` hold, by
+`ProEtale.CondensedRing.boundedConstructible_ihom_of_isLocallyFree_homology`. -/
+theorem TensorHypotheses.lisseHypotheses (hΛ : TensorHypotheses Λ) : LisseHypotheses Λ where
+  toLisseTensorHypotheses := hΛ.lisseTensorHypotheses
+  ihom Z _ _ _ hA hA' hL :=
+    boundedConstructible_ihom_of_isLocallyFree_homology hΛ hA
+      (fun n ↦ hΛ.isLocallyFree Z _ (hA' n)) hL
 
 /-- The open piece of the induction step: if the cohomology sheaves of the pullback of `K` to a
 surjective closed immersion `c : E ⟶ V` are lisse, then `RHom(K, L)` is bounded constructible on
 `V` for every bounded constructible `L`. -/
-lemma boundedConstructible_ihom_of_lisse (hΛ : TensorHypotheses Λ) {V E : Scheme.{u}}
+lemma boundedConstructible_ihom_of_lisse (hΛ : LisseHypotheses Λ) {V E : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace V] (c : E ⟶ V) [IsClosedImmersion c] [Surjective c]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
       (condensedRingObj Λ V))}
@@ -149,14 +174,13 @@ lemma boundedConstructible_ihom_of_lisse (hΛ : TensorHypotheses Λ) {V E : Sche
     ((ihom K).mapIso (asIso ((derivedUpperStarLowerStarAdjunction Λ c).unit.app L)) ≪≫
       ihomRightDerivedLowerStarIso Λ c K _).symm
     (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion Λ c
-      (boundedConstructible_ihom_of_isLocallyFree_homology hΛ hcK.1
-        (fun n ↦ hΛ.isLocallyFree E _ (hKc n)) hcL))
+      (hΛ.ihom E hcK.1 hKc hcL))
 
 /-- **The bounded constructible complexes are stable under the derived internal hom**, for a
-coefficient ring `Λ` satisfying `ProEtale.CondensedRing.TensorHypotheses`, on a scheme `T` with
+coefficient ring `Λ` satisfying `ProEtale.CondensedRing.LisseHypotheses`, on a scheme `T` with
 noetherian underlying space such that the derived pushforwards along the open immersions into
 closed subschemes of `T` preserve bounded constructible complexes. -/
-theorem boundedConstructible_ihom (hΛ : TensorHypotheses Λ) {T : Scheme.{u}}
+theorem boundedConstructible_ihom (hΛ : LisseHypotheses Λ) {T : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace T]
     (hRj : ∀ (D : Scheme.{u}) (c : D ⟶ T) [IsClosedImmersion c] (V : D.Opens)
       (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
@@ -245,10 +269,10 @@ theorem boundedConstructible_ihom (hΛ : TensorHypotheses Λ) {T : Scheme.{u}}
 
 /-- **The bounded constructible complexes are stable under the derived internal hom**, on a
 separated scheme `X` of finite type over a field `k`, for a coefficient ring `Λ` satisfying
-`ProEtale.CondensedRing.TensorHypotheses` and such that the derived pushforwards along open
+`ProEtale.CondensedRing.LisseHypotheses` and such that the derived pushforwards along open
 immersions of separated `k`-schemes of finite type preserve bounded constructible complexes
 (Deligne's finiteness theorem). -/
-theorem boundedConstructible_ihom_of_over (hΛ : TensorHypotheses Λ) {k : Type u} [Field k]
+theorem boundedConstructible_ihom_of_over (hΛ : LisseHypotheses Λ) {k : Type u} [Field k]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom]
     (hRf : ∀ (U Y : Over (Spec (.of k))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
