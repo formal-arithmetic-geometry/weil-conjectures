@@ -17,28 +17,22 @@
  },
  "proof": [
   {
-   "text": "Construct the signed finite comparison on normalized tensor presentations and use its naturality for the map between consecutive two-term quotient complexes.",
-   "uses": [
-    "lem-sf-integral-hom-models-exist",
-    "lem-sf-integral-hom-comparison-is-iso",
-    "lem-weil-integral-reduction-tower-well-defined"
-   ],
-   "elementary": false,
+   "text": "STATEMENT-DISPUTED: the original universal augmentation assertion is false. Negating a transition-compatible family preserves its transition equations but reverses a nonzero augmentation when 2 is invertible. Withdraw this split. The parent constructs its comparisons and their augmentation equations together, using the unit-normalized separate tensor models and naturality of the signed comparison at R[0] -> Q_n; it no longer invokes this node.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-    "place": "paragraph 3, augmentation square"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
    }
   }
  ],
- "proof_deps": [
-  "lem-sf-integral-hom-models-exist",
-  "lem-sf-integral-hom-comparison-is-iso",
-  "lem-weil-integral-reduction-tower-well-defined"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 3, augmentation square"
+  "group": "U8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
  },
  "mathlib_searches": [
   {
@@ -66,16 +60,6 @@
   },
   "same_as": []
  },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.IntegralHomReductionTowerAugmentation",
-  "file": "lean/Sheaf/Paper/IntegralHomReductionTowerAugmentation.lean",
-  "declaration": "WeilConjectures.IntegralHom.reductionTower_components_augmentation",
-  "statement": "theorem reductionTower_components_augmentation\n    (K : completedIntegralDerivedCategory l E Y D hl)\n    (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)\n    (q : P ⟶ G) (q' : P' ⟶ G')\n    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (R := completedIntegralCommRingSheaf l E Y D hl) q)\n    (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (R := completedIntegralCommRingSheaf l E Y D hl) q')\n    (e : DerivedCategory.Q.obj G' ≅\n      (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj\n        (op K, DerivedCategory.Q.obj G)) :\n    let H := (Functor.curry.obj\n      (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K)\n    ∀ (θ : ∀ n : ℕ, H.obj ((integralReductionTower l E Y D hl P).obj (op n)) ≅\n        (integralReductionTower l E Y D hl P').obj (op n)),\n      (∀ n : ℕ,\n        H.map ((integralReductionTower l E Y D hl P).map (homOfLE n.le_succ).op) ≫\n            (θ n).hom =\n          (θ (n + 1)).hom ≫\n            (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op) →\n      ∀ n : ℕ,\n        e.inv ≫ (integralReductionTowerCone l E Y D hl q' hq').π.app (op n) =\n          H.map ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫\n            (θ n).hom",
-  "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-28"
- },
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
@@ -89,17 +73,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W6",
-  "result": "pass",
-  "landing": "20261028T020844-L-2555085",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.IntegralHom.reductionTower_components_augmentation"
-  ],
-  "sorry_after": [
-   "WeilConjectures.IntegralHom.reductionTower_components_augmentation"
-  ]
+  "reviewer": "C-5c77f",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261028T072456-L-1952983",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn false augmentation split + parent reductionTower_components replacement proof + new hole reductionTower_unit_models against nodes, change record, clone Transition/TensorModels/TwoTermFree modules and 3b importer (OK)"
  }
 }

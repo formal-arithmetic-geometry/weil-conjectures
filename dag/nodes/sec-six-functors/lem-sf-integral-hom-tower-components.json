@@ -30,36 +30,58 @@
  ],
  "proof": [
   {
-   "text": "Obtain a family of component isomorphisms satisfying the consecutive-transition square from the transition component theorem.",
+   "text": "Choose separate tower models s,t on a common two-term free coefficient tower Q, the coefficient-unit cone R[0] -> Q, their two apex isomorphisms s0,t0 and the separate unit-normalization equations. No comparison isomorphism between the modeled towers is supplied by this step.",
    "uses": [
-    "lem-sf-integral-hom-tower-components-transition"
+    "lem-sf-integral-hom-tower-unit-models"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-    "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
    }
   },
   {
-   "text": "Apply the augmentation component theorem to this transition-compatible family.",
+   "text": "Choose the signed tensor-Hom natural transformation alpha. Each alpha(Q_n) is degreewise invertible by the existing two-term free criterion; hence its complex map, its localization and the resulting tower transformation are invertible.",
    "uses": [
-    "lem-sf-integral-hom-tower-components-augmentation"
+    "lem-sf-signed-hom-tensor-comparison",
+    "lem-sf-two-term-free-hom-tensor-components"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-    "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
+   }
+  },
+  {
+   "text": "Conjugate the inverse localized signed comparison by s and t inverse. Naturality of this single tower isomorphism gives the consecutive-transition equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
+   }
+  },
+  {
+   "text": "Apply naturality of the localized signed comparison to the actual coefficient-unit map R[0] -> Q_n. Precompose with e inverse followed by t0. Its normalization at R[0] identifies this composite with s0. The two separate model augmentation equations then give equality after postcomposition with the invertible t_n and alpha(Q_n); cancel these to obtain the claimed augmentation equation for the same family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-integral-hom-tower-components-transition",
-  "lem-sf-integral-hom-tower-components-augmentation"
+  "lem-sf-integral-hom-tower-unit-models",
+  "lem-sf-signed-hom-tensor-comparison",
+  "lem-sf-two-term-free-hom-tensor-components"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+  "by": "agent",
+  "group": "U8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1, finite-free coefficient construction, retaining the degree-zero unit"
  },
  "mathlib_searches": [
   {
@@ -109,7 +131,7 @@
   "module": "Sheaf.Paper.IntegralHomReductionTowerComponents",
   "file": "lean/Sheaf/Paper/IntegralHomReductionTowerComponents.lean",
   "declaration": "WeilConjectures.IntegralHom.reductionTower_components",
-  "statement": "theorem reductionTower_components (K : completedIntegralDerivedCategory l E Y D hl) (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (q : P ⟶ G) (q' : P' ⟶ G') (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q) (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q') (e : DerivedCategory.Q.obj G' ≅ (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, DerivedCategory.Q.obj G)) : let H := (Functor.curry.obj (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K) ∃ θ : ∀ n : ℕ, H.obj ((integralReductionTower l E Y D hl P).obj (op n)) ≅ (integralReductionTower l E Y D hl P').obj (op n), (∀ n : ℕ, H.map ((integralReductionTower l E Y D hl P).map (homOfLE n.le_succ).op) ≫ (θ n).hom = (θ (n + 1)).hom ≫ (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op) ∧ ∀ n : ℕ, e.inv ≫ (integralReductionTowerCone l E Y D hl q' hq').π.app (op n) = H.map ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫ (θ n).hom",
+  "statement": "theorem reductionTower_components\n    (K : completedIntegralDerivedCategory l E Y D hl)\n    (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)\n    (q : P ⟶ G) (q' : P' ⟶ G')\n    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (R := completedIntegralCommRingSheaf l E Y D hl) q)\n    (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (R := completedIntegralCommRingSheaf l E Y D hl) q')\n    (e : DerivedCategory.Q.obj G' ≅\n      (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj\n        (op K, DerivedCategory.Q.obj G)) :\n    let H := (Functor.curry.obj\n      (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K)\n    ∃ θ : ∀ n : ℕ, H.obj ((integralReductionTower l E Y D hl P).obj (op n)) ≅\n        (integralReductionTower l E Y D hl P').obj (op n),\n      (∀ n : ℕ,\n        H.map ((integralReductionTower l E Y D hl P).map (homOfLE n.le_succ).op) ≫\n          (θ n).hom = (θ (n + 1)).hom ≫\n            (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op) ∧\n      ∀ n : ℕ, e.inv ≫ (integralReductionTowerCone l E Y D hl q' hq').π.app (op n) =\n        H.map ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫\n          (θ n).hom",
   "branch": "sheaf-dag",
   "by": "M4",
   "date": "2026-10-19"
@@ -125,13 +147,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
-  "result": "pass",
-  "landing": "20261027T233946-L-4141762",
+  "reviewer": "C-5c77f",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261028T072456-L-1952983",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn false augmentation split + parent reductionTower_components replacement proof + new hole reductionTower_unit_models against nodes, change record, clone Transition/TensorModels/TwoTermFree modules and 3b importer (OK)"
  }
 }
