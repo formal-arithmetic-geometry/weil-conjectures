@@ -20897,3 +20897,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/S9/Sheaf.Paper.PodReindexingTensorSignedShiftModels (stage 3; reviewer PASS; first push; landing 20261028T034938-L-3573338 (interface); batch 20261028T034643; modules 6; new nodes 5)
 - 03:49 L: merged deliver/T1/Sheaf.Paper.RationalConstantUnitFrobenius (stage 3; reviewer PASS; first push; landing 20261028T034939-L-3573468 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/T1/Sheaf.SixFunctors.CoefIntegralFiniteExtensionInvertibilityTriangulated (stage 3; reviewer PASS; first push; landing 20261028T034940-L-3573633 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:49 L: merged deliver/T2/Sheaf.Paper.ScalarPullbackRoosCoordinates (stage 3; reviewer PASS; first push; landing 20261028T034942-L-3573822 (interface); batch 20261028T034643; modules 2; new nodes 1)

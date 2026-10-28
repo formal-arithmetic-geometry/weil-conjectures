@@ -6,8 +6,14 @@ module
 
 public import Sheaf.Paper.ScalarExtensionTowerRealizationData
 public import Sheaf.Paper.ScalarPullbackQuotientFormula
+import Sheaf.Paper.ScalarOrdinaryPresentationCoordinates
 import all Sheaf.Paper.IntegralGoodQuotientPresentation
 import all Sheaf.Paper.IntegralComparisonSequenceSystems
+import all Sheaf.Paper.CoherentQuotientOrdinaryLift
+import all Sheaf.Paper.CoefficientExtensionFiniteAssociation
+import all Sheaf.Paper.OrdinaryQuotientScalarModels
+import Sheaf.Paper.CompletionUnitOrdinaryAdjunction
+import Sheaf.Paper.OrdinaryQuotientPullbackTowerComparison
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
@@ -28,6 +34,15 @@ variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
+
+attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
+  integralScalarReduction scalarReductionExtension integralOrdinaryScalar
+  completedIntegralCommRingProjectionUnrestricted constantSheaf HasDerivedCategory.standard
+  unrestrictedIntegralTensorSection integralOrdinaryTensorSection integralScalarTensorSection
+
+attribute [local implicit_reducible] integralCoefficientCommRingSheaf integralCoefficientSheaf
+  unrestrictedIntegralReductionFunctor Functor.mapHomologicalComplex
+  SemilinearSections.systemRing coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
 
 /-- Transport a whole-system map to fixed strict Roos coordinates.
 Every factor is specified; no realization model of scalar extension or pullback
@@ -122,7 +137,50 @@ theorem scalarPullbackRoosCoordinates_exists
       (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj
         (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P.obj),
       ScalarPullbackQuotientFormula l E L ι f P C κ q := by
-  sorry
+  classical
+  have _ := hp
+  obtain ⟨ME⟩ := CompletionUnit.ordinaryModel_exists l E Y
+  obtain ⟨ML⟩ := CompletionUnit.ordinaryModel_exists l L Y
+  rw [IsIntegralComparisonPresentationCoherent] at hc
+  obtain ⟨b, hb, _⟩ := hc
+  obtain ⟨a, _, hκ⟩ := coherentQuotientOrdinaryLift l E Y ME P.obj C κ b hb
+  obtain ⟨A, hA, hTensor⟩ := OrdinaryScalarTowerProof.fixedSystems_exists l E L ι Y
+  obtain ⟨ρ, hρ, _⟩ := coefficientScalarCochainEvaluation l E L ι Y A
+  obtain ⟨d⟩ := coefficientExtensionFiniteAssociation_exists l E L ι Y A
+  obtain ⟨v, hv⟩ := scalarOrdinaryPresentationCoordinates l E L ι Y A ME ML ρ hρ
+    d.association d.association_section (integralComparisonSequenceScalarModel l E L ι Y).E
+    hA P.obj C a κ hκ
+  let SP := ((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P.obj
+  let D := ((integralComparisonSequenceScalarModel l E L ι Y).E.mapHomologicalComplex
+    (.up ℤ)).obj C
+  let κL (n : ℕ) :
+      ((coefficientSequenceEvaluation l L Y n).mapHomologicalComplex (.up ℤ)).obj D ≅
+        (unrestrictedIntegralFiniteComplex l L Y n).obj SP :=
+    ((coefficientSequenceEvaluation l L Y n).mapHomologicalComplex (.up ℤ)).mapIso v ≪≫
+      (NatIso.mapHomologicalComplex (ML.evaluation n) (.up ℤ)).app SP
+  have hκL (n : ℕ) :
+      ((coefficientSequenceEvaluation l L Y n).mapHomologicalComplex (.up ℤ)).mapIso
+        v.symm ≪≫ κL n =
+        (NatIso.mapHomologicalComplex (ML.evaluation n) (.up ℤ)).app SP := by
+    simp only [κL, Functor.mapIso_symm, Iso.symm_self_id_assoc]
+  obtain ⟨θ, hθ⟩ := ordinaryQuotientPullbackTowerComparison l L f ML
+  let T := (integralComparisonSequencePullback l L f).mapHomologicalComplex (.up ℤ) ⋙
+    (coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ) ⋙
+    HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  refine ⟨T.mapIso v ≪≫ θ.app SP, ?_⟩
+  intro n i U x
+  let y := integralComparisonSequenceTensorSection l E L ι Y (C.X i) (op (n, U)) 1
+    (integralComparisonSequenceSection l E Y (C.X i) n (op U)
+      (((κ n).inv.f i).val.app (op U)
+        (unrestrictedIntegralTensorSection l E Y n (P.obj.X i) (op U) 1 x)))
+  have hy := hTensor (C.X i) (op (n, U)) 1
+    (integralComparisonSequenceSection l E Y (C.X i) n (op U)
+      (((κ n).inv.f i).val.app (op U)
+        (unrestrictedIntegralTensorSection l E Y n (P.obj.X i) (op U) 1 x)))
+  have hn := hv n i (op U) x y (by simpa only [one_smul] using hy)
+  exact (hθ SP D v.symm κL hκL n i U y).trans
+    (congrArg (integralOperationsPullbackGenerator l L f n
+      (((unrestrictedIntegralFiniteComplex l L Y n).obj SP).X i) U) hn)
 
 /-- Scalar derived extension computes on the pulled coherent quotient complex.
 Source: Stacks 06YY and 07A4
