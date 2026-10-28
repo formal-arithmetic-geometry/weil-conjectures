@@ -15,35 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Construct the natural coefficient comparison by conjugating the recorded rational scalar/pullback comparison with operationStageTransitionIso. The normalized integral coefficient-tower equation follows on simultaneous flat-term K-flat representatives because both routes multiply the new coefficients in the same order. Scalar associativity and completion normalization give the completed identity. Rationalize and conjugate by the stage transitions to obtain stage-system coherence. The functor family is fixed in equality and the component normalization fixes every comparison natural isomorphism; proof irrelevance fixes coherence, proving uniqueness of the whole stage morphism in equality.",
+   "text": "Use the already proved normalized common-stage pullback comparison data. Form L with its literal rationalDerivedPullback functor family, that comparison family and its proved tower equation. Iso.ext turns the prescribed hom-component normalization into equality of component isomorphisms, giving the required HEq normalization.",
    "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-scalar-extension-composition",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-weil-pbc-descent-functors"
+    "lem-weil-common-stage-pullback-comparison-data"
    ],
    "elementary": false
   },
   {
-   "text": "For a finite coefficient inclusion O_E into O_F, finite freeness identifies tensor extension with a finite direct sum. Ordinary derived direct image and total derived inverse limit preserve this sum. The normalized finite-reduction comparisons identify the resulting isomorphism with the geometric right-adjoint mate of the inverse pullback comparison. Rationalize this isomorphism. Transport from the actual geometric right adjoints to any specified R and a by rightAdjointUniq; its counit equation preserves the specified normalization. The conclusion asserts only invertibility of the explicitly constructed mate; the consumer proves its counit equation by Mathlib mateEquiv_counit. This works without separatedness and for empty schemes.",
+   "text": "For a coefficient inclusion E<=F, identify the chosen comparison b h with rationalPullbackStageComparison by Iso.ext and NatTrans.ext on the prescribed hom components. Apply the single finite-extension right-mate theorem to the actual coefficientInclusion, R E, R F, a E and a F. Transport this IsIso proof through the recorded transition equalities on X and Y. A general categorical helper proves transport by equality induction, so it preserves the literal supplied adjunctions and the literal inverse comparison.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "prop-weil-pbc-scalar-extension",
-    "lem-pur-completed-coefficient-pushforward-comparison"
+    "lem-weil-rational-pullback-stage-coherence",
+    "lem-sf-rational-pullback-scalar-right-mate"
    ],
    "elementary": false
+  },
+  {
+   "text": "For uniqueness, destruct any competing stage morphism and use its literal functor-family equality to substitute its Phi. Every component isomorphism then equals the constructed one by the two HEq normalizations. Iso.ext, NatTrans.ext and function extensionality identify the entire beta family. Substitute this equality; proof irrelevance identifies the coherence proofs, and the two stage morphisms are equal.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-scalar-extension-composition",
-  "def-weil-derived-pullback-tensor-hom",
-  "prop-weil-pbc-descent-functors",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "prop-weil-pbc-scalar-extension",
-  "lem-pur-completed-coefficient-pushforward-comparison"
+  "lem-weil-common-stage-pullback-comparison-data",
+  "lem-weil-rational-pullback-stage-coherence",
+  "lem-sf-rational-pullback-scalar-right-mate"
  ],
- "proof_origin": "E1, 2026-10-20: the separate coefficient-change result specifies a unique normalized left stage family and invertibility of its literal right mates for arbitrary already supplied pointwise adjunctions. Pointwise adjoint existence and rationalization are proved in the consumer. The unique family is fixed by its literal functor family and all comparison components; thus using it selects no arbitrary data from mere existence. No common-stage adjunction or Weil lift is moved into this statement.",
+ "proof_origin": {
+  "by": "worker",
+  "group": "B6",
+  "date": "2026-10-28",
+  "document": "lean/Sheaf/Paper/SfRationalDirectImageCoefficientCompatibility.lean",
+  "place": "Reuse the completed normalized comparison-data theorem; construct the stage morphism and prove normalization, equality-transport of the raw right mate, and uniqueness. Only the single coefficient-extension mate step remains in its new module."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-24",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-21bb5",
-  "group": "C2",
-  "result": "fix",
-  "landing": "20261024T232204-L-2311194",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T055616-L-775676",
   "kind": "interface",
-  "note": "independent cc review: geometricCommonStagePull_isLeftAdjoint proof vs node def-weil-derived-direct-image steps 5-6; generalized sfRationalDirectImageCoefficientCompatibility vs its node, change record, and the one-line forced adaptation in SfRationalDirectImageAdjunction"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {

@@ -20961,3 +20961,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:56 L: merged deliver/B3/Sheaf.SixFunctors.AffineRestrictionMapIsoAux (stage 3; reviewer PASS; first push; landing 20261028T055612-L-774086 (interface); batch 20261028T055556; modules 5; new nodes 5)
 - 05:56 L: merged deliver/B4/Sheaf.SmoothPurity.TraceExistence (stage 3; reviewer PASS; first push; landing 20261028T055614-L-774515 (interface); batch 20261028T055556; modules 4; new nodes 3)
 - 05:56 L: merged deliver/B4/Sheaf.WeilSheaf.NativeOpenProperForgetting (stage 3; reviewer PASS; first push; landing 20261028T055615-L-775071 (proof); batch 20261028T055556; modules 1; new nodes 0)
+- 05:56 L: merged deliver/B6/Sheaf.Paper.SfRationalDirectImageCoefficientCompatibility (stage 3; reviewer PASS; first push; landing 20261028T055616-L-775676 (interface); batch 20261028T055556; modules 2; new nodes 1)
