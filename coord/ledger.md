@@ -20504,3 +20504,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:04 L: merged deliver/B2/Sheaf.Paper.NativeWeilScalarCounitData (stage 3; reviewer PASS; first push; landing 20261028T010424-L-1783496 (proof); batch 20261028T010422; modules 1; new nodes 0)
 - 01:07 L: returned deliver/A2/Sheaf.SixFunctors.IntegralNormalizedFamily (reviewer RETURN: (the landing tools, head d76b38e5c) the delivery did not land: lean/Sheaf/SixFunctors/IntegralNormalizedFamily.lean was )
 - 01:07 L: returned deliver/E4/Sheaf.SixFunctors.RationalVerdierDatumNaturality (reviewer RETURN: (the landing tools, head 514b063a5) the delivery did not land: lean/Sheaf/SixFunctors/RationalVerdierDatumNaturality.lea)
+- 01:07 L: merged deliver/A4/Sheaf.SmoothPurity.TraceExistence (stage 3; reviewer PASS; after a return; landing 20261028T010755-L-1816349 (proof); batch 20261028T010753; modules 1; new nodes 0)
