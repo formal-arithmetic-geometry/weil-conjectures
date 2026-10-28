@@ -8576,6 +8576,7 @@ public import WeilConjectures.CategoryTheory.PointSystemRefineAll
 public import WeilConjectures.CategoryTheory.PointSystemRefinementChainExists
 public import WeilConjectures.CategoryTheory.PointSystemRefinementMap
 public import WeilConjectures.CategoryTheory.PointSystemSchedule
+public import WeilConjectures.CategoryTheory.Preadditive.AveragingDuality
 public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendScalars
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule

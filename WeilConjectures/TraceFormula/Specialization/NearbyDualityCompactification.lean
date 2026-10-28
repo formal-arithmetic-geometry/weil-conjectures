@@ -135,7 +135,21 @@ localization of `𝔸¹_S` at a generic point of its special fibre, twisted by `
 the invariance of nearby cycles under change of trait and the inertia action on nearby cycles
 (SGA 4½, [Th. finitude], §3), and dualizing maps `θ` for the slice models, which are not trait
 models over the base (their geometric generic fibres are slices, not opens, of `X ×_k Spec Ω`);
-none of these is formalised. -/
+none of these is formalised. The last step of the slice argument, that the restriction of an
+isomorphism to the two averaging summands is an isomorphism, is
+`CategoryTheory.isIso_comp_comp_map_op_of_averaging`.
+
+The slice models cannot be made trait models over another base field either. The generic fibre
+of the slice along `b` is `{b = x}` inside `𝒳_{Ω_K}`. Its field of definition contains
+`Frac k'⟦t⟧`, because `b` is a function on `𝒳` whose coefficients have poles in `t` on the
+generic fibre (e.g. `y/t` on a deformation to the normal cone). A base field of a trait model
+over `Spec K⟦t⟧` is a subfield of `K⟦t⟧`, so it contains no element of positive valuation. Only
+coordinates pulled back from `X` give slices that are trait models over the base, over
+`k(x)` with fibre `X ×_{𝔸¹_k} Spec k(x)`. Such coordinates do not detect the closed points of a
+special fibre that `𝒳 ⟶ X ×_k S` contracts. The dimension induction therefore needs the
+dualizing maps `θ` and the theorem for models over arbitrary traits `Spec K⟦t⟧` whose generic
+fibre is a finite-type `Ω_K`-scheme. That means redoing the construction of `θ` and its
+characterisation (`NearbyDualizingData`) in that generality. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
     (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
     [IsProper (toPoint X).left] [IsProper (toPoint X').left] [IsProper q]
