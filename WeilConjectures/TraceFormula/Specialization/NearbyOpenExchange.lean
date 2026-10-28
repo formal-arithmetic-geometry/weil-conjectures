@@ -31,7 +31,7 @@ exchange `ν_j : Rj'_! Ψ_N ⟶ Ψ_M Rj_!` adjoint to `α_j⁻¹`
   This is the composition law of the compact-support exchanges
   (`ProEtale.CondensedRing.compactSupportExchangeOfCompactification_comp_app`), from the
   composition law `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` of the exchanges of open immersions
-  (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app`).
+  (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app`).
 
 -/
 
@@ -482,7 +482,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k').P
 /-- **The composition law of the exchanges `ν_h` of open immersions of models** (blueprint
 `det-nearby-exchange-maps`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
 `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the composition isomorphisms of the pullbacks. -/
-theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app
+theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))) :
     (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ (j ≫ ι).left)
@@ -509,10 +509,10 @@ theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app
     (fun A ↦ φ.pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ) ψ (φ.comp ψ) rfl rfl
       rfl rfl A) K
 
-/-- `NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app` read through the identifications
-`Rj_! ≅ j_!`: the first identity of the composition law of the compact-support exchanges, with the
-composition of extensions by zero `(j ≫ ι)_! ≅ ι_! j_! ≅ ι_! Rj_!` on both sides and the exchange
-`ν_j` of `NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange`. -/
+/-- `NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app` read through the
+identifications `Rj_! ≅ j_!`: the first identity of the composition law of the compact-support
+exchanges, with the composition of extensions by zero `(j ≫ ι)_! ≅ ι_! j_! ≅ ι_! Rj_!` on both
+sides and the exchange `ν_j` of `NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange`. -/
 lemma NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -536,7 +536,7 @@ lemma NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp
           (openImmersionAdjunction ℓ ι'.left)
           (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
         ((boundedConstructibleLowerShriek ℓ j).obj K).obj := by
-  have hA := NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app ℓ φ ψ K.obj
+  have hA := NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app ℓ φ ψ K.obj
   have n := (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
     (openImmersionAdjunction ℓ ι'.left)
     (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).naturality
