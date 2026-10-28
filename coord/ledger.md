@@ -20895,3 +20895,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/S4/Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw (stage 3; reviewer PASS; first push; landing 20261028T034936-L-3572644 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:49 L: merged deliver/S5/Sheaf.Paper.PodReindexingStrictTensorTowersGenerators (stage 3; reviewer PASS; first push; landing 20261028T034937-L-3573028 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:49 L: merged deliver/S9/Sheaf.Paper.PodReindexingTensorSignedShiftModels (stage 3; reviewer PASS; first push; landing 20261028T034938-L-3573338 (interface); batch 20261028T034643; modules 6; new nodes 5)
+- 03:49 L: merged deliver/T1/Sheaf.Paper.RationalConstantUnitFrobenius (stage 3; reviewer PASS; first push; landing 20261028T034939-L-3573468 (interface); batch 20261028T034643; modules 1; new nodes 0)
