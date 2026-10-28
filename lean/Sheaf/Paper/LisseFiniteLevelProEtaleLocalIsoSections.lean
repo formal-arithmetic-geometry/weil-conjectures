@@ -6,8 +6,8 @@ Authors: SHEAF group H8
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
-public import Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom
-import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
+public import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
+import Sheaf.Paper.LisseFiniteLevelProEtaleLocalIsoDescent
 
 /-! # Pro-etale local sections of the finite-level derived Isom sheaf
 
@@ -22,6 +22,7 @@ set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -74,6 +75,9 @@ theorem lisse_finite_level_proetale_local_iso_sections
             ((normalizationConstant U.left.smallEtaleTopology).obj E))
           ((derivedComparison U.left (lisseTowerEtaleRing d n)).obj D)).obj
             (op ((toProEt U.left).obj V))) := by
-  sorry
+  have hlocal := lisse_finite_level_fixed_realization_local_model X Y g d U n N E D
+    hcomparison hmodels
+  exact exists_proetale_local_iso_section_of_fixed_realization_local_model X Y g d U n E D
+    hlocal
 
 end AlgebraicGeometry.Scheme
