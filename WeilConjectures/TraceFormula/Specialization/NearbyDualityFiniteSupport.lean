@@ -238,6 +238,28 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     exact (L((l)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_isZero hz).of_iso
       ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) l _).app _)
 
+/-- **The base case of the finite-support step** (blueprint `sk-prop-tf-nearby-duality-foundation`,
+"This also supplies the base case `n = 0`"): if the special fibre `X'` has finitely many points,
+the duality map is an isomorphism away from all of them, which are closed (`X'` is a finite
+Jacobson space, hence discrete). -/
+theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_finite
+    (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g) [Finite X'.left]
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
+      IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (opensOverι (finsetComplOpens S hS))).map (nearbyDualityMap ℓ D h K)) := by
+  have : JacobsonSpace X'.left := LocallyOfFiniteType.jacobsonSpace X'.hom
+  have : Fintype X'.left := Fintype.ofFinite _
+  refine ⟨Finset.univ, fun x _ ↦ isClosed_discrete _, ?_⟩
+  have : IsEmpty (opensOver (finsetComplOpens (Finset.univ : Finset X'.left)
+      fun x _ ↦ isClosed_discrete _)).left :=
+    ⟨fun x ↦ x.2 (Finset.mem_coe.2 (Finset.mem_univ _))⟩
+  have hz (A : Dᵇc((opensOver (finsetComplOpens (Finset.univ : Finset X'.left)
+      fun x _ ↦ isClosed_discrete _)).left)⟦Profinite.padicAlgClRingObj ℓ⟧) : IsZero A :=
+    IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι A
+      (isZero_derivedCategory_of_isEmpty' _ _)
+  exact ⟨(hz _).to_ _, (hz _).eq_of_src _ _, (hz _).eq_of_src _ _⟩
+
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
