@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-system-direct-image-reduction-normalized",
+ "kind": "statement",
+ "title": "Normalization of the whole-system direct image of an arbitrary reduction",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X,Y and any morphism f:X→Y. Suppose integralComparisonSequenceDirectImage(f) is additive and coefficientSequenceModules(X) admits K-injective resolutions [def-trf-integral-comparison-sequence-systems, def-coef-ringed-sequence-site]. Let S be a CoefficientDerivedSystemCalculus on X [lem-coef-derived-system-evaluation-calculus] and K any unbounded derived completed-coefficient complex on X. Then N=R(integralComparisonSequenceDirectImage(f))(S.reduction(K)) is an IsNormalizedCoefficientSequence on Y [def-coef-ringed-sequence-site]: for all n≤m and P in D(B_n), precomposition with its actual derived transition N_m→Res(N_n) bijects Hom(N_n,P) with Hom(N_m,Res(P)). This asserts no comparison of total limits or Roos projections.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; combined with the perfect-quotient argument of Bhatt--Scholze Lemma 6.5.11(3), Stacks 0941 and 099N."
+ },
+ "proof": [
+  {
+   "text": "Resolve S.reduction(K) once on the sequence site. Apply the section-normalized derived direct-image evaluation comparison. Compose its nth component with finite direct image of S.reductionEvaluation to identify N_n with Rf_*(K tensor^L B_n). The arbitrary-resolution normalization and the restriction-transition equation ensure compatibility with every quotient map.",
+   "uses": [
+    "lem-trf-compact-support-direct-image-evaluation",
+    "lem-trf-direct-image-restriction-transition",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; combined with the perfect-quotient argument of Bhatt--Scholze Lemma 6.5.11(3), Stacks 0941 and 099N."
+   }
+  },
+  {
+   "text": "Each B_n has its two-term free resolution over completed coefficients. Apply the perfect-quotient projection formula to identify Rf_*(K tensor^L B_n) with (Rf_*K) tensor^L B_n. Use the normalized restriction comparison to compare their quotient transitions. On the two-term resolutions B_m→B_n is identity in degree zero and multiplication by the intervening uniformizer power in degree minus one; naturality of the derived direct-image unit gives precisely the actual system transitions.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; combined with the perfect-quotient argument of Bhatt--Scholze Lemma 6.5.11(3), Stacks 0941 and 099N."
+   }
+  },
+  {
+   "text": "Derived scalar-extension associativity identifies the transition-adjoint for the resulting reduction tower with (Rf_*K tensor^L B_m) tensor^L_(B_m) B_n→Rf_*K tensor^L B_n, an isomorphism. Transport to N. The scalar adjunction converts its invertibility into the required Hom-set bijection. Identity quotients, positive exponent one, zero inputs and empty schemes satisfy the same equations.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; combined with the perfect-quotient argument of Bhatt--Scholze Lemma 6.5.11(3), Stacks 0941 and 099N."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-compact-support-direct-image-evaluation",
+  "lem-trf-direct-image-restriction-transition",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-complete-direct-image-reduction",
+  "def-weil-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B7",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; combined with the perfect-quotient argument of Bhatt--Scholze Lemma 6.5.11(3), Stacks 0941 and 099N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimitTriangle|roos",
+   "results": "No hits",
+   "date": "2026-10-28",
+   "verdict": "Ingredient only; no project-specific theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Limits.Pi.π",
+   "results": "CategoryTheory.Limits.Pi.mapIso_hom_π, CategoryTheory.Limits.Pi.mapIso_inv_π, CategoryTheory.Limits.Pi.mapIso_hom_π_assoc, CategoryTheory.Limits.Pi.mapIso_inv_π_assoc",
+   "date": "2026-10-28",
+   "verdict": "Ingredient only; no project-specific theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit projection comparison finite evaluation direct image Roos triangle",
+   "results": "HomologicalComplex.coneOfHasLimitEval_π_app_f, HomologicalComplex.coneOfHasLimitEval_pt_d, LightProfinite.lightToProfinite_map_proj_eq, LightProfinite.isoMapCone, LightProfinite.proj_comp_transitionMap, LightProfinite.proj_comp_transitionMapLE, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app, localCohomology.diagramComp",
+   "date": "2026-10-28",
+   "verdict": "Ingredient only; no project-specific theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward preserves normalized coefficient systems of finite quotient rings by the perfect quotient projection formula",
+   "results": "PreTilt.coeff_def; Perfection.coeff_map; PerfectionMap.comp_equiv; PreTilt.coeff; PreTilt.mk_comp_untilt_eq_coeff_zero; PreTilt.mk_untilt_eq_coeff_zero; KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk; WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+   "date": "2026-10-28",
+   "verdict": "No derived-category or normalization theorem; all results are unrelated coefficient constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemDirectImageRoosEvaluation",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-weil-system-direct-image-roos-evaluation",
+   "place": "finite-adjunction proof of projection-compatible evaluation",
+   "via": [
+    "stage3-weil-system-direct-image-roos-evaluation"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemDirectImageReductionNormalized",
+  "file": "lean/Sheaf/Paper/SystemDirectImageReductionNormalized.lean",
+  "declaration": "WeilConjectures.systemDirectImage_reduction_normalized",
+  "statement": "theorem systemDirectImage_reduction_normalized\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [(integralComparisonSequenceDirectImage l E f).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (K : DerivedCategory (scalarReductionSource l E X)) :\n    IsNormalizedCoefficientSequence l E Y\n      ((integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj\n        (S.reduction.obj K))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261028T055617-L-776250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261028T055617-L-776250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

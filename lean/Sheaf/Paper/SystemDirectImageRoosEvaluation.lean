@@ -4,6 +4,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.Paper.SystemDirectImageRoosExistence
+import Sheaf.Paper.SystemDirectImageReductionNormalized
+import Sheaf.Paper.SfDirectImageRoosFiniteReduction
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
 
 /-! # Finite evaluation of the direct-image Roos object
 
@@ -27,13 +30,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Finite evaluations of a chosen direct-image Roos object are compatible with
 the actual total-limit projections.
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
-Proof: use one K-injective representative of the reduced system.  The
-section-normalized derived evaluation comparison gives the isomorphism at each
-finite level; normalization of quotient transitions identifies the transported
-tower arrows with `sfDirectImageTransition`.  Transporting the canonical
-projection of the resulting Roos triangle gives the displayed equation.
-No completeness, boundedness, constructibility, or geometric hypotheses are
-used. -/
+Proof: normalized reconstruction makes the scalar-extension adjunct of each
+actual total-limit projection invertible. Complete the input and transport its
+finite direct-image tower to prove the same for the specified Roos projections.
+Define the finite comparison by the inverse of the first adjunct, scalar
+extension of the given e, and the second adjunct. Naturality of the scalar
+adjunction gives the actual projection equation, including for arbitrary e.
+No completeness, boundedness, constructibility, or geometric hypotheses are imposed. -/
 theorem systemDirectImage_roosEvaluation
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(integralComparisonSequenceDirectImage l E f).Additive]
@@ -54,6 +57,49 @@ theorem systemDirectImage_roosEvaluation
               (S.reduction.obj K)) ≫
           (coefficientFiniteDerivedRestriction l E Y n).map (a n).hom =
         e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n := by
-  sorry
+  obtain ⟨T, _⟩ := coefficientDerivedSystemEvaluationCalculus l E Y
+  let N := (integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj
+    (S.reduction.obj K)
+  have hN : IsNormalizedCoefficientSequence l E Y N :=
+    systemDirectImage_reduction_normalized l E f S K
+  have hc : IsIso (T.adjunction.counit.app N) :=
+    ((purNormalizedReconstructionOfScheme l E Y T).1 N hN).2
+  let q (n : ℕ) := ((coefficientFiniteAdjunction l E Y n).homEquiv _ _).symm
+    ((coefficientSequenceProjection l E Y n).app N)
+  have hq (n : ℕ) : IsIso (q n) := by
+    have heq : q n = (T.reductionEvaluation n).inv.app
+        ((coefficientSequenceLimit l E Y).obj N) ≫
+      (coefficientSequenceDerivedEvaluation l E Y n).map (T.adjunction.counit.app N) := by
+      apply ((coefficientFiniteAdjunction l E Y n).homEquiv _ _).injective
+      exact ((coefficientFiniteAdjunction l E Y n).homEquiv _ _).apply_symm_apply _
+        |>.trans (T.counit_projection N n).symm
+    rw [heq]
+    infer_instance
+  have hr (n : ℕ) : IsIso (sfDirectImageReductionComparison l E f L n) :=
+    sfDirectImageRoos_finiteReduction l E f K L n
+  let a (n : ℕ) := (asIso (q n)).symm ≪≫
+    (coefficientFiniteDerivedExtension l E Y n).mapIso e ≪≫
+      asIso (sfDirectImageReductionComparison l E f L n)
+  refine ⟨a, ?_⟩
+  intro n
+  let adj := coefficientFiniteAdjunction l E Y n
+  have hqa : q n ≫ (a n).hom =
+      (coefficientFiniteDerivedExtension l E Y n).map e.hom ≫
+        sfDirectImageReductionComparison l E f L n := by
+    simp only [a, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
+      Functor.mapIso_hom, IsIso.hom_inv_id_assoc]
+  calc
+    _ = (adj.homEquiv _ _) (q n ≫ (a n).hom) := by
+      rw [adj.homEquiv_naturality_right]
+      simp only [q, adj, Equiv.apply_symm_apply]
+      rfl
+    _ = (adj.homEquiv _ _)
+        ((coefficientFiniteDerivedExtension l E Y n).map e.hom ≫
+          sfDirectImageReductionComparison l E f L n) := congrArg _ hqa
+    _ = _ := by
+      rw [adj.homEquiv_naturality_left]
+      exact congrArg (fun z ↦ e.hom ≫ z)
+        (((derivedScalarExtensionRestrictionAdjunction l E Y n).choose.homEquiv
+          L.obj (sfFiniteDerivedDirectImage l E f K n)).apply_symm_apply _)
 
 end WeilConjectures
