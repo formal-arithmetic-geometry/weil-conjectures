@@ -8670,6 +8670,7 @@ public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
 public import WeilConjectures.CategoryTheory.Shift.ConnectingLift
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.Shift.ShiftDecomposition
+public import WeilConjectures.CategoryTheory.Shift.ShiftDecompositionIsIso
 public import WeilConjectures.CategoryTheory.ShiftSaturatedIsoLocus
 public import WeilConjectures.CategoryTheory.SimplexMonoPullback
 public import WeilConjectures.CategoryTheory.SimplexPresentationFaithful
@@ -9998,6 +9999,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Ind
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Retract
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.NatIsoInvApp
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
@@ -12623,6 +12625,8 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
@@ -12632,11 +12636,14 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
@@ -13224,6 +13231,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionRestrictConstructibleProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionTriangleNatural
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
@@ -13959,6 +13967,7 @@ public import WeilConjectures.TraceFormula.Specialization.DiagExternalProduct
 public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
+public import WeilConjectures.TraceFormula.Specialization.FinitePointConservative
 public import WeilConjectures.TraceFormula.Specialization.FinitePointReflection
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
@@ -14052,6 +14061,11 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginBaseChange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeFinite
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeSquare
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre

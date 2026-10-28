@@ -38,9 +38,11 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
 The finite-support step is proved in chart dimension `n` (charts `V ⟶ 𝔸ᵐ_S` with `m` summed over
 the two factors, `AlgebraicGeometry.Scheme.Hom.LocallyEmbedsInAffineSpace`), given Gabber's
 Künneth formula in chart dimension `n - 1` over the trait `Spec K⟦t⟧` of the generic slices
-(`NearbyCyclesModel.KunnethFormula`); its only unfinished input is the generic-slicing
-identification `NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst` (and its mirror for the
-second factor), see `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep`.
+(`NearbyCyclesModel.KunnethFormula`); its only unfinished inputs are the invariance of nearby
+cycles under change of trait (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`)
+and the generic-slicing identification with invariants
+(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`), see
+`WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep`.
 
 The reduction to proper models in chart dimension `n` (`NearbyCyclesModel.ProperKunnethFormula`)
 is proved: locality on the special fibre reduces to products of charts
