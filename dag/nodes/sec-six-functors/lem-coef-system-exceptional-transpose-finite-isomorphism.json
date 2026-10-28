@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-system-exceptional-transpose-finite-isomorphism",
+ "kind": "lemma",
+ "title": "Finite invertibility of the counit-normalized exceptional transpose",
+ "statement": "Assume l ≠ D.p, the finite-field and finite-type hypotheses, and the coefficient data of [def-coef-system-dualizing-trace-data]. For the explicit map [def-coef-system-exceptional-transpose], the following finite-level assertion holds:\ntheorem integralDualizingSystemAdjunctionMap_evaluation_isIso\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)\n    (t : IntegralDualizingSystemTraceData D l E X S G Q eQ)\n    (K : (sfIntegralConstructibleCategory l E X)ᵒᵖ) (n : ℕ) :\n    IsIso ((coefPairingDerivedEvaluation l E n).map\n      ((integralDualizingSystemAdjunctionMap D l E X S G Q t.trace).app K))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-system-dualizing-trace-data",
+  "def-coef-system-exceptional-transpose"
+ ],
+ "proof": [
+  {
+   "text": "Fix the input K and level n. Integral residue Tor invariance puts its evaluated reduction in the finite-Tor constructible domain; no interval uniform over all inputs is used.",
+   "uses": [
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the two adjunction transposes defining the comparison. Exact tensor and section comparisons carry the proper projection, open tensor inverse and evaluation to the finite-level word; trace_evaluation supplies the finite exceptional counit.",
+   "uses": [
+    "def-coef-system-dualizing-trace-data",
+    "def-coef-system-exceptional-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite duality site comparison identifies this word with the ordinary etale internal exceptional adjunction isomorphism. Transport back through the specified site and scalar isomorphisms; all these functors preserve invertibility.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison",
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "def-coef-system-dualizing-trace-data",
+  "def-coef-system-exceptional-transpose",
+  "lem-weil-finite-duality-site-comparison",
+  "prop-asd-internal-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison obtained by transposing a projection evaluation pairing under two adjunctions is invertible when every derived tower evaluation is invertible",
+   "results": "8 hits, including Adjunction.leftAdjointCompIso and MonoidalClosedFunctor.comparison_iso; none constructs the normalized quotient-system exceptional counit.",
+   "date": "2026-10-28",
+   "verdict": "Use generic adjunction naturality and exact derived evaluation; geometric normalization remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Exact match in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "Used for the proved naturality calculation, not a replacement for the geometric finite comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isIso_iff_isIso_app",
+   "results": "Exact functor homology comparison and NatTrans.isIso_iff_isIso_app found. Local project and blueprint searches find no normalized base-system trace construction.",
+   "date": "2026-10-28",
+   "verdict": "Use these to prove joint conservativity and the final assembly directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-system-finite-adjunction",
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSystemFiniteAdjunction",
+  "date": "2026-10-28",
+  "group": "R5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingSystemFiniteEvaluation",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingSystemFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.integralDualizingSystemAdjunctionMap_evaluation_isIso",
+  "statement": "theorem integralDualizingSystemAdjunctionMap_evaluation_isIso\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)\n    (t : IntegralDualizingSystemTraceData D l E X S G Q eQ)\n    (K : (sfIntegralConstructibleCategory l E X)ᵒᵖ) (n : ℕ) :\n    IsIso ((coefPairingDerivedEvaluation l E n).map\n      ((integralDualizingSystemAdjunctionMap D l E X S G Q t.trace).app K))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

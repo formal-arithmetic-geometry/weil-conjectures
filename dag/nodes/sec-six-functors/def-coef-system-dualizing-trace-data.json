@@ -1,0 +1,110 @@
+{
+ "id": "def-coef-system-dualizing-trace-data",
+ "kind": "definition",
+ "title": "Finite-counit normalization data for a base-system trace",
+ "statement": "Fix D,l,E,X,S,G,Q and the finite dualizing identifications eQ with eQ identifying each evaluated Q with the finite dualizing term [lem-coef-finite-dualizing]. Define the intrinsic finite counit by transporting the ordinary etale exceptional counit through the fixed dualizing origin and compact-support site comparison. A normalized trace consists of a natural support-functor comparison with native quotient-system compact support, finite identifications of the base tensor unit with A_n[0], and a map from support(Q) to that unit whose evaluations equal the specified finite counit word. Define the natural Hom comparison from this trace by [def-coef-system-exceptional-transpose]. No witness is chosen from an existence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-system-exceptional-transpose",
+  "def-coef-integral-dualizing-support-system-hom",
+  "lem-coef-finite-dualizing",
+  "def-weil-compact-support-native-system-evaluation",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-sf-intrinsic-compact-support-realization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison obtained by transposing a projection evaluation pairing under two adjunctions is invertible when every derived tower evaluation is invertible",
+   "results": "8 hits, including Adjunction.leftAdjointCompIso and MonoidalClosedFunctor.comparison_iso; none constructs the normalized quotient-system exceptional counit.",
+   "date": "2026-10-28",
+   "verdict": "Use generic adjunction naturality and exact derived evaluation; geometric normalization remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Exact match in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "Used for the proved naturality calculation, not a replacement for the geometric finite comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isIso_iff_isIso_app",
+   "results": "Exact functor homology comparison and NatTrans.isIso_iff_isIso_app found. Local project and blueprint searches find no normalized base-system trace construction.",
+   "date": "2026-10-28",
+   "verdict": "Use these to prove joint conservativity and the final assembly directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-system-finite-adjunction",
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSystemFiniteAdjunction",
+  "date": "2026-10-28",
+  "group": "R5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingSystemTraceData",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingSystemTraceData.lean",
+  "declaration": "WeilConjectures.IntegralDualizingSystemTraceData",
+  "statement": "structure IntegralDualizingSystemTraceData\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.integralDualizingFiniteEtalePlus",
+   "WeilConjectures.integralDualizingFiniteSystemCounit",
+   "WeilConjectures.IntegralDualizingSystemTraceData",
+   "WeilConjectures.integralDualizingSystemAdjunctionMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "def-coef-system-exceptional-transpose",
+ "kind": "definition",
+ "title": "Base-linear exceptional transpose and exact tower detection",
+ "statement": "For closed structures SA and SC and a coefficient pairing frame F [def-coef-tower-evaluation-pairing-constructions], define the base pairing by proper projection, inverse open tensor comparison, source counit and evaluation. Given a base trace P(J(Q)) → U, define its exceptional map by the closed transpose over the base, followed by the base-sections adjunction. The pairing is dinatural in M, so the exceptional maps are contravariantly natural. For strict scalar-module derived towers define exact level evaluation and prove that these evaluations jointly detect invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-tower-evaluation-pairing-constructions",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "The proper projection mate is natural in both variables, by its construction as a natural transformation. The open tensor inverse is natural by its prescribed adjunct. Source-counit naturality and closed evaluation dinaturality therefore prove base-pairing dinaturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the closed Hom equivalence and the sections adjunction Hom equivalence to that equality to obtain naturality of the exceptional map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Commute exact evaluation with homology. A homology arrow is a tower natural transformation and is invertible if all components are. Derived homology jointly detects isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison obtained by transposing a projection evaluation pairing under two adjunctions is invertible when every derived tower evaluation is invertible",
+   "results": "8 hits, including Adjunction.leftAdjointCompIso and MonoidalClosedFunctor.comparison_iso; none constructs the normalized quotient-system exceptional counit.",
+   "date": "2026-10-28",
+   "verdict": "Use generic adjunction naturality and exact derived evaluation; geometric normalization remains project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Exact match in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "Used for the proved naturality calculation, not a replacement for the geometric finite comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isIso_iff_isIso_app",
+   "results": "Exact functor homology comparison and NatTrans.isIso_iff_isIso_app found. Local project and blueprint searches find no normalized base-system trace construction.",
+   "date": "2026-10-28",
+   "verdict": "Use these to prove joint conservativity and the final assembly directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-system-finite-adjunction",
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSystemFiniteAdjunction",
+  "date": "2026-10-28",
+  "group": "R5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingSystemAdjunctionMap",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingSystemAdjunctionMap.lean",
+  "declaration": "CategoryTheory.CoefPairingFrame.basePairing",
+  "statement": "def basePairing (M Q : A) :\n    SC.tensor.obj (F.sstar.obj (RX.obj (HA.obj (op M, Q))), P.obj (J.obj M)) ⟶\n      P.obj (J.obj Q)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-28",
+  "declarations": [
+   "CategoryTheory.CoefPairingFrame.basePairing",
+   "CategoryTheory.CoefPairingFrame.exceptionalMap",
+   "CategoryTheory.CoefPairingFrame.basePairing_dinaturality",
+   "CategoryTheory.CoefPairingFrame.exceptionalMap_naturality",
+   "WeilConjectures.coefPairingDerivedEvaluation",
+   "WeilConjectures.coefPairingDerived_isIso_of_evaluations"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261028T055744-L-804665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

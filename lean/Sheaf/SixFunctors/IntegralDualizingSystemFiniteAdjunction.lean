@@ -6,6 +6,8 @@ Authors: SHEAF group M7
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingSupportSystemHom
+import Sheaf.SixFunctors.IntegralDualizingSystemTraceExistence
+import Sheaf.SixFunctors.IntegralDualizingSystemFiniteEvaluation
 
 /-! # Finite exceptional adjunction on the quotient sequence site -/
 
@@ -31,21 +33,16 @@ Source: prop-coef-integral-dualizing, second paragraph, middle displayed compari
 and compatibility of the exceptional counits with reduction.
 (blueprint: lem-coef-integral-dualizing-system-finite-adjunction).
 
-Proof: compute both sides on simultaneous quotient-system resolutions. The
-ordinary etale internal exceptional adjunction, transported by finite duality
-site comparison, identifies the nth Hom with Hom from finite compact support into
-A_n. Use the projection/evaluation/exceptional-counit transpose that specifies
-the ordinary internal exceptional adjunction. Finite exceptional coefficient
-compatibility and hQ make
-these same transposes commute with every quotient map. Thus they define a map
-of the strict quotient-system Hom complexes, rather than a family lifted after
-evaluation. Naturality of evaluation and of the compact-support projection gives
-naturality in the derived input before localizing. On each bounded constructible
-input, integral residue Tor invariance puts its reductions in the finite-Tor
-domain of finite duality site comparison. Evaluation of the constructed map is that
-finite adjunction and is invertible. Exact evaluation jointly detects
-quasi-isomorphisms, so the strict map is an isomorphism. Zero input and empty
-schemes give zero Hom objects. No common Tor interval for all inputs is used. -/
+Proof: obtain a trace on Q normalized by the fixed finite exceptional counits,
+using the compatible identifications eQ and hQ. Define the comparison by the
+base-linear projection/evaluation word and its two adjunction transposes.
+Dinaturality of that word proves naturality in K before finite evaluation.
+For each K, the finite mapping adjunction makes every exact scalar-tower
+evaluation of this particular comparison invertible. Exact evaluation commutes
+with homology, so it jointly detects invertibility. Componentwise invertibility
+then gives the natural isomorphism. The remaining geometric obligations are the
+normalized trace construction and finite invertibility, stated separately; this
+is a decomposition of the original hole, not a closed geometric proof. -/
 theorem integralDualizing_system_finite_adjunction
     (S : CoefficientDerivedSystemCalculus l E X)
     (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)
@@ -61,6 +58,12 @@ theorem integralDualizing_system_finite_adjunction
             (integralDualizingFiniteComparison l E D X hl h)) :
     Nonempty ((sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q ≅
       integralDualizingSupportSystemHom D l E X S G) := by
-  sorry
+  obtain ⟨t⟩ := integralDualizingSystemTraceData_exists D l hl E X S G Q eQ hQ
+  let α := integralDualizingSystemAdjunctionMap D l E X S G Q t.trace
+  have (K : (sfIntegralConstructibleCategory l E X)ᵒᵖ) : IsIso (α.app K) :=
+    coefPairingDerived_isIso_of_evaluations l E _
+      (fun n ↦ integralDualizingSystemAdjunctionMap_evaluation_isIso D l hl E X S G Q eQ t K n)
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  exact ⟨asIso α⟩
 
 end WeilConjectures
