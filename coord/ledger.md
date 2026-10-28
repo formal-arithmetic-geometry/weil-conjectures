@@ -20606,3 +20606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: merged deliver/H1/Sheaf.SixFunctors.OpenScalarAdjunctionCounit (stage 3; reviewer PASS; first push; landing 20261028T020435-L-2511399 (interface); batch 20261028T020127; modules 1; new nodes 1)
 - 02:04 L: merged deliver/H2/Sheaf.Paper.AutomorphismConstructibleStageEquivalence (stage 3; reviewer PASS; first push; landing 20261028T020441-L-2512456 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:04 L: merged deliver/H2/Sheaf.Paper.FiniteQuotientDerivedDetection (stage 3; reviewer PASS; first push; landing 20261028T020442-L-2513025 (interface); batch 20261028T020127; modules 1; new nodes 0)
+- 02:04 L: merged deliver/H3/Sheaf.Paper.DerivedPullbackTensorConstraints (stage 3; reviewer PASS; after a return; landing 20261028T020444-L-2513173 (interface); batch 20261028T020127; modules 2; new nodes 1)

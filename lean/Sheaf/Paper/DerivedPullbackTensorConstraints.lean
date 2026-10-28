@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.Paper.IntegralPullbackComposition
+
 import all Sheaf.Paper.PullbackTensorReductionCalculus
 import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 import Sheaf.Paper.NormalizedCompletedOperationModels
@@ -224,6 +225,7 @@ def pullbackTensorRationalComposition {X Y Z : Scheme.{u}}
     (M : sfRationalConstructibleCategory l E Y) :=
   ((@pullbackTensorRationalComposition_existsUnique l _ E _ _ _ X Y Z f h hX hY hZ) M).exists.choose
 
+
 /-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
 Source: Stacks 06YS, 07A4, 0941.
 (blueprint: lem-pur-derived-pullback-tensor-constraints-common-composition-existence). -/
@@ -253,8 +255,6 @@ theorem pullbackTensorCommonComposition_exists {X Y Z : Scheme.{u}}
               (commonStagePullbackObject l Ω f M) L hM).inv)) := by
   sorry
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- Common-stage composition, specified at every larger finite coefficient field.
 Source: Stacks 07A4, 0941; blueprint coefficient conventions
 (blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: represent the rational
