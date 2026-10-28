@@ -6,6 +6,8 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Paper.PodCompletionTensorNormalization
+import Sheaf.Paper.PodReindexingStrictTensorTowersGenerators
+import Sheaf.Paper.PodReindexingStrictTensorTowersNaturality
 
 /-! # Strict steps in normalized completed tensor reindexing -/
 
@@ -81,6 +83,8 @@ theorem podReindexingStrictTensorTowers
             (τ P' Q').hom =
           (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map
             (Prod.mkHom ((podGoodReindex l E g D).map a).hom
-              ((podGoodReindex l E g D).map b).hom)) := by sorry
+              ((podGoodReindex l E g D).map b).hom)) := by
+  obtain ⟨τ, hgen⟩ := podReindexingStrictTensorTowersGenerators l E g D hD
+  exact ⟨τ, hgen, podReindexingStrictTensorTowersNaturality l E g D τ hgen⟩
 
 end WeilConjectures
