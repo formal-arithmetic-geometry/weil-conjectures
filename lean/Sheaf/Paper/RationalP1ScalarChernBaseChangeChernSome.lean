@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.RationalP1ScalarChernSomeRaw
 
 /-! # Specialized coefficient cases for scalar Chern exchange -/
 
@@ -54,6 +55,10 @@ theorem scalar_chern_base_change_chern_some
     let c₂ := scalarP2Chern l (some E) Y r b
     let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)
     F.map cq ≫ secondTraceExchange l (some E) k p hpl Y =
-        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by sorry
+        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by
+  dsimp only
+  unfold scalarQChern scalarP2Chern
+  dsimp
+  exact scalar_chern_base_change_chern_some_raw l E k p hpl Y δ family r a ha b hb
 
 end AlgebraicGeometry.ProEtale.RationalP1
