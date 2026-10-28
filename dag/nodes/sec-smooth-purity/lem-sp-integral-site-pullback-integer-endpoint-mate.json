@@ -12,12 +12,39 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-sp-tower-class-reduction"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Use homEquiv_leftAdjointUniq_hom_app and the constant-sheaf adjunction to identify the adjoint of each constant-sheaf comparison with the sheafification lift of the constant-section map. For the etale inverse image, naturality of toSheafify along the terminal-object comparison gives the required normalization; for integerComparison, the sections comparison is the identity.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pro-etale inverse-image coefficient map is by definition the adjoint of proEtaleConstantDirectImageMap. Cancel the hom-set equivalence and replace the etale and integer comparison mates by the lifts identified in the first step.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the sheafification hom-set equivalence and evaluate at each etale object. The defining equations of the two sheafification lifts reduce both composites to the same pro-etale constant section over the base-changed object. The direct-image comparison has identity components, since toProEtCompOverPullbackIso has identity components. Associativity and the identity law finish the equality.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "Paragraph (2), transpose the constant-section maps through the two inverse-image adjunctions"
+  "place": "Paragraph (2), integer endpoint comparison; explicit adjunction and constant-section calculation by K1, 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -90,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K6",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261027T234042-L-4174822",
-  "kind": "interface",
+  "landing": "20261028T020526-L-2520884",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
