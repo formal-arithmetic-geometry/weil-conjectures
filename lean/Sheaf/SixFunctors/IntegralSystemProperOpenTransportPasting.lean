@@ -11,16 +11,6 @@ import Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingBaseChange
 
 /-! Pasting package for intrinsic proper/open coherence. -/
 
-/- STATEMENT-DISPUTED: the theorem below quantifies over an arbitrary supplied `gamma`,
-which has no compatibility hypothesis with the semilinear proper/open gamma or with
-the canonical bridge. The three displayed equations are coherence constraints on
-`gamma`, so they cannot follow for every natural transformation of the displayed
-type. The blueprint proof transports the equations only for the specially
-constructed bridge-conjugate gamma. A corrected statement must either take that
-transported gamma (or its compatibility equations) as data, or quantify existentially
-over gamma; this declaration is retained unchanged pending that statement repair.
--/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -94,10 +84,24 @@ theorem integralSystemProperOpenTransportPasting (o : Operations l E) (c : Compo
       [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
       (_h : k ≫ p = r ≫ i),
       Operations.push l E o r ⋙ Operations.shriek l E o i ⟶
-        Operations.shriek l E o k ⋙ Operations.push l E o p) :
+        Operations.shriek l E o k ⋙ Operations.push l E o p)
+    (b : CanonicalBridge l E o)
+    (canonical : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
+      (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]
+      [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+      (h : k ≫ p = r ≫ i) (M : System l E U),
+      (gamma k r p i h).app M ≫
+        (b.push l E p).hom.app ((Operations.shriek l E o k).obj M) ≫
+        (ProEtale.SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) p).map
+          ((b.shriek l E k).hom.app M) =
+      (b.shriek l E i).hom.app ((Operations.push l E o r).obj M) ≫
+        (ProEtale.SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) i).map
+          ((b.push l E r).hom.app M) ≫
+        (ProEtale.SemilinearProperOpen.gamma (scalarRings l E) (scalarTransitions l E)
+          k r p i h).app M) :
     Nonempty (ProperOpenTransportPasting l E o c a gamma) := by
   refine ⟨{
-    vertical := integralSystemProperOpenTransportPastingVertical l E o c a gamma
+    vertical := integralSystemProperOpenTransportPastingVertical l E o c a gamma b canonical
     horizontal := integralSystemProperOpenTransportPastingHorizontal l E o c a gamma
     baseChange := integralSystemProperOpenTransportPastingBaseChange l E o c a gamma
   }⟩

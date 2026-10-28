@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-integral-system-bridge-push-composition",
+ "kind": "statement",
+ "title": "Canonical bridge preserves direct-image composition",
+ "statement": "For the section-normalized operations and compositors $o,c$ [def-sf-integral-system-operations] and canonical bridge $b$ [def-sf-integral-system-canonical-bridge], the bridge intertwines the supplied direct-image compositor with the intrinsic semilinear direct-image compositor [lem-sf-semilinear-proper-open-mate-pasting]: on each whole system $M$, $c_{f,g}(M);b_{fg}(M)=b_g(S_fM);R_g(b_f(M));s_{f,g}(M)$. This holds for every composable pair of scheme maps, with no properness or open-immersion restriction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open pasting for the canonical transported gamma; compatibility of the direct-image compositors (Stacks 03D8, 07A7)."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved ordinary bridge compositor comparison. Conjugate this equality through the module adjunctions, localize the inverse-image equality, use the complex-factor normalization of the supplied compositor, and conjugate back through the derived adjunctions.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-system-compositor-associativity",
+    "lem-sf-integral-system-ordinary-bridge-composition",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Proper/open pasting for the canonical transported gamma; compatibility of the direct-image compositors (Stacks 03D8, 07A7)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-integral-system-compositor-associativity",
+  "lem-sf-integral-system-ordinary-bridge-composition",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open pasting for the canonical transported gamma; compatibility of the direct-image compositors (Stacks 03D8, 07A7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and composition of canonical adjoint comparison isomorphisms under composition of right adjoints",
+   "results": "Adjunction.rightAdjointUniq_trans and leftAdjointCompIso express parts of the calculation; no section-normalized system bridge theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use generic conjugation, not a new system construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Found conjugateIsoEquiv and its hom/inverse formulas.",
+   "date": "2026-10-28",
+   "verdict": "Used for ordinary and derived adjunction conjugation."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*whisker|mapDerivedCategoryNatIso.*[Cc]omp",
+   "results": "Found conjugateEquiv_comp, conjugateEquiv_whiskerLeft, conjugateEquiv_whiskerRight and localization coherence in MapDerivedCategoryMate.",
+   "date": "2026-10-28",
+   "verdict": "Generic inputs suffice; no exact existing bridge/compositor theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingVertical",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Identify the direct-image compositors under the canonical bridge",
+   "via": [
+    "lem-sf-integral-system-proper-open-transport-pasting-vertical",
+    "lem-sf-integral-system-proper-open-transport-pasting",
+    "lem-sf-integral-system-proper-open-transport",
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemBridgePushComposition",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemBridgePushComposition.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemBridgePushComposition",
+  "statement": "theorem integralSystemBridgePushComposition (o : Operations l E) (c : Compositors l E o)\n    (b : CanonicalBridge l E o) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (M : System l E X) :\n    (c.pushComp l E f g).hom.app M ≫ (b.push l E (f ≫ g)).hom.app M =\n      (b.push l E g).hom.app ((Operations.push l E o f).obj M) ≫\n        (ProEtale.SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) g).map\n          ((b.push l E f).hom.app M) ≫\n        (ProEtale.SemilinearProperOpen.sComp\n          (scalarRings l E) (scalarTransitions l E) f g).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-e97cc",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055737-L-803331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-e97cc",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261028T055737-L-803331",
+  "kind": "interface",
+  "note": "independent cc review: vertical/package statements with canonical hyp vs ProperOpenTransportCore.canonical and ProperOpenCoherence.canonical (identical); proofs vs mate pasting + new bridge-compositor nodes; node deps vs owner nodes of used decls"
+ }
+}

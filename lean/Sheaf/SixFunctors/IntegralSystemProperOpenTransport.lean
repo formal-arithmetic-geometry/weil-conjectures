@@ -53,7 +53,7 @@ theorem integralSystemProperOpenTransport (o : Operations l E) (c : Compositors 
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) :
     Nonempty (ProperOpenCoherence l E o c a b) := by
   obtain ⟨hc⟩ := integralSystemProperOpenTransportCore l E o c a b
-  obtain ⟨hp⟩ := integralSystemProperOpenTransportPasting l E o c a hc.gamma
+  obtain ⟨hp⟩ := integralSystemProperOpenTransportPasting l E o c a hc.gamma b hc.canonical
   exact ⟨{
     gamma := hc.gamma
     adjunct := hc.adjunct
