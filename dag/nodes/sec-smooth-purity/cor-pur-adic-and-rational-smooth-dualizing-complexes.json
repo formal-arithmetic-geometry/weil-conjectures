@@ -25,18 +25,32 @@
   "def-weil-exceptional-inverse-image",
   "def-pur-finite-tate-site-comparison",
   "thm-pur-diagonal-dualizing-object",
-  "def-weil-pbc-bounded-constructible-tower"
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-adic-finite-comparison-model"
  ],
  "proof": [
   {
-   "text": "For the finite-model preliminaries, the published signed Tate tensor family gives a tensor inverse in degree d, hence flatness of the positive Tate power (etalePowerFlat). The zero and positive-step uniqueness statements are equality of specified isomorphisms, obtained from HEq. The finite unit is a degree-zero single complex; the exact etale/proetale comparison identifies its image with another single complex, proving finiteUnitPlus. The structure morphism is over Spec k because Spec.map of the identity is identity. These preliminary proofs preserve the integral/rational/common-stage unit route below; the remaining seven Lean holes retain that route.",
+   "text": "Use the finite normalized coefficient model of [def-pur-adic-finite-comparison-model]. Its declaration-preserving extraction includes the proved unique root comparison, the two existing finite projection and realization obligations, and the explicit finitePowerComparison construction. The finite unit is a degree-zero single complex: exact derived site inverse image preserves its lower bound zero, proving finiteUnitPlus. The structure morphism is over Spec k because Spec.map of the identity is identity. These constructions preserve the integral/rational/common-stage unit route below.",
    "uses": [
-    "lem-asd-finite-etale-tate-tensor-family"
+    "def-pur-adic-finite-comparison-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
     "place": "coefficient-unit application; elementary finite-model preliminaries in the Lean realization"
+   }
+  },
+  {
+   "text": "For integralTwist_mem, map the existing coefficient-prime unit in each local ring to its residue field and choose its uniquely determined inverse. The existing signed integral coefficient-twist membership theorem gives the unshifted nonnegative root power. Intrinsic integral constructibility is triangulated, hence stable under the even shift 2d. The integral residue-Tor criterion identifies this constructibility predicate with integral finite-Tor constructibility, completing the membership proof for every scheme over the fixed base, without finite-type restrictions.",
+   "uses": [
+    "lem-route-intrinsic-integral-coefficient-twist-mem",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Completed coefficient unit and shifted Tate line in the coefficient-unit application."
    }
   },
   {
@@ -65,13 +79,14 @@
    }
   },
   {
-   "text": "Write $\\eta_\\Lambda=\\gamma_{a_X,\\Lambda_s}^{-1}$. Reading the counit through $\\eta_\\Lambda$ gives $\\epsilon_\\Lambda\\circ Ra_{X!}(\\gamma_{a_X,\\Lambda_s})$. At finite level this is the smooth trace by [def-pur-smooth-trace]. The integral and field-stage composites are its specified transports by [prop-pur-adic-reconstruction-trace-coherence] and [prop-pur-rational-purity-trace-coherence]. Apply [lem-pur-point-trace-reconstruction] to these coherent counit pairings: their point-fibre values have source $R\\Gamma_c(X,\\Lambda_X(d)[2d])$ and target $\\Lambda$, with the same normalization under coefficient transport. The affine-space clause of [thm-pur-trace-normalization-transitivity] supplies that normalization: for $p_d:\\mathbf A_k^d\\to s$ (both schemes separated finite type), the finite trace is the ordered product of normalized affine-line traces and sends their $d$-fold class to $1$. Its coefficient-transport clause preserves this normalization, including $d=0$. No class integrating to $1$ is asserted for arbitrary $X$.",
+   "text": "Write $\\eta_\\Lambda=\\gamma_{a_X,\\Lambda_s}^{-1}$. Reading the counit through $\\eta_\\Lambda$ gives $\\epsilon_\\Lambda\\circ Ra_{X!}(\\gamma_{a_X,\\Lambda_s})$. At finite level this is the smooth trace by [def-pur-smooth-trace]. The integral and field-stage composites are its specified transports by [prop-pur-adic-reconstruction-trace-coherence] and [prop-pur-rational-purity-trace-coherence]. Apply [lem-pur-point-trace-reconstruction] to these coherent counit pairings: their point-fibre values have source $R\\Gamma_c(X,\\Lambda_X(d)[2d])$ and target $\\Lambda$, with the same normalization under coefficient transport. The affine-space clause of [thm-pur-trace-normalization-transitivity] supplies that normalization: for $p_d:\\mathbf A_k^d\\to s$ (both schemes separated finite type), the finite trace is the ordered product of normalized affine-line traces and sends their $d$-fold class to $1$. Its coefficient-transport clause preserves this normalization, including $d=0$. No class integrating to $1$ is asserted for arbitrary $X$. The Lean counit assembly is complete: the integral normalization is the specification of the uniquely chosen integral identification. A proved categorical helper cancels q and b and uses naturality of q to transport a counit read through an isomorphism. Apply it first to rationalization, then to the selected small-model scalar extension, then to common-stage inclusion. At each later stage the previous counit equation, precomposed with the compact-support image of the inverse identification, recovers exactly the previously defined integration map. These are precisely rationalIdentification, rationalIntegration, closedIdentification and closedIntegration.",
    "uses": [
     "def-pur-smooth-trace",
     "prop-pur-adic-reconstruction-trace-coherence",
     "prop-pur-rational-purity-trace-coherence",
     "lem-pur-point-trace-reconstruction",
-    "thm-pur-trace-normalization-transitivity"
+    "thm-pur-trace-normalization-transitivity",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -81,7 +96,10 @@
   }
  ],
  "proof_deps": [
-  "lem-asd-finite-etale-tate-tensor-family",
+  "def-pur-adic-finite-comparison-model",
+  "lem-route-intrinsic-integral-coefficient-twist-mem",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-coef-integral-residue-tor",
   "lem-pur-completed-unit-pullback-tower",
   "thm-pur-adic-reconstruction",
   "lem-pur-adic-purity-scalar-naturality",
@@ -90,13 +108,14 @@
   "prop-pur-adic-reconstruction-trace-coherence",
   "prop-pur-rational-purity-trace-coherence",
   "lem-pur-point-trace-reconstruction",
-  "thm-pur-trace-normalization-transitivity"
+  "thm-pur-trace-normalization-transitivity",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
  ],
  "proof_origin": {
-  "by": "A2 stage 3",
+  "by": "M2 stage 3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
   "place": "coefficient-unit application and counit clause",
-  "note": "The original three integral/rational/common-stage plan steps and all their dependencies are retained for the seven remaining holes. Added the actual tensor-family dependency used to prove the finite Tate flatness preliminary. Restored the archived Lean attachment unchanged; this repair does not claim to prove the final corollary."
+  "note": "The integral/rational/common-stage unit route is retained. Proved existsUnique_rootComparison from finite Tate descent and local-root-tensor extensionality. Proved the final counit assembly from the integral identification specification and the three coefficient-comparison counit laws. Proved integralTwist_mem from signed-line membership, shift stability and the integral residue-Tor criterion. Four original holes remain, no new holes. Existing finite-power and finite-comparison blocks are extracted for compile time; two new fully constructed helper definitions cache original comparison endpoints."
  },
  "mathlib_searches": [
   {
@@ -239,29 +258,6 @@
   "module": "Sheaf.Paper.AdicSmoothDualizingComplexes",
   "declaration": "WeilConjectures.AdicSmoothDualizing.adic_and_rational_smooth_dualizing_complexes",
   "declarations": [
-   "WeilConjectures.AdicSmoothDualizing.line",
-   "WeilConjectures.AdicSmoothDualizing.generator",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.levelSetting",
-   "WeilConjectures.AdicSmoothDualizing.lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.etalePowerProduct",
-   "WeilConjectures.AdicSmoothDualizing.etalePowerUnitor",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerZero",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPositive",
-   "WeilConjectures.AdicSmoothDualizing.etalePowerStep",
-   "WeilConjectures.AdicSmoothDualizing.etalePowerFlat",
-   "WeilConjectures.AdicSmoothDualizing.etaleSingle",
-   "WeilConjectures.AdicSmoothDualizing.etaleTensor",
-   "WeilConjectures.AdicSmoothDualizing.EtalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.etalePowerComparison",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.IsScalarUnitRealization",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.exactSingleShiftIso",
-   "WeilConjectures.AdicSmoothDualizing.finitePowerComparison",
    "WeilConjectures.AdicSmoothDualizing.integralTwist_mem",
    "WeilConjectures.AdicSmoothDualizing.integralTwist",
    "WeilConjectures.AdicSmoothDualizing.twistReduction",
@@ -306,31 +302,13 @@
   "note": "28b4 = a678 delivery plus twiceSucc replaced by the existing PurityFiniteSetting.frameDegreeNext (identical signature, PurityFrameClass.lean:139, proof-irrelevant use in EtalePowerPresentation.normalized); this repairs the duplicate-declaration refusal. Statement and binders are byte-identical to a678, which earlier reviews read clause by clause: O_E/E/Qbar clauses and counit equations, no extra hypotheses or universe restriction, edge cases d=0, empty X, levels n+1. lean.statement is verbatim and all 48 declarations are present. Mechanical finding: thm-pur-diagonal-dualizing-object is a genuine dependency (finiteIntegration uses diagonalDualizingObject = existsUnique_diagonalDualizingObject.exists.choose), PASS on that point. FIX 1 (H6): structureIsOver was again a proof term for the Prop class Hom.IsOver, the 84cf/a678 fixes having been lost on re-delivery; restored as theorem := by sorry with a proof docstring plus attribute [instance]. FIX 2: re-applied the a678 inlining of non-instance lets in finitePowerComparison/finiteIntegration (zeta-equal, no signature change). Report sentence corrected and a Reviewer fix section added. nt_compile --json on the local overlay at load about 80: delivered clean in 37.6 s; fixed clean in about 48 s and 29.6 s. Note: frameDegreeNext's owner def-pur-frame-class is not in stmt_deps (proof-irrelevant arithmetic, no rule requires it)."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J5",
-  "result": "pass",
-  "landing": "20261027T210056-L-1653543",
+  "reviewer": "C-54b3a",
+  "group": "M2",
+  "result": "fix",
+  "landing": "20261028T055716-L-798391",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.AdicSmoothDualizing.adic_and_rational_smooth_dualizing_complexes",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.integralTwist_mem"
-  ],
-  "sorry_after": [
-   "WeilConjectures.AdicSmoothDualizing.adic_and_rational_smooth_dualizing_complexes",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.integralTwist_mem"
-  ]
+  "note": "independent cc review: delivered item + 2 extracted modules vs clone (moved blocks verbatim except recorded levelSetting abbrev, finiteUnitPlus proof, finitePowerComparison refactor proved defeq by unfold+rfl); main statement byte-identical; 4 direct importers compiled OK in sandbox against delivered set (Canonical 40.6 s vs baseline 46.4 s, OrientationDatum 35.7 s both)"
  }
 }

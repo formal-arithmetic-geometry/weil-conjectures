@@ -17,9 +17,28 @@
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
   "place": "Clause (6), finite smooth purity at the coefficient unit: its ordered shifted-root-line to shifted Tate-power presentation; also the coefficient-unit identification in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The zero power step is the prescribed tensor unitor and the positive step is the identity; HEq gives their uniqueness. The finite Tate tensor family supplies tensor inverses and hence flatness of every nonnegative power. The normalized presentation records the specified tensor, single-complex and even-shift comparisons. Its unique-existence proof is the existing remaining Lean hole, with the full inductive construction and uniqueness argument in its docstring. The selected family is its uniquely specified comparison component.",
+   "uses": [
+    "lem-asd-finite-etale-tate-tensor-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (6), finite smooth purity at the coefficient unit: its ordered shifted-root-line to shifted Tate-power presentation; also the coefficient-unit identification in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-tate-tensor-family"
+ ],
+ "proof_origin": {
+  "by": "M2 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), finite smooth purity at the coefficient unit: its ordered shifted-root-line to shifted Tate-power presentation; also the coefficient-unit identification in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md.",
+  "note": "Declaration-preserving extraction of the existing finite-power block; no new mathematical statement or hole."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -87,15 +106,19 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "lean": {
-  "module": "Sheaf.Paper.AdicSmoothDualizingComplexes",
+  "module": "Sheaf.Paper.AdicSmoothDualizingFinitePowers",
   "declaration": "WeilConjectures.AdicSmoothDualizing.etalePowerComparison",
   "declarations": [
    "WeilConjectures.AdicSmoothDualizing.etalePowerProduct",
    "WeilConjectures.AdicSmoothDualizing.etalePowerUnitor",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerZero",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPositive",
    "WeilConjectures.AdicSmoothDualizing.etalePowerStep",
+   "WeilConjectures.AdicSmoothDualizing.etalePowerFlat",
    "WeilConjectures.AdicSmoothDualizing.etaleSingle",
    "WeilConjectures.AdicSmoothDualizing.etaleTensor",
    "WeilConjectures.AdicSmoothDualizing.EtalePowerPresentation",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
    "WeilConjectures.AdicSmoothDualizing.etalePowerComparison"
   ],
   "statement": "def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :\n    (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧",
@@ -103,7 +126,8 @@
   "by": "NK",
   "date": "2026-10-26",
   "existing": true,
-  "note": "Exact existing declarations in AdicSmoothDualizingComplexes. EtalePowerPresentation stores the full zero/successor normalization, and etalePowerComparison selects its comparison using existsUnique_etalePowerPresentation. This definition node owns the data; the smooth-dualizing corollary is not used as a statement dependency in its place. No Lean declaration is copied or renamed."
+  "note": "The existing finite-power block was extracted from AdicSmoothDualizingComplexes to this module for compilation time. Names, signatures, bodies and the one existing presentation-uniqueness hole are unchanged; the original module publicly imports it.",
+  "file": "lean/Sheaf/Paper/AdicSmoothDualizingFinitePowers.lean"
  },
  "reviewed": {
   "date": "2026-10-26",
@@ -122,31 +146,13 @@
   "note": "Re-delivery after 5d810e6 H2 RETURN. Lean file byte-identical; only stmt_deps/lean record changed (−cor-pur-adic-and-rational-smooth-dualizing-complexes, −lem-weil-integral-scalar-extension-well-defined, +new existing:true def-sf-etale-power-presentation, +landed def-weil-pbc-integer-quotient-inclusions). New node: all 7 declarations exist in live AdicSmoothDualizingComplexes, lean.statement verbatim, statement matches EtalePowerPresentation zero/successor normalization exactly, stmt_deps all exist and cover statement refs, no other owner. Integer/quotient maps owned by def-weil-pbc-integer-quotient-inclusions (covers Shrink.algEquiv both directions, all n). Mechanical theorem stmt_dep lem-pur-finite-tate-scalar-source-normalization: sfPurityFiniteScalarLine is .choose of its ∃! balancing (the theorem's conclusion; def-pur-finite-tate-scalar-source-data explicitly selects none) → genuine, PASS on that point. Math as previously accepted: finite/primary/all-L-all-level arrows pinned to smoothPurityMap at coefficientUnit via canonical comparisons; integral/field via datum fields + line detection; no extra hypotheses, universes bound, edge cases d=0, a=0, empty X, ramified L OK; sorry only; docstrings OK. No compile (no file changed; worker scompile clean 42.8s/36.5s). Advisory: balancing helper duplicates theorem-module VectorTraceScalar.balancing; second reading is a self-check."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J5",
-  "result": "pass",
-  "landing": "20261027T210056-L-1653543",
+  "reviewer": "C-54b3a",
+  "group": "M2",
+  "result": "fix",
+  "landing": "20261028T055716-L-798391",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.AdicSmoothDualizing.adic_and_rational_smooth_dualizing_complexes",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.integralTwist_mem"
-  ],
-  "sorry_after": [
-   "WeilConjectures.AdicSmoothDualizing.adic_and_rational_smooth_dualizing_complexes",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
-   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
-   "WeilConjectures.AdicSmoothDualizing.integralTwist_mem"
-  ]
+  "note": "independent cc review: delivered item + 2 extracted modules vs clone (moved blocks verbatim except recorded levelSetting abbrev, finiteUnitPlus proof, finitePowerComparison refactor proved defeq by unfold+rfl); main statement byte-identical; 4 direct importers compiled OK in sandbox against delivered set (Canonical 40.6 s vs baseline 46.4 s, OrientationDatum 35.7 s both)"
  }
 }

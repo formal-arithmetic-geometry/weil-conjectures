@@ -1,0 +1,175 @@
+{
+ "id": "def-pur-adic-finite-comparison-model",
+ "kind": "definition",
+ "title": "Normalized finite comparisons for the completed smooth dualizing model",
+ "statement": "Fix the finite purity setting P of [def-pur-conventions], a scheme T over Spec(P.field.k), and integers n,d >= 0. Set P_n to the identical setting with positive coefficient level n+1. Let L_d be the d-fold completed integral root line, L_0 the completed coefficient unit, and let B_(n,d) be the finite Tate root sheaf of [def-pur-finite-tate-site-comparison]. The finite projection of L_d is determined by sending each completed scalar times a pure root tensor to its quotient scalar times the corresponding finite root tensor. The site comparison from the ordinary-etale d-th Tate power to B_(n,d) is determined by the same local lifted root-tensor equations. Use the canonical constant-scalar realization equivalence of [def-weil-extension-by-zero] and its exact derived equivalence of [def-sp-finite-intrinsic-direct-adjunction]. The intrinsic realization of B_(n,d) as the finite coefficient twist is determined by identity on every scalar-unit section. Define finitePowerComparison from P_n.diagonalTwist(T,d), realized in intrinsic coefficients, to the intrinsic finite coefficient Tate twist in degree -2d as follows: apply exact site inverse image to the normalized ordered etale-power comparison [def-sf-etale-power-presentation], commute the shift and single-complex functor, apply the normalized site comparison, then the intrinsic realization equivalence, its exact single-shift comparison, and the shifted finite realization. The projection and finite realization unique-existence obligations are the existing unchanged statements; the site comparison unique-existence obligation is proved. This records the existing construction without changing its normalization or adding hypotheses.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-tate-site-comparison",
+  "def-sf-etale-power-presentation",
+  "def-weil-pbc-proetale-site",
+  "def-weil-extension-by-zero",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-pur-twist-sheaves",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation."
+ },
+ "proof": [
+  {
+   "text": "Define the completed positive Tate line by its existing sheaf tensor powers, including the coefficient unit in degree zero. Define pure root tensors recursively. Its finite projection is the unique map sending each completed scalar times a pure root tensor to the coefficient projection times the corresponding finite root tensor. Construct that map by scalar extension and the tensor universal property; local pure tensors generate, proving uniqueness. This is the unchanged remaining theorem existsUnique_lineProjection, not a new existence assumption.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-finite-tate-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation."
+   }
+  },
+  {
+   "text": "At level n+1, invertibility of the positive power of the prime implies invertibility of the prime. Apply finite Tate site descent for existence. Two normalized comparisons have equal homs by the local-root-tensor extensionality theorem, because their values on each lifted root tensor agree. Iso.ext proves uniqueness, including degree zero.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-pur-finite-tate-local-root-tensors-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation."
+   }
+  },
+  {
+   "text": "The intrinsic fixed-scalar realization of the finite root sheaf is fixed on every scalar-unit section by IsScalarUnitRealization. Extend identity on those generators by scalar linearity and sheafification. Both inverse composites are identities on the generators, giving existence and uniqueness. This is the unchanged remaining theorem existsUnique_finiteRealization.",
+   "uses": [
+    "def-pur-finite-tate-site-comparison",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation."
+   }
+  },
+  {
+   "text": "Map the uniquely normalized ordinary-etale tensor-power comparison through exact site inverse image. Follow the shift and single-complex comparison and the normalized root comparison. Then map through the intrinsic realization equivalence, commute its exact derived functor with the same single complex and shift, and apply the shifted finite realization. The named finiteSitePowerComparison and intrinsicExactSingleShiftIso are these literal factors. Their composite is finitePowerComparison. Degree zero uses the prescribed tensor and shift units. All constructions and their old signatures are preserved.",
+   "uses": [
+    "def-sf-etale-power-presentation",
+    "def-pur-finite-tate-site-comparison",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-tate-site-comparison",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-finite-tate-local-root-tensors-ext",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sf-etale-power-presentation"
+ ],
+ "proof_origin": {
+  "by": "M2 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "Integral coefficient-unit reduction and its normalized finite Tate comparisons; existing Lean construction extracted for compilation.",
+  "note": "Compile-time extraction of existing declarations after transparency and endpoint improvements. No new theorem statement or hole."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finitePowerComparison|IsScalarUnitRealization|sfIntrinsicRealizationUnit",
+   "results": "{\"t\": \"2026-10-28T02:56:44Z\", \"tool\": \"grep\", \"query\": \"finitePowerComparison|IsScalarUnitRealization|sfIntrinsicRealizationUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "No match for the normalized project-specific construction; retain the existing data and obligations. Generic mapIso composition is the Mathlib primitive used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Iso.trans",
+   "results": "{\"t\": \"2026-10-28T02:56:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapIso, CategoryTheory.Iso.trans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapIso_trans\", \"CategoryTheory.eqToIso_map_trans\", \"CategoryTheory.Monoidal.transportStruct_rightUnitor\", \"CategoryTheory.Monoidal.transportStruct_leftUnitor\", \"CategoryTheory.Monoidal.transportStruct_associator\", \"CategoryTheory.CartesianMonoidalCategory.preservesTerminalIso_comp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonIso_comp\", \"CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq\"], \"digest\": \"d0b2097f91b49171\"}",
+   "date": "2026-10-28",
+   "verdict": "No match for the normalized project-specific construction; retain the existing data and obligations. Generic mapIso composition is the Mathlib primitive used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of finite Tate powers from the etale site to intrinsic proetale coefficient modules, with shifted single complexes",
+   "results": "{\"t\": \"2026-10-28T02:56:46Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison of finite Tate powers from the etale site to intrinsic proetale coefficient modules, with shifted single complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"localCohomology.diagram\", \"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolid\", \"StandardEtalePair.homEquiv_symm_apply\", \"localCohomology\", \"StandardEtalePair.homEquiv_apply_coe\"], \"digest\": \"c5d13d6352061225\"}",
+   "date": "2026-10-28",
+   "verdict": "No match for the normalized project-specific construction; retain the existing data and obligations. Generic mapIso composition is the Mathlib primitive used."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicSmoothDualizingComplexes",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+   "via": [],
+   "place": "Finite normalized coefficient-unit model used by the integral reconstruction."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicSmoothDualizingFiniteComparison",
+  "file": "lean/Sheaf/Paper/AdicSmoothDualizingFiniteComparison.lean",
+  "declaration": "WeilConjectures.AdicSmoothDualizing.finitePowerComparison",
+  "declarations": [
+   "WeilConjectures.AdicSmoothDualizing.line",
+   "WeilConjectures.AdicSmoothDualizing.generator",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection",
+   "WeilConjectures.AdicSmoothDualizing.levelSetting",
+   "WeilConjectures.AdicSmoothDualizing.lineProjection",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison",
+   "WeilConjectures.AdicSmoothDualizing.rootComparison",
+   "WeilConjectures.AdicSmoothDualizing.IsScalarUnitRealization",
+   "WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization",
+   "WeilConjectures.AdicSmoothDualizing.finiteRealization",
+   "WeilConjectures.AdicSmoothDualizing.exactSingleShiftIso",
+   "WeilConjectures.AdicSmoothDualizing.intrinsicExactSingleShiftIso",
+   "WeilConjectures.AdicSmoothDualizing.finiteSitePowerComparison",
+   "WeilConjectures.AdicSmoothDualizing.finitePowerComparison"
+  ],
+  "statement": "def finitePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})\n    (aT : T ⟶ Spec (.of P.field.k)) (n d : ℕ) :\n    (sfIntrinsicDerivedEquivalence T\n        (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))).functor.obj\n        ((levelSetting P n).diagonalTwist T d) ≅\n      ((DerivedCategory.singleFunctor _ 0).obj\n        (finiteCoefficientTwist P.coefficients.l P.extension T n (d : ℤ)))⟦2 * (d : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28",
+  "note": "All old declarations have the same qualified names and signatures. Two helper definitions expose the existing literal comparison endpoints. The two remaining holes were moved from the corollary module, not added."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-54b3a",
+  "group": "M2",
+  "result": "fix",
+  "landing": "20261028T055716-L-798391",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-54b3a",
+  "group": "M2",
+  "result": "fix",
+  "landing": "20261028T055716-L-798391",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 extracted modules vs clone (moved blocks verbatim except recorded levelSetting abbrev, finiteUnitPlus proof, finitePowerComparison refactor proved defeq by unfold+rfl); main statement byte-identical; 4 direct importers compiled OK in sandbox against delivered set (Canonical 40.6 s vs baseline 46.4 s, OrientationDatum 35.7 s both)"
+ }
+}
