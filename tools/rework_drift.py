@@ -769,6 +769,29 @@ def _run_lean(rel: str, src_root: pathlib.Path, out_root: pathlib.Path) -> dict:
     cmd = ["nice", "-n", "19", *thp, str(pathlib.Path.home() / ".elan" / "bin" / "lean"), "-j1", *_lean_opts(),
            *([] if _upstream(rel) else ["-DautoImplicit=false"]), "-R", str(src_root),
            "-o", str(o) + ".olean", "-i", str(o) + ".ilean", str(src_root / rel)]
+    pubf = ROOT / "local" / "builds" / "published.json"
+
+    def pub_stamp():
+        try:
+            return pubf.stat().st_mtime_ns
+        except OSError:
+            return None
+    # a compile never runs while a green build is being published (the published tree is replaced then: every import
+    # of it went missing at 09:27 of 10-28), and one that failed while a publish happened runs again once
+    for attempt in (0, 1):
+        n = 0
+        while (ROOT / "local" / "PUBLISHING").exists() and n < 90:
+            time.sleep(2); n += 1
+        before = pub_stamp()
+        x = _lean_once(cmd, lp)
+        if x["rc"] == 0 or (pub_stamp() == before and not (ROOT / "local" / "PUBLISHING").exists()):
+            break
+    if x["rc"] == 0 and x["secs"] > ACCEPT:
+        x["out"] += f"\nNOT ACCEPTED: compiled in {x['secs']} s > {ACCEPT} s, the limit for one file\n"
+    return x
+
+
+def _lean_once(cmd: list, lp: str) -> dict:
     t0 = time.time()
     try:
         p = subprocess.run(cmd, cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=lp, LEAN_NUM_THREADS="1"),
@@ -778,10 +801,7 @@ def _run_lean(rel: str, src_root: pathlib.Path, out_root: pathlib.Path) -> dict:
         rc = 124
         out = (e.stdout.decode(errors="ignore") if isinstance(e.stdout, bytes) else (e.stdout or "")) + \
             f"\nNOT ACCEPTED: stopped after {RUN_LIMIT} s\n"
-    secs = round(time.time() - t0, 1)
-    if rc == 0 and secs > ACCEPT:
-        out += f"\nNOT ACCEPTED: compiled in {secs} s > {ACCEPT} s, the limit for one file\n"
-    return {"rc": rc, "out": out, "secs": secs}
+    return {"rc": rc, "out": out, "secs": round(time.time() - t0, 1)}
 
 
 def shared_plan(cands, rows: dict, g: dict, live: set, has_pub=None, lean_text=None) -> tuple[list[str], dict]:
