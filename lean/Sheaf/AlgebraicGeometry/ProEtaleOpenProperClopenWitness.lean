@@ -8,6 +8,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows
 
 /-!
 # Clopen geometric witness for an open proper square
@@ -23,7 +24,7 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
@@ -57,6 +58,38 @@ theorem exists_openProperClopenWitness
     [IsOpenImmersion i] [QuasiCompact i]
     (hcomm : k ≫ p = r ≫ i) :
     Nonempty (OpenProperClopenWitness p r k i) := by
-  sorry
+  let V := pullback p i
+  let b : V ⟶ B := pullback.fst p i
+  let s : V ⟶ E := pullback.snd p i
+  let t : C ⟶ V := pullback.lift k r hcomm
+  have ht : t ≫ b = k := by
+    dsimp only [t, b]
+    exact pullback.lift_fst _ _ _
+  have hts : t ≫ s = r := by
+    dsimp only [t, s]
+    exact pullback.lift_snd _ _ _
+  have hclopen :
+      IsOpenImmersion (ProEtale.StrictTower.squareLift k r p i hcomm) ∧
+        IsClosedImmersion (ProEtale.StrictTower.squareLift k r p i hcomm) :=
+    ProEtale.StrictTower.squareLift_clopen k r p i hcomm
+  let w : OpenProperClopenWitness p r k i := {
+    V := V
+    b := b
+    s := s
+    t := t
+    comm := by
+      dsimp only [b, s]
+      exact pullback.condition
+    bt := ht
+    st := hts
+    b_open := by
+      dsimp only [b]
+      infer_instance
+    s_proper := by
+      dsimp only [s]
+      infer_instance
+    t_open := hclopen.1
+    t_closed := hclopen.2 }
+  exact ⟨w⟩
 
 end AlgebraicGeometry.Scheme
