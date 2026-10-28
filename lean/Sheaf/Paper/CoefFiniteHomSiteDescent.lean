@@ -1,291 +1,32 @@
 module
 
-public import Sheaf.Paper.FiniteCoefficientSiteHomArrow
-public import Sheaf.Paper.EtaleFiniteCoefficientHomArrow
-public import Sheaf.Paper.FiniteCoefficientSiteScalarArrow
-public import Sheaf.Paper.FiniteCoefficientSiteChainTensor
-public import Sheaf.Paper.DerivedPullbackTensorHom
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.Paper.FiniteTorAmplitudeSites
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.NormalizedOriginScalarComparisons
-public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+public import Sheaf.Paper.CoefFiniteHomSiteDescentData
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Mathlib.Algebra.CharP.CharAndCard
+import Sheaf.Paper.CoefficientHomTensorSquare
+import Sheaf.Paper.FiniteHomSiteTensorCoherence
+import Sheaf.Paper.FiniteHomSiteHomInvertible
+import Sheaf.Paper.FiniteHomSiteEquationDescent
+import Sheaf.Paper.FiniteHomDomainCalculus
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
 
-/-! # Finite Hom scalar/site square and constructible descent
+/-! # Finite Hom site descent and coherence
 
-Source: blueprint `thm-coef-finite-hom`, final paragraph and final site-comparison
-sentence, expanded in the seven proof steps of lem-coef-finite-hom-site-descent
-(blueprint: lem-coef-finite-hom-site-descent).
-
-The indices n,m,r mean the positive exponents n+1,m+1,r+1. The canonical
-scalar/site isomorphism is the inverse of the existing adjunction mate, and the
-Hom comparisons are the existing evaluation transposes. No scalar-Hom
-invertibility is asserted. Object and morphism universes of the small site remain distinct.
+Source: blueprint `lem-coef-finite-hom-site-descent`. The predicates and canonical
+comparisons are publicly re-exported from `CoefFiniteHomSiteDescentData`.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
-universe u a b c d va vb vc vd
+universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
-
-/-- Strong monoidality for a specified tensor comparison, including unit and associativity.
-The unit is determined by this tensorator and the two unit axioms, so it is not extra
-unconstrained comparison data. Source: blueprint final paragraph; Stacks 07A4
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomStrong
-    {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) :=
-  letI := SA.monoidal
-  letI := SB.monoidal
-  {s : F.CoreMonoidal // ∀ P Q : A, s.μIso P Q = (μ.app (P, Q)).symm}
-
-/-- The monoidal square equations for the fixed tensorators and their coherent units.
-Source: blueprint final site-comparison sentence; Stacks 07A4
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomMonoidalSquare
-    {A : Type a} {B : Type b} {C : Type c} {D : Type d}
-    [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
-    (F : A ⥤ B) (G : C ⥤ D) (U : A ⥤ C) (V : B ⥤ D)
-    (μF : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)
-    (μG : SC.tensor ⋙ G ≅ G.prod G ⋙ SD.tensor)
-    (μU : SA.tensor ⋙ U ≅ U.prod U ⋙ SC.tensor)
-    (μV : SB.tensor ⋙ V ≅ V.prod V ⋙ SD.tensor)
-    (h : F ⋙ V ≅ U ⋙ G) : Prop :=
-  ∃ sF : CoefFiniteHomStrong SA SB F μF,
-    ∃ sG : CoefFiniteHomStrong SC SD G μG,
-      ∃ sU : CoefFiniteHomStrong SA SC U μU,
-        ∃ sV : CoefFiniteHomStrong SB SD V μV,
-          (∀ K M : A,
-            h.hom.app (SA.tensor.obj (K, M)) ≫ G.map (μU.hom.app (K, M)) ≫
-                μG.hom.app (U.obj K, U.obj M) =
-              V.map (μF.hom.app (K, M)) ≫ μV.hom.app (F.obj K, F.obj M) ≫
-                SD.tensor.map (Prod.mkHom (h.hom.app K) (h.hom.app M))) ∧
-          h.hom.app SA.monoidal.tensorUnit ≫
-              G.map (@Functor.CoreMonoidal.εIso _ _ SA.monoidal _ _ SC.monoidal U sU.val).inv ≫
-              (@Functor.CoreMonoidal.εIso _ _ SC.monoidal _ _ SD.monoidal G sG.val).inv =
-            V.map (@Functor.CoreMonoidal.εIso _ _ SA.monoidal _ _ SB.monoidal F sF.val).inv ≫
-              (@Functor.CoreMonoidal.εIso _ _ SB.monoidal _ _ SD.monoidal V sV.val).inv
-
-/-- Naturality, evaluation/transpose and internal composition at finite-Tor pairs.
-This is the restriction of the existing coefficient evaluation equations to the stated
-constructible domain. Source: blueprint final paragraph, equations transported by the square
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomLawsOn
-    {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)
-    (P : ObjectProperty A) : Prop :=
-  (∀ K M K' M' : A, P K → P M → P K' → P M' →
-    ∀ (f : K' ⟶ K) (g : M ⟶ M'),
-      F.map (HA.map (Prod.mkHom f.op g)) ≫ coefficientBaseChangeHom SA SB F μ K' M' =
-        coefficientBaseChangeHom SA SB F μ K M ≫
-          HB.map (Prod.mkHom (F.map f).op (F.map g))) ∧
-  (∀ K M : A, P K → P M → ∀ (T : A) (f : SA.tensor.obj (T, K) ⟶ M),
-    F.map (SA.transpose T K M f) ≫ coefficientBaseChangeHom SA SB F μ K M =
-      SB.transpose (F.obj T) (F.obj K) (F.obj M) (μ.inv.app (T, K) ≫ F.map f)) ∧
-  (∀ K L M : A, P K → P L → P M →
-    F.map (SA.composition K L M) ≫ coefficientBaseChangeHom SA SB F μ K M =
-      μ.hom.app (HA.obj (op L, M), HA.obj (op K, L)) ≫
-        SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ L M)
-          (coefficientBaseChangeHom SA SB F μ K L)) ≫
-        SB.composition (F.obj K) (F.obj L) (F.obj M))
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
-  [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
-
-/-- The specified coefficient/site isomorphism h, inverse to the scalar-restriction mate.
-Source: blueprint final site-comparison sentence
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def coefFiniteHomSiteIso {n m : ℕ} (h : m ≤ n) :
-    finiteHomEtaleReduction l E X h ⋙ finiteHomNu l E X m ≅
-      finiteHomNu l E X n ⋙ coefficientFiniteQuotientDerived l E X h :=
-  (asIso (finiteHomSiteBeta l E X h)).symm
-
-/-- Bounded constructibility in the existing positive-level etale category.
-Source: blueprint constructible descent clause
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def coefFiniteHomEtaleConstructible (n : ℕ) : ObjectProperty (finiteHomEtale l E X n) :=
-  letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
-    Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-  Etale.DerivedCategory.isBoundedConstructible
-    (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X
-
-/-- Descent, reflection for every bounded constructible witness, and interval preservation.
-Source: blueprint site-comparison sentence; proof step 1
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomDescent (n : ℕ) : Prop :=
-  PreservesFiniteLimits (finiteHomNuOrdinary l E X n) ∧
-  PreservesFiniteColimits (finiteHomNuOrdinary l E X n) ∧
-  (∀ P : normalizedDVRDerived l E X n,
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X P →
-    ∃ P' : finiteHomEtale l E X n,
-      finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X P' ∧
-      Nonempty ((finiteHomNu l E X n).obj P' ≅ P)) ∧
-  (∀ (P : normalizedDVRDerived l E X n) (P' : finiteHomEtale l E X n),
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X P →
-    coefFiniteHomEtaleConstructible l E X n P' →
-    Nonempty ((finiteHomNu l E X n).obj P' ≅ P) → ∀ a b : ℤ, a ≤ b →
-      (Etale.DerivedCategory.hasTorAmplitudeIn
-        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X a b P' ↔
-        HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) P a b)) ∧
-  (∀ P' : finiteHomEtale l E X n,
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X P' →
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X
-      ((finiteHomNu l E X n).obj P') ∧
-    ∀ a b : ℤ, a ≤ b → Etale.DerivedCategory.hasTorAmplitudeIn
-        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X a b P' →
-      HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
-        ((finiteHomNu l E X n).obj P') a b)
-
-/-- The actual canonical square, with the inverse h in the contravariant Hom input.
-Source: blueprint final site-comparison sentence; proof step 6
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomSquare {n m : ℕ} (h : m ≤ n) : Prop :=
-  ∀ K M : finiteHomEtale l E X n,
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K →
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X M →
-    IsIso (finiteHomSiteHom l E X n K M) ∧
-    IsIso (finiteHomSiteHom l E X m
-      ((finiteHomEtaleReduction l E X h).obj K)
-      ((finiteHomEtaleReduction l E X h).obj M)) ∧
-    (coefFiniteHomSiteIso l E X h).hom.app
-        ((finiteHomEtaleInternalHom l E X n).obj (op K, M)) ≫
-      (coefficientFiniteQuotientDerived l E X h).map (finiteHomSiteHom l E X n K M) ≫
-      proEtaleFiniteHomCanonical l E X h
-        ((finiteHomNu l E X n).obj K) ((finiteHomNu l E X n).obj M) =
-    (finiteHomNu l E X m).map (etaleFiniteHomCanonical l E X h K M) ≫
-      finiteHomSiteHom l E X m
-        ((finiteHomEtaleReduction l E X h).obj K)
-        ((finiteHomEtaleReduction l E X h).obj M) ≫
-      (coefficientFiniteInternalHom l E X m).map
-        (Prod.mkHom ((coefFiniteHomSiteIso l E X h).inv.app K).op
-          ((coefFiniteHomSiteIso l E X h).hom.app M))
-
-/-- Coherence for the actual scalar/site isomorphisms under successive quotients.
-Source: blueprint final paragraph; proof step 4
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomQuotientCoherence {n m : ℕ} (h : m ≤ n) : Prop :=
-  ∀ (r : ℕ) (k : r ≤ m) (T : finiteHomEtale l E X n),
-    (finiteHomNu l E X r).map ((finiteHomEtaleAssoc l E X h k).hom.app T) ≫
-      (coefFiniteHomSiteIso l E X (k.trans h)).hom.app T =
-    (coefFiniteHomSiteIso l E X k).hom.app ((finiteHomEtaleReduction l E X h).obj T) ≫
-      (coefficientFiniteQuotientDerived l E X k).map
-        ((coefFiniteHomSiteIso l E X h).hom.app T) ≫
-      (finiteHomIntrinsicAssoc l E X h k).hom.app ((finiteHomNu l E X n).obj T)
-
-/-- The fixed intrinsic scalar tensorator, projected from the published quotient calculus.
-Source: blueprint scalar tensor convention; Stacks 07A4
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def coefFiniteHomProTensor {n m : ℕ} (h : m ≤ n) :=
-  (coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.tensor h
-
-/-- Symmetry of a specified tensor comparison, using the supplied canonical symmetries.
-Source: blueprint monoidal clause; Stacks 07A4
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomSymmetry
-    {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (βA : @SymmetricCategory A _ SA.monoidal)
-    (βB : @SymmetricCategory B _ SB.monoidal)
-    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) : Prop :=
-  ∀ P Q : A,
-    F.map (βA.toBraidedCategory.braiding P Q).hom ≫ μ.hom.app (Q, P) =
-      μ.hom.app (P, Q) ≫ (βB.toBraidedCategory.braiding (F.obj P) (F.obj Q)).hom
-
-/-- The canonical identity-quotient scalar associator, adjoint to identity restriction.
-Source: blueprint identity quotient convention
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def coefFiniteHomProUnit (n : ℕ) :
-    coefficientFiniteQuotientDerived l E X (Nat.le_refl n) ≅ 𝟭 _ :=
-  Adjunction.leftAdjointIdIso
-    ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction
-      (Nat.le_refl n)) (normalizedDVRResUnit l E X n)
-
-/-- Transport of successive quotient and identity equations from the etale transposes
-to the intrinsic transposes, on finite-Tor constructible pairs.
-Source: blueprint final paragraph; proof step 7
-(blueprint: lem-coef-finite-hom-site-descent). -/
-def CoefFiniteHomSuccessive {n m : ℕ} (h : m ≤ n) : Prop :=
-  ((∀ (r : ℕ) (k : r ≤ m) (K M : finiteHomEtale l E X n),
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K →
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X M →
-    (finiteHomEtaleAssoc l E X h k).hom.app
-        ((finiteHomEtaleInternalHom l E X n).obj (op K, M)) ≫
-      etaleFiniteHomCanonical l E X (k.trans h) K M =
-    (finiteHomEtaleReduction l E X k).map
-        (etaleFiniteHomCanonical l E X h K M) ≫
-      etaleFiniteHomCanonical l E X k
-        ((finiteHomEtaleReduction l E X h).obj K)
-        ((finiteHomEtaleReduction l E X h).obj M) ≫
-      (finiteHomEtaleInternalHom l E X r).map
-        (Prod.mkHom ((finiteHomEtaleAssoc l E X h k).inv.app K).op
-          ((finiteHomEtaleAssoc l E X h k).hom.app M))) ∧
-  (∀ K M : finiteHomEtale l E X n,
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K →
-    finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X M →
-    etaleFiniteHomCanonical l E X (Nat.le_refl n) K M ≫
-      (finiteHomEtaleInternalHom l E X n).map
-        (Prod.mkHom
-          ((ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology
-            (finiteHomQuotient l E (Nat.le_refl n))
-            (congrArg RingHom.ulift (Ideal.Quotient.factor_eq
-              (S := Padic.coefficientExtensionIdeal l E (n + 1))))).inv.app K).op
-          ((ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology
-            (finiteHomQuotient l E (Nat.le_refl n))
-            (congrArg RingHom.ulift (Ideal.Quotient.factor_eq
-              (S := Padic.coefficientExtensionIdeal l E (n + 1))))).hom.app M)) =
-      (ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology
-        (finiteHomQuotient l E (Nat.le_refl n))
-        (congrArg RingHom.ulift (Ideal.Quotient.factor_eq
-          (S := Padic.coefficientExtensionIdeal l E (n + 1))))).hom.app
-        ((finiteHomEtaleInternalHom l E X n).obj (op K, M)))) →
-  (∀ (r : ℕ) (k : r ≤ m) (K M : normalizedDVRDerived l E X n),
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X K →
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X M →
-    (finiteHomIntrinsicAssoc l E X h k).hom.app
-        ((coefficientFiniteInternalHom l E X n).obj (op K, M)) ≫
-      proEtaleFiniteHomCanonical l E X (k.trans h) K M =
-    (coefficientFiniteQuotientDerived l E X k).map
-        (proEtaleFiniteHomCanonical l E X h K M) ≫
-      proEtaleFiniteHomCanonical l E X k
-        ((coefficientFiniteQuotientDerived l E X h).obj K)
-        ((coefficientFiniteQuotientDerived l E X h).obj M) ≫
-      (coefficientFiniteInternalHom l E X r).map
-        (Prod.mkHom ((finiteHomIntrinsicAssoc l E X h k).inv.app K).op
-          ((finiteHomIntrinsicAssoc l E X h k).hom.app M))) ∧
-  (∀ K M : normalizedDVRDerived l E X n,
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X K →
-    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X M →
-    proEtaleFiniteHomCanonical l E X (Nat.le_refl n) K M ≫
-      (coefficientFiniteInternalHom l E X n).map
-        (Prod.mkHom ((coefFiniteHomProUnit l E X n).inv.app K).op
-          ((coefFiniteHomProUnit l E X n).hom.app M)) =
-      (coefFiniteHomProUnit l E X n).hom.app
-        ((coefficientFiniteInternalHom l E X n).obj (op K, M)))
 
 private theorem finiteHomSupportInterval (Z : ℤ → Prop) (hf : Set.Finite {q | ¬ Z q}) :
     ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, (q < a ∨ b < q) → Z q := by
@@ -390,6 +131,29 @@ theorem coefFiniteHomSiteDescent_descent
     have hp := hpres P' hP'.1 a b hab ht
     exact ⟨⟨hp.1, a, b, hp.2⟩, fun a b hab ht ↦ (hpres P' hP'.1 a b hab ht).2⟩
 
+private theorem finiteHomEtaleSymmetric (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) (n : ℕ) :
+    ∃ β : @SymmetricCategory (finiteHomEtale l E X n) _
+        (finiteHomEtaleClosed l E X n).monoidal,
+      ∀ P Q : finiteHomEtale l E X n,
+        HEq (β.toBraidedCategory.braiding P Q)
+          (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+            (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) P Q) := by
+  let R := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))
+  have hc : finiteHomEtaleClosed l E X n =
+      finiteHomEtaleClosedGeneral (ModuleCat.{u + 1} R) X :=
+    eq_of_heq ((finiteHomEtaleData_existsUnique l E X).choose_spec.1.closed n)
+  have hm : (finiteHomEtaleClosed l E X n).monoidal =
+      (inferInstance : MonoidalCategory (finiteHomEtale l E X n)) := by
+    rw [hc]
+    exact (finiteHomEtaleClosed_existsUnique (ModuleCat.{u + 1} R) X).choose_spec.1.1
+  rw [hm]
+  refine ⟨DerivedCategory.symmetricCategory'
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)), ?_⟩
+  intro P Q
+  rfl
+
 /-- Monoidal, symmetry, quotient, square, and transport component.
 Source: blueprint `lem-coef-finite-hom-site-descent`, proof steps 2--7.
 (blueprint: lem-coef-finite-hom-site-descent-core-coherence).
@@ -465,7 +229,40 @@ theorem coefFiniteHomSiteDescent_coherence
               (coefficientFiniteQuotientDerived l E X h) (coefFiniteHomProTensor l E X h)
               (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X)) ∧
           CoefFiniteHomSuccessive l E X h := by
-  sorry
+  classical
+  choose βet hβet using fun n ↦ finiteHomEtaleSymmetric l E X n
+  obtain ⟨βpro, hβpro, hν, htensor⟩ :=
+    finiteHomSiteTensorCoherence D l _hl E X βet hβet
+  have hmono (n m : ℕ) (h : m ≤ n) := (htensor n m h).1
+  have hquot (n m : ℕ) (h : m ≤ n) := (htensor n m h).2.2.2
+  have hred {n m : ℕ} (h : m ≤ n) (K : finiteHomEtale l E X n)
+      (hK : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K) :
+      finiteTorConstructibleEtale l E (m + 1) (Nat.succ_pos m) X
+        ((finiteHomEtaleReduction l E X h).obj K) := by
+    obtain ⟨a, b, hab, hTor⟩ := hK.2
+    have hmodel := finiteHomDomain_flatModel D l _hl E X h a b hab K hK.1 hTor
+    exact ⟨hmodel.2.2.1, a, b, hab, hmodel.2.2.2⟩
+  have hsquare (n m : ℕ) (h : m ≤ n) : CoefFiniteHomSquare l E X h := by
+    intro K M hK hM
+    have hKr := hred h K hK
+    have hMr := hred h M hM
+    refine ⟨finiteHomSiteHomInvertible D l _hl E X n K M hK hM.1,
+      finiteHomSiteHomInvertible D l _hl E X m _ _ hKr hMr.1, ?_⟩
+    obtain ⟨sF, sG, sU, sV, ht, _⟩ := hmono n m h
+    exact coefficientHomTensorSquare
+      (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)
+      (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)
+      (finiteHomEtaleReduction l E X h) (coefficientFiniteQuotientDerived l E X h)
+      (finiteHomNu l E X n) (finiteHomNu l E X m)
+      (finiteHomEtaleTensor l E X h) (coefFiniteHomProTensor l E X h)
+      (finiteHomNuTensor l E X n) (finiteHomNuTensor l E X m)
+      (coefFiniteHomSiteIso l E X h) ht K M
+  have hlaws := finiteHomSiteEquationDescent D l _hl E X
+    (coefFiniteHomSiteDescent_descent D l _hl E X) hsquare hmono hquot
+  refine ⟨βet, βpro, hβet, hβpro, hν, ?_⟩
+  intro n m h
+  exact ⟨hmono n m h, (htensor n m h).2.1, (htensor n m h).2.2.1,
+    hquot n m h, hsquare n m h, (hlaws n m h).1, (hlaws n m h).2⟩
 
 /-- Finite-Tor constructible descent and the canonical scalar/site Hom square.
 Source: blueprint thm-coef-finite-hom, final paragraph and final sentence

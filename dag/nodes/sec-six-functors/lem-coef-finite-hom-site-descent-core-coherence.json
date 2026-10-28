@@ -24,45 +24,58 @@
   "def-sf-finite-coefficient-site-scalar-arrow",
   "def-sf-finite-coefficient-site-chain-tensor",
   "def-sf-finite-coefficient-site-hom-arrow",
-  "def-weil-pbc-normalized-origin-scalar-comparisons"
+  "def-weil-pbc-normalized-origin-scalar-comparisons",
+  "def-coef-finite-hom-site-descent-data"
  ],
  "proof": [
   {
-   "text": "The component is the corresponding group of steps from the source proof; its proof is left as a named stage-3 theorem for independent completion.",
+   "text": "The etale closed normalization identifies the recorded monoidal structure with the published derived tensor structure. Use its derived symmetric structure, whose components are exactly finiteHomKoszulIso.",
    "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "lem-pur-algebra-diagram-pullback-extension-coherence",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the fixed tensor coherence component to these proved Koszul symmetries.",
+   "uses": [
+    "lem-coef-finite-hom-site-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing flat-model theorem preserves finite Tor constructibility under each reduction. Apply the site Hom normalization theorem at the original and reduced inputs.",
+   "uses": [
     "lem-coef-finite-hom-domain-calculus",
-    "lem-weil-finite-duality-site-comparison",
-    "lem-coef-monoidal-square-hom-transport"
+    "lem-coef-finite-hom-site-hom-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the tensor equation from the monoidal square. Apply the proved right-closed tensor-square theorem to the four fixed functors, giving exactly CoefFiniteHomSquare. No scalar-Hom invertibility is needed.",
+   "uses": [
+    "lem-coef-right-closed-tensor-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply equation descent with the proved constructible descent component, the constructed Hom squares, and the supplied monoidal and quotient coherence. Assemble these statements with the symmetries.",
+   "uses": [
+    "lem-coef-finite-hom-site-descent-core-descent",
+    "lem-coef-finite-hom-site-equation-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-pur-algebra-diagram-pullback-extension-coherence",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-coef-finite-hom-site-tensor-coherence",
   "lem-coef-finite-hom-domain-calculus",
-  "lem-weil-finite-duality-site-comparison",
-  "lem-coef-monoidal-square-hom-transport"
+  "lem-coef-finite-hom-site-hom-invertible",
+  "lem-coef-right-closed-tensor-square",
+  "lem-coef-finite-hom-site-descent-core-descent",
+  "lem-coef-finite-hom-site-equation-descent"
  ],
- "proof_origin": "Source proof steps grouped into a strictly smaller component of the target argument.",
+ "proof_origin": "F1: etale symmetry proved from normalized closed data; right-closed Hom square proved categorically; finite quotient domain reduction from existing flat-model theorem. Three strictly smaller geometric/transport obligations retain source steps 2--5 and 7.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -180,20 +193,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
-  "result": "pass",
-  "landing": "20261027T233827-L-4120897",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.coefFiniteHomSiteDescent_coherence",
-   "WeilConjectures.coefFiniteHomSiteDescent_descent"
-  ],
-  "sorry_after": [
-   "WeilConjectures.coefFiniteHomSiteDescent_coherence"
-  ]
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
  }
 }

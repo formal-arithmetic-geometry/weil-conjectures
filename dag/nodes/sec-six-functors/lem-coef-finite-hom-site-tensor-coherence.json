@@ -1,0 +1,144 @@
+{
+ "id": "lem-coef-finite-hom-site-tensor-coherence",
+ "kind": "statement",
+ "title": "Fixed finite coefficient site tensor coherence",
+ "statement": "theorem finiteHomSiteTensorCoherence\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    (βet : ∀ n : ℕ, @SymmetricCategory (finiteHomEtale l E X n) _\n      (finiteHomEtaleClosed l E X n).monoidal)\n    (hβet : ∀ (n : ℕ) (P Q : finiteHomEtale l E X n),\n      HEq ((βet n).toBraidedCategory.braiding P Q)\n        (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) P Q)) :\n      ∃ βpro : ∀ n : ℕ, @SymmetricCategory (normalizedDVRDerived l E X n) _\n          (finiteIntrinsicClosed l E X n).monoidal,\n        (∀ n : ℕ, Nonempty (RingedDerivedTensorCoherence\n          (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n          (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n) (βpro n))) ∧\n        (∀ n : ℕ, CoefFiniteHomSymmetry\n          (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)\n          (βet n) (βpro n) (finiteHomNu l E X n) (finiteHomNuTensor l E X n)) ∧\n        ∀ (n m : ℕ) (h : m ≤ n),\n          CoefFiniteHomMonoidalSquare\n            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)\n            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)\n            (finiteHomEtaleReduction l E X h) (coefficientFiniteQuotientDerived l E X h)\n            (finiteHomNu l E X n) (finiteHomNu l E X m)\n            (finiteHomEtaleTensor l E X h) (coefFiniteHomProTensor l E X h)\n            (finiteHomNuTensor l E X n) (finiteHomNuTensor l E X m)\n            (coefFiniteHomSiteIso l E X h) ∧\n          CoefFiniteHomSymmetry\n            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)\n            (βet n) (βet m) (finiteHomEtaleReduction l E X h) (finiteHomEtaleTensor l E X h) ∧\n          CoefFiniteHomSymmetry\n            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)\n            (βpro n) (βpro m) (coefficientFiniteQuotientDerived l E X h)\n            (coefFiniteHomProTensor l E X h) ∧\n          CoefFiniteHomQuotientCoherence l E X h",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Parent proof steps 2--4: scalar/site mate normalization, symmetric tensor structures and quotient coherence."
+ },
+ "stmt_deps": [
+  "def-coef-finite-hom-site-descent-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-sf-finite-rational-derived-operations",
+  "def-coef-normalized-dvr-tower",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-sf-finite-coefficient-site-scalar-arrow",
+  "def-sf-finite-coefficient-site-hom-arrow",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use flat-term K-flat resolutions and preservation under ringed pullback. Apply terminal algebra-diagram pullback/extension coherence to compute the inverse scalar/site comparison, identifying it with the fixed restriction mate by its unit equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-algebra-diagram-pullback-extension-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the intrinsic closed symmetric monoidal structure and the prescribed etale Koszul symmetry on the fixed tensor models. Canonical pullback tensor comparisons and their unit normalization identify the fixed tensorators. Cochain coherence and finite coefficient domain monoidality supply associator, unit, and symmetry equations.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-coef-finite-hom-domain-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the tensor square and its unit square on representatives. Successive quotients multiply the same scalar coefficients along either route. Localize and identify the fixed adjunction mates and tensorators by their normalizations.",
+   "uses": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pur-algebra-diagram-pullback-extension-coherence",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-coef-finite-hom-domain-calculus"
+ ],
+ "proof_origin": "Source final evaluation/coherence argument, expanded in the parent node; right-closed categorical calculation written by F1.",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*(comp|curry)|map_pre_app_comp_ihomComparison",
+   "results": "0 hits: . No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal functor preserves internal Hom evaluation comparison and composition through monoidal natural isomorphism",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.ihom.ev_naturality. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal square of derived scalar extension and etale proetale comparison transports evaluation defined internal Hom comparisons and successive coefficient coherence",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, CategoryTheory.expComparison, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app, CategoryTheory.coev_expComparison, CategoryTheory.ExactPairing.evaluation_coevaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefFiniteHomSiteDescent",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-site-descent",
+   "place": "Parent proof steps 2--4: scalar/site mate normalization, symmetric tensor structures and quotient coherence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomSiteTensorCoherence",
+  "file": "lean/Sheaf/Paper/FiniteHomSiteTensorCoherence.lean",
+  "declaration": "WeilConjectures.finiteHomSiteTensorCoherence",
+  "statement": "theorem finiteHomSiteTensorCoherence\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    (βet : ∀ n : ℕ, @SymmetricCategory (finiteHomEtale l E X n) _\n      (finiteHomEtaleClosed l E X n).monoidal)\n    (hβet : ∀ (n : ℕ) (P Q : finiteHomEtale l E X n),\n      HEq ((βet n).toBraidedCategory.braiding P Q)\n        (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) P Q)) :\n      ∃ βpro : ∀ n : ℕ, @SymmetricCategory (normalizedDVRDerived l E X n) _\n          (finiteIntrinsicClosed l E X n).monoidal,\n        (∀ n : ℕ, Nonempty (RingedDerivedTensorCoherence\n          (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n          (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n) (βpro n))) ∧\n        (∀ n : ℕ, CoefFiniteHomSymmetry\n          (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)\n          (βet n) (βpro n) (finiteHomNu l E X n) (finiteHomNuTensor l E X n)) ∧\n        ∀ (n m : ℕ) (h : m ≤ n),\n          CoefFiniteHomMonoidalSquare\n            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)\n            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)\n            (finiteHomEtaleReduction l E X h) (coefficientFiniteQuotientDerived l E X h)\n            (finiteHomNu l E X n) (finiteHomNu l E X m)\n            (finiteHomEtaleTensor l E X h) (coefFiniteHomProTensor l E X h)\n            (finiteHomNuTensor l E X n) (finiteHomNuTensor l E X m)\n            (coefFiniteHomSiteIso l E X h) ∧\n          CoefFiniteHomSymmetry\n            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)\n            (βet n) (βet m) (finiteHomEtaleReduction l E X h) (finiteHomEtaleTensor l E X h) ∧\n          CoefFiniteHomSymmetry\n            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)\n            (βpro n) (βpro m) (coefficientFiniteQuotientDerived l E X h)\n            (coefFiniteHomProTensor l E X h) ∧\n          CoefFiniteHomQuotientCoherence l E X h",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
+ }
+}

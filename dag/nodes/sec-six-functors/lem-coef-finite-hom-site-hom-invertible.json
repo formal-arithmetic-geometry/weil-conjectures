@@ -1,0 +1,127 @@
+{
+ "id": "lem-coef-finite-hom-site-hom-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the intrinsic evaluation-defined site Hom map",
+ "statement": "theorem finiteHomSiteHomInvertible\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] :\n    ∀ (n : ℕ) (K M : finiteHomEtale l E X n),\n      finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K →\n      coefFiniteHomEtaleConstructible l E X n M →\n      IsIso (finiteHomSiteHom l E X n K M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Parent proof step 5: finite-duality comparison and normalization to the intrinsic module category."
+ },
+ "stmt_deps": [
+  "def-coef-finite-hom-site-descent-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-sf-finite-coefficient-site-hom-arrow",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite duality site comparison with the finite-Tor constructible first input and bounded constructible second input.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along the existing intrinsic realization/restriction equivalence. Normalize both evaluations and the site tensorator on flat-term K-flat representatives; their transposes agree, identifying the transported map with finiteHomSiteHom.",
+   "uses": [
+    "def-sf-finite-coefficient-site-hom-arrow",
+    "def-sf-finite-coefficient-site-scalar-arrow",
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison transported across an equivalence is invertible, so its identified intrinsic map is invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-duality-site-comparison",
+  "def-sf-finite-coefficient-site-hom-arrow",
+  "def-sf-finite-coefficient-site-scalar-arrow",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof_origin": "Source final evaluation/coherence argument, expanded in the parent node; right-closed categorical calculation written by F1.",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*(comp|curry)|map_pre_app_comp_ihomComparison",
+   "results": "0 hits: . No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal functor preserves internal Hom evaluation comparison and composition through monoidal natural isomorphism",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.ihom.ev_naturality. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal square of derived scalar extension and etale proetale comparison transports evaluation defined internal Hom comparisons and successive coefficient coherence",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, CategoryTheory.expComparison, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app, CategoryTheory.coev_expComparison, CategoryTheory.ExactPairing.evaluation_coevaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefFiniteHomSiteDescent",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-site-descent",
+   "place": "Parent proof step 5: finite-duality comparison and normalization to the intrinsic module category.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomSiteHomInvertible",
+  "file": "lean/Sheaf/Paper/FiniteHomSiteHomInvertible.lean",
+  "declaration": "WeilConjectures.finiteHomSiteHomInvertible",
+  "statement": "theorem finiteHomSiteHomInvertible\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] :\n    ∀ (n : ℕ) (K M : finiteHomEtale l E X n),\n      finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K →\n      coefFiniteHomEtaleConstructible l E X n M →\n      IsIso (finiteHomSiteHom l E X n K M)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
+ }
+}

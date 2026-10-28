@@ -1,0 +1,124 @@
+{
+ "id": "lem-coef-right-closed-tensor-square",
+ "kind": "statement",
+ "title": "Evaluation comparison for specified right closed tensor squares",
+ "statement": "theorem coefficientHomTensorSquare\n    {A : Type a} {B : Type b} {C : Type c} {D : Type d}\n    [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]\n    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}\n    {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}\n    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)\n    (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)\n    (F : A ⥤ B) (G : C ⥤ D) (U : A ⥤ C) (V : B ⥤ D)\n    (μF : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)\n    (μG : SC.tensor ⋙ G ≅ G.prod G ⋙ SD.tensor)\n    (μU : SA.tensor ⋙ U ≅ U.prod U ⋙ SC.tensor)\n    (μV : SB.tensor ⋙ V ≅ V.prod V ⋙ SD.tensor)\n    (h : F ⋙ V ≅ U ⋙ G)\n    (ht : ∀ K M : A,\n      h.hom.app (SA.tensor.obj (K, M)) ≫ G.map (μU.hom.app (K, M)) ≫\n          μG.hom.app (U.obj K, U.obj M) =\n        V.map (μF.hom.app (K, M)) ≫ μV.hom.app (F.obj K, F.obj M) ≫\n          SD.tensor.map (Prod.mkHom (h.hom.app K) (h.hom.app M)))\n    (K M : A) :\n    h.hom.app (HA.obj (op K, M)) ≫\n        G.map (coefficientBaseChangeHom SA SC U μU K M) ≫\n        coefficientBaseChangeHom SC SD G μG (U.obj K) (U.obj M) =\n      V.map (coefficientBaseChangeHom SA SB F μF K M) ≫\n        coefficientBaseChangeHom SB SD V μV (F.obj K) (F.obj M) ≫\n        HD.map (Prod.mkHom (h.inv.app K).op (h.hom.app M))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Source final paragraph: associativity and uniqueness of transpose; parent proof step 6."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-coefficient-base-change-hom"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the composite comparison using the specified target adjunction. Naturality of the inverse tensorator and the counit gives the composite-evaluation formula.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-coefficient-base-change-hom",
+    "lem-coef-finite-hom-domain-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the square and precompose by tensor of identity with h_K. Naturality of evaluation in its Hom input cancels h_K with its inverse.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-coef-finite-hom-domain-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the tensor-square equation by its four inverse tensorators. Naturality of h at evaluation identifies the remaining maps. Injectivity of the adjunction gives the required equality.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-coefficient-base-change-hom",
+  "lem-coef-finite-hom-domain-calculus"
+ ],
+ "proof_origin": "Source final evaluation/coherence argument, expanded in the parent node; right-closed categorical calculation written by F1.",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*(comp|curry)|map_pre_app_comp_ihomComparison",
+   "results": "0 hits: . No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal functor preserves internal Hom evaluation comparison and composition through monoidal natural isomorphism",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.ihom.ev_naturality. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal square of derived scalar extension and etale proetale comparison transports evaluation defined internal Hom comparisons and successive coefficient coherence",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, CategoryTheory.expComparison, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app, CategoryTheory.coev_expComparison, CategoryTheory.ExactPairing.evaluation_coevaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt. No match for the specified right adjunction maps and finite coefficient site predicates.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefFiniteHomSiteDescent",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-site-descent",
+   "place": "Source final paragraph: associativity and uniqueness of transpose; parent proof step 6.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHomTensorSquare",
+  "file": "lean/Sheaf/Paper/CoefficientHomTensorSquare.lean",
+  "declaration": "WeilConjectures.coefficientHomTensorSquare",
+  "statement": "theorem coefficientHomTensorSquare\n    {A : Type a} {B : Type b} {C : Type c} {D : Type d}\n    [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]\n    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}\n    {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}\n    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)\n    (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)\n    (F : A ⥤ B) (G : C ⥤ D) (U : A ⥤ C) (V : B ⥤ D)\n    (μF : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)\n    (μG : SC.tensor ⋙ G ≅ G.prod G ⋙ SD.tensor)\n    (μU : SA.tensor ⋙ U ≅ U.prod U ⋙ SC.tensor)\n    (μV : SB.tensor ⋙ V ≅ V.prod V ⋙ SD.tensor)\n    (h : F ⋙ V ≅ U ⋙ G)\n    (ht : ∀ K M : A,\n      h.hom.app (SA.tensor.obj (K, M)) ≫ G.map (μU.hom.app (K, M)) ≫\n          μG.hom.app (U.obj K, U.obj M) =\n        V.map (μF.hom.app (K, M)) ≫ μV.hom.app (F.obj K, F.obj M) ≫\n          SD.tensor.map (Prod.mkHom (h.hom.app K) (h.hom.app M)))\n    (K M : A) :\n    h.hom.app (HA.obj (op K, M)) ≫\n        G.map (coefficientBaseChangeHom SA SC U μU K M) ≫\n        coefficientBaseChangeHom SC SD G μG (U.obj K) (U.obj M) =\n      V.map (coefficientBaseChangeHom SA SB F μF K M) ≫\n        coefficientBaseChangeHom SB SD V μV (F.obj K) (F.obj M) ≫\n        HD.map (Prod.mkHom (h.inv.app K).op (h.hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-af0f4",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261028T020341-L-2498181",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
+ }
+}
