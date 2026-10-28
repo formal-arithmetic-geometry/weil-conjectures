@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralComparisonSystemData
 public import Sheaf.Paper.PullbackIdentitiesScalarExtension
+import Sheaf.Paper.IntegralAutomorphismCancellationPrecomposition
 
 /-! # Normalization of integral inverse cancellation
 
@@ -18,9 +19,11 @@ inverse-composition comparisons, expanded by the parent node's steps 4--6.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 
 universe u
 open CategoryTheory AlgebraicGeometry
+open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
 /-- The counit-built completed compositor and unit give the same cancellation as
@@ -63,6 +66,28 @@ theorem integralAutomorphismCancellation_normalization
           (IsIso.inv_hom_id g)) ≪≫ integralComparisonUnit l E C Y K :
         ((constructibleIntegralPullback l E g ⋙
           constructibleIntegralPullback l E (inv g)).obj K).obj ≅ K.obj).hom) := by
-  sorry
+  apply heq_of_eq
+  let hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x) := fun x ↦
+    isUnit_of_map_unit (IsLocalRing.residue (X.presheaf.stalk x)) _
+      ((map_natCast (IsLocalRing.residue (X.presheaf.stalk x)) l).symm ▸
+        isUnit_of_invertible (l : X.residueField x))
+  let hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y) := fun y ↦
+    isUnit_of_map_unit (IsLocalRing.residue (Y.presheaf.stalk y)) _
+      ((map_natCast (IsLocalRing.residue (Y.presheaf.stalk y)) l).symm ▸
+        isUnit_of_invertible (l : Y.residueField y))
+  let A := (inverseImageIntegralDerived l E (inv g)).map
+    (inverseImagePullbackComparisonDerived l E g hX hY K.obj) ≫
+    inverseImagePullbackComparisonDerived l E (inv g) hY hX
+      ((constructibleIntegralPullback l E g).obj K).obj
+  haveI : IsIso (inverseImagePullbackComparisonDerived l E g hX hY K.obj) :=
+    pullbackIdentityKappa_isIso l E g hX hY K
+  haveI : IsIso (inverseImagePullbackComparisonDerived l E (inv g) hY hX
+      ((constructibleIntegralPullback l E g).obj K).obj) :=
+    pullbackIdentityKappa_isIso l E (inv g) hY hX ((constructibleIntegralPullback l E g).obj K)
+  apply (cancel_epi A).1
+  have h := integralAutomorphismCancellation_precomposition l E C g K
+  dsimp only [A, hX, hY] at h
+  exact eq_of_heq h
+
 
 end WeilConjectures
