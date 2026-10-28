@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-locally-finite-adic-coefficient-presentations",
+ "kind": "statement",
+ "title": "Normalized continuous finite-field coefficient presentations",
+ "statement": "Let $\\ell$ be prime and $X$ any scheme. Equip the native abelian coefficient ring $B_X$ of [def-sf-locally-finite-adic-realization-data] with its existing commutative monoid structure. For every finite coefficient field $E$ in the algebraic closure of $\\mathbf Q_\\ell$, with the size transport and specified embedding of [def-sf-locally-finite-adic-realization-data], there is a CoefficientPresentation: its integral comparison identifies continuous integral functions with the completed constant residue tower, its finite comparisons fix constants and recover pointwise residues, and its integral localization and inclusions have their specified pointwise normalizations. These presentations can be chosen simultaneously so that for $E\\le L$ the completed coefficient map followed by the $L$ integral map into $B_X$ equals the $E$ integral map.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1)--(2); native realization coefficient-construction step 2"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-continuous-coefficient-completion] to every finite field. The finite quotient comparisons fix constants. Compare the two limiting residue cones to obtain the integral isomorphism, retaining its equations after every positive projection.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-continuous-coefficient-localization] for the normalized localization isomorphism and the integral-to-rational map of [def-sfb-continuous-coefficient-pullback-maps]. Postcomposition by the specified field embedding lands in locally finite functions because the field is finite dimensional. Pointwise ring operations and precomposition give the native sheaf morphism and its normalization.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-localization",
+    "def-sfb-continuous-coefficient-pullback-maps",
+    "def-sf-locally-finite-adic-realization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an extension of finite fields, compare integral sections after every residue projection. For each target residue precision, continuity supplies a sufficiently deep source precision whose ideal maps into the target ideal. The defining completion map applies the field inclusion at these precisions; compatibility on deepening the source precision covers ramification. Joint injectivity of the inverse-limit projections identifies the integral section; then the two composite embeddings in the algebraic closure agree. This gives the scalar equation. Empty objects and identity extensions obey the same formulas.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-sf-locally-finite-adic-realization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "def-sfb-continuous-coefficient-pullback-maps",
+  "def-sf-locally-finite-adic-realization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1)--(2); native realization coefficient-construction step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous integral l-adic coefficient sheaves are inverse limits of finite constant residue sheaves, rational functions embed in locally finite algebraic closure functions",
+   "results": "8 hits: BDeRhamPlus and LaurentSeries adic-completion constructions. No continuous coefficient-sheaf presentation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso",
+   "results": "11 hits: the canonical isomorphism of limiting cone points under a natural isomorphism and its projection equations. This supplies generic limit comparison only; no continuous finite-field coefficient presentation.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCoefficient|descFunctor|ofCocone",
+   "results": "25 hits: TopModuleCat.ofCocone and general limit/cocone constructions. No continuous coefficient-sheaf comparison or native module section equivalence.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicNormalizedFunctor",
+  "date": "2026-10-28",
+  "group": "E7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma 6.8.2(1)--(2); native realization coefficient-construction step 2",
+   "via": [
+    "lem-sf-locally-finite-adic-normalized-functor",
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicCoefficientPresentations",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicCoefficientPresentations.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.coefficientPresentations_exists",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicRealization.coefficientPresentations_exists"
+  ],
+  "statement": "theorem coefficientPresentations_exists\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsCommMonObj (abRing l X)] :\n    ∃ coefficient : ∀ E : Index l (PadicAlgCl l),\n      CoefficientPresentation l X (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E),\n      ∀ (E L : Index l (PadicAlgCl l)) (h : E ≤ L),\n        completedCoefficientMap l (Coefficient.{u} l (PadicAlgCl l) E)\n            (Coefficient.{u} l (PadicAlgCl l) L)\n            (coefficientInclusion l (PadicAlgCl l) E L h) X ≫\n          (coefficient L).integralMap l X = (coefficient E).integralMap l X",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261028T020331-L-2496446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261028T020331-L-2496446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
