@@ -6,6 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingMappingTower
+import Sheaf.SixFunctors.IntegralDualizingCoefficientHomTowerComparison
 
 /-! # The coefficient Hom tower over a complete DVR
 
@@ -50,6 +51,14 @@ regular module R[0], which is the target in coefficientDerivedDual. -/
 theorem integralDualizing_coefficient_hom_tower_limit :
     Nonempty (integralDualizingCoefficientHomTower l E ⋙
       CoefTower.totalLimit (integralDualizingCoefficients l E) ≅
-        coefficientDerivedDual (integralDualizingCoefficients l E)) := by sorry
+        coefficientDerivedDual (integralDualizingCoefficients l E)) := by
+  obtain ⟨α, hα⟩ := integralDualizing_coefficient_hom_tower_comparison l E
+  let e : integralDualizingCoefficientHomTower l E ⋙
+      CoefTower.totalLimit (integralDualizingCoefficients l E) ≅
+      coefficientDerivedDual (integralDualizingCoefficients l E) :=
+    NatIso.ofComponents (fun C ↦ asIso (α.app C)) (by
+      intro C D f
+      exact α.naturality f)
+  exact ⟨e⟩
 
 end WeilConjectures

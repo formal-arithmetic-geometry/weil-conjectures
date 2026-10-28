@@ -1,0 +1,127 @@
+{
+ "id": "lem-coef-integral-dualizing-coefficient-hom-tower-comparison",
+ "kind": "lemma",
+ "title": "Resolved coefficient Hom tower comparison map is invertible levelwise",
+ "statement": "For every prime l and finite extension E/Q_l, the definitions in [def-coef-integral-dualizing-mapping-towers] and [def-sf-coefficient-duality] admit a natural transformation from the constant-coefficient Hom tower followed by total derived inverse limit to coefficientDerivedDual whose component at every derived coefficient complex is an isomorphism.",
+ "stmt_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "def-sf-coefficient-duality"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "A8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, the resolved natural comparison and its componentwise invertibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between derived Hom into a quotient tower and derived Hom into its completed inverse limit",
+   "date": "2026-10-28",
+   "results": "No exact project-specific match; only generic derived-category and HomologicalComplex limit declarations.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor IsIso (alpha.app)",
+   "date": "2026-10-28",
+   "results": "Generic NatIso.ofComponents and NatTrans.isIso_iff_isIso_app; no coefficient-tower comparison.",
+   "verdict": "Only categorical assembly matches."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Hom.*tower.*limit|internalHom.*totalLimit|coefficientDerivedDual' lean/Sheaf lean/WeilConjectures",
+   "date": "2026-10-28",
+   "results": "No existing theorem with this comparison statement.",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-limit-global",
+   "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingCoefficientHomTowerLimit",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingCoefficientHomTowerComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingCoefficientHomTowerComparison.lean",
+  "declaration": "WeilConjectures.integralDualizing_coefficient_hom_tower_comparison",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28",
+  "statement": "theorem integralDualizing_coefficient_hom_tower_comparison :\n    ∃ α : integralDualizingCoefficientHomTower l E ⋙\n        CoefTower.totalLimit (integralDualizingCoefficients l E) ⟶\n      coefficientDerivedDual (integralDualizingCoefficients l E),\n      ∀ C : DerivedCategory (ModuleCat.{u + 1}\n        (integralDualizingCoefficients l E)),\n        IsIso (α.app (op C))"
+ },
+ "proof": [
+  {
+   "text": "Resolve the input by a K-flat complex and the quotient tower by one simultaneous K-injective complex. The closed Hom tower is the signed tower of ordinary Hom complexes, and all finite evaluation maps are the actual quotient maps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient transitions are degreewise surjective. The Roos triangle therefore computes the ordinary inverse limit, and the profinite coefficient tower identifies that limit with the complete coefficient ring. The resulting map is the canonical derived Hom map and is an isomorphism at every input complex.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-weil-pbc-surjective-module-complex-tower-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the comparison through the localization equivalence and use precomposition naturality to obtain one natural transformation with isomorphic components.",
+   "uses": [
+    "def-coef-integral-dualizing-mapping-towers",
+    "def-sf-coefficient-duality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "def-sf-coefficient-duality",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-pbc-surjective-module-complex-tower-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T020148-L-2472387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T020148-L-2472387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
