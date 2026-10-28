@@ -6,10 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsCompLevelwise
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangePadicAlgCl
 
 /-!
 # The cocycle condition for (Push) along the finite subextensions
@@ -95,7 +95,6 @@ lemma boundedConstructibleCocone_iso_inv_app_hom {E F : FiniteIntermediateField 
   exact (boundedConstructible (padicAlgClRingObj X ℓ)).ι.map_preimage _
 
 end Cocone
-
 
 /-! ### The cocycle condition -/
 

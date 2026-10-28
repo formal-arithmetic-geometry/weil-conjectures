@@ -325,14 +325,14 @@ theorem map_exceptionalHomIso_inv_comp_supportHomSpecialization
       (𝛃 νc).app (externalProduct ℓ K (verdierDual ℓ K)) ≫
         𝐔'.map (universalKernelSpecialization k' (y ≫ c.c₁) D K) ≫
         𝐔'.map (kunnethVerdierMap ℓ 𝐊' 𝐊') ≫ specialExceptionalHomInv := by
-  have hX := Verdier.map_inv_exceptionalHomMap_comp_eq
-    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
-    (boundedConstructibleExceptionalProjection ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction ℓ (𝛄))
-    (boundedConstructibleExceptionalProjection ℓ (𝛄))
-    (SP := 𝐒𝐏) (SC := 𝐒) (hc.supportPullbackExchange k') (𝛃 νc) 𝐀 𝐁 𝐀' 𝐁'
-    ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K)
-    ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K) hβ
+  fo_have hX := Verdier.map_inv_exceptionalHomMap_comp_eq using
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support),
+    (boundedConstructibleExceptionalProjection ℓ c.support),
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝛄)),
+    (boundedConstructibleExceptionalProjection ℓ (𝛄)),
+    (hc.supportPullbackExchange k'), (𝛃 νc), 𝐀, 𝐁, 𝐀', 𝐁',
+    ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K),
+    ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K), hβ
   unfold homSpecialization at h₁
   unfold supportHomSpecialization specialExceptionalHomInv Correspondence.exceptionalHomIso
   fo_apply map_externalDuality_comp_eq using _, _, _, _, _, hX, _, _, _, h₁
@@ -377,14 +377,14 @@ theorem curry_comp_eq_unit_comp_map_comp
       Functor.LaxMonoidal.ε 𝐒 ≫ 𝐒.map ku ≫ (𝛃 νc).app (externalProduct ℓ K (verdierDual ℓ K)) ≫
         𝐔'.map (universalKernelSpecialization k' (y ≫ c.c₁) D K) ≫
         𝐔'.map (kunnethVerdierMap ℓ 𝐊' 𝐊') ≫ specialExceptionalHomInv := by
-  have hX := Verdier.map_inv_exceptionalHomMap_comp_eq
-    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
-    (boundedConstructibleExceptionalProjection ℓ c.support)
-    (boundedConstructibleUpperShriekAdjunction ℓ (𝛄))
-    (boundedConstructibleExceptionalProjection ℓ (𝛄))
-    (SP := 𝐒𝐏) (SC := 𝐒) (hc.supportPullbackExchange k') (𝛃 νc) 𝐀 𝐁 𝐀' 𝐁'
-    ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K)
-    ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K) hβ
+  fo_have hX := Verdier.map_inv_exceptionalHomMap_comp_eq using
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support),
+    (boundedConstructibleExceptionalProjection ℓ c.support),
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝛄)),
+    (boundedConstructibleExceptionalProjection ℓ (𝛄)),
+    (hc.supportPullbackExchange k'), (𝛃 νc), 𝐀, 𝐁, 𝐀', 𝐁',
+    ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K),
+    ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K), hβ
   unfold homSpecialization at h₁
   unfold specialExceptionalHomInv Correspondence.exceptionalHomIso at *
   fo_apply curry_comp_eq_of_section using _, _, _, _, _, _, _,
