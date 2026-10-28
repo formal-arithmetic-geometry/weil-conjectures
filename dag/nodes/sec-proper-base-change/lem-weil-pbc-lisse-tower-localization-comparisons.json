@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-localization-comparisons",
+ "kind": "statement",
+ "title": "Functor comparisons for localized finite-coefficient inverse images",
+ "statement": "Let X,Y be schemes, g:Y→X, d an adic coefficient datum, U∈Y.ProEt, V∈U.left.ProEt, W∈Y.ProEt, and f:W→ProEt.mk(V.hom≫U.hom) [def-weil-pbc-bounded-constructible-tower, def-weil-pbc-lisse-tower-etale-descent-data]. Write E_j=lisseTowerEtaleRealization(U.hom≫g,d,j), L_j=upperStar(f.left) followed by fixed realization at W, P_j=adicTowerPullback(U.hom≫g,R_j), P′_j=adicTowerPullback(W.hom≫g,R_j), Q_j=restriction along the pulled consecutive quotient on U, and H_j=restriction along the finite projection at W [lem-weil-pbc-lisse-tower-pulled-scalar, def-weil-pbc-constant-adic-finite-diagram-data]. There exist functors T_j from the finite module derived category on U to the corresponding category on W, natural isomorphisms b_j:localProEtaleComparison(V.hom)⋙L_j≅E_j⋙T_j, a_j:P_j⋙T_j≅P′_j, and k_j:Q_j⋙T_(j+1)⋙H_(j+1)≅T_j⋙H_j satisfying the following two independent coefficient squares. For every section-normalized scalar square c, etale objects C,C′ and arrow δ:C→Res(q_j)C′, the localized normalized arrow followed by H_j(b_j(C′)) equals H_(j+1)(b_(j+1)(C)) followed by (T_(j+1)⋙H_(j+1))(E_(j+1)(δ)≫scalar_c(C′)) and k_j(E_j(C′)). For every pair of finite module objects N,N′ on X and semilinear arrow t:N→Res(q_j)N′, (T_(j+1)⋙H_(j+1))(lisseTowerInverseImageArrow(U.hom≫g,t)) followed by k_j(P_j(N′)) and H_j(a_j(N′)) equals H_(j+1)(a_(j+1)(N)) followed by lisseTowerProjectedArrow(W.hom≫g,t). No descended tower, family of level markings or descent equation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D2 and 03D3; sites-cohomology.tex Tag 0D6D. Sheafification, exact module inverse image, and its canonical composition comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-lisse-tower-pulled-scalar",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-ring-restriction-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For a=f.left followed by V.hom, use f.w to identify a followed by U.hom followed by g with W.hom followed by g. At every finite coefficient ring take exact module inverse image along a, with the coefficient identification obtained from the canonical inverse-image compositor. Its composition comparison gives base. The sheafification/inverse-image comparison, pasted with the etale/pro-etale inverse-image compositor, gives level.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "lem-route-pro-etale-canonical-pullback-composition-exists-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact inverse-image coefficient mate, followed by the finite-projection restriction compositor, gives scalar. Both ordinary scalar faces have identity on the pulled abelian sections, by the supplied section normalization and the normalized scalar square at W. Faithfulness of forgetting the module action proves their equality before localization. Exact localization and naturality at an arbitrary etale arrow give source.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-lisse-tower-pulled-scalar",
+    "lem-weil-pbc-proetale-normalization-square-transport",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary semilinear arrow t on X, naturality of the same inverse-image composition comparison moves t past base. Its compatibility with the inverse-image coefficient mate gives the finite-ring target square. Postcompose with restriction along the finite projection, and apply the specified restriction compositor. The resulting morphism is lisseTowerProjectedArrow by its construction, giving target. This step uses no etale model, tower or marking.",
+   "uses": [
+    "lem-route-pro-etale-canonical-pullback-composition-exists-unique",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-route-pro-etale-canonical-pullback-composition-exists-unique",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-lisse-tower-pulled-scalar",
+  "lem-weil-pbc-proetale-normalization-square-transport",
+  "def-weil-pbc-constant-adic-finite-diagram-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D2 and 03D3; sites-cohomology.tex Tag 0D6D. Sheafification, exact module inverse image, and its canonical composition comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of functors preserves commuting squares and transports morphism equations",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.CatCommSq.hInvEquiv, CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.CatCommSq.vInv_iso_hom_app, CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.CatCommSq.hInv_iso_hom_app, CategoryTheory.CatCommSq.ext",
+   "date": "2026-10-28",
+   "verdict": "General sheafification, coefficient restriction and naturality APIs; no existing declaration constructs the concrete simultaneous localization coefficient cube."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback|pullbackComp_hom|mapDerivedCategoryCompIso",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-28",
+   "verdict": "General sheafification, coefficient restriction and naturality APIs; no existing declaration constructs the concrete simultaneous localization coefficient cube."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "General sheafification, coefficient restriction and naturality APIs; no existing declaration constructs the concrete simultaneous localization coefficient cube."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of module sheaves commutes with scalar restriction and composition, with a natural isomorphism compatible with the coefficient square",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'App_inv_naturality, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, PresheafOfModules.restrictScalars, ModuleCat.restrictScalarsComp', AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, ModuleCat.restrictScalarsComp'_inv_app, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux",
+   "date": "2026-10-28",
+   "verdict": "General sheafification, coefficient restriction and naturality APIs; no existing declaration constructs the concrete simultaneous localization coefficient cube."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalizedActualNormalized",
+  "date": "2026-10-28",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Localized realization: canonical inverse-image coefficient cube, before applying the descended level markings and transition equation.",
+   "via": [
+    "lem-weil-pbc-lisse-tower-localized-actual-normalized",
+    "lem-weil-pbc-lisse-tower-localized-actual",
+    "lem-weil-pbc-lisse-tower-localized-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerLocalizationComparisons",
+  "file": "lean/Sheaf/Paper/LisseTowerLocalizationComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_localization_comparisons",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseTowerInverseImageArrow",
+   "AlgebraicGeometry.Scheme.lisseTowerProjectedArrow",
+   "AlgebraicGeometry.Scheme.LisseTowerLocalizationComparisons",
+   "AlgebraicGeometry.Scheme.lisseTower_localization_comparisons"
+  ],
+  "statement": "theorem lisseTower_localization_comparisons (X Y : Scheme.{u}) (g : Y ⟶ X) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt) (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) : Nonempty (LisseTowerLocalizationComparisons X Y g d U V W f)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d94b4",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261028T055828-L-814363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d94b4",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261028T055828-L-814363",
+  "kind": "interface",
+  "note": "independent cc review: corrected lisseTower_localized_actual_normalized (cmp-constructed family) against its node and change record; parent lisseTower_localized_actual statement byte-identical; new hole lisseTower_localization_comparisons against its node; importer LisseTowerLocalizedRealization recompiled OK"
+ }
+}

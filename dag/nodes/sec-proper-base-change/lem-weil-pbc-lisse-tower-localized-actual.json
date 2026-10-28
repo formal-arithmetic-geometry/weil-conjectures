@@ -17,28 +17,28 @@
  ],
  "proof": [
   {
-   "text": "Construct the family of level comparisons by the canonical fixed-realization and inverse-image comparison, applied to each supplied e_n.",
+   "text": "Obtain the localization functor comparison system. Construct actual_n as its level component at D_n, its pull functor applied to e_n, and its base component at M_n. This is an actual level isomorphism, with no independent choice of markings.",
    "uses": [
-    "lem-weil-pbc-lisse-tower-localized-actual-levels"
+    "lem-weil-pbc-lisse-tower-localization-comparisons"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the normalized-transition comparison to that family. Its conclusion is exactly the displayed equation for every n.",
+   "text": "Apply lisseTower_localized_actual_normalized to this constructed family and the supplied descent equations. This gives every required normalized transition equation.",
    "uses": [
     "lem-weil-pbc-lisse-tower-localized-actual-normalized"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lisse-tower-localized-actual-levels",
+  "lem-weil-pbc-lisse-tower-localization-comparisons",
   "lem-weil-pbc-lisse-tower-localized-actual-normalized"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CY and 03DA; the parent is obtained by combining the independent actual-level comparison and normalized-transition steps."
+  "place": "Tags 03CY, 03D2 and 03D3; sites-cohomology.tex Tag 0D6D. Sheafification, exact module inverse image, and its canonical composition comparison."
  },
  "mathlib_searches": [
   {
@@ -99,7 +99,7 @@
   "module": "Sheaf.Paper.LisseTowerLocalizedActual",
   "file": "lean/Sheaf/Paper/LisseTowerLocalizedActual.lean",
   "declaration": "AlgebraicGeometry.Scheme.lisseTower_localized_actual",
-  "statement": "theorem lisseTower_localized_actual\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt)\n    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom))\n    (D : ∀ n : ℕ, DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))\n    (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n)\n    (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n))\n    (δ : ∀ n : ℕ, D (n + 1) ⟶\n      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj\n        (D n))\n    (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅\n      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n))\n    (hδ : ∀ n : ℕ,\n      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫\n          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫\n          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =\n        (e (n + 1)).hom ≫\n          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) :\n    let L (j : ℕ) := (ProEtale.upperStar\n      (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) f.left).mapDerivedCategory ⋙\n        lisseTowerFixedRealization (W.hom ≫ g) d j\n    ∃ actual : ∀ (n : ℕ),\n    (L n).obj\n      ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≅\n      (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n),\n    ∀ (n : ℕ),\n    let H (k : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d k)\n    (H (n + 1)).map ((L (n + 1)).map\n      (localProEtaleNormalization V.hom (lisseTowerEtaleQuotient d n) (δ n))) ≫\n      (lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n).hom.app\n        ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≫\n      (H n).map (actual n).hom =\n    (H (n + 1)).map (actual (n + 1)).hom ≫\n      constantAdicRestrictedStep (W.hom ≫ g) d M n",
+  "statement": "theorem lisseTower_localized_actual (X Y : Scheme.{u}) (g : Y ⟶ X) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d) (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt) (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) (D : ∀ n : ℕ, DerivedCategory (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))) (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n) (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n)) (δ : ∀ n : ℕ, D (n + 1) ⟶ (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj (D n)) (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅ (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n)) (hδ : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫ (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫ (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom = (e (n + 1)).hom ≫ adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) : let L (j : ℕ) := (ProEtale.upperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) f.left).mapDerivedCategory ⋙ lisseTowerFixedRealization (W.hom ≫ g) d j ∃ actual : ∀ (n : ℕ), (L n).obj ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≅ (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n), ∀ (n : ℕ), let H (k : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d k) (H (n + 1)).map ((L (n + 1)).map (localProEtaleNormalization V.hom (lisseTowerEtaleQuotient d n) (δ n))) ≫ (lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n).hom.app ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≫ (H n).map (actual n).hom = (H (n + 1)).map (actual (n + 1)).hom ≫ constantAdicRestrictedStep (W.hom ≫ g) d M n",
   "declarations": [
    "AlgebraicGeometry.Scheme.lisseTower_localized_actual"
   ],
@@ -120,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J7",
-  "result": "pass",
-  "landing": "20261028T020523-L-2520359",
+  "reviewer": "C-d94b4",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261028T055828-L-814363",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected lisseTower_localized_actual_normalized (cmp-constructed family) against its node and change record; parent lisseTower_localized_actual statement byte-identical; new hole lisseTower_localization_comparisons against its node; importer LisseTowerLocalizedRealization recompiled OK"
  }
 }
