@@ -24,7 +24,7 @@ cartesian. By smooth base change, its pullback exchange `α_{f̃} : Lf_s^* Ψ_Y 
 isomorphism on bounded constructible `ℚ̄_ℓ`-complexes
 (`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth`).
 
-## Sorried input
+## Proof
 
 `ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth` (the smooth half
 of blueprint `det-sp-nearby-cycles-exchanges` (1), applied to the smooth morphism of deformation
@@ -40,8 +40,8 @@ morphisms
 (`ProEtale.CondensedRing.isIso_baseChangeMap_app_leftDerivedUpperStar_padicAlgCl_of_integral`).
 The integral statement,
 `ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app_padicIntegers`, is
-`sorry`ed: it needs derived `ℓ`-completeness for module objects over `𝒪_{E,X}`, see
-`WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegralInput`.
+integral smooth base change for qcqs pushforward, proved by derived Nakayama for derived complete
+complexes (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_smooth`).
 
 -/
 
@@ -58,8 +58,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
-  [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+  [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
 
 /-- **Smooth base change along affine spaces for the geometric generic fibre** (blueprint
 `sbc-thm-bounded-derived-smooth-base-change`, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`): for the inclusion
@@ -72,7 +71,7 @@ The morphism `j` is not of finite type (it is a base change of the geometric gen
 `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth` does not apply. Writing
 `K ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for an integral model `K₀`, this follows from the integral statement
 `ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app_padicIntegers`
-(`sorry`ed) by
+by
 `ProEtale.CondensedRing.isIso_baseChangeMap_app_leftDerivedUpperStar_padicAlgCl_of_integral`. -/
 theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -102,7 +101,8 @@ total spaces is smooth and whose square of geometric generic fibres is cartesian
 deformation of a smooth `f` with `J = f⁻¹ I`), the pullback exchange `α_φ : Lg_s^* Ψ_Y ⟶ Ψ_X Lg^*`
 is an isomorphism on bounded constructible `ℚ̄_ℓ`-complexes, by smooth base change along the
 inclusion `j` of the geometric generic fibre. -/
-theorem isIso_pullbackExchange_deformationModel_app_of_smooth {X Y : Over (Spec (.of k))}
+theorem isIso_pullbackExchange_deformationModel_app_of_smooth [IsSepClosed k']
+    [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     {I : Y.left.IdealSheafData} {J : X.left.IdealSheafData} {g : X.left ⟶ Y.left}
