@@ -1,0 +1,170 @@
+{
+ "id": "lem-sf-native-exceptional-closure-compact-support",
+ "kind": "statement",
+ "title": "Ordinary compact support under the specified closure transport",
+ "statement": "Fix D,l,X,Y,f₀ with D a finite-field datum, l prime and different from D.p, X and Y separated finite-type D.k₀-models and f₀ a separated finite-type morphism. Let c₀ be any compactification of f₀.left and c any compactification of geometricMap D f₀. On the full bounded constructible native category over the library algebraic closure, ordinaryCompactSupport f₀.left c₀ followed by the derived pushforward of closureMap Y is naturally isomorphic to derived pushforward of closureMap X followed by actual l c. The conclusion involves only native ordinary functors, with no realization family, coefficient system, Weil action or forgetful model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+ },
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-locally-finite-adic-compact-support-data",
+  "lem-sf-native-weil-open-proper-forgetting"
+ ],
+ "proof": [
+  {
+   "text": "The algebraic-closure equivalence makes closureMap X and closureMap Y isomorphisms. Apply pullback.hom_ext and the two geometricFiberMap projection equations to obtain their naturality square with f₀. Geometric base change gives an open i and proper p from c₀. Define d with the same middle scheme, open map inv(closureMap X) followed by i, and proper map p followed by closureMap Y. Their composite is geometricMap f₀ by the naturality square and c₀.comm.",
+   "uses": [
+    "def-sf-native-exceptional-forgetful-data",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "For a scheme isomorphism e, the source-transport comparison i_! ≅ e_* followed by (e⁻¹ followed by i)_! follows by conjugating the upper-star composition isomorphism and upperStarIsoLowerStarInv through the open adjunctions and e_* equivalence. Apply mapDerivedCategory. The target-transport comparison is the inverse exact-right total-derived compositor followed by the pushforward composition isomorphism. Compose these to compare the c₀ functor followed by closureMap Y with closureMap X followed by actual d on the entire native derived category.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "Choose a normalized realization family and a coefficient system S for geometricMap f₀. At c and d use the specified scalar-realization comparison. A common refinement r of c and d supplies (S.refinements.refinement rc .closed).left.symm followed by (S.refinements.refinement rd .closed).left. The realization image clause lifts the bounded source inclusion to the common-stage category, by full faithfulness and Mathlib essential-image lifting. Whisker the two scalar comparisons and this refinement comparison with the lift and cancel its realization isomorphism. Thus actual d and actual c agree on the full bounded constructible subcategory.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "prop-compactification-refinement",
+    "lem-sf-native-exceptional-compact-support-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "Closure pushforward is naturally isomorphic to pullback under the inverse closure isomorphism. The bounded-homology pullback theorem preserves both boundedness and constructible cohomology, so this pushforward restricts to the bounded source category. Whisker the preceding d-to-c comparison with that restriction and compose with the c₀-to-d transport. This is the displayed natural isomorphism.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-native-exceptional-compact-support-realization",
+  "prop-compactification-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported derived direct image of constructible adic sheaves is preserved by isomorphisms of the ground algebraic closure",
+   "results": "8 results: integralClosure_map_algEquiv, AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.universallyClosed_respectsIso, AlgebraicGeometry.quasiCompact_of_isIso, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, algebraicClosure.map_eq_of_algEquiv",
+   "date": "2026-10-28",
+   "verdict": "No derived adic sheaf compact-support transport theorem. The hits concern scheme morphism properties and compact support of functions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support commutes with transport by an isomorphism of schemes",
+   "results": "8 results: HasCompactSupport.comp_homeomorph, HasCompactMulSupport.comp_homeomorph, AlgebraicGeometry.quasiCompact_of_isIso, AlgebraicGeometry.Scheme.inv_base_hom_base_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, tsupport_comp_eq_preimage, AlgebraicGeometry.Scheme.inv_app",
+   "date": "2026-10-28",
+   "verdict": "No derived adic sheaf compact-support transport theorem. The hits concern scheme morphism properties and compact support of functions."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Cc]ompact|[Cc]ompact.*adic|ordinaryCompactSupport",
+   "results": "2 results: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "date": "2026-10-28",
+   "verdict": "No derived adic sheaf compact-support transport theorem. The hits concern scheme morphism properties and compact support of functions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitModelComparison",
+  "date": "2026-10-28",
+  "group": "P8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization.",
+   "via": [
+    "lem-sf-native-exceptional-ordinary-counit-model-comparison",
+    "lem-sf-native-exceptional-ordinary-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalClosureCompactSupport",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalClosureCompactSupport.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_closure_compact_support",
+  "statement": "theorem native_exceptional_closure_compact_support\n    (X Y : Space D) (f₀ : X.base ⟶ Y.base)\n    [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (c₀ : Compactification f₀.left) (c : Compactification (geometricMap D f₀)) :\n    Nonempty\n      ((ProEtale.DerivedCategory.boundedAdicConstructible l\n          X.base.hom.geometricFiber).ι ⋙\n        NativeWeilOpenProper.ordinaryCompactSupport (k₀ := D.k₀) (l := l) f₀.left c₀ ⋙\n          (ProEtale.adicLowerStar l (closureMap D Y)).rightDerivedFunctor ≅\n       (ProEtale.DerivedCategory.boundedAdicConstructible l\n          X.base.hom.geometricFiber).ι ⋙\n        (ProEtale.adicLowerStar l (closureMap D X)).rightDerivedFunctor ⋙\n          LocallyFiniteAdicCompactSupport.actual l c)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-exceptional-ordinary-counit-model-comparison",
+  "worker": "stage3",
+  "summary": "The geometric comparison is proved by adjoint transport and scalar realization, with all compactification changes realized through a specified coefficient system.",
+  "blueprint": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization.",
+  "tool_uses": [
+   {
+    "node": "prop-compactification-refinement",
+    "why": "Only its generic existence of a common refinement is used; no Nagata construction route is replaced."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Use the existing normalized System and its refinement comparisons as a generic coefficient package; no exceptional-adjunction construction is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T034912-L-3566719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T034912-L-3566719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

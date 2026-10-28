@@ -1,0 +1,174 @@
+{
+ "id": "lem-sf-native-exceptional-compact-support-realization",
+ "kind": "statement",
+ "title": "Compact-support realization for a specified coefficient system",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, schemes X and Y of finite type over D.k, and a separated finite-type D.k-morphism f:X→Y. Let source and target be any specified normalized locally finite adic Realizations of X and Y. For any specified ConstructibleExceptionalCoefficients.System S with coefficients PadicAlgCl l and any compactification c of f, the common-stage left operation (S.ring.operation c .closed).F followed by target.J is naturally isomorphic to source.J followed by actual l c. No Weil action, model over D.k₀, or ForgetModel is involved.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-locally-finite-adic-compact-support-data",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+ },
+ "proof": [
+  {
+   "text": "Choose the native ring and section geometry and the canonical completed coefficient changes. The latter agree with every CoefficientPresentation.integralMap, hence with the source and target maps. At each finite subfield E, use S.ring.rationalLeft to identify the specified rational left functor with sfCompactSupportFiniteFunctor. On an integral finite-Tor representative use its integral compact-support realization and the two supplied realization.integral isomorphisms. These identify the two finite-stage composite functors with completed compact support followed by coefficient extension and coefficient extension followed by native compact support.",
+   "uses": [
+    "lem-sf-native-compact-support-geometry",
+    "lem-sf-native-completed-coefficient-change",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "Between the last two functors take the actual proper/open scalar mate. Its factorization has the exact open tensor comparison and the proper scalar counit mate; native_compact_support_scalar_mate_invertible makes it invertible on integral finite-Tor inputs. Residue Tor identifies every integral constructible input with such an input. The section equivalence reflects isomorphisms, producing a natural isomorphism on the full integral category. Extend it through raw scalar localization to the rational stage. Naturality for integral arrows and their inverse uniformizer powers proves naturality for every rational morphism.",
+   "uses": [
+    "lem-sf-native-compact-support-scalar-mate-invertible",
+    "lem-coef-integral-residue-tor",
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "Check finite-field transition compatibility before descending. Insert the source and target common_field formulas and the S.fields.rational_normalized equation. After conjugation by the integral realization and integralLeft_normalized isomorphisms, both paths are the proper/open scalar mate for the composite coefficient map: on a flat tensor representative both send b tensor a tensor m to ba tensor m. The coefficient square, the balanced tensor associator and the triangle identities for the proper counit identify the proper terms; the unit-normalized tensor formula identifies the open terms. The identity extension inserts the tensor unit. Localize this equality on integral representatives. Compose with S.common.commonComparison; S.common.commonCocycleLeft then gives compatibility with the actual common-stage isoToStage maps.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  },
+  {
+   "text": "At a common-stage object A use the component of the A.stage comparison at A.obj. Every morphism has a representative over a common finite stage. Factor that representative into the source transition, a same-stage arrow and the inverse target transition. The preceding compatibility and rational-stage naturality prove naturality. Apply NatIso.ofComponents to these invertible components; its inverse is obtained stagewise. This works unchanged for zero objects and empty schemes and yields the claimed isomorphism for the specified realizations.",
+   "uses": [
+    "lem-sf-stage-comparison-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-integral-residue-tor",
+  "lem-real-raw-localization-natural-iso",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-native-compact-support-geometry",
+  "lem-sf-native-compact-support-scalar-mate-invertible",
+  "lem-sf-native-completed-coefficient-change",
+  "lem-sf-stage-comparison-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Realization from finite coefficient stages to constructible adic complexes commutes with compactly supported derived direct image",
+   "results": "8 results: AdicCompletion.map_of, AdicCompletion, AdicCompletion.sum_of, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, AdicCompletion.sumInv_comp_sum, AdicCompletion.sumInv_apply, IsAdicComplete.of_comp_lift, AdicCompletion.sumEquivOfFintype_apply",
+   "date": "2026-10-28",
+   "verdict": "No native sheaf-derived compact-support comparison. The hits do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified constructible coefficient system compact support functor commutes with the native adic realization functor",
+   "results": "8 results: localCohomology.diagram, Condensed.profiniteSolid, localCohomology.ofDiagram, localCohomology, Condensed.profiniteFree, localCohomology.ofSelfLERadical, CondensedMod.LocallyConstant.functor, localCohomology.diagramComp",
+   "date": "2026-10-28",
+   "verdict": "No native sheaf-derived compact-support comparison. The hits do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdic|CompactSupportComparison|sfCompactSupportFiniteFunctor",
+   "results": "0 results: ",
+   "date": "2026-10-28",
+   "verdict": "No native sheaf-derived compact-support comparison. The hits do not state this result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitModelComparison",
+  "date": "2026-10-28",
+  "group": "P8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization.",
+   "via": [
+    "lem-sf-native-exceptional-ordinary-counit-model-comparison",
+    "lem-sf-native-exceptional-ordinary-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalCompactSupportRealization",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalCompactSupportRealization.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.system_compact_support_realization",
+  "statement": "theorem system_compact_support_realization (f : X ⟶ Y)\n    [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (source : Realization l X) (target : Realization l Y)\n    (S : ConstructibleExceptionalCoefficients.System.{u, 0} l (PadicAlgCl l) D hl (f := f))\n    (c : Compactification f) :\n    Nonempty ((S.ring.operation c .closed).F ⋙ target.J ≅ source.J ⋙ actual l c)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-exceptional-ordinary-counit-model-comparison",
+  "worker": "stage3",
+  "summary": "Strict ordinary scalar-realization substep for arbitrary specified realizations and coefficient system, independent of Weil objects and closure transport.",
+  "blueprint": "Final exceptional-adjunction sentence; ordinary comparison, closure transport and scalar realization.",
+  "tool_uses": [
+   {
+    "node": "lem-real-raw-localization-natural-iso",
+    "why": "Use only the generic extension of integral natural isomorphisms through raw scalar localization."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Use the supplied System normalizations and common-stage cocycle as a generic coefficient package; no construction route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T034912-L-3566719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261028T034912-L-3566719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
