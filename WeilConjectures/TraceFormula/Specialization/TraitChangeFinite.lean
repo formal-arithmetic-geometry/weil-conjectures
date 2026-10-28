@@ -46,7 +46,7 @@ Lσ_s^*(χ_ψ) ∘ bc_s ∘ Rq''_{s*}(α_φ) = α_τ(Rq_{η*}) ∘ Ψ_{S'}(bc_η
   `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`);
 * `bc_s`, `bc_η` are the base change morphisms of the cartesian squares of special and of generic
   fibres, invertible by proper base change (blueprint `sk-thm-sfb-proper-base-change`,
-  `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`);
+  `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`);
 * `α_τ` is the change of trait for the trait itself, invertible on bounded constructible complexes
   (`NearbyCyclesModel.isIso_pullbackExchange_traitGenericModelMap_app`), and `Rq_{η*}` preserves
   them (`boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`).
@@ -223,19 +223,25 @@ theorem isIso_pullbackExchange_traitChangeGenericHom_app_of_isFinite [IsFinite q
   -- the proper exchanges
   have hχ : IsIso ((hN.toTraitGeneric.pushforwardExchange 𝐐).app A) := by
     have : IsProper hN.toTraitGeneric.total := inferInstanceAs (IsProper q)
-    exact hN.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper hN.isPullback_i
+    exact hN.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper
+      (traitGenericPoint k' ≫ traitToBase k' k') ⟨_, ⟨hN.isTraitModel.exists_isPullback⟩⟩
+      ⟨𝟙 _, isTraitModel_traitGenericModel k'⟩ hN.isPullback_i
       (IsPullback.of_horiz_isIso ⟨rfl⟩) hA
   -- proper base change on the special fibres
-  have hbc' := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ ⟨hs⟩
-    (isPullback_baseChangeSpecialMap_traitChange K hN) ((N.toGeneric.nearbyCycles 𝐐).obj A) hΨ
+  have : Fact (ringChar K ≠ ℓ) := ⟨Algebra.ringChar_eq k' K ▸ Fact.out⟩
+  have hbc' := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ (𝟙 _) (𝟙 _)
+    ⟨hs⟩ (isPullback_baseChangeSpecialMap_traitChange K hN) ((N.toGeneric.nearbyCycles 𝐐).obj A)
+    hΨ
   -- the change of trait of the trait
   have hτ := isIso_pullbackExchange_traitGenericModelMap_app k' K (ℓ := ℓ)
     (boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj ℓ
       (𝟙 (Spec (.of (traitGenericField k')))) g A hA)
   have : IsProper hN''.toTraitGeneric.total :=
     inferInstanceAs (IsProper (pullback.snd q (traitMap k' K)))
-  exact Hom.isIso_pullbackExchange_app_of_square_of_isProper ℓ (traitChangeGenericHom K hN)
-    hN.toTraitGeneric hN''.toTraitGeneric (traitGenericModelMap k' K)
+  exact Hom.isIso_pullbackExchange_app_of_square_of_isProper ℓ
+    (traitGenericPoint k' ≫ traitToBase k' k') (traitGenericPoint K ≫ traitToBase K K)
+    (by exact ⟨_, ⟨hN''.isTraitModel.exists_isPullback⟩⟩) ⟨𝟙 _, isTraitModel_traitGenericModel K⟩
+    (traitChangeGenericHom K hN) hN.toTraitGeneric hN''.toTraitGeneric (traitGenericModelMap k' K)
     (by simp [pullback.condition]) (by simp [hb]) hb hs
     (isPullback_baseChangeGenericMap_traitChange K hN) hN''.isPullback_i
     (IsPullback.of_horiz_isIso ⟨rfl⟩) A hA hχ hbc' hτ

@@ -94,9 +94,10 @@ XIII 2.1.7): for a morphism `φ : M ⟶ N` of models of finite type over the tra
 total spaces is proper and whose square of special fibres is cartesian, the base change morphism
 `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the direct image `Rj_{M*} L` of a bounded
 constructible `ℚ̄_ℓ`-complex `L` on the geometric generic fibre of `M`. -/
-theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {Y Y' : Scheme.{u}}
-    {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y}
-    {f' : X'.left ⟶ Y'} (φ : M.Hom N f f') (hM : M.IsTraitModel)
+theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {X' Y Y' : Scheme.{u}}
+    {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y}
+    {f' : X' ⟶ Y'} (φ : M.Hom N f f')
+    (hM : ∃ a : X' ⟶ Spec (.of k'), M.IsTraitModel (X' := Over.mk a))
     (hN : ∃ a : Y' ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a)) [IsProper φ.total]
     (hi : IsPullback M.i f' φ.total N.i)
     (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.generic) Ab.{u + 1})
@@ -104,6 +105,7 @@ theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {Y Y' : Scheme.{u}}
     (hL : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic) L) :
     IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) φ.commSq_i).app
       ((R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj L)) := by
+  obtain ⟨aM, hM⟩ := hM
   obtain ⟨aN, hN⟩ := hN
   have := hM.isNoetherian_generic
   have := hM.isNoetherian_total

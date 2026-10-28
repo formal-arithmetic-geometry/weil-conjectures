@@ -135,7 +135,8 @@ lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
   have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
   (compactifiedToPointModelHom X x k').isIso_pushforwardExchange_app_of_isProper
     (point k).hom
-    (isTraitModel_compactifiedDeformationModel X x k') (isTraitModel_traitModel k k').exists_over
+    (isTraitModel_compactifiedDeformationModel X x k').exists_over
+    (isTraitModel_traitModel k k').exists_over
     (by
       have h := isPullback_compactifiedSpecialFibre X x k'
       rw [← toPoint_left (compactifiedSpecialFibre X x k')] at h

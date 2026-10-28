@@ -119,7 +119,7 @@ lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
   have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
   rw [boundedConstructiblePushforwardExchange_eq_liftExchange]
   exact isIso_liftExchange_of_isIso_app _ _ _ _ _
-    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper (point k).hom hMt
+    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper (point k).hom hMt.exists_over
       (isTraitModel_traitModel k k').exists_over hi hε K.property
 
 /-- **The compact-support exchange of a proper model over the trait** (blueprint

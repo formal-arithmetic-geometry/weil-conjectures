@@ -70,9 +70,10 @@ sides are `i_N^* Rt_* Rj_{M*} Lε_M^*`. (The `ε`-square cannot be dropped: `Rf_
 with the base change to the geometric generic fibre.) -/
 theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
     [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [IsNoetherian Y] (aY : Y ⟶ Spec (.of k))
-    {X' : Over (Spec (.of k'))} {Y' : Scheme.{u}} {M : NearbyCyclesModel X X'.left}
-    {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X'.left ⟶ Y'} (φ : M.Hom N f f')
-    (hM : M.IsTraitModel) (hN : ∃ a : Y' ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a))
+    {X' Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y}
+    {f' : X' ⟶ Y'} (φ : M.Hom N f f')
+    (hM : ∃ a : X' ⟶ Spec (.of k'), M.IsTraitModel (X' := Over.mk a))
+    (hN : ∃ a : Y' ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a))
     [IsProper φ.total] [IsProper f]
     (hi : IsPullback M.i f' φ.total N.i) (hε : IsPullback M.ε φ.generic f N.ε)
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -111,8 +112,8 @@ theorem isIso_pushforwardExchange_app_of_isProper_geometric {X Y : Scheme.{u}}
   have : IsProper φ.total := by rw [ht]; infer_instance
   have := hN.isNoetherian_total
   obtain ⟨q, -, -, -, -, -, -⟩ := hN.exists_isPullback
-  exact φ.isIso_pushforwardExchange_app_of_isProper (q ≫ traitToBase k' k') hM.geometric
-    ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩ (by rw [ht]; exact hi) hj.flip hK
+  exact φ.isIso_pushforwardExchange_app_of_isProper (q ≫ traitToBase k' k')
+    hM.geometric.exists_over ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩ (by rw [ht]; exact hi) hj.flip hK
 
 end NearbyCyclesModel.Hom
 

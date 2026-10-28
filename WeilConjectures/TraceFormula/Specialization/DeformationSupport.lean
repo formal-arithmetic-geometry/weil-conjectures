@@ -104,7 +104,8 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj [Fact (ringChar k' ≠ 
     exact isPullback_deformationModel_ε k' (X := Z) _
   have := isNoetherian_of_locallyOfFiniteType X.hom
   have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper X.hom
-    (isTraitModel_deformationModel Z _ k') (isTraitModel_deformationModel X I k').exists_over
+    (isTraitModel_deformationModel Z _ k').exists_over
+    (isTraitModel_deformationModel X I k').exists_over
     (isPullback_deformationSpecialFibreMap k' g hJ) hε M.property
   have h3 : IsZero
       (R(((deformationSpecialFibreMap g hJ k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj

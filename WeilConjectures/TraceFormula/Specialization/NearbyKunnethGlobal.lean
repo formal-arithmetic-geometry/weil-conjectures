@@ -91,6 +91,14 @@ noncomputable def traitGenericModel :
   i := traitClosedPoint k'
   ε := 𝟙 _
 
+/-- The trait is a model of finite type over itself as a model of its geometric generic point. -/
+theorem isTraitModel_traitGenericModel :
+    (traitGenericModel k').IsTraitModel (X' := Over.mk (𝟙 (Spec (.of k')))) := by
+  have : IsIso (Over.mk (𝟙 (Spec (.of k')))).hom := inferInstanceAs (IsIso (𝟙 _))
+  exact ⟨⟨𝟙 _, 𝟙 _, inferInstance, inferInstance, inferInstance,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩⟩⟩
+
 variable {k'}
 
 variable {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
@@ -231,13 +239,9 @@ theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
   have : IsProper g := MorphismProperty.of_isPullback h.isPullback_j ‹IsProper q›
   have : IsIso (traitGenericModel k').ε :=
     inferInstanceAs (IsIso (𝟙 (Spec (.of (traitGenericField k')))))
-  have : IsIso (Over.mk (𝟙 (Spec (.of k')))).hom := inferInstanceAs (IsIso (𝟙 _))
-  have hN : (traitGenericModel k').IsTraitModel (X' := Over.mk (𝟙 (Spec (.of k')))) :=
-    ⟨⟨𝟙 _, 𝟙 _, inferInstance, inferInstance, inferInstance,
-      IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩,
-      IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩⟩⟩
   exact h.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper
-    (traitGenericPoint k' ≫ traitToBase k' k') ⟨h.isTraitModel.exists_isPullback⟩ ⟨𝟙 _, hN⟩
+    (traitGenericPoint k' ≫ traitToBase k' k') ⟨_, ⟨h.isTraitModel.exists_isPullback⟩⟩
+    ⟨𝟙 _, isTraitModel_traitGenericModel k'⟩
     h.isPullback_i (IsPullback.of_horiz_isIso ⟨rfl⟩)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.j C₀ hC₀)
 

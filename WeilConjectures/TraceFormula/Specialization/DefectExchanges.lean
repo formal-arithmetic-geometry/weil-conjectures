@@ -122,13 +122,15 @@ theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
   have := isNoetherian_of_locallyOfFiniteType
     (deformationSpecialFibre (centre X I) ⊥ k').hom
   have h₁ := (comapDeformationModelHom f I k').isIso_pushforwardExchange_app_of_isProper X.hom
-    (isTraitModel_deformationModel _ _ k') (isTraitModel_deformationModel _ _ k').exists_over
+    (isTraitModel_deformationModel _ _ k').exists_over
+    (isTraitModel_deformationModel _ _ k').exists_over
     (isPullback_deformationSpecialFibreMap_toTotal f (siteIdeal_map_appLE_le_comap f I) k').flip
     (isPullback_deformationModel_ε_deformationGenericMap k' f (siteIdeal_map_appLE_le_comap f I))
     L'.property
   have h₂ := (centreDeformationModelHom f I k').isIso_pushforwardExchange_app_of_isProper
     (centre X I).hom
-    (isTraitModel_deformationModel _ _ k') (isTraitModel_deformationModel _ _ k').exists_over
+    (isTraitModel_deformationModel _ _ k').exists_over
+    (isTraitModel_deformationModel _ _ k').exists_over
     (isPullback_deformationSpecialFibreMap_toTotal (centreMap f I)
       (siteIdeal_map_appLE_le_bot_centreMap f I) k').flip
     (isPullback_deformationModel_ε_deformationGenericMap k' (centreMap f I)
