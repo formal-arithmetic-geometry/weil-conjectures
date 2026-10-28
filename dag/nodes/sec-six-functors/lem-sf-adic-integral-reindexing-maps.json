@@ -13,26 +13,57 @@
  ],
  "proof": [
   {
-   "text": "Construct the balanced integral reindexing family E ↦ I(E) by comparing the finite quotient projections of the completed coefficient sheaves, using the coefficient cartesian and finite-colimit statements and the inverse-image tensor/Hom comparison. The result is a Nonempty family of IntegralReindex maps; no realization comparison is used.",
+   "text": "Compare the maps from pulled-back finite constant coefficient sheaves to finite continuous coefficient sheaves by the uniqueness of constant-section-normalized transport. Cancel the finite presentation isomorphism and evaluate on each point, using finite_constants on both schemes. Compose the two completed maps with each finite quotient projection, apply the preceding finite square, and use integral_residues. Joint monicity of the inverse-limit projections gives naturality of the integral presentation.",
    "uses": [
     "lem-weil-proetale-isomorphism-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-pur-isomorphism-inverse-image-tensor-hom"
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the proposed coefficient square with the invertible integral presentation. Cancel that presentation in the structural coefficient maps. Function normalization of RingReindex and the integral and rational inclusion normalizations identify the resulting maps pointwise. Invert the coefficient transport maps to obtain the restriction-of-scalars square; its components are identity linear equivalences on sections, with linearity given by that square.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "def-sf-native-adic-reindexing-data",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the mate of this restriction square under the normalized scalar-extension adjunctions. The module transports are equivalences, so the mate is an isomorphism. Evaluate its unit equation at a local section to get the pure-section rule at scalar one; scalar linearity and inverse transport of the scalar give the rule for every scalar. Invert this mate to obtain balance and its specified sections equation.",
+   "uses": [
+    "lem-weil-isomorphism-limit-scalar-chain-comparison",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer the universal homotopy-category scalar-extension counits to cochain complexes. Apply the left-derived exact-equivalence square to balance and the two exact module transports. Its universal factorization equation is precisely integralReindexRepresentative after unfolding the cochain counits. Combine balance, sections, the derived comparison and this equation into IntegralReindex, and choose one such structure independently for every coefficient field.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "def-derived-cochain-counit",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-sf-native-adic-reindexing-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-proetale-isomorphism-inverse-image",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "lem-pur-isomorphism-inverse-image-tensor-hom"
+  "def-sf-locally-finite-adic-realization-data",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "def-sf-native-adic-reindexing-data",
+  "lem-weil-isomorphism-limit-scalar-chain-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-derived-exact-equivalence-squares",
+  "def-derived-cochain-counit"
  ],
  "proof_origin": {
-  "by": "R4 stage 3",
+  "by": "P9 stage 3",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "BS Remark 6.8.15; balanced integral reindexing subargument split from the parent descent statement."
+  "place": "BS Lemma 6.8.2 and Remark 6.8.15; finite residue normalization, scalar-adjunction mate and universal derived-counit comparison."
  },
  "mathlib_searches": [
   {
@@ -102,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261027T234256-L-85098",
+  "landing": "20261028T020633-L-2533388",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
