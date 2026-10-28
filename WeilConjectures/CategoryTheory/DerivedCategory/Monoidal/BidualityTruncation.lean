@@ -6,9 +6,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.DoubleDual
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 
 /-! # Finite truncation for canonical biduality
 

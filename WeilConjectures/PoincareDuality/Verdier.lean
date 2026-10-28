@@ -94,14 +94,6 @@ open CategoryTheory MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-private theorem isIso_biduality_fullSubcategory
-    {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
-    [BraidedCategory C] (P : ObjectProperty C) [P.IsMonoidal]
-    [P.IsMonoidalClosed] (W K : P.FullSubcategory)
-    (h : IsIso (toIhomIhom W.obj K.obj)) : IsIso (toIhomIhom W K) := by
-  have : IsIso (P.ι.map (toIhomIhom W K)) := h
-  exact isIso_of_reflects_iso (toIhomIhom W K) P.ι
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -208,7 +200,7 @@ theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj 
     biduality_of_bounded_heart _ Q
       (fun M hM ↦ isIso_biduality_constructible_sheaf ℓ (Over.mkIdTerminal.from X) M hM)
       K.obj K.property.1 K.property.2
-  exact isIso_biduality_fullSubcategory _ (dualizingComplex ℓ X) K hK
+  exact ObjectProperty.isIso_toIhomIhom_fullSubcategory _ (dualizingComplex ℓ X) K hK
 
 /-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
 `det-pd-biduality-coefficients`): if the dualizing complex `ω_X` is isomorphic to an invertible
