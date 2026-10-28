@@ -15,24 +15,40 @@
  },
  "proof": [
   {
-   "text": "Choose a finite free basis of the completed coefficient extension. After restriction of scalars, the source and target Hom complexes are finite sums of the same RHom complexes. The tensor-Hom basis identities show that the evaluation transpose and its basis-defined inverse compose to identities; exact restriction transports this isomorphism through the derived localization and the normalized tensor presentations.",
+   "text": "Use integralScalarOrdinaryModelComparison to obtain the pure-tensor-normalized ordinary scalar isomorphism t and its derived isomorphism e. Apply scalarTensor_model_comparison at K and H(K,M) to identify the scalar tensor square with the unique source and target adjoint comparisons.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-trf-integral-scalar-ordinary-model-comparison",
+    "lem-sf-integral-hom-scalar-tensor-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert that tensor square, postcompose with extended evaluation, and use leftAdjointUniq_hom_app_counit. Naturality of the adjunction Hom equivalence identifies the original homMap with coefficientBaseChangeHom for the canonical closed models and the transported tensor isomorphism. Naturality of closed uncurrying shows that changing the scalar functor along e conjugates coefficientBaseChangeHom by e at the source Hom and by the target Hom functor applied to the inverse source and forward target components of e.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical scalarHomOrdinary comparison is invertible by the already proved scalarHomOrdinary_isIso, which contains the finite-free basis calculation. The two components of e and the target internal-Hom image of their product are isomorphisms. Their composite, equal to the requested homMap by the preceding steps, is therefore an isomorphism.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-trf-integral-scalar-ordinary-model-comparison",
+  "lem-sf-integral-hom-scalar-tensor-model-comparison",
+  "def-sf-integral-finite-extension-models",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-integral-operations-scalar-extension"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
-  "place": "Paragraph 5: finite-free basis computation of the evaluation transpose."
+  "place": "Paragraph 5: identification through the normalized tensor presentations; Stacks Project sites-cohomology.tex, Tags 06YY, 07A4 and 08J9."
  },
  "mathlib_searches": [
   {
@@ -90,12 +106,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261027T234136-L-11660",
+  "landing": "20261028T035004-L-3577142",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-integral-hom-scalar-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Normalized scalar tensor square under integral Hom presentation comparison",
+ "statement": "Fix a prime l, finite coefficient fields E,L over Q_l, an embedding iota:E to L, and a scheme X. Let a,b be normalized IntegralHom tensor presentations over the two completed coefficient sheaves [def-sf-integral-finite-extension-models]. Let t identify integralOrdinaryScalar with completedOrdinaryScalarExtension, preserving every sheafified scalar tensor section s tensor x, and let e identify their derived functors and satisfy the cochain-counit equation of [lem-trf-integral-scalar-ordinary-model-comparison]. Write F for integralOrdinaryDerivedScalar, G for pbcDerivedExtend of completedCoefficientMap, SA,SB for scalarIntegralClosed, and mu for scalarClosedTensor [lem-pur-integral-operations-scalar-extension] transported from F to G by e. For any ambient K,N, let gamma_a(K) be Adjunction.leftAdjointUniq from a.adjunction K to SA.adjunction K, and gamma_b(GK) the corresponding target comparison. Then G.map(gamma_a(K).hom.app N) followed by mu.hom.app(N,K) equals the normalized scalarTensor(a,b).hom.app(K,N) followed by gamma_b(GK).hom.app(GN). This is a tensor square for arbitrary K,N, before taking an internal-Hom mate; it asserts no invertibility of a Hom comparison.",
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-models",
+  "lem-trf-integral-scalar-ordinary-model-comparison",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraph 5: identification through the normalized tensor presentations; Stacks Project sites-cohomology.tex, Tags 06YY, 07A4 and 08J9."
+ },
+ "proof": [
+  {
+   "text": "For a and the canonical source closed structure, take the unique comparison of the left adjoints to the same fixed internal Hom. On K-flat pairs its representative is the source presentation inverse followed by the Koszul interchange and the canonical tensor representative. Test maps into K-injective targets and use the two normalized uncurrying formulas to prove this: the interchange contributes exactly the signed evaluation factor, and K-injective resolutions detect equality. This comparison is natural in both tensor inputs. Repeat over the target coefficient sheaf.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "Paragraph 5: identification through the normalized tensor presentations; Stacks Project sites-cohomology.tex, Tags 06YY, 07A4 and 08J9."
+   }
+  },
+  {
+   "text": "The given pure-tensor normalization of t identifies the ordinary scalar tensor maps and their Koszul interchanges; the given cochain-counit equation for e identifies their derived representative squares. Conjugate scalarClosedTensor by e and the two adjoint comparisons. On every flat-term K-flat pair the resulting square is the defining normalization of PurCompactSupport.scalarTensor. Its uniqueness identifies the comparisons. Resolving both tensor inputs extends the square to all K,N. This uses no finite-free Hom calculation.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "def-sf-compact-support-scalar-tensor-balancing",
+    "new-sf-scalar-tensor-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "Paragraph 5: identification through the normalized tensor presentations; Stacks Project sites-cohomology.tex, Tags 06YY, 07A4 and 08J9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "new-sf-scalar-tensor-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraph 5: identification through the normalized tensor presentations; Stacks Project sites-cohomology.tex, Tags 06YY, 07A4 and 08J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived tensor base change commutes with the unique isomorphisms of left adjoints to an internal Hom functor",
+   "results": "Rigid-category tensorRightHomEquiv and closed-functor expComparison lemmas; none compares these normalized unbounded sheaf tensor presentations.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique: leftAdjointUniq, leftAdjointUniq_hom_app_counit and unit compatibility. These give the adjoint comparisons but not their K-flat normalization or scalar tensor square.",
+   "date": "2026-10-28",
+   "verdict": "formal ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*[Tt]ensor|[Tt]ensor.*leftAdjointUniq in Mathlib/CategoryTheory",
+   "results": "No matches. Local Sheaf searches found tensorPresentation_counit_transport, which supplies an unspecified closed structure without the scalar tensor normalization required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionHomMapInvertibility",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraph 5, transport of the finite-free evaluation computation through normalized tensor presentations.",
+   "via": [
+    "lem-sf-integral-finite-extension-hom-map-invertibility",
+    "lem-sf-integral-finite-extension-invertibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralHomScalarTensorModelComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralHomScalarTensorModelComparison.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.scalarTensor_model_comparison",
+  "statement": "theorem scalarTensor_model_comparison\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (X : Scheme.{u})\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X))\n    (b : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l L X))\n    (t : integralOrdinaryScalar l E L ι X ≅\n      completedOrdinaryScalarExtension.{u, u} l E L ι X)\n    (e : integralOrdinaryDerivedScalar l E L ι X ≅\n      completedDerivedScalarExtension.{u, u} l E L ι X)\n    (ht : ∀ (N : integralTowerModules l E X) (U : X.ProEtᵒᵖ)\n      (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)\n      (x : N.val.obj U),\n      (t.hom.app N).val.app U (integralOrdinaryTensorSection l E L ι X N U s x) =\n        completedScalarTensorSection.{u, u} l E L ι X N U s x)\n    (he : ∀ P : CochainComplex (integralTowerModules l E X) ℤ,\n      e.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit.{u, u} l E L ι X P =\n        (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app P ≫\n          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P))\n    (K N : IntegralVerdier.Ambient l E X) :\n    (pbcDerivedExtend (completedCoefficientMap l E L ι X)).map\n        ((Adjunction.leftAdjointUniq (a.adjunction K)\n          ((scalarIntegralClosed l E X).adjunction K)).hom.app N) ≫\n      (Functor.isoWhiskerLeft (scalarIntegralClosed l E X).tensor e.symm ≪≫\n        scalarClosedTensor l E L ι X ≪≫\n        Functor.isoWhiskerRight (NatIso.prod e e) (scalarIntegralClosed l L X).tensor).hom.app\n          (N, K) =\n    (PurCompactSupport.scalarTensor (completedCoefficientMap l E L ι X)\n        (tensorModel X a) (tensorModel X b)).hom.app (K, N) ≫\n      (Adjunction.leftAdjointUniq\n        (b.adjunction ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K))\n        ((scalarIntegralClosed l L X).adjunction\n          ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K))).hom.app\n            ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261028T035004-L-3577142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261028T035004-L-3577142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
