@@ -6,6 +6,7 @@ Authors: SHEAF group NA
 module
 
 public import Sheaf.Paper.NativeCompactProjectionFormula
+public import Sheaf.Paper.NativeProperProjectionModels
 public import Sheaf.Paper.NativeProperProjectionComparisons
 public import Sheaf.Paper.AdicProperAdjunctionRealization
 public import Sheaf.Paper.DerivedWeilTensorOperations
@@ -14,22 +15,7 @@ public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.Localization
 public import Sheaf.Paper.AdicQbarConstructibleRealization
 
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.NativeDerivedWeilTensorConstructible
-import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
-import Sheaf.CategoryTheory.FixedPairDerivedForgetComparison
-import Sheaf.Paper.LocallyFiniteCoefficientRingRealization
-import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
-import Sheaf.WeilSheaf.NativePullbackStarPreservation
-import Sheaf.Algebra.Homology.RingedForgetTensorTransposition
-import Sheaf.Paper.WeilFrobeniusActionResolutions
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Paper.OrdinaryProperProjectionInvertible
 
 /-! # Realization of the native proper projection morphism
 
@@ -62,6 +48,12 @@ attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.commonStageDerivedPullback WeilConjectures.commonStageDerivedTensor
   AlgebraicGeometry.Scheme.ContinuousRational.modulePull
   AlgebraicGeometry.Scheme.ContinuousRational.derivedPull
+-- Keep the large concrete localization and cochain maps behind their stated types.
+attribute [local irreducible]
+  AlgebraicGeometry.ProEtaleWeilSheaf.properSectionFactors
+  AlgebraicGeometry.ProEtaleWeilSheaf.properNativePushUnit
+  AlgebraicGeometry.ProEtaleWeilSheaf.properPushSheafCochain
+  AlgebraicGeometry.ProEtaleWeilSheaf.properSectionCochain
 
 universe u
 
@@ -69,6 +61,143 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry WeilConjectures Oppo
 open WeilConjectures.AdicQbarRealization
 open AlgebraicGeometry.Scheme
 open scoped TensorProduct AlgebraicGeometry.ProEtaleWeilSheaf
+
+-- Tensor-mate coherence needs naturality of the two realization tensors, but
+-- only the components of the pullback/tensor comparison.
+private theorem projection_square
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}
+    (adj : F ⊣ R) (adj' : K ⊣ S)
+    (T : A × A ⥤ A) (U : B × B ⥤ B) (V : C × C ⥤ C) (W : D × D ⥤ D)
+    (tF : ∀ P Q, F.obj (T.obj (P, Q)) ⟶ U.obj (F.obj P, F.obj Q))
+    (tG : T ⋙ G ⟶ (G.prod G) ⋙ V)
+    (tH : U ⋙ H ⟶ (H.prod H) ⋙ W) (tK : V ⋙ K ⟶ (K.prod K) ⋙ W)
+    (a : F ⋙ H ≅ G ⋙ K) (b : R ⋙ G ≅ H ⋙ S)
+    (hc : ∀ P Q : A,
+      H.map (tF P Q) ≫ tH.app (F.obj P, F.obj Q) ≫
+        W.map (Prod.mkHom (a.hom.app P) (a.hom.app Q)) =
+      a.hom.app (T.obj (P, Q)) ≫ K.map (tG.app (P, Q)) ≫
+        tK.app (G.obj P, G.obj Q))
+    (hb : ∀ E, H.map (adj.counit.app E) =
+      a.hom.app (R.obj E) ≫ K.map (b.hom.app E) ≫ adj'.counit.app (H.obj E))
+    (E : B) (Q : A) :
+    G.map (adj.homEquiv _ _ (tF (R.obj E) Q ≫
+        U.map (Prod.mkHom (adj.counit.app E) (𝟙 _)))) ≫
+      b.hom.app (U.obj (E, F.obj Q)) ≫
+      S.map (tH.app (E, F.obj Q) ≫
+        W.map (Prod.mkHom (𝟙 _) (a.hom.app Q))) =
+    tG.app (R.obj E, Q) ≫
+      V.map (Prod.mkHom (b.hom.app E) (𝟙 _)) ≫
+      adj'.homEquiv _ _ (tK.app (S.obj (H.obj E), G.obj Q) ≫
+        W.map (Prod.mkHom (adj'.counit.app (H.obj E)) (𝟙 _))) := by
+  have hex (E : B) : K.map (b.hom.app E) ≫ adj'.counit.app (H.obj E) =
+      a.inv.app (R.obj E) ≫ H.map (adj.counit.app E) := by
+    rw [hb]
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  have ht (P Q : A) :
+      a.inv.app (T.obj (P, Q)) ≫ H.map (tF P Q) ≫
+        tH.app (F.obj P, F.obj Q) =
+      K.map (tG.app (P, Q)) ≫ tK.app (G.obj P, G.obj Q) ≫
+        W.map (Prod.mkHom (a.inv.app P) (a.inv.app Q)) := by
+    apply (cancel_epi (a.hom.app (T.obj (P, Q)))).1
+    simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+    have h := congrArg
+      (fun f ↦ f ≫ W.map (Prod.mkHom (a.inv.app P) (a.inv.app Q))) (hc P Q)
+    simp only [Category.assoc, ← W.map_comp, prod_comp, Prod.mkHom,
+      Iso.hom_inv_id_app] at h
+    change H.map (tF P Q) ≫ tH.app (F.obj P, F.obj Q) ≫
+      W.map (𝟙 (H.obj (F.obj P), H.obj (F.obj Q))) =
+        a.hom.app (T.obj (P, Q)) ≫ K.map (tG.app (P, Q)) ≫
+          tK.app (G.obj P, G.obj Q) ≫
+            W.map (Prod.mkHom (a.inv.app P) (a.inv.app Q)) at h
+    have hid : W.map (𝟙 (H.obj (F.obj P), H.obj (F.obj Q))) = 𝟙 _ :=
+      W.map_id (H.obj (F.obj P), H.obj (F.obj Q))
+    rw [hid] at h
+    have hcid : tH.app (F.obj P, F.obj Q) ≫
+        𝟙 (W.obj (H.obj (F.obj P), H.obj (F.obj Q))) =
+        tH.app (F.obj P, F.obj Q) := Category.comp_id _
+    rw [hcid] at h
+    simpa only [Category.assoc] using h
+  let pi := adj.homEquiv _ _ (tF (R.obj E) Q ≫
+    U.map (Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q))))
+  apply (adj'.homEquiv _ _).symm.injective
+  change (adj'.homEquiv _ _).symm (G.map pi ≫ b.hom.app _ ≫ S.map _) = _
+  rw [adj'.homEquiv_naturality_left_symm, adj'.homEquiv_naturality_right_symm]
+  rw [adj'.homEquiv_counit, hex]
+  dsimp only [Functor.id_obj, Functor.comp_obj] at *
+  simp only [Adjunction.homEquiv_naturality_left_symm, Equiv.symm_apply_apply]
+  have hn := a.inv.naturality pi
+  dsimp only [Functor.comp_map, Functor.id_obj] at hn
+  simp only [← Category.assoc]
+  rw [hn]
+  have hpi : F.map pi ≫ adj.counit.app (U.obj (E, F.obj Q)) =
+      tF (R.obj E) Q ≫ U.map (Prod.mkHom (adj.counit.app E) (𝟙 _)) :=
+    (adj.homEquiv _ _).symm_apply_apply _
+  simp only [Category.assoc]
+  rw [← H.map_comp_assoc, hpi, H.map_comp, Category.assoc]
+  have htH := tH.naturality (Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q)))
+  have htK := tK.naturality (Prod.mkHom (b.hom.app E) (𝟙 (G.obj Q)))
+  dsimp only [Functor.comp_map, Functor.prod_map] at htH htK
+  rw [reassoc_of% htH, reassoc_of% htK, reassoc_of% (ht (R.obj E) Q)]
+  simp only [← W.map_comp]
+  congr 2
+  congr 1
+  ext
+  · simpa using (hex E).symm
+  · simp
+
+-- Reverse a tensor square along its three comparison isomorphisms.
+private theorem inverse_tensor_square
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {F : A ⥤ B} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D}
+    (T : A × A ⥤ A) (U : B × B ⥤ B) (V : C × C ⥤ C) (W : D × D ⥤ D)
+    (tF : ∀ P Q, F.obj (T.obj (P, Q)) ⟶ U.obj (F.obj P, F.obj Q))
+    (tG : (G.prod G) ⋙ V ≅ T ⋙ G)
+    (tH : (H.prod H) ⋙ W ≅ U ⋙ H)
+    (tK : V ⋙ K ⟶ (K.prod K) ⋙ W) (a : F ⋙ H ≅ G ⋙ K)
+    (hc : ∀ P Q, K.map (tG.hom.app (P, Q)) ≫ a.inv.app (T.obj (P, Q)) ≫
+      H.map (tF P Q) = tK.app (G.obj P, G.obj Q) ≫
+        W.map (Prod.mkHom (a.inv.app P) (a.inv.app Q)) ≫
+        tH.hom.app (F.obj P, F.obj Q)) (P Q : A) :
+    H.map (tF P Q) ≫ tH.inv.app (F.obj P, F.obj Q) ≫
+        W.map (Prod.mkHom (a.hom.app P) (a.hom.app Q)) =
+      a.hom.app (T.obj (P, Q)) ≫ K.map (tG.inv.app (P, Q)) ≫
+        tK.app (G.obj P, G.obj Q) := by
+  apply (cancel_epi (K.map (tG.hom.app (P, Q)) ≫ a.inv.app _)).1
+  simp only [Category.assoc]
+  rw [reassoc_of% (hc P Q)]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
+    ← W.map_comp, prod_comp, Prod.mkHom, Iso.inv_hom_id_app]
+  rw [← K.map_comp_assoc, Iso.hom_inv_id_app, K.map_id, Category.id_comp]
+  change tK.app (G.obj P, G.obj Q) ≫
+    W.map (𝟙 (K.obj (G.obj P), K.obj (G.obj Q))) = tK.app (G.obj P, G.obj Q)
+  have hid : W.map (𝟙 (K.obj (G.obj P), K.obj (G.obj Q))) = 𝟙 _ :=
+    W.map_id (K.obj (G.obj P), K.obj (G.obj Q))
+  rw [hid]
+  exact Category.comp_id (tK.app (G.obj P, G.obj Q))
+
+-- Naturality of a counit mate for an arbitrary pair of tensor bifunctors.
+private theorem projection_naturality
+    {A B : Type*} [Category A] [Category B]
+    {F : A ⥤ B} {R : B ⥤ A} (adj : F ⊣ R)
+    (T : A × A ⥤ A) (U : B × B ⥤ B)
+    (mu : T ⋙ F ⟶ F.prod F ⋙ U)
+    {E E' : B} {P P' : A} (e : E ⟶ E') (q : P ⟶ P') :
+    T.map (Prod.mkHom (R.map e) q) ≫
+        adj.homEquiv _ _ (mu.app (R.obj E', P') ≫
+          U.map (Prod.mkHom (adj.counit.app E') (𝟙 _))) =
+      adj.homEquiv _ _ (mu.app (R.obj E, P) ≫
+          U.map (Prod.mkHom (adj.counit.app E) (𝟙 _))) ≫
+        R.map (U.map (Prod.mkHom e (F.map q))) := by
+  apply adj.homEquiv_naturality_left_square
+  have ht := mu.naturality (Prod.mkHom (R.map e) q)
+  dsimp only [Functor.comp_map, Functor.prod_map] at ht
+  rw [← Category.assoc, ht]
+  simp only [Category.assoc, ← U.map_comp]
+  congr 2
+  ext
+  · exact adj.counit.naturality e
+  · simp
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
@@ -91,84 +220,7 @@ set_option maxHeartbeats 800000 in
 data, not hypotheses on the morphism or on its constructible derived inputs.
 Source: BS 6.8.14--6.8.15; native projection proof Steps 1--8
 (blueprint: lem-sf-native-proper-projection-realization). -/
-structure NativeProperProjectionRealization where
-  source : LocallyFiniteAdicRealization.Realization l
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber
-  target : LocallyFiniteAdicRealization.Realization l
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber
-  [sourceUnits : ∀ x : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber,
-    Invertible (l : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField x)]
-  [targetUnits : ∀ y : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber,
-    Invertible (l : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField y)]
-  sourceAt : At l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source
-  targetAt : At l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target
-  sourcePresentation :
-    (sectionFunctor l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source).IsEquivalence
-  targetPresentation :
-    (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target).IsEquivalence
-  sourceFinite : ∀ E,
-    FiniteNormalization l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source sourceAt E
-  targetFinite : ∀ E,
-    FiniteNormalization l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target targetAt E
-  sourceHom : HomLaws l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source sourceAt
-  targetHom : HomLaws l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target targetAt
-  primeUnit : IsUnit (l : AlgebraicClosure k₀)
-  comparison : Proper.Comparison l (NativeBaseChange.geometricMap k₀ p) source target
-    (AlgebraicClosure k₀) primeUnit sourceAt targetAt
-  sourceTensor : ProperSectionTensor k₀ l Z source sourceAt
-  targetTensor : ProperSectionTensor k₀ l Y target targetAt
-  balanced : NativeProjectionTensorComparison k₀ l p
-  pull : nativeOpenPull k₀ l p ⋙ properSectionDerived k₀ l Z source ≅
-    properSectionDerived k₀ l Y target ⋙
-      ContinuousRational.derivedPull
-        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
-  pushSheaf : lowerStar k₀ l p ⋙ properSectionForget k₀ l Y target ≅
-    properSectionForget k₀ l Z source ⋙
-      ContinuousRational.DirectImage.modulePush
-        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
-  pushSections : ∀ M V x, HEq ((pushSheaf.hom.app M).val.app V x) x
-  push : (lowerStar k₀ l p).rightDerivedFunctor ⋙ properSectionDerived k₀ l Y target ≅
-    properSectionDerived k₀ l Z source ⋙
-      ContinuousRational.DirectImage.derivedPush
-        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
-  injective : ∀ I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ,
-    I.IsKInjective → CochainComplex.IsKInjective
-      ((properSectionCochain k₀ l Z source).obj I)
-  pushRepresentative : ∀ (I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ)
-      (_hI : I.IsKInjective),
-    (properSectionDerived k₀ l Y target).map (properNativePushUnit k₀ l p I) ≫
-      push.hom.app (DerivedCategory.Q.obj I) ≫
-      (ContinuousRational.DirectImage.derivedPush
-        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
-          ((properSectionFactors k₀ l Z source).hom.app I) =
-    (properSectionFactors k₀ l Y target).hom.app
-        (((lowerStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj I) ≫
-      DerivedCategory.Q.map
-        ((properPushSheafCochain k₀ l p source target comparison.operations pushSheaf).hom.app I) ≫
-      ContinuousRational.DirectImage.pushUnit (NativeBaseChange.geometricMap k₀ p)
-        comparison.operations.coefficient
-        ((properSectionCochain k₀ l Z source).obj I)
-  counit : ∀ A,
-    (properSectionDerived k₀ l Z source).map
-        ((derivedUpperStarLowerStarAdjunction k₀ l p).counit.app A) =
-      pull.hom.app ((lowerStar k₀ l p).rightDerivedFunctor.obj A) ≫
-        (ContinuousRational.derivedPull
-          (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
-          (push.hom.app A) ≫
-        comparison.operations.adjunction.counit.app
-          ((properSectionDerived k₀ l Z source).obj A)
-  pullTensor : ∀ M N,
-    (properSectionDerived k₀ l Z source).map (balanced.mu.hom.app (M, N)) ≫
-      sourceTensor.tensor.hom.app
-        ((nativeOpenPull k₀ l p).obj M, (nativeOpenPull k₀ l p).obj N) ≫
-      sourceAt.closed.tensor.map (Prod.mkHom (pull.hom.app M) (pull.hom.app N)) =
-    pull.hom.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫
-      (ContinuousRational.derivedPull
-        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
-          (targetTensor.tensor.hom.app (M, N)) ≫
-      comparison.tensor.tensor.hom.app
-        ((properSectionDerived k₀ l Y target).obj M,
-          (properSectionDerived k₀ l Y target).obj N)
+structure NativeProperProjectionRealization extends NativeProperProjectionModels k₀ l p where
   projection : properNativeProjectionSource k₀ l p ≅ properNativeProjectionTarget k₀ l p
   projectionMate : ∀ (A : WeilComplex k₀ l Z) (T : WeilComplex k₀ l Y),
     projection.hom.app (A, T) = nativeProjectionProperMate k₀ l p balanced A.obj T.obj
@@ -264,6 +316,125 @@ inverse. No restriction to lisse sheaves or single-degree derived objects is use
 -/
 theorem native_proper_projection_realization [IsProper p] :
     Nonempty (NativeProperProjectionRealization k₀ l p) := by
-  sorry
+  obtain ⟨M⟩ := native_proper_projection_models k₀ l p
+  let := M.sourceUnits
+  let := M.targetUnits
+  let UX := properSectionDerived k₀ l Z M.source
+  let UY := properSectionDerived k₀ l Y M.target
+  let F := nativeOpenPull k₀ l p
+  let FB := ContinuousRational.derivedPull
+    (NativeBaseChange.geometricMap k₀ p) M.comparison.operations.coefficient
+  let RB := ContinuousRational.DirectImage.derivedPush
+    (NativeBaseChange.geometricMap k₀ p) M.comparison.operations.coefficient
+  have hforget (A : DerivedCategory (ProEtaleWeilSheaf k₀ l Z))
+      (T : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :=
+    projection_square (derivedUpperStarLowerStarAdjunction k₀ l p)
+      M.comparison.operations.adjunction
+      (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
+      M.targetAt.closed.tensor M.sourceAt.closed.tensor
+      (fun P Q ↦ M.balanced.mu.hom.app (P, Q))
+      M.targetTensor.tensor.hom M.sourceTensor.tensor.hom M.comparison.tensor.tensor.hom
+      M.pull M.push M.pullTensor M.counit A T
+  have hcommonTensor (P Q : generalAlgebraicallyClosedConstructibleCategory l
+      (PadicAlgCl l) (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+      (ordinary l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber M.source).map
+          (canonicalCommonStagePullbackTensor l (PadicAlgCl l)
+            (NativeBaseChange.geometricMap k₀ p) P Q).hom ≫
+        M.sourceAt.tensor.inv.app
+          ((commonStageDerivedPullback l (PadicAlgCl l)
+            (NativeBaseChange.geometricMap k₀ p)).obj P,
+           (commonStageDerivedPullback l (PadicAlgCl l)
+            (NativeBaseChange.geometricMap k₀ p)).obj Q) ≫
+        M.sourceAt.closed.tensor.map
+          (Prod.mkHom (M.comparison.a.hom.app P) (M.comparison.a.hom.app Q)) =
+      M.comparison.a.hom.app
+          ((commonStageDerivedTensor l (PadicAlgCl l)
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj (P, Q)) ≫
+        FB.map (M.targetAt.tensor.inv.app (P, Q)) ≫
+        M.comparison.tensor.tensor.hom.app
+          ((ordinary l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber M.target).obj P,
+           (ordinary l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber M.target).obj Q) := by
+    exact inverse_tensor_square _ _ _ _
+      (fun P Q ↦ (canonicalCommonStagePullbackTensor l (PadicAlgCl l)
+        (NativeBaseChange.geometricMap k₀ p) P Q).hom)
+      M.targetAt.tensor M.sourceAt.tensor M.comparison.tensor.tensor.hom
+      M.comparison.a M.comparison.tensor_compatibility P Q
+  have hrealization := fun K L ↦ projection_square
+    (geometricCommonStageAdjunction l (PadicAlgCl l) (AlgebraicClosure k₀) M.primeUnit
+      (NativeBaseChange.geometricMap k₀ p)) M.comparison.operations.adjunction
+    (commonStageDerivedTensor l (PadicAlgCl l)
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (commonStageDerivedTensor l (PadicAlgCl l)
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    M.targetAt.closed.tensor M.sourceAt.closed.tensor
+    (fun P Q ↦ (canonicalCommonStagePullbackTensor l (PadicAlgCl l)
+      (NativeBaseChange.geometricMap k₀ p) P Q).hom)
+    M.targetAt.tensor.inv M.sourceAt.tensor.inv M.comparison.tensor.tensor.hom
+    M.comparison.a M.comparison.b hcommonTensor M.comparison.counit K L
+  have hbc (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+      [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+      [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+      (S : LocallyFiniteAdicRealization.Realization l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (A : WeilComplex k₀ l X) :
+      boundedConstructible l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber S
+        ((properSectionDerived k₀ l X S).obj A.obj) := by
+    refine ⟨(nativeForget k₀ l X).obj A.obj, ?_, ⟨Iso.refl _⟩⟩
+    exact (native_closed_forgetful k₀ l X).2.2.2.1 A
+  have hreflect : UY.ReflectsIsomorphisms := by
+    let := M.targetPresentation
+    let : (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber
+      M.target).Additive := M.target.sectionsAdditive
+    let : (nativeForget k₀ l Y).ReflectsIsomorphisms :=
+      (native_closed_forgetful k₀ l Y).2.1
+    change (nativeForget k₀ l Y ⋙
+      (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber
+        M.target).mapDerivedCategory).ReflectsIsomorphisms
+    infer_instance
+  let := hreflect
+  have hiso (A : WeilComplex k₀ l Z) (T : WeilComplex k₀ l Y) :
+      IsIso (nativeProjectionProperMate k₀ l p M.balanced A.obj T.obj) := by
+    have hOrd := properOrdinaryProjection_isIso k₀ l p M.source M.target
+      M.sourceAt M.targetAt M.primeUnit M.comparison (UX.obj A.obj) (UY.obj T.obj)
+      (hbc Z M.source A) (hbc Y M.target T)
+    let := hOrd
+    have h := hforget A.obj T.obj
+    have hpairPush : IsIso (Prod.mkHom (M.push.hom.app A.obj) (𝟙 (UY.obj T.obj))) :=
+      (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+    have hpairPull : IsIso (Prod.mkHom (𝟙 (UX.obj A.obj)) (M.pull.hom.app T.obj)) :=
+      (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+    have hcomp : IsIso
+        (UY.map (nativeProjectionProperMate k₀ l p M.balanced A.obj T.obj) ≫
+          M.push.hom.app ((nativeDerivedTensor k₀ l Z).obj (A.obj, F.obj T.obj)) ≫
+          RB.map (M.sourceTensor.tensor.hom.app (A.obj, F.obj T.obj) ≫
+            M.sourceAt.closed.tensor.map (Prod.mkHom (𝟙 _) (M.pull.hom.app T.obj)))) := by
+      rw [show UY.map (nativeProjectionProperMate k₀ l p M.balanced A.obj T.obj) ≫
+          M.push.hom.app _ ≫ RB.map _ = _ from h]
+      change IsIso (M.targetTensor.tensor.hom.app
+          ((lowerStar k₀ l p).rightDerivedFunctor.obj A.obj, T.obj) ≫
+        M.targetAt.closed.tensor.map (Prod.mkHom (M.push.hom.app A.obj) (𝟙 (UY.obj T.obj))) ≫
+        properOrdinaryProjection k₀ l p M.source M.target M.sourceAt M.targetAt
+          M.comparison.operations M.comparison.tensor (UX.obj A.obj) (UY.obj T.obj))
+      infer_instance
+    have hmapped : IsIso
+        (UY.map (nativeProjectionProperMate k₀ l p M.balanced A.obj T.obj)) :=
+      (isIso_comp_right_iff _ _).1 hcomp
+    exact isIso_of_reflects_iso _ UY
+  let := hiso
+  let projection : properNativeProjectionSource k₀ l p ≅
+      properNativeProjectionTarget k₀ l p :=
+    NatIso.ofComponents
+      (fun P ↦ asIso (nativeProjectionProperMate k₀ l p M.balanced P.1.obj P.2.obj))
+      (by
+        intro P Q f
+        exact projection_naturality (derivedUpperStarLowerStarAdjunction k₀ l p)
+          (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z) M.balanced.mu.hom
+          f.1.hom f.2.hom)
+  exact ⟨{
+    toNativeProperProjectionModels := M
+    projection := projection
+    projectionMate := fun _ _ ↦ rfl
+    projectionForget := fun A T ↦ hforget A.obj T.obj
+    projectionRealization := hrealization }⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
