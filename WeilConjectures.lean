@@ -13259,6 +13259,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
