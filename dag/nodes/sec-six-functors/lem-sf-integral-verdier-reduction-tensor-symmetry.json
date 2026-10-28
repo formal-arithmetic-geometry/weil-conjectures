@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-integral-verdier-reduction-tensor-symmetry",
+ "kind": "statement",
+ "title": "Normalized integral reduction tensor comparison preserves signed symmetry",
+ "statement": "Let D be a finite-field datum, l a prime different from D.p, E a finite-dimensional extension of Q_l, and X a scheme. Let a be a normalized tensor-Hom presentation over the completed coefficient sheaf, s its signed symmetry, n a positive quotient index (exponent n+1), m a normalized ReductionPresentation from a at n, and t a signed symmetry of m.target, as in def-sf-integral-verdier-models and def-sf-integral-hom-reduction-models. Assume s.swap and t.swap are natural in both derived inputs. Write F for derived scalar reduction and mu for m.mu. Then for every two ambient derived objects K,L, mu.inv(K,L) followed by F(s.swap(K,L).hom) equals t.swap(FK,FL).hom followed by mu.inv(L,K). There is no dualizing object, Hom comparison, evaluation equation, constructibility or boundedness premise.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: evaluation compatibility identifies the reduction of delta with the finite double-dual map; signed tensor interchange"
+ },
+ "stmt_deps": [
+  "def-sf-integral-verdier-models",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives P,Q for K,L. The derived reduction counits on these representatives are invertible, and m.normalization provides the invertible chain tensor comparison beta_PQ, its scalar-unit formula and its derived comparison square. Choose the signed chain swaps from s.representative and t.representative.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-integral-verdier-models",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check compatibility of the two beta comparisons with these chain swaps on each total summand of bidegree (i,j). On scalar-unit pure tensors both paths give (-1)^(ij) times the scalar-unit image of y tensor x; the coefficient unit is additive and commutes with the degree transport. The scalar-extension unit generates the extended module, so bilinearity extends the calculation to arbitrary tensor generators. Sheafified tensor generation and the direct-sum total inclusions then give equality of the chain maps.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-integral-verdier-models",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localization to the chain-map equality and substitute the two normalization squares for mu and the two representative equations for the signed swaps. Cancel the invertible representative and reduction-counit factors. This proves the desired square on represented K-flat pairs. Naturality of mu and the two assumed naturality equations transport it along the representing isomorphisms to the original K,L. The same generator calculation includes empty schemes and zero complexes.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-integral-verdier-models",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: evaluation compatibility identifies the reduction of delta with the finite double-dual map; signed tensor interchange"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves the Koszul symmetry under its normalized tensor comparison",
+   "results": "8 hits, including AlgEquiv.extendScalarsOfSurjective and unrelated ordinary scalar-extension lemmas; none states the normalized derived tensor symmetry square.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of derived scalar extension commutes with Koszul signed symmetry",
+   "results": "8 hits about Kaehler differentials and cotangent base change; none concerns these normalized tensor presentations.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|map_toIhomIhom_comp_dualComparison; swap.*mu|mu.*swap|SignedSymmetry in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib supplies generic braiding naturality; the source supplies canonical monoidal double-dual compatibility. FiniteTensorSymmetryCoherence treats finite fixed-scalar sheaf models, and RationalVerdierScalarInterchange treats a different completed scalar extension. No theorem states this square for arbitrary normalized integral ReductionPresentation and the supplied SignedSymmetry data.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braiding\"",
+   "results": "12 hits about braidings of product categories and binary limit cones; no derived scalar-reduction tensor symmetry statement.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdierReductionPairingDeltaUncurried",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "Second proof paragraph: evaluation compatibility identifies reduced delta; tensor-only signed interchange substep",
+   "via": [
+    "lem-sf-integral-verdier-reduction-pairing-delta-uncurried",
+    "lem-sf-integral-verdier-reduction-pairing-delta",
+    "lem-sf-integral-verdier-reduction-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralVerdierReductionTensorSymmetry",
+  "file": "lean/Sheaf/SixFunctors/IntegralVerdierReductionTensorSymmetry.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.reduction_tensor_symmetry",
+  "statement": "theorem reduction_tensor_symmetry\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u})\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheaf l E X D hl))\n    (s : SignedSymmetry X (completedIntegralCommRingSheaf l E X D hl) a)\n    (hs : ∀ (K L K' L' : Ambient l E X) (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (n : ℕ) (m : IntegralHom.ReductionPresentation l E X D hl a n)\n    (t : SignedSymmetry X (integralCoefficientCommRingSheaf l E X n) m.target)\n    (ht : ∀ (K L K' L' : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K ⟶ K') (g : L ⟶ L'),\n      m.target.tensor.map (Prod.mkHom f g) ≫ (t.swap K' L').hom =\n        (t.swap K L).hom ≫ m.target.tensor.map (Prod.mkHom g f))\n    (K L : Ambient l E X) :\n    m.mu.inv.app (K, L) ≫\n        (scalarReductionDerivedExtension l E X n).map (s.swap K L).hom =\n      (t.swap ((scalarReductionDerivedExtension l E X n).obj K)\n        ((scalarReductionDerivedExtension l E X n).obj L)).hom ≫ m.mu.inv.app (L, K)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T020208-L-2478137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261028T020208-L-2478137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
