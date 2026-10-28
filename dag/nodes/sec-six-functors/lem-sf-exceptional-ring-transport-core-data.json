@@ -12,7 +12,7 @@
  },
  "proof": [
   {
-   "text": "Choose the reconstruction and shift package from the isolated reconstruction subproblem. Choose coherent integral operations and realizations from the integral compactification realization theorem. Apply the isolated transported functor/comparison package and assemble all fields of TransportCoreData.",
+   "text": "Choose the reconstruction and shift package from the isolated reconstruction subproblem. Choose coherent integral operations and realizations from the integral compactification realization theorem. Apply the isolated transported functor/comparison package and assemble the independent fields of TransportCoreData. Define reductionF and reductionG from realizeF and realizeG by whiskering through the target reconstruction functor and composing with its counit isomorphism and the right unitor; do not choose the two reduction comparisons independently.",
    "uses": [
     "new-lem-sf-exceptional-ring-transport-reconstructions",
     "lem-sf-integral-compactification-system-realization",
@@ -27,9 +27,9 @@
   "new-lem-sf-exceptional-ring-transport-post-data"
  ],
  "proof_origin": {
-  "by": "G6 stage 3 decomposition",
+  "by": "G7 stage 3: canonical reconstruction-counit comparisons",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26; component formulas for functor whiskering"
  },
  "mathlib_searches": [
   {
@@ -72,7 +72,13 @@
   "statement": "theorem exists_exceptional_transport_core_data\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s)) :\n    Nonempty (TransportCoreData l Ω D hl c operation left)",
   "branch": "sheaf-dag",
   "by": "C5",
-  "date": "2026-10-28"
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_transport_core_data",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.reductionF",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.reductionG"
+  ],
+  "note": "The reduction comparison names and types are preserved; they are now canonical definitions from realizeF/realizeG and the reconstruction counits, rather than independent record fields."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -85,13 +91,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G6",
+  "reviewer": "C-29612",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261027T233948-L-4143113",
+  "landing": "20261028T055654-L-794460",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Item proof and canonical reductionF/G defs in unclaimed ExceptionalRingTransportCoreData against the item and data nodes, change record users, 3b importers (7 OK, 2 INFRA from missing EvaluationUnit olean) and downstream Transported assembly (ExceptionalRingTransportCore.lean:66-69)"
  }
 }

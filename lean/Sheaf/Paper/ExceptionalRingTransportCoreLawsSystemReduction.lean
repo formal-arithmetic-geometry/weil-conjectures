@@ -52,6 +52,16 @@ theorem exists_exceptional_transport_core_system_reduction_laws
           (d.reconstruction E true).equivalence.functor.map ((d.realizeG E).hom.app K) ≫
             (d.reconstruction E true).equivalence.counit.app
               ((d.G E).obj ((d.reconstruction E false).equivalence.functor.obj K)))) := by
-  sorry
+  refine ⟨⟨?_, ?_⟩⟩
+  · intro E K
+    simp only [TransportCoreData.reductionF, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+      Functor.id_obj, Category.comp_id]
+  · intro E K
+    simp only [TransportCoreData.reductionG, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+      Functor.id_obj, Category.comp_id]
 
 end WeilConjectures.ExceptionalIntegralScalar

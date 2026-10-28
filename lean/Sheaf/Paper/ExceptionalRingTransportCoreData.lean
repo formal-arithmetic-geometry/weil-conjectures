@@ -53,12 +53,6 @@ structure TransportCoreData
   realizeG (E : FieldStage.{u} l) : (operation (.integral E)).G ≅
     PurReconstruction.realized (reconstruction E false).equivalence
       (reconstruction E true).equivalence (G E)
-  reductionF (E : FieldStage.{u} l) :
-    (operation (.integral E)).F ⋙ (reconstruction E false).equivalence.functor ≅
-      (reconstruction E true).equivalence.functor ⋙ F E
-  reductionG (E : FieldStage.{u} l) :
-    (operation (.integral E)).G ⋙ (reconstruction E true).equivalence.functor ≅
-      (reconstruction E false).equivalence.functor ⋙ G E
   evaluationF (E : FieldStage.{u} l) (n : ℕ) :
     F E ⋙ (reconstruction E false).evaluation n ≅
       (reconstruction E true).evaluation n ⋙
@@ -72,6 +66,43 @@ structure TransportCoreData
       PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙
         sfCompactSupportFiniteIntegralFunctor l D.k
           (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier
+
+section ReductionComparisons
+variable {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω]
+  [IsAlgClosure (Padic l) Ω] {D : FiniteFieldDatum.{u}} {hl : l ≠ D.p}
+  {X Y : Scheme.{u}} {f : X ⟶ Y}
+  [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+  [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  {c : Compactification f}
+  {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
+  {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
+  (d : TransportCoreData l Ω D hl c operation left)
+
+/-- The reduction comparison is the realization comparison followed by the target
+reconstruction counit. It is constructed from these maps, rather than chosen independently.
+Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+def TransportCoreData.reductionF (E : FieldStage.{u} l) :
+    (operation (.integral E)).F ⋙ (d.reconstruction E false).equivalence.functor ≅
+      (d.reconstruction E true).equivalence.functor ⋙ d.F E :=
+  Functor.isoWhiskerRight (d.realizeF E) (d.reconstruction E false).equivalence.functor ≪≫
+    Functor.isoWhiskerLeft ((d.reconstruction E true).equivalence.functor ⋙ d.F E)
+      (d.reconstruction E false).equivalence.counitIso ≪≫ Functor.rightUnitor _
+
+/-- The right-adjoint reduction comparison uses the realization comparison and the
+source reconstruction counit, with the two endpoints interchanged.
+Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+def TransportCoreData.reductionG (E : FieldStage.{u} l) :
+    (operation (.integral E)).G ⋙ (d.reconstruction E true).equivalence.functor ≅
+      (d.reconstruction E false).equivalence.functor ⋙ d.G E :=
+  Functor.isoWhiskerRight (d.realizeG E) (d.reconstruction E true).equivalence.functor ≪≫
+    Functor.isoWhiskerLeft ((d.reconstruction E false).equivalence.functor ⋙ d.G E)
+      (d.reconstruction E true).equivalence.counitIso ≪≫ Functor.rightUnitor _
+
+end ReductionComparisons
 
 /-- The data fields have the construction described in the transport proof.
 (blueprint: lem-sf-exceptional-ring-transport-core-data)
@@ -122,8 +153,6 @@ theorem exists_exceptional_transport_core_data
     adjunction := p.adjunction,
     realizeF := p.realizeF,
     realizeG := p.realizeG,
-    reductionF := p.reductionF,
-    reductionG := p.reductionG,
     evaluationF := p.evaluationF,
     evaluationG := p.evaluationG,
     integralLeft := p.integralLeft }⟩
