@@ -1,0 +1,88 @@
+{
+ "id": "def-sfb-diagonal-limit-normalizations",
+ "kind": "definition",
+ "title": "Named normalization equations of the diagonal limit",
+ "statement": "The finite source and root equations, finite cycle normalization, ordinary source generator equation and ordinary root-limit equation are precisely the corresponding functions in DiagonalCompletedLimitSpec, using the named finite endpoint objects and class.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "existing diagonal limit specification, clauses (1) and (3); shared expressions"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-limit-finite-objects",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "the original specification, with explicitly typed shared expressions",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "rg",
+   "query": "DiagonalCompletedLimitSpec|diagonalFiniteCycleNormalization|diagonalSourceLimitMap|diagonalTargetLimitMap in lean/Sheaf/Paper",
+   "results": "Existing formulas in DiagonalLimitAssembly and DiagonalTowerLimitInterface; these nodes give those exact formulas shared names and explicit result types.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing objects and equations; the compatibility theorem checks the original assertion by definitional equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "explicitly typed shared expressions in the original specification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalLimitNormalizations",
+  "file": "lean/Sheaf/Paper/DiagonalLimitNormalizations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonalLimitFiniteSourceNorm",
+  "statement": "def diagonalLimitFiniteSourceNorm (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]\n    [HasExt.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (n : ℕ) (s : (D.ordinary.E.obj (diagonalIntegralSource Y)).obj (op n) ≅\n      diagonalLimitFiniteSource ℓ Y n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalLimitFiniteSourceNorm",
+   "AlgebraicGeometry.ProEtale.diagonalLimitFiniteTargetNorm",
+   "AlgebraicGeometry.ProEtale.diagonalLimitFiniteNormalization",
+   "AlgebraicGeometry.ProEtale.diagonalLimitSourceNorm",
+   "AlgebraicGeometry.ProEtale.diagonalLimitTargetNorm"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

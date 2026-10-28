@@ -19,6 +19,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import all Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import all Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 import all Sheaf.Paper.FormalClosedSupportIILimits
+import Sheaf.Paper.DiagonalLimitTypedAssembly
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LineEvaluationInversePair
 import Sheaf.Algebra.Homology.FlatSingleDerivedNormalization
@@ -54,10 +55,10 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
-  diagonalSourceLimitMap diagonalTargetLimitMap diagonalRootLimitComparison
+  diagonalRootLimitComparison
   diagonalFiniteCycleNormalization DiagonalArrowCompatibility
   diagonalCompleteDataAssertion DiagonalLimitDataSpec
-attribute [local irreducible] diagonalSingleLimitComparison diagonalExactFunctorExtImage
+attribute [local irreducible] diagonalExactFunctorExtImage
 attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 @[instance_reducible] private def diagonalResidueInvertible (ℓ : ℕ) [Fact ℓ.Prime]
@@ -577,7 +578,7 @@ torsion diagonal class with its positive Cartier/Kummer normalization.
 5. lem-weil-pbc-constant-completion-equivalence identifies constant and completed
 finite reductions and completion units. Both endpoints are derived complete.
 Restriction from completed to constant coefficients is fully faithful on these
-objects (sk-lem-integral-models, specialized to Q_l). Hence there is exactly one
+objects by diagonalCompleteScalarRestriction. Hence there is exactly one
 completed-coefficient arrow inducing the whole constant-coefficient completion.
 No assertion of uniqueness from separate finite reductions is used. -/
 theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]
@@ -596,6 +597,7 @@ theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]
     (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)
     (hsystem : DiagonalCycleSystemSpec ℓ Y hY D) :
   DiagonalCompletedLimitSpec ℓ Y hY D := by
-  sorry
+  exact diagonalLimitSpec_of_typed ℓ Y hY D
+    (diagonal_limit_typed_data ℓ k p hpℓ Y hY D hcompletion hsystem)
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-diagonal-complete-scalar-restriction-core",
+ "kind": "statement",
+ "title": "Scalar restriction on the full complete subcategory with explicit derived localizations",
+ "statement": "Let l be a prime, S any scheme, and fix the derived localizations of [def-sfb-diagonal-trace-models]. Write F=diagonalCompletedUnderlying(l,S), the exact restriction from the derived category of modules over the actual completed Z_l sheaf to the derived category of constant Z_l-module sheaves [det-prop-diagonal-tower-limit]. Let P consist of the completed-coefficient objects M such that for every constant-coefficient derived object V with l times its identity invertible, Hom(V,F(M)) is a subsingleton (equivalently zero). Then the composite of the full-subcategory inclusion P.ι with F is fully faithful. There is no geometric finiteness or l-invertibility assumption on S. No trace object or direct-image presentation occurs. This version takes the two derived-localization instances on the constant and completed module categories explicitly, without the trace localization bundle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "full faithfulness from complete completed coefficients to constant coefficients"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [
+  {
+   "text": "Use diagonalCompletionCoefficientTransport to identify the actual completed and constant derived coefficient categories with the small-site constant-completion categories, with a natural isomorphism of the actual scalar functor.",
+   "uses": [
+    "lem-sfb-diagonal-completion-coefficient-transport-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport orthogonality through the additive constant-category equivalence. By constantPrincipalComplete_of_orthogonal this implies local completeness of the restricted object. The flat-ringed restriction criterion and the equality of the extended residue kernel with the first completed residue kernel imply local completeness of the completed object.",
+   "uses": [
+    "lem-sfb-constant-principal-complete-orthogonality",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the given full subcategory into the complete completed-coefficient subcategory. Compose this fully faithful lift with ConstantCompletion.equivalence and the full inclusion of the complete constant objects. Its ambient functor is naturally isomorphic to the given scalar functor followed by the constant-category equivalence. Full faithfulness is invariant under natural isomorphism and reflected after composition with a faithful functor.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completion-coefficient-transport-core",
+  "lem-sfb-constant-principal-complete-orthogonality",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "existing proved theorem body, unchanged except the coefficient core name",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars from the sheafwise l-adic completion is fully faithful on the full subcategory whose underlying complexes are derived l-complete",
+   "results": "8 hits: ordinary SheafOfModules.restrictScalars, presheaf faithfulness and unrelated fully faithful sheaf-compose/condensed functors. No derived-complete scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from a completed ring sheaf is fully faithful on derived complete sheaves of modules",
+   "results": "8 hits, including SheafOfModules.fullyFaithfulForget and condensed locally constant functors; none compares constant and completed derived coefficients.",
+   "date": "2026-10-27",
+   "verdict": "Use ConstantCompletion.equivalence after coefficient/site transport."
+  },
+  {
+   "tool": "grep",
+   "query": "siteDerivedRestrictScalars|IsLocallyDerivedRingedIdealComplete",
+   "results": "The Mathlib search returned 0 hits. Local rg finds ConstantCompletionEquivalence, FlatRingedIdealCompleteEquivalence and LocallyDerivedRingedIdealComplete, with an equal-universe small-site ringed encoding.",
+   "date": "2026-10-27",
+   "verdict": "The general theorem exists in the project; this node is its precise constant-module and arbitrary-localization comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-complete-scalar-restriction",
+   "place": "existing coefficient comparison proof, with explicit localization instances",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompleteScalarRestrictionCore",
+  "file": "lean/Sheaf/Paper/DiagonalCompleteScalarRestrictionCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalCompleteScalarRestrictionCore",
+  "statement": "theorem diagonalCompleteScalarRestrictionCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalMod l S)]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :\n    let F := diagonalCompletedUnderlying l S\n    let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦\n      ∀ V : DerivedCategory (DiagonalMod l S),\n        IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)\n    Nonempty (P.ι ⋙ F).FullyFaithful",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

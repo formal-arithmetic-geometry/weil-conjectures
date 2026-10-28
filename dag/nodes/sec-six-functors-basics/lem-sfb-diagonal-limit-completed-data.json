@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-diagonal-limit-completed-data",
+ "kind": "statement",
+ "title": "Completed coefficient part of the diagonal tower limit",
+ "statement": "For the diagonal tower data, fixed strict-system endpoint identifications H, roots, a and b, and DiagonalCompletionSpec, the specified completed endpoint objects satisfy diagonalCompleteDataAssertion for the image of the positive integral Cartier boundary, with the source generator normalization and root-limit normalization. This is proved from the ordinary and derived endpoint calculation, existing fully faithful complete scalar restriction, and normalized finite reduction comparison; it does not construct the strict-system Ext cycle or its finite Cartier normalization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), completed coefficient arrow and finite comparisons"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-limit-interface",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "Apply the endpoint calculation to obtain the two ordinary limits, their normalized derived comparisons, and completeness in the constant and completed coefficient categories.",
+   "uses": [
+    "lem-sfb-diagonal-limit-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved explicit-localization complete scalar restriction theorem. Its full faithfulness on complete objects gives a bijection on the hom-set of the two endpoints.",
+   "uses": [
+    "lem-sfb-diagonal-complete-scalar-restriction-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-reduction calculation for the integral boundary, then the proved generic categorical assembly lemma. It lifts the underlying limit arrow uniquely and retains the finite quotient units and map equations.",
+   "uses": [
+    "lem-sfb-diagonal-limit-finite-reduction",
+    "lem-sfb-diagonal-completed-data-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-complete-scalar-restriction-core",
+  "lem-sfb-diagonal-completed-data-assembly",
+  "lem-sfb-diagonal-limit-endpoints",
+  "lem-sfb-diagonal-limit-finite-reduction"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), completed coefficient arrow and finite comparisons",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction from the completed ring sheaf to the constant ring is fully faithful on derived complete complexes",
+   "results": "8 hits, only constant and locally constant sheaf functors; none gives normalized diagonal inverse limits or their finite reduction.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project scalar-restriction theorem; isolate only endpoint and finite-comparison calculations absent from the library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of finite diagonal cycle classes defines the completed diagonal class, compatible with derived reduction",
+   "results": "8 hits: BDeRhamPlus, bar-complex diagonal, adic completion projections and unrelated results.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the normalized endpoint or derived finite-comparison statements."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalCompleteDataAssertion|DiagonalLimitDataSpec|diagonalSourceLimitMap; derived.*complete|right.*orthogonal|Mittag.Le[fF]fler in Mathlib/Algebra/Homology and CategoryTheory/Limits",
+   "results": "Mathlib grep: no relevant theorem. Project rg: existing definitions in DiagonalTowerLimitInterface and existing scalar theorem in DiagonalCompleteScalarRestriction. Blueprint searches diagonal limit: zero, 099I: unrelated tensor-pullback node.",
+   "date": "2026-10-27",
+   "verdict": "Existing scalar theorem is reused after an import refactor. No existing endpoint or finite-comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (3), completed coefficient arrow and finite comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalLimitCompletedData",
+  "file": "lean/Sheaf/Paper/DiagonalLimitCompletedData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_limit_completed_data",
+  "statement": "theorem diagonal_limit_completed_data (ℓ : ℕ) [Fact ℓ.Prime]\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] (hY : IsUnit (ℓ : Γ(Y, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)\n    (H : DiagonalSystems ℓ (diagonalSurface Y))\n    (roots : H ⋙ diagonalForget ℓ (diagonalSurface Y) ≅\n      Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) ℓ (Fact.out : ℓ.Prime))\n    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅\n      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y)))\n    (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj\n      (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≅\n      ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧) :\n    diagonalCompleteDataAssertion ℓ (diagonalCompletedRestriction ℓ (diagonalSurface Y))\n      (diagonalCompletedSource ℓ Y) (Scheme.purTwistZlModule (diagonalSurface Y) ℓ)\n      (D.ordinary.E.obj (diagonalIntegralSource Y)) H _ _\n      (D.T.map (diagonalIntegralBoundary Y).hom) a b\n      (fun s ↦ ∀ n : ℕ,\n        diagonalCompletedGenerator ℓ Y ≫ (diagonalForget ℓ (diagonalSurface Y)).map\n          (s.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (op n)) =\n        (diagonalScalarAdjunction ℓ (diagonalSurface Y)).unit.app (diagonalIntegralSource Y) ≫\n          (diagonalForget ℓ (diagonalSurface Y)).map\n            ((D.ordinary.π n).app (diagonalIntegralSource Y)))\n      (fun t ↦ HEq ((diagonalForget ℓ (diagonalSurface Y)).map t.hom)\n        (diagonalRootLimitComparison ℓ (diagonalSurface Y) H roots).inv)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

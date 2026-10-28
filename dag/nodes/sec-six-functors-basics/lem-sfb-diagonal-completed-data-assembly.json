@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-diagonal-completed-data-assembly",
+ "kind": "statement",
+ "title": "Categorical assembly of the normalized completed limit data",
+ "statement": "For arbitrary abelian categories with the fixed derived localizations, endpoint isomorphisms for a total derived limit, completeness of both completed endpoints, bijectivity of coefficient restriction on their hom-set, and compatible finite reduction equations imply diagonalCompleteDataAssertion. This is a categorical assembly lemma; it proves existence and uniqueness by conjugating the underlying map and using fullness and faithfulness. The same module proves conversion of homogeneous heterogeneous finite equations to finite normalization, and combines normalized strict-system witnesses with completed compatibility using the caller's exact normalization functions. DiagonalStrictDataSpec is the fully defined strict part of the assertion, with the same witnesses and equations, excluding completed compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), unique completed arrow and finite compatibility"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the underlying arrow by the source and inverse target comparisons, lift it through the hom-set bijection, and cancel the invertible target comparison for uniqueness. Retain the endpoint normalization and completeness hypotheses. For each finite level, retain the supplied comparison isomorphisms and their three equations. All of these operations are proved generically before specializing the categories.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the finite normalization, retain each pair of endpoint isomorphisms and use eq_of_heq. Define DiagonalStrictDataSpec as the explicit strict-system witnesses, hom equation and finite normalization. The first strict assembly lemma translates a supplied finite predicate on those witnesses. The full assembly lemma retains the same witnesses and adds their completed compatibility. All witness elimination is proved generically in the abelian categories. The named strict-data mapping theorem performs the same witness-preserving finite-predicate implication on already assembled strict data.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (3), unique completed arrow and finite compatibility",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction from the completed ring sheaf to the constant ring is fully faithful on derived complete complexes",
+   "results": "8 hits, only constant and locally constant sheaf functors; none gives normalized diagonal inverse limits or their finite reduction.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project scalar-restriction theorem; isolate only endpoint and finite-comparison calculations absent from the library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of finite diagonal cycle classes defines the completed diagonal class, compatible with derived reduction",
+   "results": "8 hits: BDeRhamPlus, bar-complex diagonal, adic completion projections and unrelated results.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the normalized endpoint or derived finite-comparison statements."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalCompleteDataAssertion|DiagonalLimitDataSpec|diagonalSourceLimitMap; derived.*complete|right.*orthogonal|Mittag.Le[fF]fler in Mathlib/Algebra/Homology and CategoryTheory/Limits",
+   "results": "Mathlib grep: no relevant theorem. Project rg: existing definitions in DiagonalTowerLimitInterface and existing scalar theorem in DiagonalCompleteScalarRestriction. Blueprint searches diagonal limit: zero, 099I: unrelated tensor-pullback node.",
+   "date": "2026-10-27",
+   "verdict": "Existing scalar theorem is reused after an import refactor. No existing endpoint or finite-comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (3), unique completed arrow and finite compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedDataAssembly",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedDataAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonalCompleteData_of_bijective",
+  "statement": "theorem diagonalCompleteData_of_bijective\n    {A : Type a} [Category.{v} A] [Abelian A]\n    {B : Type b} [Category.{u} B] [Abelian B]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]\n    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    (ℓ : ℕ) (F : A ⥤ B) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (P Q : A) (S H : ℕᵒᵖ ⥤ B) (K J : DerivedCategory (ℕᵒᵖ ⥤ B))\n    (f : K ⟶ J)\n    (a : K ≅ (DerivedCategory.singleFunctor _ 0).obj S)\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (sourceNorm : (F.obj P ≅ limit S) → Prop)\n    (targetNorm : (F.obj Q ≅ limit H) → Prop)\n    (L : DiagonalRlim B) (M : DiagonalCompletedReductionData ℓ A)\n    (s : F.obj P ≅ limit S) (t : F.obj Q ≅ limit H)\n    (hs : sourceNorm s) (ht : targetNorm t)\n    (hsource : IsIso (diagonalSingleLimitComparison F L P S K s a))\n    (htarget : IsIso (diagonalShiftedSingleLimitComparison F L Q H J t b))\n    (hP : ∀ V : DerivedCategory A, IsIso (ℓ • 𝟙 V) →\n      Subsingleton (V ⟶ (DerivedCategory.singleFunctor _ 0).obj P))\n    (hQ : ∀ V : DerivedCategory A, IsIso (ℓ • 𝟙 V) →\n      Subsingleton (V ⟶ ((DerivedCategory.singleFunctor _ 0).obj Q)⟦(2 : ℤ)⟧))\n    (hF : Function.Bijective (fun δ : (DerivedCategory.singleFunctor _ 0).obj P ⟶\n      ((DerivedCategory.singleFunctor _ 0).obj Q)⟦(2 : ℤ)⟧ ↦ F.mapDerivedCategory.map δ))\n    (hfinite : ∀ δ : (DerivedCategory.singleFunctor _ 0).obj P ⟶\n        ((DerivedCategory.singleFunctor _ 0).obj Q)⟦(2 : ℤ)⟧,\n      F.mapDerivedCategory.map δ ≫ diagonalShiftedSingleLimitComparison F L Q H J t b =\n        diagonalSingleLimitComparison F L P S K s a ≫ L.R.map f → ∀ n : ℕ,\n      ∃ (e : F.mapDerivedCategory.obj\n            ((((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory).obj\n              (M.derived.T.obj ((DerivedCategory.singleFunctor _ 0).obj P))) ≅\n            (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory).obj K)\n        (g : F.mapDerivedCategory.obj\n            ((((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory).obj\n              (M.derived.T.obj (((DerivedCategory.singleFunctor _ 0).obj Q)⟦(2 : ℤ)⟧))) ≅\n            (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory).obj J),\n        F.mapDerivedCategory.map ((M.unit n).app _) ≫ e.hom =\n          diagonalSingleLimitComparison F L P S K s a ≫ (L.projection n).app K ∧\n        F.mapDerivedCategory.map ((M.unit n).app _) ≫ g.hom =\n          diagonalShiftedSingleLimitComparison F L Q H J t b ≫ (L.projection n).app J ∧\n        F.mapDerivedCategory.map\n            ((((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory).map (M.derived.T.map δ)) =\n          e.hom ≫ (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory).map f ≫ g.inv) :\n    diagonalCompleteDataAssertion ℓ F P Q S H K J f a b sourceNorm targetNorm",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalCompleteData_of_bijective",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteCycleNormalization_of_heq",
+   "AlgebraicGeometry.ProEtale.DiagonalStrictDataSpec",
+   "AlgebraicGeometry.ProEtale.diagonalLimitData_of_strict",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteCycleNormalizationHEq",
+   "AlgebraicGeometry.ProEtale.diagonalStrictData_map_finite"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

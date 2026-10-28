@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-diagonal-completion-coefficient-transport-core",
+ "kind": "statement",
+ "title": "Transport of the actual diagonal completion coefficient map with explicit derived localizations",
+ "statement": "For a prime l, any scheme S, and the arbitrary derived localizations in [def-sfb-diagonal-trace-models], let J be the equivalent AsSmall pro-etale topology, A=ULift Z_l and I=(l). There are derived-category equivalences EB from actual completed-coefficient modules to ConstantCompletion.D(completed J A I), and ER from constant Z_l-module sheaves to ConstantCompletion.D(constant J A), with additive ER and inverse, and a natural isomorphism diagonalCompletedUnderlying(l,S) ⋙ ER.functor ≅ EB.functor ⋙ ConstantCompletion.dres(coefficientMap J A I). This compares the actual scalar functors and imposes no completeness predicate. This version takes the two derived-localization instances on the constant and completed module categories explicitly, without the trace localization bundle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "Stacks Tags 00YY, 03CY and 093M; diagonal tower limit clause (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Transport both coefficient categories by precomposition with the AsSmall equivalence of the pro-etale site, and identify constant-ring module sheaves with sheaves valued in modules over the coefficient ring. These are exact additive equivalences.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "def-weil-proetale-inverse-image",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjective residue map Z_l → Z/l^(n+1) has kernel (l^(n+1)). Its quotient isomorphisms, lifted to the coefficient universe and constant sheafified, commute with every quotient transition. Precomposition along the small-site equivalence commutes with sheafification and limits. Construct these comparison isomorphisms directly for the quotient tower. Their projection equations identify the actual completed ring with ConstantCompletion.completed and identify the constant-to-completed coefficient map itself.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar-restriction square is naturally the identity on underlying sections. Exact derived functor localization carries this natural isomorphism and the two abelian equivalences through the arbitrary chosen derived localizations. This proves the stated natural isomorphism, not merely abstract equivalence of the source and target categories.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "def-weil-proetale-inverse-image",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "existing proved theorem body, unchanged except the coefficient core name",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of sites transports sheaves of modules and commutes with restriction of scalars on derived categories",
+   "results": "LeanSearch returned Equivalence.sheafCongr, SheafOfModules.restrictScalars and the sheaf pullback adjunction; no completed derived comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sites transports sheaves of modules and commutes with restriction of scalars on derived categories",
+   "results": "LeanFinder returned Equivalence.sheafCongr and dense-subsite sheaf equivalences, without coefficient-map or derived normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean gives the abelian ringed-site equivalence, but no comparison of these coefficient towers or their derived functors.",
+   "results": "pushforwardPushforwardEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean gives the abelian ringed-site equivalence, but no comparison of these coefficient towers or their derived functors.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-completion-coefficient-transport",
+   "place": "existing coefficient comparison proof, with explicit localization instances",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletionCoefficientTransportCore",
+  "file": "lean/Sheaf/Paper/DiagonalCompletionCoefficientTransportCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalCompletionCoefficientTransportCore",
+  "statement": "theorem diagonalCompletionCoefficientTransportCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalMod l S)]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :\n    let J := Scheme.proEtaleModelTopology S\n    let A := ULift.{u + 1} ℤ_[l]\n    let I : Ideal A := Ideal.span {(l : A)}\n    ∃ (EB : DerivedCategory (DiagonalCompleted l S) ≌\n          ConstantCompletion.D (ConstantCompletion.completed J A I))\n      (ER : DerivedCategory (DiagonalMod l S) ≌\n          ConstantCompletion.D (ConstantCompletion.constant J A)),\n      ER.functor.Additive ∧ ER.inverse.Additive ∧\n      Nonempty (diagonalCompletedUnderlying l S ⋙ ER.functor ≅\n        EB.functor ⋙ ConstantCompletion.dres (ConstantCompletion.coefficientMap J A I))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

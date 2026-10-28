@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-diagonal-limit-endpoints",
+ "kind": "statement",
+ "title": "Normalized ordinary and derived completed diagonal endpoints",
+ "statement": "Fix a prime ell, a field k of prime characteristic p distinct from ell, and a finite type separated k-scheme Y with ell a unit on Y. Put W = P1_Y times_Y P1_Y. Choose all derived and Ext localizations of [def-sfb-diagonal-system-interface] and [def-sfb-diagonal-limit-interface]. Let D be simultaneous derived reduction from integral sheaves to constant Z_ell-module strict systems and assume DiagonalCompletionSpec. Let H be a strict module system, roots an isomorphism of its underlying abelian tower with the prescribed root tower, and a,b isomorphisms from D.T of the supported integral source and of G_m[1] to the source tower in degree zero and H[2]. There exist a normalized total derived limit L and ordinary endpoint isomorphisms s,t. The source comparison preserves the canonical integer generator and every quotient projection; the underlying target comparison is the inverse of diagonalRootLimitComparison. The resulting diagonalSourceLimitMap and diagonalTargetLimitMap are isomorphisms. Both completed endpoints are right orthogonal to ell-invertible objects, in the completed category and after restriction to constant coefficients. No arrow between the endpoints or finite reduction comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (1), ordinary and total inverse limits; paragraph (3), completeness of both endpoints"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-limit-interface",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "The cokernel universal properties of D.ordinary identify the source tower with the supported finite constant tower, preserving quotient units and transitions. Closed direct image is exact and commutes with limits; its ordinary limit is the restricted completed constant. Its canonical generator gives exactly the displayed source projection equation.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-exc-proetale-closed-exact",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting scalars creates the root limit. Apply the canonical preserved-limit comparison and the limit isomorphism induced by roots; the inverse has exactly the required underlying map. Root transitions are epimorphic because ell is invertible, and supported quotient transitions are epimorphic by closed exactness.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the Milnor comparison to identify ordinary limits of these two epimorphic towers with total derived limits. Choose a normalized DiagonalRlim from the total right derived data. Uniqueness of total right derived functors identifies its unit with this comparison. Compose with a and b, and the canonical shift comparison, to obtain the two specified isomorphisms.",
+   "uses": [
+    "det-pe-milnor-epimorphic",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DiagonalCompletionSpec identifies these total limits with derived-complete outputs after forgetting constant scalars. Transport orthogonality through the endpoint isomorphisms. The flat constant-completion equivalence and its principal-ideal criterion give intrinsic orthogonality over the completed ring as well. This proves completeness in both categories without constructing any morphism between the endpoints.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-constant-principal-complete-orthogonality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each finite root group is annihilated by ell^(n+1), so its constant Z_l action factors through Z_l/ell^(n+1)=Z/ell^(n+1); the underlying root isomorphisms are consequently linear. The flat coefficient comparisons Z to constant Z_l and constant Z_l to the completed coefficient sheaf preserve all finite quotients. Complete-object equivalences first reflect completeness into constant coefficients and then transfer it to completed coefficients.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-system-interface",
+  "det-pe-milnor-epimorphic",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sfb-constant-principal-complete-orthogonality",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.proof.md",
+  "place": "paragraph (1), ordinary and total inverse limits; paragraph (3), completeness of both endpoints",
+  "by": "X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction from the completed ring sheaf to the constant ring is fully faithful on derived complete complexes",
+   "results": "8 hits, only constant and locally constant sheaf functors; none gives normalized diagonal inverse limits or their finite reduction.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project scalar-restriction theorem; isolate only endpoint and finite-comparison calculations absent from the library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of finite diagonal cycle classes defines the completed diagonal class, compatible with derived reduction",
+   "results": "8 hits: BDeRhamPlus, bar-complex diagonal, adic completion projections and unrelated results.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the normalized endpoint or derived finite-comparison statements."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalCompleteDataAssertion|DiagonalLimitDataSpec|diagonalSourceLimitMap; derived.*complete|right.*orthogonal|Mittag.Le[fF]fler in Mathlib/Algebra/Homology and CategoryTheory/Limits",
+   "results": "Mathlib grep: no relevant theorem. Project rg: existing definitions in DiagonalTowerLimitInterface and existing scalar theorem in DiagonalCompleteScalarRestriction. Blueprint searches diagonal limit: zero, 099I: unrelated tensor-pullback node.",
+   "date": "2026-10-27",
+   "verdict": "Existing scalar theorem is reused after an import refactor. No existing endpoint or finite-comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "paragraph (1), ordinary and total inverse limits; paragraph (3), completeness of both endpoints",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalLimitEndpoints",
+  "file": "lean/Sheaf/Paper/DiagonalLimitEndpoints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_limit_endpoints",
+  "statement": "theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] (hY : IsUnit (ℓ : Γ(Y, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))]\n    [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)\n    (H : DiagonalSystems ℓ (diagonalSurface Y))\n    (roots : H ⋙ diagonalForget ℓ (diagonalSurface Y) ≅\n      Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) ℓ (Fact.out : ℓ.Prime))\n    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅\n      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y)))\n    (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj\n      (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≅\n      ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧) :\n    ∃ (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y)))\n      (s : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj\n        (diagonalCompletedSource ℓ Y) ≅ limit (D.ordinary.E.obj (diagonalIntegralSource Y)))\n      (t : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj\n        (Scheme.purTwistZlModule (diagonalSurface Y) ℓ) ≅ limit H),\n      (∀ n : ℕ,\n        diagonalCompletedGenerator ℓ Y ≫ (diagonalForget ℓ (diagonalSurface Y)).map\n          (s.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (op n)) =\n        (diagonalScalarAdjunction ℓ (diagonalSurface Y)).unit.app (diagonalIntegralSource Y) ≫\n          (diagonalForget ℓ (diagonalSurface Y)).map\n            ((D.ordinary.π n).app (diagonalIntegralSource Y))) ∧\n      HEq ((diagonalForget ℓ (diagonalSurface Y)).map t.hom)\n        (diagonalRootLimitComparison ℓ (diagonalSurface Y) H roots).inv ∧\n      IsIso (diagonalSourceLimitMap ℓ Y D a L s) ∧\n      IsIso (diagonalTargetLimitMap ℓ Y D H b L t) ∧\n      (∀ V : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)),\n        IsIso (ℓ • 𝟙 V) → Subsingleton (V ⟶ diagonalCompletedDomain ℓ Y)) ∧\n      (∀ V : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)),\n        IsIso (ℓ • 𝟙 V) → Subsingleton (V ⟶ diagonalCompletedCodomain ℓ Y)) ∧\n      (∀ V : DerivedCategory (DiagonalMod ℓ (diagonalSurface Y)),\n        IsIso (ℓ • 𝟙 V) → Subsingleton (V ⟶\n          (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj\n            (diagonalCompletedDomain ℓ Y))) ∧\n      (∀ V : DerivedCategory (DiagonalMod ℓ (diagonalSurface Y)),\n        IsIso (ℓ • 𝟙 V) → Subsingleton (V ⟶\n          (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj\n            (diagonalCompletedCodomain ℓ Y)))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T035013-L-3579330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
