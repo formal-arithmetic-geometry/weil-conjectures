@@ -56,6 +56,11 @@ immersion of a proper `S`-scheme into a separated `S`-scheme is closed.
 
 A separated morphism locally of finite type from a scheme with at most one point to a Jacobson
 scheme is proper (`AlgebraicGeometry.isProper_of_subsingleton`).
+
+## Morphisms over a base
+
+A morphism over `S` from a proper `S`-scheme to a separated `S`-scheme is proper
+(`AlgebraicGeometry.isProper_left_of_isProper_of_isSeparated`).
 -/
 
 @[expose] public section
@@ -263,5 +268,11 @@ lemma isProper_of_subsingleton {X Y : Scheme.{u}} (f : X ⟶ Y) [Subsingleton X]
   exact ⟨⟩
 
 end Subsingleton
+
+/-- A morphism over `S` from a proper `S`-scheme to a separated `S`-scheme is proper. -/
+lemma isProper_left_of_isProper_of_isSeparated {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
+    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
+  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+  exact IsProper.of_comp _ Y.hom
 
 end AlgebraicGeometry

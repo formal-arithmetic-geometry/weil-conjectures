@@ -117,9 +117,9 @@ omit [MonoidalPreadditive C] [IsCommMonObj R] [IsCommMonObj S] in
 noncomputable def comapPreimage [Epi φ] {A B : Mod C S}
     (g : (comap φ).obj A ⟶ (comap φ).obj B) : A ⟶ B :=
   homMk g.hom (by
-    have : PreservesColimitsOfSize.{v, v} (tensorRight A.X) :=
+    have : PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight A.X) :=
       preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight A.X)
-    have : Epi (φ ▷ A.X) := (tensorRight A.X).map_epi φ
+    have : Epi (φ ▷ A.X) := (MonoidalCategory.tensorRight A.X).map_epi φ
     rw [← cancel_epi (φ ▷ A.X)]
     have h := act_hom g
     rw [act_comap_obj, act_comap_obj] at h

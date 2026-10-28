@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
 
@@ -21,7 +22,8 @@ Let `Λ` be a commutative condensed ring, `j : U ⟶ X` a quasi-compact open imm
   `Li^* ⊣ Ri_*` extend to a distinguished triangle
   (`ProEtale.CondensedRing.exists_distTriang_openClosed_derived`);
 * if `Lj^* K = 0`, the unit `K ⟶ Ri_* Li^* K` is an isomorphism
-  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero`).
+  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero`, in the
+  file `...Derived.BoundedConstructibleClosedPushforward`).
 
 Both follow from the joint conservativity of `Lj^*` and `Li^*`
 (`ProEtale.CondensedRing.jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl`), the full
@@ -74,23 +76,5 @@ theorem exists_distTriang_openClosed_derived
       ((derivedUpperStarLowerStarAdjunction Λ i).left_triangle_components K)
   exact exists_distTriang_of_jointlyReflectIsomorphisms
     (jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl Λ i j hij) _ _ hfg h₁ hN hA h₂
-
-include hij in
-/-- A complex whose restriction to the open `U` vanishes is supported on the closed complement
-`Z`: the unit `K ⟶ Ri_* Li^* K` is an isomorphism. -/
-theorem isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero
-    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))} (hK : IsZero ((L((j)^*⟦Λ⟧)).obj K)) :
-    IsIso ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K) := by
-  have hN : IsZero ((L((j)^*⟦Λ⟧)).obj ((R((i)_*⟦Λ⟧)).obj ((L((i)^*⟦Λ⟧)).obj K))) :=
-    isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
-      hij.symm.disjoint _
-  have h₁ : IsIso ((L((j)^*⟦Λ⟧)).map ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K)) :=
-    isIso_of_source_target_iso_zero _ hK.isoZero hN.isoZero
-  have h₂ : IsIso ((L((i)^*⟦Λ⟧)).map ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K)) :=
-    IsIso.of_isIso_fac_right (hh := IsIso.id _)
-      ((derivedUpperStarLowerStarAdjunction Λ i).left_triangle_components K)
-  exact (jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl Λ i j hij).isIso_of_pairFunctor
-    _ h₁ h₂
 
 end AlgebraicGeometry.ProEtale.CondensedRing

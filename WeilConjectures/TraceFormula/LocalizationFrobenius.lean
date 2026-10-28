@@ -175,7 +175,8 @@ lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
             (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom) := by
   rw [compactFrobenius_eq (X := Z) (Φ := ΦZ) ((weilUpperStar ℓ ΦZ Φ i hi).obj K),
     weilUpperStar_obj_str_hom]
-  rfl
+  -- the carrier of `K|_Z` is `Li^* K` by `rfl`; a bare `rfl` slowly unfolded the composites
+  dsimp only [weilUpperStar_obj_carrier]
 
 set_option maxHeartbeats 1000000 in
 -- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
@@ -320,13 +321,8 @@ theorem compactFrobeniusOpenPiece_comp_counit (hj : ΦU ≫ j = j ≫ Φ)
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier))]
   simp only [Category.assoc]
   rw [Iso.inv_hom_id_app_assoc, compactFrobenius_eq K, reassoc_of% h]
-  refine Eq.trans (congrArg (fun f ↦ f ≫
-    (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
-      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier) ≫
-    (boundedConstructibleLowerShriek ℓ (toPoint X)).map
-      (((boundedConstructibleUpperShriekAdjunction ℓ
-        j).ofNatIsoRight (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)).counit.app
-          K.carrier)) (compactFrobenius_weilUpperStar hj K)) ?_
+  -- `rw`, not `Eq.trans (congrArg _ _)`: elaborating the latter against the goal was slow
+  rw [compactFrobenius_weilUpperStar hj K]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn₁, hn₂]
 
