@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-finite-underlying-evaluation",
+ "kind": "definition",
+ "title": "Underlying additive sheaves under restriction and evaluation",
+ "statement": "Let C be a site with an essentially small model in coefficient universe r. Restriction of scalars along a map of commutative ring sheaves leaves the underlying additive sheaf naturally isomorphic to its original value. For a sequence of ring sheaves B with adjacent transition maps, evaluation of a B-system at n followed by forgetting the module structure is naturally isomorphic to forgetting its system module structure and pushing its additive sheaf along the vertical inclusion at n [def-coef-semilinear-system-models].",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "Construct the identity on every underlying section group. These maps are additive isomorphisms, natural in restrictions and in the module morphism, since restriction of scalars changes only the scalar action and evaluation precomposes by the vertical inclusion.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves underlying additive sheaves and evaluation of a system is pullback along the vertical site inclusion",
+   "date": "2026-10-28",
+   "results": "SheafOfModules.restrictScalars_obj_val (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings); SheafOfModules.restrictScalars_map_val (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings); SheafOfModules.restrictScalars (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings); SheafOfModules.instAdditiveRestrictScalars (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings); PresheafOfModules.restriction (Mathlib/Algebra/Category/ModuleCat/Presheaf); PresheafOfModules.restrictScalarsObj (Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings); PresheafOfModules.restrictScalars (Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings); PresheafOfModules.restrictScalarsObj_obj (Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.NatIso.ofComponents (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents.app (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents_hom_app (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents_inv_app (Mathlib.CategoryTheory.NatIso); CategoryTheory.opOpEquivalence_counitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.opOpEquivalence_unitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Functor.opUnopEquiv_unitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Functor.opUnopEquiv_counitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Equivalence.induced_counitIso (Mathlib.CategoryTheory.EqToHom); CategoryTheory.Equivalence.induced_unitIso (Mathlib.CategoryTheory.EqToHom); CategoryTheory.piEquivalenceFunctorDiscrete_counitIso (Mathlib.CategoryTheory.Discrete.Basic); CategoryTheory.Comma.opEquiv_unitIso (Mathlib.CategoryTheory.Comma.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionToSheafIso|evaluationToSheafIso|verticalInclusion",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBoundaryUnderlyingEvaluation",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryUnderlyingEvaluation.lean",
+  "declaration": "WeilConjectures.SemilinearSections.restrictionToSheafIso",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.restrictionToSheafIso",
+   "WeilConjectures.SemilinearSections.evaluationToSheafIso"
+  ],
+  "statement": "def restrictionToSheafIso {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R') :\n    res.{c, v, r} φ ⋙ SheafOfModules.toSheaf (ring J R) ≅\n      SheafOfModules.toSheaf (ring J R')",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

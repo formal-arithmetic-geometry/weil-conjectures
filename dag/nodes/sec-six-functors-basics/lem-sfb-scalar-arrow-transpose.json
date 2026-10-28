@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-scalar-arrow-transpose",
+ "kind": "statement",
+ "title": "Restriction of the scalar Chern arrow",
+ "statement": "For a prime l, a finite extension E of the l-adic rationals, a scheme T, Chern data c whose scalarUnit satisfies unitNormalization [def-sp-tower-class-chern, def-sp-tower-class-reduction], and an arbitrary integral degree-two arrow f from its coefficient single to its root single, the single of scalarGenerator followed by mapSingleArrow of restriction applied to scalarChernArrow [def-sfb-scalar-chern-arrow] equals f followed by the shifted single of the ordinary scalar unit on the root module.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "The uniqueness of the supplied scalar adjunction identifies it with the canonical adjunction that defines scalarShift. Consequently its unit is shift-compatible.",
+   "uses": [
+    "lem-sfb-scalar-adjunction-unique",
+    "lem-sfb-scalar-root-transpose",
+    "lem-sfb-normalized-scalar-arrow"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the source equation from the hypothesis unitNormalization and the target equation from scalarRootTranspose. Apply normalizedScalarArrow_transpose at degree two.",
+   "uses": [
+    "lem-sfb-scalar-adjunction-unique",
+    "lem-sfb-scalar-root-transpose",
+    "lem-sfb-normalized-scalar-arrow"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-adjunction-unique",
+  "lem-sfb-scalar-root-transpose",
+  "lem-sfb-normalized-scalar-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restrict the scalar Chern arrow and precompose its normalized scalar generator to get the original arrow followed by the root scalar unit",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Mod_.scalarRestriction_hom (Mathlib/CategoryTheory/Monoidal/Mod_); ModuleCat.RestrictScalars.map' (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); CategoryTheory.Mod_.scalarRestriction_smul (Mathlib/CategoryTheory/Monoidal/Mod_); ModuleCat.restrictScalarsComp'App_hom_naturality (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.restrictScalarsComp'App_inv_naturality (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.restrictScalarsComp'App_inv_naturality_assoc (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.restrictScalarsComp'App_hom_naturality_assoc (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); CommRingCat.KaehlerDifferential.map (Mathlib/Algebra/Category/ModuleCat/Differentials/Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarChernArrow|unitNormalization|scalarGenerator",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarArrowTranspose",
+  "file": "lean/Sheaf/Paper/ScalarArrowTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarArrowTranspose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarArrowTranspose"
+  ],
+  "statement": "theorem scalarArrowTranspose (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (hc : unitNormalization c.scalar.T\n      (SemilinearSections.res.{u + 1, u, u + 1} (coefficientSystemMap l E T))\n      c.scalar.adjunction c.scalarUnit (scalarGenerator l E T))\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) :\n    (DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).map\n        (scalarGenerator l E T) ≫\n      mapSingleArrow (SemilinearSections.res (coefficientSystemMap l E T)) (2 : ℤ)\n        (scalarChernArrow l E c f) =\n      f ≫ ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).map\n        (c.scalar.ordinaryAdjunction.unit.app c.rootModule))⟦(2 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

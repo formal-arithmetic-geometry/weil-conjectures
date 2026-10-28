@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-scalar-adjunction-unique",
+ "kind": "statement",
+ "title": "Uniqueness of the supplied scalar adjunction",
+ "statement": "Let C, R, Rprime, phi and S be as in the scalar system models [def-coef-semilinear-system-models]. The derived adjunction supplied by S is equal to sheafScalarDerivedAdjunction phi S.model, the canonical scalar adjunction [lem-sfb-divisible-extension-derived-reduction].",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-sfb-divisible-extension-derived-reduction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "The section equation identifies the ordinary units pointwise: the model object equality and its inverse cancel. Adjunction.ext identifies the ordinary adjunctions.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-flat representative transpose_model at the identity and the canonical derived unit equation identify the derived units after an invertible counit comparison. Cancel this comparison.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat resolution and use naturality to extend unit equality to every complex. Essential surjectivity of Q extends it to every derived object. Adjunction.ext then identifies the derived adjunctions.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-sfb-divisible-extension-derived-reduction",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunctions are equal when their units agree, compare canonical derived extension of scalars adjunction via K-flat resolutions",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.derived'_unit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derived_unit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedη (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedη_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedε (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derived (Mathlib/CategoryTheory/Functor/Derived/Adjunction); ModuleCat.homEquiv_extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ext",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.ext (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.ext|scalar_derived_unit|sheafScalarDerivedAdjunction",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarModelUnit",
+  "file": "lean/Sheaf/Paper/ScalarModelUnit.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ScalarData.adjunction_eq",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.ScalarData.adjunction_eq"
+  ],
+  "statement": "theorem ScalarData.adjunction_eq (S : ScalarData.{c, v, r} φ) :\n    S.adjunction = SheafOfModules.sheafScalarDerivedAdjunction φ S.model",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

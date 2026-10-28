@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-finite-source-map",
+ "kind": "statement",
+ "title": "Identification of the finite source quotient",
+ "statement": "For a prime l, a finite extension E of the l-adic rationals, a scheme T, Chern data c [def-sp-tower-class-chern] and a finite level n, the evaluated integerGenerator followed by the evaluated and forgotten scalarGenerator and the comparison finiteScalarForgetIso [def-sfb-finite-forget-comparison] equals finiteQuotient [def-sp-tower-class-finite].",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-forget-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "Apply the integerGenerator section equation to a constant integer k. The Forget morphism equation identifies its scalarGenerator image with the coefficient ring map applied to k. Ring maps preserve integer casts.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-forget-comparison",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section equation of finiteScalarForgetIso transports the forgotten image to that actual finite section. Thus the candidate satisfies the defining section equation of finiteQuotient. Apply uniqueness.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-forget-comparison",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-forget-comparison",
+  "def-sp-tower-class-chern"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The integer generator followed by extension of scalars and finite evaluation equals the quotient from the integer sheaf by uniqueness on integer sections",
+   "date": "2026-10-28",
+   "results": "SheafOfModules.Presentation.map_generators_I (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); smoothSheafCommRing.ι_evalHom (Mathlib/Geometry/Manifold/Sheaf/Smooth); SheafOfModules.Presentation.mapGenerators (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.generatorsOfIsCokernelFree_I (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); AdicCompletion.eval_comp_of (Mathlib/RingTheory/AdicCompletion/Basic); SheafOfModules.QuasicoherentData.localGeneratorsData_generators (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.presentationOfIsCokernelFree_generators (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); SheafOfModules.generatorsOfIsCokernelFree_π (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Int.cast",
+   "date": "2026-10-28",
+   "results": "Int.cast (Init.Data.Int.Basic); Int.cast_eq (Init.Data.Int.Basic); Fin.intCast_def (Init.Data.Fin.Lemmas); Int.cast_id (Init.Data.Int.LemmasAux); Rat.ceil_intCast (Init.Data.Rat.Lemmas); Rat.floor_intCast (Init.Data.Rat.Lemmas); Rat.num_intCast (Init.Data.Rat.Lemmas); Rat.floor_le (Init.Data.Rat.Lemmas); Rat.le_ceil (Init.Data.Rat.Lemmas); Rat.den_intCast (Init.Data.Rat.Lemmas); Rat.intCast_natCast (Init.Data.Rat.Lemmas); Rat.intCast_one (Init.Data.Rat.Lemmas)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "integerGenerator|finiteQuotient|scalarGenerator",
+   "date": "2026-10-28",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:126; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean:9; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean:170; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean:183; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean:209; Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean:285; Mathlib/NumberTheory/RamificationInertia/Unramified.lean:8; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean:201; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean:493; Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean:14; Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean:119; Mathlib/NumberTheory/NumberField/Units/Regulator.lean:132; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean:122; Mathlib/NumberTheory/NumberField/ExistsRamified.lean:11; Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean:96; Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean:105; Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean:109; Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:46; Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean:49; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean:20; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean:26; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean:48; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean:59; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean:116; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean:170",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBoundaryEndpointMaps",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryEndpointMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_sourceMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_sourceMap"
+  ],
+  "statement": "theorem finiteBoundary_sourceMap (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :\n    (abEvaluation T n).map (integerGenerator T (Rrings l T) c.reduction.forget) ≫\n      (c.reduction.forget.F ⋙ abEvaluation T n).map (scalarGenerator l E T) ≫\n      (finiteScalarForgetIso l E c n).hom.app (coefficient T (Arings l E T)) =\n      finiteQuotient l E T n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

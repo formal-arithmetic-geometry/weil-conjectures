@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-finite-boundary-arrow-formulas",
+ "kind": "statement",
+ "title": "Exact transport formulas for the two evaluation arrows",
+ "statement": "Let l be a prime, E a finite extension of the l-adic rationals, T a scheme, c Chern data [def-sp-tower-class-chern], f an arbitrary integral degree-two arrow from its coefficient single to its root single, and n a natural number. The scalar evaluation arrow [def-sfb-finite-boundary-arrows] equals mapSingleArrow for finite evaluation followed by finite coefficient forgetting, then the shifted single of the forgotten lineEvaluation map [def-sp-tower-class-finite]. The integral evaluation arrow equals the single of the evaluated integerGenerator, followed by mapSingleArrow for recorded forgetting and finite evaluation applied to f, followed by the shifted single of the evaluated rootForget [def-sp-tower-class-systems, def-sp-tower-class-chern].",
+ "stmt_deps": [
+  "def-sfb-finite-boundary-arrows",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-shriek-data",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "The scalar formula is forgetEvaluatedArrow_eq specialized to the two functors in its unchanged definition.",
+   "uses": [
+    "def-sfb-finite-boundary-arrows",
+    "lem-sfb-exact-arrow-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral formula is map_underlyingSingleArrow specialized to recorded forgetting, abelian evaluation, integerGenerator and rootForget. These formulas keep subsequent proofs from repeatedly unfolding the derived comparison definitions.",
+   "uses": [
+    "def-sfb-finite-boundary-arrows",
+    "lem-sfb-exact-arrow-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-boundary-arrows",
+  "lem-sfb-exact-arrow-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate a derived scalar Chern arrow and forget its coefficients; identify the result with exact composite transport and the prescribed target single map",
+   "date": "2026-10-28",
+   "results": "CochainComplex.HomComplex.Cochain.δ_toSingleMk (Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle); ContinuousCohomology.MultiInd.d (Mathlib/Algebra/Category/ContinuousCohomology/Basic); CochainComplex.HomComplex.Cochain.δ_fromSingleMk (Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle); CochainComplex.HomComplex.Cochain.fromSingleMk_v (Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle); inhomogeneousCochains.d (Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic); CochainComplex.HomComplex.Cochain.δ_single (Mathlib/Algebra/Homology/HomotopyCategory/HomComplex); CochainComplex.ofHom_f (Mathlib/Algebra/Homology/HomologicalComplex); ChainComplex.ofHom_f (Mathlib/Algebra/Homology/HomologicalComplex)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Functor.map_comp (Mathlib.CategoryTheory.Functor.Basic); PresheafOfModules.map_comp (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.map_comp_assoc (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModulesOfCommRing.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing); AlgebraicGeometry.PresheafedSpace.map_comp_c_app (Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetEvaluatedArrow|underlyingSingleArrow|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarFiniteBoundaryArrowFormulas",
+  "file": "lean/Sheaf/Paper/ScalarFiniteBoundaryArrowFormulas.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_eval_eq",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_eval_eq",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_integral_eq"
+  ],
+  "statement": "theorem scalarFiniteBoundary_eval_eq (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ) :\n    scalarFiniteBoundary_eval l E c f n =\n      mapSingleArrow (SpTowerShriek.ev l E T n ⋙ finiteForget l E T n) (2 : ℤ)\n          (scalarChernArrow l E c f) ≫\n        ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map\n          ((finiteForget l E T n).map (lineEvaluation l E c n).hom))⟦(2 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

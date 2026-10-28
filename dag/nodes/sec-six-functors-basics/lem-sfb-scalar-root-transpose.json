@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-scalar-root-transpose",
+ "kind": "statement",
+ "title": "Transpose of the scalar root counit",
+ "statement": "For a prime l, a finite extension E of the l-adic rationals, a scheme T and Chern data c [def-sp-tower-class-chern], the derived scalar adjunct of lineComparison, followed by the exact restriction single comparison, is the degree-zero single map of the ordinary scalar adjunction unit on c.rootModule. The root module need not be flat.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "Expand lineComparison as the universal model comparison on the single root complex followed by its ordinary single comparison.",
+   "uses": [
+    "lem-sfb-scalar-model-unit",
+    "def-sp-tower-class-chern",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the exact restriction factorization and lem-sfb-scalar-model-unit to replace the derived unit and model comparison by Q of the ordinary complex unit.",
+   "uses": [
+    "lem-sfb-scalar-model-unit",
+    "def-sp-tower-class-chern",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary adjunction on single complexes has the ordinary unit in degree zero. Compose its two single comparisons and verify the resulting complex equality in degree zero.",
+   "uses": [
+    "lem-sfb-scalar-model-unit",
+    "def-sp-tower-class-chern",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-model-unit",
+  "def-sp-tower-class-chern",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar adjoint transpose of the ordinary single complex counit is the ordinary scalar unit on the root sheaf",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.constantSheafAdj_counit_w (Mathlib/CategoryTheory/Sites/ConstantSheaf); CategoryTheory.Adjunction.derived'_counit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); AlgebraicGeometry.ΓSpec.adjunction_counit_app' (Mathlib/AlgebraicGeometry/GammaSpecAdjunction); SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous); Rep.standardComplex.εToSingle₀_comp_eq (Mathlib/RepresentationTheory/Homological/Resolution); HomologicalComplex.dgoEquivHomologicalComplex_counitIso (Mathlib/Algebra/Homology/DifferentialObject); HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f (Mathlib/Algebra/Homology/DifferentialObject); AlgebraicGeometry.ΓSpec.adjunction_counit_app (Mathlib/AlgebraicGeometry/GammaSpecAdjunction)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "singleAdjunct|lineComparison|scalarRootTranspose",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarRootTranspose",
+  "file": "lean/Sheaf/Paper/ScalarRootTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarRootTranspose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarRootTranspose"
+  ],
+  "statement": "theorem scalarRootTranspose (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T) :\n    (c.scalar.adjunction.homEquiv _ _) (lineComparison l E c) ≫\n      ((SemilinearSections.res (coefficientSystemMap l E T)).mapDerivedCategorySingleFunctor\n        0).hom.app (lineModule l E c) =\n      (DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).map\n        (c.scalar.ordinaryAdjunction.unit.app c.rootModule)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

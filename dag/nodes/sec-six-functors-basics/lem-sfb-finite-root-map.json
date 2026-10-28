@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-finite-root-map",
+ "kind": "statement",
+ "title": "Identification of the finite root linearization",
+ "statement": "For a prime l, a finite extension E of the l-adic rationals, a scheme T, Chern data c [def-sp-tower-class-chern] and a finite level n, evaluate the inverse rootForget, apply the evaluated forgotten ordinary scalar unit on c.rootModule, then finiteScalarForgetIso [def-sfb-finite-forget-comparison] and the forgotten lineEvaluation. This composite from the roots sheaf to the finite coefficient line equals finiteRootMap [def-sp-tower-class-finite].",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-forget-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "Given a root section z, transport it by rootForget inverse and the section equality of Forget to an actual section x of c.rootModule. The ordinary unit_section equation identifies its scalar unit image with scalarExtensionSection.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-diagonal",
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-forget-comparison",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison finiteScalarForgetIso retains that section. Apply the pure-tensor equation of lineEvaluation with scalar one and cancel rootForget with its inverse. The candidate sends z to one tensor z, hence uniqueness of finiteRootMap identifies it.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-diagonal",
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-forget-comparison",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-finite",
+  "def-sfb-finite-forget-comparison",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scalar adjunction unit on a root sheaf followed by pure tensor evaluation sends a root section to one tensor that section",
+   "date": "2026-10-28",
+   "results": "ModuleCat.extendRestrictScalarsAdj_unit_app_apply (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); Algebra.FormallyUnramified.sec (Mathlib/RingTheory/Unramified/Finite); Algebra.FormallyUnramified.comp_sec (Mathlib/RingTheory/Unramified/Finite); ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.extendRestrictScalarsAdj_homEquiv_apply (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply (Mathlib/Algebra/Category/ModuleCat/Sheaf/Free); SheafOfModules.unitHomEquiv_symm_comp (Mathlib/Algebra/Category/ModuleCat/Sheaf); SheafOfModules.unitHomEquiv_comp_apply (Mathlib/Algebra/Category/ModuleCat/Sheaf)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit (Mathlib.CategoryTheory.Adjunction.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootMap|scalarExtensionSection|lineEvaluation",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBoundaryEndpointMaps",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryEndpointMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_rootMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_rootMap"
+  ],
+  "statement": "theorem finiteBoundary_rootMap (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :\n    (abEvaluation T n).map c.rootForget.inv ≫\n      (c.reduction.forget.F ⋙ abEvaluation T n).map\n        (c.scalar.ordinaryAdjunction.unit.app c.rootModule) ≫\n      (finiteScalarForgetIso l E c n).hom.app (lineModule l E c) ≫\n      (finiteForget l E T n).map (lineEvaluation l E c n).hom =\n      finiteRootMap l E T n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

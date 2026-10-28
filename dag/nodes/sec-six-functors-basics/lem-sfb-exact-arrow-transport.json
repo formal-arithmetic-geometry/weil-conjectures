@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-exact-arrow-transport",
+ "kind": "statement",
+ "title": "Exact single-arrow transport laws",
+ "statement": "For exact additive functors between abelian categories with chosen derived categories, mapSingleArrow [def-sp-tower-class-reduction] commutes with an ordinary natural isomorphism, with functor composition, with precomposition by an ordinary map and with postcomposition by a shifted ordinary map. Thus forgetEvaluatedArrow [def-sp-tower-class-finite] equals transport by the composite exact functor followed by its target map, and an underlyingSingleArrow [def-sfb-tower-underlying-arrow] transports by the composite with its ordinary endpoint maps. For any category with integer shifts, a commuting naturality square remains commuting after composition with source and target endpoint maps and an isomorphism at the integral target. Equality of the four arrows transfers any commuting square to the identified arrows.",
+ "stmt_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-finite",
+  "def-sfb-tower-underlying-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "For a natural isomorphism use the exact derived natural isomorphism, its single comparison and its commutation with shifts. Naturality on the derived arrow gives the asserted conjugation.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-finite",
+    "def-sfb-tower-underlying-arrow",
+    "lem-kun-derived-single-constants-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composition use the exact derived composition isomorphism and the single comparison law of lem-kun-derived-single-constants-comparison. Its shift compatibility and naturality give the composition law.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-finite",
+    "def-sfb-tower-underlying-arrow",
+    "lem-kun-derived-single-constants-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition and postcomposition are naturality of the single and shift comparisons. Substitute these laws in the definitions of forgetEvaluatedArrow and underlyingSingleArrow.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-finite",
+    "def-sfb-tower-underlying-arrow",
+    "lem-kun-derived-single-constants-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The final square gluing formula follows by substituting its two commuting-square equations, expanding shift functoriality and cancelling the target isomorphism with its inverse. Apply the exact transport laws and naturality before specializing the categories to obtain finiteBoundary_exact_glue.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-finite",
+    "def-sfb-tower-underlying-arrow",
+    "lem-kun-derived-single-constants-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-finite",
+  "def-sfb-tower-underlying-arrow",
+  "lem-kun-derived-single-constants-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors on derived categories transport single to shifted single arrows compatibly with composition and natural isomorphisms",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Abelian.Ext.mapExactFunctor_hom (Mathlib/Algebra/Homology/DerivedCategory/Ext/Map); DerivedCategory.singleFunctors (Mathlib/Algebra/Homology/DerivedCategory/Basic); CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Abelian.Ext.mapExactFunctor (Mathlib/Algebra/Homology/DerivedCategory/Ext/Map); CategoryTheory.Functor.mapDerivedCategoryFactorsh (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Functor.map_comp (Mathlib.CategoryTheory.Functor.Basic); PresheafOfModules.map_comp (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.map_comp_assoc (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModules.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf); PresheafOfModulesOfCommRing.mk (Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing); AlgebraicGeometry.PresheafedSpace.map_comp_c_app (Mathlib.Geometry.RingedSpace.PresheafedSpace.HasColimits)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|mapDerivedCategoryCompIso|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:112; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:130; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:132; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:134; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:141; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:85; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:87; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:96; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:99; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:114",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBoundaryExactTransport",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryExactTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.mapSingleArrow_natIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.mapSingleArrow_natIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.mapSingleArrow_composite",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.mapSingleArrow_precompose",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.mapSingleArrow_postcompose",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.forgetEvaluatedArrow_eq",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.map_underlyingSingleArrow",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_square_glue",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_exact_glue",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_congr",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_identified_glue"
+  ],
+  "statement": "theorem mapSingleArrow_natIso (F G : C ⥤ D) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (e : F ≅ G) {X Y : C} (n : ℤ)\n    (f : (DerivedCategory.singleFunctor C 0).obj X ⟶\n      ((DerivedCategory.singleFunctor C 0).obj Y)⟦n⟧) :\n    (DerivedCategory.singleFunctor D 0).map (e.hom.app X) ≫\n        mapSingleArrow G n f =\n      mapSingleArrow F n f ≫\n        ((DerivedCategory.singleFunctor D 0).map (e.hom.app Y))⟦n⟧'",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

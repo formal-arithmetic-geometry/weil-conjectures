@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-scalar-model-unit",
+ "kind": "statement",
+ "title": "The scalar model unit on every complex",
+ "statement": "Let C be a site with an essentially small model in coefficient universe r, R and Rprime sheaves of commutative rings, phi:R to Rprime a ring map, and S its ScalarData [def-coef-semilinear-system-models]. For every complex P of R-module sheaves, the derived adjunction unit on Q(P), followed by restriction of the universal model comparison epsilon and the exact restriction factorization, equals Q of the ordinary complex adjunction unit on P. No K-flatness of P is assumed.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "On a K-flat complex, apply transpose_model to the identity of its ordinary scalar extension. Simplify the two identity maps to obtain the unit equation.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sides are components of natural transformations on complexes. Choose a K-flat resolution P to P0 using lem-pc-kflat-resolution. Q of the resolution is invertible. Precompose with it, use naturality and the K-flat equation, and cancel to obtain the equation on P0.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend the model adjunction unit equation from K-flat complexes to every complex by naturality and a K-flat resolution",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.derived'_unit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedη (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derived_unit (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedη_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Adjunction.derivedε_fac_app_assoc (Mathlib/CategoryTheory/Functor/Derived/Adjunction); CategoryTheory.Functor.fromLeftDerivedZero (Mathlib/CategoryTheory/Abelian/LeftDerived); CategoryTheory.Functor.toRightDerivedZero (Mathlib/CategoryTheory/Abelian/RightDerived)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Adjunction.unit_naturality (Mathlib.CategoryTheory.Adjunction.Basic); CategoryTheory.LiftRightAdjoint.unitEqualises (Mathlib.CategoryTheory.Adjunction.Lifting.Right); CategoryTheory.LiftRightAdjoint.unitEqualizes (Mathlib.CategoryTheory.Adjunction.Lifting.Right)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "transpose_model|KFlat.*resolution|unit_model",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarModelUnit",
+  "file": "lean/Sheaf/Paper/ScalarModelUnit.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ScalarData.unit_model",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.ScalarData.unit_model"
+  ],
+  "statement": "theorem ScalarData.unit_model (S : ScalarData.{c, v, r} φ)\n    (P₀ : CochainComplex (Mod.{c, v, r} J R) ℤ) :\n    S.adjunction.unit.app (DerivedCategory.Q.obj P₀) ≫\n      (res φ).mapDerivedCategory.map (S.model.ε.app P₀) ≫\n      (res φ).mapDerivedCategoryFactors.hom.app\n        ((S.model.E.mapHomologicalComplex (.up ℤ)).obj P₀) =\n      DerivedCategory.Q.map\n        ((S.ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).unit.app P₀)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

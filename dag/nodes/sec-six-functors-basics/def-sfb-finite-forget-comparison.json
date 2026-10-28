@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-finite-forget-comparison",
+ "kind": "definition",
+ "title": "Restriction, recorded forgetting and finite evaluation",
+ "statement": "Let T be a scheme, R and A towers of sheaves of commutative rings, phi the associated sequence-site ring map, F a Forget structure for R [def-sp-tower-class-systems], and n a natural number. Restricting an A-system along phi, applying F and evaluating at n is naturally isomorphic to evaluating the A-system at n and forgetting its finite coefficient action. Components identify each forgotten section with the same actual module section. The specialized comparison for Chern data [def-sp-tower-class-chern] is finiteScalarForgetIso. The transport and section lemmas express equality elimination and the section and morphism fields of F.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "At each chart use the equality F.sections to form an identity-transport additive isomorphism. The restriction field makes the components natural on the site, so they form a sheaf isomorphism.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-coef-semilinear-system-models",
+    "def-sfb-finite-underlying-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The morphism field of F makes these sheaf isomorphisms natural in the A-system. Restriction changes only the scalar action, so the underlying additive maps agree.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-coef-semilinear-system-models",
+    "def-sfb-finite-underlying-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section formulas follow by equality elimination. Applying the heterogeneous morphism equality to corresponding sections yields the map-on-sections formula.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-coef-semilinear-system-models",
+    "def-sfb-finite-underlying-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems",
+  "def-coef-semilinear-system-models",
+  "def-sfb-finite-underlying-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A recorded forgetful functor with section equalities commutes naturally with restricting scalars and finite evaluation of systems of sheaves",
+   "date": "2026-10-28",
+   "results": "LightCondensed.forget_obj_val_map (Mathlib/Condensed/Light/Module); LightCondensed.forget_map_val_app (Mathlib/Condensed/Light/Module); SheafOfModules.Presentation.map_π_eq (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); PresheafOfModules.restriction (Mathlib/Algebra/Category/ModuleCat/Presheaf); PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap (Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits); SheafOfModules.Finite.evaluationPreservesFiniteLimits (Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits); SheafOfModules.restrictScalars_map_val (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings); SheafOfModules.restrictScalars_obj_val (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.NatIso.ofComponents (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents.app (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents_hom_app (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.ofComponents_inv_app (Mathlib.CategoryTheory.NatIso); CategoryTheory.opOpEquivalence_counitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.opOpEquivalence_unitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Functor.opUnopEquiv_unitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Functor.opUnopEquiv_counitIso (Mathlib.CategoryTheory.Opposites); CategoryTheory.Equivalence.induced_counitIso (Mathlib.CategoryTheory.EqToHom); CategoryTheory.Equivalence.induced_unitIso (Mathlib.CategoryTheory.EqToHom); CategoryTheory.piEquivalenceFunctorDiscrete_counitIso (Mathlib.CategoryTheory.Discrete.Basic); CategoryTheory.Comma.opEquiv_unitIso (Mathlib.CategoryTheory.Comma.Basic)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetUnderlyingEvaluationIso|forgetScalarEvaluationIso|finiteScalarForgetIso",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBoundaryForgetComparison",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryForgetComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.forgetUnderlyingEvaluationIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.forgetUnderlyingEvaluationIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.forgetScalarEvaluationIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteScalarForgetIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_transport_addHom",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_transport_element",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteScalarForgetIso_section",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_forgetMapSection",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteBoundary_cast_heq"
+  ],
+  "statement": "def forgetUnderlyingEvaluationIso (T : Scheme.{u})\n    (R : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})\n    (F : Forget T R) (n : ℕ) :\n    F.F ⋙ abEvaluation T n ≅\n      SheafOfModules.toSheaf (SemilinearSections.ring\n        (coefficientSequenceTopology (Scheme.ProEt.topology T))\n        (SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n          (fun n ↦ R.obj (op n)) (fun n ↦ R.map (homOfLE (Nat.le_succ n)).op))) ⋙\n        (Prod.sectR n T.ProEt).sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n          (Scheme.ProEt.topology T) (coefficientSequenceTopology (Scheme.ProEt.topology T))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}

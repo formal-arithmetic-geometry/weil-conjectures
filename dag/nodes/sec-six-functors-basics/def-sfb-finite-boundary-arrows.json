@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-finite-boundary-arrows",
+ "kind": "definition",
+ "title": "The scalar and integral arrows at a finite level",
+ "statement": "For a prime l, a finite extension E of the l-adic rationals, a scheme T, Chern data c [def-sp-tower-class-chern], an integral degree-two arrow f from the coefficient single to the root single, and n a natural number, define the evaluated scalar arrow by exact evaluation, the prescribed lineEvaluation, and forgetting coefficients [def-sp-tower-class-finite]; define the integral arrow by evaluation of underlyingChernArrow [def-sfb-tower-underlying-arrow]. These are exactly the two arrows previously defined in ScalarFiniteBoundaryComposition.",
+ "stmt_deps": [
+  "def-sp-tower-class-finite",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and finite evaluation"
+ },
+ "proof": [
+  {
+   "text": "Use the original formulas verbatim: forgetEvaluatedArrow applied to scalarChernArrow, and mapSingleArrow of abEvaluation applied to underlyingChernArrow. The extraction shares the compiled endpoint definitions without changing them.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "def-sfb-tower-underlying-arrow",
+    "def-sfb-scalar-chern-arrow"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-finite",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), explicit formal calculation; all listed declarations are proved or constructed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar evaluation and integral evaluation of a derived single arrow at a finite level of a tower of sheaves",
+   "date": "2026-10-28",
+   "results": "smoothSheaf.ι_evalHom (Mathlib/Geometry/Manifold/Sheaf/Smooth); smoothSheaf.ι_evalHom_apply (Mathlib/Geometry/Manifold/Sheaf/Smooth); smoothSheafCommRing.ι_evalHom (Mathlib/Geometry/Manifold/Sheaf/Smooth); smoothSheafCommRing.ι_evalHom_apply (Mathlib/Geometry/Manifold/Sheaf/Smooth); CategoryTheory.eval_app (Mathlib/CategoryTheory/Sites/Types); smoothSheaf.ι_evalHom_assoc (Mathlib/Geometry/Manifold/Sheaf/Smooth); smoothSheafCommRing.ι_evalHom_assoc (Mathlib/Geometry/Manifold/Sheaf/Smooth); SheafOfModules.Presentation.map_π_eq (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Functor.map (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.id_map (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.map_id (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.toPrefunctor_map (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.congr_map (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.comp_map (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.map_comp (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.map_dite (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.map_comp_assoc (Mathlib.CategoryTheory.Functor.Basic); CategoryTheory.Functor.map_isIso (Mathlib.CategoryTheory.Iso); CategoryTheory.Functor.mapIso_hom (Mathlib.CategoryTheory.Iso); CategoryTheory.Functor.mapIso_inv (Mathlib.CategoryTheory.Iso)",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarFiniteBoundary|forgetEvaluatedArrow|underlyingChernArrow",
+   "date": "2026-10-28",
+   "results": "none",
+   "verdict": "No exact match. General categorical or module ingredients do not state the recorded system comparison or derived endpoint calculation; those ingredients are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1), finite scalar evaluation of the integral cycle class; classes proof clause (2)",
+   "via": [
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-scalar-finite-boundary-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarFiniteBoundaryArrows",
+  "file": "lean/Sheaf/Paper/ScalarFiniteBoundaryArrows.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_eval",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_eval",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_integral"
+  ],
+  "statement": "def scalarFiniteBoundary_eval (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b9c67",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261028T055728-L-801789",
+  "kind": "interface",
+  "note": "independent cc review: delivered chain (12 new modules + re-export item) against published ScalarFiniteBoundaryComposition: type/value Expr.hash of the 4 moved decls identical; sandbox compile of all modules + unchanged importer TowerScalarFiniteBoundary OK; axioms clean; nodes against Lean"
+ }
+}
