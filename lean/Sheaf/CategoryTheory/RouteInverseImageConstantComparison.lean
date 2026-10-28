@@ -5,6 +5,10 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.CategoryTheory.RouteInverseImageConstantRingOperations
+
+import Sheaf.CategoryTheory.RouteInverseImageConstantRingAssembly
+import Sheaf.CategoryTheory.RouteInverseImageConstantSectionComparison
 
 /-!
 # Constant-sheaf comparison for a ring lift
@@ -26,55 +30,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
-
-/-- Ring-operation part of an inverse-image lift.
-
-Source: Stacks Project, `sites.tex`, Tag 00YV
-(blueprint: lem-route-inverse-image-constant-comparison). -/
-structure RingInverseImage
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
-    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
-    (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u))
-    (R : Sheaf JC CommRingCat.{u})
-    (RI : Sheaf JD CommRingCat.{u}) where
-  ringUnderlying : L.obj ((sheafCompose JC (forget CommRingCat)).obj R) ≅
-    (sheafCompose JD (forget CommRingCat)).obj RI
-  ringAdd : ∀ (T : Sheaf JC (Type u))
-    (a b t : T ⟶ ((sheafCompose JC (forget CommRingCat)).obj R)),
-    (∀ (U : Cᵒᵖ) (x : T.obj.obj U),
-      (@id (R.obj.obj U) (t.hom.app U x)) =
-        (@id (R.obj.obj U) (a.hom.app U x)) + (@id (R.obj.obj U) (b.hom.app U x))) →
-    ∀ (V : Dᵒᵖ) (x : (L.obj T).obj.obj V),
-      (@id (RI.obj.obj V)
-        (ringUnderlying.hom.hom.app V ((L.map t).hom.app V x))) =
-        (@id (RI.obj.obj V)
-          (ringUnderlying.hom.hom.app V ((L.map a).hom.app V x))) +
-          (@id (RI.obj.obj V)
-            (ringUnderlying.hom.hom.app V ((L.map b).hom.app V x)))
-  ringMul : ∀ (T : Sheaf JC (Type u))
-    (a b t : T ⟶ ((sheafCompose JC (forget CommRingCat)).obj R)),
-    (∀ (U : Cᵒᵖ) (x : T.obj.obj U),
-      (@id (R.obj.obj U) (t.hom.app U x)) =
-        (@id (R.obj.obj U) (a.hom.app U x)) * (@id (R.obj.obj U) (b.hom.app U x))) →
-    ∀ (V : Dᵒᵖ) (x : (L.obj T).obj.obj V),
-      (@id (RI.obj.obj V)
-        (ringUnderlying.hom.hom.app V ((L.map t).hom.app V x))) =
-        (@id (RI.obj.obj V)
-          (ringUnderlying.hom.hom.app V ((L.map a).hom.app V x))) *
-          (@id (RI.obj.obj V)
-            (ringUnderlying.hom.hom.app V ((L.map b).hom.app V x)))
-  ringZero : ∀ (T : Sheaf JC (Type u))
-    (a : T ⟶ ((sheafCompose JC (forget CommRingCat)).obj R)),
-    (∀ (U : Cᵒᵖ) (x : T.obj.obj U), (@id (R.obj.obj U) (a.hom.app U x)) = 0) →
-    ∀ (V : Dᵒᵖ) (x : (L.obj T).obj.obj V),
-      (@id (RI.obj.obj V)
-        (ringUnderlying.hom.hom.app V ((L.map a).hom.app V x))) = 0
-  ringOne : ∀ (T : Sheaf JC (Type u))
-    (a : T ⟶ ((sheafCompose JC (forget CommRingCat)).obj R)),
-    (∀ (U : Cᵒᵖ) (x : T.obj.obj U), (@id (R.obj.obj U) (a.hom.app U x)) = 1) →
-    ∀ (V : Dᵒᵖ) (x : (L.obj T).obj.obj V),
-      (@id (RI.obj.obj V)
-        (ringUnderlying.hom.hom.app V ((L.map a).hom.app V x))) = 1
 
 /--
 For a left-exact inverse-image functor, compatible ring lifts carry constants
@@ -135,6 +90,13 @@ theorem inverseImageConstantComparison
           (@id (((constantSheaf JD CommRingCat.{u}).obj A).obj.obj W)
             ((kappa.hom.app A).hom.app W ((L.map s).hom.app W y))) =
             (toSheafify JD ((Functor.const Dᵒᵖ).obj A)).app W a := by
-  sorry
+  obtain ⟨kappa⟩ := canonicalConstantSetComparison JC JD L V adj hL
+  obtain ⟨constants, hconstants⟩ := constantRingComparisonAssembly JC JD L hL rings e enat kappa
+  refine ⟨constants, constantRingSetComparison JC JD L kappa, ?_⟩
+  intro A
+  refine ⟨hconstants A, ?_⟩
+  intro a T s hs W y
+  exact canonicalConstantSectionComparison JC JD L kappa A a T s hs W y
+
 
 end CategoryTheory

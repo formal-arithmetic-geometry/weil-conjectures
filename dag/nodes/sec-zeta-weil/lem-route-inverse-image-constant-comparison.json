@@ -10,67 +10,53 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "lem-route-inverse-image-constant-ring-operations"
  ],
  "proof": [
   {
-   "text": "For a set E and a sheaf of sets H on (C,J), a map of presheaves from the constant presheaf U ↦ E to H is the same as a family, indexed by e in E, of maps from the constant singleton presheaf to H; the constant singleton presheaf is the terminal sheaf 1_C, so such a map is one global section of H for each e. By the sheafification universal property of the constant sheaf, maps underline E_C → H are therefore exactly such E-indexed families, the family of a map being its composites with the constant-section injections i_e:1_C → underline E_C. Hence (underline E_C,(i_e)_e) is itself a coproduct C_E of E copies of the terminal sheaf (also for E empty, where it is the initial sheaf), and we write j_e=i_e for its coprojections. Uniqueness of maps out of a coproduct shows that for a map of sets a:E→F the sheaf map underline a satisfies underline a ∘ i_e = i_{a(e)}.",
+   "text": "Construct a natural comparison for constant set sheaves via the global-sections adjunction and the terminal-object comparison, and conjugate by constantCommuteCompose to obtain the underlying comparison κ on constant rings.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (Example example-constant-sheaf), together with the sheafification universal property"
-   }
-  },
-  {
-   "text": "Because L is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] applied to the discrete E-indexed coproduct (underline E_C,(i_e)_e) of Step 1 shows that (L(underline E_C),(L i_e)_e) is a coproduct of the objects L(1_C) in Sh(C',J',Set). The finite-limit hypothesis (the empty limit) gives the canonical terminal comparison t:L(1_C) ≅ 1_{C'}. By Step 1 on (C',J'), (underline E_{C'},(i'_e)_e) is a coproduct of E copies of 1_{C'}. Hence there is a unique morphism kappa_E:L(underline E_C) → underline E_{C'} with kappa_E ∘ L(i_e) = i'_e ∘ t for every e, and it is an isomorphism (both sides are coproducts of isomorphic families). For a map of sets a:E→F, the two maps kappa_F ∘ L(underline a) and underline a ∘ kappa_E agree after every L(i_e), by the equations underline a ∘ i_e = i_{a(e)} of Step 1 on both sites, so they are equal: kappa is natural in maps of sets.",
-   "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "lem-route-inverse-image-constant-set-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (constant sheaf) and the adjunction-colimit property used in the construction sentence"
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
    }
   },
   {
-   "text": "For a commutative ring A, set c_A=e_{underline A_C}^{-1} followed by kappa_|A|. Two identifications are used. First, by [lem-pc-sites-sheafification-underlying-sets] (commutative-ring case), the underlying sheaf of sets of the constant commutative-ring sheaf underline A_C is the set-valued sheafification of the constant presheaf |A|, i.e. the constant sheaf of the set |A|, with the same constant sections i_a; its addition and multiplication are the sheafifications of the constant presheaf maps, so they send the pair (i_a,i_b) to i_{a+b}, resp. i_{ab}, and zero and one are i_0, i_1. Second, by [lem-weil-pbc-sheafification-sets-exact] sheafification of presheaves of sets preserves finite products and the terminal object, so the product of the constant set sheaves of |A| with itself is the constant sheaf of |A|×|A|, its section i_{(a,b)} having projections i_a and i_b; the same holds on (C',J'). Now compare kappa_|A| ∘ L(+) with +' ∘ (kappa_|A| × kappa_|A|) ∘ (product comparison of L) as maps out of L(underline A_C × underline A_C): by naturality of kappa (Step 2) for the two projections |A|×|A|→|A| and for the addition map |A|×|A|→|A|, both composites restricted along L(i_{(a,b)}) equal i'_{a+b} after the terminal comparison L(1_C) ≅ 1_{C'}, for every pair (a,b). Since (L(underline{|A|×|A|}_C),(L i_{(a,b)})) is a coproduct (Step 2), the composites are equal. Multiplication is the same with ab, and zero and one are the singleton-set maps selecting 0 and 1. The assumed operation equations for e identify e^{-1} with the inverse of the transported ring structure, so these equalities say that the set-sheaf map c_A commutes with addition, multiplication, zero and one; a map of sheaves of commutative rings is a map of underlying sheaves of sets that does, so c_A is a ring-sheaf morphism, and it is an isomorphism because e and kappa are isomorphisms.",
+   "text": "Use the ring assembly lemma to lift that comparison, after e^{-1}, to a natural isomorphism of constant ring-sheaf functors. Its underlying component formula is supplied by the same lemma.",
    "uses": [
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-sheafification-sets-exact"
+    "lem-route-inverse-image-constant-ring-assembly"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (Proposition proposition-functoriality-algebraic-structures-topoi), ring-object operation transport"
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
    }
   },
   {
-   "text": "If f:A→B is a ring homomorphism, the square for c_A and c_B commutes: e-naturality gives the square for e^{-1} applied to the ring-sheaf map underline f_C; under the identification of Step 3 [lem-pc-sites-sheafification-underlying-sets], the underlying set map of underline f_C (resp. underline f_{C'}) is a ring-sheaf map that sends each constant section i_a to i_{f(a)}, hence is the set-sheaf map underline |f| of Step 1, and Step 2 gives the square for kappa_|f|. Thus the c_A assemble to a natural isomorphism constants from the constant ring-sheaf functor on C followed by rings to the constant ring-sheaf functor on C'. By construction its underlying component is exactly e_{underline A_C}^{-1} followed by the canonical kappa_|A|, and the argument includes the empty set and zero ring cases.",
+   "text": "For each A use the constant-section normalization lemma on the chosen set-natural comparison. Pair this equation with the underlying component formula and return both natural isomorphisms.",
    "uses": [
-    "lem-pc-sites-sheafification-underlying-sets"
+    "lem-route-inverse-image-constant-section-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (naturality of inverse image on algebraic structures)"
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-sheafification-sets-exact"
+  "lem-route-inverse-image-constant-set-comparison",
+  "lem-route-inverse-image-constant-ring-assembly",
+  "lem-route-inverse-image-constant-section-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 0H7J and 00YV, with the coproduct/adjunction assembly described in the current blueprint"
+  "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
  },
  "mathlib_searches": [
   {
@@ -140,9 +126,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-left-adjoint-preserves-colimits"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
@@ -155,7 +139,6 @@
   "module": "Sheaf.CategoryTheory.RouteInverseImageConstantComparison",
   "declaration": "CategoryTheory.inverseImageConstantComparison",
   "declarations": [
-   "CategoryTheory.RingInverseImage",
    "CategoryTheory.inverseImageConstantComparison"
   ],
   "file": "lean/Sheaf/CategoryTheory/RouteInverseImageConstantComparison.lean",
@@ -164,7 +147,8 @@
   "by": "NC",
   "date": "2026-10-27",
   "existing": false,
-  "fixed_by": "NT-stage2-cc-919e84a1c"
+  "fixed_by": "NT-stage2-cc-919e84a1c",
+  "note": "RingInverseImage is extracted verbatim to RouteInverseImageConstantRingOperations and recorded on its node; this module publicly imports that module, so the existing name and its visibility remain available. The theorem statement is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-27",
@@ -173,5 +157,15 @@
   "group": "NC",
   "result": "fix",
   "note": "Read the node, its 3 stmt_deps, Stacks 0H7J/00YV, the module, the report, and the parent InverseImageData and AlgebraicInverseImage. The hypotheses match: the graph-form ring fields are equivalent to the node's product/terminal-comparison form since L preserves finite products; enat, universes and the HasWeakSheafify Prop instances are fine. Fault (H3): the existential kappa was unconstrained, so the component formula was tautological (kappa := e ≪≫ |constants| always works) and the canonical-comparison clause was lost. FIX: added a conjunct pinning kappa (L of any map whose sections are the toSheafify constant section of a is sent to the toSheafify constant section of a); it holds for the coproduct comparison and determines it. The fixed file compiles clean via nt_compile --json (5.6 s). Advisory: RingInverseImage copies the ring fields of SheafOfModules.AlgebraicInverseImage, acceptable as a ring-only helper. Edge cases empty set, zero ring and L = id checked."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-18ad5",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261028T055609-L-772760",
+  "kind": "interface",
+  "note": "independent cc review: item inverseImageConstantComparison + 4 new modules/nodes against node lem-route-inverse-image-constant-comparison, change record, importer GeometricRingInverseImage (sandbox compile OK)"
  }
 }

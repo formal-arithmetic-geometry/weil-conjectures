@@ -1,0 +1,148 @@
+{
+ "id": "lem-route-inverse-image-constant-ring-assembly",
+ "kind": "statement",
+ "title": "Assembly and naturality of the constant-ring isomorphism",
+ "statement": "Let (C,JC),(D,JD) be small sites with commutative-ring sheafification, L a finite-limit-preserving set-sheaf functor, rings a functor of commutative-ring sheaves, and e_R:L(|R|)≅|rings(R)| natural in R and compatible with all four ring-operation graphs. Suppose κ:constant_C ⋙ L ≅ constant_D is natural in all sets [lem-route-inverse-image-constant-set-comparison]. There is an isomorphism constants:constant_C ⋙ rings ≅ constant_D of commutative-ring-sheaf functors whose underlying component at A is e_{constant_C A}^{-1} followed by the conjugated set comparison. Unlike the parent theorem, this statement takes κ as input and makes no constant-section normalization assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "lem-route-inverse-image-constant-set-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "lem-route-inverse-image-constant-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "For each A define f_A=e_{constant_C A}^{-1};κ_A^ring. The four identities of the pointwise operation lemma make every section function a ring homomorphism. Their naturality in site morphisms is that of f_A, so these homomorphisms define a morphism of ring sheaves.",
+   "uses": [
+    "lem-route-inverse-image-constant-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+   }
+  },
+  {
+   "text": "The underlying set-sheaf morphism is f_A, a composite of isomorphisms. Since sheafCompose of the forgetful functor from commutative rings reflects isomorphisms, the ring-sheaf morphism is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+   }
+  },
+  {
+   "text": "Naturality of e_R rearranges to naturality of its inverse. Combine that equality with naturality of κ_A^ring to show the ring-sheaf components are natural in ring homomorphisms; faithfulness of the forgetful sheaf functor reduces this to the underlying equality. Use NatIso.ofComponents. The component formula holds by construction.",
+   "uses": [
+    "lem-route-inverse-image-constant-set-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-inverse-image-constant-ring-operations",
+  "lem-route-inverse-image-constant-set-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J (Example example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi): constant sheaves and inverse image of algebraic structures"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between sheaf categories commutes with constant sheaves, naturally in all sets and preserving the ring operations on constant rings",
+   "results": "constantSheafΓAdj and constantCommuteCompose support the construction; no arbitrary inverse-image comparison theorem. A separate ring-operation query returned no ring-operation comparison theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact left adjoint sheaves preserves constant sheaves",
+   "results": "constantSheafAdj_counit_w and Sheaf.isConstant_of_forget; neither constructs this inverse-image comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf",
+   "results": "constantSheaf, constantCommuteCompose, and IsConstant lemmas; no comparison under an arbitrary geometric adjunction.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*coproduct|coproduct.*constantSheaf; constant.*ring|ring.*constant in Mathlib/CategoryTheory/Sites",
+   "results": "No coproduct comparison declaration. ConstantSheaf.lean:184 supplies constantCommuteCompose; GlobalSections.lean:69 supplies constantSheafΓAdj; PreservesSheafification.lean:239 supplies sheafComposeIso_hom_fac. The existing ConstantLeftModuleTransport has private coefficient helpers for one ring, but no public natural comparison across commutative rings.",
+   "date": "2026-10-28",
+   "verdict": "supporting declarations, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RouteInverseImageConstantComparison",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-rationality",
+   "via": [
+    "lem-route-inverse-image-constant-comparison",
+    "lem-route-inverse-image-data-exists",
+    "def-zl-compact-support-small-site-morphism",
+    "lem-zl-compact-support-realization-factor-normalization",
+    "lem-zl-proper-unit-condensed-realization",
+    "lem-zl-condensed-global-frobenius-comparison"
+   ],
+   "place": "Constant-sheaf comparison in the construction of the inverse-image datum: Assembly and naturality of the constant-ring isomorphism."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RouteInverseImageConstantRingAssembly",
+  "file": "lean/Sheaf/CategoryTheory/RouteInverseImageConstantRingAssembly.lean",
+  "declaration": "CategoryTheory.constantRingComparisonAssembly",
+  "declarations": [
+   "CategoryTheory.constantRingComparisonAssembly"
+  ],
+  "statement": "theorem constantRingComparisonAssembly {C D : Type u} [SmallCategory C] [SmallCategory D] (JC : GrothendieckTopology C) (JD : GrothendieckTopology D) [HasWeakSheafify JC CommRingCat.{u}] [HasWeakSheafify JD CommRingCat.{u}] (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (hL : PreservesFiniteLimits L) (rings : Sheaf JC CommRingCat.{u} ⥤ Sheaf JD CommRingCat.{u}) (e : ∀ R : Sheaf JC CommRingCat.{u}, RingInverseImage L R (rings.obj R)) (enat : ∀ {R S : Sheaf JC CommRingCat.{u}} (φ : R ⟶ S), L.map ((sheafCompose JC (forget CommRingCat)).map φ) ≫ (e S).ringUnderlying.hom = (e R).ringUnderlying.hom ≫ (sheafCompose JD (forget CommRingCat)).map (rings.map φ)) (kappa : constantSheaf JC (Type u) ⋙ L ≅ constantSheaf JD (Type u)) : ∃ (constants : constantSheaf JC CommRingCat.{u} ⋙ rings ≅ constantSheaf JD CommRingCat.{u}), ∀ A : CommRingCat.{u}, (sheafCompose JD (forget CommRingCat)).map ((constants.app A).hom) = (e ((constantSheaf JC CommRingCat.{u}).obj A)).ringUnderlying.inv ≫ ((constantRingSetComparison JC JD L kappa).app A).hom",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-18ad5",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261028T055609-L-772760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-18ad5",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261028T055609-L-772760",
+  "kind": "interface",
+  "note": "independent cc review: item inverseImageConstantComparison + 4 new modules/nodes against node lem-route-inverse-image-constant-comparison, change record, importer GeometricRingInverseImage (sandbox compile OK)"
+ }
+}
