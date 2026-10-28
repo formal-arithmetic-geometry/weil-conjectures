@@ -20836,3 +20836,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/J1/Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompQh (stage 3; reviewer PASS; first push; landing 20261028T034814-L-3550107 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/J2/Sheaf.SixFunctors.FiniteDualizingRestrictionTransportCore (stage 3; reviewer PASS; first push; landing 20261028T034815-L-3550271 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ProEtaleClopenOrdinaryTensorNormalization (stage 3; reviewer PASS; first push; landing 20261028T034816-L-3550502 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:48 L: merged deliver/J4/Sheaf.Paper.IntegralHomTensorPresentationAdjunction (stage 3; reviewer PASS; first push; landing 20261028T034817-L-3550951 (interface); batch 20261028T034643; modules 1; new nodes 0)
