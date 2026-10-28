@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonAugmentation
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonKFlat
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonNativeTensor
 
 /-! Flatness and augmentation part of the finite-free derived comparison.
 
@@ -19,7 +22,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-universe u
+universe u v r
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -50,6 +53,9 @@ theorem finiteFreeScalarDerivedComparison_flatness
           (.up ℤ)).obj (complex Λ S Z)) ∧
       ∀ C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Z) ℤ,
         IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Z) C) := by
-  sorry
+  intro Z
+  have hK := finiteFreeScalarDerivedComparison_kflat D a S t hS r e₁ e₂ Z
+  refine ⟨finiteFreeScalarDerivedComparison_augmentation D a S t hS r e₁ e₂ Z, hK, ?_⟩
+  exact finiteFreeScalarDerivedComparison_nativeTensor D a S t hS r e₁ e₂ Z hK
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar
