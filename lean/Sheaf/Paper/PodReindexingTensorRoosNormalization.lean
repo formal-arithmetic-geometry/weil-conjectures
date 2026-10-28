@@ -6,6 +6,7 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Paper.PodCompletionTensorNormalization
+import Sheaf.Paper.PodReindexingTensorRoosStrict
 
 /-! # Strict steps in normalized completed tensor reindexing -/
 
@@ -66,6 +67,10 @@ theorem podReindexingTensorRoosNormalization
     (hgen : PodCompletedTensorReindex.Generators l E g D T)
     (hnat : PodCompletedTensorReindex.TowerNaturality l E g D T)
     (hcanonical : PodCompletedTensorReindex.Canonical l E g D T) :
-    PodCompletedTensorReindex.Model l E g D T := by sorry
+    PodCompletedTensorReindex.Model l E g D T := by
+  have hpair := podReindexingTensorRoosNormalization_model_iff_canonical
+    l E g D hD T hgen hnat
+  have hcanon : PodCompletedTensorReindex.Canonical l E g D T := hcanonical
+  exact (And.intro hpair.1 hcanon).1
 
 end WeilConjectures
