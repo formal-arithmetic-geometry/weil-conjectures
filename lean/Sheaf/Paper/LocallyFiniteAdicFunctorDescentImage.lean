@@ -6,13 +6,10 @@ Authors: SHEAF group E6
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicNormalizedFunctorData
-import Sheaf.Paper.ContinuousRationalDerivedRealization
-import Sheaf.Paper.RationalCoefficientCategoryComparison
-import Sheaf.Paper.CondensedFlatCoefficientCalculus
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.CondensedQbarFunctionCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+import Sheaf.Paper.NativeIntegralTensorConstructible
+import Sheaf.Paper.CondensedFiniteIntegralTensorModel
+import Sheaf.Paper.NativeAdicEncodingConstructible
+import Sheaf.Paper.NativeScalarForgetting
 
 /-! # Essential image descent for a normalized locally finite adic functor
 
@@ -60,6 +57,35 @@ theorem normalizedFunctor_descent_image
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] (D : NormalizedFunctor l X) :
     ∀ K, ProEtale.DerivedCategory.boundedAdicConstructible l X K ↔
       ∃ A, Nonempty (D.J.obj A ≅ K) := by
-  sorry
+  letI := D.commutative
+  letI := D.sectionsAdditive
+  letI := D.sectionsLimits
+  letI := D.sectionsColimits
+  letI : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
+    ProEtale.nativeScalarForgetting_isEquivalence l X
+  haveI : (sections l X).IsEquivalence := by
+    unfold sections
+    infer_instance
+  let S := (sections l X).mapDerivedCategory
+  let F := ProEtale.NativeEncoding.derivedEncoding l X
+  intro K
+  constructor
+  · intro hK
+    have hc := ProEtale.NativeEncoding.encoding_boundedConstructible l X K hK
+    obtain ⟨E, M, ⟨e⟩⟩ := ProEtale.constructibleCocone_essSurjObj X l ⟨F.obj K, hc⟩
+    have em : (ProEtale.derivedExtendScalarsToPadicAlgCl X l E).obj M.obj ≅ F.obj K :=
+      (ObjectProperty.ι (ProEtale.boundedConstructible
+        (ProEtale.padicAlgClRingObj X l))).mapIso e
+    obtain ⟨L, ⟨eL⟩⟩ := condensedFinite_integralTensor_model l X E (D.coefficient E) M
+    have ex : F.inv.obj
+        ((ProEtale.derivedExtendScalarsToPadicAlgCl X l E).obj M.obj) ≅ K :=
+      F.inv.mapIso em ≪≫ (F.asEquivalence.unitIso.app K).symm
+    refine ⟨(GeneralAlgebraicallyClosedCoefficients.inclusion E).obj
+      ((sfRationalConstructibleLocalization l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj L),
+      ⟨S.preimageIso ((D.integral E).app L ≪≫ eL ≪≫ S.mapIso ex)⟩⟩
+  · rintro ⟨⟨E, ⟨L⟩⟩, ⟨e⟩⟩
+    exact nativeIntegralTensor_constructible l X E (D.coefficient E) L K
+      (S.mapIso e.symm ≪≫ (D.integral E).app L)
 
 end WeilConjectures.LocallyFiniteAdicRealization

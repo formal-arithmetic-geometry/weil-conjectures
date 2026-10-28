@@ -20846,3 +20846,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/K3/Sheaf.SixFunctors.CanonicalReductionTensorPullComplexComponentBridge (stage 3; reviewer PASS; first push; landing 20261028T034826-L-3555362 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/K4/Sheaf.Paper.ExceptionalTransportEndpointReconstruction (stage 3; reviewer PASS; first push; landing 20261028T034827-L-3556039 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/K5/Sheaf.Paper.LocallyFiniteAdicFunctorDescentHom (stage 3; reviewer PASS; first push; landing 20261028T034828-L-3556496 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:48 L: merged deliver/K6/Sheaf.Paper.LocallyFiniteAdicFunctorDescentImage (stage 3; reviewer PASS; first push; landing 20261028T034829-L-3556892 (interface); batch 20261028T034643; modules 3; new nodes 2)
