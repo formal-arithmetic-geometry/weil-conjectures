@@ -38,7 +38,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Constructible `ℚ̄_ℓ,T`-module objects on a noetherian scheme are closed under retracts. -/
+/-- Constructible `ℚ̄_ℓ,T`-module objects on a topologically noetherian scheme are closed under
+retracts. -/
 theorem isConstructibleModuleObject_of_retract_padicAlgClRingObj {T : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     {M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ)}
@@ -47,7 +48,8 @@ theorem isConstructibleModuleObject_of_retract_padicAlgClRingObj {T : Scheme.{u}
   (((isConstructibleModuleObject_serre_padicAlgCl T ℓ).1 N N _ hN hN).2).of_iso
     e.isoCokernel.symm
 
-/-- Bounded constructible `ℚ̄_ℓ`-complexes on a noetherian scheme are closed under retracts. -/
+/-- Bounded constructible `ℚ̄_ℓ`-complexes on a topologically noetherian scheme are closed under
+retracts. -/
 theorem boundedConstructible_of_retract_padicAlgClRingObj {T : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})

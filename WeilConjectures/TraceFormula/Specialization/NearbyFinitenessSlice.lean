@@ -35,16 +35,16 @@ geometric generic fibres of the coordinate projections of the special fibre. The
   `P` is pro-`p` and `p ≠ ℓ`, the averaging over `P` splits the inclusion of the invariants.
 * **criterion** (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_slices`):
   if the restrictions `Lhᵢ,ₛ^* Ψ B` to all the coordinate slices are bounded constructible,
-  then so is `Ψ B`. The points of `𝔸ⁿ⁺¹_{k'}` outside all the slices are the closed points; by
-  Deligne's lemma (loc. cit., proof of 3.2; Lemme 2.3 of the ind-holonomic analogue in
-  D. Abe, *Around the nearby cycle functor for arithmetic 𝒟-modules*, §2) the cohomology
+  then so is `Ψ B`. The points of `𝔸ⁿ⁺¹_{k'}` outside the images of all the slices `hᵢ,ₛ` are
+  the closed points; by Deligne's argument (loc. cit., proof of 3.2; see also the ind-holonomic
+  analogue in D. Abe, *Around the nearby cycle functor for arithmetic 𝒟-modules*, §2) the cohomology
   sheaves of `Ψ B` are extensions of sums of skyscrapers at closed points by constructible
   sheaves, and the skyscraper parts are finite by the finiteness of
   `RΓ(ℙⁿ⁺¹_s, Ψ_{ℙⁿ⁺¹} j_! B) = RΓ(ℙⁿ⁺¹_η̄, j_! B)` (proper exchange and Deligne's finiteness
   over the field `η̄`).
 
 Together with the trait case `n = 0`
-(`NearbyCyclesModel.preservesBoundedConstructible_traitSelfModel`)
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`)
 they prove the finiteness theorem by induction on `n`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj`).
 
@@ -98,9 +98,9 @@ noncomputable def affineSpaceSliceSpecialFibre (n : ℕ) (i : Fin (n + 1)) :
 
 variable (k') in
 /-- The coordinate generic slice of the geometric generic fibres
-`𝔸ⁿ_{K⟦t⟧} ×_{K⟦t⟧} Spec Ω_K ⟶ 𝔸ⁿ⁺¹_S ×_S Spec Ω`, induced by `hᵢ` and the embedding
-`Ω ⟶ Ω_K` of the fields of the geometric generic points
-(`AlgebraicGeometry.traitGenericFieldMap`). -/
+`𝔸ⁿ_{K⟦t⟧} ×_{Spec K⟦t⟧} Spec Ω_K ⟶ 𝔸ⁿ⁺¹_S ×_S Spec Ω`, induced by `hᵢ` and the map
+`Spec Ω_K ⟶ Spec Ω` (`AlgebraicGeometry.traitGenericPointMap`) of the geometric generic points of
+`Spec K⟦t⟧` and `S`, with fields `Ω_K = (Frac K⟦t⟧)^alg` and `Ω = (Frac k'⟦t⟧)^alg`. -/
 noncomputable def affineSpaceSliceGeneric (n : ℕ) (i : Fin (n + 1)) :
     (affineSpaceModel (coordinateSliceField k') n).generic ⟶
       (affineSpaceModel k' (n + 1)).generic :=

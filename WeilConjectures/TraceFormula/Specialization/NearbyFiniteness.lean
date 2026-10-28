@@ -88,7 +88,8 @@ variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)
 henselian trait `S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), the geometric nearby
 cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes.
 
-Deligne's induction on `n`, for all separably closed fields `k'` at once: for `n = 0`,
+Deligne's induction on `n`, for all separably closed fields `k'` at once (the slices live over
+the different field `K = k'(x)^alg`): for `n = 0`,
 `𝔸⁰_S ⟶ S` is an isomorphism and the nearby cycles of the trait are computed directly
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`). For `n + 1`, by
 Deligne's criterion (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_slices`)

@@ -12,23 +12,23 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 
 # Coordinate generic slices of affine spaces over the trait
 
-Let `k'` be a field, `S = Spec k'⟦t⟧`, and let `K = k'(x)^alg` be an algebraic closure of the
-rational function field in one variable (`AlgebraicGeometry.coordinateSliceField`), with the
-transcendental element `x` (`AlgebraicGeometry.coordinateSliceElement`). For a coordinate
-`i : Fin (n + 1)` of `𝔸ⁿ⁺¹_S`, the morphism
-`hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S` (`AlgebraicGeometry.affineSpaceSlice`) over the trait map
-`Spec K⟦t⟧ ⟶ S` sends the `i`-th coordinate to the constant `x` and the other coordinates to
-the coordinates of `𝔸ⁿ_{K⟦t⟧}` in order. It identifies `𝔸ⁿ_{K⟦t⟧}` with the base change
-`𝔸ⁿ⁺¹_S ×_{𝔸¹_S} Spec K⟦t⟧` of `𝔸ⁿ⁺¹_S` along the generic slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` of the
-`i`-th coordinate (`AlgebraicGeometry.traitSlice`), the completion of the strict localization of
-`𝔸¹_S` at the generic point of its special fibre up to a purely inseparable extension of the
+Let `k'` be a field, `S = Spec k'⟦t⟧`, and let `K = k'(x)^alg`
+(`AlgebraicGeometry.coordinateSliceField`) be an algebraic closure of the rational function field
+in one variable, with the transcendental element `x` (`AlgebraicGeometry.coordinateSliceElement`).
+For a coordinate `i : Fin (n + 1)` of `𝔸ⁿ⁺¹_S`, the morphism `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S`
+(`AlgebraicGeometry.affineSpaceSlice`) over the trait map `Spec K⟦t⟧ ⟶ S` sends the `i`-th
+coordinate to the constant `x` and the other coordinates to the coordinates of `𝔸ⁿ_{K⟦t⟧}` in
+order. Mathematically (this is not formalised here), it identifies `𝔸ⁿ_{K⟦t⟧}` with the base
+change `𝔸ⁿ⁺¹_S ×_{𝔸¹_S} Spec K⟦t⟧` of `𝔸ⁿ⁺¹_S` along the generic slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` of
+the `i`-th coordinate (`AlgebraicGeometry.traitSlice`), the completion of the strict localization
+of `𝔸¹_S` at the generic point of its special fibre up to a purely inseparable extension of the
 residue field.
 
 On special fibres, `hᵢ` induces `hᵢ,ₛ : 𝔸ⁿ_K ⟶ 𝔸ⁿ⁺¹_{k'}`
-(`AlgebraicGeometry.affineSpaceSliceSpecial`), the inclusion of the geometric generic fibre of
-the `i`-th coordinate projection `𝔸ⁿ⁺¹_{k'} ⟶ 𝔸¹_{k'}`. These are the slices along which
-Deligne proves the finiteness of nearby cycles by induction on the relative dimension (SGA 4½,
-[Th. finitude], proof of Thm. 3.2 and Lemme 3.3).
+(`AlgebraicGeometry.affineSpaceSliceSpecial`), the canonical morphism from the geometric generic
+fibre `𝔸ⁿ⁺¹_{k'} ×_{𝔸¹_{k'}} Spec K` of the `i`-th coordinate projection. These are the slices
+along which Deligne proves the finiteness of nearby cycles by induction on the relative dimension
+(SGA 4½, [Th. finitude], proof of Thm. 3.2 and Lemme 3.3).
 
 -/
 
@@ -112,5 +112,12 @@ lemma affineSpaceSliceSpecial_fst :
     affineSpaceSliceSpecial (k' := k') n i x ≫ pullback.fst _ _ =
       pullback.fst _ _ ≫ affineSpaceSlice n i x :=
   pullback.lift_fst _ _ _
+
+/-- The special-fibre slice lies over the map `Spec K ⟶ Spec k'` of the closed points. -/
+@[reassoc (attr := simp)]
+lemma affineSpaceSliceSpecial_snd :
+    affineSpaceSliceSpecial (k' := k') n i x ≫ pullback.snd _ _ =
+      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom (algebraMap k' K)) :=
+  pullback.lift_snd _ _ _
 
 end AlgebraicGeometry
