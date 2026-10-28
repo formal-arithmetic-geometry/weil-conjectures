@@ -67,11 +67,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-/-- A morphism isomorphic as an arrow to an isomorphism is an isomorphism. -/
-lemma isIso_of_arrow_mk_iso {C : Type*} [Category* C] {W X Y Z : C} {f : W ⟶ X} {g : Y ⟶ Z}
-    (e : Arrow.mk f ≅ Arrow.mk g) (hg : IsIso g) : IsIso f :=
-  ((MorphismProperty.isomorphisms C).arrow_mk_iso_iff e).2 hg
-
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- **Integral proper base change over noetherian bases**: for a cartesian square
@@ -103,9 +98,9 @@ theorem isIso_baseChangeMap_app_padicIntegers_of_isProper {k k₂ : Type u} [Fie
   have hfin := isIso_derivedBaseChangeMap_app_of_isProper (ResidueFieldCoeff.{u} ℓ E) hsq _
     (boundedConstructible_derivedReduction_obj X ℓ E _ K₀.property).plusEtaleOrigin
   have : K₀.obj.IsGE K₀.property.1.1.choose := K₀.property.1.1.choose_spec
-  have h₃ := isIso_of_arrow_mk_iso
-    (nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E
-      hsq.toCommSq K₀.obj K₀.property.1.1.choose).some hfin
+  have h₃ := isIso_of_nonempty_arrowIso_map (𝟭 _) hfin
+    ((nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E
+      hsq.toCommSq K₀.obj K₀.property.1.1.choose).map Iso.symm)
   have h₄ : IsIso ((derivedReduction Y' ℓ E).map
       ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq).app K₀.obj)) := by
     unfold baseChangeMap

@@ -87,7 +87,9 @@ isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. Th
 `isIso_boundedConstructibleBaseChange_of_isProper`; it reduces to the étale proper base change
 theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by writing a constructible
 `𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` (Bhatt–Scholze, Section 6.7).
-Currently `sorry`; its `E` and `ℚ̄_ℓ` versions are proved. -/
+Currently `sorry`. The analogous statements for the subfields `E` of `ℚ̄_ℓ` given as
+`PadicAlgCl.FiniteIntermediateField`s are proved in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange

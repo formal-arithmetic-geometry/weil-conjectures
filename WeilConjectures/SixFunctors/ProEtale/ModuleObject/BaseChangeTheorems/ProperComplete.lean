@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedAdicComplete
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CountableProducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
@@ -52,11 +53,6 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- Transport of invertibility along an isomorphism of arrows. -/
-lemma isIso_of_arrow_mk_iso' {C : Type*} [Category* C] {W X Y Z : C} {f : W ⟶ X} {g : Y ⟶ Z}
-    (e : Arrow.mk g ≅ Arrow.mk f) (hg : IsIso g) : IsIso f :=
-  ((MorphismProperty.isomorphisms C).arrow_mk_iso_iff e).1 hg
 
 set_option maxHeartbeats 400000 in
 -- the derived categories of module objects are slow to elaborate
@@ -108,7 +104,7 @@ theorem isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete [IsProper p
     have h₃ : IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E))
         hsq.toCommSq).app ((derivedReduction X ℓ E).obj R)) :=
       isIso_derivedBaseChangeMap_app_of_isProper _ hsq _ hR₁
-    have key := isIso_of_arrow_mk_iso' e.symm h₃
+    have key := isIso_of_nonempty_arrowIso_map (𝟭 _) h₃ ⟨e.symm⟩
     exact_mod_proofs key
   have hred' := isIso_leftDerivedFunctor_map_of_isIso_derivedReduction_map Y' ℓ E _ hred
   have h₀ : IsZero ((Mod.extendScalars (padicIntegersToResidueField Y' ℓ E)).leftDerivedFunctor.obj

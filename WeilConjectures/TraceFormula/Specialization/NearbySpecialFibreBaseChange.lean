@@ -133,7 +133,7 @@ theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {Y Y' : Scheme.{u}}
     (Profinite.padicIntegersRingObj ℓ E.1) M.i
   have h₀ := isIso_baseChangeMap_app_of_isProper_of_isDerivedAdicComplete ℓ E hi _ a hc he
   have := isGE_leftDerivedFunctor_extendScalars_obj
-    (padicIntegersRingObjToContinuousMapRingObj ℓ E) M.generic L₀.obj a
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E) L₀.obj a
   have h₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j L₀.obj a
   have h₂ := isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E M.j
     ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)

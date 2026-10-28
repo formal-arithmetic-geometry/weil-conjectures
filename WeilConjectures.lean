@@ -13453,7 +13453,6 @@ public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.Tactic.MatchTactic
-public import WeilConjectures.Tactic.NormalizeInstanceProofs
 public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.LocallyFree
