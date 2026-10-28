@@ -20942,3 +20942,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:33 L: returned deliver/Y7/Sheaf.Paper.ExceptionalIntegralRightReduction (reviewer RETURN: (reviewer C-339ae, head 339ae78d8) 2b (unforced adaptation): withdraw the timing split of IntegralExceptionalInverseImag)
 
 - 13:39 L: batch 20261028T034643 dependency take-out
+- 05:49 L: returned deliver/D4/Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsSymmetric (reviewer RETURN: (the landing tools, head 3c999a16a) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
