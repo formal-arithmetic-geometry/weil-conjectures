@@ -80,6 +80,7 @@ omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- The source `Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B` of the Künneth map is bounded constructible if the
 nearby cycles `Ψ_M A`, `Ψ_N B` are. -/
 lemma boundedConstructible_kunnethMap_source
+    [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom]
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -102,13 +103,14 @@ lemma boundedConstructible_kunnethMap_source
 
 set_option maxHeartbeats 800000 in
 -- instance search for the monoidal structure of bounded constructible complexes
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 include φ₁ φ₂ in
 /-- The target `Ψ_P (Lf₁^* A ⊗ Lf₂^* B)` of the Künneth map is bounded constructible if the
 geometric nearby cycles `Li^* Rj_* Lj^*` of `P` preserve bounded constructible complexes: since
 `ε_M` and `ε_N` factor through the total spaces, `Lε_P^* (Lf₁^* A ⊗ Lf₂^* B)` is the pullback
 `Lj^* C₀` of a bounded constructible complex on the total space of `P`. -/
 lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
+    [LocallyOfFiniteType qP] [QuasiCompact qP]
     (hgeom : ∀ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)), boundedConstructible
             (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C₀ →
@@ -130,11 +132,11 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
         boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
           boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) (C ⊗ D) :=
               by
-    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal :=
-      isMonoidal_boundedConstructible (X := Over.mk (qP ≫
-          traitToBase k' k')) (ℓ := ℓ)
-    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian qP
+    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace qP
+    have : IsNoetherian P.total := {}
+    exact fun C D hC hD ↦
+      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ) hC hD
   obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ) φ₁
       φ₂ heM heN hA hB htensor
   exact (boundedConstructible _).prop_of_iso (L((P.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
@@ -180,6 +182,8 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM
   have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
   have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
   have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
+  have := hP.locallyOfFiniteType
+  have := hP.quasiCompact
   have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
   exact exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible hM hN hpb hP hgen hm
     hm' hIH heM heN
