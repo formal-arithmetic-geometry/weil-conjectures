@@ -76,8 +76,8 @@ morphisms, while `j : 𝔸ⁿ_η̄ ⟶ 𝔸ⁿ_S` is neither. Writing `Ψ` as th
 `i^* Rj'_*` over the finite extensions `η'` of `η` is only valid for torsion coefficients, and
 there the system does not stabilise: already on `𝔸⁰_S` with `Λ = ℤ/ℓ`, the transition maps on
 `H¹ = Hom(I_t, Λ)` are multiplication by the ramification indices. The reductions also use the
-proper exchange (blueprint `det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
-`WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`) and that bounded
+proper exchange (blueprint `det-sp-nearby-cycles-exchanges` (2),
+`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`) and that bounded
 constructible complexes on the special fibre form a triangulated subcategory
 (`ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`, `sorry`ed on the branch).
 
