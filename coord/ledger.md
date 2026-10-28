@@ -20627,3 +20627,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/J4/Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationExistence (stage 3; reviewer PASS; first push; landing 20261028T020519-L-2519655 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:05 L: merged deliver/J5/Sheaf.Paper.LisseFiniteLevelEtaleModelProperties (stage 3; reviewer PASS; first push; landing 20261028T020520-L-2519952 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:05 L: merged deliver/J6/Sheaf.Paper.LisseFiniteLevelEtaleStalkFromLocal (stage 3; reviewer PASS; first push; landing 20261028T020521-L-2520230 (proof); batch 20261028T020127; modules 1; new nodes 0)
+- 02:05 L: merged deliver/J7/Sheaf.Paper.LisseTowerLocalizedActual (stage 3; reviewer PASS; first push; landing 20261028T020523-L-2520359 (interface); batch 20261028T020127; modules 3; new nodes 2)

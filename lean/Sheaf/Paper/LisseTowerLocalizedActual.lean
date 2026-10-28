@@ -6,6 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.Paper.LisseTowerPulledScalar
+import Sheaf.Paper.LisseTowerLocalizedActualLevels
+import Sheaf.Paper.LisseTowerLocalizedActualNormalized
 
 /-! # Transport of an actual descended semilinear tower
 
@@ -94,6 +96,14 @@ theorem lisseTower_localized_actual
         ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≫
       (H n).map (actual n).hom =
     (H (n + 1)).map (actual (n + 1)).hom ≫
-      constantAdicRestrictedStep (W.hom ≫ g) d M n := by sorry
+      constantAdicRestrictedStep (W.hom ≫ g) d M n := by
+  classical
+  let L (j : ℕ) := (ProEtale.upperStar
+    (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) f.left).mapDerivedCategory ⋙
+      lisseTowerFixedRealization (W.hom ≫ g) d j
+  obtain ⟨actual⟩ := lisseTower_localized_actual_levels X Y g d M U V W f D e
+  refine ⟨actual, ?_⟩
+  intro n
+  exact lisseTower_localized_actual_normalized X Y g d M U V W f D c hc δ e hδ actual n
 
 end AlgebraicGeometry.Scheme

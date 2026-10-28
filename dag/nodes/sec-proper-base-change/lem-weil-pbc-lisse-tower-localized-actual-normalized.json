@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites Tags 03CY and 03DA; Cohomology on Sites Tag 06YY."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalizedActual",
+  "date": "2026-10-28",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-tower-localized-actual",
+   "place": "Localized actual realization proof split into level construction and transition coherence.",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-lisse-tower-localized-actual-normalized",
+ "title": "Normalized transitions for localized actual comparisons",
+ "statement": "Let the data and level comparisons of lem-weil-pbc-lisse-tower-localized-actual be given, including the section-normalized scalar squares and descent equations. Any family of localized level isomorphisms actual_n satisfies the normalized transition equation: after applying the next-level normalization, the pulled scalar comparison, and actual_n, the result equals actual_(n+1) followed by constantAdicRestrictedStep [lem-weil-pbc-lisse-tower-pulled-scalar, lem-weil-pbc-ring-sheaf-change-adjunction, lem-weil-pbc-constant-adic-restricted-tower-maps, def-weil-pbc-constant-adic-finite-diagram-data].",
+ "stmt_deps": [
+  "lem-weil-pbc-lisse-tower-pulled-scalar",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-constant-adic-restricted-tower-maps",
+  "def-weil-pbc-constant-adic-finite-diagram-data"
+ ],
+ "proof": [
+  {
+   "text": "Before localization, compare the two composites after forgetting to abelian sheaves; section normalization of the scalar square makes the coefficient-interchange cube commute.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the cube with the canonical inverse-image and restriction compositors, apply the supplied descent equation, and use naturality of the actual comparisons.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-pulled-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the resulting restricted transition with constantAdicRestrictedStep using the all-pairs restricted-tower map theorem and cancel the common invertible comparison factors.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-restricted-tower-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-tower-pulled-scalar",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-constant-adic-restricted-tower-maps",
+  "def-weil-pbc-constant-adic-finite-diagram-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; Cohomology on Sites Tag 06YY. Transport the supplied descent equation through the localized coefficient cube."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical inverse image comparison for fixed module sheaf realization",
+   "results": "No single Mathlib declaration supplies the project-specific fixed-realization comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory natural isomorphism inverse image sheafification",
+   "results": "General derived functor and sheafification APIs only; no project-specific comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg \"localIsomorphismProEtaleCoefficients|supportSiteComparison_pullback_coherent\" lean/.lake/packages/mathlib/Mathlib",
+   "results": "No project-specific coefficient comparison occurs in Mathlib; the usable declarations are in Sheaf modules.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerLocalizedActualNormalized",
+  "file": "lean/Sheaf/Paper/LisseTowerLocalizedActualNormalized.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_localized_actual_normalized",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-28",
+  "statement": "theorem lisseTower_localized_actual_normalized\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt)\n    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom))\n    (D : ∀ n : ℕ, DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))\n    (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n)\n    (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n))\n    (δ : ∀ n : ℕ, D (n + 1) ⟶\n      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj\n        (D n))\n    (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅\n      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n))\n    (hδ : ∀ n : ℕ,\n      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫\n          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫\n          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =\n        (e (n + 1)).hom ≫\n          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n))\n    (actual : ∀ (n : ℕ),\n      ((ProEtale.upperStar\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) f.left).mapDerivedCategory ⋙\n        lisseTowerFixedRealization (W.hom ≫ g) d n).obj\n        ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≅\n      (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n)) :\n    ∀ (n : ℕ),\n    let L (j : ℕ) := (ProEtale.upperStar\n      (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) f.left).mapDerivedCategory ⋙\n        lisseTowerFixedRealization (W.hom ≫ g) d j\n    let H (k : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d k)\n    (H (n + 1)).map ((L (n + 1)).map\n      (localProEtaleNormalization V.hom (lisseTowerEtaleQuotient d n) (δ n))) ≫\n      (lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n).hom.app\n        ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≫\n      (H n).map (actual n).hom =\n    (H (n + 1)).map (actual (n + 1)).hom ≫\n      constantAdicRestrictedStep (W.hom ≫ g) d M n"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261028T020523-L-2520359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261028T020523-L-2520359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
