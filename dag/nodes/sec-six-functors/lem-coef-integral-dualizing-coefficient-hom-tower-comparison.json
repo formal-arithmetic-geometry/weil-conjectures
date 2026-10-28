@@ -13,10 +13,10 @@
  },
  "proof_origin": {
   "by": "agent",
-  "group": "A8",
+  "group": "M6",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Second proof paragraph, the resolved natural comparison and its componentwise invertibility."
+  "place": "Second proof paragraph, final coefficient mapping-complex comparison; proved via the closed monoidal constant/limit adjunction and the strict Roos calculation."
  },
  "mathlib_searches": [
   {
@@ -72,37 +72,39 @@
  },
  "proof": [
   {
-   "text": "Resolve the input by a K-flat complex and the quotient tower by one simultaneous K-injective complex. The closed Hom tower is the signed tower of ordinary Hom complexes, and all finite evaluation maps are the actual quotient maps.",
+   "text": "For any strong monoidal adjunction F ⊣ G between closed monoidal categories, take mates of the tensor comparison to construct G([F(C),Y]) ≅ [C,G(Y)], naturally in C. Apply this to the derived constant-tower functor. Its strong monoidal structure is the exact-derived tensor structure; constant towers preserve flat objects because finite limits and tensor products are computed at each level. Transport the constant/limit adjunction through the unique equivalence between the small and standard tower localizations.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-sfb-exact-derived-monoidal-construction",
+    "def-coef-integral-dualizing-mapping-towers"
    ],
    "elementary": false
   },
   {
-   "text": "The quotient transitions are degreewise surjective. The Roos triangle therefore computes the ordinary inverse limit, and the profinite coefficient tower identifies that limit with the complete coefficient ring. The resulting map is the canonical derived Hom map and is an isomorphism at every input complex.",
+   "text": "Compute the derived inverse limit of the quotient tower concentrated in degree zero. The normalized strict Roos comparison identifies the right-derived limit with the shifted cone of one minus shift on the degreewise product. Surjective quotient transitions make this map degreewise epic by recursive lifting; its kernel is the ordinary limit. The degreewise-epic kernel-to-shifted-cone quasi-isomorphism thus identifies the derived limit with that ordinary limit.",
+   "uses": [
+    "stage3-pur-canonical-tower-roos-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the ordinary quotient-tower cone from the actual scalar reductions. Profinite completeness says every compatible family has a unique preimage in the integral coefficient ring, so this cone is limiting (restriction of scalars retains the underlying maps). Commuting the degree-zero single-complex functor with limits identifies the derived quotient limit with the tensor unit. Substitute this unit isomorphism in the natural closed-adjunction comparison and take its hom, obtaining isomorphic components at every coefficient complex.",
    "uses": [
     "lem-sfb-integers-profinite-tower",
-    "lem-weil-pbc-surjective-module-complex-tower-limit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the comparison through the localization equivalence and use precomposition naturality to obtain one natural transformation with isomorphic components.",
-   "uses": [
-    "def-coef-integral-dualizing-mapping-towers",
     "def-sf-coefficient-duality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sfb-exact-derived-monoidal-construction",
   "def-coef-integral-dualizing-mapping-towers",
-  "def-sf-coefficient-duality",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "stage3-pur-canonical-tower-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
   "lem-sfb-integers-profinite-tower",
-  "lem-weil-pbc-surjective-module-complex-tower-limit"
+  "def-sf-coefficient-duality"
  ],
  "reviewed": {
   "date": "2026-10-28",
@@ -118,9 +120,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A8",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261028T020148-L-2472387",
+  "landing": "20261028T055718-L-799314",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
