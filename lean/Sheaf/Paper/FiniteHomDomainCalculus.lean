@@ -26,11 +26,13 @@ public import Sheaf.Paper.FiniteHomMonoidalData
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleScalarFlatModel
 import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import Sheaf.Paper.FiniteConstructibleHom
-import Sheaf.Paper.FiniteHomScalarMonoidal
+import all Sheaf.Paper.FiniteHomDomainPullbackProof
+import all Sheaf.Paper.FiniteHomDomainMonoidalProof
+import Sheaf.Paper.EtaleScalarTensorComposition
+import Sheaf.Paper.EtaleScalarTensorIdentity
+import Sheaf.Paper.EtaleScalarUnitIdentity
+import Sheaf.SixFunctors.EtaleScalarUnitComposition
 
 /-! # Finite coefficient domains and evaluation transposition
 
@@ -308,9 +310,34 @@ def FiniteHomDomainScalarIdentity {C : Type a₁} [Category.{b₁} C]
     T.map (Prod.mkHom (z.hom.app U) (z.hom.app V)) = z.hom.app (T.obj (U, V))) ∧
   e.hom = z.hom.app I
 
-private theorem domainInsertComparison {P Q R S : Prop} (h : P ∧ R ∧ S) (q : Q) :
-    P ∧ Q ∧ R ∧ S :=
-  ⟨h.1, q, h.2⟩
+private theorem domainScalarComposition
+    {C : Type a₁} {C' : Type a₂} {C'' : Type a₃}
+    [Category.{b₁} C] [Category.{b₂} C'] [Category.{b₃} C'']
+    (T : C × C ⥤ C) (T' : C' × C' ⥤ C') (T'' : C'' × C'' ⥤ C'')
+    (I : C) (I' : C') (I'' : C'') (F : C ⥤ C') (G : C' ⥤ C'') (H : C ⥤ C'')
+    (α : F ⋙ G ≅ H)
+    (δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T'.obj (F.obj U, F.obj V))
+    (δ' : ∀ U V : C', G.obj (T'.obj (U, V)) ≅ T''.obj (G.obj U, G.obj V))
+    (δ'' : ∀ U V : C, H.obj (T.obj (U, V)) ≅ T''.obj (H.obj U, H.obj V))
+    (e : F.obj I ≅ I') (e' : G.obj I' ≅ I'') (e'' : H.obj I ≅ I'')
+    (ht : ∀ U V : C,
+      α.hom.app (T.obj (U, V)) ≫ (δ'' U V).hom =
+        G.map (δ U V).hom ≫ (δ' (F.obj U) (F.obj V)).hom ≫
+          T''.map (Prod.mkHom (α.hom.app U) (α.hom.app V)))
+    (hu : α.hom.app I ≫ e''.hom = G.map e.hom ≫ e'.hom) :
+    FiniteHomDomainScalarComposition T T' T'' I I' I'' F G H α δ δ' δ'' e e' e'' :=
+  ⟨δ, δ', δ'', e, e', e'', fun _ _ ↦ HEq.rfl, fun _ _ ↦ HEq.rfl,
+    fun _ _ ↦ HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, ht, hu⟩
+
+private theorem domainScalarIdentity
+    {C : Type a₁} [Category.{b₁} C] (T : C × C ⥤ C) (I : C) (F : C ⥤ C)
+    (δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T.obj (F.obj U, F.obj V))
+    (e : F.obj I ≅ I) (z : F ≅ 𝟭 C)
+    (ht : ∀ U V : C, (δ U V).hom ≫
+      T.map (Prod.mkHom (z.hom.app U) (z.hom.app V)) = z.hom.app (T.obj (U, V)))
+    (hu : e.hom = z.hom.app I) :
+    FiniteHomDomainScalarIdentity T I F δ e z :=
+  ⟨δ, e, fun _ _ ↦ HEq.rfl, HEq.rfl, ht, hu⟩
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -404,26 +431,6 @@ section PullbackCompatibility
 
 attribute [local instance 2000] CommRing.toRing
 
-private theorem finiteHomDomain_boundedConstructible_iff
-    (R : Type (u + 1)) [CommRing R] [Finite R] (W : Scheme.{u})
-    (M : Etale.DerivedCategoryModule R W) :
-    Etale.DerivedCategory.isBoundedConstructible R W M ↔
-      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) W M := by
-  constructor
-  · rintro ⟨hc, a, b, -, hz⟩
-    refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun i ↦
-      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hc i)⟩
-    · exact (_root_.DerivedCategory.isGE_iff M a).mpr fun i hi ↦ hz i (.inl hi)
-    · exact (_root_.DerivedCategory.isLE_iff M b).mpr fun i hi ↦ hz i (.inr hi)
-  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
-    refine ⟨fun i ↦
-      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hc i),
-      min a b, b, min_le_right _ _, fun i hi ↦ ?_⟩
-    rcases hi with hi | hi
-    · exact (_root_.DerivedCategory.isGE_iff M a).mp ha i
-        (hi.trans_le (min_le_left _ _))
-    · exact (_root_.DerivedCategory.isLE_iff M b).mp hb i hi
-
 section Pullback
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -475,19 +482,10 @@ theorem finiteHomDomain_pullback (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))]
             (.up ℤ)).obj P) ≫
         _root_.DerivedCategory.Q.map
           ((Etale.scalarSheafPullbackComplexIso (finiteHomQuotient l E h) f).hom.app P)) := by
-  refine ⟨(exactFunctor_iff _).mpr ⟨inferInstance, inferInstance⟩, ?_, ?_⟩
-  · intro a b _ T hT ht
-    refine ⟨(finiteHomDomain_boundedConstructible_iff _ Y _).mpr
-      (Etale.boundedConstructible_leftDerivedUpperStar _ f
-        ((finiteHomDomain_boundedConstructible_iff _ X _).mp hT)), ?_⟩
-    exact Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr
-      (Etale.torAmplitudeIn_leftDerivedUpperStar _ f a b
-        (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp ht))
-  · exact (Etale.scalarPullbackIso_existsUnique (finiteHomQuotient l E h) f).choose_spec.1
+  exact domainPullbackProof D l hl E X Y f h
 
 end Pullback
 end PullbackCompatibility
-
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include D hl hXover hXsep hXft hXqc in
@@ -598,10 +596,7 @@ theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
       (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X) ∧
     Etale.ExceptionalCoefficients.TensorNormalization (finiteHomQuotient l E h) X
       (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X) := by
-  exact domainInsertComparison
-    (finiteHomScalar_monoidal (finiteHomDomainCoeff l E n) (finiteHomDomainCoeff l E m)
-      (finiteHomQuotient l E h) X)
-    ((finiteHomEtaleData_existsUnique l E X).choose_spec.1.tensor n m h)
+  exact domainMonoidalProof D l hl E X h
 
 include D hl hXover hXsep hXft hXqc in
 /-- Tensor and unit comparisons agree with actual successive scalar extension and
@@ -609,13 +604,12 @@ with the identity quotient, on the ambient unbounded categories.
 Source: blueprint successive-quotient and identity clauses; Stacks 0D6D and 07A4
 (blueprint: lem-coef-finite-hom-domain-calculus).
 
-Proof: lem-pur-system-scalar-model and lem-pur-system-scalar-coherence compute the
-scalar associator on flat-term K-flat models as (x tensor b) tensor c to x tensor bc.
-The tensor composition equation of lem-pur-cochain-pullback-tensor-coherence sends
-both routes to (x tensor bc) tensor (y tensor 1); the unit square multiplies the
-same scalars. lem-sfb-ringed-derived-monoidal-comparisons makes the canonical
-composition comparison monoidal, and its identity clause gives the final two
-identities. K-flat change of rings allows every nonflat quotient tower. -/
+Proof: specialize the generic scalar tensor composition, regular-unit composition,
+tensor identity and regular-unit identity equations to the actual quotient ring maps.
+Their composition and identity equalities are finiteHomQuotient_comp and
+finiteHomDomain_quotient_id. The generic tensor identity follows from tensor composition
+by naturality and cancellation. The existential witnesses are the published tensor
+and unit comparisons, so all heterogeneous identifications are reflexive. -/
 theorem finiteHomDomain_scalarCoherence {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
     FiniteHomDomainScalarComposition
       (Functor.uncurry.obj (Etale.derivedTensor
@@ -643,7 +637,16 @@ theorem finiteHomDomain_scalarCoherence {n m r : ℕ} (h : m ≤ n) (k : r ≤ m
         (finiteHomQuotient l E (le_refl n)) X).app (U, V))
       (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E (le_refl n)) X)
       (finiteHomDomainUnit l E X n) := by
-  sorry
+  constructor
+  · apply domainScalarComposition
+    · exact Etale.ExceptionalCoefficients.scalarTensor_comp _ _ _
+        (finiteHomQuotient_comp l E h k) X
+    · exact (Etale.normalizedScalarUnit_comp _ _ _
+        (finiteHomQuotient_comp l E h k) X).symm
+  · apply domainScalarIdentity
+    · exact Etale.ExceptionalCoefficients.scalarTensor_id _
+        (finiteHomDomain_quotient_id l E n) X
+    · exact scalarUnit_id X _ (finiteHomDomain_quotient_id l E n)
 
 attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
 
@@ -678,3 +681,4 @@ theorem finiteHomDomain_transpose {n m : ℕ} (h : m ≤ n) :
 
 
 end WeilConjectures
+

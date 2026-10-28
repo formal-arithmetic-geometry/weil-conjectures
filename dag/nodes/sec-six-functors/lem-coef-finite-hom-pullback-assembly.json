@@ -1,0 +1,125 @@
+{
+ "id": "lem-coef-finite-hom-pullback-assembly",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking.",
+   "via": [
+    "lem-coef-finite-hom-domain-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Private assembly of finite coefficient pullback",
+ "statement": "For the actual finite coefficient quotient R=O_E/(varpi_E^(n+1))→S=O_E/(varpi_E^(m+1)) and a morphism f:Y→X of finite-type schemes, exact etale geometric inverse image preserves bounded constructibility and every given Tor interval [a,b] of derived R-module sheaves. The fixed scalar/pullback comparison satisfies its defining K-flat representative equation [def-weil-pbc-derived-categories, def-weil-pbc-inverse-image, def-weil-pbc-constructible-complexes, def-kun-tor-amplitude, def-pur-etale-scalar-pullback-iso, def-weil-l-adic-coefficient-extension]. This is the already proved finite pullback specialization, placed in a private implementation module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the proved scalarDomain_pullback theorem at the actual finite coefficient rings and quotient map. Their private implementation abbreviations are definitionally the unchanged coefficient rings. This is exactness, the same Tor endpoints and precisely the K-flat representative equation, with no additional hypothesis.",
+   "uses": [
+    "lem-coef-etale-domain-pullback-calculus",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-domain-pullback-calculus",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Unchanged finite specialization of the proved generic calculation; private proof implementation extracted after profiling concrete kernel checking at approximately sixteen seconds per theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*[Pp]ullback|torAmplitudeIn.*[Pp]ullback|scalarPullbackIso",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale inverse image preserves bounded constructible complexes and the same Tor amplitude interval",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; Algebra.Etale.baseChange; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.FormallyEtale.of_equiv; Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomDomainPullbackProof",
+  "file": "lean/Sheaf/Paper/FiniteHomDomainPullbackProof.lean",
+  "declaration": "WeilConjectures.domainPullbackProof",
+  "statement": "theorem domainPullbackProof (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : Y ⟶ X) [f.IsOver (Spec (.of D.k))] {n m : ℕ} (h : m ≤ n) : exactFunctor _ _ (Etale.upperStar (ModuleCat.{u + 1} (proofCoeff l E n)) f) ∧ (∀ (a b : ℤ), a ≤ b → ∀ T : finiteHomEtale l E X n, Etale.DerivedCategory.isBoundedConstructible (proofCoeff l E n) X T → Etale.DerivedCategory.hasTorAmplitudeIn (proofCoeff l E n) X a b T → Etale.DerivedCategory.isBoundedConstructible (proofCoeff l E n) Y ((Etale.upperStar (ModuleCat.{u + 1} (proofCoeff l E n)) f).leftDerivedFunctor.obj T) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (proofCoeff l E n) Y a b ((Etale.upperStar (ModuleCat.{u + 1} (proofCoeff l E n)) f).leftDerivedFunctor.obj T)) ∧ (∀ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (proofCoeff l E n))) ℤ, (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P → (Etale.scalarPullbackIso (finiteHomQuotient l E h) f).hom.app (_root_.DerivedCategory.Q.obj P) ≫ (finiteHomEtaleReduction l E Y h).map (Etale.scalarGeometricRepresentative (proofCoeff l E n) f P) ≫ Etale.scalarExtensionRepresentative (finiteHomQuotient l E h) Y (((Etale.upperStar (ModuleCat.{u + 1} (proofCoeff l E n)) f).mapHomologicalComplex (.up ℤ)).obj P) = (Etale.upperStar (ModuleCat.{u + 1} (proofCoeff l E m)) f).leftDerivedFunctor.map (Etale.scalarExtensionRepresentative (finiteHomQuotient l E h) X P) ≫ Etale.scalarGeometricRepresentative (proofCoeff l E m) f (((ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X).mapHomologicalComplex (.up ℤ)).obj P) ≫ _root_.DerivedCategory.Q.map ((Etale.scalarSheafPullbackComplexIso (finiteHomQuotient l E h) f).hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "worker": "stage3",
+  "summary": "The file contains only proved private implementation declarations. It adds no public declaration or proof hole. The node records the implementation attachment required for a new module.",
+  "blueprint": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

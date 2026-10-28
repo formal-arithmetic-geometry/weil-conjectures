@@ -1,0 +1,198 @@
+{
+ "id": "lem-coef-etale-scalar-tensor-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons.",
+   "via": [
+    "lem-coef-finite-hom-domain-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor compatibility of fixed derived scalar composition",
+ "statement": "For arbitrary commutative rings A,B,C and unital maps φ:A→B, ψ:B→C, χ:A→C with χ=ψ∘φ, a scheme T, and arbitrary unbounded derived module sheaves U,V over A on its small etale site, let Fφ,Fψ,Fχ be the fixed scalar extensions and α:FφFψ≅Fχ their fixed adjoint compositor. Write δφ,δψ,δχ for the representative-normalized tensor comparisons [def-pur-exceptional-coefficient-normalizations, def-weil-pbc-normalized-origin-scalar-comparisons, def-weil-pbc-derived-categories, def-kun-derived-tensor]. Then α(U⊗V);δχ(U,V) equals Fψ(δφ(U,V));δψ(FφU,FφV);(αU⊗αV). No flatness, boundedness, constructibility, finite ring, or invertibility restriction on the ring maps is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-weil-pbc-normalized-origin-scalar-comparisons",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat resolutions P,Q of U,V. Scalar extension preserves flatness and K-flatness for arbitrary ring maps. Compute the fixed left-adjoint compositor on these models using the normalized scalar model and its composition representative; uniqueness of adjunction mates identifies this representative with pbcFixedScalarExtensionComp.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons."
+   }
+  },
+  {
+   "text": "The ordinary tensorator sends (x⊗y)⊗b to (x⊗b)⊗(y⊗1). The ordinary compositor sends (x⊗b)⊗c to x⊗ψ(b)c. The two routes therefore agree on balanced pure tensors, both sending ((x⊗y)⊗b)⊗c to (x⊗ψ(b)c)⊗(y⊗1). The cochain composition tensor equation extends this through sheafification and signed totalization.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons."
+   }
+  },
+  {
+   "text": "Paste the ordinary equation with all-complex tensor normalization and compositor normalization. The K-flat representative maps are isomorphisms, so cancel them. Naturality along the chosen representing isomorphisms gives the assertion on U,V.",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "lem-coef-etale-scalar-normalizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-coef-etale-scalar-normalizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons. B3: explicit normalized scalar squares, with categorical cancellation for the identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism of left adjoints to lax monoidal functors is monoidal",
+   "results": "CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.mapMon; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.leftAdjointCompIso. Search digest eb58b0b8cb72e8a3",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompIso_inv_app; CategoryTheory.Adjunction.leftAdjointCompIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso_assoc. Search digest cf307597c0192305",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjoint.*[Mm]onoidal|[Mm]onoidal.*leftAdjoint",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean. Search digest 3a5cba9d7e366e9b",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension tensor comparison commutes with composition and the identity scalar extension",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_id_comp; ModuleCat.ExtendScalars.map'_comp; ModuleCat.extendScalarsComp; PolynomialLaw.comp_toFun'; TensorProduct.AlgebraTensorModule.rTensor_comp; ModuleCat.extendScalars_comp_id_assoc; ModuleCat.extendScalars_comp_id. Search digest c4465ce61bd5c4f5",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit comparison of derived scalar extension along the identity ring homomorphism equals its adjoint identity isomorphism",
+   "results": "ModuleCat.ExtendScalars.map'_id; ModuleCat.extendScalarsId; ModuleCat.extendScalarsId_hom_app_one_tmul; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.extendScalarsId_inv_app_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction. Search digest 05828edbc5ffecfc",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointIdIso|mapDerivedCategoryNatIso",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean. Search digest 5071c67013028dc4",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+   "results": "CategoryTheory.Adjunction.leftAdjointIdIso; CategoryTheory.Adjunction.leftAdjointIdIso_inv_app; CategoryTheory.Adjunction.leftAdjointIdIso_hom_app; CategoryTheory.Adjunction.leftAdjointCompIso_comp_id; CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointIdIso_hom. Search digest 369344a301e6bafe",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar-extension and adjunction coherence results are relevant. None directly states the normalized derived etale tensor or regular-unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarTensorComposition",
+  "file": "lean/Sheaf/Paper/EtaleScalarTensorComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.scalarTensor_comp",
+  "statement": "theorem scalarTensor_comp\n    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]\n    (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : χ = ψ.comp φ)\n    (T : Scheme.{u}) (U V : DerivedCategoryModule A T) :\n    (ProEtale.pbcFixedScalarExtensionComp T.smallEtaleTopology φ ψ χ hχ).hom.app\n        (((derivedTensor (ModuleCat.{u + 1} A) T).obj U).obj V) ≫\n      (tensorIso χ T).hom.app (U, V) =\n    (scalarExtension ψ T).map ((tensorIso φ T).hom.app (U, V)) ≫\n      (tensorIso ψ T).hom.app ((scalarExtension φ T).obj U, (scalarExtension φ T).obj V) ≫\n      (Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} C) T)).map\n        (Prod.mkHom\n          ((ProEtale.pbcFixedScalarExtensionComp T.smallEtaleTopology φ ψ χ hχ).hom.app U)\n          ((ProEtale.pbcFixedScalarExtensionComp T.smallEtaleTopology φ ψ χ hχ).hom.app V))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "worker": "stage3",
+  "summary": "The scalar tensor and unit equations extracted from step 7, with identity proved by categorical cancellation and the unit identity proved by exact adjunction insertion.",
+  "blueprint": "Final successive quotient and composition identities of thm-coef-finite-hom.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-scalar-model",
+    "why": "Generic scalar model normalization or tensor coherence used on the fixed small etale site; no unit route is replaced."
+   },
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Generic scalar model normalization or tensor coherence used on the fixed small etale site; no unit route is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic scalar model normalization or tensor coherence used on the fixed small etale site; no unit route is replaced."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic scalar model normalization or tensor coherence used on the fixed small etale site; no unit route is replaced."
+   },
+   {
+    "node": "lem-coef-etale-scalar-normalizations",
+    "why": "Generic scalar model normalization or tensor coherence used on the fixed small etale site; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

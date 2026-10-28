@@ -55,25 +55,22 @@
    }
   },
   {
-   "text": "For $R=A$ or $B$, [prop-weil-pbc-inverse-image-modules-exact] identifies geometric module pullback with exact etale inverse image and identifies $f^{-1}R_X$ with $R_Y$. Exactness gives $\\mathcal H^i(f_R^*T)=f_R^*\\mathcal H^i(T)$ by preservation of kernels and cokernels. These sheaves are constructible by [prop-constructible-pullback] and vanish outside the original cohomological bounds. Pull $P$ of Step 2 back termwise: [lem-weil-pbc-ringed-topos-flat-module-pullback] makes each term flat, and [prop-constructible-pullback] makes it constructible; it is still zero outside $[a,b]$. By [lem-kun-kflat-criteria](1) this bounded flat complex is K-flat. For any degree-zero $R_Y$-module sheaf $W$, its ordinary tensor with $W$ therefore computes its derived tensor with $W$, and has zero terms outside $[a,b]$. This proves preservation of the stated Tor interval, as well as bounded constructibility. In Lean use the already proved etale boundedConstructible_leftDerivedUpperStar and torAmplitudeIn_leftDerivedUpperStar APIs, which package this argument. Convert the two bounded-constructibility presentations using their cohomological definitions and the constructible module-sheaf comparison; preserve the exact same Tor endpoints.",
+   "text": "Apply scalarDomain_pullback at the two finite coefficient rings and the actual quotient map. This packages exactness, bounded constructibility with the original Tor endpoints, and the precise K-flat scalar/pullback representative equation before specialization, sharing the generic ring-category instances. The public finiteHomDomain_pullback statement is unchanged.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-constructible-pullback",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-kun-kflat-criteria"
+    "lem-coef-finite-hom-pullback-assembly"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 04JC (sites-modules lemma-flat-pullback-exact), Tag 05VD (sites-modules lemma-pullback-flat), Tag 06YQ; etale-cohomology lemma-pullback-constructible (095G)"
    }
   },
   {
-   "text": "The recorded scalarPullbackIso is chosen from scalarPullbackIso_existsUnique. Its choose_spec supplies exactly the requested representative equation, for every K-flat complex and without boundedness hypotheses. This uses the normalization in [def-pur-etale-scalar-pullback-iso] directly; no additional comparison with termwise pullback is required here.",
+   "text": "Apply scalarDomain_pullback at the two finite coefficient rings and the actual quotient map. This packages exactness, bounded constructibility with the original Tor endpoints, and the precise K-flat scalar/pullback representative equation before specialization, sharing the generic ring-category instances. The public finiteHomDomain_pullback statement is unchanged.",
    "uses": [
-    "def-pur-etale-scalar-pullback-iso"
+    "lem-coef-finite-hom-pullback-assembly"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 07A4 and 0G7E; normalized comparison on flat-term K-flat representatives"
@@ -82,8 +79,7 @@
   {
    "text": "Apply finiteHomScalar_monoidal at the actual quotient ring map. Its generic-ring proof shares the site-category instances, uses the proved canonical scalar CoreMonoidal structure and the all-complex normalization facts, and packages the unchanged FiniteHomDomainMonoidal predicate. The finiteHomEtaleData normalization identifies finiteHomEtaleTensor with the published tensorIso. Insert this heterogeneous comparison between the monoidality and the two normalization conjuncts.",
    "uses": [
-    "lem-coef-finite-hom-scalar-monoidal",
-    "def-sf-etale-finite-coefficient-hom-arrow"
+    "lem-coef-finite-hom-monoidal-assembly"
    ],
    "elementary": false,
    "source": {
@@ -94,7 +90,7 @@
   {
    "text": "The generic-ring result gives the actual CoreMonoidal structure, the required inverse-unit and inverse-tensorator identifications, and the actual Koszul witnesses with their braided-functor square. Associativity and both unit constraints are fields of CoreMonoidal. FiniteHomDomainMonoidal is relocated verbatim to a public data module so this generic result compiles independently.",
    "uses": [
-    "lem-coef-finite-hom-scalar-monoidal"
+    "lem-coef-finite-hom-monoidal-assembly"
    ],
    "elementary": false,
    "source": {
@@ -103,18 +99,17 @@
    }
   },
   {
-   "text": "For $A\\to B\\to C$, [lem-pur-system-scalar-model] supplies the normalized scalar models on this small site, and [lem-pur-system-scalar-coherence] supplies the natural derived composition and identity comparisons with their cochain normalization. On a flat-term K-flat $P$ the first comparison is $((x\\otimes b)\\otimes c)\\mapsto x\\otimes\\bar b c$, and its inverse is $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. Successive scalar extension is computed on these actual complexes, since [lem-pur-kflat-change-of-rings] applies after each extension. The tensor square is also the composition equation of [lem-pur-cochain-pullback-tensor-coherence] for these identity geometric morphisms. Explicitly both routes send $((x\\otimes y)\\otimes b)\\otimes c$ to $(x\\otimes\\bar b c)\\otimes_C(y\\otimes1)$, and the unit square multiplies the same scalars. Thus the canonical tensor comparison agrees with successive extension. On the derived level this is the monoidality of the composition comparison $c_{f,g}:P_{gf}\\cong P_fP_g$ in [lem-sfb-ringed-derived-monoidal-comparisons] for the identity geometric morphisms with ring maps $A_X\\to B_X\\to C_X$; that comparison is computed by ordinary module pullback composition on flat-term K-flat complexes, hence equals the scalar associator above, normalized on the same models. Its clause on $P_{\\mathrm{id}}\\cong\\mathrm{id}$ gives the case $n=m$. For $n=m$, multiplication $x\\otimes a\\mapsto ax$ gives the identity comparison and the two tensor routes give $(ax)\\otimes y=x\\otimes(ay)$; the coefficient-unit comparison is multiplication as well. The comparisons are natural derived comparisons by the cited normalization theorem, so these checks prove the assertions on the ambient categories, including nonflat quotient towers.",
+   "text": "Use scalarTensor_comp for the tensor component of successive extension, normalizedScalarUnit_comp for its regular-unit component, scalarTensor_id for the tensor identity, and scalarUnit_id for its regular-unit component. Specialize to the actual finite coefficient quotient maps using finiteHomQuotient_comp and finiteHomDomain_quotient_id. Supply the published tensor and unit comparisons as the existential witnesses; each requested heterogeneous identification is reflexive. The identity tensor square itself follows by categorical cancellation from the tensor composition square, so only the latter remains a new proof obligation.",
    "uses": [
-    "lem-pur-system-scalar-model",
-    "lem-pur-system-scalar-coherence",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-coef-etale-scalar-tensor-composition",
+    "lem-coef-etale-scalar-unit-composition",
+    "lem-coef-etale-scalar-tensor-identity",
+    "lem-coef-etale-scalar-unit-identity"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Normalized scalar models and derived associators; cochain composition formula; compare sites-cohomology Tags 0G7E and 0D6D"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final evaluation/coefficient coherence paragraph; successive quotient and identity scalar comparisons."
    }
   },
   {
@@ -161,22 +156,21 @@
   "lem-weil-pbc-finite-type-over-noetherian",
   "def-weil-l-adic-coefficient-extension",
   "lem-sp-etale-scalar-flat-model",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-constructible-pullback",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-kun-kflat-criteria",
-  "def-pur-etale-scalar-pullback-iso",
-  "lem-coef-finite-hom-scalar-monoidal",
+  "lem-coef-finite-hom-pullback-assembly",
+  "lem-coef-finite-hom-monoidal-assembly",
+  "lem-coef-etale-scalar-tensor-composition",
+  "lem-coef-etale-scalar-unit-composition",
+  "lem-coef-etale-scalar-tensor-identity",
+  "lem-coef-etale-scalar-unit-identity",
   "def-sf-etale-finite-coefficient-hom-arrow",
-  "lem-pur-system-scalar-model",
-  "lem-pur-system-scalar-coherence",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-kun-dimension-finite-type",
   "cor-weil-finite-constructible-hom"
  ],
- "proof_origin": "G7 proofs of flat-model, endpoints and quotient identity are retained. P2 completes pullback using source-library etale stability and the scalar/pullback normalization. E4 proves finiteHomDomain_transpose directly from the normalized closed records and evaluation-defined comparison with private categorical helpers; its shared FiniteHomDomainTransposeLaws packaging is retained. C7 proves finiteHomDomain_monoidal using the proved generic lem-coef-etale-scalar-monoidal and the existing all-complex normalization choose_spec properties. The scalar-composition and identity coherence statement alone retains its original proof plan and sorry. All public signatures and previously completed proofs are preserved. The unchanged FiniteHomDomainMonoidal definition is relocated to def-coef-finite-hom-monoidal-data and publicly re-exported; its generic-ring realization is lem-coef-finite-hom-scalar-monoidal. This splits kernel checking across modules without changing any mathematical statement.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Flat-model, endpoint, quotient-identity, monoidality and closed-transpose proofs are retained. Pullback is assembled by the proved generic scalarDomain_pullback calculation before finite specialization. Scalar coherence is assembled from the two unit equations and tensor-composition/identity equations; the identity is proved by categorical cancellation. Only the generic tensor-composition square remains a split-off hole. Every existing public signature and definition is preserved."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -352,16 +346,7 @@
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sp-etale-scalar-flat-model",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-constructible-pullback",
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-kun-kflat-criteria",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-system-scalar-model",
-  "lem-pur-system-scalar-coherence",
-  "lem-kun-dimension-finite-type",
-  "lem-sfb-ringed-derived-monoidal-comparisons"
+  "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
   "date": "2026-10-22",
@@ -408,11 +393,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-bfa22",
-  "group": "C7",
-  "result": "fix",
-  "landing": "20261028T020240-L-2485019",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
   "kind": "interface",
-  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

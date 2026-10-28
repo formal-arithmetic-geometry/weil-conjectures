@@ -1,0 +1,121 @@
+{
+ "id": "lem-coef-finite-hom-monoidal-assembly",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking.",
+   "via": [
+    "lem-coef-finite-hom-domain-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Private assembly of finite coefficient monoidality",
+ "statement": "For the finite quotient coefficient map O_E/(varpi_E^(n+1))→O_E/(varpi_E^(m+1)) and the small etale site of a finite-type scheme X, the fixed derived scalar extension with the published tensor, unit and Koszul comparisons satisfies FiniteHomDomainMonoidal. Its finiteHomEtaleTensor agrees heterogeneously with the representative-normalized tensorIso, and the latter tensor and unit comparisons satisfy TensorNormalization and UnitNormalization [def-coef-finite-hom-monoidal-data, def-pur-exceptional-coefficient-normalizations, def-sf-etale-finite-coefficient-hom-arrow, def-weil-l-adic-coefficient-extension]. This is the already proved finite monoidality specialization, placed in a private implementation module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-coef-finite-hom-monoidal-data"
+ ],
+ "proof": [
+  {
+   "text": "Specialize finiteHomScalar_monoidal at the actual quotient map. Insert the finiteHomEtaleData tensor normalization choose_spec between the monoidality conclusion and its two all-complex normalization equations. The private insertComparison helper merely reassociates a conjunction.",
+   "uses": [
+    "lem-coef-finite-hom-scalar-monoidal",
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-hom-scalar-monoidal",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Unchanged finite specialization of the proved generic calculation; private proof implementation extracted after profiling concrete kernel checking at approximately sixteen seconds per theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoreMonoidal|leftDerivedFunctorMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Multifunctor.lean; Mathlib/CategoryTheory/Monoidal/Multifunctor.lean; Mathlib/CategoryTheory/Monoidal/Multifunctor.lean; Mathlib/CategoryTheory/Monoidal/Free/Basic.lean; Mathlib/CategoryTheory/Monoidal/Discrete.lean; Mathlib/CategoryTheory/Monoidal/Grp.lean",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension is symmetric strong monoidal with its normalized tensor and unit comparisons",
+   "results": "ModuleCat.MonoidalCategory.symmetricCategory; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'; LinearEquiv.extendScalarsOfIsLocalizationEquiv; CategoryTheory.Functor.CoreMonoidal.toMonoidal; instAddCommMonoidRestrictScalars; CategoryTheory.isMonoidalDistrib.of_symmetric_monoidal_closed; SymAlg.instSMul; TensorProduct.CompatibleSMul.unit",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "CategoryTheory.Functor.CoreMonoidal; CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.εIso; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
+   "date": "2026-10-28",
+   "verdict": "The project already proves the generic statement. This node records its fully proved private finite specialization, required to distribute concrete kernel checking across modules; no new mathematical claim is being assumed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomDomainMonoidalProof",
+  "file": "lean/Sheaf/Paper/FiniteHomDomainMonoidalProof.lean",
+  "declaration": "WeilConjectures.domainMonoidalProof",
+  "statement": "theorem domainMonoidalProof {n m : ℕ} (h : m ≤ n) : FiniteHomDomainMonoidal (finiteHomEtaleReduction l E X h) (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X).app (U, V)) (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X) (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (proofCoeff l E n)))) (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (proofCoeff l E m)))) ∧ HEq (finiteHomEtaleTensor l E X h) (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X) ∧ Etale.ExceptionalCoefficients.UnitNormalization (finiteHomQuotient l E h) X (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X) ∧ Etale.ExceptionalCoefficients.TensorNormalization (finiteHomQuotient l E h) X (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "worker": "stage3",
+  "summary": "The file contains only proved private implementation declarations. It adds no public declaration or proof hole. The node records the implementation attachment required for a new module.",
+  "blueprint": "Finite coefficient domains, monoidal comparisons and their normalization; proved specialization extracted solely to distribute kernel checking."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055610-L-773463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
