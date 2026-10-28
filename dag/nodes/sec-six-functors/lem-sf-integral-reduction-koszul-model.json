@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-reduction-koszul-model",
+ "kind": "statement",
+ "title": "The fixed Koszul tower computes integral reduction on any representative",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix prime l, a finite extension E of Q_l, a scheme Y and finite-field datum D with l different from its characteristic. Use the completed integral module and derived categories of [def-sf-integral-hom-reduction-models]. Let q:P to G be a K-flat resolution and N any complex with an isomorphism Q(N) to Q(G). For R the completed coefficient sheaf and a its constant uniformizer, let Q_n=[R --a^(n+1)--> R] with strict transitions (a,id), as in [def-pur-principal-koszul-quotient-towers]. Then the actual integralReductionTower(P) of [def-weil-integral-reduction-tower] is isomorphic to the functor n maps to localization of totalTensor(N,Q_n), with its tensor-induced transitions. No Hom functor or representative of a Hom object occurs in this assertion.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-integral-hom-reduction-models",
+  "def-pc-kflat-complex",
+  "def-weil-integral-reduction-tower",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels"
+ },
+ "proof": [
+  {
+   "text": "Refine P by a flat-term K-flat resolution. The existing principal Koszul strict replacement identifies its tensor tower with the strict restricted quotient tensor tower by objectwise quasi-isomorphisms, compatible with the actual quotient transitions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite_reduction_scalar_normalization to identify this ordinary quotient tensor tower with the actual scalar-extension/restriction tower. Localize, and apply canonical resolution independence to return to q. The normalization and resolution comparison preserve every consecutive transition, so this is an isomorphism of whole towers.",
+   "uses": [
+    "lem-a1-finite-reduction-scalar-normalization",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each coefficient Koszul complex has bounded free terms and is K-flat. Tensor in this second variable sends every quasi-isomorphism to a quasi-isomorphism. Therefore the functor taking a complex to its localized Koszul tensor tower factors through the derived localization. Apply this factorization to the given isomorphism Q(N) to Q(G), and to Q(q), and compose with the preceding tower isomorphism. This does not choose arbitrary representative data from an unproved existence theorem.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-a1-finite-reduction-scalar-normalization",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-pur-kflat-tensor-quasiiso-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a K-injective complex with a two term finite free complex preserves K-injectivity; compatible quotient resolutions compute a reduction tower",
+   "results": "HomotopyEquiv.isKInjective and CochainComplex.isKInjective_of_iso; generic tensor and scalar-tower declarations; no exact tower model.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic cone and localization APIs; no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two term free Koszul coefficient towers compute derived reductions and preserve K-injective targets under tensor",
+   "results": "Searches for the finite-free complex support and the two comparison steps; Mathlib has homological complex support and generic Hom/tensor constructions, no integral coefficient tower comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; build the cone step from existing APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "principalKoszul|KInjective.*[Tt]ensor|[Tt]ensor.*KInjective; mapBifunctorMappingCone₂Iso; rightOrthogonal",
+   "results": "PrincipalKoszulStrictReplacement, FiniteReductionScalarNormalization, KFlatTensorPreservesQuasiIsoIndependentCoefficients and Mathlib KInjective supply component steps. No arbitrary-representative reduction-tower theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the strict tower; isolate only its remaining derived representative comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionTowerTensorModels",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels",
+   "via": [
+    "lem-sf-integral-hom-tower-tensor-models",
+    "lem-sf-integral-hom-tower-components-transition",
+    "lem-sf-integral-hom-tower-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionKoszulModel",
+  "file": "lean/Sheaf/Paper/IntegralReductionKoszulModel.lean",
+  "declaration": "WeilConjectures.IntegralHom.integralReductionTower_koszul_model",
+  "statement": "theorem integralReductionTower_koszul_model\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)\n    (P G N : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)\n    (q : P ⟶ G)\n    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients\n      (J := AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (R := completedIntegralCommRingSheaf l E Y D hl) q)\n    (e : DerivedCategory.Q.obj N ≅ DerivedCategory.Q.obj G) :\n    Nonempty (integralReductionTower l E Y D hl P ≅\n      principalKoszulTower (completedIntegralCommRingSheaf l E Y D hl)\n        (PrincipalKoszulStrictReplacement.uniformizer l E Y) ⋙\n          (totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj N ⋙\n            DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T034803-L-3545264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T034803-L-3545264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

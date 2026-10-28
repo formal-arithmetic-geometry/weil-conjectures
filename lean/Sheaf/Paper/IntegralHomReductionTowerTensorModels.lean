@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
+import Sheaf.Paper.IntegralReductionKoszulModel
+import Sheaf.Paper.KInjectivePrincipalTensor
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 
 /-! # Separate tensor representatives of integral reduction towers
 
@@ -20,7 +23,62 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
+open SheafOfModules (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses)
 namespace WeilConjectures.IntegralHom
+
+attribute [local irreducible] derivedInternalHomOfUniverses totalTensor
+  completedIntegralCoefficientSheafUnrestricted HasDerivedCategory.standard
+
+private theorem homTower_representatives
+    (Y : AlgebraicGeometry.Scheme.{t})
+    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
+    (K : Derived.{t, u} Y R) (A : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (eA : DerivedCategory.Q.obj A ≅ K)
+    (S : ℕᵒᵖ ⥤ CochainComplex (Modules.{t, u} Y R) ℤ)
+    (hS : ∀ n, (S.obj n).IsKInjective) :
+    Nonempty (S ⋙ DerivedCategory.Q ⋙ (Functor.curry.obj (hom.{t, u} Y R)).obj (op K) ≅
+      S ⋙ (homComplexFunctor.{t + 1, t, max u (t + 1), max u (t + 1)}
+        (R := R)).obj (op A) ⋙ DerivedCategory.Q) := by
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbSheafify.{t, u} Y
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbLocallyBijective.{t, u} Y
+  let M := Modules.{t, u} Y R
+  let : IsGrothendieckAbelian.{max u (t + 1)} M :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t + 1, t, u}
+      J R).1
+  let I₀ := CochainComplex.kInjectiveResolutionFunctor.{max u (t + 1)} M
+  let η := CochainComplex.toKInjectiveResolution.{max u (t + 1)} M
+  let HA := (homComplexFunctor.{t + 1, t, max u (t + 1), max u (t + 1)}
+    (R := R)).obj (op A)
+  obtain ⟨c⟩ := derivedInternalHomOfUniverses_comparison.{t + 1, t, u} J R I₀ η
+    (fun N ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app
+      M N).2, CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj M N⟩)
+  let b : S ⋙ HA ⋙ DerivedCategory.Q ⟶ S ⋙ I₀ ⋙ HA ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (Functor.whiskerLeft S η) (HA ⋙ DerivedCategory.Q)
+  have hb : IsIso b := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro n
+    let : (S.obj n).IsKInjective := hS n
+    have : (I₀.obj (S.obj n)).IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj M (S.obj n)
+    have : QuasiIso (η.app (S.obj n)) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app M (S.obj n)).2
+    change IsIso (DerivedCategory.Q.map (HA.map (η.app (S.obj n))))
+    apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr
+    simpa [HA] using quasiIso_homComplex_mapOfUniverses.{t + 1, t, u}
+      (J := J) (R := R) (I' := S.obj n) (I := I₀.obj (S.obj n))
+      (L' := A) (L := A) (η.app (S.obj n)) (𝟙 A)
+  let cS : S ⋙ DerivedCategory.Q ⋙
+      (Functor.curry.obj (hom.{t, u} Y R)).obj (op (DerivedCategory.Q.obj A)) ≅
+      S ⋙ I₀ ⋙ HA ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun n ↦ c.app (op A, S.obj n)) (by
+      intro n m f
+      simpa [HA, hom] using c.hom.naturality
+        (X := (op A, S.obj n)) (Y := (op A, S.obj m)) (𝟙 (op A), S.map f))
+  exact ⟨Functor.isoWhiskerLeft (S ⋙ DerivedCategory.Q)
+    ((Functor.curry.obj (hom.{t, u} Y R)).mapIso eA.op) ≪≫ cS ≪≫ (asIso b).symm⟩
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -88,6 +146,57 @@ theorem reductionTower_tensor_models
       Nonempty (integralReductionTower l E Y D hl P' ≅
         Q ⋙ (totalTensor.{t, u} Y R).obj
           (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) A I) ⋙
-            DerivedCategory.Q) := by sorry
+            DerivedCategory.Q) := by
+  classical
+  let R := completedIntegralCommRingSheaf l E Y D hl
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  let : HasSheafify J AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbSheafify.{t, u} Y
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    integralCoefficientAbLocallyBijective.{t, u} Y
+  let M := Modules.{t, u} Y R
+  let H := (Functor.curry.obj (hom.{t, u} Y R)).obj (op K)
+  let A : CochainComplex M ℤ := DerivedCategory.Q.objPreimage K
+  let eA : DerivedCategory.Q.obj A ≅ K := DerivedCategory.Q.objObjPreimageIso K
+  let : IsGrothendieckAbelian.{max u (t + 1)} M :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t + 1, t, u}
+      J R).1
+  let I := (CochainComplex.kInjectiveResolutionFunctor.{max u (t + 1)} M).obj G
+  let : I.IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj M G
+  have : QuasiIso ((CochainComplex.toKInjectiveResolution.{max u (t + 1)} M).app G) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app M G).2
+  let eI : DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj G :=
+    (asIso (DerivedCategory.Q.map
+      ((CochainComplex.toKInjectiveResolution.{max u (t + 1)} M).app G))).symm
+  let a := PrincipalKoszulStrictReplacement.uniformizer l E Y
+  let Q := principalKoszulTower R a
+  obtain ⟨r⟩ := integralReductionTower_koszul_model l E Y D hl P G I q hq eI
+  obtain ⟨h⟩ := homTower_representatives Y R K A eA
+    (Q ⋙ (totalTensor.{t, u} Y R).obj I)
+    (fun n ↦ isKInjective_tensor_principalKoszul Y R a I n.unop)
+  obtain ⟨c⟩ := derivedInternalHomOfUniverses_obj_iso.{t + 1, t, u} J R
+    K (DerivedCategory.Q.obj G) A I eA eI
+  obtain ⟨r'⟩ := integralReductionTower_koszul_model l E Y D hl P' G'
+    (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) A I)
+    q' hq' (c.symm ≪≫ e.symm)
+  refine ⟨A, I, Q, ?_, ⟨Functor.isoWhiskerRight r H ≪≫ h⟩, ⟨r'⟩⟩
+  intro n
+  let U := SheafOfModules.unit
+    ((sheafCompose J (forget₂ CommRingCat.{max u (t + 1)}
+      RingCat.{max u (t + 1)})).obj R)
+  let f := principalKoszulScalarComplex R a n
+  constructor
+  · intro k hk₁ hk₀
+    apply (CochainComplex.mappingCone.isZero_X_iff f k).2
+    exact ⟨HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 U _ (by omega),
+      HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 U k hk₀⟩
+  · constructor
+    · exact ⟨HomologicalComplex.homotopyCofiber.XIsoBiprod f (-1) 0 (by decide) ≪≫
+        (isoBiprodZero (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 U (-1)
+          (by decide))).symm ≪≫ HomologicalComplex.singleObjXSelf (.up ℤ) 0 U⟩
+    · exact ⟨HomologicalComplex.homotopyCofiber.XIsoBiprod f 0 1 (by decide) ≪≫
+        (isoZeroBiprod (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 U 1
+          (by decide))).symm ≪≫ HomologicalComplex.singleObjXSelf (.up ℤ) 0 U⟩
 
 end WeilConjectures.IntegralHom

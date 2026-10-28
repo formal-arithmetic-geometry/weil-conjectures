@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-kinjective-principal-tensor",
+ "kind": "statement",
+ "title": "K-injectivity after tensoring by a principal two-term free complex",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme in universe t, R a sheaf of commutative rings of universe max(u,t+1) on its small pro-etale site, a a global section of its unit module, I a K-injective unbounded cochain complex of R-module sheaves, and n a natural number. Using the total tensor and module category of [def-sf-integral-hom-reduction-models] and principalKoszul of [def-pur-principal-koszul-quotient-towers], the complex I tensor [R --a^(n+1)--> R] is K-injective. There is no regularity assumption on a.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels"
+ },
+ "proof": [
+  {
+   "text": "The generic mapBifunctorMappingCone₂Iso identifies tensor with the Koszul cone with the cone of the induced tensor endomorphism of I tensor R[0]. HomologicalComplex.rightUnitor identifies I tensor R[0] with I, so both ends of this cone map are K-injective.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use CochainComplex.isKInjective_iff_rightOrthogonal. The right orthogonal to the acyclic homotopy subcategory is triangulated. Apply ext_of_isTriangulatedClosed₃ to mappingCone_triangleh_distinguished, and transport K-injectivity back along the tensor-cone isomorphism. This is a complete Lean proof using Mathlib; zero a and arbitrary unbounded I are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a K-injective complex with a two term finite free complex preserves K-injectivity; compatible quotient resolutions compute a reduction tower",
+   "results": "HomotopyEquiv.isKInjective and CochainComplex.isKInjective_of_iso; generic tensor and scalar-tower declarations; no exact tower model.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic cone and localization APIs; no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two term free Koszul coefficient towers compute derived reductions and preserve K-injective targets under tensor",
+   "results": "Searches for the finite-free complex support and the two comparison steps; Mathlib has homological complex support and generic Hom/tensor constructions, no integral coefficient tower comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; build the cone step from existing APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "principalKoszul|KInjective.*[Tt]ensor|[Tt]ensor.*KInjective; mapBifunctorMappingCone₂Iso; rightOrthogonal",
+   "results": "PrincipalKoszulStrictReplacement, FiniteReductionScalarNormalization, KFlatTensorPreservesQuasiIsoIndependentCoefficients and Mathlib KInjective supply component steps. No arbitrary-representative reduction-tower theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the strict tower; isolate only its remaining derived representative comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionTowerTensorModels",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels",
+   "via": [
+    "lem-sf-integral-hom-tower-tensor-models",
+    "lem-sf-integral-hom-tower-components-transition",
+    "lem-sf-integral-hom-tower-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KInjectivePrincipalTensor",
+  "file": "lean/Sheaf/Paper/KInjectivePrincipalTensor.lean",
+  "declaration": "WeilConjectures.IntegralHom.isKInjective_tensor_principalKoszul",
+  "statement": "theorem isKInjective_tensor_principalKoszul\n    (Y : AlgebraicGeometry.Scheme.{t})\n    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})\n    (a : (SheafOfModules.unit\n      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)).sections)\n    (I : CochainComplex (Modules.{t, u} Y R) ℤ) [I.IsKInjective] (n : ℕ) :\n    (((totalTensor.{t, u} Y R).obj I).obj (principalKoszul R a n)).IsKInjective",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T034803-L-3545264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T034803-L-3545264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
