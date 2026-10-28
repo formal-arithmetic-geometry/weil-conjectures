@@ -14,41 +14,61 @@
  ],
  "proof": [
   {
-   "text": "Projection-normalized coefficient isomorphisms identify every positive quotient, transition and quotient unit. Their completed maps agree by jointly monic finite projections. Exact coefficient restriction therefore transports the actual reduction and ringed pullback derived pairs, with their universal counits.",
+   "text": "Obtain the normalized ordinary finite coefficient isomorphisms e from finiteIntegral_coefficientComparison.",
    "uses": [
-    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+    "lem-a1-finite-integral-coefficient-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The balanced ordinary maps preserve the pulled quotient-unit generators; their inverses insert 1. Their published compatibility identifies them with the published ordinary finite evaluation. The universal derived counits extend the strict tower identifications from good representatives. Compose with C.b and take the total right derived inverse limit. Exact coefficient restriction is an equivalence, so it transports this right-derived pair and all its projections, giving b and the required e_n.",
+   "text": "Construct a global strict-to-actual comparison explicitly: conjugate stratumReductionIso by pullbackDatumOrdinaryTransport and pullbackDatumTowerTransport, apply completedTowerRlim, and compose with actualCompletion_quotient inverse. reductionAugmentationTransport and constantRlimUnit_eq prove its unit normalization. This is the construction of pbcActualCompletedPullback_tower before restriction to complete inputs.",
    "uses": [
-    "lem-a1-balanced-finite-tower-generator-comparison",
-    "lem-a1-finite-pullback-strict-tower-comparison",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-stratum-completion-unit-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "The counit and generator normalizations identify the representative projection maps. Compose with the existing actual-to-strict tower comparison. Every coefficient restriction, reduction, pullback and derived limit comparison commutes with its retained shift; the unit-normalized tower/reflector comparison has the same shift by uniqueness. Derived completeness is shift stable. This gives the last clause.",
+   "text": "Apply strictIntegral_coefficientTowerTransport to e and this global comparison a, obtaining b, its strict projection equation, and the CommShift structure for coefficient restriction of a inverse followed by b.",
    "uses": [
-    "lem-cbc-completed-pullback-triangles",
-    "lem-a1-finite-pullback-strict-tower-comparison"
+    "lem-a1-strict-integral-coefficient-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness in pbcActualCompletedPullback_tower identifies the restriction of a to intrinsically complete inputs with towerIso. Consequently completedToFiniteTower is a component of the global isomorphism c obtained by whiskering a inverse and composing b.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the strict projection equation by coefficient restriction of towerIso inverse. Functor.map_comp and associativity identify the right side with completedProjection followed by finiteComputation. This proves the representative clause without modifying the chosen finite or completed projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport completeness back to the actual coefficient presentation, apply actualComplete_shift, and transport forward. Rewrite completedToFiniteTower as c.app and apply NatTrans.shift_app_comm to c.hom; the equation has the required orientation for all intrinsic-completeness proofs.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-coefficient-presentation-comparison",
-  "lem-a1-balanced-finite-tower-generator-comparison",
-  "lem-a1-finite-pullback-strict-tower-comparison",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-cbc-completed-pullback-triangles"
+  "lem-a1-finite-integral-coefficient-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-a1-strict-integral-coefficient-tower-transport",
+  "lem-sf-immersion-completed-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N(5), strict-model and coefficient-transport details expanded from the parent comparison proof."
+  "place": "Tag 099N(5), with the explicit global unit-normalized strict/actual construction from PbcActualStrictPullback and separate finite-coefficient and strict-tower transport steps; assembled by J8, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -180,13 +200,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-48c08",
-  "group": "X3",
-  "result": "fix",
-  "landing": "20261025T124343-L-1983617",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T072423-L-1945101",
   "kind": "interface",
-  "note": "independent cc review: item lem-a1-integral-pullback-completed-comparison (Nonempty Comparison) assembled from finite_pullback_strict_tower_comparison + proved integralPullback_signedShift + sorried integralPullback_roosFiniteTower / completedIntegral_finiteTowerTransport (read against their new nodes, true); moved interface type hashes compared old olean vs sandbox build; 12 direct importers compiled rc 0 against sandbox"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

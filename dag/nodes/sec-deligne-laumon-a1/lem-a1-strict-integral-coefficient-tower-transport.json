@@ -1,0 +1,149 @@
+{
+ "id": "lem-a1-strict-integral-coefficient-tower-transport",
+ "kind": "statement",
+ "title": "Coefficient transport of the strict pulled reduction limit before the reflector comparison",
+ "statement": "Fix ell,E,g:X→Y with ell invertible on both schemes, with the interfaces of [def-pod-integral-completed-comparison-data]. Fix a normalized finite strict-tower comparison C [lem-a1-finite-pullback-strict-tower-comparison], normalized ordinary finite comparisons e_n:finiteIntegral_n≅finiteCompleted_n, and a natural isomorphism a from the published strict completed pullback to actual completed pullback preserving their units on all inputs. There exists b from the strict completed pullback followed by exact coefficient restriction to H=finiteTowerLimit(C) of [lem-a1-integral-roos-finite-tower-realization]. On every good transported complex P and every level n, b_QP followed by H’s specified computation projection and Q(e_n) equals exact coefficient restriction of the published strict limit projection followed by the published finite evaluation, and then finiteComputation(P,n). The composite of coefficient restriction of a inverse with b commutes with all retained integer shifts. The displayed equation is before precomposition by any reflector-to-strict comparison, and has no intrinsic-completeness hypothesis. No comparison with the integral Roos pullback is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 0941 for strict derived model comparison, sites-modules.tex Tags 03EK/03EL for the finite tensor comparison, and derived.tex Tags 011G/014E for integer shifts. Strict coefficient-tower portion of the parent proof, before composing with its existing towerIso."
+ },
+ "stmt_deps": [
+  "def-pod-integral-completed-comparison-data",
+  "lem-a1-finite-pullback-strict-tower-comparison",
+  "lem-a1-integral-roos-finite-tower-realization",
+  "lem-a1-finite-integral-coefficient-comparison",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The unique coefficient isomorphisms identify positive quotients, transitions and quotient units. Completed structural maps agree after every quotient projection and hence agree into the completed ring limit. Exact restriction therefore identifies the ordinary scalar-extension adjunctions and their strict diagram versions. Their universal derived counits transport the reduction and tower pullback pairs.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the transported strict tower comparison with C.b, then apply total right derived inverse limit. Exact coefficient restriction is an equivalence and transports that derived pair and its canonical projections, giving b.",
+   "uses": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a good representative use C.zigzag to express the finite computation counit as the Koszul augmentation followed by its balanced comparison. The prescribed normalization of e_n identifies that balanced comparison with the published finite evaluation: both send every pulled quotient-unit generator to the same section. The existing uniqueness assertion for the ordinary finite evaluation justifies the identification. Applying the natural derived-limit projection gives exactly the displayed equation.",
+   "uses": [
+    "lem-a1-balanced-finite-tower-generator-comparison",
+    "lem-weil-pbc-ordinary-finite-evaluation-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All coefficient comparisons commute termwise with shifts. The reduction, tower and finite shift descent fields of C identify these with the retained derived shifts. The derived-limit comparison respects shifts by its universal unit. The strict and actual completed pullbacks represent the same completion reflection with the same quotient augmentation. Unit uniqueness identifies any given a with the constructed comparison, so the composite of a inverse and b has the asserted CommShift equation. This uses neither detection of arbitrary derived morphisms by finite evaluations nor exactness of ordinary completed pullback.",
+   "uses": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-a1-finite-pullback-strict-tower-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-a1-balanced-finite-tower-generator-comparison",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 0941 for strict derived model comparison, sites-modules.tex Tags 03EK/03EL for the finite tensor comparison, and derived.tex Tags 011G/014E for integer shifts. Strict coefficient-tower portion of the parent proof, before composing with its existing towerIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|commShift_iso_hom_app",
+   "results": "2 hits: Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedNatIso\"",
+   "results": "3 hits: CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars along a ring sheaf isomorphism transports derived pullback and derived inverse limits preserving projections and shifts",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of sheaf module categories identifies total right derived inverse limits and preserves their canonical projections and integer shifts",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent, SheafOfModules.hasLimit, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr_inverse, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongrPreregular",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedIntegralFiniteTowerTransport",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- restriction of $\\mathcal F$ to the geometric fibre, computed by the integral pullback, is the completed pullback whose exactness and immersion behaviour are known. Extracted finite-coefficient or strict-tower portion of the completed-integral coefficient transport argument, preserving that route.",
+   "via": [
+    "lem-a1-completed-integral-finite-tower-transport",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictIntegralCoefficientTowerTransport",
+  "file": "lean/Sheaf/Paper/StrictIntegralCoefficientTowerTransport.lean",
+  "declaration": "WeilConjectures.IntegralCompletedComparison.strictIntegral_coefficientTowerTransport",
+  "statement": "theorem strictIntegral_coefficientTowerTransport\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))\n    (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)\n    (e : ∀ n : ℕ, finiteIntegral l E g n ≅ finiteCompleted l E g n)\n    (he : ∀ n : ℕ, FiniteNormalization l E g n (e n))\n    (a : pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ≅\n      pbcActualCompletedPull g (pbcIntegralDatum l E))\n    (ha : ∀ K : PbcCompletedDerived Y (pbcIntegralDatum l E),\n      (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K ≫ a.hom.app K =\n        (pbcActualCompletedPullUnit g (pbcIntegralDatum l E)).app K) :\n    ∃ b : pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ⋙ derived l E X ≅\n        finiteTowerLimit l E g C,\n      (∀ (P : CochainComplex\n          (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)\n        (hP : integralOperationsGoodComplex.{u, u} l E Y ((complexes l E Y).obj P))\n        (n : ℕ),\n        b.hom.app (DerivedCategory.Q.obj P) ≫ finiteTowerLimitProjection l E g C P n ≫\n            DerivedCategory.Q.map ((finiteComplexComparison l E g n (e n)).app P) =\n          (derived l E X).map\n            ((completedReductionLimitProjection (pbcIntegralDatum l E) (X := X) n).app\n              ((completedTowerPullback g (pbcIntegralDatum l E)).obj\n                ((completedReductionTower Y (pbcIntegralDatum l E)).obj\n                  (DerivedCategory.Q.obj P))) ≫\n              (completedReductionFiniteEvaluation g (pbcIntegralDatum l E) n).hom.app\n                (DerivedCategory.Q.obj P)) ≫ finiteComputation l E g P n) ∧\n      NatTrans.CommShift (Functor.isoWhiskerRight a.symm (derived l E X) ≪≫ b).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T072423-L-1945101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T072423-L-1945101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

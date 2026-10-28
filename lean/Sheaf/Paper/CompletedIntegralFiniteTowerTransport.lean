@@ -6,6 +6,12 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.Paper.IntegralPullbackRoosFiniteTower
+import Sheaf.Paper.FiniteIntegralCoefficientComparison
+import Sheaf.Paper.StrictIntegralCoefficientTowerTransport
+import all Sheaf.Paper.PbcActualStrictPullback
+import all Sheaf.Paper.PbcCompletedPullbackActual
+import all Sheaf.Paper.CompletedTowerPullback
+import all Sheaf.Paper.SfImmersionCompletedPullbackComparison
 
 /-! # Coefficient transport of the published completed pullback tower
 
@@ -59,6 +65,67 @@ def completedToFiniteTower
     (completed l E g).obj K ≅ (finiteTowerLimit l E g C).obj K :=
   (derived l E X).mapIso ((towerIso l E g).app ⟨K, hK⟩).symm ≪≫ b.app K
 
+private theorem strictActualComparison :
+    ∃ a : pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ≅
+        pbcActualCompletedPull g (pbcIntegralDatum l E),
+      ∀ K : PbcCompletedDerived Y (pbcIntegralDatum l E),
+        (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K ≫ a.hom.app K =
+          (pbcActualCompletedPullUnit g (pbcIntegralDatum l E)).app K := by
+  let d := pbcIntegralDatum l E
+  classical
+  let L := pbcActualDerivedPull g d
+  let R := completedTowerRlim d X
+  let eL := pullbackDatumOrdinaryTransport g d
+  let eT := pullbackDatumTowerTransport g d
+  let τ := stratumReductionIso d g
+  let t : completedReductionTower Y d ⋙ completedTowerPullback g d ≅
+      L ⋙ completedReductionTower X d :=
+    Functor.isoWhiskerLeft (completedReductionTower Y d) eT ≪≫ τ ≪≫
+      Functor.isoWhiskerRight eL.symm (completedReductionTower X d)
+  have ht (K : PbcCompletedDerived Y d) :
+      ((completedPullbackConstantIso g d).hom.app K ≫
+        (completedTowerPullback g d).map ((completedReductionTowerUnit d Y).app K)) ≫
+          t.hom.app K = (completedReductionTowerUnit d X).app (L.obj K) := by
+    exact reductionAugmentationTransport
+      (completedDerivedConstant d Y) (completedDerivedConstant d X)
+      (completedReductionTower Y d) (completedReductionTower X d)
+      (completedOrdinaryPullback g d) (d.pull g)
+      (completedTowerPullback g d) (d.towerPull g) eL eT
+      (completedPullbackConstantIso g d) (d.derivedConstantPullbackIso g)
+      (completedReductionTowerUnit d Y) (completedReductionTowerUnit d X) τ K
+      (datumConstantComparison g d K) (stratumReduction_augmentation d g K)
+  obtain ⟨c, hc⟩ := actualCompletion_quotient d X
+  let b : pbcActualStrictCompletedPull d g ≅ pbcActualCompletedPull g d :=
+    Functor.isoWhiskerRight t R ≪≫ Functor.associator L (completedReductionTower X d) R ≪≫
+      Functor.isoWhiskerLeft L c.symm
+  have hb (K : PbcCompletedDerived Y d) :
+      (pbcActualStrictCompletedPullUnit d g).app K ≫ b.hom.app K =
+        (pbcActualCompletedPullUnit g d).app K := by
+    have hu : completedPullbackComparison g d K ≫ R.map (t.hom.app K) =
+        d.completionUnit X (L.obj K) := by
+      dsimp only [completedPullbackComparison]
+      rw [Category.assoc, ← R.map_comp, ht, constantRlimUnit_eq]
+      rfl
+    simp only [pbcActualStrictCompletedPullUnit, pbcActualCompletedPullUnit, b,
+      NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp,
+      Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.associator_hom_app, Functor.comp_obj, Iso.symm_hom]
+    change completedPullbackComparison g d K ≫
+      (R.map (t.hom.app K) ≫ c.inv.app (L.obj K)) =
+        (pbcActualCompletionUnit d X).app (L.obj K)
+    rw [← Category.assoc, hu, ← hc, Category.assoc,
+      Iso.hom_inv_id_app, Category.comp_id]
+  exact ⟨b, hb⟩
+
+private theorem complete_shift
+    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) (hK : Complete l E K) (r : ℤ) :
+    Complete l E (K⟦r⟧) := by
+  apply (ImmersionCompletedPullback.transport_complete_iff l E Y (K⟦r⟧)).mp
+  apply actualComplete_shift Y (pbcIntegralDatum l E) K
+  exact (ImmersionCompletedPullback.transport_complete_iff l E Y K).mpr hK
+
+set_option linter.unusedVariables false in
 /-- Projection-normalized coefficient transport identifies the published pulled
 quotient tower with the independent integral finite-tower model. The comparison
 is built without reference to the integral Roos pullback or an isomorphism to it.
@@ -109,6 +176,40 @@ theorem completedIntegral_finiteTowerTransport
               ((finiteTowerLimit l E g C).commShiftIso r).hom.app K =
             ((completed l E g).commShiftIso r).hom.app K ≫
               ((completedToFiniteTower l E g C b K hI).hom)⟦r⟧' := by
-  sorry
+  obtain ⟨e, he⟩ := finiteIntegral_coefficientComparison l E g hX hY
+  obtain ⟨a, ha⟩ := strictActualComparison l E g
+  obtain ⟨b, hb, hs⟩ := strictIntegral_coefficientTowerTransport l E g hX hY C e he a ha
+  have hrestriction :
+      Functor.isoWhiskerLeft
+          (ObjectProperty.ι (PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E))) a =
+        towerIso l E g := by
+    apply (pbcActualCompletedPullback_tower (pbcIntegralDatum l E) g).unique
+    · intro K
+      exact ha K.obj
+    · exact (pbcActualCompletedPullback_tower (pbcIntegralDatum l E) g).exists.choose_spec
+  let c : completed l E g ≅ finiteTowerLimit l E g C :=
+    Functor.isoWhiskerRight a.symm (derived l E X) ≪≫ b
+  have hcomponent (K : PbcCompletedDerived Y (pbcIntegralDatum l E))
+      (hI : PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K) :
+      completedToFiniteTower l E g C b K hI = c.app K := by
+    apply Iso.ext
+    change (derived l E X).map ((towerIso l E g).inv.app ⟨K, hI⟩) ≫ b.hom.app K =
+      (derived l E X).map (a.inv.app K) ≫ b.hom.app K
+    rw [← hrestriction]
+    rfl
+  refine ⟨e, b, he, ?_, ?_⟩
+  · intro P hP hK n
+    change ((derived l E X).map ((towerIso l E g).inv.app ⟨_, hK⟩) ≫
+      b.hom.app (DerivedCategory.Q.obj P)) ≫ _ ≫ _ = _
+    simp only [Category.assoc]
+    rw [hb P hP n]
+    simp only [completedProjection, Functor.map_comp, Category.assoc]
+  · have : NatTrans.CommShift c.hom ℤ := hs
+    intro K hK r
+    refine ⟨complete_shift l E K hK r, ?_⟩
+    intro hI hIr
+    rw [hcomponent (K⟦r⟧) hIr, hcomponent K hI]
+    exact (NatTrans.shift_app_comm c.hom r K).symm
+
 
 end WeilConjectures.IntegralCompletedComparison

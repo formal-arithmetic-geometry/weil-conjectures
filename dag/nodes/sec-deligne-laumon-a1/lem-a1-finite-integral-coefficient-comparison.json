@@ -1,0 +1,119 @@
+{
+ "id": "lem-a1-finite-integral-coefficient-comparison",
+ "kind": "statement",
+ "title": "Normalized comparison of the two ordinary finite coefficient pullbacks",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a morphism g:X→Y of schemes on which ell is invertible. Use finiteIntegral_n, finiteCompleted_n and FiniteNormalization of [def-pod-integral-completed-comparison-data]. For every n≥0, there is a natural module isomorphism e_n:finiteIntegral_n≅finiteCompleted_n preserving the specified pulled quotient-unit generators. This is an underived assertion about modules; it has no chosen strict derived tower, derived inverse limit or completeness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK/03EL, sheafified tensor and pullback tensor association; finite-generator portion of proetale.tex Tag 099N(5) and of lem-a1-completed-integral-finite-tower-transport, proof steps 1-2."
+ },
+ "stmt_deps": [
+  "def-pod-integral-completed-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the unique coefficient isomorphisms preserving integral constants to identify the positive quotient rings and their completed projections. The projection squares are commutative by their sectionwise coefficient formulas.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-a1-integral-completed-pullback-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image preserves these isomorphisms. Associate scalar extension with inverse image: both functors become the sheafification of the balanced inverse-image tensor over the same quotient. The map is the same pure tensor under the coefficient identifications, and its inverse uses the inverse coefficient identifications. The projection squares imply balancing; the formulas commute with restrictions and module arrows. Sheafification gives natural inverse isomorphisms at every level.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both tensor maps preserve 1, so their value on the generator integralOperationsPullbackGenerator(1 tensor x) is completedReductionFiniteGenerator(1,1,x). This is exactly FiniteNormalization. The zero module and empty site satisfy the same formulas; the exponent is always n+1, so n=0 uses the first positive quotient.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-a1-integral-completed-pullback-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK/03EL, sheafified tensor and pullback tensor association; finite-generator portion of proetale.tex Tag 099N(5) and of lem-a1-completed-integral-finite-tower-transport, proof steps 1-2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp|pullbackComp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a ring sheaf isomorphism commutes with finite scalar extension and ringed pullback and preserves tensor unit generators",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.Tilde.toOpen, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "2 hits: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the presentation-specific normalized statement. Generic scalar and derived-functor comparisons do not identify the retained generators and projections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedIntegralFiniteTowerTransport",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- restriction of $\\mathcal F$ to the geometric fibre, computed by the integral pullback, is the completed pullback whose exactness and immersion behaviour are known. Extracted finite-coefficient or strict-tower portion of the completed-integral coefficient transport argument, preserving that route.",
+   "via": [
+    "lem-a1-completed-integral-finite-tower-transport",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteIntegralCoefficientComparison",
+  "file": "lean/Sheaf/Paper/FiniteIntegralCoefficientComparison.lean",
+  "declaration": "WeilConjectures.IntegralCompletedComparison.finiteIntegral_coefficientComparison",
+  "statement": "theorem finiteIntegral_coefficientComparison\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :\n    ∃ e : ∀ n : ℕ, finiteIntegral l E g n ≅ finiteCompleted l E g n,\n      ∀ n : ℕ, FiniteNormalization l E g n (e n)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T072423-L-1945101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T072423-L-1945101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
