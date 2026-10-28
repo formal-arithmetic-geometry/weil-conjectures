@@ -25,7 +25,8 @@
   "def-pur-exceptional-coefficient-normalizations",
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-inverse-image",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "def-coef-finite-hom-monoidal-data"
  ],
  "proof": [
   {
@@ -79,14 +80,10 @@
    }
   },
   {
-   "text": "View $A_X\\to B_X$ as a morphism of ringed topoi whose underlying geometric morphism is the identity. Applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives the natural ambient isomorphism $\\mu_{U,V}:F_X(U\\otimes_A^LV)\\cong F_XU\\otimes_B^LF_XV$. More explicitly choose flat-term K-flat models $P,Q$ for arbitrary $U,V$, using [lem-pc-kflat-resolution]. Their total tensor is again flat-term K-flat by [lem-pur-kflat-total-tensor-model], and their scalar extensions are flat-term K-flat by [lem-pur-kflat-change-of-rings]. Consequently every vertex of this comparison is computed by these same models. By [lem-weil-pbc-pullback-tensor-canonical-shift-unit], applied to this ringed-topos morphism, $\\mu$ is the unique natural transformation whose component at such $P,Q$ is the localization of the cochain comparison $c_{P,Q}$ of [lem-pur-cochain-pullback-tensor-coherence], composed with the computation and representative isomorphisms. That chain comparison sends $(x\\otimes y)\\otimes b$ to $(x\\otimes b)\\otimes(y\\otimes1)$, with inverse $(x\\otimes b)\\otimes(y\\otimes b')\\mapsto(x\\otimes y)\\otimes bb'$. These are local sheafified tensor generators, not a claim about tensor sheaves being computed on sections.",
+   "text": "Apply finiteHomScalar_monoidal at the actual quotient ring map. Its generic-ring proof shares the site-category instances, uses the proved canonical scalar CoreMonoidal structure and the all-complex normalization facts, and packages the unchanged FiniteHomDomainMonoidal predicate. The finiteHomEtaleData normalization identifies finiteHomEtaleTensor with the published tensorIso. Insert this heterogeneous comparison between the monoidality and the two normalization conjuncts.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+    "lem-coef-finite-hom-scalar-monoidal",
+    "def-sf-etale-finite-coefficient-hom-arrow"
    ],
    "elementary": false,
    "source": {
@@ -95,14 +92,9 @@
    }
   },
   {
-   "text": "The coefficient-unit comparison is $F_X(A_X[0])\\cong B_X[0]$, represented by $a\\otimes b\\mapsto ab$; its inverse sends $b$ to $1\\otimes b$. By [lem-sf-ringed-derived-closed-symmetric-monoidal], the ambient associators, unitors and symmetry are the signed total-complex constraints. The chain comparison of [lem-pur-cochain-pullback-tensor-coherence] respects exactly these constraints and the scalar-action unit. Thus the associativity, both unit and symmetry diagrams for $\\mu$ commute after representing each object by a flat-term K-flat complex as in Step 5. The localized maps in these diagrams are the canonical derived maps by the representative normalization of $\\mu$ and of the unit comparison $u$ in [lem-weil-pbc-pullback-tensor-canonical-shift-unit] (which also states both unitor equations). Each derived object has such a representative and the diagrams are natural, so their commutativity on these representatives proves their commutativity on all objects. The same conclusion is stated directly by [lem-sfb-ringed-derived-monoidal-comparisons] for the ringed-topos morphism with identity geometric morphism and ring map $A_X\\to B_X$: its $t_h,e_h$ make $Lh^*=F_X$ symmetric strong monoidal for the derived associators, both unitors and the signed symmetry. This is the strong symmetric monoidal structure claimed in the statement. Taking inverses gives the tensorator and unit orientation of [def-sfb-strong-monoidal-functor].",
+   "text": "The generic-ring result gives the actual CoreMonoidal structure, the required inverse-unit and inverse-tensorator identifications, and the actual Koszul witnesses with their braided-functor square. Associativity and both unit constraints are fields of CoreMonoidal. FiniteHomDomainMonoidal is relocated verbatim to a public data module so this generic result compiles independently.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-sfb-strong-monoidal-functor",
-    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-coef-finite-hom-scalar-monoidal"
    ],
    "elementary": false,
    "source": {
@@ -174,22 +166,17 @@
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "lem-kun-kflat-criteria",
   "def-pur-etale-scalar-pullback-iso",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "def-sfb-strong-monoidal-functor",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-finite-hom-scalar-monoidal",
+  "def-sf-etale-finite-coefficient-hom-arrow",
   "lem-pur-system-scalar-model",
   "lem-pur-system-scalar-coherence",
-  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-kun-dimension-finite-type",
   "cor-weil-finite-constructible-hom"
  ],
- "proof_origin": "G7 proofs retained for flat-model, endpoints and quotient identity. P2 completes pullback using source-library etale stability and the existing scalar/pullback normalization. The monoidal and scalar-coherence statements retain their original plans. E4 proves finiteHomDomain_transpose directly from the normalized closed records and the evaluation-defined comparison, using proved private categorical helpers. The monoidal and scalar-coherence holes remain unchanged; all earlier proofs are retained. The four transpose clauses are packaged without mathematical change in FiniteHomDomainTransposeLaws to keep the coefficient-category parameters shared during kernel checking.",
+ "proof_origin": "G7 proofs of flat-model, endpoints and quotient identity are retained. P2 completes pullback using source-library etale stability and the scalar/pullback normalization. E4 proves finiteHomDomain_transpose directly from the normalized closed records and evaluation-defined comparison with private categorical helpers; its shared FiniteHomDomainTransposeLaws packaging is retained. C7 proves finiteHomDomain_monoidal using the proved generic lem-coef-etale-scalar-monoidal and the existing all-complex normalization choose_spec properties. The scalar-composition and identity coherence statement alone retains its original proof plan and sorry. All public signatures and previously completed proofs are preserved. The unchanged FiniteHomDomainMonoidal definition is relocated to def-coef-finite-hom-monoidal-data and publicly re-exported; its generic-ring realization is lem-coef-finite-hom-scalar-monoidal. This splits kernel checking across modules without changing any mathematical statement.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -369,16 +356,11 @@
   "prop-constructible-pullback",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "lem-kun-kflat-criteria",
-  "lem-pur-etale-scalar-pullback-existence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-total-tensor-model",
   "lem-pur-kflat-change-of-rings",
   "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-system-scalar-model",
   "lem-pur-system-scalar-coherence",
   "lem-kun-dimension-finite-type",
-  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
   "lem-sfb-ringed-derived-monoidal-comparisons"
  ],
  "reviewed": {
@@ -395,7 +377,6 @@
   "declarations": [
    "WeilConjectures.finiteHomDomainCoeff",
    "WeilConjectures.finiteHomDomainCoeffFinite",
-   "WeilConjectures.FiniteHomDomainMonoidal",
    "WeilConjectures.FiniteHomDomainScalarComposition",
    "WeilConjectures.FiniteHomDomainScalarIdentity",
    "WeilConjectures.finiteHomDomain_flatModel",
@@ -425,13 +406,13 @@
   "note": "Re-delivery after the 5f5aafb105ff RETURN. The H2 finding is repaired as requested: FiniteHomDomainNormalization, its DerivedTensorRightExact import and the theorem stmt_dep lem-derived-right-exact-tensor-comparison are gone. finiteHomDomain_monoidal now states ExceptionalCoefficients.TensorNormalization on tensorIso, an all-complex representative equation with the real sheafified balancing ordinaryOplax and the orientation F(U⊗V)→FU⊗FV. The added stmt_deps are all definition nodes owning used declarations: def-pur-exceptional-coefficient-normalizations (tensorIso, unitIso, TensorNormalization, UnitNormalization), def-weil-pbc-etale-constructible-sheaf, def-weil-pbc-inverse-image and def-kun-derived-tensor. No stmt_dep was dropped and no theorem node remains. The pullback representative clause no longer carries T/ctf hypotheses. The node statement, proof and proof_deps are unchanged from the base. All clauses were re-checked: flat model, pullback, monoidal, scalar composition and identity, unique transpose = etaleFiniteHomCanonical with naturality, ctf endpoints. Edge cases (empty X, a=b, exponent 1, identity quotient, nonflat tower) and universes are fine. lean.statement is verbatim and all 13 declarations exist. No hollow definitions, sorry only, docstrings complete. Advisory: the TensorNormalization and UnitNormalization conjuncts are choose_specs of the owning definition node. Nothing compiled, since no file was changed."
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-e9053",
-  "group": "E4",
-  "result": "pass",
-  "landing": "20261026T023105-L-519178",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
   "kind": "interface",
-  "note": "independent cc review: finiteHomDomain_transpose: FiniteHomDomainTransposeLaws unfolded against the old 4-clause conjunction (H=finiteHomEtaleInternalHom, etaleFiniteHomCanonical = abbrev of coefficientBaseChangeHom), same proposition; node proof steps 8-9 against the private closed-calculus helpers; axioms clean; direct importer FiniteCoefficientVerdier compiles against the delivered module"
+  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
  }
 }

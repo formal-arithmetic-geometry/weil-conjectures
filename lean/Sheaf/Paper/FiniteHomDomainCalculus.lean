@@ -22,6 +22,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Sheaf.Paper.NormalizedOriginScalarComparisons
 public import Sheaf.Paper.PurEtaleScalarMateProjection
+public import Sheaf.Paper.FiniteHomMonoidalData
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleScalarFlatModel
 import Mathlib.AlgebraicGeometry.Noetherian
@@ -29,6 +30,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import Sheaf.Paper.FiniteConstructibleHom
+import Sheaf.Paper.FiniteHomScalarMonoidal
 
 /-! # Finite coefficient domains and evaluation transposition
 
@@ -264,26 +266,6 @@ instance finiteHomDomainCoeffFinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field
   @Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E (n + 1)
     (Nat.succ_le_succ (Nat.zero_le n))) Equiv.ulift.symm
 
-/-- Strong monoidality for fixed tensor, unit and signed symmetry components.
-Heterogeneous equalities identify the components without changing their data.
-Source: blueprint ambient monoidality clause; Stacks 07A4 and 0FPT
-(blueprint: lem-coef-finite-hom-domain-calculus). -/
-def FiniteHomDomainMonoidal {C : Type a₁} {C' : Type a₂}
-    [Category.{b₁} C] [Category.{b₂} C'] [MonoidalCategory C] [MonoidalCategory C']
-    (F : C ⥤ C') {V : C → C → Type b₂} (δ : ∀ U V', V U V')
-    {W : Type b₂} (e : W)
-    {B : C → C → Type b₁} (σ : ∀ U V, B U V)
-    {B' : C' → C' → Type b₂} (σ' : ∀ U V, B' U V) : Prop :=
-  ∃ S : F.CoreMonoidal,
-    HEq S.εIso.symm e ∧
-    (∀ U V, HEq (S.μIso U V).symm (δ U V)) ∧
-    (∃ β : ∀ U V : C, U ⊗ V ≅ V ⊗ U,
-      ∃ β' : ∀ U V : C', U ⊗ V ≅ V ⊗ U,
-      (∀ U V, HEq (β U V) (σ U V)) ∧
-      (∀ U V, HEq (β' U V) (σ' U V)) ∧
-      ∀ U V, (β' (F.obj U) (F.obj V)).hom ≫ (S.μIso V U).hom =
-        (S.μIso U V).hom ≫ F.map (β U V).hom)
-
 /-- The tensor and unit squares for a specified scalar composition comparison.
 Source: blueprint successive-coefficient clause; Stacks 0D6D and 07A4
 (blueprint: lem-coef-finite-hom-domain-calculus). -/
@@ -325,6 +307,10 @@ def FiniteHomDomainScalarIdentity {C : Type a₁} [Category.{b₁} C]
   (∀ U V : C, (δ U V).hom ≫
     T.map (Prod.mkHom (z.hom.app U) (z.hom.app V)) = z.hom.app (T.obj (U, V))) ∧
   e.hom = z.hom.app I
+
+private theorem domainInsertComparison {P Q R S : Prop} (h : P ∧ R ∧ S) (q : Q) :
+    P ∧ Q ∧ R ∧ S :=
+  ⟨h.1, q, h.2⟩
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -590,16 +576,13 @@ strong symmetric monoidal, for the actual signed tensor and Koszul braiding.
 Source: blueprint opening proof paragraph; Stacks 07A4 and 0FPT
 (blueprint: lem-coef-finite-hom-domain-calculus).
 
-Proof: apply lem-weil-pbc-ringed-topoi-derived-tensor-pullback to the identity topos
-with the actual quotient ring map. The representative normalization and both unit
-constraints are lem-weil-pbc-pullback-tensor-canonical-shift-unit. On flat-term
-K-flat models from lem-pc-kflat-resolution, the comparison is the ordinary balancing
-map (x tensor y) tensor b to (x tensor b) tensor (y tensor 1). Its inverse multiplies
-the two scalars. lem-pur-cochain-pullback-tensor-coherence proves associativity,
-unitality and compatibility with the signed symmetry before localization;
-lem-sfb-ringed-derived-monoidal-comparisons descends precisely these equations.
-The normalized closed and tensor witnesses in def-sf-etale-finite-coefficient-hom-arrow
-identify these comparisons with the published finiteHomEtaleTensor. -/
+Proof: use scalarExtension_coreMonoidal for the actual quotient ring map. That
+proved generic theorem transports the native derived monoidal structure along
+uniqueness of left adjoints. Right-exact tensor normalization identifies its
+tensorator with the published tensorIso, the left unit law identifies its unit,
+and braidedness descends from the ordinary scalar adjunction. The normalization
+of finiteHomEtaleData identifies its tensor comparison with finiteHomEtaleTensor;
+the all-complex tensor and unit normalization clauses are their choose_spec laws. -/
 theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
     FiniteHomDomainMonoidal (finiteHomEtaleReduction l E X h)
       (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso
@@ -615,7 +598,10 @@ theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
       (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X) ∧
     Etale.ExceptionalCoefficients.TensorNormalization (finiteHomQuotient l E h) X
       (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X) := by
-  sorry
+  exact domainInsertComparison
+    (finiteHomScalar_monoidal (finiteHomDomainCoeff l E n) (finiteHomDomainCoeff l E m)
+      (finiteHomQuotient l E h) X)
+    ((finiteHomEtaleData_existsUnique l E X).choose_spec.1.tensor n m h)
 
 include D hl hXover hXsep hXft hXqc in
 /-- Tensor and unit comparisons agree with actual successive scalar extension and

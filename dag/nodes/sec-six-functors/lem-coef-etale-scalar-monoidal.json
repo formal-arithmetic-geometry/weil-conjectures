@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-etale-scalar-monoidal",
+ "kind": "lemma",
+ "title": "Normalized etale scalar extension is symmetric strong monoidal",
+ "statement": "Let A and B be commutative rings in Type (u+1), let phi:A→B be a unital ring homomorphism, and let T be a scheme in universe u. Use the ordinary unbounded derived categories of small-etale module sheaves [def-weil-pbc-derived-categories], the fixed scalar left adjoint S, its published tensor comparison delta and coefficient-unit comparison e [def-pur-exceptional-coefficient-normalizations], and the signed Koszul braiding beta [def-sf-etale-finite-coefficient-hom-arrow]. There exists a strong monoidal structure c on S such that c.epsilonIso inverse is e, every c.muIso(K,L) inverse is delta(K,L), and beta(SK,SL) followed by c.muIso(L,K) equals c.muIso(K,L) followed by S(beta(K,L)). No flatness, finiteness or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPT; identity geometric morphism with changed constant coefficients; extracted monoidality step of lem-coef-finite-hom-domain-calculus."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary etale sheaf scalar extension is additive, left adjoint, preserves flat objects and quasi-isomorphisms of K-flat complexes, and is strong monoidal. The adopted source-library construction leftDerivedFunctorMonoidal therefore equips its native total left derived functor with a strong monoidal structure. The proved scalarExtension_derivedComparison supplies an isomorphism from the fixed scalar adjoint to this native functor and identifies the transported cochain counit with the actual scalar representative. Transport the native monoidal structure along that isomorphism using coreMonoidalTransport.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison",
+    "lem-coef-etale-scalar-derived-comparison",
+    "def-sf-etale-sheaf-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The left-derived cochain counit identity identifies the transported counit with scalarExtensionRepresentative. The unique normalized right-exact tensor comparison consequently identifies every transported inverse tensorator with the published tensorIso component. This uses flat-term K-flat models only to identify natural transformations, and never assumes the coefficient map is flat.",
+   "uses": [
+    "lem-derived-right-exact-tensor-comparison",
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the published left unit law to the now identified tensorator. Comparing it with the transported oplax left unit law and canceling the tensorator and left unitor shows that the two unit maps become equal after tensoring with the image of the source unit. This tensoring functor is faithful: the transported unit isomorphism identifies its right tensor factor with the target unit. Thus the transported inverse unit is the published unitIso.",
+   "uses": [
+    "lem-pur-scalar-left-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars is braided lax monoidal for the ordinary sheaf tensor. The adjunction-mate equation gives braidedness of ordinary extension. The adopted-source theorem leftDerivedFunctorBraided gives compatibility with the signed derived braiding. Braidedness transports along the canonical adjoint isomorphism. The derived braiding is precisely the published finiteHomKoszulIso, as seen from its explicit localization formula.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-coef-etale-scalar-derived-comparison",
+  "def-sf-etale-sheaf-scalar-extension",
+  "lem-derived-right-exact-tensor-comparison",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-scalar-left-unit",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C7",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0FPT; native left derived monoidal structure transported along uniqueness of left adjoints; normalization and cancellation in the written Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is symmetric strong monoidal with tensor and unit comparison",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, ModuleCat.extendScalarsComp_hom_app_one_tmul, HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'. Search digest f07d0601f6a3d112.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal. Search digest b010853fd0602684.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorMonoidal|CoreMonoidal",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean. Search digest 374cb60484feeac2.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-domain-calculus",
+   "place": "Ambient scalar-extension strong symmetric monoidality, proof steps 5-6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarMonoidal",
+  "file": "lean/Sheaf/Paper/EtaleScalarMonoidal.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.scalarExtension_coreMonoidal",
+  "statement": "theorem scalarExtension_coreMonoidal (A B : Type (u + 1)) [CommRing A] [CommRing B]\n    (φ : A →+* B) (T : Scheme.{u}) :\n    ∃ c : (scalarExtension φ T).CoreMonoidal,\n      c.εIso.symm = unitIso φ T ∧\n      (∀ K L, (c.μIso K L).symm = (tensorIso φ T).app (K, L)) ∧\n      (∀ K L,\n        (WeilConjectures.finiteHomKoszulIso\n          (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))\n          ((scalarExtension φ T).obj K) ((scalarExtension φ T).obj L)).hom ≫\n            (c.μIso L K).hom =\n        (c.μIso K L).hom ≫ (scalarExtension φ T).map\n          (WeilConjectures.finiteHomKoszulIso\n            (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) K L).hom)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
+ }
+}

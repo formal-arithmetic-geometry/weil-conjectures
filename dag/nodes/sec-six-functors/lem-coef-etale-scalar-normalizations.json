@@ -1,0 +1,103 @@
+{
+ "id": "lem-coef-etale-scalar-normalizations",
+ "kind": "lemma",
+ "title": "All-complex normalizations of the published etale scalar comparisons",
+ "statement": "Let A and B be commutative rings in Type (u+1), phi:A→B a unital ring homomorphism, and T a scheme in universe u. The published coefficient-unit comparison unitIso(phi,T) satisfies UnitNormalization(phi,T), and the published tensor comparison tensorIso(phi,T) satisfies TensorNormalization(phi,T), namely the all-complex representative equations of [def-pur-exceptional-coefficient-normalizations]. These equations hold for arbitrary complexes and require no coefficient flatness or boundedness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; all-complex normalization equations of the published scalar comparisons, extracted from proof step 5 of lem-coef-finite-hom-domain-calculus."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "proof": [
+  {
+   "text": "The published unitIso is the chosen witness of unitIso_existsUnique. Its choose_spec gives UnitNormalization immediately. The published site tensorIso is heterogeneously equal to the chosen witness of tensorIso_existsUnique, by the choose_spec of siteTensorIso_existsUnique. Both isomorphisms have the same type, so eq_of_heq converts this to equality. Transport the TensorNormalization choose_spec along that equality.",
+   "uses": [
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C7",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; the normalization choose_spec clauses defining the published scalar unit and tensor comparisons. Isolated only to keep the assigned finite coefficient specialization within the compilation limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "choose_spec|eq_of_heq",
+   "results": "25 hits: Mathlib/Logic/Basic.lean, Mathlib/Logic/Basic.lean, Mathlib/Logic/Basic.lean, Mathlib/Logic/Basic.lean, Mathlib/Logic/Basic.lean, Mathlib/Logic/ExistsUnique.lean, Mathlib/Logic/Small/Defs.lean, Mathlib/Logic/Equiv/Basic.lean. Search digest a1407004d0bc4ecc.",
+   "date": "2026-10-28",
+   "verdict": "Use Exists.choose_spec, equality transport and eq_of_heq. The theorem specializes these elementary facts to the actual published comparison definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Exists.choose_spec",
+   "results": "3 hits: Exists.choose_spec, LinearMap.coe_det, AlgebraicGeometry.Scheme.affineBasisCover_map_range. Search digest c4a5449f8db35e79.",
+   "date": "2026-10-28",
+   "verdict": "Use Exists.choose_spec, equality transport and eq_of_heq. The theorem specializes these elementary facts to the actual published comparison definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chosen witness of unique existence satisfies the defining predicate",
+   "results": "8 hits: ExistsUnique.choose_eq_iff, ExistsUnique.exists, Fintype.choose_spec, Unique.exists_iff, existsUnique_prop_of_true, ExistsUnique.elim, ExistsUnique.exists₂, ExistsUnique.intro. Search digest 29ea067f41f29832.",
+   "date": "2026-10-28",
+   "verdict": "Use Exists.choose_spec, equality transport and eq_of_heq. The theorem specializes these elementary facts to the actual published comparison definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-domain-calculus",
+   "place": "All-complex tensor and unit normalization conjuncts of finiteHomDomain_monoidal, proof step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarNormalizations",
+  "file": "lean/Sheaf/Paper/EtaleScalarNormalizations.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.scalarExtension_normalizations",
+  "statement": "theorem scalarExtension_normalizations\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :\n    UnitNormalization φ T (unitIso φ T) ∧ TensorNormalization φ T (tensorIso φ T)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
+ }
+}

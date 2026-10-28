@@ -1,0 +1,116 @@
+{
+ "id": "lem-coef-etale-scalar-derived-comparison",
+ "kind": "lemma",
+ "title": "The fixed scalar adjoint and native derived scalar counit",
+ "statement": "Let A,B be commutative rings in Type (u+1), phi:A→B a unital homomorphism and T a scheme in universe u. Let E be ordinary small-etale sheaf scalar extension. Assume E preserves quasi-isomorphisms between K-flat complexes. For the fixed scalar adjoint S and its actual cochain representative r [def-pur-exceptional-coefficient-normalizations], there exists a natural isomorphism e:S≅LE to the native total left derived functor such that for every cochain complex P, r(P) is e at Q(P) followed by the native left-derived cochain counit. No flatness of B over A or boundedness of P is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, native derived adjunction and cochain counit; extracted from the scalar monoidality argument."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-weil-pbc-derived-categories",
+  "def-pc-kflat-complex",
+  "lem-derived-right-exact-tensor-comparison",
+  "def-sf-etale-sheaf-scalar-extension",
+  "def-sp-coefficient-scalar-representatives"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary scalar extension E is left adjoint to exact restriction U. Derive this adjunction and identify the right derived restriction with its exact mapDerivedCategory. The fixed scalar adjunction and this native derived adjunction have the same right functor, so leftAdjointUniq gives e. Apply the adopted-source Adjunction.leftDerivedCochainCounit identity. Unfold scalarExtensionRepresentative and use mapComplex_unit_formula to identify its cochain unit expression with the adjunction unit on cochain complexes. The resulting equation is exactly r(P)=e(QP);cochainCounit(P).",
+   "uses": [
+    "def-pur-exceptional-coefficient-normalizations",
+    "lem-derived-right-exact-tensor-comparison",
+    "def-sf-etale-sheaf-scalar-extension",
+    "lem-derived-adjoint-cochain-counit",
+    "def-sp-coefficient-scalar-representatives"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-derived-right-exact-tensor-comparison",
+  "def-sf-etale-sheaf-scalar-extension",
+  "lem-derived-adjoint-cochain-counit",
+  "def-sp-coefficient-scalar-representatives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C7",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; application of the proved native derived adjunction and leftDerivedCochainCounit formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|leftDerivedCochainCounit",
+   "results": "16 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean. Search digest 8171b73d6d66e609.",
+   "date": "2026-10-28",
+   "verdict": "Use leftAdjointUniq for the comparison; the adopted native derived cochain counit identity supplies the representative equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit. Search digest ef3654c89ecf172c.",
+   "date": "2026-10-28",
+   "verdict": "Use leftAdjointUniq for the comparison; the adopted native derived cochain counit identity supplies the representative equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two left adjoints to the same right adjoint are canonically naturally isomorphic",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app. Search digest bae97f82ba87fd70.",
+   "date": "2026-10-28",
+   "verdict": "Use leftAdjointUniq for the comparison; the adopted native derived cochain counit identity supplies the representative equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-domain-calculus",
+   "place": "Native-to-fixed scalar adjunction comparison and representative equation used in ambient monoidality, proof steps 5-6.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarDerivedComparison",
+  "file": "lean/Sheaf/Paper/EtaleScalarDerivedComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.scalarExtension_derivedComparison",
+  "statement": "theorem scalarExtension_derivedComparison\n    (A B : Type (u + 1)) [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})\n    [(ProEtale.etaleSheafExtendScalars φ T).PreservesKFlatQuasiIso] :\n    ∃ e : scalarExtension φ T ≅ (ProEtale.etaleSheafExtendScalars φ T).leftDerivedFunctor,\n      ∀ P, scalarExtensionRepresentative φ T P =\n        e.hom.app (_root_.DerivedCategory.Q.obj P) ≫\n          (ProEtale.etaleSheafExtendScalars φ T).rightExact_cochainCounit P",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
+ }
+}

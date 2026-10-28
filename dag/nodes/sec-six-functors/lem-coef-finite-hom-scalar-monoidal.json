@@ -1,0 +1,109 @@
+{
+ "id": "lem-coef-finite-hom-scalar-monoidal",
+ "kind": "lemma",
+ "title": "Generic scalar monoidality in the finite-Hom interface",
+ "statement": "For commutative rings A,B in Type (u+1), a unital homomorphism phi:A→B and a scheme T in universe u, the fixed scalar-extension functor with its actual published tensor and unit comparisons and Koszul isomorphisms [def-pur-exceptional-coefficient-normalizations, def-sf-etale-finite-coefficient-hom-arrow] satisfies FiniteHomDomainMonoidal [def-coef-finite-hom-monoidal-data]. The same unit and tensor comparisons satisfy their all-complex UnitNormalization and TensorNormalization equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPT; identity geometric morphism with changed constant coefficients; extracted monoidality step of lem-coef-finite-hom-domain-calculus."
+ },
+ "stmt_deps": [
+  "def-coef-finite-hom-monoidal-data",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved generic scalar CoreMonoidal structure and its identified unit, tensorators and braiding square. Convert its unit and tensor equalities into heterogeneous equalities; take the actual Koszul isomorphisms for the existential braiding witnesses. Their heterogeneous identifications are reflexive. Pair the result with the proved scalar comparison normalization theorem. All categorical sharing is performed at generic rings before finite coefficient specialization.",
+   "uses": [
+    "lem-coef-etale-scalar-monoidal",
+    "lem-coef-etale-scalar-normalizations",
+    "def-coef-finite-hom-monoidal-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-scalar-monoidal",
+  "lem-coef-etale-scalar-normalizations",
+  "def-coef-finite-hom-monoidal-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C7",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPT; literal predicate relocation and generic instantiation/packaging of proved normalized scalar monoidality. This separation is required by per-file kernel checking time."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is symmetric strong monoidal with tensor and unit comparison",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, ModuleCat.extendScalarsComp_hom_app_one_tmul, HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'. Search digest f07d0601f6a3d112.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal. Search digest b010853fd0602684.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorMonoidal|CoreMonoidal",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean. Search digest 374cb60484feeac2.",
+   "date": "2026-10-28",
+   "verdict": "Use generic monoidal transport and the adopted native derived monoidal structure; no direct normalized etale scalar-extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-hom-domain-calculus",
+   "place": "Ambient monoidality clause of lem-coef-finite-hom-domain-calculus; unchanged predicate and generic-ring realization before finite coefficient specialization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomScalarMonoidal",
+  "file": "lean/Sheaf/Paper/FiniteHomScalarMonoidal.lean",
+  "declaration": "WeilConjectures.finiteHomScalar_monoidal",
+  "statement": "theorem finiteHomScalar_monoidal\n    (A B : Type (u + 1)) [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :\n    FiniteHomDomainMonoidal (Etale.scalarExtension φ T)\n      (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso φ T).app (U, V))\n      (Etale.ExceptionalCoefficients.unitIso φ T)\n      (finiteHomKoszulIso (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)))\n      (finiteHomKoszulIso (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))) ∧\n    Etale.ExceptionalCoefficients.UnitNormalization φ T\n      (Etale.ExceptionalCoefficients.unitIso φ T) ∧\n    Etale.ExceptionalCoefficients.TensorNormalization φ T\n      (Etale.ExceptionalCoefficients.tensorIso φ T)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-bfa22",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261028T020240-L-2485019",
+  "kind": "interface",
+  "note": "independent cc review: finiteHomDomain_monoidal proof and 5 new fully proved modules vs node lem-coef-finite-hom-domain-calculus and the new nodes; verbatim FiniteHomDomainMonoidal relocation vs change record; 3 direct importers compiled OK in a sandbox with the delivered files; axioms clean"
+ }
+}
