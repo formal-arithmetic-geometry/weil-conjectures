@@ -1,0 +1,112 @@
+{
+ "id": "def-sf-canonical-coefficient-weil-cohomology",
+ "kind": "definition",
+ "title": "Signed standard cohomology of coefficient Frobenius pairs",
+ "statement": "Fix a purity setting P [def-pur-conventions] and a separated finite-type arithmetic scheme X_0 over its finite field [def-weil-finite-field-fiber]. On the common-stage Frobenius-pair category [def-weil-weil-sheaf-complex], choose the finite-stage signed Roos shifts and their common-stage comparison with each finite-stage inclusion from [lem-pod-fixed-pair-truncation-cohomology]. Choose the truncLE and truncGE comparisons uniquely normalized by their counit and unit equations. Define canonicalCoefficientWeilCohomology in degree n as IsoAlgebra.mapOfNatIso of truncLE n, then truncGE n, then the normalized n-shift, with values lifted to the full standard Weil heart [def-weil-constructible-heart]. These values lie in the heart by the same truncation package. The underlying functor is precisely truncLE n followed by truncGE n followed by shift n; no identification with a native derived fixed-pair category is asserted.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "lem-pod-fixed-pair-truncation-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Step 1 of the assigned comparison: explicit standard cohomology on coefficient fixed pairs with the signed finite-stage normalization retained."
+ },
+ "proof": [
+  {
+   "text": "Use fixedPairCommonTruncationCohomology to retain both its finite-stage Roos normalization and the actual finite-stage inclusion shift equation. Its truncation comparisons are normalized by the counit and unit equations. Compose their IsoAlgebra.mapOfNatIso functors and the normalized shift; the heart-membership clause lifts this explicit functor to the full coefficient Weil heart. The finite-stage normalization determines the shift comparisons on all common-stage representatives and arrows; truncation uniqueness determines the other comparisons.",
+   "uses": [
+    "lem-pod-fixed-pair-truncation-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-fixed-pair-truncation-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Step 1 of the assigned comparison: explicit standard cohomology on coefficient fixed pairs with the signed finite-stage normalization retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isZero_truncLE_obj_of_isGE|isZero_truncGE_obj_of_isLE",
+   "results": "3 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"IsGE\"",
+   "results": "5 hits: CategoryTheory.Triangulated.TStructure.instIsGEObjTruncLE, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncLE_1, CategoryTheory.Triangulated.TStructure.isZero_truncLE_obj_of_isGE, CategoryTheory.Triangulated.TStructure.isGE_iff_isZero_truncLE_obj, CategoryTheory.Triangulated.TStructure.isIso₁_truncLE_map_of_isGE. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a shifted object in the heart of a t structure vanishes except in the shifted degree",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.IsGE, DerivedCategory.TStructure.t. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CoefficientShiftedTateComparison",
+  "date": "2026-10-28",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 1 of the assigned comparison: explicit standard cohomology on coefficient fixed pairs with the signed finite-stage normalization retained. No imported blueprint ancestor of the assigned node; whole-blueprint searches for realization, Tate and coefficient heart comparison found no exact declaration.",
+   "via": [
+    "lem-sf-coefficient-shifted-tate-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CanonicalCoefficientWeilCohomology",
+  "file": "lean/Sheaf/WeilSheaf/CanonicalCoefficientWeilCohomology.lean",
+  "declaration": "WeilConjectures.NativeCoefficientCohomology.canonicalCoefficientWeilCohomology",
+  "declarations": [
+   "WeilConjectures.NativeCoefficientCohomology.canonicalCoefficientWeilCohomology"
+  ],
+  "statement": "def canonicalCoefficientWeilCohomology (n : ℤ) :\n    Pairs P X₀ ⥤ sfCommonStageWeilSheaf P.field P.coefficients.l\n      P.coefficients.different X₀ P.coefficients.Qbar",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

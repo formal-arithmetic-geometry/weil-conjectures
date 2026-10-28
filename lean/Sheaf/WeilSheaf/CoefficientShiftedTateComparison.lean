@@ -6,6 +6,9 @@ module
 
 public import Sheaf.WeilSheaf.CoefficientCohomologyComparison
 public import WeilConjectures.WeilSheaf.HomologyShift
+import Sheaf.WeilSheaf.NativeCoefficientHeartComparison
+import Sheaf.WeilSheaf.CoefficientTwistedConstantSurvivingCohomology
+import Sheaf.WeilSheaf.CoefficientTwistedConstantVanishing
 
 /-! # All-degree realization of the coefficient Tate constants
 
@@ -39,6 +42,7 @@ local instance shiftedTateStructureOver : X₀.hom.IsOver (Spec (.of P.field.k�
   change X₀.hom ≫ 𝟙 _ = X₀.hom
   rw [Category.comp_id]
 
+set_option linter.unusedVariables false in
 /-- The normalized coefficient comparison computes all degrees of every shifted Tate
 constant, without a smoothness hypothesis.
 
@@ -91,6 +95,28 @@ theorem coefficient_shifted_tate_comparison :
             ((WeilSheaf.tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d).tensorObj
               (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l X₀.left)
               (WeilSheaf.isLisse_tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d)))⟦
-                2 * (d : ℤ)⟧))) := by sorry
+                2 * (d : ℤ)⟧))) := by
+  obtain ⟨E, hE, hExceptional, hLine⟩ :=
+    native_coefficient_heart_comparison P X₀ c₀ S
+  let := hE
+  have : E.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full E
+  refine ⟨fun n ↦ canonicalCoefficientWeilCohomology P X₀ n ⋙ E, ?_, ?_⟩
+  · intro J adj n
+    exact hExceptional J adj n
+  · intro d n
+    let T := (WeilSheaf.tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d).tensorObj
+      (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l X₀.left)
+      (WeilSheaf.isLisse_tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d)
+    by_cases hn : n = -2 * (d : ℤ)
+    · subst n
+      obtain ⟨e⟩ := coefficient_twisted_constant_surviving_cohomology P X₀ d
+      obtain ⟨t⟩ := hLine d
+      exact ⟨E.mapIso e ≪≫ t ≪≫
+        (WeilComplex.homologySheafShiftToComplexIso T (2 * (d : ℤ))
+          (-2 * (d : ℤ)) (by omega)).symm⟩
+    · have hLeft := E.map_isZero (coefficient_twisted_constant_vanishing P X₀ d n hn)
+      have hRight := WeilComplex.isZero_homologySheaf_shift_toComplex T
+        (a := 2 * (d : ℤ)) (n := n) (by omega)
+      exact ⟨hLeft.isoZero ≪≫ hRight.isoZero.symm⟩
 
 end WeilConjectures.NativeCoefficientCohomology

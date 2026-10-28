@@ -20909,3 +20909,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/V1/Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransportFinite (stage 3; reviewer PASS; first push; landing 20261028T034954-L-3575616 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/V1/Sheaf.SixFunctors.RationalVerdierScalarInterchange (stage 3; reviewer PASS; first push; landing 20261028T034955-L-3575799 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:49 L: merged deliver/V2/Sheaf.Paper.PodIntegralHomComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261028T034957-L-3576062 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:49 L: merged deliver/V5/Sheaf.WeilSheaf.CoefficientShiftedTateComparison (stage 3; reviewer PASS; first push; landing 20261028T034958-L-3576334 (interface); batch 20261028T034643; modules 5; new nodes 4)

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-coefficient-twisted-constant-surviving-cohomology",
+ "kind": "statement",
+ "title": "Surviving cohomology of the coefficient shifted Tate constant",
+ "statement": "Fix a purity finite field and coefficient setting P [def-pur-conventions, def-weil-finite-field-fiber] and a separated finite-type arithmetic scheme X_0 over Spec(P.field.k_0). Use the actual common-stage coefficient Weil heart [def-weil-weil-sheaf-complex, def-weil-constructible-heart] and its signed standard cohomology functors [def-sf-canonical-coefficient-weil-cohomology]. For every natural d, coefficient H^(-2d) of twistedConstant(P,X_0,d) [lem-sf-native-coefficient-cohomology-comparison] is isomorphic in the coefficient Weil heart to the unshifted commonWeilSheaf of twist d [def-weil-frobenius-coefficient-twists]. This intertwines canonicalSourceTheta with the actual root-line Frobenius. There is no native category or exceptional endpoint.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "prop-constructible-truncations",
+  "lem-sf-native-coefficient-cohomology-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-sf-canonical-coefficient-weil-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Step 3 of the assigned node: the surviving coefficient degree and its Frobenius action, before native realization."
+ },
+ "proof": [
+  {
+   "text": "Compose sourceUnit with identification of the regular scalar unit and the reconstructed tensor unit, then the tensor right unitor. This identifies the carrier with the root line shifted by 2d.",
+   "uses": [
+    "lem-pur-constant-purity-frobenius-square",
+    "lem-pur-regular-coefficient-coherent-reduction",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The root line lies in the standard heart. The truncation counit and unit at degree -2d are isomorphisms on its 2d shift; applying the prescribed -2d shift recovers the unshifted line.",
+   "uses": [
+    "def-weil-frobenius-coefficient-twists",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand canonicalSourceTheta. Pullback-unit compatibility and right-unitor naturality remove its unit factor. The normalized truncation and shift comparisons carry shiftedLineTheta to commonDerivedLineMap. This intertwining carrier isomorphism lifts to the full coefficient Weil heart.",
+   "uses": [
+    "lem-pur-constant-purity-frobenius-square",
+    "lem-pur-common-stage-tensor-right-unitor-natural",
+    "lem-pur-derived-pullback-tensor-constraints",
+    "prop-constructible-truncations",
+    "def-sf-canonical-coefficient-weil-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-constant-purity-frobenius-square",
+  "lem-pur-regular-coefficient-coherent-reduction",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-derived-pullback-tensor-constraints",
+  "def-weil-frobenius-coefficient-twists",
+  "prop-constructible-truncations",
+  "lem-pur-common-stage-tensor-right-unitor-natural",
+  "def-sf-canonical-coefficient-weil-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Step 3 of the assigned node: the surviving coefficient degree and its Frobenius action, before native realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isZero_truncLE_obj_of_isGE|isZero_truncGE_obj_of_isLE",
+   "results": "3 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"IsGE\"",
+   "results": "5 hits: CategoryTheory.Triangulated.TStructure.instIsGEObjTruncLE, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncLE_1, CategoryTheory.Triangulated.TStructure.isZero_truncLE_obj_of_isGE, CategoryTheory.Triangulated.TStructure.isGE_iff_isZero_truncLE_obj, CategoryTheory.Triangulated.TStructure.isIso₁_truncLE_map_of_isGE. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a shifted object in the heart of a t structure vanishes except in the shifted degree",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.IsGE, DerivedCategory.TStructure.t. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CoefficientShiftedTateComparison",
+  "date": "2026-10-28",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 3 of the assigned node: the surviving coefficient degree and its Frobenius action, before native realization. The assigned node has no imported blueprint ancestor (blueprint_refs.py ancestor returned None). Whole-blueprint searches for realization, Tate, cohomology shifted Tate and coefficient heart comparison found no exact statement.",
+   "via": [
+    "lem-sf-coefficient-shifted-tate-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CoefficientTwistedConstantSurvivingCohomology",
+  "file": "lean/Sheaf/WeilSheaf/CoefficientTwistedConstantSurvivingCohomology.lean",
+  "declaration": "WeilConjectures.NativeCoefficientCohomology.coefficient_twisted_constant_surviving_cohomology",
+  "declarations": [
+   "WeilConjectures.NativeCoefficientCohomology.coefficient_twisted_constant_surviving_cohomology"
+  ],
+  "statement": "theorem coefficient_twisted_constant_surviving_cohomology (d : ℕ) :\n    Nonempty ((canonicalCoefficientWeilCohomology P X₀ (-2 * (d : ℤ))).obj\n        (twistedConstant P X₀ d) ≅\n      FrobeniusCoefficientTwists.commonWeilSheaf P.field P.coefficients.l\n        P.coefficients.different X₀ P.coefficients.Qbar (d : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

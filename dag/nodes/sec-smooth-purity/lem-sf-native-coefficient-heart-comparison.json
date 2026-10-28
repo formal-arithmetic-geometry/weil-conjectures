@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-native-coefficient-heart-comparison",
+ "kind": "statement",
+ "title": "Normalized native realization of the coefficient Weil heart",
+ "statement": "Fix a purity finite field and coefficient setting P [def-pur-conventions, def-weil-finite-field-fiber] and a separated finite-type arithmetic scheme X_0 over Spec(P.field.k_0). Use the actual common-stage coefficient Weil heart [def-weil-weil-sheaf-complex, def-weil-constructible-heart] and its signed standard cohomology functors [def-sf-canonical-coefficient-weil-cohomology]. Fix a compactification c_0 of the structure morphism and an exceptional adjunction system S [def-weil-exceptional-inverse-image], and assume ringChar(k_0) differs from ell. There is an equivalence functor E from this coefficient Weil heart to native WeilSheaf(k_0,ell,X_0) [def-sf-native-weil-derived-framework]. For every native exceptional right adjoint J to structure lower shriek and every integer n, native H^n(J(constant_point[0])) is isomorphic to E applied to coefficient H^n(exceptionalConstant(P,X_0,c_0,S)) [lem-sf-native-coefficient-cohomology-comparison]. For every natural d, E sends the unshifted coefficient commonWeilSheaf of twist d [def-weil-frobenius-coefficient-twists] to the native Tate sheaf of twist d tensor the native constant sheaf. There is no shifted Tate cohomology assertion.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "prop-constructible-truncations",
+  "lem-sf-native-coefficient-cohomology-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-sf-canonical-coefficient-weil-cohomology",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Steps 1 and 2 of the assigned node, restricted to the standard Weil heart, and the unshifted root-line normalization in step 3."
+ },
+ "proof": [
+  {
+   "text": "Restrict the normalized exact ordinary realization to the standard heart, transport the coefficient and geometric closures and section-module presentation, and lift the Frobenius comparison to fixed pairs. Ordinary full faithfulness transports structures and intertwining maps, giving an equivalence of Weil hearts.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "def-sf-adic-realization-isomorphism-data",
+    "def-sf-native-weil-derived-framework",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the exceptional counit with the counit-normalized compact-support comparison, transpose its equivariance, and use scalar Frobenius counit normalization to identify the action with the inverse-exchange mate. Exact cohomology gives the exceptional comparison for this heart realization. Uniqueness of right adjoints treats every supplied adjunction.",
+   "uses": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-pur-constant-purity-frobenius-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the completed root tower, rationalize and extend scalars. Its cyclotomic action is the native Tate action. Tensor/unit normalization gives the native constant tensor factor. This involves only unshifted lines in the heart.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-frobenius-coefficient-twists",
+    "lem-sf-adic-qbar-constructible-realization",
+    "def-sf-canonical-coefficient-weil-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-weil-derived-framework",
+  "prop-constructible-truncations",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-native-weil-scalar-frobenius-counit",
+  "lem-pur-constant-purity-frobenius-square",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-sf-canonical-coefficient-weil-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Steps 1 and 2 of the assigned node, restricted to the standard Weil heart, and the unshifted root-line normalization in step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*IsoAlgebra|IsoAlgebra.*homology|coefficient.*comparison",
+   "results": "1 hits: Mathlib/Tactic/Linarith/Datatypes.lean. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"mapDerivedCategory\"",
+   "results": "0 hits: . No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology functor on Frobenius fixed pairs of derived coefficient objects preserving Tate twists and exceptional adjunctions",
+   "results": "8 hits: groupCohomology.functor, ContinuousCohomology.MultiInd.functor, groupCohomology.functor_obj, continuousCohomology, groupCohomology.cochainsFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, ContinuousCohomology.homogeneousCochains, Rep.FiniteCyclicGroup.moduleCatCochainComplex. No exact coefficient/native comparison; the generic truncation results are used for vanishing.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CoefficientShiftedTateComparison",
+  "date": "2026-10-28",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 1 and 2 of the assigned node, restricted to the standard Weil heart, and the unshifted root-line normalization in step 3. The assigned node has no imported blueprint ancestor (blueprint_refs.py ancestor returned None). Whole-blueprint searches for realization, Tate, cohomology shifted Tate and coefficient heart comparison found no exact statement.",
+   "via": [
+    "lem-sf-coefficient-shifted-tate-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeCoefficientHeartComparison",
+  "file": "lean/Sheaf/WeilSheaf/NativeCoefficientHeartComparison.lean",
+  "declaration": "WeilConjectures.NativeCoefficientCohomology.native_coefficient_heart_comparison",
+  "declarations": [
+   "WeilConjectures.NativeCoefficientCohomology.native_coefficient_heart_comparison"
+  ],
+  "statement": "theorem native_coefficient_heart_comparison\n    (c₀ : Compactification X₀.hom)\n    (S : systems P.field P.coefficients.l P.coefficients.different P.coefficients.Qbar X₀)\n    [Fact (ringChar P.field.k₀ ≠ P.coefficients.l)] :\n    ∃ E : sfCommonStageWeilSheaf P.field P.coefficients.l P.coefficients.different\n        X₀ P.coefficients.Qbar ⥤ WeilSheaf P.field.k₀ P.coefficients.l X₀.left,\n      E.IsEquivalence ∧\n      (∀ (J : WeilComplex P.field.k₀ P.coefficients.l (Spec (.of P.field.k₀)) ⥤\n          WeilComplex P.field.k₀ P.coefficients.l X₀.left)\n        (adj : WeilComplex.derivedLowerShriek P.field.k₀ P.coefficients.l X₀.hom ⊣ J)\n        (n : ℤ),\n        Nonempty ((WeilComplex.homologySheaf n).obj\n            (J.obj (WeilSheaf.toComplex.obj\n              (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l\n                (Spec (.of P.field.k₀))))) ≅\n          E.obj ((canonicalCoefficientWeilCohomology P X₀ n).obj\n              (exceptionalConstant P X₀ c₀ S)))) ∧\n      (∀ d : ℕ, Nonempty (E.obj\n          (FrobeniusCoefficientTwists.commonWeilSheaf P.field P.coefficients.l\n            P.coefficients.different X₀ P.coefficients.Qbar (d : ℤ)) ≅\n        (WeilSheaf.tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d).tensorObj\n          (WeilSheaf.adicConstant P.field.k₀ P.coefficients.l X₀.left)\n          (WeilSheaf.isLisse_tateTwistSheaf P.field.k₀ P.coefficients.l X₀.left d)))",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261028T034958-L-3576334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
