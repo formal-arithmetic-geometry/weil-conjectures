@@ -1,0 +1,29 @@
+--- lcompile.py.bak	2026-10-27 00:24:17.996192084 +0800
++++ lcompile.py	2026-10-28 14:27:06.931427225 +0800
+@@ -315,9 +315,11 @@
+ def _own_modules(jobs, root):
+     return {".".join(f.relative_to(root).with_suffix("").parts) for f, _o, _p in jobs}
+ def _source_tree():
+-    """Committed sources also supply unpublished dependencies in the private overlay."""
++    """Committed sources and compiler implementation used by the private overlay."""
+     try:
+-        p = subprocess.run(["git", "rev-parse", "HEAD:lean"], cwd=H / "weil-conjectures-sheaf-shared",
++        p = subprocess.run(["git", "rev-parse", "HEAD:lean",
++                            "HEAD:tools/remote_compile_dependencies.py", "HEAD:tools/remote_compile_set.py"],
++                           cwd=H / "weil-conjectures-sheaf-shared",
+                            capture_output=True, text=True, timeout=10)
+         if p.returncode == 0 and p.stdout.strip(): return p.stdout.strip()
+     except (OSError, subprocess.TimeoutExpired):
+@@ -326,10 +328,11 @@
+     # whose unpublished dependencies might have changed.
+     return f"unavailable:{time.time_ns()}"
+ def _dep(jobs, root, lb):
+-    """Publication, committed Lean sources and the sandbox artifacts other than this call's.
++    """Publication, committed sources/compiler and sandbox artifacts other than this call's.
+ 
+     The compile service supplies missing published objects from committed sources.
+     A source repair must invalidate old diagnostics even before a new green build.
++    A compiler repair must also invalidate diagnostics from its old implementation.
+     Use the Lean tree, so metadata-only commits keep cached results reusable.
+     """
+     sig = []

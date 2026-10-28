@@ -72,7 +72,7 @@ def _staged_source(repo, rel, live, sources):
 
 
 def missing_dependencies(jobs, root, lb, published, lean, repo, header_imports):
-    """Return unpublished modules and their importers in private compile order.
+    """Return missing or invalidated modules in private compile order.
 
     Requested modules and caller artifacts take precedence. Other sources match
     one committed snapshot or a hash-checked, completed merge-queue landing. A
@@ -92,10 +92,17 @@ def missing_dependencies(jobs, root, lb, published, lean, repo, header_imports):
     # discover below. Skipping planned modules in visit() must not hide it.
     new_modules = {mod for mod in planned
                    if not (published / PurePosixPath(*mod.split(".")).with_suffix(".olean")).is_file()}
+    # Replacing an existing module can change the kernel types in every compiled
+    # importer, even when those importers' source texts have not changed. Their
+    # old objects cannot be mixed with the caller's replacement via --setup.
+    replaced_modules = planned - new_modules
     for artifact in lb.rglob("*.olean"):
         rel = artifact.relative_to(lb)
+        mod = ".".join(rel.with_suffix("").parts)
         if not (published / rel).is_file():
-            new_modules.add(".".join(rel.with_suffix("").parts))
+            new_modules.add(mod)
+        else:
+            replaced_modules.add(mod)
     snapshot = None
     landings = None
 
@@ -172,15 +179,15 @@ def missing_dependencies(jobs, root, lb, published, lean, repo, header_imports):
     for job in jobs:
         for mod in header_imports(root / job["rel"]):
             visit(mod)
-    if not new_modules:
+    if not new_modules and not replaced_modules:
         return dependencies
 
     # Look through published importers without importing their newer proof plans
-    # into this request. Only an edge to an actually missing module invalidates
-    # an old object: it may still contain definitions moved into that module.
-    # Rebuilding every ancestor would pull unrelated unpublished work into the
-    # overlay, even though Lean resolves transitive imports via --setup already.
-    graph = {}
+    # into this request. An edge to a newly supplied module invalidates an old
+    # owner that may still contain definitions moved into that module.
+    # For existing replacements, rebuild the whole affected ancestor chain in
+    # this request's import closure. Unaffected published objects stay in place.
+    graph, compiled_imports = {}, {}
     todo = [mod for job in jobs for mod in header_imports(root / job["rel"])]
     while True:
         while todo:
@@ -204,16 +211,20 @@ def missing_dependencies(jobs, root, lb, published, lean, repo, header_imports):
             if mod not in done and not (published / rel.with_suffix(".olean")).is_file():
                 continue
             graph[mod] = header_imports(source)
-            todo.extend(graph[mod])
+            compiled_imports[mod] = _published_imports(published, rel)
+            todo.extend(graph[mod] + compiled_imports[mod])
 
-        previous = set(new_modules)
+        previous = set(new_modules), set(replaced_modules)
         for mod, imports in graph.items():
-            if mod not in done and new_modules.intersection(imports):
+            affected = bool(replaced_modules.intersection(imports + compiled_imports[mod]))
+            if mod not in done and (affected or new_modules.intersection(imports)):
                 visit(mod, force=True)
-        if previous == new_modules:
+            if affected:
+                replaced_modules.add(mod)
+        if previous == (new_modules, replaced_modules):
             break
 
-        todo.extend(new_modules - previous)
+        todo.extend((new_modules - previous[0]) | (replaced_modules - previous[1]))
 
     # A newly supplied module can itself import an old owner selected above.
     # Put the whole overlay in import order after the invalidation pass.

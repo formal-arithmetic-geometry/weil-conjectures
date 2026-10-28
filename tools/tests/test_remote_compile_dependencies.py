@@ -140,6 +140,69 @@ class MissingImports(unittest.TestCase):
         p.write_text("module\n")
         self.assertEqual(self.resolve(), [])
 
+    def changed_existing_definition(self):
+        """Every module is published, but the caller changes Data's representation."""
+        self.source("Sheaf/Data.lean", "module\ndef value : Nat := 0\n")
+        self.source("Sheaf/B.lean", "module\nimport Sheaf.Data\n")
+        for mod in ("Data", "A", "B"):
+            (self.pub / f"Sheaf/{mod}.olean").write_bytes(b"old representation")
+        self.published_trace("Sheaf.A", ["Sheaf.B"])
+        self.published_trace("Sheaf.B", ["Sheaf.Data"])
+        subprocess.run(["git", "add", "lean/Sheaf/Data.lean", "lean/Sheaf/B.lean"],
+                       cwd=self.repo, check=True)
+        subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                        "commit", "-qm", "existing definition fixture"],
+                       cwd=self.repo, check=True)
+        target = self.root / "Sheaf/Data.lean"
+        target.parent.mkdir(parents=True)
+        target.write_text("module\ndef value : Bool := true\n")
+        self.jobs.insert(0, {"rel": "Sheaf/Data.lean", "out": True, "probe": ""})
+
+    def test_changed_published_definition_rebuilds_transitive_importers(self):
+        self.changed_existing_definition()
+        before = {p: p.read_bytes() for p in self.pub.rglob("*.olean")}
+        self.assertEqual([j["dependency"] for j in self.resolve()], ["Sheaf.B", "Sheaf.A"])
+        self.assertEqual(before, {p: p.read_bytes() for p in self.pub.rglob("*.olean")})
+
+    def test_existing_caller_artifact_rebuilds_transitive_importers(self):
+        self.changed_existing_definition()
+        self.jobs.pop(0)
+        (self.root / "Sheaf/Data.lean").unlink()
+        artifact = self.lb / "Sheaf/Data.olean"
+        artifact.parent.mkdir(parents=True)
+        artifact.write_bytes(b"new representation")
+        self.assertEqual([j["dependency"] for j in self.resolve()], ["Sheaf.B", "Sheaf.A"])
+
+    def test_changed_definition_importer_still_requires_trusted_source(self):
+        self.changed_existing_definition()
+        self.source("Sheaf/B.lean", "module\nimport Sheaf.Data\n-- unfinished repair\n")
+        with self.assertRaisesRegex(DependencySourceError, "Sheaf.B differs from committed"):
+            self.resolve()
+
+    def test_changed_definition_without_lake_traces_rebuilds_importers(self):
+        self.changed_existing_definition()
+        for path in self.pub.rglob("*.trace"):
+            path.unlink()
+        self.assertEqual([j["dependency"] for j in self.resolve()], ["Sheaf.B", "Sheaf.A"])
+
+    def test_replacement_invalidates_imports_only_in_published_object(self):
+        self.changed_existing_definition()
+        self.source("Sheaf/B.lean", "module\n")
+        subprocess.run(["git", "add", "lean/Sheaf/B.lean"], cwd=self.repo, check=True)
+        subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                        "commit", "-qm", "drop old dependency"], cwd=self.repo, check=True)
+        self.assertEqual([j["dependency"] for j in self.resolve()], ["Sheaf.B", "Sheaf.A"])
+
+    def test_service_interleaves_changed_existing_definition_and_importers(self):
+        self.changed_existing_definition()
+        expected = {"Sheaf.Data", "Sheaf.A", "Sheaf.B"}
+        reply, calls = self.service(expected_artifacts=expected)
+        self.assertEqual(calls, ["Data", "B", "A", "Test"])
+        self.assertTrue(all(result["rc"] == 0 for result in reply["results"]))
+        reply, calls = self.service(expected_artifacts=expected)
+        self.assertEqual(calls, ["Test"])
+        self.assertTrue(all(result["rc"] == 0 for result in reply["results"]))
+
     def relocated_definition(self):
         """A and B existed in the green build; B now re-exports a new owner."""
         for mod in ("A", "B"):
