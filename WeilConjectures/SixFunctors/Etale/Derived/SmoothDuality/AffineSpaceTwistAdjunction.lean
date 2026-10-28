@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 
 For a normalized Tate twist and every scheme `S` on which the exponent of `Λ` is invertible, the
 projection `p_d : 𝔸^d_S ⟶ S` satisfies `Rp_{d!} ⊣ Lp_d^*(d)[2d]`
-(`AlgebraicGeometry.Etale.nonempty_adjunction_affineSpace`, blueprint
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`, blueprint
 `cor-amb-affine-space-adjunction`, `sk-lem-geo-affine-local`).
 
 The proof composes *twisted adjunctions* `Rf_! ⊣ Lf^*(a)[2a]`
@@ -31,7 +31,7 @@ induction through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`.
   identifications `K(0)[0] ≅ K`, `K(b)[2b](a)[2a] ≅ K(b + a)[2(b + a)]` and
   `Lf^*(K(m)[2m]) ≅ (Lf^* K)(m)[2m]`.
 - `AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`
-- `AlgebraicGeometry.Etale.nonempty_adjunction_affineSpace`
+- `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`
 -/
 
 @[expose] public section
@@ -52,21 +52,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 section NatIso
 
-/-- Tensoring on the right with `M` then with `N` is tensoring on the right with `M ⊗ N`, in any
-monoidal category: the associator `(K ⊗ M) ⊗ N ≅ K ⊗ (M ⊗ N)`, natural in `K`. -/
-noncomputable def _root_.CategoryTheory.MonoidalCategory.curriedTensorFlipObjCompIso
-    {C : Type*} [Category* C] [MonoidalCategory C] (M N : C) :
-    (curriedTensor C).flip.obj M ⋙ (curriedTensor C).flip.obj N ≅
-      (curriedTensor C).flip.obj (M ⊗ N) :=
-  NatIso.ofComponents (fun K ↦ α_ K M N) fun f ↦ associator_naturality_left f M N
-
-/-- Tensoring on the right with the unit is the identity, in any monoidal category: the right
-unitor `K ⊗ 𝟙_ ≅ K`, natural in `K`. -/
-noncomputable def _root_.CategoryTheory.MonoidalCategory.curriedTensorFlipObjUnitIso
-    (C : Type*) [Category* C] [MonoidalCategory C] :
-    (curriedTensor C).flip.obj (𝟙_ C) ≅ 𝟭 C :=
-  NatIso.ofComponents (fun K ↦ ρ_ K) fun f ↦ rightUnitor_naturality f
-
 /-- Tensoring on the right with `M` then with `N` is tensoring on the right with `M ⊗ᴸ N`:
 the associator `(K ⊗ᴸ M) ⊗ᴸ N ≅ K ⊗ᴸ (M ⊗ᴸ N)`, natural in `K`. -/
 noncomputable def derivedTensorFlipObjCompIso (X : Scheme.{u})
@@ -75,13 +60,13 @@ noncomputable def derivedTensorFlipObjCompIso (X : Scheme.{u})
         (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj N ≅
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj N) :=
-  curriedTensorFlipObjCompIso M N
+  (tensorRightTensor M N).symm
 
 /-- Tensoring on the right with the unit is the identity: the right unitor `K ⊗ᴸ Λ_X ≅ K`,
 natural in `K`. -/
 noncomputable def derivedTensorFlipObjUnitIso (X : Scheme.{u}) :
     (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (𝟙_ _) ≅ 𝟭 _ :=
-  curriedTensorFlipObjUnitIso _
+  rightUnitorNatIso _
 
 /-- The functorial form of `AlgebraicGeometry.Etale.twistShiftZeroIso`: `K(0)[0] ≅ K`,
 naturally in `K`. -/
@@ -209,20 +194,27 @@ theorem nonempty_adjunction_affineLine [HasTateTwist.IsNormalized Λ] (S : Schem
     (by norm_num) (nonempty_adjunction_twistShift_of_etale Λ _ rfl)
     (nonempty_adjunction_projectiveLine Λ S)
 
-/-- Blueprint `cor-amb-affine-space-adjunction` (and `sk-lem-geo-affine-local`):
-**the affine-space adjunction** `Rp_{d!} ⊣ Lp_d^*(d)[2d]` for `p_d : 𝔸^d_S ⟶ S`, a normalized
-Tate twist and any scheme `S` on which the exponent of `Λ` is invertible. For `d = 0` the
+/-- Blueprint `cor-amb-affine-space-adjunction`: affine-space ambient adjunction.
+
+For the projection `p_d : 𝔸^d_S ⟶ S` of relative affine space over a scheme `S` on which the
+exponent of `Λ` is invertible, on the entire derived categories of étale sheaves of
+`Λ`-modules,
+
+`Rp_{d!} ⊣ p_d^*(d)[2d]`.
+
+This is also clause 1 of `sk-lem-geo-affine-local`. For `d = 0` the
 projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the
 composite of the affine-line projection over `𝔸^d_S` and of `p_d`, and twisted adjunctions
 compose (`AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`). -/
-theorem nonempty_adjunction_affineSpace [HasTateTwist.IsNormalized Λ] (d : ℕ) (S : Scheme.{u})
-    [HasInvertibleExponent Λ S] :
-    haveI : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); S) := .of_hom (_ ↘ S)
+theorem nonempty_rightDerivedLowerShriek_adjunction_affineSpace [HasTateTwist.IsNormalized Λ]
+    (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     Nonempty (R((𝔸(ULift.{u} (Fin d); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
       L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
         twistShift Λ 𝔸(ULift.{u} (Fin d); S) d) := by
   induction d with
-  | zero => exact nonempty_adjunction_twistShift_of_etale Λ _ (by simp)
+  | zero =>
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 0); S) := .of_hom (_ ↘ S)
+    exact nonempty_adjunction_twistShift_of_etale Λ _ (by simp)
   | succ d ih =>
     set φ : 𝔸(ULift.{u} (Fin (d + 1)); S) ≅ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); S)) :=
       AffineSpace.reindexIso S ((Equiv.sumCongr Equiv.ulift Equiv.ulift).trans
