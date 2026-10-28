@@ -6,6 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingMappingTower
+import Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents
 
 /-! # Finite adjunction comparison of strict mapping towers
 
@@ -67,6 +68,9 @@ theorem integralDualizing_mapping_tower_finite_comparison
             (integralDualizingFiniteComparison l E D X hl h))
     : Nonempty (integralDualizingMappingTower l E X T.tower ≅
       (integralDualizingCompactSections l E D hl X).op ⋙
-        integralDualizingCoefficientHomTower l E) := by sorry
+        integralDualizingCoefficientHomTower l E) := by
+  obtain ⟨a, ha⟩ := integralDualizing_mapping_tower_finite_components
+    D l hl E X T e he
+  exact ⟨NatIso.ofComponents a (fun f ↦ ha f)⟩
 
 end WeilConjectures

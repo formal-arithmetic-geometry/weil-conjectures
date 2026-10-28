@@ -1,0 +1,131 @@
+{
+ "id": "lem-coef-integral-dualizing-mapping-tower-finite-components",
+ "kind": "lemma",
+ "title": "Coherent finite component comparisons for strict global Hom towers",
+ "statement": "For the normalized DVR tower and coherent finite identifications in lem-coef-integral-dualizing-mapping-tower-finite-comparison, there is a component isomorphism for every object of the opposite integral constructible category, and these components satisfy the naturality square for every morphism. This is the pre-assembly component data; it does not assert a functor isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons, before assembly into the strict natural isomorphism."
+ },
+ "stmt_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "lem-coef-integral-dualizing-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Residue Tor invariance, compact-support reduction, and point-section reduction identify the finite support values with reductions of the integral compact-support complex, including all quotient maps.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-coef-integral-compact-support",
+    "lem-pod-point-sections-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar tensor-restriction adjunction and the finite exceptional adjunction to simultaneous resolutions. The finite counit and the equation he make the resulting component arrows compatible with every quotient transition.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "lem-coef-finite-dualizing",
+    "prop-asd-internal-adjunction",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation naturality and injectivity of currying identify the component arrows on every morphism of the integral constructible category, giving the displayed naturality square. Exact tower evaluation detects the component isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-sequential-tower-evaluation-full"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-coef-integral-compact-support",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-coef-finite-exceptional",
+  "lem-coef-finite-dualizing",
+  "prop-asd-internal-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-sequential-tower-evaluation-full"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, finite mapping comparisons and their transition compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural family of isomorphisms between derived Hom tower functors from finite dualizing adjunctions",
+   "results": "No exact match for these project-specific strict derived tower functors.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents constructs the final assembly from component isomorphisms and naturality.",
+   "date": "2026-10-28",
+   "verdict": "Used only for assembly in the parent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "integralDualizingMappingTower.*Finite|finite.*dualizing.*tower",
+   "results": "Only the assigned module and its finite-level dependencies; no existing component comparison.",
+   "date": "2026-10-28",
+   "verdict": "No existing project theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+   "place": "Finite component comparisons before the natural-isomorphism assembly.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComparison",
+  "date": "2026-10-28",
+  "group": "A9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComponents",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingTowerFiniteComponents.lean",
+  "declaration": "WeilConjectures.integralDualizing_mapping_tower_finite_components",
+  "statement": "theorem integralDualizing_mapping_tower_finite_components\n    (T : NormalizedDVRTower l E X D hl)\n    (e : ∀ n : ℕ, T.M n ≅ integralDualizingFiniteTerm l E D X n)\n    (he : ∀ {m n : ℕ} (h : n ≤ m),\n      T.tau h ≫ (normalizedDVRRes l E X h).map (e n).hom =\n        (e m).hom ≫\n          (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _\n            (integralDualizingFiniteComparison l E D X hl h)) :\n    ∃ (a : ∀ K : (sfIntegralConstructibleCategory l E X)ᵒᵖ,\n      (integralDualizingMappingTower l E X T.tower).obj K ≅\n        ((integralDualizingCompactSections l E D hl X).op ⋙\n          integralDualizingCoefficientHomTower l E).obj K),\n      ∀ {K L : (sfIntegralConstructibleCategory l E X)ᵒᵖ} (f : K ⟶ L),\n        (integralDualizingMappingTower l E X T.tower).map f ≫ (a L).hom =\n          (a K).hom ≫\n            ((integralDualizingCompactSections l E D hl X).op ⋙\n              integralDualizingCoefficientHomTower l E).map f",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261028T020150-L-2473172",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261028T020150-L-2473172",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
