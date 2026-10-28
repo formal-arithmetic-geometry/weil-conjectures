@@ -1,0 +1,122 @@
+{
+ "id": "stage3-integral-pull-evaluation-direct-transition-square",
+ "kind": "lemma",
+ "title": "Ordinary direct-image evaluation transition square",
+ "statement": "For a scheme morphism f : X ⟶ Y and an adjacent positive coefficient quotient, the direct-image/evaluation isomorphisms of [def-pur-completed-pullback-tower-core] commute with the transitions of the coefficient sequence site [def-coef-ringed-sequence-site], after the inverse of the normalized scalar comparison r of [def-coef-normalized-dvr-tower]. The normalization hypothesis identifies r with the inverse of the canonical identity-on-sections comparison of [lem-weil-proetale-direct-image-restriction-of-scalars]. This holds for every coefficient sequence module N on X.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, sectionwise transition calculation preceding Lemma 4.10"
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-normalized-dvr-tower",
+  "def-pur-completed-pullback-tower-core",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Use the direct evaluation unique characterization, which says that each comparison is identity on every underlying section.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The successor-arrow equation for Functor.ofOpSequence identifies the normalized quotient restriction with constant-coefficient scalar restriction. Transport the two restriction functors along this equality. The heterogeneous normalization of r then identifies r.inv with the coefficient comparison, which is identity on sections.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient transition is the presheaf restriction along the horizontal sequence arrow. The product base-change functor maps that arrow to the horizontal arrow at the base-changed object. Consequently the two composites agree on all sections; module-sheaf extensionality concludes. The same calculation covers n = 0 and zero modules.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and the section calculation before Lemma 4.10; section normalizations, explicit scalar-restriction transport, and product base-change functoriality, G9, 2026-10-28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct image of module sheaves commutes with scalar restriction and coefficient sequence evaluation",
+   "results": "8 hits, including PresheafOfModules.pushforward_obj_map_apply', SheafOfModules.pushforwardSections and PresheafOfModules.restrictScalars; none states the project comparison square.",
+   "date": "2026-10-28",
+   "verdict": "Use the project comparison normalizations and sectionwise functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.ofOpSequence_map_homOfLE_succ",
+   "results": "No hits; the service reported an unknown identifier.",
+   "date": "2026-10-28",
+   "verdict": "The lemma is available in the checked-out Mathlib source and was used directly."
+  },
+  {
+   "tool": "grep",
+   "query": "ofOpSequence_map_homOfLE_succ|theorem hom_ext",
+   "results": "25 hits in Mathlib/CategoryTheory, including Mathlib/CategoryTheory/Functor/OfSequence.lean:165 and ConcreteCategory/Basic.lean:145.",
+   "date": "2026-10-28",
+   "verdict": "The successor-arrow identity proves the restriction equality; extensionality supports the section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquareComponentCore",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-pull-evaluation-cochain-square-component-core",
+   "place": "direct-image transition subcalculation"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralPullEvaluationDirectTransitionSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralPullEvaluationDirectTransitionSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralPullEvaluation_directTransitionSquare",
+  "statement": "theorem integralPullEvaluation_directTransitionSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (r : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRModuleRes l E Y (Nat.le_succ n))\n    (hr : HEq r (proEtaleCoefficientDirectImageComparison f\n      (Padic.coefficientExtensionTransition l E (n + 1))).symm) :\n    let d : pullbackTensorSequenceDirect l E f ⋙ coefficientSequenceEvaluation l E Y n ≅\n        coefficientSequenceEvaluation l E X n ⋙\n          proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 1)) :=\n      pullbackTensorSequenceDirectEvaluation l E f n\n    let d' : pullbackTensorSequenceDirect l E f ⋙\n        coefficientSequenceEvaluation l E Y (n + 1) ≅\n        coefficientSequenceEvaluation l E X (n + 1) ⋙\n          proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 2)) :=\n      pullbackTensorSequenceDirectEvaluation l E f (n + 1)\n    ∀ N : coefficientSequenceModules l E X,\n      (coefficientSequenceTransition l E Y (Nat.le_succ n)).app\n          ((pullbackTensorSequenceDirect l E f).obj N) ≫\n        (normalizedDVRModuleRes l E Y (Nat.le_succ n)).map (d.hom.app N) ≫\n        r.inv.app ((coefficientSequenceEvaluation l E X n).obj N) =\n      d'.hom.app N ≫\n        (proEtaleConstantModuleDirectImage f (finiteCoefficientRing l E (n + 2))).map\n          ((coefficientSequenceTransition l E X (Nat.le_succ n)).app N)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055658-L-794948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261028T055658-L-794948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
