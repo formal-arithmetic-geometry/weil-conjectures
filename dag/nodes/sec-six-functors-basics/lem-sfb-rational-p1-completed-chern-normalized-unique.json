@@ -13,22 +13,48 @@
  },
  "proof": [
   {
-   "text": "Cancel the invertible presentation source comparison in the two normalization equations, then use faithfulness of completed scalar restriction on this completed hom set to recover equality of the original adjuncts.",
+   "text": "Write Delta_l(M)=1-l*shift on the countable product of copies of M. Reuse the proved sequenceDifference lemmas in DiagonalCompletedLineCompleteAux. Delta_l is invertible on each finite root sheaf because l^(n+1) annihilates it. The countable-power functor preserves limits, so Delta_l is invertible on the ordinary root limit underlying the completed Tate line. The same completed-coefficient difference lemma applies to the completed unit. Forgetting scalar actions reflects these isomorphisms. Exact countable products of constant-coefficient pro-etale sheaves make the degree-zero single functor preserve the products. For a map f from an l-invertible derived object V, the sequence inv(l id_V)^n followed by f lifts to the product and is annihilated by Delta_l. Its zeroth projection is f, so f=0. This proves derived completeness of the underlying completed unit and Tate line without Noetherianity, local freeness or invertibility of l on either scheme.",
+   "uses": [
+    "lem-sfb-diagonal-completed-line-complete-aux",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-twist-sheaves",
+    "det-pe-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The shift [2] is right adjoint to [-2], and ordinary derived upper star is additive and left adjoint to derived lower star. Thus these right adjoints preserve right orthogonality to l-invertible objects, since an additive left adjoint preserves invertibility of l times the identity. Reuse complete_rightAdjoint and rightDerivedComparison from DiagonalCompletedChernLift. The presentation completed comparison followed by the universal right-derived comparison identifies the underlying p.Rc(completedLine(X)[2]) with that complete lower-star object. Hence both endpoints of the normalized adjunct are complete.",
+   "uses": [
+    "lem-diagonal-completed-chern-lift",
+    "def-sfb-diagonal-trace-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The presentation line_limit field makes the shifted line comparison invertible, hence p.sourceMap is invertible. Cancel it from the two normalization equations to obtain equality after diagonalCompletedUnderlying. Regard the two adjuncts as morphisms in the full subcategory of complete objects and apply the injectivity part of diagonalCompleteScalarRestriction. Projecting the resulting equality to the ambient morphisms gives a=a′.",
    "uses": [
     "def-sfb-rational-p1-scalar-chern-maps",
-    "lem-diagonal-completed-chern-lift"
+    "def-sfb-diagonal-trace-presentation",
+    "lem-sfb-diagonal-complete-scalar-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sfb-diagonal-completed-line-complete-aux",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-twist-sheaves",
+  "det-pe-products-exact",
+  "lem-diagonal-completed-chern-lift",
+  "def-sfb-diagonal-trace-presentation",
   "def-sfb-rational-p1-scalar-chern-maps",
-  "lem-diagonal-completed-chern-lift"
+  "lem-sfb-diagonal-complete-scalar-restriction"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Normalization uniqueness for the completed Chern adjunct in the none-coefficient exchange."
+  "kind": "adapted",
+  "by": "E1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "Paragraph (1), completeness of the two endpoints and the completed-coefficient equivalence; the inverse-limit difference-operator argument is the formalized Stacks more-algebra.tex lemma-hom-from-Af argument already proved in DiagonalCompletedLineCompleteAux."
  },
  "mathlib_searches": [
   {
@@ -106,9 +132,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W8",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261028T020847-L-2555726",
+  "landing": "20261028T034730-L-3538417",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
