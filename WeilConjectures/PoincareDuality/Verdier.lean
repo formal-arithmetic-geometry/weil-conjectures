@@ -14,6 +14,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClos
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BidualityTruncation
+import WeilConjectures.PoincareDuality.ConstructibleSheafBiduality
+
 /-!
 
 # Verdier duality on bounded constructible complexes on the pro-étale site
@@ -69,12 +73,16 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
 - `ProEtale.CondensedRing.dualizingComplexIsoUpperStar`: `Lj^* ω_X ≅ ω_U` for an open immersion
   `j`, and `ProEtale.CondensedRing.isIso_map_verdierBiduality_iff_of_isOpenImmersion`:
   `Lj^* δ_K` is an isomorphism iff `δ_{Lj^* K}` is.
+- `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
+  isomorphism for `K` bounded constructible and `ω_X` the dualizing complex relative to the
+  structure morphism `X ⟶ Spec k` (Input 3.3 of the specification). By the finite truncation
+  argument (`CategoryTheory.MonoidalClosed.biduality_of_bounded_heart`) it reduces to
+  constructible sheaves in degree `0`.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
-  isomorphism for `K` bounded constructible and `ω_X` the dualizing complex relative to the
-  structure morphism `X ⟶ Spec k` (Input 3.3 of the specification).
+- `ProEtale.CondensedRing.isIso_biduality_constructible_sheaf`: biduality for a constructible
+  sheaf placed in degree `0`.
 
 -/
 
@@ -85,6 +93,14 @@ universe u
 open CategoryTheory MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+private theorem isIso_biduality_fullSubcategory
+    {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
+    [BraidedCategory C] (P : ObjectProperty C) [P.IsMonoidal]
+    [P.IsMonoidalClosed] (W K : P.FullSubcategory)
+    (h : IsIso (toIhomIhom W.obj K.obj)) : IsIso (toIhomIhom W K) := by
+  have : IsIso (P.ι.map (toIhomIhom W K)) := h
+  exact isIso_of_reflects_iso (toIhomIhom W K) P.ι
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -166,6 +182,7 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
   Verdier.bidualityMap (dualizingComplex ℓ X) K
 
+attribute [local irreducible] DerivedCategory.monoidalClosed in
 /-- **Constructible Verdier biduality** (blueprint `sk-thm-pd-verdier-duality`): the double-dual
 morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for `K` bounded constructible. See the module
 docstring.
@@ -174,8 +191,24 @@ The dualizing complex must be taken relative to `Spec k` (or at least to a regul
 complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at
 the node, `𝔻𝔻K` has rank `9`. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (verdierBiduality ℓ K) :=
-  sorry
+    IsIso (verdierBiduality ℓ K) := by
+  have : IsIso (Over.mk (𝟙 (Spec (.of k)))).hom :=
+    inferInstanceAs (IsIso (𝟙 _))
+  let : BraidedCategory (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) :=
+    DerivedCategory.braidedCategory' _
+  let Q : ObjectProperty
+      (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :=
+    IsConstructibleModuleObject _
+  have hQ : Q.IsClosedUnderIsomorphisms :=
+    ⟨fun e hM ↦ _root_.constructible_of_iso e hM⟩
+  have hK : IsIso (toIhomIhom (dualizingComplex ℓ X).obj K.obj) :=
+    biduality_of_bounded_heart _ Q
+      (fun M hM ↦ isIso_biduality_constructible_sheaf ℓ (Over.mkIdTerminal.from X) M hM)
+      K.obj K.property.1 K.property.2
+  exact isIso_biduality_fullSubcategory _ (dualizingComplex ℓ X) K hK
 
 /-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
 `det-pd-biduality-coefficients`): if the dualizing complex `ω_X` is isomorphic to an invertible

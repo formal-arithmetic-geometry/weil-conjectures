@@ -8056,6 +8056,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteReso
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.AssociatorShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BidualityTruncation
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.BraidingShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
