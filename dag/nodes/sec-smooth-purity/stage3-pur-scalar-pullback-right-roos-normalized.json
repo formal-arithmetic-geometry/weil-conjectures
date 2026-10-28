@@ -2,7 +2,7 @@
  "id": "stage3-pur-scalar-pullback-right-roos-normalized",
  "kind": "statement",
  "title": "Right Roos normalization before the quotient formula",
- "statement": "Before the explicit nested quotient formula, the normalized scalar realization and pullback model compose with the fixed Roos coordinate map to the ordinary scalar/pullback chain through the completion inverse. This normalization equation uses the coherent presentation and q but does not use the separate quotient-generator formula hq.",
+ "statement": "For the coherent presentations and normalized models of [def-trf-integral-comparison-realization-models], let q be the scalar/pullback strict quotient comparison satisfying ScalarPullbackQuotientFormula [stage3-pur-scalar-pullback-roos-coordinates]. Then the scalar realization at the E-pullback followed by scalar(pullbackReduction) and the fixed Roos coordinate equals the completion inverse followed by the explicit ordinary derived scalar/pullback chain. The generator formula for q is essential; arbitrary isomorphisms of the strict towers do not satisfy the equation.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
   "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); the normalization part of step 8 of lem-pur-scalar-extension-tower-coherence."
@@ -13,36 +13,47 @@
  ],
  "proof": [
   {
-   "text": "Instantiate the normalized pullback model ME and the normalized scalar model SX on a flat-term K-flat representative of the coherent presentation. Transpose their counit equations through pullbackReduction and the scalar cochain counit; naturality of the Roos bridge gives the displayed equation before applying the separate quotient formula.",
+   "text": "Use the localization of good complexes to choose a flat-term K-flat representative R of the E-pullback of K. Obtain a coherent primitive quotient presentation (D,eD,kappaD). Scalar normalization SX on this presentation supplies qD, its tensor-generator formula, and the scalar representative equation. K-flatness of D follows from the finite evaluations of R, so the scalar cochain counit on D is invertible.",
    "uses": [
-    "def-trf-integral-comparison-realization-models",
+    "lem-pur-integral-operations-well-defined",
     "lem-trf-coherent-primitive-reduction-presentation",
-    "lem-pc-kflat-resolution",
-    "def-trf-integral-comparison-sequence-systems"
+    "def-trf-integral-comparison-realization-models",
+    "stage3-pur-scalar-pullback-roos-coordinates",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the resulting equation along eP and the ordinary derived scalar/pullback comparison. The resulting tail is the explicit ordinary scalar/pullback chain ending in the finite-level map induced by q.",
+   "text": "Compose the scalar representative normalization with scalarCompletion at Q(R). Its normalization identifies the composite with the ordinary scalar localization comparison followed by the scalar completion chain and the inverse of rD. Apply the independent completion/Roos quotient calculation to identify its composite with the pullbackReduction and fixed coordinate. This remaining calculation has no scalar realization model and no completion inverse.",
    "uses": [
+    "lem-pur-integral-operations-scalar-extension",
     "def-pod-scalar-completion-tensor-comparisons",
-    "stage3-pur-scalar-pullback-roos-coordinates"
+    "lem-pur-scalar-pullback-completion-roos"
    ],
    "elementary": false
+  },
+  {
+   "text": "Naturality of scalarCompletion and SX.realization along eR moves the scalar calculation from Q(R) to the pulled K. Cancel the invertible ordinary scalar image of eR.hom and then the scalar completion isomorphism at the complete pulled K. The resulting equality is precisely the displayed equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-trf-integral-comparison-realization-models",
+  "lem-pur-integral-operations-well-defined",
   "lem-trf-coherent-primitive-reduction-presentation",
-  "lem-pc-kflat-resolution",
-  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models",
+  "stage3-pur-scalar-pullback-roos-coordinates",
+  "lem-pur-integral-operations-scalar-extension",
   "def-pod-scalar-completion-tensor-comparisons",
-  "stage3-pur-scalar-pullback-roos-coordinates"
+  "lem-pur-scalar-pullback-completion-roos",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.lean",
-  "place": "Tags 06YY, 07A4 and 0941; normalized right route before the quotient formula."
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YY, 07A4 and 0941; scalar model normalization, completion normalization, and the independent quotient/Roos augmentation calculation."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -96,7 +107,7 @@
   "declarations": [
    "WeilConjectures.ScalarExtensionTower.scalarPullbackRightRoos_normalized"
   ],
-  "statement": "theorem scalarPullbackRightRoos_normalized (W : Bool → Scheme.{u}) (ME : CompletedOperations.Models.{u, u} l E W) (ρ : IntegralComparisonRoosModel.{u, u} l L (W true)) (SX : IntegralComparisonScalarModel.{u, u} l E L ι (W true) (ME.calculus true) ρ) (f : W true ⟶ W false) (_hX : IsUnit (l : Γ(W true, ⊤))) (_hY : IsUnit (l : Γ(W false, ⊤))) (P : (integralOperationsGoodComplex.{u, u} l E (W false)).FullSubcategory) (K : sfIntegralConstructibleCategory l E (W false)) (eP : DerivedCategory.Q.obj P.obj ≅ K.obj) (C : CochainComplex (coefficientSequenceModules.{u, u} l E (W false)) ℤ) (eC : (ME.calculus false).reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C) (κ : ∀ n : ℕ, ((coefficientSequenceEvaluation.{u, u} l E (W false) n).mapHomologicalComplex (.up ℤ)).obj C ≅ (unrestrictedIntegralFiniteComplex.{u, u} l E (W false) n).obj P.obj) (hp : CoefficientReductionPresentation.{u, u} l E (W false) (ME.calculus false).toCoefficientDerivedSystemReduction P.obj P.property.1 C eC κ) (hc : IsIntegralComparisonPresentationCoherent.{u, u} l E (W false) (ME.calculus false) P.obj C eC κ) (q : (((coefficientSequenceRestriction.{u, u} l L (W true)).mapHomologicalComplex (.up ℤ)).obj ((((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex (.up ℤ)).obj C)))).asFunctor ≅ (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj (((integralOrdinaryScalar l E L ι (W false)).mapHomologicalComplex (.up ℤ)).obj P.obj)) (hF : IsSfDerivedComplete l E (W true) ((integralDerivedPullback.{u, u} l E f).obj K.obj)) : (SX.realization.hom.app ((integralDerivedPullback.{u, u} l E f).obj K.obj) ≫ (coefficientSequenceLimit.{u, u} l L (W true)).map ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map (pullbackReduction l E W ME f K.obj))) ≫ scalarPullbackRoosCoordinate l E L ι f P C (ME.calculus false) ρ K.obj eP eC q = (scalarCompletionIso l E L ι (W true) ((integralDerivedPullback.{u, u} l E f).obj K.obj) hF).inv ≫ (integralOrdinaryDerivedScalar l E L ι (W true)).map ((integralDerivedPullback.{u, u} l E f).map eP.inv) ≫ (integralOrdinaryDerivedScalar l E L ι (W true)).map ((integralDerivedPullbackComparison.{u, u} l E f).hom.app P) ≫ (integralOrdinaryScalar l E L ι (W true)).mapDerivedCategoryFactors.hom.app ((integralOperationsPullbackComplexFunctor.{u, u} l E f).obj P.obj) ≫ DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj)",
+  "statement": "theorem scalarPullbackRightRoos_normalized (W : Bool → Scheme.{u})\n    (ME : CompletedOperations.Models.{u, u} l E W)\n    (ρ : IntegralComparisonRoosModel.{u, u} l L (W true))\n    (SX : IntegralComparisonScalarModel.{u, u} l E L ι (W true) (ME.calculus true) ρ)\n    (f : W true ⟶ W false)\n    (_hX : IsUnit (l : Γ(W true, ⊤))) (_hY : IsUnit (l : Γ(W false, ⊤)))\n    (P : (integralOperationsGoodComplex.{u, u} l E (W false)).FullSubcategory)\n    (K : sfIntegralConstructibleCategory l E (W false))\n    (eP : DerivedCategory.Q.obj P.obj ≅ K.obj)\n    (C : CochainComplex (coefficientSequenceModules.{u, u} l E (W false)) ℤ)\n    (eC : (ME.calculus false).reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation.{u, u} l E (W false) n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex.{u, u} l E (W false) n).obj P.obj)\n    (hp : CoefficientReductionPresentation.{u, u} l E (W false)\n      (ME.calculus false).toCoefficientDerivedSystemReduction P.obj P.property.1 C eC κ)\n    (hc : IsIntegralComparisonPresentationCoherent.{u, u} l E (W false)\n      (ME.calculus false) P.obj C eC κ)\n    (q :\n    (((coefficientSequenceRestriction.{u, u} l L (W true)).mapHomologicalComplex (.up ℤ)).obj\n      ((((integralComparisonSequencePullback.{u, u} l L f).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel.{u, u} l E L ι (W false)).E.mapHomologicalComplex\n          (.up ℤ)).obj C)))).asFunctor ≅\n      (integralOperationsPullbackTowerFunctor.{u, u} l L f).obj\n        (((integralOrdinaryScalar l E L ι (W false)).mapHomologicalComplex (.up ℤ)).obj P.obj))\n    (hq : ScalarPullbackQuotientFormula l E L ι f P C κ q)\n    (hF : IsSfDerivedComplete l E (W true)\n      ((integralDerivedPullback.{u, u} l E f).obj K.obj)) :\n    (SX.realization.hom.app ((integralDerivedPullback.{u, u} l E f).obj K.obj) ≫\n      (coefficientSequenceLimit.{u, u} l L (W true)).map\n        ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map\n          (pullbackReduction l E W ME f K.obj))) ≫\n      scalarPullbackRoosCoordinate l E L ι f P C (ME.calculus false) ρ K.obj eP eC q =\n    (scalarCompletionIso l E L ι (W true)\n      ((integralDerivedPullback.{u, u} l E f).obj K.obj) hF).inv ≫\n      (integralOrdinaryDerivedScalar l E L ι (W true)).map\n        ((integralDerivedPullback.{u, u} l E f).map eP.inv) ≫\n      (integralOrdinaryDerivedScalar l E L ι (W true)).map\n        ((integralDerivedPullbackComparison.{u, u} l E f).hom.app P) ≫\n      (integralOrdinaryScalar l E L ι (W true)).mapDerivedCategoryFactors.hom.app\n        ((integralOperationsPullbackComplexFunctor.{u, u} l E f).obj P.obj) ≫\n      DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj)",
   "branch": "sheaf-dag",
   "by": "G7",
   "date": "2026-10-28"
@@ -114,11 +125,56 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G7",
-  "result": "pass",
-  "landing": "20261028T020430-L-2509865",
+  "reviewer": "C-85075",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261028T055603-L-770190",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: scalarPullbackRightRoos_normalized (+hq) and new scalarPullbackCompletionRoos against nodes stage3-pur-scalar-pullback-right-roos-normalized / lem-pur-scalar-pullback-completion-roos, caller ScalarPullbackRightRoos, scalarPullbackRoosCoordinate definition (linear in q)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "A5 stage 2",
+  "old_statement": "Before the explicit nested quotient formula, the normalized scalar realization and pullback model compose with the fixed Roos coordinate map to the ordinary scalar/pullback chain through the completion inverse. This normalization equation uses the coherent presentation and q but does not use the separate quotient-generator formula hq.",
+  "what": "STATEMENT-DISPUTED: the original equation quantified over arbitrary q, although only the left side depends on q. Postcomposing q with negation negates that side. For identity pullback and coefficients on a nonempty geometric point, the nonzero completed rank-one object rules out both signs having the same fixed ordinary chain. Restore the tensor-unit formula hq that the parent already assumes. This repairs a false split; it does not prove the old statement.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+   "place": "Tags 06YY (derived tensor), 07A4 (pullback and tensor), 0941 (derived limits); the normalization part of step 8 of lem-pur-scalar-extension-tower-coherence."
+  },
+  "citers": [
+   {
+    "id": "stage3-pur-scalar-pullback-right-roos",
+    "holds": true,
+    "note": "The right-route statement already assumes ScalarPullbackQuotientFormula; pass its hq to the corrected normalization theorem."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Instantiate the normalized pullback model ME and the normalized scalar model SX on a flat-term K-flat representative of the coherent presentation. Transpose their counit equations through pullbackReduction and the scalar cochain counit; naturality of the Roos bridge gives the displayed equation before applying the separate quotient formula.",
+    "uses": [
+     "def-trf-integral-comparison-realization-models",
+     "lem-trf-coherent-primitive-reduction-presentation",
+     "lem-pc-kflat-resolution",
+     "def-trf-integral-comparison-sequence-systems"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Transport the resulting equation along eP and the ordinary derived scalar/pullback comparison. The resulting tail is the explicit ordinary scalar/pullback chain ending in the finite-level map induced by q.",
+    "uses": [
+     "def-pod-scalar-completion-tensor-comparisons",
+     "stage3-pur-scalar-pullback-roos-coordinates"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-trf-integral-comparison-realization-models",
+   "lem-trf-coherent-primitive-reduction-presentation",
+   "lem-pc-kflat-resolution",
+   "def-trf-integral-comparison-sequence-systems",
+   "def-pod-scalar-completion-tensor-comparisons",
+   "stage3-pur-scalar-pullback-roos-coordinates"
+  ]
  }
 }

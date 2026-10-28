@@ -83,8 +83,8 @@ theorem scalarPullbackRightRoos (W : Bool → Scheme.{u})
           (pullbackReduction l E W ME f K.obj))) ≫
       scalarPullbackRoosCoordinate l E L ι f P C (ME.calculus false) ρ K.obj eP eC q =
     scalarPullbackRoosChain l E L ι f P K.obj eP hF := by
-  have _hq := hq
   simpa [scalarPullbackRoosChain, Category.assoc] using
-    (scalarPullbackRightRoos_normalized l E L ι W ME ρ SX f _hX _hY P K eP C eC κ hp hc q hF)
+    (scalarPullbackRightRoos_normalized l E L ι W ME ρ SX f _hX _hY P K eP C eC κ hp hc
+      q hq hF)
 
 end WeilConjectures.ScalarExtensionTower
