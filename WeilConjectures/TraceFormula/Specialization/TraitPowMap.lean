@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.RingTheory.PowerSeries.Expand
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.TraceFormula.Specialization.Trait
 
 /-!
@@ -27,42 +27,6 @@ geometric generic point (`AlgebraicGeometry.traitGenericPoint_traitPowMap`).
 universe u
 
 open CategoryTheory
-
-namespace PowerSeries
-
-variable {R : Type*} [CommRing R] (m : ℕ) (hm : m ≠ 0)
-
-/-- Every power series is `∑_{r < m} t^r g_r(t^m)`, with `g_r = ∑ₙ a_{mn+r} tⁿ`. -/
-lemma eq_sum_X_pow_mul_expand (f : PowerSeries R) :
-    f = ∑ r ∈ Finset.range m,
-      X ^ r * expand m hm (mk fun n ↦ coeff (m * n + r) f) := by
-  ext N
-  rw [map_sum, Finset.sum_eq_single (N % m)]
-  · rw [coeff_X_pow_mul', if_pos (Nat.mod_le N m), coeff_expand]
-    have hd : m ∣ N - N % m := Nat.dvd_sub_mod N
-    rw [if_pos hd, coeff_mk]
-    congr 1
-    rw [Nat.mul_div_cancel' hd, Nat.sub_add_cancel (Nat.mod_le N m)]
-  · intro r hr hrN
-    rw [coeff_X_pow_mul']
-    split_ifs with hrle
-    · rw [coeff_expand, if_neg]
-      intro hd
-      apply hrN
-      have h2 : N % m = r % m := ((Nat.modEq_iff_dvd' hrle).2 hd).symm
-      rw [h2, Nat.mod_eq_of_lt (Finset.mem_range.1 hr)]
-    · rfl
-  · intro h
-    exact absurd (Finset.mem_range.2 (Nat.mod_lt N (Nat.pos_of_ne_zero hm))) h
-
-/-- `expand m` is injective. -/
-lemma expand_injective : Function.Injective (expand m hm (R := R)) := by
-  intro f g h
-  ext n
-  have := congrArg (coeff (m * n)) h
-  rwa [coeff_expand_mul, coeff_expand_mul] at this
-
-end PowerSeries
 
 namespace AlgebraicGeometry
 

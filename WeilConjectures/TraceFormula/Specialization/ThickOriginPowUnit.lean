@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
-public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowPoint
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedUnit
 
@@ -128,21 +129,11 @@ end PowModel
 
 section GenericUnit
 
-/-- If `F(a ≫ b ≫ c) = F(d ≫ e)` with `b`, `c`, `F d`, `e` invertible, then `F a` is invertible. -/
-lemma isIso_map_of_map_comp_eq {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {P Q R S T : C} {a : P ⟶ Q} {b : Q ⟶ R} {c : R ⟶ S} {d : P ⟶ T} {e : T ⟶ S}
-    (h : a ≫ b ≫ c = d ≫ e) [IsIso b] (hc : IsIso c) (hd : IsIso (F.map d)) [IsIso e] :
-    IsIso (F.map a) := by
-  have h' := congr(F.map $h)
-  simp only [Functor.map_comp] at h'
-  have : IsIso (F.map a ≫ F.map b ≫ F.map c) := by rw [h']; infer_instance
-  exact IsIso.of_isIso_comp_right (F.map a) (F.map b ≫ F.map c)
-
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- If a morphism of models `M ⟶ N` over the identity of `X` has invertible morphisms of total spaces
-and of geometric generic fibres, and its morphism of special fibres is a universal homeomorphism,
-the specialization unit of `N` is invertible as soon as that of `M` is. -/
+/-- If a morphism of models `M ⟶ N` over the identity of `X` has invertible morphisms of total
+spaces and of geometric generic fibres, and its morphism of special fibres is a universal
+homeomorphism, the specialization unit of `N` is invertible as soon as that of `M` is. -/
 theorem NearbyCyclesModel.isIso_unit_of_hom {X X' Y' : Scheme.{u}} {M : NearbyCyclesModel X X'}
     {N : NearbyCyclesModel X Y'} {c : X' ⟶ Y'} (ψ : M.Hom N (𝟙 X) c) [IsIso ψ.total]
     [IsIso ψ.generic] [IsUniversalHomeomorphism c] (hM : IsIso (M.unit Λ)) :
@@ -164,7 +155,15 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_id_unit (X : Scheme.{u}) :
 /-- **Restricted specialization unit from the proper exchange**: let `φ : M ⟶ N` be a morphism of
 models over the identity of `X`, with morphism `f'` of special fibres, whose pushforward exchange
 is invertible at the unit and such that the specialization unit of `M` is invertible. If the unit
-`Λ ⟶ Rf'_* Lf'^* Λ` becomes invertible after `Le^*`, so does the specialization unit of `N`. -/
+`Λ ⟶ Rf'_* Lf'^* Λ` becomes invertible after `Le^*`, so does the specialization unit of `N`.
+Indeed, by the unit identity of the pushforward exchange the square
+```
+Λ --------σ_N--------> Ψ_N Λ --Ψ_N(η)--> Ψ_N R𝟙_* Λ --χ--> Rf'_* Ψ_M Λ
+|η_{f'}                                                       ‖
+v                                                             ‖
+Rf'_* Lf'^* Λ ------------Rf'_*(Ψ_M(ε) ∘ σ_M ∘ ε⁻¹)------> Rf'_* Ψ_M Λ
+```
+commutes, and all its morphisms except `σ_N` are invertible after `Le^*`. -/
 theorem NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange {X X' Y' T : Scheme.{u}}
     {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel X Y'} {f' : X' ⟶ Y'}
     (φ : M.Hom N (𝟙 X) f')
@@ -177,7 +176,14 @@ theorem NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange {X X' Y' T
     (φ.unit_comp_map_unit_comp_pushforwardExchange_app Λ) hχ he
 
 /-- Restriction along `r ≫ e` with `r` a universal homeomorphism detects isomorphisms after
-restriction along `e`. -/
+restriction along `e`: in the commutative square
+```
+L(r ≫ e)^* K --L(r ≫ e)^* g--> L(r ≫ e)^* L
+|≅                              |≅
+v                               v
+Lr^* Le^* K ---Lr^* Le^* g----> Lr^* Le^* L
+```
+the top map is invertible, hence so is the bottom one, and `Lr^*` reflects isomorphisms. -/
 lemma isIso_leftDerivedUpperStar_map_of_comp {A B C : Scheme.{u}} (r : A ⟶ B) (e : B ⟶ C)
     [IsUniversalHomeomorphism r]
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology C) Ab.{u + 1}) (condensedRingObj Λ C))}
@@ -237,14 +243,16 @@ instance (m : ℕ) [NeZero m] :
     (polyAffineThickOrigin k m)) ⊥ k').hom.isHomeomorph.injective (Subsingleton.elim _ _)⟩
 
 /-- The rational point `w = c(e(0))` of the thickened special fibre of the power model. -/
-noncomputable abbrev thickOriginPowPoint : Spec (.of k') ⟶ (thickOriginPowSpecialFibre k k' hm).left :=
+noncomputable abbrev thickOriginPowPoint :
+    Spec (.of k') ⟶ (thickOriginPowSpecialFibre k k' hm).left :=
   thickOriginZeroSectionPoint k k' 1 one_pos ≫
     (zeroSectionSpecialFibreMap (polyAffine k 1) (polyAffineThickOrigin k 1) k').left ≫
       thickOriginSpecialFibreToPow k k' hm
 
 /-- Its image `o = ν_s(w)` in the special fibre of `𝒟_{V(x^m)}`. -/
 noncomputable abbrev thickOriginPowImagePoint :
-    Spec (.of k') ⟶ (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').left :=
+    Spec (.of k') ⟶
+      (deformationSpecialFibre (polyAffine k 1) (polyAffineThickOrigin k m) k').left :=
   thickOriginPowPoint k k' hm ≫ (thickOriginPowSpecialFibreMap k k' hm).left
 
 lemma thickOriginSpecialFibreToPow_powSpecialFibreMap :
@@ -279,7 +287,8 @@ lemma thickOriginPowImagePoint_eq :
     (thickOriginZeroSectionPoint k k' 1 one_pos (IsLocalRing.closedPoint k'))
   have hr : thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)
       (IsLocalRing.closedPoint k') = ζ := Subsingleton.elim _ _
-  have hc (x) : (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginSpecialFibreToPow k k' hm x) =
+  have hc (x) :
+      (thickOriginPowSpecialFibreMap k k' hm).left (thickOriginSpecialFibreToPow k k' hm x) =
       deformationSpecialFibrePowMap k' hm (polyAffine k 1) (polyAffineThickOrigin k 1)
         (polyAffineThickOrigin k m) (thickOriginPowMap k m) (affineLinePowMap k m)
         (deformationSpacePowMap_deformationSpaceToAffineLine _)
@@ -449,7 +458,8 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin (hm : m ≠ 0) :
     (thickOriginPowModelHom k k' hm) hχ hM (thickOriginPowImagePoint k k' hm) he
   rw [thickOriginPowImagePoint_eq] at ho
   have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm) ≫
-      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom) := by
+      (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥
+        k').hom) := by
     rw [constantFamilySpecialPoint_hom]; infer_instance
   have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm)) :=
     IsUniversalHomeomorphism.of_comp _

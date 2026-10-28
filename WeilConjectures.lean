@@ -14055,7 +14055,6 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPow
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowModel
-public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowPoint
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedUnit

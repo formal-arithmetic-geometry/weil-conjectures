@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.RingTheory.ExtendedReesAlgebraPow
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
 # The power map of deformation spaces
@@ -39,19 +40,6 @@ Let `I, J` be ideal sheaves on a scheme `X` with `J ⊆ I^m` on every affine ope
 universe u
 
 open CategoryTheory Limits Opposite
-
-namespace CommRingCat
-
-/-- A variant of `CommRingCat.isPushout_quotient` with the extended ideal given up to equality. -/
-lemma isPushout_quotient_of_map_eq {R S : CommRingCat.{u}} (φ : R ⟶ S) (K : Ideal R)
-    {L : Ideal S} (hL : K.map φ.hom = L) :
-    IsPushout (ofHom (Ideal.Quotient.mk K)) φ
-      (ofHom (Ideal.quotientMap L φ.hom (hL ▸ Ideal.le_comap_map)))
-      (ofHom (Ideal.Quotient.mk L)) := by
-  subst hL
-  exact isPushout_quotient φ K
-
-end CommRingCat
 
 namespace AlgebraicGeometry
 
