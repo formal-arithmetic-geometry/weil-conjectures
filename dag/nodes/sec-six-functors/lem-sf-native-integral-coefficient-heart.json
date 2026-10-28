@@ -14,11 +14,13 @@
  ],
  "proof": [
   {
-   "text": "The given coefficient restriction is along an isomorphism. On the stratification and covering sieves in hN, its inverse identifies N with the same finite integral presentations over the detailed coefficient. The continuous integral module encoding carries these models to locally finitely presented internal modules on these strata.",
+   "text": "Take M to be the inverse image of N under the fixed integralSectionFunctor equivalence. Its counit identifies H(M) with N. Transport the given stratified models across this isomorphism, then apply integralSectionLocalModels. Since X is Noetherian, the constant-model predicate is its finite-stratification branch. The proved coefficient-generic helper constructible_of_finiteConstantStratified in IntegralLfpConstantModelComparison converts these constant local presentations into internal constructibility. Only this easy direction is used, not the integral-specific converse.",
    "uses": [
-    "def-sfb-integral-completed-coefficient-transport",
     "def-weil-pbc-integral-stratified-perfect-models",
-    "lem-weil-pbc-continuous-integral-model-encoding-universes"
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-sfb-integral-section-action-transport",
+    "lem-sfb-integral-section-local-models",
+    "lem-sfb-integral-lfp-constant-model-comparison"
    ],
    "elementary": false,
    "source": {
@@ -27,11 +29,13 @@
    }
   },
   {
-   "text": "Use the normalizations in C to identify the coefficient action with integral inclusion, localization and the embedding i. The internal-section scalar-adjunction comparison identifies ordinary extension with internal extension, by b tensor m mapping to the identical balanced tensor. Such extension commutes with actual-ring inverse image and with slice restriction, by uniqueness of the scalar-extension left adjoint. It preserves finite presentations and the same local covering families, so the resulting internal algebraic-closure module is constructible on the original finite stratification.",
+   "text": "Compose integralSectionRingIso.hom with C.integralMap and forget the section-ring map to an internal abelian-sheaf map a. Its unit and multiplication identities follow pointwise from map_one and map_mul; hence a is a ring-object map. sectionModuleComapIso, the definition of integralSectionFunctor and pbcRestrictComp give the restriction square Mod.comap(a) followed by H isomorphic to the native section equivalence followed by restriction along C.integralMap. The inverse factors of the section-ring isomorphism cancel.",
    "uses": [
+    "def-sfb-integral-section-action-transport",
     "def-sf-locally-finite-adic-realization-data",
-    "lem-sfb-internal-section-scalar-adjunction",
-    "lem-sfb-locally-finitely-presented-extend-scalars"
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": false,
    "source": {
@@ -40,9 +44,25 @@
    }
   },
   {
-   "text": "The native encoding is fully faithful and reflects native constructibility. Apply its constructibility equivalence to the internal local models, and use the displayed ordinary isomorphism to transfer the result to F. Concretely, each scalar finite presentation becomes a finite-dimensional vector space after localization and then a finite free native module after extension along i. Pure torsion gives rank zero; an empty stratum or empty scheme is allowed.",
+   "text": "Take the inverse adjunction mate of the restriction square under the internal and ordinary extension/restriction adjunctions. Both vertical section functors are equivalences, so isIso_inverseMate_of_equivalences makes this mate invertible. Its inverse identifies internal extension followed by native sections with H followed by ordinary extension. Full faithfulness of the native section equivalence, the counit H(M) isomorphic to N and the supplied e lift to an isomorphism between the underlying abelian-module sheaf of F and Mod.extendScalars(a)(M).",
    "uses": [
-    "def-sf-locally-finite-adic-realization-data",
+    "lem-stage3-inverse-mate-equivalences",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-sf-locally-finite-adic-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Apply the proved ordinary constructible_extend helper in BoundedConstructibleExtendScalars to the internal constructible M. It preserves finite presentations on the same finite stratification and requires no flatness or derived assertion. Transfer constructibility across the lifted isomorphism, and restrict along NativeEncoding.coefficientIso using constructible_comap. Finally encoding_constructible_iff reflects this constructibility to F. These operations also cover empty schemes and strata, zero modules, and torsion local models; no positive-rank choice is made.",
+   "uses": [
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sfb-locally-finitely-presented-extend-scalars",
+    "lem-weil-pbc-module-constructible-pullback",
     "lem-sf-native-adic-encoding-ordinary-operations",
     "lem-sf-native-adic-encoding-constructibility"
    ],
@@ -54,19 +74,27 @@
   }
  ],
  "proof_deps": [
-  "def-sfb-integral-completed-coefficient-transport",
   "def-weil-pbc-integral-stratified-perfect-models",
-  "lem-weil-pbc-continuous-integral-model-encoding-universes",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-sfb-integral-section-action-transport",
+  "lem-sfb-integral-section-local-models",
+  "lem-sfb-integral-lfp-constant-model-comparison",
   "def-sf-locally-finite-adic-realization-data",
-  "lem-sfb-internal-section-scalar-adjunction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
   "lem-sfb-locally-finitely-presented-extend-scalars",
+  "lem-weil-pbc-module-constructible-pullback",
   "lem-sf-native-adic-encoding-ordinary-operations",
   "lem-sf-native-adic-encoding-constructibility"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent T1",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+  "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2).",
+  "note": "Complete Lean proof using fixed section equivalences, inverse mates, and already proved ordinary constructibility helpers; no new intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -138,9 +166,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261028T055832-L-815120",
+  "landing": "20261028T072448-L-1951206",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
