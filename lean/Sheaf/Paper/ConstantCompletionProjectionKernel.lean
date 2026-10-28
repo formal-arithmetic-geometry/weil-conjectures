@@ -56,6 +56,8 @@ theorem flat_and_quotients_projection_kernel (J : GrothendieckTopology C) (A : T
           (algebraSection (coefficientMap J A I) a).val (op U))) := by
   let S := finiteSystemUnder J A I
   let : HasLimit S := HasLimit.mk ⟨projectionCone J A I, projectionConeIsLimit J A I⟩
+  let : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A S n U) :=
+    finiteSystemModule J A I
   have hprops := finiteSystem_properties J A I
   let : ∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1))
       (adicTerm J A S n U) := hprops.1

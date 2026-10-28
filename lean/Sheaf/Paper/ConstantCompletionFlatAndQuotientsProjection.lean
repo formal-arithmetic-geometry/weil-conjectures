@@ -23,9 +23,8 @@ theorem flat_and_quotients_projection (J : GrothendieckTopology C) (A : Type u)
         Ideal.span (Set.range (fun a : ↥(I ^ (n + 1)) ↦
           (algebraSection (coefficientMap J A I) a).val (op U))) := by
   let S := finiteSystemUnder J A I
-  have hmods := finiteSystem_module_instances J A I
   letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A S n U) :=
-    Classical.choice hmods
+    finiteSystemModule J A I
   have hprops := finiteSystem_properties J A I
   letI : ∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1))
       (adicTerm J A S n U) := hprops.1

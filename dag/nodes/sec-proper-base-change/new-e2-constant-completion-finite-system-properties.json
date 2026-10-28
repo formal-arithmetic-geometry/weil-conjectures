@@ -2,7 +2,7 @@
  "id": "new-e2-constant-completion-finite-system-properties",
  "kind": "lemma",
  "title": "Flatness and reduction data for the finite constant completion tower",
- "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)] : (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
+ "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) : letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U) := finiteSystemModule J A I; (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 093M, sectionwise completion argument"
@@ -10,19 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the sectionwise flat finite quotient tower argument to the finite constant coefficient system.",
+   "text": "Install the canonical quotient-section module structures finiteSystemModule (defined in this module from the sheafification unit of the constant quotient presheaf). Prove the scalar tower directly from naturality of the sheafification unit. Apply the strictly smaller flatness-and-reduction theorem to obtain flatness and tensor reduction. Prove transition surjectivity by splitting the surjective quotient ring map on underlying types and transporting the sectionwise splitting through constant sheafification.",
    "uses": [
-    "new-e2-constant-completion-finite-system-modules",
-    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+    "new-p4-constant-completion-finite-system-flat-and-reduction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-e2-constant-completion-finite-system-modules",
-  "lem-weil-pbc-sectionwise-adic-algebra-limit"
+  "new-p4-constant-completion-finite-system-flat-and-reduction"
  ],
- "proof_origin": "stage-3 decomposition",
+ "proof_origin": "stage-3 proof from canonical quotient module structures; downstream adaptation required by statement repair",
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "open",
@@ -39,9 +37,10 @@
   "file": "lean/Sheaf/Paper/ConstantCompletionFiniteSystemProperties.lean",
   "declaration": "CategoryTheory.ConstantCompletion.finiteSystem_properties",
   "declarations": [
+   "CategoryTheory.ConstantCompletion.finiteSystemModule",
    "CategoryTheory.ConstantCompletion.finiteSystem_properties"
   ],
-  "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)] : (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
+  "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) : letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U) := finiteSystemModule J A I; (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
   "branch": "sheaf-dag",
   "by": "E2",
   "date": "2026-10-28"
@@ -63,19 +62,49 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
-  "result": "pass",
-  "landing": "20261027T234143-L-16144",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.ConstantCompletion.finiteSystem_properties"
+  "reviewer": "C-9be59",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261028T020622-L-2530190",
+  "kind": "interface",
+  "note": "independent cc review: finiteSystem_properties repaired statement + proof and split node finite-system-flat-and-reduction against node, old false statement, sectionwise_adic_algebra_limit hypotheses, and the 2 forced importer adaptations"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "P4 stage 3",
+  "old_statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)] : (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
+  "what": "The arbitrary module family is replaced by a `letI` installing the canonical `finiteSystemModule J A I`, induced by the quotient constant-sheaf sheafification units. The four conclusions are unchanged under this canonical action. The old statement is false because arbitrary module structures need not agree with the canonical quotient algebra action.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 093M and 0912; canonical quotient section action"
+  },
+  "old_proof": [
+   {
+    "text": "Apply the sectionwise flat finite quotient tower argument to the finite constant coefficient system.",
+    "uses": [
+     "new-e2-constant-completion-finite-system-modules",
+     "lem-weil-pbc-sectionwise-adic-algebra-limit"
+    ],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "CategoryTheory.ConstantCompletion.finiteSystem_properties"
+  "old_proof_deps": [
+   "new-e2-constant-completion-finite-system-modules",
+   "lem-weil-pbc-sectionwise-adic-algebra-limit"
+  ],
+  "citers": [
+   {
+    "id": "new-e2-constant-completion-projection-kernel",
+    "holds": true,
+    "note": "Applies finiteSystem_properties to obtain the scalar tower, flatness and reduction hypotheses."
+   },
+   {
+    "id": "new-h2-constant-completion-projection",
+    "holds": true,
+    "note": "Consumes the finite-system properties in the sectionwise completion projection argument."
+   }
   ]
  }
 }
