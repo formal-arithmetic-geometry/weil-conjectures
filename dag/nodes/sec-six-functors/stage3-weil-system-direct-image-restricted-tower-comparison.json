@@ -1,0 +1,156 @@
+{
+ "id": "stage3-weil-system-direct-image-restricted-tower-comparison",
+ "kind": "statement",
+ "title": "The restricted tower of the actual system direct image",
+ "statement": "Fix a prime l and a finite extension E of Q_l, schemes X,Y in universe u, a morphism f:X→Y, the actual additive sequence direct image [def-trf-integral-comparison-sequence-systems], K-injective resolutions of its source system category, a normalized coefficient derived system calculus S [lem-coef-derived-system-evaluation-calculus], and an arbitrary K in D(scalarReductionSource l E X). Write N=R f_*(S.reduction(K)) in the derived category of actual coefficient systems and Z=coefficientSequenceDerivedRestriction(N) in the derived category of towers over completed integral coefficients [def-coef-ringed-sequence-site]. For every tower complex T and representing isomorphism e:Q(T)≅Z, the evaluated localized tower T.asFunctor ⋙ Q is isomorphic, as an N-op diagram, to Functor.ofOpSequence(sfDirectImageTransition l E f K). Its nth object is the restricted finite derived image sfDirectImageTerm l E f K n [def-weil-derived-direct-image]. This asserts neither existence nor normalization of any limit, product, projection, boundary or distinguished triangle.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23--24; Stacks sites-cohomology.tex Tag 0D6E and more-algebra.tex Tag 06YY."
+ },
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative P of K. The reductionModel field of the given coefficient calculus identifies a strict system complex C representing S.reduction(Q P), simultaneously at all finite levels. Its transition equation identifies every quotient arrow with ordinary coefficient reduction, not merely its object at each level.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23--24; Stacks sites-cohomology.tex Tag 0D6E and more-algebra.tex Tag 06YY."
+   }
+  },
+  {
+   "text": "Apply actual sequence-site direct image after a single K-injective resolution of C. Compare completed scalar restriction before and after the image using the diagram ring restriction/direct-image square, keeping its common-composite resolution normalization. The ordinary square is identity on sections and respects every horizontal quotient arrow. Derived composition therefore gives simultaneous finite direct-image comparisons.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-diagram-ring-restriction-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to the sequence ringed topoi and exact scalar restrictions."
+   }
+  },
+  {
+   "text": "On P the input quotient arrow sends s tensor x to rho(s) tensor x. The representative characterization of sfDerivedReductionTransition identifies it with that map. The normalized derived coefficient restriction comparison is sfDerivedRestrictionComparison. Thus transporting each image arrow gives its inverse at n+1, followed by the completed derived image of the input transition, followed by its comparison at n: exactly sfDirectImageTransition. Assemble these compatible component isomorphisms as an isomorphism of N-op diagrams.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23--24; Stacks sites-cohomology.tex Tag 0D6E and more-algebra.tex Tag 06YY."
+   }
+  },
+  {
+   "text": "Exact simultaneous evaluation takes quasi-isomorphisms of strict tower complexes to objectwise isomorphisms after localization. Hence it factors through the derived category of strict towers. Its factorization transports the comparison along the representing isomorphism e from any T. There is no choice of an inverse limit or of a triangle in this argument. For zero K or an empty scheme the construction is the same diagram of zero objects; no nonvanishing or boundedness is required.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits: exact level evaluation on the sequence site; Tag 0D6E for compatibility with the actual direct image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-direct-image",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "from-document",
+  "group": "B8",
+  "date": "2026-10-28",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and Lemma 4.10, printed pp. 23--24; Stacks sites-cohomology.tex Tag 0D6E and more-algebra.tex Tag 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of a system of sheaves commutes with evaluation and restriction of scalars at every coefficient level",
+   "results": "Eight hits: ordinary presheaf/module pushforward and scalar restriction, and sheaf evaluation; no derived simultaneous comparison with these coefficient transitions.",
+   "date": "2026-10-28",
+   "verdict": "Ordinary ingredients only; project derived restriction and evaluation normalization is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "No hits; the service reports unknown identifier NatIso.ofComponents. Local Mathlib OfSequence APIs provide generic diagram assembly only.",
+   "date": "2026-10-28",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ee]valuation|[Ee]valuation.*derived",
+   "results": "No hits in Mathlib/Algebra/Homology. Project OrdinaryPullbackEvaluationCalculus supplies only the ordinary sectionwise identity; CompletedCoefficientStrictImage supplies the general derived diagram square but not its identification with the sf coefficient tower.",
+   "date": "2026-10-28",
+   "verdict": "No exact specialized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemDirectImageRoosExistence",
+  "date": "2026-10-28",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "The finite tower identification in the direct-image Roos construction, before taking the derived inverse limit.",
+   "via": [
+    "lem-weil-system-direct-image-effectivity",
+    "lem-weil-system-direct-image-roos-presentation",
+    "stage3-weil-system-direct-image-roos-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemDirectImageRestrictedTowerComparison",
+  "file": "lean/Sheaf/Paper/SystemDirectImageRestrictedTowerComparison.lean",
+  "declaration": "WeilConjectures.systemDirectImage_restrictedTowerComparison",
+  "statement": "theorem systemDirectImage_restrictedTowerComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [(integralComparisonSequenceDirectImage l E f).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (T : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E Y) ℤ)\n    (e : DerivedCategory.Q.obj T ≅ (coefficientSequenceDerivedRestriction l E Y).obj\n      ((integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj\n        (S.reduction.obj K))) :\n    Nonempty (T.asFunctor ⋙ DerivedCategory.Q ≅\n      Functor.ofOpSequence (sfDirectImageTransition l E f K))",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261028T055618-L-776742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261028T055618-L-776742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

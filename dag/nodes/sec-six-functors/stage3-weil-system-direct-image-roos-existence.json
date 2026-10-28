@@ -15,26 +15,40 @@
  },
  "proof": [
   {
-   "text": "Choose one K-injective representative of the reduced object. Apply the project derived tower-limit theorem to the sectionwise direct image, and transport its product and triangle through the canonical finite restriction/direct-image comparisons. The resulting transition is the recorded sfDirectImageTransition.",
+   "text": "Apply the generic strict-tower construction (UniverseProof.evaluationData and CoreWork.natural_roos in RingedStrictTowerHomotopyLimitOfUniverses) to the specified canonical coefficientConstantTowerLimit. Its unit is the canonical rightDerivedFunctorUnitQ, invertible on K-injective complexes. Grothendieck module sheaves and the derived product construction supply all countable products. This gives the actual total-limit vertex and a Milnor triangle for the simultaneous evaluated tower V(Z).",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "stage3-pur-canonical-tower-roos-comparison"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 and 0941, derived limits and the strict-tower Milnor triangle; Zheng Construction 4.1 and Lemma 4.10 for the coefficient tower."
    }
+  },
+  {
+   "text": "Take a complex T representing Z, the exact completed-coefficient restriction of the actual system direct image. The restricted-tower comparison supplies a natural isomorphism T.asFunctor followed by localization to the finite direct-image tower. Compose with the evaluation factorization and the chosen representing isomorphism to identify the whole tower V(Z) with that tower.",
+   "uses": [
+    "stage3-weil-system-direct-image-restricted-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the component isomorphisms through the product. Naturality at adjacent arrows makes this product isomorphism intertwine the two one-minus-shift endomorphisms. Transport the distinguished triangle with identity on its first vertex and this product isomorphism on both other vertices. The resulting projection is p followed by the product isomorphism, and its boundary is the inverse product isomorphism followed by delta. This explicitly constructs SfIntegralDirectImage with its required recorded transition; its vertex is definitionally the coefficientSequenceLimit of N, so the final comparison is identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "stage3-pur-canonical-tower-roos-comparison"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "stage3-weil-system-direct-image-restricted-tower-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941."
+  "kind": "from-document",
+  "group": "B8",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941, derived limits and the strict-tower Milnor triangle; Zheng Construction 4.1 and Lemma 4.10 for the coefficient tower."
  },
  "mathlib_searches": [
   {
@@ -100,12 +114,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "B8",
   "result": "pass",
-  "landing": "20261027T180459-L-3865023",
+  "landing": "20261028T055618-L-776742",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
