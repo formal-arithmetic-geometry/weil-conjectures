@@ -238,6 +238,8 @@ def candidates(cache: dict) -> list[dict]:
                 continue  # dedicated reader/result has not accepted this exact repair
         if returned_head(g, head):
             continue        # this head was returned; the group pushes a new one
+        if iface_routed(g, item, head):
+            continue        # 2026-10-28 (the owner): a statement-changing delivery goes to the interface repository
         heads.add(head)
         if qwaits and qwait.holding(head, qwaits, qrows):
             continue        # 2026-10-28: an import is still quarantined (tools/quarantine_wait.py); not checked again yet
@@ -264,6 +266,16 @@ def candidates(cache: dict) -> list[dict]:
                 p.unlink(missing_ok=True)               # the branch is gone
     out.sort(key=lambda c: (not bool((read_json(marker(c["group"], c["item"])) or {}).get("repair_priority")), c["group"], c["item"]))
     return freeze_filter(out)
+
+
+def iface_routed(g, item, head) -> bool:
+    """2026-10-28 (the owner): a delivery the review agent judged statement- or interface-changing does not land in main;
+    it is applied in the interface repository and reaches main with its merge (tools/iface_repo.py; mode `on` only)."""
+    try:
+        import iface_repo
+        return iface_repo.routed_head(g, item, head)
+    except Exception:  # noqa: BLE001  (a failure keeps the ordinary path: the global build verifies the landing)
+        return False
 
 
 FROZEN: dict = {}
@@ -893,6 +905,12 @@ def land_one(plan: dict, batch_id: str) -> dict:
                 p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
         for rel, text in roots_add.items():
             (li.LEAN / rel).write_text(text)
+        try:     # 2026-10-28 (set builds): a pass of other texts than the ones landing now is withdrawn
+            import setbuild
+            setbuild.landed_text_check(head, {m["file"][len("lean/"):]: m["text"] for m in mods
+                                              if m["file"].startswith("lean/")})
+        except Exception:  # noqa: BLE001
+            pass
         _t = _lt("write", _t)
         r = subprocess.run([sys.executable, "tools/landing.py", "finish", landing] + (["--set"] if is_set else []),
                            cwd=ROOT, capture_output=True, text=True)

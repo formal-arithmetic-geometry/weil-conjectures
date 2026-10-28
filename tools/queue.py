@@ -351,6 +351,19 @@ def main() -> int:
         items3 = [x for x in items3 if x[2] not in _em]
         rw_clusters = [c for c in rw_clusters if c["item"] not in _em]
     STATE["rework"] = (len(rw_rows), len(rw_open))
+    # 2026-10-28 (the owner): work on what the interface repository changes, and work whose node depends directly on a
+    # statement still pending there, waits for its merge into main (tools/iface_repo.py paused_sets; mode `on` only)
+    if g is not None:
+        try:
+            import iface_repo
+            p_n, p_m, _pw = iface_repo.paused_sets(g)
+            if p_n or p_m:
+                nb2 = (len(s2), len(items3))
+                s2 = [x for x in s2 if x[2] not in p_n]
+                items3 = [x for x in items3 if x[2] not in p_m]
+                STATE["iface_paused"] = (nb2[0] - len(s2), nb2[1] - len(items3))
+        except Exception as e:  # noqa: BLE001 - a failure here never stops the queue
+            print(f"interface-repository pause failed, nothing paused: {e!r}", file=sys.stderr)
     wfor = {}
     for m, c in waiting:
         wfor.setdefault(m, c)
@@ -359,6 +372,9 @@ def main() -> int:
             b = STATE.get("blocked", (0, 0, 0))
             print(f"rework: {len(rw_rows)} quarantined modules (tools/rework.py), {len(rw_open)} open; blocked by rework: "
                   f"stage 1 {b[0]}, stage 2 {b[1]}, stage 3 {b[2]} items")
+        if STATE.get("iface_paused"):
+            print(f"paused for the interface repository (tools/iface_repo.py): stage 2 {STATE['iface_paused'][0]}, "
+                  f"stage 3 {STATE['iface_paused'][1]} items")
         print(f"stage 1: {len(s1)} nodes to split")
         print(f"stage 2: {len(s2)} nodes to state" + (f"; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else ""))
         if dist:
@@ -446,6 +462,9 @@ def main() -> int:
                     f.write(f"| `{c['item']}` | {len(c['members'])} | {', '.join(c['roots'][1:])[:120]} | {rw_rows[c['item']].get('cause', '')[:160]} |\n")
             f.write(f"\nBlocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 "
                     f"{b[0]}, stage 2 {b[1]}, stage 3 {b[2]} items.\n\n")
+        if STATE.get("iface_paused"):
+            f.write(f"Paused until the interface repository merges (tools/iface_repo.py; they change there or depend on a "
+                    f"statement pending there): stage 2 {STATE['iface_paused'][0]}, stage 3 {STATE['iface_paused'][1]} items.\n\n")
         f.write(f"## Stage 1: nodes to split ({len(s1)})\n\n")
         if s1:
             f.write("| node | distance to a target | Lean state on the done branch |\n|---|---|---|\n")
