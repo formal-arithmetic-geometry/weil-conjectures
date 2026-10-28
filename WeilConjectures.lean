@@ -13427,6 +13427,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisActionModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralSections
