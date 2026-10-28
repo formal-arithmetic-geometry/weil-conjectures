@@ -1,0 +1,110 @@
+{
+ "id": "def-diagonal-coefficient-route-endpoints",
+ "kind": "definition",
+ "title": "Endpoints of the two finite coefficient routes",
+ "statement": "For supplied UniformizerSquareData q [def-diagonal-uniformizer-root-frame], define residueMap to be cartierResidueAlgebra with the cyclic frame coefficient type diagonalResidue retained, and restriction to be ordinary scalar restriction along this map. sourceMap and lineMap are the supplied maps with their restricted direct-image and line targets retained explicitly. Define cyclicFunctor as cyclic derived extension followed by the supplied cyclic finite realization, and quotientFunctor as successive integral and quotient derived extension followed by the supplied A-realization. The initial objects are the single supported Z_l unit and the degree-two shifted single Z_l line. initialSource and initialTarget extract the domain and codomain of the supplied arrow, retaining its coefficient category without rebuilding it. The functors and endpoints are fields of the explicit FiniteRouteData bundles [def-diagonal-coefficient-route-data], so their types are shared without reconstructing large derived-functor expressions. The bundles contain a proved universal realization calculation, constructed before an arrow is supplied. cyclicSource and quotientSource compose the supplied supported endpoints with the exact single comparison and the ordinary supported-source isomorphism. cyclicTarget and quotientTarget compose the supplied shifted line endpoints with exact single/shift comparisons and the ordinary line endpoint isomorphism. ScalarCompatibility.compositeSource and compositeTarget provide the composite supported-source and shifted line endpoints before realization. These are explicit constructions; they assert no naturality or class equation.",
+ "stmt_deps": [
+  "def-diagonal-cyclic-route-endpoints",
+  "def-diagonal-uniformizer-route-endpoints",
+  "def-diagonal-uniformizer-root-frame"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "E2",
+  "note": "Separate the supported-constant and positive-root endpoint calculations from naturality of an arbitrary diagonal arrow."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison between scalar extension functors is the mate of the identity comparison between restriction of scalars functors, and on the free rank one module sends one tensor x to x.",
+   "date": "2026-10-28",
+   "results": "Eight generic ModuleCat hits, including extendScalars, restrictScalars, ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and extendScalarsId_hom_app_one_tmul.",
+   "verdict": "No finite-realization/root endpoint comparison; reuse the actual scalar adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension scalars units composition",
+   "date": "2026-10-28",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp, homEquiv_extendScalarsComp, extendScalars_assoc and generic Ext scalar-composition lemmas.",
+   "verdict": "Ordinary scalar associativity is available; the normalized condensed-to-ordinary endpoints are specific to this project."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "date": "2026-10-28",
+   "results": "Exact derived-composition and single-comparison APIs.",
+   "verdict": "Use mapDerivedCategoryCompIso and mapDerivedCategoryNatIso for the derived mate."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|[Ss]calar.*[Tt]rans|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "The broad indexed grep returned 25 unrelated scalar/transvection/localization hits. Local rg additionally inspected diagonal coefficient endpoints, finite realization, root frames, scalar endpoint composition and uniformizer transports.",
+   "verdict": "No existing theorem compares both finite endpoints for the supplied data and arbitrary initial arrow."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicUniformizerSquare",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-cyclic-uniformizer-square",
+   "place": "coefficient comparison, endpoint calculations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientRouteEndpoints",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientRouteEndpoints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.residueMap",
+  "statement": "def residueMap (_q : UniformizerSquareData l Y E π n A hA) :\n    diagonalResidue.{u} l n →+* A",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.residueMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.restriction",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.sourceMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.lineMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.initialSource",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerSquareData.initialTarget"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

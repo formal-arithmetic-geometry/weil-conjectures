@@ -1,0 +1,149 @@
+{
+ "id": "lem-diagonal-cyclic-uniformizer-source",
+ "kind": "statement",
+ "title": "Supported constant normalization for cyclic coefficient continuation",
+ "statement": "Let l,Y,E,pi,n,A,hA and q be as in UniformizerSquareData [def-diagonal-uniformizer-root-frame]. Put rho=restriction(q), TC=cyclicFunctor(q), TA=quotientFunctor(q), S the single supported Z_l unit, and sR=cyclicSource, sA=quotientSource [def-diagonal-coefficient-route-endpoints]. There is a unique ordinary right-functor isomorphism s:quotientRight(q) -> rho followed by cyclicRight(q) for which U(s_M)=uA(M) followed by inverse uR(rho M), where uA and uR are inverseUnderlying. Its constructed derived mate tau=comparison(s) satisfies tau_S followed by D(rho)(sA.hom) followed by the exact single comparison of rho = sR.hom followed by single(i_* maps.source). These are precisely RestrictionNormalized(q,s) and SourceEquation(q,s) [def-diagonal-coefficient-route-comparison]. No initial diagonal arrow or root endpoint is involved.",
+ "stmt_deps": [
+  "def-diagonal-coefficient-route-equations",
+  "def-diagonal-coefficient-route-comparison",
+  "def-diagonal-coefficient-route-endpoints",
+  "lem-diagonal-coefficient-route-square",
+  "def-diagonal-uniformizer-root-frame",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-finite-ordinary-comparisons",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Transport the identity underlying abelian sheaf through inverseUnderlying for the two inverse finite realizations. The Z_l actions agree because the actual quotient coefficient map factors through the cyclic quotient by hA; on cyclic constant generators the factor is the unital cartierResidueAlgebra map. This produces a natural module isomorphism. Faithful forgetting proves uniqueness.",
+   "uses": [
+    "def-diagonal-coefficient-route-equations",
+    "def-diagonal-coefficient-route-comparison",
+    "def-diagonal-coefficient-route-endpoints",
+    "lem-diagonal-coefficient-route-square",
+    "def-diagonal-uniformizer-root-frame",
+    "def-sfb-diagonal-coefficient-endpoints",
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-diagonal-finite-ordinary-comparisons",
+    "def-sfb-geo-cartier-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the actual derived mate of that restriction isomorphism. Transpose the supported endpoint through scalar adjunctions. Endpoint.normalization reduces it to supportMap of the regular unit. The finite unit and source normalizations identify this with maps.source on constant generators, hence on the sheafification. Exact single comparisons give SourceEquation.",
+   "uses": [
+    "def-diagonal-coefficient-route-equations",
+    "def-diagonal-coefficient-route-comparison",
+    "def-diagonal-coefficient-route-endpoints",
+    "lem-diagonal-coefficient-route-square",
+    "def-diagonal-uniformizer-root-frame",
+    "def-sfb-diagonal-coefficient-endpoints",
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-diagonal-finite-ordinary-comparisons",
+    "def-sfb-geo-cartier-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-diagonal-coefficient-route-equations",
+  "def-diagonal-coefficient-route-comparison",
+  "def-diagonal-coefficient-route-endpoints",
+  "lem-diagonal-coefficient-route-square",
+  "def-diagonal-uniformizer-root-frame",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-finite-ordinary-comparisons",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "E2",
+  "note": "Separate the supported-constant and positive-root endpoint calculations from naturality of an arbitrary diagonal arrow."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison between scalar extension functors is the mate of the identity comparison between restriction of scalars functors, and on the free rank one module sends one tensor x to x.",
+   "date": "2026-10-28",
+   "results": "Eight generic ModuleCat hits, including extendScalars, restrictScalars, ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and extendScalarsId_hom_app_one_tmul.",
+   "verdict": "No finite-realization/root endpoint comparison; reuse the actual scalar adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension scalars units composition",
+   "date": "2026-10-28",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp, homEquiv_extendScalarsComp, extendScalars_assoc and generic Ext scalar-composition lemmas.",
+   "verdict": "Ordinary scalar associativity is available; the normalized condensed-to-ordinary endpoints are specific to this project."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "date": "2026-10-28",
+   "results": "Exact derived-composition and single-comparison APIs.",
+   "verdict": "Use mapDerivedCategoryCompIso and mapDerivedCategoryNatIso for the derived mate."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|[Ss]calar.*[Tt]rans|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "The broad indexed grep returned 25 unrelated scalar/transvection/localization hits. Local rg additionally inspected diagonal coefficient endpoints, finite realization, root frames, scalar endpoint composition and uniformizer transports.",
+   "verdict": "No existing theorem compares both finite endpoints for the supplied data and arbitrary initial arrow."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicUniformizerSquare",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-cyclic-uniformizer-square",
+   "place": "coefficient comparison, endpoint calculations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicUniformizerSource",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicUniformizerSource.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCyclic_uniformizerSource",
+  "statement": "theorem diagonalCyclic_uniformizerSource\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)\n    (A : Type (u + 1)) [CommRing A]\n    (hA : ((l ^ (n + 1) : ℕ) : A) = 0)\n    (q : UniformizerSquareData l Y E π n A hA) :\n    criterionHypothesis% 0 (UniformizerSquareData.endpointSquare l Y E π n A hA q)\n     ",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-diagonal-scalar-arrow-composition",
+ "kind": "statement",
+ "title": "Composition of arbitrary supplied scalar arrow squares",
+ "statement": "For three arbitrary coefficient ring objects R0,R1,R2, scalar maps a and b, three supplied diagrams and two ScalarCompatibility structures, define compositeSource to be the second derived functor applied to the first supported isomorphism, followed by the second supported isomorphism. Define compositeTarget to be the second derived functor applied to the first shifted line endpoint, followed by the second shifted endpoint. The parameter-bound compositeFunctor and compositeRestriction retain the coefficient choices of the supplied squares. compositeAdjunction composes the actual scalar adjunctions and collects their exact right functor by mapDerivedCategoryCompIso. The successive derived functor applied to the first diagram delta, followed by compositeTarget, equals compositeSource.hom followed by the third diagram delta.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Construct scalarAdjunction from the supplied derived extension/restriction adjunction. Compose the two actual adjunctions and use the exact mapDerivedCategoryCompIso to collect their right functor; no existence theorem or coefficient-object reconstruction is used.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply congrArg to the first supplied delta equation, mapping through the second derived scalar functor and postcomposing with the second shifted line endpoint. Expand map_comp, use the second supplied delta equation, and reassociate. The coefficient rings and line modules remain parameters throughout this proof.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-scalars"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "E2",
+  "note": "Separate the supported-constant and positive-root endpoint calculations from naturality of an arbitrary diagonal arrow."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison between scalar extension functors is the mate of the identity comparison between restriction of scalars functors, and on the free rank one module sends one tensor x to x.",
+   "date": "2026-10-28",
+   "results": "Eight generic ModuleCat hits, including extendScalars, restrictScalars, ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and extendScalarsId_hom_app_one_tmul.",
+   "verdict": "No finite-realization/root endpoint comparison; reuse the actual scalar adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension scalars units composition",
+   "date": "2026-10-28",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp, homEquiv_extendScalarsComp, extendScalars_assoc and generic Ext scalar-composition lemmas.",
+   "verdict": "Ordinary scalar associativity is available; the normalized condensed-to-ordinary endpoints are specific to this project."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "date": "2026-10-28",
+   "results": "Exact derived-composition and single-comparison APIs.",
+   "verdict": "Use mapDerivedCategoryCompIso and mapDerivedCategoryNatIso for the derived mate."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|[Ss]calar.*[Tt]rans|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "The broad indexed grep returned 25 unrelated scalar/transvection/localization hits. Local rg additionally inspected diagonal coefficient endpoints, finite realization, root frames, scalar endpoint composition and uniformizer transports.",
+   "verdict": "No existing theorem compares both finite endpoints for the supplied data and arbitrary initial arrow."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicUniformizerSquare",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-cyclic-uniformizer-square",
+   "place": "coefficient comparison, endpoint calculations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarArrowComposition",
+  "file": "lean/Sheaf/Paper/DiagonalScalarArrowComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.composite_delta",
+  "statement": "theorem composite_delta :\n    (compositeFunctor s t).map\n      d₀.delta ≫ compositeTarget s t = (compositeSource s t).hom ≫ d₂.delta",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.scalarAdjunction",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.compositeFunctor",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.compositeRestriction",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.compositeAdjunction",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.compositeSource",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.compositeTarget",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarCompatibility.composite_delta"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

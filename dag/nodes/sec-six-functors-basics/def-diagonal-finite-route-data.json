@@ -1,0 +1,117 @@
+{
+ "id": "def-diagonal-finite-route-data",
+ "kind": "definition",
+ "title": "Explicit bundled endpoints and universal finite realization calculation",
+ "statement": "For categories B and C, a family classes:I -> Hom(X,Y) and a compatibility predicate on pairs of arrows and indices, FiniteRouteData stores a functor B -> C, its supported source isomorphism and its target map, with a universal realization identity for compatible pairs. For an arbitrary finite realization eW, ordinary supported and line comparisons, an internal derived functor F and endpoints a,t, finiteRouteData specializes this record to exact finite realization. Its proved realize field states: for every beta and alpha with F(beta) followed by t = a.hom followed by alpha, the stored supported map followed by finiteRealizedClass(alpha).hom equals the stored functor applied to beta followed by the stored line map. finiteRouteData constructs those data by exact realization and proves the universal field by finiteRealization_composition. No data depends on an existence theorem or on the arrow supplied later.",
+ "stmt_deps": [
+  "def-diagonal-finite-route-data-core",
+  "def-diagonal-finite-realization-endpoints",
+  "lem-diagonal-finite-realization-composition"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Construct the realized functor and both endpoints explicitly. For arbitrary beta, alpha and their supplied compatibility equation, use the proved finiteRealization_composition. Keeping these fields together makes their shared types available without expanding the large functors. The explicit class family finiteRealizedArrowMap and the input predicate routeArrowCompatible are named functions, retaining the native endpoint expressions behind their definitions.",
+   "uses": [
+    "def-diagonal-finite-realization-endpoints",
+    "lem-diagonal-finite-realization-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-diagonal-finite-realization-endpoints",
+  "lem-diagonal-finite-realization-composition"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "E2",
+  "note": "Separate the supported-constant and positive-root endpoint calculations from naturality of an arbitrary diagonal arrow."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison between scalar extension functors is the mate of the identity comparison between restriction of scalars functors, and on the free rank one module sends one tensor x to x.",
+   "date": "2026-10-28",
+   "results": "Eight generic ModuleCat hits, including extendScalars, restrictScalars, ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and extendScalarsId_hom_app_one_tmul.",
+   "verdict": "No finite-realization/root endpoint comparison; reuse the actual scalar adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension scalars units composition",
+   "date": "2026-10-28",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp, homEquiv_extendScalarsComp, extendScalars_assoc and generic Ext scalar-composition lemmas.",
+   "verdict": "Ordinary scalar associativity is available; the normalized condensed-to-ordinary endpoints are specific to this project."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "date": "2026-10-28",
+   "results": "Exact derived-composition and single-comparison APIs.",
+   "verdict": "Use mapDerivedCategoryCompIso and mapDerivedCategoryNatIso for the derived mate."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|[Ss]calar.*[Tt]rans|mapSingleArrow",
+   "date": "2026-10-28",
+   "results": "The broad indexed grep returned 25 unrelated scalar/transvection/localization hits. Local rg additionally inspected diagonal coefficient endpoints, finite realization, root frames, scalar endpoint composition and uniformizer transports.",
+   "verdict": "No existing theorem compares both finite endpoints for the supplied data and arbitrary initial arrow."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicUniformizerSquare",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-cyclic-uniformizer-square",
+   "place": "coefficient comparison, endpoint calculations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteRouteData",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteRouteData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finiteRouteData",
+  "statement": "def finiteRouteData",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finiteRouteData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T055641-L-787209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

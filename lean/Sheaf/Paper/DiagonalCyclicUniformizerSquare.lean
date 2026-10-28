@@ -6,6 +6,7 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.Paper.DiagonalUniformizerRootFrame
+import Sheaf.Paper.DiagonalUniformizerClassSquare
 
 /-! # Reassociation of cyclic and uniformizer coefficient reductions
 
@@ -16,19 +17,38 @@ transitivity and normalized root projections.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-universe u
+universe u v u' v'
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-attribute [local irreducible] quotientLine quotientLineMap cyclicLine cyclicLineMap
+-- Use the module-sheaf abelian structure of GeoCartierClass.
+attribute [local instance 100000] sheafIsAbelian
+attribute [local instance 200000] AlgebraicGeometry.ProEtale.diagonalAbSheafAbelian
+attribute [local instance 300000] CommRing.toRing
+attribute [local instance 400000] AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian
+
+attribute [local irreducible] geoCartierConstant geoCartierLine
+  quotientLine quotientLineMap cyclicLine cyclicLineMap
   derivedScalars QuotientLineRealization finiteRealizedClass CyclicCartierFrame.reduce
+  Functor.mapDerivedCategory Functor.mapDerivedCategorySingleFunctor Endpoint.shift
+  Functor.leftDerivedFunctor Mod.derivedExtendMapDerivedCategoryAdjunction
+  DerivedCategory.singleFunctorIsoCompQ
+  DerivedCategory HasDerivedCategory.ofHasKInjectiveResolutions
+  CondensedRing.lowerStar Profinite.continuousMapRingSheaf
+  HasDerivedCategory.standard HasDerivedCategory.ofIsGrothendieckAbelian
+  DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+
+attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
+attribute [local semireducible] CyclicCartierFrame.reduce
+
 
 /-- The coefficient square for an arbitrary initial arrow and scalar-compatible
 integral and quotient diagrams. There is no completed arrow, limit equation or
@@ -71,6 +91,7 @@ theorem diagonalCyclic_uniformizerSquare
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (q : UniformizerSquareData l Y E π n A hA) :
     q.equation l Y E π n A hA := by
-  exact (by sorry)
+  unfold UniformizerSquareData.equation CartierScalarMaps.Equation
+  exact UniformizerSquareData.realizedSquare l Y E π n A hA q
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
