@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-diagonal-reduction-resolution",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Common regular representative for a supplied derived reduction",
+ "statement": "Let ell be prime and W a scheme. Given the derived categories of integral pro-etale sheaves and strict p-adic systems and any simultaneous derived reduction D of scalar extension [def-sfb-diagonal-system-interface], every object K of the integral derived category has a representative P with Q(P) isomorphic to K, all ell^(n+1) multiplication maps monic in each degree, and the supplied counit D.epsilon(P) invertible.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "proof": [
+  {
+   "text": "Resolve each complex by flat-term complexes using the proved generic flat-resolution theorem. Flatness makes nonzero integer multiplication monic, and exact scalar extension preserves these monomorphisms.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-sfb-diagonal-derived-reduction-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing resolving-class construction to simultaneous ordinary reduction. The multiplication short exact sequences imply preservation of quasi-isomorphisms between regular representatives. Its counit computes the derived functor on them.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit-compatible natural isomorphism between left derived functors transfers invertibility to the supplied D. Choose a regular resolution of a representative of K and localize its quasi-isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-sfb-diagonal-derived-reduction-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every derived object has a representative with flat terms on which the left derived functor counit is an isomorphism",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.Derives.isIso, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|isIso.*counit|exists.*[Ff]lat",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalPureEvaluationTriangle",
+  "group": "F9",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition.",
+   "via": [
+    "lem-sfb-diagonal-pure-evaluation-triangle",
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalReductionResolution",
+  "file": "lean/Sheaf/Paper/DiagonalReductionResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_reduction_resolution",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonal_reduction_resolution"
+  ],
+  "statement": "theorem diagonal_reduction_resolution (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (K : DerivedCategory (DiagonalAb W)) :\n    ∃ (P : CochainComplex (DiagonalAb W) ℤ) (_e : DerivedCategory.Q.obj P ≅ K),\n      (∀ (n : ℕ) (i : ℤ), Mono (ℓ ^ (n + 1) • 𝟙 (P.X i))) ∧ IsIso (D.ε.app P)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261028T034748-L-3541848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261028T034748-L-3541848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

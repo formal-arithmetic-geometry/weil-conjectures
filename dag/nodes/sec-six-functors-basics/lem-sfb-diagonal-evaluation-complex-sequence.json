@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-diagonal-evaluation-complex-sequence",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Underlying multiplication short exact sequence for evaluated reduction",
+ "statement": "Let ell be prime, W a scheme, and D a simultaneous derived reduction [def-sfb-diagonal-system-interface]. Let P be an integral sheaf complex on which every ell^(n+1) is monic degreewise. For each n the actual quotient-unit map from P to the underlying n-th ordinary reduction, applied termwise with the identity and composition comparisons, gives a short exact complex sequence P --ell^(n+1)--> P --> U(E(P)_n). Its middle arrow is exactly the one in the complexes formula of [lem-sfb-diagonal-evaluation-unit].",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-evaluation-unit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "proof": [
+  {
+   "text": "Use ordinary_level_comparison from the module realizing diagonal reduction completion. It identifies the underlying p-adic quotient with the integral cokernel and carries the scalar-adjunction quotient unit to the integral quotient map.",
+   "uses": [
+    "lem-sfb-diagonal-reduction-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral reductionPresentation from the derived-reduction existence construction exhibits this quotient as an actual cokernel. The given monomorphism makes the integral multiplication sequence short exact in each degree.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the termwise components of the identity/composition comparisons. Transport the short exact sequence by the quotient isomorphism, then apply the degreewise short exactness criterion for complexes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-reduction-completion",
+  "lem-sfb-diagonal-derived-reduction-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient after extension from integers to p adic integers becomes the integral prime power cokernel under restriction of scalars",
+   "results": "8 hits: PadicInt.toZModPow, PadicInt.toZModHom, PadicInt.ker_toZModPow, PadicInt.toZMod, PadicInt.cast_toZModPow, PadicInt.adicCompletionIntegersEquiv, PadicInt.zmod_cast_comp_toZModPow, BDeRhamPlus",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt.appr_spec",
+   "results": "1 hits: PadicInt.appr_spec",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_of_degreewise_shortExact|exact_of_g_is_cokernel",
+   "results": "18 hits: Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+   "date": "2026-10-28",
+   "verdict": "Existing generic APIs supply parts of the argument; no result found states this combined comparison with the supplied data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalPureEvaluationTriangle",
+  "group": "F9",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (2) and (3), the common two-term resolution and its (ell,1) transition.",
+   "via": [
+    "lem-sfb-diagonal-pure-evaluation-triangle",
+    "lem-sfb-strict-kummer-pure-kernel-normalization",
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalEvaluationComplexSequence",
+  "file": "lean/Sheaf/Paper/DiagonalEvaluationComplexSequence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_evaluation_complex_shortExact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalEvaluationComplexMap",
+   "AlgebraicGeometry.ProEtale.diagonalEvaluationComplexMap_f",
+   "AlgebraicGeometry.ProEtale.diagonal_evaluation_complex_shortExact"
+  ],
+  "statement": "theorem diagonal_evaluation_complex_shortExact\n    (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (P : CochainComplex (DiagonalAb W) ℤ)\n    (hP : ∀ (n : ℕ) (i : ℤ), Mono (ℓ ^ (n + 1) • 𝟙 (P.X i))) (n : ℕ) :\n    ∃ hz : (ℓ ^ (n + 1) • 𝟙 P) ≫\n        diagonalEvaluationComplexMap (diagonalForget ℓ W) (diagonalScalarAdjunction ℓ W)\n          D n P = 0,\n      (ShortComplex.mk _ _ hz).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261028T034748-L-3541848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261028T034748-L-3541848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
