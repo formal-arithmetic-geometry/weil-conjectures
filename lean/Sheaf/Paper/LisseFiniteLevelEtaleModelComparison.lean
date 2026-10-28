@@ -42,6 +42,11 @@ naturality under restriction.  Bounded classical derived comparison identifies t
 transported object with the fixed realization of the supplied etale model; the local
 identifications then glue to the displayed global comparison.  Empty bases are
 covered by the unique map from the zero object.
+
+STATEMENT-DISPUTED: `D` is unconstrained by the premises. For the zero choices
+`E := 0` and `N := 0`, the local-model premise can hold, while `D` may be a nonzero
+constant finite locally constant complex concentrated in degree zero; the conclusion
+would then identify its realization with zero. No premise relates `D` to `E`.
 -/
 theorem lisse_finite_level_etale_model_comparison
     (X Y : Scheme.{u}) (g : Y ⟶ X)

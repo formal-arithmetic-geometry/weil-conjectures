@@ -20615,3 +20615,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/H5/Sheaf.Paper.ConstantAdicQuotientRealizationHomologyLift (stage 3; reviewer PASS; first push; landing 20261028T020504-L-2515902 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:05 L: merged deliver/H7/Sheaf.Paper.IntegralNormalizedRingRefinementIdentityComponent (stage 3; reviewer PASS; first push; landing 20261028T020505-L-2516088 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:05 L: merged deliver/H8/Sheaf.Paper.LisseFiniteLevelEtaleLocalIsomorphisms (stage 3; reviewer PASS; first push; landing 20261028T020507-L-2516291 (interface); batch 20261028T020127; modules 3; new nodes 2)
+- 02:05 L: merged deliver/H9/Sheaf.Paper.LisseFiniteLevelEtaleModelComparison (stage 3; reviewer PASS; first push; landing 20261028T020508-L-2516593 (proof); batch 20261028T020127; modules 1; new nodes 0)
