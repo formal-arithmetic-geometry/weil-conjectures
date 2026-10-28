@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 
 /-!
 # The projective-line adjunction
@@ -46,7 +47,7 @@ The blueprint works with `Rq_*`; for the proper `q` it is `Rq_!`
 formula of `Rq_*` is the one of `Rq_!` through this identification
 (`AlgebraicGeometry.Etale.projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar`).
 The identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` is the commutation of the derived tensor
-product with shifts followed by the symmetry; the statement that `ε` is a counit does not depend
+product with shifts followed by the braiding; the statement that `ε` is a counit does not depend
 on this choice, since a natural automorphism of the right adjoint changes the counit of an
 adjunction into the counit of another one. Likewise, the sign of the trace
 (`AlgebraicGeometry.Etale.projectiveLineTrace` is `-t_q`) does not matter: negating unit and
@@ -113,7 +114,8 @@ noncomputable def projectiveLineLowerShriekTrace :
 
 /-- The identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` on the projective line, for `K` on `S`:
 the shift is moved into the second factor of `Lq^* K ⊗ᴸ Λ(1)`, and the factors are exchanged by
-the symmetry of the derived tensor product. -/
+the braiding of the derived tensor product (`AlgebraicGeometry.Etale.derivedTensorBraiding`), so
+that the identification is compatible with pullback. -/
 noncomputable def projectiveLineTwistShiftIso
     (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1).obj
@@ -124,7 +126,7 @@ noncomputable def projectiveLineTwistShiftIso
   (((derivedTensor (ModuleCat.{u + 1} Λ) ℙ(Option (ULift.{u} (Fin 1)); S)).obj
       ((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).obj K)).commShiftIso
       (2 : ℤ)).symm.app _ ≪≫
-    ((derivedTensorFlipIso (ModuleCat.{u + 1} Λ) ℙ(Option (ULift.{u} (Fin 1)); S)).app _).app _
+    ((derivedTensorBraiding (ModuleCat.{u + 1} Λ) ℙ(Option (ULift.{u} (Fin 1)); S)).app _).app _
 
 /-- The candidate counit `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of the projective-line adjunction
 (blueprint `def-amb-p1-trace`): the identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
