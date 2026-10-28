@@ -13,30 +13,51 @@
  },
  "proof": [
   {
-   "text": "Expand the compact-support map into its proper scalar mate and open balancing map. Apply identity normalization of the scalar adjunction, then transport through the proper direct image and open extension factors.",
+   "text": "Derive the ordinary identity-restriction composition isomorphism. Its section maps are identity maps, so it is restriction applied to normalizedOriginRestrictionUnit, followed by the left unitor. Naturality and the identity law of mapDerivedCategoryCompIso identify the derived restriction compositor. Apply Mathlib Adjunction.leftAdjointCompIso_comp_id: the identity scalar associator is normalizedOriginScalarUnit evaluated after scalar extension. The private derived_comp_unit and scalar_comp_unit helpers prove these equalities.",
    "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "def-weil-pbc-normalized-origin-scalar-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let b be compactScalarMap for the identity coefficient homomorphism. Specialize the general private compact_chain theorem in FiniteSmoothCompactQuotientCocycle to two identity maps. Its proper/open mate-pasting proof works for arbitrary coefficient rings, not only ZMod quotients. Substitute the scalar associator unit laws of the preceding step. This yields uY(SY(F K)) followed by b(K) equal to SY(b(K)), b(SX K), and F(uX(SX K)).",
+   "uses": [
+    "lem-pur-finite-smooth-compact-quotient-cocycle",
     "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical coefficient-unit and witness identifications at the base and on X. Naturality and cancellation of the identity scalar unit give the displayed component equality for every K.",
+   "text": "For any isomorphism uX:SX≅Id, naturality and cancellation show uX(SX K)=SX(uX(K)). Naturality of b moves this map past b(SX K). Cancel the invertible rightmost b(K) from the cocycle. Naturality of uY and cancellation of uY(SY(F K)) now show b(K) followed by F(uX(K)) equals uY(F K). Compose with F(uX(K) inverse) to obtain the asserted normalized identity. This is the fully proved private categorical helper cocycle_unit. The required invertibility of b is the existing general compactSupport_isIso helper, for finite rings and a Noetherian target.",
    "uses": [
-    "def-weil-pbc-witness-compatibility",
-    "lem-fix-compact-support-coefficient-change"
+    "lem-pur-exceptional-coefficient-comparison",
+    "lem-pur-etale-compact-scalar-coherence"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "At level n the coefficient ring is the universe lift of the positive-level finite coefficient quotient, hence finite by Padic.finite_coefficientExtensionRing and finiteness of ULift. The base Spec of the finite field is Noetherian. Apply the private compact_identity lemma to the fixed compactification and the actual quotient, using finiteDualizingQuotient_id to identify it with the identity. This proves the original statement for every derived etale K without any boundedness or flatness hypothesis.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-coef-finite-dualizing-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-normalized-origin-scalar-comparisons",
   "def-weil-pbc-witness-compatibility",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-pur-etale-compact-scalar-coherence"
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-finite-smooth-compact-quotient-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-  "place": "Paragraphs 1--3 and final sentence"
+  "place": "Final counit/cocycle calculation; P1 proves identity normalization by cancellation from the existing proper/open scalar cocycle and the canonical scalar-adjunction unit laws."
  },
  "mathlib_searches": [
   {
@@ -102,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H9",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261027T180644-L-3886679",
-  "kind": "interface",
+  "landing": "20261028T020616-L-2529181",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
