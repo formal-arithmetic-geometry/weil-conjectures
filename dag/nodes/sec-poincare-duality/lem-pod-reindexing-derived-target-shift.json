@@ -13,22 +13,50 @@
  ],
  "proof": [
   {
-   "text": "represent the source by a complex and resolve the target by a K-injective complex. Its target shift is again K-injective. Expand `Comparison.derived_model` at the two pairs. The `RightNormalization` characterization of `homCommShift` identifies the vertical arrows with unsigned target reindexing on Hom products. The `chain_projection` field makes these maps commute with sectionwise reindexing on each factor; product extensionality proves their chain square. Localize and use naturality of the localization factors. Cancel the comparison isomorphisms and transport along the representative isomorphisms to obtain the square for arbitrary M and N.",
+   "text": "Identify the inverse of podReindexingHomModel with the fixed ordinary-to-derived Hom comparison. Curry its naturality and transport the first argument along an isomorphism Q(P) ≅ M. The existing rightShift_existsUnique normalization supplies an unsigned target reindexing isomorphism and the exact localization equation for this transported natural transformation.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the two unsigned target reindexing isomorphisms supplied on X and Y, compare the two chain-level routes after every Hom-product projection. The target-variable Hom functor projection equation removes the termwise shift comparison, whose degree components are identities. Evaluate on sections and on a section of the source module. Comparison.chain_projection converts both sides to the Y projection, and RightFormula identifies them. Homological-complex, product and section extensionality give the chain square.",
    "uses": [
     "def-pod-reindexing-coherence-data",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a K-injective I and its shift, Comparison.derived_model gives commuting squares between the ordinary-to-derived comparisons and the chain comparison. A general categorical pasting calculation combines these with the two normalized shift equations, naturality, the chain square, and the CommShift equation of podReindexingDerivedFactors.hom. Cancel the invertible ordinary comparison at I[b] and the shifted localization-factor transport. This proves the displayed derived target-shift square for Q(P), Q(I), without leaving any representative obligation.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the object bijection of the standard localization to write M literally as Q(P). The independent-universe ringed-site Grothendieck theorem and exists_iso_Q_obj_of_isKInjective give a K-injective I and N ≅ Q(I). For fixed M package the two sides of the target-shift equation as natural transformations in N. The preceding representative square gives equality at Q(I). Naturality along N ≅ Q(I) and cancellation of its image prove equality at N.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pod-reindexing-coherence-data",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pod-reindexing-hom-resolution-model",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Step 4; isolate target shift compatibility, then paste the two independent squares using naturality and CommShift addition coherence."
+  "place": "Step 4; X8 proof of the unsigned target chain square, normalization pasting on K-injective representatives, and naturality descent, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -106,9 +134,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T7",
+  "group": "X8",
   "result": "pass",
-  "landing": "20261028T034947-L-3574548",
+  "landing": "20261028T055831-L-814975",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
