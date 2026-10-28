@@ -37,7 +37,9 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-instance (c : ℕ) (S : Scheme.{u}) : LocallyOfFiniteType (generalLinearOpen.toBase c S) := by
+/-- `GL_{c,S} ⟶ S` is locally of finite type: it is an open of `𝔸^{c × c}_S`. -/
+instance locallyOfFiniteType_generalLinearOpen_toBase (c : ℕ) (S : Scheme.{u}) :
+    LocallyOfFiniteType (generalLinearOpen.toBase c S) := by
   unfold generalLinearOpen.toBase
   infer_instance
 
