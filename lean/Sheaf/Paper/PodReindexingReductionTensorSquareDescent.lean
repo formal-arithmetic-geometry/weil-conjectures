@@ -31,7 +31,85 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+/-- The two presentations use the same sequence inverse image.
+Source: Stacks 03D2 and 0941
+(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+theorem podReindexing_sequence_pullback_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    pullbackTensorSequenceDerived l E g = integralComparisonDerivedSequencePullback l E g := by
+  have he : pullbackTensorSequenceInverse l E g = integralComparisonSequencePullback l E g := by
+    unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
+    congr 1
+    unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
+    rw [pullbackTensorSequenceRing_eq]
+  unfold pullbackTensorSequenceDerived integralComparisonDerivedSequencePullback
+  congr 1
+
+
+/-- The existing system tensor comparison, transported only by equality of its functor.
+Source: Stacks 07A4 and 0941
+(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+def podReindexingSystemTensor {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    (podReindexCalculus l E Y).systemClosed.tensor ⋙
+        integralComparisonDerivedSequencePullback l E g ≅
+      (integralComparisonDerivedSequencePullback l E g).prod
+        (integralComparisonDerivedSequencePullback l E g) ⋙
+          (podReindexCalculus l E X).systemClosed.tensor :=
+  let e := eqToIso (podReindexing_sequence_pullback_eq l E g)
+  Functor.isoWhiskerLeft _ e.symm ≪≫ pullbackTensorSystemComparison l E g ≪≫
+    Functor.isoWhiskerRight (NatIso.prod e e) _
+
+/-- The normalized ordinary tensor arrow, with its construction kept behind one name.
+Source: Stacks 07A4
+(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+@[irreducible] def podReindexingIntegralTensorHom
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (c : PodReindexingCoherence.Comparison l E g none
+      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
+      (podReindexCalculus l E X).integralTensorModel
+      (podReindexCalculus l E Y).integralTensorModel)
+    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
+    (M N : podReindexingDerived l E Y none) :
+    (podOrdinaryReindex l E g).obj
+        ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ⟶
+      (podReindexCalculus l E X).integralClosed.tensor.obj
+        ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N) :=
+  ((((eqToIso h).app
+          ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N))).symm ≪≫
+          c.tensor.app (M, N) ≪≫
+          (podReindexCalculus l E X).integralClosed.tensor.mapIso
+            (((eqToIso h).app M).prod ((eqToIso h).app N))).hom)
+
+/-- The defining equation of the normalized ordinary tensor arrow.
+Source: Stacks 07A4
+(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+theorem podReindexingIntegralTensorHom_eq
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (c : PodReindexingCoherence.Comparison l E g none
+      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
+      (podReindexCalculus l E X).integralTensorModel
+      (podReindexCalculus l E Y).integralTensorModel)
+    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
+    (M N : podReindexingDerived l E Y none) :
+    podReindexingIntegralTensorHom l E g c h M N =
+      ((((eqToIso h).app
+          ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N))).symm ≪≫
+          c.tensor.app (M, N) ≪≫
+          (podReindexCalculus l E X).integralClosed.tensor.mapIso
+            (((eqToIso h).app M).prod ((eqToIso h).app N))).hom) := by
+  unfold podReindexingIntegralTensorHom
+  rfl
+
+
 /--
+STATEMENT-DISPUTED: The former statement quantified over arbitrary `w` and `v`,
+although no compatibility laws related them to the canonical comparisons were assumed.
+The corrected statement uses the canonical normalized system comparison and ordinary
+tensor map.
+
 The strict pure-tensor calculation descends through the two K-flat localizations.
 The hypothesis is the comparison's sectionwise pure-tensor formula; the conclusion
 is the whole-system square after the reduction and system tensor maps.  The descent
@@ -53,16 +131,6 @@ theorem podReindexing_reduction_tensor_square_descent
       (podReindexCalculus l E X).integralTensorModel
       (podReindexCalculus l E Y).integralTensorModel)
     (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
-    (w : (podReindexCalculus l E Y).systemClosed.tensor ⋙
-        integralComparisonDerivedSequencePullback l E g ≅
-      (integralComparisonDerivedSequencePullback l E g).prod
-        (integralComparisonDerivedSequencePullback l E g) ⋙
-          (podReindexCalculus l E X).systemClosed.tensor)
-    (v : ∀ M N : podReindexingDerived l E Y none,
-      (podOrdinaryReindex l E g).obj
-          ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ⟶
-        (podReindexCalculus l E X).integralClosed.tensor.obj
-          ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N))
     (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ)
       (hk : p + q = k) (U : X.ProEt)
       (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
@@ -79,13 +147,15 @@ theorem podReindexing_reduction_tensor_square_descent
     (M N : podReindexingDerived l E Y none) :
     (integralComparisonDerivedSequencePullback l E g).map
         ((podReindexCalculus l E Y).reductionTensor.hom.app (M, N)) ≫
-      w.hom.app ((podReindexCalculus l E Y).reduction.obj M,
-        (podReindexCalculus l E Y).reduction.obj N) ≫
+      (podReindexingSystemTensor l E g).hom.app
+        ((podReindexCalculus l E Y).reduction.obj M,
+          (podReindexCalculus l E Y).reduction.obj N) ≫
       (podReindexCalculus l E X).systemClosed.tensor.map
         (Prod.mkHom (A.reduction.hom.app M) (A.reduction.hom.app N)) =
     A.reduction.hom.app
         ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ≫
-      (podReindexCalculus l E X).reduction.map (v M N) ≫
+      (podReindexCalculus l E X).reduction.map
+        (podReindexingIntegralTensorHom l E g c h M N) ≫
       (podReindexCalculus l E X).reductionTensor.hom.app
         ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N) := by
   sorry

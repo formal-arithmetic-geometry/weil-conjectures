@@ -9,7 +9,7 @@ public import Sheaf.Paper.PodCompletionReindexModels
 public import Sheaf.Paper.PodReindexingCoherenceData
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
 import all Sheaf.Paper.CompletedPullbackTowerCore
-import Sheaf.Paper.PodReindexingReductionTensorSquareDescent
+public import Sheaf.Paper.PodReindexingReductionTensorSquareDescent
 
 /-! # Coherent reduction of the normalized ordinary reindexing tensor comparison
 
@@ -30,32 +30,6 @@ namespace WeilConjectures
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-/-- The two presentations use the same sequence inverse image.
-Source: Stacks 03D2 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
-theorem podReindexing_sequence_pullback_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    pullbackTensorSequenceDerived l E g = integralComparisonDerivedSequencePullback l E g := by
-  have he : pullbackTensorSequenceInverse l E g = integralComparisonSequencePullback l E g := by
-    unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
-    congr 1
-    unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
-    rw [pullbackTensorSequenceRing_eq]
-  unfold pullbackTensorSequenceDerived integralComparisonDerivedSequencePullback
-  congr 1
-
-/-- The existing system tensor comparison, transported only by equality of its functor.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
-def podReindexingSystemTensor {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    (podReindexCalculus l E Y).systemClosed.tensor ⋙
-        integralComparisonDerivedSequencePullback l E g ≅
-      (integralComparisonDerivedSequencePullback l E g).prod
-        (integralComparisonDerivedSequencePullback l E g) ⋙
-          (podReindexCalculus l E X).systemClosed.tensor :=
-  let e := eqToIso (podReindexing_sequence_pullback_eq l E g)
-  Functor.isoWhiskerLeft _ e.symm ≪≫ pullbackTensorSystemComparison l E g ≪≫
-    Functor.isoWhiskerRight (NatIso.prod e e) _
 
 private theorem adjunction_mate_of_unit
     {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C}
@@ -86,51 +60,6 @@ theorem podReindexing_reduction_inv_mate
       have hu := hA.2.2.2.1 K
       dsimp only [Functor.id_obj, Functor.comp_obj] at hu
       simpa only [Category.assoc, Iso.app_hom] using hu)
-
-/-- The normalized ordinary tensor arrow, with its construction kept behind one name.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
-@[irreducible] def podReindexingIntegralTensorHom
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (c : PodReindexingCoherence.Comparison l E g none
-      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
-      (podReindexCalculus l E X).integralTensorModel
-      (podReindexCalculus l E Y).integralTensorModel)
-    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
-    (M N : podReindexingDerived l E Y none) :
-    (podOrdinaryReindex l E g).obj
-        ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ⟶
-      (podReindexCalculus l E X).integralClosed.tensor.obj
-        ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N) :=
-  ((((eqToIso h).app
-          ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N))).symm ≪≫
-          c.tensor.app (M, N) ≪≫
-          (podReindexCalculus l E X).integralClosed.tensor.mapIso
-            (((eqToIso h).app M).prod ((eqToIso h).app N))).hom)
-
-/-- The defining equation of the normalized ordinary tensor arrow.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
-theorem podReindexingIntegralTensorHom_eq
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (c : PodReindexingCoherence.Comparison l E g none
-      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
-      (podReindexCalculus l E X).integralTensorModel
-      (podReindexCalculus l E Y).integralTensorModel)
-    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
-    (M N : podReindexingDerived l E Y none) :
-    podReindexingIntegralTensorHom l E g c h M N =
-      ((((eqToIso h).app
-          ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N))).symm ≪≫
-          c.tensor.app (M, N) ≪≫
-          (podReindexCalculus l E X).integralClosed.tensor.mapIso
-            (((eqToIso h).app M).prod ((eqToIso h).app N))).hom) := by
-  unfold podReindexingIntegralTensorHom
-  rfl
 
 /-- The existing tensor realization, displayed in the reindexing calculus.
 Source: Stacks 07A4 and 0941
@@ -278,8 +207,6 @@ theorem podReindexing_reduction_tensor_square
     q.P.map q.bY ≫ q.w₁ ≫ q.w₂ = q.a ≫ q.LX.map v ≫ q.bX := by
   dsimp [podReindexingTensorFrame, podReindexingIntegralTensorHom]
   exact podReindexing_reduction_tensor_square_descent l E g A hA c h
-    (podReindexingSystemTensor l E g)
-    (fun M N ↦ podReindexingIntegralTensorHom l E g c h M N)
     c.tensorChain_pure M N
 
 end WeilConjectures

@@ -2,7 +2,7 @@
  "id": "lem-pod-reindexing-reduction-tensor-square-descent",
  "kind": "statement",
  "title": "Descent of the strict reduction tensor representative square",
- "statement": "Under the recorded normalized coefficient and tensor comparison data, the strict pure-tensor comparison formula descends through the product K-flat localization to the whole-system reduction/tensor square.",
+ "statement": "For the normalized completion reindexing data and coherent tensor comparison, the strict pure-tensor comparison formula descends through the product K-flat localization to the whole-system reduction/tensor square, using the canonical system tensor comparison and canonical normalized ordinary tensor map.",
  "stmt_deps": [
   "def-pod-completion-reindex-models",
   "def-pod-reindexing-coherence-data",
@@ -91,7 +91,7 @@
   "module": "Sheaf.Paper.PodReindexingReductionTensorSquareDescent",
   "file": "lean/Sheaf/Paper/PodReindexingReductionTensorSquareDescent.lean",
   "declaration": "WeilConjectures.podReindexing_reduction_tensor_square_descent",
-  "statement": "theorem podReindexing_reduction_tensor_square_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A) (c : PodReindexingCoherence.Comparison l E g none (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed (podReindexCalculus l E X).integralTensorModel (podReindexCalculus l E Y).integralTensorModel) (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g) (w : (podReindexCalculus l E Y).systemClosed.tensor ⋙ integralComparisonDerivedSequencePullback l E g ≅ (integralComparisonDerivedSequencePullback l E g).prod (integralComparisonDerivedSequencePullback l E g) ⋙ (podReindexCalculus l E X).systemClosed.tensor) (v : ∀ M N : podReindexingDerived l E Y none, (podOrdinaryReindex l E g).obj ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ⟶ (podReindexCalculus l E X).integralClosed.tensor.obj ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N)) (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ) (hk : p + q = k) (U : X.ProEt) (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U))) (y : (L.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))), (((c.tensorChain P L).hom.f k).val.app (op U)) (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y) (podReindexingRing l E Y none) P L p q k hk (op ((proEtaleIsoPostcompose g).obj U)) x y) = coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X) (podReindexingRing l E X none) ((podReindexingComplexFunctor l E g none).obj P) ((podReindexingComplexFunctor l E g none).obj L) p q k hk (op U) x y) (M N : podReindexingDerived l E Y none) : (integralComparisonDerivedSequencePullback l E g).map ((podReindexCalculus l E Y).reductionTensor.hom.app (M, N)) ≫ w.hom.app ((podReindexCalculus l E Y).reduction.obj M, (podReindexCalculus l E Y).reduction.obj N) ≫ (podReindexCalculus l E X).systemClosed.tensor.map (Prod.mkHom (A.reduction.hom.app M) (A.reduction.hom.app N)) = A.reduction.hom.app ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ≫ (podReindexCalculus l E X).reduction.map (v M N) ≫ (podReindexCalculus l E X).reductionTensor.hom.app ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N)",
+  "statement": "theorem podReindexing_reduction_tensor_square_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A) (c : PodReindexingCoherence.Comparison l E g none (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed (podReindexCalculus l E X).integralTensorModel (podReindexCalculus l E Y).integralTensorModel) (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g) (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ) (hk : p + q = k) (U : X.ProEt) (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U))) (y : (L.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))), (((c.tensorChain P L).hom.f k).val.app (op U)) (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y) (podReindexingRing l E Y none) P L p q k hk (op ((proEtaleIsoPostcompose g).obj U)) x y) = coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X) (podReindexingRing l E X none) ((podReindexingComplexFunctor l E g none).obj P) ((podReindexingComplexFunctor l E g none).obj L) p q k hk (op U) x y) (M N : podReindexingDerived l E Y none) : (integralComparisonDerivedSequencePullback l E g).map ((podReindexCalculus l E Y).reductionTensor.hom.app (M, N)) ≫ (podReindexingSystemTensor l E g).hom.app ((podReindexCalculus l E Y).reduction.obj M, (podReindexCalculus l E Y).reduction.obj N) ≫ (podReindexCalculus l E X).systemClosed.tensor.map (Prod.mkHom (A.reduction.hom.app M) (A.reduction.hom.app N)) = A.reduction.hom.app ((podReindexCalculus l E Y).integralClosed.tensor.obj (M, N)) ≫ (podReindexCalculus l E X).reduction.map (podReindexingIntegralTensorHom l E g c h M N) ≫ (podReindexCalculus l E X).reductionTensor.hom.app ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N)",
   "branch": "sheaf-dag",
   "by": "F6",
   "date": "2026-10-28"
@@ -107,13 +107,23 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F6",
-  "result": "pass",
-  "landing": "20261027T233934-L-4138968",
+  "reviewer": "C-a875d",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261028T020327-L-2495141",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected descent statement (canonical podReindexingSystemTensor / podReindexingIntegralTensorHom instead of free w/v) against parent's use, the clone's original declarations and node; moved decls verbatim; importers + AugmentationSquare compiled"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "E3 stage 3",
+  "old_statement": "Under the recorded normalized coefficient and tensor comparison data, the strict pure-tensor comparison formula descends through the product K-flat localization to the whole-system reduction/tensor square.",
+  "what": "The original Lean interface quantified over arbitrary w and v, but supplied no compatibility laws connecting them to the canonical normalized comparisons; the conclusion therefore depended on unconstrained data. Replace them by the canonical system comparison and canonical ordinary tensor map already used by the parent theorem. This repairs the intermediate statement without changing any Challenge target.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 2 and 4: strict pure-tensor calculation followed by K-flat localization descent."
+  }
  }
 }
