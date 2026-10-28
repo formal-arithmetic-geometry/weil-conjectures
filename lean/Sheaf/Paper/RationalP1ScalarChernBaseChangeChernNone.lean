@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.CompletedChernNormalizedUnique
+import Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNoneCanonical
 
 /-! # Specialized coefficient cases for scalar Chern exchange -/
 
@@ -54,6 +56,23 @@ theorem scalar_chern_base_change_chern_none
     let c₂ := scalarP2Chern l none Y r b
     let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)
     F.map cq ≫ secondTraceExchange l none k p hpl Y =
-        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by sorry
+        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by
+  dsimp only
+  have hY : IsUnit (l : Γ(Y, ⊤)) := by
+    have hl : IsUnit (l : k) :=
+      (CharP.isUnit_natCast_iff (Fact.out : p.Prime)).2
+        (fun h ↦ hpl ((Nat.prime_dvd_prime_iff_eq (Fact.out : p.Prime)
+          (Fact.out : l.Prime)).1 h))
+    simpa only [map_natCast] using
+      hl.map ((Y ↘ Spec (.of k)).appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
+  have hP : IsUnit (l : Γ(ProjectiveLine Y, ⊤)) := by
+    simpa only [map_natCast] using hY.map (ProjectiveLine Y ↘ Y).appTop.hom
+  obtain ⟨a₀, ha₀, b₀, hb₀, hcore⟩ :=
+    scalar_chern_base_change_chern_none_canonical l k p hpl Y δ family r hY hP
+  have haa : a = a₀ := completedChernNormalized_unique l r.tq.toPresentation a a₀ ha ha₀
+  have hbb : b = b₀ := completedChernNormalized_unique l r.t₂.toPresentation b b₀ hb hb₀
+  subst a
+  subst b
+  exact hcore
 
 end AlgebraicGeometry.ProEtale.RationalP1

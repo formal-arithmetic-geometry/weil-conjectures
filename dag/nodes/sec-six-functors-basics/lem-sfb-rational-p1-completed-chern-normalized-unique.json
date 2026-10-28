@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-rational-p1-completed-chern-normalized-unique",
+ "kind": "statement",
+ "title": "Uniqueness of normalized completed Chern adjuncts",
+ "statement": "theorem completedChernNormalized_unique\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S}\n    (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)\n    (a a' : DiagonalTrace.completedUnit l S ⟶\n      p.Rc.R.obj ((DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l p a)\n    (ha' : CompletedChernNormalized l p a') : a = a' ",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "lem-diagonal-completed-chern-lift"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Normalization uniqueness for the completed Chern adjunct in the none-coefficient exchange."
+ },
+ "proof": [
+  {
+   "text": "Cancel the invertible presentation source comparison in the two normalization equations, then use faithfulness of completed scalar restriction on this completed hom set to recover equality of the original adjuncts.",
+   "uses": [
+    "def-sfb-rational-p1-scalar-chern-maps",
+    "lem-diagonal-completed-chern-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "lem-diagonal-completed-chern-lift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Normalization uniqueness for the completed Chern adjunct in the none-coefficient exchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit and Chern class split the derived direct image on a projective line, with trace values zero and one",
+   "date": "2026-10-27",
+   "results": "Eight hits: projective resolutions, linear algebra direct-sum traces, and split maps of cochain complexes. No projective-line Chern splitting or sheaf trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line Chern splitting normalized trace commutes with pullback base change",
+   "date": "2026-10-27",
+   "results": "Eight hits on normalized field traces, elliptic curves and LinearMap.trace_baseChange. None for the derived geometric trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biprod\", \"desc\"",
+   "date": "2026-10-27",
+   "results": "biprod.desc, inl_desc, inr_desc and their reassociations. These are used for the categorical assembly; they do not construct the geometric generators.",
+   "verdict": "Use Mathlib biproduct calculus for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*Chern|chern.*trace",
+   "date": "2026-10-27",
+   "results": "No Mathlib matches. In the project, DiagonalCompletedChernLift constructs normalized completed adjuncts, DiagonalTraceTwistedSplittingComponents proves the strict-system components, and DiagonalUniformizerTraceChernDegree proves completed Chern degree privately. DiagonalTowerCoefficients.baseChange needs two families and completed cycle systems not present in this item.",
+   "verdict": "Separate the intrinsic splittings from geometric preservation of their actual generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNone",
+  "date": "2026-10-28",
+  "group": "W8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-chern-base-change-chern-none",
+   "place": "Normalization uniqueness for the completed Chern adjunct in the none-coefficient exchange.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedChernNormalizedUnique",
+  "file": "lean/Sheaf/Paper/CompletedChernNormalizedUnique.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.completedChernNormalized_unique",
+  "statement": "theorem completedChernNormalized_unique\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S}\n    (p : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)\n    (a a' : DiagonalTrace.completedUnit l S ⟶\n      p.Rc.R.obj ((DiagonalTrace.completedLine l X) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l p a)\n    (ha' : CompletedChernNormalized l p a') : a = a' ",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.completedChernNormalized_unique"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261028T020847-L-2555726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261028T020847-L-2555726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

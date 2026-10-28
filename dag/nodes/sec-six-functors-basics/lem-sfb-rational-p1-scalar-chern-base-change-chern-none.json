@@ -14,27 +14,17 @@
  },
  "proof": [
   {
-   "text": "Fix the finite coefficient to the closure coefficient branch and carry out the scalar Chern exchange diagram chase from the second-identity proof. The remaining geometric exchange mate, root-normalized Tate comparison, and whole-system Chern normalization are the strictly concrete closure coefficient obligations.",
+   "text": "Obtain canonical normalized completed q and p2 Chern lifts and use uniqueness of normalized lifts to replace the arbitrary inputs by them. Apply the canonical closure-coefficient exchange obligation, then unfold the lets.",
    "uses": [
-    "def-weil-pbc-ambient-ringed-exchange",
-    "def-sfb-rational-p1-scalar-chern-maps",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "lem-sp-tower-integral-class-pullback",
-    "def-sfb-diagonal-coefficient-reference",
-    "def-sfb-diagonal-trace-models",
-    "def-sfb-diagonal-coefficient-diagrams"
+    "lem-sfb-rational-p1-completed-chern-normalized-unique",
+    "lem-sfb-rational-p1-scalar-chern-base-change-chern-none-canonical"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-sfb-rational-p1-scalar-chern-maps",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "lem-sp-tower-integral-class-pullback",
-  "def-sfb-diagonal-coefficient-reference",
-  "def-sfb-diagonal-trace-models",
-  "def-sfb-diagonal-coefficient-diagrams"
+  "lem-sfb-rational-p1-completed-chern-normalized-unique",
+  "lem-sfb-rational-p1-scalar-chern-base-change-chern-none-canonical"
  ],
  "proof_origin": {
   "by": "worker",
@@ -97,7 +87,7 @@
   "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_chern_base_change_chern_none",
   "statement": "theorem scalar_chern_base_change_chern_none\n    (l : ℕ) [Fact l.Prime]\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (r : Reference l Y δ family)\n    (a : DiagonalTrace.completedUnit l Y ⟶\n      r.tq.Rc.R.obj ((DiagonalTrace.completedLine l (ProjectiveLine Y)) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l r.tq.toPresentation a)\n    (b : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶\n      r.t₂.Rc.R.obj ((DiagonalTrace.completedLine l (diagonalSurface Y)) ⟦(2 : ℤ)⟧))\n    (hb : CompletedChernNormalized l r.t₂.toPresentation b) :\n    let Λ := (coefficient l none).X\n    let cq := scalarQChern l none Y r a\n    let c₂ := scalarP2Chern l none Y r b\n    let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)\n    F.map cq ≫ secondTraceExchange l none k p hpl Y =\n        (scalarUnitPullIso Λ Y).hom ≫ c₂",
   "branch": "sheaf-dag",
-  "by": "G1",
+  "by": "W8",
   "date": "2026-10-28",
   "declarations": [
    "AlgebraicGeometry.ProEtale.RationalP1.scalar_chern_base_change_chern_none"
@@ -114,12 +104,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "W8",
   "result": "pass",
-  "landing": "20261027T233942-L-4140445",
+  "landing": "20261028T020847-L-2555726",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
