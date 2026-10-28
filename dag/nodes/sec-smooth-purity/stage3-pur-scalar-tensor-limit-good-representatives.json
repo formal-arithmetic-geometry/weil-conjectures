@@ -2,27 +2,29 @@
  "id": "stage3-pur-scalar-tensor-limit-good-representatives",
  "kind": "lemma",
  "title": "Strict scalar/tensor transport on good localization representatives",
- "statement": "In the setting of [stage3-pur-scalar-tensor-limit-strict-witness], the strict K-flat equation yields the realized equality for every pair of good localization representatives and every bridge from scalar extension of the E tensor to the completed L tensor.",
+ "statement": "In the setting of [stage3-pur-scalar-tensor-limit-strict-witness], let chi be the specified ordinary-to-completed scalar transformation and a the specified ordinary scalar/tensor isomorphism. On every pair P,Q of good integral localization representatives, a(P,Q) followed by the L tensor of chi(P),chi(Q), TL.realization and the total limit of the two scalarReduction maps equals chi at the completed E tensor followed by SY.realization and the total limit of sequence scalar applied to tensorReduction_E and then alpha. Both sides have source ordinary scalar extension of the completed E tensor. The bridge is prescribed; there is no arbitrary bridge or completeness assumption.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
   "place": "K-flat good representatives, SY/TL normalization, and strict scalar/tensor naturality"
  },
  "stmt_deps": [
-  "stage3-pur-scalar-tensor-limit-strict-witness"
+  "stage3-pur-scalar-tensor-limit-strict-witness",
+  "lem-pur-integral-operations-scalar-extension"
  ],
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: The proposed normalization argument does not constrain the arbitrary bridge beta. Taking beta = 0 forces the fixed right-hand coordinate to vanish. For complete inputs the canonical scalarTensorCompleted isomorphism supplies another beta, so cancellation also forces the whole left postcomposition to vanish. Strict K-flat scalar/tensor compatibility does not assert either vanishing. The original theorem remains unproved; its intended normalization/localization route needs a specified canonical bridge.",
+   "text": "Choose simultaneous whole-system coherent flat-term K-flat quotient presentations of P,Q. Normalize TE,TL,SY on these presentations. Apply DerivedSigmaModel to identify the strict sequence tensor/scalar map. The ordinary tensorator has the same pure-tensor formula, and scalarCompletion inserts the quotient augmentation with zero shifted coordinate. Naturality of Roos comparison and localization yield the equation before inverting completion. This normalization is the one remaining proof hole.",
    "uses": [
     "stage3-pur-scalar-tensor-limit-strict-witness",
     "lem-pc-kflat-resolution",
     "lem-pur-kflat-change-of-rings-independent",
-    "def-trf-integral-comparison-realization-models"
+    "def-trf-integral-comparison-realization-models",
+    "lem-pur-integral-operations-scalar-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Diagnostic proved in Lean, without using the disputed theorem: on complete inputs scalarTensorCompleted gives an isomorphism between the bridge objects. For maps f and g, the assertion that beta followed by f equals g for every beta is equivalent to f = 0 and g = 0. Evaluate at the zero bridge for g = 0, evaluate at the canonical isomorphism and cancel it for f = 0, and use composition with zero for the converse.",
+   "text": "The independently proved scalarTensorCompleted_unitEquation expands the definition of the completed comparison and cancels its source completion isomorphism. It identifies the precomposition of the completed comparison by scalarCompletion with the ordinary comparison followed by the tensor of the two scalarCompletion maps. The previous arbitrary-bridge vanishing diagnostic is retained solely to explain the corrected defect.",
    "uses": [
     "lem-pur-integral-operations-scalar-extension"
    ],
@@ -38,8 +40,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "lean/Sheaf/Paper/ScalarTowerTensorLimitRepresentativeTransport.lean; lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean",
-  "place": "A7, 2026-10-28: the arbitrary-bridge vanishing diagnostic is proved independently; the original assertion is marked STATEMENT-DISPUTED and its single hole is retained."
+  "document": "lean/Sheaf/Paper/ScalarTowerTensorLimitRepresentativeTransport.lean; literature/stacks-project/sites-cohomology.tex",
+  "place": "B2, 2026-10-28: canonical ordinary-source repair. Naturality transport and completion cancellation proved; strict good-representative normalization retains its single explicit hole."
  },
  "mathlib_searches": [
   {
@@ -86,9 +88,9 @@
   "module": "Sheaf.Paper.ScalarTowerTensorLimitRepresentativeTransport",
   "file": "lean/Sheaf/Paper/ScalarTowerTensorLimitRepresentativeTransport.lean",
   "declaration": "WeilConjectures.ScalarExtensionTower.scalarTowerTensorLimitSquare_on_good_representatives",
-  "statement": "theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u}) (SE : CoefficientDerivedSystemCalculus.{u, u} l E W) (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) (ρE : IntegralComparisonRoosModel.{u, u} l E W) (ρL : IntegralComparisonRoosModel.{u, u} l L W) (SY : IntegralComparisonScalarModel.{u, u} l E L ι W SE ρL) (TE : TensorModel l E W SE ρE) (TL : TensorModel l L W SL ρL) (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅ (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor) (_hstrict : DerivedSigmaModel l E L ι W SE SL α) : ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (β : (integralScalarExtensionOfUniverses l E L ι W).obj ((integralCompletedTensor l E W).obj ((integralOperationsGoodLocalization l E W).obj P, (integralOperationsGoodLocalization l E W).obj Q)) ⟶ (integralCompletedTensor l L W).obj ((integralScalarExtension l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj P), (integralScalarExtension l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj Q))), β ≫ TL.realization.hom.app ((integralScalarExtension.{u} l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj P), (integralScalarExtension.{u} l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj Q)) ≫ (coefficientSequenceLimit.{u, u} l L W).map (SL.systemClosed.tensor.map (Prod.mkHom (scalarReduction l E L ι W SE SL ρL SY ((integralOperationsGoodLocalization l E W).obj P)) (scalarReduction l E L ι W SE SL ρL SY ((integralOperationsGoodLocalization l E W).obj Q)))) = SY.realization.hom.app ((integralCompletedTensor.{u, u} l E W).obj ((integralOperationsGoodLocalization l E W).obj P, (integralOperationsGoodLocalization l E W).obj Q)) ≫ (coefficientSequenceLimit.{u, u} l L W).map ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map (tensorReduction l E W SE ρE TE ((integralOperationsGoodLocalization l E W).obj P) ((integralOperationsGoodLocalization l E W).obj Q)) ≫ α.hom.app (SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj P), SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj Q)))",
+  "statement": "theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u}) (SE : CoefficientDerivedSystemCalculus.{u, u} l E W) (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) (ρE : IntegralComparisonRoosModel.{u, u} l E W) (ρL : IntegralComparisonRoosModel.{u, u} l L W) (SY : IntegralComparisonScalarModel.{u, u} l E L ι W SE ρL) (TE : TensorModel l E W SE ρE) (TL : TensorModel l L W SL ρL) (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅ (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor) (hstrict : DerivedSigmaModel l E L ι W SE SL α) : ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory), (scalarTensorOrdinary l E L ι W).hom.app ((integralOperationsGoodLocalization l E W).obj P, (integralOperationsGoodLocalization l E W).obj Q) ≫ (integralCompletedTensor l L W).map (Prod.mkHom ((scalarCompletion l E L ι W).app ((integralOperationsGoodLocalization l E W).obj P)) ((scalarCompletion l E L ι W).app ((integralOperationsGoodLocalization l E W).obj Q))) ≫ TL.realization.hom.app ((integralScalarExtension.{u} l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj P), (integralScalarExtension.{u} l E L ι W).obj ((integralOperationsGoodLocalization l E W).obj Q)) ≫ (coefficientSequenceLimit.{u, u} l L W).map (SL.systemClosed.tensor.map (Prod.mkHom (scalarReduction l E L ι W SE SL ρL SY ((integralOperationsGoodLocalization l E W).obj P)) (scalarReduction l E L ι W SE SL ρL SY ((integralOperationsGoodLocalization l E W).obj Q)))) = (scalarCompletion l E L ι W).app ((integralCompletedTensor l E W).obj ((integralOperationsGoodLocalization l E W).obj P, (integralOperationsGoodLocalization l E W).obj Q)) ≫ SY.realization.hom.app ((integralCompletedTensor.{u, u} l E W).obj ((integralOperationsGoodLocalization l E W).obj P, (integralOperationsGoodLocalization l E W).obj Q)) ≫ (coefficientSequenceLimit.{u, u} l L W).map ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map (tensorReduction l E W SE ρE TE ((integralOperationsGoodLocalization l E W).obj P) ((integralOperationsGoodLocalization l E W).obj Q)) ≫ α.hom.app (SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj P), SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj Q)))",
   "branch": "sheaf-dag",
-  "by": "G8",
+  "by": "B2",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -104,11 +106,50 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
-  "result": "pass",
-  "landing": "20261028T034649-L-3528853",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-9bd48",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261028T072339-L-1935707",
+  "kind": "interface",
+  "note": "independent cc review: new item statement (prescribed bridge scalarTensorOrdinary ≫ tensor(scalarCompletion)) and adapted assembly premise against definitions and normalizations in IntegralOperationsScalarComparisons / IntegralComparisonRealizationModels / DerivedSigmaModel; node records against Lean; importer TransportAssembly OK in 3b"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "B2 stage 2",
+  "old_statement": "In the setting of [stage3-pur-scalar-tensor-limit-strict-witness], the strict K-flat equation yields the realized equality for every pair of good localization representatives and every bridge from scalar extension of the E tensor to the completed L tensor.",
+  "what": "The old theorem demanded the equation for every beta, including zero; the existing diagnostic proves this forces unintended vanishing on complete inputs. Replace beta by the specified ordinary tensorator followed by the tensor of the two completion maps, and precompose the other word with source completion. No hole is counted as closed. The canonical completed square above this lemma is unchanged. stmt_deps += lem-pur-integral-operations-scalar-extension, the owner of scalarTensorOrdinary, scalarCompletion and scalarTensorCompleted named in the statement (reviewer fix).",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex; lean/Sheaf/Paper/IntegralOperationsScalarComparisons.lean",
+   "place": "lemma-pullback-tensor-product (07A4); scalarTensorCompleted definition and scalarCompletion normalization: prescribed canonical comparisons"
+  },
+  "citers": [
+   {
+    "id": "stage3-pur-scalar-tensor-limit-transport-assembly",
+    "holds": true,
+    "note": "The canonical completed conclusion is preserved. The strict-equation implication is repaired in this packet; the transport-assembly caller applies the corrected statements using exactly its existing proof."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "STATEMENT-DISPUTED: The proposed normalization argument does not constrain the arbitrary bridge beta. Taking beta = 0 forces the fixed right-hand coordinate to vanish. For complete inputs the canonical scalarTensorCompleted isomorphism supplies another beta, so cancellation also forces the whole left postcomposition to vanish. Strict K-flat scalar/tensor compatibility does not assert either vanishing. The original theorem remains unproved; its intended normalization/localization route needs a specified canonical bridge.",
+    "uses": [
+     "stage3-pur-scalar-tensor-limit-strict-witness",
+     "lem-pc-kflat-resolution",
+     "lem-pur-kflat-change-of-rings-independent",
+     "def-trf-integral-comparison-realization-models"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Diagnostic proved in Lean, without using the disputed theorem: on complete inputs scalarTensorCompleted gives an isomorphism between the bridge objects. For maps f and g, the assertion that beta followed by f equals g for every beta is equivalent to f = 0 and g = 0. Evaluate at the zero bridge for g = 0, evaluate at the canonical isomorphism and cancel it for f = 0, and use composition with zero for the converse.",
+    "uses": [
+     "lem-pur-integral-operations-scalar-extension"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_stmt_deps": [
+   "stage3-pur-scalar-tensor-limit-strict-witness"
+  ]
  }
 }

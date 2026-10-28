@@ -6,6 +6,7 @@ Authors: SHEAF group G8
 module
 
 public import Sheaf.Paper.ScalarTowerTensorLimitStrictWitness
+import all Sheaf.Paper.ScalarTowerTensorLimitRepresentativeTransport
 import all Sheaf.Paper.IntegralOperationsWellDefined
 import Mathlib.CategoryTheory.Localization.Prod
 
@@ -38,31 +39,22 @@ attribute [local irreducible]
   integralCompletedTensor scalarReduction tensorReduction
   integralComparisonDerivedSequenceScalar
 
-private theorem transport_all_bridges
+private theorem transport_natural_eq
     {A B C : Type*} [Category* A] [Category* B] [Category* C]
-    (q : A ⥤ B) [q.EssSurj] {F G H : B ⥤ C}
-    (a : F ⟶ H) (b : G ⟶ H)
-    (h : ∀ P : A, ∀ β : F.obj (q.obj P) ⟶ G.obj (q.obj P),
-      β ≫ b.app (q.obj P) = a.app (q.obj P))
-    (X : B) (β : F.obj X ⟶ G.obj X) : β ≫ b.app X = a.app X := by
+    (q : A ⥤ B) [q.EssSurj] {F G : B ⥤ C}
+    (a b : F ⟶ G) (h : ∀ P : A, a.app (q.obj P) = b.app (q.obj P))
+    (X : B) : a.app X = b.app X := by
   let e := q.objObjPreimageIso X
-  have he := h (q.objPreimage X) (F.map e.hom ≫ β ≫ G.map e.inv)
   apply (cancel_epi (F.map e.hom)).1
-  calc
-    F.map e.hom ≫ (β ≫ b.app X) =
-        (F.map e.hom ≫ β ≫ G.map e.inv) ≫ b.app (q.obj (q.objPreimage X)) ≫
-          H.map e.hom := by
-      simp only [Category.assoc, b.naturality_assoc, ← H.map_comp,
-        e.inv_hom_id, H.map_id, Category.comp_id]
-    _ = a.app (q.obj (q.objPreimage X)) ≫ H.map e.hom := by
-      rw [← Category.assoc, he]
-    _ = F.map e.hom ≫ a.app X := (a.naturality e.hom).symm
+  rw [a.naturality, b.naturality, h]
 
 /--
 Localization, completion, and total-limit functoriality assemble the square
-from its equality on all K-flat good representatives.  The hypothesis is an
-explicit family of already-realized representative equalities, rather than
-the cochain-level predicate DerivedSigmaModel.
+from the prescribed ordinary-source equation on K-flat good representatives.
+Both ordinary-source word maps are natural. Essential surjectivity extends their
+equality to every input, and invertibility of source completion on the complete
+tensor gives the specified completed comparison. The cochain-level predicate
+DerivedSigmaModel is not used by this transport step.
 Source: Stacks 07A4 and 0941 (blueprint:
 stage3-pur-scalar-tensor-limit-strict-equation-assembly).
 -/
@@ -81,17 +73,16 @@ theorem scalarTowerTensorLimitSquare_of_representativeTransport
     (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
       (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
         (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)
-    (hRep : ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
-      (β : (integralScalarExtensionOfUniverses l E L ι W).obj
-          ((integralCompletedTensor l E W).obj
-            ((integralOperationsGoodLocalization l E W).obj P,
-              (integralOperationsGoodLocalization l E W).obj Q)) ⟶
-        (integralCompletedTensor l L W).obj
-          ((integralScalarExtension l E L ι W).obj
-              ((integralOperationsGoodLocalization l E W).obj P),
-            (integralScalarExtension l E L ι W).obj
-              ((integralOperationsGoodLocalization l E W).obj Q))),
-      β ≫ TL.realization.hom.app
+    (hRep : ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory),
+      (scalarTensorOrdinary l E L ι W).hom.app
+          ((integralOperationsGoodLocalization l E W).obj P,
+            (integralOperationsGoodLocalization l E W).obj Q) ≫
+        (integralCompletedTensor l L W).map (Prod.mkHom
+          ((scalarCompletion l E L ι W).app
+            ((integralOperationsGoodLocalization l E W).obj P))
+          ((scalarCompletion l E L ι W).app
+            ((integralOperationsGoodLocalization l E W).obj Q))) ≫
+        TL.realization.hom.app
           ((integralScalarExtension.{u} l E L ι W).obj
               ((integralOperationsGoodLocalization l E W).obj P),
             (integralScalarExtension.{u} l E L ι W).obj
@@ -102,7 +93,11 @@ theorem scalarTowerTensorLimitSquare_of_representativeTransport
               ((integralOperationsGoodLocalization l E W).obj P))
             (scalarReduction l E L ι W SE SL ρL SY
               ((integralOperationsGoodLocalization l E W).obj Q)))) =
-      SY.realization.hom.app
+      (scalarCompletion l E L ι W).app
+          ((integralCompletedTensor l E W).obj
+            ((integralOperationsGoodLocalization l E W).obj P,
+              (integralOperationsGoodLocalization l E W).obj Q)) ≫
+        SY.realization.hom.app
           ((integralCompletedTensor.{u, u} l E W).obj
             ((integralOperationsGoodLocalization l E W).obj P,
               (integralOperationsGoodLocalization l E W).obj Q)) ≫
@@ -154,16 +149,23 @@ theorem scalarTowerTensorLimitSquare_of_representativeTransport
     Functor.whiskerRight
       (Functor.whiskerRight (NatTrans.prod δ δ) SL.systemClosed.tensor)
       (coefficientSequenceLimit l L W)
-  have h := transport_all_bridges (q.prod q) a b (by
-    intro P β
-    simpa only [a, b, δ, τ, q, NatTrans.comp_app, Functor.whiskerLeft_app,
+  let χ := scalarCompletion l E L ι W
+  let c := (scalarTensorOrdinary l E L ι W).hom ≫
+    Functor.whiskerRight (NatTrans.prod χ χ) (integralCompletedTensor l L W)
+  have h := transport_natural_eq (q.prod q) (c ≫ b)
+      (Functor.whiskerLeft (integralCompletedTensor l E W) χ ≫ a) (by
+    intro P
+    simpa only [a, b, c, χ, δ, τ, q, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj, Functor.comp_obj,
       scalarReduction, tensorReduction, integralScalarExtension,
-      integralScalarExtensionOfUniverses] using hRep P.1 P.2 β) (M.obj, N.obj)
-    (scalarTensorCompleted l E L ι W M.obj N.obj M.property.1 N.property.1 hT).hom
-  simpa only [a, b, δ, τ, NatTrans.comp_app, Functor.whiskerLeft_app,
+      integralScalarExtensionOfUniverses, Category.assoc] using hRep P.1 P.2) (M.obj, N.obj)
+  let : IsIso (χ.app ((integralCompletedTensor l E W).obj (M.obj, N.obj))) :=
+    (scalarCompletion_existsUnique l E L ι W).exists.choose_spec.2 _ hT
+  apply (cancel_epi (χ.app ((integralCompletedTensor l E W).obj (M.obj, N.obj)))).1
+  rw [← Category.assoc, scalarTensorCompleted_unitEquation]
+  simpa only [a, b, c, χ, δ, τ, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj, Functor.comp_obj,
     scalarReduction, tensorReduction, integralScalarExtension,
-      integralScalarExtensionOfUniverses] using h
+    integralScalarExtensionOfUniverses, Category.assoc] using h
 
 end WeilConjectures.ScalarExtensionTower

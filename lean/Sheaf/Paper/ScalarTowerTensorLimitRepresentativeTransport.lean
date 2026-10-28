@@ -33,17 +33,24 @@ attribute [local irreducible]
   integralCompletedTensor scalarReduction tensorReduction
   integralComparisonDerivedSequenceScalar
 
--- STATEMENT-DISPUTED: β is arbitrary, including zero. On complete inputs a canonical
--- isomorphism supplies another β; the universal equation then forces both the fixed
--- coordinate and the entire postcomposition to vanish. See the proved diagnostic below.
-/--
-The strict K-flat calculation gives the displayed map equality after passing
-from good cochain representatives to the derived quotient.  This is the
-localization input for the limit transport below; it has no arbitrary
-constructible inputs and no completed-tensor comparison.
-Source: Stacks 07A4 and 0941 (blueprint:
-stage3-pur-scalar-tensor-limit-good-representatives).
--/
+/-- The normalized scalar/tensor square on good representatives, before inverting
+scalar completion. The bridge is the specified ordinary tensor comparison followed
+by the two completion maps. It is not an arbitrary morphism.
+
+Source: Stacks 07A4 and 0941; scalar/tensor normalization and localization
+(blueprint: stage3-pur-scalar-tensor-limit-good-representatives).
+
+Proof: take the actual whole-system quotient presentations of P and Q. The
+normalizations of TE, TL and SY express the two maps through the same Roos
+comparisons and the coherent reduction counits. Apply the strict equation hstrict
+on flat-term K-flat resolutions of the quotient presentations. Tensor balancing
+sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y), on both routes.
+This agrees with scalarTensorOrdinary's specified chain normalization. The
+scalarCompletion normalization inserts the quotient augmentation, with zero
+shifted coordinate. Both routes therefore agree on each homogeneous tensor and
+on both Roos coordinates. Naturality of the Roos comparison and localization
+remove the resolutions and yield the displayed equality. No inverse completion
+map, arbitrary bridge, or faithfulness of finite derived evaluations is used. -/
 theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
@@ -54,18 +61,17 @@ theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u})
     (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
       (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
         (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)
-    (_hstrict : DerivedSigmaModel l E L ι W SE SL α) :
-    ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
-      (β : (integralScalarExtensionOfUniverses l E L ι W).obj
-          ((integralCompletedTensor l E W).obj
-            ((integralOperationsGoodLocalization l E W).obj P,
-              (integralOperationsGoodLocalization l E W).obj Q)) ⟶
-        (integralCompletedTensor l L W).obj
-          ((integralScalarExtension l E L ι W).obj
-              ((integralOperationsGoodLocalization l E W).obj P),
-            (integralScalarExtension l E L ι W).obj
-              ((integralOperationsGoodLocalization l E W).obj Q))),
-      β ≫ TL.realization.hom.app
+    (hstrict : DerivedSigmaModel l E L ι W SE SL α) :
+    ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory),
+      (scalarTensorOrdinary l E L ι W).hom.app
+          ((integralOperationsGoodLocalization l E W).obj P,
+            (integralOperationsGoodLocalization l E W).obj Q) ≫
+        (integralCompletedTensor l L W).map (Prod.mkHom
+          ((scalarCompletion l E L ι W).app
+            ((integralOperationsGoodLocalization l E W).obj P))
+          ((scalarCompletion l E L ι W).app
+            ((integralOperationsGoodLocalization l E W).obj Q))) ≫
+        TL.realization.hom.app
           ((integralScalarExtension.{u} l E L ι W).obj
               ((integralOperationsGoodLocalization l E W).obj P),
             (integralScalarExtension.{u} l E L ι W).obj
@@ -76,7 +82,11 @@ theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u})
               ((integralOperationsGoodLocalization l E W).obj P))
             (scalarReduction l E L ι W SE SL ρL SY
               ((integralOperationsGoodLocalization l E W).obj Q)))) =
-      SY.realization.hom.app
+      (scalarCompletion l E L ι W).app
+          ((integralCompletedTensor l E W).obj
+            ((integralOperationsGoodLocalization l E W).obj P,
+              (integralOperationsGoodLocalization l E W).obj Q)) ≫
+        SY.realization.hom.app
           ((integralCompletedTensor.{u, u} l E W).obj
             ((integralOperationsGoodLocalization l E W).obj P,
               (integralOperationsGoodLocalization l E W).obj Q)) ≫
@@ -89,6 +99,27 @@ theorem scalarTowerTensorLimitSquare_on_good_representatives (W : Scheme.{u})
             (SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj P),
               SE.reduction.obj ((integralOperationsGoodLocalization l E W).obj Q))) := by
   sorry
+
+
+
+/-- The completed comparison is the ordinary comparison after cancelling its
+source completion map. This is its defining normalization, without any
+assertion about the system realization models. -/
+private theorem scalarTensorCompleted_unitEquation (W : Scheme.{u})
+    (M N : DerivedCategory (integralTowerModules.{u, u} l E W))
+    (hM : IsSfDerivedComplete l E W M) (hN : IsSfDerivedComplete l E W N)
+    (hT : IsSfDerivedComplete l E W ((integralCompletedTensor l E W).obj (M, N))) :
+    (scalarCompletion l E L ι W).app
+        ((integralCompletedTensor l E W).obj (M, N)) ≫
+      (scalarTensorCompleted l E L ι W M N hM hN hT).hom =
+    (scalarTensorOrdinary l E L ι W).hom.app (M, N) ≫
+      (integralCompletedTensor l L W).map (Prod.mkHom
+        ((scalarCompletion l E L ι W).app M)
+        ((scalarCompletion l E L ι W).app N)) := by
+  change (scalarCompletionIso l E L ι W _ hT).hom ≫
+      ((scalarCompletionIso l E L ι W _ hT).inv ≫ _ ≫ _) = _
+  rw [Iso.hom_inv_id_assoc]
+  rfl
 
 
 private theorem forall_bridge_iff_zero
@@ -106,7 +137,8 @@ private theorem forall_bridge_iff_zero
 
 /-- On complete inputs the arbitrary-bridge equation is equivalent to two vanishing
 conditions, not to strict scalar/tensor compatibility. This diagnoses the unrestricted
-bridge quantifier in `scalarTowerTensorLimitSquare_on_good_representatives`.
+bridge quantifier in the former version of this module's theorem.
+The repaired theorem instead uses the specified ordinary comparison and completion maps.
 
 Proof: the canonical completed scalar/tensor comparison is an isomorphism between
 its two bridge objects. The zero bridge first forces the fixed right-hand coordinate
