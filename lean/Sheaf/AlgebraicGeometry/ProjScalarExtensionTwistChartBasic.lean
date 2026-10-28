@@ -6,14 +6,9 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistData
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartInjective
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartSurjective
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
-import Sheaf.RingTheory.HomogeneousLocalizationScalarExtension
-import Sheaf.Algebra.Module.GradedLocalizationScalarExtension
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.ProjTwistBasicOpenFractions
-
 /-! # The scalar-extension twist map on a complete standard chart
 
 This is the complete-chart subproblem extracted from the arbitrary-open statement.
@@ -62,6 +57,7 @@ theorem scalarExtension_twistMap_chart_bijective
         Localization.localRingHom _ _ ψ.toRingHom rfl (s.1 ⟨_, x.2⟩).val)
     (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n) :
     Function.Bijective (η.app (basicOpen ℬ (ψ f))) := by
-  sorry
+  exact ⟨scalarExtension_twistMap_chart_injective 𝒜 ℬ β ψ hβψ hgraded hψ j η hη n f hf hn,
+    scalarExtension_twistMap_chart_surjective 𝒜 ℬ β ψ hβψ hgraded hψ j η hη n f hf hn⟩
 
 end AlgebraicGeometry.Proj

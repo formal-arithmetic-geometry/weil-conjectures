@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 clause (3), standard-open calculation; Tag 01MY localized graded-module formula"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2 clause (3), complete standard-open proof; strict injective/surjective components of the chart bijectivity argument"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proj-scalar-extension-twist-chart-basic",
+   "place": "Injective/surjective component of complete-standard-chart proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261028T020620-L-2529910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261028T020620-L-2529910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "merged_into": null,
+ "id": "lem-sfb-proj-scalar-extension-twist-chart-surjective",
+ "title": "Surjectivity of the prescribed scalar-extension twist map on the complete standard chart",
+ "statement": "Under the hypotheses of lem-sfb-proj-scalar-extension-twist-chart-basic, for every positive-degree homogeneous f, the prescribed twist map on the complete standard open D₊(ψ(f)) is surjective.",
+ "proof": [
+  {
+   "text": "Identify chart sections with shifted homogeneous localized modules and use the affine tensor-section and homogeneous localization scalar-extension equivalences to lift every target fraction. The pointwise formula hη identifies the lift with η.app.",
+   "uses": [
+    "lem-nagata-homogeneous-localization-scalar-extension",
+    "lem-sc-proj-single-twist-basic-open-fractions",
+    "lem-sfb-graded-module-localization-scalar-extension",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-nagata-homogeneous-localization-scalar-extension",
+  "lem-sc-proj-single-twist-basic-open-fractions",
+  "lem-sfb-graded-module-localization-scalar-extension",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionTwistChartSurjective.lean",
+  "declaration": "AlgebraicGeometry.Proj.scalarExtension_twistMap_chart_surjective",
+  "statement": "theorem scalarExtension_twistMap_chart_surjective {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B] [Algebra R S] [Algebra R A] [Algebra S B] (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B) [GradedRing 𝒜] [GradedRing ℬ] (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ) (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a) (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A))) (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜)) (j : ℤ) (η : (tensorPullback (map ψ hψ)).obj (twist 𝒜 j) ⟶ twist ℬ j) (hη : ∀ (U : (Proj 𝒜).Opens) (s : Γ(twist 𝒜 j, U)) (x : map ψ hψ ⁻¹ᵁ U), ((η.app (map ψ hψ ⁻¹ᵁ U) (tensorPullbackSection (map ψ hψ) (twist 𝒜 j) U s)).1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) = Localization.localRingHom _ _ ψ.toRingHom rfl (s.1 ⟨_, x.2⟩).val) (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n) : Function.Surjective (η.app (basicOpen ℬ (ψ f)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Function.Bijective eta.app standard chart Proj twist",
+   "results": "No existing source declaration with this scalar-extension chart statement.",
+   "date": "2026-10-28",
+   "verdict": "No shorter source theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\" \"Function.Bijective\" twist",
+   "results": "Only unrelated Proj isomorphism results.",
+   "date": "2026-10-28",
+   "verdict": "No matching chart-section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension twisting sheaf sections standard Proj chart bijective",
+   "results": "Only generic Proj chart and sheaf isomorphism results.",
+   "date": "2026-10-28",
+   "verdict": "No existing declaration matches the required hypotheses and conclusion."
+  }
+ ]
+}

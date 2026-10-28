@@ -1,7 +1,29 @@
-# Change record: extracted complete-chart subproblem
+# Change record: complete chart proof decomposition
 
-This delivery adds the public module `Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic`
-and its named intermediate theorem
-`AlgebraicGeometry.Proj.scalarExtension_twistMap_chart_bijective`.  The assigned module
-imports it to make the complete-standard-chart part of the proof an explicit dependency.
-No existing declaration signature or definition is changed.
+## Reason
+
+The complete standard-chart proof depends on independent injectivity and surjectivity
+arguments. The existing target had one deferred hole and no Lean declarations for these
+component conclusions.
+
+## Old
+
+`ProjScalarExtensionTwistChartBasic` contained only the target theorem with a `sorry`
+and imported the chart-calculus modules directly.
+
+## New
+
+Two public component modules state the injective and surjective halves, each with its
+own DAG node and deferred proof. The target combines them using the constructor for
+`Function.Bijective`; its signature and hypotheses are unchanged.
+
+## Users
+
+The target module is the only existing user. Its direct proof-only imports were moved
+behind the two component modules; the public `ProjScalarExtensionTwistData` and Proj
+functor imports remain available to the target statement.
+
+## Status
+
+The three modules compile in import order. The target hole is closed by decomposition;
+the two component theorem holes remain for later stage-3 workers.
