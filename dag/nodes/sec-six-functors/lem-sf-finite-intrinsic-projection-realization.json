@@ -16,28 +16,22 @@
  ],
  "proof": [
   {
-   "text": "Construct the ambient finite tensor comparison from the normalized constant-coefficient comparison on simultaneous flat K-flat representatives and descend it through localization.",
+   "text": "Supply the explicit canonicalFiniteIntrinsicTensorComparison family and apply its projection compatibility. This proves the original existential conclusion without choosing unnormalized tensor isomorphisms.",
    "uses": [
-    "new-sf-finite-intrinsic-tensor-realization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the proper and open projection factors through their actual adjunctions and use tensor, support and finite pullback naturality to obtain the displayed equation.",
-   "uses": [
+    "def-sf-canonical-finite-intrinsic-tensor-comparison",
     "new-sf-finite-intrinsic-projection-compatibility"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-sf-finite-intrinsic-tensor-realization",
+  "def-sf-canonical-finite-intrinsic-tensor-comparison",
   "new-sf-finite-intrinsic-projection-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Compatibility of the specified maps under successive coefficient reductions; split into tensor construction and projection compatibility."
+  "place": "Use the specified constructed tensor family; the parent existential statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -119,7 +113,7 @@
   "module": "Sheaf.Paper.FiniteIntrinsicProjectionRealization",
   "file": "lean/Sheaf/Paper/FiniteIntrinsicProjectionRealization.lean",
   "declaration": "WeilConjectures.IntegralProjectionReduction.finiteIntrinsicProjectionRealization",
-  "statement": "theorem finiteIntrinsicProjectionRealization\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (m : ℕ)\n    (S : SixFunctorFiniteOperations D C E (m + 1) (Nat.le_add_left 1 m)) :\n    ∃ e : ∀ X : SixFunctorSpace D,\n        finiteIntrinsicDerivedTensor C.l E X.obj.left m ≅\n          evaluatedTensor (C := C) (E := E) m X,\n      ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : sixFunctorFiniteCategory D C E (m + 1) (Nat.le_add_left 1 m) X)\n        (L : finiteTorConstructibleCategory C.l E (m + 1)\n          (Nat.le_add_left 1 m) Y.obj.left)\n        (U : normalizedDVRDerived C.l E X.obj.left m)\n        (V : normalizedDVRDerived C.l E Y.obj.left m)\n        (k : U ≅ K.obj) (l : V ≅ L.obj),\n        SystemProjectionFormula.finiteProjection C.l E D C.different c\n            X.obj.hom Y.obj.hom m U V ≫\n          (sixFunctorFiniteSupport D C E (m + 1) (Nat.le_add_left 1 m) f c).map\n            ((e X).hom.app (U, (finiteDerivedPullback C.l E m f.hom.left).obj V) ≫\n              (evaluatedTensor (C := C) (E := E) m X).map\n                (Prod.mkHom k.hom\n                  ((finiteDerivedPullback C.l E m f.hom.left).map l.hom ≫\n                    (S.finitePullback f).inv.app ⟨L.obj, L.property.1⟩))) ≫\n          (S.finiteSupport f c).inv.app\n            (((CompactSupportFiniteProjection.partialTensor S X).obj K).obj\n              ((CompactSupportFiniteProjection.torPull S f).obj L)) =\n        (e Y).hom.app\n            ((sixFunctorFiniteSupport D C E (m + 1)\n              (Nat.le_add_left 1 m) f c).obj U, V) ≫\n          (evaluatedTensor (C := C) (E := E) m Y).map\n            (Prod.mkHom\n              ((sixFunctorFiniteSupport D C E (m + 1)\n                (Nat.le_add_left 1 m) f c).map k.hom ≫\n                (S.finiteSupport f c).inv.app K) l.hom) ≫\n          (finiteInclusion (C := C) (E := E) m Y).map\n            (CompactSupportFiniteProjection.component S f c K L)",
+  "statement": "theorem finiteIntrinsicProjectionRealization\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (m : ℕ)\n    (S : SixFunctorFiniteOperations D C E (m + 1) (Nat.le_add_left 1 m)) :\n    ∃ e : ∀ X : SixFunctorSpace D,\n        finiteIntrinsicDerivedTensor C.l E X.obj.left m ≅\n          evaluatedTensor (C := C) (E := E) m X,\n      ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : sixFunctorFiniteCategory D C E (m + 1) (Nat.le_add_left 1 m) X)\n        (L : finiteTorConstructibleCategory C.l E (m + 1)\n          (Nat.le_add_left 1 m) Y.obj.left)\n        (U : normalizedDVRDerived C.l E X.obj.left m)\n        (V : normalizedDVRDerived C.l E Y.obj.left m)\n        (k : U ≅ K.obj) (l : V ≅ L.obj),\n        SystemProjectionFormula.finiteProjection C.l E D C.different c\n            X.obj.hom Y.obj.hom m U V ≫\n          (sixFunctorFiniteSupport D C E (m + 1) (Nat.le_add_left 1 m) f c).map\n            ((e X).hom.app (U, (finiteDerivedPullback C.l E m f.hom.left).obj V) ≫\n              (evaluatedTensor (C := C) (E := E) m X).map\n                (Prod.mkHom k.hom\n                  ((finiteDerivedPullback C.l E m f.hom.left).map l.hom ≫\n                    (S.finitePullback f).inv.app ⟨L.obj, L.property.1⟩))) ≫\n          (S.finiteSupport f c).inv.app\n            (((CompactSupportFiniteProjection.partialTensor S X).obj K).obj\n              ((CompactSupportFiniteProjection.torPull S f).obj L)) =\n        (e Y).hom.app\n            ((sixFunctorFiniteSupport D C E (m + 1)\n              (Nat.le_add_left 1 m) f c).obj U, V) ≫\n          (evaluatedTensor (C := C) (E := E) m Y).map\n            (Prod.mkHom\n              ((sixFunctorFiniteSupport D C E (m + 1)\n                (Nat.le_add_left 1 m) f c).map k.hom ≫\n                (S.finiteSupport f c).inv.app K) l.hom) ≫\n      (finiteInclusion (C := C) (E := E) m Y).map\n            (CompactSupportFiniteProjection.component S f c K L)",
   "branch": "sheaf-dag",
   "by": "Q6",
   "date": "2026-10-27"
@@ -135,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-6e97e",
   "group": "C3",
-  "result": "pass",
-  "landing": "20261027T180506-L-3866924",
+  "result": "fix",
+  "landing": "20261028T055622-L-778192",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item statement repair (∀e false → explicit canonicalFiniteIntrinsicTensorComparison, fixed by unique-existence choices) against the node, change record, the caller's unchanged public statement and its importer; new factor/coordinate modules against their nodes; axioms checked in a scratch build"
  }
 }
