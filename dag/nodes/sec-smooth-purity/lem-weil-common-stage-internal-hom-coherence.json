@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-common-stage-internal-hom-coherence",
+ "kind": "statement",
+ "title": "Coherence of normalized common-stage Hom comparisons",
+ "statement": "Fix the common-stage Hom data and a coefficient inclusion L ≤ M. After transporting the normalized Hom representative from L to M, the operation-stage transition and stage-system associators identify it with the normalized comparison at M applied to the transported input arrows.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomData.lean",
+  "place": "The common-stage internal-Hom comparison definition; missing coherence between operationStageTransitionIso, normalized rational Hom comparisons, and stage-system associators."
+ },
+ "stmt_deps": [
+  "def-weil-common-stage-internal-hom-data",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Expand commonStageHomComparison at L and M into operation-stage transition, normalized rational Hom comparison, and the two stage associators. Apply the rationalized scalar Hom tower and naturality equations to the middle Hom map, then use functoriality of the derived internal Hom and cancellation of adjacent comparison isomorphisms. The coefficient-inclusion tower law identifies the direct M comparison with the transported L comparison, yielding the displayed coherence square.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomCoherence.lean",
+  "place": "The missing normalized Hom comparison square required by value_transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "operationStageTransitionIso commonStageHomComparison associator",
+   "results": "No existing theorem combines the normalized Hom comparison with the stage-system associators.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StageSystem associator internal Hom scalar comparison transport",
+   "results": "No exact match for the prescribed common-stage Hom coherence.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized internal Hom comparison commutes with coefficient extension",
+   "results": "No exact declaration for this project-specific comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageInternalHomRepresentative",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-common-stage-internal-hom-representative",
+   "place": "The one-extension transport equation; coherence is isolated as the missing intermediate theorem.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInternalHomCoherence",
+  "file": "lean/Sheaf/Paper/CommonStageInternalHomCoherence.lean",
+  "declaration": "WeilConjectures.CommonStageInternalHom.commonStageHomComparison_hom_square",
+  "declarations": [
+   "WeilConjectures.CommonStageInternalHom.commonStageHomComparison_hom_square"
+  ],
+  "statement": "theorem commonStageHomComparison_hom_square\n    (M : Index l Ω) (k : L ≤ M) :\n    let cP_L := commonStageHomComparison l Ω W P L h\n    let cQ_L := commonStageHomComparison l Ω W Q L h'\n    let cP_M := commonStageHomComparison l Ω W P M (h.trans k)\n    let cQ_M := commonStageHomComparison l Ω W Q M (h'.trans k)\n    ((stageSystem l Ω W).assoc h k).inv.app\n          (commonStageHomObject l Ω W P).obj ≫\n      ((stageSystem l Ω W).T k).map\n        (cP_L.hom ≫\n          (rationalDerivedInternalHom l (Coefficient.{u} l Ω L) W).map\n            (ObjectProperty.homMk\n              (X := commonStageHomPairAtStage l Ω W P L h)\n              (Y := commonStageHomPairAtStage l Ω W Q L h') (Prod.mkHom a.op b)) ≫\n          cQ_L.inv) ≫\n      ((stageSystem l Ω W).assoc h' k).hom.app\n          (commonStageHomObject l Ω W Q).obj =\n    cP_M.hom ≫\n      (rationalDerivedInternalHom l (Coefficient.{u} l Ω M) W).map\n        (ObjectProperty.homMk\n          (X := commonStageHomPairAtStage l Ω W P M (h.trans k))\n          (Y := commonStageHomPairAtStage l Ω W Q M (h'.trans k))\n          (Prod.mkHom ((stageSystem l Ω W).tr k a).op\n            ((stageSystem l Ω W).tr k b))) ≫\n      cQ_M.inv "
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261028T020810-L-2549446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261028T020810-L-2549446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

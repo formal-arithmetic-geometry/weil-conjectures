@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.Paper.CommonStageInternalHomData
+import Sheaf.Paper.CommonStageInternalHomCoherence
 
 /-! # Independence of common-stage internal Hom representatives
 
@@ -126,7 +127,11 @@ not an assertion about quotient arrows or an already descended functor. -/
 theorem value_transport (M : Index l Ω) (k : L ≤ M) :
     (stageSystem l Ω W).tr k (value l Ω W P Q L h h' a b) =
       value l Ω W P Q M (h.trans k) (h'.trans k)
-        ((stageSystem l Ω W).tr k a) ((stageSystem l Ω W).tr k b) := by sorry
+        ((stageSystem l Ω W).tr k a) ((stageSystem l Ω W).tr k b) := by
+  have hs := commonStageHomComparison_hom_square l Ω W P Q L h h' a b M k
+  dsimp at hs
+  unfold value StageSystem.tr
+  exact commonStageHomComparison_hom_square l Ω W P Q L h h' a b M k
 
 private theorem output_transport (M : Index l Ω) (k : L ≤ M) :
     output l Ω W P Q M (h.trans k) (h'.trans k)
