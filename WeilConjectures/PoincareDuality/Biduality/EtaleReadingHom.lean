@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionAdjoint
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomAdjunction
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomTensor
 
