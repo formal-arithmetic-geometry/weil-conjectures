@@ -28,6 +28,10 @@ exchange `ν_j : Rj'_! Ψ_N ⟶ Ψ_M Rj_!` adjoint to `α_j⁻¹`
   compact-support exchange of `N` is the composite of `ν_j` and of the compact-support exchange
   of `M`
   (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_ofOpen_app`).
+  This is the composition law of the compact-support exchanges
+  (`ProEtale.CondensedRing.compactSupportExchangeOfCompactification_comp_app`), from the
+  composition law `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` of the exchanges of open immersions
+  (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app`).
 
 -/
 
@@ -136,6 +140,26 @@ noncomputable def NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange
       j').hom ≫ φ.boundedConstructibleOpenExchange ℓ hN hM ≫
     Functor.whiskerRight (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ
       j).inv _
+
+/-- The components of `NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange` on the
+ambient derived categories: `Rj'_! ≅ j'_!`, the exchange adjoint to the inverse of the ambient
+pullback exchange, and `Ψ_M` of `j_! ≅ Rj_!`. -/
+lemma NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange_app_hom
+    [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K).hom =
+      ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').hom.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K)).hom ≫
+        (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ j.left)
+          (openImmersionAdjunction ℓ j'.left)
+          (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app K.obj ≫
+        (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+          ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app
+            K).hom := by
+  simp only [NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.comp_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NearbyCyclesModel.Hom.boundedConstructibleOpenExchange_app_hom]
+  rfl
 
 /-- The mate of `NearbyCyclesModel.Hom.boundedConstructibleOpenExchange` is the inverse of the
 pullback exchange. -/
@@ -328,7 +352,311 @@ lemma compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekCo
   rw [compactificationLowerShriekIso, compactificationLowerShriekIso]
   cast_proofs h
 
+
+omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] in
+/-- The diagram chase behind
+`compactificationLowerShriekIso_inv_app_comp_hom_app_hom`: from `h ≫ e = l ≫ g` for
+isomorphisms `h`, `g`, `h⁻¹ ≫ l = e ≫ g⁻¹`. -/
+private lemma inv_comp_eq_comp_inv_aux {C : Type*} [Category C] {a b c d : C} (hh : a ⟶ b)
+    (hi : b ⟶ a) (l : a ⟶ c) (e : b ⟶ d) (gh : c ⟶ d) (gi : d ⟶ c) (h₁ : hi ≫ hh = 𝟙 b)
+    (h₂ : gh ≫ gi = 𝟙 c) (hC : hh ≫ e = l ≫ gh) : hi ≫ l = e ≫ gi := by
+  calc hi ≫ l = hi ≫ l ≫ gh ≫ gi := by rw [h₂, Category.comp_id]
+    _ = e ≫ gi := by rw [← reassoc_of% hC, reassoc_of% h₁]
+
+/-- `compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp` on the
+ambient derived categories. -/
+lemma compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
+    {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
+    [IsSeparated S.hom] (j : Y ⟶ X) (ι : X ⟶ Z) (p : Z ⟶ S) [IsOpenImmersion j.left]
+    [IsOpenImmersion ι.left] [IsOpenImmersion (j ≫ ι).left] [IsProper p.left] {a : X ⟶ S}
+    {b : Y ⟶ S} (wa : ι ≫ p = a) (wb : j ≫ a = b) (wjι : (j ≫ ι) ≫ p = b)
+    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((compactificationLowerShriekIso ℓ (j ≫ ι) p wjι).hom.app L).hom ≫
+        R((p.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          (((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j ι).hom.app L).hom ≫
+            D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+              ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app
+                L).hom) =
+      ((lowerShriekCompOfEq ℓ j a wb).hom.app L).hom ≫
+        ((compactificationLowerShriekIso ℓ ι p wa).hom.app
+          ((boundedConstructibleLowerShriek ℓ j).obj L)).hom := by
+  have h := congrArg (fun f ↦ f.hom)
+    (compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp ℓ j ι p wa wb
+      wjι L)
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleLowerStar_map_hom] at h
+  exact h
+
+/-- `compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp` with the
+inverses of the factorizations, written with the restricted functors as lifts of the ambient ones
+as in `compactSupportExchangeOfCompactification_eq_lift`. -/
+lemma compactificationLowerShriekIso_inv_app_comp_hom_app_hom
+    {S : Over (Spec (.of k))} [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
+    [IsSeparated S.hom] (j : Y ⟶ X) (ι : X ⟶ Z) (p : Z ⟶ S) [IsOpenImmersion j.left]
+    [IsOpenImmersion ι.left] [IsOpenImmersion (j ≫ ι).left] [IsProper p.left] {a : X ⟶ S}
+    {b : Y ⟶ S} (wa : ι ≫ p = a) (wb : j ≫ a = b) (wjι : (j ≫ ι) ≫ p = b)
+    (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (NatTrans.app (Iso.inv (X := boundedConstructibleLowerShriek ℓ b)
+        (Y := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
+            D(((j ≫ ι).left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+            (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ (j ≫ ι)).obj K).property) ⋙
+          (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
+            R((p.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+            (fun K ↦ ((boundedConstructibleLowerStar ℓ p).obj K).property))
+        (compactificationLowerShriekIso ℓ (j ≫ ι) p wjι)) L ≫
+        (lowerShriekCompOfEq ℓ j a wb).hom.app L).hom =
+      R((p.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          (((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j ι).hom.app L).hom ≫
+            D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+              ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app
+                L).hom) ≫
+        (NatTrans.app (Iso.inv (X := boundedConstructibleLowerShriek ℓ a)
+          (Y := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
+              D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+              (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ ι).obj K).property) ⋙
+            (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
+              R((p.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+              (fun K ↦ ((boundedConstructibleLowerStar ℓ p).obj K).property))
+          (compactificationLowerShriekIso ℓ ι p wa))
+          ((boundedConstructibleLowerShriek ℓ j).obj L)).hom := by
+  rw [ObjectProperty.FullSubcategory.comp_hom]
+  refine inv_comp_eq_comp_inv_aux ((compactificationLowerShriekIso ℓ (j ≫ ι) p wjι).hom.app L).hom
+    _ _ _ ((compactificationLowerShriekIso ℓ ι p wa).hom.app
+      ((boundedConstructibleLowerShriek ℓ j).obj L)).hom _ ?_ ?_
+    (compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp ℓ j ι p wa
+      wb wjι L)
+  · rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
+    rfl
+  · rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app]
+    rfl
 end Composition
+
+section OpenComposition
+
+/-- The diagram chase behind
+`NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp`. -/
+private lemma comp_map_comp_eq_aux {C D : Type*} [Category C] [Category D] (Ψ : C ⥤ D)
+    {x y z : C} {a e f g h : D} (νN : a ⟶ Ψ.obj x) (Eg Ec : x ⟶ y) (F : y ⟶ z) (E'g E'c : a ⟶ e)
+    (ν₁ : e ⟶ f) (νA : f ⟶ Ψ.obj y) (Nm : f ⟶ h) (I' : e ⟶ g) (B : g ⟶ h) (νB : h ⟶ Ψ.obj z)
+    (hE : Eg = Ec) (hE' : E'g = E'c) (hA : νN ≫ Ψ.map Ec = E'c ≫ ν₁ ≫ νA)
+    (n : Nm ≫ νB = νA ≫ Ψ.map F) (hB : I' ≫ B = ν₁ ≫ Nm) :
+    νN ≫ Ψ.map (Eg ≫ F) = (E'g ≫ I') ≫ B ≫ νB := by
+  subst hE hE'
+  rw [Ψ.map_comp, reassoc_of% hA, ← n]
+  simp only [Category.assoc, reassoc_of% hB]
+
+/-- `G(i) ∘ G(b) = G(ν) ∘ G(m)` for `b = i' ≫ ν ≫ m` with `i ≫ i' = 𝟙`. -/
+private lemma map_comp_map_eq_aux {C D : Type*} [Category C] [Category D] (G : C ⥤ D)
+    {p q r s : C}
+    (i : p ⟶ q) (i' : q ⟶ p) (ν : p ⟶ r) (m : r ⟶ s) (b : q ⟶ s) (hi : i ≫ i' = 𝟙 p)
+    (hb : b = i' ≫ ν ≫ m) : G.map i ≫ G.map b = G.map ν ≫ G.map m := by
+  rw [hb, ← G.map_comp, ← G.map_comp, reassoc_of% hi]
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)]
+  {Y X Z : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  {Y' X' Z' : Over (Spec (.of k'))} [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+  {N : NearbyCyclesModel Y.left Y'.left} {M : NearbyCyclesModel X.left X'.left}
+  {P : NearbyCyclesModel Z.left Z'.left}
+  {j : Y ⟶ X} {j' : Y' ⟶ X'} {ι : X ⟶ Z} {ι' : X' ⟶ Z'} [IsOpenImmersion j.left]
+  [IsOpenImmersion j'.left] [IsOpenImmersion ι.left] [IsOpenImmersion ι'.left]
+  [IsOpenImmersion (j ≫ ι).left] [IsOpenImmersion (j' ≫ ι').left]
+  (φ : N.Hom M j.left j'.left) (ψ : M.Hom P ι.left ι'.left)
+  [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+  [IsIso (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+  [IsIso ((φ.comp ψ).pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
+  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom] in
+/-- **The composition law of the exchanges `ν_h` of open immersions of models** (blueprint
+`det-nearby-exchange-maps`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
+`(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the composition isomorphisms of the pullbacks. -/
+theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))) :
+    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ (j ≫ ι).left)
+        (openImmersionAdjunction ℓ (j' ≫ ι').left)
+        ((φ.comp ψ).pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app K ≫
+      (P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+        ((((conjugateIsoEquiv (openImmersionAdjunction ℓ (j ≫ ι).left)
+          ((openImmersionAdjunction ℓ j.left).comp (openImmersionAdjunction ℓ ι.left))).symm
+            (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) j.left ι.left)).symm).hom.app
+              K) =
+    (((conjugateIsoEquiv (openImmersionAdjunction ℓ (j' ≫ ι').left)
+        ((openImmersionAdjunction ℓ j'.left).comp (openImmersionAdjunction ℓ ι'.left))).symm
+          (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) j'.left ι'.left)).symm).hom.app
+            ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj K) ≫
+      D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((lowerShriekExchangeOfInv (openImmersionAdjunction ℓ j.left)
+          (openImmersionAdjunction ℓ j'.left)
+          (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app K) ≫
+      (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
+          (openImmersionAdjunction ℓ ι'.left)
+          (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
+        (D((j.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj K) :=
+  CondensedRing.lowerShriekExchangeOfInv_comp_app _ _ _ _ _ _ _ _ _ _ _
+    (fun A ↦ φ.pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ) ψ (φ.comp ψ) rfl rfl
+      rfl rfl A) K
+
+/-- `NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app` read through the
+identifications `Rj_! ≅ j_!`: the first identity of the composition law of the compact-support
+exchanges, with the composition of extensions by zero `(j ≫ ι)_! ≅ ι_! j_! ≅ ι_! Rj_!` on both
+sides and the exchange `ν_j` of `NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange`. -/
+lemma NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp
+    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ (j ≫ ι).left)
+        (openImmersionAdjunction ℓ (j' ≫ ι').left)
+        ((φ.comp ψ).pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app K.obj ≫
+      (P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+        (((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j ι).hom.app K).hom ≫
+          D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+            ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app
+              K).hom) =
+    (((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j' ι').hom.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K)).hom ≫
+        D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').inv.app
+            ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K)).hom) ≫
+      D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K).hom ≫
+      (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
+          (openImmersionAdjunction ℓ ι'.left)
+          (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
+        ((boundedConstructibleLowerShriek ℓ j).obj K).obj := by
+  have hA := NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app ℓ φ ψ K.obj
+  have n := (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
+    (openImmersionAdjunction ℓ ι'.left)
+    (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).naturality
+      ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app K).hom
+  refine comp_map_comp_eq_aux (P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)) _ _
+    ((((conjugateIsoEquiv (openImmersionAdjunction ℓ (j ≫ ι).left)
+      ((openImmersionAdjunction ℓ j.left).comp (openImmersionAdjunction ℓ ι.left))).symm
+        (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) j.left ι.left)).symm).hom.app
+          K.obj) _ _
+    ((((conjugateIsoEquiv (openImmersionAdjunction ℓ (j' ≫ ι').left)
+      ((openImmersionAdjunction ℓ j'.left).comp (openImmersionAdjunction ℓ ι'.left))).symm
+        (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) j'.left ι'.left)).symm).hom.app
+          ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj K.obj))
+    (D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((lowerShriekExchangeOfInv (openImmersionAdjunction ℓ j.left)
+          (openImmersionAdjunction ℓ j'.left)
+          (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app K.obj))
+    ((lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
+      (openImmersionAdjunction ℓ ι'.left)
+      (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
+        (D((j.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj))
+    (D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+      ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app
+          K).hom)) _ _ _ ?_ ?_ ?_ ?_ ?_
+  · cast_proofs boundedConstructibleOpenImmersionLowerShriekComp_hom_app_hom ℓ j ι K
+  · cast_proofs boundedConstructibleOpenImmersionLowerShriekComp_hom_app_hom ℓ j' ι'
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K)
+  · cast_proofs hA
+  · cast_proofs n
+  · refine map_comp_map_eq_aux _ _
+      ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').hom.app
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K)).hom _ _ _ ?_
+      (NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange_app_hom ℓ φ hN hM K)
+    rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
+    rfl
+
+variable [Algebra k k'] [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hS : (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+
+set_option maxHeartbeats 800000 in
+-- the instantiation and the three identities `H` together exceed the default budget
+/-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
+`det-nearby-exchange-maps`, compatibility of `ν` with composition): for open immersions of models
+`φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
+structure morphism `a` to the trait, the compact-support exchange of the compactification
+`j ≫ ι : N ⊆ P` is the composite of `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange
+of `ι : M ⊆ P`, through the composition isomorphisms `Rb_! ≅ Rj_! ⋙ Ra_!`.
+
+An instance of `ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq`: the
+first identity is
+`NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp`, the other two are
+`compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp` and
+`compactificationLowerShriekIso_inv_app_comp_hom_app_hom`. -/
+theorem compactSupportExchangeOfCompactification_comp_app
+    (a : P.Hom (traitModel k k') (toPoint Z).left (toPoint Z').left)
+    (ha : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+      Z.left)).ι (a.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)))
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (compactSupportExchangeOfCompactification ℓ hN hS (comp_toPoint (j ≫ ι))
+        (comp_toPoint (j' ≫ ι')) (φ.comp ψ) a ha).app K ≫
+      (NearbyCyclesModel.boundedConstructibleNearbyCycles hS).map
+        ((lowerShriekCompOfEq ℓ j (toPoint X) (comp_toPoint j)).hom.app K) =
+    (lowerShriekCompOfEq ℓ j' (toPoint X') (comp_toPoint j')).hom.app
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj K) ≫
+      (boundedConstructibleLowerShriek ℓ (toPoint X')).map
+        ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K) ≫
+      (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a
+        ha).app ((boundedConstructibleLowerShriek ℓ j).obj K) := by
+  have h := CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq
+    (Sp := NearbyCyclesModel.boundedConstructibleNearbyCycles hN)
+    (SpX := NearbyCyclesModel.boundedConstructibleNearbyCycles hM)
+    (Ts := NearbyCyclesModel.boundedConstructibleNearbyCycles hS)
+    (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) (fun K ↦ hS K.obj K.property)
+    (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ (j ≫ ι)).obj K).property)
+    (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ (j' ≫ ι')).obj K).property)
+    (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ ι).obj K).property)
+    (fun K ↦ ((boundedConstructibleOpenImmersionLowerShriek _ ℓ ι').obj K).property)
+    (fun K ↦ ((boundedConstructibleLowerStar ℓ (toPoint Z)).obj K).property)
+    (fun K ↦ ((boundedConstructibleLowerStar ℓ (toPoint Z')).obj K).property)
+    (compactificationLowerShriekIso ℓ (j' ≫ ι') (toPoint Z') (comp_toPoint (j' ≫ ι')))
+    (compactificationLowerShriekIso ℓ (j ≫ ι) (toPoint Z) (comp_toPoint (j ≫ ι)))
+    (compactificationLowerShriekIso ℓ ι' (toPoint Z') (comp_toPoint ι'))
+    (compactificationLowerShriekIso ℓ ι (toPoint Z) (comp_toPoint ι))
+    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ (j ≫ ι).left)
+      (openImmersionAdjunction ℓ (j' ≫ ι').left)
+      ((φ.comp ψ).pullbackExchange (Profinite.padicAlgClRingObj ℓ)))
+    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι.left)
+      (openImmersionAdjunction ℓ ι'.left) (ψ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)))
+    (a.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) ha
+    (lowerShriekCompOfEq ℓ j (toPoint X) (comp_toPoint j))
+    (lowerShriekCompOfEq ℓ j' (toPoint X') (comp_toPoint j')) rfl rfl rfl
+    (φ.boundedConstructibleLowerShriekExchange ℓ hN hM)
+    (compactSupportExchangeOfCompactification ℓ hN hS (comp_toPoint (j ≫ ι))
+      (comp_toPoint (j' ≫ ι')) (φ.comp ψ) a ha)
+    (heq_of_eq (compactSupportExchangeOfCompactification_eq_lift (ι₃ := j ≫ ι) (ι₃' := j' ≫ ι') ℓ hN
+      hS (φ.comp ψ) a ha))
+    (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a ha)
+    (heq_of_eq (compactSupportExchangeOfCompactification_eq_lift (ι₃ := ι) (ι₃' := ι') ℓ hM hS ψ a
+      ha)) (fun M ↦ ?_) K
+  · cast_proofs h
+  refine ⟨((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j ι).hom.app M).hom ≫
+      D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app M).hom,
+    ((boundedConstructibleOpenImmersionLowerShriekComp _ ℓ j' ι').hom.app
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom ≫
+      D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').inv.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom, ?_, ?_, ?_⟩
+  · simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp]
+    cast_proofs NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
+  · cast_proofs compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
+      ℓ j' ι' (toPoint Z') (comp_toPoint ι') (comp_toPoint j') (comp_toPoint (j' ≫ ι'))
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)
+  · cast_proofs compactificationLowerShriekIso_inv_app_comp_hom_app_hom ℓ j ι (toPoint Z)
+      (comp_toPoint ι) (comp_toPoint j) (comp_toPoint (j ≫ ι)) M
+
+end OpenComposition
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -408,6 +736,45 @@ lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
         (comp_toPoint (j' ≫ C.ι')) (φ.comp C.hom) C.isTraitModelOfBase.toTrait
         (C.isIsoOn_pushforwardExchange ℓ) :=
   rfl
+
+/-- **The compact-support exchanges along an open sub-model** (blueprint
+`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
+over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
+the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
+`α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms
+`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
+
+An instance of `ProEtale.CondensedRing.compactSupportExchangeOfCompactification_comp_app` at the
+morphisms of models `φ : N ⟶ M` and `C.hom : M ⟶ P`. -/
+theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
+    (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
+    [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]
+    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : q = φ.total ≫ qM)
+    (hg : g = φ.generic ≫ gM)
+    [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((C.ofOpen hN j j' φ hφ hq hg).compactSupportExchange ℓ).app K ≫
+        (traitSpecialization k k' (ℓ := ℓ)).map
+          ((lowerShriekCompOfEq ℓ j (toPoint X) (comp_toPoint j)).hom.app K) =
+      (lowerShriekCompOfEq ℓ j' (toPoint X') (comp_toPoint j')).hom.app
+          ((boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).obj K) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X')).map
+          ((φ.boundedConstructibleLowerShriekExchange ℓ (hN.preservesBoundedConstructible ℓ)
+            (hM.preservesBoundedConstructible ℓ)).app K) ≫
+        (C.compactSupportExchange ℓ).app ((boundedConstructibleLowerShriek ℓ j).obj K) := by
+  have : IsOpenImmersion (j ≫ C.ι).left := by
+    rw [Over.comp_left]
+    infer_instance
+  have : IsOpenImmersion (j' ≫ C.ι').left := by
+    rw [Over.comp_left]
+    infer_instance
+  have : IsIso ((φ.comp C.hom).pullbackExchange (Profinite.padicAlgClRingObj ℓ)) :=
+    inferInstanceAs (IsIso ((C.ofOpen hN j j' φ hφ hq hg).hom.pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)))
+  cast_proofs compactSupportExchangeOfCompactification_comp_app ℓ φ C.hom
+    (hN.preservesBoundedConstructible ℓ) (hM.preservesBoundedConstructible ℓ)
+    (preservesBoundedConstructible_traitModel ℓ) C.isTraitModelOfBase.toTrait
+    (C.isIsoOn_pushforwardExchange ℓ) K
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
 

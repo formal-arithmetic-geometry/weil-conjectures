@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
@@ -43,6 +44,8 @@ The index type of the affine space is `ULift.{u} (Fin d)`, since
   smooth morphism of relative dimension `d`.
 - `AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus`: the étale-local
   normal form of a morphism near a point at which it is smooth.
+- `AlgebraicGeometry.Smooth.exists_etale_affineSpace`: a smooth morphism is, on an affine open
+  neighbourhood of any point of the source, étale over an affine space over the target.
 - `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`: an irreducible
   scheme smooth over a field is smooth of relative dimension `n` if and only if it has
   dimension `n`.
@@ -223,6 +226,43 @@ theorem Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus {X Y : Scheme.
   have hxV'' : x ∈ V.ι ''ᵁ V' := ⟨⟨x, hxV⟩, hxV', rfl⟩
   exact ⟨_, _, _, hU'', hV'', (le_resLE_preimage_iff g hVU U' V').mp hVU' hxV'', hxV'', _, e,
     he, hge⟩
+
+/-- **Local structure of smooth morphisms**: around every point of `X`, a smooth morphism
+`t : X ⟶ Y` is, on an affine open `W ⊆ X` (given by an open immersion `ι : W ⟶ X`), the
+composite of an étale morphism `e : W ⟶ 𝔸ⁿ_Y` and the projection `𝔸ⁿ_Y ⟶ Y`:
+
+```
+W --e--> 𝔸ⁿ_Y
+|ι         |
+v          v
+X ---t---> Y
+```
+-/
+theorem Smooth.exists_etale_affineSpace {X Y : Scheme.{u}} (t : X ⟶ Y) [Smooth t] (x : X) :
+    ∃ (W : Scheme.{u}) (ι : W ⟶ X) (_ : IsOpenImmersion ι) (_ : IsAffine W)
+      (_ : x ∈ Set.range ι.base) (n : ℕ) (e : W ⟶ 𝔸(ULift.{u} (Fin n); Y)),
+      Etale e ∧ e ≫ 𝔸(ULift.{u} (Fin n); Y) ↘ Y = ι ≫ t := by
+  obtain ⟨U, hU, V, hV, hxV, eUV, hss⟩ := Smooth.exists_isStandardSmooth t x
+  obtain ⟨n, g, hgC, hg⟩ := hss.exists_etale_mvPolynomial
+  have : Etale (Spec.map (CommRingCat.ofHom g)) := HasRingHomProperty.Spec_iff.mpr hg
+  let r := (MvPolynomial.renameEquiv Γ(Y, U) (Equiv.ulift (α := Fin n))).toRingEquiv
+  have : IsIso (Spec.map (CommRingCat.ofHom r.toRingHom)) :=
+    inferInstanceAs (IsIso (Spec.map r.toCommRingCatIso.hom))
+  refine ⟨Spec Γ(X, V), hV.fromSpec, inferInstance, inferInstance, ?_, n,
+    Spec.map (CommRingCat.ofHom g) ≫ Spec.map (CommRingCat.ofHom r.toRingHom) ≫
+      (AffineSpace.SpecIso (ULift.{u} (Fin n)) Γ(Y, U)).inv ≫
+        AffineSpace.map (ULift.{u} (Fin n)) hU.fromSpec, inferInstance, ?_⟩
+  · rw [hV.range_fromSpec]
+    exact hxV
+  · rw [Category.assoc, Category.assoc, Category.assoc, AffineSpace.map_over,
+      AffineSpace.SpecIso_inv_over_assoc, ← Spec.map_comp_assoc, ← Spec.map_comp_assoc,
+      ← IsAffineOpen.SpecMap_appLE_fromSpec t hU hV eUV]
+    congr 2
+    ext1
+    rw [CommRingCat.hom_comp, CommRingCat.hom_comp, CommRingCat.hom_ofHom, CommRingCat.hom_ofHom,
+      CommRingCat.hom_ofHom, ← hgC]
+    ext a
+    simp [r]
 
 open Order in
 /-- Let `φ : K[X₁, …, Xₙ] ⟶ A` be an étale ring map over a field `K`. Every point of `Spec A`
