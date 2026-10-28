@@ -12599,6 +12599,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitI
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
+public import WeilConjectures.SixFunctors.NearbyCycles.ExtendScalars
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
@@ -13291,6 +13292,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoher
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegersPowShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
@@ -13923,10 +13925,12 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLi
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantCase
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantFamily
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGeneric
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorIntegral
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseCore
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLocal
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorPointwise
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidue
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangulated
