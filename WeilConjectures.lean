@@ -13264,6 +13264,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTrace
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTracePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FrobeniusNaturality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
@@ -14049,6 +14051,10 @@ public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisField
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisHensel
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisMinpoly
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisSepClosed
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
