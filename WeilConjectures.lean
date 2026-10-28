@@ -8586,6 +8586,7 @@ public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerPivot
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.Preadditive.NatTransIsIso
 public import WeilConjectures.CategoryTheory.Preadditive.TraceSplitting
+public import WeilConjectures.CategoryTheory.Preadditive.TraceSplittingAverage
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.PresheafTensorInternalHom
 public import WeilConjectures.CategoryTheory.Pro.Basic
