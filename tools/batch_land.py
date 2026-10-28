@@ -67,6 +67,7 @@ from pipeline_guard import alert, clear_alert
 import red_rework  # noqa: E402
 import merge_jobs as mj  # noqa: E402   2026-10-26: conflicts go to merge agents (tools/merge_jobs.py)
 import stage2_batch as s2b  # noqa: E402   2026-10-25: stage 2 lands in the same batches
+import quarantine_wait as qwait  # noqa: E402   2026-10-28: imports quarantined -> the delivery waits, not returned
 PRUNE_TIMEOUT = int(os.environ.get("SHEAF_PRUNE_TIMEOUT", "120"))
 
 ROOT = md.ROOT
@@ -208,6 +209,11 @@ def candidates(cache: dict) -> list[dict]:
     """The deliveries a batch may take: passed by a reader (marker with the branch's head), or of class AUTO."""
     out = []
     live = set()
+    heads = set()
+    try:
+        qwaits, qrows = qwait.load(), qwait.rework.load()
+    except Exception:  # noqa: BLE001
+        qwaits, qrows = {}, {}
     for g, item in rc.branches():
         if not s3.is_stage3_item(item):
             continue
@@ -232,6 +238,9 @@ def candidates(cache: dict) -> list[dict]:
                 continue  # dedicated reader/result has not accepted this exact repair
         if returned_head(g, head):
             continue        # this head was returned; the group pushes a new one
+        heads.add(head)
+        if qwaits and qwait.holding(head, qwaits, qrows):
+            continue        # 2026-10-28: an import is still quarantined (tools/quarantine_wait.py); not checked again yet
         mk = read_json(marker(g, item))
         if mk and mk.get("head") == head:
             if mk.get("not_before", 0) > time.time(): continue
@@ -244,6 +253,11 @@ def candidates(cache: dict) -> list[dict]:
             continue
         out.append({"group": g, "item": item, "head": head, "reviewer": None, "note": NOTE_AUTO, "verdict": "PASS",
                     "overrides": {}, "passed": False})
+    if qwaits:
+        try:
+            qwait.prune(heads)
+        except Exception:  # noqa: BLE001
+            pass
     if PASSED.is_dir():
         for p in PASSED.glob("*.json"):
             if p.name not in live:
@@ -568,6 +582,9 @@ def check(c: dict, classify: bool = True, merge_wait: bool = True) -> dict:
     try:
         cycles.refuse_missing(texts, cycles.source_modules(ROOT, pathlib.Path(graph_file).name.split("-imports")[0] if graph_file else "HEAD"), cycles.source_roots(ROOT))
     except RuntimeError as exc:
+        w = qwait.wait(exc, g, item, head)
+        if w:
+            raise Wait(w) from exc
         raise Refuse(str(exc)) from exc
     cycle = cycles.closing_cycle(import_graph, texts)
     if cycle: raise Refuse("import cycle: " + " -> ".join(cycle))
@@ -994,6 +1011,9 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
                 cycles.refuse_missing(texts, base_modules, package_roots)
             except RuntimeError as exc:
                 pre.done.pop(head, None)
+                w = qwait.wait(exc, g, item, head)
+                if w:
+                    log("not in this batch", g, item, head[:9], "|", w[:300]); continue
                 give_back(g, item, head, str(exc), log)
                 continue
             cycle = cycles.closing_cycle(import_graph, texts)
@@ -1032,6 +1052,9 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         try:
             cycles.refuse_missing(texts, base_modules, package_roots)
         except RuntimeError as exc:
+            w = qwait.wait(exc, g, item, head)
+            if w:
+                log("not in this batch", g, item, head[:9], "stage 2 |", w[:300]); continue
             s2b.do_return(g, item, head, str(exc), log); continue
         cycle = cycles.closing_cycle(import_graph, texts)
         if cycle:
@@ -1082,6 +1105,9 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
             try:
                 cycles.refuse_missing({m["module"]: m["text"] for m in plan["D"]["modules"]}, base_modules, package_roots)
             except RuntimeError as exc:
+                w = qwait.wait(exc, g, item, head)
+                if w:
+                    raise Wait(w) from exc
                 raise Refuse(str(exc)) from exc
             plan["cycle_tip"] = expected_tip
             plan["cycle_tip_lean"] = md.git("rev-parse", f"{expected_tip}:lean")

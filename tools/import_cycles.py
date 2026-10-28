@@ -151,6 +151,13 @@ def source_roots(lean):
     return roots
 
 
+class MissingImports(RuntimeError):
+    """refuse_missing's refusal; .missing lists (module, import) pairs (tools/quarantine_wait.py reads it)"""
+    def __init__(self, missing):
+        self.missing = list(missing)
+        super().__init__('missing import source modules: ' + '; '.join(f'{m}: {d}' for m, d in self.missing))
+
+
 def refuse_missing(texts, library, roots):
     """Validate every delivered import against source modules of the pinned base,
     installed packages/toolchain, or this delivery (never another delivery).
@@ -162,8 +169,8 @@ def refuse_missing(texts, library, roots):
         for dep in sorted(imports(text)):
             rel = pathlib.Path(*dep.split('.')).with_suffix('.lean')
             if dep not in available and not any((r / rel).is_file() for r in roots):
-                missing.append(f'{module}: {dep}')
-    if missing: raise RuntimeError('missing import source modules: ' + '; '.join(missing))
+                missing.append((module, dep))
+    if missing: raise MissingImports(missing)
 
 
 def source_modules(repo, ref='HEAD'):
