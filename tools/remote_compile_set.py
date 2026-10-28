@@ -184,6 +184,26 @@ try:
             if m: out.append(f"-D{m.group(1)}={m.group(2).strip().strip(chr(34))}")
         return out
     OPTS = opts()
+    def _newsets():
+        top = REPO / "local" / "sets" / "_new" / "lib" / "lean"; out = {}
+        if top.is_dir():
+            for p in top.rglob("*.olean"):
+                m = ".".join(p.relative_to(top).with_suffix("").parts)
+                if (LEAN / ".lake/build/lib/lean" / p.relative_to(top)).is_file(): continue   # merged meanwhile
+                ol = [str(p.resolve())]
+                for sfx in (".olean.server", ".olean.private"):
+                    q = p.with_suffix(sfx)
+                    if not q.exists(): break
+                    ol.append(str(q.resolve()))
+                ir = []
+                for sfx in (".ir.sig", ".ir"):
+                    q = p.with_suffix(sfx)
+                    if not q.exists(): break
+                    ir.append(str(q.resolve()))
+                out[m] = [ol, ir]
+        return out
+    try: NEWSETS = _newsets()
+    except OSError: NEWSETS = {}
     LP = ":".join([str(LEAN / ".lake/build/lib/lean")] + sorted(str(x) for x in (LEAN / ".lake/packages").glob("*/.lake/build/lib/lean")))
     def arts():
         """as lcompile.local_artifacts: every compiled module in the scratch .lbuild, with its companions"""
@@ -201,6 +221,10 @@ try:
                 if not q.is_file(): break
                 ir.append(str(q))
             a[".".join(p.relative_to(lb).with_suffix("").parts)] = [ol, ir]
+        # 2026-10-28 (set builds, tools/setbuild.py): the new modules of the passed sets, not yet in the published
+        # build, are handed to Lean the same way (LEAN_PATH cannot carry them: Lean takes the first root with Sheaf/)
+        for m, x in NEWSETS.items():
+            a.setdefault(m, x)
         return a
     # 2026-10-17 (cpu): shared result cache across calls. After an upstream sync many workers send the same chain of
     # 400+ unchanged-source modules at once (10 concurrent calls compiling identical sets were seen); a job whose
@@ -242,6 +266,9 @@ try:
             if not src.exists(): src = LEAN / rel.with_suffix(".lean")
         elif po.exists():
             st = po.stat(); ident = f"P{st.st_mtime_ns}:{st.st_size}"; src = LEAN / rel.with_suffix(".lean")
+        elif mod in NEWSETS:   # a passed set's new module (tools/setbuild.py): keyed by its compiled file
+            st = pathlib.Path(NEWSETS[mod][0][0]).stat(); ident = f"N{st.st_mtime_ns}:{st.st_size}"
+            _mk[mod] = hashlib.sha256((mod + ident).encode()).hexdigest(); _mv[mod] = mod in _VOL; return _mk[mod]
         else:
             _mk[mod] = "X" + mod; _mv[mod] = mod in _VOL; return _mk[mod]
         vol, parts = mod in _VOL, []

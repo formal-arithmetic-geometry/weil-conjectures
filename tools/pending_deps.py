@@ -3,7 +3,8 @@
 给worker，让他们知道哪些文件是还没有通过入库的").
 
 A delivery is PASSED, exactly as ~/cc1/queue_report.py counts it, when its group still holds the claim of the item and
-  stage 3 (a module item): local/batch/passed/<G>__<item>.json has `head` equal to refs/heads/deliver/<G>/<item>;
+  stage 3 (a module item): local/batch/passed/<G>__<item>.json has `head` equal to refs/heads/deliver/<G>/<item>,
+                            or that head's set build passed (local/sets/passed/<head>.json, tools/setbuild.py, switch on);
   stage 1/2 (a node item):  local/verdicts/<stage>/<head>.json of that head says PASS.
 Nothing weaker counts (a delivery under review, FIX, RETURN, an AUTO head nobody read).
 
@@ -68,6 +69,16 @@ def passed_marker(g: str, item: str, head: str) -> bool:
         return False
 
 
+def set_passed(g: str, item: str, head: str) -> bool:
+    """2026-10-28 (the owner: a statement-preserving delivery is done when its set build passes): a passed set
+    (tools/setbuild.py, switch `on`) counts as a pass here, so its dependents are released."""
+    try:
+        import setbuild
+        return setbuild.is_passed(g, item, head)
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def queue_items() -> set[tuple[str, str]] | None:
     """(item, stage) of coord/queue.tsv, None when unreadable. Only an item the queue lists is counted (queue_report.py
     counts the queue's items): a passed stage-2 delivery of a node the queue no longer lists (below a written proof, not
@@ -99,7 +110,7 @@ def passed_stage(g: str, item: str, head: str, listed=None):
     if claim_who(item) != g:
         return None
     if "." in item:
-        st = "3" if passed_marker(g, item, head) else None
+        st = "3" if passed_marker(g, item, head) or set_passed(g, item, head) else None
     else:
         st = next((x for x in ("2", "1") if verdict(x, head) == "PASS"), None)
     if st and listed is not None and (item, st) not in listed:
