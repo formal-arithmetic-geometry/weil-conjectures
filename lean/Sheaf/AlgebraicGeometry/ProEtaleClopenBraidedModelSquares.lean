@@ -1,23 +1,21 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N4
+Authors: SHEAF groups N4 and E4
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleClopenMonoidalNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedLocalization
-import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedUnitSquare
 
 /-! # Cancellation of native braided model squares
 
 Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-normalization).
+(blueprint: lem-pur-clopen-braided-model-squares).
 -/
 
 @[expose] public noncomputable section
 
-attribute [-instance] CategoryTheory.Functor.mapCochainComplexMonoidal
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
@@ -70,28 +68,13 @@ private theorem inverse_tensor_square_aux
   rw [reassoc_of% hh]
   simp only [← L.map_comp, Functor.Monoidal.μ_δ, L.map_id, comp_id]
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem inverse_unit_square_aux
-    {A B D E : Type*} [Category* A] [Category* B] [Category* D] [Category* E]
-    [MonoidalCategory A] [MonoidalCategory B] [MonoidalCategory D] [MonoidalCategory E]
-    (Q : A ⥤ D) (L : B ⥤ E) (F : A ⥤ B) (G : D ⥤ E)
-    [Q.LaxMonoidal] [L.LaxMonoidal] [F.Monoidal] [G.Monoidal]
-    (e : Q ⋙ G ≅ F ⋙ L) [NatTrans.IsMonoidal e.hom] [IsIso (ε L)] :
-    η G = G.map (ε Q) ≫ e.hom.app (𝟙_ A) ≫ L.map (η F) ≫ inv (ε L) := by
-  have hh := NatTrans.IsMonoidal.unit (τ := e.hom)
-  simp only [comp_ε, Category.assoc] at hh
-  apply (cancel_epi (ε G)).1
-  rw [Functor.Monoidal.ε_η, reassoc_of% hh]
-  rw [← L.map_comp_assoc, Functor.Monoidal.ε_η, L.map_id, id_comp, IsIso.hom_inv_id]
-
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 /-- The native tensor and unit equations follow by cancellation from a monoidal
 factorization. This is the algebraic square used by the normalization theorem.
 Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-model-normalization).
+(blueprint: lem-pur-clopen-braided-model-squares).
 
 Proof: instantiate the native lax structures and their K-flat isomorphism lemmas. Apply
 monoidality of the factorization and cancel its tensor maps; the cochain tensorator is
@@ -128,6 +111,42 @@ theorem clopen_braided_model_squares
     NatTrans.IsMonoidal (factors.{t, u} j R).hom →
       ModelNormalization.{t, u} j R b (braidedComparison.{t, u} j R d) ∧
         braidedUnit.{t, u} j R d = unitComparison.{t, u} j R h := by
-  sorry
+  intro he
+  let := c
+  let := d
+  let := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}
+    (topology X) R
+  let := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}
+    (topology Y) ((clopenTensorRings.{t, u} j).obj R)
+  constructor
+  · intro P Q hP hQ hflatP hflatQ hiP
+    have hμX := RingedDerivedNative.isIso_mu.{t + 1, t, u, max (u + 1) (t + 2)}
+      (topology X) R P Q (Or.inl hP)
+    have hμY := RingedDerivedNative.isIso_mu.{t + 1, t, u, max (u + 1) (t + 2)}
+      (topology Y) ((clopenTensorRings.{t, u} j).obj R)
+      ((clopenTensorComplexRestriction.{t, u} j R).obj P)
+      ((clopenTensorComplexRestriction.{t, u} j R).obj Q) (Or.inl hiP)
+    have hh := CategoryTheory.inverse_tensor_square_aux
+      (Q := DerivedCategory.Q.{max (u + 1) (t + 2)})
+      (L := DerivedCategory.Q.{max (u + 1) (t + 2)})
+      (F := clopenTensorComplexRestriction.{t, u} j R)
+      (G := derivedRestriction.{t, u} j R)
+      (e := factors.{t, u} j R) P Q
+    rw [hcδ P Q] at hh
+    have heq : (factors.{t, u} j R).hom.app
+        ((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj (P, Q)) =
+        (factors.{t, u} j R).hom.app (P ⊗ Q) := by
+      have hn := (factors.{t, u} j R).hom.naturality
+        (eqToHom (RingedDerivedNative.totalTensor_eq (topology X) R P Q))
+      simpa using hn.symm
+    rw [heq]
+    rw [RingedDerivedNative.tensorIso_hom (topology X) R P Q (Or.inl hP)]
+    rw [RingedDerivedNative.tensorIso_hom (topology Y)
+      ((clopenTensorRings.{t, u} j).obj R)
+      ((clopenTensorComplexRestriction.{t, u} j R).obj P)
+      ((clopenTensorComplexRestriction.{t, u} j R).obj Q) (Or.inl hiP)]
+    simpa only [braidedComparison, Iso.symm_hom,
+      Functor.Monoidal.μNatIso_inv_app] using hh
+  · exact clopen_braided_unit_square.{t, u} j R h c hcη d he
 
 end AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent

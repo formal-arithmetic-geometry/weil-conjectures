@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-clopen-braided-unit-square",
+ "kind": "statement",
+ "title": "Canonical unit square from a monoidal clopen factorization",
+ "statement": "Let j:Y→X be an open immersion of schemes, R a commutative-ring sheaf on the small pro-etale site of X, h a braided structure on module restriction, c a braided structure on degreewise cochain restriction, and d a braided structure on the specified exact derived restriction. Use the fixed native derived localization structures and canonical factors isomorphism of [def-pur-clopen-monoidal-normalization]. Suppose the inverse unit of c is the single-complex restriction comparison followed by the single-complex image of the ordinary inverse unit supplied by h. If factors.hom is monoidal for c, d and the native lax braided localization structures, then the inverse unit braidedUnit of d equals the canonical unitComparison. There is no tensor comparison b, K-flatness, flat-term, or boundedness assumption in this unit statement.",
+ "stmt_deps": [
+  "def-pur-clopen-monoidal-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPT, sites-cohomology-definition-derived-tor and sites-cohomology-lemma-symmetric-monoidal-derived; unit cancellation in step 2 of lem-pur-clopen-braided-model-squares."
+ },
+ "proof": [
+  {
+   "text": "Use the generic monoidal natural transformation unit equation. Cancel the strong derived restriction unit map, then the target localization unit, which is invertible by RingedDerivedNative.isIso_ε. This yields inverse_unit_square_aux, an equality of inverse unit maps.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the given expression for the cochain inverse unit. Apply Iso.ext to the desired equality. Expand braidedUnit and the five factors of unitComparison. Functoriality splits the image of the two cochain maps, and associativity identifies the resulting map with the generic cancellation equation. This proves the result for every open immersion, including empty schemes and zero rings.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPT; complete Lean unit cancellation proof using the existing native unit comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the inverse unit map of a monoidal functor factors through a monoidal localization comparison",
+   "results": "8 hits: generic Localization.Monoidal functorCoreMonoidalOfComp unit/tensor formulas and localized unit/naturality lemmas. None states the canonical clopen unit equation.",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal functor constructions are available; the native clopen unit equation is proved here by cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.IsMonoidal.unit\"",
+   "results": "2 hits: CategoryTheory.NatTrans.IsMonoidal.unit and unit_assoc in Mathlib.CategoryTheory.Monoidal.NaturalTransformation.",
+   "date": "2026-10-28",
+   "verdict": "The generic unit equation is used directly by the private cancellation helper."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen_braided_unit_square|inverse_unit_square_aux",
+   "results": "[grep] OK 0 hit(s). A separate rg search of lean/Sheaf and dag/nodes found no existing clopen_braided_unit_square or matching node.",
+   "date": "2026-10-28",
+   "verdict": "No pre-existing specialized public unit-square theorem; the private generic helper is moved from the assigned module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelSquares",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-braided-model-squares",
+   "place": "Proof step 2: the canonical degree-zero unit comparison. This node is fully proved, with no postponed obligation."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenBraidedUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_braided_unit_square",
+  "statement": "theorem clopen_braided_unit_square\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})\n    (h : (clopenTensorRestriction.{t, u} j R).Braided)\n    (c : (clopenTensorComplexRestriction.{t, u} j R).Braided)\n    (hcη : c.toMonoidal.toOplaxMonoidal.η =\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (clopenTensorRestriction.{t, u} j R) (.up ℤ) (0 : ℤ)).app\n          (𝟙_ (clopenTensorModules.{t, u} R))).hom ≫\n        (HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).map\n          (clopenTensorUnitComparison.{t, u} j R h).hom)\n    (d : (derivedRestriction.{t, u} j R).Braided) :\n    letI := c\n    letI := d\n    letI := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}\n      (topology X) R\n    letI := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}\n      (topology Y) ((clopenTensorRings.{t, u} j).obj R)\n    NatTrans.IsMonoidal (factors.{t, u} j R).hom →\n      braidedUnit.{t, u} j R d = unitComparison.{t, u} j R h",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261028T034733-L-3538975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261028T034733-L-3538975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
