@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
 
 /-!
 # The proper direct image on `Dᵇc` is a left adjoint, over any field
@@ -17,18 +19,18 @@ Let `ℓ` be a prime and `k` a field of characteristic `p > 0` with `p ≠ ℓ`.
 `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` (blueprints `lem-sfb-dc-proper-pushforward-left-adjoint-oe`,
 `lem-sfb-dc-proper-pushforward-left-adjoint-e`, `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`):
 
-* `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper`,
-* `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper`, from the case
+* `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`,
+* `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`, from the case
   of `𝒪̲_E` by inverting `ℓ`
   (`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`),
-* `isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_isProper`, from the case of
+* `isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`, from the case of
   the `E̲` by the 2-colimit argument
   (`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall`).
 
 No assumption on `k` is made: these do not use Brown representability on the localizing closures,
 which needs `cd_ℓ(k) < ∞`.
 
-These are theorems rather than instances: the instances are those of
+These instances are the input of the exceptional inverse image `Rg^!` on `Dᵇc` in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek`.
 -/
 
@@ -52,7 +54,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint (SGA 4 XVIII, 3.1.4; SGA 4½,
 [Th. finitude]; Bhatt–Scholze, Section 6.8). -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper
+instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
     (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
@@ -61,19 +63,16 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isPr
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`: for a proper morphism
 `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
 `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint: invert `ℓ` in the case of `𝒪̲_E`. -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper
+instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper ℓ g E.1
   isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
 
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`: for a proper morphism
 `g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint: the
 2-colimit of the cases of the finite subextensions `E ⊆ ℚ̄_ℓ`. -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_isProper :
+instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
     (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  have (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
-    isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper ℓ g E
   isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall ℓ g
 
 end AlgebraicGeometry.ProEtale.CondensedRing
