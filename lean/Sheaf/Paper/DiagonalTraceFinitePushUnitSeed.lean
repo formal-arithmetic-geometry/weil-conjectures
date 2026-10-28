@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.DiagonalTraceFiniteEvaluation
+import Sheaf.Paper.DiagonalTraceFinitePushUnitCommon
 
 /-! # The common-unit seed for finite direct-image comparison -/
 
@@ -14,8 +15,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
-
 /-- The normalized completed coefficient unit agrees with the coefficient-unit
 adjunct after the limit/direct-image comparison and the varying comparison.
 
@@ -23,17 +22,9 @@ Source: diagonal tower trace proof (2), ordinary coefficient-unit square;
 geometric classes proof (3), coefficient-pullback unit normalization.
 (blueprint: lem-sfb-diagonal-trace-finite-push-unit-seed).
 
-Proof: evaluate the completed exact square on the degree-zero complex of the
-completed coefficient unit. The completed unit map and its ordinary comparison
-are the same unital map on sections. Evaluate the coefficient cone comparison
-on the same complex and use its coefficient-one equation. The coefficient
-pullback normalization identifies the resulting ordinary map with the
-adjunction hom-equivalence of the coefficient-pullback derived isomorphism.
-Finally apply the common normalization of the limit square and the naturality
-of the varying comparison. All equalities are morphism equalities in the
-corresponding derived categories; no finite projection or evaluation is used.
-The argument also covers n=0 and empty schemes because only unital maps and
-normalization equations are involved. -/
+Proof: use the pre-varying common-unit comparison, then compose with the
+varying isomorphism.  Its inverse followed by its hom is the identity, and
+functoriality of the limit direct image transports that identity. -/
 theorem diagonalTrace_finitePush_unit_seed
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -48,6 +39,22 @@ theorem diagonalTrace_finitePush_unit_seed
             (p.model.coefficientPullback.derivedIso l (ULift.{u} (Padic l))).hom)) ≫
         p.LS.R.map (p.varying.hom.app
           (SpTowerClasses.unit X (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X))) := by
-  sorry
-
+  have h := diagonalTrace_finitePush_unit_common (p := p)
+  let U := SpTowerClasses.unit X
+    (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X)
+  have hcancel :
+      (p.finitePushUnit l ≫
+          p.Rf.R.map (p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX)) ≫
+          p.limits.iso.hom.app (p.restrictionX.F.mapDerivedCategory.obj U) =
+        (((p.finitePushUnit l ≫
+            p.Rf.R.map (p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX)) ≫
+            p.limits.iso.hom.app (p.restrictionX.F.mapDerivedCategory.obj U)) ≫
+          p.LS.R.map (p.varying.inv.app U)) ≫
+          p.LS.R.map (p.varying.hom.app U) := by
+    simp only [Category.assoc, ← p.LS.R.map_comp,
+      p.varying.inv_hom_id_app U]
+    simp
+  rw [hcancel, h]
+  simp [U]
+  
 end AlgebraicGeometry.ProEtale.DiagonalTrace

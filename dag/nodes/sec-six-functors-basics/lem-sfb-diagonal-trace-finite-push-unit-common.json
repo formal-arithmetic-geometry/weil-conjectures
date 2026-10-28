@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-push-unit-common",
+ "kind": "statement",
+ "title": "Common-unit comparison before the varying isomorphism",
+ "statement": "theorem diagonalTrace_finitePush_unit_common\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) :\n    ((p.finitePushUnit l ≫\n        p.Rf.R.map (p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX)) ≫\n        p.limits.iso.hom.app (p.restrictionX.F.mapDerivedCategory.obj\n          (SpTowerClasses.unit X (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X)))) ≫\n        p.LS.R.map (p.varying.inv.app\n          (SpTowerClasses.unit X\n            (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X))) =\n      p.coefficientsS.unitMap l (ULift.{u} (Padic l)) p.LS ≫\n        p.LS.R.map (p.restrictionS.F.mapDerivedCategory.map\n          ((SpTowerShriek.adjunction l (ULift.{u} (Padic l)) p.base p.model.geometry).homEquiv _ _\n            (p.model.coefficientPullback.derivedIso l (ULift.{u} (Padic l))).hom))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), ordinary coefficient-unit square before the varying comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the completed exact square on the degree-zero complex of the completed coefficient unit and use its common-unit normalization.",
+   "uses": [
+    "def-sfb-diagonal-trace-finite-evaluation",
+    "def-sfb-diagonal-trace-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the coefficient cone comparison and use coefficient_one and coefficient_projection together with the exact-cone projection equation.",
+   "uses": [
+    "def-sfb-diagonal-trace-coefficients",
+    "lem-sfb-diagonal-trace-exact-cone-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coefficient-pullback normalization and the limit-square equation, then transport backwards through the inverse varying comparison.",
+   "uses": [
+    "def-sp-tower-class-diagonal",
+    "def-sfb-diagonal-trace-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-diagonal",
+  "lem-sfb-diagonal-trace-exact-cone-projection"
+ ],
+ "proof_origin": {
+  "kind": "split",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), pre-varying common-unit comparison",
+  "by": "G1",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitSeed",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-finite-push-unit",
+   "place": "first proof step: common-unit coefficient square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFinitePushUnitCommon.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finitePush_unit_common",
+  "statement": "theorem diagonalTrace_finitePush_unit_common\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) :\n    ((p.finitePushUnit l ≫\n        p.Rf.R.map (p.coefficientsX.unitMap l (ULift.{u} (Padic l)) p.LX)) ≫\n        p.limits.iso.hom.app (p.restrictionX.F.mapDerivedCategory.obj\n          (SpTowerClasses.unit X (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X)))) ≫\n        p.LS.R.map (p.varying.inv.app\n          (SpTowerClasses.unit X\n            (SpTowerClasses.Arings l (ULift.{u} (Padic l)) X))) =\n      p.coefficientsS.unitMap l (ULift.{u} (Padic l)) p.LS ≫\n        p.LS.R.map (p.restrictionS.F.mapDerivedCategory.map\n          ((SpTowerShriek.adjunction l (ULift.{u} (Padic l)) p.base p.model.geometry).homEquiv _ _\n            (p.model.coefficientPullback.derivedIso l (ULift.{u} (Padic l))).hom))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finitePushUnit varying inverse common-unit comparison",
+   "results": "No existing specialized declaration; the presentation and limit-square fields are the available interfaces.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "derived limit direct image varying comparison inverse hom",
+   "results": "Only generic functoriality and iso cancellation lemmas; no diagonal-trace common-unit theorem.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite push unit coefficient unit limit square varying inverse",
+   "results": "No direct specialized result was found.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020412-L-2507494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020412-L-2507494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
