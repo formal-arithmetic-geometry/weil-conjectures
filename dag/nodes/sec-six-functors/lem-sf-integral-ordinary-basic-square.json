@@ -13,11 +13,27 @@
  },
  "proof": [
   {
-   "text": "Transpose the equality through the reduction/limit adjunction and induct on BasicPair. Canonical isomorphisms, units and counits use mate identities; exchange and projection use the normalized proper mates; proper/open and compactification use their normalized pasting equations. Naturality and recursive ordinaryReduction finish each constructor.",
+   "text": "Case split on BasicPair. Apply ordinaryCanonicalIsoSquare to isoHom. For isoInv, precompose by reduction of the ringed forward isomorphism, use the forward square, and cancel the two isomorphisms.",
    "uses": [
-    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-integral-ordinary-canonical-iso-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For proper pullUnit and pullCounit, specialize the general mate unit and counit squares to the child ordinaryReduction and the inverse reductionPull isomorphism. For openUnit and openCounit, fixedOpenReduction_isIso supplies invertibility of the open mate at the child (or pulled-back child); specialize the inverse-mate unit and counit squares. Unfold only the ordinary coefficient recursion and the mate definitions.",
+   "uses": [
     "lem-sf-tensor-adjunction-reduction-squares",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-sf-open-reconstruction-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinaryProperOpenSquare, ordinaryExchangeSquare and ordinaryProjectionSquare to their respective constructors, with the actual maps and child expressions. Apply the two clauses of ordinaryCompactificationSquares to compactExchange and compactProjection.",
+   "uses": [
+    "lem-sf-integral-ordinary-proper-open-square",
+    "lem-sf-integral-ordinary-exchange-square",
+    "lem-sf-integral-ordinary-projection-square",
+    "lem-sf-integral-ordinary-compactification-squares"
    ],
    "elementary": false
   }
@@ -25,12 +41,16 @@
  "proof_deps": [
   "lem-sf-integral-ordinary-canonical-iso-square",
   "lem-sf-tensor-adjunction-reduction-squares",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-sf-open-reconstruction-effectivity",
+  "lem-sf-integral-ordinary-proper-open-square",
+  "lem-sf-integral-ordinary-exchange-square",
+  "lem-sf-integral-ordinary-projection-square",
+  "lem-sf-integral-ordinary-compactification-squares"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "The basic-pair component of the generator square."
+  "place": "C7: complete BasicPair case split, using the existing primitive squares and generic mate identities. Exchange is independently proved in the same delivery to remove its circular call to this theorem."
  },
  "mathlib_searches": [
   {
@@ -79,13 +99,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "C-9d067",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261027T210300-L-1683531",
+  "landing": "20261028T072350-L-1937649",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: OrdinaryBasicSquare 11-case proof and the two cycle-forced component re-proofs (unclaimed modules) against nodes, change record, clone diff (signatures identical), 3b importers (2 OK), scratch #print axioms (sorryAx only from upstream calculus/AmbientModels/pull_square_nat)"
  }
 }

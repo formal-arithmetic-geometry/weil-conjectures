@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralOrdinaryExpressionReduction
-import Sheaf.SixFunctors.OrdinaryBasicSquare
+import all Sheaf.SixFunctors.IntegralOrdinaryCompactificationExchangeSquare
 
 /-! # Ordinary coefficient exchange square
 
@@ -26,6 +26,12 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+attribute [local irreducible] pullbackTensorCalculus
+  completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
+  HasDerivedCategory.standard SheafOfModules.monoidalCategory
+  proEtaleCanonicalTensorComparison ringedPullComp ringedSquare Compositors.square
+  mateEquiv ringedAdj Direct.adj
 
 /-- Exchange component of the ordinary coefficient mate square.
 Source: Stacks Tags 07A7 and 0E48; blueprint fix-prop-coherence.
@@ -55,7 +61,14 @@ theorem ordinaryExchangeSquare
                 (e.ringedObj l E a.ringedModels K)) ≫
         (Expression.push r hr (.pull k e)).ordinaryReduction l E o a K := by
   intro U V W Z k r p i hr hp w e
-  exact ordinaryBasicSquare l E o a K
-    (BasicPair.exchange k r p i hr hp w e)
+  exact matePastingNaturalSquare
+    (ringedAdj l E p.left) (ringedAdj l E r.left)
+    (o.direct p.left).adj (o.direct r.left).adj
+    (a.realizationModel.reductionPull p.left) (a.realizationModel.reductionPull r.left)
+    (a.realizationModel.reductionPull i.left).hom (a.realizationModel.reductionPull k.left).hom
+    (TwoSquare.mk _ _ _ _ (ringedSquare l E k.left r.left p.left i.left w).hom)
+    (TwoSquare.mk _ _ _ _ (a.compositors.square l E k.left r.left p.left i.left w).hom)
+    (properPullCoeff l E o a k.left r.left p.left i.left w)
+    (e.ringedObj l E a.ringedModels K) (e.ordinaryReduction l E o a K)
 
 end WeilConjectures.IntegralSystemRealization

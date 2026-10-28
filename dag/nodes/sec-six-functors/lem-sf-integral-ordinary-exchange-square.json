@@ -13,24 +13,20 @@
  ],
  "proof": [
   {
-   "text": "Paste the pullback and reduction comparison squares for the four sides of the given square. Composition normalization identifies the boundary with ringedSquare and the system square. Transpose through the two proper adjunctions using their unit and counit identities, and apply naturality to insert the coefficient map of e. This gives exactly the displayed exchange equality without cartesianness or invertibility.",
+   "text": "Use the proved private properPullCoeff and matePastingNaturalSquare helpers from IntegralOrdinaryCompactificationExchangeSquare. The first obtains the forward pullback boundary from pull_square_nat, and the second transposes it through the proper adjunctions and inserts an arbitrary coefficient arrow by naturality. Specialize this generic identity directly to the ringed interpretation and ordinaryReduction of e. The endpoints are definitionally the two ordinary expression recursions. Neither ordinaryBasicSquare nor ordinaryCompactificationExchangeSquare is used.",
    "uses": [
-    "lem-sf-integral-ordinary-canonical-iso-square",
-    "lem-sf-tensor-adjunction-reduction-squares",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-sf-integral-ordinary-canonical-iso-square"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-integral-ordinary-canonical-iso-square",
-  "lem-sf-tensor-adjunction-reduction-squares",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-sf-integral-ordinary-canonical-iso-square"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Strict component decomposition of lem-sf-integral-ordinary-exchange-projection-squares."
+  "place": "C7: direct mate-pasting and naturality proof replacing the circular call to ordinaryBasicSquare; no assumption on the compactification-exchange theorem."
  },
  "mathlib_searches": [
   {
@@ -96,17 +92,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "C-9d067",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261027T210300-L-1683531",
+  "landing": "20261028T072350-L-1937649",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.IntegralSystemRealization.ordinaryExchangeSquare"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: OrdinaryBasicSquare 11-case proof and the two cycle-forced component re-proofs (unclaimed modules) against nodes, change record, clone diff (signatures identical), 3b importers (2 OK), scratch #print axioms (sorryAx only from upstream calculus/AmbientModels/pull_square_nat)"
  }
 }
