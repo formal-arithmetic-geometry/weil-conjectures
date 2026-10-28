@@ -198,7 +198,7 @@ def CoefClosedChartAt
     CoefClosedChartNormalization
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E j)) i p aY h H.omegaY_boundedBelow
 
-/-- The coefficient-theoretic part of the closed-chart construction.
+/- The coefficient-theoretic part of the closed-chart construction.
 
 This is the remaining bounded-below compact-support and dualizing comparison argument
 after a closed affine-space chart has been chosen. It is split from the geometric
@@ -206,6 +206,31 @@ existence theorem so that the two coefficient levels can be proved independently
 Source: main-20261015, sec-smooth-purity/sk-lem-sp-tower/
 lem-coef-finite-dualizing.proof.md, paragraphs 2--3
 (blueprint: lem-coef-dualizing-closed-chart-properties). -/
+/- The one-level coefficient package is the remaining local argument. -/
+/-- For one finite coefficient stage, the closed pushforward, bounded-below
+dualizing, compact-support composition, and counit-normalization clauses hold.
+
+Source: main-20261015, sec-smooth-purity/sk-lem-sp-tower/
+lem-coef-finite-dualizing.proof.md, paragraphs 2--3.  The proof first applies
+the boundary adjunction restriction to obtain the ambient bounded-below
+adjunctions, then transports exactness of closed direct image to module sheaves.
+The exact derived factorization identifies the identity-open compact support with
+termwise direct image, and the exact adjunction bound gives the lower bound for
+the closed right adjoint.  Finally the bounded-below compact-support composition
+comparison and uniqueness of right adjoints produce the counit-normalized
+isomorphism.  This is strictly the one-stage component of the two-stage chart
+argument, and is left as the next proof item.
+(blueprint: lem-coef-dualizing-closed-chart-single). -/
+theorem coefClosedChartAt_single_of_closed_chart
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (j : ℕ) (hj : 1 ≤ j)
+    {Y P : Scheme.{u}} (i : Y ⟶ P) [IsClosedImmersion i]
+    (k : Type u) [Field k] (p : P ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]
+    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (h : i ≫ p = aY) : CoefClosedChartAt l E j hj i k p aY h := by
+  sorry
+
 theorem coefClosedChartAt_of_closed_chart
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)
@@ -216,7 +241,8 @@ theorem coefClosedChartAt_of_closed_chart
     (h : i ≫ p = aY) :
     CoefClosedChartAt l E m hm i k p aY h ∧
       CoefClosedChartAt l E n (hm.trans hmn) i k p aY h := by
-  sorry
+  exact ⟨coefClosedChartAt_single_of_closed_chart l E m hm i k p aY h,
+    coefClosedChartAt_single_of_closed_chart l E n (hm.trans hmn) i k p aY h⟩
 
 set_option linter.unusedVariables false in
 /-- Every affine separated finite-type scheme has a closed affine-space chart with

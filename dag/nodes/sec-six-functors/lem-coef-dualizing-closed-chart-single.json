@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-dualizing-closed-chart-single",
+ "kind": "statement",
+ "title": "One coefficient level for a chosen closed affine chart",
+ "statement": "For one positive finite coefficient stage, a closed immersion i:Y→P with separated finite-type quasi-compact structure maps satisfies the exact closed pushforward, bounded-below dualizing, compact-support composition, and counit-normalization clauses packaged by CoefClosedChartAt.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraphs 2--3, one fixed coefficient level after the affine chart is chosen"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-weil-boundary-etale-adjunction-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary-etale boundary adjunction restriction, transfer exactness of closed direct image to module sheaves, identify identity-open compact support with termwise direct image, prove the lower bound for the closed right adjoint, and use bounded-below compact-support composition plus uniqueness of right adjoints to obtain the counit-normalized comparison. This is the one-stage component of the two-stage coefficient argument.",
+   "uses": [
+    "lem-weil-boundary-etale-adjunction-restriction",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-amb-etale-compact-comparisons",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraphs 2--3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-boundary-etale-adjunction-restriction",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-amb-etale-compact-comparisons",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Split the two-level coefficient package into its one-level component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion etale coefficient dualizing bounded below counit",
+   "results": "No exact one-level CoefClosedChartAt declaration found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion CoefClosedChartAt",
+   "results": "No exact declaration found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefClosedChartAt|dualizingComplex.*rightAdjoint",
+   "results": "Only the assigned module defines this package.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDualizingClosedChart",
+  "date": "2026-10-28",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-closed-chart-properties",
+   "place": "One coefficient level after the closed affine chart is chosen",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "module": "Sheaf.Paper.CoefDualizingClosedChart",
+  "file": "lean/Sheaf/Paper/CoefDualizingClosedChart.lean",
+  "declaration": "AlgebraicGeometry.Etale.coefClosedChartAt_single_of_closed_chart",
+  "statement": "theorem coefClosedChartAt_single_of_closed_chart (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (j : ℕ) (hj : 1 ≤ j) {Y P : Scheme.{u}} (i : Y ⟶ P) [IsClosedImmersion i] (k : Type u) [Field k] (p : P ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (h : i ≫ p = aY) : CoefClosedChartAt l E j hj i k p aY h",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261028T020345-L-2499727",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261028T020345-L-2499727",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

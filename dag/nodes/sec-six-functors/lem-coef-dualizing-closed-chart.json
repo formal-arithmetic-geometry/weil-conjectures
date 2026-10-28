@@ -25,134 +25,31 @@
  ],
  "proof": [
   {
-   "text": "Write $Y=\\operatorname{Spec}D$. By [lem-pc-affine-finite-type-algebra], $D$ is a finite-type $k$-algebra. By [def-weil-pbc-finite-type-algebra], choose a surjection $v:k[x_1,\\ldots,x_r]\\twoheadrightarrow D$, allowing $r=0$. The affine description in [def-sbc-affine-space] and the contravariant spectrum construction [def-weil-affine-spectrum] give $i:Y\\to P=\\mathbf A^r_k$ over $s$. The singleton affine cover of $P$ satisfies [lem-weil-pbc-closed-immersion-affine-cover-criterion], since its inverse image is the affine scheme $Y$ and its section map is $v$. Thus $i$ is closed and $pi=a_Y$.",
+   "text": "Apply the existing affine closed-chart construction to the structure morphism aY. It yields r, i, the projection identity, and IsClosedImmersion i.",
    "uses": [
-    "lem-pc-affine-finite-type-algebra",
-    "def-weil-pbc-finite-type-algebra",
-    "def-sbc-affine-space",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T2 (lemma-locally-finite-type-characterize) and 01QO (lemma-closed-immersion), affine criterion"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-closed-immersion-finite], $i$ is finite; by [lem-weil-pbc-closed-immersion-proper](a), it is proper and of finite type. Therefore $(\\operatorname{id}_Y,i)$ is the identity-open compactification. The polynomial projection $p$ is finite type by [def-weil-finite-type-morphism]: its affine presentation has the finite generators $x_1,\\ldots,x_r$. It is separated in the sense of [def-weil-proper-morphism] by [lem-weil-pbc-affine-source-morphism-separated], since its source $P=\\operatorname{Spec}k[x_1,\\ldots,x_r]$ is affine by [def-sbc-affine-space]. Thus $P$ too is a separated finite-type $k$-scheme. These arguments include the zero ring $D=0$ (empty $Y$) and $r=0$.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-closed-immersion-proper",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-affine-source-morphism-separated",
     "def-sbc-affine-space"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraph 2, geometric prerequisites for the affine closed factorization"
+    "document": "WeilConjectures/AlgebraicGeometry/AffineSpaceClosedChart.lean",
+    "place": "exists_isClosedImmersion_affineSpace_of_isAffine"
    }
   },
   {
-   "text": "The rings $A$ and $B$ are finite commutative rings by the finite coefficient-ring clause of [def-weil-l-adic-coefficient-extension]. Apply [lem-weil-boundary-etale-adjunction-restriction] separately to $a_Y:Y\\to s$ and $p:P\\to s$. Its hypotheses hold by steps 1–2; $s$ is a separated finite-type $k$-scheme, and each coefficient is one of its positive finite stages. It supplies Noetherianity, compactifications, and the ordinary etale adjunctions $F_{Y,R}\\dashv G_{Y,R}$ and $F_{P,R}\\dashv G_{P,R}$, whose two functors preserve $D^+$. In particular $R_s$ is in degree zero, so both $\\omega_{Y,R}$ and $\\omega_{P,R}$ lie in $D^+$ before any coefficient-change assertion is made.",
+   "text": "Closed immersions provide finite and proper instances, and hence locally finite type and quasi-compact instances for i. The coefficient clauses are then supplied by the fixed-chart coefficient package.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-boundary-etale-adjunction-restriction"
+    "lem-coef-dualizing-closed-chart-properties"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraph 2, bounded-below domains for composing ambient right adjoints"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-etale-supported-kernel-adjunction] to the closed immersion $i$. Its statement gives exactness of $i_*$ for abelian etale sheaves. This also proves exactness for constant-$R$ module sheaves: [def-weil-pbc-direct-image] identifies the underlying abelian direct image, while [def-weil-sheaf-of-modules-category] computes module kernels sectionwise and module cokernels by sheafifying the sectionwise cokernel. These are the same underlying abelian kernels and cokernels, with induced $R$-actions; forgetting the action reflects their exactness. Hence applying module $i_*$ to a short exact sequence is exact after forgetting scalars and therefore exact as a module sequence. This argument applies to every module sheaf, with no constructibility hypothesis.",
-   "uses": [
-    "lem-pur-etale-supported-kernel-adjunction",
-    "def-weil-pbc-direct-image",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), support adjunction; sites-modules.tex Tag 03DA (lemma-abelian), exact forgetful functor"
-   }
-  },
-  {
-   "text": "For the exact additive functor just obtained, [lem-weil-pbc-exact-functor-derived-factorization] identifies its unbounded derived functor with termwise $i_*$. Equivalently, if $L\\to J$ is a K-injective resolution, its image $i_*L\\to i_*J$ is a quasi-isomorphism, so the derived direct image computed by $i_*J$ is represented by $i_*L$ itself. The identity open extension is the identity on sheaves and complexes; thus the compactification formula of [def-amb-etale-compact-support] gives $Ri_{R!}=Ri_{R*}=i_{R*}$ on the whole ordinary derived category. Finally [lem-weil-pbc-exact-functor-complex-cohomology] gives the natural equality, read as its canonical isomorphism, $H^q(i_{R*}L)\\cong i_{R*}H^q(L)$ for every integer $q$ and every unbounded $L$.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-amb-etale-compact-support",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), all complexes compute the unbounded derived functor; homology.tex Tag 010N (lemma-exact-functor)"
-   }
-  },
-  {
-   "text": "By [lem-exc-closed-ambient], the termwise derived direct image has the ordinary right adjoint $I_R=Ri_R^!$, with counit $e_R$. Apply clause (1) of [lem-pur-exact-derived-adjunction-bounds] to the exact sheaf functor of step 4 and its termwise realization of step 5. It shows $I_R(D^{\\ge a})\\subset D^{\\ge a}$ for every integer $a$, hence $I_R$ preserves $D^+$. In particular $I_R\\omega_{P,R}$ is bounded below by step 3. This establishes the second representing object independently of changing coefficients.",
-   "uses": [
-    "lem-exc-closed-ambient",
-    "lem-pur-exact-derived-adjunction-bounds"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraph 2, closed exceptional right adjoint and its independently verified lower bound"
-   }
-  },
-  {
-   "text": "Apply [lem-amb-etale-compact-comparisons] to $Y\\xrightarrow iP\\xrightarrow ps$. The schemes are Noetherian by step 3; all morphisms are separated finite type by steps 1–2, and the compactifications are available by step 3 (and the identity-open one for $i$). It gives the canonical bounded-below isomorphism $F_{P,R}i_{R*}\\cong F_{Y,R}$, since $Ri_{R!}=i_{R*}$ by step 5. The ambient adjunctions restrict to these full $D^+$ subcategories: steps 3, 5 and 6 show that every functor involved preserves them, so their Hom bijections and counits are literally the ambient ones.",
-   "uses": [
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraph 2, compact-support composition comparison on bounded-below inputs"
-   }
-  },
-  {
-   "text": "Compose $i_{R*}\\dashv I_R$ with $F_{P,R}\\dashv G_{P,R}$ on $D^+$ using [def-weil-pbc-composite-adjunction]. For every $L\\in D^+(Y_{\\mathrm{et}},R)$ its Hom bijections are $\\operatorname{Hom}_s(F_{Y,R}L,R_s)\\cong\\operatorname{Hom}_P(i_{R*}L,\\omega_{P,R})\\cong\\operatorname{Hom}_Y(L,I_R\\omega_{P,R})$, where the first arrow uses step 7. Thus $G_{Y,R}|_{D^+}$ and $I_RG_{P,R}|_{D^+}$ are right adjoints to the same left functor. By [det-sp-unique-right-adjoint], their comparison is the unique counit-compatible natural isomorphism. At $R_s$ it gives $\\theta_R:\\omega_{Y,R}\\xrightarrow{\\sim}I_R\\omega_{P,R}$. The composite counit formula in [def-weil-pbc-composite-adjunction] says precisely $\\varepsilon_{Y,R}=\\varepsilon_{P,R}\\circ F_{P,R}(e_{R,\\omega_{P,R}})\\circ F_{Y,R}(\\theta_R)$, using $F_Y\\cong F_Pi_*$. After identifying the representing objects by $\\theta_R$, this is the stated formula. Both objects were proved bounded below in steps 3 and 6, so this comparison uses no coefficient-change isomorphism.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraph 2 and paragraph 3, composition of right adjoints and structural counit normalization"
+    "place": "Paragraphs 2--3 after choosing the closed affine chart"
    }
   }
  ],
  "proof_deps": [
-  "def-amb-etale-compact-support",
   "def-sbc-affine-space",
-  "def-weil-affine-spectrum",
-  "def-weil-finite-type-morphism",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-proper-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "det-sp-unique-right-adjoint",
-  "lem-amb-etale-compact-comparisons",
-  "lem-exc-closed-ambient",
-  "lem-pc-affine-finite-type-algebra",
-  "lem-pur-etale-supported-kernel-adjunction",
-  "lem-pur-exact-derived-adjunction-bounds",
-  "lem-weil-boundary-etale-adjunction-restriction",
-  "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-coef-dualizing-closed-chart-properties"
  ],
  "proof_origin": {
   "by": "agent",
@@ -311,6 +208,8 @@
    "AlgebraicGeometry.Etale.CoefClosedChartProperties",
    "AlgebraicGeometry.Etale.CoefClosedChartNormalization",
    "AlgebraicGeometry.Etale.CoefClosedChartAt",
+   "AlgebraicGeometry.Etale.coefClosedChartAt_single_of_closed_chart",
+   "AlgebraicGeometry.Etale.coefClosedChartAt_of_closed_chart",
    "AlgebraicGeometry.Etale.exists_coefDualizingClosedChart"
   ],
   "file": "lean/Sheaf/Paper/CoefDualizingClosedChart.lean",
@@ -330,19 +229,13 @@
   "note": "Read the node, all 14 stmt_deps, the module, the report, the side-live upstream declarations and both citers (closed-descent, parent finite-dualizing). Node diff vs side-live: lean record only; lean.statement verbatim. Every hypothesis matches the node, with nothing stronger (FiniteFieldDatum, l prime, l≠p, E/Q_l finite, 1≤m≤n, affine separated finite-type Y). Every clause is rendered: closed chart into A^r with i≫p=aY, i finite/proper/finite type, i_* exact, identity-open R_!=Ri_*=termwise i_*, H^q commutation together with the derived iso, I preserves D+, ω_Y, ω_P and Iω_P bounded below, at both levels m and n. The θ clause is ∃! with the counit equation through the canonical composition (identity-open→chosen PlusIso, rightDerivedLowerShriekPlusCompIso, Congr), which is a bijection on Hom sets, so not hollow. Edge cases (empty Y, r=0, m=n=1, unbounded L, all q) are covered; universes unrestricted beyond the ULift.{u+1} coefficient convention. No H4 duplicate (boundaryDualizingEtaleIso is the R(f)^! mate, a different notion). Docstrings, imports (plain imports = proof deps), line width ≤94 and report sections OK. Advisory: identity_open, derived_pushforward and cohomology are Nonempty isos; citers only use existence and lower bounds (Q19 precedent); redundant LFT/QC next to IsProper; unused inherited T/c/Tor notation; the parent lem-coef-finite-dualizing lean record names a missing module (unrelated). Not recompiled per instruction; worker reports a clean 8.9 s compile."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C5",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261027T233830-L-4121429",
+  "landing": "20261028T020345-L-2499727",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.exists_coefDualizingClosedChart"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.coefClosedChartAt_of_closed_chart"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
