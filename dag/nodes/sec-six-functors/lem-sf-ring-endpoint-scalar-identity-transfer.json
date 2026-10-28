@@ -1,7 +1,8 @@
 {
  "kind": "statement",
  "stmt_deps": [
-  "def-sf-constructible-exceptional-assembly-data"
+  "def-sf-constructible-exceptional-assembly-data",
+  "def-sf-ring-endpoint-scalar-at-closure"
  ],
  "source": {
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
@@ -45,17 +46,21 @@
  "statement": "For a ring stage identity coefficient change, transfer the multiplication-normalized ScalarIdentity certificate from an equal-universe algebraically closed coefficient field Ψ of universe max u v to Ω of universe v, for the explicitly case-defined scalarAtClosure record.",
  "proof": [
   {
-   "text": "Case split on finite and integral ring stages. The underlying coefficient categories, inclusion functors, and ambient tensor identity are definitionally independent of the coefficient closure; only derived-category universe parameters differ.",
+   "text": "Case split on the finite and integral RingStage constructors and construct the low-universe identity isomorphism by reusing the equal-universe certificate iso.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Transport the identity isomorphism and its normalization equality across the maximum-universe to original-universe categorical presentations, preserving the literal multiplication tensor unitor.",
-   "uses": [],
+   "text": "Apply the normalization transport theorem to the chosen low-universe identity isomorphism at each object.",
+   "uses": [
+    "lem-sf-ring-endpoint-scalar-identity-normalization-transport"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sf-ring-endpoint-scalar-identity-normalization-transport"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
@@ -91,12 +96,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261027T205944-L-1637097",
+  "landing": "20261028T020920-L-2564273",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
