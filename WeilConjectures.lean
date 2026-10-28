@@ -13958,6 +13958,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
 public import WeilConjectures.TraceFormula.Specialization.Basic
+public import WeilConjectures.TraceFormula.Specialization.BoundedConstructibleFiniteComplement
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
@@ -14022,6 +14023,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback
 public import WeilConjectures.TraceFormula.Specialization.KernelPullbackDeformation
+public import WeilConjectures.TraceFormula.Specialization.NearbyCartesianModel
 public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchangeProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
@@ -14044,6 +14046,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCriterion
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFiniteClosure
