@@ -14,24 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Apply the constructibility identification and ambient tensor-Hom adjunction to the specified tensorator and permitted closed structure. The resulting transpose is invertible by the two-test-object argument, and its naturality and evaluation equations follow by injectivity of transposition.",
+   "text": "Apply commonStageEvaluation_finiteSquare to the normalized source structure. Naturality of the specified realization tensorator and functoriality carry this source equality to the finite realized evaluation square.",
    "uses": [
-    "lem-sf-adic-finite-realization-cocone",
-    "lem-sf-ringed-derived-tensor-hom-adjunction",
-    "lem-sf-adic-common-stage-hom-transpose"
+    "lem-sf-common-stage-evaluation-finite-square"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply inverse ambient transposition to the finite comparison square. The two uncurries are equal by the finite evaluation square after precomposition with tensor(identity,gammaM.inv). Thus injectivity proves the comparison square for the actual evaluation-defined transposes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ambient comparison evaluation equation follows directly from inverse transposition. Naturality of the ambient braiding and the given symmetric tensorator equation prove signed symmetry.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the extension equation with gammaH at the first field, cancel its inverse, and apply the two finite comparison squares. Bifunctoriality and the gammaM/gammaN inverse identities give the required ambient transition. For tower and identity laws, functoriality and cancellation of adjacent gamma isomorphisms prove both conjuncts.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-adic-finite-realization-cocone",
-  "lem-sf-ringed-derived-tensor-hom-adjunction",
-  "lem-sf-adic-common-stage-hom-transpose"
+  "lem-sf-common-stage-evaluation-finite-square"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "BS Lemma 3.4.11 and Remark 6.8.15"
+  "place": "Step 7 of the retained ambient comparison; source finite-stage normalization isolated, remaining transpose, symmetry and tower calculations formalized by H4."
  },
  "mathlib_searches": [
   {
@@ -78,7 +89,7 @@
   "file": "lean/Sheaf/Paper/AdicAmbientHomEvaluationComparison.lean",
   "declaration": "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_coherence",
   "declarations": [
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoreLaws",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceLaws",
    "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_coherence"
   ],
   "statement": "theorem adic_ambient_hom_evaluation_comparison_coherence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (T : Over (Spec (CommRingCat.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [∀ x : T.left, Invertible (l : T.left.residueField x)] (R : LocallyFiniteAdicRealization.Realization l T.left) (presentation : (sectionFunctor l T.left R).IsEquivalence) (A : TensorInput l T.left R) (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left) (commonStageHomPairs l (PadicAlgCl l) T.left) (commonStageDerivedInternalHom l (PadicAlgCl l) T.left)) (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) : CoherenceLaws l T.left R A source",
@@ -106,19 +117,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261028T034833-L-3557799",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_coherence",
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_core_adjunction",
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_core_bounded"
-  ],
-  "sorry_after": [
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_coherence",
-   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_core_bounded"
-  ]
+  "landing": "20261028T072417-L-1944104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

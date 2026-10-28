@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-common-stage-evaluation-finite-square",
+ "kind": "statement",
+ "title": "Finite-stage square for normalized common-stage evaluation",
+ "statement": "Fix a prime l, an algebraic closure Omega of Q_l, and a scheme X on which l is invertible. Use the common-stage rational category and tensor/internal Hom of [def-weil-derived-pullback-tensor-hom]. Let S be a partial closed structure with the finite rational inverse-transpose normalization of [def-sf-adic-closed-reindexing-maps]. For a permitted pair P and a finite field F containing its Hom-object stage, let gammaH be the literal Hom-object identification, isoToStage, and included prescribed rational Hom comparison, and let gammaM and gammaN be isoToStage on the two entries. Then tensor(gammaH,gammaM), followed by the inverse canonical inclusion tensorator of [def-sf-common-stage-inclusion-tensor-comparison] and the included rational evaluation, equals S.evaluation(P) followed by gammaN. This is an equality of the specified arrows, before applying any realization functor.",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-common-stage-inclusion-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.11 and Proposition 6.8.14; finite-stage square in step 7 of lem-sf-adic-ambient-hom-evaluation-comparison"
+ },
+ "proof": [
+  {
+   "text": "Write evaluation as inverse transpose of the identity on the common-stage Hom. Its literal object has the compositum of the entry stages as its stage. Hence F contains that Hom, both entries, and the tensor of the Hom with the first entry. Represent the identity at F and apply the assumed PodCommonTransposeNormalization there. Rational inverse transposition is natural in its test object, so move the prescribed rational Hom comparison to the first tensor input; inverse transposition of the identity is rational evaluation.",
+   "uses": [
+    "def-sf-adic-closed-reindexing-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The stageTensorFormula normalization identifies the inverse inclusion tensorator with the literal tensor-object identification, isoToStage, and commonStageTensorComparison followed by the normalized reflexive scalar units. The representative formula for commonStageDerivedTensor and functoriality of isoToStage identify the input corrections with gammaH and gammaM. Cancel the adjacent scalar units and inverse comparisons. The resulting representative is the included rational evaluation followed by the output correction gammaN.",
+   "uses": [
+    "def-sf-common-stage-inclusion-tensor-comparison",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two composites now have the same representative at F, so their classes are equal. This argument does not cancel an inclusion functor and assumes no finite-stage faithfulness. Reflexive scalar extensions use the same specified units; zero objects and empty schemes satisfy the same identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written finite-stage normalization calculation in step 7 of the ambient comparison; BS Lemma 3.4.11 and Proposition 6.8.14 fix the transpose and common-field conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A common stage internal Hom evaluation is compatible with the finite coefficient field inclusion tensor isomorphism",
+   "results": "8 hits; generic closed-category and adjunction APIs only; none states finite-stage common-field evaluation normalization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal fully faithful functor preserves internal Hom when the ambient internal Hom is constructible",
+   "results": "8 hits; generic closed-category and adjunction APIs only; none states finite-stage common-field evaluation normalization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|homEquiv_naturality",
+   "results": "25 hits; generic closed-category and adjunction APIs only; none states finite-stage common-field evaluation normalization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicAmbientHomEvaluationComparison",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-ambient-hom-evaluation-comparison",
+   "place": "Proof step 7, first equality: finite evaluation commutes with the prescribed common-stage scalar identifications.",
+   "via": [
+    "lem-sf-adic-ambient-hom-evaluation-comparison-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageEvaluationFiniteSquare",
+  "file": "lean/Sheaf/Paper/CommonStageEvaluationFiniteSquare.lean",
+  "declaration": "WeilConjectures.commonStageEvaluation_finiteSquare",
+  "statement": "theorem commonStageEvaluation_finiteSquare\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (S : PodPartialClosed (commonStageDerivedTensor l Ω X)\n      (commonStageHomPairs l Ω X) (commonStageDerivedInternalHom l Ω X))\n    (hS : PodCommonTransposeNormalization l Ω X S)\n    (P : (commonStageHomPairs l Ω X).FullSubcategory)\n    (F : AlgebraicallyClosedCoefficients.Index l Ω)\n    (h : (commonStageHomObject l Ω X P).stage ≤ F) :\n    let I := GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) F\n    let Q := commonStageHomPairAtStage l Ω X P F h\n    let γH := eqToIso (commonStageDerivedInternalHom_obj_eq l Ω X P)\n      ≪≫ (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).isoToStage\n        (commonStageHomObject l Ω X P) h ≪≫\n      I.mapIso (commonStageHomComparison l Ω X P F h)\n    let γM := (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).isoToStage\n      P.obj.1.unop (((Padic.finiteCoefficientFields_properties l Ω).1\n        P.obj.1.unop.stage P.obj.2.stage).1.trans h)\n    let γN := (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).isoToStage\n      P.obj.2 (((Padic.finiteCoefficientFields_properties l Ω).1\n        P.obj.1.unop.stage P.obj.2.stage).2.trans h)\n    (commonStageDerivedTensor l Ω X).map (Prod.mkHom γH.hom γM.hom) ≫\n        (AdicQbarRealization.stageTensor l X Ω F\n          ((rationalDerivedInternalHom l\n            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) X).obj Q)\n          Q.obj.1.unop).inv ≫\n        I.map ((podRationalClosed l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) X).evaluation Q) =\n      S.evaluation P ≫ γN.hom",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.commonStageEvaluation_finiteSquare",
+   "WeilConjectures.commonStageDerivedInternalHom_obj_eq",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.uncurry",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.uncurry_precomp",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.evaluation_pair",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.uncurry_postcomp",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.realized_evaluation_square",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.realized_braiding_evaluation",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.comparison_square",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.braiding_evaluation",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.comparison_extension",
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.ambient_transition_tower"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261028T072417-L-1944104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261028T072417-L-1944104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

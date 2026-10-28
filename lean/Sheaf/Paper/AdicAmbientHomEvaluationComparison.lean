@@ -9,6 +9,7 @@ public import Sheaf.Paper.NativeAdicRealizationData
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Algebra.Homology.OrdinaryModuleDerivedInternalHom
+public import Sheaf.Paper.CommonStageEvaluationFiniteSquare
 import Sheaf.Paper.NormalizedCommonEvaluationForStructure
 
 /-! # Ambient Hom from the actual evaluation transpose
@@ -170,6 +171,10 @@ def gammaN (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
       P.obj.2 (((Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1
         P.obj.1.unop.stage P.obj.2.stage).2.trans h))
 
+attribute [local irreducible] commonStageDerivedInternalHom
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite-stage H comparison uses exactly the prescribed rational Hom scalar map.
 The first equality merely exposes the unchanged literal object of the chosen functor.
 Source: DAG step 7; commonStageHomComparison of the recorded operations
@@ -180,8 +185,7 @@ def gammaH (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
     (ordinary l X R).obj ((commonStageDerivedInternalHom l (PadicAlgCl l) X).obj P) ≅
       finiteH l X R P F h :=
   (ordinary l X R).mapIso
-    (eqToIso ((commonStageDerivedInternalHom_existsUnique l (PadicAlgCl l)
-        X).exists.choose_spec.1 P) ≪≫
+    (eqToIso (commonStageDerivedInternalHom_obj_eq l (PadicAlgCl l) X P) ≪≫
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).isoToStage
         (commonStageHomObject l (PadicAlgCl l) X P) h ≪≫
       (GeneralAlgebraicallyClosedCoefficients.inclusion
@@ -420,66 +424,7 @@ structure CoherenceLaws : Prop where
       (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
     homTransition l X R P F F h h = 𝟙 _ ∧ ambientTransition l X R P F F h h = 𝟙 _
 
-private lemma closed_uncurry_local
-    {C : Type*} [Category C] {H : Cᵒᵖ × C ⥤ C}
-    (S : CoefficientClosedStructure H) (X K M : C)
-    (f : X ⟶ H.obj (op K, M)) :
-    (S.transpose X K M).symm f =
-      S.tensor.map (Prod.mkHom f (𝟙 K)) ≫ S.evaluation K M := by
-  let := S.monoidal
-  change ((S.adjunction K).homEquiv X M).symm f = _
-  simp only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
-    MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id]
-  rfl
-
-private lemma closed_uncurry_precomp_local
-    {C : Type*} [Category C] {H : Cᵒᵖ × C ⥤ C}
-    (S : CoefficientClosedStructure H) (X X' K M : C) (a : X' ⟶ X)
-    (f : X ⟶ H.obj (op K, M)) :
-    (S.transpose X' K M).symm (a ≫ f) =
-      S.tensor.map (Prod.mkHom a (𝟙 K)) ≫ (S.transpose X K M).symm f := by
-  rw [closed_uncurry_local, closed_uncurry_local]
-  simp only [← Category.assoc, ← S.tensor.map_comp, CategoryTheory.prod_comp,
-    Category.comp_id]
-
-private lemma closed_evaluation_pair_local
-    {C : Type*} [Category C] {H : Cᵒᵖ × C ⥤ C}
-    (S : CoefficientClosedStructure H) (M M' N N' : C) (f : M' ⟶ M) (g : N ⟶ N') :
-    S.tensor.map (Prod.mkHom (H.map (Prod.mkHom f.op g)) (𝟙 M')) ≫
-        S.evaluation M' N' =
-      S.tensor.map (Prod.mkHom (𝟙 (H.obj (op M, N))) f) ≫ S.evaluation M N ≫ g := by
-  let := S.monoidal
-  have hf := S.evaluation_naturality M M' N f
-  have hg := (S.adjunction M').counit.naturality g
-  have hp : H.map (Prod.mkHom f.op g) =
-      H.map (Prod.mkHom f.op (𝟙 N)) ≫ H.map (Prod.mkHom (𝟙 (op M')) g) := by
-    rw [← H.map_comp]
-    simp only [CategoryTheory.prod_comp, Category.comp_id, Category.id_comp]
-  rw [hp]
-  simp only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
-    MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
-    MonoidalCategory.id_tensorHom] at *
-  rw [MonoidalCategory.comp_whiskerRight, Category.assoc]
-  change MonoidalCategoryStruct.whiskerRight
-    (H.map (Prod.mkHom (𝟙 (op M')) g)) M' ≫ (S.adjunction M').counit.app N' =
-      (S.adjunction M').counit.app N ≫ g at hg
-  change MonoidalCategoryStruct.whiskerRight
-    (H.map (Prod.mkHom f.op (𝟙 N))) M' ≫ (S.adjunction M').counit.app N =
-      MonoidalCategoryStruct.whiskerLeft (H.obj (op M, N)) f ≫
-        (S.adjunction M).counit.app N at hf
-  rw [hg, ← Category.assoc, hf, Category.assoc]
-
-private lemma closed_uncurry_postcomp_local
-    {C : Type*} [Category C] {H : Cᵒᵖ × C ⥤ C}
-    (S : CoefficientClosedStructure H) (X M M' N N' : C)
-    (a : X ⟶ H.obj (op M, N)) (f : M' ⟶ M) (g : N ⟶ N') :
-    (S.transpose X M' N').symm (a ≫ H.map (Prod.mkHom f.op g)) =
-      S.tensor.map (Prod.mkHom (𝟙 X) f) ≫ (S.transpose X M N).symm a ≫ g := by
-  rw [closed_uncurry_local, closed_uncurry_local]
-  have h := congrArg (fun k ↦ S.tensor.map (Prod.mkHom a (𝟙 M')) ≫ k)
-    (closed_evaluation_pair_local S M M' N N' f g)
-  simpa only [← Functor.map_comp_assoc, ← Functor.map_comp, CategoryTheory.prod_comp,
-    Category.comp_id, Category.id_comp, Category.assoc] using h
+open CoherenceCalculus
 
 /-- The constructibility part of the core comparison argument.
 
@@ -534,7 +479,7 @@ private theorem core_adjunction_transpose_field
   apply (A.closed.transpose _ _ _).symm.injective
   rw [Equiv.symm_apply_apply]
   unfold comparison realizedEvaluation
-  rw [closed_uncurry_precomp_local]
+  rw [uncurry_precomp]
   rw [Functor.map_comp]
   have hn0 := A.tensor.hom.naturality
     (X := (L, P.obj.1.unop))
@@ -690,7 +635,7 @@ theorem adic_ambient_hom_evaluation_comparison_core_adjunction
     source_normalized, ?_, ?_⟩
   · intro P Q f
     apply (A.closed.transpose _ _ _).symm.injective
-    rw [closed_uncurry_precomp_local, closed_uncurry_postcomp_local]
+    rw [uncurry_precomp, uncurry_postcomp]
     unfold comparison
     rw [Equiv.symm_apply_apply, Equiv.symm_apply_apply]
     unfold realizedEvaluation
@@ -725,7 +670,7 @@ theorem adic_ambient_hom_evaluation_comparison_core_adjunction
       ((ordinary l T.left R).obj P.obj.1.unop)
       ((ordinary l T.left R).obj P.obj.2)).symm_apply_apply
         (realizedEvaluation l T.left R A source P)
-    rw [closed_uncurry_local] at he
+    rw [uncurry] at he
     exact he
 
 /-- Construct the core comparison laws. This is the first, constructibility and
@@ -755,6 +700,16 @@ theorem adic_ambient_hom_evaluation_comparison_core
       naturality := ha.2.2.2.1
       evaluation := ha.2.2.2.2 }
 
+attribute [local irreducible] ordinary
+  commonStageDerivedTensor rationalDerivedInternalHom podRationalClosed
+
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] ambientHom
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 1200000 in
+-- Comparing the specified finite-stage maps needs additional elaboration heartbeats.
 /-- Construct the finite-stage and coefficient tower laws. This is the second half
 of the seven-step argument in the node. -/
 theorem adic_ambient_hom_evaluation_comparison_coherence
@@ -770,7 +725,108 @@ theorem adic_ambient_hom_evaluation_comparison_coherence
       (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
     (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
     CoherenceLaws l T.left R A source := by
-  sorry
+  have _hl := hl
+  have _presentation := presentation
+  have hev (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory) :
+      A.closed.tensor.map (Prod.mkHom (comparison l T.left R A source P) (𝟙 _)) ≫
+          A.closed.evaluation ((ordinary l T.left R).obj P.obj.1.unop)
+            ((ordinary l T.left R).obj P.obj.2) =
+        realizedEvaluation l T.left R A source P := by
+    have h := (A.closed.transpose _ _ _).symm_apply_apply
+      (realizedEvaluation l T.left R A source P)
+    rw [uncurry] at h
+    exact h
+  have he (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory)
+      (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : (commonStageHomObject l (PadicAlgCl l) T.left P).stage ≤ F) :
+      A.closed.tensor.map
+          (Prod.mkHom (gammaH l T.left R P F h).hom (gammaM l T.left R P F h).hom) ≫
+          finiteEvaluation l T.left R A P F h =
+        realizedEvaluation l T.left R A source P ≫ (gammaN l T.left R P F h).hom := by
+    let I := GeneralAlgebraicallyClosedCoefficients.inclusion
+      (l := l) (Ω := PadicAlgCl l) (Y := T.left) F
+    let Q := commonStageHomPairAtStage l (PadicAlgCl l) T.left P F h
+    let gH : (commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P ≅
+        I.obj ((rationalDerivedInternalHom l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) F) T.left).obj Q) :=
+      eqToIso (commonStageDerivedInternalHom_obj_eq l (PadicAlgCl l) T.left P) ≪≫
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) T.left).isoToStage
+        (commonStageHomObject l (PadicAlgCl l) T.left P) h ≪≫
+      (GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := l) (Ω := PadicAlgCl l) (Y := T.left) F).mapIso
+          (commonStageHomComparison l (PadicAlgCl l) T.left P F h)
+    let gM : P.obj.1.unop ≅ I.obj Q.obj.1.unop :=
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l)
+      T.left).isoToStage P.obj.1.unop
+        (((Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1
+          P.obj.1.unop.stage P.obj.2.stage).1.trans h)
+    let gN : P.obj.2 ≅ I.obj Q.obj.2 :=
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l)
+      T.left).isoToStage P.obj.2
+        (((Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1
+          P.obj.1.unop.stage P.obj.2.stage).2.trans h)
+    have hs := commonStageEvaluation_finiteSquare l (PadicAlgCl l) T.left
+      source source_normalized P F h
+    exact realized_evaluation_square (ordinary l T.left R)
+      (commonStageDerivedTensor l (PadicAlgCl l) T.left) A.closed.tensor A.tensor
+      gH gM gN (source.evaluation P)
+      ((stageTensor l T.left (PadicAlgCl l) F
+        ((rationalDerivedInternalHom l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) F) T.left).obj
+            (commonStageHomPairAtStage l (PadicAlgCl l) T.left P F h))
+        (commonStageHomPairAtStage l (PadicAlgCl l) T.left P F h).obj.1.unop).inv)
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion
+          (l := l) (Ω := PadicAlgCl l) (Y := T.left) F).map
+          ((podRationalClosed l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) F)
+              T.left).evaluation
+            (commonStageHomPairAtStage l (PadicAlgCl l) T.left P F h))) hs
+  have hc (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory)
+      (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : (commonStageHomObject l (PadicAlgCl l) T.left P).stage ≤ F) :
+      (gammaH l T.left R P F h).hom ≫ finiteComparison l T.left R A P F h =
+        comparison l T.left R A source P ≫ (ambientHom l T.left R).map
+          (Prod.mkHom (gammaM l T.left R P F h).inv.op (gammaN l T.left R P F h).hom) :=
+    comparison_square A.closed _ _ _ _ _ _ _ _
+      (gammaH l T.left R P F h) (gammaM l T.left R P F h)
+      (gammaN l T.left R P F h) (he P F h)
+  refine
+    { signed_symmetry := ?_
+      finite_evaluation := he
+      finite_comparison := hc
+      extension := ?_
+      tower := ?_
+      identity := ?_ }
+  · intro P
+    calc
+      _ = (A.symmetry.braiding ((ordinary l T.left R).obj P.obj.1.unop)
+          ((ordinary l T.left R).obj
+            ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P))).hom ≫
+          realizedEvaluation l T.left R A source P :=
+        braiding_evaluation A.closed A.symmetry _ _ _ _ _ (hev P)
+      _ = _ :=
+        realized_braiding_evaluation (ordinary l T.left R) _ _ _ _ _
+          (A.symmetric P.obj.1.unop
+            ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P)).symm
+  · intro P F G _hFG hF hG
+    exact comparison_extension (ambientHom l T.left R)
+      (gammaH l T.left R P F hF) (gammaM l T.left R P F hF) (gammaN l T.left R P F hF)
+      (gammaH l T.left R P G hG) (gammaM l T.left R P G hG) (gammaN l T.left R P G hG)
+      (comparison l T.left R A source P) (finiteComparison l T.left R A P F hF)
+      (finiteComparison l T.left R A P G hG) (hc P F hF) (hc P G hG)
+  · intro P F G K _hFG _hGK hF hG hK
+    constructor
+    · simp only [homTransition, Category.assoc, Iso.hom_inv_id_assoc]
+    · exact ambient_transition_tower (ambientHom l T.left R)
+        (gammaM l T.left R P F hF) (gammaN l T.left R P F hF)
+        (gammaM l T.left R P G hG) (gammaN l T.left R P G hG)
+        (gammaM l T.left R P K hK) (gammaN l T.left R P K hK)
+  · intro P F h
+    constructor
+    · exact (gammaH l T.left R P F h).inv_hom_id
+    · simp only [ambientTransition, Iso.inv_hom_id, op_id, ← CategoryTheory.prod_id]
+      exact (ambientHom l T.left R).map_id _
+
 
 /-- Assemble the ambient comparison laws from their strictly smaller core and coherence packages.
 (blueprint: lem-sf-adic-ambient-hom-evaluation-comparison). -/
