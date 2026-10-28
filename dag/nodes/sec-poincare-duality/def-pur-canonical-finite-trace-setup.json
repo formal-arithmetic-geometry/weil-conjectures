@@ -1,0 +1,165 @@
+{
+ "id": "def-pur-canonical-finite-trace-setup",
+ "kind": "definition",
+ "title": "Finite trace setup for the canonical smooth purity realization",
+ "statement": "Fix a purity coefficient setting P, separated finite-type schemes X and Y over its field, a separated finite-type morphism f:X→Y, and a compactification c. For f smooth of pure relative dimension d, define the finite integration at level n+1 from the finite compact-support image of the shifted Tate dualizing line to the coefficient unit by the actual finite diagonal orientation, compact-support comparisons, and exceptional adjunction counit. The constant-unit, pullback-unit, tensor-unit, and shift comparisons are the published normalized comparisons. The finite dualizing object is bounded below. The level smooth compact-support, purity, and exceptional-counit helpers retain the original over-field instances. In the integral coefficient category, for any good complex whose derived object is constructible of finite Tor amplitude, the specified strict pullback augmentation becomes invertible in the derived category. These are the finite trace and pullback setup of canonical rational smooth purity; no choice of an unrelated isomorphism replaces any of these maps. The coefficient setting is [def-pur-conventions], the line uses [def-coefficient-twists-detailed], and the comparisons and finite maps are [def-pur-smooth-purity-map], [def-pur-smooth-trace], [def-weil-compactifications-refinements], and [cor-pur-adic-and-rational-smooth-dualizing-complexes]. The ordinary integral monoidal structure is the published ringed-site closed structure, with its tensor identified with the chosen ordinary tensor model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational.proof.md",
+  "place": "Step 1: finite-level smooth purity, integral pullback comparison, and the coefficient-unit trace before rationalization; the existing realization constructions are extracted unchanged"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "def-weil-compactifications-refinements",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "def-strict-coefficient-ringed-geometric-data",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-integral-reduction-tower",
+  "def-a1-flat-term-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-pur-diagonal-dualizing-data",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite integration map by the finite compact-support comparison, intrinsic-to-site comparison, inverse finite diagonal orientation followed by the dualizing comparison, and the exceptional counit. The unit comparisons are the existing constant-unit pullback, tensor presentation, and shift reassociation. Bounded-below exceptional pullback of the coefficient unit proves finiteDualizingPlus. The level helpers merely supply the original over-field instances explicitly; they do not replace the maps.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "def-pur-smooth-trace",
+    "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For smoothPullAugmentation_isIso, work with an arbitrary coefficient field and separated, locally finite-type, quasi-compact morphism; the smooth-purity case is the required specialization. Apply finiteTorOrdinaryPullComplete to the ordinary completed-ring pullback of Q(C). The ambient augmentation comparison gives a module-pullback isomorphism and the exact chain-map identity. Its termwise extension and the derived pullback factorization present this complete ordinary object by the good ambient pullback complex. Apply canonicalCompletionUnitCriterion to make its specified completion unit invertible. Naturality transports invertibility to Q of the ambient complex; completionUnit_existsUnique then makes Q(roosUnit) invertible. Compose with the actual Roos tower isomorphism and then with the termwise module-pullback isomorphism. The ambient augmentation identity identifies this composite with the specified FrobeniusCoefficientTwists.pullbackAugmentation..",
+   "uses": [
+    "lem-sf-finite-tor-ordinary-pull-complete",
+    "lem-sf-integral-pullback-augmentation-ambient",
+    "lem-fix-qcqs-completion-unit-criterion",
+    "lem-pur-integral-ambient-operation-models",
+    "def-pur-integral-derived-operations",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the ordinary monoidal presentation and ordinaryModel. The first clause of the normalized existence-and-uniqueness theorem for ordinaryModel is exactly the tensor equality. This private generic theorem lets the parent specialize the equality without repeatedly expanding the large coefficient-specific closed structure.",
+   "uses": [
+    "def-pur-canonical-purity-source-transports"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "lem-sf-finite-tor-ordinary-pull-complete",
+  "lem-sf-integral-pullback-augmentation-ambient",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-pur-integral-ambient-operation-models",
+  "def-pur-integral-derived-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-canonical-purity-source-transports"
+ ],
+ "proof_origin": {
+  "by": "J2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational.proof.md",
+  "place": "Step 1; existing canonical realization finite-trace construction and completion-augmentation proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite coefficient integration morphism from the shifted Tate dualizing line is the compact support comparison followed by the diagonal smooth orientation and exceptional adjunction counit",
+   "results": "ModuleCat.RestrictionCoextensionAdj.counit', Condensed.profiniteSolidCounit, FinPartOrd.dualEquiv_counitIso, Module.DualBases.coeffs, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, Pi.comul_comp_finsuppLcoeFun, Pi.comul_coe_finsupp, FGModuleCat.FGModuleCatCoevaluation",
+   "date": "2026-10-27",
+   "verdict": "No matching construction: these generic results do not specify the finite smooth trace or its completion augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient smooth purity integration is the exceptional counit composed with the diagonal orientation at the constant unit",
+   "results": "SingularManifold.toPUnit, Condensed.profiniteSolidCounit, AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self, Pi.counit_comp_single, Coalgebra.sum_counit_tmul_eq, LaurentPolynomial.counit_T, SSet.ι₁_snd, Pi.counit_single",
+   "date": "2026-10-27",
+   "verdict": "No matching construction: these generic results do not specify the finite smooth trace or its completion augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalDualizing|smoothPurity|finiteIntegration",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "No matching construction: these generic results do not specify the finite smooth trace or its completion augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "J2",
+  "group": "J2",
+  "item": "Sheaf.Paper.RationalSmoothPurityCanonical",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentences 3–4: finite trace and strict pullback setup of the canonical purity family, before its integral trace transpose and rationalization",
+   "via": [
+    "def-pur-canonical-rational-purity-realization",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.RationalSmoothPurityFiniteTrace",
+  "declaration": "WeilConjectures.RationalSmoothPurityCanonical.finiteIntegration",
+  "declarations": [
+   "WeilConjectures.RationalSmoothPurityCanonical.smoothPullAugmentation_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteComparisonUnit",
+   "WeilConjectures.RationalSmoothPurityCanonical.tensorUnitFromPresentation",
+   "WeilConjectures.RationalSmoothPurityCanonical.tensorLeftUnitorFromPresentation",
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteTensorUnit",
+   "WeilConjectures.RationalSmoothPurityCanonical.finitePullUnit",
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteUnitSource",
+   "WeilConjectures.RationalSmoothPurityCanonical.twist",
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteDualizingPlus",
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteIntegration",
+   "WeilConjectures.RationalSmoothPurityCanonical.levelSmoothCompactSupport",
+   "WeilConjectures.RationalSmoothPurityCanonical.levelSmoothPurityMap",
+   "WeilConjectures.RationalSmoothPurityCanonical.levelSmoothExceptionalCounit",
+   "WeilConjectures.RationalSmoothPurityCanonical.ordinaryMonoidal"
+  ],
+  "file": "lean/Sheaf/Paper/RationalSmoothPurityFiniteTrace.lean",
+  "statement": "def finiteIntegration (n d : ℕ) [SmoothOfRelativeDimension d f] : (PurCompactSupport.image (PurCompactSupport.finite P.coefficients.l P.extension (n + 1) (Nat.succ_pos n)) c).obj ((sfIntrinsicDerivedEquivalence X (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))).functor.obj ((AdicSmoothDualizing.levelSetting P n).diagonalTwist X d)) ⟶ (AdicSmoothDualizing.levelSetting P n).coefficientUnit Y",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-7164a",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261028T020515-L-2518146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-7164a",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261028T020515-L-2518146",
+  "kind": "interface",
+  "note": "independent cc review: item+new FiniteTrace module vs clone item (verbatim diff -wB, only let-cached proof args in finiteIntegration); smoothPullToOrdinary proof vs normalized_descent_comparison; nodes vs Lean names/owners; 13 direct importers compiled vs sandbox .lbuild, all OK <60 s"
+ }
+}
