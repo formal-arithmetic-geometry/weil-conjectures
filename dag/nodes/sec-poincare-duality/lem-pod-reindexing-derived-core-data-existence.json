@@ -12,28 +12,68 @@
  },
  "proof": [
   {
-   "text": "The strict quotient and normalized Roos constructions provide the raw comparison maps; the five laws are deferred to separate statements.",
+   "text": "Choose fixed ordinary and derived completion models for the two specified calculi. The existing normalized Roos-model constructor supplies sourceRoos and targetRoos.",
    "uses": [
-    "lem-pod-reindexing-derived-core-data",
-    "lem-pod-reindexing-strict-comparisons",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-trf-primitive-quotient-realization-comparisons"
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the ordinary coefficient-restriction square. Its left-adjoint mate gives finite scalar extension. Derive the ordinary inverse-evaluation isomorphism, identifying its finite pullback with sectionwise inverse image by uniqueness of left adjoints.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "lem-weil-finite-comparison-complex-isomorphism",
+    "lem-pur-completed-primitive-counit-evaluation-existence",
+    "lem-pur-completed-primitive-counit-evaluation-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the projection-normalized completed coefficient map with the inverse-image map. Apply the whole-tower inverse-image unit degreewise. Combine this natural restricted-tower isomorphism with the given natural strict Roos isomorphism and the two normalized Roos models, then descend along the localization of system complexes. This gives the limit comparison without detecting derived morphisms by evaluations.",
+   "uses": [
+    "lem-pod-reindexing-good-complex",
+    "def-trf-integral-tower-inverse-image-unit",
+    "lem-pod-reindexing-strict-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both ordinary reindexing and whole-system pullback are equivalences. Take the left-adjoint mate of the limit comparison using the two fixed reduction/limit adjunctions. This supplies the reduction comparison.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "def-trf-integral-tower-inverse-image-unit",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply primitive quotient pullback model existence to the specified source calculus and target Roos model. Retain its realization isomorphism and assemble the eight raw comparison fields. No normalization law of the raw record is invoked.",
+   "uses": [
+    "lem-trf-primitive-quotient-pullback-model-existence",
+    "def-pod-reindexing-derived-core-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-reindexing-derived-core-data",
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "lem-weil-finite-comparison-complex-isomorphism",
+  "lem-pur-completed-primitive-counit-evaluation-existence",
+  "lem-pur-completed-primitive-counit-evaluation-uniqueness",
+  "lem-pod-reindexing-good-complex",
+  "def-trf-integral-tower-inverse-image-unit",
   "lem-pod-reindexing-strict-comparisons",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-trf-primitive-quotient-realization-comparisons"
+  "lem-trf-primitive-quotient-pullback-model-existence",
+  "def-pod-reindexing-derived-core-data"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent."
+  "place": "Steps 1 and 5; Q7: exact functor descent of the normalized Roos comparison and adjoint squares."
  },
  "mathlib_match": null,
  "status": "split",
@@ -103,9 +143,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261028T020137-L-2471110",
+  "landing": "20261028T034921-L-3568929",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

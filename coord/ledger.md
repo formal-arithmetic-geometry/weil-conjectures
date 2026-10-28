@@ -20879,3 +20879,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/Q3/Sheaf.TraceFormula.CanonicalRelativeProjRestrictionComparison (stage 3; reviewer PASS; first push; landing 20261028T034917-L-3568290 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/Q5/Sheaf.Paper.PodReindexingChainShiftSquare (stage 3; reviewer PASS; first push; landing 20261028T034918-L-3568480 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:49 L: merged deliver/Q6/Sheaf.Paper.PodReindexingCompositionCompatibility (stage 3; reviewer PASS; first push; landing 20261028T034919-L-3568695 (interface); batch 20261028T034643; modules 4; new nodes 3)
+- 03:49 L: merged deliver/Q7/Sheaf.Paper.PodReindexingDerivedCoreDataExistence (stage 3; reviewer PASS; first push; landing 20261028T034921-L-3568929 (interface); batch 20261028T034643; modules 1; new nodes 0)
