@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpaceBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpaceTwistAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 
 /-!
@@ -86,7 +88,8 @@ theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertib
       {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)} (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g)
       [HasCompactification p'] [QuasiCompact p'],
       IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
-  sorry
+  ⟨nonempty_adjunction_affineSpace Λ d S, fun _ _ _ _ _ sq _ _ ↦
+    isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace_of_hasInvertibleExponent Λ d S sq⟩
 
 /-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
 blueprint `prop-asd-smooth-base-change`: the case `d = 1` of
