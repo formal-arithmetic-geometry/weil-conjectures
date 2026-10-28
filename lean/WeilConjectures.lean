@@ -12869,3 +12869,15 @@ public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaFunction.WeightSeparation
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
+public import WeilConjectures.TraceFormula.CoefficientMorphism
+public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
+public import WeilConjectures.TraceFormula.LefschetzVerdier
+public import WeilConjectures.TraceFormula.LocalTermLocality
+public import WeilConjectures.TraceFormula.PointNormalization
+public import WeilConjectures.TraceFormula.ProperCompatibility
+public import WeilConjectures.TraceFormula.ProperCurve
+public import WeilConjectures.TraceFormula.ProperPushforward
+public import WeilConjectures.TraceFormula.ProperPushforwardKernel
+public import WeilConjectures.TraceFormula.SupportedPairing
+public import WeilConjectures.TraceFormula.TraceClassAdditivity
