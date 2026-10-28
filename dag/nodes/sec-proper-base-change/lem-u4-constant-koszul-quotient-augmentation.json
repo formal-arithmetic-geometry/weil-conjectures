@@ -1,0 +1,141 @@
+{
+ "id": "lem-u4-constant-koszul-quotient-augmentation",
+ "kind": "statement",
+ "title": "Normalized natural augmentation of strict Koszul tensor towers to quotient towers",
+ "statement": "Let C be a small category with Grothendieck topology J, A a commutative ring, I an ideal, b a Boolean, r a natural number and a : Fin r → A with span(range a)=I. Use O_b and its finite coefficient maps from [def-sfb-constant-completion-coefficient-data], the strict reduction complex functor T_b from [def-pur-strict-quotient-completion-data], and the actual dual Koszul tensor tower functor G_a from [def-weil-pbc-ringed-koszul-system] on the global sections algebraSection(baseMap_b)(a_i). There exists a natural transformation α : G_a → T_b on all cochain complexes of O_b-modules. For every complex P, its actual ordinary Koszul limit unit followed by ordinaryLimit(α_P) equals ordinaryUnit_b(P). For every level n, every pair of tensor degrees p,q with q≠0, the inclusion of the summand P^p tensor (dual Koszul tower at n)^q followed by (α_P)_n in degree p+q is zero. These two conditions are precisely KoszulQuotientAugmentationLaws. No Noetherian, boundedness or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 099M (lemma-naive-completion), proof; Tag 093M (lemma-completion-flat)."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Dualize each positive two-term Koszul factor and total tensor in the given order. In degree zero send the coefficient unit to the finite coefficient quotient; send all other Koszul degrees to zero. The differential into degree zero has entries a_i^(n+1), which vanish in A/I^(n+1). Thus these components define an augmentation chain map, and the empty tensor is covered by the same quotient map.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-sfb-constant-completion-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Dual power transitions are identity in degree zero. Quotient transitions preserve residue classes, so these augmentations commute strictly with every tower arrow. Tensor with P and use the balancing isomorphism P tensor res(S_n) ≅ res(S_n tensor P) to identify the target with the specified reduction complex; the coproduct maps are zero on every nonzero Koszul-degree summand.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pur-strict-quotient-completion-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality follows on each total-tensor summand from tensor functoriality and the balancing formula. On the degree-zero unit p maps to p tensor 1 and then to 1 tensor p, the prescribed reduction unit. Compose with each ordinary-limit projection to obtain the asserted equality, since those projections are jointly monic.",
+   "uses": [
+    "def-pur-strict-quotient-completion-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion), strict Koszul augmentation and pro-system argument in the proof, with coefficient flatness from sites-modules.tex Tag 093M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "There exists a natural strict Koszul tensor tower augmentation to ideal power quotient reductions preserving its unit and vanishing on negative Koszul degrees",
+   "results": "{\"t\": \"2026-10-28T02:11:08Z\", \"tool\": \"leansearch\", \"query\": \"There exists a natural strict Koszul tensor tower augmentation to ideal power quotient reductions preserving its unit and vanishing on negative Koszul degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instAlgebra\", \"Ideal.Quotient.factorPowSucc\", \"Ideal.Quotient.factorPow\", \"Ideal.instIsScalarTowerQuotientHPowKerRingHomAlgebraMapOfNat\", \"TensorAlgebra.instRing\", \"Ideal.Quotient.tower_quotient_map_quotient\", \"Ideal.Quotient.isScalarTower\", \"KaehlerDifferential.D_tensorProductTo\"], \"digest\": \"47ec64b7926e8c51\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Results concern ordinary adic modules, quotient maps, or general localization constructions; none gives this strict augmentation on an arbitrary small site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural strict augmentation from dual Koszul tensor complex towers to ideal power quotient module sheaves with prescribed degree-zero map",
+   "results": "{\"t\": \"2026-10-28T02:11:32Z\", \"tool\": \"leanfinder\", \"query\": \"Natural strict augmentation from dual Koszul tensor complex towers to ideal power quotient module sheaves with prescribed degree-zero map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"IsAdicComplete.StrictMono.extend\", \"AdicCompletion.transitionMap\", \"localCohomology\", \"localCohomology.ofSelfLERadical\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Algebra.Generators.H1Cotangent.δ\"], \"digest\": \"8cb5fdcdab17ac5b\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Results concern ordinary adic modules, quotient maps, or general localization constructions; none gives this strict augmentation on an arbitrary small site."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|pro.zero",
+   "results": "{\"t\": \"2026-10-28T02:11:31Z\", \"tool\": \"grep\", \"query\": \"Koszul|koszul|pro.zero\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"c9ca54f8aea9f997\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Results concern ordinary adic modules, quotient maps, or general localization constructions; none gives this strict augmentation on an arbitrary small site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionKoszulQuotientComparison",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Constant completion equivalence auxiliary, comparison of the strict Koszul and quotient towers: Normalized natural augmentation of strict Koszul tensor towers to quotient towers",
+   "via": [
+    "lem-weil-pbc-constant-koszul-quotient-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantKoszulQuotientAugmentation",
+  "file": "lean/Sheaf/Paper/ConstantKoszulQuotientAugmentation.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.koszulQuotientAugmentation",
+  "statement": "theorem koszulQuotientAugmentation (ha : Ideal.span (Set.range a) = I) :\n    ∃ α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r\n        (fun i ↦ algebraSection (baseMap J A I b) (a i)) ⟶\n      (reductionTower J A I b).mapHomologicalComplex (.up ℤ),\n      KoszulQuotientAugmentationLaws J A I b r a α",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.KoszulQuotientAugmentationLaws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261028T034949-L-3574928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261028T034949-L-3574928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

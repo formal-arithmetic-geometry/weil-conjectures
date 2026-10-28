@@ -15,52 +15,53 @@
  ],
  "proof": [
   {
-   "text": "Identify the dual positive tensor Koszul tower with the exterior negative Koszul tower, including its actual diagonal transitions and degree-zero unit. The Noetherian augmentation to A/I^(m+1), constructed by the degree-zero quotient, has pro-zero cone tower. The identity degree-zero map covers the empty generating list.",
+   "text": "Obtain the normalized natural strict augmentation α from the actual dual Koszul tensor tower to reductionComplex. Its ordinary-limit unit equation and its vanishing on nonzero Koszul summands are retained.",
    "uses": [
-    "def-weil-pbc-ringed-koszul-system",
-    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+    "lem-u4-constant-koszul-quotient-augmentation"
    ],
    "elementary": false
   },
   {
-   "text": "Realize constant modules exactly and extend to O_b. The coefficient map is flat (the identity when b=false), and its finite reductions are the specified constant quotient sheaves. These identifications follow from the constant section and sectionwise adic limit theorems. On a flat-term K-flat representative P, apply flatConstantTensorProZeroCones to the augmented map; total right derived inverse limit inverts it and preserves the strict unit equation.",
+   "text": "Compare the supplied inverseLimit with the chosen rlim using rightDerivedUnique; its normalization identifies both comparison maps. After this isomorphism, the Koszul tensorFactors and α define a natural computation map c to the localized quotient strict-tower limit. On flat-term K-flat models, c is invertible by the strict augmentation theorem. The quotient presentation computation β is also invertible on these models.",
    "uses": [
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-sectionwise-adic-algebra-limit",
-    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The supplied Koszul presentation and the chosen quotient presentation compute the two limits just compared on each K-flat model. Use uniqueness of total right derived functors to compare their inverse-limit functors. Naturality of the tensor augmentation and resolving-class localization descend the model comparisons to a natural isomorphism on D(O_b). The comparison maps in both presentations and the strict coaugmentation square give the unit identity on models, hence on all objects by essential surjectivity. No reflector or completeness property is used.",
-   "uses": [
-    "def-pur-strict-quotient-completion-data",
+    "lem-u4-constant-koszul-quotient-augmentation-is-iso",
     "def-sf-constant-coefficient-koszul-completion-data",
-    "lem-pur-left-derived-from-kflat-class",
+    "def-pur-strict-quotient-completion-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cochain resolving comparison lemma in ConstantCompletionCore extends c β^{-1} naturally from flat-term K-flat complexes and inverts it on all derived objects. Flat-term K-flat resolutions supply the resolving class; the extension uses right fractions in the homotopy category and the localization universal property.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sc-nattrans-from-resolving-class",
     "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary Koszul unit is natural by tensor right-unitor naturality and joint monicity of limit projections. On a flat-term K-flat model, cancel β, apply the rightDerivedUnique comparison equation, naturality of limitComparison at α, its strict unit equation, and the quotient presentation normalization. This gives unitOnComplex(P) e_QP = completionUnit_QP. Naturality and a flat-term K-flat resolution give it for every complex. The defining representative-isomorphism formula for koszulUnit and naturality of e and completionUnit give it for every derived object.",
+   "uses": [
+    "def-sf-constant-coefficient-koszul-completion-data",
+    "def-pur-strict-quotient-completion-data",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ringed-koszul-system",
-  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-sectionwise-adic-algebra-limit",
-  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pc-kflat-resolution",
-  "def-pur-strict-quotient-completion-data",
+  "lem-u4-constant-koszul-quotient-augmentation",
+  "lem-u4-constant-koszul-quotient-augmentation-is-iso",
   "def-sf-constant-coefficient-koszul-completion-data",
-  "lem-pur-left-derived-from-kflat-class",
+  "def-pur-strict-quotient-completion-data",
+  "lem-pc-kflat-resolution",
+  "lem-sc-nattrans-from-resolving-class",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Tag 099M (lemma-naive-completion), proof; Tag 093M (lemma-completion-flat) for flat completed coefficient extension."
+  "place": "Tag 099M, proof, and Tag 093M; formal resolving-class assembly and normalization by U4, 2026-10-28. The two strict-complex steps are separately stated, and all presentation/descent glue is proved."
  },
  "mathlib_searches": [
   {
@@ -148,11 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-96ea7",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261028T020411-L-2506833",
+  "landing": "20261028T034949-L-3574928",
   "kind": "interface",
-  "note": "independent cc review: item koszul_quotient_reflector (signature byte-identical) and new hole koszulQuotientComparison against nodes lem-weil-pbc-constant-completion-equivalence / lem-weil-pbc-constant-koszul-quotient-comparison and Core defs; importer ConstantCompletionRestriction compiled OK with the delivered files"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
