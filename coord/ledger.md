@@ -20761,3 +20761,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: returned deliver/W4/Sheaf.Paper.TensorReductionCanonicalSquare (reviewer RETURN: (the landing tools, head 923cc0b9c) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
 - 03:43 L: returned deliver/D8/Sheaf.Paper.CompactSupportCondensedRealization (reviewer RETURN: (reviewer C-896c8, head 896c86fcd) A3/2b: the CompactSupportCoefficientBasis split is not needed (published item 25.9 s,)
 - 03:46 L: merged deliver/A2/Sheaf.Paper.ProjectiveSupportedSourceArrowDerived (stage 3; reviewer PASS; first push; landing 20261028T034645-L-3528242 (proof); batch 20261028T034643; modules 1; new nodes 1)
+- 03:46 L: merged deliver/A2/Sheaf.Paper.SmoothExchangeScalarCompatibility (stage 3; reviewer PASS; first push; landing 20261028T034646-L-3528364 (interface); batch 20261028T034643; modules 1; new nodes 0)

@@ -6,7 +6,6 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.Paper.RationalSmoothPurityCanonical
-public import Sheaf.Paper.RationalScalarComparisonData
 public import Sheaf.Paper.TwistedPullbackSquareScalars
 public import Sheaf.Paper.RationalPurityExchangeEndpoints
 import Sheaf.Paper.DerivedPullbackTensorIso
