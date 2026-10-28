@@ -55,15 +55,61 @@ def quotientResidual (K : IntegralVerdier.Ambient l E X) (j : ℕ) :
     (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X j)).mapIso
       ((PurCompactSupport.finiteReductionIso l E X j).app K)
 
-/-- The residual mate identity used after exposing completion naturality.
+/-- The residual composite before applying the outer normalized Hom equivalence.
+Source: current blueprint residual mate calculation.
+(blueprint: lem-sf-integral-scalar-quotient-residual-mate-transport)
+-/
+def residualTransportMap
+    (K : IntegralVerdier.Ambient l E X) (hK : IsSfDerivedComplete l E X K)
+    {m n : ℕ} (h : n ≤ m) :
+    (scalarReductionDerivedExtension l L X m).obj
+        ((integralScalarExtensionOfUniverses l E L ι X).obj K) ⟶
+      ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙
+        normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l E X n).obj K)) :=
+  (scalarReductionDerivedExtension l L X m).map (completion l E L ι X K hK).inv ≫
+    (quotientResidual l E L ι X K m).hom ≫
+    (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map
+      (normalizedDVRReductionTransition l E X D hl h K) ≫
+    (scalarReductionExchange l E L ι X h).app
+      ((scalarReductionDerivedExtension l E X n).obj K)
 
-It is the coefficient restriction square calculation: expand the quotient
-comparison into the finite reduction isomorphisms and tensor square, use the
-unit/counit triangles for the normalized adjunctions, and use the defining mate
-identity of `scalarReductionExchange`.  This is strictly below the displayed
-transpose theorem because completion transport has already been removed.
+/-- Lower residual mate transport statement used by the core transpose theorem.
 
-Source: lem-sf-integral-scalar-quotient-transition, proof step 2.
+Source: current blueprint, lem-sf-integral-scalar-quotient-transition, proof step 2.
+(blueprint: lem-sf-integral-scalar-quotient-residual-mate-transport)
+-/
+theorem residual_mate_transport
+    (K : IntegralVerdier.Ambient l E X) (hK : IsSfDerivedComplete l E X K)
+    {m n : ℕ} (h : n ≤ m) :
+    (normalizedDVRIntegralAdjunction l L X m).homEquiv
+          ((integralScalarExtensionOfUniverses l E L ι X).obj K)
+          ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙
+            normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l E X n).obj K))
+          (residualTransportMap l E L ι X D hl K hK h) =
+      (normalizedDVRIntegralAdjunction l L X n).unit.app
+          ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫
+        (normalizedDVRIntegralAdjunction l L X m).homEquiv
+          ((scalarReductionDerivedExtension l L X n ⋙
+            scalarReductionDerivedRestriction l L X n).obj
+              ((integralScalarExtensionOfUniverses l E L ι X).obj K))
+          ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙
+            normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l E X n).obj K))
+          ((scalarReductionDerivedExtension l L X m).map
+              ((normalizedDVRResCompletedComp l L X D hl h).inv.app
+                ((scalarReductionDerivedExtension l L X n).obj
+                  ((integralScalarExtensionOfUniverses l E L ι X).obj K))) ≫
+            (normalizedDVRIntegralAdjunction l L X m).counit.app
+              ((normalizedDVRRes l L X h).obj
+                ((scalarReductionDerivedExtension l L X n).obj
+                  ((integralScalarExtensionOfUniverses l E L ι X).obj K))) ≫
+            (normalizedDVRRes l L X h).map
+              ((scalarReductionDerivedExtension l L X n).map (completion l E L ι X K hK).inv ≫
+                (quotientResidual l E L ι X K n).hom)) := by
+  sorry
+
+/-- The residual transpose identity used by the scalar quotient transition theorem.
+
+Source: current blueprint, lem-sf-integral-scalar-quotient-transition, proof step 2.
 (blueprint: lem-sf-integral-scalar-quotient-transition-transpose-core)
 -/
 theorem quotient_reduction_transition_transpose_core
@@ -98,6 +144,10 @@ theorem quotient_reduction_transition_transpose_core
             (normalizedDVRRes l L X h).map
               ((scalarReductionDerivedExtension l L X n).map (completion l E L ι X K hK).inv ≫
                 (quotientResidual l E L ι X K n).hom)) := by
-  sorry
+  rw [← Category.assoc]
+  rw [← (normalizedDVRIntegralAdjunction l L X m).homEquiv_naturality_left]
+  simpa only [residualTransportMap, Category.assoc] using
+    (residual_mate_transport l E L ι X D hl K hK h)
+
 
 end WeilConjectures.IntegralFiniteExtension
