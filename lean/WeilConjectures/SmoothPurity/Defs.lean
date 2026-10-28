@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.TateTwist.ProEtale
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.Targets.PoincareTateBoundedConstructible
 import Sheaf.Paper.CondensedTateIntegralTower
 import Sheaf.Paper.FinitePuritySourceUnitReduction
@@ -504,6 +505,62 @@ private theorem smoothTrace_reconstructedInverseSemilinearSquare
   exact smoothTrace_semilinear_square _ _ _ _ _ _
     (smoothTrace_reconstructedInverseQuotientSquare ℓ f d s M e h b a hab)
 
+omit [SmoothOfRelativeDimension d f.left] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] in
+open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
+/-- The actual finite exceptional values lie in the single degree required by
+reconstruction. Source: `lem-route-is-iso-smooth-purity-map`, Step 2, and
+`lem-pur-condensed-exceptional-reconstruction`, case (b). The supplied exceptional
+identification gives vanishing in every other degree. The standard t-structure
+criteria convert it into both bounds, uniformly in the positive coefficient level.
+This uses neither the chosen trace nor the disputed unconditional purity instance. -/
+private theorem smoothTrace_exceptionalSingleDegree
+    [QuasiCompact f.left] [IsSeparated f.left] [HasCompactification f.left]
+    [IsNoetherian X.left] [IsNoetherian Y.left]
+    (s : ∀ n : ℕ, Level ℓ (n + 1) f.left d)
+    (M : AdicTower X.left (datum.{u} ℓ))
+    (e : ∀ n : ℕ,
+      M.level n ≅ (derivedRealization X.left ℓ n).obj (finiteTwist X.left ℓ n d))
+    (h : IdentifiesExceptional ℓ f.left d s M e) (n : ℕ) :
+    ((exceptional (coefficient ℓ (n + 1)) f.left).obj (𝟙_ _)).IsGE
+        (-(2 * (d : ℤ))) ∧
+      ((exceptional (coefficient ℓ (n + 1)) f.left).obj (𝟙_ _)).IsLE
+        (-(2 * (d : ℤ))) := by
+  constructor
+  · exact (_root_.DerivedCategory.isGE_iff _ _).2
+      (fun q hq ↦ h.2.2.2 n q (ne_of_lt hq))
+  · exact (_root_.DerivedCategory.isLE_iff _ _).2
+      (fun q hq ↦ h.2.2.2 n q (ne_of_gt hq))
+
+omit [SmoothOfRelativeDimension d f.left] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] in
+open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
+/-- Cohomology in the purity degree determines and lifts every map from an object
+bounded above in that degree to the actual finite exceptional unit.
+Source: `lem-route-is-iso-smooth-purity-map`, Step 2, the single-degree part of
+`lem-pur-condensed-exceptional-reconstruction`. The preceding bounds supply the
+lower bound on the exceptional value. Apply the existing truncation Hom bijection;
+its injectivity is the needed comparison of derived maps, and its surjectivity
+lifts a specified cohomology map. No arbitrary lift of a whole diagram is asserted. -/
+private theorem smoothTrace_exceptionalHomology_bijective
+    [QuasiCompact f.left] [IsSeparated f.left] [HasCompactification f.left]
+    [IsNoetherian X.left] [IsNoetherian Y.left]
+    (s : ∀ n : ℕ, Level ℓ (n + 1) f.left d)
+    (M : AdicTower X.left (datum.{u} ℓ))
+    (e : ∀ n : ℕ,
+      M.level n ≅ (derivedRealization X.left ℓ n).obj (finiteTwist X.left ℓ n d))
+    (h : IdentifiesExceptional ℓ f.left d s M e) (n : ℕ)
+    (K : proCategory (coefficient ℓ (n + 1)) X.left) [K.IsLE (-(2 * (d : ℤ)))] :
+    Function.Bijective (fun a : K ⟶
+      (exceptional (coefficient ℓ (n + 1)) f.left).obj (𝟙_ _) ↦
+        (_root_.DerivedCategory.homologyFunctor _ (-(2 * (d : ℤ)))).map a) := by
+  let := (smoothTrace_exceptionalSingleDegree ℓ f d s M e h n).1
+  exact _root_.DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE _
+
 open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
 /-- The native finite system can be chosen together with all root quotient squares
 and the normalized integral reconstruction theorem for the same compactification.
@@ -618,6 +675,46 @@ private theorem smoothTrace_normalizedIntegralSystem :
     hpM, hpL, hrM, hrL, hE, ?_⟩
   intro b a hab
   exact smoothTrace_reconstructedInverseQuotientSquare ℓ f d s M eM hE b a hab
+
+open Etale.FiniteSmoothPurity Scheme.PurityIntegralTower in
+/-- The native normalized reconstruction supplies the finite single-degree Hom
+bijections. Source: `lem-route-is-iso-smooth-purity-map`, Steps 1--2, and
+`lem-pur-condensed-exceptional-reconstruction`, case (b). Extract the finite levels
+and their actual reconstructed Tate object from the finite-system theorem and
+its retained reconstruction result. Keep their exceptional identification and apply
+the proved homology Hom
+bijection at every positive level. Witnesses are extracted only in this proof.
+This is the levelwise Hom calculation; strict-system transport is still required. -/
+private theorem smoothTrace_nativeExceptionalHomology :
+    ∃ (hfq : QuasiCompact f.left) (hfs : IsSeparated f.left)
+      (c : Compactification f.left) (hX : IsNoetherian X.left) (hY : IsNoetherian Y.left),
+      let := hfq
+      let := hfs
+      let := c.hasCompactification
+      let := hX
+      let := hY
+      ∃ (s : ∀ n : ℕ, Level ℓ (n + 1) f.left d)
+        (M : AdicTower X.left (datum.{u} ℓ))
+        (e : ∀ n : ℕ,
+          M.level n ≅ (derivedRealization X.left ℓ n).obj (finiteTwist X.left ℓ n d)),
+        IdentifiesExceptional ℓ f.left d s M e ∧
+        ∀ (n : ℕ) (K : proCategory (coefficient ℓ (n + 1)) X.left)
+          [K.IsLE (-(2 * (d : ℤ)))],
+          Function.Bijective (fun a : K ⟶
+            (exceptional (coefficient ℓ (n + 1)) f.left).obj (𝟙_ _) ↦
+              (_root_.DerivedCategory.homologyFunctor _ (-(2 * (d : ℤ)))).map a) := by
+  obtain ⟨hfq, hfs, c, hX, hY, s, r, _, hrec⟩ :=
+    smoothTrace_normalizedFiniteSystem ℓ f d
+  let := hfq
+  let := hfs
+  let := c.hasCompactification
+  let := hX
+  let := hY
+  unfold ReconstructionResult at hrec
+  obtain ⟨_, _, M, _, e, _, _, _, _, _, _, _, hE⟩ := hrec.2 s r
+  refine ⟨hfq, hfs, c, hX, hY, s, M, e, hE, ?_⟩
+  intro n K hK
+  exact smoothTrace_exceptionalHomology_bijective ℓ f d s M e hE n K
 
 end FiniteNative
 
