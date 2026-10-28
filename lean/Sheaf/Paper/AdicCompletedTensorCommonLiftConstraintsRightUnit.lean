@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorCommonLiftTensorUnit
-import Sheaf.CategoryTheory.TensorUnitComparisonUnique
+import Sheaf.Paper.AdicCompletedTensorCommonLiftUnitNormalization
 
 /-! Right-unit equation for the common-stage completed tensor lift.
 Source: BS Remark 6.8.15; HRS Lemma 7.9.
@@ -66,11 +66,10 @@ theorem completed_tensor_common_lift_right_unit_not_universal
   let d : CompletedTensorCommonLiftTensorUnit l X R closed models symmetry :=
     { tensor := data.tensor
       unit := e ≪≫ data.unit }
-  let q := data.tensor.app (U, U) ≪≫
-    (ordinary l X R).mapIso (pullbackTensorCommonRightUnitor l (PadicAlgCl l) X U)
-  have hu : data.unit.hom = d.unit.hom :=
-    tensorUnitComparison_unique data.unit q data.unit.hom d.unit.hom
-      ((h data U).trans (h d U).symm)
+  obtain ⟨a, _, unique⟩ :=
+    completed_tensor_common_lift_unit_normalization l X R closed models symmetry data
+  have hu : data.unit.hom = d.unit.hom := congrArg Iso.hom
+    ((unique data.unit (h data U)).trans (unique d.unit (h d U)).symm)
   apply he
   apply (cancel_mono data.unit.hom).1
   simpa only [d, Iso.trans_hom, Category.id_comp] using hu.symm
