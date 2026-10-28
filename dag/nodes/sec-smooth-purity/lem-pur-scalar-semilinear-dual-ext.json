@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-scalar-semilinear-dual-ext",
+ "kind": "statement",
+ "title": "Detecting semilinear dual maps on a scalar-extension basis",
+ "statement": "Let T be a scheme and take its small pro-etale site [def-weil-pbc-proetale-site]. Let alpha : R → S be a map of commutative ring sheaves, M and P R-module sheaves, and Q an S-module sheaf [def-weil-sheaf-of-modules-category]. Suppose e : S tensor_R P ≅ Q for the actual scalar extension [def-sp-scalar-tensor-comparison-data]. Let c and d be R-linear maps from M to the restriction along alpha of the internal S-dual of Q [def-pur-sheaf-hom]. If, for every site object U, phi in M(U), and x in P(U), the values of c(phi) and d(phi) agree on e(1 tensor x), evaluated on the identity object of the slice over U, then c = d. Neither local freeness nor an invertibility assumption on M or P is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjointness-tensor-restrict and section-tensor-product (03EK, 03EL); explicit transport/extensionality consequence used in the coefficient-twist scalar construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-scalar-tensor-comparison-data",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Extend c and d by the scalar-extension lifting property to S-linear maps F and G from the extension of M to the internal dual of Q. Precompose dual functionals with e, giving an isomorphism from that dual to the dual of the extension of P.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarExtensionDual_hom_ext to F and G after that internal-Hom isomorphism. Its scalar pure tensors in both arguments reduce by linearity and scalarExtensionLift_tmul to evaluations of c and d on e(1 tensor x), multiplied by the two target scalar coefficients. The hypothesis gives equality. Cancel the internal-Hom isomorphism, then evaluate F=G on 1 tensor phi and use scalarExtensionLift_tmul to obtain c=d.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-sheaf-hom",
+  "lem-sp-scalar-extension-dual-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Scalar comparison and its tensor normalization. A proved helper extracted after profiling and local instance caches did not bring the enlarged item below the 60-second limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two semilinear sheaf module maps to an internal dual agree if their evaluations agree on a scalar extension basis",
+   "results": "Eight sheaf-module extensionality hits, headed by SheafOfModules.hom_ext and hom_ext_iff. None detects sections of an internal dual on scalar-extension generators.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.hom_ext",
+   "results": "One hit, ModuleCat.hom_ext in Mathlib.Algebra.Category.ModuleCat.Basic: equality of the underlying linear maps detects module-category morphisms. It does not supply scalar-dual generation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*Dual.*ext|Semilinear.*ext",
+   "results": "One unrelated exterior-power comment in Mathlib. Local search found a proved private semilinear_dual_ext in ScalarExtensionFunctor; importing that module would cycle, so its short generic proof is preserved in this independent module.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps into an internal dual are equal when their evaluations agree on scalar extension tensor generators",
+   "results": "Eight hits including Module.Dual.eval_apply, IsBaseChange.toDualBaseChange_tmul and dualTensorHomEquivOfBasis. These concern ordinary module duals and do not state the internal sheaf-dual extensionality used here.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "via": [
+    "lem-route-twist-scalar-maps-exists-unique"
+   ],
+   "place": "Scalar extension of the first root line and its tensor and dual constructions; this helper transports the scalar comparison or proves its dual uniqueness."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarSemilinearDualExt",
+  "file": "lean/Sheaf/Paper/ScalarSemilinearDualExt.lean",
+  "declaration": "WeilConjectures.scalarSemilinearDualExt",
+  "statement": "theorem scalarSemilinearDualExt\n    (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}\n    (α : R ⟶ S) (M P : proEtaleRingModules T R) (Q : proEtaleRingModules T S)\n    (e : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} α P ≅ Q)\n    (c d : M ⟶ (SheafOfModules.restrictScalars.{u + 1}\n      ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map α)).obj\n      ((SheafOfModules.homFunctor (R := S)).obj (Opposite.op Q) |>.obj\n        (SheafOfModules.unit _)))\n    (h : ∀ (U : T.ProEtᵒᵖ) (φ : M.val.obj U) (x : P.val.obj U),\n      ((c.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop))))\n          (e.hom.val.app U\n            (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α P U 1 x)) =\n        ((d.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop))))\n          (e.hom.val.app U\n            (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α P U 1 x))) :\n    c = d",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

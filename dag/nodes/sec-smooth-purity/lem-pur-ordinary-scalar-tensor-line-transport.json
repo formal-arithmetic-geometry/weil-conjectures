@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-ordinary-scalar-tensor-line-transport",
+ "kind": "statement",
+ "title": "Transport of ordinary scalar tensor and line comparison",
+ "statement": "Let C be a category with object universe c and morphism universe v, and J a Grothendieck topology with module sheafification in universe max(c,v) and the usual locally-bijective characterization. Let alpha : R → T be a morphism of commutative ring sheaves. Use the actual sheaf tensor, scalar extension and tensor sections [def-sp-scalar-tensor-comparison-data]. Let F be an ordinary scalar functor whose specified object equalities identify F(M) with changeOfRings(alpha,M) and whose maps are the corresponding transported scalar-extension maps. Let t(M,U,s,x) be precisely the sheafification-unit image of s tensor x transported back along that object equality. Let N be an R-module sheaf, P a T-module sheaf, B : F(N) ≅ P, and c_U a family of underlying functions N(U) → P(U) such that B(t(N,U,1,y)) = c_U(y). Then there is exactly one natural isomorphism b : F(- tensor N) ≅ F(-) tensor P such that b_M(t(M tensor N,U,s,x tensor y)) = t(M,U,s,x) tensor c_U(y) on every object and every pure tensor. No invertibility of N or P is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjointness-tensor-restrict and section-tensor-product (03EK, 03EL); explicit transport/extensionality consequence used in the coefficient-twist scalar construction."
+ },
+ "stmt_deps": [
+  "def-sp-scalar-tensor-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "The specified object equalities, followed by the ordinary-to-universe scalar-extension isomorphism, give a natural isomorphism e from F to the sheafified scalar tensor functor G. Naturality follows by the hypothesis on F.map. The tensor-section identification follows from the naturality of the sheafification unit.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the normalized binary scalar comparison to identify G(M tensor N) with G(M) tensor G(N). Tensor the second factor with e_N inverse followed by B. Conjugate this comparison by e to obtain b. Naturality follows from binary-comparison naturality and naturality of tensoring a second-factor map. The pure-tensor formula follows by applying the two comparison formulas and cancelling e with its inverse.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a competing b, evaluate after e inverse on scalar pure tensors. The specified section formula identifies both maps there. Scalar-extension tensor extensionality gives equality at every object M; natural-transformation extensionality and Iso.ext give equality of b.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pur-signed-line-scalar-tensor-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Scalar comparison and its tensor normalization. A proved helper extracted after profiling and local instance caches did not bring the enlarged item below the 60-second limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension tensor comparison transports along a natural isomorphism to a chosen ordinary scalar extension functor",
+   "results": "Eight module scalar-extension hits, including extendScalars.map_tmul and extendScalarsComp. They concern ordinary modules and do not state the sheaf tensor comparison for a chosen presentation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "Twelve categorical whiskering hits; isoWhiskerLeft supplies conjugation components but not this normalized tensor-line comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*tensor.*Comparison|tensor.*scalarExtension",
+   "results": "No Mathlib matches. The project already has a proved private tensorLineScalarComparison in this item; this module preserves its proof, parametrizing the ordinary tensor sections so no private declaration enters the public signature.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the scalar extension tensor comparison along an isomorphism of functors on sheaves of modules",
+   "results": "Eight hits including module extendScalarsComp, module scalar adjunction, and IsBaseChange.tensorEquiv. These do not give the normalized comparison on sheaves or its transport to a specified ordinary scalar presentation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "via": [
+    "lem-route-twist-scalar-maps-exists-unique"
+   ],
+   "place": "Scalar extension of the first root line and its tensor and dual constructions; this helper transports the scalar comparison or proves its dual uniqueness."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryScalarTensorLineTransport",
+  "file": "lean/Sheaf/Paper/OrdinaryScalarTensorLineTransport.lean",
+  "declaration": "WeilConjectures.ordinaryScalarTensorLineTransport",
+  "statement": "theorem ordinaryScalarTensorLineTransport\n    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{max c v} RingCat.{max c v})]\n    [HasSheafify J AddCommGrpCat.{max c v}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v}]\n    {R T : Sheaf J CommRingCat.{max c v}} (α : R ⟶ T)\n    (F : SheafOfModules.{max c v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤\n      SheafOfModules.{max c v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj T))\n    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings α M)\n    (hmF : ∀ {M M'} (f : M ⟶ M'), F.map f = eqToHom (hF M) ≫\n      SheafOfModules.changeOfRingsHom α M f ≫ eqToHom (hF M').symm)\n    (t : ∀ (M : SheafOfModules.{max c v}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n      (U : Cᵒᵖ), T.obj.obj U → M.val.obj U → (F.obj M).val.obj U)\n    (ht : ∀ M U s x, t M U s x = (eqToHom (hF M).symm).val.app U\n      ((toSheafify J (SheafOfModules.changeOfRingsPresheaf α M).presheaf).app U\n        (s ⊗ₜ[R.obj.obj U,(α.hom.app U).hom] x)))\n    (N : SheafOfModules.{max c v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (P : SheafOfModules.{max c v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj T))\n    (B : F.obj N ≅ P)\n    (c : ∀ U : Cᵒᵖ, N.val.obj U → P.val.obj U)\n    (hc : ∀ U y, B.hom.val.app U (t N U 1 y) = c U y) :\n    ∃! b : SheafOfModules.siteSheafTensorRight N ⋙ F ≅\n      F ⋙ SheafOfModules.siteSheafTensorRight P,\n      ∀ M U s x y, (b.hom.app M).val.app U\n          (t _ U s (SheafOfModules.siteSheafTensorTmul M N U x y)) =\n        SheafOfModules.siteSheafTensorTmul (F.obj M) P U\n          (t M U s x)\n          (c U y)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -30,6 +30,9 @@ import all Sheaf.Algebra.Homology.ScalarHomOrdinaryTensorComparison
 import all Sheaf.Paper.SignedLineScalarTensorTower
 import all Sheaf.Paper.ScalarExtensionComposition
 import Sheaf.Paper.ScalarExtensionBinaryCoherence
+import Sheaf.Paper.FirstRootCoefficientScalarComparison
+import Sheaf.Paper.OrdinaryScalarTensorLineTransport
+import Sheaf.Paper.ScalarSemilinearDualExt
 
 /-! # Coefficient Tate twists
 
@@ -96,125 +99,8 @@ private theorem tensorLineScalarComparison
         SheafOfModules.siteSheafTensorTmul (F.obj M) P U
           (tensorSection α F hF M U s x)
           (c U y) := by
-  classical
-  let G := SheafOfModules.ScalarHomOrdinary.extensionFunctor.{c, v, max c v} α
-  let e : F ≅ G := NatIso.ofComponents
-    (fun M ↦ eqToIso (hF M) ≪≫
-      SheafOfModules.ScalarHomOrdinary.extensionIso.{c, v, max c v} α M)
-    (by
-      intro M M' f
-      dsimp only [Iso.trans_hom, eqToIso.hom]
-      rw [hmF]
-      simp only [Category.assoc]
-      rw [← Category.assoc (eqToHom (hF M').symm), eqToHom_trans]
-      simp only [eqToHom_refl, Category.id_comp]
-      apply (cancel_epi (eqToHom (hF M))).mpr
-      change SheafOfModules.changeOfRingsHom α M f ≫
-          (SheafOfModules.ScalarHomOrdinary.extensionIso α M').hom =
-        (SheafOfModules.ScalarHomOrdinary.extensionIso α M).hom ≫ G.map f
-      dsimp only [SheafOfModules.ScalarHomOrdinary.extensionIso, Functor.mapIso_hom,
-        G, SheafOfModules.ScalarHomOrdinary.extensionFunctor,
-        SheafOfModules.changeOfRingsHom, SheafOfModules.changeOfRingsHomOfUniverses]
-      erw [← Functor.map_comp, ← Functor.map_comp]
-      congr 1)
-  have he (M : SheafOfModules.{max c v} ((sheafCompose J
-      (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ) (s : T.obj.obj U)
-      (x : M.val.obj U) :
-      (e.hom.app M).val.app U (tensorSection α F hF M U s x) =
-        SheafOfModules.scalarExtensionSection α M U s x := by
-    change (SheafOfModules.ScalarHomOrdinary.extensionIso α M).hom.val.app U
-      ((eqToHom (hF M)).val.app U ((eqToHom (hF M).symm).val.app U _)) = _
-    have hc {A B : SheafOfModules.{max c v} ((sheafCompose J
-        (forget₂ CommRingCat RingCat)).obj T)} (h : A = B) (z : B.val.obj U) :
-        (eqToHom h).val.app U ((eqToHom h.symm).val.app U z) = z := by
-      cases h
-      rfl
-    rw [hc]
-    let adj := PresheafOfModules.sheafificationAdjunction
-      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj T).obj)
-    have hn := adj.unit.naturality
-      (SheafOfModules.ScalarHomOrdinary.extensionPresheafIso α M).hom
-    exact (congrArg (fun f ↦ f.app U
-      (s ⊗ₜ[R.obj.obj U, (α.hom.app U).hom] x)) hn).symm
-  let B' : G.obj N ≅ P := (e.app N).symm ≪≫ B
-  obtain ⟨k⟩ := SheafOfModules.exists_scalarExtensionTensorCore R T α
-  let bG : SheafOfModules.siteSheafTensorRight N ⋙ G ≅
-      G ⋙ SheafOfModules.siteSheafTensorRight P :=
-    NatIso.ofComponents
-      (fun M ↦ k.tensorComparison M N ≪≫
-        SheafOfModules.tensorSecondIso.{c, v, max c v} (G.obj M) B')
-      (by
-        intro M M' f
-        dsimp only [Iso.trans_hom, SheafOfModules.tensorSecondIso_hom, Functor.comp_map]
-        change (SheafOfModules.changeOfRingsHomOfUniverses α _
-          ((SheafOfModules.siteSheafTensorRight N).map f) ≫
-            (k.tensorComparison M' N).hom ≫ _) = _
-        rw [← Category.assoc, k.first_natural f N]
-        dsimp only [G, SheafOfModules.ScalarHomOrdinary.extensionFunctor]
-        simp only [Category.assoc]
-        exact congrArg (fun h ↦ (k.tensorComparison M N).hom ≫ h)
-            (SheafOfModules.siteSheafTensorSecondMap_naturality
-              (SheafOfModules.changeOfRingsHomOfUniverses α M f) B'.hom))
-  let b : SheafOfModules.siteSheafTensorRight N ⋙ F ≅
-      F ⋙ SheafOfModules.siteSheafTensorRight P :=
-    Functor.isoWhiskerLeft _ e ≪≫ bG ≪≫ Functor.isoWhiskerRight e.symm _
-  have hb : ∀ M U s x y, (b.hom.app M).val.app U
-          (tensorSection α F hF _ U s (SheafOfModules.siteSheafTensorTmul M N U x y)) =
-        SheafOfModules.siteSheafTensorTmul (F.obj M) P U
-          (tensorSection α F hF M U s x)
-          (c U y) := by
-    intro M U s x y
-    change ((SheafOfModules.siteSheafTensorRight P).map (e.inv.app M)).val.app U
-      ((SheafOfModules.siteSheafTensorSecondMap (G.obj M) B'.hom).val.app U
-        ((k.tensorComparison M N).hom.val.app U
-          ((e.hom.app _).val.app U _))) = _
-    rw [he ((SheafOfModules.siteSheafTensorRight N).obj M) U s
-      (SheafOfModules.siteSheafTensorTmul M N U x y)]
-    rw [k.tensor_tmul M N U s x y]
-    change ((SheafOfModules.siteSheafTensorRight P).map (e.inv.app M)).val.app U
-      ((SheafOfModules.siteSheafTensorSecondMap (G.obj M) B'.hom).val.app U
-        (SheafOfModules.siteSheafTensorTmul (G.obj M) (G.obj N) U
-          (SheafOfModules.scalarExtensionSection α M U s x)
-          (SheafOfModules.scalarExtensionSection α N U 1 y))) = _
-    rw [SheafOfModules.scalarTensor_second_tmul (G.obj M) B'.hom,
-      SheafOfModules.scalarTensor_first_tmul (e.inv.app M) P]
-    have hleft := congrArg (fun z ↦ (e.inv.app M).val.app U z) (he M U s x)
-    have hinv : (e.inv.app M).val.app U
-        ((e.hom.app M).val.app U (tensorSection α F hF M U s x)) =
-      tensorSection α F hF M U s x := by
-      exact congrArg (fun f ↦ f.val.app U (tensorSection α F hF M U s x))
-        (e.app M).hom_inv_id
-    rw [← hleft, hinv]
-    apply congrArg (fun z ↦ SheafOfModules.siteSheafTensorTmul _ _ U
-      (tensorSection α F hF M U s x) z)
-    change B.hom.val.app U
-      ((e.inv.app N).val.app U (SheafOfModules.scalarExtensionSection α N U 1 y)) = _
-    rw [← he N U 1 y]
-    have hcancel := congrArg (fun f ↦ f.val.app U (tensorSection α F hF N U 1 y))
-      (e.app N).hom_inv_id
-    change (e.inv.app N).val.app U ((e.hom.app N).val.app U _) =
-      tensorSection α F hF N U 1 y at hcancel
-    rw [hcancel]
-    exact hc U y
-  refine ⟨b, hb, ?_⟩
-  intro b' hb'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  apply (cancel_epi (e.app ((SheafOfModules.siteSheafTensorRight N).obj M)).inv).mp
-  apply SheafOfModules.scalarExtension_tensor_hom_ext α M N
-  intro U s x y
-  have hey := he ((SheafOfModules.siteSheafTensorRight N).obj M) U s
-    (SheafOfModules.siteSheafTensorTmul M N U x y)
-  have hcancel := congrArg (fun f ↦ f.val.app U (tensorSection α F hF _ U s
-    (SheafOfModules.siteSheafTensorTmul M N U x y)))
-      (e.app ((SheafOfModules.siteSheafTensorRight N).obj M)).hom_inv_id
-  change (e.inv.app _).val.app U ((e.hom.app _).val.app U _) =
-    tensorSection α F hF _ U s (SheafOfModules.siteSheafTensorTmul M N U x y)
-      at hcancel
-  change (b'.hom.app M).val.app U ((e.inv.app _).val.app U _) =
-    (b.hom.app M).val.app U ((e.inv.app _).val.app U _)
-  rw [← hey, hcancel, hb', hb]
+  exact ordinaryScalarTensorLineTransport α F hF hmF
+    (tensorSection α F hF) (fun _ _ _ _ ↦ rfl) N P B c hc
 
 attribute [local instance 3000] integralTowerHasDerivedCategory
 
@@ -486,6 +372,145 @@ def IsCanonicalTwistScalarMaps (c : TwistScalarMaps ℓ E S L ι) : Prop :=
       (integralCompletedScalarMap ℓ E L ι S).hom.app U
         ((f.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)
 
+private theorem twist_firstLine_cover
+    (F : Type u) [Field F] [Algebra (Padic ℓ) F]
+    [FiniteDimensional (Padic ℓ) F] :
+    ∃ (I : Type (u + 1)) (U : I → S.ProEt),
+      (ProEt.topology S).CoversTop U ∧ ∀ i,
+        Nonempty ((purTwistIntegralModule S ℓ F).over (U i) ≅ SheafOfModules.unit
+          ((completedIntegralCoefficientSheafUnrestricted ℓ F S).over (U i))) := by
+  obtain ⟨I, U, hU, hL⟩ :=
+    (SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free
+      (M := purTwistIntegralModule S ℓ F) (r := 1)).mp
+      (coefficientTwistIntegralRank ℓ F S)
+  exact ⟨I, U, hU, fun i ↦
+    ⟨(hL i).some ≪≫ SheafOfModules.freeUniqueIso (ULift.{u + 1} (Fin 1))⟩⟩
+
+private theorem twistScalarComparison_data :
+    ∃ B : ∀ m : ℤ,
+        SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
+          (integralCompletedScalarMap ℓ E L ι S) (integralTwistLine ℓ E S m) ≅
+            integralTwistLine ℓ L S m,
+      let c : TwistScalarMaps ℓ E S L ι := fun m ↦
+        SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1}
+          (integralCompletedScalarMap ℓ E L ι S)
+            (integralTwistLine ℓ E S m) ≫
+          (SheafOfModules.restrictScalars.{u + 1}
+            ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+              (integralCompletedScalarMap ℓ E L ι S))).map (B m).hom
+      IsCanonicalTwistScalarMaps ℓ E S L ι c ∧
+        ∀ d : TwistScalarMaps ℓ E S L ι,
+          IsCanonicalTwistScalarMaps ℓ E S L ι d → d = c := by
+  classical
+  let : HasSheafify (ProEt.topology S) AddCommGrpCat.{u + 1} :=
+    integralCoefficientAbSheafify.{u, u} S
+  let : HasWeakSheafify (ProEt.topology S) AddCommGrpCat.{u + 1} := inferInstance
+  let : (ProEt.topology S).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    integralCoefficientAbLocallyBijective.{u, u} S
+  let α := integralCompletedScalarMap ℓ E L ι S
+  let res := SheafOfModules.restrictScalars.{u + 1}
+    ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map α)
+  obtain ⟨b, hb, huniq⟩ := firstRootCoefficientScalarComparison ℓ E S L ι
+  obtain ⟨B, hB, heval, _⟩ :=
+    SheafOfModules.exists_signedLineComparison.{u + 1, u, u + 1} α
+      (purTwistIntegralModule S ℓ E) (purTwistIntegralModule S ℓ L)
+      (twist_firstLine_cover ℓ S E) (twist_firstLine_cover ℓ S L) b
+  let c : TwistScalarMaps ℓ E S L ι := fun m ↦
+    SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α (integralTwistLine ℓ E S m) ≫
+      res.map (B m).hom
+  have hc : IsCanonicalTwistScalarMaps ℓ E S L ι c := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · intro U a
+      change (B 0).hom.val.app U
+        (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α _ U 1 a) = _
+      rw [hB.1]
+      have hz := SheafOfModules.scalarExtensionUnitIso_tmul α U 1 a
+      rw [one_mul] at hz
+      exact hz
+    · intro U a x
+      change (B 1).hom.val.app U
+        (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α _ U 1
+        (purTwistIntegralTensor S ℓ E U a x)) = _
+      rw [hB.2.1]
+      exact hb U a x
+    · intro n U x y
+      have hfirst := congrArg
+        (fun f : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
+            α (purTwistIntegralModule S ℓ E) ⟶ purTwistIntegralModule S ℓ L ↦
+          f.val.app U (SheafOfModules.scalarExtensionSection α
+            (purTwistIntegralModule S ℓ E) U 1 y)) hB.2.1.symm
+      exact (hB.2.2.1 n U 1 x y).trans (congrArg
+        (fun z : (purTwistIntegralModule S ℓ L).val.obj U ↦
+          SheafOfModules.siteSheafTensorTmul
+            (A := completedIntegralCommRingSheafUnrestricted ℓ L S)
+            (coefficientTwistPower S (purTwistIntegralModule S ℓ L) (n + 1))
+            (purTwistIntegralModule S ℓ L) U
+            ((B (Int.ofNat (n + 1))).hom.val.app U
+              (SheafOfModules.scalarExtensionSection α
+                (coefficientTwistPower S (purTwistIntegralModule S ℓ E) (n + 1)) U 1 x)) z)
+        hfirst)
+    · intro n U f x
+      change (((B (Int.negSucc n)).hom.val.app U
+          (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α _ U 1 f)).app
+            (Opposite.op (Over.mk (𝟙 U.unop))))
+          ((B (Int.ofNat (n + 1))).hom.val.app U
+            (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1} α _ U 1 x)) = _
+      simpa only [α, integralTwistLine, coefficientTwistLine, coefficientTwistPower,
+        SheafOfModules.signedLinePower, mul_one] using heval n U 1 1 f x
+  refine ⟨B, hc, ?_⟩
+  intro d hd
+  have h1 : d 1 = c 1 := by
+    have hd1 := huniq (d 1) hd.2.1
+    change d 1 = SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α _ ≫
+      res.map b.hom at hd1
+    change d 1 = SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α _ ≫
+      res.map (B 1).hom
+    rw [hB.2.1]
+    exact hd1
+  have hpos : ∀ n : ℕ, d (Int.ofNat n) = c (Int.ofNat n) := by
+    intro n
+    induction n using Nat.twoStepInduction with
+    | zero =>
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro a
+      exact (hd.1 U a).trans (hc.1 U a).symm
+    | one => exact h1
+    | more n _ ih =>
+      apply SheafOfModules.scalarTensor_hom_ext.{u + 1, u, u + 1}
+        (integralTwistLine ℓ E S (Int.ofNat (n + 1))) (purTwistIntegralModule S ℓ E)
+      intro U x y
+      have hx := congrArg (fun z : integralTwistLine ℓ E S (Int.ofNat (n + 1)) ⟶
+          res.obj (integralTwistLine ℓ L S (Int.ofNat (n + 1))) ↦ z.val.app U x) ih
+      have hy := congrArg (fun z : integralTwistLine ℓ E S 1 ⟶
+          res.obj (integralTwistLine ℓ L S 1) ↦ z.val.app U y) h1
+      exact (hd.2.2.1 n U x y).trans ((congrArg₂
+        (fun a b ↦ SheafOfModules.siteSheafTensorTmul
+          (A := completedIntegralCommRingSheafUnrestricted ℓ L S) _ _ U a b)
+        hx hy).trans (hc.2.2.1 n U x y).symm)
+  funext m
+  cases m with
+  | ofNat n => exact hpos n
+  | negSucc n =>
+    apply scalarSemilinearDualExt S α
+      (integralTwistLine ℓ E S (Int.negSucc n))
+      (integralTwistLine ℓ E S (Int.ofNat (n + 1)))
+      (integralTwistLine ℓ L S (Int.ofNat (n + 1))) (B (Int.ofNat (n + 1)))
+    intro U f x
+    change ((d (Int.negSucc n)).val.app U f).app
+        (Opposite.op (Over.mk (𝟙 U.unop))) ((c (Int.ofNat (n + 1))).val.app U x) =
+      ((c (Int.negSucc n)).val.app U f).app
+        (Opposite.op (Over.mk (𝟙 U.unop))) ((c (Int.ofNat (n + 1))).val.app U x)
+    have hx := congrArg (fun z : integralTwistLine ℓ E S (Int.ofNat (n + 1)) ⟶
+        res.obj (integralTwistLine ℓ L S (Int.ofNat (n + 1))) ↦ z.val.app U x)
+      (hpos (n + 1))
+    exact (congrArg (fun z ↦ ((d (Int.negSucc n)).val.app U f).app
+      (Opposite.op (Over.mk (𝟙 U.unop))) z) hx.symm).trans
+        ((hd.2.2.2 n U f x).trans (hc.2.2.2 n U f x).symm)
+
 /-- There is exactly one normalized semilinear family on the signed Tate lines.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
 Proof: at zero take the completed coefficient inclusion. At one send the root
@@ -499,7 +524,8 @@ The formulas commute with restrictions and glue; tensor sheafification and the
 local generation of each positive line prove uniqueness in every degree. -/
 theorem twistScalarMaps_existsUnique :
     ∃! c : TwistScalarMaps ℓ E S L ι, IsCanonicalTwistScalarMaps ℓ E S L ι c := by
-  sorry
+  obtain ⟨B, hc, hu⟩ := twistScalarComparison_data ℓ E S L ι
+  exact ⟨_, hc, hu⟩
 
 /-- The signed scalar maps fixed by root tensors, powers and dual evaluation.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
@@ -521,7 +547,52 @@ theorem twistLineScalarIso_existsUnique (m : ℤ) :
             (integralOrdinaryTensorSection ℓ E L ι S _ U s x) =
           s • (@id ((integralTwistLine ℓ L S m).val.obj U)
             ((twistScalarMaps ℓ E S L ι m).val.app U x)) := by
-  sorry
+  classical
+  let α := integralCompletedScalarMap ℓ E L ι S
+  let hF := (integralOrdinaryScalarWitness ℓ E L ι S).choose_spec.choose
+  let q (N : integralTowerModules ℓ E S) :
+      (integralOrdinaryScalar ℓ E L ι S).obj N ≅
+        SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} α N :=
+    eqToIso (hF N) ≪≫ SheafOfModules.ScalarHomOrdinary.extensionIso α N
+  have hq (N : integralTowerModules ℓ E S) (U : S.ProEtᵒᵖ) (x : N.val.obj U) :
+      (q N).hom.val.app U (integralOrdinaryTensorSection ℓ E L ι S N U 1 x) =
+        SheafOfModules.scalarExtensionSection α N U 1 x := by
+    change (SheafOfModules.ScalarHomOrdinary.extensionIso α N).hom.val.app U
+      ((eqToHom (hF N)).val.app U ((eqToHom (hF N).symm).val.app U _)) = _
+    have hcancel := congrArg (fun f ↦ f.val.app U
+      ((toSheafify (ProEt.topology S)
+        (SheafOfModules.changeOfRingsPresheaf α N).presheaf).app U
+          ((1 : (completedIntegralCommRingSheafUnrestricted ℓ L S).obj.obj U)
+            ⊗ₜ[(completedIntegralCommRingSheafUnrestricted ℓ E S).obj.obj U,
+              (α.hom.app U).hom] x))) (eqToIso (hF N)).inv_hom_id
+    change (eqToHom (hF N)).val.app U ((eqToHom (hF N).symm).val.app U _) = _ at hcancel
+    rw [hcancel]
+    exact SheafOfModules.ScalarHomOrdinary.extensionIso_unit α N U x
+  obtain ⟨B, hc, hu⟩ := twistScalarComparison_data ℓ E S L ι
+  have hsame := hu (twistScalarMaps ℓ E S L ι)
+    (twistScalarMaps_existsUnique ℓ E S L ι).exists.choose_spec
+  let e := q (integralTwistLine ℓ E S m) ≪≫ B m
+  have he : ∀ (U : S.ProEtᵒᵖ)
+      (s : (completedIntegralCommRingSheafUnrestricted ℓ L S).obj.obj U)
+      (x : (integralTwistLine ℓ E S m).val.obj U),
+      e.hom.val.app U (integralOrdinaryTensorSection ℓ E L ι S _ U s x) =
+        s • (@id ((integralTwistLine ℓ L S m).val.obj U)
+          ((twistScalarMaps ℓ E S L ι m).val.app U x)) := by
+    intro U s x
+    rw [scalar_tensor_one, map_smul]
+    change s • ((B m).hom.val.app U ((q _).hom.val.app U
+      (integralOrdinaryTensorSection ℓ E L ι S _ U 1 x))) = _
+    rw [hq, hsame]
+    rfl
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply tensorSection_ext α (integralOrdinaryScalar ℓ E L ι S) hF
+    (integralTwistLine ℓ E S m) (integralTwistLine ℓ L S m)
+  intro U x
+  change e'.hom.val.app U (integralOrdinaryTensorSection ℓ E L ι S _ U 1 x) =
+    e.hom.val.app U (integralOrdinaryTensorSection ℓ E L ι S _ U 1 x)
+  rw [he', he]
 
 /-- The canonical scalar-extension isomorphism for the signed line.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/

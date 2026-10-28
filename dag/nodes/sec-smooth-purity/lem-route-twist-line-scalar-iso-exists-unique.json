@@ -30,96 +30,45 @@
  ],
  "proof": [
   {
-   "text": "Use the existence assertion of [lem-route-twist-scalar-maps-exists-unique] to fix its normalized family $c$. The ordinary scalar adjunction of [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] applies to $\\alpha$ and the actual ordinary tensor functor. Transpose $c_1$ to an $R_L$-linear morphism $b:F_\\alpha(T_E(1))\\to T_L(1)$. Its unit formula gives $b([1\\otimes x])=c_1(x)$, hence $b([s\\otimes x])=s c_1(x)$ by linearity. The hypotheses here are module sheafification on the small pro-etale site and the ring-sheaf map $\\alpha$; no derived or constructibility hypothesis is being invoked.",
+   "text": "Use the same first-line scalar comparison and general signed-power comparison as in the family theorem to obtain signed isomorphisms B. Their semilinear adjunct family is canonical, hence the existing unique-family theorem identifies it with twistScalarMaps.",
    "uses": [
-    "lem-route-twist-scalar-maps-exists-unique",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 1. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
-  },
-  {
-   "text": "Choose a covering of the final site object trivializing $Z$ by [lem-pur-twist-root-local-models]. On a member $V$ let $e$ be the image of $1$ under this trivialization, and put $e_F=[1\\otimes e]\\in T_F(1)(V)$ for $F=E,L$. These are bases over the completed rings, not merely over the discrete constant rings: by [lem-sfb-localized-site-tensor-restriction], the defining discrete coefficient tensor can be computed on the localized site; after replacing $Z|_V$ by $\\widehat{\\mathbf Z}_{\\ell}|_V$, its coefficient map is exactly $b\\otimes r\\mapsto d_F(b)c_F(r)$. This is bijective on each object by [lem-pur-twist-coefficient-tensor]. The action characterized in [lem-pur-tensor-pushout-action] makes this identification $R_F$-linear: multiplication by $d_F(b)$ is the original constant coefficient action, and multiplication by $c_F(r)$ sends $b'\\otimes e$ to $b'\\otimes r e$. Consequently $r\\mapsto r e_F$ identifies $R_F|_V$ with $T_F(1)|_V$. The sectionwise coefficient inverses respect restrictions because their forward maps do, and therefore give inverse sheaf maps. The same cover works for both fields.",
-   "uses": [
-    "lem-pur-twist-root-local-models",
-    "lem-sfb-localized-site-tensor-restriction",
-    "lem-pur-twist-coefficient-tensor",
-    "lem-pur-tensor-pushout-action"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 2. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
-  },
-  {
-   "text": "The exponent-one normalization of $c$ gives $c_1(e_E)=e_L$, since the map on constant integer sheaves preserves $1$. Semilinearity gives $c_1(r e_E)=\\alpha(r)e_L$. Thus, in the bases from step 2, $b|_V$ and the multiplication below agree on all local tensors $[s\\otimes re_E]$, so by the tensor extensionality of [lem-weil-ramified-finite-tensor-sections] (applied on the localized site to the actual sheaf tensor) $b|_V$ is the sheaf tensor multiplication $R_L\\otimes_{R_E}R_E\\to R_L$, $s\\otimes r\\mapsto s\\alpha(r)$. The normalized unit comparison of [def-sp-canonical-scalar-extension-maps] is exactly this isomorphism, with inverse $z\\mapsto[z\\otimes1]$. Localized tensor restriction [lem-sfb-localized-site-tensor-restriction] identifies its source with the restriction of the global source of $b$. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying abelian sheaves: the cover of the final object covers every object by pullback, and each restricted morphism is invertible. The resulting inverse is $R_L$-linear, since $b^{-1}(a y)=a b^{-1}(y)$ follows by applying the injective linear map $b$. Hence $b$ is an isomorphism of module sheaves.",
-   "uses": [
-    "def-sp-canonical-scalar-extension-maps",
-    "lem-sfb-localized-site-tensor-restriction",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "lem-weil-ramified-finite-tensor-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 3. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
-  },
-  {
-   "text": "Apply [lem-pur-signed-line-scalar-tensor-tower] to $R_0=R_E$, $R_1=R_2=R_L$, lines $T_E(1),T_L(1),T_L(1)$ and comparisons $b_{01}=b_{02}=b$ and $b_{12}$ the scalar unit. The required initial tower equation is the unit identity: both composites send $(s\\otimes x)\\otimes t$ to $st c_1(x)$. Both lines are locally units by step 2, and the small pro-etale site has finite limits and final object. The lemma supplies isomorphisms $B_m:F_\\alpha(T_E(m))\\cong T_L(m)$ for all integers. Their degree-zero map is multiplication, degree-one map is $b$, positive maps obey the tensor recursion, and for $r>0$ their negative and positive maps satisfy\n$$\\operatorname{ev}(B_{-r}([s\\otimes\\varphi]),B_r([t\\otimes x]))=st\\alpha(\\varphi(x)).$$\nThe lemma uses right scalar tensors; use the scalar-first convention by interchanging the written positions of the two factors. Its displayed formulas already specify the resulting maps on these generators.",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 4. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
-  },
-  {
-   "text": "Define $d_m(x)=B_m([1\\otimes x])$. The scalar adjunction of [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] makes $d_m$ a morphism into restriction of scalars, so these maps are semilinear and natural on all slices. The four normalizations are now explicit: $d_0(r)=\\alpha(r)$ by the scalar unit; $d_1=c_1$ by step 1; $d_{r+1}(x\\otimes y)=d_r(x)\\otimes d_1(y)$ by positive recursion; and $d_{-r}(\\varphi)(d_r(x))=\\alpha(\\varphi(x))$ by the evaluation formula in step 4 with $s=t=1$. Thus $d$ satisfies the exact predicate IsCanonicalTwistScalarMaps, not just a local rank-one condition. Uniqueness in [lem-route-twist-scalar-maps-exists-unique] gives $d=c$. Finally $R_L$-linearity gives $B_m([s\\otimes x])=s B_m([1\\otimes x])=s c_m(x)$, which proves existence with the requested formula for every $m$, including zero and negative exponents.",
-   "uses": [
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-first-root-coefficient-scalar-comparison",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-signed-line-scalar-tensor-tower",
     "lem-route-twist-scalar-maps-exists-unique"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 5. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
+   "elementary": false
   },
   {
-   "text": "If $B'_m$ is another isomorphism with the formula, its forward morphism and that of $B_m$ agree on every $[1\\otimes x]$. The ordinary tensor extensionality statement of [lem-weil-ramified-finite-tensor-sections], applied to the actual sheafified scalar-extension presentation, gives equality of their forward morphisms. Their inverses are equal as well: if $f$ is this common forward morphism and $g,h$ are the inverses, then $g=g(fh)=(gf)h=h$. This proves the asserted unique existence. On the empty scheme the covering and sheaf arguments still apply and all section equalities hold in zero modules; no argument required a nonzero basis section.",
+   "text": "Transport from the specified ordinary scalar functor to changeOfRingsOfUniverses by its prescribed object equality followed by ScalarHomOrdinary.extensionIso. The sheafification-unit equation identifies its effect on tensors of scalar one. The ordinary tensor balancing equation and linearity extend the desired formula to every scalar s. Compose this transport with B m to obtain the required isomorphism.",
    "uses": [
-    "lem-weil-ramified-finite-tensor-sections"
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-scalar-extension-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "Integral signed twists and scalar extension; worker assembly step 6. Stacks 03EK (section-tensor-product), 04TT (section-internal-hom), 0GMX (remark-pullback-internal-hom); specified normalization in CoefficientTwistsDetailed.lean, ScalarComparison."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Two isomorphisms with the same displayed formula agree on scalar-one tensor sections. The ordinary scalar tensor extensionality lemma tensorSection_ext identifies their forward maps, and Iso.ext identifies the isomorphisms.",
+   "uses": [
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-route-twist-scalar-maps-exists-unique",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-pur-twist-root-local-models",
-  "lem-sfb-localized-site-tensor-restriction",
-  "lem-pur-twist-coefficient-tensor",
-  "lem-pur-tensor-pushout-action",
-  "def-sp-canonical-scalar-extension-maps",
-  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-pur-first-root-coefficient-scalar-comparison",
+  "lem-pur-twist-sheaf-locally-free",
   "lem-pur-signed-line-scalar-tensor-tower",
-  "lem-weil-ramified-finite-tensor-sections"
+  "lem-route-twist-scalar-maps-exists-unique",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-scalar-extension-composition"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-  "place": "Integral coefficient line and signed-power definitions; assembled from existing scalar-adjunction, coefficient-coordinate, cover descent and signed-line comparison nodes, with the normalization of Sheaf.Paper.CoefficientTwistsDetailed."
+  "place": "Reduce to the first root line; reuse the existing signed scalar comparison, tensor extensionality and dual evaluation APIs. Unit-level route unchanged."
  },
  "mathlib_searches": [
   {
@@ -263,15 +212,7 @@
  },
  "tool_uses": [
   "lem-route-twist-scalar-maps-exists-unique",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-pur-twist-root-local-models",
-  "lem-sfb-localized-site-tensor-restriction",
-  "lem-pur-twist-coefficient-tensor",
-  "lem-pur-tensor-pushout-action",
-  "def-sp-canonical-scalar-extension-maps",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "lem-pur-signed-line-scalar-tensor-tower",
-  "lem-weil-ramified-finite-tensor-sections"
+  "lem-pur-signed-line-scalar-tensor-tower"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -280,5 +221,15 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-359dc5eaf (reviewer sub-agent of L); spot-checked: I read the whole delivery against the Lean in Sheaf/Paper/CoefficientTwistsDetailed.lean: twistLineScalarIso_existsUnique (now l.515), all 4 clauses of IsCanonicalTwistScalarMaps, and integralTwistLine, defined as unit, scalarTensorPower and the homObj dual for negSucc. The statement matches: arbitrary E and L with embedding ι, any S with ℓ invertible, every m ∈ ℤ. The blueprint def-coefficient-twists-detailed has no scalar-line statement, so proof_origin=agent is right. I read the statement of each of the 10 cited nodes. Step 1: the transpose of c1 through the ordinary adjunction gives b with b[s⊗x]=s·c1(x). Step 2: the root-local-models cover, localized tensor restriction, the bijective coefficient tensor b⊗r↦d(b)c(r) and the pushout action give a common basis e_F=[1⊗e] on the same cover for E and L; I checked by hand that t↦t·e_F is linear over the completed ring. Step 3: c1(r e_E)=α(r)e_L, so b|_V is the unit multiplication; lem-sfb-sheaf-cover-local-isomorphism applies to the pulled-back cover. Step 4: the signed-line tower applies with R0=R_E, R1=R2=R_L, b01=b02=b and b12 the unitor; the initial tower equation holds and both lines are locally units. Step 5: d_m=B_m[1⊗x] satisfies all 4 normalizations (d0=α, d1=c1, the positive recursion, the evaluation formula with s=t=1), so uniqueness gives d=c. Step 6: tensor extensionality. Edge cases checked: m=0,±1,2, ι=id, ramified L, empty S. A BFS over the DAG finds no cycle; only lem-pur-twist-frobenius-scalar cites the item. Not a duplicate: lem-weil-integral-twist-base-change has only the formula as a Lean clause and no uniqueness in words (advisory: that node should cite this item). All 10 declared tool_uses are accepted as generic tools; the unit sk-def-purity-conv is a remark with no proof steps. FIX, 2 faults repaired in fixes/dag/nodes/sec-smooth-purity/lem-route-twist-line-scalar-iso-exists-unique.json: (B3) Res_α had no definition node, so I added [def-pc-sheaf-restrict-scalars] to the statement and stmt_deps; (C1/C4) step 3's conclusion that two maps agreeing on local pure tensors are equal needs tensor extensionality, so I added lem-weil-ramified-finite-tensor-sections to its text and uses. proof_deps is unchanged and equals the union of the steps' uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

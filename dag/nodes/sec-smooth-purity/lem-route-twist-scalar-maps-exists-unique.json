@@ -28,104 +28,42 @@
  ],
  "proof": [
   {
-   "text": "Degrees $0$ and $1$. Put $c_0=c$, which is $R_E$-linear into $\\operatorname{Res}_cR_L$ by definition of restriction of scalars. In degree $1$, $\\mathcal O_H(1)_S=\\mathbf Z_\\ell(1)_S\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_H)_S$; since the constant map $(\\mathbf Z_\\ell)_S\\to(\\mathcal O_E)_S\\to(\\mathcal O_L)_S$ induced by $\\mathbf Z_\\ell\\subset\\mathcal O_E\\xrightarrow{j}\\mathcal O_L$ is the structure map of $(\\mathcal O_L)_S$, functoriality of the sheafified tensor in its second factor gives an additive sheaf map $c_1=\\mathrm{id}\\otimes(j)_S$ with $c_1(b\\otimes x)=j(b)\\otimes x$, so (ii) holds by construction. Semilinearity: by clause 3 of [lem-pur-twist-sheaf-locally-free] and the isomorphism $\\beta_{H,S}:\\widehat{\\mathbf Z}_{\\ell,S}\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_H)_S\\xrightarrow{\\sim}R_H$ of [lem-pur-completed-coefficient-tensor-normalization], local sections $r=\\beta_{E}(\\rho\\otimes b')$ generate $R_E$ additively and act by $r(x\\otimes b)=\\rho x\\otimes b'b$. Applying that node to the finite extension $\\iota(E)\\subset L$, its map $i_{EL}$ equals $c$ (both are the unique map to the limit $R_L$ with the same finite projections, [def-weil-completed-integral-scalar-data]), and $i_{EL}\\beta_E=\\beta_L(1\\otimes q_{EL})$ gives $c(r)=\\beta_L(\\rho\\otimes j(b'))$. Hence $c_1(r\\,v)=\\rho x\\otimes j(b')j(b)=c(r)\\,c_1(v)$ for $v=x\\otimes b$; by additivity and local generation $c_1$ is $R_E$-linear into $\\operatorname{Res}_c\\mathcal O_L(1)_S$.",
+   "text": "Apply the exponent-one comparison firstRootCoefficientScalarComparison to the actual integral first lines. It supplies a root-normalized scalar-extension isomorphism and uniqueness of its semilinear adjunct, without requiring invertibility of competing maps.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
-    "def-weil-completed-integral-scalar-data",
-    "def-pur-twist-sheaves",
-    "def-coefficient-twists-detailed",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-twist-sheaf-locally-free",
-    "lem-pur-completed-coefficient-tensor-normalization"
+    "lem-pur-first-root-coefficient-scalar-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "root-limit tensor $\\mathcal O_E(1)_S=\\mathbf Z_\\ell(1)_S\\otimes\\mathcal O_E$ and coefficient maps"
-   }
+   "elementary": false
   },
   {
-   "text": "Linearization. Let $b:\\mathcal O_E(1)_S\\otimes_{R_E}R_L\\to\\mathcal O_L(1)_S$ be the $R_L$-linear map $v\\otimes s\\mapsto s\\,c_1(v)$ (well defined on the balanced sheaf tensor by Step 1). By clause 2 of [lem-pur-twist-sheaf-locally-free] there is a pro-etale covering $\\{V_k\\to S\\}$ and generators $\\zeta_k$ with $\\mathbf Z_\\ell(1)_S|_{V_k}=\\widehat{\\mathbf Z}_{\\ell,V_k}\\zeta_k$; by clause 3 $\\mathcal O_H(1)_S|_{V_k}$ is free of rank one over $R_H$ on $1\\otimes\\zeta_k$. Since $c_1(1\\otimes\\zeta_k)=1\\otimes\\zeta_k$, on $V_k$ the map $b$ is, in these bases, the unit isomorphism $u_c:R_E\\otimes_{R_E}R_L\\simeq R_L$, $r\\otimes s\\mapsto s\\,c(r)$, of [def-sp-canonical-scalar-extension-maps]. A sheaf map that is an isomorphism on each member of a covering is an isomorphism [lem-sfb-sheaf-cover-local-isomorphism], so $b$ is an isomorphism; both lines are locally isomorphic to $R_E$, resp. $R_L$, on a covering of the final object $S$.",
+   "text": "Extract rank-one covering charts from the published local-freeness theorem using isFiniteLocallyFreeOfRank_iff_exists_over_iso_free and freeUniqueIso. Apply exists_signedLineComparison to the first-line comparison and those charts. Compose every signed isomorphism with the scalar-extension embedding. Its unit, first-line and recursive positive-tensor equations, and its evaluation equation at both scalar coefficients one, give the four IsCanonicalTwistScalarMaps clauses.",
    "uses": [
     "lem-pur-twist-sheaf-locally-free",
-    "def-sp-canonical-scalar-extension-maps",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "def-pur-twist-sheaves"
+    "lem-pur-signed-line-scalar-tensor-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "local freeness clause (lem-pur-twist-sheaf-locally-free)"
-   }
+   "elementary": false
   },
   {
-   "text": "Positive degrees. Apply [lem-pur-signed-line-scalar-tensor-tower] (the pro-etale site of $S$ has finite limits and final object $S$) to $R_0=R_E\\xrightarrow{c}R_1=R_L\\xrightarrow{\\mathrm{id}}R_2=R_L$, $L_0=\\mathcal O_E(1)_S$, $L_1=L_2=\\mathcal O_L(1)_S$, $b_{01}=b$ of Step 2, $b_{12}$ the multiplication comparison $L_1\\otimes_{R_L}R_L\\simeq L_1$ and $b_{02}=b_{12}(b_{01}\\otimes1)$; the lines are locally free of rank one by Step 2. Its signed powers $L_i^{[m]}$ are the $\\mathcal O_H(m)$ of [def-coefficient-twists-detailed] (same tensor powers and sheaf duals). Define $c_m(x)=b_{01,m}(x\\otimes1)$ for $m\\geq0$; it is $R_E$-linear into $\\operatorname{Res}_c$, as $b_{01,m}$ is $R_L$-linear and $x\\mapsto x\\otimes1$ is $c$-semilinear. The unit comparison $b_{01,0}$ gives $c_0(r)=c(r)$, which is (i), and $b_{01,1}=b$ gives back $c_1$ of Step 1. For $a=m\\geq1$, $b=1$ the tower's multiplicativity $b_{01,m+1}(\\mu^{m,1}\\otimes1)=\\mu^{m,1}(b_{01,m}\\otimes b_{01,1})\\sigma$, with $\\mu^{m,1}$ the defining identification $L^{\\otimes m}\\otimes L=L^{\\otimes(m+1)}$ and $\\sigma((x\\otimes y)\\otimes1)=(x\\otimes1)\\otimes(y\\otimes1)$, gives $c_{m+1}(x\\otimes y)=c_m(x)\\otimes c_1(y)$, which is (iii).",
+   "text": "Any competing normalized family agrees at zero by the unit formula, and at one by first-line uniqueness. Two-step induction and scalarTensor_hom_ext give agreement at every nonnegative degree. At negative degrees scalarSemilinearDualExt detects equality by evaluation on scalar-one tensors in the corresponding positive isomorphism. The negative normalization and the positive agreement give these equal evaluations. Function extensionality and integer cases prove uniqueness of the family.",
    "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-coefficient-twists-detailed"
+    "lem-pur-scalar-semilinear-dual-ext",
+    "lem-sp-scalar-extension-binary-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "definition of positive signed powers $\\Lambda(1)^{\\otimes m}$"
-   }
-  },
-  {
-   "text": "Negative degrees. For $n\\geq0$ put $c_{-(n+1)}(f)=b_{01,-(n+1)}(f\\otimes1)$, where by [lem-pur-signed-line-scalar-tensor-tower] $b_{01,-(n+1)}=\\beta_{01,n+1}\\circ(-)\\circ b_{01,n+1}^{-1}$ is an isomorphism ($\\beta_{01,n+1}$ is the isomorphism of that node, $b_{01,n+1}$ that of Step 3). It is $c$-semilinear as in Step 3. The tower's evaluation identity $\\operatorname{ev}(b_{01,-(n+1)}(f\\otimes s),b_{01,n+1}(x\\otimes t))=c(f(x))st$ with $s=t=1$ is $\\operatorname{ev}(c_{-(n+1)}(f),c_{n+1}(x))=c(f(x))$; evaluated at the identity of $U$ this is (iv).",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "definition of negative signed powers by sheaf Hom"
-   }
-  },
-  {
-   "text": "Existence. Steps 1, 3 and 4 define every $c_m$ as a morphism of sheaves of $R_E$-modules $\\mathcal O_E(m)\\to\\operatorname{Res}_c\\mathcal O_L(m)$, so $c\\in\\operatorname{TwistScalarMaps}(\\ell,E,S,L,\\iota)$; (ii) holds by Step 1, (i) and (iii) by Step 3, (iv) by Step 4. No gluing is needed: all maps are global sheaf maps.",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "signed twists $\\Lambda(m)$, all $m\\in\\mathbf Z$"
-   }
-  },
-  {
-   "text": "Uniqueness. Let $c,c'$ both satisfy (i)-(iv). Then $c_0=c'_0$ by (i). The sheafified tensor $\\mathbf Z_\\ell(1)_S\\otimes(\\mathcal O_E)_S$ is locally generated additively by pure tensors $b\\otimes x$ [def-pur-sheaf-tensor-product], on which $c_1,c'_1$ agree by (ii); additive sheaf maps agreeing on local generators are equal, so $c_1=c'_1$. Inductively, if $c_m=c'_m$ ($m\\geq1$), then $c_{m+1},c'_{m+1}$ agree on the local generators $x\\otimes y$ of $\\mathcal O_E(m)\\otimes_{R_E}\\mathcal O_E(1)$ by (iii), hence are equal. For degree $-(n+1)$ and a section $f$ over $U$: the $R_L$-linear maps $\\varphi=c_{-(n+1)}(f)$ and $\\varphi'=c'_{-(n+1)}(f)$ on $\\mathcal O_L(n+1)|_U$ satisfy, by (iv) applied at every $V\\to U$ to $f|_V$ and the naturality of $c,c'$ and of evaluation under restriction, $\\varphi(c_{n+1}(x))=\\varphi'(c_{n+1}(x))$ for all sections $x$ over all $V\\to U$. As $b_{01,n+1}$ is an isomorphism (Step 3), the sections $s\\,c_{n+1}(x)$ generate $\\mathcal O_L(n+1)$ locally, so $\\varphi=\\varphi'$ by $R_L$-linearity. Hence $c=c'$.",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-    "place": "signed twists $\\Lambda(m)$, all $m\\in\\mathbf Z$"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coefficient-twists-detailed",
-  "def-pc-sheaf-restrict-scalars",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-twist-sheaves",
-  "def-sp-canonical-scalar-extension-maps",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-completed-integral-scalar-data",
-  "lem-pur-completed-coefficient-tensor-normalization",
-  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-first-root-coefficient-scalar-comparison",
   "lem-pur-twist-sheaf-locally-free",
-  "lem-sfb-sheaf-cover-local-isomorphism"
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-scalar-semilinear-dual-ext",
+  "lem-sp-scalar-extension-binary-coherence"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
-  "place": "agent reconstruction of the scalar-map existence and uniqueness argument from the Lean docstring and coefficient-twist construction"
+  "place": "Reduce to the first root line; reuse the existing signed scalar comparison, tensor extensionality and dual evaluation APIs. Unit-level route unchanged."
  },
  "mathlib_searches": [
   {
@@ -205,5 +143,15 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a2856a81a (reviewer sub-agent of L); spot-checked: I read the whole delivery against the Lean of CoefficientTwistsDetailed.lean:435-502 and every cited statement. The four normalization clauses match IsCanonicalTwistScalarMaps: (iii) is m>=1, (iv) is Int.negSucc. The hypotheses match Field/Algebra/FiniteDimensional (Padic l) L with iota an algebra map, and the base-change morphism is integralCompletedScalarMap, i.e. c of def-weil-completed-integral-scalar-data. The statement is true. Existence: apply lem-pur-signed-line-scalar-tensor-tower to R_E->R_L->R_L, with b_12 the multiplication comparison and b_01 the linearization of c_1. Its unit comparison gives (i), multiplicativity at (m,1) gives (iii), and its evaluation identity at s=t=1 gives (iv). Uniqueness: pure tensors generate locally, b_{n+1} is an isomorphism, and naturality pins down the slice maps. Small cases checked: L=E with iota=id, S empty, degree 0. No cycle, no duplicate (the nodes naming TwistScalarMaps are consumers or coherence lemmas), no SGA. Three repairable faults, fixed in fixes/dag/nodes/sec-smooth-purity/lem-route-twist-scalar-maps-exists-unique.json. (1) split_report.tool_uses named unit ids (sk-def-sf-admissible, sk-prop-an, sk-def-sp-scalar-extension), which match no cited node. They are replaced by the one real off-route statement, lem-pur-twist-sheaf-locally-free, accepted as a generic tool. (2) stmt_deps listed six nodes the statement does not use. The statement left j, c, restriction of scalars, the pure tensors and evaluation uncited. It is rewritten with the same content and citations [def-weil-completed-integral-scalar-data, def-pur-twist-sheaves, def-pc-sheaf-restrict-scalars, def-pur-sheaf-hom], and stmt_deps now equals the cited definitions. (3) Step 1 waved semilinearity through ('descends through quotient transitions'). It now uses beta_H and i_EF beta_E = beta_F(1 tensor q) from lem-pur-completed-coefficient-tensor-normalization. Step 2 now uses the unit isomorphism u_c and the Mathlib leaf lem-sfb-sheaf-cover-local-isomorphism instead of a mis-cited tensor normalization. Steps 3-6 are made explicit, and the unneeded dual-local-iso and native-evaluation citations are dropped. proof_deps equals the union of uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

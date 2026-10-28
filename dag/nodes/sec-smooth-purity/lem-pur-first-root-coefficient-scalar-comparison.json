@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-first-root-coefficient-scalar-comparison",
+ "kind": "statement",
+ "title": "Root-normalized scalar extension of the first integral Tate line",
+ "statement": "Let l be prime, E and L finite-dimensional extensions of Q_l, and iota : E → L a Q_l-algebra embedding [def-weil-l-adic-coefficient-extension]. Let S be a scheme on which l is invertible, with its small pro-etale site [def-weil-pbc-proetale-site]. Let R_E and R_L be the completed integral coefficient ring sheaves and alpha : R_E → R_L the actual completed coefficient inclusion [def-weil-integral-scalar-extension]. Write T_E and T_L for the first completed integral root lines, defined as the constant integer coefficient tensors with the common Z_l(1) root-limit module, endowed with their specified completed actions [def-pur-twist-sheaves]. Let beta be the constant ring-sheaf map induced by the integer inclusion. There is an isomorphism b : R_L tensor over R_E T_E → T_L such that, on every object U and all constant-integer-sheaf sections a and root-limit sections x, b(1 tensor (a tensor x)) = beta(a) tensor x. Moreover any alpha-semilinear module-sheaf map c : T_E → T_L satisfying c(a tensor x) = beta(a) tensor x equals the semilinear adjunct of b. No invertibility hypothesis is imposed on c. Tensor sections are the actual sheafification-unit images [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "The integral first line and its scalar-extension construction; elaboration of the first-line scalar-extension step of lem-route-twist-scalar-maps-exists-unique. Stacks sites-modules.tex, lemma-adjointness-tensor-restrict and section-tensor-product (03EK, 03EL)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-integral-scalar-extension",
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual constant integer inclusion and the identity on the common root-limit module to define a map on the presheaf tensor. Its balancing follows from the common Z_l inclusion. Sheafification gives the additive map with the required root-tensor formula. The finite-residue characterizations of the completed actions identify multiplication by the image of a completed source scalar with multiplication before this map, so it is semilinear for alpha. Extend by balancing to a target-linear map from the ordinary completed scalar extension.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a primitive-root pro-etale cover trivializing the common Z_l root line. Its scalar tensors give bases of both integral lines. In those bases the constructed linear map is multiplication R_L tensor over R_E R_E to R_L, with inverse z mapped to z tensor one. These local inverses agree on overlaps as inverses of the same fixed forward map, so descend to a global inverse.",
+   "uses": [
+    "lem-pur-twist-root-local-models",
+    "lem-pur-twist-integral-local-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any competing semilinear map with the displayed formula, restrict its source and target along the completed action to the constant integer coefficients. Maps out of the sheafified constant tensor are determined on the presheaf tensor by sheafification adjunction, and that tensor is generated additively by the displayed pure tensors. Thus the competing map equals the adjunct of b. The argument makes no assumption that arbitrary sections globally lift before sheafification. The universal properties also cover the empty scheme and identity field extension.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-sheaves",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-twist-root-local-models",
+  "lem-pur-twist-integral-local-models",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Scalar-extension construction of the first integral line, with explicit tensor universal properties and local primitive-root inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the integral first Tate root line is the first Tate line for the larger coefficient field",
+   "results": "Eight hits about WeierstrassCurve base change and RootPairing restriction of scalars; none describes the project root-limit sheaf or completed coefficient action.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "results": "Eleven hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange and its pure-tensor formulas. This supplies sectionwise tensor reassociation, but not comparison with the specified completed integral Tate line or its root normalization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*scalar|scalar.*Tate",
+   "results": "Seven unrelated Mathlib hits concerning scalar-ring collection, scalar towers, and scalar multiplication. Local source search found generic signedLineComparison, common-line presentation and integral local models, but no theorem with this specific first-line coefficient comparison and semilinear uniqueness.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of an integral first Tate twist line along a finite extension of p-adic coefficient fields",
+   "results": "Eight hits on intermediate-field scalar restriction and p-adic scalar towers; none states a comparison of integral root-limit module sheaves.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "via": [
+    "lem-route-twist-scalar-maps-exists-unique"
+   ],
+   "place": "First sentence: first Tate line built from the roots of unity by tensor products and scalar extension; only the first-line scalar comparison."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FirstRootCoefficientScalarComparison",
+  "file": "lean/Sheaf/Paper/FirstRootCoefficientScalarComparison.lean",
+  "declaration": "WeilConjectures.firstRootCoefficientScalarComparison",
+  "statement": "theorem firstRootCoefficientScalarComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (S : Scheme.{u})\n    [∀ x : S, Invertible (l : S.residueField x)]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) :\n    let α := integralCompletedScalarMap l E L ι S\n    let β : purTwistIntegralConstant S l E ⟶ purTwistIntegralConstant S l L :=\n      (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp\n          ((integralScalarIntegerInclusion l E L ι).comp ULift.ringEquiv.toRingHom)))\n    let res := SheafOfModules.restrictScalars.{u + 1}\n      ((sheafCompose (ProEt.topology S)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map α)\n    ∃ b : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}\n        α (purTwistIntegralModule S l E) ≅ purTwistIntegralModule S l L,\n      (∀ (U : S.ProEtᵒᵖ) (a : (purTwistIntegralConstant S l E).obj.obj U)\n        (x : (purTwistZlModule S l).val.obj U),\n        b.hom.val.app U (SheafOfModules.scalarExtensionSection α\n          (purTwistIntegralModule S l E) U 1 (purTwistIntegralTensor S l E U a x)) =\n            purTwistIntegralTensor S l L U (β.hom.app U a) x) ∧\n      ∀ c : purTwistIntegralModule S l E ⟶ res.obj (purTwistIntegralModule S l L),\n        (∀ (U : S.ProEtᵒᵖ) (a : (purTwistIntegralConstant S l E).obj.obj U)\n          (x : (purTwistZlModule S l).val.obj U),\n          c.val.app U (purTwistIntegralTensor S l E U a x) =\n            purTwistIntegralTensor S l L U (β.hom.app U a) x) →\n        c = SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α\n            (purTwistIntegralModule S l E) ≫\n          res.map b.hom",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020216-L-2479749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
