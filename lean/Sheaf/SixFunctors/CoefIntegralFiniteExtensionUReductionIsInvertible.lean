@@ -1,5 +1,6 @@
 module
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionFiniteUIsInvertible
 /-! Levelwise reduction invertibility for the canonical integral dualizing comparison.
 Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraph 2
 (blueprint: lem-sf-integral-finite-extension-u-invertibility).
@@ -18,6 +19,7 @@ variable (l : ℕ) [Fact l.Prime]
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
   (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L)
+set_option linter.style.haveILetI false in
 /-- Every finite reduction of the canonical comparison is invertible.
 
 The reduction equation `u_reduction` identifies the reduction of `u` with the
@@ -31,5 +33,20 @@ theorem comparison_reduction_isIso_u :
     ∀ n : ℕ,
       IsIso ((scalarReductionDerivedExtension l L X n).map
         (u l E L ι X D hl wE wL)) := by
-  sorry
+  intro n
+  let rL := scalarReductionDerivedExtension l L X n
+  let q := quotient l E L ι X n wE.omega.obj wE.omega.property.1
+  let eE := wE.reduction n
+  let eL := wL.reduction n
+  let v := finiteU l E L ι X D n
+  haveI : IsIso eL.hom := eL.isIso_hom
+  haveI : IsIso q.hom := q.isIso_hom
+  haveI : IsIso ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n)).map
+      eE.hom) := Functor.map_isIso _ _
+  haveI : IsIso v := finiteU_isIso l E L ι X D n
+  have hc : IsIso (rL.map (u l E L ι X D hl wE wL) ≫ eL.hom) := by
+    rw [u_reduction l E L ι X D hl wE wL n]
+    infer_instance
+  letI : IsIso (rL.map (u l E L ι X D hl wE wL) ≫ eL.hom) := hc
+  exact IsIso.of_isIso_comp_right _ eL.hom
 end WeilConjectures.IntegralFiniteExtension
