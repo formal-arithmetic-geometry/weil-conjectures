@@ -110,15 +110,15 @@ theorem isZero_of_isZero_etaleReduction (E : PadicAlgCl.FiniteIntermediateField 
   have hK : IsIso ((ℓ : ℤ) ^ n • 𝟙 K.obj) :=
     (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 (Functor.map_isZero _ hext)
   -- hence on the first derived reduction of `K`, where `ℓ` acts by zero
-  have hK₁ : IsZero ((derivedReduction X.left ℓ E).obj K.obj) := by
+  have hK₁ : IsZero ((derivedReduction X.left ℓ E.1).obj K.obj) := by
     refine DerivedCategory.isZero_of_isIso_zsmul_id
       (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero ?_) (m := (ℓ : ℤ) ^ n) ?_
     · rw [Int.cast_pow, Int.cast_natCast, natCast_eq_zero_residueFieldCoeff, zero_pow hn]
-    · have : (derivedReduction X.left ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
-      rw [← (derivedReduction X.left ℓ E).map_id, ← Functor.map_zsmul]
+    · have : (derivedReduction X.left ℓ E.1).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
+      rw [← (derivedReduction X.left ℓ E.1).map_id, ← Functor.map_zsmul]
       infer_instance
   -- derived Nakayama
-  have := isIso_of_isIso_derivedReduction_map X.left ℓ E (0 : K ⟶ K)
+  have := isIso_of_isIso_derivedReduction_map X.left ℓ E.1 (0 : K ⟶ K)
     (hK₁.isIso hK₁ _)
   exact IsZero.of_mono_zero K K
 

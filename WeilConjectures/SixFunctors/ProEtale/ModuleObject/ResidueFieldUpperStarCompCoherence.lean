@@ -39,7 +39,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 section Aux
 
@@ -47,7 +48,7 @@ attribute [local instance high] isTopologicalRing_residueField
 
 set_option hygiene false in
 local notation "residueFieldCommRingObj" =>
-  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1) _ CommRing.toRing _
+  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E) _ CommRing.toRing _
 
 /-- On underlying abelian sheaves, `residueFieldModuleSheafUpperStarIsoAux` is the composite of
 the identifications of the underlying sheaves of residue field module sheaves, of pullbacks of
@@ -100,7 +101,7 @@ theorem residueFieldModuleSheafUpperStarIso_compCoherence {X Y Z : Scheme.{u}} (
     (g : Y ⟶ Z) :
     CompCoherence
       (CondensedRing.upperStarComp
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f g)
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f g)
       (ProEtale.upperStarComp (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f g)
       (residueFieldModuleSheafUpperStarIso ℓ E g) (residueFieldModuleSheafUpperStarIso ℓ E f)
       (residueFieldModuleSheafUpperStarIso ℓ E (f ≫ g)) :=

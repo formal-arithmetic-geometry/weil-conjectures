@@ -26,13 +26,11 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, w
 The constructions are the generic ones of those files. The only coefficient-specific input is the
 proper base change theorem for bounded constructible `𝒪_E`-sheaves
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`,
-blueprint `sk-thm-sfb-proper-base-change`), which is `sorry`; its `E` and `ℚ̄_ℓ` versions
-(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`) are proved.
+blueprint `sk-thm-sfb-proper-base-change`, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`).
 
 ## Main statements
 
-- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`: proper
-  base change on bounded constructible `𝒪_E`-sheaves (`sorry`).
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers`:
   `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `𝒪_E`-sheaves.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicIntegers`: the
@@ -56,45 +54,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-/-! ### Proper base change -/
-
-section Proper
-
-variable {X Y X' Y' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-include k in
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `sk-thm-sfb-proper-base-change`.
-**The proper base change theorem** for bounded constructible `𝒪_E`-sheaves (blueprint
-`sk-thm-sfb-proper-base-change`), `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian
-square of schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
-isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. This is the integral analogue of
-`isIso_boundedConstructibleBaseChange_of_isProper`; it reduces to the étale proper base change
-theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by writing a constructible
-`𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` (Bhatt–Scholze, Section 6.7).
-Currently `sorry`; its `E` and `ℚ̄_ℓ` versions are proved. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
-    (sq : IsPullback g' f' f g) :
-    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange
-      ℓ E sq.toCommSq) :=
-  sorry
-
-end Proper
 
 /-! ### Independence of the compactification -/
 
