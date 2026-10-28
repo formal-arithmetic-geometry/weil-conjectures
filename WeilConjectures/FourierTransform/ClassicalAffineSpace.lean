@@ -50,7 +50,7 @@ variable {K L R ι : Type*} [Field K] [Field L] [Fintype L] [Algebra K L] [CommR
 /-- The *classical Fourier transform* `f̂(y) = ∑ₓ f(x) ψ(Tr_{L/K}⟨x, y⟩)` of a function
 `f : L^ι → R` on a finite affine space, `⟨x, y⟩ = ∑ᵢ xᵢ yᵢ` being the standard pairing, with
 respect to the additive character `ψ ∘ Tr_{L/K}` of `L` induced by an additive character `ψ` of a
-subfield `K`. (sketch blueprint: `def-fd-trace-function`) -/
+subfield `K`. -/
 noncomputable def fourierTransformPi (ψ : AddChar K R) (f : (ι → L) → R) (y : ι → L) : R :=
   ∑ x, f x * ψ (Algebra.trace K L (∑ i, x i * y i))
 
