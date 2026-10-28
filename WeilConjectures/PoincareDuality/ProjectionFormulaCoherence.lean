@@ -93,7 +93,7 @@ theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app
           (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj
             ((boundedConstructibleUpperStar _ ℓ g).obj M)) :=
-  boundedConstructibleExceptionalProjectionMorphism_comp ℓ f g T M
+  boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft ℓ f g T M
 
 variable (X) in
 /-- **The exceptional projection morphism of the identity is the identity** (blueprint

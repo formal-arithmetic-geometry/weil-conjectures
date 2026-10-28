@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.ExchangeFormalism.ProjectionComposi
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
-public import WeilConjectures.Tactic.ExactKernel
+public import WeilConjectures.Tactic.ExactByKernel
 
 /-!
 
@@ -18,7 +18,8 @@ public import WeilConjectures.Tactic.ExactKernel
 The exceptional projection morphism `PF_f : Rf_! T ⊗ M ⟶ Rf_! (T ⊗ Lf^* M)` of bounded
 constructible `ℚ̄_ℓ`-complexes is compatible with the composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`
-(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp`, blueprint
+(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft`,
+blueprint
 `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
 
 The composition isomorphism of the lower shriek is computed through a triangle of
@@ -44,7 +45,7 @@ reducing projections of instances, which does not terminate in reasonable time o
 terms, in particular when a natural transformation is applied to two spellings of the same object.
 The abstract statement therefore takes all heavy data as variables, they are passed in the
 spelling of the goal (including the instance arguments of the triangle of factorizations), and
-the two remaining identifications are left to the kernel with `exact_kernel`.
+the two remaining identifications are left to the kernel with `exact_by_kernel`.
 
 -/
 
@@ -387,16 +388,16 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_of_compactificati
     rfl
   · exact whiskerLeft_eq_comp_eqToHom ℓ f g T M _ _
   · exact lowerShriekOfCompactification_map_eq ℓ f g d hd _
-  -- the two typings differ only by unfolding the exchange formalism, see `exact_kernel`
-  · exact_kernel exceptionalProjection_snd_eq_shriekProjection ℓ f g d hd T M
-  · exact_kernel exceptionalProjection_fst_eq_shriekProjection_comp_eqToHom ℓ f g d hd T M
+  -- the two typings differ only by unfolding the exchange formalism, see `exact_by_kernel`
+  · exact_by_kernel exceptionalProjection_snd_eq_shriekProjection ℓ f g d hd T M
+  · exact_by_kernel exceptionalProjection_fst_eq_shriekProjection_comp_eqToHom ℓ f g d hd T M
 
 omit d hd in
 /-- **The exceptional projection morphism is compatible with composition** (blueprint
 `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through the composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, the exceptional projection morphism of
 `f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
-theorem boundedConstructibleExceptionalProjectionMorphism_comp
+theorem boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft
     (T : Dᵇc(X.left)⟦𝐐⟧) (M : Dᵇc(Z.left)⟦𝐐⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ (f ≫ g) T M ≫
         (boundedConstructibleLowerShriek ℓ (f ≫ g)).map
