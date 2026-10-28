@@ -138,18 +138,16 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.o
         ((ringChar.spec k ℓ).1 h)
     simpa using (hk.map (ΓSpecIso (.of k)).inv.hom).map
       (deformationTotalToBase Y I k' ≫ Y.hom).appTop.hom
-  obtain ⟨E, K₀, ⟨e⟩⟩ := ProEtale.exists_padicAlgCl_iso_integralModel Y.left ℓ ⟨K, hK⟩
-  have hM₀ := boundedConstructible_leftDerivedUpperStar_obj_of_scheme
-    (Profinite.padicIntegersRingObj ℓ E.1) (deformationModel Y I k').ε K₀.obj K₀.property
-  have h₀ := isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E
-    (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
-    (IsPullback.of_hasPullback (deformationModel Y I k').j _) hℓ _ hM₀
-  have : ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
-      K₀.obj).IsGE hM₀.1.1.choose := hM₀.1.1.choose_spec
-  have h₁ := isIso_baseChangeMap_app_padicAlgCl_of_padicIntegers ℓ E
+  have hL := boundedConstructible_leftDerivedUpperStar_obj_of_scheme
+    (Profinite.padicAlgClRingObj ℓ) (deformationModel Y I k').ε K hK
+  have t := isIso_baseChangeMap_app_padicAlgCl_of_integralModel ℓ
     (IsPullback.of_hasPullback (deformationModel Y I k').j
       (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
-        (deformationModel Y I k').total)).toCommSq _ hM₀.1.1.choose this h₀
+        (deformationModel Y I k').total)).toCommSq ⟨_, hL⟩ fun E K₀ ↦
+    isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E
+      (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
+      (IsPullback.of_hasPullback (deformationModel Y I k').j _) hℓ K₀.obj K₀.property
+  -- `t` and the goal carry different proofs of `Precoherent Profinite`
   sorry
 
 /-- **The smooth exchange of nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (1),
