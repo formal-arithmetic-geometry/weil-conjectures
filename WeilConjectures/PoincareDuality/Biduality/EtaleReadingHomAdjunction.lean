@@ -160,4 +160,28 @@ theorem isIso_ihomComparison (A B : D) [IsIso (adj.counit.app A)] :
   funext g
   exact adj.homEquiv_symm_uncurry_comp_ihomComparison δ g
 
+/-- The comparison isomorphism `G [ι A, ι B] ≅ [F A, F B]`
+(`CategoryTheory.Adjunction.ihomComparison` followed by `eqToIso`) for a functor `ι : C' ⥤ D`
+and a functor `F` equal to `ι ⋙ G`, when the counit `L G ι A ⟶ ι A` is an isomorphism.
+
+Stating it for an abstract `F` with an equation `ι ⋙ G = F` (instead of relying on the
+definitional equality `F.obj A = G.obj (ι.obj A)`) keeps the kernel from unfolding `F` and `G`
+when checking terms involving this isomorphism. -/
+noncomputable def ihomComparisonIsoOfCompEq {C' : Type*} [Category* C'] (ι : C' ⥤ D)
+    (F : C' ⥤ C) (hF : ι ⋙ G = F) (A B : C') [hA : IsIso (adj.counit.app (ι.obj A))] :
+    G.obj ((ihom (ι.obj A)).obj (ι.obj B)) ≅ (ihom (F.obj A)).obj (F.obj B) :=
+  have := adj.isIso_ihomComparison δ (ι.obj A) (ι.obj B)
+  asIso (adj.ihomComparison δ (ι.obj A) (ι.obj B)) ≪≫ eqToIso (by subst hF; rfl)
+
+/-- The isomorphisms `CategoryTheory.Adjunction.ihomComparisonIsoOfCompEq` are natural in the
+first variable. -/
+lemma map_pre_app_comp_ihomComparisonIsoOfCompEq_hom {C' : Type*} [Category* C'] (ι : C' ⥤ D)
+    (F : C' ⥤ C) (hF : ι ⋙ G = F) {A A' : C'} (f : A ⟶ A') (B : C')
+    [hA : IsIso (adj.counit.app (ι.obj A))] [hA' : IsIso (adj.counit.app (ι.obj A'))] :
+    G.map ((pre (ι.map f)).app (ι.obj B)) ≫ (adj.ihomComparisonIsoOfCompEq δ ι F hF A B).hom =
+      (adj.ihomComparisonIsoOfCompEq δ ι F hF A' B).hom ≫ (pre (F.map f)).app (F.obj B) := by
+  subst hF
+  simpa [ihomComparisonIsoOfCompEq] using
+    adj.map_pre_app_comp_ihomComparison δ (ι.map f) (ι.obj B)
+
 end CategoryTheory.Adjunction

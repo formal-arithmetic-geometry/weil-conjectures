@@ -8,6 +8,7 @@ module
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangulated
+public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
 
 /-!
 # Biduality along the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`
@@ -92,21 +93,23 @@ noncomputable def leftDerivedIntegersModPowReductionMonoidal :
 
 attribute [local instance] leftDerivedIntegersModPowReductionMonoidal
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- Blueprint
 `det-prop-scalar-six-tensor-hom`, (2), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`. **Reduction
 modulo `ℓⁿ` commutes with internal homs**: for bounded constructible `𝒪_E`-complexes `A` and `B`,
 the comparison `v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the
 transpose of the reduction of the evaluation
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism. (Blueprint
-`lem-coef-integral-hom-reduction`: `𝒪_E ⧸ ℓⁿ` has the finite free resolution
-`𝒪_E --ℓⁿ--> 𝒪_E`, so `RHom(A, -) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ≅ RHom(A, - ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, and the
-extension–restriction adjunction identifies the latter with the restriction of scalars of
-`RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, - ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`.) -/
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an isomorphism: the restriction to
+bounded constructible complexes of
+`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction` (blueprint
+`lem-coef-integral-hom-reduction`). -/
 theorem isIso_ihomComparison_integersModPowReduction
     (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso ((Functor.LaxMonoidal.ihomComparison
       L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) A.obj).natTrans.app B.obj) :=
-  sorry
+  isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq ℓ E.1 n X.left
+    (leftDerivedIntegersModPowReductionMonoidal ℓ E n X) rfl A.obj B.obj
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
 /-- **Reduction modulo `ℓⁿ` detects zero objects** (`n ≠ 0`): a bounded constructible

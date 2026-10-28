@@ -110,11 +110,11 @@ noncomputable def finiteEtaleReadingIhomIso
     (A B : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     (ambientEtaleReading ℓ E n X).obj ((ihom A.obj).obj B.obj) ≅
       (ihom ((finiteEtaleReading ℓ E n X).obj A)).obj ((finiteEtaleReading ℓ E n X).obj B) :=
-  have := isIso_ambientEtaleReadingAdjunction_counit_app ℓ E n X A
-  have := (ambientEtaleReadingAdjunction ℓ E n X).isIso_ihomComparison
-    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) A.obj B.obj
-  asIso ((ambientEtaleReadingAdjunction ℓ E n X).ihomComparison
-    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) A.obj B.obj)
+  (ambientEtaleReadingAdjunction ℓ E n X).ihomComparisonIsoOfCompEq
+    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X)
+    (C' := Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) (ObjectProperty.ι _)
+    (finiteEtaleReading ℓ E n X) rfl A B
+    (hA := isIso_ambientEtaleReadingAdjunction_counit_app ℓ E n X A)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Naturality of `finiteEtaleReadingIhomIso` in the first variable. -/
@@ -125,7 +125,13 @@ lemma finiteEtaleReadingIhomIso_hom_naturality
         (finiteEtaleReadingIhomIso ℓ E n X A B).hom =
       (finiteEtaleReadingIhomIso ℓ E n X A' B).hom ≫
         (pre ((finiteEtaleReading ℓ E n X).map f)).app ((finiteEtaleReading ℓ E n X).obj B) :=
-  (ambientEtaleReadingAdjunction ℓ E n X).map_pre_app_comp_ihomComparison
-    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) f.hom B.obj
+  -- `C'` is given as `Dᵇc(X)⟦Λ⟧`, the spelling used in the statement: with the full subcategory
+  -- of `boundedConstructible` instead, the kernel has to unfold `finiteEtaleReading` deeply.
+  (ambientEtaleReadingAdjunction ℓ E n X).map_pre_app_comp_ihomComparisonIsoOfCompEq_hom
+    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X)
+    (C' := Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) (ObjectProperty.ι _)
+    (finiteEtaleReading ℓ E n X) rfl f B
+    (hA := isIso_ambientEtaleReadingAdjunction_counit_app ℓ E n X A)
+    (hA' := isIso_ambientEtaleReadingAdjunction_counit_app ℓ E n X A')
 
 end AlgebraicGeometry.ProEtale.CondensedRing
