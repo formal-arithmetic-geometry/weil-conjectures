@@ -12,26 +12,47 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite-free mono-cokernel and internal/sectionwise comparison results to the indicated component of the parent proof.",
+   "text": "Let F be point pullback followed by the fixed section-module equivalence. The point pullback unit isomorphism and the unit comparison of lem-pe-internal-section-tensor-comparison identify F of the regular point module with the regular section module. Thus it is flat. Additivity preserves finite biproducts. Tensoring a finite coproduct of flat objects is exact: use closedness, pointwise finite-limit preservation, and the identification of finite coproduct and finite product functors in an abelian category. Transport along the supplied e₁ and e₂ to obtain flatness of F(S.X₁) and F(S.X₂), including r=0. The finite-coproduct argument is proved locally in Lean.",
    "uses": [
-    "lem-sfb-finite-free-mono-cokernel-kflat",
-    "lem-pe-internal-section-tensor-comparison"
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
     "place": "Finite free paragraph"
    }
+  },
+  {
+   "text": "The canonical cone degree is P[0]^(i+1) ⊞ Q[0]^i. At -1 its second summand is zero, at 0 its first summand is zero, and at every other degree both summands vanish. Apply F to these canonical isomorphisms. Additivity preserves zero objects, so every term of the displayed section complex is flat, and every term of degree greater than zero vanishes. This uses only the two finite-free presentations, not monicity or the cokernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite free paragraph"
+   }
+  },
+  {
+   "text": "Convert categorical right-tensor flatness to IsFlatOnSite with siteSheafTensorRightIso. Apply the existing independent-universe bounded-above flat K-flat criterion with bound zero to the specified sectionwise image complex.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-free-mono-cokernel-kflat",
-  "lem-pe-internal-section-tensor-comparison"
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Finite free paragraph"
+  "place": "Finite free paragraph; direct finite-biproduct flatness and cone-term computation, followed by Stacks Tag 06YQ"
  },
  "mathlib_searches": [
   {
@@ -100,10 +121,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V9",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261028T020837-L-2553377",
-  "kind": "interface",
+  "landing": "20261028T034739-L-3539791",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
