@@ -1,14 +1,9 @@
-/-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
--/
 module
 
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaPullbackKFlat
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaPullbackDescent
 
-/-! Pullback naturality of a normalized finite-free beta comparison.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback)
--/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -16,18 +11,21 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 universe u
-
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
+/-! Pullback naturality of a normalized finite-free beta comparison.
+(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback)
+-/
+
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. Transport the representative comparison through exact point pullback
-and the normalized scalar comparison. This is the pullback square part, with the
-normalized beta supplied as input.
+paragraphs. The K-flat representative calculation and its descent to the
+unbounded derived category are supplied by the two strictly simpler lemmas
+imported above.
 (blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback)
 -/
 theorem finiteFreeScalarDerivedComparison_beta_pullback
@@ -46,6 +44,9 @@ theorem finiteFreeScalarDerivedComparison_beta_pullback
       tensorPull Λ f (DerivedCategory.Q.obj (complex Λ S Y)) K ≫
         ((modelPull Λ S f).hom ⊗ₘ 𝟙 ((scalarSixPull Λ f).obj K)) ≫
         (β X).hom.app ((scalarSixPull Λ f).obj K) := by
-  sorry
+  exact fun X Y f K ↦ finiteFreeScalarDerivedComparison_beta_pullback_of_kflat
+    D a S t β hβ (fun X Y f C hC ↦
+      finiteFreeScalarDerivedComparison_beta_pullback_kflat D a S t β hβ X Y f C hC)
+      X Y f K
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar

@@ -21033,3 +21033,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:57 L: merged deliver/R5/Sheaf.SixFunctors.IntegralDualizingSystemFiniteAdjunction (stage 3; reviewer PASS; first push; landing 20261028T055744-L-804665 (interface); batch 20261028T055556; modules 5; new nodes 4)
 - 05:57 L: merged deliver/R7/Sheaf.Paper.CompactSupportTargetRationalCanonicalSquare (stage 3; reviewer PASS; first push; landing 20261028T055745-L-804882 (proof); batch 20261028T055556; modules 1; new nodes 0)
 - 05:57 L: merged deliver/R8/Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaConstruction (stage 3; reviewer PASS; first push; landing 20261028T055746-L-805200 (interface); batch 20261028T055556; modules 1; new nodes 0)
+- 05:57 L: merged deliver/R9/Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaPullback (stage 3; reviewer PASS; first push; landing 20261028T055747-L-805432 (interface); batch 20261028T055556; modules 3; new nodes 2)
