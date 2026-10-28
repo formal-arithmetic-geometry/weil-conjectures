@@ -20775,3 +20775,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: merged deliver/B5/Sheaf.Paper.ConstantAdicQuotientRealizationTowerTransition (stage 3; reviewer PASS; first push; landing 20261028T034658-L-3530322 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:47 L: merged deliver/B5/Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit (stage 3; reviewer PASS; first push; landing 20261028T034700-L-3530468 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:47 L: merged deliver/B6/Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalTrace (stage 3; reviewer PASS; first push; landing 20261028T034701-L-3530774 (interface); batch 20261028T034643; modules 5; new nodes 4)
+- 03:47 L: merged deliver/B7/Sheaf.Paper.IntegralCompactSupportCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261028T034702-L-3531116 (interface); batch 20261028T034643; modules 2; new nodes 1)

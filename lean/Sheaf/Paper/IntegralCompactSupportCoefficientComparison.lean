@@ -58,6 +58,7 @@ import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import WeilConjectures.AlgebraicGeometry.DimensionFiniteTypeField
 import Sheaf.Paper.IntegralCompactSupportRestrictionShift
 import Sheaf.Paper.FiniteProperComparisonIso
+import Sheaf.Paper.CompletedQuotientProperMate
 
 /-! # Integral compact-support coefficient comparison
 
@@ -1576,19 +1577,32 @@ def recordedComparisonIso (c : Compactification f) :
       Functor.isoWhiskerLeft (scalarFiniteTor l E F i D hl f c)
         (recordedIdentification l F D hl f c)
 
+set_option linter.unusedSectionVars false in
+set_option linter.unusedVariables false in
 /-- Compact support commutes with the actual finite quotient reduction on this domain.
 Source: Bhatt--Scholze, Definition 6.7.6; Stacks Tags 06YY, 0GL6
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: the positive quotient is the cone of multiplication by the nth uniformizer
-power, with the specified quotient augmentation. The normalized proper/open operations
-are coefficient-linear and triangulated, so preserve this cone and augmentation.
-Their scalar mate is therefore this cone comparison. Equivalently normalized tower
-effectivity identifies it with the finite quotient evaluation, which is invertible. -/
+Proof: write the positive exponent as n+1. The normalized quotient projection
+formula makes the proper scalar mate invertible at the completed open extension.
+The open scalar comparison is already invertible on every input. The factorization
+of the actual compact-support mate is their ordered composite after proper direct
+image, so functorial preservation and composition of isomorphisms finish. -/
 theorem reductionComparison_isIso (c : Compactification f) (n : ℕ) (hn : 1 ≤ n)
     (M : DerivedCategory (scalarReductionSource l E X))
     (hM : finiteTorConstructibleIntegral l E X M) :
     IsIso ((comparison (reduction l E n hn) c).app M) := by
-  sorry
+  cases n with
+  | zero => omega
+  | succ n =>
+    have hp := completedQuotientProperMate l E c.g n
+      (reduction l E (n + 1) hn) (fun _ ↦ rfl)
+      ((openExtension (completed l E) c.i).mapDerivedCategory.obj M)
+    letI : IsIso ((properComparison (reduction l E (n + 1) hn) c.g).app
+        ((openExtension (completed l E) c.i).mapDerivedCategory.obj M)) := by
+      simpa only [properComparison, finiteProperComparison] using hp
+    have := openComparison_isIso (reduction l E (n + 1) hn) c.i M
+    rw [comparison_factorization]
+    infer_instance
 
 /-- The proper-open comparison is uniquely specified by the open unit and proper counit.
 The restriction map in the normalization is the actual pullback-composition/counit map.

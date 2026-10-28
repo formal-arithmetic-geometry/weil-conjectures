@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-completed-quotient-proper-mate",
+ "kind": "statement",
+ "title": "The normalized completed-to-finite quotient proper scalar mate",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, schemes X and Y, a morphism f:X→Y and n≥0. Let a be a compatible coefficient change from the completed integral coefficient sheaves to the finite coefficient sheaves of exponent n+1, whose component at every scheme is the canonical completed quotient projection. For every object K of the unbounded derived category of completed integral module sheaves on X, the actual proper scalar mate finiteProperComparison(a,f) at K is invertible. No geometric finiteness, constructibility or Tor hypothesis is required. Here finiteProperComparison is only the mate definition owned by [lem-pur-compact-support-finite-proper-comparison-iso], and not the disputed generic invertibility theorem. Coefficient data are [def-pur-integral-compact-support-coefficient-data] and scalar extension is [lem-pur-derived-change-of-rings].",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-compact-support-finite-proper-comparison-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Finite quotient compatibility of the proper/open realization; Bhatt--Scholze Lemmas 6.7.7 and 6.1.13; Stacks Tag 0GL6. Reuse of the complete private quotient_proper_mate argument from QcqsCompactSupportFiniteMates, factored below the parent to avoid an import cycle."
+ },
+ "proof": [
+  {
+   "text": "Identify completed and finite inverse-image ring identifications with the normalized coefficient identifications of SfCompleteDirectImageReduction. The underived restriction comparison is identity on sections, hence is its normalized comparison.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective complexes cancel the finite derived direct-image computation unit and restriction computation isomorphism. Both derived comparisons obey the same cochain-unit equation, so derived natural-transformation extensionality identifies them.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the proved sf_projection_formula through the left-adjoint uniqueness squares for the two scalar extension adjunctions. Substitute the prescribed quotient maps, inverse-image ring identifications and proof-irrelevant coefficient-square witnesses. This yields invertibility of the actual quotient proper mate on any unbounded input.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-complete-direct-image-reduction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B7",
+  "date": "2026-10-28",
+  "note": "Reuse and generalization of the already proved private quotient-mate argument; only the proper factor, with its actual quotient maps. The new module imports no consumer of the parent comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension along a perfect finite quotient commutes with derived direct image, with the canonical adjunction mate",
+   "results": "General derived adjunction unit/counit equations; no specialized quotient mate.",
+   "date": "2026-10-28",
+   "verdict": "Reuse project normalization and quotient projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv",
+   "results": "Unknown identifier in public search index; zero hits.",
+   "date": "2026-10-28",
+   "verdict": "Project declaration and source search used."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.formula|quotient.*mate",
+   "results": "Four irrelevant Mathlib matches. Project rg found the complete private quotient_proper_mate in QcqsCompactSupportFiniteMates; importing its module closes a cycle.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the lower proof in an acyclic module."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-integral-coefficient-comparison",
+   "place": "Canonical positive quotient reduction comparison: proper factor"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedQuotientProperMate",
+  "file": "lean/Sheaf/Paper/CompletedQuotientProperMate.lean",
+  "declaration": "WeilConjectures.completedQuotientProperMate",
+  "declarations": [
+   "WeilConjectures.completedQuotientProperMate"
+  ],
+  "statement": "theorem completedQuotientProperMate\n    (a : Change (completed l E) (finite l E (n + 1) (Nat.le_add_left 1 n)))\n    (hmap : ∀ W, a.map W = projection l E (n + 1) (Nat.le_add_left 1 n) W)\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :\n    IsIso ((finiteProperComparison a f).app K)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261028T034702-L-3531116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261028T034702-L-3531116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
