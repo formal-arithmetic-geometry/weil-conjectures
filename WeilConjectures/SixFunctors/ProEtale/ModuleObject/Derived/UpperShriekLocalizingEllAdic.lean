@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness
+
 /-!
 # The exceptional inverse image on `Loc(Dᵇc)` for the `ℓ`-adic coefficient rings
 
@@ -131,8 +133,8 @@ theorem compactlyGenerates_continuousMapRingObj (E : Type) [NormedField E]
 
 /-- Blueprints `sk-thm-sfb-proper-base-change` and `sk-prop-proper-image-localizing`: for the
 coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a
-separated finite-type `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧` and preserves direct sums on
-`Loc(Dᵇc(Z)⟦E⟧)`. -/
+separated finite-type `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧` and preserves direct
+sums on `Loc(Dᵇc(Z)⟦E⟧)`. -/
 theorem properLowerStarHypotheses_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
@@ -145,9 +147,9 @@ theorem properLowerStarHypotheses_continuousMapRingObj (E : Type) [NormedField E
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a
-separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!`
-maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into `Dctf(Y, E)`, and preserves
-direct sums on `Loc(Dctf(X, E))`. -/
+separated finite-type `k`-scheme `Y`: for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`,
+`Rp_* ∘ j_!` maps `Loc(Dctf(X, E))` into `Loc(Dctf(Y, E))` and `Dctf(X, E)` into `Dctf(Y, E)`, and
+preserves direct sums on `Loc(Dctf(X, E))`. -/
 theorem lowerShriek_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
@@ -296,8 +298,8 @@ theorem compactlyGenerates_padicAlgClRingObj {X : Scheme.{u}} (aX : X ⟶ Spec (
     (isCompactObj_boundedConstructible_padicAlgClRingObj ℓ aX hk)
 
 /-- Blueprints `sk-thm-sfb-proper-base-change` and `sk-prop-proper-image-localizing`: for the
-coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated finite-type `k`-scheme, `Rp_*` maps
-`Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧` and preserves direct sums on `Loc(Dᵇc(Z)⟦ℚ̄_ℓ⟧)`. -/
+coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated finite-type `k`-scheme,
+`Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧` and preserves direct sums on `Loc(Dᵇc(Z)⟦ℚ̄_ℓ⟧)`. -/
 theorem properLowerStarHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (p : Z ⟶ Y) [IsProper p] :
     ProperLowerStarHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) p :=
@@ -306,8 +308,8 @@ theorem properLowerStarHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}} (aY : Y �
     (properLowerStarHeartHypotheses_padicAlgClRingObj ℓ aY p).preservesColimitsOfShape⟩
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
-localizing category, for the coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `Y`: for a
-compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, ℚ̄_ℓ))` into
+localizing category, for the coefficient ring `ℚ̄_ℓ` and a separated finite-type `k`-scheme `Y`:
+for a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, `Rp_* ∘ j_!` maps `Loc(Dctf(X, ℚ̄_ℓ))` into
 `Loc(Dctf(Y, ℚ̄_ℓ))` and `Dctf(X, ℚ̄_ℓ)` into `Dctf(Y, ℚ̄_ℓ)`, and preserves direct sums on
 `Loc(Dctf(X, ℚ̄_ℓ))`. -/
 theorem lowerShriek_padicAlgClRingObj {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))

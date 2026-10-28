@@ -142,8 +142,8 @@ lemma residueFieldFiniteness_of_isNoetherian {k : Type u} [Field k] [Fact (ringC
   fun E _ hL ↦
     have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
       inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
-    have := hasInvertibleExponent_residueFieldCoeff ℓ E aY
-    ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian p hL
+    have := hasInvertibleExponent_residueFieldCoeff ℓ E (𝟙 (Spec (.of k)))
+    ProEtale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY p hL
 
 /-! ### Over a scheme of finite type over a field -/
 

@@ -75,17 +75,18 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isProper {k : Type u} [Fie
 
 /-- The pro-étale form of
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`:
-for a proper morphism `f : X ⟶ Y` to a noetherian scheme on which the exponent of the finite ring
-`Λ` is invertible, the pro-étale `Rf_*` preserves bounded constructible complexes of sheaves of
-`Λ`-modules. -/
-theorem boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian {X Y : Scheme.{u}}
-    [IsNoetherian Y] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [IsProper f]
+for a proper morphism `f : X ⟶ Y` to a noetherian scheme over a field `k` in which the exponent of
+the finite ring `Λ` is invertible, the pro-étale `Rf_*` preserves bounded constructible complexes of
+sheaves of `Λ`-modules. -/
+theorem boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian {k : Type u}
+    [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
+    [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
       ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj K) :=
   boundedConstructible_rightDerivedLowerStar_of_etale f
-    (fun _ hK' ↦ Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian f
+    (fun _ hK' ↦ Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY f
       hK') hK
 
 end AlgebraicGeometry.ProEtale

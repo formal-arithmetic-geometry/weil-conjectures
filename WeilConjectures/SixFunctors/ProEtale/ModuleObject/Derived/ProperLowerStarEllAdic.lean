@@ -8,10 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicBound
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarHeart
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicBound
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarHeart
 
 /-!
 # The proper direct image for the `ℓ`-adic coefficient rings: the inputs

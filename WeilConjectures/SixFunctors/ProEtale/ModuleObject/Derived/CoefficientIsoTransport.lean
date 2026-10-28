@@ -100,9 +100,11 @@ namespace CondensedRing
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ']
 
+omit [IsCommMonObj Λ'] in
 /-- The extension of scalars along the coefficient change induced by an isomorphism of condensed
-rings is left exact, being isomorphic to a restriction of scalars. -/
-instance preservesFiniteLimits_extendScalars_coefficientMap_of_isIso (a : Λ ⟶ Λ')
+rings is left exact, being isomorphic to a restriction of scalars. It is not an instance: the
+search for `IsIso a` would be attempted for every coefficient change. -/
+lemma preservesFiniteLimits_extendScalars_coefficientMap_of_isIso (a : Λ ⟶ Λ')
     [IsMonHom a] [IsIso a] (X : Scheme.{u}) :
     PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X)) :=
   preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv _).symm
@@ -138,6 +140,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_iso (e : Λ ≅ Λ') [IsMo
       boundedConstructible (condensedRingObj Λ' Y) ((R((p)_*⟦Λ'⟧)).obj K))
     (K) (hK : boundedConstructible (condensedRingObj Λ Z) K) :
     boundedConstructible (condensedRingObj Λ Y) ((R((p)_*⟦Λ⟧)).obj K) := by
+  have := fun X : Scheme.{u} ↦ preservesFiniteLimits_extendScalars_coefficientMap_of_isIso e.inv X
   rw [← boundedConstructible_mapDerivedCategory_comap_iff (coefficientMap e.inv Y)]
   exact (boundedConstructible _).prop_of_iso ((derivedComapLowerStarIso e.inv p).app K).symm
     (h _ ((boundedConstructible_mapDerivedCategory_comap_iff _ K).2 hK))
@@ -151,6 +154,7 @@ theorem isLE_rightDerivedLowerStar_singleFunctor_of_iso (e : Λ ≅ Λ') [IsMonH
       (R((p)_*⟦Λ'⟧).obj ((DerivedCategory.singleFunctor _ 0).obj N)).IsLE d)
     (N) (hN : IsConstructibleModuleObject (condensedRingObj Λ Z) N) :
     (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj N)).IsLE d := by
+  have := fun X : Scheme.{u} ↦ preservesFiniteLimits_extendScalars_coefficientMap_of_isIso e.inv X
   refine isLE_of_isLE_mapDerivedCategory_comap (coefficientMap e.inv Y) _ d ?_
   have : (R((p)_*⟦Λ'⟧).obj ((Mod.comap (coefficientMap e.inv Z) ⋙
       DerivedCategory.singleFunctor _ 0).obj N)).IsLE d :=
