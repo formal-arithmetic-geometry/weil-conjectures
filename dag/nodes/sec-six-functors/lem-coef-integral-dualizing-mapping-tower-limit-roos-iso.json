@@ -30,10 +30,10 @@
  "unit": "sk-prop-sf-biduality-general",
  "proof_origin": {
   "by": "worker",
-  "group": "B5",
+  "group": "M7",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Second proof paragraph, Roos-limit and mapping-complex comparisons."
+  "place": "Second proof paragraph; use the published strict-tower Roos specification and noncanonical uniqueness of derived limits (Stacks 0941 and 08TC). The evaluation/product transport is adapted from the already proved private argument in IntegralDualizingRoosModel."
  },
  "created": {
   "by": "worker",
@@ -60,15 +60,23 @@
  ],
  "proof": [
   {
-   "text": "Unpack the presentation triangle hM and the canonical Roos triangle supplied by integralDualizing_roos_model. Their transition endomorphisms and product terms agree. Rotate the distinguished triangles and use triangulated triangle-isomorphism uniqueness, then transport through the shift equivalence to obtain an isomorphism of the first objects.",
+   "text": "For the arbitrary supplied strict tower, apply the specification of the published total derived inverse limit to a complex representing it. Compare the auxiliary evaluation with normalizedDVRTowerEvaluation using its factorization through cochain localization. Naturality and the formula for Localization.liftNatTrans identify the successor transitions. Form the product isomorphism from the evaluation isomorphisms and transport the distinguished triangle to the published integralOperationsDerivedCountableProducts witness. This yields a Roos triangle for (integralDualizingLimit l E X).obj T.tower with exactly the evaluation transitions of the presentation.",
    "uses": [
-    "lem-coef-integral-dualizing-roos-model"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack hM to obtain its maps p and delta and its Roos triangle, ignoring the additional counit and compatibility clauses. Apply the uniqueness clause of exists_isDerivedLimit_and_iso to these two derived limits of the same tower. This theorem rotates the triangles, extends the identity arrow isomorphism and unshifts the resulting third-object isomorphism.",
+   "uses": [
+    "lem-weil-derived-limit-existence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-integral-dualizing-roos-model"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-derived-limit-existence"
  ],
  "lean": {
   "existing": false,
@@ -94,10 +102,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B5",
+  "group": "M7",
   "result": "pass",
-  "landing": "20261028T034700-L-3530468",
-  "kind": "interface",
+  "landing": "20261028T055720-L-799807",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
