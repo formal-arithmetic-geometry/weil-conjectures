@@ -1041,6 +1041,25 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
     if pairs: log(f"checks: {len(pairs)} of {len(cands)} candidates checked in {time.time() - t0:.0f} s; {len(plans)} to land, "
         f"{counts['refused']} refused, {counts['waiting']} waiting, {counts['error']} errors, {left} over the batch cap, "
         f"{len(cands) - len(pairs)} still being checked")
+    # 2026-10-28 (red build 375085fafa: E5 added a hypothesis to NativeWeilTensorRingedChainData, K8's KFlatFlat proof,
+    # importing it, landed in the same batch; the related-modules recheck reads only the importers on main): deliveries
+    # of this batch linked by an import or a changed name are compiled together first (tools/batch_pairs.py); a pair that
+    # breaks does not land together (the later one waits, or goes back with the compiler message)
+    if plans:
+        try:
+            import batch_pairs as bp
+            plans, pwait, pret = bp.split(plans, import_graph, log)
+        except Exception as exc:  # noqa: BLE001   the global build still verifies the batch
+            log("batch pair check failed, the batch lands as before |", repr(exc)[:300]); pwait, pret = [], []
+        for p, _why in pwait + pret:
+            for path in p["paths"]:
+                if taken.get(path) == key(p):
+                    taken.pop(path, None)
+        for p, why in pwait:
+            log("not in this batch", p["group"], p["item"], p["head"][:9], "|", why[:300])
+        for p, why in pret:
+            pre.done.pop(p["head"], None)
+            give_back(p["group"], p["item"], p["head"], why, log)
     s2plans = []
     for x in s2ready:
         g, item, head = x["row"]["group"], x["row"]["item"], x["row"]["head"]
