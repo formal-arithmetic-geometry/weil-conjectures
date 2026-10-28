@@ -24,41 +24,34 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective I representing M. The product Hom complex U(P) has differential at source product index p equal to (-1)^p times postcomposition by d_I minus precomposition by d_P. The evaluation-curried qhInternalHomToIhom gives a natural isomorphism Q(U(P))≅ihom(Q(P),Q(I)), because I is K-injective. The closed derived tensor here is the canonical K-flat tensor from [def-pur-derived-internal-hom]. These are exactly the model and comparison used for the already proved native internal-Hom exactness.",
+   "text": "Choose a K-injective complex I representing M. Apply the model-level cone-boundary theorem to Q(I).",
    "uses": [
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For f:E→G, the signed bifunctor cone isomorphism identifies U(Cone f) with Cone(Uf)[-1]. At degree n, restrict a Hom component to G^p and E^(p+1), writing x_p,a_p. The coordinates are (y,x), y_j=(-1)^(j-1)a_(j-1), and the inverse is a_p=(-1)^p y_(p+1). The differential becomes (-d*y-U(f)*x,d*x); restriction to G is the x projection. Thus the first two squares of the inverse-rotated cone triangle commute. The existing bifunctor homotopy exactness proves this triangle distinguished with the explicit signed reindexing structure; its proof uses exactly these cone coordinates.",
-   "uses": [
-    "lem-sf-signed-bifunctor-cone-iso",
-    "lem-sf-bifunctor-homotopy-exact"
+    "lem-sf-native-hom-localized-cone-boundary-model"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the degree-one boundary with the actual mate in the statement. Transpose it by evaluation. For source shift r=-1, the raw adjoint mate reindexes the source product factor p of U(P[-1]) to p-1 in U(P)[1], with coefficient (-1)^(p-1), since the tensor argument shift crosses the original source degree p-1. The q(1)=1 scalar changes this to (-1)^p. This is the inverse of the explicit ordinary signed shift at -1, whose coefficient at the factor p is (-1)^p. To check the connecting arrow directly, use the termwise split cone sequence and its connecting cochain h. In the reversed Hom sequence the differential on its section and retraction gives (-1)^(p+1) times precomposition by h_p at the product factor P^p→I^(p+n+1); the postcomposition term vanishes because the two cone summands are disjoint. Applying the opposite third arrow h[-1].op and the just-computed corrected mate gives the identical coefficient. The third triangle square therefore commutes, not just the first two.",
-   "uses": [],
-   "elementary": true
+   "text": "Naturality of the coefficient comparison and the signed source mate gives an isomorphism from the model triangle to the displayed triangle for M.",
+   "uses": [
+    "lem-sf-native-hom-localized-cone-boundary-transport"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply localization Q to that cone triangle and its three commuting squares, and then the evaluation-characterized qhInternalHomToIhom isomorphisms. Its naturality in the source identifies the first two arrows; the evaluation transpose in the preceding step identifies the third. Finally transport Q(I)≅M using the coefficient naturality of the mate. Isomorphic triangles preserve distinguishedness. The result is exactly the displayed Triangle.mk on the opposite of the localized ordinary cone. Only ordinary cone inputs and the degree-one mate have been checked; arbitrary distinguished inputs and all-integer coherence are not assumed.",
+   "text": "Transport distinguishedness across this triangle isomorphism.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "lem-sf-bifunctor-homotopy-exact",
-  "lem-sf-signed-bifunctor-cone-iso"
+  "lem-sf-native-hom-localized-cone-boundary-model",
+  "lem-sf-native-hom-localized-cone-boundary-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "P6",
   "date": "2026-10-28",
-  "note": "Explicit expansion of the native mate/cone calculations in the assigned proof, preserving the unit route."
+  "note": "Reduced the assigned theorem to a K-injective cone calculation and a separate coefficient-naturality transport theorem; the main proof combines them by isomorphic_distinguished."
  },
  "mathlib_searches": [
   {
@@ -116,13 +109,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-f80ad",
-  "group": "C3",
-  "result": "fix",
-  "landing": "20261027T233823-L-4120299",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261028T020630-L-2531929",
   "kind": "interface",
-  "note": "independent cc review: item nativeDerivedHom_signed_exact (signature identical to clone) + new modules NativeHomSignedShiftLaws/NativeHomLocalizedConeBoundary vs their nodes, change record and the 2 direct importers (both compiled OK against the delivery)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

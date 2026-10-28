@@ -6,6 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.CategoryTheory.NativeHomSignedShiftLaws
+import Sheaf.CategoryTheory.NativeHomLocalizedConeBoundaryTransport
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
@@ -65,6 +67,19 @@ theorem nativeHom_localized_cone_boundary
       (op (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f)))
     Triangle.mk (H.map T.mor₁) (H.map T.mor₂)
       (H.map T.mor₃ ≫ siteHomSignedSourceComponent M 1 T.obj₁) ∈
-        distTriang (DerivedCategory C) := by sorry
+        distTriang (DerivedCategory C) := by
+  obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M
+  let M₀ := DerivedCategory.Q.obj I
+  let H₀ := MonoidalClosed.internalHom.flip.obj M₀
+  let H := MonoidalClosed.internalHom.flip.obj M
+  let T := (triangleOpEquivalence (DerivedCategory C)).functor.obj
+    (op (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f)))
+  have hmodel :
+      Triangle.mk (H₀.map T.mor₁) (H₀.map T.mor₂)
+          (H₀.map T.mor₃ ≫ siteHomSignedSourceComponent M₀ 1 T.obj₁) ∈
+        distTriang (DerivedCategory C) :=
+    nativeHom_localized_cone_boundary_model f I
+  obtain ⟨eT⟩ := nativeHom_localized_cone_boundary_transport f I M e.symm
+  exact Pretriangulated.isomorphic_distinguished _ hmodel _ eT.symm
 
 end AlgebraicGeometry.ProEtale
