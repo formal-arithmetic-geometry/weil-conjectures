@@ -209,37 +209,6 @@ def right {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
         ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) :=
   (rightTransformation l E F i c c' x g b sp sj).app M
 
-/-- Finite integral extension preserves the specified isomorphism exchange.
-Source: constituent coefficient-transport assembly, Steps 1--6
-(blueprint: lem-pur-integral-scalar-isomorphism-exchange).
-Proof: choose one integral basis and reduce it at all levels. Restriction preserves
-the proper unit-square-counit word and the open-unit transpose. The adjunct of each
-ordered scalar comparison is compact support of the scalar unit; balanced pullback
-has adjunct pullback of that unit. Hence the two rectangle paths have adjuncts
-P' G'(eta) xi and xi G P(eta), equal by naturality of xi. The scalar adjunction
-bijection gives equality on entire strict systems. Apply total derived limit;
-normalized cofinal reduction and balanced association identify its paths with the
-integral paths. Canonical refinement comparisons commute with every factor, so
-conjugation gives independence of compactification. No k-linearity is used. -/
-theorem integralScalarIsomorphismExchange_integral
-    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
-    {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
-    [IsSeparated (X ↘ Spec (.of D.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-    [IsSeparated (Y ↘ Spec (.of D.k))]
-    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
-    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (c : Compactification f) (c' : Compactification f')
-    (x : X' ⟶ X) (g : Y' ⟶ Y) (b : c'.Z ⟶ c.Z)
-    [IsIso x] [IsIso g] [IsIso b]
-    (sp : ChosenCartesianSquare b c'.g c.g g)
-    (sj : OpenImmersionSquare x c'.i c.i b)
-    (M : DerivedCategory (scalarReductionSource l E X))
-    (_hM : finiteTorConstructibleIntegral l E X M) :
-    left l E F i c c' x g b sp sj M = right l E F i c c' x g b sp sj M := by
-  sorry
-
 /-- The actual finite constant coefficients have the canonical inverse-image compositor.
 Source: constant-coefficient convention, proof Steps 1--2
 (blueprint: lem-pur-integral-scalar-isomorphism-exchange).
@@ -482,6 +451,104 @@ theorem strictLimitEquation_of_integralScalarIsomorphismExchange
     (h : ℕ) (hr : Ramification l E F i h) (hp : 1 ≤ h) :
     StrictLimitEquation l E F i h hr hp c c' x g b sp sj M := by
   sorry
+
+-- The DVR argument is the one used in RamifiedPullback.ramification_exists.
+private theorem positive_ramification : ∃ h : ℕ, 1 ≤ h ∧ Ramification l E F i h := by
+  let R := Padic.coefficientExtensionIntegers l E
+  let S := Padic.coefficientExtensionIntegers l F
+  let t := Padic.coefficientExtensionUniformizer l E
+  let v := Padic.coefficientExtensionUniformizer l F
+  let f := integralScalarIntegerInclusion l E F i
+  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hL := (Padic.extension_integers_dvr l F (Padic.coefficientExtensionAbsoluteValue l F)
+    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have : IsLocalRing R := hE.2.2.2.1
+  have : IsLocalRing S := hL.2.2.2.1
+  have : IsDiscreteValuationRing R := hE.2.2.2.2.2.2.2.1
+  have : IsDiscreteValuationRing S := hL.2.2.2.2.2.2.2.1
+  have ht : Ideal.span ({t} : Set R) = Padic.coefficientExtensionMaximalIdeal l E :=
+    hE.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hv : Ideal.span ({v} : Set S) = Padic.coefficientExtensionMaximalIdeal l F :=
+    hL.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hti : Irreducible t :=
+    (IsDiscreteValuationRing.irreducible_iff_uniformizer t).mpr
+      ((hE.2.2.2.2.2.1 _ (IsLocalRing.maximalIdeal.isMaximal R)).trans ht.symm)
+  have hvi : Irreducible v :=
+    (IsDiscreteValuationRing.irreducible_iff_uniformizer v).mpr
+      ((hL.2.2.2.2.2.1 _ (IsLocalRing.maximalIdeal.isMaximal S)).trans hv.symm)
+  have hft : f t ≠ 0 := by
+    intro hz
+    have hz' : i (t : E) = 0 := congrArg Subtype.val hz
+    exact hti.ne_zero (Subtype.ext (i.injective (by simpa using hz')))
+  have hnu : ¬ IsUnit (f t) := by
+    intro h
+    have ha := (hL.2.2.1 (f t)).mp h
+    change Padic.coefficientExtensionAbsoluteValue l F (i (t : E)) = 1 at ha
+    rw [integralScalar_absoluteValue l E F i] at ha
+    have hb := (hE.2.1 t).mp
+      (show t ∈ Padic.coefficientExtensionMaximalIdeal l E from
+        ht ▸ Ideal.mem_span_singleton_self t)
+    exact (ne_of_lt hb) ha
+  obtain ⟨e, w, heq⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hft hvi
+  have he : 1 ≤ e := by
+    by_contra hn
+    have hz : e = 0 := by omega
+    apply hnu
+    rw [hz, pow_zero, mul_one] at heq
+    exact heq.symm ▸ w.isUnit
+  have hideal : Ideal.span ({f t} : Set S) = Ideal.span {v ^ e} := by
+    rw [heq]
+    exact Ideal.span_singleton_mul_left_unit w.isUnit _
+  refine ⟨e, he, ?_⟩
+  change Ideal.map f (Padic.coefficientExtensionIdeal l E 1) =
+    Padic.coefficientExtensionIdeal l F e
+  simpa only [Padic.coefficientExtensionIdeal, pow_one, Ideal.map_span,
+    Set.image_singleton, Ideal.span_singleton_pow] using hideal
+
+/-- Finite integral extension preserves the specified isomorphism exchange.
+Source: constituent coefficient-transport assembly, Steps 1--6
+(blueprint: lem-pur-integral-scalar-isomorphism-exchange).
+Proof: choose one integral basis and reduce it at all levels. Restriction preserves
+the proper unit-square-counit word and the open-unit transpose. The adjunct of each
+ordered scalar comparison is compact support of the scalar unit; balanced pullback
+has adjunct pullback of that unit. Hence the two rectangle paths have adjuncts
+P' G'(eta) xi and xi G P(eta), equal by naturality of xi. The scalar adjunction
+bijection gives equality on entire strict systems. Apply total derived limit;
+normalized cofinal reduction and balanced association identify its paths with the
+integral paths. Canonical refinement comparisons commute with every factor, so
+conjugation gives independence of compactification. No k-linearity is used. -/
+theorem integralScalarIsomorphismExchange_integral
+    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
+    {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [IsSeparated (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (c' : Compactification f')
+    (x : X' ⟶ X) (g : Y' ⟶ Y) (b : c'.Z ⟶ c.Z)
+    [IsIso x] [IsIso g] [IsIso b]
+    (sp : ChosenCartesianSquare b c'.g c.g g)
+    (sj : OpenImmersionSquare x c'.i c.i b)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (_hM : finiteTorConstructibleIntegral l E X M) :
+    left l E F i c c' x g b sp sj M = right l E F i c c' x g b sp sj M := by
+  obtain ⟨h, hp, hr⟩ := positive_ramification l E F i
+  have hlim := strictLimitEquation_of_integralScalarIsomorphismExchange
+    l E F i D _hl c c' x g b sp sj M _hM h hr hp
+  unfold StrictLimitEquation at hlim
+  rcases hlim with ⟨P, Q, v, a₀, a₁, _, _, _, hunit, _,
+    ρ₀, ρ₁, _, _, _, hcofinal, hz⟩
+  let := hunit
+  let := hcofinal
+  have heq := (hz _ (Set.mem_insert _ _)).trans
+    (hz _ (Set.mem_insert_of_mem _ (Set.mem_singleton _))).symm
+  apply (cancel_mono (a₁.hom ≫
+    DerivedCategory.Q.map ((completedScalarIdentityUnit l F Y').app Q) ≫
+    DerivedCategory.Q.map ρ₁)).1
+  simpa only [Category.assoc] using heq
 
 /-- The integral equation together with its simultaneous finite-system and
 normalized total-limit clauses, with the actual ramification exponent.
