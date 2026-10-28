@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-affine-space-polynomial-deformation",
+ "kind": "statement",
+ "title": "Polynomial deformation of an affine-space automorphism to its linear part",
+ "statement": "Let k be a field, let d be a nonnegative integer, and put S=Spec(k). Use the concrete affine coordinate tower X_d(S), projection p_d(S), base-change maps X_d(f), and coordinate linear map a_g of [def-amb-affine-trace-tower] and [def-amb-affine-linear-trace-action]. For every automorphism e:X_d(S)≅X_d(S) with e.hom followed by p_d(S) equal to p_d(S), there are g in GL_d(Γ(S,O_S)) and an automorphism E of X_d(A¹_S) over A¹_S such that X_d(zeroSection) followed by E.hom equals a_g followed by X_d(zeroSection), and X_d(oneSection) followed by E.hom equals e.hom followed by X_d(oneSection). The sections are the actual coordinate-zero and coordinate-one sections of the parameter line. No cohomology or coefficient data occur.",
+ "source": {
+  "document": "https://www.math.u-bordeaux.fr/~jpfurter/onTheMaximalityOfTheTriangularSubgroup.pdf",
+  "place": "Lemma 3.1, proof, pp. 5–6: translation and deformation to the linear part; characteristic-independent coordinate verification written by M2; compare Blanc, Conjugacy classes of special automorphisms of the affine spaces, introduction, pp. 939–940, https://msp.org/ant/2016/10-5/ant-v10-n5-p01-p.pdf"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-tower",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical affineTraceAffineSpaceIso and AffineSpace.SpecIso to write e in polynomial coordinates as F=(F_1,...,F_d), with inverse G. Set b=F(0). In k[t,x_1,...,x_d] define H_j=(F_j(tx)-b_j)/t+t b_j. This is a polynomial because each nonconstant monomial of F_j acquires a positive power of t and the constant term was subtracted.",
+   "uses": [
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define J_j=G_j(t y+(1-t²)b)/t. The numerator at t=0 is G_j(b)=0, so polynomial division by t has zero remainder. Over k[t,t⁻¹,x] substitution gives t J(t,H(t,x))=G(F(tx))=tx and H(t,J(t,y))=(F(G(ty+(1-t²)b))-b)/t+t b=y. Since k[t,x] is a domain, the localization at t is injective, and both composition identities hold in the polynomial ring. Thus H and J define inverse k[t]-scheme morphisms.",
+   "uses": [
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At t=1, H is F. At t=0, H is the linear part of F-b, with matrix L. The specialization J(0,y) is also linear, since its numerator has first-order coefficient DG(b)y. Specializing both inverse identities makes these two matrices inverse. Regard L as a unit in the matrix ring over k, transfer its entries through Γ(Spec k,O)≅k, and call the resulting invertible matrix g. Transport H and J through the canonical affine-space/tower isomorphisms. The coefficients lie in k[t], so the resulting E lies over the parameter line. Equality on the projection and each coordinate proves both required endpoint equalities and identifies H(0,x) with the already defined affineTraceLinearMap. For d=0, use the identity family and the unique empty invertible matrix. Every computation uses only polynomial identities and works in positive characteristic.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-tower",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof_origin": {
+  "by": "M2, written by agent; explicit polynomial details of the cited deformation",
+  "document": "https://www.math.u-bordeaux.fr/~jpfurter/onTheMaximalityOfTheTriangularSubgroup.pdf",
+  "place": "Lemma 3.1, proof, pp. 5–6: translation and deformation to the linear part; characteristic-independent coordinate verification written by M2; compare Blanc, Conjugacy classes of special automorphisms of the affine spaces, introduction, pp. 939–940, https://msp.org/ant/2016/10-5/ant-v10-n5-p01-p.pdf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A polynomial automorphism of affine space deforms over the affine line to its invertible linear part",
+   "results": "8 hits: AffineMap.linearHom, AffineMap.continuous_linear_iff, AffineMap.linear, AffineEquiv.linearHom, AffineMap.linearHom_apply, AffineEquiv.linearHom_apply, AffineEquiv.linear_symm, AffineEquiv.linear. These concern affine maps of modules, not polynomial scheme automorphisms.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Iso\"",
+   "results": "12 hits, including AffineSpace.SpecIso, AffineSpace.isoOfIsAffine, their coordinate and projection equations, isOpenMap_over and the empty-coordinate isomorphism instance. These give coordinate descriptions but no polynomial deformation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*deform|deform.*polynomial|linearPart",
+   "results": "0 hits. Local source searches found polynomial evaluation, divX and affine-space coordinate equivalences, but no deformation of a general automorphism.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceGeometricTopAction",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2: affine-space presentation invariance before transposing integration equalities; supplies a geometric deformation for the top-action subargument",
+   "via": [
+    "lem-pur-affine-space-geometric-top-action",
+    "lem-pur-affine-space-iso-trace-action-id",
+    "lem-pur-vector-integration-presentation-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpacePolynomialDeformation",
+  "file": "lean/Sheaf/Paper/AffineSpacePolynomialDeformation.lean",
+  "declaration": "AlgebraicGeometry.affineSpace_polynomial_deformation",
+  "statement": "theorem affineSpace_polynomial_deformation\n    (k : Type u) [Field k] (d : ℕ)\n    (e : affineTraceTower (Spec (.of k)) d ≅ affineTraceTower (Spec (.of k)) d)\n    (he : e.hom ≫ affineTraceProjection (Spec (.of k)) d =\n      affineTraceProjection (Spec (.of k)) d) :\n    ∃ (g : Matrix.GeneralLinearGroup (Fin d) Γ(Spec (.of k), ⊤))\n      (E : affineTraceTower (AffineSpace PUnit.{u + 1} (Spec (.of k))) d ≅\n        affineTraceTower (AffineSpace PUnit.{u + 1} (Spec (.of k))) d),\n      E.hom ≫ affineTraceProjection (AffineSpace PUnit.{u + 1} (Spec (.of k))) d =\n        affineTraceProjection (AffineSpace PUnit.{u + 1} (Spec (.of k))) d ∧\n      affineTraceMap (AffineSpace.zeroSection PUnit.{u + 1} (Spec (.of k))) d ≫ E.hom =\n        affineTraceLinearMap (Spec (.of k)) d g ≫\n          affineTraceMap (AffineSpace.zeroSection PUnit.{u + 1} (Spec (.of k))) d ∧\n      affineTraceMap (AffineSpace.oneSection PUnit.{u + 1} (Spec (.of k))) d ≫ E.hom =\n        e.hom ≫ affineTraceMap\n          (AffineSpace.oneSection PUnit.{u + 1} (Spec (.of k))) d",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261028T072428-L-1946027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261028T072428-L-1946027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

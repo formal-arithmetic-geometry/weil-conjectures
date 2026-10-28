@@ -13,34 +13,60 @@
  ],
  "proof": [
   {
-   "text": "Use the ordered projective-line decomposition and its open-closed sequence, iterated over the coordinate tower, to compute the shifted twisted compact-support cohomology of affine d-space. The Kummer trace normalization sends the rational-point class in dimension one to one. Exterior products of these classes give the class of each rational point in dimension d and are sent to one by the ordered trace. These classes generate the top compact-support group.",
+   "text": "Take the polynomial deformation of e over the affine line from the new geometric lemma: its zero fibre is an invertible linear map g and its one fibre is e. Form the actual affineLinearTraceAction of this family. The construction contains no coefficient or trace data.",
    "uses": [
-    "lem-amb-affine-space-top-trace",
-    "def-amb-p1-trace"
+    "lem-pur-affine-space-polynomial-deformation",
+    "def-amb-affine-linear-trace-action"
    ],
    "elementary": false
   },
   {
-   "text": "An isomorphism over the algebraically closed field pulls a rational point back to its unique rational inverse image as a reduced closed subscheme. The local multiplicity is one because the map is an isomorphism. Naturality of the Kummer boundary, localization, and exterior products identifies this pullback with the coefficient comparison used by affineLinearTraceAction. It therefore carries each generating point class to another class sent to one. Hence the induced map on degree-zero homology of the shifted twisted object is identity. For d=0 the affine projection and its automorphism are identity; for the zero coefficient ring all these groups vanish. The rational geometric point of Spec(k) is conservative on its small etale topos; the resulting module equality therefore determines the degree-zero homology-sheaf map.",
+   "text": "Prove base-change equivariance of the action in the private action_baseChange lemma. First express both coefficient comparisons by descent from the base coefficient. Associativity of leftDerivedUpperStarComp identifies the two inverse-image composites, including naturality of coefficient descent. Apply affineLinearExchange_action_naturality to their equivariance equation and conjugate through affineLinearCompactComparison. The endpoint actions are therefore conjugate to the endpoint restrictions of the family action.",
    "uses": [
     "def-amb-affine-linear-trace-action",
     "lem-asd-etale-finite-twist-pullback",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-amb-affine-linear-exchange-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "The private linear_action_id lemma specializes the universal matrix action at the identity section, using affineLinearAction_one and affineLinearAction_family. Apply linearAction_eq_id_of_identitySection, and then specialize at g and cancel the specialization isomorphism. Thus the zero endpoint action is identity.",
+   "uses": [
+    "lem-amb-affine-linear-action-family",
+    "lem-amb-affine-linear-action-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove line_zero_detects. A normalized trace from exists_affineSpaceTopTrace makes the affine trace source over the parameter line isomorphic to the constant unit complex, hence tensor-invertible. Every point belongs to the inverse image of its base point; that fibre is irreducible by the open geometrically irreducible affine-space projection and meets the closed zero section. Apply the proved source theorem eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible to this section and these preconnected sets. This is identity detection for an invertible object, not faithfulness of general derived pullback.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-connected-locally-constant-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the zero-endpoint comparison to obtain identity of the restricted family action; line_zero_detects then makes the family action identity. Restrict at one and cancel its comparison to obtain identity of the actual action of e. Apply the degree-zero homology functor and its identity law. The same argument covers d=0 and the zero coefficient ring.",
+   "uses": [
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-amb-affine-space-top-trace",
-  "def-amb-p1-trace",
+  "lem-pur-affine-space-polynomial-deformation",
   "def-amb-affine-linear-trace-action",
   "lem-asd-etale-finite-twist-pullback",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-amb-affine-linear-action-family",
+  "lem-amb-affine-linear-action-rigidity",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-pbc-connected-locally-constant-map"
  ],
  "proof_origin": {
-  "by": "T1 stage 3",
+  "by": "M2 stage 3; written by agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraph 2, rational-point normalization subargument of affine-space presentation invariance"
+  "place": "paragraph 2, presentation invariance below the unit level; polynomial deformation replaces rational-point generators, while retaining the ordered trace and linear invariance"
  },
  "mathlib_searches": [
   {
@@ -111,9 +137,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261028T055800-L-808996",
+  "landing": "20261028T072428-L-1946027",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
