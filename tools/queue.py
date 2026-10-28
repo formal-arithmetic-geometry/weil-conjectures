@@ -68,6 +68,39 @@ STATE = {}   # how stage 3 was selected (route or closure) and the sorried closu
 NEEDED: dict[str, set[str]] = {}   # batch -> modules with an open node on its progress walk (empty: walk not run/failed)
 SPLIT: set[str] = set()      # the nodes of the modules new since the route's commit (progress_reach.split_since_route)
 ADMITTED: set[str] = set()   # those modules the bridge reaches from a batch's walk or the priority walk
+PENDING_DEPS: dict = {}         # tools/pending_deps.py pending(): what passed, not landed deliveries provide (2026-10-28)
+EARLY_TSV = "queue-pending-deps.tsv"
+
+
+def early_rows(g, rows, waiting) -> list[tuple[str, str, list[str]]]:
+    """(item, stage, [node|module|deliver/G/I|head, ...]) for the listed items released while a dependency is only stated
+    by a passed, not landed delivery (the owner, 2026-10-28); read by the dispatcher (Batch.read_queue)"""
+    if g is None:
+        return []
+    nodes = getattr(g, "pending", {}) or {}
+    held = {m for m, _ in waiting}
+    em = getattr(g, "early_modules", {}) or {}
+    out = []
+    def dep(n):
+        i = nodes[n]
+        return f"{n}|{i['module']}|deliver/{i['group']}/{i['item']}|{i['head']}"
+    for r in rows:
+        item, st = str(r[0]), str(r[1])
+        deps = g.early.get(item, []) if st == "2" else sorted(em.get(item, ())) if st == "3" and item not in held else []
+        deps = [d for d in deps if d in nodes]
+        if deps:
+            out.append((item, st, [dep(d) for d in deps]))
+    return out
+
+
+def write_early(rows) -> None:
+    tmp = WORK / (EARLY_TSV + ".tmp")
+    with open(tmp, "w") as f:
+        f.write("# item\tstage\tdependencies stated only by a delivery that passed review and has not landed yet, comma-separated "
+                "node|module|deliver ref|head (tools/queue.py, the owner 2026-10-28)\n")
+        for item, st, deps in rows:
+            f.write(f"{item}\t{st}\t{','.join(deps)}\n")
+    os.replace(tmp, WORK / EARLY_TSV)
 
 
 def analyse():
@@ -229,6 +262,15 @@ def main() -> int:
     g = None
     if dag_queue.nodes_dir().is_dir():
         g = dag_queue.Dag(dag_queue.load())
+        # 2026-10-28 (the owner): a statement written by a delivery that PASSED review and has not landed releases its
+        # dependents at once (tools/pending_deps.py); the items released that way go to coord/queue-pending-deps.tsv,
+        # from which the dispatcher tells their workers what is not in the library yet. A failure never stops the queue.
+        try:
+            import pending_deps
+            PENDING_DEPS.update(pending_deps.pending())
+            g.pending = PENDING_DEPS.get("nodes") or {}
+        except Exception as e:  # noqa: BLE001
+            print(f"pending dependencies failed, nothing released early: {e!r}", file=sys.stderr)
         s1 = g.stage1(); s2, why = g.stage2(); waiting = g.waiting()
         # retirement of ~/weil-newtargets (2026-10-19): the stage-2 dependency waits of tools/nt_stage2.py put the missing
         # prerequisites first (no dispatch restriction; the human, 2026-10-16)
@@ -323,6 +365,11 @@ def main() -> int:
             print(f"stage 3: library modules {len(lib)}; needed by the targets {len(dist)}; outside {len(lib - set(dist))}")
             print(f"stage 3: items from the {STATE.get('route', 'import closure')}"
                   + (f"; {len(STATE['off_route'])} sorried modules in the closure are on no target's route nor below a route sorry (not items)" if STATE.get("off_route") else ""))
+            if g is not None and (g.pending or g.early):
+                _e3 = set(getattr(g, "early_modules", {})) & {x[2] for x in items3}
+                print(f"released early on dependencies that passed review and have not landed (tools/pending_deps.py): "
+                      f"stage 2 {sum(1 for x in s2 if x[2] in g.early)}, stage 3 {len(_e3)}; "
+                      f"{len(g.pending)} node statements pending")
             print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof"))
                   + f"; on the route {sum(1 for x in items3 if x[5] == 0)}, below a route sorry {sum(1 for x in items3 if x[5] > 0)}"
                   + (": " + ", ".join(f"{b} {n}" for b, n in STATE["below"].items()) if STATE.get("below") else "")
@@ -381,6 +428,10 @@ def main() -> int:
             for r in rows:
                 f.write("\t".join(str(x) for x in r) + "\n")
         os.replace(WORK / "queue.tsv.tmp", WORK / "queue.tsv")
+        try:
+            erows = early_rows(g, rows, waiting); write_early(erows)
+        except Exception as e:  # noqa: BLE001 - a failure here never stops the queue
+            erows = []; print(f"{EARLY_TSV} not written: {e!r}", file=sys.stderr)
     with open(WORK / "queue.md", "w") as f:
         f.write(f"# Work queue\n\n{len(rows)} items; claim with `tools/claim.py next <group> [--stage N]`.\n\n")
         if rw_rows:
@@ -429,6 +480,7 @@ def main() -> int:
             for m, src in sorted(STATE["pending"]):
                 f.write(f"| `{m}` | {src} |\n")
     print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)}"
+          + f"; released early on passed, not landed dependencies: stage 2 {sum(1 for r in erows if r[1] == '2')}, stage 3 {sum(1 for r in erows if r[1] == '3')}"
           + (f"; rework {len(rw_open)} open of {len(rw_rows)}, blocked by rework {sum(STATE.get('blocked', (0, 0, 0)))})" if rw_rows else ")"))
     if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
         import blueprint_refs

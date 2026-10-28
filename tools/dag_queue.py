@@ -384,6 +384,13 @@ class Dag:
         self.queue_dist = self.distances(cut=False, excluded=self.route_dropped)
         self.queue_dist1 = self.distances(cut=True, excluded=self.route_dropped)
         self.height = {}   # fewest dependency steps down to a Mathlib leaf
+        # 2026-10-28 (the owner: release downstream work once review passes): node -> {group, item, head, stage, module}
+        # of the statements written by a delivery that PASSED review but has not landed (tools/pending_deps.py; set by
+        # tools/queue.py, empty for every other caller). Such a node counts as available for releasing the stage-2 items
+        # whose statement needs it and the stage-3 modules depending on it (never for stated(): the node itself stays a
+        # stage-2 item until its delivery lands). self.early: item -> [pending nodes it was released on]
+        self.pending = {}
+        self.early = {}
 
     def _set_assumed(self):
         """self.assumed: the nodes of coord/assumed.tsv that are finished here (every target reaching them is of a batch
@@ -508,6 +515,10 @@ class Dag:
         # missing node is reported by the DAG check, not here
         return d is None or i in self.assumed or stated_node(d)
 
+    def available(self, i: str) -> bool:
+        """stated, or stated by a passed delivery that has not landed yet (self.pending, 2026-10-28)"""
+        return self.stated(i) or i in self.pending
+
     def stmt_needed(self, roots) -> set[str]:
         """The unstated nodes the statements of `roots` need, transitively through stmt_deps (the human, 2026-10-18): a
         node outside dist1 (reached only through a finished node) that is in this closure of a reached node needing a
@@ -630,10 +641,14 @@ class Dag:
             # statement and stmt_deps stay, so its own statement is not held back by the re-split
             if not unfolded(d) and not keeps_plan(i):
                 why["waits for stage 1 (statement downstream not grounded)"] += 1; continue
-            if not all(self.stated(c) for c in self.deps(i, "stmt")):
+            if not all(self.available(c) for c in self.deps(i, "stmt")):
                 why["waits for a statement dependency (bottom-up)"] += 1; continue
             if not self.stmt_grounded(i):
                 why["waits for stage 1 deeper in its statement downstream"] += 1; continue
+            # 2026-10-28 (the owner): released while a statement dependency is only stated by a passed, not landed delivery
+            pend = sorted({c for c in self.deps(i, "stmt") if not self.stated(c)})
+            if pend:
+                self.early[i] = pend
             items.append((0 if early and i in tsc else 1, self.h(i), i))
         # launcher, 2026-10-11 10:50 UTC (STAGE 2 ORDER: DEFINITIONS FIRST): a statement cannot be written before its
         # definitions, so within the open items the definitions come first, then the statements, each by the order above.
@@ -669,16 +684,26 @@ class Dag:
         # 2026-10-28 (maintainer): a node whose own declarations are written and sorry-free (tools/own_decl.py, as the
         # progress walk counts it done) holds nothing: its plan below is pruned. Before, prop-weil-operations (proof
         # written) held WeilConjectures.WeilSheaf.FourierInversion.OtherSections, whose one sorry is another node's.
+        # 2026-10-28 (the owner): a dependency stated only by a delivery that passed review and has not landed
+        # (self.pending) does not hold the module; the module is released early and self.early_modules lists, per
+        # module, those dependencies (a module also waiting for a truly unstated one stays waiting: tools/queue.py)
         from own_decl import own
         out = []
+        self.early_modules = {}
         for i, d in self.live.items():
             if is_leaf(d) or not has_decl(d) or not module_of(d):
                 continue
+            pend = []
             for c in self.deps(i, "all"):
                 if not self.stated(c):
+                    if c in self.pending:
+                        pend.append(c); continue
                     if own(d, module_of(d)) is not False:
                         out.append((module_of(d), c))
+                    pend = []
                     break
+            if pend and own(d, module_of(d)) is not False:
+                self.early_modules.setdefault(module_of(d), set()).update(pend)
         return sorted(out)
 
 

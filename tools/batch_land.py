@@ -433,6 +433,18 @@ def check(c: dict, classify: bool = True, merge_wait: bool = True) -> dict:
     reviewer = c.get("reviewer")
     base = md.git("merge-base", md.MAIN, head)
     D = s3.read_delivery(s2.Git(ROOT), head, base, g, item, overrides=c.get("overrides") or None)
+    # 2026-10-28 (the owner: downstream work is released when its dependency passes review): a delivery importing a module
+    # that a passed delivery provides and that has not landed, or that landed and is not in the published build yet,
+    # waits (tools/quarantine_wait.py; neither returned nor counted as a failure) before any other check
+    try:
+        import pending_deps as pdeps
+        unbuilt = pdeps.unbuilt_imports({m["module"]: m["text"] for m in D["modules"]})
+    except Exception:  # noqa: BLE001 - the later import check decides as before
+        unbuilt = []
+    if unbuilt:
+        w = qwait.wait(cycles.MissingImports(unbuilt), g, item, head)
+        if w:
+            raise Wait(w)
     if classify and not c.get("passed"):
         cl, why, h = rc.classify(g, item, D)
         if h != head:
@@ -597,6 +609,17 @@ def check(c: dict, classify: bool = True, merge_wait: bool = True) -> dict:
     # (tools/rework_fixcheck.py; Refuse: back to the writer with the error; Wait: an import has no .olean yet)
     import rework_fixcheck as rfc
     rootfix = rfc.verify(D, item, head, Refuse, Wait, compile=merge_wait)   # a reader's pass: the batch compiles it
+    # 2026-10-28: a delivery its tool pushed without a compile, because a dependency had not landed (report section
+    # pending_deps.PENDING_SECTION), is compiled alone against the published build now that the dependency is in it
+    import pending_deps as pdeps
+    if pdeps.PENDING_SECTION in (D.get("report") or ""):
+        st, out = pdeps.compile_check(head, {m["module"]: m["text"] for m in D["modules"]})
+        if st == "error":
+            raise Refuse("compiled after its dependencies landed (it was delivered before they did, without a compile): "
+                         + out[-2800:] + "\nRepair the module against the library as it is now, compile it, deliver again.")
+        if st != "ok":
+            raise Wait(f"compile after the dependencies landed: {st} ({out[-200:]})")
+        D["notes"].append("delivered before its dependencies landed; compiled alone against the published build after they did")
     if rootfix:
         D["notes"].append("rework root fix checked before the cluster restore: "
                           + ", ".join(f"{m} {s}" for m, s in rootfix.items()))

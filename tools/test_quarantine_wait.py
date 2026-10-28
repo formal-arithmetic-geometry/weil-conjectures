@@ -18,7 +18,9 @@ class QuarantineWait(unittest.TestCase):
         (R / "quarantine/Sheaf/Q.lean").write_text("module\n")
         (R / "coord/rework.tsv").write_text("# header\nSheaf.R\tlean/Sheaf/R.lean\tquarantine/Sheaf/R.lean\tbuild\tt\tc\t\t\n")
         self.patches = [patch.object(qw, "ROOT", R), patch.object(qw, "STATE", R / "local/batch/qw.json"),
-                        patch.object(qw.rework, "ROOT", R), patch.object(qw.rework, "FILE", R / "coord/rework.tsv")]
+                        patch.object(qw.rework, "ROOT", R), patch.object(qw.rework, "FILE", R / "coord/rework.tsv"),
+                        patch.object(qw, "pending_state", side_effect=lambda d: self.pstate.get(d, "gone"))]
+        self.pstate = {}
         for p in self.patches: p.start()
 
     def tearDown(self):
@@ -55,6 +57,31 @@ class QuarantineWait(unittest.TestCase):
         self.assertIsNone(qw.wait(exc, "G1", "Sheaf.A", "h3", now=1.0))
         self.assertFalse(qw.holding("h3", now=2.0))
         self.assertIsNone(qw.wait(RuntimeError("other"), "G1", "Sheaf.A", "h3"))
+
+    def test_pending_dependency_waits_until_published(self):
+        # 2026-10-28: an import provided by a delivery that passed review and has not landed waits (24 h cap)
+        self.pstate = {"Sheaf.P": "pending"}
+        exc = self.missing("module\nimport Sheaf.P\n")
+        w = qw.wait(exc, "G1", "Sheaf.A", "h4", now=10.0)
+        self.assertIn("not landed yet", w)
+        self.assertEqual(qw.load()["h4"]["pending"], ["Sheaf.P"])
+        self.assertTrue(qw.holding("h4", now=10.0 + 7 * 3600))           # beyond the 6 h quarantine cap
+        self.pstate = {"Sheaf.P": "landed"}                               # on main, not built yet: still waits
+        self.assertTrue(qw.holding("h4", now=20.0))
+        self.pstate = {"Sheaf.P": "published"}
+        self.assertFalse(qw.holding("h4", now=30.0))                      # checked again; refuse_missing passes then
+
+    def test_pending_dependency_returned_goes_back_with_note(self):
+        self.pstate = {"Sheaf.P": "pending"}
+        exc = self.missing("module\nimport Sheaf.P\n")
+        self.assertIsNotNone(qw.wait(exc, "G1", "Sheaf.A", "h5", now=10.0))
+        self.pstate = {}                                                  # its delivery was returned
+        self.assertFalse(qw.holding("h5", now=20.0))
+        exc2 = self.missing("module\nimport Sheaf.P\n")
+        self.assertIsNone(qw.wait(exc2, "G1", "Sheaf.A", "h5", now=30.0))
+        self.assertIn("returned or replaced before it landed", str(exc2))
+        self.assertIn("Sheaf.P", str(exc2))
+        self.assertNotIn("h5", qw.load())
 
 
 if __name__ == "__main__":

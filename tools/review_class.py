@@ -158,8 +158,26 @@ if __name__ == "__main__":
         jobs = []
         # One ref-table read, not one subprocess for every head.
         refs = git("for-each-ref", "--format=%(refname:short) %(objectname)", "refs/heads/deliver")
+        def waitdeps(hd):
+            """2026-10-28 (the owner: work is released when its dependency passes review): the imports of this delivery
+            that are not in the published build yet (tools/pending_deps.py); the reader would not be able to compile it"""
+            try:
+                import pending_deps as pdeps
+                base = git("merge-base", "sheaf-dag", hd).strip()
+                files = [f for f in git("diff", "--name-only", base, hd, "--", "lean").split() if f.endswith(".lean")]
+                texts = {f[5:-5].replace("/", "."): (show(hd, f) or None) for f in files}
+                return sorted({d for _, d in pdeps.unbuilt_imports(texts)})
+            except Exception:  # noqa: BLE001
+                return []
         def emit(g, i, hd, c, why, stamp):
             new[f"{g}/{i}"] = [hd, c, why, stamp, CACHE_POLICY]
+            if c == "CODEX":   # listed WAITDEPS (not read yet) until its imports are built; the cached class stays CODEX
+                wd = waitdeps(hd)
+                if wd:
+                    print(f"WAITDEPS\t{g}\t{i}\t{hd[:9]}\twaits for dependencies not landed yet: {', '.join(wd)}", flush=True)
+                    if len(new) % 10 == 0:
+                        save({**cache, **new})
+                    return
             print(f"{c}\t{g}\t{i}\t{hd[:9]}\t{why}", flush=True)
             if len(new) % 10 == 0:
                 save({**cache, **new})
