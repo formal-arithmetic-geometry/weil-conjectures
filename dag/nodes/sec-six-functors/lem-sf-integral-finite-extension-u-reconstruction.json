@@ -9,9 +9,24 @@
  ],
  "proof": [
   {
-   "text": "Apply integralConstructibleReductionHom to the inverse family of the finite reductions. Naturality of u and inversion of the transition square give successor compatibility. Lift the family and its inverse; uniqueness applied to the identity families proves both composites are identities.",
+   "text": "Regard the scalar extension of wE.omega as a constructible integral object using sfIntegralScalarExtension_constructible. Form the prescribed finite counit family f0 and use finiteDualizing_reduction_coherent for all n <= m. The defining equation u_reduction, followed by cancellation of wL.reduction.hom, identifies f0 with the finite reductions of u.",
    "uses": [
     "def-sf-integral-finite-extension-core",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-sf-integral-finite-dualizing-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis makes every f0 n invertible. For their inverses, postcompose the required transition square with restriction of f0 n; functoriality and cancellation reduce it to the coherent square for f0. Apply integralConstructibleReductionHom to this compatible inverse family to obtain g.",
+   "uses": [
+    "lem-sf-integral-constructible-reduction-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralConstructibleReductionHom to the identity families on each endpoint. Functoriality of reduction and the inverse equations show that g followed by u and u followed by g have identity reductions. Uniqueness identifies these composites with the identities, yielding IsIso u. This also handles zero objects and the empty scheme without any extra hypothesis.",
+   "uses": [
     "lem-sf-integral-constructible-reduction-hom"
    ],
    "elementary": false
@@ -19,12 +34,14 @@
  ],
  "proof_deps": [
   "def-sf-integral-finite-extension-core",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-sf-integral-finite-dualizing-coherence",
   "lem-sf-integral-constructible-reduction-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
-  "place": "Paragraph 3: normalized DVR effectivity and coherent reduction comparison identify the total-limit map with u."
+  "place": "Paragraphs 2-3: coherent finite dualizing comparisons and normalized reconstruction; explicit inverse lifting and uniqueness proof by C1, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -101,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261027T234126-L-5369",
-  "kind": "interface",
+  "landing": "20261028T034707-L-3532897",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
