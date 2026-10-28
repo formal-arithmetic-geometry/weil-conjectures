@@ -1,0 +1,93 @@
+{
+ "id": "lem-pur-clopen-total-tensor-comparison",
+ "kind": "lemma",
+ "title": "Canonical total tensor comparison and its summand formula",
+ "statement": "Given an open immersion j, the existing coefficient sheaf R, a braided structure on ordinary module restriction G, and preservation by G of coefficient-sized coproducts, construct the canonical natural isomorphism between restricting the total tensor and taking the total tensor of the restrictions. On each degree-(p,q) summand its map is the inverse ordinary tensorator followed by the target summand inclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ: tensor product of complexes; canonical comparison from WeilConjectures.Mathlib.Algebra.Homology.Bifunctor."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport the supplied coproduct preservation across Discrete.equivalence Equiv.ulift to the fibre of integer addition in each degree. The canonical mapBifunctorComparisonNatTrans induced by the inverse ordinary tensorator is an isomorphism. Uncurry it to obtain clopenTotalComparison. Its equation on summands is exactly map_ιMapBifunctor_mapBifunctorComparisonX.",
+   "uses": [
+    "def-pur-clopen-total-tensor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "Y5",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ; canonical mapBifunctorComparisonNatTrans and map_ιMapBifunctor_mapBifunctorComparisonX from the adopted bifunctor API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparisonNatTrans",
+   "results": "0 hits; unknown identifier in Mathlib search. The declaration is in the adopted WeilConjectures library, which the proof uses directly.",
+   "date": "2026-10-28",
+   "verdict": "Use the adopted source-library comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonPrefix",
+  "date": "2026-10-28",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-structural-comparison-prefix",
+   "place": "Proved totalization construction factored into its own module to keep each compilation below 60 seconds."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenTotalTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopenTotalComparison_summand",
+  "statement": "theorem clopenTotalComparison_summand\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})\n    (h : (ClopenData.clopenTensorRestriction.{t, u} j R).Braided)\n    (hcolim : ∀ K : Type (max u (t + 1)), PreservesColimitsOfShape (Discrete K)\n      (ClopenData.clopenTensorRestriction.{t, u} j R)) :\n    ∀ (P Q : CochainComplex (ClopenData.clopenTensorModules.{t, u} R) ℤ)\n      (p q n : ℤ) (hpq : p + q = n),\n      (ClopenData.clopenTensorRestriction.{t, u} j R).map\n          (ClopenData.clopenTotalTensorSummand.{t, u} R P Q p q n hpq) ≫\n          ((clopenTotalComparison j R h hcolim).hom.app (P, Q)).f n =\n        (ClopenData.clopenTensorComparison.{t, u} j R h (P.X p) (Q.X q)).hom ≫\n          ClopenData.clopenTotalTensorSummand.{t, u}\n            ((ClopenData.clopenTensorRings.{t, u} j).obj R)\n            ((ClopenData.clopenTensorComplexRestriction.{t, u} j R).obj P)\n            ((ClopenData.clopenTensorComplexRestriction.{t, u} j R).obj Q) p q n hpq",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.clopenTotalComparison",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTotalComparison_summand"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261028T020921-L-2564642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261028T020921-L-2564642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

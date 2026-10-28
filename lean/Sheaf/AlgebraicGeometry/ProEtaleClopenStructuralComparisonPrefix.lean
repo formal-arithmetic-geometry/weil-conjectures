@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetectionData
+import Sheaf.AlgebraicGeometry.ProEtaleClopenOrdinaryTensorNormalization
+import Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralCoproductAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorComparison
 
 /-! Split structural comparison data for finite clopen restriction.
 Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
@@ -20,6 +23,9 @@ set_option autoImplicit false
 universe t u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open WeilConjectures
+attribute [local irreducible] SheafOfModules.monoidalCategory
+  SheafOfModules.symmetricCategory
+
 namespace AlgebraicGeometry.Scheme.ProEt
 
 def clopenStructuralPrefix
@@ -81,8 +87,11 @@ def clopenStructuralPrefix
 Source: Stacks Project, sites-modules.tex, Tags 0GMW and 0FPQ.
 (blueprint: lem-pur-clopen-structural-comparison-prefix).
 
-The proof constructs the canonical comparison from the gluing equivalence and checks the
-three displayed formulas on local generators. -/
+Use the ordinary normalized braided restriction and coproduct preservation from clopen
+gluing. Uncurrying the canonical totalization comparison constructs the total isomorphism;
+its summand equation is the standard bifunctor comparison formula. The chain-map equation
+moves the differential across this comparison, and the total tensor differential formula
+then proves the signed clause. -/
 theorem clopen_structural_comparison_prefix
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]
@@ -97,6 +106,29 @@ theorem clopen_structural_comparison_prefix
             coefficientTotalTensor.{u, t + 1, t} (topology (Y i))
               ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)),
       clopenStructuralPrefix i h b := by
-  sorry
+  intro i
+  obtain ⟨h, hpure⟩ := clopen_ordinary_tensor_normalization (j i) R
+  let G := ClopenData.clopenTensorRestriction.{t, u} (j i) R
+  have hcolim := (clopen_structural_coproduct_adjunction X I Y j hdisjoint hcover R).1 i
+  let b := clopenTotalComparison (j i) R h hcolim
+  have hsum := clopenTotalComparison_summand (j i) R h hcolim
+  refine ⟨h, b, hpure, hsum, ?_⟩
+  intro P Q p q n hpq hp hq
+  have hc := (b.hom.app (P, Q)).comm n (n + 1)
+  change (b.hom.app (P, Q)).f n ≫
+      ((coefficientTotalTensor.{u, t + 1, t} (topology (Y i))
+        ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)).obj
+        ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P,
+          (ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)).d n (n + 1) =
+    G.map (((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj
+      (P, Q)).d n (n + 1)) ≫ (b.hom.app (P, Q)).f (n + 1) at hc
+  rw [G.map_comp, Category.assoc, ← hc, ← Category.assoc, hsum]
+  rw [Category.assoc]
+  exact congrArg
+    (fun f ↦ (ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫ f)
+    (CochainComplex.ιTensorObj_d
+      ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)
+      ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)
+      p q n (n + 1) hpq rfl)
 
 end AlgebraicGeometry.Scheme.ProEt

@@ -30,22 +30,48 @@
  ],
  "proof": [
   {
-   "text": "Construct the normalized restriction tensorator from the clopen gluing equivalence and verify the pure-tensor, total-summand, and differential identities on local generators; the signed differential formula is the two-summand calculation.",
+   "text": "Apply clopen_ordinary_tensor_normalization to the clopen immersion j i. Retain its braided structure h and its normalized pure-tensor equation. This is the only remaining sheaf-level construction.",
+   "uses": [
+    "lem-pur-clopen-ordinary-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first clause of clopen_structural_coproduct_adjunction gives preservation of all coefficient-sized coproducts. Apply it to a ULift of the integer total-degree fibre and transport across Discrete.equivalence Equiv.ulift. This supplies precisely the coproduct-preservation instances needed by mapHomologicalComplexδNatTrans.",
+   "uses": [
+    "lem-pur-clopen-structural-coproduct-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct b by applying Functor.uncurry.mapIso to asIso of the canonical mapBifunctorComparisonNatTrans (the underlying construction of mapHomologicalComplexδNatTrans) induced by the ordinary inverse tensorator. Strongness and coproduct preservation make it invertible. map_ιMapBifunctor_mapBifunctorComparisonX gives its formula on each total summand. All complexes are unbounded and use the existing coefficientTotalTensor.",
+   "uses": [
+    "def-pur-clopen-total-tensor-data",
+    "lem-pur-clopen-structural-coproduct-adjunction",
+    "lem-pur-clopen-total-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the restriction functor on a composite and use the chain-map equation for b to move the differential to the target total complex. Rewrite by the summand normalization. The remaining equation is exactly CochainComplex.ιTensorObj_d on the restricted complexes, which has terms dP tensor id and (-1)^p id tensor dQ. This proves the signed differential clause without another comparison axiom.",
    "uses": [
     "def-pur-clopen-total-tensor-data"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-clopen-total-tensor-data"
+  "lem-pur-clopen-ordinary-tensor-normalization",
+  "lem-pur-clopen-structural-coproduct-adjunction",
+  "def-pur-clopen-total-tensor-data",
+  "lem-pur-clopen-total-tensor-comparison"
  ],
  "proof_origin": {
   "kind": "stage3",
-  "by": "P2",
+  "by": "Y5",
   "date": "2026-10-28",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 0GMW and 0FPQ: normalized pure tensors and total summands."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, lemma-symmetric-monoidal-cat-complexes; canonical total comparison and summand formula from WeilConjectures.Mathlib.Algebra.Homology.Bifunctor, and signed differential from WeilConjectures.Mathlib.Algebra.Homology.Monoidal."
  },
  "mathlib_searches": [
   {
@@ -91,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "Y5",
   "result": "pass",
-  "landing": "20261027T234128-L-6719",
+  "landing": "20261028T020921-L-2564642",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
