@@ -12,58 +12,56 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal R_W$ for coherent reduction to derived strict systems and $\\otimes^{\\mathrm{sys}}$ for the derived tensor of strict systems, i.e. the derived tensor of module sheaves on the ringed sequence site [def-coef-ringed-sequence-site]. The integral tensor $T^{\\mathrm{int}}_{E,W}$ is the derived inverse limit of the levelwise derived tensors of the reductions, functorially in both arguments [def-weil-derived-pullback-tensor-hom], and the reduction/tensor comparison $c_{M,N}:\\mathcal R_WT^{\\mathrm{int}}_{E,W}(M,N)\\xrightarrow{\\sim}\\mathcal R_WM\\otimes^{\\mathrm{sys}}\\mathcal R_WN$ is obtained by applying the counit of the adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ to the levelwise tensor comparison [def-pur-completed-pullback-tensor-comparison]. Since $\\mathcal R_W$ is a functor on the derived category and the unit, counit and all comparisons are natural for morphisms of the inputs [lem-coef-derived-system-evaluation-calculus], $c$ is natural: $c_{M',N'}\\circ\\mathcal R_W(T^{\\mathrm{int}}_{E,W}(a,b))=(\\mathcal R_Wa\\otimes^{\\mathrm{sys}}\\mathcal R_Wb)\\circ c_{M,N}$, and likewise for $T^{\\mathrm{int}}_{E,W}(b,a)$. By [def-pod-integral-tensor-constraints], $\\mathcal R_W(\\beta^{\\mathrm{int}}_{M,N})=c_{N,M}^{-1}\\circ\\sigma_{\\mathcal R_WM,\\mathcal R_WN}\\circ c_{M,N}$, where $\\sigma$ is the strict-system braiding.",
+   "text": "Define the completed braiding by composing the integral tensor model with the strict-system braiding and its swapped inverse model. The hom of this natural isomorphism satisfies naturality for arbitrary product arrows by `NatIso.naturality`.",
    "uses": [
-    "def-pod-integral-tensor-constraints",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-completed-pullback-tensor-comparison",
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-coef-ringed-sequence-site"
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-finite-pullback-tensor-braiding"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality; specialization to the coherently reduction-normalized completed integral tensor"
+    "place": "Tag 0FPQ, signed total symmetry and its naturality"
    }
   },
   {
-   "text": "The strict-system braiding is the canonical derived symmetry of the ringed sequence site [def-pur-ringed-site-signed-tensor-models]: a natural isomorphism $\\sigma:\\otimes^{\\mathrm{sys}}\\xrightarrow{\\sim}\\otimes^{\\mathrm{sys}}\\circ\\mathrm{swap}$ represented on flat-term K-flat complexes by the signed total swap $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ on bidegree $(i,j)$. Hence for the reduced arrows $\\mathcal R_Wa,\\mathcal R_Wb$, arbitrary morphisms of the derived category and not necessarily chain maps, $\\sigma_{\\mathcal R_WM',\\mathcal R_WN'}\\circ(\\mathcal R_Wa\\otimes^{\\mathrm{sys}}\\mathcal R_Wb)=(\\mathcal R_Wb\\otimes^{\\mathrm{sys}}\\mathcal R_Wa)\\circ\\sigma_{\\mathcal R_WM,\\mathcal R_WN}$. For chain maps $u,v$ between flat-term K-flat complexes this is the direct check: both composites send $x\\otimes y$ to $(-1)^{ij}v(y)\\otimes u(x)$. The signed swap commutes with $d(x\\otimes y)=dx\\otimes y+(-1)^ix\\otimes dy$, so it is a chain map.",
+   "text": "For each integral pair, package the completed-braiding component as an isomorphism in the constructible full subcategory. Unfolding the tensor model, reduction tensor comparison and swapped model cancels inverse/hom pairs; the adjunction counit naturality gives exactly the normalization equation defining `pullbackTensorIntegralBraiding_existsUnique`. Its uniqueness therefore identifies the chosen integral braiding component with the completed-braiding component.",
    "uses": [
-    "def-pur-ringed-site-signed-tensor-models"
+    "def-pod-integral-tensor-constraints",
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-finite-pullback-tensor-braiding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, coherent reduction normalization"
+   }
+  },
+  {
+   "text": "Apply full-subcategory hom extensionality to the desired equality, rewrite both selected components using the normalization theorem, and finish with naturality of the completed braiding isomorphism. This proves the equality for arbitrary integral arrows, including identities, zero arrows, repeated objects, and the zero object.",
+   "uses": [
+    "def-pod-integral-tensor-constraints",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-finite-pullback-tensor-braiding"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality"
-   }
-  },
-  {
-   "text": "Substituting Step 1 and Step 2, $\\mathcal R_W(\\beta^{\\mathrm{int}}_{M',N'}\\circ T^{\\mathrm{int}}_{E,W}(a,b))=c_{N',M'}^{-1}\\circ\\sigma\\circ(\\mathcal R_Wa\\otimes^{\\mathrm{sys}}\\mathcal R_Wb)\\circ c_{M,N}=c_{N',M'}^{-1}\\circ(\\mathcal R_Wb\\otimes^{\\mathrm{sys}}\\mathcal R_Wa)\\circ\\sigma\\circ c_{M,N}=\\mathcal R_W(T^{\\mathrm{int}}_{E,W}(b,a)\\circ\\beta^{\\mathrm{int}}_{M,N})$; the middle comparisons $c_{N,M}$ cancel. Both composites are morphisms $T^{\\mathrm{int}}_{E,W}(M,N)\\to T^{\\mathrm{int}}_{E,W}(N',M')$ between derived-complete bounded constructible integral objects, because the integral tensor preserves this category [def-weil-derived-pullback-tensor-hom]. Coherent reduction is fully faithful, hence faithful, on that category by [lem-pod-integral-system-reduction-fully-faithful], so the two integral composites are equal. The argument applies to arbitrary $a$ and $b$, including identity and zero arrows and the zero object. No finite-field, perfectness, boundedness or torsion-freeness assumption is used beyond the constructible integral category.",
-   "uses": [
-    "def-pod-integral-tensor-constraints",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-pod-integral-system-reduction-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality; specialization to the coherently reduction-normalized completed integral tensor"
+    "place": "Tag 0FPQ, naturality square"
    }
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-finite-pullback-tensor-braiding",
   "def-pod-integral-tensor-constraints",
-  "def-pur-completed-pullback-tensor-comparison",
-  "def-pur-ringed-site-signed-tensor-models",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pod-integral-system-reduction-fully-faithful"
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "R4",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), with the completed coherent-reduction specialization fixed by the prescribed integral tensor constraints"
+  "place": "Tag 0FPQ, completed tensor model normalization followed by categorical braiding naturality"
  },
  "mathlib_searches": [
   {
@@ -150,5 +148,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Lean statement matches node clause by clause (prime, finite E/Q_l, W with l invertible, arbitrary M M' N N' a b, diagrammatic order of the naturality square correct, endpoints T(M,N) to T(N',M')); lean.statement verbatim (diff). Uses the def-pod-integral-tensor-constraints declaration pullbackTensorIntegralBraiding itself; same universe/binders as the dep. True: braiding pinned by R(e) then c = c then sigma, sigma is a NatIso, reduction_tensor proves c natural, coherentReduction fully faithful; identical private lemmas already proved (DerivedPullbackTensorIso:438, CompletedTensorHomTranspose:331), so no public duplicate exists. proof_deps = union of step uses; all owner modules exist and are imported; statement owner public import. Stacks 0FPQ checked. No new defs, sorry only, docstrings carry source and blueprint tags; Worker report and Second reading present. Advisories: docstring does not name def-pod-integral-tensor-constraints or def-coef-ringed-sequence-site; tensor and category owners cited only transitively. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261028T020710-L-2538868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
