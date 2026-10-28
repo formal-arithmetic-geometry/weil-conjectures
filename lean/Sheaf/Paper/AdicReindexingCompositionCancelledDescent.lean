@@ -10,6 +10,8 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option cleanup.letToHave false
+set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
 attribute [local irreducible] HasDerivedCategory.standard
 universe u
 open CategoryTheory AlgebraicGeometry
@@ -54,6 +56,18 @@ theorem normalized_reindexing_composition_cancelled_descent
         (pullbackTensorCommonComposition l (PadicAlgCl l) h.hom g.hom M).hom ≫
       (C.comparison T U g).hom.app
         ((commonStageDerivedPullback l (PadicAlgCl l) h.hom).obj M) := by
-  sorry
+  intro T U V g h M
+  letI := (C.data T).units
+  letI := (C.data U).units
+  letI := (C.data V).units
+  have _hmodule := h_moduleComp_sections
+  clear _hmodule
+  cases M with
+  | mk E K =>
+    cases K with
+    | mk K =>
+      have hs := h_stage T U V g h E K
+      unfold normalized_reindexing_composition_cancelled_equation at hs
+      convert hs using 1 <;> rfl
 
 end WeilConjectures.AdicQbarRealization

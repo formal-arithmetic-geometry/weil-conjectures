@@ -20768,3 +20768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: merged deliver/A7/Sheaf.SixFunctors.FiniteIntrinsicTensorSymmetry (stage 3; reviewer PASS; first push; landing 20261028T034650-L-3529080 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:46 L: merged deliver/A8/Sheaf.Paper.ScalarTowerTensorLimitStrictEquationAssembly (stage 3; reviewer PASS; first push; landing 20261028T034652-L-3529322 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:46 L: merged deliver/A9/Sheaf.Paper.ConstantAdicQuotientRealizationScalarReduction (stage 3; reviewer PASS; first push; landing 20261028T034653-L-3529470 (proof); batch 20261028T034643; modules 1; new nodes 0)
+- 03:46 L: merged deliver/B2/Sheaf.Paper.AdicReindexingCompositionCancelledDescent (stage 3; reviewer PASS; first push; landing 20261028T034654-L-3529658 (interface); batch 20261028T034643; modules 1; new nodes 0)
