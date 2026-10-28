@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-target-projection-model-iso",
+ "kind": "statement",
+ "title": "Target projection model transport for ordinary finite reduction",
+ "statement": "For the constant-completion coefficient data, the completed pullback followed by change of scalars along the target projection is naturally isomorphic to change(projection J A I n) followed by pullback along constantMap F (A / I^(n+1)).",
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL and 093M; target quotient and scalar-associativity transport"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetIso",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite quotient coefficient comparison whiskered by a pullback functor",
+   "results": "No exact project-level target transport declaration; the proved finiteComparison API is used.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isoWhiskerLeft finiteComparison change projection quotient",
+   "results": "Generic whiskering and finite comparison only; no specialized target theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryReducedPull_targetQuotientIso ordinaryReducedPull_targetProjectionIso",
+   "results": "No existing declaration; these are the new split nodes.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "proof": [
+  {
+   "text": "Use the second-site quotient identification, the projection equation for completedMap, and normalized scalar associativity for the inverse-image algebra.",
+   "uses": [
+    "lem-weil-pbc-common-quotient-ordinary-insertion",
+    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-common-quotient-ordinary-insertion",
+  "lem-weil-pbc-sectionwise-adic-algebra-limit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C6",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL and 093M; target projection and scalar-associativity transport"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetProjectionModelIso",
+  "file": "lean/Sheaf/Paper/ConstantCompletionOrdinaryReducedPullTargetProjectionModelIso.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.ordinaryReducedPull_targetProjectionIso",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28",
+  "statement": "theorem ordinaryReducedPull_targetProjectionIso (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) : Nonempty ((pull F (completedMap F A I) ⋙ change (projection J' A I n)) ≅ (change (projection J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1)))))",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.ordinaryReducedPull_targetProjectionIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T020238-L-2484769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261028T020238-L-2484769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullSourceIso
+import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetProjectionIso
+import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetProjectionModelIso
 
 /-! # Target transport for ordinary finite reduction
 
@@ -28,6 +30,7 @@ variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [PreservesFiniteLimits L]
 
+omit [PreservesFiniteLimits L] in
 /-- The target finite reduction has a transport to the same finite quotient model as
 the source reduction.  This is the target half of the common-quotient argument.
 Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M.
@@ -41,6 +44,8 @@ theorem ordinaryReducedPull_targetIso (A : Type u) [CommRing A] [IsNoetherianRin
         change (quotient J' A I n)) ≅
       (change (projection J A I n) ⋙
         pull F (constantMap F (A ⧸ I ^ (n + 1))))) := by
-  sorry
+  obtain ⟨e₁⟩ := ordinaryReducedPull_targetQuotientIso F A I n
+  obtain ⟨e₂⟩ := ordinaryReducedPull_targetProjectionIso F A I n
+  exact ⟨e₁ ≪≫ e₂⟩
 
 end CategoryTheory.ConstantCompletion
