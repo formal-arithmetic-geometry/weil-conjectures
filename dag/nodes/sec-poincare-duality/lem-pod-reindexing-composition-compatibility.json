@@ -1,0 +1,139 @@
+{
+ "id": "lem-pod-reindexing-composition-compatibility",
+ "kind": "statement",
+ "title": "Composition compatibility for section-normalized ordinary reindexing",
+ "statement": "Fix a prime l and a finite field extension E of Q_l in universe u. Let A be a PodReindexFamily l E [def-pod-completion-reindex-coherence]. Suppose its completion and tensor components satisfy PodCompletionReindex.Laws [def-pod-completion-reindex-models] and PodCompletedTensorReindex.Laws [def-pod-completion-tensor-normalization] for every isomorphism between schemes on which l is invertible. If its composition comparison is the specified Over.mapComp restriction on every original local section, then A.Composition l E holds: its reduction, total-limit and completed-tensor comparisons satisfy the three composition equations of [def-pod-completion-reindex-coherence]. Only this one comparison is required to be section-normalized; no other coherence law is assumed.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-coherence",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Identify the entire strict quotient and restricted-tower comparison on generators; use every product projection and both Roos coordinates to prove the composition equation for the whole chain maps. The source and target Roos models have the same K-injective normalization, so their comparison maps cancel; naturality and localization give the total-limit equation on arbitrary systems.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-coherence",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unit and Counit identify the specified reduction comparison with the mate of its limit comparison. Take mates of the preceding equation and cancel the actual adjunction unit and counit by the triangle identities. This gives the reduction equation on all ambient derived objects.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On flat-term K-flat representatives of the two constructible inputs, apply Generators to every homogeneous tensor summand and the strict transition formulas to the entire tower. The two Roos-coordinate equations identify the whole chain maps. Substitute Model and cancel the normalized tensor representative isomorphisms; naturality transports the equation to the original constructible inputs. No finite derived evaluation is assumed faithful.",
+   "uses": [
+    "def-pod-completion-tensor-normalization",
+    "def-pod-completion-reindex-models",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coherence",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pod-completion-tensor-normalization",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition laws for normalized sheaf reindexing, derived completion and completed tensor",
+   "results": "Eight hits, including sheafPushforwardContinuousId, sheafPushforwardContinuousId', pushforward_comp_id and sheafificationNatIso. These are ordinary categorical comparison tools and do not assert the fixed completion/tensor model compatibility.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for this compatibility statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition coherence of normalized derived completion and tensor reindexing",
+   "results": "Eight hits about AdicCompletion tensor comparison; none addresses the fixed sheaf reindexing family or its normalized derived comparisons.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardNatIso",
+   "results": "pushforwardNatIso and its hom and inv formulas construct ordinary module relabellings; they do not assert compatibility with the specified derived completion/tensor models.",
+   "date": "2026-10-28",
+   "verdict": "Useful for the ordinary construction in the parent, not a proof of this compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "PodReindexFamily.(Identity|Composition)",
+   "results": "msearch grep returned zero hits; direct reading of PodCompletionReindexCoherence found the predicates, and rg found no existing theorem proving these separate compatibility laws.",
+   "date": "2026-10-28",
+   "verdict": "No existing compatibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorFamilyIdentityComposition",
+  "date": "2026-10-28",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport.",
+   "via": [
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingCompositionCompatibility",
+  "file": "lean/Sheaf/Paper/PodReindexingCompositionCompatibility.lean",
+  "declaration": "WeilConjectures.podReindexingCompositionCompatibility",
+  "statement": "theorem podReindexingCompositionCompatibility\n    (A : PodReindexFamily l E)\n    (hcompletion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]\n      [∀ v : V, Invertible (l : V.residueField v)]\n      [∀ w : W, Invertible (l : W.residueField w)],\n      PodCompletionReindex.Laws l E f (A.completion f))\n    (htensor : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]\n      [∀ v : V, Invertible (l : V.residueField v)]\n      [∀ w : W, Invertible (l : W.residueField w)],\n      PodCompletedTensorReindex.Laws l E f (A.completion f) (A.tensor f))\n    (hcomposition : ∀ {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)\n      [IsIso h] [IsIso f] (M : scalarReductionSource l E V) (U : Z.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ f)).obj U))),\n      ((A.composition h f).hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)\n          (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x) :\n    A.Composition l E",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261028T020153-L-2474056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261028T020153-L-2474056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
