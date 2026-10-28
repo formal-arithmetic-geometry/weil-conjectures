@@ -5,28 +5,41 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
  "statement": "For fixed finite-field datum, compactification, transported mate record, field stage E and level n under the hypotheses of lem-sf-exceptional-integral-scalar-mates, there exists one ReductionMates record at E and n.",
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sf-exceptional-integral-scalar-transport-data"
+ ],
  "source": {
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
   "place": "Lemma 5.22 and Proposition 5.26, finite-level reduction comparison for one coefficient stage and level."
  },
  "proof": [
   {
-   "text": "Transport the finite-level adjunction units and counits through the chosen reconstruction. Their normalized evaluation equations provide the evaluation isomorphism and the normalized, q, and b equations required by ReductionMates.",
+   "text": "Construct the two canonical finite evaluation isomorphisms by full-inclusion lifting; their ambient normalizations are integralReductionEvaluation_normalized.",
    "uses": [
-    "lem-sf-exceptional-integral-scalar-mates-data-mates",
-    "lem-sf-exceptional-system-transport",
-    "lem-sf-exceptional-finite-scalar-mates"
+    "lem-sf-exceptional-integral-reduction-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized left reduction square. Derive the system reduction counit by equivalence conjugation from adjunction_eq and reductionF_eq/reductionG_eq, and then evaluate it using evaluation_counit. The finite counit equation for d and injectivity of the target adjunction Hom bijection force the right reduction square. Assemble these four fields into ReductionMates.",
+   "uses": [
+    "lem-sf-exceptional-integral-reduction-left-compatibility",
+    "lem-pur-adjoint-equivalence-conjugation-calculus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-exceptional-integral-scalar-mates-data-mates",
-  "lem-sf-exceptional-system-transport",
-  "lem-sf-exceptional-finite-scalar-mates"
+  "lem-sf-exceptional-integral-reduction-evaluation",
+  "lem-sf-exceptional-integral-reduction-left-compatibility",
+  "lem-pur-adjoint-equivalence-conjugation-calculus"
  ],
- "proof_origin": "stage-3 decomposition of the quantified reduction-data assertion into one fixed field stage and level",
+ "proof_origin": {
+  "by": "agent",
+  "group": "M5",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Finite reduction step: canonical evaluation, left square, then uniqueness of the counit-normalized right mate."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -92,11 +105,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
-  "result": "pass",
-  "landing": "20261028T020638-L-2534416",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-450b4",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261028T072432-L-1946971",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs published item (verbatim except evaluationRealization + evaluation_normalized), nodes vs Lean, 4 delivered modules + 6 direct importers compiled in a sandbox (all OK), #print axioms"
  }
 }

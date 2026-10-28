@@ -1,0 +1,130 @@
+{
+ "id": "def-sf-exceptional-integral-scalar-transport-data",
+ "kind": "definition",
+ "title": "Exceptional integral scalar transport data and ambient evaluation",
+ "statement": "Retain the actual coefficient stages, normalized strict systems, reconstruction equivalences, scalar mate records, transported adjunction, and reduction/system comparison records of lem-sf-exceptional-integral-scalar-mates. For a reconstruction R at E,T and positive level n+1, define its ambient evaluation isomorphism from the finite evaluation of R.equivalence.functor to ordinary finite derived tensor by composing R.evaluation_eq, R.reduction, and R.calculus.reductionEvaluation. Normalize ReductionMates.evaluation using this isomorphism, the inverse canonical PurCompactSupport.finiteReductionIso between the two recorded derived tensors, and the inverse scalar equality realization. The other data and signatures are unchanged.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemma 5.22 and Proposition 5.26; normalized reduction and exceptional mate compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-integral-scalar-extension",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-sequence-site",
+  "def-pur-coefficient-extension-reduction-data",
+  "def-sf-integral-system-operations",
+  "def-pur-system-level-left-extension-basic",
+  "def-sf-integral-system-realization-data",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-expression-domain",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-compact-support-finite-action",
+  "def-pur-completed-scalar-shift-coordinates",
+  "def-sf-positive-ramification-subsequence",
+  "def-sf-equivalence-adjunction-realization",
+  "def-sf-finite-tor-integral-inclusion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of right adjoint mate with a natural isomorphism of scalar functors",
+   "results": "Adjunction.ofNatIsoRight, adjoint uniqueness and generic scalar adjunctions; no specialized exceptional reduction comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift natural isomorphism of functors through a full faithful inclusion",
+   "results": "Functor.fullyFaithfulCancelRight and its component formula supply the full-inclusion lifting step.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|fullyFaithfulCancelRight",
+   "results": "Found the Mathlib mate counit identity and fullyFaithfulCancelRight; no specialized construction of the fixed coefficient comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-28",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-integral-scalar-mates",
+   "place": "Step 1: normalized finite reduction of the reconstructed exceptional adjunction.",
+   "via": [
+    "Sheaf.Paper.ExceptionalIntegralScalarMates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralScalarMatesData",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralScalarMatesData.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.Reconstruction.evaluationRealization",
+  "statement": "def Reconstruction.evaluationRealization (E : FieldStage.{u} l) (T : Scheme.{u}) (R : Reconstruction l E T) (n : ℕ) : (R.equivalence.functor ⋙ R.evaluation n) ⋙ (finiteTorConstructible l E.carrier (n + 1) (Nat.succ_pos n) T).ι ≅ (finiteTorConstructibleIntegral l E.carrier T).ι ⋙ coefficientFiniteDerivedExtension l E.carrier T n",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.inclusionShift",
+   "WeilConjectures.ExceptionalIntegralScalar.rings",
+   "WeilConjectures.ExceptionalIntegralScalar.evaluation",
+   "WeilConjectures.ExceptionalIntegralScalar.systemBounds",
+   "WeilConjectures.ExceptionalIntegralScalar.systemProperty",
+   "WeilConjectures.ExceptionalIntegralScalar.Recovery",
+   "WeilConjectures.ExceptionalIntegralScalar.sequenceProperty",
+   "WeilConjectures.ExceptionalIntegralScalar.Reconstruction",
+   "WeilConjectures.ExceptionalIntegralScalar.Reconstruction.evaluationRealization",
+   "WeilConjectures.ExceptionalIntegralScalar.Mates",
+   "WeilConjectures.ExceptionalIntegralScalar.Mates.q",
+   "WeilConjectures.ExceptionalIntegralScalar.Mates.b",
+   "WeilConjectures.ExceptionalIntegralScalar.Transported",
+   "WeilConjectures.ExceptionalIntegralScalar.RamifiedMap",
+   "WeilConjectures.ExceptionalIntegralScalar.ReductionMates",
+   "WeilConjectures.ExceptionalIntegralScalar.SystemMates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-450b4",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261028T072432-L-1946971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-450b4",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261028T072432-L-1946971",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs published item (verbatim except evaluationRealization + evaluation_normalized), nodes vs Lean, 4 delivered modules + 6 direct importers compiled in a sandbox (all OK), #print axioms"
+ }
+}

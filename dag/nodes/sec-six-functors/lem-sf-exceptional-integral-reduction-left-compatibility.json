@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-exceptional-integral-reduction-left-compatibility",
+ "kind": "lemma",
+ "title": "Left exceptional mate commutes with canonical finite reduction",
+ "statement": "Under the hypotheses and given transport and mate record of lem-sf-exceptional-integral-scalar-mates, for each E,n and integral finite-Tor input K, the scalar left mate followed by the finite exceptional functor applied to the canonical reduction evaluation equals canonical reduction evaluation of the integral exceptional image followed by evaluation of transport.reductionF and transport.evaluationF. Only this left comparison square is asserted; no right mate, evaluation construction, or whole-system scalar comparison is assumed or concluded.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemma 5.22 and Proposition 5.26; normalized reduction and exceptional mate compatibility."
+ },
+ "stmt_deps": [
+  "def-sf-exceptional-integral-scalar-transport-data",
+  "lem-sf-exceptional-integral-reduction-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the faithful finite full inclusion. Expand the canonical evaluation and d.comparison_normalized, retaining finiteReductionIso between the distinct quotient tensors. The recorded integral support identification, transport.integral_system_normalized, transport.reductionF_eq and transport.evaluation_support identify the resulting proper/open comparison with the evaluated reconstructed map. Cancel invertible scalar and left realizations. All system naturality is used before evaluating.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M5",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemma 5.22 and Proposition 5.26; normalized reduction and exceptional mate compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of right adjoint mate with a natural isomorphism of scalar functors",
+   "results": "Adjunction.ofNatIsoRight, adjoint uniqueness and generic scalar adjunctions; no specialized exceptional reduction comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift natural isomorphism of functors through a full faithful inclusion",
+   "results": "Functor.fullyFaithfulCancelRight and its component formula supply the full-inclusion lifting step.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|fullyFaithfulCancelRight",
+   "results": "Found the Mathlib mate counit identity and fullyFaithfulCancelRight; no specialized construction of the fixed coefficient comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical API; the specialized coefficient normalization is project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-28",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-integral-scalar-mates",
+   "place": "Step 1: normalized finite reduction of the reconstructed exceptional adjunction.",
+   "via": [
+    "Sheaf.Paper.ExceptionalIntegralScalarMates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralReductionLeftCompatibility",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralReductionLeftCompatibility.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.integralReductionLeftCompatibility",
+  "statement": "theorem integralReductionLeftCompatibility (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {X Y : Scheme.{u}} {f : X ⟶ Y} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)) (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)) (transport : Transported l Ω D hl c operation left) (d : Mates l Ω c operation left) (E : FieldStage.{u} l) (n : ℕ) : ∀ K : C.{u} l Ω X (.integral E), (Mates.q l Ω d (s := .integral E) (t := .finite E ⟨n + 1, Nat.succ_pos n⟩) (PurCompactSupport.reduction l E.carrier (n + 1) (Nat.succ_pos n)) (Allowed.reduction E ⟨n + 1, Nat.succ_pos n⟩)).hom.app K ≫ (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩)).F.map ((integralReductionEvaluation l Ω d E n true (transport.reconstruction E true)).hom.app K) = (integralReductionEvaluation l Ω d E n false (transport.reconstruction E false)).hom.app ((operation (.integral E)).F.obj K) ≫ ((transport.reconstruction E false).evaluation n).map ((transport.reductionF E).hom.app K) ≫ (transport.evaluationF E n).hom.app ((transport.reconstruction E true).equivalence.functor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-450b4",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261028T072432-L-1946971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-450b4",
+  "group": "M5",
+  "result": "fix",
+  "landing": "20261028T072432-L-1946971",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs published item (verbatim except evaluationRealization + evaluation_normalized), nodes vs Lean, 4 delivered modules + 6 direct importers compiled in a sandbox (all OK), #print axioms"
+ }
+}
