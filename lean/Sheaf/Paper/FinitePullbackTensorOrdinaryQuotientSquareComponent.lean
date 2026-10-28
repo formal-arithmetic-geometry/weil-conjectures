@@ -6,6 +6,7 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.Paper.FinitePullbackTensorKFlatNormalization
+import Sheaf.Paper.FinitePullbackTensorOrdinaryQuotientSquarePure
 
 /-! Fixed-degree component of the ordinary quotient/pullback tensor square.
 Source: Stacks Tags 03EL, 06YY and 07A4.
@@ -104,7 +105,16 @@ theorem finitePullbackTensor_ordinary_quotient_square_component {X Y : Scheme.{u
         (coefficientFiniteQuotientUnitSection l E Y h) P Q ay →
       ((GX.map km.hom ≫ ax.hom ≫ TXn.map
           (Prod.mkHom (cc.hom.app P) (cc.hom.app Q))).f i) =
-        (cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom).f i := by sorry
+        (cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom).f i := by
+  dsimp
+  intro km kn ax ay hkm hkn hax hay
+  let adjX := (pullbackTensorCalculus l E X).quotientCalculus.ordinaryAdjunction h
+  let adjF := sfIntrinsicConstantModuleAdjunction f
+    (finiteCoefficientRing l E (m + 1))
+  apply (adjX.homEquiv _ _).injective
+  apply (adjF.homEquiv _ _).injective
+  exact finitePullbackTensor_ordinary_quotient_square_pure l E f h c hc cc hcc P Q i
+    km kn ax ay hkm hkn hax hay
 
 
 end WeilConjectures
