@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarComparisonCanonicalTransition
 
 /-! # Transition coherence for the open scalar comparison
 
@@ -53,6 +54,9 @@ theorem openQuotientScalarComparisonTransition
         (level (n + 1) Q).hom.f i ≫
           ((OpenSemilinearTensor.extensionComplex l E j o).map
             ((unrestrictedIntegralTransition l E U n).app Q)).f i := by
-  sorry
+  intro n Q i
+  rw [components n Q i, components (n + 1) Q i]
+  exact openQuotientScalarComparisonCanonicalTransition l E j o tc sc n Q i
+
 
 end WeilConjectures.OpenTensorQuotient
