@@ -1,0 +1,121 @@
+{
+ "id": "lem-coef-hom-scalar-naturality",
+ "kind": "lemma",
+ "title": "Natural scalar Hom comparison for a prescribed quotient-system complex",
+ "statement": "Let l be a prime, E a finite-dimensional field extension of Padic l and X a scheme. Fix a cochain complex Q of modules over the quotient ringed sequence site [def-coef-ringed-sequence-site], and a coefficient derived-system calculus S [lem-coef-derived-system-evaluation-calculus]. On the opposite ordinary unbounded completed-coefficient module derived category, the following functors are naturally isomorphic: (1) derived constant input, followed by constant-ring sequence-site internal Hom into the inverse constant-sequence realization of the completed restriction of Q, followed by R-linear derived sections retaining the tower index [lem-coef-hom-tower-scalar-model]; (2) coefPairingHom S Q, namely quotient-linear internal Hom from S.reduction of the input into Q, followed by coefPairingSections [lem-coef-tower-evaluation-pairing]. The precise functors and their scalar actions are those in the attached Lean statement. This constructs no model Q and assumes no normalized DVR tower.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-hom-tower-scalar-model",
+  "lem-coef-tower-evaluation-pairing"
+ ],
+ "proof": [
+  {
+   "text": "Use the sequence-site scalar internal-Hom adjunction for the completion-projection ring map, with the constant completed input and Q, naturally in the input. Identify restriction with inverse constant-sequence realization and apply the actual derived scalar-section square.",
+   "uses": [
+    "lem-coef-hom-tower-scalar-model",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the constant-tower/limit adjunction with scalar extension/restriction. Its right adjoint is coefficientSequenceLimit. Uniqueness of left adjoints compares this extension of the constant input to S.reduction, and normalization identifies their units. Whisker the resulting contravariant natural isomorphism through quotient internal Hom and coefPairingSections. Every comparison is a natural transformation before restriction to constructibles.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-hom-tower-scalar-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hom-tower-scalar-model",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "A strictly smaller independent part of the parent: scalar Hom naturality for prescribed Q, with no normalized-tower realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar internal Hom adjunction gives a natural isomorphism between Hom from a constant completed input into a restricted quotient system and quotient Hom from the normalized derived reduction",
+   "results": "8 hits, including DerivedCategory.quotientCompQhIso and LightCondensed.ihomPoints; no comparison of these project-specific functors.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Generic uniqueness of left adjoints.",
+   "date": "2026-10-28",
+   "verdict": "Identifies reduction once the same right adjoint and its scalar/constant composition are exhibited."
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft|leftAdjointUniq|scalarHomCanonicalIso",
+   "results": "25 Mathlib hits, including Adjunction.leftAdjointUniq and Functor.isoWhiskerLeft. Read CoefHomTowerScalarModel and CoefPairingHomRepresentativeComparison locally.",
+   "date": "2026-10-28",
+   "verdict": "The scalar theorem supplies the bifunctor comparison; the existing representative theorem is only objectwise and does not supply this natural isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-mapping-tower-system-model"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerSystemModel",
+  "date": "2026-10-28",
+  "group": "Q8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefHomScalarNaturality",
+  "file": "lean/Sheaf/SixFunctors/CoefHomScalarNaturality.lean",
+  "declaration": "WeilConjectures.coefHom_scalar_naturality",
+  "statement": "theorem coefHom_scalar_naturality\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (S : CoefficientDerivedSystemCalculus l E X) :\n    Nonempty (\n      (coefHomDerivedConstant l E X).op ⋙\n        (Functor.curry.obj (coefHomConstantInternalHom l E X)).flip.obj\n          ((coefHomEquivalence l E X).inverse.mapDerivedCategory.obj\n            ((coefficientSequenceDerivedRestriction l E X).obj (coefTraceInput l E X Q))) ⋙\n        coefHomConstantDerivedSections l E X ≅ coefPairingHom l E X S Q)",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T055738-L-803618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T055738-L-803618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,12 +6,15 @@ Authors: SHEAF group M7
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingMappingTower
+import Sheaf.SixFunctors.NormalizedDVRQuotientSystemRealization
+import Sheaf.SixFunctors.CoefHomScalarNaturality
 
 /-! # Scalar realization of a normalized tower as a quotient system -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
@@ -63,6 +66,15 @@ theorem integralDualizing_mapping_tower_system_model
       ∀ S : CoefficientDerivedSystemCalculus l E X,
         Nonempty (integralDualizingMappingTower l E X T.tower ≅
           (sfIntegralConstructible l E X).ι.op ⋙ coefPairingHom l E X S Q) := by
-  sorry
+  obtain ⟨Q, a, ha, ⟨b⟩⟩ := normalizedDVR_quotient_system_realization l E X D hl T
+  refine ⟨Q, a, ha, ?_⟩
+  intro S
+  obtain ⟨c⟩ := coefHom_scalar_naturality l E X Q S
+  let H := (Functor.curry.obj (coefHomConstantInternalHom l E X)).flip
+  let e := H.mapIso ((coefHomEquivalence l E X).inverse.mapDerivedCategory.mapIso b)
+  let d := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft (coefHomDerivedConstant l E X).op e)
+    (coefHomConstantDerivedSections l E X)
+  exact ⟨Functor.isoWhiskerLeft (sfIntegralConstructible l E X).ι.op (d ≪≫ c)⟩
 
 end WeilConjectures

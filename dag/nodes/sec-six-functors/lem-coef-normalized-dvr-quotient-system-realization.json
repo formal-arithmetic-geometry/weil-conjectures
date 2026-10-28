@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-normalized-dvr-quotient-system-realization",
+ "kind": "lemma",
+ "title": "Strict quotient-system representative of one normalized DVR tower",
+ "statement": "Let l be a prime, E a finite-dimensional field extension of Padic l, X a scheme, D a finite-field datum, and hl : l ≠ D.p. Let T be a normalized DVR tower [def-coef-normalized-dvr-tower]. There is a cochain complex Q over the quotient ringed sequence site [def-coef-ringed-sequence-site], with isomorphisms a_n : T.M n ≅ ev_n(Q), such that tau_(m,n) followed by Res(a_n) equals a_m followed by the quotient-system transition for every n ≤ m. Moreover T.tower is isomorphic, in the derived category of strict completed-coefficient towers, to the completed scalar restriction of Q. No Hom comparison is asserted. The coefficient-derived functors and localization are precisely those in the attached Lean statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-coef-ringed-sequence-site",
+  "def-coef-integral-dualizing-mapping-towers"
+ ],
+ "proof": [
+  {
+   "text": "Recursively represent the successor finite derived morphism by a source roof, using DerivedCategory.right_fac. Start with any representative of T.M 0; choose each next roof middle complex as the next representative. Scalar restriction is exact. This is the same finiteModel construction already used by NormalizedDVRAdicConeModel.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the quotient-linear successor chain maps, and transpose their degree and system indices. The equivalence from strict ring systems to modules on the quotient ringed sequence site gives Q. The roof isomorphisms give a_n. The roof equation proves successor compatibility; induction using the restriction composition and T.tau_comp proves the displayed square for every pair, including the identity using T.tau_refl.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict Q along the completion projections. Their limit-cone identity identifies its finite evaluations and transitions with the restrictions of Q_n. Compose the restricted a_n with T.evaluationIso. The displayed coherence and T.tower_tau give a compatible family of completed-coefficient derived evaluation isomorphisms. Sequential tower fullness lifts this fixed family and its isomorphism criterion gives the asserted tower isomorphism.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-pbc-sequential-tower-evaluation-full"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-coef-normalized-dvr-tower",
+  "lem-pur-system-ringed-sequence-site",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-pbc-sequential-tower-evaluation-full"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+  "note": "A strictly smaller independent part of the parent: geometric quotient-system realization, with no Hom functor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear inverse sequence in derived categories of quotient modules admits a strict quotient system complex with compatible evaluation isomorphisms",
+   "results": "8 hits, including Profinite.NobelingProof.succ_exact and IsAdicComplete.StrictMono.lift; none about semilinear complexes over a ringed sequence site.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.right_fac",
+   "results": "1 hit: DerivedCategory.right_fac in Mathlib.Algebra.Homology.DerivedCategory.Fractions. It supplies the source roof for one arrow.",
+   "date": "2026-10-28",
+   "verdict": "Useful for the recursive successor step, not the full realization."
+  },
+  {
+   "tool": "grep",
+   "query": "strictSystemSequenceEquivalence|StrictRingSystem|right_fac",
+   "results": "11 Mathlib hits: DerivedCategory.right_fac and its bounded variants, plus unrelated pullback/pushout factorization names. Local source inspection finds strictSystemSequenceEquivalence and the finiteModel recursion in NormalizedDVRAdicConeModel.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing constructions; no theorem already combines the quotient model and prescribed strict completed tower."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-integral-dualizing-mapping-tower-system-model"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerSystemModel",
+  "date": "2026-10-28",
+  "group": "Q8"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.NormalizedDVRQuotientSystemRealization",
+  "file": "lean/Sheaf/SixFunctors/NormalizedDVRQuotientSystemRealization.lean",
+  "declaration": "WeilConjectures.normalizedDVR_quotient_system_realization",
+  "statement": "theorem normalizedDVR_quotient_system_realization\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (T : NormalizedDVRTower l E X D hl) :\n    ∃ (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n      (a : ∀ n : ℕ, T.M n ≅\n        (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q)),\n      (∀ {m n : ℕ} (h : n ≤ m),\n        T.tau h ≫ (normalizedDVRRes l E X h).map (a n).hom =\n          (a m).hom ≫ (coefficientSequenceDerivedTransition l E X h).app\n            (coefTraceInput l E X Q)) ∧\n      Nonempty (T.tower ≅ (coefficientSequenceDerivedRestriction l E X).obj\n        (coefTraceInput l E X Q))",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T055738-L-803618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T055738-L-803618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
