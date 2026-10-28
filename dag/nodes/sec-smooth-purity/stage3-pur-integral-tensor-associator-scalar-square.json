@@ -1,0 +1,133 @@
+{
+ "id": "stage3-pur-integral-tensor-associator-scalar-square",
+ "kind": "statement",
+ "title": "Integral scalar square for the normalized tensor associator",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$, and a scheme $W$ on which $\\ell$ is invertible in every residue field. In the integral complete constructible categories of [def-weil-derived-complete-integral-detailed], let $T_F$ be the restricted completed tensor and $B$ the completed scalar extension from [def-sf-finite-rational-derived-operations, def-weil-integral-scalar-extension]. Let $a_F$ be precisely pullbackTensorIntegralAssociator from [def-pod-integral-tensor-constraints], and $b$ precisely integralTensorScalarComparison from [def-sf-finite-rational-derived-operations]. For every integral $X,Y,Z$, with semicolons denoting left-to-right composition, $B(a_E(X,Y,Z));b_{X,T_E(Y,Z)};T_L(1,b_{Y,Z})=b_{T_E(X,Y),Z};T_L(b_{X,Y},1);a_L(BX,BY,BZ)$. This asserts only the integral scalar square; it does not assert rational naturality or any rational compatibility. No finite-Tor or finite-type assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof by simultaneous flat-term K-flat representatives; integral Step 1 of lem-pur-rational-tensor-associator-scalar-square. The completed associator reduction/counit pasting is the original agent expansion, not a claim that Tag 07A4 alone states the integral square."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "def-sf-finite-rational-derived-operations",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "Work first with integral objects. Under the prime, finite-field, embedding and scheme hypotheses of the primitive-scalar existence node, use the ambient comparison-system family to choose the normalized primitive scalar model $S_Y$ and normalized Roos models. Choose $T_E,T_L$ to be the tensor model realizations supplied by the stage3 tensor-model normalization; their reduction transports are the fixed calculus transports. The reduction-intertwining node says, for every such $S_Y$, that $\\gamma$ is the invertible $\\operatorname{scalarReduction}_{S_Y}$ comparison and gives its same-index quotient component. Instantiate the stage3 scalar/tensor limit-square with these $S_Y,T_E,T_L$ and the chosen Roos models. It identifies the completed scalar/tensor comparison with the two scalarReduction maps and $\\mathrm{derivedSigma}$. To pass from that total-limit equation to the reduction of the candidate integral composites, apply coherent reduction, use counit naturality and the derived-limit comparison of [lem-pur-scalar-extension-tower-coherence], and cancel the invertible maps $\\gamma$, $\\gamma\\otimes(\\gamma\\otimes\\gamma)$ and the fixed tensor reduction comparison $r$. The fixed-calculus system-associator node then replaces the two nested derivedSigma composites by the actual `systemClosed.monoidal` associator. Thus the two coherent reductions over $\\mathcal O_L$ agree. Fully-faithful coherent reduction reflects this equality, and the defining uniqueness of the normalized integral associator identifies the reflected maps with the prescribed integral associators. This proves\n$$B_{L/E}(\\alpha^{\\rm int,E});B^{\\otimes,\\rm r}=B^{\\otimes,\\rm l};\\alpha^{\\rm int,L}.$$",
+   "uses": [
+    "lem-trf-ambient-comparison-system-existence",
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "stage3-pur-scalar-tensor-model-normalization",
+    "lem-pur-integral-scalar-reduction-intertwining",
+    "stage3-pur-scalar-tensor-limit-square",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-system-scalar-associator-coherence",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; coherent reduction, normalized tensor comparison, and strict-system associator pasting"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), with the normalized completed/rational coefficient-extension square expanded from the fixed operation definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associator_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean, Mathlib/CategoryTheory/Monoidal/Free/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal and module scalar-extension results do not identify the prescribed completed integral maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.OplaxMonoidal.id, CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal_injective, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal and module scalar-extension results do not identify the prescribed completed integral maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a tensor associator and compatibility with scalar extension after rational localization",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, IsLocalization.tensorProduct_tensorProduct, IsLocalization.moduleTensorEquiv, IsLocalizedModule.rTensor, IsLocalization.algebraTensorEquiv, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, IsLocalization.tensorProduct_compatibleSMul, IsLocalization.tmul_mk'",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal and module scalar-extension results do not identify the prescribed completed integral maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completed integral tensor associator commutes with scalar extension of finite l-adic coefficient fields",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', AdicCompletion.instSMulCommClass, TensorProduct.AlgebraTensorModule.distribBaseChange, AdicCompletion.ofTensorProduct_tmul, TensorProduct.tensorTensorTensorAssoc, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, TensorProduct.AlgebraTensorModule.leftComm",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidal and module scalar-extension results do not identify the prescribed completed integral maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalTensorAssociatorScalarSquare",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral Step 1 of lem-pur-rational-tensor-associator-scalar-square, before localization; the scalar-associator equation alone.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorAssociatorScalarSquare",
+  "file": "lean/Sheaf/Paper/IntegralTensorAssociatorScalarSquare.lean",
+  "declaration": "WeilConjectures.integralTensorAssociator_scalar_square",
+  "statement": "theorem integralTensorAssociator_scalar_square\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L)\n    (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :\n    ∀ (X Y Z : sfIntegralConstructibleCategory l E W),\n      (sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).map\n          (pullbackTensorIntegralAssociator l E W X Y Z).hom ≫\n        (integralTensorScalarComparison l E L ι W X\n          ((constructibleIntegralTensor l E W).obj (Y, Z))).hom ≫\n        (constructibleIntegralTensor l L W).map\n          (Prod.mkHom (𝟙 _) (integralTensorScalarComparison l E L ι W Y Z).hom) =\n      (integralTensorScalarComparison l E L ι W\n          ((constructibleIntegralTensor l E W).obj (X, Y)) Z).hom ≫\n        (constructibleIntegralTensor l L W).map\n          (Prod.mkHom (integralTensorScalarComparison l E L ι W X Y).hom (𝟙 _)) ≫\n        (pullbackTensorIntegralAssociator l L W\n          ((sfConstructibleIntegralScalarExtension 0 l\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj X)\n          ((sfConstructibleIntegralScalarExtension 0 l\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj Y)\n          ((sfConstructibleIntegralScalarExtension 0 l\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj Z)).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "lem-trf-ambient-comparison-system-existence",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "stage3-pur-scalar-tensor-model-normalization",
+  "lem-pur-integral-scalar-reduction-intertwining",
+  "stage3-pur-scalar-tensor-limit-square",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-pur-system-scalar-associator-coherence",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261028T072347-L-1937219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261028T072347-L-1937219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

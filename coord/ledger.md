@@ -21090,3 +21090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/B4/WeilConjectures.SmoothPurity.Defs (stage 3; reviewer PASS; first push; landing 20261028T072343-L-1936290 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:23 L: merged deliver/B5/Sheaf.Paper.NativeOpenTensorUnitNormalization (stage 3; reviewer PASS; first push; landing 20261028T072344-L-1936616 (interface); batch 20261028T072331; modules 5; new nodes 4)
 - 07:23 L: merged deliver/C1/Sheaf.Paper.ProjectiveSupportedSourceArrowDerived (stage 3; reviewer PASS; first push; landing 20261028T072346-L-1936855 (interface); batch 20261028T072331; modules 6; new nodes 8)
+- 07:23 L: merged deliver/C1/Sheaf.Paper.RationalTensorAssociatorScalarSquare (stage 3; reviewer PASS; first push; landing 20261028T072347-L-1937219 (interface); batch 20261028T072331; modules 2; new nodes 1)
