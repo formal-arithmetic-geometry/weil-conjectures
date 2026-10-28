@@ -20633,3 +20633,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/K1/Sheaf.Paper.IntegralSitePullbackIntegerEndpointMate (stage 3; reviewer PASS; first push; landing 20261028T020526-L-2520884 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:05 L: merged deliver/K1/Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismExistence (stage 3; reviewer PASS; first push; landing 20261028T020527-L-2521143 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:05 L: merged deliver/K1/Sheaf.Paper.PodReindexingHomCoefficientDescent (stage 3; reviewer PASS; first push; landing 20261028T020528-L-2521369 (interface); batch 20261028T020127; modules 4; new nodes 3)
+- 02:05 L: merged deliver/K1/Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateComponentExtensionality (stage 3; reviewer PASS; first push; landing 20261028T020530-L-2521542 (interface); batch 20261028T020127; modules 2; new nodes 1)

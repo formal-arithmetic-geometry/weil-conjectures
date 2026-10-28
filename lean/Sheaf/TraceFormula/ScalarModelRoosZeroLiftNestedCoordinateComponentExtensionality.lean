@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.TraceFormula.NestedChosenScalarTensorValExt
 
 /-! # Nested scalar tensor component extensionality
 
@@ -55,6 +56,7 @@ theorem completedNestedScalarTensor_ext
         ((completedOrdinaryScalarExtension l E L ι X).obj M) U s
         (completedScalarTensorSection l E L ι X M U t x))) :
     f = g := by
-  sorry
+  apply SheafOfModules.hom_ext
+  exact nestedChosenScalarTensor_val_ext l E L F ι j X M Q f g h
 
 end WeilConjectures
