@@ -13,10 +13,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "X7",
+  "group": "H4",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-  "place": "Localization extension and component pasting"
+  "place": "Localization extension: explicit whiskered right path and Localization.natTrans_ext"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -43,10 +43,16 @@
  "statement": "The Qh representative equality extends by exact localization to a natural-transformation equality between the two pasted restriction paths.",
  "proof": [
   {
-   "text": "Use naturality of both paths and the localization extension principle. Equality on Q-images of cochain complexes is the Qh comparison statement; cancellation along the localization factors gives equality on every derived object.",
+   "text": "Construct rhs by whiskering the inverse derived scalar-restriction compositor with the level-r intrinsic equivalence, then composing the inverse level-(r,m) intrinsic comparison whiskered on the left by restriction from n to m and the inverse level-(m,n) comparison whiskered on the right by normalized restriction from m to r. Insert the canonical functor associators between the whiskered transformations. The private restrictionCompRhs_app calculation reduces their identity components and gives the required component formula.",
    "uses": [
-    "lem-coef-dualizing-intrinsic-restriction-comp-qh-x7",
     "lem-coef-dualizing-intrinsic-restriction-comp-lhs-x7"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply CategoryTheory.Localization.natTrans_ext to DerivedCategory.Q and HomologicalComplex.quasiIso. On each Q.obj P, the equality of the constructed rhs and the defined left transformation is exactly finiteDualizingIntrinsicRestriction_comp_Qh. Thus the two natural transformations agree on all derived objects.",
+   "uses": [
+    "lem-coef-dualizing-intrinsic-restriction-comp-qh-x7"
    ],
    "elementary": false
   }
@@ -75,10 +81,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X7",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261028T020858-L-2558766",
-  "kind": "interface",
+  "landing": "20261028T034809-L-3549330",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

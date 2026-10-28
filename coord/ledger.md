@@ -20829,3 +20829,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/H3/Sheaf.Paper.CoefficientDerivedSectionsScalarHomZero (stage 3; reviewer PASS; first push; landing 20261028T034805-L-3545766 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/H3/Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinatesExpanded (stage 3; reviewer PASS; first push; landing 20261028T034806-L-3546891 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:48 L: merged deliver/H4/Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA (stage 3; reviewer PASS; first push; landing 20261028T034807-L-3548105 (interface); batch 20261028T034643; modules 3; new nodes 2)
+- 03:48 L: merged deliver/H4/Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionCompNatTrans (stage 3; reviewer PASS; first push; landing 20261028T034809-L-3549330 (proof); batch 20261028T034643; modules 1; new nodes 0)

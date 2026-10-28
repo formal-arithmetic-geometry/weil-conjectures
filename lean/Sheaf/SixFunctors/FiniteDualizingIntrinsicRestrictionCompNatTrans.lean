@@ -13,6 +13,34 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
+private def restrictionCompRhs
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    {R₀₁ : C₀ ⥤ C₁} {R₁₂ : C₁ ⥤ C₂} {R₀₂ : C₀ ⥤ C₂}
+    {F₀ : C₀ ⥤ D₀} {F₁ : C₁ ⥤ D₁} {F₂ : C₂ ⥤ D₂}
+    {U₀₁ : D₀ ⥤ D₁} {U₁₂ : D₁ ⥤ D₂}
+    (c : R₀₂ ⟶ R₀₁ ⋙ R₁₂) (a : R₁₂ ⋙ F₂ ⟶ F₁ ⋙ U₁₂)
+    (b : R₀₁ ⋙ F₁ ⟶ F₀ ⋙ U₀₁) : R₀₂ ⋙ F₂ ⟶ F₀ ⋙ U₀₁ ⋙ U₁₂ :=
+  Functor.whiskerRight c F₂ ≫ (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft R₀₁ a ≫ (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight b U₁₂ ≫ (Functor.associator _ _ _).hom
+
+private theorem restrictionCompRhs_app
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    {R₀₁ : C₀ ⥤ C₁} {R₁₂ : C₁ ⥤ C₂} {R₀₂ : C₀ ⥤ C₂}
+    {F₀ : C₀ ⥤ D₀} {F₁ : C₁ ⥤ D₁} {F₂ : C₂ ⥤ D₂}
+    {U₀₁ : D₀ ⥤ D₁} {U₁₂ : D₁ ⥤ D₂}
+    (c : R₀₂ ⟶ R₀₁ ⋙ R₁₂) (a : R₁₂ ⋙ F₂ ⟶ F₁ ⋙ U₁₂)
+    (b : R₀₁ ⋙ F₁ ⟶ F₀ ⋙ U₀₁) (K : C₀) :
+    (restrictionCompRhs c a b).app K =
+      F₂.map (c.app K) ≫ a.app (R₀₁.obj K) ≫ U₁₂.map (b.app K) := by
+  simp only [restrictionCompRhs, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.comp_id, Category.id_comp]
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable (X : Scheme.{u})
@@ -44,5 +72,15 @@ theorem finiteDualizingIntrinsicRestriction_comp_natTrans_exists
               (finiteDualizingQuotient l E hmn)).obj K) ≫
           (normalizedDVRRes l E X hrm).map
             ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app K) := by
-  sorry
+  let rhs := restrictionCompRhs
+    (Sheaf.derivedRestrictScalarsCompIso (ProEt.topology X)
+      (finiteDualizingQuotient_comp l E hrm hmn)).inv
+    (finiteDualizingIntrinsicRestriction l E X hrm).inv
+    (finiteDualizingIntrinsicRestriction l E X hmn).inv
+  refine ⟨rhs, ?_, fun K ↦ restrictionCompRhs_app _ _ _ K⟩
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ))
+  intro P
+  rw [restrictionCompRhs_app]
+  exact finiteDualizingIntrinsicRestriction_comp_Qh l E X hrm hmn P
 end WeilConjectures
