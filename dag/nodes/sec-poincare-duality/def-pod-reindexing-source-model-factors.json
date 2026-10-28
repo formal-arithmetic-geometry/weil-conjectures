@@ -1,0 +1,118 @@
+{
+ "id": "def-pod-reindexing-source-model-factors",
+ "kind": "definition",
+ "title": "Explicit source and target Hom model factors",
+ "statement": "Construct the source and target model isomorphisms for the normalized source-shift square. The input is F applied to the inverse Hom model at (P[a],I) followed by the source map of the localization shift isomorphism. The output is the (-a)-shift of the Hom map of the two localization factors followed by the Hom model at (KP,KI). These are actual composites of the recorded isomorphisms, with K-injectivity hypotheses on their targets [def-pod-reindexing-coherence-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 4, signed source shift of the representative internal Hom. Detailed normalization uses Stacks sites-cohomology.tex Tags 0A8X and 08JA, and the recorded LeftNormalization."
+ },
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X7",
+  "date": "2026-10-28",
+  "note": "Explicit specialization and factorization of the representative signed-source argument in the assigned node; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived internal Hom source shift with exact reindexing and localization normalization",
+   "results": "Eight results: LocalizerMorphism.smallShiftedHomMap_mk, Localization.SmallShiftedHom.shift, LocalizerMorphism.smallShiftedHomMap_comp, LocalizerMorphism.smallShiftedHomMap_mk0, LocalizerMorphism.smallShiftedHomMap, MorphismProperty.commShift_Q', LocalizerMorphism.commShift, Localization.SmallHom.shift. None states the normalized internal-Hom comparison square.",
+   "date": "2026-10-28",
+   "verdict": "General shift/localization tools only; no matching reindexing Hom normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing of internal Hom commutes with signed source shifts through localization",
+   "results": "Eight hits include Functor.commShiftOfLocalization.iso_hom_app and its reassociated version, localization linear-shift instances and small shifted Hom maps. They describe shifts of the localized functor; they do not calculate the internal-Hom comparison on its normalized models.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for any of these site-specific model or normalization statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\", \"mapDerivedCategoryFactors\"",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftNormalization|sourceShift|chain_shift_reindexing_square",
+   "results": "msearch grep returned 0 hits. Direct source rg found RingedInternalHomShiftOfUniverses.LeftNormalization/sourceShift, PodReindexingChainShiftSquare.chain_shift_reindexing_square and RingedSliceHomSourceShift. The double ChainShift square does not state a square for arbitrary LeftFormula source isomorphisms; the slice module concerns a different functor and its final derived theorem remains sorry. Blueprint search for source shift returned no matching blueprint node.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the recorded projections and normalization definitions; these specialized one-route normal forms are not already declared."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingDerivedSourceShift",
+  "date": "2026-10-28",
+  "group": "X7"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 4: compatibility of the internal Hom source shift with automorphism pullback.",
+   "via": [
+    "lem-pod-reindexing-derived-source-shift",
+    "lem-pod-reindexing-shift-derived-model",
+    "lem-pod-reindexing-signed-shifts",
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingSourceModelFactors",
+  "file": "lean/Sheaf/Paper/PodReindexingSourceModelFactors.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.sourceModelInput",
+  "statement": "def sourceModelInput\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (P I : K l E Y s) (a : ℤ) [I.IsKInjective] :\n    (podReindexingDerivedFunctor l E g s).obj\n        ((podReindexingQ l E Y s).obj (hom l E Y s (P⟦a⟧) I)) ≅\n      (podReindexingDerivedFunctor l E g s).obj\n        ((podReindexingDerivedHom l E Y s).obj\n          (op (((podReindexingQ l E Y s).obj P)⟦a⟧), (podReindexingQ l E Y s).obj I))",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.PodReindexingCoherence.sourceModelInput",
+   "WeilConjectures.PodReindexingCoherence.sourceModelOutput"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T055830-L-814663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T055830-L-814663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

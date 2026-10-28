@@ -6,6 +6,8 @@ Authors: SHEAF group T7
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingDerivedSourceShiftDescent
+import Sheaf.Paper.PodReindexingDerivedSourceShiftModel
 
 /-! # Source-shift square for normalized reindexing
 
@@ -62,6 +64,9 @@ theorem derived_source_shift_square
         (ProEt.topology Y) (podReindexingRing l E Y s) M a).inv.app N) ≫
       ((podReindexingDerivedFunctor l E g s).commShiftIso (-a)).hom.app
         ((podReindexingDerivedHom l E Y s).obj (op M, N)) ≫
-      (c.derived.hom.app (op M, N))⟦-a⟧' := by sorry
+      (c.derived.hom.app (op M, N))⟦-a⟧' := by
+  exact derived_source_shift_descent l E g s SX SY TX TY c
+    (derived_source_shift_model l E g s SX SY TX TY c)
+    M N a
 
 end WeilConjectures.PodReindexingCoherence

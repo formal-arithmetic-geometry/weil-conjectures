@@ -1,0 +1,155 @@
+{
+ "id": "lem-pod-reindexing-source-left-normalization",
+ "kind": "statement",
+ "title": "Left route of the source-shift square on chain models",
+ "statement": "theorem source_left_normalization\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (c : Comparison l E g s SX SY TX TY) (P I : K l E Y s) (a : ℤ)\n    [I.IsKInjective] [CochainComplex.IsKInjective ((podReindexingComplexFunctor l E g s).obj I)]\n    (eX : (hom l E X s ((podReindexingComplexFunctor l E g s).obj P)\n      ((podReindexingComplexFunctor l E g s).obj I))⟦-a⟧ ≅\n      hom l E X s (((podReindexingComplexFunctor l E g s).obj P)⟦a⟧)\n        ((podReindexingComplexFunctor l E g s).obj I))\n    (hX : CategoryTheory.RingedHomUniverses.LeftFormula.{u + 1, u, u}\n      (ProEt.topology X) (podReindexingRing l E X s)\n      ((podReindexingComplexFunctor l E g s).obj P)\n      ((podReindexingComplexFunctor l E g s).obj I) a eX) :\n    (sourceModelInput l E g s P I a).hom ≫\n      (c.derived.hom.app (op (((podReindexingQ l E Y s).obj P)⟦a⟧), ((podReindexingQ l E Y s).obj\n          I)) ≫\n      (podReindexingDerivedHom l E X s).map\n        (Prod.mkHom (((podReindexingDerivedFunctor l E g s).commShiftIso a).inv.app\n          ((podReindexingQ l E Y s).obj P)).op\n          (𝟙 ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj I)))) ≫\n      (CategoryTheory.RingedHomUniverses.sourceShift.{u + 1, u, u, u + 2}\n        (ProEt.topology X) (podReindexingRing l E X s)\n        ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj P)) a).inv.app\n          ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj I))) ≫\n      (sourceModelOutput l E g s P I a).hom =\n    (podReindexingDerivedFactors l E g s).hom.app (hom l E Y s (P⟦a⟧) I) ≫\n      (podReindexingQ l E X s).map\n        ((c.chain (P⟦a⟧) I).hom ≫\n          ((podReindexingHom l E X s).map\n            ((complexShift l E g s a).inv.app P).op).app\n              ((podReindexingComplexFunctor l E g s).obj I) ≫ eX.inv) ≫\n      ((podReindexingQ l E X s).commShiftIso (-a)).hom.app\n        (hom l E X s ((podReindexingComplexFunctor l E g s).obj P)\n          ((podReindexingComplexFunctor l E g s).obj I))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 4, signed source shift of the representative internal Hom. Detailed normalization uses Stacks sites-cohomology.tex Tags 0A8X and 08JA, and the recorded LeftNormalization."
+ },
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pod-reindexing-source-model-factors"
+ ],
+ "proof": [
+  {
+   "text": "Write F for the derived reindexing, K for its complex functor, Q for localization, alpha for sourceModelInput, beta for sourceModelOutput, and kappa for the recorded Hom model. Alpha is F of kappa_(P[a],I)^(-1) followed by the Hom map of Q shift(a)^(-1) in the opposite source. Naturality of c.derived along that source map reduces its component at ((QP)[a],QI) to its component at (Q(P[a]),QI).",
+   "uses": [
+    "def-pod-reindexing-source-model-factors",
+    "def-pod-reindexing-coherence-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Comparison.derived_model at (P[a],I). Cancel F(kappa_(P[a],I)^(-1)) against its F(kappa_(P[a],I)) factor. The composite now starts with the localization factor at Hom(P[a],I), followed by Q(c.chain(P[a],I)), then the target ordinary-to-derived Hom model and its localization-factor transports.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply LeftNormalization on X to source F(QP), representative KP, and representative isomorphism (localizationFactors(P)).symm. Use uniqueness of LeftFormula to identify its chain reindexing with the given eX. Invert the normalization equation. Naturality in the target moves localizationFactors(I) through sourceShift.inv. Naturality of the ordinary Hom comparison in the source moves the map of (complexShift(a)).inv through the Hom model.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-ringed-site-ordinary-hom-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The shift compatibility of localizationFactors(P) identifies F(Q shift(a)) followed by F shift(a) with localization of complexShift(a) followed by Q shift(a). Cancel the resulting inverse pairs and beta. What remains, in order, is localizationFactors(Hom(P[a],I)), Q of c.chain(P[a],I) followed by Hom((complexShift(a)).inv,id) followed by eX.inv, and Q shift(-a) at Hom(KP,KI). This is the asserted left normal form.",
+   "uses": [
+    "def-pod-reindexing-source-model-factors",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-reindexing-source-model-factors",
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-ringed-site-ordinary-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X7",
+  "date": "2026-10-28",
+  "note": "Explicit specialization and factorization of the representative signed-source argument in the assigned node; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived internal Hom source shift with exact reindexing and localization normalization",
+   "results": "Eight results: LocalizerMorphism.smallShiftedHomMap_mk, Localization.SmallShiftedHom.shift, LocalizerMorphism.smallShiftedHomMap_comp, LocalizerMorphism.smallShiftedHomMap_mk0, LocalizerMorphism.smallShiftedHomMap, MorphismProperty.commShift_Q', LocalizerMorphism.commShift, Localization.SmallHom.shift. None states the normalized internal-Hom comparison square.",
+   "date": "2026-10-28",
+   "verdict": "General shift/localization tools only; no matching reindexing Hom normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing of internal Hom commutes with signed source shifts through localization",
+   "results": "Eight hits include Functor.commShiftOfLocalization.iso_hom_app and its reassociated version, localization linear-shift instances and small shifted Hom maps. They describe shifts of the localized functor; they do not calculate the internal-Hom comparison on its normalized models.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for any of these site-specific model or normalization statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\", \"mapDerivedCategoryFactors\"",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftNormalization|sourceShift|chain_shift_reindexing_square",
+   "results": "msearch grep returned 0 hits. Direct source rg found RingedInternalHomShiftOfUniverses.LeftNormalization/sourceShift, PodReindexingChainShiftSquare.chain_shift_reindexing_square and RingedSliceHomSourceShift. The double ChainShift square does not state a square for arbitrary LeftFormula source isomorphisms; the slice module concerns a different functor and its final derived theorem remains sorry. Blueprint search for source shift returned no matching blueprint node.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the recorded projections and normalization definitions; these specialized one-route normal forms are not already declared."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingDerivedSourceShift",
+  "date": "2026-10-28",
+  "group": "X7"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 4: compatibility of the internal Hom source shift with automorphism pullback.",
+   "via": [
+    "lem-pod-reindexing-derived-source-shift",
+    "lem-pod-reindexing-shift-derived-model",
+    "lem-pod-reindexing-signed-shifts",
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingSourceLeftNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingSourceLeftNormalization.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.source_left_normalization",
+  "statement": "theorem source_left_normalization\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (c : Comparison l E g s SX SY TX TY) (P I : K l E Y s) (a : ℤ)\n    [I.IsKInjective] [CochainComplex.IsKInjective ((podReindexingComplexFunctor l E g s).obj I)]\n    (eX : (hom l E X s ((podReindexingComplexFunctor l E g s).obj P)\n      ((podReindexingComplexFunctor l E g s).obj I))⟦-a⟧ ≅\n      hom l E X s (((podReindexingComplexFunctor l E g s).obj P)⟦a⟧)\n        ((podReindexingComplexFunctor l E g s).obj I))\n    (hX : CategoryTheory.RingedHomUniverses.LeftFormula.{u + 1, u, u}\n      (ProEt.topology X) (podReindexingRing l E X s)\n      ((podReindexingComplexFunctor l E g s).obj P)\n      ((podReindexingComplexFunctor l E g s).obj I) a eX) :\n    (sourceModelInput l E g s P I a).hom ≫\n      (c.derived.hom.app (op (((podReindexingQ l E Y s).obj P)⟦a⟧), ((podReindexingQ l E Y s).obj\n          I)) ≫\n      (podReindexingDerivedHom l E X s).map\n        (Prod.mkHom (((podReindexingDerivedFunctor l E g s).commShiftIso a).inv.app\n          ((podReindexingQ l E Y s).obj P)).op\n          (𝟙 ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj I)))) ≫\n      (CategoryTheory.RingedHomUniverses.sourceShift.{u + 1, u, u, u + 2}\n        (ProEt.topology X) (podReindexingRing l E X s)\n        ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj P)) a).inv.app\n          ((podReindexingDerivedFunctor l E g s).obj ((podReindexingQ l E Y s).obj I))) ≫\n      (sourceModelOutput l E g s P I a).hom =\n    (podReindexingDerivedFactors l E g s).hom.app (hom l E Y s (P⟦a⟧) I) ≫\n      (podReindexingQ l E X s).map\n        ((c.chain (P⟦a⟧) I).hom ≫\n          ((podReindexingHom l E X s).map\n            ((complexShift l E g s a).inv.app P).op).app\n              ((podReindexingComplexFunctor l E g s).obj I) ≫ eX.inv) ≫\n      ((podReindexingQ l E X s).commShiftIso (-a)).hom.app\n        (hom l E X s ((podReindexingComplexFunctor l E g s).obj P)\n          ((podReindexingComplexFunctor l E g s).obj I))",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T055830-L-814663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261028T055830-L-814663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
