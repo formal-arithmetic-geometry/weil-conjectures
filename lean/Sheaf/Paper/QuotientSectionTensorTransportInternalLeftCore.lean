@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorTransportFormulas
 public import Sheaf.Paper.QuotientSectionTensorTransportInternalData
+import Sheaf.Paper.QuotientSectionTensorTransportInternalLeftCorePaste
 
 /-! The categorical paste for internal-left scalar tensor transport. -/
 
@@ -90,6 +91,7 @@ comparison isomorphisms. The result is exactly scalarTensorSectionPath.
               (c.model.E.mapHomologicalComplex (.up ℤ)).obj
                 (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) =
       scalarTensorSectionPath a T c P Q := by
-  sorry
+  simpa only [Category.assoc] using
+    (section_tensor_transport_internal_left_paste a T c hc b hb barB hbarB P Q hbn hcn hqnorm)
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
