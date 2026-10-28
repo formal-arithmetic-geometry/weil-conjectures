@@ -2490,6 +2490,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupModel
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Compactification
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMap
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.PowMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.SmoothProj
@@ -10732,6 +10733,7 @@ public import WeilConjectures.RingTheory.ExistsGeneratorsWithControlledAnnihilat
 public import WeilConjectures.RingTheory.ExistsLiftOfFieldCharP
 public import WeilConjectures.RingTheory.ExtendedCompletionModuleReduction
 public import WeilConjectures.RingTheory.ExtendedReesAlgebraGraded
+public import WeilConjectures.RingTheory.ExtendedReesAlgebraPow
 public import WeilConjectures.RingTheory.Extension.JacobiZariskiBaseChange
 public import WeilConjectures.RingTheory.Extension.NaiveCotangentHomotopy
 public import WeilConjectures.RingTheory.FGFractionFieldSubmoduleLatticePresentation
@@ -13269,6 +13271,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
@@ -13883,6 +13886,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneri
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelProduct
 public import WeilConjectures.TraceFormula.Specialization.DeformationProperPoint
+public import WeilConjectures.TraceFormula.Specialization.DeformationSpacePow
 public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreComp
 public import WeilConjectures.TraceFormula.Specialization.DeformationSupport
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
@@ -13984,6 +13988,13 @@ public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnCompo
 public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginBaseChange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPow
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowModel
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowPoint
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedUnit
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
@@ -14000,6 +14011,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelRefinement
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
+public import WeilConjectures.TraceFormula.Specialization.TraitPowMap
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
