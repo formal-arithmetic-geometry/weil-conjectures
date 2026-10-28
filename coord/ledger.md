@@ -20770,3 +20770,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: merged deliver/A9/Sheaf.Paper.ConstantAdicQuotientRealizationScalarReduction (stage 3; reviewer PASS; first push; landing 20261028T034653-L-3529470 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:46 L: merged deliver/B2/Sheaf.Paper.AdicReindexingCompositionCancelledDescent (stage 3; reviewer PASS; first push; landing 20261028T034654-L-3529658 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:46 L: merged deliver/B2/Sheaf.SixFunctors.RationalVerdierComparisonEvaluationIntegral (stage 3; reviewer PASS; first push; landing 20261028T034655-L-3529834 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:46 L: merged deliver/B4/Sheaf.AlgebraicGeometry.SfDiagonalSectionForgetSupports (stage 3; reviewer PASS; first push; landing 20261028T034656-L-3529980 (interface); batch 20261028T034643; modules 1; new nodes 0)
