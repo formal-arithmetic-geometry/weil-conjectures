@@ -15,6 +15,9 @@ public import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeCoordinates
 public import Sheaf.Paper.PodCommonStageObjectNormalizations
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.Paper.PodFiniteScalarTensorNormalization
+import Sheaf.Algebra.Homology.ExactScalarDerivedPair
+import Sheaf.Paper.PodCommonStageCompositorNaturality
 
 /-! # Scalar and localized descent of the reindexed internal Hom
 
@@ -214,6 +217,8 @@ theorem ambient_scalar_chain (X : Scheme.{u})
             (completedIntegralCommRingSheafUnrestricted l L X) _ _).hom := by
   sorry
 
+set_option maxHeartbeats 600000 in
+-- Bound elaboration of the normalized scalar model and its two adjunctions.
 /-- Finite-biproduct coordinates under the normalized derived scalar adjunction.
 The basis maps are fixed on every K-flat representative, before gamma is inverted.
 Source: blueprint Step 5; Stacks 08J9, 08JA
@@ -288,7 +293,63 @@ theorem ambient_coordinates (W : Scheme.{u})
                   (scalarHomOrdinary l E L ι W M N) ≫ β.hom =
               (integralDerivedInternalHom l E W).map
                 (Prod.mkHom (𝟙 (op M)) (biproduct.ι _ i ≫ aN.hom)) := by
-  sorry
+  classical
+  let J : GrothendieckTopology W.ProEt := AlgebraicGeometry.Scheme.ProEt.topology W
+  let R : Sheaf J CommRingCat.{u + 1} := completedIntegralCommRingSheafUnrestricted l E W
+  let S : Sheaf J CommRingCat.{u + 1} := completedIntegralCommRingSheafUnrestricted l L W
+  let φ : R ⟶ S := integralCompletedScalarMap l E L ι W
+  let F := integralOrdinaryScalar l E L ι W
+  have hobj : ∀ A, F.obj A = SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ A :=
+    (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose
+  have hmap : ∀ {A B} (f : A ⟶ B), F.map f = eqToHom (hobj A) ≫
+      SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} φ A f ≫ eqToHom (hobj B).symm := by
+    intro A B f
+    exact (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose_spec.choose f
+  have hs (A : integralTowerModules l E W) (U : W.ProEtᵒᵖ)
+      (x : A.val.obj U) :
+      ringedFiniteFreeScalarSection.{u + 1, u, u} J φ F hobj A U 1 x =
+        integralOrdinaryTensorSection l E L ι W A U 1 x := by
+    unfold ringedFiniteFreeScalarSection integralOrdinaryTensorSection
+    have hη :=
+      PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app.{u + 1, u,
+        u + 1, u + 1} (J := J)
+        (𝟙 (SheafOfModules.derivedChangeRingIndependentCoefficients J S).obj)
+        (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ A)
+    with_unfolding_all exact (congrArg ((eqToHom (hobj A).symm).val.app U)
+      (ConcreteCategory.congr_hom (congr_app hη U) _))
+  obtain ⟨adj, δ, hu, hn, hcoords⟩ :=
+    ringedFiniteFreeHomBaseChange_coordinates.{u + 1, u, u, u + 2}
+      J φ d e F hobj hmap F.mapDerivedCategory F.mapDerivedCategoryFactors.hom
+      (Functor.isLeftDerivedFunctor_of_inverts _ _ F.mapDerivedCategoryFactors)
+      (scalarIntegralClosed l E W) (scalarIntegralClosed l L W)
+      (scalarIntegralModels l E W) (scalarIntegralModels l L W)
+      (scalarOrdinaryTensorChain l E L ι W) (scalarClosedTensor l E L ι W) (by
+        intro P Q p q U x y
+        simpa only [hs, scalarOrdinaryTensorChain] using
+          (scalarOrdinaryTensorChain_existsUnique l E L ι W).exists.choose_spec
+            P Q p q U x y) (by
+        intro P Q hP hQ
+        obtain ⟨hEP, hEQ, heq⟩ := scalarClosedTensor_allKFlat l E L ι W P Q hP hQ
+        exact ⟨hEP, hEQ, (F.mapDerivedCategoryFactors.app P).isIso_hom,
+          (F.mapDerivedCategoryFactors.app Q).isIso_hom, heq⟩)
+  obtain ⟨pair, hpair, hderived, hadj⟩ :=
+    SheafOfModules.exactScalarDerivedPair J φ F hobj hmap adj (by
+      intro M V x
+      rw [hu M V x]
+      unfold ringedFiniteFreeScalarSection
+      change ((eqToHom (hobj M).symm ≫ eqToHom (hobj M)).val.app V) _ = _
+      rw [eqToHom_trans]
+      rfl) δ hn
+  refine ⟨pair, hpair, hderived, δ, hadj, ?_⟩
+  intro M N
+  obtain ⟨a, aN, β, ha, haN, hβ, hι⟩ := hcoords M N
+  refine ⟨a, aN, β, ha, haN, ?_, ?_⟩
+  · convert hβ using 1 <;> rfl
+  · intro i
+    have hi := hι i
+    unfold scalarHomOrdinary coefficientBaseChangeHom
+    convert hi using 1 <;> rfl
+
 
 /-- Identity and tower laws for these actual ambient evaluation transposes.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
@@ -1363,16 +1424,36 @@ theorem common_transposition
 
 attribute [local irreducible] commonTranspose commonTensorComparison
 
+section CommonCompositorProof
+
 /-- The recorded scheme compositor in literal common-stage coordinates.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Step 14): transport the prescribed pullbackTensorCommonComposition
-through the equality-only copies of its functors. Naturality survives equality
-transport. Every component is prescribed, so this natural isomorphism is unique. -/
+Proof (node Step 14): tensor-product induction proves rational compositor naturality.
+Represent each common-stage arrow over one field; the prescribed component formulas
+and cancellation of the operation comparisons give common-stage naturality. Form
+the natural isomorphism and transport it through the equality-only functor copies.
+Every component is prescribed, so componentwise extensionality proves uniqueness. -/
 theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
     [∀ z : Z, Invertible (l : Z.residueField z)] :
     ∃! p : commonPullback l Ω (h ≫ g) ≅ commonPullback l Ω g ⋙ commonPullback l Ω h,
       ∀ K, HEq (p.hom.app K) (pullbackTensorCommonComposition l Ω g h K).hom := by
-  sorry
+  let e : commonStageDerivedPullback l Ω (h ≫ g) ≅
+      commonStageDerivedPullback l Ω g ⋙ commonStageDerivedPullback l Ω h :=
+    NatIso.ofComponents (pullbackTensorCommonComposition l Ω g h)
+      (fun a ↦ commonStagePullbackComposition_naturality l Ω g h a)
+  have hF := commonPullback_eq l Ω (h ≫ g)
+  have hG : commonPullback l Ω g ⋙ commonPullback l Ω h =
+      commonStageDerivedPullback l Ω g ⋙ commonStageDerivedPullback l Ω h := by
+    rw [commonPullback_eq l Ω g, commonPullback_eq l Ω h]
+  obtain ⟨p, hp⟩ := transportNatIso hF.symm hG.symm e
+  refine ⟨p, hp, ?_⟩
+  intro q hq
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  exact eq_of_heq ((hq K).trans (hp K).symm)
+
+end CommonCompositorProof
 
 /-- The actual prescribed compositor, with its unchanged coefficient representatives.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/

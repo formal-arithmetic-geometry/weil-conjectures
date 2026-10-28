@@ -1,0 +1,125 @@
+{
+ "id": "lem-pod-common-stage-compositor-naturality",
+ "kind": "statement",
+ "title": "Naturality of the prescribed common-stage pullback compositor",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $Z\\xrightarrow{h}X\\xrightarrow{f}Y$ be arbitrary composable scheme morphisms, with $\\ell$ invertible on all three schemes [def-weil-scheme-morphism-properties]. Use the rational and common-stage categories, pullback functors and their prescribed operation maps [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients, def-weil-derived-pullback-tensor-hom], and the component compositor $c_{f,h;K}$ with its every-field representative normalization [def-pod-rational-common-pullback-composition]. For any common-stage objects $K,N$ and arbitrary arrow $a:K\\to N$, one has $F_{hf}(a)\\,c_{f,h;N}=c_{f,h;K}\\,F_h(F_f(a))$. Thus the prescribed component compositor family is natural. No isomorphism hypothesis on $f$ or $h$ and no faithful-transition assumption are imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, operation transports; rational/common-stage descent in the coefficient-descent refinement."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-rational-common-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "For a localized morphism, induct on its scalar-first tensor expression. The zero and sum cases follow from additivity of the recorded rational pullback functors. On a pure tensor, their prescribed map formulas and the prescribed rational compositor identify both routes with the same scalar tensor the two integral compositor naturality routes. Apply integral naturality. This treats every localized arrow, not just arrows admitting an integral lift.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the common-stage morphism over a single finite coefficient field using the common-stage Hom induction principle. The prescribed pullback map and compositor representative equations express both sides of naturality at this field. Expand functoriality and cancel each comparison followed by its inverse. The remaining equation is precisely rational compositor naturality. Apply the common-stage class map, which preserves compositions, to obtain the asserted equality. This uses no faithfulness of transition functors and no extra condition on the schemes or on the morphisms.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-derived-pullback-tensor-constraints",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5. K1, 2026-10-28: proved by tensor-product and common-stage representative induction. The formal proof follows the already proved private argument in SemilinearFieldOperationLifts, moved to a lower module to avoid importing a consumer. Extracted only after local functor abstraction left the combined item above the 60-second compile limit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of pullback composition after scalar localization and filtered common coefficient stages",
+   "results": "8 hits, including PresheafOfModules.pullback_assoc, IsLocalizedModule.map_comp', AlgebraicGeometry.Scheme.Modules.pullbackComp and SheafOfModules.pullbackObjFreeIso_hom_naturality. None identifies this prescribed coefficient-stage compositor.",
+   "date": "2026-10-28",
+   "verdict": "Use tensor induction, integral naturality and the existing prescribed operation formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including NatIso.ofComponents and its hom/inv component lemmas. This constructor requires exactly the naturality equation being proved.",
+   "date": "2026-10-28",
+   "verdict": "The constructor packages the resulting natural family in the parent; it does not supply naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "common.*composition.*naturality|rational.*composition.*naturality",
+   "results": "0 Mathlib hits. Repository search finds the proved private argument in SemilinearFieldOperationLifts, which imports the parent item through DerivedAutomorphismHomEvaluation.",
+   "date": "2026-10-28",
+   "verdict": "Reuse that formal argument in this lower proof module; importing the consumer would create a cycle."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingHomCoefficientDescent",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-hom-coefficient-descent",
+   "place": "Proof Step 14: naturality of the prescribed common-stage pullback compositor before equality-only transport.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCommonStageCompositorNaturality",
+  "file": "lean/Sheaf/Paper/PodCommonStageCompositorNaturality.lean",
+  "declaration": "WeilConjectures.PodCoefficientDescent.commonStagePullbackComposition_naturality",
+  "statement": "theorem commonStagePullbackComposition_naturality\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] {X Y Z : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)] (f : X ⟶ Y) (h : Z ⟶ X)\n    {K N : generalAlgebraicallyClosedConstructibleCategory l Ω Y} (a : K ⟶ N) :\n    (commonStageDerivedPullback l Ω (h ≫ f)).map a ≫\n        (pullbackTensorCommonComposition l Ω f h N).hom =\n      (pullbackTensorCommonComposition l Ω f h K).hom ≫\n        (commonStageDerivedPullback l Ω h).map ((commonStageDerivedPullback l Ω f).map a)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261028T020528-L-2521369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261028T020528-L-2521369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
