@@ -37,8 +37,14 @@ For `Y` proper, this assembles Deligne's criterion from its local input
 the preimages `bᵢ⁻¹(Fᵢ)` of finite sets of closed points under coordinates `bᵢ : U ⟶ 𝔸¹_k` jointly
 detecting closed points, then `C` is bounded constructible. For the nearby cycles
 `C = Ψ_{ℙⁿ⁺¹}(B)` of the criterion, `RΓ(ℙⁿ⁺¹_s, C) = RΓ(ℙⁿ⁺¹_η̄, B)` is bounded constructible by
-the proper exchange; the local input (spreading the bounded constructibility of the restrictions
-to the coordinate slices to the complement of finitely many fibres) is not formalised.
+the proper exchange. The finitely many fibres may be found pointwise: if `C` is bounded
+constructible near every point over the generic point of a coordinate line, it is so away from
+finitely many fibres of that coordinate
+(`ProEtale.CondensedRing.exists_finset_boundedConstructible_of_forall_isGenericPoint`, by
+Chevalley's theorem; assembled in
+`ProEtale.CondensedRing.boundedConstructible_of_forall_exists_coordinates_of_isGenericPoint`).
+The local input (spreading the bounded constructibility of the restrictions to the geometric
+generic fibres of the coordinates to neighbourhoods of those points) is not formalised.
 
 -/
 
@@ -215,6 +221,65 @@ theorem exists_finset_boundedConstructible_of_forall_exists_coordinates
   · exact (boundedConstructible _).prop_of_iso ((leftDerivedUpperStarComp
       (Profinite.padicAlgClRingObj ℓ) V.ι (U y).ι).app C).symm (hFz y i)
 
+omit [IsSepClosed k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
+/-- **Spreading bounded constructibility from the generic fibre of a coordinate, pointwise**: let
+`Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite type and `C` a complex
+on `Y` which is bounded constructible on a neighbourhood of every point of `Y` lying over the
+generic point of `𝔸¹_k`. Then `C` is bounded constructible away from the preimage `b⁻¹(F)` of a
+finite set `F` of closed points of `𝔸¹_k`. The set `Σ` of points of `Y` with no neighbourhood on
+which `C` is bounded constructible is closed, so its image `b(Σ)` is constructible (Chevalley's
+theorem) and omits the generic point, hence is a finite set of closed points; and bounded
+constructibility is local. -/
+theorem exists_finset_boundedConstructible_of_forall_isGenericPoint
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    {n : Type u} [Unique n] (b : Y.left ⟶ 𝔸(n; Spec (.of k))) [LocallyOfFiniteType b]
+    {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj Λ Y.left))}
+    (h : ∀ y : Y.left, IsGenericPoint (b y) Set.univ →
+      ∃ W : Y.left.Opens, y ∈ W ∧ boundedConstructible _ ((L((W.ι)^*⟦Λ⟧)).obj C)) :
+    ∃ (F : Finset 𝔸(n; Spec (.of k))) (hF : ∀ x ∈ F, IsClosed {x}),
+      boundedConstructible _ (L(((b ⁻¹ᵁ finsetComplOpens F hF).ι)^*⟦Λ⟧).obj C) := by
+  have := isNoetherian_left Y
+  -- the set `Σ` of points without a neighbourhood on which `C` is bounded constructible
+  let bad : Set Y.left :=
+    {y | ¬ ∃ W : Y.left.Opens, y ∈ W ∧ boundedConstructible _ ((L((W.ι)^*⟦Λ⟧)).obj C)}
+  have hbad : IsClosed bad := by
+    rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
+    intro y hy
+    simp only [bad, Set.mem_compl_iff, Set.mem_ofPred_eq, not_not] at hy
+    obtain ⟨W, hyW, hW⟩ := hy
+    refine ⟨W, fun z hz ↦ ?_, W.isOpen, hyW⟩
+    simp only [bad, Set.mem_compl_iff, Set.mem_ofPred_eq, not_not]
+    exact ⟨W, hz, hW⟩
+  have hcons : Topology.IsConstructible bad :=
+    Topology.isConstructible_compl.1 ((TopologicalSpace.NoetherianSpace.isCompact _).isConstructible
+      hbad.isOpen_compl)
+  have : IsLocallyNoetherian 𝔸(n; Spec (.of k)) :=
+    isLocallyNoetherian_of_isOpenImmersion (AffineSpace.SpecIso n (.of k)).hom
+  have : LocallyOfFinitePresentation b :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance
+  obtain ⟨F, hFs, hF⟩ := AffineSpace.exists_finset_of_isConstructible n k
+    (b.isConstructible_image hcons) (by
+      rintro _ ⟨y, hy, rfl⟩ hgen
+      exact absurd (h y hgen) hy)
+  refine ⟨F, hF, ?_⟩
+  let V := b ⁻¹ᵁ finsetComplOpens F hF
+  have : TopologicalSpace.NoetherianSpace V := IsImmersion.noetherianSpace V.ι
+  refine boundedConstructible_of_forall_exists_opens Λ fun w ↦ ?_
+  have hw : w.1 ∉ bad := fun hw ↦ by
+    have : b w.1 ∈ (F : Set 𝔸(n; Spec (.of k))) := hFs ▸ ⟨w.1, hw, rfl⟩
+    exact w.2 this
+  simp only [bad, Set.mem_ofPred_eq, not_not] at hw
+  obtain ⟨W, hwW, hW⟩ := hw
+  refine ⟨V.ι ⁻¹ᵁ W, hwW, ?_⟩
+  refine (boundedConstructible _).prop_of_iso
+    ((leftDerivedUpperStarComp Λ (V.ι ⁻¹ᵁ W).ι V.ι).app C) ?_
+  refine boundedConstructible_leftDerivedUpperStar_of_range_subset Λ _ W.ι ?_ hW
+  rintro _ ⟨v, rfl⟩
+  rw [Scheme.Opens.range_ι]
+  exact v.2
+
 /-- **Deligne's criterion, assembly** (SGA 4½, [Th. finitude], proof of 3.2): let `Y` be proper
 over a separably closed field `k` (`ℓ ≠ char k`) and `C` a `ℚ̄_ℓ`-complex on `Y` with bounded
 constructible cohomology `RΓ(Y, C)`. Suppose that every point of `Y` has an open neighbourhood `U`
@@ -254,5 +319,37 @@ theorem boundedConstructible_of_forall_exists_coordinates_of_lowerStar
     I.subschemeι ?_ C hC hΓ
   rw [hrange, Scheme.Opens.range_ι, coe_finsetComplOpens]
   exact isCompl_compl
+
+/-- **Deligne's criterion, pointwise form** (SGA 4½, [Th. finitude], proof of 3.2): let `Y` be
+proper over a separably closed field `k` (`ℓ ≠ char k`) and `C` a `ℚ̄_ℓ`-complex on `Y` with
+bounded constructible cohomology `RΓ(Y, C)`. Suppose that every point of `Y` has an open
+neighbourhood `U` with finitely many coordinates `bᵢ : U ⟶ 𝔸¹_k` locally of finite type, jointly
+detecting closed points, such that `C|_U` is bounded constructible on a neighbourhood of every
+point of `U` lying over the generic point of a coordinate line. Then `C` is bounded constructible
+(`ProEtale.CondensedRing.exists_finset_boundedConstructible_of_forall_isGenericPoint` and
+`ProEtale.CondensedRing.boundedConstructible_of_forall_exists_coordinates_of_lowerStar`). -/
+theorem boundedConstructible_of_forall_exists_coordinates_of_isGenericPoint
+    (Y : Over (Spec (.of k))) [IsProper Y.hom]
+    {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))}
+    (hΓ : boundedConstructible _ ((R((Y.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C))
+    (H : ∀ y : Y.left, ∃ (U : Y.left.Opens) (_ : y ∈ U) (ι : Type u) (_ : Finite ι)
+      (b : ι → (U.toScheme ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))),
+      (∀ i, LocallyOfFiniteType (b i)) ∧ (∀ v : U, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
+      ∀ i (v : U), IsGenericPoint (b i v) Set.univ →
+        ∃ W : U.toScheme.Opens, v ∈ W ∧ boundedConstructible _
+          (L((W.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            (L((U.ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))) :
+    boundedConstructible _ C := by
+  refine boundedConstructible_of_forall_exists_coordinates_of_lowerStar Y hΓ fun y ↦ ?_
+  obtain ⟨U, hyU, ι, hι, b, hb, hcl, hgen⟩ := H y
+  refine ⟨U, hyU, ι, hι, b, hcl, fun i ↦ ?_⟩
+  have := hb i
+  have := isNoetherian_left Y
+  have : TopologicalSpace.NoetherianSpace U := IsImmersion.noetherianSpace U.ι
+  have := locallyOfFiniteType_overMk_of_isImmersion Y U.ι
+  have := quasiCompact_overMk_of_isImmersion Y U.ι
+  exact exists_finset_boundedConstructible_of_forall_isGenericPoint
+    (Profinite.padicAlgClRingObj ℓ) (Over.mk (U.ι ≫ Y.hom)) (b i) (hgen i)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
