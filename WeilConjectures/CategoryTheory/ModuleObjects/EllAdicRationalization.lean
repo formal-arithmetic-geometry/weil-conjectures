@@ -14,6 +14,9 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
+
 /-!
 
 # Bounded constructible `E`-coefficients as `𝒪_E`-coefficients with `ℓ` inverted
@@ -61,10 +64,12 @@ Neither description is taken as a definition: `E_X` is defined by its sections, 
 makes inverting `ℓ` the right statement: `𝒪_E` is then a discrete valuation ring in which every
 nonzero element divides a power of `ℓ`.
 
+The extension of scalars along `φ` is exact
+(`ProEtale.CondensedRing.integralScalarExtension_exact`), so its left derived functor preserves
+bounded constructible complexes (`ProEtale.boundedConstructible_leftDerivedExtendScalars_obj`).
+
 ## Sorried input
 
-* `ProEtale.boundedConstructible_derivedExtendScalars_obj`: `L(extendScalars φ)` preserves
-  bounded constructible complexes.
 * `ProEtale.isLocalization_boundedConstructibleExtendScalars`: on bounded constructible
   complexes, `L(extendScalars φ)` is a localization functor for the morphisms with
   `ℓ`-power-torsion mapping cone.
@@ -123,8 +128,17 @@ bounded constructible complexes. -/
 lemma boundedConstructible_derivedExtendScalars_obj
     (K : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
-      ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K.obj) :=
-  sorry
+      ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K.obj) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let : NormedAlgebra ℚ_[ℓ] E.1 :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  have : PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)) :=
+    CondensedRing.integralScalarExtension_exact ℓ E.1 X
+  exact boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
 on bounded constructible complexes: the restriction of
