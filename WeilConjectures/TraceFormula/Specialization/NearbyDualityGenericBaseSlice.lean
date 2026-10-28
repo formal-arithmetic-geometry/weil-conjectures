@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBase
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityAveraging
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 
 /-!
 
@@ -19,7 +20,7 @@ over `S = Spec k'⟦t⟧`, and `b : 𝒳 ⟶ 𝔸¹_S` a coordinate of its total
 generic base `(Frac K⟦t⟧, X₂)` (`NearbyCyclesModel.isTraitModelOfGenericBase_genericSliceModel`),
 whose special fibre is the special fibre `𝒳''_s` of the slice (`NearbyCyclesModel.sliceSpecial`).
 
-This file states the **slice compatibility of nearby duality**
+This file proves the **slice compatibility of nearby duality**
 (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
 `det-tf-nearby-duality-slice` (2) with `det-tf-invariants-duality`): if nearby duality holds for
 the generic slice model, then the pullback of `δ_{M,L}` to `𝒳''_s` is an isomorphism. This is the
@@ -132,7 +133,7 @@ model (with the dualizing maps of a family `D_K` over the trait `Spec K⟦t⟧`)
 every `L'`, then the pullback of `δ_{M,L}` to the special fibre `𝒳''_s` of the slice along
 `𝒳''_s ⟶ X'` is an isomorphism for every `L`.
 
-Proof sketch (not formalised). By the invariance of nearby cycles under change of trait and the
+Proof. By the invariance of nearby cycles under change of trait and the
 inertia action on nearby cycles (SGA 4½, [Th. finitude], §3), the pullback of `Ψ_M` to `𝒳''_s` is
 the `P`-invariants of `Ψ_{M''}` of the pullback of the coefficients, `P` the pro-`p` kernel of the
 map of inertia groups of the strict localisation of `𝔸¹_S` at the generic point of its special
@@ -143,7 +144,12 @@ total space into `𝔸^r_S`, smooth purity and the maps `β_i`), so that the pul
 identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The `P`-invariants are a direct
 summand cut out by an averaging idempotent (`P` is pro-`p` and `p ≠ ℓ`), and the restriction of an
 isomorphism to the two averaging summands is an isomorphism
-(`CategoryTheory.isIso_comp_comp_map_op_of_averaging`).
+(`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is
+`CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_averaging_of_eq`; the geometric inputs are
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`,
+`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_sliceSpecialUpperStar`,
+`NearbyCyclesModel.IsTraitModelOfGenericBase.isIso_closedHomComparison_genericSliceUpperStar` and
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`.
 
 The statement does not depend on the choice of `D_K`, the dualizing maps of trait models over
 generic bases being determined by their trace and open restriction properties. If the base `X₂`
@@ -169,7 +175,36 @@ theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase
     (L : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (L((sliceSpecialMap (traitSliceCoord k') h.isTraitModelOver hb)^*⟦
         Profinite.padicAlgClRingObj ℓ⟧).map (nearbyDualityMapOfGenericBase ℓ D h L).hom) := by
-  sorry
+  obtain ⟨θ, hθ, htw, hfix⟩ := h.exists_genericSliceDualizingMap ℓ hb D DK
+  obtain ⟨Γ, _, _, ψ, hψ, hn, hr⟩ :=
+    h.exists_averaging_genericSliceExchange ℓ hb ((ihom L).obj (dualizingComplex ℓ X₁)) L
+  obtain ⟨r₁, h₁, hρ₁, -⟩ := hr _ (Or.inl rfl)
+  obtain ⟨r₂, h₂, hρ₂, hinv₂⟩ := hr _ (Or.inr rfl)
+  -- the abstract lemma is instantiated once, with all functors and objects given explicitly
+  have key : IsIso ((IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ h
+      hb).map (nearbyDualityMapOfGenericBase ℓ D h L)) :=
+    Verdier.isIso_map_nearbyDualityMap_of_averaging_of_eq
+      (ΨX := boundedConstructibleNearbyCycles (h.preservesBoundedConstructible (ℓ := ℓ)))
+      (ΨU := IsTraitModelOfGenericBase.genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb)
+      (F := IsTraitModelOfGenericBase.genericSliceUpperStar (traitSliceCoord k') ℓ h hb)
+      (F' := IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb)
+      (ωX := dualizingComplex ℓ X₁) (ωX' := dualizingComplex ℓ X')
+      (boundedConstructibleTensorMap (h.preservesBoundedConstructible (ℓ := ℓ)))
+      (boundedConstructibleTensorMap ((isTraitModelOfGenericBase_genericSliceModel
+        (traitSliceCoord k') hb h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ)))
+      (D.θ h) θ (IsTraitModelOfGenericBase.genericSliceExchange (traitSliceCoord k') ℓ h hb)
+      (fun x y ↦ boundedConstructibleTensorMap_natural _ x y)
+      (IsTraitModelOfGenericBase.genericSliceExchange_tensor (traitSliceCoord k') ℓ h hb) hθ L
+      (fun a ↦ IsTraitModelOfGenericBase.genericSliceSelfAction (traitSliceCoord k') ℓ h hb (ψ a))
+      (fun a ↦ IsTraitModelOfGenericBase.genericSliceSelfAction_tensor (traitSliceCoord k') ℓ h hb
+        (ψ a))
+      (fun a ↦ hfix _ (hψ a).1 (hψ a).2) hinv₂ (hn _) r₁ (by exact_mod_proofs h₁)
+      (by exact_mod_proofs hρ₁) r₂ h₂ hρ₂
+      (h.isIso_closedHomComparison_sliceSpecialUpperStar ℓ hb _)
+      (h.isIso_closedHomComparison_genericSliceUpperStar ℓ hb L) (htw _ (hslice _))
+  exact (inferInstance : IsIso ((ObjectProperty.ι _).map
+    ((IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).map
+      (nearbyDualityMapOfGenericBase ℓ D h L))))
 
 end NearbyCyclesModel
 

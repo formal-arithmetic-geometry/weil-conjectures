@@ -12644,6 +12644,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTensor
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
@@ -14038,6 +14039,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesBraided
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesVerdierDual
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityAveraging
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
@@ -14047,6 +14049,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBa
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseInduction
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityInvariants
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLaxMonoidal
