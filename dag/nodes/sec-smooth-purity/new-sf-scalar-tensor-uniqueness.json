@@ -13,22 +13,36 @@
  },
  "proof": [
   {
-   "text": "This is a named intermediate part of the derived descent argument: compare two normalized maps on K-flat representatives and use localization extensionality.",
+   "text": "Restriction of natural transformations to pairs of flat-term K-flat complexes is faithful, using tensorRepresentatives_fullyFaithful from the existing pro-etale descent-data proof.",
    "uses": [
-    "def-pur-integral-compact-support-coefficient-data"
+    "lem-weil-pbc-proetale-tensor-descent-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each resolving pair, extract the two stipulated normalization equalities. Proof irrelevance identifies the target representative proofs, so their right sides coincide. The source representative map is invertible, and the two scalar counits are invertible by K-flat counit computation. Cancel these maps and the image of their product under the target tensor functor.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two hom components therefore agree on every resolving pair. Faithfulness of restriction gives equality of the natural transformations, and isomorphism extensionality gives equality of the comparisons.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-integral-compact-support-coefficient-data"
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "proof_origin": {
-  "by": "S4",
-  "group": "S4",
+  "by": "K2",
+  "group": "K2",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY and 07A4"
+  "place": "Tags 06YY, 07A4 and 0G7E; existing representative-descent API",
+  "note": "Complete Lean proof from the published scalar-extension, K-flat and localization declarations; no new intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -90,13 +104,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261027T234310-L-92082",
-  "kind": "proof",
+  "landing": "20261028T020532-L-2521843",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

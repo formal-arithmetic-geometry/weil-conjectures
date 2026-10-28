@@ -12,6 +12,11 @@ import all Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import all Sheaf.Paper.AdicCoefficientDatum
 import all Sheaf.Paper.CompletedAdicCoefficientDatum
 import Sheaf.Algebra.Homology.RingedDerivedTensorNative
+import all Sheaf.Paper.ProEtaleTensorPullbackDescentData
+import Sheaf.Paper.TensorPullbackRepresentativeDescent
+import all Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 
 /-! # Normalized scalar tensor comparison for compact support
 
@@ -40,7 +45,8 @@ attribute [local irreducible] CategoryTheory.presheafToSheaf CategoryTheory.Func
   AlgebraicGeometry.Scheme.completedAdicChange AlgebraicGeometry.Scheme.reductionChange
   CategoryTheory.Localization.Monoidal.tensorBifunctor
   HasDerivedCategory.standard CategoryTheory.Functor.mapDerivedCategory
-  CategoryTheory.Functor.rightDerivedFunctor
+  CategoryTheory.Functor.rightDerivedFunctor HomologicalComplex₂.total
+  CategoryTheory.Functor.mapBifunctorHomologicalComplex
 
 -- Use the canonical concrete site instances throughout this proof context.
 /-- Canonical smallness of the coefficient site.
@@ -366,6 +372,47 @@ theorem scalarTensorTotal_isIso {W : Scheme.{u}}
 
 attribute [local irreducible] scalarTensorTotal
 
+private theorem scalarComplexCounit_isIso {W : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
+    (P : CochainComplex (pbcModules W R) ℤ) (hp : proEtaleFlatRepresentatives W R P) :
+    IsIso (pbcComplexCounit a P) := by
+  simp only [proEtaleFlatRepresentatives] at hp
+  have := pbcExtensionCounit_isIso a P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hp.1)
+  dsimp only [pbcComplexCounit]
+  infer_instance
+
+private theorem scalar_preservesFlatRepresentatives {W : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
+    (P : CochainComplex (pbcModules W R) ℤ) (hp : proEtaleFlatRepresentatives W R P) :
+    proEtaleFlatRepresentatives W S
+      (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P) := by
+  simp only [proEtaleFlatRepresentatives] at hp ⊢
+  have hflat (n : ℤ) : exactFunctor _ _
+      (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (P.X n)) :=
+    (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R (P.X n)) (hp.2 n)
+  obtain ⟨hk, hf⟩ :=
+    SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients a P
+      (pbcExtend a) (reductionChange_obj_eq W a) (reductionChange_map_eq W a)
+      ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hp.1) hflat
+  refine ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 hk, ?_⟩
+  intro n
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso S _).symm (hf n)
+
+private theorem tensorTotal_flatRepresentatives {W : Scheme.{u}}
+    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
+    (P Q : CochainComplex (pbcModules W R) ℤ)
+    (hp : proEtaleFlatRepresentatives W R P) (hq : proEtaleFlatRepresentatives W R Q) :
+    proEtaleFlatRepresentatives W R
+      (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) := by
+  simp only [proEtaleFlatRepresentatives] at hp hq ⊢
+  have ht := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model R P Q
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hp.1)
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat Q).2 hq.1) hp.2 hq.2
+  exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 ht.1, ht.2.1⟩
+
 /-- Existence of the normalized derived scalar/tensor comparison.
 Source: Stacks Tags 06YY, 07A4.
 The proof descends the signed total comparison through K-flat representatives and
@@ -389,7 +436,64 @@ theorem scalarTensor_exists {W : Scheme.{u}}
               DerivedCategory.Q.map
                 (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
               s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩) := by
-  sorry
+  classical
+  let F := (pbcExtend a).mapHomologicalComplex (.up ℤ)
+  let tR := Functor.uncurry.obj ((proEtaleOrdinaryTensor W R).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ))
+  let tS := Functor.uncurry.obj ((proEtaleOrdinaryTensor W S).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ))
+  let ε₀ := complexCounitNat (pbcExtend a) (pbcDerivedExtend a) (pbcExtensionCounit a)
+  have hε₀ (P : CochainComplex (pbcModules W R) ℤ) :
+      ε₀.app P = pbcComplexCounit a P := by
+    exact complexCounitNat_app _ _ _ P
+  let ε : DerivedCategory.Q ⋙ pbcDerivedExtend a ⟶ F ⋙ DerivedCategory.Q :=
+    { app := fun P ↦ pbcComplexCounit a P
+      naturality := fun P Q v ↦ by
+        have h := ε₀.naturality v
+        rw [hε₀ P, hε₀ Q] at h
+        exact h }
+  have hε (P : CochainComplex (pbcModules W R) ℤ) :
+      ε.app P = pbcComplexCounit a P := rfl
+  obtain ⟨ff⟩ := tensorRepresentatives_fullyFaithful R S
+  let b : (F.prod F) ⋙ tS ≅ tR ⋙ F := NatIso.ofComponents
+    (fun Z ↦ @asIso _ _ _ _ (scalarTensorTotal a Z.1 Z.2)
+      (scalarTensorTotal_isIso a Z.1 Z.2)) (by
+      let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
+      let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} S
+      intro Z Z' v
+      dsimp only [Functor.comp_map, Functor.prod_map, F, tR, tS]
+      simp only [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
+        SheafOfModules.CanonicalTensorPullbackProof.tensorMap_factor]
+      simp only [asIso_hom]
+      unfold scalarTensorTotal
+      exact SheafOfModules.CanonicalTensorPullbackProof.tensorPullbackTotal_naturality
+        (pbcExtend a) (scalarOrdinaryTensor a)
+        (fun {_ _ _ _} f g ↦ by
+          simpa only [proEtaleOrdinaryTensor, MonoidalCategory.curriedTensor,
+            MonoidalCategory.tensorHom_def, Category.assoc] using
+              scalarOrdinaryTensor_naturality a f g) v.1 v.2)
+  obtain ⟨μ, hμ, _⟩ := tensorComparisonDescent
+    DerivedCategory.Q DerivedCategory.Q F (pbcDerivedExtend a) ε
+    (proEtaleFlatRepresentatives W R) (proEtaleFlatRepresentatives W S)
+    (scalar_preservesFlatRepresentatives a) ff tR tS r.tensor s.tensor
+    r.representative s.representative b.symm
+    (by intro P hp; rw [hε]; exact scalarComplexCounit_isIso a P hp)
+    (by
+      intro P Q hp hq
+      rw [hε]
+      exact scalarComplexCounit_isIso a _ (tensorTotal_flatRepresentatives R P Q hp hq))
+  refine ⟨μ, ?_⟩
+  intro P Q hp hq
+  refine ⟨scalar_preservesFlatRepresentatives a P hp,
+    scalar_preservesFlatRepresentatives a Q hq, ?_⟩
+  have hb (P Q : CochainComplex (pbcModules W R) ℤ) :
+      b.symm.hom.app (P, Q) =
+        @inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q) := by
+    rfl
+  have hh := hμ P Q hp hq
+  simp only [hε, hb] at hh
+  dsimp only [tR, Functor.uncurry_obj_obj, Functor.map₂HomologicalComplex] at hh
+  exact hh
 
 /-- Uniqueness of a normalized derived scalar/tensor comparison.
 Source: Stacks Tags 06YY, 07A4.
@@ -428,7 +532,26 @@ theorem scalarTensor_unique {W : Scheme.{u}}
               DerivedCategory.Q.map
                 (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
               s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩)) : μ = ν := by
-  sorry
+  obtain ⟨ff⟩ := tensorRepresentatives_fullyFaithful R S
+  apply Iso.ext
+  apply ff.map_injective
+  apply NatTrans.ext
+  funext X
+  obtain ⟨⟨P, hp⟩, ⟨Q, hq⟩⟩ := X
+  obtain ⟨hp', hq', hμ'⟩ := hμ P Q hp hq
+  obtain ⟨hp'', hq'', hν'⟩ := hν P Q hp hq
+  have := scalarComplexCounit_isIso a P hp
+  have := scalarComplexCounit_isIso a Q hq
+  have : IsIso (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)) :=
+    ⟨⟨Prod.mkHom (inv (pbcComplexCounit a P)) (inv (pbcComplexCounit a Q)),
+      by ext <;> simp, by ext <;> simp⟩⟩
+  change μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
+    ν.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)
+  apply (cancel_epi
+    ((pbcDerivedExtend a).map (r.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)))).1
+  apply (cancel_mono
+    (s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)))).1
+  simpa only [Category.assoc] using hμ'.trans hν'.symm
 
 /-- Tensor balancing on derived categories is uniquely fixed on flat K-flat pairs.
 Source: Stacks Tags 06YY, 07A4

@@ -13,22 +13,56 @@
  },
  "proof": [
   {
-   "text": "This is a named intermediate part of the derived descent argument: construct the comparison from the signed total and K-flat localization.",
+   "text": "The scalar-extension counit is invertible on a flat-term K-flat complex: convert its K-flat predicate to the independent-coefficient predicate and apply the recorded universal counit computation.",
    "uses": [
-    "def-pur-integral-compact-support-coefficient-data"
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply changeOfRings_isKFlat_of_flat_terms_independentCoefficients to the actual pbcExtend functor, using its recorded object and morphism equations. Transport termwise flatness along siteSheafTensorRightIso. The scalar extension of every resolving complex is again resolving.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total of two resolving complexes is resolving by kFlat_total_tensor_model. In particular, the scalar counit on their total is invertible.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package scalarTensorTotal and its proved invertibility as a natural isomorphism. Its naturality is the signed-total naturality theorem applied to scalarOrdinaryTensor_naturality. Use the cochain natural transformation of universal scalar counits and faithful restriction to flat representatives, as in the existing pro-etale descent-data proof.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorComparisonDescent to the inverse total comparison, the two given tensor representative identifications, and the counit isomorphisms. Its normalization equation is definitionally the displayed scalar comparison equation; choose the preserved flat representative proofs as the required witnesses.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-integral-compact-support-coefficient-data"
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
  ],
  "proof_origin": {
-  "by": "S4",
-  "group": "S4",
+  "by": "K2",
+  "group": "K2",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY and 07A4"
+  "place": "Tags 06YY, 07A4 and 0G7E; existing representative-descent API",
+  "note": "Complete Lean proof from the published scalar-extension, K-flat and localization declarations; no new intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -90,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261027T234310-L-92082",
-  "kind": "proof",
+  "landing": "20261028T020532-L-2521843",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
