@@ -14047,6 +14047,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding
+public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericPoint
 public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericSpec
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBase
