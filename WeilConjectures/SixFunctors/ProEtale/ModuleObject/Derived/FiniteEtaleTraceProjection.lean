@@ -147,7 +147,7 @@ theorem splitTrace_projection (P Q : Sheaf (ProEt.topology X) Ab.{u + 1}) :
   have h₁ : ((sheafToPresheaf _ Ab.{u + 1}).map
       ((localizationRestrictionLowerStarAdjunction Ab.{u + 1} g inferInstance).unit.app P)).app
         (op V) = P.obj.map (traceProj g V).op :=
-    localizationRestrictionLowerStarAdjunction_unit_app_hom_app (g := g) Ab.{u + 1} P V
+    localizationRestrictionLowerStarAdjunction_unit_app_hom_app_traceProj (g := g) Ab.{u + 1} P V
   have h₂ (G : Sheaf (ProEt.topology X) Ab.{u + 1}) :
       ((sheafToPresheaf _ Ab.{u + 1}).map ((splitTrace hg Ab.{u + 1}).app G)).app (op V) =
         splitTraceApp hg G V := rfl

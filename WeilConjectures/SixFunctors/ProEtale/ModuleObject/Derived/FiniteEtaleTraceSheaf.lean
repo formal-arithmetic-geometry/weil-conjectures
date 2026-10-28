@@ -141,7 +141,7 @@ lemma splitTrace_app_hom_app (G : Sheaf (ProEt.topology X) A') (V : X.ProEt) :
 
 omit [Abelian A'] in
 /-- The unit of `g^* ⊣ g_*` restricts sections along the projection `V ×_X Y ⟶ V`. -/
-lemma localizationRestrictionLowerStarAdjunction_unit_app_hom_app
+lemma localizationRestrictionLowerStarAdjunction_unit_app_hom_app_traceProj
     (G : Sheaf (ProEt.topology X) A') (V : X.ProEt) :
     ((localizationRestrictionLowerStarAdjunction A' g inferInstance).unit.app G).hom.app (op V) =
       G.obj.map (traceProj g V).op := by
@@ -159,7 +159,7 @@ lemma unit_comp_splitTrace :
     (sheafToPresheaf (ProEt.topology X) A').map_nsmul (f := 𝟙 G) (n := d)
   simp only [NatTrans.comp_app, NatTrans.app_nsmul, NatTrans.id_app, Functor.id_obj]
   rw [h, NatTrans.app_nsmul, NatTrans.id_app, ← restriction_comp_splitTraceApp hg G V,
-    ← localizationRestrictionLowerStarAdjunction_unit_app_hom_app]
+    ← localizationRestrictionLowerStarAdjunction_unit_app_hom_app_traceProj]
   rfl
 end Sheaf
 
