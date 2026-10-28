@@ -31,6 +31,8 @@ import all Sheaf.AlgebraicGeometry.ProEtale.FiniteComparisonIsomorphism
 import all Sheaf.Paper.FiniteCoefficientHomChange
 import all Sheaf.Paper.CompletedPullbackTowerCore
 import Sheaf.Paper.IntegralComparisonSequenceSystems
+import Sheaf.Paper.PodRationalClosedExistence
+import Sheaf.Paper.PodRationalClosedUniqueness
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -130,7 +132,10 @@ theorem podRationalClosed_existsUnique :
           (a ⊗ₜ[Padic.coefficientExtensionIntegers l E]
             ((podIntegralClosed l E W).transpose L.obj
               (integralPairOfRationalHomPair l E W P)).symm f) := by
-  sorry
+  obtain ⟨S, hS⟩ := podRationalClosed_exists l E W
+  refine ⟨S, hS, ?_⟩
+  intro S' hS'
+  exact podRationalClosed_unique l E W S' S hS' hS
 
 /-- The uniquely localized completed closed data.
 Source: node proof step 14 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/

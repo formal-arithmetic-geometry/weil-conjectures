@@ -1,0 +1,124 @@
+{
+ "id": "lem-pod-rational-closed-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of the normalized rational partial closed datum",
+ "statement": "Fix a prime l, a finite extension E of Q_l with its specified valuation ring and uniformizer [def-weil-l-adic-coefficient-extension], and a scheme W on which l is invertible [def-weil-scheme-morphism-properties]. Use the rational tensor, admissible Hom pairs and internal-Hom object of [def-sf-finite-rational-derived-operations], the partial closed interface of [def-pod-partial-closed-interfaces], and the integral partial closed datum of [def-sf-adic-closed-reindexing-maps]. Any two rational partial closed data whose inverse transposes send every pure tensor a tensor f to a tensor the prescribed integral inverse transpose of f are equal. No rational-linearity assumption on these data is needed: their additive inverse transposes are determined on the tensor-product generators.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, coefficient transport; agent refinement proving the assigned scalar-localized closed normalization. The integral tensor-Hom adjunction is anchored by Stacks Project Tag 08J9 (sites-cohomology-lemma-internal-hom)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-finite-rational-derived-operations",
+  "def-pod-partial-closed-interfaces",
+  "def-sf-adic-closed-reindexing-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the prescribed rational internal-Hom object equality to identify each incoming Hom module with the tensor product of the localization ring and the integral Hom module. The given normalization identifies the two inverse transposes on all pure tensors. Additivity and tensor-product induction identify them on every arrow.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality of inverse additive equivalences gives equality of the forward equivalences by injectivity of the inverse. Apply extensionality of partial closed data; the remaining naturality fields are propositions.",
+   "uses": [
+    "stage3-derived-automorphism-continuation-a"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-linear-scalar-localization",
+  "stage3-derived-automorphism-continuation-a"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, coefficient transport; agent refinement proving the assigned scalar-localized closed normalization. The integral tensor-Hom adjunction is anchored by Stacks Project Tag 08J9 (sites-cohomology-lemma-internal-hom). H4: explicit linear base change and tensor-product induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TensorProduct.*congr|map.*symm|LinearEquiv.*baseChange",
+   "results": "25 displayed hits: Mathlib/InformationTheory/Coding/KraftMcMillan.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/MulChar/Basic.lean, Mathlib/NumberTheory/SumTwoSquares.lean",
+   "date": "2026-10-28",
+   "verdict": "No complete match for the project partial closed datum and its pure-tensor normalization. Use Mathlib linear base change and tensor-product induction as the algebraic API."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.congr",
+   "results": "12 displayed hits: TensorProduct.congr, TensorProduct.congr_refl_refl, TensorProduct.toLinearMap_congr, TensorProduct.congr_symm, LinearEquiv.lTensor_trans_rTensor, LinearEquiv.rTensor_trans_lTensor, TensorProduct.congr_tmul, TensorProduct.congr_trans",
+   "date": "2026-10-28",
+   "verdict": "No complete match for the project partial closed datum and its pure-tensor normalization. Use Mathlib linear base change and tensor-product induction as the algebraic API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence of modules extends to an additive equivalence after tensoring with a scalar localization",
+   "results": "8 displayed hits: IsLocalization.moduleTensorEquiv, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearEquiv.extendScalarsOfIsLocalization, IsLocalizedModule.rTensor, IsLocalizedModule.map_lTensor, Module.Invertible.rTensorEquiv, IsLocalizedModule.mapEquiv",
+   "date": "2026-10-28",
+   "verdict": "No complete match for the project partial closed datum and its pure-tensor normalization. Use Mathlib linear base change and tensor-product induction as the algebraic API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear tensor Hom adjunction extends to the scalar localization category with morphisms given by tensor products",
+   "results": "8 displayed hits: CategoryTheory.ihom.adjunction, ModuleCat.monoidalClosedHomEquiv, TensorProduct.lTensorHomToHomLTensor, CategoryTheory.FunctorToTypes.adj, LinearMap.extendScalarsOfIsLocalizationEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, lTensorHomEquivHomLTensor_toLinearMap, IsLocalization.instIsLocalizedModuleTensorProductMap",
+   "date": "2026-10-28",
+   "verdict": "No complete match for the project partial closed datum and its pure-tensor normalization. Use Mathlib linear base change and tensor-product induction as the algebraic API."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: coefficient transport for the tensor-Hom normalization",
+   "via": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodRationalClosedUniqueness",
+  "file": "lean/Sheaf/Paper/PodRationalClosedUniqueness.lean",
+  "declaration": "WeilConjectures.podRationalClosed_unique",
+  "statement": "theorem podRationalClosed_unique\n    (S S' : PodPartialClosed (rationalDerivedTensor l E W)\n      (constructibleRationalHomPairs l E W) (rationalDerivedInternalHom l E W))\n    (hS : ∀ (L : sfRationalConstructibleCategory l E W)\n      (P : (constructibleRationalHomPairs l E W).FullSubcategory)\n      (f : L.obj ⟶ (constructibleIntegralHom l E W).obj\n        (integralPairOfRationalHomPair l E W P))\n      (a : Localization.Away (Padic.coefficientExtensionUniformizer l E))\n      (q : L ⟶ (rationalDerivedInternalHom l E W).obj P),\n      HEq q (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f) →\n      HEq ((S.transpose L P).symm q)\n        (a ⊗ₜ[Padic.coefficientExtensionIntegers l E]\n          ((podIntegralClosed l E W).transpose L.obj\n            (integralPairOfRationalHomPair l E W P)).symm f))\n    (hS' : ∀ (L : sfRationalConstructibleCategory l E W)\n      (P : (constructibleRationalHomPairs l E W).FullSubcategory)\n      (f : L.obj ⟶ (constructibleIntegralHom l E W).obj\n        (integralPairOfRationalHomPair l E W P))\n      (a : Localization.Away (Padic.coefficientExtensionUniformizer l E))\n      (q : L ⟶ (rationalDerivedInternalHom l E W).obj P),\n      HEq q (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f) →\n      HEq ((S'.transpose L P).symm q)\n        (a ⊗ₜ[Padic.coefficientExtensionIntegers l E]\n          ((podIntegralClosed l E W).transpose L.obj\n            (integralPairOfRationalHomPair l E W P)).symm f)) :\n    S = S'",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261028T034807-L-3548105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261028T034807-L-3548105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
