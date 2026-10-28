@@ -12,24 +12,36 @@
  },
  "proof": [
   {
-   "text": "Expand the ordered projection, comparison mate and direct-image compositor. Use naturality of the derived tensor comparison, the mate equations for the proper exchange, and the canonical tensor/base-change comparison to identify the two composites.",
+   "text": "For arbitrary composable scheme maps p and f, identify rightDerivedLowerStarCompIsoOfComp with rightDerivedLowerStarComp followed by equality transport. Substitute the composite equality, then use conjugateEquiv_leftDerivedUpperStarComp_hom and the definitions of the two conjugate isomorphisms. This is the proved private helper compIso_hom.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the compositor helper to the two pullback projections. At the level of functor isomorphisms, expand directComparison and cancel the first-projection compositor with its inverse. Evaluate the resulting isomorphism equality at the kernel tensor object. Thus directComparison followed by the first-projection Kunneth compositor is the second-projection Kunneth compositor.",
+   "uses": [
+    "def-sfb-etale-coordinate-trace-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize kunnethMap_symmetricFactorization to the self-pullback square and coefficients M and f*L. Rewrite its left side with kunnethMap_eq. Expand the coordinate orderedProjectionIso and comparison inverse: these are exactly its symmetric projection/exchange factors, since the canonical tensor symmetry is involutive. Use the compositor identity from the preceding step and cancel the final first-projection compositor, which is an isomorphism. Cancellation is packaged in the proved generic private helper cancel_iso_app, and the two symmetry normalizations in symmetry_inv and orderedProjection_hom; comparison_inv is the definitional forward-comparison equation.",
    "uses": [
     "def-sfb-etale-coordinate-trace-data",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-sf-native-kunneth-symmetric-factorization",
+    "lem-kun-kunneth-via-0f1n"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sfb-etale-coordinate-trace-data",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-sf-native-kunneth-symmetric-factorization",
+  "lem-kun-kunneth-via-0f1n"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
-  "place": "The corresponding left-route mate calculation."
+  "place": "First triangle, coordinate interchange from the existing symmetric native Kunneth factorization; compositor normalization by the source-library adjunction compatibility API."
  },
  "mathlib_searches": [
   {
@@ -83,9 +95,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F5",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261028T020400-L-2503807",
+  "landing": "20261028T035011-L-3578810",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
