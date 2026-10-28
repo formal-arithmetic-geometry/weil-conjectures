@@ -21182,3 +21182,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:18 L: merged deliver/X5/Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps (stage 3; reviewer PASS; after a return; landing 20261028T081804-L-2783973 (interface); batch 20261028T081727; modules 2; new nodes 3; change records: coord/changes/exceptional-system-support-map-normalization.md)
 - 08:18 L: merged deliver/Y3/Sheaf.Paper.AdicFiniteIntegralTensorReindexing (stage 3; reviewer PASS; first push; landing 20261028T081806-L-2784264 (interface); batch 20261028T081727; modules 4; new nodes 3)
 - 08:18 L: merged deliver/Z7/Sheaf.Paper.FiniteClosedShriekDomainPart (stage 3; reviewer PASS; first push; landing 20261028T081807-L-2784582 (proof); batch 20261028T081727; modules 1; new nodes 0)
+- 08:18 L: merged deliver/NF/lem-sf-projection-base-change-rational (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T081727; landing - (dag)
