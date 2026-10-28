@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-fixed-pullback",
+ "kind": "statement",
+ "title": "Fixed finite sheaf realization commutes with ordinary pro-etale inverse image",
+ "statement": "Let a:Z→T and b:T→X be maps of schemes, d an adic coefficient datum on A, and n a natural number. Write R for the nth coefficient sheaf on X, RT for its inverse image along b, and RZ for its inverse image along a followed by b. Use the inverse of the canonical ring inverse-image compositor as the identification of the inverse image of RT along a with RZ. Fixed sheaf realization along a followed by b after fixed-scalar inverse image along a is naturally isomorphic to module inverse image along a after fixed sheaf realization along b. This is an ordinary sheaf statement, with no tower, derived object or chosen level marking [lem-weil-pbc-lisse-tower-scalar-restriction, def-per-proetale-ring-inverse-image-comparisons, def-weil-pbc-proetale-operations].",
+ "stmt_deps": [
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "def-per-proetale-ring-inverse-image-comparisons",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03D8 and 03DA; lemma-sheafification-presheaf-modules, definition-pushforward, and lemma-adjoint-pullback-pushforward-modules."
+ },
+ "proof": [
+  {
+   "text": "Expand the finite coefficient isomorphism as inverse image of the base comparison followed by the constant-ring comparison. The constant-ring comparison composition law and naturality of the ring inverse-image compositor identify the two composite coefficient maps.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "def-per-proetale-ring-inverse-image-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose this identity through the ring inverse-image/direct-image adjunction, cancel the coefficient isomorphisms, and apply the ring sheafification unit. The resulting square says that the direct-image coefficient map commutes with constant scalar sections. Hence the identity on sections is linear after restriction to the quotient ring.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit of module sheafification is an isomorphism on the underlying presheaf of any fixed-ring module sheaf. Restriction of scalars therefore identifies realized direct image with ordinary direct image on sections. Cancel the fully faithful coefficient restriction functor to obtain an isomorphism of right adjoints.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical module inverse-image adjunction and the fixed-scalar inverse-image adjunction. The adjunction-square theorem transfers the right-adjoint isomorphism across the realization equivalences to give the ordinary finite-realization inverse-image square.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-constant-scalar-geometric-adjunctions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the square with the inverse-image compatibility of restriction along the completion quotient map. Reassociate the functors to obtain precisely the fixed sheaf realization square in the statement.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-per-proetale-ring-inverse-image-comparisons",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The associated-module-sheaf adjunction and inverse-image/direct-image adjunction give the ordinary square after checking compatibility on scalar sections. All steps are proved in Lean; no new admitted theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with sheafification and constant scalar realization",
+   "results": "SheafOfModules.sheafificationCompPullback and generic module-sheafification APIs. No declaration gives the project-specific fixed-realization square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.sheafificationCompPullback",
+   "results": "One generic continuous-site module sheafification/pullback comparison; it does not identify this coefficient realization with the specified model-site inverse image.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. The proof instead uses right-adjoint uniqueness to preserve the project coefficient compositor.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalizedActualLevels",
+  "date": "2026-10-28",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-tower-localized-actual-levels",
+   "place": "The ordinary fixed-realization/inverse-image square of proof step 1, proved completely.",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerFixedPullback",
+  "file": "lean/Sheaf/Paper/LisseTowerFixedPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_fixed_sheaf_pullback",
+  "statement": "theorem lisseTower_fixed_sheaf_pullback\n    {X T Z : Scheme.{u}} (a : Z ⟶ T) (b : T ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :\n    Nonempty (ProEtale.upperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) a ⋙\n        lisseTowerFixedSheafRealization (a ≫ b) d n ≅\n      lisseTowerFixedSheafRealization b d n ⋙\n        proEtaleRingModulePullback a\n          ((adicTowerInverseImage b).obj ((pbcAdicRings X d).obj (op n)))\n          ((adicTowerInverseImage (a ≫ b)).obj ((pbcAdicRings X d).obj (op n)))\n          ((proEtaleRingInverseImageComp a b).symm.app ((pbcAdicRings X d).obj (op n))))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T035016-L-3580134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T035016-L-3580134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

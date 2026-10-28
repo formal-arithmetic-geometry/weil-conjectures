@@ -6,6 +6,8 @@ Authors: SHEAF group J7
 module
 
 public import Sheaf.Paper.LisseTowerPulledScalar
+import Sheaf.Paper.LisseTowerFixedPullback
+import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 
 /-! # Level comparisons for localized actual realizations
 
@@ -54,6 +56,54 @@ theorem lisseTower_localized_actual_levels
     (L n).obj
       ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≅
       (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n)) := by
-  sorry
+  classical
+  let a := f.left ≫ V.hom
+  let b := U.hom ≫ g
+  have hab : a ≫ b = W.hom ≫ g := by
+    have hw := f.w
+    change f.left ≫ (V.hom ≫ U.hom) = W.hom ≫ 𝟙 Y at hw
+    erw [Category.comp_id] at hw
+    simpa only [a, b, Category.assoc] using congrArg (fun t ↦ t ≫ g) hw
+  refine ⟨fun n ↦ ?_⟩
+  let B := lisseTowerEtaleRing d n
+  let R := (pbcAdicRings X d).obj (op n)
+  let RT := (adicTowerInverseImage b).obj R
+  let RZ := (adicTowerInverseImage (a ≫ b)).obj R
+  let c := (proEtaleRingInverseImageComp a b).symm.app R
+  let P := proEtaleRingModulePullback a RT RZ c
+  have hc : Iso.refl RZ = proEtaleRingCompositeCoefficients a b R RT RZ
+      (Iso.refl RT) c := by
+    apply Iso.ext
+    change 𝟙 RZ = (proEtaleRingInverseImageComp a b).hom.app R ≫
+      (adicTowerInverseImage a).map (𝟙 RT) ≫
+        (proEtaleRingInverseImageComp a b).inv.app R
+    erw [(adicTowerInverseImage a).map_id RT, Category.id_comp]
+    exact (Iso.hom_inv_id_app (proEtaleRingInverseImageComp a b) R).symm
+  let comp := (proEtaleCanonicalPullbackComposition_existsUnique a b R RT RZ
+    (Iso.refl RT) c (Iso.refl RZ) hc).exists.choose
+  let sq := (lisseTower_fixed_sheaf_pullback a b d n).some
+  let dsq : (ProEtale.upperStar (ModuleCat.{u + 1} B) a).mapDerivedCategory ⋙
+        lisseTowerFixedRealization (a ≫ b) d n ≅
+      lisseTowerFixedRealization b d n ⋙ P.mapDerivedCategory :=
+    Functor.isoWhiskerLeft _ (lisseTowerFixedRealizationIso (a ≫ b) d n).symm ≪≫
+      Functor.mapDerivedCategorySquareIso sq ≪≫
+      Functor.isoWhiskerRight (lisseTowerFixedRealizationIso b d n) P.mapDerivedCategory
+  let starComp := Functor.mapDerivedCategoryNatIso
+      (ProEtale.upperStarComp (ModuleCat.{u + 1} B) f.left V.hom) ≪≫
+    Functor.mapDerivedCategoryCompIso
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) V.hom)
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) f.left)
+  let C := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) U.left).mapDerivedCategory
+  let K := C.obj (D n)
+  have en : (lisseTowerFixedRealization b d n).obj K ≅
+      (adicTowerPullback b R).obj (M.level n) := e n
+  have result : (lisseTowerFixedRealization (a ≫ b) d n).obj
+      ((ProEtale.upperStar (ModuleCat.{u + 1} B) f.left).mapDerivedCategory.obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} B) V.hom).mapDerivedCategory.obj K)) ≅
+      (adicTowerPullback (a ≫ b) R).obj (M.level n) :=
+    (lisseTowerFixedRealization (a ≫ b) d n).mapIso (starComp.symm.app K) ≪≫
+      dsq.app K ≪≫ P.mapDerivedCategory.mapIso en ≪≫ (comp.app (M.level n)).symm
+  rw [hab] at result
+  exact result
 
 end AlgebraicGeometry.Scheme
