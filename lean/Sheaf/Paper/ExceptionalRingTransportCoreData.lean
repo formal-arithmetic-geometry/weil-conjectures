@@ -5,11 +5,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCorePostData
+public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Data fields for exceptional integral transport
 
 This interface isolates the object, functor, adjunction, and comparison-isomorphism
-fields of the normalized exceptional transport record.  Its compatibility equations
+fields of the normalized exceptional transport record. The right comparison is
+constructed by uniqueness of right adjoints. Its remaining compatibility equations
 are supplied separately by `ExceptionalRingTransportCoreLaws`.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
 5.26 (blueprint: lem-sf-exceptional-ring-transport-core).
@@ -50,9 +52,6 @@ structure TransportCoreData
   realizeF (E : FieldStage.{u} l) : (operation (.integral E)).F ≅
     PurReconstruction.realized (reconstruction E true).equivalence
       (reconstruction E false).equivalence (F E)
-  realizeG (E : FieldStage.{u} l) : (operation (.integral E)).G ≅
-    PurReconstruction.realized (reconstruction E false).equivalence
-      (reconstruction E true).equivalence (G E)
   evaluationF (E : FieldStage.{u} l) (n : ℕ) :
     F E ⋙ (reconstruction E false).evaluation n ≅
       (reconstruction E true).evaluation n ⋙
@@ -66,6 +65,32 @@ structure TransportCoreData
       PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙
         sfCompactSupportFiniteIntegralFunctor l D.k
           (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier
+
+/-- The canonical right comparison determined by the two specified adjunctions
+and the left comparison. This is an explicit construction, not a freely chosen
+isomorphism: its inverse is the unique adjunction-compatible comparison.
+Source: Zheng, Construction 5.25, with uniqueness of right adjoints.
+(blueprint: lem-sf-exceptional-ring-transport-core-data) -/
+def TransportCoreData.realizeG
+    {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω]
+    [IsAlgClosure (Padic l) Ω] {D : FiniteFieldDatum.{u}} {hl : l ≠ D.p}
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c : Compactification f}
+    {operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l)}
+    {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
+    (d : TransportCoreData l Ω D hl c operation left) (E : FieldStage.{u} l) :
+    (operation (.integral E)).G ≅
+      PurReconstruction.realized (d.reconstruction E false).equivalence
+        (d.reconstruction E true).equivalence (d.G E) :=
+  (Adjunction.rightAdjointUniq
+    ((PurReconstruction.realizedAdjunction (d.reconstruction E true).equivalence
+      (d.reconstruction E false).equivalence (d.adjunction E)).ofNatIsoLeft
+        (d.realizeF E).symm)
+    (operation (.integral E)).adjunction).symm
 
 section ReductionComparisons
 variable {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω]
@@ -152,7 +177,6 @@ theorem exists_exceptional_transport_core_data
     G := p.G,
     adjunction := p.adjunction,
     realizeF := p.realizeF,
-    realizeG := p.realizeG,
     evaluationF := p.evaluationF,
     evaluationG := p.evaluationG,
     integralLeft := p.integralLeft }⟩

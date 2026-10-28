@@ -9,9 +9,9 @@
   "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
  },
  "proof_origin": {
-  "by": "G6",
-  "document": "WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean; literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Adjunction.ofNatIsoRight_eq_iff; Construction 5.25, pp. 36-37. Diagnosis and proved canonical comparison; original universal theorem remains disputed and unproved."
+  "by": "G3 stage 3 definition repair",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf; Mathlib/CategoryTheory/Adjunction/Unique.lean; WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "place": "Construction 5.25, pp. 36-37; Adjunction.rightAdjointUniq and Adjunction.ofNatIsoRight_eq_iff. Explicit canonical construction; no new existence choice or law hypothesis."
  },
  "mathlib_searches": [
   {
@@ -49,22 +49,20 @@
  "id": "lem-sf-exceptional-ring-transport-core-system-adjunction-law",
  "kind": "statement",
  "title": "Exceptional transport system adjunction law",
- "statement": "theorem exists_exceptional_transport_core_system_adjunction_law\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (d : TransportCoreData l Ω D hl c operation left) :\n    Nonempty (∀ E : FieldStage.{u} l,\n      (operation (.integral E)).adjunction =\n        ((PurReconstruction.realizedAdjunction (d.reconstruction E true).equivalence\n          (d.reconstruction E false).equivalence (d.adjunction E)).ofNatIsoLeft\n          (d.realizeF E).symm).ofNatIsoRight (d.realizeG E).symm)",
+ "statement": "For the parameters and a datum d of [lem-sf-exceptional-ring-transport-core-data], at every field stage E the given integral operation adjunction equals the strict-system adjunction reconstructed through the two chosen equivalences, transported on the left along d.realizeF(E) inverse and on the right along d.realizeG(E) inverse. Here d.realizeG is the explicitly constructed canonical comparison, not an arbitrary isomorphism. The full Lean signature of exists_exceptional_transport_core_system_adjunction_law is unchanged.",
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: conjugation yields the adjunction equality only for the right-adjoint uniqueness comparison. The supplied TransportCoreData leaves realizeG independent of the adjunction and realizeF. The canonical-comparison node proves the exact iff and the normalized construction; the obstruction node proves that a nonidentity twist rules out the asserted law for every datum. Thus the original universal step is invalid as stated, and the unchanged theorem is not claimed proved.",
+   "text": "The repaired data record defines realizeG as the inverse of the unique comparison between the two right adjoints of the given integral left functor. Apply normalizedRealizeG_adjunction at every stage and package the family in Nonempty. The uniqueness calculation is completely proved and requires no other transport law.",
    "uses": [
     "lem-sf-exceptional-ring-transport-core-data",
-    "lem-sf-exceptional-system-adjunction-normalized-comparison",
-    "lem-sf-exceptional-system-adjunction-comparison-obstruction"
+    "lem-sf-exceptional-system-adjunction-normalized-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sf-exceptional-ring-transport-core-data",
-  "lem-sf-exceptional-system-adjunction-normalized-comparison",
-  "lem-sf-exceptional-system-adjunction-comparison-obstruction"
+  "lem-sf-exceptional-system-adjunction-normalized-comparison"
  ],
  "lean": {
   "existing": false,
@@ -89,11 +87,44 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G6",
+  "reviewer": "C-dde61",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261028T034800-L-3544503",
+  "landing": "20261028T072413-L-1943418",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item exists_exceptional_transport_core_system_adjunction_law and 4 node files against the canonical-realizeG definition repair in unclaimed ExceptionalRingTransportCoreData; change record users vs 3b importers (8 OK, 2 INFRA that only take d as a parameter)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G3 stage 2",
+  "old_statement": "theorem exists_exceptional_transport_core_system_adjunction_law\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (d : TransportCoreData l Ω D hl c operation left) :\n    Nonempty (∀ E : FieldStage.{u} l,\n      (operation (.integral E)).adjunction =\n        ((PurReconstruction.realizedAdjunction (d.reconstruction E true).equivalence\n          (d.reconstruction E false).equivalence (d.adjunction E)).ofNatIsoLeft\n          (d.realizeF E).symm).ofNatIsoRight (d.realizeG E).symm)",
+  "what": "The original universal statement was false for the former record with freely chosen realizeG. Repair the definition of the data record by the explicit canonical comparison. The theorem signature is unchanged in text but now refers to this repaired definition, and its proof is complete. No law is added as a hypothesis and no final target statement changes.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 5.25, Lemma 5.22, Propositions 5.24 and 5.26, pp. 36-37; adjunction-induced comparisons."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-laws",
+    "holds": true,
+    "note": "The assembly uses exactly the unchanged signature of exists_exceptional_transport_core_system_adjunction_law. The datum now carries the canonical right comparison."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "STATEMENT-DISPUTED: conjugation yields the adjunction equality only for the right-adjoint uniqueness comparison. The supplied TransportCoreData leaves realizeG independent of the adjunction and realizeF. The canonical-comparison node proves the exact iff and the normalized construction; the obstruction node proves that a nonidentity twist rules out the asserted law for every datum. Thus the original universal step is invalid as stated, and the unchanged theorem is not claimed proved.",
+    "uses": [
+     "lem-sf-exceptional-ring-transport-core-data",
+     "lem-sf-exceptional-system-adjunction-normalized-comparison",
+     "lem-sf-exceptional-system-adjunction-comparison-obstruction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sf-exceptional-ring-transport-core-data",
+   "lem-sf-exceptional-system-adjunction-normalized-comparison",
+   "lem-sf-exceptional-system-adjunction-comparison-obstruction"
+  ]
  }
 }

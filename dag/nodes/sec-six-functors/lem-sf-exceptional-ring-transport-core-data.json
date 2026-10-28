@@ -4,7 +4,7 @@
  "title": "Exceptional transport object and functor data",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
- "statement": "Given the finite and integral operation families and compact-support left realizations of the exceptional ring construction, there exists the object, functor, adjunction, reconstruction, evaluation, and integral-left-realization data fields of an ExceptionalIntegralScalar.Transported record.",
+ "statement": "Given the finite and integral operation families and compact-support left realizations of the exceptional ring construction, there exists TransportCoreData with the reconstruction, operation, functor, adjunction, left-comparison, evaluation, and integral-left-realization fields. Its right comparison realizeG is not an independent field: for every E it is the inverse of Adjunction.rightAdjointUniq from the reconstructed system adjunction transported on the left by realizeF inverse to the given integral operation adjunction. Thus realizeG is explicitly determined by the two adjunctions and realizeF, without an additional compatibility hypothesis. The reduction comparisons reductionF and reductionG are likewise not independent fields: they are defined from realizeF and realizeG by whiskering through the target reconstruction functor and composing with its counit isomorphism and the right unitor.",
  "stmt_deps": [],
  "source": {
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
@@ -12,24 +12,32 @@
  },
  "proof": [
   {
-   "text": "Choose the reconstruction and shift package from the isolated reconstruction subproblem. Choose coherent integral operations and realizations from the integral compactification realization theorem. Apply the isolated transported functor/comparison package and assemble the independent fields of TransportCoreData. Define reductionF and reductionG from realizeF and realizeG by whiskering through the target reconstruction functor and composing with its counit isomorphism and the right unitor; do not choose the two reduction comparisons independently.",
+   "text": "Choose the reconstruction and shift package from the isolated reconstruction subproblem. Choose coherent integral operations and realizations from the integral compactification realization theorem. Apply the isolated transported functor/comparison package and assemble the independent fields of TransportCoreData, omitting the former arbitrary realizeG, reductionF and reductionG fields. Define reductionF and reductionG from realizeF and realizeG by whiskering through the target reconstruction functor and composing with its counit isomorphism and the right unitor; do not choose the two reduction comparisons independently.",
    "uses": [
     "new-lem-sf-exceptional-ring-transport-reconstructions",
     "lem-sf-integral-compactification-system-realization",
     "new-lem-sf-exceptional-ring-transport-post-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "Define TransportCoreData.realizeG by the inverse of rightAdjointUniq for the reconstructed adjunction, transported along realizeF inverse, and the integral operation adjunction. Both left adjoints coincide. This is the explicit unit/counit construction of the uniqueness isomorphism, not a witness chosen from an unproved existence statement.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-lem-sf-exceptional-ring-transport-reconstructions",
   "lem-sf-integral-compactification-system-realization",
-  "new-lem-sf-exceptional-ring-transport-post-data"
+  "new-lem-sf-exceptional-ring-transport-post-data",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
-  "by": "G7 stage 3: canonical reconstruction-counit comparisons",
-  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26; component formulas for functor whiskering"
+  "by": "G3 stage 3 definition repair (merged with G7 stage 3: canonical reconstruction-counit comparisons)",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf; Mathlib/CategoryTheory/Adjunction/Unique.lean; WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "place": "Construction 5.25, pp. 36-37; Adjunction.rightAdjointUniq and Adjunction.ofNatIsoRight_eq_iff. Explicit canonical construction; no new existence choice or law hypothesis. Reduction comparisons: Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26; component formulas for functor whiskering."
  },
  "mathlib_searches": [
   {
@@ -74,11 +82,13 @@
   "by": "C5",
   "date": "2026-10-28",
   "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.realizeG",
    "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_transport_core_data",
    "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.reductionF",
    "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.reductionG"
   ],
-  "note": "The reduction comparison names and types are preserved; they are now canonical definitions from realizeF/realizeG and the reconstruction counits, rather than independent record fields."
+  "note": "The comparison names and types realizeG, reductionF and reductionG are preserved; they are now canonical definitions (realizeG by uniqueness of right adjoints, reductionF/G from realizeF/realizeG and the reconstruction counits), rather than independent record fields."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -93,11 +103,119 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-29612",
-  "group": "G7",
+  "reviewer": "C-dde61",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261028T055654-L-794460",
+  "landing": "20261028T072413-L-1943418",
   "kind": "interface",
-  "note": "independent cc review: Item proof and canonical reductionF/G defs in unclaimed ExceptionalRingTransportCoreData against the item and data nodes, change record users, 3b importers (7 OK, 2 INFRA from missing EvaluationUnit olean) and downstream Transported assembly (ExceptionalRingTransportCore.lean:66-69)"
+  "note": "independent cc review: item exists_exceptional_transport_core_system_adjunction_law and 4 node files against the canonical-realizeG definition repair in unclaimed ExceptionalRingTransportCoreData; change record users vs 3b importers (8 OK, 2 INFRA that only take d as a parameter)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G3 stage 2",
+  "old_statement": "Given the finite and integral operation families and compact-support left realizations of the exceptional ring construction, there exists the object, functor, adjunction, reconstruction, evaluation, and integral-left-realization data fields of an ExceptionalIntegralScalar.Transported record.",
+  "what": "The previous data record allowed an arbitrary realizeG although every consumer requires the specified adjunction-compatible comparison. On an identity adjunction in characteristic zero, a minus-identity comparison changes the transported adjunction. Replace this free data field by the explicit uniqueness construction, not by a new law hypothesis. The data existence theorem and final Transported interface keep their written signatures.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 5.25, Lemma 5.22, Propositions 5.24 and 5.26, pp. 36-37; adjunction-induced comparisons."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-exceptional-integral-left-normalization-lift",
+    "holds": true,
+    "note": "This construction changes only integralLeft. The derived realizeG depends only on reconstruction, F, G, adjunction and realizeF, so it is definitionally unchanged by that update."
+   },
+   {
+    "id": "lem-sf-exceptional-integral-left-normalization-obstruction",
+    "holds": true,
+    "note": "This construction changes only integralLeft. The derived realizeG depends only on reconstruction, F, G, adjunction and realizeF, so it is definitionally unchanged by that update."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core",
+    "holds": true,
+    "note": "The assembly copies d.realizeG and the proved adjunction law into the unchanged Transported record. The canonical definition supplies exactly the same isomorphism type."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-evaluation-laws",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-laws",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-normalization-laws",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-adjunction-law",
+    "holds": true,
+    "note": "This delivery replaces the disputed proof plan by the proved canonical comparison law and drops the obstruction dependency. The adjunction law now holds for every repaired datum."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-laws",
+    "holds": true,
+    "note": "The assembly uses exactly the unchanged signature of exists_exceptional_transport_core_system_adjunction_law. The datum now carries the canonical right comparison."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-reduction-laws",
+    "holds": true,
+    "note": "The reductionG definition now composes the canonical right comparison with the reconstruction counit; domain, codomain and the proved reduction-law signature are unchanged, and its proof unfolds the definitions."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-support-law",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-support-law-objects",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "lem-sf-exceptional-system-adjunction-comparison-obstruction",
+    "holds": true,
+    "note": "Adapted in this delivery: noncanonical twists are tested on arbitrary comparison families, rather than illegal updates of the now derived realizeG."
+   },
+   {
+    "id": "lem-sf-exceptional-system-adjunction-normalized-comparison",
+    "holds": true,
+    "note": "Adapted in this delivery: normalizedRealizeG aliases the constructed comparison and normalizeRealizeG is the identity; its law and uniqueness signatures remain valid."
+   },
+   {
+    "id": "new-lem-sf-exceptional-ring-transport-core-evaluation-counit",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "new-lem-sf-exceptional-ring-transport-core-evaluation-support",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   },
+   {
+    "id": "new-lem-sf-exceptional-ring-transport-core-evaluation-unit",
+    "holds": true,
+    "note": "The data type retains all other fields. Only its right comparison is now a defined canonical isomorphism; no use of an independently specified right comparison occurs in this citer."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose the reconstruction and shift package from the isolated reconstruction subproblem. Choose coherent integral operations and realizations from the integral compactification realization theorem. Apply the isolated transported functor/comparison package and assemble the independent fields of TransportCoreData. Define reductionF and reductionG from realizeF and realizeG by whiskering through the target reconstruction functor and composing with its counit isomorphism and the right unitor; do not choose the two reduction comparisons independently.",
+    "uses": [
+     "new-lem-sf-exceptional-ring-transport-reconstructions",
+     "lem-sf-integral-compactification-system-realization",
+     "new-lem-sf-exceptional-ring-transport-post-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "new-lem-sf-exceptional-ring-transport-reconstructions",
+   "lem-sf-integral-compactification-system-realization",
+   "new-lem-sf-exceptional-ring-transport-post-data"
+  ]
  }
 }

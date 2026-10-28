@@ -7,9 +7,9 @@
   "place": "Construction 5.25, Lemma 5.22 and Propositions 5.24 and 5.26, pp. 36-37; agent-expanded right-adjoint comparison calculation."
  },
  "proof_origin": {
-  "by": "G6",
-  "document": "WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
-  "place": "Adjunction.ofNatIsoRight_eq_iff and rightAdjointUniq; specialized to the given reconstruction adjunction. No law-existence theorem is used."
+  "by": "G3 stage 3 definition repair",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf; Mathlib/CategoryTheory/Adjunction/Unique.lean; WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "place": "Construction 5.25, pp. 36-37; Adjunction.rightAdjointUniq and Adjunction.ofNatIsoRight_eq_iff. Explicit canonical construction; no new existence choice or law hypothesis."
  },
  "mathlib_searches": [
   {
@@ -72,13 +72,13 @@
  },
  "id": "lem-sf-exceptional-system-adjunction-normalized-comparison",
  "title": "Canonical system right comparison preserving the specified adjunctions",
- "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type schemes X,Y over D.k, a separated finite-type relative morphism f:X→Y, a compactification c, operation and compact-support left-realization families, and a transport datum d as defined in [lem-sf-exceptional-ring-transport-core-data]. For each finite extension E/Q_l, write A_E for the integral operation and B_E for the strict-system adjunction conjugated through the two reconstruction equivalences and transported on the left by realizeF_E inverse. There is a unique family e_E:A_E.G ≅ realized(d.G_E) such that A_E.adjunction equals B_E.ofNatIsoRight(e_E inverse). It is explicitly e_E=(B_E.rightAdjointUniq A_E.adjunction) inverse. The original comparison equation holds if and only if d.realizeG_E equals this e_E. Replacing only the realizeG field by e gives a transport datum satisfying the entire family of adjunction comparison equations.",
+ "statement": "Fix the parameters and a transport datum d of [lem-sf-exceptional-ring-transport-core-data]. Let B_E be the strict-system adjunction conjugated through reconstruction and transported along realizeF inverse. There is exactly one family e_E from the integral operation right functor to the reconstructed system right functor such that the integral adjunction equals B_E.ofNatIsoRight(e_E inverse). It is the inverse of B_E.rightAdjointUniq applied to the integral adjunction. The defined d.realizeG is exactly this family. normalizedRealizeG is an abbreviation for it, and normalizeRealizeG is the identity on the already normalized datum. The original iff and the law for normalizeRealizeG remain valid.",
  "stmt_deps": [
   "lem-sf-exceptional-ring-transport-core-data"
  ],
  "proof": [
   {
-   "text": "Form B_E by the specified equivalence adjunction composites, followed by transport on the left along d.realizeF_E inverse. Both B_E and A_E.adjunction have the same left adjoint. Define e_E as the inverse of their rightAdjointUniq isomorphism. This uses only existing adjunction data and no existence choice.",
+   "text": "The data record constructs realizeG by the inverse of the explicit rightAdjointUniq. normalizedRealizeG is an abbreviation for that definition, rather than a second construction.",
    "uses": [
     "lem-sf-exceptional-ring-transport-core-data",
     "det-sp-unique-right-adjoint"
@@ -86,14 +86,14 @@
    "elementary": true
   },
   {
-   "text": "The source-library theorem Adjunction.ofNatIsoRight_eq_iff says B_E.ofNatIsoRight(t) = A_E.adjunction exactly when t=B_E.rightAdjointUniq A_E.adjunction. Apply this with t=e_E inverse to prove the canonical equation, and with t=d.realizeG_E inverse to prove the necessary and sufficient condition. Taking inverse isomorphisms and function extensionality gives uniqueness of the whole family.",
+   "text": "Apply the proved source theorem ofNatIsoRight_eq_iff: transport along e equals the given adjunction exactly when e is rightAdjointUniq. This proves the canonical equation and the iff. Apply inverse isomorphisms and function extensionality to prove uniqueness of the whole comparison family.",
    "uses": [
     "det-sp-unique-right-adjoint"
    ],
    "elementary": true
   },
   {
-   "text": "Update d.realizeG to the explicit family e. None of the data fields used to define B_E depends on realizeG, so the canonical equation gives the claimed equation for the updated record without any further identifications.",
+   "text": "Since realizeG is canonical by definition, normalization is the identity map on TransportCoreData. Its adjunction equality is the canonical equation already proved.",
    "uses": [],
    "elementary": true
   }
@@ -133,11 +133,55 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G6",
+  "reviewer": "C-dde61",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261028T034800-L-3544503",
+  "landing": "20261028T072413-L-1943418",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item exists_exceptional_transport_core_system_adjunction_law and 4 node files against the canonical-realizeG definition repair in unclaimed ExceptionalRingTransportCoreData; change record users vs 3b importers (8 OK, 2 INFRA that only take d as a parameter)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G3 stage 2",
+  "old_statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type schemes X,Y over D.k, a separated finite-type relative morphism f:X→Y, a compactification c, operation and compact-support left-realization families, and a transport datum d as defined in [lem-sf-exceptional-ring-transport-core-data]. For each finite extension E/Q_l, write A_E for the integral operation and B_E for the strict-system adjunction conjugated through the two reconstruction equivalences and transported on the left by realizeF_E inverse. There is a unique family e_E:A_E.G ≅ realized(d.G_E) such that A_E.adjunction equals B_E.ofNatIsoRight(e_E inverse). It is explicitly e_E=(B_E.rightAdjointUniq A_E.adjunction) inverse. The original comparison equation holds if and only if d.realizeG_E equals this e_E. Replacing only the realizeG field by e gives a transport datum satisfying the entire family of adjunction comparison equations.",
+  "what": "Canonical right comparisons are now defined directly in TransportCoreData, so the previous normalization structure update is unnecessary and becomes the identity. The existing law and uniqueness theorem signatures are retained; normalizedRealizeG is an abbreviation for the single canonical definition.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 5.25, Lemma 5.22, Propositions 5.24 and 5.26, pp. 36-37; adjunction-induced comparisons."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-adjunction-law",
+    "holds": true,
+    "note": "This delivery replaces the disputed proof plan by the proved canonical comparison law and drops the obstruction dependency. The adjunction law now holds for every repaired datum."
+   },
+   {
+    "id": "lem-sf-exceptional-system-adjunction-comparison-obstruction",
+    "holds": true,
+    "note": "Adapted in this delivery: noncanonical twists are tested on arbitrary comparison families, rather than illegal updates of the now derived realizeG."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Form B_E by the specified equivalence adjunction composites, followed by transport on the left along d.realizeF_E inverse. Both B_E and A_E.adjunction have the same left adjoint. Define e_E as the inverse of their rightAdjointUniq isomorphism. This uses only existing adjunction data and no existence choice.",
+    "uses": [
+     "lem-sf-exceptional-ring-transport-core-data",
+     "det-sp-unique-right-adjoint"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "The source-library theorem Adjunction.ofNatIsoRight_eq_iff says B_E.ofNatIsoRight(t) = A_E.adjunction exactly when t=B_E.rightAdjointUniq A_E.adjunction. Apply this with t=e_E inverse to prove the canonical equation, and with t=d.realizeG_E inverse to prove the necessary and sufficient condition. Taking inverse isomorphisms and function extensionality gives uniqueness of the whole family.",
+    "uses": [
+     "det-sp-unique-right-adjoint"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Update d.realizeG to the explicit family e. None of the data fields used to define B_E depends on realizeG, so the canonical equation gives the claimed equation for the updated record without any further identifications.",
+    "uses": [],
+    "elementary": true
+   }
+  ]
  }
 }

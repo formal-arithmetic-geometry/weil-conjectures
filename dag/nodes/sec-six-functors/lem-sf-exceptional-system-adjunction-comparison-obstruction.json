@@ -7,9 +7,9 @@
   "place": "Construction 5.25, Lemma 5.22 and Propositions 5.24 and 5.26, pp. 36-37; agent-expanded right-adjoint comparison calculation."
  },
  "proof_origin": {
-  "by": "G6",
-  "document": "WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
-  "place": "Adjunction.ofNatIsoRight_eq_iff and rightAdjointUniq; specialized to the given reconstruction adjunction. No law-existence theorem is used."
+  "by": "G3 stage 3 definition repair",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf; Mathlib/CategoryTheory/Adjunction/Unique.lean; WeilConjectures/Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "place": "Construction 5.25, pp. 36-37; Adjunction.rightAdjointUniq and Adjunction.ofNatIsoRight_eq_iff. Explicit canonical construction; no new existence choice or law hypothesis."
  },
  "mathlib_searches": [
   {
@@ -72,21 +72,21 @@
  },
  "id": "lem-sf-exceptional-system-adjunction-comparison-obstruction",
  "title": "Obstruction to adjunction laws for arbitrary right comparisons",
- "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type schemes X,Y over D.k, a separated finite-type relative morphism f:X→Y, a compactification c, operation and compact-support left-realization families, and a transport datum d as defined in [lem-sf-exceptional-ring-transport-core-data]. If at a stage E the supplied right comparison differs from the canonical comparison in [lem-sf-exceptional-system-adjunction-normalized-comparison], the displayed adjunction equality fails. More generally let α_E be a natural automorphism of the integral operation right functor at every stage, with α_E0 not the identity at some stage E0. There cannot be an adjunction comparison law for every transport datum with the same parameters: the datum obtained by changing realizeG_E to α_E followed by the canonical comparison has no such law. In particular the conclusion holds if, for some integral object K at Y and stage E, minus the identity of A_E.G(K) differs from its identity; take α_E to be the negative identity natural automorphism at all stages. These negations explicitly assume the nonidentity automorphism or component; they do not assert it exists on a zero category.",
+ "statement": "Fix the parameters and a transport datum d as in [lem-sf-exceptional-ring-transport-core-data]. A comparison e_E different from the canonical comparison of [lem-sf-exceptional-system-adjunction-normalized-comparison] does not preserve the specified adjunctions. Given a family of automorphisms alpha_E of the integral operation right functors, nonidentity at E0, not every arbitrary family e_E of right comparison isomorphisms can preserve the adjunctions: alpha_E followed by the canonical comparison is a counterexample. The same holds when minus identity at some component is nonidentity. This obstruction concerns arbitrary comparison families; d.realizeG itself is fixed canonically and is never changed. No nonidentity automorphism is asserted to exist on a zero category.",
  "stmt_deps": [
   "lem-sf-exceptional-ring-transport-core-data",
   "lem-sf-exceptional-system-adjunction-normalized-comparison"
  ],
  "proof": [
   {
-   "text": "The pointwise necessary and sufficient condition for the adjunction equation immediately excludes a noncanonical supplied comparison.",
+   "text": "For a comparison e not equal to the canonical one, the proved ofNatIsoRight_eq_iff identifies any hypothetical compatible e inverse with rightAdjointUniq. Taking inverses contradicts the inequality.",
    "uses": [
     "lem-sf-exceptional-system-adjunction-normalized-comparison"
    ],
    "elementary": true
   },
   {
-   "text": "Update only realizeG_E to α_E followed by the canonical comparison. This remains a valid TransportCoreData because no other field depends on realizeG. A universal law applied to this update and the uniqueness condition would give α_E0 followed by e_E0 equals e_E0. Compose both sides on the right with e_E0 inverse; associativity and the two inverse identities force α_E0 to be the identity, contradicting the hypothesis.",
+   "text": "Test a hypothetical law for every arbitrary comparison family on e_E = alpha_E followed by the canonical comparison. Uniqueness at E0 forces this composite to equal the canonical comparison. Compose on the right with its inverse; associativity and the inverse identities give alpha_E0 = identity, a contradiction. No TransportCoreData field is updated.",
    "uses": [
     "lem-sf-exceptional-ring-transport-core-data",
     "lem-sf-exceptional-system-adjunction-normalized-comparison"
@@ -94,7 +94,7 @@
    "elementary": true
   },
   {
-   "text": "Each integral category is preadditive, so negation of the identity natural isomorphism is again a natural automorphism of each right functor. If it were the identity at E, equality of its component at K would contradict the specified minus-identity inequality. Apply the preceding twist obstruction. At the identity twist the canonical law remains true; on a zero category the nonidentity hypothesis is unavailable.",
+   "text": "In the preadditive integral categories use alpha_E = negative identity. If this natural isomorphism were the identity, its component at the stated K would contradict the assumed minus-identity inequality. Apply the twist obstruction. On a zero category that inequality is unavailable.",
    "uses": [
     "lem-sf-exceptional-ring-transport-core-data"
    ],
@@ -115,7 +115,7 @@
    "WeilConjectures.ExceptionalIntegralScalar.not_forall_adjunction_law_of_realizeG_twist",
    "WeilConjectures.ExceptionalIntegralScalar.not_forall_adjunction_law_of_neg_id_ne"
   ],
-  "statement": "theorem not_forall_adjunction_law_of_neg_id_ne (E : FieldStage.{u} l) (K : C.{u} l Ω Y (.integral E)) (hne : -(𝟙 ((operation (.integral E)).G.obj K)) ≠ 𝟙 ((operation (.integral E)).G.obj K)) : ¬ ∀ d' : TransportCoreData l Ω D hl c operation left, Nonempty (∀ E : FieldStage.{u} l, (operation (.integral E)).adjunction = ((PurReconstruction.realizedAdjunction (d'.reconstruction E true).equivalence (d'.reconstruction E false).equivalence (d'.adjunction E)).ofNatIsoLeft (d'.realizeF E).symm).ofNatIsoRight (d'.realizeG E).symm)",
+  "statement": "theorem not_forall_adjunction_law_of_neg_id_ne (E : FieldStage.{u} l)\n    (K : C.{u} l Ω Y (.integral E))\n    (hne : -(𝟙 ((operation (.integral E)).G.obj K)) ≠\n      𝟙 ((operation (.integral E)).G.obj K)) :\n    ¬ ∀ e : ∀ E : FieldStage.{u} l,\n        (operation (.integral E)).G ≅\n          PurReconstruction.realized (d.reconstruction E false).equivalence\n            (d.reconstruction E true).equivalence (d.G E),\n      ∀ E : FieldStage.{u} l,\n        (operation (.integral E)).adjunction =\n          ((PurReconstruction.realizedAdjunction (d.reconstruction E true).equivalence\n            (d.reconstruction E false).equivalence (d.adjunction E)).ofNatIsoLeft\n            (d.realizeF E).symm).ofNatIsoRight (e E).symm",
   "branch": "sheaf-dag",
   "by": "G6",
   "date": "2026-10-28"
@@ -133,11 +133,52 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G6",
+  "reviewer": "C-dde61",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261028T034800-L-3544503",
+  "landing": "20261028T072413-L-1943418",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item exists_exceptional_transport_core_system_adjunction_law and 4 node files against the canonical-realizeG definition repair in unclaimed ExceptionalRingTransportCoreData; change record users vs 3b importers (8 OK, 2 INFRA that only take d as a parameter)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G3 stage 2",
+  "old_statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type schemes X,Y over D.k, a separated finite-type relative morphism f:X→Y, a compactification c, operation and compact-support left-realization families, and a transport datum d as defined in [lem-sf-exceptional-ring-transport-core-data]. If at a stage E the supplied right comparison differs from the canonical comparison in [lem-sf-exceptional-system-adjunction-normalized-comparison], the displayed adjunction equality fails. More generally let α_E be a natural automorphism of the integral operation right functor at every stage, with α_E0 not the identity at some stage E0. There cannot be an adjunction comparison law for every transport datum with the same parameters: the datum obtained by changing realizeG_E to α_E followed by the canonical comparison has no such law. In particular the conclusion holds if, for some integral object K at Y and stage E, minus the identity of A_E.G(K) differs from its identity; take α_E to be the negative identity natural automorphism at all stages. These negations explicitly assume the nonidentity automorphism or component; they do not assert it exists on a zero category.",
+  "what": "After realizeG is defined canonically, updating it independently is no longer a valid datum construction. Preserve the genuine obstruction by quantifying over arbitrary comparison isomorphisms with the fixed data instead of over arbitrary TransportCoreData updates. The three theorem signatures are adapted in this module; no external caller uses them.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 5.25, Lemma 5.22, Propositions 5.24 and 5.26, pp. 36-37; adjunction-induced comparisons."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-exceptional-ring-transport-core-system-adjunction-law",
+    "holds": true,
+    "note": "This delivery replaces the disputed proof plan by the proved canonical comparison law and drops the obstruction dependency. The adjunction law now holds for every repaired datum."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "The pointwise necessary and sufficient condition for the adjunction equation immediately excludes a noncanonical supplied comparison.",
+    "uses": [
+     "lem-sf-exceptional-system-adjunction-normalized-comparison"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Update only realizeG_E to α_E followed by the canonical comparison. This remains a valid TransportCoreData because no other field depends on realizeG. A universal law applied to this update and the uniqueness condition would give α_E0 followed by e_E0 equals e_E0. Compose both sides on the right with e_E0 inverse; associativity and the two inverse identities force α_E0 to be the identity, contradicting the hypothesis.",
+    "uses": [
+     "lem-sf-exceptional-ring-transport-core-data",
+     "lem-sf-exceptional-system-adjunction-normalized-comparison"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Each integral category is preadditive, so negation of the identity natural isomorphism is again a natural automorphism of each right functor. If it were the identity at E, equality of its component at K would contradict the specified minus-identity inequality. Apply the preceding twist obstruction. At the identity twist the canonical law remains true; on a zero category the nonidentity hypothesis is unavailable.",
+    "uses": [
+     "lem-sf-exceptional-ring-transport-core-data"
+    ],
+    "elementary": true
+   }
+  ]
  }
 }
