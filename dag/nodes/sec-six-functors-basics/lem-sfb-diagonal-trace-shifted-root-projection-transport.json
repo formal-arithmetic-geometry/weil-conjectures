@@ -1,0 +1,88 @@
+{
+ "id": "lem-sfb-diagonal-trace-shifted-root-projection-transport",
+ "kind": "statement",
+ "title": "Generic shifted root-projection transport",
+ "statement": "theorem diagonalTrace_shiftedRootProjection_transport\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasDerivedCategory C]\n    (F : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [F.Additive] [V.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L₀ L : DiagonalRlim B) (P : A) (N : C)\n    (H : ℕᵒᵖ ⥤ B) (J : DerivedCategory (ℕᵒᵖ ⥤ B))\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (t : F.obj P ≅ limit H) (e : H ≅ V.obj N)\n    (π : (Functor.const ℕᵒᵖ).obj (F.obj P) ⟶ V.obj N)\n    (hcone : ∀ n : ℕ, t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) = π.app (op n))\n    (n : ℕ) :\n    rootProjectionEquation L₀.R\n      ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory\n      (L₀.projection n)\n      (diagonalShiftedSingleLimitComparison F L₀ P H J t b)\n      (rootSystemTransport V N b e).hom\n      (shiftedComparison F.mapDerivedCategory (V.mapDerivedCategory ⋙ L.R)\n        (exactConeComparison F V L P N π) 2 ≫ (L.projection n).app _)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), normalization of the root-limit comparison and exact single/shift comparisons"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-root-transport",
+  "def-sfb-diagonal-trace-root-projection-equation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized ordinary-limit projection to the single complex, transport it along the system isomorphism, and use the cone component equation. Naturality of the shift comparison moves the transported arrow through the finite projection. The remaining single and shift comparisons cancel in rootSystemTransport, while the common derived-unit normalization identifies the two right-derived-limit models.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-limit-interface",
+    "def-sfb-diagonal-trace-root-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-root-transport"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), normalization and transport through the strict root system",
+  "by": "G2"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceRootProjection",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-root-projection",
+   "place": "generic categorical transport subargument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceRootProjectionTransport",
+  "file": "lean/Sheaf/Paper/DiagonalTraceRootProjectionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_shiftedRootProjection_transport",
+  "statement": "theorem diagonalTrace_shiftedRootProjection_transport\n    {A : Type*} {B : Type*} {C : Type*}\n    [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]\n    [HasLimitsOfShape ℕᵒᵖ B]\n    [HasDerivedCategory A] [HasDerivedCategory B]\n    [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasDerivedCategory C]\n    (F : A ⥤ B) (V : C ⥤ (ℕᵒᵖ ⥤ B)) [F.Additive] [V.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (L₀ L : DiagonalRlim B) (P : A) (N : C)\n    (H : ℕᵒᵖ ⥤ B) (J : DerivedCategory (ℕᵒᵖ ⥤ B))\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (t : F.obj P ≅ limit H) (e : H ≅ V.obj N)\n    (π : (Functor.const ℕᵒᵖ).obj (F.obj P) ⟶ V.obj N)\n    (hcone : ∀ n : ℕ, t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) = π.app (op n))\n    (n : ℕ) :\n    rootProjectionEquation L₀.R\n      ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory\n      (L₀.projection n)\n      (diagonalShiftedSingleLimitComparison F L₀ P H J t b)\n      (rootSystemTransport V N b e).hom\n      (shiftedComparison F.mapDerivedCategory (V.mapDerivedCategory ⋙ L.R)\n        (exactConeComparison F V L P N π) 2 ≫ (L.projection n).app _)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T020418-L-2508481",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261028T020418-L-2508481",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.DiagonalTraceRootTransport
 public import Sheaf.Paper.DiagonalTraceProjectionEquations
+import Sheaf.Paper.DiagonalTraceRootProjectionTransport
 
 /-! # Finite root projections of a normalized root-limit comparison -/
 
@@ -65,6 +66,15 @@ theorem diagonalTrace_rootProjection (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
       (coefficientRootTransport l T c r b e).hom
       (shiftedComparison (diagonalCompletedUnderlying l T)
         (r.F.mapDerivedCategory ⋙ L.R) (k.lineMap l (ULift.{u} (Padic l)) L) 2 ≫
-        (L.projection n).app _) := by sorry
+        (L.projection n).app _) := by
+  simpa [SpTowerClasses.line, diagonalCompletedUnderlying, coefficientRootTransport,
+    Coefficients.lineMap] using
+    (diagonalTrace_shiftedRootProjection_transport
+      (F := diagonalCompletedRestriction l T) (V := r.F)
+      (L₀ := L₀) (L := L)
+      (P := Scheme.purTwistZlModule T l)
+      (N := SpTowerClasses.lineModule l (ULift.{u} (Padic l)) c)
+      (H := H) (J := J) (b := b) (t := t) (e := e)
+      (π := k.lineProjection) hcone n)
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
