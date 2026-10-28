@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-integral-pullback-finite-reduction-composition",
+ "kind": "statement",
+ "title": "Unary finite normalization of the integral pullback compositor",
+ "statement": "theorem integralPullback_finiteReduction_composition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (K : sfIntegralConstructibleCategory l E Y) (n : ℕ) :\n    (coefficientSequenceDerivedEvaluation l E Z n).map\n        ((pullbackTensorCalculus l E Z).reduction.map\n          ((pullbackTensorIntegralComposition l E f h).hom.app K).hom) ≫\n      (coefficientSequenceDerivedEvaluation l E Z n).map\n        (pullbackTensorIntegralReductionPullback l E h\n          ((constructibleIntegralPullback l E f).obj K)).hom ≫\n      (pullbackTensorDerivedEvaluation l E h n).hom.app\n        ((pullbackTensorCalculus l E X).reduction.obj\n          ((constructibleIntegralPullback l E f).obj K).obj) ≫\n      (finiteDerivedPullback l E n h).map\n        ((coefficientSequenceDerivedEvaluation l E X n).map\n            (pullbackTensorIntegralReductionPullback l E f K).hom ≫\n          (pullbackTensorDerivedEvaluation l E f n).hom.app\n            ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) =\n    ((coefficientSequenceDerivedEvaluation l E Z n).map\n        (pullbackTensorIntegralReductionPullback l E (h ≫ f) K).hom ≫\n      (pullbackTensorDerivedEvaluation l E (h ≫ f) n).hom.app\n        ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) ≫\n      (sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app\n        ((coefficientSequenceDerivedEvaluation l E Y n).obj\n          ((pullbackTensorCalculus l E Y).reduction.obj K.obj))",
+ "stmt_deps": [
+  "lem-pur-derived-pullback-tensor-constraints",
+  "def-strict-coefficient-pullback-evaluation-data",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Lemma-pushforward-Noetherian-case (099N), part (5), and sites-cohomology.tex lemma-derived-pullback-composition (0D6D). This is the unary change-of-finite-presentation step in the quotient-stage argument of lem-pur-pullback-tensor-integral-composition-reduced-finite-stage."
+ },
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat good representatives P of K and Q of f-star K, using integralOperations_preserve_constructible and its resolution construction. Let a_W(K) be reductionEvaluation at K and let b_f(K) be evaluation of pullbackTensorIntegralReductionPullback followed by pullbackTensorDerivedEvaluation. Apply published_counit_finite to f, h and h >> f. Expanding the definition of pullbackTensorIntegralReductionPullback identifies each evaluated map with the reduction of the published pullback model followed by the reconstruction counit. Define tau_f on finite derived categories by deriving the ordinary isomorphism (pullbackTensorLevelIntrinsic f n).symm followed by integralFinitePullbackModel f n. Cancel the finite reduction models and representative isomorphisms in published_counit_finite. The result is b_f(K) followed by tau_f at evaluated reduction of K, followed by constant finite pullback of a_Y(K), equals a_X(f-star K) followed by integralPullbackReductionIso f K P e n.",
+   "uses": [
+    "lem-sf-integral-published-counit-evaluation",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary presentation maps defining tau preserve the adjunction-unit sections. Both the intrinsic pullback compositor and the constant-ring compositor carry a unit section to the two successive unit sections, with the same fibre-product identification. For the intrinsic compositor this is finiteIntrinsicPullback_unit_comp; for the constant-ring compositor it is the defining mate of the direct-image compositor. The adjunction Hom bijection shows that these section equations determine the ordinary transformation, so tau intertwines the two compositors. Exact termwise localization transports this equation, with the prescribed mapDerivedCategoryCompIso comparisons, to the displayed derived compositors.",
+   "uses": [
+    "lem-pur-finite-intrinsic-pullback-unit-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the finite-reduction clause of the chosen integralPullbackComposition at K with P and Q. Substitute the three equations of step 1. Naturality of a_Z moves reduction of the integral compositor across a_Z; naturality of tau_h moves it across the f reduction comparison. Use step 2 to replace the constant-ring finite compositor by sfIntrinsicDerivedPullbackComp. Cancel the common target presentation isomorphism and the constant-ring pullbacks of a_Y(K). The remaining equality is exactly the asserted unary formula. This argument is at a fixed positive quotient exponent n+1, including n=0, and needs no joint faithfulness of the evaluations.",
+   "uses": [
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-published-counit-evaluation",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-finite-intrinsic-pullback-unit-composition",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "099N(5), together with the unit-normalized finite pullback composition of 0D6D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralPullback.*[Cc]omposition|pullbackTensorIntegralReductionPullback|sfIntrinsicDerivedPullbackComp",
+   "results": "No matching completed-integral finite-normalization theorem. Hits: ",
+   "date": "2026-10-28",
+   "verdict": "not_in_mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite coefficient reduction of composition of completed integral pullbacks agrees with the compositor of intrinsic finite inverse images under the counit normalization",
+   "results": "No matching completed-integral finite-normalization theorem. Hits: CategoryTheory.MorphismProperty.Over.pullbackComp, MvPolynomial.comap_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.Over.pullbackComp, CategoryTheory.ChosenPullbacksAlong.comp",
+   "date": "2026-10-28",
+   "verdict": "not_in_mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.comp, _ = _",
+   "results": "No matching completed-integral finite-normalization theorem. Hits: CategoryTheory.Adjunction.ext, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ext_iff, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.ofNatIsoLeft_counit",
+   "date": "2026-10-28",
+   "verdict": "not_in_mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackTensorCompositionReducedFiniteStage",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-integral-composition-coherence",
+   "via": [
+    "lem-pur-pullback-tensor-integral-composition-reduced-finite-stage",
+    "lem-pur-pullback-tensor-integral-composition-coherence"
+   ],
+   "place": "Composition of integral pullbacks after a positive coefficient quotient, before the tensor comparison is assembled."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackFiniteReductionComposition",
+  "file": "lean/Sheaf/Paper/IntegralPullbackFiniteReductionComposition.lean",
+  "declaration": "WeilConjectures.integralPullback_finiteReduction_composition",
+  "statement": "theorem integralPullback_finiteReduction_composition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (K : sfIntegralConstructibleCategory l E Y) (n : ℕ) :\n    (coefficientSequenceDerivedEvaluation l E Z n).map\n        ((pullbackTensorCalculus l E Z).reduction.map\n          ((pullbackTensorIntegralComposition l E f h).hom.app K).hom) ≫\n      (coefficientSequenceDerivedEvaluation l E Z n).map\n        (pullbackTensorIntegralReductionPullback l E h\n          ((constructibleIntegralPullback l E f).obj K)).hom ≫\n      (pullbackTensorDerivedEvaluation l E h n).hom.app\n        ((pullbackTensorCalculus l E X).reduction.obj\n          ((constructibleIntegralPullback l E f).obj K).obj) ≫\n      (finiteDerivedPullback l E n h).map\n        ((coefficientSequenceDerivedEvaluation l E X n).map\n            (pullbackTensorIntegralReductionPullback l E f K).hom ≫\n          (pullbackTensorDerivedEvaluation l E f n).hom.app\n            ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) =\n    ((coefficientSequenceDerivedEvaluation l E Z n).map\n        (pullbackTensorIntegralReductionPullback l E (h ≫ f) K).hom ≫\n      (pullbackTensorDerivedEvaluation l E (h ≫ f) n).hom.app\n        ((pullbackTensorCalculus l E Y).reduction.obj K.obj)) ≫\n      (sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app\n        ((coefficientSequenceDerivedEvaluation l E Y n).obj\n          ((pullbackTensorCalculus l E Y).reduction.obj K.obj))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261028T081751-L-2781066",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261028T081751-L-2781066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
