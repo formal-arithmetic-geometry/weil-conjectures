@@ -8583,6 +8583,7 @@ public import WeilConjectures.CategoryTheory.PointSystemRefineAll
 public import WeilConjectures.CategoryTheory.PointSystemRefinementChainExists
 public import WeilConjectures.CategoryTheory.PointSystemRefinementMap
 public import WeilConjectures.CategoryTheory.PointSystemSchedule
+public import WeilConjectures.CategoryTheory.Preadditive.AveragingDuality
 public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendScalars
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule
@@ -14034,6 +14035,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityInvariants
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLaxMonoidal
