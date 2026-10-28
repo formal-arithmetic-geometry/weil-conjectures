@@ -18,38 +18,39 @@
  },
  "proof": [
   {
-   "text": "Reduce vanishing of the closed restriction to its values on affine pro-etale covers. Refine an affine by a w-contractible affine and pull the entire square back. Quasi-compactness gives finitely many principal opens for the pullback of E. Use the closed-localization cover at the complementary ideal; principal opens miss the closed part, and every point of the closed localization specializes into the complementary closed subscheme.",
+   "text": "Apply closed-restriction detection to the q-th higher direct image. It is enough to prove zero sections at affine weakly contractible tests all of whose points specialize into the reduced closed complement.",
    "uses": [
-    "lem-weil-pbc-wcontractible-ring-extension",
-    "lem-weil-pbc-wcontractible-closed-localization"
+    "lem-sp-proetale-closed-restriction-test-detection"
    ],
    "elementary": false
   },
   {
-   "text": "Pull back k_!J using extension-by-zero base change. The induced open inside the pullback over E is clopen, and weakly etale restriction of J is injective. Compute the positive boundary cohomology on the proper pullback from an injective resolution of k_!J. Exact evaluation on the weakly contractible affine identifies the resulting section-complex homology with the sections of the higher direct image. The required local boundary vanishing is the arbitrary-injective step of the parent plan; the currently recorded etale-origin-only boundary lemma cannot be applied without proving additional input. This is the outstanding boundary step, not an invocation of that narrower theorem.",
+   "text": "Use the published functorial K-injective resolution and the right-derived comparison. Exact evaluation at W commutes with homology. The direct-image section formula identifies the evaluated pushforward complex with the model resolution evaluated on B times_D W. Thus its q-th homology is the displayed object hypercohomology.",
    "uses": [
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+    "lem-pe-bounded-complex-direct-image-presheaf",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Local zero sections on this cover give zero closed restriction by the sheaf equalizer condition. Empty base opens and empty closed complements are allowed; positive degree is retained throughout.",
-   "uses": [],
-   "elementary": true
+   "text": "The local boundary-test hypercohomology statement gives zero for this group. Transport through the evaluation comparison and the singleFunctorIsoCompQ isomorphism. The detection theorem then gives zero closed restriction.",
+   "uses": [
+    "lem-sp-proetale-proper-open-boundary-test-hypercohomology"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-wcontractible-ring-extension",
-  "lem-weil-pbc-wcontractible-closed-localization",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+  "lem-sp-proetale-closed-restriction-test-detection",
+  "lem-pe-bounded-complex-direct-image-presheaf",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-sp-proetale-proper-open-boundary-test-hypercohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "description": "Extracted from the parent proof plan, with a complete Lean proof of the open part and the arbitrary-injective boundary gap kept explicit."
+  "description": "Q4: complete Lean assembly, including K-injective evaluation comparison; the generic closed-restriction detection theorem is fully proved from existing localization and specialization-unit code. One strictly local hypercohomology step remains as a named theorem; this is a one-hole decomposition, not net hole closure."
  },
  "mathlib_searches": [
   {
@@ -161,9 +162,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261028T020339-L-2497705",
+  "landing": "20261028T055734-L-802953",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
