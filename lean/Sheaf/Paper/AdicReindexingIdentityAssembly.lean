@@ -46,6 +46,15 @@ theorem normalized_reindexing_identity_from_finite
         Functor.mapDerivedCategoryIdIso _).hom.app
           ((ordinary l T.base.left (C.data T).realization).obj M) =
     (ordinary l T.base.left (C.data T).realization).map ((C.sourceId T).hom.app M)) := by
-  sorry
+  intro T M
+  let := (C.data T).units
+  -- The certificate already includes the source identity on every finite object.
+  have _hsource := h_sourceId_unit
+  clear _hsource
+  cases M with
+  | mk E K =>
+    cases K with
+    | mk K =>
+      exact h_certificate.equation T E K
 
 end WeilConjectures.AdicQbarRealization
