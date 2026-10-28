@@ -20506,3 +20506,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:07 L: returned deliver/E4/Sheaf.SixFunctors.RationalVerdierDatumNaturality (reviewer RETURN: (the landing tools, head 514b063a5) the delivery did not land: lean/Sheaf/SixFunctors/RationalVerdierDatumNaturality.lea)
 - 01:07 L: merged deliver/A4/Sheaf.SmoothPurity.TraceExistence (stage 3; reviewer PASS; after a return; landing 20261028T010755-L-1816349 (proof); batch 20261028T010753; modules 1; new nodes 0)
 - 01:10 L: returned deliver/J4/Sheaf.Paper.AdicSmoothDualizingComplexes (reviewer RETURN: (reviewer C-af942, head af94292c4) B2 unforced adaptation: the original lean/Sheaf/Paper/RationalSmoothPurityCanonical.l)
+- 01:13 L: returned deliver/G2/Sheaf.Paper.FinitePullbackTensorAssociativityRepresentatives (reviewer RETURN: (reviewer C-89dfb, head 89dfbbcd2) 2b: Sheaf.Paper.CanonicalIntegralEvaluationCalculus (Y3, landed after the base; trans)
