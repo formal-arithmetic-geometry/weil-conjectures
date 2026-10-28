@@ -21,6 +21,21 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
+private theorem section_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Y.Modules) (U : Y.Opens) (s : Γ(M, U)) :
+    ((tensorPullbackSectionAdjunction f).unit.app M).app U s =
+      tensorPullbackSection f M U s :=
+  (Classical.choose_spec (existsUnique_tensorPullbackSectionAdjunction f)).1 M U s
+
+private theorem tensorPullbackSection_map {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Y.Modules) {U V : Y.Opens} (h : V ≤ U) (s : Γ(M, U)) :
+    tensorPullbackSection f M V (M.presheaf.map (homOfLE h).op s) =
+      ((tensorPullback f).obj M).presheaf.map (homOfLE (f.preimage_mono h)).op
+        (tensorPullbackSection f M U s) := by
+  rw [← section_unit, ← section_unit]
+  exact Hom.app_presheaf_map ((tensorPullbackSectionAdjunction f).unit.app M)
+    (homOfLE h) s
+
 /-- The normalized scalar-extension section commutes with restriction to a smaller open.
 Source: the naturality of the comparison morphism and of the tensor-pullback section.
 Proof: expand `scalarExtensionTwistSection`; apply naturality of the comparison morphism
@@ -39,6 +54,11 @@ theorem scalarExtensionTwistSection_restrict
       ((twist 𝒜 j).presheaf.map (homOfLE e).op s)).1 x =
       (scalarExtensionTwistSection r θ j U s).1
         ⟨x.1, Scheme.Hom.preimage_mono r e x.2⟩ := by
-  sorry
+  unfold scalarExtensionTwistSection
+  have hsec := tensorPullbackSection_map r (twist 𝒜 j) e s
+  have hnat := Hom.app_presheaf_map (θ j).hom (homOfLE (r.preimage_mono e))
+    (tensorPullbackSection r (twist 𝒜 j) U s)
+  rw [hsec, hnat]
+  rfl
 
 end AlgebraicGeometry.Proj
