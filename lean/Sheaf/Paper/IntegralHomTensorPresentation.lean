@@ -5,12 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.IntegralHomTensorPresentationAdjunction
+import Sheaf.Paper.IntegralHomTensorPresentationEvaluation
 
 /-! # Existence of the normalized integral tensor model
 
@@ -25,6 +22,7 @@ blueprint order 2478, proof step 2
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
@@ -50,6 +48,21 @@ makes the construction independent of the chosen resolutions.
 -/
 theorem tensor_presentation_exists :
     Nonempty (TensorPresentation.{t, u} Y
-        (completedIntegralCommRingSheaf l E Y D hl)) := by sorry
+        (completedIntegralCommRingSheaf l E Y D hl)) := by
+  classical
+  letI : EssentiallySmall.{t + 1} Y.ProEt := essentiallySmallSelf.{0, t, t + 1} _
+  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  letI : HasDerivedCategory (Modules.{t, u} Y
+      (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _
+  obtain ⟨S, T, β, hcoh⟩ :=
+    CategoryTheory.ringedDerived_closed_symmetric_monoidal.{t + 1, t, u,
+      (max u (t + 1)) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      (completedIntegralCommRingSheaf l E Y D hl)
+  let adj := Classical.choice (tensor_presentation_adjunction l E Y D hl S β)
+  exact ⟨TensorPresentation.mk S.tensor T.comparison adj
+    (tensor_presentation_evaluation l E Y D hl S T adj)⟩
 
 end WeilConjectures.IntegralHom

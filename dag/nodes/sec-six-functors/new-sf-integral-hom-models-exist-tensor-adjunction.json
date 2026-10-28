@@ -1,0 +1,89 @@
+{
+ "id": "new-sf-integral-hom-models-exist-tensor-adjunction",
+ "kind": "statement",
+ "title": "Adjunction field for the integral tensor presentation",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For the closed structure S and its symmetric braiding β, there is an adjunction in the tensor parameter for every derived object K, with left functor S.tensor curried at K and right functor the recorded derived internal Hom curried at op K.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, tensor-Hom adjunction on slices"
+ },
+ "proof": [
+  {
+   "text": "Use the generic closed symmetric monoidal derived structure and transport its right-tensor adjunction across the symmetric braiding to obtain the required left-tensor adjunction.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "R8 stage 3 split",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, tensor-Hom adjunction on slices"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoefficientClosedStructure tensor adjunction evaluation",
+   "results": "No exact proved project declaration; generic closed symmetric monoidal theorem supplies the input structure.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomTensorPresentation",
+  "date": "2026-10-28",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-models-exist-tensor",
+   "place": "paragraph 2, tensor-Hom adjunction on slices",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomTensorPresentationAdjunction",
+  "file": "lean/Sheaf/Paper/IntegralHomTensorPresentationAdjunction.lean",
+  "declaration": "WeilConjectures.IntegralHom.tensor_presentation_adjunction",
+  "statement": "theorem tensor_presentation_adjunction (S : CoefficientClosedStructure (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y) (completedIntegralCommRingSheaf l E Y D hl))) (β : @SymmetricCategory (DerivedCategory (Modules.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))) _ S.monoidal) : Nonempty (∀ K : DerivedCategory (Modules.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)), (Functor.curry.obj S.tensor).obj K ⊣ (Functor.curry.obj (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y) (completedIntegralCommRingSheaf l E Y D hl))).obj (op K))",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261028T020714-L-2539742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261028T020714-L-2539742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
