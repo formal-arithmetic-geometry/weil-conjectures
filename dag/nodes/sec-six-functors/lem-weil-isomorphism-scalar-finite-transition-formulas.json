@@ -34,20 +34,42 @@
  "statement": "theorem transition_formulas_exists\n    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅\n      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)\n    (hb : CompletedFormula l E L ι g b) :\n    ∃ tleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n,\n      LeftTransitionFormula l E L ι g tleft ∧\n    ∃ tright : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n,\n      RightTransitionFormula l E L ι g tright",
  "proof": [
   {
-   "text": "The adjacent transition maps are induced by the two coefficient transitions and satisfy the local formulas on pure tensors.",
+   "text": "Transport the existing integralScalarTransition through completed inverse image. The inverseReductionTransport map identifies this with the restricted finite right model: its underlying section maps are identities, hence it is an isomorphism. Its pure-tensor rule is exactly the existing scalar transition rule.",
    "uses": [
-    "lem-weil-isomorphism-scalar-quotient-chain-squares"
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-route-inverse-image-completed-coefficient-map-is-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite comparison satisfying FiniteFormula. Restrict its coefficients and conjugate the right transition by the comparisons at n+1 and n to construct the left transition.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-finite-comparison-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a double pure tensor apply the forward finite formula, the right transition formula, and compatibility of the coefficient inclusion and inverse finite coefficient maps with reduction. The result is the forward finite formula at n of the double tensor with both coefficients reduced. Cancel the finite comparison using its inverse. This proves LeftTransitionFormula; restrict the right transition to good complexes to obtain RightTransitionFormula.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-finite-comparison-formula",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-route-inverse-image-completed-coefficient-component-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-isomorphism-scalar-quotient-chain-squares"
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-route-inverse-image-completed-coefficient-map-is-iso",
+  "lem-weil-isomorphism-scalar-finite-comparison-formula",
+  "lem-route-inverse-image-completed-coefficient-component-naturality"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "M2",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK and 03EL"
+  "place": "Tags 03EK and 03EL; normalized scalar transition and conjugation through the finite balanced comparison, written by an agent."
  },
  "lean": {
   "existing": false,
@@ -73,12 +95,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261027T234317-L-95132",
+  "landing": "20261028T020554-L-2525491",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
