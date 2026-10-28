@@ -1,0 +1,103 @@
+{
+ "id": "lem-sfb-proj-scalar-extension-twist-canonical-section",
+ "kind": "statement",
+ "title": "Pointwise evaluation of the canonical identity pullback section",
+ "statement": "For every Proj twisting sheaf, the section-normalized pullback comparison along the identity scheme map evaluates a section at the same point of the corresponding open.",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-proj-scalar-extension-twist-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY and 01N2, the identity pullback section normalization."
+ },
+ "proof": [
+  {
+   "text": "Unfold the scalar-extension section and the section-normalized identity pullback comparison. The normalized adjunction identifies the pullback of a section along the identity with the original section, and evaluation on the identity preimage identifies the two points.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY and 01N2."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY and 01N2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorPullbackSectionId identity section evaluation",
+   "results": "No existing theorem states the pointwise canonical identity evaluation.",
+   "date": "2026-10-28",
+   "verdict": "The needed local section evaluation is split as a strictly smaller theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensorPullbackSectionId scalarExtensionTwistSection",
+   "results": "No matching declaration.",
+   "date": "2026-10-28",
+   "verdict": "No library match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointwise identity pullback evaluation of Proj twist section",
+   "results": "Only generic pullback identity and section adjunction declarations found.",
+   "date": "2026-10-28",
+   "verdict": "No specialized match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistCanonicalIdentity",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proj-scalar-extension-twist-canonical-identity",
+   "place": "The section-level identity evaluation used in the canonical fraction normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistCanonicalSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionTwistCanonicalSection.lean",
+  "declaration": "AlgebraicGeometry.Proj.scalarExtension_twist_canonical_section",
+  "statement": "theorem scalarExtension_twist_canonical_section\n    {A : Type u} [CommRing A]\n    {σ : Type u} [SetLike σ A] [AddSubgroupClass σ A]\n    {𝒜 : ℕ → σ} [GradedRing 𝒜]\n    (j : ℤ) (U : (Proj 𝒜).Opens)\n    (s : Γ(twist 𝒜 j, U))\n    (x : (𝟙 (Proj 𝒜)) ⁻¹ᵁ U) :\n    ((scalarExtensionTwistSection (𝟙 (Proj 𝒜))\n      (fun j ↦ (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j)) j U s).1 x :\n      Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =\n      (s.1 ⟨x.1, x.2⟩ : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261028T020618-L-2529526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261028T020618-L-2529526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
