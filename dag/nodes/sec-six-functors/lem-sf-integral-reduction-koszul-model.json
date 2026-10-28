@@ -20,15 +20,16 @@
  },
  "proof": [
   {
-   "text": "Refine P by a flat-term K-flat resolution. The existing principal Koszul strict replacement identifies its tensor tower with the strict restricted quotient tensor tower by objectwise quasi-isomorphisms, compatible with the actual quotient transitions.",
+   "text": "Apply the existing coefficient augmentation quasi-isomorphism from the principal strict replacement to the given K-flat P. K-flat tensor invariance applies with P in the second variable; the signed cochain braiding conjugates it to id_P tensor epsilon_n. Thus the existing strict augmentation comparison is objectwise a quasi-isomorphism without any flat-term hypothesis on P. Tensor-colimit preservation supplies the cochain braiding instances.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-a1-principal-koszul-strict-replacement"
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Use finite_reduction_scalar_normalization to identify this ordinary quotient tensor tower with the actual scalar-extension/restriction tower. Localize, and apply canonical resolution independence to return to q. The normalization and resolution comparison preserve every consecutive transition, so this is an isomorphism of whole towers.",
+   "text": "Use the proved scalarTowerIso underlying finite_reduction_scalar_normalization, which is defined for every complex, to identify the strict restricted-quotient tensor tower with the ordinary scalar-reduction tower. The existing integralTowerTransition_eq identifies its consecutive transitions with the actual integralReductionTower transitions. Localize this tower isomorphism and invert the localized augmentation comparison.",
    "uses": [
     "lem-a1-finite-reduction-scalar-normalization",
     "lem-weil-integral-reduction-tower-well-defined"
@@ -36,24 +37,32 @@
    "elementary": false
   },
   {
-   "text": "Each coefficient Koszul complex has bounded free terms and is K-flat. Tensor in this second variable sends every quasi-isomorphism to a quasi-isomorphism. Therefore the functor taking a complex to its localized Koszul tensor tower factors through the derived localization. Apply this factorization to the given isomorphism Q(N) to Q(G), and to Q(q), and compose with the preceding tower isomorphism. This does not choose arbitrary representative data from an unproved existence theorem.",
+   "text": "The existing koszul_flat and koszul_bounded lemmas show that every coefficient Koszul complex is bounded above with flat terms. Apply the independent-universe bounded-flat theorem to obtain K-flatness. Form the functor sending N to the localized tower of N tensor Q_n; K-flat tensor invariance makes it invert all quasi-isomorphisms, objectwise and hence as tower morphisms.",
    "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
     "lem-pur-kflat-tensor-quasiiso-independent"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the universal property of DerivedCategory.Q via Localization.lift and Localization.fac to descend the entire tower functor. Its comparison isomorphisms transport the composite Q(P) to Q(G) to Q(N), obtained from the quasi-isomorphism q and the inverse of e. Compose this transported tower isomorphism with step 2. All constructions retain every tower arrow; n=0 is exponent one, and neither boundedness nor flatness of N is assumed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
   "lem-a1-principal-koszul-strict-replacement",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-a1-finite-reduction-scalar-normalization",
   "lem-weil-integral-reduction-tower-well-defined",
-  "lem-pur-kflat-tensor-quasiiso-independent"
+  "lem-weil-pbc-independent-bounded-flat-kflat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels"
+  "place": "paragraph 1: the two-term finite-free quotient resolution; its functorial maps between quotient levels; S7 direct K-flat augmentation and whole-tower derived localization proof, 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -123,9 +132,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261028T034803-L-3545264",
+  "landing": "20261028T055756-L-807827",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
