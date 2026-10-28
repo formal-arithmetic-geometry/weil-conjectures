@@ -156,14 +156,11 @@ theorem native_integral_scalar_morphism [G : NativeGeometry.{u} l]
         IntegralComponent l D hl P c source target change E K
           (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l
             (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)) := by
-  obtain ⟨tau, hfac⟩ := native_integral_scalar_morphism_exists l D hl P c
-    source target stage change hs ht E
-  refine ⟨tau, ?_⟩
-  intro K
-  refine ⟨?_, ?_⟩
-  · exact hfac K
-  · simpa only [IntegralComponent] using
-      (native_integral_scalar_morphism_normalization l D hl P c source target stage
-        change hs ht E tau hfac K)
+  refine (native_integral_scalar_morphism_normalization l D hl P c
+    source target stage E ((change E).map X) ((change E).map Y) (hs E) (ht E)
+    (PurCompactSupport.comparison (change E) c)).elim ?_
+  intro tau hcomponents
+  refine ⟨tau, fun K ↦ ?_⟩
+  exact ⟨(hcomponents K).1, (hcomponents K).2⟩
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport

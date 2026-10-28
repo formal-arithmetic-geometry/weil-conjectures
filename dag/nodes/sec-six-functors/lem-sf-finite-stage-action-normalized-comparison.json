@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-finite-stage-action-normalized-comparison",
+ "kind": "statement",
+ "title": "Normalized comparison of a descended action at one rational stage",
+ "status": "split",
+ "statement": "Let l be prime, Ω an algebraic closure of Padic l, X and Y schemes, and S a morphism between their unlifted common-stage systems [def-weil-algebraically-closed-coefficients, lem-general-algebraically-closed-coefficient-stages]. For each finite index E let O_E be a rational Operation on the small coefficient model Coefficient l Ω E [def-sf-constructible-exceptional-coefficient-construction-data], H_E a functor between the corresponding raw rational constructible categories, and e_E : O_E.F ≅ H_E. Assume HEq(S.Φ E, O_E.F) at every E. For any E and any functor J from the Y pair category to an arbitrary category T, there exists q : inclusion_X(E) ⋙ S.functor ≅ H_E ⋙ inclusion_Y(E) such that, for every raw rational object A, there are raw rational objects B,B′ and an actual raw rational arrow r : B → B′ heterogeneously equal to e_E.hom.app A, with J.map(q.hom.app A) heterogeneously equal to J.map(inclusion_Y(E).map r). No property of J is assumed.",
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-associative-stage-family-descent",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; finite-stage inclusion and normalization in the integral scalar comparison"
+ },
+ "proof": [
+  {
+   "text": "The specified rational operation and the stage action have the same left functor by the supplied heterogeneous equality, after unfolding only their category aliases. Transport the given natural isomorphism e_E across that equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; finite-stage inclusion and normalization in the integral scalar comparison"
+   }
+  },
+  {
+   "text": "Compose StageSystem.Morphism.ιCompFunctorIso E with inclusion_Y(E) applied to the transported e_E. The stage inclusion comparison has identity components. Eliminate the equality transport to prove heterogeneous equality of the component after applying any J. Regard the specified component as an actual arrow in the raw category and retain its heterogeneous equality and the map formula together.",
+   "uses": [
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; finite-stage inclusion and normalization in the integral scalar comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-associative-stage-family-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; finite-stage inclusion and normalization in the integral scalar comparison",
+  "note": "Proved finite-stage comparison and component API; no sorry or deferred statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eqToIso.*whisker|whisker.*eqToIso",
+   "results": "3 hits: Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the project StageSystem.Morphism.ιCompFunctorIso; Mathlib whiskering and equality transport give the component normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerRight",
+   "results": "12 hits: CategoryTheory.Functor.isoWhiskerRight, CategoryTheory.Functor.isoWhiskerRight_refl, CategoryTheory.Functor.isoWhiskerRight_symm, CategoryTheory.Functor.isoWhiskerRight_hom, CategoryTheory.Functor.isoWhiskerRight_inv, CategoryTheory.Functor.isoWhiskerRight_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-28",
+   "verdict": "Use the project StageSystem.Morphism.ιCompFunctorIso; Mathlib whiskering and equality transport give the component normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stage inclusion commutes with the functor descended from a morphism of stage systems with identity components",
+   "results": "8 hits: CategoryTheory.SmallObject.ιFunctorObj_naturality, CategoryTheory.SmallObject.functorMap_comm, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, CategoryTheory.SmallObject.ιFunctorObj_eq, CategoryTheory.SmallObject.functorMap_π, CategoryTheory.SmallObject.ιObj_naturality, CategoryTheory.SmallObject.πFunctorObj_eq, CategoryTheory.SmallObject.πObj_ιIteration_app_right",
+   "date": "2026-10-28",
+   "verdict": "Use the project StageSystem.Morphism.ιCompFunctorIso; Mathlib whiskering and equality transport give the component normalization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismNormalization",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-integral-scalar-morphism-normalization",
+   "place": "Finite-stage rational comparison in the canonical source boundary isomorphism",
+   "via": [
+    "lem-sf-native-integral-scalar-morphism-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStageActionNormalizedComparison",
+  "file": "lean/Sheaf/Paper/FiniteStageActionNormalizedComparison.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.finiteStageAction_normalizedComparison",
+  "statement": "theorem finiteStageAction_normalizedComparison\n    (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] [IsAlgClosure (Padic l) (ULift.{u} Ω)]\n    (X Y : Scheme.{u})\n    (S : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).Morphism\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y))\n    (O : ∀ E : Index l Ω, Operation l (ULift.{u} Ω) X Y\n      (.rational ({ carrier := Coefficient.{u} l Ω E } : FieldStage.{u} l)))\n    (H : ∀ E : Index l Ω, sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X ⥤\n      sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y)\n    (e : ∀ E, (O E).F ≅ H E)\n    (hf : ∀ E, HEq (S.Φ E) (O E).F) (E : Index l Ω)\n    {T : Type*} [Category T]\n    (J : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y ⥤ T) :\n    ∃ q : GeneralAlgebraicallyClosedCoefficients.inclusion (Y := X) E ⋙ S.functor ≅\n        H E ⋙ GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Y) E,\n      ∀ A : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X,\n        ∃ (B B' : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y)\n          (r : B ⟶ B'), HEq r ((e E).hom.app A) ∧\n          HEq (J.map (q.hom.app A))\n            (J.map ((GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Y) E).map r))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-04bb9",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T020605-L-2527308",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-04bb9",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T020605-L-2527308",
+  "kind": "interface",
+  "note": "independent cc review: item, 2 new helper modules and adapted parent proof vs clone and DAG nodes; disputed old statement vs new beta-constructor; whole chain compiled in sandbox with #print axioms (sorryAx upstream only)"
+ }
+}

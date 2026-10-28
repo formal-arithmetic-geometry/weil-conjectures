@@ -3,7 +3,7 @@
  "kind": "statement",
  "title": "Six-arrow normalization of the factorized integral scalar morphism",
  "status": "split",
- "statement": "Fix the data of lem-sf-native-integral-scalar-morphism, a finite coefficient index E, a natural morphism tau as in lem-sf-native-integral-scalar-morphism-existence, and its b/comparison/d component factorization on every finite-Tor integral input. For each such K, the component of tau satisfies the six-arrow IntegralComponent formula with the prescribed rationalLeft arrow, target and source integral realizations, pbcDerivedExtend, PurCompactSupport.comparison, and operationTransport.",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $D$ with $\\ell\\ne D.p$, finite-type schemes $X,Y$ over $D.k$, a separated finite-type relative morphism $f:X\\to Y$, its compactification $c$, a coefficient construction $P$, and a StageAction [def-sf-locally-finite-adic-compact-support-data, def-sf-constructible-exceptional-coefficient-construction-data, def-weil-compactifications-refinements]. Fix realizations source and target [def-sf-locally-finite-adic-realization-data] and a finite coefficient index $E$. Let $s_X,s_Y$ be maps from the completed integral coefficient ring sheaves to the native ring sheaves, equal to the integral maps of source and target. For any natural transformation $\\beta:P_{\\mathrm{completed}}\\circ C_Y\\to C_X\\circ P_{\\mathrm{native}}$ in the functor-composition convention of Lean, with $C_T$ derived extension along $s_T$ and $P$ the actual compact-support image [def-pur-integral-compact-support-coefficient-data], construct a natural transformation $\\tau$ between the native finite-stage compact-support functors after integral-to-rational localization [def-weil-rationalization-karoubi]. On every finite-Tor integral input $K$ [def-weil-finite-tor-amplitude], the section component of $\\tau$ factors as $b_K\\,\\beta_K\\,d_K$ with both outer factors isomorphisms. Its six-arrow component formula has, in order, the recorded rationalLeft arrow, the target integral realization, derived extension of inverse sfQcqsCompactSupportRealization, the supplied $\\beta_K$, compact support of the inverse source integral realization, and inverse operationTransport. No invertibility of $\\beta$ is assumed. In particular, taking $\\beta$ to be the recorded proper/open scalar mate gives exactly the parent's original normalization.",
  "stmt_deps": [
   "def-sf-locally-finite-adic-compact-support-data",
   "def-sf-locally-finite-adic-realization-data",
@@ -11,7 +11,8 @@
   "def-sf-constructible-exceptional-coefficient-construction-data",
   "def-weil-compactifications-refinements",
   "def-weil-finite-tor-amplitude",
-  "def-weil-rationalization-karoubi"
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
@@ -19,13 +20,44 @@
  },
  "proof": [
   {
-   "text": "Unpack the rationalLeft comparison, target and source integral realization maps, proper/open scalar mate, compact-support comparison and operationTransport. Their ordered composite is exactly the six-arrow IntegralComponent formula; the assumed factorization supplies the outer b and d endpoints.",
+   "text": "Apply the proved natural boundary comparison to obtain isomorphisms b and d on the entire integral constructible category, together with their first-three-arrow and last-two-arrow component formulas.",
    "uses": [
-    "lem-sf-native-integral-scalar-morphism-existence",
-    "def-sf-locally-finite-adic-compact-support-data",
+    "lem-sf-native-integral-scalar-boundaries"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+   }
+  },
+  {
+   "text": "Use hs and ht to identify the coefficient maps, and compose b.hom, the given scalar natural transformation beta whiskered with the integral inclusion, and d.hom.",
+   "uses": [
     "def-pur-integral-compact-support-coefficient-data"
    ],
-   "elementary": false,
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+   }
+  },
+  {
+   "text": "Derived sections is an equivalence. Lift every component of this natural composite using fullness, and prove naturality using faithfulness and the naturality of the composite. Mapping the lift back gives the original composite.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+   }
+  },
+  {
+   "text": "On a finite-Tor integral input, b and d give the required factorization. Take the boundary theorem's five prescribed component arrows and insert beta as the fourth arrow. Substitute its two component equations and use category associativity to get exactly the six-arrow formula.",
+   "uses": [
+    "lem-sf-native-integral-scalar-boundaries"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
     "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
@@ -33,14 +65,17 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-native-integral-scalar-morphism-existence",
-  "def-sf-locally-finite-adic-compact-support-data",
-  "def-pur-integral-compact-support-coefficient-data"
+  "lem-sf-native-integral-scalar-boundaries",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-locally-finite-adic-compact-support-data"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M4",
+  "date": "2026-10-28",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; strict decomposition of the parent construction."
+  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8",
+  "note": "Construct the normalized scalar morphism from fully proved natural boundary comparisons, full faithfulness of derived sections, and actual composition with beta. Preserve the parent statement. No unfinished obligation."
  },
  "mathlib_searches": [
   {
@@ -117,10 +152,11 @@
   "module": "Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismNormalization",
   "file": "lean/Sheaf/Paper/NativeCompactSupportIntegralScalarMorphismNormalization.lean",
   "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_integral_scalar_morphism_normalization",
-  "statement": "theorem native_integral_scalar_morphism_normalization [G : NativeGeometry.{u} l]\n    (source : Realization l X) (target : Realization l Y)\n    (stage : StageAction l D hl P c)\n    (change : ∀ E : Index l (PadicAlgCl l),\n      PurCompactSupport.Change (PurCompactSupport.completed l\n        (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (hs : ∀ E, (change E).map X = (source.coefficient E).integralMap l X)\n    (ht : ∀ E, (change E).map Y = (target.coefficient E).integralMap l Y)\n    (E : Index l (PadicAlgCl l))\n    (tau : sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        finiteSourceAux l D hl P c target stage E ⟶\n      sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        finiteTargetAux l c source E)\n    (hfac : ∀ K : finiteTorConstructibleIntegralCategory l\n        (Coefficient l (PadicAlgCl l) E) X,\n      ∃ (b : (sections l Y).mapDerivedCategory.obj\n            ((sfRationalConstructibleLocalization l\n              (Coefficient l (PadicAlgCl l) E) X ⋙\n              finiteSourceAux l D hl P c target stage E).obj\n                ((PurCompactSupport.finiteTorIntegralInclusion l\n                  (Coefficient l (PadicAlgCl l) E) X).obj K)) ≅\n          (PurCompactSupport.image (PurCompactSupport.completed l\n            (Coefficient l (PadicAlgCl l) E)) c ⋙\n            pbcDerivedExtend ((change E).map Y)).obj K.obj)\n        (d : (pbcDerivedExtend ((change E).map X) ⋙\n            PurCompactSupport.image (nativeCoefficients l) c).obj K.obj ≅\n          (sections l Y).mapDerivedCategory.obj\n            ((sfRationalConstructibleLocalization l\n              (Coefficient l (PadicAlgCl l) E) X ⋙\n              finiteTargetAux l c source E).obj\n                ((PurCompactSupport.finiteTorIntegralInclusion l\n                  (Coefficient l (PadicAlgCl l) E) X).obj K))),\n        (sections l Y).mapDerivedCategory.map\n            (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K)) =\n          b.hom ≫ (PurCompactSupport.comparison (change E) c).app K.obj ≫ d.hom)\n    (K : finiteTorConstructibleIntegralCategory l\n      (Coefficient l (PadicAlgCl l) E) X) :\n    let rationalInput :=\n      (rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K\n    let input := (GeneralAlgebraicallyClosedCoefficients.inclusion\n        (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj rationalInput\n    ∃ (A B : sfRationalConstructibleCategory l\n          (Coefficient l (PadicAlgCl l) E) Y) (r : A ⟶ B),\n      HEq r ((P.ring.rationalLeft c (finiteField l E)).hom.app rationalInput) ∧\n    ∃ (M₁ M₂ M₃ M₄ M₅ : DerivedCategory\n          (proEtaleRingModules Y (ringSheaf l Y)))\n      (a₀ : (sections l Y).mapDerivedCategory.obj\n        ((sfRationalConstructibleLocalization l\n          (Coefficient l (PadicAlgCl l) E) X ⋙\n          finiteSourceAux l D hl P c target stage E).obj\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K)) ⟶ M₁)\n      (a₁ : M₁ ⟶ M₂) (a₂ : M₂ ⟶ M₃) (a₃ : M₃ ⟶ M₄) (a₄ : M₄ ⟶ M₅)\n      (a₅ : M₅ ⟶ (sections l Y).mapDerivedCategory.obj\n        ((sfRationalConstructibleLocalization l\n          (Coefficient l (PadicAlgCl l) E) X ⋙\n          finiteTargetAux l c source E).obj\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K))),\n      HEq a₀ ((sections l Y).mapDerivedCategory.map\n        (target.J.map ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := Y) E).map r))) ∧\n      HEq a₁ ((target.integral E).hom.app\n          ((sfCompactSupportFiniteIntegralFunctor l D.k\n            (PurCompactSupport.coefficientPrimeUnit l D hl) c\n            (Coefficient l (PadicAlgCl l) E)).obj\n              ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₂ ((pbcDerivedExtend ((target.coefficient E).integralMap l Y)).map\n          ((sfQcqsCompactSupportRealization l (Coefficient l (PadicAlgCl l) E)\n            D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c).inv.app\n              ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₃ ((PurCompactSupport.comparison (change E) c).app K.obj) ∧\n      HEq a₄ ((PurCompactSupport.image (nativeCoefficients l) c).map\n          ((source.integral E).inv.app\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₅ ((operationTransport l c).inv.app (source.J.obj input)) ∧\n      (sections l Y).mapDerivedCategory.map\n          (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l\n            (Coefficient l (PadicAlgCl l) E) X).obj K)) =\n        a₀ ≫ a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅",
+  "statement": "theorem native_integral_scalar_morphism_normalization [G : NativeGeometry.{u} l]\n    (source : Realization l X) (target : Realization l Y)\n    (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l))\n    (sx : (PurCompactSupport.completed l (Coefficient l (PadicAlgCl l) E)).ring X ⟶\n      (nativeCoefficients l).ring X)\n    (sy : (PurCompactSupport.completed l (Coefficient l (PadicAlgCl l) E)).ring Y ⟶\n      (nativeCoefficients l).ring Y)\n    (hs : sx = (source.coefficient E).integralMap l X)\n    (ht : sy = (target.coefficient E).integralMap l Y)\n    (beta : PurCompactSupport.image (PurCompactSupport.completed l\n        (Coefficient l (PadicAlgCl l) E)) c ⋙ pbcDerivedExtend sy ⟶\n      pbcDerivedExtend sx ⋙ PurCompactSupport.image (nativeCoefficients l) c) :\n    ∃ tau : sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ stage.system.functor ⋙ target.J) ⟶\n      sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J ⋙ actual l c),\n      ∀ K : finiteTorConstructibleIntegralCategory l\n          (Coefficient l (PadicAlgCl l) E) X,\n        (∃ (b : (sections l Y).mapDerivedCategory.obj\n              ((sfRationalConstructibleLocalization l\n                (Coefficient.{u} l (PadicAlgCl l) E) X ⋙\n                (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ stage.system.functor ⋙ target.J)).obj\n                  ((PurCompactSupport.finiteTorIntegralInclusion l\n                    (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)) ≅\n            (PurCompactSupport.image (PurCompactSupport.completed l\n              (Coefficient.{u} l (PadicAlgCl l) E)) c ⋙\n              pbcDerivedExtend sy).obj K.obj)\n          (d : (pbcDerivedExtend sx ⋙\n              PurCompactSupport.image (nativeCoefficients l) c).obj K.obj ≅\n            (sections l Y).mapDerivedCategory.obj\n              ((sfRationalConstructibleLocalization l\n                (Coefficient.{u} l (PadicAlgCl l) E) X ⋙\n                (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J ⋙ actual l c)).obj\n                  ((PurCompactSupport.finiteTorIntegralInclusion l\n                    (Coefficient.{u} l (PadicAlgCl l) E) X).obj K))),\n          (sections l Y).mapDerivedCategory.map\n              (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)) =\n            b.hom ≫ beta.app K.obj ≫ d.hom) ∧\n    let rationalInput :=\n      (rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K\n    let input := (GeneralAlgebraicallyClosedCoefficients.inclusion\n        (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj rationalInput\n    ∃ (A B : sfRationalConstructibleCategory l\n          (Coefficient l (PadicAlgCl l) E) Y) (r : A ⟶ B),\n      HEq r ((P.ring.rationalLeft c (finiteField l E)).hom.app rationalInput) ∧\n    ∃ (M₁ M₂ M₃ M₄ M₅ : DerivedCategory\n          (proEtaleRingModules Y (ringSheaf l Y)))\n      (a₀ : (sections l Y).mapDerivedCategory.obj\n        ((sfRationalConstructibleLocalization l\n          (Coefficient l (PadicAlgCl l) E) X ⋙\n          (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ stage.system.functor ⋙ target.J)).obj\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K)) ⟶ M₁)\n      (a₁ : M₁ ⟶ M₂) (a₂ : M₂ ⟶ M₃) (a₃ : M₃ ⟶ M₄) (a₄ : M₄ ⟶ M₅)\n      (a₅ : M₅ ⟶ (sections l Y).mapDerivedCategory.obj\n        ((sfRationalConstructibleLocalization l\n          (Coefficient l (PadicAlgCl l) E) X ⋙\n          (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J ⋙ actual l c)).obj\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K))),\n      HEq a₀ ((sections l Y).mapDerivedCategory.map\n        (target.J.map ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := l) (Ω := PadicAlgCl l) (Y := Y) E).map r))) ∧\n      HEq a₁ ((target.integral E).hom.app\n          ((sfCompactSupportFiniteIntegralFunctor l D.k\n            (PurCompactSupport.coefficientPrimeUnit l D hl) c\n            (Coefficient l (PadicAlgCl l) E)).obj\n              ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₂ ((pbcDerivedExtend ((target.coefficient E).integralMap l Y)).map\n          ((sfQcqsCompactSupportRealization l (Coefficient l (PadicAlgCl l) E)\n            D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c).inv.app\n              ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₃ (beta.app K.obj) ∧\n      HEq a₄ ((PurCompactSupport.image (nativeCoefficients l) c).map\n          ((source.integral E).inv.app\n            ((PurCompactSupport.finiteTorIntegralInclusion l\n              (Coefficient l (PadicAlgCl l) E) X).obj K))) ∧\n      HEq a₅ ((operationTransport l c).inv.app (source.J.obj input)) ∧\n      (sections l Y).mapDerivedCategory.map\n          (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l\n            (Coefficient l (PadicAlgCl l) E) X).obj K)) =\n        a₀ ≫ a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅",
   "branch": "sheaf-dag",
   "by": "D7",
-  "date": "2026-10-28"
+  "date": "2026-10-28",
+  "note": "M4: replace the disputed arbitrary-factor assertion by the directly proved canonical constructor from an arbitrary scalar natural transformation. The sole caller passes the original proper/open comparison and preserves its complete original statement."
  },
  "mathlib_match": null,
  "merged_into": null,
@@ -135,19 +171,50 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
-  "result": "pass",
-  "landing": "20261027T234036-L-4170993",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_integral_scalar_morphism_normalization"
+  "reviewer": "C-04bb9",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261028T020605-L-2527308",
+  "kind": "interface",
+  "note": "independent cc review: item, 2 new helper modules and adapted parent proof vs clone and DAG nodes; disputed old statement vs new beta-constructor; whole chain compiled in sandbox with #print axioms (sorryAx upstream only)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "M4 stage 3",
+  "old_statement": "Fix the data of lem-sf-native-integral-scalar-morphism, a finite coefficient index E, a natural morphism tau as in lem-sf-native-integral-scalar-morphism-existence, and its b/comparison/d component factorization on every finite-Tor integral input. For each such K, the component of tau satisfies the six-arrow IntegralComponent formula with the prescribed rationalLeft arrow, target and source integral realizations, pbcDerivedExtend, PurCompactSupport.comparison, and operationTransport.",
+  "what": "Arbitrary outer factors b and d do not determine the canonical six-arrow composite. In the additive setting, replacing tau and b by their negatives preserves the factorization hypothesis; the prescribed canonical arrows do not acquire that sign. At an identity compactification on a nonzero rank-one characteristic-zero coefficient object the two composites differ. Replace the universal assertion about an arbitrary tau by a direct construction of a normalized tau with the same factorization and component formula. The parent statement is unchanged. The repaired constructor is proved for any scalar natural transformation beta with these endpoints; the caller specializes beta to the recorded compact-support comparison.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-native-integral-scalar-morphism",
+    "holds": true,
+    "note": "The caller now obtains tau, its factorization and its component formula from the canonical construction; the full parent theorem signature and IntegralComponent definition are preserved."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_integral_scalar_morphism_normalization"
+  "old_proof": [
+   {
+    "text": "Unpack the rationalLeft comparison, target and source integral realization maps, proper/open scalar mate, compact-support comparison and operationTransport. Their ordered composite is exactly the six-arrow IntegralComponent formula; the assumed factorization supplies the outer b and d endpoints.",
+    "uses": [
+     "lem-sf-native-integral-scalar-morphism-existence",
+     "def-sf-locally-finite-adic-compact-support-data",
+     "def-pur-integral-compact-support-coefficient-data"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+     "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sf-native-integral-scalar-morphism-existence",
+   "def-sf-locally-finite-adic-compact-support-data",
+   "def-pur-integral-compact-support-coefficient-data"
   ]
  }
 }
