@@ -20609,3 +20609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: merged deliver/H3/Sheaf.Paper.DerivedPullbackTensorConstraints (stage 3; reviewer PASS; after a return; landing 20261028T020444-L-2513173 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:04 L: merged deliver/H3/Sheaf.Paper.ExceptionalRingTransportCoreReconstruction (stage 3; reviewer PASS; first push; landing 20261028T020445-L-2513485 (interface); batch 20261028T020127; modules 3; new nodes 2)
 - 02:04 L: merged deliver/H3/Sheaf.SixFunctors.IntegralOrdinaryProperOpenSquare (stage 3; reviewer PASS; first push; landing 20261028T020451-L-2514052 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:04 L: merged deliver/H4/Sheaf.Paper.FiniteProperProjectionFixedRealizationNormalization (stage 3; reviewer PASS; first push; landing 20261028T020456-L-2514739 (interface); batch 20261028T020127; modules 2; new nodes 1)
