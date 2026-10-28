@@ -9,7 +9,7 @@ public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.SemilinearFieldOperationLifts
 public import Sheaf.Paper.FrobeniusGeometricExchange
 import Sheaf.Paper.ConstantGeometricStalkUnit
-import Sheaf.Paper.RationalConstantUnitFrobenius
+public import Sheaf.Paper.RationalConstantUnitFrobenius
 
 /-! # Frobenius coherence of the normalized constant unit
 
@@ -132,6 +132,34 @@ def commonUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
         D hl f)
 end CommonUnit
 
+/-- Finite-stage representative formula for the common-stage pullback.
+Source: the common-stage passage in the normalized constant-unit proof.
+(blueprint: lem-pur-common-constant-unit-frobenius-transport).
+Proof: unfold the chosen common-stage pullback representative at a common finite
+coefficient field.  Its map formula is the rational pullback map conjugated by
+the recorded source and target comparison isomorphisms.  At a same-stage arrow
+these comparisons are the identity transports, so the result is exactly the
+stage inclusion of the rational pullback map.  The equality is heterogeneous
+because the chosen object representatives carry proof-irrelevant endpoint
+certificates. -/
+theorem commonStageDerivedPullback_map_inclusion
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (P Q : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L)
+    (a : P ⟶ Q) :
+    HEq
+      ((commonStageDerivedPullback l Ω f).map
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map a))
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map
+        ((rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map a)) := by
+  sorry
+
+
 /-- The normalized completed constant unit commutes with the geometric Frobenius square.
 Source: purity/trace equivariance proof, canonical constant comparison preceding Step 1.
 (blueprint: lem-pur-common-constant-unit-frobenius).
@@ -161,7 +189,7 @@ theorem commonUnit_frobenius
         (commonStageDerivedPullback l Ω f).map
           (constantWeilAlgebraicallyClosedComplex l D hl Y₀ Ω).str.hom ≫ u.hom =
       (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).map u.hom ≫
-        (constantWeilAlgebraicallyClosedComplex l D hl X₀ Ω).str.hom := by
+        (constantWeilAlgebraicallyClosedComplex l D hl X₀ Ω).str.hom  := by
   sorry
 
 end WeilConjectures.ConstantPurityFrobenius

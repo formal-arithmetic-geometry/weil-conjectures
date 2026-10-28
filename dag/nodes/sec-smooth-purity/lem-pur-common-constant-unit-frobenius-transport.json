@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-common-constant-unit-frobenius-transport",
+ "kind": "statement",
+ "title": "Common-stage transport of rational normalized constant-unit coherence",
+ "statement": "Given the rational-stage normalized constant-unit Frobenius coherence for the least finite coefficient field, the prescribed common-stage inclusion and pullback comparison satisfy the corresponding common-stage coherence equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, passage from rational coefficients to the common stage"
+ },
+ "stmt_deps": [
+  "lem-pur-common-constant-unit-frobenius-rational",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Represent the common-stage maps at the least finite coefficient stage and expand the defining representative formulas for the common pullback and inclusion.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the rational coherence equation through the inclusion functor; the recorded eqToIso object comparisons cancel by functoriality and proof irrelevance.",
+   "uses": [
+    "lem-pur-common-constant-unit-frobenius-rational",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-common-constant-unit-frobenius-rational",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "J3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, passage from rational coefficients to the common stage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback identification of constant sheaves respects composition and geometric Frobenius",
+   "results": "constantCommuteCompose and sheaf-module pullbackComp concern ordinary sheaves. No common-stage normalized unit or normalized geometric Frobenius compositor equality.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two common-stage derived pullback composition isomorphisms normalized by the same integral composition are equal",
+   "results": "Categorical pullback pasting and mkNatIso_eq. None compares these integral-normalized scalar-localized common-stage maps.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Cc]omposition|pullback.*[Uu]nit",
+   "results": "Ordinary scheme-module and site pullback unit and composition APIs; no normalized completed, rational or common-stage coefficient-unit Frobenius square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonConstantUnitFrobenius",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1, canonical constant input and normalized pullback-composition comparison",
+   "via": [
+    "lem-pur-constant-purity-frobenius-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonConstantUnitFrobenius",
+  "file": "lean/Sheaf/Paper/CommonConstantUnitFrobenius.lean",
+  "declaration": "WeilConjectures.ConstantPurityFrobenius.commonStageDerivedPullback_map_inclusion",
+  "statement": "theorem commonStageDerivedPullback_map_inclusion\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (L : AlgebraicallyClosedCoefficients.Index l Ω)\n    (P Q : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L)\n    (a : P ⟶ Q) :\n    HEq\n      ((commonStageDerivedPullback l Ω f).map\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map a))\n      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map\n        ((rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map a))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261028T020516-L-2518556",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261028T020516-L-2518556",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
