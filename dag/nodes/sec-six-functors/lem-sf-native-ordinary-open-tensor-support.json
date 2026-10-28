@@ -14,48 +14,58 @@
  ],
  "proof": [
   {
-   "text": "The ordinary open support theorem on the pro-etale ringed site applies to the actual adic coefficient sheaf. Represent M by a complex and N by a flat-term K-flat complex; the underived extension/tensor isomorphism identifies every ambient total-tensor summand with an extension from the geometric open. Naturality respects the signed differentials, and extension preserves the total coproducts.",
+   "text": "Apply nativeOrdinary_tensorRight_iso to the ordinary Hom representatives of nativeDerivedClosedComparison. This identifies its fixed tensor, with the same input order, with the canonical derived module tensor. No ordinary tensor representative choices or normalization equations are needed.",
    "uses": [
-    "lem-sf-open-tensor-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
-   }
-  },
-  {
-   "text": "The ordinary tensor model of the fixed comparison identifies this total tensor with TB′(E′ M,N). Thus the object is in the essential image of E′. This argument works for the empty open and for unbounded complexes.",
-   "uses": [
+    "lem-sf-native-ordinary-tensor-identification",
     "lem-sf-weil-native-closed-forgetful"
    ],
+   "elementary": false
+  },
+  {
+   "text": "For an ordinary module sheaf vanishing on the closed complement of the geometric open, the open counit is an isomorphism. Pullback to the open is invertible by the right triangle identity and the invertible open unit; pullback to the complement has zero source and target by disjoint extension vanishing. The existing source theorem ProEtale.isIso_of_forall_isIso_adicUpperStar_map detects invertibility using these two quasi-compact maps. The geometric open is quasi-compact in the existing finite-type setting. The existing adicUpperStarTensorLeftIso and the proved relative-tensor coequalizer comparison show that an extended sheaf tensored with any ambient sheaf vanishes on the complement. Thus it belongs to the essential image of extension. These are the private proved helpers ordinary_supported_of_complement_zero and ordinary_sheaf_tensor_supported.",
+   "uses": [
+    "lem-sf-native-adic-open-restrictions",
+    "def-sfb-modobj-relative-tensor"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ClosedImmersion.lean",
+    "place": "isIso_of_forall_isIso_adicUpperStar_map; Adic/OpenImmersion.lean, disjoint pullback vanishing; Adic/LisseInternalHom.lean, adicUpperStarTensorLeftIso"
    }
   },
   {
-   "text": "The underived ordinary open unit is invertible. Localizing its degreewise isomorphism gives an invertible derived unit. Thus E′ is fully faithful, and the adjunction counit is invertible on its essential image (Mathlib Adjunction.isIso_counit_app_iff_mem_essImage). Transport along the previous representative isomorphism.",
+   "text": "Use closure of the fully faithful extension essential image under preserved coproducts and GradedObject.isColimitCofanMapObj to show every total-tensor term is supported. The open counit is a termwise isomorphism of complexes. Its localization and mapDerivedCategoryFactors provide an explicit essential-image witness for the localized total complex. Choose a K-flat homotopy-category representative for the ambient input by DerivedCategory.exists_kFlat_iso, represent the open input by a complex, and apply the invertible canonical localization tensorator. This proves support for the canonical derived tensor and then for the fixed ordinary tensor via the first comparison. The argument is the private proved helpers ordinary_total_tensor_supported, ordinary_Q_supported and ordinary_derived_tensor_supported.",
    "uses": [
-    "def-weil-exact-derived-adjunction"
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-sf-native-adic-open-restrictions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; existing source proof in ModuleObject/Derived/OpenImmersionEssImage.lean"
    }
+  },
+  {
+   "text": "Localize the inverse ordinary open unit using the standard exact-functor composition and identity comparisons. This proves full faithfulness of the exact derived extension for the specified adjunction mapExactDerivedCategory. Apply Adjunction.isIso_counit_app_iff_mem_essImage to the supported tensor. No compatibility between this adjunction and another chosen derived adjunction is needed.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-sf-native-adic-open-restrictions"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-open-tensor-support",
+  "lem-sf-native-ordinary-tensor-identification",
   "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-adic-open-restrictions",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-derived-tensor-hom",
   "def-weil-exact-derived-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; restriction/support parts of native open tensor proof step 8."
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I. T3 formal proof uses the canonical module tensor, open/complement detection and K-flat localization, following the existing source-library total-support proof in ModuleObject/Derived/OpenImmersionEssImage.lean."
  },
  "mathlib_searches": [
   {
@@ -175,9 +185,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A8",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261028T055606-L-771561",
+  "landing": "20261028T072449-L-1951707",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
