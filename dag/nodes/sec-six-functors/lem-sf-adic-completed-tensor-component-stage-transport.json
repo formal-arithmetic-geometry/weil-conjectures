@@ -14,33 +14,43 @@
  },
  "proof": [
   {
-   "text": "let E be the compositum of the input fields and enlarge E to L. Choose good\nK-flat representatives of the two integral objects at E. Expand the representative\nclauses of the finite models at E and L, replacing their completion comparisons by\nthe normalized cochain completion maps. The scalar counits on these representatives\nare invertible. Cancel them using the K-flat model normalization. In bidegree (p,q)\nthe balance_sections equations identify both scalar tensor comparisons on the pure\nsection s tensor (x tensor y): both send it to the tensor of s tensor x and 1 tensor y.\nThe coefficient_scalar equation identifies the composite coefficient maps. The tensor\nuniversal property and sheafification give equality in each bidegree; the totalization\ncoproduct injections then give equality of complex maps. Pass to the derived category\nand transport by the good representative isomorphisms. The common_field equation of\nR identifies its boundary comparisons with ordinary.map of the actual isoToStage\nmaps. Naturality and tower compatibility of the integral scalar tensor comparison,\nand the normalized formula of stageTensor, identify the output comparison. The\nexisting natural inclusion comparison has that same formula: expand its component,\nuse functoriality of mapIso and associativity of isomorphism composition, and apply\nuniqueness in stageTensor_existsUnique. Thus its component is precisely stageTensor. Pasting\nwith the two endpoint isoToStage maps in the definition of the common component gives\nthe displayed equation. Reflexive extensions retain their normalized scalar unit;\nno nonzero object, nonempty scheme, or faithful coefficient extension is required.",
+   "text": "At the coefficient compositum E0, unfold the common component. Identify the existing natural inclusion tensor comparison with stageTensor using its uniquely normalized formula, functoriality of mapIso and associativity. Thus the common component is the conjugate of the finite stage component at E0.",
    "uses": [
-    "def-sf-adic-completed-tensor-finite-models",
     "def-sf-adic-completed-tensor-common-components",
-    "def-sf-locally-finite-adic-realization-data",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-zl-ringed-derived-closed-symmetric-monoidal-data",
     "def-sf-common-stage-inclusion-tensor-comparison",
     "lem-sf-common-stage-inclusion-tensor-model-naturality"
    ],
+   "elementary": true
+  },
+  {
+   "text": "The two input fields lie in the requested field E, so their compositum E0 lies in E. Apply the finite scalar square to the pair at E0 and its extension to E. Apply fixed-stage naturality at E to the two scalar associators, correcting the double extension to the direct extension of the original objects.",
+   "uses": [
+    "lem-sf-adic-completed-tensor-finite-scalar-square",
+    "lem-sf-adic-completed-tensor-stage-naturality"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The stage-system cocycle shows that isoToStage to E0, then isoToStage to E, then the included scalar associator is exactly isoToStage directly to E, in both coordinates. Compose the two squares, map the isomorphism identities through the two functors, and cancel the adjacent inverse maps. This gives the claimed conjugation formula.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-adic-completed-tensor-finite-models",
   "def-sf-adic-completed-tensor-common-components",
-  "def-sf-locally-finite-adic-realization-data",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
   "def-sf-common-stage-inclusion-tensor-comparison",
-  "lem-sf-common-stage-inclusion-tensor-model-naturality"
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "lem-sf-adic-completed-tensor-finite-scalar-square",
+  "lem-sf-adic-completed-tensor-stage-naturality",
+  "def-weil-pbc-finite-stage-pair-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument.",
-  "note": "K1: explicit categorical implementation of the finite normalized realization argument."
+  "note": "U9: explicit compositum transport and scalar-associator correction, combined by functorial conjugation; the two-field scalar square is a separate strictly finite-source normalization step."
  },
  "mathlib_searches": [
   {
@@ -119,9 +129,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "U9",
   "result": "pass",
-  "landing": "20261028T034821-L-3551740",
+  "landing": "20261028T072457-L-1953168",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

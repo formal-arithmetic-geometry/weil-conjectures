@@ -1,0 +1,131 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-adic-completed-tensor-finite-scalar-square",
+ "kind": "statement",
+ "title": "Scalar square for the completed tensor at one finite source stage",
+ "statement": "Fix a prime l and a scheme X on whose residue fields l is invertible. Fix a normalized native realization R of [def-sf-locally-finite-adic-realization-data], a closed tensor closed with its K-flat models models, and the normalized finite model convention of [def-sf-adic-completed-tensor-finite-models]. Let E ≤ F be finite coefficient fields inside PadicAlgCl l, NE and NF finite tensor models at these fields, and K,L two raw rational constructible objects at E in the categories of [def-weil-algebraically-closed-coefficients]. Write I for the inclusion of E into the common-stage category and a,b for the actual isoToStage maps of [def-weil-pbc-finite-stage-pair-category] from I(K),I(L) to F. Then the closed tensor of ordinary(a),ordinary(b), followed by completedTensorStageComponent at F on their transitions, equals completedTensorStageComponent at E on K,L, followed by the ordinary realization of the common tensor of a,b. The stage components are precisely those of [def-sf-adic-completed-tensor-stage-component]. Only the two models and a pair at a single source coefficient field occur.",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-stage-component",
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument."
+ },
+ "proof": [
+  {
+   "text": "Choose good integral K-flat representatives of the two objects at E. Insert the representative equations of NE and NF, the normalized whole completion coaugmentations, and the finite-free completed scalar comparison. Use coefficient_scalar and balanced ordinary scalar associativity: both routes on a homogeneous generator send s tensor (x tensor y) to (s tensor x) tensor (1 tensor y). Sheafification and total coproduct inclusions give equality of the whole chain maps; the shifted completion coordinate is zero. Pass through derived localization and cancel the invertible K-flat counits and constructible completion comparisons. R.common_field identifies the boundary maps. The normalized integral tensor scalar comparison, its rationalization, and the common-stage tensor representative formula identify the output boundary. The normalized stageTensor formula is the component of commonInclusionTensorComparison. This is precisely the two-field scalar square, including identity extensions.",
+   "uses": [
+    "def-sf-adic-completed-tensor-finite-models",
+    "def-sf-adic-completed-tensor-common-components",
+    "def-sf-locally-finite-adic-realization-data",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+    "def-sf-common-stage-inclusion-tensor-comparison",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-adic-completed-tensor-common-components",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9; the corresponding part of the finite normalized realization argument.",
+  "note": "U9: the two-field normalized representative square from the parent plan. The compositum definition, endpoint associator corrections, and their naturality are proved separately in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension tensor comparison compatible with composition and coefficient extension in derived categories",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalars_assoc; ModuleCat.extendScalarsComp. These concern ordinary modules, not the normalized completed tensor and native realization.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Use the project completed scalar and K-flat normalization data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.isoToStage",
+   "results": "No hits; the identifier is not in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "Use the project StageSystem API."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor|tensor.*scalar",
+   "results": "25 Mathlib hits, including Spectrum/Prime/ChevalleyComplexity, Spectrum/Prime/Polynomial, Spectrum/Prime/FreeLocus and PicardGroup; no native realization square. Separate local searches found the project finite tensor models and fixed-stage naturality, but no theorem for their finite scalar square.",
+   "date": "2026-10-28",
+   "verdict": "The finite scalar square is the missing normalization step; do not duplicate fixed-stage naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorComponentStageTransport",
+  "date": "2026-10-28",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Two-field normalized finite scalar square in the proof of lem-sf-adic-completed-tensor-component-stage-transport",
+   "via": [
+    "lem-sf-adic-completed-tensor-component-stage-transport",
+    "lem-sf-adic-completed-tensor-common-component-naturality",
+    "new-sf-adic-completed-tensor-common-lift-tensor-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorFiniteScalarSquare",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorFiniteScalarSquare.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completedTensorStageComponent_scalar",
+  "statement": "theorem completedTensorStageComponent_scalar\n    (E F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) (h : E ≤ F)\n    (NE : CompletedTensorFiniteModel l X R closed models E)\n    (NF : CompletedTensorFiniteModel l X R closed models F)\n    (K L : sfRationalConstructibleCategory l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :\n    let I := GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := X) E\n    let a := (GeneralAlgebraicallyClosedCoefficients.stageSystem l\n      (PadicAlgCl l) X).isoToStage (I.obj K) h\n    let b := (GeneralAlgebraicallyClosedCoefficients.stageSystem l\n      (PadicAlgCl l) X).isoToStage (I.obj L) h\n    (((ordinary l X R).prod (ordinary l X R)) ⋙ closed.tensor).map\n        (Prod.mkHom a.hom b.hom) ≫\n      (completedTensorStageComponent l X R closed models F NF\n        ((I.obj K).toStage h) ((I.obj L).toStage h)).hom =\n    (completedTensorStageComponent l X R closed models E NE K L).hom ≫\n      (commonStageDerivedTensor l (PadicAlgCl l) X ⋙ ordinary l X R).map\n        (Prod.mkHom a.hom b.hom)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T072457-L-1953168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261028T072457-L-1953168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorStageComponent
+import Sheaf.Paper.AdicCompletedTensorFiniteScalarSquare
+import Sheaf.Paper.AdicCompletedTensorStageNaturality
 
 /-! # Naturality of the explicit completed tensor components
 
@@ -13,6 +15,9 @@ Source: BS Remark 6.8.15; HRS Lemma 7.9.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option cleanup.letToHave false
 set_option synthInstance.maxSize 4096
 set_option genSizeOf false
@@ -21,6 +26,13 @@ set_option genInjectivity false
 set_option genCtorIdx false
 attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.AdicQbarRealization.ordinary
+  WeilConjectures.rationalDerivedTensor
+  WeilConjectures.commonStageTensorComparison WeilConjectures.operationStageTransitionIso
+  WeilConjectures.sfRationalScalarExtension
+  WeilConjectures.sfConstructibleIntegralScalarExtension
+  WeilConjectures.AdicQbarRealization.stageTensor
+  WeilConjectures.AdicQbarRealization.completedTensorStageComponent
+  CategoryTheory.ScalarLocalization.category
 
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
@@ -33,6 +45,149 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   (models : CoefficientTensorModels.{u + 1, u + 1, u}
     (ProEt.topology X) (ring l X R) closed)
 
+set_option allowUnsafeReducibility true in
+attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
+  GeneralAlgebraicallyClosedCoefficients.Stage
+  GeneralAlgebraicallyClosedCoefficients.pairCategory
+  generalAlgebraicallyClosedConstructibleCategory GeneralAlgebraicallyClosedCoefficients.Pair
+  commonStageDerivedTensor
+set_option linter.auxLemma false in
+set_option allowUnsafeReducibility true in
+attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
+  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
+  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
+
+private theorem whisker_app
+    {A B C : Type*} [Category* A] [Category* B] [Category* C]
+    {F G : A ⥤ B} (e : F ≅ G) (H : B ⥤ C) (x : A) :
+    (Functor.isoWhiskerRight e H).app x = H.mapIso (e.app x) := rfl
+
+private theorem components_whisker_app
+    {A B : Type*} [Category* A] [Category* B]
+    (I : A ⥤ B) (V : A × A ⥤ A) (T : A ⥤ A) (F : A × A ⥤ B)
+    (e : T ≅ 𝟭 A)
+    (c : ∀ p, F.obj p ≅ ((T.prod T) ⋙ (V ⋙ I)).obj p)
+    (hc : ∀ {p q} (f : p ⟶ q), F.map f ≫ (c q).hom =
+      (c p).hom ≫ ((T.prod T) ⋙ (V ⋙ I)).map f) (x y : A) :
+    ((NatIso.ofComponents c hc ≪≫
+      Functor.isoWhiskerRight (NatIso.prod e e) (V ⋙ I)).symm).app (x, y) =
+      (c (x, y) ≪≫ I.mapIso (V.mapIso (Iso.prod (e.app x) (e.app y)))).symm := by
+  rfl
+
+private theorem inclusion_comparison_eq
+    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+    (K L : sfRationalConstructibleCategory l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
+    (commonInclusionTensorComparison l (PadicAlgCl l) X E).app (K, L) =
+      stageTensor l X (PadicAlgCl l) E K L := by
+  apply (stageTensor_existsUnique l X (PadicAlgCl l) E K L).unique
+  · let I := GeneralAlgebraicallyClosedCoefficients.inclusion
+      (l := l) (Ω := PadicAlgCl l) (Y := X) E
+    let V := rationalDerivedTensor l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
+    let T := (GeneralAlgebraicallyClosedCoefficients.stageSystem l
+      (PadicAlgCl l) X).T (le_rfl : E ≤ E)
+    let F := (I.prod I) ⋙ commonStageDerivedTensor l (PadicAlgCl l) X
+    let e := operationStageTransitionIso l (PadicAlgCl l) X E E le_rfl ≪≫
+      GeneralAlgebraicallyClosedCoefficients.unitor l (PadicAlgCl l) X E
+    let c (p : sfRationalConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ×
+        sfRationalConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :=
+      commonInclusionTensorModel l (PadicAlgCl l) X E p.1 p.2
+    have hcomp := components_whisker_app I V T F e c
+      (fun f ↦ commonInclusionTensorModel_naturality l (PadicAlgCl l) X E f.1 f.2) K L
+    unfold stageTensorFormula commonInclusionTensorComparison
+    dsimp only
+    refine (heq_of_eq hcomp).trans ?_
+    dsimp only [c, I, V, T, F, e]
+    unfold commonInclusionTensorModel
+    simp only [Functor.mapIso_trans, Iso.trans_assoc]
+    dsimp only [Functor.id_obj, Functor.comp_obj, Functor.prod_obj]
+    unfold commonStageDerivedTensor
+    rfl
+  · unfold stageTensor
+    exact (stageTensor_existsUnique l X (PadicAlgCl l) E K L).exists.choose_spec
+
+private theorem stage_component_formula
+    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+    (NE : CompletedTensorFiniteModel l X R closed models E)
+    (K L : sfRationalConstructibleCategory l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
+    completedTensorStageComponent l X R closed models E NE K L =
+      completedTensorIntegralComponent l X R closed models E NE K.obj L.obj ≪≫
+        (ordinary l X R).mapIso (stageTensor l X (PadicAlgCl l) E K L) := by
+  unfold completedTensorStageComponent
+  rw [whisker_app, inclusion_comparison_eq]
+  rfl
+
+private theorem stage_component_hom_assoc
+    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+    (NE : CompletedTensorFiniteModel l X R closed models E)
+    (K L : sfRationalConstructibleCategory l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X)
+    {Z : DerivedCategory (modules l X R)}
+    (f : (ordinary l X R).obj ((commonStageDerivedTensor l (PadicAlgCl l) X).obj
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj K,
+       (GeneralAlgebraicallyClosedCoefficients.inclusion E).obj L)) ⟶ Z) :
+    (completedTensorStageComponent l X R closed models E NE K L).hom ≫ f =
+      (completedTensorIntegralComponent l X R closed models E NE K.obj L.obj).hom ≫
+        (ordinary l X R).map (stageTensor l X (PadicAlgCl l) E K L).hom ≫ f := by
+  rw [stage_component_formula]
+  exact Category.assoc _ _ _
+
+private theorem stage_iso_trans
+    {I : Type*} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type*} [∀ i, Category (C i)] (S : StageSystem C)
+    (A : S.PairCategory) {M N : I} (hA : A.stage ≤ M) (h : M ≤ N) :
+    S.isoToStage A hA ≪≫ S.isoToStage ((S.ι M).obj (A.toStage hA)) h ≪≫
+        (S.ι N).mapIso ((S.assoc hA h).app A.obj) =
+      S.isoToStage A (hA.trans h) := by
+  apply Iso.ext
+  have hu : (S.T h).map ((S.assoc hA (le_refl M)).inv.app A.obj) =
+      (S.assoc (le_refl M) h).inv.app (A.toStage hA) := by
+    apply (cancel_epi ((S.assoc hA h).inv.app A.obj)).mp
+    exact S.cocycle_inv hA (le_refl M) h A.obj
+  change (StageSystem.PairCategory.mkHom M hA (le_refl M)
+      ((S.assoc hA (le_refl M)).inv.app A.obj) : A ⟶ ⟨M, A.toStage hA⟩) ≫
+    (StageSystem.PairCategory.mkHom N h (le_refl N)
+      ((S.assoc h (le_refl N)).inv.app (A.toStage hA)) :
+        (⟨M, A.toStage hA⟩ : S.PairCategory) ⟶ ⟨N, (S.T h).obj (A.toStage hA)⟩) ≫
+    (StageSystem.PairCategory.mkHom N (le_refl N) (le_refl N)
+      ((S.T (le_refl N)).map ((S.assoc hA h).hom.app A.obj)) :
+        (⟨N, (S.T h).obj (A.toStage hA)⟩ : S.PairCategory) ⟶
+          ⟨N, A.toStage (hA.trans h)⟩) =
+    StageSystem.PairCategory.mkHom (X := A) (Y := ⟨N, A.toStage (hA.trans h)⟩)
+      N (hA.trans h) (le_refl N)
+      ((S.assoc (hA.trans h) (le_refl N)).inv.app A.obj)
+  rw [← StageSystem.PairCategory.mkHom_tr (X := A) (Y := ⟨M, A.toStage hA⟩)
+    (hX := hA) (hY := le_refl M) h ((S.assoc hA (le_refl M)).inv.app A.obj),
+    StageSystem.PairCategory.mkHom_comp_mkHom,
+    StageSystem.PairCategory.mkHom_comp_mkHom]
+  congr 1
+  simp only [StageSystem.tr, hu, Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [← S.cocycle_inv_assoc hA h (le_refl N)]
+  simp [← Functor.map_comp]
+
+private theorem conjugated_transport
+    {C D : Type*} [Category* C] [Category* D] (F G : C ⥤ D)
+    {A B C₀ D₀ : C} (a : A ≅ B) (t : B ≅ C₀) (c : C₀ ≅ D₀)
+    (s : F.obj B ⟶ G.obj B) (s' : F.obj C₀ ⟶ G.obj C₀)
+    (s'' : F.obj D₀ ⟶ G.obj D₀)
+    (ht : F.map t.hom ≫ s' = s ≫ G.map t.hom)
+    (hc : F.map c.hom ≫ s'' = s' ≫ G.map c.hom) :
+    F.map a.hom ≫ s ≫ G.map a.inv =
+      F.map (a ≪≫ t ≪≫ c).hom ≫ s'' ≫ G.map (a ≪≫ t ≪≫ c).inv := by
+  have htc : F.map (t.hom ≫ c.hom) ≫ s'' = s ≫ G.map (t.hom ≫ c.hom) := by
+    rw [F.map_comp, G.map_comp, Category.assoc, hc, ← Category.assoc, ht]
+    simp only [Category.assoc]
+  have htci : s = F.map (t.hom ≫ c.hom) ≫ s'' ≫ G.map (c.inv ≫ t.inv) := by
+    rw [← Category.assoc, htc, Category.assoc, ← G.map_comp]
+    simp
+  rw [htci]
+  simp only [Iso.trans_hom, Iso.trans_inv, Functor.map_comp, Category.assoc]
+
+set_option linter.unusedVariables false in
 /-- The component computed at the compositum agrees with its computation at any
 larger coefficient field, conjugated by the actual isoToStage maps.
 Source: BS Definition 3.4.10 and Remark 6.8.15; HRS Proposition 5.2 and Lemma 7.9.
@@ -76,6 +231,49 @@ theorem completedTensorCommonComponent_stage_transport
         (completedTensorStageComponent l X R closed models E (N E)
           (P.toStage hP) (Q.toStage hQ)).hom ≫
         (commonStageDerivedTensor l (PadicAlgCl l) X ⋙ ordinary l X R).map
-          (Prod.mkHom a.inv b.inv) := by sorry
+          (Prod.mkHom a.inv b.inv) := by
+  let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X
+  let F := ((ordinary l X R).prod (ordinary l X R)) ⋙ closed.tensor
+  let G := commonStageDerivedTensor l (PadicAlgCl l) X ⋙ ordinary l X R
+  let E₀ := Padic.finiteCoefficientCompositum l (PadicAlgCl l) P.stage Q.stage
+  have hP₀ : P.stage ≤ E₀ :=
+    ((Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1 P.stage Q.stage).1
+  have hQ₀ : Q.stage ≤ E₀ :=
+    ((Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1 P.stage Q.stage).2
+  have h : E₀ ≤ E := by
+    change P.stage.val ⊔ Q.stage.val ≤ E.val
+    exact sup_le hP hQ
+  let K := P.toStage hP₀
+  let L := Q.toStage hQ₀
+  let I₀ := GeneralAlgebraicallyClosedCoefficients.inclusion
+    (l := l) (Ω := PadicAlgCl l) (Y := X) E₀
+  let I := GeneralAlgebraicallyClosedCoefficients.inclusion
+    (l := l) (Ω := PadicAlgCl l) (Y := X) E
+  let a := Iso.prod (S.isoToStage P hP₀) (S.isoToStage Q hQ₀)
+  let t := Iso.prod (S.isoToStage (I₀.obj K) h) (S.isoToStage (I₀.obj L) h)
+  let c := (I.prod I).mapIso
+    (Iso.prod ((S.assoc hP₀ h).app P.obj) ((S.assoc hQ₀ h).app Q.obj))
+  have he : a ≪≫ t ≪≫ c = Iso.prod (S.isoToStage P hP) (S.isoToStage Q hQ) := by
+    apply Iso.ext
+    apply Prod.ext
+    · exact congrArg Iso.hom (stage_iso_trans S P hP₀ h)
+    · exact congrArg Iso.hom (stage_iso_trans S Q hQ₀ h)
+  have ht := completedTensorStageComponent_scalar l X R closed models E₀ E h
+    (N E₀) (N E) K L
+  have hc := completedTensorStageComponent_naturality l X R closed models E (N E)
+    (Prod.mkHom ((S.assoc hP₀ h).hom.app P.obj) ((S.assoc hQ₀ h).hom.app Q.obj))
+  have heq := conjugated_transport F G a t c
+    (completedTensorStageComponent l X R closed models E₀ (N E₀) K L).hom
+    (completedTensorStageComponent l X R closed models E (N E)
+      ((I₀.obj K).toStage h) ((I₀.obj L).toStage h)).hom
+    (completedTensorStageComponent l X R closed models E (N E)
+      (P.toStage hP) (Q.toStage hQ)).hom ht hc
+  rw [he] at heq
+  change (completedTensorCommonComponent l X R closed models N P Q).hom = _
+  rw [completedTensorCommonComponent]
+  simp only [F, G, a, S, E₀, K, L, stage_component_hom_assoc] at heq ⊢
+  dsimp only [Iso.trans, Functor.mapIso, Iso.prod, Iso.symm,
+    Functor.comp_map, Functor.prod_map, Functor.comp_obj, Functor.prod_obj] at heq ⊢
+  exact heq
 
 end WeilConjectures.AdicQbarRealization
