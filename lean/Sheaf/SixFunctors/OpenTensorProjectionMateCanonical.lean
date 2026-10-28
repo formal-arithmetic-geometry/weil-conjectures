@@ -6,6 +6,9 @@ module
 
 public import Sheaf.SixFunctors.OpenTensorCochainData
 public import Sheaf.SixFunctors.OpenTensorRepresentativeData
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -15,6 +18,8 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe c v r u₁ u₂ v₁ v₂
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped MonoidalCategory
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 open WeilConjectures.SemilinearSections
 namespace WeilConjectures.CoefSupportOpenTensor
 
@@ -76,6 +81,196 @@ private theorem canonicalProjectionMate_homEquiv
   exact Equiv.apply_symm_apply _ _
 
 
+private theorem exact_unit_app
+    {E D : Type u₁} [Category.{v₁} E] [Category.{v₁} D]
+    [Abelian E] [Abelian D] [HasDerivedCategory.{u₂} E] [HasDerivedCategory.{u₂} D]
+    {L : E ⥤ D} {R : D ⥤ E} [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (a : L ⊣ R)
+    (K : CochainComplex E ℤ) :
+    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a).unit.app
+        (DerivedCategory.Q.obj K) =
+      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app K) ≫
+        R.mapDerivedCategoryFactors.inv.app _ ≫
+        R.mapDerivedCategory.map (L.mapDerivedCategoryFactors.inv.app K) := by
+  unfold SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+    Adjunction.mapExactDerivedCategory
+  rw [Adjunction.localization_unit_app]
+  rfl
+
+private theorem exact_hom_fac
+    {E D : Type u₁} [Category.{v₁} E] [Category.{v₁} D]
+    [Abelian E] [Abelian D] [HasDerivedCategory.{u₂} E] [HasDerivedCategory.{u₂} D]
+    {L : E ⥤ D} {R : D ⥤ E} [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R] (a : L ⊣ R)
+    (K : CochainComplex E ℤ) (N : CochainComplex D ℤ)
+    (f : (L.mapHomologicalComplex (.up ℤ)).obj K ⟶ N) :
+    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a).homEquiv
+        (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj N)
+        (L.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map f) =
+      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).homEquiv _ _ f) ≫
+        R.mapDerivedCategoryFactors.inv.app N := by
+  rw [Adjunction.homEquiv_unit, exact_unit_app, Adjunction.homEquiv_unit]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← R.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact congrArg
+    (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app K) ≫ ·)
+    (R.mapDerivedCategoryFactors.inv.naturality f).symm
+
+private theorem cancel_comparison
+    {E : Type u₁} {D : Type u₂} [Category.{v₁} E] [Category.{v₂} D]
+    (G : E ⥤ D) {U V : E} {W X : D} (a : U ≅ V) (e : G.obj U ≅ W)
+    (z : X ⟶ W) (d : X ⟶ G.obj V)
+    (h : d ≫ G.map a.inv ≫ e.hom = z) :
+    z ≫ e.inv ≫ G.map a.hom = d := by
+  rw [← h]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, ← G.map_comp,
+    a.inv_hom_id, G.map_id, Category.comp_id]
+
+attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
+  HasDerivedCategory.standard DerivedCategory CoefficientClosedStructure.tensor
+  SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction canonicalProjectionMate
+
+private theorem projection_preserves_flat
+    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
+    (M : SemilinearSections.Mod.{c, v, max c v r} J' R')
+    (hM : SheafOfModules.IsFlatOnSite (J := J') (R := R') M) :
+    SheafOfModules.IsFlatOnSite (J := J) (R := R) (F.obj M) := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R'
+  let := SheafOfModules.monoidalCategory R'
+  have hf := SheafOfModules.flat_to_cat R' M hM
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft M) := hf.1.1
+  have : PreservesFiniteColimits (MonoidalCategory.tensorLeft M) := hf.1.2
+  let e : MonoidalCategory.tensorLeft (F.obj M) ≅
+      G ⋙ MonoidalCategory.tensorLeft M ⋙ F :=
+    NatIso.ofComponents (fun N ↦ D.ordinary M N) (by
+      intro N N' f
+      have hn := D.ordinaryNaturality (𝟙 M) f
+      dsimp only [ordinaryTensorHom] at hn
+      simp only [CategoryTheory.Functor.map_id, MonoidalCategory.id_tensorHom] at hn
+      exact hn)
+  have he : exactFunctor _ _ (MonoidalCategory.tensorLeft (F.obj M)) :=
+    ⟨preservesFiniteLimits_of_natIso e.symm, preservesFiniteColimits_of_natIso e.symm⟩
+  exact (exactFunctor _ _).prop_of_iso
+    ((BraidedCategory.tensorLeftIsoTensorRight (F.obj M)) ≪≫
+      (SheafOfModules.siteSheafTensorRightIso R (F.obj M)).symm) he
+
+private theorem projection_preserves_kflat
+    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
+    (K : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)
+    (hK : CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := R') K) :
+    CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R)
+      ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.tensorPreadditive R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R'
+  let := SheafOfModules.monoidalCategory R'
+  let := SheafOfModules.symmetricCategory R'
+  let := SheafOfModules.tensorPreadditive R'
+  intro Z hZ i
+  have hg : ((G.mapHomologicalComplex (.up ℤ)).obj Z).Acyclic := by
+    intro j
+    exact (hZ j).map G
+  have ht := hK _ hg
+  have ht' : ((totalTensor.{c, v, r} J' R').obj
+      (K, (G.mapHomologicalComplex (.up ℤ)).obj Z)).Acyclic := by
+    intro j
+    exact (ht j).of_iso (CochainComplex.Monoidal.braiding _ _)
+  have hm : ((F.mapHomologicalComplex (.up ℤ)).obj
+      ((totalTensor.{c, v, r} J' R').obj
+        (K, (G.mapHomologicalComplex (.up ℤ)).obj Z))).Acyclic := by
+    intro j
+    exact (ht' j).map F
+  exact ((hm i).of_iso (D.chain K Z).symm).of_iso
+    (CochainComplex.Monoidal.braiding _ _)
+
+private theorem tensorSummand_map
+    {K K' L L' : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ}
+    (f : K ⟶ K') (g : L ⟶ L') (p q k : ℤ) (hpq : p + q = k) :
+    tensorSummand.{c, v, r} J R K L p q k hpq ≫
+      ((totalTensor.{c, v, r} J R).map (Prod.mkHom f g)).f k =
+    ordinaryTensorHom.{c, v, r} J R (f.f p) (g.f q) ≫
+      tensorSummand.{c, v, r} J R K' L' p q k hpq := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  change HomologicalComplex.ιMapBifunctor K L (MonoidalCategory.curriedTensor _)
+      (.up ℤ) p q k hpq ≫
+      (HomologicalComplex.mapBifunctorMap f (𝟙 L) (MonoidalCategory.curriedTensor _)
+        (.up ℤ) ≫ HomologicalComplex.mapBifunctorMap (𝟙 K') g
+        (MonoidalCategory.curriedTensor _) (.up ℤ)).f k = _
+  have hm : HomologicalComplex.mapBifunctorMap f (𝟙 L) (MonoidalCategory.curriedTensor _)
+      (.up ℤ) ≫ HomologicalComplex.mapBifunctorMap (𝟙 K') g
+      (MonoidalCategory.curriedTensor _) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap f g (MonoidalCategory.curriedTensor _) (.up ℤ) := by
+    simp [HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
+  rw [hm, HomologicalComplex.ι_mapBifunctorMap]
+  change (f.f p ▷ L.X q) ≫ (K'.X p ◁ g.f q) ≫ _ =
+    (f.f p ⊗ₘ g.f q) ≫ _
+  erw [MonoidalCategory.tensorHom_def, Category.assoc]
+  rfl
+
+omit [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
+private theorem projection_chain_adjunct
+    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
+    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅
+      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)
+    (M : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)
+    (ho : M.ordinary = D.pullTensor)
+    (K : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)
+    (L : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ) :
+    (adj.mapHomologicalComplex (.up ℤ)).homEquiv _ _ (D.chain K L).inv =
+      (totalTensor.{c, v, r} J' R').map
+        (Prod.mkHom ((adj.mapHomologicalComplex (.up ℤ)).unit.app K) (𝟙 _)) ≫
+      M.chain ((F.mapHomologicalComplex (.up ℤ)).obj K) L := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R'
+  let := SheafOfModules.monoidalCategory R'
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R'
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R'
+  apply HomologicalComplex.Hom.ext
+  funext k
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  simp only [Adjunction.homEquiv_unit, HomologicalComplex.comp_f,
+    Functor.mapHomologicalComplex_map_f]
+  change tensorSummand.{c, v, r} J' R' K
+      ((G.mapHomologicalComplex (.up ℤ)).obj L) p q k hpq ≫
+      adj.unit.app _ ≫ G.map ((D.chain K L).inv.f k) = _
+  have hn := adj.unit.naturality
+    (tensorSummand.{c, v, r} J' R' K
+      ((G.mapHomologicalComplex (.up ℤ)).obj L) p q k hpq)
+  change _ ≫ adj.unit.app _ = adj.unit.app _ ≫ G.map (F.map _) at hn
+  erw [reassoc_of% hn]
+  erw [reassoc_of% (tensorSummand_map.{c, v, r} J' R'
+    ((adj.mapHomologicalComplex (.up ℤ)).unit.app K) (𝟙 _) p q k hpq), M.summand]
+  have hs := D.summand K L p q k hpq
+  have hi : F.map (tensorSummand.{c, v, r} J' R' K
+        ((G.mapHomologicalComplex (.up ℤ)).obj L) p q k hpq) ≫
+        (D.chain K L).inv.f k =
+      (D.ordinary (K.X p) (L.X q)).inv ≫
+        tensorSummand.{c, v, r} J R ((F.mapHomologicalComplex (.up ℤ)).obj K)
+          L p q k hpq := by
+    apply (cancel_epi (D.ordinary (K.X p) (L.X q)).hom).1
+    erw [← Category.assoc, ← hs, Category.assoc]
+    have hcomp : (D.chain K L).hom.f k ≫ (D.chain K L).inv.f k = 𝟙 _ :=
+      congrArg (fun f ↦ f.f k) (D.chain K L).hom_inv_id
+    erw [hcomp, Category.comp_id, Iso.hom_inv_id_assoc]
+  erw [← G.map_comp, hi, G.map_comp, ← Category.assoc]
+  erw [← Adjunction.homEquiv_unit, D.ordinaryInverse, ho]
+  rfl
+
+attribute [local irreducible] coefficientTotalTensor
+
+set_option maxHeartbeats 400000 in
+-- The localized tensor-model calculation needs extra elaboration heartbeats.
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
 The one-flat comparisons agree with the simultaneous K-flat models; both input
 complexes are flat-term K-flat representatives. Source: Stacks 0GL1, 07A4 and
@@ -131,6 +326,107 @@ theorem openTensorProjection_mate_canonical
           restriction).app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =
     (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫
         A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _)) := by
-  sorry
+  let FC := (F.mapHomologicalComplex (.up ℤ)).obj C
+  let GP := (G.mapHomologicalComplex (.up ℤ)).obj P
+  let GFC := (G.mapHomologicalComplex (.up ℤ)).obj FC
+  have hFC := projection_preserves_kflat J R J' R' F G adj H sectionPull D C hC
+  have flatFC : flatTerms.{c, v, r} J R FC := fun i ↦
+    projection_preserves_flat J R J' R' F G adj H sectionPull D (C.X i) (flatC i)
+  have hGP := restrictionModel.kflat P hP flatP
+  have hGFC := restrictionModel.kflat FC hFC flatFC
+  let η := (adj.mapHomologicalComplex (.up ℤ)).unit.app C
+  let U := (totalTensor.{c, v, r} J' R').obj (C, GP)
+  let V := (totalTensor.{c, v, r} J R).obj (FC, P)
+  let a := tensorModelIso.{c, v, r} J R A T FC P hFC hP
+  let b := tensorModelIso.{c, v, r} J' R' A' T' C GP hC hGP
+  let d := tensorModelIso.{c, v, r} J' R' A' T' GFC GP hGFC hGP
+  let w := DerivedCategory.Q.map
+    ((totalTensor.{c, v, r} J' R').map (Prod.mkHom η (𝟙 GP)))
+  let z := DerivedCategory.Q.map (restrictionModel.chain FC P)
+  let ad := SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj
+  let α := canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory
+    G.mapDerivedCategory ad restriction
+  have hc : ad.homEquiv _ _
+      (F.mapDerivedCategoryFactors.hom.app U ≫ DerivedCategory.Q.map (D.chain C P).inv) =
+      w ≫ z ≫ G.mapDerivedCategoryFactors.inv.app V := by
+    rw [exact_hom_fac]
+    rw [projection_chain_adjunct J R A T J' R' A' T' F G adj H sectionPull
+      D restriction restrictionModel hordinary C P, Functor.map_comp]
+    exact Category.assoc _ _ _
+  have hd : z ≫ G.mapDerivedCategoryFactors.inv.app V ≫
+      G.mapDerivedCategory.map a.hom =
+      d.hom ≫ A'.tensor.map (Prod.mkHom
+        (G.mapDerivedCategoryFactors.inv.app FC) (G.mapDerivedCategoryFactors.inv.app P)) ≫
+        restriction.inv.app (DerivedCategory.Q.obj FC, DerivedCategory.Q.obj P) := by
+    apply cancel_comparison G.mapDerivedCategory a (G.mapDerivedCategoryFactors.app V) z
+    dsimp only [Iso.app_hom]
+    have ht := restrictionModel.derived FC P hFC hP flatFC flatP
+    simp only [Category.assoc] at ⊢ ht
+    exact ht
+  have hn : w ≫ d.hom = b.hom ≫ A'.tensor.map
+      (Prod.mkHom (DerivedCategory.Q.map η) (𝟙 (DerivedCategory.Q.obj GP))) := by
+    let ρ : ObjectProperty
+        (CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ) :=
+      CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := R')
+    let f : (⟨C, hC⟩ : ρ.FullSubcategory) ⟶ ⟨GFC, hGFC⟩ := ObjectProperty.homMk η
+    let g : (⟨GP, hGP⟩ : ρ.FullSubcategory) ⟶ ⟨GP, hGP⟩ := 𝟙 _
+    have ht := T'.comparison.hom.naturality (Prod.mkHom f g)
+    change w ≫ d.hom = b.hom ≫ A'.tensor.map
+      (Prod.mkHom (DerivedCategory.Q.map η) (DerivedCategory.Q.map (𝟙 GP))) at ht
+    simpa only [CategoryTheory.Functor.map_id] using ht
+  have hr := restriction.inv.naturality
+    (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 (DerivedCategory.Q.obj P)))
+  change A'.tensor.map (Prod.mkHom
+        (G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app C))
+        (G.mapDerivedCategory.map (𝟙 _))) ≫
+      restriction.inv.app (F.mapDerivedCategory.obj (DerivedCategory.Q.obj C),
+        DerivedCategory.Q.obj P) =
+    restriction.inv.app (DerivedCategory.Q.obj FC, DerivedCategory.Q.obj P) ≫
+      G.mapDerivedCategory.map (A.tensor.map (Prod.mkHom
+        (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _))) at hr
+  simp only [CategoryTheory.Functor.map_id] at hr
+  have hu : ad.unit.app (DerivedCategory.Q.obj C) =
+      DerivedCategory.Q.map η ≫ G.mapDerivedCategoryFactors.inv.app FC ≫
+        G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app C) :=
+    exact_unit_app adj C
+  let f := b.hom ≫ A'.tensor.map
+    (Prod.mkHom (𝟙 (DerivedCategory.Q.obj C)) (G.mapDerivedCategoryFactors.inv.app P))
+  let out := a.hom ≫ A.tensor.map
+    (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 (DerivedCategory.Q.obj P)))
+  have hα : ad.homEquiv _ _
+      (α.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P)) =
+      A'.tensor.map (Prod.mkHom (ad.unit.app (DerivedCategory.Q.obj C)) (𝟙 _)) ≫
+        restriction.inv.app (F.mapDerivedCategory.obj (DerivedCategory.Q.obj C),
+          DerivedCategory.Q.obj P) := by
+    exact canonicalProjectionMate_homEquiv A.tensor A'.tensor
+      F.mapDerivedCategory G.mapDerivedCategory ad restriction _
+  have hm : F.mapDerivedCategory.map f ≫
+      α.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =
+      (F.mapDerivedCategoryFactors.hom.app U ≫
+        DerivedCategory.Q.map (D.chain C P).inv) ≫ out := by
+    apply (ad.homEquiv _ _).injective
+    rw [ad.homEquiv_naturality_left, ad.homEquiv_naturality_right, hc]
+    erw [hα]
+    dsimp only [out]
+    simp only [Functor.map_comp, Category.assoc]
+    erw [reassoc_of% hd, reassoc_of% hn, ← hr]
+    dsimp only [f]
+    simp only [Category.assoc, ← A'.tensor.map_comp_assoc]
+    congr 2
+    apply congrArg A'.tensor.map
+    apply Prod.hom_ext
+    · simpa only [prod_comp, Prod.mkHom, Category.id_comp] using hu
+    · dsimp only [prod_comp, Prod.mkHom]
+      erw [Category.id_comp]
+  have ha : ambientModel FC P (Or.inr hP) = a :=
+    ambientBoth FC P hFC hP
+  have hb : openModel C GP (Or.inr hGP) = b := openBoth C GP hC hGP
+  rw [ha, hb]
+  have ht := congrArg (fun q ↦ DerivedCategory.Q.map (D.chain C P).hom ≫
+    F.mapDerivedCategoryFactors.inv.app U ≫ q) hm
+  dsimp only [f, out] at ht
+  simp only [Functor.map_comp, Category.assoc] at ht
+  simpa only [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp] using ht
 
 end WeilConjectures.CoefSupportOpenTensor

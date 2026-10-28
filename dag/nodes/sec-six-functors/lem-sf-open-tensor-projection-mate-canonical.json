@@ -13,14 +13,16 @@
  },
  "proof": [
   {
-   "text": "The ordinary projection isomorphisms and exactness of F and G show that F carries flat modules to flat modules: tensoring with F(M) is naturally isomorphic to G followed by tensoring with M and then F. If C is K-flat, use exactness of G on an acyclic test complex, K-flatness of C, exactness of F, the chain projection and tensor symmetry to show F(C) is K-flat. Thus F(C) is a flat-term K-flat representative; D.pullKFlat and D.pullFlat give the corresponding properties of G(P).",
+   "text": "Construct the natural ordinary projection isomorphism tensorLeft(F(M)) ≅ G ⋙ tensorLeft(M) ⋙ F from D.ordinaryNaturality. Site-flatness gives categorical tensor exactness by flat_to_cat, and the site tensor comparison and symmetry return flatness of F(M). For a K-flat C and acyclic Z, exact G preserves acyclicity; apply hC, swap factors, apply exact F, and transport acyclicity through D.chain and the Koszul swap. This proves F(C) K-flat and its terms flat. D.pullFlat and restrictionModel.kflat give the corresponding properties on the restriction side.",
    "uses": [
-    "def-sf-open-tensor-cochain-data"
+    "def-sf-open-tensor-cochain-data",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "On each signed total summand, use D.ordinaryInverse, hordinary, D.summand and restrictionModel.summand to identify the cochain adjunct of D.chain(C,P).inv with totalTensor(unit,identity) followed by restrictionModel.chain(F(C),P). Equality on every coproduct summand gives equality of cochain maps.",
+   "text": "Prove the adjunct of D.chain(C,P).inv equals totalTensor(unit,identity) followed by restrictionModel.chain(F(C),P). Apply cochain-map extensionality and total-coproduct summand extensionality. Naturality of the ordinary adjunction unit moves the summand insertion across it. D.summand, cancellation of the ordinary and chain isomorphisms, D.ordinaryInverse, hordinary, and restrictionModel.summand identify the two resulting summand maps.",
    "uses": [
     "def-sf-open-tensor-cochain-data",
     "def-sf-open-tensor-representative-data"
@@ -28,7 +30,7 @@
    "elementary": false
   },
   {
-   "text": "Localize the cochain equality through the specified exact derived adjunction. Apply restrictionModel.derived to F(C),P and use naturality of the simultaneous comparison at the cochain unit. The ambientBoth and openBoth hypotheses identify the supplied one-flat comparisons with these simultaneous models. Insert the exact-functor factorization isomorphisms and use the defining hom-equivalence formula for the canonical mate. Injectivity of the hom-equivalence and cancellation of the chain isomorphism give the displayed equation.",
+   "text": "The localized hom-equivalence sends F.factors.hom followed by Q.map(D.chain.inv) to Q.map of the cochain adjunct followed by G.factors.inv. Derive this from localization_unit_app and naturality of the exact-functor factorization. Apply restrictionModel.derived on F(C),P, cancelling the factorization and tensor-model isomorphisms. Naturality of T′.comparison at the cochain unit and naturality of restriction.inv, together with the localized unit formula, identify this adjunct with that of the canonicalProjectionMate after the open comparison. Injectivity of the hom-equivalence gives the inverse chain square. Precompose with Q.map(D.chain.hom) and F.factors.inv and cancel. Finally ambientBoth and openBoth identify the supplied one-flat comparisons with the simultaneous comparisons.",
    "uses": [
     "def-weil-exact-derived-adjunction",
     "def-sf-open-tensor-representative-data"
@@ -38,13 +40,15 @@
  ],
  "proof_deps": [
   "def-sf-open-tensor-cochain-data",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-sf-open-tensor-representative-data",
   "def-weil-exact-derived-adjunction"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, resolving-pair inverse transpose calculation with the supplied simultaneous-model normalizations"
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), the omitted totalization and exact-adjunction localization calculation; explicit Lean proof by D3 on 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -110,12 +114,12 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-9ebc6",
-  "group": "G2",
+  "reviewer": "COMPILER",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261028T055650-L-793403",
+  "landing": "20261028T072354-L-1938465",
   "kind": "interface",
-  "note": "independent cc review: openTensorProjection_mate_canonical new signature vs node lean.statement, change record Old/New and caller's existing hypotheses; Resolving adaptation vs clone (forced 2-line edit); BothModel/CoefficientTensorModels/OpenTensorCochainData defs vs the docstring proof (statement true, old one false)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-28",

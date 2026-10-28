@@ -1,47 +1,75 @@
 ## What changed
 
-Added a proved private helper `canonicalProjectionMate_homEquiv` to
-`Sheaf.SixFunctors.OpenTensorProjectionMateCanonical`.  It unfolds the canonical
-mate and records its defining adjunction-transpose equation by
-`Equiv.apply_symm_apply`.  The existing resolving-pair theorem remains marked
-`STATEMENT-DISPUTED` and retains its single proof hole because its hypotheses do
-not determine the supplied comparison families.
+Replaced the proof hole in
+`WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical`
+with the resolving-pair calculation specified by the existing node. All public
+signatures, definitions and public imports are unchanged.
+
+Private proved helpers establish preservation of flat modules and K-flat
+complexes by F, the cochain adjunction identity on each total-tensor summand,
+the localized unit and hom-equivalence formulas, and generic cancellation of
+the comparison isomorphisms. The main proof combines
+the cochain identity with `restrictionModel.derived`, naturality of the fixed
+simultaneous tensor comparison, and naturality of the restriction isomorphism.
+The two BothModel hypotheses supply the final replacements of the one-flat
+comparisons. Exactness and symmetry handle the acyclic tests; no object is
+chosen from a postponed existence theorem.
+
+Added private proof imports for the existing flatness/site tensor API and the
+complex monoidal instances. Locally irreducible annotations keep the derived
+category, factorization, canonical mate and total tensor definitions behind their APIs;
+no public attributes
+change. Updated the item's proof description to record the implemented steps.
+
+Sources read: Stacks `sites-cohomology.tex`, Tag 0GL1,
+`lemma-j-shriek-and-tensor`; `sites-modules.tex`, Tag 0E8I,
+`lemma-j-shriek-and-tensor`. The current blueprint unit's route is retained.
+
+The recorded LeanFinder search returned derived adjunction factorization
+lemmas, with no matching tensor-model computation. Loogle found
+`Adjunction.homEquiv_unit`; Mathlib grep found the localization unit and
+hom-equivalence naturality APIs used here. Local searches found specialized
+projection formulas on different categories, not this normalization identity.
 
 ## Proved and sorry left
 
-The helper `canonicalProjectionMate_homEquiv` is proved.  No existing hole was
-closed.  The one existing `sorry` remains in
-`WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical`,
-node `lem-sf-open-tensor-projection-mate-canonical`.  No new `sorry` was added.
+Closed one existing hole:
+`WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical`
+(node `lem-sf-open-tensor-projection-mate-canonical`).
+
+No holes added or split off. No `sorry` remains in the item module.
+The conclusion is derived directly from the existing model data.
+
+Validation: the item compiles cleanly through `lcompile.py` in 53.0 seconds
+with no errors or warnings. Both existing public signatures were compared with
+the current source and are unchanged; all Lean lines fit the 100-column limit.
 
 ## No longer needed
 
-None.  Both public imports remain required by the item's declarations and data.
-No DAG nodes or modules were pruned.
+None of the existing public imports or declared proof dependencies is removed.
+The three steps of the implemented plan are all needed. No module
+or node is withdrawn. The added generic flatness and tensor helpers are used
+only as tools; they do not replace a step of the unit's route. Specifically,
+`lem-weil-pbc-independent-bounded-flat-kflat` supplies the proved `flat_to_cat`
+and `tensorPreadditive` API, and
+`lem-weil-pbc-independent-sheaf-tensor-colimits` supplies the proved
+`siteSheafTensorRightIso` and independent tensor instances. No declaration in
+this unit duplicates those general module-sheaf constructions.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-`openTensorProjection_mate_canonical` is false as written.  Its
-`ambientModel` and `openModel` arguments are arbitrary one-flat comparison
-families, with no naturality or agreement with the simultaneous models.  A
-single component can be postcomposed with a nontrivial automorphism while all
-listed hypotheses remain unchanged, changing the right side of the displayed
-equality.  The missing both-model and naturality hypotheses occur in the
-resolving/descent statements.  A complete repair requires changing the
-statement and its callers to carry those coherence data (or replacing the
-families by the canonical normalized model).  The newly proved helper isolates
-the part that is valid without those additional hypotheses.
-
-## New nodes
-
-None.  The helper is private and therefore has no public DAG node.
+No new statement defect found. The recent repair adding the simultaneous-model
+agreement and the flat-term K-flat hypotheses on C is used: F(C) is proved to be
+a resolving complex before applying `restrictionModel.derived`, and both supplied
+comparison families are identified with the fixed models. The former arbitrary-
+comparison statement is neither used nor restored.
 
 ## Related modules compiled before delivery
 
 1 related module(s) compiled against this delivery by deliver3.py: 1 OK.
 
 ```json
-{"capped": false, "direct": 1, "left_out": 0, "own": {"Sheaf.SixFunctors.OpenTensorProjectionMateCanonical": "201d6e4247b0c3278a23fdec4e0ec07a3c7fc5a8"}, "results": {"Sheaf.SixFunctors.OpenTensorProjectionMateResolving": {"hash": "f5ea0fe848072fc4138e035b6a73d1af66e4609b", "status": "OK"}}, "seconds": 35, "time": "2026-10-28T07:46:41+0800", "transitive": 0, "version": 1}
+{"capped": false, "direct": 1, "left_out": 0, "own": {"Sheaf.SixFunctors.OpenTensorProjectionMateCanonical": "97855b060c82e68476f6001bed2fef9c8566baeb"}, "results": {"Sheaf.SixFunctors.OpenTensorProjectionMateResolving": {"hash": "96831495c8feae0ca52458de34567e05caee1771", "status": "OK"}}, "seconds": 91, "time": "2026-10-28T14:56:24+0800", "transitive": 0, "version": 1}
 ```
 
 ## Second reading by D3
