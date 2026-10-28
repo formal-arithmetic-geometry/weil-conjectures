@@ -16,24 +16,54 @@
  ],
  "proof": [
   {
-   "text": "The two composition families use the same integralPullbackComposition family: zlIntegralPullComp f g and pullbackTensorIntegralComposition g f are definitionally identical. Rationalization identifies their hom components with the same localized integral map.",
+   "text": "Extract the integral component formula for zlPullComp from zlPullComp_existsUnique and cancel its equality-only object transports. This gives zl_composition_integral: the component is heterogeneously equal to the stage inclusion of the localized integral compositor, without altering the chosen compositor.",
    "uses": [
     "def-zl-weil-ind-sheaf-category",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-common-stage-compositor-integral-normalization"
    ],
    "elementary": true
   },
   {
-   "text": "At the literal finite stage of K, the normalization equations for zlPullComp and pullbackTensorCommonComposition express the same localized arrow conjugated by the fixed pullback identifications. The coefficient cocycle equations cancel the boundary comparisons. Equality of their representative classes identifies their components and inverses.",
+   "text": "Specialize rationalPullbackScalarComparison_tower to three identical coefficient fields and identity embeddings. The source-unit clauses of sfRationalScalar_coherence rewrite the scalar associators. Naturality of the pullback/scalar comparison moves the source unitor through that comparison. Cancel the invertible comparison, then reflect equality through identity scalar extension, which is faithful because sfRationalScalarUnit identifies it with the identity functor. This gives rational_scalar_unit. Transport along the actual coefficient-inclusion identity law and the recorded operationStageTransitionIso to obtain comparison_self, including both stage-system and scalar unit comparisons.",
    "uses": [
-    "def-zl-weil-ind-sheaf-category",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-weil-rational-pullback-scalar-tower",
+    "lem-weil-scalar-extension-composition",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-common-stage-rational-composition-naturality",
+    "lem-pur-common-stage-pullback-coefficient-unit",
+    "lem-pur-common-stage-rational-composition-naturality",
+    "lem-pur-common-stage-normalized-composition",
+    "lem-pur-common-stage-compositor-word",
+    "lem-pur-common-stage-compositor-representative"
    ],
    "elementary": true
   },
   {
-   "text": "Expand both Frobenius squares as inverse first compositor, the eqToIso for the same scheme square, and the second compositor. The two comparisons from the preceding step and proof irrelevance for the middle equality give the desired equality.",
+   "text": "Prove naturality of the rational compositor by tensor induction on rational morphisms. The zero and sum cases use additivity. On a pure tensor, use the prescribed rational pullback formula and the rational compositor normalization to reduce the equation to integralPullbackComposition naturality multiplied by the same scalar. Package these components with NatIso.ofComponents.",
    "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-derived-pullback-tensor-constraints",
+    "lem-pur-common-stage-rational-composition-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate pullbackTensorCommonComposition_existsUnique at the original coefficient stage of the arbitrary pair P. Apply comparison_self to its three boundary comparisons. Naturality of the rational compositor with respect to the coefficient unitor cancels these boundary factors: the representative is the stage transition applied to the original rational compositor. By the definition of the stage inclusion, its class is inclusion.map of that rational compositor. Its rational normalization identifies this with inclusion.map of the localized integral compositor. The first step therefore identifies (zlPullComp f g).app P with pullbackTensorCommonComposition g f P for every f,g,P.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-constraints",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-finite-rational-derived-operations",
+    "lem-pur-common-stage-rational-composition-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand zlFrobeniusSquare at K into its inverse first compositor, equality transport and second compositor. Rewrite both compositor components by the preceding equality. The middle equality transports agree by eqToHom_app and proof irrelevance, giving exactly podCommonSquarePullbackComponent.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
     "lem-pod-semilinear-field-operation-lifts"
    ],
    "elementary": true
@@ -41,13 +71,26 @@
  ],
  "proof_deps": [
   "def-zl-weil-ind-sheaf-category",
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-pod-semilinear-field-operation-lifts"
+  "lem-weil-rational-pullback-scalar-tower",
+  "lem-weil-scalar-extension-composition",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-finite-rational-derived-operations",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-derived-pullback-tensor-constraints",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pur-common-stage-rational-composition-naturality",
+  "lem-pur-common-stage-pullback-coefficient-unit",
+  "lem-pur-common-stage-normalized-composition",
+  "lem-pur-common-stage-compositor-word",
+  "lem-pur-common-stage-compositor-representative",
+  "lem-pur-common-stage-compositor-integral-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
-  "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
+  "place": "Step 1: original-stage normalized compositor comparison; G3 Lean proof using coefficient-unit normalization from the rational scalar tower law."
  },
  "mathlib_searches": [
   {
@@ -117,13 +160,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-1ac54",
-  "group": "C4",
-  "result": "fix",
-  "landing": "20261027T034621-L-3666357",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261028T020424-L-2508944",
   "kind": "interface",
-  "note": "independent cc review: delivered CommonConstantUnitFrobenius/CommonFrobeniusSquareNormalization/item vs clone item (verbatim Unit…CommonUnit move, diff empty); zlPullComp vs pullbackTensorCommonComposition definitions (same integralPullbackComposition.choose); node stmt_deps vs owners of declarations in the Lean statements"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

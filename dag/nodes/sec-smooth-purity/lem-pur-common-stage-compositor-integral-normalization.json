@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-common-stage-compositor-integral-normalization",
+ "kind": "statement",
+ "title": "commonStageCompositor_integral",
+ "statement": "Prove the declaration WeilConjectures.commonStageCompositor_integral for the normalized common-stage pullback construction used in the Frobenius-square argument.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
+ },
+ "stmt_deps": [
+  "lem-pur-common-stage-compositor-representative",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "The declaration is proved by the construction and cancellation argument documented in its Lean docstring, using the recorded dependencies.",
+   "uses": [
+    "lem-pur-common-stage-compositor-representative",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-common-stage-compositor-representative",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonFrobeniusSquareNormalization",
+  "date": "2026-10-28",
+  "group": "G3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-common-frobenius-square-normalization",
+   "place": "Step 1, canonical constant input and normalized pullback-composition comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageCompositorIntegralNormalization",
+  "file": "lean/Sheaf/Paper/CommonStageCompositorIntegralNormalization.lean",
+  "declaration": "WeilConjectures.commonStageCompositor_integral",
+  "declarations": [
+   "WeilConjectures.commonStageCompositor_integral"
+  ],
+  "statement": "theorem commonStageCompositor_integral (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y Z : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)] (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Z) :\n    HEq (pullbackTensorCommonComposition l Ω g f P).hom\n      ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) P.stage).map\n        (pullbackTensorRationalComposition l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage) g f P.obj).hom)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261028T020424-L-2508944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261028T020424-L-2508944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
