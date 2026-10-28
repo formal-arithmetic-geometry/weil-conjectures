@@ -13,20 +13,35 @@
  },
  "proof": [
   {
-   "text": "Unfold the scalar-extension section and the section-normalized identity pullback comparison. The normalized adjunction identifies the pullback of a section along the identity with the original section, and evaluation on the identity preimage identifies the two points.",
-   "uses": [],
-   "elementary": false,
+   "text": "Apply Mathlib CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app to the section-normalized identity adjunction transported along pushforwardId, and Adjunction.id. Evaluate the resulting morphism equality on U and s. The identity pushforward and identity-adjunction units act as identities on sections. By the normalization clause of existsUnique_tensorPullbackSectionAdjunction [def-pc-module-pullback], replace the chosen unit by tensorPullbackSection. This gives equality of the transported section with s, using scalarExtensionTwistSection [def-sfb-proj-scalar-extension-twist-normalization].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sfb-proj-scalar-extension-twist-normalization"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01MY and 01N2."
+    "place": "Tags 01MY and 01N2, the identity pullback section normalization."
+   }
+  },
+  {
+   "text": "Apply congrArg to evaluate the equality of sections at the point with underlying point x.1 and membership proof x.2, then coerce to the localization. The preimage of U under the identity identifies with U, giving exactly the asserted pointwise equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY and 01N2, the identity pullback section normalization."
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-proj-scalar-extension-twist-normalization"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01MY and 01N2."
+  "place": "Tags 01MY and 01N2, the identity pullback section normalization."
  },
  "mathlib_searches": [
   {
@@ -94,10 +109,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261028T020618-L-2529526",
-  "kind": "interface",
+  "landing": "20261028T034923-L-3569307",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
