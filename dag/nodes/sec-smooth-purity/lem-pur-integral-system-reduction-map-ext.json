@@ -13,24 +13,26 @@
  },
  "proof": [
   {
-   "text": "A morphism in the derived category of transition-compatible coefficient systems is represented levelwise on the sequence site. Derived localization is componentwise, so equality at every coefficient level reflects equality of the whole system morphism.",
+   "text": "STATEMENT-DISPUTED: the proposed componentwise-localization argument confuses joint conservativity on objects with joint faithfulness on morphisms. For a complete target the kernel of the map to the inverse limit of finite Hom groups is lim^1 Hom(A[1], B_n), by the Milnor exact sequence. This kernel can be nonzero on Spec Q; the Q1 report constructs an explicit nonzero Roos cokernel class from cyclotomic characters ramified at distinct primes. No proof of the unrestricted assertion is claimed. A separate, proved finite shifted-Hom criterion is recorded in lem-pur-integral-system-reduction-map-ext-finite; it does not discharge this node without its additional hypothesis.",
    "uses": [
     "def-sf-integral-system-reduction",
-    "lem-pod-integral-system-reduction-fully-faithful"
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-weil-pbc-mittag-leffler"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sf-integral-system-reduction",
-  "lem-pod-integral-system-reduction-fully-faithful"
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-weil-pbc-mittag-leffler"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V1",
+  "group": "Q1",
   "date": "2026-10-28",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "the levelwise extensionality step for the coherent coefficient-system reduction."
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma map-into-Rlim; obstruction analysis in the Q1 delivery report. This is a statement dispute, not a completed proof."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -56,7 +58,7 @@
  "unit": "sk-def-purity-conv",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.IntegralSystemReductionMapEx",
+  "module": "Sheaf.Paper.IntegralSystemReductionMapExt",
   "file": "lean/Sheaf/Paper/IntegralSystemReductionMapExt.lean",
   "declaration": "WeilConjectures.integralSystemReduction_map_ext",
   "statement": "theorem integralSystemReduction_map_ext\n    {X : Scheme.{u}}\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    {A B : sfIntegralConstructibleCategory l E X}\n    (p q : A ⟶ B)\n    (h : ∀ n : ℕ,\n      (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map p) =\n        (finiteSystemDerivedEvaluation (integralSystemRings l E)\n          (integralSystemTransition l E) X n).map\n          ((integralSystemReduction l E X).map q)) :\n    (integralSystemReduction l E X).map p =\n      (integralSystemReduction l E X).map q",
@@ -78,10 +80,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261028T020822-L-2550767",
-  "kind": "interface",
+  "landing": "20261028T055733-L-802513",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
