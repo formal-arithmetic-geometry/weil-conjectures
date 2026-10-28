@@ -1,0 +1,119 @@
+{
+ "id": "lem-pod-reindexing-shift-derived-descent",
+ "kind": "statement",
+ "title": "Localization descent for the derived signed shift equation",
+ "statement": "theorem derived_shift_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (c : Comparison l E g s SX SY TX TY)\n    (hmodel : ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a b : ℤ),\n      derivedShiftEquation l E g s SX SY TX TY c\n        ((podReindexingQ l E Y s).obj P)\n        ((podReindexingQ l E Y s).obj I) a b) :\n    ∀ (M N : podReindexingDerived l E Y s) (a b : ℤ),\n      derivedShiftEquation l E g s SX SY TX TY c M N a b",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 4; localization descent sub-obligation extracted from lem-pod-reindexing-shift-derived-part."
+ },
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-shift-derived-model"
+ ],
+ "proof": [
+  {
+   "text": "Resolve arbitrary derived targets by K-injective complexes and represent sources by localized complexes. Naturality of the comparison and the factorization equations in `Comparison.derived_model` transport the representative equality; cancel the resolution isomorphisms and use essential surjectivity of localization.",
+   "uses": [
+    "def-pod-reindexing-coherence-data",
+    "lem-pod-reindexing-shift-derived-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-shift-derived-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Strict decomposition of the derived signed-shift field into representative and localization obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-injective localization descent of a natural transformation equality from Q representatives",
+   "results": "No single theorem packages the displayed signed internal-Hom shift equation for this coefficient functor.",
+   "date": "2026-10-28",
+   "verdict": "The representative and descent obligations are recorded separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category essential surjectivity and natural transformation equality on Q objects",
+   "results": "Found localization and essential-surjectivity utilities, but no theorem combining the signed sourceShift normalization with this Comparison.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_shift_model|sourceShift_naturality|signedShift",
+   "results": "The source shift naturality used by the blueprint is private in the general internal-Hom implementation; no public theorem matches this coefficient-normalized square.",
+   "date": "2026-10-28",
+   "verdict": "Split into representative model and localization descent obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingShiftDerivedPart",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-signed-shifts",
+   "place": "Step 4 field decomposition",
+   "via": [
+    "lem-pod-reindexing-signed-shifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingShiftDerivedDescent",
+  "file": "lean/Sheaf/Paper/PodReindexingShiftDerivedDescent.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.derived_shift_descent",
+  "statement": "theorem derived_shift_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (c : Comparison l E g s SX SY TX TY)\n    (hmodel : ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a b : ℤ),\n      derivedShiftEquation l E g s SX SY TX TY c\n        ((podReindexingQ l E Y s).obj P)\n        ((podReindexingQ l E Y s).obj I) a b) :\n    ∀ (M N : podReindexingDerived l E Y s) (a b : ℤ),\n      derivedShiftEquation l E g s SX SY TX TY c M N a b",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T020129-L-2469293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261028T020129-L-2469293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

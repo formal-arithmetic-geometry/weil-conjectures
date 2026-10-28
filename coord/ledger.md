@@ -20516,3 +20516,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: returned deliver/C7/Sheaf.SixFunctors.OrdinaryBasicSquare (reviewer RETURN: (the landing tools, head 132ef968e) the delivery did not land: import cycle: Sheaf.SixFunctors.IntegralOrdinaryExchangeS)
 - 02:01 L: returned deliver/J4/Sheaf.Paper.CompletedPullbackTowerCore (reviewer RETURN: (the landing tools, head 5798e6c64) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
 - 02:01 L: returned deliver/C2/Sheaf.SixFunctors.CoefTowerNaturalCurrying (reviewer RETURN: (reviewer C-61f10, head 61f1083f9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.CoefTowe)
+- 02:01 L: merged deliver/A2/Sheaf.Paper.PodReindexingShiftDerivedPart (stage 3; reviewer PASS; first push; landing 20261028T020129-L-2469293 (interface); batch 20261028T020127; modules 3; new nodes 2)

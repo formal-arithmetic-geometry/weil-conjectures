@@ -6,6 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingShiftDerivedDescent
 
 /-! # Derived part of signed shift laws for reindexing comparisons
 
@@ -65,6 +66,9 @@ theorem derived_shift_part {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
     (c : Comparison l E g s SX SY TX TY) :
     DerivedShiftPart l E g s SX SY TX TY c := by
-  sorry
+  change ∀ (M N : podReindexingDerived l E Y s) (a b : ℤ),
+    derivedShiftEquation l E g s SX SY TX TY c M N a b
+  exact derived_shift_descent l E g s SX SY TX TY c
+    (derived_shift_model l E g s SX SY TX TY c)
 
 end WeilConjectures.PodReindexingCoherence
