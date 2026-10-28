@@ -7,6 +7,11 @@ module
 
 public import Sheaf.SixFunctors.IntegralDualizingSupportSystemHom
 public import Sheaf.SixFunctors.IntegralDualizingMappingTower
+import Sheaf.SixFunctors.CoefPairingNativeOperations
+import Sheaf.Paper.QcqsCompactSupportNativeTowerComparison
+import Sheaf.Paper.QcqsCompactSupportStrictReductionGamma
+import all Sheaf.Paper.CompactSupportRepresentativeIndependence
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
 
 /-! # Compact support reconstructed before applying Hom
 
@@ -20,6 +25,27 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
+
+private theorem dualizingLimitIso (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (Y : Scheme.{u}) :
+    Nonempty (integralDualizingLimit l E Y ≅ coefficientConstantTowerLimit l E Y) := by
+  let H := ringedStrictTowerHomotopyLimitOfUniverses.{u + 2, u + 1, u, u}
+    (Scheme.ProEt.topology Y) (completedIntegralCoefficientSheafUnrestricted l E Y)
+    (completedIntegralCoefficient_mul_commUnrestricted l E Y)
+  let U := (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E Y) ⥤ scalarReductionSource l E Y)
+  have hd := H.choose_spec.choose_spec.1
+  have hc := canonicalDerivedUnit_isDerived U
+  let η := H.choose_spec.choose
+  let η' := canonicalDerivedUnit U
+  have hc' : U.rightDerivedFunctor.IsRightDerivedFunctor η'
+      (HomologicalComplex.quasiIso _ (.up ℤ)) := hc
+  exact ⟨@Functor.rightDerivedUnique _ _ _ _ _ _ H.choose U.rightDerivedFunctor _ _ η η'
+    (HomologicalComplex.quasiIso _ (.up ℤ)) _ hd hc'⟩
+
+attribute [local irreducible] integralDualizingCompactTower integralDualizingLimit
+  coefficientSequenceLimit coefficientConstantTowerLimit sfIntegralConstructible
+  CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -70,6 +96,90 @@ theorem integralDualizing_support_reduction
         integralDualizingLimit l E (Spec (.of D.k))
     (∀ K : sfIntegralConstructibleCategory l E X,
       sfIntegralConstructible l E (Spec (.of D.k)) (F.obj K)) ∧
-      Nonempty (F ⋙ B.reduction ≅ integralDualizingSystemSupport D l E X S G) := by sorry
+      Nonempty (F ⋙ B.reduction ≅ integralDualizingSystemSupport D l E X S G)  := by
+  classical
+  let Y := Spec (.of D.k)
+  let : Y.Over Y := ⟨𝟙 _⟩
+  let c := finiteDualizingCompactification D X
+  let : (X ↘ Spec (.of D.k)).IsOver (Spec (.of D.k)) := ⟨Category.comp_id _⟩
+  let hk := finiteFieldDatumPrimeUnit D l hl
+  let N := S.reduction ⋙ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
+    (compactSupportSystemQuotient l E) c.i ⋙
+      ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
+        (compactSupportSystemQuotient l E) c.g
+  obtain ⟨a, _⟩ := qcqsCompactSupport_nativeTowerComparison l E D.k hk c S
+  let a' : integralDualizingCompactTower l E D hl X ≅
+      N ⋙ coefficientSequenceDerivedRestriction l E Y := by
+    unfold integralDualizingCompactTower integralDualizingCompactification
+    exact a
+  obtain ⟨ζ⟩ := dualizingLimitIso l E Y
+  let t : (sfIntegralConstructible l E X).ι ⋙
+      integralDualizingCompactTower l E D hl X ⋙ integralDualizingLimit l E Y ≅
+      (sfIntegralConstructible l E X).ι ⋙ N ⋙ coefficientSequenceLimit l E Y := by
+    unfold coefficientSequenceLimit
+    exact Functor.isoWhiskerLeft (sfIntegralConstructible l E X).ι
+      (Functor.isoWhiskerRight a' (integralDualizingLimit l E Y) ≪≫
+        Functor.isoWhiskerLeft (N ⋙ coefficientSequenceDerivedRestriction l E Y) ζ)
+  obtain ⟨γ, hγ⟩ := qcqsCompactSupport_strictReductionGamma l E D.k hk c S B
+  let d := t ≪≫ γ.symm
+  refine ⟨fun K ↦ (sfIntegralConstructible l E Y).prop_of_iso
+    (d.app K).symm ((sfCompactSupportFiniteIntegralFunctor l D.k hk c E).obj K).property,
+    ?_⟩
+  have hε (K : sfIntegralConstructibleCategory l E X) :
+      IsIso (B.adjunction.counit.app (N.obj K.obj)) := by
+    apply (B.isIso_iff_evaluations _).2
+    intro n
+    let V := coefficientSequenceDerivedEvaluation l E Y n
+    let P := coefficientFiniteDerivedExtension l E Y n
+    let adj := coefficientFiniteAdjunction l E Y n
+    let e := Functor.isoWhiskerLeft S.reduction (compactSupportSystemEvaluation l E c n) ≪≫
+      Functor.isoWhiskerRight (S.reductionEvaluation n)
+        (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)))
+    let q := B.adjunction.counit.app (N.obj K.obj)
+    have heq : P.map (γ.hom.app K) ≫
+        (B.reductionEvaluation n).inv.app ((coefficientSequenceLimit l E Y).obj (N.obj K.obj)) ≫
+        V.map q ≫ e.hom.app K.obj =
+        (sfCompactSupportFiniteReductionIso l D.k hk c E K n).hom := by
+      apply (adj.homEquiv _ _).injective
+      rw [← Category.assoc
+        ((B.reductionEvaluation n).inv.app
+          ((coefficientSequenceLimit l E Y).obj (N.obj K.obj)))
+        (V.map q) (e.hom.app K.obj),
+        Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+      erw [B.counit_projection]
+      exact (hγ K n).trans (by rw [Adjunction.homEquiv_unit]; rfl)
+    have : IsIso (P.map (γ.hom.app K) ≫
+        (B.reductionEvaluation n).inv.app ((coefficientSequenceLimit l E Y).obj (N.obj K.obj)) ≫
+        V.map q ≫ e.hom.app K.obj) := by rw [heq]; infer_instance
+    have : IsIso ((B.reductionEvaluation n).inv.app
+        ((coefficientSequenceLimit l E Y).obj (N.obj K.obj)) ≫
+        V.map q ≫ e.hom.app K.obj) := IsIso.of_isIso_comp_left (P.map (γ.hom.app K)) _
+    have : IsIso (V.map q ≫ e.hom.app K.obj) := IsIso.of_isIso_comp_left
+      ((B.reductionEvaluation n).inv.app _) _
+    exact IsIso.of_isIso_comp_right (V.map q) (e.hom.app K.obj)
+  let ε : ((sfIntegralConstructible l E X).ι ⋙ N ⋙ coefficientSequenceLimit l E Y) ⋙
+      B.reduction ≅ (sfIntegralConstructible l E X).ι ⋙ N :=
+    NatIso.ofComponents (fun K ↦ @asIso _ _ _ _
+      (B.adjunction.counit.app (N.obj K.obj)) (hε K))
+      (fun f ↦ B.adjunction.counit.naturality (N.map f.hom))
+  obtain ⟨jo, ⟨jp⟩⟩ := coefPairing_native_operations l E c S G
+  let := ProEtale.VaryingRing.extensionAdditive
+    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.i
+  let := ProEtale.VaryingRing.extensionLimits
+    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.i
+  let := ProEtale.VaryingRing.extensionColimits
+    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.i
+  let := ProEtale.VaryingRing.push_additive
+    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.g
+  let b : G.openModules.mapDerivedCategory ⋙ G.properModules.rightDerivedFunctor ≅
+      ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
+        (compactSupportSystemQuotient l E) c.i ⋙
+      ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
+        (compactSupportSystemQuotient l E) c.g :=
+    Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso jo)
+      G.properModules.rightDerivedFunctor ≪≫
+        Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorNatIso jp)
+  exact ⟨Functor.isoWhiskerRight t B.reduction ≪≫ ε ≪≫
+    Functor.isoWhiskerLeft ((sfIntegralConstructible l E X).ι ⋙ S.reduction) b.symm⟩
 
 end WeilConjectures

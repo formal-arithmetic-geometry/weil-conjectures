@@ -14,40 +14,52 @@
  ],
  "proof": [
   {
-   "text": "Compare the two normalized reduction left adjoints. Lift the scalar-restriction comparisons of G to the actual ordinary quotient-module open and proper operations: R-linearity implies quotient-linearity locally, since each quotient scalar lifts to R. Derive these comparisons and compose them on strict representatives. The resulting strict restricted-support comparison identifies the actual support limit with F, including its projections.",
+   "text": "Use qcqsCompactSupport_nativeTowerComparison for the fixed Nagata compactification. Uniqueness of right-derived inverse limits identifies integralDualizingLimit with coefficientConstantTowerLimit. Whiskering gives an isomorphism from F to the total limit of the native quotient support system.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-qcqs-compact-support-native-tower-comparison",
+    "lem-weil-compact-support-representative-independence"
    ],
    "elementary": false
   },
   {
-   "text": "Integral residue Tor invariance gives a common Tor interval, and X has a finite dimension bound. Apply prescribed integral compact-support reduction to the defining Roos triangle. It proves constructibility of F(K) and invertibility of every projection adjunct.",
+   "text": "Apply qcqsCompactSupport_strictReductionGamma. Its source is the actual constructible-valued integral compact-support functor, so transporting its object property gives constructibility of F(K). Its projection identity records the finite reduction isomorphisms needed for the next step.",
    "uses": [
-    "lem-coef-integral-residue-tor",
-    "lem-coef-integral-compact-support"
+    "lem-qcqs-compact-support-strict-reduction-gamma",
+    "lem-weil-integral-constructible-triangulated"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the base reduction counit along the strict support/limit comparison. The counit-projection equations identify its finite evaluations with the prescribed projection adjuncts. Joint conservativity makes this already constructed natural system map invertible.",
+   "text": "Construct the base reduction counit at the native support system. Apply the finite scalar adjunction hom equivalence to the strict gamma projection equation and use B.counit_projection. The resulting composite of the evaluated counit with known isomorphisms is the finite reduction isomorphism. Cancellation makes each evaluated counit invertible; B.isIso_iff_evaluations makes the system counit invertible. Naturality gives the natural system isomorphism.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-qcqs-compact-support-strict-reduction-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the ordinary open and proper operations of G with the native quotient-module operations. Derive the ordinary natural isomorphisms and whisker with the source reduction. Compose this comparison with the reconstructed native support system. No Hom or duality operation enters.",
+   "uses": [
+    "lem-coef-pairing-native-operations"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-qcqs-compact-support-native-tower-comparison",
+  "lem-weil-compact-support-representative-independence",
+  "lem-qcqs-compact-support-strict-reduction-gamma",
+  "lem-weil-integral-constructible-triangulated",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-integral-residue-tor",
-  "lem-coef-integral-compact-support"
+  "lem-coef-pairing-native-operations"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q9",
+  "group": "D9",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
-  "note": "Extracted a separate genuine step from the support-system scalar comparison; the full proof and edge cases are in the Lean docstring."
+  "note": "Implemented the strict-tower, constructibility and actual-counit argument in Lean using existing native-tower and normalized-gamma comparisons. Only the strictly smaller ordinary open/proper functor comparison is split off; the original statement and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -117,9 +129,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q9",
+  "group": "D9",
   "result": "pass",
-  "landing": "20261028T055739-L-803815",
+  "landing": "20261028T072359-L-1939976",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

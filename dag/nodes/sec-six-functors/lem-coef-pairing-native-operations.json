@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-pairing-native-operations",
+ "kind": "lemma",
+ "title": "Ordinary pairing operations agree with native quotient-module operations",
+ "statement": "Let l be prime, E a finite extension of Q_l, and c=(j,p) a compactification of a morphism f:X→Y of schemes. For every coefficient derived-system calculus S on X and pairing system G on c, the ordinary functor G.openModules is naturally isomorphic to the native varying-quotient extension by zero, and G.properModules is naturally isomorphic to the native varying-quotient direct image. This is a statement about ordinary sheaves of quotient modules; it contains no reduction of integral compact support, derived inverse limit, constructibility, or Hom assertion. The pairing-system and scalar-restriction data are those of [lem-coef-tower-evaluation-pairing] and [lem-coef-tower-trace-rectification]; the native operations are [def-sp-varying-ring-operations].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second paragraph: compact-support reduction and scalar restriction, the ordinary open/proper identification before deriving."
+ },
+ "stmt_deps": [
+  "lem-coef-tower-evaluation-pairing",
+  "lem-coef-tower-trace-rectification",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "At each positive quotient level, R-linear morphisms of A_n-module sheaves are A_n-linear: locally lift every quotient scalar to a constant R scalar and descend the equality by the sheaf condition. Apply this on each vertical slice, retaining all horizontal maps, to show that scalar restriction from strict quotient-module systems to strict constant-R sheaf towers is fully faithful.",
+   "uses": [
+    "lem-coef-tower-trace-rectification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Native ordinary direct image commutes with scalar restriction by its actual section formula, and native open extension does so by extension by zero and its adjunction. Compose their restriction comparisons with the specified G.openRestriction and G.properRestriction. Lift the resulting natural isomorphisms through the fully faithful restriction functors. Faithfulness proves naturality and both inverse identities. The construction applies also to zero modules, empty opens, identities, and the first quotient.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-coef-tower-evaluation-pairing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-tower-trace-rectification",
+  "def-sp-varying-ring-operations",
+  "lem-coef-tower-evaluation-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second paragraph: compact-support reduction and scalar restriction, the ordinary open/proper identification before deriving.",
+  "note": "The ordinary-functor identification in Step 1 of support reduction, separated from the completed limit and counit argument. It is strictly smaller and independent of all constructibility/limit assertions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from quotient ring module sheaves is fully faithful and lifts natural isomorphisms of ordinary open extension and direct image functors",
+   "results": "Eight hits, including SheafOfModules.fullyFaithfulForget and SheafOfModules.restrictScalars. These concern forgetting to presheaves or define scalar restriction, rather than the project-specific quotient-system functors.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; the fully faithful preimage construction supplies the generic lifting step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve uniqueness-of-adjoints declarations. They do not identify the constant-scalar restricted ordinary functors of G.",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical glue only."
+  },
+  {
+   "tool": "grep",
+   "query": "coefTraceSystemRestriction|native.*coefTrace|coefTrace.*native|restrictionFull",
+   "results": "Read CoefTowerTraceRectification, CoefTowerEvaluationPairingData, IntegralNativeDirectComparison, OpenTensorQuotientCoefficientComparisons and ProEtaleConstantModuleConstructibility. The ordinary scalar restriction lift exists for locally surjective sheaf ring maps; no theorem compares the two actual G operations with native ones.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate. Existing native comparisons assume a different, unit-normalized geometric-operation interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second paragraph: compact-support reduction and scalar restriction, the ordinary open/proper identification before deriving.",
+   "via": [
+    "lem-coef-integral-dualizing-support-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSupportReduction",
+  "date": "2026-10-28",
+  "group": "D9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefPairingNativeOperations",
+  "file": "lean/Sheaf/SixFunctors/CoefPairingNativeOperations.lean",
+  "declaration": "WeilConjectures.coefPairing_native_operations",
+  "statement": "theorem coefPairing_native_operations\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (S : CoefficientDerivedSystemCalculus l E X) (G : CoefPairingSystem l E c S) :\n    ∃ (j : G.openModules ≅ ProEtale.VaryingRing.extension\n        (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.i),\n      Nonempty (G.properModules ≅ ProEtale.VaryingRing.push\n        (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) c.g)",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261028T072359-L-1939976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261028T072359-L-1939976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
