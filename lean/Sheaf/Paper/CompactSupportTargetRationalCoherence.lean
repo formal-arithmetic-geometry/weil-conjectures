@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
 public import Sheaf.Paper.CommonStagePullbackNormalizedDescent
+import Sheaf.Paper.CompactSupportTargetRationalCanonicalSquare
 import all Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages
 import all Mathlib.Logic.Small.Defs
 import all Mathlib.Algebra.Field.Shrink
@@ -104,6 +105,9 @@ theorem compact_support_target_rational_coherence
               ((b' hij).hom.app K) =
         (b hij).hom.app K ≫
           (a j).hom.app (((stageSystem l Ω X).T hij).obj K) := by
-  sorry
+  intro i j hij K
+  have hc := compact_support_target_rational_canonical_square l Ω D hl f g e h R F c
+    R' F' c' a hij K
+  simpa only [hb hij, hb' hij] using hc
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
