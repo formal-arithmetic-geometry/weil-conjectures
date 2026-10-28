@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-integral-finite-extension-affine-counit",
+ "kind": "statement",
+ "title": "The native cross-field dualizing counit on an affine scheme",
+ "statement": "Assume the purity coefficient conventions [def-pur-conventions], so l is different from D.p. Let E and L be finite extensions of Q_l and let iota : E -> L be a Q_l-algebra embedding, with native quotient map O_E/(pi_E^(n+1)) -> O_L/(pi_L^(n+1)) as in [def-sf-integral-finite-extension-core]. Let Y be an affine separated finite-type scheme over Spec D.k. For any compactification c of its structural morphism and any supplied right adjoints GA, GB to the two compact-support functors [def-coef-finite-dualizing-data], the counit-defined ordinary etale comparison DualizingOpenMate.globalMate [lem-coef-dualizing-open-mate], evaluated at the regular coefficient unit, is an isomorphism. No intrinsic realization or descent to a non-affine scheme is asserted.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-integral-finite-extension-core",
+  "def-coef-finite-dualizing-data",
+  "lem-coef-dualizing-open-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraph 2: finite-free cofinal dualizing comparisons and compatibility with quotient counits."
+ },
+ "proof": [
+  {
+   "text": "For the supplied field embedding, first use the actual cofinal upper quotient O_L/(pi_E^(n+1)) over O_E/(pi_E^(n+1)). It is finite free. The finite-free coefficient theorem gives the counit-compatible dualizing comparison; identify the upper ideal with (pi_L)^(e*(n+1)) using its ramification calculation.",
+   "uses": [
+    "lem-coef-finite-free-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since e is positive, reduce the upper field from exponent e*(n+1) to exponent n+1 using the finite-dualizing quotient theorem. Apply scalar extension to the preceding isomorphism and compose with this quotient comparison. Quotient compatibility and the scalar associator identify this composite with the native counit-defined coefficient mate. In particular no finite freeness of the native quotient map is assumed.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "lem-coef-finite-free-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer to the supplied compactification and supplied right adjoints by uniqueness of right adjoints. Their counit compatibility, followed by injectivity of the exceptional Hom equivalence, identifies the transferred map with exactly DualizingOpenMate.globalMate. This calculation is only required on affine finite-type schemes. Empty schemes and identity embeddings are included by the same equations.",
+   "uses": [
+    "def-coef-finite-dualizing-data",
+    "lem-coef-dualizing-open-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-free-extension",
+  "lem-coef-finite-dualizing",
+  "def-coef-finite-dualizing-data",
+  "lem-coef-dualizing-open-mate"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraph 2: finite-free cofinal dualizing comparisons and compatibility with quotient counits.",
+  "by": "worker",
+  "note": "The affine geometric part of J8's proved local-to-global and scalar-adjunction reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme the counit mate of finite coefficient extension on a dualizing object is an isomorphism",
+   "results": "Eight unrelated affine spectrum/global-section matches; no coefficient counit theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction.homEquiv",
+   "results": "Two Kan-extension adjunction isomorphism criteria, neither supplies this exceptional coefficient comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*[Cc]oefficient|[Cc]oefficient.*dualizing",
+   "results": "No Mathlib AlgebraicGeometry matches. Project search found finiteDualizingCoefficientComparisons for same-field quotients and finite_free_coefficient_extension for cofinal base-uniformizer quotients, neither literally the native cross-field affine comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionFiniteUIsInvertible",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraph 2: finite-free cofinal dualizing comparisons and compatibility with quotient counits.",
+   "via": [
+    "lem-sf-integral-finite-extension-finite-u-is-invertible",
+    "lem-sf-integral-finite-extension-u-reduction-is-invertible",
+    "lem-sf-integral-finite-extension-u-invertibility",
+    "lem-sf-integral-finite-extension-invertibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionAffineCounit",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionAffineCounit.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.affineCounit_isIso",
+  "statement": "theorem affineCounit_isIso\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (n : ℕ)\n    (Y : Scheme.{u}) [IsAffine Y] (aY : Y ⟶ Spec (.of D.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (c : Compactification aY)\n    (GA : Etale.DerivedCategoryModule (finiteDualizingCoeff l E n) (Spec (.of D.k)) ⥤\n      Etale.DerivedCategoryModule (finiteDualizingCoeff l E n) Y)\n    (GB : Etale.DerivedCategoryModule (finiteDualizingCoeff l L n) (Spec (.of D.k)) ⥤\n      Etale.DerivedCategoryModule (finiteDualizingCoeff l L n) Y)\n    (aA : Etale.rightDerivedLowerShriekOfCompactification\n      (ModuleCat.{u + 1} (finiteDualizingCoeff l E n)) c ⊣ GA)\n    (aB : Etale.rightDerivedLowerShriekOfCompactification\n      (ModuleCat.{u + 1} (finiteDualizingCoeff l L n)) c ⊣ GB) :\n    IsIso (Etale.DualizingOpenMate.globalMate\n      (RingHom.ulift.{u + 1, u + 1} (integralScalarQuotientMap l E L ι n))\n      c GA GB aA aB)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-74b0e",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261028T072425-L-1945387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-74b0e",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261028T072425-L-1945387",
+  "kind": "interface",
+  "note": "independent cc review: finiteU_isIso proof and new affineCounit_isIso hole against node lem-sf-integral-finite-extension-finite-u-is-invertible, new node lem-sf-integral-finite-extension-affine-counit, change record J8-finite-u-characteristic, the forced caller adaptation and §3b"
+ }
+}

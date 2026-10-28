@@ -43,7 +43,7 @@ theorem comparison_reduction_isIso_u :
   haveI : IsIso q.hom := q.isIso_hom
   haveI : IsIso ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n)).map
       eE.hom) := Functor.map_isIso _ _
-  haveI : IsIso v := finiteU_isIso l E L ι X D n
+  haveI : IsIso v := finiteU_isIso l E L ι X D hl n
   have hc : IsIso (rL.map (u l E L ι X D hl wE wL) ≫ eL.hom) := by
     rw [u_reduction l E L ι X D hl wE wL n]
     infer_instance
