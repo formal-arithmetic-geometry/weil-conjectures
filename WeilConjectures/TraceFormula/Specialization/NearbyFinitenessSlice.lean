@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
+public import WeilConjectures.TraceFormula.Specialization.NearbySliceInputs
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -55,13 +53,10 @@ lisse sheaves and the proper-exchange cases, they prove the finiteness theorem b
 
 ## Unfinished
 
-Both steps are `sorry`ed. No blueprint node states them (the blueprint has no node for the
-finiteness of nearby cycles). The slice step needs the Galois action of the inertia group on the
-nearby cycles, Hochschild–Serre for the pro-`p` kernel `P` and the invariance of nearby cycles
-under extensions of strictly henselian traits, none of which exists for pro-étale
-`ℚ̄_ℓ`-sheaves in the repository (the slice exchange
-`NearbyCyclesModel.isIso_pullbackExchange_sliceHom_of_isPullback` only reduces the comparison
-over `S` to base change of `Rj_*` along the slice). The criterion needs that the cohomology
+The slice step is proved from its two inputs (M1) and (M2), stated in
+`WeilConjectures.TraceFormula.Specialization.NearbySliceInputs`, where they are `sorry`ed. The
+criterion is `sorry`ed; no blueprint node states it (the blueprint has no node for the finiteness
+of nearby cycles). The criterion needs that the cohomology
 sheaves of `Ψ B` are ind-constructible, which for torsion coefficients holds for every étale
 sheaf, but has no analogue for pro-étale `ℚ̄_ℓ`-sheaves without passing through `𝒪_E`-lattices
 and their reductions (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
@@ -84,51 +79,6 @@ namespace NearbyCyclesModel
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-variable (k') in
-/-- The coordinate generic slice `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S` (`K = k'(x)^alg`,
-`AlgebraicGeometry.affineSpaceSlice`) as a morphism of the total spaces of the standard models. -/
-noncomputable def affineSpaceSliceTotal (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).total ⟶ (affineSpaceModel k' (n + 1)).total :=
-  affineSpaceSlice n i (traitSliceCoord k')
-
-variable (k') in
-/-- The coordinate generic slice of the special fibre `hᵢ,ₛ : 𝔸ⁿ_K ⟶ 𝔸ⁿ⁺¹_{k'}`
-(`AlgebraicGeometry.affineSpaceSliceSpecial`) as a morphism of the special fibres of the standard
-models. -/
-noncomputable def affineSpaceSliceSpecialFibre (n : ℕ) (i : Fin (n + 1)) :
-    (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
-      trait (traitSliceField k'))).left ⟶
-      (traitStdSpecialFibre (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')).left :=
-  affineSpaceSliceSpecial n i (traitSliceCoord k')
-
-variable (k') in
-/-- The coordinate generic slice of the geometric generic fibres
-`𝔸ⁿ_{K⟦t⟧} ×_{Spec K⟦t⟧} Spec Ω_K ⟶ 𝔸ⁿ⁺¹_S ×_S Spec Ω`, induced by `hᵢ` and the map
-`Spec Ω_K ⟶ Spec Ω` (`AlgebraicGeometry.traitGenericPointMap`) of the geometric generic points of
-`Spec K⟦t⟧` and `S`, with fields `Ω_K = (Frac K⟦t⟧)^alg` and `Ω = (Frac k'⟦t⟧)^alg`. -/
-noncomputable def affineSpaceSliceGeneric (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).generic ⟶
-      (affineSpaceModel k' (n + 1)).generic :=
-  pullback.lift (pullback.fst _ _ ≫ affineSpaceSliceTotal k' n i)
-    (pullback.snd _ _ ≫ traitGenericPointMap k' (traitSliceField k')) (by
-      rw [Category.assoc, affineSpaceSliceTotal, affineSpaceSlice_over, pullback.condition_assoc,
-        Category.assoc, traitGenericPoint_traitMap])
-
-variable (k') in
-/-- The **morphism of geometric models over the coordinate generic slice** `hᵢ`: from the standard
-model of `𝔸ⁿ_{K⟦t⟧}` over `Spec K⟦t⟧` to the standard model of `𝔸ⁿ⁺¹_S` over `S`, with the slices
-`hᵢ` of the total spaces, `hᵢ,ₛ` of the special fibres, and of the geometric generic fibres. -/
-@[simps]
-noncomputable def affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).geometric.Hom
-      (affineSpaceModel k' (n + 1)).geometric (affineSpaceSliceTotal k' n i)
-      (affineSpaceSliceSpecialFibre k' n i) where
-  total := affineSpaceSliceTotal k' n i
-  generic := affineSpaceSliceGeneric k' n i
-  comm_j := pullback.lift_fst _ _ _
-  comm_i := affineSpaceSliceSpecial_fst _ _ _
-  comm_ε := pullback.lift_fst _ _ _
-
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Nearby cycles on the coordinate generic slices** (SGA 4½, [Th. finitude], Lemme 3.3 and
@@ -136,15 +86,24 @@ variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)
 exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of models over the slice
 (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism: it is the inclusion of the
 invariants of `Ψ_K (Lhᵢ^* B)` under a pro-`p` group `P` (`p ≠ ℓ`), split by averaging over `P`.
-See the module docstring; `sorry`ed. -/
+It is deduced through the cartesian model of the slice
+(`NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_cartesian`) from the base change
+along the cartesian slice square
+(`NearbyCyclesModel.isIso_pullbackExchange_app_fromCartesian_affineSpaceSliceHom`, (M1)) and the
+pro-`p` averaging splitting
+(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom`, (M2)). -/
 theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (affineSpaceModel k' (n + 1)).total))}
     (hB : boundedConstructible _ B) :
     IsSplitMono (((affineSpaceSliceHom k' n i).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ)).app B) :=
-  sorry
+      (Profinite.padicAlgClRingObj ℓ)).app B) := by
+  have h₁ := isIso_pullbackExchange_app_fromCartesian_affineSpaceSliceHom n i hB
+  have h₂ := isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom n i hB
+  have := Hom.isSplitMono_pullbackExchange_app_of_cartesian (affineSpaceSliceHom k' n i)
+    (Profinite.padicAlgClRingObj ℓ) B (by exact_mod_proofs h₁) (by exact_mod_proofs h₂)
+  exact_mod_proofs this
 
 /-- **Nearby cycles on the coordinate generic slices are retracts**: for a bounded constructible
 complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the restriction `Lhᵢ,ₛ^* Ψ B` of its nearby cycles
