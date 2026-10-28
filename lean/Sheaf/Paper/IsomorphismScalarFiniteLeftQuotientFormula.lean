@@ -4,6 +4,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import Sheaf.Paper.IsomorphismScalarFiniteComparisonUnit
+import Sheaf.Paper.IsomorphismScalarFiniteRightQuotientFormula
+import all Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison
 
 /-! # Left finite scalar quotient formula
 
@@ -46,6 +49,41 @@ theorem left_quotient_formula_exists
         (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶
           (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n,
       LeftQuotientFormula l E L ι g vleft := by
-  sorry
+  obtain ⟨bfin, hfin⟩ := finite_formula_unit_exists l E L ι g b hb
+  obtain ⟨vright, hright⟩ := right_quotient_formula_exists l E L ι g b hb
+  -- Conjugation supplies a natural chain map without a new tensor presentation.
+  let e n := Functor.isoWhiskerRight (bfin n) (integralOperationsRestrict l L X n)
+  let vleft n := b.hom ≫ vright n ≫ (e n).inv
+  refine ⟨vleft, ?_⟩
+  intro n P i U s x
+  let sX := (inverseImageCompletedCoefficientMap l L g).hom.app (op U) s
+  let sfin := (completedIntegralCommRingProjectionUnrestricted l L X n).hom.app (op U) sX
+  have hcoef :
+      (inv (inverseImageFiniteCoefficientMap l L g n)).hom.app (op U) sfin =
+        (completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app
+          (op ((proEtaleIsoPostcompose g).obj U)) s := by
+    have hc := congrArg (fun f ↦ (f.hom.app (op U)).hom sX)
+      (inverseCoefficient_square l L g n)
+    have hs : (inv (inverseImageCompletedCoefficientMap l L g)).hom.app (op U) sX = s :=
+      congrArg (fun f ↦ (f.hom.app (op U)).hom s)
+        (IsIso.hom_inv_id (inverseImageCompletedCoefficientMap l L g))
+    change (completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app
+        (op ((proEtaleIsoPostcompose g).obj U))
+        ((inv (inverseImageCompletedCoefficientMap l L g)).hom.app (op U) sX) =
+      (inv (inverseImageFiniteCoefficientMap l L g n)).hom.app (op U) sfin at hc
+    rw [hs] at hc
+    exact hc.symm
+  change (((e n).inv.app P).f i).val.app (op U)
+    ((((vright n).app P).f i).val.app (op U)
+      (((b.hom.app P).f i).val.app (op U)
+        (completedScalarTensorSection l E L ι X
+          (((inverseComplex l E g).obj P.obj).X i) (op U) sX x))) = _
+  rw [hb P i U s x, hright n P i U s x]
+  have hh := hfin n P i U sfin x
+  simp only [map_one, mul_one, id] at hh
+  rw [hcoef] at hh
+  have hi := congrArg (fun f ↦ (f.f i).val.app (op U)
+    (doublePure l E L ι g n P.obj i U sfin 1 x)) ((e n).hom_inv_id_app P)
+  exact (congrArg (fun z ↦ (((e n).inv.app P).f i).val.app (op U) z) hh).symm.trans hi
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor

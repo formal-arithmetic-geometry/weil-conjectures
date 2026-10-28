@@ -34,20 +34,35 @@
  "statement": "theorem left_quotient_formula_exists\n    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅\n      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)\n    (hb : CompletedFormula l E L ι g b) :\n    ∃ vleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n,\n      LeftQuotientFormula l E L ι g vleft",
  "proof": [
   {
-   "text": "Construct the left quotient map by unit insertion and finite projection, and verify its pure-tensor formula. The concrete presentation transport is isolated to this left component.",
+   "text": "Apply finite_formula_unit_exists to obtain the finite comparison with its unit middle-coefficient formula, and right_quotient_formula_exists to obtain the right completed-to-finite map with its pure-tensor formula. Only the unit case of the finite comparison is needed.",
    "uses": [
-    "lem-weil-isomorphism-scalar-quotient-chain-squares"
+    "lem-weil-isomorphism-scalar-finite-comparison-formula-unit",
+    "lem-weil-isomorphism-scalar-finite-right-quotient-formula"
    ],
    "elementary": false
+  },
+  {
+   "text": "The defining completed coefficient limit map commutes with each finite projection. Compose this identity with the inverse completed and finite coefficient isomorphisms, and evaluate on a local coefficient section s, to obtain cB inverse(piX(cS(s))) = piY(s). This is inverseCoefficient_square in the existing inverse-image pullback comparison module.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let e_n be the finite comparison after restriction to completed L coefficients. Define vleft_n = b.hom followed by vright_n followed by e_n.inv. This is already a natural transformation of cochain functors. On a completed pure tensor use CompletedFormula, then RightQuotientFormula. The unit finite formula evaluated at piX(cS(s)), together with the coefficient identity of the preceding step and map_one, identifies e_n.hom of the desired double pure tensor with this result. Apply e_n.inv and cancel e_n.hom followed by e_n.inv. This proves LeftQuotientFormula without any extra statement or flatness/surjectivity assumption.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-isomorphism-scalar-quotient-chain-squares"
+  "lem-weil-isomorphism-scalar-finite-comparison-formula-unit",
+  "lem-weil-isomorphism-scalar-finite-right-quotient-formula",
+  "def-weil-inverse-image-pullback-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK and 03EL; independent left/right component of the finite quotient construction."
+  "place": "Tags 03EK and 03EL; conjugate the right quotient by the completed and unit finite comparisons, as in Step 4 of lem-weil-isomorphism-scalar-quotient-chain-squares; Lean proof by P3, 2026-10-28."
  },
  "lean": {
   "existing": false,
@@ -76,10 +91,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261028T020550-L-2524967",
-  "kind": "interface",
+  "landing": "20261028T034902-L-3564635",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
