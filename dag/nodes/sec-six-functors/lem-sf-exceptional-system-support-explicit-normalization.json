@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-exceptional-system-support-explicit-normalization",
+ "kind": "statement",
+ "title": "Construct a datum with strictly normalized support functor",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix the coefficient, geometric and operation data of [lem-sf-exceptional-ring-transport-core-data] and a datum d. Let H_E be the prescribed support composite ι_X;shriek(c.i);push(c.g). Given a specified natural isomorphism e_E:d.F_E;ι_Y≅H_E and object equalities h_(E,K):ι_Y(d.F_E K)=H_E K, define α_E via comparisonNormalizer for the fully faithful inclusion ι_Y. Conjugate d using α_E. The resulting concrete datum retains its objects, right-hand fields, operations and reconstruction choices and satisfies F′_E;ι_Y=H_E for all E. This theorem constructs a normalized datum; it does not claim that every original datum is normalized, or that e_E follows merely from h_(E,K).",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25, pp. 36-37; agent-expanded normalization and conjugation calculations using Mathlib/CategoryTheory/NatIso.lean (copyObj, isoCopyObj), EqToHom.lean (Functor.ext), and Functor/FullyFaithful.lean (preimageIso)."
+ },
+ "stmt_deps": [
+  "lem-sf-exceptional-ring-transport-core-data",
+  "lem-sf-functor-comparison-normalization",
+  "lem-sf-exceptional-system-support-conjugation-obstruction"
+ ],
+ "proof": [
+  {
+   "text": "Define systemSupportFunctor to be the prescribed support composite, and use comparisonNormalizer with the full-subcategory inclusion to produce the automorphisms α_E from e_E and h_E.",
+   "uses": [
+    "lem-sf-functor-comparison-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use conjugateSystemF with this family to construct normalizeSystemF. The prior construction supplies every data field without a new existence choice.",
+   "uses": [
+    "lem-sf-exceptional-system-support-conjugation-obstruction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply copyObj_comparisonNormalizer_comp at each E. The operations are unchanged in the new datum, so its support composite is definitionally the same H_E. This proves the complete strict support functor equality for the constructed datum.",
+   "uses": [
+    "lem-sf-functor-comparison-normalization",
+    "lem-sf-exceptional-system-support-conjugation-obstruction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-functor-comparison-normalization",
+  "lem-sf-exceptional-system-support-conjugation-obstruction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/EqToHom.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "place": "Explicit calculation by X5 from the displayed definitions and naturality identities; no law-existence theorem or new unproved statement is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor can be conjugated by arbitrary object automorphisms and remains naturally isomorphic but its maps may differ",
+   "results": "Functor.copyObj and Functor.isoCopyObj provide exactly the conjugated functor and its comparison; these existing constructions are used directly. The remaining result concerns normalization after a fully faithful inclusion.",
+   "date": "2026-10-28",
+   "verdict": "Use copyObj and isoCopyObj; no duplicate functor construction is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "NatIso.naturality_2 gives the conjugation identity for an existing natural isomorphism. Naturality_1 is the inverse-direction identity used in the normalization proof.",
+   "date": "2026-10-28",
+   "verdict": "Use the naturality API; it requires a natural comparison and does not make arbitrary object identifications natural."
+  },
+  {
+   "tool": "grep",
+   "query": "copyObj|isoCopyObj; eqToIso.*hom; preimageIso; TransportCoreData",
+   "results": "Read Mathlib CategoryTheory/NatIso.lean:239-246, EqToHom.lean:214-222, Functor/FullyFaithful.lean:205-227, and ExceptionalRingTransportCoreData.lean. The data fields contain no support normalization requirement.",
+   "date": "2026-10-28",
+   "verdict": "Mathlib supplies transport, preimages and extensionality. The strict support requirement is absent from TransportCoreData."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps",
+  "date": "2026-10-28",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-system-support-law-maps",
+   "place": "The fixed-field morphism component: testing and constructing the normalization required for a strict support comparison."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCoreLawsSystemSupportMaps.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.normalizeSystemF_support",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.systemSupportFunctor",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.normalizeSystemF",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.normalizeSystemF_support"
+  ],
+  "statement": "theorem TransportCoreData.normalizeSystemF_support (comparison : ∀ E : FieldStage.{u} l, d.F E ⋙ (sequenceProperty l E Y).ι ≅ d.systemSupportFunctor l Ω D hl c operation left E) (objects : ∀ (E : FieldStage.{u} l) (K : (sequenceProperty l E X).FullSubcategory), (d.F E ⋙ (sequenceProperty l E Y).ι).obj K = (d.systemSupportFunctor l Ω D hl c operation left E).obj K) (E : FieldStage.{u} l) : let d' := d.normalizeSystemF l Ω D hl c operation left comparison objects d'.F E ⋙ (sequenceProperty l E Y).ι = d'.systemSupportFunctor l Ω D hl c operation left E",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

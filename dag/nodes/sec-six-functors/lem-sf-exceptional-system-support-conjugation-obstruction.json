@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-exceptional-system-support-conjugation-obstruction",
+ "kind": "statement",
+ "title": "Object conjugation exposes the missing strict support normalization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix l, Ω, D, hl, finite-type D.k-schemes X,Y, a separated finite-type morphism f, its compactification c, operation and left-realization families, and a datum d:TransportCoreData as in [lem-sf-exceptional-ring-transport-core-data]. For every family α_(E,K) of automorphisms of (d.F E)(K), construct a new datum by using Mathlib copyObj to conjugate F maps, transporting its adjunction and comparison isomorphisms, and retaining all other fields. The new functor has exactly the same objects and maps α_(E,K) inverse;F(u);α_(E,K′). If this differs from F(u) for some E and u:K→K′, the hypotheses do not determine that system map uniquely, even by heterogeneous equality after the full-subcategory inclusion. In particular, using the object equalities of [lem-sf-exceptional-ring-transport-core-system-support-law-objects], the displayed strict support map equation cannot hold for every datum in the presence of this nonnaturality witness. This is a conditional obstruction, not an assertion that a nonnaturality witness exists for every input.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25, pp. 36-37; agent-expanded normalization and conjugation calculations using Mathlib/CategoryTheory/NatIso.lean (copyObj, isoCopyObj), EqToHom.lean (Functor.ext), and Functor/FullyFaithful.lean (preimageIso)."
+ },
+ "stmt_deps": [
+  "lem-sf-exceptional-ring-transport-core-data",
+  "lem-sf-exceptional-ring-transport-core-system-support-law-objects"
+ ],
+ "proof": [
+  {
+   "text": "Apply copyObj and isoCopyObj to each F_E and α_E. Transport the adjunction via ofNatIsoLeft. Whisker the isomorphism to transport realizeF, and whisker its inverse to transport evaluationF. The reduction comparison is derived from realizeF by the current TransportCoreData API, so it needs no independent field assignment. All remaining fields have unchanged types, so the explicit structure update is a TransportCoreData.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-core-data",
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The displayed object and map equations are definitional reductions of the structure update and copyObj. If all data had the same map after inclusion, specialize to this conjugate. Its objects are definitionally unchanged, so heterogeneous equality becomes ordinary equality. Faithfulness of the inclusion contradicts the nonnaturality witness.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-core-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the literal support formula, specialize the proposed universal equation to d and its conjugate. The operations and object representatives are unchanged, so both right-hand sides are identical; proof irrelevance identifies the object-equality proofs inside eqToHom. Thus the two left-hand maps agree, again contradicting faithfulness and the given witness.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-core-system-support-law-objects"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-ring-transport-core-data",
+  "lem-sfb-adjunction-transport-left-iso",
+  "lem-sf-exceptional-ring-transport-core-system-support-law-objects"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/EqToHom.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "place": "Explicit calculation by X5 from the displayed definitions and naturality identities; no law-existence theorem or new unproved statement is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor can be conjugated by arbitrary object automorphisms and remains naturally isomorphic but its maps may differ",
+   "results": "Functor.copyObj and Functor.isoCopyObj provide exactly the conjugated functor and its comparison; these existing constructions are used directly. The remaining result concerns normalization after a fully faithful inclusion.",
+   "date": "2026-10-28",
+   "verdict": "Use copyObj and isoCopyObj; no duplicate functor construction is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "NatIso.naturality_2 gives the conjugation identity for an existing natural isomorphism. Naturality_1 is the inverse-direction identity used in the normalization proof.",
+   "date": "2026-10-28",
+   "verdict": "Use the naturality API; it requires a natural comparison and does not make arbitrary object identifications natural."
+  },
+  {
+   "tool": "grep",
+   "query": "copyObj|isoCopyObj; eqToIso.*hom; preimageIso; TransportCoreData",
+   "results": "Read Mathlib CategoryTheory/NatIso.lean:239-246, EqToHom.lean:214-222, Functor/FullyFaithful.lean:205-227, and ExceptionalRingTransportCoreData.lean. The data fields contain no support normalization requirement.",
+   "date": "2026-10-28",
+   "verdict": "Mathlib supplies transport, preimages and extensionality. The strict support requirement is absent from TransportCoreData."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps",
+  "date": "2026-10-28",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-system-support-law-maps",
+   "place": "The fixed-field morphism component: testing and constructing the normalization required for a strict support comparison."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCoreLawsSystemSupportMaps.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.not_unique_system_map_of_conjugation",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.conjugateSystemF",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.conjugateSystemF_obj",
+   "WeilConjectures.ExceptionalIntegralScalar.TransportCoreData.conjugateSystemF_map",
+   "WeilConjectures.ExceptionalIntegralScalar.not_unique_system_map_of_conjugation",
+   "WeilConjectures.ExceptionalIntegralScalar.not_forall_system_support_map_of_conjugation"
+  ],
+  "statement": "theorem not_unique_system_map_of_conjugation (E : FieldStage.{u} l) {K K' : (sequenceProperty l E X).FullSubcategory} (u : K ⟶ K') (hne : (α E K).inv ≫ (d.F E).map u ≫ (α E K').hom ≠ (d.F E).map u) : ¬ ∀ d' : TransportCoreData l Ω D hl c operation left, HEq ((d'.F E ⋙ (sequenceProperty l E Y).ι).map u) ((d.F E ⋙ (sequenceProperty l E Y).ι).map u)",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

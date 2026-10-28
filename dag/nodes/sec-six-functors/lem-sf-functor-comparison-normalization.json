@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-functor-comparison-normalization",
+ "kind": "statement",
+ "title": "Strictify a comparison after a fully faithful inclusion",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let A,B,D be categories, F:A→B, J:B→D fully faithful, G:A→D, e:FJ≅G a specified natural isomorphism, and h_X:J(FX)=GX specified object equalities. Define α_X to be the unique preimage under J of e_X followed by eqToIso(h_X) inverse. Then copyObj(F,F.obj,α) followed by J equals G strictly. This construction preserves all source object representatives and uses the explicit fully faithful preimage construction.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25, pp. 36-37; agent-expanded normalization and conjugation calculations using Mathlib/CategoryTheory/NatIso.lean (copyObj, isoCopyObj), EqToHom.lean (Functor.ext), and Functor/FullyFaithful.lean (preimageIso)."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "The composite e_X;eqToIso(h_X) inverse is an automorphism of J(FX). Take its fully faithful preimage, yielding an automorphism α_X of FX. This is comparisonNormalizer.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib copyObj has the same objects as F and sends f:X→Y to α_X inverse;F(f);α_Y. Applying J and using the preimage equations yields eqToHom(h_X);e_X inverse;J(Ff);e_Y;eqToHom(h_Y inverse).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality_1 identifies the middle three factors with G(f). Apply Functor.ext with h_X to conclude strict functor equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/EqToHom.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "place": "Explicit calculation by X5 from the displayed definitions and naturality identities; no law-existence theorem or new unproved statement is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor can be conjugated by arbitrary object automorphisms and remains naturally isomorphic but its maps may differ",
+   "results": "Functor.copyObj and Functor.isoCopyObj provide exactly the conjugated functor and its comparison; these existing constructions are used directly. The remaining result concerns normalization after a fully faithful inclusion.",
+   "date": "2026-10-28",
+   "verdict": "Use copyObj and isoCopyObj; no duplicate functor construction is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "NatIso.naturality_2 gives the conjugation identity for an existing natural isomorphism. Naturality_1 is the inverse-direction identity used in the normalization proof.",
+   "date": "2026-10-28",
+   "verdict": "Use the naturality API; it requires a natural comparison and does not make arbitrary object identifications natural."
+  },
+  {
+   "tool": "grep",
+   "query": "copyObj|isoCopyObj; eqToIso.*hom; preimageIso; TransportCoreData",
+   "results": "Read Mathlib CategoryTheory/NatIso.lean:239-246, EqToHom.lean:214-222, Functor/FullyFaithful.lean:205-227, and ExceptionalRingTransportCoreData.lean. The data fields contain no support normalization requirement.",
+   "date": "2026-10-28",
+   "verdict": "Mathlib supplies transport, preimages and extensionality. The strict support requirement is absent from TransportCoreData."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupportMaps",
+  "date": "2026-10-28",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-system-support-law-maps",
+   "place": "The fixed-field morphism component: testing and constructing the normalization required for a strict support comparison."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FunctorObjectConjugation",
+  "file": "lean/Sheaf/CategoryTheory/FunctorObjectConjugation.lean",
+  "declaration": "CategoryTheory.Functor.copyObj_comparisonNormalizer_comp",
+  "declarations": [
+   "CategoryTheory.Functor.comparisonNormalizer",
+   "CategoryTheory.Functor.copyObj_comparisonNormalizer_comp"
+  ],
+  "statement": "theorem copyObj_comparisonNormalizer_comp {D : Type u₃} [Category.{v₃} D] (J : B ⥤ D) (hJ : J.FullyFaithful) (G : A ⥤ D) (e : F ⋙ J ≅ G) (hobj : ∀ X : A, (F ⋙ J).obj X = G.obj X) : F.copyObj F.obj (F.comparisonNormalizer J hJ G e hobj) ⋙ J = G",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261028T081804-L-2783973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
