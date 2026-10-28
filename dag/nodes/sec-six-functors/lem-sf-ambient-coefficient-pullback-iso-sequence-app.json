@@ -12,20 +12,33 @@
  },
  "proof": [
   {
-   "text": "Write U=(n,V). Evaluate the sequence-site adjunction at U. The resulting component is the finite-stage coefficient comparison at index n, transported along the product projection. Apply the finite-stage inverse and use compatibility with quotient transition maps to check the two inverse equations componentwise.",
+   "text": "Restrict a sequence ring sheaf to every vertical slice, retaining the horizontal restriction maps. This functor is fully faithful: after forgetting the sheaf conditions it is currying preceded by the product-opposite equivalence, and all forgetful functors are fully faithful. The coefficient diagram is canonically isomorphic to the diagram of these slices, with identity section components.",
+   "uses": [
+    "lem-sf-ambient-pullback-site-constructions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction to slices commutes with ringPush, by the identity comparison on sections. Whisker the finite ring-sheaf inverse-image adjunction by the index category. The transpose of the resulting coefficient diagram map has component ringMap at some n, since the comparison is identity on sections. Each component is invertible by the finite coefficient pullback theorem, so the diagram transpose is invertible.",
    "uses": [
     "lem-sf-ambient-coefficient-pullback-iso-finite"
    ],
    "elementary": false
+  },
+  {
+   "text": "A fully faithful square of right adjoints transfers invertibility of this transpose to the original sequence transpose. Indeed for any target sheaf the two fully faithful hom equivalences and the diagram adjunction identify precomposition by the sequence transpose with precomposition by the invertible diagram transpose. Thus it is bijective on every outgoing hom set and the sequence transpose is invertible. Applying the sheaf-to-presheaf functor and evaluating at U gives the stated component isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sf-ambient-pullback-site-constructions",
   "lem-sf-ambient-coefficient-pullback-iso-finite"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Finite-stage comparison evaluated on each sequence-site object."
+  "place": "Tags 03CB and 0941: levelwise product-site adjunction; categorical glue written by R2 using Mathlib currying, fully faithful functors, whiskered adjunctions and the coyoneda criterion."
  },
  "mathlib_searches": [
   {
@@ -77,10 +90,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261028T020228-L-2482381",
-  "kind": "interface",
+  "landing": "20261028T072445-L-1950474",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

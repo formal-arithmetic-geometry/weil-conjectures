@@ -21134,3 +21134,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/P8/Sheaf.Paper.ReducedIntegralBraidingScalarExtensionSquare (stage 3; reviewer PASS; first push; landing 20261028T072441-L-1949797 (interface); batch 20261028T072331; modules 3; new nodes 2)
 - 07:24 L: merged deliver/P9/Sheaf.Paper.PointIntegralPerfectRealization (stage 3; reviewer PASS; first push; landing 20261028T072442-L-1949944 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:24 L: merged deliver/Q9/Sheaf.AlgebraicGeometry.BaseFieldFiniteTorsionCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261028T072443-L-1950224 (interface); batch 20261028T072331; modules 2; new nodes 1)
+- 07:24 L: merged deliver/R2/Sheaf.Paper.AmbientCoefficientSequencePullbackIsoApp (stage 3; reviewer PASS; first push; landing 20261028T072445-L-1950474 (proof); batch 20261028T072331; modules 1; new nodes 0)
