@@ -25,6 +25,43 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
 
+-- Perform the logical pairing before specializing to the concrete relative-Proj data.
+private theorem pair_local_coefficients {S T : Scheme.{u}} (f : T ⟶ S)
+    (E : S.Modules) {P Q : T.Modules}
+    (q : (Scheme.Modules.tensorPullback f).obj E ⟶ P)
+    (q' : (Scheme.Modules.tensorPullback f).obj E ⟶ Q)
+    (hq : ∀ (U : S.affineOpens) (W : T.Opens) (h : W ≤ f ⁻¹ᵁ U.1)
+      (x : T), x ∈ W →
+      ∃ (Z : T.Opens) (hZW : Z ≤ W) (_ : x ∈ Z)
+        (a : Γ(P, Z)) (c : Γ(E, U.1) → Γ(T, Z)),
+        ∀ t : Γ(E, U.1),
+          let s := ((Scheme.Modules.tensorPullback f).obj E).presheaf.map
+            (homOfLE (hZW.trans h)).op (Scheme.Modules.tensorPullbackSection f E U.1 t)
+          q.app Z s = c t • a)
+    (hq' : ∀ (U : S.affineOpens) (W : T.Opens) (h : W ≤ f ⁻¹ᵁ U.1)
+      (x : T) (Z : T.Opens) (hZW : Z ≤ W) (_ : x ∈ Z)
+      (a : Γ(P, Z)) (c : Γ(E, U.1) → Γ(T, Z)),
+      (∀ t : Γ(E, U.1),
+        let s := ((Scheme.Modules.tensorPullback f).obj E).presheaf.map
+          (homOfLE (hZW.trans h)).op (Scheme.Modules.tensorPullbackSection f E U.1 t)
+        q.app Z s = c t • a) →
+      ∃ b' : Γ(Q, Z), ∀ t : Γ(E, U.1),
+        let s := ((Scheme.Modules.tensorPullback f).obj E).presheaf.map
+          (homOfLE (hZW.trans h)).op (Scheme.Modules.tensorPullbackSection f E U.1 t)
+        q'.app Z s = c t • b') :
+    ∀ (U : S.affineOpens) (W : T.Opens) (h : W ≤ f ⁻¹ᵁ U.1)
+      (x : T), x ∈ W →
+      ∃ (Z : T.Opens) (hZW : Z ≤ W) (_ : x ∈ Z)
+        (a : Γ(P, Z)) (b' : Γ(Q, Z)) (c : Γ(E, U.1) → Γ(T, Z)),
+        ∀ t : Γ(E, U.1),
+          let s := ((Scheme.Modules.tensorPullback f).obj E).presheaf.map
+            (homOfLE (hZW.trans h)).op (Scheme.Modules.tensorPullbackSection f E U.1 t)
+          q.app Z s = c t • a ∧ q'.app Z s = c t • b' := by
+  intro U W h x hx
+  obtain ⟨Z, hZW, hxZ, a, c, hqZ⟩ := hq U W h x hx
+  obtain ⟨b', hqZ'⟩ := hq' U W h x Z hZW hxZ a c hqZ
+  exact ⟨Z, hZW, hxZ, a, b', c, fun t ↦ ⟨hqZ t, hqZ' t⟩⟩
+
 /-- Local factorization and coefficient formulas on one affine chart.
 
 Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
@@ -83,6 +120,16 @@ theorem normalized_pullback_generator_local_coefficients
               (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
               E U.1 t)
           q.app Z s = c t • a ∧ q'.app Z s = c t • b' := by
-  sorry
+  exact pair_local_coefficients
+    (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom) E
+    ((Scheme.Modules.tensorPullbackSectionComp b.relProjComparison
+      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom.app E ≫
+      (Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient)
+    ((eqToIso e).hom ≫
+      (Scheme.Modules.tensorPullbackSectionComp
+        (SymmetricAlgebraSheaf.gradedAlgebraData
+          ((Scheme.Modules.tensorPullback g).obj E)).relProjHom g).hom.app E ≫ D'.quotient)
+    (normalized_pullback_generator_local_coefficients_q g E D D' b hb e)
+    (normalized_pullback_generator_local_coefficients_qprime g E D D' b hb e)
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts

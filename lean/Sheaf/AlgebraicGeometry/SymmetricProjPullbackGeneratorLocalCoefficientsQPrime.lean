@@ -32,6 +32,22 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 The open, the first frame, and its coefficient map are fixed as input. The
 conclusion is only the existence of the second frame and its formula, hence is
 strictly smaller than the common-coefficient theorem.
+
+Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
+Proof: on standard degree-one charts the normalization of both quotients identifies
+images of generators with their homogeneous fractions. The map `b` sends these
+fractions to the fractions for the pulled generators, by `hb`. Hence the two
+normalized quotients have the same kernel on the pulled generators. Such generators
+span the pullback of `E` locally, because `U` is affine and `E` is quasi-coherent.
+The first quotient is surjective, so the equation `q(t) = c(t) • a` implies that
+`a` generates its invertible target at every stalk. Thus `a` is a frame on `Z`.
+Expressing the second normalized quotient in that frame yields a section `b'`;
+the common-kernel equation proves `q'(t) = c(t) • b'` on a standard-open cover.
+The local sections `b'` agree on intersections by the generating property of the
+coefficients `c(t)`, and glue to the required section on `Z`. The zero-ring and
+empty-open cases satisfy the same formulas. This argument requires the specified
+normalized `q'`; it does not apply to an arbitrary morphism.
+(blueprint: lem-trf-symmetric-proj-pullback-generator-local-coefficients-qprime)
 -/
 theorem normalized_pullback_generator_local_coefficients_qprime
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
@@ -61,7 +77,10 @@ theorem normalized_pullback_generator_local_coefficients_qprime
       (Scheme.Modules.tensorPullbackSectionComp b.relProjComparison
         (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom.app E ≫
         (Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient
-    ∀ (q' : M ⟶ D'.line),
+    let q' : M ⟶ D'.line := (eqToIso e).hom ≫
+      (Scheme.Modules.tensorPullbackSectionComp
+        (SymmetricAlgebraSheaf.gradedAlgebraData
+          ((Scheme.Modules.tensorPullback g).obj E)).relProjHom g).hom.app E ≫ D'.quotient
     ∀ (U : S.affineOpens) (W : T.Opens) (h : W ≤
       (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom) ⁻¹ᵁ U.1)
       (x : T) (Z : T.Opens) (hZW : Z ≤ W) (hx : x ∈ Z)
