@@ -42,22 +42,8 @@ namespace AlgebraicGeometry
 
 variable (k' : Type u) [Field k'] {m : ℕ} (hm : m ≠ 0)
 
-/-- `t ↦ t^m` is a finite ring map: `k'⟦t⟧` is spanned by `1, t, …, t^{m-1}` over its image. -/
-lemma PowerSeries.finite_expand : (PowerSeries.expand m hm (R := k')).toRingHom.Finite := by
-  classical
-  let := (PowerSeries.expand m hm (R := k')).toRingHom.toAlgebra
-  let : Module (PowerSeries k') (PowerSeries k') := Algebra.toModule
-  refine ⟨⟨(Finset.range m).image fun r ↦ (PowerSeries.X : PowerSeries k') ^ r, ?_⟩⟩
-  rw [eq_top_iff]
-  intro f _
-  rw [PowerSeries.eq_sum_X_pow_mul_expand m hm f]
-  refine Submodule.sum_mem _ fun r hr ↦ ?_
-  rw [mul_comm]
-  exact Submodule.smul_mem _ (PowerSeries.mk fun n ↦ PowerSeries.coeff (m * n + r) f)
-    (Submodule.subset_span (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hr)))
-
 instance : IsFinite (traitPowMap k' m hm) :=
-  (IsFinite.SpecMap_iff _).2 (PowerSeries.finite_expand k' hm)
+  (IsFinite.SpecMap_iff _).2 (PowerSeries.finite_expand m hm)
 
 namespace ProEtale.CondensedRing
 

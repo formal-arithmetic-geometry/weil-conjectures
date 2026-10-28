@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.Expand
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.RingTheory.ExtendedReesAlgebraGraded
 
@@ -32,48 +32,6 @@ restricts, for ideals `I, J` of `R` with `J ⊆ I^m`, to a map of extended Rees 
 @[expose] public section
 
 open LaurentPolynomial
-
-namespace LaurentPolynomial
-
-variable (R : Type*) [CommSemiring R]
-
-/-- The substitution `t ↦ t^m` of Laurent polynomials, `T n ↦ T (m * n)`. -/
-noncomputable def expand (m : ℕ) : R[T;T⁻¹] →ₐ[R] R[T;T⁻¹] :=
-  AddMonoidAlgebra.mapDomainAlgHom R R (AddMonoidHom.mulLeft (m : ℤ))
-
-variable {R}
-
-@[simp]
-lemma expand_C (m : ℕ) (r : R) : expand R m (C r) = C r := by
-  rw [C_eq_algebraMap, AlgHom.commutes]
-
-@[simp]
-lemma expand_T (m : ℕ) (n : ℤ) : expand R m (T n) = T (m * n) := by
-  rw [expand, AddMonoidAlgebra.mapDomainAlgHom_apply, T, AddMonoidAlgebra.mapDomain_single]
-  rfl
-
-lemma expand_C_mul_T (m : ℕ) (r : R) (n : ℤ) : expand R m (C r * T n) = C r * T (m * n) := by
-  rw [map_mul, expand_C, expand_T]
-
-/-- `LaurentPolynomial.expand` extends `Polynomial.expand`. -/
-lemma expand_comp_toLaurentAlg (m : ℕ) :
-    (expand R m).comp Polynomial.toLaurentAlg =
-      Polynomial.toLaurentAlg.comp (Polynomial.expand R m) := by
-  refine Polynomial.algHom_ext ?_
-  simp [Polynomial.toLaurent_X]
-
-lemma expand_toLaurent (m : ℕ) (p : Polynomial R) :
-    expand R m (Polynomial.toLaurent p) = Polynomial.toLaurent (Polynomial.expand R m p) := by
-  simpa [Polynomial.toLaurentAlg_apply] using congr($(expand_comp_toLaurentAlg (R := R) m) p)
-
-/-- `LaurentPolynomial.expand` is natural in the coefficient ring. -/
-lemma mapRingHom_expand {S : Type*} [CommSemiring S] (φ : R →+* S) (m : ℕ) (x : R[T;T⁻¹]) :
-    mapRingHom φ (expand R m x) = expand S m (mapRingHom φ x) := by
-  induction x using LaurentPolynomial.induction_on' with
-  | add p q hp hq => rw [map_add, map_add, hp, hq, map_add, map_add]
-  | C_mul_T n a => simp [expand_C_mul_T]
-
-end LaurentPolynomial
 
 namespace Ideal
 
@@ -171,11 +129,6 @@ theorem finite_extendedReesAlgebraPowMap {m : ℕ} (hm : 0 < m) (h : J ≤ I ^ m
   · refine RingHom.FiniteType.of_comp_finiteType (f := algebraMap R J.extendedReesAlgebra) ?_
     rw [extendedReesAlgebraPowMap_comp_algebraMap]
     exact RingHom.finiteType_algebraMap.mpr (finiteType_extendedReesAlgebra hI)
-
-lemma _root_.LaurentPolynomial.coeff_C_mul_T (a : R) (j i : ℤ) :
-    (C a * T j : R[T;T⁻¹]).coeff i = if i = j then a else 0 := by
-  rw [← single_eq_C_mul_T, AddMonoidAlgebra.coeff_single, Finsupp.single_apply]
-  simp only [eq_comm]
 
 /-- The map `R[t, I t⁻¹] ⟶ (R / I)[t]` cutting out the zero section of the deformation space is
 surjective. -/

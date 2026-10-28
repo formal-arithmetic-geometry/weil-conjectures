@@ -8,14 +8,14 @@ module
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftSquareIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComponents
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 
 /-!
 # The extension of scalars `E ⟶ ℚ̄_ℓ` as a coefficient change
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. This file shows that the
 extension of scalars `T_X : Dᵇc(X)⟦E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧`, with the comparisons (Pull), (Shriek) and
-(Push) of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility`, is
+(Push) of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility`, is
 a coefficient change of the bounded constructible six functors
 (`ProEtale.CondensedRing.toPadicAlgClCoefficientChange`). The required compatibilities are
 restrictions of those on the ambient derived categories

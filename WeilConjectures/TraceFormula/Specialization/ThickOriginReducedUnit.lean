@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.SmoothProj
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantFamily
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginCentre
+public import WeilConjectures.Mathlib.CategoryTheory.Iso
 
 /-!
 
@@ -95,15 +96,6 @@ end Geometry
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
-
-/-- If `f₁ ≫ f₂ = g₁ ≫ g₂ ≫ g₃` with `f₁`, `f₂`, `g₁`, `g₃` isomorphisms, then `g₂` is an
-isomorphism. -/
-lemma isIso_of_comp_eq_comp_comp {C : Type*} [Category C] {A B D E F : C} {f₁ : A ⟶ B}
-    {f₂ : B ⟶ F} {g₁ : A ⟶ D} {g₂ : D ⟶ E} {g₃ : E ⟶ F} (h : f₁ ≫ f₂ = g₁ ≫ g₂ ≫ g₃) [IsIso f₁]
-    (hf₂ : IsIso f₂) [IsIso g₁] [IsIso g₃] : IsIso g₂ := by
-  have : IsIso (g₁ ≫ g₂ ≫ g₃) := h ▸ inferInstance
-  have := IsIso.of_isIso_comp_left g₁ (g₂ ≫ g₃)
-  exact IsIso.of_isIso_comp_right g₂ g₃
 
 /-- Any morphism `f : X ⟶ Y` pulls the zero ideal back into any ideal `J` of `X`. -/
 lemma siteIdeal_bot_map_appLE_le {X Y : Scheme.{u}} (f : X ⟶ Y) (J : X.IdealSheafData)
