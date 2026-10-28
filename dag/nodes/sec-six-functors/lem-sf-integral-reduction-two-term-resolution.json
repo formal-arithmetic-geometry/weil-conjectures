@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-integral-reduction-two-term-resolution",
+ "kind": "statement",
+ "title": "Augmented two-term resolution of finite coefficients over completed coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix universes d,t,u, a prime l, a finite extension E of Q_l, a scheme Y in universe t, a finite-field datum D in universe d with characteristic unequal to l, and n a natural number. Put R equal to the completed integral coefficient ring sheaf on the pro-etale site of Y. The restriction to R of the finite coefficient unit at level n, placed in degree zero, admits an augmented resolution Q. The complex Q is K-flat, is zero outside degrees -1 and 0, and its terms in these degrees are isomorphic to the R-module unit. The augmentation is a quasi-isomorphism. The restriction functor and coefficient objects are exactly those of [def-sf-integral-hom-reduction-models] and [def-weil-integral-derived-reduction].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-derived-reduction",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use the DVR of integers of E and its standard quotient resolution: multiplication by a uniformizer power between two free rank-one modules, with augmentation to the quotient.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  },
+  {
+   "text": "Apply the constant-sheaf construction and extend to the completed sheaf. Flatness and the completed reduction identification preserve the augmented resolution and identify its target with the actual restricted finite unit. The terms remain unit modules and a bounded flat complex is K-flat.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient by a uniformizer power has a two term free resolution over the completed constant ring sheaf on a pro etale site",
+   "date": "2026-10-28",
+   "results": "8 hits: BDeRham, BDeRhamPlus, StandardEtalePresentation, instCommRingBDeRhamPlus, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.instEtaleRing, Algebra.Etale.formallyEtale",
+   "verdict": "No completed-coefficient quotient resolution found."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.double",
+   "date": "2026-10-28",
+   "results": "12 hits: HomologicalComplex.double, HomologicalComplex.doubleXIso₀, HomologicalComplex.doubleXIso₁, HomologicalComplex.isZero_double_X, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId, HomologicalComplex.double_d_eq_zero₀, HomologicalComplex.double_d_eq_zero₁, HomologicalComplex.double_d",
+   "verdict": "Double complexes supply two-term objects but not the augmented sheaf resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "twoTerm.*(resolution|quasiIso)|homComplex.*tensor|tensor.*homComplex",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No quotient-resolution or Hom-tensor theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonRepresentative",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionTwoTermResolution",
+  "file": "lean/Sheaf/Paper/IntegralReductionTwoTermResolution.lean",
+  "declaration": "WeilConjectures.IntegralHom.integralReduction_twoTerm_resolution",
+  "statement": "theorem integralReduction_twoTerm_resolution (n : ℕ) :\n    let R := completedIntegralCommRingSheaf l E Y D hl\n    ∃ (Q : CochainComplex (Modules.{t, u} Y R) ℤ)\n      (_ : flat.{t, u} Y R Q)\n      (_ : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))\n      (_ : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n        ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n      (_ : Q.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n        ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n      (epsilon : Q ⟶\n        ((scalarReductionRestriction l E Y n).mapHomologicalComplex (.up ℤ)).obj\n          ((CochainComplex.singleFunctor (scalarReductionTarget l E Y n) 0).obj\n            (SheafOfModules.unit (integralCoefficientSheaf l E Y n)))),\n      QuasiIso epsilon",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-integral-hom-representative-square",
+ "kind": "statement",
+ "title": "Normalization square for fixed augmented chain representatives",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix the coefficient data, tensor presentation a, reduction presentation m, and derived objects K,L of [def-sf-integral-hom-reduction-models]. Suppose fixed complexes P,I represent K,L with P K-flat and I K-injective. Suppose Q is a K-flat complex supported in degrees -1,0, both terms isomorphic to the completed coefficient unit, and an augmentation quasi-isomorphism identifies it with the restricted level-n finite coefficient unit in degree zero. For any chain map f from Hom(P,I) tensor Q to Hom(P,I tensor Q) satisfying the signed local formula of [lem-sf-two-term-free-hom-tensor-components], there exist endpoint isomorphisms s and t to these localized chain complexes such that the restricted normalized derived comparison followed by t is s followed by the localization of f. Only the normalization square is asserted: all complexes, their representing isomorphisms, the augmentation and signed chain map are supplied as hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-two-term-free-hom-tensor-components",
+  "def-weil-integral-derived-reduction",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "The two free terms of Q imply that I tensor Q is K-injective. The augmentation, K-flatness, and Hom localization give the source and target representative isomorphisms. The scalar internal-Hom and derived scalar extension-restriction adjunctions identify the restricted target with Hom_R(K,U(FL)).",
+   "uses": [
+    "lem-weil-pbc-split-perfect-tensor-kinjective",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-pur-derived-internal-hom",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  },
+  {
+   "text": "Transpose the square through the tensor-Hom adjunction, and use the evaluation normalization in a and scalar-unit normalization in m. On homogeneous local sections the signed exchange formula contributes exactly the interchange sign. Both transposes are the same reduced evaluation, including the same augmentation, so injectivity of the adjunction gives the equality.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-sf-two-term-free-hom-tensor-components",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pur-derived-internal-hom",
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-two-term-free-hom-tensor-components",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived change of rings internal Hom comparison is represented by the signed Hom tensor exchange on K flat and K injective resolutions",
+   "date": "2026-10-28",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Tor'_map_app, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "verdict": "No normalized change-of-rings internal-Hom representative theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "date": "2026-10-28",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "verdict": "Adjunction hom equivalences justify the final injectivity step, not the representative identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*tensor|tensor.*homComplex",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No Hom-complex tensor comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonRepresentative",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomRepresentativeSquare",
+  "file": "lean/Sheaf/Paper/IntegralHomRepresentativeSquare.lean",
+  "declaration": "WeilConjectures.IntegralHom.comparison_representative_square",
+  "statement": "theorem comparison_representative_square\n    (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))\n    (n : ℕ) (m : ReductionPresentation l E Y D hl a n)\n    (K L : completedIntegralDerivedCategory l E Y D hl)\n    (P I Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)\n    (hP : flat.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) P) (hI : I.IsKInjective)\n    (eP : DerivedCategory.Q.obj P ≅ K)\n    (eI : DerivedCategory.Q.obj I ≅ L)\n    (hQ : flat.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) Q)\n    (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))\n    (eNeg : Q.X (-1) ≅ (show completedIntegralModuleSheaves l E Y D hl from\n      SheafOfModules.unit (completedIntegralCoefficientSheaf l E Y D hl)))\n    (eZero : Q.X 0 ≅ (show completedIntegralModuleSheaves l E Y D hl from\n      SheafOfModules.unit (completedIntegralCoefficientSheaf l E Y D hl)))\n    (epsilon : Q ⟶\n      ((scalarReductionRestriction l E Y n).mapHomologicalComplex (.up ℤ)).obj\n        ((CochainComplex.singleFunctor (scalarReductionTarget l E Y n) 0).obj\n          (SheafOfModules.unit (integralCoefficientSheaf l E Y n))))\n    (hepsilon : QuasiIso epsilon)\n    (f : ((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj\n          (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}\n            (R := completedIntegralCommRingSheaf l E Y D hl) P I)).obj Q ⟶\n        homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}\n          (R := completedIntegralCommRingSheaf l E Y D hl) P\n          (((totalTensor.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj I).obj Q))\n    (hf : IsSignedHomTensor Y (completedIntegralCommRingSheaf l E Y D hl) P I Q f) :\n    let R := completedIntegralCommRingSheaf l E Y D hl\n    let U := scalarReductionDerivedRestriction l E Y n\n    let F := integralDerivedReduction l E Y D hl n\n    ∃ (s : U.obj (F.obj ((hom.{t, u} Y R).obj (op K, L))) ≅\n          DerivedCategory.Q.obj (((totalTensor.{t, u} Y R).obj\n            (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q))\n        (t : U.obj ((hom.{t, u} Y (integralCoefficientCommRingSheaf l E Y n)).obj\n            (op (F.obj K), F.obj L)) ≅\n          DerivedCategory.Q.obj\n            (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P\n              (((totalTensor.{t, u} Y R).obj I).obj Q))),\n      U.map (comparison l E Y D hl m K L) ≫ t.hom =\n        s.hom ≫ DerivedCategory.Q.map f",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

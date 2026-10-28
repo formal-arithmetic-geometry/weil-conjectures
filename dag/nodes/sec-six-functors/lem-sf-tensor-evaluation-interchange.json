@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-tensor-evaluation-interchange",
+ "kind": "statement",
+ "title": "Koszul interchange before tensor evaluation",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme in universe t and R a commutative ring sheaf in universe max(u,t+1) on its pro-etale site. For arbitrary complexes H,P,I,Q and a chain map e from H tensor P to I, there is a chain map psi from (H tensor Q) tensor P to I tensor Q. On local homogeneous tensor generators v,z,x in degrees a,b,p, its value is (-1)^(bp) times e(v tensor x) tensor z, with the indicated canonical total-degree transports. Tensor products and generators are the actual complexes of [def-pc-tensor-complex-sheaves], [def-sf-integral-hom-reduction-models] and [def-coef-ringed-tensor-hom-model]. No boundedness, flatness or injectivity is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-integral-hom-reduction-models",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Form psi by the associator, identity tensor the braiding Q tensor P to P tensor Q, the inverse associator, and e tensor identity. On pure generators use the associator and tensor-map formulas, then the braiding formula. Its sign is (-1)^(bp). Integer linearity carries the sign through the remaining maps, and the inverse associator and evaluation tensor identity give the claimed expression. Local caches of the existing structures keep elaboration from repeatedly unfolding their constructions.",
+   "uses": [
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed chain map from tensor of internal Hom complexes to internal Hom with tensor in the second variable, compatible with derived scalar reduction",
+   "date": "2026-10-28",
+   "results": "8 hits: HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorOfHasTensorX",
+   "verdict": "Only general tensor-complex constructors; no signed exchange theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "date": "2026-10-28",
+   "results": "1 hits: HomologicalComplex.tensorHom",
+   "verdict": "General tensoring of chain maps, used to form evaluation tensor identity."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*tensor|tensor.*homComplex",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No Hom-complex exchange theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonRepresentative",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative",
+    "lem-sf-signed-hom-tensor-map"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorEvaluationInterchange",
+  "file": "lean/Sheaf/Algebra/Homology/TensorEvaluationInterchange.lean",
+  "declaration": "WeilConjectures.IntegralHom.tensorEvaluation_interchange",
+  "statement": "theorem tensorEvaluation_interchange\n    (H P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)\n    (e : (((totalTensor.{t, u} Y R).obj H).obj P) ⟶ I) :\n    ∃ psi : (((totalTensor.{t, u} Y R).obj\n        (((totalTensor.{t, u} Y R).obj H).obj Q)).obj P) ⟶\n        (((totalTensor.{t, u} Y R).obj I).obj Q),\n      ∀ (a b p : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n        (v : (H.X a).val.obj U) (z : (Q.X b).val.obj U) (x : (P.X p).val.obj U),\n        (psi.f (p + (a + b))).val.app U\n            (coefficientTensorGenerator.{u, t + 1, t} J R\n              (((totalTensor.{t, u} Y R).obj H).obj Q) P\n              (a + b) p (p + (a + b)) (add_comm (a + b) p) U\n              (coefficientTensorGenerator.{u, t + 1, t} J R H Q a b (a + b) rfl U v z) x) =\n          (b * p).negOnePow •\n            coefficientTensorGenerator.{u, t + 1, t} J R I Q (p + a) b (p + (a + b))\n              (add_assoc p a b) U\n              ((e.f (p + a)).val.app U\n                (coefficientTensorGenerator.{u, t + 1, t} J R H P a p (p + a)\n                  (add_comm a p) U v x)) z",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

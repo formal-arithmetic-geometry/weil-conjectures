@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-hom-complex-tensor-pure-equivalence",
+ "kind": "statement",
+ "title": "Pure-section normalization of the chain tensor-Hom equivalence",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme in universe t and R a commutative ring sheaf in universe max(u,t+1) on its pro-etale site. For arbitrary unbounded complexes A,L,N of R-module sheaves, there is an equivalence between chain maps A tensor L to N and chain maps A to Hom(L,N). For every chain map psi and homogeneous local sections x of A in degree i and y of L in degree j, evaluation of the degree-i component of the image of psi on x at y equals the degree-(j+i) component of psi applied to the homogeneous tensor generator of x,y, with the canonical degree transport. The Hom complex, total tensor, evaluation and generator are those of [def-pur-hom-complex], [def-pc-tensor-complex-sheaves], [def-sf-integral-hom-reduction-models] and [def-coef-ringed-tensor-hom-model].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-integral-hom-reduction-models",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing native chain tensor-Hom equivalence. Its inverse pure-section formula applies to the image of psi. The inverse-image identity gives the required equation; the internal-Hom sign and braiding sign cancel for the specified factor order.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed chain map from tensor of internal Hom complexes to internal Hom with tensor in the second variable, compatible with derived scalar reduction",
+   "date": "2026-10-28",
+   "results": "8 hits: HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorOfHasTensorX",
+   "verdict": "Only general tensor-complex constructors; no signed exchange theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "date": "2026-10-28",
+   "results": "1 hits: HomologicalComplex.tensorHom",
+   "verdict": "General tensoring of chain maps, used to form evaluation tensor identity."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*tensor|tensor.*homComplex",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No Hom-complex exchange theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonRepresentative",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative",
+    "lem-sf-signed-hom-tensor-map"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexTensorPureEquivalence",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexTensorPureEquivalence.lean",
+  "declaration": "WeilConjectures.IntegralHom.homComplexTensor_pure_equivalence",
+  "statement": "theorem homComplexTensor_pure_equivalence\n    (A L N : CochainComplex (Modules.{t, u} Y R) ℤ) :\n    ∃ e : ((((totalTensor.{t, u} Y R).obj A).obj L) ⟶ N) ≃\n        (A ⟶ homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) L N),\n      ∀ (psi : (((totalTensor.{t, u} Y R).obj A).obj L) ⟶ N)\n        (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n        (x : (A.X i).val.obj U) (y : (L.X j).val.obj U),\n        evaluate.{t, u} Y R L N i j U (((e psi).f i).val.app U x) y =\n          (psi.f (j + i)).val.app U\n            (coefficientTensorGenerator.{u, t + 1, t}\n              (AlgebraicGeometry.Scheme.ProEt.topology Y) R\n              A L i j (j + i) (add_comm i j) U x y)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

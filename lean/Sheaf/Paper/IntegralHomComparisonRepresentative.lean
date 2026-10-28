@@ -6,6 +6,10 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.Algebra.Homology.TwoTermFreeHomTensorComponents
+import Sheaf.Algebra.Homology.SignedHomTensorMap
+import Sheaf.Paper.IntegralReductionTwoTermResolution
+import Sheaf.Paper.IntegralHomRepresentativeSquare
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # A signed complex representative of integral Hom reduction
 
@@ -19,13 +23,15 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
 universe d t u
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace WeilConjectures.IntegralHom
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
+-- Preserve the original existential binder names.
+set_option linter.unusedVariables false in
 -- Use the existing sheafification at the coefficient universe for this declaration.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The restricted comparison has the signed Hom--tensor complex representative.
@@ -88,6 +94,36 @@ theorem comparison_representative
             (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P
               (((totalTensor.{t, u} Y R).obj I).obj Q))),
         U.map (comparison l E Y D hl m K L) ≫ t.hom = s.hom ≫ DerivedCategory.Q.map f := by
-  sorry
+  classical
+  let R := completedIntegralCommRingSheaf l E Y D hl
+  let A := Modules.{t, u} Y R
+  have : IsGrothendieckAbelian.{max u (t + 1)} A :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t + 1, t, u}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R).1
+  let G : CochainComplex A ℤ := DerivedCategory.Q.objPreimage K
+  obtain ⟨P, p, hP, _, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) G
+  have : QuasiIso p := hp
+  have : IsIso (DerivedCategory.Q.map p) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso A p).2 hp
+  let eP : DerivedCategory.Q.obj P ≅ K :=
+    asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+  let G' : CochainComplex A ℤ := DerivedCategory.Q.objPreimage L
+  let I := (CochainComplex.kInjectiveResolutionFunctor.{max u (t + 1)} A).obj G'
+  have hI : I.IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj A G'
+  let eta := (CochainComplex.toKInjectiveResolution.{max u (t + 1)} A).app G'
+  have heta : QuasiIso eta :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app A G').2
+  have : IsIso (DerivedCategory.Q.map eta) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso A eta).2 heta
+  let eI : DerivedCategory.Q.obj I ≅ L :=
+    (asIso (DerivedCategory.Q.map eta)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso L
+  obtain ⟨Q, hQ, hzero, eNeg, eZero, epsilon, hepsilon⟩ :=
+    integralReduction_twoTerm_resolution l E Y D hl n
+  obtain ⟨f, hf⟩ := signedHomTensor_exists Y R P I Q
+  obtain ⟨s, t, hsquare⟩ := comparison_representative_square l E Y D hl a n m K L
+    P I Q hP hI eP eI hQ hzero eNeg eZero epsilon hepsilon f hf
+  exact ⟨P, I, Q, hP, hI, ⟨eP⟩, ⟨eI⟩, hzero, eNeg, eZero, f, hf, s, t, hsquare⟩
 
 end WeilConjectures.IntegralHom

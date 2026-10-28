@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-signed-hom-tensor-map",
+ "kind": "statement",
+ "title": "Signed exchange from Hom tensor to Hom of tensor",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme in universe t and R a commutative ring sheaf in universe max(u,t+1) on its pro-etale site. For arbitrary unbounded complexes P,I,Q of R-module sheaves, there exists a chain map Hom(P,I) tensor Q to Hom(P,I tensor Q). On local homogeneous sections v,z,x in degrees a,b,p its evaluation is (-1)^(bp) times v(x) tensor z, with the canonical degree transport. The signed formula is exactly IsSignedHomTensor of [lem-sf-two-term-free-hom-tensor-components]. No resolutions, flatness, injectivity or coefficient reduction are assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-two-term-free-hom-tensor-components",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized chain tensor-Hom equivalences for (Hom(P,I),P,I) and (Hom(P,I) tensor Q,P,I tensor Q). Apply the inverse of the first to the identity to obtain evaluation. Apply the tensor-evaluation interchange theorem and then the second equivalence to obtain the desired signed map.",
+   "uses": [
+    "lem-sf-hom-complex-tensor-pure-equivalence",
+    "lem-sf-tensor-evaluation-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  },
+  {
+   "text": "The normalized equivalence formula and the pure-section interchange formula identify evaluation of the curried map with the required (-1)^(bp) expression. The inverse-image identity identifies evaluation with v(x); the canonical tensor generator transport gives the exact degree transport of IsSignedHomTensor.",
+   "uses": [
+    "lem-sf-hom-complex-tensor-pure-equivalence",
+    "lem-sf-tensor-evaluation-interchange",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-hom-complex-tensor-pure-equivalence",
+  "lem-sf-tensor-evaluation-interchange",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; coefficient, chain-map and normalization steps separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed chain map from tensor of internal Hom complexes to internal Hom with tensor in the second variable, compatible with derived scalar reduction",
+   "date": "2026-10-28",
+   "results": "8 hits: HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorOfHasTensorX",
+   "verdict": "Only general tensor-complex constructors; no signed exchange theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "date": "2026-10-28",
+   "results": "1 hits: HomologicalComplex.tensorHom",
+   "verdict": "General tensoring of chain maps, used to form evaluation tensor identity."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*tensor|tensor.*homComplex",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No Hom-complex exchange theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonRepresentative",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedHomTensorMap",
+  "file": "lean/Sheaf/Algebra/Homology/SignedHomTensorMap.lean",
+  "declaration": "WeilConjectures.IntegralHom.signedHomTensor_exists",
+  "statement": "theorem signedHomTensor_exists (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ) :\n    ∃ f : ((totalTensor Y R).obj\n        (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶\n      homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P\n        (((totalTensor Y R).obj I).obj Q), IsSignedHomTensor Y R P I Q f",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261028T020546-L-2524164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
