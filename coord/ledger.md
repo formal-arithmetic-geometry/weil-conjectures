@@ -21069,3 +21069,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/X6/Sheaf.Paper.LisseTowerLocalizedActualNormalized (stage 3; reviewer FIX; first push; landing 20261028T055828-L-814363 (interface); batch 20261028T055556; modules 3; new nodes 1; change records: coord/changes/lisse-tower-localized-actual-coherence.md)
 - 05:58 L: merged deliver/X7/Sheaf.Paper.PodReindexingDerivedSourceShift (stage 3; reviewer PASS; first push; landing 20261028T055830-L-814663 (interface); batch 20261028T055556; modules 7; new nodes 6)
 - 05:58 L: merged deliver/X8/Sheaf.Paper.PodReindexingDerivedTargetShift (stage 3; reviewer PASS; first push; landing 20261028T055831-L-814975 (interface); batch 20261028T055556; modules 1; new nodes 0)
+- 05:58 L: merged deliver/Y2/Sheaf.Paper.NativeIntegralTensorConstructible (stage 3; reviewer PASS; first push; landing 20261028T055832-L-815120 (interface); batch 20261028T055556; modules 3; new nodes 2)

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-native-integral-coefficient-flat",
+ "kind": "statement",
+ "title": "Flatness of normalized integral-to-native coefficient extension",
+ "statement": "Let $\\ell$ be prime and let $X$ be a Noetherian scheme. Let $E/\\mathbf Q_\\ell$ be a finite field extension and $i:E\\to\\overline{\\mathbf Q}_\\ell$ a $\\mathbf Q_\\ell$-algebra embedding. Use the native abelian coefficient ring $A_X$, its reconstructed section-ring sheaf, and any normalized coefficient presentation $C$ for $(E,i)$ of [def-sf-locally-finite-adic-realization-data], with the specified commutative monoid structure. The ordinary extension of module sheaves along $C.\\mathrm{integralMap}$, as defined in [def-weil-pbc-bounded-constructible-tower], preserves finite limits. No constructibility or boundedness condition on its input module is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the integral isomorphism of C and its residue normalization to put the completed coefficient into the continuous integral chart. The integral-inclusion and localization normalizations identify its rationalization with the actual continuous inclusion. Exact continuous localization and its ordinary section-action comparison give finite-limit preservation for this factor.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-weil-pbc-continuous-scalar-encoding-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Identify i(E) with its finite intermediate field in the algebraic closure, using the algebra isomorphism induced by the injective field embedding i. Transport the finite-field chart along this isomorphism. The rational normalization of C identifies its rational inclusion, on each section and point, with this finite-field inclusion followed by the native coefficient comparison. Extension from this finite field to the locally finite algebraic closure is exact by the condensed coefficient calculus.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Under the section-module equivalences, restriction uses exactly the scalar maps just identified. The internal-section scalar-adjunction comparison therefore identifies ordinary extensions, with balanced generator b tensor m sent to itself. Compose the two exact extensions and the integral ring-isomorphism extension. The balanced tensor associator identifies the composite with pbcExtend(C.integralMap), proving finite-limit preservation. Zero modules and the empty scheme obey the same adjunction identities.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "lem-weil-pbc-continuous-scalar-encoding-universes",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definitions 6.8.3, 6.8.6 and 6.8.10; Propositions 6.8.11(3) and 6.8.14(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from continuous integral coefficients to locally finite algebraic closure coefficients is exact",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact and seven cotangent or differential exactness results; no coefficient-sheaf scalar-extension theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFiniteLimits\", \"extendScalars\"",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Mathlib.Algebra.Category.ModuleCat.Descent.",
+   "date": "2026-10-28",
+   "verdict": "Generic ring-module result; does not identify or prove flatness of the normalized sheaf coefficient map."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*extendScalars",
+   "results": "5 lines in Mathlib/Algebra/Category/ModuleCat/Descent.lean, including preservesFiniteLimits_extendScalars_of_flat at lines 42-43.",
+   "date": "2026-10-28",
+   "verdict": "Generic module theorem only; no normalized coefficient-sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeIntegralTensorConstructible",
+  "date": "2026-10-28",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient passage preserving constructibility in the native realization argument: the ordinary tensor exactness part of parent proof step 2. The current parent created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-native-integral-tensor-constructible",
+    "lem-sf-locally-finite-adic-functor-descent-image",
+    "lem-sf-locally-finite-adic-functor-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeIntegralCoefficientFlat",
+  "file": "lean/Sheaf/Paper/NativeIntegralCoefficientFlat.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.nativeIntegralCoefficient_flat",
+  "statement": "theorem nativeIntegralCoefficient_flat\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]\n    [IsCommMonObj (abRing l X)]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (i : E →ₐ[Padic l] PadicAlgCl l) (C : CoefficientPresentation l X E i) :\n    PreservesFiniteLimits (pbcExtend (C.integralMap l X))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T055832-L-815120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261028T055832-L-815120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

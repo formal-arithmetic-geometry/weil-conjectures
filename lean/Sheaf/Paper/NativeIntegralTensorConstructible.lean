@@ -1,11 +1,16 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group K6
+Authors: SHEAF groups K6 and Y2
 -/
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicRealizationData
+import Sheaf.Paper.NativeIntegralCoefficientFlat
+import Sheaf.Paper.NativeIntegralCoefficientHeart
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.NativeScalarForgetting
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Native constructibility of a finite integral tensor model
 
@@ -36,25 +41,37 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 
 attribute [local irreducible] sections CoefficientPresentation.integralMap
 
+private theorem stratifiedFinitelyPresented_of_iso
+    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    {F G : pbcModules X (pbcAdicCompletion X d)} (e : F ≅ G)
+    (hF : IsIntegralStratifiedFinitelyPresented X d F) :
+    IsIntegralStratifiedFinitelyPresented X d G := by
+  obtain ⟨s, hs⟩ := hF
+  refine ⟨s, fun j ↦ ?_⟩
+  obtain ⟨V, hV, h⟩ := hs j
+  refine ⟨V, hV, fun U f hf ↦ ?_⟩
+  obtain ⟨N, hN, ⟨eN⟩⟩ := h U f hf
+  exact ⟨N, hN, ⟨(SheafOfModules.overFunctor _ U).mapIso
+    ((proEtaleModuleInverseImage (s.immersion j) _).mapIso e.symm) ≪≫ eN⟩⟩
+
 /-- Extension of a constructible complete integral complex to the native coefficient
 has bounded constructible cohomology, read through the section-module equivalence.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Lemma 6.8.2.
 (blueprint: lem-sf-native-integral-tensor-constructible).
 
-Proof in words: the normalized integral isomorphism identifies the completed coefficient
-with continuous integral functions, and the normalized inclusion identifies the displayed
-map with integral inclusion followed by the given finite-field embedding. On a finite
-constructible stratification the integral complex is perfect over the completed integral
-coefficient. Localization at its uniformizer is exact. The finite-field realization and
-flat extension to the locally finite algebraic-closure coefficient therefore give bounded
-complexes of locally finite free native modules on each stratum. Their cohomology is native
-constructible: finite-dimensional coefficient kernels and cokernels are locally finite free
-on a refinement, and the finite stratification globalizes the assertion. Their bounds can
-be chosen from the finite-Tor interval of K over the finitely many strata.
-The section-module equivalence retains
-the underlying sheaves and is exact, so the given isomorphism transfers these conclusions
-to M. Rank zero, the zero complex and the empty scheme satisfy the same argument.
+Proof in words: use the integral stratified-perfect characterization and its detailed
+coefficient transport to obtain a bounded complex whose cohomology sheaves have
+stratified finitely presented integral local models. The transport is exact and faithful,
+so it reflects the bounds. Ordinary extension along C.integralMap is exact by
+nativeIntegralCoefficient_flat and the scalar-extension adjunction. Hence its universal
+left derived functor is canonically isomorphic to its termwise exact derived functor.
+It preserves the bounds and commutes with cohomology. For each cohomology sheaf,
+nativeIntegralCoefficient_heart takes its integral local models to native constructible
+sheaves. The given isomorphism e and the exact section-module equivalence then transfer
+both conclusions to M. The comparison on homology also transports the local-model
+condition along the detailed coefficient isomorphism. Rank zero, the zero complex and
+the empty scheme satisfy the same argument.
 -/
 theorem nativeIntegralTensor_constructible
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
@@ -68,6 +85,67 @@ theorem nativeIntegralTensor_constructible
     (M : DerivedCategory (ProEtale.AdicSheaf l X))
     (e : (sections l X).mapDerivedCategory.obj M ≅
       (pbcDerivedExtend (C.integralMap l X)).obj K.obj) :
-    ProEtale.DerivedCategory.boundedAdicConstructible l X M := by sorry
+    ProEtale.DerivedCategory.boundedAdicConstructible l X M := by
+  let A := Coefficient.{u} l (PadicAlgCl l) E
+  let R := SheafOfModules.restrictScalars.{u + 1}
+    (integralDetailedCoefficientComparison X l A).hom
+  haveI : PreservesFiniteLimits R :=
+    (integralDetailedCoefficientRestriction_exact X l A).1
+  haveI : PreservesFiniteColimits R :=
+    (integralDetailedCoefficientRestriction_exact X l A).2
+  haveI : R.Additive := Functor.additive_of_preserves_binary_products _
+  haveI : R.Faithful := by
+    constructor
+    intro F G f g h
+    ext U x
+    exact congrArg (fun k ↦ k.val.app U x) h
+  have hunit : IsUnit (l : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ ⊤
+    intro x hx
+    simpa only [map_natCast] using (Fact.out : ∀ x : X,
+      IsUnit (l : X.presheaf.stalk x)) x
+  have hK := (integralStratifiedPerfectDetailed X l A Fact.out hunit K.obj).mp K.property
+  have hmodels := (integralStratifiedPerfectCharacterization X l A
+    Fact.out hunit ((integralDetailedTransport X l A).obj K.obj)).2.mp
+      ((integralStratifiedPerfectCharacterization X l A
+        Fact.out hunit ((integralDetailedTransport X l A).obj K.obj)).1.mp hK)
+  obtain ⟨a, b, _, ha, hb⟩ := hmodels.1
+  have hbounded : DerivedCategory.TStructure.t.bounded K.obj := by
+    apply R.bounded_of_bounded_mapDerivedCategory_obj
+    exact ⟨⟨a, ha⟩, ⟨b, hb⟩⟩
+  let T := pbcExtend (C.integralMap l X)
+  haveI : PreservesFiniteLimits T :=
+    nativeIntegralCoefficient_flat l X A (embedding l E) C
+  haveI : PreservesColimitsOfSize.{0, 0} T :=
+    (pbcScalarAdjunction (C.integralMap l X)).leftAdjoint_preservesColimits
+  haveI : PreservesFiniteColimits T := inferInstance
+  haveI : (pbcDerivedExtend (C.integralMap l X)).IsLeftDerivedFunctor
+      (pbcExtensionCounit (C.integralMap l X))
+      (HomotopyCategory.quasiIso _ (.up ℤ)) :=
+    pbcDerivedExtension_universal (C.integralMap l X)
+  haveI : T.mapDerivedCategory.IsLeftDerivedFunctor T.mapDerivedCategoryFactorsh.hom
+      (HomotopyCategory.quasiIso _ (.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_of_inverts _ _ T.mapDerivedCategoryFactorsh
+  let d : pbcDerivedExtend (C.integralMap l X) ≅ T.mapDerivedCategory :=
+    Functor.leftDerivedNatIso _ _ (pbcExtensionCounit (C.integralMap l X))
+      T.mapDerivedCategoryFactorsh.hom
+      (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
+  let q := e ≪≫ d.app K.obj
+  haveI : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
+    ProEtale.nativeScalarForgetting_isEquivalence l X
+  haveI : (sections l X).IsEquivalence := by
+    unfold sections
+    infer_instance
+  refine ⟨(sections l X).bounded_of_bounded_mapDerivedCategory_obj
+    ((DerivedCategory.TStructure.t.bounded).prop_of_iso q.symm
+      (T.bounded_mapDerivedCategory_obj hbounded)), fun n ↦ ?_⟩
+  let N := (DerivedCategory.homologyFunctor _ n).obj K.obj
+  have hn : IsIntegralStratifiedFinitelyPresented X (pbcIntegralDatum l A) (R.obj N) :=
+    stratifiedFinitelyPresented_of_iso X _
+      (((R.mapDerivedCategoryHomologyFunctorIso n).app K.obj).symm) (hmodels.2 n)
+  apply nativeIntegralCoefficient_heart l X A (embedding l E) C N hn
+  exact ((sections l X).mapDerivedCategoryHomologyFunctorIso n).app M ≪≫
+    (DerivedCategory.homologyFunctor _ n).mapIso q ≪≫
+      ((T.mapDerivedCategoryHomologyFunctorIso n).app K.obj).symm
 
 end WeilConjectures.LocallyFiniteAdicRealization
