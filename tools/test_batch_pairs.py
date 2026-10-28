@@ -188,6 +188,15 @@ def test_result_of_an_older_build_is_compiled_again_only_when_the_batch_touched_
         bp.changed_modules = lambda a, b: {"Sheaf.Other"}
         (land, waits, rets), _ = run([E5(), K8()], stub)
         assert [p["group"] for p in land] == ["E5", "K8"] and len(stub.calls) == 1, stub.calls
+        # it changed a module only K8's imports import (not K8 itself, not a direct import): the result stands
+        bp.published_commit = lambda: "P2b"
+        bp.changed_modules = lambda a, b: {"Sheaf.Base"}
+        main_b = dict(MAIN, **{"Sheaf.Base": mod("theorem base : True := trivial\n")})
+        main_b["Sheaf.ChainData"] = CHAIN_OLD.replace("\n\n@[expose]", "\npublic import Sheaf.Base\n\n@[expose]", 1)
+        g = combined([E5(), K8()], main_b)
+        g["Sheaf.ChainData"] = set(g.get("Sheaf.ChainData", ())) | {"Sheaf.Base"}
+        assert not bp.stale({"pub": "P1"}, {"Sheaf.KFlatFlat"}, g, "P2b", {})
+        assert bp.stale({"pub": "P1"}, {"Sheaf.ChainData"}, g, "P2b", {})
         # it changed a module K8 imports: compiled again against the new build
         bp.published_commit = lambda: "P3"
         bp.changed_modules = lambda a, b: {"Sheaf.ChainData"}

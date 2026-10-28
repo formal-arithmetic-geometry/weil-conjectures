@@ -33,9 +33,11 @@ What (tools/batch_land.py land_batch calls split() on the checked stage-3 plans,
      it queues the compiles of their linked pairs on the same background threads (same slots, nice 19) without waiting,
      at most every SHEAF_BATCH_PAIR_PRERUN_EVERY s (120) and again after 600 s with an unchanged candidate set. Each
      result records the published build it compiled against (`pub`, local/builds/published.json). A decided result is
-     reused while no module of either delivery is, or imports, a module that changed between its `pub` and the build
-     published now (the in-flight batch); otherwise the pair is compiled again. Results without `pub` are reused as
-     before.
+     reused unless a module of either delivery is, or directly imports, a module that changed between its `pub` and
+     the build published now (the in-flight batch touched the pair); then the pair is compiled again. (Transitive
+     importers would invalidate nearly every pair: one interface landing's cone is up to 8 000 modules.) Results
+     without `pub` are reused as before. The pre-run uses SHEAF_BATCH_PAIR_PRERUN_PARALLEL (12) threads: with 4,
+     a 100-min build decided only ~60 of ~220 pairs (each pair ~4 min of single-file compiles and slot waits).
 
     tools/batch_pairs.py links <groupA>/<sha> <groupB>/<sha> ...     dry: the links between landed commits (each commit
                                                                      vs its first parent), no compile
@@ -55,6 +57,7 @@ BG_TOTAL = int(os.environ.get("SHEAF_BATCH_PAIR_CALL", "1800"))    # one pair's 
 ROLES = ("item", "adapted", "new", "restored", "deleted")
 PUBLISHED = pathlib.Path(ROOT) / "local" / "builds" / "published.json"
 PRERUN_EVERY = float(os.environ.get("SHEAF_BATCH_PAIR_PRERUN_EVERY", "120"))
+PRERUN_PARALLEL = int(os.environ.get("SHEAF_BATCH_PAIR_PRERUN_PARALLEL", "12"))
 PRERUN_SAME = 600.0     # an unchanged candidate set is looked at again after this (INFRA / SLOW results are retried)
 
 
@@ -83,14 +86,14 @@ def changed_modules(old: str, new: str) -> set | None:
 
 def stale(r: dict | None, mods: set, graph: dict, cur: str | None, memo: dict) -> bool:
     """True when the result `r` was compiled against a published build older than `cur` and one of `mods` (both
-    deliveries' modules) is, or imports, a module changed since (memo: per old pub, the changed modules and their
-    importers in `graph`)."""
+    deliveries' modules) is, or directly imports, a module changed since (memo: per old pub, the changed modules and
+    their direct importers in `graph`)."""
     old = (r or {}).get("pub")
     if not old or not cur or old == cur:
         return False
     if old not in memo:
         ch = changed_modules(old, cur)
-        memo[old] = None if ch is None else (set(ch) | rm.li.downstream(set(ch), graph))
+        memo[old] = None if ch is None else (set(ch) | rm.li.downstream(set(ch), graph, direct=True))
     aff = memo[old]
     return aff is None or bool(mods & aff)
 
@@ -252,14 +255,14 @@ def _busy(keys) -> bool:
         return any(k in _BG["busy"] for k in keys)
 
 
-def _submit(jobs, compile) -> list[str]:
+def _submit(jobs, compile, parallel: int | None = None) -> list[str]:
     """queue the pair compiles on the lander's background pool (PARALLEL threads; a key queued or compiling is not queued
     again); they write DIR/<key>.json. Returns the keys."""
     with _BG["lock"]:
         for k, a, b, x in jobs:
             if k not in _BG["busy"]:
                 _BG["busy"].add(k); _BG["queue"].append((k, a, b, x, compile))
-        start = max(0, min(PARALLEL, len(_BG["queue"])) - _BG["workers"])
+        start = max(0, min(parallel or PARALLEL, len(_BG["queue"])) - _BG["workers"])
         _BG["workers"] += start
     for _ in range(start):
         threading.Thread(target=_bg_worker, daemon=True).start()
@@ -338,7 +341,7 @@ def prerun(plans: list[dict], graph, log, compile=compile_pair, source=None) -> 
             continue
         jobs.append((k, a, b, x))
     if jobs:
-        _submit(jobs, compile)
+        _submit(jobs, compile, PRERUN_PARALLEL)
     if L:
         log(f"batch pairs ahead of the landing: {len(L)} linked pair(s) among {len(plans)} checked candidate(s), "
             f"{have} decided, {len(jobs)} queued ({time.time() - t0:.0f} s)")
