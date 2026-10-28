@@ -9,9 +9,9 @@
  },
  "status": "split",
  "proof_origin": {
-  "by": "stage-3 worker W4",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Ordinary-generator component of flat-term transport"
+  "by": "stage-3 worker E9",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback); categorical conjugation through the fixed section equivalence, with Mathlib Functor.preimageIso and Functor.map_preimage."
  },
  "mathlib_searches": [
   {
@@ -49,15 +49,24 @@
  "unit": "sk-thm-sfb-proper-base-change",
  "proof": [
   {
-   "text": "Conjugate the canonical internal coefficient pullback isomorphism by cX.ordinary, cY.ordinary and pullComparison. Evaluate on section generators; hcX and hcY identify the result with the displayed balanced map.",
+   "text": "Whisker the inverse ordinary comparison at Y by section pullback, the inverse section pullComparison for Λ′ by internal scalar extension, the inverse internal CondensedRing.pullIso by the target section equivalence, the ordinary comparison at X by internal pullback, and the section pullComparison for Λ by cX.model.E. Insert associators to obtain an isomorphism after precomposition by the section equivalence at Y.",
+   "uses": [
+    "def-sfb-quotient-section-tensor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precomposition by an equivalence is fully faithful. Take the preimage isomorphism using Functor.preimageIso. Functor.map_preimage evaluated at M identifies its component with the conjugated composite. Expanding the composite and cancelling the adjacent inverse ordinary and pullComparison components proves the displayed square. No generator equation or endpoint normalization hypothesis is needed for this existential square.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "stmt_deps": [
   "def-sfb-quotient-section-tensor-data"
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.QuotientSectionPullTransportKFlatOrdinary",
@@ -88,13 +97,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261027T234350-L-115860",
-  "kind": "interface",
+  "landing": "20261028T020333-L-2496785",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
