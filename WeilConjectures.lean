@@ -8193,6 +8193,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangu
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceLaws
 public import WeilConjectures.CategoryTheory.DerivedCategory.TraceScalarExtension
 public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.ZSMul
 public import WeilConjectures.CategoryTheory.DerivedCoupleBoundaryVanishes
 public import WeilConjectures.CategoryTheory.DerivedCoupleExact
 public import WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
@@ -8924,6 +8925,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existenc
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Representable
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.RepresentableProConstant
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 public import WeilConjectures.CategoryTheory.Triangulated.IdempotentCompleteOfCoproducts
 public import WeilConjectures.CategoryTheory.Triangulated.IsIsoOfCones
@@ -8937,6 +8939,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.MilnorBoundaryFactoriz
 public import WeilConjectures.CategoryTheory.Triangulated.MilnorProjectionFactorization
 public import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
 public import WeilConjectures.CategoryTheory.Triangulated.PBCDerivedLimitTowerCone
+public import WeilConjectures.CategoryTheory.Triangulated.PreservesProducts
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
@@ -13031,6 +13034,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleRetract
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DerivedStalk
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualPerfect
@@ -13352,6 +13356,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegersModPowReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralDerivedLimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralReductionLimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula

@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralDerivedLimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
 
@@ -56,7 +58,9 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isPr
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
     (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
+  isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finiteIntermediateField ℓ g
+    (fun E' ↦
+      isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper' ℓ E' g) E
 
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`: for a proper morphism
 `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward

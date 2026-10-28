@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Representable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegersModPowReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralReductionLimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionTower
@@ -53,6 +54,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (p : Z ⟶ Y) [IsProper p.left]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated Z.hom]
+  [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [IsProper p.left] in
 /-- The first derived reduction of the derived limit: if `G` is the homotopy limit of a tower `Tₙ`
 of bounded constructible `𝒪_E`-complexes on `Z` representing
 `A ↦ Hom(Rp_* A, Res (L ⧸ ℓⁿ⁺¹))` on `Dᵇc(Z)⟦𝒪̲_E⟧`, compatibly with the reduction tower of
@@ -64,13 +68,21 @@ theorem boundedConstructible_derivedReduction_homotopyLimit_of_representsOn
     (hT : ∀ n, boundedConstructible _ (T.obj (op n)))
     (ε : T ⋙ (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor ⟶
       ProEtale.reductionTower E L.obj)
-    (hε : ∀ n, ((lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor).RepresentsOn
+    (hε : ∀ n,
+      ((lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor).RepresentsOn
       (boundedConstructible _) (ε.app (op n)))
     {c : Cone T} (hc : IsHomotopyLimit c) :
     ProEtale.DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Z.left ((derivedReduction Z.left ℓ E).obj c.pt) :=
-  sorry
+      (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Z.left
+      ((derivedReduction Z.left ℓ E).obj c.pt) := by
+  have : IsLocallyNoetherian Z.left := LocallyOfFiniteType.isLocallyNoetherian Z.hom
+  have : CompactSpace Z.left := QuasiCompact.compactSpace_of_compactSpace Z.hom
+  have : IsNoetherian Z.left := ⟨⟩
+  exact boundedConstructible_derivedReduction_of_integersModReduction
+    (boundedConstructible_integersModReduction_homotopyLimit p.left L.obj hT ε hε hc)
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated Z.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [IsProper p.left] in
 /-- The bounded constructible complexes detect the derived limit: if `G` is the homotopy limit
 of a tower `Tₙ` of bounded constructible `𝒪_E`-complexes on `Z` representing
 `A ↦ Hom(Rp_* A, Res (L ⧸ ℓⁿ⁺¹))` on `Dᵇc(Z)⟦𝒪̲_E⟧`, compatibly with the reduction tower of
@@ -82,7 +94,8 @@ theorem boundedConstructible_homotopyLimit_of_representsOn
     (hT : ∀ n, boundedConstructible _ (T.obj (op n)))
     (ε : T ⋙ (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor ⟶
       ProEtale.reductionTower E L.obj)
-    (hε : ∀ n, ((lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor).RepresentsOn
+    (hε : ∀ n,
+      ((lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor).RepresentsOn
       (boundedConstructible _) (ε.app (op n)))
     {c : Cone T} (hc : IsHomotopyLimit c) :
     boundedConstructible _ c.pt := by
@@ -106,7 +119,8 @@ theorem exists_bijective_boundedConstructibleLowerStar_padicIntegersRingObj
     ∃ (G : Dᵇc(Z.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
       (e : (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 p).obj G ⟶ L),
       ∀ A, Function.Bijective
-        (fun f : A ⟶ G ↦ (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 p).map f ≫ e) := by
+        (fun f : A ⟶ G ↦
+          (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 p).map f ≫ e) := by
   let Φ := (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p.left).rightDerivedFunctor
   let P := boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Z.left)
   let F := PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 p
