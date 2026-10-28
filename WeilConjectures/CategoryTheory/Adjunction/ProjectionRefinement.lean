@@ -96,7 +96,15 @@ refinement `h` of compactifications `(i, p)` and `(i₁, p₁)` of `f`, with `κ
 (`h ≫ p₁ = p`) compatible with the projection morphisms (`hpm`), `τ : Ps ≅ P₁s ⋙ Hs` and the
 identifications `εP : Fs ≅ Ps ⋙ Is`, `εP₁ : Fs ≅ P₁s ⋙ I₁s` compatible with `e` (`hε`), the
 comparison `ρ = P₁ (I₁ ⟶ H I) ≫ κ` carries the exceptional projection morphism of `(i₁, p₁)` to
-that of `(i, p)`. -/
+that of `(i, p)`:
+```
+P₁ (I₁ K) ⊗ B --ρ_K ▷ B--> P (I K) ⊗ B
+     |                          |
+ PF^{(i₁,p₁)}                 PF^{(i,p)}
+     v                          v
+P₁ (I₁ (K ⊗ Fs B)) --ρ--> P (I (K ⊗ Fs B))
+```
+-/
 lemma whiskerRight_refinement_comp_exceptionalProjection
     (he : ∀ X Y, μ I₁s X Y ≫ e.hom.app (X ⊗ Y) =
       (e.hom.app X ⊗ₘ e.hom.app Y) ≫ μ (Hs ⋙ Is) X Y)
@@ -164,6 +172,7 @@ open Functor.OplaxMonoidal
 
 variable {C : Type*} [Category C] [MonoidalCategory C]
 
+/-- The projection morphism of the identity adjunction is the identity. -/
 lemma id_projectionMorphism (A B : C) :
     (Adjunction.id (C := C)).projectionMorphism A B = 𝟙 _ := by
   simp only [projectionMorphism, id_δ, Category.id_comp, homEquiv_unit]
@@ -171,6 +180,9 @@ lemma id_projectionMorphism (A B : C) :
 
 variable {Gs G : C ⥤ C} [Gs.OplaxMonoidal] (ag : Gs ⊣ G) (ηs : Gs ≅ 𝟭 C)
 
+/-- For an adjunction `Gs ⊣ G` with a monoidal identification `ηs : Gs ≅ 𝟭`, the projection
+morphism followed by the conjugate identification `G ≅ 𝟭` is that identification whiskered by `B`,
+followed by `A ◁ ηs⁻¹`. -/
 lemma projectionMorphism_comp_conjugate_id
     (hηs : ∀ X Y, δ Gs X Y ≫ (ηs.hom.app X ⊗ₘ ηs.hom.app Y) = ηs.hom.app (X ⊗ Y)) (A B : C) :
     ag.projectionMorphism A B ≫
@@ -190,7 +202,15 @@ open Functor.LaxMonoidal in
 /-- **The exceptional projection morphism of the trivial compactification** `(j, 𝟙)`, for
 abstract adjunctions: through the identification `G ≅ 𝟭` conjugate to `ηs : Gs ≅ 𝟭`, the composite
 of the projection morphism of `Gs ⊣ G`, the inverse projection comparison of `I ⊣ Is` and
-`Is ηs`, followed by the projection comparison of `I ⊣ Is`, is the identification. -/
+`Is ηs`, followed by the projection comparison of `I ⊣ Is`, is the identification:
+```
+G (I K) ⊗ B --PF--> G (I (K ⊗ Is B))
+     |                     |
+  (G ≅ 𝟭) ▷ B           G ≅ 𝟭
+     v                     v
+  I K ⊗ B <------π----- I (K ⊗ Is B)
+```
+-/
 lemma trivial_exceptionalProjection_comp_projectionComparison {D : Type*} [Category D]
     [MonoidalCategory D] {I : D ⥤ C} {Is : C ⥤ D} [Is.LaxMonoidal] (bi : I ⊣ Is)
     (hηs : ∀ X Y, δ Gs X Y ≫ (ηs.hom.app X ⊗ₘ ηs.hom.app Y) = ηs.hom.app (X ⊗ Y)) (K : D) (B : C)

@@ -88,7 +88,13 @@ variable {𝒳 𝒵 𝒴 : Type*} [Category 𝒳] [Category 𝒵] [Category 𝒴
 /-- **The exceptional projection morphism of a composite, on full subcategories**: the
 composite of the projection morphism of `Gs ⊣ G`, of the inverse of the projection comparison of
 `I ⊣ Is` and of a morphism `Fs B ⟶ Is Gs B` lifting `e⁻¹`, computed for the restricted
-adjunctions, is the same composite for the ambient adjunctions. -/
+adjunctions, is the same composite for the ambient adjunctions: with `ι` the inclusions,
+```
+ι (G (I K) ⊗ B) --ι(PF restricted)--> ι (G (I (K ⊗ Fs B)))
+       ‖                                    ‖
+G (I K) ⊗ B ----------PF---------> G (I (K ⊗ Fs B))
+```
+where `PF = pm ≫ G (π⁻¹ ≫ I (K ◁ e⁻¹))`. -/
 lemma ι_map_exceptionalProjection_restrictFullyFaithful (K : PX.FullSubcategory)
     (B : PY.FullSubcategory)
     (εB : (PX.lift (PZ.ι ⋙ Is) hIs).obj ((PZ.lift (PY.ι ⋙ Gs) hGs).obj B) ⟶

@@ -37,10 +37,9 @@ functors (`traceAux_eq_counit_of_lowerShriekIso`, `traceAux_eq_counit_of_restric
 
 ## The projection formula of an open immersion
 
-`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`: for an open
-immersion, the projection formula is the inverse of the projection comparison of `j_! ⊣ Lj^*`
-(blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, §5). It is
-`boundedConstructibleExceptionalProjection_comp_projectionComparison` of
+The projection formula of an open immersion used below,
+`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison` (blueprint
+`prop-sf-pf-coherence`; SGA 4, Exposé XVII, §5), is proved in
 `WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion`.
 
 ## Implementation notes
@@ -247,33 +246,6 @@ attribute [local instance 2000] MonoidalCategory.toMonoidalCategoryStruct
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-/-! ### The projection formula of an open immersion -/
-
-section ProjectionFormula
-
-variable {V W : Over (Spec (.of k))} [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
-  [IsSeparated V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]
-
-/-- **The projection formula of an open immersion is the adjoint of the monoidal structure of the
-pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): for an open
-immersion `f`, through the identification `Rf_! ≅ f_!` with the extension by zero, the projection
-morphism `PF_f : Rf_! K ⊗ B ⟶ Rf_! (K ⊗ Lf^* B)` is the inverse of the projection comparison
-`f_! (K ⊗ Lf^* B) ⟶ f_! K ⊗ B` of the adjunction `f_! ⊣ Lf^*`, the adjoint of the tensor
-structure of `Lf^*`. -/
-theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison
-    (f : V ⟶ W) [IsOpenImmersion f.left] (K : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B : Dᵇc(W.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    boundedConstructibleExceptionalProjectionMorphism ℓ f K B ≫
-        (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app
-          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) ≫
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
-          f).projectionComparison K B =
-      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K ▷ B :=
-  boundedConstructibleExceptionalProjection_comp_projectionComparison ℓ
-    f K B
-
-end ProjectionFormula
 
 /-! ### The trace map of an open immersion -/
 

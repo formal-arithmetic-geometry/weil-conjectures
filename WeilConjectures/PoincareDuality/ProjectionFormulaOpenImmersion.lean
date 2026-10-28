@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOfCompactification
-public import WeilConjectures.PoincareDuality.ProjectionRefinementAbstract
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRefinement
 public import WeilConjectures.PoincareDuality.RefinementProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.RefinementCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
@@ -21,7 +21,7 @@ identification `Rj_! ≅ j_!`
 (`boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl`),
 the exceptional projection morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` of bounded
 constructible `ℚ̄_ℓ`-complexes is the inverse of the projection comparison of `j_! ⊣ Lj^*`
-(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjection_comp_projectionComparison`,
+(`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`,
 blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2).
 
 The proof follows the definition of `Rj_! ≅ j_!`: the lower shriek `Rj_!` is defined through the
@@ -133,6 +133,8 @@ instance isIso_boundedConstructibleOpenImmersionProjectionComparison (M : Dᵇc(
     infer_instance
   exact (ObjectProperty.fullyFaithfulι _).isIso_of_isIso_map _
 
+/-- On the ambient derived categories, the extension by zero of bounded constructible complexes acts
+on morphisms as that of the derived categories. -/
 lemma ι_map_boundedConstructibleOpenImmersionLowerShriek_map {K K' : Dᵇc(U.left)⟦𝐐⟧}
     (φ : K ⟶ K') :
     (boundedConstructible _).ι.map ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).map φ) =
@@ -155,6 +157,8 @@ lemma boundedConstructibleProjectionMorphism_hom (A : Dᵇc(Z.left)⟦𝐐⟧) (
       (derivedUpperStarLowerStarAdjunction _ g.left).projectionMorphism A.obj B.obj :=
   Adjunction.ι_map_projectionMorphism_restrictFullyFaithful _ _ _ A B
 
+/-- On the ambient derived categories, the pushforward of bounded constructible complexes acts on
+morphisms as that of the derived categories. -/
 lemma ι_map_boundedConstructibleLowerStar_map {A A' : Dᵇc(Z.left)⟦𝐐⟧} (φ : A ⟶ A') :
     (boundedConstructible _).ι.map ((boundedConstructibleLowerStar ℓ g).map φ) =
       (R((g.left)_*⟦_⟧)).map ((boundedConstructible _).ι.map φ) :=
@@ -162,8 +166,11 @@ lemma ι_map_boundedConstructibleLowerStar_map {A A' : Dᵇc(Z.left)⟦𝐐⟧} 
 
 end LowerStar
 
-lemma ι_map_whiskerLeft {W : Over (Spec (.of k))} [LocallyOfFiniteType W.hom] [QuasiCompact W.hom]
-    [IsSeparated W.hom] (A : Dᵇc(W.left)⟦𝐐⟧) {M N : Dᵇc(W.left)⟦𝐐⟧} (φ : M ⟶ N) :
+/-- The inclusion of bounded constructible complexes into the derived category commutes with
+left whiskering. -/
+lemma boundedConstructible_ι_map_whiskerLeft {W : Over (Spec (.of k))} [LocallyOfFiniteType W.hom]
+    [QuasiCompact W.hom] [IsSeparated W.hom] (A : Dᵇc(W.left)⟦𝐐⟧) {M N : Dᵇc(W.left)⟦𝐐⟧}
+    (φ : M ⟶ N) :
     (boundedConstructible _).ι.map (A ◁ φ) = A.obj ◁ (boundedConstructible _).ι.map φ :=
   rfl
 
@@ -203,7 +210,7 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_eq (c : Compactifica
       ι_map_boundedConstructibleLowerStar_map, Functor.map_comp, Functor.map_inv]
     simp only [boundedConstructibleOpenImmersionProjectionComparison_hom]
     rw [ι_map_boundedConstructibleOpenImmersionLowerShriek_map]
-    simp only [ι_map_whiskerLeft, hε]
+    simp only [boundedConstructible_ι_map_whiskerLeft, hε]
   rfl
 
 end Bridge
@@ -650,10 +657,12 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
 /-- **The projection formula of an open immersion is the adjoint of the monoidal structure of the
-pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): through
-`Rj_! ≅ j_!`, the exceptional projection morphism of `j` followed by the projection comparison of
-`j_! ⊣ Lj^*` is the identification. -/
-theorem boundedConstructibleExceptionalProjection_comp_projectionComparison
+pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): for an open
+immersion `j`, through the identification `Rj_! ≅ j_!` with the extension by zero, the projection
+morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` is the inverse of the projection comparison
+`j_! (K ⊗ Lj^* B) ⟶ j_! K ⊗ B` of the adjunction `j_! ⊣ Lj^*`, the adjoint of the tensor
+structure of `Lj^*`. -/
+theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison
     (K : Dᵇc(U.left)⟦𝐐⟧) (B : Dᵇc(X.left)⟦𝐐⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ j K B ≫
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app

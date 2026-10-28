@@ -49,7 +49,9 @@ section General
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The projection comparison of `Dj_! ⊣ Lj^*` is an isomorphism
-(`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`). -/
+(`ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`). It only restates that instance
+for the unfolded projection comparison, so that instance search finds it in the unfolded
+exceptional projection morphism. -/
 instance isIso_derivedOpenImmersionProjectionComparison {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j]
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
@@ -62,7 +64,9 @@ instance isIso_derivedOpenImmersionProjectionComparison {U V : Scheme.{u}} (j : 
 variable {S : Scheme.{u}} {X Y : Over S} {f : X ⟶ Y} (c : Compactification f.left)
 
 /-- The identification `Lf^* ≅ Lp^* ⋙ Li^*` of a compactification `c` of a morphism `f` over
-`S`, through the morphisms `c.overI` and `c.overG` over `S`. -/
+`S`, through the morphisms `c.overI` and `c.overG` over `S`. It is
+`leftDerivedUpperStarCompactificationIso Λ c` with its type restated through `c.overI.left` and
+`c.overG.left` instead of `c.i` and `c.g`, and exists only as this typing bridge. -/
 noncomputable def leftDerivedUpperStarOverCompactificationIso :
     L((f.left)^*⟦Λ⟧) ≅ L((c.overG.left)^*⟦Λ⟧) ⋙ L((c.overI.left)^*⟦Λ⟧) :=
   leftDerivedUpperStarCompactificationIso Λ c

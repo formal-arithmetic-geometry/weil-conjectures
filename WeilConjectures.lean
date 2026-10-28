@@ -7761,6 +7761,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismComp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoidal
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRefinement
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 public import WeilConjectures.CategoryTheory.Adjunction.PushHomComp
@@ -10322,7 +10323,6 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaOfCompactificatio
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
-public import WeilConjectures.PoincareDuality.ProjectionRefinementAbstract
 public import WeilConjectures.PoincareDuality.ProperProjectionComp
 public import WeilConjectures.PoincareDuality.RefinementProjection
 public import WeilConjectures.PoincareDuality.Verdier
