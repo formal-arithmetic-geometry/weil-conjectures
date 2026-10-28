@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-ordinary-square",
+ "kind": "statement",
+ "title": "Ordinary scalar tensor pullback square",
+ "statement": "Let $R$ be a finite commutative ring, $X,Y$ schemes, and $p:X\\to Y$ a scheme morphism. Write $C_T$ for sheaves of $\\operatorname{ULift}(R)$-modules on the small pro-etale site of $T$, $I_T$ for module sheaves over its constant ring sheaf, and $E_T:C_T\\to I_T$ for the specified scalar realization equivalence [lem-sf-finite-scalar-tensor-complex]. Let $A:C_Y\\to C_X$ be fixed-coefficient inverse image, $B:I_Y\\to I_X$ the identified-constant-ring module pullback, and $c:E_YB\\simeq AE_X$ the inverse mate of the section-normalized direct-image comparison [def-sf-finite-scalar-ordinary-pullback-comparison]. Let $\\tau_T:E_T(M\\otimes N)\\simeq E_TM\\otimes E_TN$ be the specified sheafification tensor isomorphism [lem-sf-finite-scalar-tensor-complex], $\\delta_A:A(M\\otimes N)\\to AM\\otimes AN$ the canonical fixed-coefficient oplax tensorator, and $\\mu_B:B(U\\otimes V)\\simeq BU\\otimes BV$ the pure-unit-normalized intrinsic tensor comparison [def-sp-proetale-ordinary-tensor-pullback-total]. For every $M,N\\in C_Y$, as maps from $E_XA(M\\otimes N)$ to $BE_YM\\otimes BE_YN$, one has\n$$E_X(\\delta_A(M,N));\\tau_X(AM,AN);(c_M^{-1}\\otimes c_N^{-1})=c_{M\\otimes N}^{-1};B(\\tau_Y(M,N));\\mu_B(E_YM,E_YN).$$\nThere is no boundedness, flatness, constructibility or finiteness assumption on $M,N$, and the zero ring and empty schemes are included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, fixed-ring modules; Tag 03EL, lemma-tensor-product-pullback, proof by adjunction and bilinear maps. This is their compatibility under the specified constant-scalar realization."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "proof": [
+  {
+   "text": "Precompose both composites with the hom component of c at M tensor N, and transpose through the intrinsic module pullback adjunction. Precomposition is injective because c is an isomorphism. Expand the inverse-mate unit equation defining c and the direct-image equality in its definition; the direct-image comparison sends every source scalar-unit section to the corresponding target scalar-unit section.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified tau is built from the fixed-coefficient sheafification tensorator, the scalar-realization unit, and the intrinsic module sheafification tensorator. Their unit equations show that tau takes the scalar-unit image of a pure tensor m tensor n to the tensor of the scalar-unit images of m and n. The fixed-coefficient inverse-image tensorator is obtained by transposing the tensor of its two adjunction units. Substitute these formulas in the transposed left composite; its value on m tensor n is the intrinsic tensor of the two inverse-image unit sections. The pure-unit formula for mu_B gives precisely that value for the transposed right composite.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-sf-proetale-sheafification-tensor-comparison",
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source tensor is the sheafification of the sectionwise balanced tensor. Equality on every pure tensor over every site object implies equality on the presheaf tensor by tensor induction, and then equality on its sheafification by its adjunction. Undo the pullback adjunction and cancel c.hom to obtain the displayed square. These universal properties cover zero modules, the zero ring, and empty sites as well.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "00YV and 03EL, ordinary scalar compatibility step of the assigned total-degree square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of the comparison between fixed coefficient sheaves and sheaves of modules over the constant ring commutes with the canonical tensor pullback isomorphism",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback; CategoryTheory.constantCommuteCompose; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-28",
+   "verdict": "The general mate and pullback APIs do not state the normalized scalar tensor square. Use the canonical section and adjunction characterizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a natural isomorphism between right adjoints commutes with tensor product under monoidal equivalences of sheaf categories",
+   "results": "8 hits: CategoryTheory.sheafComposeNatIso; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.mateEquiv; CategoryTheory.sheafComposeNatTrans; CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-28",
+   "verdict": "The general mate and pullback APIs do not state the normalized scalar tensor square. Use the canonical section and adjunction characterizations."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Tt]ensor|[Tt]ensor.*mate",
+   "results": "6 hits: Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "The general mate and pullback APIs do not state the normalized scalar tensor square. Use the canonical section and adjunction characterizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Every step constructs or compares the same projection map; ordinary tensor-pullback compatibility needed for the scalar realization of its proper counit transpose.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackOrdinarySquare",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackOrdinarySquare.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_ordinary_square",
+  "statement": "theorem finiteScalarTensorPullback_ordinary_square\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (M N : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) :\n    (sfIntrinsicModuleEquivalence X R).functor.map\n        (Functor.OplaxMonoidal.δ\n          (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) M N) ≫\n      (finiteScalarOrdinaryTensorIso X R).hom.app\n        ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).obj M,\n         (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).obj N) ≫\n      (uncurry.obj (proEtaleOrdinaryTensor X (proEtaleConstantRing X R))).map\n        (Prod.mkHom ((finiteScalarOrdinaryPullbackComparison R p).inv.app M)\n          ((finiteScalarOrdinaryPullbackComparison R p).inv.app N)) =\n    (finiteScalarOrdinaryPullbackComparison R p).inv.app (M ⊗ N) ≫\n      (proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).map\n        ((finiteScalarOrdinaryTensorIso Y R).hom.app (M, N)) ≫\n      (proEtaleOrdinaryTensorPullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)\n        ((sfIntrinsicModuleEquivalence Y R).functor.obj M)\n        ((sfIntrinsicModuleEquivalence Y R).functor.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-proetale-sheafification-tensor-comparison",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

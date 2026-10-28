@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Tensor of the termwise scalar comparison on a summand.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  }
+ ],
+ "id": "lem-sf-finite-scalar-tensor-comparison-map-summand",
+ "title": "Tensor of the termwise scalar comparison on a summand",
+ "statement": "For a finite commutative ring R, a scheme morphism p:X→Y, cochain complexes P,Q of fixed scalar sheaves and a+b=n, the (a,b) injection into the tensor total of realized fixed pullbacks, followed by the tensor total map of the two complex scalar comparisons, equals the ordinary tensor of their scalar comparison components at P.X a and Q.X b followed by the target injection into the tensor total of intrinsic pullbacks of the realized complexes.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Expand the uncurried total tensor map as mapBifunctorMap. Apply Mathlib HomologicalComplex.ι_mapBifunctorMap, replace each degree component by the ordinary scalar comparison using mapHomologicalComplexCompIso_inv_app_f, expand the ordinary uncurried tensor map, and reassociate. The remaining equality is definitional. This entire calculation is proved in Lean.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorComparisonMapSummand",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorComparisonMapSummand.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_comparison_map_summand",
+  "statement": "theorem finiteScalarTensorPullback_comparison_map_summand\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (a b n : ℤ) (h : a + b = n) :\n    CochainComplex.ιMapBifunctor\n      (((sfIntrinsicModuleEquivalence X R).functor.mapHomologicalComplex (.up ℤ)).obj\n        (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n          (.up ℤ)).obj P))\n      (((sfIntrinsicModuleEquivalence X R).functor.mapHomologicalComplex (.up ℤ)).obj\n        (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n          (.up ℤ)).obj Q))\n      (proEtaleOrdinaryTensor X (proEtaleConstantRing X R)) a b n h ≫\n      (((uncurry.obj\n        ((proEtaleOrdinaryTensor X (proEtaleConstantRing X R)).map₂HomologicalComplex\n          (.up ℤ) (.up ℤ) (.up ℤ))).map\n            (Prod.mkHom ((finiteScalarComplexPullbackComparison R p).inv.app P)\n              ((finiteScalarComplexPullbackComparison R p).inv.app Q))).f n) =\n    ((uncurry.obj (proEtaleOrdinaryTensor X (proEtaleConstantRing X R))).map\n      (Prod.mkHom ((finiteScalarOrdinaryPullbackComparison R p).inv.app (P.X a))\n        ((finiteScalarOrdinaryPullbackComparison R p).inv.app (Q.X b)))) ≫\n    CochainComplex.ιMapBifunctor\n      (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).obj (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj P))\n      (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).obj (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj Q)) (proEtaleOrdinaryTensor X (proEtaleConstantRing X R)) a b n h",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

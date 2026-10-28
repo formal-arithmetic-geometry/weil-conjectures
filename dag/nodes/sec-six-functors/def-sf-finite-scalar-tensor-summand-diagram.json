@@ -1,0 +1,120 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "A typed diagram of the scalar tensor total paths.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  }
+ ],
+ "id": "def-sf-finite-scalar-tensor-summand-diagram",
+ "title": "A typed diagram of the scalar tensor total paths",
+ "statement": "A typed summand diagram records eight objects: the four vertices of the left total-degree path and its four ordinary summand vertices; their three horizontal maps; four coproduct injections; the right total-degree path and its ordinary path. For finite R, p:X→Y, P,Q and a+b=n, construct this record from degree n of the actual chain diagram, the ordinary scalar tensorators and comparisons, and the native coproduct injections. Its fields assert no compatibility and choose no new data.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-tensor-native-chain-diagram",
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Take the four objects, three edges and right arrow of the native cochain diagram in degree n. Use the corresponding four ordinary tensor objects, their tensorator and scalar-comparison maps, and the native mapped coproduct injections. Every field is an explicit existing object or map; there are no proof or witness fields.",
+   "uses": [
+    "def-sf-finite-scalar-tensor-native-chain-diagram",
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-tensor-native-chain-diagram",
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorSummandDiagram",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorSummandDiagram.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorSummandDiagram",
+  "statement": "def finiteScalarTensorSummandDiagram\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (a b n : ℤ) (h : a + b = n) :\n    FiniteScalarTensorSummandDiagram (proEtaleRingModules X (proEtaleConstantRing X R))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.finiteScalarTensorSummandDiagram",
+   "WeilConjectures.FiniteScalarTensorSummandDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

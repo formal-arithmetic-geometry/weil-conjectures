@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The right scalar tensor pullback composite on a summand.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  }
+ ],
+ "id": "lem-sf-finite-scalar-tensor-pullback-right-summand",
+ "title": "The right scalar tensor pullback composite on a summand",
+ "statement": "For a finite commutative ring R, p:X→Y, fixed scalar cochain complexes P,Q and a+b=n, the image under fixed inverse image and scalar realization of the (a,b) total injection, followed by the right total composite in degree n, equals the inverse ordinary scalar comparison at P.X a tensor Q.X b, then intrinsic pullback of the ordinary realization tensor comparison on Y, then the ordinary intrinsic tensor pullback isomorphism, followed by the target (a,b) injection. The formula is independent of the ordinary square compatibility theorem.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "proof": [
+  {
+   "text": "The complex scalar comparison has its ordinary component in each degree. Naturality of the inverse ordinary comparison moves it before the source injection. Apply the realization injection identity on Y and then the intrinsic inverse-total injection identity. A proved private categorical pasting lemma combines naturality, functoriality, and these two identities. The whole formula is proved in Lean.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-realization-summand",
+    "lem-sf-finite-scalar-intrinsic-tensor-summand"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-realization-summand",
+  "lem-sf-finite-scalar-intrinsic-tensor-summand"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackRightSummand",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackRightSummand.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_right_summand",
+  "statement": "theorem finiteScalarTensorPullback_right_summand\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (a b n : ℤ) (h : a + b = n) :\n    ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) ⋙\n      (sfIntrinsicModuleEquivalence X R).functor).map\n        (CochainComplex.ιMapBifunctor P Q (curriedTensor _) a b n h) ≫\n    (((finiteScalarComplexPullbackComparison R p).inv.app\n        ((finiteScalarRepresentativeTotalTensor\n          (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).obj (P, Q)) ≫\n      ((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).map ((finiteScalarRepresentativeTotalRealization R Y).app (P, Q)) ≫\n      (finiteScalarIntrinsicComplexTensorPullback R p).app\n        (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P,\n         ((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q)).f\n      n) =\n    ((finiteScalarOrdinaryPullbackComparison R p).inv.app ((P.X a) ⊗ (Q.X b)) ≫\n      (proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).map\n        ((finiteScalarOrdinaryTensorIso Y R).hom.app ((P.X a), (Q.X b))) ≫\n      (proEtaleOrdinaryTensorPullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)\n        ((sfIntrinsicModuleEquivalence Y R).functor.obj (P.X a))\n        ((sfIntrinsicModuleEquivalence Y R).functor.obj (Q.X b))).hom) ≫\n      CochainComplex.ιMapBifunctor\n      (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).obj (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj P))\n      (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).obj (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj Q)) (proEtaleOrdinaryTensor X (proEtaleConstantRing X R)) a b n h",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

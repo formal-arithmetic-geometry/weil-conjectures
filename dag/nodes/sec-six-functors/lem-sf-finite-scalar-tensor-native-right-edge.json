@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; termwise and total tensor comparison injection formulas. The native Mathlib mapBifunctorMap and adopted total-comparison APIs supply the formal calculations.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The specified right native chain edge.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the native total tensor injection identities and categorical pasting; no additional mathematical obligation is introduced."
+  }
+ ],
+ "id": "lem-sf-finite-scalar-tensor-native-right-edge",
+ "title": "The specified right native chain edge",
+ "statement": "For finite R, p:X→Y and P,Q, the explicitly named native right path equals the original three-factor composite of inverse scalar comparison, intrinsic pullback of realization and intrinsic total tensor comparison. This is an equality of chain maps before degree evaluation.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-tensor-native-right-path"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the right-path data definition. Its value is exactly the displayed original three-factor composite, so reflexivity proves the equality.",
+   "uses": [
+    "def-sf-finite-scalar-tensor-native-right-path"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-tensor-native-right-path"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorNativeRightEdge",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorNativeRightEdge.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorNativeRight_edge",
+  "statement": "theorem finiteScalarTensorNativeRight_edge\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :\n    finiteScalarTensorNativeRightPath R p P Q =\n    (finiteScalarComplexPullbackComparison R p).inv.app\n        ((finiteScalarRepresentativeTotalTensor\n          (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).obj (P, Q)) ≫\n      ((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).map ((finiteScalarRepresentativeTotalRealization R Y).app (P, Q)) ≫\n      (finiteScalarIntrinsicComplexTensorPullback R p).app\n        (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P,\n         ((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

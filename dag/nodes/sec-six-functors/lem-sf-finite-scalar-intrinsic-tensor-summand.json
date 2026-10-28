@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/Sheaf/Paper/ProEtaleTensorPullbackModels.lean",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the total tensor comparison defined by its coproduct-desc components."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/Sheaf/Paper/ProEtaleTensorPullbackModels.lean",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the total tensor comparison defined by its coproduct-desc components.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Coproduct summand of the intrinsic inverse-total tensor pullback comparison.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  }
+ ],
+ "id": "lem-sf-finite-scalar-intrinsic-tensor-summand",
+ "title": "Coproduct summands of intrinsic inverse-total tensor pullback",
+ "statement": "Let R be a finite commutative ring, p:X→Y a scheme morphism, and P,Q cochain complexes of modules over the constant ring sheaf on Y. For all a+b=n, intrinsic module pullback applied to the (a,b) total tensor injection, followed by the specified inverse-total tensor comparison in degree n, equals the ordinary tensor pullback isomorphism followed by the (a,b) injection into the tensor total of the pulled-back complexes.",
+ "stmt_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the hom component of the intrinsic total tensor isomorphism. Its defining total-desc component on a coproduct injection is the inverse ordinary tensor comparison followed by the pulled-back injection. Cancel the ordinary isomorphism. Specialize to constant rings and rewrite the intrinsic complex comparison app. All steps are proved in Lean without holes.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarIntrinsicTensorSummand",
+  "file": "lean/Sheaf/Paper/FiniteScalarIntrinsicTensorSummand.lean",
+  "declaration": "WeilConjectures.finiteScalarIntrinsicComplexTensorPullback_ι",
+  "statement": "theorem finiteScalarIntrinsicComplexTensorPullback_ι (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y R)) ℤ)\n    (a b n : ℤ) (h : a + b = n) :\n    (proEtaleRingModulePullback p (proEtaleConstantRing Y R) (proEtaleConstantRing X R)\n      (proEtaleConstantRingComparison p R)).map\n        (CochainComplex.ιMapBifunctor P Q (proEtaleOrdinaryTensor Y\n          (proEtaleConstantRing Y R)) a b n h) ≫\n      ((finiteScalarIntrinsicComplexTensorPullback R p).app (P, Q)).f n =\n    (proEtaleOrdinaryTensorPullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)\n        (P.X a) (Q.X b)).hom ≫\n      CochainComplex.ιMapBifunctor\n        (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n          (.up ℤ)).obj P)\n        (((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n          (.up ℤ)).obj Q)\n        (proEtaleOrdinaryTensor X (proEtaleConstantRing X R)) a b n h",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

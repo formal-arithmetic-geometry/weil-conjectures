@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-realization-summand",
+ "kind": "statement",
+ "title": "Coproduct summands of scalar total realization",
+ "statement": "For a finite commutative ring R, a scheme T, arbitrary cochain complexes P,Q of fixed-coefficient sheaves on its small pro-etale site, and integers a+b=n, let E be the specified scalar realization equivalence and e its ordinary tensor comparison [lem-sf-finite-scalar-tensor-complex], and use its specified total realization [def-sf-finite-scalar-representative-total-realization]. Then E(ι_{a,b}) followed by the nth component of total realization equals e at (P.X a,Q.X b) followed by the (a,b) injection into the total tensor of E(P),E(Q). No flatness or boundedness assumptions are needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, signed-total comparison; HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX, the coproduct-injection computation used in Lean."
+ },
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, signed-total comparison; HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX, the coproduct-injection computation used in Lean.",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Coproduct summand of the total tensor realization in the scalar projection comparison.",
+   "via": [
+    "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "stmt_deps": [
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "For an arbitrary additive equivalence of preadditive monoidal categories with countable colimits, unfold the abstract total tensor comparison. Its value on a coproduct injection is the value of its defining ordinary tensor comparison, by HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX. Rewrite the shared representative wrapper by its app equation and specialize to the scalar realization. These steps are all proved in Lean, without sorry.",
+   "uses": [
+    "def-sf-finite-scalar-representative-total-realization",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorRealizationSummand",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorRealizationSummand.lean",
+  "declaration": "WeilConjectures.finiteScalarRepresentativeTotalRealization_ι",
+  "statement": "theorem finiteScalarRepresentativeTotalRealization_ι (R : Type u) [CommRing R] [Finite R]\n    (T : Scheme.{u})\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (a b n : ℤ) (h : a + b = n) :\n    (sfIntrinsicModuleEquivalence T R).functor.map\n        (CochainComplex.ιMapBifunctor P Q (curriedTensor _) a b n h) ≫\n      ((finiteScalarRepresentativeTotalRealization R T).app (P, Q)).f n =\n    (finiteScalarOrdinaryTensorIso T R).hom.app (P.X a, Q.X b) ≫\n      CochainComplex.ιMapBifunctor\n        (((sfIntrinsicModuleEquivalence T R).functor.mapHomologicalComplex (.up ℤ)).obj P)\n        (((sfIntrinsicModuleEquivalence T R).functor.mapHomologicalComplex (.up ℤ)).obj Q)\n        (curriedTensor _) a b n h",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary natural transformation square of tensor product comparisons commutes after lifting to homological complexes and totalizing",
+   "results": "8 hits: HomologicalComplex.ι_mapBifunctorMap_assoc; HomologicalComplex.ι_mapBifunctorMap; HomologicalComplex.ι_mapBifunctorDesc_assoc; HomologicalComplex.ι_mapBifunctorDesc; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|ι_mapBifunctorMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorAssociator.lean; Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the total-bifunctor coproduct-injection APIs to prove the wrapper specialization."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261028T055708-L-796653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,8 +9,7 @@ public import Sheaf.Paper.FiniteScalarOrdinaryPullbackComparison
 public import Sheaf.Paper.FiniteScalarComplexTensorPullback
 public import Sheaf.Paper.FiniteScalarRepresentativeTotalRealization
 public import Sheaf.Paper.RepresentativeTensorOrdinaryPullbackLaw
-import Sheaf.Algebra.Homology.FlatTermKFlatFunctor
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+import Sheaf.Paper.FiniteScalarTensorPullbackNativeChainSquare
 
 /-! Degreewise scalar tensor pullback chain square.
 
@@ -40,25 +39,32 @@ attribute [local instance 4000] Preadditive.preadditiveHasZeroMorphisms
 attribute [local instance 30000] SheafOfModules.instPreadditive
   HomologicalComplex.instPreadditive CategoryTheory.functorCategoryPreadditive
   Preadditive.preadditiveHasZeroMorphisms Functor.preservesZeroMorphisms_of_additive
-attribute [local irreducible] SheafOfModules.monoidalCategory
+attribute [local irreducible] sfIntrinsicModuleEquivalence
+  SheafOfModules.monoidalCategory
   AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotalIso
   AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotal
   AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback
   AlgebraicGeometry.Scheme.proEtaleRingModulePullback
+  CategoryTheory.Functor.leftAdjoint CategoryTheory.presheafToSheaf
 attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
   CategoryTheory.Functor.mapHomologicalComplex
 
 namespace WeilConjectures
 
+attribute [local implicit_reducible] finiteScalarRepresentativeTotalTensor
+
+universe a v
+open CategoryTheory.Limits
+
 /-- The scalar tensor pullback square holds on each total-degree component.
 Source: Stacks Tags 00YV, 07A4 and 07A6.
 (blueprint: lem-sf-finite-scalar-tensor-pullback-chain-square-component).
 
-Proof: expand the signed total maps on the coproduct injection in degree `n`.
-The two resulting summand maps are the same ordinary scalar tensor pullback
-square, with the same Koszul sign. The ordinary square follows from the
-unit-normalized inverse-image comparison and the tensor universal property;
-totalization only reindexes the common summand. -/
+Proof: the constructed native cochain diagram commutes, by degreewise mapped-coproduct
+extensionality and pasting of its proved native summand identities with the ordinary
+scalar tensor square. A proved native chain-map equality identifies the constructed
+paths with exactly the maps in the statement, before degree evaluation. Take degree n
+of this equality. Their signed differentials belong to the existing total constructions. -/
 theorem finiteScalarTensorPullback_chain_square_component
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P Q : CochainComplex
@@ -85,6 +91,7 @@ theorem finiteScalarTensorPullback_chain_square_component
         (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P,
          ((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q)).f
       n) := by
-  sorry
+  exact congrArg (fun f ↦ HomologicalComplex.Hom.f f n)
+    (finiteScalarTensorPullback_native_chain_square R p P Q)
 
 end WeilConjectures
