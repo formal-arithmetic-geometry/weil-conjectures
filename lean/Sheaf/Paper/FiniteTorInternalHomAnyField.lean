@@ -8,22 +8,12 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Algebra.Homology.DerivedInternalHomMixedUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
-import Sheaf.SixFunctors.FlatModelGeneration
-import Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant
-import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
-import Sheaf.Paper.CohomologyInWeakSerreSubcategory
-import Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
-import Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility
-import Sheaf.CategoryTheory.RingedSitePerfectDuality
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import all Sheaf.SixFunctors.FlatModelGeneration
 import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.StratumAmbientHom
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
-import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import Sheaf.CategoryTheory.SignedDerivedInternalHomExact
+import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
+import Sheaf.Paper.LocallyClosedProjectiveHomAnyField
 
 /-! # Finite-Tor internal Hom over an arbitrary field
 
@@ -38,7 +28,8 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory Opposite
+open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory.Pretriangulated.Opposite
 
 namespace AlgebraicGeometry.Scheme
 
@@ -101,6 +92,78 @@ theorem finiteTor_internalHom_constructible_anyField
         (Padic.finite_coefficientExtensionRing l E n hn)).obj L ≅
         (derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X)
           (proEtaleConstantRing X (Padic.coefficientExtensionRing l E n))).obj (op K, M)) := by
-  sorry
+  classical
+  let A := Padic.coefficientExtensionRing l E n
+  let : Finite A := Padic.finite_coefficientExtensionRing l E n hn
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  let : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  let C := proEtaleRingModules X (proEtaleConstantRing X A)
+  let P : ObjectProperty (proEtaleDerivedCategory X A) :=
+    intrinsicFiniteTorsionConstructible l E n hn X
+  obtain ⟨hiso, htri⟩ := proEtale_bounded_constructible_isTriangulated X A
+  have : P.IsClosedUnderIsomorphisms := hiso
+  have : P.IsTriangulated := htri
+  have : P.IsStableUnderRetracts := ⟨fun {B D} r hD ↦ by
+    refine ⟨hD.1.subset ?_, fun q ↦ ?_⟩
+    · intro q hq hz
+      have rr := r.map (DerivedCategory.homologyFunctor C q)
+      apply hq
+      apply (IsZero.iff_id_eq_zero _).mpr
+      rw [← rr.retract, hz.eq_of_tgt rr.i 0, zero_comp]
+    · have hc := flatModel_intrinsic_constructible_retract X A
+        (r.map (DerivedCategory.homologyFunctor C q))
+        ((CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mpr
+          ((proEtaleModuleRestriction_constructible_iff X A _).mp (hD.2 q)))
+      exact (proEtaleModuleRestriction_constructible_iff X A _).mpr
+        ((CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mp hc)⟩
+  let H := derivedInternalHomOfUniverses.{u + 1, u, u}
+    (ProEt.topology X) (proEtaleConstantRing X A)
+  let F := Prod.sectL _ M ⋙ H
+  obtain ⟨sF, hsF⟩ := signedDerivedInternalHom_exact.{u + 1, u, u}
+    (ProEt.topology X) (proEtaleConstantRing X A) M
+  let : F.CommShift ℤ := sF
+  have : F.IsTriangulated := hsF.1
+  let Q := (P.inverseImage F).unop
+  have : Q.IsTriangulated := inferInstance
+  have : Q.IsStableUnderRetracts := ⟨fun r h ↦ P.prop_of_retract (r.op.map F) h⟩
+  let G : ObjectProperty (proEtaleDerivedCategory X A) := fun B ↦
+    ∃ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a)
+      (L : proEtaleRingModules S (proEtaleConstantRing S A)),
+      FlatModelProEtaleLisseProjective S A L ∧
+      Nonempty (B ≅ (DerivedCategory.singleFunctor _ 0).obj
+        ((flatModelProEtaleExtension A a ha).obj L))
+  have hgen : G ≤ Q := by
+    rintro B ⟨S, a, ha, L, hL, ⟨e⟩⟩
+    exact P.prop_of_iso (F.mapIso e.op)
+      (locallyClosedProjective_internalHom_constructible_anyField
+        k l _hl E n hn X S a ha L hL M _hM.1)
+  have hK : G.triangEnvelope K := by
+    rw [← proEtale_flatConstructible_thickGeneration X A]
+    refine ⟨fun q ↦ ?_, ?_, _hK.2⟩
+    · exact (CoefficientSerre.coefficient_constructible_iff X (ULift.{u + 1, u} A) _).mpr
+        ((proEtaleModuleRestriction_constructible_iff X A _).mp (_hK.1.2 q))
+    · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ :=
+        Set.finite_iff_bddBelow_bddAbove.mp _hK.1.1
+      refine ⟨min a b, max a b, min_le_max, fun q hq ↦ ?_⟩
+      by_contra hz
+      rcases hq with hq | hq
+      · exact (not_le_of_gt hq) ((min_le_left _ _).trans (ha hz))
+      · exact (not_le_of_gt hq) ((hb hz).trans (le_max_right _ _))
+  have hH : P (H.obj (op K, M)) :=
+    ((ObjectProperty.triangEnvelope_le_iff (P := G)).mpr hgen) K hK
+  refine ⟨hH, ?_⟩
+  have hb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor C i).obj (H.obj (op K, M))) := by
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := Set.finite_iff_bddBelow_bddAbove.mp hH.1
+    refine ⟨min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    by_contra hz
+    rcases hi with hi | hi
+    · exact (not_le_of_gt hi) ((min_le_left _ _).trans (ha hz))
+    · exact (not_le_of_gt hi) ((hb hz).trans (le_max_right _ _))
+  obtain ⟨L, ⟨e⟩⟩ := ((finiteRing_constructibleDerived_origin X A).2.2.1
+    (H.obj (op K, M))).mpr ⟨hH.2, hb⟩
+  exact ⟨L.obj, L.property, ⟨e⟩⟩
 
 end AlgebraicGeometry.Scheme
