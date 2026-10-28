@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-profinite-integer-smooth-primitives",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-base-field-cd",
+   "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument",
+   "via": [
+    "lem-sfb-finite-field-prime-degree-two"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth translation primitives from all cyclic residue maps",
+ "statement": "Let G be a compact Hausdorff totally disconnected topological group with an element tau whose integral powers are dense. Suppose for each positive integer n a continuous homomorphism G→Multiplicative(ZMod n) sends tau to 1 (in additive notation). Let ell>1 be an integer and A an abelian group. For every function f:G→A with open right-translation stabilizer and ell*f(x)=0 for every x, there is a function h:G→A with open right-translation stabilizer and h(x*tau)-h(x)=f(x) for every x. Smooth means having open right stabilizer as in the discrete-module coinduction construction [def-exc-continuous-cohomology].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+  "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument"
+ },
+ "stmt_deps": [
+  "def-exc-continuous-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For the open right stabilizer of f choose an open normal subgroup U contained in it, using the compact totally disconnected group open-normal neighborhood basis. The finite quotient Q=G/U contains the image of tau, of positive order n. Put N=n*ell>1. The residue homomorphism q:G→Z/N sends tau to 1. Since 1 generates Z/N and n divides N, the homomorphism a:Z/N→Q sending 1 to the image of tau exists. The continuous homomorphisms a∘q and G→Q agree on every integral power of tau and hence agree on G by density and the Hausdorff topology of finite Q. Thus f is constant on fibers of q.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+    "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument"
+   }
+  },
+  {
+   "text": "Write F(i)=f(tau^i). Translation by tau^n lies in U, so F(n*m+i)=F(i) for all natural m,i. Split the sum over N terms into ell blocks of n terms. It equals ell times the sum over n terms, which is zero because ell kills each value of f. This also works when n=1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+    "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument"
+   }
+  },
+  {
+   "text": "Let idx(x) be the least nonnegative representative of q(x), and set h(x)=sum_{i<idx(x)}F(i). The kernel of q is open and fixes h under right translation, so h is smooth. The residue of x*tau increments idx(x) modulo N. Away from wraparound, the difference h(x*tau)-h(x) is F(idx(x))=f(x). At wraparound the vanishing sum over all N terms gives the same equality. These arguments also cover zero coefficients and f=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+    "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+  "place": "Finite modules paragraph: refining a cyclic quotient by the coefficient exponent; explicit finite summation implementation of this argument",
+  "note": "An explicit bounded-torsion version of finite cyclic summation; all helper declarations are proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DenseRange|sum_range",
+   "results": "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact match; elementary residue and density lemmas are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod.val_add",
+   "results": "ZMod.val_add",
+   "date": "2026-10-28",
+   "verdict": "No exact match; elementary residue and density lemmas are used in the complete Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth functions on a profinite cyclic group with bounded torsion values admit a primitive for translation by a topological generator",
+   "results": "HurwitzKernelBounds.F_int, CircleDeg1Lift.map_add_one', CircleDeg1Lift.forall_map_sub_of_Icc, AddCircle.Ioc_ext, AddCircle.liftIoc, AddCircle.Ico_ext, AddCircle.liftIco, AddCircle.liftIoc_zero_coe_apply",
+   "date": "2026-10-28",
+   "verdict": "No exact match; elementary residue and density lemmas are used in the complete Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the profinite completion of the integers every locally constant function killed by a positive integer admits a locally constant primitive under translation by one",
+   "results": "Profinite.NobelingProof.instIsAddTorsionFreeLocallyConstantInt, Profinite.NobelingProof.Nobeling_aux, LocallyConstant.freeOfProfinite, Profinite.NobelingProof.e, Profinite.exists_locallyConstant_fin_two, LocallyConstant.instAddCommGroup, LocallyConstant.recOn, Profinite.NobelingProof.instNontrivialLocallyConstantIntOfNonempty",
+   "date": "2026-10-28",
+   "verdict": "No primitive theorem; the returned results concern freeness and torsion-freeness of locally constant integer functions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.FiniteFieldPrimeCohomology",
+  "date": "2026-10-28",
+  "group": "F5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ProfiniteIntegerSmoothPrimitives",
+  "file": "lean/Sheaf/RepresentationTheory/ProfiniteIntegerSmoothPrimitives.lean",
+  "declaration": "DiscreteModule.exists_smooth_primitive_of_cyclic_residues",
+  "statement": "theorem exists_smooth_primitive_of_cyclic_residues\n    {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (τ : G) (hd : DenseRange (zpowersHom G τ))\n    (residue : ∀ n : ℕ, 0 < n → G →ₜ* Multiplicative (ZMod n))\n    (hresidue : ∀ (n : ℕ) (hn : 0 < n),\n      residue n hn τ = Multiplicative.ofAdd 1)\n    (ell : ℕ) (hell : 1 < ell)\n    {A : Type v} [AddCommGroup A] (f : G → A)\n    (hf : IsOpen (rightStab G f : Set G)) (hkill : ∀ x, ell • f x = 0) :\n    ∃ h : G → A, IsOpen (rightStab G h : Set G) ∧ ∀ x, h (x * τ) - h x = f x",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261028T081739-L-2777143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261028T081739-L-2777143",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
