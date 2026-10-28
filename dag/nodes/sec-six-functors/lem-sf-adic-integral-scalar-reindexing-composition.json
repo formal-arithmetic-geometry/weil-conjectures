@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-adic-integral-scalar-reindexing-composition",
+ "kind": "statement",
+ "title": "Composition of balanced integral scalar reindexing",
+ "statement": "Fix a prime l, a finite-field datum D, and normalized adic family core C. For geometric spaces T, U, V and scheme isomorphisms g:T→U and h:U→V, assume the ordinary module compositor of C is identity on sections. For every finite coefficient index E and every ambient derived module K over the completed integral coefficient sheaf on V, the inverse balanced derived comparison for g followed by h, postcomposed with the derived native module compositor, equals scalar extension of the completed integral inverse-image compositor, followed by the inverse balanced comparison for g at h^{-1}K and native derived g-pullback of the inverse balanced comparison for h at K. This is the composition square for scalar extension alone; it uses no realization comparison, constructibility or completion-unit inversion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, explicit inverse-image formula; Stacks 03EL, 07A4 and 0941; agent-formulated scalar-composition refinement"
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data",
+  "lem-pod-derived-automorphism-hom-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "For ordinary modules evaluate the two balanced comparison paths on every pure tensor a tensor x. IntegralReindex.sections fixes each balanced map; the assumed native module compositor and the completed module compositor leave x unchanged. RingReindex.functions identifies the composite coefficient value with the two successive values. The sheafified tensor universal property extends this equality to the whole ordinary module morphisms.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary square termwise to cochain complexes. Substitute the three integralReindexRepresentative equations. The exact-derived composition factorizations identify the cochain compositor with mapDerivedCategoryNatIso followed by mapDerivedCategoryCompIso. Universal scalar-extension cochain counits determine natural transformations between the resulting total left derived functors uniquely, so the cochain equality gives the stated ambient derived equality. Invert the forward comparison square and whisker its isomorphisms to obtain the stated inverse-component equation.",
+   "uses": [
+    "def-sf-native-adic-reindexing-data",
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-adic-reindexing-data",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-derived-exact-equivalence-squares"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, explicit inverse-image formula; agent-formulated scalar-only composition refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived extension of scalars square for two composable exact inverse image equivalences respects their natural composition isomorphisms",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp, extendScalars_assoc and PresheafOfModules.pullbackComp. These give ordinary algebraic compositors, not this normalized sheaf-derived scalar square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of normalized derived pullback comparison under extension of scalars, given coherence on cochain representatives",
+   "results": "Eight hits for ordinary module pullback/tensor and pullbackComp. No ambient integral derived comparison matching the recorded universal counits.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|integralReindexRepresentative|podIntegralPullbackComp_normalization",
+   "results": "Mathlib search: no hits for these project names. Project rg finds the reindexing definitions and their existence construction, but no scalar-reindexing composition square. The completed pullback normalization is already present and reused by the parent.",
+   "date": "2026-10-28",
+   "verdict": "new scalar-only compatibility step needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-functoriality-comp-cancelled-stage",
+   "place": "scalar base-change composition subcalculation at a fixed finite coefficient field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralScalarReindexingComposition",
+  "file": "lean/Sheaf/Paper/AdicIntegralScalarReindexingComposition.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.integralScalarReindexing_composition",
+  "statement": "theorem integralScalarReindexing_composition\n    (C : FamilyCore l D) (T U V : GeometricSpace D)\n    (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left)\n    (h_sections : ∀ (M : modules l V.base.left (C.data V).realization)\n      (W : T.base.left.ProEtᵒᵖ)\n      (x : ((modulePull l T.base.left (g ≪≫ h).hom\n        (C.ring T V (g ≪≫ h))).obj M).val.obj W),\n      HEq (((C.moduleComp T U V g h).hom.app M).val.app W x) x)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (K : DerivedCategory (integralTowerModules l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) V.base.left)) :\n    (C.integral T V (g ≪≫ h) E).derived.inv.app K ≫\n      (Functor.mapDerivedCategoryNatIso (C.moduleComp T U V g h) ≪≫\n        Functor.mapDerivedCategoryCompIso _ _).hom.app\n          ((pbcDerivedExtend (coefficientMap l V.base.left (C.data V).realization E)).obj K) =\n    (pbcDerivedExtend (coefficientMap l T.base.left (C.data T).realization E)).map\n        ((podCompletedDerivedComp l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E)\n          h.hom g.hom).hom.app K) ≫\n      (C.integral T U g E).derived.inv.app\n        ((podCompletedDerivedInverseImage l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) h.hom).obj K) ≫\n      (derivedPull l T.base.left g.hom (C.ring T U g)).map\n        ((C.integral U V h E).derived.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCompositionCancelledStage",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T034709-L-3533515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T034709-L-3533515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
