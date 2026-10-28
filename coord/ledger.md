@@ -21011,3 +21011,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:57 L: merged deliver/M5/Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitCanonical (stage 3; reviewer PASS; first push; landing 20261028T055717-L-798989 (interface); batch 20261028T055556; modules 3; new nodes 2)
 - 05:57 L: merged deliver/M6/Sheaf.SixFunctors.IntegralDualizingCoefficientHomTowerComparison (stage 3; reviewer PASS; first push; landing 20261028T055718-L-799314 (interface); batch 20261028T055556; modules 1; new nodes 0)
 - 05:57 L: merged deliver/M7/Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitRoos (stage 3; reviewer PASS; first push; landing 20261028T055720-L-799807 (proof); batch 20261028T055556; modules 1; new nodes 0)
+- 05:57 L: merged deliver/M8/Sheaf.SixFunctors.IntegralHomScalarTensorModelComparison (stage 3; reviewer PASS; first push; landing 20261028T055721-L-800199 (interface); batch 20261028T055556; modules 3; new nodes 2)

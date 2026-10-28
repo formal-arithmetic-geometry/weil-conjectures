@@ -8,6 +8,7 @@ module
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionModels
 public import Sheaf.Paper.IntegralScalarOrdinaryModelComparison
 public import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.SixFunctors.IntegralHomScalarTensorRepresentativeComparison
 
 /-! # Tensor normalization under a change of integral Hom presentations
 
@@ -89,6 +90,26 @@ theorem scalarTensor_model_comparison
         (b.adjunction ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K))
         ((scalarIntegralClosed l L X).adjunction
           ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K))).hom.app
-            ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N) := by sorry
+            ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N) := by
+  have hμ : scalarTensorTransport l E L ι X a b e =
+      PurCompactSupport.scalarTensor (completedCoefficientMap l E L ι X)
+        (tensorModel X a) (tensorModel X b) := by
+    apply (PurCompactSupport.scalarTensor_existsUnique
+      (completedCoefficientMap l E L ι X) (tensorModel X a) (tensorModel X b)).unique
+    · exact scalarTensorTransport_normalization l E L ι X a b t e ht he
+    · exact (PurCompactSupport.scalarTensor_existsUnique
+        (completedCoefficientMap l E L ι X)
+        (tensorModel X a) (tensorModel X b)).exists.choose_spec
+  apply (cancel_mono ((tensorAdjointComparison l L X b).inv.app
+    ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K,
+      (pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N))).1
+  change _ = (_ ≫ (tensorAdjointComparison l L X b).hom.app
+    ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K,
+      (pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N)) ≫
+      (tensorAdjointComparison l L X b).inv.app
+        ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K,
+          (pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj N)
+  simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  exact congrArg (fun μ ↦ μ.hom.app (K, N)) hμ
 
 end WeilConjectures.IntegralFiniteExtension
