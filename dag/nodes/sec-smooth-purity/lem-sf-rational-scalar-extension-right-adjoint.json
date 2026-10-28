@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-rational-scalar-extension-right-adjoint",
+ "kind": "statement",
+ "title": "Finite rational scalar extension has a trace left adjoint",
+ "statement": "Fix a prime l, finite extensions E and F of Q_l, and a Q_l-algebra map iota:E to F [def-weil-l-adic-coefficient-extension]. Let W be a scheme with l invertible in every residue field. On the raw rational constructible categories of [def-weil-rationalization-karoubi], the recorded functor T_W=sfRationalScalarExtension(l,E,W,0,l nonzero,F,iota) is a right adjoint: there exists U_W:D_c(W,F) to D_c(W,E) with an adjunction U_W left adjoint to T_W. No morphism of schemes, geometric right adjoint, algebraic closure or coefficient stage system is involved.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; the finite-free trace argument spelled out in steps 1–2 of lem-sf-rational-pullback-scalar-right-mate (agent elaboration, not a separately numbered assertion of the paper)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Restrict modules along the completed coefficient inclusion and apply it termwise to complexes. Exactness gives a functor on ambient derived categories. The finite free coefficient module in lem-weil-finite-free-completed-scalar-comparison preserves finite generation under restriction. Cofinality of the uniformizer filtrations identifies the two completeness conditions. Thus restriction preserves the integral constructible subcategories. Rationalize its maps on Hom groups using scalar localization: an F-coefficient of a rational morphism acts as an E-linear endomorphism after restriction; balancing and the uniformizer identities make this independent of the integral numerator and denominator.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the characteristic-zero finite separable trace pairing. For an E-basis b_i with trace-dual basis c_i, put eta_M(m)=sum_i b_i tensor c_i m for an F-module M, and epsilon_N(z tensor n)=Tr(z)n for an E-module N. F-linearity of eta is the trace-dual-basis identity in F tensor_E F. The two identities sum_i b_i Tr(c_i z)=z and sum_i Tr(z b_i)c_i=z prove the two adjunction triangles. The same formulas commute with sheaf restrictions and differentials. Clear one common nonzero denominator for the finitely many coefficients, then invert it in the raw rationalization. These finite formulas define natural transformations on the actual localized derived categories.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On complete complexes the canonical finiteFreeCompletedScalarComparison identifies the ordinary tensor functor with the normalized completed scalar functor. Localize this natural identification and transport the trace adjunction across it. Its right adjoint is precisely sfRationalScalarExtension with p=0 and the prime nonzero proof, so it supplies the claimed IsRightAdjoint instance. No functor is defined from arbitrary mere existence.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; the finite-free trace argument spelled out in steps 1–2 of lem-sf-rational-pullback-scalar-right-mate (agent elaboration, not a separately numbered assertion of the paper)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjunction mate of scalar extension commuting with pullback is an isomorphism for finite field extensions",
+   "results": "{\"t\": \"2026-10-28T06:02:03Z\", \"tool\": \"leanfinder\", \"query\": \"The right adjunction mate of scalar extension commuting with pullback is an isomorphism for finite field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"ModuleCat.homEquiv_extendScalarsComp\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"ModuleCat.homEquiv_extendScalarsId\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"e2e8758c4c78d95f\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars is left adjoint to finite separable extension of scalars by the trace pairing",
+   "results": "{\"t\": \"2026-10-28T06:05:47Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars is left adjoint to finite separable extension of scalars by the trace pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"LinearMap.restrictScalarsₗ\", \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.restrictScalars\", \"LinearEquiv.restrictScalars\"], \"digest\": \"7cd57aca96f7825d\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv_symm|traceForm_nondegenerate|restrictCoextendScalarsAdj",
+   "results": "{\"t\": \"2026-10-28T06:06:57Z\", \"tool\": \"grep\", \"query\": \"unit_mateEquiv_symm|traceForm_nondegenerate|restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/ClassNumber/Finite.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"77d0480888e4ef2c\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalPullbackScalarRightMate",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Finite coefficient compatibility: step 1 of lem-sf-rational-pullback-scalar-right-mate; trace left adjunction for the single coefficient extension",
+   "via": [
+    "lem-sf-rational-pullback-scalar-right-mate",
+    "lem-sf-rational-direct-image-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalScalarExtensionRightAdjoint",
+  "file": "lean/Sheaf/Paper/RationalScalarExtensionRightAdjoint.lean",
+  "declaration": "WeilConjectures.rationalScalarExtension_isRightAdjoint",
+  "statement": "theorem rationalScalarExtension_isRightAdjoint\n    (l : ℕ) [Fact l.Prime]\n    (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (ι : E →ₐ[ℚ_[l]] F) (W : Scheme.{u})\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    (sfRationalScalarExtension l E W 0\n      (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).IsRightAdjoint",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T072451-L-1952049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T072451-L-1952049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

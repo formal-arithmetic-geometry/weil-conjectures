@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-rational-restriction-pullback-unit",
+ "kind": "statement",
+ "title": "Unit normalization of rational restriction and pullback",
+ "statement": "Fix a prime l, finite extensions E and F of Q_l, a Q_l-algebra map iota:E to F [def-weil-l-adic-coefficient-extension], and a morphism of schemes f:X to Y on which l is invertible in every residue field. Use the raw rational constructible categories of [def-weil-rationalization-karoubi]. Write T_W for the recorded scalar extension at p=0, L_E and L_F for rationalDerivedPullback, and alpha for the inverse of the normalized rationalPullbackScalarComparison of [def-sf-finite-rational-derived-operations]. For arbitrary supplied functors U_X:D_c(X,F) to D_c(X,E) and U_Y:D_c(Y,F) to D_c(Y,E) with adjunctions bX:U_X left adjoint to T_X and bY:U_Y left adjoint to T_Y, there is a natural isomorphism e:L_F followed by U_X to U_Y followed by L_E such that for every K in D_c(Y,F), L_F(bY.unit_K) followed by alpha_(U_Y K) equals bX.unit_(L_F K) followed by T_X(e_K). There are no supplied geometric right adjoints or claims about their existence.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; the finite-free trace argument spelled out in steps 1–2 of lem-sf-rational-pullback-scalar-right-mate (agent elaboration, not a separately numbered assertion of the paper)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "For the actual coefficient restriction functors, forgetting the F action commutes with termwise inverse image, with the exact coefficient reductions, and with the limits used by the normalized completed pullback. Cofinality of the two uniformizer filtrations identifies the completion towers. These are inverse identifications in both directions and are natural in every complex. They preserve the constructible subcategories and give an isomorphism e after rationalization.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip coefficient restriction with the trace adjunction: its unit on M is sum_i b_i tensor c_i m for trace-dual bases of F over E. On a simultaneous flat-term K-flat representative the two maps in the unit equation both send a section m to this same finite sum after pullback. The finiteFreeCompletedScalarComparison identifies the ordinary tensor computation with the completed one, scalarPullbackCompleted fixes its precise normalized tensor map, and rationalPullbackScalarComparison has exactly the localized integral component. Thus the displayed equality uses alpha itself. Natural resolutions and localization extend the equality from the representatives to every K. Denominators are inverted, including for ramified F/E.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary supplied bX and bY, use left-adjoint uniqueness relative to the identity on T_X and T_Y. If vX:U_X to Res_X and vY:U_Y to Res_Y are the uniqueness isomorphisms, conjugate the canonical e by L_F(vX), the canonical e, and vY inverse whiskered by L_E. The defining unit equation eta_Res = eta_U followed by T(v), together with naturality of alpha, transports the canonical unit equation to the displayed one for bX and bY. This asserts neither geometric right-adjoint existence nor any direct-image comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; the finite-free trace argument spelled out in steps 1–2 of lem-sf-rational-pullback-scalar-right-mate (agent elaboration, not a separately numbered assertion of the paper)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with derived pullback and the trace adjunction unit",
+   "results": "{\"t\": \"2026-10-28T06:06:56Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars commutes with derived pullback and the trace adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"AlgHom.restrictScalars\", \"RestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"LinearMap.restrictScalarsₗ\", \"ModuleCat.restrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"PresheafOfModules.restrictScalarsObj\"], \"digest\": \"8cc40f992068213f\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized scalar pullback comparison intertwines units of the trace adjunction between restriction and finite field scalar extension",
+   "results": "{\"t\": \"2026-10-28T06:06:57Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized scalar pullback comparison intertwines units of the trace adjunction between restriction and finite field scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"prod_galRestrict_eq_norm\", \"Algebra.normalizedTrace_algebraMap_apply\", \"Algebra.normalizedTrace_map\", \"Algebra.normalizedTrace_trans\", \"Algebra.normalizedTrace_algebraMap\", \"Algebra.normalizedTrace_intermediateField\", \"Algebra.normalizedTrace_comp_algHom\", \"galRestrict'_galLift\"], \"digest\": \"232a908b72b30892\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv_symm|traceForm_nondegenerate|restrictCoextendScalarsAdj",
+   "results": "{\"t\": \"2026-10-28T06:06:57Z\", \"tool\": \"grep\", \"query\": \"unit_mateEquiv_symm|traceForm_nondegenerate|restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/ClassNumber/Finite.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"77d0480888e4ef2c\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; related tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalPullbackScalarRightMate",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-direct-image",
+   "place": "Finite coefficient compatibility: step 2 of lem-sf-rational-pullback-scalar-right-mate; restriction/pullback identification and its trace-unit equation",
+   "via": [
+    "lem-sf-rational-pullback-scalar-right-mate",
+    "lem-sf-rational-direct-image-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalRestrictionPullbackUnit",
+  "file": "lean/Sheaf/Paper/RationalRestrictionPullbackUnit.lean",
+  "declaration": "WeilConjectures.rationalRestrictionPullback_unit",
+  "statement": "theorem rationalRestrictionPullback_unit\n    (l : ℕ) [Fact l.Prime]\n    (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (ι : E →ₐ[ℚ_[l]] F) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (UX : sfRationalConstructibleCategory l F X ⥤ sfRationalConstructibleCategory l E X)\n    (UY : sfRationalConstructibleCategory l F Y ⥤ sfRationalConstructibleCategory l E Y)\n    (bX : UX ⊣ sfRationalScalarExtension l E X 0\n      (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι)\n    (bY : UY ⊣ sfRationalScalarExtension l E Y 0\n      (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι) :\n    ∃ e : rationalDerivedPullback l F f ⋙ UX ≅ UY ⋙ rationalDerivedPullback l E f,\n      ∀ K : sfRationalConstructibleCategory l F Y,\n        (rationalDerivedPullback l F f).map (bY.unit.app K) ≫\n          (rationalPullbackScalarComparison l E F ι f).inv.app (UY.obj K) =\n        bX.unit.app ((rationalDerivedPullback l F f).obj K) ≫\n          (sfRationalScalarExtension l E X 0\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι).map (e.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T072451-L-1952049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261028T072451-L-1952049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

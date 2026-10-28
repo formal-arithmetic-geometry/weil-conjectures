@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.FiniteRationalDerivedOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Paper.RationalScalarExtensionRightAdjoint
+import Sheaf.Paper.RationalRestrictionPullbackUnit
 
 /-! # A single finite coefficient extension and the rational pullback right mate
 
@@ -66,6 +68,32 @@ theorem rationalPullbackScalar_rightMate_isIso
     (aF : rationalDerivedPullback l F f ⊣ RF) :
     IsIso ((mateEquiv aE aF
       (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)).natTrans) := by
-  sorry
+  let TX := sfRationalScalarExtension l E X 0
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι
+  let TY := sfRationalScalarExtension l E Y 0
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) F ι
+  let : TX.IsRightAdjoint := rationalScalarExtension_isRightAdjoint l E F ι X
+  let : TY.IsRightAdjoint := rationalScalarExtension_isRightAdjoint l E F ι Y
+  let bX := Adjunction.ofIsRightAdjoint TX
+  let bY := Adjunction.ofIsRightAdjoint TY
+  obtain ⟨e, he⟩ := rationalRestrictionPullback_unit l E F ι f
+    TX.leftAdjoint TY.leftAdjoint bX bY
+  let α := TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv
+  let δ := (mateEquiv bY bX).symm α
+  have hδ : δ.natTrans = e.hom := by
+    ext K
+    apply (bX.homEquiv _ _).injective
+    change bX.unit.app _ ≫ TX.map (δ.natTrans.app K) =
+      bX.unit.app _ ≫ TX.map (e.hom.app K)
+    rw [← he K]
+    exact (unit_mateEquiv_symm bY bX α K).symm
+  have : IsIso δ.natTrans := by
+    rw [hδ]
+    infer_instance
+  have h := iterated_mateEquiv_conjugateEquiv bY bX aF aE δ
+  rw [Equiv.apply_symm_apply] at h
+  change IsIso (mateEquiv aE aF α).natTrans
+  rw [h]
+  infer_instance
 
 end WeilConjectures

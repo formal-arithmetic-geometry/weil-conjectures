@@ -21139,3 +21139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/R8/Sheaf.SixFunctors.CoefPairingFiniteNormalization (stage 3; reviewer PASS; first push; landing 20261028T072447-L-1950857 (interface); batch 20261028T072331; modules 3; new nodes 2)
 - 07:24 L: merged deliver/T1/Sheaf.Paper.NativeIntegralCoefficientHeart (stage 3; reviewer PASS; first push; landing 20261028T072448-L-1951206 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:24 L: merged deliver/T3/Sheaf.Paper.NativeOrdinaryOpenTensorSupport (stage 3; reviewer PASS; first push; landing 20261028T072449-L-1951707 (interface); batch 20261028T072331; modules 1; new nodes 0)
+- 07:24 L: merged deliver/T4/Sheaf.Paper.RationalPullbackScalarRightMate (stage 3; reviewer PASS; first push; landing 20261028T072451-L-1952049 (interface); batch 20261028T072331; modules 3; new nodes 2)

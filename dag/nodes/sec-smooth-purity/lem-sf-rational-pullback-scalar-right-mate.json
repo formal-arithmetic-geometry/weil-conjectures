@@ -14,38 +14,33 @@
  ],
  "proof": [
   {
-   "text": "For the single finite extension, write T_W for the recorded rational scalar extension and U_W for restriction of coefficients, W=X,Y. Finite freeness of O_F over O_E identifies ordinary completed extension with the normalized completed scalar construction. Restriction is exact and preserves derived completeness and constructibility; finite generation is preserved because O_F is finite over O_E. Rationalize these restrictions. The trace pairing of the finite characteristic-zero extension F/E is nondegenerate: choose an E-basis b_i and its trace-dual basis c_i, with Tr(b_i c_j)=delta_ij. The maps m to sum_i b_i tensor c_i m and z tensor m to Tr(z)m give U_W left adjoint to T_W. A common nonzero denominator makes these formulas integral, so they define maps in raw rationalization independently of the denominator. The two dual-basis identities prove both triangles. Ramification causes denominators, which are inverted; it does not require a perfect integral trace pairing.",
+   "text": "Apply rationalScalarExtension_isRightAdjoint separately at X and Y, obtaining the Mathlib chosen left adjoints U_X and U_Y with adjunctions bX and bY. Adjointness specifies these objects up to the unique compatible isomorphism used by the next step.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-rationalization-karoubi"
+    "lem-sf-rational-scalar-extension-right-adjoint"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the inverse normalized scalar/pullback comparison along U_Y left adjoint to T_Y and U_X left adjoint to T_X. It is the natural restriction/pullback comparison U_X L_F versus L_E U_Y, with the directions fixed by mateEquiv. On simultaneous flat-term K-flat representatives, ordinary scalar tensor balancing and the dual-basis formulas identify its components with forgetting the coefficient action before versus after pullback. Finite free restriction preserves flat K-flat representatives and commutes with the reduction towers and limits that define completed pullback. Therefore this precise transpose is invertible. The completed scalar comparison and the component specification of rationalPullbackScalarComparison ensure the map is the recorded normalized one, not an arbitrary endpoint isomorphism.",
+   "text": "Apply rationalRestrictionPullback_unit to these adjunctions. It gives an isomorphism e:L_F U_X to U_Y L_E with the explicit unit equation for the inverse normalized scalar/pullback comparison alpha. Let delta be the inverse coefficient mate of alpha. The equation unit_mateEquiv_symm gives the same equation for delta. Injectivity of bX.homEquiv at every object identifies delta componentwise with e.hom, so delta is invertible.",
    "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-sf-finite-rational-derived-operations"
+    "lem-sf-rational-restriction-pullback-unit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv to the supplied pullback/right-adjoint adjunctions and the coefficient adjunctions of step 1. It identifies the further transpose of the prescribed right mate with conjugation of the invertible restriction/pullback transpose from step 2, between composite adjunctions. conjugateEquiv_of_iso reflects invertibility. Thus the prescribed right mate is invertible. Only the supplied adjunctions are used, with no assertion that ambient geometric direct image preserves the full constructible category for arbitrary f. Identity extensions reduce to the scalar unit; the same formulas apply to zero complexes and empty schemes.",
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv to bY, bX, aF, aE and delta. The coefficient mate of delta is alpha by the inverse law for mateEquiv. The identity therefore identifies the specified geometric right mate of alpha with conjugateEquiv (bY.comp aE) (aF.comp bX) delta. Conjugation preserves isomorphisms, so this literal mate is invertible for the supplied aE and aF. This is a complete Lean argument with no assertion of geometric right-adjoint existence.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-weil-rationalization-karoubi",
-  "lem-pur-integral-operations-scalar-extension",
-  "def-sf-finite-rational-derived-operations"
+  "lem-sf-rational-scalar-extension-right-adjoint",
+  "lem-sf-rational-restriction-pullback-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "B6 writes out the single-extension finite-free/trace argument from the existing parent docstring, using 6.8.14(2) for raw rationalization and Mathlib iterated mates for arbitrary supplied adjoints."
+  "place": "T4 implements step 3 by unit_mateEquiv_symm, homEquiv injectivity, and iterated_mateEquiv_conjugateEquiv. The coefficient-adjunction and explicit unit-normalized restriction steps are isolated in the two named dependencies."
  },
  "mathlib_searches": [
   {
@@ -130,9 +125,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B6",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261028T055616-L-775676",
+  "landing": "20261028T072451-L-1952049",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
