@@ -13910,6 +13910,9 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangul
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericSlicePoint
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUniversal
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback

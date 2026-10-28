@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceInputs
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
