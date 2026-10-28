@@ -65,7 +65,15 @@ lemma isIso_of_bijective_localizingClosure {X Y : P.localizingClosure.FullSubcat
 
 /-- Let `F : Loc(P) ⥤ D` be left adjoint to `G`. If a morphism `ε : F T ⟶ N` induces bijections
 `Hom(A, T) ≃ Hom(F A, N)`, `f ↦ F f ≫ ε`, for all objects `A` of `P`, then its adjunct
-`T ⟶ G N` is an isomorphism. -/
+`T ⟶ G N` is an isomorphism.
+
+For `f : A ⟶ T` the two composites
+```
+F A --F f--> F T --ε--> N        A --f--> T --adj.homEquiv ε--> G N
+```
+correspond under `adj.homEquiv A N`: the adjunct of `F f ≫ ε` is `f ≫ adj.homEquiv ε`, so
+composition with `adj.homEquiv ε` is bijective on `Hom(A, T)` and
+`isIso_of_bijective_localizingClosure` applies. -/
 lemma isIso_homEquiv_of_bijective_localizingClosure {D : Type u'} [Category* D]
     {F : P.localizingClosure.FullSubcategory ⥤ D} {G : D ⥤ P.localizingClosure.FullSubcategory}
     (adj : F ⊣ G) {T : P.localizingClosure.FullSubcategory} {N : D} (ε : F.obj T ⟶ N)

@@ -43,23 +43,21 @@ The restriction theorems (blueprints `sk-thm-restriction` and `sk-thm-int-restri
 `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj` and
 `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`) are
 proved from the existence of the right adjoint of `Rp_*` on `Dᵇc` for proper `p` over any field
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper` and its analogues,
+(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` and its analogues,
 in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint`):
 for a compactification `c = (X ⟶[i] X̄ ⟶[p] Y)`, the restriction of `Rf_!(c)` to `Dᵇc` is
 `i_! ⋙ Rp_*`, a left adjoint, and the objects of `Dᵇc` detect isomorphisms of `Loc(Dᵇc)`, so every
 right adjoint on `Loc(Dᵇc)` agrees on `Dᵇc` with the right adjoint on `Dᵇc`
 (`boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint`).
 
-## Other fields
+## Relation to the general case
 
-For `k` neither finite nor separably closed, `cd_ℓ(k)` may be infinite and the bounded
-constructible complexes need not be compact in `Loc(Dᵇc)`, so Brown representability does not
-apply. There `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not` is the
-general `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper`. The case
-of `E̲` reduces to that of `𝒪̲_E` by inverting `ℓ`
-(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`), and
-the case of `ℚ̲̄_ℓ` to those of the `E̲` by the 2-colimit argument, in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit`.
+The theorems above are special cases of the instances
+`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` and its analogues, which hold
+over any field. Since the restriction theorems use those instances, the Brown representability
+argument here is not an independent proof; it records the route of the blueprint for `k` finite or
+separably closed, where `cd_ℓ(k) < ∞` and the bounded constructible complexes are compact in
+`Loc(Dᵇc)`.
 -/
 
 @[expose] public section
@@ -142,7 +140,7 @@ into `Dᵇc(X)⟦E⟧`.
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
-(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper`); on `Dᵇc(Y)`,
+(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`); on `Dᵇc(Y)`,
 `f^!` is then its right adjoint (`boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint`). -/
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (hf : f ≫ aY = aX)
@@ -160,7 +158,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_cont
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_isProper ℓ
+  have := isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj ℓ
     c'.overG E
   have : (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
       c').IsLeftAdjoint :=
@@ -180,7 +178,7 @@ of `f`, every right adjoint `f^!` of the compact-support direct image
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper`); on `Dᵇc(Y)`,
+(`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`); on `Dᵇc(Y)`,
 `f^!` is then its right adjoint (`boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint`). -/
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
@@ -200,7 +198,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper ℓ
+  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj ℓ
     c'.overG E
   have : (PadicIntegersRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E
       c').IsLeftAdjoint :=
@@ -219,7 +217,7 @@ of the compact-support direct image `Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc
 
 The restriction of `Rf_!` to `Dᵇc` is `i_! ⋙ Rp_*` for `c = (X ⟶[i] X̄ ⟶[p] Y)`, a left adjoint
 since `Rp_*` is one on `Dᵇc` for the proper `p`
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_isProper`); on `Dᵇc(Y)`,
+(`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`); on `Dᵇc(Y)`,
 `f^!` is then its right adjoint (`boundedConstructible_rightAdjoint_obj_of_isLeftAdjoint`). -/
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
     (hf : f ≫ aY = aX)
@@ -237,7 +235,7 @@ theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padi
   have : QuasiCompact (Over.mk aX).hom := ‹QuasiCompact aX›
   have : IsSeparated (Over.mk aX).hom := ‹IsSeparated aX›
   let c' : Compactification (Over.homMk (U := Over.mk aX) (V := Over.mk aY) f hf).left := c
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_isProper ℓ c'.overG
+  have := isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj ℓ c'.overG
   have : (boundedConstructibleLowerShriekOfCompactification ℓ c').IsLeftAdjoint :=
     inferInstanceAs (boundedConstructibleOpenImmersionLowerShriek _ ℓ c'.overI ⋙
       boundedConstructibleLowerStar ℓ c'.overG).IsLeftAdjoint
@@ -304,33 +302,6 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_
     fun L hL ↦
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
         ℓ Z.hom Y.hom _ (Over.w g) adj L hL
-
-/-! ### Fields of infinite cohomological dimension -/
-
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for `k` neither finite nor
-separably closed: for a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`,
-the derived pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint (SGA 4 XVIII,
-3.1.4; SGA 4½, [Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument
-of `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed`
-needs `cd_ℓ(k) < ∞`; for a general `k` the right adjoint is the derived limit of the étale
-`Rg^!` on the torsion levels. -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not
-    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    (_hk : ¬(Finite k ∨ IsSepClosed k)) :
-    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper ℓ g E
-
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`, for `k` neither finite nor separably
-closed: for a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
-derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint. Inverting `ℓ`, this
-follows from the case of `𝒪̲_E`
-(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`). -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) (hk : ¬(Finite k ∨ IsSepClosed k)) :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not ℓ g E.1 hk
-  isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
 
 end ProperLowerStar
 
