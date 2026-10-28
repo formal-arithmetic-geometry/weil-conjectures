@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-intrinsic-site-hom-transport-chain",
+ "kind": "lemma",
+ "title": "Chain-level intrinsic site Hom transport",
+ "statement": "For a scheme X and finite commutative ring A, the realization of the fixed-coefficient derived Hom on a complex Lc and a K-injective complex Ic is isomorphic to the localization of the intrinsic constant-ring Hom complex on the realized complexes.",
+ "stmt_deps": [
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "section-internal-hom, Tags 00YV, 08J7 and 0A95; coefficient-presentation transport in Step 2 of lem-sf-tensor-exchange-ctf-domains"
+ },
+ "proof": [
+  {
+   "text": "Apply the exact associated-module-sheaf realization termwise to the fixed-coefficient Hom complex. The sheaf-Hom/tensor adjunction identifies each term and its signed differential with the intrinsic constant-ring Hom complex; exactness carries the localized representative to the localized intrinsic complex.",
+   "uses": [
+    "def-sp-finite-coefficient-intrinsic-derived-comparison",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B9",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "representative chain comparison in coefficient-presentation transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact realization functor maps derived Hom representative to intrinsic Hom complex",
+   "results": "No exact theorem; generic K-injective representative APIs found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient realization Hom complex comparison",
+   "results": "No coefficient-specific bridge theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mapDerivedCategory homComplex intrinsic realization",
+   "results": "No matching declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientIntrinsicRealization.*homComplex",
+   "results": "No existing bridge; only tensor and direct-image realization comparisons found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntrinsicSiteHomTransportRepresentatives",
+  "date": "2026-10-28",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-intrinsic-site-hom-transport-representatives",
+   "place": "representative-level chain comparison",
+   "via": [
+    "lem-sf-intrinsic-site-hom-transport-representatives"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntrinsicSiteHomTransportChain",
+  "file": "lean/Sheaf/Paper/IntrinsicSiteHomTransportChain.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsicSiteHom_transport_chain",
+  "statement": "theorem intrinsicSiteHom_transport_chain (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] (Lc Ic : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ) [Ic.IsKInjective] : Nonempty ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj (op (DerivedCategory.Q.obj Lc))).obj (DerivedCategory.Q.obj Ic)) ≅ DerivedCategory.Q.obj (homComplex.{u + 1, u, u + 1, u + 1} (R := proEtaleConstantRing X A) (((finiteCoefficientIntrinsicRealization X A).mapHomologicalComplex (.up ℤ)).obj Lc) (((finiteCoefficientIntrinsicRealization X A).mapHomologicalComplex (.up ℤ)).obj Ic)))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261028T034705-L-3531835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261028T034705-L-3531835",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

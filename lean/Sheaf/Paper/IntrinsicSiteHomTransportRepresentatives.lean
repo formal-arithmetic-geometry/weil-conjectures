@@ -5,7 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
+import Sheaf.Paper.IntrinsicSiteHomTransportChain
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 /-! # Representative-level intrinsic Hom transport
@@ -21,6 +23,8 @@ universe u
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
+
+set_option linter.style.haveILetI false
 
 /-- Representative-level coefficient transport.  The source and target derived objects
 are fixed representatives, with the second representative K-injective.  The arbitrary
@@ -51,6 +55,19 @@ theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)
             (DerivedCategory.Q.obj Lc)),
             (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj
               (DerivedCategory.Q.obj Ic))) := by
-  sorry
+  let F := finiteCoefficientIntrinsicRealization X A
+  letI : F.IsEquivalence := (finiteCoefficientIntrinsicRealization_exact X A).1
+  letI : F.PreservesKInjectiveComplexes :=
+    Functor.preservesKInjectiveComplexes_of_isEquivalence F
+  obtain ⟨e₁⟩ := intrinsicSiteHom_transport_chain X A Lc Ic
+  obtain ⟨e₂⟩ := derivedInternalHomOfUniverses_obj_iso.{u + 1, u, u}
+    (ProEt.topology X) (proEtaleConstantRing X A)
+    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj Lc))
+    (F.mapDerivedCategory.obj (DerivedCategory.Q.obj Ic))
+    ((F.mapHomologicalComplex (.up ℤ)).obj Lc)
+    ((F.mapHomologicalComplex (.up ℤ)).obj Ic)
+    (F.mapDerivedCategoryFactors.app Lc).symm
+    (F.mapDerivedCategoryFactors.app Ic).symm
+  exact ⟨e₁ ≪≫ e₂.symm⟩
 
 end AlgebraicGeometry.ProEtale
