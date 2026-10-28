@@ -12,30 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Transport the normalized section adjunctions through coefficient change and apply the ring-sheaf change-adjunction identity. Substitute the pullback square and use beta naturality at the geometric counit to obtain the projection equality.",
+   "text": "The normalization D.thetaNormalization identifies theta.hom with the inverse scalar mate of the inverse restriction/pullback square. Apply Mathlib iterated_mateEquiv_conjugateEquiv and the inverse law of mateEquiv: the conjugate defining restrictionPush is exactly the geometric mate of that inverse square. This calculation is the private generic lemma conjugate_pushHom.",
    "uses": [
-    "new-sfb-finite-free-scalar-derived-comparison-beta-normalized",
-    "lem-sfb-kflat-scalar-comparison-normalization",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "def-sfb-integral-finite-scalar-model-interfaces",
+    "lem-trf-iterated-square-mates"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Formal properties paragraphs"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For any square s and geometric adjunct v, the unit equation unit_mateEquiv and naturality of its mate show that the adjunct of s followed by restricted v equals restriction of the adjunct of v followed by the mate of s. Apply this to the inverse restriction/pullback square and v = theta.inv followed by scalar extension of the geometric counit. This rewrites restricted gamma followed by restrictionPush as one geometric adjunct.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Move beta_Y and the pushed-forward beta_X inverse inside that adjunct by naturality of homEquiv. Use hpull at Rf_*K. Naturality of beta_X at the geometric counit moves the coefficient change past beta_X; its hom and inverse cancel. Bifunctoriality of tensor combines modelPull.hom tensor identity with identity tensor counit. The resulting adjunct is exactly the definition of projection. This calculation is implemented by the proved private generic lemma scalar_projection, specialized to the existing internal-module derived categories.",
+   "uses": [
+    "def-sfb-integral-finite-scalar-model-interfaces"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-sfb-finite-free-scalar-derived-comparison-beta-normalized",
-  "lem-sfb-kflat-scalar-comparison-normalization",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "def-sfb-integral-finite-scalar-model-interfaces",
+  "lem-trf-iterated-square-mates",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "E3",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Formal properties paragraphs"
+  "place": "Formal properties: formal mate calculation using the specified scalar and geometric adjunctions directly; no transport to section modules required."
  },
  "mathlib_searches": [
   {
@@ -91,9 +100,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V8",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261028T020832-L-2552555",
+  "landing": "20261028T034732-L-3538775",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

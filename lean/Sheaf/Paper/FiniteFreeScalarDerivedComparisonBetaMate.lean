@@ -23,6 +23,89 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
+attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
+  Functor.leftDerivedFunctor Functor.rightDerivedFunctor
+  DerivedCategory.monoidalClosed Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+
+private theorem conjugate_pushHom
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : F₁ ⊣ U₁) (b₂ : F₂ ⊣ U₂)
+    (e : F₂ ⋙ R₂ ≅ R₁ ⋙ F₁) (θ : F₁ ⋙ L₂ ≅ L₁ ⋙ F₂)
+    (hθ : θ.hom = Adjunction.pushHomOfComapIso a₁ a₂ e) :
+    conjugateEquiv (a₁.comp b₂) (b₁.comp a₂) θ.hom =
+      (mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+  have hm : mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ θ.hom) =
+      TwoSquare.mk _ _ _ _ e.inv := by
+    rw [hθ]
+    exact (mateEquiv a₁ a₂).apply_symm_apply (TwoSquare.mk _ _ _ _ e.inv)
+  have h := iterated_mateEquiv_conjugateEquiv a₁ a₂ b₁ b₂
+    (TwoSquare.mk _ _ _ _ θ.hom)
+  rw [hm] at h
+  exact h.symm
+
+private theorem mate_adjunct
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : TwoSquare G L L' H)
+    (M : A) (N : B) (v : L.obj M ⟶ N) :
+    adj'.homEquiv _ _ (s.app M ≫ H.map v) =
+      G.map (adj.homEquiv M N v) ≫ (mateEquiv adj adj' s).app N := by
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hu := unit_mateEquiv adj adj' s M
+  dsimp only [Functor.id_obj] at hu
+  rw [← Category.assoc, ← hu, Category.assoc]
+  have hn := (mateEquiv adj adj' s).natTrans.naturality v
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Category.assoc, ← G.map_comp]
+
+private theorem scalar_projection
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [MonoidalCategory A] [MonoidalCategory C]
+    {L : A ⥤ C} {R : C ⥤ A} {L' : B ⥤ D} {R' : D ⥤ B}
+    {E : A ⥤ B} {V : B ⥤ A} {E' : C ⥤ D} {V' : D ⥤ C}
+    (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (s : L' ⋙ V' ≅ V ⋙ L) (θ : L ⋙ E' ≅ E ⋙ L')
+    (d : R' ⋙ V ≅ V' ⋙ R)
+    (hd : d.hom = (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans)
+    {BY : A} {BX : C} (βY : tensorLeft BY ≅ E ⋙ V) (βX : tensorLeft BX ≅ E' ⋙ V')
+    (μ : ∀ M N : A, L.obj (M ⊗ N) ⟶ L.obj M ⊗ L.obj N) (e : L.obj BY ≅ BX)
+    (hpull : ∀ M : A,
+      L.map (βY.hom.app M) ≫ s.inv.app (E.obj M) ≫ V'.map (θ.inv.app M) =
+        μ BY M ≫ (e.hom ⊗ₘ 𝟙 (L.obj M)) ≫ βX.hom.app (L.obj M)) (K : C) :
+    βY.hom.app (R.obj K) ≫
+        V.map (adj'.homEquiv _ _ (θ.inv.app (R.obj K) ≫ E'.map (adj.counit.app K))) ≫
+        d.hom.app (E'.obj K) ≫ R.map (βX.inv.app K) =
+      adj.homEquiv _ _ (μ BY (R.obj K) ≫ (e.hom ⊗ₘ adj.counit.app K)) := by
+  have ht := mate_adjunct adj' adj (TwoSquare.mk _ _ _ _ s.inv) _ _
+    (θ.inv.app (R.obj K) ≫ E'.map (adj.counit.app K))
+  change adj.homEquiv _ _
+      (s.inv.app (E.obj (R.obj K)) ≫ V'.map _) =
+    V.map _ ≫ (mateEquiv adj' adj (TwoSquare.mk _ _ _ _ s.inv)).natTrans.app
+      (E'.obj K) at ht
+  rw [hd]
+  slice_lhs 2 3 => rw [← ht]
+  erw [← adj.homEquiv_naturality_right
+    (s.inv.app (E.obj (R.obj K)) ≫
+      V'.map (θ.inv.app (R.obj K) ≫ E'.map (adj.counit.app K))) (βX.inv.app K)]
+  erw [← adj.homEquiv_naturality_left (βY.hom.app (R.obj K))]
+  apply adj.homEquiv _ _ |>.congr_arg
+  simp only [Functor.map_comp, Category.assoc]
+  slice_lhs 1 3 => rw [hpull]
+  have hn := βX.hom.naturality (adj.counit.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
+  simp only [Category.assoc]
+  erw [← reassoc_of% hn]
+  simp only [Iso.hom_inv_id_app, Category.comp_id]
+  congr 1
+  exact (tensorHom_comp_whiskerLeft e.hom (𝟙 _) (adj.counit.app K)).trans
+    (by rw [Category.id_comp])
+
+set_option maxHeartbeats 500000 in
+-- Instantiating the generic mate calculation compares large derived-functor interfaces.
 /--
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
@@ -59,6 +142,17 @@ theorem finiteFreeScalarDerivedComparison_beta_mate
         (moduleObjectDerivedPushforward Λ.X f).map ((β X).inv.app K) =
       projection Λ f (DerivedCategory.Q.obj (complex Λ S Y))
         (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K := by
-  sorry
+  have _ := hβ
+  intro X Y f K
+  let d := derivedComapUpperStarIso (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom f
+  have hd : (restrictionPush D a f).hom =
+      (mateEquiv (geometricAdjunction Λ' f) (geometricAdjunction Λ f)
+        (TwoSquare.mk _ _ _ _ d.inv)).natTrans :=
+    conjugate_pushHom (scalarAdjunction a Y) (scalarAdjunction a X)
+      (geometricAdjunction Λ f) (geometricAdjunction Λ' f) d (D.theta a f)
+      (D.thetaNormalization a f)
+  exact scalar_projection (geometricAdjunction Λ f) (geometricAdjunction Λ' f)
+    d (D.theta a f) (restrictionPush D a f) hd (β Y) (β X)
+    (tensorPull Λ f) (modelPull Λ S f) (hpull X Y f) K
 
 end AlgebraicGeometry.ProEtale.IntegralFiniteScalar
