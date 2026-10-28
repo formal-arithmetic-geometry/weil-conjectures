@@ -15,28 +15,86 @@
  ],
  "proof": [
   {
-   "text": "Identify the kernel of the successive quotient with the ideal-power layer, balance the derived tensor using the compatible coefficient maps, and transport the supplied residue-chart isomorphism through derived tensor descent. Exact restriction to the chart preserves the comparison.",
+   "text": "Identify the actual coefficient kernel as the restriction of the constant residue ideal layer, using the ordinary kernel comparison. This retains the successor coefficient action.",
    "uses": [
     "def-weil-pbc-finite-quotient-coefficient-layer-data",
     "def-weil-pbc-finite-quotient-layer-tensor-complex",
     "def-weil-pbc-finite-perfect-quotient-model-data",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-pbc-ringed-derived-restriction"
+    "lem-weil-pbc-finite-quotient-layer-kernel-constant-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Resolve the successor reduction by a K-flat complex. Change of rings preserves K-flatness, and ordinary tensor cancellation gives a natural chain isomorphism. The published degree-zero K-flat tensor comparison and scalar-extension computation give the derived balancing isomorphism. Composition of derived scalar extension and the projection equation identify its residue input with the zeroth reduction of M.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core",
+    "lem-weil-pbc-finite-quotient-model-residue-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact slice restriction preserves K-flat complexes. Its ordinary tensor comparison and the degree-zero tensor calculation give compatibility with tensor by the restricted residue layer. Scalar restriction commutes with slice restriction as an exact functor, hence also on derived categories.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded above projective complex P has a K-flat constant realization: lifting and ring-equivalence restriction preserve projectivity, projective modules are flat, constant realization preserves flatness, and bounded above flat complexes are K-flat. Compute tensor with the layer term by term. The ordinary tensor comparison identifies this complex with the successor constant layer-tensor model. The coefficient isomorphisms make ordinary scalar change exact and identify it with derived scalar change.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-layer-tensor-complex",
+    "def-weil-pbc-finite-perfect-quotient-model-data",
+    "lem-sfb-constant-module-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-weil-pbc-finite-quotient-layer-tensor-model-homology-identification",
+    "lem-weil-pbc-finite-quotient-layer-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the supplied representative-based chart isomorphism to exact derived restriction. Apply the slice tensor and scalar-restriction functors to it, and compose with balancing, slice compatibility, and the explicit chart computation. This proves the original derived slice isomorphism without any change of statement.",
+   "uses": [
+    "lem-weil-pbc-finite-quotient-model-residue-comparison",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-quotient-coefficient-layer-data",
   "def-weil-pbc-finite-quotient-layer-tensor-complex",
   "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-weil-pbc-finite-quotient-layer-kernel-constant-comparison",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "def-weil-pbc-ringed-derived-restriction"
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core",
+  "lem-weil-pbc-finite-quotient-model-residue-comparison",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-constant-module-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-finite-quotient-layer-tensor-model-homology-identification",
+  "lem-weil-pbc-finite-quotient-layer-ordinary-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 094I and 06YU"
+  "place": "Tag 094I displayed layer-balancing identity, with Tags 06YU and 06YY; G1 Lean proof from two ordinary comparisons"
  },
  "mathlib_searches": [
   {
@@ -107,9 +165,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q9",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261028T020700-L-2536935",
+  "landing": "20261028T055648-L-792505",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
