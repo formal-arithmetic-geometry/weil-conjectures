@@ -33,7 +33,12 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (.of D.k))]
   (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- Scalar compatibility for normalized finite exceptional comparisons.
+/-- STATEMENT-DISPUTED: `FiniteExceptionalFormulaCore` permits independently chosen
+finite exceptional identifications at each coefficient stage and has no field relating
+them across scalar extensions. Thus the displayed scalar equation is not forced by the
+stated hypotheses.
+
+Scalar compatibility for normalized finite exceptional comparisons.
 Source: thm-coef-qbar-verdier, retained proof step 9.
 (blueprint: lem-coef-qbar-finite-exceptional-formula-scalar)
 
