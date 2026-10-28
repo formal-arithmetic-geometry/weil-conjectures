@@ -10,6 +10,8 @@ public import Sheaf.Paper.SemilinearFieldOperationLifts
 public import Sheaf.Paper.FrobeniusGeometricExchange
 import Sheaf.Paper.ConstantGeometricStalkUnit
 public import Sheaf.Paper.RationalConstantUnitFrobenius
+import Sheaf.Paper.CommonStagePullbackCoefficientUnit
+import Sheaf.Paper.CommonStageCompositorIntegralNormalization
 
 /-! # Frobenius coherence of the normalized constant unit
 
@@ -19,11 +21,18 @@ Source: constant comparison in the proof of purity/trace equivariance, preceding
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
+set_option Elab.async false
+set_option backward.defeqAttrib.useBackward true
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstantPurityFrobenius
+
+attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
+  Scheme.residueField completedIntegralCoefficientSheafUnrestricted
 
 section Unit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -132,16 +141,51 @@ def commonUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
         D hl f)
 end CommonUnit
 
+private theorem unit_conjugation {C B : Type*} [Category* C] [Category* B]
+    (F : C ⥤ B) (S : C ⥤ C) (T : B ⥤ B)
+    (s : S ≅ 𝟭 C) (t : T ≅ 𝟭 B) {P Q : C} (a : P ⟶ Q)
+    (bP : T.obj (F.obj P) ≅ F.obj (S.obj P))
+    (bQ : T.obj (F.obj Q) ≅ F.obj (S.obj Q))
+    (hP : bP ≪≫ F.mapIso (s.app P) = t.app (F.obj P))
+    (hQ : bQ ≪≫ F.mapIso (s.app Q) = t.app (F.obj Q)) :
+    bP.hom ≫ F.map (S.map a) ≫ bQ.inv = T.map (F.map a) := by
+  apply (cancel_mono bQ.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  apply (cancel_mono (F.map (s.hom.app Q))).1
+  have hp := congrArg Iso.hom hP
+  have hq := congrArg Iso.hom hQ
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] at hp hq
+  rw [Category.assoc, ← F.map_comp, s.hom.naturality, F.map_comp,
+    ← Category.assoc, hp, Category.assoc, hq]
+  exact (t.hom.naturality (F.map a)).symm
+
+-- Normalize cached category wrappers without unfolding the derived constructions.
+attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback
+  commonStagePullbackComparison
+  sfRationalScalarExtension operationStageTransitionIso
+  GeneralAlgebraicallyClosedCoefficients.unitor
+  StageSystem.PairCategory.mkHom ScalarLocalization.category
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
+  StageSystem.PairCategory.categoryStruct Preadditive.fullSubcategory
+set_option linter.auxLemma false in
+set_option allowUnsafeReducibility true in
+attribute [local reducible] StageSystem.ι commonStagePullbackObject
+  GeneralAlgebraicallyClosedCoefficients.Stage
+  GeneralAlgebraicallyClosedCoefficients.stageCategory
+  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
+  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
+  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
+
 /-- Finite-stage representative formula for the common-stage pullback.
 Source: the common-stage passage in the normalized constant-unit proof.
 (blueprint: lem-pur-common-constant-unit-frobenius-transport).
-Proof: unfold the chosen common-stage pullback representative at a common finite
-coefficient field.  Its map formula is the rational pullback map conjugated by
-the recorded source and target comparison isomorphisms.  At a same-stage arrow
-these comparisons are the identity transports, so the result is exactly the
-stage inclusion of the rational pullback map.  The equality is heterogeneous
-because the chosen object representatives carry proof-irrelevant endpoint
-certificates. -/
+Proof: apply the prescribed map formula to the self-stage representative of a.
+The coefficient-unit normalization identifies each boundary comparison after
+composition with the transition unitor. Naturality of that unitor cancels the
+boundary comparisons, leaving the self-transition of the rational pullback map.
+Its representative is exactly the stage inclusion. The recorded object
+comparisons account for the heterogeneous endpoints. -/
 theorem commonStageDerivedPullback_map_inclusion
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -157,20 +201,175 @@ theorem commonStageDerivedPullback_map_inclusion
       ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map
         ((rationalDerivedPullback l
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).map a)) := by
-  sorry
+  unfold commonStageDerivedPullback
+  have hm := (commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.2
+    ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P)
+    ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj Q) L le_rfl le_rfl
+    (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T (le_refl L)).map a)
+  have hc := unit_conjugation
+    (rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f)
+    ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).T (le_refl L))
+    ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T (le_refl L))
+    (operationStageTransitionIso l Ω Y L L le_rfl ≪≫
+      GeneralAlgebraicallyClosedCoefficients.unitor l Ω Y L)
+    (operationStageTransitionIso l Ω X L L le_rfl ≪≫
+      GeneralAlgebraicallyClosedCoefficients.unitor l Ω X L)
+    a
+    (commonStagePullbackComparison l Ω f
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P) L le_rfl)
+    (commonStagePullbackComparison l Ω f
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj Q) L le_rfl)
+    (commonStagePullbackComparison_self_unit l Ω f _)
+    (commonStagePullbackComparison_self_unit l Ω f _)
+  exact hm.trans (heq_of_eq (congrArg
+    (GeneralAlgebraicallyClosedCoefficients.ofHom
+      (commonStagePullbackObject l Ω f
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P))
+      (commonStagePullbackObject l Ω f
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj Q)) L le_rfl le_rfl) hc))
 
+
+private theorem map_heq {C B : Type*} [Category* C] [Category* B] (F : C ⥤ B)
+    {A B A' B' : C} (ha : A = A') (hb : B = B')
+    {a : A ⟶ B} {b : A' ⟶ B'} (h : HEq a b) : HEq (F.map a) (F.map b) := by
+  cases ha
+  cases hb
+  cases h
+  rfl
+
+private theorem inv_heq {C : Type*} [Category* C]
+    {A B A' B' : C} (ha : A = A') (hb : B = B')
+    {a : A ≅ B} {b : A' ≅ B'} (h : HEq a.hom b.hom) : HEq a.inv b.inv := by
+  cases ha
+  cases hb
+  have e : a = b := Iso.ext (eq_of_heq h)
+  cases e
+  rfl
+
+private theorem comp_heq {C : Type*} [Category* C]
+    {A B D A' B' D' : C}
+    {a : A ⟶ B} {b : B ⟶ D} {a' : A' ⟶ B'} {b' : B' ⟶ D'}
+    (ha : HEq a a') (hb : HEq b b') (hA : A = A') (hB : B = B') (hD : D = D') :
+    HEq (a ≫ b) (a' ≫ b') :=
+  heq_comp hA hB hD ha hb
+
+private theorem map_three_two {C B : Type*} [Category* C] [Category* B] (I : C ⥤ B)
+    {A₀ A₁ A₂ A₃ A₄ : C} {a : A₀ ⟶ A₁} {b : A₁ ⟶ A₂} {c : A₂ ⟶ A₃}
+    {d : A₀ ⟶ A₄} {e : A₄ ⟶ A₃} (h : a ≫ b ≫ c = d ≫ e) :
+    I.map a ≫ I.map b ≫ I.map c = I.map d ≫ I.map e := by
+  simpa only [Functor.map_comp] using congrArg I.map h
+
+private theorem eqToHom_map_heq {C B : Type*} [Category* C] [Category* B]
+    (I : C ⥤ B) {α : Sort*} (F : α → B) (G : α → C)
+    (ho : ∀ a, F a = I.obj (G a)) {a b : α} (h : a = b) :
+    HEq (eqToHom (congrArg F h)) (I.map (eqToHom (congrArg G h))) := by
+  cases h
+  change HEq (𝟙 (F a)) (I.map (𝟙 (G a)))
+  rw [I.map_id]
+  have hid {U V : B} (e : U = V) : HEq (𝟙 U) (𝟙 V) := by
+    cases e
+    rfl
+  exact hid (ho a)
+
+private theorem pullback_stage_obj
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (P : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L) :
+    (commonStageDerivedPullback l Ω f).obj
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P) =
+      (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
+        ((rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).obj P) := by
+  unfold commonStageDerivedPullback
+  exact (commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec.1 _
+
+private theorem pullback_stage_obj_two
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Z ⟶ X)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (P : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L) :
+    (commonStageDerivedPullback l Ω g).obj
+        ((commonStageDerivedPullback l Ω f).obj
+          ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P)) =
+      (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj
+        ((rationalDerivedPullback l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) g).obj
+          ((rationalDerivedPullback l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).obj P)) := by
+  exact (congrArg (commonStageDerivedPullback l Ω g).obj
+    (pullback_stage_obj l Ω f L P)).trans (pullback_stage_obj l Ω g L _)
+
+private theorem square_stage_heq
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (gX : X ⟶ X) (gY : Y ⟶ Y) (h : gX ≫ f = f ≫ gY)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (P : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y L) :
+    HEq (podCommonSquarePullbackComponent l Ω f gX gY h
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P)).hom
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).map
+        (podRationalSquarePullbackComponent l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f gX gY h P).hom) := by
+  let I := GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) L
+  have ho (k : X ⟶ Y) := pullback_stage_obj l Ω k L P
+  have hleft : HEq
+      (pullbackTensorCommonComposition l Ω f gX
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P)).hom
+      (I.map (pullbackTensorRationalComposition l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f gX P).hom) :=
+    commonStageCompositor_integral l Ω gX f _
+  have hright : HEq
+      (pullbackTensorCommonComposition l Ω gY f
+        ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P)).hom
+      (I.map (pullbackTensorRationalComposition l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) gY f P).hom) :=
+    commonStageCompositor_integral l Ω f gY _
+  have hi := inv_heq
+    (a := pullbackTensorCommonComposition l Ω f gX
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P))
+    (b := I.mapIso (pullbackTensorRationalComposition l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f gX P))
+    (ho (gX ≫ f)) (pullback_stage_obj_two l Ω f gX L P) hleft
+  have hm := eqToHom_map_heq I
+    (fun k : X ⟶ Y ↦ (commonStageDerivedPullback l Ω k).obj
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj P))
+    (fun k : X ⟶ Y ↦ (rationalDerivedPullback l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) k).obj P) ho h
+  have hc := comp_heq hm hright (ho (gX ≫ f)) (ho (f ≫ gY))
+    (pullback_stage_obj_two l Ω gY f L P)
+  have hall := comp_heq hi hc (pullback_stage_obj_two l Ω f gX L P)
+    (ho (gX ≫ f)) (pullback_stage_obj_two l Ω gY f L P)
+  simp only [Functor.mapIso_inv] at hall
+  rw [← I.map_comp, ← I.map_comp] at hall
+  simpa only [podCommonSquarePullbackComponent, podRationalSquarePullbackComponent,
+    Iso.trans_hom, Iso.symm_hom, eqToIso.hom] using hall
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] FiniteFieldDatum.geometricFiber CategoryTheory.Aut
 
 /-- The normalized completed constant unit commutes with the geometric Frobenius square.
 Source: purity/trace equivariance proof, canonical constant comparison preceding Step 1.
 (blueprint: lem-pur-common-constant-unit-frobenius).
-Proof: at each positive coefficient quotient the pullback unit is multiplication by
-constant sections. Constant-ring composition identifies its two composites around the
-scheme square: both send each constant section to itself. These equalities respect the
-actual quotient transitions. Apply the whole-system derived-limit functor, using the
-normalized strict unit with zero shifted-cone component. Its identification for an
-isomorphism is integralUnit_canonicalWeil. Rationalization and the least-stage inclusion
-preserve the equation, with their recorded object and compositor comparisons. This gives
-the displayed common-stage equation, also for empty schemes and identity morphisms. -/
+Proof: apply rationalizedUnit_frobenius at the least coefficient field. Its unit
+agrees with rationalUnit because both use the same uniquely normalized strict chain
+unit. The common unit and constant Weil structures are the included rational maps,
+preceded by their recorded object comparisons. The inclusion map formula identifies
+both pullbacks of these arrows. The common compositor normalization identifies the
+square comparison, including its inverse and the equality of scheme composites.
+Functoriality of the inclusion and heterogeneous composition therefore transport the
+rational equation to the displayed equation. This also covers empty schemes and
+identity morphisms. -/
 theorem commonUnit_frobenius
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -190,6 +389,50 @@ theorem commonUnit_frobenius
           (constantWeilAlgebraicallyClosedComplex l D hl Y₀ Ω).str.hom ≫ u.hom =
       (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).map u.hom ≫
         (constantWeilAlgebraicallyClosedComplex l D hl X₀ Ω).str.hom  := by
-  sorry
+  let := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
+  let := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
+  let L := Padic.finiteCoefficientBase l Ω
+  let E := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L
+  let f := FrobeniusExchange.fiberMap D f₀
+  let X := (D.geometricFiber X₀).left
+  let Y := (D.geometricFiber Y₀).left
+  let gX := (D.geometricFrobenius X₀).hom
+  let gY := (D.geometricFrobenius Y₀).hom
+  let IX := GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) L
+  let IY := GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := Y) L
+  let KY := constantWeilRationalObject l E D hl Y
+  let KX := constantWeilRationalObject l E D hl X
+  let u := rationalizedUnit D l hl E f
+  have hu : HEq (commonUnit D l hl Ω f).hom (IX.map u.hom) := by
+    change HEq (eqToHom (pullback_stage_obj l Ω f L KY) ≫
+      IX.map (rationalUnit l E D hl f).hom) _
+    exact (eqToHom_comp_heq _ _).trans (by rfl)
+  have htY : HEq (constantWeilAlgebraicallyClosedComplex l D hl Y₀ Ω).str.hom
+      (IY.map (constantWeilRationalComplex l E D hl Y₀).str.hom) := by
+    change HEq (eqToHom (pullback_stage_obj l Ω gY L KY) ≫
+      IY.map (constantWeilRationalComplex l E D hl Y₀).str.hom) _
+    exact eqToHom_comp_heq _ _
+  have htX : HEq (constantWeilAlgebraicallyClosedComplex l D hl X₀ Ω).str.hom
+      (IX.map (constantWeilRationalComplex l E D hl X₀).str.hom) := by
+    change HEq (eqToHom (pullback_stage_obj l Ω gX L KX) ≫
+      IX.map (constantWeilRationalComplex l E D hl X₀).str.hom) _
+    exact eqToHom_comp_heq _ _
+  have hfu := (map_heq (commonStageDerivedPullback l Ω gX)
+      (pullback_stage_obj l Ω f L KY) rfl hu).trans
+    (commonStageDerivedPullback_map_inclusion l Ω gX L _ _ u.hom)
+  have hft := (map_heq (commonStageDerivedPullback l Ω f)
+      (pullback_stage_obj l Ω gY L KY) rfl htY).trans
+    (commonStageDerivedPullback_map_inclusion l Ω f L _ _
+      (constantWeilRationalComplex l E D hl Y₀).str.hom)
+  have hs := square_stage_heq l Ω f gX gY (zlFrobenius_naturality D f₀) L KY
+  have hleft := comp_heq hs
+    (comp_heq hft hu (pullback_stage_obj_two l Ω gY f L KY)
+      (pullback_stage_obj l Ω f L KY) rfl)
+    (pullback_stage_obj_two l Ω f gX L KY)
+    (pullback_stage_obj_two l Ω gY f L KY) rfl
+  have hright := comp_heq hfu htX (pullback_stage_obj_two l Ω f gX L KY)
+    (pullback_stage_obj l Ω gX L KX) rfl
+  have he := map_three_two IX (rationalizedUnit_frobenius D l hl E X₀ Y₀ f₀)
+  exact eq_of_heq (hleft.trans ((heq_of_eq he).trans hright.symm))
 
 end WeilConjectures.ConstantPurityFrobenius

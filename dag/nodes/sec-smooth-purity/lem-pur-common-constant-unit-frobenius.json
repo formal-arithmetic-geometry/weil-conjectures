@@ -24,14 +24,7 @@
  ],
  "proof": [
   {
-   "text": "For each positive quotient, proEtaleCoefficientInverseImageMap_comp identifies the two constant-section maps around the geometric Frobenius square. Both composites act as identity on each constant section and commute with quotient transitions.",
-   "uses": [
-    "lem-pur-proetale-constant-ring-composition"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply the rational-stage coherence theorem for the normalized unit, then apply the common-stage inclusion and its pullback comparison to obtain the displayed equation.",
+   "text": "Apply rationalizedUnit_frobenius at the least finite coefficient field. The rationalUnit constructor agrees definitionally with rationalizedUnit, since both use the same uniquely normalized strict chain unit.",
    "uses": [
     "lem-pur-common-constant-unit-frobenius-rational",
     "lem-zl-constant-geometric-stalk-unit"
@@ -39,24 +32,34 @@
    "elementary": true
   },
   {
-   "text": "Apply rationalization and the least finite-stage inclusion with their fixed object equalities and pullback-composition comparisons. Functoriality preserves the equation and identifies its two sides with the asserted maps.",
+   "text": "The common-stage map formula identifies pullback of each included rational arrow with the inclusion of its rational pullback. The common compositor normalization identifies the two composition components, including their inverses, with the included rational components; proof irrelevance transports the equality of scheme composites. The common units and constant Weil structures differ from the included rational maps only by the specified eqToIso source comparisons.",
    "uses": [
+    "lem-pur-common-constant-unit-frobenius-transport",
+    "lem-pur-common-stage-compositor-integral-normalization",
     "def-weil-derived-pullback-tensor-hom",
     "def-weil-constant-weil-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the stage inclusion to the rational equation. Functor.map_comp and heterogeneous composition identify its sides with the required common-stage composites; equal endpoints turn heterogeneous equality into the asserted equality.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-proetale-constant-ring-composition",
-  "lem-pur-completed-operation-tower-substitution",
-  "lem-zl-constant-geometric-stalk-unit",
   "lem-pur-common-constant-unit-frobenius-rational",
+  "lem-zl-constant-geometric-stalk-unit",
+  "lem-pur-common-constant-unit-frobenius-transport",
+  "lem-pur-common-stage-compositor-integral-normalization",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-constant-weil-structure"
+  "def-weil-constant-weil-structure",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J6",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
   "place": "Step 1, canonical constant input and normalized pullback-composition comparison"
  },
@@ -138,17 +141,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "J6",
   "result": "pass",
-  "landing": "20261028T020516-L-2518556",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.ConstantPurityFrobenius.commonUnit_frobenius"
-  ],
-  "sorry_after": [
-   "WeilConjectures.ConstantPurityFrobenius.commonStageDerivedPullback_map_inclusion",
-   "WeilConjectures.ConstantPurityFrobenius.commonUnit_frobenius"
-  ]
+  "landing": "20261028T034818-L-3551272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

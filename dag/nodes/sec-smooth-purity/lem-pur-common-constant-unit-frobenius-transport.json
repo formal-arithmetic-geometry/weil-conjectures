@@ -2,41 +2,39 @@
  "id": "lem-pur-common-constant-unit-frobenius-transport",
  "kind": "statement",
  "title": "Common-stage transport of rational normalized constant-unit coherence",
- "statement": "Given the rational-stage normalized constant-unit Frobenius coherence for the least finite coefficient field, the prescribed common-stage inclusion and pullback comparison satisfy the corresponding common-stage coherence equation.",
+ "statement": "Let $\\ell$ be prime, $\\Omega$ an algebraic closure of $\\mathbf Q_\\ell$, and $f:X\\to Y$ a scheme morphism such that $\\ell$ is invertible in every residue field of $X$ and $Y$. Use the common-stage categories and finite-stage inclusions $j_L$ of [def-weil-algebraically-closed-coefficients], and the rational and common-stage pullback functors of [def-weil-derived-pullback-tensor-hom]. For any finite coefficient stage $L$ and arrow $a:P\\to Q$ in the rational constructible category of $Y$ with coefficient field $L$, the common-stage pullback of $j_L(a)$ is heterogeneously equal to $j_L(Lf_L^*(a))$. The endpoint equalities are the prescribed object formulas identifying $Lf_\\Omega^*(j_L(P))$ and $Lf_\\Omega^*(j_L(Q))$ with $j_L(Lf_L^*(P))$ and $j_L(Lf_L^*(Q))$, respectively.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
   "place": "Step 1, passage from rational coefficients to the common stage"
  },
  "stmt_deps": [
-  "lem-pur-common-constant-unit-frobenius-rational",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-constant-weil-structure"
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Represent the common-stage maps at the least finite coefficient stage and expand the defining representative formulas for the common pullback and inclusion.",
+   "text": "Use the prescribed common-stage pullback map formula on the self-stage representative of the included arrow. The inclusion represents a by the self-transition functor applied to a.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": true
   },
   {
-   "text": "Transport the rational coherence equation through the inclusion functor; the recorded eqToIso object comparisons cancel by functoriality and proof irrelevance.",
+   "text": "Apply commonStagePullbackComparison_self_unit at the two endpoints. Naturality of the transition unit identifies the conjugated rational pullback map with the self-transition of the rational pullback of a. Passing to ofHom is precisely its stage inclusion. The recorded object equalities give heterogeneous equality.",
    "uses": [
-    "lem-pur-common-constant-unit-frobenius-rational",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-pur-common-stage-pullback-coefficient-unit"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-common-constant-unit-frobenius-rational",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-common-stage-pullback-coefficient-unit"
  ],
  "proof_origin": {
-  "by": "J3",
+  "by": "J6",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
   "place": "Step 1, passage from rational coefficients to the common stage"
  },
@@ -108,10 +106,49 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "J6",
   "result": "pass",
-  "landing": "20261028T020516-L-2518556",
-  "kind": "proof",
+  "landing": "20261028T034818-L-3551272",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "J6 stage 2",
+  "old_statement": "Given the rational-stage normalized constant-unit Frobenius coherence for the least finite coefficient field, the prescribed common-stage inclusion and pullback comparison satisfy the corresponding common-stage coherence equation.",
+  "what": "Correct the natural-language node to its existing Lean attachment. The old text described transport of the whole Frobenius equation, whereas the attached declaration is the finite-stage pullback-map formula. Its Lean signature is unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+   "place": "Step 1, passage from rational coefficients to the common stage"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-pur-common-constant-unit-frobenius-rational",
+   "def-weil-algebraically-closed-coefficients",
+   "def-weil-derived-pullback-tensor-hom",
+   "def-weil-constant-weil-structure"
+  ],
+  "old_proof": [
+   {
+    "text": "Represent the common-stage maps at the least finite coefficient stage and expand the defining representative formulas for the common pullback and inclusion.",
+    "uses": [
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Transport the rational coherence equation through the inclusion functor; the recorded eqToIso object comparisons cancel by functoriality and proof irrelevance.",
+    "uses": [
+     "lem-pur-common-constant-unit-frobenius-rational",
+     "def-weil-algebraically-closed-coefficients"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-common-constant-unit-frobenius-rational",
+   "def-weil-derived-pullback-tensor-hom",
+   "def-weil-algebraically-closed-coefficients"
+  ]
  }
 }
