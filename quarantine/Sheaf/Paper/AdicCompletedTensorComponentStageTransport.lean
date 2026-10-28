@@ -62,16 +62,23 @@ private theorem whisker_app
     {F G : A ⥤ B} (e : F ≅ G) (H : B ⥤ C) (x : A) :
     (Functor.isoWhiskerRight e H).app x = H.mapIso (e.app x) := rfl
 
-private theorem components_whisker_app
-    {A B : Type*} [Category* A] [Category* B]
-    (I : A ⥤ B) (V : A × A ⥤ A) (T : A ⥤ A) (F : A × A ⥤ B)
-    (e : T ≅ 𝟭 A)
-    (c : ∀ p, F.obj p ≅ ((T.prod T) ⋙ (V ⋙ I)).obj p)
-    (hc : ∀ {p q} (f : p ⟶ q), F.map f ≫ (c q).hom =
-      (c p).hom ≫ ((T.prod T) ⋙ (V ⋙ I)).map f) (x y : A) :
-    ((NatIso.ofComponents c hc ≪≫
-      Functor.isoWhiskerRight (NatIso.prod e e) (V ⋙ I)).symm).app (x, y) =
-      (c (x, y) ≪≫ I.mapIso (V.mapIso (Iso.prod (e.app x) (e.app y)))).symm := by
+private theorem inclusion_comparison_app
+    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+    (K L : sfRationalConstructibleCategory l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
+    (commonInclusionTensorComparison l (PadicAlgCl l) X E).app (K, L) =
+      (commonInclusionTensorModel l (PadicAlgCl l) X E K L ≪≫
+        (GeneralAlgebraicallyClosedCoefficients.inclusion
+          (l := l) (Ω := PadicAlgCl l) (Y := X) E).mapIso
+          ((rationalDerivedTensor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).mapIso
+            (Iso.prod
+              ((operationStageTransitionIso l (PadicAlgCl l) X E E le_rfl ≪≫
+                GeneralAlgebraicallyClosedCoefficients.unitor l (PadicAlgCl l) X E).app K)
+              ((operationStageTransitionIso l (PadicAlgCl l) X E E le_rfl ≪≫
+                GeneralAlgebraicallyClosedCoefficients.unitor l (PadicAlgCl l) X E).app
+                  L)))).symm := by
+  unfold commonInclusionTensorComparison
   rfl
 
 private theorem inclusion_comparison_eq
@@ -80,27 +87,10 @@ private theorem inclusion_comparison_eq
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
     (commonInclusionTensorComparison l (PadicAlgCl l) X E).app (K, L) =
       stageTensor l X (PadicAlgCl l) E K L := by
+  rw [inclusion_comparison_app]
   apply (stageTensor_existsUnique l X (PadicAlgCl l) E K L).unique
-  · let I := GeneralAlgebraicallyClosedCoefficients.inclusion
-      (l := l) (Ω := PadicAlgCl l) (Y := X) E
-    let V := rationalDerivedTensor l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
-    let T := (GeneralAlgebraicallyClosedCoefficients.stageSystem l
-      (PadicAlgCl l) X).T (le_rfl : E ≤ E)
-    let F := (I.prod I) ⋙ commonStageDerivedTensor l (PadicAlgCl l) X
-    let e := operationStageTransitionIso l (PadicAlgCl l) X E E le_rfl ≪≫
-      GeneralAlgebraicallyClosedCoefficients.unitor l (PadicAlgCl l) X E
-    let c (p : sfRationalConstructibleCategory l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ×
-        sfRationalConstructibleCategory l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :=
-      commonInclusionTensorModel l (PadicAlgCl l) X E p.1 p.2
-    have hcomp := components_whisker_app I V T F e c
-      (fun f ↦ commonInclusionTensorModel_naturality l (PadicAlgCl l) X E f.1 f.2) K L
-    unfold stageTensorFormula commonInclusionTensorComparison
-    dsimp only
-    refine (heq_of_eq hcomp).trans ?_
-    dsimp only [c, I, V, T, F, e]
+  · unfold stageTensorFormula
+    refine heq_of_eq ?_
     unfold commonInclusionTensorModel
     simp only [Functor.mapIso_trans, Iso.trans_assoc]
     dsimp only [Functor.id_obj, Functor.comp_obj, Functor.prod_obj]
