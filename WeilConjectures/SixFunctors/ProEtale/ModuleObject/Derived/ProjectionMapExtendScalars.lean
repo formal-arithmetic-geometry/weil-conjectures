@@ -58,7 +58,8 @@ noncomputable def derivedExtendScalarsTensorIso (X : Scheme.{u}) :
     (Functor.postcompose₂.obj (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor).obj
         (curriedTensor (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
           (condensedRingObj Λ X)))) ≅
-      (((Functor.whiskeringLeft₂ _).obj (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor).obj
+      (((Functor.whiskeringLeft₂ _).obj
+        (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor).obj
         (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor).obj
           (curriedTensor (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
             (condensedRingObj Λ' X)))) :=
@@ -81,9 +82,9 @@ theorem comparisonCompatible_derivedPullIso :
     Adjunction.ComparisonCompatible (derivedPullIso a f).symm
       (leftDerivedUpperStarTensor Λ f) (leftDerivedUpperStarTensor Λ' f)
       (derivedExtendScalarsTensorIso a X) (derivedExtendScalarsTensorIso a Y) := by
-  letI := Mod.extendScalarsMonoidal (coefficientMap a X)
-  letI := Mod.extendScalarsMonoidal (coefficientMap a Y)
-  haveI := isMonoidal_pullIso_hom a f
+  let := Mod.extendScalarsMonoidal (coefficientMap a X)
+  let := Mod.extendScalarsMonoidal (coefficientMap a Y)
+  have := isMonoidal_pullIso_hom a f
   intro K M
   have h := Functor.map_leftDerivedTensorComparison_comp_eq_of_iso
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ (f)^*⟦Λ⟧

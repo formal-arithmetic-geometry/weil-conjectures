@@ -40,12 +40,29 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The pullback of module objects preserves flat objects: it preserves K-flat complexes, and an
 object is flat if and only if it is K-flat as a complex concentrated in degree `0`. -/
-instance preservesFlat_upperStar : ((f)^*⟦Λ⟧).PreservesFlat := sorry
+instance preservesFlat_upperStar : ((f)^*⟦Λ⟧).PreservesFlat where
+  flat_obj {M} hM := by
+    rw [← CochainComplex.kFlat_single_obj_iff_flat _ 0] at hM ⊢
+    exact ObjectProperty.prop_of_iso _
+      ((HomologicalComplex.singleMapHomologicalComplex (f)^*⟦Λ⟧ (.up ℤ) 0).app M)
+      (kFlat_upperStar_mapHomologicalComplex_obj Λ f hM)
 
+set_option maxHeartbeats 1000000 in
+-- the images of complexes in the homotopy category are unfolded
 /-- The tensor comparison `Lf^*(K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` of the derived pullback of module
 objects is the generic tensor comparison of the left derived functor of the strong monoidal
 functor `f^*`. -/
 theorem leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :
-    leftDerivedUpperStarTensor Λ f = ((f)^*⟦Λ⟧).leftDerivedTensorComparison := sorry
+    leftDerivedUpperStarTensor Λ f = ((f)^*⟦Λ⟧).leftDerivedTensorComparison := by
+  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ f)
+    (leftDerivedUpperStarTensorRightCounit Λ f) (HomotopyCategory.quasiIso _ _)
+    (HomotopyCategory.quasiIso _ _) _ _ _ ?_
+  ext A B
+  have h₁ := leftDerivedUpperStarTensor_app_app_fac Λ f A B
+  have h₂ := ((f)^*⟦Λ⟧).leftDerivedTensorComparison_app_app_comp_tensorHom A B
+  rw [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
+  simp only [NatTrans.comp_app]
+  rw [leftDerivedUpperStarTensorRightCounit_app_app]
+  erw [reassoc_of% h₁, reassoc_of% h₂]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
