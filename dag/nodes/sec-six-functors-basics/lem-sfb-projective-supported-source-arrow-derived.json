@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-projective-supported-source-arrow-derived",
+ "kind": "lemma",
+ "title": "Derived-unit evaluation of the supported source",
+ "statement": "theorem supported_source_arrow_derived\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    (DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).map d.support₂.iso.hom ≫\n        diagonalTraceRightSingle\n          (CondensedRing.lowerStar Λ (secondProjection Y)) d.R₂\n          (source Λ Y) ≫\n        (secondDiagramPushIso Λ Y L d).hom.app\n          ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n            (source Λ Y)) =\n      (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, evaluation of the canonical right-derived unit on the supported source before cancellation."
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the canonical right-derived unit of the second projection on the chosen supported source. Use the support normalization to identify the ordinary source isomorphism with the closed diagonal followed by the second projection, then transport the resulting single comparison through the canonical derived pushforward comparison.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-projective-diagonal-pullback",
+    "lem-kun-right-derived-single-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, canonical right-derived unit evaluation on the supported source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "support source derived unit single comparison",
+   "results": "No existing theorem states the project-specific supported source evaluation.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the stated project comparison declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "diagonalTraceRightSingle source pushforward section",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical right-derived unit evaluation on supported source",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveSupportedSourceArrow",
+  "date": "2026-10-28",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-supported-source-arrow",
+   "place": "Second identity, evaluation of the canonical right-derived unit before cancellation.",
+   "via": [
+    "lem-sfb-projective-supported-source-arrow"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectiveSupportedSourceArrowDerived",
+  "file": "lean/Sheaf/Paper/ProjectiveSupportedSourceArrowDerived.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.supported_source_arrow_derived",
+  "statement": "theorem supported_source_arrow_derived\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    (DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).map d.support₂.iso.hom ≫\n        diagonalTraceRightSingle\n          (CondensedRing.lowerStar Λ (secondProjection Y)) d.R₂\n          (source Λ Y) ≫\n        (secondDiagramPushIso Λ Y L d).hom.app\n          ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n            (source Λ Y)) =\n      (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261028T020552-L-2525144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261028T020552-L-2525144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

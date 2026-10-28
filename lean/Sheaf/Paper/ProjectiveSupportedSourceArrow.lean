@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.ProjectiveDiagonalComposition
 public import Sheaf.Paper.RationalP1SecondPullComparison
 public import Sheaf.Paper.DiagonalCoefficientCategory
+import Sheaf.Paper.ProjectiveSupportedSourceArrowDerived
 
 /-! # Supported source arrow before tensor normalization -/
 
@@ -44,6 +45,8 @@ theorem supported_source_arrow
       (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫
         (moduleObjectDerivedPushforward Λ (secondProjection Y)).map
           (supportedUnitIso Λ Y).hom := by
-  sorry
+  dsimp only [DiagonalTrace.NormalizedSource.hom]
+  simpa only [DiagonalCoefficients.Modules, secondProjection, Category.assoc] using
+    supported_source_arrow_derived Λ Y L d
 
 end AlgebraicGeometry.ProEtale.RationalP1
