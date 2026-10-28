@@ -24,6 +24,8 @@ namespace WeilConjectures.IntegralVerdier
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] ProEtale.sheafBraidedCategory
 
+-- Preserve the published binders, including the unused normalization and resolution proofs.
+set_option linter.unusedVariables false in
 /-- A natural tensor square which holds on flat-term K-flat representatives holds
 on every pair in the derived category.
 
@@ -71,6 +73,46 @@ theorem finiteIntrinsicTensorSymmetry_extension
         (s.swap ((sfIntrinsicDerivedEquivalence X B).functor.obj K)
           ((sfIntrinsicDerivedEquivalence X B).functor.obj L)).hom ≫
             (finiteIntrinsicTensorRealization X B a).hom.app (L, K) := by
-  sorry
+  let D := DerivedCategory (Sheaf (ProEt.topology X)
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
+  let F := (sfIntrinsicDerivedEquivalence X B).functor
+  let T := CategoryTheory.MonoidalCategory.curriedTensor D
+  let r := finiteIntrinsicTensorRealization X B a
+  let swap := CategoryTheory.Prod.swap D D
+  let σ : F.prod F ⋙ a.tensor ⟶ swap ⋙ F.prod F ⋙ a.tensor :=
+    { app := fun Z ↦ (s.swap (F.obj Z.1) (F.obj Z.2)).hom
+      naturality := by
+        intro Z W f
+        exact hs _ _ _ _ (F.map f.1) (F.map f.2) }
+  let τ : Functor.uncurry.obj T ⟶ swap ⋙ Functor.uncurry.obj T :=
+    Functor.uncurry.map ((flipFunctor D D D).map b.inv) ≫
+      (Functor.uncurryObjFlip T).hom
+  have hτ (K L : D) : τ.app (K, L) = (b.inv.app L).app K := by
+    change (b.inv.app L).app K ≫ 𝟙 _ = _
+    exact Category.comp_id _
+  let α := r.hom ≫ Functor.whiskerRight τ F
+  let β := σ ≫ Functor.whiskerLeft swap r.hom
+  let P := finiteScalarFlatRepresentatives X B
+  let W := (Functor.whiskeringLeft
+    (P.FullSubcategory × P.FullSubcategory) (D × D)
+    (proEtaleDerivedCategory X B)).obj
+      (((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)))
+  obtain ⟨ff⟩ := finiteScalarRepresentativesFullyFaithful X B
+  have hW : W.map α = W.map β := by
+    ext Z
+    change r.hom.app (DerivedCategory.Q.obj Z.1.obj, DerivedCategory.Q.obj Z.2.obj) ≫
+      F.map (τ.app (DerivedCategory.Q.obj Z.1.obj, DerivedCategory.Q.obj Z.2.obj)) =
+      (s.swap (F.obj (DerivedCategory.Q.obj Z.1.obj))
+        (F.obj (DerivedCategory.Q.obj Z.2.obj))).hom ≫
+          r.hom.app (DerivedCategory.Q.obj Z.2.obj, DerivedCategory.Q.obj Z.1.obj)
+    rw [hτ]
+    exact hres Z.1.obj Z.2.obj Z.1.property Z.2.property
+  have h : α = β := ff.map_injective hW
+  intro K L
+  have hKL := congr_app h (K, L)
+  change r.hom.app (K, L) ≫ F.map (τ.app (K, L)) =
+    (s.swap (F.obj K) (F.obj L)).hom ≫ r.hom.app (L, K) at hKL
+  rw [hτ] at hKL
+  exact hKL
 
 end WeilConjectures.IntegralVerdier

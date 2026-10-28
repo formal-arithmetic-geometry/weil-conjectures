@@ -9,24 +9,30 @@
  },
  "proof": [
   {
-   "text": "Use naturality of the realization, hs and b to obtain natural transformations on the resolving subcategories, and apply finiteScalarRepresentativesFullyFaithful to extend their equality to all derived pairs.",
+   "text": "Let F be the intrinsic derived equivalence functor and r the specified tensor realization. The assumption hs defines a natural transformation sigma from the realized intrinsic tensor functor to its swapped functor. Flip b.inv, uncurry it and compose with the canonical uncurrying-flip isomorphism to obtain a natural transformation tau from the fixed tensor to its swapped functor. Form alpha = r.hom followed by tau whiskered with F, and beta = sigma followed by r.hom restricted along the swap. Both have the same source and target.",
    "uses": [
-    "lem-sf-finite-scalar-tensor-resolution",
-    "lem-sf-finite-intrinsic-tensor-symmetry-resolving"
+    "def-sf-finite-intrinsic-tensor-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the injectivity of restriction on natural transformations supplied by finiteScalarRepresentativesFullyFaithful. On a pair of flat-term K-flat representatives the components of alpha and beta are equal by hres; the canonical uncurrying-flip isomorphism contributes only an identity. Thus alpha = beta. Evaluating at an arbitrary derived pair gives the required square. No representative symmetry calculation or normalization hb is needed in this extension step.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-finite-scalar-tensor-resolution",
-  "lem-sf-finite-intrinsic-tensor-symmetry-resolving"
+  "def-sf-finite-intrinsic-tensor-realization",
+  "lem-sf-finite-scalar-tensor-resolution"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A7",
+  "group": "K9",
   "date": "2026-10-28",
-  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-finite-intrinsic-tensor-symmetry.proof.md",
-  "place": "The representative calculation and the resolving-class extension"
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Localization universal property, Tag 04VK; natural-transformation extension argument written in Lean by K9"
  },
  "mathlib_searches": [
   {
@@ -97,10 +103,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A7",
+  "group": "K9",
   "result": "pass",
-  "landing": "20261028T034650-L-3529080",
-  "kind": "interface",
+  "landing": "20261028T055714-L-797979",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
