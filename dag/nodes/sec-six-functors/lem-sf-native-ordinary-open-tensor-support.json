@@ -1,0 +1,184 @@
+{
+ "id": "lem-sf-native-ordinary-open-tensor-support",
+ "kind": "statement",
+ "title": "Ordinary derived tensor preserves the geometric open support",
+ "statement": "Fix k₀,l,U,Z,j as in the native open tensor data [def-sf-native-open-tensor-operations]. Write E′ for the exact derived ordinary adic extension by zero on the geometric open, R′ for exact derived ordinary restriction, and a′ for their localized sheaf adjunction. Let TB′ be the fixed ambient ordinary derived tensor in nativeDerivedClosedComparison [lem-sf-weil-native-closed-forgetful]. For every ordinary derived object M on U and N on Z, the counit a′.counit at TB′(E′ M,N) is an isomorphism. This only asserts support, with no chosen projection map, native presentation, Frobenius structure, or forgetting square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I"
+ },
+ "stmt_deps": [
+  "def-sf-native-open-tensor-operations",
+  "lem-sf-weil-native-closed-forgetful",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary open support theorem on the pro-etale ringed site applies to the actual adic coefficient sheaf. Represent M by a complex and N by a flat-term K-flat complex; the underived extension/tensor isomorphism identifies every ambient total-tensor summand with an extension from the geometric open. Naturality respects the signed differentials, and extension preserves the total coproducts.",
+   "uses": [
+    "lem-sf-open-tensor-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The ordinary tensor model of the fixed comparison identifies this total tensor with TB′(E′ M,N). Thus the object is in the essential image of E′. This argument works for the empty open and for unbounded complexes.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The underived ordinary open unit is invertible. Localizing its degreewise isomorphism gives an invertible derived unit. Thus E′ is fully faithful, and the adjunction counit is invertible on its essential image (Mathlib Adjunction.isIso_counit_app_iff_mem_essImage). Transport along the previous representative isomorphism.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-support",
+  "lem-sf-weil-native-closed-forgetful",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; restriction/support parts of native open tensor proof step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact open extension by zero has invertible counit on the derived tensor of an extended object with an arbitrary object",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "TrivSqZeroExt.invertibleEquivInvertibleFst",
+     "CategoryTheory.Abelian.Ext.comp_zero",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+     "ModuleCat.RestrictionCoextensionAdj.counit'",
+     "CategoryTheory.Abelian.Ext.zero_hom",
+     "HomologicalComplex.extend.d_none_eq_zero'",
+     "CategoryTheory.Abelian.Ext.zero_comp",
+     "TrivSqZeroExt.instInv"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "No derived support result: hits concern zero and extension constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Generic counit/essential-image criterion is available; still needs geometric tensor support."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*counit.*tensor|tensor.*essImage|restriction.*tensor",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "No ordinary pro-etale derived support result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorForgetNormalization",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Forgetting normalization: Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I",
+   "via": [
+    "new-lem-sf-native-open-tensor-forget-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryOpenTensorSupport",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryOpenTensorSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_open_tensor_support",
+  "statement": "theorem native_ordinary_open_tensor_support\n    (M : DerivedCategory (ProEtale.AdicSheaf l\n      (U ↘ Spec (CommRingCat.of k₀)).geometricFiber))\n    (N : DerivedCategory (ProEtale.AdicSheaf l\n      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)) :\n    IsIso ((ProEtale.adicOpenImmersionLowerShriekAdjunction l\n      (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapExactDerivedCategory.counit.app\n        ((nativeDerivedClosedComparison k₀ l Z).ordinaryClosed.tensor.obj\n          ((ProEtale.adicOpenImmersionLowerShriek l\n            (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory.obj M, N)))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.NativeOpenTensorForgetNormalization",
+  "worker": "stage3",
+  "summary": "Strict subargument of forgetting normalization; source proof recorded in the theorem docstring.",
+  "blueprint": "The native open tensor input used by the unchanged biduality unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-support",
+    "why": "The generic ordinary pro-etale open-support theorem supplies only essential-image membership for the ordinary adic coefficient model. No native forgetting or biduality assertion is taken from the other unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T055606-L-771561",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T055606-L-771561",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

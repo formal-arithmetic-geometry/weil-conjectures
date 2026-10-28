@@ -1,0 +1,192 @@
+{
+ "id": "lem-sf-native-open-tensor-restriction-forget",
+ "kind": "statement",
+ "title": "Forgetting the native restriction/tensor comparison",
+ "statement": "Fix the finite field k₀, coefficient prime l, and separated finite-type schemes U,Z with an open immersion j:U→Z over k₀. Let s be the native open sheaf data, rho the derived native restriction/tensor isomorphism, and c a presentation [def-sf-native-open-tensor-presentation-data] whose restriction, sheaf tensors, total tensors, derived tensors, K-flat predicates, models and summand insertions are the specified native ones. The equalities do not constrain c.E or c.gamma. There exists a natural ordinary restriction/tensor isomorphism rho′: TB′⋙R′ ≅ (R′×R′)⋙TA′ for the fixed ordinary tensor models [lem-sf-weil-native-closed-forgetful]. For every pair M,N of native ambient derived objects, FA(rho(M,N)) followed by the fixed open tensor comparison and the two forget/restriction comparisons equals the forget/restriction comparison followed by R′ of the ambient tensor comparison and rho′(FB M,FB N). No open tensor isomorphism gamma′, inverse-unit identity or gamma forgetting square is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL1, 0E8I and 015F: descend the restriction/tensor square before treating open extension"
+ },
+ "stmt_deps": [
+  "def-sf-native-open-tensor-presentation-data",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof": [
+  {
+   "text": "Use the balanced ordinary restriction/tensor isomorphism on the geometric open; it sends tensor generators to their restrictions. The localized coefficient map is invertible. The same construction on direct-sum total complexes commutes with both signed differentials.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I and localized ringed-site tensor restriction"
+   }
+  },
+  {
+   "text": "Use exact restriction, K-flat resolutions and the fixed ordinary tensor models to descend this comparison to rho′. Forgetting the native representatives gives the same resolutions, and s.restriction_forget identifies the degreewise maps.",
+   "uses": [
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The presentation restriction_summands identifies the total maps summand by summand; restriction_model then identifies the localization factorizations with rho. The two-variable localization universal property extends their equality to all derived pairs. The compositors of the exact functors are exactly the prescribed forget/restriction comparisons.",
+   "uses": [
+    "def-sf-native-open-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-weil-native-closed-forgetful",
+  "def-sf-native-open-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL1, 0E8I and 015F: descend the restriction/tensor square before treating open extension; restriction/support parts of native open tensor proof step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting Frobenius equivariant module structures commutes with the restriction and derived tensor comparison for an open immersion",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.toPresheafOfModules",
+     "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+     "PresheafOfModules.pushforward₀CompToPresheaf",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "SheafOfModules.forget",
+     "PresheafOfModules.forgetToPresheafModuleCatObjObj",
+     "AlgebraicGeometry.Scheme.Modules.restrict_map"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "No match: returned scheme-module restriction functors do not compare these native derived models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.mk'_homEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Only the generic adjunction API; no restriction/tensor forget square."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*counit.*tensor|tensor.*essImage|restriction.*tensor",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "No native derived forget comparison; hits concern monoidal category constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorForgetNormalization",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Forgetting normalization: Tags 0GL1, 0E8I and 015F: descend the restriction/tensor square before treating open extension",
+   "via": [
+    "new-lem-sf-native-open-tensor-forget-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorRestrictionForget",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorRestrictionForget.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_tensor_restriction_forget",
+  "statement": "theorem native_open_tensor_restriction_forget (s : NativeOpenTensorData k₀ l j)\n    (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅\n      (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)\n    (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z))\n    (_hc :\n      HEq c.R (upperStar k₀ l j) ∧\n      HEq c.SA (nativeOpenSheafTensor k₀ l U) ∧ HEq c.SB (nativeOpenSheafTensor k₀ l Z) ∧\n      HEq c.TA (nativeTensorTotal k₀ l U) ∧ HEq c.TB (nativeTensorTotal k₀ l Z) ∧\n      HEq c.DA (nativeDerivedTensor k₀ l U) ∧ HEq c.DB (nativeDerivedTensor k₀ l Z) ∧\n      HEq c.flatA (NativeIsKFlat k₀ l U) ∧ HEq c.flatB (NativeIsKFlat k₀ l Z) ∧\n      HEq c.modelA (nativeOpenTensorModel k₀ l U) ∧ HEq c.modelB (nativeOpenTensorModel k₀ l Z) ∧\n      HEq c.iA (nativeOpenTensorInsertion k₀ l U) ∧ HEq c.iB (nativeOpenTensorInsertion k₀ l Z) ∧\n      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho) :\n    ∃ rho' :\n      (nativeDerivedClosedComparison k₀ l Z).ordinaryClosed.tensor ⋙\n          (ProEtale.adicUpperStar l\n            (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory ≅\n        ((ProEtale.adicUpperStar l\n          (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory).prod\n          ((ProEtale.adicUpperStar l\n            (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory) ⋙\n              (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor,\n      ∀ M N,\n        (nativeForget k₀ l U).map (rho.hom.app (M, N)) ≫\n          (nativeDerivedClosedComparison k₀ l U).tensorComparison.hom.app\n            ((nativeOpenPull k₀ l j).obj M, (nativeOpenPull k₀ l j).obj N) ≫\n          (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor.map\n            (Prod.mkHom ((nativeOpenForgetPull k₀ l j).hom.app M)\n              ((nativeOpenForgetPull k₀ l j).hom.app N)) =\n        (nativeOpenForgetPull k₀ l j).hom.app ((nativeDerivedTensor k₀ l Z).obj (M, N)) ≫\n          (ProEtale.adicUpperStar l\n            (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory.map\n              ((nativeDerivedClosedComparison k₀ l Z).tensorComparison.hom.app (M, N)) ≫\n          rho'.hom.app ((nativeForget k₀ l Z).obj M, (nativeForget k₀ l Z).obj N)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.NativeOpenTensorForgetNormalization",
+  "worker": "stage3",
+  "summary": "Strict subargument of forgetting normalization; source proof recorded in the theorem docstring.",
+  "blueprint": "The native open tensor input used by the unchanged biduality unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "The generic balanced restriction/tensor comparison on a localized ringed site supplies the underived restriction square; this does not replace any biduality step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T055606-L-771561",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261028T055606-L-771561",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

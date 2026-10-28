@@ -14,24 +14,73 @@
  },
  "proof": [
   {
-   "text": "Forget the normalized native representative squares through the exact open functors. The canonical tensor comparisons and ordinary unit-transpose theorem identify the resulting maps and provide the ordinary forgetting record.",
+   "text": "Import the existing native inverse-unit normalization theorem for the supplied presentation. Its statement is unchanged.",
    "uses": [
-    "lem-sf-weil-native-closed-forgetful",
-    "lem-sf-weil-frobenius-action-resolutions",
-    "lem-sf-open-tensor-normalization"
+    "new-lem-sf-native-open-tensor-unit-normalization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "Obtain only the ordinary restriction/tensor isomorphism and its native forget square from the restriction comparison lemma. Its hypotheses omit extension and gamma normalization.",
+   "uses": [
+    "lem-sf-native-open-tensor-restriction-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "Construct the ordinary inverse open tensor natural transformation as the adjunct of TA′(unit,id) followed by rho′ inverse. Prove naturality using restriction naturality and unit naturality. The open unit is invertible, as is the counit at the ambient tensor by the support lemma, so this adjunct is invertible. Its inverse defines gamma′, and Equiv.apply_symm_apply proves the required inverse-unit formula.",
+   "uses": [
+    "lem-sf-native-ordinary-open-tensor-support",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "Prove that the exact localization squares for extension and restriction preserve the specified adjunction unit. On complexes this is the degreewise identity s.unit_forget. Cancel the standard exact-functor factors and use the localization natural-transformation extensionality theorem to descend this equality.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "Under this unit square the adjunction homEquiv commutes with forgetting. Apply injectivity of the ordinary homEquiv to the inverse gamma square; native and ordinary inverse-unit formulas reduce it to the restriction forget square and naturality of the tensor comparison. Invert the gamma square by cancelling the isomorphisms. Package rho′, gamma′, both normalizations and this compatibility in OpenTensorForgetData.",
+   "uses": [
+    "def-sf-native-open-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-weil-native-closed-forgetful",
-  "lem-sf-weil-frobenius-action-resolutions",
-  "lem-sf-open-tensor-normalization"
+  "new-lem-sf-native-open-tensor-unit-normalization",
+  "lem-sf-native-open-tensor-restriction-forget",
+  "lem-sf-native-ordinary-open-tensor-support",
+  "def-weil-exact-derived-adjunction",
+  "def-sf-native-open-tensor-presentation-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Native open tensor proof steps 7--8; strict sub-conclusion split from lem-sf-native-open-tensor-normalization."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1: support plus the open-unit transpose. A8 proves the categorical assembly and exact-localization unit compatibility in Lean; the two residual geometric statements are separated."
  },
  "mathlib_searches": [
   {
@@ -98,12 +147,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "A8",
   "result": "pass",
-  "landing": "20261027T180804-L-3902359",
+  "landing": "20261028T055606-L-771561",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
