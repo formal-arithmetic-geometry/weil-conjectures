@@ -1,0 +1,133 @@
+{
+ "id": "lem-coef-qbar-verdier-shift-naturality-K6",
+ "kind": "lemma",
+ "title": "Naturality of normalized finite Verdier shift components",
+ "statement": "For the finite coherent rational Verdier data of def-sf-common-stage-verdier-data, there exists a family of exact integer CommShift structures on the finite dual functors such that the explicit shiftComponent maps are natural in each integer degree on common-stage quotient morphisms. finiteRestrictionShift is transport of the finite composite shift along the specified descendedComparison. shiftComponent cancels the opposite-inclusion shift from this transported shift at the original stage of each pair. The conclusion asserts only exactness of the finite shifts and naturality of these explicit components, not a global coherent CommShift or compatibility of its finite comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport: shift coherence for the explicit common-stage dual"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-sf-rational-verdier-data",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite shift maps by signed reindexing of the internal-Hom complex. Their evaluations are the tensor-Hom shift transposes, and the cone calculation proves exactness for these finite shifts.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized scalar-extension evaluation equation. Transpose the evaluation shift square to show that the actual beta maps commute with the chosen finite shifts. For a pair arrow represented over a common finite overfield, apply finite naturality there and the beta squares at its ends. The finiteMorphism representative formula is conjugation by these same beta maps. This gives the displayed equation; tower coherence ensures it is independent of the quotient representative.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-coef-rational-operations",
+    "lem-coef-qbar-verdier-representative-functor",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "K6: finite internal-Hom shift normalization and common-stage arrow naturality only"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CommShift.*(of|lift)|commShift.*(of|lift)",
+   "date": "2026-10-28",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\"], \"note\": \"\", \"digest\": \"fef3c0ed60120741\"}",
+   "verdict": "Generic shift transport and precomposition APIs exist, but none proves naturality of the specified finite evaluation-transpose components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend a functor commuting with integer shifts through a fully faithful inclusion of triangulated categories",
+   "date": "2026-10-28",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.Functor.instFullTriangleMapTriangleOfFaithful\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Functor.isTriangulated_iff_comp_right\", \"CategoryTheory.Functor.isTriangulated_of_precomp_iso\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Functor.isTriangulated_of_precomp\"], \"note\": \"\", \"digest\": \"b38ef1676d9418b6\"}",
+   "verdict": "Generic shift transport and precomposition APIs exist, but none proves naturality of the specified finite evaluation-transpose components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso_compatibility",
+   "date": "2026-10-28",
+   "results": "{\"n_hits\": 1, \"top\": [\"CategoryTheory.Functor.CommShift.ofIso_compatibility\"], \"note\": \"\", \"digest\": \"1b0430b7c20677fd\"}",
+   "verdict": "Generic shift transport and precomposition APIs exist, but none proves naturality of the specified finite evaluation-transpose components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor commutes coherently with shifts if its natural shift comparisons restrict to coherent shift comparisons on a covering family of stage inclusions.",
+   "date": "2026-10-28",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.CommShift₂.commShift_map\", \"CategoryTheory.Functor.map_shiftFunctorComm_hom_app\", \"CategoryTheory.Functor.map_shiftFunctorComm\", \"CategoryTheory.NatTrans.CommShift.shift_comm\", \"CategoryTheory.Functor.CommShift.commShiftIso\", \"CategoryTheory.Functor.CommShift.iso\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"note\": \"\", \"digest\": \"e5728ebe931adee8\"}",
+   "verdict": "Generic shift transport and precomposition APIs exist, but none proves naturality of the specified finite evaluation-transpose components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierShiftCore",
+  "date": "2026-10-28",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-shift-core-Y3",
+   "place": "Finite exact shift choice and arrow naturality, before categorical zero/addition assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierShiftComponents",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierShiftComponents.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finite_shift_naturality",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.finiteRestrictionShift",
+   "WeilConjectures.CoefQbarVerdier.finiteRestrictionShift_compatibility",
+   "WeilConjectures.CoefQbarVerdier.shiftComponent",
+   "WeilConjectures.CoefQbarVerdier.finite_shift_naturality"
+  ],
+  "statement": "theorem finite_shift_naturality (F : Finite D l hl Ω X)\n    (hF : FiniteCoherent D l hl Ω X F) :\n    ∃ t : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n        (F.datum E).dual.CommShift ℤ,\n      (∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n        letI := t E\n        (F.datum E).dual.IsTriangulated) ∧\n      ∀ (n : ℤ) (P Q : (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ)\n        (f : P ⟶ Q),\n        (descendedDual D l hl Ω X F hF).map (f⟦n⟧') ≫\n          (shiftComponent D l hl Ω X F hF t n Q).hom =\n        (shiftComponent D l hl Ω X F hF t n P).hom ≫\n          ((descendedDual D l hl Ω X F hF).map f)⟦n⟧'",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-operations",
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d2ffd",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261028T072427-L-1945773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d2ffd",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261028T072427-L-1945773",
+  "kind": "interface",
+  "note": "independent cc review: descended_shift_core (htri→hnat, STATEMENT-DISPUTED) against node lem-coef-qbar-verdier-shift-core-Y3, change record and statement_change; finite_shift_naturality against parent lem-coef-qbar-verdier-shift-compatibility (equivalent via ofIso uniqueness); #print axioms on scratch build (sorryAx upstream only); importer CoefQbarVerdierExactness compiled OK against delivered .lbuild"
+ }
+}

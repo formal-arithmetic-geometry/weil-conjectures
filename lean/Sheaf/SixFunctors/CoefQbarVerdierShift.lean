@@ -85,15 +85,8 @@ theorem descended_shift_compatibility (F : Finite D l hl Ω X)
           @NatTrans.CommShift _ _ _ _ _ _
             (descendedComparison D l hl Ω X F hF E).hom ℤ _ _ _ cA cB := by
   classical
-  let t : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
-      (F.datum E).dual.CommShift ℤ := fun E ↦ (F.datum E).exact.choose
-  have ht : ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
-      letI := t E
-      (F.datum E).dual.IsTriangulated := by
-    intro E
-    letI := t E
-    exact ⟨fun T hT ↦ (F.datum E).exact.choose_spec T hT⟩
-  obtain ⟨s, hs⟩ := descended_shift_core D l hl Ω X F hF t ht
+  obtain ⟨t, ht, hnat⟩ := finite_shift_naturality D l hl Ω X F hF
+  obtain ⟨s, hs⟩ := descended_shift_core D l hl Ω X F hF t hnat
   letI := s
   refine ⟨s, ?_⟩
   intro E
