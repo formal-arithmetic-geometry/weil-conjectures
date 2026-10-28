@@ -14,6 +14,7 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.Paper.CondensedQbarCoefficientConstruction
 import Sheaf.SmoothPurity.RepresentingTraceClassification
 import Sheaf.SmoothPurity.NativeTraceSystem
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 
 /-! The representing trace required by condensed smooth purity.
 
@@ -66,6 +67,178 @@ private theorem smoothTrace_nativeReconstructionInputs
   obtain ⟨hfq, hfs, c, hX, hY, hrec, _⟩ :=
     smoothTrace_nativeSystem ell k (Fact.out : (ringChar k).Prime).pos f.left d
   exact ⟨hfq, hfs, c, hX, hY, hrec⟩
+
+section NormalizedOpenTrace
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+/-- The supplied zero-Tate orientation gives an actual identification with the native
+unit. Source: def-route-smooth-trace, the dimension-zero normalization, and the
+single-functor unit comparison. Full faithfulness lifts the specified ambient
+isomorphism; no representing witness or smooth-purity assertion is chosen. -/
+private noncomputable def smoothTrace_zeroSourceIso
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0)) :
+    M ≅ 𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) := by
+  let e : tateTwistDerived X.left ℓ 0 ≅
+      𝟙_ (DerivedCategory (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))) :=
+    DerivedCategory.singleFunctorObjUnitIso _
+  exact (ObjectProperty.ι _).preimageIso
+    (hM ≪≫ ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _) ≪≫ e)
+
+/-- The open comparison and the specified source/target identifications construct the
+orientation to the chosen exceptional right adjoint. Source: def-route-smooth-trace,
+dimension-zero normalization. In particular the source identification is retained,
+rather than replaced by an arbitrary isomorphism to the exceptional object. -/
+private noncomputable def smoothTrace_openOrientation
+    (j : X ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0))
+    (U : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : U = 𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :
+    M ≅ (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj U :=
+  smoothTrace_zeroSourceIso ℓ M hM ≪≫
+    (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).symm ≪≫
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).mapIso
+        (eqToIso hU).symm
+
+/-- The normalized trace for an open immersion is the explicit exceptional counit
+composite. Source: def-route-smooth-trace, Steps 3--4, and the open normalization in
+sk-thm-purity-transport. This is a construction from the specified orientation. -/
+private noncomputable def smoothTrace_openCounit
+    (j : X ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0))
+    (U : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : U = 𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj M ⟶ U :=
+  (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+      (smoothTrace_openOrientation ℓ j M hM U hU).hom ≫
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app U
+
+/-- All Hom maps for this explicitly constructed open trace are bijections.
+Source: def-route-smooth-trace, the dimension-zero case of its representing-pair
+step. Compose the specified orientation's Hom equivalence with inverse adjunction. -/
+private theorem smoothTrace_openCounit_representing
+    (j : X ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0))
+    (U : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : U = 𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :
+    ∀ K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      Function.Bijective (fun a : K ⟶ M ↦
+        (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map a ≫
+          smoothTrace_openCounit ℓ j M hM U hU) :=
+  representingTrace_of_iso _ (boundedConstructibleUpperShriekAdjunction _ ℓ j)
+    (smoothTrace_openOrientation ℓ j M hM U hU)
+
+/-- The specified open orientation fixes the trace uniquely. Source:
+def-route-smooth-trace, the corrected normalized final step, and
+sk-thm-purity-transport, Step 3. Take its explicit counit composite and apply the
+inverse laws of the chosen exceptional adjunction. No uniqueness among all
+unnormalized representing traces is asserted. -/
+private theorem existsUnique_smoothTrace_openNormalized
+    (j : X ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0))
+    (U : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hU : U = 𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :
+    ∃! t : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj M ⟶ U,
+      (∀ K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+        Function.Bijective (fun a : K ⟶ M ↦
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map a ≫ t)) ∧
+      (boundedConstructibleUpperShriekAdjunction _ ℓ j).homEquiv M U t =
+        (smoothTrace_openOrientation ℓ j M hM U hU).hom := by
+  let adj := boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j
+  have hn : adj.homEquiv M U (smoothTrace_openCounit ℓ j M hM U hU) =
+      (smoothTrace_openOrientation ℓ j M hM U hU).hom := by
+    rw [smoothTrace_openCounit, ← adj.homEquiv_counit]
+    exact (adj.homEquiv M U).apply_symm_apply _
+  refine ⟨smoothTrace_openCounit ℓ j M hM U hU, ⟨?_, hn⟩, ?_⟩
+  · exact smoothTrace_openCounit_representing ℓ j M hM U hU
+  · intro t ht
+    exact (adj.homEquiv M U).injective (ht.2.trans hn.symm)
+
+/-- The exceptional open-unit comparison preserves the actual extension-by-zero
+counit. Source: the open comparison is the mate of the compact-support comparison
+in def-route-smooth-trace. Apply the mate counit identity, then move the monoidal
+unit map through the compact-support comparison by naturality. -/
+private theorem smoothTrace_openUnit_counit_formula
+    (j : X ⟶ Y) [IsOpenImmersion j.left] :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
+      (boundedConstructibleUpperShriekAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) =
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app
+        (𝟙_ _) ≫
+      (boundedConstructibleOpenImmersionLowerShriek
+        (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          (Functor.Monoidal.εIso
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).hom ≫
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) := by
+  have hc :
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          ((boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).app (𝟙_ _)).inv ≫
+        (boundedConstructibleUpperShriekAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) =
+      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj (𝟙_ _)) ≫
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) := by
+    exact conjugateEquiv_counit
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
+      (boundedConstructibleUpperShriekAdjunction _ ℓ j)
+      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom (𝟙_ _)
+  change (boundedConstructibleLowerShriek _ ℓ j).map
+      ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ j)).hom ≫
+        ((boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j).app (𝟙_ _)).inv) ≫
+      _ = _
+  rw [Functor.map_comp, Category.assoc, hc, ← Category.assoc]
+  rw [(boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.naturality]
+  simp only [Category.assoc]
+
+/-- The constructed trace is the ordinary extension-by-zero counit, with exactly
+the supplied zero-Tate orientation and the canonical monoidal unit map. Source:
+def-route-smooth-trace, dimension-zero normalization. Expand only the small
+orientation composite, use the preceding actual counit identity, and move the
+source identification through the compact-support comparison by naturality.
+This holds for the empty scheme too and makes no global choice of a Tate basis. -/
+private theorem smoothTrace_openCounit_extensionByZero
+    (j : X ⟶ Y) [IsOpenImmersion j.left]
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hM : M.obj ≅ (shiftFunctor _ (2 * ((0 : ℕ) : ℤ))).obj
+      (tateTwistDerived X.left ℓ 0)) :
+    smoothTrace_openCounit ℓ j M hM (𝟙_ _) rfl =
+      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app M ≫
+        (boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+            (smoothTrace_zeroSourceIso ℓ M hM).hom ≫
+        (boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+            (Functor.Monoidal.εIso
+              (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j)).hom ≫
+          (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) := by
+  simp only [smoothTrace_openCounit, smoothTrace_openOrientation, Iso.trans_hom,
+    Iso.symm_hom, Functor.mapIso_hom, eqToIso_refl, Iso.refl_inv,
+    Functor.map_comp, Category.assoc]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [smoothTrace_openUnit_counit_formula, ← Category.assoc,
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.naturality]
+  simp only [Category.assoc]
+
+end NormalizedOpenTrace
 
 section Counterexample
 
