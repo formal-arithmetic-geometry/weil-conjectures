@@ -20940,3 +20940,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:21 L: returned deliver/J7/Sheaf.Paper.RationalSmoothPurityCanonical (reviewer RETURN: (reviewer C-dc21c, head dc21c2a78) Stage 3 §4 / brief 5 (H1 shape): drop the unforced timing extractions CanonicalSmooth)
 - 05:07 L: returned deliver/M9/Sheaf.SixFunctors.RationalVerdierCompletionSignedRepresentative (reviewer RETURN: (reviewer C-7aed6, head 7aed6bc56) D1/D2: the split theorem is the item restated (postcomposed with an isomorphism), so )
 - 05:25 L: returned deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (reviewer RETURN: (the global build of d71826a13f, still running) your landing 20261028T034856-L-3560188 fails to compile in Sheaf.SixFunc)
+- 05:33 L: returned deliver/Y7/Sheaf.Paper.ExceptionalIntegralRightReduction (reviewer RETURN: (reviewer C-339ae, head 339ae78d8) 2b (unforced adaptation): withdraw the timing split of IntegralExceptionalInverseImag)
