@@ -1,0 +1,77 @@
+{
+ "id": "lem-trf-canonical-relative-proj-restriction-comparison",
+ "kind": "statement",
+ "title": "Restriction comparison for the canonical relative Proj",
+ "statement": "For a finite type quasi-coherent module E on a scheme S and an affine open U, the relative Proj of E restricted to U is canonically isomorphic over U to the restriction of the canonical relative Proj of E.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas 01WB and 01WC, affine-local comparison"
+ },
+ "proof": [
+  {
+   "text": "For an affine open V of U, the sections of E|_U over V are those of E over the image of V, so the canonical graded algebra of Sym(E|_U) agrees on V with that of Sym(E), compatibly with restrictions. Both relative Proj schemes are glued from the charts Proj(Sym(E)(V)) along the same transitions, and over affine V the preimage of V in the global relative Proj is this chart; the chart embeddings glue to an isomorphism over U, which commutes with the structural morphisms chart by chart.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas 01WB and 01WC, affine-local comparison"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-canonical-relative-proj-proper-local",
+   "place": "comparison step"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CanonicalRelativeProjRestrictionComparison",
+  "declaration": "AlgebraicGeometry.exists_canonicalRelativeProj_restrict_iso",
+  "file": "lean/Sheaf/TraceFormula/CanonicalRelativeProjRestrictionComparison.lean",
+  "statement": "theorem exists_canonicalRelativeProj_restrict_iso {S : Scheme.{u}} (E : S.Modules) (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (hU : IsAffineOpen U) (hq : (E.restrict U.ι).IsQuasicoherent) : ∃ (e : (@SymmetricAlgebraSheaf.gradedAlgebraData U.toScheme (E.restrict U.ι) hq).relProj ≅ ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ⁻¹ᵁ U).toScheme), e.hom ≫ ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ∣_ U) = (@SymmetricAlgebraSheaf.gradedAlgebraData U.toScheme (E.restrict U.ι) hq).relProjHom",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CanonicalRelativeProjProperLocal",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3e2b5",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T020617-L-2529383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-3e2b5",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T020617-L-2529383",
+  "kind": "interface",
+  "note": "independent cc review: canonicalRelativeProj_restrict_proper and the new exists_canonicalRelativeProj_restrict_iso against nodes lem-trf-canonical-relative-proj-proper-local / -restriction-comparison, WeilConjectures RelativeProj gluing (isPullback_relProjι), and the importer CanonicalRelativeProjProper (recompiled OK)"
+ }
+}
