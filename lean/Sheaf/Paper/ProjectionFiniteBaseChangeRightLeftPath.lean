@@ -6,6 +6,7 @@ Authors: SHEAF group F7
 module
 
 public import Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates
+import Sheaf.Paper.ProjectionFiniteBaseChangeRightLeftPathRealized
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,15 +31,21 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
 Source: prop-sf-pf-coherence.proof.md, base-change paragraph, route normalization.
 (blueprint: lem-sf-finite-base-change-right-left-path).
 
-Proof: expand both route composites, use bifunctoriality and the naturality of
-the supplied exchange and projection comparisons, and normalize the pullback
-compositors. The resulting fixed-coordinate composites are identical. -/
+Proof: cancel the target comparison after applying the faithful intrinsic
+realization functor. The preceding realized route equality supplies the required
+cancellation equation.
+-/
 theorem sixFunctorProjectionFinite_right_left_path
     (S : SixFunctorDatum D C E n hn) (Q : SixFunctorCompactifiedSquare D)
     (K : sixFunctorFiniteCategory D C E n hn Q.X)
     (L : finiteTorConstructibleCategory C.l E n hn Q.Y.obj.left) :
     sixFunctorProjectionFiniteRightPath S Q K L =
       sixFunctorProjectionFiniteLeftPath S Q K L := by
-  sorry
+  let := Padic.finite_coefficientExtensionRing C.l E n hn
+  let I := (intrinsicFiniteTorsionConstructible C.l E n hn Q.Y'.obj.left).ι
+  let target := sixFunctorProjectionFiniteSquareTarget S Q K L
+  apply I.map_injective
+  apply (cancel_mono target.hom).mp
+  exact sixFunctorProjectionFinite_right_left_path_realized S Q K L
 
 end WeilConjectures
