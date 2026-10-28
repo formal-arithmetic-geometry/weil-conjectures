@@ -219,4 +219,39 @@ lemma traitPowMap_traitToBase : traitPowMap k' m hm ≫ traitToBase k k' = trait
   change _ = algebraMap k (PowerSeries k') a
   rw [IsScalarTower.algebraMap_apply k k' (PowerSeries k'), PowerSeries.algebraMap_eq]
 
+/-- The power map fixes the closed point of the trait. -/
+@[reassoc (attr := simp)]
+lemma traitClosedPoint_traitPowMap :
+    traitClosedPoint k' ≫ traitPowMap k' m hm = traitClosedPoint k' := by
+  rw [traitClosedPoint, traitPowMap, ← Spec.map_comp]
+  congr 1
+  refine CommRingCat.hom_ext (RingHom.ext fun f ↦ ?_)
+  exact PowerSeries.constantCoeff_expand m hm f
+
+/-- A point of the trait is the closed point if and only if `t` vanishes at it. -/
+lemma mem_range_traitClosedPoint_iff (z : trait k') :
+    z ∈ Set.range (traitClosedPoint k') ↔ PowerSeries.X ∈ z.asIdeal := by
+  rw [traitClosedPoint, Spec.map_base]
+  change z ∈ Set.range (PrimeSpectrum.comap PowerSeries.constantCoeff) ↔ _
+  have h := range_comap_of_surjective k' PowerSeries.constantCoeff
+    (fun a ↦ ⟨PowerSeries.C a, by simp⟩)
+  refine (Set.ext_iff.1 h z).trans ?_
+  rw [PrimeSpectrum.mem_zeroLocus]
+  refine ⟨fun h ↦ h (by simp), fun h f hf ↦ ?_⟩
+  obtain ⟨g, rfl⟩ := PowerSeries.X_dvd_iff.2 (RingHom.mem_ker.1 hf)
+  exact z.asIdeal.mul_mem_right g h
+
+/-- The power map of the trait is the identity on the closed point and maps the generic point
+to the generic point: the preimage of the closed point is the closed point. -/
+lemma mem_range_traitClosedPoint_of_traitPowMap (z : trait k')
+    (hz : traitPowMap k' m hm z ∈ Set.range (traitClosedPoint k')) :
+    z ∈ Set.range (traitClosedPoint k') := by
+  rw [mem_range_traitClosedPoint_iff] at hz ⊢
+  rw [traitPowMap, Spec.map_base] at hz
+  change PowerSeries.X ∈ Ideal.comap (PowerSeries.expand m hm).toRingHom z.asIdeal at hz
+  rw [Ideal.mem_comap] at hz
+  change PowerSeries.expand m hm PowerSeries.X ∈ z.asIdeal at hz
+  rw [PowerSeries.expand_X] at hz
+  exact z.isPrime.mem_of_pow_mem m hz
+
 end AlgebraicGeometry

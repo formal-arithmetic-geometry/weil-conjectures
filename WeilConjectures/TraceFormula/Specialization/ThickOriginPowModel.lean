@@ -210,6 +210,76 @@ lemma isFinite_deformationTotalPowMap [IsFinite ν₀] [IsSeparated p] :
     (inferInstanceAs (IsFinite ν₀)) inferInstance hν₀.symm hσ.symm
   exact MorphismProperty.comp_mem _ _ _ inferInstance this
 
+/-- The special fibre `𝒟_{I,s} ⟶ 𝒟_{J,s}` of the morphism of total spaces. -/
+noncomputable def deformationSpecialFibrePowMap :
+    (deformationSpecialFibre X I k').left ⟶ (deformationSpecialFibre X J k').left :=
+  pullback.lift (deformationSpecialToTotal X I k' ≫ deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ)
+    (deformationSpecialFibre X I k').hom (by
+      rw [Category.assoc, deformationTotalPowMap_toTrait,
+        reassoc_of% (isPullback_deformationSpecialFibre X I k').w, traitClosedPoint_traitPowMap])
+
+/-- The inclusion `c : 𝒟_{I,s} ⟶ 𝒲_s` of the special fibre `t = 0` of `𝒟_I` into the thickened
+special fibre `t^m = 0`. -/
+noncomputable def specialFibreToPowSpecialFibre :
+    (deformationSpecialFibre X I k').left ⟶ (powSpecialFibre k' hm X I J ν₀ p hν₀ hσ).left :=
+  pullback.lift (deformationSpecialFibrePowMap k' hm X I J ν₀ p hν₀ hσ)
+    (deformationSpecialToTotal X I k') (pullback.lift_fst _ _ _)
+
+@[reassoc (attr := simp)]
+lemma specialFibreToPowSpecialFibre_i :
+    specialFibreToPowSpecialFibre k' hm X I J ν₀ p hν₀ hσ ≫
+      (powSourceModel k' hm X I J ν₀ p hν₀ hσ).i = (deformationModel X I k').i :=
+  pullback.lift_snd _ _ _
+
+omit [Algebra k k'] in
+lemma isClosedImmersion_traitClosedPoint : IsClosedImmersion (traitClosedPoint k') :=
+  IsClosedImmersion.spec_of_surjective _ fun a ↦ ⟨PowerSeries.C a, by simp⟩
+
+instance (Y : Over (Spec (.of k))) (K : Y.left.IdealSheafData) :
+    IsClosedImmersion (deformationModel Y K k').i := by
+  have := isClosedImmersion_traitClosedPoint k'
+  exact inferInstanceAs (IsClosedImmersion (pullback.fst _ _))
+
+instance : IsClosedImmersion (powSourceModel k' hm X I J ν₀ p hν₀ hσ).i :=
+  inferInstanceAs (IsClosedImmersion (pullback.snd (deformationModel X J k').i _))
+
+instance : IsClosedImmersion (specialFibreToPowSpecialFibre k' hm X I J ν₀ p hν₀ hσ) := by
+  have : IsClosedImmersion (specialFibreToPowSpecialFibre k' hm X I J ν₀ p hν₀ hσ ≫
+      (powSourceModel k' hm X I J ν₀ p hν₀ hσ).i) := by
+    rw [specialFibreToPowSpecialFibre_i]
+    infer_instance
+  exact IsClosedImmersion.of_comp_isClosedImmersion _
+    (powSourceModel k' hm X I J ν₀ p hν₀ hσ).i
+
+instance : Surjective (specialFibreToPowSpecialFibre k' hm X I J ν₀ p hν₀ hσ) := by
+  refine ⟨fun w ↦ ?_⟩
+  have e : pullback.snd (deformationModel X J k').i
+      (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) ≫
+      deformationTotalToTrait X I k' ≫ traitPowMap k' m hm =
+      pullback.fst (deformationModel X J k').i (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) ≫
+        (deformationSpecialFibre X J k').hom ≫ traitClosedPoint k' := by
+    rw [← deformationTotalPowMap_toTrait k' hm X I J ν₀ p hν₀ hσ, ← Category.assoc,
+      ← pullback.condition, Category.assoc,
+      ← (isPullback_deformationSpecialFibre X J k').w]
+    rfl
+  set y := pullback.snd (deformationModel X J k').i
+    (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) w
+  have hy : deformationTotalToTrait X I k' y ∈ Set.range (traitClosedPoint k') := by
+    refine mem_range_traitClosedPoint_of_traitPowMap k' m hm _
+      ⟨(deformationSpecialFibre X J k').hom (pullback.fst (deformationModel X J k').i
+        (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) w), ?_⟩
+    have := congr($(e).base w)
+    simp only [Scheme.Hom.comp_base, TopCat.comp_app] at this
+    exact this.symm
+  obtain ⟨s, hs⟩ := hy
+  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback y s hs.symm
+  refine ⟨z, (pullback.snd (deformationModel X J k').i
+    (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ)).isClosedEmbedding.injective ?_⟩
+  change ((specialFibreToPowSpecialFibre k' hm X I J ν₀ p hν₀ hσ) ≫
+    (powSourceModel k' hm X I J ν₀ p hν₀ hσ).i) z = y
+  rw [specialFibreToPowSpecialFibre_i]
+  exact hz
+
 end ProEtale.CondensedRing
 
 end AlgebraicGeometry
