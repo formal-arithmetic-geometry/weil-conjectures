@@ -41,6 +41,7 @@ lemma mapDerivedCategoryNatTrans_app_Q_obj (τ : F ⟶ G) (K : CochainComplex C 
   rw [← mapDerivedCategoryNatTrans_fac_assoc, Iso.hom_inv_id_app]
   exact (comp_id _).symm
 
+@[reassoc]
 lemma mapDerivedCategoryNatTrans_comp (τ : F ⟶ G) (τ' : G ⟶ H) :
     mapDerivedCategoryNatTrans (τ ≫ τ') =
       mapDerivedCategoryNatTrans τ ≫ mapDerivedCategoryNatTrans τ' := by

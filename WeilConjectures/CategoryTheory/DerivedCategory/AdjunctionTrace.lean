@@ -111,4 +111,80 @@ lemma mapDerivedCategoryAdjunction_unit_eq :
     NatTrans.id_app, Functor.comp_obj, id_comp, NatTrans.mapHomologicalComplex_app_f]
   exact comp_id _
 
+
+variable {ι : Type*} [Fintype ι]
+
+/-- The trace `D(f) ⋙ D(g) ⟶ 𝟭` induced by a trace `t : f ⋙ g ⟶ 𝟭`. -/
+noncomputable def mapDerivedCategoryTrace (t : f ⋙ g ⟶ 𝟭 C) :
+    f.mapDerivedCategory ⋙ g.mapDerivedCategory ⟶ 𝟭 _ :=
+  (Functor.mapDerivedCategoryCompIso f g).inv ≫ Functor.mapDerivedCategoryNatTrans t ≫
+    (Functor.mapDerivedCategoryIdIso C).hom
+
+/-- The endomorphism of `D(f) ⋙ D(g)` induced by an endomorphism of `f ⋙ g`. -/
+noncomputable def mapDerivedCategoryEndo (σ : f ⋙ g ⟶ f ⋙ g) :
+    f.mapDerivedCategory ⋙ g.mapDerivedCategory ⟶ f.mapDerivedCategory ⋙ g.mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso f g).inv ≫ Functor.mapDerivedCategoryNatTrans σ ≫
+    (Functor.mapDerivedCategoryCompIso f g).hom
+
+lemma mapDerivedCategoryAdjunction_unit_comp_mapDerivedCategoryTrace {t : f ⋙ g ⟶ 𝟭 C} {d : ℕ}
+    (hd : adj.unit ≫ t = d • 𝟙 _) :
+    adj.mapDerivedCategoryAdjunction.unit ≫ mapDerivedCategoryTrace t = d • 𝟙 _ := by
+  rw [mapDerivedCategoryAdjunction_unit_eq, mapDerivedCategoryTrace, assoc, assoc,
+    Iso.hom_inv_id_assoc, ← Functor.mapDerivedCategoryNatTrans_comp_assoc, hd,
+    Functor.mapDerivedCategoryNatTrans_nsmul, Functor.mapDerivedCategoryNatTrans_id,
+    Preadditive.nsmul_comp, id_comp, Preadditive.comp_nsmul, Iso.inv_hom_id]
+
+lemma mapDerivedCategoryTrace_comp_mapDerivedCategoryAdjunction_unit {t : f ⋙ g ⟶ 𝟭 C}
+    {ρ : ι → (f ⋙ g ⟶ f ⋙ g)} (ht : t ≫ adj.unit = ∑ i, ρ i) :
+    mapDerivedCategoryTrace t ≫ adj.mapDerivedCategoryAdjunction.unit =
+      ∑ i, mapDerivedCategoryEndo (ρ i) := by
+  rw [mapDerivedCategoryAdjunction_unit_eq, mapDerivedCategoryTrace, assoc, assoc,
+    Iso.hom_inv_id_assoc, ← Functor.mapDerivedCategoryNatTrans_comp_assoc, ht,
+    Functor.mapDerivedCategoryNatTrans_sum]
+  simp only [mapDerivedCategoryEndo, Preadditive.sum_comp, Preadditive.comp_sum]
+
+/-- The comparison `Lf ⋙ Rg ≅ D(f) ⋙ D(g)` of the derived and levelwise composites. -/
+noncomputable def derivedCompIsoMapDerivedCategoryComp :
+    f.leftDerivedFunctor ⋙ g.rightDerivedFunctor ≅
+      f.mapDerivedCategory ⋙ g.mapDerivedCategory :=
+  Functor.isoWhiskerRight f.leftDerivedFunctorIsoMapDerivedCategory g.rightDerivedFunctor ≪≫
+    Functor.isoWhiskerLeft f.mapDerivedCategory g.rightDerivedFunctorIsoMapDerivedCategory
+
+lemma mapDerivedCategoryAdjunction_unit_eq_derivedAdjunction_unit :
+    adj.mapDerivedCategoryAdjunction.unit =
+      adj.derivedAdjunction.unit ≫ derivedCompIsoMapDerivedCategoryComp.hom := by
+  ext K
+  simp [mapDerivedCategoryAdjunction, derivedCompIsoMapDerivedCategoryComp]
+
+/-- **The derived trace**: a trace `t : f ⋙ g ⟶ 𝟭` of an adjunction of exact functors induces a
+trace `Lf ⋙ Rg ⟶ 𝟭` of the derived adjunction. -/
+noncomputable def derivedTrace (t : f ⋙ g ⟶ 𝟭 C) :
+    f.leftDerivedFunctor ⋙ g.rightDerivedFunctor ⟶ 𝟭 _ :=
+  derivedCompIsoMapDerivedCategoryComp.hom ≫ mapDerivedCategoryTrace t
+
+/-- The endomorphism of `Lf ⋙ Rg` induced by an endomorphism of `f ⋙ g`. -/
+noncomputable def derivedEndo (σ : f ⋙ g ⟶ f ⋙ g) :
+    f.leftDerivedFunctor ⋙ g.rightDerivedFunctor ⟶ f.leftDerivedFunctor ⋙ g.rightDerivedFunctor :=
+  derivedCompIsoMapDerivedCategoryComp.hom ≫ mapDerivedCategoryEndo σ ≫
+    derivedCompIsoMapDerivedCategoryComp.inv
+
+/-- **The derived unit followed by the derived trace is the degree** if `u ≫ t = d • 𝟙`. -/
+theorem unit_comp_derivedTrace {t : f ⋙ g ⟶ 𝟭 C} {d : ℕ} (hd : adj.unit ≫ t = d • 𝟙 _) :
+    adj.derivedAdjunction.unit ≫ derivedTrace t = d • 𝟙 _ := by
+  rw [derivedTrace, ← assoc, ← mapDerivedCategoryAdjunction_unit_eq_derivedAdjunction_unit,
+    mapDerivedCategoryAdjunction_unit_comp_mapDerivedCategoryTrace adj hd]
+
+/-- **The derived trace followed by the derived unit is the sum of the derived endomorphisms** if
+`t ≫ u = ∑ i, ρ i`. -/
+theorem derivedTrace_comp_unit {t : f ⋙ g ⟶ 𝟭 C} {ρ : ι → (f ⋙ g ⟶ f ⋙ g)}
+    (ht : t ≫ adj.unit = ∑ i, ρ i) :
+    derivedTrace t ≫ adj.derivedAdjunction.unit = ∑ i, derivedEndo (ρ i) := by
+  have h : adj.derivedAdjunction.unit =
+      adj.mapDerivedCategoryAdjunction.unit ≫ derivedCompIsoMapDerivedCategoryComp.inv := by
+    rw [mapDerivedCategoryAdjunction_unit_eq_derivedAdjunction_unit, assoc, Iso.hom_inv_id,
+      comp_id]
+  rw [h, derivedTrace, assoc, ← assoc (mapDerivedCategoryTrace t),
+    mapDerivedCategoryTrace_comp_mapDerivedCategoryAdjunction_unit adj ht]
+  simp only [derivedEndo, Preadditive.sum_comp, Preadditive.comp_sum]
+
 end CategoryTheory.Adjunction
