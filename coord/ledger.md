@@ -20625,3 +20625,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/J3/Sheaf.Paper.NativeOrdinaryTensorModelResolutionNaturality (stage 3; reviewer PASS; first push; landing 20261028T020517-L-2518923 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:05 L: merged deliver/J4/Sheaf.Paper.IntegralSitePullbackIntegerEndpointInverseImage (stage 3; reviewer PASS; first push; landing 20261028T020518-L-2519247 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:05 L: merged deliver/J4/Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationExistence (stage 3; reviewer PASS; first push; landing 20261028T020519-L-2519655 (interface); batch 20261028T020127; modules 3; new nodes 2)
+- 02:05 L: merged deliver/J5/Sheaf.Paper.LisseFiniteLevelEtaleModelProperties (stage 3; reviewer PASS; first push; landing 20261028T020520-L-2519952 (interface); batch 20261028T020127; modules 1; new nodes 0)

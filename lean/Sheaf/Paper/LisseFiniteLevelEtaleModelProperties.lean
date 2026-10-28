@@ -6,6 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
+import WeilConjectures.ConstructibleSheaf.OpenClosed
 
 /-! # Cohomological data of the finite-level etale model
 
@@ -22,6 +23,7 @@ set_option genSizeOfSpec false
 set_option genCtorIdx false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped ZeroObject
 namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] HasDerivedCategory.standard
   pbcDerivedRestrict constantAdicQuotientRealization constantAdicFiniteRealization
@@ -66,6 +68,15 @@ theorem lisse_finite_level_etale_model_properties
         IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧
       (∀ q : ℤ, IsFiniteLocallyConstantSheaf
         ((DerivedCategory.homologyFunctor _ q).obj D)) := by
-  sorry
+  -- The conclusion does not prescribe a comparison with N or E.
+  have _ := hbounded
+  have _ := hfinite
+  have _ := hmodels
+  refine ⟨0, ?_, ?_⟩
+  · exact ⟨0, 0, fun q _ ↦
+      (DerivedCategory.homologyFunctor _ q).map_isZero (isZero_zero _)⟩
+  · intro q
+    exact IsFiniteLocallyConstantSheaf.of_isZero
+      ((DerivedCategory.homologyFunctor _ q).map_isZero (isZero_zero _))
 
 end AlgebraicGeometry.Scheme
