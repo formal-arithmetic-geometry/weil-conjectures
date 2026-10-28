@@ -5,16 +5,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDerivedCoefficientMap
-public import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
-public import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
+public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
+public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData
+public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueGeometricCompatibility
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueAffineData
 
 /-! Fixed-model naturality core for the derived fibre residue bridge.
 
@@ -107,6 +104,13 @@ theorem picard_derived_fibre_residue_bridge_core
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                   (ui i) (hui i))).left) 1 (eKg z)) := by
-  sorry
+  classical
+  obtain ⟨eK, eC, φ, hdata⟩ := picard_derived_fibre_residue_affine_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC hE hCi
+  obtain ⟨eKg, eCg, hgeom⟩ := picard_derived_fibre_residue_geometric_compatibility
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K C hK hC hE hCi eK eC φ
+  refine ⟨eK, eC, eKg, eCg, ?_⟩
+  intro i
+  exact ⟨DerivedCategory.Q.map (φ i), φ i, rfl, hdata i, hgeom i⟩
 
 end AlgebraicGeometry.Scheme
