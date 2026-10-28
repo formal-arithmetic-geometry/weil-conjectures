@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
+import Sheaf.Paper.NativeCompletedCoefficientPresentationAt
 
 /-! # Existence of normalized completed-to-native coefficient maps -/
 
@@ -45,6 +46,11 @@ theorem exists_native_completed_coefficient_presentation
         (PurCompactSupport.completed l E).ring T ⟶ (nativeCoefficients l).ring T)
       (C : ∀ T : Scheme.{u}, CoefficientPresentation l T E i),
       ∀ T : Scheme.{u}, m T = (C T).integralMap l T := by
-  sorry
+  classical
+  let C : ∀ T : Scheme.{u}, CoefficientPresentation l T E i :=
+    fun T ↦ Classical.choice (exists_native_completed_coefficient_presentation_at l E i T)
+  refine ⟨fun T ↦ (C T).integralMap l T, C, ?_⟩
+  intro T
+  rfl
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
