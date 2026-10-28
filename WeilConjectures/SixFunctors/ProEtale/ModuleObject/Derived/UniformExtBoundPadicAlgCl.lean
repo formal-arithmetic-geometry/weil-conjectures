@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatibilities
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
@@ -199,7 +200,7 @@ theorem hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X)) :
     HasUniformConstructibleExtBound (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) := by
   intro M hM
-  obtain ⟨E, K, ⟨eK⟩⟩ := constructibleCocone_essSurjObj X ℓ
+  obtain ⟨E, K, ⟨eK⟩⟩ := uniformExtBoundCompat_essSurjObj X ℓ
     (⟨_, CondensedRing.boundedConstructible_singleFunctor_obj _ X 0 M hM⟩ :
       PadicAlgClConstructible X ℓ)
   obtain ⟨M', hM', ⟨eM⟩⟩ :=
@@ -207,10 +208,10 @@ theorem hasUniformConstructibleExtBound_padicAlgClRingObj_of_padicSubfield
       ((ObjectProperty.ι _).mapIso eK)
   obtain ⟨N, hN⟩ := h E M' hM'
   refine ⟨N, fun B hB n hn f ↦ ?_⟩
-  obtain ⟨F, L, ⟨eL⟩⟩ := constructibleCocone_essSurjObj X ℓ
+  obtain ⟨F, L, ⟨eL⟩⟩ := uniformExtBoundCompat_essSurjObj X ℓ
     (⟨_, CondensedRing.boundedConstructible_singleFunctor_obj _ X n B hB⟩ :
       PadicAlgClConstructible X ℓ)
-  obtain ⟨H, hE, hF, g, hg⟩ := constructibleCocone_homSurj X ℓ E F K L
+  obtain ⟨H, hE, hF, g, hg⟩ := uniformExtBoundCompat_homSurj X ℓ E F K L
     (eK.hom ≫ ObjectProperty.homMk f ≫ eL.inv)
   obtain ⟨B', hB', ⟨eB'⟩⟩ := exists_iso_singleFunctor_of_constructibleToPadicAlgCl_obj_iso ℓ
     ((constructibleExtendScalars X ℓ hF).obj L) n B

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatibilities
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
@@ -137,7 +138,7 @@ lemma exists_extendScalars_padicIntegersToPadicSubfield_obj_iso {X : Scheme.{u}}
         (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X),
       IsConstructibleModuleObject _ M₀ ∧
         Nonempty ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).obj M₀ ≅ M) := by
-  obtain ⟨K₀, ⟨e⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X ℓ E
+  obtain ⟨K₀, ⟨e⟩⟩ := uniformExtBoundCompat_integralModel X ℓ E
     ⟨_, CondensedRing.boundedConstructible_singleFunctor_obj _ X 0 M hM⟩
   exact ⟨(DerivedCategory.homologyFunctor _ 0).obj K₀.obj, K₀.2.2 0,
     ⟨((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctorHomologyFunctorIso

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatibilities
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
@@ -230,7 +231,7 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
     inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
   have := hasInvertibleExponent_residueFieldCoeff ℓ E aX
   have hC := constructibleFiniteTor_derivedReduction_obj P hP
-  obtain ⟨N, hN⟩ := DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor
+  obtain ⟨N, hN⟩ := DerivedCategory.uniformExtBoundCompat_constructibleFiniteTor
     (Λ := ResidueFieldCoeff.{u} ℓ E) hk aX hC
   refine ⟨-N, fun K hK hK₀ q hq f ↦ ?_⟩
   let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (padicIntegersToResidueField X ℓ E)
