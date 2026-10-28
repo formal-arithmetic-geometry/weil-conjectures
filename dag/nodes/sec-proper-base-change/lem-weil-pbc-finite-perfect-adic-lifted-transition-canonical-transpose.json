@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-lifted-transition-canonical-transpose",
+ "kind": "statement",
+ "title": "Canonical transpose of the universe-lifted transition",
+ "statement": "theorem finitePerfectAdicLiftedTransition_canonical_transpose_isIso\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*\n        ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=\n      RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))\n    letI : (normalizationModuleRestrict q).IsRightAdjoint :=\n      ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q\n    let adj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)\n    IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n))",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, transport of the normalized transpose through the coefficient-universe lift"
+ },
+ "proof": [
+  {
+   "text": "Define the canonical left adjoint to derived restriction of scalars using the proved derived scalar adjunction. Identify the transpose of the lifted transition with the universe lift of the supplied normalized transpose, using the scalar-restriction comparison defining finitePerfectAdicLiftedTransition. The universe lift and comparison are equivalences, so they preserve invertibility.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-tower-data",
+    "def-weil-pbc-finite-perfect-adic-constant-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "proof_origin": {
+  "by": "Z7 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, canonical derived restriction adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universe lift derived restriction adjunction transpose preserves isomorphism",
+   "results": "Generic derived restriction adjunction and functor map-isIso APIs; no project-specific lifted transition theorem.",
+   "date": "2026-10-28",
+   "verdict": "new project-specific intermediate statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.ofIsRightAdjoint leftAdjointUniq homEquiv IsIso",
+   "results": "Adjunction uniqueness and hom-equivalence unit formulas found; no exact universe-lifted transition theorem.",
+   "date": "2026-10-28",
+   "verdict": "used for the parent transport"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdicLiftedTransition_canonical_transpose_isIso",
+   "results": "No existing theorem.",
+   "date": "2026-10-28",
+   "verdict": "new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicLiftedTransitionTranspose",
+  "date": "2026-10-28",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-lifted-transition-transpose",
+   "place": "Tags 06YY and 09C6, canonical universe-lifted transpose substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicLiftedTransitionCanonicalTranspose",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicLiftedTransitionCanonicalTranspose.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicLiftedTransition_canonical_transpose_isIso",
+  "statement": "theorem finitePerfectAdicLiftedTransition_canonical_transpose_isIso\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*\n        ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=\n      RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))\n    letI : (normalizationModuleRestrict q).IsRightAdjoint :=\n      ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q\n    let adj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)\n    IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n))",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261028T020932-L-2567725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261028T020932-L-2567725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
