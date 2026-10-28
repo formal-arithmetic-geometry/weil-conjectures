@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-import all Sheaf.SixFunctors.AmbientAdjunctionCompositorNormalization
+public import Sheaf.Paper.IntrinsicDirectComparisonTransport
+public import Sheaf.Paper.IntrinsicConjugateComparisonTransport
 
 /-! Fixed-scalar intermediate for the intrinsic direct compositor calculation. -/
 
@@ -15,7 +16,8 @@ import all Sheaf.SixFunctors.AmbientAdjunctionCompositorNormalization
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 universe u
-open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
+open CategoryTheory CategoryTheory.Functor AlgebraicGeometry AlgebraicGeometry.Scheme
+open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCategory
@@ -100,8 +102,12 @@ theorem sfIntrinsicDirectCompositorCoordinates_ambient_normalization
             (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) (f ≫ g))
           (leftDerivedUpperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f g)).hom.app
           (DerivedCategory.Q.obj I)) =
-      sfIntrinsicAmbientIntermediate A f g I := by
-  sorry
+      sfIntrinsicAmbientIntermediate A f g I  := by
+  simpa [sfIntrinsicAmbientIntermediate, sfIntrinsicAmbientCoordinate,
+    sfIntrinsicTransportRight, sfTransportRight] using
+    (sfIntrinsicDirectComparisonTransport A f g I
+      (leftDerivedUpperStarComp
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f g))
 
 /-- The intermediate is the composite-adjunction coordinate.
 
@@ -122,7 +128,17 @@ theorem sfIntrinsicDirectCompositorCoordinates_ambient_to_intrinsic
         (sfIntrinsicDerivedPullbackComp A f g)).hom.app
           ((sfIntrinsicDerivedEquivalence X A).functor.obj (DerivedCategory.Q.obj I)) ≫
       (sfIntrinsicDerivedDirectImageComparison (f ≫ g) A).hom.app
-        (DerivedCategory.Q.obj I) := by
-  sorry
+        (DerivedCategory.Q.obj I)   := by
+  have h := sfIntrinsicConjugateComparisonTransport A f g I
+  calc
+    sfIntrinsicAmbientIntermediate A f g I =
+        sfIntrinsicAmbientCoordinate A f g I
+          (leftDerivedUpperStarComp
+            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f g) := by
+      simp [sfIntrinsicAmbientIntermediate, sfIntrinsicAmbientCoordinate,
+        sfTransportRight, sfIntrinsicTransportRight]
+    _ = _ := by
+      rw [h]
+      simp
 
 end AlgebraicGeometry.Scheme

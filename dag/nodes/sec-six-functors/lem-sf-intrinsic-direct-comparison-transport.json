@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-intrinsic-direct-comparison-transport",
+ "kind": "statement",
+ "title": "Transport of the intrinsic direct-image comparisons through a fixed mate",
+ "statement": "For finite coefficients and composable scheme maps, the two normalized derived direct-image comparisons followed by any fixed-scalar conjugate agree with the corresponding transported mate coordinate.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "The comparison-square naturality substep of the intrinsic direct compositor normalization."
+ },
+ "stmt_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sp-finite-intrinsic-pullback",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the section-normalized derived direct-image comparisons, then cancel the equivalence unit and counit in the transported adjunction square.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "def-sp-finite-intrinsic-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sp-finite-intrinsic-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Comparison transport isolated from the fixed compositor target."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "intrinsic direct compositor comparison transport",
+   "results": "No direct match; project-specific statement retained.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction conjugate equivalence naturality",
+   "results": "Generic conjugate equivalence declarations only.",
+   "date": "2026-10-28",
+   "verdict": "generic only"
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDirectImageComparison conjugateIsoEquiv",
+   "results": "Existing transport definitions inspected.",
+   "date": "2026-10-28",
+   "verdict": "project-specific"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntrinsicDirectCompositorCoordinatesMatePasting",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-intrinsic-direct-compositor-coordinates-k-injective-mate-pasting",
+   "place": "Naturality portion of the abstract mate-pasting step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntrinsicDirectComparisonTransport",
+  "file": "lean/Sheaf/Paper/IntrinsicDirectComparisonTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicDirectComparisonTransport",
+  "statement": "theorem sfIntrinsicDirectComparisonTransport (A : Type u) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (I : CochainComplex (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A))) ℤ) [I.IsKInjective] (k : (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) (f ≫ g)).leftDerivedFunctor ≅ (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).leftDerivedFunctor ⋙ (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).leftDerivedFunctor) : (proEtaleConstantDerivedDirectImage g A).map ((sfIntrinsicDerivedDirectImageComparison f A).hom.app (DerivedCategory.Q.obj I)) ≫ (sfIntrinsicDerivedDirectImageComparison g A).hom.app ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).rightDerivedFunctor.obj (DerivedCategory.Q.obj I)) ≫ (sfIntrinsicDerivedEquivalence Z A).functor.map ((conjugateIsoEquiv ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).comp (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f)) (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) (f ≫ g)) k).hom.app (DerivedCategory.Q.obj I)) = sfIntrinsicAmbientCoordinate A f g I k",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicDirectComparisonTransport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T034824-L-3553357",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T034824-L-3553357",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
