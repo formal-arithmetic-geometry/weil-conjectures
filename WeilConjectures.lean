@@ -6840,6 +6840,7 @@ public import WeilConjectures.AlgebraicGeometry.SectionComponentGenericDichotomy
 public import WeilConjectures.AlgebraicGeometry.SectionComponentLocallyConstructible
 public import WeilConjectures.AlgebraicGeometry.SectionComponentNoetherianModel
 public import WeilConjectures.AlgebraicGeometry.SectionComponentPullback
+public import WeilConjectures.AlgebraicGeometry.SectionEtaleChart
 public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.SectionFractionRestrictionMap
 public import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
@@ -8998,6 +8999,7 @@ public import WeilConjectures.Compactification.OverRefinementBaseChange
 public import WeilConjectures.Compactification.OverRefinementEqualizer
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.ProperOpenSection
+public import WeilConjectures.Compactification.QuasiCompact
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.Compactification.RefinementOfIsPullback
@@ -9321,6 +9323,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ExtendScalarsCohomol
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FamilyObject
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependenceField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusDatum
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
@@ -9346,12 +9349,15 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportReflection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
@@ -9360,6 +9366,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFrames
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFramesFundamentalClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
@@ -12171,6 +12179,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HigherDirectImageAffine
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint
