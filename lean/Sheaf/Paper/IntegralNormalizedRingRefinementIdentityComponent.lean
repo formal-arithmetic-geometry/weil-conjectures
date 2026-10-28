@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData
+import Sheaf.Paper.IntegralNormalizedRingRefinementIdentityCore
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,6 +41,49 @@ theorem integral_normalized_ring_refinement_identity_component
     (K : C.{u, v} l Ω X (.integral E)) :
     (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map
         ((N.refinement (.id c) (.integral E)).left.hom.app K) = 𝟙 _ := by
-  sorry
+  obtain ⟨hi, hg, h⟩ := N.refinement_normalized (.id c) (.integral E)
+  obtain ⟨ε, hε, hρ⟩ := h K
+  dsimp at hi hg hε hρ ⊢
+  have hcore :=
+    integral_normalized_ring_refinement_identity_core.{u, v}
+      ((RingStage.integral E).coefficients l) (c := c) hi hg
+      ((RingStage.inclusion l Ω X (.integral E)).obj K) ε hε
+  change (RingStage.inclusion l Ω Y (.integral E)).map
+      ((N.refinement (.id c) (.integral E)).left.hom.app K) = 𝟙 _
+  have hρ' :
+      (R.left c (.integral E)).inv.app K ≫
+          (RingStage.inclusion l Ω Y (.integral E)).map
+            ((N.refinement (.id c) (.integral E)).left.hom.app K) ≫
+        (R.left c (.integral E)).hom.app K =
+      ((PurCompactSupport.geometricPushComposition
+          ((RingStage.integral E).coefficients l)
+          (Compactification.Refinement.id c).hom c.g hg ≪≫
+        eqToIso (congrArg (fun h ↦ PurCompactSupport.push
+            ((RingStage.integral E).coefficients l) h)
+          (Compactification.Refinement.id c).hom_g)).symm.app
+          ((PurCompactSupport.openExtension ((RingStage.integral E).coefficients l)
+            c.i).mapDerivedCategory.obj
+              ((RingStage.inclusion l Ω X (.integral E)).obj K))).hom ≫
+        (PurCompactSupport.push ((RingStage.integral E).coefficients l) c.g).map ε.inv := by
+    exact hρ
+  have hcore' :
+      ((PurCompactSupport.geometricPushComposition
+          ((RingStage.integral E).coefficients l)
+          (Compactification.Refinement.id c).hom c.g hg ≪≫
+        eqToIso (congrArg (fun h ↦ PurCompactSupport.push
+            ((RingStage.integral E).coefficients l) h)
+          (Compactification.Refinement.id c).hom_g)).symm.app
+          ((PurCompactSupport.openExtension ((RingStage.integral E).coefficients l)
+            c.i).mapDerivedCategory.obj
+              ((RingStage.inclusion l Ω X (.integral E)).obj K))).hom ≫
+        (PurCompactSupport.push ((RingStage.integral E).coefficients l) c.g).map ε.inv =
+      𝟙 ((PurCompactSupport.image ((RingStage.integral E).coefficients l) c).obj
+        ((RingStage.inclusion l Ω X (.integral E)).obj K)) := by
+    simpa [PurCompactSupport.image, Functor.comp_obj] using hcore
+  apply (cancel_mono ((R.left c (.integral E)).hom.app K)).1
+  simp only [Category.id_comp]
+  apply (cancel_epi ((R.left c (.integral E)).inv.app K)).1
+  simpa [PurCompactSupport.image, Functor.comp_obj, Category.assoc,
+    Iso.inv_hom_id_app] using hρ'.trans hcore' 
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
