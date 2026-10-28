@@ -6,6 +6,7 @@ module
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.PurTwistSheaves
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import all Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
 
 /-! # Invertibility of the module adjunction unit for an isomorphic scheme map
 -/
@@ -41,6 +42,21 @@ theorem frobeniusIntegralRootTransport_moduleUnit_isIso
       ((proEtaleRingModuleAdjunction g (completedIntegralCommRingSheafUnrestricted l E Y)
         (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l E).pull
           g)).unit.app (purTwistIntegralModule Y l E))) := by
-  sorry
+  let R := completedIntegralCommRingSheafUnrestricted l E Y
+  let S := completedIntegralCommRingSheafUnrestricted l E X
+  let c := (PurCompactSupport.completed l E).pull g
+  let := (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0}
+    g CommRingCat.{u + 1}).1
+  have : IsIso (proEtaleRingDirectImageMap g R S c) := by
+    unfold proEtaleRingDirectImageMap
+    infer_instance
+  let ρ := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (proEtaleRingDirectImageMap g R S c)
+  let e := isoModulePushforwardEquivalence g
+    ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
+    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S) ρ
+  let : (proEtaleRingModuleDirectImage g R S c).IsEquivalence := e.isEquivalence_functor
+  exact Functor.map_isIso (SheafOfModules.toSheaf _) _
 
 end WeilConjectures
