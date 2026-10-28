@@ -48,6 +48,12 @@ lemma isIso_map_of_isIso {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
     {f : A ⟶ B} (h : IsIso f) : IsIso (F.map f) :=
   inferInstance
 
+/-- If `H (α_A)` is an isomorphism and `A ≅ B`, then so is `H (α_B)`. -/
+lemma isIso_map_app_of_iso {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {F G : C ⥤ D} (α : F ⟶ G) (H : D ⥤ E) {A B : C} (e : A ≅ B) (h : IsIso (H.map (α.app A))) :
+    IsIso (H.map (α.app B)) :=
+  (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight α H) e).1 h
+
 /-- A morphism isomorphic, as an arrow, to an isomorphism is an isomorphism. -/
 lemma isIso_of_nonempty_arrowIso_of_isIso {C : Type*} [Category* C] {A B A' B' : C}
     {f : A ⟶ B} {g : A' ⟶ B'} (e : Nonempty (Arrow.mk f ≅ Arrow.mk g)) (hg : IsIso g) :
@@ -170,6 +176,32 @@ theorem isIso_map_baseChangeMap_app_derivedExtendScalars (H : DerivedPullIsoComp
 
 end Flat
 
+section Transport
+
+variable {Λ₁ Λ₂ Λ₃ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ₁]
+  [IsCommMonObj Λ₁] [MonObj Λ₂] [IsCommMonObj Λ₂] [MonObj Λ₃] [IsCommMonObj Λ₃]
+  (a : Λ₁ ⟶ Λ₂) [IsMonHom a] (b : Λ₂ ⟶ Λ₃) [IsMonHom b]
+  {X Y X' Y' Z : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+/-- The restricted base change map with coefficients `Λ₃` is invertible at `K` as soon as it is
+invertible at `T_b (T_a K₀)` for some `K₀` with `T_b (T_a K₀) ≅ K`. -/
+lemma isIso_map_baseChangeMap_app_of_iso_extendScalars (sq : CommSq g' p' p g) (i : Z ⟶ Y')
+    (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ₁ X)))
+    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ₃ X))}
+    (e : Nonempty ((Mod.extendScalars (coefficientMap b X)).leftDerivedFunctor.obj
+        ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K₀) ≅ K))
+    (h : IsIso ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
+      (pullbackSquareComparison Λ₃ sq)).app
+        ((Mod.extendScalars (coefficientMap b X)).leftDerivedFunctor.obj
+          ((Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor.obj K₀))))) :
+    IsIso ((L((i)^*⟦Λ₃⟧)).map ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction Λ₃ p) (derivedUpperStarLowerStarAdjunction Λ₃ p')
+      (pullbackSquareComparison Λ₃ sq)).app K)) :=
+  isIso_map_app_of_iso _ _ e.some h
+
+end Transport
+
 section Coefficients
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
@@ -287,6 +319,59 @@ theorem isIso_map_baseChangeMap_app_padicAlgCl_of_padicSubfield [QuasiCompact p]
       ((g')^*⟦Profinite.continuousMapRingObj E.1⟧.leftDerivedFunctor.obj K) n)
     (by exact_mod_proofs h)
   exact_mod_proofs hA
+
+/-- **The `ℚ̄_ℓ`-restricted base change map from integral models**: for quasi-compact
+quasi-separated vertical maps and a topologically noetherian `X`, the restricted base change map
+with `ℚ̄_ℓ`-coefficients is invertible at a bounded constructible `K` as soon as, for every finite
+subextension `E ⊆ ℚ̄_ℓ`, the one with `𝒪_E`-coefficients is invertible at every bounded
+constructible `𝒪_E`-complex: `K ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for an integral model `K₀`
+(`ProEtale.exists_padicAlgCl_iso_integralModel`). -/
+theorem isIso_map_baseChangeMap_app_padicAlgCl_of_integral [TopologicalSpace.NoetherianSpace X]
+    [QuasiCompact p] [QuasiSeparated p] [QuasiCompact p'] [QuasiSeparated p']
+    (sq : CommSq g' p' p g) (i : Z ⟶ Y')
+    {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hK : boundedConstructible _ K)
+    (h : ∀ (E : FiniteIntermediateField ℓ) (K₀ : DerivedCategory (Mod
+      (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))),
+      boundedConstructible _ K₀ →
+        IsIso ((L((i)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).map ((Adjunction.exchangeRight
+          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) p)
+          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) p')
+          (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq)).app K₀))) :
+    IsIso ((L((i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).map ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p)
+      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p')
+      (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)).app K)) := by
+  obtain ⟨E, K₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X ℓ ⟨K, hK⟩
+  -- the integral model as an object of the ambient derived category, `ℚ̄_ℓ ⊗ (E ⊗ K₀) ≅ K`
+  have hobj : (ObjectProperty.ι _).obj (⟨K, hK⟩ : PadicAlgClConstructible X ℓ) = K := rfl
+  have i₁ := (ObjectProperty.liftCompιIso (boundedConstructible (padicAlgClRingObj X ℓ))
+    ((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙ derivedExtendScalarsToPadicAlgCl X ℓ E)
+    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj X ℓ E K)).app
+      ((boundedConstructibleExtendScalars X ℓ E).obj K₀)
+  have i₂ := (derivedExtendScalarsToPadicAlgCl X ℓ E).mapIso
+    ((boundedConstructibleExtendScalarsCompatibility X ℓ E).app K₀)
+  have e' := Nonempty.intro ((i₁ ≪≫ i₂).symm ≪≫ (ObjectProperty.ι _).mapIso e ≪≫ eqToIso hobj)
+  have hK₀ : boundedConstructible _ K₀.obj := by exact_mod_proofs K₀.property
+  obtain ⟨n, hn⟩ := hK₀.1.1
+  have hE := isIso_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E sq i K₀.obj n hn
+    (h E K₀.obj hK₀)
+  have hnE := isGE_leftDerivedFunctor_extendScalars_obj
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E) K₀.obj n
+  have hA := isIso_map_baseChangeMap_app_padicAlgCl_of_padicSubfield ℓ E sq i
+    ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+      X)).leftDerivedFunctor.obj K₀.obj) n hnE (by exact_mod_proofs hE)
+  have hgen := isIso_map_baseChangeMap_app_of_iso_extendScalars
+    (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) sq i K₀.obj (K := K)
+  -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
+  clear i₁ i₂ hobj e hK₀ hE hnE
+  revert E K₀ n hn hA e' hgen
+  normalize_precoherent
+  intro E K₀ e' n hn hA hgen
+  exact hgen e' hA
 
 end Coefficients
 
