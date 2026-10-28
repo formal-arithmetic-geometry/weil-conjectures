@@ -4,8 +4,9 @@
 Usage:
   tools/units.py build     write dag/chapters/<sec>.json (16) and dag/units/<sk>.json (389) from the blueprint, keeping the
                            `realized` fields already recorded, and stamp every node in dag/nodes/ with `chapter` and `unit`
-  tools/units.py build --snapshot main-20261015 --unit <sk> [--unit <sk> ...]
-                          build only the selected units and their chapters from that snapshot; stamp only their nodes.
+  tools/units.py build --snapshot NAME --unit <sk> [--unit <sk> ...]
+                          build only the selected units and their chapters from that snapshot (default `latest`, the
+                          current blueprint, read through literature/blueprint/latest); stamp only their nodes.
                           Companion <sk>.proof.md files supply steps when _section.md has no inline proof.
                           Changed files have timestamped .bak copies (empty for a newly created file).
   tools/units.py route     print the unit route of the targets: the units reached from the targets' units through `uses`,
@@ -30,13 +31,13 @@ Reachability also honors a unit's explicit `realized` binding when all its state
 are reached, even if those nodes' source paths place them in another unit. Empty or partial bindings do not count.
 """
 from __future__ import annotations
-import argparse, collections, json, pathlib, re, sys, time
+import argparse, collections, json, os, pathlib, re, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import dag_queue as dq  # noqa: E402
 
 ROOT = dq.li.ROOT
-BP = ROOT / "literature/blueprint/master/blueprint"
+LIT = ROOT / "literature/blueprint"
 UNITS = ROOT / "dag/units"
 CHAPTERS = ROOT / "dag/chapters"
 BACKUP_SUFFIX = f".units-{time.time_ns()}.bak"
@@ -81,6 +82,22 @@ def dump(path: pathlib.Path, d: dict):
     path.write_text(text)
 
 
+def current_snapshot(name: str = "latest") -> pathlib.Path:
+    """literature/blueprint/<name>; `latest` (the current blueprint, moved by ~/cc1/blueprint-refresh.sh) is followed to
+    its dated directory, so that records name the snapshot they were read from"""
+    p = LIT / name
+    return LIT / os.readlink(p) if p.is_symlink() else p
+
+
+def source_document(d) -> str:
+    """the document a node comes from: `source.document`, or `source` itself when the node records a plain path
+    (lem-pd-section-tensor-representatives-exists, 2026-10-26); "" otherwise"""
+    s = d.get("source")
+    if isinstance(s, dict):
+        return str(s.get("document") or "")
+    return s if isinstance(s, str) else ""
+
+
 def source_place(doc, units, chapters):
     m = re.search(r"blueprint/[^/]+/blueprint/(sec-[^/]+)/(?:(sk-[^/]+)/)?[^/]+\.md$", doc)
     if m and m.group(1) in chapters:
@@ -90,7 +107,7 @@ def source_place(doc, units, chapters):
 
 def stamp_missing(d, units, chapters):
     """Complete absent live-import bindings from source metadata; keep explicit live bindings."""
-    place = source_place(str((d.get("source") or {}).get("document") or ""), units, chapters)
+    place = source_place(source_document(d), units, chapters)
     if place:
         for key, value in zip(("chapter", "unit"), place):
             if not d.get(key) and value is not None:
@@ -100,7 +117,7 @@ def stamp_missing(d, units, chapters):
 
 def node_place(i, nodes, files, units, chapters, seen=()):
     d = nodes[i]
-    place = source_place(str((d.get("source") or {}).get("document") or ""), units, chapters)
+    place = source_place(source_document(d), units, chapters)
     if place:
         return place
     item = (d.get("created") or {}).get("item")
@@ -110,7 +127,7 @@ def node_place(i, nodes, files, units, chapters, seen=()):
 
 
 def build(bp=None, selected=None) -> None:
-    bp = BP if bp is None else bp
+    bp = current_snapshot() / "blueprint" if bp is None else bp
     if not bp.is_dir():
         raise ValueError(f"blueprint snapshot is not available: {bp}")
     sections = sorted(bp.glob("sec-*"))
@@ -341,13 +358,13 @@ def main() -> int:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     if cmd == "build":
         parser = argparse.ArgumentParser(description="Build blueprint unit metadata")
-        parser.add_argument("--snapshot", default="master")
+        parser.add_argument("--snapshot", default="latest")
         parser.add_argument("--unit", action="append", dest="selected")
         args = parser.parse_args(sys.argv[2:])
         if pathlib.Path(args.snapshot).name != args.snapshot or args.snapshot in (".", ".."):
             parser.error("--snapshot must name a directory under literature/blueprint")
         try:
-            build(ROOT / "literature/blueprint" / args.snapshot / "blueprint", set(args.selected) if args.selected else None)
+            build(current_snapshot(args.snapshot) / "blueprint", set(args.selected) if args.selected else None)
         except ValueError as e:
             parser.error(str(e))
         return 0

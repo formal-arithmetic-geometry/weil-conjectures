@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-"""Bring a new snapshot of the blueprint (formal-arithmetic-geometry/weil-conjectures-blueprint, branch main) into the
-project, the way the snapshots of 2026-10-15 (imported 2026-10-16, e7ca1a8cf6, be148130e2, 6d63bf6ef7) and 2026-10-17
-(df19dd5c27) were brought in. Run by ~/cc1/blueprint-refresh.sh every day; by hand:
+"""Bring a new snapshot of the blueprint into the project, the way the snapshots of 2026-10-15 (imported 2026-10-16,
+e7ca1a8cf6, be148130e2, 6d63bf6ef7) and 2026-10-17 (df19dd5c27) were brought in.
 
-  tools/blueprint_snapshot.py install --clone DIR [--commit REV] [--name main-YYYYMMDD] [--dest DIR]
-        export REV (default origin/main) of the blueprint clone DIR into literature/blueprint/<name> (no .git) and add
-        the line `<name> <sha> (weil-conjectures-blueprint main, <commit time UTC>; <subject>)` to COMMITS.txt
+The blueprint is the one in slopmaster2 (upstream rule, Nailin Guan, Zulip 2026-10-28: "always use the latest blueprint
+in slopmaster2"): the commit of formal-arithmetic-geometry/weil-conjectures-blueprint that the `blueprint` submodule of
+formal-arithmetic-geometry/weil-conjectures, branch slopmaster2, points to. Snapshots up to main-20261028 were taken from
+the blueprint repository's own main. Run by ~/cc1/blueprint-refresh.sh every 6 hours; by hand:
+
+  tools/blueprint_snapshot.py pointer
+        print the blueprint commit that slopmaster2 points to (GitHub API, token ~/.config/weil-pr/github_token)
+  tools/blueprint_snapshot.py install --clone DIR --commit REV [--name slopmaster2-YYYYMMDD] [--dest DIR]
+        export REV of the blueprint clone DIR into literature/blueprint/<name> (no .git) and add the line
+        `<name> <sha> (<label>, <commit time UTC>; <subject>)` to COMMITS.txt
   tools/blueprint_snapshot.py latest
-        print the name and commit of the newest main-* snapshot recorded in COMMITS.txt
+        print the name and commit of the newest snapshot recorded in COMMITS.txt
   tools/blueprint_snapshot.py merge --snapshot NAME [--base NAME] [--snapshot-dir DIR] [--dry] [--report FILE]
         import the snapshot into dag/nodes (the base defaults to the snapshot recorded before it in COMMITS.txt)
 
@@ -27,7 +33,7 @@ tools/live_closed.py for the "proved" count):
   5. one commit under flock coord/.merge.lock (SHEAF_LEAD=L-only) with only these files.
 """
 from __future__ import annotations
-import argparse, datetime, fcntl, json, os, pathlib, re, shutil, subprocess, sys
+import argparse, datetime, fcntl, json, os, pathlib, re, shutil, subprocess, sys, urllib.request
 
 TOOLS = pathlib.Path(__file__).resolve().parent
 ROOT = TOOLS.parent
@@ -37,6 +43,11 @@ COMMITS = LIT / "COMMITS.txt"
 WORK = pathlib.Path(os.environ.get("BLUEPRINT_REFRESH_WORK", pathlib.Path.home() / "cc1" / "blueprint-refresh"))
 NODES = ROOT / "dag" / "nodes"
 TRAILER = "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+UPSTREAM = "formal-arithmetic-geometry/weil-conjectures"
+BRANCH = "slopmaster2"
+TOKEN = pathlib.Path.home() / ".config" / "weil-pr" / "github_token"
+PREFIXES = ("main-", "slopmaster2-")      # dated snapshots: blueprint main (to 2026-10-28), then slopmaster2's pointer
+LABEL = "weil-conjectures-blueprint at the blueprint submodule of weil-conjectures slopmaster2"
 FM = re.compile(r"\+\+\+\n(.*?)\n\+\+\+\n?(.*)", re.S)
 
 
@@ -57,9 +68,22 @@ def recorded() -> list[tuple[str, str]]:
     out = []
     for line in COMMITS.read_text().splitlines():
         p = line.split()
-        if len(p) >= 2 and p[0].startswith("main-"):
+        if len(p) >= 2 and p[0].startswith(PREFIXES):
             out.append((p[0], p[1]))
     return out
+
+
+def pointer(fetch=None) -> str:
+    """the blueprint commit of the `blueprint` submodule of UPSTREAM on BRANCH"""
+    url = f"https://api.github.com/repos/{UPSTREAM}/contents/blueprint?ref={BRANCH}"
+    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json"})
+    if TOKEN.is_file():
+        req.add_header("Authorization", "Bearer " + TOKEN.read_text().strip())
+    with (fetch or urllib.request.urlopen)(req, timeout=60) as r:
+        d = json.load(r)
+    if not isinstance(d, dict) or d.get("type") != "submodule" or not re.fullmatch(r"[0-9a-f]{40}", str(d.get("sha"))):
+        raise SystemExit(f"{UPSTREAM}@{BRANCH}: blueprint is not a submodule pointer: {str(d)[:200]}")
+    return d["sha"]
 
 
 def install(a) -> int:
@@ -73,7 +97,7 @@ def install(a) -> int:
             say(f"{sha[:10]} is already installed as {name}")
             print(f"INSTALLED {name} {sha}")
             return 0
-    name = a.name or "main-" + datetime.date.today().strftime("%Y%m%d")
+    name = a.name or "slopmaster2-" + datetime.date.today().strftime("%Y%m%d")
     taken = {n for n, _ in recorded()}
     if name in taken or (LIT / name).exists():
         name = name + "-" + datetime.datetime.now().strftime("%H%M")
@@ -87,7 +111,7 @@ def install(a) -> int:
     arch = subprocess.run(["git", "-C", clone, "archive", "--format=tar", sha], capture_output=True, check=True).stdout
     subprocess.run(["tar", "-x", "-C", tmp], input=arch, check=True)
     tmp.rename(dest)
-    line = f"{name} {sha} (weil-conjectures-blueprint main, {when}; {info[1]})\n"
+    line = f"{name} {sha} ({a.label}, {when}; {info[1]})\n"
     if not a.dest:
         with COMMITS.open("a") as f:
             f.write(line)
@@ -262,14 +286,18 @@ def write_units(snapdir: pathlib.Path, new_nodes: list[str]) -> list[pathlib.Pat
     written = []
     if want:
         keep = {p: p.read_bytes() for p in U.CHAPTERS.glob("*.json")}
+        new_chapters = set()
         before = set(ROOT.joinpath("dag").rglob("*.bak"))
-        U.build(bp, set(want))
-        for p, b in keep.items():
-            p.write_bytes(b)
-        for p in set(ROOT.joinpath("dag").rglob("*.bak")) - before:
-            p.unlink()
+        try:
+            U.build(bp, set(want))
+        finally:   # also when build fails half way (2026-10-28): the chapter records stay, no .bak is left behind
+            new_chapters = {p for p in U.CHAPTERS.glob("*.json") if p not in keep}
+            for p, b in keep.items():
+                p.write_bytes(b)
+            for p in set(ROOT.joinpath("dag").rglob("*.bak")) - before:
+                p.unlink()
         written += [U.UNITS / f"{u}.json" for u in want]
-        written += [p for p in U.CHAPTERS.glob("*.json") if p not in keep]
+        written += sorted(new_chapters)
     units, chapters = U.load_units()
     files = live_nodes()
     for i in new_nodes:
@@ -287,6 +315,7 @@ def break_cycles(snap: str) -> list[pathlib.Path]:
     `blueprint_detail_nodes`), and a node no longer lists a later blueprint node (larger blueprint_order; kept in
     `blueprint_forward_refs`)."""
     from check_dag import sccs
+    import units as U
     files = live_nodes()
     nodes = {i: json.loads(p.read_text()) for i, p in files.items()}
     mine = {i for i, d in nodes.items() if d.get("blueprint_snapshot") == snap}
@@ -301,9 +330,9 @@ def break_cycles(snap: str) -> list[pathlib.Path]:
             cs = set(c)
             for u in sorted(cs & mine):
                 d = nodes[u]
-                udoc = str((d.get("source") or {}).get("document") or "")
+                udoc = U.source_document(d)
                 for v in [x for x in graph[u] if x in cs]:
-                    vdoc = str((nodes[v].get("source") or {}).get("document") or "")
+                    vdoc = U.source_document(nodes[v])
                     detail = udoc.endswith("/_section.md") and vdoc.startswith(udoc[: -len("_section.md")])
                     forward = (nodes[v].get("blueprint_order") or -1) > (d.get("blueprint_order") or 10 ** 9)
                     if not (detail or forward):
@@ -441,7 +470,7 @@ def merge(a) -> int:
             say("nothing to commit")
             sha = None
         else:
-            msg = (f"Blueprint main {commit[:9]}: snapshot literature/blueprint/{snap} into the DAG: {s['new_nodes']} new nodes "
+            msg = (f"Blueprint {commit[:9]}: snapshot literature/blueprint/{snap} into the DAG: {s['new_nodes']} new nodes "
                    f"imported, {s['changed_nodes']} nodes whose blueprint text changed carry blueprint_update\n\n"
                    f"Base {base}. Statement changed: {s['changed_statement']} (of them proved in Lean, recorded and not "
                    f"reopened: {len(s['changed_statement_proved_in_lean'])}); proof only: {s['changed_proof_only']}. "
@@ -462,10 +491,12 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     i = sub.add_parser("install")
     i.add_argument("--clone", required=True)
-    i.add_argument("--commit", default="origin/main")
+    i.add_argument("--commit", required=True)
     i.add_argument("--name")
+    i.add_argument("--label", default=LABEL, help="where the commit comes from, for COMMITS.txt")
     i.add_argument("--dest", help="install here instead of literature/blueprint (a dry run); COMMITS.txt untouched")
     sub.add_parser("latest")
+    sub.add_parser("pointer")
     m = sub.add_parser("merge")
     m.add_argument("--snapshot", required=True)
     m.add_argument("--base")
@@ -494,6 +525,8 @@ def main() -> int:
         return 0
     if a.cmd == "install":
         return install(a)
+    if a.cmd == "pointer":
+        print(pointer()); return 0
     if a.cmd == "latest":
         n, c = recorded()[-1]
         print(n, c); return 0
