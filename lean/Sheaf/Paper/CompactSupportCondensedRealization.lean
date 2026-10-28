@@ -43,6 +43,7 @@ blueprint sk-thm-purity-transport, Steps 2--3.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option linter.unusedSectionVars false
 
 set_option synthInstance.maxSize 4096
@@ -1008,13 +1009,16 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
+-- Keep the properness and site-size proofs in the field type. Abstracting these
+-- into auxiliary declarations forces the kernel to unfold the large mate construction.
+set_option backward.proofsInPublic true in
 /-- The identity equation required by the normalized semilinear mate calculation.
 Source: Stacks 0F7B and `SemilinearProperOpen.gamma_identities`.
 (blueprint: lem-pur-compact-support-condensed-realization).
 -/
-def GammaIdentityCondition {X Y : CondensedERealization.Base k}
-    (f : X.scheme ⟶ Y.scheme) (c : Compactification f) : Prop :=
-  ∀ N, ((AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma
+structure GammaIdentityCondition {X Y : CondensedERealization.Base k}
+    (f : X.scheme ⟶ Y.scheme) (c : Compactification f) : Prop where
+  identity : ∀ N, ((AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma
       (quotientRings l E) (quotientMaps l E) c.i (𝟙 X.scheme) (𝟙 c.Z) c.i (by simp)).app N ≫
       (AlgebraicGeometry.ProEtale.SemilinearProperOpen.sId
         (quotientRings l E) (quotientMaps l E) c.Z).hom.app
@@ -1029,7 +1033,9 @@ def GammaIdentityCondition {X Y : CondensedERealization.Base k}
 theorem gammaIdentityCondition_exists {X Y : CondensedERealization.Base k}
     (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) :
     GammaIdentityCondition l E k f c := by
-  sorry
+  constructor
+  exact (SemilinearProperOpen.gamma_identities
+    (quotientRings l E) (quotientMaps l E)).1 c.i (by simp)
 
 /-- The normalized identity mate reduces to the canonical unitor composite.
 Source: Stacks 0F7B and `SemilinearProperOpen.gamma_identities`.
