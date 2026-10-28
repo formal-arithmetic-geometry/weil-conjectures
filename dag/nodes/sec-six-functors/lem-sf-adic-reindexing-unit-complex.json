@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-adic-reindexing-unit-complex",
+ "kind": "lemma",
+ "title": "Cochain left-unit square for section-normalized adic reindexing",
+ "statement": "Fix a prime l, schemes X and Y with l invertible on both, a scheme isomorphism g:X → Y, native realizations R,S, ambient tensor structures A,B, a coefficient-ring reindexing r, and V:ReindexTensor l X g A B r [def-sf-native-adic-tensor-reindexing]. Let P be a cochain complex of S-modules. Choose chain isomorphisms bB:Tot(OY,P) ≅ P and bA:Tot(OX,F(P)) ≅ F(P), where OX,OY are the coefficient-unit complexes in degree zero and F is the termwise module reindexing. Assume each b acts on its (0,n) homogeneous tensor of the unit section a and a section x by multiplication a·x. Then F(bB.hom) equals V.cochain.hom at (OY,P), followed by Tot(V.unitCochain.hom,id), followed by bA.hom. No K-flatness of P and no comparison between common-stage realizations is assumed.",
+ "stmt_deps": [
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, with Stacks Tags 03EK and 0FPT; agent-written pure-section and localization verification of the normalized ordinary left unitor."
+ },
+ "proof": [
+  {
+   "text": "Precompose the desired equality by the inverse cochain tensor comparison. The proved total_hom_ext and pure_ext helpers reduce it to totalization summands and sheafified pure tensors. The coefficient-unit complex is zero away from degree zero, reindexing preserves zero objects, and tensoring preserves zero objects. Thus every summand whose first degree is nonzero vanishes.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-right-representatives",
+    "def-sf-native-adic-tensor-reindexing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the (0,n) summand, use the single-complex identification to express its first section as the coefficient-unit section of a. The recorded pure-section equation identifies the inverse cochain tensor map on this generator, by applying its inverse to that equation and cancelling the isomorphism. Naturality of total-tensor summand inclusions and the componentwise formula for sheaf pure tensors carry Tot(unitCochain.hom,id) to the map on its first factor. Use the already proved tensorGenerator_map helper of the scalar-unit module for the total generator formula, instead of repeating its proof.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-right-representatives",
+    "def-sf-native-adic-tensor-reindexing",
+    "lem-sfb-ringed-slice-scalar-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two assumed multiplication formulas for bB and bA, and the recorded unit-section equation. The source side is multiplication by a. On the target side, the unit comparison sends a to r.iso(a); the definition of modulePull restricts scalars along the inverse of this ring isomorphism. Its action is therefore multiplication by the original a as well. The ring isomorphism identity proves equality, without any nonzero-ring assumption or global generation assumption. Combine with the vanishing summands.",
+   "uses": [
+    "def-sf-native-adic-tensor-reindexing"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, with Stacks Tags 03EK and 0FPT; agent-written pure-section and localization verification of the normalized ordinary left unitor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The left unitor of total tensor complexes commutes with sectionwise reindexing normalized on pure tensors and coefficient units",
+   "results": "Eight hits for HomologicalComplex.leftUnitor, leftUnitor' and component/differential formulas. They give unitors themselves, not the reindexing square for the supplied normalized comparisons.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιMapBifunctor",
+   "results": "Twelve hits for totalization summand inclusions, their naturality and extensionality. These are generic tools already packaged by the proved ringed-forget helpers. No native reindexing square.",
+   "date": "2026-10-28",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "left_unit_chain|moduleTmul_map",
+   "results": "Zero Mathlib hits in the requested Sheaf subtree. Separate source-library rg located the proved private ringed left-unit and pure-tensor helpers; use the generator and summand helpers, with a direct native coefficient action calculation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingUnitContraction",
+  "date": "2026-10-28",
+  "group": "Q8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Cochain normalization used in the ordinary left-unitor calculation for lem-sf-adic-reindexing-unit-contraction, from BS Remark 6.8.15. The imported blueprint reference tool reports no blueprint ancestor for the assigned module.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingUnitComplex",
+  "file": "lean/Sheaf/Paper/AdicReindexingUnitComplex.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.reindexing_left_unitor_chain",
+  "statement": "theorem reindexing_left_unitor_chain\n    (P : CochainComplex (modules l Y S) ℤ)\n    (bB : (coefficientTotalTensor.{u + 1, u + 1, u}\n      (ProEt.topology Y) (ring l Y S)).obj\n      (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology Y) (ring l Y S), P) ≅ P)\n    (bA : (coefficientTotalTensor.{u + 1, u + 1, u}\n      (ProEt.topology X) (ring l X R)).obj\n      (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology X) (ring l X R),\n        ((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P) ≅\n      ((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P)\n    (hbB : ∀ (n : ℤ) (h : 0 + n = n) (W : Y.ProEtᵒᵖ) (a : (ring l Y S).obj.obj W)\n      (x : (P.X n).val.obj W),\n      (bB.hom.f n).val.app W (coefficientTensorGenerator.{u + 1, u + 1, u}\n        (ProEt.topology Y) (ring l Y S)\n        (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology Y) (ring l Y S))\n        P 0 n n h W\n        (ringedTensorUnitSection.{u + 1, u, u + 1} (ProEt.topology Y) (ring l Y S) W a) x) =\n        a • x)\n    (hbA : ∀ (n : ℤ) (h : 0 + n = n) (W : X.ProEtᵒᵖ) (a : (ring l X R).obj.obj W)\n      (x : ((((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P).X n).val.obj W),\n      (bA.hom.f n).val.app W (coefficientTensorGenerator.{u + 1, u + 1, u}\n        (ProEt.topology X) (ring l X R)\n        (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology X) (ring l X R))\n        (((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P) 0 n n h W\n        (ringedTensorUnitSection.{u + 1, u, u + 1} (ProEt.topology X) (ring l X R) W a) x) =\n        a • x) :\n    ((modulePull l X g r).mapHomologicalComplex (.up ℤ)).map bB.hom =\n      V.cochain.hom.app\n        (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology Y) (ring l Y S), P) ≫\n      (coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R)).map\n        (X := (((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj\n          (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology Y) (ring l Y S)),\n          ((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P))\n        (Y := (ringedTensorUnitComplex.{u + 1, u, u + 1} (ProEt.topology X) (ring l X R),\n          ((modulePull l X g r).mapHomologicalComplex (.up ℤ)).obj P))\n        (V.unitCochain.hom, 𝟙 _) ≫ bA.hom",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "lem-sf-ringed-forget-tensor-right-representatives",
+  "def-sf-native-adic-tensor-reindexing",
+  "lem-sfb-ringed-slice-scalar-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T020659-L-2536594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261028T020659-L-2536594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
