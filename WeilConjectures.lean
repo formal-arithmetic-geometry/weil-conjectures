@@ -13444,6 +13444,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldUppe
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueReductionBounded
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.StalkZeroLocus
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TestObjectPushforwardSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolution
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionMod
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionProEtale
