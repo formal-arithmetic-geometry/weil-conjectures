@@ -63,7 +63,7 @@ theorem lowerStar_preservesFilteredColimit
   have : PreservesColimit E T := preservesColimit_of_preserves_colimit_cocone hc hT
   have : PreservesColimit D S := inferInstance
   have : PreservesColimit D (S ⋙ T) := comp_preservesColimit S T
-  exact preservesColimit_of_natIso D
+  exact preservesColimit_of_natIso (F := S ⋙ T) D
     ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (DerivedCategory.singleFunctorIsoCompQ A 0).symm
         ((lowerStar Λ f).rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ 0) ≪≫
