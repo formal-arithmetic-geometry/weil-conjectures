@@ -20468,3 +20468,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:28 L: returned deliver/G8/Sheaf.Paper.ScalarTowerTensorLimitTransportAssembly (reviewer RETURN: (reviewer C-2a591, head 2a5916a2f) D1/G2: StrictEquationAssembly's sorry is scalarTowerTensorLimitSquare_of_derivedSigma)
 - 00:30 L: merged deliver/NC/lem-pur-intrinsic-coefficient-stage-shift-coherence (reviewer FIX; after a return; new nodes: 1)
 - 00:31 L: returned deliver/NA/lem-pur-scalar-reduction-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head c5ed7727f569: H7/H3: the §1(C) correction makes the node easier. The conclusion is)
+- 00:37 L: returned deliver/N4/Sheaf.Paper.AdicAmbientHomEvaluationComparison (reviewer RETURN: (reviewer C-f773b, head f773b5101) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicAmbientHom)
