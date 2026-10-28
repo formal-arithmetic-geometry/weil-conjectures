@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
-import Sheaf.SixFunctors.RationalVerdierIntegralCocycle
 
 /-! # Integral-representative transport for rational Verdier composition
 
@@ -24,12 +23,39 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 open scoped TensorProduct
 
+attribute [local irreducible] CategoryTheory.derivedInternalHomOfUniverses
+  CategoryTheory.homComplexFunctor WeilConjectures.IntegralHom.totalTensor
+  WeilConjectures.IntegralHom.homModelMap WeilConjectures.IntegralHom.projection
+  WeilConjectures.IntegralHom.evaluate
+
 namespace WeilConjectures.RationalVerdier
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+
+private theorem map_heq {C C' : Type*} [Category* C] [Category* C']
+    (F : C ⥤ C') {X Y X' Y' : C} (hx : X = X') (hy : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (hf : HEq f g) : HEq (F.map f) (F.map g) := by
+  cases hx
+  cases hy
+  cases hf
+  rfl
+
+private theorem contra_map_heq {C C' : Type*} [Category* C] [Category* C']
+    (F : Cᵒᵖ ⥤ C') {X Y X' Y' : C} (hx : X = X') (hy : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (hf : HEq f g) : HEq (F.map f.op) (F.map g.op) := by
+  cases hx
+  cases hy
+  cases hf
+  rfl
+
+private theorem app_heq {C C' : Type*} [Category* C] [Category* C']
+    {F G : C ⥤ C'} (a : F ⟶ G) {X Y : C} (h : X = Y) :
+    HEq (a.app X) (a.app Y) := by
+  cases h
+  rfl
 
 /--
 The normalized comparison equation on an integral representative.
@@ -80,6 +106,101 @@ theorem localized_extension_composition
           eFH.comparison.hom.app ((op ((sfRationalConstructibleLocalization l F X).obj K))) ≫
             C.dual.map
               (a.hom.app ((sfRationalConstructibleLocalization l F X).obj K)).op := by
-  sorry
+  let QF := sfRationalConstructibleLocalization l F X
+  let QG := sfRationalConstructibleLocalization l G X
+  let QH := sfRationalConstructibleLocalization l H X
+  let T := integralScalar l X F G i
+  let U := integralScalar l X G H j
+  let V := integralScalar l X F H (j.comp i)
+  let R := scalar l X F G i
+  let S := scalar l X G H j
+  let W := scalar l X F H (j.comp i)
+  let IF := IntegralVerdier.restrictedDual l F X wF.omega.obj A.preserves
+  let IG := IntegralVerdier.restrictedDual l G X wG.omega.obj B.preserves
+  let IH := IntegralVerdier.restrictedDual l H X wH.omega.obj C.preserves
+  let bFG (K : sfIntegralConstructibleCategory l F X) :
+      T.obj (IF.obj (op K)) ⟶ IG.obj (op (T.obj K)) :=
+    ObjectProperty.homMk
+      (IntegralFiniteExtension.beta l F G i X D hl wF wG A.ordinary B.ordinary
+        K.obj K.property.1)
+  let bGH (K : sfIntegralConstructibleCategory l G X) :
+      U.obj (IG.obj (op K)) ⟶ IH.obj (op (U.obj K)) :=
+    ObjectProperty.homMk
+      (IntegralFiniteExtension.beta l G H j X D hl wG wH B.ordinary C.ordinary
+        K.obj K.property.1)
+  let bFH (K : sfIntegralConstructibleCategory l F X) :
+      V.obj (IF.obj (op K)) ⟶ IH.obj (op (V.obj K)) :=
+    ObjectProperty.homMk
+      (IntegralFiniteExtension.beta l F H (j.comp i) X D hl wF wH A.ordinary C.ordinary
+        K.obj K.property.1)
+  let c (K : sfIntegralConstructibleCategory l F X) : U.obj (T.obj K) ≅ V.obj K :=
+    ObjectProperty.isoMk _ (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1)
+  have hbeta (K : sfIntegralConstructibleCategory l F X) :
+      U.map (bFG K) ≫ bGH (T.obj K) =
+        (c (IF.obj (op K))).hom ≫ bFH K ≫ IH.map (c K).hom.op := by
+    have hb : U.map (bFG K) ≫ bGH (T.obj K) ≫ IH.map (c K).inv.op =
+        (c (IF.obj (op K))).hom ≫ bFH K := by
+      apply ObjectProperty.hom_ext
+      exact hcomp.2.2.2.2.1 K
+    have hb' : (U.map (bFG K) ≫ bGH (T.obj K)) ≫ (IH.mapIso (c K).op).inv =
+        (c (IF.obj (op K))).hom ≫ bFH K := by
+      simpa only [Functor.mapIso_inv, Iso.op_inv, Category.assoc] using hb
+    simpa only [Functor.mapIso_hom, Iso.op_hom, Category.assoc] using
+      (IH.mapIso (c K).op).comp_inv_eq.mp hb'
+  have hR (K : sfRationalConstructibleCategory l F X) :
+      R.obj K = QG.obj (T.obj K.obj) :=
+    sfRationalScalarExtension_obj l F X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) G i K
+  have hS (K : sfRationalConstructibleCategory l G X) :
+      S.obj K = QH.obj (U.obj K.obj) :=
+    sfRationalScalarExtension_obj l G X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) H j K
+  have hW (K : sfRationalConstructibleCategory l F X) :
+      W.obj K = QH.obj (V.obj K.obj) :=
+    sfRationalScalarExtension_obj l F X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))
+      H (j.comp i) K
+  intro K
+  have hDK : A.dual.obj (op (QF.obj K)) = QF.obj (IF.obj (op K)) := A.objects _
+  have hTK : R.obj (QF.obj K) = QG.obj (T.obj K) := hR _
+  have hRDK : R.obj (A.dual.obj (op (QF.obj K))) =
+      QG.obj (T.obj (IF.obj (op K))) := by rw [hDK, hR]; rfl
+  have hDTK : B.dual.obj (op (R.obj (QF.obj K))) =
+      QG.obj (IG.obj (op (T.obj K))) := by rw [hTK, B.objects]; rfl
+  have hsource : S.obj (R.obj (A.dual.obj (op (QF.obj K)))) =
+      QH.obj (U.obj (T.obj (IF.obj (op K)))) := by rw [hRDK, hS]; rfl
+  have hmiddle : S.obj (B.dual.obj (op (R.obj (QF.obj K)))) =
+      QH.obj (U.obj (IG.obj (op (T.obj K)))) := by rw [hDTK, hS]; rfl
+  have hUTK : S.obj (R.obj (QF.obj K)) = QH.obj (U.obj (T.obj K)) := by
+    rw [hTK, hS]; rfl
+  have htarget : C.dual.obj (op (S.obj (R.obj (QF.obj K)))) =
+      QH.obj (IH.obj (op (U.obj (T.obj K)))) := by rw [hUTK, C.objects]; rfl
+  have hVDK : W.obj (A.dual.obj (op (QF.obj K))) =
+      QH.obj (V.obj (IF.obj (op K))) := by rw [hDK, hW]; rfl
+  have hVK : W.obj (QF.obj K) = QH.obj (V.obj K) := hW _
+  have hDVK : C.dual.obj (op (W.obj (QF.obj K))) =
+      QH.obj (IH.obj (op (V.obj K))) := by rw [hVK, C.objects]; rfl
+  have hfirst : HEq (S.map (eFG.comparison.hom.app (op (QF.obj K))))
+      (QH.map (U.map (bFG K))) := by
+    have hb := map_heq S hRDK hDTK (hFG.2.1 K)
+    have ht := sfRationalScalarExtension_map_tmul l G X 0
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) H j _ _ (bFG K) 1
+    simp only [map_one] at ht
+    exact hb.trans ht
+  have hsecond : HEq (eGH.comparison.hom.app (op (R.obj (QF.obj K))))
+      (QH.map (bGH (T.obj K))) :=
+    (app_heq eGH.comparison.hom (congrArg op hTK)).trans (hGH.2.1 (T.obj K))
+  have hassoc : HEq (a.hom.app (A.dual.obj (op (QF.obj K))))
+      (QH.map (c (IF.obj (op K))).hom) :=
+    (app_heq a.hom hDK).trans (hnorm (IF.obj (op K)))
+  have hthird : HEq (C.dual.map (a.hom.app (QF.obj K)).op)
+      (QH.map (IH.map (c K).hom.op)) := by
+    have hm := contra_map_heq C.dual hUTK hVK (hnorm K)
+    have hp : HEq (C.dual.map (QH.map (c K).hom).op)
+        (QH.map (IH.map (c K).hom.op)) := C.pure _ _ (c K).hom 1
+    exact hm.trans hp
+  have hleft := heq_comp hsource hmiddle htarget hfirst hsecond
+  have hright := heq_comp hsource hVDK htarget hassoc
+    (heq_comp hVDK hDVK htarget (hFH.2.1 K) hthird)
+  have hi := congrArg QH.map (hbeta K)
+  simp only [Functor.map_comp] at hi
+  exact eq_of_heq (hleft.trans ((heq_of_eq hi).trans hright.symm))
 
 end WeilConjectures.RationalVerdier

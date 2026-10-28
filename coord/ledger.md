@@ -21101,3 +21101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/D8/Sheaf.Paper.FiniteProperProjectionFixedRealizationNormalizationCore (stage 3; reviewer PASS; first push; landing 20261028T072357-L-1939526 (interface); batch 20261028T072331; modules 1; new nodes 0)
 - 07:23 L: merged deliver/D9/Sheaf.SixFunctors.IntegralDualizingSupportReduction (stage 3; reviewer PASS; first push; landing 20261028T072359-L-1939976 (interface); batch 20261028T072331; modules 2; new nodes 1)
 - 07:24 L: merged deliver/E4/Sheaf.SixFunctors.RationalHomScalarCounitNormalization (stage 3; reviewer PASS; first push; landing 20261028T072400-L-1940343 (interface); batch 20261028T072331; modules 2; new nodes 1)
+- 07:24 L: merged deliver/E5/Sheaf.SixFunctors.RationalVerdierLocalizedComposition (stage 3; reviewer PASS; first push; landing 20261028T072401-L-1940879 (interface); batch 20261028T072331; modules 1; new nodes 0)
