@@ -84,16 +84,11 @@ variable {C : Type*} [Category C] [MonoidalCategory C]
   {R S : C} [MonObj R] [MonObj S]
   (a : R ⟶ S) [IsMonHom a]
 
-private noncomputable def mapRegularIso :
-    (F.mapMod R).obj (regular R) ≅ regular (F.obj R) :=
-  isoMk (Iso.refl _) (by simp only [Iso.refl_hom, Category.comp_id,
-    MonoidalCategory.whiskerLeft_id, Category.id_comp])
-
 private noncomputable def mapRestrictedRegularIso :
     (F.mapMod R).obj ((comap a).obj (regular S)) ≅
       (comap (F.map a)).obj (regular (F.obj S)) :=
   (F.mapModComapIso a).app (regular S) ≪≫
-    (comap (F.map a)).mapIso (mapRegularIso F)
+    (comap (F.map a)).mapIso (F.mapModRegularIso S)
 
 /-- A functor preserving coproducts carries a copower decomposition of a restricted regular
 module to one of the image. -/
@@ -102,7 +97,7 @@ private noncomputable def mapCopowerIso {I : Type*} [HasCoproductsOfShape I (Mod
     [PreservesColimitsOfShape (Discrete I) (F.mapMod R)]
     (e : (∐ fun _ : I ↦ regular R) ≅ (comap a).obj (regular S)) :
     (∐ fun _ : I ↦ regular (F.obj R)) ≅ (comap (F.map a)).obj (regular (F.obj S)) :=
-  Sigma.mapIso (fun _ ↦ (mapRegularIso F).symm) ≪≫
+  Sigma.mapIso (fun _ ↦ (F.mapModRegularIso R).symm) ≪≫
     asIso (sigmaComparison (F.mapMod R) (fun _ : I ↦ regular R)) ≪≫
     (F.mapMod R).mapIso e ≪≫ mapRestrictedRegularIso F a
 
@@ -115,12 +110,7 @@ variable {C : Type*} [Category C] [MonoidalCategory C]
 
 private noncomputable def regularRingIso (r : R ≅ S) [IsMonHom r.hom] :
     (comap r.inv).obj (regular R) ≅ regular S :=
-  isoMk r (by
-    change (r.inv ▷ R ≫ μ[R]) ≫ r.hom = S ◁ r.hom ≫ μ[S]
-    rw [Category.assoc, IsMonHom.mul_hom]
-    rw [MonoidalCategory.tensorHom_def]
-    rw [Category.assoc, ← comp_whiskerRight_assoc, r.inv_hom_id,
-      id_whiskerRight, Category.id_comp])
+  (comapCongr (IsIso.Iso.inv_hom r).symm).app _ ≪≫ regularIsoOfIsIso r.hom
 
 private noncomputable def restrictedRegularIsoOfRingIso
     (a : R ⟶ S) [IsMonHom a] (a' : R' ⟶ S') [IsMonHom a']

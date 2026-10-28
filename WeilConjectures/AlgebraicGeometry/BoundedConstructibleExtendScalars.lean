@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.LocallyFinitelyPresentedExtendSc
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import WeilConjectures.AlgebraicGeometry.PullbackExtendScalarsComparison
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 
 /-! # Exact scalar extension preserves bounded constructible module objects
 
@@ -31,15 +32,6 @@ variable {X : Scheme.{u}}
   (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
   (φ : R ⟶ S) [IsMonHom φ]
-omit [IsCommMonObj R] in
-private lemma lfp_of_iso
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : IsLocallyFinitelyPresented R M) (e : M ≅ N) :
-    IsLocallyFinitelyPresented R N := by
-  rcases h with ⟨U, hU⟩
-  exact ⟨U, fun i ↦ (fp_iff_of_iso ((upperStar Ab.{u + 1} (U.f i)).mapMod R |>.mapIso e)).mp
-    (hU i)⟩
-
 omit [IsCommMonObj S] in
 private lemma constructible_extend
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
@@ -48,17 +40,9 @@ private lemma constructible_extend
   rcases h with ⟨U, hU⟩
   refine ⟨U, fun i ↦ ?_⟩
   let F := upperStar Ab.{u + 1} (U.immersion i)
-  exact lfp_of_iso (F.obj S) (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
+  exact IsLocallyFinitelyPresented.of_iso
     ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
-
-omit [IsCommMonObj S] [IsCommMonObj R] in
-private lemma constructible_of_iso
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : IsConstructibleModuleObject R M) (e : M ≅ N) :
-    IsConstructibleModuleObject R N := by
-  rcases h with ⟨U, hU⟩
-  exact ⟨U, fun i ↦ lfp_of_iso _ (hU i)
-    (((upperStar Ab.{u + 1} (U.immersion i)).mapMod R).mapIso e)⟩
+    (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
 /-- Exact extension of scalars preserves bounded constructible complexes of module objects.
 (auxiliary; not a blueprint node)
@@ -82,7 +66,7 @@ theorem boundedConstructible_leftDerivedExtendScalars_obj
   refine ⟨⟨a, b, fun i hi ↦ ?_⟩, fun n ↦ ?_⟩
   · exact (F.map_isZero (hab i hi)).of_iso
       ((F.leftDerivedFunctorHomologyFunctorIso i).app K).symm
-  · exact constructible_of_iso S (constructible_extend R S φ (hK n))
-      ((F.leftDerivedFunctorHomologyFunctorIso n).app K)
+  · exact IsConstructibleModuleObject.of_iso ((F.leftDerivedFunctorHomologyFunctorIso n).app K)
+      (constructible_extend R S φ (hK n))
 
 end AlgebraicGeometry.ProEtale
