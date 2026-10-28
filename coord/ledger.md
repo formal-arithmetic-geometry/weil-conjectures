@@ -20474,3 +20474,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 08:58 L: batch 20261027T233735 dependency take-out
 - 01:04 L: returned deliver/A2/WeilConjectures.SmoothPurity.Defs (reviewer RETURN: (the landing tools, head ea3eff068) the delivery did not land: missing import source modules: Sheaf.SmoothPurity.TraceNo)
+- 01:04 L: returned deliver/A4/Sheaf.SmoothPurity.TraceExistence (reviewer RETURN: (the landing tools, head 0265879ae) the delivery did not land: missing import source modules: Sheaf.SmoothPurity.TraceEx)
