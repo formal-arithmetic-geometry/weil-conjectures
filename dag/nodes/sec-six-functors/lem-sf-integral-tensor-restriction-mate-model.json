@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-integral-tensor-restriction-mate-model",
+ "kind": "statement",
+ "title": "One-level K-flat model for the normalized scalar tensor mate",
+ "statement": "Fix l,E,X,D,hl and a tensor presentation a over the completed integral coefficient sheaf B [def-sf-integral-hom-reduction-models]. Fix a K-flat complex P [def-pc-kflat-complex]. Let T_P be ordinary total tensor with P, q the derived localization, and A_P the functor a.tensor(q(P),-). There exists a natural isomorphism e:T_P;q ~= q;A_P whose component on every K-flat Q equals a.representative(P,Q). For every single level n, every normalized reduction presentation m at n, and every family of chain maps b_Q:T(P,F_n Q) -> F_n T(P,Q) satisfying the pure-section rule x tensor (s tensor y) -> s tensor (x tensor y), the following equation holds for every K-flat Q: A_P(c_n(Q));e(F_n Q)^(-1);q(b_Q) = mate_m(P,Q);U_nF_n(e(Q)^(-1));c_n(T(P,Q)). Here F_n is ordinary extension followed by restriction, c_n the specified derived representative comparison [def-weil-integral-reduction-tower], and mate_m is the transpose under the actual scalar adjunction of mu(P,U_nF_n Q);tensor_n(1,counit);mu(P,Q)^(-1) [lem-weil-derived-scalar-extension-restriction-adjunction]. This statement contains no transition between levels and imposes no relation between presentations at different levels.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 06YY, lemma-derived-base-change; Tag 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pc-kflat-complex",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Tensor with the K-flat P preserves quasi-isomorphisms by the signed cone comparison. Descend along localization and extend the tensor representative comparison from K-flat complexes; K-flat resolutions and their localization comparison give e, with its required components and naturality.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-pc-kflat-resolution",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a single level, take a K-flat resolution S of the restricted extension of Q. Naturality identifies e there with its value on S. Untranspose using the scalar adjunction and use ReductionPresentation.normalization on (P,S) and (P,Q). The ordinary scalar counit multiplies coefficients. Its composite on each homogeneous pure tensor is exactly x tensor (s tensor y) to s tensor (x tensor y).",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sf-integral-hom-reduction-models",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pure-section hypothesis on b, tensor/sheafification/total-summand extensionality, and then localization. The restriction representative comparison is the restriction factor of the derived scalar counit. Cancel the resolution and normalized comparison isomorphisms to obtain the equation. The same e works for all levels because it was constructed solely from a and P.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-integral-reduction-tower",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pc-kflat-resolution",
+  "def-sf-integral-hom-reduction-models",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 06YY, lemma-derived-base-change; Tag 07A4, lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ordinary tensor contraction x tensor (s tensor y) maps to s tensor (x tensor y), naturally with respect to scalar quotient maps",
+   "results": "8 hits: TensorProduct.quotientTensorEquiv_apply_tmul_mk, TensorProduct.tensorTensorTensorComm, TensorProduct.mapOfCompatibleSMul_tmul, Algebra.TensorProduct.mapOfCompatibleSMul_tmul, Algebra.TensorProduct.assoc, Algebra.TensorProduct.tensorTensorTensorComm_symm_tmul, contractLeft_assoc_coevaluation', contractLeft",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the specified ordinary complex contraction or normalized derived mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf tensor product contraction commutes with a quotient of coefficient rings on total complexes",
+   "results": "8 hits: TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, Ideal.pi_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, HomologicalComplex.HasGoodTensor₁₂",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the specified ordinary complex contraction or normalized derived mate."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|tensor.*[Rr]estrict|[Rr]estrict.*[Tt]ensor",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the specified ordinary complex contraction or normalized derived mate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorRestrictionTransition",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "Second paragraph: evaluation-preserving scalar reduction; the ordinary tensor and scalar-adjunction calculation underlying this compatibility.",
+   "via": [
+    "lem-sf-integral-tensor-restriction-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorRestrictionMateModel",
+  "file": "lean/Sheaf/Paper/IntegralTensorRestrictionMateModel.lean",
+  "declaration": "WeilConjectures.IntegralHom.restrictionTensor_mate_model",
+  "statement": "theorem restrictionTensor_mate_model\n    (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))\n    (P : CochainComplex (scalarReductionSource l E X) ℤ)\n    (hP : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) P) :\n    let R := completedIntegralCommRingSheafUnrestricted l E X\n    let F := fun n : ℕ ↦ (sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)\n    let T := totalTensor.{u, u} X R\n    let A := (Functor.curry.obj a.tensor).obj (DerivedCategory.Q.obj P)\n    ∃ e : (T.obj P) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ A,\n      (∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n          (hQ : flat.{u, u} X R Q),\n        e.hom.app Q = a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ∧\n      ∀ (n : ℕ) (m : ReductionPresentation l E X D hl a n)\n          (b : ∀ Q : CochainComplex (scalarReductionSource l E X) ℤ,\n            (T.obj P).obj ((F n).obj Q) ⟶ (F n).obj ((T.obj P).obj Q)),\n        (∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n            (i j : ℤ) (U : X.ProEtᵒᵖ)\n            (s : (integralCoefficientCommRingSheaf l E X n).obj.obj U)\n            (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),\n          ((b Q).f (i + j)).val.app U\n              (totalPair.{u, u} X R P ((F n).obj Q) i j U x\n                (sfReductionTensor l E X n (Q.X j) U s y)) =\n            sfReductionTensor l E X n (((T.obj P).obj Q).X (i + j)) U s\n              (totalPair.{u, u} X R P Q i j U x y)) →\n        ∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n            (_hQ : flat.{u, u} X R Q),\n          A.map (sfReductionRepresentativeComparison l E X n Q) ≫\n              e.inv.app ((F n).obj Q) ≫ DerivedCategory.Q.map (b Q) =\n            (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose.homEquiv _ _\n              (m.mu.hom.app (DerivedCategory.Q.obj P,\n                  (sfDerivedReductionRestricted l E X n).obj (DerivedCategory.Q.obj Q)) ≫\n                m.target.tensor.map\n                  (Prod.mkHom (𝟙 ((scalarReductionDerivedExtension l E X n).obj\n                    (DerivedCategory.Q.obj P)))\n                    ((derivedScalarExtensionRestrictionAdjunction.{u, u}\n                      l E X n).choose.counit.app\n                        ((scalarReductionDerivedExtension l E X n).obj\n                          (DerivedCategory.Q.obj Q)))) ≫\n                m.mu.inv.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n              (sfDerivedReductionRestricted l E X n).map (e.inv.app Q) ≫\n              sfReductionRepresentativeComparison l E X n ((T.obj P).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T055712-L-797358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261028T055712-L-797358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
