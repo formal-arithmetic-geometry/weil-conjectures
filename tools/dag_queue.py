@@ -478,6 +478,18 @@ class Dag:
             self._progress_open = progress_reach.open_nodes(self)
         return self._progress_open
 
+    @property
+    def priority_open(self) -> set[str]:
+        """the open nodes of the priority closure (tools/priority.py closure); empty without roots or on a failure"""
+        if "_priority_open" not in self.__dict__:
+            try:
+                import priority
+                toks = priority.roots()
+                self._priority_open = set(priority.closure(self, sys.modules[__name__], toks)[0]) if toks else set()
+            except Exception as e:  # noqa: BLE001
+                print(f"priority closure failed: {e!r}", file=sys.stderr); self._priority_open = set()
+        return self._priority_open
+
     def resolve(self, i: str) -> str:
         seen = set()
         while i in self.merged and i not in seen:
@@ -598,6 +610,10 @@ class Dag:
         # rests on a sorry (WeilConjectures.Statement, CtfStabilityDirectImages, ...) it offered the whole pruned plan:
         # 3296 of 3540 stage-2 items on 10-24
         reach = {i for i in self.queue_dist1 if i in self.progress_open}
+        # 2026-10-28 (maintainer): the open nodes of the priority closure (tools/priority.py, coord/priority-roots.txt) too.
+        # A priority root on no batch's progress walk (prop-sf-pf-coherence) never had the six statements its module waits
+        # for offered; its module stayed "waiting for statements" for good. A failure here never stops the queue.
+        reach |= {i for i in self.priority_open if i in self.queue_dist1}
         need = self.stmt_needed([i for i in reach if self.needs_statement(i)])
         for i, d in self.live.items():
             if not self.needs_statement(i):   # a leaf, stated, assumed (never an item, 2026-10-17) or finished (2026-10-18)
@@ -650,13 +666,19 @@ class Dag:
         """(module, node it waits for) for every stated node that depends on an unstated node: stmt_deps and proof_deps
         (the human, 2026-10-18: a node may be proved as soon as every statement it depends on, both stmt_deps and
         proof_deps, has a Lean statement; until then its module is not a stage-3 item)."""
+        # 2026-10-28 (maintainer): a node whose own declarations are written and sorry-free (tools/own_decl.py, as the
+        # progress walk counts it done) holds nothing: its plan below is pruned. Before, prop-weil-operations (proof
+        # written) held WeilConjectures.WeilSheaf.FourierInversion.OtherSections, whose one sorry is another node's.
+        from own_decl import own
         out = []
         for i, d in self.live.items():
             if is_leaf(d) or not has_decl(d) or not module_of(d):
                 continue
             for c in self.deps(i, "all"):
                 if not self.stated(c):
-                    out.append((module_of(d), c)); break
+                    if own(d, module_of(d)) is not False:
+                        out.append((module_of(d), c))
+                    break
         return sorted(out)
 
 
