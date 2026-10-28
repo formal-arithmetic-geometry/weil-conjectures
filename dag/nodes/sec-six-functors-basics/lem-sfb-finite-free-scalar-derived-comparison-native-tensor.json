@@ -12,26 +12,35 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite-free mono-cokernel and internal/sectionwise comparison results to the indicated component of the parent proof.",
+   "text": "Apply the K-flatness clause of internal_section_tensor_comparison to the pulled-back coefficient ring and the specified complex. Its right-to-left implication turns hK into the internal one-sided acyclic tensor test. The section equivalence here is definitionally ModuleRingedComparison.equivalence.",
    "uses": [
-    "lem-sfb-finite-free-mono-cokernel-kflat",
     "lem-pe-internal-section-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use HomotopyCategory.kFlat_iff_preserves_acyclic. Represent an arbitrary homotopy-category acyclic object by a cochain complex and reflect acyclicity using quotient_obj_mem_subcategoryAcyclic_iff_acyclic. The preceding test gives acyclicity after right tensoring by the model; the braiding gives acyclicity in the other order. This proves native two-sided K-flatness of the model in the homotopy category.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Closedness gives sequential-colimit preservation by tensorLeft, and the braiding supplies the corresponding tensorRight preservation. Apply DerivedMonoidal.isIso_counit_app_app_of_kFlat_left to the native K-flat model and an arbitrary second complex. The lax tensorator of DerivedCategory.Q is the composite of the quotient comparison isomorphisms, this Qh tensorator, and the Qh-image of the homotopy quotient tensor isomorphism. Each factor is invertible, so their composite is invertible.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-free-mono-cokernel-kflat",
-  "lem-pe-internal-section-tensor-comparison"
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-derived-monoidal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Finite free paragraph"
+  "place": "Finite free paragraph; F2 specializes the existing internal/sectionwise K-flat equivalence and the native derived-monoidal K-flat computation. The supplied hK makes a second finite-free resolution argument unnecessary."
  },
  "mathlib_searches": [
   {
@@ -100,10 +109,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V9",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261028T020837-L-2553377",
-  "kind": "interface",
+  "landing": "20261028T034740-L-3539914",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
