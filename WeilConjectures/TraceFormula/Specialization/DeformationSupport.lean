@@ -73,7 +73,8 @@ lemma comap_ker_eq_top_of_disjoint [IsSeparated X.hom] (x : RationalPoint X) (g 
   rw [Scheme.Hom.support_ker, x.left.isClosedEmbedding.isClosed_range.closure_eq] at hz'
   exact Set.disjoint_left.mp hx ⟨z, rfl⟩ hz'
 
-variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k' ≠ ℓ)]
+  [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
@@ -101,7 +102,9 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafD
     rw [show deformationGenericMap g hJ k' ≫ pullback.snd _ _ = pullback.snd _ _ from
       (pullback.lift_snd _ _ _).trans (Category.comp_id _)]
     exact isPullback_deformationModel_ε k' (X := Z) _
-  have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper X.hom
+    (isTraitModel_deformationModel Z _ k') (isTraitModel_deformationModel X I k').exists_over
     (isPullback_deformationSpecialFibreMap k' g hJ) hε M.property
   have h3 : IsZero
       (R(((deformationSpecialFibreMap g hJ k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj

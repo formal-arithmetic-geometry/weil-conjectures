@@ -52,6 +52,14 @@ namespace NearbyCyclesModel.Hom
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)]
 
+omit [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)] in
+/-- A model of finite type over the trait whose special fibre is a `k'`-scheme `Y'`, read with
+the special fibre as a bare scheme. -/
+lemma _root_.AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModel.exists_over
+    {Y : Scheme.{u}} {Y' : Over (Spec (.of k'))} {N : NearbyCyclesModel Y Y'.left}
+    (hN : N.IsTraitModel) : ∃ a : Y'.left ⟶ Spec (.of k'), N.IsTraitModel (X' := Over.mk a) :=
+  ⟨Y'.hom, ⟨hN.exists_isPullback⟩⟩
+
 /-- **Proper base change for nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (2),
 proper half; SGA 7 XIII 2.1.7): let `φ : M ⟶ N` be a morphism of models of finite type over the
 trait over `f : X ⟶ Y`, with `Y` noetherian over a field `k` in which `ℓ` is invertible. If the

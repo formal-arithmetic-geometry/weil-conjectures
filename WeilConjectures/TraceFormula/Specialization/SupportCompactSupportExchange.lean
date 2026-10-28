@@ -630,6 +630,7 @@ lemma isIsoOn_supportClosureProperModelHom_pushforwardExchange
       ((supportClosureProperModelHom c y k').pushforwardExchange
         (Profinite.padicAlgClRingObj ℓ)) :=
   fun K ↦ (supportClosureProperModelHom c y k').isIso_pushforwardExchange_app_of_isProper
+    (isTraitModel_deformationModel _ _ k') (isTraitModel_deformationProdModel _ _ _ _ k')
     (isPullback_supportClosureSpecialMap k')
     (isPullback_deformationProdLiftModelHom_ε k' _ _ _ _) K.property
 
