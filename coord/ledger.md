@@ -20708,3 +20708,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:07 L: merged deliver/S1/Sheaf.SixFunctors.OpenQuotientScalarSectionCompatibility (stage 3; reviewer PASS; first push; landing 20261028T020723-L-2541479 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:07 L: merged deliver/S1/Sheaf.WeilSheaf.NativeExceptionalHomTransport (stage 3; reviewer PASS; first push; landing 20261028T020728-L-2542115 (proof); batch 20261028T020127; modules 1; new nodes 3)
 - 02:07 L: merged deliver/S2/Sheaf.Paper.FiniteFreeScalarDerivedComparison (stage 3; reviewer PASS; first push; landing 20261028T020730-L-2542518 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:07 L: merged deliver/S2/Sheaf.Paper.IntegralPullbackTensorAssociatorNaturality (stage 3; reviewer PASS; first push; landing 20261028T020731-L-2542712 (interface); batch 20261028T020127; modules 1; new nodes 0)
