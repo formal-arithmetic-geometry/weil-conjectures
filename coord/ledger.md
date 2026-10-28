@@ -20914,3 +20914,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/V8/Sheaf.Paper.FrobeniusIntegralRootTransportAux (stage 3; reviewer PASS; first push; landing 20261028T035001-L-3576748 (interface); batch 20261028T034643; modules 4; new nodes 3)
 - 03:50 L: merged deliver/V9/Sheaf.Paper.FrobeniusIntegralRootTransportModuleGlue (stage 3; reviewer PASS; first push; landing 20261028T035002-L-3577017 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:50 L: merged deliver/W3/Sheaf.SixFunctors.CoefIntegralFiniteExtensionHomMapInvertibility (stage 3; reviewer PASS; first push; landing 20261028T035004-L-3577142 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:50 L: merged deliver/W4/Sheaf.Paper.CoefficientStrictReductionTensorNormalization (stage 3; reviewer PASS; first push; landing 20261028T035005-L-3577338 (interface); batch 20261028T034643; modules 2; new nodes 2)

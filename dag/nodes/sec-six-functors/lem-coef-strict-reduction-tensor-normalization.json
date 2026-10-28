@@ -12,34 +12,26 @@
  ],
  "proof": [
   {
-   "text": "Identify the reduction functor with the sequence-projection derived pullback through uniqueness of its specified adjunction; its projection formulas preserve the finite comparisons.",
+   "text": "Choose the strict derived tensor comparison for reduction from the sequence-projection pullback construction.",
    "uses": [
-    "def-coef-derived-system-calculus-data",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "def-coef-ringed-sequence-site"
+    "lem-coef-strict-reduction-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the canonical tensor pullback comparison on simultaneous flat-term K-flat complexes. Its strict chain map and three strict presentations have the prescribed finite components by the unique scalar and evaluation generator formulas. Descent through the supplied tensor models gives the system-derived square.",
+   "text": "Apply the representative normalization theorem to the chosen comparison.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-prescribed-scalar-tensor-comparison",
-    "lem-coef-actual-total-tensor-evaluation"
+    "lem-coef-strict-reduction-tensor-normalization-fixed"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-derived-system-calculus-data",
-  "lem-coef-sequence-pushforward-limit-projections",
-  "def-coef-ringed-sequence-site",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-coef-prescribed-scalar-tensor-comparison",
-  "lem-coef-actual-total-tensor-evaluation"
+  "lem-coef-strict-reduction-tensor-comparison",
+  "lem-coef-strict-reduction-tensor-normalization-fixed"
  ],
  "proof_origin": {
-  "by": "stage-3 worker A9, adapting the cited source construction",
+  "by": "stage-3 worker W4, splitting strict comparison and representative normalization",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YS, 06YY, 07A4 and 0941"
  },
@@ -92,7 +84,7 @@
   "declaration": "WeilConjectures.coefficientStrictReductionTensorNormalization",
   "statement": "theorem coefficientStrictReductionTensorNormalization\n    (R : CoefficientDerivedSystemReduction l E W) :\n    ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅\n      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,\n      CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ }",
   "branch": "sheaf-dag",
-  "by": "A9",
+  "by": "W4",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -108,11 +100,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-22bb6",
-  "group": "A9",
-  "result": "fix",
-  "landing": "20261028T020149-L-2472700",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261028T035005-L-3577338",
   "kind": "interface",
-  "note": "independent cc review: repaired ∃-normalized statement of coefficientNormalizedReductionNormalizations vs its node, the record fields in CoefficientDerivedSystemEvaluationData (counterexample to the old ∀ form confirmed), the forced 3-line consumer adaptation vs the clone, and the 4 new modules vs their nodes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
