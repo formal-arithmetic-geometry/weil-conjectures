@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitClosed
 
@@ -20,7 +22,7 @@ the same holds for every constructible module object `M`
 (`ProEtale.CondensedRing.homCommutesWithFilteredColimits_singleFunctor_of_isConstructibleModuleObject`).
 
 The proof is the noetherian induction of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage`:
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage` (not imported, to stay below the localizing subcategories in the import hierarchy):
 a constructible sheaf `G` on a closed subscheme `c : D ⟶ T` is split, along a nonempty open `V`
 of `D` contained in a stratum, by the open–closed triangle `j_! Lj^* G ⟶ G ⟶ Ri_* Li^* G ⟶`
 into the extension by zero of a lisse sheaf and a sheaf supported on a smaller closed subset. The

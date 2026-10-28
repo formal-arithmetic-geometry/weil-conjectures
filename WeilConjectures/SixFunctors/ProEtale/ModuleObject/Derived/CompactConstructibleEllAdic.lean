@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitEllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 
@@ -65,7 +67,7 @@ theorem hasConstructibleExtContinuity_continuousMapRingObj (E : Type) [NormedFie
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     HasConstructibleExtContinuity (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) :=
-  sorry
+  hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType ℓ E aX
 
 /-- Blueprint `sk-prop-ind-heart` (2), for the coefficient ring `E` of a finite extension `E` of
 `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: the ind-constructible `E`-sheaves are closed
@@ -90,7 +92,7 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj (E : Type) [NormedF
     (hk : Finite k ∨ IsSepClosed k) :
     HasUniformConstructibleExtBound
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) :=
-  sorry
+  hasUniformConstructibleExtBound_continuousMapRingObj_of_locallyOfFiniteType ℓ aX E hk
 
 /-! ### The coefficient ring `𝒪_E` -/
 
@@ -103,7 +105,7 @@ theorem hasConstructibleExtContinuity_padicIntegersRingObj (E : Type) [Field E]
     [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     HasConstructibleExtContinuity
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
-  sorry
+  hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType ℓ E aX
 
 /-- Blueprints `sk-lem-int-integral-heart` and `det-prop-int-compactness-compact` (1), for the
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type
@@ -131,7 +133,7 @@ theorem hasUniformConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E
     (hk : Finite k ∨ IsSepClosed k) :
     HasUniformConstructibleExtBound
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
-  sorry
+  hasUniformConstructibleExtBound_padicIntegersRingObj_of_locallyOfFiniteType ℓ aX E hk
 
 /-! ### The coefficient ring `ℚ̄_ℓ` -/
 
@@ -141,7 +143,7 @@ commutes with filtered colimits of sheaves. -/
 theorem hasConstructibleExtContinuity_padicAlgClRingObj {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] :
     HasConstructibleExtContinuity (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
-  sorry
+  hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType ℓ aX
 
 /-- Blueprint `sk-prop-ind-heart` (2), for the coefficient ring `ℚ̄_ℓ` and a separated finite-type
 `k`-scheme `X`: the ind-constructible `ℚ̄_ℓ`-sheaves are closed under kernels, cokernels,
@@ -163,7 +165,7 @@ theorem hasUniformConstructibleExtBound_padicAlgClRingObj {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
     (hk : Finite k ∨ IsSepClosed k) :
     HasUniformConstructibleExtBound (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
-  sorry
+  hasUniformConstructibleExtBound_padicAlgClRingObj_of_locallyOfFiniteType ℓ aX hk
 
 /-! ### Compactness -/
 

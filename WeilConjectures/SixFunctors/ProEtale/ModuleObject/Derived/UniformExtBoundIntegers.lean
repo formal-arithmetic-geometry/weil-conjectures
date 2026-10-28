@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
@@ -110,6 +111,40 @@ lemma eq_zero_of_forall_eq_zero_shift {C : Type*} [Category* C] [Preadditive C] 
     ← cancel_epi ((shiftFunctorCompIsoId C n (-n) (add_neg_cancel n)).inv.app X), comp_zero]
   exact h _
 
+/-- For an adjunction `L ⊣ G` with `G` commuting with the shifts, a morphism `P ⟶ (G Y)⟦q⟧`
+vanishes if all morphisms `L P ⟶ Y⟦q⟧` do. -/
+lemma Adjunction.eq_zero_of_forall_eq_zero_shift {C D : Type*} [Category* C] [Category* D]
+    [Preadditive C] [Preadditive D] [HasShift C ℤ] [HasShift D ℤ] {L : C ⥤ D} {G : D ⥤ C}
+    (adj : L ⊣ G) [G.CommShift ℤ] [G.PreservesZeroMorphisms] {P : C} {Y : D} {q : ℤ}
+    (h : ∀ g : L.obj P ⟶ Y⟦q⟧, g = 0) (f : P ⟶ (G.obj Y)⟦q⟧) : f = 0 := by
+  rw [← Preadditive.IsIso.comp_right_eq_zero _ ((G.commShiftIso q).inv.app Y),
+    ← (adj.homEquiv _ _).apply_symm_apply (f ≫ _), h ((adj.homEquiv _ _).symm _),
+    Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
+
+/-- For a faithful functor `F` commuting with the shifts, a morphism `A ⟶ B⟦q⟧` vanishes if all
+morphisms `F A ⟶ (F B)⟦q⟧` do. -/
+lemma Functor.eq_zero_of_forall_map_eq_zero_shift {C D : Type*} [Category* C] [Category* D]
+    [Preadditive C] [Preadditive D] [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D) [F.CommShift ℤ]
+    [F.PreservesZeroMorphisms] [F.Faithful] {A B : C} {q : ℤ}
+    (h : ∀ g : F.obj A ⟶ (F.obj B)⟦q⟧, g = 0) (g : A ⟶ B⟦q⟧) : g = 0 := by
+  rw [← F.map_eq_zero_iff, ← Preadditive.IsIso.comp_right_eq_zero _ ((F.commShiftIso q).hom.app B)]
+  exact h _
+
+/-- If `1 - powShift (z.app M)` is invertible on the countable power of `M`, then so is
+`1 - powShift` of the induced central element of the derived category on the countable power of
+`M` placed in degree `0`, the countable products being exact. -/
+lemma CatCenter.isIso_sub_powShift_derivedCategory_app_Q_obj_single {C : Type*} [Category* C]
+    [Abelian C] [HasDerivedCategory C] [Abelian.HasKInjectiveResolutions C]
+    [HasLimitsOfShape (Discrete ℕ) C] [HasExactLimitsOfShape (Discrete ℕ) C] (z : CatCenter C)
+    (M : C) [HasProduct fun _ : ℕ ↦
+      DerivedCategory.Q.obj ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj M)]
+    (h : IsIso (𝟙 _ - powShift (z.app M))) :
+    IsIso (𝟙 _ - powShift (z.derivedCategory.app
+      (DerivedCategory.Q.obj ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj M)))) := by
+  have := Pretriangulated.isIso_sub_powShift_single z M h
+  rw [CatCenter.derivedCategory_app_Q_obj]
+  exact (isIso_map_sub_powShift_iff DerivedCategory.Q _).1 inferInstance
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
@@ -191,6 +226,9 @@ lemma hasInvertibleExponent_residueFieldCoeff {X : Scheme.{u}} (aX : X ⟶ Spec 
       by simpa using (Ne.isUnit hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
   exact .of_hom aX
 
+set_option maxHeartbeats 400000 in
+-- elaborating the vanishing statement of `exists_forall_eq_zero_of_constructibleFiniteTor` for the
+-- derived reduction unfolds the derived categories of module objects
 /-- **Torsion targets**: for a separated finite-type scheme `X` over a field `k` with
 `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, and a bounded constructible `𝒪_E`-complex `P`, there is `d` with
 `Hom(P, (K ⊗ᴸ 𝔽_E)[q]) = 0` for `q ≥ d` and every bounded constructible `K` concentrated in
@@ -206,19 +244,30 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
     (hP : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) P) :
     ∃ d : ℤ, ∀ K, boundedConstructible
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K → K.IsLE 0 →
-      ∀ q ≥ d, ∀ f : P ⟶ ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
+      ∀ q ≥ d, ∀ f : P ⟶ ((Mod.comap (D := Sheaf (ProEt.topology X) Ab.{u + 1})
+        (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
         ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))⟦q⟧,
         f = 0 := by
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
     inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
   have := hasInvertibleExponent_residueFieldCoeff ℓ E aX
   have hC := constructibleFiniteTor_derivedReduction_obj P hP
-  sorry
-  obtain ⟨N, hN⟩ := DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor hk aX hC
+  obtain ⟨N, hN⟩ := DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor
+    (Λ := ResidueFieldCoeff.{u} ℓ E) hk aX hC
   refine ⟨-N, fun K hK hK₀ q hq f ↦ ?_⟩
   let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (padicIntegersToResidueField X ℓ E)
-  let F := (residueFieldModuleSheaf X ℓ E).mapDerivedCategory
-  sorry
+  have := isEquivalence_residueFieldModuleSheaf_of_section X ℓ E (residueFieldSectionFac X ℓ E)
+  have hL := (DerivedCategory.homologyProperty _).le_shift q _
+    (DerivedCategory.etaleOriginHomology_of_boundedConstructible
+      (boundedConstructible_derivedReduction_obj X ℓ E K hK))
+  have : ((derivedReduction X ℓ E).obj K).IsLE 0 := isLE_derivedReduction_obj K 0
+  have : DerivedCategory.TStructure.t.IsLE (((derivedReduction X ℓ E).obj K)⟦q⟧) (-q) :=
+    DerivedCategory.TStructure.t.isLE_shift _ 0 q (-q) (add_neg_cancel q)
+  have hLN : (((derivedReduction X ℓ E).obj K)⟦q⟧).IsLE N :=
+    DerivedCategory.TStructure.t.isLE_of_le _ (-q) N (by omega)
+  refine Adjunction.eq_zero_of_forall_eq_zero_shift adj (fun g ↦ ?_) f
+  exact Functor.eq_zero_of_forall_map_eq_zero_shift
+    (residueFieldModuleSheaf X ℓ E).mapDerivedCategory (fun g ↦ hN _ hL hLN g) g
 
 /-- Blueprint `sk-lem-int-ext` (2): for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated
 finite-type `k`-scheme `X`, with `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, every constructible
@@ -228,7 +277,48 @@ theorem hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomol
     [IsSeparated aX]
     (hk : Etale.HasFiniteCohomologicalDimension (ResidueFieldCoeff.{u} ℓ E) (Spec (.of k))) :
     HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) :=
-  sorry
+      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  intro M hM
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  rw [Ideal.submodule_span_eq] at hϖ
+  have hϖ' : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) :=
+    hϖ ▸ Ideal.mem_span_singleton_self ϖ
+  obtain ⟨d, hd⟩ := exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField ℓ E aX hk
+    ((DerivedCategory.singleFunctor _ 0).obj M)
+    (CondensedRing.boundedConstructible_singleFunctor_obj _ X 0 M hM)
+  refine ⟨-1 - d, fun B hB n hn f ↦ ?_⟩
+  obtain ⟨g, h, hT⟩ := Mod.exists_distinguished_regularEndCenter_derivedExtendScalars
+    (padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ hϖ')
+    (shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ)
+    (DerivedCategory.Q.obj ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj B))
+  have hY := (boundedConstructible _).prop_of_iso
+    ((DerivedCategory.singleFunctorIsoCompQ _ 0).app B)
+    (CondensedRing.boundedConstructible_singleFunctor_obj _ X 0 B hB)
+  have hY₀ : (DerivedCategory.Q.obj
+      ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj B)).IsLE 0 :=
+    DerivedCategory.TStructure.t.isLE_of_iso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app B) 0
+  -- `1 - powShift ϖ` is invertible on the countable power of `B` in the derived category
+  have := CatCenter.isIso_sub_powShift_derivedCategory_app_Q_obj_single _ B
+    (isIso_sub_powShift_padicIntegersCenter_of_isConstructible hϖ' B hB)
+  -- postcomposition with `ϖ` is bijective on morphisms `M⟦n⟧ ⟶ B`
+  have hbij := Triangle.bijective_comp_mor₁ hT
+    (M := ((DerivedCategory.singleFunctor _ 0).obj M)⟦n⟧) (fun g ↦ by
+      refine eq_zero_of_forall_eq_zero_shift (fun g' ↦ ?_) g
+      exact hd _ hY hY₀ (-n) (by omega) g') (fun g ↦ by
+      refine eq_zero_of_forall_eq_zero_shift (fun g' ↦ ?_) g
+      rw [← Preadditive.IsIso.comp_right_eq_zero _
+        ((shiftFunctorAdd' _ (-1) (-n) (-1 + -n) rfl).inv.app _)]
+      exact hd _ hY hY₀ (-1 + -n) (by omega) _)
+  rw [← Preadditive.IsIso.comp_right_eq_zero _
+    ((((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (neg_add_cancel n)).app B).inv),
+    ← Preadditive.IsIso.comp_right_eq_zero _
+    ((shiftFunctor _ (-n)).map ((DerivedCategory.singleFunctorIsoCompQ _ 0).app B).hom)]
+  refine eq_zero_of_forall_shift_eq_zero (fun g ↦ ?_) _
+  exact Limits.eq_zero_of_isIso_sub_powShift_of_bijective
+    ((padicIntegersCenter X ℓ E ϖ).derivedCategory.app
+      (DerivedCategory.Q.obj ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj B))) hbij g
 
 end AlgebraicGeometry.ProEtale
