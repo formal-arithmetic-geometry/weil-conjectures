@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Paper.AmbientPullbackSiteData
+import Sheaf.Paper.AmbientCoefficientSequencePullbackIsoApp
 
 /-! Sequence-site component of ambient coefficient pullback.
 Source: Stacks 03CB and 0941.
@@ -23,6 +24,12 @@ variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
 (blueprint: lem-sf-ambient-coefficient-pullback-iso-sequence) -/
 theorem coefficientPullback_none_isIso {X Y : Scheme.{t}}
     (f : X ⟶ Y) :
-    IsIso (ringMap ell E f none) := by sorry
+    IsIso (ringMap ell E f none) := by
+  let F := sheafToPresheaf (topology X none) CommRingCat.{max u (t + 1)}
+  have hF : IsIso (F.map (ringMap ell E f none)) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro U
+    exact coefficientPullback_none_isIso_app ell E f U.unop
+  exact isIso_of_reflects_iso (ringMap ell E f none) F
 
 end WeilConjectures.AmbientPullbackTensor
