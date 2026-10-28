@@ -2,33 +2,50 @@
  "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport-equation",
  "kind": "statement",
  "title": "Normalized ordinary reduced transport equation",
- "statement": "For source and target transports from the two finite-reduced functors to the canonical finite quotient model, the reduced ordinary comparison followed by the target transport equals the source transport.",
+ "statement": "Let L : Sh(J, Type u) → Sh(J′, Type u) have right adjoint V, preserve finite limits, and carry the supplied algebraic inverse-image data F [def-weil-pbc-algebraic-inverse-image, def-pur-constant-coefficient-inverse-image-data]. For a commutative Noetherian ring A, ideal I and n : ℕ, use the coefficient, quotient and projection functors of [def-pur-strict-quotient-completion-data]. There exist source and target natural isomorphisms s and t from the two finite-reduced functors to the canonical model change(projection J A I n) followed by pull F (constantMap F (A/I^(n+1))), such that the finite reduction of ordinaryPullComparison F A I followed by t.hom equals s.hom. The two transports are chosen together with compatible insertion normalizations; the equality is not asserted for arbitrary independent isomorphisms.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03EK, 03EL and 093M; Tag 06YY normalization equation"
  },
  "stmt_deps": [
   "def-weil-pbc-algebraic-inverse-image",
-  "lem-weil-pbc-common-quotient-ordinary-insertion"
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-sfb-constant-completion-coefficient-data"
  ],
  "proof": [
   {
-   "text": "Evaluate the three maps on the quotient unit, where all insertion maps send 1 tensor m to the same class, then use the scalar-extension adjunction to extend this equality to every object and cancel the coefficient identifications.",
+   "text": "Use the proved normalized ordinary finite pull comparison for the source. For the completed projection square, compose the normalized inverse-image/scalar-extension mate with the two normalized scalar-associativity isomorphisms. The defining limit cone for completedMap gives the square equation. Both constructions preserve insertion of one.",
    "uses": [
-    "lem-weil-pbc-common-quotient-ordinary-insertion"
+    "lem-weil-pbc-constant-completion-ordinary-finite-pull-existence",
+    "lem-coef-normalized-module-adjunction",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker each finite coefficient comparison to obtain source and target transports to the canonical model. Their pure-tensor formulas identify each transport on the respective double insertion with L(insertion projection) followed by finite pullInsertion. Naturality of insertion and the defining ordinaryPullComparison insertion equation identify these composites. Apply the two scalar-extension Hom equivalences, faithfulness of underlying sheaves and cancellation of moduleUnderlying to get equality of each component; then use natural-transformation extensionality.",
+   "uses": [
+    "def-pur-strict-quotient-completion-data",
+    "def-pur-constant-coefficient-inverse-image-data",
+    "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-common-quotient-ordinary-insertion"
+  "lem-weil-pbc-constant-completion-ordinary-finite-pull-existence",
+  "lem-coef-normalized-module-adjunction",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pur-strict-quotient-completion-data",
+  "def-pur-constant-coefficient-inverse-image-data"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "P3",
+  "by": "agent",
+  "group": "F2",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK, 03EL and 093M; Tag 06YY normalization equation"
+  "place": "lemma-adjointness-tensor-restrict and lemma-tensor-product-pullback (Tag 03EL); normalized coefficient comparison from Tag 093M. The component argument follows the source scalar-extension units."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -52,12 +69,13 @@
   "file": "lean/Sheaf/Paper/ConstantCompletionOrdinaryReducedPullTransportEquation.lean",
   "declaration": "CategoryTheory.ConstantCompletion.ordinaryReducedPull_transport_eq",
   "branch": "sheaf-dag",
-  "by": "P3",
+  "by": "F2",
   "date": "2026-10-28",
-  "statement": "theorem ordinaryReducedPull_transport_eq (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) (s : (res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙ change (quotient J' A I n)) ≅ (change (projection J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))))) (t : (pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙ change (quotient J' A I n)) ≅ (change (projection J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))))) : Functor.whiskerRight (ordinaryPullComparison F A I) (change (quotient J' A I n)) ≫ t.hom = s.hom",
+  "statement": "theorem ordinaryReducedPull_transport_eq\n    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)\n    [hL : PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (n : ℕ) :\n    ∃ (s : (res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙\n        change (quotient J' A I n)) ≅\n        (change (projection J A I n) ⋙\n          pull F (constantMap F (A ⧸ I ^ (n + 1)))))\n      (t : (pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙\n        change (quotient J' A I n)) ≅\n        (change (projection J A I n) ⋙\n          pull F (constantMap F (A ⧸ I ^ (n + 1))))),\n      Functor.whiskerRight (ordinaryPullComparison F A I)\n          (change (quotient J' A I n)) ≫ t.hom = s.hom",
   "declarations": [
    "CategoryTheory.ConstantCompletion.ordinaryReducedPull_transport_eq"
-  ]
+  ],
+  "note": "F2 repairs the false universal assertion by constructing compatible transports, using the existing geometric adjunction. No target or definition changes."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -72,17 +90,44 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B8",
-  "result": "pass",
-  "landing": "20261028T020211-L-2478669",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.ConstantCompletion.ordinaryReducedPull_transport_eq"
+  "reviewer": "C-886b4",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261028T055644-L-789631",
+  "kind": "interface",
+  "note": "independent cc review: ordinaryReducedPull_transport_eq (∃ compatible s,t to canonical model) against node lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport-equation, change record, adapted Transport caller and its importer ReducedPull; axioms via scratch compile"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F2 stage 2",
+  "old_statement": "For source and target transports from the two finite-reduced functors to the canonical finite quotient model, the reduced ordinary comparison followed by the target transport equals the source transport.",
+  "what": "The former Lean theorem quantified over arbitrary isomorphisms, which is false: on the terminal site with identity inverse image, A = F₃ and I = 0, postcompose a target transport by multiplication by -1. All hypotheses persist but its value on the nonzero rank-one finite module changes. The source requires compatible normalized choices. Replace the universal assertion by the existence of a compatible pair to the same canonical model, retain the parent theorem verbatim, and supply its existing geometric adjunction context.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03EK, 03EL and 093M; Tag 06YY normalization equation"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport",
+    "holds": true,
+    "note": "Existing use remains valid; the normalized finite comparison and geometric hypotheses are retained."
+   }
   ],
-  "sorry_after": [
-   "CategoryTheory.ConstantCompletion.ordinaryReducedPull_transport_eq"
+  "old_stmt_deps": [
+   "def-weil-pbc-algebraic-inverse-image",
+   "lem-weil-pbc-common-quotient-ordinary-insertion"
+  ],
+  "old_proof": [
+   {
+    "text": "Evaluate the three maps on the quotient unit, where all insertion maps send 1 tensor m to the same class, then use the scalar-extension adjunction to extend this equality to every object and cancel the coefficient identifications.",
+    "uses": [
+     "lem-weil-pbc-common-quotient-ordinary-insertion"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-common-quotient-ordinary-insertion"
   ]
  }
 }

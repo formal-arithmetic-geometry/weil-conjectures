@@ -56,9 +56,7 @@ theorem ordinaryReducedPull_transport
           (change (quotient J' A I n)) ≫ t.hom = s.hom := by
   let X := change (projection J A I n) ⋙
     pull F (constantMap F (A ⧸ I ^ (n + 1)))
-  obtain ⟨s⟩ := ordinaryReducedPull_sourceIso F V adj A I n
-  obtain ⟨t⟩ := ordinaryReducedPull_targetIso F A I n
-  refine ⟨X, s, t, ?_⟩
-  exact ordinaryReducedPull_transport_eq F A I n s t
+  obtain ⟨s, t, h⟩ := ordinaryReducedPull_transport_eq F V adj A I n
+  exact ⟨X, s, t, h⟩
 
 end CategoryTheory.ConstantCompletion
