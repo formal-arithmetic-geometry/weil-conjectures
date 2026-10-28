@@ -6,13 +6,8 @@ Authors: SHEAF group Q49
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicNormalizedFunctorData
-import Sheaf.Paper.ContinuousRationalDerivedRealization
-import Sheaf.Paper.RationalCoefficientCategoryComparison
-import Sheaf.Paper.CondensedFlatCoefficientCalculus
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.CondensedQbarFunctionCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+import Sheaf.Paper.LocallyFiniteAdicFunctorDescentHom
+import Sheaf.Paper.LocallyFiniteAdicFunctorDescentImage
 
 /-! # LocallyFiniteAdicFunctorDescent
 
@@ -79,6 +74,8 @@ theorem normalizedFunctor_descent
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] (D : NormalizedFunctor l X) :
     (∀ K L, Function.Bijective (D.J.map : (K ⟶ L) → (D.J.obj K ⟶ D.J.obj L))) ∧
       (∀ K, ProEtale.DerivedCategory.boundedAdicConstructible l X K ↔
-        ∃ A, Nonempty (D.J.obj A ≅ K)) := by sorry
+        ∃ A, Nonempty (D.J.obj A ≅ K)) := by
+  exact ⟨normalizedFunctor_descent_hom l X D,
+    normalizedFunctor_descent_image l X D⟩
 
 end WeilConjectures.LocallyFiniteAdicRealization
