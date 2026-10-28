@@ -6,6 +6,18 @@ import re
 import leanindex as li
 
 _s, _blocks = {}, {}
+
+
+def _file(m):
+    """the module's source: a passed set's (tools/setbuild.py, switch on; done before its merge, 2026-10-28) or live"""
+    try:
+        import setbuild
+        p = setbuild.passed_sources().get(m)
+        if p is not None:
+            return p
+    except Exception:  # noqa: BLE001
+        pass
+    return li.file_of(m)
 _DECL = re.compile(r"^(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|public|nonrec|partial|unsafe)\s+)*"
                    r"(?:theorem|lemma|def|abbrev|instance|structure|class|inductive|opaque|example)\b", re.M)
 _COMMENTS = re.compile(r"--[^\n]*|/-.*?-/", re.S)
@@ -14,7 +26,7 @@ _COMMENTS = re.compile(r"--[^\n]*|/-.*?-/", re.S)
 def sorries(m):
     """sorry count of module m in live, -1 when the file is missing"""
     if m not in _s:
-        p = li.file_of(m)
+        p = _file(m)
         _s[m] = li.sorry_count(p.read_text(errors="ignore")) if p.is_file() else -1
     return _s[m]
 
@@ -36,7 +48,7 @@ def _block_sorry(blk):
 def _declaring(m, name):
     """the blocks of module m that declare `name` (not merely mention it)"""
     if m not in _blocks:
-        p = li.file_of(m)
+        p = _file(m)
         t = _COMMENTS.sub("", p.read_text(errors="ignore")) if p.is_file() else ""
         starts = [x.start() for x in _DECL.finditer(t)] + [len(t)]
         _blocks[m] = [t[a:b] for a, b in zip(starts, starts[1:])]

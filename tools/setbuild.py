@@ -843,6 +843,25 @@ def is_passed(g: str, item: str, head: str) -> bool:
     return bool(r) and r.get("group") == g and r.get("item") == item
 
 
+_SOURCES: dict = {}
+
+
+def passed_sources() -> dict:
+    """{module: path of its source in the passed set} for the passed sets whose head is live (switch on); kept 60 s.
+    tools/own_decl.py reads a module from here first, so the progress count and the queue see a passed set's module
+    as written (done) before its merge into the library."""
+    if _SOURCES.get("t", 0) > time.time() - 60:
+        return _SOURCES["s"]
+    out = {}
+    for r in sorted(passed_heads().values(), key=lambda r: r.get("passed", "")):
+        for m in r.get("modules") or []:
+            p = pathlib.Path(r["folder"]) / "src" / rel_of(m)
+            if p.is_file():
+                out[m] = p
+    _SOURCES.update(t=time.time(), s=out)
+    return out
+
+
 def refresh_newlib() -> None:
     """local/sets/_new/lib/lean: symlinks to the compiled new modules of every passed set whose head is live and whose
     module the frozen tree does not have yet; rebuilt beside and switched with one rename of a symlink."""
@@ -907,6 +926,12 @@ def daemon() -> int:
             if head in running or len(running) >= width:
                 continue
             r = read_json(RESULTS / f"{head}.json")
+            if r and r.get("ok") and mode() == "on" and r.get("base_time") == pt and r.get("group") == g \
+                    and not (PASSED / f"{head}.json").exists():
+                try:
+                    record_passed(r)          # built in shadow mode, switched on since
+                except Exception as e:  # noqa: BLE001
+                    log("record_passed failed", head[:9], repr(e)[:200])
             if r and r.get("base_time") == pt and r.get("phase") not in ("infra",):
                 continue
             if r and r.get("phase") in ("not-eligible", "static", "returned"):
