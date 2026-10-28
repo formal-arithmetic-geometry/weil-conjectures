@@ -20643,3 +20643,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/K3/Sheaf.Paper.IsomorphismScalarCompletedPreservesModels (stage 3; reviewer PASS; first push; landing 20261028T020538-L-2522997 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:05 L: merged deliver/K3/Sheaf.WeilSheaf.NativeOpenProperForgetting (stage 3; reviewer PASS; first push; landing 20261028T020540-L-2523168 (proof); batch 20261028T020127; modules 1; new nodes 2)
 - 02:05 L: merged deliver/K4/Sheaf.Paper.IsomorphismScalarFiniteComparisonFormula (stage 3; reviewer PASS; first push; landing 20261028T020541-L-2523357 (interface); batch 20261028T020127; modules 3; new nodes 2)
+- 02:05 L: merged deliver/K4/Sheaf.Paper.RationalP1SectionEvaluation (stage 3; reviewer PASS; first push; landing 20261028T020542-L-2523478 (proof); batch 20261028T020127; modules 1; new nodes 2)

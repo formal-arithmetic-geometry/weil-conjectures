@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-rational-p1-section-evaluation-postprefix",
+ "kind": "statement",
+ "title": "Post-prefix native functional cancellation",
+ "statement": "After the normalized supported arrow and canonical first-projection transport, composing the native first functional yields the right-unitor inverse followed by the supported arrow, the diagram alpha and t.",
+ "stmt_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-diagonal-coefficient-category",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-rational-tate-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity: path comparison, projection cancellation, and section normalization before the final unitors."
+ },
+ "proof": [
+  {
+   "text": "The strict substep is isolated from the parent calculation; its proof uses the corresponding path, naturality and transport identities.",
+   "uses": [
+    "lem-sfb-rational-p1-section-evaluation-prefix"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-p1-section-evaluation-prefix"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, strict substep isolated during stage-3 proof."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SectionEvaluation",
+  "date": "2026-10-28",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-section-evaluation-core",
+   "place": "strict substep of the pre-unitor calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SectionEvaluation",
+  "file": "lean/Sheaf/Paper/RationalP1SectionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.first_section_tensor_evaluation_postprefix",
+  "statement": "theorem first_section_tensor_evaluation_postprefix\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (Y : Scheme.{u})\n    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)\n    (d : Diagram (coefficient l c).X Y L)\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))\n    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n      (source (coefficient l c).X Y) ⟶ N)\n    (t : d.R₁.R.obj N ⟶ unit (coefficient l c).X (ProjectiveLine Y))\n    (hobj : d.R₁.R.obj N =\n      (moduleObjectDerivedPushforward (coefficient l c).X (firstProjection Y)).obj N) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫\n          d.support₁.hom ≫ d.R₁.R.map α ≫\n          (eqToIso d.p₁_canonical).hom.app N ≫\n          eqToHom ((congrArg (fun F => F.obj N) d.p₁_canonical).symm.trans hobj))) ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (M ◁ firstNativeFunctional (coefficient l c).X Y L d N t) =\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫\n          d.support₁.hom ≫ d.R₁.R.map α ≫ t))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261028T020542-L-2523478",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261028T020542-L-2523478",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

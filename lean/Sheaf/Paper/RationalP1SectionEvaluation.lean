@@ -118,39 +118,6 @@ def firstTerminalFunctional
 
 attribute [local irreducible] coefficient line diagram secondLineComparison
 
-set_option maxHeartbeats 800000 in
--- Elaborate the native projection and the two canonical direct-image paths.
-/-- The section/projection paste before the terminal unitors.
-Source: the first identity in the rational projective-line triangle proof, with the
-terminal unitors omitted (blueprint: lem-sfb-rational-p1-section-evaluation-core).
-Proof: path-comparison naturality moves the kernel insertion across the path change;
-projectionMap naturality cancels the specified inverse first projection. The diagonal
-section identity leaves the normalized supported arrow followed by the native
-functional. -/
-theorem first_section_tensor_evaluation_core
-    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
-    (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)
-    (d : Diagram (coefficient l c).X Y L)
-    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
-    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))
-    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
-      (source (coefficient l c).X Y) ⟶ N)
-    (t : d.R₁.R.obj N ⟶ unit (coefficient l c).X (ProjectiveLine Y))
-    (hp : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M N)) :
-    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
-        (firstKernelInsertion (coefficient l c).X Y M N α) ≫
-      (firstPathComparison (coefficient l c).X Y).hom.app
-        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗ N) ≫
-      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
-        (@inv _ _ _ _ (projectionMap (coefficient l c).X (firstProjection Y) M N) hp) ≫
-      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
-        (M ◁ firstNativeFunctional (coefficient l c).X Y L d N t) =
-    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
-      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
-        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
-          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by sorry
-
 attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
   CategoryTheory.Mod.monoidalCategory CategoryTheory.Mod.monoidalClosed
   DerivedCategory.monoidalClosed
@@ -301,6 +268,108 @@ private theorem finish_tensor_evaluation
       R.map ((ρ_ M).inv ≫ (M ◁ (k₀ ≫ k₁ ≫ k₂ ≫ k₃ ≫ e.hom)) ≫ (ρ_ M).hom) := by
   have h' := congrArg (fun z ↦ z ≫ R.map (M ◁ e.hom) ≫ R.map (ρ_ M).hom) h
   simpa only [Functor.map_comp, MonoidalCategory.whiskerLeft_comp, Category.assoc] using h'
+
+
+/-- The kernel-insertion prefix before the terminal first-projection functional.
+Source: the pre-unitor section calculation in the rational projective-line triangle
+(blueprint: lem-sfb-rational-p1-section-evaluation-prefix).
+This is the strict prefix of `first_section_tensor_evaluation_core`: it stops after
+transporting the supported arrow through the first projection and therefore has no
+terminal functional. The proof is the same path-comparison and section/projection
+cancellation calculation, with the final postcomposition omitted. -/
+theorem first_section_tensor_evaluation_prefix
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (Y : Scheme.{u})
+    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)
+    (d : Diagram (coefficient l c).X Y L)
+    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
+    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))
+    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+      (source (coefficient l c).X Y) ⟶ N)
+    (hobj : d.R₁.R.obj N =
+      (moduleObjectDerivedPushforward (coefficient l c).X (firstProjection Y)).obj N)
+    (hp : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M N)) :
+    ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (firstKernelInsertion (coefficient l c).X Y M N α) ≫
+      (firstPathComparison (coefficient l c).X Y).hom.app
+        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗ N)) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (@inv _ _ _ _ (projectionMap (coefficient l c).X (firstProjection Y) M N) hp) =
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
+          d.support₁.hom ≫ d.R₁.R.map α ≫
+          (eqToIso d.p₁_canonical).hom.app N ≫
+          eqToHom ((congrArg (fun F => F.obj N) d.p₁_canonical).symm.trans hobj))) := by sorry
+
+theorem first_section_tensor_evaluation_postprefix
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (Y : Scheme.{u})
+    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)
+    (d : Diagram (coefficient l c).X Y L)
+    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
+    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))
+    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+      (source (coefficient l c).X Y) ⟶ N)
+    (t : d.R₁.R.obj N ⟶ unit (coefficient l c).X (ProjectiveLine Y))
+    (hobj : d.R₁.R.obj N =
+      (moduleObjectDerivedPushforward (coefficient l c).X (firstProjection Y)).obj N) :
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
+          d.support₁.hom ≫ d.R₁.R.map α ≫
+          (eqToIso d.p₁_canonical).hom.app N ≫
+          eqToHom ((congrArg (fun F => F.obj N) d.p₁_canonical).symm.trans hobj))) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ firstNativeFunctional (coefficient l c).X Y L d N t) =
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
+          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by sorry
+
+set_option maxHeartbeats 800000 in
+-- Elaborate the native projection and the two canonical direct-image paths.
+/-- The section/projection paste before the terminal unitors.
+Source: the first identity in the rational projective-line triangle proof, with the
+terminal unitors omitted (blueprint: lem-sfb-rational-p1-section-evaluation-core).
+Proof: path-comparison naturality moves the kernel insertion across the path change;
+projectionMap naturality cancels the specified inverse first projection. The diagonal
+section identity leaves the normalized supported arrow followed by the native
+functional. -/
+theorem first_section_tensor_evaluation_core
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (Y : Scheme.{u})
+    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)
+    (d : Diagram (coefficient l c).X Y L)
+    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
+    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))
+    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+      (source (coefficient l c).X Y) ⟶ N)
+    (t : d.R₁.R.obj N ⟶ unit (coefficient l c).X (ProjectiveLine Y))
+    (hp : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M N)) :
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (firstKernelInsertion (coefficient l c).X Y M N α) ≫
+      (firstPathComparison (coefficient l c).X Y).hom.app
+        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗ N) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (@inv _ _ _ _ (projectionMap (coefficient l c).X (firstProjection Y) M N) hp) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ firstNativeFunctional (coefficient l c).X Y L d N t) =
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
+          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by
+  have hcanon : d.R₁.R = moduleObjectDerivedPushforward (coefficient l c).X
+      (firstProjection Y) := by
+    unfold moduleObjectDerivedPushforward firstProjection
+    exact d.p₁_canonical
+  have hobj : d.R₁.R.obj N =
+      (moduleObjectDerivedPushforward (coefficient l c).X (firstProjection Y)).obj N :=
+    congrArg (fun F => F.obj N) hcanon
+  rw [← Category.assoc, ← Category.assoc]
+  rw [first_section_tensor_evaluation_prefix l c Y L d M N α hobj hp]
+  simpa only [Category.assoc] using
+    (first_section_tensor_evaluation_postprefix l c Y L d M N α t hobj)
 
 
 /-- The section calculation with an arbitrary kernel arrow and an arbitrary functional.
