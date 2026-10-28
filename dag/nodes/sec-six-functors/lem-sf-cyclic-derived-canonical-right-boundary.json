@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-cyclic-derived-canonical-right-boundary",
+ "kind": "statement",
+ "title": "Cyclic Hom functoriality for canonical total right derivation",
+ "statement": "Let C and D be Grothendieck abelian categories, F and G additive autoequivalences, and L:C→D additive and left exact, with an equivariance isomorphism e:L⋙G≅F⋙L. Assume the recorded derived categories and K-injective resolutions for C and IsoAlgebra(F). Given a forgetting isomorphism between the canonical total right-derived functors satisfying their unit equation, and natural normalized cyclic boundary families, the induced graded-Hom transport is additive and preserves the cyclic action, native degree-zero morphisms and the degree-minus-one boundary on all bounded native endpoints with bounded derived images. All shifts are the fixed canonical shifts.",
+ "stmt_deps": [
+  "def-sf-cyclic-derived-hom-data",
+  "def-sfb-right-derived-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K and 070Y, lemmas enough-K-injectives-implies and K-injective-defined; unit-preserving uniqueness of total right derivation. Cyclic boundary compatibility is the normalized comparison step in the blueprint exceptional-adjunction argument."
+ },
+ "proof": [
+  {
+   "text": "Use the universal properties to compare the arbitrary-quasi-isomorphism derived functors with the canonical K-injective derived functors by unique unit-preserving natural isomorphisms. Both underlying units commute with shifts; restrict to K-injective objects, where the first unit is invertible, and descend the shift square to show that the underlying comparison commutes with shifts. The canonical-unit shift statement is the already proved private canonical_unit_commShift of CanonicalRightDerivedAdjunctionShift, imported with import all; its statement assumes only an additive functor and K-injective resolutions, not an adjunction.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemmas enough-K-injectives-implies and K-injective-defined; unit-preserving uniqueness of total right derivation. Cyclic boundary compatibility is the normalized comparison step in the blueprint exceptional-adjunction argument."
+   }
+  },
+  {
+   "text": "Cancel the exact-localization comparison factors in the assumed exact-square unit equation, yielding the homotopy-category unit equation. Whisker the given canonical forgetting comparison by the native derived comparison and the inverse underlying comparison. Its unit equation and naturality of the underlying comparison identify this with the fixed-pair normalized comparison.",
+   "uses": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-weil-pbc-kinjective-exact-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemmas enough-K-injectives-implies and K-injective-defined; unit-preserving uniqueness of total right derivation. Cyclic boundary compatibility is the normalized comparison step in the blueprint exceptional-adjunction argument."
+   }
+  },
+  {
+   "text": "Apply cyclicDerivedHom_rightDerived_functorial with boundedness transported along the native comparison. Expand the transported graded Hom map: naturality and shift compatibility cancel the underlying comparison, leaving conjugation by the native comparison. The Frobenius structure is natural in the native endpoints, hence its conjugation action is preserved by these endpoint isomorphisms. The target boundary is natural in both native endpoints, so its square transfers as well. Additivity and degree-zero forgetting follow directly from the same transport formula.",
+   "uses": [
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, lemmas enough-K-injectives-implies and K-injective-defined; unit-preserving uniqueness of total right derivation. Cyclic boundary compatibility is the normalized comparison step in the blueprint exceptional-adjunction argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "lem-sf-cyclic-derived-hom-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "T9",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Unit-preserving comparison between the two existing derived implementations, followed by endpoint naturality; fills the comparison gap in the native compactification transport plan."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Uu]nique|[Cc]ommShift.*[Uu]nit",
+   "results": "15 hits: Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean. No cyclic boundary comparison for the canonical unbounded implementation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "12 hits: CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.HasRightDerivedFunctor.mk', CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension, CategoryTheory.Functor.IsRightDerivedFunctor.mk, CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension, CategoryTheory.Functor.rightDerivedDesc, CategoryTheory.Functor.rightDerivedUnique. No cyclic boundary comparison for the canonical unbounded implementation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit preserving isomorphism between total right derived functors commutes with shifts and preserves natural cyclic connecting maps",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapDerivedCategoryFactors. No cyclic boundary comparison for the canonical unbounded implementation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalHomTransport",
+  "date": "2026-10-28",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Final exceptional-adjunction sentence: retain the same unit-normalized proper-pushforward comparison when applying cyclic-Hom functoriality to native compact support.",
+   "via": [
+    "lem-sf-native-exceptional-hom-transport",
+    "lem-sf-native-exceptional-hom-transport-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CyclicDerivedCanonicalRightBoundary",
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedCanonicalRightBoundary.lean",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedCanonicalRight_functorial",
+  "statement": "theorem cyclicDerivedCanonicalRight_functorial\n    (α : (mapOfNatIso e).rightDerivedFunctor ⋙ (forget G).mapDerivedCategory ≅\n      (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctor)\n    (hunit : ∀ I : CochainComplex (IsoAlgebra F) ℤ,\n      KInjectiveExactSquare.leftUnit (mapOfNatIso e) L (forget F) (forget G) rfl\n        (mapOfNatIso e).rightDerivedFunctor (mapOfNatIso e).rightDerivedFunctorUnit I ≫\n          α.hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) =\n      KInjectiveExactSquare.rightUnit L (forget F) L.rightDerivedFunctor\n        L.rightDerivedFunctorUnit I)\n    (b : CyclicDerivedHomBoundary F) (b' : CyclicDerivedHomBoundary G)\n    (hb : CyclicDerivedHomBoundaryNormalized F b)\n    (hb' : CyclicDerivedHomBoundaryNormalized G b')\n    (hn : CyclicDerivedHomBoundaryNatural F b)\n    (hn' : CyclicDerivedHomBoundaryNatural G b')\n    : CyclicDerivedHomBoundaryFunctorial F G b b' (mapOfNatIso e).rightDerivedFunctor\n        L.rightDerivedFunctor (fun r ↦ L.rightDerivedFunctor.commShiftIso r) α",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261028T055811-L-811057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261028T055811-L-811057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
