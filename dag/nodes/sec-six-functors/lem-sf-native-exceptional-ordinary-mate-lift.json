@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-native-exceptional-ordinary-mate-lift",
+ "kind": "statement",
+ "title": "Native realization and lift of an invariant ordinary exceptional transpose",
+ "statement": "Fix the ordinary restricted compact-support adjunction, the common-stage coefficient system, the forgetful realization models VX,VY and a native target L. For any native H and invariant ordinary carrier t from nativeShriek(H) to L, there are a native complex M realizing the common-stage right-adjoint value, an ordinary isomorphism d from M to the supplied ordinary right-adjoint value, and a native map q:H→M whose underlying map followed by d is the ordinary transpose of the carrier. No identification e for H, arbitrary native comparison a, transported-arrow equation, or invertibility conclusion is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, split into the ordinary carrier/invariance and graded Hom substeps."
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction gives bijective postcomposition by the counit on shifted Hom groups",
+   "results": "Mathlib shift/adjunction material; source library Adjunction.shiftedHomEquiv supplies the formal graded step, not the geometric lift.",
+   "date": "2026-10-28",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Standard adjunction Hom equivalence; no Frobenius realization or constructible cone criterion.",
+   "date": "2026-10-28",
+   "verdict": "formal part only"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*mate.*lift|cone.*detection|IsSplitMono.*constructible",
+   "results": "No matching declaration. Local searches found cyclic action realization, the cyclic Hom sequence, and the scalar Frobenius counit as component inputs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-cyclic-derived-hom-data",
+  "lem-sf-native-exceptional-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Construct the scalar-normalized right Frobenius mate and its invariant counit. Closure transport and the section equivalence identify its ordinary value with the right-adjoint value of the fixed ordinary compact-support functor. Uniqueness of right adjoints supplies d for the given adjunction.",
+   "uses": [
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-native-weil-open-proper-forgetting",
+    "lem-sf-native-weil-open-proper-forgetting-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the invertible right Frobenius object as a bounded constructible native Weil complex M. The coefficient realization gives b:VX(M)≅G_stage(VY(L)).",
+   "uses": [
+    "lem-sf-cyclic-derived-action-realization",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The invariant counit identity carries the invariance of t to the invariance of its ordinary transpose. Apply degree-zero surjectivity of the cyclic derived Hom exact sequence to lift this transpose to q:H→M, and cancel the zero-shift unitor.",
+   "uses": [
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-scalar-frobenius-counit",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-native-weil-open-proper-forgetting",
+  "lem-sf-native-weil-open-proper-forgetting-frobenius",
+  "lem-sf-cyclic-derived-action-realization",
+  "lem-sf-cyclic-derived-hom-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Separate native realization and cone detection; prove kernel reflection and the graded adjunction calculation."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-exceptional-ordinary-counit-graded",
+   "place": "Strict component of the native exceptional ordinary counit argument.",
+   "via": [
+    "lem-sf-native-exceptional-ordinary-counit-graded"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitGraded",
+  "date": "2026-10-28",
+  "group": "P7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryMateLift",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalOrdinaryMateLift.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_ordinary_mate_lift",
+  "statement": "theorem native_exceptional_ordinary_mate_lift (R : Family l D)\n    (X Y : Space D) (VX : ForgetModel D l R X) (VY : ForgetModel D l R Y)\n    (f₀ : X.base ⟶ Y.base)\n    [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (h : ∀ K, ordinaryCounitProperty D l X K →\n      ordinaryCounitProperty D l Y ((counitOrdinaryShriek D l f₀).obj K))\n    (G : (ordinaryCounitProperty D l Y).FullSubcategory ⥤\n      (ordinaryCounitProperty D l X).FullSubcategory)\n    (adj : ordinaryCounitLeft D l f₀ h ⊣ G)\n    (S : CoefficientSystem D l f₀) (c : Compactification (geometricMap D f₀))\n    (L : W D l Y) (H : W D l X)\n    (t : WeilComplex.forget.obj ((nativeShriek D l f₀).obj H) ⟶\n      WeilComplex.forget.obj L)\n    (hinv : (t ≫ (shiftFunctorZero _ ℤ).inv.app (WeilComplex.forget.obj L)) ∈\n      CyclicDerivedHomInvariants (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)\n        ((nativeShriek D l f₀).obj H).obj L.obj) :\n    ∃ (M : W D l X)\n      (b : VX.functor.obj M ≅ (S.ring.operation c .closed).G.obj (VY.functor.obj L))\n      (d : ordinaryCounitObject D l X M ≅ G.obj (ordinaryCounitObject D l Y L))\n      (q : H ⟶ M),\n      ObjectProperty.homMk (WeilComplex.forget.map q) ≫ d.hom =\n        adj.homEquiv (ordinaryCounitObject D l X H) (ordinaryCounitObject D l Y L)\n          (ObjectProperty.homMk ((counitForgetComparison D l f₀).inv.app H ≫ t))",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.NativeExceptionalForgetful.ordinaryCounitProperty",
+   "WeilConjectures.NativeExceptionalForgetful.ordinaryCounitObject",
+   "WeilConjectures.NativeExceptionalForgetful.ordinaryCounitLeft",
+   "WeilConjectures.NativeExceptionalForgetful.native_exceptional_ordinary_mate_lift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261028T034910-L-3566504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261028T034910-L-3566504",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
