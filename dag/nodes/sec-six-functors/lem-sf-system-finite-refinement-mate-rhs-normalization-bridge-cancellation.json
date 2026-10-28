@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-system-finite-refinement-mate-rhs-normalization-bridge-cancellation",
+ "kind": "statement",
+ "title": "Canonical bridge cancellation for finite refinement mate",
+ "statement": "After expanding the finite coordinate maps, the canonical bridge factors cancel by their unit and counit identities, leaving the evaluated semilinear mate expression.",
+ "stmt_deps": [
+  "def-sf-system-finite-evaluation-coordinates",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Finite coordinate bridge cancellation."
+ },
+ "proof": [
+  {
+   "text": "Expand the finite coordinate definitions and use the stated mate and triangle identities.",
+   "uses": [
+    "def-sf-system-finite-evaluation-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Finite coordinate bridge cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-system-finite-evaluation-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Finite coordinate bridge cancellation."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-system-finite-refinement-mate-rhs-normalization",
+   "place": "Finite coordinate bridge cancellation."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemFiniteRefinementMateRhsCore",
+  "date": "2026-10-28",
+  "group": "N1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteRefinementMateRhsBridgeCancellation",
+  "file": "lean/Sheaf/Paper/SystemFiniteRefinementMateRhsBridgeCancellation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.rhsCoreBridgeCancellation",
+  "statement": "theorem rhsCoreBridgeCancellation (D : FiniteFieldDatum.{u}) (o : Operations l E)\n    (z : Realizations l E D o) (m : ℕ)\n    {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    (c d : Compactification f.hom.left) (r : c.Refinement d)\n    (M : System l E X.obj.left) :\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))\n    let RW := sfIntrinsicDerivedEquivalence d.Z (Padic.coefficientExtensionRing l E (m + 1))\n    haveI := c.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)\n    haveI := d.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)\n    (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((Operations.shriek l E o d.i).map\n          ((z.canonicalBridge.push l E (𝟙 X.obj.left) ≪≫\n            SemilinearProperOpen.sId (scalarRings l E) (scalarTransitions l E)\n              X.obj.left).inv.app M)) ≫\n      (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((z.properOpen.gamma c.i (𝟙 X.obj.left) r.hom d.i\n          (r.i_hom.trans (Category.id_comp _).symm)).app M) ≫\n      (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫\n      RW.functor.map ((ProperOpenPush A r.hom).map (fixedShriek l E o m c.i M).hom) =\n    (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((Operations.shriek l E o d.i).map\n          ((z.canonicalBridge.push l E (𝟙 X.obj.left) ≪≫\n            SemilinearProperOpen.sId (scalarRings l E) (scalarTransitions l E)\n              X.obj.left).inv.app M)) ≫\n      (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((z.properOpen.gamma c.i (𝟙 X.obj.left) r.hom d.i\n          (r.i_hom.trans (Category.id_comp _).symm)).app M) ≫\n      (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((z.canonicalBridge.push l E r.hom).hom.app\n          ((Operations.shriek l E o c.i).obj M)) ≫\n      (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) r.hom).map\n          ((z.canonicalBridge.shriek l E c.i).hom.app M)) ≫\n      (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) r.hom).map\n          ((z.canonicalBridge.shriek l E c.i).inv.app M) ≫\n          (z.canonicalBridge.push l E r.hom).inv.app\n            ((Operations.shriek l E o c.i).obj M)) ≫\n      (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫\n      RW.functor.map ((ProperOpenPush A r.hom).map (fixedShriek l E o m c.i M).hom)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rhsCoreBridgeCancellation",
+   "results": "No existing declaration matches the project-specific statement.",
+   "date": "2026-10-28",
+   "verdict": "New project-specific intermediate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite proper open mate transport",
+   "searched": "2026-10-28",
+   "result": "No exact declaration.",
+   "verdict": "Project-specific theorem required."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp properOpenMate",
+   "searched": "2026-10-28",
+   "result": "Only generic categorical identities.",
+   "verdict": "No exact declaration."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261028T034853-L-3559670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261028T034853-L-3559670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

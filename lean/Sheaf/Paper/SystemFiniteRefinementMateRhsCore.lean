@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.SystemFiniteRefinementMateCanonical
 public import Sheaf.Paper.SystemFiniteEvaluationCoordinates
+import Sheaf.Paper.SystemFiniteRefinementMateRhsBridgeCancellation
+import Sheaf.Paper.SystemFiniteRefinementMateRhsCoreFiniteMate
 import Sheaf.SixFunctors.AmbientProperOpenCalculus
 
 /-! # Core finite proper/open mate transport
@@ -71,6 +73,8 @@ theorem rhsCore (D : FiniteFieldDatum.{u}) (o : Operations l E)
           (properOpenMate A c.i (𝟙 X.obj.left) r.hom d.i
             (r.i_hom.trans (Category.id_comp _).symm)).app
               (input l E m X.obj.left M)) := by
-  sorry
+  have hb := rhsCoreBridgeCancellation l E D o z m c d r M
+  have hf := rhsCoreFiniteMate l E D o z m c d r M
+  simpa only [Category.assoc] using hb.trans hf
 
 end WeilConjectures.IntegralSystemRealization.FiniteCoordinates
