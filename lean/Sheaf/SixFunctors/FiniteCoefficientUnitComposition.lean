@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.ExceptionalCoefficientMaps
 public import Sheaf.Paper.WitnessCompatibility
+import Sheaf.SixFunctors.FiniteCoefficientUnitInsertion
+import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 
 /-! # Composition of normalized regular scalar units
 
@@ -15,11 +17,70 @@ lem-coef-finite-dualizing.proof.md, the coefficient counit cocycle.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.MonoidalCategory
 
 namespace WeilConjectures
+
+attribute [local instance 10000] SheafExactDegreeZero.scalarWeakSheafify
+
+attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
+  Functor.mapDerivedCategory
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] Etale.DerivedCategoryModule._proof_1
+  Etale.DerivedCategoryModule._proof_2
+
+open Functor.LaxMonoidal
+
+private theorem ordinary_unit_comp
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    (φ : A →+* B) (ψ : B →+* C) (S : Scheme.{u}) :
+    Functor.LaxMonoidal.ε (Sheaf.restrictScalars S.smallEtaleTopology (ψ.comp φ)) =
+      Functor.LaxMonoidal.ε (Sheaf.restrictScalars S.smallEtaleTopology φ) ≫
+        (Sheaf.restrictScalars S.smallEtaleTopology φ).map
+          (Functor.LaxMonoidal.ε (Sheaf.restrictScalars S.smallEtaleTopology ψ)) ≫
+        (Sheaf.restrictScalarsCompIso S.smallEtaleTopology φ ψ (ψ.comp φ) rfl).hom.app
+          (𝟙_ _) := by
+  have hr : (Sheaf.restrictScalarsCompIso S.smallEtaleTopology φ ψ
+      (ψ.comp φ) rfl).hom.app (𝟙_ _) = 𝟙 _ := by
+    ext U x
+    rfl
+  erw [hr, Category.comp_id]
+  apply Sheaf.hom_ext_of_ε_comp
+  have h₁ := Sheaf.ε_sheafToPresheaf_comp_map_ε_sheafCompose S.smallEtaleTopology
+    (ModuleCat.restrictScalars.{u + 1} (ψ.comp φ))
+  have h₂ := Sheaf.ε_sheafToPresheaf_comp_map_ε_sheafCompose S.smallEtaleTopology
+    (ModuleCat.restrictScalars.{u + 1} φ)
+  have h₃ := Sheaf.ε_sheafToPresheaf_comp_map_ε_sheafCompose S.smallEtaleTopology
+    (ModuleCat.restrictScalars.{u + 1} ψ)
+  simp only [Functor.map_comp]
+  rw [h₁, reassoc_of% h₂]
+  rw [show (sheafToPresheaf _ _).map ((sheafCompose _
+      (ModuleCat.restrictScalars.{u + 1} φ)).map
+        (ε (sheafCompose S.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} ψ)))) =
+      ((Functor.whiskeringRight _ _ _).obj (ModuleCat.restrictScalars.{u + 1} φ)).map
+        ((sheafToPresheaf _ _).map (ε (sheafCompose S.smallEtaleTopology
+          (ModuleCat.restrictScalars.{u + 1} ψ)))) from rfl,
+    ← Functor.map_comp, h₃]
+  have key : ε ((Functor.whiskeringRight S.Etaleᵒᵖ _ _).obj
+        (ModuleCat.restrictScalars.{u + 1} φ)) ≫
+      ((Functor.whiskeringRight S.Etaleᵒᵖ _ _).obj (ModuleCat.restrictScalars.{u + 1} φ)).map
+        (ε ((Functor.whiskeringRight S.Etaleᵒᵖ _ _).obj
+          (ModuleCat.restrictScalars.{u + 1} ψ))) =
+      ε ((Functor.whiskeringRight S.Etaleᵒᵖ _ _).obj
+        (ModuleCat.restrictScalars.{u + 1} (ψ.comp φ))) := by
+    ext U : 2
+    apply ModuleCat.hom_ext
+    ext
+    simp only [NatTrans.comp_app, ModuleCat.hom_comp, LinearMap.comp_apply]
+    erw [ModuleCat.restrictScalars_η, ModuleCat.restrictScalars_η, ModuleCat.restrictScalars_η]
+    rfl
+  rw [Functor.map_comp, ← Category.assoc]
+  erw [key]
+  rfl
 
 /-- The regular scalar-unit identifications compose with the associator obtained
 from restriction of scalars. This is a coefficient-only statement, with no compact
@@ -51,6 +112,15 @@ theorem finiteCoefficient_unit_composition
         (Etale.ExceptionalCoefficients.unitIso ψ S).hom =
       (ProEtale.pbcFixedScalarExtensionComp S.smallEtaleTopology φ ψ χ hχ).hom.app
           (𝟙_ (Etale.DerivedCategoryModule A S)) ≫
-        (Etale.ExceptionalCoefficients.unitIso χ S).hom := by sorry
+        (Etale.ExceptionalCoefficients.unitIso χ S).hom := by
+  subst χ
+  rw [finiteCoefficient_unit_eq_scalarInsertion φ S,
+    finiteCoefficient_unit_eq_scalarInsertion ψ S,
+    finiteCoefficient_unit_eq_scalarInsertion (ψ.comp φ) S]
+  exact SheafExactDegreeZero.scalarAdjointInsertion_comp S.smallEtaleTopology φ ψ
+    (ε (Sheaf.restrictScalars S.smallEtaleTopology φ))
+    (ε (Sheaf.restrictScalars S.smallEtaleTopology ψ))
+    (ε (Sheaf.restrictScalars S.smallEtaleTopology (ψ.comp φ)))
+    (ordinary_unit_comp φ ψ S)
 
 end WeilConjectures

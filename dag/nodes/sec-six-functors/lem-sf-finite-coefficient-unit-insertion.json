@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-finite-coefficient-unit-insertion",
+ "kind": "statement",
+ "title": "Adjunction formula for normalized regular scalar units",
+ "statement": "Let $A,B$ be commutative rings in the coefficient universe, let $\\phi:A\\to B$ be a unital ring map, and let $S$ be any scheme. Let $T_\\phi$ be derived small-etale scalar extension and $e_\\phi:T_\\phi(\\mathbf1)\\cong\\mathbf1$ the regular-unit identification normalized on cochain representatives [def-pur-exceptional-coefficient-normalizations]. If $\\epsilon_\\phi:\\mathbf1_A\\to\\operatorname{Res}_\\phi(\\mathbf1_B)$ is the ordinary restriction lax monoidal unit, then $e_\\phi$ has underlying morphism equal to the exact degree-zero adjunction insertion of $\\epsilon_\\phi$ [def-sp-exact-degree-zero-adjoint-interface]. No finiteness or flatness assumption is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Regular-unit quotient compatibility; identification of the normalized unit with its ordinary restriction adjunct, step 1 of lem-sf-finite-coefficient-unit-composition."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "proof": [
+  {
+   "text": "Expand UnitNormalization for the chosen unitIso. The lax unit morphisms of the cochain-to-derived localization are identities, so the chosen unit hom equals its scalar representative at the unit complex followed by the localized ordinary complex oplax unit. Keep the representative formula uniform in the complex before specializing to the regular sheaf in degree zero, so all monoidal data remain shared.",
+   "uses": [
+    "def-pur-exceptional-coefficient-normalizations",
+    "def-sp-coefficient-scalar-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalarSingleMap_cochain to replace the representative followed by the complex-single comparison by the ordinary-to-derived adjunction comparison. The general single_insertion_abstract adjunction calculation underlying scalarSingleMap_eq_scalarInsertion moves the remaining ordinary oplax unit through this comparison. Its ordinary adjunct is precisely the restriction lax unit, by the definition of the sheafified left-adjoint oplax structure. Thus the resulting derived arrow is its exact degree-zero adjunction insertion. The calculation applies equally to identity maps and zero rings and uses no flatness.",
+   "uses": [
+    "def-pur-finite-smooth-coefficient-arrows",
+    "lem-pur-scalar-single-map-adjoint-insertion",
+    "def-sp-exact-degree-zero-adjoint-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-sp-coefficient-scalar-representatives",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "lem-pur-scalar-single-map-adjoint-insertion",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Regular-unit quotient compatibility; identification of the normalized unit with its ordinary restriction adjunct, step 1 of lem-sf-finite-coefficient-unit-composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar extension unit morphism equals adjunction insertion of the ordinary restriction lax monoidal unit",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.mapMon_unit, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.Adjunction.unit_app_unit_comp_map_η, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.ε_η_app. Search log: b074a925381c7a5b.",
+   "verdict": "Ordinary monoidal adjunction facts only; no normalized derived scalar-unit insertion statement.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.ε",
+   "results": "12 hits: CategoryTheory.Functor.LaxMonoidal.ε, CategoryTheory.Functor.LaxMonoidal.id_ε, CategoryTheory.Functor.Monoidal.instIsIsoε, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal_ε, CategoryTheory.Functor.Monoidal.εIso_hom, CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal, CategoryTheory.Functor.Monoidal.ofLaxMonoidal, CategoryTheory.Functor.Monoidal.inv_ε. Search log: e4722c2e31bf806b.",
+   "verdict": "Ordinary monoidal adjunction facts only; no normalized derived scalar-unit insertion statement.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexη|unit_app_unit_comp_map_η",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean. Search log: de814e32e186f7a3.",
+   "verdict": "Ordinary monoidal adjunction facts only; no normalized derived scalar-unit insertion statement.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteCoefficientUnitComposition",
+  "date": "2026-10-28",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-coefficient-unit-composition",
+   "place": "Proof step 1: the normalized regular-unit adjunction insertion formula.",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteCoefficientUnitInsertion",
+  "file": "lean/Sheaf/SixFunctors/FiniteCoefficientUnitInsertion.lean",
+  "declaration": "WeilConjectures.finiteCoefficient_unit_eq_scalarInsertion",
+  "statement": "theorem finiteCoefficient_unit_eq_scalarInsertion\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) (S : Scheme.{u}) :\n    (Etale.ExceptionalCoefficients.unitIso φ S).hom =\n      SheafExactDegreeZero.scalarAdjointInsertion S.smallEtaleTopology φ\n        (Functor.LaxMonoidal.ε (Sheaf.restrictScalars S.smallEtaleTopology φ))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261028T034908-L-3566114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261028T034908-L-3566114",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
