@@ -1,0 +1,136 @@
+{
+ "id": "lem-coef-sequence-derived-evaluation-full",
+ "kind": "lemma",
+ "title": "Compatible derived morphisms lift on varying quotient coefficient sequences",
+ "statement": "Fix a prime l, a finite extension E of the l-adic field, and a scheme W. Let M,N belong to the derived category of modules on the quotient coefficient sequence site [def-coef-ringed-sequence-site]. A family f_n: ev_n M -> ev_n N which commutes with every adjacent transition (using normalizedDVRRes on the lower finite map) is the evaluation family of some morphism g:M -> N. No uniqueness is asserted. This includes arbitrary unbounded complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A6, with Injectives Tag 079P; the locally finite coinduced two-term argument in this node expands paragraph 2 of prop-coef-integral-dualizing."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Identify sequence-site module sheaves with inverse systems M_n whose transitions are R_(n+1)-linear maps M_(n+1) to restriction of M_n. Evaluation is exact. Its right adjoint r_n has zero levels m<n and scalar restriction of M_n at levels m>=n. Scalar restriction is exact, so r_n is exact as well.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a representative complex N construct 0 -> N -> product_n r_n(N_n) -> product_n r_(n+1)(Res N_n) -> 0. The first map records all transitions; the difference map subtracts consecutive transitions. At level m these are finite products of m+1 and m terms. The kernel is N_m and recursive solution of the m triangular equations proves surjectivity. This proves a short exact sequence of complexes without any exactness assumption on infinite products of sheaves.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve each N_n and, independently, each restricted N_n by K-injectives. Since r_n is right adjoint to exact evaluation, it preserves K-injectives. Products of K-injectives are K-injective. At each level these replacement products have finitely many nonzero terms, so the replacements are quasi-isomorphisms. The short exact sequence therefore gives a distinguished triangle N -> A -> B -> N[1], with A and B the indicated derived coinduced products. Restriction of scalars need not preserve K-injectives and is never claimed to do so.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived adjunction identifies Hom(M,A) with families of maps M_n -> N_n and Hom(M,B) with families of maps M_(n+1) -> Res N_n. The induced Hom(M,A) -> Hom(M,B) is the difference of the two adjacent compatibility words. The assumed equations say that the prescribed family belongs to its kernel. Exactness of Hom(M,-) on the triangle supplies a lift M -> N. Composing with N -> A identifies its evaluation with the prescribed maps. No uniqueness or faithfulness assertion is used.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of derived inverse systems of modules with varying rings lift from compatible families of derived morphisms by a two term coinduced resolution",
+   "results": "8 hits: DirectLimit.Module.lift, CategoryTheory.ProjectiveResolution.liftFOne, DirectLimit.Module.lift_of, IsAdicComplete.lift, DirectLimit.Module.lift.congr_simp, Rep.coindMap', IsAdicComplete.liftAlgHom, Module.DirectLimit.map",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.mk'_counit, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.id_counit, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*(exact|Exact)|rightDerivedFunctorAdjunction|shortExact.*[Tt]riangle|[Tt]riangle.*shortExact",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-system-dualizing-trace-existence",
+    "lem-coef-integral-dualizing-system-finite-adjunction",
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSystemTraceExistence",
+  "date": "2026-10-28",
+  "group": "E6"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSequenceEvaluationFull",
+  "file": "lean/Sheaf/Paper/CoefficientSequenceEvaluationFull.lean",
+  "declaration": "WeilConjectures.coefficientSequenceDerivedEvaluation_full",
+  "statement": "theorem coefficientSequenceDerivedEvaluation_full\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : Scheme.{u})\n    (M N : coefficientSequenceDerived l E W)\n    (f : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation l E W n).obj M ⟶\n      (coefficientSequenceDerivedEvaluation l E W n).obj N)\n    (hf : ∀ n : ℕ,\n      f (n + 1) ≫ (coefficientSequenceDerivedTransition l E W (Nat.le_succ n)).app N =\n        (coefficientSequenceDerivedTransition l E W (Nat.le_succ n)).app M ≫\n          (normalizedDVRRes l E W (Nat.le_succ n)).map (f n)) :\n    ∃ g : M ⟶ N, ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E W n).map g = f n",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261028T072403-L-1941188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261028T072403-L-1941188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

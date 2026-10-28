@@ -13,40 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Use the scalar-restriction descriptions of open extension and proper image to identify the support functor with the native quotient-system one. The tensor-unit universal property gives its finite unit comparisons. Represent Q on a simultaneous quotient-system resolution.",
+   "text": "Apply the finite counit compatibility theorem to obtain c and eU and adjacent compatibility of the explicitly prescribed finite trace words.",
    "uses": [
+    "lem-coef-system-finite-counit-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply varying-ring derived evaluation fullness on the base scheme to the support object and the tensor unit, using the prescribed finite trace words and the compatibility just proved. Obtain a system morphism t with exactly these evaluations.",
+   "uses": [
+    "lem-coef-sequence-derived-evaluation-full",
+    "lem-coef-system-finite-counit-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set supportComparison=c, unitEvaluation=eU and trace=t. For trace_evaluation rewrite by the lifting evaluation equation, expand the finite trace word, reassociate, and cancel (eU n).inv followed by (eU n).hom. This is the original required word.",
+   "uses": [
+    "lem-coef-system-finite-counit-compatibility",
     "def-coef-system-dualizing-trace-data"
    ],
-   "elementary": false
-  },
-  {
-   "text": "At every finite level apply eQ, the fixed etale origin, and the etale exceptional counit. The finite exceptional coefficient counit square and hQ make these maps compatible with every quotient; rectify the counit word on the simultaneous resolution and descend it. No test input is involved.",
-   "uses": [
-    "lem-coef-finite-exceptional",
-    "lem-coef-finite-dualizing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact evaluation of this same resolution gives the displayed trace_evaluation equation, including its fixed support and site comparison factors.",
-   "uses": [
-    "def-weil-compact-support-native-system-evaluation"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coef-system-dualizing-trace-data",
-  "lem-coef-finite-exceptional",
-  "lem-coef-finite-dualizing",
-  "def-weil-compact-support-native-system-evaluation"
+  "lem-coef-system-finite-counit-compatibility",
+  "lem-coef-sequence-derived-evaluation-full",
+  "def-coef-system-dualizing-trace-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R5",
+  "group": "E6",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+  "place": "Second proof paragraph: separate finite quotient counit compatibility from the generic lifting of compatible derived evaluation maps, then cancel the finite unit comparison."
  },
  "mathlib_searches": [
   {
@@ -119,9 +119,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R5",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261028T055744-L-804665",
+  "landing": "20261028T072403-L-1941188",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

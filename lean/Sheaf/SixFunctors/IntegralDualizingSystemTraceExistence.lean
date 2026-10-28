@@ -6,6 +6,8 @@ Authors: SHEAF group M7
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingSystemTraceData
+import Sheaf.Paper.CoefficientSequenceEvaluationFull
+import Sheaf.SixFunctors.IntegralDualizingFiniteCounitCompatibility
 
 /-! # Finite exceptional adjunction on the quotient sequence site -/
 
@@ -57,6 +59,21 @@ theorem integralDualizingSystemTraceData_exists
         (eQ m).hom ≫
           (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _
             (integralDualizingFiniteComparison l E D X hl h)) :
-    Nonempty (IntegralDualizingSystemTraceData D l E X S G Q eQ) := by sorry
+    Nonempty (IntegralDualizingSystemTraceData D l E X S G Q eQ) := by
+  obtain ⟨c, eU, hc⟩ := integralDualizingFiniteCounit_compatible D l E X hl S G Q eQ hQ
+  obtain ⟨t, ht⟩ := coefficientSequenceDerivedEvaluation_full l E (Spec (.of D.k))
+    (G.properModules.rightDerivedFunctor.obj
+      (G.openModules.mapDerivedCategory.obj (coefTraceInput l E X Q)))
+    G.baseTensors.systemClosed.monoidal.tensorUnit
+    (integralDualizingFiniteTraceWord D l E X S G Q eQ c eU) hc
+  refine ⟨{
+    supportComparison := c
+    unitEvaluation := eU
+    trace := t
+    trace_evaluation := ?_ }⟩
+  intro n
+  rw [ht n]
+  simp only [integralDualizingFiniteTraceWord, Category.assoc, Iso.inv_hom_id,
+    Category.comp_id]
 
 end WeilConjectures

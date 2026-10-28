@@ -1,0 +1,146 @@
+{
+ "id": "lem-coef-system-finite-counit-compatibility",
+ "kind": "lemma",
+ "title": "Adjacent quotient compatibility of the prescribed finite exceptional counits",
+ "statement": "Fix D,l,E,X and the scheme hypotheses of [def-coef-system-dualizing-trace-data], with l different from the characteristic of D. For every coefficient calculus S and pairing system G, and every quotient-system complex Q with finite identifications eQ commuting with all fixed dualizing transitions, there exist a support comparison c and finite unit identifications eU of exactly the types in IntegralDualizingSystemTraceData, such that the explicit finite trace word (evaluation of c, native support comparison, support of eQ, fixed finite counit, inverse eU) commutes with each adjacent source and target quotient-system transition. The conclusion contains no system trace morphism and asserts only the finite compatibility square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "stmt_deps": [
+  "def-coef-system-dualizing-trace-data",
+  "lem-coef-finite-dualizing",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified openRestriction and properRestriction isomorphisms of the calculus. Restriction to the constant integral coefficient ring is fully faithful on quotient module sheaves: quotient scalar maps are locally surjective, so integral-linear maps are quotient-linear. Lift the two functor identifications before deriving. Exact restriction and the composition comparisons for derived functors produce the natural isomorphism c from the chosen support composite to the native quotient-system support composite.",
+   "uses": [
+    "def-coef-system-dualizing-trace-data",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor model and its unit universal property identify its system tensor unit with the coefficient ring complex in degree zero. Evaluate this single system isomorphism and compose with the generator-normalized finiteDualizingIntrinsicUnit. This supplies eU with the actual quotient transitions, not independent arbitrary finite normalizations.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-system-dualizing-trace-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the finite trace word by evaluation of c, the canonical native compact-support evaluation comparison, compact support of eQ, the fixed finite exceptional counit, and inverse eU. This is an explicit finite composite and contains no chosen system morphism.",
+   "uses": [
+    "def-coef-system-dualizing-trace-data",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the adjacent transition square. Naturality of c and native support evaluation move the source transition to Q. Substitute hQ. Transport through the fixed ordinary-etale origin and the canonical support site comparison. Apply the counit equation in finiteDualizingCoefficientComparisons: the coefficient mate cancels and scalar-adjunction unit naturality leaves the quotient coefficient map after the old counit. The normalization of eU identifies that map with the actual target transition. Transport back and compose with inverse eU. This is precisely the required equality of finite trace words. The construction uses exact scalar restriction, not flatness of the quotient map.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "def-coef-system-dualizing-trace-data",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-system-dualizing-trace-data",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-coef-finite-dualizing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counits of exceptional inverse image commute with quotient coefficients under the canonical compact support base change comparison",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, Pi.counit_coe_dFinsupp, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CompHausLike.LocallyConstant.counitApp, CategoryTheory.Adjunction.CommShift.commShift_counit, CompHausLike.LocallyConstant.counit_app_val, CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.mk'_counit, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.id_counit, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(Iso|Adjunction)|evaluation.*(full|Full)|counit",
+   "results": "3 hits: Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem for varying quotient coefficient sequence categories; generic adjunction lemmas and ordinary constant-ring tower fullness do not supply this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second proof paragraph: finite mapping-complex comparisons and reduction-compatible counits.",
+   "via": [
+    "lem-coef-system-dualizing-trace-existence",
+    "lem-coef-integral-dualizing-system-finite-adjunction",
+    "lem-coef-integral-dualizing-mapping-tower-finite-components",
+    "lem-coef-integral-dualizing-mapping-tower-finite-comparison",
+    "lem-coef-integral-dualizing-mapping-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingSystemTraceExistence",
+  "date": "2026-10-28",
+  "group": "E6"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingFiniteCounitCompatibility",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingFiniteCounitCompatibility.lean",
+  "declaration": "WeilConjectures.integralDualizingFiniteCounit_compatible",
+  "statement": "theorem integralDualizingFiniteCounit_compatible (hl : l ≠ D.p)\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S)\n    (Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (eQ : ∀ n : ℕ,\n      (coefficientSequenceDerivedEvaluation l E X n).obj (coefTraceInput l E X Q) ≅\n        integralDualizingFiniteTerm l E D X n)\n    (hQ : ∀ {m n : ℕ} (h : n ≤ m),\n      (coefficientSequenceDerivedTransition l E X h).app (coefTraceInput l E X Q) ≫\n          (normalizedDVRRes l E X h).map (eQ n).hom =\n        (eQ m).hom ≫\n          (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _\n            (integralDualizingFiniteComparison l E D X hl h)) :\n    ∃ (c : G.openModules.mapDerivedCategory ⋙ G.properModules.rightDerivedFunctor ≅\n      ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) (finiteDualizingCompactification D X).i ⋙\n        ProEtale.VaryingRing.P (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) (finiteDualizingCompactification D X).g)\n      (eU : ∀ n : ℕ,\n        (coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).obj\n          G.baseTensors.systemClosed.monoidal.tensorUnit ≅\n        (finiteDualizingRealization l E (Spec (.of D.k)) n).obj\n          (Etale.constantComplex (finiteDualizingCoeff l E n) (Spec (.of D.k)))),\n      ∀ n : ℕ,\n        integralDualizingFiniteTraceWord D l E X S G Q eQ c eU (n + 1) ≫\n            (coefficientSequenceDerivedTransition l E (Spec (.of D.k))\n              (Nat.le_succ n)).app G.baseTensors.systemClosed.monoidal.tensorUnit =\n          (coefficientSequenceDerivedTransition l E (Spec (.of D.k))\n              (Nat.le_succ n)).app\n              (G.properModules.rightDerivedFunctor.obj\n                (G.openModules.mapDerivedCategory.obj (coefTraceInput l E X Q))) ≫\n            (normalizedDVRRes l E (Spec (.of D.k)) (Nat.le_succ n)).map\n              (integralDualizingFiniteTraceWord D l E X S G Q eQ c eU n)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.integralDualizingFiniteTraceWord",
+   "WeilConjectures.integralDualizingFiniteCounit_compatible"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261028T072403-L-1941188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261028T072403-L-1941188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
