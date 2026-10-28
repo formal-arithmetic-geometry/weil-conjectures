@@ -2,10 +2,11 @@
  "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-target-projection-model-iso",
  "kind": "statement",
  "title": "Target projection model transport for ordinary finite reduction",
- "statement": "For the constant-completion coefficient data, the completed pullback followed by change of scalars along the target projection is naturally isomorphic to change(projection J A I n) followed by pullback along constantMap F (A / I^(n+1)).",
+ "statement": "Let C and C' be small categories with Grothendieck topologies J and J'. Let L : Sh(J) → Sh(J') have right adjoint V with adjunction adj : L ⊣ V and preserve finite limits, and let F : InverseImageData L be the supplied constant-coefficient algebraic inverse-image data. For every commutative Noetherian ring A, ideal I, and n : ℕ, pull F (completedMap F A I) followed by change(projection J' A I n) is naturally isomorphic to change(projection J A I n) followed by pull F (constantMap F (A / I^(n+1))).",
  "stmt_deps": [
   "def-weil-pbc-algebraic-inverse-image",
-  "def-pur-strict-quotient-completion-data"
+  "def-pur-strict-quotient-completion-data",
+  "def-pur-constant-coefficient-inverse-image-data"
  ],
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
@@ -51,24 +52,33 @@
  ],
  "proof": [
   {
-   "text": "Use the second-site quotient identification, the projection equation for completedMap, and normalized scalar associativity for the inverse-image algebra.",
+   "text": "The definition of completedMap as a limit lift gives completedMap F A I followed by projection J' A I n equal to F.rings.map (projection J A I n) followed by constantMap F (A / I^(n+1)), by limit.lift_π.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved generic finiteInverseScalar_exists helper in ConstantCompletionOrdinaryFinitePullExistence to projection J A I n. This helper uses the normalized module adjunction at both rings: the restriction square is an isomorphism on underlying sheaves, its right mate is invertible by the normalized transpose equation, and conjugacy makes the scalar-extension mate invertible. It yields an isomorphism between (F.algebra (completed J A I)).modules followed by change(F.rings.map projection) and change(projection) followed by (F.algebra (finite J A I n)).modules. The helper is imported with import all; its proof is complete, not an assumption.",
    "uses": [
-    "lem-weil-pbc-common-quotient-ordinary-insertion",
-    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+    "lem-coef-normalized-module-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the already proved finiteScalarComposite_exists helper twice. Each scalar-composition isomorphism is uniqueness of left adjoints applied to the composite tensor adjunction, transported through resCompIso. First identify change(completedMap) followed by change(target projection) with change of their composite, using the projection equation. Then expand that composite as change(F.rings.map source projection) followed by change(constantMap). Whisker the two scalar-composition isomorphisms by the completed algebraic module inverse image, and whisker the inverse-image/scalar comparison by change(constantMap). Their composite is the required natural isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-common-quotient-ordinary-insertion",
-  "lem-weil-pbc-sectionwise-adic-algebra-limit"
+  "lem-coef-normalized-module-adjunction"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C6",
+  "group": "X2",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK, 03EL and 093M; target projection and scalar-associativity transport"
+  "place": "Tags 03EK and 03EL; projection equation and the existing proved scalar-composition and inverse-image/scalar-extension helpers.",
+  "note": "No new theorem or hole. The two helpers are generic in the ring map and are reused via a private proof import. The normalized module adjunction is used as a generic tool; the unit route is unchanged."
  },
  "lean": {
   "existing": false,
@@ -78,10 +88,11 @@
   "branch": "sheaf-dag",
   "by": "C6",
   "date": "2026-10-28",
-  "statement": "theorem ordinaryReducedPull_targetProjectionIso (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) : Nonempty ((pull F (completedMap F A I) ⋙ change (projection J' A I n)) ≅ (change (projection J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1)))))",
+  "statement": "theorem ordinaryReducedPull_targetProjectionIso\n    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (n : ℕ) :\n    Nonempty ((pull F (completedMap F A I) ⋙ change (projection J' A I n)) ≅\n      (change (projection J A I n) ⋙\n        pull F (constantMap F (A ⧸ I ^ (n + 1)))))",
   "declarations": [
    "CategoryTheory.ConstantCompletion.ordinaryReducedPull_targetProjectionIso"
-  ]
+  ],
+  "note": "2026-10-28 X2: restore V, adj : L ⊣ V and PreservesFiniteLimits L explicitly. This is a source-faithful correction of the false non-geometric interface, not a proof of its former generality. The geometric caller passes its existing data."
  },
  "reviewed": {
   "date": "2026-10-28",
@@ -96,11 +107,46 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C6",
+  "reviewer": "C-766b0",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261028T020238-L-2484769",
+  "landing": "20261028T072501-L-1954025",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item targetProjectionIso proof (limit.lift_π + private finiteInverseScalar/finiteScalarComposite helpers, axioms clean) and the geometric-context statement change (C2-invariants counterexample checked against InverseImageData/pull) against both nodes, the change record, the sole users TargetIso/Transport and a sandbox chain compile through OrdinaryReducedPull"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "X2 stage 2",
+  "old_statement": "For the constant-completion coefficient data, the completed pullback followed by change of scalars along the target projection is naturally isomorphic to change(projection J A I n) followed by pullback along constantMap F (A / I^(n+1)).",
+  "what": "Restore the geometric inverse-image hypotheses of Stacks 03EL. InverseImageData L alone transports ring and module operations but does not assert an adjunction or colimit preservation. Counterexample: take C2-invariants from C2-sets to sets, A = ℤ, I = (2), n = 0, and the completed module ℤ₂ with sign action. Constants and finite limits are preserved and algebraic lifts exist. The completed coefficient ring has trivial action, so completedMap is the identity. The source functor gives (ℤ₂^C2)/2 = 0, while the finite model gives (ℤ₂/2)^C2 = ℤ/2. Thus the original generality is false, even with left exactness. Restore the specified right adjoint and finite-limit preservation, as already assumed by ordinaryReducedPull_transport and the reviewed source-side correction. No definition or target statement changes.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03EL, lemma-tensor-product-pullback: a morphism of ringed topoi, using the inverse/direct-image adjunction in its proof."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-target-iso",
+    "holds": true,
+    "note": "Its target projection-model input must retain the same geometric context; the caller is corrected in this delivery and passes V and adj."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-algebraic-inverse-image",
+   "def-pur-strict-quotient-completion-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Use the second-site quotient identification, the projection equation for completedMap, and normalized scalar associativity for the inverse-image algebra.",
+    "uses": [
+     "lem-weil-pbc-common-quotient-ordinary-insertion",
+     "lem-weil-pbc-sectionwise-adic-algebra-limit"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-common-quotient-ordinary-insertion",
+   "lem-weil-pbc-sectionwise-adic-algebra-limit"
+  ]
  }
 }

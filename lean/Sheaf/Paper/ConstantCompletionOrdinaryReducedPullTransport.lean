@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ConstantCompletionDerivedPull
 import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTransportEquation
+import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTargetIso
 
 /-! # Ordinary finite transport for constant-completion pullback
 
@@ -56,7 +57,14 @@ theorem ordinaryReducedPull_transport
           (change (quotient J' A I n)) ≫ t.hom = s.hom := by
   let X := change (projection J A I n) ⋙
     pull F (constantMap F (A ⧸ I ^ (n + 1)))
-  obtain ⟨s, t, h⟩ := ordinaryReducedPull_transport_eq F V adj A I n
-  exact ⟨X, s, t, h⟩
+  first
+  | obtain ⟨s, t, h⟩ := ordinaryReducedPull_transport_eq F V adj A I n
+    exact ⟨X, s, t, h⟩
+  | obtain ⟨s⟩ : Nonempty ((res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙
+        change (quotient J' A I n)) ≅ X) := by
+      solve_by_elim only [ordinaryReducedPull_sourceIso F, V, adj]
+    obtain ⟨t⟩ := ordinaryReducedPull_targetIso F V adj A I n
+    refine ⟨X, s, t, ?_⟩
+    exact ordinaryReducedPull_transport_eq F A I n s t
 
 end CategoryTheory.ConstantCompletion
