@@ -49,8 +49,7 @@ theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     Nonempty (Comparison l E g s SX SY TX TY) := by
   obtain ⟨h⟩ := comparison_core_hom_data_exists l E g s SX SY TX TY
   obtain ⟨t⟩ := comparison_core_tensor_data_exists l E g s SX SY TX TY
-  obtain ⟨m⟩ := comparison_core_tensor_model_exists l E g s SX SY TX TY
-    t.tensorChain t.tensor
+  obtain ⟨tensor, ⟨m⟩⟩ := comparison_core_tensor_model_exists l E g s SX SY TX TY t
   exact ⟨{
     chain := h.chain
     chain_projection := h.chain_projection
@@ -58,7 +57,7 @@ theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     derived_model := h.derived_model
     tensorChain := t.tensorChain
     tensorChain_pure := t.tensorChain_pure
-    tensor := t.tensor
+    tensor := tensor
     tensor_model := m.tensor_model }⟩
 
 end WeilConjectures.PodReindexingCoherence

@@ -1,0 +1,106 @@
+{
+ "id": "lem-pod-reindexing-tensor-chain-naturality",
+ "kind": "lemma",
+ "title": "Naturality of the pure-normalized tensor-chain comparison",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; naturality of the pure-normalized chain tensor comparison."
+ },
+ "statement": "For any scheme isomorphism and finite or completed coefficient stage, take closed structures and K-flat tensor models [def-pod-reindexing-coherence-data, def-coef-ringed-tensor-hom-model], and tensor comparison data whose chain maps send each pure generator to its reindexed generator [lem-pod-reindexing-comparison-core-tensor-data]. For arbitrary complexes P,L,P′,L′ and chain maps f:P→P′, h:L→L′, reindexing the total-tensor map followed by the chain comparison for P′,L′ equals the chain comparison for P,L followed by the total tensor of the two reindexed maps. No K-flatness or boundedness is required.",
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-comparison-core-tensor-data",
+  "lem-pod-reindexing-hom-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the invertible comparison for P,L. In each total degree use extensionality on all pure-tensor summands. The inverse comparison sends a target pure generator to the corresponding source generator, by its pure normalization and inverse identity. The formula for total tensor maps on generators and pure normalization for both comparisons identify the two images. This proves the equality degreewise.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-pod-reindexing-comparison-core-tensor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-pod-reindexing-comparison-core-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "T8 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; naturality of the pure-normalized chain tensor comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a total tensor chain comparison normalized on pure tensor generators under reindexing of sheaves",
+   "results": "Eight hits including SheafOfModules.pullbackObjFreeIso_hom_naturality and PresheafOfModules.Monoidal.tensorHom; none gives this total-complex comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project pure-generator extensionality and map formula to prove naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "The constructor requires the naturality equation; it does not prove it.",
+   "date": "2026-10-28",
+   "verdict": "The present lemma proves exactly the missing constructor hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "total_pure_hom_ext|tensor_generator_map|tensorChain_naturality",
+   "results": "No Mathlib match. Existing ScalarHomTensorCoherence has the generator extensionality and map formulas used in the proof.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate naturality statement; reuse existing proved helpers."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingComparisonCoreTensorModel",
+  "date": "2026-10-28",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-comparison-core-tensor-model",
+   "place": "Pure-normalized chain comparison naturality, first step of the localization construction."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorChainNaturality",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorChainNaturality.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.tensor_chain_naturality",
+  "statement": "theorem tensor_chain_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]\n    (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (t : ComparisonCoreTensorData l E g s SX SY TX TY)\n    {P L P' L' : K l E Y s} (f : P ⟶ P') (h : L ⟶ L') :\n    (podReindexingComplexFunctor l E g s).map ((total l E Y s).map (f, h)) ≫\n        (t.tensorChain P' L').hom =\n      (t.tensorChain P L).hom ≫ (total l E X s).map\n        ((podReindexingComplexFunctor l E g s).map f,\n          (podReindexingComplexFunctor l E g s).map h)",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-de1e1",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261028T072452-L-1952327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-de1e1",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261028T072452-L-1952327",
+  "kind": "interface",
+  "note": "independent cc review: comparison_core_tensor_model_exists (old ∀tensor false; new ∃tensor from ComparisonCoreTensorData) against node lem-pod-reindexing-comparison-core-tensor-model, its change record and the parent Comparison fields; sandbox compile all OK, axioms clean"
+ }
+}

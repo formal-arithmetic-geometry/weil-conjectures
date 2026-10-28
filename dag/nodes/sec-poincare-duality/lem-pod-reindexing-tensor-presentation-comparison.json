@@ -1,0 +1,114 @@
+{
+ "id": "lem-pod-reindexing-tensor-presentation-comparison",
+ "kind": "lemma",
+ "title": "Explicit tensor comparison on the K-flat presentation",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; compose the exact factorization, chain comparison and target model, before localization descent."
+ },
+ "statement": "For a scheme isomorphism with the prime invertible, a finite or completed coefficient stage and recorded closed structures and K-flat tensor models [def-pod-reindexing-coherence-data, def-coef-ringed-tensor-hom-model], take pure-normalized chain tensor comparison data [lem-pod-reindexing-comparison-core-tensor-data]. Lift reindexing to the K-flat full subcategories by its proved preservation property [lem-pod-reindexing-hom-resolution-model]. On the product of the source K-flat category there is a natural isomorphism from the localization of the source total tensor followed by derived reindexing to the target derived tensor of the two localized reindexed inputs. Its component is exactly the factorization at the total complex, followed by the localized tensor-chain comparison, followed by the target tensor-model comparison. This is the comparison on representatives only; no derived bifunctor comparison or descent is asserted.",
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-comparison-core-tensor-data",
+  "lem-pod-reindexing-hom-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct tensorKFlatReindexing as the full-subcategory lift of the actual complex functor, using the K-flat preservation component of podReindexing_resolution_preservation. Assemble the chain comparisons into a natural isomorphism using tensor_chain_naturality. Whisker the localization factorization, then the localized chain comparison, then the target tensor model, and compose these three natural isomorphisms. Evaluation of this explicit composite gives the stated component formula.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-pod-reindexing-tensor-chain-naturality",
+    "def-pod-reindexing-coherence-data",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-pod-reindexing-tensor-chain-naturality",
+  "def-pod-reindexing-coherence-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "T8 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 2; compose the exact factorization, chain comparison and target model, before localization descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compose a reindexing factorization and a natural tensor chain comparison with a K flat tensor model before localization descent",
+   "results": "Eight hits about flat tensor functors and localization of modules, none constructing this comparison on K-flat sheaf complexes.",
+   "date": "2026-10-28",
+   "verdict": "Compose the existing recorded project comparisons directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "isoWhiskerLeft, its component formula, and its transitivity formulas are available.",
+   "date": "2026-10-28",
+   "verdict": "Use whiskering and isomorphism composition; the specialized three-factor comparison is not already stated."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_presentation_comparison|tensorKFlatReindexing",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-28",
+   "verdict": "Project-specific construction; reuse recorded coefficient models."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingComparisonCoreTensorModel",
+  "date": "2026-10-28",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-comparison-core-tensor-model",
+   "place": "Explicit natural isomorphism on the K-flat presentation, before full-faithfulness descent."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorPresentationComparison",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorPresentationComparison.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.tensor_presentation_comparison",
+  "declarations": [
+   "WeilConjectures.PodReindexingCoherence.tensor_presentation_comparison",
+   "WeilConjectures.PodReindexingCoherence.tensorKFlatReindexing"
+  ],
+  "statement": "theorem tensor_presentation_comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]\n    (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (t : ComparisonCoreTensorData l E g s SX SY TX TY) :\n    let K := coefficientKFlatInclusion.{u, u + 1, u}\n      (ProEt.topology Y) (podReindexingRing l E Y s)\n    let KX := coefficientKFlatInclusion.{u, u + 1, u}\n      (ProEt.topology X) (podReindexingRing l E X s)\n    let F := tensorKFlatReindexing l E g s\n    let LX := KX ⋙ podReindexingQ l E X s\n    ∃ e : (((K.prod K) ⋙ total l E Y s) ⋙ podReindexingQ l E Y s) ⋙\n          podReindexingDerivedFunctor l E g s ≅\n        ((F ⋙ LX).prod (F ⋙ LX)) ⋙ SX.tensor,\n      ∀ P Q, e.hom.app (P, Q) =\n        (podReindexingDerivedFactors l E g s).hom.app\n            ((total l E Y s).obj (P.obj, Q.obj)) ≫\n          (podReindexingQ l E X s).map (t.tensorChain P.obj Q.obj).hom ≫\n          TX.comparison.hom.app (F.obj P, F.obj Q)",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-de1e1",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261028T072452-L-1952327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-de1e1",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261028T072452-L-1952327",
+  "kind": "interface",
+  "note": "independent cc review: comparison_core_tensor_model_exists (old ∀tensor false; new ∃tensor from ComparisonCoreTensorData) against node lem-pod-reindexing-comparison-core-tensor-model, its change record and the parent Comparison fields; sandbox compile all OK, axioms clean"
+ }
+}
