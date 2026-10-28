@@ -20923,3 +20923,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/X3/Sheaf.Paper.DiagonalTowerLimit (stage 3; reviewer PASS; after a return; landing 20261028T035013-L-3579330 (interface); batch 20261028T034643; modules 16; new nodes 15; change records: coord/changes/X3-diagonal-complete-scalar-imports.md)
 - 03:50 L: merged deliver/X3/Sheaf.SixFunctors.CoefQbarFiniteExceptionalCore (stage 3; reviewer PASS; first push; landing 20261028T035015-L-3579818 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:50 L: merged deliver/X5/Sheaf.Paper.LisseTowerLocalizedActualLevels (stage 3; reviewer PASS; first push; landing 20261028T035016-L-3580134 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:50 L: merged deliver/X8/Sheaf.Paper.LisseTowerLocalizedConstantsNormalization (stage 3; reviewer PASS; first push; landing 20261028T035017-L-3580456 (proof); batch 20261028T034643; modules 1; new nodes 0)
