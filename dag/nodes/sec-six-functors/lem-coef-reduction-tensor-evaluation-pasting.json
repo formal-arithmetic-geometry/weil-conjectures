@@ -1,0 +1,110 @@
+{
+ "id": "lem-coef-reduction-tensor-evaluation-pasting",
+ "kind": "statement",
+ "title": "Pasting the three representative tensor squares",
+ "statement": "Fix ℓ, E and W and a coefficient reduction record R. If R satisfies its reduction tensor normalization, finite scalar tensor normalization, and evaluation tensor normalization, then it satisfies CoefficientReductionTensorEvaluation. This is a relation among the three already specified maps, with no existence or construction of tensor comparisons.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941; representative tensor comparison and localization"
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the two natural transformations to flat-term K-flat integral pairs, a faithful restriction by cochain tensor model rigidity.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the strict reduction tensor square. Use evaluation/localization naturality and the evaluation tensor square, then move the three finite presentation identifications through the finite tensor model by naturality. Substitute the strict finite-component equation and the finite scalar tensor square. Cancel all representative isomorphisms and descend by faithfulness.",
+   "uses": [
+    "def-coef-derived-system-calculus-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-tensor-model-rigidity",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker A9, adapting the cited source construction",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(eval|pullback)|pullback.*tensor",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor pullback natural isomorphism computed on flat term K flat complexes and compatible with evaluation on a ringed sequence site",
+   "date": "2026-10-28",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionNormalizations"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models-normalizations",
+   "place": "Pasting the three representative tensor squares",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientReductionTensorEvaluationPasting",
+  "file": "lean/Sheaf/Paper/CoefficientReductionTensorEvaluationPasting.lean",
+  "declaration": "WeilConjectures.coefficientReductionTensorEvaluation_of_normalizations",
+  "statement": "theorem coefficientReductionTensorEvaluation_of_normalizations\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hR : CoefficientReductionTensorNormalization l E W R)\n    (hF : CoefficientFiniteTensorNormalization l E W R)\n    (hE : CoefficientEvaluationTensorNormalization l E W R) :\n    CoefficientReductionTensorEvaluation l E W R",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "independent cc review: repaired ∃-normalized statement of coefficientNormalizedReductionNormalizations vs its node, the record fields in CoefficientDerivedSystemEvaluationData (counterexample to the old ∀ form confirmed), the forced 3-line consumer adaptation vs the clone, and the 4 new modules vs their nodes"
+ }
+}

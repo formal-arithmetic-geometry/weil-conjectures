@@ -1,0 +1,118 @@
+{
+ "id": "lem-coef-strict-reduction-tensor-normalization",
+ "kind": "statement",
+ "title": "Strict reduction tensor comparison on simultaneous representatives",
+ "statement": "Fix ℓ, E and W and any core coefficient reduction record R. There exists a reduction tensor comparison μ:R.integralClosed.tensor⋙R.reduction≅(R.reduction.prod R.reduction)⋙R.systemClosed.tensor such that replacing only reductionTensor by μ satisfies CoefficientReductionTensorNormalization. In particular a single strict chain map supplies all finite ordinary tensor components and the system-derived comparison square. No finite scalar or evaluation tensor comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941; representative tensor comparison and localization"
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the reduction functor with the sequence-projection derived pullback through uniqueness of its specified adjunction; its projection formulas preserve the finite comparisons.",
+   "uses": [
+    "def-coef-derived-system-calculus-data",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical tensor pullback comparison on simultaneous flat-term K-flat complexes. Its strict chain map and three strict presentations have the prescribed finite components by the unique scalar and evaluation generator formulas. Descent through the supplied tensor models gives the system-derived square.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-prescribed-scalar-tensor-comparison",
+    "lem-coef-actual-total-tensor-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-coef-prescribed-scalar-tensor-comparison",
+  "lem-coef-actual-total-tensor-evaluation"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker A9, adapting the cited source construction",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(eval|pullback)|pullback.*tensor",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor pullback natural isomorphism computed on flat term K flat complexes and compatible with evaluation on a ringed sequence site",
+   "date": "2026-10-28",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionNormalizations"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models-normalizations",
+   "place": "Strict reduction tensor comparison on simultaneous representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientStrictReductionTensorNormalization",
+  "file": "lean/Sheaf/Paper/CoefficientStrictReductionTensorNormalization.lean",
+  "declaration": "WeilConjectures.coefficientStrictReductionTensorNormalization",
+  "statement": "theorem coefficientStrictReductionTensorNormalization\n    (R : CoefficientDerivedSystemReduction l E W) :\n    ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅\n      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,\n      CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ }",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "independent cc review: repaired ∃-normalized statement of coefficientNormalizedReductionNormalizations vs its node, the record fields in CoefficientDerivedSystemEvaluationData (counterexample to the old ∀ form confirmed), the forced 3-line consumer adaptation vs the clone, and the 4 new modules vs their nodes"
+ }
+}

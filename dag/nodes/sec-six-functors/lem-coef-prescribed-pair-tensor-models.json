@@ -1,0 +1,123 @@
+{
+ "id": "lem-coef-prescribed-pair-tensor-models",
+ "kind": "statement",
+ "title": "Scalar tensor comparison for independently prescribed tensor models",
+ "statement": "On an essentially small ringed site J, let a:R→S be a map of commutative ring sheaves and let s be its prescribed normalized scalar-derived pair. For any independently prescribed closed derived tensor structures SR, SS and their K-flat total-tensor models TR, TS, there is a PairTensorComparison for s with these structures. It preserves K-flat complexes, has the scalar-unit pure-generator law on total complexes, and its derived comparison satisfies the representative square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941; representative tensor comparison and localization"
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-coef-prescribed-scalar-tensor-comparison",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized ordinary scalar tensor comparison and totalize its inverse on direct-sum summands. Naturality and the signed differential give a natural total chain isomorphism.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension preserves K-flats. Resolve all homotopy objects by K-flats and use resolving-representative full faithfulness. Apply tensorComparisonDescent to the two prescribed models and the universal counit; its square is the normalization.",
+   "uses": [
+    "lem-sfb-scalar-extension-kflat",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-scalar-extension-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker A9, adapting the cited source construction",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(eval|pullback)|pullback.*tensor",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor pullback natural isomorphism computed on flat term K flat complexes and compatible with evaluation on a ringed sequence site",
+   "date": "2026-10-28",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionNormalizations"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models-normalizations",
+   "place": "Scalar tensor comparison for independently prescribed tensor models",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientPrescribedPairTensorModels",
+  "file": "lean/Sheaf/Paper/CoefficientPrescribedPairTensorModels.lean",
+  "declaration": "WeilConjectures.coefficientPrescribedPairTensorComparison",
+  "statement": "theorem coefficientPrescribedPairTensorComparison\n    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}\n    [EssentiallySmall.{max c v r} C]\n    [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)\n    [∀ R : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J R)]\n    (s : ScalarDerivedPair a)\n    (SR : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))\n    (SS : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J S))\n    (TR : CoefficientTensorModels.{r, c, v, w} J R SR)\n    (TS : CoefficientTensorModels.{r, c, v, w} J S SS) :\n    Nonempty (PairTensorComparison.{c, v, r, w} a s SR SS TR TS)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "independent cc review: repaired ∃-normalized statement of coefficientNormalizedReductionNormalizations vs its node, the record fields in CoefficientDerivedSystemEvaluationData (counterexample to the old ∀ form confirmed), the forced 3-line consumer adaptation vs the clone, and the 4 new modules vs their nodes"
+ }
+}

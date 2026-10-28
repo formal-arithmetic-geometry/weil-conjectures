@@ -88,8 +88,10 @@ theorem coefficientNormalizedReductionModels (T : CoefficientDerivedSystemTensor
       Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) :=
   by
   obtain ⟨R, hRT, hQ⟩ := coefficientNormalizedReductionCore l E W T
-  obtain ⟨hR, hF, hE, hRE⟩ :=
-    coefficientNormalizedReductionNormalizations l E W T R hRT hQ.some
-  exact ⟨R, hRT, hR, hF, hE, hRE, hQ⟩
+  obtain ⟨S, hSR, hR, hF, hE, hRE⟩ :=
+    coefficientNormalizedReductionNormalizations l E W R
+  have hST : S.toCoefficientDerivedSystemTensors = R.toCoefficientDerivedSystemTensors :=
+    congrArg CoefficientDerivedSystemReductionModel.toCoefficientDerivedSystemTensors hSR
+  exact ⟨S, hST.trans hRT, hR, hF, hE, hRE, hST.symm ▸ hQ⟩
 
 end WeilConjectures

@@ -1,0 +1,120 @@
+{
+ "id": "lem-coef-normalized-evaluation-tensor-chain",
+ "kind": "statement",
+ "title": "Natural prescribed evaluation tensor comparison on complexes",
+ "statement": "For every prime ℓ, finite coefficient extension E and scheme W, and each n, the prescribed coefficientEvaluationTensorIso on arbitrary pairs of coefficient sequence complexes is the component of a single natural isomorphism from evaluation of their total tensor to the total tensor of their evaluations. There is no K-flat, boundedness or normalized-system hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 07A4 and 0941; ordinary evaluation tensor, totalization and section transport"
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Totalize the natural ordinary evaluation tensor isomorphism using the left adjoint evaluation functor, giving a natural total chain isomorphism. Inverse generator formulas and inverse cancellation determine its forward pure-generator formula. A section transport heterogeneously equal to the identity equals the canonical transport; hence this formula works for any such transport.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-coef-semilinear-total-tensor-evaluation",
+    "lem-coef-semilinear-tensor-reduction-cochain",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize to the actual coefficient sequence and coefficientEvaluationSection. Its defining equality transport is heterogeneously the identity. Apply the unique generator characterization to identify every component with coefficientEvaluationTensorIso.",
+   "uses": [
+    "def-coef-derived-system-calculus-data",
+    "lem-coef-actual-total-tensor-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-coef-semilinear-total-tensor-evaluation",
+  "lem-coef-semilinear-tensor-reduction-cochain",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-actual-total-tensor-evaluation",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker A9, adapting the cited source construction",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 07A4 and 0941; ordinary evaluation tensor, totalization and section transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(eval|pullback)|pullback.*tensor",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-28",
+   "results": "0 hits: ",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor pullback natural isomorphism computed on flat term K flat complexes and compatible with evaluation on a ringed sequence site",
+   "date": "2026-10-28",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "No theorem for the prescribed coefficient reduction, independently chosen tensor models, or representative pasting; use the project descent declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "A9",
+  "date": "2026-10-28",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionNormalizations"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models-normalizations",
+   "place": "Naturality of the prescribed evaluation tensor maps on complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedEvaluationTensorChain",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedEvaluationTensorChain.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedEvaluationTensorChain",
+  "statement": "theorem coefficientNormalizedEvaluationTensorChain (n : ℕ) :\n    ∃ b : coefficientTotalTensor.{u, t+1, t}\n        (coefficientSequenceTopology (Scheme.ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W) ⋙\n        (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ) ≅\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).prod\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)) ⋙\n          coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)\n            (integralCoefficientCommRingSheaf l E W n),\n      ∀ P Q, b.app (P, Q) = coefficientEvaluationTensorIso l E W n P Q",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-22bb6",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261028T020149-L-2472700",
+  "kind": "interface",
+  "note": "independent cc review: repaired ∃-normalized statement of coefficientNormalizedReductionNormalizations vs its node, the record fields in CoefficientDerivedSystemEvaluationData (counterexample to the old ∀ form confirmed), the forced 3-line consumer adaptation vs the clone, and the 4 new modules vs their nodes"
+ }
+}
