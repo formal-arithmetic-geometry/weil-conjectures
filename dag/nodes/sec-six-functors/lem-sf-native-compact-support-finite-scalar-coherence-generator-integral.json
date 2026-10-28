@@ -1,0 +1,105 @@
+{
+ "id": "lem-sf-native-compact-support-finite-scalar-coherence-generator-integral",
+ "kind": "statement",
+ "title": "Integral finite-Tor numerator case of finite scalar transition coherence",
+ "statement": "Under the hypotheses of lem-sf-native-compact-support-finite-scalar-coherence-generator, assume the fixed stage object is the rationalization of a finite-Tor integral object. The displayed transition equation then holds.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; integral numerator calculation"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "lem-sf-native-integral-scalar-morphism",
+  "lem-coef-integral-residue-tor"
+ ],
+ "proof": [
+  {
+   "text": "Insert the IntegralComponent six-arrow formulas for the fixed finite-Tor numerator and compare the scalar transition factors. The coefficient cocycle, finite-free tensor comparison and pasted-mates normalization identify the two composites.",
+   "uses": [
+    "lem-sf-native-integral-scalar-morphism",
+    "lem-sf-constructible-exceptional-coefficient-coherence",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sfb-pasted-mates-counit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-coherence",
+  "lem-sf-native-integral-scalar-morphism",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J9",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; integral numerator calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IntegralComponent finiteTor transition coherence",
+   "results": "No existing theorem states the native compact-support transition square on integral numerators.",
+   "date": "2026-10-28",
+   "verdict": "Use the project IntegralComponent APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportFiniteScalarCoherenceGenerator",
+  "date": "2026-10-28",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-compact-support-finite-scalar-coherence-generator",
+   "via": [],
+   "place": "integral finite-Tor numerator calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportFiniteScalarCoherenceGeneratorIntegral",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportFiniteScalarCoherenceGeneratorIntegral.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_finite_scalar_coherence_generator_integral",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_finite_scalar_coherence_generator_integral"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-28",
+  "statement": "theorem native_compact_support_finite_scalar_coherence_generator_integral [G : NativeGeometry.{u} l] (source : Realization l X) (target : Realization l Y) (stage : StageAction l D hl P c) (change : ∀ E : Index l (PadicAlgCl l), PurCompactSupport.Change (PurCompactSupport.completed l (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l)) (hs : ∀ E, (change E).map X = (source.coefficient E).integralMap l X) (ht : ∀ E, (change E).map Y = (target.coefficient E).integralMap l Y) (alpha : ∀ E : Index l (PadicAlgCl l), finiteSource l D hl P c target stage E ≅ finiteTarget l c source E) (hα : ∀ (E : Index l (PadicAlgCl l)) (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X), IntegralComponent l D hl P c source target change E K ((alpha E).hom.app ((rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K))) (i E : Index l (PadicAlgCl l)) (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) i) X) (Aobj : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X i) (hA : Aobj = (rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l i) X).obj K) (h : i ≤ E) : (stage.system.functor ⋙ target.J).map ((StageSystem.isoToStage (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X) (⟨i, Aobj⟩ : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X) h).hom) ≫ (alpha E).hom.app (((⟨i, Aobj⟩ : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X).toStage h)) = (alpha i).hom.app Aobj ≫ (source.J ⋙ actual l c).map ((StageSystem.isoToStage (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X) (⟨i, Aobj⟩ : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X) h).hom)"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261028T020525-L-2520738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261028T020525-L-2520738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

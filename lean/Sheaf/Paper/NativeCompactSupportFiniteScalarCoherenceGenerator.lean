@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.NativeCompactSupportIntegralScalarMorphism
 
+import Sheaf.Paper.NativeCompactSupportFiniteScalarCoherenceGeneratorIntegral
+import Sheaf.Paper.IntegralResidueTor
+
 /-! # Generator case of finite scalar coherence -/
 
 @[expose] public noncomputable section
@@ -81,6 +84,30 @@ objects. (blueprint: lem-sf-native-compact-support-finite-scalar-coherence-gener
           (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X)
           (⟨i, Aobj⟩ :
             generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X) h).hom) := by
-  sorry
+  classical
+  let primeUnit : IsUnit (l : Γ(X, ⊤)) := by
+    let ρ := (Scheme.ΓSpecIso (.of D.k)).inv ≫ (X ↘ Spec (.of D.k)).appTop
+    simpa only [map_natCast] using
+      (PurCompactSupport.coefficientPrimeUnit l D hl).map ρ.hom
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (show IsUnit (l : X.residueField x) from by
+      simpa only [map_natCast] using
+        ((primeUnit.map (X.presheaf.germ ⊤ x trivial).hom).map
+          (X.residue x).hom)).invertible
+  let Kint : sfIntegralConstructibleCategory l
+      (Coefficient.{u} l (PadicAlgCl l) i) X :=
+    CategoryTheory.ScalarLocalization.obj Aobj
+  let K' : finiteTorConstructibleIntegralCategory l
+      (Coefficient.{u} l (PadicAlgCl l) i) X :=
+    ⟨Kint.obj, by
+      rw [← (integral_residue_tor D l hl
+        (Coefficient.{u} l (PadicAlgCl l) i) X).2]
+      exact Kint.property⟩
+  have hK' :
+      (rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l i) X).obj K' = Aobj := by
+    rfl
+  rw [← hK']
+  exact native_compact_support_finite_scalar_coherence_generator_integral l D hl P c
+    source target stage change hs ht alpha hα i E K' Aobj hK' h
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
