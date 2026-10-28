@@ -16,13 +16,52 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the scalar unit as the sheafified pure tensor, evaluate the ordinary geometric transpose on that tensor, and use the normalized line comparison. The Kummer boundary square, hk, and d.kummer_roots identify its root with restrictRoot; LinePullback.normalization then gives the same finite Tate tensor as the abelian transpose after d.rootIso.",
+   "text": "Use the first Kummer square and hk to identify d.kummer.tau_1 with the canonical roots-of-unity inverse-image map: cancel the monic roots inclusion and apply roots_units_square. Transposing gives the canonical roots direct-image map.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "lem-sp-tower-integral-class-pullback",
+    "lem-sp-tower-integral-coefficient-pullback-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+   }
+  },
+  {
+   "text": "Transport a forgotten root section to its integral module section. The scalar-extension unit is the scalar-extension section (section_unit); lineScalarSection_normalization identifies its finite evaluation with the unit Tate tensor. Apply the inverse lineEvaluation isomorphism to obtain the scalar-unit section formula.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-scalar-extension-section-naturality",
+    "lem-sfb-tower-line-transition-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+   }
+  },
+  {
+   "text": "Apply the scalar-unit section formula to the source. Use the forgetful morphism equation, pushEvaluationSections, and LinePullback.normalization at scalar 1. The source is HEq to the inverse lineEvaluation of the unit Tate tensor of restrictRoot.",
+   "uses": [
+    "def-sp-tower-class-pullback",
+    "lem-sp-tower-restricted-scalar-adjunction",
+    "lem-sfb-tower-line-transition-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+   }
+  },
+  {
+   "text": "Transpose d.kummer_roots using homEquiv naturality and cancel rootForget. The roots transpose calculation and root_direct_eq identify the resulting root with restrictRoot. Naturality of the scalar unit rewrites the scalar transpose after d.rootIso; the scalar-unit section formula identifies the right side with the same inverse lineEvaluation of the unit Tate tensor. Compose the two HEq identities.",
    "uses": [
     "def-sp-tower-class-pullback",
     "def-sp-tower-class-systems",
     "def-coef-semilinear-system-models",
     "lem-sp-tower-restricted-scalar-adjunction",
-    "lem-sp-tower-integral-class-pullback"
+    "lem-sfb-tower-line-pullback-lower-tensor"
    ],
    "elementary": false,
    "source": {
@@ -32,15 +71,19 @@
   }
  ],
  "proof_deps": [
-  "def-sp-tower-class-pullback",
   "def-sp-tower-class-systems",
+  "lem-sp-tower-integral-class-pullback",
+  "lem-sp-tower-integral-coefficient-pullback-existence",
   "def-coef-semilinear-system-models",
+  "lem-coef-scalar-extension-section-naturality",
+  "lem-sfb-tower-line-transition-tensor",
+  "def-sp-tower-class-pullback",
   "lem-sp-tower-restricted-scalar-adjunction",
-  "lem-sp-tower-integral-class-pullback"
+  "lem-sfb-tower-line-pullback-lower-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J9",
+  "group": "N3",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
   "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
@@ -107,12 +150,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J9",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261027T234028-L-4166171",
+  "landing": "20261028T034857-L-3560602",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
