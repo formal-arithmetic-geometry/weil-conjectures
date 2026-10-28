@@ -15,24 +15,22 @@
  },
  "proof": [
   {
-   "text": "Apply the generator equation of MapSpec to the source frame section. Its module image is the pullback-adjunction image of m. The canonical composition and restriction-to-pullback comparisons identify its pullback to W with the image of the standard j-th source section under framedPullbackMap.",
+   "text": "Use the canonical Mathlib pullback/pushforward adjunction and its mate-compatible pullbackComp isomorphism. Its restriction comparison identifies evaluation on a basis vector in pulledFrame with restriction of the adjoint module morphism applied to frameSection. This is proved for an arbitrary module on W, not only a bundle or a structure sheaf.",
    "uses": [
-    "def-pur-vector-trace-geometry",
-    "lem-pc-module-pullback-adjunction",
     "def-asd-vector-bundle-zero-section"
    ],
    "elementary": false
   },
   {
-   "text": "Expand this image in the standard global basis of the target free module. The coefficients are freeMatrix(c)_{i,j}. Linearity of the degree-one symmetric-algebra inclusion and its structure-algebra isomorphism carries this finite expansion to the corresponding linear combination of degree-one functions.",
+   "text": "The degree-one inclusion and algebraIso define a linear map F to the pushforward of the structure sheaf along any map to its bundle. Apply MapSpec.generators to identify this map for the composite with v. Transpose it through the pullback adjunctions and the equal-base comparison h. In the two pulled frames the resulting module morphism is exactly framedPullbackMap.",
    "uses": [
-    "def-asd-vector-bundle-zero-section",
-    "def-pur-vector-trace-geometry"
+    "def-pur-vector-trace-geometry",
+    "def-asd-vector-bundle-zero-section"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse target chart takes the target degree-one basis functions to the ordered polynomial coordinates; the affine tower comparison identifies these with affineTraceCoordinate. Restriction via the open inclusion and topIso identifies the source degree-one function with its forward-chart coordinate. Pullback on scalar functions is pi_W.appTop, giving the stated formula. Empty bases yield empty sums; no nonempty or affine condition on W was used.",
+   "text": "Insert the finite identity sum_i freeπ_i followed by ιFree_i into the resulting pairing. Evaluation at one gives freeMatrix(c)_{i,j} times the target basis value. The inverse target chart sends that value to its polynomial coordinate, and induction on the affine tower shows that affineTraceMap preserves the ordered coordinates. The source forward chart evaluates to coordinate by homOfVector_appTop_coord. This proves the stated finite sum, including empty schemes and rank zero.",
    "uses": [
     "def-asd-vector-bundle-zero-section",
     "def-amb-vector-integration-charts"
@@ -42,16 +40,15 @@
  ],
  "proof_deps": [
   "def-pur-vector-trace-geometry",
-  "lem-pc-module-pullback-adjunction",
   "def-asd-vector-bundle-zero-section",
   "def-amb-vector-integration-charts"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U3",
+  "group": "P2",
   "date": "2026-10-28",
-  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraph 2, the generator calculation isolated from the matrix invertibility and inverse-chart comparison"
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lemma-spec-properties and lemma-category-vector-bundles; the degree-one generator and module-frame calculation for the base-change compatibility in the latest vector-bundle-purity proof"
  },
  "mathlib_searches": [
   {
@@ -125,9 +122,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261028T055813-L-811537",
+  "landing": "20261028T072437-L-1948729",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

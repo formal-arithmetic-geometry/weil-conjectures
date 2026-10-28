@@ -21128,3 +21128,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/M7/Sheaf.SixFunctors.CoefDualFormulaScalarTranspose (stage 3; reviewer PASS; first push; landing 20261028T072433-L-1947382 (proof); batch 20261028T072331; modules 1; new nodes 0)
 - 07:24 L: merged deliver/M9/Sheaf.SixFunctors.RationalVerdierCompletionSignedRepresentative (stage 3; reviewer PASS; after a return; landing 20261028T072434-L-1947914 (interface); batch 20261028T072331; modules 5; new nodes 4)
 - 07:24 L: merged deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (stage 3; reviewer PASS; after a return; landing 20261028T072436-L-1948381 (interface); batch 20261028T072331; modules 3; new nodes 2)
+- 07:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.VectorBundleMapFrameCoordinates (stage 3; reviewer PASS; first push; landing 20261028T072437-L-1948729 (interface); batch 20261028T072331; modules 1; new nodes 0)
