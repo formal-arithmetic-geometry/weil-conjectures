@@ -7,13 +7,16 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance
 
 /-!
 # Topological invariance of the small pro-étale topos
 
 Let `r : X ⟶ Y` be a universal homeomorphism of schemes. Base change `V ↦ V ×_Y X` along `r`
-identifies the schemes weakly étale over `Y` with those weakly étale over `X`, preserving and
-reflecting pro-étale coverings, because `r` and all its base changes are homeomorphisms. Hence
+exhibits the small pro-étale site of `Y` as a dense subsite of that of `X`
+(`AlgebraicGeometry.Scheme.ProEt.isDenseSubsite_overPullback`): it preserves and reflects
+pro-étale coverings, because `r` and all its base changes are homeomorphisms, and it is locally
+essentially surjective, locally full and locally faithful. Hence
 the pushforward `r_*` and the pullback `r^*` are mutually quasi-inverse equivalences of the
 categories of pro-étale sheaves. This is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance`, where the
@@ -29,17 +32,18 @@ corresponding statement for the small étale site is [Stacks 04DZ].
 
 ## Implementation notes
 
-`ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism` is the only input of this file
-that is not formal, and it is still `sorry`: the equivalence of the small pro-étale sites,
-which for the small étale site is `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, is not
-available for weakly étale morphisms yet.
+`ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism` is the comparison lemma
+(`CategoryTheory.Functor.IsDenseSubsite`) applied to the dense subsite of
+`WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance`. Unlike the étale case
+(`AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`), base change is not shown to be an
+equivalence of the underlying categories of the small pro-étale sites.
 -/
 
 @[expose] public section
 
 universe u' u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -48,12 +52,16 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- **Topological invariance of the small pro-étale topos**: for a universal homeomorphism
 `r : X ⟶ Y`, the pushforward `r_*`, restriction along base change `V ↦ V ×_Y X`, is an
-equivalence between the categories of `A`-valued pro-étale sheaves on `X` and on `Y`. Base
-change is an equivalence of the small pro-étale sites which preserves and reflects
-coverings, since `r` and every base change of `r` is a homeomorphism
-(blueprint: `sk-i-topology`). -/
-theorem isEquivalence_lowerStar_of_isUniversalHomeomorphism : ((r)_*[A]).IsEquivalence :=
-  sorry
+equivalence between the categories of `A`-valued pro-étale sheaves on `X` and on `Y`, base
+change being a dense subsite (blueprint: `sk-i-topology`). -/
+theorem isEquivalence_lowerStar_of_isUniversalHomeomorphism : ((r)_*[A]).IsEquivalence := by
+  have := Scheme.ProEt.isDenseSubsite_overPullback r
+  have : ∀ V, HasLimitsOfShape
+      (StructuredArrow V (MorphismProperty.Over.pullback @WeaklyEtale ⊤ r).op) A := fun _ ↦
+    have : HasLimitsOfSize.{u, u + 1} A := hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+    inferInstance
+  unfold lowerStar
+  infer_instance
 
 /-- **Topological invariance of the small pro-étale topos**: for a universal homeomorphism
 `r : X ⟶ Y`, the pullback `r^*` is an equivalence between the categories of `A`-valued

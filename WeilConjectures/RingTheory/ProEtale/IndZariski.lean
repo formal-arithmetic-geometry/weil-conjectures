@@ -2397,6 +2397,14 @@ theorem _root_.Algebra.IndZariski.iff_ind_indZariksi [Algebra R S] :
     ((iff_ind_indZariski _).trans
       respectsIso.ind_toMorphismProperty_iff_ind_toObjectProperty)
 
+/-- Ind-Zariski ring homomorphisms are stable under base change. -/
+lemma isStableUnderBaseChange : RingHom.IsStableUnderBaseChange RingHom.IndZariski := by
+  intro R S R' S' _ _ _ _ _ _ _ _ _ _ _ hpush hRS
+  rw [iff_ind_isLocalIso] at hRS ⊢
+  rw [← CommRingCat.isPushout_iff_isPushout] at hpush
+  exact (inferInstance : (MorphismProperty.ind
+    (RingHom.toMorphismProperty RingHom.IsLocalIso)).IsStableUnderCobaseChange).1 hpush.flip hRS
+
 end RingHom.IndZariski
 
 namespace Algebra.IndZariski
