@@ -145,7 +145,7 @@ end Model
 
 /-- `Subgroup.card_nsmul_eq_sum_fin_of_le` for endomorphisms of `Ψ (L A)`, with the left-hand side
 stated for `(L ⋙ Ψ) A`, the form in which averaged pullback exchanges occur. -/
-lemma card_nsmul_eq_sum_fin_of_le_aux {G : Type*} [Group G] {DX DS : Type*} [Category DX]
+lemma card_nsmul_eq_sum_fin_of_le_comp_obj {G : Type*} [Group G] {DX DS : Type*} [Category DX]
     [Category DS] [Preadditive DS] (L : DX ⥤ DX) (Ψ : DX ⥤ DS) (A : DX) {U V : Subgroup G}
     (hUV : U ≤ V) [Fintype (G ⧸ U)] [Fintype (G ⧸ V)]
     (act : G → (Ψ.obj (L.obj A) ⟶ Ψ.obj (L.obj A))) (hact : ∀ g, ∀ v ∈ V, act (g * v) = act g)

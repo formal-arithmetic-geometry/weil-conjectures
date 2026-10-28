@@ -51,7 +51,7 @@ lemma leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId {X Y : Sc
 /-- The diagram chase behind `NearbyCyclesModel.Hom.autAction_eq_id_of_isIso`, in an abstract
 category: if `c` is a left inverse of the isomorphism `i` with inverse `j`, `j ≫ u = a ≫ k`,
 `a ≫ m₁ = c ≫ u ≫ s` and `m₁ ≫ m₂ = 𝟙`, then `a ≫ k ≫ s ≫ m₂ = a`. -/
-lemma comp_autAction_aux {D : Type*} [Category D] {P P₁ Q Q₁ R : D} {a : P ⟶ Q}
+private lemma comp_autAction_aux {D : Type*} [Category D] {P P₁ Q Q₁ R : D} {a : P ⟶ Q}
     {c j : P ⟶ P₁} {i : P₁ ⟶ P} {u : P₁ ⟶ Q₁} {k : Q ⟶ Q₁} {s : Q₁ ⟶ R} {m₁ : Q ⟶ R}
     {m₂ : R ⟶ Q} (hc : c ≫ i = 𝟙 P) (hij : i ≫ j = 𝟙 P₁) (hnat : a ≫ k = j ≫ u)
     (hρ : a ≫ m₁ = c ≫ u ≫ s) (hm : m₁ ≫ m₂ = 𝟙 Q) :

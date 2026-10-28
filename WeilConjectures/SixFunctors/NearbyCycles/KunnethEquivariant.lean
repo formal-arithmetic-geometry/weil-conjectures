@@ -83,7 +83,7 @@ variable {S D : Type*} [Category S] [MonoidalCategory S] [Category D]
 
 /-- The equivariance of the Künneth maps, in an abstract monoidal category: the transport of the
 compatibility of the Künneth maps with pullbacks along an isomorphism `I ≅ 𝟭`. -/
-lemma kunnethMap_autAction_aux {I : S ⥤ S} (ι : I ≅ 𝟭 S) (Ψ : D ⥤ S)
+private lemma kunnethMap_autAction_aux {I : S ⥤ S} (ι : I ≅ 𝟭 S) (Ψ : D ⥤ S)
     {U₁ U₂ U₁' U₂' V₁ V₂ : S} {C₀ C' C : D} (K : U₁ ⊗ U₂ ⟶ Ψ.obj C)
     (K' : U₁' ⊗ U₂' ⟶ Ψ.obj C') (n : C' ⟶ C)
     (v₁ : U₁' ⟶ U₁) (v₂ : U₂' ⟶ U₂) (hnat : K' ≫ Ψ.map n = (v₁ ⊗ₘ v₂) ≫ K)
@@ -109,7 +109,7 @@ variable {CM CN CP SM SN SP : Type*} [Category CM] [Category CN] [Category CP] [
   {s₁ : SM ⥤ SP} {s₂ : SN ⥤ SP}
 
 /-- The naturality of the Künneth maps, in abstract categories. -/
-lemma kunnethMap_comp_map_tensorHom_aux (α₁ : ΨM ⋙ s₁ ⟶ g₁ ⋙ ΨP) (α₂ : ΨN ⋙ s₂ ⟶ g₂ ⋙ ΨP)
+private lemma kunnethMap_comp_map_tensorHom_aux (α₁ : ΨM ⋙ s₁ ⟶ g₁ ⋙ ΨP) (α₂ : ΨN ⋙ s₂ ⟶ g₂ ⋙ ΨP)
     (μ : ∀ U V, ΨP.obj U ⊗ ΨP.obj V ⟶ ΨP.obj (U ⊗ V))
     (hμ : ∀ {U U' V V' : CP} (x : U ⟶ U') (y : V ⟶ V'),
       (ΨP.map x ⊗ₘ ΨP.map y) ≫ μ U' V' = μ U V ≫ ΨP.map (x ⊗ₘ y))

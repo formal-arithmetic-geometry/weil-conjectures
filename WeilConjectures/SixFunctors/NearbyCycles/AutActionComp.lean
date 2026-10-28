@@ -51,8 +51,8 @@ lemma Hom.autAction_of_eq_id (σ : M.Hom M (𝟙 X) (𝟙 X')) (ht : σ.total = 
 /-- The diagram chase behind `NearbyCyclesModel.Hom.autAction_comp_of_eq`, for abstract functors:
 `L₀ ≅ 𝟭`, `L ≅ 𝟭` (the pullbacks along identities), `Ψ` (the nearby cycles) and transformations
 `α : Ψ ⋙ L ⟶ L₀ ⋙ Ψ` (the pullback exchanges) satisfying the composition law `hx`. -/
-lemma autAction_comp_aux {D D' : Type*} [Category D] [Category D'] {L₀ : D ⥤ D} {L : D' ⥤ D'}
-    (I₀ : L₀ ≅ 𝟭 D) (I : L ≅ 𝟭 D') (Ψ : D ⥤ D') (ασ ατ αχ : Ψ ⋙ L ⟶ L₀ ⋙ Ψ)
+private lemma autAction_comp_aux {D D' : Type*} [Category D] [Category D'] {L₀ : D ⥤ D}
+    {L : D' ⥤ D'} (I₀ : L₀ ≅ 𝟭 D) (I : L ≅ 𝟭 D') (Ψ : D ⥤ D') (ασ ατ αχ : Ψ ⋙ L ⟶ L₀ ⋙ Ψ)
     (c₀ : L₀ ⟶ L₀ ⋙ L₀) (c : L ⟶ L ⋙ L) (C : D)
     (hx : αχ.app C ≫ Ψ.map (c₀.app C) =
       c.app (Ψ.obj C) ≫ L.map (ατ.app C) ≫ ασ.app (L₀.obj C))
