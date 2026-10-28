@@ -2,10 +2,11 @@
  "id": "new-lem-weil-pbc-lisse-finite-level-etale-local-representative-cover",
  "kind": "statement",
  "title": "Etale cover carrying representatives of a pro-etale local Isom section",
- "statement": "For a scheme X, an étale object V over X, commutative ring B, and derived objects A,D on X's étale site, every section of the pro-étale presheaf of derived local isomorphisms between the comparison pullbacks of A and D over V is represented by actual derived isomorphisms on an étale covering of V.",
+ "statement": "For a scheme X, an étale object V over X, a commutative ring B, and derived objects A,D on X's étale site, assume D is bounded below [def-weil-pbc-bounded-derived-subcategories]. Every section of the pro-étale presheaf of derived local isomorphisms [def-weil-pbc-derived-local-isomorphism-sheaf] between the comparison pullbacks [def-weil-pbc-derived-morphism-sheaf-comparison] of A and D over V is represented by actual derived isomorphisms on an étale covering of V.",
  "stmt_deps": [
   "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "def-weil-pbc-derived-morphism-sheaf-comparison"
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "source": {
   "document": "literature/stacks-project/proetale.tex",
@@ -13,22 +14,55 @@
  },
  "proof": [
   {
-   "text": "Apply local surjectivity of sheafification to the supplied pro-étale Isom section, simultaneously to its morphism and inverse components. Refine the resulting local representatives to a common étale cover. The two inverse equations are preserved under restriction, so each member of this cover carries an actual derived isomorphism.",
+   "text": "Use the canonical equivalence between the localized pro-etale site over V and the small pro-etale site of V.left. The generic restrictionComparison construction identifies inverse image along V.hom with overPullback followed by this equivalence.",
    "uses": [
-    "def-weil-pbc-derived-local-isomorphism-sheaf",
-    "def-weil-pbc-derived-morphism-sheaf-comparison"
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false
+  },
+  {
+   "text": "Derive the canonical comparison/pullback square and the restriction isomorphism. Applying the derived slice equivalence to the supplied presheaf section gives an isomorphism between the comparison pullbacks of the etale restrictions A|V and D|V.",
+   "uses": [
+    "def-weil-pbc-derived-local-isomorphism-sheaf",
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact etale restriction preserves the lower bound of D. The fixed-module derived comparison Hom bijection with bounded-below target lifts the hom component to A|V -> D|V. Exact comparison reflects isomorphisms: its cohomology comparison transports invertibility to each underived comparison of a cohomology map, and the underived fully faithful functor reflects invertibility. Therefore the lift is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the singleton identity etale cover of V.left. Restrict the lifted isomorphism along each canonical arrow to V using localIsomorphismMap. This also applies to the empty scheme.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-proetale-inverse-image",
   "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "def-weil-pbc-derived-morphism-sheaf-comparison"
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof_origin": {
-  "by": "W8 stage-3 worker",
+  "by": "F5 stage-3 worker",
+  "group": "F5",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09BV and 00WJ; local surjectivity of Isom sheafification"
+  "place": "Tag 09B1, lemma-compare-derived; bounded-below derived comparison, together with localization and exact pullback."
  },
  "mathlib_searches": [
   {
@@ -87,9 +121,9 @@
   "module": "Sheaf.Paper.EtaleLocalIsoCoverFromProEtaleSection",
   "file": "lean/Sheaf/Paper/EtaleLocalIsoCoverFromProEtaleSection.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_etale_iso_cover_of_proetale_local_iso_section",
-  "statement": "theorem exists_etale_iso_cover_of_proetale_local_iso_section\n    (X : Scheme.{u}) (V : X.Etale)\n    {B : Type (u + 1)} [CommRing B]\n    (A D : DerivedCategory\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (s : (derivedLocalIsoPresheaf (ProEt.topology X) B\n      ((derivedComparison X B).obj A)\n      ((derivedComparison X B).obj D)).obj\n        (op ((toProEt X).obj V))) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage V.left,\n      ∀ i : 𝒰.I₀,\n        Nonempty ((localIsomorphismRestriction X B\n          (Etale.mk (𝒰.f i ≫ V.hom))).obj A ≅\n          (localIsomorphismRestriction X B\n            (Etale.mk (𝒰.f i ≫ V.hom))).obj D)",
+  "statement": "theorem exists_etale_iso_cover_of_proetale_local_iso_section\n    (X : Scheme.{u}) (V : X.Etale)\n    {B : Type (u + 1)} [CommRing B]\n    (A D : DerivedCategory\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hD : DerivedCategory.TStructure.t.plus D)\n    (s : (derivedLocalIsoPresheaf (ProEt.topology X) B\n      ((derivedComparison X B).obj A)\n      ((derivedComparison X B).obj D)).obj\n        (op ((toProEt X).obj V))) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage V.left,\n      ∀ i : 𝒰.I₀,\n        Nonempty ((localIsomorphismRestriction X B\n          (Etale.mk (𝒰.f i ≫ V.hom))).obj A ≅\n          (localIsomorphismRestriction X B\n            (Etale.mk (𝒰.f i ≫ V.hom))).obj D)",
   "branch": "sheaf-dag",
-  "by": "W8",
+  "by": "F5",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -105,11 +139,46 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W8",
-  "result": "pass",
-  "landing": "20261028T035009-L-3578037",
+  "reviewer": "C-ff12e",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261028T072410-L-1943052",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 2 adapted unclaimed modules and 3 nodes against the change records, the consumer's unchanged signature, unit realized list and an axioms scratch compile"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F5 stage 2",
+  "old_statement": "For a scheme X, an étale object V over X, commutative ring B, and derived objects A,D on X's étale site, every section of the pro-étale presheaf of derived local isomorphisms between the comparison pullbacks of A and D over V is represented by actual derived isomorphisms on an étale covering of V.",
+  "what": "The former arbitrary-target statement does not follow from local surjectivity of sheafification: a pro-etale cover cannot in general be refined by an etale cover, and the input is already an actual derived Isom presheaf section. Add the bounded-below target hypothesis needed by the existing derived comparison Hom bijection. The finite-level consumer already assumes D bounded, so its statement is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09B1, lemma-compare-derived; bounded-below derived comparison, together with localization and exact pullback."
+  },
+  "citers": [
+   {
+    "id": "new-lem-weil-pbc-lisse-finite-level-etale-local-representative",
+    "holds": false,
+    "note": "Its original unrestricted statement also requires the lower bound; the repaired statement and proof are included in this delivery."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-derived-local-isomorphism-sheaf",
+   "def-weil-pbc-derived-morphism-sheaf-comparison"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply local surjectivity of sheafification to the supplied pro-étale Isom section, simultaneously to its morphism and inverse components. Refine the resulting local representatives to a common étale cover. The two inverse equations are preserved under restriction, so each member of this cover carries an actual derived isomorphism.",
+    "uses": [
+     "def-weil-pbc-derived-local-isomorphism-sheaf",
+     "def-weil-pbc-derived-morphism-sheaf-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-derived-local-isomorphism-sheaf",
+   "def-weil-pbc-derived-morphism-sheaf-comparison"
+  ]
  }
 }

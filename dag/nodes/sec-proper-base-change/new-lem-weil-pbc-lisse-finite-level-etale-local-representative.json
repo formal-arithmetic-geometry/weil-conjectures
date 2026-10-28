@@ -2,10 +2,11 @@
  "id": "new-lem-weil-pbc-lisse-finite-level-etale-local-representative",
  "kind": "statement",
  "title": "Etale representatives of pro-etale derived Isom sections",
- "statement": "For arbitrary derived module sheaves on an etale scheme, a pro-etale derived Isom presheaf section carried by an etale neighbourhood of every geometric point has an actual etale derived-isomorphism representative on such a neighbourhood.",
+ "statement": "For derived module sheaves A,D on an etale scheme, with D bounded below [def-weil-pbc-bounded-derived-subcategories], a pro-etale derived Isom presheaf section [def-weil-pbc-derived-local-isomorphism-sheaf] between their comparison pullbacks [def-weil-pbc-derived-morphism-sheaf-comparison], carried by an etale neighbourhood of every geometric point, has an actual etale derived-isomorphism representative on such a neighbourhood.",
  "stmt_deps": [
   "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "def-weil-pbc-derived-morphism-sheaf-comparison"
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "source": {
   "document": "literature/stacks-project/proetale.tex",
@@ -13,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Apply the local-cover representative theorem to the supplied pro-etale section over an etale object V. The existing geometric-point lifting theorem for an etale cover lifts the chosen separably closed geometric point to one cover member. Compose the lifted point with V to obtain the required pointed etale object and use the local isomorphism on that member.",
+   "text": "Apply the local-cover theorem with the supplied lower bound on D. Lift the chosen separably closed geometric point through that etale cover using Scheme.Cover.exists_comp_eq_of_isSepClosed, compose its covering morphism with V.hom, and use the isomorphism on that member.",
    "uses": [
     "new-lem-weil-pbc-lisse-finite-level-etale-local-representative-cover"
    ],
@@ -24,11 +25,11 @@
   "new-lem-weil-pbc-lisse-finite-level-etale-local-representative-cover"
  ],
  "proof_origin": {
-  "by": "W8 stage-3 worker",
-  "group": "W8",
+  "by": "F5 stage-3 worker",
+  "group": "F5",
   "date": "2026-10-28",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09BV and 00WJ; local representatives of Isom presheaf sections."
+  "place": "Tag 09B1, lemma-compare-derived; bounded-below derived comparison, together with localization and exact pullback."
  },
  "mathlib_searches": [
   {
@@ -78,9 +79,9 @@
   "module": "Sheaf.Paper.LisseFiniteLevelEtaleLocalRepresentative",
   "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleLocalRepresentative.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_etale_local_representative_of_proetale_local_iso_sections",
-  "statement": "theorem exists_etale_local_representative_of_proetale_local_iso_sections\n    (X : Scheme.{u}) (U : X.ProEt)\n    {B : Type (u + 1)} [CommRing B]\n    (A D : DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hsections : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((derivedLocalIsoPresheaf (ProEt.topology U.left) B\n          ((derivedComparison U.left B).obj A)\n          ((derivedComparison U.left B).obj D)).obj\n            (op ((toProEt U.left).obj V)))) :\n    ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((localIsomorphismRestriction U.left B V).obj A ≅\n          (localIsomorphismRestriction U.left B V).obj D)",
+  "statement": "theorem exists_etale_local_representative_of_proetale_local_iso_sections\n    (X : Scheme.{u}) (U : X.ProEt)\n    {B : Type (u + 1)} [CommRing B]\n    (A D : DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hD : DerivedCategory.TStructure.t.plus D)\n    (hsections : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((derivedLocalIsoPresheaf (ProEt.topology U.left) B\n          ((derivedComparison U.left B).obj A)\n          ((derivedComparison U.left B).obj D)).obj\n            (op ((toProEt U.left).obj V)))) :\n    ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((localIsomorphismRestriction U.left B V).obj A ≅\n          (localIsomorphismRestriction U.left B V).obj D)",
   "branch": "sheaf-dag",
-  "by": "H8",
+  "by": "F5",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -96,11 +97,41 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W8",
-  "result": "pass",
-  "landing": "20261028T035009-L-3578037",
+  "reviewer": "C-ff12e",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261028T072410-L-1943052",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 2 adapted unclaimed modules and 3 nodes against the change records, the consumer's unchanged signature, unit realized list and an axioms scratch compile"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F5 stage 2",
+  "old_statement": "For arbitrary derived module sheaves on an etale scheme, a pro-etale derived Isom presheaf section carried by an etale neighbourhood of every geometric point has an actual etale derived-isomorphism representative on such a neighbourhood.",
+  "what": "The former arbitrary-target statement does not follow from local surjectivity of sheafification: a pro-etale cover cannot in general be refined by an etale cover, and the input is already an actual derived Isom presheaf section. Add the bounded-below target hypothesis needed by the existing derived comparison Hom bijection. The finite-level consumer already assumes D bounded, so its statement is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09B1, lemma-compare-derived; bounded-below derived comparison, together with localization and exact pullback."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms",
+    "holds": true,
+    "note": "The finite-level theorem already assumes hDbounded. Its unchanged conclusion follows after extracting D.IsGE a and passing that bound to the repaired intermediate theorem."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-derived-local-isomorphism-sheaf",
+   "def-weil-pbc-derived-morphism-sheaf-comparison"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the local-cover representative theorem to the supplied pro-etale section over an etale object V. The existing geometric-point lifting theorem for an etale cover lifts the chosen separably closed geometric point to one cover member. Compose the lifted point with V to obtain the required pointed etale object and use the local isomorphism on that member.",
+    "uses": [
+     "new-lem-weil-pbc-lisse-finite-level-etale-local-representative-cover"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }

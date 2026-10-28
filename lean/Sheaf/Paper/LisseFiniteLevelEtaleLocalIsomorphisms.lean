@@ -39,14 +39,12 @@ finite-level descent argument; no sheafification or stalk evaluation is included
 Source: Stacks Project, proetale.tex, Tags 099Y, 099Z, 09B1 and 09BV.
 (blueprint: lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms).
 
-Proof: The four bounded finite-lisse Hom comparisons are invertible, hence the
-inverse-pair equalizer comparison is invertible.  On every member of the supplied
-pro-étale covering sieve, compose the given model isomorphism with the inverse of
-the fixed-realization comparison.  The fixed realization is an equivalence, so this
-comparison lifts to an actual isomorphism after restricting to an étale neighbourhood
-of any geometric point.  The resulting representative is the required local section
-of the Isom presheaf.  Empty schemes and zero complexes are covered by the same
-construction.
+Proof: First obtain pointwise pro-etale derived Isom presheaf sections from the
+finite-level comparison and local model hypotheses. The lower half of hDbounded puts
+D in the bounded-below subcategory. Apply the bounded-below etale representative
+theorem to each section. That theorem lifts the isomorphism using derived comparison
+and its conservativity, so the resulting representative is an actual derived
+isomorphism. Empty schemes and zero complexes are included.
 -/
 theorem lisse_finite_level_etale_local_isomorphisms
     (X Y : Scheme.{u}) (g : Y ⟶ X)
@@ -79,8 +77,10 @@ theorem lisse_finite_level_etale_local_isomorphisms
   have hsections :=
     lisse_finite_level_proetale_local_iso_sections X Y g d U n N E D
       hDbounded hDlisse hcomparison hmodels
+  have hDplus : DerivedCategory.TStructure.t.plus D := by
+    obtain ⟨a, b, hab⟩ := hDbounded
+    exact ⟨a, (DerivedCategory.isGE_iff D a).2 (fun q hq ↦ hab q (Or.inl hq))⟩
   exact exists_etale_local_representative_of_proetale_local_iso_sections Y U
-    ((normalizationConstant U.left.smallEtaleTopology).obj E) D
-    hsections
+    ((normalizationConstant U.left.smallEtaleTopology).obj E) D hDplus hsections
 
 end AlgebraicGeometry.Scheme
