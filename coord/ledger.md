@@ -21152,3 +21152,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:25 L: merged deliver/NH/lem-sf-projection-reduction-rational (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing - (dag)
 - 07:25 L: merged deliver/NA/lem-per-adic-closed-constructible (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing 20261028T072504-NA-1955179 (proof)
 - 07:25 L: merged deliver/NB/lem-pur-general-legacy-pair-shifts (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing - (dag)
+- 08:11 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (the landing tools, head bbe60acc7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
