@@ -39,22 +39,37 @@ deduced from the two statements of this file through
 * **(M2)** `NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom`:
   the change of generic fibres `π : X_T ×_T Ω_K ⟶ X_T ×_S Ω` is, up to a universal
   homeomorphism, a torsor under the kernel of `I_T ⟶ I_S`, a pro-`p` group (the uniformizer `t`
-  identifies the tame quotients), so the unit `G ⟶ Rπ_* Lπ^* G` is split by the normalized trace
-  (averaging over the finite `p`-group quotients, `p` invertible in `ℚ̄_ℓ`; SGA 4½,
+  identifies the tame quotients), so the unit `G ⟶ Rπ_* Lπ^* G` is split by integration against
+  the `ℚ̄_ℓ`-valued Haar measure of that group (`p` invertible in `ℚ̄_ℓ`; SGA 4½,
   [Th. finitude], proof of Lemme 3.3). The pullback exchange of `toCartesian` is `i^* Rj'_*` of
   this unit.
 
 ## Unfinished
 
-Both statements are `sorry`ed. (M2) is proved on `trace2/nearby-prop-averaging` (the pro-`p`
-averaging splitting). (M1) needs the invariance of nearby cycles under extensions of strictly
-henselian traits for pro-étale `ℚ̄_ℓ`-sheaves (SGA 4½, [Th. finitude], 3.7), which in turn rests
-on the finiteness theorem in lower dimension and on the comparison of `I_T` and `I_{S'}`. The
-completed trait `T = Spec K⟦t⟧` is not weakly étale over `𝔸¹_S` (its residue field `K` is a
-purely inseparable extension of `k'(x)^sep` and `K⟦t⟧` is not ind-étale over the strict
-henselization), so neither weakly étale base change
+Both statements are `sorry`ed.
+
+(M1) needs the invariance of nearby cycles under extensions of strictly henselian traits for
+pro-étale `ℚ̄_ℓ`-sheaves (SGA 4½, [Th. finitude], 3.7), applied to `X' = X ×_{𝔸¹_S} S'` over `S'`.
+That invariance rests on the finiteness theorem for `X'`, which has relative dimension `n` over
+`S'`. The induction of `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj` only
+gives finiteness over traits `Spec k⟦t⟧`, and `S'` is not of that form. So (M1) cannot be proved
+from the induction hypothesis as set up. The completed trait `T = Spec K⟦t⟧` is not weakly étale
+over `𝔸¹_S` (its residue field `K` is a purely inseparable extension of `k'(x)^sep` and `K⟦t⟧` is
+not ind-étale over the strict henselization), so neither weakly étale base change
 (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`) nor smooth base change applies to
 the square directly.
+
+(M2) needs three inputs that are not formalised:
+* the field theory of `K((t)) ⊗_{k'((t))} Ω`: it has a single prime, since `k'((t))` is separably
+  closed in `K((t))`, and `Ω_K` is a pro-`p` Galois extension of its residue field;
+* the identification of `α_{toCartesian}` with `i^* Rj'_*` of the unit of `π`;
+* a splitting of the unit `G ⟶ Rπ_* Lπ^* G` for the pro-`p` torsor `π`.
+
+The trace of a finite Galois covering of pro-étale abelian sheaves (on the branch
+`trace2/nearby-prop-averaging`) only gives the finite levels. For `ℚ̄_ℓ`-coefficients
+`Rπ_* Lπ^* ℚ̄_ℓ` is the sheaf of continuous functions `P ⟶ ℚ̄_ℓ`, which is not the colimit of the
+locally constant ones. So the splitting is the integral against the `ℚ̄_ℓ`-valued Haar measure of
+`P`, not a colimit of the finite traces.
 
 -/
 
@@ -91,13 +106,12 @@ theorem isIso_pullbackExchange_app_fromCartesian_affineSpaceSliceHom (n : ℕ) (
   sorry
 
 /-- **(M2) The pro-`p` averaging splitting on the slice** (SGA 4½, [Th. finitude], proof of
-Lemme 3.3; proved on `trace2/nearby-prop-averaging`): for a bounded constructible complex `B` on
-`𝔸ⁿ⁺¹_S`, the pullback exchange of the first factor
-`(affineSpaceModel (traitSliceField k') n).geometric ⟶ cartesianModel φ` of the morphism of
-models over the coordinate generic slice is a split monomorphism at `B`: it is `i^* Rj'_*`
-of the unit `G ⟶ Rπ_* Lπ^* G` of the change of generic fibres `π`, a torsor under a pro-`p`
-group up to a universal homeomorphism, which is split by averaging since `p ≠ ℓ`. See the module
-docstring; `sorry`ed. -/
+Lemme 3.3): for a bounded constructible complex `B` on `𝔸ⁿ⁺¹_S`, the pullback exchange of the
+first factor `(affineSpaceModel (traitSliceField k') n).geometric ⟶ cartesianModel φ` of the
+morphism of models over the coordinate generic slice is a split monomorphism at `B`. It is
+`i^* Rj'_*` of the unit `G ⟶ Rπ_* Lπ^* G` of the change of generic fibres `π`, a torsor under a
+pro-`p` group up to a universal homeomorphism. The unit is split by the `ℚ̄_ℓ`-valued Haar measure
+of that group, since `p ≠ ℓ`. See the module docstring; `sorry`ed. -/
 theorem isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom (n : ℕ)
     (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
