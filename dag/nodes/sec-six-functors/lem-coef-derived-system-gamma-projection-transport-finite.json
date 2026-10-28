@@ -17,24 +17,34 @@
  ],
  "proof": [
   {
-   "text": "Use the finite enriched uncurrying identity, the fiber evaluation comparison, and naturality of reduction evaluation in the first variable to identify the two internal-Hom composites.",
+   "text": "Expand the enriched adjunct as the ordinary adjunction transpose of beta followed by internal Hom of the system counit. Naturality of the finite projection and unit_projection show that its composite with the projection and restricted fiberHom is the finite scalar adjunct of rho inverse followed by evaluation of that word and fiberHom. This is the private adjunct_projection calculation, using the unit formula for homEquiv.",
    "uses": [
-    "lem-coef-enriched-sequence-projection-formula",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-coef-derived-system-calculus-data"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply fiber_naturality to the system counit from reduction(limit N) to N, with the first variable fixed at reduction P; both reduced objects are normalized. Apply beta_evaluation to P and limit N. Cancel the evaluation isomorphism at internal Hom. Functoriality of finite internal Hom identifies the resulting map as finite beta followed by internal Hom of rho_P and k, where k is rho_(limit N) inverse followed by the evaluated system counit.",
+   "uses": [
+    "def-coef-derived-system-calculus-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The finite_compatible naturality field, naturality of the finite scalar unit, and the finite scalar triangle identity show that internal Hom of the adjunct of k followed by the finite enriched map is the finite adjunct of beta followed by internal Hom of the identity and k. The counit_projection field identifies that adjunct of k with the prescribed projection of N. Apply homEquiv_naturality_right to the remaining first-variable rho_P map and combine the two internal-Hom maps. Both sides are now the same finite scalar adjunct.",
+   "uses": [
+    "def-coef-derived-system-calculus-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-coef-enriched-sequence-projection-formula",
-  "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "def-coef-derived-system-calculus-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A6, 08JA, 0D6E and 0941; finite uncurrying and coefficient evaluation transport"
+  "place": "Tags 07A6 and 0941; V1 categorical calculation from the existing calculus unit_projection, counit_projection, beta_evaluation, fiber_naturality, and finite_compatible fields. No new representative or sections theorem is needed."
  },
  "mathlib_searches": [
   {
@@ -107,9 +117,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261028T020314-L-2493544",
+  "landing": "20261028T034954-L-3575616",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
