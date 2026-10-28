@@ -1,10 +1,12 @@
 module
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionTriangulatedPrecomp
 /-! Auxiliary reduction for finite-extension triangulation.
 Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraph 1
 (blueprint: lem-sf-integral-finite-extension-invertibility). -/
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralFiniteExtension
@@ -22,7 +24,12 @@ K-flat representative functor. (blueprint: lem-sf-integral-finite-extension-tria
 theorem comparison_invertibility_triangulated_isTriangulated
     (c : (integralScalarExtensionOfUniverses l E L ι X).CommShift ℤ) :
     (integralScalarExtensionOfUniverses l E L ι X).IsTriangulated := by
-  sorry
+  let T := integralScalarExtensionOfUniverses l E L ι X
+  letI := c
+  have hcomp : (DerivedCategory.Qh ⋙ T).IsTriangulated :=
+    comparison_precomp_triangulated l E L ι X c
+  letI := hcomp
+  exact Functor.isTriangulated_of_precomp (DerivedCategory.Qh (C := _)) T
 
 /-- The strict finite-free scalar functor admits a shift making it triangulated.
 Source: finite-free Roos total-limit triangulation and localization of the
