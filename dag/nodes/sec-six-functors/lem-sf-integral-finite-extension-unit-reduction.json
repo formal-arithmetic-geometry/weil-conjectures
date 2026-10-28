@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-integral-finite-extension-unit-reduction",
+ "kind": "statement",
+ "title": "The dualizing multiplication unit has the prescribed finite reductions",
+ "statement": "Fix l,E,X,D,hl with l prime and distinct from the characteristic of D, E finite over the l-adic field and X separated finite type over Spec(D.k), as in [def-sf-integral-finite-extension-core]. Let wE be a coherent integral dualizing datum [def-sf-coherent-integral-dualizing-datum]. At every n≥0, reduction of the specified multiplication unit on wE.omega followed by wE.reduction_n equals the identity-extension quotient comparison followed by scalar extension of wE.reduction_n and then the counit-defined finiteU_n [def-sf-integral-finite-extension-models]. This is an equality at a single finite quotient and asserts no equality of integral morphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph, u unit equation: the finite comparison unit squares before applying integral reconstruction."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-integral-finite-extension-models"
+ ],
+ "proof": [
+  {
+   "text": "Expand quotient into inverse completion, finiteReductionIso, the coefficient tensor square, and the source finiteReductionIso. Naturality of finiteReductionIso cancels the completion factors against those in unit. The identity coefficient map induces the identity at each quotient.",
+   "uses": [
+    "def-sf-integral-finite-extension-core",
+    "def-sf-integral-finite-extension-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit-defined finite exceptional comparison for identity coefficients is the scalar multiplication unit by adjunction triangle identities, as in finiteDualizingCoefficientComparisons. The scalar-unit-normalized pro-etale realization preserves this identity. Substitute it in the tensor square; naturality of multiplication with respect to (wE.reduction n).hom proves the claimed square. The same formulas cover n=0, zero dualizing objects and empty X.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "def-sf-integral-finite-extension-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-finite-extension-models",
+  "lem-coef-finite-dualizing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph, u unit equation: the finite comparison unit squares before applying integral reconstruction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The identity coefficient extension on a dualizing complex has finite quotient reduction equal to the canonical scalar multiplication unit",
+   "results": "Mathlib search: 8 hits. ModuleCon.instSMulQuotient, ModuleCat.extendScalarsId, QuotSMulTop.map_id, ModuleCat.extendScalars_comp_id, Ideal.Quotient.one, DualNumber.inr_eq_smul_eps, ModuleCat.ExtendRestrictScalarsAdj.counit_app, LinearEquiv.dualMap_refl Search log digest 1e4e8ae301520753.",
+   "date": "2026-10-28",
+   "verdict": "Only generic coefficient multiplication and adjunction results; no finite dualizing reduction square. Project and whole-blueprint searches found no exact duplicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite reduction square for scalar multiplication under identity extension of coefficients of a dualizing complex",
+   "results": "Mathlib search: 8 hits. CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀, ModuleCat.smulShortComplex_X₂, ModuleCat.smulShortComplex_X₁, ModuleCat.smulShortComplex_f, ModuleCat.smulShortComplex, ModuleCat.smulShortComplex_exact, CategoryTheory.Abelian.Ext.mk₀_smul, ModuleCat.CoextendScalars.smul_apply Search log digest c8f7692399de96a2.",
+   "date": "2026-10-28",
+   "verdict": "Only generic coefficient multiplication and adjunction results; no finite dualizing reduction square. Project and whole-blueprint searches found no exact duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing|unit_dualizing_reduction|finiteReductionIso",
+   "results": "Mathlib search: 0 hits. No results. Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-28",
+   "verdict": "Only generic coefficient multiplication and adjunction results; no finite dualizing reduction square. Project and whole-blueprint searches found no exact duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityE",
+  "date": "2026-10-28",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Final paragraph, u unit equation: the finite comparison unit squares before applying integral reconstruction.",
+   "via": [
+    "lem-sf-integral-finite-extension-identity-e",
+    "lem-sf-integral-finite-extension-cocycles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionUnitReduction",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionUnitReduction.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.unit_dualizing_reduction",
+  "statement": "theorem unit_dualizing_reduction\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    (wE : DualizingDatum l X D hl E)\n    (n : ℕ) :\n    (scalarReductionDerivedExtension l E X n).map\n        (unit l E X wE.omega.obj wE.omega.property.1).hom ≫ (wE.reduction n).hom =\n      (quotient l E E (AlgHom.id (Padic l) E) X n\n          wE.omega.obj wE.omega.property.1).hom ≫\n        (pbcDerivedExtend (integralScalarQuotientSheafMap l E E\n          (AlgHom.id (Padic l) E) X n)).map (wE.reduction n).hom ≫\n        finiteU l E E (AlgHom.id (Padic l) E) X D n",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T034932-L-3571611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T034932-L-3571611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

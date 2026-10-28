@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-integral-scalar-tensor-identity",
+ "kind": "statement",
+ "title": "Identity scalar tensor balancing preserves multiplication",
+ "statement": "Let X be a scheme and R a sheaf of commutative rings on its small pro-etale site. Let a be a derived tensor model normalized on flat-term K-flat representatives [def-sf-compact-support-scalar-tensor-balancing]. Write F for derived extension along the identity of R, e:F≅Id for tensorIdentity [def-sf-ring-scalar-multiplication-unit], and μ for scalarTensor(Id_R,a,a). For all derived R-modules K,M, μ⁻¹_(K,M) followed by e_(a.tensor(K,M)) equals a.tensor(e_K,e_M). This concerns ordinary uncompleted extension and needs no constructibility or completeness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph, v unit equation: ordinary scalar/tensor multiplication before transposing evaluation or conjugating by completion."
+ },
+ "stmt_deps": [
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "def-sf-ring-scalar-multiplication-unit"
+ ],
+ "proof": [
+  {
+   "text": "On flat-term K-flat representatives the identity scalar restriction is identity on sections, so its conjugate tensorIdentity is multiplication. The inverse balancing map sends (r tensor x) tensor (s tensor y) to rs tensor (x tensor y). After multiplication both sides give rx tensor sy; balanced pure tensors generate the sheaf tensor, and the degree-zero scalars introduce no Koszul sign.",
+   "uses": [
+    "def-sf-compact-support-scalar-tensor-balancing",
+    "def-sf-ring-scalar-multiplication-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the representative normalization of scalarTensor and the universal derived scalar counits to this degreewise identity on signed totals. Every derived pair has flat-term K-flat representatives, and naturality transports the identity along their isomorphisms to all K,M. The calculation also covers zero objects and empty X.",
+   "uses": [
+    "def-sf-compact-support-scalar-tensor-balancing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-compact-support-scalar-tensor-balancing",
+  "def-sf-ring-scalar-multiplication-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph, v unit equation: ordinary scalar/tensor multiplication before transposing evaluation or conjugating by completion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension along the identity ring map commutes with tensor multiplication unit",
+   "results": "Mathlib search: 8 hits. ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.ExtendScalars.smul_tmul, TensorProduct.one_smul, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendScalars.map'_id, ModuleCat.extendScalars_id_comp, TensorProduct.rid, LinearMap.lTensor_smul_action Search log digest 6d9242d40635494a.",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor and adjunction facts only; no theorem for the prescribed project comparisons. Project and blueprint searches found no duplicate statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Mathlib search: 12 hits. CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit Search log digest 05a3b8c6fadac431.",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor and adjunction facts only; no theorem for the prescribed project comparisons. Project and blueprint searches found no duplicate statement."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(injective|apply)|counit_naturality",
+   "results": "Mathlib search: 25 hits. Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/FintypeCat.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean Search log digest 317229f7c45b0084.",
+   "date": "2026-10-28",
+   "verdict": "Generic tensor and adjunction facts only; no theorem for the prescribed project comparisons. Project and blueprint searches found no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityE",
+  "date": "2026-10-28",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Final paragraph, v unit equation: ordinary scalar/tensor multiplication before transposing evaluation or conjugating by completion.",
+   "via": [
+    "lem-sf-integral-finite-extension-identity-e",
+    "lem-sf-integral-finite-extension-cocycles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralScalarTensorIdentity",
+  "file": "lean/Sheaf/SixFunctors/IntegralScalarTensorIdentity.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarTensor_identity",
+  "statement": "theorem scalarTensor_identity {X : Scheme.{u}}\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (a : ProEtaleTensorModel X R) (K M : DerivedCategory (pbcModules X R)) :\n    (scalarTensor (𝟙 R) a a).inv.app (K, M) ≫\n        (tensorIdentity R).hom.app (a.tensor.obj (K, M)) =\n      a.tensor.map (Prod.mkHom ((tensorIdentity R).hom.app K)\n        ((tensorIdentity R).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T034932-L-3571611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T034932-L-3571611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
