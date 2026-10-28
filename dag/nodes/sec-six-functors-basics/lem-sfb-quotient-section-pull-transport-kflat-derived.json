@@ -2,16 +2,16 @@
  "id": "lem-sfb-quotient-section-pull-transport-kflat-derived",
  "kind": "statement",
  "title": "Flat-term derived square for quotient section pull transport",
- "statement": "Given normalized endpoint ScalarSectionData, a PullNormalized internal comparison, its conjugated derived section comparison barLam, and an ordinary square e, the scalar-model derived computation equation holds on every flat-term K-flat complex.",
+ "statement": "Given normalized endpoint ScalarSectionData, a PullNormalized internal comparison lam, a derived section comparison barLam satisfying the conjugation/realization equation for lam through the endpoint derived comparisons and canonical geometric comparisons, and an ordinary square e satisfying the ordinary realization equation, the scalar-model derived computation equation holds on every flat-term K-flat complex.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YS, 06YY and 0D6D; flat-term representative computation in parent transport proof step 8."
  },
  "status": "split",
  "proof_origin": {
-  "by": "stage-3 worker W4",
+  "by": "stage-3 worker E8",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Flat-term representative computation"
+  "place": "Tags 06YY, 0D6D and 07A6; reuse the proved generic categorical pasting in SectionPullComputationOfRealization, with the actual cochain-model counits."
  },
  "mathlib_searches": [
   {
@@ -49,15 +49,38 @@
  "unit": "sk-thm-sfb-proper-base-change",
  "proof": [
   {
-   "text": "Expand the endpoint scalar-model counit equations on a flat-term K-flat complex, paste the ordinary square, and use PullNormalized for the central internal square. Cancel the invertible computation counits.",
-   "uses": [],
+   "text": "Use the endpoint all-complex scalar computation equations from ScalarSectionNormalized in the form of section_pull_transport_scalar_computation. Use the canonical section-derived geometric computation equation at each coefficient ring.",
+   "uses": [
+    "lem-sfb-quotient-section-pull-transport-scalar-computation",
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate PullNormalized at the homotopy quotient of an internal cochain complex. Remove the identity homotopy composition factor and identify the remaining homotopy comparison with its localized cochain comparison.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved generic paste_diagram categorical pasting lemma from SectionPullComputationOfRealization to the actual scalar models and their natural counits. Its scalar and geometric side equations are those of step 1; its ordinary equation is he; its internal equation is step 2; its derived realization equation is hbarLam. Naturality moves the middle computation maps, and faithfulness of precomposition by the termwise section equivalence gives the equality on every section complex. Remove the identity target composition factor. No flatness argument or new unresolved lemma is needed. The dependency records reuse of that module’s proved private generic helpers, rather than application of its public section-scalar theorem.",
+   "uses": [
+    "lem-sfb-section-pull-computation-of-realization"
+   ],
    "elementary": false
   }
  ],
  "stmt_deps": [
-  "def-sfb-quotient-section-tensor-data"
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-internal-section-scalar-pullback-comparison-data"
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sfb-quotient-section-pull-transport-scalar-computation",
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-section-pull-computation-of-realization"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.QuotientSectionPullTransportKFlatDerived",
@@ -66,7 +89,7 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_kflat_derived"
   ],
-  "statement": "theorem section_pull_transport_kflat_derived {X Y : Scheme.{u}} (f : X ⟶ Y) (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y) (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY) (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T) (e : cY.model.E ⋙ pullback Λ' f ≅ pullback Λ f ⋙ cX.model.E) (he : ∀ M : Modules Λ Y, (equivalence Λ' X).functor.map ((CondensedRing.pullIso a f).inv.app M) ≫ cX.ordinary.hom.app ((CondensedRing.upperStar Λ f).obj M) ≫ cX.model.E.map ((pullComparison Λ f).hom.app M) = (pullComparison Λ' f).hom.app ((QuotientChange.extension a Y).obj M) ≫ (pullback Λ' f).map (cY.ordinary.hom.app M) ≫ e.hom.app ((equivalence Λ Y).functor.obj M)) : ∀ P : CochainComplex (modules Λ Y) ℤ, (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P → (∀ i : ℤ, ObjectProperty.flat (P.X i)) → barLam.hom.app (DerivedCategory.Q.obj P) ≫ cX.model.T.map ((pullback Λ f).mapDerivedCategoryFactors.hom.app P) ≫ cX.model.ε.app (((pullback Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (Iso.refl (pullback Λ f ⋙ cX.model.E)) (.up ℤ)).hom.app P) = (derivedPullback Λ' f).map (cY.model.ε.app P) ≫ (pullback Λ' f).mapDerivedCategoryFactors.hom.app ((cY.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P)",
+  "statement": "theorem section_pull_transport_kflat_derived {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅\n      derivedPullback Λ f ⋙ cX.model.T)\n    (hbarLam : ∀ M : DerivedCategory (Modules Λ Y),\n      (derivedEquivalence Λ' X).functor.map (lam.hom.app M) ≫\n          cX.derived.hom.app ((L Λ f).obj M) ≫\n          cX.model.T.map ((scalarSectionPullComparison Λ f).hom.app M) =\n        (scalarSectionPullComparison Λ' f).hom.app ((D a Y).obj M) ≫\n          (derivedPullback Λ' f).map (cY.derived.hom.app M) ≫\n          barLam.hom.app ((derivedEquivalence Λ Y).functor.obj M))\n    (e : cY.model.E ⋙ pullback Λ' f ≅ pullback Λ f ⋙ cX.model.E)\n    (he : ∀ M : Modules Λ Y,\n      (equivalence Λ' X).functor.map ((CondensedRing.pullIso a f).inv.app M) ≫\n          cX.ordinary.hom.app ((CondensedRing.upperStar Λ f).obj M) ≫\n          cX.model.E.map ((pullComparison Λ f).hom.app M) =\n        (pullComparison Λ' f).hom.app ((QuotientChange.extension a Y).obj M) ≫\n          (pullback Λ' f).map (cY.ordinary.hom.app M) ≫\n          e.hom.app ((equivalence Λ Y).functor.obj M)) :\n    ∀ P : CochainComplex (modules Λ Y) ℤ,\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      (∀ i : ℤ, ObjectProperty.flat (P.X i)) →\n      barLam.hom.app (DerivedCategory.Q.obj P) ≫\n          cX.model.T.map ((pullback Λ f).mapDerivedCategoryFactors.hom.app P) ≫\n          cX.model.ε.app (((pullback Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso\n            (Iso.refl (pullback Λ f ⋙ cX.model.E)) (.up ℤ)).hom.app P) =\n        (derivedPullback Λ' f).map (cY.model.ε.app P) ≫\n          (pullback Λ' f).mapDerivedCategoryFactors.hom.app\n            ((cY.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map\n            ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P)",
   "branch": "sheaf-dag",
   "by": "W4",
   "date": "2026-10-28"
@@ -88,13 +111,41 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W4",
+  "reviewer": "C-26c30",
+  "group": "E8",
   "result": "pass",
-  "landing": "20261027T234350-L-115860",
+  "landing": "20261028T020332-L-2496671",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: section_pull_transport_kflat_derived (new hbarLam binder) against node lem-sfb-quotient-section-pull-transport-kflat-derived lean.statement (byte-equal), change record, the caller's conjugation construction in QuotientSectionPullTransportKFlat, and the analogous realization hypothesis of section_pull_computation_of_realization"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "E8 stage 2",
+  "old_statement": "Given normalized endpoint ScalarSectionData, a PullNormalized internal comparison, its conjugated derived section comparison barLam, and an ordinary square e, the scalar-model derived computation equation holds on every flat-term K-flat complex.",
+  "what": "The old Lean statement quantified over an unrestricted barLam and never related it to lam. Twisting barLam by minus the identity changes only the left-hand side of the asserted equation. For identity scalar and geometric maps over integer coefficients, on the regular module in degree zero, the positive and negative choices cannot both satisfy it. Add the missing realization equation. This is already guaranteed by the conjugation construction in the sole caller, whose public theorem and conclusion stay unchanged.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YS, 06YY and 0D6D; flat-term representative computation in parent transport proof step 8."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-quotient-section-pull-transport-kflat",
+    "holds": true,
+    "note": "The parent constructs barLam by conjugating lam. Its new proved private realization lemma supplies exactly the added hypothesis; the parent signature is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Expand the endpoint scalar-model counit equations on a flat-term K-flat complex, paste the ordinary square, and use PullNormalized for the central internal square. Cancel the invertible computation counits.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [],
+  "old_stmt_deps": [
+   "def-sfb-quotient-section-tensor-data"
+  ]
  }
 }
