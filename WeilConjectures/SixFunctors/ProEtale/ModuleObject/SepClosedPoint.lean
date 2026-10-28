@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFieldProfiniteDenseSubsite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 
 /-!
 
@@ -20,13 +21,10 @@ groups is an equivalence. Its right adjoint `p_*` is lax monoidal and the adjunc
 is monoidal, so `p^*` also induces an equivalence `Mod_Λ ⥤ Mod_{p^* Λ}` on module objects over
 any condensed ring `Λ` (blueprint `sk-prop-pe-condensed-point`).
 
-## Main definitions
-
-- `AlgebraicGeometry.ProEtale.upperStarFromPointAdjunction`: the adjunction `p_X^* ⊣ p_{X*}`,
-  where `p_{X*} = π_{X*} ⋙ p_*`.
-
 ## Main results
 
+- `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointAdjunction`: the adjunction
+  `p_X^* ⊣ p_{X*}` (`AlgebraicGeometry.ProEtale.upperStarFromPointAdjunction`) is monoidal.
 - `AlgebraicGeometry.ProEtale.isEquivalence_upperStarFromPoint`: for `Ω` separably closed,
   `p^* : Sh(*_proét, Ab) ⥤ Sh((Spec Ω)_proét, Ab)` is an equivalence.
 - `AlgebraicGeometry.ProEtale.isEquivalence_mapMod_upperStarFromPoint`: for `Ω` separably
@@ -46,12 +44,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
-
-/-- The adjunction `p_X^* ⊣ p_{X*}` between condensed abelian groups and abelian sheaves on
-`X_proét`, the composite of `p^* ⊣ p_*` and `π_X^* ⊣ π_{X*}`. -/
-noncomputable def upperStarFromPointAdjunction (X : Scheme.{u}) :
-    upperStarFromPoint X ⊣ (toSpecZ X)_*[Ab.{u + 1}] ⋙ pointLowerStar :=
-  pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
 
 /-- The adjunction `p_X^* ⊣ p_{X*}` is monoidal, as a composite of monoidal adjunctions. -/
 instance isMonoidal_upperStarFromPointAdjunction (X : Scheme.{u}) :
