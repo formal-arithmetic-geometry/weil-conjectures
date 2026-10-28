@@ -20756,3 +20756,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:09 L: merged deliver/Z6/Sheaf.Paper.DiagonalCompletedAdjunctSquare (stage 3; reviewer PASS; first push; landing 20261028T020931-L-2567498 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:09 L: merged deliver/Z7/Sheaf.Paper.FinitePerfectAdicLiftedTransitionTranspose (stage 3; reviewer PASS; first push; landing 20261028T020932-L-2567725 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:09 L: merged deliver/Z9/Sheaf.Paper.PodReindexingComparisonCore (stage 3; reviewer PASS; first push; landing 20261028T020934-L-2567908 (interface); batch 20261028T020127; modules 4; new nodes 3)
+- 03:00 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (reviewer C-945b3, head 945b332c1) 2/3 (worst fault): complete proofs deleted and replaced by sorry'd *_split/new theore)
