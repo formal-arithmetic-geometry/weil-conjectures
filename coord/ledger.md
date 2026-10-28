@@ -21075,3 +21075,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/Z9/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartSurjective (stage 3; reviewer PASS; first push; landing 20261028T055835-L-816066 (proof); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/NB/lem-per-finite-tor-internal-hom-any-field (stage 2; reviewer FIX; parallel immutable checks); batch 20261028T055556; landing 20261028T055836-NB-816931 (proof)
 - 06:32 L: returned deliver/K3/Sheaf.Paper.IntegralHomEvaluationTransport (reviewer RETURN: (reviewer C-3f397, head 3f397d2e4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralHomEva)
+- 07:05 L: returned deliver/J1/Sheaf.Paper.CompactSupportTargetRationalCanonicalSquare (reviewer RETURN: (reviewer C-3ac3e, head 3ac3e8d27) Stage-3 no-split rule / 2b unforced adaptation: the ConstructibleCompactSupportTarget)
