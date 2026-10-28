@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
-public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
 
 /-!
 
@@ -134,14 +133,6 @@ lemma isSplitMono_pullbackExchange_app_of_cartesian
   φ.isSplitMono_pullbackExchange_app_of_cartesian' Λ C h₁
     (NatTrans.isSplitMono_app_of_iso (φ.toCartesian.pullbackExchange Λ) (Y := C)
       ((leftDerivedUpperStarId Λ Y).app C) h₂)
-
-/-- If the morphism of total spaces of `φ` is weakly étale, the pullback exchange of
-`fromCartesian` is an isomorphism (weakly étale base change of `Rj_*`). -/
-lemma isIso_pullbackExchange_fromCartesian_of_weaklyEtale
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    [WeaklyEtale φ.total] : IsIso (φ.fromCartesian.pullbackExchange Λ) :=
-  have : WeaklyEtale φ.fromCartesian.total := ‹WeaklyEtale φ.total›
-  φ.fromCartesian.isIso_pullbackExchange_of_weaklyEtale Λ φ.isPullback_fromCartesian
 
 end Hom
 

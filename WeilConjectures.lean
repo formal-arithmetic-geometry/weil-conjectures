@@ -12590,6 +12590,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModel
+public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelWeaklyEtale
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
@@ -13907,6 +13908,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangulated
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback

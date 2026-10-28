@@ -81,17 +81,82 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- **Change of trait to the generic slice trait** (SGA 4½, [Th. finitude], 3.7): the pullback
+exchange of the change of strictly henselian trait `τ : (𝔸ⁿ_{K⟦t⟧} over Spec K⟦t⟧) ⟶
+(𝔸ⁿ⁺¹_S ×_{𝔸¹_S} S' over S')` is an isomorphism at the pullback of a bounded constructible
+complex `B` on `𝔸ⁿ⁺¹_S`; a case of
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`. -/
+theorem isIso_pullbackExchange_app_genericSliceTraitChangeHom (D : GenericSliceTrait k') (n : ℕ)
+    (i : Fin (n + 1))
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        (affineSpaceModel k' (n + 1)).total))}
+    (hB : boundedConstructible _ B) :
+    IsIso (((genericSliceTraitChangeHom D n i).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app
+        ((L((genericSliceTraitProj D n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B)) := by
+  have : Fact (ringChar D.κ ≠ ℓ) := ⟨D.ringChar_κ ▸ Fact.out⟩
+  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
+    (genericSliceTraitModel D n i).ε _
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
+      (genericSliceTraitProj D n i) B hB)
+  have hNj : IsPullback (genericSliceTraitModel D n i).j (pullback.snd _ _)
+      (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.a)) :=
+    IsPullback.of_hasPullback _ _
+  have hNi : IsPullback (genericSliceTraitModel D n i).i (pullback.snd _ _)
+      (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.b)) :=
+    IsPullback.of_hasPullback _ _
+  have hMj : IsPullback (affineSpaceModel (traitSliceField k') n).geometric.j (pullback.snd _ _)
+      (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
+      (Spec.map (CommRingCat.ofHom
+        (algebraMap (PowerSeries (traitSliceField k'))
+          (traitGenericField (traitSliceField k'))))) :=
+    IsPullback.of_hasPullback _ _
+  have hMi : IsPullback (affineSpaceModel (traitSliceField k') n).geometric.i (pullback.snd _ _)
+      (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
+      (Spec.map (CommRingCat.ofHom (PowerSeries.constantCoeff (R := traitSliceField k')))) :=
+    IsPullback.of_hasPullback _ _
+  have hφ := isPullback_genericSliceTraitChangeTotal D n i
+  have hgen : (genericSliceTraitChangeHom D n i).generic ≫ pullback.snd _ _ =
+      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom D.ωK) := pullback.lift_snd _ _ _
+  exact Hom.isIso_pullbackExchange_app_of_isPullback_trait (ι := D.ι) (a₁ := D.a)
+    (a₂ := algebraMap _ _) (c := D.ωK) (b₁ := D.b) (b₂ := PowerSeries.constantCoeff)
+    D.injective_ι D.injective_a (algebraMap_traitGenericField_injective _) D.ωK_comp_a D.ker_b
+    PowerSeries.ker_coeff_eq_max_ideal (genericSliceTraitChangeHom D n i)
+    (genericSliceTraitStructure D n i) _ hNj _ hNi _ _ hMj _ hMi hφ hgen hB'
+
+/-- **Slicing over the generic slice trait** (SGA 4½, [Th. finitude], Lemme 3.4): the pullback
+exchange of `σ : (𝔸ⁿ⁺¹_S ×_{𝔸¹_S} S' over S') ⟶ (𝔸ⁿ⁺¹_S over S)` is a split monomorphism at a
+bounded constructible complex: its cartesian factor is weakly étale base change, and its change of
+generic fibres is split by averaging over the pro-`p` kernel (M2). -/
+theorem isSplitMono_pullbackExchange_app_genericSliceTraitHom (D : GenericSliceTrait k') (n : ℕ)
+    (i : Fin (n + 1))
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        (affineSpaceModel k' (n + 1)).total))}
+    (hB : boundedConstructible _ B) :
+    IsSplitMono (((genericSliceTraitHom D n i).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app B) := by
+  have := (genericSliceTraitHom D n i).isIso_pullbackExchange_fromCartesian_of_weaklyEtale
+    (Profinite.padicAlgClRingObj ℓ)
+  have h₂ := isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom D n i hB
+  have h := Hom.isSplitMono_pullbackExchange_app_of_cartesian (genericSliceTraitHom D n i)
+    (Profinite.padicAlgClRingObj ℓ) B inferInstance (by exact_mod_proofs h₂)
+  exact_mod_proofs h
+
+
 /-- **Nearby cycles on the coordinate generic slices** (SGA 4½, [Th. finitude], Lemme 3.3 and
 3.7): for a bounded constructible complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the pullback
 exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of models over the slice
 (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism: it is the inclusion of the
 invariants of `Ψ_K (Lhᵢ^* B)` under a pro-`p` group `P` (`p ≠ ℓ`), split by averaging over `P`.
-It is deduced through the cartesian model of the slice
-(`NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_cartesian`) from the base change
-along the cartesian slice square
-(`NearbyCyclesModel.isIso_pullbackExchange_app_fromCartesian_affineSpaceSliceHom`, (M1)) and the
-pro-`p` averaging splitting
-(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom`, (M2)). -/
+It is deduced, following Deligne's proof of Lemme 3.3, from the factorization of the slice through
+the strict localization `S'` of `𝔸¹_S` at the generic point of its special fibre
+(`AlgebraicGeometry.nonempty_genericSliceTrait`): the change of trait `Spec K⟦t⟧ ⟶ S'` has
+invertible exchange (`NearbyCyclesModel.isIso_pullbackExchange_app_genericSliceTraitChangeHom`,
+Th. finitude 3.7), and the slice `X ×_{𝔸¹_S} S' ⟶ X` over `S' ⟶ S` has split exchange
+(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_genericSliceTraitHom`, Lemme 3.4). -/
 theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -99,10 +164,18 @@ theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom (n : ℕ) (i : Fin 
     (hB : boundedConstructible _ B) :
     IsSplitMono (((affineSpaceSliceHom k' n i).pullbackExchange
       (Profinite.padicAlgClRingObj ℓ)).app B) := by
-  have h₁ := isIso_pullbackExchange_app_fromCartesian_affineSpaceSliceHom n i hB
-  have h₂ := isSplitMono_pullbackExchange_app_toCartesian_affineSpaceSliceHom n i hB
-  have := Hom.isSplitMono_pullbackExchange_app_of_cartesian (affineSpaceSliceHom k' n i)
-    (Profinite.padicAlgClRingObj ℓ) B (by exact_mod_proofs h₁) (by exact_mod_proofs h₂)
+  obtain ⟨D⟩ := nonempty_genericSliceTrait k'
+  have h₁ := isIso_pullbackExchange_app_genericSliceTraitChangeHom D n i hB
+  have h₂ := isSplitMono_pullbackExchange_app_genericSliceTraitHom D n i hB
+  have htot : (genericSliceTraitChangeHom D n i).total ≫ (genericSliceTraitHom D n i).total =
+      (affineSpaceSliceHom k' n i).total := genericSliceTraitChangeTotal_comp D n i
+  have hgen : (genericSliceTraitChangeHom D n i).generic ≫ (genericSliceTraitHom D n i).generic =
+      (affineSpaceSliceHom k' n i).generic := genericSliceTraitChangeGeneric_comp D n i
+  have key := Hom.isSplitMono_pullbackExchange_app_of_comp (Profinite.padicAlgClRingObj ℓ)
+    (genericSliceTraitChangeHom D n i) (genericSliceTraitHom D n i) (affineSpaceSliceHom k' n i)
+    (genericSliceTraitChangeTotal_comp D n i) (genericSliceTraitChangeSpecial_comp D n i)
+    htot hgen B
+  have := key (by exact_mod_proofs h₁) (by exact_mod_proofs h₂)
   exact_mod_proofs this
 
 /-- **Nearby cycles on the coordinate generic slices are retracts**: for a bounded constructible
