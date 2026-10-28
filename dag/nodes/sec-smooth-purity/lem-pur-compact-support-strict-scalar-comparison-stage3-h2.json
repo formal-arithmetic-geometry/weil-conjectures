@@ -13,12 +13,9 @@
  ],
  "proof": [
   {
-   "text": "Use the proper restriction cocycle and inverse restriction cocycle, then apply mate pasting. The open factors are the degree-zero tensor balancing maps, whose two successive products agree with the composite balancing associator. Naturality in the derived image object gives the displayed equality.",
+   "text": "Unfold the compact-support comparison into its proper mate followed by its open tensor mate. Apply compositionProper to the retained object over the compactification and compositionOpen to the open immersion. Naturality of the F-to-L proper mate moves the first open factor through it; functoriality of the L direct image and the definition of image identify the remaining composite with the stated right-hand side.",
    "uses": [
-    "lem-pur-strict-proper-restriction-composition",
-    "lem-pur-strict-scalar-tower-associator",
-    "lem-weil-pbc-mate-pasting",
-    "lem-pur-compact-support-strict-scalar-mate"
+    "lem-pur-compact-support-strict-scalar-composition-prelude"
    ],
    "elementary": false,
    "source": {
@@ -28,15 +25,12 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-strict-proper-restriction-composition",
-  "lem-pur-strict-scalar-tower-associator",
-  "lem-weil-pbc-mate-pasting",
-  "lem-pur-compact-support-strict-scalar-mate"
+  "lem-pur-compact-support-strict-scalar-composition-prelude"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A6 and 0E8I; auxiliary comparison Step 11."
+  "place": "Tags 07A6 and 0E8I; strict proper/open mate composition."
  },
  "mathlib_searches": [
   {
@@ -88,7 +82,7 @@
   "declaration": "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
   "statement": "theorem compactSupportStrictScalarComparison (c : Compactification f) (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X) : (compositionTower l E F i L j Y).hom.app ((image l E c).obj K) ≫ (comparison l E L (j.comp i) c).app K = (T l F L j Y).map ((comparison l E F i c).app K) ≫ (comparison l F L j c).app ((T l E F i X).obj K) ≫ (image l L c).map ((compositionTower l E F i L j X).hom.app K)",
   "branch": "sheaf-dag",
-  "by": "H2",
+  "by": "R3",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -102,22 +96,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-c5fcb",
-  "group": "Q4",
-  "result": "fix",
-  "landing": "20261027T234156-L-22538",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261028T020706-L-2538069",
   "kind": "interface",
-  "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files",
-  "sorry_before": [
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComposition",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarIdentity"
-  ],
-  "sorry_after": [
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarIdentity"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

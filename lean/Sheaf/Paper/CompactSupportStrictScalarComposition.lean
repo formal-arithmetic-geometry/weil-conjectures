@@ -28,6 +28,7 @@ comparisons. Arithmetic reassociation is the localization of the actual index eq
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
@@ -100,7 +101,25 @@ theorem compactSupportStrictScalarComparison (c : Compactification f)
       (T l F L j Y).map ((comparison l E F i c).app K) ≫
         (comparison l F L j c).app ((T l E F i X).obj K) ≫
         (image l L c).map ((compositionTower l E F i L j X).hom.app K) := by
-  sorry
+  unfold comparison
+  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+    Functor.map_comp, Category.assoc]
+  have hp := compositionProper l E F i L j c.g
+    ((J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.i).obj K)
+  have ho := compositionOpen l E F i L j c.i K
+  have hn := (proper l F L j c.g).naturality ((openTensor l E F i c.i).app K)
+  simp only [Functor.comp_obj]
+  change (compositionTower l E F i L j Y).hom.app
+      ((R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.g).obj
+        ((J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.i).obj K)) ≫
+      (proper l E L (j.comp i) c.g).app
+        ((J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.i).obj K) ≫ _ = _
+  rw [reassoc_of% hp]
+  rw [← Functor.map_comp]
+  rw [ho]
+  simp only [Functor.map_comp, Functor.comp_obj]
+  rw [← reassoc_of% hn]
+  simp only [image, Functor.comp_map, Functor.comp_obj]
 
 
 /-- Composition of the actual strict proper/open scalar mates on the common L tower.
