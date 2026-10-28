@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstructibleDictionary
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 
