@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
 
+import Sheaf.Paper.AdicReindexingTensorIntegralCancelled
+
 /-! # Tensor square on integral objects at one finite coefficient field
 
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15;
@@ -17,6 +19,7 @@ agent-written refinement of these comparison results.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option cleanup.letToHave false
+set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -77,7 +80,23 @@ theorem normalized_reindexing_tensor_integral
          (ordinary l U.base.left (C.data U).realization).obj N) ≫
       (C.data T).tensor.closed.tensor.map (Prod.mkHom
         ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫
-      (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,
-        (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N) := by sorry
+    (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,
+        (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N) := by
+  intro K L
+  let I := GeneralAlgebraicallyClosedCoefficients.inclusion
+    (l := l) (Ω := PadicAlgCl l) (Y := U.base.left) E
+  let Q := sfRationalConstructibleLocalization l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) U.base.left
+  let M := I.obj (Q.obj K)
+  let N := I.obj (Q.obj L)
+  letI := (C.data T).units
+  letI := (C.data U).units
+  apply (cancel_mono ((C.data T).tensor.tensor.inv.app
+    ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,
+     (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N))).mp
+  dsimp only [M, N, I, Q]
+  simpa only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id] using
+    normalized_reindexing_tensor_integral_cancelled l D C T U g E
+    h_integral_normalization K L
 
 end WeilConjectures.AdicQbarRealization

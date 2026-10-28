@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-adic-reindexing-tensor-integral-cancelled",
+ "kind": "statement",
+ "title": "Integral tensor square after target tensorator cancellation",
+ "statement": "Fix l,D,C,T,U,g,E and the single-field integral normalization of lem-sf-adic-reindexing-tensor-integral. For every pair K,L of integral constructible objects at E, the displayed tensor square becomes an equality after postcomposition with the inverse of the target realization tensorator at the pulled-back pair. This is the representative normalization equation before the final cancellation; it retains the inverse tensorator explicitly.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62; Hemo--Richarz--Scholbach, Lemma 7.9.",
+  "note": "The explicit postcomposition is the cancellation stage in the fixed-field representative calculation."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives for K and L and expand the two finite normalization equations, the integral reindexing representative equation, and the signed cochain pullback tensor comparison. The pure-section and quotient-coordinate calculations identify the two composites after the target tensorator inverse is appended.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data",
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the representative equality through the K-flat comparison isomorphisms, raw rationalization, and fixed-stage inclusion. The inverse target tensorator is kept in the equation, so no cancellation or arbitrary coefficient-stage enlargement is used in this node.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The fixed integral coefficient representative calculation preceding the final tensorator cancellation in Proposition 6.8.14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorator inverse cancellation adic realization",
+   "results": "No existing native adic realization square; only generic category cancellation lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_assoc",
+   "results": "Generic cancellation and inverse identities only.",
+   "date": "2026-10-28",
+   "verdict": "Used only for the final assembly theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed coefficient integral tensor pullback realization representative square",
+   "results": "No exact native declaration.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor-integral",
+   "place": "The K-flat and quotient-completion representative calculation before cancellation of the target tensorator.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingTensorIntegralCancelled",
+  "file": "lean/Sheaf/Paper/AdicReindexingTensorIntegralCancelled.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_tensor_integral_cancelled",
+  "statement": "theorem normalized_reindexing_tensor_integral_cancelled\n    (C : FamilyCore l D) (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (h_integral_normalization :\n        letI := (C.data T).units\n        letI := (C.data U).units\n        integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization\n          (C.ring T U g) E (C.integral T U g E) (C.comparison T U g)) :\n    ∀ (K L : sfIntegralConstructibleCategory l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) U.base.left),\n    let I := GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := l) (Ω := PadicAlgCl l) (Y := U.base.left) E\n    let Q := sfRationalConstructibleLocalization l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) U.base.left\n    let M := I.obj (Q.obj K)\n    let N := I.obj (Q.obj L)\n    letI := (C.data T).units\n    letI := (C.data U).units\n    ((derivedPull l T.base.left g.hom (C.ring T U g)).map\n        ((C.data U).tensor.tensor.hom.app (M, N)) ≫\n      (C.comparison T U g).inv.app\n        ((commonStageDerivedTensor l (PadicAlgCl l) U.base.left).obj (M, N)) ≫\n      (ordinary l T.base.left (C.data T).realization).map\n        (canonicalCommonStagePullbackTensor l (PadicAlgCl l) g.hom M N).hom) ≫\n        (C.data T).tensor.tensor.inv.app\n          ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,\n           (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N) =\n    ((C.pullTensor T U g).tensor.hom.app\n        ((ordinary l U.base.left (C.data U).realization).obj M,\n         (ordinary l U.base.left (C.data U).realization).obj N) ≫\n      (C.data T).tensor.closed.tensor.map (Prod.mkHom\n        ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫\n      (C.data T).tensor.tensor.hom.app\n        ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,\n         (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N) ≫\n      (C.data T).tensor.tensor.inv.app\n        ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,\n         (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensorIntegral",
+  "date": "2026-10-28",
+  "group": "Q7"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261028T020657-L-2536317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261028T020657-L-2536317",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
