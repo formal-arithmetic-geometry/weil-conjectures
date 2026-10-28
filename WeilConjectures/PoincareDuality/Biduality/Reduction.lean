@@ -126,17 +126,8 @@ theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
   obtain ⟨g, δ, hT⟩ := exists_distinguished_integersModPowReduction X.left ℓ E.1 n K.obj
   have hK : IsIso ((ℓ : ℤ) ^ n • 𝟙 K.obj) :=
     (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 (Functor.map_isZero _ h)
-  -- hence on the first derived reduction of `K`, where `ℓ` acts by zero
-  have hK₁ : Limits.IsZero ((derivedReduction X.left ℓ E).obj K.obj) := by
-    refine DerivedCategory.isZero_of_isIso_zsmul_id
-      (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero ?_) (m := (ℓ : ℤ) ^ n) ?_
-    · rw [Int.cast_pow, Int.cast_natCast, natCast_eq_zero_residueFieldCoeff, zero_pow hn]
-    · have : (derivedReduction X.left ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
-      rw [← (derivedReduction X.left ℓ E).map_id, ← Functor.map_zsmul]
-      infer_instance
-  -- derived Nakayama
-  have := isIso_of_isIso_derivedReduction_map X.left ℓ E (0 : K ⟶ K) (hK₁.isIso hK₁ _)
-  exact Limits.IsZero.of_mono_zero K K
+  -- hence `K = 0` by derived Nakayama
+  exact isZero_of_isIso_pow_zsmul_id X.left ℓ E.1 hn hK
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
 /-- **Derived Nakayama for the reduction modulo `ℓⁿ`** (blueprint `sk-lem-pe-derived-nakayama`):
