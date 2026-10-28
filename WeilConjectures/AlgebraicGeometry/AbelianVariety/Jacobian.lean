@@ -54,7 +54,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `sk-def-av-jacobian`: The Jacobian
+/-- Blueprint `def-sc-jacobian`: The Jacobian
 
 Let `C` be a smooth projective geometrically integral curve over a field `K`, of genus `g`. A
 *Jacobian of `C`* is a pair `(J, φ)` consisting of an abelian variety `J` over `K` of dimension
@@ -100,7 +100,7 @@ instance IsCurve.of_smoothOfRelativeDimension_one (f : C ⟶ Spec (.of K))
 geometrically integral group scheme `J`, smooth of relative dimension the genus of `C`, which
 respects the group laws.
 
-(blueprint: `sk-def-av-jacobian`) -/
+(blueprint: `def-sc-jacobian`) -/
 theorem IsJacobian.of_representableBy (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f]
     [IsProper f] [GeometricallyIntegral f]
     (J : Over (Spec (.of K))) [GrpObj J] [IsProper J.hom] [GeometricallyIntegral J.hom]
@@ -117,13 +117,13 @@ theorem IsJacobian.of_representableBy (f : C ⟶ Spec (.of K)) [IsCurve f] [Smoo
   · rwa [Iso.symm_symm_eq, Equiv.symm_apply_apply]
 
 /-- **The Jacobian is a Jacobian.** A smooth projective geometrically integral curve `C` over a
-separably closed field `K` has a Jacobian in the sense of blueprint `sk-def-av-jacobian`: an
+separably closed field `K` has a Jacobian in the sense of blueprint `def-sc-jacobian`: an
 abelian variety of dimension the genus of `C` representing `Pic⁰_{C/K}` as a group-valued
 functor. This repackages `AlgebraicGeometry.exists_jacobian`, the genus
 `dim_K Γ(C, Ω¹_{C/K})` being the arithmetic genus `dim_K H¹(C, 𝒪_C)` by
 `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
 
-(blueprint: `sk-prop-jacobian`, `sk-def-av-jacobian`) -/
+(blueprint: `sk-thm-picard-main`, `def-sc-jacobian`) -/
 theorem exists_isJacobian [IsSepClosed K] [C.Over (Spec (.of K))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [IsProper (C ↘ Spec (.of K))]
     [GeometricallyIntegral (C ↘ Spec (.of K))] [Smooth (C ↘ Spec (.of K))] :

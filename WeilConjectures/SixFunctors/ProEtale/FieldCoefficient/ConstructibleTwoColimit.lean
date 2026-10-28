@@ -15,11 +15,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalar
 /-!
 # The common-stage constructible category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)` and its heart
 
-For `Λ = ℚ̄_ℓ`, blueprint `def-weil-constructible-heart` uses the common-stage category of
-blueprint `def-weil-algebraically-closed-coefficients`: the `2`-colimit over the finite
-extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the bounded constructible derived categories `D^b_c(X, E)`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedFieldConstructible`) along the extensions of
-scalars `F ⊗_E -`. This file constructs
+For `Λ = ℚ̄_ℓ`, the constructible heart is defined on the common-stage category: the `2`-colimit
+over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the bounded constructible derived categories
+`D^b_c(X, E)` (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedFieldConstructible`) along the
+extensions of scalars `F ⊗_E -`. This file constructs
 
 - the transition functors `F ⊗_E - : D^b_c(X, E) ⥤ D^b_c(X, F)`, induced on derived categories by
   the exact extension of scalars of sheaves, which preserves constructibility
@@ -173,8 +172,7 @@ lemma _root_.PadicAlgCl.continuous_algebraMap_intermediateField'
     (E : IntermediateField ℚ_[l] (PadicAlgCl l)) : Continuous (algebraMap ℚ_[l] E) :=
   (continuous_algebraMap ℚ_[l] (PadicAlgCl l)).subtype_mk _
 
-/-- Blueprint `def-weil-algebraically-closed-coefficients` for `D^b_c`: the stage system of the
-`E`-stages.
+/-- Algebraically closed coefficients for `D^b_c`: the stage system of the `E`-stages.
 
 The directed system `E ↦ D^b_c(X, E)` over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, with the
 extensions of scalars `F ⊗_E -` as transition functors and the identifications
@@ -199,8 +197,8 @@ noncomputable def boundedFieldConstructibleStageSystem :
       (continuous_algebraMap_intermediateField' l _)
       (continuous_algebraMap_intermediateField' l _) X K
 
-/-- Blueprint `def-weil-algebraically-closed-coefficients` for `D^b_c`: the common-stage
-category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`.
+/-- Algebraically closed coefficients for `D^b_c`: the common-stage category
+`D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`.
 
 The pair category of
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedFieldConstructibleStageSystem`:
@@ -268,16 +266,16 @@ lemma boundedFieldConstructibleHeart_T {E F : FiniteIntermediateField l} (h : E 
 
 variable (l X)
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the half `D^{≤ n}_c(X, ℚ̄_ℓ)` of the
-standard `t`-structure on the common-stage category `D^b_c(X, ℚ̄_ℓ)`. Since the transition
-functors are `t`-exact, it consists of the objects `(E, K)` such that `F ⊗_E K ∈ D^{≤ n}_c(X, F)`
-at some finite stage `F ⊇ E` (equivalently, at all sufficiently large stages). -/
+/-- The half `D^{≤ n}_c(X, ℚ̄_ℓ)` of the standard `t`-structure on the common-stage category
+`D^b_c(X, ℚ̄_ℓ)`. Since the transition functors are `t`-exact, it consists of the objects
+`(E, K)` such that `F ⊗_E K ∈ D^{≤ n}_c(X, F)` at some finite stage `F ⊇ E` (equivalently, at
+all sufficiently large stages). -/
 def constructibleTwoColimitLE (n : ℤ) : ObjectProperty (ConstructibleTwoColimit l X) :=
   (boundedFieldConstructibleStageSystem l X).eventually
     fun E ↦ boundedFieldConstructibleLE l X E n
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the half `D^{≥ n}_c(X, ℚ̄_ℓ)` of the
-standard `t`-structure on the common-stage category `D^b_c(X, ℚ̄_ℓ)`. -/
+/-- The half `D^{≥ n}_c(X, ℚ̄_ℓ)` of the standard `t`-structure on the common-stage category
+`D^b_c(X, ℚ̄_ℓ)`. -/
 def constructibleTwoColimitGE (n : ℤ) : ObjectProperty (ConstructibleTwoColimit l X) :=
   (boundedFieldConstructibleStageSystem l X).eventually
     fun E ↦ boundedFieldConstructibleGE l X E n
@@ -290,12 +288,11 @@ instance (n : ℤ) : (constructibleTwoColimitGE l X n).IsClosedUnderIsomorphisms
   StageSystem.eventually_isClosedUnderIsomorphisms (S := boundedFieldConstructibleStageSystem l X)
     (P := fun E ↦ boundedFieldConstructibleGE l X E n) (fun h ↦ boundedFieldConstructibleGE_T h n)
 
-/-- Blueprint `def-weil-constructible-heart`: Constructible heart, stage `Λ = ℚ̄_ℓ`.
+/-- Constructible heart, stage `Λ = ℚ̄_ℓ`.
 
 The constructible heart `Sh_c(X, ℚ̄_ℓ) = D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the standard
 `t`-structure on the common-stage category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.ConstructibleTwoColimit`, blueprint
-`def-weil-algebraically-closed-coefficients`). By
+(`AlgebraicGeometry.ProEtale.DerivedCategory.ConstructibleTwoColimit`). By
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitHeart_eq` its objects are the
 pairs `(E, K)` with `F ⊗_E K` in the constructible heart `Sh_c(X, F)` of some finite stage
 (`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`), and by
@@ -332,9 +329,8 @@ noncomputable def constructibleHeartStageSystem :
       (boundedFieldConstructibleHeart l X E).FullSubcategory) :=
   (boundedFieldConstructibleStageSystem l X).restrict _ boundedFieldConstructibleHeart_T
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the constructible heart of the
-common-stage category is the `2`-colimit of the constructible hearts of the finite stages,
-`2-colim_E Sh_c(X, E) ≌ Sh_c(X, ℚ̄_ℓ)`. -/
+/-- The constructible heart of the common-stage category is the `2`-colimit of the
+constructible hearts of the finite stages, `2-colim_E Sh_c(X, E) ≌ Sh_c(X, ℚ̄_ℓ)`. -/
 noncomputable def constructibleTwoColimitHeartEquiv :
     (constructibleHeartStageSystem l X).PairCategory ≌
       (constructibleTwoColimitHeart l X).FullSubcategory :=

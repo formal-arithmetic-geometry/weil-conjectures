@@ -38,7 +38,7 @@ For a morphism `f : X ⟶ Y` of schemes, `Y` of finite type over `k`, and a comp
   `ProEtale.boundedConstructibleAdicUpperShriekAdjunction`.
 
 That `Rg_*` is a left adjoint on `Dᵇc(-, ℚ̄_ℓ)` for proper `g` is part of the constructible
-adjunction `Rf_! ⊣ Rf^!` of blueprint `thm-coef-qbar-verdier`
+adjunction `Rf_! ⊣ Rf^!` of blueprint `det-pd-biduality-coefficients`
 (not proved in the project). The constructions therefore take it as an instance argument.
 
 ## Implementation notes
@@ -144,7 +144,7 @@ open immersion `j`. The blueprint characterizes it by the adjunction
 `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on `Dᵇc(-, ℚ̄_ℓ)`
 (`AlgebraicGeometry.ProEtale.boundedConstructibleAdicUpperShriekOfCompactificationAdjunction`).
 That `Rg_*` has a right adjoint is the instance argument; its existence is part of the
-constructible adjunction of blueprint `thm-coef-qbar-verdier` (another subsection). -/
+constructible adjunction of blueprint `det-pd-biduality-coefficients` (another subsection). -/
 noncomputable def ProEtale.boundedConstructibleAdicUpperShriekOfCompactification :
     (ProEtale.DerivedCategory.boundedConstructibleAdic l Y).FullSubcategory ⥤
       (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory :=

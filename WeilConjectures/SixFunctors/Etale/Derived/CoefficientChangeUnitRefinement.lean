@@ -18,8 +18,7 @@ comparison `Rf_!(d) ⟶ Rf_!(c)` of the unbounded derived lower shrieks
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison`) is compatible
 with the coefficient comparisons of `Rf_!(c)` and `Rf_!(d)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison_app_restrictScalars`).
-This is used for the compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+This is used for the compatible systems of Frobenius coefficient morphisms.
 -/
 
 @[expose] public section

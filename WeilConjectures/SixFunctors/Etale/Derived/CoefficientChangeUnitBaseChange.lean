@@ -16,8 +16,7 @@ the derived base change map `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) is compatible with the coefficient comparisons
 of `Rf_*`, `Rf'_*`, `Lg^*` and `Lg'^*`
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap_app_restrictScalars`). This is used for the
-compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+compatible systems of Frobenius coefficient morphisms.
 -/
 
 @[expose] public section

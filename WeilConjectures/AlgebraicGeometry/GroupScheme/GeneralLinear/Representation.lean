@@ -38,7 +38,7 @@ stability under `G(k)` is stability under `G`; over a general field it is not.
 
 ## Blueprint
 
-- `sk-d-linear`: coefficients and representations; the constructions on representations it
+- `det-d-linear`: coefficients and representations; the constructions on representations it
   lists are Mathlib's `Representation`, `Subrepresentation`, `Representation.IsIrreducible`,
   `Representation.IsSemisimpleRepresentation`, `Representation.tprod` and
   `Representation.exteriorPower`.
@@ -85,7 +85,7 @@ under `G` (`RationalHom.isSimple_iff`). (blueprint: `def-wf-simple-module`)
 Stability is tested on the `k`-points `G(k)` only. This is the scheme-theoretic notion (a
 subcomodule, i.e. stable under `G(R)` for every `k`-algebra `R`) because `G` is an algebraic
 group, i.e. locally of finite type over `k`, and `k` is algebraically closed of characteristic
-`0`, the standing hypotheses of `sk-d-linear`: then `G` is reduced (Cartier) and `G(k)` is
+`0`, the standing hypotheses of `det-d-linear`: then `G` is reduced (Cartier) and `G(k)` is
 schematically dense in `G`. Without these hypotheses the two notions differ, which is why
 `[LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k]` are imposed. -/
 abbrev IsSimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : Prop :=

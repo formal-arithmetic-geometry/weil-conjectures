@@ -51,7 +51,7 @@ variable {K L R : Type*} [Field K] [Field L] [Fintype L] [Algebra K L] [CommRing
 `f : L → R` on a finite field `L`, with respect to the additive character `ψ ∘ Tr_{L/K}` of `L`
 induced by an additive character `ψ` of a subfield `K`. For `L = 𝔽_{qⁿ}` over `K = 𝔽_q` this
 is the transform with respect to the character `ψₙ` of `𝔽_{qⁿ}`.
-(sketch blueprint: `sk-def-trace`) -/
+(sketch blueprint: `def-fd-trace-function`) -/
 noncomputable def fourierTransform (ψ : AddChar K R) (f : L → R) (y : L) : R :=
   ∑ x, f x * ψ (Algebra.trace K L (x * y))
 
@@ -71,7 +71,7 @@ variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsDomain R]
 /-- **Classical Fourier inversion.** For a nontrivial additive character `ψ` of `K`, the
 transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L` times the
 identity: `∑_x (∑_z f(z) ψ_L(z x)) ψ_L(-x y) = #L · f(y)`.
-(sketch blueprint: `sk-prop-double-trace`, proof) -/
+(sketch blueprint: `det-prop-double-trace`, proof) -/
 theorem fourierTransform_inv_fourierTransform {ψ : AddChar K R} (hψ : ψ ≠ 1) (f : L → R)
     (y : L) :
     fourierTransform ψ⁻¹ (fourierTransform ψ f) y = Fintype.card L * f y := by

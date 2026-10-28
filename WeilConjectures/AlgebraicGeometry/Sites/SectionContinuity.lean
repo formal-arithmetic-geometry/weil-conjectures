@@ -19,7 +19,7 @@ exhibit the sections of the pullback of an abelian étale sheaf `G` on `R` over 
 colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and quasi-separated étale
 over a quasi-separated `R` (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`).
 This is blueprint `lem-weil-pbc-etale-section-continuity`, which belongs to the subsection
-`sk-prop-h2`.
+`lem-sc-second-kummer-divisors`.
 
 ## Main statements
 

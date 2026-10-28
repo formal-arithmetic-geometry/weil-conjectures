@@ -35,7 +35,7 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`: the polynomial `P_{i,ℓ}`
-  (`def-weil-smooth-proper-cohomological-family`, `sk-def-cohfamily`).
+  (`def-weil-smooth-proper-cohomological-family`, `det-def-cohfamily`).
 - `AlgebraicGeometry.Scheme.IsIntegralFrobeniusFactor`: an integral polynomial realizing
   `P_{i,ℓ}` for every `ℓ ≠ p` (`def-weil-integral-frobenius-factor`).
 - `AlgebraicGeometry.Scheme.oddFrobeniusProduct`, `AlgebraicGeometry.Scheme.evenFrobeniusProduct`:
@@ -46,7 +46,7 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 - `AlgebraicGeometry.Scheme.exists_traceDatum`: the cohomological family is a trace datum whose
   integers are the point counts.
 - `AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`: the trace-to-determinant
-  identity (`sk-thm-tracetodeterminant`, `thm-zl-lefschetz-weil-identity`).
+  identity (`det-thm-tracetodeterminant`, `thm-zl-lefschetz-weil-identity`).
 - `LinearMap.inv_alternatingCharpolyRevProd_eq_exp` and
   `AlgebraicGeometry.Scheme.trace_determinant`: `prop-trace-determinant`.
 -/
@@ -156,7 +156,7 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-smooth-proper-cohomological-family` (and `sk-def-cohfamily`): the
+/-- Blueprint `def-weil-smooth-proper-cohomological-family` (and `det-def-cohfamily`): the
 determinant factor
 
 `P_{i,ℓ}(T) = det(1 - T Fᵢ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`
@@ -243,7 +243,7 @@ theorem exists_traceDatum :
          (((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^ n)) _).symm },
     fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl⟩
 
-/-- Blueprint `sk-thm-tracetodeterminant` and `thm-zl-lefschetz-weil-identity`
+/-- Blueprint `det-thm-tracetodeterminant` and `thm-zl-lefschetz-weil-identity`
 (trace-to-determinant identity): for `X₀` smooth and proper of pure dimension `d`,
 
 `Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`,

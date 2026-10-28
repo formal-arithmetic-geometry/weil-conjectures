@@ -47,11 +47,11 @@ cocontinuous functor `U_H` to `Λ[H]`-modules whose right adjoint `V_H` is exact
   (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety`).
 
 The sheaf `F` is not of étale origin. On the étale-origin class the exceptional adjoint is the
-unconditional constructible `Rf^!` of `sk-def-sf-operations` (vi), which is the only exceptional
+unconditional constructible `Rf^!` of `det-def-sf-operations` (vi), which is the only exceptional
 functor used downstream (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
 
-Blueprint `open-sf-ambient-adjoint-input` records the same failure: the exceptional right adjoint
-of `Rf_!` on unbounded (or bounded below) pro-étale complexes does not exist in general.
+In particular, the exceptional right adjoint of `Rf_!` on unbounded (or bounded below) pro-étale
+complexes does not exist in general.
 
 ## Implementation notes
 
@@ -303,10 +303,10 @@ theorem not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety
   not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety Λ E hE c
     (hc.of_compactification _ _)
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (iii), `open-sf-ambient-adjoint-input`: for the structure
-morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
-over an algebraically closed field, `Ra_{E!}` has no right adjoint on the bounded below derived
-category `D⁺(E_proét, Λ)` either.
+/-- Blueprint `sk-rem-sf-fullcd-scope` (iii): for the structure morphism `a_E` of an elliptic
+curve (more generally an abelian variety of positive dimension) over an algebraically closed
+field, `Ra_{E!}` has no right adjoint on the bounded below derived category `D⁺(E_proét, Λ)`
+either.
 
 Let `F` be the sheaf of
 `AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and `I` an

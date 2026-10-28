@@ -55,7 +55,7 @@ Proof:
    lem-weil-pbc-presheaf-finite-limits-objectwise and
    lem-weil-pbc-sheafification-sets-exact. Hence so does set inverse image.
 4. By lem-weil-pbc-sheaf-algebraic-structures-objects and
-   lem-weil-pbc-adjunction-lifts-group-ring-objects, transport the operations using
+   lem-weil-pbc-adjunction-lifts-abelian-group-objects, transport the operations using
    the product and terminal comparisons. The adjunction restricts on hom sets,
    and its unit is the original set unit. Right images have sectionwise operations.
 5. Uniqueness of left adjoints (lem-weil-pbc-conjugate-iso-unit-equation) identifies

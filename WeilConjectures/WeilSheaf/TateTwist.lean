@@ -53,7 +53,7 @@ Tate twist `K ↦ K(m)` of Weil complexes is the derived tensor product with `�
 
 `AlgebraicGeometry.WeilSheaf.tateTwistSheaf` and `AlgebraicGeometry.WeilComplex.tateTwist`
 implement `def-wf-tate-twist`. The cyclotomic Tate module `ℤ_ℓ(1)` of the subsection
-`sk-d-ab-cyclotomic` is `cyclotomicTateModule`.
+`det-d-ab-cyclotomic` is `cyclotomicTateModule`.
 -/
 
 @[expose] public section

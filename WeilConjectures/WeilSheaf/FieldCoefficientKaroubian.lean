@@ -16,14 +16,13 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
 The standard t-structure of the derived category of pro-étale `E`-Weil sheaves induces a bounded
 t-structure on `D^b_{c,W}(X, E)` (`AlgebraicGeometry.FieldWeilComplex.tStructure`), so that
 `D^b_{c,W}(X, E)` is idempotent complete and its canonical functor into its Karoubi envelope is
-an exact equivalence, by the Karoubian bounded-t theorem (`thm-weil-karoubian-bounded-t`).
+an exact equivalence, by the Karoubian bounded-t theorem.
 
 The common-stage category `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` of blueprint
 `def-weil-weil-sheaf-complex` (`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
 complete as well, a filtered `2`-colimit of idempotent complete categories being idempotent
 complete (`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`); hence its canonical
-functor into its Karoubi envelope is an equivalence (blueprint
-`lem-weil-weil-complex-qbar-idempotent-complete`, for the `2`-colimit model).
+functor into its Karoubi envelope is an equivalence.
 
 This file also records the forgetful functor `For` and the derived Frobenius isomorphism `θ` of
 the `2`-colimit model, through its comparison functor to the direct `ℚ̄_ℓ`-stage
@@ -85,8 +84,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The idempotent completeness part of blueprint
-`lem-weil-weil-complex-qbar-idempotent-complete`, for the `2`-colimit model.
+/-- Idempotent completeness of the Weil category, for the `2`-colimit model.
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` (`AlgebraicGeometry.WeilComplexTwoColimit`) is
 idempotent complete, and the canonical functor into its Karoubi envelope is an equivalence: every

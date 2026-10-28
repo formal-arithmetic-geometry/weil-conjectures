@@ -19,17 +19,14 @@ Frobenius operator* `F_x̄(φ) = φ_x̄ ∘ τ_x̄` on the geometric stalk
 (`AlgebraicGeometry.Etale.localOperator`), blueprint `def-trf-frobenius-operators`.
 
 A *compatible system of Frobenius coefficient morphisms* on a normalized adic system `L_•`
-(`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem`, blueprint
-`prop-trf-adic-coefficient-morphism-systems`) is a family `ψ_n : Lg^* L_n ⟶ L_n` reducing to each
-other along the transitions of `L_•`; a compatible tower of Weil pairs is the case where every
-`ψ_n` is invertible (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.IsWeil`). For such a
+(`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem`) is a family `ψ_n : Lg^* L_n ⟶ L_n` reducing
+to each other along the transitions of `L_•`; a compatible tower of Weil pairs is the case where
+every `ψ_n` is invertible (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.IsWeil`). For such a
 system and every `m ≥ 1`, the global operators `F_c(ψ_n^{[m]})` and the local operators
 `F_x̄(ψ_n^{[m]})` at points fixed by `(g^m, h^m)` form compatible families of endomorphisms of the
-normalized towers of perfect complexes `RΓ_c(X, L_n)` and `(L_n)_x̄`
-(`prop-trf-adic-coefficient-morphism-systems` (3)); hence they lift to the realizations over
-`R`, the realization isomorphisms are equivariant for the lifts, and the traces of the lifts are
-the limits of the levelwise traces (`prop-trf-adic-coefficient-morphism-systems` (4),
-`sk-prop-trace-adic` (ii)).
+normalized towers of perfect complexes `RΓ_c(X, L_n)` and `(L_n)_x̄`; hence they lift to the
+realizations over `R`, the realization isomorphisms are equivariant for the lifts, and the traces
+of the lifts are the limits of the levelwise traces.
 
 ## Main definitions
 
@@ -45,11 +42,11 @@ the limits of the levelwise traces (`prop-trf-adic-coefficient-morphism-systems`
 
 - `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.isCompatible_globalOperatorFamily`,
   `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.isCompatible_localOperatorFamily`:
-  blueprint `prop-trf-adic-coefficient-morphism-systems` (3).
+  the global and local Frobenius operators form compatible families on the towers.
 - `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_isLift_globalOperatorFamily`,
   `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_globalOperatorFamily` and
-  their local versions: blueprint `prop-trf-adic-coefficient-morphism-systems` (2), (4) and
-  `sk-prop-trace-adic` (ii), equivariance.
+  their local versions: the operators lift to the realizations, equivariantly for the
+  realization isomorphisms, and the traces of the lifts are the limits of the levelwise traces.
 
 ## Implementation notes
 
@@ -233,13 +230,13 @@ namespace AdicSystem
 
 variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {X : Scheme.{u}} (S : AdicSystem I X)
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems`: a *compatible system of Frobenius
-coefficient morphisms* on a normalized adic system `L_•`, relative to an endomorphism `g` of `X`:
-morphisms `ψ_n : Lg^* L_n ⟶ L_n` at every level such that `ψ_{n+1}` followed by the transition
-`ν_n : L_{n+1} ⟶ Res L_n` is `Lg^* ν_n` followed by the identification
-`Lg^* Res L_n ≅ Res Lg^* L_n` (`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso`)
-and `Res ψ_n`; in terms of derived base change, `ψ_{n+1} ⊗ᴸ A_n` corresponds to `ψ_n` under
-`ν_n`. No invertibility is assumed. -/
+/-- A *compatible system of Frobenius coefficient morphisms* on a normalized adic system `L_•`,
+relative to an endomorphism `g` of `X`: morphisms `ψ_n : Lg^* L_n ⟶ L_n` at every level such that
+`ψ_{n+1}` followed by the transition `ν_n : L_{n+1} ⟶ Res L_n` is `Lg^* ν_n` followed by the
+identification `Lg^* Res L_n ≅ Res Lg^* L_n`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso`) and `Res ψ_n`; in terms of
+derived base change, `ψ_{n+1} ⊗ᴸ A_n` corresponds to `ψ_n` under `ν_n`. No invertibility is
+assumed. -/
 structure FrobeniusSystem (g : X ⟶ X) where
   /-- The Frobenius coefficient morphism `ψ_n : Lg^* L_n ⟶ L_n`. -/
   coeff (n : ℕ) : (L((g)^*[ModuleCat.{u + 1} (R ⧸ I ^ n)])).obj (S.obj n) ⟶ S.obj n
@@ -255,10 +252,9 @@ namespace FrobeniusSystem
 
 variable {S} {g : X ⟶ X} (F : S.FrobeniusSystem g)
 
-/-- Blueprint `def-trf-adic-system`, `sk-prop-trace-adic` (ii): a compatible system of Frobenius
-coefficient morphisms is a *compatible tower of Weil pairs* if every `ψ_n` is invertible: a
-strict Weil structure `Lg^* L_n ≅ L_n` at every level (`sk-def-sf-weil-complexes`), compatible
-with the transitions. -/
+/-- A compatible system of Frobenius coefficient morphisms is a *compatible tower of Weil pairs* if
+every `ψ_n` is invertible: a strict Weil structure `Lg^* L_n ≅ L_n` at every level
+(`sk-def-sf-weil-complexes`), compatible with the transitions. -/
 def IsWeil : Prop :=
   ∀ n, IsIso (F.coeff n)
 
@@ -311,13 +307,12 @@ noncomputable def localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x = x
     (S.stalkTower x β hβ).obj n ⟶ (S.stalkTower x β hβ).obj n :=
   localOperator _ hx (F.coeff (n + 1))
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), global operators: the global
-Frobenius operators `F_c(ψ_n)` of a compatible system of Frobenius coefficient morphisms form a
-compatible family of endomorphisms of the tower `RΓ_c(X, L_n)`, for coefficient identifications
-compatible with the compact-support base change
-(`AlgebraicGeometry.Etale.AdicSystem.exists_compactSupportTower`). Applied to the iterated
-systems `AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.iterate`, this gives the statement for
-every `m`. -/
+/-- Global operators: the global Frobenius operators `F_c(ψ_n)` of a compatible system of Frobenius
+coefficient morphisms form a compatible family of endomorphisms of the tower `RΓ_c(X, L_n)`, for
+coefficient identifications compatible with the compact-support base change
+(`AlgebraicGeometry.Etale.AdicSystem.exists_compactSupportTower`). Applied to the iterated systems
+`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.iterate`, this gives the statement for every
+`m`. -/
 theorem isCompatible_globalOperatorFamily (sq : IsPullback g aX aX h)
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
@@ -330,10 +325,9 @@ theorem isCompatible_globalOperatorFamily (sq : IsPullback g aX aX h)
     (S.map (n + 1)) (F.comm (n + 1))
 
 omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), local operators: at a point `x̄`
-fixed by `(g, h)`, the local Frobenius operators `F_x̄(ψ_n)` of a compatible system of Frobenius
-coefficient morphisms form a compatible family of endomorphisms of the tower `(L_n)_x̄`, for
-coefficient identifications compatible with the stalk transport
+/-- Local operators: at a point `x̄` fixed by `(g, h)`, the local Frobenius operators `F_x̄(ψ_n)` of
+a compatible system of Frobenius coefficient morphisms form a compatible family of endomorphisms of
+the tower `(L_n)_x̄`, for coefficient identifications compatible with the stalk transport
 (`AlgebraicGeometry.Etale.AdicSystem.exists_stalkTower`). -/
 theorem isCompatible_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x = x ≫ g)
     (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
@@ -345,10 +339,10 @@ theorem isCompatible_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x 
   operator_comm_of_comm_aux _ _ (β n) _ (stalkPullback _ hx) (stalkPullback _ hx) (hβ' n)
     (S.map (n + 1)) (F.comm (n + 1))
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), global operators, for every
-`m`: the global operators `F_{c,m}(ψ_n) = F_c(ψ_n^{[m]})` of the iterated systems form compatible
-families of endomorphisms of the tower `RΓ_c(X, L_n)`, for coefficient identifications
-compatible with the compact-support base change along every pair of automorphisms. -/
+/-- Global operators, for every `m`: the global operators `F_{c,m}(ψ_n) = F_c(ψ_n^{[m]})` of the
+iterated systems form compatible families of endomorphisms of the tower `RΓ_c(X, L_n)`, for
+coefficient identifications compatible with the compact-support base change along every pair of
+automorphisms. -/
 theorem isCompatible_globalOperatorFamily_iterate [IsIso g] (sq : IsPullback g aX aX h)
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
@@ -362,10 +356,10 @@ theorem isCompatible_globalOperatorFamily_iterate [IsIso g] (sq : IsPullback g a
   (F.iterate m).isCompatible_globalOperatorFamily _ α hα fun n ↦ hα' n _ _ _
 
 omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), local operators, for every `m`:
-at a point `x̄` fixed by `(g^m, h^m)` (for `X = X₀ ×_{k₀} k` and `g` the geometric Frobenius, a
-geometric point over an `𝔽_{q^m}`-point of `X₀`), the local operators `F_{x̄,m}(ψ_n)` of the
-iterated systems form compatible families of endomorphisms of the tower `(L_n)_x̄`. -/
+/-- Local operators, for every `m`: at a point `x̄` fixed by `(g^m, h^m)` (for `X = X₀ ×_{k₀} k` and
+`g` the geometric Frobenius, a geometric point over an `𝔽_{q^m}`-point of `X₀`), the local operators
+`F_{x̄,m}(ψ_n)` of the iterated systems form compatible families of endomorphisms of the tower
+`(L_n)_x̄`. -/
 theorem isCompatible_localOperatorFamily_iterate {x : Spec (.of k) ⟶ X} (m : ℕ)
     (hx : endIterate h m ≫ x = x ≫ endIterate g m)
     (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
@@ -383,8 +377,7 @@ variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} (hϖ : ϖ ∈ IsLocalRing
   (hI : I = Ideal.span {ϖ})
 
 include hϖ hI in
-/-- Blueprint `sk-prop-trace-adic` (ii), equivariance for the global operators, and
-`prop-trf-adic-coefficient-morphism-systems` (2): the global Frobenius operators of a compatible
+/-- Equivariance for the global operators: the global Frobenius operators of a compatible
 system of Frobenius coefficient morphisms lift to an endomorphism `V` of the realization
 `P_𝒪 = R lim_n RΓ_c(X, L_n)`, for which the realization isomorphisms
 `P_𝒪 ⊗ᴸ_R A_{n+1} ≅ RΓ_c(X, L_{n+1})` are equivariant. -/
@@ -403,8 +396,7 @@ theorem exists_isLift_globalOperatorFamily (sq : IsPullback g aX aX h)
 
 omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
-/-- Blueprint `sk-prop-trace-adic` (ii), equivariance for the local operators, and
-`prop-trf-adic-coefficient-morphism-systems` (2): at a point `x̄` fixed by `(g, h)`, the local
+/-- Equivariance for the local operators: at a point `x̄` fixed by `(g, h)`, the local
 Frobenius operators of a compatible system of Frobenius coefficient morphisms lift to an
 endomorphism `V` of the realization `P_{x̄, 𝒪} = R lim_n (L_n)_x̄`, for which the realization
 isomorphisms `P_{x̄, 𝒪} ⊗ᴸ_R A_{n+1} ≅ (L_{n+1})_x̄` are equivariant. -/
@@ -428,10 +420,10 @@ hold for every choice of right duals; both are available by perfectness
 attribute [local instance] DerivedCategory.braidedCategory'
 
 include hϖ hI in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4), global operators: the
-categorical trace `tr_R(V ∣ P_𝒪)` of a lift `V` of the global Frobenius operators is the element
-`(tr(F_c(ψ_{n+1}) ∣ RΓ_c(X, L_{n+1})))_n` of `lim_n R ⧸ Iⁿ⁺¹ = R`; in particular it does not
-depend on the lift (`ModuleCat.NormalizedPerfectTower.trace_eq_of_isAdicComplete`). -/
+/-- Traces of the global operators: the categorical trace `tr_R(V ∣ P_𝒪)` of a lift `V` of the
+global Frobenius operators is the element `(tr(F_c(ψ_{n+1}) ∣ RΓ_c(X, L_{n+1})))_n` of
+`lim_n R ⧸ Iⁿ⁺¹ = R`; in particular it does not depend on the lift
+(`ModuleCat.NormalizedPerfectTower.trace_eq_of_isAdicComplete`). -/
 theorem exists_trace_eq_globalOperatorFamily (sq : IsPullback g aX aX h)
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
@@ -454,10 +446,10 @@ theorem exists_trace_eq_globalOperatorFamily (sq : IsPullback g aX aX h)
 
 omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4), local operators: the categorical
-trace `tr_R(V ∣ P_{x̄, 𝒪})` of a lift `V` of the local Frobenius operators at a point `x̄` fixed
-by `(g, h)` is the element `(tr(F_x̄(ψ_{n+1}) ∣ (L_{n+1})_x̄))_n` of `lim_n R ⧸ Iⁿ⁺¹ = R`; in
-particular it does not depend on the lift. -/
+/-- Traces of the local operators: the categorical trace `tr_R(V ∣ P_{x̄, 𝒪})` of a lift `V` of the
+local Frobenius operators at a point `x̄` fixed by `(g, h)` is the element
+`(tr(F_x̄(ψ_{n+1}) ∣ (L_{n+1})_x̄))_n` of `lim_n R ⧸ Iⁿ⁺¹ = R`; in particular it does not depend on
+the lift. -/
 theorem exists_trace_eq_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x = x ≫ g)
     (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
@@ -487,11 +479,11 @@ variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} {k : Type u} [Field k] [I
   [HasCompactification aX] [∀ n, Finite (R ⧸ I ^ n)]
   [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
 
-/-- Blueprint `sk-prop-trace-adic`: **Adic realization**, items (i) and (ii). Let `R` be a
-complete local ring with an ideal `I = (ϖ)` generated by a nonzerodivisor in the maximal ideal
-(`R = 𝒪_E`), `A_n = R ⧸ Iⁿ` finite with exponent invertible on the separably closed field `k`,
-`a_X : X ⟶ Spec k` separated of finite type, and `L_•` a normalized system of complexes
-`L_n ∈ Dᵇctf(X, A_n)` (`AlgebraicGeometry.Etale.AdicSystem`).
+/-- **Adic realization**, items (i) and (ii). Let `R` be a complete local ring with an ideal
+`I = (ϖ)` generated by a nonzerodivisor in the maximal ideal (`R = 𝒪_E`), `A_n = R ⧸ Iⁿ` finite with
+exponent invertible on the separably closed field `k`, `a_X : X ⟶ Spec k` separated of finite type,
+and `L_•` a normalized system of complexes `L_n ∈ Dᵇctf(X, A_n)`
+(`AlgebraicGeometry.Etale.AdicSystem`).
 
 1. *(i) Realization.* The derived limit `K_R = R lim_n ν^* L_n` on the pro-étale site is derived
    complete, satisfies `K_R ⊗ᴸ_R A_n ≅ ν^* L_n` compatibly with the transitions, and lies in every

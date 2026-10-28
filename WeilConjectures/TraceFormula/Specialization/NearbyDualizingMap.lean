@@ -29,7 +29,8 @@ The *dualizing map* `θ_X : Ψ_X ω_X ⟶ ω_{X'}` (blueprint `det-nearby-exchan
 `θ_X = β_{a_X}(A)`) is the exceptional adjoint of the compact-support exchange `ν_{a_X}`, read
 through the specialization unit of the trait and the base change `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`.
 The compact-support exchange is built from a relative compactification of `𝒳` over `S`, and is
-independent of the choice; it is not formalised. A family of maps `θ` with the two properties
+independent of the choice (`NearbyCyclesModel.IsTraitModelOfBase.dualizingMap`, downstream).
+A family of maps `θ` with the two properties
 that characterize the dualizing maps is a `NearbyCyclesModel.NearbyDualizingData`, and its
 existence is the node lemma `NearbyCyclesModel.nonempty_nearbyDualizingData` (blueprint
 `det-nearby-exchange-maps` and the composition law `sk-lem-tf-nearby-mate-coherences` (4)):
@@ -220,32 +221,6 @@ structure NearbyDualizingData where
           (hM.preservesBoundedConstructible ℓ)).app (dualizingComplex ℓ X) ≫
         (boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).map
           (dualizingComplexUpperStarIso ℓ j).hom ≫ θ hN
-
-/-- **The dualizing maps of nearby cycles over the trait** (blueprint `det-nearby-exchange-maps`
-(4)–(5) and its independence of the compactification, with the composition law
-`θ_V = f_s^! θ_W ∘ β_f(ω_W)` of `sk-lem-tf-nearby-mate-coherences` (4); proved there from the
-pullback and proper exchanges of `det-sp-nearby-cycles-exchanges` and Nagata's compactification
-theorem). The dualizing maps `θ_M = β_a(ℚ̄_ℓ) : Ψ_M ω_X ⟶ ω_{X'}` of the trait models over the base,
-read through the specialization unit of the trait and `Lε^* ω_{X/k} ≅ ω_{𝒳_Ω/Ω}`, form a family
-`NearbyCyclesModel.NearbyDualizingData`:
-* (**proper models**) if `q : 𝒳 ⟶ S` is proper and the geometric generic fibre `𝒳_Ω` is all of
-  `X ×_k Spec Ω` (a pullback square), then `ν_a = χ_a⁻¹` (under `Ra_! ≅ Ra_*`) gives
-  `tr_{X'} ∘ Ra'_*(θ_M) ∘ χ_a(ω_X) = σ⁻¹ ∘ Ψ_S(tr_X)`;
-* (**open restriction**) if `φ : N ⟶ M` is a morphism of trait models over open immersions
-  `j : Y ⟶ X` and `j' : Y' ⟶ X'`, whose map of total spaces is an open immersion compatible with
-  the structure morphisms and whose square of geometric generic fibres is cartesian, then
-  `β_j = α_j⁻¹` and `j^! = j^*` give `ρ' ∘ j'^*(θ_M) = θ_N ∘ Ψ_N(ρ) ∘ α_j(ω_X)`.
-
-These properties determine the family (see the module docstring). The hypothesis that `𝒳_Ω` is
-all of `X ×_k Spec Ω` in the proper property is necessary: if `𝒳_Ω` is only an open of
-`X ×_k Spec Ω` (as `NearbyCyclesModel.IsTraitModelOfBase` allows), `Ψ_M` only sees the part of `X`
-met by `𝒳_Ω`, while `tr_X` sees all of `X` (for `X = Spec k ⊔ Spec k` and the trait itself as
-total space over the first copy, the left side vanishes on the second summand of
-`Ra_* ω_X = ℚ̄_ℓ ⊕ ℚ̄_ℓ` and the right side does not). With it, `χ_a` is the proper base change
-isomorphism `RΓ(X_Ω, -) ≅ RΓ(X', Ψ -)`, and the property is the compatibility of `β_a` with
-traces. -/
-theorem nonempty_nearbyDualizingData : Nonempty (NearbyDualizingData k k' ℓ) :=
-  sorry
 
 end NearbyCyclesModel
 

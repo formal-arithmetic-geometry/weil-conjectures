@@ -59,7 +59,7 @@ theorem IsLisse.tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn : 1 ≤ n) :
 
 /-- The power sums of the complex local eigenvalues of the tensor power `ρ^{⊗ k}`, `k ≥ 1`, are
 the `k`-th powers of those of `ρ`: the local eigenvalues of `ρ^{⊗ k}` are the `k`-fold products
-of local eigenvalues of `ρ` (`sk-p-linear-spectra`). -/
+of local eigenvalues of `ρ` (`p-linear-spectra`). -/
 theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) {k : ℕ}
     (hk : 1 ≤ k) :
     (((W.localEigenvalues l (ρ.tensorPower k) x).map ι).map (· ^ n)).sum =

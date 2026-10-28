@@ -138,9 +138,15 @@ noncomputable def smoothPurityMap :
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
 
+-- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
+-- instance-implicit section variables, even under `include`. The elaborated signature has it
+-- once; the linter also counts the section variable in scope.
+set_option linter.overlappingInstances false in
 /-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
-adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism. -/
-instance isIso_smoothPurityMap : IsIso (smoothPurityMap ℓ f d) :=
+adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism, for `f` smooth of
+relative dimension `d`. -/
+instance isIso_smoothPurityMap [SmoothOfRelativeDimension d f.left] :
+    IsIso (smoothPurityMap ℓ f d) :=
   sorry
 
 /-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type

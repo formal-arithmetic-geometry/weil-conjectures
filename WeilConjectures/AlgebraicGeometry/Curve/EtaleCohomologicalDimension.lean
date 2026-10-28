@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 /-!
 # Etale cohomological dimension of a smooth connected curve
 
-Source: blueprint sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md;
+Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md;
 Stacks Project, Tag 03SC (1) (blueprint: lem-sc-cohomological-dimension).
 -/
 
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 /-- For a smooth separated connected curve over an algebraically closed field, every torsion
 abelian etale sheaf has zero cohomology above degree two. Cohomology is the homology of derived
 global sections, applied to the sheaf in degree zero.
-Source: blueprint sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md,
+Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md,
 and Stacks Project, Tag 03SC (1) (blueprint: lem-sc-cohomological-dimension).
 
 Proof (the nine steps of the node):

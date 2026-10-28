@@ -214,7 +214,7 @@ theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact �
     rfl
   exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
 
-/-- Blueprint `sk-prop-av-divisible-structure`: The torsion of a divisible group.
+/-- Blueprint `lem-sc-divisible-group-structure`: The torsion of a divisible group.
 
 This is also the blueprint lemma `lem-sc-divisible-group-structure`.
 
@@ -319,7 +319,7 @@ theorem nonempty_addEquiv_torsionBy_mul_prod (D : Type*) [AddCommGroup D] {a b :
         rw [smul_add, smul_smul, smul_smul, mul_comm (a : ℤ) v, mul_smul v, hy, smul_zero,
           zero_add, mul_comm, ← hz']
 
-/-- The Chinese remainder step of blueprint `sk-prop-av-ntorsion-etale`.
+/-- The Chinese remainder step of blueprint `lem-sc-ntorsion-etale`.
 
 Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0` the
 `ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to

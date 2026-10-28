@@ -238,7 +238,7 @@ opens. Let `g : Spec K ⟶ S` be a field point, through a point `s = g x`. If th
 `h^q` takes the same value at all generisations of `s` as at `s`, then the base change map
 `Γ(Spec K, ⊤) ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` is bijective.
 
-(blueprint: `thm-pc-semicontinuity-base-change`, part (3), `sk-thm-picard-semicon`) -/
+(blueprint: `thm-pc-semicontinuity-base-change`, part (3), `det-thm-picard-semicon`) -/
 theorem bijective_cechBaseChangeMap_of_forall_specializes [IsReduced S]
     [IsNoetherianRing Γ(S, ⊤)]
     [LocallyOfFinitePresentation f] [Nonempty ι] (hℱ : ℱ.IsFlatOver f) (K : Type u) [Field K]

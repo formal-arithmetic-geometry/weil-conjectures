@@ -16,10 +16,9 @@ completed extension by zero of the completed pullback:
 
 `Lg''^*_comp (j_! K) ≅ (j'_! (Lg'^*_comp K))^`
 
-naturally in `K ∈ D(U_proét, R)` (blueprint `lem-cbc-completed-extension-zero-comparison`, in
-its corrected form). The blueprint states the uncompleted target `j'_! Lg'^*_comp K`; that form
-is false on pro-étale sites, since `j'_!` does not preserve derived completeness (see the
-docstring of
+naturally in `K ∈ D(U_proét, R)`. The blueprint states the uncompleted target
+`j'_! Lg'^*_comp K`; that form is false on pro-étale sites, since `j'_!` does not preserve
+derived completeness (see the docstring of
 `AlgebraicGeometry.ProEtale.completedRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 -/
 
@@ -40,8 +39,7 @@ variable {R : Type (u + 1)} [CommRing R] (I : Ideal R)
   {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
   [IsOpenImmersion j] [IsOpenImmersion j']
 
-/-- Blueprint `lem-cbc-completed-extension-zero-comparison` (corrected): Completed
-extension-by-zero base change.
+/-- Completed extension-by-zero base change (corrected form).
 
 For a cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, the completed
 pullback of `j_! K` is the derived completion of `j'_!` of the completed pullback of `K`:

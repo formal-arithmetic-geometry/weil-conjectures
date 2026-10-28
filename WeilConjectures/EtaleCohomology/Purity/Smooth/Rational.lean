@@ -16,8 +16,7 @@ object of the integral stage `D_comp(X, 𝒪_E)` (`DerivedCategoryDerivedComplet
 viewed in its rationalization `D_comp(X, E)` (`DerivedCategoryDerivedCompleteRational`) through
 the localization functor `fromIntegral`, the exact functor `- ⊗ᴸ_{𝒪_E} E`. The `E`-purity
 isomorphism is the image of the adic purity isomorphism of
-`AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel` under this functor
-(blueprint `thm-pur-rational-and-qbar-purity`, Step 1).
+`AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel` under this functor.
 
 ## Main statements
 
@@ -54,8 +53,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
     PadicAlgCl.maximalIdealShrink l E ^ (n + 1))]
   {X Y : Scheme.{u}} (d : ℤ) (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `thm-pur-rational-and-qbar-purity`: Rational and `ℚ̄_ℓ` purity (`E`-stage
-packaging only)
+/-- Rational and `ℚ̄_ℓ` purity (`E`-stage packaging only)
 
 Let `K = (K_n)_n` be a normalized system over `𝒪_E` on `Y`, `S`, `T` normalized systems on `X`
 with levels identified with `Lf^* K_n(d)[2d]` and `Rf^! K_n`, and `γ_n` isomorphisms between

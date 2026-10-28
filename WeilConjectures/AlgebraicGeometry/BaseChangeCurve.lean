@@ -19,8 +19,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Base change of a curve
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md
-(blueprint: lem-sc-base-change-curve).
+Source: blueprint
+sec-curve-estimates/sbc-thm-algebraically-closed-invariance/lem-sc-base-change-curve.md (blueprint:
+lem-sc-base-change-curve).
 -/
 
 @[expose] public section
