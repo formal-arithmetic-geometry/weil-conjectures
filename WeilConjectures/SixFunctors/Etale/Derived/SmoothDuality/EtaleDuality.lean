@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapLinear
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapRightAdjointUniq
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualityBaseChange
 
