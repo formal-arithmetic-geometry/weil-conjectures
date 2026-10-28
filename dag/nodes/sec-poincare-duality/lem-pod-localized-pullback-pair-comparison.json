@@ -1,0 +1,126 @@
+{
+ "id": "lem-pod-localized-pullback-pair-comparison",
+ "kind": "statement",
+ "title": "Localized comparison between pullback and a restricted pair operation",
+ "statement": "Let R be a commutative ring, C,D preadditive R-linear categories, and t in R. Let q,p be object properties of C^op times C and D^op times D, and q-prime,p-prime object properties of the corresponding scalar-localized pair categories. Suppose a permitted localized pair has a permitted underlying integral pair, and every permitted integral D-pair gives a permitted localized D-pair. Let F0:C to D and F:Loc(C) to Loc(D) be functors, with F additive, F objects the localized F0 objects, and F(x tensor a) heterogeneously x tensor F0(a). Let H0,I0 be integral operations on the full permitted pair subcategories, and H,I their localized operations. Suppose H,I have the unchanged integral object formulas and separately linear arrow actions, whose values on pure tensor pairs (x tensor a,y tensor b) are (xy) tensor H0(a^op,b) and (xy) tensor I0(a^op,b). Suppose F0 and F take permitted pairs to permitted pairs, defining pair0 and pair. Then any natural isomorphism alpha:H0 followed by F0 to pair0 followed by I0 extends uniquely to a natural isomorphism H followed by F to pair followed by I, with both hom and inverse components heterogeneously the localized components of alpha on the integral pair. No liftability or faithful-localization hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, proof Steps 10--11: raw localization of the reindexing/internal-Hom comparison."
+ },
+ "stmt_deps": [
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Compose the recorded object formulas for H and F. For the target, equality of the underlying integral pair after F with the F0 pair, by the F object formula and full-subcategory extensionality, gives the required I0 object formula.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the separately linear H action with the additive F map. On pure tensors use the H pure-tensor formula, transport its endpoints by the H object equations, then use the F pure-tensor formula. This gives the source composite action with scalar factor xy.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the separately linear I action with the additive F maps in both variables. For pure tensors, use the F formula twice. Identify each pulled-back localized pair with the canonical localized integral pullback pair; transport the operation map across these equalities. Apply the I pure-tensor formula there. This gives the target composite action with the same factor xy, including zero coefficients and zero arrows.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply restrictedPairIso_existsUnique to the two composite functors and their separately additive actions. It proves naturality on all finite sums of tensor arrows by double tensor induction, and prescribes both component directions. Its uniqueness conclusion is precisely the required uniqueness.",
+   "uses": [
+    "lem-pod-restricted-pair-localization-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "lem-pod-restricted-pair-localization-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, proof Steps 10--11. K8, 2026-10-28: fully proved composite action formulas, factored separately to reduce coefficient-category elaboration and artifact generation in the item. No unfinished obligation is added."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between functors of two variables descends to scalar localized morphism groups by double tensor induction",
+   "results": "8 hits. No exact restricted contravariant pair-domain comparison was found; use double tensor induction.",
+   "date": "2026-10-28",
+   "verdict": "No exact restricted contravariant pair-domain comparison was found; use double tensor induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.ext",
+   "results": "1 hits. Iso.ext supplies uniqueness from equality of hom components; naturality still requires the tensor argument.",
+   "date": "2026-10-28",
+   "verdict": "Iso.ext supplies uniqueness from equality of hom components; naturality still requires the tensor argument."
+  },
+  {
+   "tool": "grep",
+   "query": "iso.*[Ee]xt|[Ee]xt.*iso",
+   "results": "25 hits. The general isomorphism extensionality API applies, but does not construct this restricted pair-domain comparison.",
+   "date": "2026-10-28",
+   "verdict": "The general isomorphism extensionality API applies, but does not construct this restricted pair-domain comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingHomCoefficientDescent",
+  "date": "2026-10-28",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-hom-coefficient-descent",
+   "place": "Step 5, proof Steps 10--11: raw localization of the reindexing/internal-Hom comparison.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationPullbackPairIso",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationPullbackPairIso.lean",
+  "declaration": "CategoryTheory.ScalarLocalization.pullbackPairIso_existsUnique",
+  "statement": "theorem pullbackPairIso_existsUnique\n    {R : Type*} [CommRing R] {C D : Type*}\n    [Category* C] [Preadditive C] [Linear R C]\n    [Category* D] [Preadditive D] [Linear R D] (t : R)\n    (q : ObjectProperty (Cᵒᵖ × C))\n    (q' : ObjectProperty ((ScalarLocalization R C t)ᵒᵖ × ScalarLocalization R C t))\n    (p : ObjectProperty (Dᵒᵖ × D))\n    (p' : ObjectProperty ((ScalarLocalization R D t)ᵒᵖ × ScalarLocalization R D t))\n    (hq : ∀ A, q' A → q (op A.1.unop.obj, A.2.obj))\n    (hp : ∀ A, p' A → p (op A.1.unop.obj, A.2.obj))\n    (hpLift : ∀ A : p.FullSubcategory,\n      p' (op (ScalarLocalization.mk A.obj.1.unop), ScalarLocalization.mk A.obj.2))\n    (F₀ : C ⥤ D) (F : ScalarLocalization R C t ⥤ ScalarLocalization R D t)\n    [F.Additive]\n    (hF : ∀ K, F.obj K = ⟨F₀.obj K.obj⟩)\n    (mF : ∀ (K N : C) (f : K ⟶ N) (a : Localization.Away t),\n      HEq (F.map (a ⊗ₜ[R] f : ScalarLocalization.mk K ⟶ ScalarLocalization.mk N))\n        (a ⊗ₜ[R] F₀.map f))\n    (H₀ : q.FullSubcategory ⥤ C) (I₀ : p.FullSubcategory ⥤ D)\n    (H : q'.FullSubcategory ⥤ ScalarLocalization R C t)\n    (I : p'.FullSubcategory ⥤ ScalarLocalization R D t)\n    (hH : ∀ A, H.obj A = ⟨H₀.obj\n      ⟨(op A.obj.1.unop.obj, A.obj.2.obj), hq _ A.property⟩⟩)\n    (hI : ∀ A, I.obj A = ⟨I₀.obj\n      ⟨(op A.obj.1.unop.obj, A.obj.2.obj), hp _ A.property⟩⟩)\n    (mH : ∀ P Q : q'.FullSubcategory,\n      ∃ β : (Q.obj.1.unop ⟶ P.obj.1.unop) →ₗ[Localization.Away t]\n          (P.obj.2 ⟶ Q.obj.2) →ₗ[Localization.Away t] (H.obj P ⟶ H.obj Q),\n        (∀ a b, H.map (ObjectProperty.homMk (Prod.mkHom a.op b)) = β a b) ∧\n        ∀ a b (x y : Localization.Away t),\n          HEq (β (x ⊗ₜ[R] a) (y ⊗ₜ[R] b))\n            ((x * y) ⊗ₜ[R] H₀.map (ObjectProperty.homMk\n              (X := ⟨(op P.obj.1.unop.obj, P.obj.2.obj), hq _ P.property⟩)\n              (Y := ⟨(op Q.obj.1.unop.obj, Q.obj.2.obj), hq _ Q.property⟩)\n              (Prod.mkHom a.op b))))\n    (mI : ∀ P Q : p'.FullSubcategory,\n      ∃ β : (Q.obj.1.unop ⟶ P.obj.1.unop) →ₗ[Localization.Away t]\n          (P.obj.2 ⟶ Q.obj.2) →ₗ[Localization.Away t] (I.obj P ⟶ I.obj Q),\n        (∀ a b, I.map (ObjectProperty.homMk (Prod.mkHom a.op b)) = β a b) ∧\n        ∀ a b (x y : Localization.Away t),\n          HEq (β (x ⊗ₜ[R] a) (y ⊗ₜ[R] b))\n            ((x * y) ⊗ₜ[R] I₀.map (ObjectProperty.homMk\n              (X := ⟨(op P.obj.1.unop.obj, P.obj.2.obj), hp _ P.property⟩)\n              (Y := ⟨(op Q.obj.1.unop.obj, Q.obj.2.obj), hp _ Q.property⟩)\n              (Prod.mkHom a.op b))))\n    (permitted₀ : ∀ A : q.FullSubcategory,\n      p (op (F₀.obj A.obj.1.unop), F₀.obj A.obj.2))\n    (permitted : ∀ A : q'.FullSubcategory,\n      p' (op (F.obj A.obj.1.unop), F.obj A.obj.2)) :\n    let pair₀ := p.lift (q.ι ⋙ F₀.op.prod F₀) permitted₀\n    let pair := p'.lift (q'.ι ⋙ F.op.prod F) permitted\n    ∀ α : H₀ ⋙ F₀ ≅ pair₀ ⋙ I₀,\n    ∃! β : H ⋙ F ≅ pair ⋙ I, ∀ A,\n      HEq (β.hom.app A) ((ScalarLocalization.localization R D t).map\n        (α.hom.app ⟨(op A.obj.1.unop.obj, A.obj.2.obj), hq _ A.property⟩)) ∧\n      HEq (β.inv.app A) ((ScalarLocalization.localization R D t).map\n        (α.inv.app ⟨(op A.obj.1.unop.obj, A.obj.2.obj), hq _ A.property⟩))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261028T034831-L-3557299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261028T034831-L-3557299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

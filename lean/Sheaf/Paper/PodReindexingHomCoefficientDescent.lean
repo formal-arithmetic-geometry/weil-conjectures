@@ -15,9 +15,9 @@ public import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeCoordinates
 public import Sheaf.Paper.PodCommonStageObjectNormalizations
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
-import Sheaf.Paper.PodFiniteScalarTensorNormalization
-import Sheaf.Algebra.Homology.ExactScalarDerivedPair
 import Sheaf.Paper.PodCommonStageCompositorNaturality
+import Sheaf.Paper.PodFiniteScalarCoordinatesRealization
+import Sheaf.CategoryTheory.ScalarLocalizationPullbackPairIso
 
 /-! # Scalar and localized descent of the reindexed internal Hom
 
@@ -293,62 +293,7 @@ theorem ambient_coordinates (W : Scheme.{u})
                   (scalarHomOrdinary l E L ι W M N) ≫ β.hom =
               (integralDerivedInternalHom l E W).map
                 (Prod.mkHom (𝟙 (op M)) (biproduct.ι _ i ≫ aN.hom)) := by
-  classical
-  let J : GrothendieckTopology W.ProEt := AlgebraicGeometry.Scheme.ProEt.topology W
-  let R : Sheaf J CommRingCat.{u + 1} := completedIntegralCommRingSheafUnrestricted l E W
-  let S : Sheaf J CommRingCat.{u + 1} := completedIntegralCommRingSheafUnrestricted l L W
-  let φ : R ⟶ S := integralCompletedScalarMap l E L ι W
-  let F := integralOrdinaryScalar l E L ι W
-  have hobj : ∀ A, F.obj A = SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ A :=
-    (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose
-  have hmap : ∀ {A B} (f : A ⟶ B), F.map f = eqToHom (hobj A) ≫
-      SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} φ A f ≫ eqToHom (hobj B).symm := by
-    intro A B f
-    exact (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose_spec.choose f
-  have hs (A : integralTowerModules l E W) (U : W.ProEtᵒᵖ)
-      (x : A.val.obj U) :
-      ringedFiniteFreeScalarSection.{u + 1, u, u} J φ F hobj A U 1 x =
-        integralOrdinaryTensorSection l E L ι W A U 1 x := by
-    unfold ringedFiniteFreeScalarSection integralOrdinaryTensorSection
-    have hη :=
-      PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app.{u + 1, u,
-        u + 1, u + 1} (J := J)
-        (𝟙 (SheafOfModules.derivedChangeRingIndependentCoefficients J S).obj)
-        (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ A)
-    with_unfolding_all exact (congrArg ((eqToHom (hobj A).symm).val.app U)
-      (ConcreteCategory.congr_hom (congr_app hη U) _))
-  obtain ⟨adj, δ, hu, hn, hcoords⟩ :=
-    ringedFiniteFreeHomBaseChange_coordinates.{u + 1, u, u, u + 2}
-      J φ d e F hobj hmap F.mapDerivedCategory F.mapDerivedCategoryFactors.hom
-      (Functor.isLeftDerivedFunctor_of_inverts _ _ F.mapDerivedCategoryFactors)
-      (scalarIntegralClosed l E W) (scalarIntegralClosed l L W)
-      (scalarIntegralModels l E W) (scalarIntegralModels l L W)
-      (scalarOrdinaryTensorChain l E L ι W) (scalarClosedTensor l E L ι W) (by
-        intro P Q p q U x y
-        simpa only [hs, scalarOrdinaryTensorChain] using
-          (scalarOrdinaryTensorChain_existsUnique l E L ι W).exists.choose_spec
-            P Q p q U x y) (by
-        intro P Q hP hQ
-        obtain ⟨hEP, hEQ, heq⟩ := scalarClosedTensor_allKFlat l E L ι W P Q hP hQ
-        exact ⟨hEP, hEQ, (F.mapDerivedCategoryFactors.app P).isIso_hom,
-          (F.mapDerivedCategoryFactors.app Q).isIso_hom, heq⟩)
-  obtain ⟨pair, hpair, hderived, hadj⟩ :=
-    SheafOfModules.exactScalarDerivedPair J φ F hobj hmap adj (by
-      intro M V x
-      rw [hu M V x]
-      unfold ringedFiniteFreeScalarSection
-      change ((eqToHom (hobj M).symm ≫ eqToHom (hobj M)).val.app V) _ = _
-      rw [eqToHom_trans]
-      rfl) δ hn
-  refine ⟨pair, hpair, hderived, δ, hadj, ?_⟩
-  intro M N
-  obtain ⟨a, aN, β, ha, haN, hβ, hι⟩ := hcoords M N
-  refine ⟨a, aN, β, ha, haN, ?_, ?_⟩
-  · convert hβ using 1 <;> rfl
-  · intro i
-    have hi := hι i
-    unfold scalarHomOrdinary coefficientBaseChangeHom
-    convert hi using 1 <;> rfl
+  exact finiteScalarCoordinatesRealization l E L ι W d e
 
 
 /-- Identity and tower laws for these actual ambient evaluation transposes.
@@ -759,6 +704,14 @@ def IsRationalNormalized
     HEq (β.inv.app P) ((sfRationalConstructibleLocalization l E X).map
       (α.inv.app (integralPairOfRationalHomPair l E Y P)))
 
+section RationalComparisonProof
+
+attribute [local irreducible] rationalDerivedPullback rationalDerivedInternalHom
+  constructibleIntegralHom constructibleIntegralPullback
+
+private theorem localized_chosen_spec {T : Sort*} {P : T → Prop} (h : ∃! t, P t)
+    (t : T) (ht : t = h.exists.choose) : P t := ht.symm ▸ h.exists.choose_spec
+
 /-- Raw localization gives a unique comparison natural for arbitrary localized arrows.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
 Proof (node Steps 10--12): tensor the integral component and its inverse with one.
@@ -774,7 +727,38 @@ theorem rational_comparison_existsUnique
     ∃! β : rationalDerivedInternalHom l E Y ⋙ rationalDerivedPullback l E g ≅
       rationalPair l E g ⋙ rationalDerivedInternalHom l E X,
       IsRationalNormalized l E g α β := by
-  sorry
+  let R := Padic.coefficientExtensionIntegers l E
+  let t := Padic.coefficientExtensionUniformizer l E
+  let F := rationalDerivedPullback l E g
+  let F₀ := constructibleIntegralPullback l E g
+  let HY := rationalDerivedInternalHom l E Y
+  let HX := rationalDerivedInternalHom l E X
+  let IY := constructibleIntegralHom l E Y
+  let IX := constructibleIntegralHom l E X
+  have hF : ∀ K, F.obj K = ⟨F₀.obj K.obj⟩ := by
+    unfold F rationalDerivedPullback
+    exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.1
+  have mF (K N : sfIntegralConstructibleCategory l E Y) (f : K ⟶ N)
+      (a : Localization.Away t) :
+      HEq (F.map (a ⊗ₜ[R] f : ScalarLocalization.mk K ⟶ ScalarLocalization.mk N))
+        (a ⊗ₜ[R] F₀.map f) := by
+    unfold F rationalDerivedPullback
+    exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.2 K N f a
+  have : F.Additive := by
+    unfold F rationalDerivedPullback
+    exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.1
+  have specY := localized_chosen_spec (rationalDerivedInternalHom_existsUnique l E Y)
+    HY (by unfold HY rationalDerivedInternalHom; rfl)
+  have specX := localized_chosen_spec (rationalDerivedInternalHom_existsUnique l E X)
+    HX (by unfold HX rationalDerivedInternalHom; rfl)
+  exact ScalarLocalization.pullbackPairIso_existsUnique t
+    (constructibleIntegralHomPairs l E Y) (constructibleRationalHomPairs l E Y)
+    (constructibleIntegralHomPairs l E X) (constructibleRationalHomPairs l E X)
+    (fun _ h ↦ h) (fun _ h ↦ h) (fun A ↦ A.property)
+    F₀ F hF mF IY IX HY HX specY.1 specX.1 specY.2 specX.2
+    (integral_pair_permitted l E g) (rational_pair_permitted l E g) α
+end RationalComparisonProof
+
 /-- The normalized integral comparison is independent of its resolution presentation.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
 Proof (node Steps 8--9): the projection-normalized pullback is fixed on both Roos

@@ -1,0 +1,124 @@
+{
+ "id": "lem-pod-finite-scalar-coordinates-realization",
+ "kind": "statement",
+ "title": "Realizing the normalized finite-scalar coordinate data on the prescribed functors",
+ "statement": "Fix a prime l, finite coefficient fields E and L over Q_l, an algebra map iota:E to L, a scheme W, a natural number d, and a chosen isomorphism from the restriction of the completed integral L coefficient unit to the free completed integral E module on d generators. The actual recorded ordinary and derived scalar extension functors admit a ScalarDerivedPair with those exact functors and a derived restriction adjunction heterogeneously equal to that pair adjunction. For every pair M,N of unbounded derived integral E modules there are the prescribed biproduct coordinate isomorphisms aH and aN and a restricted scalar-Hom isomorphism beta. The two basis maps satisfy RingedFiniteFreeBasisCoordinates, beta is normalized by the transpose of restricted L-evaluation after the scalar tensor map and adjunction unit and counit, and each basis inclusion followed by aH, restricted scalarHomOrdinary and beta equals the internal-Hom map of the corresponding basis inclusion followed by aN. Rank zero and arbitrary unbounded inputs are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, proof Step 2: the normalized finite-free coordinates and exact scalar-derived pair."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "def-pod-finite-free-basis-coordinates",
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the recorded ordinary scalar witness for its object and map equations. Apply the sheafification-adjunction unit equation to identify ringedFiniteFreeScalarSection at coefficient one with integralOrdinaryTensorSection at coefficient one.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize ringedFiniteFreeHomBaseChange_coordinates to the actual completed coefficient sheaves, actual ordinary scalar functor and its canonical exact derived functor. Its chain normalization is the prescribed scalarOrdinaryTensorChain formula after the preceding section identification. The all-K-flat tensor normalization supplies its representative tensor square and invertibility of the canonical counits. Obtain both adjunctions, their unit and chain-transpose normalizations, and the basis and evaluation coordinates.",
+   "uses": [
+    "lem-sf-ringed-finite-free-hom-coordinates",
+    "lem-pod-finite-scalar-tensor-all-kflat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactScalarDerivedPair to the supplied adjunctions. Its unit equation is the just obtained ordinary unit equation followed by the inverse object transport; the two equality transports cancel. Its derived normalization is the supplied chain-transpose equation. Retain its exact extension and derived functor equalities. The generic coefficientBaseChangeHom and scalarHomOrdinary are the same prescribed evaluation transpose by their definitions, so the supplied basis equations and evaluation formula finish the conclusion.",
+   "uses": [
+    "lem-pod-exact-scalar-derived-pair"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-ringed-finite-free-hom-coordinates",
+  "lem-pod-finite-scalar-tensor-all-kflat",
+  "lem-pod-exact-scalar-derived-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, proof Step 2: the normalized finite-free coordinates and exact scalar-derived pair. K8, 2026-10-28: a fully proved auxiliary argument, compiled separately after profiling the combined file and controlling expensive local instance unfolding. It adds no unfinished statement."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension coordinates for derived internal Hom via a normalized scalar adjunction and biproduct basis maps",
+   "results": "8 hits. The results concern ordinary module internal Hom and scalar adjunctions, not the recorded derived sheaf coordinate normalization; specialize the existing project coordinate interface.",
+   "date": "2026-10-28",
+   "verdict": "The results concern ordinary module internal Hom and scalar adjunctions, not the recorded derived sheaf coordinate normalization; specialize the existing project coordinate interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biproduct.ι",
+   "results": "12 hits. The biproduct inclusion API supplies the coordinate arrows but not this normalized derived scalar model.",
+   "date": "2026-10-28",
+   "verdict": "The biproduct inclusion API supplies the coordinate arrows but not this normalized derived scalar model."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedFiniteFreeBasisCoordinates|ringedFiniteFreeHomBaseChange_coordinates",
+   "results": "0 hits. No Mathlib declaration provides these project-specific normalized coordinates.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib declaration provides these project-specific normalized coordinates."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingHomCoefficientDescent",
+  "date": "2026-10-28",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-hom-coefficient-descent",
+   "place": "Step 5, proof Step 2: the normalized finite-free coordinates and exact scalar-derived pair.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodFiniteScalarCoordinatesRealization",
+  "file": "lean/Sheaf/Paper/PodFiniteScalarCoordinatesRealization.lean",
+  "declaration": "WeilConjectures.PodCoefficientDescent.finiteScalarCoordinatesRealization",
+  "statement": "theorem finiteScalarCoordinatesRealization (W : Scheme.{u})\n    (d : ℕ)\n    (e : (SheafOfModules.scalarRestriction (integralCompletedScalarMap l E L ι W)).obj\n      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l L W)) ≅\n      SheafOfModules.free (R := completedIntegralCoefficientSheafUnrestricted l E W)\n        (ULift.{u + 1} (Fin d))) :\n    ∃ D : SheafOfModules.ScalarDerivedPair.{u + 1,u,u + 1,u + 2}\n      (integralCompletedScalarMap l E L ι W),\n      D.extension = integralOrdinaryScalar l E L ι W ∧\n      D.derived = integralOrdinaryDerivedScalar l E L ι W ∧\n      ∃ δ : integralOrdinaryDerivedScalar l E L ι W ⊣\n        SheafOfModules.scalarDerivedRestriction (integralCompletedScalarMap l E L ι W),\n        HEq δ D.adjunction ∧\n        ∀ M N : DerivedCategory (integralTowerModules l E W),\n        ∃ (aH : (⨁ fun _ : Fin d ↦\n            (integralDerivedInternalHom l E W).obj (op M, N)) ≅\n          (SheafOfModules.scalarDerivedRestriction (integralCompletedScalarMap l E L ι W)).obj\n            ((integralOrdinaryDerivedScalar l E L ι W).obj\n              ((integralDerivedInternalHom l E W).obj (op M, N))))\n          (aN : (⨁ fun _ : Fin d ↦ N) ≅\n            (SheafOfModules.scalarDerivedRestriction (integralCompletedScalarMap l E L ι W)).obj\n              ((integralOrdinaryDerivedScalar l E L ι W).obj N))\n          (β : (SheafOfModules.scalarDerivedRestriction\n              (integralCompletedScalarMap l E L ι W)).obj\n            ((integralDerivedInternalHom l L W).obj\n              (op ((integralOrdinaryDerivedScalar l E L ι W).obj M),\n                (integralOrdinaryDerivedScalar l E L ι W).obj N)) ≅\n            (integralDerivedInternalHom l E W).obj\n              (op M, (SheafOfModules.scalarDerivedRestriction\n                (integralCompletedScalarMap l E L ι W)).obj\n                  ((integralOrdinaryDerivedScalar l E L ι W).obj N))),\n          RingedFiniteFreeBasisCoordinates.{u + 1,u,u,u + 2} (ProEt.topology W)\n            (integralCompletedScalarMap l E L ι W) d e (integralOrdinaryScalar l E L ι W)\n            (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose\n            (integralOrdinaryDerivedScalar l E L ι W)\n            (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom\n            ((integralDerivedInternalHom l E W).obj (op M, N)) aH ∧\n          RingedFiniteFreeBasisCoordinates.{u + 1,u,u,u + 2} (ProEt.topology W)\n            (integralCompletedScalarMap l E L ι W) d e (integralOrdinaryScalar l E L ι W)\n            (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose\n            (integralOrdinaryDerivedScalar l E L ι W)\n            (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom N aN ∧\n          ((scalarIntegralClosed l E W).transpose _ M\n            ((SheafOfModules.scalarDerivedRestriction\n              (integralCompletedScalarMap l E L ι W)).obj\n                ((integralOrdinaryDerivedScalar l E L ι W).obj N))).symm β.hom =\n            (scalarIntegralClosed l E W).tensor.map (Prod.mkHom (𝟙 _) (δ.unit.app M)) ≫\n            δ.unit.app _ ≫\n            (SheafOfModules.scalarDerivedRestriction (integralCompletedScalarMap l E L ι W)).map\n              ((scalarClosedTensor l E L ι W).hom.app _ ≫\n                (scalarIntegralClosed l L W).tensor.map\n                  (Prod.mkHom (δ.counit.app _) (δ.counit.app _))) ≫\n            (SheafOfModules.scalarDerivedRestriction (integralCompletedScalarMap l E L ι W)).map\n              ((scalarIntegralClosed l L W).evaluation\n                ((integralOrdinaryDerivedScalar l E L ι W).obj M)\n                ((integralOrdinaryDerivedScalar l E L ι W).obj N)) ∧\n          ∀ i : Fin d,\n            biproduct.ι _ i ≫ aH.hom ≫\n              (SheafOfModules.scalarDerivedRestriction\n                (integralCompletedScalarMap l E L ι W)).map\n                  (scalarHomOrdinary l E L ι W M N) ≫ β.hom =\n              (integralDerivedInternalHom l E W).map\n                (Prod.mkHom (𝟙 (op M)) (biproduct.ι _ i ≫ aN.hom))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261028T034831-L-3557299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261028T034831-L-3557299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
