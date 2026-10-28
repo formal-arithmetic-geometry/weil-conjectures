@@ -2473,6 +2473,7 @@ public import WeilConjectures.AlgebraicGeometry.CyclicHigherDirectImageLocalVani
 public import WeilConjectures.AlgebraicGeometry.CyclicModuleConstantReflection
 public import WeilConjectures.AlgebraicGeometry.DQCoheratorAdjunction
 public import WeilConjectures.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
+public import WeilConjectures.AlgebraicGeometry.DVRStalkLocalEquation
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
@@ -13153,6 +13154,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothFinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothResidue
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
@@ -13278,6 +13280,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedCompCoher
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedRegularEnd
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ChangeOfRings
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPullback
@@ -13895,6 +13898,7 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantCase
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantFamily
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGeneric
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
@@ -13944,6 +13948,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegralInput
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
