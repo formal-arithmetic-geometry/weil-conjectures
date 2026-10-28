@@ -6,6 +6,8 @@ Authors: SHEAF group P7
 module
 
 public import Sheaf.WeilSheaf.NativeExceptionalForgetfulData
+import Sheaf.WeilSheaf.NativeOrdinaryConeRetraction
+import Sheaf.WeilSheaf.NativeOrdinaryConeSection
 
 /-! # Detecting invertibility by native cone maps
 
@@ -51,6 +53,10 @@ theorem native_ordinary_cone_detection (R : Family l D) (T : Space D)
     (hq : ∀ (K : W D l T) (v : K ⟶ H),
       WeilComplex.forget.map (v ≫ q) = 0 → V.functor.map v = 0) :
     IsIso (WeilComplex.forget.map q) := by
-  sorry
+  obtain ⟨sm⟩ := native_ordinary_cone_retraction D l R T V H M q e hq
+  obtain ⟨se⟩ := native_ordinary_cone_section D l R T V H M q e hq
+  let _ : IsSplitMono (WeilComplex.forget.map q) := IsSplitMono.mk' sm
+  let _ : IsSplitEpi (WeilComplex.forget.map q) := IsSplitEpi.mk' se
+  exact isIso_of_mono_of_isSplitEpi _
 
 end WeilConjectures.NativeExceptionalForgetful

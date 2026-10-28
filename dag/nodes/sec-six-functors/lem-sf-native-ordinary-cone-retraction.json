@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-native-ordinary-cone-retraction",
+ "kind": "statement",
+ "title": "Retraction half of ordinary cone detection",
+ "statement": "Under the native cone-detection hypotheses, the ordinary underlying map has a retraction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence: rotated cone splitting"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data"
+ ],
+ "proof": [
+  {
+   "text": "Complete and rotate the native cone; detection makes the first ordinary arrow zero, so the underlying distinguished triangle splits and yields a retraction.",
+   "uses": [
+    "def-sf-native-exceptional-forgetful-data",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "lem-sf-adic-qbar-constructible-realization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Rotated cone splitting"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-ordinary-cone-detection",
+   "place": "Strict weaker intermediate",
+   "via": [
+    "lem-sf-native-ordinary-cone-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeOrdinaryConeRetraction",
+  "file": "lean/Sheaf/WeilSheaf/NativeOrdinaryConeRetraction.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_ordinary_cone_retraction",
+  "statement": "theorem native_ordinary_cone_retraction (R : Family l D) (T : Space D)\n    (V : ForgetModel D l R T) (H M : W D l T) (q : H ⟶ M)\n    (e : Nonempty (V.functor.obj H ≅ V.functor.obj M))\n    (hq : ∀ (K : W D l T) (v : K ⟶ H),\n      WeilComplex.forget.map (v ≫ q) = 0 → V.functor.map v = 0) :\n    Nonempty (SplitMono (WeilComplex.forget.map q))",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "split mono distinguished triangle cone zero morphism",
+   "results": "No exact geometric match; only categorical split-mono lemmas.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSplitMono f",
+   "results": "Mathlib provides the final categorical split-mono API.",
+   "date": "2026-10-28",
+   "verdict": "formal part only"
+  },
+  {
+   "tool": "grep",
+   "query": "cone.*split|finite.*stalk.*isIso",
+   "results": "No matching declaration in the local source tree.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeOrdinaryConeDetection",
+  "date": "2026-10-28",
+  "group": "U8"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261028T055817-L-812218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261028T055817-L-812218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
