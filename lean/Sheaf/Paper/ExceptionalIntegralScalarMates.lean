@@ -674,6 +674,31 @@ theorem exceptionalIntegralScalarMates_data_mates
     Nonempty (Mates l Ω c operation left) := by
   sorry
 
+/-! The pointwise reduction construction is the remaining independent part of the
+    reduction-data theorem.  Isolating one coefficient stage and one level keeps the
+    unresolved construction strictly below the quantified assertion above it.
+    Source: Zheng, Lemma 5.22 and Proposition 5.26.
+    (blueprint: lem-sf-exceptional-integral-scalar-mates-data-reduction-pointwise).
+    The finite-level adjunction units and counits are transported through the chosen
+    reconstruction, and their normalized evaluation equations give the four fields of
+    `ReductionMates` for this fixed `E` and `n`. -/
+theorem exceptionalIntegralScalarMates_data_reduction_pointwise
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
+    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
+    (transport : Transported l Ω D hl c operation left)
+    (d : Mates l Ω c operation left) (E : FieldStage.{u} l) (n : ℕ) :
+    Nonempty (ReductionMates l Ω D hl c operation left transport d E n) := by
+  sorry
+
 /-
 The reduction part is a separate strictly smaller assertion: once the scalar mate
 record is fixed, it supplies the reduction comparison at every finite level.
@@ -699,7 +724,10 @@ theorem exceptionalIntegralScalarMates_data_reduction
     (d : Mates l Ω c operation left) :
     Nonempty (∀ (E : FieldStage.{u} l) (n : ℕ),
       ReductionMates l Ω D hl c operation left transport d E n) := by
-  sorry
+  classical
+  exact ⟨fun E n =>
+    Classical.choice (exceptionalIntegralScalarMates_data_reduction_pointwise
+      l Ω D hl c operation left transport d E n)⟩
 
 /-- Construction of the mate and finite-reduction data used by the integral scalar comparison.
 Source: Zheng, Lemma 5.22 and Proposition 5.26; the finite reduction and completed scalar
