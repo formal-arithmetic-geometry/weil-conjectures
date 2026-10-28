@@ -1,0 +1,104 @@
+{
+ "id": "lem-sfb-proj-scalar-extension-image-basic-open-basis",
+ "kind": "statement",
+ "title": "Image standard opens form a basis after graded scalar extension",
+ "statement": "Let R,S,A,B be commutative rings with the stated algebra structures, let 𝒜 and ℬ be graded submodules, let β : S ⊗_R A ≃ₐ[S] B and ψ : 𝒜 →+*ᵍ ℬ satisfy β(1 ⊗ a)=ψ(a), and suppose every ℬ_n is the S-span of ψ(𝒜_n), with the irrelevant ideal of ℬ mapping into that of 𝒜. Then the opens basicOpen ℬ (ψ f), indexed by positive homogeneous f in 𝒜, form a topological basis of Proj ℬ.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2, standard-open covering argument from homogeneous spanning"
+ },
+ "stmt_deps": [
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use the positive homogeneous standard-open basis on Proj B. For a homogeneous b in ℬ_n, write b as a finite S-linear combination of images ψ(f_i) with f_i in 𝒜_n. In the domain of a homogeneous prime, b not in the prime implies at least one ψ(f_i) is not in it, so each standard neighborhood refines by an image standard open. The irrelevant-ideal hypothesis ensures the resulting opens cover Proj B.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-nagata-affine-proj-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker N3",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2, standard-open basis refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsBasis image basicOpen graded span Proj",
+   "results": "No existing theorem states the image-standard-open basis under a graded spanning map.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Opens.IsBasis Set.range basicOpen",
+   "results": "Only the generic basis-isomorphism criterion was found.",
+   "date": "2026-10-28",
+   "verdict": "Generic criterion reused in parent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive homogeneous standard opens form basis of Proj after graded map",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChart",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proj-scalar-extension-twist-chart",
+   "place": "basis refinement in the arbitrary-open chart proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionImageBasicOpenBasis",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionImageBasicOpenBasis.lean",
+  "declaration": "AlgebraicGeometry.Proj.scalarExtension_image_basicOpen_isBasis",
+  "statement": "theorem scalarExtension_image_basicOpen_isBasis {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B] [Algebra R S] [Algebra R A] [Algebra S B] (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B) [GradedRing 𝒜] [GradedRing ℬ] (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ) (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a) (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A))) (hψ : HomogeneousIdeal.irrelevant ℬ ≤ HomogeneousIdeal.map ψ (HomogeneousIdeal.irrelevant 𝒜)) : TopologicalSpace.Opens.IsBasis (Set.range (fun i : Σ n : PNat, 𝒜 (n : ℕ) ↦ basicOpen ℬ (ψ (i.2 : A))))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261028T020611-L-2528405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261028T020611-L-2528405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

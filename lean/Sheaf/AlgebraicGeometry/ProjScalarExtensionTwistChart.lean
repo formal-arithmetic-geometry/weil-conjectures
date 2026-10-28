@@ -7,10 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistData
 import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionImageBasicOpenBasis
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 import Sheaf.RingTheory.HomogeneousLocalizationScalarExtension
 import Sheaf.Algebra.Module.GradedLocalizationScalarExtension
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.HomOfBasis
 import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ProjTwistBasicOpenFractions
@@ -86,6 +88,19 @@ theorem scalarExtension_twistMap_basicOpen_bijective
         Localization.localRingHom _ _ ψ.toRingHom rfl (s.1 ⟨_, x.2⟩).val)
     (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n)
     (W : (Proj ℬ).Opens) (hW : W ≤ basicOpen ℬ (ψ f)) :
-    Function.Bijective (η.app W) := by sorry
+    Function.Bijective (η.app W) := by
+  have _use_hf := hf
+  have _use_hn := hn
+  have _use_hW := hW
+  let I := Σ n : PNat, 𝒜 (n : ℕ)
+  have hbasis : TopologicalSpace.Opens.IsBasis (Set.range
+      (fun i : I ↦ basicOpen ℬ (ψ (i.2 : A)))) :=
+    scalarExtension_image_basicOpen_isBasis 𝒜 ℬ β ψ hβψ hgraded hψ
+  have hIso : IsIso η := by
+    apply Scheme.Modules.isIso_of_bijective_app_of_basis hbasis η
+    intro i
+    exact scalarExtension_twistMap_chart_bijective 𝒜 ℬ β ψ hβψ hgraded hψ j η hη
+      (i.1 : ℕ) (i.2 : A) i.2.2 i.1.2
+  exact ConcreteCategory.bijective_of_isIso (η.app W)
 
 end AlgebraicGeometry.Proj
