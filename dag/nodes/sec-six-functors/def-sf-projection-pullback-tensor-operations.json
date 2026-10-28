@@ -1,0 +1,96 @@
+{
+ "id": "def-sf-projection-pullback-tensor-operations",
+ "kind": "definition",
+ "title": "The supplied pullback/tensor operations and their compatibility square",
+ "statement": "For functors I:A→A′, J:B→B′, F:A→B, G:A′→B′, curried tensors on the four categories, two pullback/tensor maps φ and ψ, an isomorphism a:F;J≅I;G, and the two inclusion tensorators mA and mB, define projectionTensorComparisonComponent at M,N to be the expanded five-factor comparison square. It is exactly the component equation of comparison compatibility. This module also hosts the four unchanged definitions previously declared in CommonProjectionPullbackTensorCompatibility; their bodies and signatures are relocated verbatim.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; finite-stage representative and supplied-operation normalization."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-common-projection-tensor-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient inclusion commutes with derived tensor and pullback comparison",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.ComparisonCompatible'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackTensor.*[Cc]ompatib|pullbackTensor.*[Uu]nit",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-pullback-tensor-compatibility-component",
+   "place": "The four existing operation and square definitions, separated without changing their bodies or signatures.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionPullbackTensorOperations",
+  "file": "lean/Sheaf/Paper/CommonProjectionPullbackTensorOperations.lean",
+  "declaration": "WeilConjectures.projectionTensorComparisonComponent",
+  "statement": "def projectionTensorComparisonComponent\n    {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']\n    (I : A ⥤ A') (J : B ⥤ B')\n    {F : A ⥤ B} {G : A' ⥤ B'}\n    {TA : A ⥤ A ⥤ A} {TB : B ⥤ B ⥤ B}\n    {TA' : A' ⥤ A' ⥤ A'} {TB' : B' ⥤ B' ⥤ B'}\n    (φ : (Functor.postcompose₂.obj F).obj TA ⟶\n      (((Functor.whiskeringLeft₂ _).obj F).obj F).obj TB)\n    (ψ : (Functor.postcompose₂.obj G).obj TA' ⟶\n      (((Functor.whiskeringLeft₂ _).obj G).obj G).obj TB')\n    (a : F ⋙ J ≅ I ⋙ G)\n    (mA : (Functor.postcompose₂.obj I).obj TA ≅\n      (((Functor.whiskeringLeft₂ _).obj I).obj I).obj TA')\n    (mB : (Functor.postcompose₂.obj J).obj TB ≅\n      (((Functor.whiskeringLeft₂ _).obj J).obj J).obj TB')\n    (M N : A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.projectionTensorComparisonComponent",
+   "WeilConjectures.projectionTransportTensorComparison",
+   "WeilConjectures.projectionPullbackTensor",
+   "WeilConjectures.projectionCurriedTensorComparison",
+   "WeilConjectures.projectionTensorComparisonCompatible"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}

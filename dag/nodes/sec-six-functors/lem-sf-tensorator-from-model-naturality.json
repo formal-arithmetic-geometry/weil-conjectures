@@ -1,0 +1,98 @@
+{
+ "id": "lem-sf-tensorator-from-model-naturality",
+ "kind": "statement",
+ "title": "Naturality of the tensorator given by component models and scalar units",
+ "statement": "Let I:A→B be a functor, R and T bifunctors on A and B, and U:S≅id_A a natural isomorphism. Suppose m_(M,N):T(IM,IN)≅I(R(SM,SN)) is natural in both variables. Then the inverse of the composite m_(M,N) ≫ I(R(U_M,U_N)) is a natural transformation R;I→(I×I);T. The displayed Lean equation states its naturality on an arbitrary arrow of A×A.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility: naturality of the finite model and coefficient-unit comparisons."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Assemble m and its assumed naturality into a natural isomorphism using NatIso.ofComponents. Compose with the right whiskering of NatIso.prod U U and invert. Its naturality equation at f evaluates to the displayed component formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; generic naturality calculation for the explicit inclusion tensorator."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse tensor comparison built from natural component models and a whiskered unit isomorphism",
+   "results": "Eight hits, including Localization.Monoidal.μ_inv_natural_left/right, Functor.Monoidal.tensorObjComp_inv_app, and NatTrans.tensor_naturality. These require monoidal structure or a different comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use generic NatIso construction; no exact pointwise formula under only the stated bifunctor assumptions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents, NatIso.ofComponents.app, NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app and eight further component-construction examples.",
+   "date": "2026-10-28",
+   "verdict": "NatIso.ofComponents constructs the model isomorphism; naturality of its corrected inverse gives the result."
+  },
+  {
+   "tool": "grep",
+   "query": "tensoratorFromModel|ofComponents.app|isoWhiskerRight_inv",
+   "results": "Six hits, including Mathlib/CategoryTheory/NatIso.lean:198-199 (ofComponents.app) and Mathlib/CategoryTheory/Whiskering.lean:252 (isoWhiskerRight_inv).",
+   "date": "2026-10-28",
+   "verdict": "Generic component and whiskering formulas are available; the combined equation is a short categorical lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-stage-inclusion-tensor-model-naturality",
+   "place": "Present the same canonical tensorator directly by its components, with a generic proof of naturality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TensoratorFromModelNaturality",
+  "file": "lean/Sheaf/CategoryTheory/TensoratorFromModelNaturality.lean",
+  "declaration": "WeilConjectures.tensoratorFromModel_naturality",
+  "statement": "theorem tensoratorFromModel_naturality\n    {A B : Type*} [Category* A] [Category* B]\n    (I : A ⥤ B) (R : A × A ⥤ A) (T : B × B ⥤ B)\n    {S : A ⥤ A} (U : S ≅ 𝟭 A)\n    (m : ∀ K : A × A, T.obj (I.obj K.1, I.obj K.2) ≅\n      I.obj (R.obj (S.obj K.1, S.obj K.2)))\n    (hm : ∀ {K L : A × A} (f : K ⟶ L),\n      T.map (Prod.mkHom (I.map f.1) (I.map f.2)) ≫ (m L).hom =\n        (m K).hom ≫ I.map (R.map (Prod.mkHom (S.map f.1) (S.map f.2))))\n    {K L : A × A} (f : K ⟶ L) :\n    (R ⋙ I).map f ≫\n        (m L ≪≫ I.mapIso (R.mapIso (Iso.prod (U.app L.1) (U.app L.2)))).inv =\n      (m K ≪≫ I.mapIso (R.mapIso (Iso.prod (U.app K.1) (U.app K.2)))).inv ≫\n        (I.prod I ⋙ T).map f",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}

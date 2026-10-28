@@ -1,0 +1,98 @@
+{
+ "id": "lem-sf-common-projection-tensor-component-normalization",
+ "kind": "statement",
+ "title": "Transport of a tensor comparison component square",
+ "statement": "For arbitrary categories, inclusions I,J and pullback functors F,G, suppose six functor equalities identify the pullbacks and the four curried tensors with fixed uncurried models. If the two tensorators, the pullback coefficient comparison, and the rational and common pullback/tensor components have the prescribed heterogeneous equalities to those models, then the component square for the models implies the component square for the supplied operations. The curried tensorators are required to have the corresponding uncurried components.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; finite-stage representative and supplied-operation normalization."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Substitute the functor equalities, identify the comparison isomorphism by its hom components, and use the uncurrying identities to identify both tensorator components. Substitute the comparison components and combine the two factor maps by the tensor functor composition law.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; explicit finite-model and scalar-unit cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient inclusion commutes with derived tensor and pullback comparison",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.ComparisonCompatible'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackTensor.*[Cc]ompatib|pullbackTensor.*[Uu]nit",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-pullback-tensor-compatibility-component",
+   "place": "Normalization and finite coefficient-model cancellation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionPullbackTensorTransport",
+  "file": "lean/Sheaf/Paper/CommonProjectionPullbackTensorTransport.lean",
+  "declaration": "WeilConjectures.commonProjectionTensorComponent_of_normalization",
+  "statement": "theorem commonProjectionTensorComponent_of_normalization\n    {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']\n    (I : A ⥤ A') (J : B ⥤ B')\n    {F F₀ : A ⥤ B} {G G₀ : A' ⥤ B'}\n    {TA : A ⥤ A ⥤ A} {TB : B ⥤ B ⥤ B}\n    {TA' : A' ⥤ A' ⥤ A'} {TB' : B' ⥤ B' ⥤ B'}\n    (RA : A × A ⥤ A) (RB : B × B ⥤ B)\n    (RA' : A' × A' ⥤ A') (RB' : B' × B' ⥤ B')\n    (eF : F = F₀) (eG : G = G₀)\n    (eTA : TA = Functor.currying.inverse.obj RA)\n    (eTB : TB = Functor.currying.inverse.obj RB)\n    (eTA' : TA' = Functor.currying.inverse.obj RA')\n    (eTB' : TB' = Functor.currying.inverse.obj RB')\n    (φ : (Functor.postcompose₂.obj F).obj TA ⟶\n      (((Functor.whiskeringLeft₂ _).obj F).obj F).obj TB)\n    (ψ : (Functor.postcompose₂.obj G).obj TA' ⟶\n      (((Functor.whiskeringLeft₂ _).obj G).obj G).obj TB')\n    (μ : ∀ K L, F₀.obj (RA.obj (K, L)) ⟶ RB.obj (F₀.obj K, F₀.obj L))\n    (ν : ∀ K L, G₀.obj (RA'.obj (K, L)) ⟶ RB'.obj (G₀.obj K, G₀.obj L))\n    (a : F ⋙ J ≅ I ⋙ G) (a₀ : F₀ ⋙ J ≅ I ⋙ G₀)\n    (tA : Functor.uncurry.obj TA ⋙ I ≅ I.prod I ⋙ Functor.uncurry.obj TA')\n    (tB : Functor.uncurry.obj TB ⋙ J ≅ J.prod J ⋙ Functor.uncurry.obj TB')\n    (tA₀ : RA ⋙ I ≅ I.prod I ⋙ RA') (tB₀ : RB ⋙ J ≅ J.prod J ⋙ RB')\n    (mA : (Functor.postcompose₂.obj I).obj TA ≅\n      (((Functor.whiskeringLeft₂ _).obj I).obj I).obj TA')\n    (mB : (Functor.postcompose₂.obj J).obj TB ≅\n      (((Functor.whiskeringLeft₂ _).obj J).obj J).obj TB')\n    (hmA : ∀ K L, (mA.hom.app K).app L = tA.hom.app (K, L))\n    (hmB : ∀ K L, (mB.hom.app K).app L = tB.hom.app (K, L))\n    (ha : ∀ K, HEq (a.hom.app K) (a₀.hom.app K))\n    (htA : HEq tA tA₀) (htB : HEq tB tB₀)\n    (hφ : ∀ K L, HEq ((φ.app K).app L) (μ K L))\n    (hψ : ∀ K L, HEq ((ψ.app K).app L) (ν K L))\n    (M N : A)\n    (h : J.map (μ M N) ≫ tB₀.hom.app (F₀.obj M, F₀.obj N) =\n      a₀.hom.app (RA.obj (M, N)) ≫ G₀.map (tA₀.hom.app (M, N)) ≫\n        ν (I.obj M) (I.obj N) ≫\n        RB'.map (Prod.mkHom (a₀.inv.app M) (a₀.inv.app N))) :\n    J.map ((φ.app M).app N) ≫\n        (mB.hom.app (F.obj M)).app\n          (F.obj N) =\n      a.hom.app ((TA.obj M).obj N) ≫\n        G.map ((mA.hom.app M).app N) ≫\n        ((ψ.app (I.obj M)).app (I.obj N)) ≫\n        (TB'.map (a.inv.app M)).app (G.obj (I.obj N)) ≫\n        (TB'.obj (J.obj (F.obj M))).map (a.inv.app N)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}

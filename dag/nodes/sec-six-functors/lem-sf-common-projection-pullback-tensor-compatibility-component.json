@@ -11,30 +11,65 @@
   "def-sf-operation-stages",
   "def-pur-completed-pullback-tensor-comparison",
   "def-sf-common-projection-tensor-comparison",
-  "lem-sf-common-projection-pullback-tensor-representative"
+  "lem-sf-common-projection-pullback-tensor-representative",
+  "def-sf-projection-pullback-tensor-operations"
  ],
  "proof": [
   {
-   "text": "Normalize the supplied pullback comparisons and the curried tensorators, evaluate the representative formula at E, and cancel the finite-stage transition and scalar-unit isomorphisms.",
+   "text": "Use normalized pullback descent to choose the literal stage-system pullback model. Transport the supplied common comparison through the recorded tensor and pullback equalities. The supplied coefficient comparison has identity components, and the supplied tensorators agree heterogeneously with the canonical inclusion tensorators. Apply the generic component-normalization theorem.",
    "uses": [
     "def-sf-operation-stages",
-    "def-pur-completed-pullback-tensor-comparison",
     "def-sf-common-projection-tensor-comparison",
-    "lem-sf-common-projection-pullback-tensor-representative"
+    "lem-pod-common-stage-pullback-normalized-descent",
+    "lem-sf-common-projection-tensor-component-normalization",
+    "def-sf-common-projection-pullback-stages",
+    "lem-sf-common-projection-pullback-stage-coherence",
+    "lem-sf-common-projection-pullback-stage-normalization",
+    "lem-sf-common-projection-tensor-comparison-normalization",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The supplied tensor/pullback normalization and the assumed representative equation give the finite representative for the transported comparison. Apply the proved finite-model square and cancel the identity components of the stage-system inclusion comparison.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-sf-common-projection-pullback-tensor-representative",
+    "lem-sf-common-projection-inclusion-pullback-tensor-square",
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sf-operation-stages",
-  "def-pur-completed-pullback-tensor-comparison",
   "def-sf-common-projection-tensor-comparison",
-  "lem-sf-common-projection-pullback-tensor-representative"
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-sf-common-projection-tensor-component-normalization",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-sf-common-projection-pullback-tensor-representative",
+  "lem-sf-common-projection-inclusion-pullback-tensor-square",
+  "def-sf-common-projection-pullback-stages",
+  "lem-sf-common-projection-pullback-stage-coherence",
+  "lem-sf-common-projection-pullback-stage-normalization",
+  "lem-sf-common-projection-tensor-comparison-normalization",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-associative-stage-family-descent"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
-  "place": "Compatibility finite-stage cancellation, pointwise component."
+  "place": "Compatibility: normalize supplied operations and prove finite-model square by stage coherence, tensor naturality and scalar units."
  },
  "mathlib_searches": [
   {
@@ -66,10 +101,10 @@
  "unit": "sk-rem-sf-pf-done",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
-  "file": "lean/Sheaf/Paper/CommonProjectionPullbackTensorCompatibility.lean",
+  "module": "Sheaf.Paper.CommonProjectionPullbackTensorComponent",
+  "file": "lean/Sheaf/Paper/CommonProjectionPullbackTensorComponent.lean",
   "declaration": "WeilConjectures.projectionTensorComparisonCompatible_component_of_representative_formula",
-  "statement": "theorem projectionTensorComparisonCompatible_component_of_representative_formula\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (Q : SixFunctorCompactifiedSquare D)\n    [hZ : ∀ x : Q.Z.obj.left, Invertible (C.l : Q.Z.obj.left.residueField x)]\n    [hY : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x)]\n    (M N : sfRationalConstructibleCategory C.l\n      (AlgebraicallyClosedCoefficients.Coefficient C.l C.Qbar E) Q.Y.obj.left)\n    (hrep : HEq (canonicalCommonStagePullbackTensor C.l C.Qbar Q.p.hom.left\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (Y := Q.Y.obj.left) E).obj M)\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (Y := Q.Y.obj.left) E).obj N)).hom\n      (ofHom (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n          (commonStageTensorObject C.l C.Qbar Q.Y.obj.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj M)\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj N)))\n        (commonStageTensorObject C.l C.Qbar Q.Z.obj.left\n          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj M))\n          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj N)))\n        E (by\n          change E.val ⊔ E.val ≤ E.val\n          exact sup_le le_rfl le_rfl)\n        (by\n          change E.val ⊔ E.val ≤ E.val\n          exact sup_le le_rfl le_rfl)\n        (pullbackTensorAtCommonStage C.l C.Qbar Q.p.hom.left\n          ((GeneralAlgebraicallyClosedCoefficients.inclusion\n            (Y := Q.Y.obj.left) E).obj M)\n          ((GeneralAlgebraicallyClosedCoefficients.inclusion\n            (Y := Q.Y.obj.left) E).obj N) E (by\n            change E.val ⊔ E.val ≤ E.val\n            exact sup_le le_rfl le_rfl)).hom)) :\n    ((GeneralAlgebraicallyClosedCoefficients.inclusion E).map\n        (((projectionPullbackTensor\n          ((H.coefficientStages E).rationalExchange Q)).hom.app M).app N) ≫\n      ((projectionCurriedTensorComparison\n        (GeneralAlgebraicallyClosedCoefficients.inclusion E)\n        ((H.coefficientStages E).rationalTensor Q.Z) (H.commonStageTensor Q.Z)\n        (commonProjectionTensorComparison H E Q.Z)).hom.app\n          (((H.coefficientStages E).rational.pull Q.p).obj M)).app\n        (((H.coefficientStages E).rational.pull Q.p).obj N)) =\n    (((H.commonStageComparison E).directAdjunction Q.p).left.symm.inv.app\n        ((((H.coefficientStages E).rationalTensor Q.Y).obj M).obj N) ≫\n      (H.commonStage.pull Q.p).map\n        (((projectionCurriedTensorComparison\n          (GeneralAlgebraicallyClosedCoefficients.inclusion E)\n          ((H.coefficientStages E).rationalTensor Q.Y) (H.commonStageTensor Q.Y)\n          (commonProjectionTensorComparison H E Q.Y)).hom.app M).app N) ≫\n      ((projectionPullbackTensor (H.commonStageExchange Q)).hom.app\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj M)).app\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj N) ≫\n      ((H.commonStageTensor Q.Z).map\n        (((H.commonStageComparison E).directAdjunction Q.p).left.symm.hom.app M)).app\n          ((H.commonStage.pull Q.p).obj\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj N)) ≫\n      ((H.commonStageTensor Q.Z).obj\n          (((H.coefficientStages E).rational.pull Q.p ⋙\n            (GeneralAlgebraicallyClosedCoefficients.inclusion E)).obj M)).map\n        (((H.commonStageComparison E).directAdjunction Q.p).left.symm.hom.app N))",
+  "statement": "theorem projectionTensorComparisonCompatible_component_of_representative_formula\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (Q : SixFunctorCompactifiedSquare D)\n    [hZ : ∀ x : Q.Z.obj.left, Invertible (C.l : Q.Z.obj.left.residueField x)]\n    [hY : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x)]\n    (M N : sfRationalConstructibleCategory C.l\n      (AlgebraicallyClosedCoefficients.Coefficient C.l C.Qbar E) Q.Y.obj.left)\n    (hrep : HEq (canonicalCommonStagePullbackTensor C.l C.Qbar Q.p.hom.left\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (Y := Q.Y.obj.left) E).obj M)\n        ((GeneralAlgebraicallyClosedCoefficients.inclusion\n          (Y := Q.Y.obj.left) E).obj N)).hom\n      (ofHom (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n          (commonStageTensorObject C.l C.Qbar Q.Y.obj.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj M)\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj N)))\n        (commonStageTensorObject C.l C.Qbar Q.Z.obj.left\n          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj M))\n          (commonStagePullbackObject C.l C.Qbar Q.p.hom.left\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (Y := Q.Y.obj.left) E).obj N)))\n        E (by\n          change E.val ⊔ E.val ≤ E.val\n          exact sup_le le_rfl le_rfl)\n        (by\n          change E.val ⊔ E.val ≤ E.val\n          exact sup_le le_rfl le_rfl)\n        (pullbackTensorAtCommonStage C.l C.Qbar Q.p.hom.left\n          ((GeneralAlgebraicallyClosedCoefficients.inclusion\n            (Y := Q.Y.obj.left) E).obj M)\n          ((GeneralAlgebraicallyClosedCoefficients.inclusion\n            (Y := Q.Y.obj.left) E).obj N) E (by\n            change E.val ⊔ E.val ≤ E.val\n            exact sup_le le_rfl le_rfl)).hom)) :\n    projectionTensorComparisonComponent (inclusion E) (inclusion E)\n      (projectionPullbackTensor ((H.coefficientStages E).rationalExchange Q)).hom\n      (projectionPullbackTensor (H.commonStageExchange Q)).hom\n      ((H.commonStageComparison E).directAdjunction Q.p).left\n      (projectionCurriedTensorComparison (inclusion E)\n        ((H.coefficientStages E).rationalTensor Q.Y) (H.commonStageTensor Q.Y)\n        (commonProjectionTensorComparison H E Q.Y))\n      (projectionCurriedTensorComparison (inclusion E)\n        ((H.coefficientStages E).rationalTensor Q.Z) (H.commonStageTensor Q.Z)\n        (commonProjectionTensorComparison H E Q.Z)) M N",
   "branch": "sheaf-dag",
   "by": "F4",
   "date": "2026-10-28"
@@ -87,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
-  "result": "pass",
-  "landing": "20261028T020353-L-2501919",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
  }
 }

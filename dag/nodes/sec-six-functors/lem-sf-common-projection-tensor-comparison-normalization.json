@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-common-projection-tensor-comparison-normalization",
+ "kind": "statement",
+ "title": "Normalization of the supplied inclusion tensor comparison",
+ "statement": "The inclusion tensor comparison supplied by the six-functor common-stage data is heterogeneously equal to the canonical inclusion tensor comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; finite-stage representative and supplied-operation normalization."
+ },
+ "stmt_deps": [
+  "def-sf-common-projection-tensor-comparison",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "def-sf-operation-stages"
+ ],
+ "proof": [
+  {
+   "text": "Identify the invertibility instances by subsingleton elimination. Expand the supplied comparison. Each of its three transports is heterogeneously equal to the transported term, leaving the canonical comparison itself.",
+   "uses": [
+    "def-sf-common-projection-tensor-comparison",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-projection-tensor-comparison",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; explicit finite-model and scalar-unit cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient inclusion commutes with derived tensor and pullback comparison",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.ComparisonCompatible'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackTensor.*[Cc]ompatib|pullbackTensor.*[Uu]nit",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-pullback-tensor-compatibility-component",
+   "place": "Normalization and finite coefficient-model cancellation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionTensorComparisonNormalization",
+  "file": "lean/Sheaf/Paper/CommonProjectionTensorComparisonNormalization.lean",
+  "declaration": "WeilConjectures.commonProjectionTensorComparison_heq",
+  "statement": "theorem commonProjectionTensorComparison_heq\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (X : SixFunctorSpace D)\n    [hX : ∀ x : X.obj.left, Invertible (C.l : X.obj.left.residueField x)] :\n    HEq (commonProjectionTensorComparison H E X)\n      (commonInclusionTensorComparison C.l C.Qbar X.obj.left E)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}

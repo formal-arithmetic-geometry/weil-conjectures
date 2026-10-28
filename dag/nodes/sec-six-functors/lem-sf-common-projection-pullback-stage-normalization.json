@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-common-projection-pullback-stage-normalization",
+ "kind": "statement",
+ "title": "Normalization by a literal coherent stage morphism",
+ "statement": "For any proof of coherence of the prescribed rational pullbacks and normalized stage comparisons, the functor of the resulting literal stage morphism is the specified common-stage derived pullback.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; finite-stage representative and supplied-operation normalization."
+ },
+ "stmt_deps": [
+  "def-sf-common-projection-pullback-stages",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-associative-stage-family-descent"
+ ],
+ "proof": [
+  {
+   "text": "Normalized descent supplies such an identity for one coherence proof. Proof irrelevance identifies its coherence field with the supplied proof, so the same literal stage morphism has the required functor identity.",
+   "uses": [
+    "def-sf-common-projection-pullback-stages",
+    "lem-pod-common-stage-pullback-normalized-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-projection-pullback-stages",
+  "lem-pod-common-stage-pullback-normalized-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; explicit finite-model and scalar-unit cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient inclusion commutes with derived tensor and pullback comparison",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.ComparisonCompatible'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackTensor.*[Cc]ompatib|pullbackTensor.*[Uu]nit",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-pullback-tensor-compatibility-component",
+   "place": "Normalization and finite coefficient-model cancellation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionPullbackStageNormalization",
+  "file": "lean/Sheaf/Paper/CommonProjectionPullbackStageNormalization.lean",
+  "declaration": "WeilConjectures.commonProjectionPullbackStageNormalization",
+  "statement": "theorem commonProjectionPullbackStageNormalization\n    (hc : StageSystem.pairFunctorCoherent (stageSystem l Ω Y) (stageSystem l Ω X)\n      (fun L ↦ rationalDerivedPullback l\n        (AlgebraicallyClosedCoefficients.Coefficient l Ω L) f)\n      (commonStagePullbackTransition l Ω f)) :\n    commonStageDerivedPullback l Ω f =\n      (commonProjectionPullbackStages l Ω f hc).functor",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}

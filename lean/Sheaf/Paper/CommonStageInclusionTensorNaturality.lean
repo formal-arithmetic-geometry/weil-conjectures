@@ -6,6 +6,7 @@ Authors: SHEAF group A7
 module
 
 public import Sheaf.Paper.CommonStageInclusionTensorModel
+public import Sheaf.CategoryTheory.TensoratorFromModelNaturality
 
 /-! # Naturality of the finite-stage tensor model
 
@@ -128,11 +129,11 @@ Source: thm-sf-pf-field.proof.md, Compatibility
   let I := inclusion (l := l) (Ω := Ω) (Y := W) E
   let R := rationalDerivedTensor l (Coefficient.{u} l Ω E) W
   let U := (operationStageTransitionIso l Ω W E E le_rfl) ≪≫ unitor l Ω W E
-  let a : (I.prod I) ⋙ commonStageDerivedTensor l Ω W ≅
-      (((stageSystem l Ω W).T (le_rfl : E ≤ E)).prod
-        ((stageSystem l Ω W).T (le_rfl : E ≤ E))) ⋙ (R ⋙ I) :=
-    NatIso.ofComponents (fun K ↦ commonInclusionTensorModel l Ω W E K.1 K.2)
-      (fun f ↦ commonInclusionTensorModel_naturality l Ω W E f.1 f.2)
-  exact (a ≪≫ Functor.isoWhiskerRight (NatIso.prod U U) (R ⋙ I)).symm
+  exact NatIso.ofComponents
+    (fun K ↦ (commonInclusionTensorModel l Ω W E K.1 K.2 ≪≫
+      I.mapIso (R.mapIso (Iso.prod (U.app K.1) (U.app K.2)))).symm)
+    (fun f ↦ tensoratorFromModel_naturality I R (commonStageDerivedTensor l Ω W) U
+      (fun K ↦ commonInclusionTensorModel l Ω W E K.1 K.2)
+      (fun f ↦ commonInclusionTensorModel_naturality l Ω W E f.1 f.2) f)
 
 end WeilConjectures

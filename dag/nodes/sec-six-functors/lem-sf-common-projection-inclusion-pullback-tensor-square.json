@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-common-projection-inclusion-pullback-tensor-square",
+ "kind": "statement",
+ "title": "Finite-model square for tensor and normalized pullback",
+ "statement": "Let l be prime, Ω an algebraic closure of Q_l, f:X→Y a scheme morphism with l invertible on X and Y, and E a finite coefficient field. Let G be the stage-system functor of the normalized pullback comparisons, with any proof of their coherence. For M,N at E, let μ:G(tensor_Y(IM,IN))→tensor_X(IFM,IFN) have the prescribed pullbackTensorAtCommonStage representative at E. Then inclusion of the rational pullback/tensor comparison followed by the X inclusion tensorator equals G applied to the Y inclusion tensorator followed by μ. This uses the actual inclusion tensorators, including their repeated-stage scalar units.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; finite-stage representative and supplied-operation normalization."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-sf-common-stage-inclusion-tensor-model",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "def-sf-common-projection-pullback-stages",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-common-stage-pullback-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-associative-stage-family-descent"
+ ],
+ "proof": [
+  {
+   "text": "Use the stage-morphism coherence equation to compute the image of isoToStage. Apply this calculation to the finite tensor model. Expand the assumed representative by mkHom_eq_isoToStage; inverse cancellation gives the square between the finite tensor models.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-sf-common-stage-inclusion-tensor-model",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality",
+    "lem-pod-common-stage-pullback-normalized-descent",
+    "def-sf-common-projection-pullback-stages",
+    "lem-sf-common-projection-pullback-tensor-model-map",
+    "lem-pur-associative-stage-family-descent",
+    "def-weil-common-stage-pullback-data",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply rational pullback/tensor naturality to the two source coefficient-unit maps. The self-stage pullback coefficient-unit theorem identifies each pulled-back unit with the corresponding target unit. Substitute the inclusion tensorator formula and cancel its inverse to obtain the desired square.",
+   "uses": [
+    "lem-pur-canonical-rational-pullback-tensor-naturality",
+    "lem-pur-common-stage-pullback-coefficient-unit",
+    "lem-sf-common-stage-inclusion-tensor-model-naturality",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-weil-common-stage-internal-hom-data",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-sf-common-stage-inclusion-tensor-model",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-pur-canonical-rational-pullback-tensor-naturality",
+  "lem-pur-common-stage-pullback-coefficient-unit",
+  "def-sf-common-projection-pullback-stages",
+  "lem-sf-common-projection-pullback-tensor-model-map",
+  "lem-pur-associative-stage-family-descent",
+  "def-weil-common-stage-pullback-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-common-stage-internal-hom-data",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility; explicit finite-model and scalar-unit cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient inclusion commutes with derived tensor and pullback comparison",
+   "results": "PresheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; KaehlerDifferential.tensorKaehlerEquiv_left_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ComparisonCompatible",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.ComparisonCompatible'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackTensor.*[Cc]ompatib|pullbackTensor.*[Uu]nit",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized common-stage square; use the existing project constructions and categorical identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionPullbackTensorCompatibility",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-common-projection-pullback-tensor-compatibility-component",
+   "place": "Normalization and finite coefficient-model cancellation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionPullbackTensorModels",
+  "file": "lean/Sheaf/Paper/CommonProjectionPullbackTensorModels.lean",
+  "declaration": "WeilConjectures.commonProjectionInclusionPullbackTensorSquare",
+  "statement": "theorem commonProjectionInclusionPullbackTensorSquare\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (hc : StageSystem.pairFunctorCoherent (stageSystem l Ω Y) (stageSystem l Ω X)\n      (fun L ↦ rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient l Ω L) f)\n      (commonStagePullbackTransition l Ω f))\n    (E : AlgebraicallyClosedCoefficients.Index l Ω)\n    (M N : Stage l Ω Y E)\n    (μ : (StageSystem.Morphism.functor\n      (commonProjectionPullbackStages l Ω f hc)).obj ((commonStageDerivedTensor l Ω Y).obj\n          ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj M, (inclusion (l := l) (Ω := Ω) (Y := Y)\n          E).obj N)) ⟶\n      (commonStageDerivedTensor l Ω X).obj ((inclusion (l := l) (Ω := Ω) (Y := X) E).obj\n          ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f).obj\n          M), (inclusion (l := l) (Ω := Ω) (Y := X) E).obj ((rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f).obj N)))\n    (hrep : HEq μ\n      (ofHom\n        (commonStagePullbackObject l Ω f\n          (commonStageTensorObject l Ω Y ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj M)\n              ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj N)))\n        (commonStageTensorObject l Ω X\n          (commonStagePullbackObject l Ω f ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj M))\n          (commonStagePullbackObject l Ω f ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj N)))\n        E (by change E.val ⊔ E.val ≤ E.val; exact sup_le le_rfl le_rfl)\n        (by change E.val ⊔ E.val ≤ E.val; exact sup_le le_rfl le_rfl)\n        (pullbackTensorAtCommonStage l Ω f ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj M)\n            ((inclusion (l := l) (Ω := Ω) (Y := Y) E).obj N) E\n          (by change E.val ⊔ E.val ≤ E.val; exact sup_le le_rfl le_rfl)).hom)) :\n    (inclusion (l := l) (Ω := Ω) (Y := X) E).map ((canonicalRationalPullbackTensor l\n        (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f M N).hom) ≫\n      (commonInclusionTensorComparison l Ω X E).hom.app ((rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f).obj M,(rationalDerivedPullback l\n          (AlgebraicallyClosedCoefficients.Coefficient l Ω E) f).obj N) =\n    (StageSystem.Morphism.functor\n      (commonProjectionPullbackStages l Ω f hc)).map ((commonInclusionTensorComparison l Ω Y\n          E).hom.app (M,N)) ≫ μ",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d1ee3",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261028T081750-L-2780519",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered Lean modules and 12 node files against the base clone, the change record, the old/new component conclusion (defeq via @[reducible] projectionTensorComparisonComponent), the old/new commonInclusionTensorComparison components, and the 3b importer compiles (6/6 OK)"
+ }
+}
