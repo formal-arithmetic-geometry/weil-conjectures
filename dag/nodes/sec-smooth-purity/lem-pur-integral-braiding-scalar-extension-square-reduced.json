@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-integral-braiding-scalar-extension-square-reduced",
+ "kind": "statement",
+ "title": "Coherent reduction of the integral braiding scalar-extension square",
+ "statement": "Fix a prime $\\ell$, finite coefficient fields $E,L$ of $\\mathbf Q_\\ell$ with an algebra map $\\iota:E\\to L$, and a scheme $W$ on which $\\ell$ is invertible in every residue field. Let $S$ be the prescribed integral scalar-extension functor, $T_E,T_L$ the prescribed completed integral tensors, $\\beta^E,\\beta^L$ the coherently normalized integral braidings, and $\\lambda^{\\mathrm{int}}$ the prescribed tensor scalar comparison. For all $M,N$, the two composites\n$$S(\\beta^E_{M,N});\\lambda^{\\mathrm{int}}_{N,M},\\qquad\n\\lambda^{\\mathrm{int}}_{M,N};\\beta^L_{S M,S N}$$\nhave equal images under the coherent reduction functor for coefficient field $L$. Equivalently, the coherent reductions of the two displayed morphisms from $S(T_E(M,N))$ to $T_L(SN,SM)$ are equal. This is the finite-stage signed-swap assertion used to prove the integral square; it is strictly weaker than equality before coherent reduction and imposes no additional hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, signed total symmetry on homogeneous generators; coherent reduction form of the prescribed integral scalar-extension comparison"
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-pod-integral-tensor-constraints",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives and use the coefficient-extension reduction model and normalized scalar-comparison realization to identify the reductions of the prescribed scalar-extension and tensor maps with the balanced quotient-level system maps. The normalized tensor-constraint transport and primitive-counit comparison identify the reductions of the prescribed integral braidings with the signed total swaps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-pur-completed-primitive-counit-comparison",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ and the recorded normalized reduction models"
+   }
+  },
+  {
+   "text": "At every quotient level the cochain pullback tensor coherence computes both composites on a homogeneous tensor as the same signed swap, with the scalar in degree zero, and its transition equation makes these equalities compatible with all quotient maps. The compatible system maps therefore agree after coherent reduction.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-coefficient-extension-reduction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, signed total symmetry and quotient-transition compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-integral-tensor-constraints",
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-pur-completed-primitive-counit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, finite-stage signed total symmetry assembled through coherent reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent reduction of a scalar extension commutes with a signed tensor swap",
+   "results": "No direct theorem; generic monoidal scalar-extension results do not identify the prescribed coherent reduction maps.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map (braiding) scalar extension tensor comparison",
+   "results": "No direct theorem for the prescribed completed constructible categories.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'integralBraiding.*Scalar|scalar.*Braiding|map_braiding' lean/Sheaf lean/WeilConjectures",
+   "results": "Only the current rational compatibility statement and generic Mathlib braided-functor APIs; no reduced integral square.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralBraidingScalarExtensionSquare",
+  "date": "2026-10-28",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-braiding-scalar-extension-square",
+   "place": "The integral scalar-extension square is proved by first establishing equality after coherent reduction, before full faithfulness reflects it.",
+   "via": [
+    "lem-pur-integral-braiding-scalar-extension-square"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReducedIntegralBraidingScalarExtensionSquare",
+  "file": "lean/Sheaf/Paper/ReducedIntegralBraidingScalarExtensionSquare.lean",
+  "declaration": "WeilConjectures.reducedIntegralBraidingScalarExtensionSquare",
+  "statement": "theorem reducedIntegralBraidingScalarExtensionSquare (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] (M N : sfIntegralConstructibleCategory l E W) : (integralSystemReduction l L W).map ( (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).map ((pullbackTensorIntegralBraiding l E W M N).hom) ≫ (integralTensorScalarComparison l E L ι W N M).hom) = (integralSystemReduction l L W).map ( (integralTensorScalarComparison l E L ι W M N).hom ≫ (pullbackTensorIntegralBraiding l L W ((sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj M) ((sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj N)).hom)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T020722-L-2541281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261028T020722-L-2541281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.ReducedIntegralBraidingScalarExtensionSquare
 
 /-!
 # Integral Koszul braiding and scalar extension
@@ -56,6 +57,7 @@ theorem integralBraidingScalarExtensionSquare
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj M)
         ((sfConstructibleIntegralScalarExtension 0 l
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj N)).hom := by
-  sorry
+  apply (integralSystemReduction_fullyFaithful l L W).2.map_injective
+  exact reducedIntegralBraidingScalarExtensionSquare l E L ι W M N
 
 end WeilConjectures
