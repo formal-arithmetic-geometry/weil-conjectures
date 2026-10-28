@@ -84,7 +84,7 @@ theorem finiteQuotient_layer_tensor_homology_comparison
   intro q
   obtain ⟨e₁⟩ :=
     finiteQuotient_layer_tensor_derived_homology_comparison X d φ hφ hcompat M b n Z P hPb hP e q
-  obtain ⟨e₂⟩ := finiteQuotient_layer_tensor_model_homology_identification X d φ n Z P q
+  obtain ⟨e₂⟩ := finiteQuotient_layer_tensor_model_homology_identification X d φ hφ n Z P q
   exact ⟨e₁ ≪≫ e₂⟩
 
 end AlgebraicGeometry.Scheme
