@@ -1,0 +1,131 @@
+{
+ "id": "lem-diagonal-cyclic-uniformizer-source-equation",
+ "kind": "statement",
+ "title": "Supported endpoint equation of a normalized comparison",
+ "statement": "For l,Y,E,pi,n,A,hA and q as in UniformizerSquareData [def-diagonal-uniformizer-root-frame], let s:quotientRight(q) ~= restriction(q) followed by cyclicRight(q) be GIVEN with RestrictionNormalized(q,s) [def-diagonal-coefficient-route-comparison]. Then SourceEquation(q,s) [def-diagonal-coefficient-route-equations] holds. This asserts only the supported derived endpoint equation, not existence or uniqueness of s.",
+ "stmt_deps": [
+  "def-diagonal-coefficient-route-equations",
+  "def-diagonal-coefficient-route-comparison",
+  "def-diagonal-coefficient-route-endpoints",
+  "def-diagonal-uniformizer-root-frame",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-finite-ordinary-comparisons",
+  "def-sfb-geo-cartier-interface",
+  "lem-diagonal-coefficient-route-square"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [
+  {
+   "text": "Transpose under the cyclic adjunction. The restrictionMate definition gives the quotient endpoint transpose followed by the right-functor comparison. Transpose the finite realization and the scalar endpoints using Endpoint.normalization and composition of exact single comparisons.",
+   "uses": [
+    "def-diagonal-coefficient-route-comparison",
+    "def-diagonal-coefficient-route-endpoints",
+    "def-sfb-diagonal-coefficient-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget the resulting ordinary equation. RestrictionNormalized cancels the inverse-realization counits. FiniteSourceComparison.normalization and FiniteRealization.unit_normalization reduce both sides to unital maps from pulled-back Z_l to constant A. Reduction modulo l^(n+1) and generation by one give their equality. The source_normalization of maps.source identifies its constant-generator map with the same coefficient map. Sheafification, direct image, and reversal of the adjunction transpositions give SourceEquation.",
+   "uses": [
+    "def-diagonal-coefficient-route-equations",
+    "def-diagonal-finite-ordinary-comparisons",
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-sfb-geo-cartier-interface",
+    "lem-condensed-padic-torsion-linearity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-diagonal-coefficient-route-comparison",
+  "def-diagonal-coefficient-route-endpoints",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-diagonal-coefficient-route-equations",
+  "def-diagonal-finite-ordinary-comparisons",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-geo-cartier-interface",
+  "lem-condensed-padic-torsion-linearity"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+  "by": "F5",
+  "note": "Ordinary comparison and supported endpoint steps of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between module restriction functors from an isomorphism of underlying abelian sheaves and equality of scalar actions",
+   "date": "2026-10-28",
+   "results": "ModuleCat.restrictScalarsCongr, ModuleCat.restrictScalarsCongr_hom_app, ModuleCat.restrictScalarsCongr_inv_app, ModuleCat.restrictScalarsId', ModuleCat.restrictScalarsComp', SheafOfModules.restrictScalars_obj_val, ModuleCat.restrictScalarsId, ModuleCat.restrictScalarsComp'_inv_app",
+   "verdict": "No theorem compares the supplied finite realizations. Local library search provides the reduction cokernel and module-object linearity criteria."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.hom_ext",
+   "date": "2026-10-28",
+   "results": "CategoryTheory.Mod.hom_ext",
+   "verdict": "No theorem compares the supplied finite realizations. Local library search provides the reduction cokernel and module-object linearity criteria."
+  },
+  {
+   "tool": "grep",
+   "query": "padicInt.*[Ll]inear|[Cc]ondensed.*[Tt]orsion|act_comp_eq_of_zsmul",
+   "date": "2026-10-28",
+   "results": "No indexed Mathlib hits.",
+   "verdict": "No theorem compares the supplied finite realizations. Local library search provides the reduction cokernel and module-object linearity criteria."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicUniformizerSource",
+  "date": "2026-10-28",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-cyclic-uniformizer-source",
+   "place": "ordinary comparison and supported endpoint proof steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicUniformizerSourceEquation",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicUniformizerSourceEquation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCyclic_uniformizerSource_equation",
+  "statement": "theorem diagonalCyclic_uniformizerSource_equation\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)\n    (A : Type (u + 1)) [CommRing A]\n    (hA : ((l ^ (n + 1) : ℕ) : A) = 0)\n    (q : UniformizerSquareData l Y E π n A hA)\n    (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)\n    (hs : q.RestrictionNormalized s) :\n    sourceEquation% (UniformizerSquareData.endpointSquare l Y E π n A hA q) s",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261028T081737-L-2776824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261028T081737-L-2776824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
