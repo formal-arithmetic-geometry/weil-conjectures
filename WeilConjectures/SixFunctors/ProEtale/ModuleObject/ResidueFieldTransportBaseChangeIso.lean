@@ -31,7 +31,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- **The base-change morphism and residue field module sheaves.** Assume that
@@ -47,11 +48,11 @@ theorem nonempty_arrowIso_map_exchangeRight_residueField (sq : CommSq g' f' f g)
     Nonempty (Arrow.mk ((residueFieldModuleSheaf Y' ℓ E).mapDerivedCategory.map
         ((Adjunction.exchangeRight
           (CondensedRing.derivedUpperStarLowerStarAdjunction
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f)
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
           (CondensedRing.derivedUpperStarLowerStarAdjunction
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f')
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f')
           (pullbackSquareComparison
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq)).app M)) ≅
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) sq)).app M)) ≅
       Arrow.mk ((Adjunction.exchangeRight
         (ProEtale.derivedUpperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f)
@@ -61,14 +62,14 @@ theorem nonempty_arrowIso_map_exchangeRight_residueField (sq : CommSq g' f' f g)
         ((residueFieldModuleSheaf X ℓ E).mapDerivedCategory.obj M))) := by
   have key := Adjunction.nonempty_arrowIso_map_exchangeRight_app
     (CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f)
+      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
     (CondensedRing.derivedUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f')
+      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f')
     (ProEtale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f)
     (ProEtale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f')
-    (pullbackSquareComparison (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq)
+    (pullbackSquareComparison (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) sq)
     (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) sq)
     (residueFieldDerivedUpperStarIso ℓ E f) (residueFieldDerivedUpperStarIso ℓ E f')
     (residueFieldDerivedUpperStarIso ℓ E g) (residueFieldDerivedUpperStarIso ℓ E g')

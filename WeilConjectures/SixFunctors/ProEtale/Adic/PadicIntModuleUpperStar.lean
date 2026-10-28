@@ -40,20 +40,6 @@ open scoped Obj
 
 namespace CategoryTheory
 
-namespace Functor
-
-variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
-  (F : C ⥤ D) [F.LaxMonoidal] (R : C) [MonObj R]
-
-/-- The image of the regular module under a lax monoidal functor `F` is the regular module over
-`F R`. -/
-noncomputable def mapModRegularIso :
-    (F.mapMod R).obj (Mod.regular R : Mod C R) ≅ (Mod.regular (F.obj R) : Mod D (F.obj R)) :=
-  Mod.isoMk (Iso.refl (F.obj R)) (by
-    erw [Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp])
-
-end Functor
-
 namespace Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C]

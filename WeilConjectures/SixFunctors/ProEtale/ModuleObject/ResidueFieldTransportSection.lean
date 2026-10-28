@@ -84,12 +84,13 @@ lemma continuousMapCoefficientSectionRingHom_const_hom (t : T) :
 
 end Const
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The constant global sections of `𝔽_{E,X}` are the images under `p_X^*` of the constant global
 sections of `𝔽̲_E`. -/
 theorem residueFieldSectionFac : ResidueFieldSectionFac X ℓ E := fun c ↦ by
-  have h : (algebraMap (integersResidueField ℓ E.1) C(X, integersResidueField ℓ E.1))
+  have h : (algebraMap (integersResidueField ℓ E) C(X, integersResidueField ℓ E))
       (ULift.down c) = ContinuousMap.const X (ULift.down c) :=
     ContinuousMap.ext fun _ ↦ by simp
   refine Eq.trans ?_ (continuousMapCoefficientSectionRingHom_const_hom X _ (ULift.down c))
