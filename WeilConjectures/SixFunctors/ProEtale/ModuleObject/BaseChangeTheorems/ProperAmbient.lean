@@ -27,8 +27,8 @@ bounded constructible `K` (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padic
 The two base-change morphisms are the exchange morphisms of the pullback comparisons, and the
 one on bounded constructible complexes is the restriction of the ambient one
 (`CategoryTheory.Adjunction.exchangeRight_restrictFullyFaithful_app_hom`), the pullback
-comparison on bounded constructible complexes being the ambient one
-(`ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl`).
+comparison on bounded constructible complexes being the ambient one (`ProEtale.CondensedRing.
+boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison`).
 -/
 
 @[expose] public section
@@ -56,19 +56,19 @@ set_option maxHeartbeats 1000000 in
 /-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
 constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
 square of schemes. -/
-lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl
-    (sq : CommSq g' f' f g) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-      K).hom =
-      (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ)
+lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq g' f' f g) (K : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+      (pullbackSquareComparison Λ
         (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)).hom.app
         K.obj := by
   have hinv (a : X' ⟶ Y') (b : Y' ⟶ Y) :
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b).inv.app K).hom =
-        (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) a.left b.left).inv.app K.obj := by
+      ((boundedConstructibleUpperStarComp Λ ℓ a b).inv.app K).hom =
+        (leftDerivedUpperStarComp Λ a.left b.left).inv.app K.obj := by
     simp [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
       ObjectProperty.liftCompιIso]
-  have e {A₁ A₂ : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (h : A₁ = A₂) :
+  have e {A₁ A₂ : Dᵇc(X'.left)⟦Λ⟧} (h : A₁ = A₂) :
       (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
     subst h
     rfl
@@ -96,7 +96,7 @@ lemma isIso_baseChangeMap_app_of_isIso_exchangeRight (sq : CommSq g' f' f g)
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
         K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
           (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_padicAlgCl,
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
       pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
