@@ -14,8 +14,9 @@
  ],
  "proof": [
   {
-   "text": "The fixed-input ordinary adjunction is a linear Hom equivalence; compose its inverse with inverse completion on the constructible pair (K,V). Naturality of completion identifies it with completed tensor followed by the specified integral counit. Its source and target are exactly the full-subcategory Hom groups.",
+   "text": "Use integralDerivedHom_bilinear to give the fixed-first-input ambient internal Hom its additive and O_E-linear functor structures. The ordinary adjunction therefore gives a linear Hom equivalence. Compose its inverse with precomposition by the inverse completion isomorphism and with the full-subcategory Hom linear equivalences. Completion naturality identifies the resulting equivalence on an integral arrow f with completed tensor(id,f) followed by the prescribed inverse-completion counit.",
    "uses": [
+    "lem-sf-integral-derived-hom-bilinear",
     "def-sf-integral-hom-reduction-models",
     "def-sf-rational-verdier-data"
    ],
@@ -26,7 +27,7 @@
    }
   },
   {
-   "text": "Base-change that linear equivalence to the localized coefficient ring. The bilinear pure-tensor formula for rational tensor, the pure-tensor composition law and A.evaluation_integral identify its action on pure tensors with rational evaluation. Additivity extends the equality to sums. The base-changed equivalence is injective; A.objects identifies its source with maps into the supplied rational dual. All raw rational objects have their stored integral objects as representatives.",
+   "text": "Apply LinearEquiv.baseChange to this integral Hom equivalence. On a pure localized arrow, the rational tensor formula and ScalarLocalization.composition_tmul identify its value with tensor(id,f) followed by A.evaluation, using A.evaluation_integral. Extend the equation to zero and sums by linearity. Transport the dual object along A.objects; the resulting pairing map is injective because the base-changed equivalence is injective and the source transport is an isomorphism. Every raw rational object is its stored integral object wrapped by localization.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-derived-pullback-tensor-hom",
@@ -40,6 +41,7 @@
   }
  ],
  "proof_deps": [
+  "lem-sf-integral-derived-hom-bilinear",
   "def-sf-integral-hom-reduction-models",
   "def-sf-rational-verdier-data",
   "def-weil-rationalization-karoubi",
@@ -47,10 +49,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "W3",
+  "group": "B8",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "Expanded genuine part of the evaluation-transposition argument of lem-coef-rational-verdier-comparison-biduality"
+  "place": "Direct implementation of both existing proof steps: integral linear currying, completion naturality, and injectivity after scalar extension."
  },
  "mathlib_searches": [
   {
@@ -120,12 +122,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "B8",
   "result": "pass",
-  "landing": "20261027T234349-L-115146",
+  "landing": "20261028T034704-L-3531493",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
