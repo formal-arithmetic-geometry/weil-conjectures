@@ -720,7 +720,7 @@ theorem smoothExchangeScalarCompatibility (cartesian : IsPullback u f' f v) :
   letI := g.smoothF'
   obtain ⟨I, I', R, R', hEnds, hCanonical, hCanonical', m, hm, hScalar, hShift⟩ :=
     normalizedExchangeData D C u f f' v (d := d) cartesian.w S S'
-  exact assembleExchange D C u f f' v S S' cartesian.w d I I' R R' hEnds
+  simpa only [] using assembleExchange D C u f f' v S S' cartesian.w d I I' R R' hEnds
     hCanonical hCanonical' m hm hScalar hShift
 
 end Statement
