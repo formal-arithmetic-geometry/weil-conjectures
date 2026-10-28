@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCoreReconstruction
+import Sheaf.Paper.ExceptionalRingTransportCorePostFunctorData
 
 /-! # Functor and comparison fields for exceptional integral transport -/
 
@@ -100,6 +101,21 @@ theorem exists_exceptional_transport_post_data
       IntegralSystemRealization.Realizations l E.carrier D (operations E)) :
     Nonempty
       (TransportCorePostData l Ω D hl c operation left reconstruction operations realizations) := by
-  sorry
+  classical
+  obtain ⟨p⟩ := exists_exceptional_transport_post_functor_data
+    l Ω D hl f c operation left reconstruction operations realizations
+  obtain ⟨integralLeft⟩ := exists_exceptional_transport_integral_left
+    l Ω D hl f c operation left reconstruction operations realizations
+  exact ⟨{
+    F := p.F
+    G := p.G
+    adjunction := p.adjunction
+    realizeF := p.realizeF
+    realizeG := p.realizeG
+    reductionF := p.reductionF
+    reductionG := p.reductionG
+    evaluationF := p.evaluationF
+    evaluationG := p.evaluationG
+    integralLeft := integralLeft }⟩
 
 end WeilConjectures.ExceptionalIntegralScalar

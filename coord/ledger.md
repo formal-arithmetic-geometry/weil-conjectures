@@ -20596,3 +20596,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:04 L: merged deliver/G1/Sheaf.Paper.DiagonalTraceFinitePushUnitSeed (stage 3; reviewer PASS; first push; landing 20261028T020412-L-2507494 (interface); batch 20261028T020127; modules 2; new nodes 1; change records: coord/changes/diagonal-trace-finite-push-unit-seed.md)
 - 02:04 L: merged deliver/G2/Sheaf.Paper.DiagonalTraceRootProjection (stage 3; reviewer PASS; first push; landing 20261028T020418-L-2508481 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:04 L: merged deliver/G3/Sheaf.Paper.CommonFrobeniusSquareNormalization (stage 3; reviewer PASS; first push; landing 20261028T020424-L-2508944 (interface); batch 20261028T020127; modules 7; new nodes 6)
+- 02:04 L: merged deliver/G4/Sheaf.Paper.ExceptionalRingTransportCorePostData (stage 3; reviewer PASS; first push; landing 20261028T020426-L-2509093 (interface); batch 20261028T020127; modules 2; new nodes 2)
