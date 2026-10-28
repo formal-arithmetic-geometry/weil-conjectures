@@ -26,6 +26,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.SixFunctors.OpenTensorNormalization
 
 import Sheaf.AlgebraicGeometry.VaryingRingOperations
+import all Sheaf.Paper.IntegralSystemCompositorNormalization
+import all Sheaf.Paper.IntegralSystemSquareNormalization
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.Paper.SystemDirectImageRoosPresentation
@@ -59,7 +61,8 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u v
-open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated AlgebraicGeometry AlgebraicGeometry.Scheme
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+open AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Functor
 
 namespace WeilConjectures.FrobeniusExchange
@@ -97,46 +100,6 @@ private theorem transport_reduction_equation
       simpa only [Functor.comp_map, Category.assoc] using
         congrArg (fun k ↦ k ≫ e) (κ.naturality δ)
 
-private theorem vertical_pushforward_eq
-    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
-    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
-    (F : C ⥤ D) [F.IsContinuous J K]
-    [((𝟭 ℕ).prod F).IsContinuous (coefficientSequenceTopology J)
-      (coefficientSequenceTopology K)] (n : ℕ)
-    [(Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J)]
-    [(Prod.sectR n D).IsContinuous K (coefficientSequenceTopology K)]
-    {A : Sheaf (coefficientSequenceTopology J) RingCat.{u + 1}}
-    {B : Sheaf (coefficientSequenceTopology K) RingCat.{u + 1}}
-    {S : Sheaf J RingCat.{u + 1}} {T : Sheaf K RingCat.{u + 1}}
-    (a : S ⟶ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{u + 1}
-      J (coefficientSequenceTopology J)).obj A)
-    (b : T ⟶ ((Prod.sectR n D).sheafPushforwardContinuous RingCat.{u + 1}
-      K (coefficientSequenceTopology K)).obj B)
-    (φ : A ⟶ (((𝟭 ℕ).prod F).sheafPushforwardContinuous RingCat.{u + 1}
-      (coefficientSequenceTopology J) (coefficientSequenceTopology K)).obj B)
-    (ψ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj T)
-    (h : ∀ U : Cᵒᵖ, a.hom.app U ≫ φ.hom.app (Opposite.op (n, U.unop)) =
-      ψ.hom.app U ≫ b.hom.app (F.op.obj U)) :
-    SheafOfModules.pushforward.{u + 1} φ ⋙ SheafOfModules.pushforward a =
-      SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ := by
-  have := Functor.isContinuous_comp (Prod.sectR n C) ((𝟭 ℕ).prod F)
-    J (coefficientSequenceTopology J) (coefficientSequenceTopology K)
-  have := Functor.isContinuous_comp F (Prod.sectR n D)
-    J K (coefficientSequenceTopology K)
-  have he : a ≫ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{u + 1}
-      J (coefficientSequenceTopology J)).map φ =
-      ψ ≫ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).map b := by
-    apply Sheaf.hom_ext
-    apply NatTrans.ext
-    funext U
-    exact h U
-  change SheafOfModules.pushforward
-      (F := (Prod.sectR n C) ⋙ (𝟭 ℕ).prod F)
-      (a ≫ ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{u + 1}
-        J (coefficientSequenceTopology J)).map φ) = _
-  exact congrArg (fun θ ↦ SheafOfModules.pushforward
-    (F := (Prod.sectR n C) ⋙ (𝟭 ℕ).prod F) θ) he
-
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- The finite exchange for any commuting square is the specified adjunction mate.
@@ -169,9 +132,7 @@ def finiteTensorExchange {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     whiskerRight (openSquareDerivedPullbackModel A gX).inv
       (proEtaleConstantDerivedDirectImage f' A)
 
-
 variable (A : Type u) [CommRing A] [Finite A]
-
 
 section Systems
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -264,6 +225,7 @@ def systemSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (gX : X ⟶ X) (gY : Y ⟶ Y)
   (integralComparisonSystemComposition l E f gY).symm ≪≫
     eqToIso (congrArg (fun h ↦ integralComparisonDerivedSequencePullback l E h) w.symm) ≪≫
     integralComparisonSystemComposition l E gX f
+
 
 /-- The specified system mate, formed before finite evaluation or derived inverse limit.
 Source: Zheng 4.10; blueprint `def:weil-direct-image-object`
@@ -662,6 +624,8 @@ def systemOpenExchangeInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   ((mateEquiv (systemDerivedOpenAdjunction l E j) (systemDerivedOpenAdjunction l E j)).symm
     (TwoSquare.mk _ _ _ _ (systemSquare l E j gU gX w).inv)).natTrans
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The open mate is invertible for a Cartesian open square.
 Source: Stacks 03S6; Zheng 4.10
 (blueprint: def-weil-system-operation-exchange-realization).
@@ -674,7 +638,10 @@ theorem systemOpenExchangeInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (gU : U ⟶ U) (gX : X ⟶ X)
     (sq : IsPullback gU j j gX) :
     IsIso (systemOpenExchangeInv l E j gU gX sq.w) := by
-  sorry
+  unfold systemOpenExchangeInv systemSquare
+  exact integralInverseOpenMate_isIso l E j gU gX sq
+    (systemDerivedOpenAdjunction l E j)
+
 
 /-- The canonical open-system exchange, inverse to the specified open-adjunction mate.
 Source: Stacks 03S6; Zheng 4.10
@@ -858,7 +825,6 @@ theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
   refine ⟨hprod, M, ?_⟩
   rfl
 
-
 /-- The simultaneous direct-image realization is bounded constructible.
 Source: blueprint integral direct-image paragraph; Bhatt--Scholze 6.5, 6.7
 (blueprint: def-weil-system-operation-exchange-realization).
@@ -962,7 +928,6 @@ theorem directImage_linear :
     intro K M a r
     apply ObjectProperty.hom_ext
     exact h.map_smul a.hom r
-
 
 variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]

@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-integral-system-compositor-normalization",
+ "kind": "statement",
+ "title": "The integral system compositor is the varying-ring compositor",
+ "statement": "For a prime ell, a finite extension E of Q_ell, and composable scheme morphisms f:X→Y and g:Y→Z in universe u, specialize the varying-ring operations to R_n=ULift(O_E/(varpi_E^(n+1))) with the actual adjacent quotient transitions. The section-normalized integralComparisonSystemComposition(ell,E,f,g) equals the varying-ring derived pullback compositor gComp(R,transition,f,g). This is equality of the specified natural isomorphisms on the ordinary unbounded derived categories of whole strict systems.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0D6D and 03D3; Zheng 4.10, ordinary composition and its exact descent."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "The two ordinary direct-image functors and their chosen adjunctions agree definitionally at the lifted quotient rings. The varying-ring modulePComp satisfies precisely the section formula in integralComparisonSequenceComposition_existsUnique.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib identity conjugateEquiv_leftAdjointCompIso_inv identifies the conjugate of moduleGComp with modulePComp. Thus moduleGComp satisfies the complete uniquely normalized specification of integralComparisonSequenceComposition. Apply uniqueness to equate the ordinary pullback compositors.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the two derived compositors, rewrite by the ordinary equality, and identify their standard exact-composition localization maps by definitional equality. This proves the equality of natural isomorphisms.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "J8 stage 3",
+  "date": "2026-10-28",
+  "document": "lean/Sheaf/Paper/IntegralSystemCompositorNormalization.lean",
+  "place": "Complete proof by section-normalized uniqueness, conjugateEquiv_leftAdjointCompIso_inv, and exact localization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of chosen pullback composition isomorphisms obtained by conjugating pushforward composition through adjunctions and exact derived localization",
+   "results": "Found generic chosen pullback and sheaf-module conjugate-composition APIs; none identifies the integral sequence-site model.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing section-normalized compositor uniqueness and Mathlib conjugacy identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "Exact match in Mathlib.CategoryTheory.Adjunction.CompositionIso.",
+   "date": "2026-10-28",
+   "verdict": "Used in the ordinary compositor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|iso_word_heq|conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "Found the Mathlib conjugate-composition identity. Repository rg additionally found system_square_localization and betaInv_mate in the existing varying-ring normalization modules.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing exact square-localization identity and the proved integral compositor comparison."
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemOperationExchangeRealization",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "Cartesian whole-system open exchange: identify the ordinary and derived pullback compositors before applying the existing inverse-beta mate calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSystemCompositorNormalization",
+  "file": "lean/Sheaf/Paper/IntegralSystemCompositorNormalization.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.integralComparisonSystemComposition_eq_varyingRing",
+  "statement": "theorem integralComparisonSystemComposition_eq_varyingRing\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    integralComparisonSystemComposition l E f g =\n      ProEtale.VaryingRing.gComp\n        (fun n ↦ CommRingCat.of (ULift.{u + 1}\n          (Padic.coefficientExtensionRing l E (n + 1))))\n        (fun n ↦ CommRingCat.ofHom\n          (Padic.coefficientExtensionTransition l E (n + 1)).ulift) f g",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T034819-L-3551488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T034819-L-3551488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

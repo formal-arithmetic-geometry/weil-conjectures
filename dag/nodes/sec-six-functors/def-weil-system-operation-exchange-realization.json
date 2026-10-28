@@ -151,7 +151,7 @@
    }
   },
   {
-   "text": "The componentwise scalar-open mate is isolated as the strictly smaller obligation systemOpenScalarInv_app_isIso. Applying the componentwise criterion proves systemOpenScalarInv_isIso; the six other existing named theorem obligations retain their source proofs in their Lean docstrings.",
+   "text": "The componentwise scalar-open mate is isolated as the strictly smaller obligation systemOpenScalarInv_app_isIso. Applying the componentwise criterion proves systemOpenScalarInv_isIso; the other existing named theorem obligations retain their source proofs in their Lean docstrings.",
    "uses": [
     "lem-weil-system-open-scalar-inv-app-is-iso"
    ],
@@ -159,6 +159,21 @@
    "source": {
     "document": "literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex",
     "place": "slopmaster2 blueprint, def:weil-direct-image-object (lines 2405-2428, FrEx_{f,*}) and def:weil-compact-support-object (lines 2432-2471, FrEx_{f,!} 'literally the compactification composite' Ex_{*,p,g_Y} followed by Rp_*(Ex_{j,g_Xbar})); the notion is the action by transport of structure of Deligne, La conjecture de Weil II (literature/deligne-weil-II_PMIHES-1980-52.pdf), (1.1.10)-(1.1.11) and (1.1.14), pp. 151-152"
+   }
+  },
+  {
+   "text": "For systemOpenExchangeInv_isIso, apply the proved compositor-normalization step integralComparisonSystemComposition_eq_varyingRing, whose ordinary comparison is uniquely fixed by the section formula and adjunction conjugacy. This identifies the derived compositors and the proved integralComparisonSystemSquare_eq_varyingRing then identifies systemSquare with mapDerivedCategorySquareIso(moduleSquareG). The existing betaInv_mate identity identifies the inverse mate under varying-ring jAdj with the inverse of the localized moduleBeta isomorphism. Finally the elementary change-of-adjunction calculation, using leftAdjointUniq, inverseMateIsoOfUnit, and transportedUnit, transfers invertibility to the actual systemDerivedOpenAdjunction with the same right functor. The private varyingInverseOpenMate_isIso helper allows any left adjoint, avoiding any need to unfold or identify chosen open left adjoints. This proves the specified whole-system mate without any finite-evaluation faithfulness or new obligation. The proved private integralSystemPull_eq_varying equality normalizes the derived restriction functor before applying this generic calculation, and transports its adjunction type without unfolding chosen left adjoints. The final private integralInverseOpenMate_isIso calculation is proved with an arbitrary adjunction parameter on the actual integral restriction functor, then instantiated with systemDerivedOpenAdjunction; this keeps adjunction data abstract during the coordinate comparison.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-sp-varying-ring-open-base-change-evaluation",
+    "lem-weil-integral-system-compositor-normalization",
+    "lem-weil-integral-system-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 03S6 and 03DI; Zheng 4.10, exact descent of cartesian open base change."
    }
   }
  ],
@@ -175,12 +190,17 @@
   "lem-weil-system-direct-image-effectivity",
   "lem-weil-system-open-scalar-inv-app-is-iso",
   "lem-weil-system-direct-image-roos-presentation",
-  "lem-derived-limit-triangle-transport"
+  "lem-derived-limit-triangle-transport",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-sp-varying-ring-open-base-change-evaluation",
+  "lem-weil-integral-system-compositor-normalization",
+  "lem-weil-integral-system-square-normalization"
  ],
  "proof_origin": {
-  "by": "Y6",
+  "by": "J8 stage 3",
+  "date": "2026-10-28",
   "document": "lean/Sheaf/Paper/SystemOperationExchangeRealization.lean",
-  "place": "Existing proofs retained. directAlpha_isIso is proved by composing the pullback realization isomorphism with functorial images of the geometric whole-system direct-image counit. That strictly earlier effectivity step is isolated in SystemDirectImageEffectivity. No statement, definition, public import or unit-route change."
+  "place": "Existing proofs retained. Cartesian system open exchange is proved by section-normalized compositor uniqueness, exact localization of the pullback square, the proved varying-ring inverse-beta mate identity, and invariance of invertibility under changing the left adjoint of the same right functor. No new unproved statement, public interface change, or unit-route change."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -379,9 +399,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "J8",
   "result": "pass",
-  "landing": "20261028T020559-L-2526547",
+  "landing": "20261028T034819-L-3551488",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

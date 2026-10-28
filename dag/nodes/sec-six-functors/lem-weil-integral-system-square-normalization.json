@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-integral-system-square-normalization",
+ "kind": "statement",
+ "title": "The integral system pullback square is exactly localized",
+ "statement": "For a prime ell, a finite extension E of Q_ell, a scheme map j:U→X, endomorphisms gU:U→U and gX:X→X with gU j = j gX, the word of the two specified integralComparisonSystemComposition isomorphisms and equality transport equals mapDerivedCategorySquareIso of the ordinary varying-ring moduleSquareG at the lifted quotient coefficient rings. This asserts equality of the specified natural isomorphisms on the ordinary unbounded derived categories of whole strict systems; no open or Cartesian hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0D6D and 03D3; Zheng 4.10, exact localization of composition and equality transport."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sp-varying-ring-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing exact square-localization identity system_square_localization from the intrinsic/varying-ring mate normalization: mapDerivedCategorySquareIso(moduleSquareG) is the corresponding word of gComp and equality transport.",
+   "uses": [
+    "lem-sf-intrinsic-varying-ring-mate-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite both integral compositors by integralComparisonSystemComposition_eq_varyingRing. The remaining transport between the same derived inverse-image functors agrees definitionally, proving equality of the isomorphism words.",
+   "uses": [
+    "lem-weil-integral-system-compositor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-intrinsic-varying-ring-mate-normalization",
+  "lem-weil-integral-system-compositor-normalization"
+ ],
+ "proof_origin": {
+  "by": "J8 stage 3",
+  "date": "2026-10-28",
+  "document": "lean/Sheaf/Paper/IntegralSystemSquareNormalization.lean",
+  "place": "Complete proof using the existing exact square-localization calculation and the proved integral compositor normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of chosen pullback composition isomorphisms obtained by conjugating pushforward composition through adjunctions and exact derived localization",
+   "results": "Found generic chosen pullback and sheaf-module conjugate-composition APIs; none identifies the integral sequence-site model.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing section-normalized compositor uniqueness and Mathlib conjugacy identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "Exact match in Mathlib.CategoryTheory.Adjunction.CompositionIso.",
+   "date": "2026-10-28",
+   "verdict": "Used in the ordinary compositor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|iso_word_heq|conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "Found the Mathlib conjugate-composition identity. Repository rg additionally found system_square_localization and betaInv_mate in the existing varying-ring normalization modules.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing exact square-localization identity and the proved integral compositor comparison."
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemOperationExchangeRealization",
+  "date": "2026-10-28",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "Cartesian whole-system open exchange: identify the specified derived pullback square with exact localization before taking its inverse open mate.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSystemSquareNormalization",
+  "file": "lean/Sheaf/Paper/IntegralSystemSquareNormalization.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.integralComparisonSystemSquare_eq_varyingRing",
+  "statement": "theorem integralComparisonSystemSquare_eq_varyingRing\n    {U X : Scheme.{u}} (j : U ⟶ X) (gU : U ⟶ U) (gX : X ⟶ X)\n    (h : gU ≫ j = j ≫ gX) :\n    (integralComparisonSystemComposition l E j gX).symm ≪≫\n        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E) h.symm) ≪≫\n        integralComparisonSystemComposition l E gU j =\n      Functor.mapDerivedCategorySquareIso\n        (ProEtale.VaryingRing.moduleSquareG\n          (fun n ↦ CommRingCat.of (ULift.{u + 1}\n            (Padic.coefficientExtensionRing l E (n + 1))))\n          (fun n ↦ CommRingCat.ofHom\n            (Padic.coefficientExtensionTransition l E (n + 1)).ulift) gU j j gX h)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T034819-L-3551488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261028T034819-L-3551488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
