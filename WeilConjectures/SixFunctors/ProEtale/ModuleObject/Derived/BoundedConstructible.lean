@@ -99,9 +99,14 @@ coefficient rings, in
 The pullback and the extension by zero preserve bounded constructible complexes
 (`boundedConstructible_leftDerivedUpperStar_obj_of_scheme`,
 `boundedConstructible_openImmersionLowerShriek_obj`). That the derived pushforward does is
-`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`, and so are the instances
+`sorry`ed: `boundedConstructible_rightDerivedLowerStar_obj`. The theorems
 `isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
-`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
+`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`), used as
+instances, are proved by noetherian induction from the lisse case
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorObj`,
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom`); the second
+one uses the pushforward along open immersions, hence
+`boundedConstructible_rightDerivedLowerStar_obj`.
 
 The pullback and the extension by zero preserve bounded constructible complexes for every `Λ`,
 and are defined for a general condensed ring `Λ`. The other three statements are false for a
