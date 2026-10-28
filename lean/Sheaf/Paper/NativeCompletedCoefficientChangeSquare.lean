@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
+import Sheaf.Paper.NativeCompletedCoefficientIntegralMapSquare
 
 /-! # Pullback compatibility of normalized completed-to-native maps -/
 
@@ -48,6 +49,8 @@ theorem native_completed_coefficient_change_square_of_presentation
       ((PurCompactSupport.completed l E).pull g).hom ≫ m U =
         (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (m V) ≫
           ((nativeCoefficients l).pull g).hom := by
-  sorry
+  intro U V g
+  rw [hC U, hC V]
+  exact coefficient_presentation_integralMap_pull_square l E i C g
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport

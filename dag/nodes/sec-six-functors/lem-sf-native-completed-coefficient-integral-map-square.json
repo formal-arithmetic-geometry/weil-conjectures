@@ -1,0 +1,94 @@
+{
+ "id": "lem-sf-native-completed-coefficient-integral-map-square",
+ "kind": "lemma",
+ "title": "Pullback square for explicit normalized integral presentation maps",
+ "status": "split",
+ "statement": "Given normalized CoefficientPresentation records C T for every scheme T, the explicit maps (C T).integralMap satisfy the inverse-image square for every scheme morphism.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Section 6.8; finite quotient pullback comparison"
+ },
+ "proof": [
+  {
+   "text": "Compose both sides with every finite quotient projection. The finite constant and residue normalizations identify the resulting pointwise maps, and the completed inverse-limit projections are jointly monic.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data",
+    "def-sf-locally-finite-adic-realization-data",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K9",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Section 6.8; finite quotient pullback comparison"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "merged_into": null,
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-completed-coefficient-change-square",
+   "place": "explicit integral-map square substep",
+   "via": [
+    "lem-sf-native-completed-coefficient-change-square"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompletedCoefficientChangeSquare",
+  "date": "2026-10-28",
+  "group": "K9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompletedCoefficientIntegralMapSquare",
+  "file": "lean/Sheaf/Paper/NativeCompletedCoefficientIntegralMapSquare.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.coefficient_presentation_integralMap_pull_square",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.coefficient_presentation_integralMap_pull_square"
+  ],
+  "statement": "theorem coefficient_presentation_integralMap_pull_square [G : NativeGeometry.{u} l] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (i : E →ₐ[Padic l] PadicAlgCl l) (C : ∀ T : Scheme.{u}, CoefficientPresentation l T E i) : ∀ {U V : Scheme.{u}} (g : U ⟶ V), ((PurCompactSupport.completed l E).pull g).hom ≫ (C U).integralMap l U = (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map ((C V).integralMap l V) ≫ ((nativeCoefficients l).pull g).hom",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261028T020549-L-2524821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261028T020549-L-2524821",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
