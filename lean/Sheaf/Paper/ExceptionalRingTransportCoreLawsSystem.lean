@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCoreData
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemSupport
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemAdjunction
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemReduction
 
 /-! The system-level compatibility laws for exceptional integral transport.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
@@ -76,6 +79,16 @@ theorem exists_exceptional_transport_core_system_laws
       LeftRealization.{u} l Ω c s (operation s))
     (d : TransportCoreData l Ω D hl c operation left) :
     Nonempty (TransportCoreSystemLaws l Ω D hl c operation left d) := by
-  sorry
+  obtain ⟨hs⟩ := exists_exceptional_transport_core_system_support_law
+    l Ω D hl f c operation left d
+  obtain ⟨ha⟩ := exists_exceptional_transport_core_system_adjunction_law
+    l Ω D hl f c operation left d
+  obtain ⟨hrF, hrG⟩ := exists_exceptional_transport_core_system_reduction_laws
+    l Ω D hl f c operation left d
+  exact ⟨{
+    support := hs
+    adjunction_eq := ha
+    reductionF_eq := hrF
+    reductionG_eq := hrG }⟩
 
 end WeilConjectures.ExceptionalIntegralScalar

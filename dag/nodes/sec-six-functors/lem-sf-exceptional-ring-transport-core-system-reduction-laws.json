@@ -1,0 +1,95 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "stmt_deps": [
+  "lem-sf-exceptional-ring-transport-core-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TransportCoreSystemSupportLaw",
+   "results": "No existing declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional transport system support law",
+   "results": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty TransportCore support",
+   "results": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystem",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-system-laws",
+   "place": "the normalized system transport construction"
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-exceptional-ring-transport-core-system-reduction-laws",
+ "kind": "statement",
+ "title": "Exceptional transport system reduction laws",
+ "statement": "theorem exists_exceptional_transport_core_system_reduction_laws\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (d : TransportCoreData l Ω D hl c operation left) :\n    Nonempty ((∀ E : FieldStage.{u} l,\n      ∀ K : C.{u} l Ω X (.integral E),\n        (d.reductionF E).hom.app K =\n          (d.reconstruction E false).equivalence.functor.map ((d.realizeF E).hom.app K) ≫\n            (d.reconstruction E false).equivalence.counit.app\n              ((d.F E).obj ((d.reconstruction E true).equivalence.functor.obj K))) ∧\n      (∀ E : FieldStage.{u} l,\n      ∀ K : C.{u} l Ω Y (.integral E),\n        (d.reductionG E).hom.app K =\n          (d.reconstruction E true).equivalence.functor.map ((d.realizeG E).hom.app K) ≫\n            (d.reconstruction E true).equivalence.counit.app\n              ((d.G E).obj ((d.reconstruction E false).equivalence.functor.obj K))))",
+ "proof": [
+  {
+   "text": "The two endpoint reduction comparisons are obtained by the reconstruction-counit calculation at the true and false endpoints.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-core-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-ring-transport-core-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCoreLawsSystemReduction",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCoreLawsSystemReduction.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_transport_core_system_reduction_laws",
+  "statement": "theorem exists_exceptional_transport_core_system_reduction_laws\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (d : TransportCoreData l Ω D hl c operation left) :\n    Nonempty ((∀ E : FieldStage.{u} l,\n      ∀ K : C.{u} l Ω X (.integral E),\n        (d.reductionF E).hom.app K =\n          (d.reconstruction E false).equivalence.functor.map ((d.realizeF E).hom.app K) ≫\n            (d.reconstruction E false).equivalence.counit.app\n              ((d.F E).obj ((d.reconstruction E true).equivalence.functor.obj K))) ∧\n      (∀ E : FieldStage.{u} l,\n      ∀ K : C.{u} l Ω Y (.integral E),\n        (d.reductionG E).hom.app K =\n          (d.reconstruction E true).equivalence.functor.map ((d.realizeG E).hom.app K) ≫\n            (d.reconstruction E true).equivalence.counit.app\n              ((d.G E).obj ((d.reconstruction E false).equivalence.functor.obj K))))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T020321-L-2494655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261028T020321-L-2494655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
