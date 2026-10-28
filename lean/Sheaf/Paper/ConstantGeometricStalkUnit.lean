@@ -24,6 +24,9 @@ public import Sheaf.Paper.SfRationalizationKaroubi
 
 import all Sheaf.Paper.PointSectionsScalarExtension
 import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+import Sheaf.Paper.FinitePullbackUnitComposition
+import Sheaf.Paper.FinitePointTransportUnit
+import all Sheaf.SixFunctors.FrobeniusPointTransportNatural
 
 /-! # Constant geometric stalks and the coefficient unit
 
@@ -46,8 +49,6 @@ ring sheaf. The maps below retain the actual adjunction units and strict Roos mo
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -450,6 +451,98 @@ theorem embeddingPoint_return (n : ℕ) (hn : 1 ≤ n)
   exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_card_eq
     D.k₀ D.k n hc' ι a
 
+attribute [local implicit_reducible] localPositivePower CategoryTheory.Aut
+
+private theorem finiteUnit_eqToHom {X Y : Scheme.{u}} {f g : X ⟶ Y}
+    (h : f = g) (m : ℕ) :
+    eqToHom (congrArg (fun k ↦ (finiteDerivedPullback l E m k).obj
+        (finiteConstantCoefficientObject l E Y m)) h) ≫ (finiteUnit l E g m).hom =
+      (finiteUnit l E f m).hom := by
+  subst g
+  simp
+
+private theorem finiteUnit_inv_composition {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (m : ℕ) :
+    (finiteCanonicalPullbackComposition l E f g m).inv.app
+        (finiteConstantCoefficientObject l E Z m) ≫ (finiteUnit l E (f ≫ g) m).hom =
+      (finiteDerivedPullback l E m f).map (finiteUnit l E g m).hom ≫
+        (finiteUnit l E f m).hom := by
+  rw [← finiteUnit_composition l E f g m]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
+private theorem finiteWeilIterate_unit (m r : ℕ) :
+    finiteWeilIterate l E D Y₀ m r =
+      finiteUnit l E (localPositivePower (D.geometricFrobenius Y₀).hom r) m := by
+  induction r with
+  | zero => rfl
+  | succ r ih =>
+    apply Iso.ext
+    simpa only [finiteWeilIterate, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, ih,
+      localPositivePower]
+      using finiteUnit_composition l E
+        (localPositivePower (D.geometricFrobenius Y₀).hom r)
+        (D.geometricFrobenius Y₀).hom m
+
+private theorem finiteTransportIterate_unit (m r : ℕ)
+    (N : proEtaleDerivedCategory (Spec (.of D.k))
+      (Padic.coefficientExtensionRing l E (m + 1)))
+    (a : N ⟶ finiteConstantCoefficientObject l E (Spec (.of D.k)) m) :
+    finiteTransportIterate l E D hl m N r ≫
+      (pointFiniteSections D.k
+        (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory.map
+          ((finiteDerivedPullback l E m
+            (localPositivePower (frobeniusPointIso D).hom r)).map a) ≫
+      (pointFiniteSections D.k
+        (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory.map
+          (finiteUnit l E (localPositivePower (frobeniusPointIso D).hom r) m).hom =
+      (pointFiniteSections D.k
+        (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory.map a := by
+  let S := (pointFiniteSections D.k
+    (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory
+  let g := (frobeniusPointIso D).hom
+  obtain ⟨τ, hτ⟩ := naturalFiniteTransport D l hl E m
+  have base (M : proEtaleDerivedCategory (Spec (.of D.k))
+      (Padic.coefficientExtensionRing l E (m + 1)))
+      (b : M ⟶ finiteConstantCoefficientObject l E (Spec (.of D.k)) m) :
+      frobeniusPointTransportFinite D l hl E m M ≫
+        S.map ((finiteDerivedPullback l E m g).map b) ≫
+        S.map (finiteUnit l E g m).hom = S.map b := by
+    have hn := τ.naturality b
+    change S.map b ≫ τ.app _ =
+      τ.app M ≫ S.map ((finiteDerivedPullback l E m g).map b) at hn
+    rw [← hτ M, ← Category.assoc, ← hn, Category.assoc, hτ,
+      finitePointTransport_unit l E D hl m, Category.comp_id]
+  induction r generalizing N with
+  | zero => exact base N a
+  | succ r ih =>
+    let P := finiteDerivedPullback l E m (localPositivePower g r)
+    let G := finiteDerivedPullback l E m g
+    let c := finiteCanonicalPullbackComposition l E (localPositivePower g r) g m
+    have hc := c.inv.naturality a
+    change P.map (G.map a) ≫ c.inv.app _ =
+      c.inv.app N ≫ (finiteDerivedPullback l E m (localPositivePower g r ≫ g)).map a at hc
+    have hu : c.inv.app (finiteConstantCoefficientObject l E (Spec (.of D.k)) m) ≫
+        (finiteUnit l E (localPositivePower g r ≫ g) m).hom =
+        P.map (finiteUnit l E g m).hom ≫
+          (finiteUnit l E (localPositivePower g r) m).hom := by
+      exact finiteUnit_inv_composition l E (localPositivePower g r) g m
+    have hnorm : c.inv.app N ≫
+        (finiteDerivedPullback l E m (localPositivePower g (r + 1))).map a ≫
+        (finiteUnit l E (localPositivePower g (r + 1)) m).hom =
+        P.map (G.map a ≫ (finiteUnit l E g m).hom) ≫
+          (finiteUnit l E (localPositivePower g r) m).hom := by
+      simp only [localPositivePower]
+      rw [← Category.assoc, ← hc]
+      simp only [Category.assoc, hu, Functor.map_comp]
+    change (frobeniusPointTransportFinite D l hl E m N ≫
+      finiteTransportIterate l E D hl m (G.obj N) r ≫ S.map (c.inv.app N)) ≫
+        S.map ((finiteDerivedPullback l E m (localPositivePower g (r + 1))).map a) ≫
+        S.map (finiteUnit l E (localPositivePower g (r + 1)) m).hom = S.map a
+    simp only [Category.assoc]
+    rw [← S.map_comp, ← S.map_comp, hnorm, S.map_comp]
+    rw [ih]
+    simpa only [S, G, Functor.map_comp, Category.assoc] using base N a
+
 /-- The finite local operator is the coefficient identity under the canonical stalk iso.
 Source: reviewed expansion steps 1--5 (blueprint: lem-zl-constant-geometric-stalk-unit).
 Proof: the image of F_(q^n) is the unique subfield of its order, fixed pointwise by
@@ -468,7 +561,35 @@ theorem finiteOperator_unit (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀
         (embeddingPoint_return D Y₀ n hn x ι hι) ≫
       (finiteStalkUnit l E D Y₀ (embeddingPoint D Y₀ n hn x ι hι) m).hom =
         (finiteStalkUnit l E D Y₀ (embeddingPoint D Y₀ n hn x ι hι) m).hom := by
-  sorry
+  let xbar := embeddingPoint D Y₀ n hn x ι hι
+  let h := embeddingPoint_return D Y₀ n hn x ι hι
+  let gs := localPositivePower (frobeniusPointIso D).hom (n - 1)
+  let gy := localPositivePower (D.geometricFrobenius Y₀).hom (n - 1)
+  let B := finiteConstantCoefficientObject l E (D.geometricFiber Y₀).left m
+  let S := (pointFiniteSections D.k
+    (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory
+  have hw :
+      (((finiteCanonicalPullbackComposition l E gs xbar m).symm.app B ≪≫
+        eqToIso (congrArg (fun f ↦ (finiteDerivedPullback l E m f).obj B) h.symm) ≪≫
+        (finiteCanonicalPullbackComposition l E xbar gy m).app B).hom ≫
+        (finiteDerivedPullback l E m xbar).map (finiteUnit l E gy m).hom) ≫
+        (finiteUnit l E xbar m).hom =
+      (finiteDerivedPullback l E m gs).map (finiteUnit l E xbar m).hom ≫
+        (finiteUnit l E gs m).hom := by
+    simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, eqToIso.hom, Category.assoc]
+    rw [finiteUnit_composition l E xbar gy m, finiteUnit_eqToHom l E h.symm m,
+      finiteUnit_inv_composition]
+  change finiteOperator l E D hl Y₀ xbar m (n - 1) h ≫
+    (finiteStalkUnit l E D Y₀ xbar m).hom =
+      (finiteStalkUnit l E D Y₀ xbar m).hom
+  simp only [finiteOperator, finiteStalkUnit, Iso.trans_hom, Functor.mapIso_hom,
+    finiteWeilIterate_unit]
+  simp only [Category.assoc]
+  simp only [Iso.trans_hom] at hw
+  rw [← S.map_comp_assoc, ← S.map_comp_assoc, hw, S.map_comp]
+  have ht := congrArg (fun t ↦ t ≫ (finiteSectionsUnit l E D m).hom)
+    (finiteTransportIterate_unit l E D hl m (n - 1) _ (finiteUnit l E xbar m).hom)
+  simpa only [Category.assoc] using ht
 
 /-- The completed integral local operator is identity on the whole derived stalk.
 Source: reviewed expansion steps 1, 6 and 7 (blueprint: lem-zl-constant-geometric-stalk-unit).
