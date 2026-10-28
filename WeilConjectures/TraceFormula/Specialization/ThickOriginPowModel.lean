@@ -44,7 +44,9 @@ variable (k' : Type u) [Field k'] {m : ℕ} (hm : m ≠ 0)
 
 /-- `t ↦ t^m` is a finite ring map: `k'⟦t⟧` is spanned by `1, t, …, t^{m-1}` over its image. -/
 lemma PowerSeries.finite_expand : (PowerSeries.expand m hm (R := k')).toRingHom.Finite := by
+  classical
   letI := (PowerSeries.expand m hm (R := k')).toRingHom.toAlgebra
+  letI : Module (PowerSeries k') (PowerSeries k') := Algebra.toModule
   refine ⟨⟨(Finset.range m).image fun r ↦ (PowerSeries.X : PowerSeries k') ^ r, ?_⟩⟩
   rw [eq_top_iff]
   intro f _
@@ -83,7 +85,8 @@ lemma deformationTotalPowMap_toTrait :
 
 /-- The morphism of geometric generic fibres `𝒟_{I,Ω} ⟶ 𝒟_{J,Ω}` over the automorphism of
 `Spec Ω` extending the power map of the trait. -/
-noncomputable def deformationGenericPowMap : deformationGeneric X I k' ⟶ deformationGeneric X J k' :=
+noncomputable def deformationGenericPowMap :
+    deformationGeneric X I k' ⟶ deformationGeneric X J k' :=
   pullback.map _ _ _ _ (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ)
     (traitGenericPointPowMap k' m hm) (traitPowMap k' m hm)
     (deformationTotalPowMap_toTrait k' hm X I J ν₀ p hν₀ hσ).symm
@@ -129,19 +132,20 @@ lemma isIso_deformationGenericPowMap :
       (Iso.refl _) (by simp) (by simp) (by simp) ?_
     simp only [Iso.refl_hom, Category.comp_id, asIso_hom]
     exact hω.symm
-  have e := hI'.isoIsPullback _ _ hJ
-  have : deformationGenericPowMap k' hm X I J ν₀ p hν₀ hσ = e.hom := by
+  have : deformationGenericPowMap k' hm X I J ν₀ p hν₀ hσ = (hI'.isoIsPullback _ _ hJ).hom := by
     refine hJ.hom_ext ?_ ?_
-    · rw [IsPullback.isoIsPullback_hom_fst,
-        deformationGenericPowMap_ε k' hm X I J ν₀ p hν₀ hσ hproj]
-    · rw [IsPullback.isoIsPullback_hom_snd, deformationGenericPowMap_toPoint]
+    · exact (deformationGenericPowMap_ε k' hm X I J ν₀ p hν₀ hσ hproj).trans
+        (IsPullback.isoIsPullback_hom_fst _ _ hI' hJ).symm
+    · exact (deformationGenericPowMap_toPoint k' hm X I J ν₀ p hν₀ hσ).trans
+        (IsPullback.isoIsPullback_hom_snd _ _ hI' hJ).symm
   rw [this]
   infer_instance
 
 /-- The thickened special fibre `𝒟_I ×_{𝒟_J} 𝒟_{J,s}` (the locus `t^m = 0` of `𝒟_I`), as a
 `k'`-scheme. -/
 noncomputable def powSpecialFibre : Over (Spec (.of k')) :=
-  Over.mk (pullback.fst (deformationModel X J k').i (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) ≫
+  Over.mk (pullback.fst (deformationModel X J k').i
+    (deformationTotalPowMap k' hm X I J ν₀ p hν₀ hσ) ≫
     (deformationSpecialFibre X J k').hom)
 
 /-- The model `𝒲` of `X`: the total space and geometric generic fibre of `𝒟_I`, with the
@@ -199,7 +203,7 @@ lemma isFinite_deformationTotalPowMap [IsFinite ν₀] [IsSeparated p] :
       pullback.mapDesc (deformationSpaceToAffineLine X I) (traitToAffineLine k k') p ≫
         pullback.map _ _ _ _ ν₀ (traitPowMap k' m hm) (𝟙 _)
           ((Category.comp_id _).trans hν₀.symm) ((Category.comp_id _).trans hσ.symm) := by
-    ext <;> simp [deformationTotalPowMap]
+    refine pullback.hom_ext ?_ ?_ <;> simp [deformationTotalPowMap]
   rw [e]
   have := MorphismProperty.pullbackMap (P := @IsFinite) (f := deformationSpaceToAffineLine X I ≫ p)
     (g := traitToAffineLine k k' ≫ p) (i₁ := ν₀) (i₂ := traitPowMap k' m hm)
