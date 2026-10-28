@@ -20467,3 +20467,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:23 L: returned deliver/U4/Sheaf.Paper.CommonStageInternalHomRepresentative (reviewer RETURN: (reviewer C-fbc19, head fbc191faf) No proof: value_transport (the only sorry) unchanged; prove it, or put the missing co)
 - 00:28 L: returned deliver/G8/Sheaf.Paper.ScalarTowerTensorLimitTransportAssembly (reviewer RETURN: (reviewer C-2a591, head 2a5916a2f) D1/G2: StrictEquationAssembly's sorry is scalarTowerTensorLimitSquare_of_derivedSigma)
 - 00:30 L: merged deliver/NC/lem-pur-intrinsic-coefficient-stage-shift-coherence (reviewer FIX; after a return; new nodes: 1)
+- 00:31 L: returned deliver/NA/lem-pur-scalar-reduction-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head c5ed7727f569: H7/H3: the §1(C) correction makes the node easier. The conclusion is)
