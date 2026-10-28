@@ -1,0 +1,109 @@
+{
+ "id": "new-completed-constant-square-pushout",
+ "kind": "statement",
+ "title": "Sectionwise pushout for completed constant coefficient maps",
+ "statement": "For a prime l, finite extensions E and F of Q_l, an algebra map i : E → F, a scheme W, and every pro-etale object U of W, the square of commutative rings formed by the constant E-to-F map, the two constant-to-completion maps, and the normalized completed coefficient map is a pushout. The maps are the coefficient maps of [def-pur-constant-scalar-tensor-data], [def-weil-completed-integral-coefficients] and [lem-weil-finite-free-completed-scalar-comparison].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), together with the finite-free completed scalar comparison; basis-and-reduction construction of the ordinary coefficient tensor comparison."
+ },
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pur-constant-scalar-tensor-data",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Choose the integral E-basis of F supplied by finite freeness. The compatible quotient bases identify each completed F coefficient section with the finite direct sum of completed E coefficient sections indexed by that basis. The multiplication map from the constant F coefficients and the E completion is therefore the universal balanced map. The residue normalization determines this map as completedCoefficientMap, and the universal property of tensor product gives the pushout. Compatibility with the pro-etale restriction maps follows from naturality of the coefficient maps; the empty site object gives zero section rings and the identity field extension gives the identity square.",
+   "uses": [
+    "lem-pur-adic-basis-limit",
+    "lem-weil-completed-integral-finite-free",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adic-basis-limit",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "G1",
+  "date": "2026-10-28",
+  "note": "Strictly smaller split from the objectwise ordinary coefficient comparison: only the sectionwise ring pushout remains to be proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of complete coefficient rings makes the constant-to-completion square a pushout on sheaf sections",
+   "date": "2026-10-28",
+   "results": "8 hits, including CommRingCat.isPushout_iff_isPushout, CommRingCat.pushoutCoconeIsColimit and Algebra.IsPushout.comp_iff.",
+   "verdict": "Generic ring pushout APIs support the tensor argument but do not prove the sectionwise completed coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat.isPushout_iff_isPushout",
+   "date": "2026-10-28",
+   "results": "1 hit: CommRingCat.isPushout_iff_isPushout.",
+   "verdict": "Used by the proved local balancing helper to translate categorical pushouts into Algebra.IsPushout."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout.*cancelBaseChange|ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-28",
+   "results": "12 hits in Mathlib.RingTheory.IsTensorProduct, Mathlib.RingTheory.AdicCompletion.AsTensorProduct and Mathlib.RingTheory.RingHom.Flat.",
+   "verdict": "Tensor cancellation proves the module part; the finite completion tensor equivalence does not directly identify pro-etale section rings or the normalized coefficient map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCoefficientModelsOrdinaryExistence",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-coefficient-models-ordinary-existence",
+   "place": "Sectionwise coefficient square needed for the ordinary tensor comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantSquarePushout",
+  "file": "lean/Sheaf/Paper/CompletedConstantSquarePushout.lean",
+  "declaration": "WeilConjectures.completedConstantSquare_isPushout",
+  "statement": "theorem completedConstantSquare_isPushout (W : Scheme.{u}) : ∀ U : W.ProEtᵒᵖ, IsPushout ((PurStrictScalar.constantMap l E F i W).hom.app U) (CommRingCat.ofHom (show ((PurStrictScalar.constants l E).ring W).obj.obj U →+* (completedIntegralCommRingSheafUnrestricted l E W).obj.obj U from ((integralConstantToCompletionOfUniverses l E W).hom.app U).hom)) (CommRingCat.ofHom (show ((PurStrictScalar.constants l F).ring W).obj.obj U →+* (completedIntegralCommRingSheafUnrestricted l F W).obj.obj U from ((integralConstantToCompletionOfUniverses l F W).hom.app U).hom)) ((completedCoefficientMap l E F i W).hom.app U)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28",
+  "note": "Sectionwise pushout split from ordinary coefficient balancing; its proof is the remaining basis-and-completion argument."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T034749-L-3542367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T034749-L-3542367",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

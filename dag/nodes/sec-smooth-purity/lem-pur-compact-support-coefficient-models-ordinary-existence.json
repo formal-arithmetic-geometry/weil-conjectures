@@ -14,24 +14,27 @@
  ],
  "proof": [
   {
-   "text": "Choose an integral A-basis b_i of B. The compatible finite quotient bases identify the completed coefficient sheaf S with the finite free R-module on the images of b_i. Therefore the multiplication map R tensor_A B to S is an isomorphism. For the fixed R-module sheaf M, tensor this coefficient isomorphism with M and use associativity. The forward map sends b tensor x to completion(b) tensor x. Write s uniquely as sum_i r_i completion(b_i); the inverse sends s tensor x to sum_i b_i tensor (r_i x). The basis multiplication matrices prove B-linearity and the balancing relation over R. The composites are identities on pure tensors, and restriction compatibility lets the maps descend through sheafification. This proves the component isomorphism and its section formula; it makes no assertion of naturality in M or uniqueness.",
+   "text": "Use the sectionwise completed constant-square pushout theorem. Its universal property is the finite-free completed coefficient comparison, normalized by the prescribed constant-to-completion maps.",
    "uses": [
-    "lem-pur-adic-basis-limit",
-    "lem-weil-completed-integral-finite-free",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "new-completed-constant-square-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sectionwise tensor-balancing construction to the constant map and completed coefficient map. The construction forms the presheaf tensor comparison from the sectionwise pushout, proves restriction compatibility by tensor induction, and transports the comparison through sheafification and the extension-existence identifications. Its generator calculation is exactly the displayed pure-tensor formula.",
+   "uses": [
+    "new-completed-constant-square-pushout"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-adic-basis-limit",
-  "lem-weil-completed-integral-finite-free",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "new-completed-constant-square-pushout"
  ],
  "proof_origin": {
-  "by": "R5",
-  "date": "2026-10-26",
-  "note": "Objectwise basis construction split from proof step 4 of lem-pur-compact-support-coefficient-models. The parent proves naturality and uniqueness independently from tensor generators."
+  "by": "G1",
+  "date": "2026-10-28",
+  "note": "The tensor/sheafification comparison is proved directly by the sectionwise pushout balancing construction; the completed square is split as a strictly smaller statement."
  },
  "mathlib_searches": [
   {
@@ -104,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R5",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261026T070817-L-3660453",
+  "landing": "20261028T034749-L-3542367",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
