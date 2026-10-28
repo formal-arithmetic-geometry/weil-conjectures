@@ -6,6 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationABase
+import Sheaf.Paper.PodIntegralHomComparisonComparisonIdentification
 
 /-! # Invertibility of the integral pullback Hom comparison
 
@@ -51,6 +52,8 @@ theorem podIntegralHomComparison_isIso :
       IsIso (podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)
       (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)
         (canonicalIntegralPullbackTensor l E g) P) := by
-  sorry
+  intro P
+  rw [podIntegralHomComparison_eq_integralComparison l E g P]
+  infer_instance
 
 end WeilConjectures
