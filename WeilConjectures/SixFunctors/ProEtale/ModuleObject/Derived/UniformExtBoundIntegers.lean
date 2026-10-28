@@ -21,7 +21,7 @@ Blueprint `sk-lem-int-ext` (2). Let `E ⊆ ℚ̄_ℓ` be a finite subextension o
 integers `𝒪_E`, uniformizer `ϖ` and residue field `𝔽_E`, and let `X` be a separated scheme of finite
 type over a field `k` of characteristic prime to `ℓ` with `cd_ℓ(k) < ∞`. For every constructible
 `𝒪_{E,X}`-module `M` there is `d` with `Ext^q(M, B) = 0` for `q > d` and every constructible `B`
-(`ProEtale.hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension`).
+(`hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension`).
 
 The proof avoids derived limits:
 

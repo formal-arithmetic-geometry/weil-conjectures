@@ -17,7 +17,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Sections
 Let `Λ` be a commutative condensed ring with `Λ_X` flat, `i : Z ⟶ X` a closed immersion with
 quasi-compact open complement `j`. If `Hom(s, -[q])` commutes with filtered colimits of module
 objects over `Λ_Z` and `s` is bounded above, then so does `Hom(Ri_* s, -[q])` over `Λ_X`
-(`homCommutesWithFilteredColimits_rightDerivedLowerStar_of_isClosedImmersion`, blueprint `sk-lem-constructible-ext-continuity`, closed-support step via
+(`homCommutesWithFilteredColimits_rightDerivedLowerStar_of_isClosedImmersion`, blueprint
+`sk-lem-constructible-ext-continuity`, closed-support step via
 `sk-lem-formal-closed-support`).
 
 Indeed `Hom(i_* s, B[q]) = Hom(s, (Ri^! B)[q])`

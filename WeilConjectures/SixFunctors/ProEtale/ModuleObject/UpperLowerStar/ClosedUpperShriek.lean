@@ -92,11 +92,13 @@ lemma sectionsWithSupportι_app_comp_unit_app
 /-- The counit `j^* j_* ⟶ 𝟭` of `j^* ⊣ j_*` on module objects along an open immersion is an
 isomorphism: in the adjoint triple `j_! ⊣ j^* ⊣ j_*` the unit of the first adjunction is an
 isomorphism. -/
-instance isIso_upperStarLowerStarAdjunction_counit_of_isOpenImmersion [IsOpenImmersion j] :
+lemma isIso_upperStarLowerStarAdjunction_counit_of_isOpenImmersion [IsOpenImmersion j] :
     IsIso (upperStarLowerStarAdjunction Λ j).counit :=
   (Adjunction.Triple.mk (openImmersionLowerShriekUpperStarAdjunction Λ j)
     (upperStarLowerStarAdjunction Λ j)).isIso_unit_iff_isIso_counit.1
     (inferInstance : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit)
+
+attribute [local instance] isIso_upperStarLowerStarAdjunction_counit_of_isOpenImmersion
 
 /-- `Γ_Z N` vanishes on `U`: `j^*` is exact and `j^*` of the unit `N ⟶ j_* j^* N` is an
 isomorphism, inverse to the counit. -/

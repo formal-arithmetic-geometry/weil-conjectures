@@ -27,7 +27,7 @@ finite type over `k`. For the coefficient rings `𝒪_E`, `E` and `ℚ̄_ℓ`, e
 The base field has finite cohomological dimension for `𝔽_E`-coefficients
 (`ProEtale.hasFiniteCohomologicalDimension_residueFieldCoeff`, blueprint `sk-lem-base-field-cd`),
 which gives the bound for `𝒪_E` by reduction modulo a uniformizer
-(`ProEtale.hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension`);
+(`hasUniformConstructibleExtBound_padicIntegersRingObj_of_hasFiniteCohomologicalDimension`);
 the bound for `E` follows by inverting `ℓ`
 (`ProEtale.hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj`), and the
 bound for `ℚ̄_ℓ` from the finite subextensions

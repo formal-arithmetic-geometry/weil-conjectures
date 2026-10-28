@@ -23,12 +23,12 @@ Blueprint `sk-lem-constructible-ext-continuity` (1), and `sk-lem-int-ext` (1) fo
 morphisms `C ⟶ B[n]` out of a constructible sheaf `C` into a filtered colimit `B = colim Bᵢ` of
 sheaves factor through some `Bᵢ[n]`:
 
-* `AlgebraicGeometry.ProEtale.CondensedRing.hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType`,
-* `AlgebraicGeometry.ProEtale.CondensedRing.hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType`,
-* `AlgebraicGeometry.ProEtale.CondensedRing.hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType`.
+* `hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType`,
+* `hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType`,
+* `hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType`.
 
 They follow from the dévissage
-`AlgebraicGeometry.ProEtale.CondensedRing.homCommutesWithFilteredColimits_singleFunctor_of_isConstructibleModuleObject`,
+`homCommutesWithFilteredColimits_singleFunctor_of_isConstructibleModuleObject`,
 whose two hypotheses are verified here:
 
 * flatness of `Λ_X` over `ℤ`, from the torsion-freeness of continuous maps into `Λ`
@@ -37,7 +37,7 @@ whose two hypotheses are verified here:
   and `ℚ̄_ℓ` such an `L` is locally free, and for `𝒪_E` it has a resolution
   `0 ⟶ F₁ ⟶ F₀ ⟶ L ⟶ 0` by locally free sheaves (`integral_lfp_locallyFree_resolution`); locally
   free sheaves are handled by
-  `AlgebraicGeometry.ProEtale.CondensedRing.homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree`.
+  `homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree`.
 -/
 
 @[expose] public section

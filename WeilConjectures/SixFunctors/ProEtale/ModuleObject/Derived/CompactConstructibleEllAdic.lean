@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitEllAdic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitEllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 
 /-!
@@ -29,7 +29,7 @@ They follow from the abstract argument
 window, left completeness of the pro-étale derived category by repleteness,
 `AlgebraicGeometry.ProEtale.CondensedRing.countableAB4Star_mod`) and the inputs below.
 
-## Sorried input
+## Inputs
 
 For each of the three coefficient rings:
 
@@ -42,6 +42,11 @@ For each of the three coefficient rings:
 * `hasUniformConstructibleExtBound_*` (blueprints `sk-lem-uniform-constructible-ext`, for `𝒪_E`
   `sk-lem-int-ext` (2)): `Ext^q(C, N) = 0` for `C` constructible, `q > d_C` and all constructible
   `N`; this uses that `k` is finite or separably closed.
+
+The proofs are in the modules `...Derived.IndConstructibleHeart` (the heart, from the
+continuity), `...Derived.HomFilteredColimitEllAdic` (the continuity) and
+`...Derived.UniformExtBoundEllAdic` (the bound), under
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject`.
 -/
 
 @[expose] public section
@@ -60,6 +65,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k �
 
 /-! ### The coefficient ring `E` -/
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-lem-constructible-ext-continuity` (1), for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
 constructible `E`-sheaf `C` commutes with filtered colimits of sheaves. -/
@@ -69,6 +75,7 @@ theorem hasConstructibleExtContinuity_continuousMapRingObj (E : Type) [NormedFie
     HasConstructibleExtContinuity (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X) :=
   hasConstructibleExtContinuity_continuousMapRingObj_of_locallyOfFiniteType ℓ E aX
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-prop-ind-heart` (2), for the coefficient ring `E` of a finite extension `E` of
 `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: the ind-constructible `E`-sheaves are closed
 under kernels, cokernels, extensions and direct sums. -/
@@ -96,6 +103,7 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj (E : Type) [NormedF
 
 /-! ### The coefficient ring `𝒪_E` -/
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-lem-int-ext` (1), for the coefficient ring `𝒪_E` of a finite extension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a
 constructible `𝒪_E`-sheaf `C` commutes with filtered colimits of sheaves. -/
@@ -107,6 +115,7 @@ theorem hasConstructibleExtContinuity_padicIntegersRingObj (E : Type) [Field E]
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X) :=
   hasConstructibleExtContinuity_padicIntegersRingObj_of_locallyOfFiniteType ℓ E aX
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprints `sk-lem-int-integral-heart` and `det-prop-int-compactness-compact` (1), for the
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type
 `k`-scheme `X`: the ind-constructible `𝒪_E`-sheaves are closed under kernels, cokernels,
@@ -137,6 +146,7 @@ theorem hasUniformConstructibleExtBound_padicIntegersRingObj (E : Type) [Field E
 
 /-! ### The coefficient ring `ℚ̄_ℓ` -/
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-lem-constructible-ext-continuity` (1), for the coefficient ring `ℚ̄_ℓ` and a
 separated finite-type `k`-scheme `X`: `Ext^q(C, -)` out of a constructible `ℚ̄_ℓ`-sheaf `C`
 commutes with filtered colimits of sheaves. -/
@@ -145,6 +155,7 @@ theorem hasConstructibleExtContinuity_padicAlgClRingObj {X : Scheme.{u}}
     HasConstructibleExtContinuity (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
   hasConstructibleExtContinuity_padicAlgClRingObj_of_locallyOfFiniteType ℓ aX
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-prop-ind-heart` (2), for the coefficient ring `ℚ̄_ℓ` and a separated finite-type
 `k`-scheme `X`: the ind-constructible `ℚ̄_ℓ`-sheaves are closed under kernels, cokernels,
 extensions and direct sums. -/

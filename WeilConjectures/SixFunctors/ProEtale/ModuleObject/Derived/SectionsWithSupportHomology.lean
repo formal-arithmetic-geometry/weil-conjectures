@@ -129,8 +129,8 @@ lemma nonempty_isColimit_homologyFunctor_mapCocone_rightDerivedFunctor_upperStar
   have := preservesColimitsOfShape_of_reflects_of_preserves (J := I) Ψ F
   exact ⟨isColimitOfPreserves Ψ hc⟩
 
-omit [IsOpenImmersion j] [PreservesFiniteLimits (tensorLeft (condensedRingObj Λ X))]
-  [QuasiCompact j] in
+omit [IsCommMonObj Λ] [IsOpenImmersion j]
+  [PreservesFiniteLimits (tensorLeft (condensedRingObj Λ X))] [QuasiCompact j] in
 /-- The cohomology sheaves of `R𝟭 (B[0])` commute with filtered colimits of module objects `B`. -/
 lemma nonempty_isColimit_homologyFunctor_mapCocone_rightDerivedFunctor_id
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
