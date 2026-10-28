@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueShort
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteCondensed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndConstructible
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
 
 /-!
 # The derived reduction to the residue field preserves boundedness
@@ -139,18 +140,6 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
-/-- The constant global section `ϖ` of `𝒪_{E,X}`, as an endomorphism of the regular
-`𝒪_{E,X}`-module: the multiplication by `ϖ`. -/
-noncomputable def padicIntegersRegularEndOfAlgebra (ϖ : PadicAlgCl.integers ℓ E) :
-    𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ⟶
-      𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  Mod.regularLift (Mod.regular _) (Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
-    (upperStarFromPoint X).map
-      (Profinite.continuousMapConstRingHom.{u} (PadicAlgCl.integers ℓ E) ϖ).hom)
-
 /-- The underlying map of `padicIntegersRegularEndOfAlgebra X ℓ E ϖ` is the image under `p_X^*`
 of the multiplication by `ϖ` on `𝒪̲_E`. -/
 lemma padicIntegersRegularEndOfAlgebra_hom (ϖ : PadicAlgCl.integers ℓ E) :

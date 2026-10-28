@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -484,6 +485,8 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
     Iso.inv_hom_id_app_assoc, ← NatTrans.naturality_assoc, Functor.id_map, ← hid,
     Iso.inv_hom_id_app, Category.comp_id]
 
+set_option maxHeartbeats 800000 in
+-- the unit of `Dᵇc` is compared through the monoidal instances of several schemes
 /-- The local Frobenii of the constant Weil object are the identity: `tr(F_{x,m} | ℚ̄_ℓ) = 1`. -/
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
@@ -509,8 +512,9 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (fun a ↦ (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)).inv)
     (boundedConstructibleUpperStarId_hom_app_unit ℓ _)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
-    (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit ℓ a b) hx (iterate_carrier _ m)
+    (fun a b ↦ by exact_mod_proofs boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
+    (fun a b ↦ by exact_mod_proofs boundedConstructibleUpperStarComp_hom_app_unit ℓ a b)
+    hx (iterate_carrier _ m)
     _ _ _
 
 end WeilBoundedConstructible
