@@ -20752,3 +20752,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:09 L: merged deliver/Y6/Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonSymmetry (stage 3; reviewer PASS; first push; landing 20261028T020922-L-2565106 (interface); batch 20261028T020127; modules 1; new nodes 0)
 - 02:09 L: merged deliver/Y7/Sheaf.Paper.AdicCompletedTensorCommonLiftTensorUnit (stage 3; reviewer PASS; first push; landing 20261028T020927-L-2566837 (interface); batch 20261028T020127; modules 4; new nodes 3)
 - 02:09 L: merged deliver/Y9/Sheaf.Paper.CompactSupportTargetRationalCoherence (stage 3; reviewer PASS; first push; landing 20261028T020928-L-2567048 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:09 L: merged deliver/Z5/Sheaf.Paper.CompactSupportTargetRationalIsoFamily (stage 3; reviewer PASS; first push; landing 20261028T020930-L-2567281 (interface); batch 20261028T020127; modules 2; new nodes 1)

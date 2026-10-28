@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-completed-direct-image-target-iso",
+ "kind": "lemma",
+ "title": "Completed direct image under a target isomorphism",
+ "statement": "Let $\\ell$ be prime and let $E/\\mathbf Q_\\ell$ be a finite extension. For schemes $T,Y,Z$ in the coefficient universe, a morphism $p:T\\to Z$, and an isomorphism $e:Y\\xrightarrow{\\sim}Z$, the completed-coefficient derived direct image of [def-pur-integral-compact-support-coefficient-data] along $e^{-1}\\circ p$ (Lean order $p\\gg e.inv$) is naturally isomorphic to the direct image along $p$ followed by exact sectionwise integral inverse image along $e$, as in [def-weil-inverse-image-pullback-comparison]. This is an isomorphism on the entire unbounded derived categories of modules over the completed integral coefficient sheaves. No constructibility, properness, or finite-type condition on $p$ is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Target transport of the proper/open construction through the inverse target isomorphism."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For an isomorphism g, the sectionwise module inverse image is left adjoint to module direct image, by the already proved sectionwiseModuleAdjunction helper in IsomorphismDerivedPullback (the module pushforward adjunction on the site equivalence). Its coefficient map transposes to the actual completed coefficient direct-image map: test against every finite quotient projection, apply the proved sectionwiseConstantDirectMap normalization, and use naturality of the site adjunction unit. The helpers are used via proof-only import all; they introduce no unproved obligation.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise inverse-image functors along g and its inverse form an equivalence by the module pullback-identity counits. Uniqueness of right adjoints identifies module direct image along g with inverse image along its inverse. Derive this natural isomorphism; inverse image is exact, so its derived functor is its termwise derived-category functor.",
+   "uses": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set g=e.inv and compose the resulting derived isomorphism with the normalized direct-image compositor for p followed by e.inv.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pod-pullback-identities-scalar-extension",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Z5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Target transport of the proper/open construction through the inverse target isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of schemes, direct image along its inverse is the same as inverse image, for sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Hom.inv_appTop, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app, AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_inv",
+   "date": "2026-10-28",
+   "verdict": "Use adjunction uniqueness and exact derived-functor comparison; no exact project-coefficient target comparison in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-28",
+   "verdict": "Use adjunction uniqueness and exact derived-functor comparison; no exact project-coefficient target comparison in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorNatIso|rightAdjointUniq",
+   "results": "19 hits: Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-28",
+   "verdict": "Use adjunction uniqueness and exact derived-functor comparison; no exact project-coefficient target comparison in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportTargetRationalIsoFamily",
+  "date": "2026-10-28",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The final exceptional-adjunction sentence in cor-coef-verdier-weil-equivariance.proof.md, using the inverse-automorphism-square argument of lem-fix-weil-operations.proof.md for the proper map in the proper/open construction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedDirectImageTargetIso",
+  "file": "lean/Sheaf/Paper/CompletedDirectImageTargetIso.lean",
+  "declaration": "WeilConjectures.completedDirectImageTargetIso",
+  "statement": "theorem completedDirectImageTargetIso\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T Y Z : Scheme.{u}} (p : T ⟶ Z) (e : Y ≅ Z) :\n    Nonempty (push (completed l E) (p ≫ e.inv) ≅\n      push (completed l E) p ⋙\n        AlgebraicGeometry.ProEtale.inverseImageIntegralDerived l E e.hom)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261028T020930-L-2567281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261028T020930-L-2567281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
