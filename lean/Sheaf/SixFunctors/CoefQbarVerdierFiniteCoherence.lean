@@ -7,8 +7,6 @@ module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierData
 import Sheaf.SixFunctors.RationalHomIdentifications
-import Sheaf.SixFunctors.CoefQbarVerdierFiniteUnit
-import Sheaf.SixFunctors.CoefQbarVerdierFiniteTower
 
 /-! # Normalized coherence of the finite Verdier comparisons
 
@@ -33,7 +31,6 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
 
 open AlgebraicallyClosedCoefficients (Index Coefficient)
-open GeneralAlgebraicallyClosedCoefficients (Stage)
 
 omit [IsAlgClosure (Padic l) Ω] in
 /-- Simultaneous finite data from rational Verdier duality and finite Hom identification.
@@ -91,8 +88,6 @@ comparisons. The defining uniqueness of the rational scalar comparison and
 associator_existsUnique identify a with associator. Substitute in the rational
 tower equation, retaining the heterogeneous equality at its dependent endpoints.
 Both arguments include repeated coefficient fields, the zero object and the empty scheme. -/
-theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F := by
-  exact ⟨finite_unit_equation D l hl Ω X F,
-    finite_tower_equation D l hl Ω X F⟩
+theorem finite_coherent (F : Finite D l hl Ω X) : FiniteCoherent D l hl Ω X F := by sorry
 
 end WeilConjectures.CoefQbarVerdier

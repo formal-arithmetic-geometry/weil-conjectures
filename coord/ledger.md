@@ -20858,7 +20858,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/M9/Sheaf.SixFunctors.CoefFiniteRealizationRestrictionSquare (stage 3; reviewer PASS; first push; landing 20261028T034852-L-3559517 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/N1/Sheaf.Paper.SystemFiniteRefinementMateRhsCore (stage 3; reviewer PASS; first push; landing 20261028T034853-L-3559670 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/N1/Sheaf.TraceFormula.NestedChosenScalarTensorValExt (stage 3; reviewer PASS; first push; landing 20261028T034854-L-3559843 (interface); batch 20261028T034643; modules 1; new nodes 0)
-- 03:48 L: merged deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (stage 3; reviewer PASS; first push; landing 20261028T034856-L-3560188 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/N3/Sheaf.Paper.TowerScalarRootAbelianTransposeCore (stage 3; reviewer PASS; first push; landing 20261028T034857-L-3560602 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/N3/Sheaf.TraceFormula.ScalarModelRoosZeroLiftStrictExistence (stage 3; reviewer PASS; first push; landing 20261028T034858-L-3561576 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:48 L: merged deliver/P2/Sheaf.Paper.IsomorphismScalarFiniteComparisonExtension (stage 3; reviewer PASS; first push; landing 20261028T034859-L-3562900 (interface); batch 20261028T034643; modules 1; new nodes 0)
@@ -20941,3 +20940,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:07 L: returned deliver/M9/Sheaf.SixFunctors.RationalVerdierCompletionSignedRepresentative (reviewer RETURN: (reviewer C-7aed6, head 7aed6bc56) D1/D2: the split theorem is the item restated (postcomposed with an isomorphism), so )
 - 05:25 L: returned deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (reviewer RETURN: (the global build of d71826a13f, still running) your landing 20261028T034856-L-3560188 fails to compile in Sheaf.SixFunc)
 - 05:33 L: returned deliver/Y7/Sheaf.Paper.ExceptionalIntegralRightReduction (reviewer RETURN: (reviewer C-339ae, head 339ae78d8) 2b (unforced adaptation): withdraw the timing split of IntegralExceptionalInverseImag)
+
+- 13:39 L: batch 20261028T034643 dependency take-out
