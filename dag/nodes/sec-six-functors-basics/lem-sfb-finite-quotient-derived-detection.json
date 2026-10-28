@@ -29,32 +29,30 @@
  ],
  "proof": [
   {
-   "text": "Evaluation at one identifies maps out of the regular coefficient module with global sections. The evaluation/regular-module identification is identity on every section. The unique generator formula for finiteQuotient makes the degree-zero integral comparison exactly this bijection.",
+   "text": "Use the mixed-universe Grothendieck theorem locally to obtain enough injectives for the finite module-sheaf category, and hence Ext groups in universe u+1. Keep the chosen derived-category models in the theorem unchanged.",
    "uses": [
-    "def-sp-tower-class-finite",
-    "lem-sfb-tower-class-finite-unit",
-    "lem-sfb-finite-quotient-hom-bijective"
+    "lem-weil-pbc-ring-sheaves-grothendieck"
    ],
    "elementary": false
   },
   {
-   "text": "Lift hom universes using ULiftHom. The induced equivalences of ringed sites preserve injectivity and evaluation. Apply the injective-module abelian acyclicity theorem on the lifted site, then transfer its right-derived evaluation vanishing back. The mixed-universe Grothendieck theorem supplies enough injectives without changing the abelian structure.",
+   "text": "The already proved finiteQuotient_hom_bijective gives the degree-zero generator bijection. For every injective finite module sheaf I, finiteInjective_sections_acyclic gives vanishing of positive right-derived terminal sections of its underlying abelian sheaf. The existing terminal-sections/sheaf-cohomology comparison identifies this with vanishing of Ext from the constant integral sheaf.",
    "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-sp-tower-class-finite",
+    "lem-sfb-finite-quotient-hom-bijective",
     "lem-sfb-finite-injective-sections-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "For a general exact additive functor with this degree-zero generator bijection and these acyclic images of injectives, embed the target into an injective and take its cokernel. Naturality of Ext composition and of exact-functor connecting classes gives the square of two right-exact sequences. Induction and the cokernel form of the five lemma prove the comparison bijective in every degree.",
+   "text": "Apply restrictionClass_bijective to the exact forgetful functor, finiteQuotient, the degree-zero bijection and the preceding acyclicity. This gives an injective Ext comparison in degree two.",
    "uses": [
     "lem-sfb-finite-derived-restriction-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "Use Ext.homEquiv and the explicit exact-functor single/shift formula to identify the degree-two comparison with the displayed function. Its injectivity is the claim.",
+   "text": "Mathlib Ext.homEquiv identifies Ext with the chosen single-to-shifted-single morphisms. Ext.comp_hom, Ext.mk₀_hom and Ext.mapExactFunctor_hom identify the comparison with precomposition by single(finiteQuotient) followed by mapSingleArrow. Apply its injectivity and transport back through homEquiv.",
    "uses": [
     "def-sp-tower-class-finite"
    ],
@@ -63,8 +61,6 @@
  ],
  "proof_deps": [
   "def-sp-tower-class-finite",
-  "lem-sfb-tower-class-finite-unit",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sfb-finite-quotient-hom-bijective",
   "lem-sfb-finite-injective-sections-acyclic",
@@ -72,8 +68,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "H2",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second equality and injective-module argument"
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), universal delta-functor comparison via acyclicity of forgotten injective module sheaves"
  },
  "mathlib_searches": [
   {
@@ -157,13 +155,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-5e0be",
-  "group": "D3",
-  "result": "fix",
-  "landing": "20261027T233846-L-4124344",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261028T020442-L-2513025",
   "kind": "interface",
-  "note": "independent cc review: item finiteP1_kummer_chern_realization_of_boundary (new ht premise, STATEMENT-DISPUTED, verified false-old via t↦-t) and its proof against node lem-sfb-finite-p1-kummer-boundary-transport, 9 new modules/nodes, the forced FiniteP1KummerChernRealization adaptation and the report"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
