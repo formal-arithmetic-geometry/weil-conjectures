@@ -26,7 +26,8 @@ What (tools/batch_land.py land_batch calls split() on the checked stage-3 plans,
      record local/batch/pairs/pending/<B head>.json keeps A's delivered texts, so that the next batches still compile B
      with A (while A's texts are what main has); it is dropped once decided, A is no longer on main, or B's head moved.
      B fails without A too: not this check's verdict (the batch lands as before).
-  The compiles of one step have SHEAF_BATCH_PAIR_TOTAL s (300); unfinished pairs count as not decided.
+  The compiles run on SHEAF_BATCH_PAIR_PARALLEL (4) background threads of the lander; a batch waits for them at most
+  SHEAF_BATCH_PAIR_TOTAL s (300), unfinished pairs count as not decided and go on compiling for the next step.
 
     tools/batch_pairs.py links <groupA>/<sha> <groupB>/<sha> ...     dry: the links between landed commits (each commit
                                                                      vs its first parent), no compile
@@ -42,6 +43,7 @@ DIR = pathlib.Path(ROOT) / "local" / "batch" / "pairs"
 TOTAL = int(os.environ.get("SHEAF_BATCH_PAIR_TOTAL", "300"))
 WAIT = float(os.environ.get("SHEAF_BATCH_PAIR_WAIT", "10800"))
 PARALLEL = int(os.environ.get("SHEAF_BATCH_PAIR_PARALLEL", "4"))
+BG_TOTAL = int(os.environ.get("SHEAF_BATCH_PAIR_CALL", "1800"))    # one pair's compiles, in the background
 ROLES = ("item", "adapted", "new", "restored", "deleted")
 
 
@@ -194,6 +196,51 @@ def _pending_parties(plans: list[dict], source) -> list[dict]:
     return out
 
 
+_BG = {"lock": threading.Lock(), "queue": [], "busy": set(), "workers": 0}
+
+
+def _busy(keys) -> bool:
+    with _BG["lock"]:
+        return any(k in _BG["busy"] for k in keys)
+
+
+def _submit(jobs, compile) -> list[str]:
+    """queue the pair compiles on the lander's background pool (PARALLEL threads; a key queued or compiling is not queued
+    again); they write DIR/<key>.json. Returns the keys."""
+    with _BG["lock"]:
+        for k, a, b, x in jobs:
+            if k not in _BG["busy"]:
+                _BG["busy"].add(k); _BG["queue"].append((k, a, b, x, compile))
+        start = max(0, min(PARALLEL, len(_BG["queue"])) - _BG["workers"])
+        _BG["workers"] += start
+    for _ in range(start):
+        threading.Thread(target=_bg_worker, daemon=True).start()
+    return [j[0] for j in jobs]
+
+
+def _bg_worker() -> None:
+    while True:
+        with _BG["lock"]:
+            if not _BG["queue"]:
+                _BG["workers"] -= 1
+                return
+            k, a, b, x, compile = _BG["queue"].pop(0)
+        try:
+            try:
+                r = compile(a["texts"], b["texts"], x["modules"], time.time() + BG_TOTAL,
+                            a_old={m: v[0] for m, v in a["changes"].items()})
+            except Exception as e:  # noqa: BLE001
+                r = {"with": "INFRA", "with_out": repr(e)[:300], "without": None}
+            old = _read(DIR / f"{k}.json") or {}
+            _write(DIR / f"{k}.json", dict(r, first=old.get("first") or time.time(), a=a["name"], b=b["name"],
+                                          modules=x["modules"], via=x["via"], time=time.strftime("%FT%T%z")))
+        except Exception:  # noqa: BLE001   a result that cannot be written is compiled again next time
+            pass
+        finally:
+            with _BG["lock"]:
+                _BG["busy"].discard(k)
+
+
 def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None, now=time.time) -> tuple:
     """plans: checked stage-3 plans in landing order; graph: the import graph with every plan's texts in place.
     Returns (plans that land, [(plan, why)] that wait, [(plan, why)] returned to their groups)."""
@@ -214,9 +261,14 @@ def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None
     L = [x for x in L if parties[x["a"]].get("landing") or parties[x["a"]].get("for") == parties[x["b"]]["plan"]["head"]]
     if not L:
         return plans, [], []
-    t0 = now(); deadline = t0 + TOTAL
-    res, lock = {}, threading.Lock()
-    todo = []
+    t0 = now()
+    for f in DIR.glob("*.json"):              # results of pairs not seen for a long time
+        try:
+            if time.time() - f.stat().st_mtime > 2 * WAIT:
+                f.unlink(missing_ok=True)
+        except OSError:
+            pass
+    res, todo = {}, []
     for x in L:
         a, b = parties[x["a"]], parties[x["b"]]
         k = pair_key(a["texts"], b["texts"])
@@ -226,39 +278,28 @@ def split(plans: list[dict], graph: dict, log, compile=compile_pair, source=None
             res[k] = r
         else:
             res[k] = dict(r or {}, first=(r or {}).get("first") or a.get("first") or t0)
+            if r is None:
+                _write(DIR / f"{k}.json", res[k])       # the wait cap counts from the first attempt
             todo.append(x)
     if todo:
         log(f"batch pairs: {len(L)} linked pair(s) in the batch, {len(todo)} to compile: "
             + "; ".join(f"{parties[x['b']]['name']} with {parties[x['a']]['name']} ({', '.join(x['modules'][:2])})"
                         for x in todo[:6]))
-
-    def work():
-        while True:
-            with lock:
-                if not todo or deadline - now() < 60:
-                    return
-                x = todo.pop(0)
-            a, b = parties[x["a"]], parties[x["b"]]
-            try:
-                r = compile(a["texts"], b["texts"], x["modules"], deadline,
-                            a_old={m: v[0] for m, v in a["changes"].items()})
-            except Exception as e:  # noqa: BLE001
-                r = {"with": "INFRA", "with_out": repr(e)[:300], "without": None}
-            with lock:
-                r = dict(r, first=res[x["key"]]["first"], a=a["name"], b=b["name"], modules=x["modules"],
-                         via=x["via"], time=time.strftime("%FT%T%z"))
-                res[x["key"]] = r
-                _write(DIR / f"{x['key']}.json", r)
-    ths = [threading.Thread(target=work) for _ in range(max(1, min(PARALLEL, len(todo))))]
-    for th in ths: th.start()
-    for th in ths: th.join()
+        keys = _submit([(x["key"], parties[x["a"]], parties[x["b"]], x) for x in todo], compile)
+        # the batch waits for them at most TOTAL s; the rest go on in the background (results kept for the next step)
+        t_end = time.time() + TOTAL
+        while time.time() < t_end and _busy(keys):
+            time.sleep(0.5)
+        for x in todo:
+            r = _read(DIR / f"{x['key']}.json")
+            if r:
+                res[x["key"]] = dict(r, first=res[x["key"]]["first"])
 
     out_wait, out_ret, record = {}, {}, set()
     for x in L:
         a, b, r = parties[x["a"]], parties[x["b"]], res[x["key"]]
         ia = x["a"] if a.get("landing") else -1          # a pending A landed in an earlier batch: earlier
         later = x["b"] if ia < x["b"] else x["a"]
-        lp = parties[later]["plan"]
         if r.get("with") == "OK" or (r.get("with") == "FAIL" and r.get("without") == "FAIL"):
             continue
         if r.get("with") == "FAIL" and r.get("without") == "OK":
