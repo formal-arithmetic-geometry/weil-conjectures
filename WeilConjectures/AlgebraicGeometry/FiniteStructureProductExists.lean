@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteStructureProductCompatibility
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
-import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorPowersSupported
-import WeilConjectures.AlgebraicGeometry.GrothendieckExistence
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 /-! # Existence of a lifted finite-structure product
 

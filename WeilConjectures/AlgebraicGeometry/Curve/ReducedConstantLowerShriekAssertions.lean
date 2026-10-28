@@ -8,9 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction
+public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Constant prime coefficients extended by zero on reduced curves
 

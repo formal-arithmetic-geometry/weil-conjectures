@@ -6,8 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import WeilConjectures.AlgebraicGeometry.RestrictedResolutionOpenCohomology
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Open restriction of the normalized resolution class
 

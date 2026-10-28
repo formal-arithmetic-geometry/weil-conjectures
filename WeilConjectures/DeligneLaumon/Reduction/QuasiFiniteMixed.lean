@@ -5,11 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
-public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
-public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
+public import WeilConjectures.WeilSheaf.VerdierDualLocalization
+public import WeilConjectures.WeilSheaf.ConstantTwistWeight
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
+public import WeilConjectures.WeilSheaf.CohomologyExact
 
 /-!
 # Weil sheaves on a quasi-finite `k₀`-scheme are mixed

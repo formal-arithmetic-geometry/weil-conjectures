@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassEquiv
 import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkNormalization
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Local direct-image stalks and total cohomology
 

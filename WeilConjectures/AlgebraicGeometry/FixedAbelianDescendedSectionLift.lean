@@ -6,9 +6,12 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionLift
 import all WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.Data.NNReal.Defs
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Fixed-coefficient lifting on a descended qcqs étale object
 

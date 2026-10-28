@@ -7,10 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
-public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
 
 /-!
 # Resolutions by twists on the projective line

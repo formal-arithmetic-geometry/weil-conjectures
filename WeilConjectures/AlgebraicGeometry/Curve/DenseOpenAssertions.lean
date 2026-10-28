@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
@@ -16,7 +15,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenVanishingComparison
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenFinitenessComparison
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChangeComparison
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import WeilConjectures.AlgebraicGeometry.Curve.CoefficientPair
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # The eight curve assertions on a dense open

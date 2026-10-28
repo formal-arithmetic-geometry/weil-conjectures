@@ -6,12 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.AlgebraicGeometry.ModuleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing
 import WeilConjectures.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanishing
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-!
 # Direct images of injective modules are acyclic on every open

@@ -6,16 +6,14 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
-public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
-public import WeilConjectures.Mathlib.RingTheory.Localization.Ideal
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
+public import Mathlib.Data.Nat.Choose.Multinomial
 
 /-!
 # Hilbert schemes of curves

@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Mathlib.CategoryTheory.Presentable.Directed
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Ordinary etale continuity for cofiltered categories
 

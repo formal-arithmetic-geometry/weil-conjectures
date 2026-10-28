@@ -10,12 +10,12 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 @[expose] public section
 

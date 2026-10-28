@@ -7,13 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
-public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
+public import Mathlib.Condensed.Discrete.Characterization
 
 /-!
 # Cohomological dimension of étale sheaves of `Λ`-modules

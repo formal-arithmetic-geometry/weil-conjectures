@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
@@ -15,7 +14,13 @@ import WeilConjectures.AlgebraicGeometry.FieldExtensionHigherDirectImageExchange
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.Data.NNReal.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Acyclicity of extended injective torsion module sheaves
 

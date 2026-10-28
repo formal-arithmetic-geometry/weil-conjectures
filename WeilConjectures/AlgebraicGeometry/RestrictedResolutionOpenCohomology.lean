@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyAugmentedLift
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Restriction on the homology of fixed-resolution section complexes
 

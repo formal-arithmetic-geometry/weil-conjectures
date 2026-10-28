@@ -7,9 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.Grp.Abelian
 
 /-!
 # Sections of module pullback on affine opens

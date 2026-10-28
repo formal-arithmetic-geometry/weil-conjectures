@@ -6,11 +6,10 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPullCore
-import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Comparison of a formal system with a proper pushforward
 

@@ -7,12 +7,10 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.Concentration
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.WeilSheaf.Dual
-public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 public import WeilConjectures.WeilSheaf.StalkTensor
-public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
+public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 
 /-!
 # The realified kernel is `ι`-real

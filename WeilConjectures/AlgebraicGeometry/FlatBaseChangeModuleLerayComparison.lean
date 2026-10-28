@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Affine target Leray comparison in module cohomology
 

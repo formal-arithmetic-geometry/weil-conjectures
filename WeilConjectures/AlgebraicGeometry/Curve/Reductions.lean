@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 
 
-public import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 
@@ -22,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
 import WeilConjectures.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.ReductionModuleAssertions
-import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
@@ -32,13 +30,10 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -48,8 +43,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.NormalizationMonoProperties
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+public import Mathlib.Tactic.Polynomial.Basic
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Reduction steps for the eight curve-cohomology assertions

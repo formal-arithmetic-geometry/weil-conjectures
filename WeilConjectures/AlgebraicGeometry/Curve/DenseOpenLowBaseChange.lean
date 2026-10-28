@@ -6,11 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenClosedTerm
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import Mathlib.Algebra.FiveLemma
+public import Mathlib
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Dense-open field-extension comparison ingredients -/
 

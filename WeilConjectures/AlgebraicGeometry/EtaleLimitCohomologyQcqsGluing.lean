@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyAffineStage
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyBinaryGluing
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Cohomology continuity glues from affine stages to qcqs stages
 

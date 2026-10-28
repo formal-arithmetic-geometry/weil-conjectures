@@ -10,9 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealKernelBound
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdealImageStabilization
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 

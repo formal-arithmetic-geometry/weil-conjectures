@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-!
 # Affine base change for global Hom out of a perfect complex

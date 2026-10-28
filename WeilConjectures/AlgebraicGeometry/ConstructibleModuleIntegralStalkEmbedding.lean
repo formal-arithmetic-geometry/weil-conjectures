@@ -12,16 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleNormalizedGenericData
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.ConstructibleSheaf.FinitePushforward
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Finite.Stalk
+import Mathlib
 
 /-!
 # Integral pushforward maps detecting a prescribed point

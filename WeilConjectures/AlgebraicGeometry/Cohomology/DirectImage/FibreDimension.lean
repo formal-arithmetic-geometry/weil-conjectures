@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.RelativeSerre
 public import WeilConjectures.AlgebraicGeometry.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexFibre
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
 
 /-!
 # Vanishing of the higher direct images above the fibre dimension

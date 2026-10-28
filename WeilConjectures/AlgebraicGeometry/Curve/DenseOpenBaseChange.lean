@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenLowBaseChange
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
+public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Field extension across a dense open -/
 

@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 
 import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.Algebra.Homology.KFlat
 
 /-! # Coherent formal modules and completion
 

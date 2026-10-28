@@ -5,9 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.ConstructibleSheaf.FinitePushforward
-public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
@@ -22,12 +19,13 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic
 import WeilConjectures.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity
-import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+public import Mathlib.Tactic.ReduceModChar
+public import Mathlib.RingTheory.WittVector.IsPoly
 
 /-!
 # Gabber's affine comparison theorem

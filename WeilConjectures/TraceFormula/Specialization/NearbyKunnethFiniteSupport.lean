@@ -5,14 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
-public import WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteClosedPoints
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
-public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.TraceFormula.Specialization.SliceSupport
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
 
 /-!
 

@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraOperationsLift
@@ -23,6 +22,8 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionAlgebraSectionsExact
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Algebra structures on algebraized finite direct images
 

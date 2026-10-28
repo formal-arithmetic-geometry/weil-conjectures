@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.AffineCohomologySectionEquiv
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-import WeilConjectures.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 /-! # Canonical affine section comparisons before flat base change
 
 Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,

@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
@@ -19,6 +18,8 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
+public import WeilConjectures.AlgebraicGeometry.Curve.CoefficientPair
+public import Mathlib.RingTheory.WittVector.IsPoly
 
 /-!
 # DenseOpenBaseChangeComparison

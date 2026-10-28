@@ -6,11 +6,11 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLift
 import WeilConjectures.AlgebraicGeometry.SupportedKoszulUnitSummand
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Gluing supported perfect zero detectors
 

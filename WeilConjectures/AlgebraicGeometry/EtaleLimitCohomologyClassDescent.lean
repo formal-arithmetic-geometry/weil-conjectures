@@ -9,6 +9,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyConnectingLadder
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Finite-stage representatives of limit cohomology classes
 

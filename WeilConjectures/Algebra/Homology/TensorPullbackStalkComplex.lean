@@ -6,8 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings

@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Target Leray comparison normalized against a natural source comparison
 

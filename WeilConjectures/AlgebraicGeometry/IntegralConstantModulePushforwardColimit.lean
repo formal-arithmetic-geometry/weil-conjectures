@@ -6,16 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardLimit
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitSystem
-import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Compactification.Defs
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
 # Integral constant module pushforwards are filtered colimits of finite pushforwards

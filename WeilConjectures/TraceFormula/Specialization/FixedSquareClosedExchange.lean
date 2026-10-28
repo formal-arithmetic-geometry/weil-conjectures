@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange

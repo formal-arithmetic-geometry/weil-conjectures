@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineCanonicalComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 @[expose] public section
 universe u

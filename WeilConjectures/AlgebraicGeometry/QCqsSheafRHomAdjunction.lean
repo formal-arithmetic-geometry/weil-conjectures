@@ -6,12 +6,13 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageInternalHom
-public import WeilConjectures.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
-public import WeilConjectures.AlgebraicGeometry.DQCoheratorAdjunction
 import WeilConjectures.AlgebraicGeometry.QCqsDerivedProjectionMate
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 
 /-! # Coherated sheaf derived Hom adjunction
 

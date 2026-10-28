@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineEventualZero
 import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Affine-stage cohomology continuity
 

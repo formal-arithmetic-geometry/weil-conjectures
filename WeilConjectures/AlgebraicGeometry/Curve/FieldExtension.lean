@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
 
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic

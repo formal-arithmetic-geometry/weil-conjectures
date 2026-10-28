@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineDegreeZeroKernel
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # EtaleLimitAffineEventualZero
 

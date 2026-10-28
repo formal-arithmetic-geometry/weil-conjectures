@@ -8,12 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
-public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionAffineLine
-public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
-public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
-public import WeilConjectures.TraceFormula.WeilBaseChange
 
 /-!
 

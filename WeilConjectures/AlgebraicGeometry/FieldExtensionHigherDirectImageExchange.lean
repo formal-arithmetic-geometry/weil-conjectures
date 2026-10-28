@@ -6,11 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import WeilConjectures.AlgebraicGeometry.FieldExtensionDerivedDirectImageExchange
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-! # Relative higher-direct-image exchange for field extensions
 

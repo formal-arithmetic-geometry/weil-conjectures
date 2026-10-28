@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineExactLadder
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Corrected lifts for the affine continuity kernel
 

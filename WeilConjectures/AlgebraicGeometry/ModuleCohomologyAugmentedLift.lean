@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-public import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import Mathlib.Algebra.Homology.Factorizations.CM5a

@@ -15,10 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 
 import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraAdjointsConstruct
-import WeilConjectures.AlgebraicGeometry.FiniteStructureAdjointTransitions
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Algebra structures on algebraized finite direct images
 

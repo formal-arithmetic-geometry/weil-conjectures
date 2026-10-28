@@ -6,12 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
-public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
-public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.DualIrreducible
-public import WeilConjectures.WeilSheaf.LisseDuality
 
 /-!
 # Nonexceptionality of the dual

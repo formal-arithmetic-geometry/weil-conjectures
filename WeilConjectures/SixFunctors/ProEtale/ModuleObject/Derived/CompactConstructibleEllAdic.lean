@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 

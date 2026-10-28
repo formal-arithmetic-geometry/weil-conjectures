@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 public import WeilConjectures.SixFunctors.BaseChange.Etale
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import Mathlib
 
 /-!
 # Base change for extensions by zero along étale morphisms

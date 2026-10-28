@@ -6,12 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.Algebra.Homology.Factorizations.CM5a
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 
 /-! # Maps on module cohomology induced by scheme maps
 

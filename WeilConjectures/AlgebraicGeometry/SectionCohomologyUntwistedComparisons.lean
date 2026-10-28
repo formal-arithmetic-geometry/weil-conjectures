@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.Topology.RestrictInjectiveResolution
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Untwisted comparison with raw section cohomology
 

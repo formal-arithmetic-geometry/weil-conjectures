@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
@@ -15,6 +14,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Comma
 
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingApproximation
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Essential surjectivity of finite étale lifting over a henselian pair

@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.Grp.Abelian
 
 /-! # Affine section base change for quasi-coherent modules
 

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 
 /-!
 # The inverse transform of a punctual sheaf, geometrically

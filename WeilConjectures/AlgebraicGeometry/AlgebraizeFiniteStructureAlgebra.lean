@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraLift
 import WeilConjectures.AlgebraicGeometry.FiniteStructureProperSupport
-import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import all WeilConjectures.AlgebraicGeometry.SupportedThickeningDictionary
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
@@ -24,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Algebraization of the structure algebras of a finite formal system
 

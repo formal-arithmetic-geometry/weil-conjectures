@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import WeilConjectures.AlgebraicGeometry.RestrictedResolutionCohomology
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Restriction of target section classes
 

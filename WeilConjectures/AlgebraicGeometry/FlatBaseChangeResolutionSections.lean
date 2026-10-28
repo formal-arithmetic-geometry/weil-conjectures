@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import WeilConjectures.AlgebraicGeometry.FlatPullbackHomologySections
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # FlatBaseChangeResolutionSections
 

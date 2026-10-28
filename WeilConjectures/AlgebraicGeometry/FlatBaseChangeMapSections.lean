@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionIndependence
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionSections
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # FlatBaseChangeMapSections
 

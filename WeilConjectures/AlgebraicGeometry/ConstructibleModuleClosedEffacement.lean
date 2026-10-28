@@ -6,12 +6,16 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement
+public import Mathlib.Data.NNReal.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Effacing constructible finite module coefficients on a closed subscheme
 

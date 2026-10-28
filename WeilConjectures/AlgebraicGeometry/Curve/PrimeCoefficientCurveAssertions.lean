@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
+public import Mathlib.Algebra.Category.ModuleCat.Algebra
+public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Eight assertions for constructible prime coefficients on reduced curves
 

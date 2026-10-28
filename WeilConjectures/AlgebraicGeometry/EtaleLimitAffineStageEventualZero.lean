@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineStageTailColimit
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
-import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineEventualZero
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Finite-stage vanishing when one stage is affine
 
