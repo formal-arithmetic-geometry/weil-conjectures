@@ -13,32 +13,50 @@
  ],
  "proof": [
   {
-   "text": "The section-preserving constant-ring sequence equivalence and simultaneous K-injectives identify derived internal Hom and derived integral sections with the strict signed global Hom complex. The slice normalization is natural under precomposition; pass from K-flat to arbitrary sources by quasi-isomorphism invariance.",
+   "text": "Use the no-limit sequence-site comparison to identify the ambient derived mapping tower naturally in all source complexes with Q of the explicitly transposed strict global Hom cochain tower.",
    "uses": [
-    "lem-coef-hom-tower-scalar-model",
-    "lem-sfb-derived-internal-hom-sections-model"
+    "lem-coef-integral-dualizing-resolved-mapping-tower"
    ],
    "elementary": false
   },
   {
-   "text": "Transitions of injective towers split in every degree. Postcomposition supplies split transitions on global Hom cochains. The product endomorphism 1-shift is degreewise surjective, with kernel the ordinary limit. The normalized Roos comparison and exact products of modules identify this limit with the total derived limit, naturally under precomposition.",
+   "text": "For an injective tower each successor transition splits. In degree q the Hom-complex product projections construct a section of postcomposition by a degreewise split epimorphism. Applying the specified additive module-valued sections preserves that splitting. Thus every transition of the strict global Hom tower is degreewise epic. This is proved by private helpers homComplex_post_split and resolvedMappingCochains_epi.",
    "uses": [
-    "lem-sfb-global-rhom-resolved-tower-models"
+    "lem-weil-pbc-sequential-tower-evaluation-full",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a strict complex of module towers with degreewise epic transitions, solve 1-shift on its product degreewise. Identify the ordinary limit with the kernel. The degreewise-epic kernel-to-shifted-mapping-cone comparison identifies its actual inclusion roosι as a quasi-isomorphism, using the two cone coordinates. The natural normalized Roos comparison then proves invertibility of the canonical right-derived-limit unit at that complex. These are private helpers moduleRoosInclusionQuasiIso and moduleLimitUnitOfSurjective.",
+   "uses": [
+    "stage3-pur-canonical-tower-roos-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the canonical right-derived-limit unit by the strict cochain functor. Its components are invertible by the previous step, so it is a natural isomorphism. The source library functorEquivalence.inverse constructs the transpose; transposing back is definitionally the original tower of complexes. The natural strictTowerLimitIso identifies limit of complexes with termwise limit. Compose these isomorphisms with the no-limit comparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-coef-hom-tower-scalar-model",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "lem-sfb-global-rhom-resolved-tower-models"
+  "lem-coef-integral-dualizing-resolved-mapping-tower",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-sc-hom-complex-projections",
+  "stage3-pur-canonical-tower-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M5",
+  "group": "C6",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "section-global-RHom (Tag 0B6E), section on internal Hom (Tags 0A95, 0A96), lemma-derived-limit-is-ok (Tag 0941); current blueprint prop-coef-integral-dualizing, second proof paragraph."
+  "place": "section-global-RHom (Tag 0B6E), section on internal Hom (Tags 0A95, 0A96), lemma-derived-limit-is-ok (Tag 0941); current blueprint prop-coef-integral-dualizing, second proof paragraph.",
+  "description": "The complete ordinary-limit half is implemented directly from the proved Roos and kernel-to-cone library. Only the strict mapping-tower identification before limits remains as a strictly smaller obligation; the original statement and definitions are unchanged."
  },
  "mathlib_searches": [
   {
@@ -125,9 +143,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M5",
+  "group": "C6",
   "result": "pass",
-  "landing": "20261028T055717-L-798989",
+  "landing": "20261028T081732-L-2775778",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

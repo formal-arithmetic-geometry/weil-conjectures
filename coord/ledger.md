@@ -21157,3 +21157,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:11 L: returned deliver/E3/Sheaf.Paper.DiagonalCyclicEvaluationTransport (reviewer RETURN: (the landing tools, head a704850e5) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 08:17 L: merged deliver/B5/Sheaf.Paper.FiniteFreeScalarDerivedComparisonBetaPullbackDescent (stage 3; reviewer PASS; first push; landing 20261028T081730-L-2775124 (interface); batch 20261028T081727; modules 1; new nodes 0)
 - 08:17 L: merged deliver/C1/Sheaf.SmoothPurity.TraceExistence (stage 3; reviewer PASS; first push; landing 20261028T081731-L-2775523 (interface); batch 20261028T081727; modules 1; new nodes 0)
+- 08:17 L: merged deliver/C6/Sheaf.SixFunctors.IntegralDualizingResolvedMappingLimit (stage 3; reviewer PASS; first push; landing 20261028T081732-L-2775778 (interface); batch 20261028T081727; modules 2; new nodes 1)
