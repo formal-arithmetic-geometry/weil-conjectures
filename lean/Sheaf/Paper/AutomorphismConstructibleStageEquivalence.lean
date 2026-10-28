@@ -26,6 +26,8 @@ import Sheaf.Paper.SimultaneousIntegralPullbackComparisons
 import Sheaf.Paper.IntegralScalarPullbackCompletionNormalization
 import Sheaf.Paper.IntegralAutomorphismCancellationNormalization
 import Sheaf.Paper.CommonStagePullbackRepresentativeLinearity
+import Sheaf.Paper.AutomorphismConstructibleIntegralShiftData
+import Sheaf.Paper.AutomorphismConstructibleIntegralShiftWitness
 import Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback
 import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
 import all Sheaf.Paper.IntegralOperationsPreserveConstructible
@@ -70,6 +72,7 @@ Weil-structures paragraph, first two sentences
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -2083,7 +2086,17 @@ theorem automorphismConstructibleStage_integral_shifts
           (constructibleIntegralPullback l E eY.hom).IsTriangulated ∧
           NatTrans.CommShift (automorphismStageIntegralSquare l E C f eX eY h).hom ℤ)
         (sf := cf) (sX := cX) (sY := cY) := by
-  sorry
+  constructor
+  · exact automorphismConstructibleStage_integral_shift_data l E
+  · let b := automorphismStageIntegralSquare l E C f eX eY h
+    have hb := (automorphismStageIntegralSquare_existsUnique l E C f eX eY h).exists.choose_spec
+    obtain ⟨cf, cX, cY, hf, hX, hY, hall⟩ :=
+      automorphismConstructibleStage_integral_shift_witness l E C f eX eY h b hb
+    refine ⟨cf, cX, cY, ?_, ?_, ?_, ?_⟩
+    · simpa only [automorphismStageIntegralShiftNormalization] using hf
+    · simpa only [automorphismStageIntegralShiftNormalization] using hX
+    · simpa only [automorphismStageIntegralShiftNormalization] using hY
+    · exact hall
 
 /-- The rational and common-stage square comparisons preserve the descended shifts.
 Source: Weil-structures paragraph, rationalization and coherent finite-field descent
