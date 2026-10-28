@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicReindexingCompositionCancelledStage
+import Sheaf.Paper.AdicReindexingCompositionCancelledDescent
 
 /-! # Cancelled composition calculation for normalized adic reindexing
 
@@ -66,6 +68,11 @@ theorem normalized_reindexing_composition_cancelled
         (pullbackTensorCommonComposition l (PadicAlgCl l) h.hom g.hom M).hom ≫
       (C.comparison T U g).hom.app
         ((commonStageDerivedPullback l (PadicAlgCl l) h.hom).obj M) := by
-  sorry
+  intro T U V g h M
+  apply normalized_reindexing_composition_cancelled_descent l D C
+    h_moduleComp_sections
+  intro T U V g h E K
+  exact normalized_reindexing_composition_cancelled_stage l D C
+    h_moduleComp_sections h_integral_normalization T U V g h E K
 
 end WeilConjectures.AdicQbarRealization

@@ -1,0 +1,93 @@
+{
+ "id": "lem-sf-adic-reindexing-functoriality-comp-cancelled-descent",
+ "kind": "statement",
+ "title": "Common-stage descent for cancelled composition",
+ "statement": "A cancelled composition equation holding for every finite integral representative descends through localization and common-stage representatives to every common-stage object.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, composition paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Use scalar-extension naturality and representative independence to transport the finite-stage equation through rational localization and common-stage inclusion; cancel the intermediate scalar comparisons.",
+   "uses": [
+    "lem-sf-adic-reindexing-functoriality-comp-cancelled-stage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-reindexing-functoriality-comp-cancelled-stage"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, composition paragraph"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-functoriality-comp-cancelled",
+   "place": "Remark 6.8.15, composition paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingCompositionCancelledDescent",
+  "file": "lean/Sheaf/Paper/AdicReindexingCompositionCancelledDescent.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_composition_cancelled_descent",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-28",
+  "statement": "theorem normalized_reindexing_composition_cancelled_descent (C : FamilyCore l D) (h_moduleComp_sections : ∀ (T U V : GeometricSpace D) (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left) (M : modules l V.base.left (C.data V).realization) (W : T.base.left.ProEtᵒᵖ) (x : ((modulePull l T.base.left (g ≪≫ h).hom (C.ring T V (g ≪≫ h))).obj M).val.obj W), HEq (((C.moduleComp T U V g h).hom.app M).val.app W x) x) (h_stage : ∀ (T U V : GeometricSpace D) (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left) (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) V.base.left), normalized_reindexing_composition_cancelled_equation l D C T U V g h E K) : ∀ (T U V : GeometricSpace D) (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left) (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) V.base.left), letI := (C.data T).units letI := (C.data U).units letI := (C.data V).units (C.comparison T V (g ≪≫ h)).hom.app M ≫ (Functor.mapDerivedCategoryNatIso (C.moduleComp T U V g h) ≪≫ Functor.mapDerivedCategoryCompIso _ _).hom.app ((ordinary l V.base.left (C.data V).realization).obj M) ≫ inv ((derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.comparison U V h).hom.app M)) = (ordinary l T.base.left (C.data T).realization).map (pullbackTensorCommonComposition l (PadicAlgCl l) h.hom g.hom M).hom ≫ (C.comparison T U g).hom.app ((commonStageDerivedPullback l (PadicAlgCl l) h.hom).obj M)",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.normalized_reindexing_composition_cancelled_descent"
+  ]
+ },
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCompositionCancelled",
+  "date": "2026-10-28",
+  "group": "Q6"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T020652-L-2535765",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T020652-L-2535765",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

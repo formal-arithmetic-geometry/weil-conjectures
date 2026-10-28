@@ -1,0 +1,97 @@
+{
+ "id": "lem-sf-adic-reindexing-functoriality-comp-cancelled-stage",
+ "kind": "statement",
+ "title": "Finite-stage cancelled composition equation",
+ "statement": "The cancelled composition equation holds for an integral constructible representative at every finite coefficient stage. ",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, composition paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the integral formulas at a fixed finite stage, apply cochain tensor coherence and the integral inverse-image comparison compositor, and cancel the finite-stage comparison.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, composition paragraph"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-functoriality-comp-cancelled",
+   "place": "Remark 6.8.15, composition paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingCompositionCancelledStage",
+  "file": "lean/Sheaf/Paper/AdicReindexingCompositionCancelledStage.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_composition_cancelled_stage",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-28",
+  "statement": "theorem normalized_reindexing_composition_cancelled_stage (C : FamilyCore l D) (h_moduleComp_sections : ∀ (T U V : GeometricSpace D) (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left) (M : modules l V.base.left (C.data V).realization) (W : T.base.left.ProEtᵒᵖ) (x : ((modulePull l T.base.left (g ≪≫ h).hom (C.ring T V (g ≪≫ h))).obj M).val.obj W), HEq (((C.moduleComp T U V g h).hom.app M).val.app W x) x) (h_integral_normalization : ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left) (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)), letI := (C.data T).units letI := (C.data U).units integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization (C.ring T U g) E (C.integral T U g E) (C.comparison T U g)) (T U V : GeometricSpace D) (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left) (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) V.base.left) : normalized_reindexing_composition_cancelled_equation l D C T U V g h E K",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.normalized_reindexing_composition_cancelled_stage"
+  ]
+ },
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCompositionCancelled",
+  "date": "2026-10-28",
+  "group": "Q6"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T020652-L-2535765",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261028T020652-L-2535765",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
