@@ -20501,3 +20501,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:04 L: returned deliver/U7/Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit (reviewer RETURN: (the landing tools, head 2bb71e9ff) the delivery did not land: missing import source modules: Sheaf.SixFunctors.Integral)
 - 01:04 L: returned deliver/U8/Sheaf.SixFunctors.IntegralVerdierReductionPairingDeltaUncurried (reviewer RETURN: (the landing tools, head 2b031541d) the delivery did not land: missing import source modules: Sheaf.SixFunctors.Integral)
 - 01:04 L: returned deliver/X9/Sheaf.SixFunctors.RationalVerdierEvaluationDetection (reviewer RETURN: (the landing tools, head e85554efe) the delivery did not land: missing import source modules: Sheaf.SixFunctors.Rational)
+- 01:04 L: merged deliver/B2/Sheaf.Paper.NativeWeilScalarCounitData (stage 3; reviewer PASS; first push; landing 20261028T010424-L-1783496 (proof); batch 20261028T010422; modules 1; new nodes 0)
