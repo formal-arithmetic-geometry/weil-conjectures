@@ -6,6 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingMappingTower
+import Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitRoos
+import Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitCanonical
 
 /-! # Global Hom and the limit of a strict mapping tower
 
@@ -50,12 +52,26 @@ computes its derived limit. These comparisons commute with precomposition in P
 and with homotopies. Descend them through localization, obtaining naturality on
 the entire constructible category, rather than choosing separate isomorphisms
 for its objects. The construction applies also to the zero complex and empty X. -/
+private theorem integralDualizingGlobalHom_iso_of_iso
+    {M N : DerivedCategory (scalarReductionSource l E X)} (e : M ≅ N) :
+    Nonempty (integralDualizingGlobalHom l E X M ≅
+      integralDualizingGlobalHom l E X N) := by
+  let F := (Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u}
+      (ProEt.topology X) (completedIntegralCommRingSheafUnrestricted l E X))).flip
+  exact ⟨Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft (sfIntegralConstructible l E X).ι.op (F.mapIso e))
+    (integralDualizingDerivedSections l E X)⟩
+
 theorem integralDualizing_mapping_tower_limit
     (T : NormalizedDVRTower l E X D hl)
     (M : sfIntegralConstructibleCategory l E X)
     (hM : IntegralDualizingLimitPresentation l E D hl X T M.obj) :
     Nonempty (integralDualizingGlobalHom l E X M.obj ≅
       integralDualizingMappingTower l E X T.tower ⋙
-        CoefTower.totalLimit (integralDualizingCoefficients l E)) := by sorry
+        CoefTower.totalLimit (integralDualizingCoefficients l E)) := by
+  obtain ⟨eM⟩ := integralDualizing_mapping_tower_limit_roos_iso D l hl E X T M hM
+  obtain ⟨eLimit⟩ := integralDualizing_mapping_tower_limit_canonical D l hl E X T
+  obtain ⟨eHom⟩ := integralDualizingGlobalHom_iso_of_iso l E X eM
+  exact ⟨eHom ≪≫ eLimit⟩
 
 end WeilConjectures

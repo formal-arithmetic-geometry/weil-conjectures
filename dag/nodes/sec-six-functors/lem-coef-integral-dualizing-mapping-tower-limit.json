@@ -54,10 +54,10 @@
  },
  "proof_origin": {
   "by": "worker",
-  "group": "V2",
+  "group": "B5",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons."
+  "place": "Second proof paragraph, strict decomposition into Roos uniqueness and canonical mapping comparison."
  },
  "id": "lem-coef-integral-dualizing-mapping-tower-limit",
  "kind": "lemma",
@@ -69,25 +69,23 @@
  ],
  "proof": [
   {
-   "text": "Resolve the strict tower by a K-injective complex of injective towers. Its ordinary limit computes the published derived limit; the Roos triangle in hM identifies M with that value by rotation and completion of an isomorphism of distinguished triangles.",
+   "text": "Obtain the uniqueness isomorphism between the presented object M.obj and the chosen derived limit.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-coef-integral-dualizing-mapping-tower-limit-roos-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The constant-sequence internal Hom and sections model give the strict tower Hom(P,I_n), with the exact scalar section action. Hom(P,lim I) agrees with lim Hom(P,I_n) on products, differentials and projections. Surjective resolved transitions make the latter a derived limit. Precomposition and homotopy compatibility descend this to a natural isomorphism in the first argument.",
+   "text": "Use the canonical global-Hom comparison for the chosen limit, then transport it along the object isomorphism by functoriality of derived internal Hom and sections.",
    "uses": [
-    "lem-coef-hom-tower-scalar-model",
-    "lem-sfb-ringed-site-global-rhom-derived-limits"
+    "lem-coef-integral-dualizing-mapping-tower-limit-canonical"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-coef-hom-tower-scalar-model",
-  "lem-sfb-ringed-site-global-rhom-derived-limits"
+  "lem-coef-integral-dualizing-mapping-tower-limit-roos-iso",
+  "lem-coef-integral-dualizing-mapping-tower-limit-canonical"
  ],
  "lean": {
   "existing": false,
@@ -96,7 +94,7 @@
   "declaration": "WeilConjectures.integralDualizing_mapping_tower_limit",
   "statement": "theorem integralDualizing_mapping_tower_limit\n    (T : NormalizedDVRTower l E X D hl)\n    (M : sfIntegralConstructibleCategory l E X)\n    (hM : IntegralDualizingLimitPresentation l E D hl X T M.obj) :\n    Nonempty (integralDualizingGlobalHom l E X M.obj ≅\n      integralDualizingMappingTower l E X T.tower ⋙\n        CoefTower.totalLimit (integralDualizingCoefficients l E))",
   "branch": "sheaf-dag",
-  "by": "V2",
+  "by": "B5",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -110,12 +108,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "B5",
   "result": "pass",
-  "landing": "20261027T234335-L-106453",
+  "landing": "20261028T034700-L-3530468",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

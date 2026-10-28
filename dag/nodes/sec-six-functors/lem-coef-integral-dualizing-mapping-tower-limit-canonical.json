@@ -1,0 +1,106 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, Roos-limit and mapping-complex comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of two distinguished triangles defining a derived inverse limit",
+   "results": "No exact project-specific match; generic triangulated uniqueness is used.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedLimitTriangle Nonempty Iso",
+   "results": "No exact match for the project-specific tower objects.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isDerivedLimit_and_iso",
+   "results": "CategoryTheory.exists_isDerivedLimit_and_iso is the generic source theorem.",
+   "date": "2026-10-28",
+   "verdict": "used as a proof ingredient"
+  }
+ ],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "proof_origin": {
+  "by": "worker",
+  "group": "B5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, Roos-limit and mapping-complex comparisons."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-tower-limit",
+   "place": "Strict decomposition of its Roos and mapping comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "kind": "lemma",
+ "id": "lem-coef-integral-dualizing-mapping-tower-limit-canonical",
+ "title": "Global Hom of the canonical integral Roos limit",
+ "statement": "For every normalized DVR tower T, there is a natural isomorphism of functors integralDualizingGlobalHom l E X ((integralDualizingLimit l E X).obj T.tower) and integralDualizingMappingTower l E X T.tower ⋙ CoefTower.totalLimit (integralDualizingCoefficients l E).",
+ "stmt_deps": [
+  "def-coef-integral-dualizing-mapping-towers",
+  "lem-sfb-ringed-site-global-rhom-derived-limits"
+ ],
+ "proof": [
+  {
+   "text": "Resolve T.tower by a K-injective complex of injective towers and apply the global-Hom/derived-limit comparison. Identify the internal-Hom and section models with the strict mapping tower, and use the Roos comparison to identify its ordinary limit with the total derived limit. The construction is natural in the constructible input.",
+   "uses": [
+    "lem-sfb-ringed-site-global-rhom-derived-limits",
+    "def-coef-integral-dualizing-mapping-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-global-rhom-derived-limits",
+  "def-coef-integral-dualizing-mapping-towers"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitCanonical",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingTowerLimitCanonical.lean",
+  "declaration": "WeilConjectures.integralDualizing_mapping_tower_limit_canonical",
+  "statement": "theorem integralDualizing_mapping_tower_limit_canonical (T : NormalizedDVRTower l E X D hl) : Nonempty (integralDualizingGlobalHom l E X ((integralDualizingLimit l E X).obj T.tower) ≅ integralDualizingMappingTower l E X T.tower ⋙ CoefTower.totalLimit (integralDualizingCoefficients l E))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T034700-L-3530468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T034700-L-3530468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

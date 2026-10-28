@@ -1,0 +1,103 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, Roos-limit and mapping-complex comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of two distinguished triangles defining a derived inverse limit",
+   "results": "No exact project-specific match; generic triangulated uniqueness is used.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedLimitTriangle Nonempty Iso",
+   "results": "No exact match for the project-specific tower objects.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isDerivedLimit_and_iso",
+   "results": "CategoryTheory.exists_isDerivedLimit_and_iso is the generic source theorem.",
+   "date": "2026-10-28",
+   "verdict": "used as a proof ingredient"
+  }
+ ],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "proof_origin": {
+  "by": "worker",
+  "group": "B5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, Roos-limit and mapping-complex comparisons."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-tower-limit",
+   "place": "Strict decomposition of its Roos and mapping comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "kind": "lemma",
+ "id": "lem-coef-integral-dualizing-mapping-tower-limit-roos-iso",
+ "title": "Uniqueness of the prescribed integral Roos limit",
+ "statement": "For a normalized DVR tower T and an integral constructible object M satisfying IntegralDualizingLimitPresentation l E D hl X T M.obj, the presented object M.obj is isomorphic to the chosen derived limit (integralDualizingLimit l E X).obj T.tower.",
+ "stmt_deps": [
+  "lem-coef-integral-dualizing-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the presentation triangle hM and the canonical Roos triangle supplied by integralDualizing_roos_model. Their transition endomorphisms and product terms agree. Rotate the distinguished triangles and use triangulated triangle-isomorphism uniqueness, then transport through the shift equivalence to obtain an isomorphism of the first objects.",
+   "uses": [
+    "lem-coef-integral-dualizing-roos-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-dualizing-roos-model"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingTowerLimitRoos",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingTowerLimitRoos.lean",
+  "declaration": "WeilConjectures.integralDualizing_mapping_tower_limit_roos_iso",
+  "statement": "theorem integralDualizing_mapping_tower_limit_roos_iso (T : NormalizedDVRTower l E X D hl) (M : sfIntegralConstructibleCategory l E X) (hM : IntegralDualizingLimitPresentation l E D hl X T M.obj) : Nonempty (M.obj ≅ (integralDualizingLimit l E X).obj T.tower)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T034700-L-3530468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261028T034700-L-3530468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
