@@ -45,6 +45,7 @@ structure PicardResidueHomologyGeometricData
   hdata : ∀ i z, eC i (M i (φ i) z) = F i (eK z)
   hgeom : ∀ i z, ei i (F i z) = N i (e z)
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- The dependent family of derived-category maps requires extra elaboration heartbeats.
 /-- The lower data theorem packages the affine and geometric comparisons.
@@ -116,6 +117,19 @@ theorem picard_residue_homology_chosen_geometric_fibre_data
         (((Over.pullback (S.fromSpecResidueField s)).map
           (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
             (ui i) (hui i))).left) 1 z)) := by
-  sorry
+  obtain ⟨eK, eC, φ, hdata⟩ := picard_residue_homology_chosen_geometric_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi
+  obtain ⟨e, he⟩ := picard_derived_fibre_naturality
+    f Xi fi ui hui L W k w s hw τ
+  let ei : ∀ i, _ := fun i ↦ Classical.choose (he i)
+  have hei : ∀ i z, ei i ((derivedFiberCohomologyFunctor W w 1).map
+      (picardDerivedCoefficientMap f (fi i) (ui i) (hui i) L W k) z) =
+      structureSheafCohomologyPullback
+        (((Over.pullback (S.fromSpecResidueField s)).map
+          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+            (ui i) (hui i))).left) 1 (e z) := by
+    intro i z
+    exact Classical.choose_spec (he i) z
+  exact ⟨⟨eK, eC, φ, e, ei, _, hdata, hei⟩⟩
 
 end AlgebraicGeometry.Scheme
