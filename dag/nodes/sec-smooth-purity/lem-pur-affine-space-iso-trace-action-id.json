@@ -13,25 +13,27 @@
  ],
  "proof": [
   {
-   "text": "On a geometric stalk over a separably closed field, use the normalized projective-line Kummer class and the open-closed sequence to identify each rational point of affine one-space with the generator sent to one. The ordered coordinate induction identifies the top compact-support group with the rank-one coefficient module and shows that point classes generate it.",
-   "uses": [
-    "lem-amb-affine-space-top-trace"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "An arbitrary affine-space isomorphism carries each rational point to its unique inverse image, and the corresponding reduced closed subscheme has local cycle multiplicity one. Naturality of point classes and the canonical Tate comparison therefore fix the normalized generator. Hence the action is the identity on every geometric stalk, including dimension zero.",
+   "text": "Construct the base change of the given automorphism using the affine-tower Cartesian square and its lift universal property. Build coefficientBaseChange from the coefficient descent and the canonical base Tate pullback. Associativity of leftDerivedUpperStarComp proves the coefficient equivariance square for arbitrary automorphisms, not just matrices. Compact-support exchange pasting then gives an isomorphism intertwining the pulled-back action and the base-changed action.",
    "uses": [
     "def-amb-affine-linear-trace-action",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-affine-linear-exchange-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "Compact-support base change identifies the specified derived action with the stalk action. Degree-zero faithfulness and conservativity of geometric stalks lift stalkwise identity to the derived source. Empty bases and the zero coefficient ring reduce to identity or zero-object equations.",
+   "text": "Use exists_affineSpaceTopTrace only to identify the fixed action source with the degree-zero constant sheaf. On a spectrum of an algebraically closed field, the geometric top homology calculation fixes degree-zero homology. Full faithfulness of singleFunctor and singleFunctorCompHomologyFunctorIso lift this to identity of the derived action.",
    "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-pur-affine-space-geometric-top-action",
     "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back along the algebraic closure of the residue field of each base point. Cancel the base-change intertwining isomorphism to obtain identity of each pullback of the original action. Conjugate the original action into a single degree-zero sheaf map. Naturality of singleFunctorCompLeftDerivedUpperStarIso and faithfulness of singleFunctor show all sheaf pullbacks are identity. Geometric stalk conservativity, via isIso_of_isIso_upperStar_map_of_jointlySurjective and jointlyFaithful, proves the original sheaf map is identity. Cancel the source isomorphism. The jointly faithful argument covers empty bases without a nonemptiness assumption.",
+   "uses": [
     "lem-weil-pbc-derived-single-fully-faithful",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
@@ -39,9 +41,9 @@
   }
  ],
  "proof_origin": {
-  "by": "C5 stage 3",
+  "by": "T1 stage 3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraph 2, affine-coordinate geometric degree-one subargument"
+  "place": "paragraph 2; implemented arbitrary-automorphism base-change and degree-zero geometric descent; only the geometric-field homology calculation remains"
  },
  "mathlib_searches": [
   {
@@ -98,10 +100,12 @@
   "date": "2026-10-28"
  },
  "proof_deps": [
-  "lem-amb-affine-space-top-trace",
   "def-amb-affine-linear-trace-action",
   "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-linear-exchange-coherence",
   "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-affine-space-geometric-top-action",
+  "lem-amb-affine-space-top-trace",
   "lem-weil-pbc-derived-single-fully-faithful",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
@@ -119,9 +123,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C5",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261028T020237-L-2484583",
+  "landing": "20261028T055800-L-808996",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

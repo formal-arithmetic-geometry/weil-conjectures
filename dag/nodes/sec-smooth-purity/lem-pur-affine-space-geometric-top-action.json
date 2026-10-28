@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-affine-space-geometric-top-action",
+ "kind": "statement",
+ "title": "Geometric top homology of affine space is fixed by automorphisms",
+ "statement": "Let k be an algebraically closed field, N a positive integer, A a finite commutative ring with NA=0, and suppose N is invertible on Spec(k). Fix ordinary finite Tate transport t and d >= 0. For any automorphism e of the affine coordinate tower of relative dimension d over Spec(k), with its Cartesian square over the identity, the endomorphism affineLinearTraceAction of [def-amb-affine-linear-trace-action] induces the identity on degree-zero homology. This is the top compact-support cohomology after the ordered Tate twist and shift, in the categories of [def-weil-pbc-derived-categories]. No assertion over a general base or about derived faithfulness is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, geometric fibre degree-one calculation before applying the affine counit"
+ },
+ "stmt_deps": [
+  "def-amb-affine-linear-trace-action",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordered projective-line decomposition and its open-closed sequence, iterated over the coordinate tower, to compute the shifted twisted compact-support cohomology of affine d-space. The Kummer trace normalization sends the rational-point class in dimension one to one. Exterior products of these classes give the class of each rational point in dimension d and are sent to one by the ordered trace. These classes generate the top compact-support group.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An isomorphism over the algebraically closed field pulls a rational point back to its unique rational inverse image as a reduced closed subscheme. The local multiplicity is one because the map is an isomorphism. Naturality of the Kummer boundary, localization, and exterior products identifies this pullback with the coefficient comparison used by affineLinearTraceAction. It therefore carries each generating point class to another class sent to one. Hence the induced map on degree-zero homology of the shifted twisted object is identity. For d=0 the affine projection and its automorphism are identity; for the zero coefficient ring all these groups vanish. The rational geometric point of Spec(k) is conservative on its small etale topos; the resulting module equality therefore determines the degree-zero homology-sheaf map.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "lem-asd-etale-finite-twist-pullback",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-amb-p1-trace",
+  "def-amb-affine-linear-trace-action",
+  "lem-asd-etale-finite-twist-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "T1 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, rational-point normalization subargument of affine-space presentation invariance"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(compactSupport|compactlySupported).*(automorphism|Iso)",
+   "results": "0 hits: none",
+   "date": "2026-10-28",
+   "verdict": "No geometric compact-support automorphism theorem; the single/homology isomorphism supports the proved descent in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"singleFunctor\"",
+   "results": "1 hits: DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-28",
+   "verdict": "No geometric compact-support automorphism theorem; the single/homology isomorphism supports the proved descent in the parent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of affine space over an algebraically closed field acts trivially on its top compactly supported etale cohomology with finite coefficients",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, InfiniteGalois.limitToAlgEquiv_apply, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, Field.absoluteGaloisGroup",
+   "date": "2026-10-28",
+   "verdict": "No geometric compact-support automorphism theorem; the single/homology isomorphism supports the proved descent in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "T1 stage 3",
+  "item": "Sheaf.Paper.AffineSpaceIsoTraceCore",
+  "date": "2026-10-28",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2, geometric top cohomology subargument",
+   "via": [
+    "lem-pur-affine-space-iso-trace-action-id",
+    "lem-pur-vector-integration-presentation-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpaceGeometricTopAction",
+  "file": "lean/Sheaf/Paper/AffineSpaceGeometricTopAction.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineSpaceIsoTraceAction_homology_zero",
+  "statement": "theorem affineSpaceIsoTraceAction_homology_zero\n    (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (hk : IsUnit (N : Γ(Spec (.of k), ⊤))) (d : ℕ)\n    (e : affineTraceTower (Spec (.of k)) d ≅ affineTraceTower (Spec (.of k)) d)\n    (sq : IsPullback e.hom (affineTraceProjection (Spec (.of k)) d)\n      (affineTraceProjection (Spec (.of k)) d) (𝟙 (Spec (.of k)))) :\n    (_root_.DerivedCategory.homologyFunctor\n      (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} A)) 0).map\n        (affineLinearTraceAction N hN A hA t (Spec (.of k)) hk d e.hom sq) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261028T055800-L-808996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261028T055800-L-808996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
