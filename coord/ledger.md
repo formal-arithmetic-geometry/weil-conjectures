@@ -20873,3 +20873,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/P7/Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitGraded (stage 3; reviewer PASS; first push; landing 20261028T034910-L-3566504 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:49 L: merged deliver/P8/Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitModelComparison (stage 3; reviewer PASS; first push; landing 20261028T034912-L-3566719 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:49 L: merged deliver/P9/Sheaf.Paper.PodReindexingChainShiftPresentations (stage 3; reviewer PASS; first push; landing 20261028T034913-L-3567095 (proof); batch 20261028T034643; modules 1; new nodes 0)
+- 03:49 L: merged deliver/Q1/Sheaf.Paper.IsomorphismScalarFiniteComparisonUnit (stage 3; reviewer PASS; first push; landing 20261028T034914-L-3567671 (interface); batch 20261028T034643; modules 1; new nodes 0)
