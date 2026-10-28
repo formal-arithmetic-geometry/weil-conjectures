@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProperSupportedKunnethRoute
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-import Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw
+import Sheaf.AlgebraicGeometry.ProperShriekCompSupportsCanonicalHelper
 
 /-! # Canonical-composite proper forget-supports calculation
 
@@ -46,6 +46,8 @@ theorem properShriekComp_comp_forgetSupports_canonical {W X S : Scheme.{u}}
             ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫
         (rightDerivedLowerStarCompIsoOfComp
           (ModuleCat.{u + 1} A) p f (p ≫ f) rfl).hom.app E := by
-  sorry
+  exact Eq.trans
+    (properRouteCompIso_comp_app_eq_canonical A p f E)
+    (properShriekComp_comp_forgetSupports_raw_with_comp A p f E)
 
 end AlgebraicGeometry.Etale
