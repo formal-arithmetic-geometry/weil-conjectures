@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.QuotientSectionPullTransportKFlat
+public import Sheaf.Paper.QuotientSectionTensorData
+import Sheaf.Paper.QuotientSectionPullTransportKFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.QuotientSectionPullTransportLocalizationIso
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-! # Localization descent for normalized quotient section pull transport -/
 
@@ -13,6 +18,21 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+  DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+  CategoryTheory.Sheaf.monoidalCategory
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+
+attribute [local instance] AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
@@ -66,6 +86,20 @@ theorem section_pull_normalized_localization_descent {X Y : Scheme.{u}} (f : X �
             ((cY.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map
             ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P) := by
-  sorry
+  classical
+  intro P
+  let := SheafOfModules.monoidalCategory (ring Λ Y)
+  let := SheafOfModules.symmetricCategory (ring Λ Y)
+  let := (SheafOfModules.nonempty_monoidalClosed_independentCoefficients
+    (R := ring Λ Y)).some
+  let := SheafOfModules.hasFunctorialFlatResolution_kfi (ring Λ Y)
+  let : IsGrothendieckAbelian.{u + 1} (modules Λ Y) :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0}
+      (Scheme.ProEt.topology Y) _
+  obtain ⟨P', q, hq, hflat', hP'⟩ := CochainComplex.exists_quasiIso_flat_kFlat P
+  let e' : DerivedCategory.Q.obj P' ≅ DerivedCategory.Q.obj P :=
+    asIso (DerivedCategory.Q.map q)
+  exact section_pull_normalized_localization_transport_iso a f cX cY barLam e P' P e'
+    (hflat P' hP' hflat')
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
