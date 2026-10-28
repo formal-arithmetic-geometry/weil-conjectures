@@ -6,6 +6,8 @@ Authors: SHEAF group H5
 module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
+import Sheaf.Paper.ConstantAdicQuotientRealizationIsoHomLift
+import Sheaf.Paper.ConstantAdicQuotientRealizationReflectsIsoOfMap
 
 /-! # Algebraic isomorphism extracted from a constant adic quotient realization -/
 
@@ -42,6 +44,13 @@ theorem constantAdicQuotientRealization_iso_lift
     (h : Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅
       (constantAdicQuotientRealization (W.hom ≫ g) d n).obj F)) :
     ∃ f : E ⟶ F, IsIso f := by
-  sorry
+  rcases h with ⟨e⟩
+  obtain ⟨f, hf⟩ := constantAdicQuotientRealization_iso_hom_lift
+    X Y g d n W _w E F e
+  refine ⟨f, ?_⟩
+  apply constantAdicQuotientRealization_reflects_iso_of_map
+    X Y g d n W _w E F f
+  rw [hf]
+  infer_instance
 
 end AlgebraicGeometry.Scheme
