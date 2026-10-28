@@ -657,8 +657,11 @@ lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
     (Y' := Y) p).2.2 A B hA hB
 
 /-- **The derived projection formula for `Rf_!`** (`E`-coefficient): the exceptional projection
-morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
-docstring. -/
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
+isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-rational`,
+`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
+identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
@@ -832,7 +835,7 @@ set_option maxHeartbeats 1000000 in
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
 constructible `𝒪_E`-complexes: the proper projection formula (blueprint
-`det-thm-sfb-proper-base-change-rational`). -/
+`det-thm-sfb-proper-base-change-integral`). -/
 lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
     [IsProper p.left]
@@ -848,8 +851,11 @@ lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
     p).2.2 A B hA hB
 
 /-- **The derived projection formula for `Rf_!`** (`𝒪_E`-coefficient): the exceptional projection
-morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
-docstring. -/
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
+isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-integral`,
+`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
+identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
