@@ -1,0 +1,92 @@
+{
+ "id": "lem-coef-integral-dualizing-coefficient-homology-at-zero",
+ "kind": "lemma",
+ "title": "Degree-zero coefficient dual Hom comparison",
+ "statement": "Degree-zero coefficient dual Hom comparison.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph; degree-zero Hom comparison."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized derived Hom comparison and the coefficient-point sections calculation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homSingleEquivOfProjective",
+   "verdict": "existing declaration used"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom_global_sectionsOfUniverses",
+   "verdict": "existing declaration used"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful.homEquiv",
+   "verdict": "existing declaration used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-limit-hom-at",
+   "place": "Degree-zero extraction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "lean.Sheaf.SixFunctors.IntegralDualizingCoefficientHomologyAtZero.",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingCoefficientHomologyAtZero.lean",
+  "declaration": "WeilConjectures.integralDualizing_coefficient_homology_at_zero",
+  "statement": "theorem integralDualizing_coefficient_homology_at_zero\n    (K : sfIntegralConstructibleCategory l E X) :\n    Nonempty (((DerivedCategory.homologyFunctor\n      (ModuleCat.{u + 1} (integralDualizingCoefficients l E)) 0).obj\n      ((coefficientDerivedDual (integralDualizingCoefficients l E)).obj\n        (Opposite.op ((integralDualizingCompactSections l E D hl X).obj K)))) ≃\n      (((integralDualizingLimit l E (Spec (.of D.k))).obj\n        ((integralDualizingCompactTower l E D hl X).obj K.obj) ⟶\n          (DerivedCategory.singleFunctor\n            (scalarReductionSource l E (Spec (.of D.k))) 0).obj\n            (SheafOfModules.unit\n              (completedIntegralCoefficientSheafUnrestricted l E\n                (Spec (.of D.k)))))))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingLimitHomAtDegreeZero",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T034657-L-3530155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261028T034657-L-3530155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

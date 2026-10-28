@@ -6,6 +6,8 @@ Authors: SHEAF group U5
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingRoosModel
+import Sheaf.SixFunctors.IntegralDualizingGlobalHomologyAtZero
+import Sheaf.SixFunctors.IntegralDualizingCoefficientHomologyAtZero
 
 /-! The degree-zero extraction from the global integral dualizing comparison.
 
@@ -54,6 +56,11 @@ theorem integralDualizing_mapping_limit_hom_at_degree_zero
           (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj
             (SheafOfModules.unit
               (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k)))))) := by
-  sorry
+  obtain ⟨a⟩ := integralDualizing_global_homology_at_zero l E X M K
+  obtain ⟨b⟩ := integralDualizing_coefficient_homology_at_zero D l hl E X K
+  let h := (DerivedCategory.homologyFunctor
+    (ModuleCat.{u + 1} (integralDualizingCoefficients l E)) 0).mapIso
+      (η.app (Opposite.op K))
+  exact ⟨a.symm.toEquiv.trans (h.toLinearEquiv.toEquiv.trans b)⟩
 
 end WeilConjectures
