@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantCohomology
 public import Sheaf.RingTheory.DerivedModuleScalarAdjunction
+import Sheaf.Paper.FinitePerfectAdicLiftedTransitionCanonicalTransposeFormula
 
 /-! # Canonical transpose of the lifted finite perfect transition
 
@@ -16,6 +17,7 @@ Source: Stacks Project, Tags 06YY and 09C6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -36,6 +38,10 @@ theorem finitePerfectAdicLiftedTransition_canonical_transpose_isIso
       ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q
     let adj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)
     IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n)) := by
-  sorry
+  dsimp
+  obtain ⟨e, he⟩ := finitePerfectAdicLiftedTransition_canonical_transpose_formula T n
+  letI := T.normalized n
+  rw [he]
+  infer_instance
 
 end AlgebraicGeometry.Scheme

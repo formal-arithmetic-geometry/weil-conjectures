@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-lifted-transition-canonical-transpose-formula",
+ "kind": "statement",
+ "title": "Formula for the canonical transpose of the universe-lifted transition",
+ "statement": "theorem finitePerfectAdicLiftedTransition_canonical_transpose_formula\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*\n        ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=\n      RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))\n    letI : (normalizationModuleRestrict q).IsRightAdjoint :=\n      ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q\n    let adj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)\n    ∃ e : (normalizationModuleRestrict q).leftAdjoint.obj\n          ((finitePerfectAdicAlgebraLift _).obj (T.level (n + 1))) ≅\n        (finitePerfectAdicAlgebraLift _).obj\n          ((T.stepExtension n).obj (T.level (n + 1))),\n      (adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n) =\n        e.hom ≫ (finitePerfectAdicAlgebraLift _).map\n          ((T.stepAdjunction n).homEquiv _ _ |>.symm (T.transition n))",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, mate calculation for the universe-lifted transition"
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison isomorphism between the canonical left adjoint on the lifted coefficient category and the lifted supplied step extension by transporting the scalar-restriction comparison through exact localization. Expand finitePerfectAdicLiftedTransition, apply the defining hom-equivalence unit identity for the comparison, and use naturality to identify the canonical mate with the comparison followed by the image of the supplied mate.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-tower-data",
+    "def-weil-pbc-finite-perfect-adic-constant-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "proof_origin": {
+  "by": "K2 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, explicit mate transport equation"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicLiftedTransitionCanonicalTranspose",
+  "date": "2026-10-28",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-lifted-transition-canonical-transpose",
+   "place": "explicit mate equation substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicLiftedTransitionCanonicalTransposeFormula",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicLiftedTransitionCanonicalTransposeFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicLiftedTransition_canonical_transpose_formula",
+  "statement": "theorem finitePerfectAdicLiftedTransition_canonical_transpose_formula\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*\n        ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=\n      RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))\n    letI : (normalizationModuleRestrict q).IsRightAdjoint :=\n      ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q\n    let adj := Adjunction.ofIsRightAdjoint (normalizationModuleRestrict q)\n    ∃ e : (normalizationModuleRestrict q).leftAdjoint.obj\n          ((finitePerfectAdicAlgebraLift _).obj (T.level (n + 1))) ≅\n        (finitePerfectAdicAlgebraLift _).obj\n          ((T.stepExtension n).obj (T.level (n + 1))),\n      (adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n) =\n        e.hom ≫ (finitePerfectAdicAlgebraLift _).map\n          ((T.stepAdjunction n).homEquiv _ _ |>.symm (T.transition n))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T034823-L-3552617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T034823-L-3552617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
