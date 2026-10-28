@@ -7,11 +7,13 @@ module
 public import Mathlib.CategoryTheory.Functor.Basic
 public import Mathlib.CategoryTheory.Iso
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.AffineRestrictionMapIsoAux
 
 /-! # Affine restriction transport for the finite dualizing mate -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -37,6 +39,10 @@ theorem finiteDualizing_etaleComparison_factorization (hl : l ≠ D.p)
       (k : Z ⟶ finiteDualizingEtaleTerm l E D X n),
       IsIso g ∧ IsIso k ∧
         finiteDualizingEtaleComparison l E D X h = g ≫ k := by
-  sorry
+  haveI : IsIso (finiteDualizingEtaleComparison l E D X h) :=
+    finiteDualizing_etaleComparison_isIso_for_factorization l E D X hl h
+  refine ⟨finiteDualizingEtaleTerm l E D X n,
+    finiteDualizingEtaleComparison l E D X h, 𝟙 _, inferInstance, inferInstance, ?_⟩
+  simp
 
 end WeilConjectures
