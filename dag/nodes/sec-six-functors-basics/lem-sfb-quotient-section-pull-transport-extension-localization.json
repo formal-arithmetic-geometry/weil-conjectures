@@ -9,9 +9,11 @@
  },
  "status": "split",
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "B9",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Equality on the resolving class descends through the derived localization"
+  "place": "Tags 06YS and 06YU; direct naturality along the flat-term K-flat resolution augmentation, followed by cancellation in the derived source."
  },
  "blueprint": {
   "is": null,
@@ -26,9 +28,9 @@
  "unit": "sk-thm-sfb-proper-base-change",
  "proof": [
   {
-   "text": "Choose a flat-term K-flat resolution P of an arbitrary complex Q, and use the representative transport lemma along the induced derived isomorphism to transport the assumed equality from P to Q.",
+   "text": "Package both normalized composites as natural transformations on cochain complexes; their source is localization followed by derived scalar extension and derived pullback. For any complex P, choose a flat-term K-flat resolution P' and retain its cochain quasi-isomorphism q : P' → P. The hypothesis gives equality at P'. Apply both naturality squares to q and substitute this equality. The source map inverts q, so cancellation proves equality at P. No target map or scalar counit is cancelled.",
    "uses": [
-    "new-sfb-quotient-section-pull-transport-localization-iso"
+    "lem-sfb-abstract-kflat-resolution"
    ],
    "elementary": false
   }
@@ -38,7 +40,7 @@
   "lem-sfb-quotient-section-pull-transport-kflat"
  ],
  "proof_deps": [
-  "new-sfb-quotient-section-pull-transport-localization-iso"
+  "lem-sfb-abstract-kflat-resolution"
  ],
  "lean": {
   "existing": false,
@@ -95,11 +97,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D7",
+  "reviewer": "C-59020",
+  "group": "B9",
   "result": "pass",
-  "landing": "20261028T020310-L-2491846",
+  "landing": "20261028T055619-L-777194",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered QuotientSectionPullTransportLocalization proof + withdrawn Iso stub + 2 node JSONs + change record against clone (live) versions, parent DAG node, lem-sfb-abstract-kflat-resolution lean record, 3b importer result, and #print axioms of the scratch-compiled parent"
  }
 }

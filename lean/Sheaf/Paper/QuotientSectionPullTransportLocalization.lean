@@ -7,7 +7,6 @@ module
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.QuotientSectionPullTransportKFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.QuotientSectionPullTransportLocalizationIso
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
@@ -87,6 +86,21 @@ theorem section_pull_normalized_localization_descent {X Y : Scheme.{u}} (f : X �
           DerivedCategory.Q.map
             ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P) := by
   classical
+  let source := (DerivedCategory.Q ⋙ cY.model.T) ⋙ derivedPullback Λ' f
+  let target := (pullback Λ f ⋙ cX.model.E).mapHomologicalComplex (.up ℤ) ⋙
+    DerivedCategory.Q
+  let α : source ⟶ target :=
+    Functor.whiskerLeft DerivedCategory.Q barLam.hom ≫
+      Functor.whiskerRight (pullback Λ f).mapDerivedCategoryFactors.hom cX.model.T ≫
+      Functor.whiskerLeft ((pullback Λ f).mapHomologicalComplex (.up ℤ)) cX.model.ε ≫
+      Functor.whiskerRight (Functor.mapHomologicalComplexCompIso
+        (Iso.refl (pullback Λ f ⋙ cX.model.E)) (.up ℤ)).hom DerivedCategory.Q
+  let β : source ⟶ target :=
+    Functor.whiskerRight cY.model.ε (derivedPullback Λ' f) ≫
+      Functor.whiskerLeft (cY.model.E.mapHomologicalComplex (.up ℤ))
+        (pullback Λ' f).mapDerivedCategoryFactors.hom ≫
+      Functor.whiskerRight (Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom
+        DerivedCategory.Q
   intro P
   let := SheafOfModules.monoidalCategory (ring Λ Y)
   let := SheafOfModules.symmetricCategory (ring Λ Y)
@@ -97,9 +111,14 @@ theorem section_pull_normalized_localization_descent {X Y : Scheme.{u}} (f : X �
     SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0}
       (Scheme.ProEt.topology Y) _
   obtain ⟨P', q, hq, hflat', hP'⟩ := CochainComplex.exists_quasiIso_flat_kFlat P
-  let e' : DerivedCategory.Q.obj P' ≅ DerivedCategory.Q.obj P :=
-    asIso (DerivedCategory.Q.map q)
-  exact section_pull_normalized_localization_transport_iso a f cX cY barLam e P' P e'
-    (hflat P' hP' hflat')
+  have h' : α.app P' = β.app P' := hflat P' hP' hflat'
+  change α.app P = β.app P
+  have : IsIso (DerivedCategory.Q.map q) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).2 hq
+  have : IsIso (source.map q) := by
+    dsimp only [source, Functor.comp_map]
+    infer_instance
+  apply (cancel_epi (source.map q)).mp
+  rw [α.naturality, β.naturality, h']
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
