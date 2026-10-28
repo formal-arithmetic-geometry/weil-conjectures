@@ -110,30 +110,29 @@
    }
   },
   {
-   "text": "Prove proper_normalization directly for the canonical d, retaining the arrows leftUnit and rightUnit of [lem-weil-pbc-kinjective-exact-square-comparison]. In the fully proved private fixedPair_unit_normalization lemma, apply rightDerivedNatTrans_app to the exact-right composition comparison, the strict forgetting isomorphism, and the derived composition comparison. Their unit equations cancel the homotopy composition identifications. The equation rightDerivedFunctorIsoMapDerivedCategory_hom_fac then changes the last composite to the inverse exact-localization factor, giving leftUnit I followed by d_QI equals rightUnit I for every complex I. On a K-injective I the native unit is invertible; forgetting preserves K-injectives by Step 4, so the ordinary unit is invertible too [def-sfb-right-derived-functor]. This proves both isomorphism clauses. The theorem proper_frobenius follows separately by applying Q.map to equal complex maps and using extensionality in each degree: the fixed-pair lift structure is definitionally a followed by adicLowerStar of theta. For the remaining open_proper theorem, take native K-injective resolutions [lem-sfb-grothendieck-k-injective] after open extension, so this normalized proper comparison is the identity on their common underlying proper-pushforward representative.",
+   "text": "Prove proper_normalization directly for the canonical d, retaining the arrows leftUnit and rightUnit of [lem-weil-pbc-kinjective-exact-square-comparison]. In the fully proved private fixedPair_unit_normalization lemma, apply rightDerivedNatTrans_app to the exact-right composition comparison, the strict forgetting isomorphism, and the derived composition comparison. Their unit equations cancel the homotopy composition identifications. The equation rightDerivedFunctorIsoMapDerivedCategory_hom_fac then changes the last composite to the inverse exact-localization factor, giving leftUnit I followed by d_QI equals rightUnit I for every complex I. On a K-injective I the native unit is invertible; forgetting preserves K-injectives by Step 4, so the ordinary unit is invertible too [def-sfb-right-derived-functor]. This proves both isomorphism clauses. The theorem proper_frobenius follows separately by applying Q.map to equal complex maps and using extensionality in each degree: the fixed-pair lift structure is definitionally a followed by adicLowerStar of theta.",
    "uses": [
     "lem-sf-fixed-pair-derived-forget-comparison",
     "def-sfb-right-derived-functor",
     "lem-weil-pbc-kinjective-exact-square-comparison",
-    "def-sf-native-weil-derived-framework",
-    "lem-sfb-grothendieck-k-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
-    "place": "rightDerivedFunctorMapOfNatIsoCompForgetIso and the unit equations of its four factors; mapOfNatIso_obj_str. The final resolution argument remains the plan for open_proper."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-kinjective-hom-derived], every derived morphism between the native K-injective resolutions is represented by a chain map uniquely up to homotopy. Both constructions send such a map $v:I\\to I'$ to $Q(p_*Uv)$, so the identity comparisons commute with every derived morphism and with change of resolution. For shifts one may choose $I[n]$: it is K-injective because shifting an acyclic source remains acyclic, and the defining Hom group shifts back to a vanishing one. Both constructions use $p_*UI[n]=(p_*UI)[n]$ and the same shifted structure arrow, so $d$ respects shifts. Finally precompose $d$ with $j_!^{\\mathrm W}$ and use the equality of Step 6, obtaining $c^0:U_YRp_*^{\\mathrm W}j_!^{\\mathrm W}\\xrightarrow{\\sim}Rp_*j_!U_X$. This uses exactly the chosen ordered compactification construction of [def-sf-native-weil-derived-framework]. Step 8 proves its asserted normalization and Frobenius compatibility. The argument applies on the ordinary ambient derived categories and requires no exceptional adjunction.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
     "def-sf-native-weil-derived-framework"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Assembly of the normalized open/proper comparison; all localized morphisms and shifts checked on native K-injective representatives."
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+    "place": "rightDerivedFunctorMapOfNatIsoCompForgetIso and the unit equations of its four factors; mapOfNatIso_obj_str."
+   }
+  },
+  {
+   "text": "The proved compactificationComparison_commShift assembles the canonical shift comparisons of the four proper factors and the exact open comparison. The proved compactificationComparison_frobenius specializes nativeWeil_comparison_structure, whose comparison and ordinary exchange agree definitionally with the specified constructions. Combine these two components with the naturality of compactificationComparison to obtain open_proper.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-forgetting-comm-shift",
+    "lem-sf-native-weil-open-proper-forgetting-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean; lean/Sheaf/Paper/NativeWeilComparisonStructure.lean",
+    "place": "compactificationComparison_commShift, compactificationComparison_frobenius, and open_proper."
    }
   }
  ],
@@ -151,15 +150,13 @@
   "lem-sf-native-adic-qcqs-stratification",
   "def-sfb-right-derived-functor",
   "lem-weil-pbc-kinjective-exact-square-comparison",
-  "lem-sfb-grothendieck-k-injective",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-sf-native-weil-open-proper-forgetting-comm-shift",
   "lem-sf-native-weil-open-proper-forgetting-frobenius"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
-  "place": "G2: hearts is proved from fixedPair_forget_properties, the exact homology comparison, boundedness reflection, and native qcqs stratification. proper_normalization is proved by the unit equations of the existing four-factor canonical comparison, with explicit K-injective preservation. The previously landed proper_frobenius proof and the five other completed theorem bodies are preserved. This delivery closes two of the three current holes: eight of nine public theorem proofs are now complete, and open_proper remains the sole unchanged sorry. No new holes or intermediate theorem nodes are added."
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Reuse of the existing canonical comparison APIs; B4, 2026-10-28. The comparison, exchange and structure are the existing constructions without changes."
  },
  "mathlib_searches": [
   {
@@ -506,9 +503,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261028T020540-L-2523168",
+  "landing": "20261028T055615-L-775071",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

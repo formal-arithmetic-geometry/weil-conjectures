@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
 public import Sheaf.Paper.CompletedCondensedCoefficients
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.Paper.NativeWeilComparisonStructure
+import all Sheaf.CategoryTheory.CompactSupportIdentityCalculus
 import Sheaf.CategoryTheory.FixedPairDerivedForgetComparison
 import Sheaf.Paper.NativeScalarForgetting
 import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
@@ -641,13 +643,16 @@ abbrev ordinaryCompactSupportFrobenius (f : X ⟶ Y)
     (ordinaryCompactSupport (k₀ := k₀) (l := l) f c).mapIso
       ((nativeDerivedStructure (k₀ := k₀) (l := l) X).app K)
 
+-- Preserve the existing characteristic binder for callers.
+set_option linter.unusedSectionVars false in
 /-- The compactification comparison commutes with integer shifts.
-Source: native comparison Step 9; Stacks 070I.
-(blueprint: lem-sf-native-weil-open-proper-forgetting).
-Proof: expand the ordered comparison into the associativity, open-extension and proper
-comparison isomorphisms. The derived open comparison is exact; the proper comparison is
-the unit-normalized right-derived comparison. The standard shift compatibility lemmas for
-these three factors and closure under whiskering and composition give the result. -/
+Source: native comparison Step 9; Stacks 070I; CompactSupportIdentityCalculus.lean,
+rightCompExactIso_shift, rightNatIso_shift, rightCompIso_shift and rightExactIso_shift.
+(blueprint: lem-sf-native-weil-open-proper-forgetting-comm-shift).
+Proof: apply the four proved generic shift lemmas to the factors of the canonical
+proper comparison. Exact derived natural-isomorphism and composition comparisons
+handle the open part. Associators, inverse, whiskering and composition preserve
+shift compatibility, giving the specified ordered compactification comparison. -/
 theorem compactificationComparison_commShift
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -658,17 +663,35 @@ theorem compactificationComparison_commShift
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (c : Compactification f) :
     (compactificationComparison (k₀ := k₀) (l := l) f c).hom.CommShift ℤ := by
-  sorry
+  letI := c.over (k₀ := k₀)
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  let e := ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso
+    l c.g (comp_over c.g (Spec (CommRingCat.of k₀)))
+  have := rightCompExactIso_shift (IsoAlgebra.mapOfNatIso e)
+    (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Y))
+  have := rightNatIso_shift (IsoAlgebra.mapOfNatIsoCompForgetIso e)
+  have := rightCompIso_shift (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l c.Z))
+    (ProEtale.adicLowerStar l
+      (Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (CommRingCat.of k₀)))))
+  have := rightExactIso_shift (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l c.Z))
+  dsimp only [compactificationComparison, comparison, properComparison, openComparison,
+    IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
+  infer_instance
 
 /-- The native and independently assembled ordinary Frobenius actions commute with the
 compactification comparison.
-Source: native comparison Steps 8--9; Stacks 070I and 070K.
-(blueprint: lem-sf-native-weil-open-proper-forgetting).
-Proof: choose a native K-injective representative after exact open extension. Both sides
-are the same localized chain map: proper normalization identifies the proper comparison
-with the identity on the common representative, while the open comparison and the
-sectionwise fixed-pair formula identify the two Frobenius arrows. Naturality of derived
-localization transports the equality from representatives to every object. -/
+Source: native comparison Steps 8--9; Stacks 070I and 070K;
+NativeWeilComparisonStructure.lean, nativeWeil_comparison_structure.
+(blueprint: lem-sf-native-weil-open-proper-forgetting-frobenius).
+Proof: the existing nativeWeil_comparison_structure theorem proves this equation for
+exactly these comparisons. Its comparison, independent ordinary exchange, compact
+support functor and localized structure are definitionally the constructions here.
+Expand the composite ordinary Frobenius isomorphism into the exchange followed by
+the image of the source structure, and apply that theorem. -/
 theorem compactificationComparison_frobenius
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -684,7 +707,8 @@ theorem compactificationComparison_frobenius
         (ordinaryCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom =
       (nativeCompactSupportFrobenius (k₀ := k₀) (l := l) f c K).hom ≫
         (compactificationComparison (k₀ := k₀) (l := l) f c).hom.app K := by
-  sorry
+  intro K
+  exact NativeWeilInduction.nativeWeil_comparison_structure k₀ l f c K
 
 theorem open_proper (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
