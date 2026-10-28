@@ -13,11 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Use the normalized uncurrying equation to identify the two composites with the same tensor-Hom mate. Uniqueness of mates under the parameter and ringed tensor-Hom adjunctions proves naturality in each variable, while the prescribed component is U.underived.",
+   "text": "Apply U.uncurry to the native adjunct of any map f:T(P,Q) to I. Cancel the adjunction equivalence and identify the ringed adjunction with SheafOfModules.tensorHomEquiv. This expresses U.underived(P,Q).inv followed by native(f) as the braiding followed by the inverse ringed adjunct of native(adjunct(f)) followed by nativeHom. Specialize f to the identity to express each inverse component.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For p:P to Pprime and q:Q to Qprime, apply this formula to T.map(p).app(Q) followed by T(Pprime).map(q). Mathlib ParametrizedAdjunction.homEquiv_naturality_one and homEquiv_naturality_two express its native adjunct as q followed by the identity adjunct followed by ihom.map(p.op). Naturality of b.nativeHom replaces the last map by homObjMap(native(p),id). Cancel the braiding and apply injectivity of tensorHomEquiv; its whiskerRight and whiskerLeft naturality identities give precisely the tensor of native(q) and native(p) followed by the target inverse component. Braiding naturality supplies the reversed factor order.",
    "uses": [
     "lem-sf-native-weil-tensor-ringed-underived-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "The preceding equality is the naturality of the inverse pointwise isomorphisms. Assemble these with NatIso.ofComponents and invert, obtaining the required natural isomorphism. Its forward components are definitionally the prescribed U.underived homs.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -25,10 +39,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E5",
+  "group": "M4",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Underived mate-normalization and bifunctor naturality."
+  "place": "Underived tensor-Hom mate normalization and bifunctor naturality; explicit verification using the two adjunctions and the braiding."
  },
  "mathlib_searches": [
   {
@@ -110,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-f345b",
-  "group": "E5",
-  "result": "fix",
-  "landing": "20261027T233915-L-4134784",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261028T020606-L-2527518",
   "kind": "interface",
-  "note": "independent cc review: native_weil_tensor_ringed_chain_data (+hsign) and the two split theorems against node lem-sf-native-weil-tensor-ringed-chain-data, the new nodes, Mathlib BifunctorFlip/WeilConjectures Bifunctor comparison lemmas and the sole caller NativeWeilTensorRingedComplexes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
