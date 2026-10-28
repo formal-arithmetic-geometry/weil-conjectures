@@ -2,7 +2,7 @@
  "id": "lem-pod-reindexing-tensor-signed-shift-squares-r3",
  "kind": "statement",
  "title": "Tensor-factor signed-shift squares",
- "statement": "theorem podReindexingTensorSignedShifts_tensorSquares\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g D) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) :\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₁) ∧\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₂)",
+ "statement": "Fix l,E,g,D,T as in [def-pod-completion-reindex-models] and [def-pod-completion-tensor-reindex-models], with D and T satisfying their Laws [def-pod-completion-tensor-normalization]. Let SY at Y and SX at X be PodTensorSignedShift models satisfying both their Generators laws and their Model laws for D.shiftSource and D.shiftTarget, respectively [def-pod-completion-reindex-shifts]. Then the two displayed tensor-factor signed-shift squares commute for every constructible complete M,N,M′,N′, integer r and shifted-input identifications a,b, with the exact equations recorded in the Lean statement. The source and target shifts are normalized, rather than arbitrary isomorphisms of the indicated objects.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
   "place": "Steps 1 and 5; tensor-factor signed-shift squares."
@@ -15,28 +15,30 @@
  ],
  "proof": [
   {
-   "text": "On homogeneous tensor generators reindexing preserves degrees and signs. Generator extensionality and the normalized Roos equations descend the two factor squares to completed tensor objects and derived presentations.",
+   "text": "Choose good representatives P,Q for M,N using essential surjectivity of the existing good-complex localization. Construct presentations of M′,N′ from Q.commShiftIso, shifted eP,eQ, and a.inv,b.inv. Cancel a.inv followed by a and b.inv followed by b to check their required compatibility equations.",
    "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-integral-operations-well-defined",
-    "lem-pod-reindexing-signed-roos-shift"
+    "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-    "place": "Steps 1 and 5; tensor-factor signed-shift squares."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the separate Roos path normalization to these presentations. Apply the strict tower square theorem to P,Q,r. Substitute the strict path equality in each pair of normalized formulas, then cancel the reindexed tensor presentation (an isomorphism) to obtain the required derived square in each slot.",
+   "uses": [
+    "lem-pod-tensor-shift-strict-tower-squares-c3",
+    "lem-pod-tensor-shift-roos-path-normalization-c3"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-kflat-total-tensor-model",
   "lem-pur-integral-operations-well-defined",
-  "lem-pod-reindexing-signed-roos-shift"
+  "lem-pod-tensor-shift-strict-tower-squares-c3",
+  "lem-pod-tensor-shift-roos-path-normalization-c3"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "lean/Sheaf/Paper/PodReindexingTensorSignedShifts.lean",
-  "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/PodReindexingTensorSignedSquares.lean",
+  "place": "Good representative presentations, strict tower paths and cancellation of presentation isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -85,9 +87,9 @@
   "module": "Sheaf.Paper.PodReindexingTensorSignedSquares",
   "file": "lean/Sheaf/Paper/PodReindexingTensorSignedSquares.lean",
   "declaration": "WeilConjectures.podReindexingTensorSignedShifts_tensorSquares",
-  "statement": "theorem podReindexingTensorSignedShifts_tensorSquares {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (_hT : PodCompletedTensorReindex.Laws l E g D T) (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) : (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ) (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), ((podOrdinaryReindex l E g).map (SY.left M N M' r a).hom ≫ ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' = (T.tensor M' N).hom ≫ (SX.left ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩ ⟨_,T.constructible M'⟩ r ((podOrdinaryReindex l E g).mapIso a ≪≫ ((podOrdinaryReindex l E g).commShiftIso r).app M.obj)).hom)) ∧ (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ) (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), ((podOrdinaryReindex l E g).map (SY.right M N N' r b).hom ≫ ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' = (T.tensor M N').hom ≫ (SX.right ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩ ⟨_,T.constructible N'⟩ r ((podOrdinaryReindex l E g).mapIso b ≪≫ ((podOrdinaryReindex l E g).commShiftIso r).app N.obj)).hom))",
+  "statement": "theorem podReindexingTensorSignedShifts_tensorSquares\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D) (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X)\n    (hSY : SY.Generators l E) (hSX : SX.Generators l E)\n    (mSY : SY.Model l E D.shiftSource) (mSX : SX.Model l E D.shiftTarget) :\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧),\n      ((podOrdinaryReindex l E g).map (SY.left M N M' r a).hom ≫\n          ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' =\n        (T.tensor M' N).hom ≫\n          (SX.left ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩\n            ⟨_,T.constructible M'⟩ r\n            ((podOrdinaryReindex l E g).mapIso a ≪≫\n              ((podOrdinaryReindex l E g).commShiftIso r).app M.obj)).hom)) ∧\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧),\n      ((podOrdinaryReindex l E g).map (SY.right M N N' r b).hom ≫\n          ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' =\n        (T.tensor M N').hom ≫\n          (SX.right ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩\n            ⟨_,T.constructible N'⟩ r\n            ((podOrdinaryReindex l E g).mapIso b ≪≫\n              ((podOrdinaryReindex l E g).commShiftIso r).app N.obj)).hom))",
   "branch": "sheaf-dag",
-  "by": "R3",
+  "by": "C3",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -101,13 +103,50 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
-  "result": "pass",
-  "landing": "20261027T234252-L-83074",
+  "reviewer": "C-d7806",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261028T020229-L-2482936",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item statement repair (+Generators/Model laws) vs PodTensorSignedShift/PodReindexSignedShifts defs and parent h₅..h₈; two new sorry leaves vs PodCompletionReindexModels/TensorModels/TensorNormalization laws; node lean.statements vs Lean files; new-node stmt_deps vs declaration owners"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "C3 stage 2",
+  "old_statement": "theorem podReindexingTensorSignedShifts_tensorSquares\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g D) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) :\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₁) ∧\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₂)",
+  "what": "The original theorem quantified over arbitrary SY,SX but imposed neither Generators nor Model. Their derived left/right isomorphisms can be changed by a sign independently at source and target, violating the claimed square on a nonzero tensor object (already for g=id and r=0). Add exactly the generator and model laws already supplied by the parent core construction. Also remove the malformed extra D in the prose D binder. No target or parent statement changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+  },
+  "citers": [
+   {
+    "id": "lem-pod-reindexing-tensor-signed-shifts",
+    "holds": true,
+    "note": "Its core construction already supplies the four missing laws; pass those existing proofs to the repaired tensor-square theorem. The parent statement is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "On homogeneous tensor generators reindexing preserves degrees and signs. Generator extensionality and the normalized Roos equations descend the two factor squares to completed tensor objects and derived presentations.",
+    "uses": [
+     "lem-pur-kflat-total-tensor-model",
+     "lem-pur-integral-operations-well-defined",
+     "lem-pod-reindexing-signed-roos-shift"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+     "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-kflat-total-tensor-model",
+   "lem-pur-integral-operations-well-defined",
+   "lem-pod-reindexing-signed-roos-shift"
+  ]
  }
 }

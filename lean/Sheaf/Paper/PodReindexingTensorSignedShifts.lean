@@ -71,7 +71,7 @@ theorem podReindexingTensorSignedShifts
       PodReindexSignedShifts l E g D T SY SX := by
   obtain ⟨SY, SX, h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈⟩ :=
     podReindexingTensorSignedShifts_core l E g D hD T hT
-  have hs := podReindexingTensorSignedShifts_tensorSquares l E g D hD T hT SY SX
+  have hs := podReindexingTensorSignedShifts_tensorSquares l E g D hD T hT SY SX h₅ h₆ h₇ h₈
   refine ⟨SY, SX, h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈, ?_⟩
   intro M N M' N' r a b
   exact ⟨hs.1 M N M' N' r a b, hs.2 M N M' N' r a b⟩

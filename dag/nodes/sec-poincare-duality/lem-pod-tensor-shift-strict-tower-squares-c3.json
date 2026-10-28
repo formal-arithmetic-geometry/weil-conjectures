@@ -1,0 +1,138 @@
+{
+ "id": "lem-pod-tensor-shift-strict-tower-squares-c3",
+ "kind": "statement",
+ "title": "Signed tensor-shift squares before Roos realization",
+ "statement": "Fix a prime l, a finite coefficient extension E, an isomorphism g:X→Y with l invertible, normalized completion data D and tensor reindexing T satisfying their Laws [def-pod-completion-reindex-models, def-pod-completion-tensor-normalization]. Let SY and SX be signed tensor shifts satisfying their Generators laws [def-pod-completion-reindex-shifts]. For every pair of flat-term K-flat complexes P,Q on Y and integer r, the two strict tower maps from the reindexed finite total tensor of (P[r],Q) to the shift of the finite total tensor of (g*P,g*Q) agree: first shift on Y and reindex, or first reindex, apply the termwise reindexing/shift comparison to the first input and then shift on X. The analogous two tower maps for (P,Q[r]) also agree, with the right-slot Koszul sign. These are equalities of natural transformations of complete strict quotient towers, before Roos or localization [def-pod-completion-tensor-reindex-models].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at a quotient and a total degree. Reindexing is sectionwise relabelling. Use tensor and coproduct extensionality to test the two maps on homogeneous pure tensors. The sheafified-tensor and restricted-scalar generator extensionality is the same one used in the strict tensor construction of integralOperationsWellDefined.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply T.Generators, SY.Generators and SX.Generators. The first slot gives the same relabelled tensor. The second gives the same tensor multiplied by (-1)^(pr). D.QuotientGenerators identifies the shifted quotient map with the quotient map in degree p+r (or q+r): verify this first on a scalar-tensor generator and use scalar-extension generator extensionality. Thus the two component maps agree. Complex and natural-transformation extensionality prove the entire tower equalities.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-shifts",
+    "def-pod-completion-tensor-reindex-models",
+    "def-pod-completion-tensor-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares. Explicit expansion of the indicated model calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ss]hift|[Ss]hift.*tensor",
+   "results": "Mathlib/CategoryTheory/Shift/Basic.lean; Mathlib/CategoryTheory/Shift/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only; no exact normalized strict-tower or Roos-path theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only; no exact normalized strict-tower or Roos-path theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product shift natural isomorphism reindexing compatibility homogeneous generators",
+   "results": "GradedTensorProduct.auxEquiv; TensorAlgebra.mk_reindex_cast; GradedTensorProduct.liftEquiv; CategoryTheory.GradedObject.Monoidal.ιTensorObj; GradedTensorProduct.auxEquiv_tmul; CategoryTheory.GradedObject.Monoidal.tensorIso_hom; TensorProduct.gradedCommAux; PiTensorProduct.gradedMonoid_eq_of_reindex_cast",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only; no exact normalized strict-tower or Roos-path theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of morphisms descends from K flat representatives through normalized derived tensor and mapping cocone shift comparisons",
+   "results": "CategoryTheory.PreservesFiniteLimitsOfFlat.uniq; CochainComplex.mappingCone.desc.congr_simp; CochainComplex.mappingCone.congr_simp; LinearMap.tensorEqLocusEquiv_apply; CochainComplex.mappingCone.ext_to_iff; CochainComplex.mappingCone.ext_from_iff; LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm; CochainComplex.mappingCone.ext_to",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only; no exact normalized strict-tower or Roos-path theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedSquares",
+  "date": "2026-10-28",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5; tensor-factor signed-shift squares.",
+   "via": [
+    "lem-pod-reindexing-tensor-signed-shift-squares-r3",
+    "lem-pod-reindexing-tensor-signed-shifts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodTensorShiftStrictTowerSquares",
+  "file": "lean/Sheaf/Paper/PodTensorShiftStrictTowerSquares.lean",
+  "declaration": "WeilConjectures.podTensorShift_strictTowerSquares",
+  "statement": "theorem podTensorShift_strictTowerSquares\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X)\n    (hSY : SY.Generators l E) (hSX : SX.Generators l E)\n    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory) (r : ℤ) :\n    letI : (isoReductionIntegralInverse l E g).Additive :=\n      isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom\n    letI : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=\n      isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom\n    let PX := (podGoodReindex l E g D).obj P\n    let QX := (podGoodReindex l E g D).obj Q\n    let TY := integralOperationsTensorTowerFunctor l E Y\n    let TX := integralOperationsTensorTowerFunctor l E X\n    let PYr := (⟨P.obj⟦r⟧, SY.good P r⟩ :\n      (integralOperationsGoodComplex l E Y).FullSubcategory)\n    let QYr := (⟨Q.obj⟦r⟧, SY.good Q r⟩ :\n      (integralOperationsGoodComplex l E Y).FullSubcategory)\n    let L₁ := (podReindexTower l E g).map (SY.leftTower P Q r).hom ≫\n      (podTowerShift l E g (TY.obj (P.obj, Q.obj)) r).hom ≫\n      whiskerRight (T.tower P Q).hom (shiftFunctor _ r)\n    let L₂ := (T.tower PYr Q).hom ≫\n      TX.map (Prod.mkHom (((isoReductionIntegralComplex l E g).commShiftIso r).hom.app P.obj)\n        (𝟙 QX.obj)) ≫ (SX.leftTower PX QX r).hom\n    let R₁ := (podReindexTower l E g).map (SY.rightTower P Q r).hom ≫\n      (podTowerShift l E g (TY.obj (P.obj, Q.obj)) r).hom ≫\n      whiskerRight (T.tower P Q).hom (shiftFunctor _ r)\n    let R₂ := (T.tower P QYr).hom ≫\n      TX.map (Prod.mkHom (𝟙 PX.obj)\n        (((isoReductionIntegralComplex l E g).commShiftIso r).hom.app Q.obj)) ≫\n      (SX.rightTower PX QX r).hom\n    L₁ = L₂ ∧ R₁ = R₂",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d7806",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261028T020229-L-2482936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-d7806",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261028T020229-L-2482936",
+  "kind": "interface",
+  "note": "independent cc review: item statement repair (+Generators/Model laws) vs PodTensorSignedShift/PodReindexSignedShifts defs and parent h₅..h₈; two new sorry leaves vs PodCompletionReindexModels/TensorModels/TensorNormalization laws; node lean.statements vs Lean files; new-node stmt_deps vs declaration owners"
+ }
+}
