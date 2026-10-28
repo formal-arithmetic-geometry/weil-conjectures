@@ -1,0 +1,169 @@
+{
+ "id": "lem-sf-finite-projection-open-routes",
+ "kind": "statement",
+ "title": "Open projection routes and their canonical restrictions",
+ "statement": "For a finite commutative coefficient ring A, a cartesian square (a,j',j,h) with both vertical arrows open immersions, and arbitrary K on the source of j and P on its target, the actual fixed-scalar maps openFirst and openSecond agree. Restricting either map by the pullback functor of j' and following by openUnitInv gives the independently constructed openSource. All maps are those of [def-sf-finite-projection-exchange-coordinates].",
+ "stmt_deps": [
+  "def-sf-finite-projection-exchange-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Original item proof steps 2, 5"
+ },
+ "proof": [
+  {
+   "text": "Use the actual adjunction Dj_! ⊣ Lj^*, transported by leftDerivedUpperStarIsoMapDerivedCategory. The canonical openUnitInv is its inverse unit. The published mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv gives the unit equation for beta. The adjunction projectionMap unit equation, transported through the same comparison, gives the unit equation for gamma. Cancelling the invertible units gives beta_restriction and gamma_restriction. These are proved private calculations, not additional assumptions.",
+   "uses": [
+    "def-sf-finite-projection-exchange-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Original item proof steps 2, 5"
+   }
+  },
+  {
+   "text": "Expand openFirst and openSecond. Apply the restriction equations, naturality of the unit and of the pullback tensor comparison, and bifunctoriality of tensorMap. For openSecond use tensor_square for the open square. Each restriction is exactly openSource. The common target is an extension-by-zero object; use the adjunction hom-equivalence and the invertible unit to deduce openFirst = openSecond from their equal restrictions.",
+   "uses": [
+    "lem-sf-finite-projection-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Original item proof steps 2, 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-projection-exchange-coordinates",
+  "lem-sf-finite-projection-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "F1: complete proof of canonical open restrictions, extracted from the assembly proof after profiling"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+   "results": {
+    "t": "2026-10-25T09:46:12Z",
+    "tool": "leansearch",
+    "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatTrans.IsMonoidal.mk",
+     "CategoryTheory.NatTrans.IsMonoidal.tensor",
+     "CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory",
+     "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+     "CategoryTheory.leftAdjointMate",
+     "CategoryTheory.NatTrans.IsMonoidal",
+     "CategoryTheory.rightAdjointMate",
+     "CategoryTheory.frobeniusMorphism_mate"
+    ],
+    "digest": "b4966417fc368ec8"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": {
+    "t": "2026-10-25T09:35:43Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.homEquiv'",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "digest": "d4686c3e2e7585d2"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+   "results": {
+    "t": "2026-10-25T09:35:42Z",
+    "tool": "grep",
+    "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionOpenAssembly",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-projection-open-assembly",
+   "place": "Open-factor restriction calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionOpenRestrictions",
+  "file": "lean/Sheaf/Paper/FiniteProjectionOpenRestrictions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.open_factor_routes",
+  "statement": "theorem open_factor_routes\n    {X' X B' B : Scheme.{u}} {a : X' ⟶ X} {j' : X' ⟶ B'}\n    {j : X ⟶ B} {h : B' ⟶ B} [IsOpenImmersion j] [IsOpenImmersion j']\n    (s : IsPullback a j' j h) (K : Dcat A X) (P : Dcat A B) :\n    openFirst A s K P = openSecond A s K P ∧\n    (pull A j').map (openFirst A s K P) ≫ openUnitInv A j' _ = openSource A s K P ∧\n    (pull A j').map (openSecond A s K P) ≫ openUnitInv A j' _ = openSource A s K P",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.open_factor_routes"
+  ],
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261028T020302-L-2489194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261028T020302-L-2489194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

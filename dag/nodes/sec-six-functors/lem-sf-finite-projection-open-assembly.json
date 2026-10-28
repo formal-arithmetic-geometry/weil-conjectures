@@ -12,13 +12,33 @@
  },
  "proof": [
   {
-   "text": "restrict the two open routes by j'^*. The open-unit normalization of beta,\ngamma and gamma' replaces their restrictions by the canonical units. Naturality of\nmu and tensor_square for (a,j',j,h) identify each remaining composite with\nopenSource. Both open routes are isomorphisms onto an object in the image of j'_!,\nso full faithfulness of j'_! turns equality of their restrictions into equality of\nthese routes. Expand PF^c as the proper projection followed by the proper image of\ngamma and the pullback-composition comparison. Expand Ex_!^c as proper exchange\nfollowed by the proper image of beta. Naturality of proper exchange moves the image\nof gamma through exchange; naturality of proper projection moves beta through the\nprojection. Substitute the supplied proper-factor equality and the open-route equality.\nThe pullback composition associativity identifies the two remaining target comparisons\nwith the one for the outside square. This gives the diamond equality. All maps are\nactual fixed-scalar maps; no constructibility, absolute separatedness, or invertibility\nof proper projection or exchange is used.",
+   "text": "Use open_factor_routes for the two open restrictions and for equality of the original open routes. This is a completely proved calculation of the canonical maps, not an additional normalization assumption.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-sf-finite-projection-tensor-square",
-    "def-exchange-projection"
+    "lem-sf-finite-projection-open-routes"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Original item proof steps 2, 5"
+   }
+  },
+  {
+   "text": "Prove the three inverse rearrangements of leftDerivedUpperStarComp_assoc_app, allowing equality-transport on the composite map. Express theta as the inverse comparison through the diagonal followed by the other comparison. Apply these three rearrangements and cancel inverse pairs to prove compactification_square, identifying the remaining compactification target maps. All these calculations are proved from the published pro-etale associativity theorem.",
+   "uses": [
+    "def-sf-finite-projection-exchange-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Original item proof steps 2, 5"
+   }
+  },
+  {
+   "text": "Expand the compactification projection and exchange into proper and open factors. Rewrite naturality of exchange twice, and the supplied proper-factor equality after cancelling its invertible tensor comparisons. Move beta past the proper projection by naturality. The equality of the open routes, naturality in the second tensor argument, and compactification_square identify the remaining maps inside the proper direct image. This proves the compactification diamond. Pair it with the two already established restriction equations.",
+   "uses": [
+    "def-sf-finite-projection-exchange-coordinates"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
     "place": "Original item proof steps 2, 5"
@@ -26,14 +46,13 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-finite-projection-tensor-square",
-  "def-exchange-projection"
+  "def-sf-finite-projection-exchange-coordinates",
+  "lem-sf-finite-projection-open-routes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "Expanded fixed-scalar form of original steps 2, 5"
+  "place": "F1: canonical pro-etale adjunction-unit calculations and compactification factor assembly; associativity from the published UpperStarCompCoherence module"
  },
  "mathlib_searches": [
   {
@@ -177,13 +196,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-97c08",
-  "group": "C9",
+  "reviewer": "COMPILER",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261025T122658-L-1795676",
+  "landing": "20261028T020302-L-2489194",
   "kind": "interface",
-  "note": "independent cc review: item module + new FiniteProjectionExchangeData vs clone item (moved block identical modulo blueprint tags); four new sorry statements vs item SquareLaw/RefinementLaw/IdentityLaw clauses and canonical defs of theta/mu/upperStarId; node fields vs Lean proof; unit realized empty"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
