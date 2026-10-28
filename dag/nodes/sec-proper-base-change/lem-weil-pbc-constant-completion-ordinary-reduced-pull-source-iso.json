@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-source-iso",
  "kind": "statement",
  "title": "Source transport for ordinary finite reduction",
- "statement": "For the constant-completion coefficient data, the source finite-reduced functor admits a natural isomorphism to the canonical finite quotient model change(projection J A I n) followed by pullback along constantMap F (A / I^(n+1)).",
+ "statement": "Let C and C' be small categories with Grothendieck topologies J and J'. Let L : Sh(J) → Sh(J') have right adjoint V with adjunction adj : L ⊣ V and preserve finite limits, and let F : InverseImageData L be the supplied constant-coefficient algebraic inverse-image data. For every commutative Noetherian ring A, ideal I, and n : ℕ, the functor res(coefficientMap J A I) followed by pull F (constantMap F A) and change(quotient J' A I n) is naturally isomorphic to change(projection J A I n) followed by pull F (constantMap F (A / I^(n+1))).",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03EK and 03EL; the source-side normalized finite pullback and quotient comparisons"
@@ -25,10 +25,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P3",
+  "group": "D6",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK and 03EL; the source-side normalized finite pullback and quotient comparisons"
+  "place": "Tags 03EK and 03EL; the stated source-transport plan, implemented by isoWhiskerLeft and isoWhiskerRight.",
+  "note": "The original route and proof dependencies are retained; the geometric hypotheses are restored explicitly."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -54,10 +55,11 @@
   "branch": "sheaf-dag",
   "by": "P3",
   "date": "2026-10-28",
-  "statement": "theorem ordinaryReducedPull_sourceIso (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) : Nonempty ((res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙ change (quotient J' A I n)) ≅ (change (projection J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1)))))",
+  "statement": "theorem ordinaryReducedPull_sourceIso\n    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (n : ℕ) :\n    Nonempty ((res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙\n        change (quotient J' A I n)) ≅\n      (change (projection J A I n) ⋙\n        pull F (constantMap F (A ⧸ I ^ (n + 1)))))",
   "declarations": [
    "CategoryTheory.ConstantCompletion.ordinaryReducedPull_sourceIso"
-  ]
+  ],
+  "note": "2026-10-28 D6: make V, adj : L ⊣ V, and PreservesFiniteLimits L explicit. The original section variables were omitted from the elaborated theorem. The source transport is proved by the two planned whiskered natural isomorphisms; its transport caller passes the geometric context through. No definition or target changes."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -70,13 +72,30 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "C-16e51",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261027T234133-L-10113",
+  "landing": "20261028T020303-L-2489734",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: ordinaryReducedPull_sourceIso proof (existsUnique + finiteComparison whiskering) against node plan and def-pur-strict-quotient-completion-data; restored V/adj/PreservesFiniteLimits against ordinaryFinitePull_existsUnique's hypotheses, transport node text and ordinaryReducedPull_isIso; node lean records against delivered Lean"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "D6 stage 2",
+  "old_statement": "For the constant-completion coefficient data, the source finite-reduced functor admits a natural isomorphism to the canonical finite quotient model change(projection J A I n) followed by pullback along constantMap F (A / I^(n+1)).",
+  "what": "Restore the geometric inverse-image hypotheses assumed by the source and by the parent ordinary reduced pull theorem. Section variables V, adj, and finite-limit preservation were not included in the old Lean theorem. Invariants from C2-sets to sets preserve finite limits, constant rings, and all algebraic operations, but do not preserve reduction: for A = ℤ, I = (2), n = 0, and the completed module ℤ₂ with sign action, the source is zero and the target is ℤ/2. Thus even finite-limit preservation alone does not imply the old assertion. An adjunction with L on the left supplies the geometric hypothesis in Stacks 03EL. The proof now uses exactly ordinaryFinitePull_existsUnique and finiteComparison as planned.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03EL, lemma-tensor-product-pullback: a morphism of ringed topoi; the proof uses the inverse/direct-image adjunction."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport",
+    "holds": true,
+    "note": "Its statement already assumes an adjunction and finite-limit-preserving inverse image. Its Lean interface is corrected in this delivery to retain this context, and ordinaryReducedPull_isIso already has and supplies it."
+   }
+  ]
  }
 }

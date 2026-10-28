@@ -62,7 +62,7 @@ theorem ordinaryReducedPull_isIso
     IsIso (Functor.whiskerRight (ordinaryPullComparison F A I)
       (change (quotient J' A I n))) := by
   let _adj := adj
-  obtain ⟨X, s, t, h⟩ := ordinaryReducedPull_transport F A I n
+  obtain ⟨X, s, t, h⟩ := ordinaryReducedPull_transport F V adj A I n
   have hi : IsIso (Functor.whiskerRight (ordinaryPullComparison F A I)
       (change (quotient J' A I n)) ≫ t.hom) := by
     rw [h]

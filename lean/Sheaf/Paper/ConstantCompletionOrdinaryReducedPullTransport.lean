@@ -28,8 +28,6 @@ namespace CategoryTheory.ConstantCompletion
 variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
-variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
-variable [PreservesFiniteLimits L]
 
 /-- Both finite reductions of the ordinary scalar comparison are transported to one
 ordinary finite-module functor, and the comparison is the map induced by that transport.
@@ -45,7 +43,9 @@ Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL, 093M;
 sites-cohomology.tex, Tag 06YY.
 (blueprint: lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport).
 -/
-theorem ordinaryReducedPull_transport (A : Type u) [CommRing A] [IsNoetherianRing A]
+theorem ordinaryReducedPull_transport
+    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (n : ℕ) :
     ∃ (X : Mod (completed J A I) ⥤ Mod (finite J' A I n))
       (s : (res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙
@@ -56,7 +56,7 @@ theorem ordinaryReducedPull_transport (A : Type u) [CommRing A] [IsNoetherianRin
           (change (quotient J' A I n)) ≫ t.hom = s.hom := by
   let X := change (projection J A I n) ⋙
     pull F (constantMap F (A ⧸ I ^ (n + 1)))
-  obtain ⟨s⟩ := ordinaryReducedPull_sourceIso F A I n
+  obtain ⟨s⟩ := ordinaryReducedPull_sourceIso F V adj A I n
   obtain ⟨t⟩ := ordinaryReducedPull_targetIso F A I n
   refine ⟨X, s, t, ?_⟩
   exact ordinaryReducedPull_transport_eq F A I n s t
