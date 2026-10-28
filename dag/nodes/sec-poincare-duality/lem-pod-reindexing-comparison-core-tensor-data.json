@@ -59,9 +59,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Z9",
+  "group": "T7",
   "result": "pass",
-  "landing": "20261028T020934-L-2567908",
+  "landing": "20261028T055810-L-810858",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
@@ -74,8 +74,35 @@
  ],
  "proof": [
   {
-   "text": "Construct the indicated component data by the corresponding sectionwise comparison, localization and representative normalization argument, then retain the displayed fields.",
+   "text": "Apply sectionwiseTensorComparison to postcomposition by g and the inverse of the normalized coefficient-ring isomorphism. This gives a natural ordinary tensor comparison with its identity formula on sheafified pure sections. Postcomposition is continuous and cocontinuous because g is an isomorphism. The module functor is the recorded exact equivalence.",
    "uses": [
+    "lem-sf-sectionwise-tensor-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the ordinary comparison to total complexes using tensorPullbackTotal and its invertibility for a left adjoint. Assemble its inverse into a natural isomorphism by tensorPullbackTotal_naturality. On a homogeneous summand, the coproduct desc equation followed by cancellation computes the forward comparison as the ordinary comparison followed by the target summand inclusion. Evaluating this equation on sheafified pure tensors proves tensorChain_pure; transport along p+q=k gives every displayed degree. Both signed differential terms commute by naturality and additivity. The two proved private helpers in this module implement this extension without importing the cyclic AdicCochainTensorReindexing specialization.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use podReindexing_resolution_preservation for preservation of K-flatness. Resolve every source homotopy complex by exists_isKFlatResolutionIndependentCoefficients and pass the quasi-isomorphism to the homotopy quotient. Apply resolvingRepresentativesFullyFaithfulWhiskering and transport along quotientCompQhIso to obtain fully faithful restriction along the product of the recorded K-flat localization functors.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorComparisonDescent to the two supplied Models.comparison isomorphisms, the natural total-chain comparison, and podReindexingDerivedFactors. The latter is an isomorphism on every complex, hence also on representatives and their tensors. This supplies the derived tensor isomorphism. Retain its underlying isomorphism and the normalized chain components to construct ComparisonCoreTensorData; the structure and theorem signatures are unchanged.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
     "def-coef-ringed-tensor-hom-model",
     "def-pod-reindexing-coherence-data"
    ],
@@ -83,19 +110,27 @@
   }
  ],
  "proof_deps": [
+  "lem-sf-sectionwise-tensor-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-coef-ringed-tensor-hom-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
   "def-pod-reindexing-coherence-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Z9",
+  "group": "T7",
   "date": "2026-10-28",
+  "kind": "agent-written",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 2; component decomposition."
+  "place": "Steps 1 and 2; sectionwise tensor comparison, its signed total extension, and K-flat representative descent."
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.PodReindexingComparisonCoreTensorData.",
+  "module": "Sheaf.Paper.PodReindexingComparisonCoreTensorData",
   "file": "lean/Sheaf/Paper/PodReindexingComparisonCoreTensorData.lean",
   "declaration": "WeilConjectures.PodReindexingCoherence.comparison_core_tensor_data_exists",
   "statement": "theorem comparison_core_tensor_data_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]\n    (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY) :\n    Nonempty (ComparisonCoreTensorData l E g s SX SY TX TY)",
