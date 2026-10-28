@@ -237,7 +237,22 @@ theorem coefHomScalar_naturality {X Y : (ℕ × W.ProEt)ᵒᵖ} (f : X ⟶ Y) :
           (op Y.unop.2) =
       (completedIntegralCommRingProjectionUnrestricted l E W X.unop.1).hom.app
           (op X.unop.2) ≫ (coefficientSequenceCommRingSheaf l E W).obj.map f := by
-  sorry
+  let π : (Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E W) ⟶
+      coefficientSequenceCommRingSystem l E W :=
+    NatTrans.ofOpSequence (completedIntegralCommRingProjectionUnrestricted l E W)
+      (fun n ↦ by
+        simp only [Functor.const_obj_map, coefficientSequenceCommRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ]
+        apply (sheafCompose (Scheme.ProEt.topology W)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map_injective
+        rw [Functor.map_comp]
+        have h := limit.w (integralCoefficientSheafSystem l E W) (homOfLE n.le_succ).op
+        simp only [integralCoefficientSheafSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] at h
+        exact h.symm)
+  exact (Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := W.ProEt)).functor
+    (Functor.uncurry.map (Functor.whiskerRight π
+      (sheafToPresheaf (Scheme.ProEt.topology W) CommRingCat)))).naturality f
 
 /-- The sequence-site ring map is precisely the completion projection on each slice.
 Source: Stacks 03CO, 0941 (blueprint: lem-coef-hom-tower-scalar-model). -/
@@ -518,7 +533,45 @@ theorem coefHomQuotientSectionScalar_naturality {m n : ℕᵒᵖ} (f : m ⟶ n) 
         (forget₂ CommRingCat RingCat).map
           ((coefficientSequenceCommRingSheaf l E W).obj.map
             ((coefHomSectionIndex W).op.map f)) := by
-  sorry
+  have hstep (k : ℕ) :
+      (coefHomPointQuotientRing.{t, u} l E).map (homOfLE (Nat.le_succ k)).op ≫
+          coefHomQuotientSectionScalarComponent l E W k =
+        coefHomQuotientSectionScalarComponent l E W (k + 1) ≫
+          (forget₂ CommRingCat RingCat).map
+            ((coefficientSequenceCommRingSheaf l E W).obj.map
+              ((coefHomSectionIndex W).op.map (homOfLE (Nat.le_succ k)).op)) := by
+    let q : CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (k + 2))) ⟶
+        CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (k + 1))) :=
+      CommRingCat.ofHom ((ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).symm.toRingHom.comp
+        ((Padic.coefficientExtensionTransition l E (k + 1)).comp
+          (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))
+    have hq := toSheafify_naturality (Scheme.ProEt.topology W)
+      ((Functor.const W.ProEtᵒᵖ).map q)
+    have hqa := congrArg (fun z ↦
+      (forget₂ CommRingCat RingCat).map (z.app (op (Scheme.ProEt.mk (𝟙 W))))) hq
+    simp only [NatTrans.comp_app, Functor.map_comp, Functor.const_map_app] at hqa
+    change (forget₂ CommRingCat RingCat).map q ≫ _ = _ at hqa
+    simp only [coefHomPointQuotientRing, Functor.ofOpSequence_map_homOfLE_succ]
+    change (forget₂ CommRingCat RingCat).map q ≫ _ = _
+    convert hqa using 1
+    · rfl
+    · rfl
+    · change _ ≫ (forget₂ CommRingCat RingCat).map
+        (((coefficientSequenceCommRingSystem l E W).map
+            (homOfLE (Nat.le_succ k)).op).hom.app
+              (op (Scheme.ProEt.mk (𝟙 W))) ≫
+          ((coefficientSequenceCommRingSystem l E W).obj (op k)).obj.map
+            (𝟙 (op (Scheme.ProEt.mk (𝟙 W))))) = _
+      dsimp only [coefHomQuotientSectionScalarComponent]
+      simp only [CategoryTheory.Functor.map_id, Category.comp_id]
+      simp only [coefficientSequenceCommRingSystem,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      rfl
+  exact (NatTrans.ofOpSequence
+    (F := coefHomPointQuotientRing.{t, u} l E)
+    (G := (coefHomSectionIndex W).op ⋙
+      (coefficientSequenceCommRingSheaf l E W).obj ⋙ forget₂ CommRingCat RingCat)
+    (coefHomQuotientSectionScalarComponent.{t, u} l E W) hstep).naturality f
 
 /-- The structural ring map for quotient-linear global sections.
 Source: Stacks 03DA, 0941 (blueprint: lem-coef-hom-tower-scalar-model). -/
