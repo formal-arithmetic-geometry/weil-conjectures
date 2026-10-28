@@ -12,15 +12,15 @@
  ],
  "proof": [
   {
-   "text": "The composition functor from Y.ProEt to X.ProEt is continuous and cocontinuous. Restrict the module-sheafification unit and transpose it under module sheafification on Y. Cocontinuity preserves local bijectivity, so this transpose is invertible. Its adjunction equation gives compatibility with the sheafification units. The proof of the cited restriction lemma uses only these properties and therefore applies at the independent site and coefficient universes used here, with the same formulas.",
+   "text": "Apply exists_unique_ringedPushforward_laxMonoidal to composition along j with the identity map of the restricted ring sheaf. This gives a lax monoidal structure on the actual sectionwise module restriction and the forward pure-tensor normalization, with unit equal to the identity on ring sections. The site and coefficient universes remain independent.",
    "uses": [
-    "lem-weil-pbc-module-sheafification-restriction",
+    "lem-pd-ringed-direct-image-pairing-lax",
     "def-pur-clopen-total-tensor-data"
    ],
    "elementary": false
   },
   {
-   "text": "Precomposition preserves the presheaf tensor and unit sectionwise, including their associator and symmetry. Localize this strong symmetric monoidal functor along module sheafification, using the preceding unit-compatible comparison. The localization universal property gives the strong braided structure on the actual restriction, with the existing monoidal structures, rather than transporting or replacing the tensor objects.",
+   "text": "The sectionwise identity identifies the tensor of the restricted underlying module presheaves with the restriction of their tensor. Let a be the sheafification unit followed by tensorObjIsoSheafification.inv on the component. The normalization says that a followed by the lax tensorator is this identity followed by the restriction of the original sheafification unit and tensorObjIsoSheafification.inv. Both a and that composite are local bijections: units and isomorphisms are, and the composition functor is cocontinuous. Cancellation of local equivalences shows the tensorator is locally bijective, hence an isomorphism between sheaves. The unit isomorphism is sectionwise the identity. Monoidal.ofLaxMonoidal gives the strong monoidal structure without changing any tensor or restriction object.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-pur-clopen-total-tensor-data"
@@ -28,24 +28,26 @@
    "elementary": false
   },
   {
-   "text": "Evaluate the unit-compatible sheafification comparison on x tensor y. Since the presheaf tensorator is the identity on this section, the inverse tensorator of the localized functor has exactly the pure-tensor formula in the conclusion. The argument includes the empty site and zero coefficient rings.",
+   "text": "Morphisms from a sheaf tensor are determined by pure tensors, by tensorObjIsoSheafification, the module sheafification adjunction and sectionwise tensor induction. Check the braided equation on those generators, using the forward normalization and moduleTmul_braiding on each site. This promotes the strong monoidal structure to a braided one. Finally apply the inverse tensorator to the forward pure-tensor normalization and cancel its composite with the tensorator. The resulting inverse normalization is exactly clopenTensorComparison on clopenTensorPure. All proofs apply to the empty component and the zero ring.",
    "uses": [
+    "lem-pur-module-tensor-generator-calculus",
     "def-pur-clopen-total-tensor-data"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheafification-restriction",
+  "lem-pd-ringed-direct-image-pairing-lax",
   "def-pur-clopen-total-tensor-data",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-module-tensor-generator-calculus"
  ],
  "proof_origin": {
   "kind": "stage3",
-  "by": "Y5",
+  "by": "J3",
   "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EL and 0GMW; unit-compatible restriction from Sites 04B8."
+  "place": "Tags 03D6, 03EK, 03EL and 0GMW; normalized lax direct image plus cocontinuous preservation of local bijections (Sites 04B8)."
  },
  "mathlib_searches": [
   {
@@ -112,9 +114,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y5",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261028T020921-L-2564642",
+  "landing": "20261028T034816-L-3550502",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
