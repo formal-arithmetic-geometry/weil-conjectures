@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModelBase
 import Sheaf.Paper.IsomorphismScalarCompletedFormulaChainData
-import Sheaf.Paper.IsomorphismScalarCompletedFormulaChainNormalization
 
 /-! # Completed pure-tensor comparison
 
@@ -15,10 +14,9 @@ Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0
 Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 (blueprint: lem-weil-isomorphism-scalar-completed-formula).
 
-The proof composes the coefficient square at every finite projection, applies the
-inverse-limit scalar-chain comparison, transports its normalized pure-tensor rule
-through the specified completed presentations, and restricts to the good-complex
-subcategory. The resulting local section equation is precisely CompletedFormula.
+The proof applies the normalized comparison of completed-coefficient module
+sheaves degreewise, then restricts the resulting natural isomorphism of complexes
+to the good-complex subcategory. Its local tensor rule is exactly CompletedFormula.
 -/
 
 @[expose] public noncomputable section
@@ -44,19 +42,12 @@ Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0
 Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 (blueprint: lem-weil-isomorphism-scalar-completed-formula).
 
-Proof: Compose the two maps from inverse image of the completed E coefficient ring
-into the completed L coefficient ring with every finite projection. The projection
-formula for inverseImageCompletedCoefficientMap, naturality of the finite constant
-coefficient comparisons, and the residue formula for completedCoefficientMap make
-these composites equal. Joint monicity of the limit projections gives the coefficient
-square. Apply limitScalarChainComparison to the finite E and L coefficient towers.
-Identify its scalar-extension functors with completedOrdinaryScalarExtension using
-their specified object equalities to sheafified changeOfRings and their conjugated
-map equalities. These object equalities give natural isomorphisms, and their inverses
-transport the sheafification-unit pure tensors to completedScalarTensorSection.
-Transport the comparison through these isomorphisms and restrict to good complexes.
-Its forward pure-tensor rule is exactly CompletedFormula. The argument applies to
-unbounded complexes, including the zero complex and an empty site.
+Proof: The completed module comparison has the normalized pure-tensor rule
+on every module sheaf. Apply NatIso.mapHomologicalComplex to obtain a natural
+isomorphism on unbounded complexes and whisker by the inclusion of good complexes.
+In degree i its component is the module comparison on P.X i, whose pure-tensor
+rule is exactly the displayed CompletedFormula. No completeness of P is needed;
+this construction also applies to the zero complex and an empty site.
 -/
 theorem scalar_completed_formula
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -64,7 +55,13 @@ theorem scalar_completed_formula
     ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g,
       CompletedFormula l E L ι g b := by
-  obtain ⟨D, b, hb⟩ := completed_formula_chain_data l E L ι g _hX _hY
-  exact ⟨b, completed_formula_chain_normalization l E L ι g D b hb⟩
+  obtain ⟨e, he⟩ := completed_formula_chain_data l E L ι g
+  let b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
+      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g :=
+    Functor.isoWhiskerLeft (integralOperationsGoodComplex l E Y).ι
+      (NatIso.mapHomologicalComplex e (.up ℤ))
+  refine ⟨b, ?_⟩
+  intro P i U s x
+  exact he (P.obj.X i) U x s
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
