@@ -13908,6 +13908,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangulated
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
+public import WeilConjectures.TraceFormula.Specialization.GenericSlicePoint
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
