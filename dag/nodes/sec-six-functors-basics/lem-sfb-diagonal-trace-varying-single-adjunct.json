@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-diagonal-trace-varying-single-adjunct",
+ "kind": "statement",
+ "title": "Varying comparison on the coefficient adjunction unit",
+ "statement": "Let $l$ be prime, $E$ a finite dimensional extension field of $\\mathbf Q_l$, $f:X\\to S$ a morphism of schemes with diagonal localizations, and $p$ a presentation [def-sfb-diagonal-trace-presentation]. Assume that $\\eta_t(r_X I)$ is invertible for every K-injective complex $I$ of varying coefficient systems on $X$. Write $N_X,N_S$ for the coefficient systems, $\\theta$ for the ordinary coefficient pullback isomorphism, $\\theta_D$ for its specified derived localization, $a$ for the ordinary geometric adjunction and $a_D$ for its canonical derived adjunction [def-sp-tower-class-diagonal]. Put $\\delta=a_D^{\\flat}(\\theta_D)$ and $\\beta=r_S(a^{\\flat}(\\theta))\\,v^{\\mathrm{ord}}_{N_X}$. Then DiagonalSingleUnitCompatible [lem-sfb-diagonal-trace-varying-full-normalization] holds:\n\\[D(r_S)(\\delta)\\,v_{s_XN_X}=s_{r_S}(N_S)\\,s_S(\\beta)\\,\\rho_t(r_XN_X)\\,R_t(s_{r_X}(N_X)^{-1}).\\]\nThe single-object comparisons and ordinary-to-derived arrow are those recorded by the presentation; composition is in application order.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), coefficient-unit compatibility with the varying comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-diagonal",
+  "lem-sfb-diagonal-trace-varying-full-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized varying single-object square, using the supplied restricted-push acyclicity.",
+   "uses": [
+    "lem-sfb-diagonal-trace-varying-single-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the actual derived coefficient adjunct using the ordinary coefficient adjunct and the canonical right-derived single-object map.",
+   "uses": [
+    "lem-sfb-diagonal-trace-coefficient-single-adjunct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the degree-zero square with the ordinary-to-derived adjunct formula. Naturality of the restriction single-functor comparison and cancellation give the equality defined by DiagonalSingleUnitCompatible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-varying-single-square",
+  "lem-sfb-diagonal-trace-coefficient-single-adjunct"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), coefficient-unit compatibility with the varying comparison",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction on an object in degree zero is its ordinary adjunction followed by the right derived functor unit",
+   "results": "CategoryTheory.Adjunction.derived_unit and derivedη_fac_app give derived-unit normalization; no coefficient square.",
+   "date": "2026-10-28",
+   "verdict": "Combine the derived-unit identity with exact single-object and normalized scalar-square comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction on a complex concentrated in degree zero agrees with the ordinary adjunction and the right derived unit",
+   "results": "Derived adjunction unit and generic naturality lemmas; no specialized varying coefficient adjunct.",
+   "date": "2026-10-28",
+   "verdict": "Combine generic derived-unit normalization with the supplied square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "This supplies the ordinary adjunct formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|rightDerivedFunctorUnitQ",
+   "results": "No Mathlib matches in CategoryTheory. The adopted source library supplies these APIs.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing source-library single-functor and cochain-unit interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "group": "H7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-finite-push-unit-common",
+   "place": "coefficient-unit adjunct after the full varying normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceVaryingSingleAdjunct",
+  "file": "lean/Sheaf/Paper/DiagonalTraceVaryingSingleAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_varying_single_adjunct",
+  "statement": "theorem diagonalTrace_varying_single_adjunct\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l E f)\n    (hacyc : ∀ I : CochainComplex (SpTowerClasses.Systems X\n      (SpTowerClasses.Arings l E X)) ℤ, I.IsKInjective →\n      IsIso (p.Rt.η.app ((p.restrictionX.F.mapHomologicalComplex (.up ℤ)).obj I))) :\n    let := p.base.kinjective X\n    let := p.model.geometry.pushAdditive\n    let := p.restrictionS.additive\n    let := p.restrictionX.additive\n    let := p.restrictionX.limits\n    let := p.restrictionX.colimits\n    let := p.restrictionS.limits\n    let := p.restrictionS.colimits\n    DiagonalSingleUnitCompatible (diagonalTraceSystemPush l f)\n      p.restrictionX.F p.restrictionS.F p.Rt\n      (SpTowerShriek.push l E p.base p.model.geometry) p.varying\n      (SpTowerClasses.coefficient X (SpTowerClasses.Arings l E X))\n      (SpTowerClasses.coefficient S (SpTowerClasses.Arings l E S))\n      ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n        (p.model.coefficientPullback.derivedIso l E).hom)\n      (p.restrictionS.F.map ((p.model.geometry.ordinaryAdjunction.homEquiv _ _)\n        p.model.coefficientPullback.iso.hom) ≫ p.varyingOrdinary.hom.app\n          (SpTowerClasses.coefficient X (SpTowerClasses.Arings l E X)))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

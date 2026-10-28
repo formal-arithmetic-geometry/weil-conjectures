@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-diagonal-trace-coefficient-single-adjunct",
+ "kind": "statement",
+ "title": "Canonical derived coefficient adjunct on a single object",
+ "statement": "Let $l$ be prime, $E$ a finite dimensional extension field of $\\mathbf Q_l$, $f:X\\to S$ a morphism of schemes with diagonal localizations, and $p$ a presentation [def-sfb-diagonal-trace-presentation]. Write $N_X,N_S$ for the coefficient systems and $a:L\\dashv F$ for its ordinary geometric adjunction. Let $\\theta:L N_S\\simeq N_X$ be the specified coefficient pullback and $\\theta_D$ its specified derived localization [def-sp-tower-class-diagonal]. If $s_T$ denotes placement in degree zero and $\\rho_F(N_X):s_S(FN_X)\\to R_F(s_XN_X)$ is the canonical ordinary-to-derived single-object arrow [lem-diagonal-canonical-right-derived], then\n\\[a_D^{\\flat}(\\theta_D)=s_S(a^{\\flat}(\\theta))\\,\\rho_F(N_X).\\]\nHere $a_D$ is the canonical derived adjunction, and composition is in application order.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraphs (1)--(2), ordinary coefficient-unit square and normalized varying restriction"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-diagonal",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient derived pullback is the exact single-functor comparison followed by localization of the ordinary coefficient isomorphism.",
+   "uses": [
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cochain unit of the canonical derived adjunction is the ordinary unit followed by the right cochain unit. Evaluate on a single complex and apply naturality to the ordinary coefficient isomorphism.",
+   "uses": [
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-diagonal",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraphs (1)--(2), ordinary coefficient-unit square and normalized varying restriction",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction on an object in degree zero is its ordinary adjunction followed by the right derived functor unit",
+   "results": "CategoryTheory.Adjunction.derived_unit and derivedη_fac_app give derived-unit normalization; no coefficient square.",
+   "date": "2026-10-28",
+   "verdict": "Combine the derived-unit identity with exact single-object and normalized scalar-square comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction on a complex concentrated in degree zero agrees with the ordinary adjunction and the right derived unit",
+   "results": "Derived adjunction unit and generic naturality lemmas; no specialized varying coefficient adjunct.",
+   "date": "2026-10-28",
+   "verdict": "Combine generic derived-unit normalization with the supplied square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "This supplies the ordinary adjunct formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|rightDerivedFunctorUnitQ",
+   "results": "No Mathlib matches in CategoryTheory. The adopted source library supplies these APIs.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing source-library single-functor and cochain-unit interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "group": "H7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-varying-single-adjunct",
+   "place": "Canonical derived coefficient adjunct on a single object",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCoefficientSingleAdjunct",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCoefficientSingleAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_coefficient_single_adjunct",
+  "statement": "theorem diagonalTrace_coefficient_single_adjunct\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l E f) :\n    let := p.base.kinjective X\n    let := p.model.geometry.pushAdditive\n    ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n        (p.model.coefficientPullback.derivedIso l E).hom) =\n      (DerivedCategory.singleFunctor\n          (SpTowerClasses.Systems S (SpTowerClasses.Arings l E S)) 0).map\n        ((p.model.geometry.ordinaryAdjunction.homEquiv _ _)\n          p.model.coefficientPullback.iso.hom) ≫\n        diagonalTraceRightSingle p.model.geometry.push\n          (canonicalDiagonalRightDerived p.model.geometry.push)\n          (SpTowerClasses.coefficient X (SpTowerClasses.Arings l E X))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

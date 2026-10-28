@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-diagonal-trace-varying-single-square",
+ "kind": "statement",
+ "title": "Varying trace square on any single system object",
+ "statement": "Let $l$ be prime, $E$ a finite dimensional extension field of $\\mathbf Q_l$, $f:X\\to S$ a morphism of schemes with diagonal localizations, and $p$ a presentation [def-sfb-diagonal-trace-presentation]. Assume that for every K-injective complex $I$ of varying coefficient systems on $X$, $\\eta_t(r_X I)$ is invertible. For every system object $M$ on $X$, the presentation's varying comparison satisfies DiagonalSingleSquare [lem-sfb-diagonal-trace-varying-full-normalization]:\n\\[D(r_S)(\\rho_F(M))\\,v_{s_XM}\\,R_t(s_{r_X}(M))=s_{r_S}(FM)\\,s_S(v^{\\mathrm{ord}}_M)\\,\\rho_t(r_XM).\\]\nHere $F$ is the ordinary geometric pushforward, $\\rho_F$ is formed with its canonical right derived functor [lem-diagonal-canonical-right-derived], $s_{r_T}$ is the exact restriction's single-object comparison, $\\rho_t$ is the ordinary-to-derived single-object arrow for constant-scalar pushforward, and composition is in application order.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraphs (1)--(2), ordinary coefficient-unit square and normalized varying restriction"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "lem-diagonal-canonical-right-derived",
+  "lem-sfb-diagonal-trace-varying-full-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the stated acyclicity to extend the supplied normalization on K-injectives to the full cochain-unit normalization.",
+   "uses": [
+    "lem-sfb-diagonal-trace-varying-full-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the full normalization on the specified system object in degree zero. Naturality of exact single-functor comparisons and the cochain units gives the equality defined by DiagonalSingleSquare.",
+   "uses": [
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-varying-full-normalization",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraphs (1)--(2), ordinary coefficient-unit square and normalized varying restriction",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction on an object in degree zero is its ordinary adjunction followed by the right derived functor unit",
+   "results": "CategoryTheory.Adjunction.derived_unit and derivedη_fac_app give derived-unit normalization; no coefficient square.",
+   "date": "2026-10-28",
+   "verdict": "Combine the derived-unit identity with exact single-object and normalized scalar-square comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction on a complex concentrated in degree zero agrees with the ordinary adjunction and the right derived unit",
+   "results": "Derived adjunction unit and generic naturality lemmas; no specialized varying coefficient adjunct.",
+   "date": "2026-10-28",
+   "verdict": "Combine generic derived-unit normalization with the supplied square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-28",
+   "verdict": "This supplies the ordinary adjunct formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|rightDerivedFunctorUnitQ",
+   "results": "No Mathlib matches in CategoryTheory. The adopted source library supplies these APIs.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing source-library single-functor and cochain-unit interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "group": "H7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-varying-single-adjunct",
+   "place": "Varying trace square on a coefficient single object",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceVaryingSingleSquare",
+  "file": "lean/Sheaf/Paper/DiagonalTraceVaryingSingleSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_varying_single_square",
+  "statement": "theorem diagonalTrace_varying_single_square\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l E f)\n    (hacyc : ∀ I : CochainComplex (SpTowerClasses.Systems X\n      (SpTowerClasses.Arings l E X)) ℤ, I.IsKInjective →\n      IsIso (p.Rt.η.app ((p.restrictionX.F.mapHomologicalComplex (.up ℤ)).obj I)))\n    (M : SpTowerClasses.Systems X (SpTowerClasses.Arings l E X)) :\n    let := p.base.kinjective X\n    let := p.model.geometry.pushAdditive\n    let := p.restrictionS.additive\n    let := p.restrictionX.additive\n    let := p.restrictionX.limits\n    let := p.restrictionX.colimits\n    let := p.restrictionS.limits\n    let := p.restrictionS.colimits\n    DiagonalSingleSquare p.model.geometry.push (diagonalTraceSystemPush l f)\n      p.restrictionX.F p.restrictionS.F (canonicalDiagonalRightDerived p.model.geometry.push)\n      p.Rt p.varyingOrdinary p.varying M",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

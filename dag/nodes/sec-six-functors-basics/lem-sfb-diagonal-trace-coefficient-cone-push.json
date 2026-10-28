@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-diagonal-trace-coefficient-cone-push",
+ "kind": "statement",
+ "title": "Ordinary coefficient cone compatibility with direct image",
+ "statement": "Let $l$ be prime, let $f:X\\to S$ be a morphism of schemes with diagonal localizations, and let $p$ be a presentation with $E=\\mathbf Q_l$ (in its recorded universe lift) [def-sfb-diagonal-trace-presentation]. Write $N_T$ for the coefficient system, $H_T=r_TN_T$, $M_T$ for the completed coefficient module, and $c_T:U_TM_T\\to\\lim H_T$ for the cone lift of its recorded coefficient projections [def-sfb-diagonal-trace-coefficients]. Let $b:M_S\\to f_*M_X$ be completedPushUnit [def-sfb-diagonal-trace-finite-evaluation], let $\\alpha:N_S\\to f_*N_X$ be the ordinary adjunct of the specified coefficient pullback [def-sp-tower-class-diagonal], and put $\\beta=r_S(\\alpha)\\,v^{\\mathrm{ord}}_{N_X}$. Then\n\\[U_S(b)\\,c^{\\mathrm{ord}}_{M_X}\\,f_*(c_X)\\,\\lambda^{\\mathrm{ord}}_{H_X}=c_S\\,\\lim(\\beta).\\]\nComposition is written in application order, and $c^{\\mathrm{ord}}$ and $\\lambda^{\\mathrm{ord}}$ are the presentation's completed and limit ordinary comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), ordinary coefficient-unit square before the varying comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Apply ordinary limit extensionality. The limit.post projection identity and cone lift equations reduce the claim to the levelwise coefficient cone square.",
+   "uses": [
+    "def-sfb-diagonal-trace-presentation",
+    "def-sfb-diagonal-trace-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget scalars faithfully and compose with coefficientForget. The completed_sections and varying_sections equations identify the direct-image comparisons with the identity on sections. coefficient_projection identifies the cone arrows with the actual completed ring projections.",
+   "uses": [
+    "def-sfb-diagonal-trace-presentation",
+    "def-sfb-diagonal-trace-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficientPullback normalization identifies the ordinary adjunct with finite constant-ring restriction. Additivity and coefficient_one identify the coefficient comparisons locally on finite constant sections, which are integer multiples of one. Descent identifies the sheaf maps. The definition of diagonalCompletedCoefficientMap as a limit lift gives the remaining finite ring square.",
+   "uses": [
+    "def-sp-tower-class-diagonal",
+    "def-sfb-diagonal-trace-coefficients",
+    "def-sfb-diagonal-trace-finite-evaluation",
+    "lem-sfb-diagonal-trace-varying-scalar-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-diagonal",
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "lem-sfb-diagonal-trace-varying-scalar-square"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), coefficient cone square in ordinary module sheaves",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two additive morphisms from a finite constant ring sheaf agree when they agree on one",
+   "results": "Additive homomorphism extensionality, including Finsupp.addHom_ext; no finite constant sheaf result.",
+   "date": "2026-10-28",
+   "verdict": "Use sheafification extensionality and generation by one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two additive morphisms from a finite constant ring sheaf agree if their values on one agree",
+   "results": "Generic sheaf and additive hom extensionality results, combined with the explicit cyclicity of finite constant coefficients.",
+   "date": "2026-10-28",
+   "verdict": "No specialized comparison theorem; prove it using sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafify_hom_ext",
+   "results": "CategoryTheory.sheafify_hom_ext in Mathlib.CategoryTheory.Sites.Sheafification.",
+   "date": "2026-10-28",
+   "verdict": "Use the sheafification adjunction to reduce equality to constant sections."
+  },
+  {
+   "tool": "grep",
+   "query": "constantCommuteCompose|sheafify_hom_ext",
+   "results": "Mathlib.CategoryTheory.Sites.ConstantSheaf and Sheafification provide the constant/forgetful comparison and sheafification extensionality.",
+   "date": "2026-10-28",
+   "verdict": "These supply the elementary sheafification part of the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "group": "H7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-finite-push-unit-common",
+   "place": "ordinary coefficient cone calculation before deriving",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCoefficientConePush",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCoefficientConePush.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_coefficient_cone_push",
+  "statement": "theorem diagonalTrace_coefficient_cone_push\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) :\n    let E := ULift.{u} (Padic l)\n    let H := p.restrictionX.F.obj (SpTowerClasses.coefficient X (SpTowerClasses.Arings l E X))\n    (diagonalCompletedRestriction l S).map (completedPushUnit l f) ≫\n        p.completedOrdinary.hom.app\n          (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l))) ≫\n        (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).map\n          (limit.lift H ⟨_, p.coefficientsX.coefficientProjection⟩) ≫\n        p.limits.ordinary.hom.app H =\n      limit.lift _ ⟨_, p.coefficientsS.coefficientProjection⟩ ≫\n        (lim : DiagonalSystems l S ⥤ DiagonalMod l S).map\n          (p.restrictionS.F.map\n              ((p.model.geometry.ordinaryAdjunction.homEquiv _ _)\n                p.model.coefficientPullback.iso.hom) ≫\n            p.varyingOrdinary.hom.app\n              (SpTowerClasses.coefficient X (SpTowerClasses.Arings l E X)))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

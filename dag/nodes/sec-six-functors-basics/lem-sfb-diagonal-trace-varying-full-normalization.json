@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-diagonal-trace-varying-full-normalization",
+ "kind": "statement",
+ "title": "Full cochain-unit normalization from K-injective normalization",
+ "statement": "Let $A,B,C,D$ be abelian categories with derived categories, and assume that $A$ has K-injective resolutions. Let $F:A\\to B$ and $G:C\\to D$ be additive, $U:A\\to C$ and $V:B\\to D$ exact additive, and $o:FV\\simeq UG$. Use the canonical total right derived functor of $F$ [lem-diagonal-canonical-right-derived], a specified total right derived functor $R_G$ with cochain unit $\\eta_G$ [det-prop-diagonal-tower-limit], and an isomorphism $e:R_FD(V)\\simeq D(U)R_G$. Write $c_U,c_V$ for the exact-functor localization comparisons. Suppose that for every K-injective complex $I$, the arrow $\\eta_G(U I)$ is invertible and\n\\[e_{QI}\\,R_G(c_U(I))=D(V)(\\kappa_F(I))\\,c_V(FI)\\,Q(o_I)\\,\\eta_G(UI),\\]\nwhere $\\kappa_F(I):R_F(QI)\\simeq Q(FI)$ is the canonical computation isomorphism. Then for every complex $P$,\n\\[D(V)(\\eta_F(P))\\,e_{QP}\\,R_G(c_U(P))=c_V(FP)\\,Q(o_P)\\,\\eta_G(UP).\\]\nAll compositions are in application order.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized varying scalar restriction before the Milnor step"
+ },
+ "stmt_deps": [
+  "det-prop-diagonal-tower-limit",
+  "lem-diagonal-canonical-right-derived",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof": [
+  {
+   "text": "The stated acyclicity and the existing squareOfAcyclic construction give a fully normalized derived square for the ordinary comparison.",
+   "uses": [
+    "lem-sfb-diagonal-trace-scalar-comparisons",
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective complexes, the canonical cochain unit is the inverse of the computation isomorphism. Cancel it in the constructed normalization and use the supplied varying normalization to identify their isomorphisms.",
+   "uses": [
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object is isomorphic to a K-injective complex. Naturality and cancellation show that the two comparison natural transformations agree everywhere. Substitution yields the full normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-scalar-comparisons",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized varying scalar restriction before the Milnor step",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived adjunction on an object in degree zero is its ordinary adjunction followed by the right derived functor unit",
+   "results": "CategoryTheory.Adjunction.derived_unit and derivedη_fac_app give derived-unit normalization; no coefficient square.",
+   "date": "2026-10-28",
+   "verdict": "Combine the derived-unit identity with exact single-object and normalized scalar-square comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Nn]aturality|homEquiv.*unit",
+   "results": "Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality and derived-unit lemmas; combine with the existing scalar-square construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp; PresheafOfModules.map_comp; PresheafOfModules.map_comp_assoc; PresheafOfModules.mk",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality and derived-unit lemmas; combine with the existing scalar-square construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit normalized square of derived functors evaluated on an object in degree zero commutes with the adjunction unit",
+   "results": "CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-28",
+   "verdict": "Generic naturality and derived-unit lemmas; combine with the existing scalar-square construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePushUnitCommon",
+  "group": "H7",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-finite-push-unit-common",
+   "place": "extension of the varying comparison from K-injectives to every cochain complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceSingleNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalTraceSingleNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_full_normalization_of_kInjective",
+  "statement": "theorem diagonalTrace_full_normalization_of_kInjective\n    {A B C D : Type a} [Category.{v} A] [Category.{v} B]\n    [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]\n    [HasDerivedCategory.{wc} C] [HasDerivedCategory.{wc} D]\n    [Abelian.HasKInjectiveResolutions A]\n    (F : A ⥤ B) (G : C ⥤ D) [F.Additive] [G.Additive]\n    (U : A ⥤ C) (V : B ⥤ D) [U.Additive] [V.Additive]\n    [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (RG : DiagonalRightDerived G) (ordinary : F ⋙ V ≅ U ⋙ G)\n    (e : F.rightDerivedFunctor ⋙ V.mapDerivedCategory ≅ U.mapDerivedCategory ⋙ RG.R)\n    (hacyc : ∀ (I : CochainComplex A ℤ), I.IsKInjective →\n      IsIso (RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj I)))\n    (hk : ∀ (I : CochainComplex A ℤ) (hI : I.IsKInjective),\n      letI := hI\n      e.hom.app (DerivedCategory.Q.obj I) ≫\n          RG.R.map (U.mapDerivedCategoryFactors.hom.app I) =\n        V.mapDerivedCategory.map (F.rightDerivedFunctorObjQIso I).hom ≫\n          V.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫\n          DerivedCategory.Q.map\n            ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app I) ≫\n          RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj I))\n    (P : CochainComplex A ℤ) :\n    V.mapDerivedCategory.map (F.rightDerivedFunctorUnitQ P) ≫\n        e.hom.app (DerivedCategory.Q.obj P) ≫\n        RG.R.map (U.mapDerivedCategoryFactors.hom.app P) =\n      V.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫\n        RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.DiagonalSingleSquare",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.DiagonalSingleUnitCompatible",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.DiagonalFinitePushUnitFormula",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.DiagonalExactConeFormula"
+  ],
+  "note": "The same module defines four named propositions for the exact single-object and map-definition equalities. Every definition has a complete body, and the generic proofs unfold these definitions before the categorical calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261028T055704-L-795643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
