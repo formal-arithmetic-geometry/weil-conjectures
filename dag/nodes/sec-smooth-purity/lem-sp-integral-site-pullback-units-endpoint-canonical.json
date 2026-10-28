@@ -15,7 +15,22 @@
  ],
  "proof": [
   {
-   "text": "Transpose the endpoint equality through the comparison adjunction. Expand the canonical units map as the adjoint of unitsDirect, expand cartierUnitsComparison and upperStarGmSheafToGmSheaf by their adjunction definitions, and use the conjugate-adjunction counit identity for comparisonUpperStarCompUpperStarIso. The two resulting maps are both the pullback of a unit along the first projection on each etale chart.",
+   "text": "Precompose the desired equation with the hom component of comparisonUpperStarCompUpperStarIso. Cancel this isomorphism; its hom followed by its inverse is the identity. The resulting square has comparisonUpperStarCompUpperStarIso.hom on its left side.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved general adjoint-square lemma CategoryTheory.conjugateIsoEquiv_symm_hom_app_comp_map_comp from WeilConjectures.WeilSheaf.FieldCoefficientTateTwist. Take the horizontal adjunctions to be the etale and pro-etale inverse-image adjunctions, the vertical adjunctions to be the two site-comparison adjunctions, and the right-adjoint comparison to be lowerStarCompComparisonLowerStarIso.symm. This reduces the square to equality of the transposes of the four endpoint maps.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the adjunction definitions of upperStarGmSheafToGmSheaf, cartierUnitsComparison and towerIntegral_unitsSheafPull. Cancel each homEquiv against its inverse. Extensionality reduces the remaining direct-image equation to a unit on an arbitrary etale Y-chart. Unfold unitsDirect and the right-adjoint comparison. The latter is induced by identity isomorphisms of the base-changed charts. Both sides therefore pull the unit back by pullback.fst, and their values are definitionally equal.",
    "uses": [
     "def-sp-tower-integral-pullback-data",
     "def-weil-proetale-inverse-image",
@@ -34,7 +49,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "Paragraph (2), canonical units mate calculation"
+  "place": "Paragraph (2), canonical units mate calculation; implemented using the existing general adjoint-square lemma and the defining chartwise formulas (K2, 2026-10-28)."
  },
  "mathlib_searches": [
   {
@@ -99,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K7",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261027T234043-L-4175719",
-  "kind": "interface",
+  "landing": "20261028T020533-L-2522104",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

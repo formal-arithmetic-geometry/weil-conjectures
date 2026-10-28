@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.TowerIntegralPullbackData
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
 
 /-! # Canonical units endpoint mate calculation
 
@@ -41,23 +42,23 @@ theorem integral_site_pullback_units_endpoint_canonical {X Y : Scheme.{u}} (f : 
       (comparisonUpperStar AddCommGrpCat.{u + 1} X).map
           (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X) := by
   dsimp
-  unfold towerIntegral_unitsSheafPull
-  apply ((comparisonAdjunction AddCommGrpCat.{u + 1} X).homEquiv _ _).injective
-  simp only [Adjunction.homEquiv_unit]
-  rw [cancel_epi ((comparisonAdjunction AddCommGrpCat.{u + 1} X).unit.app
-    ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj Y.gmSheaf))]
-  simp only [Functor.map_comp]
-  simp only [Adjunction.homEquiv_counit, Functor.map_comp]
-  simp only [← Functor.map_comp]
-  unfold comparisonUpperStarCompUpperStarIso
-  unfold Scheme.upperStarGmSheafToGmSheaf
-  simp only [Adjunction.homEquiv_counit]
-  rw [conjugateIsoEquiv_symm_apply_inv]
-  unfold cartierUnitsComparison
+  apply (cancel_epi
+    ((comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f).hom.app Y.gmSheaf)).mp
+  simp only [Iso.hom_inv_id_app_assoc]
+  symm
+  apply conjugateIsoEquiv_symm_hom_app_comp_map_comp
+    (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+    (comparisonAdjunction AddCommGrpCat.{u + 1} Y)
+    (comparisonAdjunction AddCommGrpCat.{u + 1} X)
+    (lowerStarCompComparisonLowerStarIso f AddCommGrpCat.{u + 1}).symm
+  simp only [Scheme.upperStarGmSheafToGmSheaf, cartierUnitsComparison,
+    towerIntegral_unitsSheafPull, Equiv.apply_symm_apply]
   ext U x
-  unfold unitsDirect
-  simp
-  sorry
+  simp [unitsDirect, lowerStarCompComparisonLowerStarIso, comparisonLowerStar,
+    Etale.lowerStar, ProEtale.lowerStar, toProEtCompOverPullbackIso,
+    Scheme.gmSheafToLowerStarGmSheaf, Scheme.etaleStructurePresheafToPullback]
+  rfl
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
