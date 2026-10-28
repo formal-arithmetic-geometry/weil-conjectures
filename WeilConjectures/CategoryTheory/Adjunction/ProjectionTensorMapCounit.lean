@@ -46,7 +46,16 @@ include hπ hassoc hε
 /-- **The tensor map of a trace counit is the reassociation.** If the counit of `L ⊣ R` is the
 trace counit `L (R N) ≅ L (T ⊗ F N) ≅ L T ⊗ N ⟶ N` of `t : L T ⟶ 𝟙_` through
 `γ N : R N ≅ T ⊗ F N`, then the tensor map `τ M N : R M ⊗ F N ⟶ R (M ⊗ N)` is
-`(T ⊗ F M) ⊗ F N ≅ T ⊗ (F M ⊗ F N) ≅ T ⊗ F (M ⊗ N)`, read through `γ`. -/
+`(T ⊗ F M) ⊗ F N ≅ T ⊗ (F M ⊗ F N) ≅ T ⊗ F (M ⊗ N)`, read through `γ`:
+
+```
+  R M ⊗ F N  -----------------τ----------------->  R (M ⊗ N)
+     |                                                ↑
+  γ_M ▷ F N                                      γ_{M ⊗ N}⁻¹
+     ↓                                                |
+  (T ⊗ F M) ⊗ F N --α--> T ⊗ (F M ⊗ F N) --T ◁ δ⁻¹--> T ⊗ F (M ⊗ N)
+```
+-/
 theorem projectionTensorMap_eq_of_counit_eq (M N : D) :
     adj.projectionTensorMap π M N =
       (γ M).hom ▷ F.obj N ≫ (α_ T (F.obj M) (F.obj N)).hom ≫ T ◁ inv (δ M N) ≫

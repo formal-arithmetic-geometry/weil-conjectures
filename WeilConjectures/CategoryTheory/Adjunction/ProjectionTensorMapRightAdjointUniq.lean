@@ -35,7 +35,16 @@ section Uniq
 variable {R R' : D ⥤ C} (adj : L ⊣ R) (adj' : L ⊣ R')
 
 /-- **The tensor map does not depend on the right adjoint**: through the isomorphism
-`ρ : R ≅ R'` of two right adjoints of `L`, the tensor maps of `L ⊣ R` and `L ⊣ R'` agree. -/
+`ρ : R ≅ R'` of two right adjoints of `L`, the tensor maps of `L ⊣ R` and `L ⊣ R'` agree:
+
+```
+  R M ⊗ F N  ---τ--->  R (M ⊗ N)
+     |                    |
+  ρ_M ▷ F N           ρ_{M ⊗ N}
+     ↓                    ↓
+  R' M ⊗ F N ---τ'--> R' (M ⊗ N)
+```
+-/
 @[reassoc]
 lemma projectionTensorMap_rightAdjointUniq_hom
     (hπ : ∀ {M M' : C} (φ : M ⟶ M') (N : D), L.map φ ▷ N ≫ π M' N = π M N ≫ L.map (φ ▷ F.obj N))
