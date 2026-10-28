@@ -20933,3 +20933,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/Y9/Sheaf.Paper.NativeCompletedCoefficientIntegralMapSquare (stage 3; reviewer PASS; first push; landing 20261028T035025-L-3581853 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:50 L: merged deliver/Z5/Sheaf.Paper.NativeCompletedCoefficientPresentationAt (stage 3; reviewer PASS; first push; landing 20261028T035026-L-3582046 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:50 L: merged deliver/Z7/Sheaf.SixFunctors.CoefQbarOperationStageTransitionTower (stage 3; reviewer PASS; first push; landing 20261028T035027-L-3582188 (proof); batch 20261028T034643; modules 1; new nodes 0)
+- 03:50 L: merged deliver/Z8/Sheaf.CategoryTheory.NativeHomLocalizedConeBoundaryTransport (stage 3; reviewer PASS; first push; landing 20261028T035028-L-3582416 (proof); batch 20261028T034643; modules 1; new nodes 0)
