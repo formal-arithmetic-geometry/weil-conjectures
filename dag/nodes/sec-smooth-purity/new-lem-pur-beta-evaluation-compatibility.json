@@ -1,0 +1,84 @@
+{
+ "id": "new-lem-pur-beta-evaluation-compatibility",
+ "kind": "statement",
+ "title": "Evaluation compatibility for the conjugated completed line comparison",
+ "statement": "For the completed scalar extension and compatible signed line data in `lem-pur-completed-line-tensor-coherence`, the conjugated comparison beta satisfies the evaluation equation: for every integer m and every derived-complete K, beta(-m) at tensor(m,K), followed by tensor(-m) of beta(m) and epsilon, equals scalar extension of epsilon.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), evaluation compatibility of the conjugated beta maps"
+ },
+ "stmt_deps": [
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Expand beta as chi inverse, the normalized ordinary pairing comparison, and tensor of chi. Naturality of the completion comparison and the normalized evaluation equation for the ordinary pair identify the two composites; cancel the invertible chi components. The argument covers zero, positive, and negative signed powers uniformly through the recorded epsilon and pairing definitions.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), evaluation compatibility of the conjugated beta maps"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-line-tensor-coherence",
+   "place": "Proof (3), evaluation compatibility of the conjugated beta maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "declaration": "WeilConjectures.CompletedLineTensor.beta_evaluation_compatibility",
+  "declarations": [
+   "WeilConjectures.CompletedLineTensor.beta_evaluation_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedLineTensorCoherence.lean",
+  "statement": "theorem beta_evaluation_compatibility (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1] (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)} (completedCoefficientMap l E F ι X) L ≅ N) : ∀ (m : ℤ) (K : DerivedCategory (integralTowerModules l E X)) (hK : IsDerivedCompleteUnrestricted l E X K), (beta l E X F ι L N b (-m) ((tensor l E X L m).obj K) (complete l E X L m K hK)).hom ≫ (tensor l F X N (-m)).map (beta l E X F ι L N b m K hK).hom ≫ (epsilon l F X N m).hom.app ((integralScalarExtensionOfUniverses l E F ι X).obj K) = (integralScalarExtensionOfUniverses l E F ι X).map ((epsilon l E X L m).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020410-L-2506574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261028T020410-L-2506574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

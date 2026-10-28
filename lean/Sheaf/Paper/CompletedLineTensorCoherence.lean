@@ -608,7 +608,7 @@ def associator (K : DerivedCategory (integralTowerModules l E X))
 
 attribute [local irreducible] associator associatorData
 
-/-- Naturality and compatibility with evaluation for exactly the conjugated beta.
+/- Naturality and compatibility with evaluation for exactly the conjugated beta.
 Source: blueprint Proof (3), completed line/scalar coherence
 (blueprint: lem-pur-completed-line-tensor-coherence).
 Proof: every factor defining beta is natural and invertible on complete inputs;
@@ -619,6 +619,29 @@ are multiplication by the evaluated line scalar, by the negative clause of
 IsPairNormalized. Naturality
 of chi identifies this with C(epsilon)*chi. Cancel the invertible chi. The proof
 includes zero, positive and negative m and never inverts a chain completion map. -/
+/-- The evaluation component of beta compatibility, isolated from naturality.
+Source: blueprint Proof (3), completed line/scalar coherence
+(blueprint: new-lem-pur-beta-evaluation-compatibility).
+Proof: expand both conjugated beta maps and the derived evaluation. Naturality
+of chi cancels the completion comparisons. The normalized pairing equation in
+`IsPairNormalized` identifies the remaining ordinary pure-tensor map; the
+localization comparison then gives the displayed equality. -/
+theorem beta_evaluation_compatibility (L : integralTowerModules l E X)
+    [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
+    [N.IsFiniteLocallyFreeOfRank 1]
+    (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
+      (completedCoefficientMap l E F ι X) L ≅ N) :
+    ∀ (m : ℤ) (K : DerivedCategory (integralTowerModules l E X))
+      (hK : IsDerivedCompleteUnrestricted l E X K),
+      (beta l E X F ι L N b (-m) ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).hom ≫
+        (tensor l F X N (-m)).map (beta l E X F ι L N b m K hK).hom ≫
+        (epsilon l F X N m).hom.app
+          ((integralScalarExtensionOfUniverses l E F ι X).obj K) =
+      (integralScalarExtensionOfUniverses l E F ι X).map
+        ((epsilon l E X L m).hom.app K) := by
+  sorry
+
 theorem beta_natural_evaluation (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -638,13 +661,116 @@ theorem beta_natural_evaluation (L : integralTowerModules l E X)
         (tensor l F X N (-m)).map (beta l E X F ι L N b m K hK).hom ≫
         (epsilon l F X N m).hom.app ((integralScalarExtensionOfUniverses l E F ι X).obj K) =
       (integralScalarExtensionOfUniverses l E F ι X).map ((epsilon l E X L m).hom.app K)) := by
-  sorry
+  constructor
+  · intro m K M hK hM f
+    unfold beta
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+    have hχinv :
+        (integralScalarExtensionOfUniverses l E F ι X).map
+            ((tensor l E X L m).map f) ≫
+            (chi l E X F ι ((tensor l E X L m).obj M)
+              (complete l E X L m M hM)).inv =
+          (chi l E X F ι ((tensor l E X L m).obj K)
+              (complete l E X L m K hK)).inv ≫
+            (completedDerivedScalarExtension l E F ι X).map
+              ((tensor l E X L m).map f) := by
+      apply (cancel_mono (chi l E X F ι ((tensor l E X L m).obj M)
+        (complete l E X L m M hM)).hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      unfold chi
+      simp only [CategoryTheory.asIso_hom]
+      rw [(completedScalarComparison l E F ι X).naturality]
+      simp only [CategoryTheory.asIso_inv]
+      rw [CategoryTheory.IsIso.inv_hom_id_assoc]
+    have hd := ((pairData l E X F ι L N b).ordinary m).hom.naturality f
+    simp only [Functor.comp_map] at hd
+    have hd' :
+        (completedDerivedScalarExtension l E F ι X).map
+            ((tensor l E X L m).map f) ≫
+            ((pairData l E X F ι L N b).ordinary m).hom.app M =
+          ((pairData l E X F ι L N b).ordinary m).hom.app K ≫
+            (tensor l F X N m).map
+              ((completedDerivedScalarExtension l E F ι X).map f) := by
+      simpa using hd
+    have hχordinary :
+        (completedDerivedScalarExtension l E F ι X).map f ≫
+            (chi l E X F ι M hM).hom =
+          (chi l E X F ι K hK).hom ≫
+            (integralScalarExtensionOfUniverses l E F ι X).map f := by
+      unfold chi
+      simp only [CategoryTheory.asIso_hom]
+      exact (completedScalarComparison l E F ι X).naturality _
+    have happM :
+        (((pairData l E X F ι L N b).ordinary m).app M).hom =
+          ((pairData l E X F ι L N b).ordinary m).hom.app M := rfl
+    have happK :
+        (((pairData l E X F ι L N b).ordinary m).app K).hom =
+          ((pairData l E X F ι L N b).ordinary m).hom.app K := rfl
+    rw [happM, happK]
+    calc
+      (integralScalarExtensionOfUniverses l E F ι X).map
+          ((tensor l E X L m).map f) ≫
+          (chi l E X F ι ((tensor l E X L m).obj M)
+            (complete l E X L m M hM)).inv ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app M ≫
+          (tensor l F X N m).map
+            (chi l E X F ι M hM).hom =
+        ((integralScalarExtensionOfUniverses l E F ι X).map
+            ((tensor l E X L m).map f) ≫
+          (chi l E X F ι ((tensor l E X L m).obj M)
+            (complete l E X L m M hM)).inv) ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app M ≫
+          (tensor l F X N m).map
+            (chi l E X F ι M hM).hom := by
+            simp only [Category.assoc]
+      _ = ((chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          (completedDerivedScalarExtension l E F ι X).map
+            ((tensor l E X L m).map f)) ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app M ≫
+          (tensor l F X N m).map
+            (chi l E X F ι M hM).hom := by
+            rw [hχinv]
+      _ = (chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          ((completedDerivedScalarExtension l E F ι X).map
+            ((tensor l E X L m).map f) ≫
+            ((pairData l E X F ι L N b).ordinary m).hom.app M) ≫
+          (tensor l F X N m).map
+            (chi l E X F ι M hM).hom := by
+            simp only [Category.assoc]
+      _ = (chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          (((pairData l E X F ι L N b).ordinary m).hom.app K ≫
+            (tensor l F X N m).map
+              ((completedDerivedScalarExtension l E F ι X).map f)) ≫
+          (tensor l F X N m).map
+            (chi l E X F ι M hM).hom := by
+            rw [hd']
+      _ = (chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app K ≫
+          (tensor l F X N m).map
+            ((completedDerivedScalarExtension l E F ι X).map f ≫
+              (chi l E X F ι M hM).hom) := by
+            simp only [Category.assoc, ← Functor.map_comp]
+      _ = (chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app K ≫
+          (tensor l F X N m).map
+            ((chi l E X F ι K hK).hom ≫
+              (integralScalarExtensionOfUniverses l E F ι X).map f) := by
+            rw [hχordinary]
+      _ = (chi l E X F ι ((tensor l E X L m).obj K)
+          (complete l E X L m K hK)).inv ≫
+          ((pairData l E X F ι L N b).ordinary m).hom.app K ≫
+          (tensor l F X N m).map (chi l E X F ι K hK).hom ≫
+          (tensor l F X N m).map
+            ((integralScalarExtensionOfUniverses l E F ι X).map f) := by
+            simp only [Functor.map_comp]
+  · exact beta_evaluation_compatibility l E X F ι L N b
 
 section DerivedUnitProof
-
-attribute [local irreducible] integralOperationsGoodComplex
-attribute [local semireducible] completedDerivedScalarExtension
-  completedOrdinaryScalarComplex completedOrdinaryScalarExtension
 
 /-- The ordinary derived multiplication unitor, fixed by the recorded chain unitor.
 Source: Stacks 06YY; blueprint Proof (3)
