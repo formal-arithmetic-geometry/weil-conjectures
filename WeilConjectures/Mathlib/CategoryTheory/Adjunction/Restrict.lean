@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.EssentialImage
+public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
@@ -109,7 +109,7 @@ lemma isIso_biproductDesc_restrictFullyFaithful_unit_smul_iff (K : PA.FullSubcat
     simpa [ObjectProperty.liftCompιIso] using map_restrictFullyFaithful_unit_app adj
       PA.fullyFaithfulι PB.fullyFaithfulι
       (PB.liftCompιIso (PA.ι ⋙ L) hL).symm (PA.liftCompιIso (PB.ι ⋙ R) hR).symm K
-  rw [← isIso_iff_of_reflects_iso _ PA.ι, Functor.isIso_map_biproduct_desc_iff]
+  rw [← isIso_iff_of_reflects_iso _ PA.ι, Functor.isIso_map_biproductDesc]
   simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, hu,
     ObjectProperty.lift_map, ObjectProperty.homMk_hom, Functor.comp_map]
   rfl

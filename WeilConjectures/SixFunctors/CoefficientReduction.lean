@@ -277,7 +277,7 @@ local notation "𝐃𝐎(" X ", " E ")" =>
 
 /-- The compatibility of the scalar extension `𝒪_E → 𝒪_{E'}` between two finite extensions
 `E ⊆ E'` of `ℚ_ℓ` inside `ℚ̄_ℓ` (the common-stage scalar extension of
-`def-weil-rationalization-karoubi`) with the basic operations: derived pullback, derived tensor
+`def-sfb-rationalization-quotient`) with the basic operations: derived pullback, derived tensor
 product, derived direct image, compact-support direct image and the projection map commute with
 the derived base change along `𝒪_E → 𝒪_{E'}`; and after rationalization, the scalar extension
 `- ⊗_E E' : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, E')` of the projection map over `E` is, as an arrow,
@@ -556,7 +556,7 @@ invokes the coefficient comparisons that the admissibility hypothesis
 unconditionally on the unbounded categories and are stated (`Rf^!` and the unit and counit of
 `Rf_! ⊣ Rf^!`), while for the finite reductions and scalar extensions they remain part of that
 hypothesis. Rationalization is stated in the étale model, where the rational categories of
-`def-weil-rationalization-karoubi` are formalised. -/
+`def-sfb-rationalization-quotient` are formalised. -/
 theorem coefficientChangeCompatibility : CoefficientChangeCompatibility.{u} :=
   sorry
 

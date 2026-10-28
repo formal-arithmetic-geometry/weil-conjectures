@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.PoincareDuality.ProjectionFormulaBaseChange
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.ProperKunneth
@@ -19,7 +20,8 @@ of the source exchange, transposed along `Lf^* ⊣ Rf_*`, is the compact-support
 followed by the projection formula of `z` (`ProEtale.CondensedRing.sourceExchange_leftTranspose`).
 The ingredient is the compatibility of the exceptional projection morphism with the
 compact-support base change (`ProEtale.CondensedRing.exceptionalProjection_baseChange`,
-blueprint `prop-sf-pf-coherence`).
+blueprint `prop-sf-pf-coherence`), the componentwise form of
+`ProEtale.CondensedRing.pfBaseChange_boundedConstructibleExceptionalProjection`.
 
 -/
 
@@ -195,8 +197,13 @@ theorem exceptionalProjection_baseChange (sq : IsPullback g' f' f g)
         (boundedConstructibleUpperStar _ ℓ g).obj M) ≫
       ((boundedConstructibleExceptionalProjection ℓ f').app
         ((boundedConstructibleUpperStar _ ℓ g').obj T)).app
-        ((boundedConstructibleUpperStar _ ℓ g).obj M) :=
-  sorry
+        ((boundedConstructibleUpperStar _ ℓ g).obj M) := by
+  have h := pfBaseChange_boundedConstructibleExceptionalProjection ℓ sq T M
+  rw [boundedConstructibleExceptionalProjection_app_app,
+    boundedConstructibleExceptionalProjection_app_app,
+    boundedConstructiblePullbackSquareComparison_inv_app] at h
+  simp only [Functor.map_comp, MonoidalCategory.whiskerLeft_comp] at h ⊢
+  exact h
 
 end BaseChange
 

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Curve.Picard
 /-!
 # Powers in the kernel of the boundary divisor map
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
-affine-case proof, divisor kernel and constants paragraph.
+Source: blueprint
+sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
+proof, divisor kernel and constants paragraph.
 -/
 
 @[expose] public section
@@ -29,9 +30,9 @@ namespace AlgebraicGeometry
 
 /-- A unit with zero boundary divisor is an nth power.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
-affine-case proof, divisor kernel and constants paragraph
-(blueprint: lem-sc-boundary-divisor-kernel-powers).
+Source: blueprint
+sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
+proof, divisor kernel and constants paragraph (blueprint: lem-sc-boundary-divisor-kernel-powers).
 
 Proof: The germ compatibility identifies φ with restriction to the function field through
 the open immersion c.i. At every point of C both the unit and its inverse have regular germs,

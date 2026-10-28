@@ -46,9 +46,8 @@ Lemma Tag 02L2 (blueprint: lem-weil-pbc-fpqc-descend-flat).
    (`lem-weil-pbc-flatness-descends-faithfully-flat`) implies that `A` is flat over the
    original base ring. Thus each affine restriction of the original morphism is flat,
    and source locality implies that the original morphism is flat.
-6. Steps 1, 2 and 5 verify the fpqc-local criterion
-   (`lem-weil-pbc-fpqc-local-on-base-criterion`, Tag 02KP). Apply it to the given fpqc
-   covering family and the flat second projections to conclude that `f` is flat. -/
+6. Steps 1, 2 and 5 verify the fpqc-local-on-the-base criterion (Tag 02KP). Apply it to the given
+   fpqc covering family and the flat second projections to conclude that `f` is flat. -/
 theorem flat_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)

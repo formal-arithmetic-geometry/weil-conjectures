@@ -37,7 +37,7 @@ Proof:
    (`lem-pc-restrict-derived-direct-image-open`), so the positive higher direct images
    of F|U vanish by hacyc. They are quasi-coherent by the quasi-coherence clause
    of `lem-pc-finite-support-hi` (only this clause is used). Affine vanishing
-   (`lem-pc-affine-vanishing`) and the Leray edge
+   (`pqf-lem-affine-vanishing`) and the Leray edge
    (`lem-pc-leray-degenerate-sections`) give H^p(U,F|U) = 0 for every p > 0.
    Sections on U commute with countable products, by their universal property.
 2. Shift the derived object to reduce to degree zero. Apply

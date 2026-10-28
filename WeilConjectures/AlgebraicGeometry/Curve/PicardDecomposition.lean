@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.Picard
 /-!
 # The Picard group of a proper curve splits as `ℤ × Pic⁰`
 
-Source: blueprint, `sec-curve-estimates/sk-def-pic`, node lem-sc-pic-proper-decomposition,
+Source: blueprint, `sec-curve-estimates/det-def-pic`, node lem-sc-pic-proper-decomposition,
 order 888 (blueprint: lem-sc-pic-proper-decomposition).
 -/
 
@@ -25,7 +25,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint, `sec-curve-estimates/sk-def-pic`, node lem-sc-pic-proper-decomposition,
+/-- Source: blueprint, `sec-curve-estimates/det-def-pic`, node lem-sc-pic-proper-decomposition,
 order 888 (blueprint: lem-sc-pic-proper-decomposition).
 
 Let `C` be a proper smooth connected curve over the algebraically closed field `k`. The degree

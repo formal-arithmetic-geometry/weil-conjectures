@@ -30,7 +30,7 @@ isomorphisms.
 ## The statement
 
 The operations of the integral stage are defined levelwise on the finite reductions (blueprint
-`sk-def-sf-operations`, adic stages; `def-exchange-projection`: the coefficient categories
+`det-def-sf-operations`, adic stages; `def-exchange-projection`: the coefficient categories
 `𝒪_E`, `E`, `ℚ̄_ℓ` "are obtained by derived completion"): the integral `Rf_! K ⊗ᴸ L` is the derived
 limit `R lim_n (Rf_! K_n ⊗ᴸ L_n)` of its reductions, and `PF_{f, K, L}` over `𝒪_E` is the morphism
 realized by the system `(PF_{f, K_n, L_n})_n` (`thm-sf-pf-adic`). Since reduction commutes with

@@ -12,12 +12,11 @@ public import Mathlib.CategoryTheory.Idempotents.Karoubi
 # Idempotent completeness of the pair category
 
 If all the categories `C i` of a stage system are idempotent complete, so is the pair category
-`S.PairCategory` (blueprint `prop-weil-filtered-retract-descent`): an idempotent `e` of the pair
-category is represented at some stage `n` by `u` with `u ≫ u = u` after a further transport, and
-the splitting of this idempotent at a finite stage gives a splitting of `e`. Consequently the
-functor `toKaroubi` from the pair category to its Karoubi envelope is an equivalence
-(blueprint `thm-weil-pbc-qbar-idempotent-complete`). This is the property of the `ℚ̄_ℓ`-category
-`D^b_c(T, ℚ̄_ℓ)` deferred in its definition (blueprint `rem-ptr-weil-pbc-qbar-category-1`).
+`S.PairCategory`: an idempotent `e` of the pair category is represented at some stage `n` by `u`
+with `u ≫ u = u` after a further transport, and the splitting of this idempotent at a finite
+stage gives a splitting of `e`. Consequently the functor `toKaroubi` from the pair category to
+its Karoubi envelope is an equivalence. This is the property of the `ℚ̄_ℓ`-category
+`D^b_c(T, ℚ̄_ℓ)` deferred in its definition.
 
 ## Main statements
 
@@ -59,9 +58,8 @@ lemma exists_conj_ι_idem {X : S.PairCategory} (p : X ⟶ X) (hp : p ≫ p = p) 
     rw [mkHom_eq_isoToStage]
     simp [reassoc_of% this]
 
-/-- Blueprint `prop-weil-filtered-retract-descent` (precise form): if all the stages are
-idempotent complete, every idempotent of the pair category splits, through an object of a
-single stage. -/
+/-- Filtered retract descent, precise form: if all the stages are idempotent complete, every
+idempotent of the pair category splits, through an object of a single stage. -/
 lemma exists_splitting [∀ i, IsIdempotentComplete (C i)] {X : S.PairCategory} (p : X ⟶ X)
     (hp : p ≫ p = p) :
     ∃ (q : I) (y : C q) (i : (S.ι q).obj y ⟶ X) (e : X ⟶ (S.ι q).obj y),
@@ -72,19 +70,17 @@ lemma exists_splitting [∀ i, IsIdempotentComplete (C i)] {X : S.PairCategory} 
   · simp [← Functor.map_comp, h₁]
   · simp [← Functor.map_comp_assoc, h₂]
 
-/-- Blueprint `prop-weil-filtered-retract-descent`: Filtered retract descent.
-If all the stages of a stage system over a directed preorder are idempotent complete, the pair
-category is idempotent complete. -/
+/-- Filtered retract descent: if all the stages of a stage system over a directed preorder are
+idempotent complete, the pair category is idempotent complete. -/
 instance isIdempotentComplete [∀ i, IsIdempotentComplete (C i)] :
     IsIdempotentComplete S.PairCategory where
   idempotents_split X p hp := by
     obtain ⟨q, y, i, e, h₁, h₂⟩ := exists_splitting p hp
     exact ⟨_, i, e, h₁, h₂⟩
 
-/-- Blueprint `thm-weil-pbc-qbar-idempotent-complete`: The Qbar-l category is idempotent
-complete. If all the stages are idempotent complete, the pair category is idempotent complete
-and the canonical fully faithful functor to its Karoubi envelope is an equivalence. (Its
-exactness, for triangulated stage systems, is
+/-- The Qbar-l category is idempotent complete. If all the stages are idempotent complete, the pair
+category is idempotent complete and the canonical fully faithful functor to its Karoubi envelope is
+an equivalence. (Its exactness, for triangulated stage systems, is
 `CategoryTheory.StageSystem.PairCategory.isTriangulated_toKaroubi`.) -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi [∀ i, IsIdempotentComplete (C i)] :
     IsIdempotentComplete S.PairCategory ∧ (toKaroubi S.PairCategory).IsEquivalence :=

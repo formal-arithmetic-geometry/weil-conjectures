@@ -57,7 +57,7 @@ definition, and it is the only place where the scheme and the matrix groups meet
 
 ## Blueprint
 
-- `sk-d-geometry`: matrix algebraic groups as closed subgroup schemes of `GL(V)`.
+- `det-d-geometry`: matrix algebraic groups as closed subgroup schemes of `GL(V)`.
 - `sk-i-restriction`: closed subgroups containing the commutators, and the derived subgroup.
 -/
 
@@ -120,7 +120,7 @@ section SubgroupScheme
 
 /-- The closed subgroup scheme `V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of `GL_n` cut out by a Hopf ideal
 `I`. It is a group object by Mathlib's quotient Hopf algebra structure.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable abbrev subgroupScheme (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k ⧸ I))).asOver (Spec (.of k))
@@ -136,7 +136,7 @@ instance : LocallyOfFiniteType (subgroupScheme I).hom :=
   locallyOfFiniteType_specOverSpec
 
 /-- The closed immersion of the closed subgroup scheme `V(I)` into `GL_n`.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable def subgroupSchemeι : subgroupScheme I ⟶ 𝔾𝕃(n; k) :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mkₐ k I).toRingHom)).asOver (Spec (.of k))
 
@@ -165,7 +165,7 @@ theorem mapMulEquiv_comp_subgroupSchemeι {R : Type u} [CommRing R] [Algebra k R
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the invertible matrices over `R`
 satisfying the equations in `I`: the identification of `G(R)` with a classical matrix group is a
-theorem, not a definition. (blueprint: `sk-d-geometry`) -/
+theorem, not a definition. (blueprint: `det-d-geometry`) -/
 theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     Set.range (fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
       GeneralLinearGroup.homMulEquiv n k R (φ ≫ subgroupSchemeι I)) = zeroLocus I R := by
@@ -199,7 +199,7 @@ theorem injective_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the group `zeroLocus I R` of matrices
 satisfying the equations in `I`: a point `φ : Spec R ⟶ V(I)` corresponds to the matrix of the
 point `φ ≫ ι` of `GL_n`, where `ι : V(I) ⟶ GL_n` is the closed immersion.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable def zeroLocusMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
     zeroLocus I R ≃* ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) :=
   (MulEquiv.subgroupCongr (SetLike.coe_injective (range_homMulEquiv_comp I R)).symm).trans
@@ -244,7 +244,7 @@ variable {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The closed immersion `V(J) ⟶ V(I)` of closed subgroup schemes of `GL_n` induced by an
 inclusion `I ≤ J` of Hopf ideals: the spectrum of the quotient map `k[GL_n] ⧸ I → k[GL_n] ⧸ J`.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable def subgroupSchemeHom (h : I ≤ J) : subgroupScheme J ⟶ subgroupScheme I :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.factorₐ k h).toRingHom)).asOver (Spec (.of k))
 

@@ -27,7 +27,7 @@ categories, where it is compatible with the corresponding isomorphisms of derive
 
 This is the compatibility of pullback with the change of the finite coefficients, used to make
 the systems of derived pullbacks of the `ℓ`-adic coefficient stages into morphisms of adic
-systems (blueprint `prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+systems.
 
 ## Main definitions
 

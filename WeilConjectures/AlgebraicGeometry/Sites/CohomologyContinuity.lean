@@ -23,13 +23,14 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
-`lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`. For
-abelian sheaves it is proved here in elementwise form (`cohomologyMap_isColimit_of_isLimit`), by
-specialising `nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form
-follows (`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing
-form for a general Grothendieck abelian coefficient category
-(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian
-sheaves of [Stacks, Tag 09YQ], is proved through finite split étale hypercovers: the derived
+`lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection
+`lem-sc-second-kummer-divisors`. For abelian sheaves it is proved here in elementwise form
+(`cohomologyMap_isColimit_of_isLimit`), by specialising
+`nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form follows
+(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing form for a
+general Grothendieck abelian coefficient category
+(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian sheaves
+of [Stacks, Tag 09YQ], is proved through finite split étale hypercovers: the derived
 functors of sections are computed by hypercover cohomology, which commutes with the limit.
 
 ## Main definitions

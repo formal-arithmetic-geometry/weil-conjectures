@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 /-!
 # Mapping-cylinder split factorization of a cochain map
 
-Source: Stacks Project, Derived Categories, Lemma 013N, Definition 014G, and Remark 013O
-(blueprint: lem-weil-pbc-complex-mapping-cylinder-split-factorization).
+Source: Stacks Project, Derived Categories, Lemma 013N, Definition 014G, and Remark 013O.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ attribute [local instance] hasBinaryBiproducts_of_finite_biproducts
 
 /-- A cochain map in an additive category factors through a termwise direct-summand inclusion
 and a deformation retraction, preserving the specified upper bound and lowering the specified
-lower bound by one. Source: Stacks Project, Lemma 013N, Definition 014G, and Remark 013O
-(blueprint: lem-weil-pbc-complex-mapping-cylinder-split-factorization).
+lower bound by one. Source: Stacks Project, Lemma 013N, Definition 014G, and Remark 013O.
 
 Proof (the six steps of the node):
 1. Using finite biproducts (`def-weil-additive-category`), take

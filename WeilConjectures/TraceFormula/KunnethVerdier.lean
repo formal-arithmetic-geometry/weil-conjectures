@@ -308,7 +308,7 @@ private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCa
 /-- **Verdier biduality for the dualizing complex** (blueprint `thm-trf-verdier-biduality`): for
 bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, the transpose of the
 evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
-theorem (`isIso_verdierBiduality`, blueprint `thm-coef-qbar-verdier`). -/
+theorem (`isIso_verdierBiduality`, blueprint `det-pd-biduality-coefficients`). -/
 noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     M ≅ verdierDual ℓ (verdierDual ℓ M) :=
   haveI := isIso_verdierBiduality ℓ M

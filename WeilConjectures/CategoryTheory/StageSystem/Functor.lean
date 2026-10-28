@@ -12,11 +12,10 @@ public import WeilConjectures.CategoryTheory.StageSystem.Basic
 
 Let `S` and `S'` be stage systems on families of categories `C i` and `D i` indexed by the same
 directed preorder. A *morphism of stage systems* `F : S.Morphism S'` is a family of functors
-`Φ_i : C i ⥤ D i` together with isomorphisms `β_{j/i} : T'_{j/i} ∘ Φ_i ≅ Φ_j ∘ T_{j/i}`
-compatible with the associators. It induces a functor `F.functor` between the pair categories,
-given on a representative `u : T x ⟶ T y` at the stage `n` by `β ≫ Φ_n u ≫ β⁻¹`
-(blueprint `prop-weil-pbc-descent-functors`). Families of natural transformations compatible
-with the `β` descend to natural transformations.
+`Φ_i : C i ⥤ D i` together with isomorphisms `β_{j/i} : T'_{j/i} ∘ Φ_i ≅ Φ_j ∘ T_{j/i}` compatible
+with the associators. It induces a functor `F.functor` between the pair categories, given on a
+representative `u : T x ⟶ T y` at the stage `n` by `β ≫ Φ_n u ≫ β⁻¹`. Families of natural
+transformations compatible with the `β` descend to natural transformations.
 
 In the application, `Φ_E` is `Rf_{!,E}` or `Lg_E^*` on `D^b_c(-, E)` and `β` is the compatibility
 with the extension of scalars `T_{F/E} = F ⊗ᴸ_E -`; the exchange maps at the finite stages
@@ -52,7 +51,7 @@ variable {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)
 
 /-- A *morphism of stage systems* `S ⟶ S'`: functors `Φ_i : C i ⥤ D i` at every stage and
 isomorphisms `β_{j/i} : Φ_i ⋙ T'_{j/i} ≅ T_{j/i} ⋙ Φ_j` compatible with the associators
-(blueprint `prop-weil-pbc-descent-functors`, the families `(Φ_E, β_{F/E})`). -/
+(the families `(Φ_E, β_{F/E})`). -/
 structure Morphism (S : StageSystem C) (S' : StageSystem D) where
   /-- The functors at the finite stages. -/
   Φ : ∀ i, C i ⥤ D i
@@ -123,9 +122,8 @@ variable [IsDirectedOrder I]
 
 open PairCategory
 
-/-- The functor on pair categories induced by a morphism of stage systems
-(blueprint `prop-weil-pbc-descent-functors`): `(i, x) ↦ (i, Φ_i x)`, and a representative
-`u : T x ⟶ T y` at the stage `n` goes to `β ≫ Φ_n u ≫ β⁻¹`. -/
+/-- The functor on pair categories induced by a morphism of stage systems: `(i, x) ↦ (i, Φ_i x)`,
+and a representative `u : T x ⟶ T y` at the stage `n` goes to `β ≫ Φ_n u ≫ β⁻¹`. -/
 noncomputable def functor : S.PairCategory ⥤ S'.PairCategory where
   obj X := ⟨X.stage, (F.Φ X.stage).obj X.obj⟩
   map {X Y} f := Quotient.map (sa := Rep.setoid X Y) (sb := Rep.setoid _ _)
@@ -178,8 +176,7 @@ lemma ιCompFunctorIso_hom_app (i : I) (x : C i) :
 lemma ιCompFunctorIso_inv_app (i : I) (x : C i) :
     (F.ιCompFunctorIso i).inv.app x = 𝟙 _ := rfl
 
-/-- A compatible family of natural transformations between two morphisms of stage systems
-(blueprint `prop-weil-pbc-descent-functors`, "compatible natural transformations"). -/
+/-- A compatible family of natural transformations between two morphisms of stage systems. -/
 @[ext]
 structure Hom (F G : Morphism S S') where
   /-- The natural transformations at the finite stages. -/
@@ -256,8 +253,8 @@ noncomputable def descNatIso (τ : Hom F G) (τ' : Hom G F) (h₁ : τ.comp τ' 
   inv_hom_id := by rw [← descNatTrans_comp, h₂, descNatTrans_id]
 
 /-- A descended natural transformation whose components at the finite stages are isomorphisms is
-an isomorphism (blueprint `thm-cbc-qbar`: the descended exchange transformation is an
-isomorphism as soon as it is one at every finite stage). -/
+an isomorphism (for instance, the descended exchange transformation is an isomorphism as soon
+as it is one at every finite stage). -/
 lemma isIso_descNatTrans (τ : Hom F G) (hτ : ∀ i, IsIso (τ.τ i)) : IsIso (descNatTrans τ) := by
   have : ∀ X : S.PairCategory, IsIso ((descNatTrans τ).app X) := fun X ↦ by
     rw [descNatTrans_app]

@@ -57,10 +57,10 @@ for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorp
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
   `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-  (`sk-thm-product`): the relative product theorem for complexes supported on closed
+  (`sk-thm-sf-kunneth-relative`): the relative product theorem for complexes supported on closed
   subschemes.
 - `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-  (`sk-thm-product`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+  (`sk-thm-sf-kunneth-relative`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
 - `AlgebraicGeometry.Etale.hasKunnethComparisons` (`sk-thm-sf-kunneth-verdier`): the four
   comparison maps are isomorphisms.
 

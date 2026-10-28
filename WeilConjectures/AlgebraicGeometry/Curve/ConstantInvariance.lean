@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 /-!
 # Constant coefficients under algebraically closed field extension
 
-Source: Weil conjectures blueprint, sec-curve-estimates/sk-prop-ext-invariance,
+Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 thm-sc-constant-invariance (blueprint: thm-sc-constant-invariance).
 -/
 
@@ -35,7 +35,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 thm-sc-constant-invariance (blueprint: thm-sc-constant-invariance).
 
 The witness `r` is constrained to be the canonical cohomology pullback followed by the

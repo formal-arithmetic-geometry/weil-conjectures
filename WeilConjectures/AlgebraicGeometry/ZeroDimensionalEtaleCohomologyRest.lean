@@ -17,7 +17,7 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Zero-dimensional étale cohomology: cohomological remainder
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs.
 (blueprint: zero-dimensional-etale-cohomology-rest).
 -/
@@ -34,7 +34,7 @@ namespace AlgebraicGeometry
 /-- Positive étale cohomology is zero, and the canonical degree-zero comparison
 followed by the product of the chosen geometric stalk germs is invertible.
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1.
 (blueprint: zero-dimensional-etale-cohomology-rest).

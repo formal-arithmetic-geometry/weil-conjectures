@@ -101,7 +101,7 @@ lemma derivedTensorRightUnitor_eq (K : _root_.DerivedCategory (Sheaf X.smallEtal
 
 /-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
 an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived
-tensor product is symmetric monoidal (blueprint `sk-def-sf-operations`, remark
+tensor product is symmetric monoidal (blueprint `det-def-sf-operations`, remark
 `rem-sf-summary`); this is the existence of its symmetry.
 
 It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/

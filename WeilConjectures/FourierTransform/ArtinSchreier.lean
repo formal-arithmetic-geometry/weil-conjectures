@@ -437,7 +437,7 @@ lemma isIdempotentElem_artinSchreierIdempotent (Ψ : AddChar k Λ) :
 /-- The *Artin–Schreier sheaf* `ℒ_Ψ` on `𝔸¹_k`: the image of the idempotent `e_Ψ` on
 `(AS_q)_* Λ`, that is, the `Ψ`-isotypic component of the pushforward of the constant sheaf
 along the Artin–Schreier map `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`.
-(sketch blueprint: `sk-def-as`; blueprint: `def-fd-artin-schreier-sheaf`) -/
+(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-artin-schreier-sheaf`) -/
 def artinSchreierSheaf (Ψ : AddChar k Λ) :
     Sheaf (Scheme.smallEtaleTopology 𝔸¹[k]) (ModuleCat Λ) :=
   image (artinSchreierIdempotent Ψ)
@@ -465,7 +465,7 @@ lemma image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction
 `X`, where `f` is viewed as a morphism `X ⟶ 𝔸¹_k`. The variants `ℒ_{ψ⁻¹, f}` and
 `ℒ_{ψ(a f)}` of the blueprint are `artinSchreierSheafOf X Ψ⁻¹ f` and
 `artinSchreierSheafOf X Ψ (a • f)`.
-(sketch blueprint: `sk-def-as`; blueprint: `def-fd-artin-schreier-sheaf`) -/
+(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-artin-schreier-sheaf`) -/
 def artinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))] (Ψ : AddChar k Λ)
     (f : Γ(X, ⊤)) : Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
   (AffineSpace.homOfVector (X ↘ Spec (.of k)) fun _ ↦ f)^*[ModuleCat Λ].obj
@@ -506,9 +506,9 @@ instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
 /-- For a scheme `X` of characteristic `p`, the Artin–Schreier sheaf `ℒ_{Ψ, f}` of a global
 function `f` and an additive character `Ψ` of `ℤ/p`, where `X` is viewed as a scheme over
 `𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. This is the construction of the
-blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint: `sk-def-as`): the
-`Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the Artin–Schreier covering
-`T ^ p - T = f`. -/
+blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint:
+`def-fd-artin-schreier-sheaf`): the `Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the
+Artin–Schreier covering `T ^ p - T = f`. -/
 def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u})
     [CharP Γ(X, ⊤) p] (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
@@ -536,7 +536,7 @@ for any morphism `g : X' ⟶ X`, `g^* ℒ_{Ψ, f} ≅ ℒ_{Ψ, g^* f}`. This is
 `AlgebraicGeometry.Etale.artinSchreierSheafOfPullbackIso`, every morphism being one over
 `𝔽_p` (`AlgebraicGeometry.Scheme.Hom.isOver_overSpecZModOfCharP`): the Artin–Schreier
 covering is compatible with base change.
-(sketch blueprint: `sk-def-as`; blueprint: `def-fd-kernel`) -/
+(sketch blueprint: `def-fd-artin-schreier-sheaf`; blueprint: `def-fd-kernel`) -/
 def artinSchreierSheafZModPullbackIso {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
     {X X' : Scheme.{u}} [CharP Γ(X, ⊤) p] [CharP Γ(X', ⊤) p] (g : X' ⟶ X)
     (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
@@ -1282,19 +1282,19 @@ theorem nonempty_iso_artinSchreierSheaf_inv (Ψ : AddChar k Λ) :
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf has finite stalks: it has the tensor
 inverse `ℒ_{Ψ⁻¹}`, so its stalks are invertible modules over the finite ring `Λ`.
-(sketch blueprint: `sk-prop-kernel-lisse`) -/
+(sketch blueprint: `prop-kernel-lisse`) -/
 instance isFiniteSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
     Scheme.IsFiniteSheaf (artinSchreierSheaf Ψ) :=
   .of_tensorIso (nonempty_iso_artinSchreierSheaf_inv Ψ).some
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf is constructible, being finite
-locally constant. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+locally constant. (sketch blueprint: `prop-kernel-lisse`) -/
 instance isConstructibleSheaf_artinSchreierSheaf [Finite Λ] (Ψ : AddChar k Λ) :
     Scheme.IsConstructibleSheaf (artinSchreierSheaf Ψ) :=
   Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf {}
 
 /-- Over a finite coefficient ring the Artin–Schreier sheaf `ℒ_{Ψ, f}` is constructible, as the
-pullback of a constructible sheaf. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+pullback of a constructible sheaf. (sketch blueprint: `prop-kernel-lisse`) -/
 instance isConstructibleSheaf_artinSchreierSheafOf [Finite Λ] (X : Scheme.{u})
     [X.Over (Spec (.of k))] (Ψ : AddChar k Λ) (f : Γ(X, ⊤)) :
     Scheme.IsConstructibleSheaf (artinSchreierSheafOf X Ψ f) :=

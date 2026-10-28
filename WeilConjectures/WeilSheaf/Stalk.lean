@@ -519,7 +519,7 @@ of the trace functions of the cohomology sheaves `𝓗ʲ(K)`
 (`AlgebraicGeometry.WeilSheaf.traceFunction`), computed with the local Frobenius on the
 stalks. The sum is finite, `K` being bounded
 (`AlgebraicGeometry.WeilComplex.traceFunction_eq_sum`).
-(blueprint: `def-fd-trace-function`; sketch blueprint: `sk-def-trace`) -/
+(blueprint: `def-fd-trace-function`; sketch blueprint: `def-fd-trace-function`) -/
 noncomputable def traceFunction (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     PadicAlgCl l :=

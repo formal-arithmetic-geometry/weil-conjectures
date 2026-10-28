@@ -24,8 +24,7 @@ equivalent to the full subcategory of the `2`-colimit on the objects eventually 
 (`CategoryTheory.StageSystem.restrictEquiv`).
 
 In the application, `P E` is the constructible heart of `D^b_c(Y, E)` and this identifies the heart
-of `D^b_c(Y, ℚ̄_ℓ) = 2-colim_E D^b_c(Y, E)` with the `2`-colimit of the hearts (blueprint
-`def-weil-constructible-heart`).
+of `D^b_c(Y, ℚ̄_ℓ) = 2-colim_E D^b_c(Y, E)` with the `2`-colimit of the hearts.
 -/
 
 @[expose] public section

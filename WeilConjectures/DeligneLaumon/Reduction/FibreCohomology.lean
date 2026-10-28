@@ -342,7 +342,7 @@ supported cohomology of the fibre: `H_c^i(X' ⊗ k̄, g^*F)` vanishes if `Rⁱf�
 
 `det (1 - T^d F_y ∣ (Rⁱf₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
 
-(blueprint: `thm-cbc-qbar`, at the spectrum of a residue field). -/
+(proper base change at the spectrum of a residue field). -/
 theorem WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek (y : Y.finitePoints) :
     ∃ (X' : Scheme.{u}) (_ : X'.Over (Spec (CommRingCat.of k₀))) (g : X' ⟶ X)
       (_ : g.IsOver (Spec (CommRingCat.of k₀)))

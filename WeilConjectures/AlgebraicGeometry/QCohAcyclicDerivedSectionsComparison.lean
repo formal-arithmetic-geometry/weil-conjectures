@@ -37,7 +37,7 @@ Source: Stacks Project, Tags 08D4, 08D5, 0AVW and 0D5X
 Proof: (1) For an affine open V, restrict the injective resolution and derived direct
 image to f⁻¹V and V, using lem-sc-ringed-space-restrict-injective-resolution and
 lem-pc-restrict-derived-direct-image-open. Higher direct images are quasi-coherent
-(lem-pc-finite-support-hi); affine vanishing (lem-pc-affine-vanishing) and Leray
+(lem-pc-finite-support-hi); affine vanishing (pqf-lem-affine-vanishing) and Leray
 (lem-pc-leray-degenerate-sections) imply that sections on f⁻¹V are acyclic on every
 quasi-coherent module. Sections preserve countable products.
 (2) Shift to degree zero. Apply lem-pc-unbounded-derived-functor-cohomological-bound

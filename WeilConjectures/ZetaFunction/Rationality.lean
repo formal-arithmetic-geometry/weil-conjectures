@@ -14,7 +14,7 @@ public import WeilConjectures.ZetaLinearAlgebra.Rationality
 
 Let `X₀` be a scheme of finite type over the finite field `k₀ = 𝔽_q`. Then its zeta series
 `Z(X₀, T)` is a rational function: `B(T) Z(X₀, T) = A(T)` for integer polynomials `A, B` with
-`B(0) = 1` (blueprint `sk-thm-rationality`).
+`B(0) = 1` (blueprint `det-thm-rationality`).
 
 For `X₀` separated, the Grothendieck–Lefschetz trace formula with compact supports
 (`AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology`) writes
@@ -36,7 +36,7 @@ rationality propagates to `W ∪ U`.
 - `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq_of_isSeparated`: rationality of the
   zeta series in the separated case, via the trace formula.
 - `AlgebraicGeometry.Scheme.Hom.exists_int_mul_zetaSeries_eq`: rationality of the zeta series of
-  a scheme of finite type over a finite field (`sk-thm-rationality`).
+  a scheme of finite type over a finite field (`det-thm-rationality`).
 - `AlgebraicGeometry.Scheme.Hom.finiteDimensional_shiftSpan_zetaSeries_and_exists_rat`
   (`prop-rational-descent`) and
   `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries_and_exists_rat_mul_eq`
@@ -257,7 +257,7 @@ theorem Hom.exists_int_mul_zetaSeries_eq_of_isSeparated {Y : Scheme.{u}}
           exact ⟨⟨(i - a₀).toNat, by omega⟩, by simp; omega⟩ }
   exact Hom.zetaSeries_rational_of_traceDatum g D fun n ↦ rfl
 
-/-- Blueprint `sk-thm-rationality` (rationality of the zeta series): for a scheme `X₀` of finite
+/-- Blueprint `det-thm-rationality` (rationality of the zeta series): for a scheme `X₀` of finite
 type (quasi-compact and locally of finite type) over a finite field `k`, there are integer
 polynomials `A, B` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`.
 

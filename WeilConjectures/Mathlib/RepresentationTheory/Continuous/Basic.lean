@@ -37,7 +37,7 @@ universe v w
 
 namespace Rep
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems.
 
 A representation of a topological group `G` on a `Λ`-module is *finite continuous* if the
 underlying module is finite and every stabilizer is open, i.e. the action is continuous for
