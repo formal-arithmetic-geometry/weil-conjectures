@@ -4,7 +4,7 @@
  "title": "Evaluation field for the integral tensor presentation",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "statement": "For flat complexes P and S and a K-injective I, every Hom-complex map q from S to Hom(P,I) has a total-tensor representative β satisfying the signed sectionwise evaluation formula and the comparison square for the chosen adjunction.",
+ "statement": "For the completed integral coefficient ring sheaf on Y, let S be closed derived tensor data and T its normalized K-flat tensor model as in [def-sf-integral-hom-reduction-models] and [lem-sf-ringed-derived-closed-symmetric-monoidal]. There exists a family adj of left tensor-Hom adjunctions for S.tensor and the fixed derived internal Hom, such that for every pair of K-flat complexes P and S′, every K-injective I, and every chain map q from S′ to Hom(P,I), there is a chain map beta from Tot(P tensor S′) to I with the signed sectionwise formula beta(x tensor s) = (-1)^(i*j) q(s)(x) and whose localization, through T.comparison.inv, is tensor(id,Q(q) followed by homModelMap) followed by the counit of adj. The same chosen family adj works for all these representatives and maps.",
  "stmt_deps": [
   "def-sf-integral-hom-reduction-models",
   "lem-sf-ringed-derived-closed-symmetric-monoidal"
@@ -15,22 +15,42 @@
  },
  "proof": [
   {
-   "text": "Choose the representative supplied by the Hom-complex evaluation construction; the signed sectionwise formula and comparison square are the required normalization fields.",
+   "text": "Apply the normalized Koszul exchange theorem to S,T. Its natural isomorphism sigma gives an isomorphism from right tensor by K to left tensor by K. Transport the recorded S.adjunction K along this isomorphism using Adjunction.ofNatIsoLeft, defining adj simultaneously for all K. The inverse transpose for adj is sigma.hom followed by the inverse transpose for S.",
    "uses": [
+    "lem-weil-pbc-ringed-tensor-koszul-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the public pure-section tensor-Hom equivalence to uncurry q to psi: Tot(S′ tensor P) to I. Its inverse evaluates pure homogeneous sections without a sign. This formula, with the total-degree index commuted, supplies IsCoefficientTensorCurry for the normalization theorem. Let beta be the Koszul exchange s: Tot(P tensor S′) to Tot(S′ tensor P), followed by psi. The exchange formula and linearity of psi give exactly the required (-1)^(i*j) evaluation. The definition totalPair agrees with the coefficient tensor generator. The proved evaluate_eq_coefficient API identifies the paper evaluation and coefficient component application without repeatedly unfolding the chosen Hom-complex projections.",
+   "uses": [
+    "lem-sf-hom-complex-tensor-pure-equivalence",
+    "lem-weil-pbc-ringed-tensor-koszul-existence",
     "def-sf-integral-hom-reduction-models",
-    "new-sf-integral-hom-models-exist-tensor-adjunction"
+    "new-sf-integral-hom-evaluation-coefficient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientTensorCurry_normalize to psi,q and the two K-flat hypotheses. It identifies the right inverse transpose of Q(q) followed by homModelMap with T(S′,P).inv followed by Q(psi). Conjugate the exchange comparison square by T(P,S′).inv and T(S′,P).inv, then compose with Q(psi). Functoriality gives Q(beta), and the transported inverse-transpose equation and Adjunction.homEquiv_symm_apply give the stated counit square.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-weil-pbc-ringed-tensor-koszul-existence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-ringed-tensor-koszul-existence",
+  "lem-sf-hom-complex-tensor-pure-equivalence",
   "def-sf-integral-hom-reduction-models",
-  "new-sf-integral-hom-models-exist-tensor-adjunction"
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "new-sf-integral-hom-evaluation-coefficient"
  ],
  "proof_origin": {
-  "by": "R8 stage 3 split",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 2, tensor-Hom adjunction on slices"
+  "by": "S4 stage 3, complete Lean proof with correction of arbitrary-adjunction quantifier",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, the actual evaluation maps and tensor-Hom adjunction on slices; Stacks 08J9 and 06YU"
  },
  "mathlib_searches": [
   {
@@ -63,9 +83,9 @@
   "module": "Sheaf.Paper.IntegralHomTensorPresentationEvaluation",
   "file": "lean/Sheaf/Paper/IntegralHomTensorPresentationEvaluation.lean",
   "declaration": "WeilConjectures.IntegralHom.tensor_presentation_evaluation",
-  "statement": "theorem tensor_presentation_evaluation (S : CoefficientClosedStructure (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y) (completedIntegralCommRingSheaf l E Y D hl))) (T : CoefficientTensorModels (AlgebraicGeometry.Scheme.ProEt.topology Y) (completedIntegralCommRingSheaf l E Y D hl) S) (adj : ∀ K : Derived.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl), (Functor.curry.obj S.tensor).obj K ⊣ (Functor.curry.obj (hom Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K)) : ∀ (P I S' : CochainComplex (Modules.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl)) ℤ) (hP : flat.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P) (hS : flat.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) S'), I.IsKInjective → ∀ q : S' ⟶ homComplex.{t+1,t,max u (t+1),max u (t+1)} (R := completedIntegralCommRingSheaf l E Y D hl) P I, ∃ beta : ((totalTensor.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj S' ⟶ I, (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : (P.X i).val.obj U) (s : (S'.X j).val.obj U), (beta.f (i+j)).val.app U (totalPair.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P S' i j U x s) = (i*j).negOnePow • evaluate.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P I j i U ((q.f j).val.app U s) x) ∧ T.comparison.inv.app (⟨P,hP⟩,⟨S',hS⟩) ≫ DerivedCategory.Q.map beta = S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P)) (DerivedCategory.Q.map q ≫ homModelMap.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P I)) ≫ (adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I)",
+  "statement": "theorem tensor_presentation_evaluation\n    (S : CoefficientClosedStructure\n      (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (completedIntegralCommRingSheaf l E Y D hl)))\n    (T : CoefficientTensorModels (AlgebraicGeometry.Scheme.ProEt.topology Y)\n      (completedIntegralCommRingSheaf l E Y D hl) S)\n    : ∃ adj : ∀ K : Derived.{t, u} Y\n      (completedIntegralCommRingSheaf l E Y D hl),\n      (Functor.curry.obj S.tensor).obj K ⊣\n        (Functor.curry.obj (hom Y\n          (completedIntegralCommRingSheaf l E Y D hl))).obj (op K),\n    ∀ (P I S' : CochainComplex (Modules.{t,u} Y\n      (completedIntegralCommRingSheaf l E Y D hl)) ℤ)\n      (hP : flat.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P)\n      (hS : flat.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) S'), I.IsKInjective →\n      ∀ q : S' ⟶ homComplex.{t+1,t,max u (t+1),max u (t+1)}\n        (R := completedIntegralCommRingSheaf l E Y D hl) P I,\n      ∃ beta : ((totalTensor.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj P).obj S' ⟶ I,\n        (∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n          (x : (P.X i).val.obj U) (s : (S'.X j).val.obj U),\n          (beta.f (i+j)).val.app U\n            (totalPair.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl) P S' i j U x s) =\n            (i*j).negOnePow • evaluate.{t,u} Y (completedIntegralCommRingSheaf l E Y D hl)\n              P I j i U ((q.f j).val.app U s) x) ∧\n        T.comparison.inv.app (⟨P,hP⟩,⟨S',hS⟩) ≫ DerivedCategory.Q.map beta =\n          S.tensor.map (Prod.mkHom (𝟙 (DerivedCategory.Q.obj P))\n            (DerivedCategory.Q.map q ≫ homModelMap.{t,u} Y\n              (completedIntegralCommRingSheaf l E Y D hl) P I)) ≫\n          (adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I)",
   "branch": "sheaf-dag",
-  "by": "R8",
+  "by": "S4",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -81,11 +101,42 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R8",
+  "reviewer": "C-7259d",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261028T020714-L-2539742",
+  "landing": "20261028T055753-L-806781",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected ∃-adj tensor_presentation_evaluation (old ∀-adj false: −1-twisted adjunction negates counit) against node new-sf-integral-hom-models-exist-tensor-evaluation, TensorPresentation fields, change record and the adapted unclaimed caller; new evaluate_eq_coefficient rfl lemma against its node; 3b importer IntegralHomModelsExist OK"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "S4 stage 3",
+  "old_statement": "For flat complexes P and S and a K-injective I, every Hom-complex map q from S to Hom(P,I) has a total-tensor representative β satisfying the signed sectionwise evaluation formula and the comparison square for the chosen adjunction.",
+  "what": "The old Lean theorem universally quantified an arbitrary family adj, but its conclusion fixes the counit to the actual signed evaluation. Adjunctions for fixed functors are not unique as data: twisting the right adjoint by its natural automorphism minus identity negates the counit. On degree-zero rank-one integral coefficient modules (for instance l=3), the pure-tensor formula fixes beta to multiplication; it cannot also localize to negative multiplication. The source requires choosing the normalized adjunction together with evaluation, not proving normalization for every adjunction. Move adj from the hypotheses into the existential conclusion and construct it using the normalized Koszul exchange. The TensorPresentation existence statement and all target statements are unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+   "place": "paragraph 2, the actual evaluation maps and tensor-Hom adjunction on slices; Stacks 08J9 and 06YU"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-hom-models-exist-tensor",
+    "holds": true,
+    "note": "Adapted in this packet: obtain adj and its evaluation proof together, then package the same TensorPresentation. No statement change in the caller."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose the representative supplied by the Hom-complex evaluation construction; the signed sectionwise formula and comparison square are the required normalization fields.",
+    "uses": [
+     "def-sf-integral-hom-reduction-models",
+     "new-sf-integral-hom-models-exist-tensor-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sf-integral-hom-reduction-models",
+   "new-sf-integral-hom-models-exist-tensor-adjunction"
+  ]
  }
 }

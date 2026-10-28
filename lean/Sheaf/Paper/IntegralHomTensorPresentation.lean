@@ -6,7 +6,6 @@ module
 
 public import Sheaf.Paper.IntegralHomReductionModels
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-import Sheaf.Paper.IntegralHomTensorPresentationAdjunction
 import Sheaf.Paper.IntegralHomTensorPresentationEvaluation
 
 /-! # Existence of the normalized integral tensor model
@@ -57,12 +56,11 @@ theorem tensor_presentation_exists :
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
   letI : HasDerivedCategory (Modules.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _
-  obtain ⟨S, T, β, hcoh⟩ :=
+  obtain ⟨S, T, _, _⟩ :=
     CategoryTheory.ringedDerived_closed_symmetric_monoidal.{t + 1, t, u,
       (max u (t + 1)) + 1} (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (completedIntegralCommRingSheaf l E Y D hl)
-  let adj := Classical.choice (tensor_presentation_adjunction l E Y D hl S β)
-  exact ⟨TensorPresentation.mk S.tensor T.comparison adj
-    (tensor_presentation_evaluation l E Y D hl S T adj)⟩
+  obtain ⟨adj, hev⟩ := tensor_presentation_evaluation l E Y D hl S T
+  exact ⟨TensorPresentation.mk S.tensor T.comparison adj hev⟩
 
 end WeilConjectures.IntegralHom

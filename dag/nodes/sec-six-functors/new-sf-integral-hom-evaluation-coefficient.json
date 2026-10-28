@@ -1,0 +1,108 @@
+{
+ "id": "new-sf-integral-hom-evaluation-coefficient",
+ "kind": "statement",
+ "title": "Agreement of paper and coefficient section evaluation",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For every scheme Y and commutative ring sheaf R on its pro-etale site, with independent site and coefficient universes as in [def-sf-integral-hom-reduction-models], let P,I be arbitrary cochain complexes. For all integers j,i, every object U, a degree-j section f of Hom(P,I) over U and a degree-i section x of P over U, the paper evaluation evaluate(Y,R,P,I,j,i,U,f,x) equals coefficientHomSectionApply of the degree-(j,i,i+j) coefficientHomComponent applied to f, evaluated at x. These are the definitions of [lem-sf-coefficient-cochain-tensor-curry] and [def-coef-hom-representative-evaluation], with the same chosen product projection.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-coefficient-cochain-tensor-curry",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, the actual evaluation maps; Stacks Tags 0A8X and 03EO"
+ },
+ "proof": [
+  {
+   "text": "Unfold evaluate and projection, coefficientHomSectionApply, coefficientHomComponent and homComplexπ. Both expressions apply the same chosen product projection of the fixed Hom-complex functor at total degree i+j, then evaluate the resulting local internal-Hom section at the identity slice on x. Reflexivity closes the equality. This argument is independent of boundedness, flatness and injectivity, and also applies in zero or negative degrees.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-sf-coefficient-cochain-tensor-curry",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-coefficient-cochain-tensor-curry",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof_origin": {
+  "by": "S4 stage 3; fully proved normalization API isolated after kernel profiling",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2, the actual evaluation maps; Stacks Tags 0A8X and 03EO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sectionwise evaluation of the Hom complex product projection equals evaluation of the corresponding internal Hom section",
+   "results": "8 generic results, including CategoryTheory.Pi.closedCounit_app and CategoryTheory.eval_app; none identifies the two project-specific definitions.",
+   "date": "2026-10-28",
+   "verdict": "Use the actual project definitions; the equality is definitional."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.homComplexπ",
+   "results": "0 hits; the identifier is project-specific and unknown to the Mathlib index.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientHomSectionApply|coefficientHomComponent|def evaluate",
+   "results": "Mathlib search returned only evaluateCombinedCones and evaluateCombinedCocones. Project rg identifies evaluate and projection in IntegralHomReductionModels, coefficientHomSectionApply in CoefficientCochainTensorCurry, and coefficientHomComponent in CoefficientHomRepresentativeEvaluation.",
+   "date": "2026-10-28",
+   "verdict": "The project definitions use exactly the same Hom-complex projection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomTensorPresentationEvaluation",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sf-integral-hom-models-exist-tensor-evaluation",
+   "place": "identification of the two evaluation notations in the representative formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomEvaluationCoefficient",
+  "file": "lean/Sheaf/Paper/IntegralHomEvaluationCoefficient.lean",
+  "declaration": "WeilConjectures.IntegralHom.evaluate_eq_coefficient",
+  "statement": "theorem evaluate_eq_coefficient (Y : AlgebraicGeometry.Scheme.{t})\n    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})\n    (P I : CochainComplex (Modules.{t, u} Y R) ℤ) (j i : ℤ)\n    (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)\n    (f : ((homComplex.{t + 1, t, max u (t + 1), max u (t + 1)}\n      (R := R) P I).X j).val.obj U) (x : (P.X i).val.obj U) :\n    evaluate.{t, u} Y R P I j i U f x =\n      coefficientHomSectionApply.{u, t + 1, t}\n        (AlgebraicGeometry.Scheme.ProEt.topology Y) R (P.X i) (I.X (i + j)) U\n        ((coefficientHomComponent.{u, t + 1, t}\n          (AlgebraicGeometry.Scheme.ProEt.topology Y) R P I j i (i + j) rfl).val.app U f) x",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-7259d",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261028T055753-L-806781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-7259d",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261028T055753-L-806781",
+  "kind": "interface",
+  "note": "independent cc review: corrected ∃-adj tensor_presentation_evaluation (old ∀-adj false: −1-twisted adjunction negates counit) against node new-sf-integral-hom-models-exist-tensor-evaluation, TensorPresentation fields, change record and the adapted unclaimed caller; new evaluate_eq_coefficient rfl lemma against its node; 3b importer IntegralHomModelsExist OK"
+ }
+}
