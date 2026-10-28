@@ -9,6 +9,8 @@ public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.PurTwistSheaves
 public import Sheaf.AlgebraicGeometry.RootsOfUnityInverseImageIso
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import Sheaf.Paper.FrobeniusIntegralRootTransportAux
+import Sheaf.Paper.FrobeniusIntegralRootTransportModuleGlue
 
 /-! # Transport of the first integral root line
 
@@ -29,9 +31,9 @@ private instance (priority := 3000) rootSiteSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
-  proEtaleModuleInverseImage completedIntegralCoefficientSheafUnrestricted
-  MorphismProperty.Over.pullback constantSheaf Padic
-attribute [local instance_reducible] PurCompactSupport.completed
+  completedIntegralCoefficientSheafUnrestricted
+attribute [local implicit_reducible] purTwistZlOne proEtaleRootsOfUnityTower
+  PurCompactSupport.completed completedIntegralCommRingSheafUnrestricted
 
 
 /-- The prescribed root-limit comparison extends to the first
@@ -80,6 +82,15 @@ theorem frobeniusIntegralRootTransport
         (purTwistIntegralTensor X l E (op ((proEtaleBaseChange g).obj V)) 1
           (r.hom.app (op ((proEtaleBaseChange g).obj V))
           (((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).unit.app
-            (purTwistZlOne Y l)).hom.app (op V) x))) := by sorry
+            (purTwistZlOne Y l)).hom.app (op V) x))) := by
+  obtain ⟨φ, hφ, hs⟩ :=
+    frobeniusIntegralRootTransport_additive l E g r hr
+  rcases hs with ⟨hroot, hscalar⟩
+  obtain ⟨e, he⟩ :=
+    frobeniusIntegralRootTransport_moduleGlue l E g φ hφ hscalar
+  refine ⟨e, ?_⟩
+  intro V b x
+  exact (he V (@SMul.smul _ _ (purTwistIntegralAction Y l E (op V)).toSMul b
+    (purTwistIntegralTensor Y l E (op V) 1 x))).trans (hroot V b x)
 
 end WeilConjectures

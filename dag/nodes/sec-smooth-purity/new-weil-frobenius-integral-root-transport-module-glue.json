@@ -1,0 +1,89 @@
+{
+ "id": "new-weil-frobenius-integral-root-transport-module-glue",
+ "kind": "statement",
+ "title": "Module adjunction glue for integral root transport",
+ "statement": "An auxiliary categorical statement for the first completed root-line transport.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; module adjunction and sheafification"
+ },
+ "stmt_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-roots-of-unity-inverse-image-iso"
+ ],
+ "proof": [
+  {
+   "text": "Use completed-coefficient semilinearity to regard φ as a map into the module direct image, transpose it under the canonical module adjunction, and reflect the additive isomorphism. The adjunction unit identity gives the section formula. This omits the root comparison and tensor formula and is strictly simpler than the parent target.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL; module adjunction and sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-sheaves",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K2",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; module adjunction and sheafification"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusIntegralRootTransport",
+  "date": "2026-10-28",
+  "group": "K2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusIntegralRootTransportModuleGlue",
+  "file": "lean/Sheaf/Paper/FrobeniusIntegralRootTransportModuleGlue.lean",
+  "declaration": "WeilConjectures.frobeniusIntegralRootTransport_moduleGlue",
+  "statement": "theorem frobeniusIntegralRootTransport_moduleGlue\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (φ : (SheafOfModules.toSheaf _).obj (purTwistIntegralModule Y l E) ⟶\n      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).obj\n        ((SheafOfModules.toSheaf _).obj (purTwistIntegralModule X l E)))\n    (hφ : IsIso φ)\n    (hscalar : ∀ (V : Y.ProEt)\n      (a : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj (op V))\n      (t : (purTwistIntegralModule Y l E).val.obj (op V)),\n      φ.hom.app (op V)\n          (@SMul.smul _ _ (purTwistIntegralAction Y l E (op V)).toSMul a t) =\n        @SMul.smul _ _\n          (purTwistIntegralAction X l E (op ((proEtaleBaseChange g).obj V))).toSMul\n          ((sfCompletedCoefficientMap l E g).hom.app (op V) a)\n          (φ.hom.app (op V) t)) :\n    ∃ e : (proEtaleRingModulePullback g (completedIntegralCommRingSheafUnrestricted l E Y)\n        (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l E).pull\n          g)).obj (purTwistIntegralModule Y l E) ≅ (purTwistIntegralModule X l E),\n      ∀ (V : Y.ProEt)\n        (t : (purTwistIntegralModule Y l E).val.obj (op V)),\n        e.hom.val.app (op ((proEtaleBaseChange g).obj V))\n          (((proEtaleRingModuleAdjunction g (completedIntegralCommRingSheafUnrestricted l E Y)\n            (completedIntegralCommRingSheafUnrestricted l E X) ((PurCompactSupport.completed l\n              E).pull g)).unit.app (purTwistIntegralModule Y l E)).val.app (op V) t) =\n        φ.hom.app (op V) t",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-frobenius-integral-root-transport",
+   "place": "Auxiliary step extracted from the parent proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T020531-L-2521730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261028T020531-L-2521730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
