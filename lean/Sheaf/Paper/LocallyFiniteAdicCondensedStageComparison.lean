@@ -5,12 +5,9 @@ Authors: SHEAF group K5
 -/
 module
 
-public import Sheaf.Paper.LocallyFiniteAdicNormalizedFunctorData
-public import Sheaf.Paper.CondensedQbarCoefficientConstruction
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
-import Sheaf.Paper.NativeScalarForgetting
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Sheaf.Paper.LocallyFiniteAdicCondensedStageData
+import Sheaf.Paper.LocallyFiniteAdicCondensedIntegralNormalization
+import Sheaf.CategoryTheory.ScalarLocalizationNaturalIso
 
 /-! # Finite tensor comparison with condensed coefficients
 
@@ -26,98 +23,50 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option linter.all false
-
 attribute [local irreducible] HasDerivedCategory.standard
-
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme
 open scoped Obj
-
 namespace WeilConjectures.LocallyFiniteAdicRealization
+attribute [local irreducible] nativeCondensedDerived nativeCondensedModules
 
-/-- The actual coefficient comparison: bounded finite-field functions are locally finite
-functions. Source: Bhatt--Scholze, Lemma 6.8.2, via the two published ring comparisons
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
-def condensedNativeMap (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    ProEtale.padicAlgClRingObj X l ⟶ abRing l X :=
-  (ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso l X).hom.hom ≫
-    ProEtale.padicAlgClSheafToAdicConstantSheaf X l
-
-instance condensedNativeMap_isMonHom (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    IsMonHom (condensedNativeMap l X) := by
-  unfold condensedNativeMap
-  infer_instance
-
-instance condensedNativeMap_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    IsIso (condensedNativeMap l X) := by
-  unfold condensedNativeMap
-  infer_instance
-
-/-- Transport native modules to the condensed coefficient, retaining their abelian sheaves.
-Source: Bhatt--Scholze, Lemma 6.8.2; restriction along the specified ring isomorphism
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
-def nativeCondensedModules (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
-  ProEtale.AdicSheaf.forgetAb l X ⋙ Mod.comap (condensedNativeMap l X)
-
-instance nativeCondensedModules_isEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    (nativeCondensedModules l X).IsEquivalence := by
-  letI := ProEtale.nativeScalarForgetting_isEquivalence l X
-  letI : (Mod.comap (condensedNativeMap l X)).IsEquivalence :=
-    (Mod.comapEquivalenceOfIsIso (condensedNativeMap l X)).isEquivalence_functor
-  unfold nativeCondensedModules
-  infer_instance
-
-instance nativeCondensedModules_additive (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    (nativeCondensedModules l X).Additive :=
-  Functor.additive_of_preserves_binary_products _
-
-/-- The exact derived transport along the same coefficient isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
-def nativeCondensedDerived (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
-  (nativeCondensedModules l X).mapDerivedCategory
-
-instance nativeCondensedDerived_isEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
-    (nativeCondensedDerived l X).IsEquivalence := by
-  unfold nativeCondensedDerived
-  infer_instance
-
-open AlgebraicallyClosedCoefficients (Index)
-
-/-- Only finite-stage data: full faithful functors on raw rational stages, scalar comparisons,
-and their action on a representative. No statement about a Hom colimit is included.
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15
-(blueprint: lem-sf-locally-finite-adic-condensed-stage-comparison). -/
-structure CondensedStageComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
-    (D : NormalizedFunctor l X) where
-  finite : ∀ E : Index l (PadicAlgCl l),
-    GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E ⥤
-      ProEtale.PadicSubfieldConstructible X l E
-  full : ∀ E, (finite E).Full
-  faithful : ∀ E, (finite E).Faithful
-  scalar : ∀ {E L : Index l (PadicAlgCl l)} (h : E ≤ L),
-    finite E ⋙ ProEtale.constructibleExtendScalars X l h ≅
-      (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h ⋙
-        finite L
-  objectIso : ∀ A : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X,
-    (nativeCondensedDerived l X).obj (D.J.obj A) ≅
-      ((ProEtale.constructibleToPadicAlgCl X l A.stage).obj
-        ((finite A.stage).obj A.obj)).obj
-  representative : ∀ {A B : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X}
-    (L : Index l (PadicAlgCl l)) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
-    (f : A.toStage hA ⟶ B.toStage hB),
-    (nativeCondensedDerived l X).map
-        (D.J.map (StageSystem.PairCategory.mkHom L hA hB f)) =
-      (objectIso A).hom ≫
-        (((ProEtale.constructibleToPadicAlgClCompIso X l hA).inv.app
-              ((finite A.stage).obj A.obj) ≫
-            (ProEtale.constructibleToPadicAlgCl X l L).map
-              ((scalar hA).hom.app A.obj ≫ (finite L).map f ≫
-                (scalar hB).inv.app B.obj) ≫
-            (ProEtale.constructibleToPadicAlgClCompIso X l hB).hom.app
-              ((finite B.stage).obj B.obj)).hom) ≫
-        (objectIso B).inv
+private theorem representative_of_stage_normalization
+    {I : Type*} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type*} [∀ i, Category (C i)] {B : Type*} [Category B]
+    (S : StageSystem C) (H : S.PairCategory ⥤ B) (F : ∀ i, C i ⥤ B)
+    (e : ∀ i, S.ι i ⋙ H ≅ F i)
+    (p : ∀ {i j} (h : i ≤ j), F i ≅ S.T h ⋙ F j)
+    (he : ∀ (A : S.PairCategory) (j : I) (h : A.stage ≤ j),
+      H.map (S.isoToStage A h).hom ≫ (e j).hom.app (A.toStage h) =
+        (e A.stage).hom.app A.obj ≫ (p h).hom.app A.obj)
+    {A A' : S.PairCategory} (j : I) (hA : A.stage ≤ j) (hA' : A'.stage ≤ j)
+    (f : A.toStage hA ⟶ A'.toStage hA') :
+    H.map (StageSystem.PairCategory.mkHom j hA hA' f) =
+      (e A.stage).hom.app A.obj ≫ (p hA).hom.app A.obj ≫
+        (F j).map f ≫ (p hA').inv.app A'.obj ≫ (e A'.stage).inv.app A'.obj := by
+  let c (A : S.PairCategory) : H.obj A ≅ (F A.stage).obj A.obj :=
+    (e A.stage).app A.obj
+  have hc (A : S.PairCategory) (j : I) (h : A.stage ≤ j) :
+      H.map (S.isoToStage A h).hom ≫ (e j).hom.app (A.toStage h) =
+        (c A).hom ≫ (p h).hom.app A.obj := he A j h
+  change H.map (StageSystem.PairCategory.mkHom j hA hA' f) =
+    (c A).hom ≫ (p hA).hom.app A.obj ≫ (F j).map f ≫
+      (p hA').inv.app A'.obj ≫ (c A').inv
+  have hi : H.map (S.isoToStage A' hA').inv ≫ (c A').hom =
+      (e j).hom.app (A'.toStage hA') ≫ (p hA').inv.app A'.obj := by
+    apply (cancel_epi (H.map (S.isoToStage A' hA').hom)).mp
+    rw [← H.map_comp_assoc, Iso.hom_inv_id, H.map_id, Category.id_comp]
+    rw [← Category.assoc, hc A' j hA']
+    simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  apply (cancel_mono (c A').hom).mp
+  rw [StageSystem.mkHom_eq_isoToStage hA hA' f]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [hi]
+  have hn := (e j).hom.naturality f
+  dsimp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn, ← Category.assoc, hc A j hA]
+  simp only [Category.assoc]
 
 /-- Finite coefficient realization agrees with the normalized native tensor formula.
 
@@ -153,6 +102,78 @@ theorem condensedStageComparison_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] (D : NormalizedFunctor l X) :
-    Nonempty (CondensedStageComparison l X D) := by sorry
+    Nonempty (CondensedStageComparison l X D)  := by
+  classical
+  obtain ⟨A⟩ := AdicFiniteRealization.finiteData_exists l X
+  obtain ⟨e, he⟩ := finiteCondensedIntegralNormalization l X D A
+  let H := D.J ⋙ nativeCondensedDerived l X
+  let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X
+  let F := AdicFiniteRealization.finiteCondensedClosureFunctor l X A
+  have hd (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :
+      ∃! d : GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙ H ≅ F E,
+        ∀ K : sfIntegralConstructibleCategory l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X,
+          d.hom.app ((sfRationalConstructibleLocalization l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj K) =
+              (e E).hom.app K := by
+    letI : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) n).Additive :=
+      fun n ↦ inferInstance
+    letI : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) n).Linear
+          (Padic.coefficientExtensionIntegers l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E)) :=
+      fun n ↦ sfIntegralConstructibleShift_linear l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X n
+    exact ScalarLocalization.naturalIso_of_integral
+      (Padic.coefficientExtensionIntegers l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E))
+      (sfIntegralConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X)
+      (Padic.coefficientExtensionUniformizer l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E))
+      (GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙ H) (F E) (e E)
+  let d E := (hd E).exists.choose
+  have de (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
+      (d E).hom.app K = (e E).hom.app K.obj :=
+    (hd E).exists.choose_spec K.obj
+  have ht (B : S.PairCategory) (L : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : B.stage ≤ L) :
+      H.map (S.isoToStage B h).hom ≫ (d L).hom.app (B.toStage h) =
+        (d B.stage).hom.app B.obj ≫
+          (AdicFiniteRealization.finiteCondensedClosureTransition l X A h).hom.app B.obj := by
+    rw [de, de]
+    exact he B.stage L h B.obj.obj
+  let objectComparison (B : S.PairCategory) :
+      (nativeCondensedDerived l X).obj (D.J.obj B) ≅ (F B.stage).obj B.obj :=
+    (d B.stage).app B.obj
+  refine ⟨{
+    finite := AdicFiniteRealization.finiteCondensedFunctor l X A
+    full := fun E ↦ inferInstance
+    faithful := fun E ↦ inferInstance
+    scalar := AdicFiniteRealization.finiteCondensedScalarComparison l X A
+    objectIso := objectComparison
+    representative := ?_
+  }⟩
+  intro B C L hB hC f
+  have hf := representative_of_stage_normalization S H F d
+    (fun {_ _} h ↦ AdicFiniteRealization.finiteCondensedClosureTransition l X A h)
+    ht L hB hC f
+  change H.map (StageSystem.PairCategory.mkHom L hB hC f) =
+    (objectComparison B).hom ≫
+      (AdicFiniteRealization.finiteCondensedClosureTransition l X A hB).hom.app B.obj ≫
+      (F L).map f ≫
+      (AdicFiniteRealization.finiteCondensedClosureTransition l X A hC).inv.app C.obj ≫
+      (objectComparison C).inv at hf
+  simpa only [H, F, AdicFiniteRealization.finiteCondensedClosureFunctor,
+    AdicFiniteRealization.finiteCondensedClosureTransition,
+    Iso.trans_hom, Iso.trans_inv, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerRight_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Iso.symm_inv, Functor.comp_map,
+    Functor.map_comp, Functor.comp_obj, ObjectProperty.ι_map,
+    ObjectProperty.FullSubcategory.comp_hom, Category.assoc] using hf
+
 
 end WeilConjectures.LocallyFiniteAdicRealization

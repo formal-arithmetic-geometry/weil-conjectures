@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-locally-finite-adic-condensed-integral-normalization",
+ "kind": "statement",
+ "title": "Integral normalization of the explicit finite condensed realization",
+ "statement": "Let ell be prime and X Noetherian finite-dimensional with ell invertible. Let D be a normalized native functor [def-sf-locally-finite-adic-normalized-functor], A normalized finite realization data [def-sf-locally-finite-adic-finite-condensed-realization], H native condensed scalar forgetting, and F_E the explicit finite condensed realization [def-sf-locally-finite-adic-finite-condensed-realization] followed by closure extension and ambient inclusion. Write Q_E for raw integral rationalization and i_E for raw stage inclusion. There is a family of natural isomorphisms e_E: Q_E i_E D.J H ≅ Q_E F_E. For every E contained in L and integral object K, H(D.J(isoToStage(E,Q_E K))).hom followed by e_L at the underlying integral object of T_raw(Q_E K) equals e_E(K) followed by the explicitly constructed closure transition at Q_E K. This asserts integral naturality and integral transition normalization only; it asserts neither finite full faithfulness nor a general common-stage representative formula.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-normalized-functor",
+  "def-sf-adic-finite-realization-data",
+  "def-sf-locally-finite-adic-finite-condensed-realization",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-locally-finite-adic-condensed-stage-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Reconstruct finite section coefficients using finiteIso. Its normalization identifies each continuous function and its fixed embedding into the closure. D.rationalInclusion_normalized describes the same map. On integral coefficients, compare the finite quotient projections: D.integral_residues, the raw identity normalization and the continuous realization normalization send a section to its residue. Joint monicity of the inverse-limit projections identifies the completed integral maps.",
+   "uses": [
+    "def-sf-locally-finite-adic-normalized-functor",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-fd-integral-identity-rational-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Transport derived extension through the section-module scalar adjunction, retaining its unit equation. Compose the integral raw identity, the integral continuous realization formula and this balanced comparison. The finite encoding counit identifies this composite with the explicitly constructed finite condensed functor. Compose with D.integral and native scalar forgetting to produce the natural iso on the integral source. Naturality already holds for all integral arrows; no rational fraction is used.",
+   "uses": [
+    "def-sf-locally-finite-adic-finite-condensed-realization",
+    "def-sf-adic-finite-realization-data",
+    "lem-pbc-scalar-coefficient-equivalence",
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "For E contained in L, substitute D.common_field. The raw completion scalar normalization and the integral scalar equation in Data identify both sides with the same derived balanced tensor transposition. The normalized coefficient square identifies the field maps. The adjunction unit equation and tensor-composition comparisons used to construct finiteCondensedScalarComparison give exactly finiteCondensedClosureTransition. On K-flat representatives both composites send b tensor (a tensor k) to ba tensor k; the derived universal property proves equality. Identity inclusions and zero objects use the same unit equations.",
+   "uses": [
+    "def-sf-locally-finite-adic-normalized-functor",
+    "def-sf-locally-finite-adic-finite-condensed-realization",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-pbc-scalar-coefficient-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-finite-realization-data",
+  "def-sf-locally-finite-adic-finite-condensed-realization",
+  "def-sf-locally-finite-adic-normalized-functor",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-fd-completion-inverse-scalar-coherence",
+  "lem-fd-integral-identity-rational-equivalence",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-per-rational-realization-scalar-coherence",
+  "lem-sf-native-scalar-forgetting-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assigned finite condensed stage comparison, integral portions of proof steps 3 and 4; BS 6.8.11(3), 6.8.14(2), Remark 6.8.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of coefficient module categories transports derived scalar extension and its unit naturally.",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, Equiv.smul, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|fullyFaithfulWhiskeringLeft|leftAdjointCompIso",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCondensedStageComparison",
+  "group": "X3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned finite condensed stage comparison, integral portions of proof steps 3 and 4; BS 6.8.11(3), 6.8.14(2), Remark 6.8.15. The assigned node has no imported blueprint ancestor.",
+   "via": [
+    "lem-sf-locally-finite-adic-condensed-stage-comparison",
+    "lem-sf-locally-finite-adic-functor-descent-hom",
+    "lem-sf-locally-finite-adic-functor-descent",
+    "lem-sf-locally-finite-adic-constructible-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicCondensedIntegralNormalization",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicCondensedIntegralNormalization.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.finiteCondensedIntegralNormalization",
+  "statement": "theorem finiteCondensedIntegralNormalization\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]\n    [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n    (D : NormalizedFunctor l X) (A : AdicFiniteRealization.FiniteCondensedData l X) :\n    ∃ e : ∀ E : Index l (PadicAlgCl l),\n      sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙\n          GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙ D.J ⋙\n            nativeCondensedDerived l X ≅\n        sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙\n          finiteCondensedClosureFunctor l X A E,\n      ∀ (E L : Index l (PadicAlgCl l)) (h : E ≤ L)\n        (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X),\n        (D.J ⋙ nativeCondensedDerived l X).map\n            ((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).isoToStage\n              ⟨E, (sfRationalConstructibleLocalization l\n                (Coefficient.{u} l (PadicAlgCl l) E) X).obj K⟩ h).hom ≫\n          (e L).hom.app\n            (((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h).obj\n              ((sfRationalConstructibleLocalization l\n                (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)).obj =\n          (e E).hom.app K ≫ (finiteCondensedClosureTransition l X A h).hom.app\n            ((sfRationalConstructibleLocalization l\n              (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T055827-L-814092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T055827-L-814092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

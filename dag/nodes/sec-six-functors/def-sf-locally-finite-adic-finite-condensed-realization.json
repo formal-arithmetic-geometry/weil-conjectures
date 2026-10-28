@@ -1,0 +1,166 @@
+{
+ "id": "def-sf-locally-finite-adic-finite-condensed-realization",
+ "kind": "definition",
+ "title": "Explicit finite condensed realization and scalar comparisons",
+ "statement": "Let ell be prime and X a Noetherian finite-dimensional scheme with ell invertible. Define FiniteCondensedData to consist of a Core C, ScalarData B for C, ClosureData R for C and B [def-sf-adic-finite-realization-data], and the following finite_sections comparison: an internal finite-coefficient derived object K is bounded constructible if and only if its section reconstruction followed by extension along R.finiteIso has bounded stratified locally finite-free cohomology. Such finite data exist, without a structure map from X to an auxiliary finite field. For these data A, define F_E from the raw rational finite stage [def-weil-algebraically-closed-coefficients] to bounded constructible condensed E-modules [def-weil-pbc-condensed-e-module-category] by composing C.raw.family.Phi E with C.realization E, then the inverse section encoding and extension along R.finiteIso, and restricting the result to the bounded constructible full subcategory. This explicitly constructed functor is full and faithful. Its scalar isomorphism F_E T_cond(h) isomorphic to T_raw(h) F_L is obtained by transporting B.theta through the section-module scalar adjunction and R.coefficient_normalization, then cancelling the fully faithful encoding. Whiskering it with closure extension and the specified tensor associator defines the closure transition.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+ },
+ "stmt_deps": [
+  "def-sf-adic-finite-realization-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a prime p greater than ell, use ULift of ZMod p and its algebraic closure as the auxiliary finite-field datum. The integral identity and inverse-completion coherence give the raw rational family. Continuous rational realization is fully faithful by constructible rational Hom comparison. Bounded cone models and continuous filtration models identify its essential image with bounded stratified finite-free cohomology.",
+   "uses": [
+    "lem-fd-integral-identity-rational-equivalence",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-per-rational-module-realization-functor",
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-rational-continuous-filtration-models",
+    "lem-per-rational-realization-finite-cone-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Assemble the scalar data, constructibility comparisons into FiniteCondensedData, retaining only Core, ScalarData, ClosureData and finite_sections. No structure map from X to the auxiliary field is required.",
+   "uses": [
+    "lem-sf-adic-finite-scalar-coherence",
+    "lem-sf-adic-finite-constructibility-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Encode internal finite coefficient modules by the section-module equivalence followed by extension along finiteIso. Both are equivalences. Pull back the continuous finite functor along this equivalence; finite_sections and the essential-image comparison show it lands in the actual bounded constructible full subcategory. Restriction of the composite of fully faithful functors is fully faithful.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-sf-adic-finite-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  },
+  {
+   "text": "Derive sectionModuleComapIso. Transport the scalar adjunction along the two section equivalences. The generic coefficientExtensionSquare compares the two composite left adjoints of the literal normalized restriction square. Insert explicit functor associators, retaining the forward encoding equation, so that no large derived functor is unfolded to reassociate. Cancel the fully faithful finite encoding to obtain the finite scalar isomorphism. Whisker with closure extension and its specified tensor associator for the closure transition.",
+   "uses": [
+    "lem-pbc-scalar-coefficient-equivalence",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), with Lemma 6.8.2 and Remark 6.8.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-finite-realization-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-fd-completion-inverse-scalar-coherence",
+  "lem-fd-integral-identity-rational-equivalence",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-per-constructible-rational-hom-comparison",
+  "lem-per-rational-continuous-filtration-models",
+  "lem-per-rational-module-realization-functor",
+  "lem-per-rational-realization-finite-cone-models",
+  "lem-sf-adic-finite-constructibility-comparison",
+  "lem-sf-adic-finite-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assigned finite condensed stage comparison, proof step 2; BS 6.8.2 and 6.8.14(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of coefficient module categories transports derived scalar extension and its unit naturally.",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, Equiv.smul, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|fullyFaithfulWhiskeringLeft|leftAdjointCompIso",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar adjunction, full-subcategory, and localization APIs only; no project-specific normalized integral coefficient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCondensedStageComparison",
+  "group": "X3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned finite condensed stage comparison, proof step 2; BS 6.8.2 and 6.8.14(2). The assigned node has no imported blueprint ancestor.",
+   "via": [
+    "lem-sf-locally-finite-adic-condensed-stage-comparison",
+    "lem-sf-locally-finite-adic-functor-descent-hom",
+    "lem-sf-locally-finite-adic-functor-descent",
+    "lem-sf-locally-finite-adic-constructible-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicFiniteCondensedRealization",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicFiniteCondensedRealization.lean",
+  "declaration": "WeilConjectures.AdicFiniteRealization.finiteCondensedFunctor",
+  "statement": "def finiteCondensedFunctor (A : FiniteCondensedData l T)\n    (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :\n    GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E ⥤\n      ProEtale.PadicSubfieldConstructible T l E",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T055827-L-814092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261028T055827-L-814092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

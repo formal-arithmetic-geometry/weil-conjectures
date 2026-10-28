@@ -15,11 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Construct the ring map from the condensed closure coefficient to the native abelian coefficient as globalCoefficientIso followed by padicAlgClSheafToAdicConstantSheaf. Both factors are isomorphisms. Compose native scalar forgetting with restriction along this map, then derive the resulting additive equivalence. This is the actual H in the statement, defined without choosing data from an existence theorem.",
+   "text": "Use the explicitly constructed native condensed scalar equivalence and the unchanged comparison record, extracted into the data module. Both coefficient factors are actual isomorphisms; restriction and native scalar forgetting form the derived equivalence H.",
    "uses": [
-    "def-weil-pbc-condensed-qbar-coefficient-construction",
-    "lem-weil-pbc-condensed-qbar-function-coefficients",
-    "lem-sf-native-scalar-forgetting-equivalence"
+    "def-sf-locally-finite-adic-condensed-stage-comparison-data"
    ],
    "elementary": false,
    "source": {
@@ -28,14 +26,9 @@
    }
   },
   {
-   "text": "For every finite E use the normalized integral-identity rational equivalence, then continuous rational realization. Encode the continuous E-valued section modules as internal condensed E-modules by the canonical section-ring equivalence. The finite realization preserves bounded locally finite free cohomology and is full and faithful. The auxiliary finite-field datum in the identity comparison is arbitrary and puts no base-field condition on X: choose an auxiliary prime different from ell. For E contained in L use the inverse-completion scalar comparison and the balanced continuous tensor comparison. The internal/section scalar adjunction identifies this with the displayed condensed scalar comparison beta_h; all coefficient maps are pinned on continuous functions.",
+   "text": "Use the explicit finite condensed realization, its full and faithful instances, and its scalar comparison.",
    "uses": [
-    "lem-fd-integral-identity-rational-equivalence",
-    "lem-fd-completion-inverse-scalar-coherence",
-    "lem-per-continuous-rational-derived-realization",
-    "lem-per-rational-realization-scalar-coherence",
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-sfb-internal-section-scalar-adjunction"
+    "def-sf-locally-finite-adic-finite-condensed-realization"
    ],
    "elementary": false,
    "source": {
@@ -44,12 +37,11 @@
    }
   },
   {
-   "text": "The finite scalar inclusion followed by the map to the native coefficient evaluates a function by the specified embedding E to the closure. The rationalInclusion_normalized clause of D gives the same map. The integral_residues clause and finite quotient projections identify the completed integral maps. Thus D.integral and balanced derived tensor transitivity give a natural comparison on the integral source. Extend the comparison through raw scalar localization: it is natural on numerator arrows; the uniformizer maps are inverted by both functors, so naturality holds on their inverses and on fractions. Its component at the finite representative A is e_A.",
+   "text": "Obtain the normalized natural comparison on the integral source and its integral transition equation. Extend each natural iso uniquely through raw scalar localization. Every raw rational object has an underlying integral object, so the component formula transfers the transition equation directly.",
    "uses": [
-    "def-sf-locally-finite-adic-normalized-functor",
-    "lem-fd-integral-identity-rational-equivalence",
-    "lem-sfb-internal-section-scalar-adjunction",
-    "def-weil-pbc-continuous-coefficient-module-encoding"
+    "lem-sf-locally-finite-adic-condensed-integral-normalization",
+    "lem-real-raw-localization-natural-iso",
+    "lem-weil-integral-constructible-linear"
    ],
    "elementary": false,
    "source": {
@@ -58,13 +50,9 @@
    }
   },
   {
-   "text": "On integral objects, apply D.common_field and the internal/section tensor comparison to identify D of isoToStage with the inverse condensed scalar associator followed by beta_h. Both sides are natural in the rational source, so the equality extends across localization just as in the preceding step. A common-stage representative is isoToStage followed by the inclusion of its stage arrow followed by the inverse isoToStage. Functoriality and naturality of the finite comparison yield the representative equation. This uses no closure Hom descent or essential-image conclusion. Identity extensions, repeated fields and zero objects use the same unit and inverse formulas.",
+   "text": "Factor a common-stage representative as isoToStage, the stage inclusion of its arrow, and inverse isoToStage. Apply the functor, naturality of the extended comparison, and the transition equation. Cancel the invertible comparisons and expand the closure transition to obtain exactly the required tensor representative formula.",
    "uses": [
-    "def-sf-locally-finite-adic-normalized-functor",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-fd-completion-inverse-scalar-coherence",
-    "lem-per-rational-realization-scalar-coherence",
-    "lem-sfb-internal-section-scalar-adjunction"
+    "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -74,22 +62,17 @@
   }
  ],
  "proof_deps": [
-  "def-sf-locally-finite-adic-normalized-functor",
+  "def-sf-locally-finite-adic-condensed-stage-comparison-data",
+  "def-sf-locally-finite-adic-finite-condensed-realization",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-pbc-condensed-qbar-coefficient-construction",
-  "def-weil-pbc-continuous-coefficient-module-encoding",
-  "lem-fd-completion-inverse-scalar-coherence",
-  "lem-fd-integral-identity-rational-equivalence",
-  "lem-per-continuous-rational-derived-realization",
-  "lem-per-rational-realization-scalar-coherence",
-  "lem-sf-native-scalar-forgetting-equivalence",
-  "lem-sfb-internal-section-scalar-adjunction",
-  "lem-weil-pbc-condensed-qbar-function-coefficients"
+  "lem-real-raw-localization-natural-iso",
+  "lem-sf-locally-finite-adic-condensed-integral-normalization",
+  "lem-weil-integral-constructible-linear"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Finite realization and common-field tensor normalization inside Proposition 6.8.14(2), separated from the Hom colimit argument."
+  "place": "BS 6.8.14(2): explicit finite construction, integral normalization, localization of natural isomorphisms, and common-stage representative factorization."
  },
  "mathlib_searches": [
   {
@@ -169,9 +152,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K5",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261028T034828-L-3556496",
+  "landing": "20261028T055827-L-814092",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
