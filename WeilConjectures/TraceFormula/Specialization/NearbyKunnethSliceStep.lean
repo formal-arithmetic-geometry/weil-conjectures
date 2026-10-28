@@ -43,7 +43,7 @@ if the Künneth map of the geometric slice is an isomorphism, so is the restrict
 `Π_{A,B}` is a retract of the Künneth map of the geometric slice
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), given the two facts on traits:
 the invariance of nearby cycles under change of trait
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished) and the
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`) and the
 generic-slicing identification with invariants
 (`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, from the unfinished
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`); the projection
@@ -323,7 +323,7 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
       A B) := by
   obtain ⟨n, τ, hn, rM, rP, hrM, havgM, hrP, havgP⟩ :=
     exists_sum_autAction_pullbackExchange_sliceFst hM hP hb hA hB
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap (K := traitSliceField k') hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   refine isTensorRetract_of_average (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
@@ -383,7 +383,7 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
       (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
     isIso_kunnethMap_of_iso _ _ _ ((leftDerivedUpperStarId _ X).app A)
       ((leftDerivedUpperStarId _ Y).app B) h
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap (K := traitSliceField k') hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   have hT :=
     isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB

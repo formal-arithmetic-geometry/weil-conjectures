@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCompRetraction
@@ -30,7 +31,9 @@ along `𝔸¹_S ⟶ S`: the slice of `M_T` along the section `T ⟶ 𝔸¹_T` gi
 [Th. finitude], §§3.4, 3.7) into the two facts about traits used in the blueprint:
 
 * the pullback exchange of `ψ` is invertible: nearby cycles do not change under the change of
-  trait `T ⟶ S` (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished);
+  trait `T ⟶ S` (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, the case
+  `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of the invariance under change of strictly henselian trait
+  `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`);
 * the pullback exchange of `θ` is the inclusion of the invariants of the pro-`p` kernel
   `P' = Gal(Ω_K / Frac K⟦t⟧ · Ω)` of the map of inertia groups, which acts on the nearby cycles of
   `M''` through a finite quotient
@@ -56,35 +59,6 @@ open Scheme
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] {X : Scheme.{u}}
   {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g)
-
-section TraitChange
-
-variable [IsSepClosed k'] [Fact (ringChar k').Prime] {ℓ : ℕ} [Fact ℓ.Prime]
-  [Fact (ringChar k' ≠ ℓ)]
-
-/-- **Invariance of nearby cycles under change of trait** (SGA 4½, [Th. finitude], §3.7; blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", first fact): for a model `M` of finite
-type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of trait
-`Spec K⟦t⟧ ⟶ S` (`K = k'(x)^alg`), the pullback exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M_T} A` to the
-nearby cycles of the base change `M_T = M ×_S Spec K⟦t⟧` (`NearbyCyclesModel.baseChange`) is an
-isomorphism if the restriction of `A` to the generic fibre is bounded constructible.
-
-Unfinished: the identification of the stalks of `Rj_*` at the points of the special fibre of
-`M_T` with those of `M` requires base change of `Rj_*` along `𝒳 ×_S Spec K⟦t⟧ ⟶ 𝒳`, which is not
-weakly étale, and the comparison of the geometric generic points of the two traits; neither is
-formalised for pro-étale `ℚ̄_ℓ`-sheaves. Deligne's proof of this invariance runs the dévissage of
-his finiteness theorem (SGA 4½, [Th. finitude], Thm. 3.2), whose lisse generic case is still
-`sorry` (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`). -/
-theorem isIso_pullbackExchange_baseChangeHom_traitMap
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)
-      (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :
-    IsIso (((baseChangeHom hM q (Category.comp_id q) (traitMap k' (traitSliceField k'))
-      (Category.comp_id _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A) :=
-  sorry
-
-end TraitChange
 
 variable (x : K) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
@@ -206,7 +180,8 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
   have hD := exists_subgroup_pullbackExchange_sliceTraitChangeHom (ℓ := ℓ) hM hb
     (C := L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) hA'
   obtain ⟨V, hV, htriv, r, hr, havg⟩ := hD
-  have hs := isIso_pullbackExchange_baseChangeHom_traitMap (ℓ := ℓ) hM (A := A) hA
+  have hs := isIso_pullbackExchange_baseChangeHom_traitMap (K := traitSliceField k') (ℓ := ℓ) hM
+    (A := A) hA
   refine ⟨V, hV, fun σ hσ ↦ eq_id_of_naturality_of_iso _
     (fun g ↦ Hom.autAction_naturality _ _ g)
     ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
