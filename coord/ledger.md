@@ -20459,3 +20459,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:06 L: returned deliver/ND/lem-pur-compact-support-strict-scalar-composition-prelude (reviewer RETURN: I read the item, unit sk-thm-sf-compatibility, the parent and every cited statement, along with the Lean the steps descr)
 - 00:10 L: returned deliver/NA/lem-pur-scalar-reduction-transpose-normalization (reviewer RETURN: L: independent stage-2 immutable head 1e02355b5635: H6/H3: scalarReductionTransposeNormalization is a tautology — arbitr)
 - 00:17 L: merged deliver/ND/lem-pur-compact-support-strict-scalar-composition-prelude (reviewer FIX; after a return; new nodes: 0)
+- 00:19 L: returned deliver/K8/Sheaf.Paper.NativeWeilTensorRingedKFlatFlat (reviewer RETURN: (the global build of 375085fafa, still running) your landing 20261027T234046-L-4177423 fails to compile in Sheaf.Paper.N)
