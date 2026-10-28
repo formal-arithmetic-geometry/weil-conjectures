@@ -20849,3 +20849,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/K6/Sheaf.Paper.LocallyFiniteAdicFunctorDescentImage (stage 3; reviewer PASS; first push; landing 20261028T034829-L-3556892 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/K8/Sheaf.Paper.PodReindexingHomCoefficientDescent (stage 3; reviewer PASS; first push; landing 20261028T034831-L-3557299 (interface); batch 20261028T034643; modules 4; new nodes 3)
 - 03:48 L: merged deliver/K9/Sheaf.Paper.LocallyFiniteAdicCoefficientPresentations (stage 3; reviewer PASS; first push; landing 20261028T034832-L-3557662 (interface); batch 20261028T034643; modules 1; new nodes 0)
+- 03:48 L: merged deliver/M1/Sheaf.Paper.AdicAmbientHomEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261028T034833-L-3557799 (proof); batch 20261028T034643; modules 1; new nodes 0)
