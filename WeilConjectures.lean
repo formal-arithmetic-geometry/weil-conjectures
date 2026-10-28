@@ -7792,6 +7792,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualiz
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 public import WeilConjectures.CategoryTheory.Adjunction.PushHomComp
+public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
@@ -8110,6 +8111,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoy
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationAdjoint
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
@@ -8293,6 +8295,7 @@ public import WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
 public import WeilConjectures.CategoryTheory.FilteredStableSubquotient
 public import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
+public import WeilConjectures.CategoryTheory.FilteredTwoColimitAdjunction
 public import WeilConjectures.CategoryTheory.FilteredTwoColimitCharacterization
 public import WeilConjectures.CategoryTheory.FilteredTwoColimitIhom
 public import WeilConjectures.CategoryTheory.FilteredTwoColimitModel
@@ -13192,6 +13195,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Subfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldPushCocycle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldUpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
@@ -13261,6 +13265,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
