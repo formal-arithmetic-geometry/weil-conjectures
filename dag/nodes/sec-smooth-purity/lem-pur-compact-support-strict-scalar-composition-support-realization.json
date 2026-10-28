@@ -23,26 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Expand the retained L/F arrow. The selection square is the localized identity square and cancels the F support-model pair. Arithmetic selection acts termwise on the ordinary proper/open mates, so it commutes with the L/F comparison; naturality of that comparison moves the F/E balancing in front. The remaining isomorphisms agree: the reduction balancings compose by uniqueness in reductionBalancing_existsUnique (ordinary balancings compose by ((x⊗b)⊗d)↦x⊗bd), the image selections for e and h compose through compositionRetained, and the L support model is natural in compositionCompleted.",
+   "text": "Expand the L/F arrow. Apply the categorical support_pasting identity: naturality of the tensor/selection comparison cancels the F support-model pair. Naturality of comparison moves E/F reduction balancing across the L/F scalar mate. Use comparison_selection to move e-selection through that mate.",
    "uses": [
-    "lem-pur-compact-support-strict-scalar-composition-prelude",
-    "def-pur-strict-scalar-reduction-balancing"
+    "lem-pur-strict-scalar-comparison-selection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Returned comparison Step 11, proof Steps 3--6."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Substitute reductionBalancing_composition before applying the L image. It identifies the direct associator/balancing word with E/F balancing, tensor/selection, retained F/L balancing, retained-level reassociation, and reduction of the completed associator.",
+   "uses": [
+    "lem-pur-scalar-reduction-balancing-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply reindexImage_composition and naturality of inverse image-selection. Naturality of the L support-model inverse and retained-level reassociation moves the completed associator to the final support map. The private categorical support_pasting proof performs the isomorphism cancellations and functoriality rewrites explicitly.",
+   "uses": [
+    "lem-pur-strict-image-reindex-composition",
+    "def-pur-native-constant-support-model"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-compact-support-strict-scalar-composition-prelude",
-  "def-pur-strict-scalar-reduction-balancing"
+  "lem-pur-strict-scalar-comparison-selection",
+  "lem-pur-scalar-reduction-balancing-composition",
+  "lem-pur-strict-image-reindex-composition",
+  "def-pur-native-constant-support-model"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Returned comparison Step 11, support realization portion of Steps 3--6."
+  "place": "Returned comparison Step 11, Steps 3--6, decomposed into coefficient balancing, scalar-selection and nested-image-selection coherence with a complete categorical pasting calculation."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -89,13 +101,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-c5fcb",
-  "group": "Q4",
-  "result": "fix",
-  "landing": "20261027T234156-L-22538",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261028T020708-L-2538385",
   "kind": "interface",
-  "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
