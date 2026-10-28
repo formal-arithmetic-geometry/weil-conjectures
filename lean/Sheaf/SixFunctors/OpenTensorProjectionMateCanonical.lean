@@ -64,6 +64,17 @@ def canonicalProjectionMate
     · exact adj.unit.naturality f.1
     · simp
 
+private theorem canonicalProjectionMate_homEquiv
+    {E : Type u₁} {D : Type u₂} [Category.{v₁} E] [Category.{v₂} D]
+    (S : E × E ⥤ E) (T : D × D ⥤ D)
+    (F : D ⥤ E) (G : E ⥤ D) (adj : F ⊣ G)
+    (μ : S ⋙ G ≅ (G.prod G) ⋙ T)
+    (X : D × E) :
+    adj.homEquiv _ _ ((canonicalProjectionMate S T F G adj μ).app X) =
+      T.map (Prod.mkHom (adj.unit.app X.1) (𝟙 _)) ≫
+        μ.inv.app (F.obj X.1, X.2) := by
+  exact Equiv.apply_symm_apply _ _
+
 
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
 This is the chain calculation with the mate fixed by the adjunction; it omits
