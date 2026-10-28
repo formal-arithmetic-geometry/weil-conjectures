@@ -9,7 +9,6 @@ public import Sheaf.Paper.RationalSmoothPurityCanonical
 public import Sheaf.Paper.RationalScalarComparisonData
 public import Sheaf.Paper.TwistedPullbackSquareScalars
 public import Sheaf.Paper.RationalPurityExchangeEndpoints
-public import Sheaf.Paper.RationalPurityExchangeEndpointData
 import Sheaf.Paper.DerivedPullbackTensorIso
 
 /-! # Scalar compatibility of the actual smooth purity exchange
