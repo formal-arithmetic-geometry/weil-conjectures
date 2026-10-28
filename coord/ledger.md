@@ -20929,3 +20929,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/Y5/Sheaf.Paper.IntegralHomRepresentativeSquare (stage 3; reviewer PASS; first push; landing 20261028T035020-L-3581000 (interface); batch 20261028T034643; modules 2; new nodes 1)
 - 03:50 L: merged deliver/Y6/Sheaf.Paper.IntegralReductionTwoTermResolution (stage 3; reviewer PASS; first push; landing 20261028T035021-L-3581207 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:50 L: merged deliver/Y8/Sheaf.Paper.CanonicalSectionProjectionCoreCoherence (stage 3; reviewer PASS; first push; landing 20261028T035022-L-3581392 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:50 L: merged deliver/Y8/Sheaf.Paper.IntegralTensorRestrictionTransition (stage 3; reviewer PASS; first push; landing 20261028T035024-L-3581606 (proof); batch 20261028T034643; modules 1; new nodes 0)

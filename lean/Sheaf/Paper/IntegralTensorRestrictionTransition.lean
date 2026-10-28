@@ -61,6 +61,8 @@ normalization of sfDerivedReductionTransition identifies these maps with the sta
 transitions. Localize the equality and cancel the K-flat resolution and comparison
 isomorphisms. This works in every degree and at n = 0 without boundedness or
 constructibility assumptions.
+STATEMENT-DISPUTED: `ReductionPresentation` carries no compatibility field between
+successive levels, so the displayed equality is not determined by the hypotheses.
 (blueprint: lem-sf-integral-tensor-restriction-transition). -/
 theorem restrictionTensor_transition
     (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))
