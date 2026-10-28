@@ -20861,3 +20861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/N2/Sheaf.SixFunctors.CoefQbarVerdierFiniteCoherence (stage 3; reviewer PASS; first push; landing 20261028T034856-L-3560188 (interface); batch 20261028T034643; modules 3; new nodes 2)
 - 03:48 L: merged deliver/N3/Sheaf.Paper.TowerScalarRootAbelianTransposeCore (stage 3; reviewer PASS; first push; landing 20261028T034857-L-3560602 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:48 L: merged deliver/N3/Sheaf.TraceFormula.ScalarModelRoosZeroLiftStrictExistence (stage 3; reviewer PASS; first push; landing 20261028T034858-L-3561576 (interface); batch 20261028T034643; modules 2; new nodes 1)
+- 03:48 L: merged deliver/P2/Sheaf.Paper.IsomorphismScalarFiniteComparisonExtension (stage 3; reviewer PASS; first push; landing 20261028T034859-L-3562900 (interface); batch 20261028T034643; modules 1; new nodes 0)
