@@ -12967,6 +12967,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleProject
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CechComparisonUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologyLimit
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
