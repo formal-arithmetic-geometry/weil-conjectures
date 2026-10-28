@@ -7,6 +7,7 @@ module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierData
 import Sheaf.SixFunctors.CoefQbarFiniteExceptionalScalar
+import Sheaf.SixFunctors.CoefQbarFiniteExceptionalNormalizedCore
 
 /-! # Finite exceptional comparisons for specified Verdier dualities
 
@@ -83,36 +84,28 @@ coefficient system and the specified finite-origin dualities.
 Source: thm-coef-qbar-verdier, retained proof step 9
 (blueprint: lem-coef-qbar-finite-exceptional-formula).
 
-Proof: apply rationalExceptional_identifications to the given finite dualizing
-presentations, Hom identifications and normalized Extension data of BX and BY.
-Use the adjunction transpose of the evaluation-defined integral exceptional
-comparison to choose its component at each field. The evaluation and counit
-normalizations fix that transpose, so the comparisons obtained for two different
-scalar extensions have the same component at their common endpoint. The scalar
-identity in rationalExceptional_identifications therefore holds for this one
-family. Rationalize the integral comparisons and retain their transported
-adjunctions to obtain finite. Whisker the comparison at E by inclusion, then by
-BX.comparison, inverse BY.comparison and the inverse pullbackInclusion. This is
-comparison E, and its component formula is normalized. To check scalar, expand
-this composite. The finite exceptional scalar identity replaces the first two
-factors. The BX and BY duality scalar squares replace the duality factors, and
-the published pullback scalar square replaces its pullback factor. Naturality
-moves these comparisons past each other; inverse pairs cancel. The result is
-exactly inclusionTransition on X followed by comparison E followed by the
-formula functor applied to inverse inclusionTransition on Y. Every equation
-uses the actual units and counits; repeated fields use their identity scalar
-comparisons and the argument also applies to zero objects. No gluing of functors
-on the pair category is part of this statement. -/
+Proof: choose a finite core whose dual-formula adjunction at every coefficient field
+has the existing trace normalization. Such a core is obtained by comparing the system
+adjunction with the trace-normalized dual-formula adjunction using right-adjoint
+uniqueness, then conjugating an old core's common-stage comparison. The normalization
+identity is preserved by inverse cancellation. Apply finite_exceptional_formula_scalar
+to this core and its trace normalizations. Its finite equation follows by transposing
+through the target adjunction and using the coefficient-system counit square together
+with the rational dual-formula scalar-counit identity. The BX, BY and pullback component
+squares transport that equation through the inclusions. Package these comparisons,
+their component formulas and their scalar squares in FiniteExceptionalFormula. All
+identifications are pointwise at finite stages, including repeated fields and zero
+objects; no gluing of functors on the pair category is part of this statement. -/
 theorem finite_exceptional_formula (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)
     (c : Compactification f)
     (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f)) :
     Nonempty (FiniteExceptionalFormula D l hl Ω X f BX BY c S) := by
-  obtain ⟨t⟩ := finite_exceptional_formula_core D l hl Ω X f BX BY c S
+  obtain ⟨t, ht⟩ := finite_exceptional_normalized_core D l hl Ω X f BX BY c S
   let z : FiniteExceptionalFormula D l hl Ω X f BX BY c S :=
     { finite := t.finite
       comparison := t.comparison
       normalized := t.normalized
-      scalar := finite_exceptional_formula_scalar D l hl Ω X f BX BY c S t }
+      scalar := finite_exceptional_formula_scalar D l hl Ω X f BX BY c S t ht }
   exact ⟨z⟩
 
 end WeilConjectures.CoefQbarVerdier

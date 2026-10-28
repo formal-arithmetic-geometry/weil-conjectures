@@ -2,10 +2,12 @@
  "id": "lem-coef-qbar-finite-exceptional-formula-scalar",
  "kind": "lemma",
  "title": "Scalar square for finite exceptional comparison data",
- "statement": "theorem finite_exceptional_formula_scalar\n    (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)\n    (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (t : FiniteExceptionalFormulaCore D l hl Ω X f BX BY c S) :\n    ∀ (E L : Index l Ω) (h : E ≤ L) (M : Stage l Ω Y E),\n      (inclusion L).map ((finiteRightScalar D l hl Ω X f c S E L h).hom.app M) ≫\n        (t.comparison L).hom.app ((transition l Ω Y E L h).obj M) =\n      (inclusionTransition l Ω X E L h).hom.app\n          ((finiteRight D l hl Ω X f c S E).obj M) ≫\n        (t.comparison E).hom.app M ≫\n        (specifiedExceptionalFormulaCore D l hl Ω X f BX BY).map\n          ((inclusionTransition l Ω Y E L h).inv.app M)",
+ "statement": "theorem finite_exceptional_formula_scalar\n    (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)\n    (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (t : FiniteExceptionalFormulaCore D l hl Ω X f BX BY c S)\n    (ht : ∀ E : Index l Ω,\n      RationalOperations.DualFormulaAdjunctionNormalized D l hl X c (fieldStage l Ω E)\n        (BX.finite.omega E) (BY.finite.omega E) (BX.finite.datum E) (BY.finite.datum E)\n        (t.finite E).adjunction) :\n    ∀ (E L : Index l Ω) (h : E ≤ L) (M : Stage l Ω Y E),\n      (inclusion L).map ((finiteRightScalar D l hl Ω X f c S E L h).hom.app M) ≫\n        (t.comparison L).hom.app ((transition l Ω Y E L h).obj M) =\n      (inclusionTransition l Ω X E L h).hom.app\n          ((finiteRight D l hl Ω X f c S E).obj M) ≫\n        (t.comparison E).hom.app M ≫\n        (specifiedExceptionalFormulaCore D l hl Ω X f BX BY).map\n          ((inclusionTransition l Ω Y E L h).inv.app M)",
  "stmt_deps": [
   "def-sf-common-stage-verdier-data",
-  "lem-sf-constructible-exceptional-adjunction-coefficients"
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-rational-dual-formula-adjunction",
+  "lem-coef-qbar-finite-exceptional-formula-core"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
@@ -13,25 +15,33 @@
  },
  "proof": [
   {
-   "text": "Apply the rational exceptional scalar mate identity to the finite duality extensions; substitute the normalized BX and BY squares and the pullback scalar square, then use naturality and inverse cancellation.",
+   "text": "For the supplied trace-normalized adjunctions, apply rationalDualFormulaScalarCounit. Transport the system scalar counit identity along rationalLeft. Transpose under the target normalized adjunction; the source and target comparison counit equations, together with naturality of the compact-support scalar comparison, show that scalar extension of the finite exceptional comparison followed by dualScalar equals finiteRightScalar followed by the target comparison.",
    "uses": [
-    "lem-sf-rational-exceptional-identifications",
-    "lem-pur-integral-operations-scalar-extension",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-sf-rational-dual-formula-scalar-counit",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "def-sf-rational-operation-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand t.normalized at E and L. Map the finite identity through inclusion_L and apply dual_formula_inclusion_scalar to the remaining duality-pullback-duality components. Naturality of inclusionTransition_X at the finite comparison supplies the final square.",
+   "uses": [
+    "lem-coef-qbar-dual-formula-inclusion-scalar"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-rational-exceptional-identifications",
-  "lem-pur-integral-operations-scalar-extension",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-coef-qbar-dual-formula-inclusion-scalar",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-rational-dual-formula-scalar-counit",
+  "def-sf-rational-operation-comparison-data"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "Q1",
+  "by": "agent",
+  "group": "U7",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-  "place": "Retained proof step 9 split into strictly smaller comparison and scalar obligations"
+  "place": "Retained thm-coef-qbar-verdier proof step 9: trace-normalized finite comparisons and substitution of finite-origin scalar squares"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -59,7 +69,7 @@
   "module": "Sheaf.SixFunctors.CoefQbarFiniteExceptionalScalar",
   "file": "lean/Sheaf/SixFunctors/CoefQbarFiniteExceptionalScalar.lean",
   "declaration": "WeilConjectures.CoefQbarVerdier.finite_exceptional_formula_scalar",
-  "statement": "theorem finite_exceptional_formula_scalar\n    (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)\n    (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (t : FiniteExceptionalFormulaCore D l hl Ω X f BX BY c S) :\n    ∀ (E L : Index l Ω) (h : E ≤ L) (M : Stage l Ω Y E),\n      (inclusion L).map ((finiteRightScalar D l hl Ω X f c S E L h).hom.app M) ≫\n        (t.comparison L).hom.app ((transition l Ω Y E L h).obj M) =\n      (inclusionTransition l Ω X E L h).hom.app\n          ((finiteRight D l hl Ω X f c S E).obj M) ≫\n        (t.comparison E).hom.app M ≫\n        (specifiedExceptionalFormulaCore D l hl Ω X f BX BY).map\n          ((inclusionTransition l Ω Y E L h).inv.app M)",
+  "statement": "theorem finite_exceptional_formula_scalar\n    (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)\n    (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (t : FiniteExceptionalFormulaCore D l hl Ω X f BX BY c S)\n    (ht : ∀ E : Index l Ω,\n      RationalOperations.DualFormulaAdjunctionNormalized D l hl X c (fieldStage l Ω E)\n        (BX.finite.omega E) (BY.finite.omega E) (BX.finite.datum E) (BY.finite.datum E)\n        (t.finite E).adjunction) :\n    ∀ (E L : Index l Ω) (h : E ≤ L) (M : Stage l Ω Y E),\n      (inclusion L).map ((finiteRightScalar D l hl Ω X f c S E L h).hom.app M) ≫\n        (t.comparison L).hom.app ((transition l Ω Y E L h).obj M) =\n      (inclusionTransition l Ω X E L h).hom.app\n          ((finiteRight D l hl Ω X f c S E).obj M) ≫\n        (t.comparison E).hom.app M ≫\n        (specifiedExceptionalFormulaCore D l hl Ω X f BX BY).map\n          ((inclusionTransition l Ω Y E L h).inv.app M)",
   "branch": "sheaf-dag",
   "by": "Q1",
   "date": "2026-10-28"
@@ -77,17 +87,48 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
-  "result": "pass",
-  "landing": "20261028T020754-L-2546946",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.CoefQbarVerdier.finite_exceptional_formula_scalar"
+  "reviewer": "C-745d4",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261028T072455-L-1952792",
+  "kind": "interface",
+  "note": "independent cc review: finite_exceptional_formula_scalar (+ht) against FiniteExceptionalFormulaCore/ExceptionalIdentification fields (old statement false: per-field rescaling); dual_formula_inclusion_scalar against DualityProperties scalar clause + commonStagePullbackComparison; nodes against Lean statements/proofs; importer chain incl. CoefQbarVerdierExceptional compiled (24.1 s OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "U7 stage 2",
+  "old_statement": "theorem finite_exceptional_formula_scalar\n    (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)\n    (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (t : FiniteExceptionalFormulaCore D l hl Ω X f BX BY c S) :\n    ∀ (E L : Index l Ω) (h : E ≤ L) (M : Stage l Ω Y E),\n      (inclusion L).map ((finiteRightScalar D l hl Ω X f c S E L h).hom.app M) ≫\n        (t.comparison L).hom.app ((transition l Ω Y E L h).obj M) =\n      (inclusionTransition l Ω X E L h).hom.app\n          ((finiteRight D l hl Ω X f c S E).obj M) ≫\n        (t.comparison E).hom.app M ≫\n        (specifiedExceptionalFormulaCore D l hl Ω X f BX BY).map\n          ((inclusionTransition l Ω Y E L h).inv.app M)",
+  "what": "Repair the previously disputed arbitrary-core statement by requiring trace normalization of each dual-formula adjunction. Independent transported adjunctions do not force scalar compatibility. The caller constructs this normalization from the one-field adjunction theorem, so no hypothesis is added to the parent or any target.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+   "place": "Retained thm-coef-qbar-verdier proof step 9: trace-normalized finite comparisons and substitution of finite-origin scalar squares"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-qbar-finite-exceptional-formula",
+    "holds": true,
+    "note": "The finite exceptional formula statement stays unchanged. Its proof now obtains a trace-normalized core from finite_exceptional_normalized_core and supplies the normalization to the repaired scalar theorem."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.CoefQbarVerdier.finite_exceptional_formula_scalar"
+  "old_stmt_deps": [
+   "def-sf-common-stage-verdier-data",
+   "lem-sf-constructible-exceptional-adjunction-coefficients"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the rational exceptional scalar mate identity to the finite duality extensions; substitute the normalized BX and BY squares and the pullback scalar square, then use naturality and inverse cancellation.",
+    "uses": [
+     "lem-sf-rational-exceptional-identifications",
+     "lem-pur-integral-operations-scalar-extension",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sf-rational-exceptional-identifications",
+   "lem-pur-integral-operations-scalar-extension",
+   "def-weil-derived-pullback-tensor-hom"
   ]
  }
 }
