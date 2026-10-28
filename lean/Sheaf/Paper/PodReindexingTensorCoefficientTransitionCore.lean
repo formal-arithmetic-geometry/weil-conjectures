@@ -6,6 +6,9 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.Paper.PodCompletionReindexCoefficientTransition
+import Sheaf.Paper.PodReindexingTensorCoefficientTransitionPure
+import Sheaf.Paper.PodReindexingTensorCoefficientTransitionReduction
+import Sheaf.Paper.PodReindexingTensorCoefficientTransitionLimit
 
 /-! # Core scalar/reindexing transition data
 
@@ -100,10 +103,12 @@ def PodReindexCoefficientTransition.Core
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
 (blueprint: lem-pod-reindexing-tensor-coefficient-transition-core).
 
-Proof: assemble the finite-free scalar comparison on the actual quotient systems.
-Balanced tensor associativity fixes the pure-tensor map and its inverse; descending
-the same strict-system map through the normalized Roos realization gives the
-reduction and limit squares by their counit formulas. -/
+Proof: construct the ordinary scalar/reindexing isomorphism as the mate of the
+restriction-of-scalars square, with its pure section formula, and choose normalized
+primitive quotient scalar models. Apply the reduction-square component to this
+transition. The limit square follows from reduction by the reduction/limit
+adjunction and the counit laws of the supplied reindexing data. Package these
+three clauses into Core. -/
 theorem podReindexingTensorCoefficientTransition_core
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -118,5 +123,11 @@ theorem podReindexingTensorCoefficientTransition_core
     (hT' : PodCompletedTensorReindex.Laws l L g D' T') :
     ∃ S : PodReindexCoefficientTransition l E L ι g D D',
       PodReindexCoefficientTransition.Core l E g L ι D D' S := by
-  sorry
+  obtain ⟨S, hpure⟩ := podReindexingTensorCoefficientTransition_pure
+    l E g D hD T hT L ι D' hD' T' hT'
+  have hred := podReindexingTensorCoefficientTransition_reduction
+    l E g D hD T hT L ι D' hD' T' hT' S hpure
+  have hlim := podReindexingTensorCoefficientTransition_limit
+    l E g D hD T hT L ι D' hD' T' hT' S hpure hred
+  exact ⟨S, hpure, hred, hlim⟩
 end WeilConjectures

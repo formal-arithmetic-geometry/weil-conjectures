@@ -1,0 +1,117 @@
+{
+ "id": "lem-pod-reindexing-tensor-coefficient-transition-core-limit",
+ "kind": "lemma",
+ "title": "Limit square component of normalized coefficient transition",
+ "status": "proved",
+ "statement": "Let l be prime, E and L finite extensions of Q_l, ι : E \\to L a Q_l-algebra map, and g : X \\to Y an isomorphism of schemes on which l is invertible in every residue field. Fix completion reindexing data D,D′ and completed tensor reindexing data T,T′ satisfying their laws. For any transition data S satisfying the pure section formula and the reduction square at every ambient derived module, its scalar limit maps commute with D.limit, D′.limit, and the system scalar/pullback isomorphism on every ambient derived coefficient system N. The exact equality is the attached Lean statement. The notions are those of [def-pod-completion-reindex-models], [def-pod-completion-reindex-coefficient-transition] and [def-trf-integral-comparison-realization-models].",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-scalar-completion-tensor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "The scalar reduction and scalar limit maps are mates: expand their common completion-realization arrow and use naturality of the reduction/limit counit. Apply the target L reduction/limit adjunction to the desired equation. Use the mate identity at X, naturality of scalar reduction, and D.Counit to rewrite its left side. Naturality of the system scalar/pullback isomorphism and the assumed reduction square transport it to Y. Apply the mate identity at Y, naturality of D′.reduction.inv, and D′.Counit to obtain the right side. Injectivity of the adjunction hom equivalence finishes.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-pod-completion-reindex-coefficient-transition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coefficient-transition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; limit component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites commutes with extension of scalars with the balanced pure tensor formula",
+   "results": "Generic change-of-rings and pushforward comparisons, no complete normalized derived square.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with an equivalence of ringed sites and respects pure tensors",
+   "results": "Generic module extension-of-scalars declarations, no complete normalized derived square.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "Generic adjunction and equivalence APIs; used the project adjoint-square lemma.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|pushforwardCongr|sheafPushforwardContinuous|restrictScalars.*[Cc]omp",
+   "results": "ModuleCat.extendScalarsComp and homEquiv_extendScalarsComp in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; SheafOfModules.pushforwardCongr and pushforwardComp with section formulas in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean.",
+   "date": "2026-10-28",
+   "verdict": "These supply ordinary adjunction and transport APIs, but no normalized scalar reduction/reindexing square."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionCore",
+  "date": "2026-10-28",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-core",
+   "place": "limit clause"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionLimit",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionLimit.lean",
+  "declaration": "WeilConjectures.podReindexingTensorCoefficientTransition_limit",
+  "declarations": [
+   "WeilConjectures.podReindexingTensorCoefficientTransition_limit"
+  ],
+  "statement": "theorem podReindexingTensorCoefficientTransition_limit\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (_hT' : PodCompletedTensorReindex.Laws l L g D' T')\n    (S : PodReindexCoefficientTransition l E L ι g D D')\n    (_hpure : ∀ (M : scalarReductionSource l E Y) (U : X.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj U)))\n      (a : (completedIntegralCoefficientSheafUnrestricted l L Y).obj.obj\n        (op ((proEtaleIsoPostcompose g).obj U))),\n      (S.ordinary.hom.app M).val.app (op U)\n          (integralOrdinaryTensorSection l E L ι X\n            ((isoReductionIntegralInverse l E g).obj M) (op U)\n            ((isoReductionCompletedMap l L g).hom.hom.app (op U) a) x) =\n        integralOrdinaryTensorSection l E L ι Y M\n          (op ((proEtaleIsoPostcompose g).obj U)) a x)\n    (hred : ∀ K : DerivedCategory (scalarReductionSource l E Y),\n      (podScalarReduction l E L ι X D'.targetRoos S.target).app\n          ((podOrdinaryReindex l E g).obj K) ≫\n        (integralComparisonDerivedSequenceScalar l E L ι X).map\n          (D.reduction.inv.app K) ≫\n        (integralComparisonSystemScalarPullback l E L ι g).hom.app\n          ((podReindexCalculus l E Y).reduction.obj K) =\n      (podReindexCalculus l L X).reduction.map\n          ((S.derived l E L ι g D D').hom.app K) ≫\n        D'.reduction.inv.app\n          ((integralOrdinaryDerivedScalar l E L ι Y).obj K) ≫\n        (integralComparisonDerivedSequencePullback l L g).map\n          ((podScalarReduction l E L ι Y D'.sourceRoos S.source).app K)) :\n    ∀ N : coefficientSequenceDerived l E Y,\n      (integralOrdinaryDerivedScalar l E L ι X).map (D.limit.hom.app N) ≫\n        podScalarLimit l E L ι X D'.targetRoos S.target\n          ((integralComparisonDerivedSequencePullback l E g).obj N) ≫\n        (coefficientSequenceLimit l L X).map\n          ((integralComparisonSystemScalarPullback l E L ι g).hom.app N) =\n      (S.derived l E L ι g D D').hom.app\n          ((coefficientSequenceLimit l E Y).obj N) ≫\n        (podOrdinaryReindex l L g).map\n          (podScalarLimit l E L ι Y D'.sourceRoos S.source N) ≫\n        D'.limit.hom.app\n          ((integralComparisonDerivedSequenceScalar l E L ι Y).obj N)",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-28"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded scalar compatibility proof; limit component"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261028T034713-L-3535556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261028T034713-L-3535556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

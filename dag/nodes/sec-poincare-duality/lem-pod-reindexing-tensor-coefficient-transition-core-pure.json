@@ -1,0 +1,123 @@
+{
+ "id": "lem-pod-reindexing-tensor-coefficient-transition-core-pure",
+ "kind": "lemma",
+ "title": "Pure section component of normalized coefficient transition",
+ "status": "proved",
+ "statement": "Let l be prime, E and L finite extensions of Q_l, ι : E \\to L a Q_l-algebra map, and g : X \\to Y an isomorphism of schemes on which l is invertible in every residue field. Fix completion reindexing data D,D′ and completed tensor reindexing data T,T′ satisfying their laws. There exists transition data S, with ordinary scalar/reindexing isomorphism, normalized scalar models at X and Y and preservation of intrinsic constructibility. For every module M on Y, object U of X.ProEt, section x of M on g(U), and completed L coefficient a on g(U), the ordinary comparison sends c_L(a) tensor x on U to a tensor x on g(U). The notions are those of [def-pod-completion-reindex-models], [def-pod-completion-reindex-coefficient-transition] and [def-trf-integral-comparison-realization-models].",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-scalar-completion-tensor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "At each quotient, naturality of the constant sheaf scalar map gives the coefficient square. Equality after all quotient projections gives the completed square. Apply restrictionSquare and adjointSquare from the isomorphism reduction module to the scalar adjunctions; both reindexing functors are equivalences. Evaluating the mate identity on sections and using the unit tensor formula gives the tensor-one identity. Linearity and the inverse coefficient map give the arbitrary coefficient formula. Choose the normalized primitive quotient scalar models. Transfer completed scalar constructibility along scalarCompletionIso on a derived complete input.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "lem-weil-scalar-extension-composition",
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "lem-weil-scalar-extension-composition",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; pure component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites commutes with extension of scalars with the balanced pure tensor formula",
+   "results": "Generic change-of-rings and pushforward comparisons, no complete normalized derived square.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with an equivalence of ringed sites and respects pure tensors",
+   "results": "Generic module extension-of-scalars declarations, no complete normalized derived square.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "Generic adjunction and equivalence APIs; used the project adjoint-square lemma.",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the normalized derived transition; the project declarations are used."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|pushforwardCongr|sheafPushforwardContinuous|restrictScalars.*[Cc]omp",
+   "results": "ModuleCat.extendScalarsComp and homEquiv_extendScalarsComp in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; SheafOfModules.pushforwardCongr and pushforwardComp with section formulas in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean.",
+   "date": "2026-10-28",
+   "verdict": "These supply ordinary adjunction and transport APIs, but no normalized scalar reduction/reindexing square."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionCore",
+  "date": "2026-10-28",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-coefficient-transition-core",
+   "place": "pure clause"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorCoefficientTransitionPure",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCoefficientTransitionPure.lean",
+  "declaration": "WeilConjectures.podReindexingTensorCoefficientTransition_pure",
+  "declarations": [
+   "WeilConjectures.podReindexingTensorCoefficientTransition_pure"
+  ],
+  "statement": "theorem podReindexingTensorCoefficientTransition_pure\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (_hT : PodCompletedTensorReindex.Laws l E g D T)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (D' : PodCompletionReindex l L g) (_hD' : PodCompletionReindex.Laws l L g D')\n    (T' : PodCompletedTensorReindex l L g D')\n    (_hT' : PodCompletedTensorReindex.Laws l L g D' T') :\n    ∃ S : PodReindexCoefficientTransition l E L ι g D D',\n      ∀ (M : scalarReductionSource l E Y) (U : X.ProEt)\n        (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj U)))\n        (a : (completedIntegralCoefficientSheafUnrestricted l L Y).obj.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        (S.ordinary.hom.app M).val.app (op U)\n            (integralOrdinaryTensorSection l E L ι X\n              ((isoReductionIntegralInverse l E g).obj M) (op U)\n              ((isoReductionCompletedMap l L g).hom.hom.app (op U) a) x) =\n          integralOrdinaryTensorSection l E L ι Y M\n            (op ((proEtaleIsoPostcompose g).obj U)) a x",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-28"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded scalar compatibility proof; pure component"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261028T034713-L-3535556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261028T034713-L-3535556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
