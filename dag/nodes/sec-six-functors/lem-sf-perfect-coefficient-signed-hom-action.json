@@ -1,0 +1,158 @@
+{
+ "id": "lem-sf-perfect-coefficient-signed-hom-action",
+ "kind": "statement",
+ "title": "The localized signed Hom action of a two-term perfect coefficient object",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let Y be a scheme and R a commutative ring sheaf on its pro-etale site, with coefficient universe max(u,t+1). Use the module, tensor, Hom-complex, derived Hom and canonical homModelMap of [def-sf-integral-hom-reduction-models]. Let P,I,Q,Q0 be complexes of R-module sheaves. Assume P,Q,Q0 are K-flat and I is K-injective. Suppose Q0 is zero outside degrees -1,0, both remaining terms are isomorphic to the R-module unit, and there is an isomorphism Qloc(Q) to Qloc(Q0) in the derived category. If f:Hom(P,I) tensor Q to Hom(P,I tensor Q) satisfies the signed local evaluation formula of [lem-sf-two-term-free-hom-tensor-components], then Qloc(f) followed by homModelMap(P,I tensor Q) is invertible. This asserts neither invertibility of f itself nor K-injectivity of I tensor Q, and has no scalar reduction presentation as input.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-sf-two-term-free-hom-tensor-components"
+ ],
+ "proof": [
+  {
+   "text": "For Q0, the component theorem makes the signed exchange invertible as a chain map. The bounded coefficient complex of unit terms is dualizable, with bounded K-flat dual. Tensoring with Q0 preserves K-injectives by the tensor-dual adjunction on the homotopy category. Thus homModelMap(P,I tensor Q0) is an isomorphism: the canonical target augmentation is a homotopy equivalence between K-injectives and Hom preserves it.",
+   "uses": [
+    "lem-sf-two-term-free-hom-tensor-components",
+    "lem-pur-rhom-well-defined-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  },
+  {
+   "text": "Represent the given isomorphism Qloc(Q) to Qloc(Q0) by a roof with K-flat complexes. A quasi-isomorphism between K-flat complexes has acyclic K-flat cone, and hence remains a quasi-isomorphism after tensoring with any complex. Apply this to Hom(P,I) and I. Derived Hom carries the resulting target isomorphism to an isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  },
+  {
+   "text": "The signed exchange is natural in the coefficient complex. Its formula determines it by the Hom product projections and tensor-sheafification descent; for each map of the roof both composites have that same formula. Naturality of homModelMap descends the commutative square to the derived category. All its vertical arrows are isomorphisms, so invertibility for Q0 proves invertibility for Q.",
+   "uses": [
+    "lem-sf-signed-hom-tensor-comparison",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-two-term-free-hom-tensor-components",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-pc-kflat-resolution",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "def-pur-derived-internal-hom",
+  "lem-sf-signed-hom-tensor-comparison",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-28",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars followed by restriction is tensor with a K-flat resolution of the coefficient ring, compatibly with evaluation",
+   "date": "2026-10-28",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.ExtendRestrictScalarsAdj.Counit.map.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*tensor|tensor.*reduction|homModelMap",
+   "date": "2026-10-28",
+   "results": "18 hits: Mathlib/LinearAlgebra/Contraction.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*tensor|tensor.*ihom|scalar.*evaluation",
+   "date": "2026-10-28",
+   "results": "22 hits: Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Polynomial/Smeval.lean.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category tensor by a dualizable object commutes with internal Hom in its second argument",
+   "date": "2026-10-28",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.ihom.ev_coev_assoc.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReducedEvaluation",
+  "date": "2026-10-28",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative",
+    "lem-sf-integral-hom-representative-square",
+    "lem-sf-integral-hom-reduced-evaluation-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PerfectCoefficientSignedHomAction",
+  "file": "lean/Sheaf/Paper/PerfectCoefficientSignedHomAction.lean",
+  "declaration": "WeilConjectures.IntegralHom.perfectCoefficient_signedHomAction_isIso",
+  "statement": "theorem perfectCoefficient_signedHomAction_isIso\n    (P I Q Q0 : CochainComplex (Modules.{t, u} Y R) ℤ)\n    (hP : flat.{t, u} Y R P) (hI : I.IsKInjective)\n    (hQ : flat.{t, u} Y R Q) (hQ0 : flat.{t, u} Y R Q0)\n    (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q0.X k))\n    (eNeg : Q0.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n    (eZero : Q0.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n    (eQ : DerivedCategory.Q.obj Q ≅ DerivedCategory.Q.obj Q0)\n    (f : ((totalTensor.{t, u} Y R).obj\n        (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶\n      homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P\n        (((totalTensor.{t, u} Y R).obj I).obj Q))\n    (hf : IsSignedHomTensor Y R P I Q f) :\n    IsIso (DerivedCategory.Q.map f ≫\n      homModelMap.{t, u} Y R P (((totalTensor.{t, u} Y R).obj I).obj Q))",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T072422-L-1944900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T072422-L-1944900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

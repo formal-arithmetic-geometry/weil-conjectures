@@ -1,0 +1,160 @@
+{
+ "id": "lem-sf-integral-hom-scalar-evaluation-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the completed-ring scalar transpose of reduced evaluation",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix integral coefficient data l,E,Y,D,hl as in [def-sf-integral-hom-reduction-models], a tensor presentation a of the completed ring R and a reduction presentation m at n. Put F=derived reduction, U=derived scalar restriction, adj=the specified extension-restriction adjunction, H=RHom_R(K,L), and X=UF(H), for arbitrary unbounded K,L. Let v: tensor_R(K,X) to UF(L) be the scalar adjunct of mu(K,X), followed by tensor(id_FK,counit_FH), followed by mu(K,H) inverse and F of the tensor-Hom counit at L. The transpose of v under the source adjunction a.adjunction K is an isomorphism X to RHom_R(K,UF(L)). No chain representatives, coefficient resolution Q, signed map, finite-coefficient internal Hom, or normalization square is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual principal multiplication on the completed unit and its quotient projection. They form the short exact sequence of units and the restricted quotient. Therefore the quotient is the cone of that multiplication, and restricted derived reduction is computed by its two-term coefficient construction.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-sf-integral-reduction-two-term-resolution",
+    "lem-sf-reduction-tensor-resolution-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  },
+  {
+   "text": "For fixed K, derived internal Hom in the second argument is triangulated. Apply it to the two-term coefficient construction of L. The comparison on each free unit term is the unit identification, so the induced morphism of cone triangles is invertible. This uses no perfection of K or L. The independent coefficient universes are retained by transport from a small model of the site.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-covariant-exact",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  },
+  {
+   "text": "Identify the cone comparison with the displayed scalar mate. On K-flat test representatives, m.normalization identifies the chain tensor comparison with the actual scalar unit x to 1 tensor x, and the universal derived scalar counit gives its localized square. The scalar adjunction counit supplies the middle tensor map. These equations identify the mate with the coefficient action just proved invertible. Changing normalized tensor representatives or adjunctions conjugates this map by isomorphisms and preserves invertibility.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-sf-integral-reduction-two-term-resolution",
+  "lem-sf-reduction-tensor-resolution-comparison",
+  "lem-weil-pbc-ringed-internal-hom-covariant-exact",
+  "def-pur-derived-internal-hom",
+  "def-sf-integral-hom-reduction-models",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-28",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars followed by restriction is tensor with a K-flat resolution of the coefficient ring, compatibly with evaluation",
+   "date": "2026-10-28",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.ExtendRestrictScalarsAdj.Counit.map.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*tensor|tensor.*reduction|homModelMap",
+   "date": "2026-10-28",
+   "results": "18 hits: Mathlib/LinearAlgebra/Contraction.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*tensor|tensor.*ihom|scalar.*evaluation",
+   "date": "2026-10-28",
+   "results": "22 hits: Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Polynomial/Smeval.lean.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category tensor by a dualizable object commutes with internal Hom in its second argument",
+   "date": "2026-10-28",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.ihom.ev_coev_assoc.",
+   "verdict": "No exact result for unbounded derived sheaf coefficients and the normalized presentation data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReducedEvaluation",
+  "date": "2026-10-28",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2: two-term perfect coefficient object and scalar extension-restriction adjunction",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sf-integral-hom-comparison-representative",
+    "lem-sf-integral-hom-representative-square",
+    "lem-sf-integral-hom-reduced-evaluation-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomScalarEvaluationInvertible",
+  "file": "lean/Sheaf/Paper/IntegralHomScalarEvaluationInvertible.lean",
+  "declaration": "WeilConjectures.IntegralHom.scalar_reduced_evaluation_transpose_isIso",
+  "statement": "theorem scalar_reduced_evaluation_transpose_isIso\n    (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))\n    (n : ℕ) (m : ReductionPresentation l E Y D hl a n)\n    (K L : completedIntegralDerivedCategory l E Y D hl) :\n    let R := completedIntegralCommRingSheaf l E Y D hl\n    let U := scalarReductionDerivedRestriction l E Y n\n    let F := integralDerivedReduction l E Y D hl n\n    let adj := (derivedScalarExtensionRestrictionAdjunction l E Y n).choose\n    let H := (hom.{t, u} Y R).obj (op K, L)\n    let X := U.obj (F.obj H)\n    IsIso ((a.adjunction K).homEquiv X (U.obj (F.obj L))\n      (adj.homEquiv (a.tensor.obj (K, X)) (F.obj L)\n        (m.mu.hom.app (K, X) ≫\n          m.target.tensor.map (Prod.mkHom (𝟙 (F.obj K)) (adj.counit.app (F.obj H))) ≫\n          m.mu.inv.app (K, H) ≫ F.map ((a.adjunction K).counit.app L))))",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T072422-L-1944900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T072422-L-1944900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
