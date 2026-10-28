@@ -21,31 +21,42 @@
  ],
  "proof": [
   {
-   "text": "Identify left-closed and specified right-closed transposes using the signed symmetry. Apply monoidal-square Hom transport and the supplied site Hom isomorphisms to carry naturality, arbitrary transpose and composition equations on etale-origin objects.",
+   "text": "Work directly with the recorded right tensor-Hom adjunctions. Uncurrying the evaluation-defined coefficientBaseChangeHom gives inverse tensor comparison followed by mapped evaluation. The generic scalar Hom calculus gives two-variable naturality. Naturality of the tensor comparison and the inverse-transpose identity give preservation of every transpose. Extract the intrinsic strong monoidal structure from hmonoidal; its associativity axiom identifies the two uncurried successive evaluations and proves preservation of internal composition. These equations hold on all ambient objects, hence on the specified finite-Tor constructible domain, independently of the etale-law antecedent.",
    "uses": [
-    "lem-coef-monoidal-square-hom-transport"
+    "lem-pur-scalar-hom-comparison-tower"
    ],
    "elementary": false
   },
   {
-   "text": "Paste the coefficient squares for a quotient tower. The supplied quotient coherence cancels the site components; the assumed etale coefficient equation gives the intrinsic one. Identity restriction has the specified adjunction mate, giving the normalized unit equation.",
+   "text": "Apply the existing intrinsic finite scalar tensor composition square and the generic scalarBaseChangeHom_tower evaluation calculation. This gives the required successive-quotient Hom equation on all ambient objects, including both contravariant and covariant endpoint transports. Restrict to the stated constructible pairs; the etale tower antecedent is unnecessary for this direct argument.",
    "uses": [
-    "lem-coef-monoidal-square-hom-transport",
-    "def-weil-pbc-normalized-origin-scalar-comparisons"
+    "lem-coef-finite-hom-intrinsic-tensor-composition",
+    "lem-pur-scalar-hom-comparison-tower"
    ],
    "elementary": false
   },
   {
-   "text": "Use the supplied constructible descent hypothesis to choose etale witnesses for each intrinsic object. Naturality conjugates all obtained equations by their witness isomorphisms, whose inverses cancel. Thus the equations hold independently of witnesses.",
-   "uses": [],
-   "elementary": true
+   "text": "For the identity quotient, the ordinary restriction unit/composition comparison is the identity on sections. The derivedUnit calculation identifies the derived self-composition restriction map with restriction of its unit. Mathlib leftAdjointCompIso_comp_id therefore identifies the intrinsic self-composition associator with the unit at F(P), which equals F(unit at P) by naturality and cancellation.",
+   "uses": [
+    "lem-coef-normalized-dvr-completed-restriction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write F for self-quotient extension, mu for its fixed tensorator, and e:F≅Id for coefFiniteHomProUnit. Substitute the preceding associator identity into the tensor composition square for the self quotient. Naturality of mu at (e_X,e_Y) rewrites this as F(mu_XY followed by tensor(e_X,e_Y)) followed by mu_XY = F(e_tensor(X,Y)) followed by mu_XY. Cancel mu_XY and use faithfulness of F (it is isomorphic to Id). This proves that e is monoidal; invert its components to obtain the identity tensor equation. Apply scalarBaseChangeHom_identity to obtain exactly the required intrinsic Hom unit equation. No descent witnesses, site-Hom invertibility, or scalar-Hom invertibility are used.",
+   "uses": [
+    "lem-coef-finite-hom-intrinsic-tensor-composition",
+    "lem-pur-scalar-hom-comparison-tower"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-monoidal-square-hom-transport",
-  "def-weil-pbc-normalized-origin-scalar-comparisons"
+  "lem-pur-scalar-hom-comparison-tower",
+  "lem-coef-finite-hom-intrinsic-tensor-composition",
+  "lem-coef-normalized-dvr-completed-restriction-coherence"
  ],
- "proof_origin": "Source final evaluation/coherence argument, expanded in the parent node; right-closed categorical calculation written by F1.",
+ "proof_origin": "E5: direct right-closed evaluation calculation following the final associativity/uniqueness-of-transpose paragraph of thm-coef-finite-hom.proof.md. The generic composition calculation is the same proved calculation as finiteChange_composition in the parent FiniteCoefficientHomChange, reproduced privately to avoid an import cycle. Identity normalization is deduced from the already stated self-quotient tensor composition square by cancellation and faithfulness, rather than importing the downstream CoefficientTensorNormalizationUnit.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -117,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-af0f4",
-  "group": "F1",
-  "result": "fix",
-  "landing": "20261028T020341-L-2498181",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261028T034735-L-3539329",
   "kind": "interface",
-  "note": "independent cc review: item + 5 new modules against the clone (verbatim Data-split diff empty), 3 sorry statements against the old coherence conjuncts and FiniteDualitySiteComparison, 3b importers (5 OK), node records against the Lean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
