@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NormalSchemeDivisor
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorIntegral
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 
 /-!
@@ -23,13 +24,17 @@ vanishes, or `U₀` covers `V ∖ Z` for an open neighbourhood `V` of `ζ`
 generators whose support closure contains `ζ` from the codimension-one core
 `ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`.
 
+The core holds for every bounded constructible complex on `X ∖ Z`
+(`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl`): an
+integral model and derived Nakayama reduce it to `𝔽_E`-coefficients.
+
 ## Unfinished
 
-The core is `sorry`ed: it is the local acyclicity of lisse sheaves along a divisor (the nearby
-cycles of the deformation `x = t u` at the zero section), which needs stalk computations of `Rj_*`
-over the strictly henselian trait, not available in this formalism. Duality (`Ψ D ≅ D Ψ`) only
-turns it into the equivalent statement for `Re^!`, and a contraction argument would need
-monodromic complexes.
+The core depends on the finite-coefficient statement
+`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField`, which is
+`sorry`ed: it is the local acyclicity along a divisor of extensions by zero of constructible
+`𝔽_E`-complexes on the complement (the nearby cycles of the deformation `x = t u` at the zero
+section).
 
 -/
 
@@ -275,6 +280,8 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_isEmpty
   exact (boundedConstructible _).ι.map_isZero
     ((boundedConstructibleOpenImmersionLowerShriek _ ℓ _).map_isZero hN)
 
+set_option linter.unusedVariables false in
+-- The lisse generator data are part of the interface of the reduction.
 /-- **The codimension-one core** (route (a), after the geometric reduction
 `isEmpty_or_exists_opens_subset_range`): the hypotheses of
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, with the
@@ -283,12 +290,9 @@ lisse generator `Rg_! Rj'_! M` is lisse on all of `V ∖ Z`.
 
 This is the genuine local acyclicity statement: near `ζ` the complex `j_! N` is the extension by
 zero of a lisse complex on the complement of the divisor (up to the universal homeomorphism
-`U₀ ∩ V ⟶ V ∖ Z`), and `Le^* Ψ_X(j_! N)` should vanish near `ζ`. It is not provable with the
-infrastructure of the branch: it needs a computation of nearby cycles at the points of the zero
-section (Milnor fibres of the deformation `x = t u` along the divisor), which is not available
-even for the constant sheaf (`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`
-is itself `sorry`ed) and, for non-constant `M` possibly wildly ramified along `Z`, needs the
-tame/wild analysis of `Rj_*` on strictly henselian two-dimensional local rings. -/
+`U₀ ∩ V ⟶ V ∖ Z`), and `Le^* Ψ_X(j_! N)` vanishes near `ζ`. It holds for every bounded
+constructible `N` (`exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl`), by reduction to
+`𝔽_E`-coefficients through an integral model of `N` and derived Nakayama. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -312,7 +316,7 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range
           (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
             ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
               (overRestrictι X I.support.compl)).obj N).obj))) :=
-  sorry
+  exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl k' hX hh hI ζ hζ N
 
 /-- **The target modulo the codimension-one core**: route (a) reduces
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure` to
