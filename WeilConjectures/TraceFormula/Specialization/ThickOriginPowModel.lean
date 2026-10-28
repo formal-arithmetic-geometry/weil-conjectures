@@ -45,8 +45,8 @@ variable (k' : Type u) [Field k'] {m : ℕ} (hm : m ≠ 0)
 /-- `t ↦ t^m` is a finite ring map: `k'⟦t⟧` is spanned by `1, t, …, t^{m-1}` over its image. -/
 lemma PowerSeries.finite_expand : (PowerSeries.expand m hm (R := k')).toRingHom.Finite := by
   classical
-  letI := (PowerSeries.expand m hm (R := k')).toRingHom.toAlgebra
-  letI : Module (PowerSeries k') (PowerSeries k') := Algebra.toModule
+  let := (PowerSeries.expand m hm (R := k')).toRingHom.toAlgebra
+  let : Module (PowerSeries k') (PowerSeries k') := Algebra.toModule
   refine ⟨⟨(Finset.range m).image fun r ↦ (PowerSeries.X : PowerSeries k') ^ r, ?_⟩⟩
   rw [eq_top_iff]
   intro f _

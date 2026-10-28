@@ -358,6 +358,35 @@ theorem mem_range_deformationSpaceMap_subschemeι_of_deformationSpacePowMap
   rw [range_deformationSpaceMap_subschemeι] at hz ⊢
   exact mem_range_quotientPolynomialSpecToDeformationSpace_of_deformationSpacePowMap hJ hJ' hz
 
+include hJ in
+/-- **The power map preserves the zero section.** For `m > 0` and `J ⊆ I^m` on affine opens, the
+power map `D_I X ⟶ D_J X` sends the zero section of `D_I X` into that of `D_J X`. -/
+theorem deformationSpacePowMap_mem_range_quotientPolynomialSpecToDeformationSpace (hm : 0 < m)
+    {z : I.deformationSpace} (hz : z ∈ Set.range I.quotientPolynomialSpecToDeformationSpace) :
+    deformationSpacePowMap m hJ z ∈ Set.range J.quotientPolynomialSpecToDeformationSpace := by
+  obtain ⟨U, p, rfl⟩ : ∃ (U : X.AffineZariskiSite) (p : Spec (I.reesPresheaf.obj (op U))),
+      colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor U p = z :=
+    (relativeGluingData I.coequifibered_toReesPresheaf).cover.exists_eq z
+  replace hz := (ι_mem_range_quotientPolynomialSpecToDeformationSpace_iff I U p).mp hz
+  rw [← Scheme.Hom.comp_apply, deformationSpacePowMap, ι_relativeGluingMap,
+    Scheme.Hom.comp_apply]
+  have hle : RingHom.ker (J.reesToQuotientPolynomial.app (op U)).hom ≤
+      p.asIdeal.comap (Ideal.extendedReesAlgebraPowMap m (hJ U)) := fun x hx ↦
+    Ideal.mem_comap.mpr (hz (Ideal.extendedReesAlgebraPowMap_mem_ker hm (hJ U) hx))
+  exact (ι_mem_range_quotientPolynomialSpecToDeformationSpace_iff J U _).mpr hle
+
+include hJ in
+/-- **The power map preserves the zero section**, in terms of the closed subschemes `V(I) ⊆ X` and
+`V(J) ⊆ X`: for `m > 0` and `J ⊆ I^m` on affine opens, the power map `D_I X ⟶ D_J X` sends the
+image of `D_⊥ V(I) ⟶ D_I X` into the image of `D_⊥ V(J) ⟶ D_J X`. -/
+theorem deformationSpacePowMap_mem_range_deformationSpaceMap_subschemeι (hm : 0 < m)
+    {z : I.deformationSpace} (hz : z ∈ Set.range
+      (deformationSpaceMap I.subschemeι I ⊥ I.siteIdeal_map_appLE_subschemeι_le_bot)) :
+    deformationSpacePowMap m hJ z ∈ Set.range
+      (deformationSpaceMap J.subschemeι J ⊥ J.siteIdeal_map_appLE_subschemeι_le_bot) := by
+  rw [range_deformationSpaceMap_subschemeι] at hz ⊢
+  exact deformationSpacePowMap_mem_range_quotientPolynomialSpecToDeformationSpace hJ hm hz
+
 end ZeroSection
 
 end IdealSheafData

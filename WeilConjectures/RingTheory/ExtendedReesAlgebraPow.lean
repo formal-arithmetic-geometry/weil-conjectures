@@ -270,4 +270,58 @@ lemma injective_extendedReesAlgebraToPolynomial_bot :
   rw [Submodule.bot_pow (by omega)] at hj
   simpa using hj
 
+lemma max_toNat_neg_mul_le {m : ℕ} (hm : 0 < m) (j : ℤ) :
+    max (-((m : ℤ) * j)).toNat 1 ≤ m * max (-j).toNat 1 := by
+  rcases le_or_gt 0 j with hj | hj
+  · have h0 := Int.natCast_nonneg m
+    rw [Int.toNat_eq_zero.mpr (by nlinarith), Int.toNat_eq_zero.mpr (by omega)]
+    simpa using Nat.succ_le_of_lt hm
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, j = -n := ⟨(-j).toNat, by omega⟩
+    have e : -((m : ℤ) * -n) = ((m * n : ℕ) : ℤ) := by push_cast; ring
+    rw [e, neg_neg, Int.toNat_natCast, Int.toNat_natCast,
+      max_eq_left (Nat.one_le_iff_ne_zero.mpr (Nat.mul_ne_zero hm.ne' (by omega))),
+      max_eq_left (by omega)]
+
+/-- **The power map preserves the zero sections.** For `m > 0` and `J ⊆ I^m`, the power map sends
+the kernel of `R[t, J t⁻¹] ⟶ (R / J)[t]` into the kernel of `R[t, I t⁻¹] ⟶ (R / I)[t]`: a monomial
+`c tʲ` with `c ∈ J^{max(-j, 1)}` goes to `c t^{mj}`, and
+`c ∈ I^{m max(-j, 1)} ⊆ I^{max(-mj, 1)}`. -/
+theorem extendedReesAlgebraPowMap_mem_ker {m : ℕ} (hm : 0 < m) (h : J ≤ I ^ m)
+    {x : J.extendedReesAlgebra}
+    (hx : x ∈ RingHom.ker (J.extendedReesAlgebraToPolynomial (Ideal.Quotient.mk J)
+      Ideal.mk_ker.ge)) :
+    extendedReesAlgebraPowMap m h x ∈
+      RingHom.ker (I.extendedReesAlgebraToPolynomial (Ideal.Quotient.mk I) Ideal.mk_ker.ge) := by
+  classical
+  rw [mem_ker_extendedReesAlgebraToPolynomial_iff] at hx
+  have hx' : x = ∑ j ∈ (x : R[T;T⁻¹]).coeff.support,
+      (⟨C ((x : R[T;T⁻¹]).coeff j) * T j, C_mul_T_mem_extendedReesAlgebra
+        (Ideal.pow_le_pow_right (le_max_left _ _) (hx j))⟩ : J.extendedReesAlgebra) := by
+    refine Subtype.ext ?_
+    rw [AddSubmonoidClass.coe_finsetSum]
+    exact LaurentPolynomial.eq_sum_C_mul_T _
+  rw [hx', map_sum]
+  refine Ideal.sum_mem _ fun j _ ↦ ?_
+  rw [mem_ker_extendedReesAlgebraToPolynomial_iff]
+  intro i
+  rw [coe_extendedReesAlgebraPowMap, expand_C_mul_T, coeff_C_mul_T]
+  split_ifs with hij
+  · have hc : (x : R[T;T⁻¹]).coeff j ∈ (I ^ m) ^ max (-j).toNat 1 :=
+      Ideal.pow_right_mono h _ (hx j)
+    rw [← pow_mul] at hc
+    rw [hij]
+    exact Ideal.pow_le_pow_right (max_toNat_neg_mul_le hm j) hc
+  · exact zero_mem _
+
+/-- The power map sends the kernel of `R[t, J t⁻¹] ⟶ (R / J)[t]` into the kernel of
+`R[t, I t⁻¹] ⟶ (R / I)[t]`, for `m > 0` and `J ⊆ I^m`. -/
+theorem map_ker_extendedReesAlgebraToPolynomial_le {m : ℕ} (hm : 0 < m) (h : J ≤ I ^ m) :
+    (RingHom.ker (J.extendedReesAlgebraToPolynomial (Ideal.Quotient.mk J)
+      Ideal.mk_ker.ge)).map (extendedReesAlgebraPowMap m h) ≤
+      RingHom.ker (I.extendedReesAlgebraToPolynomial (Ideal.Quotient.mk I) Ideal.mk_ker.ge) := by
+  rw [Ideal.map_le_iff_le_comap]
+  intro x hx
+  rw [Ideal.mem_comap]
+  exact extendedReesAlgebraPowMap_mem_ker hm h hx
+
 end Ideal
