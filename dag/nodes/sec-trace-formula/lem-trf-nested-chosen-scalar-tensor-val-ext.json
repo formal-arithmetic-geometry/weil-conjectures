@@ -12,20 +12,28 @@
  ],
  "proof": [
   {
-   "text": "Apply the sheafification adjunction to the underlying morphisms and use tensor induction first in the inner completed scalar tensor and then in the outer tensor; the hypothesis identifies the nested pure tensors, and sheafification preserves the resulting equality.",
+   "text": "Specialize sheafRingCoefficientOrdinaryAdjunction to each completed coefficient map. The completedOrdinaryScalarExtension object and map equations identify the recorded functor with sheafified tensor extension. Evaluate the adjunction Hom formula on the inverse equality transport to prove that its unit sends x to completedScalarTensorSection with coefficient 1. This is a private proved specialization, with the existing pro-etale abelian sheafification instances.",
    "uses": [
-    "def-trf-integral-comparison-realization-models"
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply injectivity of the outer extension/restriction Hom equivalence, then injectivity of the inner Hom equivalence. Extensionality on the remaining module-sheaf morphisms reduces to equality on each section x. Adjunction.homEquiv_unit expresses the two double adjuncts as f and g evaluated on the successive units. Replace both units by their pure tensor formulas and apply the given hypothesis with both scalar coefficients equal to 1. Apply congrArg to the underlying presheaf morphism projection.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-trf-integral-comparison-realization-models"
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 3.5.1; sheafification and tensor induction"
+  "by": "N1 stage 3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03DA, via the existing normalized ordinary coefficient adjunction; double adjunction argument written by worker."
  },
  "mathlib_searches": [
   {
@@ -95,9 +103,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261028T020530-L-2521542",
+  "landing": "20261028T034854-L-3559843",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
