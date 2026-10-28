@@ -308,18 +308,44 @@ def same_version(v: dict) -> bool:
 
 # ---------------------------------------------------------------- the compiles of one set
 
-def lean_opts() -> list[str]:
-    """[leanOptions] of the lakefile as -D flags (as tools/remote_compile_set.py)."""
-    out, on = [], False
-    for l in (LEAN / "lakefile.toml").read_text().split("\n"):
-        if l.startswith("[leanOptions]"):
-            on = True; continue
-        if l.startswith("["):
-            on = False
-        m = re.match(r"([A-Za-z][\w.]*)\s*=\s*([^#]*)", l) if on else None
-        if m:
-            out.append(f"-D{m.group(1)}={m.group(2).strip().strip(chr(34))}")
-    return out
+def lake_options(module: str) -> dict:
+    """The options Lake gives Lean for `module` (its setup.json): the package's [leanOptions] and its library's own
+    (lakefile.toml; the Sheaf library adds autoImplicit = false). With them, the package name and isModule, a compile
+    here writes the same .olean as Lake's (measured 2026-10-28: byte-identical .olean/.olean.server/.olean.private)."""
+    import tomllib
+    cfg = tomllib.loads((LEAN / "lakefile.toml").read_text())
+
+    def flat(d, pre=""):        # TOML reads `pp.unicode.fun = true` as nested tables; Lean wants the dotted name
+        out = {}
+        for k, x in (d or {}).items():
+            if isinstance(x, dict):
+                out.update(flat(x, pre + k + "."))
+            else:
+                out[pre + k] = x
+        return out
+    opts = flat(cfg.get("leanOptions"))
+    top = module.split(".")[0]
+    for lib in cfg.get("lean_lib") or []:
+        if lib.get("name") == top or top in [r.split(".")[0] for r in lib.get("roots") or []]:
+            opts.update(flat(lib.get("leanOptions")))
+            break
+    return opts
+
+
+def lake_package() -> str:
+    import tomllib
+    return tomllib.loads((LEAN / "lakefile.toml").read_text()).get("name") or "weil-conjectures"
+
+
+def is_module_file(text: str) -> bool:
+    """The file opens with `module` (the module system), after comments."""
+    t = _COMMENT.sub("", text or "").lstrip()
+    return bool(re.match(r"module\b", t))
+
+
+def setup_json(name: str, module_file: bool, arts: dict) -> str:
+    return json.dumps({"name": name, "isModule": module_file, "package": lake_package(), "options": lake_options(name),
+                       "importArts": arts, "dynlibs": [], "plugins": []})
 
 
 def packages_path() -> list[str]:
@@ -403,9 +429,7 @@ def compile_one(folder: pathlib.Path, module: str, outdir: pathlib.Path | None, 
     Over ACCEPT seconds is a failure (Lean may run up to SHEAF_FILE_RUN_LIMIT so that its messages arrive).
     {rc, secs, out, errors, slow}."""
     rel = rel_of(module)
-    cmd = ["nice", "-n", "0", LEANBIN, "-j1", *lean_opts(), "-R", str(folder / root)]
-    if module.startswith("Sheaf."):
-        cmd.append("-DautoImplicit=false")      # the Sheaf library's own option (lakefile)
+    cmd = ["nice", "-n", "0", LEANBIN, "-j1", "-R", str(folder / root)]
     if outdir is not None:
         o = outdir / rel[:-len(".lean")]
         o.parent.mkdir(parents=True, exist_ok=True)
@@ -413,11 +437,10 @@ def compile_one(folder: pathlib.Path, module: str, outdir: pathlib.Path | None, 
             x.unlink()
         cmd += ["-o", str(o) + ".olean", "-i", str(o) + ".ilean"]
     arts = {m: a for m, a in arts.items() if m != module}
-    if arts:
-        sf = folder / f"setup-{name or module}.json"
-        sf.write_text(json.dumps({"name": module, "isModule": False, "importArts": arts, "dynlibs": [], "plugins": [],
-                                  "options": {}}))
-        cmd += ["--setup", str(sf)]
+    # as Lake calls Lean (its setup.json: name, isModule, package, options); the set's own compiled modules as importArts
+    sf = folder / f"setup-{name or module}.json"
+    sf.write_text(setup_json(module, is_module_file((folder / root / rel).read_text(errors="ignore")), arts))
+    cmd += ["--setup", str(sf)]
     limit = max(ACCEPT, int(setting("SHEAF_FILE_RUN_LIMIT", "120")))
     t0 = time.time()
     try:
@@ -472,8 +495,8 @@ def run_probe(folder: pathlib.Path, mods: list[str], arts: dict) -> tuple[dict, 
         f.write_text("module\nimport Lean.Elab.Command\n" + "".join(f"import all {m}\n" for m in ms)
                      + PROBE % ",\n    ".join("`" + m for m in ms))
         sf = folder / f"setup-{name}.json"
-        sf.write_text(json.dumps({"name": name, "isModule": True, "importArts": arts, "dynlibs": [], "plugins": [],
-                                  "options": {}}))
+        sf.write_text(json.dumps({"name": name, "isModule": True, "package": lake_package(), "options": {},
+                                  "importArts": arts, "dynlibs": [], "plugins": []}))
         try:
             p = subprocess.run([LEANBIN, "--setup", str(sf), "-R", str(folder / "src"), str(f)], cwd=folder,
                                capture_output=True, text=True, timeout=600,
@@ -631,7 +654,8 @@ def build_set(g: str, item: str, head: str, texts: dict, allowed: dict, v: dict)
     lk = sid_lock(sid)
     try:
         done = read_json(folder / "set.json")
-        if done and done.get("sha") == sha and done.get("phase") not in ("infra",):
+        # a complete result is final; over 60 s under load ("slow") and infrastructure faults are tried again
+        if done and done.get("sha") == sha and done.get("phase") not in ("infra", "slow"):
             return done
         res = {"id": sid, "folder": str(folder), "group": g, "item": item, "head": head, "sha": sha,
                "base": v["commit"], "base_gen": v["gen"], "base_time": v.get("time"),
@@ -966,7 +990,7 @@ def evaluate(g: str, item: str, head: str, judge: bool = True) -> dict:
 
     def done(r):
         write_json(RESULTS / f"{head}.json", r)
-        if not r.get("ok") and r.get("phase") not in ("wait-reader", "no-judgement", "infra"):
+        if not r.get("ok") and r.get("phase") not in ("wait-reader", "no-judgement", "infra", "slow"):
             revoke(head, f"latest evaluation: {r.get('phase')}")
         log(g, item, head[:9], r.get("phase"), "PASS" if r.get("ok") else "-", f"{r.get('seconds', 0)} s",
             str(r.get("why") or "; ".join(r.get("findings") or []))[:240].replace("\n", " "))
@@ -1261,7 +1285,7 @@ def daemon() -> int:
                 continue
             r = read_json(RESULTS / f"{head}.json")
             fresh = r and r.get("base_gen") == v["gen"] and r.get("base") == v["commit"]
-            if fresh and r.get("phase") not in ("infra", "wait-reader", "no-judgement", "error", "timeout"):
+            if fresh and r.get("phase") not in ("infra", "slow", "wait-reader", "no-judgement", "error", "timeout"):
                 if not (r.get("phase") == "built" and r.get("ok") and mode() == "on" and valid_pass_missing(r)):
                     continue
             if time.time() - tried.get(head, 0) < 900:

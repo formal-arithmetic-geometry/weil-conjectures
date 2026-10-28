@@ -15,7 +15,7 @@ class Sandbox(unittest.TestCase):
         self.p = [mock.patch.object(sb, "SB", t / "sets"), mock.patch.object(sb, "RESULTS", t / "sets" / "results"),
                   mock.patch.object(sb, "JUDGE", t / "sets" / "judge"), mock.patch.object(sb, "PASSED", t / "sets" / "passed"),
                   mock.patch.object(sb, "NEWLINK", t / "sets" / "_new"), mock.patch.object(sb, "PUBLIB", t / "pub"),
-                  mock.patch.object(sb, "GEN", t / "publish-gen"),
+                  mock.patch.object(sb, "GEN", t / "publish-gen"), mock.patch.object(sb, "LOG", t / "setbuild.log"),
                   mock.patch.object(sb, "published", lambda: {"commit": "c0ffee00" * 5, "time": "T"})]
         for x in self.p:
             x.start()
@@ -105,6 +105,19 @@ class Pure(unittest.TestCase):
                 self.assertEqual(sb.mode(), "shadow")
                 with mock.patch.dict(os.environ, {"SHEAF_SETBUILD": "on"}):
                     self.assertEqual(sb.mode(), "shadow")     # the old variable no longer switches
+
+
+class LakeFaithful(unittest.TestCase):
+    def test_options_and_module_header(self):
+        o = sb.lake_options("Sheaf.Foo")
+        self.assertIs(o.get("autoImplicit"), False)              # the Sheaf library's own option
+        self.assertIn("maxSynthPendingDepth", o)                  # the package's [leanOptions]
+        self.assertIn("pp.unicode.fun", o)                        # dotted names, not nested tables
+        self.assertNotIn("autoImplicit", sb.lake_options("WeilConjectures.Foo"))
+        self.assertTrue(sb.is_module_file("/- c -/\n-- x\nmodule\n\npublic import Mathlib\n"))
+        self.assertFalse(sb.is_module_file("import Mathlib\nmodule_thing\n"))
+        j = json.loads(sb.setup_json("Sheaf.Foo", True, {}))
+        self.assertEqual((j["isModule"], j["package"]), (True, sb.lake_package()))
 
 
 class Version(Sandbox):
