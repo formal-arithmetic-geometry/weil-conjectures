@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FiniteP1KummerCoordinates
+import Sheaf.Paper.FiniteP1OrdinaryKummerBoundaryCore
 
 /-! # The integral boundary of the ordinary finite Kummer class
 
@@ -57,6 +58,11 @@ theorem finiteP1_ordinary_kummer_boundary
     (c : SpTowerP1.CoefficientCoordinates l E n X hX) :
     FiniteKummerBoundary l E X n k
       (Scheme.Pic.mapHom e.hom (hyperplanePic S))
-      (finiteP1OrdinaryKummerArrow l E n e hS c) := by sorry
+      (finiteP1OrdinaryKummerArrow l E n e hS c) := by
+  apply finiteP1_ordinary_kummer_boundary_of_class l E e k hS n c
+  exact (Etale.projectiveLineTraceDatum (l ^ (n + 1))
+    (pow_pos (Fact.out : l.Prime).pos _) (FiniteRing l E n)
+    (ULift.ext _ _ (coefficient_annihilates l E n)) S
+    (by simpa only [Nat.cast_pow] using hS.pow (n + 1))).chern_spec
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

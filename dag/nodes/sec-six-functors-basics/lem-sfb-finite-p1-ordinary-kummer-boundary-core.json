@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-finite-p1-ordinary-kummer-boundary-core",
+ "kind": "statement",
+ "title": "Concrete finite ordinary Kummer boundary composite",
+ "statement": "Under the hypotheses of lem-sfb-finite-p1-ordinary-kummer-boundary, the finite quotient followed by finiteP1OrdinaryKummerArrow equals the evaluated Kummer composite for e*O(1) followed by the finite root map. This is the concrete composite equality before packaging it as FiniteKummerBoundary endpoint witnesses.",
+ "stmt_deps": [
+  "def-sp-ordinary-finite-first-chern",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sfb-finite-p1-kummer-coordinates",
+  "def-sfb-finite-kummer-boundary-equation",
+  "sk-lem-geo-p1-cohomology",
+  "lem-sp-finite-p1-unit-on-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "proof": [
+  {
+   "text": "Use the ordinary finite first-Chern class characterization to identify the scalar ordinary arrow with the positive Kummer class of the pulled-back hyperplane line bundle.",
+   "uses": [
+    "def-sp-ordinary-finite-first-chern",
+    "def-asd-ordinary-finite-p1-kummer-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this class through the exact evaluation, coefficient-coordinate, and scalar-forgetting comparisons; the normalized section equations identify the integral and root endpoint maps with finiteQuotient and finiteRootMap.",
+   "uses": [
+    "def-sp-p1-coefficient-coordinates",
+    "def-sp-tower-class-finite",
+    "def-sfb-finite-p1-kummer-coordinates",
+    "sk-lem-geo-p1-cohomology",
+    "lem-sp-finite-p1-unit-on-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the single and shifted connecting morphisms and the inclusion_eq and power_eq fields of k to obtain the displayed equality of composites.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sfb-finite-kummer-boundary-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-ordinary-finite-first-chern",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sfb-finite-p1-kummer-coordinates",
+  "def-sfb-finite-kummer-boundary-equation",
+  "sk-lem-geo-p1-cohomology",
+  "lem-sp-finite-p1-unit-on-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), normalized finite positive Kummer class before direct image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite quotient followed by ordinary positive Kummer arrow equals evaluated Kummer connecting morphism followed by finite root map",
+   "results": "No exact Mathlib declaration; the search returns only generic derived-category connecting morphism and exact-functor naturality APIs.",
+   "date": "2026-10-28",
+   "verdict": "No matching concrete finite Kummer boundary composite in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteBoundaryEquality KummerBoundary mapSingleArrow",
+   "results": "No exact Mathlib declaration; the names are project-specific.",
+   "date": "2026-10-28",
+   "verdict": "No matching project-specific declaration in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteP1_ordinary_kummer_boundary|FiniteKummerBoundary|finiteP1OrdinaryKummerArrow",
+   "results": "Only the current item and its transport consumer occur; no completed source proof is available.",
+   "date": "2026-10-28",
+   "verdict": "The concrete comparison is new to this library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1OrdinaryKummerBoundary",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-p1-ordinary-kummer-boundary",
+   "place": "paragraph (1), normalized finite positive Kummer class before direct image",
+   "via": [
+    "lem-sfb-finite-p1-ordinary-kummer-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1OrdinaryKummerBoundaryCore",
+  "file": "lean/Sheaf/Paper/FiniteP1OrdinaryKummerBoundaryCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_ordinary_kummer_boundary_of_class",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteP1_ordinary_kummer_boundary_of_class"
+  ],
+  "statement": "theorem finiteP1_ordinary_kummer_boundary_of_class\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (e : X ≅ ProjectiveLine S) (k : Kummer l X)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)]\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX)\n    (hclass : Etale.ordinaryFiniteP1ChernSpec (FiniteRing l E n) (l ^ (n + 1))\n      (ULift.ext _ _ (coefficient_annihilates l E n)) S\n      (finiteP1_unitOnPullback (l ^ (n + 1)) (ProjectiveLine S ↘ S)\n        (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))\n      (geoP1EtaleChern (FiniteRing l E n) (l ^ (n + 1))\n        (pow_pos (Fact.out : l.Prime).pos _)\n        (ULift.ext _ _ (coefficient_annihilates l E n)) S\n        (by simpa only [Nat.cast_pow] using hS.pow (n + 1)))) :\n    FiniteKummerBoundary l E X n k\n      (Scheme.Pic.mapHom e.hom (hyperplanePic S))\n      (finiteP1OrdinaryKummerArrow l E n e hS c)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T020434-L-2510886",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261028T020434-L-2510886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
