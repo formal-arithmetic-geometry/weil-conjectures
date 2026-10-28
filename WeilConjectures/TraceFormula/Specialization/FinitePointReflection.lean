@@ -40,8 +40,8 @@ The proof works with the points `x : Spec κ(x) ⟶ Y`, which are closed immersi
 So `p_*` is conservative and `F` is constructible (for the stratification by points) as soon as
 `p_* F` is finitely presented; since `p_*` is exact, `Hⁿ(Rp_* K) ≅ p_* Hⁿ(K)`.
 
-The equivalence of `Mod_{Spec Ω}` with condensed `Λ`-modules for separably closed `Ω` is the
-`sorry`ed `ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`.
+The equivalence of `Mod_{Spec Ω}` with condensed `Λ`-modules for separably closed `Ω` is
+`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`.
 
 -/
 
