@@ -1,0 +1,108 @@
+{
+ "id": "new-lem-weil-pbc-lisse-finite-level-etale-local-representative",
+ "kind": "statement",
+ "title": "Etale representatives of pro-etale derived Isom sections",
+ "statement": "For arbitrary derived module sheaves on an etale scheme, a pro-etale derived Isom presheaf section carried by an etale neighbourhood of every geometric point has an actual etale derived-isomorphism representative on such a neighbourhood.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 00WJ; local representatives of Isom presheaf sections."
+ },
+ "proof": [
+  {
+   "text": "Use local surjectivity of sheafification and a common refinement to represent each supplied pro-etale Isom section by an actual inverse pair on an etale object. The finite-limit equations remain valid after refinement, and the point-fibre joint-surjectivity supplies a pointed etale representative carrying the original geometric point.",
+   "uses": [
+    "def-weil-pbc-derived-local-isomorphism-sheaf",
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H8",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 00WJ; local representatives of Isom presheaf sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale representatives of pro-etale derived Isom sections",
+   "results": "No exact project theorem; only generic sheafification, point-fibre and finite-limit APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale representatives of pro-etale derived Isom sections",
+   "results": "No exact project theorem; only generic sheafification, point-fibre and finite-limit APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale representatives of pro-etale derived Isom sections",
+   "results": "No duplicate declaration in the repository.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleLocalIsomorphisms",
+  "date": "2026-10-28",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms",
+   "place": "Strict substep of the local representative proof.",
+   "via": [
+    "lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleLocalRepresentative",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleLocalRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_local_representative_of_proetale_local_iso_sections",
+  "statement": "theorem exists_etale_local_representative_of_proetale_local_iso_sections\n    (X : Scheme.{u}) (U : X.ProEt)\n    {B : Type (u + 1)} [CommRing B]\n    (A D : DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hsections : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((derivedLocalIsoPresheaf (ProEt.topology U.left) B\n          ((derivedComparison U.left B).obj A)\n          ((derivedComparison U.left B).obj D)).obj\n            (op ((toProEt U.left).obj V)))) :\n    ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (x : Spec (.of Ω) ⟶ U.left),\n      ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V),\n        Nonempty ((localIsomorphismRestriction U.left B V).obj A ≅\n          (localIsomorphismRestriction U.left B V).obj D)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T020507-L-2516291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261028T020507-L-2516291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

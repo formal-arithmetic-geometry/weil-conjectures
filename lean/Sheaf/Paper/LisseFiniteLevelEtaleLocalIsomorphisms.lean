@@ -6,12 +6,8 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
-import Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse
-import Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
-import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import Sheaf.Paper.LisseFiniteLevelProEtaleLocalIsoSections
+import Sheaf.Paper.LisseFiniteLevelEtaleLocalRepresentative
 
 /-! # Local isomorphism representatives for a finite-level model
 
@@ -26,6 +22,7 @@ set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -79,6 +76,11 @@ theorem lisse_finite_level_etale_local_isomorphisms
             ((normalizationConstant U.left.smallEtaleTopology).obj E) ≅
           (localIsomorphismRestriction U.left
             (lisseTowerEtaleRing d n) V).obj D) := by
-  sorry
+  have hsections :=
+    lisse_finite_level_proetale_local_iso_sections X Y g d U n N E D
+      hDbounded hDlisse hcomparison hmodels
+  exact exists_etale_local_representative_of_proetale_local_iso_sections Y U
+    ((normalizationConstant U.left.smallEtaleTopology).obj E) D
+    hsections
 
 end AlgebraicGeometry.Scheme
