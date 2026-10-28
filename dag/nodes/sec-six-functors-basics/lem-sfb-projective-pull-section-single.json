@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-projective-pull-section-single",
+ "kind": "lemma",
+ "title": "Single pull section compatibility",
+ "statement": "Single pull section compatibility",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, residual compatibility after removing the ordinary support isomorphism."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: ordinary support normalization, single-object coherence for exact pullbacks, and the two adjunction counit squares. All auxiliary calculations are proved privately in the item module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supported source derived unit residual compatibility",
+   "results": "No existing theorem states this project-specific compatibility.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "diagonalTraceRightSingle secondDiagramPushIso pushSectionIso",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived unit evaluation supported diagonal source",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "C1",
+  "item": "Sheaf.Paper.ProjectiveSupportedSourceArrowDerived",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-supported-source-arrow-derived",
+   "place": "Residual compatibility after removing the ordinary support isomorphism.",
+   "via": [
+    "lem-sfb-projective-supported-source-arrow-derived"
+   ]
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectivePullSectionSingle",
+  "file": "lean/Sheaf/Paper/ProjectivePullSectionSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.projective_pull_section_single",
+  "statement": "theorem projective_pull_section_single (Y : Scheme.{u})\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y))\n    (M : Modules Λ (ProjectiveLine Y)) :\n    (pullSectionIso Λ Y f h).hom.app\n        ((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj M) =\n      (CondensedRing.upperStar Λ (diagonalImmersion Y)).leftDerivedFunctor.map\n        ((CategoryTheory.Functor.singleFunctorCompLeftDerivedFunctorIso\n          (CondensedRing.upperStar Λ f)).hom.app M) ≫\n      (CategoryTheory.Functor.singleFunctorCompLeftDerivedFunctorIso\n        (CondensedRing.upperStar Λ (diagonalImmersion Y))).hom.app\n          ((CondensedRing.upperStar Λ f).obj M) ≫\n    (DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).map\n        (((CondensedRing.upperStarComp Λ (diagonalImmersion Y) f).symm ≪≫\n          CondensedRing.upperStarCongr Λ h ≪≫\n          CondensedRing.upperStarId Λ (ProjectiveLine Y)).hom.app M)",
+  "by": "C1",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261028T072346-L-1936855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261028T072346-L-1936855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

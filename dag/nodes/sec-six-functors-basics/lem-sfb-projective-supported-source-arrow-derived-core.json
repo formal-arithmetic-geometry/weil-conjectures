@@ -16,30 +16,52 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the canonical right-derived unit on the supported source. Use the support normalization to identify the ordinary source isomorphism with the closed diagonal followed by the second projection, then transport this equality through the canonical derived pushforward comparison and the conjugate section isomorphism. The resulting residual compatibility is exactly the displayed equation.",
+   "text": "Identify the normalized ordinary support inverse with lowerStarComp followed by lowerStarCongr and lowerStarId. On underlying sheaves this is exactly d.support₂.normalization; faithfulness of module morphisms gives the module-object equality. Conjugation of upperStarComp, upperStarCongr, and upperStarId identifies its inverse with the mate of the ordinary pullback section comparison.",
    "uses": [
     "def-sfb-diagonal-coefficient-category",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the canonical derived pullback section on a single complex. The proved source-library single-functor compatibility lemmas for leftDerivedFunctorNatIso and leftDerivedFunctorCompIso identify its component with the ordinary section map after the two left-derived single comparisons. The identity comparison is computed directly from mapDerivedCategoryIdIso_factorsh.",
+   "uses": [
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport single_rightDerived_counit along the exact-left-functor comparison. Compose its instances for the projection and diagonal, using counit naturality, to obtain the single-complex counit equation for their composite adjunction. Apply the injective inverse Hom bijection to compare the ordinary and derived conjugate section maps, and use the single-complex pullback section equation from the previous step.",
+   "uses": [
+    "lem-kun-right-derived-single-counit",
     "def-sfb-projective-diagonal-composition",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The diagram field p₂_unit identifies diagonalTraceRightSingle followed by secondDiagramPushIso with the canonical singleRightDerivedUnit. For the exact diagonal direct image, the right-derived uniqueness factorization identifies its singleRightDerivedUnit with the inverse of supportedUnitIso. Postcompose the section equation with the pushforward of supportedUnitIso.hom and cancel the ordinary support normalization to obtain the stated residual equation.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-category",
     "def-sfb-rational-p1-second-pull-comparison",
-    "def-sfb-projective-diagonal-pullback",
-    "lem-kun-right-derived-single-counit"
+    "def-sfb-projective-diagonal-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sfb-diagonal-coefficient-category",
-  "def-sfb-projective-diagonal-composition",
-  "def-sfb-rational-p1-second-pull-comparison",
   "def-sfb-projective-diagonal-pullback",
-  "lem-kun-right-derived-single-counit"
+  "lem-kun-right-derived-single-counit",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A2",
+  "group": "C1",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Residual compatibility after support normalization."
+  "place": "Second identity: ordinary support normalization, single-object coherence for exact pullbacks, and the two adjunction counit squares. All auxiliary calculations are proved privately in the item module."
  },
  "mathlib_searches": [
   {
@@ -99,7 +121,7 @@
   "declaration": "AlgebraicGeometry.ProEtale.RationalP1.supported_source_arrow_derived_core",
   "statement": "theorem supported_source_arrow_derived_core\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    diagonalTraceRightSingle\n          (CondensedRing.lowerStar Λ (secondProjection Y)) d.R₂\n          (source Λ Y) ≫\n        (secondDiagramPushIso Λ Y L d).hom.app\n          ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n            (source Λ Y)) =\n      (DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).map d.support₂.iso.inv ≫\n        (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
   "branch": "sheaf-dag",
-  "by": "A2",
+  "by": "C1",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -116,10 +138,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261028T034645-L-3528242",
-  "kind": "proof",
+  "landing": "20261028T072346-L-1936855",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

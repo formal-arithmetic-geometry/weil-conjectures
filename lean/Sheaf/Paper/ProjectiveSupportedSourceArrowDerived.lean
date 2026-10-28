@@ -3,6 +3,11 @@ module
 public import Sheaf.Paper.ProjectiveDiagonalComposition
 public import Sheaf.Paper.RationalP1SecondPullComparison
 public import Sheaf.Paper.DiagonalCoefficientCategory
+import Sheaf.Paper.ProjectivePullSectionSingle
+import Sheaf.Paper.ProjectiveSupportedNormalization
+import Sheaf.Paper.ProjectiveSectionSingle
+import Sheaf.Paper.ProjectiveDiagramSingle
+import Sheaf.Paper.ProjectiveResidualTarget
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,7 +43,8 @@ theorem supported_source_arrow_derived_core
         (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫
         (moduleObjectDerivedPushforward Λ (secondProjection Y)).map
           (supportedUnitIso Λ Y).hom := by
-  sorry
+  rw [projective_diagram_single Λ Y L d]
+  exact projective_residual_target Λ Y L d
 
 /-- Derived-unit evaluation of the supported source.
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
