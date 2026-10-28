@@ -13,6 +13,8 @@ public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
 public import Sheaf.Paper.OrdinaryCompletedIntegralPullback
+import all Sheaf.Paper.OrdinaryIntegralPullbackConstruction
+import all Sheaf.Paper.IntegralOperationsWellDefined
 import Sheaf.Paper.IntegralResidueTor
 import Sheaf.SixFunctors.CoefIntegralFiniteExtensionInvertibility
 
@@ -269,7 +271,29 @@ theorem pullCompletion_existsUnique :
             (HasDerivedCategory.standard _)).map (ordinaryPullComplexMap l E f P.obj) ≫
           (@DerivedCategory.Q (scalarReductionSource.{u, u} l E X) _ _
             (HasDerivedCategory.standard _)).map (ordinaryIntegralCompletionChain l E f P.obj) := by
-  sorry
+  let := ordinaryIntegralModulePull_additive l E f
+  let QX := @DerivedCategory.Q (scalarReductionSource.{u, u} l E X) _ _
+    (HasDerivedCategory.standard _)
+  let L := integralOperationsGoodLocalization l E Y
+  let O := PurCompactSupport.pull (PurCompactSupport.completed l E) f
+  let F := integralDerivedPullback.{u, u} l E f
+  let e := integralDerivedPullbackComparison.{u, u} l E f
+  let β : L ⋙ O ⟶ integralOperationsPullbackOnGood l E f :=
+    Functor.whiskerLeft (integralOperationsGoodComplex.{u, u} l E Y).ι
+      ((proEtaleRingDerivedPullbackFactors f
+        ((PurCompactSupport.completed l E).ring Y)
+        ((PurCompactSupport.completed l E).ring X)
+        ((PurCompactSupport.completed l E).pull f)).hom ≫
+      Functor.whiskerRight
+        (NatTrans.mapHomologicalComplex (ordinaryPullIso l E f).hom (.up ℤ)) QX ≫
+      Functor.whiskerRight (ordinaryIntegralCompletionNat l E f) QX)
+  let ff := Classical.choice (good_whisker_fullyFaithful l E Y
+    (DerivedCategory (integralTowerModules l E X)))
+  have h := ordinaryNormalizedComparison_existsUnique L ff O F _ e β
+  simpa only [L, O, F, e, integralOperationsGoodLocalization, Functor.comp_obj,
+    ObjectProperty.ι_obj, β, QX, ordinaryPullComplexMap, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    ordinaryIntegralCompletionNat_app] using h
 
 /-- The canonical ordinary-to-completed pullback map, with the complete chain normalization.
 Source: blueprint Steps 2 and 11
