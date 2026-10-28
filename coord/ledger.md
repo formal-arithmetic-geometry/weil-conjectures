@@ -20759,3 +20759,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:00 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (reviewer C-945b3, head 945b332c1) 2/3 (worst fault): complete proofs deleted and replaced by sorry'd *_split/new theore)
 - 03:24 L: returned deliver/Y7/Sheaf.Paper.IntegralSupportOperationRealization (reviewer RETURN: (reviewer C-86ee2, head 86ee2aad2) 2b (unneeded adaptation): in Sheaf.Paper.IntegralExceptionalInverseImage only the one)
 - 03:41 L: returned deliver/W4/Sheaf.Paper.TensorReductionCanonicalSquare (reviewer RETURN: (the landing tools, head 923cc0b9c) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
+- 03:43 L: returned deliver/D8/Sheaf.Paper.CompactSupportCondensedRealization (reviewer RETURN: (reviewer C-896c8, head 896c86fcd) A3/2b: the CompactSupportCoefficientBasis split is not needed (published item 25.9 s,)
