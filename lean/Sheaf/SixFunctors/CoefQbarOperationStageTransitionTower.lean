@@ -22,6 +22,20 @@ universe u v
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.CoefQbarVerdier
 
+private theorem associator_transport
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {F F' : C ⥤ D} {G G' : D ⥤ E} {H H' : C ⥤ E}
+    (p : F = F') (q : G = G') (r : H = H')
+    (a : F ⋙ G ≅ H) (a' : F' ⋙ G' ≅ H') (ha : HEq a a') (W : C) :
+    G.map ((eqToIso p).hom.app W) ≫
+        (eqToIso q).hom.app (F'.obj W) ≫ a'.hom.app W =
+      a.hom.app W ≫ (eqToIso r).hom.app W := by
+  subst F'
+  subst G'
+  subst H'
+  cases eq_of_heq ha
+  simp
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (X : Scheme.{u})
@@ -41,6 +55,13 @@ theorem operationStageTransitionIso_tower
         ((GeneralAlgebraicallyClosedCoefficients.transition l Ω X E L h).obj W) ≫
       (GeneralAlgebraicallyClosedCoefficients.associator l Ω X E L M h k).hom.app W =
     ((stageSystem l Ω X).assoc h k).hom.app W ≫
-      (operationStageTransitionIso l Ω X E M (h.trans k)).hom.app W := by sorry
+      (operationStageTransitionIso l Ω X E M (h.trans k)).hom.app W := by
+  exact associator_transport
+    ((stageSystem_existsUnique l Ω X).exists.choose_spec.1 E L h)
+    ((stageSystem_existsUnique l Ω X).exists.choose_spec.1 L M k)
+    ((stageSystem_existsUnique l Ω X).exists.choose_spec.1 E M (h.trans k))
+    ((stageSystem l Ω X).assoc h k)
+    (GeneralAlgebraicallyClosedCoefficients.associator l Ω X E L M h k)
+    ((stageSystem_existsUnique l Ω X).exists.choose_spec.2 E L M h k) W
 
 end WeilConjectures.CoefQbarVerdier
