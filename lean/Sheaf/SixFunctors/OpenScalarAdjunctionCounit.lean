@@ -42,6 +42,7 @@ Source: Weil blueprint, `lem-coef-finite-closed-shriek`, proof paragraph 3
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
@@ -274,6 +275,34 @@ def ScalarCounit {A B : Type u} [CommRing A] [CommRing B]
         (proEtaleConstantRing X A) (proEtaleConstantRing V A)
         (proEtaleConstantRingComparison j A)).counit.app M)
 
+/-- The geometric and finite-Tor package for one finite coefficient ring.
+
+This is the one-coefficient component of the two-ring package below. Its proof follows
+paragraph 3 of `lem-coef-finite-closed-shriek`: Noetherianity and exactness give the
+closed/open origin clauses, the finite flat model and preservation-class theorem give the
+finite-Tor clauses, and the normalized exceptional adjunction comparison gives the displayed
+counit-compatible isomorphism.
+Source: Weil blueprint, `lem-coef-finite-closed-shriek`, proof paragraph 3
+(blueprint: lem-coef-open-scalar-adjunction-counit-factored-single).
+-/
+theorem coefficient_factored_single
+    (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E]
+    (m : ℕ) (hm : 1 ≤ m)
+    {W V X : Scheme.{u}}
+    [W.Over (Spec (.of F.k))] [V.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of F.k))] [QuasiCompact (V ↘ Spec (.of F.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))]
+    [IsSeparated (W ↘ Spec (.of F.k))] [IsSeparated (V ↘ Spec (.of F.k))]
+    [IsSeparated (X ↘ Spec (.of F.k))]
+    (t : W ⟶ V) (j : V ⟶ X) [t.IsOver (Spec (.of F.k))]
+    [j.IsOver (Spec (.of F.k))] [IsClosedImmersion t] [IsOpenImmersion j]
+    (c : Compactification (t ≫ j)) :
+    CoefficientFactored F.k l E m hm t j c := by
+  sorry
+
 /-- The two coefficient-domain packages in the locally closed factorization.
 
 This is the geometric and finite-Tor portion of the proof plan. Finite type over
@@ -282,7 +311,8 @@ preserve etale origins, and the bounded flat model plus the preservation-class
 comparison supplies the displayed finite-Tor and counit data. The remaining
 unbounded scalar calculation is isolated in `scalar_counit_aux`.
 Source: Weil blueprint, `lem-coef-finite-closed-shriek`, proof paragraph 3
-(blueprint: lem-coef-open-scalar-adjunction-counit-factored-aux). -/
+(blueprint: lem-coef-open-scalar-adjunction-counit-factored-aux).
+-/
 theorem coefficient_factored_aux
     (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)
     (E L : Type u) [Field E] [Field L]
@@ -302,7 +332,8 @@ theorem coefficient_factored_aux
     (c : Compactification (t ≫ j)) :
     CoefficientFactored F.k l E m hm t j c ∧
       CoefficientFactored F.k l L n hn t j c := by
-  sorry
+  exact ⟨coefficient_factored_single F l _hl E m hm t j c,
+    coefficient_factored_single F l _hl L n hn t j c⟩
 
 /-- Open scalar adjunction and the factored actual exceptional counit.
 Source: Weil blueprint, lem-coef-finite-closed-shriek, proof paragraph 3
