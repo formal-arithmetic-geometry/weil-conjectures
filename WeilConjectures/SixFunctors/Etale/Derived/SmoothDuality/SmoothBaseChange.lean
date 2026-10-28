@@ -20,14 +20,13 @@ compactification is an isomorphism (blueprint `prop-asd-smooth-base-change`).
 The proof reduces, through the étale-local normal form of a smooth morphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine`), to the
 étale case (`AlgebraicGeometry.Etale.etaleBaseChange`) and to the affine-line case
-(`AlgebraicGeometry.Etale.affineLineBaseChange`), which is the base change compatibility of the
-affine-space adjunction (`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, blueprint
-`sk-lem-geo-affine-local`).
+(`AlgebraicGeometry.Etale.affineLineBaseChange`), which comes from the projective-line adjunction
+and gives the base change compatibility of the affine-space adjunction
+(`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, blueprint `sk-lem-geo-affine-local`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange` (`sk-lem-geo-affine-local`)
-- `AlgebraicGeometry.Etale.affineLineBaseChange`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`
   (`prop-asd-smooth-base-change`).
@@ -88,14 +87,7 @@ theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertib
       [HasCompactification p'] [QuasiCompact p'],
       IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
   ⟨nonempty_rightDerivedLowerShriek_adjunction_affineSpace Λ d S, fun _ _ _ _ _ sq _ _ ↦
-    isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace_of_hasInvertibleExponent Λ d S sq⟩
-
-/-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
-blueprint `prop-asd-smooth-base-change`: the case `d = 1` of
-`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`. -/
-theorem affineLineBaseChange : AffineLineBaseChange Λ := by
-  intro S _ _ S' P' g p' g' sq _ _
-  exact (affineSpaceAdjunction_baseChange Λ 1 S).2 sq
+    isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace (affineLineBaseChange Λ) d S sq⟩
 
 variable {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X]
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]

@@ -42,34 +42,14 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 blueprint `det-sp-p1-adjunction`.
 
 **The projective-line adjunction commutes with base change.** For a normalized Tate twist and
-every scheme `S` on which the exponent of `Λ` is invertible (affine or not), the adjunctions
+every scheme `S` on which the exponent of `Λ` is invertible, the adjunctions
 `Rq_! ⊣ Lq^*(1)[2]` of the projective line `q : ℙ¹_S ⟶ S` and of its base change along any
 `g : S' ⟶ S` have counits compatible with the compact-support base change, in the sense of
 `AlgebraicGeometry.Etale.ProjectiveLineAdjunctionBaseChange`: the unit and the counit of the
 blueprint are built from the cycle class of the diagonal, the trace, proper base change and the
 projection formula, all of which commute with base change. -/
 theorem projectiveLineAdjunctionBaseChange_of_isNormalized [HasTateTwist Λ]
-    [HasTateTwist.IsNormalized Λ] ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S]
-    ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
-    (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
-    [QuasiCompact q'] :
-    haveI : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)
-    haveI : HasInvertibleExponent Λ P' := .of_hom (g' ≫ _ ↘ S)
-    haveI : HasInvertibleExponent Λ S' := .of_hom g
-    ∃ (adj : R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
-        L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
-          twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)
-      (adj' : R(q')_![ModuleCat.{u + 1} Λ] ⊣
-        L((q')^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ P' 1),
-      ∀ K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-        (rightDerivedLowerShriekBaseChangeMap Λ sq).app
-            ((twistShift Λ _ 1).obj
-              ((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).obj K)) ≫
-          (R(q')_![ModuleCat.{u + 1} Λ]).map
-            ((leftDerivedUpperStarTwistShiftIso Λ g' 1 _).hom ≫
-              (twistShift Λ P' 1).map ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app K)) ≫
-            adj'.counit.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) =
-          (L((g)^*[ModuleCat.{u + 1} Λ])).map (adj.counit.app K) :=
+    [HasTateTwist.IsNormalized Λ] : ProjectiveLineAdjunctionBaseChange Λ :=
   sorry
 
 end Etale

@@ -48,7 +48,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 variable (Λ) in
-/-- *Base change for projective-line projections*: for every affine scheme `S` on which the
+/-- *Base change for projective-line projections*: for every scheme `S` on which the
 exponent of `Λ` is invertible and every cartesian square of the projection
 `q : ℙ¹_S ⟶ S` (here `ℙ¹_S = ℙ(Option (Fin 1); S)`, the target of the standard chart of `𝔸¹_S`)
 with quasi-compact base change admitting a compactification, the canonical base change map
@@ -56,7 +56,7 @@ with quasi-compact base change admitting a compactification, the canonical base 
 `Rq^! = q^*(1)[2]` with counit built from the projective-line trace, and unit and counit commute
 with base change. -/
 def ProjectiveLineBaseChange : Prop :=
-  ∀ ⦃S : Scheme.{u}⦄ [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+  ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
     (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
     [QuasiCompact q'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
@@ -67,7 +67,7 @@ the projection `ℙ¹_S ⟶ S`; base change maps compose, and base change holds 
 immersions. -/
 theorem affineLineBaseChange_of_projectiveLineBaseChange (h : ProjectiveLineBaseChange Λ) :
     AffineLineBaseChange Λ := by
-  intro S _ _ S' P' g p' g' sq _ _
+  intro S _ S' P' g p' g' sq _ _
   have : QuasiCompact (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S ≫
       ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) := by
     rw [AffineSpace.toRelativeProjectiveSpace_over]
@@ -89,7 +89,7 @@ variable [HasTateTwist Λ]
 
 variable (Λ) in
 /-- *The projective-line adjunction commutes with base change* (the form in which blueprint
-`det-sp-p1-adjunction` is used): for every affine scheme `S` on which the exponent of `Λ` is
+`det-sp-p1-adjunction` is used): for every scheme `S` on which the exponent of `Λ` is
 invertible and every cartesian square
 
 ```
@@ -111,7 +111,7 @@ In the blueprint, `Rq_! = Rq_*` (`q` is proper), and the counit is
 `ε_K : Rq_* q^* K(1)[2] ≅ K ⊗ Rq_* Λ(1)[2] ⟶ K`, from the trace `Tr_q` of `def-amb-p1-trace`; the
 counit commutes with base change since the trace and the projection formula do. -/
 def ProjectiveLineAdjunctionBaseChange : Prop :=
-  ∀ ⦃S : Scheme.{u}⦄ [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+  ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
     (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
     [QuasiCompact q'],
@@ -141,7 +141,7 @@ isomorphism `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`
 (`CategoryTheory.isIso_mateEquiv_app_of_counit`). -/
 theorem projectiveLineBaseChange_of_adjunction (h : ProjectiveLineAdjunctionBaseChange Λ) :
     ProjectiveLineBaseChange Λ := by
-  intro S _ _ S' P' g q' g' sq _ _
+  intro S _ S' P' g q' g' sq _ _
   have : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)
   have : HasInvertibleExponent Λ P' := .of_hom (g' ≫ _ ↘ S)
   have : HasInvertibleExponent Λ S' := .of_hom g
