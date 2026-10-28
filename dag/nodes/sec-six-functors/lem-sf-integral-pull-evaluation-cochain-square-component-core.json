@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-integral-pull-evaluation-cochain-square-component-core",
+ "kind": "statement",
+ "title": "Expanded cochain component core for ordinary pullback evaluation transition",
+ "statement": "For the same data as the degreewise ordinary pullback evaluation transition square, after expanding the ordinary pullback evaluation complex into the inverse evaluation isomorphism followed by the mapped intrinsic pullback isomorphism, the displayed component equality holds at a cochain degree i. This is the explicit component calculation used by the parent statement.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, degreewise section calculation."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Expand the mapped homological-complex components of the inverse evaluation isomorphism and the intrinsic finite pullback isomorphism. Compute both composites on a generating section at (n,U); the adjunction-unit normalization and the identity-on-sections scalar comparison identify the two maps. Extensionality gives the stated component equality.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, degreewise section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "expanded degreewise cochain pullback evaluation transition square",
+   "results": "No exact match; only generic HomologicalComplex component lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex_map_f NatTrans.mapHomologicalComplex_app_f",
+   "results": "Generic component lemmas only; no geometric square.",
+   "date": "2026-10-28",
+   "verdict": "Used generic component expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensorInverseEvaluationComplex coefficientSequenceTransition",
+   "results": "No completed square in the source tree.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquareComponent",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-pull-evaluation-cochain-square-component",
+   "place": "explicit component expansion",
+   "via": [
+    "lem-sf-integral-pull-evaluation-cochain-square-component"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquareComponentCore",
+  "file": "lean/Sheaf/SixFunctors/IntegralPullEvaluationCochainSquareComponentCore.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralPullEvaluation_cochainSquare_component_core_expanded",
+  "statement": "theorem integralPullEvaluation_cochainSquare_component_core_expanded\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRModuleRes l E Y (Nat.le_succ n))\n    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f\n      (Padic.coefficientExtensionTransition l E (n + 1))).symm)\n    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ) (i : ℤ) :\n    ((NatTrans.mapHomologicalComplex\n        (coefficientSequenceTransition l E X (Nat.le_succ n)) (.up ℤ)).app\n        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)).f i ≫\n      (((normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).map\n        (((pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫\n    Functor.isoWhiskerLeft\n      ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))\n      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n)\n        (.up ℤ))).hom.app P)).f i =\n    ((((pullbackTensorInverseEvaluationComplex l E f (n + 1)).symm ≪≫\n    Functor.isoWhiskerLeft\n      ((coefficientSequenceEvaluation l E Y (n + 1)).mapHomologicalComplex (.up ℤ))\n      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f (n + 1))\n        (.up ℤ))).hom.app P)).f i ≫\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapHomologicalComplex\n        (.up ℤ)).map\n        ((NatTrans.mapHomologicalComplex\n          (coefficientSequenceTransition l E Y (Nat.le_succ n)) (.up ℤ)).app P)).f i ≫\n      ((NatTrans.mapHomologicalComplex\n        ((mateEquiv\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm\n          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app\n        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i ",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T020351-L-2501586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261028T020351-L-2501586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

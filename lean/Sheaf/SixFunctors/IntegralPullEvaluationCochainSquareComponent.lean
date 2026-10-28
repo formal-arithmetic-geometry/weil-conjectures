@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.IntegralSystemOperations
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.SixFunctors.IntegralPullEvaluationCochainSquareComponentCore
 
 /-! Degreewise ordinary pullback evaluation transition square. -/
 
@@ -19,6 +20,10 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic
+attribute [local implicit_reducible] Functor.mapHomologicalComplex
+  coefficientSequenceEvaluation pullbackTensorSequenceInverse
 
 /-- The ordinary cochain comparison used by the degreewise square.
 Source: Zheng Construction 4.1 and Lemma 4.10.
@@ -72,7 +77,8 @@ theorem integralPullEvaluation_cochainSquare_component {X Y : Scheme.{u}} (f : X
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app
-        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i := by
-  sorry
+        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i  := by
+  simpa only [ordinaryPullEvaluationComplex] using
+    (integralPullEvaluation_cochainSquare_component_core_expanded l E f n r₀ hr₀ P i)
 
 end WeilConjectures.IntegralSystemRealization
