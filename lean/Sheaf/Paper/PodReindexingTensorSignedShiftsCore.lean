@@ -6,6 +6,8 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.Paper.PodCompletionReindexShifts
+import Sheaf.Paper.PodReindexingTensorSignedShiftModels
+import Sheaf.Paper.PodReindexingTensorSignedShiftCompatibility
 
 /-! # Core signed-shift models for tensor reindexing -/
 
@@ -58,6 +60,11 @@ theorem podReindexingTensorSignedShifts_core
       PodLimitSignedShift l E X D.targetRoos D.shiftTarget ∧
       SY.Generators l E ∧ SX.Generators l E ∧
       SY.Model l E D.shiftSource ∧ SX.Model l E D.shiftTarget := by
-  sorry
+  obtain ⟨SY, SX, hSYg, hSXg, hSYm, hSXm⟩ :=
+    podReindexingTensorSignedShiftModels l E g D hD T hT
+  obtain ⟨hred, hlim, hY, hX⟩ :=
+    podReindexingTensorSignedShiftCompatibility l E g D hD T hT SY SX
+      hSYg hSXg hSYm hSXm
+  exact ⟨SY, SX, hred, hlim, hY, hX, hSYg, hSXg, hSYm, hSXm⟩
 
 end WeilConjectures

@@ -1,0 +1,109 @@
+{
+ "id": "lem-pod-reindexing-tensor-signed-shifts-core-compatibility-r3",
+ "kind": "statement",
+ "title": "Compatibility of signed tensor shifts with normalized reindexing",
+ "statement": "theorem podReindexingTensorSignedShiftCompatibility {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T) (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) (hSYg : SY.Generators l E) (hSXg : SX.Generators l E) (hSYm : SY.Model l E D.shiftSource) (hSXm : SX.Model l E D.shiftTarget) : NatTrans.CommShift D.reduction.hom ℤ ∧ NatTrans.CommShift D.limit.hom ℤ ∧ PodLimitSignedShift l E Y D.sourceRoos D.shiftSource ∧ PodLimitSignedShift l E X D.targetRoos D.shiftTarget",
+ "stmt_deps": [
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; reduction, limit, and Roos compatibility."
+ },
+ "proof": [
+  {
+   "text": "Use the quotient generator equation and the two-coordinate Roos comparison. The first coordinate is the projection-defined product comparison and the second receives (-1)^r. The Roos shift law in hD and the representative-model equations descend the equations through localization, yielding CommShift for reduction and limit and both PodLimitSignedShift laws.",
+   "uses": [
+    "lem-pod-reindexing-signed-roos-shift",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-signed-roos-shift",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; reduction, limit, and Roos compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "NatTrans.CommShift normalized reduction limit Roos tensor reindexing",
+   "results": "No exact project-specific declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PodLimitSignedShift NatTrans.CommShift",
+   "results": "No match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodLimitSignedShift|RoosShift",
+   "results": "Only the existing definitions and lower signed Roos comparison.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShiftsCore",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-signed-shifts-core-r3",
+   "place": "Steps 1 and 5; reduction, limit, and Roos compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorSignedShiftCompatibility",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorSignedShiftCompatibility.lean",
+  "declaration": "WeilConjectures.podReindexingTensorSignedShiftCompatibility",
+  "statement": "theorem podReindexingTensorSignedShiftCompatibility {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T) (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) (hSYg : SY.Generators l E) (hSXg : SX.Generators l E) (hSYm : SY.Model l E D.shiftSource) (hSXm : SX.Model l E D.shiftTarget) : NatTrans.CommShift D.reduction.hom ℤ ∧ NatTrans.CommShift D.limit.hom ℤ ∧ PodLimitSignedShift l E Y D.sourceRoos D.shiftSource ∧ PodLimitSignedShift l E X D.targetRoos D.shiftTarget",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020222-L-2480591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020222-L-2480591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

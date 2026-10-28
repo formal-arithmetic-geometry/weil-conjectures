@@ -1,0 +1,108 @@
+{
+ "id": "lem-pod-reindexing-tensor-signed-shifts-core-models-r3",
+ "kind": "statement",
+ "title": "Signed tensor shift models and intrinsic laws",
+ "statement": "theorem podReindexingTensorSignedShiftModels {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T) : ∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X, SY.Generators l E ∧ SX.Generators l E ∧ SY.Model l E D.shiftSource ∧ SX.Model l E D.shiftTarget",
+ "stmt_deps": [
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; construction of the two signed tensor shift models."
+ },
+ "proof": [
+  {
+   "text": "Relabel the direct-sum tensor summands on flat-term K-flat representatives for every integer shift. The first-factor map has no Koszul factor and the second-factor map has the factor (-1)^(pr). Verify the signed total differential and quotient transitions, localize the maps, and use the normalized Roos comparison to obtain the Generators and Model laws.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pod-reindexing-signed-roos-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pod-reindexing-signed-roos-shift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; construction of the two signed tensor shift models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "signed tensor shift models for flat-term K-flat complexes",
+   "results": "No exact project-specific declaration; generic cochain tensor shift isomorphisms only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PodTensorSignedShift Generators Model",
+   "results": "No match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodTensorSignedShift",
+   "results": "Only the target definitions and this split declaration.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShiftsCore",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-signed-shifts-core-r3",
+   "place": "Steps 1 and 5; construction of the two signed tensor shift models.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorSignedShiftModels",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorSignedShiftModels.lean",
+  "declaration": "WeilConjectures.podReindexingTensorSignedShiftModels",
+  "statement": "theorem podReindexingTensorSignedShiftModels {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T) : ∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X, SY.Generators l E ∧ SX.Generators l E ∧ SY.Model l E D.shiftSource ∧ SX.Model l E D.shiftTarget",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020222-L-2480591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261028T020222-L-2480591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

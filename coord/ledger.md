@@ -20545,3 +20545,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:02 L: merged deliver/C1/Sheaf.Paper.PodReindexingTensorRoosNormalization (stage 3; reviewer PASS; first push; landing 20261028T020214-L-2479204 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:02 L: merged deliver/C2/Sheaf.Paper.AmbientCoefficientPullbackFiniteIso (stage 3; reviewer PASS; first push; landing 20261028T020215-L-2479401 (proof); batch 20261028T020127; modules 1; new nodes 0)
 - 02:02 L: merged deliver/C2/Sheaf.Paper.CoefficientTwistsDetailed (stage 3; reviewer PASS; first push; landing 20261028T020216-L-2479749 (interface); batch 20261028T020127; modules 4; new nodes 3)
+- 02:02 L: merged deliver/C2/Sheaf.Paper.PodReindexingTensorSignedShiftsCore (stage 3; reviewer PASS; first push; landing 20261028T020222-L-2480591 (interface); batch 20261028T020127; modules 3; new nodes 2)
