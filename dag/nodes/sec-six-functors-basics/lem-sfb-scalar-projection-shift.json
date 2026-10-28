@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-scalar-projection-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of the scalar-first derived projection",
+ "statement": "Let Λ be a commutative condensed ring, f : X → Y a morphism of schemes, L = Lf* and R = Rf* on derived categories of internal Λ-modules, and K a derived module on X. Form the scalar-first natural projection B ⊗ R(K) → R(L(B) ⊗ K) as the right-adjoint projection map of L ⊣ R with both tensor bifunctors flipped and the canonical generic derived tensor comparison. This natural transformation commutes with the integer shifts for the native derived tensor and derived-functor shift structures.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free coefficient extensions: compatibility with cones"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-derived-tensor-modules",
+  "new-proetale-derived-module-pullback-monoidal",
+  "def-sfb-scalar-first-projection-transformation"
+ ],
+ "proof": [
+  {
+   "text": "Identify the generic derived tensor comparison with the native tensor comparison. The native comparison commutes with shifts in the first variable, so its flipped application at R(K) commutes with shifts. The map induced by the derived counit under tensor-right also commutes with shifts.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "def-sfb-derived-tensor-modules",
+    "def-sfb-scalar-first-projection-transformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing generic right-adjoint-projection shift theorem to both flipped tensor bifunctors and the native derived adjunction, which commutes with shifts. Its comparison and counit hypotheses are exactly the preceding two compatibilities. This proves shift compatibility of the scalar-first projection as a natural transformation in B.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-proetale-derived-module-pullback-monoidal",
+  "def-sfb-derived-tensor-modules",
+  "def-sfb-scalar-first-projection-transformation",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free coefficient extensions, cone compatibility; native tensor-comparison shift theorem and generic adjunction projection-map theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projection natural transformation obtained from an adjunction commuting with shifts and a tensor comparison commuting with shifts also commutes with shifts.",
+   "results": "Found Adjunction.CommShift and its unit/counit compatibilities. The source library additionally has commShift_rightAdjointProjectionMap_app, which proves exactly the needed formal implication.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "Found the class and its identity, composition and whiskering infrastructure. The existing source-library generic projection theorem combines these compatibilities.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_rightAdjointProjectionMap_app",
+   "results": "No indexed result. Direct source search found this theorem in WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift and the native tensor-comparison compatibility in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift; both are imported.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeScalarProjectionTriangle",
+  "date": "2026-10-28",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-free-scalar-projection-triangle",
+   "place": "The shift compatibility needed for the mapping-cone triangle",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarProjectionShift",
+  "file": "lean/Sheaf/Paper/ScalarProjectionShift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarProjection_commShift",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarProjection_commShift"
+  ],
+  "statement": "theorem scalarProjection_commShift\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    NatTrans.CommShift (scalarFirstProjection Λ f K) ℤ",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T055702-L-795471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261028T055702-L-795471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
