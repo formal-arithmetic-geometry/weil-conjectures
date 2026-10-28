@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-constant-adic-quotient-realization-iso-lift",
+ "kind": "statement",
+ "title": "Algebraic isomorphism extracted from a constant adic quotient realization",
+ "statement": "Under the hypotheses of the constant quotient realization statement, a realized isomorphism determines an algebraic morphism between the two derived coefficient objects that is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 093J and 03Q3, the nonempty-chart stalk detection part"
+ },
+ "stmt_deps": [
+  "lem-sfb-constant-realization-reflects-isomorphism",
+  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transport the realized isomorphism through the canonical completion quotient comparison and the inverse-image/constant-section comparison. Evaluate at the supplied point of the etale chart; the stalk of a constant quotient module is its coefficient module, so this evaluation gives an algebraic morphism. Exactness identifies the stalks of its kernel and cokernel with zero, and nonempty-chart constant-section detection forces the kernel and cokernel to vanish. Hence the extracted algebraic morphism is an isomorphism.",
+   "uses": [
+    "lem-sfb-constant-realization-reflects-isomorphism",
+    "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-realization-reflects-isomorphism",
+  "def-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 093J and 03Q3, the nonempty-chart stalk detection part"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given an isomorphism after constant adic quotient realization, construct an algebraic morphism between arbitrary unbounded derived module objects that is an isomorphism",
+   "results": "No theorem for this constant adic quotient realization and coefficient interface; only generic derived isomorphism criteria were returned.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extract an algebraic derived isomorphism from an isomorphism after constant sheaf realization at a nonempty point",
+   "results": "Returned generic derived homology and adic-completion declarations, but no constant-realization lifting theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant adic quotient realization iso lift; searched lean/WeilConjectures and lean/Sheaf plus Mathlib for constant realization lifting declarations",
+   "results": "No existing declaration has this quotient, coefficient, and point-stalk extraction interface.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantAdicQuotientRealizationHomologyLift",
+  "date": "2026-10-28",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-adic-quotient-realization-reflects-iso",
+   "place": "The nonempty-chart stalk detection step used to extract the algebraic isomorphism before applying the derived isomorphism criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantAdicQuotientRealizationIsoLift",
+  "file": "lean/Sheaf/Paper/ConstantAdicQuotientRealizationIsoLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantAdicQuotientRealization_iso_lift",
+  "statement": "theorem constantAdicQuotientRealization_iso_lift\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (W : Y.Etale) (_w : W.left)\n    (E F : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))))\n    (h : Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅\n      (constantAdicQuotientRealization (W.hom ≫ g) d n).obj F)) :\n    ∃ f : E ⟶ F, IsIso f",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261028T020504-L-2515902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261028T020504-L-2515902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

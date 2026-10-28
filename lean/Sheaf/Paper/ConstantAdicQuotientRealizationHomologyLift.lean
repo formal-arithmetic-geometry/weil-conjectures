@@ -1,12 +1,12 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group M4
+Authors: SHEAF group H5
 -/
 module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
-import Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism
+import Sheaf.Paper.ConstantAdicQuotientRealizationIsoLift
 
 /-! # Homology-level lift from a constant adic quotient realization -/
 
@@ -24,16 +24,9 @@ Source: Stacks Project, sites-modules.tex, Tags 093J and 03DH; proetale.tex,
 Tag 03Q3.
 (blueprint: lem-weil-pbc-constant-adic-quotient-realization-homology-lift).
 
-Proof: transport the realized isomorphism through the canonical completion
-quotient comparison and the inverse-image/constant-section comparison.  Choose
-the supplied point of the etale chart and apply the exact geometric stalk
-functor.  The stalk of a constant quotient module is the corresponding
-coefficient module, so the stalked isomorphism descends to a morphism of the
-algebraic derived objects.  Exactness identifies its stalked cohomology maps
-with the original realized maps; the nonempty point and constant-section
-detection make each of these maps invertible.  The construction is natural in
-roofs, hence gives one morphism whose every cohomology map is an isomorphism.
-No boundedness or finiteness assumption is used.
+Proof: apply the point-stalk extraction theorem to obtain an algebraic
+isomorphism.  The unbounded derived isomorphism criterion identifies an
+isomorphism in the derived category with isomorphisms on every homology object.
 -/
 theorem constantAdicQuotientRealization_homology_lift
     (X Y : Scheme.{u}) (g : Y ⟶ X)
@@ -47,6 +40,10 @@ theorem constantAdicQuotientRealization_homology_lift
       IsIso ((DerivedCategory.homologyFunctor
         (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸
           (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) i).map f) := by
-  sorry
+  obtain ⟨f, hf⟩ := constantAdicQuotientRealization_iso_lift X Y g d n W _w E F h
+  refine ⟨f, ?_⟩
+  exact (DerivedCategory.isIso_iff
+    (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸
+      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) f).mp hf
 
 end AlgebraicGeometry.Scheme
