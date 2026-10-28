@@ -12,28 +12,37 @@
  ],
  "proof": [
   {
-   "text": "Choose a flat-term K-flat representative of each derived object, apply the restricted K-flat tensor identification to the finite-free augmentation, and descend the resulting comparison along the site-derived tensor localization. The resulting natural isomorphisms satisfy the ordinary augmentation normalization by the fixed coefficient and total-complex formulas.",
+   "text": "Use finiteFreeScalarDerivedComparison_augmentation to identify the fixed two-term model with its augmented degree-zero target in the derived category. The remaining construction is schemewise and does not use the geometric comparison data.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pe-restricted-kflat-tensor-identification",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sfb-kflat-scalar-comparison-normalization"
+    "lem-sfb-finite-free-scalar-derived-comparison-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing internal-module coequalizer comparison extendTensorNatIso, with inverse underlying extendForgetTensorObjIso.inv, for the ordinary coefficient tensor identification. Identify the pulled-back target with the single complex on the restricted regular module. Tensor this identification with a complex, apply mapBifunctorSingle₁Iso and the degreewise ordinary comparison. Naturality follows from tensor interchange and the single-complex comparison. Its (0,n) summand is exactly targetZeroIso tensor identity followed by the specified ordinary comparison.",
+   "uses": [
+    "lem-pe-internal-kflat-scalar-tower-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare Q followed by derived tensor with the model, and Q followed by derived scalar change then exact restriction, to the same ordinary extension-restriction complex. The first comparison is Q lax multiplication, tensor augmentation, and the total comparison just constructed; the second is restricted scalarCounit and the restriction localization factor. On K-flat input the second is invertible by the total-left-derived counit theorem; the first is invertible by naturality of Q lax multiplication, the quasi-isomorphic augmentation, and the K-flat tensor-counit theorem. Fully faithful precomposition with localization of the full subcategory of native K-flat complexes descends their ratio to a natural isomorphism. The map-preimage identity gives exactly the required augmentation equation on every K-flat complex. Schemewise choice yields the stated family.",
+   "uses": [
+    "lem-pe-internal-kflat-scalar-tower-realization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pe-restricted-kflat-tensor-identification",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-sfb-kflat-scalar-comparison-normalization"
+  "lem-sfb-finite-free-scalar-derived-comparison-augmentation",
+  "lem-pe-internal-kflat-scalar-tower-realization"
  ],
  "proof_origin": {
-  "by": "E4 stage 3 proof",
-  "group": "E4",
+  "by": "worker",
+  "group": "R8",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Formal properties paragraphs"
+  "place": "Formal properties; native module tensor and K-flat localization construction"
  },
  "mathlib_searches": [
   {
@@ -100,9 +109,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "R8",
   "result": "pass",
-  "landing": "20261028T034734-L-3539134",
+  "landing": "20261028T055746-L-805200",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
