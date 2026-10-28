@@ -14,36 +14,59 @@
  ],
  "proof": [
   {
-   "text": "Expand finiteU and integralDualizingExceptionalTransition as the specified scalar and exceptional mates. Apply hom-equivalence naturality to move the endpoint transitions across the two adjunctions.",
+   "text": "Prove the lifted residue coefficient square by quotient induction. On the ordinary etale site, apply the coefficient-chain clause of etaleSingleCoefficientProjection (at ell=0, since it imposes no primality condition) and cancel the base scalar associator. This proves compact-support comparison composition for arbitrary finite coefficient maps. Proper finite coefficient extension and the open scalar isomorphism make the four comparison components used below invertible.",
    "uses": [
-    "def-sf-integral-finite-extension-models",
-    "def-coef-finite-dualizing-data"
+    "lem-pur-etale-single-coefficient-projection",
+    "lem-asd-proper-finite-coefficient-extension",
+    "def-per-exceptional-coefficient-maps"
    ],
    "elementary": false
   },
   {
-   "text": "The remaining coefficient counit square commutes by the proper/open mate cocycle and the normalized scalar restriction square; the triangle identities identify the result with the two displayed hom-equivalence images.",
+   "text": "Use the regular-unit composition equation and coefficientCounitMate_cocycle to prove composition of exceptional coefficient counit transposes. Transpose again under the scalar adjunctions. Applying this along both factorizations of the residue coefficient square and cancelling the restriction compositors gives the ordinary etale semilinear square.",
    "uses": [
-    "lem-coef-finite-dualizing",
-    "lem-coef-finite-free-extension",
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "def-sf-scalar-reduction-exchange"
+    "lem-sf-finite-coefficient-unit-composition",
+    "lem-coef-dualizing-quotient-mates",
+    "def-weil-pbc-witness-compatibility",
+    "def-coef-finite-dualizing-data",
+    "def-sf-integral-finite-extension-models"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the realization restriction-square equation to the coefficient object at level n. Functoriality and naturality transport the etale semilinear square through the four realizations. Conjugate its four vertices by finiteDualizingOrigin. The middle origin inverse pairs cancel and the resulting arrows are the scalar adjuncts of finiteU and integralDualizingExceptionalTransition.",
+   "uses": [
+    "lem-sf-finite-realization-restriction-square",
+    "def-coef-finite-dualizing-data",
+    "def-sf-integral-finite-extension-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand scalarReductionExchange as the mate of scalarRestrictionSquare. Hom-equivalence naturality, the unit equation for mateEquiv.symm, and naturality of the restriction square identify its adjunct with the left boundary of the semilinear square. The right boundary is the adjunct of finiteU_m followed by the L transition. This proves the displayed mate equality without assuming the mixed mate invertible.",
+   "uses": [
+    "def-sf-scalar-reduction-exchange"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pur-etale-single-coefficient-projection",
+  "lem-asd-proper-finite-coefficient-extension",
+  "def-per-exceptional-coefficient-maps",
+  "lem-sf-finite-coefficient-unit-composition",
+  "lem-coef-dualizing-quotient-mates",
+  "def-weil-pbc-witness-compatibility",
   "def-coef-finite-dualizing-data",
   "def-sf-integral-finite-extension-models",
-  "def-sf-scalar-reduction-exchange",
-  "lem-coef-finite-dualizing",
-  "lem-coef-finite-free-extension",
-  "lem-pur-compact-support-integral-coefficient-comparison"
+  "lem-sf-finite-realization-restriction-square",
+  "def-sf-scalar-reduction-exchange"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "R1",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
-  "place": "Paragraphs 3-4: transpose the coefficient counit square under the exceptional and scalar adjunctions."
+  "place": "The quotient-compatibility sentence in paragraphs 2--3, using the proper/open coefficient cocycle, exceptional counit mate calculus, coefficient-only realization coherence and scalar mate naturality."
  },
  "mathlib_searches": [
   {
@@ -97,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "B7",
   "result": "pass",
-  "landing": "20261027T234102-L-4186933",
-  "kind": "proof",
+  "landing": "20261028T020210-L-2478510",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
