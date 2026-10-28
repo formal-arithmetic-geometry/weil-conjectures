@@ -1,6 +1,6 @@
 # Work queue
 
-307 items; claim with `tools/claim.py next <group> [--stage N]`.
+308 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -55,6 +55,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteTateRootTensorPresentation` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CommonStagePullbackCompComponent` | 6 | 2 | proof | route |
 | `Sheaf.Paper.CompletedComparisonCanonicalIdentification` | 7 | 1 | proof | route |
+| `Sheaf.Paper.IntegralPullbackTensorCompositionReduced` | 7 | 1 | proof | route |
 | `Sheaf.Paper.PbcScalarTensor` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleOpenCounitFiniteSupportDiagram` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperQcOpenCounitSections` | 8 | 1 | proof | route |
@@ -101,7 +102,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CondensedFiniteIntegralTensorModel` | 14 | 1 | proof | route |
 | `Sheaf.Paper.ConstructiblePullbackTExact` | 14 | 2 | proof | route |
 | `Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationB` | 14 | 16 | proof | route |
-| `Sheaf.Paper.DiagonalCompletedTracePullback` | 14 | 1 | proof | route |
 | `Sheaf.Paper.FrobeniusCompactIntegralAmbientNormalization` | 14 | 1 | proof | route |
 | `Sheaf.Paper.IntegralConstantUnitFrobenius` | 14 | 1 | proof | route |
 | `Sheaf.Paper.IntegralNormalizedRingRefinementCompositionAfterInclusion` | 14 | 1 | proof | route |
@@ -112,7 +112,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PodReindexingHomCoefficientDescent` | 14 | 17 | proof | route |
 | `Sheaf.Paper.QcqsCompactSupportNativeTowerComparison` | 14 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1SectionEvaluation` | 14 | 1 | proof | route |
-| `Sheaf.SixFunctors.EtaleScalarTensorShiftCancellation` | 14 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalDualFormulaScalarCounit` | 14 | 1 | proof | route |
 | `Sheaf.SixFunctors.RationalVerdierDatumNaturality` | 14 | 1 | proof | route |
 | `Sheaf.Paper.AdicSmoothDualizingFinitePowers` | 15 | 1 | proof | route |
@@ -178,6 +177,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FdIntegralScalarRestrictionExact` | 17 | 1 | proof | route |
 | `Sheaf.Paper.FdRawLocalizationScalarDescent` | 17 | 1 | proof | route |
 | `Sheaf.Paper.FiniteHomIntrinsicTensorComposition` | 17 | 1 | proof | route |
+| `Sheaf.Paper.IntegralHomReductionTowerUnitModels` | 17 | 1 | proof | route |
 | `Sheaf.Paper.IntegralTensorQuotientContraction` | 17 | 1 | proof | route |
 | `Sheaf.Paper.IntegralTensorRestrictionMateModel` | 17 | 1 | proof | route |
 | `Sheaf.Paper.PodIntegralHomComparisonComparisonIdentification` | 17 | 1 | proof | route |
@@ -255,8 +255,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PodReindexingCompositionTensor` | 20 | 1 | proof | route |
 | `Sheaf.Paper.PodTensorRoosRepresentativeSquare` | 20 | 1 | proof | route |
 | `Sheaf.Paper.PodTensorSignedShiftDescent` | 20 | 1 | proof | route |
-| `Sheaf.SixFunctors.CoefFiniteEvaluationExistence` | 20 | 1 | proof | route |
-| `Sheaf.SixFunctors.CoefFiniteProjectionWordEvaluation` | 20 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefPairingNativeOperations` | 20 | 1 | proof | route |
 | `Sheaf.SixFunctors.CoefTowerTraceRectification` | 20 | 3 | proof | route |
 | `Sheaf.SixFunctors.IntegralDualizingFiniteCounitCompatibility` | 20 | 1 | proof | route |
@@ -303,6 +301,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AdicSmoothDualizingComplexes` | 13 | 1 | proof | 1 |
 | `Sheaf.Paper.ConstantGeometricStalkUnit` | 13 | 2 | proof | 1 |
 | `Sheaf.Paper.IntegralProperOpenDerivedLimit` | 13 | 1 | proof | 1 |
+| `Sheaf.Paper.DiagonalCompletedTracePullback` | 14 | 1 | proof | 1 |
+| `Sheaf.SixFunctors.EtaleScalarTensorShiftCancellation` | 14 | 1 | proof | 1 |
 | `Sheaf.Paper.PointRealizationStandardCohomology` | 15 | 2 | proof | 1 |
 | `Sheaf.Paper.RationalRealizationPullbackComparison` | 15 | 1 | proof | 1 |
 | `Sheaf.SixFunctors.CoefHomTowerScalarModel` | 18 | 6 | proof | 1 |
