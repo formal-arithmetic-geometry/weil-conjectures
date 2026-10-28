@@ -1,0 +1,115 @@
+{
+ "id": "def-weil-pbc-coefficient-sheafification-seed",
+ "kind": "definition",
+ "title": "The scalar-restricted module-sheafification unit and its extension",
+ "statement": "Let C be a category, J a topology, R and S commutative rings, r:R→S, and a:T→U a morphism of ring sheaves. Let α:const(R)→T and β:const(S)→U be locally bijective presentations with const(r)≫β=α≫a, and suppose abelian sheafification exists with its usual local equivalence criterion. For an S-module presheaf P, restrict the β-sheafification unit along r and along α,a; extend this R-linear presheaf map by the α-module-sheafification adjunction. This defines rawMap(P):sh_α(Res_r(P))→Res_a(sh_β(P)). Its underlying morphism of abelian sheaves is the identity of the common abelian sheafification of P.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The component is the β-sheafification unit on underlying elements. Its R-linearity follows by evaluating const(r)≫β=α≫a on a section; naturality is naturality of that unit. Extend this map by sheafificationHomEquiv(α). The forgetful formulas for the unit and hom-equivalence identify its abelian adjunct with toSheafify. The sheafification adjunction unit formula and injectivity of its hom-equivalence then identify the extended underlying sheaf map with the identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": "5 hits: PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of module presheaves commutes with restriction of scalars along compatible locally bijective ring presentations",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toSheafify, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.sheafify",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerScalarRestriction",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), descent at finite quotient levels and compatibility with their actual normalization arrows: The scalar-restricted module-sheafification unit and its extension",
+   "via": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSheafificationSeed",
+  "file": "lean/Sheaf/Paper/CoefficientSheafificationSeed.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawRestriction",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawSeed",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawSeed_forget",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawMap",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.rawMap_forget"
+  ],
+  "statement": "def rawMap\n    (P : PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of S))) :\n    (PresheafOfModules.sheafification α).obj ((rawRestriction r).obj P) ⟶\n      (SheafOfModules.restrictScalars a).obj\n        ((PresheafOfModules.sheafification β).obj P)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

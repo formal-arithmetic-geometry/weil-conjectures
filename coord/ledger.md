@@ -20666,3 +20666,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:06 L: merged deliver/N3/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChart (stage 3; reviewer PASS; first push; landing 20261028T020611-L-2528405 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:06 L: merged deliver/N4/Sheaf.Paper.NativeWeilTensorRingedKFlatLocalizationEquivalence (stage 3; reviewer PASS; first push; landing 20261028T020612-L-2528611 (interface); batch 20261028T020127; modules 2; new nodes 1)
 - 02:06 L: merged deliver/N4/Sheaf.SixFunctors.CanonicalReductionTensorPullComplexComponent (stage 3; reviewer PASS; first push; landing 20261028T020613-L-2528752 (interface); batch 20261028T020127; modules 2; new nodes 1)
+- 02:06 L: merged deliver/P1/Sheaf.Paper.LisseTowerScalarRestriction (stage 3; reviewer PASS; first push; landing 20261028T020614-L-2528972 (interface); batch 20261028T020127; modules 10; new nodes 9)

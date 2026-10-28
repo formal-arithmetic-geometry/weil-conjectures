@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-coefficient-sheafification-sections",
+ "kind": "statement",
+ "title": "The constructed coefficient scalar square is normalized by the abelian counits",
+ "statement": "For commutative rings B,Bprime,R,S, maps q:B→Bprime, b:R→B, bprime:S→Bprime, r:R→S with bprime∘r=q∘b, ring sheaves T,U and locally bijective presentations α:const(R)→T, β:const(S)→U compatible with a:T→U, the scalar square constructed in [def-weil-pbc-coefficient-sheafification-scalar-square] satisfies normalized with the canonical ring-sheaf and fixed-ring restriction identities and the two abelian counit comparisons of [def-weil-pbc-coefficient-sheafification-section-data]. Assume abelian sheafification and its usual local equivalence criterion. There is no scheme, adic coefficient system or derived category in this statement.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coefficient-sheafification-section-data",
+  "def-weil-pbc-coefficient-sheafification-scalar-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply the abstract component criterion for normalized. Forgetting each component of coefficientScalarIso gives the identity, by coefficientScalarIso_forget. The two restriction comparisons are also identities, so cancel them. The remaining counit components agree: expand forgetIso and observe that scalar restriction leaves the underlying abelian sheaf and its sheafification unchanged. This is an equality of the same abelian sheafification counit. Thus every component equation holds.",
+   "uses": [
+    "def-weil-pbc-coefficient-sheafification-section-data",
+    "def-weil-pbc-coefficient-sheafification-scalar-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coefficient-sheafification-section-data",
+  "def-weil-pbc-coefficient-sheafification-scalar-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": "5 hits: PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of module presheaves commutes with restriction of scalars along compatible locally bijective ring presentations",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toSheafify, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.sheafify",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerScalarRestriction",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), scalar presentation compatibility: The constructed coefficient scalar square is normalized by the abelian counits",
+   "via": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSheafificationSections",
+  "file": "lean/Sheaf/Paper/CoefficientSheafificationSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientScalarIso_normalized",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientScalarIso_normalized"
+  ],
+  "statement": "theorem coefficientScalarIso_normalized : normalized (coefficientScalarIso (J := J) (q := q) (b := b) (b' := b') (r := r) (h := h) (a := a) (α := α) (β := β) (ha := ha)) (restrictForgetIso a) (forgetIso J B' S b' U β) (forgetIso J B R b T α) (fixedRestrictForgetIso J q)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

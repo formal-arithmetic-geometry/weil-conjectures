@@ -16,33 +16,40 @@
  ],
  "proof": [
   {
-   "text": "The completion quotient maps commute with consecutive quotients. Naturality of the constant ring comparison and of inverse image gives the square for the two ordinary coefficient presentations. Both module sheaves are sheafifications of the same additive presheaf with the same restricted action. The identity on that presheaf therefore extends uniquely to a natural isomorphism. After forgetting scalars it is exactly the composite of the abelian sheafification counits specified by LisseTowerScalarSquareSections. Faithfulness of the forgetful functor proves uniqueness.",
+   "text": "The completion quotient homomorphisms commute with consecutive quotients. Apply naturality of pbcLevelConstantComparison and of proEtaleConstantInverseImageMap to prove the actual scalar-presentation square. For a commutative square of constant ring presentations, restrict the lower module-sheafification unit along the upper action and extend by the module-sheafification adjunction. Forgetting scalars identifies this map with the identity of abelian sheafification, so it is invertible and natural. Whisker with the presheaf scalar-composition isomorphism to obtain the required ordinary square. The abelian sheafification counits prove its section normalization; faithfulness and cancellation of these counits prove uniqueness. The section equation is first proved over abstract coefficient presentations. Proved equalities identify these formulas with the unchanged public forgetful comparisons of the item, so specializing it never expands the concrete adic coefficient objects into a component calculation.",
    "uses": [
     "def-weil-pbc-lisse-tower-etale-descent-data",
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison"
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-coefficient-sheafification-scalar-square",
+    "def-weil-pbc-coefficient-sheafification-section-data",
+    "lem-weil-pbc-coefficient-sheafification-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Both ordinary realization functors are exact equivalences. Apply exact localization and its composition comparison, then paste with the coefficient square of comparison inverse image. This is exactly lisseTowerEtaleScalarIso. The inverse scalar mate for realization is invertible because its transverse functors are equivalences. For comparison and inverse image, compute scalar extension on flat resolutions. Both orders are sheafifications of the same balanced tensor, and the identity of pure tensors identifies the mate and its inverse. The unit is m↦1 tensor m, so the comparisons have the specified unit normalization. On actual ringed coefficients this agrees with the ring-sheaf-change adjunction by its adjunct identity.",
+   "text": "An invertible inverse scalar mate sends an initial structured arrow to an initial structured arrow: identify the given arrow with its scalar-adjunction unit, compose the mate with the target isomorphism, and use the mate unit identity. Apply this elementary categorical calculation to the already proved inverseImage_mate_isIso in ConstantAdicQuotientScalarComparison. The original tower transition is the scalar unit followed by its supplied normalization isomorphism. Hence its actual restricted transition is universal.",
    "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the constructed ordinary scalar square using mapDerivedCategorySquareIso and the fixed realization composition comparisons. The supplied descent equation, after expanding lisseTowerEtaleScalarIso, is precisely its composite with the comparison coefficient square. Conjugating by e and eprime transports the universality just proved to the realized compared delta. Both fixed derived realization functors are equivalences, so StructuredArrow.map₂ is an equivalence and reflects initiality. Thus the compared delta is universal. Apply comparisonNormalization_reflects_universal and then etaleSourceNormalization_universal to obtain the required arrow on every etale source. Only the two latter tensor statements remain unproved in this delivery.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
     "def-weil-pbc-derived-normalization-arrows",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-weil-pbc-comparison-normalization-reflects-universal",
+    "lem-weil-pbc-etale-source-normalization-universal"
    ],
    "elementary": false
   },
   {
-   "text": "Take the scalar adjunct of delta. The assumed descent equation and the mate unit identities identify its image with the pulled actual normalization isomorphism of M, conjugated by e and eprime. Hence that image is invertible. Comparison is exact and conservative: on homology its sheaf unit is invertible, so it detects a zero cone. The fixed realization is an equivalence. These two functors therefore reflect invertibility of the adjunct, which proves the stated global universality. This uses no bounded Tor dimension and includes zero rings, zero complexes and empty schemes. Pullback to an etale Z-object has the same invertible scalar mate, computed by the same sheafified flat-resolution tensor identity. Its unit identity identifies the pulled universal arrow with the prescribed etaleIsomorphismNormalizationArrow. Thus this arrow is universal on every source. Exactness preserves the bounds needed by the source-site comparison.",
+   "text": "For the final conjunct, apply the already proved normalizationConstantArrow_isUniversal to the supplied algebraically universal arrow. Apply the same etaleSourceNormalization_universal to this constant arrow. Combine existence, sections, the reflected universality, this constant universality, and section uniqueness to prove the unchanged exists-unique statement.",
    "uses": [
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-bounded-constructible-tower"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For an algebraically universal k, exact constant realization is universal by normalizationConstantArrow_isUniversal. Pull it to each etale source by the same tensor computation and unit identity. This proves LisseTowerConstantLocalUniversal. Restriction coherence is not included in this lemma and is proved independently by lem-weil-pbc-etale-normalization-coherence.",
-   "uses": [
-    "lem-weil-pbc-constant-derived-normalization-universal"
+    "lem-weil-pbc-constant-derived-normalization-universal",
+    "lem-weil-pbc-etale-source-normalization-universal"
    ],
    "elementary": false
   }
@@ -50,16 +57,19 @@
  "proof_deps": [
   "def-weil-pbc-lisse-tower-etale-descent-data",
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "def-weil-pbc-derived-normalization-arrows",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-coefficient-sheafification-scalar-square",
+  "def-weil-pbc-coefficient-sheafification-section-data",
+  "lem-weil-pbc-coefficient-sheafification-sections",
   "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-derived-normalization-arrows",
+  "lem-weil-pbc-comparison-normalization-reflects-universal",
+  "lem-weil-pbc-etale-source-normalization-universal",
   "lem-weil-pbc-constant-derived-normalization-universal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YY (derived base change); Modules on Sites Tags 03CY and 03DA (associated modules and scalar restriction); proetale.tex Tags 099Z and 09B1 (exact comparison). The coefficient square and scalar-adjunction part of normalization descent."
+  "place": "Tags 06YS, 0G7E and 0D6D for the two separated scalar-tensor steps; existing proved inverse-image mate and constant-realization universal-arrow theorem; explicit section-normalized sheafification construction and equivalence of structured-arrow categories."
  },
  "mathlib_searches": [
   {
@@ -168,12 +178,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261027T210145-L-1664349",
+  "landing": "20261028T020614-L-2528972",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

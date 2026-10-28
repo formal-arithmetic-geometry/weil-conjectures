@@ -1,0 +1,127 @@
+{
+ "id": "def-weil-pbc-coefficient-sheafification-scalar-square",
+ "kind": "definition",
+ "title": "The coefficient-presentation scalar square normalized on abelian sheaves",
+ "statement": "Let B,Bprime,R,S be commutative rings, q:B→Bprime, b:R→B, bprime:S→Bprime and r:R→S satisfy bprime∘r=q∘b. Let J and α,β,a satisfy the locally bijective presentation assumptions of def-weil-pbc-coefficient-sheafification-iso. Realize fixed-ring sheaves by restricting b or bprime, passing to constant-ring module presheaves, and module sheafifying along α or β. There is a canonical natural isomorphism Res_q⋙Real_α≅Real_β⋙Res_a. Its underlying abelian-sheaf components are identities.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coefficient-sheafification-iso",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "The two restrictions on module presheaves are canonically isomorphic by ModuleCat.restrictScalarsCompApp and bprime∘r=q∘b; all component maps are identities on elements. Whisker that presheaf isomorphism with α-sheafification and paste it with rawIso, using the associators. After forgetting, rawIso is the identity and the presheaf restriction isomorphism is the identity, so the resulting map is the abelian sheafification functor applied to an identity.",
+   "uses": [
+    "def-weil-pbc-coefficient-sheafification-iso",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-coefficient-sheafification-map-forget"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coefficient-sheafification-iso",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-coefficient-sheafification-map-forget"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "place": "The module-sheafification adjunction, its forgetful hom-equivalence formulas and unit; the scalar-composition isomorphism of ModuleCat."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": "5 hits: PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of module presheaves commutes with restriction of scalars along compatible locally bijective ring presentations",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toSheafify, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.sheafify",
+   "date": "2026-10-28",
+   "verdict": "The adjunction and scalar-restriction primitives are present; the commutative-square construction is proved directly in this module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerScalarRestriction",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), descent at finite quotient levels and compatibility with their actual normalization arrows: The coefficient-presentation scalar square normalized on abelian sheaves",
+   "via": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSheafificationScalarSquare",
+  "file": "lean/Sheaf/Paper/CoefficientSheafificationScalarSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientScalarIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientPresheaf",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientPresheafIso",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientPresheafIso_forget",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientRealization",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientScalarIso",
+   "AlgebraicGeometry.Scheme.CoefficientSheafificationSquare.coefficientScalarIso_forget"
+  ],
+  "statement": "def coefficientScalarIso :\n    sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ⋙\n        (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} b) ⋙\n          coefficientRealization J α) ≅\n      (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} b') ⋙\n        coefficientRealization J β) ⋙ SheafOfModules.restrictScalars a",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261028T020614-L-2528972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
