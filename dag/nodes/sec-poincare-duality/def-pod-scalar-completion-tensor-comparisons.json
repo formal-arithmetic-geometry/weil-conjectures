@@ -3,10 +3,10 @@
  "kind": "definition",
  "title": "Normalized ordinary scalar completion and tensor comparisons",
  "status": "split",
- "statement": "For prime $\\ell$, finite $E,L/\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$ and scheme $W$, use ordinary derived scalar extension and completed tensor [def-weil-integral-scalar-extension] [def-pur-completed-pullback-tensor-comparison]. Define the scalar completion natural transformation as the unique map fixed on every good complex by the quotient-completion chain map (unshifted finite quotient projections and zero shifted-product coordinate). Define scalarTensorOrdinary as the unique natural isomorphism between ordinary scalar extension of completed tensor and completed tensor of the scalar extensions whose every good-pair component is the localization of the canonical whole strict-tower scalar/tensor map. These are the existing scalarCompletion and scalarTensorOrdinary, not arbitrary choices.",
+ "statement": "For prime $\\ell$, finite $E,L/\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$ and scheme $W$, use ordinary derived scalar extension and completed tensor [def-weil-integral-scalar-extension] [def-pur-integral-derived-operations]. Define the scalar completion natural transformation as the unique map fixed on every good complex by the quotient-completion chain map (unshifted finite quotient projections and zero shifted-product coordinate). Define scalarTensorOrdinary as the unique natural isomorphism between ordinary scalar extension of completed tensor and completed tensor of the scalar extensions whose every good-pair component is the localization of the canonical whole strict-tower scalar/tensor map. These are the existing scalarCompletion and scalarTensorOrdinary, not arbitrary choices.",
  "stmt_deps": [
   "def-weil-integral-scalar-extension",
-  "def-pur-completed-pullback-tensor-comparison"
+  "def-pur-integral-derived-operations"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
@@ -113,17 +113,89 @@
   "note": "Re-delivery after 839c RETURN; F1-F3 repaired. F1: copied canonical-coherence and Fin 3 substitution conjuncts removed; PodReindexFamily with Relabelling (Over.mapId/mapComp section formulas), Identity (reduction/limit/tensor vs integralComparisonSystemUnit), Composition (vs integralComparisonSystemComposition), own TensorConstraints (associator/braiding/unitors; unit iso determined); PodReindexCoefficientTransition.Laws for all L, iota incl. id, with pure-tensor pin and own D/D'/T/T' squares; PodReindexSignedShifts (CommShift of D.reduction/limit, Roos squares, shift generators with (-1)^(pr), Model pins left/right); PodReindexSubstitution ties model C on Bool to D's calculi/Roos/pullback, primitive pullback = D.limit, plus T.Model/Canonical. F2: theorem stmt_deps replaced by existing:true def-pod-isomorphism-reduction-reindexing, def-pod-integral-tensor-constraints, def-pod-scalar-completion-tensor-comparisons; statements verbatim, decls exist, no duplicate owners. F3: RestrictedGenerators pins restricted via the sequence-pullback unit generator along proEtaleIsoCommaArrow, so no sign twist. Statement verbatim; item differs from live only in lean/stmt_deps; no dep records or modules changed; only 2 theorem sorries; docstrings with source/blueprint everywhere; no stronger hypotheses; edge cases (empty schemes, g=id, n=0, incomplete K, all shifts, E=L) fine. No compile (no file changed). Advisories: substitution def node cites theorem lem-pur-completed-operation-tower-substitution instead of def-pur-completed-operation-model-data/-comparison-data; auxiliary evaluation/restriction fields only partly pinned; base-era non-stmt_dep owners; self second reading."
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "H9",
   "result": "pass",
-  "landing": "20261027T151702-L-1192152",
+  "landing": "20261028T081743-L-2778614",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.scalarOperationsOrdinary_tower"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "H9 stage 2",
+  "old_statement": "For prime $\\ell$, finite $E,L/\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$ and scheme $W$, use ordinary derived scalar extension and completed tensor [def-weil-integral-scalar-extension] [def-pur-completed-pullback-tensor-comparison]. Define the scalar completion natural transformation as the unique map fixed on every good complex by the quotient-completion chain map (unshifted finite quotient projections and zero shifted-product coordinate). Define scalarTensorOrdinary as the unique natural isomorphism between ordinary scalar extension of completed tensor and completed tensor of the scalar extensions whose every good-pair component is the localization of the canonical whole strict-tower scalar/tensor map. These are the existing scalarCompletion and scalarTensorOrdinary, not arbitrary choices.",
+  "old_stmt_deps": [
+   "def-weil-integral-scalar-extension",
+   "def-pur-completed-pullback-tensor-comparison"
   ],
-  "sorry_after": []
+  "what": "Dependency precision: completed tensor is defined by def-pur-integral-derived-operations. This definition does not use the completed pullback/tensor comparison or its scalar compatibility theorem. Replacing that mistaken citation removes a spurious DAG cycle while preserving the exact scalarCompletion and scalarTensorOrdinary definitions.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 1 and 5; Stacks 03EL, 07A4, 0941"
+  },
+  "citers": [
+   {
+    "id": "def-pod-completion-reindex-coefficient-transition",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-completion-unit-tensor",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition-core",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition-core-limit",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition-core-pure",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition-core-reduction",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pod-reindexing-tensor-coefficient-transition-tensor",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-pur-scalar-pullback-completion-roos",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-sf-coefficient-tensor-normalization",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "lem-sf-scalar-hom-presentation-evaluation",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   },
+   {
+    "id": "stage3-pur-scalar-pullback-right-roos-normalized",
+    "holds": true,
+    "note": "The same completed tensor and scalar completion maps are used. Only the citation of completed tensor is corrected to its defining operation node; no Lean statement or definition changes."
+   }
+  ]
  }
 }

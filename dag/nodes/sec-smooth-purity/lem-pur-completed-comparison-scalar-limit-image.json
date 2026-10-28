@@ -34,37 +34,60 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-normalized-scalar-comparison-realization] to $E\\subset L$ and $f$ (and to $h$ when needed). It gives the displayed balanced association $(x\\otimes a)\\otimes b\\mapsto x\\otimes i_n(a)b$, with insertion-of-one inverse, on the actual scalar quotient systems. It states that these and their pullback/tensor expressions are flat-term K-flat and normalized, retains every quotient transition, and identifies the canonical completed scalar comparisons $\\alpha_F,\\alpha_T$ with the limits of the strict scalar-association maps. This applies also when $L/E$ is ramified: it explicitly imposes no flatness on $B^E_{W,n}\\to B^L_{W,n}$.",
+   "text": "Induct on ScalarGenerated. Quotient-goodness and representative normalization handle E inputs. Tensor reconstruction, transported pullback normalization, normalized units and scalar-goodness handle all constructors. Use normalized counit isomorphisms to transfer normalization through each operation; levelwiseFlatModels supplies the levelwise assertion.",
    "uses": [
-    "lem-pur-normalized-scalar-comparison-realization"
+    "lem-pur-completed-comparison-quotient-models",
+    "lem-pur-normalized-completed-operation-models",
+    "lem-pur-quotient-expression-strict-kflat-towers",
+    "stage3-pur-derived-scalar-tensor-normalization",
+    "lem-trf-transported-reduction-systems-normalized"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Integral level; scalar quotient models and the normalized realization of the fixed scalar comparisons (agent refinement)."
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
    }
   },
   {
-   "text": "Use [lem-pur-strict-coefficient-comparison-calculus] for the two quotient coefficient sequences $B^E_{W,\\bullet}\\to B^L_{W,\\bullet}$ and the pro-etale inverse image of $f$. Its equation\n$$c_L F_L(\\sigma_Y)\\kappa_{T_E}=T_L(\\kappa_M,\\kappa_N)\\sigma_X S_X(c_E)$$\nis an equality of strict chain-system maps: both routes have value $(b\\otimes x)\\otimes(1\\otimes y)$ on $b\\otimes(x\\otimes y)$. It includes inverse, identity and successive-extension equations, with no coefficient-flatness hypothesis. Apply $\\mathcal L_L$ and the normalized realizations of [lem-pur-normalized-scalar-comparison-realization]. The $\\kappa,\\sigma$ maps become $\\alpha_F,\\alpha_T$ by step 6; the $c_D$ maps become $\\gamma_D$ by steps 2--3. Functoriality and cancellation of the intermediate realization isomorphisms give exactly the scalar equation in the statement. The same application to the inverse, identity and three-coefficient equations proves all their asserted compatibilities. Counit naturality as in step 4 retains their coherent reductions.",
+   "text": "Choose normalized L Roos models at X and Y and normalized scalar models from the existing existence lemmas. The closure induction gives goodL for every strict expression on scalar quotients. The scalar leaf substitution is an isomorphism since reduction of the E substitution and the K-flat scalar counit are isomorphisms. Induct on expressions using substitute_inputs_iso to obtain invertibleL.",
    "uses": [
-    "lem-pur-strict-coefficient-comparison-calculus",
-    "lem-pur-normalized-scalar-comparison-realization"
+    "lem-pur-normalized-completed-operation-models",
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "lem-pur-completed-comparison-quotient-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Integral level; strict coefficient square and its limit image (agent)."
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+   }
+  },
+  {
+   "text": "Apply the two new strictly smaller uncancelled coordinate lemmas. Postcompose each equation with the inverse L target substitution. Cancel its forward factor using hom_inv_id; the beta comparison becomes the canonical L transport. Equality of the strict routes gives both equations for either route. Assemble these equations with the chosen models, goodL, invertibleL and generated closure into ScalarLimitImage.",
+   "uses": [
+    "lem-pur-completed-scalar-beta-comparison",
+    "lem-pur-completed-scalar-route-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-normalized-scalar-comparison-realization",
-  "lem-pur-strict-coefficient-comparison-calculus"
+  "lem-pur-completed-comparison-quotient-models",
+  "lem-pur-normalized-completed-operation-models",
+  "lem-pur-quotient-expression-strict-kflat-towers",
+  "stage3-pur-derived-scalar-tensor-normalization",
+  "lem-trf-transported-reduction-systems-normalized",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "lem-pur-completed-scalar-beta-comparison",
+  "lem-pur-completed-scalar-route-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
-  "place": "The corresponding steps of the recorded representative-normalized realization proof, made into separate Lean obligations."
+  "place": "H9: Lean induction for scalar closure, normalized reconstruction and leaf invertibility, followed by cancellation of two separately stated uncancelled comparison coordinates."
  },
  "mathlib_searches": [
   {
@@ -141,12 +164,12 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-03463",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261028T034944-L-3574173",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261028T081743-L-2778614",
   "kind": "interface",
-  "note": "independent cc review: item proof of canonicalIntegralPullbackTensor_scalar vs CanonicalIdentification/ScalarLimitImage/QuotientNormalization statements; old item CoherentSystems section vs new Integral/Coherent modules (verbatim diff); old vs new Normalization (verbatim helper move); nodes vs Lean; all non-OK 3b importers compiled against delivered files in sandbox (all OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-28",

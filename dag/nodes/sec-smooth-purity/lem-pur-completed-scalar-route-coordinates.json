@@ -1,0 +1,176 @@
+{
+ "id": "lem-pur-completed-scalar-route-coordinates",
+ "kind": "statement",
+ "title": "Strict scalar square and uncancelled completed coordinates",
+ "statement": "Fix a prime ell, finite extensions E,L of Q_ell and an algebra homomorphism iota:E→L. Let Z→X→Y be composable scheme morphisms h,f with ell invertible at every point of all three schemes. Let M_i (i:Fin 3) be constructible derived-complete integral E objects on Y, P_i arbitrary flat-term K-flat representatives, and phi_i:Q(P_i)≅M_i. Use the exact strict quotient systems, expression evaluations, recursive substitutions, scalarBeta, scalarLeft, scalarRight and scalarSubstitution of [def-pur-completed-comparison-quotient-realization-data]. Fix good:GoodExpressions for the E quotient expressions. Write A_s=pullF(tensor(input 0,input 1)) and A_t=tensor(pullF(input 0),pullF(input 1)); write c_D for comparison at D and F_D for coefficientSequenceLimit at D. Assume every E substitution is invertible. Fix any normalized L Roos models rhoX,rhoY and scalar models SX,SY for the prescribed E reconstruction calculi, as in [def-trf-integral-comparison-realization-models], and goodL for all strict expressions on scalarQuotients(P). Write beta_A for scalarBeta, b_s for scalarSubstitution(SX,strictValue_E(A_s),substitution_E(A_s)), and T_E for the E transport of c_E from A_s to A_t. Then (1) scalarLeft=scalarRight on the first two E quotient inputs; (2) b_s ≫ F_L.map(Q.map(scalarLeft.hom)) = alphaF(M_0 tensor M_1) ≫ pull_L.map(alphaT(M_0,M_1)) ≫ beta_As ≫ F_L.map(Q.map(c_L.hom)); (3) b_s ≫ F_L.map(Q.map(scalarRight.hom)) = scalar_X.map(T_E) ≫ alphaT(pull_E(M_0),pull_E(M_1)) ≫ tensor_L.map(alphaF(M_0),alphaF(M_1)) ≫ beta_At. Here alphaF and alphaT are the fixed integralPullbackScalarComparison and integralTensorScalarComparison of [lem-pur-integral-operations-scalar-extension]; each occurrence uses the exact parentheses and objects in the attached Lean signature. No canonical L comparison identification or invertibility of beta is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+ },
+ "stmt_deps": [
+  "def-pur-completed-comparison-quotient-realization-data",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pur-completed-pullback-tensor-integral-construction",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-pur-strict-quotient-expressions",
+  "def-pur-completed-operation-comparison-data",
+  "def-trf-integral-comparison-realization-models",
+  "def-pur-strict-quotient-expression-data",
+  "def-pur-integral-coherence-data",
+  "def-pur-coefficient-extension-reduction-data",
+  "def-pur-coefficient-reduction-presentation",
+  "def-pur-scalar-extension-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the transported strict cochain comparison with the generator-normalized coefficient comparison using the chosen inverse-image equality and uniqueness on generators. The strict scalar square sends b tensor (x tensor y) by either route to (b tensor x) tensor (1 tensor y), compatibly with all quotient transitions.",
+   "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "stage3-pur-scalar-pullback-limit-square",
+    "stage3-pur-scalar-tensor-limit-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+   }
+  },
+  {
+   "text": "For the left coordinate expand scalarSubstitution, the L source substitution and scalarLeft. Apply the normalized scalar/pullback and scalar/tensor limit squares. Naturality moves the coherent leaf reductions across the strict comparisons, and functoriality of the total-limit functor gives the uncancelled left equation.",
+   "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "stage3-pur-scalar-pullback-limit-square",
+    "stage3-pur-scalar-tensor-limit-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+   }
+  },
+  {
+   "text": "For the right coordinate expand scalarRight and the E transport. Apply the same two normalized limit squares at X and to the two pulled-back inputs. The inverse E target substitution cancels its forward factor. Counit naturality identifies the remaining factors with scalarBeta at the L target, giving the right equation without cancelling that L factor.",
+   "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "stage3-pur-scalar-pullback-limit-square",
+    "stage3-pur-scalar-tensor-limit-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Compatibility with finite reduction and extension of scalars; agent refinement of lem-pur-completed-comparison-quotient-realization, Scalar closure and normalized comparison limit image. Stacks 07A2, 0G7E, 07A4 and 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-coefficient-comparison-calculus",
+  "stage3-pur-scalar-pullback-limit-square",
+  "stage3-pur-scalar-tensor-limit-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "H9 refinement of the recorded scalar realization argument; whole coefficient-system normalization before total limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_comp|map_isIso",
+   "results": "Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean; Mathlib/CategoryTheory/Functor/FullyFaithful.lean; Mathlib/CategoryTheory/Functor/Functorial.lean; Mathlib/CategoryTheory/Functor/Functorial.lean; Mathlib/CategoryTheory/Functor/OfSequence.lean; Mathlib/CategoryTheory/Functor/OfSequence.lean; Mathlib/CategoryTheory/Functor/OfSequence.lean; Mathlib/CategoryTheory/Functor/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact completed derived coefficient-system comparison; reuse the stated project normalization lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp; PresheafOfModules.map_comp; PresheafOfModules.map_comp_assoc; PresheafOfModules.mk; PresheafOfModulesOfCommRing.mk; AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-28",
+   "verdict": "No exact completed derived coefficient-system comparison; reuse the stated project normalization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived scalar extension on strict coefficient systems preserves flat K flat complexes and realizes pullback tensor comparison",
+   "results": "Algebra.Extension.tensorH1Cotangent; KaehlerDifferential.moduleBaseChange'; KaehlerDifferential.cotangentComplexBaseChange; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; KaehlerDifferential.tensorKaehlerEquiv_left_inv; Algebra.FormallyUnramified.flat_of_restrictScalars; ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-28",
+   "verdict": "No exact completed derived coefficient-system comparison; reuse the stated project normalization lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized pullback tensor comparison on derived coefficient systems conjugated by recursive substitutions equals the canonical completed comparison",
+   "results": "CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.instIsIsoPullbackComparison; SheafOfModules.pullbackComp; CategoryTheory.GlueData.t'_jii; CategoryTheory.Meq.pullback_refine; CategoryTheory.Limits.pullbackPullbackRightIsPullback; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'; SheafOfModules.conjugateEquiv_pullbackId_hom",
+   "date": "2026-10-28",
+   "verdict": "No exact completed derived coefficient-system comparison; reuse the stated project normalization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension tensor and pullback compatibility on strict quotient complexes and the two completed limit coordinates",
+   "results": "AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.tensor_map_id_left_eq_map; Ideal.pi_mkQ_rTensor; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfPiFintype; rTensor.inverse_comp_rTensor; lTensor.inverse_comp_lTensor",
+   "date": "2026-10-28",
+   "verdict": "No exact completed derived coefficient-system comparison; reuse the stated project normalization lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "H9",
+  "item": "Sheaf.Paper.CompletedComparisonScalarLimitImage",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: integral pullback-tensor comparison underlying coefficient twists; Scalar closure and normalized comparison limit image.",
+   "via": [
+    "lem-pur-completed-comparison-scalar-limit-image",
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarRouteCoordinates",
+  "file": "lean/Sheaf/Paper/CompletedScalarRouteCoordinates.lean",
+  "declaration": "WeilConjectures.CompletedQuotient.completedScalarRouteCoordinates",
+  "statement": "theorem completedScalarRouteCoordinates\n    {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (M : Fin 3 → sfIntegralConstructibleCategory l E Y)\n    (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (φ : ∀ i : Fin 3, DerivedCategory.Q.obj (P i).obj ≅ (M i).obj)\n    (good : GoodExpressions l E h f P)\n    (invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),\n      IsIso (substitution l E P (fun i ↦ (M i).obj) φ good A))\n    (ρX : IntegralComparisonRoosModel l L X) (ρY : IntegralComparisonRoosModel l L Y)\n    (SX : IntegralComparisonScalarModel l E L ι X (pullbackTensorCalculus l E X) ρX)\n    (SY : IntegralComparisonScalarModel l E L ι Y (pullbackTensorCalculus l E Y) ρY)\n    (goodL : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),\n      StrictQuotient.SystemGood l L (strictValue l L (scalarQuotients l E L ι P) A)) :\n    (scalarLeft l E L ι f (quotient l E (P 0).obj) (quotient l E (P 1).obj) =\n      scalarRight l E L ι f (quotient l E (P 0).obj) (quotient l E (P 1).obj)) ∧\n    (scalarSubstitution l E L ι SX\n        (strictValue l E (fun i ↦ quotient l E (P i).obj) (sourceExpression h f))\n        (substitution l E P (fun i ↦ (M i).obj) φ good (sourceExpression h f)) ≫\n      (coefficientSequenceLimit l L X).map (DerivedCategory.Q.map\n        (scalarLeft l E L ι f (quotient l E (P 0).obj)\n          (quotient l E (P 1).obj)).hom) =\n    (integralPullbackScalarComparison l E L ι f\n        ((constructibleIntegralTensor l E Y).obj (M 0, M 1))).hom.hom ≫\n      (integralDerivedPullback l L f).map\n        (integralTensorScalarComparison l E L ι Y (M 0) (M 1)).hom.hom ≫\n      scalarBeta l E L ι M P φ good SY goodL (sourceExpression h f) ≫\n      (coefficientSequenceLimit l L X).map (DerivedCategory.Q.map\n        (comparison l L f ((scalarQuotients l E L ι P) 0)\n          ((scalarQuotients l E L ι P) 1)).hom)) ∧\n    (scalarSubstitution l E L ι SX\n        (strictValue l E (fun i ↦ quotient l E (P i).obj) (sourceExpression h f))\n        (substitution l E P (fun i ↦ (M i).obj) φ good (sourceExpression h f)) ≫\n      (coefficientSequenceLimit l L X).map (DerivedCategory.Q.map\n        (scalarRight l E L ι f (quotient l E (P 0).obj)\n          (quotient l E (P 1).obj)).hom) =\n    (integralScalarExtension l E L ι X).map\n      (transport l E P (fun i ↦ (M i).obj) φ good invertible\n        (sourceExpression h f) (targetExpression h f)\n        (comparison l E f (quotient l E (P 0).obj) (quotient l E (P 1).obj)).hom) ≫\n      (integralTensorScalarComparison l E L ι X\n        ((constructibleIntegralPullback l E f).obj (M 0))\n        ((constructibleIntegralPullback l E f).obj (M 1))).hom.hom ≫\n      (integralCompletedTensor l L X).map (Prod.mkHom\n        (integralPullbackScalarComparison l E L ι f (M 0)).hom.hom\n        (integralPullbackScalarComparison l E L ι f (M 1)).hom.hom) ≫\n      scalarBeta l E L ι M P φ good SY goodL (targetExpression h f))",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261028T081743-L-2778614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261028T081743-L-2778614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
