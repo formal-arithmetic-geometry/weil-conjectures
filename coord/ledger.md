@@ -20793,3 +20793,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:47 L: merged deliver/D2/Sheaf.SmoothPurity.TraceExistence (stage 3; reviewer PASS; first push; landing 20261028T034720-L-3536931 (interface); batch 20261028T034643; modules 1; new nodes 0)
 - 03:47 L: merged deliver/D3/Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsRightUnit (stage 3; reviewer PASS; first push; landing 20261028T034721-L-3537047 (interface); batch 20261028T034643; modules 2; new nodes 2)
 - 03:47 L: merged deliver/D3/Sheaf.SixFunctors.CoefHomTowerScalarModel (stage 3; reviewer PASS; first push; landing 20261028T034722-L-3537293 (proof); batch 20261028T034643; modules 1; new nodes 0)
+- 03:47 L: merged deliver/D4/Sheaf.Algebra.Homology.RingedSiteGlobalRHomDerivedLimits (stage 3; reviewer FIX; first push; landing 20261028T034723-L-3537515 (interface); batch 20261028T034643; modules 4; new nodes 3; change records: coord/changes/D4-global-rhom-model-extraction.md)

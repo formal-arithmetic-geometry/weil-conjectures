@@ -15,109 +15,65 @@
   "def-weil-derived-limit",
   "def-pur-ringed-site-zeroth-hypercohomology",
   "def-pur-sheaf-modules-hom-module",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "def-sfb-global-rhom-resolved-model"
  ],
  "proof": [
   {
-   "text": "Choose a K-flat complex $L$ representing $E$ by the K-flat resolution theorem. The ringed-site tensor–Hom adjunction makes the recorded internal Hom $R\\mathcal Hom_{\\mathcal O}(E,-)$ right adjoint to $-\\otimes^{\\mathbf L}E$ for the native monoidal structure. That structure is symmetric and its one-K-flat comparison represents $E\\otimes^{\\mathbf L}N$ by $\\operatorname{Tot}(L\\otimes N)$ [lem-sf-ringed-derived-native-tensor]; composing with the braiding, $R\\mathcal Hom_{\\mathcal O}(E,-)$ is the right adjoint of $E\\otimes^{\\mathbf L}-$ required by the sections-model lemma. For every K-injective complex $J$, that lemma represents $R\\operatorname{Hom}_{\\mathcal C}(E,QJ)$ by $C(J)=\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(L,J))$, naturally in $J$. Its degree-$r$ term is $\\prod_p\\operatorname{Hom}_{\\mathcal O}(L^p,J^{p+r})$. Give this complex its $A$-action by postmultiplication through $A\\to\\Gamma(\\mathcal C,\\mathcal O)$; all differentials and comparison maps are $A$-linear. The Hom-from-K-flat lemma makes $\\mathcal Hom^\\bullet(L,J)$ K-injective, so the definition of derived global sections computes it by ordinary global sections, with exactly this $A$-action. This proves the comparison in $D(A)$, not just after forgetting scalars. No boundedness of $L$ is needed.",
+   "text": "Use the A-linear coefficient model to obtain β natural on K-injective targets and the natural A-linear cohomology equivalences.",
    "uses": [
-    "lem-sf-ringed-derived-tensor-hom-adjunction",
-    "lem-sf-ringed-derived-native-tensor",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "def-pur-hom-complex",
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "def-pur-ringed-site-zeroth-hypercohomology"
+    "lem-sfb-global-rhom-coefficient-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B6E (section-global-RHom), 08JA (lemma-section-RHom-over-U), and 08J9 (lemma-internal-hom). Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective); Tag 06YS (lemma-K-flat-resolution)."
-   }
+   "elementary": false
   },
   {
-   "text": "Resolve the strict tower $N_\\bullet$ by a K-injective tower $I_\\bullet$ with injective terms. The injective-tower lemma says that each $I_n$ is K-injective, every $I_{n+1}^p\\to I_n^p$ is split epic, and $\\lim I_n$ represents the resolution-derived limit with its actual projection maps. Moreover $\\lim I_n$ is K-injective: ordinary inverse limit is right adjoint to the constant-tower functor, which is exact because tower exactness is levelwise. Apply the lemma that a right adjoint to an exact additive functor preserves K-injectives. Step 1 therefore represents the left side by $C(\\lim I_n)$ and the right-hand tower by the strict tower $C(I_n)$.",
+   "text": "The module-sheaf category is Grothendieck abelian. Left adjoints to evaluation applied to a separator form a separating family for towers; filtered colimits are exact levelwise. Apply the canonical functorial K-injective replacement of a tower complex; its terms are injective, so it is a resolved tower and the augmentation is a quasi-isomorphism. Evaluation has an exact left adjoint and preserves K-injectivity. Inverse limit is right adjoint to the exact constant-tower functor, so it preserves K-injectives too. The limit of the evaluated tower is isomorphic to the degreewise inverse-limit complex, proving the K-injectivity needed to apply β. All of these steps are proved in the item by private generic helpers.",
    "uses": [
-    "lem-pur-injective-tower-roos-shifts",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-degreewise-existence",
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-tower-evaluation-kinjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), resolution and evaluation paragraphs; Derived Categories Tag 08BJ (lemma-adjoint-preserve-K-injectives)."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $P=\\prod_n C(I_n)$, termwise in $A$-modules, and $h=1-s$, where $\\operatorname{pr}_n s=C(t_n)\\operatorname{pr}_{n+1}$. From the explicit terms and differential of the Hom complex there are chain isomorphisms\n$$C(\\lim_n I_n)\\cong\\lim_n C(I_n)=\\ker(h:P\\to P),\\qquad C(\\prod_n I_n)\\cong\\prod_n C(I_n).$$\nIndeed a map $L^p\\to\\lim_n I_n^{p+r}$ is precisely a compatible family of maps to the $I_n^{p+r}$; interchanging the two products over $p,n$ identifies the terms. Postcomposition with $d_I$ and precomposition with $d_L$ give the same differential on each projection. For each degree $r$, the transition of $C(I_n)^r$ is surjective: choose sections of the split epimorphisms $I_{n+1}^{p+r}\\to I_n^{p+r}$ and postcompose every component. Consequently $h^r$ is surjective: given $(b_n)$, choose $x_1=0$ and recursively choose $x_{n+1}$ lifting $x_n-b_n$. Thus $0\\to C(\\lim I_n)\\to P\\xrightarrow{h}P\\to0$ is degreewise exact. This uses splitness only for the resolved tower, not for $N_\\bullet$.",
+   "text": "Use the resolved-tower ordinary-limit models to obtain invertibility of limit.post and the two projection-normalized Roos triangles.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pur-injective-tower-roos-shifts"
+    "lem-sfb-global-rhom-resolved-tower-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), split-transition and short-exact-sequence paragraphs; Tag 0B6E (section-global-RHom)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the degreewise-epimorphism kernel–cone lemma to $h$. It gives a quasi-isomorphism\n$$k:C(\\lim I_n)\\longrightarrow\\operatorname{Cone}(1-s:P\\to P)[-1],\\qquad z\\longmapsto(0,(C(\\operatorname{pr}_n)z)_n).$$\nUse the strict Roos comparison for the category of $A$-modules (the module-sheaf category on the one-object identity site). Its hypothesis on exact countable products holds: a product of surjections is surjective by choosing one preimage in every coordinate, and kernels are coordinatewise. Its normalized isomorphism $\\rho$ identifies this cone with the resolution-derived $R\\lim_n C(I_n)$. Hence $\\rho\\circ Q(k)$ is the desired isomorphism in $D(A)$ after Step 1's identifications. The same strict Roos lemma identifies $(0,(C(\\operatorname{pr}_n)z)_n)$ with the map induced by the strict augmentation. It therefore proves compatibility with the resolution-derived limiting cone, rather than merely giving an unspecified isomorphism between vertices of triangles.",
+   "text": "At I define α_I=β_(lim I)^(-1) followed by Q(limit.post). Naturality of β applied to lim of a tower map, and the identity H(lim u)·limit.post=limit.post·lim(Hu), show this family is natural. Each component is invertible, so it is a natural isomorphism.",
    "uses": [
-    "lem-weil-degreewise-epi-kernel-cocone-qis",
-    "lem-weil-strict-roos-comparison"
+    "lem-sfb-global-rhom-coefficient-model",
+    "lem-sfb-global-rhom-resolved-tower-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), final paragraph; strict Roos normalization on the point site."
-   }
+   "elementary": true
   },
   {
-   "text": "For a map of resolved towers $u:I_\\bullet\\to I'_\\bullet$, the two maps from $C(\\lim I_n)$ to the target product in Step 4 agree on the $n$th projection: both are postcomposition with $u_n\\operatorname{pr}_n=\\operatorname{pr}'_n\\lim(u)$. Their other cone coordinate is zero. Thus $k$ is natural, and $\\rho$ is natural by the strict Roos comparison. These maps pass to derived objects: maps into K-injective complexes are computed in the homotopy category, and quasi-isomorphisms between K-injectives are homotopy equivalences. Applying $C$ carries such homotopies to homotopies by postcomposition, using its displayed differential. The sections-model identification is natural on those representatives; changing the tower resolution gives the same morphism after localization. All products and maps used are in the ambient module-sheaf category and $D(A)$; no step assumes that the limit has quasi-coherent cohomology.",
+   "text": "For each n, limit.post followed by the nth limit projection is H of the original projection. Localize this equation, apply naturality of β to the projection lim I→I_n, and cancel β_(lim I) with its inverse. This proves the asserted projection compatibility. Combine this with the two Roos triangles, resolutions, and the cohomology equivalences, without changing any conclusion.",
    "uses": [
-    "lem-weil-strict-roos-comparison",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sfb-derived-internal-hom-sections-model"
+    "lem-sfb-global-rhom-coefficient-model",
+    "lem-sfb-global-rhom-resolved-tower-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B6E (section-global-RHom) and 0941 (lemma-derived-limit-is-ok); naturality of the explicit resolution comparison."
-   }
-  },
-  {
-   "text": "For any $N\\in D(\\mathcal O)$ choose a K-injective representative $J$. The sections-model lemma gives, for every integer $q$, $H^q C(J)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(E,N[q])$, naturally in $N$. Combined with Step 1 this is the asserted identification of $H^q R\\operatorname{Hom}_{\\mathcal C}(E,N)$. The $A$-action is postmultiplication on the target in both descriptions, so the identification respects scalars. This also applies to $q<0$ and to unbounded $E,N$.",
-   "uses": [
-    "lem-sfb-derived-internal-hom-sections-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B6E (section-global-RHom), cohomology identities, using Tag 08JA (lemma-section-RHom-over-U)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-ringed-derived-tensor-hom-adjunction",
-  "lem-sf-ringed-derived-native-tensor",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "def-pur-hom-complex",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "def-pur-ringed-site-zeroth-hypercohomology",
-  "lem-pur-injective-tower-roos-shifts",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sfb-global-rhom-coefficient-model",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-degreewise-existence",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-sfb-global-rhom-resolved-tower-models"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0B6E and 0941; explicit global Hom / strict Roos argument expanding the products-and-derived-limits sentence of spaces-perfect.tex Tag 0D3F."
+  "place": "Tags 0B6E and 0941, assembling the coefficient comparison and ordinary-limit models by naturality of limit.post and its projections."
  },
  "mathlib_searches": [
   {
@@ -341,16 +297,6 @@
   "module": "Sheaf.Algebra.Homology.RingedSiteGlobalRHomDerivedLimits",
   "declaration": "CategoryTheory.RingedSiteGlobalRHom.preserves_derived_limits",
   "declarations": [
-   "CategoryTheory.RingedSiteGlobalRHom.Modules",
-   "CategoryTheory.RingedSiteGlobalRHom.Scalars",
-   "CategoryTheory.RingedSiteGlobalRHom.modulesLinear",
-   "CategoryTheory.RingedSiteGlobalRHom.sections",
-   "CategoryTheory.RingedSiteGlobalRHom.globalHom",
-   "CategoryTheory.RingedSiteGlobalRHom.representative",
-   "CategoryTheory.RingedSiteGlobalRHom.resolvedProperty",
-   "CategoryTheory.RingedSiteGlobalRHom.limitGlobalHom",
-   "CategoryTheory.RingedSiteGlobalRHom.representativeTowers",
-   "CategoryTheory.RingedSiteGlobalRHom.globalHomLimit",
    "CategoryTheory.RingedSiteGlobalRHom.preserves_derived_limits"
   ],
   "file": "lean/Sheaf/Algebra/Homology/RingedSiteGlobalRHomDerivedLimits.lean",
@@ -368,5 +314,15 @@
   "group": "Q32",
   "result": "pass",
   "note": "Read node, live node diff (only lean + stmt_deps; statement identical; added stmt_deps def-pur-hom-complex and def-pur-sheaf-modules-hom-module are definition nodes landed 2026-10-11 and used by the Lean, which the brief allows), the module, and dep sources (derivedInternalHomOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, homComplexFunctor, IsDerivedLimitTriangle, ringedSiteModules, rightDerivedFunctor). globalHom is the recorded internal RHom then the right derived functor of Hom-from-unit restricted along phi, i.e. full unbounded RGamma in D(A). Resolved-tower model: every tower has a resolution (conjunct 1); alpha is a NatIso pinned by beta(lim I).inv then Q(limit.post); source and target Roos triangles carry the actual projections; projection compatibility holds, so RHom(E,-) sends the derived-limit cone to a derived-limit cone. beta is true for an arbitrary representative L (K-flat replacement, I K-injective); limit.post is an iso; target triangle holds because injective towers split. H^q clause covers all q in Z, natural in N, A-linear. No universe equality and no qcoh/bounded/K-flat/exact-products hypothesis. No hollow defs, only sorry, docstrings and 6 proof steps present, lines <=100, 24 imports exist, lean.statement verbatim. Edge cases E=0, zero tower, q<0, A=0, empty site check. Notes only: A-linear RGamma rebuilt locally because the recorded dep is H0 with abelian-group values and no general D(A)-valued RGamma exists; second-reading section is short. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4f699",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261028T034723-L-3537515",
+  "kind": "interface",
+  "note": "independent cc review: item preserves_derived_limits (unchanged signature) assembled from new coefficient_model + resolved_tower_models against nodes lem-sfb-ringed-site-global-rhom-derived-limits, lem-sfb-global-rhom-coefficient-model, lem-sfb-global-rhom-resolved-tower-models, def-sfb-global-rhom-resolved-model; verbatim def move vs clone; zero importers"
  }
 }

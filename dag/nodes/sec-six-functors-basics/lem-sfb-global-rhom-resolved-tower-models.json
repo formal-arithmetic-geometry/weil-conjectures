@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-global-rhom-resolved-tower-models",
+ "kind": "statement",
+ "title": "Ordinary-limit and Roos models for resolved global Hom towers",
+ "statement": "Use the module-valued representative and resolved-tower functors of [def-sfb-global-rhom-resolved-model]. For every complex L and every K-injective complex I of strict towers whose terms are injective towers, the actual map limit.post:representative(L,lim I)→lim representative(L,I_n) is an isomorphism. Both Q(lim I) and Q(lim representative(L,I_n)) carry derived-limit triangles whose first arrows have exactly the localized ordinary limit projections. The assertion does not include existence of resolutions, K-injectivity, a comparison with global RHom, naturality of such a comparison, or any cohomology equivalence.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and derived.tex Tag 08BJ: original node proof steps 2–4, ordinary-limit, split-transition and kernel-to-cone calculations."
+ },
+ "stmt_deps": [
+  "def-sfb-global-rhom-resolved-model",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "For an injective tower each transition splits degreewise. The injective-tower Roos theorem gives its distinguished triangle with actual projections, and makes the localized termwise product a categorical product. Transport the triangle along the unique product isomorphism to the selected product in D(R). The first arrow then has precisely the localized limit projections.",
+   "uses": [
+    "lem-pur-injective-tower-roos-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Degree q of the global Hom complex is the product over p of Hom(L^p,I^(p+q)). Maps into an inverse limit are compatible families, and products over p and n interchange. Thus representative(L,lim I) is canonically isomorphic to lim representative(L,I_n), with the same differentials and A-action. The isomorphism is exactly limit.post, characterized by its projections.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Split transitions of the original tower induce split surjections on the Hom product terms. To solve x_n-t_n x_(n+1)=b_n, start with x_0=0 and use the chosen transition sections recursively. Hence 1-shift on the product is surjective in each degree, with kernel the ordinary limit. The kernel-to-shifted-cone lemma gives the ordinary-limit Roos triangle. Products of A-modules are exact, so their degreewise product localizes to the derived product. The kernel inclusion has coordinates (0,z); transport to the selected product gives the stated projection equations.",
+   "uses": [
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-injective-tower-roos-shifts",
+  "def-pur-hom-complex",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, original proof steps 3–4 and the source triangle part of step 2. The statement only asks for the triangles and their projections, so no descent to a separate total-derived-limit functor is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom preserves inverse limits on K-injective complexes and computes derived morphisms",
+   "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, DerivedCategory.right_fac",
+   "date": "2026-10-28",
+   "verdict": "No theorem gives the full ringed-site module-valued model or normalized Roos comparison. limit.post and limit.map_post are used in the assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimit|PreservesLimits",
+   "results": "No matches",
+   "date": "2026-10-28",
+   "verdict": "No theorem gives the full ringed-site module-valued model or normalized Roos comparison. limit.post and limit.map_post are used in the assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.post",
+   "results": "CategoryTheory.Limits.limit.post, CategoryTheory.Limits.limit.post_π, CategoryTheory.Limits.limit.lift_post, CategoryTheory.Limits.limit.post_π_assoc, CategoryTheory.Limits.limit.post_post, CategoryTheory.Limits.limit.pre_post, CategoryTheory.Limits.limit.map_post, CategoryTheory.preservesLimit_of_isIso_post",
+   "date": "2026-10-28",
+   "verdict": "No theorem gives the full ringed-site module-valued model or normalized Roos comparison. limit.post and limit.map_post are used in the assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolved inverse towers of sheaves have ordinary limits with normalized derived limit triangles and global Hom commutes with these limits",
+   "results": "SheafOfModules.hasLimit, TopCat.isSheaf_of_isLimit, TopCat.instHasLimitsOfShapeSheaf, instHasLimitsOfShapeCondensed, CategoryTheory.Sheaf.isLimitConeΓ, CategoryTheory.Sheaf.instHasLimitsOfShape, SheafOfModules.hasLimitsOfSize, SheafOfModules.hasLimitsOfShape",
+   "date": "2026-10-28",
+   "verdict": "No theorem gives the full ringed-site module-valued model or normalized Roos comparison. limit.post and limit.map_post are used in the assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom on a ringed site is computed by module-valued global Hom into K-injective complexes, with a natural linear cohomology equivalence",
+   "results": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-28",
+   "verdict": "No theorem gives the full ringed-site module-valued model or normalized Roos comparison. limit.post and limit.map_post are used in the assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSiteGlobalRHomDerivedLimits",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "via": [
+    "lem-sfb-ringed-site-global-rhom-derived-limits",
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ],
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, second paragraph: the exact global RHom functor commutes with products and derived limits; specify ambient D(O) since the limit need not be quasi-coherent.; Tag 0941 and derived.tex Tag 08BJ: original node proof steps 2–4, ordinary-limit, split-transition and kernel-to-cone calculations."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSiteGlobalRHomResolvedTowerModels",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteGlobalRHomResolvedTowerModels.lean",
+  "declaration": "CategoryTheory.RingedSiteGlobalRHom.resolved_tower_models",
+  "statement": "theorem resolved_tower_models\n    (L : CochainComplex (Modules.{c, v, max c v r} R) ℤ) :\n    (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory,\n      IsIso (limit.post I.obj.asFunctor (representative.{c, v, r, a} R A φ L))) ∧\n      (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory,\n        ∃ hp : HasProduct (fun n : ℕ ↦\n            DerivedCategory.Q.{w}.obj (I.obj.asFunctor.obj (op n))),\n        ∃ (p : DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor) ⟶\n            ∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (I.obj.asFunctor.obj (op n))))\n          (δ : (∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj\n              (I.obj.asFunctor.obj (op n)))) ⟶\n            (DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor))⟦(1 : ℤ)⟧),\n          IsDerivedLimitTriangle\n            (fun n : ℕ ↦ DerivedCategory.Q.{w}.map\n              (I.obj.asFunctor.map (homOfLE (Nat.le_succ n)).op))\n            (DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor)) p δ ∧\n          ∀ n : ℕ, p ≫ Pi.π _ n = DerivedCategory.Q.{w}.map\n            (limit.π I.obj.asFunctor (op n))) ∧\n      (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory,\n        ∃ hp : HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj\n            (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n))),\n        ∃ (p : (globalHomLimit.{c, v, r, a} R A φ L).obj I ⟶\n            ∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.obj\n              (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n))))\n          (δ : (∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.obj\n              (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n)))) ⟶\n            ((globalHomLimit.{c, v, r, a} R A φ L).obj I)⟦(1 : ℤ)⟧),\n          IsDerivedLimitTriangle\n            (fun n : ℕ ↦ DerivedCategory.Q.map\n              (((representativeTowers.{c, v, r, a} R A φ L).obj I).map\n                (homOfLE (Nat.le_succ n)).op))\n            ((globalHomLimit.{c, v, r, a} R A φ L).obj I) p δ ∧\n          ∀ n : ℕ, p ≫ Pi.π _ n = DerivedCategory.Q.map\n            (limit.π ((representativeTowers.{c, v, r, a} R A φ L).obj I) (op n)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4f699",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261028T034723-L-3537515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-4f699",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261028T034723-L-3537515",
+  "kind": "interface",
+  "note": "independent cc review: item preserves_derived_limits (unchanged signature) assembled from new coefficient_model + resolved_tower_models against nodes lem-sfb-ringed-site-global-rhom-derived-limits, lem-sfb-global-rhom-coefficient-model, lem-sfb-global-rhom-resolved-tower-models, def-sfb-global-rhom-resolved-model; verbatim def move vs clone; zero importers"
+ }
+}
