@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantRegularEnd
 
 /-!
 # Complexes with vanishing reduction modulo a regular endomorphism
@@ -151,36 +152,28 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 
 /-- The multiplication by a constant on `𝒪̲_E` is additive in the constant. -/
 lemma padicIntegersRingObjMulLeft_add (a b : PadicAlgCl.integers ℓ E.1) :
-    padicIntegersRingObjMulLeft.{u} ℓ E (a + b) =
-      padicIntegersRingObjMulLeft ℓ E a + padicIntegersRingObjMulLeft ℓ E b := by
+    padicIntegersRingObjMulLeft.{u} ℓ E.1 (a + b) =
+      padicIntegersRingObjMulLeft ℓ E.1 a + padicIntegersRingObjMulLeft ℓ E.1 b := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   ext S x
   exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ add_mul a b (x.down s))
 
-/-- The multiplication by a product of constants on `𝒪̲_E` is the composition of the
-multiplications. -/
-lemma padicIntegersRingObjMulLeft_mul (a b : PadicAlgCl.integers ℓ E.1) :
-    padicIntegersRingObjMulLeft.{u} ℓ E (a * b) =
-      padicIntegersRingObjMulLeft ℓ E b ≫ padicIntegersRingObjMulLeft ℓ E a := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-  ext S x
-  exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_assoc a b (x.down s))
-
 /-- The multiplication by `1` on `𝒪̲_E` is the identity. -/
 lemma padicIntegersRingObjMulLeft_one :
-    padicIntegersRingObjMulLeft.{u} ℓ E 1 = 𝟙 _ := by
+    padicIntegersRingObjMulLeft.{u} ℓ E.1 1 = 𝟙 _ := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
   ext S x
   exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ one_mul (x.down s))
 
 /-- The multiplication by a constant on `𝒪̲_E`, as an additive map in the constant. -/
 noncomputable def padicIntegersRingObjMulLeftAddHom :
-    PadicAlgCl.integers ℓ E.1 →+ (padicIntegersRingObj.{u} ℓ E.1 ⟶ padicIntegersRingObj ℓ E.1) :=
-  AddMonoidHom.mk' (padicIntegersRingObjMulLeft ℓ E) (padicIntegersRingObjMulLeft_add ℓ E)
+    PadicAlgCl.integers ℓ E.1 →+
+      (padicIntegersRingObj.{u} ℓ E.1 ⟶ padicIntegersRingObj ℓ E.1) :=
+  AddMonoidHom.mk' (padicIntegersRingObjMulLeft ℓ E.1) (padicIntegersRingObjMulLeft_add ℓ E)
 
 /-- The multiplication by an integer on `𝒪̲_E` is the integer multiple of the identity. -/
 lemma padicIntegersRingObjMulLeft_intCast (m : ℤ) :
-    padicIntegersRingObjMulLeft.{u} ℓ E m = m • 𝟙 _ := by
+    padicIntegersRingObjMulLeft.{u} ℓ E.1 m = m • 𝟙 _ := by
   have h := map_zsmul (padicIntegersRingObjMulLeftAddHom.{u} ℓ E) m 1
   rwa [padicIntegersRingObjMulLeftAddHom, AddMonoidHom.mk'_apply,
     zsmul_one, padicIntegersRingObjMulLeft_one] at h
@@ -193,18 +186,9 @@ open Scheme
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
-/-- The multiplication by a product of constants of `𝒪_E` on the regular `𝒪_{E,X}`-module is the
-composition of the multiplications. -/
-lemma padicIntegersRegularEnd_mul (a b : PadicAlgCl.integers ℓ E.1) :
-    padicIntegersRegularEnd X ℓ E (a * b) =
-      padicIntegersRegularEnd X ℓ E b ≫ padicIntegersRegularEnd X ℓ E a :=
-  Mod.hom_ext _ _ (by
-    rw [Mod.comp_hom', padicIntegersRegularEnd_hom, padicIntegersRegularEnd_hom,
-      padicIntegersRegularEnd_hom, padicIntegersMulLeft, padicIntegersMulLeft,
-      padicIntegersMulLeft, Profinite.padicIntegersRingObjMulLeft_mul, Functor.map_comp])
-
 /-- The multiplication by `1` on the regular `𝒪_{E,X}`-module is the identity. -/
-lemma padicIntegersRegularEnd_one : padicIntegersRegularEnd X ℓ E 1 = 𝟙 _ :=
+lemma padicIntegersRegularEndOfAlgebra_one :
+    padicIntegersRegularEndOfAlgebra X ℓ E.1 1 = 𝟙 _ :=
   Mod.hom_ext _ _ (by
     rw [padicIntegersRegularEnd_hom, padicIntegersMulLeft,
       Profinite.padicIntegersRingObjMulLeft_one, CategoryTheory.Functor.map_id]
@@ -212,8 +196,8 @@ lemma padicIntegersRegularEnd_one : padicIntegersRegularEnd X ℓ E 1 = 𝟙 _ :
 
 /-- The multiplication by an integer on the regular `𝒪_{E,X}`-module is the integer multiple of
 the identity. -/
-lemma padicIntegersRegularEnd_intCast (m : ℤ) :
-    padicIntegersRegularEnd X ℓ E m = m • 𝟙 _ :=
+lemma padicIntegersRegularEndOfAlgebra_intCast (m : ℤ) :
+    padicIntegersRegularEndOfAlgebra X ℓ E.1 m = m • 𝟙 _ :=
   Mod.hom_ext _ _ (by
     rw [padicIntegersRegularEnd_hom, padicIntegersMulLeft,
       Profinite.padicIntegersRingObjMulLeft_intCast, Functor.map_zsmul,
@@ -222,22 +206,27 @@ lemma padicIntegersRegularEnd_intCast (m : ℤ) :
 
 /-- The multiplication by a power `a ^ n` of a constant of `𝒪_E` on the regular `𝒪_{E,X}`-module,
 followed by an endomorphism `x`, is `x` preceded by `n` multiplications by `a`. -/
-lemma padicIntegersRegularEnd_pow_comp (a : PadicAlgCl.integers ℓ E.1) (n : ℕ)
+lemma padicIntegersRegularEndOfAlgebra_pow_comp (a : PadicAlgCl.integers ℓ E.1) (n : ℕ)
     (x : 𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) ⟶ 𝟙_ _) :
-    padicIntegersRegularEnd X ℓ E (a ^ n) ≫ x = (padicIntegersRegularEnd X ℓ E a ≫ ·)^[n] x := by
+    padicIntegersRegularEndOfAlgebra X ℓ E.1 (a ^ n) ≫ x =
+      (padicIntegersRegularEndOfAlgebra X ℓ E.1 a ≫ ·)^[n] x := by
   induction n with
   | zero =>
-    rw [pow_zero, padicIntegersRegularEnd_one, Category.id_comp, Function.iterate_zero_apply]
+    rw [pow_zero, padicIntegersRegularEndOfAlgebra_one, Category.id_comp,
+      Function.iterate_zero_apply]
   | succ n ih =>
-    rw [pow_succ, padicIntegersRegularEnd_mul, Category.assoc, ih, Function.iterate_succ_apply']
+    rw [pow_succ', padicIntegersRegularEndOfAlgebra_mul, Category.assoc, ih,
+      Function.iterate_succ_apply']
 
 /-- The multiplication by a unit of `𝒪_E` on the regular `𝒪_{E,X}`-module is an isomorphism. -/
-instance isIso_padicIntegersRegularEnd_unit (c : (PadicAlgCl.integers ℓ E.1)ˣ) :
-    IsIso (padicIntegersRegularEnd X ℓ E c) :=
-  ⟨padicIntegersRegularEnd X ℓ E ↑c⁻¹, by
-    rw [← padicIntegersRegularEnd_mul, Units.inv_mul, padicIntegersRegularEnd_one], by
-    rw [← padicIntegersRegularEnd_mul, Units.mul_inv, padicIntegersRegularEnd_one]⟩
+instance isIso_padicIntegersRegularEndOfAlgebra_unit (c : (PadicAlgCl.integers ℓ E.1)ˣ) :
+    IsIso (padicIntegersRegularEndOfAlgebra X ℓ E.1 c) :=
+  ⟨padicIntegersRegularEndOfAlgebra X ℓ E.1 ↑c⁻¹, by
+    rw [← padicIntegersRegularEndOfAlgebra_mul, Units.mul_inv,
+      padicIntegersRegularEndOfAlgebra_one], by
+    rw [← padicIntegersRegularEndOfAlgebra_mul, Units.inv_mul,
+      padicIntegersRegularEndOfAlgebra_one]⟩
 
 open ZeroObject in
 /-- **`ℓ` acts invertibly on `𝒪_E`-complexes with vanishing first derived reduction.** Write
@@ -270,12 +259,13 @@ theorem isIso_zsmul_id_of_isZero_derivedReduction
     rw [Int.cast_natCast]
     exact Nat.cast_ne_zero.2 (Fact.out : ℓ.Prime).ne_zero
   obtain ⟨e, c, hc⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hℓ hirr
-  have w := padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ
+  have w := padicIntegersRegularEnd_hom_comp_residueField X ℓ E.1 ϖ
     (hϖ ▸ Ideal.mem_span_singleton_self ϖ)
   refine Mod.isIso_zsmul_id_of_isZero_leftDerivedFunctor_extendScalars w
-    (shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ) hz
-    (v := padicIntegersRegularEnd X ℓ E c) (e := e) ?_
-  rw [← padicIntegersRegularEnd_intCast, hc, padicIntegersRegularEnd_mul,
-    padicIntegersRegularEnd_pow_comp]
+    (shortExact_padicIntegersRegularEnd X ℓ E.1 ϖ hϖ) hz
+    (v := padicIntegersRegularEndOfAlgebra X ℓ E.1 c) (e := e) ?_
+  rw [← padicIntegersRegularEndOfAlgebra_intCast, hc, mul_comm,
+    padicIntegersRegularEndOfAlgebra_mul,
+    padicIntegersRegularEndOfAlgebra_pow_comp]
 
 end AlgebraicGeometry.ProEtale
