@@ -36,7 +36,6 @@ theorem coefficientStrictReductionTensorNormalization
     ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅
       R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,
       CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ } := by
-  obtain ⟨μ⟩ := coefficientStrictReductionTensorComparison_exists l E W R
-  exact ⟨μ, coefficientStrictReductionTensorNormalization_of l E W R μ⟩
+  exact coefficientStrictReductionTensorNormalization_of l E W R
 
 end WeilConjectures

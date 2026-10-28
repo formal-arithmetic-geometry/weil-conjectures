@@ -25,7 +25,7 @@
  "mathlib_match": null,
  "id": "lem-coef-strict-reduction-tensor-normalization-fixed",
  "title": "Normalization of a chosen strict reduction tensor comparison",
- "statement": "For every coefficient reduction record R and every isomorphism μ:R.integralClosed.tensor⋙R.reduction ≅ (R.reduction.prod R.reduction)⋙R.systemClosed.tensor supplied by the strict pullback construction, the record obtained by replacing reductionTensor by μ satisfies CoefficientReductionTensorNormalization. This is the representative square for arbitrary simultaneous flat-term K-flat pairs.",
+ "statement": "For every coefficient reduction record R there is an isomorphism μ:R.integralClosed.tensor⋙R.reduction ≅ (R.reduction.prod R.reduction)⋙R.systemClosed.tensor, namely the one supplied by the strict pullback construction, such that the record obtained by replacing reductionTensor by μ satisfies CoefficientReductionTensorNormalization. This is the representative square for arbitrary simultaneous flat-term K-flat pairs.",
  "proof": [
   {
    "text": "On each simultaneous flat-term K-flat pair, compare the strict chain tensor map with the three reduction presentations and descend the resulting square to the prescribed tensor models.",
@@ -50,7 +50,7 @@
   "module": "Sheaf.Paper.CoefficientStrictReductionTensorComparison",
   "file": "lean/Sheaf/Paper/CoefficientStrictReductionTensorComparison.lean",
   "declaration": "WeilConjectures.coefficientStrictReductionTensorNormalization_of",
-  "statement": "theorem coefficientStrictReductionTensorNormalization_of\n    (R : CoefficientDerivedSystemReduction l E W)\n    (μ : R.integralClosed.tensor ⋙ R.reduction ≅\n      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor) :\n    CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ }",
+  "statement": "theorem coefficientStrictReductionTensorNormalization_of\n    (R : CoefficientDerivedSystemReduction l E W) :\n    ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅\n      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,\n      CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ }",
   "branch": "sheaf-dag",
   "by": "W4",
   "date": "2026-10-28"
@@ -106,6 +106,23 @@
   ],
   "sorry_after": [
    "WeilConjectures.coefficientStrictReductionTensorNormalization_of"
+  ]
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "L stage 3",
+  "old_statement": "For every coefficient reduction record R and every isomorphism μ:R.integralClosed.tensor⋙R.reduction ≅ (R.reduction.prod R.reduction)⋙R.systemClosed.tensor supplied by the strict pullback construction, the record obtained by replacing reductionTensor by μ satisfies CoefficientReductionTensorNormalization. This is the representative square for arbitrary simultaneous flat-term K-flat pairs.",
+  "what": "The statement quantified over every isomorphism μ of the given type; the Lean signature had no hypothesis selecting the strict comparison. It is false: if μ satisfies the normalization then -μ does not (the square for P=Q=the structure sheaf in degree 0 forces the evaluated comparison to send 1⊗1 to 1, while -μ sends it to -1, and no choice of the existential presentations absorbs the sign: with signs a,b,c,s for (eC,κC),(eD,κD),(eZ,κZ),ψ the ordinary equation forces abs=c and the square then forces the sign of μ to be +1; l=3 gives 1≠-1). Corrected to the existence of the comparison supplied by the strict pullback construction, which is what the parent lem-coef-strict-reduction-tensor-normalization uses.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YS, 06YY, 07A4 and 0941"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-strict-reduction-tensor-normalization",
+    "holds": true,
+    "note": "its Lean proof now applies the corrected existence statement directly; its statement is unchanged"
+   }
   ]
  }
 }

@@ -35,20 +35,18 @@ theorem coefficientStrictReductionTensorComparison_exists
       R.reduction.prod R.reduction ⋙ R.systemClosed.tensor) := by
   exact ⟨R.reductionTensor⟩
 
-/-- A chosen strict reduction comparison has the simultaneous representative
-normalization square. This is the normalization part after the comparison map
-has been constructed; the finite projections are the prescribed scalar tensor
-maps on every flat-term K-flat pair.
+/-- The strict reduction comparison supplied by the strict pullback construction
+has the simultaneous representative normalization square. The finite projections
+are the prescribed scalar tensor maps on every flat-term K-flat pair.
+The comparison is asserted to exist, not quantified over: an arbitrary comparison
+need not be normalized (its negative has the same type but not the square).
 Source: Stacks 06YS, 06YY, 07A4 and 0941, representative tensor descent.
 (blueprint: lem-coef-strict-reduction-tensor-normalization-fixed). -/
--- STATEMENT-DISPUTED: an arbitrary comparison μ need not have the prescribed
--- ordinary scalar tensor normalization. The signature omits the docstring
--- requirement that μ be supplied by the strict pullback construction.
 theorem coefficientStrictReductionTensorNormalization_of
-    (R : CoefficientDerivedSystemReduction l E W)
-    (μ : R.integralClosed.tensor ⋙ R.reduction ≅
-      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor) :
-    CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ } := by
+    (R : CoefficientDerivedSystemReduction l E W) :
+    ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅
+      R.reduction.prod R.reduction ⋙ R.systemClosed.tensor,
+      CoefficientReductionTensorNormalization l E W { R with reductionTensor := μ } := by
   sorry
 
 end WeilConjectures
