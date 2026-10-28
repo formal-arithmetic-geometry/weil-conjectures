@@ -13,26 +13,56 @@
  ],
  "proof": [
   {
-   "text": "expand gamma as the open adjunct of inverse lambda. The canonical bridge identifies the system lambda with the cartesian open-base-change, clopen lift and proper-composition factors. The ringed lambda has exactly the independent ringed factors. Their coefficient squares follow from pull-composition, open base change, clopen adjunction normalization and proper composition. Paste, invert the resulting lambda square, and transpose under the actual open adjunction using its counit square. Naturality inserts the coefficient map of e. The computation is in whole systems and ordinary ringed categories; no completion or expression comparison is used.",
+   "text": "Use fixedOpenReduction_isIso to invert the actual open reduction mate on every ordinary integral object. The inverse is natural, giving the ordinary open coefficient transformation. Derive its open composition and inverse-unit squares by the mate composition and unit identities, using the normalized pull composition square. Equality transports follow by substitution.",
+   "uses": [
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-canonical-reduction-pull-composition",
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the cartesian open square of p and i, invert the vertical sides of the ordinary beta inverse square. Apply mateEquiv to this equality under the composite open/direct adjunctions. Mate conjugation and composition identify the resulting square with the ordinary coefficient square of cartesianConjugate.",
    "uses": [
     "lem-sf-integral-ordinary-canonical-iso-square",
     "lem-sf-tensor-adjunction-reduction-squares",
-    "lem-sf-proper-open-lambda-reduction-square",
-    "lem-sf-semilinear-proper-open-mate-pasting"
+    "lem-sf-integral-ordinary-proper-open-conjugate-square"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the clopen lift s into the pullback, paste open composition and equality transport and invert that square. Restrict it along the pulled-back open and use the inverse open-unit square to obtain the restrictFactor square. Use the ordinary canonical clopen and proper-composition squares for the remaining factors; direct-image equality transport follows by substitution.",
+   "uses": [
+    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-open-reconstruction-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the five factor squares to obtain the forward lambda square. Invert its horizontal isomorphisms. The specified ringed and system gamma adjunct equations identify their transposes with inverse lambda. Apply the inverse open-mate square to transpose the inverse lambda square back to the gamma coefficient square.",
+   "uses": [
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the resulting primitive gamma square on the ringed object of e. Naturality of system gamma inserts the recursively constructed ordinary coefficient map of e. Expanding the two outer unary recursion equations gives exactly ordinaryProperOpenSquare.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sf-open-reconstruction-effectivity",
   "lem-sf-integral-ordinary-canonical-iso-square",
+  "lem-sf-canonical-reduction-pull-composition",
   "lem-sf-tensor-adjunction-reduction-squares",
-  "lem-sf-proper-open-lambda-reduction-square",
-  "lem-sf-semilinear-proper-open-mate-pasting"
+  "lem-sf-integral-ordinary-proper-open-conjugate-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Explicit ordinary coefficient recursion and its primitive generator diagrams; refinement of lem-sf-integral-basic-generator-square."
+  "place": "H3: explicit ordinary mate-conjugation, clopen factorization and five-factor lambda pasting, followed by open adjunction transposition. No completion or finite-word admissibility theorem."
  },
  "mathlib_searches": [
   {
@@ -99,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J7",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261026T235911-L-1467113",
+  "landing": "20261028T020451-L-2514052",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

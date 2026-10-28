@@ -1,0 +1,99 @@
+{
+ "id": "lem-sf-integral-ordinary-proper-open-conjugate-square",
+ "kind": "lemma",
+ "title": "Adjunction conjugation preserves coefficient squares",
+ "statement": "Let A,B,C,D be categories; let P ⊣ Q and P' ⊣ Q' be adjunctions between A and B, and F ⊣ G and F' ⊣ G' adjunctions between C and D. Fix coefficient functors R:A→C and T:B→D and natural transformations χ:R⋙F→P⋙T, χ':R⋙F'→P'⋙T. For α:P'→P and β:F'→F, assume the two whiskered squares χ⋅β and χ'⋅α agree. Then for every X:B, mate(χ)_X followed by conjugate(β)_(T X) equals R(conjugate(α)_X) followed by mate(χ')_X. All mates and conjugates use the indicated adjunctions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply mateEquiv for P ⊣ Q and F' ⊣ G' to the equality of whiskered squares. Mathlib mateEquiv_conjugateEquiv_vcomp and conjugateEquiv_mateEquiv_vcomp identify its sides with the bottom and top whiskerings by the conjugate transformations. Evaluate at X and simplify associator and identity components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient coherence for adjunction transposition, proved using the Mathlib vertical composition identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|conjugate)|homEquiv_naturality",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib mate-conjugation composition identities and evaluate components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib mate-conjugation composition identities and evaluate components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of mates under change of coefficients: a commuting square for a natural transformation implies the commuting square for its adjoint mate",
+   "results": "CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib mate-conjugation composition identities and evaluate components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOrdinaryProperOpenSquare",
+  "date": "2026-10-28",
+  "group": "H3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Adjunction coherence of the ordinary coefficient maps",
+   "via": [
+    "lem-sf-integral-basic-generator-square",
+    "lem-sf-integral-ordinary-proper-open-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryProperOpenCalculus",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryProperOpenCalculus.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryProperOpenConjugateSquare",
+  "statement": "theorem ordinaryProperOpenConjugateSquare\n    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]\n    {P P' : A ⥤ B} {Q Q' : B ⥤ A} {F F' : C ⥤ D} {G G' : D ⥤ C}\n    {R : A ⥤ C} {T : B ⥤ D}\n    (a : P ⊣ Q) (a' : P' ⊣ Q') (b : F ⊣ G) (b' : F' ⊣ G')\n    (χ : R ⋙ F ⟶ P ⋙ T) (χ' : R ⋙ F' ⟶ P' ⋙ T)\n    (α : P' ⟶ P) (β : F' ⟶ F)\n    (h : (TwoSquare.mk _ _ _ _ χ).whiskerRight β =\n      (TwoSquare.mk _ _ _ _ χ').whiskerLeft α) (X : B) :\n    (mateEquiv a b χ).natTrans.app X ≫\n        (conjugateEquiv b b' β).app (T.obj X) =\n      R.map ((conjugateEquiv a a' α).app X) ≫\n        (mateEquiv a' b' χ').natTrans.app X",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261028T020451-L-2514052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261028T020451-L-2514052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
