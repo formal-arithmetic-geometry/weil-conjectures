@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-continuous-coefficient-completion] to every finite field. The finite quotient comparisons fix constants. Compare the two limiting residue cones to obtain the integral isomorphism, retaining its equations after every positive projection.",
+   "text": "Use continuousCoefficientCompletion for each finite field. Identify its commutative-ring inverse limit with the existing completion: the finite quotient diagrams agree after forgetting commutativity, this fully faithful forgetful functor preserves limits, and the resulting comparison preserves every projection. Compose the normalized continuous completion isomorphism with this comparison and retain the supplied constant and residue equations.",
    "uses": [
     "lem-weil-pbc-continuous-coefficient-completion",
     "def-weil-completed-integral-coefficients"
@@ -20,18 +20,21 @@
    "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-continuous-coefficient-localization] for the normalized localization isomorphism and the integral-to-rational map of [def-sfb-continuous-coefficient-pullback-maps]. Postcomposition by the specified field embedding lands in locally finite functions because the field is finite dimensional. Pointwise ring operations and precomposition give the native sheaf morphism and its normalization.",
+   "text": "Use continuousCoefficientLocalization and integralRationalCoefficientMap for the normalized localization and integral inclusion. The specified finite-field embedding is an isometry by uniqueness of the absolute value extending the p-adic norm. Its postcomposition on continuous functions has finite-dimensional span contained in the range of the finite-dimensional source, so it lands in native locally finite functions. The proved section-ring multiplication comparison in NativeScalarForgetting identifies native multiplication with pointwise multiplication; the native unit is pointwise one by applying one_mul to the constant-one function. Thus postcomposition is an actual ring-sheaf morphism with the required pointwise normalization.",
    "uses": [
     "lem-weil-pbc-continuous-coefficient-localization",
     "def-sfb-continuous-coefficient-pullback-maps",
-    "def-sf-locally-finite-adic-realization-data"
+    "def-sf-locally-finite-adic-realization-data",
+    "lem-sf-native-scalar-forgetting-equivalence"
    ],
    "elementary": false
   },
   {
-   "text": "For an extension of finite fields, compare integral sections after every residue projection. For each target residue precision, continuity supplies a sufficiently deep source precision whose ideal maps into the target ideal. The defining completion map applies the field inclusion at these precisions; compatibility on deepening the source precision covers ramification. Joint injectivity of the inverse-limit projections identifies the integral section; then the two composite embeddings in the algebraic closure agree. This gives the scalar equation. Empty objects and identity extensions obey the same formulas.",
+   "text": "For any two normalized presentations, the finite comparison is forced by its values on the sheafification unit, hence is the canonical constant-functions comparison. Its naturality for the existing quotient inclusion maps makes the continuous integral scalar map commute with every reduction. The same-index quotient maps exist for all finite embeddings: integralScalar_quotient_kernel proves this even for ramification. The unique completed coefficient map with those projections is therefore conjugate to continuous integral postcomposition through the two integral isomorphisms. Compose with the normalized integral and native inclusions. Pointwise equality follows from composition of the field embeddings. Choose the presentations simultaneously in the final theorem; cancellation of Shrink.algEquiv and its inverse proves the required embedding equation. The argument needs no points of the site objects and includes empty objects and identity inclusions.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-algebraically-closed-coefficients",
     "def-sf-locally-finite-adic-realization-data"
    ],
    "elementary": false
@@ -42,12 +45,16 @@
   "def-weil-completed-integral-coefficients",
   "lem-weil-pbc-continuous-coefficient-localization",
   "def-sfb-continuous-coefficient-pullback-maps",
-  "def-sf-locally-finite-adic-realization-data"
+  "def-sf-locally-finite-adic-realization-data",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2(1)--(2); native realization coefficient-construction step 2"
+  "place": "Lemma 6.8.2(1)--(2), implemented from the existing normalized completion and localization theorems; scalar compatibility by uniqueness of completedCoefficientMap and naturality of the constant-functions comparisons."
  },
  "mathlib_searches": [
   {
@@ -122,9 +129,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E7",
+  "group": "K9",
   "result": "pass",
-  "landing": "20261028T020331-L-2496446",
+  "landing": "20261028T034832-L-3557662",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
