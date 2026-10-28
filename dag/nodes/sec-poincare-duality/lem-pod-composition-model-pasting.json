@@ -1,0 +1,103 @@
+{
+ "id": "lem-pod-composition-model-pasting",
+ "kind": "statement",
+ "title": "Pasting representative and model comparisons",
+ "statement": "Let C0,C1,C2,D0,D1,D2 be categories, with functors F:C0→C1,G:C1→C2,H:C0→C2,S:D0→D1,T:D1→D2,U:D0→D2, and Ri:Di→Ci. Let bF:R0⋙F→S⋙R1, bG:R1⋙G→T⋙R2, bH:R0⋙H→U⋙R2, k:H→F⋙G and s:U→S⋙T be natural transformations. Choose x∈D0,y∈D1,z,w∈D2, representative arrows sf:Sx→y and th:Ty→z that are isomorphisms, and cc:Ux→w, sc:w→z. Choose model objects v0,v1,v2,v3 and isomorphisms r0:R0x≅v0,r1:R1y≅v1,r2:R2z≅v2,rc:R2w≅v3, plus mF:Fv0→v1,mG:Gv1→v2,mH:Hv0→v3,ms:v3→v2. Assume s_x≫T(sf)≫th=cc≫sc, R2(sc)≫r2=rc≫ms, F(r0)≫mF=bF_x≫R1(sf)≫r1, G(r1)≫mG=bG_y≫R2(th)≫r2, H(r0)≫mH=bH_x≫R2(cc)≫rc, and k_v0≫G(mF)≫mG=mH≫ms, where model isomorphisms denote their homs. Then k_(R0x)≫G(bF_x)≫bG_(Sx)=bH_x≫R2(s_x).",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Postcompose both sides with the isomorphism R2(T(sf))≫R2(th)≫r2. Naturality of bG at sf moves R2(T(sf)) past bG. Substitute the second model equation, combine the maps under G, and substitute the first model equation. Naturality of k at r0 moves H(r0) to the front; then the strict model composition equation changes the remaining factors to mH≫ms. Substitute the composite model equation, use the final model naturality equation backwards, and combine the two R2 maps. The representative composition equation rewrites cc≫sc to s_x≫T(sf)≫th. This is exactly the postcomposed other side. Cancel the postcomposing isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and cancellation of isomorphisms paste commuting squares of comparison transformations to prove composition",
+   "results": "Eight results: CatCommSq.hComp_iso_hom_app, vComp_iso_hom_app, iso_hom_naturality, NatIso.hcomp and inverse formulas.",
+   "date": "2026-10-28",
+   "verdict": "Generic square infrastructure; the representative/model diagram here is proved directly by naturality and cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine results; NatTrans.naturality is the needed elementary ingredient.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality directly."
+  },
+  {
+   "tool": "grep",
+   "query": "pasting|paste.*[Ss]quare|[Mm]odel.*[Cc]ompos",
+   "results": "Twenty-five results, including pullback and bicategorical mate pasting; no representative-model equation.",
+   "date": "2026-10-28",
+   "verdict": "Direct categorical calculation is shorter than recasting the diagram in additional structures."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompositionLimit",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: composition of whole Roos-limit comparisons.",
+   "via": [
+    "lem-pod-reindexing-composition-limit-equation",
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence",
+    "lem-pod-reindexing-composition-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompositionModelPasting",
+  "file": "lean/Sheaf/Paper/PodCompositionModelPasting.lean",
+  "declaration": "WeilConjectures.podCompositionModelPasting",
+  "statement": "theorem podCompositionModelPasting\n    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}\n    [Category C₀] [Category C₁] [Category C₂]\n    [Category D₀] [Category D₁] [Category D₂]\n    {F : C₀ ⥤ C₁} {G : C₁ ⥤ C₂} {H : C₀ ⥤ C₂}\n    {S : D₀ ⥤ D₁} {T : D₁ ⥤ D₂} {U : D₀ ⥤ D₂}\n    {R₀ : D₀ ⥤ C₀} {R₁ : D₁ ⥤ C₁} {R₂ : D₂ ⥤ C₂}\n    (bF : R₀ ⋙ F ⟶ S ⋙ R₁) (bG : R₁ ⋙ G ⟶ T ⋙ R₂)\n    (bH : R₀ ⋙ H ⟶ U ⋙ R₂) (k : H ⟶ F ⋙ G) (s : U ⟶ S ⋙ T)\n    (x : D₀) (y : D₁) (z w : D₂)\n    (sf : S.obj x ⟶ y) (th : T.obj y ⟶ z) (cc : U.obj x ⟶ w)\n    (sc : w ⟶ z) [IsIso sf] [IsIso th]\n    (v₀ : C₀) (v₁ : C₁) (v₂ v₃ : C₂)\n    (r₀ : R₀.obj x ≅ v₀) (r₁ : R₁.obj y ≅ v₁)\n    (r₂ : R₂.obj z ≅ v₂) (rc : R₂.obj w ≅ v₃)\n    (mF : F.obj v₀ ⟶ v₁) (mG : G.obj v₁ ⟶ v₂)\n    (mH : H.obj v₀ ⟶ v₃) (ms : v₃ ⟶ v₂)\n    (hs : s.app x ≫ T.map sf ≫ th = cc ≫ sc)\n    (hr : R₂.map sc ≫ r₂.hom = rc.hom ≫ ms)\n    (hf : F.map r₀.hom ≫ mF = bF.app x ≫ R₁.map sf ≫ r₁.hom)\n    (hg : G.map r₁.hom ≫ mG = bG.app y ≫ R₂.map th ≫ r₂.hom)\n    (hc : H.map r₀.hom ≫ mH = bH.app x ≫ R₂.map cc ≫ rc.hom)\n    (hm : k.app v₀ ≫ G.map mF ≫ mG = mH ≫ ms) :\n    k.app (R₀.obj x) ≫ G.map (bF.app x) ≫ bG.app (S.obj x) =\n      bH.app x ≫ R₂.map (s.app x)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

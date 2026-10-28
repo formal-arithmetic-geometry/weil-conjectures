@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-composition-restricted-tower",
+ "kind": "statement",
+ "title": "Composition of the section-normalized restricted tower comparisons",
+ "statement": "Fix l prime, a finite extension E of Q_l, and composable scheme isomorphisms h:Z→W and f:W→V, with l invertible in all residue fields. Let Df,Dh,Dc be PodCompletionReindex data for f,h,h≫f [def-pod-completion-reindex-models] satisfying RestrictedGenerators. Let a be an isomorphism from isoReductionIntegralInverse(h≫f) to isoReductionIntegralInverse(f)⋙isoReductionIntegralInverse(h), with its forward map on each original section equal to restriction along the inverse Over.mapComp(h,f) arrow. For every strict complex C of coefficient sequence modules [def-trf-integral-comparison-sequence-systems], let sigma be the cochain map of the strict sequence compositor, and let tau be the natural transformation on the restricted tower obtained from the cochain map of a.inv. Then tau ≫ Dc.restricted(C).hom ≫ tower(restriction(sigma_C)) equals reindex_h(Df.restricted(C).hom) ≫ Dh.restricted(sequencePullback_f(C)).hom. The maps are whole strict towers, including all transition arrows. The normalized reindexing definitions are those of [def-pod-completion-reindex-coherence].",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pod-completion-reindex-coherence"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Cancel the forward section map of a, whose inverse is its inverse natural transformation, to obtain the formula for a.inv as restriction along Over.mapComp.hom. Test both sides at a tower index n, degree i, and original section. Use restricted-section naturality, the three RestrictedGenerators laws, and the restricted functor map formula. Naturality of the strict sequence compositor moves the composite comma arrow past the compositor, whose unit-generator formula now gives the two successive unit generators. Move the site arrows past both generators by their naturality. The two resulting sections are restrictions of the same twice-generated section; presheaf functoriality combines their arrows. Product hom extensionality reduces their equality to the actual comma-arrow composition identity. These formulas are the proved helpers in IntegralInverseImageComparisonComposition. Extensionality gives the entire tower identity.",
+   "uses": [
+    "lem-trf-integral-inverse-image-comparison-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-inverse-image-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image sheaf adjunction units on original section generators for an equivalence of sites",
+   "results": "Eight results, including sheafCongr unit section formulas and sheaf module adjunction formulas.",
+   "date": "2026-10-28",
+   "verdict": "No exact restricted-system composition theorem; use the existing project generator formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_unit_app",
+   "results": "One result: Adjunction.comp_unit_app.",
+   "date": "2026-10-28",
+   "verdict": "General adjunction infrastructure; project sequence generators are already normalized by this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp|comp_unit_app|mapComp.*unit",
+   "results": "Twenty-five results, including Adjunction.comp_unit_app, its mate applications, and unrelated unit-composition identities.",
+   "date": "2026-10-28",
+   "verdict": "No exact original-section tower theorem; prove by project section and comma formulas."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompositionLimit",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: composition of whole Roos-limit comparisons on original section generators.",
+   "via": [
+    "lem-pod-reindexing-composition-limit-equation",
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence",
+    "lem-pod-reindexing-composition-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompositionRestrictedTower",
+  "file": "lean/Sheaf/Paper/PodCompositionRestrictedTower.lean",
+  "declaration": "WeilConjectures.podCompositionRestrictedTower",
+  "statement": "theorem podCompositionRestrictedTower\n    {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]\n    [∀ v : V, Invertible (l : V.residueField v)]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    (Df : PodCompletionReindex l E f) (Dh : PodCompletionReindex l E h)\n    (Dc : PodCompletionReindex l E (h ≫ f))\n    (hf : PodCompletionReindex.RestrictedGenerators l E f Df)\n    (hh : PodCompletionReindex.RestrictedGenerators l E h Dh)\n    (hc : PodCompletionReindex.RestrictedGenerators l E (h ≫ f) Dc)\n    (a : isoReductionIntegralInverse l E (h ≫ f) ≅\n      isoReductionIntegralInverse l E f ⋙ isoReductionIntegralInverse l E h)\n    (ha : ∀ (M : scalarReductionSource l E V) (U : Z.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ f)).obj U))),\n      (a.hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)\n          (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x)\n    (C : CochainComplex (coefficientSequenceModules l E V) ℤ) :\n    let σ := NatTrans.mapHomologicalComplex\n      (integralComparisonSequenceComposition l E h f).hom (.up ℤ)\n    let τ := whiskerLeft (podRestrictedTower l E C)\n      (NatTrans.mapHomologicalComplex a.inv (.up ℤ))\n    τ ≫ (Dc.restricted C).hom ≫\n        HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n          (((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).map\n            (σ.app C)) =\n      (podReindexTower l E h).map (Df.restricted C).hom ≫\n        (Dh.restricted\n          (((integralComparisonSequencePullback l E f).mapHomologicalComplex\n            (.up ℤ)).obj C)).hom",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "lem-pod-composition-restricted-roos",
+ "kind": "statement",
+ "title": "Composition of the strict restricted Roos comparisons",
+ "statement": "Fix l prime, a finite extension E of Q_l, and composable scheme isomorphisms h:Z→W and f:W→V, with l invertible in all residue fields. Let A be a PodReindexFamily [def-pod-completion-reindex-coherence] satisfying the PodCompletionReindex.Laws [def-pod-completion-reindex-models] for f,h,h≫f. Assume its ordinary compositor a:H≅F⋙G acts on original sections by restriction along the inverse Over.mapComp(h,f) arrow, with F=isoReductionIntegralInverse(f), G=isoReductionIntegralInverse(h), H=isoReductionIntegralInverse(h≫f). For a strict coefficient sequence complex C [def-trf-integral-comparison-sequence-systems], put Cf=sequencePullback_f(C), let sigma be the strict sequence compositor at C, and T(sigma) its restricted tower map. Write R(C) for podRestrictedTower(C), r_f for the supplied Roos comparison, and t_f(C) for its restricted tower comparison. Write alpha:HC→FC⋙GC for the cochain transformation of a.hom. Then alpha_(Roos R(C)) ≫ GC(r_f(R(C))) ≫ GC(Roos(t_f(C))) ≫ r_h(R(Cf)) ≫ Roos(t_h(Cf)) = r_(h≫f)(R(C)) ≫ Roos(t_(h≫f)(C)) ≫ Roos(T(sigma)). This is equality of whole strict cochain maps before localization, for every unbounded C.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-coherence",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "RoosFst and RoosSnd identify each supplied Roos comparison with scalarRoosMap. Both coordinate formulas are the canonical ones; compose mappingCocone.id_X with the two candidate maps in degree i to identify them from the two coordinates.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted-tower composition theorem, followed by cancellation of the inverse ordinary tower compositor, identifies the composite restricted map followed by T(sigma) with the forward ordinary tower compositor followed by the two successive restricted maps. Naturality of scalarRoosMap moves the first restricted map past the h Roos comparison. Apply the generic composition theorem for scalarRoosMap. The strict Roos functor sends the restricted-tower equation to the equality of the remaining factors. Thus the strict composition square commutes.",
+   "uses": [
+    "lem-pod-composition-restricted-tower",
+    "lem-pod-composition-roos-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pod-composition-restricted-tower",
+  "lem-pod-composition-roos-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total derived inverse limit Roos complex naturality composition of additive functors",
+   "results": "Eight results, including ProjectiveResolution.isoLeftDerivedObj_inv_naturality and Functor.mapDerivedCategoryFactorsh_hom_app; no exact Roos composition equation.",
+   "date": "2026-10-28",
+   "verdict": "Use existing scalarRoosMap coordinate formulas and product projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "Twelve results, including piComparison_comp_π.",
+   "date": "2026-10-28",
+   "verdict": "Product projection infrastructure applies; no full Roos composition result."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*comp|Roos.*[Cc]omp",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-28",
+   "verdict": "Prove the two coordinate equations with project Roos definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompositionLimit",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: composition of whole Roos-limit comparisons.",
+   "via": [
+    "lem-pod-reindexing-composition-limit-equation",
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence",
+    "lem-pod-reindexing-composition-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompositionRestrictedRoos",
+  "file": "lean/Sheaf/Paper/PodCompositionRestrictedRoos.lean",
+  "declaration": "WeilConjectures.podCompositionRestrictedRoos",
+  "statement": "theorem podCompositionRestrictedRoos\n    {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]\n    [∀ v : V, Invertible (l : V.residueField v)]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    (A : PodReindexFamily l E)\n    (hf : PodCompletionReindex.Laws l E f (A.completion f))\n    (hh : PodCompletionReindex.Laws l E h (A.completion h))\n    (hc : PodCompletionReindex.Laws l E (h ≫ f) (A.completion (h ≫ f)))\n    (ha : ∀ (M : scalarReductionSource l E V) (U : Z.ProEt)\n      (x : M.val.obj (op ((proEtaleIsoPostcompose (h ≫ f)).obj U))),\n      ((A.composition h f).hom.app M).val.app (op U) x =\n        M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)\n          (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x)\n    (C : CochainComplex (coefficientSequenceModules l E V) ℤ) :\n    let Cf := ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj C\n    let σ := (NatTrans.mapHomologicalComplex\n      (integralComparisonSequenceComposition l E h f).hom (.up ℤ)).app C\n    let Tσ := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n      (((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).map σ)\n    let α : isoReductionIntegralComplex l E (h ≫ f) ⟶\n        isoReductionIntegralComplex l E f ⋙ isoReductionIntegralComplex l E h :=\n      NatTrans.mapHomologicalComplex (A.composition h f).hom (.up ℤ)\n    α.app (integralOperationsRoos (podRestrictedTower l E C)) ≫\n      (isoReductionIntegralComplex l E h).map\n        ((A.completion f).roos (podRestrictedTower l E C)).hom ≫\n      (isoReductionIntegralComplex l E h).map\n        (integralOperationsRoosFunctor.map ((A.completion f).restricted C).hom) ≫\n      ((A.completion h).roos (podRestrictedTower l E Cf)).hom ≫\n      integralOperationsRoosFunctor.map ((A.completion h).restricted Cf).hom =\n    ((A.completion (h ≫ f)).roos (podRestrictedTower l E C)).hom ≫\n      integralOperationsRoosFunctor.map ((A.completion (h ≫ f)).restricted C).hom ≫\n      integralOperationsRoosFunctor.map Tσ",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

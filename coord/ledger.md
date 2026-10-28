@@ -21060,3 +21060,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: merged deliver/U8/Sheaf.WeilSheaf.NativeOrdinaryConeDetection (stage 3; reviewer PASS; first push; landing 20261028T055817-L-812218 (interface); batch 20261028T055556; modules 3; new nodes 2)
 - 05:58 L: merged deliver/V7/Sheaf.Paper.EtaleSourceNormalizationUniversal (stage 3; reviewer PASS; first push; landing 20261028T055818-L-812433 (proof); batch 20261028T055556; modules 1; new nodes 0)
 - 05:58 L: merged deliver/V8/Sheaf.Paper.FinitePerfectAdicLiftedTransitionCanonicalTransposeFormula (stage 3; reviewer PASS; first push; landing 20261028T055819-L-812647 (interface); batch 20261028T055556; modules 1; new nodes 0)
+- 05:58 L: merged deliver/V9/Sheaf.Paper.PodReindexingCompositionLimit (stage 3; reviewer PASS; first push; landing 20261028T055820-L-812987 (interface); batch 20261028T055556; modules 6; new nodes 5)

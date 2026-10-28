@@ -1,0 +1,112 @@
+{
+ "id": "lem-pod-composition-roos-pasting",
+ "kind": "statement",
+ "title": "Pasting tower maps with the additive Roos comparisons",
+ "statement": "Let A,B,D be abelian categories with countable products, F:A→B,G:B→D,H:A→D additive functors and a:H≅F⋙G. Let C,Cf,Cc,Chf be strict cochain towers in A,B,D,D. Let fRoos,gRoos,hRoos be maps with the same sources and targets as scalarRoosMap(F,C), scalarRoosMap(G,Cf), scalarRoosMap(H,C) [def-sf-additive-roos-map], and assume each equals that canonical map. Let rF:C⋙FC→Cf, rG:Cf⋙GC→Chf, rH:C⋙HC→Cc, sigma:Cc→Chf be tower maps, where FC,GC,HC denote the induced cochain functors. Let alpha:HC→FC⋙GC be the cochain transformation of a.hom. Assume rH≫sigma=whiskerLeft(C,alpha)≫whiskerRight(rF,GC)≫rG. For the strict Roos functor [def-sf-strict-roos-functor], alpha_(Roos C)≫GC(fRoos)≫GC(Roos(rF))≫gRoos≫Roos(rG) = hRoos≫Roos(rH)≫Roos(sigma). No invertibility of the tower maps or of the three Roos comparisons is required.",
+ "stmt_deps": [
+  "def-sf-strict-roos-functor",
+  "def-sf-additive-roos-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "proof": [
+  {
+   "text": "Replace fRoos,gRoos,hRoos by the canonical maps. Naturality of scalarRoosMap(G) at rF replaces GC(Roos(rF)) followed by scalarRoosMap(G,Cf) with scalarRoosMap(G,C⋙FC) followed by Roos(whiskerRight(rF,GC)). Apply additive Roos composition to the three leading factors. The left side is now scalarRoosMap(H,C) followed by the Roos image of whiskerLeft(C,alpha)≫whiskerRight(rF,GC)≫rG. Substitute the assumed tower equation backwards and use Roos functoriality. This is exactly the right side.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison",
+    "lem-pod-composition-roos-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pod-composition-roos-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: identity and composition of the normalized quotient, Roos-limit and tensor transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total derived inverse limit Roos complex naturality composition of additive functors",
+   "results": "Eight results, including ProjectiveResolution.isoLeftDerivedObj_inv_naturality and Functor.mapDerivedCategoryFactorsh_hom_app; no exact Roos composition equation.",
+   "date": "2026-10-28",
+   "verdict": "Use existing scalarRoosMap coordinate formulas and product projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "Twelve results, including piComparison_comp_π.",
+   "date": "2026-10-28",
+   "verdict": "Product projection infrastructure applies; no full Roos composition result."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*comp|Roos.*[Cc]omp",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-28",
+   "verdict": "Prove the two coordinate equations with project Roos definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompositionLimit",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: composition of whole Roos-limit comparisons.",
+   "via": [
+    "lem-pod-reindexing-composition-limit-equation",
+    "lem-pod-reindexing-tensor-family-identity-composition",
+    "lem-pod-reindexing-tensor-family-coherence",
+    "lem-pod-reindexing-composition-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCompositionRoosPasting",
+  "file": "lean/Sheaf/Paper/PodCompositionRoosPasting.lean",
+  "declaration": "WeilConjectures.podCompositionRoosPasting",
+  "statement": "theorem podCompositionRoosPasting\n    {A B D : Type*} [Category A] [Category B] [Category D]\n    [Abelian A] [Abelian B] [Abelian D]\n    [HasCountableProducts A] [HasCountableProducts B] [HasCountableProducts D]\n    (F : A ⥤ B) (G : B ⥤ D) (H : A ⥤ D)\n    [F.Additive] [G.Additive] [H.Additive] (a : H ≅ F ⋙ G)\n    (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (Cf : ℕᵒᵖ ⥤ CochainComplex B ℤ)\n    (Cc Chf : ℕᵒᵖ ⥤ CochainComplex D ℤ)\n    (fRoos : (F.mapHomologicalComplex (.up ℤ)).obj (integralOperationsRoos C) ⟶\n      integralOperationsRoos (C ⋙ F.mapHomologicalComplex (.up ℤ)))\n    (gRoos : (G.mapHomologicalComplex (.up ℤ)).obj (integralOperationsRoos Cf) ⟶\n      integralOperationsRoos (Cf ⋙ G.mapHomologicalComplex (.up ℤ)))\n    (hRoos : (H.mapHomologicalComplex (.up ℤ)).obj (integralOperationsRoos C) ⟶\n      integralOperationsRoos (C ⋙ H.mapHomologicalComplex (.up ℤ)))\n    (rF : C ⋙ F.mapHomologicalComplex (.up ℤ) ⟶ Cf)\n    (rG : Cf ⋙ G.mapHomologicalComplex (.up ℤ) ⟶ Chf)\n    (rH : C ⋙ H.mapHomologicalComplex (.up ℤ) ⟶ Cc) (σ : Cc ⟶ Chf)\n    (hf : fRoos = scalarRoosMap F C) (hg : gRoos = scalarRoosMap G Cf)\n    (hh : hRoos = scalarRoosMap H C) :\n    let α : H.mapHomologicalComplex (.up ℤ) ⟶\n        F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) :=\n      NatTrans.mapHomologicalComplex a.hom (.up ℤ)\n    rH ≫ σ = whiskerLeft C α ≫\n        whiskerRight rF (G.mapHomologicalComplex (.up ℤ)) ≫ rG →\n    α.app (integralOperationsRoos C) ≫\n        (G.mapHomologicalComplex (.up ℤ)).map fRoos ≫\n        (G.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosFunctor.map rF) ≫\n        gRoos ≫ integralOperationsRoosFunctor.map rG =\n      hRoos ≫ integralOperationsRoosFunctor.map rH ≫\n        integralOperationsRoosFunctor.map σ",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261028T055820-L-812987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
