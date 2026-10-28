@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.ProjectionFormulaComposition
 public import WeilConjectures.PoincareDuality.ProjectionFormulaProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 
@@ -19,7 +20,7 @@ For a proper morphism `f`, the exceptional projection morphism
 `Lf^* (Rf_! T ⊗ᴸ M) ≅ Lf^* Rf_! T ⊗ᴸ Lf^* M ⟶ T ⊗ᴸ Lf^* M`, the counit tensored with
 `Lf^* M`.
 
-## Sorried input
+## Main statements
 
 - `ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`: the clause
   "identification with the direct-image projection formula through `Rf_! ≅ Rf_*` for proper `f`"
@@ -28,6 +29,9 @@ For a proper morphism `f`, the exceptional projection morphism
   for composable `f`, `g`, compatible with the composition law" of `prop-sf-pf-coherence`.
 - `ProEtale.CondensedRing.exceptionalProjection_id`: the clause "the identity for `f = id`" of
   `prop-sf-pf-coherence`.
+
+They are proved in `WeilConjectures.PoincareDuality.ProjectionFormulaProper` (the first and the
+last) and `WeilConjectures.PoincareDuality.ProjectionFormulaComposition` (composition).
 
 -/
 
@@ -89,7 +93,7 @@ theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app
           (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj
             ((boundedConstructibleUpperStar _ ℓ g).obj M)) :=
-  sorry
+  boundedConstructibleExceptionalProjectionMorphism_comp ℓ f g T M
 
 variable (X) in
 /-- **The exceptional projection morphism of the identity is the identity** (blueprint

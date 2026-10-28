@@ -22,7 +22,10 @@ followed by the inverse of the projection comparison of `i_! ⊣ i^*` and the id
 The composition isomorphism of a triangle of factorizations intertwines these morphisms
 (`CategoryTheory.ExchangeFormalism.compIso_hom_app_whiskerRight_comp_shriekProjection`): this is
 the compatibility of the projection formula with the composition of compactly supported direct
-images (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
+images (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). Its variant
+`CategoryTheory.ExchangeFormalism.compIso_inv_app_whiskerRight_comp_of_eq` takes the exceptional
+projection morphisms and the other data as variables subject to equations, so that it applies to
+data spelled differently (for instance through the definitions of a concrete exchange formalism).
 
 -/
 
@@ -306,10 +309,11 @@ theorem compIso_hom_app_whiskerRight_comp_shriekProjection
   exact congrArg (F.pf T.p₂).map (F.exchange_whiskerRight_comp_projectionMorphism_triangle hδ
     T.i₁ T.p₁ T.i₂ T.p₂ T.q T.r T.i T.p f g hf hg T.i_q T.r_p T.w hfg K B)
 
-/-- `compIso_hom_app_whiskerRight_comp_shriekProjection` with the exceptional projection
-morphisms and the composition isomorphism of the pullbacks replaced by morphisms equal to them,
-so that it applies to morphisms given in another form without unfolding them. -/
-theorem compIso_hom_app_whiskerRight_comp_of_eq
+/-- `compIso_hom_app_whiskerRight_comp_shriekProjection` read through the inverse of the
+composition isomorphism, with the exceptional projection morphisms, the composition isomorphism of
+the pullbacks and the object `K ⊗ f^* g^* B` replaced by data equal to them, so that it applies to
+data given in another form without unfolding it. -/
+theorem compIso_inv_app_whiskerRight_comp_of_eq
     (hδ : ∀ {X Y Z : 𝒞} (f : X ⟶ Y) (g : Y ⟶ Z) (M N : F.obj Z),
       δ (F.pb (f ≫ g)) M N ≫ ((F.pbComp f g).hom.app M ⊗ₘ (F.pbComp f g).hom.app N) =
         (F.pbComp f g).hom.app (M ⊗ N) ≫ (F.pb f).map (δ (F.pb g) M N) ≫
@@ -320,21 +324,26 @@ theorem compIso_hom_app_whiskerRight_comp_of_eq
     [hbc : IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
     [hex : IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
     {f : X ⟶ Y} {g : Y ⟶ S} (hf : T.i₁ ≫ T.p₁ = f) (hg : T.i₂ ≫ T.p₂ = g)
-    (hfg : T.i ≫ T.p = f ≫ g) (K : F.obj X) (B : F.obj S)
+    (hfg : T.i ≫ T.p = f ≫ g) (K : F.obj X) (B : F.obj S) (W : F.obj X)
+    (hW : K ⊗ (F.pb f).obj ((F.pb g).obj B) = W)
     (a : (F.shriek T.i T.p).obj K ⊗ B ⟶ (F.shriek T.i T.p).obj (K ⊗ (F.pb (f ≫ g)).obj B))
     (ha : a = F.shriekProjection T.i T.p (f ≫ g) hfg K B)
+    (s : (F.pb (f ≫ g)).obj B ⟶ (F.pb g ⋙ F.pb f).obj B)
+    (hs : s = (F.pbComp f g).hom.app B)
+    (u : K ⊗ (F.pb (f ≫ g)).obj B ⟶ W) (hu : u = K ◁ s ≫ eqToHom hW)
+    (t : (F.shriek T.i T.p).obj (K ⊗ (F.pb (f ≫ g)).obj B) ⟶ (F.shriek T.i T.p).obj W)
+    (ht : t = (F.shriek T.i T.p).map u)
     (b : (F.shriek T.i₂ T.p₂).obj ((F.shriek T.i₁ T.p₁).obj K) ⊗ B ⟶
       (F.shriek T.i₂ T.p₂).obj ((F.shriek T.i₁ T.p₁).obj K ⊗ (F.pb g).obj B))
     (hb : b = F.shriekProjection T.i₂ T.p₂ g hg ((F.shriek T.i₁ T.p₁).obj K) B)
-    (c : (F.shriek T.i₁ T.p₁).obj K ⊗ (F.pb g).obj B ⟶
-      (F.shriek T.i₁ T.p₁).obj (K ⊗ (F.pb f).obj ((F.pb g).obj B)))
-    (hc : c = F.shriekProjection T.i₁ T.p₁ f hf K ((F.pb g).obj B))
-    (s : (F.pb (f ≫ g)).obj B ⟶ (F.pb g ⋙ F.pb f).obj B)
-    (hs : s = (F.pbComp f g).hom.app B) :
-    (F.compIso T).hom.app K ▷ B ≫ a ≫ (F.shriek T.i T.p).map (K ◁ s) =
-      b ≫ (F.shriek T.i₂ T.p₂).map c ≫
-        (F.compIso T).hom.app (K ⊗ (F.pb f).obj ((F.pb g).obj B)) := by
-  subst ha hb hc hs
-  exact F.compIso_hom_app_whiskerRight_comp_shriekProjection hδ T hf hg hfg K B
+    (c : (F.shriek T.i₁ T.p₁).obj K ⊗ (F.pb g).obj B ⟶ (F.shriek T.i₁ T.p₁).obj W)
+    (hc : c = F.shriekProjection T.i₁ T.p₁ f hf K ((F.pb g).obj B) ≫
+      (F.shriek T.i₁ T.p₁).map (eqToHom hW)) :
+    (F.compIso T).inv.app K ▷ B ≫ b ≫ (F.shriek T.i₂ T.p₂).map c ≫
+        (F.compIso T).hom.app W = a ≫ t := by
+  subst hW ha hs hu ht hb hc
+  have h := F.compIso_hom_app_whiskerRight_comp_shriekProjection hδ T hf hg hfg K B
+  simp only [eqToHom_refl, Category.comp_id, Functor.map_id]
+  rw [← h, ← comp_whiskerRight_assoc, Iso.inv_hom_id_app, id_whiskerRight, Category.id_comp]
 
 end CategoryTheory.ExchangeFormalism
