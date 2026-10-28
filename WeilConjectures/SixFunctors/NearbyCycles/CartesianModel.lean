@@ -46,8 +46,10 @@ open Scheme
 section Abstract
 
 /-- A natural transformation that is a split monomorphism at `Y` is one at any `X ≅ Y`. -/
-lemma _root_.CategoryTheory.NatTrans.isSplitMono_app_of_iso {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
-    (α : F ⟶ G) {X Y : C} (e : X ≅ Y) (h : IsSplitMono (α.app Y)) : IsSplitMono (α.app X) := by
+lemma _root_.CategoryTheory.NatTrans.isSplitMono_app_of_iso {C D : Type*} [Category C]
+    [Category D] {F G : C ⥤ D}
+    (α : F ⟶ G) {X Y : C} (e : X ≅ Y) (h : IsSplitMono (α.app Y)) :
+    IsSplitMono (α.app X) := by
   have hX : α.app X = F.map e.hom ≫ α.app Y ≫ G.map e.inv := by
     rw [α.naturality_assoc, ← G.map_comp, e.hom_inv_id, G.map_id, Category.comp_id]
   rw [hX]
