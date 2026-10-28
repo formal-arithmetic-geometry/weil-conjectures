@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-b3-weil-projective-decomposition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Projective-line calculation, followed by projection formula and compatible coefficient passage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Native Weil projective-line decomposition normalized at infinity",
+ "statement": "For a finite field k₀ and a prime l different from its characteristic, let X be locally of finite type, quasi-compact and quasi-separated over Spec k₀. Let G and ρ be the proper projective-line cohomology and restriction of [def-pur-b3-weil-projective-restriction], and let T=(-)(-1)[-2] be the native Tate-twist/shift functor [def-wf-tate-twist]. There exists a natural transformation p:G→T such that for every Weil complex K the biproduct map (p_K,ρ_K):G(K)→T(K)⊕K is an isomorphism. This concerns only proper projective-line cohomology; there is no affine-line compact-support term.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Projective-line calculation, followed by projection formula and compatible coefficient passage"
+ },
+ "stmt_deps": [
+  "def-pur-b3-weil-projective-restriction",
+  "def-wf-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "For the finite coefficient ring A=O_E/(varpi^n), use [thm-amb-p1-decomposition] for q:P¹_X→X. Its unit and Kummer Chern-class components give A_X ⊕ A_X(-1)[-2]≅Rq_*A_P. The projective bundle is trivial, so O(1) pulls back to a trivial line on infinity. Its Chern component therefore restricts to zero; the unit component restricts to identity by the adjunction identities.",
+   "uses": [
+    "thm-amb-p1-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a bounded constructible coefficient complex K on X, tensor that decomposition with K and apply [lem-amb-proper-coproducts-projection]. This is natural in K. Order its summands as K(-1)[-2], K; the map to K induced by restriction is the second projection, because the two component equations just proved tensor with identity_K. Consequently its inverse has components (trace, restriction).",
+   "uses": [
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The class, unit, projection and restriction maps commute with coefficient reduction. Apply derived completion to the compatible finite-level maps on a constructible integral model; the inverse-limit functor preserves their inverse identities, and the cohomological bounds are uniform (the proper-line complex has two summands in degrees 0 and 2). Invert the uniformizer and pass through the filtered finite-extension coefficient stages. Every bounded constructible input and morphism is represented at a finite coefficient-field stage, so the compatible natural maps define the rational and algebraically closed-coefficient natural transformation. These operations are performed on the equivariant constructions themselves: the Chern class is Tate-twisted, all units and counits are Weil adjunction maps, and their coefficient comparisons intertwine Frobenius. Thus they give morphisms in the native derived category of Weil sheaves, rather than an attempted lift of an arbitrary invariant morphism of the geometric derived category. The coefficient twist agrees with [def-wf-tate-twist]. The inverse matrix identities persist under every coefficient functor; restrict to WeilComplex to obtain the asserted isomorphism.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-wf-tate-twist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-amb-p1-decomposition",
+  "lem-amb-proper-coproducts-projection",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-wf-tate-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Projective-line calculation, followed by projection formula and compatible coefficient passage; native Weil-complex specialization and explicit categorical assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilComplex|projectiveLineRestriction|derivedLowerShriek",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match: no relative projective-line calculation, canonical restriction, or compact localization for native Weil complexes in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\"",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match: no relative projective-line calculation, canonical restriction, or compact localization for native Weil complexes in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative projective-line cohomology of Weil complexes splits as identity and Tate twist; restriction to infinity and the affine-chart compact-support localization triangle",
+   "results": "8 hits: AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s, CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, Rep.FiniteCyclicGroup.homResolutionIso, groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+   "date": "2026-10-28",
+   "verdict": "no match: no relative projective-line calculation, canonical restriction, or compact localization for native Weil complexes in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative projective-line cohomology of Weil complexes and the affine-chart compact-support localization triangle with restriction to infinity",
+   "results": "8 hits: groupCohomology.H1InfRes, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, HomologicalComplex.restriction, OnePoint.smul_infty_def, groupCohomologyIso, HomologicalComplex.homologyπ_restrictionHomologyIso_hom",
+   "date": "2026-10-28",
+   "verdict": "no match: no relative projective-line calculation, canonical restriction, or compact localization for native Weil complexes in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.FourierInversion.OtherSections",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.FourierInversion.ProjectiveLineDecomposition",
+  "file": "lean/Sheaf/WeilSheaf/FourierInversion/ProjectiveLineDecomposition.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.exists_projectiveLine_trace_decomposition",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.exists_projectiveLine_trace_decomposition"
+  ],
+  "statement": "theorem exists_projectiveLine_trace_decomposition {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] : ∃ p : projectiveLineCohomology (k₀ := k₀) (l := l) X ⟶ tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ), ∀ K, IsIso (biprod.lift (p.app K) ((projectiveLineRestriction X).app K))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T072340-L-1935910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T072340-L-1935910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
