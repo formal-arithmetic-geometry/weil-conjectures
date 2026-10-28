@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-common-constant-unit-frobenius-integral",
+ "kind": "statement",
+ "title": "Integral normalized constant-unit Frobenius coherence",
+ "statement": "At the completed integral coefficient stage, the normalized constant unit commutes with the geometric Frobenius square through the canonical integral pullback composition comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, finite coefficient tower and normalized integral Roos unit"
+ },
+ "stmt_deps": [
+  "def-weil-constant-weil-structure",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-zl-constant-geometric-stalk-unit"
+ ],
+ "proof": [
+  {
+   "text": "Compute the finite quotient unit on constant sections, use constant-ring composition around the Frobenius square, and realize the compatible equations through the completed normalized Roos tower.",
+   "uses": [
+    "lem-pur-proetale-constant-ring-composition",
+    "lem-zl-constant-geometric-stalk-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-zl-constant-geometric-stalk-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, completed integral coefficient stage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral normalized constant unit Frobenius square",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed integral pullback unit commutes with Frobenius",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralUnit.*frobenius|constantWeilIntegralTheta.*square",
+   "results": "No existing theorem for this integral square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalConstantUnitFrobenius",
+  "date": "2026-10-28",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-common-constant-unit-frobenius",
+   "place": "integral coefficient stage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstantUnitFrobenius",
+  "file": "lean/Sheaf/Paper/IntegralConstantUnitFrobenius.lean",
+  "declaration": "WeilConjectures.ConstantPurityFrobenius.integralUnit_frobenius",
+  "statement": "theorem integralUnit_frobenius\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X₀ Y₀ : Over (Spec (.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) :\n    letI := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x\n    letI := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y\n    let f := FrobeniusExchange.fiberMap D f₀\n    let K := constantWeilIntegralObject l E D hl (D.geometricFiber Y₀).left\n    let u := ObjectProperty.isoMk _ (ConstantGeometricStalkUnit.integralUnit l E f)\n    (integralSquarePullbackComponent l E f\n        (D.geometricFrobenius X₀).hom (D.geometricFrobenius Y₀).hom\n        (zlFrobenius_naturality D f₀) K).hom ≫\n        (constructibleIntegralPullback l E f).map\n          (constantWeilConstructibleIntegralTheta l E D hl Y₀).hom ≫ u.hom =\n      (constructibleIntegralPullback l E (D.geometricFrobenius X₀).hom).map u.hom ≫\n        (constantWeilConstructibleIntegralTheta l E D hl X₀).hom",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261028T020427-L-2509337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261028T020427-L-2509337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,6 +8,7 @@ public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.SemilinearFieldOperationLifts
 public import Sheaf.Paper.FrobeniusGeometricExchange
 public import Sheaf.Paper.ConstantGeometricStalkUnit
+import Sheaf.Paper.IntegralConstantUnitFrobenius
 
 /-! # Rational-stage coherence of the normalized constant unit
 
@@ -22,6 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstantPurityFrobenius
+
 
 /-- The rationalized normalized unit, prior to passage to the common coefficient stage.
 Source: constant-comparison proof, Step 2
