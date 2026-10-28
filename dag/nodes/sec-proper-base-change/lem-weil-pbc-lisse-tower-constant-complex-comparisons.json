@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-constant-complex-comparisons",
+ "kind": "statement",
+ "title": "Natural constant models and coefficient identity on represented complexes",
+ "statement": "For arbitrary g:Z→X, a:T→S and b:Z→T and adic datum d, construct a family of natural isomorphisms model_n:lisseTowerConstantInput(g,a,b,d,n)≅constantAdicQuotientRealization(g,d,n). The coefficient path lisseTowerConstantScalarIso followed by lisseTowerConstantModelIso(model_n) equals the path obtained by restricting lisseTowerConstantModelIso(model_(n+1)) and then using lisseTowerAlgebraRestrictIso, when evaluated at Q(K) for every cochain complex K over B_n. These are comparisons of identity coefficient arrows at represented objects. No arbitrary derived semilinear arrow k is quantified here; that extension is proved by the normalization criterion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; Sites, Example 0H7J; Cohomology on Sites, Tag 06YY. Canonical constant comparisons and their coefficient identity on represented complexes."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lisse-tower-localized-constants-normalization",
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary natural model using the constant-sheaf adjunction along comparison, a and b; transport its finite coefficient action by lisseTowerFiniteCoefficientIso. The module-sheafification adjunction identifies the resulting functor with constantAdicQuotientModules X d n followed by ringed inverse image along g. The adjunction units fix the maps on all constant generators and their naturality in algebraic modules.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "def-weil-pbc-derived-local-isomorphism-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity coefficient-restriction arrow, the two ordinary paths agree on each constant generator x, sending it to x. Use the section normalization of lisseTowerNormalizedScalarSquare and constantAdicQuotientComparison. Include pbcRestrictComp and restrictScalarsComp, which describe the two coefficient restrictions. This checks the coefficient identity for these constructed comparisons, not for arbitrary natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-pulled-scalar",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary natural model isomorphisms and the coefficient identity termwise to a cochain complex K, then localize the exact functors. Keep mapDerivedCategoryCompIso and lisseTowerFixedRealizationIso; their definitions identify the result with the three explicit natural isomorphisms in the statement. This constructs model_n and proves the required equation at Q(K). The argument applies to zero complexes, zero coefficient rings and empty bases.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-lisse-tower-localized-constants-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "lem-weil-pbc-lisse-tower-pulled-scalar",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "lem-weil-pbc-lisse-tower-localized-constants-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DA; Sites, Example 0H7J; Cohomology on Sites, Tag 06YY. Canonical constant comparisons and their coefficient identity on represented complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism between constant module sheaf inverse image and constant module realization commuting with coefficient restriction on complexes",
+   "results": "Found constantCommuteCompose, SheafOfModules.pullbackIso and freeFunctorCompPullbackIso. These provide ordinary pieces, not the specified coherent comparisons with these actual finite inverse-image coefficient rings.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantCommuteCompose",
+   "results": "Found the constant/sheafCompose comparison and its counit equation; no comparison with the concrete fixed-realization and completion-quotient functors.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantCommuteCompose|constantSheafsheafPullbackIso",
+   "results": "Mathlib CategoryTheory/Sites/ConstantSheaf.lean supplies constantCommuteCompose; the local project has inverse-image and scalar comparisons, but no theorem supplying the joint natural models and identity coefficient equation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalizedConstantsNormalization",
+  "date": "2026-10-28",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Canonical constant comparisons and the ordinary coefficient identity before the extension to arbitrary derived semilinear arrows.",
+   "via": [
+    "lem-weil-pbc-lisse-tower-localized-constants-normalization",
+    "lem-weil-pbc-lisse-tower-localized-constants",
+    "lem-weil-pbc-lisse-tower-localized-realization",
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerConstantComplexComparisons",
+  "file": "lean/Sheaf/Paper/LisseTowerConstantComplexComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_constant_complex_comparisons",
+  "statement": "theorem lisseTower_constant_complex_comparisons\n    {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :\n    ∃ model : ∀ n : ℕ,\n      lisseTowerConstantInput g a b d n ≅ constantAdicQuotientRealization g d n,\n    ∀ (n : ℕ)\n      (K : CochainComplex (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ℤ),\n      ((lisseTowerConstantScalarIso g a b d n) ≪≫\n        lisseTowerConstantModelIso g a b d n (model n)).hom.app (DerivedCategory.Q.obj K) =\n      (Functor.isoWhiskerLeft (normalizationModuleRestrict (lisseTowerEtaleQuotient d n))\n          (lisseTowerConstantModelIso g a b d (n + 1) (model (n + 1))) ≪≫\n        Functor.isoWhiskerRight (lisseTowerAlgebraRestrictIso d n)\n          (constantAdicFiniteRealization g d)).hom.app (DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-48a86",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261028T072415-L-1943844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-48a86",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261028T072415-L-1943844",
+  "kind": "interface",
+  "note": "independent cc review: item lemma (natural-model/localization criterion, proved; sorryAx only upstream via lisseTower_scalar_restriction) and new sorry lisseTower_constant_complex_comparisons against their nodes; parent signature vs clone; 3b importer OK"
+ }
+}

@@ -2,13 +2,14 @@
  "id": "lem-weil-pbc-lisse-tower-localized-constants-normalization",
  "kind": "statement",
  "title": "Normalized semilinear transition for localized constant models",
- "statement": "Given a family model_n(E) as above, every semilinear algebraic arrow k:E→Res(q_n)E' satisfies the localized normalized transition equation after composing with the prescribed lisseTowerPulledScalarIso, constantAdicQuotientRightIso and constantAdicFiniteRealization compositors.",
+ "statement": "Let X,Z,T,S be schemes, g:Z→X, a:T→S and b:Z→T arbitrary morphisms, and d an adic coefficient datum. Let model_n be NATURAL isomorphisms from normalizationConstant on S followed by localProEtaleComparison(a), inverse image along b, and fixed realization at g, to constantAdicQuotientRealization(g,d,n). Form the three specified natural isomorphisms lisseTowerConstantScalarIso, lisseTowerConstantModelIso, and lisseTowerAlgebraRestrictIso by the explicit coefficient and localization compositors. Assume that the two coefficient paths formed from these isomorphisms agree at Q(K) for every cochain complex K over B_n. Then the original normalized square holds for EVERY derived semilinear arrow k:E→Res(q_n)Eprime, with the objectwise models given by components of model_n. This is a localization and naturality criterion; it makes no assertion for arbitrary objectwise models without a coefficient compatibility hypothesis.",
  "stmt_deps": [
   "def-weil-pbc-lisse-tower-etale-descent-data",
   "lem-weil-pbc-lisse-tower-pulled-scalar",
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
   "def-weil-pbc-constant-adic-finite-diagram-data",
-  "def-weil-pbc-derived-local-isomorphism-sheaf"
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-normalization-arrows"
  ],
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
@@ -16,7 +17,7 @@
  },
  "proof": [
   {
-   "text": "Evaluate the ordinary square on constant sections, use the section-normalized scalar comparison and the restriction compositors, then localize and conjugate by constantAdicQuotientRightIso to obtain the displayed equality.",
+   "text": "Construct the constant coefficient path by pasting normalizationConstantRestrict, localProEtaleComparisonCoefficients and lisseTowerPulledScalarIso with explicit associators. Construct c_n by whiskering the supplied natural model and inverting constantAdicQuotientRightIso. Construct the algebraic coefficient path by the inverse exact composition and restrictScalarsComp comparisons. These are actual natural isomorphisms, not independently chosen component maps.",
    "uses": [
     "lem-weil-pbc-lisse-tower-pulled-scalar",
     "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
@@ -24,7 +25,25 @@
     "def-weil-pbc-derived-local-isomorphism-sheaf",
     "def-weil-pbc-lisse-tower-etale-descent-data"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Localization.natTrans_ext to DerivedCategory.Q at quasi-isomorphisms. The hypothesis on every Q(K) gives equality of the two coefficient natural transformations on the entire derived category.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At Eprime precompose that equality with the image of the arbitrary k under the source composite functor. Naturality of c_(n+1) moves k through c_(n+1). Functor.map_comp combines its algebraic image with the coefficient compositor; expanding the supplied definitions gives exactly lisseTowerAlgebraArrow(k) and the original geometric normalized square. This step uses neither a representation of k by a chain map nor a boundedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-pulled-scalar",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-constant-adic-finite-diagram-data",
+    "def-weil-pbc-derived-local-isomorphism-sheaf",
+    "def-weil-pbc-lisse-tower-etale-descent-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,12 +51,13 @@
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
   "def-weil-pbc-constant-adic-finite-diagram-data",
   "def-weil-pbc-derived-local-isomorphism-sheaf",
-  "def-weil-pbc-lisse-tower-etale-descent-data"
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CY and 03DA; Sites Tag 0H7J; Tag 06YY, constant sections and exact derived localization."
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Localization universal property, Section 4.27; Mathlib Localization.natTrans_ext and naturality of the specified model isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -87,11 +107,19 @@
   "module": "Sheaf.Paper.LisseTowerLocalizedConstantsNormalization",
   "file": "lean/Sheaf/Paper/LisseTowerLocalizedConstantsNormalization.lean",
   "declaration": "AlgebraicGeometry.Scheme.lisseTower_localized_constants_normalization",
-  "statement": "theorem lisseTower_localized_constants_normalization\n    {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (model : ∀ (n : ℕ)\n      (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))),\n      ((ProEtale.upperStar\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) b).mapDerivedCategory ⋙\n          lisseTowerFixedRealization g d n).obj\n        ((localProEtaleComparison a (lisseTowerEtaleRing d n)).obj\n          ((normalizationConstant S.smallEtaleTopology).obj E)) ≅\n        (constantAdicQuotientRealization g d n).obj E) :\n    ∀ (n : ℕ)\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))))\n    (E' : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))\n    (k : E ⟶ (normalizationModuleRestrict (lisseTowerEtaleQuotient d n)).obj E'),\n    let H (j : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection g d j)\n    let c (j : ℕ) (N : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d j))) :=\n      (H j).mapIso (model j N) ≪≫\n        ((constantAdicQuotientRightIso g d j).app N).symm\n    (H (n + 1)).map ((\n      (ProEtale.upperStar\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))) b).mapDerivedCategory ⋙\n        lisseTowerFixedRealization g d (n + 1)).map\n      (localProEtaleNormalization a (lisseTowerEtaleQuotient d n)\n        (normalizationConstantArrow S.smallEtaleTopology (lisseTowerEtaleQuotient d n)\n          k))) ≫\n      (lisseTowerPulledScalarIso g b d n).hom.app\n      ((localProEtaleComparison a\n        (lisseTowerEtaleRing d n)).obj\n          ((normalizationConstant S.smallEtaleTopology).obj E')) ≫ (c n E').hom =\n      (c (n + 1) E).hom ≫\n        (constantAdicFiniteRealization g d).map (lisseTowerAlgebraArrow d n k)",
+  "statement": "theorem lisseTower_localized_constants_normalization\n    {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (model : ∀ n : ℕ,\n      lisseTowerConstantInput g a b d n ≅ constantAdicQuotientRealization g d n)\n    (hmodel : ∀ (n : ℕ)\n      (K : CochainComplex (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ℤ),\n      ((lisseTowerConstantScalarIso g a b d n) ≪≫\n        lisseTowerConstantModelIso g a b d n (model n)).hom.app (DerivedCategory.Q.obj K) =\n      (Functor.isoWhiskerLeft (normalizationModuleRestrict (lisseTowerEtaleQuotient d n))\n          (lisseTowerConstantModelIso g a b d (n + 1) (model (n + 1))) ≪≫\n        Functor.isoWhiskerRight (lisseTowerAlgebraRestrictIso d n)\n          (constantAdicFiniteRealization g d)).hom.app (DerivedCategory.Q.obj K)) :\n    ∀ (n : ℕ)\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))))\n    (E' : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))\n    (k : E ⟶ (normalizationModuleRestrict (lisseTowerEtaleQuotient d n)).obj E'),\n    let H (j : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection g d j)\n    let c (j : ℕ) (N : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d j))) :=\n      (H j).mapIso ((model j).app N) ≪≫\n        ((constantAdicQuotientRightIso g d j).app N).symm\n    (H (n + 1)).map ((\n      (ProEtale.upperStar\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))) b).mapDerivedCategory ⋙\n        lisseTowerFixedRealization g d (n + 1)).map\n      (localProEtaleNormalization a (lisseTowerEtaleQuotient d n)\n        (normalizationConstantArrow S.smallEtaleTopology (lisseTowerEtaleQuotient d n)\n          k))) ≫\n      (lisseTowerPulledScalarIso g b d n).hom.app\n      ((localProEtaleComparison a\n        (lisseTowerEtaleRing d n)).obj\n          ((normalizationConstant S.smallEtaleTopology).obj E')) ≫ (c n E').hom =\n      (c (n + 1) E).hom ≫\n        (constantAdicFiniteRealization g d).map (lisseTowerAlgebraArrow d n k)",
   "branch": "sheaf-dag",
   "by": "J8",
   "date": "2026-10-28",
-  "note": "STATEMENT-DISPUTED (X8, 2026-10-28): arbitrary objectwise model isomorphisms carry no compatibility across levels. Negating every level-zero component changes only one side of the n=0 equation. The claim would force the realized algebraic transition to equal its negative, which fails for the constant rank-one F_3 complex on a nonempty point with zero adic ideal. The item keeps its signature and hole; private proved categorical lemmas and report record the obstruction. The existential parent needs a jointly constructed coherent family, not this universal split."
+  "note": "H3, 2026-10-28: false universal statement repaired to the proved localization/naturality criterion. Parent signature preserved; its canonical comparison construction on complexes is a separate genuine step. No sorry remains in this module.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseTowerConstantInput",
+   "AlgebraicGeometry.Scheme.lisseTowerPasteConstantScalar",
+   "AlgebraicGeometry.Scheme.lisseTowerConstantScalarIso",
+   "AlgebraicGeometry.Scheme.lisseTowerAlgebraRestrictIso",
+   "AlgebraicGeometry.Scheme.lisseTowerConstantModelIso",
+   "AlgebraicGeometry.Scheme.lisseTower_localized_constants_normalization"
+  ]
  },
  "reviewed": {
   "date": "2026-10-28",
@@ -106,11 +134,48 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X8",
-  "result": "pass",
-  "landing": "20261028T035017-L-3580456",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-48a86",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261028T072415-L-1943844",
+  "kind": "interface",
+  "note": "independent cc review: item lemma (natural-model/localization criterion, proved; sorryAx only upstream via lisseTower_scalar_restriction) and new sorry lisseTower_constant_complex_comparisons against their nodes; parent signature vs clone; 3b importer OK"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "H3 stage 2",
+  "old_statement": "Given a family model_n(E) as above, every semilinear algebraic arrow k:E→Res(q_n)E' satisfies the localized normalized transition equation after composing with the prescribed lisseTowerPulledScalarIso, constantAdicQuotientRightIso and constantAdicFiniteRealization compositors.",
+  "what": "Repair the false universal quantifier diagnosed by X8. Objectwise model isomorphisms, even levelwise natural ones, can be negated at one level without preserving coefficient compatibility. The replacement is a proved criterion: natural models satisfying only the coefficient identity on represented complexes satisfy all derived-arrow squares. The parent existential theorem keeps exactly its original signature and now uses jointly coherent natural comparisons.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03CY and 03DA; Sites, Example 0H7J; Cohomology on Sites, Tag 06YY. Canonical constant comparisons and their coefficient identity on represented complexes."
+  },
+  "old_proof": [
+   {
+    "text": "Evaluate the ordinary square on constant sections, use the section-normalized scalar comparison and the restriction compositors, then localize and conjugate by constantAdicQuotientRightIso to obtain the displayed equality.",
+    "uses": [
+     "lem-weil-pbc-lisse-tower-pulled-scalar",
+     "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+     "def-weil-pbc-constant-adic-finite-diagram-data",
+     "def-weil-pbc-derived-local-isomorphism-sheaf",
+     "def-weil-pbc-lisse-tower-etale-descent-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-lisse-tower-pulled-scalar",
+   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+   "def-weil-pbc-constant-adic-finite-diagram-data",
+   "def-weil-pbc-derived-local-isomorphism-sheaf",
+   "def-weil-pbc-lisse-tower-etale-descent-data"
+  ],
+  "citers": [
+   {
+    "id": "lem-weil-pbc-lisse-tower-localized-constants",
+    "holds": true,
+    "note": "The existential conclusion is unchanged. Its proof now obtains natural comparisons and the identity-on-complex condition together, then applies the repaired normalization criterion."
+   }
+  ]
  }
 }
