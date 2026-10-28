@@ -18,31 +18,50 @@
  ],
  "proof": [
   {
-   "text": "Apply lem-sf-locally-finite-adic-compact-support-realization to $f=p$ with the compactification $(\\mathrm{id}_Z,p)$. It supplies the proper scalar-extension comparison on the stated full ordinary derived subcategories; for this compactification $D(\\mathrm{id}_!)$ is the identity (extension by zero across the entire scheme). In particular its final preservation clause says that the actual $Rp_{*,B}$ sends $\\mathcal D_Z$ into $\\mathcal D_Y$. The domain called $D^b_{ctf}(-,\\Omega)$ in that lemma is exactly the common-stage $D^b_c(-,\\Omega)$ by def-weil-finite-tor-amplitude, so no extra Tor hypothesis is being imposed on objects of $\\mathcal C_Z$. Step 1 identifies its realization $J$ with $\\rho$. We use this result here only to restrict the independently defined ordinary module direct image; its comparison need not be chosen as our $b_p$. Transport its native ordinary presentation through the section-module equivalence of the fixed Family. The precomposition property of Operations identifies the coefficient map, hence the ordinary pullback functor; uniqueness of right adjoints identifies the actual right-derived direct images. This identification transports boundedConstructible, independent of the auxiliary realization chosen by compact-support realization.",
+   "text": "Give Z and T their Over instances from their structural maps; p.w supplies p.IsOver, and hp supplies properness, hence the separated finite-type hypotheses. Apply exists_coefficient_construction over the canonical universe lift of PadicAlgCl and then locally_finite_adic_compact_support_realization to Compactification.ofIsProper p.left. This gives native geometry G and the preservation field C.preserves for the compactification (identity,p). No extra Tor condition on the input is needed: this preservation field is stated on the native boundedAdicConstructible predicate.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "lem-sf-locally-finite-adic-compact-support-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct of O.coefficient and the adjunct of (G.pull p.left).hom have identical values: both are precomposition of locally finite functions by the same base-change projection. Extensionality on test objects, sections and points, followed by injectivity of the sheaf adjunction Hom equivalence, gives equality of these coefficient maps. Unfolding the two sectionwise pushforward definitions then gives equality of ContinuousRational.DirectImage.modulePush and proEtaleRingModuleDirectImage with G.pull.",
+   "uses": [
+    "def-sf-native-proper-coefficient-operations",
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identity adic pullback is isomorphic to the identity functor. Uniqueness of left adjoints therefore identifies extension by zero along the identity with the identity. Apply mapDerivedCategoryNatIso and mapDerivedCategoryIdIso and whisker with the proper right-derived direct image: actual l (ofIsProper p) is isomorphic to native derived direct image. The canonical properTransport of G compares native derived direct image followed by sections with sections followed by the ringed derived direct image. Apply rightDerivedFunctorNatIso to the equality of sectionwise direct images from the preceding step; its whiskering completes the comparison with the assigned ordinary derivedPush. The sectionDerived functors depend on each realization only through proposition-valued structure, so these are the fixed Family section presentations by proof irrelevance.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data",
+    "def-sf-native-adic-realization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unpack boundedConstructible K as a native bounded constructible L and an isomorphism sectionDerived(L) to K. C.preserves gives constructibility of actual(L), hence of native derivedPush(L) by the identity-extension isomorphism and isomorphism closure of the native predicate. Realize this native derived image by sectionDerived. The properTransport component followed by ordinary derivedPush applied to the given input isomorphism is an isomorphism from that realization to ordinary derivedPush(K). This is exactly the witness required by boundedConstructible on T. No essential-image surjectivity, new realization choice, tensor comparison or adjunction-comparison equation is required; empty schemes and the zero object are handled by the same constructions.",
    "uses": [
     "lem-sf-locally-finite-adic-compact-support-realization",
-    "def-weil-finite-tor-amplitude",
-    "def-sf-native-proper-coefficient-operations",
-    "lem-sf-adic-qbar-constructible-realization"
+    "def-sf-native-adic-realization-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
   "lem-sf-locally-finite-adic-compact-support-realization",
-  "def-weil-finite-tor-amplitude",
   "def-sf-native-proper-coefficient-operations",
-  "lem-sf-adic-qbar-constructible-realization"
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-native-adic-realization-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas",
-  "note": "Agent-formulated strict subargument of the proper-adjunction assembly, retaining the named source and its normalization."
+  "place": "Lemma 6.7.2, Proposition 6.8.14 and Remark 6.8.15 via the existing compact-support realization; identity compactification and canonical section transport.",
+  "note": "Q9, 2026-10-28: complete Lean proof using C.preserves, coefficient-map extensionality, identity-extension adjunction uniqueness, and the existing properTransport. No new statements or sorry split-offs."
  },
  "mathlib_searches": [
   {
@@ -113,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "by": "L",
-  "reviewer": "C-e55ba",
-  "group": "G3",
-  "result": "fix",
-  "landing": "20261027T094408-L-222429",
-  "kind": "interface",
-  "note": "independent cc review: item proof (mate helper + Mathlib mate unit/counit) and two new sorry lemmas against Comparison fields, DAG nodes, unit sk-prop-sf-biduality-general (realized empty)"
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261028T081757-L-2782144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
