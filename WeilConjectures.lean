@@ -13381,6 +13381,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresente
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
