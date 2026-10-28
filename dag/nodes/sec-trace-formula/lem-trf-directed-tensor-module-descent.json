@@ -38,36 +38,36 @@
  ],
  "proof": [
   {
-   "text": "Identify every open immersion of the cover with the inclusion of its open image. Transport M_i to that open. For an inclusion the section-normalized tensor pullback and ordinary restriction are canonically isomorphic by uniqueness of left adjoints to pushforward; the same uniqueness identifies their composition comparisons. Consequently ht is the ordinary restriction composition law. Apply ht to two identity arrows and cancel the invertible transition to obtain the canonical unit law.",
+   "text": "Construct L as the explicit multiequalizer tensorMatchingModule of the pushed-forward local modules. Its projections have canonical normalized adjoint chart maps and satisfy the full chart equation by the proved mate and multiequalizer compatibility lemmas.",
    "uses": [
-    "def-pc-module-pullback"
+    "def-trf-directed-tensor-matching-module"
    ],
    "elementary": false
   },
   {
-   "text": "For each pair i,j, local directedness covers the intersection of the two open images by images of indices k equipped with arrows k→i,k→j. On such a refinement define the transition from M_i to M_j as t(k→i) followed by the inverse of t(k→j). Two refinements of this intersection admit further common refinements pointwise, again by local directedness. On those further refinements ht and cancellation show that the two formulas agree. The morphism gluing and locality clauses of glue_sheaves_of_modules therefore produce a unique overlap map; glue the inverse formulas too, and check both inverse identities locally. On a triple overlap refine simultaneously in all three indices. Cancellation of the middle transition proves the cocycle there, hence on the triple overlap by locality. This also proves the assertions on empty intersections.",
+   "text": "The tensor cocycle and local directedness make every canonical matching chart map invertible, by lem-trf-directed-tensor-matching-chart-is-iso. Regard each map as its associated isomorphism.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "lem-trf-directed-tensor-matching-chart-is-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the object-gluing clause of glue_sheaves_of_modules to these modules on the open images and their overlap isomorphisms. Obtain a module L and isomorphisms from its restrictions to M_i. For an arrow i→j, refine the overlap using i itself: the overlap map is exactly the transition t(i→j), by the unit law. The overlap compatibility of the glued charts is therefore the required chart square. Transport back along the open-image identifications and the canonical tensor-pullback/restriction comparisons. Their naturality gives precisely the eqToIso and tensorPullbackSectionComp in the displayed conclusion. Empty covers force the scheme empty, where the zero module gives the claim. No quasi-coherence or finiteness is used.",
+   "text": "Use tensorMatchingModule and the canonical tensorMatchingChartIso as the existential witnesses. Their exact required equation is tensorMatchingChartIso_condition, proved by the abstract isomorphism-factor comparison and the normalized mate/multiequalizer calculation. No new existence assertion is used.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "def-trf-directed-tensor-matching-module",
+    "lem-trf-directed-tensor-matching-chart-is-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "lem-weil-pbc-glue-sheaves-of-modules"
+  "def-trf-directed-tensor-matching-module",
+  "lem-trf-directed-tensor-matching-chart-is-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01LI, lemma-relative-glueing-sheaves, proof: common refinements and overlap cocycle; general sheaves of modules version using Sheaves Tags 04TN, 00AL, 00AM."
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL and 00AM, first proof by matching sections, implemented by R1 as the actual multiequalizer of pushforwards; common refinements follow Constructions Tag 01LI. No existential gluing theorem or unproved intermediate is needed."
  },
  "mathlib_searches": [
   {
@@ -133,9 +133,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261028T020635-L-2533588",
+  "landing": "20261028T055740-L-804003",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Mathlib.AlgebraicGeometry.Cover.Directed
+import Sheaf.AlgebraicGeometry.DirectedTensorMatchingSections
 
 /-! # Module descent on a locally directed open cover
 
@@ -66,6 +67,9 @@ theorem exists_directed_tensor_module_descent
       ∀ {i j : 𝒰.I₀} (f : i ⟶ j),
         eqToIso (congrArg (fun a ↦ (tensorPullback a).obj L) (𝒰.trans_map f).symm) ≪≫
           (tensorPullbackSectionComp (𝒰.trans f) (𝒰.f j)).app L ≪≫
-          (tensorPullback (𝒰.trans f)).mapIso (chart j) ≪≫ t f = chart i := by sorry
+          (tensorPullback (𝒰.trans f)).mapIso (chart j) ≪≫ t f = chart i := by
+  refine ⟨tensorMatchingModule 𝒰 M t, tensorMatchingChartIso 𝒰 M t ht, ?_⟩
+  intro i j f
+  exact tensorMatchingChartIso_condition 𝒰 M t ht f
 
 end AlgebraicGeometry.Scheme.Modules
