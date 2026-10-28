@@ -21154,3 +21154,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:25 L: merged deliver/NB/lem-pur-general-legacy-pair-shifts (stage 2; reviewer PASS; parallel immutable checks); batch 20261028T072331; landing - (dag)
 - 08:11 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (the landing tools, head bbe60acc7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 08:11 L: returned deliver/D4/Sheaf.Paper.AdicCompletedTensorCommonLiftConstraintsSymmetric (reviewer RETURN: (the landing tools, head dbb80d1d3) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
+- 08:11 L: returned deliver/E3/Sheaf.Paper.DiagonalCyclicEvaluationTransport (reviewer RETURN: (the landing tools, head a704850e5) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
