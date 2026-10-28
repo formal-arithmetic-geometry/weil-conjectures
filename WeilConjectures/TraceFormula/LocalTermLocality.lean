@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusContracting
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.TraceFormula.ContractingPieces
+public import WeilConjectures.TraceFormula.LocalTermPoint
 public import WeilConjectures.TraceFormula.PointNormalization
 public import WeilConjectures.TraceFormula.ProperCompatibility
 
@@ -104,20 +105,6 @@ structure IsContractingAt (y : RationalPoint c.C) : Prop where
         (X.left.presheaf.stalk (c.c₁.left (y.left (default : Spec (.of k)))))).map
         (c.c₁.left.stalkMap (y.left (default : Spec (.of k)))).hom) ^ (n + 1)
 
-variable {c}
-
-/-- A `k`-point of the support lying on the fixed locus, as a point of the fixed locus. -/
-noncomputable def FixedLocus.liftPoint (F : c.FixedLocus) (y : RationalPoint c.C)
-    (hy : y ≫ c.c₁ = y ≫ c.c₂) : RationalPoint F.F :=
-  F.isLimit.lift (Fork.ofι (P := point k) y hy)
-
-@[reassoc (attr := simp)]
-lemma FixedLocus.liftPoint_ι (F : c.FixedLocus) (y : RationalPoint c.C)
-    (hy : y ≫ c.c₁ = y ≫ c.c₂) : F.liftPoint y hy ≫ F.ι = y :=
-  Fork.IsLimit.lift_ι F.isLimit
-
-variable (c)
-
 variable {c} in
 /-- The *restricted coefficient map* `u_Z : K_x ⟶ K_x` of a correspondence at a `k`-point `y` of
 the fixed locus whose fibre `c₁⁻¹(x)`, `x = c₁(y) = c₂(y)`, is the reduced point `y` (blueprint
@@ -188,17 +175,6 @@ noncomputable abbrev restrictedClosedPieceDiagram {y : RationalPoint c.C}
   w₁ := (Category.id_comp _).symm
   w₂ := hy.symm.trans (Category.id_comp _).symm
 
-/-- The trace class of a correspondence whose pulled back coefficient `Lc₂^* K` vanishes is
-zero: the mate of `u` is a map out of the zero object. -/
-lemma traceClass_eq_zero_of_isZero (F : c.FixedLocus)
-    (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K)) :
-    c.traceClass F = 0 := by
-  have hm : c.mate = 0 := by
-    rw [mate, ← MonoidalClosed.curry'_uncurry' (0 : 𝟙_ _ ⟶ _)]
-    exact congrArg _ (hK.eq_of_src _ _)
-  rw [traceClass, hm, zero_comp, Adjunction.homEquiv_counit, Functor.map_zero, zero_comp,
-    comp_zero]
-
 variable {c}
 
 /-- Being contracting at a point only depends on the support of the correspondence. -/
@@ -208,14 +184,6 @@ lemma IsContractingAt.withCoeff {y : RationalPoint c.C} (hc : c.IsContractingAt 
       (boundedConstructibleUpperShriek ℓ c.c₁).obj K') :
     (c.withCoeff K' u').IsContractingAt y :=
   ⟨hc.1, hc.2, hc.3⟩
-
-lemma FixedLocus.liftPoint_withCoeff (F : c.FixedLocus)
-    (K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (u' : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂).obj K' ⟶
-      (boundedConstructibleUpperShriek ℓ c.c₁).obj K')
-    (y : RationalPoint c.C) (hy : y ≫ c.c₁ = y ≫ c.c₂) :
-    (F.withCoeff K' u').liftPoint y hy = F.liftPoint y hy :=
-  rfl
 
 lemma comp_eq_of_isContractingAt_ofGraph {h : X ⟶ X}
     {v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K}

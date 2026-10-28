@@ -117,9 +117,9 @@ omit [MonoidalPreadditive C] [IsCommMonObj R] [IsCommMonObj S] in
 noncomputable def comapPreimage [Epi φ] {A B : Mod C S}
     (g : (comap φ).obj A ⟶ (comap φ).obj B) : A ⟶ B :=
   homMk g.hom (by
-    have : PreservesColimitsOfSize.{v, v} (tensorRight A.X) :=
+    have : PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight A.X) :=
       preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight A.X)
-    have : Epi (φ ▷ A.X) := (tensorRight A.X).map_epi φ
+    have : Epi (φ ▷ A.X) := (MonoidalCategory.tensorRight A.X).map_epi φ
     rw [← cancel_epi (φ ▷ A.X)]
     have h := act_hom g
     rw [act_comap_obj, act_comap_obj] at h
@@ -234,12 +234,12 @@ lemma rightAcyclic_lowerStar_kernel (ϖ : PadicAlgCl.integers ℓ E)
     (J : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) [Injective J] :
     ((f)_*⟦_⟧).rightAcyclic
-      (Limits.kernel (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) J)) := by
+      (Limits.kernel (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J)) := by
   have := mono_padicIntegersRegularEnd_hom X ℓ E ϖ hϖ
-  have := Mod.epi_regularEndSMul_of_injective (r := padicIntegersRegularEnd X ℓ E ϖ) J
+  have := Mod.epi_regularEndSMul_of_injective (r := padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J
   refine Functor.rightAcyclic_kernel_of_injective _ ?_
-  have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) J) =
-      Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ) ((f)_*⟦_⟧.obj J) :=
+  have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J) =
+      Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ) ((f)_*⟦_⟧.obj J) :=
     Mod.hom_ext _ _ (lowerStar_map_regularEndSMul ℓ E ϖ f J)
   rw [h]
   have := mono_padicIntegersRegularEnd_hom Y ℓ E ϖ hϖ
@@ -298,7 +298,7 @@ theorem isIso_pushHom_residueField_app_of_rightAcyclic (ϖ : PadicAlgCl.integers
     (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
-    [Mono (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M)]
+    [Mono (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M)]
     (hM : ((f)_*⟦_⟧).rightAcyclic M) :
     IsIso ((pushHom (Profinite.padicIntegersRingObjToResidueField ℓ E) f).app M) :=
   isIso_pushHom_residueField_app_of_mono ℓ E ϖ f hϖ M

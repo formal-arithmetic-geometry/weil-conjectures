@@ -103,7 +103,7 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 /-- `ϖ` acts by an isomorphism on the restriction of scalars of `E_X`, if `ϖ ≠ 0` in `E`. -/
 lemma isIso_regularEndSMul_comap_padicSubfield_hom (hϖ : (ϖ : E) ≠ 0) :
     letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-    IsIso (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)
+    IsIso (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)
       ((Mod.comap (padicIntegersToSubfieldRingObj X ℓ E)).obj
         (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) X)))).hom := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
@@ -124,7 +124,7 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 /-- `ϖ` acts by an epimorphism on the restriction of scalars of `E_X`, if `ϖ ≠ 0` in `E`. -/
 lemma epi_regularEndSMul_comap_padicSubfield (hϖ : (ϖ : E) ≠ 0) :
     letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-    Epi (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)
+    Epi (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)
       ((Mod.comap (padicIntegersToSubfieldRingObj X ℓ E)).obj
         (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) X)))) := by
   have := isIso_regularEndSMul_comap_padicSubfield_hom X ℓ E ϖ hϖ
@@ -171,7 +171,7 @@ theorem exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic_padicIntegers
     ∃ (J : CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ℤ),
       Nonempty (K ≅ DerivedCategory.Q.obj J) ∧ J.IsStrictlyGE (n - 1) ∧
-      (∀ k, Mono (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) (J.X k))) ∧
+      (∀ k, Mono (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) (J.X k))) ∧
       ∀ k, ((f)_*⟦_⟧).rightAcyclic (J.X k) := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   let ιY := Mod.regularToComapRegular (padicIntegersToSubfieldRingObj Y ℓ E)
@@ -186,18 +186,18 @@ theorem exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic_padicIntegers
     have := Mod.preservesMonomorphisms_tensorLeft_comap_regular
       (padicIntegersToSubfieldRingObj X ℓ E)
     exact Functor.PreservesMonomorphisms.of_iso ((tensoringLeft _).mapIso e.symm)
-  have : Epi (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)
+  have : Epi (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)
       ((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj
         ((Mod.comap (padicIntegersToSubfieldRingObj Y ℓ E)).obj
           (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E) Y))))) := by
     have := epi_regularEndSMul_comap_padicSubfield X ℓ E ϖ
       (coe_ne_zero_of_maximalIdeal_eq_span ℓ E hϖ)
-    have h := Mod.regularEndSMul_naturality (padicIntegersRegularEnd X ℓ E ϖ) e.hom
-    rw [show Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) _ = _ ≫ _ ≫ e.inv from
+    have h := Mod.regularEndSMul_naturality (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) e.hom
+    rw [show Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) _ = _ ≫ _ ≫ e.inv from
       (by rw [← reassoc_of% h, e.hom_inv_id, Category.comp_id])]
     infer_instance
   obtain ⟨J, hK, hJ, hr, hG⟩ := exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic _ ιX
-    (padicIntegersRegularEnd X ℓ E ϖ) K n
+    (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) K n
   exact ⟨J, hK, hJ, hr, fun k ↦ hG f ιY (Iso.refl _) (by rw [Iso.refl_hom, Category.comp_id]) k⟩
 
 /-- **The derived (Push) comparison for `𝒪_E ⟶ 𝔽_E`**: for every morphism of schemes
@@ -219,11 +219,11 @@ theorem isIso_derivedUpperStarExtendScalarsPushHom_residueField_app
   have hφ := shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ
   have := mono_padicIntegersRegularEnd_hom X ℓ E ϖ hϖ
   have := mono_padicIntegersRegularEnd_hom Y ℓ E ϖ hϖ
-  have hY : ∀ k, Mono (Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ)
+  have hY : ∀ k, Mono (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ)
       ((f)_*⟦_⟧.obj (J.X k))) := fun k ↦ by
     have := hr k
-    have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) (J.X k)) =
-        Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ) ((f)_*⟦_⟧.obj (J.X k)) :=
+    have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) (J.X k)) =
+        Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ) ((f)_*⟦_⟧.obj (J.X k)) :=
       Mod.hom_ext _ _ (lowerStar_map_regularEndSMul ℓ E ϖ f (J.X k))
     rw [← h]
     infer_instance

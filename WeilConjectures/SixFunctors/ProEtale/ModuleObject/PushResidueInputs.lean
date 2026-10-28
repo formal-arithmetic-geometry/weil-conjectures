@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfiel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoUnderived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueShortExact
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
 
 /-!
 # The uniformizer as an endomorphism of the regular `𝒪_{E,X}`-module
@@ -17,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueShort
 Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E` and
 residue field `𝔽_E`, and `ϖ ∈ 𝒪_E`. The constant global section `ϖ` of `𝒪_{E,X}`
 (`AlgebraicGeometry.ProEtale.padicIntegersConstSection`) defines an endomorphism
-`AlgebraicGeometry.ProEtale.padicIntegersRegularEnd` of the regular `𝒪_{E,X}`-module, whose
+`AlgebraicGeometry.ProEtale.padicIntegersRegularEndOfAlgebra` of the regular `𝒪_{E,X}`-module, whose
 underlying map is the multiplication `padicIntegersMulLeft X ℓ E ϖ`
 (`AlgebraicGeometry.ProEtale.padicIntegersRegularEnd_hom`). Hence, for a uniformizer `ϖ`, the
 reduction lemmas of `PushResidueIsoReduction` apply to the residue map `𝒪_{E,X} ⟶ 𝔽_{E,X}`
@@ -73,31 +74,23 @@ noncomputable def padicIntegersConstSection :
   ε (upperStarFromPoint X) ≫ (upperStarFromPoint X).map
     (Profinite.continuousMapConstRingHom.{u} (PadicAlgCl.integers ℓ E) ϖ).hom
 
-/-- The multiplication by a constant `ϖ ∈ 𝒪_E`, as an endomorphism of the regular
-`𝒪_{E,X}`-module. -/
-noncomputable def padicIntegersRegularEnd :
-    𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ⟶
-      𝟙_ (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :=
-  Mod.regularLift (Mod.regular _) (padicIntegersConstSection X ℓ E ϖ)
-
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
-/-- The action of `padicIntegersRegularEnd X ℓ E ϖ` on an `𝒪_{E,X}`-module is the action of the
-constant global section `ϖ`. -/
+/-- The action of `padicIntegersRegularEndOfAlgebra X ℓ E ϖ` on an `𝒪_{E,X}`-module is the action
+of the constant global section `ϖ`. -/
 lemma regularEndSMul_padicIntegersRegularEnd_hom
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :
-    (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M).hom =
+    (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M).hom =
       Mod.globalSmul (padicIntegersConstSection X ℓ E ϖ) M :=
   Mod.regularEndSMul_regularLift_hom _ M
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
-/-- **The underlying map of `padicIntegersRegularEnd X ℓ E ϖ` is the multiplication by `ϖ`.** -/
+/-- **The underlying map of `padicIntegersRegularEndOfAlgebra X ℓ E ϖ` is the multiplication by
+`ϖ`.** -/
 lemma padicIntegersRegularEnd_hom :
-    (padicIntegersRegularEnd X ℓ E ϖ).hom = padicIntegersMulLeft X ℓ E ϖ := by
+    (padicIntegersRegularEndOfAlgebra X ℓ E ϖ).hom = padicIntegersMulLeft X ℓ E ϖ := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  rw [← Mod.regularEndSMul_unit (padicIntegersRegularEnd X ℓ E ϖ)]
+  rw [← Mod.regularEndSMul_unit (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)]
   refine (regularEndSMul_padicIntegersRegularEnd_hom X ℓ E ϖ _).trans ?_
   rw [padicIntegersConstSection]
   erw [Mod.globalSmul_regular_obj (upperStarFromPoint X)]
@@ -108,7 +101,7 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 /-- An element `ϖ ∈ 𝔪_E` vanishes in `𝔽_{E,X}`. -/
 lemma padicIntegersRegularEnd_hom_comp_residueField
     (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E)) :
-    (padicIntegersRegularEnd X ℓ E ϖ).hom ≫ padicIntegersToResidueField X ℓ E = 0 := by
+    (padicIntegersRegularEndOfAlgebra X ℓ E ϖ).hom ≫ padicIntegersToResidueField X ℓ E = 0 := by
   rw [padicIntegersRegularEnd_hom]
   exact padicIntegersMulLeft_comp_residueField X ℓ E ϖ hϖ
 
@@ -132,7 +125,7 @@ omit [FiniteDimensional ℚ_[ℓ] E] in
 monomorphism. -/
 lemma mono_padicIntegersRegularEnd_hom
     (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
-    Mono (padicIntegersRegularEnd X ℓ E ϖ).hom :=
+    Mono (padicIntegersRegularEndOfAlgebra X ℓ E ϖ).hom :=
   (shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ).mono_f
 
 namespace CondensedRing
@@ -145,8 +138,8 @@ omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteD
 lemma lowerStar_map_regularEndSMul
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :
-    (f)_*[Ab.{u + 1}].map (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M).hom =
-      (Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ) ((f)_*⟦_⟧.obj M)).hom := by
+    (f)_*[Ab.{u + 1}].map (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M).hom =
+      (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ) ((f)_*⟦_⟧.obj M)).hom := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   rw [regularEndSMul_padicIntegersRegularEnd_hom, regularEndSMul_padicIntegersRegularEnd_hom,
     padicIntegersConstSection, padicIntegersConstSection]
@@ -161,7 +154,7 @@ theorem isIso_pushHom_residueField_app_of_mono
     (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ})
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
-    [Mono (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M)]
+    [Mono (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M)]
     (hM : ((f)_*[Ab.{u + 1}]).rightAcyclic M.X) :
     IsIso ((pushHom (Profinite.padicIntegersRingObjToResidueField ℓ E) f).app M) := by
   have hmem := hϖ ▸ Ideal.mem_span_singleton_self ϖ
@@ -170,7 +163,8 @@ theorem isIso_pushHom_residueField_app_of_mono
     (shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ) M
   have := hX.mono_f
   have := hX.epi_g
-  have : Mono ((Mod.forget _).map (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M)) :=
+  have : Mono ((Mod.forget _).map
+      (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M)) :=
     (Mod.forget _).map_mono _
   have : Epi ((Mod.forget _).map (Mod.extendUnit (padicIntegersToResidueField X ℓ E) M)) :=
     (Mod.forget _).map_epi _
@@ -184,7 +178,7 @@ theorem isIso_pushHom_residueField_app_of_mono
       ((f)_*⟦_⟧.obj M))).map (Mod.forget _)).g :=
     (Mod.forget _).map_epi _
   have e := lowerStar_map_regularEndSMul ℓ E ϖ f M
-  have w₂ : (Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ) ((f)_*⟦_⟧.obj M)).hom ≫
+  have w₂ : (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ) ((f)_*⟦_⟧.obj M)).hom ≫
       (f)_*[Ab.{u + 1}].map (Mod.extendUnitHom
         (coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E) X) M) = 0 := by
     rw [← e, ← Functor.map_comp, ← Mod.extendUnit_hom, ← Mod.comp_hom',

@@ -169,7 +169,10 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinement (w : i 
     (boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ w).hom ≫
     boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Λ ℓ
 
-/-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
 ```
 X --i--> Z
 |𝟙       |h
@@ -404,7 +407,10 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
   [IsProper h.left]
 
-/-- For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides
 restrict to the identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are,
 by proper base change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`,
@@ -434,7 +440,10 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
-/-- For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl
     (sq : IsPullback (𝟙 X) i i₁ h) :

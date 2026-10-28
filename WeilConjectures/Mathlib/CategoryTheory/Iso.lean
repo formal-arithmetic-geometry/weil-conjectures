@@ -13,6 +13,9 @@ public import Mathlib.CategoryTheory.Iso
 Two commutative squares `e₁ ≫ s = s₁ ≫ e₁'` and `e₂ ≫ s = s₂ ≫ e₂'` with isomorphisms as
 horizontal sides and a common right side `s` glue to a commutative square
 `(e₁ ≫ e₂⁻¹) ≫ s₂ = s₁ ≫ (e₁' ≫ e₂'⁻¹)`.
+
+In an equation `a ≫ b = c ≫ d ≫ e` with `a`, `b`, `c`, `e` invertible, `d` is invertible
+(`CategoryTheory.isIso_of_comp_eq_comp_comp`).
 -/
 
 @[expose] public section
@@ -36,3 +39,15 @@ lemma comp_inv_comp_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
   rw [this, reassoc_of% h₁]
 
 end CategoryTheory.Iso
+
+namespace CategoryTheory
+
+/-- In an equation `a ≫ b = c ≫ d ≫ e` with `a`, `b`, `c`, `e` invertible, `d` is invertible. -/
+lemma isIso_of_comp_eq_comp_comp {C : Type*} [Category* C] {P Q R S T : C} {a : P ⟶ Q}
+    {b : Q ⟶ R} {c : P ⟶ S} {d : S ⟶ T} {e : T ⟶ R} (h : a ≫ b = c ≫ d ≫ e) [IsIso a]
+    [IsIso b] [IsIso c] [IsIso e] : IsIso d := by
+  have : d = inv c ≫ a ≫ b ≫ inv e := by simp [reassoc_of% h]
+  rw [this]
+  infer_instance
+
+end CategoryTheory
