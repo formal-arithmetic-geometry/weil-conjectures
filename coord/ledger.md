@@ -20926,3 +20926,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/X8/Sheaf.Paper.LisseTowerLocalizedConstantsNormalization (stage 3; reviewer PASS; first push; landing 20261028T035017-L-3580456 (proof); batch 20261028T034643; modules 1; new nodes 0)
 - 03:50 L: merged deliver/Y2/Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting (stage 3; reviewer PASS; first push; landing 20261028T035018-L-3580686 (proof); batch 20261028T034643; modules 1; new nodes 1)
 - 03:50 L: merged deliver/Y3/Sheaf.SixFunctors.CoefQbarVerdierShift (stage 3; reviewer PASS; first push; landing 20261028T035019-L-3580883 (interface); batch 20261028T034643; modules 2; new nodes 1; change records: coord/changes/Y3-coef-qbar-verdier-shift-split.md)
+- 03:50 L: merged deliver/Y5/Sheaf.Paper.IntegralHomRepresentativeSquare (stage 3; reviewer PASS; first push; landing 20261028T035020-L-3581000 (interface); batch 20261028T034643; modules 2; new nodes 1)
