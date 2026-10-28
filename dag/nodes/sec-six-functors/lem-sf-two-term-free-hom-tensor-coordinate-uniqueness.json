@@ -16,24 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Decompose the total tensor degree into the two surviving coefficient summands, transport each unit summand through the tensor-Hom adjunction, and use the product universal property to assemble the signed coordinate map. The coordinate signs square to one.",
+   "text": "Use the total tensor coproduct universal property: maps from its degree j are equal if they agree after every summand inclusion with a+b=j. This does not require restricting the support of Q.",
    "uses": [
-    "def-sf-integral-hom-reduction-models",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the Hom-complex product projections to reduce equality to the internal Hom factor Hom(P^p,(I tensor Q)^(p+j)), for each integer p.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose with the inverse tensor/sheafification comparison and apply the sheafification Hom adjunction. For maps of presheaves into an internal Hom, evaluation at all identity slices determines the map: naturality along W→U identifies any slice component at W with identity-slice evaluation of the restricted source section. Induction on presheaf tensors therefore reduces the equality to evaluation on pure tensors.",
+   "uses": [
+    "lem-sf-tensor-hom-evaluation-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On each pure tensor v tensor z and each section x of P^p, the two hypotheses give the same signed evaluation formula. Compose these equalities to identify the evaluations. The preceding extensionality steps yield f.f j = g.f j. The support and rank-one assumptions are not needed for uniqueness, and no boundedness of P or I is used.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-integral-hom-reduction-models",
   "def-pc-tensor-complex-sheaves",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "def-sf-integral-hom-reduction-models",
+  "lem-sc-hom-complex-projections",
+  "lem-sf-tensor-hom-evaluation-ext"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraph 1"
+  "place": "paragraph 1; uniqueness from tensor sheafification and Hom product universal properties, formalized by G7"
  },
  "mathlib_searches": [
   {
@@ -98,9 +120,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P5",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261028T020624-L-2530447",
+  "landing": "20261028T055653-L-794316",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
