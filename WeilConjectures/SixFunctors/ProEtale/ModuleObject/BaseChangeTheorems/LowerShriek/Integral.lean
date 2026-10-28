@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekUnit
 
 /-!
 
@@ -67,16 +69,33 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   [IsProper h.left]
 
 /-- For bounded constructible `𝒪_E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism. Mathematically it follows from proper
-base change for `𝒪_E`-sheaves
-(`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`) by the argument of the
-interchange lemma, which is formalised for `ℚ̲̄_ℓ` only
-(`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl`). -/
+cartesian square `sq` with `h` proper is an isomorphism: the unit of `Lh^* ⊣ Rh_*` is invertible on
+extensions by zero (`isIso_unit_app_openImmersionLowerShriek`), by proper base change for
+`𝒪_E`-sheaves (`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`). -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicIntegers
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (PadicIntegersRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
       ℓ E sq) :=
-  sorry
+  by
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
+    (Profinite.padicIntegersRingObj ℓ E) ℓ sq
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have := isIso_unit_app_openImmersionLowerShriek _ ℓ
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E h)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E (𝟙 X))
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
+      (overPullbackSnd h (overClosedComplement i₁))) sq
+    (by
+      rw [← PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E sq.flip)
+    (by
+      rw [← PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E
+        (isPullback_overPullbackFst_overPullbackSnd h (overClosedComplement i₁))) K
+  simp only [PadicIntegersRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
 end Pushforward
 
