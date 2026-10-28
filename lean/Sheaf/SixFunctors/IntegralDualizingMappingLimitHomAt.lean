@@ -6,6 +6,8 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingRoosModel
+import Sheaf.SixFunctors.IntegralDualizingMappingLimitGlobal
+import Sheaf.SixFunctors.IntegralDualizingMappingLimitHomAtDegreeZero
 
 /-! The fixed-object degree-zero mapping comparison for the prescribed dualizing limit.
 
@@ -54,6 +56,7 @@ theorem integralDualizing_mapping_limit_hom_at
           (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj
             (SheafOfModules.unit
               (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k)))))) := by
-  sorry
+  obtain ⟨η⟩ := integralDualizing_mapping_limit_global D l hl E X T e he M hM
+  exact integralDualizing_mapping_limit_hom_at_degree_zero D l hl E X M K η
 
 end WeilConjectures
