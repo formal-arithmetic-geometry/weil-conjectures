@@ -1,0 +1,98 @@
+{
+ "id": "lem-coef-derived-sections-core-equations",
+ "kind": "statement",
+ "title": "Resolution and projection equations for sections data",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For transported scalar, evaluation and total-limit data D arising from a coefficient reduction R and finite tensor normalization hF, the prescribed resolution equation holds for the total-limit comparison and its actual finite projections agree with the scalar sections maps.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 079P, 0941, 0D6E and 03CZ; extracted equation stage of the normalized coefficient-sections construction."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized simultaneous sections/limit comparison to the transported derived pairs. Its universal-unit identity is the resolution equation. Identify each finite projection with the prescribed coefficient projection by uniqueness of the right-derived comparison and the transported ordinary section map.",
+   "uses": [
+    "lem-coef-sequence-sections-limit-comparison",
+    "lem-coef-sequence-global-sections-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-coef-sequence-global-sections-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Extracted equation stage of the normalized coefficient-sections construction."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSectionsCore",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-sections-normalization-core",
+   "place": "Strictly smaller equation interface extracted from the core package.",
+   "via": [
+    "lem-coef-derived-sections-normalization-core"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceGlobalSectionsEvaluation coefficientSequenceSectionsLimitComparison",
+   "results": "Found the two generic comparison theorems used by the extracted interfaces.",
+   "date": "2026-10-28",
+   "verdict": "existing declarations used"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSectionsCoreEquations",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSectionsCoreEquations.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSectionsCoreEquations",
+  "declarations": [
+   "WeilConjectures.CoefficientDerivedSectionsCoreResolutionEquation",
+   "WeilConjectures.coefficientDerivedSectionsCoreEquations"
+  ],
+  "statement": "theorem coefficientDerivedSectionsCoreEquations\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hF : CoefficientFiniteTensorNormalization l E W R)\n    (D : CoefficientDerivedSectionsCoreData l E W R) :\n    CoefficientDerivedSectionsCoreResolutionEquation l E W R D ∧\n      (∀ (M : coefficientSequenceDerived l E W) (n : ℕ),\n        D.globalLimit.hom.app M ≫\n            (coefficientMappingProjection.{max u (t + 1)} n).app\n              ((coefficientSequenceDerivedRestriction l E W ⋙\n                (coefficientTowerSections l E W).rightDerivedFunctor).obj M) ≫\n            (D.systemSectionsEvaluation n).hom.app M =\n          (coefficientIntegralSections l E W).map\n              ((coefficientSequenceProjection l E W n).app M) ≫\n            (D.scalar.scalarSections n).hom.app\n              ((coefficientSequenceDerivedEvaluation l E W n).obj M))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T020244-L-2485556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261028T020244-L-2485556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

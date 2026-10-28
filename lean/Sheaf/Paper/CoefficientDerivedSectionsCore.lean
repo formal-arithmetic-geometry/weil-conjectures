@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSectionsCoreData
+import Sheaf.Paper.CoefficientDerivedSectionsCoreEquations
 
 /-! A strict subpackage of the normalized coefficient-sections data.
 (blueprint: lem-coef-derived-sections-normalization-core)
@@ -77,6 +79,17 @@ theorem coefficientDerivedSectionsCore
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :
     Nonempty (CoefficientDerivedSectionsCore l E W R) := by
-  sorry
+  obtain ⟨D⟩ := coefficientDerivedSectionsCoreData l E W R hF
+  obtain ⟨hmodel, hprojection⟩ := coefficientDerivedSectionsCoreEquations
+    l E W R hF D
+  refine ⟨{
+    toCoefficientDerivedSystemScalarCoherence := D.scalar
+    systemSectionsEvaluation := D.systemSectionsEvaluation
+    globalLimit := D.globalLimit
+    globalLimit_model := ?_
+    sections_projection := ?_ }⟩
+  · simpa only [CoefficientDerivedSectionsCoreResolutionEquation,
+      CoefficientSectionsLimitResolutionEquationCore] using hmodel
+  · exact hprojection
 
 end WeilConjectures
