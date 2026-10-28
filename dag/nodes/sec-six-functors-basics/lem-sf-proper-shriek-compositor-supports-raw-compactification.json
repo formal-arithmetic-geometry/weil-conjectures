@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-proper-shriek-compositor-supports-raw-compactification",
+ "kind": "statement",
+ "title": "Compactification proper compositor and forget-supports calculation",
+ "statement": "Let A be a finite commutative ring, p:W→X and f:X→S proper maps, d=(i_d,g_d) any compactification of f, and e any compactification of p;i_d. The pullback construction e.restrict compactifies p, while d.comp e compactifies p;f. For every E in the ordinary unbounded D(W_et,A), the compatible-model compositor from R p_!(e.restrict) followed by R f_!(d) to R(p;f)_!(d.comp e), followed by the forget-supports map for d.comp e, equals the following route: apply R f_!(d) to the forget-supports map for e.restrict, apply the forget-supports map for d to R p_* E, and apply the canonical ordinary direct-image compositor R p_* R f_* → R(p;f)_*. All compactification forget-supports maps are the open comparison D(i_!)→Ri_* followed by the ordinary direct-image compositor. There are no comparisons between different compactifications in this equation.",
+ "stmt_deps": [
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, common pullback counits, restricted to the compatible compactification tower before the independence comparisons."
+ },
+ "proof": [
+  {
+   "text": "Write J_a=D(a_!) for an open immersion a, t_a:J_a→Ra_* for the adjunct of the inverse open unit, and κ for ordinary direct-image composition. Expand rightDerivedLowerShriekOfCompactificationCompIso: first exchange J_(d.i) with R(e.restrict.g)_*, then compose the two open extensions, and compose the two proper pushforwards. The underlying pullback square is e.isPullback_restrict, and its open factor identity is e.restrict_i_fst.",
+   "uses": [
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open/proper exchange followed by the forget-supports map on its target equals the forget-supports map on its source followed by the ordinary direct-image comparison of the square. To check this equation, transpose under the pullback/direct-image adjunction for e.g. The unit and counit in the definition of exchange cancel by the triangle identity. The remaining equation is derivedOpenImmersionLowerShriekBaseChangeIso_hom_comp_toLowerStar, which follows from the unit-mate equation of the cited node. Transpose back, obtaining the required exchange square.",
+   "uses": [
+    "lem-asd-open-base-change-unit-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two composable open immersions a,b, the inverse open-extension compositor followed by t_(a;b) equals J_b(t_a), then t_b on Ra_*E, then κ_(a,b). Transpose under the composite pullback/direct-image adjunction. By uniqueness of left adjoints, the open-extension compositor transports the composite open-adjunction unit to the unit for a;b. Thus both transposes are its inverse. This is the composite counit and triangle calculation; it also respects the equality e.restrict.i;pullback.fst e.g d.i=e.i.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the two preceding squares into the expanded compatible-model compositor. Move forget-supports maps through the ordinary direct-image compositors by naturality. Associativity of κ combines the proper factors e.g and d.g with the open factors, leaving precisely the compositor for p followed by f. The commutativity equations of d, e.restrict and d.comp e identify all composite morphisms with p, f and p;f. This gives the displayed equation without any chosen-compactification comparison.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-asd-open-base-change-unit-mate",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, common pullback counits on the compatible compactification tower.",
+  "why": "Strict substep after the original theorem has disposed of the two independence-of-compactification comparisons using the already proved refinement theorem. The statement concerns the compatible-model compositor itself, not the chosen compositor rewritten in forget-supports notation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comp.*forgetSupports|forgetSupports.*comp",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "No theorem identifies the specified compatible compactification compositor with the forget-supports route."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id",
+   "results": "2 hits: CategoryTheory.Iso.hom_inv_id, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso",
+   "date": "2026-10-28",
+   "verdict": "No theorem identifies the specified compatible compactification compositor with the forget-supports route."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward with compact support compositor commutes with forget supports to ordinary direct image",
+   "results": "8 hits: TopCat.Sheaf.pushforward_forget, TopCat.Sheaf.pushforwardForgetIso, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.Functor.sheafPushforwardContinuousComp, PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, TopCat.Presheaf.Pushforward.comp",
+   "date": "2026-10-28",
+   "verdict": "No theorem identifies the specified compatible compactification compositor with the forget-supports route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-shriek-compositor-supports-raw",
+   "place": "Compatible-model exchange and open-composition calculation, after both chosen-compactification comparisons are removed.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperShriekCompCompForgetSupports",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperShriekCompCompForgetSupports.lean",
+  "declaration": "AlgebraicGeometry.Etale.properShriekComp_compactificationForgetSupports",
+  "statement": "theorem properShriekComp_compactificationForgetSupports {W X S : Scheme.{u}}\n    (p : W ⟶ X) (f : X ⟶ S) [IsProper p] [IsProper f]\n    (d : Compactification f) (e : Compactification (p ≫ d.i))\n    (E : DerivedCategoryModule A W) :\n    (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app E ≫\n        (compactificationForgetSupports (ModuleCat.{u + 1} A) (d.comp e)).app E =\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map\n          ((compactificationForgetSupports (ModuleCat.{u + 1} A) e.restrict).app E) ≫\n        (compactificationForgetSupports (ModuleCat.{u + 1} A) d).app\n          ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫\n        (rightDerivedLowerStarCompIsoOfComp\n          (ModuleCat.{u + 1} A) p f (p ≫ f) rfl).hom.app E",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261028T034936-L-3572644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261028T034936-L-3572644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProperSupportedKunnethRoute
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+import Sheaf.AlgebraicGeometry.ProperShriekCompCompForgetSupports
+import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar
 
 /-! Raw proper compositor compatibility after canonicalizing the composite.
 Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
@@ -20,6 +23,35 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
+omit [Finite A] in
+private theorem proper_forget_eq {Y Z : Scheme.{u}} (q : Y ⟶ Z) [IsProper q] :
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q).hom =
+      compactificationForgetSupports (ModuleCat.{u + 1} A)
+        (HasCompactification.compactification q) := by
+  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
+    rightDerivedLowerShriekToLowerStarComp_comp_eq]
+  rfl
+
+private theorem comparison_forget {Y Z : Scheme.{u}} (q : Y ⟶ Z) [IsProper q]
+    (c : Compactification q) (E : DerivedCategoryModule A Y) :
+    (rightDerivedLowerShriekIso A c).hom.app E ≫
+        (compactificationForgetSupports (ModuleCat.{u + 1} A)
+          (HasCompactification.compactification q)).app E =
+      (compactificationForgetSupports (ModuleCat.{u + 1} A) c).app E := by
+  exact rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar A
+    c (HasCompactification.compactification q) E
+
+private theorem comparison_inv_forget {Y Z : Scheme.{u}} (q : Y ⟶ Z) [IsProper q]
+    (c : Compactification q) (E : DerivedCategoryModule A Y) :
+    (rightDerivedLowerShriekIso A c).inv.app E ≫
+        (compactificationForgetSupports (ModuleCat.{u + 1} A) c).app E =
+      (compactificationForgetSupports (ModuleCat.{u + 1} A)
+        (HasCompactification.compactification q)).app E := by
+  rw [← comparison_forget A q c E, Iso.inv_hom_id_app_assoc]
 
 /--
 The compact-support composition isomorphism for `p` and `f`, followed by the
@@ -45,6 +77,16 @@ theorem properShriekComp_comp_forgetSupports_raw {W X S : Scheme.{u}}
             ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫
         (rightDerivedLowerStarCompIsoOfComp
           (ModuleCat.{u + 1} A) p f (p ≫ f) rfl).hom.app E := by
-  sorry
+  rw [proper_forget_eq A p, proper_forget_eq A f, proper_forget_eq A (p ≫ f)]
+  let d := HasCompactification.compactification f
+  let e := (HasCompactification.compactification (p ≫ f)).ofComp d
+  have hcomp := properShriekComp_compactificationForgetSupports A p f d e E
+  have hα := comparison_forget A (p ≫ f) (d.comp e) E
+  have hβ := comparison_inv_forget A p e.restrict E
+  simp only [rightDerivedLowerShriekCompIso, Iso.trans_inv, Iso.symm_inv,
+    Functor.isoWhiskerRight_inv, NatTrans.comp_app, Functor.whiskerRight_app,
+    Category.assoc]
+  rw [hα, hcomp, ← Functor.map_comp_assoc, hβ]
+  rfl
 
 end AlgebraicGeometry.Etale
