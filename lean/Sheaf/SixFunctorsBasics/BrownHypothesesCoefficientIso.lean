@@ -6,6 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.SixFunctorsBasics.BrownHypotheses
+import Sheaf.SixFunctorsBasics.BrownHypothesesCriteria
 import Sheaf.Paper.CondensedCoefficientIsoConstructible
 import Sheaf.Paper.ConstantModelTorAmplitude
 import Sheaf.SixFunctorsBasics.BrownHypothesesStructural

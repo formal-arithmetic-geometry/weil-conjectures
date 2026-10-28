@@ -6,6 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.SixFunctorsBasics.BrownHypotheses
+import Sheaf.SixFunctorsBasics.BrownHypothesesCriteria
 public import Sheaf.Paper.FiniteFieldFiber
 import Sheaf.SixFunctorsBasics.BrownHypothesesArbitraryFieldCompactness
 
