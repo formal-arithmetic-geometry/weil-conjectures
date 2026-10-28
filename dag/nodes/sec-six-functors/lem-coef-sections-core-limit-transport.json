@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-sections-core-limit-transport",
+ "kind": "statement",
+ "title": "Derived limit comparison for the prescribed section models",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let $A$ be a Grothendieck abelian category with inverse limits of natural-number towers, additive inverse-limit functor, and K-injective resolutions of towers. Fix derived-category models [def-weil-abstract-derived-category], and let $F:A\\to\\mathrm{Ab}$ be additive and preserve these inverse limits. Write $T$ for termwise application of $F$ to towers. There is a natural isomorphism $RF\\circ R\\!\\lim_A\\cong R\\!\\lim_{\\mathrm{Ab}}\\circ RT$. Use the standard derived categories for abelian groups and their towers, with their additive inverse-limit functor, as in [lem-coef-sequence-sections-limit-comparison].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-coef-sequence-sections-limit-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 079P, 0941 and 0D6E; the normalized coefficient sections construction."
+ },
+ "proof": [
+  {
+   "text": "Inverse limit preserves K-injective complexes: its left adjoint is the exact constant-diagram functor. The completed composite unit for inverse limit followed by F is therefore invertible on K-injectives and makes the composite a right derivation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The proved tower-image acyclicity lemma makes derived abelian inverse limit after derived termwise F a right derivation of the other ordinary composite. Preservation of limits by F identifies the ordinary composites. Apply the universal right-derived natural isomorphism to their composite units.",
+   "uses": [
+    "lem-coef-sequence-sections-limit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-sections-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proved implementation extracted from the coefficient-sections core data proof to satisfy the per-file compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ee]val|[Ee]val.*rightDerived|rightDerivedUnique",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match. Reuse proved project comparison helpers and the Mathlib right-derived uniqueness API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of a composite of sheaf module pushforwards is naturally isomorphic to the composite right derived functors",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardComp_inv_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match. Reuse proved project comparison helpers and the Mathlib right-derived uniqueness API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections commute with inverse limit and exact restriction of coefficient rings",
+   "results": "AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.AffineScheme.Γ; AlgebraicGeometry.LocallyRingedSpace.Γ; AlgebraicGeometry.Scheme.Γ_def; AlgebraicGeometry.preservesLimit_rightOp_Γ; CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape; CategoryTheory.Sheaf.ΓRes_naturality; AlgebraicGeometry.AffineScheme.Γ_preservesLimits",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match. Reuse proved project comparison helpers and the Mathlib right-derived uniqueness API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSectionsCoreData",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Normalized coefficient sections data below the integral exceptional adjoint.",
+   "via": [
+    "lem-coef-derived-sections-normalization",
+    "lem-coef-derived-sections-normalization-core",
+    "lem-coef-derived-sections-core-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSectionsCoreTransport",
+  "file": "lean/Sheaf/Paper/CoefficientSectionsCoreTransport.lean",
+  "declaration": "WeilConjectures.sectionsLimitComparison",
+  "declarations": [
+   "WeilConjectures.sectionsLimitComparison"
+  ],
+  "statement": "theorem sectionsLimitComparison : Nonempty ((lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⋙ F.rightDerivedFunctor ≅ ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{r}).obj F).rightDerivedFunctor ⋙ (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).rightDerivedFunctor)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261028T055742-L-804508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261028T055742-L-804508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
