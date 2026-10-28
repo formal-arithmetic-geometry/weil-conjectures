@@ -10,7 +10,9 @@ Nothing weaker counts (a delivery under review, FIX, RETURN, an AUTO head nobody
 What such a delivery provides before it lands (read from its branch against its merge base with the main branch):
   modules  the Lean modules it adds (lean/**.lean not on the main branch)
   nodes    the DAG nodes whose file on the branch carries a Lean record with a module (a statement it writes)
-A module or node counts as pending only while the main branch does not have it (once it lands, the ordinary rules apply).
+A module or node counts as pending only while the main branch does not have it (once it lands, the ordinary rules apply);
+a node only when its module is one the delivery adds (a statement added to an existing module cannot be waited for as a
+missing import, so it releases nothing early).
 
 Used by
   tools/queue.py      (dag_queue.Dag.pending): a node stated by a passed delivery counts as available when releasing the
@@ -175,7 +177,11 @@ def pending() -> dict:
             if not on_main(m):
                 modules.setdefault(m, {"group": g, "item": item, "head": h, "stage": st, "module": m})
         for n, m in pv["nodes"].items():
-            nodes.setdefault(n, {"group": g, "item": item, "head": h, "stage": st, "module": m})
+            # only a statement in a NEW module of the delivery: its dependents import that module, and their deliveries wait
+            # for it as a missing import (quarantine_wait.py); a statement added to an existing module could not be waited
+            # for that way (the module exists, the declaration does not), so it releases nothing before it lands
+            if m in pv["modules"] and not on_main(m):
+                nodes.setdefault(n, {"group": g, "item": item, "head": h, "stage": st, "module": m})
     if changed or set(cache) - set(live):
         _save_cache(live)   # heads that are no longer passed drop out of the cache
     out = {"nodes": nodes, "modules": modules}
