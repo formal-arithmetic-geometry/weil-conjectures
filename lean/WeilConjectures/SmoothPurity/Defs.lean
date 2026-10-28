@@ -850,6 +850,112 @@ private theorem isIso_smoothPurityMap_of_representing_pairing
   rw [smoothPurityMap_eq_of_trace_formula ℓ f d e.hom (htrace.trans he.symm)]
   infer_instance
 
+/-- Realization carries an integral trace-composition equation to the corresponding
+equation for the actual realized left compositor. Source:
+`lem-route-smooth-purity-iso-comp-open-immersion`, Steps 5--6. Cancel the source
+comparison, use its compositor square, and use naturality of the second comparison
+at the first integral trace. The two inverse comparisons then cancel. This works
+with arbitrary categories and does not assume purity or uniqueness of a trace. -/
+private theorem smoothTrace_realization_transitivity
+    {A B C A' B' C' : Type*}
+    [Category A] [Category B] [Category C]
+    [Category A'] [Category B'] [Category C']
+    (P : A ⥤ B) (Q : B ⥤ C) (R : A ⥤ C)
+    (F : A' ⥤ B') (H : B' ⥤ C') (J : A' ⥤ C')
+    (U : A ⥤ A') (V : B ⥤ B') (W : C ⥤ C')
+    (a : P ⋙ V ≅ U ⋙ F) (b : Q ⋙ W ≅ V ⋙ H) (c : R ⋙ W ≅ U ⋙ J)
+    (α : R ⟶ P ⋙ Q) (β : J ⟶ F ⋙ H)
+    {M : A} {L : B} {N : C} (t : P.obj M ⟶ L)
+    (s : R.obj M ⟶ N) (q : Q.obj L ⟶ N)
+    (hs : α.app M ≫ Q.map t ≫ q = s)
+    (hc : W.map (α.app M) ≫ b.hom.app (P.obj M) ≫ H.map (a.hom.app M) =
+      c.hom.app M ≫ β.app (U.obj M)) :
+    β.app (U.obj M) ≫ H.map (a.inv.app M ≫ V.map t) ≫
+        b.inv.app L ≫ W.map q = c.inv.app M ≫ W.map s := by
+  apply (cancel_epi (c.hom.app M)).1
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  rw [← hc]
+  simp only [Functor.map_comp, Category.assoc]
+  have ha : H.map (a.hom.app M) ≫ H.map (a.inv.app M) = 𝟙 _ :=
+    (H.mapIso (a.app M)).hom_inv_id
+  rw [reassoc_of% ha]
+  rw [← reassoc_of% (b.hom.naturality t)]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← W.map_comp, ← W.map_comp, hs]
+
+/-- The realized composition equation retains the canonical target-unit maps when
+the common realized Tate source is replaced by its specified Tate identification.
+Source: `lem-route-smooth-purity-iso-comp-open-immersion`, Steps 6--7. Naturality
+moves the common source comparison through the left compositor. The integral
+trace equation and the open trace's unit normalization then give the result. -/
+private theorem smoothTrace_unit_normalized_transitivity
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (H : D ⥤ E) (J : C ⥤ E) (β : F ⋙ H ⟶ J)
+    {M T : C} {L U : D} {N V : E}
+    (a : M ≅ T) (b : L ≅ U) (c : N ≅ V)
+    (t : F.obj M ⟶ L) (s : J.obj M ⟶ N) (q : H.obj L ⟶ N)
+    (ε : H.obj U ⟶ V)
+    (hs : β.app M ≫ s = H.map t ≫ q)
+    (hq : q ≫ c.hom = H.map b.hom ≫ ε) :
+    β.app T ≫ J.map a.inv ≫ s ≫ c.hom =
+      H.map (F.map a.inv ≫ t ≫ b.hom) ≫ ε := by
+  rw [← Category.assoc (β.app T) (J.map a.inv), ← β.naturality a.inv]
+  simp only [Functor.comp_map, Category.assoc]
+  rw [reassoc_of% hs, hq]
+  simp only [Functor.map_comp, Category.assoc]
+
+omit [SmoothOfRelativeDimension d f.left] in
+/-- Apply the preceding unit transport to the live chosen-compactification
+compositor and open counit. Source:
+`lem-route-smooth-purity-iso-comp-open-immersion`, Steps 6--7. The two trace
+identifications and the reconstructed trace equation are explicit inputs.
+The output is the native trace-transitivity equation needed by the existing
+purity-map mate calculation. No trace is chosen from an existence theorem. -/
+private theorem smoothTrace_transitivity_of_realized_traces
+    {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+    [IsSeparated Z.hom] (j : Y ⟶ Z) [IsOpenImmersion j.left]
+    {M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    {N : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (a : M ≅ boundedConstructibleTateTwist ℓ X d (2 * d))
+    (b : L ≅ 𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (c : N ≅ 𝟙_ (Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (t : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M ⟶ L)
+    (s : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ j)).obj M
+      ⟶ N)
+    (q : (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj L ⟶ N)
+    (hs : (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f j).inv.app M ≫ s =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map t ≫ q)
+    (hq : q ≫ c.hom =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          (b.hom ≫ (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv) ≫
+        (boundedConstructibleUpperShriekAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _))
+    (ht : smoothTrace ℓ f d =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map a.inv ≫
+        t ≫ b.hom)
+    (hu : smoothTrace ℓ (f ≫ j) d =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ j)).map a.inv
+        ≫ s ≫ c.hom) :
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f j).inv.app
+          (boundedConstructibleTateTwist ℓ X d (2 * d)) ≫ smoothTrace ℓ (f ≫ j) d =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          (smoothTrace ℓ f d ≫ (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv) ≫
+        (boundedConstructibleUpperShriekAdjunction
+          (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _) := by
+  let H := boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j
+  let ε := H.map (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
+    (boundedConstructibleUpperShriekAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ j).counit.app (𝟙_ _)
+  have hq' : q ≫ c.hom = H.map b.hom ≫ ε := by
+    simpa only [H, ε, Functor.map_comp, Category.assoc] using hq
+  have h := smoothTrace_unit_normalized_transitivity
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f) H
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ j))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f j).inv a b c t s q ε hs hq'
+  rw [ht, hu]
+  simpa only [H, ε, Functor.map_comp, Category.assoc] using h
+
 /-- Taking a mate transports the actual adjunction Hom bijection.
 Source: `lem-route-smooth-purity-iso-comp-open-immersion`, Step 7.
 Apply the inverse Hom bijection, then use the mate-counit identity and naturality
