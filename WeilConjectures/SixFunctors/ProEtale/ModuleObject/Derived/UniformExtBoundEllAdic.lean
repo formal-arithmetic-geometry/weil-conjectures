@@ -40,7 +40,7 @@ extensions `E` of `ℚ_ℓ` are reduced to subextensions of `ℚ̄_ℓ` by choos
 
 The bounds use the following statements of other blueprint nodes, stated separately as the
 compatibility lemmas of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatibilities`:
+the files `...Derived.UniformExtBoundCompat*`:
 
 * `AlgebraicGeometry.Etale.smoothGenericDirectImage` (blueprint
   `lem-asd-smooth-generic-direct-image`, for `thm-fin-deligne-generic-open`), through the

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatibilities
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatFinite
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
