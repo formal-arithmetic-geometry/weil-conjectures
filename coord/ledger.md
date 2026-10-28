@@ -21028,3 +21028,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:57 L: merged deliver/Q8/Sheaf.SixFunctors.IntegralDualizingMappingTowerSystemModel (stage 3; reviewer PASS; first push; landing 20261028T055738-L-803618 (interface); batch 20261028T055556; modules 3; new nodes 2)
 - 05:57 L: merged deliver/Q9/Sheaf.SixFunctors.IntegralDualizingSupportSystemHomComparison (stage 3; reviewer PASS; first push; landing 20261028T055739-L-803815 (interface); batch 20261028T055556; modules 3; new nodes 2)
 - 05:57 L: merged deliver/R1/Sheaf.AlgebraicGeometry.DirectedTensorModuleDescent (stage 3; reviewer PASS; first push; landing 20261028T055740-L-804003 (interface); batch 20261028T055556; modules 4; new nodes 3)
+- 05:57 L: merged deliver/R1/Sheaf.Paper.ConstantKoszulQuotientAugmentationIsIso (stage 3; reviewer PASS; first push; landing 20261028T055741-L-804185 (interface); batch 20261028T055556; modules 4; new nodes 3)

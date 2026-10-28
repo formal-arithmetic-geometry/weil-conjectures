@@ -1,0 +1,136 @@
+{
+ "id": "lem-r1-constant-koszul-coefficient-cone-comparison",
+ "kind": "statement",
+ "title": "Finite normalized Koszul coefficient cone identification",
+ "statement": "Let C,J,A,I,b be the small-site coefficient data [def-sfb-constant-completion-coefficient-data]. Suppose an additive exact functor E:ModuleCat A -> Mod O_b is supplied, together with a regular-module isomorphism c and finite-quotient isomorphisms q_n satisfying the scalar and quotient-unit equations in [lem-r1-constant-exact-coefficient-realization]. Let a:Fin r -> A generate I, and let epsilonA_n, tA_nm, qA_nm be exterior Koszul augmentations and diagonal/quotient transitions with the explicit degree-component formulas and strict augmentation squares [lem-weil-pbc-noetherian-koszul-augmentation-pro-zero], without assuming the pro-zero conclusion. Set U=O_b[0]. For every map v from the strict Koszul tensor tower at U to the reduction tower at U which preserves the actual ordinary-limit unit [lem-u4-constant-koszul-quotient-augmentation], the realized finite algebraic augmentation cone at n is isomorphic to the level n cone of v. The isomorphisms commute with every n<=m transition as in the attached Lean statement. No Noetherianity, arbitrary complex P, K-flatness, eventual vanishing or derived inverse limit is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 099M, finite realization and normalization of the exterior Koszul augmentation; Tag 0A0E."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "lem-r1-constant-exact-coefficient-realization",
+  "lem-u4-constant-koszul-quotient-augmentation",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply exteriorKoszul_scalar_realization to the supplied exact functor and regular module normalization. It identifies the realized extended exterior complex with the actual dual Koszul tower, including every diagonal transition and the degree-zero unit.",
+   "uses": [
+    "lem-sfb-exterior-koszul-scalar-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The left tensor unitor identifies U tensor the dual complex with the dual complex. The strict tower complex is reconstructed by CochainComplex.of; use its identity-component natural isomorphism with the original total complex before inserting the unitor. The singleMapHomologicalComplex and scalar-extension regular-module unit isomorphisms identify the reduction of U with the finite quotient in degree zero. Compose with q_n for the target comparison.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the stated ordinary-limit unit equation to level n, then take degree zero. The limit.lift projection formula gives the actual strict tensor-unit equation. Precompose by c followed by the realization of the exterior degree-zero basis map. The exterior unit normalization and naturality of the tensor unitors turn the source into the actual Koszul unit. On the target, the reduction unit sends 1 to 1 tensor 1, and the scalar-extension unit comparison multiplies this to the section 1. The supplied q_n normalization is the same map. Every other target degree is zero, so degree zero determines the augmentation square. Its algebraic augmentation is degreewise epi: in degree zero it is a quotient after an isomorphism, elsewhere its target is zero. Exact E preserves epimorphy.",
+   "uses": [
+    "lem-sfb-exterior-koszul-scalar-realization",
+    "lem-u4-constant-koszul-quotient-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply additiveConeFamilyComparison with these source and target isomorphisms. Source naturality is already supplied by exterior realization; epimorphy of each augmentation forces target naturality. The additive cone comparison then supplies exactly the displayed cone isomorphisms and their strict naturality.",
+   "uses": [
+    "lem-sfb-additive-cone-family-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exterior-koszul-scalar-realization",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-u4-constant-koszul-quotient-augmentation",
+  "lem-sfb-additive-cone-family-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion; finite module and tensor identifications only. Tag 099M, finite realization and normalization of the exterior Koszul augmentation; Tag 0A0E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact additive realization of exterior Koszul complexes preserves augmentation mapping cones and diagonal transitions",
+   "results": "{\"t\": \"2026-10-28T04:11:32Z\", \"tool\": \"leansearch\", \"query\": \"An exact additive realization of exterior Koszul complexes preserves augmentation mapping cones and diagonal transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"HomologicalComplex.ExactAt.of_iso\", \"CochainComplex.mappingCone.mapTriangleIso\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.map_δ\", \"HomologicalComplex.quasiIsoAt_map_of_preservesHomology\"], \"digest\": \"76bf8ae48b87bf3e\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping cone of tensoring a normalized Koszul augmentation by a complex is naturally tensor of its coefficient mapping cone",
+   "results": "{\"t\": \"2026-10-28T04:11:33Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping cone of tensoring a normalized Koszul augmentation by a complex is naturally tensor of its coefficient mapping cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.tensorHom\"], \"digest\": \"7903656bec3cb7dd\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorMappingCone|mapHomologicalComplexIso",
+   "results": "{\"t\": \"2026-10-28T04:11:32Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorMappingCone|mapHomologicalComplexIso\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\"], \"digest\": \"6ac8875bb7df46be\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantKoszulQuotientAugmentationIsIso",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Constant completion equivalence auxiliary: normalized Koszul quotient comparison, Finite normalized Koszul coefficient cone identification",
+   "via": [
+    "lem-u4-constant-koszul-quotient-augmentation-is-iso",
+    "lem-weil-pbc-constant-koszul-quotient-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantKoszulCoefficientConeComparison",
+  "file": "lean/Sheaf/Paper/ConstantKoszulCoefficientConeComparison.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantKoszulCoefficientConeComparison",
+  "statement": "theorem constantKoszulCoefficientConeComparison\n    (b : Bool)\n    (E : ModuleCat.{u} A ⥤ Mod (coefficients J A I b)) [E.Additive]\n    [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (c : SheafOfModules.unit (siteModuleRings (coefficients J A I b)) ≅\n      E.obj (ModuleCat.of A A))\n    (q : ∀ n : ℕ, E.obj (ModuleCat.of A (A ⧸ I ^ (n + 1))) ≅\n      (res (finiteMap J A I b n)).obj\n        (SheafOfModules.unit (siteModuleRings (finite J A I n))))\n    (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =\n      ringedKoszulScalar (coefficients J A I b) (algebraSection (baseMap J A I b) x) ≫\n        c.hom)\n    (hq : ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom (I ^ (n + 1)).mkQ) ≫ (q n).hom =\n      (SheafOfModules.unitHomEquiv\n        ((res (finiteMap J A I b n)).obj\n          (SheafOfModules.unit (siteModuleRings (finite J A I n))))).symm\n        ⟨fun V ↦ (1 : (finite J A I n).obj.obj V),\n          fun f ↦ map_one ((finite J A I n).obj.map f).hom⟩)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)\n    (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶\n      (ChainComplex.single₀ (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))\n    (tA : ∀ n m : ℕ, n ≤ m →\n      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶\n        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))\n    (qA : ∀ n m : ℕ, n ≤ m →\n      ((ChainComplex.single₀ (ModuleCat.{u} A)).obj\n          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶\n        (ChainComplex.single₀ (ModuleCat.{u} A)).obj\n          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))\n    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom\n      (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp\n        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap))\n    (htA : ∀ n m h k, (tA n m h).f k = ModuleCat.ofHom\n      (exteriorPower.map k\n        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n))))))\n    (hqA : ∀ n m h,\n      ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (m + 1)).mkQ ≫ (qA n m h).f 0 =\n        ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)\n    (hc : ∀ n m h,\n      HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat ≫\n        HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =\n      HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫\n        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat) :\n    let O := coefficients J A I b\n    let U := ringedSiteRingComplex O\n    ∀ (v : (ringedKoszulTensorTowerFunctor O r\n        (fun i ↦ algebraSection (baseMap J A I b) (a i))).obj U ⟶\n      ((reductionTower J A I b).mapHomologicalComplex (.up ℤ)).obj U)\n      (_hv : ringedKoszulLimitUnit O r\n        (fun i ↦ algebraSection (baseMap J A I b) (a i)) U ≫\n          (ordinaryLimit O).map v = ordinaryUnit J A I b U),\n    ∃ e : ∀ n : ℕ,\n        (E.mapHomologicalComplex (.up ℤ)).obj\n          (HomologicalComplex.homotopyCofiber\n            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅\n          (CochainComplex.mappingCone v).asFunctor.obj (op n),\n      ∀ (n m : ℕ) (h : n ≤ m),\n        (E.mapHomologicalComplex (.up ℤ)).map\n          (HomologicalComplex.homotopyCofiber.mapArrowHom\n            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)\n            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)\n            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)\n            (Arrow.homMk\n              (HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)\n              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)\n              (hc n m h))) ≫ (e n).hom =\n        (e m).hom ≫ (CochainComplex.mappingCone v).asFunctor.map\n          (homOfLE h).op",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T055741-L-804185",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T055741-L-804185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

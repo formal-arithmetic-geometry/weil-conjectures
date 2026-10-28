@@ -6,6 +6,11 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.Paper.ConstantKoszulQuotientAugmentation
+import Sheaf.Paper.ConstantExactCoefficientRealization
+import Sheaf.Paper.ConstantKoszulCoefficientConeComparison
+import Sheaf.Paper.ConstantKoszulTensorConeComparison
+import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
+import all Sheaf.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Derived-limit invertibility of the normalized strict augmentation
 
@@ -19,12 +24,40 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace CategoryTheory.ConstantCompletion
 
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 variable (A : Type u) [CommRing A] (I : Ideal A)
+
+attribute [local instance] HasDerivedCategory.standard
+  flatConstantCochainMonoidal flatConstantCochainMonoidalStruct
+attribute [local irreducible] HasDerivedCategory.standard strictLimit
+
+private theorem proZero_of_exact_realization
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    {D : Type*} [Category D] [Abelian D] [HasDerivedCategory D]
+    (E : B ⥤ D) [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]
+    (K : ℕ → CochainComplex B ℤ) (t : ∀ n m : ℕ, n ≤ m → (K m ⟶ K n))
+    (T : ℕᵒᵖ ⥤ CochainComplex D ℤ)
+    (e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj (K n) ≅ T.obj (op n))
+    (he : ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map (t n m h) ≫ (e n).hom =
+      (e m).hom ≫ T.map (homOfLE h).op)
+    (hz : ∀ n, ∃ m h, DerivedCategory.Q.map (t n m h) = 0) :
+    ∀ n, ∃ (m : ℕ) (h : n ≤ m), DerivedCategory.Q.map (T.map (homOfLE h).op) = 0 := by
+  intro n
+  obtain ⟨m, h, hm⟩ := hz n
+  refine ⟨m, h, ?_⟩
+  have hE : ∀ {K L : CochainComplex B ℤ} (f : K ⟶ L),
+      QuasiIso f → QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map f) := by
+    intro K L f hf
+    have : QuasiIso f := hf
+    infer_instance
+  have hzE := localizedZero_map (E.mapHomologicalComplex (.up ℤ)) hE (t n m h) hm
+  have hn := congrArg (fun f ↦ DerivedCategory.Q.map f) (he n m h)
+  rw [Functor.map_comp, Functor.map_comp, hzE, zero_comp] at hn
+  exact (cancel_epi (DerivedCategory.Q.map (e m).hom)).1 (hn.symm.trans (by simp))
 
 /-- A normalized strict augmentation becomes invertible after total derived inverse
 limit on a flat-term K-flat complex. This concerns strict complexes, before descent
@@ -56,6 +89,45 @@ theorem koszulQuotientAugmentation_isIso [IsNoetherianRing A] (b : Bool) (r : �
     (P : Cx (coefficients J A I b)) (hP : P.IsAcyclicTensorKFlat)
     (hflat : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
     IsIso ((rlim (coefficients J A I b)).map
-      ((TQ (coefficients J A I b)).map (α.app P))) := by sorry
+      ((TQ (coefficients J A I b)).map (α.app P))) := by
+  let O := coefficients J A I b
+  let U := ringedSiteRingComplex O
+  obtain ⟨εA, tA, qA, hεA, htA, hqA, hc, hz⟩ :=
+    ExteriorAlgebra.noetherian_koszul_augmentation_pro_zero A r a
+  obtain ⟨E, hadd, hlim, hcolim, cE, qE, hs, hq⟩ :=
+    constantExactCoefficientRealization J A I b
+  obtain ⟨e, he⟩ :=
+    constantKoszulCoefficientConeComparison J A I b E cE qE hs hq r a ha
+      εA tA qA hεA htA hqA hc (α.app U) (hα.1 U)
+  have hcoef : ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (Q O).map
+      ((CochainComplex.mappingCone (α.app U)).asFunctor.map (homOfLE h).op) = 0 :=
+    proZero_of_exact_realization E _ _ _ e he hz
+  obtain ⟨c⟩ := constantKoszulTensorConeComparison J A I b r a α hα P
+  have hP' := (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat
+    (R := O) P).2 hP
+  have ht : ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (Q O).map
+      ((CochainComplex.mappingCone (α.app P)).asFunctor.map (homOfLE h).op) = 0 := by
+    apply proZero_of_towerIso c
+    intro n
+    obtain ⟨m, h, hm⟩ := hcoef n
+    refine ⟨m, h, ?_⟩
+    have : (tensorLeft P).PreservesZeroMorphisms := by
+      constructor
+      intro K L
+      change HomologicalComplex.mapBifunctorMap (𝟙 P) (0 : K ⟶ L)
+        (curriedTensor _) (.up ℤ) = 0
+      exact mapBifunctorMap_id_zero (curriedTensor _) P K L
+    exact localizedZero_map (tensorLeft P)
+      (fun f hf ↦ flatConstantTensor_preservesQuasiIso (O := O) J P hP' f hf)
+      ((CochainComplex.mappingCone (α.app U)).asFunctor.map (homOfLE h).op) hm
+  let v := HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (α.app P)
+  have hv : FlatConstantConeProZero v := by
+    change ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (Q O).map
+      ((CochainComplex.mappingCone (α.app P)).asFunctor.map (homOfLE h).op) = 0
+    exact ht
+  have _ := hflat
+  exact ringedLimit_proZero_isIso J (siteModuleRings O)
+    (fun U a b ↦ @mul_comm (O.obj.obj U) _ a b)
+    (rlim O) (limitComparison O) (strictLimit O).universal v hv
 
 end CategoryTheory.ConstantCompletion

@@ -16,46 +16,48 @@
  ],
  "proof": [
   {
-   "text": "The Noetherian exterior Koszul augmentation to A/I^(n+1) has pro-zero cones with the actual diagonal transitions. Dualizing the positive tensor model identifies it with this negative exterior model, including the degree-zero quotient and the strict transition squares.",
+   "text": "Choose the exterior Koszul augmentations and diagonal/quotient transition maps from noetherian_koszul_augmentation_pro_zero, with eventual derived-zero cone transitions.",
    "uses": [
-    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
-    "def-weil-pbc-ringed-koszul-system"
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Realize ordinary modules as constant modules exactly and extend to O_b. For b=false this is the identity change of coefficients. For b=true constant-module sections and the sectionwise adic algebra limit give a flat coefficient map whose finite reductions are precisely the specified constant quotients. Tensor by P; the zero-summand and unit formulas identify the resulting strict map with α_P, since the Koszul degree-zero unit is an isomorphism and all the tensor coproduct inclusions are jointly epimorphic.",
+   "text": "Use the proved exact coefficient realization, then apply the finite coefficient-cone comparison at U=O_b[0]. Map the eventual derived-zero transitions through this exact realization using localizedZero_map and conjugate by the strict comparison isomorphisms. This proves that the actual cone tower of alpha_U is pro-zero.",
    "uses": [
-    "lem-u4-constant-koszul-quotient-augmentation",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+    "lem-r1-constant-exact-coefficient-realization",
+    "lem-r1-constant-koszul-coefficient-cone-comparison",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
    ],
    "elementary": false
   },
   {
-   "text": "The signed tensor-cone identification carries the resulting cone tower to the tensor of the original coefficient cones, including transitions. Apply flatConstantTensorProZeroCones to preserve pro-zero cones and invert this map after total derived inverse limit. Uniqueness of the right derived pair transfers invertibility to the specified rlim. This includes I=0 with the empty list and the zero ring, where the original cones are acyclic.",
+   "text": "Use the strict tensor-cone comparison to identify the actual cone tower of alpha_P with tensorLeft P applied to the coefficient cone tower. K-flatness implies tensorLeft P preserves quasi-isomorphisms. localizedZero_map transports eventual derived-zero transitions and proZero_of_towerIso transports them across the strict isomorphism.",
    "uses": [
-    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-r1-constant-koszul-tensor-cone-comparison",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved ringedLimit_proZero_isIso helper to the resulting FlatConstantConeProZero witness and to the chosen strictLimit universal right-derived pair. This proves invertibility for precisely rlim(O_b).map(TQ(O_b).map(alpha_P)), without changing any target or coefficient definition. The termwise-flat hypothesis is retained but the stronger generic K-flat transport makes it unnecessary to the proof.",
+   "uses": [
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
-  "def-weil-pbc-ringed-koszul-system",
-  "lem-u4-constant-koszul-quotient-augmentation",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-sectionwise-adic-algebra-limit",
+  "lem-r1-constant-exact-coefficient-realization",
+  "lem-r1-constant-koszul-coefficient-cone-comparison",
   "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-r1-constant-koszul-tensor-cone-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099M (lemma-naive-completion), strict Koszul augmentation and pro-system argument in the proof, with coefficient flatness from sites-modules.tex Tag 093M."
+  "place": "Tag 099M, noetherian Koszul pro-isomorphism followed by exact constant realization, K-flat tensor and total derived inverse limit. R1 implements the localized-zero and right-derived-limit glue; two finite comparison steps are separately named."
  },
  "mathlib_searches": [
   {
@@ -139,9 +141,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261028T034949-L-3574928",
+  "landing": "20261028T055741-L-804185",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

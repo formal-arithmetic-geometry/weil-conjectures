@@ -1,0 +1,140 @@
+{
+ "id": "lem-r1-constant-koszul-tensor-cone-comparison",
+ "kind": "statement",
+ "title": "Strict tensor comparison for normalized Koszul cones",
+ "statement": "Let C,J,A,I,b,r,a be arbitrary small-site coefficient and generator-list data [def-sfb-constant-completion-coefficient-data, def-weil-pbc-ringed-koszul-system]. Let alpha be a natural strict Koszul-tensor-to-reduction augmentation satisfying the unit and nonzero-Koszul-summand laws [lem-u4-constant-koszul-quotient-augmentation]. Put U=O_b[0]. For every complex P, tensoring the strict cone tower of alpha_U on the left by P yields a strict tower naturally isomorphic to the cone tower of alpha_P. This is an actual strict tower isomorphism before localization. It assumes no Noetherianity, flatness or K-flatness and makes no eventual-vanishing or derived-limit claim.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 099M, tensoring the finite augmentation; Cohomology on Sites Tags 06YN and 06YP, total tensor and cone signs."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-u4-constant-koszul-quotient-augmentation",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify the source at U with the actual dual Koszul tower by the total tensor left unitor (and identity-component isomorphism for the reconstructed strict complex). Its degree-zero unit is invertible: identify the dual with the negative Koszul tensor, whose sole degree-zero subset basis is the empty subset and hence the coefficient unit.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "lem-sfb-negative-koszul-low-degrees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each finite quotient, the sheaf tensor balancing comparison identifies reduction(M) with M tensor the restricted quotient unit. It sends m tensor s to s tensor m. Extend this comparison termwise to complexes and use the single-degree-zero total tensor isomorphism. Associativity and the unitors then give the source and target isomorphisms between tensor by P of the data at U and the data at P. Check compatibility with finite transitions on local pure tensors, where both composites send m tensor s to the image of s tensor m.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmentation square is checked on every (p,q) total tensor summand. For q!=0, alpha_P vanishes by its law, while the coefficient augmentation maps to a degree-zero complex and therefore also vanishes in degree q. For q=0 precompose with the isomorphism P^p tensor the degree-zero Koszul unit. Project the ordinary-limit unit law to the finite level: both composites are the actual reduction-unit map on P^p. Cancel the isomorphism and use joint detection by the total tensor inclusions. This proves the square for all P, including unbounded complexes.",
+   "uses": [
+    "lem-u4-constant-koszul-quotient-augmentation",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the natural signed tensor/mapping-cone comparison to each commuting square. Its shifted-source summand in P-degree p has sign (-1)^p, and its target summand has sign 1; the differential identity is (-1)^(p+1)=-(-1)^p. The same sign on both sides makes each cone transition square commute. Thus the component isomorphisms assemble into the stated strict tower isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-ringed-negative-koszul-duality",
+  "lem-sfb-negative-koszul-low-degrees",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-u4-constant-koszul-quotient-augmentation",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion; finite module and tensor identifications only. Tag 099M, tensoring the finite augmentation; Cohomology on Sites Tags 06YN and 06YP, total tensor and cone signs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact additive realization of exterior Koszul complexes preserves augmentation mapping cones and diagonal transitions",
+   "results": "{\"t\": \"2026-10-28T04:11:32Z\", \"tool\": \"leansearch\", \"query\": \"An exact additive realization of exterior Koszul complexes preserves augmentation mapping cones and diagonal transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"HomologicalComplex.ExactAt.of_iso\", \"CochainComplex.mappingCone.mapTriangleIso\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.map_δ\", \"HomologicalComplex.quasiIsoAt_map_of_preservesHomology\"], \"digest\": \"76bf8ae48b87bf3e\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping cone of tensoring a normalized Koszul augmentation by a complex is naturally tensor of its coefficient mapping cone",
+   "results": "{\"t\": \"2026-10-28T04:11:33Z\", \"tool\": \"leanfinder\", \"query\": \"The mapping cone of tensoring a normalized Koszul augmentation by a complex is naturally tensor of its coefficient mapping cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.tensorHom\"], \"digest\": \"7903656bec3cb7dd\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorMappingCone|mapHomologicalComplexIso",
+   "results": "{\"t\": \"2026-10-28T04:11:32Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorMappingCone|mapHomologicalComplexIso\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\"], \"digest\": \"6ac8875bb7df46be\"}",
+   "verdict": "No exact normalized comparison on the arbitrary small ringed site. General cone and tensor constructions are available and are used in the proposed finite proof.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantKoszulQuotientAugmentationIsIso",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Constant completion equivalence auxiliary: normalized Koszul quotient comparison, Strict tensor comparison for normalized Koszul cones",
+   "via": [
+    "lem-u4-constant-koszul-quotient-augmentation-is-iso",
+    "lem-weil-pbc-constant-koszul-quotient-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantKoszulTensorConeComparison",
+  "file": "lean/Sheaf/Paper/ConstantKoszulTensorConeComparison.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantKoszulTensorConeComparison",
+  "statement": "theorem constantKoszulTensorConeComparison\n    (b : Bool) (r : ℕ) (a : Fin r → A)\n    (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r\n        (fun i ↦ algebraSection (baseMap J A I b) (a i)) ⟶\n      (reductionTower J A I b).mapHomologicalComplex (.up ℤ))\n    (hα : KoszulQuotientAugmentationLaws J A I b r a α)\n    (P : Cx (coefficients J A I b)) :\n    Nonempty\n      ((CochainComplex.mappingCone\n          (α.app (ringedSiteRingComplex (coefficients J A I b)))).asFunctor ⋙\n        tensorLeft P ≅ (CochainComplex.mappingCone (α.app P)).asFunctor)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T055741-L-804185",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261028T055741-L-804185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
