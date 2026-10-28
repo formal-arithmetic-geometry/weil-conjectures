@@ -202,6 +202,14 @@ namespace Correspondence
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C} (hc : c.IsContractingAt y)
 
+variable (k' c y) in
+/-- The *specialized complex* `Ψ_X K = Sp_{X,x}(K)` on the normal cone `N_x X ⊗ k'` of
+`x = c₁(y)`: the specialization of `K` at `x`, the complex of the specialized correspondence
+(`ProEtale.CondensedRing.Correspondence.IsContractingAt.specialCorrespondence`). -/
+noncomputable def specialComplex :
+    Dᵇc((deformationSpecialFibre X (y ≫ c.c₁).left.ker k').left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  (specialization k' (y ≫ c.c₁)).obj K
+
 namespace IsContractingAt
 
 variable (k')
@@ -211,7 +219,7 @@ specialization `Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special 
 deformation of `c` to the normal cones (blueprint `det-tf-contracting-vanishing`). Its coefficient
 map plays no role in the vanishing argument and is taken to be zero. -/
 noncomputable def specialCorrespondence :
-    Correspondence ℓ ((specialization k' (y ≫ c.c₁)).obj K) where
+    Correspondence ℓ (c.specialComplex k' y) where
   C := deformationSpecialFibre c.C y.left.ker k'
   c₁ := hc.specialLeg₁ k'
   c₂ := hc.specialLeg₂ k'
