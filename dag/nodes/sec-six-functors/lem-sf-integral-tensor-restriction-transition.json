@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-integral-tensor-restriction-transition",
+ "kind": "statement",
+ "title": "Tensor compatibility with restricted coefficient quotient transitions",
+ "statement": "Fix a universe $u$, a prime $\\ell$, a finite-dimensional extension $E/\\mathbf Q_\\ell$, a scheme $X$ in universe $u$, a finite-field datum $D$, and $\\ell\\ne D.p$ [def-weil-l-adic-coefficient-extension, def-weil-finite-field-fiber]. On the small pro-etale site of $X$ [def-weil-pbc-proetale-site] let $B$ be the completed integral coefficient ring and $B_n$ its quotient of exponent $n+1$ [def-weil-completed-integral-coefficients]. Write $F_n:D(B)\\to D(B_n)$ for derived extension and $U_n:D(B_n)\\to D(B)$ for derived restriction [def-weil-integral-derived-reduction, def-weil-integral-derived-restriction-of-scalars], and $\\tau_n:U_{n+1}F_{n+1}\\to U_nF_n$ for the canonical quotient transition [def-weil-integral-reduction-tower]. Fix an ordinary tensor presentation $a$ and normalized reduction presentations $m_n$ with tensor comparisons $\\mu_n:F_nT\\simeq T_n(F_n,F_n)$ [def-sf-integral-hom-reduction-models]. For arbitrary $K,V\\in D(B)$, construct $b_n(K,V):T(K,U_nF_nV)\\to U_nF_nT(K,V)$ as the scalar-adjunction transpose of the composite $\\mu_n(K,U_nF_nV)$ followed by $T_n(1,\\epsilon_{F_nV})$ followed by $\\mu_n(K,V)^{-1}$, where $\\epsilon$ is the actual scalar-adjunction counit. Then\n$$T(1,\\tau_n(V));b_n(K,V)=b_{n+1}(K,V);\\tau_n(T(K,V))$$\nfor every $n\\in\\mathbf N$. No Hom, dualizing object, invertible Hom comparison, completeness, constructibility or boundedness hypothesis occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 06YY, lemma-derived-base-change; Tag 07A4, lemma-pullback-tensor-product. Coefficient-unit calculation used by the original node."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "def-weil-integral-reduction-tower",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat complexes representing K and V and a flat-term K-flat resolution of the restricted quotient representative used in the second input. Compute the derived extension and tensor by these representatives and their prescribed counits.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sf-integral-hom-reduction-models",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Untranspose b_n through the scalar adjunction. The scalar counit multiplies its coefficient factor; the two normalized tensor comparisons identify the resulting ordinary balanced tensor map with x tensor (b tensor y) mapping to b tensor (x tensor y). The coefficient has degree zero, so there is no extra Koszul sign. The consecutive quotient sends b to q(b), and both composites send the same generator to q(b) tensor (x tensor y). Equality on balanced pure tensors extends through sheafification and the degreewise direct sums defining total tensor.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localization to this chain-map equality. The representative equation defining the canonical derived quotient transition identifies the arrows with tau_n. Cancel the K-flat resolution isomorphisms and the normalized tensor comparison isomorphisms, obtaining the displayed square for arbitrary K and V. At n=0 the same formula is reduction from exponent two to exponent one, and zero inputs or empty X give the zero square.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 06YY, lemma-derived-base-change; Tag 07A4, lemma-pullback-tensor-product. Coefficient-unit calculation used by the original node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with the restriction of a derived scalar reduction commutes with consecutive coefficient quotient transitions, using the scalar extension restriction adjunction.",
+   "results": "8 hits: ordinary TensorProduct restriction/currying/scalar tower facts and ModuleCat.extendRestrictScalarsAdj. No derived ringed-site quotient-transition square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar adjunction and normalized tensor comparison induce a map from tensor with a restricted quotient to reduction of tensor, natural for consecutive quotient maps.",
+   "results": "8 hits about ordinary module quotient tensor equivalences, including TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor. They do not concern unbounded ringed-site derived reductions.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionTensor|sfDerivedReductionTransition|scalar.*tensor.*transition",
+   "results": "0 Mathlib CategoryTheory hits. Repository search found tensorIntegralReductionTower, an existence of an isomorphism for a separately presented tower without this specified scalar-adjunction component formula. No existing statement of the required normalized square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition",
+  "date": "2026-10-28",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "First paragraph: internal-Hom reduction preserves evaluation; the coefficient tensor calculation for consecutive quotient transitions.",
+   "via": [
+    "lem-sf-integral-verdier-reduction-pairing",
+    "lem-sf-integral-verdier-reduction-pairing-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorRestrictionTransition",
+  "file": "lean/Sheaf/Paper/IntegralTensorRestrictionTransition.lean",
+  "declaration": "WeilConjectures.IntegralHom.restrictionTensor_transition",
+  "declarations": [
+   "WeilConjectures.IntegralHom.restrictionTensor",
+   "WeilConjectures.IntegralHom.restrictionTensor_transition"
+  ],
+  "statement": "theorem restrictionTensor_transition\n    (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))\n    (m : ∀ n : ℕ, ReductionPresentation l E X D hl a n)\n    (K V : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :\n    a.tensor.map (Prod.mkHom (𝟙 K) ((sfDerivedReductionTransition l E X n).app V)) ≫\n        restrictionTensor l E X D hl (m n) K V =\n      restrictionTensor l E X D hl (m (n + 1)) K V ≫\n        (sfDerivedReductionTransition l E X n).app (a.tensor.obj (K, V))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T020801-L-2548009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261028T020801-L-2548009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
