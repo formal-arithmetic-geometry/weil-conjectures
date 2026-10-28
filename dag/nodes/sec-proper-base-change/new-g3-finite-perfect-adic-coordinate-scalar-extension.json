@@ -1,0 +1,133 @@
+{
+ "id": "new-g3-finite-perfect-adic-coordinate-scalar-extension",
+ "kind": "statement",
+ "title": "Scalar extension of actual finite quotient coordinates",
+ "statement": "Let X be a scheme, d an adic coefficient datum, and phi_n compatible isomorphisms from the constant positive finite quotient ring sheaves to the actual finite coefficient sheaves. For every derived completed module M, etale chart V and n >= 0, and every functor L left adjoint to actual restriction along the lifted consecutive quotient homomorphism on the pro-etale site of V, L applied to finitePerfectAdicQuotientCoordinates at n+1 is isomorphic to finitePerfectAdicQuotientCoordinates at n. There is no boundedness, perfectness or etale-origin hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D; constant coefficient encoding in 03CY and the consecutive quotient normalization of proetale.tex, Tag 09C6."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-finite-perfect-adic-marked-origin",
+  "def-weil-pbc-derived-normalization-arrows",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models"
+ ],
+ "proof": [
+  {
+   "text": "At each positive level use the exact equivalence given by restriction along phi and encoding modules over the constant ring as fixed-scalar module sheaves. Naturality of the constant-sheaf unit and the consecutive quotient compatibility give the scalar-restriction square, with identity maps on underlying additive sections.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-residue-perfect-finite-quotient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse mate of the square of coefficient restrictions is invertible because both coordinate encodings are equivalences. Evaluate it on the larger quotient reduction and compose with pbcReductionNormalization, whose projection compatibility is the limit-cone equation. This identifies extension of the larger global coordinates with the smaller global coordinates.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For inverse image to the etale chart, restriction and coextension on fixed modules commute with direct image sectionwise. Iterated adjunction mates prove the ordinary scalar-extension mate invertible. Representably flat pullback preserves the local-relations criterion for flat module sheaves. The flat-resolution derived-mate computation and uniqueness of scalar left adjoints identify the derived mate with an isomorphism. This is proved locally from the earlier witness-compatibility API rather than importing the downstream local-systems theorem.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact composition factors and the upper-star/localization-restriction comparison identify the specified chart coordinates with inverse images of the global coordinates. Compose these factors, the invertible chart mate and the global quotient isomorphism. Finally transport from the canonical scalar left adjoint to the supplied adjunction by uniqueness of left adjoints.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-slice-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models",
+  "lem-stage3-inverse-mate-equivalences",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-pbc-finite-coefficient-slice-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0G7E; adjunction formulation of quotient balancing and chart pullback."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction scalar quotient reduction arrows are universal scalar extension adjunction tensor associativity",
+   "results": "Found generic ModuleCat.extendRestrictScalarsAdj and scalar-extension composition results. None identifies these actual finite quotient chart coordinates.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "Found leftAdjointCompIso and its coherence API, used by pbcReductionNormalization. The chart coordinate equivalences still require the displayed proof.",
+   "date": "2026-10-28",
+   "verdict": "generic tool, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate_scalar_extension|Scalar extension of the actual finite quotient coordinates; blueprint_refs.py search finite quotient scalar extension",
+   "results": "No existing declaration or imported blueprint node states this coordinate scalar-extension isomorphism.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicCoordinateTransitionMaps",
+  "date": "2026-10-28",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-coordinate-transitions",
+   "place": "Finite-perfect coordinate transition argument: consecutive quotient balancing, before lifting the arrows through comparison.",
+   "via": [
+    "new-w5-finite-perfect-adic-coordinate-transition-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicCoordinateScalarExtension",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicCoordinateScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_coordinate_scalar_extension",
+  "statement": "theorem finitePerfectAdic_coordinate_scalar_extension\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale) (n : ℕ)\n    (L : DerivedCategory (Sheaf (ProEt.topology V.left)\n        (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) ) ⥤\n      DerivedCategory (Sheaf (ProEt.topology V.left)\n        (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))))\n    (adj : L ⊣ normalizationRestrict (ProEt.topology V.left)\n      (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))) :\n    Nonempty (L.obj (finitePerfectAdicQuotientCoordinates X d φ M V (n + 1)) ≅\n      finitePerfectAdicQuotientCoordinates X d φ M V n)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261028T034755-L-3543780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261028T034755-L-3543780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
