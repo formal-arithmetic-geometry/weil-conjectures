@@ -56,7 +56,7 @@ lemma diagUpperStarExternalProductIso_hom_hom (K N : Dᵇc(X.left)⟦Profinite.p
   simp only [diagUpperStarExternalProductIso, Iso.trans_hom, Iso.symm_hom, tensorIso_hom,
     Iso.app_hom, Iso.app_inv, eqToIso.hom, Functor.Monoidal.μIso_inv,
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.tensorHom_hom',
-    δ_boundedConstructibleUpperStar_hom', ObjectProperty.eqToHom_hom,
+    boundedConstructibleUpperStar_δ_hom, ObjectProperty.eqToHom_hom,
     boundedConstructibleUpperStarComp_inv_app_hom,
     boundedConstructibleUpperStarId_hom_app_hom]
 
