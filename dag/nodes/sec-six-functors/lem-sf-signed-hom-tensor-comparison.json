@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-signed-hom-tensor-comparison",
+ "kind": "statement",
+ "title": "Natural signed tensor-Hom comparison of arbitrary cochain complexes",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let $Y$ be a scheme in universe $t$, and $R$ a commutative-ring sheaf of universe $\\max(u,t+1)$ on its small pro-etale site. Use module sheaves in that coefficient universe, the signed direct-sum total tensor $T$, and the recorded product Hom complex $C$ with its product projections [def-sf-integral-hom-reduction-models, def-pur-hom-complex]. For arbitrary unbounded complexes $P,I$, there exists a natural transformation in the coefficient complex $Q$,\n$$\\alpha_Q:T(C(P,I),Q)\\longrightarrow C(P,T(I,Q)),$$\nwith the following equation on every object $U$, integers $a,b,p$, and local sections $v\\in C(P,I)^a(U)$, $z\\in Q^b(U)$, $x\\in P^p(U)$:\n$$\\alpha_Q(v\\otimes z)(x)=(-1)^{bp}v(x)\\otimes z.$$\nBoth tensors mean the actual sheafified pure tensors inserted in their total summands, and the right side is transported by $(p+a)+b=p+(a+b)$. Thus each component satisfies the existing predicate IsSignedHomTensor. No flatness, injectivity, boundedness or finite support is required, and invertibility is not asserted.",
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pur-hom-complex",
+  "lem-sf-two-term-free-hom-tensor-components"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility"
+ },
+ "proof": [
+  {
+   "text": "Use the existing evaluation-normalized chain tensor-Hom equivalence. Put C=Hom(P,I) and let ev:C tensor P to I be the inverse transpose of its identity. For each Q define psi_Q:(C tensor Q) tensor P to I tensor Q by associating to C tensor (Q tensor P), braiding Q past P, reassociating to (C tensor P) tensor Q, and applying ev tensor identity. Curry psi_Q to define alpha_Q.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility"
+   }
+  },
+  {
+   "text": "Associator and braiding naturality and tensor functoriality show that (identity_C tensor g) tensor identity_P followed by psi_Q-prime equals psi_Q followed by identity_I tensor g. Naturality and injectivity of inverse currying give the natural transformation alpha. No resolution, boundedness or invertibility is used.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-braided-hom-tensor-exchange-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility"
+   }
+  },
+  {
+   "text": "Evaluate the inverse transpose on the homogeneous generator (v tensor z) tensor x, where degrees are a,b,p. The associators have coefficient 1, the middle braiding contributes (-1)^(bp), and the normalized evaluation sends v tensor x to v(x). Thus alpha_Q has exactly the IsSignedHomTensor formula, with the canonical transport (p+a)+b=p+(a+b). Tensor functoriality moves the maps through total summand inclusions. This is valid for every site object and arbitrary unbounded complexes.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-braided-hom-tensor-exchange-naturality",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "There is a natural tensor Hom comparison from Hom(P,I) tensor Q to Hom(P,I tensor Q) for cochain complexes in a closed symmetric monoidal category",
+   "results": "8 hits: rTensorHomEquivHomRTensor, homTensorHomEquiv and lTensorHomEquivHomLTensor in Mathlib.LinearAlgebra.Contraction (ordinary free modules), CategoryTheory.ihom.adjunction and ihom.coev_naturality_assoc in Mathlib.CategoryTheory.Monoidal.Closed.Basic, ModuleCat.monoidalClosedHomEquiv, HomologicalComplex.tensorHom and CategoryTheory.FunctorToTypes.functorHomEquiv.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-complex signed comparison; general closed and complex tensor APIs are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a natural morphism Hom(P,I) tensor Q to Hom(P,I tensor Q) of cochain complexes with Koszul sign on homogeneous tensors",
+   "results": "8 generic complex tensor results, including HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj and tensor existence instances; no comparison with the chosen sheaf Hom product projections.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-complex signed comparison; general closed and complex tensor APIs are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.ihomTensorToIhom",
+   "results": "0 hits: this identifier is absent. This name lookup is supplemented by semantic and source searches.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-complex signed comparison; general closed and complex tensor APIs are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomTensorToIhom|IsSignedHomTensor|reductionTower_tensor_models",
+   "results": "0 Mathlib hits. IsSignedHomTensor is defined by the existing project module TwoTermFreeHomTensorComponents.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-complex signed comparison; general closed and complex tensor APIs are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionTowerTransition",
+  "date": "2026-10-28",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 1: the Hom and finite-free coefficient construction, before invertibility",
+   "via": [
+    "lem-sf-integral-hom-tower-components-transition",
+    "lem-sf-integral-hom-tower-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedHomTensorComparison",
+  "file": "lean/Sheaf/Paper/SignedHomTensorComparison.lean",
+  "declaration": "WeilConjectures.IntegralHom.signedHomTensorComparison_exists",
+  "statement": "theorem signedHomTensorComparison_exists\n    (P I : CochainComplex (Modules.{t, u} Y R) ℤ) :\n    ∃ α : (totalTensor.{t, u} Y R).obj\n          (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I) ⟶\n        (totalTensor.{t, u} Y R).obj I ⋙\n          (homComplexFunctor.{t + 1, t, max u (t + 1), max u (t + 1)}\n            (R := R)).obj (op P),\n      ∀ Q, IsSignedHomTensor.{t, u} Y R P I Q (α.app Q)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261028T020845-L-2555440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261028T020845-L-2555440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

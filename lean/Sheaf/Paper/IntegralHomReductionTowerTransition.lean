@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
+import Sheaf.Paper.SignedHomTensorComparison
+import Sheaf.Paper.IntegralHomReductionTowerTensorModels
 
 /-! # Transition compatibility for integral Hom reduction towers
 
@@ -43,6 +45,14 @@ in Stacks Tags 07A6, 08J9 and 08TC.
 
 Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC
 (blueprint: lem-sf-integral-hom-tower-components-transition).
+
+Proof: use separate tensor representatives A,I and the common two-term free
+coefficient tower Q. Whisker the natural signed tensor--Hom map by Q and by
+localization. Its component in every cochain degree is invertible by the
+existing two-term free component lemma, so its complex components and then
+its localized natural transformation are isomorphisms. Invert that natural
+isomorphism and conjugate by the two model isomorphisms. Its naturality at
+the consecutive quotient map is exactly the displayed transition square.
 -/
 theorem reductionTower_components_transition
     (K : completedIntegralDerivedCategory l E Y D hl)
@@ -66,6 +76,24 @@ theorem reductionTower_components_transition
             (θ n).hom =
           (θ (n + 1)).hom ≫
             (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op := by
-  sorry
+  obtain ⟨A, I, Q, hQ, ⟨s⟩, ⟨t⟩⟩ :=
+    reductionTower_tensor_models l E Y D hl K P G P' G' q q' hq hq' e
+  obtain ⟨α, hα⟩ := signedHomTensorComparison_exists Y
+    (completedIntegralCommRingSheaf l E Y D hl) A I
+  let β := Functor.whiskerRight (Functor.whiskerLeft Q α) DerivedCategory.Q
+  have (n : ℕᵒᵖ) : IsIso (β.app n) := by
+    obtain ⟨hz, ⟨eNeg⟩, ⟨eZero⟩⟩ := hQ n.unop
+    have (j : ℤ) : IsIso ((α.app (Q.obj n)).f j) :=
+      twoTermFreeHomTensor_component_isIso Y _ A I (Q.obj n)
+        hz eNeg eZero (α.app (Q.obj n)) (hα (Q.obj n)) j
+    have : IsIso (α.app (Q.obj n)) :=
+      HomologicalComplex.Hom.isIso_of_components _
+    change IsIso (DerivedCategory.Q.map (α.app (Q.obj n)))
+    infer_instance
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  let τ := s ≪≫ (asIso β).symm ≪≫ t.symm
+  refine ⟨fun n ↦ τ.app (op n), ?_⟩
+  intro n
+  exact τ.hom.naturality (homOfLE n.le_succ).op
 
 end WeilConjectures.IntegralHom

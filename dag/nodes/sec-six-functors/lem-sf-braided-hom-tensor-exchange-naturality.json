@@ -1,0 +1,99 @@
+{
+ "id": "lem-sf-braided-hom-tensor-exchange-naturality",
+ "kind": "statement",
+ "title": "Naturality of uncurried tensor-Hom exchange in a braided category",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let C be any braided monoidal category, M,P,I,Q,Q' objects, e:M tensor P to I a morphism and g:Q to Q' a morphism. Write\n$$c_Q=\\alpha_{M,Q,P};(1_M\\otimes\\beta_{Q,P});\\alpha^{-1}_{M,P,Q};(e\\otimes1_Q): (M\\otimes Q)\\otimes P\\longrightarrow I\\otimes Q.$$\nThen\n$$((1_M\\otimes g)\\otimes1_P);c_{Q'}=c_Q;(1_I\\otimes g).$$\nHere semicolons denote composition from left to right, alpha is the associator and beta is the braiding. No symmetry, closedness, additive structure or hypotheses on the objects are required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: naturality of the finite-free Hom construction; categorical associator, braiding and tensor interchange identities"
+ },
+ "proof": [
+  {
+   "text": "Apply naturality of the associator in its middle argument to move g across the first associator. Functoriality of left tensoring and left naturality of the braiding move it across the middle braiding. Naturality of the inverse associator in its right argument moves it across the inverse associator. The tensor interchange identity then commutes g with e on the other factor. Reassociate the compositions; the resulting equality is the displayed equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: naturality of the finite-free Hom construction; categorical associator, braiding and tensor interchange identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a braided monoidal category, moving Q past P and then evaluating M tensor P to I is natural in Q",
+   "results": "8 hits, including tensorμ_natural and its variants, BraidedCategory.braiding_naturality and braiding_naturality_right_assoc. These supply the constituent naturality identities, not this composed expression.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing associator, braiding and interchange lemmas; the composed identity is a four-rewrite proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality_middle_assoc",
+   "results": "1 hit: the named theorem in Mathlib.CategoryTheory.Monoidal.Category.",
+   "date": "2026-10-28",
+   "verdict": "Used directly as the first rewrite."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality_left|associator_inv_naturality_right_assoc|whisker_exchange",
+   "results": "25 hits, including the graded monoidal associator proof and uses of whisker_exchange in monoidal localization; the basic braiding and associator lemmas are available.",
+   "date": "2026-10-28",
+   "verdict": "The constituent monoidal identities suffice; no new categorical axiom or unfinished lemma is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReductionTowerTransition",
+  "date": "2026-10-28",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 1, naturality of the tensor-Hom construction",
+   "via": [
+    "lem-sf-signed-hom-tensor-comparison",
+    "lem-sf-integral-hom-tower-components-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedHomTensorComparisonConstruction",
+  "file": "lean/Sheaf/Paper/SignedHomTensorComparisonConstruction.lean",
+  "declaration": "WeilConjectures.IntegralHom.braidedTensorExchange_naturality",
+  "statement": "theorem braidedTensorExchange_naturality {V : Type a₀} [Category.{b₀} V]\n    [MonoidalCategory V] [BraidedCategory V]\n    (M P I Q Q' : V) (ev : M ⊗ P ⟶ I) (g : Q ⟶ Q') :\n    ((M ◁ g) ▷ P) ≫ (α_ M Q' P).hom ≫ M ◁ (β_ Q' P).hom ≫\n        (α_ M P Q').inv ≫ ev ▷ Q' =\n      (α_ M Q P).hom ≫ M ◁ (β_ Q P).hom ≫\n        (α_ M P Q).inv ≫ ev ▷ Q ≫ I ◁ g",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261028T020845-L-2555440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261028T020845-L-2555440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
