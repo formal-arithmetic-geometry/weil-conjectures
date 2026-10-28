@@ -2,7 +2,7 @@
  "id": "lem-pod-reindexing-strict-tensor-towers-naturality",
  "kind": "statement",
  "title": "Naturality of strict tensor tower reindexing",
- "statement": "theorem podReindexingStrictTensorTowersNaturality\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g)\n    (τ : ∀ P Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (podReindexTower l E g).obj\n            ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n          (integralOperationsTensorTowerFunctor l E X).obj\n            (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (n : ℕ) (p q : ℤ) (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U)))\n        (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        ((((τ P Q).hom.app (op n)).f (p + q)).val.app (op U))\n            (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n              (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n          integralOperationsTotalTensorSection l E X n\n            (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n            p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n              ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n      ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (a : P ⟶ P') (b : Q ⟶ Q'),\n        (podReindexTower l E g).map\n            ((integralOperationsTensorTowerFunctor l E Y).map (Prod.mkHom a.hom b.hom)) ≫\n            (τ P' Q').hom =\n          (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map\n            (Prod.mkHom ((podGoodReindex l E g D).map a).hom\n              ((podGoodReindex l E g D).map b).hom)",
+ "statement": "theorem podReindexingStrictTensorTowersNaturality\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.QuotientGenerators l E g D)\n    (τ : ∀ P Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (podReindexTower l E g).obj\n            ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n          (integralOperationsTensorTowerFunctor l E X).obj\n            (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (n : ℕ) (p q : ℤ) (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U)))\n        (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        ((((τ P Q).hom.app (op n)).f (p + q)).val.app (op U))\n            (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n              (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n          integralOperationsTotalTensorSection l E X n\n            (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n            p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n              ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n      ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (a : P ⟶ P') (b : Q ⟶ Q'),\n        (podReindexTower l E g).map\n            ((integralOperationsTensorTowerFunctor l E Y).map (Prod.mkHom a.hom b.hom)) ≫\n            (τ P' Q').hom =\n          (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map\n            (Prod.mkHom ((podGoodReindex l E g D).map a).hom\n              ((podGoodReindex l E g D).map b).hom)",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
   "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
@@ -17,24 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Evaluate both composites on each pure tensor generator. Naturality of inverse image and quotient maps gives equal images; the generator formula and total-tensor universal property extend equality to every tower morphism.",
+   "text": "Apply the quotient generator normalization at scalar one. Since the coefficient transport preserves one, D.quotient sends the reduction unit of each original section to the corresponding reindexed reduction unit. The assumed tensor formula therefore computes τ on tensors of reduced original sections.",
    "uses": [
-    "lem-pod-reindexing-hom-resolution-model",
-    "lem-pur-integral-operations-well-defined"
+    "def-pod-completion-reindex-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the desired naturality equation with the inverse of τ(P,Q), cancel the adjacent inverse-hom pair on the right, and apply tower, chain-map, and finite tensor generator extensionality. The latter is the proved finite_tensor_ext helper in IntegralScalarTensorLevelReduction.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-level-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate τ.hom_inv_id on the original tensor generator. Together with the normalized generator formula this computes τ inverse on the target generator. Reindexing has the same underlying section maps, and evaluation of a strict tensor tower map gives its finite-level tensor map; both component identities follow by reflexivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved finite_tensor_map_section and finite_reduction_map_section helpers in IntegralScalarTensorLevelTower on both sides. The source composite first maps the two original sections and then applies the normalized τ formula; the target composite reduces their reindexed images. The sectionwise reindexing model identifies these sections definitionally, closing the generator equality.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-level-tower"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-reindexing-hom-resolution-model",
-  "lem-pur-integral-operations-well-defined"
+  "def-pod-completion-reindex-models",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "lem-pur-integral-scalar-tensor-level-tower"
  ],
  "proof_origin": {
   "by": "worker",
   "kind": "agent-written",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; evaluation on pure tensor summands for naturality."
+  "place": "Steps 1 and 5; normalized reduction units, tensor generator extensionality, and sectionwise tensor-map naturality. Reuses proved finite tensor helpers from the scalar comparison."
  },
  "mathlib_searches": [
   {
@@ -149,9 +168,9 @@
   "module": "Sheaf.Paper.PodReindexingStrictTensorTowersNaturality",
   "file": "lean/Sheaf/Paper/PodReindexingStrictTensorTowersNaturality.lean",
   "declaration": "WeilConjectures.podReindexingStrictTensorTowersNaturality",
-  "statement": "theorem podReindexingStrictTensorTowersNaturality\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g)\n    (τ : ∀ P Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (podReindexTower l E g).obj\n            ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n          (integralOperationsTensorTowerFunctor l E X).obj\n            (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (n : ℕ) (p q : ℤ) (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U)))\n        (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        ((((τ P Q).hom.app (op n)).f (p + q)).val.app (op U))\n            (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n              (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n          integralOperationsTotalTensorSection l E X n\n            (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n            p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n              ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n      ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (a : P ⟶ P') (b : Q ⟶ Q'),\n        (podReindexTower l E g).map\n            ((integralOperationsTensorTowerFunctor l E Y).map (Prod.mkHom a.hom b.hom)) ≫\n            (τ P' Q').hom =\n          (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map\n            (Prod.mkHom ((podGoodReindex l E g D).map a).hom\n              ((podGoodReindex l E g D).map b).hom)",
+  "statement": "theorem podReindexingStrictTensorTowersNaturality\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.QuotientGenerators l E g D)\n    (τ : ∀ P Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (podReindexTower l E g).obj\n            ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n          (integralOperationsTensorTowerFunctor l E X).obj\n            (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (n : ℕ) (p q : ℤ) (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U)))\n        (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        ((((τ P Q).hom.app (op n)).f (p + q)).val.app (op U))\n            (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n              (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n          integralOperationsTotalTensorSection l E X n\n            (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n            p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n              ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n      ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (a : P ⟶ P') (b : Q ⟶ Q'),\n        (podReindexTower l E g).map\n            ((integralOperationsTensorTowerFunctor l E Y).map (Prod.mkHom a.hom b.hom)) ≫\n            (τ P' Q').hom =\n          (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map\n            (Prod.mkHom ((podGoodReindex l E g D).map a).hom\n              ((podGoodReindex l E g D).map b).hom)",
   "branch": "sheaf-dag",
-  "by": "A3",
+  "by": "S6",
   "date": "2026-10-28"
  },
  "reviewed": {
@@ -167,11 +186,42 @@
  "reviewed_proof": {
   "date": "2026-10-28",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "C-f14f1",
+  "group": "S6",
   "result": "pass",
-  "landing": "20261028T020130-L-2470406",
+  "landing": "20261028T055755-L-807528",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered podReindexingStrictTensorTowersNaturality (+hD QuotientGenerators) against node lem-pod-reindexing-strict-tensor-towers-naturality, change record, PodCompletionReindex structure/Laws (7th conjunct), parent caller and axiom audit"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "S6 stage 2",
+  "old_statement": "theorem podReindexingStrictTensorTowersNaturality\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g)\n    (τ : ∀ P Q : (integralOperationsGoodComplex l E Y).FullSubcategory,\n        (podReindexTower l E g).obj\n            ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅\n          (integralOperationsTensorTowerFunctor l E X).obj\n            (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj))\n    (hgen : ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (n : ℕ) (p q : ℤ) (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj).X p).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U)))\n        (y : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X q).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        ((((τ P Q).hom.app (op n)).f (p + q)).val.app (op U))\n            (integralOperationsTotalTensorSection l E Y n P.obj Q.obj p q\n              (op ((proEtaleIsoPostcompose g).obj U)) x y) =\n          integralOperationsTotalTensorSection l E X n\n            (((podGoodReindex l E g D).obj P).obj) (((podGoodReindex l E g D).obj Q).obj)\n            p q (op U) ((((D.quotient P.obj P.property n).hom.f p).val.app (op U)) x)\n              ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)) :\n      ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)\n        (a : P ⟶ P') (b : Q ⟶ Q'),\n        (podReindexTower l E g).map\n            ((integralOperationsTensorTowerFunctor l E Y).map (Prod.mkHom a.hom b.hom)) ≫\n            (τ P' Q').hom =\n          (τ P Q).hom ≫ (integralOperationsTensorTowerFunctor l E X).map\n            (Prod.mkHom ((podGoodReindex l E g D).map a).hom\n              ((podGoodReindex l E g D).map b).hom)",
+  "what": "The earlier statement omitted normalization of D.quotient. The structure gives objectwise isomorphisms, not a natural family. For identity reindexing, multiplying the quotient isomorphism for one nonzero good representative by -1, and its tensor comparison by the product of the two signs, preserves the stated generator formula and tower compatibility but need not preserve a morphism between two representatives. For odd residue characteristic, a nonzero inclusion between finite free representatives detects the failure. The source uses the fixed normalized quotient comparison. Add only its existing QuotientGenerators law; the parent already assumes all Laws. No target or parent statement changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+   "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
+  },
+  "citers": [
+   {
+    "id": "lem-pod-reindexing-strict-tensor-towers",
+    "holds": true,
+    "note": "Already assumes PodCompletionReindex.Laws; pass its QuotientGenerators conjunct. The statement and mathematical conclusion are unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Evaluate both composites on each pure tensor generator. Naturality of inverse image and quotient maps gives equal images; the generator formula and total-tensor universal property extend equality to every tower morphism.",
+    "uses": [
+     "lem-pod-reindexing-hom-resolution-model",
+     "lem-pur-integral-operations-well-defined"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pod-reindexing-hom-resolution-model",
+   "lem-pur-integral-operations-well-defined"
+  ]
  }
 }

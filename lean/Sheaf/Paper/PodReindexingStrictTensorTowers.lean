@@ -85,6 +85,7 @@ theorem podReindexingStrictTensorTowers
             (Prod.mkHom ((podGoodReindex l E g D).map a).hom
               ((podGoodReindex l E g D).map b).hom)) := by
   obtain ⟨τ, hgen⟩ := podReindexingStrictTensorTowersGenerators l E g D hD
-  exact ⟨τ, hgen, podReindexingStrictTensorTowersNaturality l E g D τ hgen⟩
+  exact ⟨τ, hgen,
+    podReindexingStrictTensorTowersNaturality l E g D hD.2.2.2.2.2.2.1 τ hgen⟩
 
 end WeilConjectures
