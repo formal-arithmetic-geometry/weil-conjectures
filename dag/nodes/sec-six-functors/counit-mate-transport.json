@@ -1,0 +1,120 @@
+{
+ "id": "counit-mate-transport",
+ "kind": "statement",
+ "title": "Transport of counit mates along compatible left-adjoint isomorphisms",
+ "statement": "Let C,D,C′,D′ be categories, with adjunctions aO:LO⊣RO and aC:LC⊣RC between C,D and bO:LO′⊣RO′ and bC:LC′⊣RC′ between C′,D′ [det-sp-unique-right-adjoint]. Let Q:C→C′ and T:D→D′, tA:LO≅LC, tB:LO′≅LC′, qO:LO⋙T≅Q⋙LO′ and qC:LC⋙T≅Q⋙LC′. Fix K∈D, K′∈D′ and η:T(K)→K′. Suppose maps uO:Q(RO(K))→RO′(K′) and uC:Q(RC(K))→RC′(K′) satisfy LO′(uO)≫ε_bO=qO⁻¹_RO(K)≫T(ε_aO,K)≫η and LC′(uC)≫ε_bC=qC⁻¹_RC(K)≫T(ε_aC,K)≫η. Suppose also T(tA_RO(K))≫qC_RO(K)=qO_RO(K)≫tB_Q(RO(K)). Then there exist object isomorphisms eA:RO(K)≅RC(K) and eB:RO′(K′)≅RC′(K′) such that Q(eA)≫uC=uO≫eB. Here the adjunction transpose of x:F(X)→Y is the actual map η_X≫G(x):X→G(Y).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "paragraph 3, transposition and compatibility with the specified counit"
+ },
+ "stmt_deps": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Transport aO and bO across tA and tB and apply uniqueness of right adjoints against aC and bC. Evaluate the resulting natural isomorphisms at K and K′; their counit equations are the right-adjoint uniqueness counit formulas.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the coefficient square using both natural isomorphisms. Transpose the required equality under bC. Naturality moves eA and tB past qC and uO, respectively, and substitution of the two assumed counit equations leaves the inverted coefficient square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity of the adjunction Hom equivalence proves the equality, with the two object isomorphisms already constructed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "General categorical counit calculation used in the paragraph 3 factorization comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two adjunction counit mates compatible with natural isomorphisms of left adjoints commute with the induced right adjoint isomorphisms",
+   "results": "Eight hits including mateEquiv_counit, conjugateEquiv_counit, and conjugateEquiv_comm in Mathlib.CategoryTheory.Adjunction.Mates. They describe one mates correspondence; the required objectwise square also combines two changes of adjunction and a unit arrow. Proved the combination using the existing uniqueness counit API.",
+   "date": "2026-10-28",
+   "verdict": "combine Mathlib API"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit",
+   "results": "One exact API hit in Mathlib.CategoryTheory.Adjunction.Unique; used for the two representing-object isomorphisms.",
+   "date": "2026-10-28",
+   "verdict": "use as tool"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq.*counit",
+   "results": "Eleven hits, including rightAdjointUniq_hom_app_counit and its natural-transformation form, plus uses in locally Cartesian closed categories. No exact two-coefficient-square statement.",
+   "date": "2026-10-28",
+   "verdict": "combine Mathlib API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AffineRestrictionMapIsoAux",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "paragraph 3, sentences identifying the affine restriction with the closed-chart composite via the specified counit",
+   "via": [
+    "affine-restriction-comparison-is-iso",
+    "affine-restriction-map-iso",
+    "dualizing-open-closed-mate-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CounitMateTransport",
+  "file": "lean/Sheaf/CategoryTheory/CounitMateTransport.lean",
+  "declaration": "CategoryTheory.counitMates_transport",
+  "statement": "theorem counitMates_transport\n    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']\n    {LO LC : C ⥤ D} {RO RC : D ⥤ C}\n    {LO' LC' : C' ⥤ D'} {RO' RC' : D' ⥤ C'}\n    (aO : LO ⊣ RO) (aC : LC ⊣ RC) (bO : LO' ⊣ RO') (bC : LC' ⊣ RC')\n    (Q : C ⥤ C') (T : D ⥤ D')\n    (tA : LO ≅ LC) (tB : LO' ≅ LC')\n    (qO : LO ⋙ T ≅ Q ⋙ LO') (qC : LC ⋙ T ≅ Q ⋙ LC')\n    (K : D) (K' : D') (unit : T.obj K ⟶ K')\n    (uO : Q.obj (RO.obj K) ⟶ RO'.obj K')\n    (uC : Q.obj (RC.obj K) ⟶ RC'.obj K')\n    (hO : LO'.map uO ≫ bO.counit.app K' =\n      qO.inv.app (RO.obj K) ≫ T.map (aO.counit.app K) ≫ unit)\n    (hC : LC'.map uC ≫ bC.counit.app K' =\n      qC.inv.app (RC.obj K) ≫ T.map (aC.counit.app K) ≫ unit)\n    (hc : T.map (tA.hom.app (RO.obj K)) ≫ qC.hom.app (RO.obj K) =\n      qO.hom.app (RO.obj K) ≫ tB.hom.app (Q.obj (RO.obj K))) :\n    ∃ (eA : RO.obj K ≅ RC.obj K) (eB : RO'.obj K' ≅ RC'.obj K'),\n      Q.map eA.hom ≫ uC = uO ≫ eB.hom",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28",
+  "declarations": [
+   "CategoryTheory.counitMates_transport",
+   "CategoryTheory.counitTranspose"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "dualizing-open-closed-mate-normalization",
+ "kind": "statement",
+ "title": "Transpose of the open/closed compact-support coefficient square",
+ "statement": "Let A and B be finite commutative rings, φ:A→B, and X,V,P,S Noetherian schemes. Let f:X→S and p:P→S be separated quasi-compact locally finite-type compactifiable maps, j:V→X a quasi-compact open immersion, and i:V→P a closed immersion, with j≫f=i≫p [open-closed-compact-scalar-coherence]. Write Q_T for derived scalar extension on the ordinary etale module derived category of T, ω_f,R=f_R^!(R_S), ω_p,R=p_R^!(R_S), and u_f,u_p for the specified counit-defined dualizing coefficient maps, R=A,B [def-per-exceptional-coefficient-maps]. Suppose ω_f,A is bounded constructible of finite Tor amplitude. Define b_i,M:Q_V(i_A^!M)→i_B^!(Q_PM) as the transpose of the inverse canonical direct-image scalarMate followed by Q_P of the proper closed counit. Proper finite coefficient extension makes that inverse defined [lem-asd-proper-finite-coefficient-extension]. There exist isomorphisms e_R:j_R^*ω_f,R≅i_R^!ω_p,R, R=A,B, with (openScalarRestriction φ j)_ω≫j_B^*(u_f)≫e_B=Q_V(e_A)≫b_i,ω_p,A≫i_B^!(u_p). No invertibility of b_i,M, u_f or u_p is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "paragraphs 2--3, normalized counit and factorization comparison"
+ },
+ "stmt_deps": [
+  "open-closed-compact-scalar-coherence",
+  "def-per-exceptional-coefficient-maps",
+  "lem-asd-proper-finite-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The lower coefficient square supplies the two composite left-adjoint isomorphisms and their compatibility with the open and closed coefficient maps.",
+   "uses": [
+    "open-closed-compact-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing open-mate and closed-assembly counit formulas, together with counit-mate-transport, construct the representing-object isomorphisms and prove the required transpose equality.",
+   "uses": [
+    "lem-coef-dualizing-open-mate",
+    "lem-coef-dualizing-closed-assembly",
+    "lem-asd-proper-finite-coefficient-extension",
+    "counit-mate-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "counit-mate-transport",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-coef-dualizing-closed-assembly",
+  "lem-coef-dualizing-open-mate",
+  "open-closed-compact-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "The open/closed coefficient square and its adjunction transpose"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient extension commutes with compactly supported direct image compositions and with changing an open followed by a structural map to a closed followed by a structural map",
+   "results": "Eight hits about compactly supported continuous maps, none about etale derived compact supports.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic: naturality of the adjunction Hom equivalence in its target. Used in the proved scalar-map normalization helper.",
+   "date": "2026-10-28",
+   "verdict": "use as tool"
+  },
+  {
+   "tool": "grep",
+   "query": "compactScalarChosenMap|closedOpen_dualizingMate",
+   "results": "No Mathlib matches. Local library search found etaleCompactScalarComposition and refinement coherence, and the separate open-mate and closed-assembly counit calculations. No combined factorization square.",
+   "date": "2026-10-28",
+   "verdict": "combine project declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AffineRestrictionMapIsoAux",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "paragraph 3, sentences identifying the affine restriction with the closed-chart composite via the specified counit",
+   "via": [
+    "affine-restriction-comparison-is-iso",
+    "affine-restriction-map-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClosedOpenDualizingMateNormalization",
+  "file": "lean/Sheaf/SixFunctors/ClosedOpenDualizingMateNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.closedOpen_dualizingMate_normalization",
+  "statement": "theorem closedOpen_dualizingMate_normalization\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X V P S : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian V] [IsNoetherian P] [IsNoetherian S]\n    (f : X ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f]\n    (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    (i : V ⟶ P) [IsClosedImmersion i]\n    (p : P ⟶ S) [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]\n    [HasCompactification p]\n    (h : j ≫ f = i ≫ p)\n    (hω : DerivedCategory.isBoundedConstructible A X\n        (dualizingComplex (ModuleCat.{u + 1} A) f) ∧\n      ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b\n        (dualizingComplex (ModuleCat.{u + 1} A) f)) :\n    ∃ (eA : (derivedRestriction (A := A) j).obj\n          (dualizingComplex (ModuleCat.{u + 1} A) f) ≅\n        (rightDerivedUpperShriek (ModuleCat.{u + 1} A) i).obj\n          (dualizingComplex (ModuleCat.{u + 1} A) p))\n      (eB : (derivedRestriction (A := B) j).obj\n          (dualizingComplex (ModuleCat.{u + 1} B) f) ≅\n        (rightDerivedUpperShriek (ModuleCat.{u + 1} B) i).obj\n          (dualizingComplex (ModuleCat.{u + 1} B) p)),\n      (openScalarRestriction φ j).hom.app (dualizingComplex (ModuleCat.{u + 1} A) f) ≫\n          (derivedRestriction (A := B) j).map\n            (ExceptionalCoefficients.dualizingScalarMap φ f) ≫ eB.hom =\n        (scalarExtension φ V).map eA.hom ≫\n          closedDualizingCoefficientMate φ i (dualizingComplex (ModuleCat.{u + 1} A) p) ≫\n          (rightDerivedUpperShriek (ModuleCat.{u + 1} B) i).map\n            (ExceptionalCoefficients.dualizingScalarMap φ p)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Etale.closedDualizingCoefficientMate",
+   "AlgebraicGeometry.Etale.closedOpen_dualizingMate_normalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

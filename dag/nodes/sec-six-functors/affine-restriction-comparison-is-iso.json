@@ -17,20 +17,45 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the proper/open coefficient comparison to the fixed compactification of X. On every affine chart, the closed-chart descent and affine-space comparison identify the counit-defined mate with a composite of isomorphisms. The affine opens are jointly surjective, so the etale upper-star isomorphism criterion reflects this local invertibility and proves the global comparison is an isomorphism.",
+   "text": "Identify the original finiteDualizingEtaleComparison with the published dualizingScalarMap by naturality of the adjunction Hom equivalence, without changing the coefficient-unit arrow. The dualizing construction supplies the bounded constructible finite-Tor source.",
+   "uses": [
+    "lem-coef-dualizing-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each affine open choose the finite-type closed embedding in affine space. The open/closed mate normalization identifies the restricted coefficient map, up to isomorphisms, with the closed coefficient mate followed by the closed upper-shriek image of the affine-space dualizing map.",
+   "uses": [
+    "lem-coef-dualizing-closed-chart",
+    "dualizing-open-closed-mate-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed descent theorem makes the actual counit-defined closed mate invertible. Apply the finite smooth dualizing scalar theorem to the affine-space structural projection: the finite quotient coefficients are annihilated by l^(m+1), and l is invertible on Spec k by l≠p. Thus both component arrows and their composite are isomorphisms.",
+   "uses": [
+    "lem-pur-finite-smooth-dualizing-scalar",
+    "lem-sf-bc-adic-ring-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the open scalar isomorphism and the object identification on each affine open. The jointly surjective affine-open family reflects isomorphisms of derived etale objects, proving the original comparison invertible.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "paragraphs 1--3"
-   }
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "dualizing-open-closed-mate-normalization",
+  "lem-coef-dualizing-closed-chart",
+  "lem-coef-dualizing-construction",
+  "lem-pur-finite-smooth-dualizing-scalar",
+  "lem-sf-bc-adic-ring-domain"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-  "place": "global affine-chart descent"
+  "place": "paragraphs 1--3; affine-space smooth comparison, closed descent, and the explicit open/closed coefficient square"
  },
  "mathlib_searches": [
   {
@@ -75,9 +100,9 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S7",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261028T020750-L-2545966",
+  "landing": "20261028T055612-L-774086",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

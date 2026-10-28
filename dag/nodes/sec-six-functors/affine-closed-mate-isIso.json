@@ -1,0 +1,116 @@
+{
+ "id": "affine-closed-mate-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the closed affine coefficient mate",
+ "statement": "In the finite dualizing coefficient setting, for l ≠ p and n ≤ m, an affine closed immersion i:Y→A^r over Spec(k) has an invertible counit-defined closed coefficient mate at the m-level dualizing complex.",
+ "stmt_deps": [
+  "lem-coef-dualizing-closed-descent",
+  "def-pur-exceptional-coefficient-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "paragraph 3, closed-chart descent and the ordinary counit-defined mate"
+ },
+ "proof": [
+  {
+   "text": "Apply coefficientDualizingClosedDescent at the affine chart and unpack its witness, including the isomorphism b and its counit equation.",
+   "uses": [
+    "lem-coef-dualizing-closed-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proper direct-image adjunction Hom equivalence to identify closedDualizingCoefficientMate with b by their counit equations, then transport IsIso b.",
+   "uses": [
+    "def-pur-exceptional-coefficient-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-maps",
+  "lem-coef-dualizing-closed-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "paragraph 3, closed-chart descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed affine counit mate isIso from coefficient descent witness",
+   "results": "No exact project theorem; used the named closed descent declaration.",
+   "date": "2026-10-28",
+   "verdict": "use project declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "Exact Mathlib adjunction counit API.",
+   "date": "2026-10-28",
+   "verdict": "use as tool"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientDualizingClosedDescent",
+   "results": "Found the complete closed descent statement and its witness fields.",
+   "date": "2026-10-28",
+   "verdict": "use project declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AffineRestrictionMapIsoAux",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "paragraph 3, closed-chart descent",
+   "via": [
+    "affine-restriction-comparison-is-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AffineRestrictionMapIsoAux",
+  "file": "lean/Sheaf/SixFunctors/AffineRestrictionMapIsoAux.lean",
+  "declaration": "WeilConjectures.closed_mate_isIso_aux",
+  "statement": "theorem closed_mate_isIso_aux (hl : l ≠ D.p) {m n : ℕ} (h : n ≤ m)\n    (r : ℕ) (Y : Scheme.{u}) [IsAffine Y]\n    (aY : Y ⟶ Spec (.of D.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (i : Y ⟶ AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)))\n    [IsClosedImmersion i]\n    (hi : i ≫ (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘\n      Spec (.of D.k)) = aY)\n    [IsNoetherian Y]\n    [IsNoetherian (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)))] :\n    IsIso (Etale.closedDualizingCoefficientMate (finiteDualizingQuotient l E h) i\n      (Etale.dualizingComplex (ModuleCat.{u + 1} (finiteDualizingCoeff l E m))\n        (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.closed_mate_isIso_aux"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T055612-L-774086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
