@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Write F,K,Q,alpha,beta,kappa as in the model-factor definitions. Apply the source-site LeftNormalization at source QP with representative P and identity representative isomorphism. Uniqueness of LeftFormula identifies the chosen chain isomorphism with eY. Invert the equation to obtain kappa_(P[a],I)^(-1) followed by Hom(Q shift(a)^(-1),id) followed by sourceShift.inv = Q(eY.inv) followed by Q shift(-a) followed by kappa_(P,I)^(-1)[-a].",
+   "text": "Specialize leftShift_existsUnique and its LeftNormalization to M=QP, L=P, F=I, and eM=Iso.refl. Prove equality of the chosen chain isomorphism with eY by HomologicalComplex.hom_ext and homComplex_hom_ext, using the two LeftFormula hypotheses on each projection. Unfold the ordinary Hom comparison to identify it with the inverse of podReindexingHomModel. Cancel Q(eY.hom) and sourceShift.hom to obtain the inverse normalized source composite hi.",
    "uses": [
     "def-pod-reindexing-source-model-factors",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "Apply F to this equation. Naturality of F shift(-a) moves F of the shifted kappa inverse to the shifted F(kappa inverse). Shifted functoriality groups it with c.derived and the first part of beta. Comparison.derived_model at (P,I) identifies that grouped composite with localizationFactors(Hom(P,I)) followed by Q(c.chain(P,I)); all kappa and Hom-factor inverses cancel.",
+   "text": "Use Comparison.derived_model at (P,I). Write the unshifted output model as t followed by kX, where t is the derived-Hom map of the localization factors. Its t and kX cancel their inverses in derived_model; F(k.inv) cancels F(k.hom). This gives the unshifted model equation hm: F(k.inv), c.derived, and the output model compose to the localization factor followed by Q(c.chain).",
    "uses": [
     "def-pod-reindexing-coherence-data",
     "lem-pod-reindexing-hom-resolution-model"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "Use shift compatibility of localizationFactors at Hom(P,I), then naturality of that factor along eY.inv. Finally naturality of Q shift(-a) along c.chain(P,I) moves Q shift to the far right. The remaining composite is localizationFactors(Hom(P[a],I)), Q of K(eY.inv) followed by complexShift(-a) followed by c.chain(P,I)[-a], and Q shift(-a) at Hom(KP,KI), as claimed.",
+   "text": "Apply the proved private functor calculation right_model_calculus to hi and hm. Naturality of F commShift moves the shifted inverse model past F commShift. Functoriality of the shift combines the three model arrows and replaces them using hm. NatTrans.shift_app_comm for the localization factor, then its naturality along eY.inv, and finally naturality of Q commShift along c.chain give the claimed normal form. The sourceModelInput and sourceModelOutput definitions identify this abstract calculation with the displayed route.",
    "uses": [
     "def-pod-reindexing-source-model-factors",
     "lem-pod-reindexing-hom-resolution-model"
@@ -48,9 +48,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X7",
+  "group": "G9",
   "date": "2026-10-28",
-  "note": "Explicit specialization and factorization of the representative signed-source argument in the assigned node; the unit route is unchanged."
+  "note": "Implemented the existing three-step normalization plan with projectionwise uniqueness, inverse cancellation, and a proved private categorical shift calculation. No additional obligations or change of unit route."
  },
  "mathlib_searches": [
   {
@@ -139,10 +139,10 @@
   "date": "2026-10-28",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X7",
+  "group": "G9",
   "result": "pass",
-  "landing": "20261028T055830-L-814663",
-  "kind": "interface",
+  "landing": "20261028T072414-L-1943678",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
