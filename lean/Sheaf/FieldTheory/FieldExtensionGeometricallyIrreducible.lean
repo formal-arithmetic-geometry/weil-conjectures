@@ -6,7 +6,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.Algebraic.Defs
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Mathlib.FieldTheory.PrimitiveElement
+import Mathlib.RingTheory.AdjoinRoot
+import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest
+import Sheaf.FieldTheory.RelativeAlgebraicClosurePolynomialQuotientField
 
 /-!
 # Algebraic closure in a field extension implies geometric irreducibility
@@ -20,6 +25,7 @@ Source: Stacks Project, Algebra, Tag 037P (lemma-field-extension-geometrically-i
 universe u
 
 open CategoryTheory
+open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
@@ -49,6 +55,36 @@ theorem geometricallyIrreducible_of_isAlgebraic_mem
     (h : ∀ x : K, IsAlgebraic k x → ∃ y : k, algebraMap k K y = x) :
     GeometricallyIrreducible
       (Spec.map (CommRingCat.ofHom (algebraMap k K))) := by
-  sorry
+  classical
+  rw [geometricallyIrreducible_iff,
+    geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms]
+  have htensor : ∀ (E : Type u) [Field E] [Algebra k E],
+      IrreducibleSpace (Spec (CommRingCat.of (K ⊗[k] E))) := by
+    apply (Algebra.irreducibleSpace_tensorProduct_iff_finite_separable k K).mpr
+    intro E _ _ _ _
+    let pb := Field.powerBasisOfFiniteOfSeparable k E
+    let P := minpoly k pb.gen
+    have hP : P.Monic := minpoly.monic pb.isIntegral_gen
+    have hPirr : Irreducible P := minpoly.irreducible pb.isIntegral_gen
+    let e : AdjoinRoot P ≃ₐ[k] E :=
+      AdjoinRoot.equiv' P pb
+        (by rw [AdjoinRoot.aeval_eq, AdjoinRoot.mk_self]) (minpoly.aeval k pb.gen)
+    let Q := P.map (Algebra.TensorProduct.includeRight : k →ₐ[k] K ⊗[k] k).toRingHom
+    let e₁ := Algebra.TensorProduct.congr (AlgEquiv.refl : K ≃ₐ[k] K) e.symm
+    let e₂ := AdjoinRoot.tensorAlgEquiv (R := k) (T := K) P Q rfl
+    let r := (Algebra.TensorProduct.rid k K K).toRingEquiv
+    have hmap : Q.map r.toRingHom = P.map (algebraMap k K) := by
+      rw [Polynomial.map_map]
+      congr 1
+      ext x
+      simp [r, Algebra.TensorProduct.rid_tmul, Algebra.smul_def]
+    let e₃ := AdjoinRoot.mapRingEquiv r Q (P.map (algebraMap k K))
+      (hmap ▸ Associated.refl _)
+    let equiv := e₁.toRingEquiv.trans (e₂.toRingEquiv.trans e₃)
+    have hirr :=
+      (Polynomial.irreducible_map_and_isField_quotient_of_isAlgebraic_mem h P hP hPirr).2.2.2
+    exact (PrimeSpectrum.homeomorphOfRingEquiv equiv).irreducibleSpace_iff.mpr hirr
+  intro E _ _
+  exact (pullbackSpecIso k K E).hom.homeomorph.irreducibleSpace_iff.mpr (htensor E)
 
 end AlgebraicGeometry
