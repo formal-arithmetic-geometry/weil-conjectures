@@ -21,6 +21,7 @@ corresponding isomorphisms of functors on the homotopy categories.
 - `CategoryTheory.Functor.leftDerivedFunctorNatIso_hom_app_Qh`
 - `Functor.leftDerivedFunctorIsoMapDerivedCategory_trans_mapDerivedCategoryIdIso_hom_app_Qh`
 - `CategoryTheory.Functor.leftDerivedFunctorCompIso_hom_app_Qh`
+- `CategoryTheory.Functor.leftDerivedFunctorCompIso_symm_trans_natIso_hom_app_Qh`
 -/
 
 @[expose] public section
@@ -124,6 +125,24 @@ lemma leftDerivedFunctorCompIso_hom_app_Qh (G : D ⥤ E) [G.Additive]
   congr 2
   rw [← NatTrans.naturality_assoc]
   simp
+
+/-- The isomorphism `LF ⋙ LG ≅ L(F ⋙ G) ≅ LH` induced by `e : F ⋙ G ≅ H` is, modulo the counits,
+`e` on the homotopy categories. -/
+@[reassoc]
+lemma leftDerivedFunctorCompIso_symm_trans_natIso_hom_app_Qh (G : D ⥤ E) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] {H : C ⥤ E} [H.Additive]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : F ⋙ G ≅ H)
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    ((F.leftDerivedFunctorCompIso G).symm ≪≫ (F ⋙ G).leftDerivedFunctorNatIso e).hom.app
+        (DerivedCategory.Qh.obj K) ≫ H.leftDerivedFunctorCounit.app K =
+      G.leftDerivedFunctor.map (F.leftDerivedFunctorCounit.app K) ≫
+        G.leftDerivedFunctorCounit.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
+        DerivedCategory.Qh.map ((mapHomotopyCategoryCompIso e (ComplexShape.up ℤ)).hom.app K) := by
+  rw [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    leftDerivedFunctorNatIso_hom_app_Qh, ← leftDerivedFunctorCompIso_hom_app_Qh_assoc,
+    Iso.inv_hom_id_app_assoc]
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  rfl
 
 end Composition
 
