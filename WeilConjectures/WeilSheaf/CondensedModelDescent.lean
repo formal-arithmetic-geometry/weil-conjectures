@@ -200,7 +200,7 @@ lemma homEquiv_comp_baseChangeAction_of_invariant (s : Y ⟶ Y) (hs : s ≫ q = 
   rfl
 
 /-- An endomorphism `s` of `Y` over `X` is weakly étale when `q : Y ⟶ X` is. -/
-lemma weaklyEtale_of_comp_eq {s : Y ⟶ Y} (hs : s ≫ q = q) : WeaklyEtale s :=
+lemma weaklyEtale_of_comp_eq_self {s : Y ⟶ Y} (hs : s ≫ q = q) : WeaklyEtale s :=
   have : WeaklyEtale (s ≫ q) := by rw [hs]; infer_instance
   WeaklyEtale.of_comp s q
 
@@ -215,9 +215,10 @@ theorem exists_localizationRestriction_map_eq [Surjective q] [QuasiCompact q]
     (ψ : (localizationRestriction Ab.{u + 1} q inferInstance).obj H ⟶
       (localizationRestriction Ab.{u + 1} q inferInstance).obj H')
     (hψ : ∀ i, (localizationRestrictionComp Ab.{u + 1} (ρ i) q
-        (weaklyEtale_of_comp_eq q (hρ i)) inferInstance q (hρ i).symm inferInstance).hom.app H ≫
-        (localizationRestriction Ab.{u + 1} (ρ i) (weaklyEtale_of_comp_eq q (hρ i))).map ψ ≫
-        (localizationRestrictionComp Ab.{u + 1} (ρ i) q (weaklyEtale_of_comp_eq q (hρ i))
+        (weaklyEtale_of_comp_eq_self q (hρ i)) inferInstance q (hρ i).symm
+          inferInstance).hom.app H ≫
+        (localizationRestriction Ab.{u + 1} (ρ i) (weaklyEtale_of_comp_eq_self q (hρ i))).map ψ ≫
+        (localizationRestrictionComp Ab.{u + 1} (ρ i) q (weaklyEtale_of_comp_eq_self q (hρ i))
           inferInstance q (hρ i).symm inferInstance).inv.app H' = ψ) :
     ∃ φ : H ⟶ H', (localizationRestriction Ab.{u + 1} q inferInstance).map φ = ψ := by
   let adj := localizationRestrictionLowerStarAdjunction Ab.{u + 1} q inferInstance
@@ -227,7 +228,7 @@ theorem exists_localizationRestriction_map_eq [Surjective q] [QuasiCompact q]
       (fun i ↦ baseChangeAction q (ρ i) (hρ i)) (generate_singleton_baseChangeProj_mem q)
       (isGalois_baseChangeAction q hρ hgal) (isSheaf_comp_forget H') _
       fun i ↦ homEquiv_comp_baseChangeAction_of_invariant q (ρ i) (hρ i)
-        (weaklyEtale_of_comp_eq q (hρ i)) ψ (hψ i)⟩
+        (weaklyEtale_of_comp_eq_self q (hρ i)) ψ (hψ i)⟩
   refine ⟨ObjectProperty.homMk d, (adj.homEquiv _ _).injective ?_⟩
   rw [Adjunction.homEquiv_unit, adj.unit_naturality]
   exact ObjectProperty.hom_ext _ hd
@@ -261,7 +262,7 @@ theorem exists_upperStar_map_eq_of_isGaloisAction [Surjective q] [QuasiCompact q
     simp
   obtain ⟨φ, hφ⟩ := exists_localizationRestriction_map_eq q hρ hgal
     (e.inv.app H ≫ ψ ≫ e.hom.app H') fun i ↦ by
-      rw [← upperStarComp'_conj Ab.{u + 1} (ρ i) q (weaklyEtale_of_comp_eq q (hρ i))
+      rw [← upperStarComp'_conj Ab.{u + 1} (ρ i) q (weaklyEtale_of_comp_eq_self q (hρ i))
         inferInstance q (hρ i).symm inferInstance ψ]
       rw [reassoc_of% (key i)]
   refine ⟨φ, ?_⟩
