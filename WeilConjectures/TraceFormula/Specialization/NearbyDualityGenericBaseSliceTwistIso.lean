@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TateTwist.UpperStar
-public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesTateTwist
+public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesZeroTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingAutInvariant
@@ -64,8 +63,7 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of
 namespace IsTraitModelOfGenericBase
 
 /-- The twist of the nearby cycles of the generic slice model by `T = ℚ̄_ℓ(0)[2]`:
-`κ : Ψ_{M''}(A ⊗ T) ≅ Ψ_{M''} A ⊗ T` (`NearbyCyclesModel.nearbyCyclesTateTwistIso` for `d = 0`,
-with the canonical pullbacks of `ℚ̄_ℓ(0)`). -/
+`κ : Ψ_{M''}(A ⊗ T) ≅ Ψ_{M''} A ⊗ T` (`NearbyCyclesModel.zeroTwistIso` for the slice model). -/
 noncomputable def genericSliceTwistIso
     (A : Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
@@ -73,13 +71,10 @@ noncomputable def genericSliceTwistIso
       (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj A ⊗
         boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
           0 2 :=
-  (genericSliceModel (traitSliceCoord k') hb).nearbyCyclesTateTwistIso
+  (genericSliceModel (traitSliceCoord k') hb).zeroTwistIso
     ((isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
       h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ))
-    (isDualizable_tateTwistDerived_of_trait ℓ (pullback.snd b (traitSlice (traitSliceCoord k'))) 0)
-    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ)
-    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ)
-    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ) 2 A
+    (pullback.snd b (traitSlice (traitSliceCoord k'))) 2 A
 
 end IsTraitModelOfGenericBase
 

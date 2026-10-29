@@ -137,11 +137,15 @@ theorem exists_genericSliceDualizingMap (D : NearbyDualizingDataOfGenericBase k'
       (traitSliceCoord k') hb h.isTraitModelOver) ▷ _ ≫ v.inv,
     eq_comp_comp_comp_inv_of_comp_hom_eq v huv, fun A hA ↦ ?_, fun ψ hψ hσ ↦ ?_⟩
   · exact (Verdier.isIso_nearbyDualityMap_twist_comp_inv_iff _ (genericSliceTwistIso ℓ h hb)
-      (fun x y ↦ boundedConstructibleTensorMap_natural _ x y) (by sorry) (by sorry) (by sorry)
-      (by sorry) _ u v A).2 hA
+      (fun x y ↦ boundedConstructibleTensorMap_natural _ x y)
+      (fun f ↦ NearbyCyclesModel.zeroTwistIso_hom_naturality _ _ 2 f)
+      (NearbyCyclesModel.zeroTwistIso_tensor _ _ 2)
+      (isInvertible_boundedConstructibleTateTwist_zero ℓ _ 2)
+      (isInvertible_boundedConstructibleTateTwist_zero ℓ _ 2) _ u v A).2 hA
   · obtain ⟨σ, hσ, hψσ⟩ := hσ
     exact Verdier.app_comp_twist_eq (genericSliceTwistIso ℓ h hb)
-      (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ) (by sorry) _
+      (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ)
+      (NearbyCyclesModel.boundedConstructibleAutAction_app_comp_zeroTwistIso_hom _ _ ψ 2) _
       (DK.autAction_comp_θ _ ψ hψ σ hσ hψσ) u v
 
 end IsTraitModelOfGenericBase

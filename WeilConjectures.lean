@@ -14332,6 +14332,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesBraided
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesTateTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesVerdierDual
+public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesZeroTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityAveraging
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
