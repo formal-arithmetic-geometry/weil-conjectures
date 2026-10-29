@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartes
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelWeaklyEtale
+public import WeilConjectures.TraceFormula.Specialization.SliceTrait
 
 /-!
 
@@ -45,7 +46,9 @@ with a weakly étale morphism `S' ⟶ 𝔸¹_S`, through which the generic slice
 `Spec K⟦t⟧ ⟶ 𝔸¹_S` (`K = k'(x)^alg`) factors by a local injection `ι : R ⟶ K⟦t⟧`, together with a
 geometric generic point `a : R ⟶ Ω'` (`Ω'` an algebraic closure of `Frac R`) and a separably
 closed point `b : R ⟶ κ` compatible with those of `S` and of `Spec K⟦t⟧`. The strict
-localization of `𝔸¹_S` at the generic point of its special fibre is one (`AlgebraicGeometry.nonempty_genericSliceTrait`). -/
+localization of `𝔸¹_S` at the generic point of its special fibre is one
+(`AlgebraicGeometry.nonempty_genericSliceTrait`). It is in particular a slice trait over `S`
+(`AlgebraicGeometry.GenericSliceTrait.toSliceTrait`). -/
 structure GenericSliceTrait (k' : Type u) [Field k'] where
   /-- the strictly henselian discrete valuation ring `R` of `S'`. -/
   R : Type u
@@ -64,6 +67,17 @@ structure GenericSliceTrait (k' : Type u) [Field k'] where
   /-- the weakly étale morphism `S' ⟶ 𝔸¹_S`. -/
   toAffineLine : Spec (.of R) ⟶ 𝔸(ULift.{u} (Fin 1); trait k')
   weaklyEtale : WeaklyEtale toAffineLine
+  /-- the structure map `k'⟦t⟧ ⟶ R`. -/
+  φ : PowerSeries k' →+* R
+  spec_φ : Spec.map (CommRingCat.ofHom φ) = toAffineLine ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k'
+  [isLocalHom_φ : IsLocalHom φ]
+  /-- `t` is a uniformizer of `R`. -/
+  maximalIdeal_eq : IsLocalRing.maximalIdeal R =
+    (IsLocalRing.maximalIdeal (PowerSeries k')).map φ
+  /-- the elements of the residue field of `R` algebraic over `k'` come from `k'`. -/
+  mem_range_residueField : letI := (IsLocalRing.ResidueField.map φ).toAlgebra
+    ∀ z : IsLocalRing.ResidueField R, IsAlgebraic (IsLocalRing.ResidueField (PowerSeries k')) z →
+      z ∈ (IsLocalRing.ResidueField.map φ).range
   /-- the local injection `R ⟶ K⟦t⟧` through which the generic slice factors. -/
   ι : R →+* PowerSeries (traitSliceField k')
   isLocalHom_ι : IsLocalHom ι
@@ -101,7 +115,50 @@ structure GenericSliceTrait (k' : Type u) [Field k'] where
 namespace GenericSliceTrait
 
 attribute [instance] commRing isDomain isDiscreteValuationRing isStrictlyHenselianLocalRing field_Ω
-  isAlgClosed field_κ isSepClosed weaklyEtale isLocalHom_ι
+  isAlgClosed field_κ isSepClosed weaklyEtale isLocalHom_ι isLocalHom_φ
+
+variable {k' : Type u} [Field k'] (D : GenericSliceTrait k')
+
+/-- The structure map `k'⟦t⟧ ⟶ R ⟶ Ω'` is `k'⟦t⟧ ⟶ Ω ⟶ Ω'`. -/
+lemma ωS_comp_algebraMap :
+    D.ωS.comp (algebraMap (PowerSeries k') (traitGenericField k')) = D.a.comp D.φ := by
+  have h := D.generic_over
+  rw [← D.spec_φ, traitGenericPoint, ← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+    ← CommRingCat.ofHom_comp] at h
+  exact (congrArg CommRingCat.Hom.hom (Spec.map_injective h)).symm
+
+/-- The structure map `k'⟦t⟧ ⟶ R ⟶ κ` is `k'⟦t⟧ ⟶ k' ⟶ κ`. -/
+lemma κS_comp_constantCoeff :
+    D.κS.comp PowerSeries.constantCoeff = D.b.comp D.φ := by
+  have h := D.closed_over
+  rw [← D.spec_φ, traitClosedPoint, ← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+    ← CommRingCat.ofHom_comp] at h
+  exact (congrArg CommRingCat.Hom.hom (Spec.map_injective h)).symm
+
+/-- A generic slice trait of `𝔸¹_S` is a slice trait over `S = Spec k'⟦t⟧`, with the geometric
+generic point `Spec Ω ⟶ S` and the closed point `Spec k' ⟶ S`. -/
+@[simps]
+noncomputable def toSliceTrait :
+    SliceTrait (algebraMap (PowerSeries k') (traitGenericField k'))
+      (PowerSeries.constantCoeff (R := k')) where
+  R := D.R
+  toAffineLine := D.toAffineLine
+  weaklyEtale := D.weaklyEtale
+  φ := D.φ
+  spec_φ := D.spec_φ
+  maximalIdeal_eq := D.maximalIdeal_eq
+  mem_range_residueField := D.mem_range_residueField
+  Ω := D.Ω
+  a := D.a
+  injective_a := D.injective_a
+  isAlgebraic_a := D.isAlgebraic_a
+  ωS := D.ωS
+  ωS_comp := D.ωS_comp_algebraMap
+  κ := D.κ
+  b := D.b
+  ker_b := D.ker_b
+  κS := D.κS
+  κS_comp := D.κS_comp_constantCoeff
 
 end GenericSliceTrait
 

@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUniversal
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationFunctoriality
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitResidue
 
 /-!
 
@@ -25,8 +26,9 @@ closed point `R ⟶ K`, this is a generic slice trait
 
 The embedding `Ω' ⟶ Ω_K` extends `Frac R ⟶ Frac K⟦t⟧`
 (`AlgebraicGeometry.genericSliceTraitToField`); the embedding `Ω ⟶ Ω'` is the unique one whose
-composite with it is the fixed embedding `Ω ⟶ Ω_K`: the image of `Ω`, algebraic over `Frac k'⟦t⟧`, lies in the algebraically closed image
-of `Ω'` (`AlgebraicGeometry.genericSliceTraitFromField`).
+composite with it is the fixed embedding `Ω ⟶ Ω_K`: the image of `Ω`, algebraic over
+`Frac k'⟦t⟧`, lies in the algebraically closed image of `Ω'`
+(`AlgebraicGeometry.genericSliceTraitFromField`).
 
 -/
 
@@ -198,15 +200,71 @@ lemma algebraMap_comp_genericSliceTraitStructureMap :
   simp only [RingHom.comp_apply] at h1 h2 h3 h4 ⊢
   rw [h1, h2, h3, h4]
 
+/-- The structure map `k'⟦t⟧ ⟶ R` is local. -/
+instance isLocalHom_genericSliceTraitStructureMap :
+    IsLocalHom (genericSliceTraitStructureMap k') := by
+  have : IsLocalHom ((genericSliceRingHom k').comp (genericSliceTraitStructureMap k')) := by
+    rw [genericSliceRingHom_comp_structureMap]
+    refine ⟨fun x hx ↦ ?_⟩
+    rw [PowerSeries.isUnit_iff_constantCoeff, constantCoeff_map_apply] at hx
+    rw [PowerSeries.isUnit_iff_constantCoeff, isUnit_iff_ne_zero]
+    exact fun h ↦ hx.ne_zero (by rw [h, map_zero])
+  exact isLocalHom_of_comp _ (genericSliceRingHom k')
+
+/-- `t` is a uniformizer of the strict localization. -/
+lemma maximalIdeal_strictHenselization_genericSlicePoint_eq_map :
+    IsLocalRing.maximalIdeal (strictHenselization (genericSlicePoint k')) =
+      (IsLocalRing.maximalIdeal (PowerSeries k')).map (genericSliceTraitStructureMap k') := by
+  rw [maximalIdeal_strictHenselization_genericSlicePoint, PowerSeries.maximalIdeal_eq_span_X,
+    Ideal.map_span, Set.image_singleton]
+  rfl
+
+/-- The kernel of the constant coefficient is the maximal ideal of `k'⟦t⟧`. -/
+lemma ker_constantCoeff_powerSeries :
+    RingHom.ker (PowerSeries.constantCoeff (R := k')) =
+      IsLocalRing.maximalIdeal (PowerSeries k') := by
+  ext φ
+  rw [RingHom.mem_ker, PowerSeries.maximalIdeal_eq_span_X, Ideal.mem_span_singleton,
+    PowerSeries.X_dvd_iff]
+
+/-- The elements of the residue field of the strict localization algebraic over `k'` come from
+`k'` (`AlgebraicGeometry.mem_range_algebraMap_residueField_sliceTraitPoint`). -/
+lemma mem_range_residueField_genericSliceTraitStructureMap [IsSepClosed k'] :
+    letI := (IsLocalRing.ResidueField.map (genericSliceTraitStructureMap k')).toAlgebra
+    ∀ z : IsLocalRing.ResidueField (strictHenselization (genericSlicePoint k')),
+      IsAlgebraic (IsLocalRing.ResidueField (PowerSeries k')) z →
+        z ∈ (IsLocalRing.ResidueField.map (genericSliceTraitStructureMap k')).range := by
+  have : IsSepClosed (IsLocalRing.ResidueField (PowerSeries k')) :=
+    .of_ringEquiv (PowerSeries.residueFieldEquiv k')
+  have key : ∀ s, s = sliceTraitPoint (PowerSeries.constantCoeff (R := k')) →
+      ∀ [IsLocalHom (Spec.preimage (strictLocalizationToBase s ≫
+        𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')).hom],
+      letI := (IsLocalRing.ResidueField.map (Spec.preimage (strictLocalizationToBase s ≫
+        𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')).hom).toAlgebra
+      ∀ z : IsLocalRing.ResidueField (strictHenselization s),
+        IsAlgebraic (IsLocalRing.ResidueField (PowerSeries k')) z →
+          z ∈ (IsLocalRing.ResidueField.map (Spec.preimage (strictLocalizationToBase s ≫
+            𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')).hom).range := by
+    rintro s rfl _ z hz
+    exact mem_range_algebraMap_residueField_sliceTraitPoint _ (ker_constantCoeff_powerSeries k')
+      z hz
+  exact @key _ (genericSlicePoint_eq_sliceTraitPoint k')
+    (isLocalHom_genericSliceTraitStructureMap k')
+
 /-- **The strict localization of `𝔸¹_S` at the generic point of its special fibre** as a generic
 slice trait: `R` the strict henselization, `Ω' = (Frac R)^alg`, and `κ = K` with the evaluation
 `R ⟶ K` at the geometric point. -/
-noncomputable def genericSliceTraitOfStrictLocalization : GenericSliceTrait k' where
+noncomputable def genericSliceTraitOfStrictLocalization [IsSepClosed k'] :
+    GenericSliceTrait k' where
   R := strictHenselization (genericSlicePoint k')
   Ω := genericSliceTraitField k'
   κ := traitSliceField k'
   toAffineLine := strictLocalizationToBase (genericSlicePoint k')
   weaklyEtale := weaklyEtale_strictLocalizationToBase_genericSlicePoint k'
+  φ := genericSliceTraitStructureMap k'
+  spec_φ := spec_genericSliceTraitStructureMap k'
+  maximalIdeal_eq := maximalIdeal_strictHenselization_genericSlicePoint_eq_map k'
+  mem_range_residueField := mem_range_residueField_genericSliceTraitStructureMap k'
   ι := genericSliceRingHom k'
   isLocalHom_ι := inferInstance
   injective_ι := injective_genericSliceRingHom k'
@@ -237,7 +295,7 @@ noncomputable def genericSliceTraitOfStrictLocalization : GenericSliceTrait k' w
 
 /-- **The strict localization of `𝔸¹_S` at the generic point of its special fibre is a generic
 slice trait** (EGA IV₄, 18.8; SGA 4½, [Th. finitude], 3.3). -/
-theorem nonempty_genericSliceTrait : Nonempty (GenericSliceTrait k') :=
+theorem nonempty_genericSliceTrait [IsSepClosed k'] : Nonempty (GenericSliceTrait k') :=
   ⟨genericSliceTraitOfStrictLocalization k'⟩
 
 end AlgebraicGeometry
