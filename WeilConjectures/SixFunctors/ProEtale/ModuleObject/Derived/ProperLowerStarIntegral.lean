@@ -54,7 +54,7 @@ variable {C : Type*} [Category* C]
 
 /-- A central element `z` acts on the homology of a homological complex `K` through the degreewise
 action `z.mapHomologicalComplex`, as `z` itself. -/
-lemma homologyMap_mapHomologicalComplex_app [Preadditive C] [HasZeroObject C]
+private lemma homologyMap_mapHomologicalComplex_app [Preadditive C] [HasZeroObject C]
     [CategoryWithHomology C] (z : CatCenter C) {ι : Type*} {c : ComplexShape ι}
     (K : HomologicalComplex C c) (i : ι) :
     HomologicalComplex.homologyMap ((z.mapHomologicalComplex c).app K) i =
@@ -67,7 +67,7 @@ lemma homologyMap_mapHomologicalComplex_app [Preadditive C] [HasZeroObject C]
 
 /-- The central element of the derived category induced by a central element `z` of `C` acts on
 the cohomology objects `Hⁿ(K)` as `z`. -/
-lemma homologyFunctor_map_derivedCategory_app [Abelian C] [HasDerivedCategory C]
+private lemma homologyFunctor_map_derivedCategory_app [Abelian C] [HasDerivedCategory C]
     (z : CatCenter C) (n : ℤ) (K : DerivedCategory C) :
     (DerivedCategory.homologyFunctor C n).map (z.derivedCategory.app K) =
       z.app ((DerivedCategory.homologyFunctor C n).obj K) := by
@@ -180,7 +180,7 @@ theorem isLE_of_isLE_derivedReduction {X : Scheme.{u}} [IsNoetherian X]
     ((DerivedCategory.homologyFunctor _ q).obj K)
   have h₀ : Mod.extendUnit (padicIntegersToResidueField X ℓ E)
       ((DerivedCategory.homologyFunctor _ q).obj K) = 0 := by
-    rw [← cancel_epi (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)
+    rw [← cancel_epi (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E.1 ϖ)
       ((DerivedCategory.homologyFunctor _ q).obj K)), comp_zero]
     exact Mod.regularEndSMul_comp_extendUnit (padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ)) _
