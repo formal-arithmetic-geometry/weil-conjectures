@@ -47,7 +47,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 section Square
 
@@ -66,27 +67,27 @@ comparisons are invertible on bounded below complexes
 theorem nonempty_arrowIso_derivedExtendScalars_residueField_map_baseChangeMap
     (sq : CommSq g' f' f g)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℤ) [K.IsGE n] :
     Nonempty (Arrow.mk ((Mod.extendScalars (coefficientMap
-        (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y')).leftDerivedFunctor.map
-        ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq).app K)) ≅
-      Arrow.mk ((baseChangeMap (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
+        (Profinite.padicIntegersRingObjToResidueField ℓ E) Y')).leftDerivedFunctor.map
+        ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq).app K)) ≅
+      Arrow.mk ((baseChangeMap (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E))
         sq).app ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj K))) := by
+          (Profinite.padicIntegersRingObjToResidueField ℓ E) X)).leftDerivedFunctor.obj K))) := by
   have h₁ : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).app K) :=
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) f).app K) :=
     isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E f K n
-  have : ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K).IsGE n :=
+  have : ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K).IsGE n :=
     isGE_leftDerivedUpperStar_obj _ g' K n
   have h₂ : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f').app
-      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K)) :=
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) f').app
+      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K)) :=
     isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E f'
-      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K) n
+      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K) n
   have k₂ := nonempty_arrowIso_map_exchangeRight_derivedExtendScalars_of_nonFlat'
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+    (Profinite.padicIntegersRingObjToResidueField ℓ E)
     (derivedUpperStarExtendScalarsIsoCompCoherence
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)) sq K h₁ h₂
+      (Profinite.padicIntegersRingObjToResidueField ℓ E)) sq K h₁ h₂
   unfold baseChangeMap
   transport_mod_proofs k₂
 
@@ -102,21 +103,21 @@ variable {X T : Scheme.{u}}
 `ProEtale.boundedConstructible_derivedReduction_obj`, which needs no noetherian hypothesis. -/
 theorem boundedConstructible_derivedReduction_obj_of_derivedExtendScalars
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
     (hL : boundedConstructible (residueFieldRingObj X ℓ E)
       ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K)) :
     ProEtale.DerivedCategory.boundedConstructible
       (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X
       ((derivedReduction X ℓ E).obj K) := by
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
-    inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
+    inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E)))
   rw [← DerivedCategory.boundedConstructibleIntrinsic_eq]
   refine ⟨(residueFieldModuleSheaf X ℓ E).bounded_mapDerivedCategory_obj hL.1, fun n ↦ ?_⟩
   refine isConstructible_of_iso
     (((residueFieldModuleSheaf X ℓ E).mapDerivedCategoryHomologyFunctorIso n).app _) ?_
   exact isConstructible_of_iso
     (((residueFieldModuleSheafIsoOfSection X ℓ E (residueFieldSectionFac X ℓ E)).app _).symm)
-    (isConstructible_finiteCoefficientModEquivalence_functor_obj (integersResidueField ℓ E.1)
+    (isConstructible_finiteCoefficientModEquivalence_functor_obj (integersResidueField ℓ E)
       (hL.2 n))
 
 /-- For a morphism `ε : X ⟶ T` to a noetherian scheme and a bounded constructible `𝒪_E`-complex
@@ -128,13 +129,13 @@ complexes. -/
 theorem boundedConstructible_derivedExtendScalars_residueField_leftDerivedUpperStar_obj
     [IsNoetherian T] (ε : X ⟶ T)
     (K₀ : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T)))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) T)))
     (hK₀ : boundedConstructible _ K₀) :
     boundedConstructible (residueFieldRingObj X ℓ E)
       ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj
-        ((L((ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)) :=
+        ((L((ε)^*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K₀)) :=
   (boundedConstructible _).prop_of_iso
-    ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+    ((derivedUpperStarExtendScalarsIso (Profinite.padicIntegersRingObjToResidueField ℓ E)
       ε).app K₀).symm
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ ε _
       (boundedConstructible_derivedExtendScalars_residueField T ℓ E K₀ hK₀))
@@ -153,11 +154,11 @@ finite coefficients (`ProEtale.isIso_derivedBaseChangeMap_app_of_smooth`). -/
 theorem isIso_derivedExtendScalars_residueField_map_baseChangeMap_app_of_smooth [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p) (hℓ : IsUnit (ℓ : Γ(S, ⊤)))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W))) (n : ℤ) [K.IsGE n]
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W))) (n : ℤ) [K.IsGE n]
     (hK : boundedConstructible (residueFieldRingObj W ℓ E)
       ((Mod.extendScalars (padicIntegersToResidueField W ℓ E)).leftDerivedFunctor.obj K)) :
     IsIso ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.map
-      ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq).app K)) := by
+      ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq).app K)) := by
   unfold baseChangeMap
   apply isIso_leftDerivedFunctor_map_of_isIso_derivedReduction_map
   have α := (nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E sq.toCommSq K n).some
@@ -168,6 +169,7 @@ theorem isIso_derivedExtendScalars_residueField_map_baseChangeMap_app_of_smooth 
   simp only [MorphismProperty.isomorphisms.iff] at key
   exact_mod_proofs key (by exact_mod_proofs hfin)
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- **`ϖ` acts invertibly on the cone of a morphism with invertible reduction**: in a distinguished
 triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of `𝒪_{E,X}`-complexes whose first morphism becomes invertible
 after `- ⊗ᴸ 𝔽_E`, the multiplication by a uniformizer `ϖ` is invertible on `K₃`: the triangulated
@@ -175,12 +177,12 @@ functor `- ⊗ᴸ 𝔽_E` kills `K₃`, and the reduction triangle `K₃ --ϖ-->
 distinguished. -/
 theorem isIso_derivedRegularEndSMul_obj₃_of_isIso_derivedExtendScalars_map
     {T : Triangle (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))} (hT : T ∈ distTriang _)
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))} (hT : T ∈ distTriang _)
     (hT₁ : IsIso ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.map
       T.mor₁))
-    (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ}) :
-    IsIso ((Mod.derivedRegularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)).app T.obj₃) :=
+    (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
+    IsIso ((Mod.derivedRegularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)).app T.obj₃) :=
   Mod.isIso_derivedRegularEndSMul_of_isZero_derivedExtendScalars
     (padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ))
@@ -196,16 +198,16 @@ a uniformizer `ϖ` is invertible on the cone `C` of the integral base change map
 theorem isIso_derivedRegularEndSMul_cone_baseChangeMap_app_of_smooth [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p) (hℓ : IsUnit (ℓ : Γ(S, ⊤)))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) W))) (n : ℤ) [K.IsGE n]
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) W))) (n : ℤ) [K.IsGE n]
     (hK : boundedConstructible (residueFieldRingObj W ℓ E)
       ((Mod.extendScalars (padicIntegersToResidueField W ℓ E)).leftDerivedFunctor.obj K))
     {C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))} {v : _ ⟶ C} {δ : C ⟶ _}
-    (hT : Triangle.mk ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E.1) sq.toCommSq).app K)
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))} {v : _ ⟶ C} {δ : C ⟶ _}
+    (hT : Triangle.mk ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq.toCommSq).app K)
       v δ ∈ distTriang _)
-    (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ}) :
-    IsIso ((Mod.derivedRegularEndSMul (padicIntegersRegularEnd X ℓ E ϖ)).app C) :=
+    (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
+    IsIso ((Mod.derivedRegularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)).app C) :=
   isIso_derivedRegularEndSMul_obj₃_of_isIso_derivedExtendScalars_map ℓ E hT
     (isIso_derivedExtendScalars_residueField_map_baseChangeMap_app_of_smooth ℓ E sq hℓ K n hK)
     ϖ hϖ
