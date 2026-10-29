@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Finiteness.Cardinality
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Completion
 public import Mathlib.Topology.LocallyConstant.Basic
+public import WeilConjectures.Algebra.Homology.MinimalMatrixComplex
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 
 /-!
@@ -495,22 +496,6 @@ theorem IsAdicComplete.of_linearEquiv [IsAdicComplete I M] (e : M ≃ₗ[R] N) :
       simpa [hmap'] using (hf hmn).map (e.symm : N →ₗ[R] M)
     refine ⟨e y, fun n ↦ ?_⟩
     simpa [hmap n e] using (hy n).map (e : M →ₗ[R] N)
-
-/-- For a finite index type, `x ∈ I • ⊤` in `ι → R` iff all coordinates of `x` lie in `I`. -/
-theorem Ideal.mem_smul_top_pi_iff {ι : Type*} [Finite ι] (J : Ideal R) (x : ι → R) :
-    x ∈ (J • ⊤ : Submodule R (ι → R)) ↔ ∀ i, x i ∈ J := by
-  classical
-  have := Fintype.ofFinite ι
-  refine ⟨fun hx ↦ ?_, fun hx ↦ ?_⟩
-  · refine Submodule.smul_induction_on hx (fun r hr m _ i ↦ ?_) fun x y hx hy i ↦ ?_
-    · rw [Pi.smul_apply, smul_eq_mul]
-      exact J.mul_mem_right _ hr
-    · rw [Pi.add_apply]
-      exact J.add_mem (hx i) (hy i)
-  · rw [← Finset.univ_sum_single x]
-    refine Submodule.sum_mem _ fun i _ ↦ ?_
-    rw [← mul_one (x i), ← smul_eq_mul, Pi.single_smul']
-    exact Submodule.smul_mem_smul (hx i) Submodule.mem_top
 
 /-- `J • R = J` for an ideal `J` of `R`. -/
 theorem Ideal.smul_top_self (J : Ideal R) : (J • ⊤ : Submodule R R) = J := by

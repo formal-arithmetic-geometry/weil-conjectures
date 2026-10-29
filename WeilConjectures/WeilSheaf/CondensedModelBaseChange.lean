@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import
@@ -71,7 +72,7 @@ the base change
   `D(geometricFiberWeil) ⋙ Rf̄_! ≅ Rf_!(c) ⋙ D(geometricFiberWeil)`.
 
 The derived statement uses
-`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfIso`:
+`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso`:
 `R(T ⋙ mapOfNatIso e) ≅ D(T) ⋙ R(mapOfNatIso e)` for an exact functor `T` to algebras whose
 underlying functor preserves K-injective complexes (here `p^*`, right adjoint to the exact
 extension by zero along the weakly étale `p`).
@@ -178,12 +179,6 @@ namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k] {X₀ Y₀ : Scheme.{u}} {s : X₀ ⟶ Spec (.of k)}
   {t : Y₀ ⟶ Spec (.of k)}
-
-/-- The base change `φ × 𝟙` to `k̄` only depends on the morphism `φ`. -/
-lemma Scheme.Hom.geometricFiberMap_congr {φ ψ : X₀ ⟶ Y₀} (e : φ = ψ) (h : φ ≫ t = s)
-    (h' : ψ ≫ t = s) : Scheme.Hom.geometricFiberMap φ h = Scheme.Hom.geometricFiberMap ψ h' := by
-  subst e
-  rfl
 
 namespace Compactification
 
@@ -295,7 +290,7 @@ lemma isRightDerivedFunctor_mapDerivedCategory_comp_rightDerivedFunctor_mapOfNat
 /-- **Right derived functors of transports precomposed with exact functors to algebras**:
 `R(T ⋙ mapOfNatIso e) ≅ D(T) ⋙ R(mapOfNatIso e)` for an exact `T : A ⥤ IsoAlgebra F` whose
 underlying functor preserves K-injective complexes. -/
-noncomputable def rightDerivedFunctorCompMapOfNatIsoIsoOfIso (α : T ⋙ forget F ≅ T₀) :
+noncomputable def rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso (α : T ⋙ forget F ≅ T₀) :
     (T ⋙ mapOfNatIso e).rightDerivedFunctor ≅
       T.mapDerivedCategory ⋙ (mapOfNatIso e).rightDerivedFunctor :=
   have := isRightDerivedFunctor_mapDerivedCategory_comp_rightDerivedFunctor_mapOfNatIso_of_iso
@@ -635,7 +630,7 @@ noncomputable def geometricFiberWeilRightDerivedLowerStarIso
     (geometricFiberWeilLowerStar Λ s).mapDerivedCategory ⋙
         (geometricFiberMapWeilLowerStar Λ φ h).rightDerivedFunctor ≅
       (φ)_*⟦Λ⟧.rightDerivedFunctor ⋙ (geometricFiberWeilLowerStar Λ t).mapDerivedCategory :=
-  (Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfIso
+  (Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfForgetIso
       (lowerStarGeometricFiberMapCompFrobeniusIso Λ φ h) (geometricFiberWeilLowerStar Λ s)
       (T₀ := (s.geometricFiberProj)^*⟦Λ⟧) (Iso.refl _)).symm ≪≫
     Functor.rightDerivedFunctorNatIso (asIso (lowerStarGeometricFiberWeilBaseChange hc)).symm ≪≫
