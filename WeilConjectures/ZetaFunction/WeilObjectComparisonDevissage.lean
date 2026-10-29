@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
+public import WeilConjectures.WeilSheaf.TraceTriangleAdditivity
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 
 /-!
@@ -151,34 +152,6 @@ theorem stubA_neg (A : WeilBoundedConstructible l e.hom) :
               (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj A) :=
   sorry
 
-theorem stubB_add (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _) (m : ℕ) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        ((T.obj₂.compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-          ((T.obj₁.compactlySupportedCohomology i).frobeniusEnd ^ m) +
-        ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-          ((T.obj₃.compactlySupportedCohomology i).frobeniusEnd ^ m) :=
-  sorry
-
-theorem stubB_tf (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    T.obj₂.traceFunction n y = T.obj₁.traceFunction n y + T.obj₃.traceFunction n y :=
-  sorry
-
-theorem stubB_shift (K : WeilComplex k₀ l X) (a : ℤ) (m : ℕ) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        (((K⟦a⟧).compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      (a.negOnePow : ℤ) • ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) :=
-  sorry
-
-theorem stubB_congr {K L : WeilComplex k₀ l X} (e : K ≅ L) (m : ℕ) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) =
-      ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        ((L.compactlySupportedCohomology i).frobeniusEnd ^ m) :=
-  sorry
-
 end Stubs
 
 variable {ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l}
@@ -189,7 +162,7 @@ namespace HasWeilObjectComparison
 theorem of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (hK : HasWeilObjectComparison ι K) :
     HasWeilObjectComparison ι L := by
   obtain ⟨K', hglob, hloc⟩ := hK
-  exact ⟨K', fun n ↦ (hglob n).trans (stubB_congr e (n + 1)),
+  exact ⟨K', fun n ↦ (hglob n).trans (finsum_trace_compactlySupportedCohomology_congr e (n + 1)),
     fun n y ↦ (hloc n y).trans (traceFunction_eq_of_iso e (n + 1) y)⟩
 
 /-- The comparison for `K` gives the comparison for `K[1]`... for every shift `K[a]`: the traces
@@ -200,11 +173,11 @@ theorem shift {K : WeilComplex k₀ l X} (hK : HasWeilObjectComparison ι K) (a 
   obtain ⟨K', hglob, hloc⟩ := hK
   rcases Int.even_or_odd a with ha | ha
   · refine ⟨K', fun n ↦ ?_, fun n y ↦ ?_⟩
-    · rw [stubB_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hglob]
+    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hglob]
     · rw [traceFunction_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hloc]
   · obtain ⟨C, hCloc, hCglob⟩ := stubA_neg (Iso.refl (overSpec (k₀ := k₀) X)) K'
     refine ⟨C, fun n ↦ ?_, fun n y ↦ ?_⟩
-    · rw [stubB_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one, neg_smul,
+    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one, neg_smul,
         one_smul, hCglob, map_neg, hglob]
     · rw [traceFunction_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one,
         neg_smul, one_smul, hCloc, map_neg, hloc]
@@ -219,8 +192,8 @@ theorem of_distTriang (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTria
   obtain ⟨K₃, hglob₃, hloc₃⟩ := h₃
   obtain ⟨B, hBloc, hBglob⟩ := stubA_add (Iso.refl (overSpec (k₀ := k₀) X)) K₁ K₃
   refine ⟨B, fun n ↦ ?_, fun n y ↦ ?_⟩
-  · rw [stubB_add T hT, hBglob, map_add, hglob₁, hglob₃]
-  · rw [stubB_tf T hT, hBloc, map_add, hloc₁, hloc₃]
+  · rw [finsum_trace_compactlySupportedCohomology_eq_add_of_distTriang T hT, hBglob, map_add, hglob₁, hglob₃]
+  · rw [traceFunction_eq_add_of_distTriang T hT, hBloc, map_add, hloc₁, hloc₃]
 
 end HasWeilObjectComparison
 
