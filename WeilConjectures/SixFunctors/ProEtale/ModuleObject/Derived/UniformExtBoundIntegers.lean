@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatFinite
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.BoundedHom
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
@@ -32,8 +32,7 @@ The proof avoids derived limits:
   `Ext^q_{𝒪_E}(M, B ⊗ᴸ 𝔽_E) = Ext^q_{𝔽_E}(M ⊗ᴸ 𝔽_E, B ⊗ᴸ 𝔽_E)`. The source is a constructible
   complex of `𝔽_E`-sheaves and the target has constructible cohomology sheaves (of étale origin) in
   degrees `[-1, 0]`, so these groups vanish for `q` large, uniformly in `B`
-  (`ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor`, which uses
-  `cd_ℓ(k) < ∞`).
+  (`exists_forall_eq_zero_of_constructibleFiniteTor_of_generation`, which uses `cd_ℓ(k) < ∞`).
 * *Inverting `ϖ`.* Hence, for `q` large, multiplication by `ϖ` is bijective on
   `V = Hom(M, B[q])`.
 * *Completeness.* On the countable power of `B`, `(xₙ) ↦ (xₙ - ϖ x_{n+1})` is an isomorphism
@@ -208,12 +207,14 @@ lemma hasInvertibleExponent_residueFieldCoeff {X : Scheme.{u}} (aX : X ⟶ Spec 
 set_option maxHeartbeats 400000 in
 -- elaborating the vanishing statement of `exists_forall_eq_zero_of_constructibleFiniteTor` for the
 -- derived reduction unfolds the derived categories of module objects
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- **Torsion targets**: for a separated finite-type scheme `X` over a field `k` with
 `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, and a bounded constructible `𝒪_E`-complex `P`, there is `d` with
 `Hom(P, (K ⊗ᴸ 𝔽_E)[q]) = 0` for `q ≥ d` and every bounded constructible `K` concentrated in
 degrees `≤ 0`, where `K ⊗ᴸ 𝔽_E` is regarded as an `𝒪_E`-complex. By adjunction these are the
 morphisms `P ⊗ᴸ 𝔽_E ⟶ (K ⊗ᴸ 𝔽_E)[q]` of complexes of `𝔽_E`-sheaves, which vanish for `q` large
-uniformly in `K` (`ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor`). -/
+uniformly in `K`
+(`ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor_of_generation`). -/
 theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [QuasiSeparated aX]
     [IsNoetherian X]
@@ -229,9 +230,8 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
         f = 0 := by
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
     inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
-  have := hasInvertibleExponent_residueFieldCoeff ℓ E aX
   have hC := constructibleFiniteTor_derivedReduction_obj P hP
-  obtain ⟨N, hN⟩ := DerivedCategory.uniformExtBoundCompat_constructibleFiniteTor
+  obtain ⟨N, hN⟩ := DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor_of_generation
     (Λ := ResidueFieldCoeff.{u} ℓ E) hk aX hC
   refine ⟨-N, fun K hK hK₀ q hq f ↦ ?_⟩
   let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (padicIntegersToResidueField X ℓ E)
@@ -248,6 +248,7 @@ theorem exists_forall_eq_zero_shift_comap_derivedExtendScalars_residueField {X :
   exact Functor.eq_zero_of_forall_map_eq_zero_shift
     (residueFieldModuleSheaf X ℓ E).mapDerivedCategory (fun g ↦ hN _ hL hLN g) g
 
+omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-lem-int-ext` (2): for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated
 finite-type `k`-scheme `X`, with `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, every constructible
 `𝒪_{E,X}`-module `M` admits `d` with `Ext^q(M, B) = 0` for `q > d` and all constructible `B`. -/

@@ -36,22 +36,12 @@ extensions `E` of `ℚ_ℓ` are reduced to subextensions of `ℚ̄_ℓ` by choos
 (`ProEtale.hasUniformConstructibleExtBound_continuousMapRingObj_of_finiteIntermediateField`,
 `ProEtale.hasUniformConstructibleExtBound_padicIntegersRingObj_of_finiteIntermediateField`).
 
-## Compatibilities from other sections
+## Compatibility from another section
 
-The bounds use the following statements of other blueprint nodes, stated separately as the
-compatibility lemmas of
-the files `...Derived.UniformExtBoundCompat*`:
-
-* `AlgebraicGeometry.Etale.smoothGenericDirectImage` (blueprint
-  `lem-asd-smooth-generic-direct-image`, for `thm-fin-deligne-generic-open`), through the
-  finite-coefficient bound
-  `ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor`;
-* `ProEtale.isLocalization_boundedConstructibleExtendScalars` (blueprint
-  `sk-thm-sfb-rationalization-comparison`), for the integral models of constructible `E`-sheaves;
-* `ProEtale.constructibleCocone_essSurjObj`, `ProEtale.constructibleCocone_homSurj`,
-  `ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj` and
-  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj` (blueprint
-  `sk-thm-sfb-qlbar-two-colimit`), for `ℚ̄_ℓ`.
+The bounds for `E` and `ℚ̄_ℓ` use the integral models of constructible `E`-sheaves, the
+compatibility lemma `ProEtale.uniformExtBoundCompat_integralModel` (blueprint
+`sk-thm-sfb-rationalization-comparison`, `...Derived.UniformExtBoundCompatIntegralModel`). The
+bound for `𝒪_E` uses no input from other sections.
 -/
 
 @[expose] public section
@@ -66,9 +56,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 
-omit [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `sk-lem-base-field-cd`: a field `k` which is finite or separably closed has finite
 étale cohomological dimension for sheaves of modules over the residue field `𝔽_E` of `𝒪_E`. -/
 lemma hasFiniteCohomologicalDimension_residueFieldCoeff (E : FiniteIntermediateField ℓ)
