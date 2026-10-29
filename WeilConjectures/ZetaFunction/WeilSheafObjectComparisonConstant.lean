@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRankCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedSection
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonSpec
 
@@ -71,13 +72,6 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
-
-/-- The global section of the zero morphism `ℚ̄_ℓ ⟶ M` is zero. -/
-lemma globalSectionOfModHom_zero {Z : Scheme.{u}} (M : AdicSheaf l Z) :
-    globalSectionOfModHom (0 : AdicSheaf.unit l Z ⟶ M) = 0 := by
-  rw [globalSectionOfModHom_eq]
-  erw [Mod.zero_hom, Functor.map_zero]
-  rfl
 
 /-- On a connected scheme `Z`, the global sections of `ℚ̄_ℓʳ` form an `r`-dimensional space. -/
 theorem finrank_globalSections_biproduct_unit_of_connectedSpace (Z : Scheme.{u})

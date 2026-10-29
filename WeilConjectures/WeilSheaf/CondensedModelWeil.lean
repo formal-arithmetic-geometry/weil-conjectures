@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.StrictWeilComplex
 
 /-!
 # Weil sheaves in the condensed model
@@ -76,25 +77,6 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
   {F : C ⥤ C} {G : D ⥤ D} {L : C ⥤ D} (e : L ⋙ G ≅ F ⋙ L)
-
-/-- The transport along a faithful functor is faithful. -/
-instance faithful_mapOfNatIso [L.Faithful] : (mapOfNatIso e).Faithful where
-  map_injective {_ _} _ _ h := ObjectProperty.hom_ext _ (Algebra.Hom.ext
-    (L.map_injective (congrArg (fun φ ↦ φ.hom.f) h)))
-
-/-- The transport along a fully faithful functor is full: the preimage of a morphism of
-algebras is compatible with the structure morphisms since its image is. -/
-instance full_mapOfNatIso [L.Full] [L.Faithful] : (mapOfNatIso e).Full where
-  map_surjective {K K'} φ := by
-    refine ⟨ObjectProperty.homMk
-      { f := L.preimage φ.hom.f
-        h := L.map_injective ?_ }, ObjectProperty.hom_ext _ (Algebra.Hom.ext (L.map_preimage _))⟩
-    have h := φ.hom.h
-    have hn := e.hom.naturality (L.preimage φ.hom.f)
-    simp only [Functor.comp_map, Functor.map_preimage, ι_obj] at hn
-    dsimp [mapOfNatIso, Algebra.mapOfNatTrans] at h
-    rw [Functor.map_comp, Functor.map_comp, Functor.map_preimage,
-      ← cancel_epi (e.hom.app K.carrier), ← reassoc_of% hn, h, Category.assoc]
 
 /-- The transport along an essentially surjective fully faithful functor is essentially
 surjective: an algebra `Φ : G b ≅ b` is the transport of the algebra on a preimage `a` of `b`
