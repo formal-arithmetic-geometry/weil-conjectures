@@ -48,8 +48,8 @@ end CategoryTheory.Adjunction
 namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C] [MonoidalPreadditive C]
-  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
+  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight X)] [BraidedCategory C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] {φ : R ⟶ S} [IsMonHom φ] {n : ℕ}
   {c : ℕ → (R ⟶ S)}
 
