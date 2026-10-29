@@ -53,14 +53,15 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The constant global section `c` of `𝔽_{E,X}` defining `ProEtale.residueFieldModuleSheaf` is
 the image under `p_X^*` of the constant global section `c` of the condensed ring `𝔽̲_E`. -/
 def ResidueFieldSectionFac : Prop :=
   ∀ c : ResidueFieldCoeff.{u} ℓ E, (residueFieldSectionRingHom X ℓ E c).hom =
     ε (upperStarFromPoint X) ≫ (upperStarFromPoint X).map
-      (Profinite.continuousMapConstRingHom.{u} (integersResidueField ℓ E.1) (ULift.down c)).hom
+      (Profinite.continuousMapConstRingHom.{u} (integersResidueField ℓ E) (ULift.down c)).hom
 
 variable {X ℓ E} in
 /-- Under `ProEtale.ResidueFieldSectionFac`, the action of `c` on `residueFieldModuleSheaf X ℓ E`
@@ -72,11 +73,11 @@ lemma sectionActRingHom_residueFieldSectionRingHom_of_fac (h : ResidueFieldSecti
       (sheafCompose (ProEt.topology X)
         (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map
         (Sheaf.smulEnd
-          ((finiteCoefficientModEquivalence X (integersResidueField ℓ E.1)).functor.obj M) c) := by
+          ((finiteCoefficientModEquivalence X (integersResidueField ℓ E)).functor.obj M) c) := by
   change (_ : M.X ⟶ M.X) = _
   ext U y
   refine Eq.trans ?_
-    (finiteCoefficientModEquivalence_smul X (integersResidueField ℓ E.1) M U (ULift.down c) y).symm
+    (finiteCoefficientModEquivalence_smul X (integersResidueField ℓ E) M U (ULift.down c) y).symm
   rw [Mod.sectionActRingHom_apply, h c]
   rfl
 
@@ -85,10 +86,10 @@ equivalence `finiteCoefficientModEquivalence` between module objects over `𝔽_
 of `𝔽_E`-modules. -/
 noncomputable def residueFieldModuleSheafIsoOfSection (h : ResidueFieldSectionFac X ℓ E) :
     residueFieldModuleSheaf X ℓ E ≅
-      (finiteCoefficientModEquivalence X (integersResidueField ℓ E.1)).functor :=
+      (finiteCoefficientModEquivalence X (integersResidueField ℓ E)).functor :=
   Sheaf.isoOfSheafComposeForget₂ (Λ := ResidueFieldCoeff.{u} ℓ E)
     (P := residueFieldModuleSheaf X ℓ E)
-    (Q := (finiteCoefficientModEquivalence X (integersResidueField ℓ E.1)).functor)
+    (Q := (finiteCoefficientModEquivalence X (integersResidueField ℓ E)).functor)
     (residueFieldModuleSheafCompForgetIso X) fun M c ↦ by
     rw [sheafCompose_map_smulEnd_comp_residueFieldModuleSheafCompForgetIso_hom_app,
       sectionActRingHom_residueFieldSectionRingHom_of_fac h]

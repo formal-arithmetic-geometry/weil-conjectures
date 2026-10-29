@@ -39,7 +39,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 section Aux
 
@@ -47,8 +48,9 @@ attribute [local instance high] isTopologicalRing_residueField
 
 set_option hygiene false in
 local notation "residueFieldCommRingObj" =>
-  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1) _ CommRing.toRing _
+  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E) _ CommRing.toRing _
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- On underlying abelian sheaves, `residueFieldModuleSheafUpperStarIsoAux` is the composite of
 the identifications of the underlying sheaves of residue field module sheaves, of pullbacks of
 module objects and of pullbacks of sheaves of modules. -/
@@ -68,6 +70,7 @@ lemma sheafCompose_map_residueFieldModuleSheafUpperStarIsoAux_hom_app' {A B : Sc
   refine (sheafCompose_map_residueFieldModuleSheafUpperStarIsoAux_hom_app ℓ E a M).trans ?_
   simp [residueFieldModuleSheafUpperStarForgetIso]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- `residueFieldModuleSheafUpperStarIsoAux` is compatible with the composition isomorphisms. -/
 theorem residueFieldModuleSheafUpperStarIsoAux_compCoherence {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ Z) :
@@ -93,6 +96,7 @@ theorem residueFieldModuleSheafUpperStarIsoAux_compCoherence {X Y Z : Scheme.{u}
 
 end Aux
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **The isomorphisms `residueFieldModuleSheafUpperStarIso` are compatible with the composition
 isomorphisms** of the pullbacks of module objects over `𝔽_E` and of pro-étale sheaves of
 `𝔽_E`-modules. -/
@@ -100,7 +104,7 @@ theorem residueFieldModuleSheafUpperStarIso_compCoherence {X Y Z : Scheme.{u}} (
     (g : Y ⟶ Z) :
     CompCoherence
       (CondensedRing.upperStarComp
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f g)
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f g)
       (ProEtale.upperStarComp (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f g)
       (residueFieldModuleSheafUpperStarIso ℓ E g) (residueFieldModuleSheafUpperStarIso ℓ E f)
       (residueFieldModuleSheafUpperStarIso ℓ E (f ≫ g)) :=

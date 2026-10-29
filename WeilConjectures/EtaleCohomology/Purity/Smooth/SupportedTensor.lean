@@ -69,7 +69,8 @@ section Ranges
 variable {U Z Z₁ Z₂ Z' : Scheme.{u}}
 
 /-- The open complement of a closed immersion has the complementary range. -/
-lemma Scheme.Hom.range_openComplement_ι (i : Z ⟶ U) [IsClosedImmersion i] :
+lemma _root_.AlgebraicGeometry.Scheme.Hom.range_openComplement_ι (i : Z ⟶ U)
+    [IsClosedImmersion i] :
     Set.range i.openComplement.ι.base = (Set.range i.base)ᶜ := by
   rw [i.range_eq_compl_range_openComplement_ι, compl_compl]
 

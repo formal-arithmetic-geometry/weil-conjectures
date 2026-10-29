@@ -15,7 +15,8 @@ This file collects criteria for a natural transformation between monoidal functo
 monoidal (`NatTrans.IsMonoidal`).
 
 * For strong monoidal functors, it suffices that the transformation is compatible with the
-  comonoidal structures `η` and `δ` (`CategoryTheory.NatTrans.IsMonoidal.of_η_δ`).
+  comonoidal structures `η` and `δ` (`CategoryTheory.NatTrans.IsMonoidal.of_η_δ`), and, for an
+  isomorphism, with `δ` alone (`CategoryTheory.NatTrans.IsMonoidal.of_isIso_of_δ`).
 * A transformation `τ` is monoidal as soon as `τ ◫ H` is, for a faithful strong monoidal
   functor `H` (`CategoryTheory.NatTrans.IsMonoidal.of_whiskerRight`).
 * Replacing the right adjoint of a monoidal adjunction by a monoidally isomorphic functor gives
@@ -49,6 +50,30 @@ lemma IsMonoidal.of_η_δ {F G : C ⥤ D} [F.Monoidal] [G.Monoidal] (τ : F ⟶ 
   tensor X Y := by
     rw [← cancel_mono (δ G X Y), Category.assoc, hδ, Functor.Monoidal.μ_δ_assoc,
       Category.assoc, Functor.Monoidal.μ_δ, Category.comp_id]
+
+/-- A natural isomorphism between strong monoidal functors which is compatible with the
+comonoidal structures `δ` is monoidal: the compatibility with the unit comparisons is
+automatic. -/
+lemma IsMonoidal.of_isIso_of_δ {F G : C ⥤ D} [F.Monoidal] [G.Monoidal] (τ : F ⟶ G) [IsIso τ]
+    (hδ : ∀ X Y : C, τ.app (X ⊗ Y) ≫ δ G X Y = δ F X Y ≫ (τ.app X ⊗ₘ τ.app Y)) :
+    IsMonoidal τ := by
+  have hμ (X Y : C) : μ F X Y ≫ τ.app (X ⊗ Y) = (τ.app X ⊗ₘ τ.app Y) ≫ μ G X Y := by
+    rw [← cancel_mono (δ G X Y), Category.assoc, hδ, Functor.Monoidal.μ_δ_assoc,
+      Category.assoc, Functor.Monoidal.μ_δ, Category.comp_id]
+  have key : (ε F ≫ τ.app (𝟙_ C)) ▷ G.obj (𝟙_ C) = ε G ▷ G.obj (𝟙_ C) := by
+    rw [← cancel_epi (𝟙_ D ◁ τ.app (𝟙_ C)),
+      ← cancel_mono (μ G (𝟙_ C) (𝟙_ C) ≫ G.map (λ_ (𝟙_ C)).hom)]
+    simp only [Category.assoc]
+    rw [← Functor.LaxMonoidal.left_unitality, comp_whiskerRight_assoc, whisker_exchange_assoc,
+      ← tensorHom_def'_assoc, ← reassoc_of% (hμ (𝟙_ C) (𝟙_ C)), ← τ.naturality,
+      ← Functor.LaxMonoidal.left_unitality_assoc, leftUnitor_naturality]
+  have e (u : 𝟙_ D ⟶ G.obj (𝟙_ C)) : u = (ρ_ (𝟙_ D)).inv ≫ 𝟙_ D ◁ ε G ≫
+      u ▷ G.obj (𝟙_ C) ≫ G.obj (𝟙_ C) ◁ η G ≫ (ρ_ (G.obj (𝟙_ C))).hom := by
+    rw [whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, Functor.Monoidal.ε_η,
+      MonoidalCategory.whiskerLeft_id, Category.id_comp, ← rightUnitor_inv_naturality_assoc,
+      Iso.inv_hom_id, Category.comp_id]
+  refine ⟨?_, hμ⟩
+  rw [e (ε F ≫ τ.app (𝟙_ C)), key, ← e]
 
 /-- A natural transformation `τ` between lax monoidal functors is monoidal as soon as its
 whiskering `τ ◫ H` with a faithful strong monoidal functor `H` is. -/

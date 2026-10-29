@@ -153,15 +153,22 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSep
         rightDerivedUpperShriek Λ f') :=
   nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
 
 *Étale morphisms.* Every étale morphism `e : X ⟶ Y` is cohomologically smooth, with trivial
 dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
 theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
-    Nonempty (dualizingComplex Λ e ≅ constantComplex Λ X) :=
-  sorry
+    Nonempty (dualizingComplex Λ e ≅ constantComplex Λ X) := by
+  let c := HasCompactification.compactification e
+  have : IsIso (compactificationEtaleComparison Λ e c) :=
+    isIso_compactificationEtaleComparison Λ e c
+  exact ⟨((rightDerivedUpperShriekAdjunction Λ e).rightAdjointUniq
+    (compactificationEtaleAdjunction Λ e c)).app (𝟙_ _) ≪≫
+      leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) e⟩
 
+omit [HasTateTwist Λ] in
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
 ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,
 smooth of relative dimension zero, together with `ω_e ≅ Λ_X`
