@@ -9357,6 +9357,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomo
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologySupports
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyTriangle
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
@@ -9373,6 +9374,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwis
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ShiftTateObjectAssoc
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportReflection
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
@@ -12324,6 +12326,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComp
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChangeRefinement
