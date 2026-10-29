@@ -73,7 +73,7 @@ variable (X : Scheme.{u}) [ConnectedSpace X]
 
 /-- The unit `N ⟶ Γ(X, N_X)` of the constant sheaf adjunction on the small étale site of a
 connected scheme is bijective. -/
-lemma bijective_constantSheafAdj_unit_app (N : AddCommGrpCat.{u + 1}) :
+lemma bijective_constantSheafAdj_unit_app_addCommGrp (N : AddCommGrpCat.{u + 1}) :
     Function.Bijective ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
       (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)).unit.app N) := by
   simp only [constantSheafAdj, Adjunction.comp_unit_app, constantPresheafAdj_unit_app,
@@ -87,7 +87,7 @@ noncomputable def fullyFaithfulConstantSheaf :
   have : IsIso (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
       (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)).unit :=
     (NatTrans.isIso_iff_isIso_app _).2 (fun N ↦ (ConcreteCategory.isIso_iff_bijective _).2
-      (bijective_constantSheafAdj_unit_app X N))
+      (bijective_constantSheafAdj_unit_app_addCommGrp X N))
   (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)).fullyFaithfulLOfIsIsoUnit
 
