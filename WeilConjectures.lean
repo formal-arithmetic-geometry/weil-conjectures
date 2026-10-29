@@ -13405,6 +13405,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTransportAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
@@ -13424,6 +13425,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCompNatIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedRegularEnd
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FilteredColimit.FunctorCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FilteredColimit.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FilteredColimit.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ChangeOfRings
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantPullback
