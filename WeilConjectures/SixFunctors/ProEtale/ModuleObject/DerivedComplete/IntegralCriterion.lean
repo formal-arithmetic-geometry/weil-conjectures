@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterionLocal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 
 /-!
@@ -24,11 +25,20 @@ The implication (1) ⇒ (2) is proved:
 `ProEtale.boundedConstructible_derivedReduction_obj`. This file states the converse
 (2) ⇒ (1), `ProEtale.boundedConstructible_of_derivedCompleteIntegers`.
 
-## Sorried input
+## Proof of (2) ⇒ (1)
 
-`ProEtale.boundedConstructible_of_derivedCompleteIntegers` is `sorry`ed: it is the substantial
-implication of blueprint `sk-prop-integral-criterion`, resting on the integral local models of
-blueprint `sk-prop-integral-local-structure`.
+By the integral local models of blueprint `sk-prop-integral-local-structure`
+(`ProEtale.exists_stratification_cover_homology_iso_integralConstantModule`), there are an
+interval `[a, b]`, a finite stratification of `X` and pro-étale covers of its strata on whose
+members `g` the cohomology sheaves `Hⁿ(Lg^* K) ≅ g^* Hⁿ(K)` are constant finitely presented
+modules `⊕ⱼ 𝒪_E/ϖ^{eⱼ} ⊕ 𝒪_E^r`, zero outside `[a, b]`. Hence every `Hⁿ(K)` is constructible
+along this stratification, and `Hⁿ(K)` vanishes outside `[a, b]`, the pullbacks to the members of
+the covers jointly detecting zero objects.
+
+## Remaining input
+
+The local structure statement
+`ProEtale.exists_stratification_cover_homology_iso_integralConstantModule` is `sorry`ed.
 -/
 
 @[expose] public section
@@ -55,7 +65,18 @@ theorem boundedConstructible_of_derivedCompleteIntegers {X : Scheme.{u}} [IsNoet
     (hK : derivedCompleteIntegers ℓ E X K)
     (h₁ : ProEtale.DerivedCategory.boundedConstructible
       (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X ((derivedReduction X ℓ E).obj K)) :
-    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K :=
-  sorry
+    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K := by
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  rw [Ideal.submodule_span_eq] at hϖ
+  obtain ⟨a, b, S, hS⟩ :=
+    exists_stratification_cover_homology_iso_integralConstantModule hK h₁ ϖ hϖ
+  choose 𝒰 h𝒰 using hS
+  refine (mem_boundedConstructible_iff _ K).2 ⟨⟨a, b, fun q hq ↦ ?_⟩, fun n ↦ ?_⟩
+  · exact isZero_of_forall_isZero_upperStar_stratification _ S 𝒰 _ fun s i ↦
+      ((h𝒰 s i q).1 hq).of_iso ((leftDerivedUpperStarHomologyIso _ _ q).app K)
+  · refine isConstructibleModuleObject_of_isFinitelyPresented_upperStar _ S 𝒰 _ fun s i ↦ ?_
+    obtain ⟨k, r, e, ⟨φ⟩⟩ := (h𝒰 s i n).2
+    exact (isFinitelyPresented_integralConstantModule ℓ E.1 _ ϖ k r e).of_iso
+      (((leftDerivedUpperStarHomologyIso _ _ n).app K) ≪≫ φ).symm
 
 end AlgebraicGeometry.ProEtale
