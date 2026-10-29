@@ -41,59 +41,64 @@ open CategoryTheory Limits MonObj
 
 namespace Profinite
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The multiplication `𝒪̲_E ⟶ 𝒪̲_E` by a constant `ϖ ∈ 𝒪_E`, as a morphism of condensed abelian
 groups. -/
-noncomputable def padicIntegersRingObjMulLeft (ϖ : PadicAlgCl.integers ℓ E.1) :
-    padicIntegersRingObj.{u} ℓ E.1 ⟶ padicIntegersRingObj ℓ E.1 :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-  continuousMapRingObjMulLeft (PadicAlgCl.integers ℓ E.1) ϖ
+noncomputable def padicIntegersRingObjMulLeft (ϖ : PadicAlgCl.integers ℓ E) :
+    padicIntegersRingObj.{u} ℓ E ⟶ padicIntegersRingObj ℓ E :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  continuousMapRingObjMulLeft (PadicAlgCl.integers ℓ E) ϖ
 
-lemma padicIntegersRingObjMulLeft_hom_app_apply (ϖ : PadicAlgCl.integers ℓ E.1)
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
+lemma padicIntegersRingObjMulLeft_hom_app_apply (ϖ : PadicAlgCl.integers ℓ E)
     (S : Profinite.{u}ᵒᵖ) :
-    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1),
+    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E),
       (padicIntegersRingObjMulLeft ℓ E ϖ).hom.app S a =
         ULift.up (ContinuousMap.const _ ϖ * a.down) :=
   fun _ ↦ rfl
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 lemma padicIntegersRingObjToResidueField_hom_app_apply (S : Profinite.{u}ᵒᵖ) :
-    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1),
-      (padicIntegersRingObjToResidueField ℓ E.1).hom.app S a =
-        ULift.up ((⟨PadicAlgCl.integersResidue ℓ E.1, PadicAlgCl.continuous_integersResidue ℓ E.1⟩ :
-          C(PadicAlgCl.integers ℓ E.1, PadicAlgCl.integersResidueField ℓ E.1)).comp a.down) :=
+    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+    ∀ a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E),
+      (padicIntegersRingObjToResidueField ℓ E).hom.app S a =
+        ULift.up ((⟨PadicAlgCl.integersResidue ℓ E, PadicAlgCl.continuous_integersResidue ℓ E⟩ :
+          C(PadicAlgCl.integers ℓ E, PadicAlgCl.integersResidueField ℓ E)).comp a.down) :=
   fun _ ↦ rfl
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- An element of the maximal ideal vanishes in `𝔽_E`: the multiplication by `ϖ ∈ 𝔪_E` on `𝒪̲_E`
 followed by the residue map is zero. -/
-lemma padicIntegersRingObjMulLeft_comp_residueField (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) :
-    padicIntegersRingObjMulLeft.{u} ℓ E ϖ ≫ padicIntegersRingObjToResidueField ℓ E.1 = 0 := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+lemma padicIntegersRingObjMulLeft_comp_residueField (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E)) :
+    padicIntegersRingObjMulLeft.{u} ℓ E ϖ ≫ padicIntegersRingObjToResidueField ℓ E = 0 := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   ext S a
   refine ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)
-  change PadicAlgCl.integersResidue ℓ E.1 (ϖ * a.down s) = 0
-  rw [map_mul, show PadicAlgCl.integersResidue ℓ E.1 ϖ = 0 from
+  change PadicAlgCl.integersResidue ℓ E (ϖ * a.down s) = 0
+  rw [map_mul, show PadicAlgCl.integersResidue ℓ E ϖ = 0 from
     (IsLocalRing.residue_eq_zero_iff _).2 hϖ, zero_mul]
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- **`0 ⟶ 𝒪̲_E --ϖ--> 𝒪̲_E ⟶ 𝔽̲_E ⟶ 0` is short exact** for a generator `ϖ` of the maximal ideal of
 `𝒪_E`, checked on sections over each profinite set `S`. -/
-lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ}) :
+lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
     (ShortComplex.mk _ _ (padicIntegersRingObjMulLeft_comp_residueField.{u} ℓ E ϖ
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ))).ShortExact := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
   let T := ShortComplex.mk _ _ (padicIntegersRingObjMulLeft_comp_residueField.{u} ℓ E ϖ
     (hϖ ▸ Ideal.mem_span_singleton_self ϖ))
-  have hne : ϖ ≠ 0 := fun h ↦ PadicAlgCl.maximalIdeal_integers_ne_bot ℓ E.1 (by
+  have hne : ϖ ≠ 0 := fun h ↦ PadicAlgCl.maximalIdeal_integers_ne_bot ℓ E (by
     rw [hϖ, h, Ideal.span_singleton_eq_bot])
-  have hne' : (ϖ : E.1) ≠ 0 := fun h ↦ hne (Subtype.ext h)
-  have hf (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1)) (s) :
+  have hne' : (ϖ : E) ≠ 0 := fun h ↦ hne (Subtype.ext h)
+  have hf (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E)) (s) :
       (T.f.hom.app S a).down s = ϖ * a.down s := rfl
-  have hg (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E.1)) (s) :
-      (T.g.hom.app S a).down s = PadicAlgCl.integersResidue ℓ E.1 (a.down s) := rfl
+  have hg (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E)) (s) :
+      (T.g.hom.app S a).down s = PadicAlgCl.integersResidue ℓ E (a.down s) := rfl
   have hpre : (T.map (sheafToPresheaf _ _)).Exact := by
     rw [ShortComplex.exact_iff_isZero_homology]
     refine Functor.isZero _ fun S ↦ ?_
@@ -103,10 +108,10 @@ lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integ
       have hz (s : S.unop) : a.down s ∈ Ideal.span {ϖ} := by
         rw [← hϖ, ← IsLocalRing.residue_eq_zero_iff]
         exact (hg S a s).symm.trans (congrArg (fun z : ULift.{u + 1} C(S.unop,
-          PadicAlgCl.integersResidueField ℓ E.1) ↦ z.down s) ha)
+          PadicAlgCl.integersResidueField ℓ E) ↦ z.down s) ha)
       choose b hb using fun s ↦ Ideal.mem_span_singleton'.1 (hz s)
-      have hbv (s : S.unop) : (b s : E.1) = (ϖ : E.1)⁻¹ * (a.down s : E.1) := by
-        rw [← hb s, Subring.coe_mul, mul_comm (b s : E.1)]
+      have hbv (s : S.unop) : (b s : E) = (ϖ : E)⁻¹ * (a.down s : E) := by
+        rw [← hb s, Subring.coe_mul, mul_comm (b s : E)]
         exact (inv_mul_cancel_left₀ hne' _).symm
       have hbc : Continuous b := by
         refine Topology.IsInducing.subtypeVal.continuous_iff.2 ?_
@@ -121,12 +126,12 @@ lemma shortExact_padicIntegersRingObjMulLeft_residueField (ϖ : PadicAlgCl.integ
     intro a b hab
     have h := congrArg ULift.down hab
     exact ULift.ext _ _ (ContinuousMap.ext fun s ↦ mul_left_cancel₀ hne
-      (((hf S a s).symm.trans (congrArg (fun z : C(S.unop, PadicAlgCl.integers ℓ E.1) ↦ z s)
+      (((hf S a s).symm.trans (congrArg (fun z : C(S.unop, PadicAlgCl.integers ℓ E) ↦ z s)
         h)).trans (hf S b s)))
   have hepi (S : Profinite.{u}ᵒᵖ) : Epi (((sheafToPresheaf _ _).map T.g).app S) := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro c
-    refine ⟨ULift.up ⟨Function.surjInv (PadicAlgCl.integersResidue_surjective ℓ E.1) ∘ c.down,
+    refine ⟨ULift.up ⟨Function.surjInv (PadicAlgCl.integersResidue_surjective ℓ E) ∘ c.down,
       continuous_of_discreteTopology.comp c.down.continuous⟩,
       ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
     exact (hg S _ s).trans (Function.surjInv_eq _ _)
@@ -143,27 +148,30 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The multiplication `𝒪_{E,X} ⟶ 𝒪_{E,X}` by a constant `ϖ ∈ 𝒪_E`: the pullback along `p_X` of
 the multiplication by `ϖ` on `𝒪̲_E`. -/
-noncomputable abbrev padicIntegersMulLeft (ϖ : PadicAlgCl.integers ℓ E.1) :
-    condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X ⟶
-      condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X :=
+noncomputable abbrev padicIntegersMulLeft (ϖ : PadicAlgCl.integers ℓ E) :
+    condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X ⟶
+      condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X :=
   (upperStarFromPoint X).map (Profinite.padicIntegersRingObjMulLeft ℓ E ϖ)
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- An element `ϖ ∈ 𝔪_E` vanishes in `𝔽_{E,X}`. -/
-lemma padicIntegersMulLeft_comp_residueField (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) :
+lemma padicIntegersMulLeft_comp_residueField (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E)) :
     padicIntegersMulLeft X ℓ E ϖ ≫ padicIntegersToResidueField X ℓ E = 0 := by
   rw [← Functor.map_comp, Profinite.padicIntegersRingObjMulLeft_comp_residueField ℓ E ϖ hϖ,
     Functor.map_zero]
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- **`0 ⟶ 𝒪_{E,X} --ϖ--> 𝒪_{E,X} ⟶ 𝔽_{E,X} ⟶ 0` is short exact** for a generator `ϖ` of the
 maximal ideal of `𝒪_E`: it is the inverse image along the exact functor `p_X^*` of the short
 exact sequence `0 ⟶ 𝒪̲_E --ϖ--> 𝒪̲_E ⟶ 𝔽̲_E ⟶ 0` of condensed abelian groups. -/
-lemma shortExact_padicIntegersMulLeft_residueField (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ}) :
+lemma shortExact_padicIntegersMulLeft_residueField (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
     (ShortComplex.mk _ _ (padicIntegersMulLeft_comp_residueField X ℓ E ϖ
       (hϖ ▸ Ideal.mem_span_singleton_self ϖ))).ShortExact := by
   have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
@@ -178,11 +186,11 @@ lemma shortExact_padicIntegersMulLeft_residueField (ϖ : PadicAlgCl.integers ℓ
 /-- `𝔽_{E,X}` is the cokernel of a uniformizer: there is `ϖ ∈ 𝒪_E` generating the maximal ideal
 such that `0 ⟶ 𝒪_{E,X} --ϖ--> 𝒪_{E,X} ⟶ 𝔽_{E,X} ⟶ 0` is short exact. -/
 lemma exists_shortExact_padicIntegersMulLeft_residueField :
-    ∃ (ϖ : PadicAlgCl.integers ℓ E.1)
-      (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ}),
+    ∃ (ϖ : PadicAlgCl.integers ℓ E)
+      (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}),
       (ShortComplex.mk _ _ (padicIntegersMulLeft_comp_residueField X ℓ E ϖ
         (hϖ ▸ Ideal.mem_span_singleton_self ϖ))).ShortExact := by
-  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E
   rw [Ideal.submodule_span_eq] at hϖ
   exact ⟨ϖ, hϖ, shortExact_padicIntegersMulLeft_residueField X ℓ E ϖ hϖ⟩
 
