@@ -14195,6 +14195,7 @@ public import WeilConjectures.TraceFormula.Specialization.SliceTraitExists
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitFunctoriality
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisTame
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitMap
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitPoint
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitResidue
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
