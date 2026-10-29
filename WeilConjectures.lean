@@ -13058,6 +13058,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Dua
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EssentiallySmall
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtPullback
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtPullbackHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
