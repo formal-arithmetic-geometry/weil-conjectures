@@ -17,7 +17,7 @@ Let `S = Spec A`, `A = k'⟦t⟧`, `B = K⟦t⟧`, `F = Frac A`, `F_K = Frac B`,
 `Ω_K = F_K^alg`. For the morphism of models `φ = hᵢ` over a coordinate generic slice
 (`NearbyCyclesModel.affineSpaceSliceHom`) the change of geometric generic fibre is
 ```
-g = φ.toCart.generic : 𝔸ⁿ_B ×_B Spec Ω_K ⟶ 𝔸ⁿ_B ×_S Spec Ω.
+g = φ.toCartesian.generic : 𝔸ⁿ_B ×_B Spec Ω_K ⟶ 𝔸ⁿ_B ×_S Spec Ω.
 ```
 We identify it with a base change of a morphism of spectra of rings:
 
@@ -267,7 +267,7 @@ lemma isPullback_affineSpaceSliceHom_cartModel_generic_trait :
     IsPullback (pullback.fst (affineSpaceModel k' (n + 1)).geometric.j
         (affineSpaceSliceHom k' n i).total ≫
         pullback.snd (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k') (traitGenericPoint k'))
-      (affineSpaceSliceHom k' n i).cartModel.j (traitGenericPoint k')
+      (affineSpaceSliceHom k' n i).cartesianModel.j (traitGenericPoint k')
       (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k') ≫
         traitMap k' (traitSliceField k')) := by
   have h := (IsPullback.of_hasPullback (affineSpaceModel k' (n + 1)).geometric.j
@@ -282,13 +282,13 @@ variable (k') in
 of the cartesian model of the slice (`B = K⟦t⟧`, `K = k'(x)^alg`), induced by the projections
 to `Spec Ω` and to `𝔸ⁿ_B ⟶ Spec B`. -/
 noncomputable def affineSpaceSliceCartTensor :
-    (affineSpaceSliceHom k' n i).cartModel.generic ⟶
+    (affineSpaceSliceHom k' n i).cartesianModel.generic ⟶
       Spec (traitGenericTensor k' (traitSliceField k')) :=
   (isPullback_traitGenericTensor k' (traitSliceField k')).lift
     (pullback.fst (affineSpaceModel k' (n + 1)).geometric.j
         (affineSpaceSliceHom k' n i).total ≫
         pullback.snd (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k') (traitGenericPoint k'))
-    ((affineSpaceSliceHom k' n i).cartModel.j ≫
+    ((affineSpaceSliceHom k' n i).cartesianModel.j ≫
       𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k')) (by
     rw [Category.assoc]
     exact (isPullback_affineSpaceSliceHom_cartModel_generic_trait n i).w)
@@ -300,9 +300,9 @@ noncomputable def affineSpaceSliceCartTensor :
       ↓                      ↓
     𝔸ⁿ_B ───────────────> Spec B
 ```
-is cartesian, i.e. `(affineSpaceSliceHom k' n i).cartModel.generic ≅ 𝔸ⁿ_B ×_B T`. -/
+is cartesian, i.e. `(affineSpaceSliceHom k' n i).cartesianModel.generic ≅ 𝔸ⁿ_B ×_B T`. -/
 theorem isPullback_affineSpaceSliceHom_cartModel_generic :
-    IsPullback (affineSpaceSliceCartTensor k' n i) (affineSpaceSliceHom k' n i).cartModel.j
+    IsPullback (affineSpaceSliceCartTensor k' n i) (affineSpaceSliceHom k' n i).cartesianModel.j
       (traitGenericTensorSnd k' (traitSliceField k'))
       (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k')) := by
   refine IsPullback.of_right (h₁₂ := traitGenericTensorFst k' (traitSliceField k'))
@@ -315,7 +315,7 @@ theorem isPullback_affineSpaceSliceHom_cartModel_generic :
 `c`. -/
 @[reassoc]
 lemma affineSpaceSliceHom_toCart_generic_cartTensor :
-    (affineSpaceSliceHom k' n i).toCart.generic ≫ affineSpaceSliceCartTensor k' n i =
+    (affineSpaceSliceHom k' n i).toCartesian.generic ≫ affineSpaceSliceCartTensor k' n i =
       pullback.snd (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
         trait (traitSliceField k')) (traitGenericPoint (traitSliceField k')) ≫
         traitGenericTensorPoint k' (traitSliceField k') := by
@@ -335,17 +335,17 @@ lemma affineSpaceSliceHom_toCart_generic_cartTensor :
 ```
 is cartesian. -/
 theorem isPullback_affineSpaceSliceHom_toCart_generic :
-    IsPullback (affineSpaceSliceHom k' n i).toCart.generic
+    IsPullback (affineSpaceSliceHom k' n i).toCartesian.generic
       (pullback.snd (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
         trait (traitSliceField k')) (traitGenericPoint (traitSliceField k')))
       (affineSpaceSliceCartTensor k' n i) (traitGenericTensorPoint k' (traitSliceField k')) := by
-  refine IsPullback.of_right (h₁₂ := (affineSpaceSliceHom k' n i).cartModel.j)
+  refine IsPullback.of_right (h₁₂ := (affineSpaceSliceHom k' n i).cartesianModel.j)
     (v₁₃ := 𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
     (h₂₂ := traitGenericTensorSnd k' (traitSliceField k')) ?_
     (affineSpaceSliceHom_toCart_generic_cartTensor n i)
     (isPullback_affineSpaceSliceHom_cartModel_generic n i).flip
   rw [traitGenericTensorPoint_snd]
-  simp only [Hom.toCart_generic, Hom.cartModel_j, pullback.lift_snd]
+  simp only [Hom.toCartesian_generic, Hom.cartesianModel_j, pullback.lift_snd]
   exact IsPullback.of_hasPullback _ _
 
 section Factor
@@ -366,7 +366,7 @@ noncomputable abbrev affineSpaceSliceGaloisCover : Scheme.{u} :=
 variable (k') in
 /-- The nilpotent thickening `r₂ : Z₂ ⟶ 𝔸ⁿ_B ×_S Spec Ω`, base change of `Spec L ⟶ T`. -/
 noncomputable def affineSpaceSliceThickening :
-    affineSpaceSliceGaloisBase k' n i ⟶ (affineSpaceSliceHom k' n i).cartModel.generic :=
+    affineSpaceSliceGaloisBase k' n i ⟶ (affineSpaceSliceHom k' n i).cartesianModel.generic :=
   pullback.fst _ _
 
 variable (k') in
@@ -381,7 +381,7 @@ variable (k') in
 noncomputable def affineSpaceSliceInsepMap :
     (affineSpaceModel (traitSliceField k') n).geometric.generic ⟶
       affineSpaceSliceGaloisCover k' n i :=
-  pullback.lift (pullback.lift (affineSpaceSliceHom k' n i).toCart.generic
+  pullback.lift (pullback.lift (affineSpaceSliceHom k' n i).toCartesian.generic
     (pullback.snd (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
         trait (traitSliceField k')) (traitGenericPoint (traitSliceField k')) ≫
       traitGenericSepPoint k' (traitSliceField k') ≫
@@ -398,7 +398,7 @@ noncomputable def affineSpaceSliceInsepMap :
 @[reassoc]
 theorem affineSpaceSliceHom_toCart_generic_factor :
     affineSpaceSliceInsepMap k' n i ≫ affineSpaceSliceGaloisMap k' n i ≫
-      affineSpaceSliceThickening k' n i = (affineSpaceSliceHom k' n i).toCart.generic := by
+      affineSpaceSliceThickening k' n i = (affineSpaceSliceHom k' n i).toCartesian.generic := by
   simp [affineSpaceSliceInsepMap, affineSpaceSliceGaloisMap, affineSpaceSliceThickening]
 
 /-- The Galois part `q` is the base change of `Spec L^sep ⟶ Spec L` along `Z₂ ⟶ Spec L`. -/

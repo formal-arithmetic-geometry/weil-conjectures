@@ -108,19 +108,19 @@ instance isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_isUniversal
 namespace NearbyCyclesModel
 
 /-- **The change of geometric generic fibre up to a universal homeomorphism**: if the morphism
-`g = φ.toCart.generic` of geometric generic fibres factors as `g = r ≫ q` with `r` a universal
+`g = φ.toCartesian.generic` of geometric generic fibres factors as `g = r ≫ q` with `r` a universal
 homeomorphism and the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `G = Lε'^* C`, then the
-pullback exchange of `φ.toCart` is a split monomorphism at `C`. -/
+pullback exchange of `φ.toCartesian` is a split monomorphism at `C`. -/
 theorem Hom.isSplitMono_toCart_pullbackExchange_app_of_factor {X X' Y Y' : Scheme.{u}}
     {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (φ : M.Hom N f f')
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)))
-    {Z : Scheme.{u}} (r : M.generic ⟶ Z) (q : Z ⟶ φ.cartModel.generic)
-    [IsUniversalHomeomorphism r] (hrq : r ≫ q = φ.toCart.generic)
+    {Z : Scheme.{u}} (r : M.generic ⟶ Z) (q : Z ⟶ φ.cartesianModel.generic)
+    [IsUniversalHomeomorphism r] (hrq : r ≫ q = φ.toCartesian.generic)
     (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((φ.cartModel.ε)^*⟦Λ⟧)).obj C))) :
-    IsSplitMono ((φ.toCart.pullbackExchange Λ).app C) := by
+      ((L((φ.cartesianModel.ε)^*⟦Λ⟧)).obj C))) :
+    IsSplitMono ((φ.toCartesian.pullbackExchange Λ).app C) := by
   refine φ.isSplitMono_toCart_pullbackExchange_app_of_isSplitMono_unit Λ C ?_
   rw [← hrq]
   exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ r q _
