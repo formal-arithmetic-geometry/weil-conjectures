@@ -48,37 +48,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor ZeroObject
 
 namespace CategoryTheory
 
-namespace CatCenter
-
-variable {C : Type*} [Category* C]
-
-/-- A central element `z` acts on the homology of a homological complex `K` through the degreewise
-action `z.mapHomologicalComplex`, as `z` itself. -/
-private lemma homologyMap_mapHomologicalComplex_app [Preadditive C] [HasZeroObject C]
-    [CategoryWithHomology C] (z : CatCenter C) {ι : Type*} {c : ComplexShape ι}
-    (K : HomologicalComplex C c) (i : ι) :
-    HomologicalComplex.homologyMap ((z.mapHomologicalComplex c).app K) i =
-      z.app (K.homology i) := by
-  have hc : HomologicalComplex.cyclesMap ((z.mapHomologicalComplex c).app K) i =
-      z.app (K.cycles i) := by
-    rw [← cancel_mono (K.iCycles i), HomologicalComplex.cyclesMap_i,
-      mapHomologicalComplex_app_f, z.naturality]
-  rw [← cancel_epi (K.homologyπ i), HomologicalComplex.homologyπ_naturality, hc, z.naturality]
-
-/-- The central element of the derived category induced by a central element `z` of `C` acts on
-the cohomology objects `Hⁿ(K)` as `z`. -/
-private lemma homologyFunctor_map_derivedCategory_app [Abelian C] [HasDerivedCategory C]
-    (z : CatCenter C) (n : ℤ) (K : DerivedCategory C) :
-    (DerivedCategory.homologyFunctor C n).map (z.derivedCategory.app K) =
-      z.app ((DerivedCategory.homologyFunctor C n).obj K) := by
-  refine map_app_of_iso _ _ _ (DerivedCategory.Q.objObjPreimageIso K) ?_
-  rw [derivedCategory_app_Q_obj, ← cancel_mono
-    ((DerivedCategory.homologyFunctorFactors C n).hom.app (DerivedCategory.Q.objPreimage K)),
-    DerivedCategory.homologyFunctorFactors_hom_naturality, homologyMap_mapHomologicalComplex_app]
-  exact z.naturality _
-
-end CatCenter
-
 /-- A functor which preserves zero morphisms and reflects isomorphisms reflects zero objects. -/
 lemma Functor.isZero_of_isZero_map {C D : Type*} [Category* C]
     [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D] [HasZeroObject C] [HasZeroObject D]

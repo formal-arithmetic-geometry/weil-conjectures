@@ -28,7 +28,8 @@ Deligne's finiteness theorem on the étale site, through the comparison of the c
   `Rf_*` preserves the bounded constructible complexes of étale origin
   (`ProEtale.boundedConstructible_rightDerivedLowerStar`, from the étale finiteness theorem);
 * conversely, the condensed reading `Φ⁻¹ (ν^* N)` of a bounded constructible étale complex `N` is
-  bounded constructible (`ProEtale.CondensedRing.boundedConstructible_inverse_obj_of_etale`).
+  bounded constructible (`ProEtale.CondensedRing.boundedConstructible_inverse_obj_of_etale`, in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstructibleReading`).
 
 This is the torsion step of blueprint `lem-sfb-dc-lower-star-preserves`.
 -/
@@ -47,29 +48,6 @@ open Scheme
 
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
-
-/-- **The condensed reading of a bounded constructible étale complex is bounded
-constructible**: for a finite discrete commutative ring `T` and a bounded constructible
-complex `N` of étale sheaves of `T`-modules, `Φ⁻¹ (ν^* N)` is a bounded constructible complex of
-module objects over `p_X^* T̲`. The exact functors `ν^*` and `Φ⁻¹` preserve boundedness and
-commute with the cohomology sheaves, and the condensed reading of a constructible étale sheaf is
-constructible (`ProEtale.isConstructibleModuleObject_inverse_obj_comparisonUpperStar_obj`). -/
-theorem boundedConstructible_inverse_obj_of_etale {X : Scheme.{u}}
-    {N : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} T)))}
-    (hN : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} T)) X N) :
-    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X)
-      ((finiteCoefficientDerivedEquivalence X T).inverse.obj
-        ((ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} T)]).mapDerivedCategory.obj N)) := by
-  refine ⟨Functor.bounded_mapDerivedCategory_obj _
-    ((ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} T)]).bounded_mapDerivedCategory_obj hN.1),
-    fun i ↦ ?_⟩
-  have : IsConstructibleSheaf ((DerivedCategory.homologyFunctor _ i).obj N) := hN.2 i
-  exact (isConstructibleModuleObject_inverse_obj_comparisonUpperStar_obj T _).of_iso
-    ((finiteCoefficientModEquivalence X T).inverse.mapIso
-      ((Functor.mapDerivedCategoryHomologyFunctorIso
-        (ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} T)]) i).app N) ≪≫
-      (((finiteCoefficientModEquivalence X T).inverse.mapDerivedCategoryHomologyFunctorIso
-        i).app _))
 
 /-- **Deligne's finiteness theorem for `Rf_*` with finite condensed coefficients**: for a finite
 discrete commutative ring `T` killed by an integer `N` invertible in the field `k`, a `k`-scheme

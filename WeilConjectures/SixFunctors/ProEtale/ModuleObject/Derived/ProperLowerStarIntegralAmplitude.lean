@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructureTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
@@ -41,16 +42,6 @@ universe u
 open CategoryTheory Limits Pretriangulated
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor ZeroObject
-
-/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` of a derived category, if `X₁` and `X₂`
-lie in degrees `≤ n`, so does `X₃`. -/
-lemma DerivedCategory.isLE_obj₃_of_isLE {C : Type*} [Category* C] [Abelian C]
-    [HasDerivedCategory C] (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _) (n : ℤ)
-    (h₁ : T.obj₁.IsLE n) (h₂ : T.obj₂.IsLE n) : T.obj₃.IsLE n := by
-  have h : ((shiftFunctor (DerivedCategory C) (1 : ℤ)).obj T.obj₁).IsLE n := by
-    have := DerivedCategory.TStructure.t.isLE_shift T.obj₁ n 1 (n - 1) (by lia)
-    exact DerivedCategory.TStructure.t.isLE_of_le _ (n - 1) n (by lia)
-  exact DerivedCategory.TStructure.t.isLE₂ _ (rot_of_distTriang _ hT) n h₂ h
 
 namespace AlgebraicGeometry
 
