@@ -12669,6 +12669,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerAction
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp

@@ -16,7 +16,8 @@ Let `N` be a model of `X` with special fibre `X'`, `h : N.generic ⟶ Spec L`, `
 extension, `N_Ω` the Galois layer (`NearbyCyclesModel.galoisLayer`) with generic fibre
 `G_Ω = N.generic ×_{Spec L} Spec Ω` and projection `g : G_Ω ⟶ N.generic`. The pullback exchange
 `α : L(𝟙)^* Ψ_N C ⟶ Ψ_{N_Ω} (L(𝟙)^* C)` of the projection `N_Ω ⟶ N` is `Li^* Rj_*` of the derived
-unit `A ⟶ Rg_* Lg^* A` at `A = Lε^* C` (`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`),
+unit `A ⟶ Rg_* Lg^* A` at `A = Lε^* C`
+(`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`),
 and the action of `σ ∈ Aut(Ω/L)` on `Ψ_{N_Ω}` is `Li^* Rj_*` of the derived unit transport `u_σ`
 along `Spec σ` (`NearbyCyclesModel.galoisLayerAut_autAction`).
 

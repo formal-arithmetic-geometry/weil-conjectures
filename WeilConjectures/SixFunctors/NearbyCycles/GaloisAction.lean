@@ -68,7 +68,8 @@ private lemma pullbackExchange_comp_autAction_aux {D D' E E' : Type*} [Category 
     rw [← cancel_mono (I.hom.app (Lf'.obj (Ψ'.obj C))), hd, Iso.inv_hom_id_app]
     rfl
   have hb : αψ.app C ≫ I.inv.app (Ψ.obj (Lf.obj C)) =
-      I.inv.app (Lf'.obj (Ψ'.obj C)) ≫ L.map (αψ.app C) := by simpa using I.inv.naturality (αψ.app C)
+      I.inv.app (Lf'.obj (Ψ'.obj C)) ≫ L.map (αψ.app C) := by
+    simpa using I.inv.naturality (αψ.app C)
   calc αψ.app C ≫ (I.inv.app (Ψ.obj (Lf.obj C)) ≫ ασ.app (Lf.obj C) ≫
         Ψ.map (I₀.hom.app (Lf.obj C)))
       = (c.app (Ψ'.obj C) ≫ L.map (αψ.app C) ≫ ασ.app (Lf.obj C)) ≫
