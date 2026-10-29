@@ -13,6 +13,8 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextensionBasis
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushFiniteFree
 
 /-!
 
@@ -45,7 +47,11 @@ coefficient changes. This file supplies the coefficient-specific input:
   dimensional spaces), and sheafification preserves the decomposition. The monoidal left adjoint
   `p_X^*` carries it to `X`, and a copower of the unit is flat;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
-  (Shriek);
+  (Shriek) (`ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`): an `E`-basis
+  of `F` is a basis of `F̲` over `E̲` made of constant global sections
+  (`Profinite.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul`), so this is the
+  case of a finite free coefficient change
+  (`ProEtale.CondensedRing.isIso_derivedPushHom_of_isIso_biproductDesc_globalSmul`);
 * for `E ⊆ Ω`, (Push) is an isomorphism at bounded below objects for every quasi-compact
   quasi-separated `f`, by the continuity of `Rf_*` on bounded below complexes
   (`ProEtale.CondensedRing.isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`,
@@ -53,12 +59,6 @@ coefficient changes. This file supplies the coefficient-specific input:
   (Shriek) (`ProEtale.CondensedRing.isIso_derivedLowerShriekHom_app_padicAlgCl_of_isGE`). It is
   not an isomorphism on all unbounded objects, even for proper `f`: `Rf_*` need not commute
   with direct sums (blueprint `sk-rem-sf-fullcd-scope`), while `ℚ̄_ℓ ≅ ⨁_ℕ E` as `E`-modules.
-
-## Sorried input
-
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
-  `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
-  the compatibility of `Rf_*` with finite direct sums.
 
 -/
 
@@ -815,7 +815,13 @@ is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf
 module docstring. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  sorry
+  have (Z : Scheme.{u}) : PreservesFiniteLimits
+      (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) Z)) :=
+    preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap ℓ Z h
+  -- term-mode `Exists.elim`: `obtain` on this existential times out at `isDefEq`
+  (Profinite.exists_isIso_biproductDesc_padicSubfieldRingObjMap_globalSmul.{u} ℓ h).elim
+    fun _ hn ↦ hn.elim fun b hb ↦ isIso_derivedPushHom_of_isIso_biproductDesc_globalSmul
+      (Profinite.padicSubfieldRingObjMap ℓ h) (Profinite.continuousMapConstRingHom F) b hb f
 
 /-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
 example [HasCompactification f] {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
