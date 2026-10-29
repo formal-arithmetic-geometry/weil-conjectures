@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRetraction
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsUnit
 
 /-!
 

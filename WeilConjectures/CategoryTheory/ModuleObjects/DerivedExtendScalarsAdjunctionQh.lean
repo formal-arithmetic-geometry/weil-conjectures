@@ -9,15 +9,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 
 /-!
-# The unit and counit of the derived extension–restriction adjunction on complexes
+# The derived extension–restriction adjunction on complexes
 
-Let `φ : R ⟶ S` be a morphism of commutative algebra objects in a closed symmetric monoidal
-Grothendieck abelian category. On the image of a complex, the counit of the derived adjunction
-`S ⊗ᴸ_R - ⊣ D(comap φ)` (`CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction`) is the
-levelwise counit read through the counit of the derived extension of scalars
-(`CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction_counit_app_Qh`), and its unit
-followed by the counit of the derived extension of scalars is the levelwise unit
-(`CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh`).
+Let `φ : R ⟶ S` be a morphism of commutative algebra objects. The unit and the counit of the
+derived adjunction `S ⊗ᴸ_R - ⊣ D(comap φ)` (`Mod.derivedExtendMapDerivedCategoryAdjunction`) on
+the image of a complex are the levelwise unit and counit, read through the counit of the derived
+extension of scalars (`Mod.derivedExtendMapDerivedCategoryAdjunction_counit_app_Qh`,
+`Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh`).
 -/
 
 @[expose] public section
@@ -25,8 +23,6 @@ followed by the counit of the derived extension of scalars is the levelwise unit
 universe v u'
 
 open CategoryTheory Limits MonoidalCategory MonObj
-
-open scoped CategoryTheory.Obj
 
 namespace CategoryTheory.Mod
 
@@ -86,5 +82,20 @@ lemma derivedExtendMapDerivedCategoryAdjunction_unit_app_Qh
   erw [Adjunction.left_triangle_components,
     CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
+
+/-- The counit of the derived adjunction `S ⊗ᴸ_R - ⊣ D(comap φ)` on the image of a complex `M`,
+in the form used by `CategoryTheory.Adjunction.mateEquiv_leftDerived_inv_eq`. -/
+lemma derivedExtendMapDerivedCategoryAdjunction_counit_app_Qh_eq
+    (M : HomotopyCategory (Mod C S) (ComplexShape.up ℤ)) :
+    (derivedExtendMapDerivedCategoryAdjunction φ).counit.app (DerivedCategory.Qh.obj M) =
+      (extendScalars φ).leftDerivedFunctor.map
+          ((comap φ).mapDerivedCategoryFactorsh.hom.app M) ≫
+        (extendScalars φ).leftDerivedFunctorCounit.app
+          (((comap φ).mapHomotopyCategory (ComplexShape.up ℤ)).obj M) ≫
+        DerivedCategory.Qh.map
+          (((extendRestrictAdjunction φ).mapHomotopyCategory
+            (ComplexShape.up ℤ)).counit.app M) := by
+  rw [← derivedExtendMapDerivedCategoryAdjunction_counit_app_Qh, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
 
 end CategoryTheory.Mod

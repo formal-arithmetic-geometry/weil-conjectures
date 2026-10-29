@@ -5,10 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurj
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurj
@@ -69,7 +69,7 @@ the ordinary-category model of the 2-colimit that they describe.
 * `ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj` and
   `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`: the extension of scalars
   is exact, so it commutes with the cohomology sheaves, and it preserves constructibility
-  (`ProEtale.CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj`).
+  (`ProEtale.boundedConstructible_leftDerivedExtendScalars_obj`).
 * **(Obj)** `ProEtale.constructibleCocone_essSurjObj`: dévissage along the generation of
   `Dᵇc(X, ℚ̄_ℓ)` by extensions by zero of lisse sheaves, the cone step using (Hom), and lisse
   descent (`ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj`).
@@ -130,7 +130,7 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteInterme
     (h : E ≤ F) (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
       ((derivedExtendScalarsSubfield X ℓ h).obj K.obj) :=
-  CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ K.obj K.property
+  ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes.
 See the module docstring. -/
@@ -138,7 +138,7 @@ lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteInter
     (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicAlgClRingObj X ℓ)
       ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj) :=
-  CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ K.obj K.property
+  ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
 for finite subextensions `E ≤ F`. -/

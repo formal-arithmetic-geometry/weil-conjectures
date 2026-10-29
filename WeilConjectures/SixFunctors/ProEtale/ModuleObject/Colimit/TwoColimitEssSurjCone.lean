@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.CategoryTheory.Triangulated.FunctorCone
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
 
 /-!
 # Descent of bounded constructible `ℚ̄_ℓ`-complexes: the cone step
@@ -105,7 +105,7 @@ lemma exists_iso_derivedExtendScalarsToPadicAlgCl_obj_of_le {E H : FiniteInterme
       Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ H).obj
         ((derivedExtendScalarsSubfield X ℓ h).obj K') ≅
           (derivedExtendScalarsToPadicAlgCl X ℓ E).obj K') :=
-  ⟨CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ K' hK',
+  ⟨ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K' hK',
     ⟨(derivedExtendScalarsCompIso X ℓ h).app K'⟩⟩
 
 /-- **The cone step** of blueprint `det-lem-coefficient-finite-descent-objects`: on a
@@ -152,7 +152,7 @@ theorem descendsToPadicSubfield_obj₂ [TopologicalSpace.NoetherianSpace X]
       ((derivedExtendScalarsCompIso X ℓ hE).app (a⟦(1 : ℤ)⟧)) ec T.mor₃ θ hg)
   refine ⟨H, b, ?_, ⟨eb⟩⟩
   exact (boundedConstructible _).ext_of_isTriangulatedClosed₂ _ hfg
-    (CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ a ha)
-    (CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ c hc)
+    (ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ a ha)
+    (ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ c hc)
 
 end AlgebraicGeometry.ProEtale

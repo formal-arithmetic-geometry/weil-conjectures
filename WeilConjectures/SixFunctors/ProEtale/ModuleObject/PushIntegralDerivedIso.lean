@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsUnit
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedPlus
 
