@@ -83,8 +83,15 @@ theorem Hom.isIso_pullbackExchange_app_upperStar_of_square (φ₀ : P.Hom M f₀
     (hψ : IsIso ((ψ.pullbackExchange Λ).app C))
     (hψ' : IsIso ((ψ'.pullbackExchange Λ).app (L((e)^*⟦Λ⟧).obj C)))
     (hφ₁ : IsIso ((φ₁.pullbackExchange Λ).app C)) :
-    IsIso ((φ₀.pullbackExchange Λ).app (L((g)^*⟦Λ⟧).obj C)) :=
-  sorry
+    IsIso ((φ₀.pullbackExchange Λ).app (L((g)^*⟦Λ⟧).obj C)) := by
+  have h : IsIso ((pullbackSquareComparison Λ (⟨hs⟩ : CommSq f₀' k' g' e')).hom.app
+      ((M₁.nearbyCycles Λ).obj C) ≫ L((f₀')^*⟦Λ⟧).map ((ψ.pullbackExchange Λ).app C) ≫
+        (φ₀.pullbackExchange Λ).app (L((g)^*⟦Λ⟧).obj C)) := by
+    rw [Hom.pullbackExchange_square Λ φ₀ ψ ψ' φ₁ htot hgen hb hs C]
+    infer_instance
+  have h' := @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance h
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _
+    (Functor.map_isIso L((f₀')^*⟦Λ⟧) ((ψ.pullbackExchange Λ).app C)) h'
 
 end Square
 
@@ -170,6 +177,22 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
+/-- For a cartesian square `j ≫ q = g₁ ≫ s` and a factorization `q = i ≫ g`, the square formed by
+the induced map `A ⟶ Z ×_S S'`, `j`, the first projection and `i` is cartesian. -/
+private lemma isPullback_pullbackLift_comp {𝒞 : Type*} [Category 𝒞] {A B Z S S' : 𝒞}
+    {j : A ⟶ B} {g₁ : A ⟶ S'} {q : B ⟶ S} {s : S' ⟶ S} (h : IsPullback j g₁ q s) {g : Z ⟶ S}
+    [HasPullback g s] (i : B ⟶ Z) (hi : i ≫ g = q) (w : (j ≫ i) ≫ g = g₁ ≫ s) :
+    IsPullback (pullback.lift (j ≫ i) g₁ w) j (pullback.fst g s) i :=
+  IsPullback.of_right (by rw [pullback.lift_snd, hi]; exact h.flip) (pullback.lift_fst _ _ _)
+    (IsPullback.of_hasPullback g s).flip
+
+/-- A natural transformation invertible at `F (G K)` is invertible at `K`, for an adjunction
+`F ⊣ G` with invertible counit. -/
+private lemma isIso_app_of_isIso_app_counit {𝒞 𝒟 ℰ : Type*} [Category 𝒞] [Category 𝒟]
+    [Category ℰ] {F : 𝒞 ⥤ 𝒟} {G : 𝒟 ⥤ 𝒞} (adj : F ⊣ G) [IsIso adj.counit] {H H' : 𝒟 ⥤ ℰ}
+    (α : H ⟶ H') (K : 𝒟) (h : IsIso (α.app (F.obj (G.obj K)))) : IsIso (α.app K) :=
+  (NatTrans.isIso_app_iff_of_iso α (asIso (adj.counit.app K))).mp h
+
 /-- **Reduction of the change of trait to proper models** (the first step of the proof of
 SGA 4½, [Th. finitude], Prop. 3.7). Let `N` be a model over `Spec R₁` along a quasi-compact `q₁`,
 `M` a model over `Spec R₂` along `q₂` and `φ : M ⟶ N` a morphism of models whose square of total
@@ -205,8 +228,68 @@ theorem Hom.isIso_pullbackExchange_app_of_compactification
       (condensedRingObj (Profinite.continuousMapRingObj T) N.generic)))
     (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) _
       ((finiteCoefficientDerivedEquivalence _ T).functor.obj K)) :
-    IsIso ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K) :=
-  sorry
+    IsIso ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K) := by
+  -- the open immersions of `N` into `N̄` and of `M` into `M̄`, with their cartesian squares
+  have hwN : (N.j ≫ cpt.i) ≫ cpt.g = g₁ ≫ Spec.map (CommRingCat.ofHom a₁) := by
+    rw [Category.assoc, ← cpt.comm, hNj.w]
+  have hwφ : (φ.total ≫ cpt.i) ≫ cpt.g = q₂ ≫ Spec.map (CommRingCat.ofHom ι) := by
+    rw [Category.assoc, ← cpt.comm, hφ.w]
+  have : QuasiCompact cpt.i := cpt.quasiCompact_openImmersion ‹_›
+  have hNsq := isPullback_pullbackLift_comp hNj cpt.i cpt.comm.symm hwN
+  have hφsq := isPullback_pullbackLift_comp hφ cpt.i cpt.comm.symm hwφ
+  have : IsOpenImmersion (pullback.lift (φ.total ≫ cpt.i) q₂ hwφ) :=
+    MorphismProperty.of_isPullback hφsq.flip inferInstance
+  have hMsq := isPullback_pullbackLift_comp hMj
+    (pullback.lift (φ.total ≫ cpt.i) q₂ hwφ)
+    (pullback.lift_snd _ _ _) (by rw [Category.assoc, pullback.lift_snd, hMj.w])
+  have : IsOpenImmersion (pullback.lift (N.j ≫ cpt.i) g₁ hwN) :=
+    MorphismProperty.of_isPullback hNsq.flip inferInstance
+  have : QuasiCompact (pullback.lift (N.j ≫ cpt.i) g₁ hwN) :=
+    MorphismProperty.of_isPullback hNsq.flip inferInstance
+  have hC := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj T
+    (pullback.lift (N.j ≫ cpt.i) g₁ hwN) hK
+  have key := Hom.isIso_pullbackExchange_app_upperStar_of_square
+    (Profinite.continuousMapRingObj T) φ.toGeneric
+    (Hom.toOfOverTrait N a₁ b₁ cpt.g q₁ g₁ p₁ hNj.w hNi.w cpt.i cpt.comm.symm)
+    (Hom.toOfOverTrait M a₂ b₂ (pullback.snd cpt.g (Spec.map (CommRingCat.ofHom ι))) q₂ g₂ p₂
+      hMj.w hMi.w (pullback.lift (φ.total ≫ cpt.i) q₂ hwφ)
+      (pullback.lift_snd _ _ _))
+    (ofOverTraitHom a₁ b₁ a₂ b₂ ι c d hc hd cpt.g (pullback.snd _ _) (pullback.fst _ _)
+      pullback.condition)
+    (pullback.lift_fst _ _ _).symm
+    (by
+      apply pullback.hom_ext
+      · simp [reassoc_of% φ.comm_j]
+      · simp [hgen])
+    (by
+      apply pullback.hom_ext
+      · simp [reassoc_of% φ.comm_j]
+      · simp [hgen])
+    (by
+      apply pullback.hom_ext
+      · simp [reassoc_of% φ.comm_i]
+      · simp [hs])
+    (R((pullback.lift (N.j ≫ cpt.i) g₁ hwN)_*⟦Profinite.continuousMapRingObj T⟧).obj K)
+    (by
+      have := (Hom.toOfOverTrait N a₁ b₁ cpt.g q₁ g₁ p₁ hNj.w hNi.w cpt.i
+        cpt.comm.symm).isIso_pullbackExchange_of_isOpenImmersion
+        (Profinite.continuousMapRingObj T) hNsq
+      infer_instance)
+    (by
+      have := (Hom.toOfOverTrait M a₂ b₂ (pullback.snd cpt.g (Spec.map (CommRingCat.ofHom ι)))
+        q₂ g₂ p₂ hMj.w hMi.w
+        (pullback.lift (φ.total ≫ cpt.i) q₂ hwφ)
+        (pullback.lift_snd _ _ _)).isIso_pullbackExchange_of_isOpenImmersion
+        (Profinite.continuousMapRingObj T) hMsq
+      infer_instance)
+    (by exact_mod_proofs H _ hC)
+  have key' : IsIso ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app
+      (L((pullback.lift (N.j ≫ cpt.i) g₁ hwN)^*⟦Profinite.continuousMapRingObj T⟧).obj
+        (R((pullback.lift (N.j ≫ cpt.i) g₁ hwN)_*⟦Profinite.continuousMapRingObj T⟧).obj K))) := by
+    exact_mod_proofs key
+  exact isIso_app_of_isIso_app_counit
+    (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T)
+      (pullback.lift (N.j ≫ cpt.i) g₁ hwN)) _ K key'
 
 end Compactification
 
