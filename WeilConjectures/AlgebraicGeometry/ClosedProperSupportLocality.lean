@@ -88,7 +88,7 @@ theorem closed_proper_support_locality
       obtain ⟨a, x, hx⟩ := hsurj s
       exact Set.mem_iUnion.mpr ⟨a, x, hx⟩
     have hfpqc : Presieve.ofArrows Sᵢ w ∈ fpqcPrecoverage S :=
-      fpqcCover_of_smallEtaleCover S e hcover
+      fpqcCover_of_smallEtaleCover e hcover
     change IsProper (i ≫ p)
     apply isProper_of_fpqc_cover (i ≫ p) Sᵢ w hfpqc
     intro a

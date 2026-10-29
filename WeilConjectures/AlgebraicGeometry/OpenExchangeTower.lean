@@ -108,30 +108,4 @@ attribute [local irreducible] lowerStar openImmersionLowerShriek
 set_option maxHeartbeats 300000 in
 -- The explicit tower and derived-unit rewrites exceed the default cumulative heartbeat bound.
 set_option backward.isDefEq.respectTransparency false in
-/-- The open composition comparison on a compactification is the proper/open tower
-interchange followed by the left-adjoint comparison of the square of inverse images.
-This is an equality
-on every input `M`, before composing with any evaluation counit or proper exchange.
-Source: Stacks Project, more-etale.tex, Tags 0F7B and 0F7J; etale-cohomology.tex,
-Tags 03S3, 03S6 and 0F70 (auxiliary; not a blueprint node).
-Proof: write the compactification as `f = j ≫ r`, its pullback as `(j_U,r_U)`, and
-`b = pullback.fst r u`. Write `J,J',B,V,L` for derived open extension and `P,Q` for
-proper derived image. Apply `unboundedEtaleLowerShriekCompIso_open_source` to `(v,f)`
-and `c`; it supplies the source-open composition factor with terminal model `c.precomp v`.
-For `(f_U,u)`, expand `unboundedEtaleLowerShriekCompIso_tower` using
-`(u,id)` and the compactification `(v ≫ j,r)` transported along the pullback equation.
-Its restriction is exactly `c_U`, and its square gives the proper/open interchange
-`Gamma : Q ⋙ L ⟶ B ⋙ P`. Both composite compactifications have open factor `v ≫ j`
-and proper factor `r`. The congruence comparison and their model-to-chosen comparisons
-therefore cancel. The identity proper comparisons also cancel with those in the
-specified open identifications. The two remaining open composition comparisons combine
-to `a : J' ⋙ B ≅ V ⋙ J`, giving
-`L(t' inverse) ≫ Gamma ≫ P(a) ≫ t`.
-The open factor `a` is the left-adjoint comparison for the square of inverse images:
-open composition is defined by uniqueness of left adjoints, so its value on the two
-factorizations is the conjugate of the square comparison. Applying the exact open
-functors termwise gives the displayed `mapDerivedCategorySquareIso` comparison on
-unbounded derived categories. The identity and empty opens use the same unit
-normalizations and require no exception. The parent theorem separately proves that
-this open square comparison is the inverse mate of open base change. -/
 end AlgebraicGeometry.Etale

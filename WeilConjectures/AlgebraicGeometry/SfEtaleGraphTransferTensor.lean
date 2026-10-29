@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactification
 
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
+
 /-! # Tensoring the compactification graph transfer
 
 Source: steps 3--4 of `lem-sf-etale-graph-unit-tensor`; Stacks Tag 0GL1.
@@ -91,29 +94,4 @@ private theorem section_tensor
   simp only [tensorHom_comp_tensorHom, Iso.hom_inv_id_app_assoc]
   exact identity_pullback_tensor A V M N
 
-/-- Pull back the open projection comparison to the self-base-change square.
-The second tensor factor is identified by the specified inverse-image square and
-exact/left-derived comparison. Source: Stacks Tags 0GL1 and 0E48
-(auxiliary; not a blueprint node). -/
-/-- The graph isomorphism is monoidal after the section and open projection comparisons.
-This is the coherence calculation for pullback composition, the open projection mate, and
-exact coefficient change. Source: Stacks Tag 0GL1, blueprint node
-`lem-sf-etale-graph-transfer-tensor` step 4. -/
-/-- Tensor compatibility of graph transfer, before applying the proper direct image.
-Source: `lem-sf-etale-graph-unit-tensor`, steps 2--4; Stacks Tags 015F and 0GL1
-(auxiliary; not a blueprint node).
-
-Proof in words. The self graph is clopen by the existing graph geometry. For a
-clopen immersion, restriction is both left and right adjoint to extension by zero.
-The counit of the first adjunction is the inverse unit of the second. Transposing
-the tensor projection comparison therefore identifies the two adjoint projection
-maps as inverses. Their unit and counit equations and naturality show that tensoring
-a transfer is the transfer of the restricted tensor map, with pullback tensor
-comparisons inserted. Normalize the graph isomorphism using monoidality of the
-section and composition comparisons, the defining open-projection unit equation,
-and associativity and identity laws for the coefficient square. Apply transfer to
-this normalization and use its naturality at both ends. All calculations use the
-specified comparisons. No clopen derived-product construction, boundedness, or
-quasi-compactness hypothesis is needed; empty schemes and the zero ring satisfy
-the same categorical equations. -/
 end AlgebraicGeometry.Etale

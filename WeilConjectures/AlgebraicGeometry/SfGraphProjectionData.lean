@@ -62,11 +62,6 @@ def sfCompactProjection
         ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)) :=
   ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K
 
-/-- The endpoint wrapper is the original compactification projection.
-Source: its defining equation (auxiliary; not a blueprint node). -/
-/-- Invertibility of the canonical wrapped projection for finite coefficients.
-Source: sfEtaleAmbientAdjointProjection
-(auxiliary; not a blueprint node). -/
 /-- The original graph comparison, with the presentation functor as its target.
 Source: `SfGraphCompactSupportComposition.lean`, explicit graph comparison
 (auxiliary; not a blueprint node). -/

@@ -76,35 +76,4 @@ private theorem square_factors
   simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
 
-/-- The exact derived adjunction mate satisfies the right-derived unit identity on complexes.
-Source: Stacks Project, derived.tex, Tag 0DVC; exact-derived mate factorization
-(auxiliary; not a blueprint node). -/
-/-- The canonical direct-image comparison on a specified K-injective representative:
-`Q(u_*I) ≅ Ru_*(QI) ≅ Ru_*K`, with the second arrow induced by `s.symm`.
-Source: Stacks Project, derived.tex, Tags 070K and 070Y
-(auxiliary; not a blueprint node). -/
-/-- The isomorphism `t = g'⁻¹(s) ≫ φ ≫ Q(j)` associated to the replacement `j`.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A7, and derived.tex, Tag 070I
-(auxiliary; not a blueprint node). -/
-/-- The complex map `e = Ex⁰_I ≫ f'_*(j)`, using the termwise module mate.
-Naturality of the sheaf mate supplies the chain-map condition in every degree.
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7
-(auxiliary; not a blueprint node). -/
-/-- The specified unbounded module exchange is computed on any K-injective representative
-and any K-injective replacement of its inverse image. The two sides are respectively
-`σsrc ≫ Ex_K` and `Q(e) ≫ χ_(J,t)`, with `χ_(I,s)`, `t`, and `e` explicitly defined above.
-Consequently conjugating `Q(e)` by the displayed comparison isomorphisms always yields
-this fixed exchange mate. This includes bounded below injective representatives, and
-requires no K-injectivity of the inverse image of `I`.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K, 08BJ and 0DVC; blueprint main-20261015, sk-def-exchange, final paragraph
-(auxiliary; not a blueprint node).
-
-Proof: the composition and natural-isomorphism factorization identities normalize the
-exact derived inverse-image square. Apply the general exact-derived mate identity on
-homotopy complexes and identify its factors with the complex-level comparisons.
-Naturality in `s.inv` transports this identity from `Q(I)` to `K`. Naturality of the
-right-derived unit along `j`, and cancellation in the explicit definition of `t`,
-identify the resulting right side with `Q(e) ≫ χ_(J,t)`. -/
 end AlgebraicGeometry.Etale

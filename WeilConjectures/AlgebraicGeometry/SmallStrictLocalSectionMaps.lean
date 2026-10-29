@@ -127,7 +127,4 @@ theorem smallStrictHenselizationBaseChangeMap_fst
   simp only [Spec.map_comp, Category.assoc] at hh
   exact congrArg (fun z ↦ pullback.fst (strictHenselizationStructuralMap y) f ≫ z) hh
 
-/-- The site morphism σ_V from the final object to the iterated fibre product.
-Source: Stacks Project, Tag 03Q9, canonical section restriction
-(auxiliary; not a blueprint node). -/
 end AlgebraicGeometry.Scheme

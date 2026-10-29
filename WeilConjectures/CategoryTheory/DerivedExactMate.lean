@@ -20,9 +20,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
 
-/-- An ordinary transformation of exact functors, descended to unbounded derived categories.
-Source: localization of the degreewise transformation
-(auxiliary; not a blueprint node). -/
 end CategoryTheory.Functor
 
 namespace CategoryTheory.Adjunction

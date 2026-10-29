@@ -1062,21 +1062,4 @@ attribute [local irreducible] derivedOpenImmersionLowerShriekProjectionIso
 
 attribute [local irreducible] rightDerivedLowerShriekOfCompactificationCompIso
 
-/-- Projection compatibility on the explicit proper/open tower, before changing
-compactifications or tensor conventions.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0E48
-(auxiliary; not a blueprint node).
-
-Proof: write the tower as open extensions J_j,J_b,J_i and proper images S_q,S_p,S_s.
-The cartesian mixed square intertwines J_i S_q with S_p J_b and their projection maps:
-transpose under J_i adjoint to i*, then use the exchange/projection identity and the
-normalization of open tensor extension under restriction. Expand the two projection maps
-of compactifications as proper projection followed by open tensor extension. Substitute
-this mixed square in the middle, compose the proper projections by their counit identity,
-and compose the open tensor maps by uniqueness of extension by zero. The canonical
-pullback composition isomorphism inserts exactly the final tensor-factor map below.
-Naturality permits all these equalities to be whiskered by the outer proper image and
-inner open extension. All arrows and adjunction identities live in the unbounded derived
-categories; no projection arrow is inverted and no boundedness is used.
--/
 end AlgebraicGeometry.Etale

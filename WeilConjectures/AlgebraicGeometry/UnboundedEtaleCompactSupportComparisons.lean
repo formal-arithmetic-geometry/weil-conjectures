@@ -1003,22 +1003,10 @@ private theorem unbounded_refinement_comparison
     ← refinementLowerStarComp_eq]
   rfl
 
-/-- The common-refinement comparisons satisfy the identity and cocycle laws. In particular,
-passing through any third compactification produces the same map.
-Source: Stacks Project, Tag 0F7I
-(auxiliary; not a blueprint node).
-Proof: identify the actual pairwise comparison with the compact-support formalism's
-common-refinement comparison. Its identity and cocycle equations give both assertions;
-the refinement-composition and naturality equations are already proved in that formalism. -/
 end UnboundedFormalism
 
 attribute [local instance] unbounded_has_base_change unbounded_has_proper_exchange
 
-/-- The graph-normalized comparison for the coarser open of a proper refinement.
-The two Noetherian structures on the ambient are consequences of properness over the
-Noetherian target, supplied explicitly rather than added as hypotheses.
-Source: Stacks Project, Tags 0F7I and 0F7B
-(auxiliary; not a blueprint node). -/
 /-- The composition isomorphism is computed by every proper/open tower. Thus it is
 independent of compactification choices and commutes with their refinement comparisons.
 Source: Stacks Project, Tag 0F7J
@@ -1045,39 +1033,6 @@ private lemma unbounded_pf_id
           Functor.mapDerivedCategoryIdIso _ := by
   exact derived_star_id_conjugate A X
 
-/-- Congruence of the chosen compact-support functors under equality of morphisms.
-Source: Stacks Project, Tag 0F7K
-(auxiliary; not a blueprint node). -/
-/-- The identity compactification, followed by the exact identity sum-extension comparison.
-Source: Stacks Project, Tag 0F7K
-(auxiliary; not a blueprint node). -/
-/-- Associativity is equality of the two specified natural transformations.
-Source: Stacks Project, Tag 0F7K
-(auxiliary; not a blueprint node).
-Proof: identify the chosen compositor, congruence maps and units with the existing
-compact-support formalism. Its associativity equation, proved by refining the tower and
-pasting the proper/open squares, transports to the specified natural transformations. -/
-/-- Both unit laws have the canonical identity-compactification normalization.
-Source: Stacks Project, Tag 0F7K
-(auxiliary; not a blueprint node).
-Proof: identify the chosen composition and identity comparisons with the compact-support
-formalism. The open and proper identity compositors have the specified derived-unit
-normalizations. Transport its left and right unit equations across these identifications. -/
-/-- The exact inverse-image composition is the sheaf comparison descended termwise.
-Source: Stacks Project, Tags 0F7H and 0F7L
-(auxiliary; not a blueprint node). -/
-/-- The exact inverse-image identity is the sheaf identity descended termwise.
-Source: Stacks Project, Tags 0F7H and 0F7L
-(auxiliary; not a blueprint node). -/
-/-- The chosen-compactification exchange with exact inverse images. This extends the
-existing `exactCompactSupportExchange` from the chosen fibre product to an arbitrary
-specified cartesian square, using exactly the same canonical exact-functor transport.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node). -/
-/-- The proper open-restriction map, followed by the inverse of the open unit. It is the
-map called lambda in the tower normalization, formed from the specified exact-derived mate.
-Source: Stacks Project, Tag 0F7B, case (b)
-(auxiliary; not a blueprint node). -/
 /-- The tower interchange has adjunct inverse to the specified proper open-restriction
 exchange. The equation specifies the inverse without choosing any unrelated isomorphism.
 Source: Stacks Project, Tag 0F7B, case (b)
@@ -1087,15 +1042,6 @@ change makes lambda invertible, and the open unit is invertible. The two mate fo
 for the tower exchange transpose to lambda inverse by triangle identities and mate pasting.
 This is equality of the actual maps, and does not use stalks to detect derived morphisms. -/
 set_option backward.isDefEq.respectTransparency false in
-/-- On a compactification, exchange is exactly proper exchange followed by the inverse
-of the degreewise open-extension comparison, with the displayed canonical associators.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node).
-Proof: expand the exact-functor transport in the existing exchange definition.
-The proper factor becomes the exact inverse-image adjunction mate of def-kun-unbounded-exchange.
-The open factor is the degreewise inverse conjugate of the sheaf exchange, hence the map
-of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the exact-functor
-transport isomorphisms. Localization descends this equation on every complex. -/
 section UnboundedBaseChange
 
 set_option backward.isDefEq.respectTransparency false
@@ -1103,14 +1049,6 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
   Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
 
-/-- Compact-support exchange is an isomorphism on every unbounded complex, independently
-of compactification, with the specified exact proper exchange and inverse open factor.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node).
-Proof: identify the canonical exact-derived proper mate and the degreewise open base-change
-isomorphism with the two factors of the compact-support formalism. Proper base change makes
-the first factor invertible for finite coefficients. The formalism's refinement naturality
-and common-refinement cocycle identify the result for every supplied compactification. -/
 end UnboundedBaseChange
 
 section HorizontalPasting
@@ -1128,19 +1066,6 @@ exchanges; the common-refinement factors cancel by the comparison cocycle. -/
 attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Identity base changes give identity exchange after the canonical pullback unit maps.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node).
-Proof: apply the horizontal pasting equation with an identity change of base. Cancel the
-invertible compact-support exchange. Naturality of the inverse-image compositor and its
-unit equation give precisely the displayed identity after the canonical unit maps. -/
-/-- Base change is compatible with the specified compact-support composition maps.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node).
-Proof: apply the proved compact-support-formalism exchange/compositor pasting equation.
-Identify its chosen compact-support compositor and exchange with the concrete maps, and
-its inverse-image compositor with the exact termwise-derived inverse-image comparison.
-The resulting component equation is the asserted equality. -/
 section BoundedBelowRestriction
 
 open Abelian
@@ -1159,13 +1084,6 @@ end Proper
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.rightDerivedFunctorPlus
   Functor.rightDerivedFunctorPlusCompatibility
-/-- The pairwise comparisons restrict to the already specified bounded-below comparisons.
-Source: Stacks Project, Tags 0F7H and 0F7I
-(auxiliary; not a blueprint node).
-Proof: compare the right-derived proper exchange and exact open adjunction under the
-bounded-below inclusion, using their derived units, counits and square equations. This
-identifies the cartesian refinement comparisons. Apply the two common-refinement factors
-and their inverses to obtain equality of the specified pairwise comparison maps. -/
 section ExchangeRestriction
 
 attribute [local irreducible] openImmersionLowerShriekUpperStarAdjunction
@@ -1189,22 +1107,6 @@ end BoundedOpenCompositor
 end CompositionRestriction
 
 set_option maxRecDepth 2048 in
-/-- The normalized composition comparison restricts to the existing bounded-below one.
-Source: Stacks Project, Tags 0F7H--0F7K
-(auxiliary; not a blueprint node).
-Proof: the inclusions preserve the proper/open exchange, open-extension compositor and
-proper direct-image compositor. Paste these three compatibility squares to compare the
-tower maps. The preceding comparison restriction transports the three compactification
-comparisons to the chosen models, yielding the displayed equation. -/
-/-- The compactification-relative exchange restricts to the specified finite-torsion
-bounded-below exchange, with the same proper and degreewise open normalizations.
-Source: Stacks Project, Tags 0F7H and 0F7L
-(auxiliary; not a blueprint node).
-Proof: compare the proper unit--square--counit mate under the bounded-below inclusion,
-then compare the inverse degreewise open base-change factor. Paste these two compatibility
-squares with the full proper/open inclusion comparisons. This gives the first assertion.
-The pairwise comparison restriction transports it to the chosen compactifications and
-gives the second assertion. -/
 end BoundedBelowRestriction
 
 /-- The open factor used above is precisely the specified inverse-conjugate beta map of
@@ -1236,16 +1138,4 @@ attribute [local irreducible] upperStar lowerStar
 
 end NormalizationRefinements
 
-/-- Every proper refinement, including a noncartesian one, gives the comparison normalized
-as the identity on the source open. The graph-normalized open comparison is the identity
-there; applying the ambient direct image and composing direct images gives this formula.
-Source: Stacks Project, Tags 0F7I and 0F7B
-(auxiliary; not a blueprint node).
-Proof: sheaf normalization determines the comparison because its map to direct image is
-monic. The prescribed injective model then identifies its derived map with proper/open
-interchange. For a cartesian refinement, the specified adjunct identifies this with the
-formalism comparison. Apply the normalization family's refinement law to the coarser open
-to obtain composition for arbitrary refinements. The concrete dense refinement of the
-source maps cartesianly to both compactifications. Composition and cancellation of its
-isomorphism give the result for the original refinement. -/
 end AlgebraicGeometry.Etale

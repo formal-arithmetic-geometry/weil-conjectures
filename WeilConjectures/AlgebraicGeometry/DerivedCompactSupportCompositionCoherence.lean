@@ -10,6 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
+
 /-!
 # Structural coherence for three proper images and three open extensions
 
@@ -165,25 +168,4 @@ attribute [local irreducible] rightDerivedLowerStarComp
   openImmersionLowerShriekComp Functor.rightDerivedFunctor Functor.mapDerivedCategory
   lowerStar openImmersionLowerShriek
 
-/-- The structural loop comparing the two parenthesizations of three proper direct
-images and three open extensions is the identity. No proper/open interchange is involved.
-Source: Stacks Project, Tag 0F7K, proof of `lemma-pseudo-functor`, structural
-identifications of the common target; Tag 0D6E for derived direct-image composition
-(auxiliary; not a blueprint node).
-
-Proof: The two open-extension contraction maps agree by the three-fold clause of
-`openImmersionLowerShriekComp_coherence`. Apply the exact functor construction on derived
-categories to this equality. Naturality of `mapDerivedCategoryCompIso` in both factors and
-its associativity identify the resulting equality with the displayed open comparisons.
-For direct images, `rightDerivedLowerStarComp` is the conjugate of the analogous exact
-pullback comparison. The associativity of `upperStarComp`, lifted to derived categories
-by the same exact-functor coherence, implies the associativity of these conjugates by
-`conjugateEquiv_comp`, its whiskering identities, and its associator identity. Thus the
-initial two direct-image comparisons cancel the inverse comparisons at the end, after
-transport along scheme associativity. Move the open comparisons through these natural
-transformations. The open-extension coherence just obtained then cancels the remaining
-open comparisons. Functoriality and the hom/inverse identities leave the identity map.
-The transports express only associativity of scheme composition. The argument works
-for arbitrary schemes and arbitrary commutative coefficients; in particular it does not
-require cartesian squares, properness, Noetherianity, or finiteness of the coefficients. -/
 end AlgebraicGeometry.Etale
