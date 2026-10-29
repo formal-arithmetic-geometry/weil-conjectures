@@ -10,6 +10,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTran
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafMonoidal
 
 /-!
 # The residue field module sheaves are compatible with the derived tensor products
@@ -19,6 +23,15 @@ Write `G_X = residueFieldModuleSheaf X ℓ E` for the equivalence between module
 the derived tensor products, compatibly with the tensor comparisons of the derived pullbacks and
 the isomorphisms `Lf^* ⋙ D(G_X) ≅ D(G_Y) ⋙ Lf^*` (`ProEtale.residueFieldDerivedUpperStarIso`)
 (`ProEtale.exists_comparisonCompatible_residueFieldDerivedUpperStarIso`).
+
+The tensor isomorphisms are the derived comparisons
+`Functor.leftDerivedTensorComparisonOfNatTrans` of the tensor isomorphisms of `G`
+(`ProEtale.residueFieldModuleSheafTensorIso`). Since all the functors involved are exact,
+`residueFieldDerivedUpperStarIso` is the isomorphism of composites of left derived functors induced
+by the underived commutation `f^* ⋙ G_X ≅ G_Y ⋙ f^*`
+(`ProEtale.residueFieldDerivedUpperStarIso_symm_eq`), which is compatible with the tensor
+isomorphisms (`ProEtale.tensorCompatible_residueFieldModuleSheafUpperStarIso`); the result follows
+from `Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison`.
 -/
 
 @[expose] public section
@@ -42,6 +55,32 @@ instance isNoetherianRing_residueFieldCoeff : IsNoetherianRing (ResidueFieldCoef
     inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E)))
   inferInstance
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
+/-- The inverse of `residueFieldDerivedUpperStarIso` is, through the identifications
+`L(G) ≅ D(G)`, the isomorphism `LG_Y ⋙ Lf^* ≅ Lf^* ⋙ LG_X` of composites of left derived functors
+induced by the underived commutation `G_Y ⋙ f^* ≅ f^* ⋙ G_X`, all functors being exact. -/
+lemma residueFieldDerivedUpperStarIso_symm_eq :
+    (residueFieldDerivedUpperStarIso ℓ E f).symm =
+      Functor.isoWhiskerRight
+          (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory.symm
+          ((f)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).leftDerivedFunctor ≪≫
+        Functor.leftDerivedFunctorCompNatIso
+          (f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧
+          (residueFieldModuleSheaf X ℓ E) (residueFieldModuleSheaf Y ℓ E)
+          (f)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]
+          (residueFieldModuleSheafUpperStarIso ℓ E f).symm ≪≫
+        Functor.isoWhiskerLeft
+          ((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).leftDerivedFunctor
+          (residueFieldModuleSheaf X ℓ E).leftDerivedFunctorIsoMapDerivedCategory := by
+  ext K
+  simp [residueFieldDerivedUpperStarIso, Functor.leftDerivedFunctorCompNatIso,
+    Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso,
+    CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory,
+    ProEtale.leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategoryNatIso_symm]
+
+set_option maxHeartbeats 1000000 in
+-- rewriting the tensor comparison of the derived pullback unfolds the derived categories of module
+-- objects
 /-- **`D(G)` is monoidal, compatibly with the derived pullbacks**: there are isomorphisms
 `D(G_X)(A ⊗ᴸ B) ≅ D(G_X) A ⊗ᴸ D(G_X) B` such that the isomorphism
 `Lf^* ⋙ D(G_X) ≅ D(G_Y) ⋙ Lf^*` is compatible with them and with the tensor comparisons of the
@@ -59,7 +98,22 @@ theorem exists_comparisonCompatible_residueFieldDerivedUpperStarIso :
         (leftDerivedUpperStarTensor
           (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
         (leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f)
-        m_X m_Y :=
-  sorry
+        m_X m_Y := by
+  refine ⟨Functor.TensorIso.ofIso
+      (asIso ((residueFieldModuleSheaf X ℓ E).leftDerivedTensorComparisonOfNatTrans
+        (residueFieldModuleSheafTensorIso X ℓ E).hom))
+      (residueFieldModuleSheaf X ℓ E).leftDerivedFunctorIsoMapDerivedCategory,
+    Functor.TensorIso.ofIso
+      (asIso ((residueFieldModuleSheaf Y ℓ E).leftDerivedTensorComparisonOfNatTrans
+        (residueFieldModuleSheafTensorIso Y ℓ E).hom))
+      (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory, ?_⟩
+  rw [residueFieldDerivedUpperStarIso_symm_eq,
+    CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
+      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f,
+    ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
+    ← Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans,
+    ← Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans]
+  exact (Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison _ _ _ _
+    _ _ _ _ _ (tensorCompatible_residueFieldModuleSheafUpperStarIso ℓ E f).inv).ofIso _ _
 
 end AlgebraicGeometry.ProEtale
