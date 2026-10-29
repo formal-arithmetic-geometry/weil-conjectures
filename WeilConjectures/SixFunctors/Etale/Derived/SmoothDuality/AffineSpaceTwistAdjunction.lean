@@ -171,8 +171,7 @@ theorem nonempty_adjunction_projectiveLine [HasTateTwist.IsNormalized Λ] (S : S
     Nonempty (R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
       L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
         twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1) := by
-  obtain ⟨adj, -, -⟩ := projectiveLineAdjunctionBaseChange_of_isNormalized Λ
-    (IsPullback.id_horiz (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))
+  obtain ⟨adj, -, -⟩ := projectiveLineAdjunctionBaseChange_of_isNormalized Λ (𝟙 S)
   exact ⟨adj⟩
 
 /-- **The affine-line adjunction** `Rp_! ⊣ Lp^*(1)[2]` for `p : 𝔸¹_S ⟶ S` and a normalized

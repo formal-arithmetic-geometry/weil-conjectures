@@ -12427,6 +12427,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualityBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.LowerShriekTraceCounitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange
