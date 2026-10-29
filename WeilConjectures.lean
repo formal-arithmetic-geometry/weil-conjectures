@@ -8527,6 +8527,10 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryS
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunction
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionTriangle
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionUnit
 public import WeilConjectures.CategoryTheory.Monoidal.MapIsoUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
@@ -12442,6 +12446,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmers
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
