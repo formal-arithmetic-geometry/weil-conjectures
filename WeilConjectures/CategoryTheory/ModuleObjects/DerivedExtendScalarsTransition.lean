@@ -115,8 +115,8 @@ lemma comp_derivedExtendScalarsTransition_app {A B : DerivedCategory (Mod C R)}
     CategoryTheory.Functor.map_id, Category.id_comp]
   exact ((derivedExtendMapDerivedCategoryAdjunction ψ).unit.naturality_assoc s _)
 
-/-- The transition intertwines `D(Res_φ')` of a morphism `s : S' ⊗ᴸ_R B ⟶ S' ⊗ᴸ_R A` and `D(Res_φ)` of
-its reduction. -/
+/-- The transition intertwines `D(Res_φ')` of a morphism `s : S' ⊗ᴸ_R B ⟶ S' ⊗ᴸ_R A` and
+`D(Res_φ)` of its reduction. -/
 @[reassoc]
 lemma map_comp_derivedReductionTransition_app {A B : DerivedCategory (Mod C R)}
     (s : (extendScalars φ').leftDerivedFunctor.obj B ⟶
