@@ -9488,6 +9488,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTatePureLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassAffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFrames
