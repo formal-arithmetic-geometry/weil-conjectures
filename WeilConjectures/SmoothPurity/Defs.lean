@@ -43,7 +43,8 @@ twists need not be recorded.
 ## Sorried data
 
 The orientation `γ_f : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint `def-pur-smooth-trace`)
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint `sk-thm-purity-transport`,
+used in `def-pur-smooth-trace`)
 is a `@[no_expose]` definition with value `sorry`: its construction (the finite orientations
 transported through the integral tower, normalized by integration on the affine line) is not
 formalized. The trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
@@ -123,11 +124,13 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-/-- Blueprint `def-pur-smooth-trace` (`γ_{f,Λ_Y}`, `sk-prop-sp-orientation`): the **orientation**
-`ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`, the purity
-isomorphism normalized by integration on the affine line (the canonical orientation of
-`𝔸¹_Y ⟶ Y`). Its construction (from the finite orientations through the integral tower and
-scalar extension) is not formalized; it is the datum the smooth trace is built from. -/
+/-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
+**orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension
+`d`, the purity isomorphism normalized by integration on the affine line (the canonical
+orientation of `𝔸¹_Y ⟶ Y`). Its construction (from the finite orientations through the integral
+tower and scalar extension) is not formalized; it is the datum the smooth trace is built from.
+The signature does not carry `[SmoothOfRelativeDimension d f.left]` because the (sorried) value
+does not use it; the datum is meaningful only for `f` smooth of pure relative dimension `d`. -/
 @[no_expose]
 noncomputable def smoothOrientation :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
