@@ -12646,6 +12646,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTensor
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
@@ -13564,6 +13565,7 @@ public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
 public import WeilConjectures.TateTwist.TateModuleTrivialization
+public import WeilConjectures.TateTwist.UpperStar
 public import WeilConjectures.TateTwist.UpperStarExtendScalars
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
 public import WeilConjectures.Topology.AbelianIntegerExtensionMono
@@ -14065,6 +14067,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwist
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingAutInvariant
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersion
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersionGenericBase
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedImmersionInputs
