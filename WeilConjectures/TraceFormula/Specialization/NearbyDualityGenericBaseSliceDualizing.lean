@@ -5,21 +5,21 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceTwist
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceTwistIso
 
 /-!
 
 # The dualizing maps and generic slicing
 
 The dualizing map of a trait model over a generic base restricts, along the slice exchange, to a
-dualizing map of its generic slice which is the twist by `ℚ̄_ℓ(1)[2]` of the dualizing map of the
+dualizing map of its generic slice which is the twist by `ℚ̄_ℓ(0)[2]` of the dualizing map of the
 slice model (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`,
 blueprint `det-tf-nearby-duality-slice`, "the twist (1)" and "the map `θ`"). It is deduced from
-the twist of the dualizing complexes on the fibres of the coordinate
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_dualizingComplex_genericSlice_twist`, blueprint
-`det-pd-generic-dualizing-twist`) and the compatibility of the dualizing maps with slicing for
-any such twist identifications
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap_of_twist`).
+the twist equation `p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`): the duality maps are
+compared by `CategoryTheory.Verdier.isIso_nearbyDualityMap_twist_comp_inv_iff` and the invariance
+under inertia is `NearbyCyclesModel.NearbyDualizingDataOfGenericBase.autAction_comp_θ`, inertia
+acting trivially on the twist.
 
 -/
 
@@ -63,53 +63,52 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of
 
 namespace IsTraitModelOfGenericBase
 
-/-- **The dualizing maps are compatible with generic slicing** (blueprint
-`det-tf-nearby-duality-slice`, "the map `θ`"), for twist identifications
-`τ_g : c^* ω_{X₁} ≅ ω_{X₂}(1)[2]` and `τ_s : p^* ω_{X'} ≅ ω_{𝒳''_s}(1)[2]` of the dualizing
-complexes on the fibres of the coordinate. There is a dualizing map
-`θ : Ψ_{M''} c^* ω_{X₁} ⟶ p^* ω_{X'}` of the generic slice model such that
-* `θ` restricts `p^* θ_M` along the slice exchange: `p^* θ_M = θ ∘ α_{ω_{X₁}}`;
-* the duality map for `θ` is an isomorphism wherever the duality map `δ_{M''}` of the slice
-  model for the family `DK` is (through `τ_g`, `τ_s`, `θ` is the twist of `θ_{M''}`, up to an
-  automorphism of the dualizing complex);
-* `θ` is invariant under the automorphisms of the generic slice model which are the identity on
-  its total space (inertia acts trivially on `ℚ̄_ℓ(1)`).
+/-- **The dualizing map of a model restricts to the twist of that of its generic slice**
+(blueprint `det-tf-nearby-duality-slice`, the twist (1) and "the map `θ`"): there are
+identifications `u : c^* ω_{X₁} ≅ ω_{X₂} ⊗ T` and `v : p^* ω_{X'} ≅ ω_{𝒳''_s} ⊗ T`,
+`T = ℚ̄_ℓ(0)[2]` (over the separably closed `K`, `ℚ̄_ℓ(1) ≅ ℚ̄_ℓ(0)`), such that the restriction of
+`p^* θ_M` along the slice exchange `α` is the twist of the dualizing map `θ_{M''}` of the slice:
+`p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`.
 
-Unfinished. The blueprint proof embeds `𝒳` locally over `𝔸¹_S` as a closed subscheme of
-`𝔸^r_{𝔸¹_S}`, identifies `θ` on the smooth model and its slice with the smooth purity
-isomorphisms (`Ψ(ℚ̄_ℓ) ≅ ℚ̄_ℓ` for smooth models), which differ by `ℚ̄_ℓ(1)[2]`, and transports
-along the exceptional exchange `β_i` of the closed immersion. -/
-theorem exists_genericSliceDualizingMap_of_twist (D : NearbyDualizingDataOfGenericBase k' ℓ)
-    (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
-    (τg : (genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁) ≅
-      dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hb) ⊗
-        boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hb) 1 2)
-    (τs : (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X') ≅
-      dualizingComplex ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k'))) ⊗
-        boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
-          1 2) :
-    ∃ θ : (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
-        ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁)) ⟶
-      (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X'),
-      (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).map (D.θ h) =
-          (genericSliceExchange (traitSliceCoord k') ℓ h hb).app (dualizingComplex ℓ X₁) ≫ θ ∧
-        (∀ A : Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦
-            Profinite.padicAlgClRingObj ℓ⟧,
-          IsIso (nearbyDualityMapOfGenericBase ℓ DK
-            (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
-              h.isTraitModelOver) A) →
-          IsIso (genericSliceDualityMap (traitSliceCoord k') ℓ h hb θ A)) ∧
-        ∀ ψ : (genericSliceModel (traitSliceCoord k') hb).Hom
-            (genericSliceModel (traitSliceCoord k') hb) (𝟙 _) (𝟙 _),
-          ψ.total = 𝟙 _ → IsIso ψ.generic →
-            (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ).app _ ≫ θ = θ := by
+Unfinished. The blueprint proof embeds the total space locally over `𝔸¹_S` into `𝔸^r_{𝔸¹_S}`,
+identifies `θ` on the smooth model and its slice with smooth purity (which differ by
+`ℚ̄_ℓ(1)[2]`), transports along the exceptional exchange `β_i` of the closed immersion
+(`NearbyDualizingDataOfGenericBase.closedImmersion_law`) and uses the commutation of `Ri^!` with
+generic restriction (blueprint `det-pd-generic-closed-hom` (1)). In this formalization the
+dualizing maps are relative to a base field: the embedding is defined over the trait, not over the
+base field `F` of `M`, so every route first needs `M` as a model over the generic point `η` of the
+trait, that is, the base change of dualizing complexes along the field extension `F ⟶ η`,
+compatibly with traces, which is not available. -/
+theorem exists_iso_map_θ_eq_twist (D : NearbyDualizingDataOfGenericBase k' ℓ)
+    (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ) :
+    ∃ (u : (genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁) ≅
+        dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hb) ⊗
+          boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hb) 0 2)
+      (v : (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X') ≅
+        dualizingComplex ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k'))) ⊗
+          boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
+            0 2),
+      (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).map (D.θ h) ≫ v.hom =
+        (genericSliceExchange (traitSliceCoord k') ℓ h hb).app (dualizingComplex ℓ X₁) ≫
+          (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).map u.hom ≫
+          (genericSliceTwistIso ℓ h hb _).hom ≫
+          DK.θ (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
+            h.isTraitModelOver) ▷ _ := by
   sorry
 
-/-- **The dualizing maps and generic slicing** (blueprint `det-tf-nearby-duality-slice`,
-"the twist (1)" and "the map `θ`"): the compatibility
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap_of_twist` for the
-twist identifications of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_dualizingComplex_genericSlice_twist`. -/
+/-- **The dualizing maps and generic slicing** (blueprint `det-tf-nearby-duality-slice`, "the
+map `θ`"). There is a dualizing map `θ : Ψ_{M''} c^* ω_{X₁} ⟶ p^* ω_{X'}` of the generic slice
+model such that
+* `θ` restricts `p^* θ_M` along the slice exchange: `p^* θ_M = θ ∘ α_{ω_{X₁}}`;
+* the duality map for `θ` is an isomorphism wherever the duality map `δ_{M''}` of the slice model
+  for the family `DK` is;
+* `θ` is invariant under the automorphisms of the generic slice model which are the identity on
+  its total space and act on `Spec Ω_K` over `η_K` (inertia acts trivially on `ℚ̄_ℓ(1)`).
+
+It is `θ = Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T ≫ v⁻¹` for the identifications of
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`; the duality maps are
+compared by `CategoryTheory.Verdier.isIso_nearbyDualityMap_of_iso_twist_iff` and the invariance
+is `NearbyCyclesModel.NearbyDualizingDataOfGenericBase.autAction_comp_θ`. -/
 theorem exists_genericSliceDualizingMap (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ) :
     ∃ θ : (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
@@ -125,10 +124,25 @@ theorem exists_genericSliceDualizingMap (D : NearbyDualizingDataOfGenericBase k'
           IsIso (genericSliceDualityMap (traitSliceCoord k') ℓ h hb θ A)) ∧
         ∀ ψ : (genericSliceModel (traitSliceCoord k') hb).Hom
             (genericSliceModel (traitSliceCoord k') hb) (𝟙 _) (𝟙 _),
-          ψ.total = 𝟙 _ → IsIso ψ.generic →
+          ψ.total = 𝟙 _ →
+          (∃ σ : Spec (.of (traitGenericField (traitSliceField k'))) ⟶
+              Spec (.of (traitGenericField (traitSliceField k'))),
+            σ ≫ traitGenericPointToSpec (traitSliceField k') =
+                traitGenericPointToSpec (traitSliceField k') ∧
+              ψ.generic ≫ pullback.snd _ _ = pullback.snd _ _ ≫ σ) →
             (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ).app _ ≫ θ = θ := by
-  obtain ⟨⟨τg⟩, ⟨τs⟩⟩ := h.exists_dualizingComplex_genericSlice_twist ℓ hb
-  exact h.exists_genericSliceDualizingMap_of_twist ℓ hb D DK τg τs
+  obtain ⟨u, v, huv⟩ := h.exists_iso_map_θ_eq_twist ℓ hb D DK
+  refine ⟨(genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).map u.hom ≫
+    (genericSliceTwistIso ℓ h hb _).hom ≫ DK.θ (isTraitModelOfGenericBase_genericSliceModel
+      (traitSliceCoord k') hb h.isTraitModelOver) ▷ _ ≫ v.inv,
+    eq_comp_comp_comp_inv_of_comp_hom_eq v huv, fun A hA ↦ ?_, fun ψ hψ hσ ↦ ?_⟩
+  · exact (Verdier.isIso_nearbyDualityMap_twist_comp_inv_iff _ (genericSliceTwistIso ℓ h hb)
+      (fun x y ↦ boundedConstructibleTensorMap_natural _ x y) (by sorry) (by sorry) (by sorry)
+      (by sorry) _ u v A).2 hA
+  · obtain ⟨σ, hσ, hψσ⟩ := hσ
+    exact Verdier.app_comp_twist_eq (genericSliceTwistIso ℓ h hb)
+      (genericSliceSelfAction (traitSliceCoord k') ℓ h hb ψ) (by sorry) _
+      (DK.autAction_comp_θ _ ψ hψ σ hσ hψσ) u v
 
 end IsTraitModelOfGenericBase
 

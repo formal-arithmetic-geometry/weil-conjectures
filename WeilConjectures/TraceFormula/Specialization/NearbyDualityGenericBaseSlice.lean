@@ -200,7 +200,7 @@ theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase
       (fun a ↦ IsTraitModelOfGenericBase.genericSliceSelfAction (traitSliceCoord k') ℓ h hb (ψ a))
       (fun a ↦ IsTraitModelOfGenericBase.genericSliceSelfAction_tensor (traitSliceCoord k') ℓ h hb
         (ψ a))
-      (fun a ↦ hfix _ (hψ a).1 (hψ a).2.1) hinv₂ (hn _) r₁ (by exact_mod_proofs h₁)
+      (fun a ↦ hfix _ (hψ a).1 (hψ a).2.2) hinv₂ (hn _) r₁ (by exact_mod_proofs h₁)
       (by exact_mod_proofs hρ₁) r₂ h₂ hρ₂
       (h.isIso_closedHomComparison_sliceSpecialUpperStar ℓ hb _)
       (h.isIso_closedHomComparison_genericSliceUpperStar ℓ hb L) (htw _ (hslice _))

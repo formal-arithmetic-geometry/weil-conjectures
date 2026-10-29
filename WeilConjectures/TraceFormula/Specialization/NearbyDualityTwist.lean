@@ -140,4 +140,42 @@ theorem isIso_nearbyDualityMap_of_iso_twist_iff
     map_ihom_map_comp_nearbyDualityMap μ hμ, hθ, ← Ψ.map_comp_assoc, Iso.inv_hom_id, Ψ.map_id,
     Category.id_comp]
 
+
+/-- **Invariance of a twisted dualizing map.** If an endomorphism `ρ` of `Ψ` commutes with the
+twist, `ρ_{A ⊗ T} ≫ κ_A = κ_A ≫ ρ_A ▷ T'`, and fixes `θ`, then it fixes the dualizing map
+`Ψ u ≫ κ_ω ≫ θ ▷ T' ≫ u'⁻¹` transported along `u : ω₁ ≅ ω ⊗ T`, `u' : ω₁' ≅ ω' ⊗ T'`. -/
+theorem app_comp_twist_eq (ρ : Ψ ⟶ Ψ)
+    (hρκ : ∀ A : C, ρ.app (A ⊗ T) ≫ (κ A).hom = (κ A).hom ≫ ρ.app A ▷ T')
+    {ω : C} {ω' : C'} (θ : Ψ.obj ω ⟶ ω') (hρθ : ρ.app ω ≫ θ = θ) {ω₁ : C} {ω₁' : C'}
+    (u : ω₁ ≅ ω ⊗ T) (u' : ω₁' ≅ ω' ⊗ T') :
+    ρ.app ω₁ ≫ Ψ.map u.hom ≫ (κ ω).hom ≫ θ ▷ T' ≫ u'.inv =
+      Ψ.map u.hom ≫ (κ ω).hom ≫ θ ▷ T' ≫ u'.inv := by
+  rw [← ρ.naturality_assoc, reassoc_of% (hρκ ω), ← comp_whiskerRight_assoc, hρθ]
+
+/-- `CategoryTheory.Verdier.isIso_nearbyDualityMap_of_iso_twist_iff` for the transported dualizing
+map `Ψ u ≫ κ_ω ≫ θ ▷ T' ≫ u'⁻¹`. -/
+theorem isIso_nearbyDualityMap_twist_comp_inv_iff
+    (hμ : ∀ {A A' B B' : C} (x : A ⟶ A') (y : B ⟶ B'),
+      (Ψ.map x ⊗ₘ Ψ.map y) ≫ μ A' B' = μ A B ≫ Ψ.map (x ⊗ₘ y))
+    (hκ : ∀ {A B : C} (f : A ⟶ B), Ψ.map (f ▷ T) ≫ (κ B).hom = (κ A).hom ≫ Ψ.map f ▷ T')
+    (hκμ : ∀ A B : C, μ A (B ⊗ T) ≫ Ψ.map (α_ A B T).inv ≫ (κ (A ⊗ B)).hom =
+      Ψ.obj A ◁ (κ B).hom ≫ (α_ _ _ _).inv ≫ μ A B ▷ T')
+    (hT : IsInvertible T) (hT' : IsInvertible T')
+    {ω : C} {ω' : C'} (θ : Ψ.obj ω ⟶ ω') {ω₁ : C} {ω₁' : C'} (u : ω₁ ≅ ω ⊗ T)
+    (u' : ω₁' ≅ ω' ⊗ T') (M : C) :
+    IsIso (nearbyDualityMap μ (Ψ.map u.hom ≫ (κ ω).hom ≫ θ ▷ T' ≫ u'.inv) M) ↔
+      IsIso (nearbyDualityMap μ θ M) :=
+  isIso_nearbyDualityMap_of_iso_twist_iff μ κ hμ hκ hκμ hT hT' θ u u' _
+    (by simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]) M
+
 end CategoryTheory.Verdier
+
+namespace CategoryTheory
+
+/-- From `x ≫ v = a ≫ z₁ ≫ z₂ ≫ z₃` with `v` an isomorphism, `x = a ≫ z₁ ≫ z₂ ≫ z₃ ≫ v⁻¹`. -/
+lemma eq_comp_comp_comp_inv_of_comp_hom_eq {C : Type u₁} [Category.{v₁} C] {P X Y Q R S : C}
+    {x : P ⟶ X} (v : X ≅ Y) {a : P ⟶ Q} {z₁ : Q ⟶ R} {z₂ : R ⟶ S} {z₃ : S ⟶ Y}
+    (h : x ≫ v.hom = a ≫ z₁ ≫ z₂ ≫ z₃) : x = a ≫ z₁ ≫ z₂ ≫ z₃ ≫ v.inv := by
+  simp only [← reassoc_of% h, Iso.hom_inv_id, Category.comp_id]
+
+end CategoryTheory

@@ -5,18 +5,22 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.TateTwist.UpperStar
+public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesTateTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwist
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingAutInvariant
 
 /-!
 
-# The dualizing complexes of a generic slice
+# The twist of the nearby cycles of a generic slice
 
-For the generic slice of a trait model over a generic base along a coordinate `b`, the pullbacks
-of the dualizing complexes along the generic-fibre map `c : X₂ ⟶ X₁` and the special-fibre map
-`p : 𝒳''_s ⟶ X'` are the dualizing complexes of the slice twisted by `ℚ̄_ℓ(1)[2]`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_dualizingComplex_genericSlice_twist`,
-blueprint `det-pd-generic-dualizing-twist`).
+Let `M''` be the generic slice of a trait model over a generic base along a coordinate, over the
+trait `Spec K⟦t⟧`, `K = k'(x)^alg`. The pullbacks of the dualizing complexes to the slice are those
+of the slice twisted by `ℚ̄_ℓ(1)[2]`; over the separably closed field `K` the Tate twist
+`ℚ̄_ℓ(1)` is trivial, so the twist used is `T = ℚ̄_ℓ(0)[2]`. This file defines the isomorphism
+`κ : Ψ_{M''}(A ⊗ T) ≅ Ψ_{M''} A ⊗ T`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceTwistIso`).
 
 -/
 
@@ -24,7 +28,7 @@ blueprint `det-pd-generic-dualizing-twist`).
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -59,23 +63,23 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of
 
 namespace IsTraitModelOfGenericBase
 
-/-- **The dualizing complex on a generic fibre is twisted** (blueprint
-`det-pd-generic-dualizing-twist`, section `sk-lem-pd-generic-restriction` of the six-functor
-chapter). Restricting to the fibre of a coordinate over the generic point of the affine line
-twists the dualizing complex by `ℚ̄_ℓ(1)[2]`: on the generic fibres,
-`c^* ω_{X₁} ≅ ω_{X₂}(1)[2]` (`X₂` the fibre of `b_η` over the generic point
-`Spec Frac K⟦t⟧ ⟶ 𝔸¹_η`, after the base change of fields `F ⟶ Frac k'⟦t⟧`, which does not
-twist), and on the special fibres `p^* ω_{X'} ≅ ω_{𝒳''_s}(1)[2]` (`𝒳''_s` the fibre of
-`b_s` over the geometric generic point `Spec K ⟶ 𝔸¹_{k'}`). -/
-theorem exists_dualizingComplex_genericSlice_twist :
-    Nonempty ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X₁) ≅
-        dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hb) ⊗
-          boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hb) 1 2) ∧
-      Nonempty ((sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X') ≅
-        dualizingComplex ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k'))) ⊗
-          boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
-            1 2) :=
-  sorry
+/-- The twist of the nearby cycles of the generic slice model by `T = ℚ̄_ℓ(0)[2]`:
+`κ : Ψ_{M''}(A ⊗ T) ≅ Ψ_{M''} A ⊗ T` (`NearbyCyclesModel.nearbyCyclesTateTwistIso` for `d = 0`,
+with the canonical pullbacks of `ℚ̄_ℓ(0)`). -/
+noncomputable def genericSliceTwistIso
+    (A : Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
+        (A ⊗ boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hb) 0 2) ≅
+      (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj A ⊗
+        boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
+          0 2 :=
+  (genericSliceModel (traitSliceCoord k') hb).nearbyCyclesTateTwistIso
+    ((isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
+      h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ))
+    (isDualizable_tateTwistDerived_of_trait ℓ (pullback.snd b (traitSlice (traitSliceCoord k'))) 0)
+    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ)
+    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ)
+    (leftDerivedUpperStarTateTwistDerivedZeroIso _ ℓ) 2 A
 
 end IsTraitModelOfGenericBase
 
