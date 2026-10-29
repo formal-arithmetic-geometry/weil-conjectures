@@ -9,7 +9,8 @@ public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraMapDerivedComp
+public import
+WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraMapDerivedComp
 
 /-!
 # Base change of the condensed lower shriek to the geometric fibres
@@ -42,18 +43,22 @@ needs no properness.
 
 The canonical Weil structure `(Fr⁻¹)_* p^* M ≅ p^* M` of a pulled-back object
 (`AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilLowerStar`) is compared with the Weil
-structures of `weilUpperStar`, `weilLowerStar` and `weilExtensionByZero`, which are defined as
+structures of `geometricFiberMapWeilUpperStar`, `geometricFiberMapWeilLowerStar` and
+`weilExtensionByZero`, which are defined as
 (iterated) mates of the Frobenius exchange of the pushforward. The whole comparison is reduced to
 a single Frobenius compatibility, for the pullback comparison `φ^* ⋙ p_X^* ≅ p_Y^* ⋙ φ̄^*`
 (`AlgebraicGeometry.ProEtale.CondensedRing.UpperStarWeilCompatible`): given it,
 
 - `AlgebraicGeometry.ProEtale.CondensedRing.upperStarCompGeometricFiberWeilLowerStarIso` lifts the
   pullback comparison to Weil objects;
-- its mate along `φ^* ⊣ φ_*` and the lifted adjunction `weilUpperStar ⊣ weilLowerStar` is the
-  base change morphism `geometricFiberWeil (φ_* M) ⟶ weilLowerStar φ (geometricFiberWeil M)`
+- its mate along `φ^* ⊣ φ_*` and the lifted adjunction `geometricFiberMapWeilUpperStar ⊣
+  geometricFiberMapWeilLowerStar` is the
+  base change morphism `geometricFiberWeil (φ_* M) ⟶ geometricFiberMapWeilLowerStar φ
+  (geometricFiberWeil M)`
   (`AlgebraicGeometry.ProEtale.CondensedRing.lowerStarGeometricFiberWeilBaseChange`), an
   isomorphism since its underlying morphism is the weakly étale base change morphism;
-- its inverse mate along `j_! ⊣ j^*` and `weilExtensionByZero ⊣ weilUpperStar` is the base change
+- its inverse mate along `j_! ⊣ j^*` and `weilExtensionByZero ⊣ geometricFiberMapWeilUpperStar` is
+the base change
   morphism of extension by zero
   (`AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilExtensionByZeroBaseChange`), an
   isomorphism since its conjugate along the composite adjunctions is a weakly étale base change
@@ -483,29 +488,32 @@ noncomputable def geometricFiberUpperStarComparison :
 /-- **Frobenius compatibility of the pullback comparison**: the comparison
 `p_X^* φ^* N ≅ φ̄^* p_Y^* N` intertwines the canonical Weil structure of `p_X^* (φ^* N)`
 (`AlgebraicGeometry.ProEtale.CondensedRing.geometricFiberWeilLowerStar`) with the Weil structure
-of `weilUpperStar φ (p_Y^* N)`. -/
+of `geometricFiberMapWeilUpperStar φ (p_Y^* N)`. -/
 def UpperStarWeilCompatible : Prop :=
   ∀ N, (lowerStar Λ s.geometricGaloisFrobenius.inv).map
       ((geometricFiberUpperStarComparison Λ φ h).hom.app N) ≫
-      ((weilUpperStar Λ φ h).obj ((geometricFiberWeilLowerStar Λ t).obj N)).str.hom =
+      ((geometricFiberMapWeilUpperStar Λ φ h).obj
+        ((geometricFiberWeilLowerStar Λ t).obj N)).str.hom =
     ((geometricFiberWeilLowerStar Λ s).obj ((φ)^*⟦Λ⟧.obj N)).str.hom ≫
       (geometricFiberUpperStarComparison Λ φ h).hom.app N
 
 variable {Λ φ h}
 
 /-- The pullback comparison as an isomorphism of Weil objects, given its Frobenius
-compatibility: `geometricFiberWeil (φ^* N) ≅ weilUpperStar φ (geometricFiberWeil N)`. -/
+compatibility: `geometricFiberWeil (φ^* N) ≅ geometricFiberMapWeilUpperStar φ (geometricFiberWeil
+N)`. -/
 noncomputable def upperStarCompGeometricFiberWeilLowerStarIso
     (hc : UpperStarWeilCompatible Λ φ h) :
     (φ)^*⟦Λ⟧ ⋙ geometricFiberWeilLowerStar Λ s ≅
-      geometricFiberWeilLowerStar Λ t ⋙ weilUpperStar Λ φ h :=
+      geometricFiberWeilLowerStar Λ t ⋙ geometricFiberMapWeilUpperStar Λ φ h :=
   Endofunctor.IsoAlgebra.isoMkOfForget (geometricFiberUpperStarComparison Λ φ h) hc
 
-/-- The base change morphism `geometricFiberWeil (φ_* M) ⟶ weilLowerStar φ (geometricFiberWeil M)`
+/-- The base change morphism `geometricFiberWeil (φ_* M) ⟶ geometricFiberMapWeilLowerStar φ
+(geometricFiberWeil M)`
 of Weil objects, the mate of the pullback comparison. -/
 noncomputable def lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompatible Λ φ h) :
     (φ)_*⟦Λ⟧ ⋙ geometricFiberWeilLowerStar Λ t ⟶
-      geometricFiberWeilLowerStar Λ s ⋙ weilLowerStar Λ φ h :=
+      geometricFiberWeilLowerStar Λ s ⋙ geometricFiberMapWeilLowerStar Λ φ h :=
   (mateEquiv (upperStarLowerStarAdjunction Λ φ)
     (Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction
       (upperStarLowerStarAdjunction Λ (Scheme.Hom.geometricFiberMap φ h))
@@ -518,7 +526,8 @@ noncomputable def lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompa
       (upperStarCompGeometricFiberWeilLowerStarIso hc).inv)).natTrans
 
 /-- Weakly étale base change for the pushforward of Weil objects: the base change morphism
-`geometricFiberWeil (φ_* M) ⟶ weilLowerStar φ (geometricFiberWeil M)` is an isomorphism, its
+`geometricFiberWeil (φ_* M) ⟶ geometricFiberMapWeilLowerStar φ (geometricFiberWeil M)` is an
+isomorphism, its
 underlying morphism being the weakly étale base change morphism of module objects. -/
 instance isIso_lowerStarGeometricFiberWeilBaseChange (hc : UpperStarWeilCompatible Λ φ h) :
     IsIso (lowerStarGeometricFiberWeilBaseChange hc) := by
@@ -618,12 +627,13 @@ section Derived
 variable {Λ}
 
 /-- Derived pushforward of Weil objects and pullback to the geometric fibres:
-`D(p_X^*) ⋙ R(weilLowerStar φ) ≅ R(φ_*) ⋙ D(p_Y^*)`, given the Frobenius compatibility of the
+`D(p_X^*) ⋙ R(geometricFiberMapWeilLowerStar φ) ≅ R(φ_*) ⋙ D(p_Y^*)`, given the Frobenius
+compatibility of the
 pullback comparison of `φ`. -/
 noncomputable def geometricFiberWeilRightDerivedLowerStarIso
     {φ : X₀ ⟶ Y₀} {h : φ ≫ t = s} (hc : UpperStarWeilCompatible Λ φ h) :
     (geometricFiberWeilLowerStar Λ s).mapDerivedCategory ⋙
-        (weilLowerStar Λ φ h).rightDerivedFunctor ≅
+        (geometricFiberMapWeilLowerStar Λ φ h).rightDerivedFunctor ≅
       (φ)_*⟦Λ⟧.rightDerivedFunctor ⋙ (geometricFiberWeilLowerStar Λ t).mapDerivedCategory :=
   (Endofunctor.IsoAlgebra.rightDerivedFunctorCompMapOfNatIsoIsoOfIso
       (lowerStarGeometricFiberMapCompFrobeniusIso Λ φ h) (geometricFiberWeilLowerStar Λ s)
@@ -655,7 +665,7 @@ noncomputable def weilRightDerivedLowerShriek (c : Compactification f) (h : f �
     DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ s.geometricGaloisFrobenius.inv)) ⥤
       DerivedCategory (Endofunctor.IsoAlgebra (lowerStar Λ t.geometricGaloisFrobenius.inv)) :=
   (weilExtensionByZero Λ c.i (c.i_comp_g_comp h)).mapDerivedCategory ⋙
-    (weilLowerStar Λ c.g (rfl : c.g ≫ t = c.g ≫ t)).rightDerivedFunctor
+    (geometricFiberMapWeilLowerStar Λ c.g (rfl : c.g ≫ t = c.g ≫ t)).rightDerivedFunctor
 
 variable {Λ}
 
