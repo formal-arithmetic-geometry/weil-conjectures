@@ -12668,6 +12668,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
@@ -13478,6 +13479,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.SheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.SheafIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.Tower
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerContinuity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerTrace
