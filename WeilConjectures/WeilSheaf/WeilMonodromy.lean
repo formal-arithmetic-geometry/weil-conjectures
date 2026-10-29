@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationFunctor
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.WeilSheaf.LisseFiltration
@@ -136,24 +137,6 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   {M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K} {B : BasePointData W}
 
 section StalkMap
-
-/-- The stalk map of a composite is the composite of the stalk maps. -/
-lemma stalkMap_comp {F G H : WeilSheaf K l C} (φ : F ⟶ G) (ψ : G ⟶ H) (hF : F.IsLisse)
-    (hG : G.IsLisse) (hH : H.IsLisse) :
-    stalkMap (B := B) (φ ≫ ψ) hF hH = stalkMap ψ hG hH ∘ₗ stalkMap (B := B) φ hF hG := by
-  simp only [stalkMap]
-  rw [show WeilSheaf.toLisseMap (φ ≫ ψ) hF hH =
-    WeilSheaf.toLisseMap φ hF hG ≫ WeilSheaf.toLisseMap ψ hG hH from rfl,
-    CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
-  rfl
-
-/-- The stalk map of the identity is the identity. -/
-lemma stalkMap_id {F : WeilSheaf K l C} (hF : F.IsLisse) :
-    stalkMap (B := B) (𝟙 F) hF hF = LinearMap.id := by
-  simp only [stalkMap]
-  rw [show WeilSheaf.toLisseMap (𝟙 F) hF hF = 𝟙 _ from rfl, CategoryTheory.Functor.map_id,
-    CategoryTheory.Functor.map_id]
-  rfl
 
 /-- The stalk map of the zero morphism is zero. -/
 lemma stalkMap_zero {F G : WeilSheaf K l C} (hF : F.IsLisse) (hG : G.IsLisse) :

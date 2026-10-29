@@ -40,7 +40,8 @@ models:
 - `AlgebraicGeometry.ProEtaleWeilSheaf.lowerStarCompToCondensedIso`,
   `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarCompToCondensedIso` and
   `AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZeroCompToCondensedIso`: the Weil functors.
-- `AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarCompIso`: `Rφ_* ⋙ D(E) ≅ D(E) ⋙ Rφ_*`.
+- `AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarCompToCondensedIso`:
+  `Rφ_* ⋙ D(E) ≅ D(E) ⋙ Rφ_*`.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriekCompIso`:
   `Rf_! ⋙ D(E) ≅ D(E) ⋙ Rf_!` for a compactification.
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekCompToCondensedIso`: the same for
@@ -314,12 +315,12 @@ noncomputable def lowerStarGeometricFiberMapCompFrobeniusIso :
 fibre with an isomorphism `(Fr⁻¹)_* M ≅ M`): the pushforward along the base change `φ̄`, with the
 Weil structure transported along
 `AlgebraicGeometry.ProEtale.CondensedRing.lowerStarGeometricFiberMapCompFrobeniusIso`. -/
-noncomputable def weilLowerStar :
+noncomputable def geometricFiberMapWeilLowerStar :
     Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) ⥤
       Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (lowerStarGeometricFiberMapCompFrobeniusIso Λ φ h)
 
-instance : (weilLowerStar Λ φ h).Additive :=
+instance : (geometricFiberMapWeilLowerStar Λ φ h).Additive :=
   Endofunctor.IsoAlgebra.additive_mapOfNatIso _
 
 /-- The exchange isomorphism `φ̄^* ⋙ (Fr_X⁻¹)_* ≅ (Fr_Y⁻¹)_* ⋙ φ̄^*` of the pullback, the mate of
@@ -334,22 +335,23 @@ noncomputable def upperStarGeometricFiberMapCompFrobeniusIso :
 
 /-- The pullback `φ^*` of condensed Weil objects: the pullback along the base change `φ̄`, with
 the Weil structure transported along the mate of the exchange isomorphism of the pushforward. -/
-noncomputable def weilUpperStar :
+noncomputable def geometricFiberMapWeilUpperStar :
     Endofunctor.IsoAlgebra (lowerStar Λ g.geometricGaloisFrobenius.inv) ⥤
       Endofunctor.IsoAlgebra (lowerStar Λ f.geometricGaloisFrobenius.inv) :=
   Endofunctor.IsoAlgebra.mapOfNatIso (upperStarGeometricFiberMapCompFrobeniusIso Λ φ h)
 
-instance : (weilUpperStar Λ φ h).Additive :=
+instance : (geometricFiberMapWeilUpperStar Λ φ h).Additive :=
   Endofunctor.IsoAlgebra.additive_mapOfNatIso _
 
-instance : PreservesFiniteLimits (weilUpperStar Λ φ h) :=
+instance : PreservesFiniteLimits (geometricFiberMapWeilUpperStar Λ φ h) :=
   Endofunctor.IsoAlgebra.preservesFiniteLimits_mapOfNatIso _
 
-instance : PreservesFiniteColimits (weilUpperStar Λ φ h) :=
+instance : PreservesFiniteColimits (geometricFiberMapWeilUpperStar Λ φ h) :=
   Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
 
 /-- The adjunction `φ^* ⊣ φ_*` of condensed Weil objects, lifted from `φ̄^* ⊣ φ̄_*`. -/
-noncomputable def weilUpperStarLowerStarAdjunction : weilUpperStar Λ φ h ⊣ weilLowerStar Λ φ h :=
+noncomputable def weilUpperStarLowerStarAdjunction :
+    geometricFiberMapWeilUpperStar Λ φ h ⊣ geometricFiberMapWeilLowerStar Λ φ h :=
   Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction (upperStarLowerStarAdjunction Λ _) _ _
     (Endofunctor.IsoAlgebra.mateEquiv_leftMateIso_inv _ _)
 
@@ -389,7 +391,7 @@ instance : PreservesFiniteColimits (weilExtensionByZero Λ φ h) :=
 /-- The adjunction `φ_! ⊣ φ^*` of condensed Weil objects along an open immersion, lifted from
 `φ̄_! ⊣ φ̄^*`. -/
 noncomputable def weilExtensionByZeroUpperStarAdjunction :
-    weilExtensionByZero Λ φ h ⊣ weilUpperStar Λ φ h :=
+    weilExtensionByZero Λ φ h ⊣ geometricFiberMapWeilUpperStar Λ φ h :=
   Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction (openImmersionLowerShriekUpperStarAdjunction Λ _)
     _ _ (Endofunctor.IsoAlgebra.mateEquiv_leftMateIso_inv _ _)
 
@@ -437,7 +439,8 @@ compatible with the Frobenius structures
 noncomputable def lowerStarCompToCondensedIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
     lowerStar k₀ l φ ⋙ toCondensed k₀ l Y ≅
       toCondensed k₀ l X ⋙
-        CondensedRing.weilLowerStar (Profinite.padicAlgClRingObj l) φ (comp_over φ _) :=
+        CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l) φ
+          (comp_over φ _) :=
   Endofunctor.IsoAlgebra.mapOfNatIsoCompIsoOfExchange _
     (exchangeCompatible_lowerStar_geometricFiberMap l φ (comp_over φ _))
 
@@ -450,7 +453,8 @@ so this is the conjugate of
 noncomputable def upperStarCompToCondensedIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
     upperStar k₀ l φ ⋙ toCondensed k₀ l X ≅
       toCondensed k₀ l Y ⋙
-        CondensedRing.weilUpperStar (Profinite.padicAlgClRingObj l) φ (comp_over φ _) :=
+        CondensedRing.geometricFiberMapWeilUpperStar (Profinite.padicAlgClRingObj l) φ
+          (comp_over φ _) :=
   Adjunction.leftAdjointCompIsoOfEquivalence (upperStarLowerStarAdjunction k₀ l φ)
     (CondensedRing.weilUpperStarLowerStarAdjunction _ φ _) (toCondensed k₀ l X).asEquivalence
     (toCondensed k₀ l Y).asEquivalence (lowerStarCompToCondensedIso k₀ l φ)
@@ -528,10 +532,11 @@ variable (k₀ l) in
 /-- **Derived pushforward of Weil sheaves in the two models**: `Rφ_* ⋙ D(E) ≅ D(E) ⋙ Rφ_*`, from
 the underived compatibility
 `AlgebraicGeometry.ProEtaleWeilSheaf.lowerStarCompToCondensedIso`. -/
-noncomputable def rightDerivedLowerStarCompIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
+noncomputable def rightDerivedLowerStarCompToCondensedIso (φ : X ⟶ Y)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] :
     (lowerStar k₀ l φ).rightDerivedFunctor ⋙ (derivedEquivCondensed k₀ l Y).functor ≅
       (derivedEquivCondensed k₀ l X).functor ⋙
-        (CondensedRing.weilLowerStar (Profinite.padicAlgClRingObj l) φ
+        (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l) φ
           (comp_over φ _)).rightDerivedFunctor :=
   Functor.rightDerivedFunctorCompMapDerivedCategoryIsoOfEquivalence
     (condensedEquivalence k₀ l X) (condensedEquivalence k₀ l Y)
@@ -553,7 +558,7 @@ noncomputable def upperStarMapDerivedCategoryCompIso (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] :
     (upperStar k₀ l φ).mapDerivedCategory ⋙ (derivedEquivCondensed k₀ l X).functor ≅
       (derivedEquivCondensed k₀ l Y).functor ⋙
-        (CondensedRing.weilUpperStar (Profinite.padicAlgClRingObj l) φ
+        (CondensedRing.geometricFiberMapWeilUpperStar (Profinite.padicAlgClRingObj l) φ
           (comp_over φ _)).mapDerivedCategory :=
   Functor.mapDerivedCategoryCompIsoOfIso (upperStarCompToCondensedIso k₀ l φ)
 
@@ -584,7 +589,7 @@ noncomputable def condensedRightDerivedLowerShriek (f : X ⟶ Y)
           (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)) :=
   (CondensedRing.weilExtensionByZero (Profinite.padicAlgClRingObj l) c.i
       (comp_over c.i _)).mapDerivedCategory ⋙
-    (CondensedRing.weilLowerStar (Profinite.padicAlgClRingObj l) c.g
+    (CondensedRing.geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l) c.g
       (comp_over c.g _)).rightDerivedFunctor
 
 variable (k₀ l) in
@@ -598,7 +603,7 @@ noncomputable def rightDerivedLowerShriekCompIso (f : X ⟶ Y)
       (derivedEquivCondensed k₀ l X).functor ⋙ condensedRightDerivedLowerShriek k₀ l f c :=
   Functor.associator (extensionByZero k₀ l c.i).mapDerivedCategory
       (lowerStar k₀ l c.g).rightDerivedFunctor _ ≪≫
-    Functor.isoWhiskerLeft _ (rightDerivedLowerStarCompIso k₀ l c.g) ≪≫
+    Functor.isoWhiskerLeft _ (rightDerivedLowerStarCompToCondensedIso k₀ l c.g) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (extensionByZeroMapDerivedCategoryCompIso k₀ l c.i) _ ≪≫
     Functor.associator _ _ _
