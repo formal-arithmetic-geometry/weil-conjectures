@@ -193,7 +193,9 @@ section TwoColimit
 
 variable [TopologicalSpace.NoetherianSpace X]
 
-/-- **(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
+/-- Compatibility required from subsection `sk-thm-sfb-qlbar-two-colimit` (to be proved there):
+blueprint `lem-sfb-constructible-cocone-obj`.
+**(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
 scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/
 theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj := fun K ↦ by
