@@ -82,10 +82,6 @@ set_option linter.unusedSectionVars false
 open HomologicalComplex
 open scoped ChangeOfRings
 
-attribute [local instance] scalarExtensionPresheafFunctor_additive
-
-attribute [local instance] scalarExtensionFunctor_additive
-
 /-- The two-term complex of a short exact sequence resolves its cokernel. -/
 private theorem twoTerm_augmentation {A : Type uA} [Category.{vA} A] [Abelian A]
     (S : ShortComplex A) (hS : S.ShortExact) :

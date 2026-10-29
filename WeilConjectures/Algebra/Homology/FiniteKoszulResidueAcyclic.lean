@@ -30,6 +30,8 @@ import WeilConjectures.Algebra.Homology.NilpotentCoefficientTensorAcyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.RingedCechKoszulDualKFlat
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Finite Koszul tensor vanishing after residue vanishing
 

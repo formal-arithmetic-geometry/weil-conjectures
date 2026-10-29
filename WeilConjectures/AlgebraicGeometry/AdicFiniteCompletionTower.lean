@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 import WeilConjectures.AlgebraicGeometry.AdicFiniteStrictReductionSuccessor
+import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 /-! # The normalized quotient tower of completion -/
 

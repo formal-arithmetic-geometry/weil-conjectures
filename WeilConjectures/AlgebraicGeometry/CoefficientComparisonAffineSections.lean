@@ -7,6 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonAffineCech
 import WeilConjectures.CategoryTheory.ModuleCechCriterion
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
 /-! # Affine sections of the intrinsic comparison of an injective
 

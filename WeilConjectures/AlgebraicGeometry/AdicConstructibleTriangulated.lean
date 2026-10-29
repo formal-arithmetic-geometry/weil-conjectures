@@ -9,6 +9,8 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueFieldTensor
 import WeilConjectures.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # The bounded constructible residue locus is triangulated
 

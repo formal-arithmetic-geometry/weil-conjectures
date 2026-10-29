@@ -112,8 +112,7 @@ abbrev Complete (b : Bool) : ObjectProperty
   fun M ↦ IsIso ((completionUnit (topology X) (integers l E) (ideal l E) b).app M)
 
 private theorem integers_noetherian : IsNoetherianRing (integers l E) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1
   exact isNoetherianRing_of_ringEquiv (Padic.coefficientExtensionIntegers l E)

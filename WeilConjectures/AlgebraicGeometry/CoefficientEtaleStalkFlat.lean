@@ -9,6 +9,11 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.CategoryTheory.Sites.Point.Monoidal
 import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+public import Mathlib.RingTheory.Flat.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Flat coefficient module sheaves have flat geometric stalks
 

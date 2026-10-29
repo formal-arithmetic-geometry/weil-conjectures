@@ -8,6 +8,7 @@ public import WeilConjectures.Algebra.Homology.AdicShortComplexCohomologyML
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectModuleFunctors
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModels
 import WeilConjectures.AlgebraicGeometry.AdicPerfectUnitHom
+import Mathlib.RingTheory.Finiteness.Projective
 
 /-! # The ordinary quotient comparison for a single pair of modules
 

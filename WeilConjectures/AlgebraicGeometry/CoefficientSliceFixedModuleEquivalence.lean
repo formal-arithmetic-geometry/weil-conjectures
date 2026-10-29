@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Fixed-scalar coordinates on a coefficient-sized pro-etale slice
 

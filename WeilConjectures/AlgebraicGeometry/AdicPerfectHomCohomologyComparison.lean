@@ -8,6 +8,7 @@ public import WeilConjectures.Algebra.Homology.AdicShortComplexCohomologyML
 public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.AlgebraicGeometry.AdicPerfectModelHomCohomology
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Quotient Hom cohomology for constant perfect models
 

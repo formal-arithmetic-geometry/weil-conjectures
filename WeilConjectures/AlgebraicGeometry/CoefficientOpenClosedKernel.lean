@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientFixedClosedUnitEpi
 public import WeilConjectures.AlgebraicGeometry.CoefficientOpenExtension
 import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+import Mathlib.CategoryTheory.Adjunction.Triple
+import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-! # The open term as a kernel on coefficient-sized sites
 

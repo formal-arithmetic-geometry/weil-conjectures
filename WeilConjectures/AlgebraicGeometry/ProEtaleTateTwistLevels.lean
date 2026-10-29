@@ -222,6 +222,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
 import of
+public import Mathlib.AlgebraicGeometry.Sites.ElladicCohomology
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 
 /-! # Finite levels and integral and rational Tate twist objects
 
@@ -251,7 +254,14 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-set_option backward.isDefEq.respectTransparency false in
+/-- The standard size witness at the coefficient universe, used with explicit universes.
+This merely exposes Mathlib's existing small-category witness to instance search;
+it avoids selecting an unrelated instance with an unconstrained extra universe.
+Source: def-weil-size-convention and the small pro-etale site
+(blueprint: sk-def-sp-tate-twist). -/
+instance spProEtEssentiallySmall : EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} X.ProEt
+
 /-- The cofinal ell-power ideals in the ring of integers.
 Source: blueprint integral-twist formula (blueprint: sk-def-sp-tate-twist). -/
 def spTateEllIdeal (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
@@ -347,6 +357,16 @@ def spEllPointReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
 attribute [local irreducible] spEllPointReduction
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The condensed finite quotient map preserves the ring structure.
+Source: blueprint quotient action (blueprint: sk-def-sp-tate-twist).
+Proof: its maps are postcomposition with a ring homomorphism, so preserve one
+and multiplication sectionwise; forgetting to abelian sheaves retains these laws. -/
+@[instance] theorem spEllPointReduction_isMonHom
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
+    IsMonHom (spEllPointReduction.{u} ℓ E n) := by
+  unfold spEllPointReduction
+  infer_instance
+
 /-- The pulled-back reduction O_E,X -> (B_E,n+1)_X.
 Source: blueprint quotient action (blueprint: sk-def-sp-tate-twist). -/
 abbrev spEllReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :=
@@ -379,6 +399,16 @@ def spEllPointTransition (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) 
 attribute [local irreducible] spEllPointTransition
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Finite reduction preserves one and multiplication.
+Source: blueprint quotient transitions (blueprint: sk-def-sp-tate-twist).
+Proof: it is postcomposition with the quotient ring homomorphism; ring operations
+on continuous functions are pointwise. -/
+@[instance] theorem spEllPointTransition_isMonHom
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
+    IsMonHom (spEllPointTransition.{u} ℓ E n) := by
+  unfold spEllPointTransition
+  infer_instance
+
 /-- The finite twist, regarded as an O_E,X-module through the quotient map.
 Since mu is killed by ell^(n+1), B_X tensor_Z mu is precisely its extension
 from (Z/ell^(n+1))_X to B_X.

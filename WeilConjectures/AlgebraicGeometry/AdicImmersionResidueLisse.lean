@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueTransport
 import all WeilConjectures.AlgebraicGeometry.ConstantCoefficientLocalModelsComparison
 import all WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import all WeilConjectures.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsComparison
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Finite lisse sheaves in the explicit etale coefficient model
 

@@ -48,5 +48,13 @@ structure CommonQuotientTowerPresentation (φ : R ⟶ B) where
 namespace CommonQuotientTowerPresentation
 variable {φ : R ⟶ B} (D : CommonQuotientTowerPresentation φ)
 
+/-- The quotient projection with its source ring explicit.
+Source: Stacks 099L (auxiliary; not a blueprint node). -/
+abbrev projection (n : ℕ) : R ⟶ D.S.obj (op n) := D.q.app (op n)
+
+/-- The projection from the second ring, with its source ring explicit.
+Source: Stacks 099L (auxiliary; not a blueprint node). -/
+abbrev extensionProjection (n : ℕ) : B ⟶ D.S.obj (op n) := D.b.app (op n)
+
 end CommonQuotientTowerPresentation
 end SheafOfModules

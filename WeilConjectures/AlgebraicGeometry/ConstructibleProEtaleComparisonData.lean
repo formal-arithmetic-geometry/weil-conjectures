@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 
 /-! # Canonical inverse image for constructible comparison
 

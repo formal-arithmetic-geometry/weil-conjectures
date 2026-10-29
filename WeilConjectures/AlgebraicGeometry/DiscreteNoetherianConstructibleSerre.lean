@@ -66,6 +66,9 @@ private instance etaleModuleOverWeakSheafify (Y : Scheme.{u}) (R : Type (u + 1))
     [CommRing R] (U : Y.Etale) :
     HasWeakSheafify (Y.smallEtaleTopology.over U) (ModuleCat.{u + 1} R) := inferInstance
 
+private instance etaleRingWeakSheafify (Y : Scheme.{u}) :
+    HasWeakSheafify Y.smallEtaleTopology RingCat.{u + 1} := inferInstance
+
 private instance etaleModuleLocallyBijective (Y : Scheme.{u}) (R : Type (u + 1))
     [CommRing R] : Y.smallEtaleTopology.WEqualsLocallyBijective (ModuleCat.{u + 1} R) :=
   inferInstance

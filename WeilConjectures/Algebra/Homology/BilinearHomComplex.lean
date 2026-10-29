@@ -262,7 +262,6 @@ def ProductHomComplexSpecification [HasZeroMorphisms A] [HasZeroMorphisms B]
     (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) : Prop :=
   Nonempty (ProductHomComplexData H F)
 
-omit [HasProducts D] [H.Additive] [∀ a, (H.obj a).Additive] in
 /-- Existence of the Hom-complex bifunctor with its product projections and exact sign.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
 (auxiliary; not a blueprint node).

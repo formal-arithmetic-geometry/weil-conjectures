@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
+public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
+import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
 
 /-! # Generalized generators of the ordinary module comparison
 

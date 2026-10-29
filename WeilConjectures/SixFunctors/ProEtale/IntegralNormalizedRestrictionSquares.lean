@@ -5,8 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Order.CompletePartialOrder
-public import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 public import WeilConjectures.SixFunctors.ProEtale.IntegralPresentationEncoding
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientTerminal
@@ -328,6 +329,14 @@ private def integerPointIso : DerivedNakayama.integerRing l E ≅
     (sfbCondensedIntegers l E).X :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso (integerPointRingIso l E)
+
+private instance integerPointIso_hom_mon : IsMonHom (integerPointIso l E).hom :=
+  Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
+    (integerPointRingIso l E).hom
+
+private instance integerPointIso_inv_mon : IsMonHom (integerPointIso l E).inv :=
+  Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
+    (integerPointRingIso l E).inv
 
 private theorem point_hom_ext
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

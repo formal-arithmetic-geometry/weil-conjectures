@@ -35,6 +35,17 @@ import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExt
 import all WeilConjectures.AlgebraicGeometry.ProEtaleMultiplicationDifferenceCriterion
 import all WeilConjectures.AlgebraicGeometry.TorsionLimitSheafCompleteness
 import WeilConjectures.CategoryTheory.ConstantFiniteFreePresentationExtension
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Module.Projective
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.RingTheory.Nilpotent.Lemmas
 
 /-!
 # Completeness and residue reduction of completed perfect models

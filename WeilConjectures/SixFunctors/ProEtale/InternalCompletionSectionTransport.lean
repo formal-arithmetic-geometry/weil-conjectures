@@ -24,6 +24,61 @@ namespace AlgebraicGeometry.ProEtale.InternalCompletionTransport
 
 open IntegralModelsStacks
 
+/-- Section-action transport and small-site restriction form an equivalence.
+Source: Stacks Tag 00YV. Proof: compose the section-module equivalence with
+pushforward along the inverse of AsSmall.equiv.
+(auxiliary; not a blueprint node). -/
+theorem smallModules_equivalence (X : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    (smallModules X R).IsEquivalence := by
+  let A := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology X) R)
+  let B := ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
+    X.ProEt).sheafPushforwardContinuous RingCat.{u + 1}
+      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X)).obj A
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsContinuous
+      (Scheme.ProEt.topology X) (Scheme.coefficientProEtaleModelTopology.{u, u} X) :=
+    Scheme.coefficientProEtaleModelUp_isContinuous.{u, u} X
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsContinuous
+      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X) := by
+    change (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsContinuous
+      ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
+        X.ProEt).inducedTopology (Scheme.ProEt.topology X)) (Scheme.ProEt.topology X)
+    infer_instance
+  let e := SheafOfModules.pushforwardPushforwardEquivalence
+    (J := Scheme.ProEt.topology X)
+    (K := Scheme.coefficientProEtaleModelTopology.{u, u} X)
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)) (𝟙 A) (𝟙 B)
+    (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
+    (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
+  have : e.inverse.IsEquivalence := e.isEquivalence_inverse
+  exact inferInstanceAs
+    ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology X) R).functor ⋙ e.inverse).IsEquivalence
+
+instance smallModules_isEquivalence (X : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    (smallModules X R).IsEquivalence := smallModules_equivalence X R
+
+instance smallModules_additive (X : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    (smallModules X R).Additive := ⟨by intros; ext U x; rfl⟩
+
+private theorem derived_reflects
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B] (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.ReflectsIsomorphisms] :
+    F.mapDerivedCategory.ReflectsIsomorphisms where
+  reflects f _ := by
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    have : IsIso (F.map ((DerivedCategory.homologyFunctor A n).map f)) :=
+      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2
+        (by rw [Functor.comp_map]; infer_instance)
+    exact isIso_of_reflects_iso _ F
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
@@ -53,6 +108,29 @@ def functor : DerivedCategory (AdicCompletion.Modules l E X) ⥤
   (Mod.comap (coefficientMap
     (IntegralConstantModel.pointComparison l E).inv.hom X)).mapDerivedCategory ⋙
     restriction l E X ⋙ (smallModules X (constantRing l E X)).mapDerivedCategory
+
+/-- This transport detects isomorphisms. Proof: ordinary restriction of scalars is
+conservative since its composite with the underlying-object functor is unchanged;
+exactness and the homology comparison give conservativity after deriving. The final
+section functor is an equivalence. Source: Stacks Tags 00YV and 099I
+(auxiliary; not a blueprint node). -/
+instance functor_reflects : (functor l E X).ReflectsIsomorphisms := by
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod (ring l E X))
+  have hr {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+      [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+      (f : R ⟶ S) [IsMonHom f] :
+      Functor.ReflectsIsomorphisms
+        ((Mod.comap f : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S ⥤
+          Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R).mapDerivedCategory) := by
+    have : (Mod.comap f : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S ⥤
+        Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R).ReflectsIsomorphisms :=
+      reflectsIsomorphisms_of_comp (Mod.comap f) (Mod.forget R)
+    exact derived_reflects _
+  have := hr (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X)
+  have := hr (scalarMap l E X)
+  have := derived_reflects (smallModules X (constantRing l E X))
+  unfold functor restriction
+  infer_instance
 
 /-- Comparison with the representative-based smallDerivedObject in the target.
 Proof: the exact functor localization comparison evaluated at objPreimage, followed

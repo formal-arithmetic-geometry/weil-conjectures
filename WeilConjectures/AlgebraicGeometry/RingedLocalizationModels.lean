@@ -42,9 +42,6 @@ namespace CategoryTheory
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
-/-- The canonical relocalization comparison, induced by the sectionwise identity.
-Source: Stacks 08JB, Modules on Sites 04IX
-(auxiliary; not a blueprint node). -/
 private theorem localization_isFlat (R : Sheaf J CommRingCat.{u})
     (g : (R.obj ⋙ forget CommRingCat.{u}).sections) :
     SheafOfModules.IsFlat (ringedSectionLocalization R g) := by

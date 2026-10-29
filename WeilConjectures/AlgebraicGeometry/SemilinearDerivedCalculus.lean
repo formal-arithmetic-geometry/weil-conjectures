@@ -682,12 +682,6 @@ section OpenLocalization
 
 variable (U : C)
 
-omit ambientSmall in
-attribute [instance] openSite_continuous
-
-attribute [instance] OpenSystems.extensionAdditive OpenSystems.extensionLimits
-  OpenSystems.extensionColimits
-
 end OpenLocalization
 
 end WeilConjectures.SemilinearSections

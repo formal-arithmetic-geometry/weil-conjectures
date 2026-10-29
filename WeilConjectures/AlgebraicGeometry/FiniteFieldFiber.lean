@@ -66,8 +66,5 @@ attribute [instance] FiniteFieldDatum.field_base FiniteFieldDatum.finite_base
 
 namespace FiniteFieldDatum
 
-attribute [instance] CoefficientDatum.prime CoefficientDatum.field CoefficientDatum.algebra
-  CoefficientDatum.isAlgClosure
-
 end FiniteFieldDatum
 end WeilConjectures

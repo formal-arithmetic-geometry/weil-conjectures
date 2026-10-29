@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import WeilConjectures.CategoryTheory.SectionwisePushout
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # The sheaf-level first-residue pushout -/
 

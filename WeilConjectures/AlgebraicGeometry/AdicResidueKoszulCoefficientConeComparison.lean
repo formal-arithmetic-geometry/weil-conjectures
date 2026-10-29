@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import WeilConjectures.AlgebraicGeometry.AdicResidueExactCoefficientRealization
 import WeilConjectures.CategoryTheory.AdditiveConeFamilyComparison
 import WeilConjectures.CategoryTheory.ExteriorKoszulScalarRealization
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.Single
 
 /-! # Finite coefficient comparison for normalized Koszul augmentations
 

@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # The adjunction for locally constant integer-valued functions
 

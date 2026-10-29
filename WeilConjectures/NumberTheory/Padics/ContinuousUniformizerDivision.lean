@@ -108,8 +108,7 @@ theorem continuous_uniformizer_division
   classical
   let A := coefficientExtensionIntegers l E
   let c : E := (coefficientExtensionUniformizer l E : E) ^ e
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   rcases h with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr, hpid, hm0,
     hprime, hfinite, hr, hgen_exists, hassoc, hfactor⟩
   have hO : ∀ x : E, x ∈ A ↔ coefficientExtensionAbsoluteValue l E x ≤ 1 := hO

@@ -35,7 +35,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 public import WeilConjectures.AlgebraicGeometry.IntegralCoefficientCompletenessTransport
 public import WeilConjectures.AlgebraicGeometry.IntegralCompletedConstantModelTransport
 public import WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
-public import all WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
+public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 public import WeilConjectures.AlgebraicGeometry.NilpotentCoefficientLissity
 public import WeilConjectures.AlgebraicGeometry.NilpotentReductionLissity
 public import WeilConjectures.AlgebraicGeometry.NoetherianStratumDetection
@@ -123,6 +123,7 @@ public import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
+import all WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 
 /-! # Canonical integral constant-model realization
 

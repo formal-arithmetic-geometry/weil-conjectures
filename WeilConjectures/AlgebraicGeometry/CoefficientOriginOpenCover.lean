@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import Mathlib.CategoryTheory.Sites.LocalProperties
+import Mathlib.CategoryTheory.Category.ULift
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Zariski locality of coefficient-sized etale origin
 

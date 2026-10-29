@@ -25,6 +25,10 @@ set_option backward.isDefEq.respectTransparency false
 universe u c v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct ChangeOfRings
+
+-- Upstream made these instances local (InternalSectionTensorComparison, SheafTensor).
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 attribute [instance] SheafOfModules.ScalarDerivedPair.extension_additive
 
 namespace CategoryTheory.InternalAbelianSheafModule
@@ -59,10 +63,6 @@ variable [HasDerivedCategory.{w} (scalarInternalModules J R)]
 
 open SheafOfModules
 
-set_option maxHeartbeats 800000 in
--- Comparing the homotopy and complex factorization APIs needs additional elaboration.
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)] in
 private noncomputable def scalarRestrictionIso :
     Mod.comap a ⋙ (sectionModuleEquivalence J R).functor ≅
       (sectionModuleEquivalence J S).functor ⋙
@@ -126,16 +126,4 @@ private theorem inverseMate_isIso
     exact isIso_of_op (α.app X)
   exact NatIso.isIso_of_isIso_app α
 
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)] in
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)] in
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)] in
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)]
-  [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J R))]
-  [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J S))] in
-omit [HasDerivedCategory (scalarInternalModules J R)]
-  [HasDerivedCategory (scalarInternalModules J S)] in
 end CategoryTheory.InternalAbelianSheafModule

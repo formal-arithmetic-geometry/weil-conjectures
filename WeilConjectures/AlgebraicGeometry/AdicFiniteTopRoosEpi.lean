@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.AdicFiniteTransitionTensorSequence
 import WeilConjectures.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 import WeilConjectures.AlgebraicGeometry.ProEtaleProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # The endpoint Roos epimorphism for finite reductions -/
 

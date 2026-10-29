@@ -14,6 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
 import WeilConjectures.AlgebraicGeometry.IntegralConstantSectionProjection
 import all WeilConjectures.AlgebraicGeometry.IntegralModelsCompleteSectionPredicate
 import all WeilConjectures.AlgebraicGeometry.IntegralModelsCompletionTransport
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # The normalized common first residue in constant-ring coordinates
 

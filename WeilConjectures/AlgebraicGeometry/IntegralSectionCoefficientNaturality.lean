@@ -6,7 +6,12 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralCompletedCoefficientTransport
 public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
-public import all WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
+import all WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.CategoryTheory.Functor.Flat
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # The coefficient equation for the integral section comparison -/
 

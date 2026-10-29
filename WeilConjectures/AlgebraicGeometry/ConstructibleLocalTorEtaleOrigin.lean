@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTorLocalGlobal
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleConstructibleIso
 import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
 import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Etale origin of constructible complexes locally of finite Tor dimension

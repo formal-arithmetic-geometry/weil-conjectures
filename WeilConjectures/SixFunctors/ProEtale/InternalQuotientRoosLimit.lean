@@ -319,6 +319,38 @@ private theorem small_tower_grothendieck :
   exact IsGrothendieckAbelian.of_equivalence
     (Equivalence.congrLeft (AsSmall.equiv (C := ℕᵒᵖ)).symm)
 
+private theorem comap_products
+    {C : Type*} [Category* C] [CategoryTheory.MonoidalCategory C]
+    [HasLimitsOfShape (Discrete ℕ) C]
+    {R S : C} [MonObj R] [MonObj S] (f : R ⟶ S) [IsMonHom f] :
+    PreservesLimitsOfShape (Discrete ℕ) (Mod.comap f : Mod C S ⥤ Mod C R) := by
+  have : PreservesLimitsOfShape (Discrete ℕ) ((Mod.comap f : Mod C S ⥤ Mod C R) ⋙ Mod.forget R) :=
+    inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ) (Mod.forget S : Mod C S ⥤ C))
+  have : ReflectsLimitsOfShape (Discrete ℕ) (Mod.forget R : Mod C R ⥤ C) :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact preservesLimitsOfShape_of_reflects_of_preserves (Mod.comap f) (Mod.forget R)
+
+private theorem composite_products
+    {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁]
+    [Category* C₂] [Category* C₃]
+    (A : C₀ ⥤ C₁) (B : C₁ ⥤ C₂) (D : C₂ ⥤ C₃)
+    (hA : PreservesLimitsOfShape (Discrete ℕ) A)
+    (hB : PreservesLimitsOfShape (Discrete ℕ) B)
+    (hD : PreservesLimitsOfShape (Discrete ℕ) D) :
+    PreservesLimitsOfShape (Discrete ℕ) (A ⋙ B ⋙ D) := by
+  infer_instance
+
+private instance modules_products :
+    PreservesLimitsOfShape (Discrete ℕ) (modules l E X) := by
+  let A := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X)
+  let B := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (IntegralModelsStacks.scalarMap l E X)
+  unfold modules
+  exact composite_products A B (IntegralModelsStacks.smallModules X (constantRing l E X))
+    (comap_products (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X))
+    (comap_products (IntegralModelsStacks.scalarMap l E X)) inferInstance
+
 private theorem sourceRoosIso_augmentation
     (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     AdicCompletion.augmentation l E X P ≫ (sourceRoosIso l E X P).hom =

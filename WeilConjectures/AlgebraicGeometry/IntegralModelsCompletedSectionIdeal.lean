@@ -88,8 +88,7 @@ private theorem integers_radical (l : ℕ) [Fact l.Prime]
       (Ideal.span {(l : IntegralConstantCompletion.integers l E)}).radical := by
   let A := Padic.coefficientExtensionIntegers l E
   let m := Padic.coefficientExtensionMaximalIdeal l E
-  have hd := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hd := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} = m :=
     hd.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have hm : m.IsMaximal := hd.2.2.2.2.1
@@ -161,8 +160,7 @@ private theorem kernel_radical_nat {A B S : Type u}
 private theorem integers_prime (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     (IntegralConstantCompletion.ideal l E).IsPrime := by
-  have hd := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hd := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     hd.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

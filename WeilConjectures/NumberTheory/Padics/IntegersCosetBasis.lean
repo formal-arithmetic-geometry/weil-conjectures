@@ -44,8 +44,7 @@ theorem coefficientExtension_integers_coset_basis (l : ℕ) [Fact l.Prime]
   let : NormedField E := spectralNorm.normedField (Padic l) E
   let R := coefficientExtensionIntegers l E
   let π := coefficientExtensionUniformizer l E
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hR : ∀ z : E, z ∈ R ↔ ‖z‖ ≤ 1 := h.1
   have hgen : Ideal.span ({π} : Set R) = coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

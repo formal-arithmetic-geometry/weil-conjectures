@@ -156,8 +156,4 @@ private theorem unit_naturality (O : Sheaf J CommRingCat.{u})
     f ≫ D.unit E' = D.unit E ≫ D.completion.map f := by
   simpa only [Functor.id_map, derivedUnitNat_app] using (derivedUnitNat O D).naturality f
 
-omit [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules B)]
-  [HasDerivedCategory.{w} (Towers R)] [HasDerivedCategory.{w} (Towers B)] in
-omit [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules B)]
-  [HasDerivedCategory.{w} (Towers R)] [HasDerivedCategory.{w} (Towers B)] in
 end CategoryTheory.FlatScalarKoszul

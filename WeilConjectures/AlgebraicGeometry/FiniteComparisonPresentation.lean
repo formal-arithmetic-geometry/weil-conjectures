@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.FiniteComparisonCoefficients
-public import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
+public import WeilConjectures.AlgebraicGeometry.FiniteComparisonCoefficients
+public import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import all WeilConjectures.AlgebraicGeometry.FiniteComparisonCoefficients
+import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import Mathlib.Topology.Compactification.OnePoint.Basic
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 import all WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
@@ -26,6 +28,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+import Mathlib.RingTheory.Finiteness.Cardinality
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 set_option linter.privateModule false
 
@@ -294,6 +298,11 @@ private local instance proRealization_monoidal (X : Scheme.{u}) (A : Type (u + 1
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
+
+omit [TopologicalSpace B] [IsTopologicalRing B] [DiscreteTopology B] [Finite B] in
+private theorem fixedModuleLimits :
+    HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
+  ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
 
 attribute [local instance] fixedModuleLimits
 
@@ -579,13 +588,4 @@ namespace AlgebraicGeometry.ProEtale
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
 
-attribute [local instance] presentationSiteSmall etale_bounded_iso constantModel_bounded_iso in
--- Fix the coefficient universes only within these private proofs.
-attribute [-instance] WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory
-  WeilConjectures.integralCoefficientAbLocallyBijective
-  WeilConjectures.integralCoefficientAbSheafify
-  WeilConjectures.integralCoefficientRingSheafify in
 end AlgebraicGeometry.ProEtale

@@ -8,13 +8,17 @@ public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.AlgebraicGeometry.IntrinsicCompletionCompleted
-public import all WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
+public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
+import all WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
 import all WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
+import Mathlib.GroupTheory.OrderOfElement
 
 /-!
 # Bounded constructible derived-complete objects
@@ -37,7 +41,6 @@ open ProEtale
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
@@ -69,8 +72,7 @@ theorem pbcCoefficientDatumProperties :
         (Ideal.span {pbcUniformizer l E}) n) ∧
       ∀ n : ℕ, Finite (PbcIntegralRing l E ⧸
         (Ideal.span {pbcUniformizer l E}) ^ (n + 1)) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1
   let e : PbcIntegralRing l E ≃+* Padic.coefficientExtensionIntegers l E :=

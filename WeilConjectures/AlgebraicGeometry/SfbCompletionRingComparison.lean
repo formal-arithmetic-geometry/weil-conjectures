@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-! # Canonical comparison of the two completed coefficient rings
 

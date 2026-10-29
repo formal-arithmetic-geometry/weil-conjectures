@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.Algebra.Homology.KFlat
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.RingedToposMorphism
 import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import all WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback

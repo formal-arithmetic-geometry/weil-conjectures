@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplexes
 import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelsCompatibility
 import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelsKProjective
+public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Ordinary complexes computing reductions of constant perfect models -/
 

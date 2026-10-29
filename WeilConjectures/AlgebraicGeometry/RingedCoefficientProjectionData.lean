@@ -165,6 +165,10 @@ variable {uInv : Sheaf J (Type r) ⥤ Sheaf K (Type r)}
   {uPush : Sheaf K (Type r) ⥤ Sheaf J (Type r)} {adj : uInv ⊣ uPush}
   (g : Geometry uInv uPush adj)
 
+/-- Exact coefficient inverse image on ordinary unbounded derived categories.
+Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+abbrev Geometry.left (R : Sheaf J CommRingCat.{r}) := (g.inverse R).modules.mapDerivedCategory
+
 variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
   (nY : _root_.SheafOfModules.SuccessiveDerivedQuotient.Normalization.{c, v, r, max c v (r + 1)}
       (J := J) pY)

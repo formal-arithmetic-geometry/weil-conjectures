@@ -99,16 +99,6 @@ private theorem sectionScalarNat_unit
       rw [pow_succ]
       ring
 
-set_option backward.isDefEq.respectTransparency false in
-/-- Each generator power annihilates every local section of Koszul cohomology.
-Source: Stacks Project, Tags 0626, 0663 and 099H
-(auxiliary; not a blueprint node).
-
-Proof: signed index removal gives a null-homotopic diagonal scalar endomorphism.
-Sectionwise scalar multiplication is natural on all module sheaves and agrees
-with the diagonal matrix on each free term. Naturality on the cycles inclusion
-and the homology projection identifies its induced map with sectionwise scalar
-multiplication on cohomology. A null-homotopic map induces zero on cohomology. -/
 private theorem span_pow_le_of_generator_powers
     {S : Type*} [CommRing S] {ι : Type*} (s : Finset ι) (f : ι → S)
     (e : ℕ) (A : Ideal S) (h : ∀ j ∈ s, f j ^ e ∈ A) :

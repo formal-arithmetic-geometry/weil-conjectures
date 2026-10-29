@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AdicFiniteStrictReductionSuccessor
 import WeilConjectures.AlgebraicGeometry.AdicFiniteTransitionKernelTensor
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # The transition-sequence construction after choosing a residue model
 

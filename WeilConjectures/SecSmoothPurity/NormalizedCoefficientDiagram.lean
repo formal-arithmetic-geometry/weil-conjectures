@@ -35,8 +35,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 attribute [local irreducible] SheafOfModules.cochainModulesMonoidal
 attribute [local irreducible] CategoryTheory.CochainPullback.extensionAdjunction
 attribute [local irreducible] CategoryTheory.CochainPullback.extensionFunctor
-attribute [local irreducible] SheafOfModules.systemScalarRestrictionComposition
-attribute [local irreducible] SheafOfModules.systemScalarRestrictionUnit
 set_option maxErrors 1
 universe w uC vC uD vD
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
@@ -96,8 +94,6 @@ structure Diagram where
 attribute [instance] Diagram.additive
 
 variable (d : Diagram (J := J) (K := K))
-
-attribute [local irreducible] scalarComp scalarUnit
 
 variable {d}
 

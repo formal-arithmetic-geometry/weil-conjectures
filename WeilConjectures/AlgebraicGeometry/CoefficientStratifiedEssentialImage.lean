@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructiblePr
 import WeilConjectures.AlgebraicGeometry.CoefficientOriginAffineOpenClosed
 import WeilConjectures.AlgebraicGeometry.CoefficientOriginOpenCover
 import WeilConjectures.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Stratified descent of etale origin in the coefficient universe
 

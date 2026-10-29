@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 import WeilConjectures.AlgebraicGeometry.AdicResidueCechQuotientCone
 import WeilConjectures.AlgebraicGeometry.AdicResidueCompletionModel
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The normalized quotient cone of a complete object
 

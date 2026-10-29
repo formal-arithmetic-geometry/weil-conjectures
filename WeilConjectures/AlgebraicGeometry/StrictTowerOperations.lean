@@ -32,6 +32,12 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+-- The universe-polymorphic `{max u (t + 1)}` sheafification instances get stuck on
+-- universe constraints for the `CommRingCat.{t + 1}` sheaves of this file.
+attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
+  WeilConjectures.integralCoefficientAbSheafify
+  WeilConjectures.integralCoefficientAbLocallyBijective
+
 /-- Constant coefficients on the small pro-etale site, in the sheaf-value universe.
 Source: strict normalization, paragraph 2; Stacks 00YV
 (auxiliary; not a blueprint node). -/

@@ -144,7 +144,8 @@ private theorem moduleZero_of_strata (X : Scheme.{u}) [IsNoetherian X]
   let F := SheafOfModules.toSheaf ((adicLisseForget X).obj R)
   have hz : IsZero (F.obj M) := by
     apply (IsZero.iff_id_eq_zero _).2
-    apply AlgebraicGeometry.ProEtale.abDetectMaps s.immersion
+    apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+      s.immersion
     · intro x
       obtain ⟨α, hα⟩ := Set.mem_iUnion.mp
         (s.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
@@ -265,7 +266,8 @@ private theorem residueModels_bounds (X : Scheme.{u}) [IsNoetherian X]
       (forget₂ (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) AddCommGrpCat.{u + 1})
     have hz : IsZero (F.obj M) := by
       apply (IsZero.iff_id_eq_zero _).2
-      apply AlgebraicGeometry.ProEtale.abDetectMaps s.immersion
+      apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+        s.immersion
       · intro x
         obtain ⟨α, hα⟩ := Set.mem_iUnion.mp
           (s.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)

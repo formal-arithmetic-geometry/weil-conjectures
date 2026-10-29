@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.CoefficientEtaleChartComparison
 import WeilConjectures.AlgebraicGeometry.CoefficientEtaleChartStalk
 import all WeilConjectures.AlgebraicGeometry.LisseCoefficientConstructible
 import WeilConjectures.AlgebraicGeometry.SiteBoundedConstantModel
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Etale charts for bounded lisse coefficient complexes
 

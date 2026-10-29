@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PointModelRestrictionModule
 import WeilConjectures.AlgebraicGeometry.ConstantSliceInternalPresentation
 import WeilConjectures.AlgebraicGeometry.DiscreteInternalMatrixLocalLifting
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Lifting one discrete constant presentation
 

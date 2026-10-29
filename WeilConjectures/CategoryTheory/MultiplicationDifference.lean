@@ -38,6 +38,12 @@ private def countablePowerIsoLim (B : Type u) [Category.{v} B]
       rintro ⟨n⟩
       simp [countablePower])
 
+/-- Powers act additively on morphisms.
+Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
+instance countablePower_additive (B : Type u) [Category.{v} B] [Preadditive B]
+    [HasCountableProducts B] : (countablePower B).Additive where
+  map_add := by intros; apply Pi.hom_ext; intro n; simp [countablePower]
+
 /-- Countable powers commute with limits.
 Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
 instance countablePower_preservesLimitsOfShape (B : Type u) [Category.{v} B]

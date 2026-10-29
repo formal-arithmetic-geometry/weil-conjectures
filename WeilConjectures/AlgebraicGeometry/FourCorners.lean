@@ -42,30 +42,14 @@ Source: Stacks Tag 06YY (blueprint: def-weil-pbc-four-corners). -/
 noncomputable def proEtaleRingExtension : proEtaleRingModules T R ⥤ proEtaleRingModules T S :=
   reductionChange T a
 
+/-- The fixed scalar extension is additive. Source: Stacks Tag 06YY
+(blueprint: def-weil-pbc-four-corners). -/
+noncomputable instance proEtaleRingExtension_additive : (proEtaleRingExtension a).Additive :=
+  reductionChangeAdditive T a
+
 /-- Reuse the published tensor-unit normalized ordinary scalar adjunction.
 Source: Stacks 03D3, 06YY (blueprint: def-weil-pbc-four-corners). -/
 noncomputable abbrev proEtaleRingExtensionAdjunction :
     proEtaleRingExtension a ⊣ proEtaleRingRestrictScalars a := pbcScalarAdjunction a
-
-variable {U V : Scheme.{u}} (f : U ⟶ V)
-  (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
-  (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})
-  (aV : RV ⟶ SV) (aU : RU ⟶ SU)
-  (cR : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RV ≅ RU)
-  (cS : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SV ≅ SU)
-  (comm : cR.hom ≫ aU = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aV ≫ cS.hom)
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-
-attribute [instance] AdicCoefficientDatum.ringTower_finite
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-  {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
 end AlgebraicGeometry.Scheme

@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 public import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import all WeilConjectures.CategoryTheory.GeometricModuleTransport
@@ -200,6 +201,9 @@ private theorem binary_of_graph
 private noncomputable abbrev structureMap (f : RingedPullback R S) :=
   f.I.ringUnderlying.hom ≫
     (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map f.coefficient
+
+private noncomputable instance pushPreservesLimits (f : RingedPullback R S) :
+    PreservesLimits f.uPush := f.adj.rightAdjoint_preservesLimits
 
 private theorem linearMate_exists (f : RingedPullback R S)
     (H : Modules S) (P : Modules R)

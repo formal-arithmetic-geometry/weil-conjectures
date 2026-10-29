@@ -139,8 +139,6 @@ private lemma dual_proj {H : HomData D} (P : Spec H F) (I : CochainComplex D ℤ
   simpa only [Functor.map_id, HomologicalComplex.id_f, Category.comp_id,
     dualF, Functor.flip_obj_map] using P.map L K I I f (𝟙 I) n a b h
 
-set_option backward.isDefEq.respectTransparency false in
--- Step 1: signed reindexing, its inverse and naturality.
 private lemma inB_proj {H : HomData D} (P : Spec H F) (I : CochainComplex D ℤ)
     {A B : CochainComplex D ℤ} (f : A ⟶ B)
     (q a b : ℤ) (h : a + q = b) :

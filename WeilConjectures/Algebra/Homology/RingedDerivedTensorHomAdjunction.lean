@@ -594,9 +594,21 @@ private theorem qHomEquiv_map
         ((HomotopyCategory.quotient (Modules.{c, v, u} J R) (.up ℤ)).map f) =
       DerivedCategory.Q.map f := GenericDerived.qHomEquiv_map P I f
 
+private theorem baseFlat :
+    Abelian.HasFunctorialFlatResolution (Modules.{c, v, u} J R) :=
+  SheafOfModules.hasFunctorialFlatResolution_kfi R
+
 attribute [local instance 1000] baseFlat
 
+private theorem auxTensorLeftColimits (M : Modules.{c, v, u} J R) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+  SheafOfModules.cochainTensorLeftPreservesColimits R M
+
 attribute [local instance 1000] auxTensorLeftColimits
+
+private theorem auxTensorRightColimits (M : Modules.{c, v, u} J R) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  SheafOfModules.cochainTensorRightPreservesColimits R M
 
 attribute [local instance 1000] auxTensorRightColimits
 

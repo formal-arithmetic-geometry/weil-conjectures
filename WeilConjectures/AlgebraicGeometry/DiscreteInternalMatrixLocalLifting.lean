@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PointModelPullbackFunctor
 import WeilConjectures.AlgebraicGeometry.DiscreteSectionCoordinates
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.CategoryTheory.FiniteLocalSectionLifts
+public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # Local descent of an internal matrix to the discrete condensed point
 

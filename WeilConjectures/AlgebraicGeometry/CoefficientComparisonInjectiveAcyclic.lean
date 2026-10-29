@@ -7,6 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonAffineSections
 import all WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 /-! # Injective acyclicity for intrinsic coefficient comparison
 Source: Stacks Tags 099U and 099V.
 -/

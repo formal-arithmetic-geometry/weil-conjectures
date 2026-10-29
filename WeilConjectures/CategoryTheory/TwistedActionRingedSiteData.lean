@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniv
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import WeilConjectures.CategoryTheory.RingedToposMorphism
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # The ringed site of a site automorphism
 

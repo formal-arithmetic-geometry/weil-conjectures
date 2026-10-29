@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparison
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Flatness for the canonical coefficient-model comparison pullback
 Source: Stacks Project, Tag 05VD.

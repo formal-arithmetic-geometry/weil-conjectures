@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
 import Mathlib.Algebra.Category.ModuleCat.Products
 import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.Single
+public import Mathlib.Algebra.Module.Projective
+import Mathlib.RingTheory.Finiteness.Projective
+import Mathlib.CategoryTheory.Sites.Abelian
 
 /-!
 # Completed constant sheaves and finite reduction
@@ -398,9 +403,6 @@ private theorem constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] 
     (PresheafOfModules.sheafification (adicLisseConstantUnit T A)),
     comp_preservesFiniteColimits P
       (PresheafOfModules.sheafification (adicLisseConstantUnit T A))⟩
-
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] constantChange_unit
 
 /-- The termwise constant module sheaf of a complex. Source: Stacks Tag 093J
 (auxiliary; not a blueprint node). -/

@@ -21,6 +21,19 @@ universe u v r
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+private theorem fan_projection_bijective.{t} {ι : Type} {X : ι → Type t}
+    {P : Type t} (π : ∀ i, P ⟶ X i) (h : Limits.IsLimit (Limits.Fan.mk P π)) :
+    Function.Bijective (fun x i ↦ π i x) := by
+  let e := h.conePointUniqueUpToIso (Limits.Types.productLimitCone X).isLimit
+  have he (x : P) (i : ι) : e.hom x i = π i x :=
+    ConcreteCategory.congr_hom (h.conePointUniqueUpToIso_hom_comp
+      (Limits.Types.productLimitCone X).isLimit ⟨i⟩) x
+  have hf : (fun x i ↦ π i x) = e.toEquiv := by
+    funext x i
+    exact (he x i).symm
+  rw [hf]
+  exact e.toEquiv.bijective
+
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def sectionToLocalizedHom
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

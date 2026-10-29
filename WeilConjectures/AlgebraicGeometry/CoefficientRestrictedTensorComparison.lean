@@ -12,6 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientFixedPullbackFlat
 import all WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
 import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import all WeilConjectures.CategoryTheory.SiteModuleSheafConstantRingEquivalence
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-! # Derived tensor comparison for the coefficient-sized inverse image
 

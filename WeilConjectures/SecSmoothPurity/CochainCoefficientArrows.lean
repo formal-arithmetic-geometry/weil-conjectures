@@ -326,6 +326,34 @@ noncomputable def insertion {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) (M : M
     (underlying A).obj M ⟶ (underlying B).obj ((extensionFunctor a).obj M) :=
   (underlying A).map ((extensionAdjunction a).unit.app M)
 
+/-- The compatible coefficient square over the same geometric inverse image.
+In particular the equality of the two coefficient maps is part of the input.
+The module functor is required to be the actual scalar-extension presentation.
+Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+structure CoefficientSquare (f : RingedPullback R S) where
+  R' : Sheaf J CommRingCat.{w}
+  S' : Sheaf K CommRingCat.{w}
+  sourceMap : R ⟶ R'
+  targetMap : S ⟶ S'
+  RI' : Sheaf K CommRingCat.{w}
+  I' : SheafOfModules.AlgebraicInverseImage f.uInv R' RI'
+  coefficient' : RI' ⟶ S'
+  inverseImageMap : f.RI ⟶ RI'
+  inverseImageMap_graph :
+    f.uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map sourceMap) ≫
+        I'.ringUnderlying.hom =
+      f.I.ringUnderlying.hom ≫
+        (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map inverseImageMap
+  square : inverseImageMap ≫ coefficient' = f.coefficient ≫ targetMap
+  L' : Modules R' ⥤ Modules S'
+  hobj' : ∀ M, L'.obj M = SheafOfModules.changeOfRings coefficient' (I'.modules.obj M)
+  hmap' : ∀ {M N} (b : M ⟶ N), L'.map b = eqToHom (hobj' M) ≫
+    SheafOfModules.changeOfRingsHom coefficient' (I'.modules.obj M) (I'.modules.map b) ≫
+      eqToHom (hobj' N).symm
+  V' : Modules S' ⥤ Modules R'
+  moduleAdj' : L' ⊣ V'
+  [additive' : L'.Additive]
+
 attribute [instance] CoefficientSquare.additive'
 
 /-- A generalized inverse-image generator, followed by scalar-unit insertion.
@@ -335,10 +363,6 @@ noncomputable def generator (f : RingedPullback R S) (k : Comparison f)
     f.uInv.obj Z ⟶ (underlying S).obj (f.L.obj M) :=
   f.uInv.map x ≫ f.I.moduleUnderlying.inv.app M ≫ k.q M
 
-/-- Scalar association is normalized on every generalized inverse-image generator.
-Together with S'-linearity and balancing this specifies exactly
-`s' ⊗ (x ⊗ r) ↦ (1 ⊗ x) ⊗ s' phi'(r)`.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
 private theorem insertion_naturality {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     {M N : Modules A} (b : M ⟶ N) :
     (underlying A).map b ≫ insertion a N =
@@ -384,6 +408,9 @@ open SheafOfModules SheafOfModules.GeometricConstruction
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
+
+private noncomputable instance pushPreservesLimits (f : RingedPullback R S) :
+    PreservesLimits f.uPush := f.adj.rightAdjoint_preservesLimits
 
 /-- The restriction of scalars on complexes, applied termwise.
 Source: Stacks 03CY (auxiliary; not a blueprint node). -/

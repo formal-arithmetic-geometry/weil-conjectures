@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientClassicalSingle
 import WeilConjectures.CategoryTheory.ModuleInverseImageUnitComparison
 import through
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived localization of canonical coefficient comparison
 

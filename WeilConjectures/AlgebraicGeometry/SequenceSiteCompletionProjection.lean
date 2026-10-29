@@ -199,26 +199,22 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-attribute [instance] SequenceOrdinaryPullback.extension_additive
-
 attribute [local instance 30000] CategoryTheory.ringedToposRingForgetCompose
   CategoryTheory.ringedToposAbelianForgetCompose CategoryTheory.ringedToposCommRingForgetCompose
+
+private instance seqSetHasLimit (F : ℕᵒᵖ ⥤ Sheaf J (Type r)) : HasLimit F :=
+  inferInstance
+
+private instance seqModHasLimit (R : Sheaf J CommRingCat.{r})
+    (F : ℕᵒᵖ ⥤ Mod.{c, v, r} J R) : HasLimit F := inferInstance
 
 attribute [local instance 30000] seqSetHasLimit seqModHasLimit
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-attribute [irreducible] seqAdjunction
-
-attribute [irreducible] seqUnderlyingTower seqUnderlyingDirect
-
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-
-attribute [irreducible] seqOrdinaryEvaluation
-
-attribute [irreducible] seqModuleAdjunction
 
 end WeilConjectures.SemilinearSections
 

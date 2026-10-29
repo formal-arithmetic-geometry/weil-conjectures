@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 public import WeilConjectures.RingTheory.RlimPerfectComplete
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Algebraic stalk towers for finite adic reductions
 

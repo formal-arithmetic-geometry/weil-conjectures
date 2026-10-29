@@ -10,11 +10,20 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLi
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 public import WeilConjectures.CategoryTheory.StrictRoosModel
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-public import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
+public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
+import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Localization.Predicate
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Mathlib.CategoryTheory.Shift.Localization
+import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 set_option linter.privateModule false
 
@@ -247,7 +256,7 @@ private theorem coneToTensor_quasiIso (data : PrincipalReduction.PrincipalReduct
   infer_instance
 end CoefficientCone
 
-open CategoryTheory CategoryTheory.Limits Opposite CochainComplex RoosConeCalculus
+open CategoryTheory CategoryTheory.Limits Opposite CochainComplex
 namespace RoosCompletion
 variable {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -272,7 +281,7 @@ end TowerAssembly
 namespace EvalCone
 universe a b
 variable {A : Type a} [Category.{b} A] [Abelian A]
-open CochainComplex RoosConeCalculus
+open CochainComplex
 end EvalCone
 
 -- Keep assembly and coherence calculations independent of the coefficient category.

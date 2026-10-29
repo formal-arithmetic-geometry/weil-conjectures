@@ -41,9 +41,36 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency.types false
 
+private noncomputable abbrev abSheafify
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
+    (J : GrothendieckTopology C) : HasSheafify J AddCommGrpCat.{w} :=
+  hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
+
+private noncomputable abbrev smallArrowLimits
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (U : Cᵒᵖ) :
+    HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)
+      AddCommGrpCat.{w} :=
+  HasLimitsOfShape.of_small.{w, w} AddCommGrpCat.{w} _
+
 attribute [local instance] abSheafify smallArrowLimits
 
+private noncomputable abbrev abLocallyBijective
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
+    (J : GrothendieckTopology C) : J.WEqualsLocallyBijective AddCommGrpCat.{w} :=
+  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall J
+    (A := AddCommGrpCat.{w})
+
 attribute [local instance] abLocallyBijective
+
+private theorem abForgetLimits
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
+    (J : GrothendieckTopology C) :
+    PreservesFiniteLimits (sheafCompose J (forget AddCommGrpCat.{w})) := by
+  have : PreservesFiniteLimits
+      (sheafCompose J (forget AddCommGrpCat.{w}) ⋙ sheafToPresheaf J (Type w)) :=
+    inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf J AddCommGrpCat.{w} ⋙
+      (Functor.whiskeringRight _ _ _).obj (forget AddCommGrpCat.{w})))
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf J (Type w))
 
 attribute [local instance] abForgetLimits
 

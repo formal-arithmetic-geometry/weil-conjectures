@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Cohomological bounds after scalar extension
 

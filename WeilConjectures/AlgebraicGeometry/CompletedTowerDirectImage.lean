@@ -65,6 +65,14 @@ import WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherence
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-!
 # Total direct image of strict completed-coefficient towers
@@ -91,5 +99,14 @@ def completedCoefficientDirectImageMap :
       (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj (pbcAdicCompletion X d) :=
   (proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app (pbcAdicCompletion Y d) ≫
     (proEtaleSheafDirectImage f CommRingCat.{u + 1}).map (completedCoefficientMap f d)
+
+@[instance]
+theorem completedEvaluation_preservesKInjective (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (n : ℕ) :
+    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules T R)).obj
+      (op n)).PreservesKInjectiveComplexes := by
+  constructor
+  intro I hI
+  exact tower_evaluation_isKInjective (pbcModules T R) I (op n)
 
 end AlgebraicGeometry.Scheme

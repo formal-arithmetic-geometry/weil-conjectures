@@ -45,6 +45,16 @@ variable {A : Type uE} [Category.{vE} A] [MonoidalCategory A]
 end Generic
 
 -- The graded tensor coproduct choices are shared throughout this module.
+private theorem gradedTensorR (X Y : GradedObject ℤ (Modules R)) : X.HasTensor Y :=
+  inferInstance
+private theorem gradedTensorS (X Y : GradedObject ℤ (Modules S)) : X.HasTensor Y :=
+  inferInstance
+private theorem gradedTensorFourR (X Y Z W : GradedObject ℤ (Modules R)) :
+    GradedObject.HasTensor₄ObjExt X Y Z W := inferInstance
+private theorem gradedTensorFourS (X Y Z W : GradedObject ℤ (Modules S)) :
+    GradedObject.HasTensor₄ObjExt X Y Z W := inferInstance
+
+-- The graded tensor coproduct choices are shared throughout this module.
 private theorem gradedTensorLeftR (X Y Z : GradedObject ℤ (Modules R)) :
     GradedObject.HasGoodTensor₁₂Tensor X Y Z := inferInstance
 private theorem gradedTensorLeftS (X Y Z : GradedObject ℤ (Modules S)) :

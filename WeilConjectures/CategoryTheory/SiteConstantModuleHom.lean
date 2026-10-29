@@ -70,4 +70,14 @@ def constantModuleHomUnit (M : ModuleCat.{max u v} Λ) :
       ((constantModuleHomFunctor J Λ).obj M).val.presheaf :=
   toSheafify J ((siteConstantModulePresheafGeneral (C := C) Λ).obj M).presheaf
 
+private instance homUnit_surjective (M : ModuleCat.{max u v} Λ) :
+    Presheaf.IsLocallySurjective J (constantModuleHomUnit J Λ M) :=
+  inferInstanceAs (Presheaf.IsLocallySurjective J
+    (toSheafify J ((siteConstantModulePresheafGeneral (C := C) Λ).obj M).presheaf))
+
+private instance homUnit_injective (M : ModuleCat.{max u v} Λ) :
+    Presheaf.IsLocallyInjective J (constantModuleHomUnit J Λ M) :=
+  inferInstanceAs (Presheaf.IsLocallyInjective J
+    (toSheafify J ((siteConstantModulePresheafGeneral (C := C) Λ).obj M).presheaf))
+
 end CategoryTheory

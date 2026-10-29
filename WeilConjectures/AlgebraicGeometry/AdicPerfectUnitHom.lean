@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.AdicShortComplexCohomologyML
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectModuleFunctors
 import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionAdjunction
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # The unit case of the ordinary quotient Hom comparison
 

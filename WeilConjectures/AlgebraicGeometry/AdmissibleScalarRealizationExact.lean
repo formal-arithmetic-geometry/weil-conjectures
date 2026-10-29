@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantSheafReduction
 public import WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
-public import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 import WeilConjectures.AlgebraicGeometry.CompactAdicContinuousIdentification
@@ -17,6 +18,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.NumberTheory.Padics.RingHoms
+import Mathlib.NumberTheory.Padics.ProperSpace
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.Algebra.Field.ULift
+public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 
 /-!
 # Exact scalar realization for admissible continuous coefficients
@@ -43,6 +52,10 @@ open CategoryTheory.MonObj
 open scoped TensorProduct Topology
 
 namespace AlgebraicGeometry.ProEtale.AdmissibleScalarRealization
+
+-- In live this instance came globally from the Sheaf copy of InternalSectionTensorComparison;
+-- the tip makes it local there.
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 
 open FiniteConstantModel
 
@@ -96,9 +109,6 @@ def CompletedIdentification (T : Scheme.{u}) (p : A) : Prop :=
             ((Ideal.span ({ULift.up p} : Set (ULift.{u + 1} A))) ^ (n + 1))
             (ULift.up a)))
 
-/-- Rational extension scalars retain the topology of their spectral absolute value.
-Source: blueprint internal-Hom proof paragraphs 2--3, field case
-(auxiliary; not a blueprint node). -/
 private local instance constantFunctions_locallySurjective [Finite A] [DiscreteTopology A] :
     Presheaf.IsLocallySurjective (coherentTopology Profinite.{u}) (constantFunctions A) where
   imageSieve_mem {S} s := by

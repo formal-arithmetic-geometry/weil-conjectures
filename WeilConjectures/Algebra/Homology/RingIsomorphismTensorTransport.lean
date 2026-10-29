@@ -255,6 +255,22 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   {R S : Sheaf J CommRingCat.{r}}
 
+/-- The existing monoidal structure on module cochain complexes, cached for elaboration.
+Source: Stacks 03EK and 06YT
+(auxiliary; not a blueprint node). -/
+noncomputable instance (priority := 2000) ringIsoCochainMonoidal
+    (A : Sheaf J CommRingCat.{r}) :
+    MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
+  HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
+
+/-- The underlying structure of the existing total tensor, cached for elaboration.
+Source: Stacks 03EK and 06YT
+(auxiliary; not a blueprint node). -/
+noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
+    (A : Sheaf J CommRingCat.{r}) :
+    MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
+  HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
+
 /-- Localization of termwise restriction, allowing independent localization universes.
 Source: Stacks 04VG and 06YP
 (auxiliary; not a blueprint node). -/

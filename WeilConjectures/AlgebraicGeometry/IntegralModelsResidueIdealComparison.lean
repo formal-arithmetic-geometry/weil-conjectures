@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
+public import WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
+import all WeilConjectures.AlgebraicGeometry.IntegralConstantCompletion
 import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
 import WeilConjectures.AlgebraicGeometry.CompactAdicContinuousIdentification
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
@@ -532,8 +533,7 @@ private theorem continuousIntegers_identification (l : ℕ) [Fact l.Prime]
   let := spectralNorm.normedField (Padic l) E
   let A := Padic.coefficientExtensionIntegers l E
   let p := Padic.coefficientExtensionUniformizer l E
-  have hd := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hd := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span ({p} : Set A) = Padic.coefficientExtensionMaximalIdeal l E :=
     hd.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have hp : p ≠ 0 := by

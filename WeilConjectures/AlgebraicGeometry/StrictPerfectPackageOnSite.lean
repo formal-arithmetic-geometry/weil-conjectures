@@ -40,6 +40,13 @@ end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
 
+/-- Abelian sheafification on a small pro-etale slice in the coefficient universe.
+Source: Stacks, Tag 03DA (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+instance strictPerfectSliceSheafify (X : Scheme.{u}) (V : X.ProEt) :
+    HasSheafify ((ProEt.topology X).over V) AddCommGrpCat.{u + 1} :=
+  letI : EssentiallySmall.{u + 1} (Over V) := essentiallySmallSelf.{0} _
+  hasSheafifyEssentiallySmallSite _ _
+
 /-- The locally bijective sheafification criterion on that same slice.
 Source: Stacks, Tag 03DA (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
 instance strictPerfectSliceLocallyBijective (X : Scheme.{u}) (V : X.ProEt) :

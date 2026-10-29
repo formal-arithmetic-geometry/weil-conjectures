@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Homology.CochainTensorModelRigidity
 public import WeilConjectures.Algebra.Homology.KFlatFixedTensorTriangulated
-public import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Computing constant-ring derived tensors on flat representatives
 

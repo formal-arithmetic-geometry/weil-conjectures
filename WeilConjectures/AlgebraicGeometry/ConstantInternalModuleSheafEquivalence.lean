@@ -33,6 +33,9 @@ variable {C : Type u} [Category.{v} C] (R : Type w) [Ring R]
 local instance evaluationMonoidal (U : C) : ((evaluation C Ab.{w}).obj U).Monoidal :=
   Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
 
+abbrev A : C ⥤ Ab.{w} :=
+  (Functor.const C).obj (RingCat.of R) ⋙ forget₂ RingCat.{w} Ab.{w}
+
 noncomputable def presheafToFunctor : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R) ⥤
     (C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) where
   obj M :=
@@ -48,6 +51,36 @@ noncomputable def presheafToFunctor : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C :=
   map_id M := by ext U; rfl
   map_comp φ ψ := by ext U; rfl
 
+noncomputable def functorToPresheafObj
+    (F : C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) :
+    CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R) := by
+  let X := F ⋙ CategoryTheory.Mod.forget (AddCommGrpCat.of R)
+  let act : A (C := C) R ⊗ X ⟶ X :=
+    { app U := γ[AddCommGrpCat.of R,(F.obj U).X]
+      naturality _ _ f := by exact (CategoryTheory.Mod.act_hom (F.map f)).symm }
+  letI : ModObj (A (C := C) R) X := ModObj.mk' (A (C := C) R) act
+    (NatTrans.ext (funext fun U ↦ ModObj.one_smul_self (AddCommGrpCat.of R) (F.obj U).X))
+    (NatTrans.ext (funext fun U ↦ ModObj.mul_smul_self (AddCommGrpCat.of R) (F.obj U).X))
+  exact ⟨X⟩
+
+noncomputable def preimageMap {M N : CategoryTheory.Mod (C ⥤ Ab.{w}) (A (C := C) R)}
+    (φ : (presheafToFunctor R).obj M ⟶ (presheafToFunctor R).obj N) : M ⟶ N :=
+  CategoryTheory.Mod.homMk
+    { app U := (φ.app U).hom
+      naturality _ _ f := congrArg CategoryTheory.Mod.Hom.hom (φ.naturality f) }
+    (NatTrans.ext (funext fun U ↦ CategoryTheory.Mod.act_hom (φ.app U)))
+
+noncomputable def presheafToFunctorFullyFaithful :
+    (presheafToFunctor (C := C) R).FullyFaithful where
+  preimage φ := preimageMap R φ
+  map_preimage φ := by ext U; rfl
+  preimage_map φ := CategoryTheory.Mod.hom_ext _ _ (by ext U; rfl)
+
+noncomputable def realizationIso (F : C ⥤ CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R)) :
+    (presheafToFunctor R).obj (functorToPresheafObj R F) ≅ F :=
+  NatIso.ofComponents (fun U ↦ CategoryTheory.Mod.isoMk (Iso.refl _) (by simp))
+    (fun _ ↦ CategoryTheory.Mod.hom_ext _ _ rfl)
+
 end PresheafEncoding
 
 section ModuleLocalization
@@ -59,9 +92,26 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 variable (A : Cᵒᵖ ⥤ Ab.{w}) [MonObj A]
 
+noncomputable abbrev moduleLocalizationAdjunction :=
+  (sheafificationAdjunction J Ab.{w}).mapModAdjunction A
+
 noncomputable abbrev moduleLocalizationRight :=
   (sheafificationAdjunction J Ab.{w}).modRight
     ((sheafificationAdjunction J Ab.{w}).unit.app A)
+
+noncomputable def moduleLocalizationRightFullyFaithful :
+    (moduleLocalizationRight J A).FullyFaithful := by
+  let adj := moduleLocalizationAdjunction J A
+  have : ∀ N, IsIso (adj.counit.app N) := by
+    intro N
+    rw [← isIso_iff_of_reflects_iso _ (CategoryTheory.Mod.forget _)]
+    change IsIso ((adj.counit.app N).hom)
+    rw [Adjunction.mapModAdjunction_counit_app_hom]
+    infer_instance
+  have : IsIso adj.counit := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact fun N ↦ inferInstance
+  exact adj.fullyFaithfulROfIsIsoCounit
 
 end ModuleLocalization
 
@@ -87,6 +137,12 @@ lemma modulePresheafEncoding_forget
     (G ⋙ forget₂ (ModuleCat.{w} R) Ab.{w}) = _
   rw [hG]
   rfl
+
+instance presheafToFunctorIsEquivalence :
+    (presheafToFunctor (C := Cᵒᵖ) R).IsEquivalence where
+  faithful := (presheafToFunctorFullyFaithful R).faithful
+  full := (presheafToFunctorFullyFaithful R).full
+  essSurj := ⟨fun F ↦ ⟨functorToPresheafObj R F, ⟨realizationIso R F⟩⟩⟩
 
 noncomputable def sheafEncoding
     (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R)
@@ -123,6 +179,62 @@ variable (G : CategoryTheory.Mod Ab.{w} (AddCommGrpCat.of R) ⥤ ModuleCat.{w} R
     [HasLimitsOfSize.{v, u} (ModuleCat.{w} R)]
     [PreservesLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
     [ReflectsLimitsOfSize.{v, u} (forget₂ (ModuleCat.{w} R) Ab.{w})]
+
+instance localizationRightFull :
+    (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Full :=
+  (moduleLocalizationRightFullyFaithful J _).full
+
+instance localizationRightFaithful :
+    (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Faithful :=
+  (moduleLocalizationRightFullyFaithful J _).faithful
+
+instance moduleEncodingIsEquivalence :
+    (modulePresheafEncoding (C := C) R G).IsEquivalence := by
+  unfold modulePresheafEncoding
+  infer_instance
+
+instance sheafEncodingFull : (sheafEncoding J R G hG).Full := by
+  have : (modulePresheafEncoding (C := C) R G).Full :=
+    (moduleEncodingIsEquivalence R G).full
+  have : (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Full :=
+    (moduleLocalizationRightFullyFaithful J _).full
+  exact Functor.Full.of_comp_faithful_iso
+    (G := sheafToPresheaf J (ModuleCat.{w} R))
+    (H := moduleLocalizationRight J (A (C := Cᵒᵖ) R) ⋙ modulePresheafEncoding (C := C) R G)
+    (Iso.refl _)
+
+instance sheafEncodingFaithful : (sheafEncoding J R G hG).Faithful := by
+  have : (modulePresheafEncoding (C := C) R G).Faithful :=
+    (moduleEncodingIsEquivalence R G).faithful
+  have : (moduleLocalizationRight J (A (C := Cᵒᵖ) R)).Faithful :=
+    (moduleLocalizationRightFullyFaithful J _).faithful
+  exact Functor.Faithful.of_comp_iso
+    (G := sheafToPresheaf J (ModuleCat.{w} R))
+    (H := moduleLocalizationRight J (A (C := Cᵒᵖ) R) ⋙ modulePresheafEncoding (C := C) R G)
+    (Iso.refl _)
+
+instance sheafEncodingEssSurj : (sheafEncoding J R G hG).EssSurj where
+  mem_essImage N := by
+    let P := modulePresheafEncoding (C := C) R G
+    let M := P.objPreimage N.obj
+    let e := P.objObjPreimageIso N.obj
+    have hM : Presheaf.IsSheaf J M.X := by
+      have hME : P.obj M ⋙ forget₂ (ModuleCat.{w} R) Ab.{w} = M.X :=
+        congrArg (fun F ↦ F.obj M) (modulePresheafEncoding_forget (C := C) R G hG)
+      let e' := (eqToIso hME).symm ≪≫
+        ((Functor.whiskeringRight Cᵒᵖ _ _).obj
+          (forget₂ (ModuleCat.{w} R) Ab.{w})).mapIso e
+      exact (Presheaf.isSheaf_of_iso_iff e').mpr
+        ((sheafCompose J (forget₂ (ModuleCat.{w} R) Ab.{w})).obj N).property
+    let adj := moduleLocalizationAdjunction J (A (C := Cᵒᵖ) R)
+    have hη : IsIso (adj.unit.app M) := by
+      rw [← isIso_iff_of_reflects_iso _ (CategoryTheory.Mod.forget _)]
+      change IsIso ((adj.unit.app M).hom)
+      rw [Adjunction.mapModAdjunction_unit_app_hom]
+      exact isIso_toSheafify J hM
+    exact ⟨_, ⟨ObjectProperty.isoMk _ ((P.mapIso (asIso (adj.unit.app M))).symm ≪≫ e)⟩⟩
+
+instance sheafEncodingIsEquivalence : (sheafEncoding J R G hG).IsEquivalence where
 
 end SheafEncoding
 

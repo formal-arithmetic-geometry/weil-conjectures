@@ -72,6 +72,36 @@ noncomputable instance normalizationConstantLimits :
     PreservesFiniteLimits (constantSheaf J (ModuleCat.{u + 1} R)) :=
   (normalizationCoefficientExactness J (RingHom.id R)).1.1
 
+/-- Exactness of constants, from the coefficient exactness statement.
+Source: Stacks Tag 093J (auxiliary; not a blueprint node). -/
+noncomputable instance normalizationConstantColimits :
+    PreservesFiniteColimits (constantSheaf J (ModuleCat.{u + 1} R)) :=
+  (normalizationCoefficientExactness J (RingHom.id R)).1.2
+
+/-- Additivity of coefficient restriction.
+Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+noncomputable instance normalizationRestrictAdditive (q : R →+* S) :
+    (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)).Additive :=
+  (normalizationCoefficientExactness J q).2.1.1
+
+/-- Left exactness of coefficient restriction.
+Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+noncomputable instance normalizationRestrictLimits (q : R →+* S) :
+    PreservesFiniteLimits (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) :=
+  (normalizationCoefficientExactness J q).2.1.2.1
+
+/-- Right exactness of coefficient restriction.
+Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+noncomputable instance normalizationRestrictColimits (q : R →+* S) :
+    PreservesFiniteColimits (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) :=
+  (normalizationCoefficientExactness J q).2.1.2.2
+
+/-- Coefficient restriction commutes with sheafification.
+Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+noncomputable instance normalizationRestrictSheafification (q : R →+* S) :
+    J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) :=
+  (normalizationCoefficientExactness J q).2.2
+
 section Pullback
 
 variable {D : Type (u + 1)} [Category.{u} D] [EssentiallySmall.{u + 1} D]

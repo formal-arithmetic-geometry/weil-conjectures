@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientTerminal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
+import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+import Mathlib.CategoryTheory.Sites.Equivalence
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Coordinates for one discrete coefficient section
 

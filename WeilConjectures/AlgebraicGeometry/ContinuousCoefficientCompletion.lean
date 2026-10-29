@@ -144,7 +144,6 @@ noncomputable def discreteContinuousCoefficientIso (X : Scheme.{u}) :
     exact asIso (continuousCoefficientConstantComparison X T))
     (fun f ↦ discreteConstantComparison_naturality X f)
 
-/-- The residue coefficient rings before taking constant sheaves. -/
 private theorem commRingForgetReflectsLimit {J : Type v} [Category J]
     (F : J ⥤ CommRingCat.{u}) (c : Limits.Cone F)
     (hc : Limits.IsLimit ((CategoryTheory.forget CommRingCat).mapCone c)) :

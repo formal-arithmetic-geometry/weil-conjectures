@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import all WeilConjectures.AlgebraicGeometry.OrdinaryCommonQuotientTower
 import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 import WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueRingPushout
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 
 /-! # The ordinary common first-residue tensor comparison -/
 

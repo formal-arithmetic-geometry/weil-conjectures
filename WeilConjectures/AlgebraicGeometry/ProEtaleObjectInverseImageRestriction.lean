@@ -77,12 +77,6 @@ structure ProEtaleObjectRestrictionComparison {X : Scheme.{u}} (W : X.ProEt)
       toSheafify (ProEt.topology W.left)
         (((proEtaleBaseChange W.hom).op.lan).obj G.obj)
 
-/-- Restriction of constant-coefficient modules through the constant-ring localization
-isomorphism `e : A_W ≅ A_X|_W`. This is the existing sectionwise pushforward of
-module sheaves along composition; its scalar action uses `e.hom` and its underlying
-abelian presheaf is exactly `U ↦ M(U → W → X)`.
-Source: Stacks, Tags 00XZ, 0H7J and 03D2
-(auxiliary; not a blueprint node). -/
 private noncomputable def restrictionPresheafIso {X : Scheme.{u}} (W : X.ProEt)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D] :
     AlgebraicGeometry.ProEtale.localizationRestriction D W.hom W.prop ⋙

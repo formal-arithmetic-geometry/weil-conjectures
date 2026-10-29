@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
+public import WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
+import all WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 
 /-!
@@ -52,10 +53,20 @@ private theorem scalarModules_full : (scalarModules A).Full := by
         exact h }
   exact ⟨ModuleCat.ofHom g, rfl⟩
 
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem scalarModules_faithful : (scalarModules A).Faithful := by
+  constructor
+  intro P Q f g h
+  ext p
+  exact ConcreteCategory.congr_hom (congrArg Mod.Hom.hom h) p
+
 attribute [local instance] scalarModules_full scalarModules_faithful
 
 private instance scalarModules_colimits : PreservesFiniteColimits (scalarModules A) :=
   scalarModules_preservesFiniteColimits A
+
+private instance scalarModules_additive' : (scalarModules A).Additive :=
+  scalarModules_additive A
 
 private abbrev B : Ab.{u + 1} := AddCommGrpCat.of (ULift.{u + 1} A)
 private abbrev Λ := Profinite.continuousCoefficientRingObj A

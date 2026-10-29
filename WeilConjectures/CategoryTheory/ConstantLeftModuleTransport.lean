@@ -105,6 +105,17 @@ private instance (T : Dᵒᵖ) : PreservesFiniteLimits (sectionAb K F T) :=
 
 section AbelianAdjunction
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+private instance forgetAbLimits : PreservesFiniteLimits (U J) := by
+  have : PreservesFiniteLimits (U J ⋙ sheafToPresheaf J (Type u)) := by
+    change PreservesFiniteLimits (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+      (Functor.whiskeringRight Cᵒᵖ AddCommGrpCat.{u} (Type u)).obj
+        (forget AddCommGrpCat.{u}))
+    infer_instance
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf J (Type u))
+
+private instance abBiproducts : HasFiniteBiproducts (Sheaf J AddCommGrpCat.{u}) :=
+  .of_hasFiniteProducts
+
 variable (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
   (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))
   [PreservesFiniteLimits L] [PreservesFiniteLimits R]

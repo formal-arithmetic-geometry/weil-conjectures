@@ -40,6 +40,32 @@ theorem sliceDense (U : C) :
 
 attribute [local instance] sliceDense
 variable (R : Sheaf J CommRingCat.{max c d vc vd r})
+
+/-- Restriction on each slice is an equivalence. The slice equivalence is dense by the preceding
+covering-sieve calculation, so apply the module equivalence associated with that ringed site
+equivalence.
+
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
+(auxiliary; not a blueprint node). -/
+theorem sliceModulesEquivalence (U : C) :
+    (restrictModules.{max c vc, max d vd, vc, vd, r}
+      (K := K.over U) (Over.post F) (R.over (F.obj U))).IsEquivalence := by
+  let : (Over.post F).asEquivalence.symm.inverse.IsDenseSubsite
+      (K.over U) (J.over (F.obj U)) := sliceDense F U
+  exact restrictModules_isEquivalence.{max d vd, max c vc, vd, vc, r}
+    (Over.post F).asEquivalence.symm (R.over (F.obj U))
+
+/-- Direct restriction on the original site is an equivalence. Apply the structural ringed
+equivalence comparison to the inverse of the given equivalence.
+
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
+(auxiliary; not a blueprint node). -/
+theorem globalModulesEquivalence :
+    (restrictModules.{c, d, vc, vd, r} (K := K) F R).IsEquivalence := by
+  let : F.asEquivalence.symm.inverse.IsDenseSubsite K J := inferInstanceAs
+    (F.IsDenseSubsite K J)
+  exact restrictModules_isEquivalence.{d, c, vd, vc, r} F.asEquivalence.symm R
+
 attribute [local instance] globalModulesEquivalence sliceModulesEquivalence
 
 variable (U : C)

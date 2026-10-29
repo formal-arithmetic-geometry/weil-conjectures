@@ -101,6 +101,41 @@ private noncomputable def finiteComparisonPresheafEncodingIso
     ext U m
     rfl
 
+private theorem finiteComparisonConstantRealization_isEquivalence
+    (X : Scheme.{u}) (B : Type) [CommRing B] :
+    (finiteComparisonConstantRealization X B).IsEquivalence := by
+  let J := Scheme.ProEt.topology X
+  let R := ULift.{u + 1} B
+  let A := ConstantInternalModuleSheafEncoding.A (C := X.ProEtᵒᵖ) R
+  let G := internalToModule R
+  let : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} R) :=
+    ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
+  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R G rfl
+  let L := finiteComparisonConstantRealization X B
+  let E := sheafToPresheaf J (ModuleCat.{u + 1} R) ⋙ finiteComparisonPresheaf X B
+  let P := ConstantInternalModuleSheafEncoding.modulePresheafEncoding (C := X.ProEt) R G
+  let adj := (sheafificationAdjunction J Ab.{u + 1}).mapModAdjunction A
+  have hu (M : Sheaf J (ModuleCat.{u + 1} R)) : IsIso (adj.unit.app (E.obj M)) := by
+    rw [← isIso_iff_of_reflects_iso _ (Mod.forget A)]
+    change IsIso ((adj.unit.app (E.obj M)).hom)
+    rw [Adjunction.mapModAdjunction_unit_app_hom]
+    exact isIso_toSheafify J
+      ((sheafCompose J (forget₂ (ModuleCat.{u + 1} R) Ab.{u + 1})).obj M).property
+  let η := Functor.whiskerRight (Functor.whiskerLeft E adj.unit) P
+  have : IsIso η := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro M
+    exact Functor.map_isIso P (adj.unit.app (E.obj M))
+  let e0 : E ⋙ P ≅ sheafToPresheaf J (ModuleCat.{u + 1} R) :=
+    Functor.isoWhiskerLeft _ (finiteComparisonPresheafEncodingIso X B)
+  let e : (L ⋙ H) ⋙ sheafToPresheaf J (ModuleCat.{u + 1} R) ≅
+      (𝟭 _) ⋙ sheafToPresheaf J (ModuleCat.{u + 1} R) :=
+    (asIso η).symm ≪≫ e0
+  let i := ((fullyFaithfulSheafToPresheaf J (ModuleCat.{u + 1} R)).whiskeringRight _)
+    |>.preimageIso e
+  have : (L ⋙ H).IsEquivalence := Functor.isEquivalence_of_iso i.symm
+  exact Functor.isEquivalence_of_comp_right L H
+
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
 
@@ -118,8 +153,61 @@ def finiteComparisonRealization (X : Scheme.{u})
   finiteComparisonConstantRealization X B ⋙
     Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv
 
+/-- The specified coefficient transport is an exact equivalence.
+Source: blueprint finite comparison, coefficient paragraph and proof step 1
+(auxiliary; not a blueprint node).
+
+Proof: an internal presheaf action is precisely the sectionwise scalar action.
+Monoidal sheafification extends it uniquely to the associated constant ring sheaf.
+Restriction along constant sections is inverse: local scalar representatives and
+sheaf uniqueness recover both the action and every linear map. The unit and counit
+are the sheafification identifications on underlying abelian sheaves. Transport along
+`finiteDiscreteSchemeRingIso` has inverse transport along its inverse ring map.
+The two composite functors are inverse and retain the underlying additive sheaves,
+so preserve finite limits, finite colimits, and addition. This includes the zero ring
+and empty scheme. -/
+theorem finiteComparisonRealization_exact (X : Scheme.{u})
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
+      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
+        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom] :
+    (finiteComparisonRealization B X eR).IsEquivalence ∧
+    (finiteComparisonRealization B X eR).Additive ∧
+    PreservesFiniteLimits (finiteComparisonRealization B X eR) ∧
+    PreservesFiniteColimits (finiteComparisonRealization B X eR) := by
+  let _ : DiscreteTopology B := inferInstance
+  let _ : Finite B := inferInstance
+  have : (finiteComparisonConstantRealization X B).IsEquivalence :=
+    finiteComparisonConstantRealization_isEquivalence X B
+  have : (Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv).IsEquivalence :=
+    (Mod.comapEquivalenceOfIsIso (finiteDiscreteSchemeRingIso B X eR).inv)
+      |>.isEquivalence_functor
+  have : (finiteComparisonRealization B X eR).IsEquivalence := by
+    unfold finiteComparisonRealization
+    infer_instance
+  have : (finiteComparisonRealization B X eR).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
+
 variable (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
   ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
     Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom]
+
+/-- Additivity of the specified coefficient transport, from the coefficient paragraph.
+Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+instance finiteComparisonRealization_additive (X : Scheme.{u}) :
+    (finiteComparisonRealization B X eR).Additive :=
+  (finiteComparisonRealization_exact B X eR).2.1
+
+/-- Left exactness of the coefficient transport, from the coefficient paragraph.
+Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+instance finiteComparisonRealization_limits (X : Scheme.{u}) :
+    PreservesFiniteLimits (finiteComparisonRealization B X eR) :=
+  (finiteComparisonRealization_exact B X eR).2.2.1
+
+/-- Right exactness of the coefficient transport, from the coefficient paragraph.
+Source: blueprint finite comparison (auxiliary; not a blueprint node). -/
+instance finiteComparisonRealization_colimits (X : Scheme.{u}) :
+    PreservesFiniteColimits (finiteComparisonRealization B X eR) :=
+  (finiteComparisonRealization_exact B X eR).2.2.2
 
 end AlgebraicGeometry.ProEtale

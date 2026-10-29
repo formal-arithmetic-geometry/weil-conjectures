@@ -7,6 +7,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractibleBasis
+public import Mathlib.Topology.Connected.Basic
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.RingTheory.ProEtale.WContractible
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # A coefficient-sized contractible cover subordinate to connected components
 

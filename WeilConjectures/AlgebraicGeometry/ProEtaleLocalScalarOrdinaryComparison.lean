@@ -553,7 +553,7 @@ private def sliceSheafificationIso :
         PresheafOfModules.sheafification (R := (ringSheaf S).over V) (𝟙 _) ≅
       PresheafOfModules.sheafification (R := ringSheaf S) (𝟙 _) ⋙
         SheafOfModules.overFunctor (ringSheaf S) V := by
-  haveI (P : PresheafOfModules.{u + 1} (ringSheaf S).obj) :
+  haveI (P : _root_.PresheafOfModules.{u + 1} (ringSheaf S).obj) :
       IsIso (SheafOfModules.overSheafificationMap (ringSheaf S) V P) :=
     SheafOfModules.overSheafificationMap_isIso (ringSheaf S) V P
   exact NatIso.ofComponents

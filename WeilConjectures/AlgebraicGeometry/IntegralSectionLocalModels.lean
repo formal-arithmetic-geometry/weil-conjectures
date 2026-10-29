@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 public import WeilConjectures.AlgebraicGeometry.IntegralStratifiedPerfectModels
 import WeilConjectures.AlgebraicGeometry.IntegralSectionMemberModels
 import WeilConjectures.WeilObject.Sheaf.Stalk
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
 /-! # Finite scalar models under the normalized integral section comparison
 

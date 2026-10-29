@@ -56,13 +56,8 @@ local notation:max "Res" f:arg => restrictScalars
 section QuotientKernel
 variable {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S)
 
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
+private def K (U : Cᵒᵖ) : Ideal (R.obj.obj U) := RingHom.ker (q.hom.app U).hom
+
 end QuotientKernel
 
 /-- The sectionwise quotient unit, sending x to 1 tensor x.
@@ -95,7 +90,6 @@ noncomputable def commonQuotientUnit
           (𝟙 (derivedChangeRingIndependentCoefficients J S).obj)
           (𝟙 (changeOfRings q M)))
 
-omit [EssentiallySmall.{r} C] in
 /-- The actual quotient units are natural in the module.
 Source: Stacks 03EK (auxiliary; not a blueprint node). -/
 theorem commonQuotientUnit_naturality
@@ -538,8 +532,6 @@ private theorem ordinaryComparison
   rw [hFi, hp]
   exact hGi
 
-attribute [local irreducible] rawTransition
-
 end RingPushout
 
 variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
@@ -579,10 +571,6 @@ structure OrdinaryCommonQuotientTower where
           (((D.S.map (homOfLE (Nat.le_succ n)).op).hom.app U s)
             ⊗ₜ[R.obj.obj U, ((D.projection n).hom.app U).hom] x))
 
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] [HasDerivedCategory.{wR} (Mod R)]
-  [HasDerivedCategory.{wB} (Mod B)]
-  [∀ n : ℕ, HasDerivedCategory.{wS} (Mod(D.S.obj (op n)))] in
 variable {D a b}
 
 /-- The quotient units are constructed, rather than chosen as part of the comparison.

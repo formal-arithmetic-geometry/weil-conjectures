@@ -5,10 +5,19 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
+public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTransport
 import all WeilConjectures.AlgebraicGeometry.IntegralCohomologicalAdicCriterion
 import WeilConjectures.AlgebraicGeometry.IntegralConstantModelConstructibility
 import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletionTransport
 import WeilConjectures.AlgebraicGeometry.IntegralModelsResidueTransport
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.CategoryTheory.ObjectProperty.Equivalence
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 /-! # Integral constructible objects and Stacks adic constructibility
 
@@ -25,43 +34,17 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-private theorem smallModules_equivalence (X : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
-    (smallModules X R).IsEquivalence := by
-  let A := (sheafCompose (Scheme.ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
-        (Scheme.ProEt.topology X) R)
-  let B := ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
-    X.ProEt).sheafPushforwardContinuous RingCat.{u + 1}
-      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X)).obj A
-  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsContinuous
-      (Scheme.ProEt.topology X) (Scheme.coefficientProEtaleModelTopology.{u, u} X) :=
-    Scheme.coefficientProEtaleModelUp_isContinuous.{u, u} X
-  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsContinuous
-      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X) := by
-    change (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsContinuous
-      ((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤
-        X.ProEt).inducedTopology (Scheme.ProEt.topology X)) (Scheme.ProEt.topology X)
-    infer_instance
-  let e := SheafOfModules.pushforwardPushforwardEquivalence
-    (J := Scheme.ProEt.topology X)
-    (K := Scheme.coefficientProEtaleModelTopology.{u, u} X)
-    (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)) (𝟙 A) (𝟙 B)
-    (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
-    (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
-  have : e.inverse.IsEquivalence := e.isEquivalence_inverse
-  exact inferInstanceAs
-    ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
-      (Scheme.ProEt.topology X) R).functor ⋙ e.inverse).IsEquivalence
-
-private def smallDerivedIso (X : Scheme.{u})
+/-- An isomorphism of derived objects induces an isomorphism of their transports to the
+small site. Proof: compare both transports with the derived functor of the section-module
+equivalence `smallModules` on localization representatives. Source: Stacks Tag 05RU
+(auxiliary; not a blueprint node). -/
+def smallDerivedIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
     (e : K ≅ L) : smallDerivedObject X R K ≅ smallDerivedObject X R L := by
   let := HasDerivedCategory.standard (ConstantCompletion.Mod (smallRing X R))
   let F := smallModules X R
-  have : F.IsEquivalence := smallModules_equivalence X R
+  have : F.IsEquivalence := InternalCompletionTransport.smallModules_equivalence X R
   have : F.Additive := ⟨by intros; ext U x; rfl⟩
   change DerivedCategory.Q.obj
       ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K)) ≅
@@ -72,7 +55,10 @@ private def smallDerivedIso (X : Scheme.{u})
       (DerivedCategory.Q.objObjPreimageIso L).symm) ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage L)
 
-private theorem complete_iso
+/-- Local derived completeness along `q` is invariant under isomorphism. Proof: derived
+restriction and derived internal Hom carry the isomorphism to an isomorphism on every slice.
+Source: Stacks Tag 0999 (auxiliary; not a blueprint node). -/
+theorem isComplete_of_iso
     {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
     {O S : Sheaf J CommRingCat.{u + 1}} (q : O ⟶ S)
     {K L : ConstantCompletion.D O} (e : K ≅ L)
@@ -85,16 +71,24 @@ private theorem complete_iso
       (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))))
   exact (((ringedDerivedRestriction O U ⋙ H).mapIso e).isZero_iff).mp (hK U f hf)
 
-private theorem stacksConstructible_iso (l : ℕ) [Fact l.Prime]
+/-- Stacks adic constructibility is invariant under isomorphism. Proof: completeness by
+`isComplete_of_iso` after `smallDerivedIso`, the residue clause by `residueCondition_iso`.
+Source: Stacks Tags 09C1 and 09C2 (auxiliary; not a blueprint node). -/
+theorem stacksConstructible_iso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X))}
     (e : K ≅ L) (hK : stacksConstructible l E X K) : stacksConstructible l E X L := by
-  refine ⟨complete_iso _ (smallDerivedIso X _ e) hK.1, ?_⟩
+  refine ⟨isComplete_of_iso _ (smallDerivedIso X _ e) hK.1, ?_⟩
   exact residueCondition_iso l E X e hK.2
 
-private theorem selected_equivalence
+/-- An equivalence `e` of full subcategories `PC ≌ QC` whose functor is identified with `F`
+restricts to an equivalence `P ≌ Q` of smaller full subcategories with the same functor,
+provided `F` matches `P` with `Q` on `PC`. Proof: the restricted functor is fully faithful,
+and every object of `Q` is the image of its `e`-preimage, which satisfies `P`.
+(auxiliary; not a blueprint node). -/
+theorem exists_selected_equivalence
     {C D : Type*} [Category C] [Category D]
     (P PC : ObjectProperty C) (Q QC : ObjectProperty D)
     (F : C ⥤ D) (e : PC.FullSubcategory ≌ QC.FullSubcategory)
@@ -200,7 +194,7 @@ theorem integral_models_stacks (l : ℕ) [Fact l.Prime]
   let QC := fun L ↦ ConstantCompletion.IsComplete (smallMap X (residueMap l E X))
     (smallDerivedObject X _ L)
   let : Q.IsClosedUnderIsomorphisms := ⟨fun ε h ↦ stacksConstructible_iso l E X ε h⟩
-  refine selected_equivalence P PC Q QC (restriction l E X) e α ?_ ?_ ?_
+  refine exists_selected_equivalence P PC Q QC (restriction l E X) e α ?_ ?_ ?_
   · intro K hK
     exact ((Scheme.integral_cohomological_adic_criterion l E X _).mp ((hc K).mp hK)).1
   · exact fun _ h ↦ h.1

@@ -80,8 +80,22 @@ instance hasDerived (R : Sheaf J CommRingCat.{r}) :
     HasDerivedCategory.{max c v (r + 1)} (Mod.{c, v, r} J R) :=
   HasDerivedCategory.standard _
 
+/-- The ordinary unbounded derived module category.
+Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+abbrev D (R : Sheaf J CommRingCat.{r}) :=
+  @DerivedCategory (Mod.{c, v, r} J R) _ _ (hasDerived.{c, v, r} J R)
+
 variable (B : ℕ → Sheaf J CommRingCat.{r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
+
+/-- The sequence site is essentially small in the same coefficient universe.
+Source: Zheng 4.1 (auxiliary; not a blueprint node).
+Proof: take a small model of C and its product with the natural-number poset,
+using a universe lift of the latter. The product of the two equivalences is an
+equivalence with a category whose objects and arrows lie in the coefficient universe. -/
+theorem sequenceSmall : EssentiallySmall.{r} (ℕ × C) := by
+  exact EssentiallySmall.mk'
+    ((AsSmall.equiv : ℕ ≌ AsSmall.{r} ℕ).prod (equivSmallModel.{r} C))
 
 attribute [instance] sequenceSmall
 
@@ -188,6 +202,37 @@ Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
 set_option linter.unusedSectionVars false in
+/-- The slice inclusion is continuous for the actual vertical topology.
+Source: Zheng 4.1 (auxiliary; not a blueprint node).
+Proof: a covering sieve restricts to a covering sieve on its vertical slice by the
+definition of coefficientSequenceTopology. The sheaf condition restricts accordingly. -/
+theorem evaluation_continuous (n : ℕ) :
+    (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
+  apply Functor.isContinuous_of_coverPreserving
+  · constructor
+    intro G Z T x hx Y₁ Y₂ X f₁ f₂ g₁ g₂ hg₁ hg₂ he
+    have he' : f₁.2 ≫ g₁ = f₂.2 ≫ g₂ := congrArg Prod.snd he
+    have hx' := hx f₁.2 f₂.2 hg₁ hg₂ he'
+    let q : X ⟶ (n, X.2) := Prod.mkHom f₁.1 (𝟙 _)
+    have e₁ : q ≫ (Prod.sectR n C).map f₁.2 = f₁ := by
+      ext <;> simp [q]
+    have e₂ : q ≫ (Prod.sectR n C).map f₂.2 = f₂ := by
+      apply Prod.hom_ext
+      · exact Subsingleton.elim _ _
+      · simp [q]
+    rw [← e₁, ← e₂, op_comp, op_comp, G.obj.map_comp, G.obj.map_comp]
+    exact congrArg (G.obj.map q.op) hx'
+  · constructor
+    intro U S hS
+    change (S.functorPushforward (Prod.sectR n C)).functorPullback (Prod.sectR n C) ∈ J U
+    exact J.superset_covering (Sieve.le_functorPushforward_pullback _ S) hS
+
+/-- Continuity used by continuous module pushforward along the vertical inclusion.
+Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
+instance evaluationContinuous (n : ℕ) :
+    (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) :=
+  evaluation_continuous J n
+
 /-- Evaluation of B_bullet is B_n, including its restriction maps.
 Source: Zheng 4.1 (auxiliary; not a blueprint node).
 Proof: uncurry and ofOpSequence evaluate to B_n(U); the horizontal identity is the
@@ -215,6 +260,84 @@ def evaluation (n : ℕ) : Systems.{c, v, r} J B τ ⥤ Mod.{c, v, r} J (B n) :=
   SheafOfModules.pushforward (F := Prod.sectR n C)
     (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
 
+private theorem sequenceEvaluation_exact
+    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify (coefficientSequenceTopology J) AddCommGrpCat.{r}]
+    [(coefficientSequenceTopology J).WEqualsLocallyBijective AddCommGrpCat.{r}]
+    (n : ℕ) {S : Sheaf J RingCat.{r}}
+    {R : Sheaf (coefficientSequenceTopology J) RingCat.{r}}
+    [Functor.IsContinuous (Prod.sectR n C) J (coefficientSequenceTopology J)]
+    (φ : S ⟶ ((Prod.sectR n C).sheafPushforwardContinuous
+      RingCat.{r} J (coefficientSequenceTopology J)).obj R) :
+    PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ) ∧
+      PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ) := by
+  constructor
+  · let T := SheafOfModules.forget.{r} S ⋙ PresheafOfModules.toPresheaf S.obj
+    have : PreservesFiniteLimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{r} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (Functor.whiskeringLeft _ _ _).obj (Prod.sectR n C).op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ T
+  · let : (Prod.sectR n C).IsCocontinuous J (coefficientSequenceTopology J) :=
+      ⟨fun hS ↦ hS⟩
+    let : ∀ (F : Cᵒᵖ ⥤ AddCommGrpCat.{r}),
+        (Prod.sectR n C).op.HasPointwiseRightKanExtension F := fun F X ↦ by
+      let : HasLimitsOfShape (StructuredArrow X (Prod.sectR n C).op)
+          AddCommGrpCat.{r} := HasLimitsOfShape.of_essentiallySmall _ _
+      infer_instance
+    let H := (Prod.sectR n C).sheafPushforwardContinuous
+      AddCommGrpCat.{r} J (coefficientSequenceTopology J)
+    have : PreservesColimitsOfSize.{0, 0} H :=
+      ((Prod.sectR n C).sheafAdjunctionCocontinuous AddCommGrpCat.{r}
+        J (coefficientSequenceTopology J)).leftAdjoint_preservesColimits
+    let T := SheafOfModules.toSheaf.{r} S
+    have : PreservesFiniteColimits (SheafOfModules.pushforward.{r} φ ⋙ T) := by
+      change PreservesFiniteColimits (SheafOfModules.toSheaf.{r} R ⋙ H)
+      infer_instance
+    have : ReflectsFiniteColimits T :=
+      { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+    exact preservesFiniteColimits_of_reflects_of_preserves _ T
+
+/-- Evaluation is additive and exact; kernels and cokernels are componentwise.
+Source: Zheng 4.1 (auxiliary; not a blueprint node).
+Proof: kernels are sectionwise and cokernels are sheafifications of sectionwise
+cokernels. Vertical sheafification computes the same sheafification at each level.
+Addition of maps is sectionwise as well. -/
+theorem evaluation_exact (n : ℕ) :
+    (evaluation.{c, v, r} J B τ n).Additive ∧ PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) ∧
+      PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) := by
+  refine ⟨⟨by intros; ext U x; rfl⟩, ?_⟩
+  exact sequenceEvaluation_exact J n
+    (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
+
+/-- Additivity of the actual evaluation.
+Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
+instance evaluationAdditive (n : ℕ) : (evaluation.{c, v, r} J B τ n).Additive :=
+  (evaluation_exact.{c, v, r} J B τ n).1
+
+/-- Left exactness of the actual evaluation.
+Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
+instance evaluationLimits (n : ℕ) : PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) :=
+  (evaluation_exact.{c, v, r} J B τ n).2.1
+
+/-- Right exactness of the actual evaluation.
+Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
+instance evaluationColimits (n : ℕ) : PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) :=
+  (evaluation_exact.{c, v, r} J B τ n).2.2
+
+/-- Evaluation on the ordinary derived category, computed termwise by its construction.
+Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
+abbrev e (n : ℕ) : DS.{c, v, r} J B τ ⥤ D.{c, v, r} J (B n) :=
+  letI := evaluationAdditive.{c, v, r} J B τ n
+  letI := evaluationLimits.{c, v, r} J B τ n
+  letI := evaluationColimits.{c, v, r} J B τ n
+  letI := hasDerived.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
+  letI := hasDerived.{c, v, r} J (B n)
+  (evaluation.{c, v, r} J B τ n).mapDerivedCategory
+
 /-- The coefficient homomorphism from m to n is the composite of the supplied tau maps.
 Source: Zheng 4.1 (auxiliary; not a blueprint node). -/
 def coefficientMap {m n : ℕ} (h : n ≤ m) : B m ⟶ B n :=
@@ -229,6 +352,30 @@ Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
 abbrev res : Mod.{c, v, r} J R' ⥤ Mod.{c, v, r} J R :=
   SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
+
+/-- Restriction leaves the underlying abelian sheaves unchanged, hence is exact.
+Source: Stacks 03CZ (auxiliary; not a blueprint node).
+Proof: kernels retain their sectionwise groups and cokernels retain their sheafified
+sectionwise groups; only the ring action is restricted. -/
+theorem res_exact : PreservesFiniteLimits (res.{c, v, r} φ) ∧
+    PreservesFiniteColimits (res.{c, v, r} φ) := by
+  let U := SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R)
+  have : PreservesFiniteLimits (res.{c, v, r} φ ⋙ U) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R')))
+  have : PreservesFiniteColimits (res.{c, v, r} φ ⋙ U) :=
+    inferInstanceAs (PreservesFiniteColimits
+      (SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R')))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
+    preservesFiniteColimits_of_reflects_of_preserves _ U⟩
+
+/-- Left exactness of scalar restriction.
+Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+instance resLimits : PreservesFiniteLimits (res.{c, v, r} φ) := (res_exact.{c, v, r} φ).1
+
+/-- Right exactness of scalar restriction.
+Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+instance resColimits : PreservesFiniteColimits (res.{c, v, r} φ) := (res_exact.{c, v, r} φ).2
 
 /-- Ordinary derived restriction of scalars, computed termwise.
 Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
@@ -272,6 +419,15 @@ structure ScalarData where
         (Functor.mapDerivedCategoryFactors (res.{c, v, r} φ)).hom.app Q =
       DerivedCategory.Q.map
         (((ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv P Q) f)
+
+/-- The model's actual scalar-extension functor, with all projection universes fixed.
+Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+abbrev ScalarData.T (A : ScalarData.{c, v, r} φ) :
+    D.{c, v, r} J R ⥤ D.{c, v, r} J R' :=
+  @SheafOfModules.DerivedChangeOfRingsCochainModel.T.{c, v, r,
+    max c v (r + 1), max c v (r + 1)} C _ (siteSmall.{c, v, r}) J _
+      (locallyBijective.{c, v, r} J) (abelianSheafify.{c, v, r} J) R R' φ
+      (hasDerived.{c, v, r} J R) (hasDerived.{c, v, r} J R') A.model
 
 end Scalars
 

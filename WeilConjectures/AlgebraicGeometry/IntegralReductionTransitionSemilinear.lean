@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
+import all WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 
 /-! # Semilinearity of the canonical finite reduction transitions
 

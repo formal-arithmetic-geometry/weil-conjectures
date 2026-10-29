@@ -12,6 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientSliceRestrictionIso
 import all WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Transport of a discrete point presentation to the coefficient slice
 

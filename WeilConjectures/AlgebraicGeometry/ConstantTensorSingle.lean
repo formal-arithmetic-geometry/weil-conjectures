@@ -109,6 +109,16 @@ Source: Stacks 03EK (auxiliary; not a blueprint node). -/
 def tensorTower (O : Sheaf J CommRingCat.{u}) (Q : ℕᵒᵖ ⥤ Mod O) :
     Mod O ⥤ ℕᵒᵖ ⥤ Mod O := (Q ⋙ (curriedTensor (Mod O)).flip).flip
 
+/-- Tensor towers are additive by evaluation at every level.
+Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+theorem tensorTower_additive (O : Sheaf J CommRingCat.{u})
+    (Q : ℕᵒᵖ ⥤ Mod O) : (tensorTower J O Q).Additive := by
+  constructor
+  intro M N f g
+  apply NatTrans.ext
+  funext n
+  exact (tensorRight (Q.obj n)).map_add
+
 attribute [local instance] tensorTower_additive
 
 /-- Tensoring the termwise coefficient tower at the cochain unit gives its value at P.

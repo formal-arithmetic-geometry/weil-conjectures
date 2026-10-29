@@ -47,6 +47,8 @@ public import WeilConjectures.Topology.ConstructibleIsRetrocompact
 import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 import WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import WeilConjectures.AlgebraicGeometry.OrdinaryCommonQuotientTower
+import Mathlib.CategoryTheory.ObjectProperty.Equivalence
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 set_option linter.privateModule false
 
@@ -125,8 +127,4 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
   IntegralModelsStacks.smallModules IntegralModelsStacks.smallMap
   ConstantCompletion.kernelIdeal RingedSiteIdeal.extension
 
-set_option maxHeartbeats 400000 in
--- Transport compares the standard local derived instances and two complete subcategories.
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] integralModel_coefficientMonObj in
 end AlgebraicGeometry.ProEtale

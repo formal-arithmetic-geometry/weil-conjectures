@@ -63,6 +63,7 @@ import WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
 import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
 import WeilConjectures.AlgebraicGeometry.ScalarExtensionBinaryCoherence
 import WeilConjectures.AlgebraicGeometry.SemilinearDerivedCalculus
+import WeilConjectures.AlgebraicGeometry.StrictTowerOperations
 import WeilConjectures.AlgebraicGeometry.WeilCompletedRealizationRegular
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
@@ -98,6 +99,11 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDeri
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Pullback of strict completed-coefficient towers
 
@@ -123,6 +129,74 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
+
+/-- The finite coefficient identification transported by the published constant comparison.
+Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U ⟶ V)
+    (n : ℕ) :
+    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (d.finiteRing V n) ≅
+      d.finiteRing U n :=
+  (proEtaleSheafInverseImage f CommRingCat.{u + 1}).mapIso
+      (pbcLevelConstantComparison V d n).symm ≪≫
+    @asIso _ _ _ _ ((proEtaleConstantComparison f).app (d.ringTower.obj (op n)))
+      (by exact exchangeConstantComparison_isIso f (A ⧸ d.ideal ^ (n + 1))) ≪≫
+    pbcLevelConstantComparison U d n
+
+/-- The finite coefficient comparisons retain every quotient transition.
+Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
+Proof: the published constants-to-functions comparison commutes with quotient maps.
+The constant inverse-image comparison is natural in the finite coefficient ring.
+Combining their naturality squares with the limit cone equations gives this equation. -/
+theorem AdicCoefficientDatum.integralRingComponent_naturality {U V : Scheme.{u}}
+    (f : U ⟶ V) {m n : ℕᵒᵖ} (a : m ⟶ n) :
+    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V m.unop) ≫
+        (d.finiteRingIso f m.unop).hom ≫ (reductionCoefficientSystem U d).map a =
+      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V n.unop) ≫
+        (d.finiteRingIso f n.unop).hom := by
+  let eU := pbcConstantSystemComparison U d
+  let eV := pbcConstantSystemComparison V d
+  let t : adicLisseRingSystem V d.ideal ⋙
+      proEtaleSheafInverseImage f CommRingCat.{u + 1} ⟶
+      adicLisseRingSystem U d.ideal :=
+    NatTrans.ofOpSequence (fun k ↦ (proEtaleConstantComparison f).app
+      (CommRingCat.of (A ⧸ d.ideal ^ (k + 1)))) (by
+        intro k
+        simpa only [Functor.comp_map, adicLisseRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] using
+          (proEtaleConstantComparison f).naturality
+            (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (k + 1))))
+  have hn := congrArg (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+    (eV.inv.naturality a)
+  have ht := t.naturality a
+  have hu := eU.hom.naturality a
+  simp only [Functor.map_comp] at hn
+  change (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+      ((reductionCoefficientSystem V d).map a) ≫
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          (pbcLevelConstantComparison V d n.unop).inv =
+    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+      (pbcLevelConstantComparison V d m.unop).inv ≫
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          ((adicLisseRingSystem V d.ideal).map a) at hn
+  change (adicLisseRingSystem V d.ideal ⋙
+    proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a ≫
+      (proEtaleConstantComparison f).app (d.ringTower.obj n) =
+    (proEtaleConstantComparison f).app (d.ringTower.obj m) ≫
+      (adicLisseRingSystem U d.ideal).map a at ht
+  change (adicLisseRingSystem U d.ideal).map a ≫
+      (pbcLevelConstantComparison U d n.unop).hom =
+    (pbcLevelConstantComparison U d m.unop).hom ≫
+      (reductionCoefficientSystem U d).map a at hu
+  dsimp only [finiteRingIso, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+    asIso_hom]
+  simp only [Category.assoc]
+  rw [← hu, ← Category.assoc _ _ ((pbcLevelConstantComparison U d n.unop).hom)]
+  rw [← ht]
+  simp only [Functor.comp_map, Category.assoc]
+  rw [← reassoc_of% hn]
+  simp only [← Functor.map_comp_assoc]
+  simp only [AdicCoefficientDatum.projection, completedReductionProjection,
+    ← Category.assoc, limit.w]
 
 /-- Finite coefficient comparison obtained from constant sections, with its fixed
 constant-section normalization. Source: blueprint order 1261
@@ -165,8 +239,6 @@ def completedCoefficientMap :
              naturality _ _ f := (Category.id_comp _).trans
                (completedCoefficientComponent_naturality g d f).symm } }
 
-attribute [irreducible] completedTowerPullback completedOrdinaryPullback
-
 open CategoryTheory.Functor
 
 -- Exact-presentation proof utilities from CompletedOpenExchangeTransport.
@@ -175,7 +247,17 @@ section
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-attribute [local irreducible] constantDerivedSquare transportedSquare
+private instance exactTowerFiniteLimits
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [PreservesFiniteLimits F] :
+    PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
+  preservesFiniteLimits _ _ _ := inferInstance
+
+private instance exactTowerFiniteColimits
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [PreservesFiniteColimits F] :
+    PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
+  preservesFiniteColimits _ _ _ := inferInstance
 
 end
 

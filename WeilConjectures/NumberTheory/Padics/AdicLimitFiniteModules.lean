@@ -47,8 +47,7 @@ private theorem coefficientIntegers_complete (l : ℕ) [Fact l.Prime] (E : Type 
       (coefficientExtensionIntegers l E) := by
   let R := coefficientExtensionIntegers l E
   let J := coefficientExtensionMaximalIdeal l E
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hR : ∀ x : E, x ∈ R ↔ coefficientExtensionAbsoluteValue l E x ≤ 1 := h.1
   let : IsLocalRing R := h.2.2.2.1
   let : IsDiscreteValuationRing R := h.2.2.2.2.2.2.2.1

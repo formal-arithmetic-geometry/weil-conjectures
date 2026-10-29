@@ -12,6 +12,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingAdjunction
 import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Scalar extension at the explicit coefficient-sized geometric stalk
 

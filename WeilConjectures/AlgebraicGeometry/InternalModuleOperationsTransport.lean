@@ -160,6 +160,11 @@ private theorem section_action {C D : Type (u + 1)} [Category.{u} C] [Category.{
       ((ψ.hom.app V ▷ N.obj.obj (F.op.obj V)).hom (r ⊗ₜ[ℤ] m)) = _
   rw [AddCommGrpCat.MonoidalCategory.whiskerRight_tmul]
 
+private instance pullback_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).IsContinuous
+      (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) :=
+  Scheme.ProEt.isContinuous_overPullback f
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
@@ -293,10 +298,6 @@ noncomputable def lowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.lowerStar Λ f ⋙ (equivalence Λ Y).functor ≅
       (equivalence Λ X).functor ⋙ lowerStar Λ f :=
   (lowerComparison_existsUnique Λ f).exists.choose
-
-attribute [local irreducible] squareData
-
-attribute [local irreducible] internalSquare sectionSquare
 
 end InternalModuleOperations
 end AlgebraicGeometry.ProEtale

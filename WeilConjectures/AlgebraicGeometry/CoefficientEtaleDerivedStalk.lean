@@ -7,6 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import all WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Sites.Equivalence
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Geometric stalks on the coefficient-sized etale model
 

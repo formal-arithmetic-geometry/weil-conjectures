@@ -10,6 +10,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientClassicalModuleOrigin
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-! # Bounded classical descent on coefficient-sized derived categories
 Source: blueprint classical derived equivalence, Stacks Tag 09AL.
 -/

@@ -40,7 +40,8 @@ namespace WeilConjectures
 /-- Transport ring sheafification through a small model in the coefficient universe.
 This is the existing Mathlib transport, with `essentiallySmallSelf` supplying the size.
 Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable instance integralCoefficientRingSheafify (Y : AlgebraicGeometry.Scheme.{t}) :
+noncomputable instance (priority := low) integralCoefficientRingSheafify
+    (Y : AlgebraicGeometry.Scheme.{t}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
     essentiallySmallSelf _
@@ -48,7 +49,8 @@ noncomputable instance integralCoefficientRingSheafify (Y : AlgebraicGeometry.Sc
 
 /-- Transport abelian-group sheafification through a small model in the coefficient universe.
 Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable instance integralCoefficientAbSheafify (Y : AlgebraicGeometry.Scheme.{t}) :
+noncomputable instance (priority := low) integralCoefficientAbSheafify
+    (Y : AlgebraicGeometry.Scheme.{t}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
     essentiallySmallSelf _
@@ -57,7 +59,7 @@ noncomputable instance integralCoefficientAbSheafify (Y : AlgebraicGeometry.Sche
 /-- The locally bijective description is transported from the same small model.
 It supplies Mathlib's abelian instance for module sheaves without an added hypothesis.
 Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable instance integralCoefficientAbLocallyBijective
+noncomputable instance (priority := low) integralCoefficientAbLocallyBijective
     (Y : AlgebraicGeometry.Scheme.{t}) :
     (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} :=

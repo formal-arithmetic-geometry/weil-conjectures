@@ -95,8 +95,7 @@ private theorem uniformizerSection_regular
     Function.Injective (fun x : (ring l E X).obj.obj (op V) ↦
       (ConstantCompletion.algebraSection e.hom
         (ULift.up (Padic.coefficientExtensionUniformizer l E))).val (op V) * x) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
       Set (Padic.coefficientExtensionIntegers l E)) =
       Padic.coefficientExtensionMaximalIdeal l E :=

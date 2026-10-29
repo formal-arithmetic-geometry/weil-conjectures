@@ -13,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import all WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.CategoryTheory.SiteModuleSheafConstantRingEquivalence
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Pro-etale restriction of a supplied constant etale chart
 

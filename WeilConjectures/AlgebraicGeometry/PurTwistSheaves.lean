@@ -43,6 +43,12 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
+-- The universe-polymorphic `{max u (t + 1)}` sheafification instances get stuck on
+-- universe constraints for the `CommRingCat.{u + 1}` sheaves of this file.
+attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
+  WeilConjectures.integralCoefficientAbSheafify
+  WeilConjectures.integralCoefficientAbLocallyBijective
+
 variable (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- Forgetting commutativity preserves sheafification on the small pro-etale site.
@@ -80,10 +86,6 @@ noncomputable def purTwistRootsModule (n : ℕ) :=
   (SheafOfModules.restrictScalars (purTwistFiniteRingIso S l n).hom).obj
     (proEtaleRootsOfUnityModule S (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _))
 
-set_option backward.isDefEq.respectTransparency.types false in
--- Pull back the target action along the coefficient reduction. Normalized torsion
--- actions make every additive sheaf morphism linear for this pulled-back action.
-set_option backward.isDefEq.respectTransparency.types false in
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 end AlgebraicGeometry.Scheme

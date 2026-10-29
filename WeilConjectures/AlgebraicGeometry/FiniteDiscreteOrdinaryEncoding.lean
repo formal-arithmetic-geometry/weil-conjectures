@@ -15,6 +15,15 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.CategoryTheory.SheafTensor
+public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-! # Finite discrete internal and ordinary coefficients
 
@@ -30,6 +39,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open CategoryTheory.MonObj
 open scoped CategoryTheory.Obj TensorProduct
+
+-- Upstream made these instances local (InternalSectionTensorComparison, SheafTensor).
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
@@ -143,10 +156,6 @@ def Encoding.ordinaryDerived {T : Scheme.{u}} (e : Encoding A T) :
   letI := HasDerivedCategory.standard (Ordinary A T)
   e.ordinary.mapDerivedCategory
 
-open Classical in
-/-- The ordinary bounded constructible finite-Tor predicate, without a fixed Tor bound.
-Source: sk-def-sfb-constructible, final paragraph, and blueprint proof steps 7 and 9
-(auxiliary; not a blueprint node). -/
 private instance pointConstants_locallySurjective [Finite A] [DiscreteTopology A] :
     Presheaf.IsLocallySurjective (coherentTopology Profinite.{u}) (pointConstants A) where
   imageSieve_mem {S} s := by

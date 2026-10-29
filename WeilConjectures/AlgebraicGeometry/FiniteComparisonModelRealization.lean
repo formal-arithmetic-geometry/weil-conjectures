@@ -8,6 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonD
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import WeilConjectures.CategoryTheory.ConstantRingModuleSheaves
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Mathlib.Algebra.Category.Ring.Adjunctions
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Ordinary realization of coefficient-sized constant module sheaves
 
@@ -196,8 +200,18 @@ instance finiteComparisonProEtaleModelRealization_isEquivalence :
   unfold finiteComparisonProEtaleModelRealization
   infer_instance
 
+/-- The etale model realization preserves addition. Source: Stacks Tag 03CY
+(auxiliary; not a blueprint node). -/
+instance finiteComparisonEtaleModelRealization_additive :
+    (finiteComparisonEtaleModelRealization X A).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
 /-- The pro-etale model realization preserves addition. Source: Stacks Tag 03CY
 (auxiliary; not a blueprint node). -/
+instance finiteComparisonProEtaleModelRealization_additive :
+    (finiteComparisonProEtaleModelRealization X A).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
 private theorem modelComparisonRingMap_unit :
     SheafOfModules.constantCoefficientUnit
         (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A ≫

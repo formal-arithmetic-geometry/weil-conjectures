@@ -31,10 +31,6 @@ abbrev coefficientModelTensorTest (P : ConstantCompletion.Cx R)
   ((((ringedKoszulTensor R).obj P).obj
     ((HomologicalComplex.single (ConstantCompletion.Mod R) (.up ℤ) 0).obj M)).homology q)
 
-/-- Every coefficient-model derived object has a K-flat representative.
-Source: Stacks Tag 06YS (auxiliary; not a blueprint node).
-Proof: resolve a standard-localization representative by the existing K-flat resolution
-and compose its localized augmentation with the localization preimage isomorphism. -/
 private local instance moduleMonoidal : MonoidalCategory (ConstantCompletion.Mod R) :=
   SheafOfModules.monoidalCategory R
 private local instance moduleSymmetric : SymmetricCategory (ConstantCompletion.Mod R) :=

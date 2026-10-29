@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.AlgebraicGeometry.ConstantKoszulQuotientAugmentationIsIso
 

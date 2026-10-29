@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedE
 import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedFunctor
 import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonLocal
 import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 
 /-!
 # Constructible comparison for discrete Noetherian coefficients

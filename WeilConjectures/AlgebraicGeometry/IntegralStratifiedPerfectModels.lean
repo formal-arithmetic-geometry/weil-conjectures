@@ -82,6 +82,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Completed integral constant models
@@ -173,6 +174,14 @@ theorem integralConstantModule_exact (T : Scheme.{u}) {A : Type (u + 1)} [CommRi
   let := hE.2
   exact ⟨comp_preservesFiniteLimits (K ⋙ E) R,
     comp_preservesFiniteColimits (K ⋙ E) R⟩
+
+/-- Additivity of completed-constant realization, inherited from its two factors.
+Source: Bhatt--Scholze, Proposition 6.6.11
+(auxiliary; not a blueprint node). -/
+instance integralConstantModule_additive (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive :=
+  letI := (integralConstantModule_exact T d).1
+  Functor.additive_of_preserves_binary_products _
 
 /-- The derived realization P ↦ A_T ⊗^L_A P, obtained by localizing the exact
 ordinary constant-module realization. On bounded finite projective complexes this

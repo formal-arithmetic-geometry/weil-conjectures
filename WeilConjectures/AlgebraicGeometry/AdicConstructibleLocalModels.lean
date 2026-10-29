@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
 import WeilConjectures.AlgebraicGeometry.AdicImmersionLiftingInput
 import WeilConjectures.AlgebraicGeometry.AdicResidueLissePerfectLift
+import WeilConjectures.ConstructibleSheaf.Refinement
+import WeilConjectures.ConstructibleSheaf.OpenClosed
 
 /-! # Perfect local models from an adic constructible residue
 

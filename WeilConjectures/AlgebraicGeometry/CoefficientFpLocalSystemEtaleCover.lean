@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
 import WeilConjectures.AlgebraicGeometry.CoefficientLocallyConstantEtaleSections
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+public import Mathlib.CategoryTheory.Sites.CoversTop.Basic
+import Mathlib.CategoryTheory.Sites.SheafHom
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Etale trivializing charts for coefficient-sized local systems
 

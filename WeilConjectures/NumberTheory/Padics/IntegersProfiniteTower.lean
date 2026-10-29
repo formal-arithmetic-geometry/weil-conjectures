@@ -124,8 +124,7 @@ theorem coefficientExtension_integers_profinite_tower (l : ℕ) [Fact l.Prime]
   let q := fun n : ℕ ↦ Ideal.Quotient.mk (coefficientExtensionIdeal l E (n + 1))
   have hb := coefficientExtension_integers_coset_basis l E
   have hO : ∀ x : E, x ∈ R ↔ ‖x‖ ≤ 1 :=
-    (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec.1
+    (coefficientExtensionIntegers_dvr l E).choose_spec.1
   have hc : CompactSpace R := by
     rw [← isCompact_univ_iff, Subtype.isCompact_iff, Set.image_univ,
       Subtype.range_coe_subtype]

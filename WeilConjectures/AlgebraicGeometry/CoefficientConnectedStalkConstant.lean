@@ -17,6 +17,9 @@ import all WeilConjectures.AlgebraicGeometry.LisseCoefficientConstructible
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 import WeilConjectures.CategoryTheory.SheafTensor
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+public import Mathlib.Topology.Connected.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # A single lisse complex on a connected component
 

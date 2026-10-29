@@ -338,10 +338,6 @@ noncomputable def complexHomProjection
       homObj (R := R) (L.X p) (M.X q) :=
   homComplexπ L M n p q h
 
-/-- The typed projection is the original chosen product projection.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
-Proof: this is the defining equation of the typed projection. -/
 private theorem complexHomProjection_isLimit
     (L M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (n : ℤ) :

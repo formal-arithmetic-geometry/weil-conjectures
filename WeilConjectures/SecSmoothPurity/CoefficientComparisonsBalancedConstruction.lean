@@ -171,6 +171,16 @@ def ScalarTensorConstruction {A B : Sheaf J CommRingCat.{w}} (i : A ⟶ B) : Pro
       (identityAlgebraicInverseImage A) i (extensionFunctor.{w, uC, vC} i)
         (fun _ ↦ rfl), c.mu = s
 
+/-- Forgetting commutativity preserves sheaves. Cache the existing Mathlib instance locally
+so that coefficient-comparison types do not repeat its multicospan inference.
+Source: Mathlib, Sites.Whiskering, `hasSheafCompose_of_preservesMulticospan`.
+(auxiliary; not a blueprint node).
+Proof: apply Mathlib's instance for the limit-preserving forgetful functor. -/
+private theorem coefficientComparison_hasSheafCompose
+    {E : Type uC} [Category.{vC} E] [EssentiallySmall.{w} E]
+    (T : GrothendieckTopology E) :
+    T.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w}) := inferInstance
+
 attribute [local instance 2000] coefficientComparison_hasSheafCompose
 
 open scoped ChangeOfRings TensorProduct

@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModul
 import WeilConjectures.Algebra.Homology.RingedKFlatSingleTensorComparison
 import WeilConjectures.AlgebraicGeometry.CoefficientRestrictedTensorComparison
 import all WeilConjectures.AlgebraicGeometry.NilpotentReductionStep
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Flat models for a restricted tensor with constant coefficients
 

@@ -10,9 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 public import WeilConjectures.AlgebraicGeometry.PbcCompletedPullbackActual
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
-public import all WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
+public import WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
+import all WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
+public import Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # Canonical coefficient change and ringed pullback
 

@@ -15,6 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 import all WeilConjectures.AlgebraicGeometry.ScalarModelFiniteFlatResolution
 import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 import all WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModules
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.Algebra.Module.FinitePresentation
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # The integral cohomological adic criterion
@@ -306,8 +309,7 @@ private theorem integralCoefficients (l : ℕ) [Fact l.Prime] (E : Type u)
   let I := ProEtale.IntegralConstantCompletion.ideal l E
   let J : Ideal O := Ideal.span {Padic.coefficientExtensionUniformizer l E}
   let e : O ≃+* R := ULift.ringEquiv.symm
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsDiscreteValuationRing O := h.2.2.2.2.2.2.2.1
   let : IsDiscreteValuationRing R :=
     IsDiscreteValuationRing.RingEquivClass.isDiscreteValuationRing e

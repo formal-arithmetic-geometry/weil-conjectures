@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
+public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Affine-local and global constructibility on Noetherian schemes

@@ -25,6 +25,13 @@ universe u v w vD vE
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
+/-- Abelian sheafification at the specified coefficient size, transported through the
+small site model. Source: Stacks Tag 03DA
+(auxiliary; not a blueprint node). -/
+instance completedConstantAbSheafify (X : Scheme.{u}) :
+    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+  letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
 /-- The locally bijective description at exactly the same coefficient size.
 Source: Stacks Tag 03DA
 (auxiliary; not a blueprint node). -/
@@ -63,6 +70,16 @@ def completedConstantExtension (X : Scheme.{u})
   letI := HasDerivedCategory.standard (completedConstantModules X R)
   letI := HasDerivedCategory.standard (completedConstantModules X S)
   (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u} φ).choose
+/-- The scalar extension witness is additive, as specified by the existing derived
+change-of-rings theorem. Source: Stacks Tag 06YY
+(auxiliary; not a blueprint node). -/
+instance completedConstantExtension_additive (X : Scheme.{u})
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) :
+    (completedConstantExtension X φ).Additive :=
+  letI := HasDerivedCategory.standard (completedConstantModules X R)
+  letI := HasDerivedCategory.standard (completedConstantModules X S)
+  Exists.choose (Exists.choose_spec (Exists.choose_spec (Exists.choose_spec
+    (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u} φ))))
 /-- The constant-module sheafification generator, the image of an actual module element.
 Source: Stacks Tag 093J, constant sheafification
 (auxiliary; not a blueprint node). -/

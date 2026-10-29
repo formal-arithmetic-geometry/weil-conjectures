@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplexes
 import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientTermsProjective
+public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # K-projectivity of ordinary quotient complexes -/
 

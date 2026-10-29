@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFiniteReflection
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
 import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
+import Mathlib.Algebra.Module.FinitePresentation
 /-! # The stratum test for coefficient-sized comparison
 Source: blueprint constructible comparison, Stacks Tag 09AK.
 -/

@@ -8,6 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientFiltration
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleConstantTensor
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
 import WeilConjectures.Algebra.Homology.RingedKFlatSingleTensorComparison
+public import Mathlib.Algebra.Module.Torsion.Basic
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.RingTheory.Finiteness.Basic
 
 /-! # The residue module underlying an adic graded layer
 

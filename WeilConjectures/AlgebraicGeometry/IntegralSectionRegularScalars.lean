@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
+public import WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 public import WeilConjectures.AlgebraicGeometry.IntegralSectionRegularScalarsScalar
+import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 
 /-! # The scalar-compatible rank-one section comparison
 

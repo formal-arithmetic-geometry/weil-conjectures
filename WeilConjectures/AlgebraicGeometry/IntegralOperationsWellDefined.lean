@@ -5,11 +5,12 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import all WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+import all WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestricted
 import Mathlib.CategoryTheory.Localization.Pi
 import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
@@ -122,6 +123,15 @@ Source: Stacks Tag 012Z (auxiliary; not a blueprint node). -/
   fun x ↦ ((φ.app P).f n).val.app U x
 
 open WeilConjectures
+
+/-- Scalar restriction preserves zero morphisms.
+Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+theorem SheafOfModules.integralOperationsRestrictScalarsZero
+    {C : Type c} [Category.{d} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{r}} (q : R ⟶ S) :
+    (SheafOfModules.restrictScalars.{r} q).PreservesZeroMorphisms :=
+  @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ _
+    (inferInstanceAs (SheafOfModules.restrictScalars.{r} q).Additive)
 
 attribute [local instance 2000] SheafOfModules.integralOperationsRestrictScalarsZero
 
@@ -260,6 +270,22 @@ private noncomputable def restrictComplexMap
   comm' i j _ := by
     ext U x
     exact congrArg (fun k ↦ k.val.app U x) (φ.comm i j)
+
+private theorem restrictComplexMap_naturality
+    {P P' : CochainComplex (SheafOfModules.{r} S) ℤ}
+    {Q Q' : CochainComplex (SheafOfModules.{r} T) ℤ}
+    (a : P ⟶ (WeilConjectures.integralOperationsRestrictionComplex q).obj Q)
+    (b : P' ⟶ (WeilConjectures.integralOperationsRestrictionComplex q).obj Q')
+    (u : P ⟶ P') (v : Q ⟶ Q')
+    (h : u ≫ b = a ≫ (WeilConjectures.integralOperationsRestrictionComplex q).map v) :
+    (WeilConjectures.integralOperationsRestrictionComplex f).map u ≫
+        restrictComplexMap f g q hq b =
+      restrictComplexMap f g q hq a ≫
+        (WeilConjectures.integralOperationsRestrictionComplex g).map v := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  ext U x
+  exact congrArg (fun z ↦ (z.f i).val.app U x) h
 
 end Composition
 
@@ -404,6 +430,21 @@ attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
   SheafOfModules.IntegralPullbackProof.pushRestrictionIso
   IntegralMateProof.mate
 
+private theorem integralHasMap
+    {A : Type a} [Category.{b} A] [Preadditive A] [MonoidalCategory A]
+    [(MonoidalCategory.curriedTensor A).PreservesZeroMorphisms]
+    [∀ M : A, ((MonoidalCategory.curriedTensor A).obj M).PreservesZeroMorphisms]
+    [HasCountableCoproducts A] (P Q : CochainComplex A ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q
+      (MonoidalCategory.curriedTensor A) (.up ℤ) := by
+  infer_instance
+
+private theorem scalarRestrictionAdditive
+    {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) :
+    (SheafOfModules.restrictScalars.{r} α).Additive := by
+  infer_instance
+
 namespace WeilConjectures
 
 /-- Signed total tensor followed by a zero-preserving coefficient functor.
@@ -447,6 +488,31 @@ variable {C : Type a} [Category.{b} C] [Preadditive C] [MonoidalCategory C]
   [(curriedTensor C).PreservesZeroMorphisms]
   [∀ X : C, ((curriedTensor C).obj X).PreservesZeroMorphisms]
   {P Q A B : CochainComplex C ℤ}
+private theorem totalTensor_map
+    (a : P ⟶ A) (b : Q ⟶ B)
+    [∀ (K L : CochainComplex C ℤ),
+      HomologicalComplex.HasMapBifunctor K L (curriedTensor C) (.up ℤ)] :
+    (Functor.uncurry.obj (curriedTensor C).map₂CochainComplex).map
+      (X := (P, Q)) (Y := (A, B)) (a, b) =
+      HomologicalComplex.mapBifunctorMap a b (curriedTensor C) (.up ℤ) := by
+  change HomologicalComplex.mapBifunctorMap a (𝟙 Q) _ _ ≫
+    HomologicalComplex.mapBifunctorMap (𝟙 A) b _ _ = _
+  simp [HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
+
+private theorem composite_map
+    {D : Type a'} [Category.{b'} D] {B : Type c} [Category.{d} B]
+    [HasZeroMorphisms B] (F : D ⥤ CochainComplex C ℤ) (R : C ⥤ B)
+    [R.PreservesZeroMorphisms]
+    [∀ (K L : CochainComplex C ℤ),
+      HomologicalComplex.HasMapBifunctor K L (curriedTensor C) (.up ℤ)]
+    {K L : D × D} (u : K ⟶ L) :
+    (integralOperationsTensorComposite F R).map u =
+      (R.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.mapBifunctorMap (F.map u.1) (F.map u.2)
+          (curriedTensor C) (.up ℤ)) := by
+  exact congrArg (R.mapHomologicalComplex (.up ℤ)).map
+    (totalTensor_map (F.map u.1) (F.map u.2))
+
 end TensorTotalProof
 
 section SignedTensorConstruction
@@ -601,6 +667,11 @@ variable {C : Type a} [Category.{b} C] [EssentiallySmall.{r} C]
 attribute [local instance] HomologicalComplex.monoidalCategoryStruct
   HomologicalComplex.monoidalCategory
 
+private theorem totalMap_eq {A : Sheaf J CommRingCat.{r}}
+    {P Q X Y : Complex A} (f : P ⟶ X) (g : Q ⟶ Y) :
+    tensorTotalMap f g =
+      HomologicalComplex.mapBifunctorMap f g (curriedTensor (Modules A)) (.up ℤ) := rfl
+
 @[no_expose] private noncomputable def chainAdjunction :=
   (extensionAdjunction α).mapHomologicalComplex (.up ℤ)
 
@@ -657,6 +728,35 @@ private theorem pure
   rw [KappaCalculation.extension_unit, scalarTotal_hom, totalMap_pure,
     transpose_section, transpose_section]
 attribute [local irreducible] map transpose
+private theorem map_naturality
+    {P Q X Y : Complex R} {P' Q' X' Y' : Complex S}
+    (a : P ⟶ (restrictComplex α).obj P')
+    (b : Q ⟶ (restrictComplex α).obj Q')
+    (a' : X ⟶ (restrictComplex α).obj X')
+    (b' : Y ⟶ (restrictComplex α).obj Y')
+    (f : P ⟶ X) (g : Q ⟶ Y) (f' : P' ⟶ X') (g' : Q' ⟶ Y')
+    (ha : f ≫ a' = a ≫ (restrictComplex α).map f')
+    (hb : g ≫ b' = b ≫ (restrictComplex α).map g') :
+    tensorTotalMap f g ≫ map R S α a' b' =
+      map R S α a b ≫ (restrictComplex α).map (tensorTotalMap f' g') := by
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  apply tensor_hom_ext
+  intro U x y
+  subst n
+  change ((map R S α a' b').f (p+q)).val.app U
+    (((tensorTotalMap f g).f (p+q)).val.app U
+      (totalPure P Q p q (p+q) rfl U x y)) =
+    ((tensorTotalMap f' g').f (p+q)).val.app U
+      (((map R S α a b).f (p+q)).val.app U
+        (totalPure P Q p q (p+q) rfl U x y))
+  rw [totalMap_pure, pure, pure, totalMap_pure]
+  exact congrArg₂ (totalPure X' Y' p q (p+q) rfl U)
+    (congrArg (fun k ↦ (k.f p).val.app U x) ha)
+    (congrArg (fun k ↦ (k.f q).val.app U y) hb)
+
 end TensorChainProof
 
 attribute [local irreducible] TensorChainProof.map TensorChainProof.transpose
@@ -795,6 +895,29 @@ private theorem component_pure (P Q : D) (p q : ℤ) (U : Cᵒᵖ)
     (TensorChainProof.map S T q₀ (θ.app P) (θ.app Q)) (p+q) U _).trans
       h
 
+private theorem level_map_eq {K L : D × D} (a : K ⟶ L) :
+    (level S f F).map a =
+      (WeilConjectures.integralOperationsRestrictionComplex f).map
+        (tensorTotalMap (F.map a.1) (F.map a.2)) := by
+  exact (TensorTotalProof.composite_map F (SheafOfModules.restrictScalars f) a).trans
+    (congrArg (WeilConjectures.integralOperationsRestrictionComplex f).map
+      (TensorChainProof.totalMap_eq (F.map a.1) (F.map a.2)).symm)
+
+@[no_expose] private noncomputable def candidate [Presheaf.IsLocallySurjective J f.hom] :
+    level S f F ⟶ level T g G where
+  app := component S T f g q₀ hq₀ F G θ
+  naturality {K L} u := by
+    rw [level_map_eq, level_map_eq]
+    exact SheafOfModules.IntegralScalarProof.restrictComplexMap_naturality f g
+      ((integralOperationsForgetSheaf J).map q₀) hq₀
+      (TensorChainProof.map S T q₀ (θ.app K.1) (θ.app K.2))
+      (TensorChainProof.map S T q₀ (θ.app L.1) (θ.app L.2))
+      (tensorTotalMap (F.map u.1) (F.map u.2))
+      (tensorTotalMap (G.map u.1) (G.map u.2))
+      (TensorChainProof.map_naturality S T q₀ (θ.app K.1) (θ.app K.2)
+        (θ.app L.1) (θ.app L.2) (F.map u.1) (F.map u.2) (G.map u.1) (G.map u.2)
+        (θ.naturality u.1) (θ.naturality u.2))
+
 attribute [local irreducible] component
 
 include hq₀ in
@@ -860,7 +983,8 @@ noncomputable abbrev integralOperationsFiniteModules (W : AlgebraicGeometry.Sche
 
 /-- The pro-etale site is small relative to the coefficient universe.
 Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
-noncomputable instance integralOperationsSiteSmall (W : AlgebraicGeometry.Scheme.{t}) :
+noncomputable instance (priority := low) integralOperationsSiteSmall
+    (W : AlgebraicGeometry.Scheme.{t}) :
     EssentiallySmall.{max u (t + 1)} W.ProEt := essentiallySmallSelf _
 
 /-- Standard localization for the commutative presentation of the same completed sheaf.
@@ -875,7 +999,55 @@ noncomputable instance integralOperationsCommHasDerivedCategory
 
 attribute [local instance 3000] integralTowerHasDerivedCategory
 
+/-- The presheaf tensor structure for the same finite ring, with commutativity retained.
+Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+noncomputable instance integralOperationsFinitePresheafMonoidal
+    (W : AlgebraicGeometry.Scheme.{t}) (n : ℕ) :
+    MonoidalCategory (PresheafOfModules.{max u (t + 1)}
+      (integralCoefficientSheaf l E W n).obj) :=
+  PresheafOfModules.monoidalCategory
+    (R := (integralCoefficientCommRingSheaf l E W n).obj)
+
+/-- The recorded sheaf tensor structure on finite coefficients.
+Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+noncomputable instance integralOperationsFiniteMonoidal (W : AlgebraicGeometry.Scheme.{t})
+    (n : ℕ) : MonoidalCategory (integralOperationsFiniteModules l E W n) :=
+  letI : EssentiallySmall.{max u (t + 1)} W.ProEt := essentiallySmallSelf _
+  letI := integralCoefficientAbSheafify.{t, u} W
+  letI := integralCoefficientAbLocallyBijective.{t, u} W
+  letI := SheafOfModules.isMonoidal_W_independentCoefficients
+    (J := AlgebraicGeometry.Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)
+  SheafOfModules.monoidalCategory (integralCoefficientCommRingSheaf l E W n)
+
+/-- Tensoring finite sheaves preserves zero maps in the first variable.
+Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+noncomputable instance integralOperationsFiniteTensorZero
+    (W : AlgebraicGeometry.Scheme.{t}) (n : ℕ) :
+    (MonoidalCategory.curriedTensor
+      (integralOperationsFiniteModules l E W n)).PreservesZeroMorphisms :=
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+    (integralCoefficientCommRingSheaf l E W n)
+
+/-- Tensoring finite sheaves preserves zero maps in the second variable.
+Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
+noncomputable instance integralOperationsFiniteTensorObjZero
+    (W : AlgebraicGeometry.Scheme.{t}) (n : ℕ) (M : integralOperationsFiniteModules l E W n) :
+    ((MonoidalCategory.curriedTensor
+      (integralOperationsFiniteModules l E W n)).obj M).PreservesZeroMorphisms :=
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+    (integralCoefficientCommRingSheaf l E W n) M
+
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+
+/-- The direct-sum total tensor exists in finite coefficient modules.
+Source: Stacks Tag 012Z (auxiliary; not a blueprint node). -/
+theorem integralOperationsFiniteHasMap
+    (W : AlgebraicGeometry.Scheme.{t}) (n : ℕ)
+    (P Q : CochainComplex (integralOperationsFiniteModules l E W n) ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q
+      (MonoidalCategory.curriedTensor (integralOperationsFiniteModules l E W n)) (.up ℤ) := by
+  exact integralHasMap P Q
 
 attribute [local instance 2000] integralOperationsFiniteHasMap
 
@@ -901,12 +1073,33 @@ private noncomputable def integralOperationsBaseChange {X Y : AlgebraicGeometry.
     (f : X ⟶ Y) : Y.ProEt ⥤ X.ProEt :=
   AlgebraicGeometry.Scheme.proEtaleBaseChange f
 
+/-- Continuity of the named base-change functor.
+Source: Stacks Tag 09A5 (auxiliary; not a blueprint node). -/
+private instance integralOperationsBaseChange_isContinuous
+    {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) :
+    (integralOperationsBaseChange f).IsContinuous
+      (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      (AlgebraicGeometry.Scheme.ProEt.topology X) :=
+  AlgebraicGeometry.Scheme.proEtaleBaseChange_isContinuous f
+
 /-- Finite-level pullback, along the canonical constant-section coefficient map.
 Source: Stacks Tag 03D2 (auxiliary; not a blueprint node). -/
 noncomputable def integralOperationsLevelPullback {X Y : AlgebraicGeometry.Scheme.{t}}
     (f : X ⟶ Y) (n : ℕ) :=
   AlgebraicGeometry.Scheme.coefficientProEtaleModulePullback.{t, u} f
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+@[instance]
+theorem integralOperationsLevelPullback_additive {X Y : AlgebraicGeometry.Scheme.{t}}
+    (f : X ⟶ Y) (n : ℕ) : (integralOperationsLevelPullback l E f n).Additive := by
+  have : (AlgebraicGeometry.Scheme.coefficientProEtaleModuleDirectImage.{t, u} f
+      (CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).Additive := by
+    constructor
+    intro M N a b
+    rfl
+  exact (AlgebraicGeometry.Scheme.coefficientProEtaleModuleAdjunction.{t, u} f
+    (CommRingCat.of
+      (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).left_adjoint_additive
 
 /-- The nth pullback tower level Res_n f*(P_n), as a functor on complexes.
 Source: Stacks Tags 03D2 and 06YT
@@ -1479,6 +1672,23 @@ noncomputable def integralOperationsRoosFunctor :
   map_comp := integralOperationsRoosMap_comp
 
 end Roos
+
+/-- Countable products of completed-coefficient module sheaves.
+Source: Stacks Tag 08TC (auxiliary; not a blueprint node). -/
+noncomputable instance integralOperationsCountableProducts (W : AlgebraicGeometry.Scheme.{t}) :
+    HasCountableProducts (integralTowerModules l E W) :=
+  (AlgebraicGeometry.Scheme.ProEt.countableProducts_exact.{t, u, 0} W
+    (completedIntegralCommRingSheafUnrestricted l E W)).1
+@[instance]
+theorem integralOperationsDerivedCountableProducts (W : AlgebraicGeometry.Scheme.{t}) :
+    HasCountableProducts (DerivedCategory (integralTowerModules l E W)) := by
+  let A := integralTowerModules l E W
+  have : CountableAB4Star A :=
+    ⟨fun I _ ↦ AlgebraicGeometry.Scheme.ProEt.products_exact.{t, u, 0} W
+      (SheafOfModules.derivedChangeRingIndependentCoefficients
+        (AlgebraicGeometry.Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)) I⟩
+  exact (derivedCategory_countableProducts_core.{0} A).choose
 
 /-- The strict pullback tower, functorial in the input complex.
 Source: Stacks Tags 03D2 and 06YT

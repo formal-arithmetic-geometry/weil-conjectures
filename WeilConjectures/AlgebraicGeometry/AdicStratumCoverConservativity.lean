@@ -20,12 +20,13 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionKoszulReflecto
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
-public import all WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+public import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
+import all WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import all WeilConjectures.AlgebraicGeometry.CompletedPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.NoetherianStratumDetection
@@ -246,7 +247,8 @@ private theorem strataModules_detectZero
   have : ∀ α, QuasiCompact (s.immersion α) := fun α ↦ inferInstance
   have hzN : IsZero N := by
     rw [IsZero.iff_id_eq_zero]
-    apply AlgebraicGeometry.ProEtale.abDetectMaps s.immersion
+    apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+      s.immersion
     · intro x
       obtain ⟨α, hα⟩ := Set.mem_iUnion.mp (s.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
       exact ⟨α, (s.range_immersion α).symm ▸ hα⟩

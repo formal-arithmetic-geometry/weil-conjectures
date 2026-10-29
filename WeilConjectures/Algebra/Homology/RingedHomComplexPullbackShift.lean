@@ -352,9 +352,9 @@ attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
 
 attribute [local semireducible] sheafCompose HasForget₂.forget₂
 
-omit [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
-  [HasSheafify J AddCommGrpCat.{max c v r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] in
+@[no_expose] private def ev : EvaluationFamily.{c, v, r} R :=
+  fun E I n p q h ↦ unc.{c, v, r} R (homComplexπ E I n p q h)
+
 attribute [local irreducible] ev
 
 attribute [local irreducible] sheafCompose HasForget₂.forget₂
@@ -529,9 +529,5 @@ variable [HasSheafify J AddCommGrpCat.{max c v d t r}]
   [HasSheafify K AddCommGrpCat.{max c v d t r}]
   [K.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}]
 
-omit [HasSheafify J AddCommGrpCat.{max c v d t r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}]
-  [HasSheafify K AddCommGrpCat.{max c v d t r}]
-  [K.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}] in
 end TwoSites
 end CategoryTheory.RingedHomPullback

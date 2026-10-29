@@ -6,8 +6,9 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Homology.KFlatFixedTensorTriangulated
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
-public import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.Algebra.Homology.ConstantRingTensorRepresentatives
 import WeilConjectures.Algebra.Homology.FlatTermKFlatFunctor
 

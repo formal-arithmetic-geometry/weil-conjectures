@@ -32,7 +32,7 @@ open SheafOfModules
 open scoped TensorProduct ChangeOfRings
 namespace CategoryTheory.CochainPullback.StrictCoefficient.KappaCalculation
 
-attribute [local irreducible] scalarComp scalarUnit extensionAdjunction
+attribute [local irreducible] extensionAdjunction
 attribute [local irreducible] generator
 attribute [local instance 2000] SheafOfModules.cochainModulesMonoidal
 set_option Elab.async false
@@ -76,6 +76,6 @@ private theorem extension_map {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
   rw [extension_unit, extension_unit] at h
   rw [extension_smul a M, extension_smul a N, map_smul, h]
 
-attribute [local irreducible] extensionFunctor Comparisons.pullArrow squareArrow
+attribute [local irreducible] extensionFunctor
 
 end CategoryTheory.CochainPullback.StrictCoefficient.KappaCalculation

@@ -74,6 +74,4 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 
 end RestrictionTensor
 
-attribute [irreducible] tensorPushMap
-
 end CategoryTheory.TwistedActionRingedSite.TensorRestriction
