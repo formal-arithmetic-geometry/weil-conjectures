@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.Cohomology
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import WeilConjectures.ZetaFunction.WeilObjectComparison
 
 /-!
 # Composition and base change for the compact-support direct image of Weil complexes
@@ -111,6 +112,6 @@ theorem sum_trace_compactlySupportedCohomology_eq_sum_traceFunction {X : Scheme.
         ((K.compactlySupportedCohomology i).frobenius.toLinearMap ^ m) =
       ∑ᶠ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
         K.traceFunction m y :=
-  sorry
+  K.finsum_trace_compactlySupportedCohomology_eq_of_comparison (Nat.one_le_iff_ne_zero.2 hm)
 
 end AlgebraicGeometry.WeilComplex
