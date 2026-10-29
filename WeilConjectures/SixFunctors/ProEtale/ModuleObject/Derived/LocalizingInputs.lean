@@ -8,6 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`
@@ -323,7 +326,14 @@ theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X 
     (∀ (K : 𝔻[𝐐](X.left)) (M : 𝔻[𝐐](Y.left)), boundedConstructible (condensedRingObj 𝐐 X.left) K →
       boundedConstructible (condensedRingObj 𝐐 Y.left) M →
         IsIso (((projectionMap 𝐐 p.left).app K).app M)) :=
-  sorry
+  ⟨fun K hK ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p ⟨K, hK⟩,
+    fun sq K hK ↦ isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ sq
+      ((Over.forget _).map_commSq sq.toCommSq) rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+      K hK,
+    fun K M hK hM ↦ isIso_projectionMap_padicAlgClRingObj_of_integral ℓ p
+      (fun E K M hK hM ↦ by
+        exact_mod_proofs (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ
+          (X' := X) (Y' := Y) E.1 p).2.2 K M hK hM) K M hK hM⟩
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
 the case `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps
