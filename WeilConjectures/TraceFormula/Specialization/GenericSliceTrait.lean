@@ -43,9 +43,9 @@ namespace AlgebraicGeometry
 /-- A **generic slice trait** of `𝔸¹_S`, `S = Spec k'⟦t⟧`: a strictly henselian trait `S' = Spec R`
 with a weakly étale morphism `S' ⟶ 𝔸¹_S`, through which the generic slice
 `Spec K⟦t⟧ ⟶ 𝔸¹_S` (`K = k'(x)^alg`) factors by a local injection `ι : R ⟶ K⟦t⟧`, together with a
-geometric generic point `a : R ⟶ Ω` and a separably closed point `b : R ⟶ κ` compatible with those
-of `S` and of `Spec K⟦t⟧`. The strict localization of `𝔸¹_S` at the generic point of its special
-fibre is one (`AlgebraicGeometry.nonempty_genericSliceTrait`). -/
+geometric generic point `a : R ⟶ Ω'` (`Ω'` an algebraic closure of `Frac R`) and a separably
+closed point `b : R ⟶ κ` compatible with those of `S` and of `Spec K⟦t⟧`. The strict
+localization of `𝔸¹_S` at the generic point of its special fibre is one (`AlgebraicGeometry.nonempty_genericSliceTrait`). -/
 structure GenericSliceTrait (k' : Type u) [Field k'] where
   /-- the strictly henselian discrete valuation ring `R` of `S'`. -/
   R : Type u
@@ -72,6 +72,9 @@ structure GenericSliceTrait (k' : Type u) [Field k'] where
   /-- the geometric generic point `R ⟶ Ω'`. -/
   a : R →+* Ω
   injective_a : Function.Injective a
+  /-- `Ω'` is algebraic over `R`, i.e. an algebraic closure of `Frac R`: so the change of
+  geometric generic fibres over `S'` is a Galois layer up to universal homeomorphisms. -/
+  isAlgebraic_a : letI := a.toAlgebra; Algebra.IsAlgebraic R Ω
   /-- the closed point `R ⟶ κ`. -/
   b : R →+* κ
   ker_b : RingHom.ker b = IsLocalRing.maximalIdeal R
