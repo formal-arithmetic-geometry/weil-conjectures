@@ -14561,7 +14561,9 @@ public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
+public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.WeilSheaf.CondensedModelWeil
+public import WeilConjectures.WeilSheaf.CondensedModelWeilCoherence
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
