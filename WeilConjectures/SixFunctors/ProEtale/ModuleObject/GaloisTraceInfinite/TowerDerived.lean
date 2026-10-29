@@ -39,7 +39,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- **Naturality of the derived unit transport** in the complex. -/
 lemma derivedUnitTransport_naturality {G G' T S : Scheme.{u}} (s : G ⟶ G') {p : G' ⟶ T}
     {q : G' ⟶ S} {p₁ : G ⟶ T} {q₁ : G ⟶ S} (hp : s ≫ p = p₁) (hq : s ≫ q = q₁)
-    {A A' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))}
+    {A A' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+      (condensedRingObj Λ S))}
     (e : A ⟶ A') :
     R((p)_*⟦Λ⟧).map (L((q)^*⟦Λ⟧).map e) ≫ derivedUnitTransport Λ s hp hq A' =
       derivedUnitTransport Λ s hp hq A ≫ R((p₁)_*⟦Λ⟧).map (L((q₁)^*⟦Λ⟧).map e) := by
@@ -103,7 +104,8 @@ theorem exists_invariant_retraction_derivedUnit (a : ℤ) [K.IsStrictlyGE a]
     (hK : ∀ n, ((T.ginf)_*⟦Λ⟧).rightAcyclic (((T.ginf)^*⟦Λ⟧).obj (K.X n))) :
     ∃ R : R((T.ginf)_*⟦Λ⟧).obj (L((T.ginf)^*⟦Λ⟧).obj (DerivedCategory.Q.obj K)) ⟶
         DerivedCategory.Q.obj K,
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.app (DerivedCategory.Q.obj K) ≫ R =
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.app
+          (DerivedCategory.Q.obj K) ≫ R =
           𝟙 _ ∧
         ∀ (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf),
           (∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) →
@@ -118,6 +120,28 @@ theorem exists_invariant_retraction_derivedUnit (a : ℤ) [K.IsStrictlyGE a]
     reassoc_of% h]
   simp only [Iso.hom_inv_id_assoc]
   erw [← Functor.map_comp, T.unitTransport_comp_complexTrace Λ hd K hc σ hσ hσj]
+
+include hd hc in
+/-- `GaloisTower.exists_invariant_retraction_derivedUnit` for an object `C ≅ K` of the derived
+category. -/
+theorem exists_invariant_retraction_derivedUnit_of_iso (a : ℤ) [K.IsStrictlyGE a]
+    (hK : ∀ n, ((T.ginf)_*⟦Λ⟧).rightAcyclic (((T.ginf)^*⟦Λ⟧).obj (K.X n)))
+    (C : DerivedCategory
+      (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (e : DerivedCategory.Q.obj K ≅ C) :
+    ∃ R : R((T.ginf)_*⟦Λ⟧).obj (L((T.ginf)^*⟦Λ⟧).obj C) ⟶ C,
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.app C ≫ R = 𝟙 _ ∧
+        ∀ (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf),
+          (∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) →
+            derivedUnitTransport Λ σ hσ hσ C ≫ R = R := by
+  obtain ⟨R, hR₁, hR₂⟩ := T.exists_invariant_retraction_derivedUnit Λ hd K hc a hK
+  refine ⟨R((T.ginf)_*⟦Λ⟧).map (L((T.ginf)^*⟦Λ⟧).map e.inv) ≫ R ≫ e.hom, ?_, fun σ hσ hσj ↦ ?_⟩
+  · have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.naturality e.inv
+    simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
+    rw [← reassoc_of% hn]
+    simp [reassoc_of% hR₁]
+  · have hn := derivedUnitTransport_naturality Λ σ hσ hσ e.inv
+    rw [← reassoc_of% hn, reassoc_of% (hR₂ σ hσ hσj)]
 
 end GaloisTower
 
