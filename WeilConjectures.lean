@@ -14496,6 +14496,7 @@ public import WeilConjectures.TraceFormula.WeilDistTriang
 public import WeilConjectures.TraceFormula.WeilDistTriangHomology
 public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
 public import WeilConjectures.TraceFormula.WeilDistTriangTrace
+public import WeilConjectures.TraceFormula.WeilScalarUnit
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
 public import WeilConjectures.TraceFormula.WeilTrace
@@ -14685,6 +14686,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
+public import WeilConjectures.WeilSheaf.PointTraceComparison
 public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.ExtensionByZero
 public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
 public import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerStar
@@ -14782,6 +14784,7 @@ public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
 public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonSpec
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
