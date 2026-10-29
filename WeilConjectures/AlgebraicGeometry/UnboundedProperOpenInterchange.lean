@@ -450,5 +450,4 @@ private noncomputable def constructedDerivedComparison
   refine ⟨Γ, hn, fun J _ I _ ρ _ => ?_⟩
   exact comparison_representative R P K E θ Γ J I ρ (hn _)
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Etale

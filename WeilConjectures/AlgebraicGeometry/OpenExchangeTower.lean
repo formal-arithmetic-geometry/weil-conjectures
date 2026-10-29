@@ -102,13 +102,3 @@ private theorem direct_image_right_unit (A : Type (u + 1)) [CommRing A] [Finite 
         Functor.rightUnitor (lowerStar B f) := lowerStarComp_id_right B f
   rw [he]
   exact derived_comp_right_unit (lowerStar B f) (lowerStar B (𝟙 Y)) (lowerStarId B Y)
-namespace AlgebraicGeometry.Etale
-attribute [local instance 2000] CategoryTheory.Abelian.toPreadditive
-attribute [local irreducible] lowerStar openImmersionLowerShriek
-  Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  rightDerivedLowerShriekIso rightDerivedLowerShriekOfCompactificationIso
-  unboundedEtaleLowerShriekCompIso openImmersionLowerShriekLowerStarExchange
-set_option maxHeartbeats 300000 in
--- The explicit tower and derived-unit rewrites exceed the default cumulative heartbeat bound.
-set_option backward.isDefEq.respectTransparency false in
-end AlgebraicGeometry.Etale

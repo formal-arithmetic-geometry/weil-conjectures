@@ -1033,39 +1033,8 @@ private lemma unbounded_pf_id
           Functor.mapDerivedCategoryIdIso _ := by
   exact derived_star_id_conjugate A X
 
-/-- The tower interchange has adjunct inverse to the specified proper open-restriction
-exchange. The equation specifies the inverse without choosing any unrelated isomorphism.
-Source: Stacks Project, Tag 0F7B, case (b)
-(auxiliary; not a blueprint node).
-Proof: descend the open adjunction and its triangles termwise. Proper base
-change makes lambda invertible, and the open unit is invertible. The two mate formulas
-for the tower exchange transpose to lambda inverse by triangle identities and mate pasting.
-This is equality of the actual maps, and does not use stalks to detect derived morphisms. -/
-set_option backward.isDefEq.respectTransparency false in
-section UnboundedBaseChange
-
-set_option backward.isDefEq.respectTransparency false
-attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
-  Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
-
-end UnboundedBaseChange
-
-section HorizontalPasting
-universe v w
-open TwoSquare
-end HorizontalPasting
-
-/-- Successive changes of base give the composite exchange, with the termwise
-inverse-image composition identifications.
-Source: Stacks Project, Tag 0F7L
-(auxiliary; not a blueprint node).
-Proof: use the twice base-changed compactification and the formalism's horizontal pasting
-equation. Its refinement square identifies the transported maps with the specified chosen
-exchanges; the common-refinement factors cancel by the comparison cocycle. -/
 attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
-set_option backward.isDefEq.respectTransparency true in
 section BoundedBelowRestriction
 
 open Abelian
@@ -1106,18 +1075,8 @@ end BoundedOpenCompositor
 
 end CompositionRestriction
 
-set_option maxRecDepth 2048 in
 end BoundedBelowRestriction
 
-/-- The open factor used above is precisely the specified inverse-conjugate beta map of
-extension by zero, specialized to the canonical fibre product. Termwise descent therefore
-uses that named map and its inverse, with its prescribed orientation.
-Source: Stacks Project, Tags 03S6 and 0F7L
-(auxiliary; not a blueprint node).
-Proof: expand both definitions as inverse conjugates under the two composite adjunctions.
-The open sum extension is the existing open-immersion extension. Both right-adjoint maps
-are the same underived exchange of the same cartesian square. The adjunction hom bijection
-therefore identifies the two beta maps. Descend the equality degreewise as in step 8. -/
 open CategoryTheory.Abelian
 section NormalizationModels
 universe w₁ w₂ v₁ v₂ u₁ u₂
