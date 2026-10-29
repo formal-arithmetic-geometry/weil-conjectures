@@ -13194,6 +13194,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.GaloisActionSections
+public import WeilConjectures.SixFunctors.ProEtale.GaloisAcyclic.FieldExtension
+public import WeilConjectures.SixFunctors.ProEtale.GaloisAcyclic.ModuleObject
+public import WeilConjectures.SixFunctors.ProEtale.GaloisAcyclic.WContractible
 public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTraceMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
