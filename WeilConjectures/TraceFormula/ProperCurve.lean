@@ -6,8 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.FixedPointScheme
-public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
+public import WeilConjectures.TraceFormula.FrobeniusCurveLocalTerm
 public import WeilConjectures.TraceFormula.LefschetzVerdier
+public import WeilConjectures.TraceFormula.StalkFrobeniusGraph
 
 /-!
 
@@ -20,18 +21,23 @@ the fixed scheme of `Φ_m` is the disjoint union of the points `x` fixed by `Φ_
 locus of the graph correspondence `c_m = (𝟙, Φ_m)` whose open and closed pieces are these points
 (`ProEtale.CondensedRing.IsModelFrobenius.graphFixedLocus`). The Lefschetz–Verdier formula
 (`ProEtale.CondensedRing.Correspondence.trace_globalOperator_eq_sum_localTerm`) and the local term
-of the Frobenius correspondence at a fixed point
-(`ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`) then give
-the trace formula
+of the Frobenius correspondence at a fixed point then give the trace formula
 ```
 tr(T_{c_m}(φ_m) | RΓ(X, K)) = ∑_{x ∈ X(k), Φ_m x = x} tr(F_{x,m} | K_x)
 ```
 (`ProEtale.CondensedRing.WeilBoundedConstructible.trace_globalOperator_graph_eq_sum`), and the
 same for the global Frobenius of the compactly supported cohomology of the Weil object
 (`WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one`).
-This is
-the curve case in Step 2 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`,
-for the proper curve itself.
+This is the curve case in Step 2 of the proof of blueprint
+`thm-trf-coefficient-morphism-trace-formula`, for the proper curve itself.
+
+The local term at a fixed point `x` is the trace of the local Frobenius `F_{x,m}`, which is the
+stalk map of `φ_m` at `x` (`WeilBoundedConstructible.stalkFrobenius_eq_graphStalkMap`). It is
+taken from the curve route of SGA 5, III B (blueprint `lem-trf-local-term-locality`, item 3,
+`sk-p-frob`, `sk-i-curve-zero`:
+`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`),
+not from Varshavsky's theorem for contracting correspondences, so the trace formula does not
+depend on nearby cycles.
 
 -/
 
@@ -79,11 +85,11 @@ lemma IsModelFrobenius.fixedLocusPoint_graphFixedLocus (hΦ : IsModelFrobenius �
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve** (blueprint
 `thm-trf-coefficient-morphism-trace-formula`, Step 2, for a proper curve; from
-`thm-trf-lefschetz-verdier`, `thm-trf-frobenius-local-term` and
-`thm-trf-frobenius-fixed-points`): for a proper smooth curve `X` with the model Frobenius `Φ`, a
-Weil object `(K, φ)` and `m ≥ 1`, the trace of the global operator of the graph correspondence
-`c_m = (𝟙, Φ_m)` on `RΓ(X, K)` is the sum over the rational points `x` fixed by `Φ_m` of the
-traces of the local Frobenius `F_{x,m}` on the stalks `K_x`. -/
+`thm-trf-lefschetz-verdier`, `thm-trf-frobenius-local-term` on curves
+(`lem-trf-local-term-locality`, item 3) and `thm-trf-frobenius-fixed-points`): for a proper smooth
+curve `X` with the model Frobenius `Φ`, a Weil object `(K, φ)` and `m ≥ 1`, the trace of the global
+operator of the graph correspondence `c_m = (𝟙, Φ_m)` on `RΓ(X, K)` is the sum over the rational
+points `x` fixed by `Φ_m` of the traces of the local Frobenius `F_{x,m}` on the stalks `K_x`. -/
 theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.hom]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
     (hΦ : IsModelFrobenius Φ f₀ p) (K : WeilBoundedConstructible ℓ Φ) (hm : 1 ≤ m)
@@ -102,12 +108,17 @@ theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.h
     (sigmaPointι k (FixedPoint Φ m)) (fun _ _ h ↦ disjoint_range_sigmaPointι k _ h)
     (iUnion_range_sigmaPointι k _)]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
-  refine K.localTerm_traceClass_graph_eq_trace hΦ hm F x.1 x.2 (sigmaPointι k _ x) ?_
-  rw [hΦ.fixedLocusPoint_graphFixedLocus hm K x]
-  ext y
-  refine ⟨?_, fun hy ↦ ⟨(default : Spec (.of k)), hy.symm⟩⟩
-  rintro ⟨z, rfl⟩
-  rw [Set.mem_singleton_iff, Subsingleton.elim (α := Spec (.of k)) z default]
+  have hB : Set.range (sigmaPointι k (FixedPoint Φ m) x).left.base =
+      {(K.fixedLocusPoint m F x.1 x.2).left.base (default : Spec (.of k))} := by
+    rw [hΦ.fixedLocusPoint_graphFixedLocus hm K x]
+    ext y
+    refine ⟨?_, fun hy ↦ ⟨(default : Spec (.of k)), hy.symm⟩⟩
+    rintro ⟨z, rfl⟩
+    rw [Set.mem_singleton_iff, Subsingleton.elim (α := Spec (.of k)) z default]
+    rfl
+  rw [K.stalkFrobenius_eq_graphStalkMap]
+  exact Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth hΦ hm
+    (K.iterateStr m).hom F x.1 x.2 (sigmaPointι k _ x) hB
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**, for the global Frobenius `F_{c,m}` of the

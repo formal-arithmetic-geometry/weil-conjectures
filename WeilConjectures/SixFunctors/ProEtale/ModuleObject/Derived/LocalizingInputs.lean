@@ -8,6 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`
@@ -80,8 +83,7 @@ section Integers
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = 𝒪̲_E`.
 If `K, L ∈ D(Mod_{𝒪_{E,X}})` are bounded constructible, then
@@ -187,8 +189,7 @@ set_option hygiene false in
 /-- The condensed field `E̲`. -/
 local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = E̲`.
 If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
@@ -283,8 +284,7 @@ set_option hygiene false in
 /-- The condensed field `ℚ̲̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = ℚ̲̄_ℓ`.
 If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
@@ -326,7 +326,14 @@ theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X 
     (∀ (K : 𝔻[𝐐](X.left)) (M : 𝔻[𝐐](Y.left)), boundedConstructible (condensedRingObj 𝐐 X.left) K →
       boundedConstructible (condensedRingObj 𝐐 Y.left) M →
         IsIso (((projectionMap 𝐐 p.left).app K).app M)) :=
-  sorry
+  ⟨fun K hK ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p ⟨K, hK⟩,
+    fun sq K hK ↦ isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ sq
+      ((Over.forget _).map_commSq sq.toCommSq) rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+      K hK,
+    fun K M hK hM ↦ isIso_projectionMap_padicAlgClRingObj_of_integral ℓ p
+      (fun E K M hK hM ↦ by
+        exact_mod_proofs (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ
+          (X' := X) (Y' := Y) E.1 p).2.2 K M hK hM) K M hK hM⟩
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
 the case `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps

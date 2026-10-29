@@ -9,10 +9,15 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
 
 /-!
 
@@ -61,10 +66,20 @@ Neither description is taken as a definition: `E_X` is defined by its sections, 
 makes inverting `ℓ` the right statement: `𝒪_E` is then a discrete valuation ring in which every
 nonzero element divides a power of `ℓ`.
 
+The extension of scalars along `φ` is exact
+(`ProEtale.preservesFiniteLimits_extendScalars_padicIntegersToPadicSubfield`): on profinite sets
+the maps `ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲` (`Profinite.padicIntegersRingObjToContinuousMapRingObjInvPow`)
+exhibit `E̲` as the sequential colimit of the multiplications by `ℓ` on `𝒪̲_E`
+(`Profinite.isColimitPadicIntegersRingObjSmulSequenceCocone`), since a continuous map from a
+profinite set to `E` is `ℓ⁻ᵐ` times a continuous map to `𝒪_E`
+(`PadicAlgCl.exists_norm_pow_mul_le_one`); the additive left adjoint `p_X^*` keeps this colimit,
+and sequential colimits of abelian sheaves are exact
+(`CategoryTheory.Mod.preservesFiniteLimits_extendScalars_of_isColimit`). Hence the left derived
+functor of the extension of scalars preserves bounded constructible complexes
+(`ProEtale.boundedConstructible_leftDerivedExtendScalars_obj`).
+
 ## Sorried input
 
-* `ProEtale.boundedConstructible_derivedExtendScalars_obj`: `L(extendScalars φ)` preserves
-  bounded constructible complexes.
 * `ProEtale.isLocalization_boundedConstructibleExtendScalars`: on bounded constructible
   complexes, `L(extendScalars φ)` is a localization functor for the morphisms with
   `ℓ`-power-torsion mapping cone.
@@ -116,6 +131,115 @@ noncomputable abbrev padicIntegersToPadicSubfield :
       condensedRingObj (Profinite.continuousMapRingObj E.1) X :=
   (upperStarFromPoint X).map (padicIntegersRingObjToContinuousMapRingObj ℓ E)
 
+end AlgebraicGeometry.ProEtale
+
+/-! ### Flatness of `E_X` over `𝒪_{E,X}` -/
+
+namespace Profinite
+
+open AlgebraicGeometry.ProEtale
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+
+/-- The map `c_k = ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲`, where `φ` is the inclusion. -/
+noncomputable def padicIntegersRingObjToContinuousMapRingObjInvPow (k : ℕ) :
+    padicIntegersRingObj.{u} ℓ E.1 ⟶ continuousMapRingObj E.1 :=
+  padicIntegersRingObjToContinuousMapRingObj ℓ E ≫
+    continuousMapRingObjMulLeft E.1 ((ℓ : E.1)⁻¹ ^ k)
+
+lemma padicIntegersRingObjToContinuousMapRingObjInvPow_zero :
+    padicIntegersRingObjToContinuousMapRingObjInvPow.{u} ℓ E 0 =
+      padicIntegersRingObjToContinuousMapRingObj ℓ E := by
+  rw [padicIntegersRingObjToContinuousMapRingObjInvPow, pow_zero,
+    continuousMapRingObjMulLeft_one, Category.comp_id]
+
+lemma nsmul_padicIntegersRingObjToContinuousMapRingObjInvPow_succ (k : ℕ) :
+    ℓ • padicIntegersRingObjToContinuousMapRingObjInvPow.{u} ℓ E (k + 1) =
+      padicIntegersRingObjToContinuousMapRingObjInvPow ℓ E k := by
+  have hℓ : (ℓ : E.1) ≠ 0 := Nat.cast_ne_zero.2 (Fact.out : ℓ.Prime).ne_zero
+  rw [padicIntegersRingObjToContinuousMapRingObjInvPow,
+    padicIntegersRingObjToContinuousMapRingObjInvPow, ← Preadditive.comp_nsmul,
+    nsmul_continuousMapRingObjMulLeft, pow_succ', ← _root_.mul_assoc, mul_inv_cancel₀ hℓ,
+    _root_.one_mul]
+
+/-- **`E̲ = colim(𝒪̲_E --ℓ--> 𝒪̲_E --ℓ--> ⋯)`**: the maps `ℓ⁻ᵏ φ : 𝒪̲_E ⟶ E̲` exhibit the condensed
+abelian group `E̲` as the sequential colimit of the multiplications by `ℓ` on `𝒪̲_E`. Sectionwise,
+every continuous map from a profinite set to `E` is `ℓ⁻ᵐ` times a continuous map to `𝒪_E`
+(`PadicAlgCl.exists_norm_pow_mul_le_one`), and the maps `ℓ⁻ᵏ φ` are injective. -/
+noncomputable def isColimitPadicIntegersRingObjSmulSequenceCocone :
+    IsColimit (Mod.smulSequenceCocone ℓ
+      (padicIntegersRingObjToContinuousMapRingObjInvPow.{u} ℓ E)
+      (nsmul_padicIntegersRingObjToContinuousMapRingObjInvPow_succ ℓ E)) := by
+  have hℓ : (ℓ : E.1) ≠ 0 := Nat.cast_ne_zero.2 (Fact.out : ℓ.Prime).ne_zero
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget Ab.{u + 1})
+  have : ReflectsColimitsOfShape ℕ (forget Ab.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  refine isColimitOfReflects (sheafToPresheaf _ _) ?_
+  refine evaluationJointlyReflectsColimits _ fun S ↦
+    isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    obtain ⟨x⟩ := x
+    obtain ⟨m, hm⟩ := PadicAlgCl.exists_norm_pow_mul_le_one
+      ((⟨Subtype.val, continuous_subtype_val⟩ : C(E.1, PadicAlgCl ℓ)).comp x)
+    have hmem (s : S.unop) : (ℓ : E.1) ^ m * x s ∈ PadicAlgCl.integers ℓ E.1 := by
+      rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe, coe_nnnorm, map_mul, map_pow,
+        map_natCast]
+      exact hm s
+    refine ⟨m, ULift.up ⟨fun s ↦ ⟨_, hmem s⟩, (continuous_const.mul x.continuous).subtype_mk _⟩,
+      ULift.ext _ _ (ContinuousMap.ext fun s ↦ ?_)⟩
+    have key : (ℓ : E.1)⁻¹ ^ m * ((ℓ : E.1) ^ m * x s) = x s := by
+      rw [← _root_.mul_assoc, ← mul_pow, inv_mul_cancel₀ hℓ, one_pow, _root_.one_mul]
+    exact key.symm
+  · intro k x y h
+    refine ⟨k, 𝟙 k, ?_⟩
+    rw [CategoryTheory.Functor.map_id]
+    obtain ⟨x⟩ := x
+    obtain ⟨y⟩ := y
+    have hk : (ℓ : E.1)⁻¹ ^ k ≠ 0 := pow_ne_zero _ (inv_ne_zero hℓ)
+    have h' (s : S.unop) :
+        (ℓ : E.1)⁻¹ ^ k * (x s : E.1) = (ℓ : E.1)⁻¹ ^ k * (y s : E.1) :=
+      congrArg (fun z : ULift.{u + 1} C(S.unop, E.1) ↦ z.down s) h
+    obtain rfl : x = y := ContinuousMap.ext fun s ↦ Subtype.ext (mul_left_cancel₀ hk (h' s))
+    rfl
+
+end Profinite
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+open scoped CondensedRing
+
+section
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+
+/-- **Flatness of `E_X` over `𝒪_{E,X}`**: the extension of scalars along the inclusion
+`𝒪_{E,X} ⟶ E_X` is exact. Indeed `E_X = p_X^* E̲` is the sequential colimit of the
+multiplications by `ℓ` on `𝒪_{E,X} = p_X^* 𝒪̲_E`, `p_X^*` being an additive left adjoint, so
+`E_X ⊗_{𝒪_{E,X}} M = colim(M --ℓ--> M --ℓ--> ⋯)`, and sequential colimits of abelian sheaves are
+exact. -/
+instance preservesFiniteLimits_extendScalars_padicIntegersToPadicSubfield (X : Scheme.{u}) :
+    PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)) := by
+  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    adj.leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  have := Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+  have := AB5OfSize_of_univLE.{0, 0} (Sheaf (ProEt.topology X) Ab.{u + 1})
+  exact Mod.preservesFiniteLimits_extendScalars_of_isColimit _
+    (Mod.isColimitSmulSequenceCoconeMap (upperStarFromPoint X) _
+      (Profinite.isColimitPadicIntegersRingObjSmulSequenceCocone ℓ E))
+    (by rw [Profinite.padicIntegersRingObjToContinuousMapRingObjInvPow_zero])
+
+end
+
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+
 /-! ### Extension of scalars on bounded constructible complexes -/
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` preserves
@@ -124,7 +248,7 @@ lemma boundedConstructible_derivedExtendScalars_obj
     (K : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
       ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K.obj) :=
-  sorry
+  boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
 on bounded constructible complexes: the restriction of
