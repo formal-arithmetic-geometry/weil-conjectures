@@ -34,8 +34,9 @@ for `ℚ̄_ℓ`-coefficients:
   `sk-prop-an`).
 - `ProEtale.CondensedRing.exists_iso_smoothTrace_baseChange`: the compatibility of the smooth
   trace with base change (SGA 4, Exposé XVIII, Théorème 2.9 (Var 4); blueprint
-  `sk-prop-sp-purity-bc`), a property of the sorried definition `smoothTrace`, required from the
-  smooth purity section. Its adjoint form is
+  `sk-prop-sp-purity-bc`), deduced from the compatibility of the orientation `γ_f` with base
+  change (`ProEtale.CondensedRing.smoothOrientation_baseChange`, required from the smooth purity
+  section). Its adjoint form is
   `ProEtale.CondensedRing.exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange`.
 
 -/
