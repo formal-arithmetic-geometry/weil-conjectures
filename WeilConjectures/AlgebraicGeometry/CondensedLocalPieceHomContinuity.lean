@@ -17,6 +17,8 @@ public import WeilConjectures.AlgebraicGeometry.CondensedLocallyClosedPiece
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 
+set_option linter.privateModule false
+
 /-! # Filtered Hom continuity for one locally closed piece -/
 
 @[expose] public section
