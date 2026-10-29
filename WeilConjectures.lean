@@ -7892,6 +7892,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoid
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRefinement
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTrivial
 public import WeilConjectures.CategoryTheory.Adjunction.PushHomComp
 public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
@@ -8347,6 +8348,8 @@ public import WeilConjectures.CategoryTheory.ExchangeFormalism.CompositionCohere
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Cube
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Pasting
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.ProjectionComposition
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.ProjectionExchange
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.PushforwardBaseChange
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.ShriekBaseChangeMate
@@ -10503,10 +10506,12 @@ public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.PoincareDuality.ProjectionFormulaBaseChange
 public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
+public import WeilConjectures.PoincareDuality.ProjectionFormulaComposition
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidal
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidalOfCompactification
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOfCompactification
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
+public import WeilConjectures.PoincareDuality.ProjectionFormulaProper
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 public import WeilConjectures.PoincareDuality.ProjectionFormulaShiftBoundedConstructible
 public import WeilConjectures.PoincareDuality.ProperProjectionComp
@@ -13695,6 +13700,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
+public import WeilConjectures.Tactic.ExactByKernel
 public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
