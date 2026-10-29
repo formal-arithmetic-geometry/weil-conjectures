@@ -15,6 +15,7 @@ public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
 public import WeilConjectures.WeilSheaf.TraceFunctionTensor
 public import WeilConjectures.ZetaSeries
+import WeilConjectures.ZetaFunction.WeilObjectComparison
 
 /-!
 # The trace function of the Fourier–Deligne transform

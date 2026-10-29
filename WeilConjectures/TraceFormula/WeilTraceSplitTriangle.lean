@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraZero
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleShift
@@ -25,8 +26,6 @@ whose local and global traces are the negatives of those of `A`.
 
 ## Main results
 
-- `CategoryTheory.Endofunctor.IsoAlgebra.isZero_mk`: an algebra with invertible structure
-  morphism on a zero object is a zero object.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.isDistTriang_id_id`: the triangle
   `Z ⟶ Z ⟶ Z` of identities of a zero Weil object is distinguished.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.exists_isDistTriang_biprod`: every pair of
@@ -53,27 +52,6 @@ open CategoryTheory Endofunctor Limits Pretriangulated
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj ZeroObject
 
-namespace CategoryTheory.Endofunctor.IsoAlgebra
-
-variable {C : Type*} [Category C] {F : C ⥤ C}
-
-/-- An algebra with invertible structure morphism whose underlying object is zero is a zero
-object. -/
-lemma isZero_mk {a : C} (ha : IsZero a) (Φ : F.obj a ≅ a) : IsZero (mk a Φ) where
-  unique_to Y := ⟨⟨⟨ObjectProperty.homMk ⟨ha.to_ Y.carrier, (ha.of_iso Φ).eq_of_src _ _⟩⟩,
-    fun _ ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext (ha.eq_of_src _ _))⟩⟩
-  unique_from Y := ⟨⟨⟨ObjectProperty.homMk ⟨ha.from_ Y.carrier, ha.eq_of_tgt _ _⟩⟩,
-    fun _ ↦ ObjectProperty.hom_ext _ (Algebra.Hom.ext (ha.eq_of_tgt _ _))⟩⟩
-
-/-- The underlying object of a zero algebra with invertible structure morphism is zero, for an
-endofunctor preserving zero morphisms of a category with a zero object. -/
-lemma isZero_carrier [HasZeroMorphisms C] [HasZeroObject C] [F.PreservesZeroMorphisms]
-    {K : IsoAlgebra F} (hK : IsZero K) : IsZero K.carrier :=
-  (isZero_zero C).of_iso ((forget F).mapIso
-    (hK.iso (isZero_mk (isZero_zero C) (F.map_isZero (isZero_zero C)).isoZero)))
-
-end CategoryTheory.Endofunctor.IsoAlgebra
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -89,9 +67,16 @@ variable {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D �
 
 /-- For an algebra `(K, φ)` with invertible structure morphism of `F`, the structure morphism
 `F (K[1]) ≅ (F K)[1] ≅ K[1]` of its shift is compatible, through the commutation
-`ι (K[1]) ≅ (ι K)[1]`, with the connecting morphism transported along `e` (`connectingOfIso`):
-`ι (φ_{K[1]}) ≫ c = connectingOfIso (c) ≫ (ι φ)[1]` for `c` the commutation of `ι` with the
-shift. -/
+`c : ι (K[1]) ≅ (ι K)[1]`, with the connecting morphism transported along `e`
+(`connectingOfIso`): the square
+```
+ι F (K[1]) ──ι φ_{K[1]}──▶ ι (K[1])
+    │                          │
+connectingOfIso c              c
+    ▼                          ▼
+(ι F K)[1] ───(ι φ)[1]────▶ (ι K)[1]
+```
+commutes. -/
 lemma map_str_hom_comp_commShiftIso_hom_app_eq_connectingOfIso (K : IsoAlgebra F) :
     ι.map (IsoAlgebra.mk (K.carrier⟦(1 : ℤ)⟧) ((F.commShiftIso (1 : ℤ)).app K.carrier ≪≫
         (shiftFunctor C (1 : ℤ)).mapIso K.str)).str.hom ≫

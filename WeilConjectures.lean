@@ -8458,6 +8458,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLiftOfStr
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraZero
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.CategoryTheory.EquivalenceRightAdjointCounitTransport
 public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
@@ -9884,6 +9885,7 @@ public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.DegreeExact
 public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
 public import WeilConjectures.LinearAlgebra.TraceLongExactSequence
+public import WeilConjectures.LinearAlgebra.TraceLongExactSequenceFinsum
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
 public import WeilConjectures.Mathlib.Algebra.Algebra.Subalgebra.Tower
@@ -14503,6 +14505,7 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
