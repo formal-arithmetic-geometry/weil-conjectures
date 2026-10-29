@@ -40,13 +40,6 @@ section Iso
 variable {T T' : Type} [TopologicalSpace T] [TopologicalSpace T'] [Ring T] [IsTopologicalRing T]
   [Ring T'] [IsTopologicalRing T']
 
-/-- Postcomposition with a continuous ring endomorphism equal to the identity is the identity. -/
-lemma continuousMapRingObjMap_eq_id (f : T →+* T) (hf : Continuous f) (h : f = RingHom.id T) :
-    continuousMapRingObjMap.{u} f hf = 𝟙 _ := by
-  subst h
-  exact (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map_id
-    (continuousMapRingSheaf T)
-
 /-- A ring isomorphism `φ : T ≃+* T'` which is continuous in both directions induces, by
 postcomposition, an isomorphism of condensed rings `C(-, T) ≅ C(-, T')`. -/
 noncomputable def continuousMapRingObjIso (φ : T ≃+* T') (hφ : Continuous φ)

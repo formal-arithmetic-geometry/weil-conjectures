@@ -14,6 +14,8 @@ A continuous ring homomorphism `φ : T →+* T'` induces, by postcomposition, a 
 objects `C(-, T) ⟶ C(-, T')` of condensed abelian groups (`Profinite.continuousMapRingObjMap`).
 It sends the constant global section `t` to the constant global section `φ t`
 (`Profinite.continuousMapConstRingHom_hom_comp_continuousMapRingObjMap`).
+Postcomposition is functorial (`Profinite.continuousMapRingObjMap_comp`,
+`Profinite.continuousMapRingObjMap_eq_id`).
 -/
 
 @[expose] public section
@@ -50,6 +52,13 @@ lemma continuousMapRingObjMap_comp {T'' : Type} [TopologicalSpace T''] [Ring T''
       continuousMapRingObjMap φ hφ ≫ continuousMapRingObjMap ψ hψ :=
   (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map_comp
     (continuousMapRingSheafMap φ hφ) (continuousMapRingSheafMap ψ hψ)
+
+/-- Postcomposition with a continuous ring endomorphism equal to the identity is the identity. -/
+lemma continuousMapRingObjMap_eq_id (f : T →+* T) (hf : Continuous f) (h : f = RingHom.id T) :
+    continuousMapRingObjMap.{u} f hf = 𝟙 _ := by
+  subst h
+  exact (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map_id
+    _
 
 end Ring
 

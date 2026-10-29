@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.IntegralReductionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperShriek
 
 /-!
 # The étale reduction `f^!` clause for proper morphisms, modulo finite-coefficient inputs
@@ -59,37 +60,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
 
-/-- **The étale reading of bounded constructible `𝒪_E ⧸ ℓⁿ`-complexes**: `M ↦ Rν_* Φ(M)`, from
-bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes on `X_proét` to the derived category of
-étale sheaves of `𝒪_E ⧸ ℓⁿ`-modules on `X`. The étale reduction `etaleReduction` is the
-condensed reduction followed by it. -/
-noncomputable def finiteEtaleReading (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom]
-    [QuasiCompact Y.hom] [IsSeparated Y.hom] :
-    Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧ ⥤
-      DerivedCategory (Sheaf Y.left.smallEtaleTopology
-        (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))) :=
-  (boundedConstructible _).ι ⋙
-    (finiteCoefficientDerivedEquivalence Y.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
-      R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])
-
 variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-/-- **The finite-coefficient comparison for `p^!`** (proper `p`): the pushforward `Rp_*` on
-bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes has a right adjoint `H'`, and there is an
-isomorphism `Rp_* ⋙ ρ_Y ≅ ρ_X ⋙ Rp_!` (`ρ = finiteEtaleReading`, `Rp_!` étale) whose transpose
-`H' ⋙ ρ_X ⟶ ρ_Y ⋙ Rp^!` under `Rp_* ⊣ H'` and the étale `Rp_! ⊣ Rp^!` is an isomorphism. -/
-def HasEtaleReadingUpperShriekComparison (p : X ⟶ Y) : Prop :=
-  have := HasCompactification.of_over p
-  ∃ (H' : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧)
-    (adjH' : IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⊣ H')
-    (γ : IntegersModPowRingObj.boundedConstructibleLowerStar ℓ E n p ⋙
-        finiteEtaleReading ℓ E n Y ≅
-      finiteEtaleReading ℓ E n X ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left),
-    IsIso (mateEquiv adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left)
-      (TwoSquare.mk _ _ _ _ γ.inv))
 
 /-- **The étale reduction `f^!` clause for a proper morphism**, from the compatibilities of
 (Pull) with the natural reduction triangles, the preservation of bounded constructible
@@ -131,4 +103,23 @@ theorem hasEtaleReductionLowerShriekIso_of_isProper_of_compatible (p : X ⟶ Y) 
   exact isIso_mateEquiv_hComp (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
     adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left) α β
 
+variable {ℓ E n} in
+/-- **The étale reduction `f^!` clause for a proper morphism** (`HasEtaleReductionLowerShriekIso`),
+from:
+* the compatibilities of (Pull) for `p` with the natural reduction triangles;
+* restriction of scalars along `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` preserves bounded constructible complexes on `X`
+  and `Y`;
+* the identification of bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes with bounded
+  constructible étale ones (`EtaleOriginReading` on `X` and `Y`, `BoundedConstructibleOfEtale` on
+  `X`). -/
+theorem hasEtaleReductionLowerShriekIso_of_isProper_of_comparisons (p : X ⟶ Y) [IsProper p.left]
+    (hη : IntegersModPowPullUnitCompatible ℓ E n p.left)
+    (hδ : IntegersModPowPullδCompatible ℓ E n p.left)
+    (hX : RestrictScalarsIntegersModPowBoundedConstructible ℓ E n X.left)
+    (hY : RestrictScalarsIntegersModPowBoundedConstructible ℓ E n Y.left)
+    (hXo : EtaleOriginReading ℓ E n X) (hYo : EtaleOriginReading ℓ E n Y)
+    (hXc : BoundedConstructibleOfEtale ℓ E n X) :
+    HasEtaleReductionLowerShriekIso ℓ E n p :=
+  hasEtaleReductionLowerShriekIso_of_isProper_of_compatible ℓ E n p hη hδ hX hY
+    (hasEtaleReadingUpperShriekComparison_of_etaleOrigin p hXo hYo hXc)
 end AlgebraicGeometry.ProEtale.CondensedRing
