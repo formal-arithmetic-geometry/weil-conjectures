@@ -14,6 +14,15 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 import WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Intrinsic completion over the completed coefficient sheaf
 
 Source: blueprint, proper base change, order 1247; Stacks Tags 099M and 091Z
@@ -55,6 +64,17 @@ end TensorUnits
 Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
 def completedKoszulConstant : ModuleCat.{t + 1} A ⥤ adicDatumModules X d :=
   adicLisseConstantModules X A ⋙ completedConstantExtension X (adicDatumScalar X d)
+
+/-- Constant module sheafification and scalar extension are additive.
+Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
+Proof: addition and zero hold on the constant presheaves, then on their sheafification;
+scalar extension is additive by its specified tensor/restriction adjunction. -/
+theorem completedKoszulConstant_additive : (completedKoszulConstant X d).Additive := by
+  let := CompletedConstantReduction.constant_additive X A
+  exact Functor.Additive.mk (by
+    intro M N f g
+    dsimp [completedKoszulConstant]
+    rw [Functor.map_add, Functor.map_add])
 
 attribute [instance] completedKoszulConstant_additive
 

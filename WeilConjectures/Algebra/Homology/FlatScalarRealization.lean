@@ -60,11 +60,46 @@ def flatScalarExtension (α : realizationRing J A ⟶ R) :
     change L.map (t (f ≫ g)) = L.map (t f) ≫ L.map (t g)
     rw [ht, L.map_comp]
 
+/-- Additivity is inherited from sectionwise tensor and additive sheafification.
+Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+instance flatScalarExtension_additive : (flatScalarExtension J α).Additive where
+  map_add {M N} f g := by
+    let L := PresheafOfModules.sheafification
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+    let t (h : M ⟶ N) :
+        changeOfRingsPresheafOfUniverses.{v, u, max u v, max u v} α M ⟶
+          changeOfRingsPresheafOfUniverses.{v, u, max u v, max u v} α N :=
+      { app U := (ModuleCat.extendScalars (α.hom.app U).hom).map (h.val.app U)
+        naturality := changeOfRingsHom_naturalityOfUniverses α M h }
+    have ht : t (f + g) = t f + t g := by
+      apply PresheafOfModules.hom_ext
+      intro U
+      have : (ModuleCat.extendScalars (α.hom.app U).hom).Additive :=
+        (ModuleCat.extendRestrictScalarsAdj (α.hom.app U).hom).left_adjoint_additive
+      exact (ModuleCat.extendScalars (α.hom.app U).hom).map_add
+        (f := f.val.app U) (g := g.val.app U)
+    have : PreservesFiniteLimits L := by
+      let := siteTensor_identity_locallyInjective
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+      let := siteTensor_identity_locallySurjective
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+      dsimp [L]
+      infer_instance
+    have : L.Additive := leftExactFunctor_le_additiveFunctor _ _ L this
+    change L.map (t (f + g)) = L.map (t f) + L.map (t g)
+    rw [ht, L.map_add]
+
 /-- Constant module realization followed by the specified sheafified change of rings.
 Source: Stacks 093J and 03EK (auxiliary; not a blueprint node). -/
 def flatScalarRealization (α : realizationRing J A ⟶ R) :
     ModuleCat.{max u v} A ⥤ SheafOfModules.{max u v}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) :=
   commutativeSiteConstantModuleFunctor J A ⋙ flatScalarExtension J α
+
+/-- Both factors of scalar realization are additive.
+Source: Stacks 093J and 03EK (auxiliary; not a blueprint node). -/
+instance flatScalarRealization_additive : (flatScalarRealization J α).Additive :=
+  inferInstanceAs ((commutativeSiteConstantModuleFunctor J A ⋙
+    flatScalarExtension J α).Additive)
 
 end SheafOfModules

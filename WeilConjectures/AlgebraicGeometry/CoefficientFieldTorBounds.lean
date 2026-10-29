@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ConstantFieldFlat
 import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Bounded cohomology over a constant field has the same Tor bound
 

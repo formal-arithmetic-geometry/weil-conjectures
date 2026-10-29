@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import WeilConjectures.AlgebraicGeometry.ConstantScalarTensorModel
 
 /-! # The ordinary reduction tower as a tensor tower
@@ -68,6 +69,14 @@ private theorem reductionTensorNat_app (b : Bool)
       (reductionTensorIso J (finiteMap J A I b n) M).hom := by
   unfold reductionTensorNat
   rfl
+
+private instance reductionTensorNat_isIso (b : Bool)
+    (M : Mod (coefficients J A I b)) : IsIso (reductionTensorNat J A I b M) := by
+  have : ∀ n, IsIso ((reductionTensorNat J A I b M).app n) := fun n ↦ by
+    obtain ⟨n⟩ := n
+    rw [reductionTensorNat_app]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
 
 @[irreducible] private def reductionTensorTowerIso (b : Bool) :
     (((reductionTower J A I b).obj (𝟙_ _) ⋙

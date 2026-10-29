@@ -217,11 +217,6 @@ namespace AlgebraicGeometry.ProEtale.FiniteConstantModel
 
 universe uC vC
 
-/-- A scalar short exact sequence, its specified scalar-extended short exact sequence,
-and the augmented complex in degrees minus one and zero. The component equations
-fix the differential and augmentation to the images of the original scalar maps.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(auxiliary; not a blueprint node). -/
 private def freeCoordinates (A : Type u) [CommRing A] (n : ℕ) :
     (Fin n → ULift.{u + 1} A) ≃ₗ[A] (Fin n → A) :=
   LinearEquiv.piCongrRight (fun _ ↦ ULift.moduleEquiv)

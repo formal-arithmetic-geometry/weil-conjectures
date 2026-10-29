@@ -9,6 +9,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonInjectiveAcyclic
 import all WeilConjectures.AlgebraicGeometry.CoefficientOriginClosedDirectImage
 import WeilConjectures.AlgebraicGeometry.CoefficientOriginLocalizationKernel
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Affine open-closed gluing of coefficient-sized etale origin
 

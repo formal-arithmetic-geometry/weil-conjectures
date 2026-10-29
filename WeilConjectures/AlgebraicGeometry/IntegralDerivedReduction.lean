@@ -30,16 +30,16 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (n : ℕ)
 
+/-- Standard localization for finite quotient coefficient module sheaves.
+Source: Stacks, Tag 06YY (auxiliary; not a blueprint node). -/
+noncomputable instance integralReductionTargetHasDerivedCategory :
+    HasDerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) :=
+  HasDerivedCategory.standard _
+
 /-- The small pro-etale site fits in the ambient coefficient universe.
 Source: Stacks, Tag 06YY (auxiliary; not a blueprint node). -/
-noncomputable instance integralReductionSiteEssentiallySmall :
+noncomputable instance (priority := low) integralReductionSiteEssentiallySmall :
     EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
   essentiallySmallSelf _
-
-set_option linter.defProp false in
-attribute [local instance] integralReductionChangeOfRingsAdditive
-
-set_option linter.defProp false in
-attribute [local instance] integralDerivedReductionUniversal
 
 end WeilConjectures

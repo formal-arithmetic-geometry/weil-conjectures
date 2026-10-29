@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonFlatPullback
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonTensorTestReflection
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Noetherian finite-Tor comparison

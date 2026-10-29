@@ -309,6 +309,20 @@ instance fixedClosed : MonoidalClosed (Fixed J B) :=
   (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
     (A := ModuleCat.{max u v} B) J).2.1.some
 
+/-- Tensoring preserves the coproducts used in the signed total.
+Source: sk-def-sfb-sheaf-tensor (auxiliary; not a blueprint node). -/
+instance fixedLeftColimits (M : Fixed J B) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+  (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
+    (A := ModuleCat.{max u v} B) J).2.2 M |>.1
+
+/-- Tensoring on the other side preserves those coproducts.
+Source: sk-def-sfb-sheaf-tensor (auxiliary; not a blueprint node). -/
+instance fixedRightColimits (M : Fixed J B) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+  (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
+    (A := ModuleCat.{max u v} B) J).2.2 M |>.2.1
+
 /-- Cache additivity of the recorded sheaf tensor.
 Source: blueprint sk-def-sfb-sheaf-tensor
 (auxiliary; not a blueprint node). -/
@@ -1065,6 +1079,11 @@ instance fixedSmallColimits : HasColimitsOfSize.{0, 0} (Fixed J B) :=
 Source: Stacks 06YL (auxiliary; not a blueprint node). -/
 instance fixedDiscreteColimits (I : Type) : HasColimitsOfShape (Discrete I) (Fixed J B) :=
   (fixedSmallColimits J B).has_colimits_of_shape (Discrete I)
+
+/-- Evaluate the preceding discrete-colimit instance without searching for a new size.
+Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+instance fixedDiscreteColimit {I : Type} (F : Discrete I ⥤ Fixed J B) : HasColimit F :=
+  (fixedDiscreteColimits J B I).has_colimit F
 
 /-- Countable coproducts for the two-sided quasi-isomorphism test.
 Source: Stacks 06YP (auxiliary; not a blueprint node). -/

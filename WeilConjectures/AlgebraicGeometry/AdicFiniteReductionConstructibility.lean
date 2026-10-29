@@ -14,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import all WeilConjectures.AlgebraicGeometry.NoetherianGlobalConstructibility
 import all WeilConjectures.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsComparison
 import WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantSerre
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! # Constructibility of the higher derived coefficient reductions
 

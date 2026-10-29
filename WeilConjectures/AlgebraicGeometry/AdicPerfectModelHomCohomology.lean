@@ -9,6 +9,8 @@ public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModels
 import WeilConjectures.AlgebraicGeometry.AdicPerfectHomCochains
 import all WeilConjectures.AlgebraicGeometry.ConstantModuleSectionProperties
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-! # Ordinary quotient-model Hom and algebraic Hom cohomology
 

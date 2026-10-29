@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import WeilConjectures.CategoryTheory.ModuleInverseImageUnitComparison
+import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Exactness and faithfulness on intrinsic comparison modules
 Source: Stacks Project, Tags 00YV and 099T.

@@ -17,6 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
@@ -70,6 +71,10 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] upperStarFromPoint
 
+-- In live this instance came globally from the Sheaf copy of InternalSectionTensorComparison;
+-- the tip makes it local there.
+attribute [local instance] Sheaf.monoidalCategory
+
 /-- Derived completeness, constructibility of every positive reduction and a common
 finite cohomological interval. The reduction index n denotes the exponent n+1.
 There is no Tor-amplitude condition and no boundedness requirement on K itself.
@@ -87,9 +92,6 @@ def continuousIntegralConstructible (l : ℕ) [Fact l.Prime]
       IsZero ((DerivedCategory.homologyFunctor _ q).obj
         ((AdicCompletion.derivedReduction l E X n).obj K))
 
-/-- The full subcategory with the inherited ambient derived morphisms.
-Source: Weil blueprint, order 1459
-(blueprint: det-prop-integral-criterion-reductions). -/
 private theorem finiteConstantEndomorphism (X : Scheme.{u})
     (h : sfbFiniteConstantSets X ⟶ sfbFiniteConstantSets X) : h = 𝟙 _ := by
   let J := Scheme.ProEt.topology X
@@ -486,11 +488,6 @@ instance integralSectionFunctor_isEquivalence (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) : (integralSectionFunctor l E X).IsEquivalence :=
   (integralSectionFunctor_properties l E X).2
 
-/-- Localization of the fixed section-action equivalence on unbounded complexes.
-Its forward functor is the localization of integralSectionFunctor, with Mathlib's
-canonical localization comparison on every complex.
-Source: Stacks 05RU; blueprint integral-criterion proof step 8
-(blueprint: det-prop-integral-criterion-reductions). -/
 private def integralEncoding (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : IntegralPresentation.Encoding l E X where
@@ -543,6 +540,22 @@ private theorem finiteTopology_discrete (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] WeilConjectures.scalarReductionExistence
   WeilConjectures.scalarReductionDerivedExistence
+
+private theorem reductionAbSheafify (X : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=
+  WeilConjectures.integralCoefficientAbSheafify.{u, u} X
+
+private theorem reductionAbLocallyBijective (X : Scheme.{u}) :
+    (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
+  WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
+
+private theorem reductionRingSheafify (X : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  hasSheafifyEssentiallySmallSite _ _
+
+private theorem reductionSiteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
 
 attribute [local instance] reductionSiteSmall
 

@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PointModelRestrictionModule
 import WeilConjectures.AlgebraicGeometry.CoefficientSliceFixedModuleEquivalence
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientPullbackCoordinates
 import WeilConjectures.AlgebraicGeometry.ConstantModuleGlobalEncoding
+import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Internal module coordinates on a coefficient-sized slice
 

@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteSchemeRing
+import Mathlib.RingTheory.Ideal.Quotient.Operations
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # Comparing discrete quotient coefficients after internal realization
 

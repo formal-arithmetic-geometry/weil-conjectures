@@ -73,12 +73,6 @@ private abbrev pureTensor (M N : Modules.{c, v, u} J R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :=
   CochainPullback.moduleTmul (R := R) M N U x y
 
-omit [HasSheafify J AddCommGrpCat.{max c v u}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
-omit [HasSheafify J AddCommGrpCat.{max c v u}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
-omit [HasSheafify J AddCommGrpCat.{max c v u}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
 private theorem pureTensor_mu (M N : Modules.{c, v, u} J R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
     pureTensor.{c, v, u} J R M N U x y =
@@ -107,8 +101,6 @@ section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-omit [HasSheafify J AddCommGrpCat.{max c v u}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
 end
 
 end CategoryTheory.RingedDerivedNative

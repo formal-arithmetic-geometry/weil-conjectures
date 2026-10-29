@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.PbcActualScalarPullback
 import WeilConjectures.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalScalarOrdinaryComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local invariance of derived extension to constant coefficients
 

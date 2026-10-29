@@ -107,6 +107,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDeri
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Completed pullback on the published completed-coefficient categories
 
@@ -139,15 +143,11 @@ abbrev pbcActualStructureMap : pbcActualCompletedRing d Y ⟶
   ⟨Functor.whiskerRight (completedCoefficientDirectImageMap g d).hom
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
-attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
-  coefficientProEtaleModelUp_isContinuous in
 section CompletionPresentation
 variable (X)
 variable (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
 
-attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip wfRestrictId
-
-attribute [local irreducible] intrinsicCompletionComplex
+attribute [local irreducible] pbcCompletedComparison
 
 end CompletionPresentation
 

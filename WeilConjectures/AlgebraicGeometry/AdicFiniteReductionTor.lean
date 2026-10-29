@@ -12,6 +12,8 @@ import all WeilConjectures.Algebra.Homology.NilpotentCoefficientTensorAcyclic
 import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # AdicFiniteReductionTor
 -/

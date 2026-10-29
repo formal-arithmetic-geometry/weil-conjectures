@@ -27,6 +27,8 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 import all WeilConjectures.AlgebraicGeometry.ConstantPullbackScalar
 import WeilConjectures.AlgebraicGeometry.RingedComplexTensorPullback
 import WeilConjectures.CategoryTheory.ConstantRingSectionRigidity
+import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
+import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 /-! # The augmented positive Koszul diagram under completed inverse image
 

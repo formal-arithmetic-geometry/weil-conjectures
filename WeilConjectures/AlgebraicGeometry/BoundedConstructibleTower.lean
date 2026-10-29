@@ -399,8 +399,6 @@ def pbcAdicProjection (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (n : ℕ) : pbcAdicCompletion X d ⟶ (pbcAdicRings X d).obj (op n) :=
   limit.π (pbcAdicRings X d) (op n)
 
-set_option linter.defProp false in
-set_option linter.defProp false in
 /-- The quotient continuous-function presheaf with its prescribed discrete topology.
 Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 def pbcQuotientPresheaf (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]

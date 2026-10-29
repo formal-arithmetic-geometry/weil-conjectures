@@ -13,6 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.ConstantDerivedNormalizationUnivers
 import WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalScalarDerivedIso
 import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Residue homology of a specified local completed model
 

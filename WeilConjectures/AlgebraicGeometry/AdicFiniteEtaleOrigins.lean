@@ -12,6 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.CompletedPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import WeilConjectures.CategoryTheory.ConstantInverseImageScalarNormalization
 import all WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # AdicFiniteEtaleOrigins
 -/

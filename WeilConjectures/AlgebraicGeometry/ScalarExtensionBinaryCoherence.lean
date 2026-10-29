@@ -198,6 +198,36 @@ noncomputable def scalarSheafificationUnit
   (PresheafOfModules.sheafificationAdjunction
     (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)).unit.app P
 
+/-- scalarSheafificationUnit locallyInjective for the explicit sheaf tensor construction.
+Source: Stacks, Tags 03EK and 05V4
+(auxiliary; not a blueprint node).
+Proof: tensor generation, naturality of the sheafification unit, and tensor descent
+identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+instance scalarSheafificationUnit_locallyInjective
+    [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
+    [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
+    (P : PresheafOfModules.{m} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
+    PresheafOfModules.IsLocallyInjective J (scalarSheafificationUnit (J := J) P) := by
+  change PresheafOfModules.IsLocallyInjective J (PresheafOfModules.toSheafify
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)
+    (CategoryTheory.toSheafify J P.presheaf))
+  infer_instance
+
+/-- scalarSheafificationUnit locallySurjective for the explicit sheaf tensor construction.
+Source: Stacks, Tags 03EK and 05V4
+(auxiliary; not a blueprint node).
+Proof: tensor generation, naturality of the sheafification unit, and tensor descent
+identify the displayed maps on pure tensors; the isomorphism identities give the inverse formula. -/
+instance scalarSheafificationUnit_locallySurjective
+    [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
+    [HasWeakSheafify J AddCommGrpCat.{m}] {R : Sheaf J CommRingCat.{u}}
+    (P : PresheafOfModules.{m} (R.obj ⋙ forget₂ CommRingCat RingCat)) :
+    PresheafOfModules.IsLocallySurjective J (scalarSheafificationUnit (J := J) P) := by
+  change PresheafOfModules.IsLocallySurjective J (PresheafOfModules.toSheafify
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (𝟙 _)
+    (CategoryTheory.toSheafify J P.presheaf))
+  infer_instance
+
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarSheafification map unit for the explicit sheaf tensor construction.
@@ -494,10 +524,6 @@ theorem scalarExtension_map_tmul
       changeOfRingsPresheafOfUniverses α N ⟶ changeOfRingsPresheafOfUniverses α P)
     U (s ⊗ₜ[R.obj.obj U, (α.hom.app U).hom] x)
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarExtensionSection_smul for the normalized binary comparison.

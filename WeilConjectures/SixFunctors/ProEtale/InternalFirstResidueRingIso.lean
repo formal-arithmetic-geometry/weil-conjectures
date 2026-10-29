@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 import all WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
+import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 set_option linter.privateModule false
 
@@ -35,6 +36,10 @@ private abbrev constantContinuousMap (A : Type u) [CommRing A] [TopologicalSpace
     [IsTopologicalRing A] : discreteObj A ⟶ continuousAb A :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
     (constantToContinuous A)
+
+private instance constantContinuousMap_mon (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A] : IsMonHom (constantContinuousMap A) :=
+  Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) (constantToContinuous A)
 
 private theorem constantContinuousMap_isIso (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
@@ -125,6 +130,11 @@ private theorem continuousMonEq (A : Type u) [CommRing A] [TopologicalSpace A]
 private def constantCoefficientMap (A : Type u) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : discreteObj A ⟶ coefficientAb A :=
   constantContinuousMap A ≫ (Mon.forget _).map (eqToHom (continuousMonEq A))
+
+private instance constantCoefficientMap_mon (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A] : IsMonHom (constantCoefficientMap A) := by
+  change IsMonHom (constantContinuousMap A)
+  exact constantContinuousMap_mon A
 
 private theorem constantCoefficientMap_isIso (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

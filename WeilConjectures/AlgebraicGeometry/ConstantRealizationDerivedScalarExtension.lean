@@ -21,10 +21,19 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.CategoryTheory.ConstantModuleFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.ExactRightDerivedAdjointKFlatRepresentative
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import all WeilConjectures.RingTheory.DerivedModuleScalarAdjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Derived constant realization and scalar extension
 
@@ -84,6 +93,16 @@ theorem restriction_properties :
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf _),
     preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf _),
     (SheafOfModules.CoefficientOrdinaryProof.tensorAdjunction φ).isRightAdjoint⟩
+
+/-- Exactness of actual restriction.
+Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+instance restriction_limits : PreservesFiniteLimits (restriction J q) :=
+  (restriction_properties J q).1
+
+/-- Exactness of actual restriction.
+Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+instance restriction_colimits : PreservesFiniteColimits (restriction J q) :=
+  (restriction_properties J q).2.1
 
 /-- The ordinary scalar adjunction exists by its tensor universal property.
 Source: Stacks 03DA (auxiliary; not a blueprint node). -/
@@ -613,6 +632,67 @@ variable [HasDerivedCategory.{dR} (realizationModules J R)]
 Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
 abbrev derivedRestriction := (restriction J q).mapDerivedCategory
 
+/-- Unbounded scalar extension is left adjoint to exact restriction on module sheaves.
+Source: Stacks 06YY and 07A6
+(auxiliary; not a blueprint node).
+Proof: derived change of rings supplies an everywhere defined left derived tensor
+functor computed by K-flat resolutions. The derived adjunction theorem identifies
+its right adjoint with exact restriction. Transport along the canonical equivalences
+of localization universes gives the independently sized source and target. -/
+theorem derivedRestriction_isRightAdjoint :
+    (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint := by
+  let Ft := derivedRestriction.{u, v, dR, dS} J q
+  let QAR := @DerivedCategory.Q (realizationModules J R) _ _
+    (inferInstance : HasDerivedCategory.{dR} (realizationModules J R))
+  let QBS := @DerivedCategory.Q (realizationModules J S) _ _
+    (inferInstance : HasDerivedCategory.{dS} (realizationModules J S))
+  let hA := HasDerivedCategory.standard (realizationModules J R)
+  let hB := HasDerivedCategory.standard (realizationModules J S)
+  let := hA
+  let := hB
+  let QA := @DerivedCategory.Q _ _ _ hA
+  let QB := @DerivedCategory.Q _ _ _ hB
+  let WA := HomologicalComplex.quasiIso (realizationModules J R) (.up ℤ)
+  let WB := HomologicalComplex.quasiIso (realizationModules J S) (.up ℤ)
+  let eA := Localization.uniq QA (QAR) WA
+  let eB := Localization.uniq QB (QBS) WB
+  let F := @Functor.mapDerivedCategory _ _ _ hB _ _ _ hA
+    (restriction J q) _ _ _
+  have : F.IsRightAdjoint := by
+    let φ := (constantSheaf J CommRingCat.{max u v}).map (CommRingCat.ofHom q)
+    obtain ⟨_, _, h⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+    obtain ⟨E, hobj, hmap, hadd, _, _, LF, ε, hLF, _⟩ :=
+      SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+    let := hadd
+    obtain ⟨_, _, hd⟩ := h E hobj hmap
+    obtain ⟨d, _⟩ := hd LF ε hLF
+    exact d.isRightAdjoint
+  let G := (eB.inverse ⋙ F) ⋙ eA.functor
+  have : G.IsRightAdjoint := inferInstance
+  let H := (restriction J q).mapHomologicalComplex (.up ℤ)
+  let e : QBS ⋙ G ≅ H ⋙ QAR :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Localization.compUniqInverse QB
+          (QBS) WB) F) eA.functor ≪≫
+      Functor.isoWhiskerRight
+        (@Functor.mapDerivedCategoryFactors _ _ _ hB _ _ _ hA
+          (restriction J q) _ _ _) eA.functor ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft H
+        (Localization.compUniqFunctor QA (QAR) WA)
+  let : Localization.Lifting QBS WB
+      (H ⋙ QAR) G := ⟨e⟩
+  let i : Ft ≅ G :=
+    Localization.liftNatIso QBS WB (H ⋙ QAR) (H ⋙ QAR) Ft G (Iso.refl _)
+  exact Functor.isRightAdjoint_of_iso i.symm
+
+/-- The sheaf scalar adjunction instance, supplied by the named existence theorem.
+Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+instance derivedRestriction_rightAdjoint :
+    (derivedRestriction.{u, v, dR, dS} J q).IsRightAdjoint :=
+  derivedRestriction_isRightAdjoint J q
+
 end SheafDerivedExistence
 
 section Derived
@@ -737,10 +817,6 @@ def moduleRepresentative {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B
 attribute [local irreducible] adjunction derivedExtension moduleDerivedExtension
   derivedAdjunction moduleDerivedAdjunction
 
-/-- The scalar-extension unit is compatible with constant realization.
-Source: Stacks 0D6D and 07A6 (auxiliary; not a blueprint node).
-Proof: transpose both sides under the derived adjunction; the two transposes are the
-realized ordinary scalar-extension unit followed by the restriction comparison. -/
 private theorem moduleRepresentative_isIso
     {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)
     [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
@@ -757,8 +833,6 @@ private theorem moduleRepresentative_isIso
     (ModuleCat.extendRestrictScalarsAdj f)
     (moduleDerivedAdjunction.{wR, wS, r} f) P hP
 
-omit [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
-    [HasDerivedCategory.{wS} (ModuleCat.{max u v} S)] in
 end Derived
 section Tower
 

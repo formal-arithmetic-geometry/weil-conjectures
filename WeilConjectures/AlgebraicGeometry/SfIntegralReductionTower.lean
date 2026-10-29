@@ -33,6 +33,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 local instance (priority := 4000) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 
+/-- The specified abelian sheafification at the coefficient size of this small site.
+Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
+noncomputable instance (priority := 3000) sfAbSheafify (Y : AlgebraicGeometry.Scheme.{u}) :
+    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+  integralCoefficientAbSheafify.{u, u} Y
+
 /-- The corresponding locally bijective criterion in the same coefficient size.
 Source: Stacks Tag 03DA (auxiliary; not a blueprint node). -/
 noncomputable instance (priority := 3000) sfAbBijective (Y : AlgebraicGeometry.Scheme.{u}) :
@@ -40,13 +46,26 @@ noncomputable instance (priority := 3000) sfAbBijective (Y : AlgebraicGeometry.S
       AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Y
 
-attribute [local irreducible] sfReductionTransition
+/-- Exact restriction retains its finite-limit structure with all coefficients specified.
+Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+noncomputable instance sfRestrictionLimits (n : ℕ) :
+    PreservesFiniteLimits (scalarReductionRestriction.{u, u} l E X n) :=
+  scalarReductionRestrictionLimits.{u, u} l E X n
 
-attribute [local irreducible] sfComparison
+/-- Exact restriction retains its finite-colimit structure with all coefficients specified.
+Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+noncomputable instance sfRestrictionColimits (n : ℕ) :
+    PreservesFiniteColimits (scalarReductionRestriction.{u, u} l E X n) :=
+  scalarReductionRestrictionColimits.{u, u} l E X n
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] sfDerivedReductionTransition
+private noncomputable instance sfRestrictionAdditive (n : ℕ) :
+    (scalarReductionRestriction.{u, u} l E X n).Additive :=
+  Functor.additive_of_preserves_binary_products _
 
-attribute [local irreducible] sfReductionRepresentativeComparison sfDerivedReductionUnit
+/-- Additivity of the fixed scalar-extension functor, with explicit coefficients.
+Source: Stacks Tag 03CZ (auxiliary; not a blueprint node). -/
+noncomputable instance sfExtensionAdditive (n : ℕ) :
+    (scalarReductionExtension.{u, u} l E X n).Additive :=
+  scalarReductionExtensionAdditive.{u, u} l E X n
+
 end WeilConjectures

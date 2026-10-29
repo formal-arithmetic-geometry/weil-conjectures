@@ -309,6 +309,26 @@ theorem localizedSystemExact :
 /-- Exactness component for the actual localized functor.
 Source: Stacks 03DI--03DJ
 (auxiliary; not a blueprint node). -/
+instance localizedSystemExtensionAdditive : (localizedSystemExtension.{c, v, r} R U).Additive :=
+  (localizedSystemExact.{c, v, r} R U).1
+
+/-- Exactness component for the actual localized functor.
+Source: Stacks 03DI--03DJ
+(auxiliary; not a blueprint node). -/
+instance localizedSystemExtensionLimits :
+    PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) :=
+  (localizedSystemExact.{c, v, r} R U).2.1
+
+/-- Exactness component for the actual localized functor.
+Source: Stacks 03DI--03DJ
+(auxiliary; not a blueprint node). -/
+instance localizedSystemExtensionColimits :
+    PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) :=
+  (localizedSystemExact.{c, v, r} R U).2.2.1
+
+/-- Exactness component for the actual localized functor.
+Source: Stacks 03DI--03DJ
+(auxiliary; not a blueprint node). -/
 instance localizedSystemRestrictionAdditive : (localizedSystemRestriction.{c, v, r} R U).Additive :=
   (localizedSystemExact.{c, v, r} R U).2.2.2.1
 

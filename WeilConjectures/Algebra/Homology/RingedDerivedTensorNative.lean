@@ -277,7 +277,6 @@ def lax : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤ _)
   inferInstance
 
 omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
-omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 /-- The acyclicity definition of K-flatness implies the native two-sided predicate.
 Source: Stacks Project, Tag 06YT. -/
 theorem kFlat (P : CochainComplex (Modules.{c, v, u} J R) ℤ)

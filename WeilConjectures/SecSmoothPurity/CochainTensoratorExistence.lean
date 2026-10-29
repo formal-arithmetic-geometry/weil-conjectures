@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
 import WeilConjectures.SecSmoothPurity.CochainInverseComparison
 
 /-! # Ordinary tensorator for independent site sizes

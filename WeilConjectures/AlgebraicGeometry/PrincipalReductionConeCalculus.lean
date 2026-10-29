@@ -7,6 +7,12 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.AlgebraicGeometry.PrincipalReductionDerivedNormalization
 import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-!
 # Strict principal reduction and its compatible cone comparisons
@@ -259,6 +265,38 @@ private def conePair {A B : CochainComplex C ℤ} (f : A ⟶ B)
   b ≫ (CochainComplex.mappingCone.inr f).f q +
     a ≫ (CochainComplex.mappingCone.inl f).v (q + 1) q (by omega)
 
+@[reassoc (attr := simp)]
+private theorem conePair_fst {A B : CochainComplex C ℤ} (f : A ⟶ B)
+    (q : ℤ) {Z : C} (b : Z ⟶ B.X q) (a : Z ⟶ A.X (q + 1)) :
+    conePair f q b a ≫ (CochainComplex.mappingCone.fst f).1.v q (q + 1) rfl = a := by
+  simp [conePair]
+
+@[reassoc (attr := simp)]
+private theorem conePair_snd {A B : CochainComplex C ℤ} (f : A ⟶ B)
+    (q : ℤ) {Z : C} (b : Z ⟶ B.X q) (a : Z ⟶ A.X (q + 1)) :
+    conePair f q b a ≫ (CochainComplex.mappingCone.snd f).v q q (add_zero q) = b := by
+  simp [conePair]
+
+@[reassoc (attr := simp)]
+private theorem coneMap_fst {A B A' B' : CochainComplex C ℤ}
+    (f : A ⟶ B) (f' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
+    (h : f ≫ b = a ≫ f') (q : ℤ) :
+    (CochainComplex.mappingCone.map f f' a b h).f q ≫
+        (CochainComplex.mappingCone.fst f').1.v q (q + 1) rfl =
+      (CochainComplex.mappingCone.fst f).1.v q (q + 1) rfl ≫ a.f (q + 1) := by
+  apply CochainComplex.mappingCone.ext_from f (q + 1) q rfl <;>
+    simp [CochainComplex.mappingCone.map]
+
+@[reassoc (attr := simp)]
+private theorem coneMap_snd {A B A' B' : CochainComplex C ℤ}
+    (f : A ⟶ B) (f' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
+    (h : f ≫ b = a ≫ f') (q : ℤ) :
+    (CochainComplex.mappingCone.map f f' a b h).f q ≫
+        (CochainComplex.mappingCone.snd f').v q q (add_zero q) =
+      (CochainComplex.mappingCone.snd f).v q q (add_zero q) ≫ b.f q := by
+  apply CochainComplex.mappingCone.ext_from f (q + 1) q rfl <;>
+    simp [CochainComplex.mappingCone.map]
+
 private abbrev strictConeMap
     (τ σ : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
     (a : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
@@ -290,6 +328,14 @@ private abbrev ca {A B : CochainComplex C ℤ} (f : A ⟶ B)
 private abbrev cb {A B : CochainComplex C ℤ} (f : A ⟶ B) (i : ℤ) :=
   (mappingCone.snd f).v i i (add_zero i)
 
+@[reassoc (attr := simp)]
+private theorem conePair_ca {A B : CochainComplex C ℤ} (f : A ⟶ B)
+    (q : ℤ) {Z : C} (b : Z ⟶ B.X q) (a : Z ⟶ A.X (q + 1))
+    (j : ℤ) (hj : q + 1 = j) :
+    conePair f q b a ≫ ca f q j hj = a ≫ (A.XIsoOfEq hj).hom := by
+  subst j
+  simp
+
 private abbrev diagonal {A B : CochainComplex C ℤ}
     (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) :=
   mappingCone.map f f s t h.symm
@@ -320,6 +366,42 @@ private def doublePsi {A B : CochainComplex C ℤ}
       (cb (vertical s t f h) q ≫ ca t q (q + 1) rfl)
       (-(ca (vertical s t f h) q (q + 1) rfl ≫ ca s (q + 1) (q + 1 + 1) rfl)))
 
+@[reassoc (attr := simp)]
+private theorem doublePhi_ca {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (q : ℤ) :
+    doublePhi s t f h q ≫ ca (vertical s t f h) q (q + 1) rfl =
+      conePair s (q + 1)
+        (cb (diagonal s t f h) q ≫ ca f q (q + 1) rfl)
+        (-(ca (diagonal s t f h) q (q + 1) rfl ≫ ca f (q + 1) (q + 1 + 1) rfl)) := by
+  simp [doublePhi]
+
+@[reassoc (attr := simp)]
+private theorem doublePhi_cb {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (q : ℤ) :
+    doublePhi s t f h q ≫ cb (vertical s t f h) q =
+      conePair t q
+        (cb (diagonal s t f h) q ≫ cb f q)
+        (ca (diagonal s t f h) q (q + 1) rfl ≫ cb f (q + 1)) := by
+  simp [doublePhi]
+
+@[reassoc (attr := simp)]
+private theorem doublePsi_ca {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (q : ℤ) :
+    doublePsi s t f h q ≫ ca (diagonal s t f h) q (q + 1) rfl =
+      conePair f (q + 1)
+        (cb (vertical s t f h) q ≫ ca t q (q + 1) rfl)
+        (-(ca (vertical s t f h) q (q + 1) rfl ≫ ca s (q + 1) (q + 1 + 1) rfl)) := by
+  simp [doublePsi]
+
+@[reassoc (attr := simp)]
+private theorem doublePsi_cb {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (q : ℤ) :
+    doublePsi s t f h q ≫ cb (diagonal s t f h) q =
+      conePair f q
+        (cb (vertical s t f h) q ≫ cb t q)
+        (ca (vertical s t f h) q (q + 1) rfl ≫ cb s (q + 1)) := by
+  simp [doublePsi]
+
 private def doubleDegreeIso {A B : CochainComplex C ℤ}
     (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t) (q : ℤ) :
     (mappingCone (diagonal s t f h)).X q ≅ (mappingCone (vertical s t f h)).X q where
@@ -337,6 +419,18 @@ private def doubleDegreeIso {A B : CochainComplex C ℤ}
         simp [Category.assoc, ca, cb]
     · apply mappingCone.ext_to t q (q + 1) rfl <;>
         simp [Category.assoc, ca, cb]
+
+@[reassoc (attr := simp)]
+private theorem cone_d_ca {A B : CochainComplex C ℤ} (f : A ⟶ B)
+    (i j k : ℤ) (hij : i + 1 = j) (hjk : j + 1 = k) :
+    (mappingCone f).d i j ≫ ca f j k hjk = -ca f i j hij ≫ A.d j k :=
+  mappingCone.d_fst_v f i j k hij hjk
+
+@[reassoc (attr := simp)]
+private theorem cone_d_cb {A B : CochainComplex C ℤ} (f : A ⟶ B)
+    (i j : ℤ) (hij : i + 1 = j) :
+    (mappingCone f).d i j ≫ cb f j = ca f i j hij ≫ f.f j + cb f i ≫ B.d i j :=
+  mappingCone.d_snd_v f i j hij
 
 private theorem doublePhi_comm {A B : CochainComplex C ℤ}
     (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t)
@@ -404,6 +498,28 @@ private def interchangeOfEq {A B : CochainComplex C ℤ}
   eqToIso (congrArg (fun k : CochainComplex.mappingCone f ⟶
     CochainComplex.mappingCone f ↦ CochainComplex.mappingCone k) hg) ≪≫ doubleInterchange s t f h
 
+@[reassoc (attr := simp)]
+private theorem interchangeOfEq_ca {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t)
+    (g : CochainComplex.mappingCone f ⟶ CochainComplex.mappingCone f)
+    (hg : g = diagonal s t f h) (q : ℤ) :
+    (interchangeOfEq s t f h g hg).hom.f q ≫ ca (vertical s t f h) q (q + 1) rfl =
+      conePair s (q + 1) (cb g q ≫ ca f q (q + 1) rfl)
+        (-(ca g q (q + 1) rfl ≫ ca f (q + 1) (q + 1 + 1) rfl)) := by
+  subst g
+  simp [interchangeOfEq, doubleInterchange, doubleDegreeIso]
+
+@[reassoc (attr := simp)]
+private theorem interchangeOfEq_cb {A B : CochainComplex C ℤ}
+    (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t)
+    (g : CochainComplex.mappingCone f ⟶ CochainComplex.mappingCone f)
+    (hg : g = diagonal s t f h) (q : ℤ) :
+    (interchangeOfEq s t f h g hg).hom.f q ≫ cb (vertical s t f h) q =
+      conePair t q (cb g q ≫ cb f q)
+        (ca g q (q + 1) rfl ≫ cb f (q + 1)) := by
+  subst g
+  simp [interchangeOfEq, doubleInterchange, doubleDegreeIso]
+
 private theorem interchangeOfEq_coordinates {A B : CochainComplex C ℤ}
     (s : A ⟶ A) (t : B ⟶ B) (f : A ⟶ B) (h : s ≫ f = f ≫ t)
     (g : CochainComplex.mappingCone f ⟶ CochainComplex.mappingCone f)
@@ -469,6 +585,47 @@ private abbrev strictInterchange (μ : 𝟭 C ⟶ 𝟭 C)
       CochainComplex.mappingCone ((strictCone (chainAction μ)).map f) :=
   interchangeOfEq ((chainAction μ).app A) ((chainAction μ).app B)
     f ((chainAction μ).naturality f).symm _ (chainAction_cone μ f).symm
+
+@[reassoc (attr := simp)]
+private theorem strictCone_map_fst (τ : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
+    {M N : CochainComplex C ℤ} (g : M ⟶ N) (q : ℤ) :
+    ((strictCone τ).map g).f q ≫ (CochainComplex.mappingCone.fst (τ.app N)).1.v
+        q (q + 1) rfl =
+      (CochainComplex.mappingCone.fst (τ.app M)).1.v q (q + 1) rfl ≫ g.f (q + 1) := by
+  exact coneMap_fst _ _ g g (τ.naturality g).symm q
+
+@[reassoc (attr := simp)]
+private theorem strictCone_map_snd (τ : 𝟭 (CochainComplex C ℤ) ⟶ 𝟭 _)
+    {M N : CochainComplex C ℤ} (g : M ⟶ N) (q : ℤ) :
+    ((strictCone τ).map g).f q ≫ (CochainComplex.mappingCone.snd (τ.app N)).v
+        q q (add_zero q) =
+      (CochainComplex.mappingCone.snd (τ.app M)).v q q (add_zero q) ≫ g.f q := by
+  exact coneMap_snd _ _ g g (τ.naturality g).symm q
+
+@[reassoc (attr := simp)]
+private theorem strictInterchange_ca (μ : 𝟭 C ⟶ 𝟭 C)
+    {A B : CochainComplex C ℤ} (f : A ⟶ B) (q : ℤ) :
+    (strictInterchange μ f).hom.f q ≫
+        (CochainComplex.mappingCone.fst ((strictCone (chainAction μ)).map f)).1.v
+          q (q + 1) rfl =
+      conePair ((chainAction μ).app A) (q + 1)
+        (cb ((chainAction μ).app (CochainComplex.mappingCone f)) q ≫
+          ca f q (q + 1) rfl)
+        (-(ca ((chainAction μ).app (CochainComplex.mappingCone f)) q (q + 1) rfl ≫
+          ca f (q + 1) (q + 1 + 1) rfl)) := by
+  exact interchangeOfEq_ca _ _ f _ _ _ q
+
+@[reassoc (attr := simp)]
+private theorem strictInterchange_cb (μ : 𝟭 C ⟶ 𝟭 C)
+    {A B : CochainComplex C ℤ} (f : A ⟶ B) (q : ℤ) :
+    (strictInterchange μ f).hom.f q ≫
+        (CochainComplex.mappingCone.snd ((strictCone (chainAction μ)).map f)).v
+          q q (add_zero q) =
+      conePair ((chainAction μ).app B) q
+        (cb ((chainAction μ).app (CochainComplex.mappingCone f)) q ≫ cb f q)
+        (ca ((chainAction μ).app (CochainComplex.mappingCone f)) q (q + 1) rfl ≫
+          cb f (q + 1)) := by
+  exact interchangeOfEq_cb _ _ f _ _ _ q
 
 @[reassoc (attr := simp)]
 private theorem strictShift_ca (μ : 𝟭 C ⟶ 𝟭 C)
@@ -603,6 +760,12 @@ private theorem strictInterchange_natural (μ : 𝟭 C ⟶ 𝟭 C)
       simp only [HomologicalComplex.comp_f, Category.assoc,
         strictInterchange_cb_assoc]
     all_goals simp [Category.assoc, ca, cb]
+
+omit [Preadditive C] [HasBinaryBiproducts C] in
+@[reassoc (attr := simp)]
+private theorem central_move (μ : 𝟭 C ⟶ 𝟭 C) {U V : C} (g : U ⟶ V) :
+    μ.app U ≫ g = g ≫ μ.app V := by
+  exact (μ.naturality g).symm
 
 private theorem strictInterchange_row (μ ν a : 𝟭 C ⟶ 𝟭 C)
     (h : ∀ M : CochainComplex C ℤ,
@@ -1165,6 +1328,106 @@ structure PrincipalReductionConeData where
     ((D n).obj M).X q ≅ M.X q ⊞ M.X (q + 1)
   T : ∀ n : ℕ, D (n + 1) ⟶ D n
   j : ∀ n : ℕ, 𝟭 (CochainComplex (Modules l E X) ℤ) ⟶ D n
+
+/-- Exact canonical characterization of the simultaneous principal calculus.
+The conjunction is under the scalar test binders. This is equivalent to placing
+its remaining clauses outside them: use the one-point profinite test and the zero
+section. Keeping these binders shared avoids repeated closed-proof abstraction.
+Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
+(auxiliary; not a blueprint node). -/
+def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l E X) : Prop :=
+  ∀ (S : Profinite.{u}ᵒᵖ)
+    (a : (DerivedNakayama.integerRing l E).obj.obj S) (s : S.unop),
+    ((data.d.hom.hom.app S) a).down s = Padic.coefficientExtensionUniformizer l E * a.down s ∧
+    ∃ (sD : ∀ n : ℕ, (data.D n).CommShift ℤ)
+      (sF : ∀ n : ℕ, (reductionFunctor l E X n).CommShift ℤ)
+      (κ : ∀ n : ℕ, data.D n ⋙ DerivedCategory.Q ≅
+        DerivedCategory.Q ⋙ reductionFunctor l E X n)
+      (Φ : ∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B),
+        (data.D n).obj (CochainComplex.mappingCone f) ≅
+          CochainComplex.mappingCone ((data.D n).map f)),
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ) (q : ℤ),
+      data.χ n M q = eqToIso (congrArg (fun K ↦ K.X q) (data.hobj n M)) ≪≫
+        principalConeCoordinates (scalar l E X data.d n M) q) ∧
+    (∀ (n : ℕ) {M N : CochainComplex (Modules l E X) ℤ} (g : M ⟶ N) (q : ℤ),
+      ((data.D n).map g).f q ≫ (data.χ n N q).hom =
+        (data.χ n M q).hom ≫ biprod.map (g.f q) (g.f (q + 1))) ∧
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ) (q : ℤ),
+      ((data.T n).app M).f q ≫ (data.χ n M q).hom =
+        (data.χ (n + 1) M q).hom ≫ biprod.map (𝟙 _)
+          ((DerivedNakayama.scalarOnComplex l E X data.d M).f (q + 1))) ∧
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ) (q : ℤ),
+      ((data.j n).app M).f q ≫ (data.χ n M q).hom = biprod.inl) ∧
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ),
+      (data.j (n + 1)).app M ≫ (data.T n).app M = (data.j n).app M) ∧
+    (∀ (n : ℕ) {M N : CochainComplex (Modules l E X) ℤ} (g : M ⟶ N),
+      QuasiIso g → QuasiIso ((data.D n).map g)) ∧
+    (∀ n : ℕ, (reductionFunctor l E X n).Additive ∧
+      @Functor.IsTriangulated _ _ _ _ _ _ (reductionFunctor l E X n)
+        (sF n) _ _ _ _ _ _ _ _) ∧
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ),
+      DerivedCategory.Q.map ((data.T n).app M) ≫ (κ n).hom.app M =
+        (κ (n + 1)).hom.app M ≫ integralStep l E X (DerivedCategory.Q.obj M) n) ∧
+    (∀ (n : ℕ) (M : CochainComplex (Modules l E X) ℤ),
+      DerivedCategory.Q.map ((data.j n).app M) ≫ (κ n).hom.app M =
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app
+          (DerivedCategory.Q.obj M)) ∧
+    (∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B) (q : ℤ),
+      (Φ n f).hom.f q ≫ (principalConeCoordinates ((data.D n).map f) q).hom ≫
+          biprod.map (data.χ n B q).hom (data.χ n A (q + 1)).hom =
+        (data.χ n (CochainComplex.mappingCone f) q).hom ≫
+          biprod.map (principalConeCoordinates f q).hom
+            (principalConeCoordinates f (q + 1)).hom ≫
+          principalConeInterchange (B.X q) (A.X (q + 1)) (B.X (q + 1))
+            (A.X (q + 1 + 1))) ∧
+    (∀ (n : ℕ) (r : ℤ) (M : CochainComplex (Modules l E X) ℤ) (q : ℤ),
+      ((Functor.commShiftIso (self := sD n) (data.D n) r).hom.app M).f q ≫
+          (((data.D n).obj M).shiftFunctorObjXIso r q (q + r) rfl).hom ≫
+          (data.χ n M (q + r)).hom =
+        (data.χ n (M⟦r⟧) q).hom ≫
+          biprod.map (M.shiftFunctorObjXIso r q (q + r) rfl).hom
+            (r.negOnePow •
+              (M.shiftFunctorObjXIso r (q + 1) (q + r + 1)
+                (add_right_comm q r 1)).hom)) ∧
+    (∀ (n : ℕ) {A B A' B' : CochainComplex (Modules l E X) ℤ}
+      (f : A ⟶ B) (f' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
+      (h : f ≫ b = a ≫ f')
+      (h' : (data.D n).map f ≫ (data.D n).map b = (data.D n).map a ≫ (data.D n).map f'),
+      (data.D n).map (CochainComplex.mappingCone.map f f' a b h) ≫ (Φ n f').hom =
+        (Φ n f).hom ≫ CochainComplex.mappingCone.map
+          ((data.D n).map f) ((data.D n).map f') ((data.D n).map a) ((data.D n).map b) h') ∧
+    (∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B),
+      (data.T n).app (CochainComplex.mappingCone f) ≫ (Φ n f).hom =
+        (Φ (n + 1) f).hom ≫ CochainComplex.mappingCone.map
+          ((data.D (n + 1)).map f) ((data.D n).map f) ((data.T n).app A) ((data.T n).app B)
+          ((data.T n).naturality f)) ∧
+    (∀ (n : ℕ) (r : ℤ) (M : CochainComplex (Modules l E X) ℤ),
+      (data.T n).app (M⟦r⟧) ≫ (Functor.commShiftIso (self := sD n) (data.D n) r).hom.app M =
+        (Functor.commShiftIso (self := sD (n + 1)) (data.D (n + 1)) r).hom.app M ≫
+          ((data.T n).app M)⟦r⟧') ∧
+    (∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B),
+      (data.D n).map (CochainComplex.mappingCone.inr f) ≫ (Φ n f).hom =
+        CochainComplex.mappingCone.inr ((data.D n).map f)) ∧
+    (∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B),
+      (data.D n).map (CochainComplex.mappingCone.triangle f).mor₃ ≫
+          (Functor.commShiftIso (self := sD n) (data.D n) (1 : ℤ)).hom.app A =
+        (Φ n f).hom ≫ (CochainComplex.mappingCone.triangle ((data.D n).map f)).mor₃) ∧
+    (∀ (n : ℕ) {A B : CochainComplex (Modules l E X) ℤ} (f : A ⟶ B),
+      (data.j n).app (CochainComplex.mappingCone f) ≫ (Φ n f).hom =
+        CochainComplex.mappingCone.map f ((data.D n).map f) ((data.j n).app A) ((data.j n).app B)
+          ((data.j n).naturality f)) ∧
+    (∀ (n : ℕ) (r : ℤ) (M : CochainComplex (Modules l E X) ℤ),
+      (data.j n).app (M⟦r⟧) ≫ (Functor.commShiftIso (self := sD n) (data.D n) r).hom.app M =
+        ((data.j n).app M)⟦r⟧') ∧
+    (∀ (n : ℕ) (r : ℤ) (M : CochainComplex (Modules l E X) ℤ),
+      DerivedCategory.Q.map
+          ((Functor.commShiftIso (self := sD n) (data.D n) r).hom.app M) ≫
+          (DerivedCategory.Q.commShiftIso r).hom.app ((data.D n).obj M) ≫
+          ((κ n).hom.app M)⟦r⟧' =
+        (κ n).hom.app (M⟦r⟧) ≫
+          (reductionFunctor l E X n).map ((DerivedCategory.Q.commShiftIso r).hom.app M) ≫
+          (Functor.commShiftIso (self := sF n) (reductionFunctor l E X n) r).hom.app
+            (DerivedCategory.Q.obj M))
 
 /-- Strict principal reductions, with the signed cone and shift comparisons and their
 canonical derived interpretation, simultaneously at all positive levels.

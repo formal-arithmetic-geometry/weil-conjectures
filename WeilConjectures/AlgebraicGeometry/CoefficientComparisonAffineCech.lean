@@ -11,6 +11,11 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonContinuity
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafification
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
+import Mathlib.CategoryTheory.Whiskering
+import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-! # Finite affine Čech complexes for intrinsic comparison
 

@@ -299,6 +299,20 @@ noncomputable abbrev integralTowerModules :=
       (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y))
 
+/-- The standard localization for unrestricted completed coefficients.
+Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+noncomputable instance integralTowerHasDerivedCategory :
+    HasDerivedCategory (integralTowerModules l E Y) :=
+  HasDerivedCategory.standard _
+
+/-- Preserve the standard localization for the recorded completed-ring presentation.
+This is definitionally the same module category as integralTowerModules.
+Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+noncomputable instance integralCompletedRingHasDerivedCategory :
+    HasDerivedCategory (SheafOfModules.{max u (t + 1)}
+      (completedIntegralCoefficientSheafUnrestricted l E Y)) :=
+  HasDerivedCategory.standard _
+
 set_option linter.defProp false in
 /-- The canonical scalar-extension witness, with explicit standard localizations.
 Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
@@ -312,6 +326,12 @@ noncomputable def unrestrictedIntegralReductionFunctor (n : ℕ) :
     integralTowerModules l E Y ⥤
       SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) :=
   scalarReductionExtension l E Y n
+
+/-- Additivity of ordinary reduction, from the scalar-extension witness.
+Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/
+noncomputable instance unrestrictedIntegralReductionFunctor_additive (n : ℕ) :
+    (unrestrictedIntegralReductionFunctor l E Y n).Additive :=
+  scalarReductionExtensionAdditive l E Y n
 
 /-- Termwise finite reduction, before restricting the coefficient action.
 Source: Stacks Tag 06YY (auxiliary; not a blueprint node). -/

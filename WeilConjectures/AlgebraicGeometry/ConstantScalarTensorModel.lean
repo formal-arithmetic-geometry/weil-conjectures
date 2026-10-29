@@ -5,8 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import all WeilConjectures.Algebra.Homology.RingedTensorComplexConstraints
 import WeilConjectures.CategoryTheory.TwistedActionTensorRestriction
 

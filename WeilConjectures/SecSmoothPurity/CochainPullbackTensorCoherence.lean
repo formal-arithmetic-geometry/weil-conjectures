@@ -32,7 +32,7 @@ set_option autoImplicit false
 set_option linter.checkUnivs false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-attribute [local irreducible] changed extensionFunctor scalarAssociation compositionModule
+attribute [local irreducible] extensionFunctor
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]

@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
 import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletedSectionIdeal
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local completeness under the completed integral realization
 

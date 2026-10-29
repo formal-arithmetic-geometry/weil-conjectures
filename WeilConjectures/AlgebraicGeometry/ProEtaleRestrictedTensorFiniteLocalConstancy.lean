@@ -10,11 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstanc
 public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelStalks
 public import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModelsFromLisse
 public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
-public import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
+public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
+import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
@@ -56,6 +57,15 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 section Proof
 
 -- Build total tensors directly from countable colimits, avoiding diagram-wide search.
+private instance tensorTotal {C : Type*} [Category C] [Preadditive C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [HasColimitsOfSize.{0, 0} C]
+    (P Q : CochainComplex C ℤ) :
+    HomologicalComplex.HasMapBifunctor P Q (curriedTensor C) (.up ℤ) :=
+  fun _ ↦ @HasColimitsOfShape.has_colimit _ _ _ _
+    (@HasColimitsOfSize.has_colimits_of_shape _ _
+      (inferInstance : HasColimitsOfSize.{0, 0} C) _ _) _
+
+-- Build total tensors directly from countable colimits, avoiding diagram-wide search.
 section TensorTransport
 universe u₁ u₂ v₁ v₂
 open CategoryTheory.MonoidalCategory
@@ -64,9 +74,6 @@ variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
   [MonoidalPreadditive C] [MonoidalPreadditive D]
   [HasColimitsOfSize.{0, 0} C] [HasColimitsOfSize.{0, 0} D]
 
-omit [MonoidalCategory C] [MonoidalCategory D]
-  [MonoidalPreadditive C] [MonoidalPreadditive D]
-  [HasColimitsOfSize.{0, 0} C] [HasColimitsOfSize.{0, 0} D] in
 end TensorTransport
 
 attribute [local instance] Sheaf.monoidalCategory
@@ -91,7 +98,20 @@ private instance smallScalar_surjective : Presheaf.IsLocallySurjective J (smallS
 
 private noncomputable abbrev smallG := moduleRestriction J B (smallR J B) (smallScalar J B)
 
+@[instance_reducible]
+private noncomputable instance smallConstMonoidal :
+    MonoidalCategory (PresheafOfModules.{s}
+      ((Functor.const Cᵒᵖ).obj (RingCat.of B))) :=
+  inferInstanceAs (MonoidalCategory (PresheafOfModules.{s}
+    (((Functor.const Cᵒᵖ).obj (CommRingCat.of B)) ⋙ forget₂ CommRingCat RingCat)))
+
 attribute [local irreducible] SheafOfModules.monoidalCategory Sheaf.monoidalCategory
+
+private noncomputable abbrev smallMonoidal :=
+  @SheafOfModules.monoidalCategory.{s, s, s} C _ J _
+    ((constantSheaf J CommRingCat.{s}).obj (CommRingCat.of B)) _ _
+    (SheafOfModules.isMonoidal_W
+      ((constantSheaf J CommRingCat.{s}).obj (CommRingCat.of B)))
 
 attribute [local instance] smallMonoidal
 
@@ -150,13 +170,23 @@ attribute [local instance] ProFiniteModels.asSmallDownEquivalence
   ProFiniteModels.asSmallUpEquivalence ProFiniteModels.asSmallDense
   ProFiniteModels.asSmallUpDense
 
+private instance intrinsicMonoidalW (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    ((ProEt.topology X).W.inverseImage (PresheafOfModules.toPresheaf.{u + 1}
+      ((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj)).IsMonoidal :=
+  SheafOfModules.isMonoidal_W_separateHomUniverse.{u + 1, u} (R := R)
+
+@[no_expose, instance_reducible]
+private noncomputable instance intrinsicRTMonoidal (X : Scheme.{u}) (A : Type u)
+    [CommRing A] : MonoidalCategory (proEtaleRingModules X (proEtaleConstantRing X A)) :=
+  SheafOfModules.monoidalCategory.{u, u + 1, u + 1} (proEtaleConstantRing X A)
+
 section EncodingTensor
 -- Comparing tensor functors needs only the API, never the localization construction.
 attribute [local irreducible] SheafOfModules.monoidalCategory Sheaf.monoidalCategory
 
 end EncodingTensor
-
-attribute [local irreducible] encoding siteEncoding
 
 -- Use tensor comparison lemmas without reducing their localized monoidal structures.
 attribute [local irreducible] SheafOfModules.monoidalCategory Sheaf.monoidalCategory
@@ -164,6 +194,10 @@ attribute [local irreducible] SheafOfModules.monoidalCategory Sheaf.monoidalCate
 attribute [-instance] intrinsicRTMonoidal
 
 attribute [local instance] intrinsicRTMonoidal
+
+private instance intrinsicCountableColimits (X : Scheme.{u}) (A : Type u) [CommRing A] :
+    HasColimitsOfSize.{0, 0} (proEtaleRingModules X (proEtaleConstantRing X A)) :=
+  inferInstance
 
 end AlgebraicGeometry.Scheme
 

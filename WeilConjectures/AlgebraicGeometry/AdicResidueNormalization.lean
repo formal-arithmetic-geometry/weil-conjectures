@@ -5,8 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.AdicStratumCompletionUnit
-public import all WeilConjectures.AlgebraicGeometry.SfbCompletionNormalization
-public import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+public import WeilConjectures.AlgebraicGeometry.SfbCompletionNormalization
+public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+import all WeilConjectures.AlgebraicGeometry.SfbCompletionNormalization
+import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import WeilConjectures.AlgebraicGeometry.FixedScalarSmallCoordinates

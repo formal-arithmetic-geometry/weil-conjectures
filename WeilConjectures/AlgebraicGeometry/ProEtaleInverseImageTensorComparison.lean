@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
@@ -75,10 +76,6 @@ private theorem inverseSection_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 -- Use the canonical-unit API without unfolding the small-model module construction.
 attribute [local irreducible] proEtaleModuleInverseImage inverseSection
 
-attribute [local irreducible] ringComp
-
-set_option maxHeartbeats 800000 in
--- Elaborate the two scalar actions in the sectionwise bilinear pairing.
 /-- The underlying set sheaf of a commutative ring sheaf.
 Source: Stacks, Tag 00YV (auxiliary; not a blueprint node). -/
 noncomputable abbrev ringSets {X : Scheme.{u}} (R : Rings X) :=
@@ -246,12 +243,6 @@ attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
   AlgebraicGeometry.ProEtale.setPullbackAdjunction
   AlgebraicGeometry.ProEtale.setPullbackComp
 
-set_option maxHeartbeats 800000 in
--- Elaborate the semilinear actions on the iterated pullback.
-attribute [local irreducible] ringId
-
-set_option maxHeartbeats 800000 in
--- Elaborate the identity scalar transport through the adjunction unit.
 /-- Forget a module morphism to its actual underlying sheaf map.
 Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
 noncomputable abbrev moduleMapSets {X : Scheme.{u}} {R : Rings X}

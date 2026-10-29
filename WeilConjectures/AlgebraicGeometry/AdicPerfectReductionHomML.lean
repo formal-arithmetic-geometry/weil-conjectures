@@ -8,6 +8,7 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.AlgebraicGeometry.AdicPerfectHomCohomologyComparison
 import WeilConjectures.CategoryTheory.FiniteTripleMittagLeffler
+import Mathlib.Data.Int.Interval
 
 /-! # Mittag-Leffler for perfect finite-reduction Hom
 

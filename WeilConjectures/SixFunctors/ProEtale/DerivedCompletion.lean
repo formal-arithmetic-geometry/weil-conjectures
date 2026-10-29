@@ -144,6 +144,10 @@ abbrev transition (X : Scheme.{u}) (n : ℕ) : finiteRing l E X (n + 1) ⟶
 
 /-- The finite quotient transition is a morphism of the pulled-back ring objects.
 Source: functoriality of monoid objects (blueprint: sk-def-pe-derived-completion). -/
+instance transition_isMonHom (X : Scheme.{u}) (n : ℕ) :
+    IsMonHom (transition l E X n) := by
+  exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _ (transitionRing l E n)
+
 private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
     {R S T : C} [MonObj S] [MonObj T] (q : R ⟶ S) (r : R ⟶ T)
     (f : S ⟶ T) [IsMonHom f] (h : q ≫ f = r) :

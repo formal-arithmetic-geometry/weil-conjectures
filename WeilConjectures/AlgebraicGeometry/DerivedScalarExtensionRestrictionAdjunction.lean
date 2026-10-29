@@ -449,6 +449,25 @@ Source: Stacks Tag 06YY
 noncomputable def scalarReductionTarget (n : ℕ) :=
   SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)
 
+/-- The standard localization of completed-coefficient module complexes.
+Source: Stacks Tag 05RU
+(auxiliary; not a blueprint node). -/
+noncomputable instance scalarReductionSourceDerived :
+    HasDerivedCategory (scalarReductionSource l E Y) := HasDerivedCategory.standard _
+
+/-- The standard localization of finite-coefficient module complexes.
+Source: Stacks Tag 05RU
+(auxiliary; not a blueprint node). -/
+noncomputable instance scalarReductionTargetDerived (n : ℕ) :
+    HasDerivedCategory (scalarReductionTarget l E Y n) := HasDerivedCategory.standard _
+
+/-- The site fits in the chosen module universe via its standard small model.
+Source: blueprint small-site convention
+(auxiliary; not a blueprint node). -/
+theorem scalarReductionSiteSmall :
+    EssentiallySmall.{max u (t + 1)} (AlgebraicGeometry.Scheme.ProEt Y) :=
+  essentiallySmallSelf _
+
 attribute [local instance] scalarReductionSiteSmall
 
 variable (n : ℕ)
@@ -463,6 +482,14 @@ noncomputable def scalarReductionRestriction :
     ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E Y n))
+
+/-- Additivity of the explicit scalar-restriction functor.
+Source: Stacks Tag 03CZ
+(auxiliary; not a blueprint node). -/
+instance scalarReductionRestrictionAdditive :
+    (scalarReductionRestriction l E Y n).Additive := by
+  unfold scalarReductionRestriction
+  infer_instance
 
 /-- Restriction is exact, since it leaves underlying abelian sheaves unchanged.
 Source: Stacks Tags 03DA and 03CZ
@@ -535,6 +562,13 @@ Source: Stacks Tag 06YY
 noncomputable def scalarReductionExtension :
     scalarReductionSource l E Y ⥤ scalarReductionTarget l E Y n :=
   (scalarReductionExistence l E Y n).choose
+
+/-- Additivity of tensor extension.
+Source: Stacks Tag 06YY
+(auxiliary; not a blueprint node). -/
+theorem scalarReductionExtensionAdditive :
+    (scalarReductionExtension l E Y n).Additive :=
+  (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose
 
 attribute [local instance] scalarReductionExtensionAdditive
 

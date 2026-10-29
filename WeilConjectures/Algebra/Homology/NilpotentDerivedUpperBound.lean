@@ -19,6 +19,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
+set_option linter.privateModule false
+
 /-!
 # Nilpotent derived reduction detects an upper cohomological bound
 

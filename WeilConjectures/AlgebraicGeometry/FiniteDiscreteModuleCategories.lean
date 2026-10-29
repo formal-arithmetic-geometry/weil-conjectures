@@ -35,4 +35,7 @@ abbrev FiniteDiscreteProEtaleSheaves (T : Scheme.{u}) :=
 variable (T : Scheme.{u})
   (E : FiniteDiscreteProEtaleSheaves B T ≌ FiniteDiscreteInternalModules B T)
 
+noncomputable instance finiteDiscreteEncoding_additive : E.functor.Additive :=
+  Functor.additive_of_preserves_binary_products _
+
 end AlgebraicGeometry.ProEtale.CondensedRing

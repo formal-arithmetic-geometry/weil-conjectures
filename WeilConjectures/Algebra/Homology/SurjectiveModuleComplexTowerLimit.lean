@@ -32,11 +32,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Restrict a varying-ring complex tower to the vertex of its ring cone, using the
-canonical composition comparison for restriction of scalars. Source: Stacks Project,
-Tag 091D, preceding setup (auxiliary; not a blueprint node).
-The comparison has identity underlying additive maps, so these are the original transitions.
--/
 private theorem module_countableAB4Star (R : Type u) [Ring R] :
     CountableAB4Star (ModuleCat.{v} R) := by
   let U := forget₂ (ModuleCat.{v} R) AddCommGrpCat.{v}

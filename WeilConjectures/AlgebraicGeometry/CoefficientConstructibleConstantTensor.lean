@@ -10,6 +10,9 @@ public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModul
 import WeilConjectures.AlgebraicGeometry.CoefficientConstantTensorLocalModels
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
 import WeilConjectures.AlgebraicGeometry.NoetherianGlobalConstructibility
+import Mathlib.Data.Int.Interval
+import Mathlib.Algebra.Module.FinitePresentation
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! # Tensoring constructible complexes with finite constant modules
 

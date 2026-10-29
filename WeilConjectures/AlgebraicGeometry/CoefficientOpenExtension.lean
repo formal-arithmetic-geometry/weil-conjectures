@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Extension by zero on coefficient-sized sites
 

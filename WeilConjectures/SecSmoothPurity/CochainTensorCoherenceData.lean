@@ -7,7 +7,8 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback
 public import WeilConjectures.CategoryTheory.RingedSiteModules
-public import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
+public import WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
+import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 import WeilConjectures.CategoryTheory.GeometricModuleConstruction
@@ -59,6 +60,15 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
       L.obj M = changeOfRings c (I.modules.obj M))
 
 open scoped ChangeOfRings
+
+/-- Bilinearity of the existing sheaf tensor, assembled from its additive tensor functors.
+Source: Stacks 03EK (auxiliary; not a blueprint node).
+Proof: the additive tensorLeft and tensorRight functors of MonoidalFree give the
+four zero and addition laws of MonoidalPreadditive. Assemble those four laws. -/
+noncomputable abbrev ringedTensorPreadditive :
+    @MonoidalPreadditive (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
+      RingCat.{u})).obj R)) _ _ (monoidalCategory R) :=
+  cochainModulesPreadditive R
 
 /-- The ordinary tensor comparison with its pure-tensor characterization.
 The maps q insert 1 in scalar extension; the generalized-element equation fixes
@@ -890,6 +900,43 @@ theorem canonicalRingedTensorComparison_unit
 attribute [local irreducible] monoidalCategory
 
 set_option backward.isDefEq.respectTransparency true
+
+/-- Chain-level representative of the canonical comparison.
+Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+noncomputable def CanonicalRingedTensorComparison.total [L.Additive]
+    (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
+    (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
+      RingCat.{u})).obj R)) ℤ) :
+    CochainComplex.mapBifunctor
+      ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+      ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)
+      (@curriedTensor (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}
+      RingCat.{u})).obj S)) _ (monoidalCategory S)) ⟶
+    (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      (CochainComplex.mapBifunctor P Q (@curriedTensor (SheafOfModules.{u} ((sheafCompose JC
+      (forget₂
+      CommRingCat.{u} RingCat.{u})).obj R)) _ (monoidalCategory R))) := by
+  letI := monoidalCategory R
+  letI := monoidalCategory S
+  letI := ringedTensorPreadditive R
+  letI := ringedTensorPreadditive S
+  exact tensorPullbackTotal L k.mu k.naturality P Q
+
+/-- The canonical chain comparison as an isomorphism, with no arbitrary choice.
+Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+noncomputable def CanonicalRingedTensorComparison.totalIso [L.Additive]
+    (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
+    (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤
+      SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am : L ⊣
+      V)
+    (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
+      RingCat.{u})).obj R)) ℤ) :=
+  letI := monoidalCategory R
+  letI := monoidalCategory S
+  letI := ringedTensorPreadditive R
+  letI := ringedTensorPreadditive S
+  @asIso _ _ _ _ (k.total R S RI uInv I c L hobj P Q)
+    (tensorPullbackTotal_isIso L k.mu k.naturality V am P Q)
 
 end SheafOfModules.CochainTensorComparison
 

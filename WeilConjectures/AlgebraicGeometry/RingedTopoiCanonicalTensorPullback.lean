@@ -567,7 +567,7 @@ theorem canonicalRingedTensorComparison_unit
   intro y hy
   exact canonicalRingedTensorComparison_unit_unique R S RI uInv I c L hobj hmap k y j hy hj
 
-attribute [local irreducible] CanonicalRingedTensorComparison.totalIso monoidalCategory
+attribute [local irreducible] monoidalCategory
 
 namespace CanonicalTensorPullbackProof
 

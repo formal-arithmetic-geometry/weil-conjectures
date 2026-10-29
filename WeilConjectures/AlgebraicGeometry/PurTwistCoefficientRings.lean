@@ -25,6 +25,12 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 variable (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
 
+/-- The recorded small-model sheafification criterion at the actual coefficient size.
+Source: Stacks Tag 00W1 (auxiliary; not a blueprint node). -/
+noncomputable instance purTwistAbLocallyBijective :
+    (ProEt.topology S).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbLocallyBijective.{t, t} S
+
 /-- Forget commutativity of a coefficient sheaf, without changing its sections.
 Source: Stacks Tag 03EK (auxiliary; not a blueprint node). -/
 abbrev purTwistRingOfUniverses (R : Sheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}) :=

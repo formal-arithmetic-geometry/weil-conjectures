@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.SecSmoothPurity.NormalizedKappaTransitions
+public import WeilConjectures.SecSmoothPurity.NormalizedKappaTransitions
+import all WeilConjectures.SecSmoothPurity.NormalizedKappaTransitions
 import all WeilConjectures.SecSmoothPurity.CochainPullbackTensorCoherence
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 import all WeilConjectures.SecSmoothPurity.CoefficientComparisonsBalancedConstruction
@@ -33,7 +34,7 @@ open SheafOfModules
 open scoped TensorProduct ChangeOfRings
 namespace CategoryTheory.CochainPullback.StrictCoefficient.ScalarCalculation
 
-attribute [local irreducible] scalarComp scalarUnit extensionAdjunction
+attribute [local irreducible] extensionAdjunction
 attribute [local irreducible] generator
 attribute [local instance 2000] SheafOfModules.cochainModulesMonoidal
 
@@ -74,8 +75,6 @@ def totalPure {A : Sheaf J CommRingCat.{w}} (P Q : Complex A)
   (tensorι P Q p q n h).val.app U
     (ringedComparisonPure A (P.X p) (Q.X q) U x y)
 
-/-- Auxiliary formula for scalar tensor transitions. Source: Stacks 03EK, 03EL, 07A4
-(auxiliary; not a blueprint node). -/
 @[no_expose] private noncomputable instance tensorCoproducts (R : Sheaf J CommRingCat.{w}) :
     HasCoproducts.{0} (Modules R) := inferInstance
 
@@ -174,7 +173,7 @@ private theorem scalarTotal_hom {A B : Sheaf J CommRingCat.{w}}
   erw [extension_map, (scalarTensorFormulas a c).1] at ht
   exact ht
 
-attribute [local irreducible] extensionFunctor squareArrow
+attribute [local irreducible] extensionFunctor
 attribute [local irreducible] PresheafOfModules.sheafificationAdjunction
 
 set_option backward.isDefEq.respectTransparency true

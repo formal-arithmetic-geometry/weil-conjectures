@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
 public import WeilConjectures.AlgebraicGeometry.FixedScalarComplexModel
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Explicit exact equivalences for fixed scalar site models
 
@@ -80,6 +81,11 @@ theorem fixedScalarComplexToModel_eq (X : Scheme.{u}) (k : Type (u + 1)) [CommRi
       (fixedScalarProEtaleSheafEquivalence X k).functor.mapHomologicalComplex (.up ℤ) := by
   unfold fixedScalarComplexToModel fixedScalarProEtaleSheafEquivalence
   rfl
+
+instance fixedScalarEtaleSheafEquivalence_inverse_additive (X : Scheme.{u})
+    (k : Type (u + 1)) [CommRing k] :
+    (fixedScalarEtaleSheafEquivalence X k).inverse.Additive :=
+  Functor.additive_of_preserves_binary_products _
 
 instance fixedScalarEtaleComplexToModel_isEquivalence (X : Scheme.{u})
     (k : Type (u + 1)) [CommRing k] :

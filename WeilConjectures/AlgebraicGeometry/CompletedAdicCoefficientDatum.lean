@@ -52,6 +52,23 @@ Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -
 abbrev completedAdicQuotient (d : AdicCoefficientDatum A) (n : ℕ) :=
   ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))
 
+/-- Quotient coefficients are finite, by the datum, also after changing universe.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance completedAdicQuotient_finite (d : AdicCoefficientDatum A) (n : ℕ) :
+    Finite (completedAdicQuotient d n) :=
+  letI := d.quotientFinite n
+  inferInstance
+
+/-- Each finite quotient has the discrete topology specified by the datum.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance completedAdicQuotient_topology (d : AdicCoefficientDatum A) (n : ℕ) :
+    TopologicalSpace (completedAdicQuotient d n) := ⊥
+
+/-- The quotient topology is discrete.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance completedAdicQuotient_discrete (d : AdicCoefficientDatum A) (n : ℕ) :
+    DiscreteTopology (completedAdicQuotient d n) := ⟨rfl⟩
+
 /-- The actual finite coefficient sheaf from the recorded continuous-functions construction.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 def completedAdicFiniteRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :=
@@ -85,6 +102,63 @@ def completedAdicRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     Sheaf (ProEt.topology T) RingCat.{t + 1} :=
   limit (completedAdicRingSystem T d)
 
+private theorem finiteRing_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
+    (n : ℕ) (U : T.ProEtᵒᵖ) (x y : (completedAdicFiniteRing T d n).obj.obj U) :
+    x * y = y * x := by
+  let J := ProEt.topology T
+  let F := ProEtale.finiteCoefficientPresheaf T (completedAdicQuotient d n)
+  let R := completedAdicFiniteRing T d n
+  let η : F ⟶ R.obj := toSheafify J F
+  have hs := (isSheaf_iff_isSheaf_of_type J
+      (R.obj ⋙ CategoryTheory.forget RingCat.{t + 1})).1
+    ((sheafCompose J (CategoryTheory.forget RingCat.{t + 1})).obj R).property
+  apply (hs.isSeparated _ (J.intersection_covering
+    (Presheaf.imageSieve_mem J η x) (Presheaf.imageSieve_mem J η y))).ext
+  rintro V f ⟨⟨a, ha⟩, ⟨b, hb⟩⟩
+  change R.obj.map f.op (x * y) = R.obj.map f.op (y * x)
+  rw [map_mul, map_mul, ← ha, ← hb, ← map_mul, ← map_mul]
+  change C(ConnectedComponents V.left, completedAdicQuotient d n) at a b
+  exact congrArg (η.app (op V)) (mul_comm a b)
+
+/-- The limit ring sheaf is commutative on sections.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: continuous functions into the commutative quotient rings commute pointwise;
+sheafification preserves that equation locally. Each limit projection therefore identifies
+the images of xy and yx. Evaluate the limit on U: its projections are jointly injective,
+so xy=yx. This argument includes the zero ring and the empty site object. -/
+theorem completedAdicRing_mul_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
+    (U : T.ProEtᵒᵖ) (x y : (completedAdicRing T d).obj.obj U) : x * y = y * x := by
+  let D := completedAdicRingSystem T d
+  let ev := sheafToPresheaf (ProEt.topology T) RingCat.{t + 1} ⋙
+    (CategoryTheory.evaluation T.ProEtᵒᵖ RingCat.{t + 1}).obj U
+  apply Concrete.isLimit_ext (D ⋙ ev)
+    (isLimitOfPreserves ev (limit.isLimit D)) (x * y) (y * x)
+  intro j
+  change ((limit.π D j).hom.app U) (x * y) = ((limit.π D j).hom.app U) (y * x)
+  rw [map_mul, map_mul]
+  exact finiteRing_comm T d j.unop U _ _
+
+/-- Retain the actual ring data of the limit and supply only its commutativity proof.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+abbrev completedAdicCommRingStructure (T : Scheme.{t}) (d : AdicCoefficientDatum A)
+    (U : T.ProEtᵒᵖ) : CommRing ((completedAdicRing T d).obj.obj U) :=
+  { RingCat.ring _ with mul_comm := completedAdicRing_mul_comm T d U }
+
+/-- The same completed coefficient presheaf with commutativity retained.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+def completedAdicCommPresheaf (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
+    T.ProEtᵒᵖ ⥤ CommRingCat.{t + 1} where
+  obj U := @CommRingCat.of ((completedAdicRing T d).obj.obj U)
+    (completedAdicCommRingStructure T d U)
+  map {U V} f :=
+    letI := completedAdicCommRingStructure T d U
+    letI := completedAdicCommRingStructure T d V
+    CommRingCat.ofHom ((completedAdicRing T d).obj.map f).hom
+  map_id U := (forget₂ CommRingCat RingCat).map_injective
+    ((completedAdicRing T d).obj.map_id U)
+  map_comp f g := (forget₂ CommRingCat RingCat).map_injective
+    ((completedAdicRing T d).obj.map_comp f g)
+
 /-- The commutative ring sheaf with precisely the completed limit's underlying ring sheaf.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 def completedAdicCommRing (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
@@ -104,7 +178,10 @@ instance completedAdicModules_monoidal (T : Scheme.{t}) (d : AdicCoefficientDatu
     MonoidalCategory (CompletedAdicModules T d) :=
   SheafOfModules.monoidalCategory (completedAdicCommRing T d)
 
-attribute [instance] completedAdicOrdinaryTower_additive
+/-- Standard localization of the completed-coefficient module category.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance completedAdicModules_hasDerived (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
+    HasDerivedCategory (CompletedAdicModules T d) := HasDerivedCategory.standard _
 
 section DerivedReductionModels
 

@@ -107,19 +107,4 @@ private lemma overSheafificationMap_naturality {P Q : PresheafOfModules.{m} R.ob
 
 end SheafificationComparison
 
-section TensorComparison
-
-variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{m}]
-  [HasWeakSheafify J AddCommGrpCat.{m}]
-  {A : Sheaf J CommRingCat.{r}} (U : C)
-  [(J.over U).HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{m}]
-  [HasWeakSheafify (J.over U) AddCommGrpCat.{m}]
-
-end TensorComparison
-
-attribute [local instance] tensorOverComparison_isIso
-
 end SheafOfModules

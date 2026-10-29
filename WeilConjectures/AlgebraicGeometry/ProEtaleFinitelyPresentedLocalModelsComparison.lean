@@ -175,9 +175,6 @@ private theorem fixedModels_constantRing {C : Type u} [SmallCategory C]
     | exact ⟨M, hM, (hi W M).mpr he⟩
     | exact ⟨M, hM, (hi W M).mp he⟩
 
-/-- Intrinsic module constants agree with constants after restriction to fixed scalars.
-Source: Stacks Project, Tags 03CY and 093U
-(auxiliary; not a blueprint node). -/
 theorem asSmallDownEquivalence {C : Type u} [Category.{v} C] :
     (AsSmall.down : AsSmall.{w} C ⥤ C).IsEquivalence :=
   (AsSmall.equiv : C ≌ AsSmall.{w} C).isEquivalence_inverse

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientEtaleDerivedStalk
 import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-! # Fixed scalar presentations for local coefficient models
 

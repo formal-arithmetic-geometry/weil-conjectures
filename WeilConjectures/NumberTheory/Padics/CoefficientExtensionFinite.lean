@@ -42,8 +42,7 @@ theorem finite_coefficientExtensionRing
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) :
     Finite (Padic.coefficientExtensionRing l E n) := by
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hfinite : Finite (coefficientExtensionIntegers l E ⧸
       coefficientExtensionMaximalIdeal l E) :=
     h.2.2.2.2.2.2.2.2.2.2.2.1

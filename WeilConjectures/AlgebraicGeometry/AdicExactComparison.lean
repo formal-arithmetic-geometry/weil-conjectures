@@ -10,6 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.CompletedPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import WeilConjectures.CategoryTheory.ConstantInverseImageScalarNormalization
 import all WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Identifying the adic pullback with exact comparison
 

@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInve
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-public import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Homology.AlgebraicInverseImageKFlat
 public import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 public import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
@@ -55,7 +55,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteLocalConstancyRefl
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
 public import WeilConjectures.AlgebraicGeometry.ProEtaleLocalDerivedRestrictionComparisons
 public import WeilConjectures.AlgebraicGeometry.ProEtaleModelRingPresentation
-public import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
+public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 public import WeilConjectures.AlgebraicGeometry.ProEtaleMultiplicationDifferenceCriterion
@@ -141,11 +141,16 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ContinuousMapReduction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
 public import of
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimitProperties
 import all WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 import all WeilConjectures.AlgebraicGeometry.TateInverseLimitBaseChange
 import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Cartesian coefficients and Tate twists
 
@@ -173,7 +178,6 @@ variable {C : Type w₁} [Category.{vM₁} C] [MonoidalCategory C]
   {D : Type w₂} [Category.{vM₂} D] [MonoidalCategory D]
   (F : C ⥤ D) [F.Monoidal] (R : C) [MonObj R]
 open CategoryTheory.Limits
-attribute [local irreducible] inverseSemilinear
 
 end ModuleComparisons
 
@@ -192,26 +196,49 @@ private abbrev AbSheaf (T : Scheme.{u}) :=
   Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}
 private instance proEtSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
+private instance abelianSheafify (T : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} := inferInstance
 private instance abelianWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} := inferInstance
+private instance ringSheafify (T : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology T) RingCat.{u + 1} := inferInstance
+private instance ringWeakSheafify (T : Scheme.{u}) :
+    HasWeakSheafify (Scheme.ProEt.topology T) RingCat.{u + 1} := inferInstance
+private instance commRingSheafify (T : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
+  WeilConjectures.integralCoefficientRingSheafify.{u, u + 1} T
 private instance commRingWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify (Scheme.ProEt.topology T) CommRingCat.{u + 1} := inferInstance
+private instance typeSheafify (T : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology T) (Type (u + 1)) := inferInstance
+private instance typeWeakSheafify (T : Scheme.{u}) :
+    HasWeakSheafify (Scheme.ProEt.topology T) (Type (u + 1)) := inferInstance
+
 private instance abelianForgetSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
       (forget AddCommGrpCat.{u + 1}) := inferInstance
+private instance ringForgetSheafification (T : Scheme.{u}) :
+    (Scheme.ProEt.topology T).PreservesSheafification
+      (forget RingCat.{u + 1}) := inferInstance
 private instance commRingForgetSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
       (forget CommRingCat.{u + 1}) := inferInstance
-/-- Roots of unity commute with inverse image along every scheme morphism where ell
-is invertible, including exponent zero. Source: blueprint Roots of unity paragraph
-(blueprint: det-prop-sfb-cartesian-coefficients-twists).
-Proof: invertibility in every residue field makes ell a unit of global sections,
-and hence ell^n is a unit as well. Apply the root square of finiteRootSiteComparison
-with the finite auxiliary ring ULift (ZMod (ell^n)). The etale root comparison,
-the comparison of the etale and pro-etale inverse images, and the etale-to-pro-etale
-root identifications are isomorphisms. Thus so is their composite, and cancellation
-of the pulled-back root identification gives the prescribed pro-etale root map.
-This argument also applies to n=0, where the auxiliary ring is the zero ring. -/
+private instance commRingToRingSheafification (T : Scheme.{u}) :
+    (Scheme.ProEt.topology T).PreservesSheafification
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := inferInstance
+
+private instance integralSystem_hasLimit (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) : HasLimit (spIntegralTwistSystem T ℓ E) :=
+  inferInstance
+
+private instance integralSystem_forget_preservesLimit
+    (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    PreservesLimit (spIntegralTwistSystem T ℓ E)
+      (Mod.forget (C := AbSheaf T)
+        (D := AbSheaf T)
+        (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) T)) :=
+  inferInstance
+
 private instance pullback_forget_kan
     {D : Type (u + 2)} [Category.{u + 1} D]
     [HasColimitsOfSize.{u + 1, u + 1} D]
@@ -469,15 +496,7 @@ theorem spCoefficientIso_existsUnique
     (condensedRingObj Λ X) (condensedPullbackHom Λ f) (condensedPushforwardHom Λ f)
   exact (abelianAdjunct_eq f _ _ _).trans (unitAlgHom_comp_map_condensedPullbackHom Λ f)
 
-attribute [local irreducible] spCoefficientIso
-
-attribute [local irreducible] integralComparisonSystem
-
 attribute [local irreducible] profinitePointModuleForgetPullbackIso
-
-attribute [local irreducible] spIntegralComparison
-
-attribute [local irreducible] spTwistFunctor
 
 section SignedComparisonStatement
 attribute [local irreducible] Scheme.proEtaleRingModulePullback
@@ -489,8 +508,6 @@ section SignedPullbackProof
 attribute [local irreducible] Scheme.proEtaleModuleInverseImage
   Scheme.proEtaleRingModuleAdjunction Scheme.proEtaleRingModulePullback
   SheafOfModules.siteSheafTensorRight
-
-attribute [local irreducible] moduleStructuralMap modulePullbackComparison
 
 end SignedPullbackProof
 
@@ -643,8 +660,7 @@ private def rootModuleDirect (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) :
     (Scheme.purTwistFiniteRingIso Y ℓ r) _ _
     (Scheme.proEtaleRootsOfUnityDirectImageMap f (ℓ ^ (r + 1)))
 
-attribute [local irreducible] finiteFirstComparison rootModuleComparison
-  rootModuleDirect tensorMap' directScalarIso' tensorPullbackHomEquiv'
+attribute [local irreducible] rootModuleDirect tensorMap' directScalarIso' tensorPullbackHomEquiv'
 
 section
 end
@@ -670,8 +686,6 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] CondensedRing.upperStarLowerStarAdjunction
   InternalModuleOperations.lowerComparison InternalModuleOperations.coefficientMap
 end
-
-attribute [local irreducible] SpInternalCartesian
 
 attribute [local irreducible] spIntegralTwist
 set_option backward.defeqAttrib.useBackward false

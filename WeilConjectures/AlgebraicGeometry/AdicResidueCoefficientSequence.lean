@@ -5,6 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Algebra.Module.Torsion.Basic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # The consecutive finite coefficient sequence on a slice
 

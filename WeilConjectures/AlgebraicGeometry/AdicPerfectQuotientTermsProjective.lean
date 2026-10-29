@@ -5,6 +5,13 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplexes
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Preadditive.Projective.Basic
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.RingTheory.Finiteness.Cardinality
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Projectivity of ordinary quotient terms -/
 

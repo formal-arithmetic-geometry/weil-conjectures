@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Module.FinitePresentation
 /-! # Isomorphism invariance of coefficient constructibility
 Source: Stacks Tag 09AJ, constructibility by finite local models.
 -/

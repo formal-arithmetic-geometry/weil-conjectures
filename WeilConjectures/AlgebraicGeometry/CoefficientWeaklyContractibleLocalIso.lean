@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
 import WeilConjectures.CategoryTheory.RingedDerivedDisjointIso
+import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-! # Local derived isomorphisms on a weakly contractible affine object
 

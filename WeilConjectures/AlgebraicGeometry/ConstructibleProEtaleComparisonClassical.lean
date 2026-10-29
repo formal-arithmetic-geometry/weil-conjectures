@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructiblePr
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
 import WeilConjectures.AlgebraicGeometry.CoefficientStratifiedContinuity
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Module.FinitePresentation
 
 /-! Constructible pro-etale comparison: classicality.
 -/

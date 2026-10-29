@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.AdicConstructibleTriangulated
 import WeilConjectures.AlgebraicGeometry.AdicPerfectModelsResidueOrigin
 import WeilConjectures.AlgebraicGeometry.AdicResidueFieldTensor
 import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Adic constructibility and stratified perfect models
 
@@ -91,6 +92,11 @@ private def sfbToModelEquivalence (X : Scheme.{u})
       (PresheafOfModules.isoMk (fun U ↦ Iso.refl _))))
     (NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
       (PresheafOfModules.isoMk (fun U ↦ Iso.refl _))))
+
+private instance sfbToModel_isEquivalence (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
+    (proEtaleModuleToModel R).IsEquivalence :=
+  (sfbToModelEquivalence X R).isEquivalence_functor
 
 private theorem sfbComplete_triangulated (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :

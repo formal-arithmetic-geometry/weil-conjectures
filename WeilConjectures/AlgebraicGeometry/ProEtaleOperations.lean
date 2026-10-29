@@ -8,6 +8,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
@@ -485,6 +486,27 @@ noncomputable instance proEtaleRingModulePullback_preservesFiniteColimits :
   (proEtaleRingModuleOperations_properties f R S c).2.2.2.1
 
 set_option backward.isDefEq.respectTransparency false in
+/-- K-injective resolutions exist in all modules over these coefficients.
+Source: Stacks, Section 07A5 and Theorem 079P
+(blueprint: def-weil-pbc-proetale-operations).
+Proof: transport the site to `proEtaleSiteModel X`, enlarging only the Hom universe.
+Module sheaves on that small site form a Grothendieck abelian category. Transfer this
+property across the module equivalence. The source Grothendieck-category instance then
+supplies K-injective resolutions, with monomorphic quasi-isomorphisms into the replacements.
+No constructibility, torsion, completeness, or boundedness condition is imposed. -/
+theorem proEtaleRingModules_hasKInjectiveResolutions (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    Abelian.HasKInjectiveResolutions (proEtaleRingModules X R) := by
+  let A := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let B := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+    RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj A
+  let e := proEtaleModuleModelEquivalence X A
+  let := SheafOfModules.isGrothendieckAbelian B
+  let : IsGrothendieckAbelian.{u + 1} (proEtaleRingModules X R) :=
+    IsGrothendieckAbelian.of_equivalence e
+  infer_instance
+
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
 
 /-- Ordinary uncompleted derived inverse image, by exact termwise descent.

@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
 import WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueReductionComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
+import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Actual residue reduction under constant scalar restriction
 

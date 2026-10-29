@@ -41,6 +41,12 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
+-- The universe-polymorphic `{max u (t + 1)}` sheafification instances get stuck on
+-- universe constraints for the `CommRingCat.{u + 1}` sheaves of this file.
+attribute [-instance] WeilConjectures.integralCoefficientRingSheafify
+  WeilConjectures.integralCoefficientAbSheafify
+  WeilConjectures.integralCoefficientAbLocallyBijective
+
 attribute [local irreducible] proEtaleRingModulePullback proEtaleModuleInverseImage
   proEtaleRingModuleAdjunction
 
@@ -159,8 +165,6 @@ private noncomputable def tensorHomEquiv
 
 attribute [local irreducible] restrictionToTensor
 
-attribute [local irreducible] tensorUnit
-
 private def constantUnit (T : Scheme.{u}) (R : Type u) [CommRing R] :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} R)) ⟶
       ((sheafCompose (ProEt.topology T)
@@ -176,35 +180,8 @@ private instance (T : Scheme.{u}) (R : Type u) [CommRing R] :
     Presheaf.IsLocallySurjective (ProEt.topology T) (constantUnit T R) :=
   adicLisseConstantUnit_locallySurjective T (ULift.{u + 1, u} R)
 
-by
-  let f : (Functor.const T.ProEtᵒᵖ).obj
-      (CommRingCat.of (ULift.{u + 1, u} R)) ⟶
-      (Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} Q)) :=
-    (Functor.const T.ProEtᵒᵖ).map
-      (CommRingCat.ofHom ((ULift.ringEquiv : ULift.{u + 1, u} Q ≃+* Q).symm.toRingHom.comp
-        (q.comp (ULift.ringEquiv : ULift.{u + 1, u} R ≃+* R).toRingHom)))
-  exact (congrArg (fun t ↦ Functor.whiskerRight t
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-      (toSheafify_naturality (ProEt.topology T) f)).symm
-
-attribute [local irreducible] restrictHomEquiv
-
-attribute [local irreducible] directScalarIso tensorPullbackHomEquiv
-
-attribute [local irreducible] tateTensorMap
-
 attribute [local irreducible] tensorHomEquiv tensorPresheafHomEquiv tensorToRestriction
 
-attribute [local irreducible] reductionUnit
-
-attribute [local irreducible] tateReduction
-
-attribute [local irreducible] quotientPullbackHomEquiv
-
-attribute [local irreducible] tatePullbackId
-
 attribute [local irreducible] exchangeModuleComposition
-
-attribute [local irreducible] tatePullbackComp
 
 end AlgebraicGeometry.Scheme

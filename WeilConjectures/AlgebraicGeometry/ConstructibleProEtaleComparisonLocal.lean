@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPullback
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Module.FinitePresentation
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! Constructible pro-etale comparison: locality.
 -/

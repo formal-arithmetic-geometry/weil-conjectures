@@ -86,7 +86,6 @@ noncomputable def principalKoszulScalarComplex
   (CochainComplex.singleFunctor (𝒜) 0).map
     (endoPow (globalSectionMultiplication R t) (m + 1))
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Tensor with the representative in the K-flat (second) variable. The canonical symmetry
 identifies this model with `P ⊗ Q_m`, including its maps and augmentations.
 Source: Stacks Tags 06YN and 0941

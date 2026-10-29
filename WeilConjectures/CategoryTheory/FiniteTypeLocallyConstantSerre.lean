@@ -33,6 +33,10 @@ set_option linter.style.haveILetI false
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {B : Type u} [CommRing B]
 
+private theorem restrictMap_preservesFiniteLimits (R : Sheaf J RingCat.{u})
+    {X Y : C} (f : X ⟶ Y) : PreservesFiniteLimits (overMap.{u} R f) :=
+  (overMap_exact R f).1
+
 private theorem restrictMap_preservesFiniteColimits (R : Sheaf J RingCat.{u})
     {X Y : C} (f : X ⟶ Y) : PreservesFiniteColimits (overMap.{u} R f) :=
   (overMap_exact R f).2

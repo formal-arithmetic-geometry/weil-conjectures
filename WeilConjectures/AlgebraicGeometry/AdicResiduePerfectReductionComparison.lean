@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueAlgebraTower
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExtension
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Finite reductions of completed constant perfect complexes
 

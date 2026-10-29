@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Constructibility under a surjective coefficient restriction
 Source: Stacks Project, Tag 09AJ, definition-constructible; Tag 09BR, scalar restriction

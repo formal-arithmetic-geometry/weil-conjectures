@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructiblePr
 public import WeilConjectures.AlgebraicGeometry.PointModelRestrictionModule
 import Mathlib.Algebra.Category.ModuleCat.Products
 import WeilConjectures.AlgebraicGeometry.ConstantSliceModuleEncoding
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Transport of a constant slice presentation to internal modules
 

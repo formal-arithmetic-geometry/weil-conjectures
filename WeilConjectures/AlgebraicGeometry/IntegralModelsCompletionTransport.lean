@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import WeilConjectures.AlgebraicGeometry.IntegralModelsCompleteSectionPredicate
 import WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
+import Mathlib.CategoryTheory.ObjectProperty.Equivalence
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Complete objects in the internal integral coefficient presentation
 

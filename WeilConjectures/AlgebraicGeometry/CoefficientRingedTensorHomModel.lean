@@ -60,6 +60,11 @@ Source: Stacks 07A4, 08J9 (auxiliary; not a blueprint node). -/
 def tensor : D × D ⥤ D :=
   @MonoidalCategory.tensor D _ S.monoidal
 
+/-- Evaluation in the derived system category itself.
+Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+def evaluation (P Q : D) : S.tensor.obj (H.obj (op P, Q), P) ⟶ Q :=
+  (S.adjunction P).counit.app Q
+
 /-- The tensor-Hom transpose in the derived system category itself.
 Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
 def transpose (T P Q : D) : (S.tensor.obj (T, P) ⟶ Q) ≃ (T ⟶ H.obj (op P, Q)) :=

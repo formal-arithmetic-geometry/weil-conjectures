@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 public import WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtension
 import all WeilConjectures.AlgebraicGeometry.IntegralSectionCoefficientNaturality
+import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
 
 /-! # Pulling back a constant chart of the condensed coefficient ring
 

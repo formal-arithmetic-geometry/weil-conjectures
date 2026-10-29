@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
+public import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
+import all WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Transport of strict tensor cone towers
 Source: Stacks 06YP (auxiliary; not a blueprint node).

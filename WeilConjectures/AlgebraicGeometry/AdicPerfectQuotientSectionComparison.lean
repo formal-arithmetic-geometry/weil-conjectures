@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionModel
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionComparisonTensor
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Constant quotient sections and scalar transitions
 

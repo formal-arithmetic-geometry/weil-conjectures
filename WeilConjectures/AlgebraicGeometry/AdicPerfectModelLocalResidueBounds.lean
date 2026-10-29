@@ -10,6 +10,7 @@ import WeilConjectures.Algebra.Homology.FlatScalarRealizationFlat
 import all WeilConjectures.AlgebraicGeometry.AdicConstructibleTriangulated
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalScalarHomologyIso
+import Mathlib.Algebra.Module.Projective
 
 /-! # The residue interval on one perfect-model chart
 

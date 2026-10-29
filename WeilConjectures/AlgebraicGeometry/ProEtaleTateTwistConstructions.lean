@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
+public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
+import all WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
+import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Coefficient extension maps, the field colimit and signed Tate twists
 
@@ -114,6 +117,12 @@ private theorem spIntegersMap_spec {E F : PadicAlgCl.FiniteIntermediateField ℓ
   exact (spIntegersMap_existsUnique X ℓ h).exists.choose_spec
 
 attribute [local irreducible] spIntegersMap
+
+private theorem spEllReduction_isMonHom
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
+    IsMonHom (spEllReduction X ℓ E n) := by
+  dsimp only [spEllReduction]
+  infer_instance
 
 attribute [local instance] spEllReduction_isMonHom
 

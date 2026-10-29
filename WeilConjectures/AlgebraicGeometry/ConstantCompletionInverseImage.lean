@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Adjunction.Evaluation
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
@@ -69,6 +70,34 @@ def tres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (ℕᵒᵖ ⥤ Mod B) ⥤ (ℕᵒᵖ ⥤ Mod R) :=
   (Functor.whiskeringRight ℕᵒᵖ (Mod B) (Mod R)).obj (res φ)
 
+/-- Levelwise restriction is additive and exact, since evaluation computes these laws.
+Source: Stacks 0940 (auxiliary; not a blueprint node).
+Proof: evaluate at every tower index. Restriction is additive and exact on module sheaves
+by siteRestrictScalars_exact, and finite limits and colimits of functors are pointwise. -/
+theorem tres_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    (tres φ).Additive ∧ PreservesFiniteLimits (tres φ) ∧
+      PreservesFiniteColimits (tres φ) := by
+  have := (siteRestrictScalars_exact φ).1
+  have := (siteRestrictScalars_exact φ).2
+  change ((Functor.whiskeringRight ℕᵒᵖ (Mod B) (Mod R)).obj (res φ)).Additive ∧ _
+  dsimp only [tres, res]
+  refine ⟨inferInstance, ⟨fun K _ _ ↦ ?_⟩, ⟨fun K _ _ ↦ ?_⟩⟩ <;> infer_instance
+
+/-- The additive structure of the specified levelwise restriction.
+Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+instance tres_additive {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    (tres φ).Additive := (tres_exact φ).1
+
+/-- Finite limits for levelwise restriction.
+Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+instance tres_finiteLimits {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    PreservesFiniteLimits (tres φ) := (tres_exact φ).2.1
+
+/-- Finite colimits for levelwise restriction.
+Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+instance tres_finiteColimits {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    PreservesFiniteColimits (tres φ) := (tres_exact φ).2.2
+
 /-- Exact levelwise restriction induces restriction on the derived strict tower categories.
 Source: Stacks 0940 (auxiliary; not a blueprint node). -/
 def tdres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : TD B ⥤ TD R :=
@@ -78,9 +107,32 @@ def tdres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : TD B ⥤ TD R :=
   letI := (siteRestrictScalars_exact φ).2
   (tres φ).mapDerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+/-- Restricting before forming the strict quotient tower is additive.
+Source: Stacks 06YY (auxiliary; not a blueprint node).
+Proof: at every tower index the functor is scalar restriction followed by scalar
+extension and restriction. All three maps preserve sums of module homomorphisms.
+Equality after every evaluation is equality in the strict functor category. -/
+theorem restrictionReduction_additive (J : GrothendieckTopology C) (A : Type u)
+    [CommRing A] (I : Ideal A) :
+    (res (coefficientMap J A I) ⋙ reductionTower J A I false).Additive := by
+  have : (res (coefficientMap J A I)).Additive := inferInstance
+  constructor
+  intro M N f g
+  change (reductionTower J A I false).map
+    ((res (coefficientMap J A I)).map (f + g)) = _
+  rw [Functor.map_add]
+  exact Functor.map_add (reductionTower J A I false)
+
 attribute [instance] restrictionReduction_additive
+
+/-- Reducing and then restricting a completed-coefficient tower is additive.
+Source: Stacks 06YY (auxiliary; not a blueprint node).
+Proof: evaluate at every tower index. Scalar extension and both restrictions preserve
+addition of module maps, so their composite does as well. -/
+theorem reductionRestriction_additive (J : GrothendieckTopology C) (A : Type u)
+    [CommRing A] (I : Ideal A) :
+    (reductionTower J A I true ⋙ tres (coefficientMap J A I)).Additive := by
+  infer_instance
 
 attribute [instance] reductionRestriction_additive
 
@@ -180,10 +232,6 @@ private theorem change_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
 
 end ExactScalarExtension
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Forget a module sheaf to its underlying sheaf of sets.
 Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
 abbrev underlying (O : Sheaf J CommRingCat.{u}) : Mod O ⥤ Sheaf J (Type u) :=

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
+public import WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 public import WeilConjectures.AlgebraicGeometry.IntegralCompletedCoefficientTransport
 public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 public import WeilConjectures.AlgebraicGeometry.IntegralStratifiedPerfectModels
+import all WeilConjectures.AlgebraicGeometry.ContinuousScalarFinitePresentation
 import all WeilConjectures.AlgebraicGeometry.IntegralSectionRegularScalars
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Scalar realization under the integral section comparison -/
 

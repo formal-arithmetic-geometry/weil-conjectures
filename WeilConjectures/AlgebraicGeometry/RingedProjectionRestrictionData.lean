@@ -69,6 +69,11 @@ Source: Stacks 04IX (auxiliary; not a blueprint node). -/
 abbrev Mod (R : Sheaf J CommRingCat.{u + 1}) :=
   SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
+/-- The standard localization size for these module categories.
+Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+instance derived (R : Sheaf J CommRingCat.{u + 1}) : HasDerivedCategory (Mod R) :=
+  HasDerivedCategory.standard _
+
 /-- Standard localization on the slice site.
 Source: Stacks 05RU (auxiliary; not a blueprint node). -/
 instance derivedOver (R : Sheaf J CommRingCat.{u + 1}) (V : C) :
@@ -78,8 +83,6 @@ instance derivedOver (R : Sheaf J CommRingCat.{u + 1}) (V : C) :
 Source: Stacks 05RU (auxiliary; not a blueprint node). -/
 instance derivedOverModules (R : Sheaf J RingCat.{u + 1}) (V : C) :
     HasDerivedCategory (SheafOfModules.{u + 1} (R.over V)) := HasDerivedCategory.standard _
-
-attribute [instance_reducible, instance] TensorShifts.shifts
 
 /-- Proof data for the actual module operations associated to a continuous ringed site map.
 The only ring map is the displayed coefficient map. The adjunction, exact pullback and

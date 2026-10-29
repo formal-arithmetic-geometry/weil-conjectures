@@ -5,6 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
+import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Exact field tensor and cohomological bounds
 

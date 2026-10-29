@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralCompletedCoefficientTransport
-public import all WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
+public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
+import all WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
 import WeilConjectures.AlgebraicGeometry.IntegralSectionCoefficientNaturality
 import all WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
-public import all WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import WeilConjectures.Algebra.Homology.FlatScalarRestrictionKFlat
@@ -24,11 +24,15 @@ public import WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
+import all WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 import WeilConjectures.Algebra.Homology.AcyclicKFlatTensor
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Mathlib.Algebra.Module.Torsion.Basic
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Tensor vanishing for nilpotent quotient coefficients
 
@@ -45,6 +49,10 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Monoida
 
 namespace CategoryTheory
 namespace NilpotentCoefficientProof
+
+-- The tip's high-priority `hasSheafify_of_essentiallySmall` (Hom-types in a successor universe)
+-- fails hard on the universe constraint for these small sites; Mathlib's instance applies.
+attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 variable {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}
 

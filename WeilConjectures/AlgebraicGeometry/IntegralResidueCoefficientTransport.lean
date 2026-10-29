@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleConstructibleIso
 import all WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
 import WeilConjectures.AlgebraicGeometry.IntegralResidueModelComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 
 /-! # First residue under the normalized integral coefficient comparison
 

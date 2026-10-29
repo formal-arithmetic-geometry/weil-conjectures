@@ -9,6 +9,7 @@ import WeilConjectures.Algebra.Homology.AcyclicKFlatTensor
 import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.AdicResidueCoefficientSequence
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # Successive quotient vanishing
 

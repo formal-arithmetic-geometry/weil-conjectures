@@ -13,7 +13,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
-public import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantRealizationData
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantSheafReduction
@@ -26,6 +26,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.RingTheory.AdicCompletionNoetherian
 public import WeilConjectures.RingTheory.FiniteModuleComplete
 public import WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
 import all WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 import WeilConjectures.Algebra.Homology.RingedTensorComplexConstraints
@@ -35,6 +36,9 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.ResolvingRepresentativeWhiskering
 import WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
+public import Mathlib.Algebra.Homology.Functor
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Completed adic coefficient datum and its strict reduction tower
@@ -94,6 +98,11 @@ def adicDatumRing := adicLisseCompletedRing T d.ideal
 Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 abbrev adicDatumModules := completedConstantModules T (adicDatumRing T d)
 
+/-- Finite biproducts are the usual products in the abelian module category.
+Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance adicDatumFiniteBiproducts : HasFiniteBiproducts (adicDatumModules T d) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The original ring acts by its compatible residues in every finite quotient.
@@ -131,8 +140,6 @@ section ScalarChange
 
 variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Local pure tensors in the actual sheafified extension, transported by the
 specified object identification of the additive scalar-extension witness.
 Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -211,18 +218,7 @@ attribute [local irreducible] adicDatumRing adicLisseRingSystem
 attribute [local instance 20000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
-attribute [local instance 40000] adicDatumModulesAbelian
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [instance] adicDatumOrdinaryTower_additive
 
 section Balancing
 variable {R S B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
@@ -237,7 +233,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 end GenericKFlatTransport
 
-open SheafOfModules MonoidalCategory in
 end Balancing
 
 end AlgebraicGeometry.Scheme

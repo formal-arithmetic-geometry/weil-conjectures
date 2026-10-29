@@ -140,4 +140,18 @@ theorem finiteCoefficientScalarMap_locallyBijective :
       exact y.property.symm
   constructor <;> dsimp only [finiteCoefficientScalarMap] <;> infer_instance
 
+/-- Local injectivity needed for the associated module sheaf construction.
+Source: blueprint, `def-weil-pbc-proetale-modules`
+(blueprint: def-weil-pbc-proetale-modules). -/
+noncomputable instance finiteCoefficientScalarMap_isLocallyInjective :
+    Presheaf.IsLocallyInjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
+  (finiteCoefficientScalarMap_locallyBijective T Λ).1
+
+/-- Local surjectivity needed for the associated module sheaf construction.
+Source: blueprint, `def-weil-pbc-proetale-modules`
+(blueprint: def-weil-pbc-proetale-modules). -/
+noncomputable instance finiteCoefficientScalarMap_isLocallySurjective :
+    Presheaf.IsLocallySurjective (Scheme.ProEt.topology T) (finiteCoefficientScalarMap T Λ) :=
+  (finiteCoefficientScalarMap_locallyBijective T Λ).2
+
 end AlgebraicGeometry.ProEtale

@@ -221,9 +221,25 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 private instance : CommRing (Scalars A) := scalarRing A
+private def centerHom : Scalars A →+* CatCenter A where
+  toFun a :=
+    { app := fun X ↦ unitEndAction X a
+      naturality := fun _ _ f ↦ (unitEndAction_naturality f a).symm }
+  map_one' := by ext X; exact (unitEndAction X).map_one
+  map_mul' a b := by ext X; exact (unitEndAction X).map_mul a b
+  map_zero' := by ext X; exact (unitEndRingHom X).map_zero
+  map_add' a b := by ext X; exact (unitEndRingHom X).map_add a b
+private instance (priority := 2000) scalarLinear : Linear (Scalars A) A :=
+  Linear.ofRingMorphism (centerHom A)
 private theorem smul_eq {X Y : A} (a : Scalars A) (f : X ⟶ Y) :
     a • f = unitEndAction X a ≫ f := rfl
 variable [BraidedCategory A]
+omit [Preadditive A] [MonoidalPreadditive A] [BraidedCategory A] in
+private theorem action_tensor_right (X Y : A) (a : End (𝟙_ A)) :
+    X ◁ unitEndAction Y a = unitEndAction (X ⊗ Y) a := by
+  simp only [unitEndAction_apply, whiskerLeft_comp]
+  change (𝟙_ A ⟶ 𝟙_ A) at a
+  monoidal
 omit [Preadditive A] [MonoidalPreadditive A] in
 private theorem action_left (X : A) (a : End (𝟙_ A)) :
     unitEndAction X a = (λ_ X).inv ≫ a ▷ X ≫ (λ_ X).hom := by
@@ -232,6 +248,19 @@ private theorem action_left (X : A) (a : End (𝟙_ A)) :
   simpa only [unitEndAction_apply, Category.assoc, Iso.hom_inv_id_assoc,
     Iso.hom_inv_id, Category.comp_id, braiding_tensorUnit_left] using
     (braiding_naturality_left a X).symm
+omit [Preadditive A] [MonoidalPreadditive A] in
+private theorem action_tensor_left (X Y : A) (a : End (𝟙_ A)) :
+    unitEndAction X a ▷ Y = unitEndAction (X ⊗ Y) a := by
+  rw [action_left, action_left]
+  simp only [comp_whiskerRight]
+  change (𝟙_ A ⟶ 𝟙_ A) at a
+  monoidal
+private instance (priority := 2000) scalarMonoidal :
+    MonoidalLinear (Scalars A) A where
+  whiskerLeft_smul X _ _ a f := by
+    simp only [smul_eq, whiskerLeft_comp, action_tensor_right]
+  smul_whiskerRight a _ _ f X := by
+    simp only [smul_eq, comp_whiskerRight, action_tensor_left]
 end UnitScalar
 
 namespace UnitScalar
@@ -495,9 +524,7 @@ private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
   rfl
 
 private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  let h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
     h.2.2.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
@@ -543,6 +570,29 @@ private theorem reduction_zero (n : ℕ) :
     rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow]
     exact Ideal.mem_span_singleton_self _
   rw [h, zero_mul]
+
+private instance pointFiniteLimits : PreservesFiniteLimits pointUpperStar.{u} := by
+  have : AB5OfSize.{u, u + 1} Ab.{u + 1} :=
+    AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} _
+  dsimp [pointUpperStar, Functor.sheafPullbackConstruction.sheafPullback]
+  infer_instance
+
+private instance pullbackFiniteLimits (X : Scheme.{u}) :
+    PreservesFiniteLimits (pullback l E X) := by
+  have : PreservesFiniteLimits (upperStarFromPoint X) := by
+    dsimp [upperStarFromPoint]
+    infer_instance
+  dsimp [pullback]
+  infer_instance
+
+private instance pullbackFiniteColimits (X : Scheme.{u}) :
+    PreservesFiniteColimits (pullback l E X) := by
+  have : (upperStarFromPoint X).IsLeftAdjoint :=
+    (pointUpperStarLowerStarAdjunction.comp
+      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
+  have : PreservesFiniteColimits (upperStarFromPoint X) := by infer_instance
+  dsimp [pullback]
+  infer_instance
 
 private theorem pointResolution (n : ℕ) :
     (ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)

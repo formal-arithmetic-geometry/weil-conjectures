@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientScalarEquivalence
 import WeilConjectures.AlgebraicGeometry.NilpotentReductionLissity
 import all WeilConjectures.AlgebraicGeometry.NilpotentReductionStep
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Lissity reflected by a nilpotent surjection of constant coefficients
 

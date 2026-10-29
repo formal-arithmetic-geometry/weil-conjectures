@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.SfbCompletionRingComparison
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 import all WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Comparison of the completed coefficient complexes
 
@@ -28,6 +29,11 @@ private instance (priority := 10000) modelComparisonWEquals (X : Scheme.{u}) :
   let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} _
   exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
     u + 1, u + 2, u + 1} _
+
+private instance (priority := 10000) modelComparisonHasSheafify (X : Scheme.{u}) :
+    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} := by
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} _
+  exact hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
 
 attribute [-instance] SheafOfModules.instAbelian in
 private theorem modelCoefficientMap (X : Scheme.{u})

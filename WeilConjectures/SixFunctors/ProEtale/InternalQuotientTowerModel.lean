@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTransport
 import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
+public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv
 
 /-! # The transported strict positive quotient tower
 
@@ -37,6 +38,18 @@ Source: integral-models proof (1), Stacks 00YV and 099L.
       (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X) ⋙
     Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (scalarMap l E X) ⋙
       smallModules X (constantRing l E X)
+
+instance modules_additive : (modules l E X).Additive := by
+  unfold modules
+  infer_instance
+
+instance modules_preservesFiniteLimits : PreservesFiniteLimits (modules l E X) := by
+  unfold modules
+  infer_instance
+
+instance modules_preservesFiniteColimits : PreservesFiniteColimits (modules l E X) := by
+  unfold modules
+  infer_instance
 
 attribute [local semireducible] modules
 

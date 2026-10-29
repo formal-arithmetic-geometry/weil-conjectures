@@ -10,6 +10,16 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 public import WeilConjectures.CategoryTheory.SiteConstantModuleHom
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # Coefficient comparisons for local adic perfect lifting
 

@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.ClassicalContinuityMap
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonContinuity
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafification
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # Classical intrinsic coefficient module descent
 Source: blueprint classical sheaves of modules, essential-image paragraph.
 -/

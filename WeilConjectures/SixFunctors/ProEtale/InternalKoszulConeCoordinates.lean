@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PrincipalReductionConeCalculus
 public import WeilConjectures.SixFunctors.ProEtale.InternalQuotientTowerModel
 import WeilConjectures.SixFunctors.ProEtale.InternalUniformizerKoszulScalarSquare
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Singleton Koszul coordinates after exact coefficient transport
 

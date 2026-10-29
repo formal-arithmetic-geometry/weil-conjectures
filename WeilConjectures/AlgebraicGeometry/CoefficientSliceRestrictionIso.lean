@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.PointModelRestrictionModule
 import all WeilConjectures.AlgebraicGeometry.ConstantCoefficientChartPullback
 import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-! # Invariance of the coefficient slice model under internal restriction isomorphisms
 

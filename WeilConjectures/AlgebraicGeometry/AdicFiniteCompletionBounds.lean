@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.AdicFiniteCompletionTower
 import WeilConjectures.AlgebraicGeometry.AdicFiniteTopRoosEpi
 import WeilConjectures.AlgebraicGeometry.ProEtaleProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # AdicFiniteCompletionBounds
 -/

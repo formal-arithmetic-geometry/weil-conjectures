@@ -235,6 +235,18 @@ end AlgebraicGeometry.Scheme.AdicCoefficients
 
 namespace AlgebraicGeometry.Scheme
 
+/-- The quotient map between arbitrary positive powers, not just consecutive powers.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable def reductionQuotientMap {A : Type (t + 1)} [CommRing A] (I : Ideal A)
+    (b a : ℕ) (h : a ≤ b) : A ⧸ I ^ (b + 1) →+* A ⧸ I ^ (a + 1) :=
+  Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
+
+/-- The quotient coefficient sheaf, obtained from continuous component functions.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable abbrev reductionCoefficient (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (n : ℕ) :=
+  (AdicCoefficients.ringSystem T d.ideal d.quotientFinite).obj (op n)
+
 /-- The strict diagram of all positive quotient coefficient sheaves.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 noncomputable def reductionCoefficientSystem (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
@@ -247,6 +259,13 @@ Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -
 noncomputable def completedReductionCoefficient (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) : Sheaf (ProEt.topology T) CommRingCat.{t + 1} :=
   limit (reductionCoefficientSystem T d)
+
+/-- The n-th coordinate of the limit of quotient coefficient sheaves.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable def completedReductionProjection (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (n : ℕ) :
+    completedReductionCoefficient T d ⟶ reductionCoefficient T d n :=
+  limit.π (reductionCoefficientSystem T d) (op n)
 
 /-- The ring underlying a commutative coefficient sheaf on the small pro-etale site.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -271,6 +290,12 @@ Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -
 noncomputable abbrev reductionDerivedCategory (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   DerivedCategory (reductionModules T R)
+
+/-- Standard localization for modules over any coefficient ring sheaf B.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable instance reductionRingModulesHasDerivedCategory (T : Scheme.{t})
+    (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :
+    HasDerivedCategory (ringedSiteModules.{t + 1} B) := HasDerivedCategory.standard _
 
 /-- The existing scalar-extension specification, named without changing its predicate.
 The extractor uses the type of the existence proof and ignores that proof.
@@ -359,9 +384,34 @@ noncomputable def reductionRestrict (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   SheafOfModules.restrictScalars.{t + 1}
     ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ)
+@[instance]
+theorem reductionRestrict_preservesFiniteLimits (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    PreservesFiniteLimits (reductionRestrict T φ) := by
+  let F := SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T R)
+  have : PreservesFiniteLimits (reductionRestrict T φ ⋙ F) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T S)))
+  exact preservesFiniteLimits_of_reflects_of_preserves (reductionRestrict T φ) F
+@[instance]
+theorem reductionRestrict_preservesFiniteColimits (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    PreservesFiniteColimits (reductionRestrict T φ) := by
+  let F := SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T R)
+  have : PreservesFiniteColimits (reductionRestrict T φ ⋙ F) :=
+    inferInstanceAs (PreservesFiniteColimits
+      (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T S)))
+  exact preservesFiniteColimits_of_reflects_of_preserves (reductionRestrict T φ) F
 
 /-- Scalar restriction is additive on the unchanged underlying abelian sheaf.
 Source: Stacks 03DA (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance reductionRestrict_additive (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    (reductionRestrict T φ).Additive :=
+  inferInstanceAs (SheafOfModules.restrictScalars.{t + 1}
+    ((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ)).Additive
+
 private theorem reductionChange_obj_eq (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (M : reductionModules T R) :
@@ -423,7 +473,6 @@ universe uB vB wB uD vD wD
 
 attribute [local irreducible] Functor.mapHomotopyCategory
 attribute [local irreducible] Functor.mapHomotopyCategoryFactors
-attribute [local irreducible] completedReductionModuleTowerFunctor
 attribute [local irreducible] completedReductionCoefficient
 attribute [local irreducible] reductionCoefficientSystem AdicCoefficients.ringSystem
 
@@ -439,7 +488,6 @@ attribute [local instance] reductionModulesHasDerivedCategory
 attribute [local irreducible] reductionChange reductionDerivedChange
 attribute [local irreducible] Functor.mapHomotopyCategory
 attribute [local irreducible] Functor.mapHomotopyCategoryFactors
-attribute [local irreducible] completedReductionModuleTowerFunctor
 attribute [local irreducible] completedReductionCoefficient
 attribute [local irreducible] reductionCoefficientSystem AdicCoefficients.ringSystem
 
@@ -447,16 +495,37 @@ universe v w u' v' w'
 open CategoryTheory.Functor
 set_option backward.defeqAttrib.useBackward true
 
-attribute [local irreducible] completedReductionTower
 attribute [local irreducible] Functor.mapDerivedCategory
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
 attribute [local irreducible] Functor.mapDerivedCategoryFactorsh
 
-attribute [local semireducible] completedReductionModuleTowerFunctor
+/-- The quotient ring tower, indexed by the positive exponent n+1.
+Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable abbrev AdicCoefficientDatum.ringTower {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) :=
+  Functor.ofOpSequence (X := fun n ↦ CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
+    (fun n ↦ CommRingCat.ofHom (reductionQuotientMap d.ideal (n + 1) n (Nat.le_succ n)))
+
+/-- The finite quotient ring sheaf.
+Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable abbrev AdicCoefficientDatum.finiteRing {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) := reductionCoefficient T d n
 
 /-- The actual completed coefficient ring sheaf.
 Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 noncomputable abbrev AdicCoefficientDatum.completedRing {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) := completedReductionCoefficient T d
+
+/-- The specified coordinate of the completed coefficient sheaf.
+Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable abbrev AdicCoefficientDatum.projection {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) :=
+  completedReductionProjection T d n
+
+/-- Every finite quotient has exactly the finiteness certificate of the arithmetic datum.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+instance AdicCoefficientDatum.positiveQuotient_finite {A : Type (t + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (n : ℕ) : Finite (A ⧸ d.ideal ^ (n + 1)) :=
+  d.quotientFinite n
 
 end AlgebraicGeometry.Scheme

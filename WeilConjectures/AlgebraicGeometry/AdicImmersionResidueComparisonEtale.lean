@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueComparisonCo
 import WeilConjectures.CategoryTheory.ConstantInverseImageScalarNormalization
 import all WeilConjectures.CategoryTheory.RingedPullbackPresentationOnSites
 import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Residue comparisons for the specified completed immersion pullback
 

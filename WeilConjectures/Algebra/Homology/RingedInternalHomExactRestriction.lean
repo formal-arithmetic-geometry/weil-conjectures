@@ -173,9 +173,6 @@ theorem ringedSite_overMap_colimits
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R) f) := by
   exact ringedSite_pushforward_colimits (Sheaf.pushforwardOverMapIso _ f).inv
 
-set_option maxHeartbeats 400000 in
--- Descending the trifunctor comparison requires several large tensor instances.
-set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] derivedInternalHom homComplexFunctor
 
 set_option linter.style.haveILetI false in

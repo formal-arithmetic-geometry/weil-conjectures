@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingAdjunction
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The quotient tower obtained by scalar adjunction
 

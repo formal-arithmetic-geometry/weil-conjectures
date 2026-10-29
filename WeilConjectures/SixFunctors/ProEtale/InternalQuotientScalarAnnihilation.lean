@@ -129,6 +129,9 @@ private abbrev inclusion := SheafOfModules.forget
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) ⋙
     PresheafOfModules.restrictScalars (𝟙 _)
 
+@[reducible] private noncomputable instance inclusionLax : (inclusion O).LaxMonoidal :=
+  (PresheafOfModules.sheafificationAdjunction (𝟙 _)).rightAdjointLaxMonoidal
+
 private theorem inclusion_unit : Functor.LaxMonoidal.ε (inclusion O) =
     𝟙 (𝟙_ (PresheafOfModules.{u} (O.obj ⋙ forget₂ CommRingCat RingCat))) := by
   let adj := PresheafOfModules.sheafificationAdjunction
@@ -438,6 +441,10 @@ private def finiteScalarPoint (n : ℕ) :
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
     (IntegralModelsStacks.constantToContinuous (Padic.coefficientExtensionRing l E (n + 1)))
+
+private instance finiteScalarPoint_mon (n : ℕ) : IsMonHom (finiteScalarPoint l E n) := by
+  unfold finiteScalarPoint
+  infer_instance
 
 set_option linter.style.haveILetI false in
 private theorem finiteScalarPoint_square (n : ℕ) :

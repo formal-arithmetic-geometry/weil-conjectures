@@ -7,6 +7,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
@@ -51,5 +52,12 @@ private noncomputable def modelSheafEquivalence (X : Scheme.{u})
   (proEtaleSheafAdjunction f D).restrictFullyFaithful
     (modelSheafEquivalence Y D).fullyFaithfulFunctor
     (modelSheafEquivalence X D).fullyFaithfulFunctor (Iso.refl _) (Iso.refl _)
+
+/-- The ordinary localization at quasi-isomorphisms for modules over any ring sheaf.
+Source: Stacks, Tag 05RU (auxiliary; not a blueprint node). -/
+noncomputable instance proEtaleAllRingModules_hasDerivedCategory (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
+    HasDerivedCategory (ringedSiteModules.{u + 1} R) :=
+  HasDerivedCategory.standard _
 
 end AlgebraicGeometry.Scheme

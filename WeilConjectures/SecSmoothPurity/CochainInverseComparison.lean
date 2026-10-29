@@ -242,38 +242,6 @@ private theorem cochain_tensor_bilinear_universal
 end SheafOfModules.CochainScalarConstruction
 
 namespace SheafOfModules.CochainInversePairing
-open SheafOfModules.CochainScalarConstruction
-attribute [local irreducible] monoidalCategory
-attribute [local instance 2000] cochainModulesMonoidal
-set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
-  [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-end SheafOfModules.CochainInversePairing
-
-namespace SheafOfModules.CochainInversePairing
 open SheafOfModules.CochainGeometricConstruction SheafOfModules.GeometricConstruction
 open SheafOfModules.CochainScalarConstruction
 attribute [local irreducible] monoidalCategory
@@ -401,18 +369,6 @@ private theorem ringOperations :
 
 variable [PreservesFiniteLimits V]
 
-omit [PreservesFiniteLimits F] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-omit [PreservesFiniteLimits F] [PreservesFiniteLimits V] in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
-set_option backward.isDefEq.respectTransparency false in
-omit [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
-  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 attribute [local irreducible] CochainScalarConstruction.pure
 
 -- The tensor construction is already locally irreducible.

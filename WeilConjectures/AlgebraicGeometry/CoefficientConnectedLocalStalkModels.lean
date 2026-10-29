@@ -8,6 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 public import WeilConjectures.AlgebraicGeometry.CoefficientEtaleDerivedStalk
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import WeilConjectures.AlgebraicGeometry.CoefficientEtaleDerivedChartAtlas
+public import Mathlib.Topology.Connected.Basic
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Local models given by a specified geometric stalk on a connected component
 

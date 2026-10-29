@@ -351,6 +351,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
   [HasSheafify J AddCommGrpCat.{max u v}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
 
+/-- Reuse the existing coefficient-forgetful sheaf-composition instance.
+Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+instance flatConstantHasSheafCompose :
+    J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
+  inferInstance
+
 attribute [-instance] flatConstantHasSheafCompose
 attribute [local instance] flatConstantHasSheafCompose
 
@@ -367,12 +373,28 @@ instance flatConstantModulesAbelian :
 attribute [-instance] flatConstantModulesAbelian
 attribute [local instance] flatConstantModulesAbelian
 
+/-- Reuse ordinary strict inverse limits in the module-sheaf category.
+Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+instance flatConstantModulesLimits :
+    HasLimitsOfShape ℕᵒᵖ (SheafOfModules.{max u v}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) :=
+  inferInstance
+
 attribute [-instance] flatConstantModulesLimits
 attribute [local instance] flatConstantModulesLimits
 
 variable
   [HasDerivedCategory.{wO} (SheafOfModules.{max u v}
     (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O))]
+
+/-- Specialize the existing canonical scalar-extension model to the constant ring sheaf,
+using the standard source localization. No source localization is additional input.
+Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+noncomputable instance flatConstantSourceHasDerivedCategory :
+    HasDerivedCategory
+      (SheafOfModules (SheafOfModules.derivedChangeRingIndependentCoefficients J
+        (realizationRing J A))) :=
+  HasDerivedCategory.standard (realizationModules J A)
 
 /-- The recorded canonical extension model, at the standard source localization.
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/
@@ -411,6 +433,12 @@ instance flatConstantCochainMonoidalStruct :
 
 attribute [-instance] flatConstantCochainMonoidalStruct
 attribute [local instance] flatConstantCochainMonoidalStruct
+
+/-- Reuse the existing additivity witness for ordinary constant extension.
+Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+instance flatConstantExtensionAdditive (φ : realizationRing J A ⟶ O) :
+    (flatConstantExtension J A φ).Additive :=
+  inferInstance
 
 attribute [-instance] flatConstantExtensionAdditive
 attribute [local instance] flatConstantExtensionAdditive
@@ -476,6 +504,11 @@ namespace FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private abbrev R :=
+  SheafOfModules.derivedChangeRingIndependentCoefficients J (realizationRing J A)
+
+private abbrev M := (commutativeSiteConstantModuleFunctor J A).obj (ModuleCat.of A A)
 
 private def linearUnit :
     (siteConstantModulePresheafGeneral (C := C) A).obj (ModuleCat.of A A) ⟶
@@ -603,9 +636,6 @@ private def scalarUnitIso :
   exact F.mapIso (scalarUnitPresheafIso J A φ ≪≫ e) ≪≫
     (asIso adj.counit).app (SheafOfModules.unit S)
 
-omit [EssentiallySmall.{max u v} C]
-  [HasDerivedCategory.{wO} (SheafOfModules.{max u v}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients J O))] in
 private def coefficientIso :
     (flatConstantExtension J A φ).obj (ModuleCat.of A A) ≅
       SheafOfModules.unit
@@ -614,9 +644,6 @@ private def coefficientIso :
     eqToIso ((flatConstantExtensionModel J A φ).obj_eq (SheafOfModules.unit (R J A))) ≪≫
       scalarUnitIso J A φ
 
-omit [EssentiallySmall.{max u v} C]
-  [HasDerivedCategory.{wO} (SheafOfModules.{max u v}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients J O))] in
 end FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false in

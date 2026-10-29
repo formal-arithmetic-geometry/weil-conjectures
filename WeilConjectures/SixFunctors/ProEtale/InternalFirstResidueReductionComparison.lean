@@ -126,6 +126,12 @@ private def firstResidueRestrictionComp
 
 attribute [local irreducible] firstResidueRestrictionComp
 
+private def firstResidueComposeSquare
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (F : A ⥤ B) (G : B ⥤ C) (H : C ⥤ D) (R : A ⥤ C) (T : A ⥤ D)
+    (c : F ⋙ G ≅ R) (d : R ⋙ H ≅ T) : F ⋙ G ⋙ H ≅ T :=
+  (Functor.associator F G H).symm ≪≫ Functor.isoWhiskerRight c H ≪≫ d
+
 /-- Two exact restrictions followed by residue extension compute the same square. -/
 private theorem firstResidueTwoRestrictionSquare
     (X : Scheme.{u})

@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonData
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 
 /-! # Constant scalars and comparison commute with scheme inverse image
 Source: Stacks Project, Tags 099Y, 099R and 03CY.

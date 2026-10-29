@@ -41,6 +41,11 @@ universe uC vC r v u' v' w'
 
 open scoped BigOperators
 
+private theorem complexNatProducts
+    {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A] :
+    HasLimitsOfShape (Discrete ℕ) (CochainComplex A ℤ) := by
+  infer_instance
+
 private theorem complexNatProduct
     {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
     (K : ℕ → CochainComplex A ℤ) :

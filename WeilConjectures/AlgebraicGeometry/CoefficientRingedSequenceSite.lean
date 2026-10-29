@@ -112,7 +112,148 @@ def coefficientSequenceTopology {C : Type c} [Category.{v} C]
   transitive' := fun {_ _} h R hh ↦
     (coefficientSequenceTopologyAxioms J).2.2 h R (fun {_ _} hf ↦ hh hf)
 
+set_option backward.defeqAttrib.useBackward true in
+private theorem sequenceInclusion_continuous {C : Type c} [Category.{v} C]
+    (J : GrothendieckTopology C) (n : ℕ) :
+    (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
+  apply Functor.isContinuous_of_coverPreserving
+  · constructor
+    intro G Z T x hx Y₁ Y₂ X f₁ f₂ g₁ g₂ hg₁ hg₂ he
+    have h := hx f₁.2 f₂.2 hg₁ hg₂ (congrArg (fun f ↦ f.2) he)
+    have h' := congrArg (G.obj.map (Prod.mkHom f₁.1 (𝟙 X.2)).op) h
+    change G.obj.map (Prod.mkHom f₁.1 (𝟙 X.2)).op
+      (G.obj.map (Prod.mkHom (𝟙 n) f₁.2).op (x g₁ hg₁)) =
+        G.obj.map (Prod.mkHom f₁.1 (𝟙 X.2)).op
+          (G.obj.map (Prod.mkHom (𝟙 n) f₂.2).op (x g₂ hg₂)) at h'
+    have he₁ : Prod.mkHom f₁.1 (𝟙 X.2) ≫ Prod.mkHom (𝟙 n) f₁.2 = f₁ := by
+      ext <;> simp
+    have he₂ : Prod.mkHom f₁.1 (𝟙 X.2) ≫ Prod.mkHom (𝟙 n) f₂.2 = f₂ := by
+      ext
+      · exact Subsingleton.elim _ _
+      · simp
+    have hp₁ : G.obj.map f₁.op (x g₁ hg₁) =
+        G.obj.map (Prod.mkHom f₁.1 (𝟙 X.2)).op
+          (G.obj.map (Prod.mkHom (𝟙 n) f₁.2).op (x g₁ hg₁)) := by
+      conv_lhs => rw [← he₁, op_comp, G.obj.map_comp]
+      rfl
+    have hp₂ : G.obj.map f₂.op (x g₂ hg₂) =
+        G.obj.map (Prod.mkHom f₁.1 (𝟙 X.2)).op
+          (G.obj.map (Prod.mkHom (𝟙 n) f₂.2).op (x g₂ hg₂)) := by
+      conv_lhs => rw [← he₂, op_comp, G.obj.map_comp]
+      rfl
+    exact hp₁.trans (h'.trans hp₂.symm)
+  · constructor
+    intro X S hS
+    change (S.functorPushforward (Prod.sectR n C)).functorPullback
+      (Prod.sectR n C) ∈ J X
+    exact J.superset_covering
+      (fun _ _ hf ↦ Sieve.image_mem_functorPushforward (Prod.sectR n C) S hf) hS
+
+private theorem diagrams_isGrothendieckAbelian
+    (A : Type c) [Category.{u} A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+    (D : Type u) [SmallCategory D] : IsGrothendieckAbelian.{u} (D ⥤ A) := by
+  let G := separator A
+  have hG := isSeparator_separator A
+  have hS : ObjectProperty.IsSeparating
+      (.ofObj fun j : D ↦ (evaluationLeftAdjoint A j).obj G) := by
+    intro F F' f g hfg
+    apply NatTrans.ext
+    funext j
+    apply hG.def
+    intro a
+    let adj := evaluationAdjunctionRight A j
+    apply (adj.homEquiv G F').symm.injective
+    have h := hfg _ (ObjectProperty.ofObj_apply _ j) ((adj.homEquiv G F).symm a)
+    exact (adj.homEquiv_naturality_right_symm a f).trans
+      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
+  let : HasSeparator (D ⥤ A) := ⟨_, hS.isSeparator_coproduct⟩
+  let : HasFilteredColimitsOfSize.{u, u} (D ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
+  let : AB5OfSize.{u, u} (D ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
+  exact {}
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
+
+/-- The unchanged sequence site fits in the coefficient universe.
+Source: the size convention, Stacks 0941
+(auxiliary; not a blueprint node). -/
+noncomputable instance (priority := low) coefficientSequenceEssentiallySmall :
+    EssentiallySmall.{max u (t + 1)} (ℕ × W.ProEt) := essentiallySmallSelf _
+
+/-- The standard localization at each finite coefficient ring.
+Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+noncomputable instance coefficientFiniteHasDerived (n : ℕ) :
+    HasDerivedCategory (SheafOfModules.{max u (t+1)}
+      ((sheafCompose (Scheme.ProEt.topology W)
+        (forget₂ CommRingCat RingCat)).obj (integralCoefficientCommRingSheaf l E W n))) :=
+  HasDerivedCategory.standard _
+
+/-- The vertical inclusion is continuous, so restriction is coefficient evaluation.
+Source: Stacks 0941 (auxiliary; not a blueprint node).
+Proof: a sequence sheaf restricts to a sheaf on every vertical slice, by the defining
+covering condition. The product-site sheaf condition checked above applies to set
+sheaves as well as ring sheaves; this is exactly continuity. -/
+theorem coefficientSequenceEvaluationContinuous (n : ℕ) :
+    (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
+      (coefficientSequenceTopology (Scheme.ProEt.topology W)) := by
+  exact sequenceInclusion_continuous (Scheme.ProEt.topology W) n
+
+/-- The canonical continuity structure on evaluation.
+Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+noncomputable instance coefficientSequenceEvaluationContinuousInstance (n : ℕ) :
+    (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
+      (coefficientSequenceTopology (Scheme.ProEt.topology W)) :=
+  coefficientSequenceEvaluationContinuous W n
+
+/-- Constant-coefficient towers have simultaneous K-injective resolutions.
+Source: Stacks 079P and 0941
+(auxiliary; not a blueprint node).
+Proof: identify towers with modules over the constant ring on the sequence site.
+The vertical sheaf condition gives this equivalence sectionwise. Apply the
+Grothendieck module-sheaf theorem and transport functorial K-injective resolutions
+through the exact equivalence. -/
+theorem coefficientConstantTowers_haveKInjectives :
+    Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) := by
+  let A := scalarReductionSource l E W
+  let : IsGrothendieckAbelian.{max u (t + 1)} A :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t+1, t, u}
+      (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)).1
+  let : IsGrothendieckAbelian.{max u (t + 1)} (ℕᵒᵖ ⥤ A) := by
+    have := diagrams_isGrothendieckAbelian A (AsSmall.{max u (t + 1)} ℕᵒᵖ)
+    exact IsGrothendieckAbelian.of_equivalence
+      (Equivalence.congrLeft (AsSmall.equiv (C := ℕᵒᵖ)).symm)
+  infer_instance
+
+/-- The simultaneous resolution instance for the actual constant-coefficient towers.
+Source: Stacks 079P and 0941
+(auxiliary; not a blueprint node). -/
+noncomputable instance coefficientConstantTowersKInjectives :
+    Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
+  coefficientConstantTowers_haveKInjectives l E W
+
+/-- The standard unbounded localization of constant coefficient towers.
+Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+noncomputable instance coefficientConstantTowerDerived :
+    HasDerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
+  HasDerivedCategory.standard _
+
+/-- Inverse limit is additive.
+Source: Stacks 0941 (auxiliary; not a blueprint node).
+Proof: its limit projection at every level sends a sum of tower maps to the sum
+of the corresponding module maps. The projections jointly determine the limit map. -/
+theorem coefficientConstantTowerLimit_additive :
+    (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive := by
+  constructor
+  intro M N f g
+  apply limit.hom_ext
+  intro n
+  simp only [lim_map, limMap_π, Preadditive.add_comp, NatTrans.app_add,
+    Preadditive.comp_add]
+
+/-- The additive structure on the ordinary inverse-limit functor.
+Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+noncomputable instance coefficientConstantTowerLimitAdditive :
+    (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive :=
+  coefficientConstantTowerLimit_additive l E W
 
 end WeilConjectures

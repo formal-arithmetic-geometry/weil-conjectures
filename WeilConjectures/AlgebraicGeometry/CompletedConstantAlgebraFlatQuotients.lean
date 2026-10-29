@@ -28,6 +28,9 @@ import WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # Flatness and quotients of a completed constant algebra
 
@@ -596,7 +599,7 @@ attribute [local irreducible] scalarTensorSectionIso
 private noncomputable def scalarPresheafFunctor (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : R ⟶ S) :
     SheafOfModules.{u + 1} ((adicLisseForget T).obj R) ⥤
-      PresheafOfModules.{u + 1} ((adicLisseForget T).obj S).obj where
+      _root_.PresheafOfModules.{u + 1} ((adicLisseForget T).obj S).obj where
   obj := SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c
   map f :=
     { app := fun U ↦ (ModuleCat.extendScalars (c.hom.app U).hom).map (f.val.app U)
@@ -753,7 +756,7 @@ private theorem quotient_isIso (T : Scheme.{u}) {A : Type (u + 1)}
             ((adicLisseConstantUnit T (A ⧸ I ^ (n + 1))).app U x)) : IsIso r := by
   classical
   let Q := A ⧸ I ^ (n + 1)
-  let P : PresheafOfModules.{u + 1}
+  let P : _root_.PresheafOfModules.{u + 1}
       ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
     (siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
       PresheafOfModules.pushforward₀

@@ -73,6 +73,7 @@ import WeilConjectures.CategoryTheory.StrictRoosDerivation
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Completeness under normalized integral coefficient transport
 

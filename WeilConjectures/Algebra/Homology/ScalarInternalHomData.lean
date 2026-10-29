@@ -202,6 +202,4 @@ variable {J} (M : ScalarHomModels.{c, v, r, w} J)
 attribute [local irreducible] scalarPairComplexComparison
   coefficientTotalTensor CoefficientTensorModels.iso
 
-attribute [local irreducible] ScalarHomTensorNormalization
-
 end CategoryTheory

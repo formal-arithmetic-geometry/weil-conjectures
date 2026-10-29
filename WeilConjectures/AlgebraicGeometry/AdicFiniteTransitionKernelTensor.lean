@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientLocalModelsComparison
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+public import Mathlib.Algebra.Module.Torsion.Basic
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-! # The ordinary kernel of consecutive flat coefficient reductions
 
@@ -23,6 +26,12 @@ universe w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.ConstantCompletion
 open Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme
+
+@[instance_reducible, no_expose]
+private def adicKernelSectionModule {C : Type w} [SmallCategory C]
+    {T : GrothendieckTopology C} (R : Sheaf T CommRingCat.{w})
+    (M : Mod R) (U : Cᵒᵖ) : Module (R.obj.obj U) (M.val.obj U) :=
+  (M.val.obj U).isModule
 
 attribute [local instance 10000] adicKernelSectionModule
 

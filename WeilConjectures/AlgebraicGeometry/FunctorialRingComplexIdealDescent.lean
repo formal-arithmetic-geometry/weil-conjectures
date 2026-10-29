@@ -38,6 +38,10 @@ private instance commRingForgetHasSheafCompose
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
 
+private theorem commRingToTypeCompose
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
+    J.HasSheafCompose (forget CommRingCat.{u}) := inferInstance
+
 private theorem addCommGrpToTypeCompose
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget AddCommGrpCat.{u}) := inferInstance
@@ -57,6 +61,10 @@ private abbrev modulePreadditive
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) : Preadditive (SheafOfModules.{u} R) :=
   SheafOfModules.instPreadditive R
+
+private abbrev presheafModulePreadditive
+    {C : Type u} [SmallCategory C] (R : Cᵒᵖ ⥤ RingCat.{u}) :
+    Preadditive (PresheafOfModules.{u} R) := PresheafOfModules.instPreadditive
 
 private abbrev moduleAddCommGroup
     {R : Type u} [Ring R] (M : ModuleCat.{u} R) : AddCommGroup M :=

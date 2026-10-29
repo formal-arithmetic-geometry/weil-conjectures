@@ -10,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonConstruction
 import WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
 import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Reflection of one coefficient-model tensor test
 Source: Stacks Project, Tag 07A4, and blueprint finite-Tor comparison.

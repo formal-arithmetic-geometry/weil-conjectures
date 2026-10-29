@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueCompletionModel
 import WeilConjectures.AlgebraicGeometry.AdicResidueQuotientUnitUniversal
 import all WeilConjectures.AlgebraicGeometry.CompletionFiniteReduction
 import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # The quotient Roos cone of an augmented Cech completion
 

@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import all WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
+public import WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import WeilConjectures.Topology.ContinuousMapCondensedRing
+import all WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 import all WeilConjectures.AlgebraicGeometry.IntegralScalarContractive
 import all WeilConjectures.AlgebraicGeometry.PointLanAffineEvaluation
 

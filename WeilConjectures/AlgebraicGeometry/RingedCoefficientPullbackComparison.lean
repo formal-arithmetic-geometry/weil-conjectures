@@ -108,10 +108,6 @@ private theorem imagePair_snd [PreservesFiniteLimits uInv]
   rw [← prodComparison_snd, IsIso.inv_hom_id_assoc]
   exact SheafOfModules.sectionPair_snd _ _ _ _ _
 
-attribute [local irreducible] restrictionMap restrictionIso
-
-attribute [local irreducible] leftFlatComputation rightFlatComputation
-
 end SheafOfModules.RingedCoefficientProjection
 
 end

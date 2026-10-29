@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ConstantFieldFlat
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Tensor bounds for arbitrary representatives over a constant field sheaf
 

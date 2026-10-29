@@ -5,13 +5,21 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionFinitePull
-public import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionFinitePull
+public import WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionFinitePull
+import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
 import all WeilConjectures.AlgebraicGeometry.CompletedPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingAdjunction
 import WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 /-! # Canonical scalar maps for finite adic reductions
 
 Source: Stacks Project, proetale.tex, Tag 09C2, with Tag 09AL for compatible etale origins

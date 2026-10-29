@@ -6,14 +6,24 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
 public import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
-public import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
-public import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+public import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
+public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersFinite
+import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
+import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
 import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
 import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 
 set_option linter.privateModule false
 

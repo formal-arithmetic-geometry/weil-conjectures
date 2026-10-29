@@ -6,6 +6,12 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+import Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+import Mathlib.Topology.ContinuousMap.Algebra
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # The comparison counit on a constant etale chart
 

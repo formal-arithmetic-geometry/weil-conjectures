@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import WeilConjectures.Algebra.Homology.RingedKFlatSingleTensorComparison
 import all WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The graded coefficient filtration triangle
 

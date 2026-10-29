@@ -27,6 +27,8 @@ public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Constant module adjunction on a slice and the unit identity for mates
 

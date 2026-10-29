@@ -22,6 +22,13 @@ private def sectionAlgebra (J : GrothendieckTopology C) (R : Type u)
 
 attribute [local instance] sectionAlgebra
 
+@[instance_reducible]
+private def quotientModule (J : GrothendieckTopology C) (A : Type u) [CommRing A]
+    (I : Ideal A) (n : ℕ) (U : Cᵒᵖ) :
+    Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U) :=
+  inferInstanceAs (Module (A ⧸ I ^ (n + 1))
+    ((constant J (A ⧸ I ^ (n + 1))).obj.obj U))
+
 attribute [local instance] quotientModule
 
 private def projectionCone (J : GrothendieckTopology C) (A : Type u) [CommRing A]
