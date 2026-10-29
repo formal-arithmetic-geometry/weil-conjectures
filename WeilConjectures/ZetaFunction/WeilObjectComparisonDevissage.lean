@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.Statement
+public import WeilConjectures.TraceFormula.WeilTraceSplitTriangle
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
@@ -118,42 +119,6 @@ namespace WeilComplex
 
 open ProEtale.CondensedRing
 
-section Stubs
--- TEMPORARY stubs, replaced by the sub-agents' lemmas
-variable {Y : Over (Spec (.of k₀))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  [IsSeparated Y.hom] (e : Y ≅ Y)
-
-theorem stubA_add (A C : WeilBoundedConstructible l e.hom) :
-    ∃ B : WeilBoundedConstructible l e.hom,
-      (∀ (n : ℕ) (x : Spec (.of (AlgebraicClosure k₀)) ⟶ Y.left)
-        (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k₀).pow (n + 1)).hom ≫ x),
-        weilStalkTraceAlternatingSum l (n + 1) x hx B =
-          weilStalkTraceAlternatingSum l (n + 1) x hx A +
-            weilStalkTraceAlternatingSum l (n + 1) x hx C) ∧
-      ∀ n : ℕ,
-        weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
-            (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj B) =
-          weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
-              (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj A) +
-            weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
-              (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj C) :=
-  sorry
-
-theorem stubA_neg (A : WeilBoundedConstructible l e.hom) :
-    ∃ C : WeilBoundedConstructible l e.hom,
-      (∀ (n : ℕ) (x : Spec (.of (AlgebraicClosure k₀)) ⟶ Y.left)
-        (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k₀).pow (n + 1)).hom ≫ x),
-        weilStalkTraceAlternatingSum l (n + 1) x hx C =
-          -weilStalkTraceAlternatingSum l (n + 1) x hx A) ∧
-      ∀ n : ℕ,
-        weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
-            (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj C) =
-          -weilStalkTraceAlternatingSum l (n + 1) (specAlgebraicClosure k₀)
-              (specAlgebraicClosure_comp_pow (n + 1)) ((weilCompactSupportCohomology l e).obj A) :=
-  sorry
-
-end Stubs
-
 variable {ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l}
 
 namespace HasWeilObjectComparison
@@ -165,20 +130,23 @@ theorem of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (hK : HasWeilObjectCom
   exact ⟨K', fun n ↦ (hglob n).trans (finsum_trace_compactlySupportedCohomology_congr e (n + 1)),
     fun n y ↦ (hloc n y).trans (traceFunction_eq_of_iso e (n + 1) y)⟩
 
-/-- The comparison for `K` gives the comparison for `K[1]`... for every shift `K[a]`: the traces
-of `K[a]` are those of `K` multiplied by `(-1)ᵃ`, which are those of `K'` or of a Weil object with
-the negated traces. -/
+/-- The comparison for `K` gives the comparison for every shift `K[a]`: the traces of `K[a]` are
+those of `K` multiplied by `(-1)ᵃ`, which are those of `K'` or of a Weil object with the negated
+traces. -/
 theorem shift {K : WeilComplex k₀ l X} (hK : HasWeilObjectComparison ι K) (a : ℤ) :
     HasWeilObjectComparison ι (K⟦a⟧) := by
   obtain ⟨K', hglob, hloc⟩ := hK
   rcases Int.even_or_odd a with ha | ha
   · refine ⟨K', fun n ↦ ?_, fun n y ↦ ?_⟩
-    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hglob]
+    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_even a ha, Units.val_one,
+        one_smul, hglob]
     · rw [traceFunction_shift, Int.negOnePow_even a ha, Units.val_one, one_smul, hloc]
-  · obtain ⟨C, hCloc, hCglob⟩ := stubA_neg (Iso.refl (overSpec (k₀ := k₀) X)) K'
+  · obtain ⟨C, hCloc, hCglob⟩ :=
+      WeilBoundedConstructible.exists_weilStalkTraceAlternatingSum_eq_neg l
+        (Iso.refl (overSpec (k₀ := k₀) X)) K'
     refine ⟨C, fun n ↦ ?_, fun n y ↦ ?_⟩
-    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one, neg_smul,
-        one_smul, hCglob, map_neg, hglob]
+    · rw [finsum_trace_compactlySupportedCohomology_shift, Int.negOnePow_odd a ha, Units.val_neg,
+        Units.val_one, neg_smul, one_smul, hCglob, map_neg, hglob]
     · rw [traceFunction_shift, Int.negOnePow_odd a ha, Units.val_neg, Units.val_one,
         neg_smul, one_smul, hCloc, map_neg, hloc]
 
@@ -190,9 +158,12 @@ theorem of_distTriang (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTria
     HasWeilObjectComparison ι T.obj₂ := by
   obtain ⟨K₁, hglob₁, hloc₁⟩ := h₁
   obtain ⟨K₃, hglob₃, hloc₃⟩ := h₃
-  obtain ⟨B, hBloc, hBglob⟩ := stubA_add (Iso.refl (overSpec (k₀ := k₀) X)) K₁ K₃
+  obtain ⟨B, hBloc, hBglob⟩ :=
+    WeilBoundedConstructible.exists_weilStalkTraceAlternatingSum_eq_add l
+      (Iso.refl (overSpec (k₀ := k₀) X)) K₁ K₃
   refine ⟨B, fun n ↦ ?_, fun n y ↦ ?_⟩
-  · rw [finsum_trace_compactlySupportedCohomology_eq_add_of_distTriang T hT, hBglob, map_add, hglob₁, hglob₃]
+  · rw [finsum_trace_compactlySupportedCohomology_eq_add_of_distTriang T hT, hBglob, map_add,
+      hglob₁, hglob₃]
   · rw [traceFunction_eq_add_of_distTriang T hT, hBloc, map_add, hloc₁, hloc₃]
 
 end HasWeilObjectComparison
