@@ -101,17 +101,18 @@ lemma exists_sliceTrait_genericField_hom :
   exact exists_comp_eq_algebraMap_algebraicClosure_fractionRing _ a₁ ha₁ halg _
     (injective_sliceTraitStructureMap b₁ hb₁)
 
+variable [IsStrictlyHenselianLocalRing R₁]
+
 include ha₁ halg hb₁ in
 /-- **The strict localization of `𝔸¹_{S₁}` at the generic point of its special fibre** as a slice
 trait over `S₁`: `R` the strict henselization at `sliceTraitPoint b₁`, `Ω' = (Frac R)^alg`, and
 `κ' = κ₁(x)^alg` with the evaluation at the geometric point. -/
-theorem nonempty_sliceTrait [IsStrictlyHenselianLocalRing R₁] : Nonempty (SliceTrait a₁ b₁) := by
-  have := isDomain_strictHenselization_sliceTraitPoint b₁ hb₁
-  have := isDiscreteValuationRing_strictHenselization_sliceTraitPoint b₁ hb₁
-  have := isLocalHom_sliceTraitStructureMap b₁ hb₁
-  have := isStrictlyHenselianLocalRing_strictHenselization' (sliceTraitPoint b₁)
-  obtain ⟨ω, hω⟩ := exists_sliceTrait_genericField_hom a₁ ha₁ halg b₁ hb₁
-  exact ⟨{
+noncomputable def sliceTraitOfStrictLocalization : SliceTrait a₁ b₁ :=
+  haveI := isDomain_strictHenselization_sliceTraitPoint b₁ hb₁
+  haveI := isDiscreteValuationRing_strictHenselization_sliceTraitPoint b₁ hb₁
+  haveI := isLocalHom_sliceTraitStructureMap b₁ hb₁
+  haveI := isStrictlyHenselianLocalRing_strictHenselization' (sliceTraitPoint b₁)
+  {
     R := strictHenselization (sliceTraitPoint b₁)
     toAffineLine := strictLocalizationToBase (sliceTraitPoint b₁)
     weaklyEtale := inferInstance
@@ -124,12 +125,44 @@ theorem nonempty_sliceTrait [IsStrictlyHenselianLocalRing R₁] : Nonempty (Slic
     a := algebraMap _ _
     injective_a := injective_algebraMap_algebraicClosure_fractionRing _
     isAlgebraic_a := isAlgebraic_algebraicClosure_fractionRing _
-    ωS := ω
-    ωS_comp := hω
+    ωS := (exists_sliceTrait_genericField_hom a₁ ha₁ halg b₁ hb₁).choose
+    ωS_comp := (exists_sliceTrait_genericField_hom a₁ ha₁ halg b₁ hb₁).choose_spec
     κ := traitSliceField κ₁
     b := (strictHenselizationEval (sliceTraitPoint b₁)).hom
     ker_b := maximalIdeal_strictHenselization.symm
     κS := algebraMap κ₁ (traitSliceField κ₁)
-    κS_comp := (strictHenselizationEval_comp_sliceTraitStructureMap b₁).symm }⟩
+    κS_comp := (strictHenselizationEval_comp_sliceTraitStructureMap b₁).symm }
+
+include ha₁ halg hb₁ in
+/-- **The strict localization of `𝔸¹_{S₁}` at the generic point of its special fibre is a slice
+trait** (EGA IV₄, 18.8; SGA 4½, [Th. finitude], 3.3). -/
+theorem nonempty_sliceTrait : Nonempty (SliceTrait a₁ b₁) :=
+  ⟨sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁⟩
+
+section Simp
+
+variable {a₁ b₁}
+
+lemma sliceTraitOfStrictLocalization_R :
+    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).R =
+      strictHenselization (sliceTraitPoint b₁) :=
+  rfl
+
+lemma sliceTraitOfStrictLocalization_toAffineLine :
+    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).toAffineLine =
+      strictLocalizationToBase (sliceTraitPoint b₁) :=
+  rfl
+
+lemma sliceTraitOfStrictLocalization_φ :
+    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).φ =
+      sliceTraitStructureMap b₁ :=
+  rfl
+
+lemma sliceTraitOfStrictLocalization_b :
+    (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg hb₁).b =
+      (strictHenselizationEval (sliceTraitPoint b₁)).hom :=
+  rfl
+
+end Simp
 
 end AlgebraicGeometry
