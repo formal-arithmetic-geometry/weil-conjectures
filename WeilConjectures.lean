@@ -13709,6 +13709,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriekPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ModPowReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
