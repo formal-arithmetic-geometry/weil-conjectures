@@ -30,6 +30,9 @@ the unit of a finite Galois covering is the normalized trace (`CategoryTheory.eq
 
 @[expose] public section
 
+-- several lemmas do not need all the instances of the section variables
+set_option linter.unusedSectionVars false
+
 universe u
 
 open CategoryTheory Category Limits
@@ -40,7 +43,7 @@ namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
 
-variable {X : Scheme.{u}} (T : GaloisTower X)
+variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : GaloisTower ginf)
   (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 omit [IsCommMonObj Λ] in
@@ -71,8 +74,8 @@ noncomputable def levelUnit (j : T.J) : 𝟭 _ ⟶ T.levelFunctor Λ j :=
   (CondensedRing.upperStarLowerStarAdjunction Λ (T.g j)).unit
 
 /-- The unit of `g_∞^* ⊣ g_{∞*}`. -/
-noncomputable def infUnit : 𝟭 _ ⟶ T.infFunctor Λ :=
-  (CondensedRing.upperStarLowerStarAdjunction Λ T.ginf).unit
+noncomputable def infUnit (ginf : Yinf ⟶ X) : 𝟭 _ ⟶ infFunctor Λ ginf :=
+  (CondensedRing.upperStarLowerStarAdjunction Λ ginf).unit
 
 instance (j : T.J)
     (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
@@ -105,7 +108,7 @@ lemma levelUnit_app_comp_transport {j j' : T.J} (h : j ≤ j') :
   rw [← NatTrans.comp_app_assoc, upperStarLowerStarAdjunction_unit_comp_upperStarLowerStarHom]
 
 lemma levelUnit_app_comp_infTransport (j : T.J) :
-    (T.levelUnit Λ j).app M ≫ T.infTransport Λ M j = (T.infUnit Λ).app M := by
+    (T.levelUnit Λ j).app M ≫ T.infTransport Λ M j = (infUnit Λ ginf).app M := by
   apply (Mod.forget _).map_injective
   rw [Functor.map_comp, forget_map_infTransport]
   unfold levelUnit infUnit
@@ -181,7 +184,7 @@ noncomputable def normTraceCocone : Cocone (T.moduleDiagram Λ M) where
 
 /-- **The normalized trace of a Galois tower** `τ : g_{∞*} g_∞^* M ⟶ M`, glued from the normalized
 finite traces along the colimit `g_{∞*} g_∞^* M = colim_j g_{j*} g_j^* M`. -/
-noncomputable def trace (hc : IsColimit (T.moduleCocone Λ M)) : (T.infFunctor Λ).obj M ⟶ M :=
+noncomputable def trace (hc : IsColimit (T.moduleCocone Λ M)) : (infFunctor Λ ginf).obj M ⟶ M :=
   hc.desc (T.normTraceCocone Λ M hd)
 
 lemma infTransport_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) (j : T.J) :
@@ -190,7 +193,7 @@ lemma infTransport_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) (j : T.J) :
 
 /-- **The normalized trace is a retraction of the unit.** -/
 lemma unit_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) :
-    (T.infUnit Λ).app M ≫ T.trace Λ M hd hc = 𝟙 M := by
+    (infUnit Λ ginf).app M ≫ T.trace Λ M hd hc = 𝟙 M := by
   obtain ⟨j⟩ := T.nonempty
   rw [← T.levelUnit_app_comp_infTransport Λ M j, assoc, T.infTransport_comp_trace,
     T.levelUnit_app_comp_normTrace]
@@ -199,7 +202,7 @@ lemma unit_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) :
 
 lemma infTransport_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') (j : T.J) :
-    T.infTransport Λ M j ≫ (T.infFunctor Λ).map φ =
+    T.infTransport Λ M j ≫ (infFunctor Λ ginf).map φ =
       (T.levelFunctor Λ j).map φ ≫ T.infTransport Λ M' j := by
   unfold infTransport
   exact ((unitTransport Λ (T.π j) (T.π_g j) (T.π_g j)).naturality φ).symm
@@ -220,7 +223,7 @@ lemma normTrace_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) 
 lemma map_comp_trace {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') (hc : IsColimit (T.moduleCocone Λ M))
     (hc' : IsColimit (T.moduleCocone Λ M')) :
-    (T.infFunctor Λ).map φ ≫ T.trace Λ M' hd hc' = T.trace Λ M hd hc ≫ φ := by
+    (infFunctor Λ ginf).map φ ≫ T.trace Λ M' hd hc' = T.trace Λ M hd hc ≫ φ := by
   refine hc.hom_ext fun j ↦ ?_
   change T.infTransport Λ M j ≫ _ = T.infTransport Λ M j ≫ _
   rw [← assoc, T.infTransport_naturality, assoc, T.infTransport_comp_trace, ← assoc,
@@ -230,18 +233,18 @@ lemma map_comp_trace {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u 
 
 /-- The unit transport `g_{∞*} g_∞^* M ⟶ g_{∞*} g_∞^* M` along an automorphism `σ` of `Y_∞` over
 `X`. -/
-@[irreducible] noncomputable def infAction (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf) :
-    (T.infFunctor Λ).obj M ⟶ (T.infFunctor Λ).obj M :=
+@[irreducible] noncomputable def infAction (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) :
+    (infFunctor Λ ginf).obj M ⟶ (infFunctor Λ ginf).obj M :=
   (unitTransport Λ σ hσ hσ).app M
 
-lemma infAction_eq (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf) :
-    T.infAction Λ M σ hσ = (unitTransport Λ σ hσ hσ).app M := by
+lemma infAction_eq (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) :
+    infAction Λ M σ hσ = (unitTransport Λ σ hσ hσ).app M := by
   unfold infAction
   rfl
 
-lemma infTransport_comp_infAction (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf) (j : T.J)
+lemma infTransport_comp_infAction (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) (j : T.J)
     (a : T.Γ j) (ha : σ ≫ T.π j = T.π j ≫ T.ρ j a) :
-    T.infTransport Λ M j ≫ T.infAction Λ M σ hσ =
+    T.infTransport Λ M j ≫ infAction Λ M σ hσ =
       (T.levelAction Λ j a).app M ≫ T.infTransport Λ M j := by
   apply (Mod.forget _).map_injective
   rw [Functor.map_comp, Functor.map_comp, forget_map_infTransport, infAction_eq,
@@ -249,7 +252,7 @@ lemma infTransport_comp_infAction (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf 
   unfold levelAction
   rw [CondensedRing.forget_map_galoisAction_app_eq]
   simp only [assoc]
-  rw [← Functor.map_comp_assoc (T.ginf)_*[Ab.{u + 1}], Iso.hom_inv_id_app]
+  rw [← Functor.map_comp_assoc (ginf)_*[Ab.{u + 1}], Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, id_comp]
   rw [← Functor.map_comp_assoc (T.g j)_*[Ab.{u + 1}], Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, id_comp]
@@ -259,9 +262,9 @@ lemma infTransport_comp_infAction (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf 
 /-- **The normalized trace is Galois invariant**: it is fixed by the unit transport along any
 automorphism `σ` of `Y_∞` over `X` which, at every finite level, covers an element of the Galois
 group. -/
-lemma infAction_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) (σ : T.Yinf ⟶ T.Yinf)
-    (hσ : σ ≫ T.ginf = T.ginf) (hσj : ∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) :
-    T.infAction Λ M σ hσ ≫ T.trace Λ M hd hc = T.trace Λ M hd hc := by
+lemma infAction_comp_trace (hc : IsColimit (T.moduleCocone Λ M)) (σ : Yinf ⟶ Yinf)
+    (hσ : σ ≫ ginf = ginf) (hσj : ∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) :
+    infAction Λ M σ hσ ≫ T.trace Λ M hd hc = T.trace Λ M hd hc := by
   refine hc.hom_ext fun j ↦ ?_
   obtain ⟨a, ha⟩ := hσj j
   change T.infTransport Λ M j ≫ _ = T.infTransport Λ M j ≫ _

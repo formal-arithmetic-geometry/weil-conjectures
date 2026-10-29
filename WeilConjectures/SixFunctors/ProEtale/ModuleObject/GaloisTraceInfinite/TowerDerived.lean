@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.GaloisAcyclic.ModuleObject
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTransportAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitRetraction
@@ -23,6 +24,9 @@ transports along the automorphisms of `Y_∞` over `X` compatible with the Galoi
 -/
 
 @[expose] public section
+
+-- several lemmas do not need all the instances of the section variables
+set_option linter.unusedSectionVars false
 
 universe u
 
@@ -61,7 +65,7 @@ namespace GaloisTower
 
 open Scheme CondensedRing
 
-variable {X : Scheme.{u}} (T : GaloisTower X)
+variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : GaloisTower ginf)
   (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (hd : ∀ (j : T.J)
     (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
@@ -72,19 +76,19 @@ variable {X : Scheme.{u}} (T : GaloisTower X)
 
 /-- The levelwise normalized trace `g_{∞*} g_∞^* K ⟶ K` of a complex. -/
 noncomputable def complexTrace :
-    (((T.ginf)_*⟦Λ⟧).mapHomologicalComplex _).obj
-      ((((T.ginf)^*⟦Λ⟧).mapHomologicalComplex _).obj K) ⟶ K where
+    (((ginf)_*⟦Λ⟧).mapHomologicalComplex _).obj
+      ((((ginf)^*⟦Λ⟧).mapHomologicalComplex _).obj K) ⟶ K where
   f n := T.trace Λ (K.X n) hd (hc n)
   comm' i j _ := (T.map_comp_trace Λ hd (K.d i j) (hc i) (hc j)).symm
 
 lemma unit_comp_complexTrace :
-    ((CondensedRing.upperStarLowerStarAdjunction Λ T.ginf).mapHomologicalComplex _).unit.app K ≫
+    ((CondensedRing.upperStarLowerStarAdjunction Λ ginf).mapHomologicalComplex _).unit.app K ≫
       T.complexTrace Λ hd K hc = 𝟙 K := by
   refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
   rw [HomologicalComplex.comp_f, HomologicalComplex.id_f]
   exact T.unit_comp_trace Λ (K.X n) hd (hc n)
 
-lemma unitTransport_comp_complexTrace (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf)
+lemma unitTransport_comp_complexTrace (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf)
     (hσj : ∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) :
     (NatTrans.mapHomologicalComplex (unitTransport Λ σ hσ hσ) _).app K ≫
       T.complexTrace Λ hd K hc = T.complexTrace Λ hd K hc := by
@@ -101,22 +105,22 @@ include hd hc in
 under the derived unit transports along the automorphisms of `Y_∞` over `X` compatible with the
 Galois actions. -/
 theorem exists_invariant_retraction_derivedUnit (a : ℤ) [K.IsStrictlyGE a]
-    (hK : ∀ n, ((T.ginf)_*⟦Λ⟧).rightAcyclic (((T.ginf)^*⟦Λ⟧).obj (K.X n))) :
-    ∃ R : R((T.ginf)_*⟦Λ⟧).obj (L((T.ginf)^*⟦Λ⟧).obj (DerivedCategory.Q.obj K)) ⟶
+    (hK : ∀ n, ((ginf)_*⟦Λ⟧).rightAcyclic (((ginf)^*⟦Λ⟧).obj (K.X n))) :
+    ∃ R : R((ginf)_*⟦Λ⟧).obj (L((ginf)^*⟦Λ⟧).obj (DerivedCategory.Q.obj K)) ⟶
         DerivedCategory.Q.obj K,
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.app
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app
           (DerivedCategory.Q.obj K) ≫ R =
           𝟙 _ ∧
-        ∀ (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf),
+        ∀ (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf),
           (∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) →
             derivedUnitTransport Λ σ hσ hσ (DerivedCategory.Q.obj K) ≫ R = R := by
   refine ⟨Adjunction.derivedUnitRetraction K a hK (T.complexTrace Λ hd K hc),
     Adjunction.derivedAdjunction_unit_app_comp_derivedUnitRetraction K a hK _
-      (CondensedRing.upperStarLowerStarAdjunction Λ T.ginf) (T.unit_comp_complexTrace Λ hd K hc),
+      (CondensedRing.upperStarLowerStarAdjunction Λ ginf) (T.unit_comp_complexTrace Λ hd K hc),
     fun σ hσ hσj ↦ ?_⟩
-  have h := derivedUnitIso_hom_comp_derivedUnitTransport_self Λ T.ginf σ hσ K a hK
+  have h := derivedUnitIso_hom_comp_derivedUnitTransport_self Λ ginf σ hσ K a hK
   rw [Adjunction.derivedUnitRetraction, ← cancel_epi
-    (Adjunction.derivedUnitIso (f := (T.ginf)^*⟦Λ⟧) (g := (T.ginf)_*⟦Λ⟧) K a hK).hom,
+    (Adjunction.derivedUnitIso (f := (ginf)^*⟦Λ⟧) (g := (ginf)_*⟦Λ⟧) K a hK).hom,
     reassoc_of% h]
   simp only [Iso.hom_inv_id_assoc]
   erw [← Functor.map_comp, T.unitTransport_comp_complexTrace Λ hd K hc σ hσ hσj]
@@ -125,18 +129,18 @@ include hd hc in
 /-- `GaloisTower.exists_invariant_retraction_derivedUnit` for an object `C ≅ K` of the derived
 category. -/
 theorem exists_invariant_retraction_derivedUnit_of_iso (a : ℤ) [K.IsStrictlyGE a]
-    (hK : ∀ n, ((T.ginf)_*⟦Λ⟧).rightAcyclic (((T.ginf)^*⟦Λ⟧).obj (K.X n)))
+    (hK : ∀ n, ((ginf)_*⟦Λ⟧).rightAcyclic (((ginf)^*⟦Λ⟧).obj (K.X n)))
     (C : DerivedCategory
       (CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     (e : DerivedCategory.Q.obj K ≅ C) :
-    ∃ R : R((T.ginf)_*⟦Λ⟧).obj (L((T.ginf)^*⟦Λ⟧).obj C) ⟶ C,
-      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.app C ≫ R = 𝟙 _ ∧
-        ∀ (σ : T.Yinf ⟶ T.Yinf) (hσ : σ ≫ T.ginf = T.ginf),
+    ∃ R : R((ginf)_*⟦Λ⟧).obj (L((ginf)^*⟦Λ⟧).obj C) ⟶ C,
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app C ≫ R = 𝟙 _ ∧
+        ∀ (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf),
           (∀ j, ∃ a, σ ≫ T.π j = T.π j ≫ T.ρ j a) →
             derivedUnitTransport Λ σ hσ hσ C ≫ R = R := by
   obtain ⟨R, hR₁, hR₂⟩ := T.exists_invariant_retraction_derivedUnit Λ hd K hc a hK
-  refine ⟨R((T.ginf)_*⟦Λ⟧).map (L((T.ginf)^*⟦Λ⟧).map e.inv) ≫ R ≫ e.hom, ?_, fun σ hσ hσj ↦ ?_⟩
-  · have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ T.ginf).unit.naturality e.inv
+  refine ⟨R((ginf)_*⟦Λ⟧).map (L((ginf)^*⟦Λ⟧).map e.inv) ≫ R ≫ e.hom, ?_, fun σ hσ hσj ↦ ?_⟩
+  · have hn := (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.naturality e.inv
     simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hn
     rw [← reassoc_of% hn]
     simp [reassoc_of% hR₁]

@@ -13469,6 +13469,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisActionModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.FieldTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.GaloisLevel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.MapModCompHom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.NormalizedTraceUnique

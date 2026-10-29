@@ -30,6 +30,9 @@ pullback schemes are expensive for the kernel, and an abstract statement is inst
 
 @[expose] public section
 
+-- several lemmas do not need all the instances of the section variables
+set_option linter.unusedSectionVars false
+
 universe u
 
 open CategoryTheory Category Limits
@@ -43,7 +46,7 @@ open Scheme
 /-- A *Galois tower* over `X`: a directed system of finite étale Galois coverings `g_j : Y_j ⟶ X`
 with groups `Γ_j`, transition maps `t : Y_{j'} ⟶ Y_j` over `X` along which the Galois actions
 lift, and a cone `π_j : Y_∞ ⟶ Y_j` over `X` with `g_∞ : Y_∞ ⟶ X` weakly étale. -/
-structure GaloisTower (X : Scheme.{u}) where
+structure GaloisTower {X Yinf : Scheme.{u}} (ginf : Yinf ⟶ X) where
   /-- the index set. -/
   J : Type u
   [preorder : Preorder J]
@@ -56,11 +59,6 @@ structure GaloisTower (X : Scheme.{u}) where
   [weaklyEtale : ∀ j, WeaklyEtale (g j)]
   [surjective : ∀ j, Surjective (g j)]
   [quasiCompact : ∀ j, QuasiCompact (g j)]
-  /-- the limit. -/
-  Yinf : Scheme.{u}
-  /-- the structure map of the limit. -/
-  ginf : Yinf ⟶ X
-  [weaklyEtale_inf : WeaklyEtale ginf]
   /-- the transition maps. -/
   t : ∀ {j j' : J}, j ≤ j' → (Y j' ⟶ Y j)
   t_g : ∀ {j j' : J} (h : j ≤ j'), t h ≫ g j = g j'
@@ -84,9 +82,9 @@ structure GaloisTower (X : Scheme.{u}) where
 namespace GaloisTower
 
 attribute [instance] preorder isDirected nonempty weaklyEtale surjective quasiCompact
-  weaklyEtale_inf group fintype
+  group fintype
 
-variable {X : Scheme.{u}} (T : GaloisTower X)
+variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : GaloisTower ginf)
 
 /-! ### Abelian sheaves -/
 
@@ -108,7 +106,7 @@ noncomputable def abDiagram (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1})
 @[simps]
 noncomputable def abCocone (H : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) :
     Cocone (T.abDiagram H) where
-  pt := ((T.ginf)^*[AddCommGrpCat.{u + 1}] ⋙ (T.ginf)_*[AddCommGrpCat.{u + 1}]).obj H
+  pt := ((ginf)^*[AddCommGrpCat.{u + 1}] ⋙ (ginf)_*[AddCommGrpCat.{u + 1}]).obj H
   ι :=
     { app j := (upperStarLowerStarHom _ _ (T.π j) (T.π_g j)).app H
       naturality j j' f := by
@@ -129,10 +127,10 @@ noncomputable def levelFunctor (j : T.J) :
   (T.g j)^*⟦Λ⟧ ⋙ (T.g j)_*⟦Λ⟧
 
 /-- The endofunctor `g_{∞*} g_∞^*` of `Λ_X`-module objects. -/
-noncomputable def infFunctor :
+noncomputable def infFunctor (ginf : Yinf ⟶ X) :
     CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
       CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
-  (T.ginf)^*⟦Λ⟧ ⋙ (T.ginf)_*⟦Λ⟧
+  (ginf)^*⟦Λ⟧ ⋙ (ginf)_*⟦Λ⟧
 
 variable (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
@@ -143,7 +141,7 @@ variable (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condense
 
 /-- The unit transport `g_{j*} g_j^* M ⟶ g_{∞*} g_∞^* M` along the projection. -/
 @[irreducible] noncomputable def infTransport (j : T.J) :
-    (T.levelFunctor Λ j).obj M ⟶ (T.infFunctor Λ).obj M :=
+    (T.levelFunctor Λ j).obj M ⟶ (infFunctor Λ ginf).obj M :=
   (unitTransport Λ (T.π j) (T.π_g j) (T.π_g j)).app M
 
 lemma forget_map_transport {j j' : T.J} (h : j ≤ j') :
@@ -157,8 +155,8 @@ lemma forget_map_transport {j j' : T.J} (h : j ≤ j') :
 lemma forget_map_infTransport (j : T.J) :
     (Mod.forget _).map (T.infTransport Λ M j) =
       (T.g j)_*[Ab.{u + 1}].map ((upperStarForgetIso Λ (T.g j)).inv.app M) ≫
-        (upperStarLowerStarHom (T.g j) T.ginf (T.π j) (T.π_g j)).app M.X ≫
-        (T.ginf)_*[Ab.{u + 1}].map ((upperStarForgetIso Λ T.ginf).hom.app M) := by
+        (upperStarLowerStarHom (T.g j) ginf (T.π j) (T.π_g j)).app M.X ≫
+        (ginf)_*[Ab.{u + 1}].map ((upperStarForgetIso Λ ginf).hom.app M) := by
   unfold infTransport
   exact forget_map_unitTransport_app_eq Λ (T.π j) (T.g j) (T.π_g j) M
 
@@ -206,7 +204,7 @@ lemma moduleDiagram_map {j j' : T.J} (f : j ⟶ j') :
 
 /-- The cocone of the unit transports `g_{j*} g_j^* M ⟶ g_{∞*} g_∞^* M` along the projections. -/
 noncomputable def moduleCocone : Cocone (T.moduleDiagram Λ M) where
-  pt := (T.infFunctor Λ).obj M
+  pt := (infFunctor Λ ginf).obj M
   ι :=
     { app j := T.infTransport Λ M j
       naturality _ _ _ := (T.transport_comp_infTransport Λ M _).trans (comp_id _).symm }
@@ -231,7 +229,7 @@ noncomputable def isColimitModuleCocone (hc : IsColimit (T.abCocone M.X)) :
     IsColimit (T.moduleCocone Λ M) := by
   refine isColimitOfReflects (Mod.forget _)
     ((IsColimit.equivOfNatIsoOfIso (T.moduleDiagramForgetIso Λ M) _ _ ?_).symm hc)
-  refine Cocone.ext ((T.ginf)_*[Ab.{u + 1}].mapIso
+  refine Cocone.ext ((ginf)_*[Ab.{u + 1}].mapIso
     ((upperStarForgetIso Λ _).app M).symm) fun j ↦ ?_
   rw [Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app, moduleCocone_ι_app,
     forget_map_infTransport]

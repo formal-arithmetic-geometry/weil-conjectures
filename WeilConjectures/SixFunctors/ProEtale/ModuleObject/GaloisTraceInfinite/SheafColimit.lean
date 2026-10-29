@@ -125,8 +125,8 @@ noncomputable def galoisUpperLowerDiagram (H : Sheaf (ProEt.topology G) AddCommG
     FiniteGaloisIntermediateField L Ω ⥤ Sheaf (ProEt.topology G) AddCommGrpCat.{u + 1} where
   obj L' :=
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))))_*[AddCommGrpCat.{u + 1}].obj
-      ((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))))^*[AddCommGrpCat.{u + 1}].obj
-        H)
+      ((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))))^*[
+        AddCommGrpCat.{u + 1}].obj H)
   map f := (upperStarLowerStarHom _ _ (galoisLevelMap Ω h (leOfHom f))
     (galoisLevelMap_fst h _)).app H
   map_id L' := by
@@ -144,7 +144,8 @@ noncomputable def galoisUpperLowerCocone (H : Sheaf (ProEt.topology G) AddCommGr
     Cocone (galoisUpperLowerDiagram Ω h H) where
   pt :=
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*[AddCommGrpCat.{u + 1}].obj
-      ((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*[AddCommGrpCat.{u + 1}].obj H)
+      ((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*[
+        AddCommGrpCat.{u + 1}].obj H)
   ι :=
     { app L' := (upperStarLowerStarHom _ _ (galoisLevelProjection h L')
         (galoisLevelProjection_fst h L')).app H
