@@ -15,7 +15,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
-public import Mathlib.LinearAlgebra.DirectSum.Basis
+import Mathlib.LinearAlgebra.DirectSum.Basis
 
 /-!
 # Purity of real lisse Weil sheaves on curves

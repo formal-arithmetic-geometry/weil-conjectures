@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineDegreeZeroKernel
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # EtaleLimitAffineEventualZero
 

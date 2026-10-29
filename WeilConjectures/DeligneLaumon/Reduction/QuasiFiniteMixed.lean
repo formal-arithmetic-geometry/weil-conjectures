@@ -7,10 +7,10 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
-public import WeilConjectures.WeilSheaf.VerdierDualLocalization
-public import WeilConjectures.WeilSheaf.ConstantTwistWeight
-public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
-public import WeilConjectures.WeilSheaf.CohomologyExact
+import WeilConjectures.WeilSheaf.VerdierDualLocalization
+import WeilConjectures.WeilSheaf.ConstantTwistWeight
+import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
+import WeilConjectures.WeilSheaf.CohomologyExact
 
 /-!
 # Weil sheaves on a quasi-finite `k₀`-scheme are mixed

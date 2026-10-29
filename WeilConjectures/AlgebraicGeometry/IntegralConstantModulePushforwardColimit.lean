@@ -8,13 +8,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardLimit
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.Compactification.Defs
-public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-public import Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
 # Integral constant module pushforwards are filtered colimits of finite pushforwards

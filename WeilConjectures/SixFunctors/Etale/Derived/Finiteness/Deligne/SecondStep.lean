@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.FirstStep
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 
 /-!
 # The second step of Deligne's generic constructibility: smooth source, locally constant sheaf

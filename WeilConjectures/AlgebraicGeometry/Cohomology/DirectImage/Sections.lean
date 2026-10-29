@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionDenominators
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionTorsion
-
-
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris

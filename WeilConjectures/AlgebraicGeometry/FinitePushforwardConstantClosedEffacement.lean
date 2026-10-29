@@ -9,20 +9,18 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.AlgebraicGeometry.FiniteCoverKillsConstantCohomology
 import WeilConjectures.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility
 import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import Mathlib.Algebra.Category.ModuleCat.AB
-public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Killing one finite-pushforward component by a finite-cover unit
 

@@ -8,9 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassMap
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassTopComparison
 import WeilConjectures.AlgebraicGeometry.TargetSectionClassRestriction
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Restriction compatibility of the local stalk class map
 

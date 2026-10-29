@@ -12,7 +12,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleNormalizedGenericData
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Mathlib
+import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Mathlib.CategoryTheory.ExtremalEpi
 
 /-!
 # Integral pushforward maps detecting a prescribed point

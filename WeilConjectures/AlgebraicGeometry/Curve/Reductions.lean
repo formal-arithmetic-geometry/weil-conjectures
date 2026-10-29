@@ -6,15 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
-
-
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.Order.CompletePartialOrder
 import WeilConjectures.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
@@ -44,9 +41,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-public import Mathlib.Tactic.Polynomial.Basic
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Reduction steps for the eight curve-cohomology assertions

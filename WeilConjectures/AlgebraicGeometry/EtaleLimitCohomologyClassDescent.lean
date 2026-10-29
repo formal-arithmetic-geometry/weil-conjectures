@@ -7,9 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyConnectingLadder
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Finite-stage representatives of limit cohomology classes
 

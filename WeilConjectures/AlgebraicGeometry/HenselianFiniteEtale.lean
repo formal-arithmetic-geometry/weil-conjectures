@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEquivalenceH1
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair

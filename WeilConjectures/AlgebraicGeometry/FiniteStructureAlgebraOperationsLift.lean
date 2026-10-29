@@ -13,12 +13,10 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
-
-import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraAdjointsConstruct
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraAdjointsConstruct
 
 /-! # Algebra structures on algebraized finite direct images
 

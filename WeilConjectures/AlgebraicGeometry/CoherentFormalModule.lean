@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
-
 import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Algebra.Homology.KFlat

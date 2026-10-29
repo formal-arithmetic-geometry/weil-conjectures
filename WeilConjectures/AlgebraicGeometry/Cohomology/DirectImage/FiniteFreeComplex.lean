@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeShortening
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
-
-
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite

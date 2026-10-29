@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Homology.KFlatPullback
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Canonical tensor comparison for derived pullback
 

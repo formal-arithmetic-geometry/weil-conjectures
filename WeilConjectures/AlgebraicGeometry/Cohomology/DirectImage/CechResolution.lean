@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.AlgebraicGeometry.Modules.StalkExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # The Čech resolution of a sheaf of modules

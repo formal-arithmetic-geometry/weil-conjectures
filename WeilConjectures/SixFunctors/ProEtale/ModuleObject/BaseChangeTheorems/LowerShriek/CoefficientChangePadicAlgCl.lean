@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComponents
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
-public import Mathlib
 
 /-!
 # The extension of scalars `E ⟶ ℚ̄_ℓ` as a coefficient change

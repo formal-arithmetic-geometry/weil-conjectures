@@ -11,9 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
-public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
-public import Mathlib.Data.Nat.Choose.Multinomial
+import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
 
 /-!
 # Hilbert schemes of curves

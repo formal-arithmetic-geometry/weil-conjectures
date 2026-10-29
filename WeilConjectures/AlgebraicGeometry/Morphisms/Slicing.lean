@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
-
 import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
 
 /-!

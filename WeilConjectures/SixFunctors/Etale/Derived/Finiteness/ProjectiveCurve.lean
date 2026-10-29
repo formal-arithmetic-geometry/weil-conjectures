@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDe
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GenericConstructibility
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GeometricFibreStalk
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 
 /-!
 # Constant coefficients on projective families of curves

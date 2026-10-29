@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverTransport
 import WeilConjectures.AlgebraicGeometry.KInjectiveSchemeEvaluationModels
 

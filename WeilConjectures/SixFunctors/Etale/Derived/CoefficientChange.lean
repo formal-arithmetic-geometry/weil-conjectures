@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
-public import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 
 /-!
 # Compact cohomology and geometric stalks commute with restriction of scalars

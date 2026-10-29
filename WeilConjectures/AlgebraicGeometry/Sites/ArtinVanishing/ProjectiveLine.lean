@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
-public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
+import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 
 /-!
 # Higher direct images on the projective line

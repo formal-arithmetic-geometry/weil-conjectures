@@ -21,7 +21,8 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 
 /-!
 # The Jacobian of a smooth projective curve

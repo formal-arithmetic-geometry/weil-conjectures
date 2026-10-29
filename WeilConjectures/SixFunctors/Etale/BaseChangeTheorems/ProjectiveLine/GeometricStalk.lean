@@ -10,10 +10,10 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangePro
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
-public import WeilConjectures.RingTheory.ProEtale.WeakDimension
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.RingTheory.ProEtale.WeakDimension
 
 /-!
 # The exchange morphism of the projective line at a geometric point

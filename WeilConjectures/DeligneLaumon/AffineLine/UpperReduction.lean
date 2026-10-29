@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.FiniteLength
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
+import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 
 /-!
 # Reduction of the affine-line estimate to irreducible factors

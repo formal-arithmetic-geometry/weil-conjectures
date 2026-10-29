@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineSource
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineTarget
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Normalized affine cohomology section dictionaries
 

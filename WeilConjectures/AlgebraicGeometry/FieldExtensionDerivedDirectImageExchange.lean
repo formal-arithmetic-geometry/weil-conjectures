@@ -7,15 +7,15 @@ Authors: Bin Wu
 module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.SmoothLimitDerivedDirectImageExchange
-import WeilConjectures.FieldTheory.SeparableSmoothColimit
-import Mathlib.FieldTheory.SeparablyGenerated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.AlgebraicGeometry.SmoothLimitDerivedDirectImageExchange
+import WeilConjectures.FieldTheory.SeparableSmoothColimit
+import Mathlib.FieldTheory.SeparablyGenerated
 
 /-! # Derived relative exchange for a torsion sheaf under field extension
 

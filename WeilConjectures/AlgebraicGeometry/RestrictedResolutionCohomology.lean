@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Restriction on resolution cohomology before the section-class map
 

@@ -6,11 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Data.EReal.Operations
-public import Mathlib.Topology.MetricSpace.Bounded
-public import Mathlib.Algebra.Order.Module.Field
-public import Mathlib.Combinatorics.Matroid.Init
 
 /-!
 # The cohomology of the twisting sheaves on `ℙⁿ_A` over a commutative ring

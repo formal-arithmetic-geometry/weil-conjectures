@@ -8,9 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.LinearAlgebra.TensorProduct.Map
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Category.Grp.Abelian
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 
 /-!
 # Sections of module pullback on affine opens

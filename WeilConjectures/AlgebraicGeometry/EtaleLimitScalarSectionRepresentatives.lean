@@ -6,15 +6,13 @@ Authors: Bin Wu
 
 module
 
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.FixedAbelianDescendedSectionLift
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Scalar continuity for descended qcqs étale objects
 

@@ -6,8 +6,6 @@ Authors: Bin Wu
 
 module
 
-
-
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.TensorPullback

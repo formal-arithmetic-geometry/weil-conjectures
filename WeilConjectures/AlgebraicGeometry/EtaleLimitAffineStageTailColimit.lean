@@ -7,9 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison
 import WeilConjectures.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # The comparison cocone on the affine tail
 

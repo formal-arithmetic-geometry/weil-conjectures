@@ -7,11 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.AffineSectionsBaseChangeMate
 import WeilConjectures.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 
 /-!
 # Affine global Hom comparison as sections of sheaf base change

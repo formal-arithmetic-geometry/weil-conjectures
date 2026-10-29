@@ -11,12 +11,12 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
-import WeilConjectures.AlgebraicGeometry.IdealPowersReesGradedData
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
-import WeilConjectures.AlgebraicGeometry.GradedFinitenessCohomology
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.IdealPowersReesGradedData
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
+import WeilConjectures.AlgebraicGeometry.GradedFinitenessCohomology
 
 /-! # Finiteness of cohomology of ideal powers over the Rees algebra
 

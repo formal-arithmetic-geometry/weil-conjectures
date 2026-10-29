@@ -7,8 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyAugmentedLift
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyAugmentedLift
 
 /-! # Restriction on the homology of fixed-resolution section complexes
 

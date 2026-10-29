@@ -8,12 +8,12 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyEventualVanishing
 import WeilConjectures.AlgebraicGeometry.CompatiblePullbackSheafSystem
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Etale cohomology of limits of schemes
 

@@ -8,14 +8,9 @@ module
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
-public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
-public import Mathlib.Tactic.Bound
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Data.EReal.Operations
-public import Mathlib.Topology.MetricSpace.Bounded
-public import Mathlib.Algebra.Order.Module.Field
-public import Mathlib.Algebra.Category.ModuleCat.Projective
+import WeilConjectures.Compactification.Defs
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # The Serre pairing on projective space

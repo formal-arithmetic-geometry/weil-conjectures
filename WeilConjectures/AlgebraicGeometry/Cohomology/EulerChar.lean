@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-
-
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -20,10 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
-public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.RingTheory.Flat.TorsionFree
-public import Mathlib.Combinatorics.Matroid.Init
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
+import Mathlib.Combinatorics.Quiver.ReflQuiver
+import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules

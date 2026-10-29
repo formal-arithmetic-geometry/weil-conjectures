@@ -7,8 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-import WeilConjectures.AlgebraicGeometry.RestrictedResolutionCohomology
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.RestrictedResolutionCohomology
 
 /-! # Restriction of target section classes
 

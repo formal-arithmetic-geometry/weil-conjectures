@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
-public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
-public import WeilConjectures.TraceFormula.OpenPieceCoherence
+import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
+import WeilConjectures.TraceFormula.OpenPieceCoherence
 
 /-!
 

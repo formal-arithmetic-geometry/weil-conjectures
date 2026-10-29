@@ -8,12 +8,12 @@ module
 public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import Mathlib.RingTheory.PicardGroup
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 
 /-!
 # The universal curve-test datum attached to a failure of base change
