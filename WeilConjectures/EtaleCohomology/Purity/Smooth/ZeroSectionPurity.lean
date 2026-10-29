@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicity
 
 /-!
 # Relative purity for the zero section of the affine line
@@ -233,8 +234,8 @@ SGA 4 XVI 3.7). It is the only input of the relative purity of this file which i
 theorem isIso_unit_tateObject_affineLine_of_hasInvertibleExponent
     (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-      (𝔸(ULift.{u} (Fin 1); S) ↘ S)).unit.app (tateObject Λ S 1)) := by
-  sorry
+      (𝔸(ULift.{u} (Fin 1); S) ↘ S)).unit.app (tateObject Λ S 1)) :=
+  isIso_unit_tateObject_affineLine_of_strictlyHenselian Λ S
 
 /-- Homotopy invariance of the affine line for `Λ(1)[2]`
 (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`). -/

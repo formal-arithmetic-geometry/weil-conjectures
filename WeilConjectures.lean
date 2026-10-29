@@ -9411,6 +9411,8 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobeni
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathGeometric
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Adic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicity
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicityStalk
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineGluing
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineInputs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineKunneth
