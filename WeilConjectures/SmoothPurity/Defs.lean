@@ -123,7 +123,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-/-- Blueprint `def-pur-smooth-trace` (`γ_{f,Λ_Y}`, `sk-prop-sp-orientation`): the **orientation**
+/-- Blueprint `def-pur-smooth-trace` (`γ_{f,Λ_Y}`, `sk-thm-purity-transport`): the **orientation**
 `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`, the purity
 isomorphism normalized by integration on the affine line (the canonical orientation of
 `𝔸¹_Y ⟶ Y`). Its construction (from the finite orientations through the integral tower and
