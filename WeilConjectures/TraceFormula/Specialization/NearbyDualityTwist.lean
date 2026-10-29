@@ -141,6 +141,7 @@ theorem isIso_nearbyDualityMap_of_iso_twist_iff
     Category.id_comp]
 
 
+omit [MonoidalClosed C] [MonoidalClosed C'] in
 /-- **Invariance of a twisted dualizing map.** If an endomorphism `ρ` of `Ψ` commutes with the
 twist, `ρ_{A ⊗ T} ≫ κ_A = κ_A ≫ ρ_A ▷ T'`, and fixes `θ`, then it fixes the dualizing map
 `Ψ u ≫ κ_ω ≫ θ ▷ T' ≫ u'⁻¹` transported along `u : ω₁ ≅ ω ⊗ T`, `u' : ω₁' ≅ ω' ⊗ T'`. -/
