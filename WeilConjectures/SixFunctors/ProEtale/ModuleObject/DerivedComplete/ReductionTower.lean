@@ -254,17 +254,19 @@ open Scheme PadicAlgCl CondensedRing
 
 open scoped CategoryTheory.Obj
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ} {X : Scheme.{u}}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)] {X : Scheme.{u}}
 
 /-- **Derived Nakayama**: on a derived complete `𝒪_E`-complex `M`, the endomorphism
 `𝟙 + ℓ • x` is an isomorphism for every endomorphism `x`, since `ℓ` acts by zero on the first
 derived reduction. -/
 theorem isIso_id_add_zsmul_of_derivedCompleteIntegers
     {M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hM : derivedCompleteIntegers ℓ E X M) (x : M ⟶ M) : IsIso (𝟙 M + (ℓ : ℤ) • x) := by
   refine isIso_of_derivedCompleteIntegers_of_isIso_derivedReduction_map _ hM hM ?_
-  have : (derivedReduction X ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
+  have : (derivedReduction X ℓ E).Additive :=
+    inferInstanceAs (((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor ⋙
+      (residueFieldModuleSheaf X ℓ E).mapDerivedCategory).Additive)
   rw [Functor.map_add, CategoryTheory.Functor.map_id, Functor.map_zsmul]
   exact DerivedCategory.isIso_id_add_zsmul (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero
     (by rw [Int.cast_natCast, natCast_eq_zero_residueFieldCoeff])) _
@@ -272,7 +274,7 @@ theorem isIso_id_add_zsmul_of_derivedCompleteIntegers
 /-- Derived complete complexes are closed under products. -/
 theorem derivedCompleteIntegers_piObj {ι : Type*}
     (M : ι → DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) [HasProduct M]
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) [HasProduct M]
     (hM : ∀ i, derivedCompleteIntegers ℓ E X (M i)) :
     derivedCompleteIntegers ℓ E X (∏ᶜ M) := by
   intro Z hZ f
@@ -284,22 +286,22 @@ theorem derivedCompleteIntegers_piObj {ι : Type*}
 modulo `ℓⁿ⁺¹` extends to a morphism of triangles. -/
 lemma exists_reductionTowerTransition
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
-    ∃ t : (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1 + 1))).mapDerivedCategory.obj
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
+    ∃ t : (Mod.comap (integersModPowReduction X ℓ E (n + 1 + 1))).mapDerivedCategory.obj
         ((Mod.extendScalars
-          (integersModPowReduction X ℓ E.1 (n + 1 + 1))).leftDerivedFunctor.obj K) ⟶
-      (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E.1 (n + 1))).leftDerivedFunctor.obj K),
+          (integersModPowReduction X ℓ E (n + 1 + 1))).leftDerivedFunctor.obj K) ⟶
+      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
+        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K),
       (Mod.derivedExtendMapDerivedCategoryAdjunction
-          (integersModPowReduction X ℓ E.1 (n + 1 + 1))).unit.app K ≫ t =
+          (integersModPowReduction X ℓ E (n + 1 + 1))).unit.app K ≫ t =
         𝟙 K ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction
-          (integersModPowReduction X ℓ E.1 (n + 1))).unit.app K ∧
-      (integersModPowReductionδ ℓ E.1 (n + 1 + 1) X).app K ≫
+          (integersModPowReduction X ℓ E (n + 1))).unit.app K ∧
+      (integersModPowReductionδ ℓ E (n + 1 + 1) X).app K ≫
           (shiftFunctor _ (1 : ℤ)).map ((ℓ : ℤ) • 𝟙 K) =
-        t ≫ (integersModPowReductionδ ℓ E.1 (n + 1) X).app K :=
+        t ≫ (integersModPowReductionδ ℓ E (n + 1) X).app K :=
   complete_distinguished_triangle_morphism _ _
-    (integersModPowReduction_distinguished ℓ E.1 (n + 1 + 1) K)
-    (integersModPowReduction_distinguished ℓ E.1 (n + 1) K) ((ℓ : ℤ) • 𝟙 K) (𝟙 K)
+    (integersModPowReduction_distinguished ℓ E (n + 1 + 1) K)
+    (integersModPowReduction_distinguished ℓ E (n + 1) K) ((ℓ : ℤ) • 𝟙 K) (𝟙 K)
     (zsmul_pow_succ_id_comp_id _ K (n + 1))
 
 variable (E) in
@@ -308,34 +310,34 @@ modulo `ℓⁿ⁺²` and `ℓⁿ⁺¹` of a complex `K` of `𝒪_{E,X}`-module o
 `(ℓ, 𝟙)` between the natural reduction triangles to a morphism of triangles. -/
 noncomputable def reductionTowerTransition
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
-    (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1 + 1))).mapDerivedCategory.obj
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
+    (Mod.comap (integersModPowReduction X ℓ E (n + 1 + 1))).mapDerivedCategory.obj
         ((Mod.extendScalars
-          (integersModPowReduction X ℓ E.1 (n + 1 + 1))).leftDerivedFunctor.obj K) ⟶
-      (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E.1 (n + 1))).leftDerivedFunctor.obj K) :=
+          (integersModPowReduction X ℓ E (n + 1 + 1))).leftDerivedFunctor.obj K) ⟶
+      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
+        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K) :=
   (exists_reductionTowerTransition K n).choose
 
 /-- The transition maps of the tower of reductions are compatible with the units. -/
 @[reassoc (attr := simp)]
 lemma unit_comp_reductionTowerTransition
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
     (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E.1 (n + 1 + 1))).unit.app K ≫
+        (integersModPowReduction X ℓ E (n + 1 + 1))).unit.app K ≫
       reductionTowerTransition E K n =
     (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E.1 (n + 1))).unit.app K :=
+        (integersModPowReduction X ℓ E (n + 1))).unit.app K :=
   (exists_reductionTowerTransition K n).choose_spec.1.trans (id_comp _)
 
 /-- The transition maps of the tower of reductions are compatible with the connecting morphisms
 of the natural reduction triangles and with the multiplication by `ℓ`. -/
 lemma reductionTowerTransition_comp_δ
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
-    (integersModPowReductionδ ℓ E.1 (n + 1 + 1) X).app K ≫
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
+    (integersModPowReductionδ ℓ E (n + 1 + 1) X).app K ≫
         (shiftFunctor _ (1 : ℤ)).map ((ℓ : ℤ) • 𝟙 K) =
-      reductionTowerTransition E K n ≫ (integersModPowReductionδ ℓ E.1 (n + 1) X).app K :=
+      reductionTowerTransition E K n ≫ (integersModPowReductionδ ℓ E (n + 1) X).app K :=
   (exists_reductionTowerTransition K n).choose_spec.2
 
 variable (E) in
@@ -344,28 +346,28 @@ variable (E) in
 (`ProEtale.reductionTower_obj`). -/
 noncomputable def reductionTower
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     ℕᵒᵖ ⥤ DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :=
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :=
   Functor.ofOpSequence (X := fun n ↦
-    (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1))).mapDerivedCategory.obj
-      ((Mod.extendScalars (integersModPowReduction X ℓ E.1 (n + 1))).leftDerivedFunctor.obj K))
+    (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
+      ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K))
     (reductionTowerTransition E K)
 
 @[simp]
 lemma reductionTower_obj
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
     (reductionTower E K).obj (op n) =
-      (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E.1 (n + 1))).leftDerivedFunctor.obj
+      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
+        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj
           K) :=
   rfl
 
 @[simp]
 lemma reductionTower_map_succ
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
     (reductionTower E K).map (homOfLE (Nat.le_add_right n 1)).op =
       reductionTowerTransition E K n :=
   Functor.ofOpSequence_map_homOfLE_succ _ n
@@ -375,27 +377,27 @@ variable (E) in
 `K ⟶ Res_{n+1} (red_{n+1} K)` of the adjunctions `red_{n+1} ⊣ Res_{n+1}`. -/
 noncomputable def reductionTowerCone
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     Cone (reductionTower E K) :=
   Limits.Cone.ofOpSequence (X := fun n ↦
-      (Mod.comap (integersModPowReduction X ℓ E.1 (n + 1))).mapDerivedCategory.obj
-        ((Mod.extendScalars (integersModPowReduction X ℓ E.1 (n + 1))).leftDerivedFunctor.obj K))
+      (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory.obj
+        ((Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K))
     (reductionTowerTransition E K) K (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction
-      (integersModPowReduction X ℓ E.1 (n + 1))).unit.app K) (unit_comp_reductionTowerTransition K)
+      (integersModPowReduction X ℓ E (n + 1))).unit.app K) (unit_comp_reductionTowerTransition K)
 
 @[simp]
 lemma reductionTowerCone_pt
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     (reductionTowerCone E K).pt = K :=
   rfl
 
 @[simp]
 lemma reductionTowerCone_π_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℕ) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℕ) :
     (reductionTowerCone E K).π.app (op n) = (Mod.derivedExtendMapDerivedCategoryAdjunction
-      (integersModPowReduction X ℓ E.1 (n + 1))).unit.app K :=
+      (integersModPowReduction X ℓ E (n + 1))).unit.app K :=
   rfl
 
 /-- **A derived complete `𝒪_E`-complex is the homotopy limit of its reductions modulo `ℓⁿ`**:
@@ -403,13 +405,13 @@ the cone `K ⟶ Res_{n+1} (red_{n+1} K)` of units of `red_{n+1} ⊣ Res_{n+1}` i
 cone, `K = R lim_n Res_n (red_n K)`. -/
 theorem isHomotopyLimit_reductionTowerCone
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hK : derivedCompleteIntegers ℓ E X K) : IsHomotopyLimit (reductionTowerCone E K) := by
   have hP : derivedCompleteIntegers ℓ E X (∏ᶜ fun _ : ℕ ↦ K) :=
     derivedCompleteIntegers_piObj _ fun _ ↦ hK
   refine isHomotopyLimit_of_triangles _ (ℓ : ℤ)
-    (fun n ↦ (integersModPowReductionδ ℓ E.1 (n + 1) X).app K)
-    (fun n ↦ integersModPowReduction_distinguished ℓ E.1 (n + 1) K) (fun n ↦ ?_)
+    (fun n ↦ (integersModPowReductionδ ℓ E (n + 1) X).app K)
+    (fun n ↦ integersModPowReduction_distinguished ℓ E (n + 1) K) (fun n ↦ ?_)
     (isIso_id_add_zsmul_of_derivedCompleteIntegers hP)
     (isIso_id_add_zsmul_of_derivedCompleteIntegers (derivedCompleteIntegers_shift hP 1))
   rw [reductionTower_map_succ]
@@ -421,11 +423,11 @@ term is `Res_{n+1} (red_{n+1} K)` (`ProEtale.reductionTower_obj`), the legs bein
 the adjunctions `red_{n+1} ⊣ Res_{n+1}`. -/
 theorem exists_isHomotopyLimit_reductionTower
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hK : derivedCompleteIntegers ℓ E X K) :
     ∃ π : (Functor.const ℕᵒᵖ).obj K ⟶ reductionTower E K, IsHomotopyLimit (Cone.mk K π) ∧
       ∀ n : ℕ, π.app (op n) = (Mod.derivedExtendMapDerivedCategoryAdjunction
-        (integersModPowReduction X ℓ E.1 (n + 1))).unit.app K :=
+        (integersModPowReduction X ℓ E (n + 1))).unit.app K :=
   ⟨(reductionTowerCone E K).π, isHomotopyLimit_reductionTowerCone hK, fun _ ↦ rfl⟩
 
 end AlgebraicGeometry.ProEtale
