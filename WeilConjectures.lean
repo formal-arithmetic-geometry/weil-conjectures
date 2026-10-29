@@ -12950,6 +12950,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerTopology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
