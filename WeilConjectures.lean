@@ -6234,6 +6234,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartBoundary
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartBoundaryLine
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
@@ -9351,6 +9352,11 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.OrientationGeometricPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyChartBoundary
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologySupports
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyTriangle
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
@@ -12464,6 +12470,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.StrictlyHenselianConstan
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsCounit
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsPairFunctoriality
