@@ -10708,6 +10708,7 @@ public import WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlge
 public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
+public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
@@ -14563,6 +14564,7 @@ public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
+public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevel
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevelColimit
@@ -14763,6 +14765,7 @@ public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.WeilMonodromy
+public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
