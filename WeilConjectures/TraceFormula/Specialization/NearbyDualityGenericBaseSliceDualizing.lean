@@ -70,6 +70,10 @@ identifications `u : c^* ω_{X₁} ≅ ω_{X₂} ⊗ T` and `v : p^* ω_{X'} ≅
 `p^* θ_M` along the slice exchange `α` is the twist of the dualizing map `θ_{M''}` of the slice:
 `p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`.
 
+The existence of `u` and `v` alone is the first half of blueprint `det-pd-generic-dualizing-twist`
+(stated there Zariski locally; it holds globally by generic base change for `Rf^!`); `u` and `v`
+are part of the conclusion because the equation fixes them up to automorphisms.
+
 Unfinished. The blueprint proof embeds the total space locally over `𝔸¹_S` into `𝔸^r_{𝔸¹_S}`,
 identifies `θ` on the smooth model and its slice with smooth purity (which differ by
 `ℚ̄_ℓ(1)[2]`), transports along the exceptional exchange `β_i` of the closed immersion

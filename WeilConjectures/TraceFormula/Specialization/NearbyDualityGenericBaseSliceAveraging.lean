@@ -16,8 +16,8 @@ at a finite level, the inclusion of the summand cut out by the averaging idempot
 group of Galois automorphisms of the slice model
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`). This is
 the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P` of SGA 4½, [Th. finitude], §3
-(Lemme 3.4 and 3.7), with the pro-`p` averaging; it is owned by the nearby-finiteness slice
-tasks (#1790, `trace2/nearby-slice-traits`).
+(Lemme 3.4 and 3.7), with the pro-`p` averaging. It is not proved here (see the docstring of the
+lemma).
 
 -/
 
@@ -72,9 +72,14 @@ generic point `Spec Ω_K` through automorphisms `σ` over the generic point `η_
 with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
 The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`.
 
-Owned by the nearby-finiteness slice tasks: to be proved on `trace2/nearby-finiteness-slice`
-(#1790) and `trace2/nearby-slice-traits`, from (M2),
-`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom`. -/
+Unfinished. This is stronger than the splitting (M2)
+`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom` of
+#1790, which is itself `sorry` there: besides a retraction it needs the action of `P` on
+`Ψ_{M''} c^* Aᵢ` to factor through a finite quotient realised by automorphisms of the slice model.
+Missing are: the Galois-layer form of the slice model (an algebraic geometric generic point of the
+slice trait over the strict localization `S'` of `𝔸¹_S`), Deligne's finiteness over `S'` (so that
+`P` acts through a finite quotient on `ℚ̄_ℓ`-complexes), and the passage of the torsion splittings
+of #1818 to `ℚ̄_ℓ` coefficients through `R lim`. -/
 theorem exists_averaging_genericSliceExchange
     (A₁ A₂ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (Γ : Type u) (_ : Group Γ) (_ : Fintype Γ)
