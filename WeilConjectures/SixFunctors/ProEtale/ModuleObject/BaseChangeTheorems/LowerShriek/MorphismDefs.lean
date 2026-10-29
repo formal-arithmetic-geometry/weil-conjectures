@@ -43,7 +43,8 @@ the namespaces `ProEtale.CondensedRing`, `ProEtale.CondensedRing.ContinuousMapRi
     `ProEtale.CondensedRing.boundedConstructibleBaseChange`;
   - the *extension-by-zero exchange* for the open-immersion square of the base-changed
     compactification. Its canonical mate goes in the direction `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*`,
-    base change for extension by zero asserts that it is an isomorphism (currently `sorry`),
+    base change for extension by zero asserts that it is an isomorphism
+    (`ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`),
     and the pasting uses its inverse.
 * **For the lower shriek.** For the coefficient rings `E̲` of a finite subextension `E ⊆ ℚ̄_ℓ` and
   `ℚ̲̄_ℓ`, the morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for the lower shriek
@@ -77,7 +78,7 @@ All schemes are separated and of finite type over a field `k` of characteristic 
   `boundedConstructibleOpenImmersionLowerShriekBaseChange'` of
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`, which is
   an isomorphism by `isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'` (blueprint
-  `sk-def-sfb-open-base-change`, `sorry`ed there).
+  `sk-def-sfb-open-base-change`).
 
 -/
 
