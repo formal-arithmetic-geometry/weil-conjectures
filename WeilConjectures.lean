@@ -10709,6 +10709,7 @@ public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
+public import WeilConjectures.RepresentationTheory.WeilGroupLattice
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
@@ -14564,7 +14565,9 @@ public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
+public import WeilConjectures.WeilSheaf.CondensedLisseRepresentation
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
+public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevel
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevelColimit
