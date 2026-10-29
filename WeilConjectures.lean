@@ -9544,7 +9544,9 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathGeometr
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Adic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicBase
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicDVR
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicField
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicStrictlyLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicityStalk
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineGluing

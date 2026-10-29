@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicDVR
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicStrictlyLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicityStalk
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
@@ -84,7 +86,8 @@ theorem bijective_cohomologyMap_affineLine_of_strictlyHenselian
       (AffineSpace.map (ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom φ)))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         ((𝔸(ULift.{u} (Fin 1); Spec (.of A)) ↘ Spec (.of A))^*[ModuleCat.{u + 1} Λ].obj M)) q) := by
-  sorry
+  exact bijective_cohomologyMap_affineLine_of_strictlyHenselian_of_affineLineAcyclicAt Λ
+    (fun A _ _ _ _ ↦ affineLineAcyclicAt_of_isDiscreteValuationRing Λ A) φ M q
 
 /-- The exchange morphism of the affine line `p : 𝔸¹_S ⟶ S` along any `g : T ⟶ S` is an
 isomorphism in every degree at the pullback `p^* L` of a locally constant sheaf `L` of
