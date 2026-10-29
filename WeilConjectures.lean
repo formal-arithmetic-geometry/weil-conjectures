@@ -13464,6 +13464,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructure
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructureAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeBasis
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeCocycle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeDescent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeTransition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLatticeValues
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
