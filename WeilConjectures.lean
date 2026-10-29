@@ -8623,6 +8623,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunction
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange
+public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionClass
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionTriangle
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionUnit
 public import WeilConjectures.CategoryTheory.Monoidal.MapIsoUnit
@@ -12543,6 +12544,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDualityBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.KernelBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.LowerShriekTraceCounitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
@@ -12550,7 +12552,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAssembly
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TraceCounitLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
@@ -12627,6 +12631,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CommSq
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
