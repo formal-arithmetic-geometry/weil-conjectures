@@ -4050,6 +4050,7 @@ public import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleUnitNatural
 public import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity
 public import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends
 public import WeilConjectures.AlgebraicGeometry.GaloisCategories
+public import WeilConjectures.AlgebraicGeometry.GaloisFieldCover
 public import WeilConjectures.AlgebraicGeometry.GaloisFiniteInvariantClopenPartition
 public import WeilConjectures.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
 public import WeilConjectures.AlgebraicGeometry.GaloisPointGeometricComparison
@@ -12655,6 +12656,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
@@ -12662,7 +12664,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExcha
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
@@ -12970,6 +12974,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleProject
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CechComparisonUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologyLimit
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
