@@ -4059,6 +4059,7 @@ public import WeilConjectures.AlgebraicGeometry.GeneratingSectionsStalkSpan
 public import WeilConjectures.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
 public import WeilConjectures.AlgebraicGeometry.GenericComponentsSplit
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.GenericRegularity
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GenericSmoothness
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.GeometricGenericFiber
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
@@ -13324,6 +13325,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafDevissage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafRegularDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoefficientTensorHypotheses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTraceCover
@@ -13400,13 +13402,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundIntegers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundRationalLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundTransport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundUniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing

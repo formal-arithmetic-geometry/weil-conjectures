@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundCompatIntegralModel
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
@@ -14,23 +13,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyc
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 
 /-!
-# The uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`
+# Helpers for the uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`
 
 Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
-subextension of `ℚ_ℓ` and `X` a scheme with noetherian underlying space. If constructible
-`𝒪_{E,X}`-modules satisfy the uniform `Ext` bound and `Hom(M[0], -[q])` factors through filtered
-colimits for constructible `𝒪_{E,X}`-modules `M`, then constructible `E_X`-modules satisfy the
-uniform `Ext` bound
-(`ProEtale.hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj`).
-
-Every constructible `E_X`-module is `E ⊗ M₀` for a constructible `𝒪_{E,X}`-module `M₀`: take
-`H⁰` of an integral model (`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), the
-extension of scalars `𝒪_E ⟶ E` being exact
-(`ProEtale.preservesFiniteLimits_extendScalars_padicIntegersToPadicSubfield`). Then
-`Ext^q_E(E ⊗ M₀, E ⊗ B₀) = Ext^q_{𝒪_E}(M₀, E ⊗ B₀)` by adjunction, `E ⊗ B₀` is the filtered
-colimit of `B₀ --ℓ--> B₀ --ℓ--> ⋯` (`ProEtale.isColimitPadicIntegersRingObjSmulSequenceCocone`),
-so every class factors through some `Ext^q_{𝒪_E}(M₀, B₀)`, which vanishes for `q` large
-independently of `B₀`.
+subextension of `ℚ_ℓ` and `X` a scheme. This file computes `Ext` between extensions of scalars
+`E ⊗_{𝒪_E} M₀` of `𝒪_{E,X}`-modules: by adjunction
+`Ext^q_E(E ⊗ M₀, E ⊗ B₀) = Ext^q_{𝒪_E}(M₀, E ⊗ B₀)`, and `E ⊗ B₀` is the filtered colimit of
+`B₀ --ℓ--> B₀ --ℓ--> ⋯` (`ProEtale.isColimitPadicIntegersRingObjSmulSequenceCocone`), so every
+class factors through some `Ext^q_{𝒪_E}(M₀, B₀)`
+(`ProEtale.eq_zero_of_extendScalars_padicIntegersToPadicSubfield`). The uniform bound itself is
+deduced in `...Derived.UniformExtBoundRationalLattice`.
 -/
 
 @[expose] public section
@@ -124,29 +116,6 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
-/-- **Integral models of constructible `E_X`-modules**: on a topologically noetherian scheme,
-every constructible `E_X`-module `M` is `E ⊗_{𝒪_E} M₀` for a constructible `𝒪_{E,X}`-module `M₀`.
-Take `M₀ = H⁰(K₀)` for an integral model `K₀` of `M[0]`
-(`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`): extension of scalars is exact,
-so it commutes with `H⁰`. -/
-lemma exists_extendScalars_padicIntegersToPadicSubfield_obj_iso {X : Scheme.{u}}
-    [TopologicalSpace.NoetherianSpace X]
-    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X))
-    (hM : IsConstructibleModuleObject _ M) :
-    ∃ M₀ : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X),
-      IsConstructibleModuleObject _ M₀ ∧
-        Nonempty ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).obj M₀ ≅ M) := by
-  obtain ⟨K₀, ⟨e⟩⟩ := uniformExtBoundCompat_integralModel X ℓ E
-    ⟨_, CondensedRing.boundedConstructible_singleFunctor_obj _ X 0 M hM⟩
-  exact ⟨(DerivedCategory.homologyFunctor _ 0).obj K₀.obj, K₀.2.2 0,
-    ⟨((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctorHomologyFunctorIso
-        0).app K₀.obj ≪≫ (DerivedCategory.homologyFunctor _ 0).mapIso
-          ((boundedConstructibleExtendScalarsCompatibility X ℓ E).symm.app K₀ ≪≫
-            (boundedConstructible _).ι.mapIso e) ≪≫
-      (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M⟩⟩
-
 /-- `p_X^*(ℓ⁻⁰ φ) = φ`. -/
 lemma padicIntegersToPadicSubfieldInvPow_zero (X : Scheme.{u}) :
     padicIntegersToPadicSubfieldInvPow ℓ E X 0 = padicIntegersToPadicSubfield X ℓ E :=
@@ -217,32 +186,5 @@ lemma eq_zero_of_extendScalars_padicIntegersToPadicSubfield {X : Scheme.{u}}
       ℓ E hc N hb B₀ hB₀ n hn (adj.homEquiv _ _ f' ≫ e.hom)).trans zero_comp.symm)
   exact (cancel_epi (leftDerivedExtendScalarsSingleFunctorIso ℓ E M₀).hom).1
     ((adj.eq_zero_of_homEquiv_eq_zero h).trans comp_zero.symm)
-
-set_option maxHeartbeats 400000 in
--- matching the vanishing statement of `eq_zero_of_extendScalars_padicIntegersToPadicSubfield`
--- against that of `HasUniformConstructibleExtBound` unfolds the derived categories of modules
-/-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`: the uniform `Ext`
-bound for constructible `E_X`-modules follows from the uniform bound and the continuity of
-`Ext` for constructible `𝒪_{E,X}`-modules. -/
-theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj
-    {X : Scheme.{u}} [IsNoetherian X]
-    (hb : HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X))
-    (hc : HasConstructibleExtContinuity
-      (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E.1) X)) :
-    HasUniformConstructibleExtBound
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) X) := by
-  intro M hM
-  have : TopologicalSpace.NoetherianSpace X := inferInstance
-  obtain ⟨M₀, hM₀, ⟨eM⟩⟩ := exists_extendScalars_padicIntegersToPadicSubfield_obj_iso ℓ E M hM
-  obtain ⟨N, hN⟩ := hb M₀ hM₀
-  refine ⟨N, fun B hB n hn f ↦ ?_⟩
-  obtain ⟨B₀, hB₀, ⟨eB⟩⟩ := exists_extendScalars_padicIntegersToPadicSubfield_obj_iso ℓ E B hB
-  have h := eq_zero_of_extendScalars_padicIntegersToPadicSubfield ℓ E (hc M₀ hM₀) N hN B₀ hB₀ n hn
-    ((DerivedCategory.singleFunctor _ 0).map eM.hom ≫ f ≫
-      (DerivedCategory.singleFunctor _ n).map eB.inv)
-  refine (Iso.cancel_iso_hom_left ((DerivedCategory.singleFunctor _ 0).mapIso eM) _ _).1
-    ((Iso.cancel_iso_inv_right_assoc _ _ _ _ ((DerivedCategory.singleFunctor _ n).mapIso eB)).1 ?_)
-  exact h.trans (comp_zero.symm.trans (congrArg _ zero_comp.symm))
 
 end AlgebraicGeometry.ProEtale
