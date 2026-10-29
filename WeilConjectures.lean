@@ -6261,6 +6261,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.KoszulResolution
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineChartBasis
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDiagonal
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineGeometricallyIrreducible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
@@ -9327,6 +9328,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImage
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImageGerm
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ExtendScalarsCohomologyPullback
@@ -9339,6 +9341,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryProductOne
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerChernClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
@@ -9359,6 +9362,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomo
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologySupports
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyTriangle
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineConstantEnd
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineDiagonalIntegrals
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
@@ -9379,6 +9384,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportReflection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTatePureLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
@@ -9391,6 +9397,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.WeilEquivariance
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ZeroSectionPurity
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLine
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent
