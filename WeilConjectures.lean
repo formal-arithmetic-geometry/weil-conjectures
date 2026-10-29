@@ -14561,6 +14561,7 @@ public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 public import WeilConjectures.WeilSheaf.ComplexWeights
+public import WeilConjectures.WeilSheaf.CondensedModelWeil
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
@@ -14781,6 +14782,7 @@ public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
 public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonConstant
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonSpec
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
