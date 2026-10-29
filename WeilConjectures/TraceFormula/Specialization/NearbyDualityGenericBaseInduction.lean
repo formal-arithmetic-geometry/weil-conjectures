@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingGenericBaseExistence
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseDenseCompactification
 
 /-!
