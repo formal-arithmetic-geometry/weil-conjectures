@@ -9364,6 +9364,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomo
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyTriangle
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineConstantEnd
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineDiagonalIntegrals
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineDiagonalPurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
