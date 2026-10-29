@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 import WeilConjectures.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.AlgebraicGeometry.SmallStrictLocalSectionMaps
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationRingResidue
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # The degree-zero exchange factorization through strict-local sections
@@ -112,7 +113,7 @@ theorem qcqs_geometricExchange_factorization
   let : Algebra (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
     (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
   obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
-    strictHenselizationResidue s rfl
+    strictHenselizationRingResidue s rfl
   let := hlocal
   let t := Spec.map (CommRingCat.ofHom
     (((IntermediateField.val

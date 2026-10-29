@@ -32,6 +32,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
 import WeilConjectures.AlgebraicGeometry.ProperSupportSheafComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
+
 /-!
 # Unbounded proper/open composition
 

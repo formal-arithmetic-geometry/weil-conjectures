@@ -39,6 +39,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.CategoryTheory.DerivedExactCompositionComparison
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
+
 /-!
 # Unbounded proper/open interchange and its canonical normalizations
 

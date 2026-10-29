@@ -12,6 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedExactMate
 
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
+
 /-!
 # The unbounded module exchange on K-injective representatives
 

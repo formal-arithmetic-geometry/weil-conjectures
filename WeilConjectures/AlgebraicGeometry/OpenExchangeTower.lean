@@ -8,6 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComp
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+
+-- Internal comparison lemmas are shared through private imports.
+set_option linter.privateModule false
 /-! The compactification tower calculation for open composition. -/
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits
