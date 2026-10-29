@@ -182,13 +182,13 @@ lemma abSectionAct_zero (a : (adicConstantSheaf l X).obj.obj U) : abSectionAct N
 
 variable (U) in
 /-- The constant function with value `c`, a section of `ℚ̄_ℓ,X` over `U`. -/
-noncomputable abbrev constSection (c : ULift.{u + 1} (PadicAlgCl l)) :
+noncomputable abbrev constScalarSection (c : ULift.{u + 1} (PadicAlgCl l)) :
     (adicConstantSheaf l X).obj.obj U :=
   ULift.up (algebraMap _ _ c.down)
 
 /-- Restrictions of constant sections are constant. -/
-lemma map_constSection {V : X.ProEtᵒᵖ} (f : U ⟶ V) (c : ULift.{u + 1} (PadicAlgCl l)) :
-    (adicConstantSheaf l X).obj.map f (constSection U c) = constSection V c :=
+lemma map_constScalarSection {V : X.ProEtᵒᵖ} (f : U ⟶ V) (c : ULift.{u + 1} (PadicAlgCl l)) :
+    (adicConstantSheaf l X).obj.map f (constScalarSection U c) = constScalarSection V c :=
   rfl
 
 /-- The action of the constant section `c` on a module object over `forgetAb ℚ̄_ℓ,X`, as an
@@ -196,15 +196,15 @@ endomorphism of the underlying abelian sheaf. -/
 noncomputable def constAct (c : ULift.{u + 1} (PadicAlgCl l)) : N.X ⟶ N.X :=
   { hom :=
     { app U := AddCommGrpCat.ofHom
-        { toFun := abSectionAct N (constSection U c)
+        { toFun := abSectionAct N (constScalarSection U c)
           map_zero' := abSectionAct_zero N _
           map_add' := abSectionAct_add N _ }
       naturality _ _ f := AddCommGrpCat.ext fun x ↦
         ((map_abSectionAct N f _ x).trans
-          (congrArg (abSectionAct N · _) (map_constSection f c))).symm } }
+          (congrArg (abSectionAct N · _) (map_constScalarSection f c))).symm } }
 
 lemma constAct_app (c : ULift.{u + 1} (PadicAlgCl l)) (x : N.X.obj.obj U) :
-    (constAct N c).hom.app U x = abSectionAct N (constSection U c) x :=
+    (constAct N c).hom.app U x = abSectionAct N (constScalarSection U c) x :=
   rfl
 
 /-- The constant sections act on a module object over `forgetAb ℚ̄_ℓ,X` through a ring
@@ -245,13 +245,13 @@ noncomputable def toWeilSheaf :
 /-- Scalars act on the sections of `toWeilSheaf N` as constant sections. -/
 lemma toWeilSheaf_smul (c : ULift.{u + 1} (PadicAlgCl l))
     (x : ((toWeilSheaf l X).obj N).obj.obj U) :
-    c • x = abSectionAct N (constSection U c) x :=
+    c • x = abSectionAct N (constScalarSection U c) x :=
   rfl
 
 /-- The `ℚ̄_ℓ`-vector space structure of `ℚ̄_ℓ,X(U)` is multiplication by constant sections. -/
 lemma smul_eq_constSection_mul (c : ULift.{u + 1} (PadicAlgCl l))
     (a : (adicConstantSheaf l X).obj.obj U) :
-    c • a = ULift.up ((constSection U c).down * a.down) :=
+    c • a = ULift.up ((constScalarSection U c).down * a.down) :=
   ULift.ext _ _ (Algebra.smul_def c.down a.down)
 
 variable (U) in
@@ -410,7 +410,7 @@ space structure. -/
 lemma act_μ_constSection_tmul (c : ULift.{u + 1} (PadicAlgCl l)) (x : M.X.obj.obj U) :
     (Mod.act M.X).hom.app U ((Functor.LaxMonoidal.μ (sheafToPresheaf
         (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)) (adicConstantSheaf l X) M.X).app U
-          (constSection U c ⊗ₜ x)) = c • x := by
+          (constScalarSection U c ⊗ₜ x)) = c • x := by
   let := (sheafToPresheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l)).modObjObj
     (A := adicConstantSheaf l X) M.X
   have h := congrArg (fun g ↦ g.app U (c ⊗ₜ x))
@@ -423,7 +423,7 @@ lemma act_μ_constSection_tmul (c : ULift.{u + 1} (PadicAlgCl l)) (x : M.X.obj.o
 multiplication. -/
 lemma abSectionAct_forgetAb_obj_constSection (c : ULift.{u + 1} (PadicAlgCl l))
     (x : M.X.obj.obj U) :
-    abSectionAct ((forgetAb l X).obj M) (constSection U c) x = c • x :=
+    abSectionAct ((forgetAb l X).obj M) (constScalarSection U c) x = c • x :=
   (abSectionAct_forgetAb_obj M _ x).trans (act_μ_constSection_tmul M c x)
 
 variable {M} {M' : AdicSheaf l X}
