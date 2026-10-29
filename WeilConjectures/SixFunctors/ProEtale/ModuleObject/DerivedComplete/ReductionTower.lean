@@ -256,6 +256,9 @@ open scoped CategoryTheory.Obj
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ} {X : Scheme.{u}}
 
+set_option maxHeartbeats 1000000 in
+-- rewriting `Functor.map_id` under `derivedReduction` unifies large instance terms for the
+-- coercion of the `FiniteIntermediateField` `E` to a type
 /-- **Derived Nakayama**: on a derived complete `𝒪_E`-complex `M`, the endomorphism
 `𝟙 + ℓ • x` is an isomorphism for every endomorphism `x`, since `ℓ` acts by zero on the first
 derived reduction. -/
