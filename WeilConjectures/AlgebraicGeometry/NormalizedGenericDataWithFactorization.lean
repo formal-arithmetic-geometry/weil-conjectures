@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 
 module
+
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -12,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConsta
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.ConstructibleSheaf.Pullback
 import all WeilConjectures.AlgebraicGeometry.NormalizedGenericDataCore
+
 /-!
 # Normalized generic data retaining the residue-field square
 

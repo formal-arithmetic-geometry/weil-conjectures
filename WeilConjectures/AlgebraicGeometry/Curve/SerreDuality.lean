@@ -23,7 +23,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
-public import Mathlib.Order.CompletePartialOrder
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Local theory of smooth curves and finite morphisms to the projective line

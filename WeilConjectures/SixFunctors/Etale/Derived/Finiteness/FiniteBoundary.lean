@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
-public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+import WeilConjectures.SixFunctors.Etale.Derived.Supports
 
 /-!
 # Proper direct images and a finite boundary

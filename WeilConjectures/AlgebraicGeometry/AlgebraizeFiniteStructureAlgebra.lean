@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.FiniteStructureAlgebraLift
 import WeilConjectures.AlgebraicGeometry.FiniteStructureProperSupport
 import all WeilConjectures.AlgebraicGeometry.SupportedThickeningDictionary
@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckExistence
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Algebraization of the structure algebras of a finite formal system
 

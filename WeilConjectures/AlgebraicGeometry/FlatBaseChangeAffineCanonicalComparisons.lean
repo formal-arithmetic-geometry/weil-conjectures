@@ -5,15 +5,17 @@ Authors: Bin Wu
 -/
 
 module
+
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.AffineCohomologySectionEquiv
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+
 /-! # Canonical affine section comparisons before flat base change
 
 Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,

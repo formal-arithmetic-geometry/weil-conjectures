@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-
-
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.ConstructibleSheaf.Defs
@@ -21,7 +19,7 @@ import Mathlib.CategoryTheory.Presentable.Limits
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves

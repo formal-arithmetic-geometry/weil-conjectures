@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-
-
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.AlgebraicGeometry.EtaleEdgeMapBaseChange
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
@@ -19,9 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Etale.Gabber
-public import Mathlib
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Order.CompletePartialOrder
 
 /-! # Acyclic closed term for a dense-open counit -/
 

@@ -19,8 +19,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import Mathlib.Data.Int.ConditionallyCompleteOrder
 
 /-!
 # Serre's theorems on the cohomology of projective schemes

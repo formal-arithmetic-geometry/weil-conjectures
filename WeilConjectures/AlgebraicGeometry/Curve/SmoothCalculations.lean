@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierSequence
 import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPDegreeTwo
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
@@ -30,8 +31,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 import WeilConjectures.AlgebraicGeometry.Curve.ClopenConstantAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.Algebra.Field.ULift
+import Mathlib.Algebra.Field.ULift
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

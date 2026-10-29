@@ -5,15 +5,16 @@ Authors: Bin Wu
 -/
 
 module
+
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineCanonicalComparisons
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 @[expose] public section
 universe u

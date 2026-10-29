@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 
 /-!
 # The global sections are perfect at the point

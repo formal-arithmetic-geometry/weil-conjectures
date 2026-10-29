@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
-public import Mathlib.Algebra.Category.Grp.Abelian
 
 /-!
 # Products of quasi-coherent ideals and modules

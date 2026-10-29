@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import Mathlib
 
 /-!
 

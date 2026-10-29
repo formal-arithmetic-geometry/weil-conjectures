@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
-
-
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso

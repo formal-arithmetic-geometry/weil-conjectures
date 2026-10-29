@@ -7,12 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
+public import Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion
 import WeilConjectures.AlgebraicGeometry.HenselianBoundedAbelianComparisonStep
-public import Mathlib.RingTheory.Henselian
 
 /-!
 # Surjectivity of henselian restriction for bounded abelian coefficients

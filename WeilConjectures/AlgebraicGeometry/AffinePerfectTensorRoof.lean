@@ -8,13 +8,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
-import WeilConjectures.AlgebraicGeometry.AffineKoszulSectionRoof
-import WeilConjectures.AlgebraicGeometry.TensorRoofTransposition
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
+import WeilConjectures.AlgebraicGeometry.AffineKoszulSectionRoof
+import WeilConjectures.AlgebraicGeometry.TensorRoofTransposition
 
 /-! # Koszul tensor roof lifting an affine open morphism
 

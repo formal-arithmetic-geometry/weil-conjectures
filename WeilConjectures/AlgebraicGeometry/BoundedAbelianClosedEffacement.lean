@@ -7,19 +7,17 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleClosedEffacement
 import Mathlib.CategoryTheory.Abelian.Basic
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.AlgebraicGeometry.QuasiAffine
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.AlgebraicGeometry.QuasiAffine
 
 /-! # Effacement preserving a fixed coefficient exponent
 

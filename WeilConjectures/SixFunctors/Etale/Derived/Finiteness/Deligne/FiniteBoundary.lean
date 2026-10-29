@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.OpenCover
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ClosedImmersion
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ClosedImmersion
 
 /-!
 # Generic constructibility across a finite boundary

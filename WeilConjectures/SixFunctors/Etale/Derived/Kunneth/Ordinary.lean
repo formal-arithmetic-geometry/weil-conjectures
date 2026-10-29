@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle
-public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # The Künneth formula in ordinary étale cohomology

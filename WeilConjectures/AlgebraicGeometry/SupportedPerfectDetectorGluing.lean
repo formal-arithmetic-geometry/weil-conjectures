@@ -8,9 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.SupportedDetectorOpenLift
 import WeilConjectures.AlgebraicGeometry.SupportedKoszulUnitSummand
-public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Gluing supported perfect zero detectors
 

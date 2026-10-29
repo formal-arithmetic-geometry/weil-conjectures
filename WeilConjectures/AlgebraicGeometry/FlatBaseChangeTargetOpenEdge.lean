@@ -9,13 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.AffineResolutionSectionBijective
 import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
 /-! # Normalized Leray edge on a smaller target open
 

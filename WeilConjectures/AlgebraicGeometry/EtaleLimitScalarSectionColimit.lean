@@ -6,15 +6,12 @@ Authors: Bin Wu
 
 module
 
-
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives
 import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionEventualEquality
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-! # Scalar section comparison along an inverse system
 Source: Stacks Project, Tags 09YN and 09YQ.

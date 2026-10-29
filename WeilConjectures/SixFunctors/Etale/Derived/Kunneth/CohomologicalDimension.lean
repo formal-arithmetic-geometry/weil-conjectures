@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTors
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
-public import Mathlib.Condensed.Discrete.Characterization
+import Mathlib.Condensed.Discrete.Characterization
 
 /-!
 # Cohomological dimension of étale sheaves of `Λ`-modules

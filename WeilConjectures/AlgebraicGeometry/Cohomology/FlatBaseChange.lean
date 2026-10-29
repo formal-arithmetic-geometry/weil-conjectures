@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.ExtendScalars
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.Pullback
 public import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate
-public import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Cohomology and flat base change

@@ -6,10 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
-public import Mathlib.Tactic.ReduceModChar
-public import Mathlib.RingTheory.WittVector.IsPoly
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 
 /-!
 # Elementary operations preserving bounded constructibility

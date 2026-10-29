@@ -8,14 +8,12 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionContinuity
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Filtered.Final
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 set_option linter.unusedVariables false
 

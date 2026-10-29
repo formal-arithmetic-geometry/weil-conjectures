@@ -7,10 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionOpenMap
-
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSections
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyAugmentedLift
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # The open cohomology map of a fixed resolution lift
 

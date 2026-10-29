@@ -8,13 +8,13 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.SiteCechComplex
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import WeilConjectures.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-!
 # The Čech vanishing criterion for module sheaves

@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-
-
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComplex
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Model
 

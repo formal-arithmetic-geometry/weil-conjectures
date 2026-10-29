@@ -10,8 +10,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.RestrictScalars
-import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 
 /-!
 # The coefficients of the smooth base change theorem

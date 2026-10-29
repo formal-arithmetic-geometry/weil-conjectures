@@ -6,16 +6,14 @@ Authors: Bin Wu
 
 module
 
-
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Reduction data for constant coefficients on reduced curves
 

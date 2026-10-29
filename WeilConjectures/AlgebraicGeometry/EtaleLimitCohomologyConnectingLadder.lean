@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAcyclicReplacement
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Degree reduction for etale limit cohomology
 

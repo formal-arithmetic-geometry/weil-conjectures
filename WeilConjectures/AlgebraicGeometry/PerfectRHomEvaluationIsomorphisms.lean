@@ -7,12 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectRHomEvaluationLocal
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 import Mathlib.CategoryTheory.Yoneda
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Local computations for the perfect internal dual -/
 

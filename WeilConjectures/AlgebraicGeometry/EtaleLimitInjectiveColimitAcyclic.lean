@@ -7,7 +7,11 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
-
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
@@ -15,15 +19,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
-public import Mathlib.CategoryTheory.Sites.LocalSite
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Descent
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import Mathlib.Data.NNReal.Defs
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.CategoryTheory.Sites.LocalSite
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Descent
 
 /-! # Etale replacement: construction and vanishing
 

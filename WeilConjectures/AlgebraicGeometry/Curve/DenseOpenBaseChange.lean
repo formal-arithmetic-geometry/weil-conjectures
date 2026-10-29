@@ -8,12 +8,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenLowBaseChange
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
-public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Field extension across a dense open -/
 

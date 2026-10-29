@@ -9,11 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Mathlib.CategoryTheory.Yoneda
 import WeilConjectures.AlgebraicGeometry.DualizableEvaluationCriterion
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparisonDual
 import WeilConjectures.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 
 /-! # Perfect RHom tensor comparison
 

@@ -6,14 +6,12 @@ Authors: Bin Wu
 
 module
 
-
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChange
-public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-! # Dense-open comparison for prime-torsion module sheaves -/
 

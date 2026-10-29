@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
+import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 
 /-!
 # Geometric stalks commute with finite-level coefficient reduction

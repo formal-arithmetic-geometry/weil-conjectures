@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData
 
-
 /-! # Connecting square for relative Mayer--Vietoris base change
 
 Source: Stacks Project, Tags 08BV, 08HY and 0DJ9

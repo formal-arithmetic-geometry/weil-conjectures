@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Restricted resolution choices for the section formula
 

@@ -6,22 +6,18 @@ Authors: Bin Wu
 
 module
 
-
-
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
-
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 import WeilConjectures.AlgebraicGeometry.FormalComparisonCompletedAffineTransport
 import WeilConjectures.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization
 import WeilConjectures.AlgebraicGeometry.CompletedAffineComplementBaseChange
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
 /-! # Algebraization of the completed affine comparison as an adjunction
 

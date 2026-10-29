@@ -7,11 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineExactLadder
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import Mathlib.CategoryTheory.Filtered.Final
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Corrected lifts for the affine continuity kernel
 

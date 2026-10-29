@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
-import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 
 /-! # The local ordinary model of canonical derived evaluation
 

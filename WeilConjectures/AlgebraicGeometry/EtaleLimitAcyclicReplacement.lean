@@ -7,12 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitReplacementExactSystems
 import WeilConjectures.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 

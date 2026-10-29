@@ -7,13 +7,13 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 
