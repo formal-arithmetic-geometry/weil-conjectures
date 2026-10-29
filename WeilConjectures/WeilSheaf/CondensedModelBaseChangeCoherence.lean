@@ -1,6 +1,28 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
 module
 
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
+
+/-!
+# The Frobenius coherence of the base change to geometric fibres
+
+`WeilConjectures.WeilSheaf.CondensedModelBaseChange` reduces the Weil-structure version of the
+base change of `Rf_!` to geometric fibres to a Frobenius compatibility of the pullback comparison
+(`AlgebraicGeometry.ProEtale.CondensedRing.UpperStarWeilCompatible`). This file proves the
+coherences behind it, for module objects over a condensed ring `Λ`:
+
+- the pseudofunctor coherences of the pushforwards `lowerStarComp`, `lowerStarCongr` and
+  `lowerStarId`, and the unit and counit of the equivalence `lowerStarEquivalenceOfIso`;
+- the mate of the Frobenius exchange of the pushforward along the adjunctions `(F⁻¹)_* ⊣ F_*`
+  (`AlgebraicGeometry.ProEtale.CondensedRing.leftMateIso_lowerStarFrobeniusExchange`);
+- the Frobenius compatibility of the comparison `φ^* pX^* ≅ pY^* φ'^*` for a commutative square
+  with Frobenius-invariant projections
+  (`AlgebraicGeometry.ProEtale.CondensedRing.upperStarSquareComparison_inv_app_frobenius`).
+-/
 
 @[expose] public section
 
