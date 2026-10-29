@@ -63,7 +63,6 @@ variable [IsAlgClosed k] [CharZero k] {G : Over (Spec (.of k))} [GrpObj G]
   [LocallyOfFiniteType G.hom] {I : Type u} [Fintype I] [DecidableEq I]
   (b : Module.Basis I k (Lie G))
 
-omit [CharZero k] in
 /-- The conjugation by a central rational point is the identity. -/
 theorem conjBy_centerι_eq [IsReduced G.left] (z : 𝟙_ (Over (Spec (.of k))) ⟶ center G) :
     conjBy G (z ≫ centerι G) = 𝟙 G := by
@@ -84,7 +83,6 @@ theorem centerι_comp_adjoint (z : 𝟙_ (Over (Spec (.of k))) ⟶ center G) :
   change (LinearMap.toMatrix b b LinearMap.id).map _ = 1
   rw [LinearMap.toMatrix_id, Matrix.map_one _ (map_zero _) (map_one _)]
 
-omit [IsAlgClosed k] in
 /-- **A rational point in the kernel of `Ad` is central**: if `Ad(h) = d(c_h) = 1`, the closed
 subgroup scheme `C_G(h)` has the Lie algebra of `G`, hence is `G`, `G` being connected. -/
 theorem exists_comp_centerι_of_comp_adjoint [QuasiCompact G.hom] [ConnectedSpace G.left]

@@ -10,15 +10,20 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Kernel
 /-!
 # The centre of a group scheme over an algebraically closed field
 
-Let `G` be a group scheme over a field `k`. Its centre `Z(G)` is the intersection of the
-centralizers `C_G(g)` of its rational points `g` (`AlgebraicGeometry.GrpObj.center`): the closed
-subscheme of `G` cut out by the supremum of their ideal sheaves. A morphism `x : X ⟶ G` factors
-through `Z(G)` if and only if it commutes with every rational point of `G`
-(`AlgebraicGeometry.GrpObj.exists_comp_centerι_iff`), so `Z(G)` is a closed subgroup scheme.
+Let `G` be a group scheme locally of finite type over an algebraically closed field `k` of
+characteristic zero (the setting of the blueprint). Its centre `Z(G)`
+(`AlgebraicGeometry.GrpObj.center`) is constructed as the intersection of the centralizers
+`C_G(g)` of its rational points `g`: the closed subscheme of `G` cut out by the supremum of their
+ideal sheaves. A morphism `x : X ⟶ G` factors through `Z(G)` if and only if it commutes with every
+rational point of `G` (`AlgebraicGeometry.GrpObj.exists_comp_centerι_iff`), so `Z(G)` is a closed
+subgroup scheme.
 
-In the setting of the blueprint (`L` algebraically closed of characteristic zero, `G` of finite
-type) the rational points of `G` are dense and `G` is reduced, and `Z(G)` is the centre of the
-algebraic group `G`; for `G` connected it is the kernel of the adjoint representation
+This is the centre of `G` because `G(k)` is schematically dense in `G`: `G` is reduced (Cartier's
+theorem, `k` of characteristic zero) and its rational points are its closed points, which are dense
+(`k` algebraically closed, `G` locally of finite type). Without these hypotheses the intersection
+of the centralizers of the rational points can be larger than the centre (for instance over a
+finite field, or for a non-reduced `G` in characteristic `p`), so the construction is only made
+under them. For `G` connected `Z(G)` is the kernel of the adjoint representation
 (`WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.AdjointCenter`).
 
 Over an algebraically closed field, a morphism from a reduced scheme locally of finite type factors
@@ -28,7 +33,8 @@ and they are dense.
 
 ## Main definitions
 
-- `AlgebraicGeometry.GrpObj.center`: the centre `Z(G)`, with its inclusion
+- `AlgebraicGeometry.GrpObj.center`: the centre `Z(G)` of a group scheme locally of finite type
+  over an algebraically closed field of characteristic zero, with its inclusion
   `AlgebraicGeometry.GrpObj.centerι : Z(G) ⟶ G`, a closed immersion and a homomorphism.
 
 ## Main statements
@@ -132,14 +138,23 @@ namespace GrpObj
 variable {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- The ideal sheaf of the centre: the supremum of the ideal sheaves of the centralizers of the
-rational points. -/
-noncomputable def centerIdeal : G.left.IdealSheafData :=
+rational points. It is only defined for `k` algebraically closed of characteristic zero and `G`
+locally of finite type, where it cuts out the centre `Z(G)` (see `center`). -/
+noncomputable def centerIdeal [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType G.hom] :
+    G.left.IdealSheafData :=
   ⨆ g : 𝟙_ (Over (Spec (.of k))) ⟶ G, (centralizerι g).left.ker
 
-/-- The centre `Z(G)` of a group scheme `G` over a field `k`: the intersection of the centralizers
-`C_G(g)` of the rational points `g` of `G`, a closed subgroup scheme of `G`. Its `X`-points are the
-`X`-points of `G` commuting with all rational points (`exists_comp_centerι_iff`).
-(blueprint: `sk-p-comparison`) -/
+variable [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType G.hom]
+
+/-- The centre `Z(G)` of a group scheme `G` locally of finite type over an algebraically closed
+field `k` of characteristic zero, a closed subgroup scheme of `G`. It is constructed as the
+intersection of the centralizers `C_G(g)` of the rational points `g` of `G`, so its `X`-points are
+the `X`-points of `G` commuting with all rational points (`exists_comp_centerι_iff`). This is the
+centre of `G` because `G(k)` is schematically dense in `G`: `G` is reduced (Cartier, `k` of
+characteristic zero) and its rational points are its closed points, which are dense (`k`
+algebraically closed, `G` locally of finite type). Over a general field this intersection can be
+strictly larger than the centre, hence the hypotheses. (blueprint: `sk-p-comparison`,
+`lem-ag-lie-centre`) -/
 noncomputable def center : Over (Spec (.of k)) :=
   Over.mk ((centerIdeal G).subschemeι ≫ G.hom)
 
@@ -205,7 +220,7 @@ noncomputable instance instGrpObjCenter : GrpObj (center G) :=
 instance isMonHom_centerι : IsMonHom (centerι G) :=
   GrpObj.isMonHom_ofMono _ _ _ _
 
-instance [LocallyOfFiniteType G.hom] : LocallyOfFiniteType (center G).hom := by
+instance : LocallyOfFiniteType (center G).hom := by
   rw [← Over.w (centerι G)]
   infer_instance
 
