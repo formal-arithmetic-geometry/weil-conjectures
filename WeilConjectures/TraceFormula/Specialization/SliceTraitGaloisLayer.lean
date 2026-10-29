@@ -54,7 +54,7 @@ variable {R₁ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRin
 
 /-- The structure map `R₁ ⟶ R` of a slice trait is injective. -/
 lemma injective_φ : Function.Injective D.φ :=
-  letI := D.φ.toAlgebra
+  let := D.φ.toAlgebra
   IsDiscreteValuationRing.injective_algebraMap_of_maximalIdeal_eq_map D.maximalIdeal_eq
 
 /-- **The geometric generic fibre of `Spec R ⟶ Spec R₁` over `Spec Ω₁` is a single point**:
@@ -64,8 +64,8 @@ theorem subsingleton_primeSpectrum (ha₁ : Function.Injective a₁)
     letI := D.φ.toAlgebra
     letI := a₁.toAlgebra
     Subsingleton (PrimeSpectrum (Ω₁ ⊗[R₁] D.R)) := by
-  letI := D.φ.toAlgebra
-  letI := a₁.toAlgebra
+  let := D.φ.toAlgebra
+  let := a₁.toAlgebra
   have : IsLocalHom (algebraMap R₁ D.R) := D.isLocalHom_φ
   let F := FractionRing D.R
   have hinj : Function.Injective ((algebraMap D.R F).comp D.φ) :=
@@ -81,7 +81,6 @@ section Galois
 variable [IsAlgClosed Ω₁] (ha₁ : Function.Injective a₁)
   (halg : letI := a₁.toAlgebra; Algebra.IsAlgebraic R₁ Ω₁)
 
-include ha₁ halg in
 /-- **The Galois extension `L^sep / L` of a slice trait is pro-`p`**: with the algebra structures
 given by `φ`, `a₁`, `a` and `ωS`, every finite Galois subextension of `L^sep / L`
 (`L = Ω₁(R) ⊆ Ω'`) has degree a power of `p`, for a prime `p` such that every natural number
@@ -100,16 +99,16 @@ theorem exists_finrank_eq_pow {p : ℕ} [Fact p.Prime]
       (traitTensorCompositumSep D.R Ω₁ D.Ω),
       ∃ k : ℕ, Module.finrank (traitTensorCompositum D.R Ω₁ D.Ω) L' = p ^ k := by
   intro L'
-  letI := D.φ.toAlgebra
-  letI := a₁.toAlgebra
-  letI := D.a.toAlgebra
-  letI := D.ωS.toAlgebra
-  letI : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
-  haveI : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
+  let := D.φ.toAlgebra
+  let := a₁.toAlgebra
+  let := D.a.toAlgebra
+  let := D.ωS.toAlgebra
+  let : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
+  have : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
     (RingHom.congr_fun D.ωS_comp x).symm
   let F := FractionRing D.R
-  letI : Algebra F D.Ω := (IsFractionRing.lift D.injective_a).toAlgebra
+  let : Algebra F D.Ω := (IsFractionRing.lift D.injective_a).toAlgebra
   have : IsScalarTower D.R F D.Ω := IsScalarTower.of_algebraMap_eq fun r ↦
     (IsFractionRing.lift_algebraMap D.injective_a r).symm
   have : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
@@ -186,17 +185,17 @@ theorem isSplitMono_toCartesian_pullbackExchange_app_of_sliceTrait
       ((finiteCoefficientDerivedEquivalence Y T₀).functor.obj C)) :
     IsSplitMono ((φ.toCartesian.pullbackExchange (Profinite.continuousMapRingObj T₀)).app C) := by
   have hsub := D.subsingleton_primeSpectrum ha₁ halg
-  have hdeg := D.exists_finrank_eq_pow ha₁ halg hp
-  letI := D.φ.toAlgebra
-  letI := a₁.toAlgebra
-  letI := D.a.toAlgebra
-  letI := D.ωS.toAlgebra
-  letI : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
-  haveI : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
+  have hdeg := D.exists_finrank_eq_pow hp
+  let := D.φ.toAlgebra
+  let := a₁.toAlgebra
+  let := D.a.toAlgebra
+  let := D.ωS.toAlgebra
+  let : Algebra R₁ D.Ω := (D.a.comp D.φ).toAlgebra
+  have : IsScalarTower R₁ D.R D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower R₁ Ω₁ D.Ω := IsScalarTower.of_algebraMap_eq fun x ↦
     (RingHom.congr_fun D.ωS_comp x).symm
-  haveI : FaithfulSMul D.R D.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D.injective_a
-  haveI : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
+  have : FaithfulSMul D.R D.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D.injective_a
+  have : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
   refine isSplitMono_toCartesian_pullbackExchange_app_of_traitChange (φ := φ) hM hN hq hg
     T₀ (fun L' ↦ ?_) C hC
   obtain ⟨k, hk⟩ := hdeg L'
@@ -238,7 +237,8 @@ theorem isSplitMono_pullbackExchange_app_toCartesian_sliceTraitHom
     IsSplitMono (((sliceTraitHom D N c hc hNj hNi).toCartesian.pullbackExchange
       (Profinite.continuousMapRingObj T₀)).app C) :=
   Hom.isSplitMono_toCartesian_pullbackExchange_app_of_sliceTrait D ha₁ halg
-    (sliceTraitHom D N c hc hNj hNi) (N := N.geometric) (isPullback_sliceTraitModel_j D N c) hNj (sliceTrait_fst_comp D N c hc)
+    (sliceTraitHom D N c hc hNj hNi) (N := N.geometric) (isPullback_sliceTraitModel_j D N c) hNj
+    (sliceTrait_fst_comp D N c hc)
     (hNj.lift_snd _ _ _) hp T₀ hpT C hC
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

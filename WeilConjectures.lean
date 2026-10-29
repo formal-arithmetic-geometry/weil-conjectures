@@ -10698,6 +10698,7 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevel
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
+public import WeilConjectures.RingTheory.DiscreteValuationRing.SeparablyClosedFractionField
 public import WeilConjectures.RingTheory.DiscreteValuationRingFiniteRank
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.DualDepthTwo
@@ -14108,6 +14109,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericSlicePoint
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayer
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUniversal
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
@@ -14188,6 +14190,13 @@ public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExcha
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
+public import WeilConjectures.TraceFormula.Specialization.SliceTrait
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitFunctoriality
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisTame
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitPoint
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitResidue
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
 public import WeilConjectures.TraceFormula.Specialization.StructuralProduct
@@ -14206,6 +14215,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeFinite
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeGaloisLayer
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeSquare
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
@@ -14240,6 +14250,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTameSy
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTensor
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
+public import WeilConjectures.TraceFormula.Specialization.TraitTensorCompositum
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernelFirst
