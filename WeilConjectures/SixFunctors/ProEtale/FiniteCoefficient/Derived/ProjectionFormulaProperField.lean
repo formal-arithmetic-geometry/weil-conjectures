@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
+public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 
 /-!
 # The proper projection formula for bounded constructible complexes over a finite field
@@ -45,7 +46,21 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_boundedConstructible
     (hN : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z N)
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     (hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y L) :
-    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g).app N).app L) :=
-  sorry
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g).app N).app L) := by
+  obtain ⟨N₀, hN₀, ⟨eN⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ N).1 hN
+  obtain ⟨L₀, hL₀, ⟨eL⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ L).1 hL
+  -- `L₀` has finite Tor amplitude since `Λ` is a field
+  obtain ⟨a, b, hL₀t⟩ : Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) Y L₀ := by
+    let := hΛ.toField
+    exact Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_field Λ Y hL₀
+  have hML := Etale.plus_derivedTensor_leftDerivedUpperStar g hN₀.1 hL₀t
+  -- the étale projection formula for the proper `g`
+  have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ g
+  have := isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived (ModuleCat.{u + 1} Λ) g
+    N₀ L₀ hN₀.1.1 hML
+  exact NatTrans.isIso_app_app_of_iso
+    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g)
+    ((ν^*(Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app N₀ ≪≫ eN)
+    ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀ ≪≫ eL)
 
 end AlgebraicGeometry.ProEtale
