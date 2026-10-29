@@ -77,7 +77,19 @@ lemma unit_app_comp_derivedReductionTransition_app (K : DerivedCategory (Mod C R
     (derivedExtendMapDerivedCategoryAdjunction φ').unit.app K ≫
         (derivedReductionTransition φ' ψ φ h).app K =
       (derivedExtendMapDerivedCategoryAdjunction φ).unit.app K := by
-  sorry
+  have h₁ := unit_conjugateEquiv_symm ((derivedExtendMapDerivedCategoryAdjunction φ').comp
+    (derivedExtendMapDerivedCategoryAdjunction ψ)) (derivedExtendMapDerivedCategoryAdjunction φ)
+    (mapDerivedCategoryComapCompIso φ' ψ φ h).hom K
+  rw [Adjunction.comp_unit_app, Category.assoc] at h₁
+  have h₂ := (mapDerivedCategoryComapCompIso φ' ψ φ h).hom.naturality
+    ((derivedExtendScalarsCompIso φ' ψ φ h).inv.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at h₂
+  simp only [derivedReductionTransition, derivedExtendScalarsTransition, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+  erw [h₂, reassoc_of% h₁]
+  rw [← Functor.map_comp, show ((conjugateEquiv _ _).symm _).app K ≫ _ = 𝟙 _ from
+    (derivedExtendScalarsCompIso φ' ψ φ h).hom_inv_id_app K, CategoryTheory.Functor.map_id,
+    Category.comp_id]
 
 /-- The **reduction** `S ⊗ᴸ_{S'} s` of a morphism `s : S' ⊗ᴸ_R B ⟶ S' ⊗ᴸ_R A`, read as a morphism
 `S ⊗ᴸ_R B ⟶ S ⊗ᴸ_R A` through the transitivity isomorphisms `Mod.derivedExtendScalarsCompIso`. -/
@@ -96,14 +108,37 @@ lemma comp_derivedExtendScalarsTransition_app {A B : DerivedCategory (Mod C R)}
     s ≫ (derivedExtendScalarsTransition φ' ψ φ h).app A =
       (derivedExtendScalarsTransition φ' ψ φ h).app B ≫
         (comap ψ).mapDerivedCategory.map (derivedExtendScalarsReduction φ' ψ φ h s) := by
-  sorry
+  simp only [derivedExtendScalarsTransition, derivedExtendScalarsReduction, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc, Functor.map_comp]
+  rw [← Functor.map_comp_assoc (comap ψ).mapDerivedCategory
+    ((derivedExtendScalarsCompIso φ' ψ φ h).inv.app B), Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  exact ((derivedExtendMapDerivedCategoryAdjunction ψ).unit.naturality_assoc s _)
+
+/-- The transition intertwines `D(Res_φ')` of a morphism `s : S' ⊗ᴸ_R B ⟶ S' ⊗ᴸ_R A` and `D(Res_φ)` of
+its reduction. -/
+@[reassoc]
+lemma map_comp_derivedReductionTransition_app {A B : DerivedCategory (Mod C R)}
+    (s : (extendScalars φ').leftDerivedFunctor.obj B ⟶
+      (extendScalars φ').leftDerivedFunctor.obj A) :
+    (comap φ').mapDerivedCategory.map s ≫ (derivedReductionTransition φ' ψ φ h).app A =
+      (derivedReductionTransition φ' ψ φ h).app B ≫
+        (comap φ).mapDerivedCategory.map (derivedExtendScalarsReduction φ' ψ φ h s) := by
+  simp only [derivedReductionTransition, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Category.assoc]
+  rw [← Functor.map_comp_assoc, comp_derivedExtendScalarsTransition_app, Functor.map_comp,
+    Category.assoc]
+  congr 1
+  exact (mapDerivedCategoryComapCompIso φ' ψ φ h).hom.naturality _
 
 /-- The reduction of the derived extension of scalars `S' ⊗ᴸ_R f` of a morphism `f` is
 `S ⊗ᴸ_R f`. -/
 lemma derivedExtendScalarsReduction_map {A B : DerivedCategory (Mod C R)} (f : B ⟶ A) :
     derivedExtendScalarsReduction φ' ψ φ h ((extendScalars φ').leftDerivedFunctor.map f) =
       (extendScalars φ).leftDerivedFunctor.map f := by
-  sorry
+  rw [derivedExtendScalarsReduction, ← Functor.comp_map,
+    ← (derivedExtendScalarsCompIso φ' ψ φ h).hom.naturality_assoc, Iso.hom_inv_id_app,
+    Category.comp_id]
 
 /-- The reduction of a composite is the composite of the reductions. -/
 lemma derivedExtendScalarsReduction_comp {A B D : DerivedCategory (Mod C R)}
@@ -113,6 +148,7 @@ lemma derivedExtendScalarsReduction_comp {A B D : DerivedCategory (Mod C R)}
       (extendScalars φ').leftDerivedFunctor.obj D) :
     derivedExtendScalarsReduction φ' ψ φ h (s ≫ s') =
       derivedExtendScalarsReduction φ' ψ φ h s ≫ derivedExtendScalarsReduction φ' ψ φ h s' := by
-  sorry
+  simp only [derivedExtendScalarsReduction, Functor.map_comp, Category.assoc,
+    Iso.inv_hom_id_app_assoc]
 
 end CategoryTheory.Mod

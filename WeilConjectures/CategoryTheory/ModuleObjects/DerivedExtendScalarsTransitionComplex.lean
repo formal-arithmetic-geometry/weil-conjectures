@@ -91,6 +91,7 @@ variable {φ' φ} (k' k m : ℤ) (hk : k' = m * k) (w' : (k' • 𝟙 R) ≫ φ'
   (hφ' : (ShortComplex.mk _ _ w').ShortExact) (w : (k • 𝟙 R) ≫ φ = 0)
   (hφ : (ShortComplex.mk _ _ w).ShortExact)
 
+include hk in
 /-- **The transition and the connecting morphisms of the reduction triangles**: if
 `0 ⟶ R --k'--> R --φ'--> S' ⟶ 0` and `0 ⟶ R --k--> R --φ--> S ⟶ 0` are short exact and
 `k' = m * k`, then `t ≫ δ = δ' ≫ m`, where `δ` and `δ'` are the connecting morphisms of the

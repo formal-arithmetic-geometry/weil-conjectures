@@ -40,6 +40,22 @@ We also record that complete objects are stable under shifts and extensions
 
 @[expose] public section
 
+namespace CategoryTheory.CatCenter
+
+variable {D : Type*} [Category* D] [Preadditive D]
+
+/-- The multiple `m • 1` of the unit of the center acts by `m • 𝟙`. -/
+@[simp]
+lemma zsmul_one_app (m : ℤ) (X : D) : (m • (1 : CatCenter D)).app X = m • 𝟙 X :=
+  NatTrans.app_zsmul X _ m
+
+/-- The multiple `m • 1` of the unit of the center commutes with the shifts. -/
+lemma zsmul_one_app_shift [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] (m : ℤ) (X : D)
+    (n : ℤ) : (m • (1 : CatCenter D)).app (X⟦n⟧) = ((m • (1 : CatCenter D)).app X)⟦n⟧' := by
+  rw [zsmul_one_app, zsmul_one_app, Functor.map_zsmul, CategoryTheory.Functor.map_id]
+
+end CategoryTheory.CatCenter
+
 namespace CategoryTheory.Pretriangulated
 
 open Category Limits Opposite
