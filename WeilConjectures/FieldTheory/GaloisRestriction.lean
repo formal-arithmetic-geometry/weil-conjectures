@@ -28,9 +28,9 @@ If moreover `Ω₂ / L₂` is normal and `L₁` is relatively closed in `L₂` i
 it surjects onto `Gal(L'/L₁)` for every finite Galois subextension `L'` of `Ω₁ / L₁`
 (`AlgEquiv.exists_restrictNormalHomAlong_eq`, `AlgEquiv.exists_eq_of_forall_mem_range`).
 
-We also record the group-theoretic statement used to compare wild inertia subgroups:
-for a commutative square `q₁ ∘ r = ψ ∘ q₂` with `r` surjective and `ψ` injective, `r` maps
-`ker q₂` onto `ker q₁` (`MonoidHom.map_ker_eq_ker_of_comp_eq`).
+The group-theoretic form of "the wild kernels map onto each other" (for a commutative square
+`q₁ ∘ r = ψ ∘ q₂` of groups with `r` surjective and `ψ` injective, `r` maps `ker q₂` onto
+`ker q₁`) is `MonoidHom.map_ker_eq_ker_of_comp_eq`.
 -/
 
 @[expose] public section
@@ -125,16 +125,3 @@ theorem exists_eq_of_forall_mem_range [Normal L₁ Ω₁] [Normal L₂ Ω₂]
   exact ⟨σ, restrictNormalHomAlong hω σ, hσ, restrictNormalHomAlong_commutes hω σ⟩
 
 end AlgEquiv
-
-namespace MonoidHom
-
-/-- Given a commutative square of groups `q₁ ∘ r = ψ ∘ q₂` with `r` surjective and `ψ`
-injective, `r` maps the kernel of `q₂` onto the kernel of `q₁`. -/
-theorem map_ker_eq_ker_of_comp_eq {I₂ I₁ Q₂ Q₁ : Type*} [Group I₂] [Group I₁] [Group Q₂]
-    [Group Q₁] {r : I₂ →* I₁} {q₂ : I₂ →* Q₂} {q₁ : I₁ →* Q₁} {ψ : Q₂ →* Q₁}
-    (hr : Function.Surjective r) (hψ : Function.Injective ψ) (h : q₁.comp r = ψ.comp q₂) :
-    q₂.ker.map r = q₁.ker := by
-  rw [← ker_comp_of_injective q₂ ψ hψ, ← h, ← comap_ker,
-    Subgroup.map_comap_eq_self_of_surjective hr]
-
-end MonoidHom
