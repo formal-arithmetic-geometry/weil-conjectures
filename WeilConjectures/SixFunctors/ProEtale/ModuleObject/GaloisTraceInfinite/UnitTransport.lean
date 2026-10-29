@@ -33,7 +33,8 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 /-- A morphism `s` over `X` between weakly étale `X`-schemes is weakly étale. -/
-lemma weaklyEtale_of_comp_eq_of_weaklyEtale {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g : Y ⟶ X) {p₁ : Y' ⟶ X}
+lemma weaklyEtale_of_comp_eq_of_weaklyEtale {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g : Y ⟶ X)
+    {p₁ : Y' ⟶ X}
     (hp : s ≫ g = p₁) [WeaklyEtale g] [WeaklyEtale p₁] : WeaklyEtale s :=
   MorphismProperty.of_postcomp (W := @WeaklyEtale) (W' := @WeaklyEtale) s g ‹_›
     (hp ▸ ‹WeaklyEtale p₁›)
