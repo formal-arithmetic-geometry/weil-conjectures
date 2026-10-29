@@ -9319,6 +9319,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClassSmooth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
