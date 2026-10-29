@@ -275,7 +275,7 @@ noncomputable def coefficientComplexExtensionIso {F G : FiniteIntermediateField 
     (h : F ≤ G)
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
-    (finiteCoefficientDerivedExtension X ℓ h).obj (DerivedCategory.Q.obj C) ≅
+    (derivedExtendScalarsSubfield X ℓ h).obj (DerivedCategory.Q.obj C) ≅
       DerivedCategory.Q.obj
         (((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).mapHomologicalComplex
           (.up ℤ)).obj C) :=
@@ -289,7 +289,7 @@ noncomputable def coefficientComplexExtensionIso {F G : FiniteIntermediateField 
 noncomputable def coefficientComplexAlgClExtensionIso (F : FiniteIntermediateField ℓ)
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
-    (finiteCoefficientDerivedToAlgCl X ℓ F).obj (DerivedCategory.Q.obj C) ≅
+    (derivedExtendScalarsToPadicAlgCl X ℓ F).obj (DerivedCategory.Q.obj C) ≅
       DerivedCategory.Q.obj
         (((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).mapHomologicalComplex
           (.up ℤ)).obj C) :=
@@ -305,7 +305,7 @@ noncomputable def coefficientComplexStageIso {E F G : FiniteIntermediateField �
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
     DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C) ≅
       (finiteCoefficientDerivedRestriction X ℓ he).obj
-        ((finiteCoefficientDerivedExtension X ℓ hf).obj (DerivedCategory.Q.obj C)) :=
+        ((derivedExtendScalarsSubfield X ℓ hf).obj (DerivedCategory.Q.obj C)) :=
   ((Mod.comap (padicSubfieldRingObjMap X ℓ he)).mapDerivedCategoryFactors.app
       (((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hf)).mapHomologicalComplex
         (.up ℤ)).obj C)).symm ≪≫
@@ -318,7 +318,7 @@ noncomputable def coefficientComplexVertexIso {E F : FiniteIntermediateField ℓ
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
     DerivedCategory.Q.obj (coefficientComplexVertex X ℓ (E := E) C) ≅
       (finiteCoefficientDerivedFromAlgCl X ℓ E).obj
-        ((finiteCoefficientDerivedToAlgCl X ℓ F).obj (DerivedCategory.Q.obj C)) :=
+        ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj (DerivedCategory.Q.obj C)) :=
   ((Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).mapDerivedCategoryFactors.app
       (((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).mapHomologicalComplex
         (.up ℤ)).obj C)).symm ≪≫

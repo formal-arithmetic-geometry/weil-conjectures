@@ -242,9 +242,9 @@ private lemma tensorComp_complex_fac
     {E G : FiniteIntermediateField ℓ} (h : E ≤ G)
     (K : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ℤ) :
-    (finiteCoefficientDerivedTensorCompIso X ℓ h).hom.app (DerivedCategory.Q.obj K) ≫
+    (derivedExtendScalarsCompIso X ℓ h).hom.app (DerivedCategory.Q.obj K) ≫
       (coefficientComplexAlgClExtensionIso X ℓ E K).hom =
-    (finiteCoefficientDerivedToAlgCl X ℓ G).map
+    (derivedExtendScalarsToPadicAlgCl X ℓ G).map
         (coefficientComplexExtensionIso X ℓ h K).hom ≫
       (coefficientComplexAlgClExtensionIso X ℓ G
         (((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).mapHomologicalComplex
@@ -260,7 +260,7 @@ private lemma tensorComp_complex_fac
     ((Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)
       (padicSubfieldRingObjToPadicAlgCl X ℓ G)).symm ≪≫
       Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)) K
-  simpa only [finiteCoefficientDerivedTensorCompIso, coefficientComplexAlgClExtensionIso,
+  simpa only [derivedExtendScalarsCompIso, coefficientComplexAlgClExtensionIso,
     coefficientComplexExtensionIso, coefficientComplexTensorIso, coefficientTensorIso,
     CategoryTheory.Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
     Iso.trans_hom, Iso.app_hom, CategoryTheory.Functor.map_comp, Category.assoc] using hh
@@ -294,13 +294,13 @@ theorem coefficientComplex_derived_mate_transport
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
     finiteCoefficientDerivedAlgClHomEquiv X ℓ E
       (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _
-      ((finiteCoefficientDerivedTensorCompIso X ℓ he).inv.app
+      ((derivedExtendScalarsCompIso X ℓ he).inv.app
           (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) ≫
-        (finiteCoefficientDerivedToAlgCl X ℓ G).map
+        (derivedExtendScalarsToPadicAlgCl X ℓ G).map
           ((finiteCoefficientDerivedHomEquiv X ℓ he
               (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _).symm
             (coefficientComplexStageIso X ℓ he hf C).hom) ≫
-        (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)) =
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)) =
       DerivedCategory.Q.map (coefficientComplexTransposedMap X ℓ he hf C) ≫
         (coefficientComplexVertexIso X ℓ (E := E) C).hom := by
   let K := (coefficientComplexStage X ℓ he hf).obj C
@@ -313,7 +313,7 @@ theorem coefficientComplex_derived_mate_transport
     (padicSubfieldRingObjMap X ℓ he)).mapHomologicalComplex (.up ℤ)
   let ε : ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ he)).mapHomologicalComplex
     (.up ℤ)).obj K ⟶ Y := a.counit.app Y
-  let L := (finiteCoefficientDerivedExtension X ℓ hf).obj (DerivedCategory.Q.obj C)
+  let L := (derivedExtendScalarsSubfield X ℓ hf).obj (DerivedCategory.Q.obj C)
   have hm' : finiteCoefficientDerivedHomEquiv X ℓ he
       (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj Y)
       (ue.hom ≫ DerivedCategory.Q.map ε) =
@@ -334,7 +334,7 @@ theorem coefficientComplex_derived_mate_transport
     exact adjoint_comparison_triangle (finiteCoefficientDerivedAdjunction X ℓ he)
       (coefficientComplexStageIso X ℓ he hf C) u
       (ue.hom ≫ DerivedCategory.Q.map ε) (hm'.trans hstage.symm)
-  let b := finiteCoefficientDerivedToAlgCl X ℓ G
+  let b := derivedExtendScalarsToPadicAlgCl X ℓ G
   let Z := ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ he)).mapHomologicalComplex
     (.up ℤ)).obj K
   let YΩ := ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).mapHomologicalComplex
@@ -347,18 +347,18 @@ theorem coefficientComplex_derived_mate_transport
   let tf := (coefficientComplexTensorIso X ℓ hf).app C
   let m := (finiteCoefficientDerivedHomEquiv X ℓ he (DerivedCategory.Q.obj K) L).symm
     (coefficientComplexStageIso X ℓ he hf C).hom
-  let sd := (finiteCoefficientDerivedTensorCompIso X ℓ he).inv.app
+  let sd := (derivedExtendScalarsCompIso X ℓ he).inv.app
       (DerivedCategory.Q.obj K) ≫ b.map m ≫
-      (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)
+      (derivedExtendScalarsCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)
   let sc := (coefficientComplexTensorIso X ℓ he).inv.app K ≫
     ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ G)).mapHomologicalComplex
       (.up ℤ)).map ε ≫ (coefficientComplexTensorIso X ℓ hf).hom.app C
   have hE := tensorComp_complex_fac X ℓ he K
-  change (finiteCoefficientDerivedTensorCompIso X ℓ he).hom.app
+  change (derivedExtendScalarsCompIso X ℓ he).hom.app
       (DerivedCategory.Q.obj K) ≫ ve.hom =
     b.map ue.hom ≫ bz.hom ≫ DerivedCategory.Q.map te.hom at hE
   have hF := tensorComp_complex_fac X ℓ hf C
-  change (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app
+  change (derivedExtendScalarsCompIso X ℓ hf).hom.app
       (DerivedCategory.Q.obj C) ≫ v.hom =
     b.map u.hom ≫ bY.hom ≫ DerivedCategory.Q.map tf.hom at hF
   have hn₀ := Mod.exact_comparison_naturality
@@ -370,10 +370,10 @@ theorem coefficientComplex_derived_mate_transport
         (((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ G)).mapHomologicalComplex
           (.up ℤ)).map ε) := by
     simpa only [b, bY, bz, Z, coefficientComplexAlgClExtensionIso,
-      finiteCoefficientDerivedToAlgCl, Iso.trans_hom, Iso.app_hom, Category.assoc] using hn₀
+      derivedExtendScalarsToPadicAlgCl, Iso.trans_hom, Iso.app_hom, Category.assoc] using hn₀
   have hs₀ := mate_transport_word b m u.hom ue.hom (DerivedCategory.Q.map ε)
-    ((finiteCoefficientDerivedTensorCompIso X ℓ he).app (DerivedCategory.Q.obj K))
-    ((finiteCoefficientDerivedTensorCompIso X ℓ hf).app (DerivedCategory.Q.obj C))
+    ((derivedExtendScalarsCompIso X ℓ he).app (DerivedCategory.Q.obj K))
+    ((derivedExtendScalarsCompIso X ℓ hf).app (DerivedCategory.Q.obj C))
     v.hom ve.hom bz.hom bY.hom (DerivedCategory.Q.mapIso te)
     (DerivedCategory.Q.map tf.hom)
     (DerivedCategory.Q.map

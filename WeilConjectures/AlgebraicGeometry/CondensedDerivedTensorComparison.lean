@@ -4,14 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
 
-/-! # The canonical derived finite coefficient tensor comparison
+/-! # Restrictions and adjunctions of the finite coefficient derived extensions
 
-This construction is the comparison already used by the two-colimit cocone, placed
-below that cocone so coefficient complex presentations can state its naturality.
-The functor and Hom-equivalence names cache the derived constructions, avoiding
-repeated elaboration of their resolution and localization data.
+For the derived extensions of scalars `derivedExtendScalarsSubfield` and
+`derivedExtendScalarsToPadicAlgCl`, this file names the exact derived restrictions of
+scalars, the derived extension/restriction adjunctions and their Hom equivalences.
+These names cache the derived constructions, avoiding repeated elaboration of their
+resolution and localization data.
 -/
 
 @[expose] public section
@@ -21,25 +22,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-- The total derived extension between two finite coefficient fields.
-Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
-(auxiliary; not a blueprint node) -/
-@[reducible]
-noncomputable def finiteCoefficientDerivedExtension {E F : FiniteIntermediateField ℓ}
-    (h : E ≤ F) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
-  (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctor
-
-/-- The total derived extension to the specified condensed algebraic closure.
-Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
-(auxiliary; not a blueprint node) -/
-@[reducible]
-noncomputable def finiteCoefficientDerivedToAlgCl (E : FiniteIntermediateField ℓ) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ)) :=
-  (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).leftDerivedFunctor
 
 /-- The exact derived restriction between finite coefficient fields.
 Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
@@ -63,14 +45,14 @@ Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restric
 (auxiliary; not a blueprint node) -/
 noncomputable def finiteCoefficientDerivedAdjunction {E F : FiniteIntermediateField ℓ}
     (h : E ≤ F) :
-    finiteCoefficientDerivedExtension X ℓ h ⊣ finiteCoefficientDerivedRestriction X ℓ h :=
+    derivedExtendScalarsSubfield X ℓ h ⊣ finiteCoefficientDerivedRestriction X ℓ h :=
   Mod.derivedExtendMapDerivedCategoryAdjunction (padicSubfieldRingObjMap X ℓ h)
 
 /-- The canonical derived algebraic-closure extension/restriction adjunction.
 Source: `Mod.derivedExtendMapDerivedCategoryAdjunction` and exact scalar restriction.
 (auxiliary; not a blueprint node) -/
 noncomputable def finiteCoefficientDerivedAlgClAdjunction (E : FiniteIntermediateField ℓ) :
-    finiteCoefficientDerivedToAlgCl X ℓ E ⊣ finiteCoefficientDerivedFromAlgCl X ℓ E :=
+    derivedExtendScalarsToPadicAlgCl X ℓ E ⊣ finiteCoefficientDerivedFromAlgCl X ℓ E :=
   Mod.derivedExtendMapDerivedCategoryAdjunction (padicSubfieldRingObjToPadicAlgCl X ℓ E)
 
 /-- The Hom equivalence of the finite coefficient derived adjunction.
@@ -82,7 +64,7 @@ noncomputable def finiteCoefficientDerivedHomEquiv {E F : FiniteIntermediateFiel
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (L : DerivedCategory
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F))) :
-    ((finiteCoefficientDerivedExtension X ℓ h).obj K ⟶ L) ≃
+    ((derivedExtendScalarsSubfield X ℓ h).obj K ⟶ L) ≃
       (K ⟶ (finiteCoefficientDerivedRestriction X ℓ h).obj L) :=
   (finiteCoefficientDerivedAdjunction X ℓ h).homEquiv K L
 
@@ -94,27 +76,8 @@ noncomputable def finiteCoefficientDerivedAlgClHomEquiv (E : FiniteIntermediateF
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (L : DerivedCategory
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))) :
-    ((finiteCoefficientDerivedToAlgCl X ℓ E).obj K ⟶ L) ≃
+    ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K ⟶ L) ≃
       (K ⟶ (finiteCoefficientDerivedFromAlgCl X ℓ E).obj L) :=
   (finiteCoefficientDerivedAlgClAdjunction X ℓ E).homEquiv K L
-
-/-- Canonical tensor transitivity from a finite coefficient field through a larger
-finite field to the algebraic closure.
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, ExtendScalars.
-(auxiliary; not a blueprint node)
-This is the existing exact-derived composite comparison followed by the derivation
-of the underived tensor multiplication isomorphism and equality of coefficient maps. -/
-noncomputable def finiteCoefficientDerivedTensorCompIso
-    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    finiteCoefficientDerivedExtension X ℓ h ⋙ finiteCoefficientDerivedToAlgCl X ℓ F ≅
-      finiteCoefficientDerivedToAlgCl X ℓ E :=
-  haveI : PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h ≫
-      padicSubfieldRingObjToPadicAlgCl X ℓ F)) :=
-    preservesFiniteLimits_of_natIso
-      (Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)).symm
-  (Functor.leftDerivedFunctorCompIso _ _).symm ≪≫
-    Functor.leftDerivedFunctorNatIso _
-      ((Mod.extendScalarsComp _ _).symm ≪≫
-        Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h))
 
 end AlgebraicGeometry.ProEtale

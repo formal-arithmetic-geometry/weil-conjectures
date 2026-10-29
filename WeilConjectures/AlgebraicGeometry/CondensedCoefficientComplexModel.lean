@@ -43,7 +43,7 @@ multiplication formulas commute with coefficient inclusions: on complexes both
 maps send m to 1 tensor m followed by the same inclusion. Localize this equality
 of natural transformations and use the factorization equations for
 leftDerivedFunctorCompIso and leftDerivedFunctorNatIso to identify the comparisons
-with finiteCoefficientDerivedTensorCompIso. This gives the equation for the
+with derivedExtendScalarsCompIso. This gives the equation for the
 canonical localized cocone arrow. No boundedness is needed: each construction is degreewise and
 localization uses exact functors. Zero complexes and the empty scheme give zero
 diagrams and satisfy the same formulas. -/
@@ -64,19 +64,19 @@ theorem exists_condensed_coefficient_complex_model
             (.up ℤ)).obj C) ∧
       ∃ eΩ : DerivedCategory.Q.obj c.pt ≅
           (finiteCoefficientDerivedFromAlgCl X ℓ E).obj
-            ((finiteCoefficientDerivedToAlgCl X ℓ F).obj (DerivedCategory.Q.obj C)),
+            ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj (DerivedCategory.Q.obj C)),
         ∃ ei : ∀ i : I, DerivedCategory.Q.obj (N.obj i) ≅
             (finiteCoefficientDerivedRestriction X ℓ (he i)).obj
-              ((finiteCoefficientDerivedExtension X ℓ (hf i)).obj (DerivedCategory.Q.obj C)),
+              ((derivedExtendScalarsSubfield X ℓ (hf i)).obj (DerivedCategory.Q.obj C)),
           ∀ i : I,
             finiteCoefficientDerivedAlgClHomEquiv X ℓ E
               (DerivedCategory.Q.obj (N.obj i)) _
-              ((finiteCoefficientDerivedTensorCompIso X ℓ (he i)).inv.app
+              ((derivedExtendScalarsCompIso X ℓ (he i)).inv.app
                   (DerivedCategory.Q.obj (N.obj i)) ≫
-                (finiteCoefficientDerivedToAlgCl X ℓ (H.obj i)).map
+                (derivedExtendScalarsToPadicAlgCl X ℓ (H.obj i)).map
                     ((finiteCoefficientDerivedHomEquiv X ℓ (he i)
                         (DerivedCategory.Q.obj (N.obj i)) _).symm (ei i).hom) ≫
-                  (finiteCoefficientDerivedTensorCompIso X ℓ (hf i)).hom.app
+                  (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app
                     (DerivedCategory.Q.obj C)) =
               DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
   refine ⟨coefficientComplexDiagram X ℓ C H he hf,

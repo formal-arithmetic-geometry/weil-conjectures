@@ -34,7 +34,7 @@ degree. Exact extension and restriction descend to the unbounded derived
 categories. Their factorization isomorphisms carry the localized units to the
 derived units; the defining equations of `leftDerivedFunctorCompIso` and
 `leftDerivedFunctorNatIso` carry the localized tensor comparison to
-`finiteCoefficientDerivedTensorCompIso`. Transport the degreewise identity along
+`derivedExtendScalarsCompIso`. Transport the degreewise identity along
 these isomorphisms. This gives the displayed equality with the explicitly
 constructed stage and vertex comparisons. All operations apply to arbitrary
 complexes, including zero complexes, with no boundedness or filteredness
@@ -46,13 +46,13 @@ theorem coefficientComplexToAlgCl_derived_compatibility
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :
     finiteCoefficientDerivedAlgClHomEquiv X ℓ E
       (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _
-      ((finiteCoefficientDerivedTensorCompIso X ℓ he).inv.app
+      ((derivedExtendScalarsCompIso X ℓ he).inv.app
           (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) ≫
-        (finiteCoefficientDerivedToAlgCl X ℓ G).map
+        (derivedExtendScalarsToPadicAlgCl X ℓ G).map
           ((finiteCoefficientDerivedHomEquiv X ℓ he
               (DerivedCategory.Q.obj ((coefficientComplexStage X ℓ he hf).obj C)) _).symm
             (coefficientComplexStageIso X ℓ he hf C).hom) ≫
-        (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)) =
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app (DerivedCategory.Q.obj C)) =
       DerivedCategory.Q.map (coefficientComplexToAlgCl X ℓ he hf C) ≫
         (coefficientComplexVertexIso X ℓ (E := E) C).hom := by
   rw [coefficientComplex_derived_mate_transport,

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategorySerre
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite truncation dévissage for constructible module objects

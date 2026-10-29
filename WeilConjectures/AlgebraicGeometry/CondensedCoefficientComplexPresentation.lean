@@ -52,7 +52,7 @@ underived extension/restriction adjunction: both sides take a section `m` to
 This is an equality of natural transformations of complexes, not a choice of
 bijections. Localize it and use the defining factorization equations of
 `leftDerivedFunctorCompIso` and `leftDerivedFunctorNatIso`; the resulting
-comparisons are precisely `finiteCoefficientDerivedTensorCompIso`. Naturality
+comparisons are precisely `derivedExtendScalarsCompIso`. Naturality
 then gives the equation for every derived `K` and every `g`.
 
 Edge cases: the zero complex and the empty scheme give zero cocones; no
@@ -72,19 +72,19 @@ theorem exists_condensed_coefficient_complex_presentation
       (∃ a : ℤ, ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r)) ∧
       ∃ eΩ : DerivedCategory.Q.obj c.pt ≅
           (finiteCoefficientDerivedFromAlgCl X ℓ E).obj
-            ((finiteCoefficientDerivedToAlgCl X ℓ F).obj L),
+            ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj L),
         ∃ ei : ∀ i : I, DerivedCategory.Q.obj (N.obj i) ≅
             (finiteCoefficientDerivedRestriction X ℓ (he i)).obj
-              ((finiteCoefficientDerivedExtension X ℓ (hf i)).obj L),
+              ((derivedExtendScalarsSubfield X ℓ (hf i)).obj L),
           ∀ (i : I) (K : DerivedCategory
               (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
             (g : K ⟶ DerivedCategory.Q.obj (N.obj i)),
             finiteCoefficientDerivedAlgClHomEquiv X ℓ E K _
-              ((finiteCoefficientDerivedTensorCompIso X ℓ (he i)).inv.app K ≫
-                (finiteCoefficientDerivedToAlgCl X ℓ (H.obj i)).map
+              ((derivedExtendScalarsCompIso X ℓ (he i)).inv.app K ≫
+                (derivedExtendScalarsToPadicAlgCl X ℓ (H.obj i)).map
                     ((finiteCoefficientDerivedHomEquiv X ℓ (he i) K _).symm
                         (g ≫ (ei i).hom)) ≫
-                  (finiteCoefficientDerivedTensorCompIso X ℓ (hf i)).hom.app L) =
+                  (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
   obtain ⟨a, ha⟩ := hL
   have : L.IsGE a := ha
@@ -98,9 +98,9 @@ theorem exists_condensed_coefficient_complex_presentation
       Mod.comap (padicSubfieldRingObjMap X ℓ (he i)))).map_isZero
         (C.isZero_of_isStrictlyGE a r hr)
   let eΩ' := eΩ ≪≫ (finiteCoefficientDerivedFromAlgCl X ℓ E).mapIso
-    ((finiteCoefficientDerivedToAlgCl X ℓ F).mapIso e.symm)
+    ((derivedExtendScalarsToPadicAlgCl X ℓ F).mapIso e.symm)
   let ei' := fun i ↦ ei i ≪≫ (finiteCoefficientDerivedRestriction X ℓ (he i)).mapIso
-    ((finiteCoefficientDerivedExtension X ℓ (hf i)).mapIso e.symm)
+    ((derivedExtendScalarsSubfield X ℓ (hf i)).mapIso e.symm)
   refine ⟨N, c, hc, ⟨a, hbound⟩, eΩ', ei', ?_⟩
   intro i K g
   -- Establish source and target naturality before instantiating the derived module categories.
@@ -129,8 +129,8 @@ theorem exists_condensed_coefficient_complex_presentation
         (α.inv.app K₀ ≫ R.map ((ap.homEquiv K₀ _).symm g) ≫ β.hom.app L₀) (W.map f))
   have ht := transport (finiteCoefficientDerivedAdjunction X ℓ (he i))
     (finiteCoefficientDerivedAlgClAdjunction X ℓ E)
-    (finiteCoefficientDerivedTensorCompIso X ℓ (he i))
-    (finiteCoefficientDerivedTensorCompIso X ℓ (hf i)) e.inv g (ei i).hom
+    (derivedExtendScalarsCompIso X ℓ (he i))
+    (derivedExtendScalarsCompIso X ℓ (hf i)) e.inv g (ei i).hom
   have hcompat := hcomp i
   simp only [finiteCoefficientDerivedHomEquiv, finiteCoefficientDerivedAlgClHomEquiv] at hcompat
   simp only [Category.assoc] at ht
@@ -139,6 +139,6 @@ theorem exists_condensed_coefficient_complex_presentation
   refine ht.trans ?_
   simpa only [Category.assoc] using congrArg
     (fun f ↦ g ≫ f ≫ (finiteCoefficientDerivedFromAlgCl X ℓ E).map
-      ((finiteCoefficientDerivedToAlgCl X ℓ F).map e.inv)) hcompat
+      ((derivedExtendScalarsToPadicAlgCl X ℓ F).map e.inv)) hcompat
 
 end AlgebraicGeometry.ProEtale

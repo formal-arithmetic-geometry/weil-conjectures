@@ -4,17 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategorySerre
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
-import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shared proof API for finite coefficient descent
 
-The private factorization, exact derived composition, and bounded constructibility
-helpers formerly lived in the two-colimit and flat-coefficient proofs. They are kept
-here so their earlier support-induction dependencies can reuse them without a cycle.
+The private factorization and exact derived composition helpers formerly lived in the
+two-colimit and flat-coefficient proofs. They are kept here so their earlier
+support-induction dependencies can reuse them without a cycle. The composite of the
+derived functors of exact functors commutes with the shifts
+(`CategoryTheory.Functor.leftComp_shift`).
 This module introduces no new mathematical obligation.
 -/
 
@@ -157,7 +157,10 @@ private lemma leftComp_transport (G : D ⥤ E) [G.Additive]
   simp [leftDerivedFunctorCompIso, leftDerivedFunctorNatIso, transportComp, derivedComp,
     Iso.trans_assoc, ← isoWhiskerLeft_symm, ← isoWhiskerRight_symm]
 
-private lemma leftComp_shift (G : D ⥤ E) [G.Additive]
+/-- For exact functors `F`, `G` and `FG` with `F ⋙ G ≅ FG`, the comparison
+`L F ⋙ L G ≅ L FG` of their derived functors commutes with the shifts, for the shifts
+transported from the derived functors `F.mapDerivedCategory`. -/
+lemma leftComp_shift (G : D ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     {FG : C ⥤ E} [FG.Additive] [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
     (e : F ⋙ G ≅ FG) :
@@ -185,67 +188,3 @@ private lemma leftComp_shift (G : D ⥤ E) [G.Additive]
   infer_instance
 end LeftTransport
 end CategoryTheory.Functor
-
-namespace AlgebraicGeometry.ProEtale
-open Scheme PadicAlgCl
-variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
-  (ℓ : ℕ) [Fact ℓ.Prime]
-
-private lemma bounded_tri_of_serre {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (hker : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : M ⟶ N),
-      IsConstructibleModuleObject R M → IsConstructibleModuleObject R N →
-      IsConstructibleModuleObject R (kernel f) ∧ IsConstructibleModuleObject R (cokernel f))
-    (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
-      S.ShortExact → IsConstructibleModuleObject R S.X₁ →
-      IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
-    (boundedConstructible R).IsTriangulated := by
-  let P : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
-    IsConstructibleModuleObject R
-  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ constructible_of_iso e h⟩
-  have : P.IsClosedUnderKernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).1⟩
-  have : P.IsClosedUnderCokernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).2⟩
-  have : P.IsClosedUnderExtensions := ⟨fun h h₁ h₃ ↦ hext _ h h₁ h₃⟩
-  exact isTriangulated_boundedConstructible_of_serre R
--- Build the specific condensed-field triangulated structures from their Serre closure
--- statements; no arbitrary-coefficient closure assertion is used.
-/-- Bounded constructible complexes over a finite coefficient field form a triangulated
-subcategory.
-
-Source: `Colimit/TwoColimit.lean`, the private `finiteBoundedTriangulated` helper.
-Proof: finite-field constructible modules are closed under kernels, cokernels, and
-extensions by `isConstructibleModuleObject_serre_padicSubfield`. Transport these
-closures across isomorphisms and apply the existing conditional bounded-constructible
-triangulated instance. This extracts the existing proof without adding an obligation.
-(auxiliary; not a blueprint node)
--/
-lemma finiteBoundedTriangulated (E : FiniteIntermediateField ℓ) :
-    (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated := by
-  obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E
-  exact bounded_tri_of_serre _ hk he
-omit [TopologicalSpace.NoetherianSpace X] in
-private lemma single_bounded_constructible
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (hM : IsConstructibleModuleObject R M) :
-    boundedConstructible R ((DerivedCategory.singleFunctor _ 0).obj M) := by
-  let K := (DerivedCategory.singleFunctor _ 0).obj M
-  have hzero (n : ℤ) (hn : n ≠ 0) :
-      IsZero ((DerivedCategory.homologyFunctor _ n).obj K) := by
-    rcases lt_or_gt_of_ne hn with hn | hn
-    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
-    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
-  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
-  by_cases hn : n = 0
-  · subst n
-    exact constructible_of_iso
-      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
-  · exact constructible_of_isZero R _ (hzero n hn)
-
-end AlgebraicGeometry.ProEtale

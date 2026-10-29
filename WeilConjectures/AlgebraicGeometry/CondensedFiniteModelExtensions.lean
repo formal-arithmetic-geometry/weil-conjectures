@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
 import all WeilConjectures.AlgebraicGeometry.CondensedFiniteModelProofAPI
 import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 /-! # Finite coefficient models are closed under extensions
 Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object-descent
 arguments. The Hom argument does not use object descent. We use it independently
@@ -47,7 +48,7 @@ variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
   (ℓ : ℕ) [Fact ℓ.Prime]
 
 private noncomputable instance finiteCommShift {E F : FiniteIntermediateField ℓ}
-    (h : E ≤ F) : (finiteCoefficientDerivedExtension X ℓ h).CommShift ℤ :=
+    (h : E ≤ F) : (derivedExtendScalarsSubfield X ℓ h).CommShift ℤ :=
   Functor.CommShift.ofIso
     (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)
       |>.leftDerivedFunctorIsoMapDerivedCategory).symm ℤ
@@ -58,16 +59,16 @@ private lemma singleHomDescent
     (hM : IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E) M)
     (L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (padicSubfieldRingObj X ℓ F))) (hL : DerivedCategory.TStructure.t.plus L)
-    (f : (finiteCoefficientDerivedToAlgCl X ℓ E).obj
+    (f : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj
       ((DerivedCategory.singleFunctor _ 0).obj M) ⟶
-      (finiteCoefficientDerivedToAlgCl X ℓ F).obj L) :
+      (derivedExtendScalarsToPadicAlgCl X ℓ F).obj L) :
     ∃ (H : FiniteIntermediateField ℓ) (he : E ≤ H) (hf : F ≤ H)
-      (g : (finiteCoefficientDerivedExtension X ℓ he).obj
+      (g : (derivedExtendScalarsSubfield X ℓ he).obj
         ((DerivedCategory.singleFunctor _ 0).obj M) ⟶
-        (finiteCoefficientDerivedExtension X ℓ hf).obj L),
-      f = (finiteCoefficientDerivedTensorCompIso X ℓ he).inv.app _ ≫
-        (finiteCoefficientDerivedToAlgCl X ℓ H).map g ≫
-        (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app L := by
+        (derivedExtendScalarsSubfield X ℓ hf).obj L),
+      f = (derivedExtendScalarsCompIso X ℓ he).inv.app _ ≫
+        (derivedExtendScalarsToPadicAlgCl X ℓ H).map g ≫
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app L := by
   let G := IsFiltered.max E F
   let I := AsSmall.{u + 1} (Under G)
   let H : I ⥤ FiniteIntermediateField ℓ :=
@@ -86,7 +87,7 @@ private lemma singleHomDescent
       (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K
         (fun n ↦ isIso_constructible_condensed_sheaf_hom_colimit X ℓ E M hM N hN n) 0))
   let adj := finiteCoefficientDerivedAlgClHomEquiv X ℓ E K
-    ((finiteCoefficientDerivedToAlgCl X ℓ F).obj L)
+    ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj L)
   obtain ⟨i, g, hg⟩ := hfac (adj f ≫ eΩ.inv)
   refine ⟨H.obj i, he i, hf i,
     (finiteCoefficientDerivedHomEquiv X ℓ (he i) K _).symm (g ≫ (ei i).hom), ?_⟩
@@ -97,20 +98,20 @@ private lemma singleHomDescent
   exact hh'.trans ((Category.assoc _ _ _).trans hh.symm)
 
 private noncomputable def algClDerivedIso (E : FiniteIntermediateField ℓ) :
-    finiteCoefficientDerivedToAlgCl X ℓ E ≅
+    derivedExtendScalarsToPadicAlgCl X ℓ E ≅
       (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).mapDerivedCategory :=
   (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E))
     |>.leftDerivedFunctorIsoMapDerivedCategory
 private noncomputable instance algClCommShift (E : FiniteIntermediateField ℓ) :
-    (finiteCoefficientDerivedToAlgCl X ℓ E).CommShift ℤ :=
+    (derivedExtendScalarsToPadicAlgCl X ℓ E).CommShift ℤ :=
   Functor.CommShift.ofIso (algClDerivedIso X ℓ E).symm ℤ
 private instance algClTriangulated (E : FiniteIntermediateField ℓ) :
-    (finiteCoefficientDerivedToAlgCl X ℓ E).IsTriangulated := by
+    (derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility (algClDerivedIso X ℓ E).symm ℤ
   exact Functor.isTriangulated_of_iso (algClDerivedIso X ℓ E).symm
 omit [TopologicalSpace.NoetherianSpace X] in
 private lemma tensorCompShift {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    NatTrans.CommShift (finiteCoefficientDerivedTensorCompIso X ℓ h).hom ℤ := by
+    NatTrans.CommShift (derivedExtendScalarsCompIso X ℓ h).hom ℤ := by
   exact Functor.leftComp_shift
     (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h))
     (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F))
@@ -158,7 +159,7 @@ private lemma boundary_identification
   rw [← Functor.map_comp, e₁.inv_hom_id]
   simp
 
-attribute [local irreducible] finiteCoefficientDerivedTensorCompIso
+attribute [local irreducible] derivedExtendScalarsCompIso
 
 /-- Finite constructible coefficient models are closed under distinguished extensions.
 Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object descent.
@@ -208,44 +209,44 @@ theorem exists_finiteCoefficient_model_of_triangle
   have hL : DerivedCategory.TStructure.t.plus L := by
     exact ⟨-1, DerivedCategory.TStructure.t.isGE_shift KP 0 1 (-1) (by decide)⟩
   let f := e₃.hom ≫ D.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧' ≫
-    ((finiteCoefficientDerivedToAlgCl X ℓ E).commShiftIso (1 : ℤ)).inv.app KP
+    ((derivedExtendScalarsToPadicAlgCl X ℓ E).commShiftIso (1 : ℤ)).inv.app KP
   obtain ⟨H, hf, he, g, hg⟩ := singleHomDescent X ℓ F E Q hQ L hL f
-  let A := (finiteCoefficientDerivedExtension X ℓ he).obj KP
-  let C := (finiteCoefficientDerivedExtension X ℓ hf).obj KQ
+  let A := (derivedExtendScalarsSubfield X ℓ he).obj KP
+  let C := (derivedExtendScalarsSubfield X ℓ hf).obj KQ
   let g' : C ⟶ A⟦(1 : ℤ)⟧ :=
-    g ≫ ((finiteCoefficientDerivedExtension X ℓ he).commShiftIso (1 : ℤ)).hom.app KP
+    g ≫ ((derivedExtendScalarsSubfield X ℓ he).commShiftIso (1 : ℤ)).hom.app KP
   obtain ⟨B, a, b, hB⟩ := Pretriangulated.distinguished_cocone_triangle₂ g'
   have hA : boundedConstructible (padicSubfieldRingObj X ℓ H) A :=
     boundedConstructible_leftDerivedExtendScalars_obj _ _ _ KP
-      (single_bounded_constructible X _ P hP)
+      (CondensedRing.boundedConstructible_singleFunctor_zero_obj _ P hP)
   have hC : boundedConstructible (padicSubfieldRingObj X ℓ H) C :=
     boundedConstructible_leftDerivedExtendScalars_obj _ _ _ KQ
-      (single_bounded_constructible X _ Q hQ)
-  have := finiteBoundedTriangulated X ℓ H
+      (CondensedRing.boundedConstructible_singleFunctor_zero_obj _ Q hQ)
+  have := isTriangulated_boundedConstructible_continuousMapRingObj X ℓ H
   have : (boundedConstructible (padicSubfieldRingObj X ℓ H)).IsClosedUnderIsomorphisms :=
     ⟨fun e h ↦ ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e h.1,
       fun n ↦ constructible_of_iso
         ((DerivedCategory.homologyFunctor _ n).mapIso e) (h.2 n)⟩⟩
   have hmiddle : boundedConstructible (padicSubfieldRingObj X ℓ H) B :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₂ _ hB hA hC
-  let W := finiteCoefficientDerivedToAlgCl X ℓ H
-  let eA := (finiteCoefficientDerivedTensorCompIso X ℓ he).app KP ≪≫ e₁
-  let eC := (finiteCoefficientDerivedTensorCompIso X ℓ hf).app KQ ≪≫ e₃
+  let W := derivedExtendScalarsToPadicAlgCl X ℓ H
+  let eA := (derivedExtendScalarsCompIso X ℓ he).app KP ≪≫ e₁
+  let eC := (derivedExtendScalarsCompIso X ℓ hf).app KQ ≪≫ e₃
   have hcomm : (W.mapTriangle.obj (Pretriangulated.Triangle.mk a b g')).mor₃ ≫
       eA.hom⟦(1 : ℤ)⟧' = eC.hom ≫ D.mor₃ := by
     have := tensorCompShift X ℓ he
-    have hh : W.map g ≫ (finiteCoefficientDerivedTensorCompIso X ℓ he).hom.app L =
-        (finiteCoefficientDerivedTensorCompIso X ℓ hf).hom.app KQ ≫ f :=
-      cancel_comparison ((finiteCoefficientDerivedTensorCompIso X ℓ hf).app KQ)
-        (W.map g) ((finiteCoefficientDerivedTensorCompIso X ℓ he).hom.app L) f hg
+    have hh : W.map g ≫ (derivedExtendScalarsCompIso X ℓ he).hom.app L =
+        (derivedExtendScalarsCompIso X ℓ hf).hom.app KQ ≫ f :=
+      cancel_comparison ((derivedExtendScalarsCompIso X ℓ hf).app KQ)
+        (W.map g) ((derivedExtendScalarsCompIso X ℓ he).hom.app L) f hg
     have hh' : W.map g ≫
-        (finiteCoefficientDerivedTensorCompIso X ℓ he).hom.app (KP⟦(1 : ℤ)⟧) =
+        (derivedExtendScalarsCompIso X ℓ he).hom.app (KP⟦(1 : ℤ)⟧) =
         eC.hom ≫ D.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧' ≫
-          ((finiteCoefficientDerivedToAlgCl X ℓ E).commShiftIso (1 : ℤ)).inv.app KP := by
+          ((derivedExtendScalarsToPadicAlgCl X ℓ E).commShiftIso (1 : ℤ)).inv.app KP := by
       simpa only [eC, Iso.trans_hom, Iso.app_hom, f, Category.assoc] using hh
-    exact boundary_identification (finiteCoefficientDerivedExtension X ℓ he) W
-      (finiteCoefficientDerivedToAlgCl X ℓ E)
-      (finiteCoefficientDerivedTensorCompIso X ℓ he) KP C e₁ eC D.mor₃ g hh'
+    exact boundary_identification (derivedExtendScalarsSubfield X ℓ he) W
+      (derivedExtendScalarsToPadicAlgCl X ℓ E)
+      (derivedExtendScalarsCompIso X ℓ he) KP C e₁ eC D.mor₃ g hh'
   let e := Pretriangulated.Triangle.π₂.mapIso
     (Pretriangulated.isoTriangleOfIso₁₃ _ _ (W.map_distinguished _ hB) hD eA eC hcomm)
   refine ⟨H, (DerivedCategory.homologyFunctor _ 0).obj B, hmiddle.2 0, ⟨?_⟩⟩
