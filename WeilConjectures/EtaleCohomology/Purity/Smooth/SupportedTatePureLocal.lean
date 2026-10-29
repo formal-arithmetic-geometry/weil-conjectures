@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClass
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 
 /-!
 # The purity hypothesis is local
@@ -42,26 +43,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
-
-/-- **Restrictions along a jointly surjective family reflect isomorphisms in `D(X_ét, Λ)`.** If
-`a_i : U_i ⟶ X` is a family of morphisms whose images cover `X`, a morphism `φ` of `D(X_ét, Λ)`
-whose derived pullbacks along all the `a_i` are invertible is invertible: its cohomology sheaves
-are, `a_i^*` being exact. -/
-theorem isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective (Λ : Type (u + 1))
-    [CommRing Λ] {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
-    (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
-    {M N : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : M ⟶ N)
-    (h : ∀ i, IsIso ((L((a i)^*[ModuleCat.{u + 1} Λ])).map φ)) : IsIso φ := by
-  rw [_root_.DerivedCategory.isIso_iff]
-  intro n
-  refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) a ha _
-    fun i ↦ ?_
-  have h' : IsIso (D((a i)^*[ModuleCat.{u + 1} Λ]).map φ) :=
-    (NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory _ (a i)) φ).1 (h i)
-  exact (NatIso.isIso_map_iff
-    (((a i)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso n) φ).2
-    (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
-      (D((a i)^*[ModuleCat.{u + 1} Λ]).map φ))
 
 /-- An object of `D(X_ét, Λ)` vanishes if its derived pullbacks along a jointly surjective
 family vanish. -/

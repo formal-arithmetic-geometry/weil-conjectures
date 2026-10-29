@@ -17,7 +17,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 # Purity for the zero section of the affine line and for the diagonal of the projective line
 
 From relative purity for the zero section of `𝔸¹_B`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`) we obtain the purity
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent`)
+we obtain the purity
 hypothesis `AlgebraicGeometry.Etale.SupportedTatePure` of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClass`:
 
@@ -153,14 +154,15 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 /-- **Purity for the zero locus of the coordinate of `𝔸¹_B`**, over every base `B` on which the
 exponent of `Λ` is invertible: `Rs^!(Λ(1)[2]) ≅ Λ_{V(t)}`
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`). -/
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent`).
+-/
 theorem supportedTatePure_zeroLocusSubschemeι_coord (B : Scheme.{u})
     [HasInvertibleExponent Λ B] :
     haveI : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B) := .of_hom (𝔸(ULift.{u} (Fin 1); B) ↘ B)
     SupportedTatePure Λ 1 (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
       {AffineSpace.coord B (ULift.up 0)}) := by
   have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B) := .of_hom (𝔸(ULift.{u} (Fin 1); B) ↘ B)
-  have := isIso_supportedClassMap_kummerBoundary_coord Λ B
+  have := isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent Λ B
   exact supportedTatePure_of_iso_constantComplex Λ 1 _ (asIso (supportedClassMap Λ _
     (shiftSupportedClass Λ _ 2 (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0)))))).symm
 

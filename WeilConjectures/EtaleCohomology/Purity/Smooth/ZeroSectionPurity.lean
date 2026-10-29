@@ -13,7 +13,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomo
 For a scheme `B` on which the exponent of the finite coefficient ring `Λ` is invertible and a
 normalized rank-one datum, the adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` of the Kummer boundary of the
 coordinate `t` of `𝔸¹_B` is an isomorphism, `s : V(t) ⟶ 𝔸¹_B` the zero section
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`). The normalisation
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent`).
+The normalisation
 `AlgebraicGeometry.Etale.HasKummerClass.IsNormalized` asserts this only for `B` separated and
 locally of finite type over a field; this is the relative purity of SGA 4 XVI 3.7 for the zero
 section of `𝔸¹` (Fu, *Étale cohomology theory*, 8.4; Milne, *Étale cohomology*, VI.5).
@@ -36,7 +37,8 @@ automorphism of the support.
 
 The one input which is not proved here is the homotopy invariance of the étale cohomology of the
 affine line over an arbitrary base
-(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`), proved in the repository only over
+(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`),
+proved in the repository only over
 fields.
 
 ## Main statements
@@ -45,7 +47,8 @@ fields.
   decomposition criterion `AlgebraicGeometry.Etale.isIso_biprodDesc_of_isIso_supportedClassMap`.
 - `AlgebraicGeometry.Etale.isIso_supportedClassMap_lineInfinity`: the class of the section at
   infinity of `ℙ¹_B` is a fundamental class.
-- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`: relative purity for the
+- `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent`:
+  relative purity for the
   zero section of `𝔸¹_B`.
 -/
 
@@ -227,18 +230,19 @@ general base it amounts to the compatibility of `Rp_*` with base change to the g
 (equivalently, by compactifying `𝔸¹_S ⊆ ℙ¹_S` and proper base change, of `Rj_*` for the
 complement `j` of the section at infinity: Deligne, SGA 4½, [Th. finitude] Appendice 1.3.3;
 SGA 4 XVI 3.7). It is the only input of the relative purity of this file which is not proved. -/
-theorem isIso_unit_tateObject_affineLine (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
+theorem isIso_unit_tateObject_affineLine_of_hasInvertibleExponent
+    (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); S) ↘ S)).unit.app (tateObject Λ S 1)) := by
   sorry
 
 /-- Homotopy invariance of the affine line for `Λ(1)[2]`
-(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`). -/
+(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`). -/
 theorem isIso_unit_tateObject_shift_affineLine_of_hasInvertibleExponent (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       (𝔸(ULift.{u} (Fin 1); S) ↘ S)).unit.app ((tateObject Λ S 1)⟦(2 : ℤ)⟧)) := by
-  have := isIso_unit_tateObject_affineLine Λ S
+  have := isIso_unit_tateObject_affineLine_of_hasInvertibleExponent Λ S
   rw [← Adjunction.unit_app_shift_commShiftIso_inv_app]
   infer_instance
 
@@ -254,7 +258,8 @@ with supports of the section at infinity `i : Z ⟶ ℙ¹_S`
 (`AlgebraicGeometry.Etale.chartBoundarySupportedClass`) is an isomorphism. This follows from the
 decomposition of the cohomology of the projective line
 (`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`) and the homotopy invariance of
-its complement `𝔸¹_S` (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`), by
+its complement `𝔸¹_S`
+(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`), by
 `AlgebraicGeometry.Etale.isIso_supportedClassMap_of_isIso_biprodDesc`. -/
 theorem isIso_supportedClassMap_lineInfinity (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     IsIso (supportedClassMap Λ (ProjectiveSpace.lineInfinityι S)
@@ -333,9 +338,10 @@ separated and locally of finite type over a field.
 It is the restriction to the chart at infinity of the class of the section at infinity of
 `ℙ¹_B`, which is a fundamental class
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_lineInfinity`).
-The proof uses the homotopy invariance `AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`.
+The proof uses the homotopy invariance
+`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`.
 -/
-theorem isIso_supportedClassMap_kummerBoundary_coord (B : Scheme.{u})
+theorem isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent (B : Scheme.{u})
     [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
