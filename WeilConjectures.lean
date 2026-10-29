@@ -8584,6 +8584,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.SectionAction
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
+public import WeilConjectures.CategoryTheory.Monoidal.BraidingSelfTrivial
 public import WeilConjectures.CategoryTheory.Monoidal.BraidingShiftAux
 public import WeilConjectures.CategoryTheory.Monoidal.ClassTransport
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithful
@@ -12551,8 +12552,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmers
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineDiagonalGysin
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineDiagonalGysinSwap
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAssembly
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelBraiding
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TraceCounitLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
