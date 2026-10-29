@@ -9550,6 +9550,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineInputs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineKunneth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineNormalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocal
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocalHigher
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocalSections
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
