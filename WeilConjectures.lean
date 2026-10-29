@@ -14497,6 +14497,7 @@ public import WeilConjectures.TraceFormula.WeilDistTriangTrace
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
 public import WeilConjectures.TraceFormula.WeilTrace
+public import WeilConjectures.TraceFormula.WeilTraceSplitTriangle
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
@@ -14699,6 +14700,7 @@ public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkComparison
 public import WeilConjectures.WeilSheaf.StalkConstantSheaf
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
+public import WeilConjectures.WeilSheaf.StalkExact
 public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFrobeniusPow
@@ -14735,6 +14737,7 @@ public import WeilConjectures.WeilSheaf.TraceFunctionTensor
 public import WeilConjectures.WeilSheaf.TraceFunctionVanishing
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
+public import WeilConjectures.WeilSheaf.TraceTriangleAdditivity
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UnramifiedBoundaryPurity
 public import WeilConjectures.WeilSheaf.UpperStarComp
@@ -14774,6 +14777,8 @@ public import WeilConjectures.ZetaFunction.WeightSeparation
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
