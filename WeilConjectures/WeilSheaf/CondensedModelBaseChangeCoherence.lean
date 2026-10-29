@@ -678,7 +678,7 @@ lemma upperStarComp_inv_app_comp_upperStarComp_inv_app (a : S ⟶ T) (b : T ⟶ 
 /-- The associativity law of the composition isomorphisms of the pullbacks, solved for
 `a^* (b, c) ≫ (a, b)⁻¹`. -/
 @[reassoc]
-lemma map_upperStarComp_hom_app_comp_upperStarComp_inv_app (a : S ⟶ T) (b : T ⟶ U)
+lemma upperStar_map_upperStarComp_hom_app_comp_upperStarComp_inv_app (a : S ⟶ T) (b : T ⟶ U)
     (c : U ⟶ V) (M : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)) :
     (a)^*⟦Λ⟧.map ((upperStarComp Λ b c).hom.app M) ≫
         (upperStarComp Λ a b).inv.app ((c)^*⟦Λ⟧.obj M) =
@@ -710,7 +710,7 @@ lemma upperStarSquareComparison_frobenius (pX : X ⟶ X₀) (pY : Y ⟶ Y₀) (�
       ((upperStarComp Λ pX φ).inv.app N ≫ (upperStarCongr Λ hsq).hom.app N ≫
         (upperStarComp Λ φ' pY).hom.app N) := by
   rewrite [Functor.map_comp_assoc, Functor.map_comp_assoc,
-    map_upperStarComp_hom_app_comp_upperStarComp_inv_app_assoc,
+    upperStar_map_upperStarComp_hom_app_comp_upperStarComp_inv_app_assoc,
     map_upperStarCongr_hom_app_comp_upperStarComp_inv_app_assoc,
     upperStarComp_hom_app_upperStarCongr_hom_app_assoc,
     upperStarComp_hom_app_comp_upperStarComp_hom_app_assoc, ← Functor.map_comp,

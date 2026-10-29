@@ -638,11 +638,6 @@ theorem exists_monotone_finiteDimensional_cover :
     exact ⟨m, adjoin_simple_le_iff.2 (subset_adjoin ℚ_[ℓ] (e '' Set.Iic m)
       (Set.mem_image_of_mem e (Set.mem_Iic.2 le_rfl))) hxy⟩
 
-/-- A finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` is closed. -/
-theorem isClosed_intermediateField (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ))
-    [FiniteDimensional ℚ_[ℓ] E] : IsClosed (E : Set (PadicAlgCl ℓ)) :=
-  Submodule.closed_of_finiteDimensional (Subalgebra.toSubmodule E.toSubalgebra)
-
 end PadicAlgCl
 
 namespace LinearEquiv
@@ -750,7 +745,7 @@ theorem exists_lattice_of_isWeaklyBounded_of_compactSpace [FiniteDimensional (Pa
     exact hcont (b k) (b.coord i)
   have hclosed (m : ℕ) : IsClosed (A m : Set (PadicAlgCl ℓ)) := by
     have := hEfd m
-    exact PadicAlgCl.isClosed_intermediateField (E m)
+    exact Submodule.closed_of_finiteDimensional (Subalgebra.toSubmodule (E m).toSubalgebra)
   obtain ⟨m₀, hm₀⟩ := LinearEquiv.exists_isDefinedOver_of_compactSpace (ρ.comp ι) b hσ hA
     hclosed hEcover
   choose ms hms using fun s : S ↦ LinearEquiv.exists_isDefinedOver_of_monotone hA hEcover (ρ s) b
