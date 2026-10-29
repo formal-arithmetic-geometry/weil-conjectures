@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
-public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import
