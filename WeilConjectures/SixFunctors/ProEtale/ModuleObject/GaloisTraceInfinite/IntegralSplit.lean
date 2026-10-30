@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerUnique
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTransportExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegersModPowFinal
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsReductionComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestrictedSplitMonoTorsion
 
 /-!
@@ -21,14 +22,15 @@ derived complete `𝒪_E`-complex `K` on `G` whose reductions modulo `ℓⁿ⁺�
 (`ProEtale.CondensedRing.isSplitMono_derivedUnit_galois_padicIntegers`): this is the integral form
 of the Hochschild–Serre splitting of SGA 4½, [Th. finitude], Lemme 3.4.
 
-The proof lifts the torsion splittings with `ProEtale.isSplitMono_of_derivedCompleteIntegers_of_unique_retractions`.
+The proof lifts the torsion splittings with
+`ProEtale.isSplitMono_of_derivedCompleteIntegers_of_unique_retractions`.
 Modulo `ℓⁿ⁺¹` the reduction of the unit is the unit with coefficients `𝒪_E/ℓⁿ⁺¹`
 (`ProEtale.CondensedRing.map_unit_comp_derivedPushPullExtendScalarsHom`, the push comparison
 being invertible by `isIso_derivedUpperStarExtendScalarsPushHom_integersModPow_app`), compatibly
 with the Galois actions. There it has a `Gal(Ω/L)`-invariant retraction
 (`ProEtale.exists_invariant_retraction_derivedUnit_galois`), which is unique
 (`ProEtale.eq_of_invariant_retraction_derivedUnit_galois`, from the Möbius decomposition of the
-infinite level, `ProEtale.galoisTowerMoebiusDecomposition`). The reduction of an invariant
+infinite level, `ProEtale.exists_galoisTowerMoebiusDecomposition`). The reduction of an invariant
 retraction is invariant, the Galois action being defined with integral coefficients.
 -/
 
@@ -52,8 +54,8 @@ lemma isUnit_natCast_integersModPow (n : ℕ) {d : ℕ} (hd : ¬ ℓ ∣ d) :
   have h := (Nat.isCoprime_iff_coprime.2 hcop).map (Int.castRingHom (integersModPow ℓ E n))
   have h0 : ((ℓ ^ n : ℕ) : integersModPow ℓ E n) = 0 := by
     change integersModPowMk ℓ E n ((ℓ ^ n : ℕ) : integers ℓ E) = 0
-    rw [integersModPowMk, Ideal.Quotient.eq_zero_iff_mem, Nat.cast_pow]
-    exact Ideal.subset_span rfl
+    rw [Nat.cast_pow]
+    exact Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span rfl)
   simp only [eq_intCast, Int.cast_natCast, h0] at h
   exact isCoprime_zero_right.1 h
 
@@ -110,12 +112,56 @@ theorem eq_of_invariant_retraction_derivedUnit_galois (T₀ : Type) [Topological
     (essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some)
   have hK := fun n ↦
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
-  exact (galoisTowerMoebiusDecomposition h (Profinite.continuousMapRingObj T₀) hd K
-    hc).eq_of_retraction_derivedUnit_of_iso a hK e hR hR' (fun _ _ ↦ hinv _) (fun _ _ ↦ hinv' _)
+  obtain ⟨D, hD⟩ := exists_galoisTowerMoebiusDecomposition h (Profinite.continuousMapRingObj T₀) hd
+    K hc
+  have key (S : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+        Profinite.continuousMapRingObj T₀⟧).obj
+          (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+            Profinite.continuousMapRingObj T₀⟧).obj C) ⟶ C)
+      (hS : ∀ σ : Ω ≃ₐ[L] Ω, derivedUnitTransport (Profinite.continuousMapRingObj T₀)
+        (pullbackAction h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ) C ≫ S = S) (i : D.ι) (b : D.A i) :
+      derivedUnitTransport (Profinite.continuousMapRingObj T₀) (D.σ i b) (D.hσ i b) (D.hσ i b)
+        C ≫ S = S := by
+    obtain ⟨σ, hσ⟩ := hD i b
+    have gen : ∀ (s : _ ⟶ _)
+        (hs : s ≫ pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))) =
+          pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))),
+        s = pullbackAction h _ specGaloisAction_comp σ →
+          derivedUnitTransport (Profinite.continuousMapRingObj T₀) s hs hs C ≫ S = S := by
+      rintro s hs rfl
+      exact hS σ
+    exact gen _ _ hσ
+  exact D.eq_of_retraction_derivedUnit_of_iso a hK e hR hR' (key R hinv) (key R' hinv')
 
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- **Transport of unique invariant retractions along an isomorphism.** Let `c : B ⟶ B'` be an
+isomorphism intertwining endomorphisms `a σ` of `B` and `a' σ` of `B'`, and `t ≫ c = η`. If the
+retractions of `η` fixed by all the `a' σ` are unique, so are those of `t` fixed by the `a σ`. -/
+lemma _root_.CategoryTheory.eq_of_retraction_of_iso {C : Type*} [Category C] {A B B' : C}
+    {t : A ⟶ B} {c : B ⟶ B'} [IsIso c] {η : A ⟶ B'} (e : t ≫ c = η) {ι : Type*}
+    {a : ι → (B ⟶ B)} {a' : ι → (B' ⟶ B')} (ea : ∀ σ, a σ ≫ c = c ≫ a' σ)
+    (H : ∀ R R' : B' ⟶ A, η ≫ R = 𝟙 A → η ≫ R' = 𝟙 A → (∀ σ, a' σ ≫ R = R) →
+      (∀ σ, a' σ ≫ R' = R') → R = R')
+    {r r' : B ⟶ A} (hr : ∀ σ, a σ ≫ r = r) (hr' : ∀ σ, a σ ≫ r' = r') (h₁ : t ≫ r = 𝟙 A)
+    (h₁' : t ≫ r' = 𝟙 A) : r = r' := by
+  have he : η ≫ inv c = t := by rw [← e, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  have hea (σ) : a' σ ≫ inv c = inv c ≫ a σ := by
+    rw [IsIso.comp_inv_eq, Category.assoc, ea, IsIso.inv_hom_id_assoc]
+  have key := H (inv c ≫ r) (inv c ≫ r') (by rw [← Category.assoc, he, h₁])
+    (by rw [← Category.assoc, he, h₁']) (fun σ ↦ by rw [← Category.assoc, hea, Category.assoc, hr])
+    (fun σ ↦ by rw [← Category.assoc, hea, Category.assoc, hr'])
+  exact (cancel_epi _).1 key
+
+/-- A composite `t ≫ c ≫ R` is the identity if `t ≫ c = η` and `η ≫ R = 𝟙`. -/
+lemma _root_.CategoryTheory.comp_comp_eq_id_of_comp_eq {C : Type*} [Category C] {A B B' : C}
+    {t : A ⟶ B} {c : B ⟶ B'} {η : A ⟶ B'} {R : B' ⟶ A} (e : t ≫ c = η) (hR : η ≫ R = 𝟙 A) :
+    t ≫ c ≫ R = 𝟙 A := by
+  rw [← Category.assoc, e, hR]
 
 open Scheme PadicAlgCl
 
@@ -123,25 +169,221 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   {L Ω : Type u} [Field L] [Field Ω] [Algebra L Ω] [IsGalois L Ω] {G : Scheme.{u}}
   (h : G ⟶ Spec (.of L))
 
-/-- The reduction modulo `ℓⁿ⁺¹` of `L(φ') f ≫ s` is `L(φ) f` followed by the reduction of `s`. -/
-lemma derivedExtendScalarsReduction_map_comp (n : ℕ)
-    {A B B' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) G))} (f : B' ⟶ B)
-    (s : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1 + 1))).obj B ⟶
-      L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1 + 1))).obj A) :
-    Mod.derivedExtendScalarsReduction (integersModPowReduction G ℓ E.1 (n + 1 + 1))
-        (modPowTransition G ℓ E.1 (n + 1)) (integersModPowReduction G ℓ E.1 (n + 1))
-        (integersModPowReduction_comp_modPowTransition G ℓ E.1 (n + 1))
-        (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1 + 1))).map f ≫ s) =
-      L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map f ≫
-        Mod.derivedExtendScalarsReduction (integersModPowReduction G ℓ E.1 (n + 1 + 1))
-          (modPowTransition G ℓ E.1 (n + 1)) (integersModPowReduction G ℓ E.1 (n + 1))
-          (integersModPowReduction_comp_modPowTransition G ℓ E.1 (n + 1)) s := by
-  simp only [Mod.derivedExtendScalarsReduction, Functor.map_comp]
-  rw [← Category.assoc, ← Category.assoc, ← Category.assoc]
-  congr 2
-  exact ((Mod.derivedExtendScalarsCompIso _ _ _ _).hom.naturality f).symm
+/-- `ProEtale.exists_invariant_retraction_derivedUnit_galois` for the coefficient ring
+`(𝒪_E ⧸ ℓⁿ)̲` written as `Profinite.integersModPowRingObj`. -/
+theorem exists_invariant_retraction_derivedUnit_galois_integersModPow (n : ℕ)
+    (hp : ∀ L' : FiniteGaloisIntermediateField L Ω,
+      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n))
+    (X : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
+      (condensedRingObj (Profinite.integersModPowRingObj ℓ E.1 n) G)))
+    (hX : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersModPow ℓ E.1 n))) G
+      ((finiteCoefficientDerivedEquivalence G (integersModPow ℓ E.1 n)).functor.obj X)) :
+    ∃ R : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+        Profinite.integersModPowRingObj ℓ E.1 n⟧).obj
+          (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+            Profinite.integersModPowRingObj ℓ E.1 n⟧).obj X) ⟶ X,
+      (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app X ≫ R =
+        𝟙 _ ∧
+      ∀ σ : Ω ≃ₐ[L] Ω, derivedUnitTransport (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) X ≫ R = R := by
+  exact_mod_proofs exists_invariant_retraction_derivedUnit_galois h (integersModPow ℓ E.1 n) hp X hX
 
+/-- `ProEtale.eq_of_invariant_retraction_derivedUnit_galois` for the coefficient ring
+`(𝒪_E ⧸ ℓⁿ)̲` written as `Profinite.integersModPowRingObj`. -/
+theorem eq_of_invariant_retraction_derivedUnit_galois_integersModPow (n : ℕ)
+    (hp : ∀ L' : FiniteGaloisIntermediateField L Ω,
+      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n))
+    (X : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
+      (condensedRingObj (Profinite.integersModPowRingObj ℓ E.1 n) G)))
+    (hX : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersModPow ℓ E.1 n))) G
+      ((finiteCoefficientDerivedEquivalence G (integersModPow ℓ E.1 n)).functor.obj X))
+    (R R' : R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+        Profinite.integersModPowRingObj ℓ E.1 n⟧).obj
+          (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+            Profinite.integersModPowRingObj ℓ E.1 n⟧).obj X) ⟶ X)
+    (hR : (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E.1 n)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app X ≫ R = 𝟙 _)
+    (hR' : (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E.1 n)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app X ≫ R' = 𝟙 _)
+    (hinv : ∀ σ : Ω ≃ₐ[L] Ω, derivedUnitTransport (Profinite.integersModPowRingObj ℓ E.1 n)
+      (pullbackAction h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ) X ≫ R = R)
+    (hinv' : ∀ σ : Ω ≃ₐ[L] Ω, derivedUnitTransport (Profinite.integersModPowRingObj ℓ E.1 n)
+      (pullbackAction h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ) X ≫ R' = R') :
+    R = R' := by
+  have key := @eq_of_invariant_retraction_derivedUnit_galois L Ω _ _ _ _ G h
+    (integersModPow ℓ E.1 n) _ _ _ _ _ hp X hX
+  exact_mod_proofs key hR hR' hinv hinv'
+
+
+omit [IsGalois L Ω] in
+/-- The comparison of the reduction of `Rg_* Lg^* K` with `Rg_* Lg^*` of the reduction is an
+isomorphism, for `K` bounded below. -/
+lemma isIso_derivedPushPullExtendScalarsHom_integersModPow (n : ℕ)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) G))) (m : ℤ) [K.IsGE m] :
+    IsIso (derivedPushPullExtendScalarsHom
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K) := by
+  have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1)
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K m
+  have := isIso_derivedUpperStarExtendScalarsPushHom_integersModPow_app ℓ E.1 n
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+    ((L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+      Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) m
+  infer_instance
+
+set_option maxHeartbeats 1600000 in
+-- the retraction is matched against the large types of the reductions
+/-- **Existence of invariant torsion retractions**: the reduction modulo `ℓⁿ` of the unit
+`K ⟶ Rg_* Lg^* K` has a retraction invariant under the reductions of the Galois action. -/
+lemma exists_retraction_map_unit_integersModPow (n : ℕ)
+    (hunit : ∀ L' : FiniteGaloisIntermediateField L Ω,
+      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n))
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) G)))
+    (hred : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersModPow ℓ E.1 n))) G
+      ((finiteCoefficientDerivedEquivalence G (integersModPow ℓ E.1 n)).functor.obj
+        (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K))) :
+    ∃ r, (∀ σ : Ω ≃ₐ[L] Ω, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫ r = r) ∧
+      L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) ≫ r =
+        𝟙 _ := by
+  have hR := exists_invariant_retraction_derivedUnit_galois_integersModPow E h n hunit _ hred
+  refine ⟨derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K ≫ hR.choose,
+    fun σ ↦ ?_, ?_⟩
+  · have e : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫
+        derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K =
+      derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K ≫
+        derivedUnitTransport (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K) := by
+      exact_mod_proofs (map_derivedUnitTransport_comp_derivedPushPullExtendScalarsHom
+        (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+        (pullbackAction h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ)
+        (pullbackAction_fst h _ specGaloisAction_comp σ) K)
+    exact_mod_proofs (Category.assoc _ _ _).symm.trans ((congrArg (· ≫ hR.choose) e).trans
+      ((Category.assoc _ _ _).trans (congrArg (_ ≫ ·) (hR.choose_spec.2 σ))))
+  · have e : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) ≫
+        derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K =
+      (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+        (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K) := by
+      exact_mod_proofs (map_unit_comp_derivedPushPullExtendScalarsHom
+        (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K)
+    exact comp_comp_eq_id_of_comp_eq e hR.choose_spec.1
+
+set_option maxHeartbeats 800000 in
+-- the retractions are compared through the large types of the reductions
+/-- **Uniqueness of invariant torsion retractions**: two retractions of the reduction modulo `ℓⁿ`
+of the unit `K ⟶ Rg_* Lg^* K`, invariant under the reductions of the Galois action, are equal. -/
+lemma eq_of_retraction_map_unit_integersModPow (n : ℕ)
+    (hunit : ∀ L' : FiniteGaloisIntermediateField L Ω,
+      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n))
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) G))) (m : ℤ) [K.IsGE m]
+    (hred : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersModPow ℓ E.1 n))) G
+      ((finiteCoefficientDerivedEquivalence G (integersModPow ℓ E.1 n)).functor.obj
+        (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K)))
+    (r r' : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj
+        (R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
+          Profinite.padicIntegersRingObj ℓ E.1⟧).obj
+          (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
+            Profinite.padicIntegersRingObj ℓ E.1⟧).obj K)) ⟶
+      L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K)
+    (hr : ∀ σ : Ω ≃ₐ[L] Ω, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫ r = r)
+    (hr' : ∀ σ : Ω ≃ₐ[L] Ω, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫ r' = r')
+    (h₁ : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) ≫ r =
+        𝟙 _)
+    (h₁' : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) ≫ r' =
+        𝟙 _) :
+    r = r' := by
+  have := isIso_derivedPushPullExtendScalarsHom_integersModPow (Ω := Ω) E h n K m
+  have e : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) ≫
+        derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K =
+      (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+        (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K) := by
+    exact_mod_proofs (map_unit_comp_derivedPushPullExtendScalarsHom
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K)
+  have ea (σ : Ω ≃ₐ[L] Ω) : L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫
+        derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K =
+      derivedPushPullExtendScalarsHom (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
+          (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K ≫
+        derivedUnitTransport (Profinite.integersModPowRingObj ℓ E.1 n)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 n)).obj K) := by
+    exact_mod_proofs (map_derivedUnitTransport_comp_derivedPushPullExtendScalarsHom
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 n)
+      (pullbackAction h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ)
+      (pullbackAction_fst h _ specGaloisAction_comp σ) K)
+  exact eq_of_retraction_of_iso e ea
+    (fun R R' hR hR' hi hi' ↦ eq_of_invariant_retraction_derivedUnit_galois_integersModPow E h n
+      hunit _ hred R R' hR hR' hi hi') hr hr' h₁ h₁'
+
+set_option maxHeartbeats 800000 in
+-- the torsion retractions are matched against the large types of the reductions
 /-- **The derived unit of an infinite Galois extension of degrees prime to `ℓ` splits with
 `𝒪_E`-coefficients** at every derived complete complex whose reductions modulo `ℓⁿ⁺¹` are bounded
 below of étale origin. -/
@@ -156,66 +398,20 @@ theorem isSplitMono_derivedUnit_galois_padicIntegers
         (L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).obj K))) :
     IsSplitMono ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) := by
-  -- the Galois action with integral coefficients
-  let u (σ : Ω ≃ₐ[L] Ω) := derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
-    (pullbackAction h _ specGaloisAction_comp σ) (pullbackAction_fst h _ specGaloisAction_comp σ)
-    (pullbackAction_fst h _ specGaloisAction_comp σ) K
-  -- the comparison of the reduction of `Rg_* Lg^* K` with `Rg_* Lg^*` of the reduction
-  have hc (n : ℕ) : IsIso (derivedPushPullExtendScalarsHom
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 (n + 1))
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K) := by
-    have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K m
-    have := isIso_derivedUpperStarExtendScalarsPushHom_integersModPow_app ℓ E.1 (n + 1)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
-      ((L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
-        Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K) m
-    infer_instance
-  let c (n : ℕ) := asIso (derivedPushPullExtendScalarsHom
-      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 (n + 1))
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K)
-  have hη (n : ℕ) := map_unit_comp_derivedPushPullExtendScalarsHom
-    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 (n + 1))
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K
-  have hu (n : ℕ) (σ : Ω ≃ₐ[L] Ω) := map_derivedUnitTransport_comp_derivedPushPullExtendScalarsHom
-    (Profinite.padicIntegersRingObjToIntegersModPow ℓ E.1 (n + 1))
-    (pullbackAction h _ specGaloisAction_comp σ) (pullbackAction_fst h _ specGaloisAction_comp σ)
-    (pullbackAction_fst h _ specGaloisAction_comp σ) K
   have hunit (n : ℕ) : ∀ L' : FiniteGaloisIntermediateField L Ω,
-      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 (n + 1)) := fun L' ↦
-    isUnit_natCast_integersModPow E.1 (n + 1) (hp L')
+      IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n) := fun L' ↦
+    isUnit_natCast_integersModPow E.1 n (hp L')
   refine ProEtale.isSplitMono_of_derivedCompleteIntegers_of_unique_retractions _ hK
-    (fun n r ↦ ∀ σ, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map (u σ) ≫ r =
-      r) (fun n ↦ ?_) (fun n r r' hr hr' h₁ h₁' ↦ ?_) (fun n r hr _ σ ↦ ?_)
-  · obtain ⟨R₀, h₁, h₂⟩ := exists_invariant_retraction_derivedUnit_galois h
-      (integersModPow ℓ E.1 (n + 1)) (hunit n) _ (hred n)
-    refine ⟨(c n).hom ≫ R₀, fun σ ↦ ?_, ?_⟩
-    · change _ ≫ derivedPushPullExtendScalarsHom _ _ _ K ≫ R₀ = _
-      rw [reassoc_of% (hu n σ), h₂]
-    · change _ ≫ derivedPushPullExtendScalarsHom _ _ _ K ≫ R₀ = _
-      rw [reassoc_of% (hη n), h₁]
-  · have hη' : (derivedUpperStarLowerStarAdjunction _
-        (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app _ ≫
-          (c n).inv = L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map
-            ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
-              (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) := by
-      rw [Iso.comp_inv_eq]
-      exact (hη n).symm
-    have hu' (σ : Ω ≃ₐ[L] Ω) : derivedUnitTransport _
-        (pullbackAction h _ specGaloisAction_comp σ)
-        (pullbackAction_fst h _ specGaloisAction_comp σ)
-        (pullbackAction_fst h _ specGaloisAction_comp σ) _ ≫ (c n).inv =
-          (c n).inv ≫ L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map
-            (u σ) := by
-      rw [Iso.eq_inv_comp, ← Category.assoc, Iso.comp_inv_eq]
-      exact (hu n σ).symm
-    have := eq_of_invariant_retraction_derivedUnit_galois h (integersModPow ℓ E.1 (n + 1))
-      (hunit n) _ (hred n) (R := (c n).inv ≫ r) (R' := (c n).inv ≫ r')
-      (by rw [reassoc_of% hη', h₁]) (by rw [reassoc_of% hη', h₁'])
-      (fun σ ↦ by rw [reassoc_of% (hu' σ), hr σ]) (fun σ ↦ by rw [reassoc_of% (hu' σ), hr' σ])
-    exact (cancel_epi _).1 this
-  · rw [← derivedExtendScalarsReduction_map_comp, hr σ]
+    (fun n r ↦ ∀ σ : Ω ≃ₐ[L] Ω, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map
+        (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
+          (pullbackAction h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ)
+          (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫ r = r)
+    (fun n ↦ exists_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K (hred n))
+    (fun n r r' hr hr' h₁ h₁' ↦
+      eq_of_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K m (hred n) r r' hr hr' h₁
+        h₁')
+    (fun n r hr _ σ ↦ ?_)
+  rw [← Mod.derivedExtendScalarsReduction_map_comp, hr σ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
