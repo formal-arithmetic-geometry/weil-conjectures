@@ -6,9 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.Verdier
-public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 
 /-!

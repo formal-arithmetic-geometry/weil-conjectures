@@ -6,12 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.ConstructibleSheaf.FiniteDerived
-public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 
 /-!
 # Elementary operations preserving bounded constructibility

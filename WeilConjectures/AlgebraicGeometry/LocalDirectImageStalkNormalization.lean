@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassMap
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.LocalDirectImageStalkClassRestriction
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
