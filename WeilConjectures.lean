@@ -10393,6 +10393,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.HomologySequenceMorphi
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyColimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterComplete
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTowerDerived
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
