@@ -27,6 +27,32 @@ universe u
 
 open CategoryTheory
 
+namespace CategoryTheory
+
+variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+  {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+
+/-- The components of the inverse mate of a square along two adjunctions. -/
+lemma mateEquiv_symm_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (β : TwoSquare R₁ H G R₂)
+    (a : A) : ((mateEquiv adj₁ adj₂).symm β).natTrans.app a =
+      L₂.map (G.map (adj₁.unit.app a)) ≫ L₂.map (β.natTrans.app (L₁.obj a)) ≫
+        adj₂.counit.app (H.obj (L₁.obj a)) := by
+  simp [mateEquiv_symm_apply]
+
+/-- A square `α` is the inverse mate of `β` as soon as `β` intertwines the units of the two
+adjunctions with `α`. -/
+lemma mateEquiv_eq_of_unit_comp_map (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
+    (β : TwoSquare R₁ H G R₂)
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.natTrans.app (L₁.obj a) =
+      adj₂.unit.app (G.obj a) ≫ R₂.map (α.natTrans.app a)) :
+    mateEquiv adj₁ adj₂ α = β := by
+  rw [← Equiv.eq_symm_apply]
+  refine TwoSquare.ext _ _ fun a ↦ ?_
+  rw [mateEquiv_symm_natTrans_app, ← Functor.map_comp_assoc, h]
+  simp
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale
 
 open CategoryTheory.TwoSquare
@@ -160,8 +186,24 @@ lemma adicSheafEquivCondensedMod_map_unit_comp (e : S ≅ T) (x : AdicSheaf l T)
   simp only [Mod.comp_hom', CategoryTheory.Functor.map_comp, adicLowerStarId_inv_app_hom,
     adicLowerStarCongr_inv_app_hom, adicLowerStarComp_inv_app_hom]
   erw [CategoryTheory.Functor.map_id, Category.comp_id,
-    weilCoefficientsForgetAb_map_lowerStarId_inv_app, weilCoefficientsForgetAb_map_lowerStarCongr_inv_app,
+    weilCoefficientsForgetAb_map_lowerStarId_inv_app,
+    weilCoefficientsForgetAb_map_lowerStarCongr_inv_app,
     weilCoefficientsForgetAb_map_lowerStarComp_inv_app]
+  rfl
+
+set_option maxHeartbeats 1000000 in
+-- the kernel unfolds the equivalences of the pushforwards along `e`
+/-- The pushforward comparisons of the two models along `e` and `e⁻¹` are mates for the
+adjunctions `(e⁻¹)_* ⊣ e_*` of both models. -/
+lemma mateEquiv_adicLowerStarCompCondensedModIso_inv (e : S ≅ T) :
+    mateEquiv (adicLowerStarEquivalence l e).symm.toAdjunction
+        (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e)
+        (TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.inv).inv) =
+      TwoSquare.mk _ _ _ _ (adicLowerStarCompCondensedModIso l e.hom).hom := by
+  refine CategoryTheory.mateEquiv_eq_of_unit_comp_map _ _ _ _ fun x ↦ ?_
+  rw [← adicSheafEquivCondensedMod_map_unit_comp l e x, Category.assoc, Category.assoc,
+    ← Functor.map_comp, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
 /-- The pullback comparison of the two models along an isomorphism `e` is the pushforward
