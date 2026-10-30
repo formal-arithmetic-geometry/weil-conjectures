@@ -31,7 +31,7 @@ along `𝔸¹_S ⟶ S`: the slice of `M_T` along the section `T ⟶ 𝔸¹_T` gi
 [Th. finitude], §§3.4, 3.7) into the two facts about traits used in the blueprint:
 
 * the pullback exchange of `ψ` is invertible: nearby cycles do not change under the change of
-  trait `T ⟶ S` (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, the case
+  trait `T ⟶ S` (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, the case
   `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧` of the invariance under change of strictly henselian trait
   `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`);
 * the pullback exchange of `θ` is the inclusion of the invariants of the pro-`p` kernel
@@ -154,7 +154,7 @@ over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index 
 exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` is a split monomorphism whose idempotent is `1 / [P' : V]`
 times the sum of the actions of representatives of `P' ⧸ V`. It is the composite of the exchange
 of the change of trait, invertible by
-`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, and of the inclusion of the
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, and of the inclusion of the
 `P'`-invariants `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). -/
 theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
@@ -185,7 +185,7 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
   have hD := exists_subgroup_pullbackExchange_sliceTraitChangeHom (ℓ := ℓ) hM hb
     (C := L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) hA'
   obtain ⟨V, hV, htriv, r, hr, havg⟩ := hD
-  have hs := isIso_pullbackExchange_baseChangeHom_traitMap (K := traitSliceField k') (ℓ := ℓ) hM
+  have hs := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (K := traitSliceField k') (ℓ := ℓ) hM
     (A := A) hA
   refine ⟨V, hV, fun σ hσ ↦ eq_id_of_naturality_of_iso _
     (fun g ↦ Hom.autAction_naturality _ _ g)
