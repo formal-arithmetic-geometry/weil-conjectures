@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.EtaleCohomologyComparison
 public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExtPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicEtale
 
@@ -37,21 +39,6 @@ attribute [local instance 2000] CommRing.toRing
 
 namespace CategoryTheory.Abelian.Ext
 
-/-- Postcomposition with an isomorphism `e : Y ≅ Z`, as an additive equivalence
-`Extⁿ(X, Y) ≃+ Extⁿ(X, Z)`. -/
-noncomputable def postcompIsoAddEquiv {D : Type*} [Category D] [Abelian D] [HasExt.{u} D]
-    {X Y Z : D} (e : Y ≅ Z) (n : ℕ) : Ext X Y n ≃+ Ext X Z n where
-  toFun x := x.comp (mk₀ e.hom) (add_zero n)
-  invFun x := x.comp (mk₀ e.inv) (add_zero n)
-  left_inv x := by simp [mk₀_comp_mk₀]
-  right_inv x := by simp [mk₀_comp_mk₀]
-  map_add' x y := add_comp _ _ _ _
-
-lemma postcompIsoAddEquiv_apply {D : Type*} [Category D] [Abelian D] [HasExt.{u} D]
-    {X Y Z : D} (e : Y ≅ Z) (n : ℕ) (x : Ext X Y n) :
-    postcompIsoAddEquiv e n x = x.comp (mk₀ e.hom) (add_zero n) :=
-  rfl
-
 /-- `y ↦ a ∘ G(y) ∘ b` for an exact functor `G`, as an additive map. -/
 noncomputable def mk₀CompMk₀MapExactFunctorAddHom {C : Type*} [Category C] [Abelian C]
     [HasExt.{u} C] {D : Type*} [Category D] [Abelian D] [HasExt.{u} D] (G : C ⥤ D) [G.Additive]
@@ -70,7 +57,7 @@ variable {C : Type*} [Category C] {J : GrothendieckTopology C} [HasSheafify J Ad
 /-- The additive equivalence of cohomology groups induced by an isomorphism of sheaves. -/
 noncomputable def H.mapAddEquiv {F G : Sheaf J AddCommGrpCat.{u}} (e : F ≅ G) (n : ℕ) :
     H F n ≃+ H G n :=
-  Ext.postcompIsoAddEquiv e n
+  Ext.postcompAddEquiv _ e n
 
 end CategoryTheory.Sheaf
 
@@ -86,15 +73,18 @@ applied to the (non-atomic) sheaf category; inside definitions this proof is abs
 auxiliary lemma stating the unfolded `HasExt`, which the kernel can only compare with the original
 by unfolding the derived category constructions. -/
 
+/-- `HasExt` for étale sheaves of `ℤ/ℓᵐ`-modules, as a lemma to be used as a local instance. -/
 lemma hasExt_sheafEtaleModuleCatZMod (l m : ℕ) (S : Scheme.{u}) :
     HasExt.{u + 1}
       (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (l ^ m))))) :=
   inferInstance
 
+/-- `HasExt` for abelian étale sheaves, as a lemma to be used as a local instance. -/
 lemma hasExt_sheafEtaleAddCommGrpCat (S : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
+/-- `HasExt` for abelian pro-étale sheaves, as a lemma to be used as a local instance. -/
 lemma hasExt_sheafProEtAddCommGrpCat (S : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1}) :=
   inferInstance
@@ -110,13 +100,6 @@ attribute [local instance high] hasExt_sheafEtaleModuleCatZMod hasExt_sheafEtale
 `CategoryTheory.sheafToPresheaf_isRightAdjoint` in `Sheaf.constantRing`, and the kernel would
 have to unfold the sheaf categories to compare the two. -/
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
-
-/-- A bijective morphism of abelian groups, as an additive equivalence. Unlike
-`AddEquiv.ofBijective` at a concrete type, the `Add` instances of the equivalence and of the
-morphism are compared generically, not by unfolding the group structures. -/
-noncomputable def addEquivOfBijectiveAddMonoidHom {A B : Type*} [AddCommGroup A] [AddCommGroup B]
-    (f : A →+ B) (hf : Function.Bijective f) : A ≃+ B :=
-  AddEquiv.ofBijective f hf
 
 variable (l : ℕ) [Fact l.Prime] (m : ℕ) (S : Scheme.{u})
 
@@ -180,19 +163,19 @@ lemma bijective_mk₀CompMk₀AddHom_forgetComparisonUpperStar (n : ℕ) :
   have h : ⇑(Ext.mk₀CompMk₀MapExactFunctorAddHom (forgetComparisonUpperStar l m S)
       (forgetComparisonUpperStarUnit l m S)
       (forgetComparisonUpperStarConstantRingIso l m S).hom n) =
-      ⇑(Ext.postcompIsoAddEquiv (Y := (comparisonUpperStar AddCommGrpCat.{u + 1} S).obj
+      ⇑(Ext.postcompAddEquiv (Y := (comparisonUpperStar AddCommGrpCat.{u + 1} S).obj
           ((constantSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of
             (ULift.{u + 1} (ℤ_[l] ⧸ (PadicInt.powOpenAddSubgroup l m : AddSubgroup ℤ_[l]))))))
-          ((comparisonUpperStarConstantSheafIsoAddCommGrpCat S).app _ ≪≫
+          _ ((comparisonUpperStarConstantSheafIsoAddCommGrpCat S).app _ ≪≫
             constantSheafIsoContinuousSheaf S _) n) ∘
         ⇑(cohomologyComparison S _ n) ∘
-        ⇑(Ext.postcompIsoAddEquiv (sheafForget₂ConstantRingIsoQuotient l m S) n) ∘
+        ⇑(Ext.postcompAddEquiv _ (sheafForget₂ConstantRingIsoQuotient l m S) n) ∘
         ⇑((Etale.sheafForget₂ (ULift.{u + 1} (ZMod (l ^ m))) S).mapExtComp
           (Sheaf.constantIntToRing S.smallEtaleTopology (Etale.terminalEtaleIsTerminal S)
             (ULift.{u + 1} (ZMod (l ^ m)))) _ n) := by
     funext y
     rw [Function.comp_apply, Function.comp_apply, Function.comp_apply,
-      Ext.postcompIsoAddEquiv_apply, Ext.postcompIsoAddEquiv_apply, Functor.mapExtComp_apply,
+      Ext.postcompAddEquiv_apply, Ext.postcompAddEquiv_apply, Functor.mapExtComp_apply,
       Ext.mk₀_comp_comp_mk₀, cohomologyComparison_apply, Ext.mapExactFunctor_mk₀CompMk₀,
       Ext.mk₀_comp_mk₀CompMk₀, Ext.mk₀CompMk₀_comp_mk₀, Ext.mapExactFunctor_mapExactFunctor]
     rfl
@@ -208,7 +191,7 @@ noncomputable def extAddEquivFiniteAdicH (n : ℕ) :
     Ext (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m))))
         (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m)))) n ≃+
       FiniteAdicH S l m n :=
-  addEquivOfBijectiveAddMonoidHom _
+  AddEquiv.ofBijectiveAddMonoidHom _
     (bijective_mk₀CompMk₀AddHom_forgetComparisonUpperStar l m S n)
 
 /-- The comparison `Extⁿ_Λ(Λ_S, Λ_S) ≅ Hⁿ(S_proét, ℤ_ℓ/ℓᵐ)` is `y ↦ u ∘ (ν^* ∘ forget)(y) ∘ v`. -/
