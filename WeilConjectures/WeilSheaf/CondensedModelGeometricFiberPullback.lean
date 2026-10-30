@@ -220,7 +220,9 @@ lemma adicUpperStarCompCondensedModIso_inv_of_iso (e : S ≅ T) :
     mateEquiv_conjugateEquiv_vcomp _
       (CondensedRing.lowerStarInvAdjunction (Profinite.padicAlgClRingObj l) e),
     conjugateEquiv_adicUpperStarIsoLowerStarInv_inv, conjugateEquiv_upperStarIsoLowerStarInv_hom]
-  sorry
+  rw [mateEquiv_adicLowerStarCompCondensedModIso_inv]
+  refine TwoSquare.ext _ _ fun M ↦ ?_
+  simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
 
 end AlgebraicGeometry.ProEtale
 
