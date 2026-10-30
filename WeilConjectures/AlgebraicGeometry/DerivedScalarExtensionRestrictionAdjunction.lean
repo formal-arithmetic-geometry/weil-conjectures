@@ -14,6 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibi
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.Mathlib.Algebra.Homology.Localization
 
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-! # Derived reduction and restriction of scalars
 
 Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;
@@ -599,5 +603,51 @@ noncomputable def scalarReductionDerivedExistence :
 attribute [local semireducible] scalarReductionExtension
 
 attribute [local irreducible] scalarReductionDerivedExistence
+
+end WeilConjectures
+
+namespace WeilConjectures
+
+section
+
+set_option autoImplicit false
+set_option Elab.async false
+open CategoryTheory CategoryTheory.Limits
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
+variable (n : ℕ)
+attribute [local instance] scalarReductionSiteSmall
+attribute [local instance] scalarReductionRestrictionLimits
+attribute [local instance] scalarReductionRestrictionColimits
+attribute [local instance] scalarReductionExtensionAdditive
+
+
+/-- Termwise exact restriction descended through localization.
+Source: Stacks Tag 015F
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionDerivedRestriction :=
+  (scalarReductionRestriction l E Y n).mapDerivedCategory
+
+/-- Derived tensor with the finite quotient over the completed coefficient ring.
+Its universal property determines it up to unique compatible isomorphism.
+Source: Stacks Tag 06YY
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionDerivedExtension :
+    DerivedCategory (scalarReductionSource l E Y) ⥤
+      DerivedCategory (scalarReductionTarget l E Y n) :=
+  (scalarReductionDerivedExistence l E Y n).choose
+
+/-- The universal comparison on homotopy complexes, an isomorphism on K-flat ones.
+Source: Stacks Tag 06YY
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionCounit :
+    DerivedCategory.Qh ⋙ scalarReductionDerivedExtension l E Y n ⟶
+      (scalarReductionExtension l E Y n).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+        DerivedCategory.Qh :=
+  (scalarReductionDerivedExistence l E Y n).choose_spec.choose
+
+-- The proof-valued witnesses have large types; their bodies are never needed below.
+
+end
 
 end WeilConjectures

@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequenti
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
+import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
+import Mathlib.CategoryTheory.Functor.OfSequence
 /-! # Exactness of integral scalar localization
 
 For a normed extension `E` of `ℚ_ℓ` with closed unit ball `𝒪_E`, the condensed ring `E̲` is the
@@ -178,5 +180,167 @@ Source: Bhatt--Scholze, Lemma 6.8.2
   have := AB5OfSize_of_univLE.{0, 0} (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   exact Mod.preservesFiniteLimits_extendScalars_of_isColimit _
     (isColimitCoefficientMapSmulSequenceCocone ℓ E X) (coefficientMapInvPow_zero ℓ E X)
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+section
+
+open CategoryTheory Limits MonoidalCategory MonObj Opposite
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+
+private noncomputable abbrev coefficientPresheaf (R : Type) [TopologicalSpace R]
+    [Ring R] [IsTopologicalRing R] : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1} :=
+  Profinite.continuousMapRingPresheaf R ⋙ forget₂ RingCat Ab
+
+private noncomputable abbrev integralPresheafMap :
+    coefficientPresheaf.{u} (continuousIntegers ℓ E) ⟶ coefficientPresheaf E :=
+  Functor.whiskerRight
+    (Profinite.continuousMapRingPresheafMap (continuousIntegers ℓ E).subtype
+      continuous_subtype_val) (forget₂ RingCat Ab)
+
+private noncomputable def localizationLegHom (n : ℕ) :
+    coefficientPresheaf.{u} (continuousIntegers ℓ E) ⟶ coefficientPresheaf E where
+  app S := AddCommGrpCat.ofHom
+    { toFun x := ULift.up
+        (⟨fun s ↦ (x.down s : E) / (ℓ : E) ^ n,
+          (continuous_subtype_val.comp x.down.continuous).div_const _⟩ : C(S.unop, E))
+      map_zero' := by apply ULift.ext; ext; simp
+      map_add' x y := by
+        apply ULift.ext
+        ext s
+        change ((x.down s : E) + (y.down s : E)) / (ℓ : E) ^ n =
+          (x.down s : E) / (ℓ : E) ^ n + (y.down s : E) / (ℓ : E) ^ n
+        exact add_div _ _ _ }
+  naturality _ _ _ := rfl
+
+private noncomputable def localizationLeg (n : ℕ) :
+    Mod.regular (coefficientPresheaf.{u} (continuousIntegers ℓ E)) ⟶
+      (Mod.comap (integralPresheafMap ℓ E)).obj (Mod.regular (coefficientPresheaf E)) :=
+  Mod.homMk (localizationLegHom ℓ E n) (by
+    ext S : 2
+    apply AddCommGrpCat.hom_ext_toIntLinearMap
+    apply TensorProduct.ext'
+    intro a b
+    apply ULift.ext
+    ext x
+    change ((a.down x : E) * (b.down x : E)) / (ℓ : E) ^ n =
+      (a.down x : E) * ((b.down x : E) / (ℓ : E) ^ n)
+    exact mul_div_assoc _ _ _)
+
+private noncomputable abbrev localizationSequence :
+    ℕ ⥤ Mod (Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1})
+      (coefficientPresheaf (continuousIntegers ℓ E)) :=
+  Functor.ofSequence (fun _ ↦ ℓ • 𝟙 (Mod.regular
+    (coefficientPresheaf (continuousIntegers ℓ E))))
+
+private noncomputable def localizationCocone : Cocone (localizationSequence.{u} ℓ E) where
+  pt := (Mod.comap (integralPresheafMap ℓ E)).obj (Mod.regular (coefficientPresheaf E))
+  «ι» := NatTrans.ofSequence (localizationLeg ℓ E) (by
+    intro n
+    simp only [localizationSequence, Functor.ofSequence_map_homOfLE_succ,
+      Functor.const_obj_map]
+    apply Mod.hom_ext
+    ext S x
+    apply ULift.ext
+    ext s
+    change (continuousIntegers ℓ E).subtype (ℓ • x.down s) / (ℓ : E) ^ (n + 1) =
+      (x.down s : E) / (ℓ : E) ^ n
+    rw [map_nsmul, nsmul_eq_mul, pow_succ]
+    field_simp [ell_ne_zero ℓ E]
+    rfl)
+
+private noncomputable def localizationCoconeIsColimit :
+    IsColimit (localizationCocone.{u} ℓ E) := by
+  let := Functor.functorCategoryMonoidalClosed Profinite.{u}ᵒᵖ Ab.{u + 1}
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget Ab.{u + 1})
+  have : ReflectsColimitsOfShape ℕ (forget Ab.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  have : ReflectsColimitsOfShape ℕ
+      (Mod.forget (D := Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1})
+        (coefficientPresheaf (continuousIntegers ℓ E))) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  apply isColimitOfReflects (Mod.forget (D := Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1})
+    (coefficientPresheaf (continuousIntegers ℓ E)))
+  refine evaluationJointlyReflectsColimits _ fun S ↦
+    isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    let φ := (continuousIntegers ℓ E).subtype.compLeftContinuous S.unop continuous_subtype_val
+    let := φ.toAlgebra
+    have hloc := continuousIntegralFunctions_isLocalization ℓ E S.unop
+    obtain ⟨n, a, ha⟩ := IsLocalization.Away.surj
+      (ContinuousMap.const S.unop (ℓ : continuousIntegers ℓ E)) x.down
+    refine ⟨n, ULift.up a, ?_⟩
+    apply ULift.ext
+    ext s
+    change x.down s = (a s : E) / (ℓ : E) ^ n
+    have ha' := congrArg (fun f : C(S.unop, E) ↦ f s) ha
+    change x.down s * (ℓ : E) ^ n = (a s : E) at ha'
+    exact (eq_div_iff (pow_ne_zero n (ell_ne_zero ℓ E))).2 ha'
+  · intro n x y h
+    have hxy : x = y := by
+      apply ULift.ext
+      apply ContinuousMap.ext
+      intro s
+      apply Subtype.ext
+      have h' := congrArg (fun f : ULift.{u + 1} C(S.unop, E) ↦ f.down s) h
+      change (x.down s : E) / (ℓ : E) ^ n = (y.down s : E) / (ℓ : E) ^ n at h'
+      exact (div_left_inj' (pow_ne_zero n (ell_ne_zero ℓ E))).mp h'
+    subst y
+    exact ⟨n, 𝟙 n, rfl⟩
+
+private noncomputable def mappedRegularIso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (L : C ⥤ D) [L.LaxMonoidal] (R : C) [MonObj R] :
+    (L.mapMod R).obj (Mod.regular R) ≅ Mod.regular (L.obj R) :=
+  Mod.isoMk (Iso.refl _) (by simp [Mod.act])
+
+private noncomputable def restrictedRegularIso
+    {C : Type*} [Category C] [MonoidalCategory C]
+    {A B B' : C} [MonObj A] [MonObj B] [MonObj B']
+    (φ : A ⟶ B) (φ' : A ⟶ B') [IsMonHom φ] [IsMonHom φ']
+    (e : B ≅ B') [IsMonHom e.hom] (w : φ ≫ e.hom = φ') :
+    (Mod.comap φ).obj (Mod.regular B) ≅ (Mod.comap φ').obj (Mod.regular B') :=
+  Mod.isoMk e (by
+    change (φ ▷ B ≫ μ[B]) ≫ e.hom = A ◁ e.hom ≫ φ' ▷ B' ≫ μ[B']
+    rw [Category.assoc, IsMonHom.mul_hom, MonoidalCategory.tensorHom_def, Category.assoc,
+      ← comp_whiskerRight_assoc, w, whisker_exchange_assoc])
+
+private noncomputable def pointCoefficientIso (R : Type) [TopologicalSpace R]
+    [Ring R] [IsTopologicalRing R] :
+    (presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
+      (coefficientPresheaf R) ≅ Profinite.continuousMapRingObj R :=
+  Sheaf.sheafifyRingPresheafIso (coherentTopology Profinite.{u})
+    (Profinite.continuousMapRingSheaf R)
+
+private noncomputable abbrev schemeCoefficientFunctor (X : Scheme.{u}) :=
+  presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙ upperStarFromPoint X
+
+private noncomputable def schemeCoefficientIso (X : Scheme.{u})
+    (R : Type) [TopologicalSpace R] [Ring R] [IsTopologicalRing R] :
+    (schemeCoefficientFunctor X).obj (coefficientPresheaf R) ≅
+      condensedRingObj (Profinite.continuousMapRingObj R) X :=
+  (upperStarFromPoint X).mapIso (pointCoefficientIso R)
+
+private theorem schemeCoefficientIso_naturality (X : Scheme.{u}) :
+    (schemeCoefficientFunctor X).map (integralPresheafMap ℓ E) ≫
+        (schemeCoefficientIso X E).hom =
+      (schemeCoefficientIso X (continuousIntegers ℓ E)).hom ≫
+        coefficientMap (integralScalarMap ℓ E) X := by
+  change (upperStarFromPoint X).map
+      ((presheafToSheaf _ Ab).map (integralPresheafMap ℓ E)) ≫
+        (upperStarFromPoint X).map (pointCoefficientIso E).hom =
+    (upperStarFromPoint X).map (pointCoefficientIso (continuousIntegers ℓ E)).hom ≫
+      (upperStarFromPoint X).map (integralScalarMap ℓ E)
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  rw [integralScalarMap, Sheaf.sheafCompose_map_eq]
+  simp only [pointCoefficientIso, Iso.hom_inv_id_assoc]
+  rfl
+
+end
 
 end AlgebraicGeometry.ProEtale.CondensedRing
