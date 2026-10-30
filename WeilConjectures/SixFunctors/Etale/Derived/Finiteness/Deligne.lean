@@ -7,8 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Induction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.RadicialDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence

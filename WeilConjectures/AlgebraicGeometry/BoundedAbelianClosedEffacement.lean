@@ -6,13 +6,18 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleClosedEffacement
 import Mathlib.CategoryTheory.Abelian.Basic
+import Mathlib.AlgebraicGeometry.QuasiAffine
 
 /-! # Effacement preserving a fixed coefficient exponent
 

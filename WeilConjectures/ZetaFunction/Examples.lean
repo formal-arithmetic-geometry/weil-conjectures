@@ -5,15 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
-public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
-public import WeilConjectures.PointCount
-public import WeilConjectures.WeilSheaf.Curve
-public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.ZetaFunction.BettiSymmetry
-public import WeilConjectures.ZetaFunction.TraceFormula
-public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!
 # Examples of zeta functions and of compactly supported cohomology

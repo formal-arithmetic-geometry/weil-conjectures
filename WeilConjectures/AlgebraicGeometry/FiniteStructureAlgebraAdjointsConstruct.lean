@@ -13,11 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.FiniteStructureAdjointTransitions
-public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
-
 import WeilConjectures.AlgebraicGeometry.FiniteStructureMultiplicationLift
 import WeilConjectures.AlgebraicGeometry.FiniteStructureUnitLift
 import Mathlib.Algebra.Category.Ring.Limits

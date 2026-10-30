@@ -7,11 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Canonical tensor comparison for derived pullback
 
