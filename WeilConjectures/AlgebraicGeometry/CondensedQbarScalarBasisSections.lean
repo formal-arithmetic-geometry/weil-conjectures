@@ -6,8 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasisPushforward
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
-import WeilConjectures.AlgebraicGeometry.CondensedQbarPointBasis
 import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! Coherent coefficient sections for the algebraic closure.
 

@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.ScalarInternalHomData
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTransportIso
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # Transport of normalized derived scalar adjunctions
@@ -28,24 +29,6 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 attribute [local instance] SheafOfModules.ScalarDerivedPair.extension_additive
 
 namespace CategoryTheory.InternalAbelianSheafModule
-
-private theorem kan_precomp_full
-    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
-    (G : A ⥤ B) (Q : B ⥤ D) (F : B ⥤ E) (T : D ⥤ E)
-    [((Functor.whiskeringLeft A B E).obj G).Full]
-    [((Functor.whiskeringLeft A B E).obj G).Faithful]
-    (α : Q ⋙ T ⟶ F) [T.IsRightKanExtension α] :
-    T.IsRightKanExtension
-      ((Functor.associator G Q T).hom ≫ Functor.whiskerLeft G α) := by
-  have : (Functor.RightExtension.precomp Q F G).IsEquivalence := by
-    apply CostructuredArrow.isEquivalenceMap₂
-  let e : (Functor.RightExtension.mk T α).IsUniversal ≃
-      (Functor.RightExtension.mk T
-        ((Functor.associator G Q T).hom ≫ Functor.whiskerLeft G α)).IsUniversal :=
-    (IsTerminal.isTerminalIffObj (Functor.RightExtension.precomp Q F G)
-      (Functor.RightExtension.mk T α)).trans
-        (IsTerminal.equivOfIso (CostructuredArrow.isoMk (Iso.refl _)))
-  exact ⟨⟨e (T.isUniversalOfIsRightKanExtension α)⟩⟩
 
 private theorem kan_postcomp_iff
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
@@ -331,7 +314,7 @@ private theorem derivedTransport
       F εh
         (HomotopyCategory.quasiIso
           (D) (.up ℤ))
-    have := kan_precomp_full q DerivedCategory.Qh _ F εh
+    have := ModuleCat.kan_precomp_full q DerivedCategory.Qh _ F εh
     have hec : F.IsRightKanExtension ec := by
       let i := DerivedCategory.quotientCompQhIso
         (D)

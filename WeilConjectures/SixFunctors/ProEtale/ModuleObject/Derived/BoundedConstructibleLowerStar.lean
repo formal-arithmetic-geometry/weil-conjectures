@@ -124,8 +124,8 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
-/-- **Deligne's finiteness theorem** for `Rf_*` (part of blueprint
-`sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
+/-- **Deligne's finiteness theorem** for `Rf_*` (blueprint `lem-sfb-dc-lower-star-preserves`;
+part of blueprint `sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
 for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It is false for a general

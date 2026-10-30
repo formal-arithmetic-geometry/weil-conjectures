@@ -1,23 +1,28 @@
 /-
-Copyright (c) 2026 Bin Wu. All rights reserved.
+Copyright (c) 2026 Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Bin Wu
+Authors: Nailin Guan, Bin Wu
 -/
 module
-public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
-set_option linter.privateModule false
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 
 /-!
 # The relative tensor product of module objects as a coequalizer
 
 For a commutative algebra object `R` of a closed symmetric monoidal Grothendieck abelian category,
-private helpers presenting `M ⊗_R N` as the cokernel of the two actions of `R` on `M ⊗ N`
-(`relativeTensorπ`, `relativeTensorCofork`, `isColimitRelativeTensorCofork`) and the right unitor
-`N ⊗_R R ≅ N` (`relativeTensorRightIso`). They supplement
-`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian` and are used through
-`import all`.
+this file presents `M ⊗_R N` as the coequalizer of the two actions of `R` on `M ⊗ N`
+(`Mod.relativeTensorπ`, `Mod.relativeTensorCofork`, `Mod.isColimitRelativeTensorCofork`), and
+identifies the coequalizer tensor functor `Mod.tensorLeft N` with the monoidal tensor product
+(`Mod.relativeTensorRightIso`). It is used by
+`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`.
+(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -33,7 +38,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   {R : C} [MonObj R] [IsCommMonObj R]
 
 /-- The quotient map defining the relative tensor product is linear in its first factor. -/
-private noncomputable def relativeTensorπ (M N : Mod C R) :
+noncomputable def relativeTensorπ (M N : Mod C R) :
     (Mod.tensorRight R N.X).obj M ⟶ M ⊗ N :=
   homMk (M := (Mod.tensorRight R N.X).obj M) (N := M ⊗ N) (tensorObjπ M N) (by
     change ((α_ R M.X N.X).inv ≫ γ[R,M.X] ▷ N.X) ≫ tensorObjπ M N =
@@ -41,7 +46,7 @@ private noncomputable def relativeTensorπ (M N : Mod C R) :
     simpa only [Category.assoc] using (whiskerLeft_tensorπ_smul M N).symm)
 
 /-- The relative tensor product is a cofork of the two action maps on module objects. -/
-private noncomputable def relativeTensorCofork (M N : Mod C R) :
+noncomputable def relativeTensorCofork (M N : Mod C R) :
     Cofork ((tensorRightMap R γ[R,N.X]).app M)
       ((tensorRightRightAct R N.X).app M) :=
   Cofork.ofπ (relativeTensorπ M N) (by
@@ -52,7 +57,7 @@ private noncomputable def relativeTensorCofork (M N : Mod C R) :
     simp only [Category.assoc, Iso.inv_hom_id_assoc])
 
 /-- The tensor cofork is a coequalizer, as can be checked after forgetting the module action. -/
-private noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
+noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
     IsColimit (relativeTensorCofork M N) := by
   apply isColimitOfIsColimitCoforkMap (forget R)
   change IsColimit (Cofork.ofπ (tensorObjπ M N) _ :
@@ -72,8 +77,9 @@ private noncomputable def isColimitRelativeTensorCofork (M N : Mod C R) :
       (g := (α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X])
     exact hm.trans (coequalizer.π_desc _ _).symm
 
-/-- The previously constructed coequalizer tensor functor agrees with the monoidal tensor. -/
-private noncomputable def relativeTensorRightIso (N : Mod C R) :
+/-- The relative tensor product `- ⊗_R N`, built as a coequalizer, agrees with the monoidal
+tensor product of `Mod C R`. -/
+noncomputable def relativeTensorRightIso (N : Mod C R) :
     Mod.tensorLeft N ≅ MonoidalCategory.tensorRight N :=
   NatIso.ofComponents
     (fun M ↦ by
