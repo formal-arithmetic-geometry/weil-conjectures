@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 
 For a factorisation `b ≫ c = a` of morphisms of schemes, the pullbacks of `ℓ`-adic sheaves
 satisfy `a^* ≅ c^* ⋙ b^*` (`AlgebraicGeometry.ProEtale.adicUpperStarFactor`). These isomorphisms
-are associative (`AlgebraicGeometry.ProEtale.map_adicUpperStarFactor_inv_app_comp_inv_app`): the equations
+are associative
+(`AlgebraicGeometry.ProEtale.map_adicUpperStarFactor_inv_app_comp_inv_app`): the equations
 of the factorisations are arbitrary hypotheses, so that the identities can be instantiated at
 concrete morphisms without unfolding them.
 -/

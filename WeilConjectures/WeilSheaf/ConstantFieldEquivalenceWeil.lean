@@ -118,8 +118,8 @@ def constantFieldFunctorGeometricFiberPullbackIso {H : AdicSheaf l V} (hH : IsAd
 /-- A family of zero objects is a zero object of the product category. -/
 lemma _root_.CategoryTheory.Limits.IsZero.pi {ι : Type*} {D : ι → Type*}
     [∀ i, Category (D i)] {X : ∀ i, D i} (h : ∀ i, IsZero (X i)) : IsZero X :=
-  ⟨fun Y ↦ ⟨⟨fun i ↦ (h i).to_ (Y i)⟩, fun f ↦ funext fun i ↦ (h i).eq_of_src _ _⟩,
-    fun Y ↦ ⟨⟨fun i ↦ (h i).from_ (Y i)⟩, fun f ↦ funext fun i ↦ (h i).eq_of_tgt _ _⟩⟩
+  ⟨fun Y ↦ ⟨⟨fun i ↦ (h i).to_ (Y i)⟩, fun _ ↦ funext fun i ↦ (h i).eq_of_src _ _⟩,
+    fun Y ↦ ⟨⟨fun i ↦ (h i).from_ (Y i)⟩, fun _ ↦ funext fun i ↦ (h i).eq_of_tgt _ _⟩⟩
 
 /-- A Weil sheaf whose image under the constant field functor vanishes vanishes: all the pieces
 of its underlying sheaf are isomorphic to the first one. -/

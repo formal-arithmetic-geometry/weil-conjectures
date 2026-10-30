@@ -52,12 +52,12 @@ include hJ hτ hτnat hτ0 in
 lemma twist_compat_last :
     (P.J (Fin.last m)).map (IsoAlgebra.mk A.carrier (A.str ≪≫ σ A.carrier)).str.hom ≫
         (P.chain A (Fin.last m) ≪≫ τ (Fin.last m) ((P.J 0).obj A.carrier)).hom =
-      P.β.hom.app A.carrier ≫ G.map (P.chain A 0 ≪≫ τ (0 : Fin (m + 1)) ((P.J 0).obj A.carrier)).hom ≫
+      P.β.hom.app A.carrier ≫
+        G.map (P.chain A 0 ≪≫ τ (0 : Fin (m + 1)) ((P.J 0).obj A.carrier)).hom ≫
         (P.strZero A ≪≫ τ (m + 1) ((P.J 0).obj A.carrier)).hom := by
   simp only [mk_str, Iso.trans_hom, Functor.map_comp, hJ, chain_zero, Iso.refl_hom,
-    Fin.val_zero, hτ0, Category.comp_id, CategoryTheory.Functor.map_id, Category.id_comp, strZero,
-    Iso.symm_hom, Iso.app_inv, Functor.mapIso_hom, Category.assoc, Iso.hom_inv_id_app_assoc,
-    Fin.val_last, hτ m]
+    Fin.val_zero, hτ0, Category.comp_id, CategoryTheory.Functor.map_id, strZero,
+    Iso.symm_hom, Iso.app_inv, Functor.mapIso_hom, Category.assoc, Fin.val_last, hτ m]
   rw [reassoc_of% (hτnat 1 (P.chain A (Fin.last m)).hom)]
   erw [Category.id_comp, Iso.hom_inv_id_app_assoc]
 

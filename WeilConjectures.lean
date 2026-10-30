@@ -13174,6 +13174,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDeriv
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PullbackStrCompat
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Retract
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
@@ -14623,6 +14624,7 @@ public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
+public import WeilConjectures.WeilSheaf.AdicCyclicDecomposition
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
@@ -14766,6 +14768,7 @@ public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.GeometricConstituent
 public import WeilConjectures.WeilSheaf.GeometricConstituentMono
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
+public import WeilConjectures.WeilSheaf.GeometricFiberPullbackStr
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
