@@ -200,6 +200,47 @@ lemma derivedExtendScalarsPullbackMap_comp {T S R : Scheme.{u}} (g₁ : T ⟶ S)
     ← Functor.map_comp_assoc, unit_app_comp_map_derivedExtendScalarsPullbackMap_app,
     Functor.map_comp_assoc]
 
+/-- The commutation of `Ψ` with the derived pullback along the identity is the identity, through
+`L(𝟙 X)^* ≅ 𝟭`. -/
+@[reassoc]
+lemma derivedExtendScalarsPullbackMap_id {X : Scheme.{u}} (K : 𝐃(X, Λ)) :
+    (derivedExtendScalarsPullbackMap hρ ha (𝟙 X)).app K ≫
+        (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ') X).hom.app _ =
+      (derivedExtendScalars hρ ha X).map
+        ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).hom.app K) := by
+  apply derivedExtendScalars_hom_ext hρ ha
+  have hu := (derivedExtendScalarsAdjunction hρ ha X).unit.naturality
+    ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).hom.app K)
+  have hi := (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).hom.naturality
+    ((derivedExtendScalarsAdjunction hρ ha X).unit.app K)
+  simp only [Functor.id_obj, Functor.comp_obj, Functor.id_map, Functor.comp_map] at hu hi
+  rw [Functor.map_comp, unit_app_comp_map_derivedExtendScalarsPullbackMap_app_assoc,
+    leftDerivedUpperStarRestrictScalarsIso_id_hom_app, hi, hu]
+
+/-- The commutation of `Ψ` with the derived pullbacks is compatible with the isomorphism
+`Ls^* Lp^* ≅ 𝟭` of a section `s` of `p`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarCompSectionIso`). -/
+@[reassoc]
+lemma derivedExtendScalarsPullbackMap_compSection {X Y : Scheme.{u}} (s : Y ⟶ X) (p : X ⟶ Y)
+    (h : s ≫ p = 𝟙 Y) (K : 𝐃(Y, Λ)) :
+    (derivedExtendScalarsPullbackMap hρ ha s).app ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) ≫
+        (L((s)^*[ModuleCat.{u + 1} Λ'])).map ((derivedExtendScalarsPullbackMap hρ ha p).app K) ≫
+          (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ') s p h).hom.app _ =
+      (derivedExtendScalars hρ ha Y).map
+        ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) s p h).hom.app K) := by
+  have hc := derivedExtendScalarsPullbackMap_comp hρ ha s p (𝟙 Y) h.symm K
+  simp only [leftDerivedUpperStarCompSectionIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.map_comp]
+  have hc' : (derivedExtendScalarsPullbackMap hρ ha s).app ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) ≫
+      (L((s)^*[ModuleCat.{u + 1} Λ'])).map ((derivedExtendScalarsPullbackMap hρ ha p).app K) =
+      (derivedExtendScalars hρ ha Y).map
+          ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) s p (𝟙 Y) h.symm).inv.app K) ≫
+        (derivedExtendScalarsPullbackMap hρ ha (𝟙 Y)).app K ≫
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ') s p (𝟙 Y) h.symm).hom.app _ := by
+    rw [← hc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp]
+  rw [reassoc_of% hc', Iso.hom_inv_id_app_assoc, derivedExtendScalarsPullbackMap_id]
+
 end Comp
 
 section ConstantComplex
