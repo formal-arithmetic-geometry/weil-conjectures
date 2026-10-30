@@ -18,7 +18,7 @@ compactly supported cohomology `RΓ_c(X₀, H)` at the geometric point of `Spec 
 `End (𝟙_ Mod_{Spec k̄}) ≅ ℚ̄_ℓ`, the alternating sums of the traces of the powers of the
 geometric Frobenius on the compactly supported cohomology `H_c^i(X₀ ⊗ k̄, p^* H)` of the pulled
 back Weil sheaf
-(`AlgebraicGeometry.WeilComplex.endTensorUnitRingEquiv_weilCompactSupportCohomology_weilObjectOfLisse`).
+(`WeilComplex.endTensorUnitRingEquiv_weilCompactSupportCohomology_weilObjectOfLisse`).
 -/
 
 @[expose] public section

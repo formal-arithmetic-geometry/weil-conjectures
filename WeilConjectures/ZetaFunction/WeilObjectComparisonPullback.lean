@@ -20,7 +20,8 @@ Let `H` be a lisse `ℓ`-adic sheaf on a separated `k₀`-scheme `X₀` of finit
 (`AlgebraicGeometry.WeilSheaf.geometricFiberPullback`). Through the equivalence of `ℓ`-adic
 sheaves with condensed `ℚ̲̄_ℓ`-modules (`AlgebraicGeometry.ProEtale.adicSheafEquivCondensedMod`),
 `H` is an object of `Dᵇc(X₀)⟦ℚ̲̄_ℓ⟧`, a Weil object for the identity of `X₀` with the identity
-Weil structure (`AlgebraicGeometry.WeilComplex.weilObjectOfLisse`), and `p^* H` has its traces: its stalks are the stalks of `H` with their Galois
+Weil structure (`AlgebraicGeometry.WeilComplex.weilObjectOfLisse`), and `p^* H` has its
+traces: its stalks are the stalks of `H` with their Galois
 action, and its compactly supported cohomology is the stalk at `Spec k̄` of `Rf_! H`.
 
 ## Main results

@@ -70,7 +70,8 @@ attribute [local instance] fact_ringChar_prime_of_finite
 noncomputable def boundedConstructibleOfLisse {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H) :
     Dᵇc(X)⟦Profinite.padicAlgClRingObj l⟧ :=
   ⟨(_root_.DerivedCategory.singleFunctor _ 0).obj ((adicSheafEquivCondensedMod l X).functor.obj H),
-    boundedConstructible_singleFunctor_obj _ X 0 _ (isConstructibleModuleObject_of_isAdicLisseSheaf hH)⟩
+    boundedConstructible_singleFunctor_obj _ X 0 _
+      (isConstructibleModuleObject_of_isAdicLisseSheaf hH)⟩
 
 /-- The multiplication by `b ∈ ℚ̄_ℓˣ` on `H` placed in degree `0`. -/
 noncomputable def boundedConstructibleOfLisseSMulIso {H : AdicSheaf l X}

@@ -24,7 +24,7 @@ lisse Weil sheaves on smooth irreducible affine `k₀`-schemes
 two:
 
 * **Descent**
-  (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback`):
+  (`WeilSheaf.IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback`):
   an irreducible lisse Weil sheaf `G` on a smooth irreducible `V₀` is a constant twist
   `p^* H ⊗ 𝓑_b` of the pullback of a lisse `ℓ`-adic sheaf `H` on `V₀` itself, along the
   projection `p : V₀ ⊗ k̄ ⟶ V₀` (Deligne, Weil II, 1.3.14, and the dictionary between lisse
@@ -70,7 +70,8 @@ theorem _root_.AlgebraicGeometry.WeilComplex.SatisfiesLefschetz.constantTwist
     (hG : WeilComplex.SatisfiesLefschetz (toComplex.obj G)) (b : (PadicAlgCl l)ˣ) :
     WeilComplex.SatisfiesLefschetz (toComplex.obj (G.constantTwist b)) := fun n ↦ by
   have h₁ (i : ℤ) : LinearMap.trace (PadicAlgCl l) _
-      (((toComplex.obj (G.constantTwist b)).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) =
+      (((toComplex.obj (G.constantTwist b)).compactlySupportedCohomology i).frobeniusEnd ^
+        (n + 1)) =
         (b : PadicAlgCl l) ^ (n + 1) * LinearMap.trace (PadicAlgCl l) _
           (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) := by
     obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_constantTwist G b i

@@ -16,7 +16,7 @@ For a lisse `ℓ`-adic sheaf `H` on `X₀` and `b ∈ ℚ̄_ℓˣ`, the local tr
 `(H, b)` of `Dᵇc(X₀)⟦ℚ̲̄_ℓ⟧` (`AlgebraicGeometry.WeilComplex.weilObjectOfLisse`) at the points
 of `X₀` are, through `End (𝟙_ Mod_{Spec k̄}) ≅ ℚ̄_ℓ`, the values of the trace function of the
 Weil sheaf `p^* H ⊗ 𝓑_b` on `X₀ ⊗ k̄`
-(`AlgebraicGeometry.WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse`).
+(`WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse`).
 -/
 
 @[expose] public section
