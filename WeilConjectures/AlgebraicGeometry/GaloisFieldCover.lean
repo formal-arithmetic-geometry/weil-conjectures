@@ -96,8 +96,9 @@ variable (F L : Type u) [Field F] [Field L] [Algebra F L]
 noncomputable def specGaloisAction (σ : L ≃ₐ[F] L) : Spec (.of L) ⟶ Spec (.of L) :=
   Spec.map (CommRingCat.ofHom (σ : L →+* L))
 
-/-- `Spec L ⟶ Spec F` is finite for a finite field extension `L/F`. -/
-instance isFinite_specMap_algebraMap [FiniteDimensional F L] :
+/-- `Spec L ⟶ Spec F` is finite for a finite field extension `L/F` (the instance form of
+`AlgebraicGeometry.isFinite_specMap_algebraMap`). -/
+instance instIsFiniteSpecMapAlgebraMap [FiniteDimensional F L] :
     IsFinite (Spec.map (CommRingCat.ofHom (algebraMap F L))) :=
   (IsFinite.SpecMap_iff _).2 (RingHom.finite_algebraMap.2 inferInstance)
 
@@ -106,8 +107,9 @@ instance etale_specMap_algebraMap [FiniteDimensional F L] [Algebra.IsSeparable F
     Etale (Spec.map (CommRingCat.ofHom (algebraMap F L))) :=
   HasRingHomProperty.Spec_iff.2 (RingHom.etale_algebraMap.2 .of_finite_of_isSeparable)
 
-/-- `Spec L ⟶ Spec F` is surjective for a field extension `L/F`: `Spec F` is a point. -/
-instance surjective_specMap_algebraMap :
+/-- `Spec L ⟶ Spec F` is surjective for a field extension `L/F`: `Spec F` is a point (the instance
+form of `AlgebraicGeometry.surjective_specMap_algebraMap`). -/
+instance instSurjectiveSpecMapAlgebraMap :
     Surjective (Spec.map (CommRingCat.ofHom (algebraMap F L))) :=
   ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
 

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Finite
+public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedLiftSections
 
 /-!
 # Cohomology over w-contractible affine schemes and acyclicity for direct images
@@ -39,25 +40,13 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [Ring Λ]
 
-/-- An epimorphism of pro-étale sheaves of `Λ`-modules is surjective on sections over a weakly
-contractible object. -/
-lemma surjective_app_of_isWeaklyContractible {X : Scheme.{u}} {W : X.ProEt}
-    (hW : (ProEt.topology X).IsWeaklyContractible.{u + 1} W)
-    {F G : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) [Epi φ] :
-    Function.Surjective (φ.hom.app (op W)) := by
-  have h : Sheaf.IsLocallySurjective φ := (Sheaf.isLocallySurjective_iff_epi' _ _).2 inferInstance
-  intro s
-  obtain ⟨t, ht⟩ := hW ((sheafCompose _ (forget _)).map φ)
-    ((Presheaf.isLocallySurjective_iff_whisker_forget _ _).1 h) s
-  exact ⟨t, ht⟩
-
 /-- Taking sections over a weakly contractible object is an exact functor on pro-étale sheaves
 of `Λ`-modules. -/
 lemma preservesHomology_sectionsFunctor_of_isWeaklyContractible {X : Scheme.{u}} {W : X.ProEt}
     (hW : (ProEt.topology X).IsWeaklyContractible.{u + 1} W) :
     (sectionsFunctor (ModuleCat.{u + 1} Λ) W).PreservesHomology := by
   have : (sectionsFunctor (ModuleCat.{u + 1} Λ) W).PreservesEpimorphisms := ⟨fun φ _ ↦
-    (ModuleCat.epi_iff_surjective _).2 (surjective_app_of_isWeaklyContractible Λ hW φ)⟩
+    (ModuleCat.epi_iff_surjective _).2 (surjective_app_of_isWeaklyContractible (R := Λ) hW φ)⟩
   exact Functor.preservesHomology_of_preservesEpis_and_kernels _
 
 /-- The higher derived sections over a weakly contractible object of the pro-étale site vanish.
