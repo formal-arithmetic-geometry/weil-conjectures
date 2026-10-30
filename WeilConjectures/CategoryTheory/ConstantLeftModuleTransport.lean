@@ -243,6 +243,14 @@ private def constantComparison :
 variable (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
   [HasWeakSheafify K RingCat.{u}]
 
+omit [HasWeakSheafify J RingCat.{u}] in
+private theorem constantMap_unit (X Y : Type u) (f : X → Y) (T : Cᵒᵖ) (x : X) :
+    ((constantSheaf J (Type u)).map (TypeCat.ofHom f)).hom.app T
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj X)).app T x) =
+        (toSheafify J ((Functor.const Cᵒᵖ).obj Y)).app T (f x) := by
+  exact (congrArg (fun g ↦ g.app T x)
+    (toSheafify_naturality J ((Functor.const Cᵒᵖ).map (TypeCat.ofHom f)))).symm
+
 open ConstantLeftModuleInverseImage
 end CoefficientConstruction
 
@@ -262,13 +270,25 @@ private def sectionAb (T : Dᵒᵖ) : A ⥤ AddCommGrpCat.{u} :=
     (LeftExactFunctor.of (F ⋙ sheafToPresheaf K (Type u) ⋙
       (evaluation Dᵒᵖ (Type u)).obj T))).obj
 
-private instance (T : Dᵒᵖ) : PreservesFiniteLimits (sectionAb K F T) :=
+private instance constantLeftModuleTransportInst1
+    (T : Dᵒᵖ) : PreservesFiniteLimits (sectionAb K F T) :=
   ((AddCommGrpCat.leftExactFunctorForgetEquivalence A).inverse.obj
     (LeftExactFunctor.of (F ⋙ sheafToPresheaf K (Type u) ⋙
       (evaluation Dᵒᵖ (Type u)).obj T))).property
 
 section AbelianAdjunction
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+private instance forgetAbLimits : PreservesFiniteLimits (U J) := by
+  have : PreservesFiniteLimits (U J ⋙ sheafToPresheaf J (Type u)) := by
+    change PreservesFiniteLimits (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+      (Functor.whiskeringRight Cᵒᵖ AddCommGrpCat.{u} (Type u)).obj
+        (forget AddCommGrpCat.{u}))
+    infer_instance
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf J (Type u))
+
+private instance abBiproducts : HasFiniteBiproducts (Sheaf J AddCommGrpCat.{u}) :=
+  .of_hasFiniteProducts
+
 variable (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
   (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))
   [PreservesFiniteLimits L] [PreservesFiniteLimits R]
