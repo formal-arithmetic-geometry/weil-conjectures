@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
 public import WeilConjectures.AlgebraicGeometry.SfGraphCompactSupportComposition
 public import WeilConjectures.AlgebraicGeometry.SfGraphProjectionWord
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.SfEtaleAmbientAdjointProjection
 import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
 import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
@@ -61,6 +62,21 @@ def sfCompactProjection
       (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj
         ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)) :=
   ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K
+
+theorem sfCompactProjection_eq
+    (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :
+    sfCompactProjection A c M K =
+      ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K := rfl
+
+instance sfCompactProjection_isIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :
+    IsIso (sfCompactProjection A c M K) := by
+  rw [sfCompactProjection_eq]
+  exact (sfEtaleAmbientAdjointProjection A c).2 M K
 
 /-- The original graph comparison, with the presentation functor as its target.
 Source: `SfGraphCompactSupportComposition.lean`, explicit graph comparison

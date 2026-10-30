@@ -251,6 +251,11 @@ private theorem towerOpen_isOpen
   MorphismProperty.IsStableUnderBaseChange.of_isPullback
     (P := @IsOpenImmersion) (towerSquare d e) inferInstance
 
+private theorem towerOpen_comp
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (d : Compactification g) (e : Compactification (f ≫ d.i)) :
+    e.restrict.i ≫ towerOpen d e = e.i := e.restrict_i_fst
+
 attribute [local instance] towerOpen_isOpen
 attribute [local irreducible] towerOpen
 
@@ -1060,6 +1065,62 @@ attribute [local irreducible] derivedOpenImmersionLowerShriekProjectionIso
   mapDerivedCategoryOpenImmersionLowerShriekCongr leftDerivedUpperStarComp
   derivedSquareUpperStarIso leftDerivedUpperStarCompactificationIso
 
+private theorem towerCompositor_app
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (d : Compactification g) (e : Compactification (f ≫ d.i))
+    (N : DerivedCategoryModule A X) :
+    (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app N =
+      (lowerStar (ModuleCat.{u + 1} A) d.g).rightDerivedFunctor.map
+        ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A)
+          (towerSquare d e)).app
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} A) e.restrict.i).mapDerivedCategory.obj
+              N)) ≫
+      (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.g d.g).hom.app
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) (towerOpen d e)).mapDerivedCategory.obj
+          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) e.restrict.i).mapDerivedCategory.obj N))
+            ≫
+      (lowerStar (ModuleCat.{u + 1} A) (e.g ≫ d.g)).rightDerivedFunctor.map
+        (((mapDerivedCategoryOpenImmersionLowerShriekComp (ModuleCat.{u + 1} A)
+            e.restrict.i (towerOpen d e)).symm ≪≫
+          mapDerivedCategoryOpenImmersionLowerShriekCongr (ModuleCat.{u + 1} A)
+            (towerOpen_comp d e)).hom.app N) := by
+  simp only [towerOpen, rightDerivedLowerShriekOfCompactificationCompIso, Iso.trans_hom,
+    Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, asIso_hom, Functor.comp_obj, Category.id_comp, Category.assoc]
+
 attribute [local irreducible] rightDerivedLowerShriekOfCompactificationCompIso
+
+theorem projectionMapOfCompactification_tower_comp
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (d : Compactification g) (e : Compactification (f ≫ d.i))
+    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) :
+    ((projectionMapOfCompactification (ModuleCat.{u + 1} A) d).app
+      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) e.restrict).obj M)).app K ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map
+          (((projectionMapOfCompactification (ModuleCat.{u + 1} A) e.restrict).app M).app
+          (((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor).obj K)) ≫
+        (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app (((derivedTensor
+          (ModuleCat.{u + 1} A) X).obj M).obj (((upperStar (ModuleCat.{u + 1} A)
+          f).leftDerivedFunctor).obj (((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor).obj
+          K))) =
+      ((derivedTensor (ModuleCat.{u + 1} A) Z).map
+        ((rightDerivedLowerShriekOfCompactificationCompIso A d e).hom.app M)).app K ≫
+        ((projectionMapOfCompactification (ModuleCat.{u + 1} A) (d.comp e)).app M).app K ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (d.comp e)).map
+          (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map ((leftDerivedUpperStarComp
+          (ModuleCat.{u + 1} A) f g (f ≫ g) rfl).hom.app K)) := by
+  have hcomp : f ≫ g = e.i ≫ (e.g ≫ d.g) := by
+    calc
+      _ = f ≫ (d.i ≫ d.g) := congrArg (f ≫ ·) d.comm
+      _ = (f ≫ d.i) ≫ d.g := (Category.assoc f d.i d.g).symm
+      _ = (e.i ≫ e.g) ≫ d.g := congrArg (· ≫ d.g) e.comm
+      _ = _ := Category.assoc e.i e.g d.g
+  exact tower_projection_canonical (hb := towerOpen_isOpen d e) (ModuleCat.{u + 1} A)
+    f g d e e.restrict (towerOpen d e) (towerSquare d e) (towerOpen_comp d e) hcomp
+    (rightDerivedLowerShriekOfCompactificationCompIso A d e)
+    (towerCompositor_app A f g d e) M K
 
 end AlgebraicGeometry.Etale
