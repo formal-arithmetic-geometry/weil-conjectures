@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStabilityCharP
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStabilityMixedChar
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
 public import WeilConjectures.FieldTheory.PPowerDegreeCyclicSubextension
 public import WeilConjectures.FieldTheory.CyclicDegreePGenerator
@@ -117,16 +117,6 @@ local notation "𝒟₁" => sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ 
 local notation "𝒟₂" => sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂
 
 include ha₁ halg₁ ha₂ halg₂ hb₁ hb₂ in
-/-- **Kummer equations over the slice composita, mixed characteristic.** -/
-theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
-    [CharP (ResidueField R₁) p] (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂)
-    (hκ : ∀ y, H.κMap y = y) {α : (𝒟₁).Ω} (hα : letI := a₁.toAlgebra; α ∈ (𝒟₁).compositum)
-    (h₂ : letI := a₂.toAlgebra; ∃ θ ∈ (𝒟₂).compositum, θ ^ p = H.ΩMap α) :
-    letI := a₁.toAlgebra
-    ∃ θ ∈ (𝒟₁).compositum, θ ^ p = α := by
-  sorry
-
-include ha₁ halg₁ ha₂ halg₂ hb₁ hb₂ in
 /-- **The compositum of a strict-localization slice is relatively separably closed in that of a
 finer one** (Ohm–Kuhlmann stability): for a morphism `H : D₁ ⟶ D₂` of strict-localization
 slice traits which is the identity on the fields of the closed points, an element of the
@@ -215,6 +205,18 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
     · -- mixed characteristic
       haveI : CharZero Ω₁ := CharP.charP_to_charZero Ω₁
       haveI : NeZero (q : Ω₁) := ⟨Nat.cast_ne_zero.2 hqp.ne_zero⟩
+      haveI : CharP (ResidueField R₂) q := (CharP.charP_iff_prime_eq_zero hqp).2 (by
+        rw [← map_natCast (residue R₂), IsLocalRing.residue_eq_zero_iff,
+          IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
+        intro hu
+        have h1 : IsUnit (H.ψ ((𝒟₁).φ (q : R₁))) := by
+          rw [map_natCast, map_natCast, ← map_natCast (𝒟₂).φ]
+          exact hu.map _
+        have h3 : (𝒟₁).φ (q : R₁) ∈ maximalIdeal (𝒟₁).R := by
+          rw [(𝒟₁).maximalIdeal_eq]
+          exact Ideal.mem_map_of_mem _ (by
+            rw [← IsLocalRing.residue_eq_zero_iff, map_natCast, CharP.cast_eq_zero])
+        exact (IsLocalRing.mem_maximalIdeal _).1 h3 ((isUnit_map_iff H.ψ _).1 h1))
       obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω₁ q
       have hζL : (primitiveRoots q L).Nonempty :=
         ⟨algebraMap Ω₁ L ζ, (mem_primitiveRoots hqp.pos).2
