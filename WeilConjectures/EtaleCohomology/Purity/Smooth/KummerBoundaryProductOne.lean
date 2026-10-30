@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
 
 /-!
 # The product of a single Kummer boundary
