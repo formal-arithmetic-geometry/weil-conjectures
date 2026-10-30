@@ -14864,6 +14864,7 @@ public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.WeilDescent
 public import WeilConjectures.WeilSheaf.WeilDescentConnected
+public import WeilConjectures.WeilSheaf.WeilDescentConstantField
 public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroup
 public import WeilConjectures.WeilSheaf.WeilDescentFundamentalRep
 public import WeilConjectures.WeilSheaf.WeilMonodromy
