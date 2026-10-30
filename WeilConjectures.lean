@@ -6452,6 +6452,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Resolution
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SheafifyGradedChain
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SpreadFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
