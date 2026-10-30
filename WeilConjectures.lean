@@ -9120,6 +9120,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionClass
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionTriangle
 public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionUnit
+public import WeilConjectures.CategoryTheory.Monoidal.MapIhomUnit
 public import WeilConjectures.CategoryTheory.Monoidal.MapIsoUnit
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Bidual
@@ -10373,6 +10374,7 @@ public import WeilConjectures.Mathlib.Algebra.Group.AddChar
 public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
+public import WeilConjectures.Mathlib.Algebra.GroupWithZero.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
@@ -10626,6 +10628,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pro
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
@@ -10735,6 +10738,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.MonoidalUnit
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Plus
@@ -14413,6 +14417,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
+public import WeilConjectures.SmoothPurity.TateTwistPullback
 public import WeilConjectures.SmoothPurity.TraceBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
@@ -14428,10 +14433,13 @@ public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.TateTwist.Pullback
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
+public import WeilConjectures.TateTwist.RootsOfUnityUpperStar
 public import WeilConjectures.TateTwist.TateModuleTrivialization
+public import WeilConjectures.TateTwist.TateModuleUpperStar
 public import WeilConjectures.TateTwist.UpperStarExtendScalars
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
 public import WeilConjectures.Topology.AbelianIntegerExtensionMono
