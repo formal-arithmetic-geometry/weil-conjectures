@@ -5,12 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGaloisTrace
-public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
-public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
-public import WeilConjectures.WeilSheaf.GeometricFiberPullback
-public import WeilConjectures.WeilSheaf.StalkComparison
-public import WeilConjectures.WeilSheaf.StalkUpperStar
+public import WeilConjectures.WeilSheaf.GaloisGlobalSectionsTransport
+
 
 /-!
 # The trace function of a Weil sheaf pulled back from the model
@@ -22,7 +18,8 @@ trace of the Galois action of `σᵐ` on the global sections `Γ(Spec k̄, x̄^*
 point `x̄` over the point
 (`AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_galoisGlobalSections_of_iso`); in
 particular for `F = p^* H` itself
-(`AlgebraicGeometry.WeilSheaf.traceFunction_geometricFiberPullback_eq_trace_galoisGlobalSections`).
+(`AlgebraicGeometry.WeilSheaf.traceFunction_geometricFiberPullback_eq_trace_galoisGlobalSections`,
+in `WeilConjectures.WeilSheaf.GeometricFiberPullbackTraceFunction`).
 
 The proof goes through the transports of global sections
 (`AlgebraicGeometry.ProEtale.globalSectionsTransport`): the iterated Weil structures of `F` are
@@ -39,136 +36,6 @@ universe u u'
 open CategoryTheory
 
 open scoped AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-/-- The canonical morphism `g^* p^* N ≅ (g ≫ p)^* N = p^* N` for an endomorphism `g` with
-`g ≫ p = p`. -/
-noncomputable def upperStarInvariantHom {Z Y : Scheme.{u}} (p : Z ⟶ Y) {g : Z ⟶ Z}
-    (hg : g ≫ p = p) (N : Sheaf (Scheme.ProEt.topology Y) A) :
-    (g)^*[A].obj ((p)^*[A].obj N) ⟶ (p)^*[A].obj N :=
-  (upperStarComp A g p).inv.app N ≫ (upperStarCongr A hg).hom.app N
-
-/-- The canonical morphisms `g^* p^* N ⟶ p^* N` along equal endomorphisms agree. -/
-lemma upperStarCongr_hom_app_comp_upperStarInvariantHom {Z Y : Scheme.{u}} (p : Z ⟶ Y)
-    {g g' : Z ⟶ Z} (e : g = g') (hg : g ≫ p = p) (hg' : g' ≫ p = p)
-    (N : Sheaf (Scheme.ProEt.topology Y) A) :
-    (upperStarCongr A e).hom.app ((p)^*[A].obj N) ≫ upperStarInvariantHom A p hg' N =
-      upperStarInvariantHom A p hg N := by
-  subst e
-  simp [upperStarCongr]
-
-/-- Three congruence isomorphisms of pullbacks compose to one; the composite equality is an
-independent hypothesis, so that the kernel never compares proofs of equalities of morphisms. -/
-lemma upperStarCongr_hom_app_trans_trans {P Q : Scheme.{u}} {x y z w : P ⟶ Q} (h : x = y)
-    (h' : y = z) (h'' : z = w) (e : x = w) (N : Sheaf (Scheme.ProEt.topology Q) A) :
-    (upperStarCongr A h).hom.app N ≫ (upperStarCongr A h').hom.app N ≫
-        (upperStarCongr A h'').hom.app N =
-      (upperStarCongr A e).hom.app N := by
-  subst h h' h''
-  simp [upperStarCongr]
-
-/-- **The cocycle condition** of the canonical morphisms `g^* p^* N ⟶ p^* N`: for `b ≫ c = a`,
-the canonical morphism along `a` is `a^* p^* N ≅ b^* c^* p^* N ⟶ b^* p^* N ⟶ p^* N`. -/
-lemma upperStarFactor_hom_app_comp_upperStarInvariantHom {Z Y : Scheme.{u}} (p : Z ⟶ Y)
-    {a b c : Z ⟶ Z} (e : b ≫ c = a) (ha : a ≫ p = p) (hb : b ≫ p = p) (hc : c ≫ p = p)
-    (N : Sheaf (Scheme.ProEt.topology Y) A) :
-    (upperStarFactor A e).hom.app ((p)^*[A].obj N) ≫
-        (b)^*[A].map (upperStarInvariantHom A p hc N) ≫ upperStarInvariantHom A p hb N =
-      upperStarInvariantHom A p ha N := by
-  subst e
-  rw [upperStarFactor_rfl, ← cancel_epi ((upperStarComp A (b ≫ c) p).hom.app N),
-    reassoc_of% upperStarComp_hom_app_comp_upperStarComp_hom_app, upperStarInvariantHom,
-    upperStarInvariantHom, upperStarInvariantHom, Functor.map_comp_assoc,
-    ← Functor.map_comp_assoc (b)^*[A] ((upperStarComp A c p).hom.app N), Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc,
-    ← reassoc_of% upperStarCongr_hom_app_comp_upperStarComp_hom_app' A b hc N,
-    Iso.hom_inv_id_app_assoc]
-  exact upperStarCongr_hom_app_trans_trans A _ _ _ _ N
-
-/-- Two congruence isomorphisms of pullbacks compose to one; the composite equality is an
-independent hypothesis. -/
-@[reassoc]
-lemma upperStarCongr_hom_app_trans_eq {P Q : Scheme.{u}} {x y z : P ⟶ Q} (h : x = y)
-    (h' : y = z) (e : x = z) (N : Sheaf (Scheme.ProEt.topology Q) A) :
-    (upperStarCongr A h).hom.app N ≫ (upperStarCongr A h').hom.app N =
-      (upperStarCongr A e).hom.app N := by
-  subst h h'
-  simp [upperStarCongr]
-
-/-- The composition isomorphism with the identity, followed by `𝟙^* ≅ 𝟭`, is the transport along
-`t ≫ 𝟙 = t`. -/
-@[reassoc]
-lemma upperStarComp_id_right_hom_app_comp_map_upperStarId_hom_app {S Y : Scheme.{u}}
-    (t : S ⟶ Y) (N : Sheaf (Scheme.ProEt.topology Y) A) :
-    (upperStarComp A t (𝟙 Y)).hom.app N ≫ (t)^*[A].map ((upperStarId A Y).hom.app N) =
-      (upperStarCongr A (Category.comp_id t)).hom.app N := by
-  rw [upperStarComp_id_right, Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app,
-    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom,
-    Iso.symm_hom, Functor.leftUnitor_inv_app, Category.id_comp, Category.assoc,
-    ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-  exact Category.comp_id _
-
-/-- The transport of global sections along a square `τ ≫ x = x ≫ 𝟙` and `𝟙^* ≅ 𝟭` is the Galois
-action `Γ(x^* N) ⟶ Γ(τ^* x^* N) ≅ Γ((τ ≫ x)^* N) = Γ(x^* N)`. -/
-lemma globalSectionsTransport_upperStarId_hom_app {S Y : Scheme.{u}} {τ : S ⟶ S} {x : S ⟶ Y}
-    (hY : τ ≫ x = x ≫ 𝟙 Y) (h : τ ≫ x = x) (N : Sheaf (Scheme.ProEt.topology Y) A) :
-    globalSectionsTransport A hY ((upperStarId A Y).hom.app N) =
-      (globalSectionsToUpperStar A τ).app ((x)^*[A].obj N) ≫
-        (Sheaf.Γ _ A).map ((upperStarComp A τ x).inv.app N ≫ (upperStarCongr A h).hom.app N) := by
-  rw [globalSectionsTransport, upperStarCompIso_hom_app, Category.assoc, Category.assoc,
-    upperStarComp_id_right_hom_app_comp_map_upperStarId_hom_app,
-    upperStarCongr_hom_app_trans_eq A hY (Category.comp_id x) h]
-
-/-- The Galois action on global sections, written with the pullback of the underlying sheaf. -/
-lemma galoisGlobalSections_eq {l : ℕ} [Fact l.Prime] {S X : Scheme.{u}} (σ : S ⟶ S) (x : S ⟶ X)
-    (h : σ ≫ x = x) (H : AdicSheaf l X) :
-    galoisGlobalSections σ x h H =
-      (globalSectionsToUpperStar (WeilCoefficients.{u} l) σ).app
-          ((x)^*[WeilCoefficients.{u} l].obj H.X) ≫
-        (Sheaf.Γ _ (WeilCoefficients.{u} l)).map
-          ((upperStarComp (WeilCoefficients.{u} l) σ x).inv.app H.X ≫
-            (upperStarCongr (WeilCoefficients.{u} l) h).hom.app H.X) := by
-  rw [galoisGlobalSections, Mod.comp_hom', adicUpperStarComp_inv_app_hom,
-    adicUpperStarCongr_hom_app_hom]
-  rfl
-
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry
-
-open ProEtale
-
-/-- Endomorphisms of `ℚ̄_ℓ`-modules intertwined by an isomorphism have the same trace. -/
-lemma WeilCoefficients.trace_toModuleCat_map_eq_of_comp_eq {l : ℕ} [Fact l.Prime]
-    {V W : WeilCoefficients.{u} l} (E : V ≅ W) {T : V ⟶ V} {T' : W ⟶ W}
-    (h : T ≫ E.hom = E.hom ≫ T') :
-    LinearMap.trace (PadicAlgCl l) _ ((WeilCoefficients.toModuleCat l).map T).hom =
-      LinearMap.trace (PadicAlgCl l) _ ((WeilCoefficients.toModuleCat l).map T').hom := by
-  have hT' : T' = E.inv ≫ T ≫ E.hom := by rw [h, Iso.inv_hom_id_assoc]
-  rw [hT', ← LinearMap.trace_conj' ((WeilCoefficients.toModuleCat l).map T).hom
-    (WeilCoefficients.linearEquivOfIso E)]
-  congr 1
-
-/-- The `m`-th powers of the two forms `specGeometricFrobenius` and `geometricFrobeniusField` of the
-geometric Frobenius `σ` of `Spec k̄` agree. -/
-lemma specGeometricFrobenius_pow_hom_eq_geometricFrobeniusField_pow_hom (k : Type u) [Field k]
-    [Finite k] (m : ℕ) :
-    (specGeometricFrobenius k ^ m).hom = ((geometricFrobeniusField k).pow m).hom := by
-  let := Fintype.ofFinite k
-  have e : FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) =
-      FiniteField.geometricFrobenius k (AlgebraicClosure k) := by
-    ext x
-    refine ((FiniteField.geometricFrobenius_eq_iff k (AlgebraicClosure k)).2 ?_).symm
-    rw [Nat.card_eq_fintype_card, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv,
-      ← FiniteField.frobeniusAlgEquivOfAlgebraic_apply, ← AlgEquiv.mul_apply, mul_inv_cancel,
-      AlgEquiv.one_apply]
-  rw [specGeometricFrobenius_pow_hom, Iso.pow_hom_eq_pow,
-    ProEtale.CondensedRing.geometricFrobeniusField_hom_pow, e]
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.WeilSheaf
 
@@ -352,58 +219,5 @@ theorem traceFunction_eq_trace_galoisGlobalSections_of_adicIso (F : WeilSheaf k�
         (galoisGlobalSections ((geometricFrobeniusField k₀).pow (n + 1)).hom x h H)).hom :=
   traceFunction_eq_trace_galoisGlobalSections_of_iso F ((AdicSheaf.forget _).mapIso e)
     (frobeniusStr_comp_forget_map_eq F e hF) n y hx h
-
-/-- The underlying `ℓ`-adic sheaf of the Weil sheaf `p^* H` pulled back from the model is
-`p^* H`. -/
-noncomputable def geometricFiberPullbackObjCarrierIso {H : AdicSheaf l X}
-    (hH : IsAdicLisseSheaf H) :
-    (geometricFiberPullback (k₀ := k₀) hH).obj.carrier ≅
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H :=
-  Iso.refl _
-
-/-- The Weil structure of `p^* H` is the canonical one, `Fr^* p^* H ≅ (Fr ≫ p)^* H = p^* H`. -/
-lemma geometricFiberPullback_str_hom_comp_carrierIso_hom {H : AdicSheaf l X}
-    (hH : IsAdicLisseSheaf H) :
-    (adicUpperStarIsoLowerStarInv l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app
-          (geometricFiberPullback (k₀ := k₀) hH).obj.carrier ≫
-        (geometricFiberPullback (k₀ := k₀) hH).obj.str.hom ≫
-          (geometricFiberPullbackObjCarrierIso hH).hom =
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
-          (geometricFiberPullbackObjCarrierIso hH).hom ≫
-        (adicUpperStarComp l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-          (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv.app H ≫
-        (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
-          (X ↘ Spec (CommRingCat.of k₀)))).hom.app H := by
-  have hstr : (geometricFiberPullback (k₀ := k₀) hH).obj.str.hom =
-      ((ProEtaleWeilSheaf.geometricFiberPullbackFrobeniusIso k₀ l X).app H).hom := by
-    rw [Endofunctor.IsoAlgebra.str_hom]
-    rfl
-  -- stated for a variable isomorphism `α`, so that the kernel does not unfold the concrete one
-  have h {P Q : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
-      AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} (α : P ≅ Q) :
-      α.hom.app (geometricFiberPullback (k₀ := k₀) hH).obj.carrier =
-        α.hom.app (((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H) := rfl
-  rw [geometricFiberPullbackObjCarrierIso, Iso.refl_hom, Category.comp_id,
-    CategoryTheory.Functor.map_id, Category.id_comp, hstr, h]
-  simp only [ProEtaleWeilSheaf.geometricFiberPullbackFrobeniusIso, Iso.trans_hom, Iso.app_hom,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
-    Iso.hom_inv_id_app_assoc]
-
-/-- **The trace function of the Weil sheaf `p^* H` pulled back from the model**: at an
-`𝔽_{q^{n+1}}`-point `y` with geometric point `x̄`, it is the trace of the Galois action of
-`σ^{n+1}` on `Γ(Spec k̄, x̄^* H)`. -/
-theorem traceFunction_geometricFiberPullback_eq_trace_galoisGlobalSections {H : AdicSheaf l X}
-    (hH : IsAdicLisseSheaf H) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ (n + 1)))
-    {x : Spec (.of (AlgebraicClosure k₀)) ⟶ X}
-    (hx : Spec.map (CommRingCat.ofHom
-      (FiniteField.galoisExtension.liftAlgebraicClosure k₀ (n + 1)).toRingHom) ≫ y.1 = x)
-    (h : ((geometricFrobeniusField k₀).pow (n + 1)).hom ≫ x = x) :
-    (geometricFiberPullback (k₀ := k₀) hH).traceFunction (n + 1) y =
-      LinearMap.trace (PadicAlgCl l) _ ((WeilCoefficients.toModuleCat l).map
-        (galoisGlobalSections ((geometricFrobeniusField k₀).pow (n + 1)).hom x h H)).hom :=
-  traceFunction_eq_trace_galoisGlobalSections_of_adicIso _ (geometricFiberPullbackObjCarrierIso hH)
-    (geometricFiberPullback_str_hom_comp_carrierIso_hom hH) n y hx h
 
 end AlgebraicGeometry.WeilSheaf

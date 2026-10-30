@@ -15267,11 +15267,13 @@ public import WeilConjectures.WeilSheaf.FrobeniusDerived
 public import WeilConjectures.WeilSheaf.FrobeniusTwist
 public import WeilConjectures.WeilSheaf.FrobeniusTwistStalk
 public import WeilConjectures.WeilSheaf.FrobeniusTwistSubobject
+public import WeilConjectures.WeilSheaf.GaloisGlobalSectionsTransport
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.GeometricConstituent
 public import WeilConjectures.WeilSheaf.GeometricConstituentMono
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTrace
+public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTraceFunction
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz

@@ -10,7 +10,7 @@ public import WeilConjectures.TraceFormula.WeilIdentityStalkTrace
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
-public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTrace
+public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTraceFunction
 public import WeilConjectures.WeilSheaf.Stalk
 
 /-!

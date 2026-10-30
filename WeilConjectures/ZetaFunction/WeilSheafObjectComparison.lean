@@ -20,22 +20,21 @@ identification `End (𝟙_ Mod_{Spec k̄}) ≅ ℚ̄_ℓ`
 `WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage` the same then holds for every Weil
 complex (`AlgebraicGeometry.WeilSheaf.exists_hasWeilObjectComparison`).
 
-## Sorried input
+## The comparison
 
-`AlgebraicGeometry.WeilSheaf.hasWeilObjectComparison_toComplex` is stated without proof. It
-compares the Weil sheaves of the zeta-function chapter, `ℓ`-adic sheaves on the pro-étale site of
-the geometric fiber `X₀ ⊗ k̄` with a Frobenius structure, with the Weil objects of the trace
-formula chapter, condensed `ℚ̲̄_ℓ`-modules on the pro-étale site of `X₀` with an automorphism.
-Since the Weil objects satisfy the trace formula `ProEtale.CondensedRing.weilTraceFormula`, its
-global clause is equivalent, given the local one, to the Grothendieck–Lefschetz formula for `G`.
-The proof needs:
-* the reduction of the traces to the semisimplification of `G` and, by Deligne (Weil II, 1.3.14),
-  the description of an irreducible Weil sheaf on a stratum as the twist of an étale `ℚ̄_ℓ`-sheaf
-  on the stratum of `X₀` by a character `b^{deg}` of `W(k̄/k₀)`; the twist becomes the automorphism
-  `b` of the Weil object;
-* the comparison of the two sheaf theories along the pullback `X₀ ⊗ k̄ ⟶ X₀`, with their stalks
-  and their direct images with compact support.
-No functor between the two settings exists yet.
+`AlgebraicGeometry.WeilSheaf.hasWeilObjectComparison_toComplex` compares the Weil sheaves of the
+zeta-function chapter, `ℓ`-adic sheaves on the pro-étale site of the geometric fiber `X₀ ⊗ k̄`
+with a Frobenius structure, with the Weil objects of the trace formula chapter, condensed
+`ℚ̲̄_ℓ`-modules on the pro-étale site of `X₀` with an automorphism. Since the Weil objects satisfy
+the trace formula `ProEtale.CondensedRing.weilTraceFormula`, its global clause is, given the local
+one, the Grothendieck–Lefschetz formula for `G`. It is proved in
+`WeilConjectures.ZetaFunction.WeilSheafObjectComparisonLisse`:
+* by Noetherian induction the traces reduce to irreducible lisse Weil sheaves on smooth strata,
+  which by Deligne (Weil II, 1.3.14) are twists `p^* H ⊗ 𝓑_b` of pullbacks of lisse `ℓ`-adic
+  sheaves `H` on the stratum by a character `b^{deg}` of `W(k̄/k₀)`; the twist becomes the
+  automorphism `b` of the Weil object `(H, b)`;
+* the two sheaf theories are compared along the pullback `X₀ ⊗ k̄ ⟶ X₀`, with their stalks and
+  their direct images with compact support.
 -/
 
 @[expose] public section
@@ -53,7 +52,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 open ProEtale.CondensedRing in
-/-- **Weil sheaves have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`** (sorried): every Weil
+/-- **Weil sheaves have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`**: every Weil
 sheaf placed in degree `0` has, through the canonical identification
 `End (𝟙_ Mod_{Spec k̄}) ≅ ℚ̄_ℓ`, the compactly supported Frobenius traces and the trace function
 of a Weil object for the identity of `X₀`

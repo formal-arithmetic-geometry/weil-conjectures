@@ -23,7 +23,7 @@ trace functions. The trace formula of the project is stated in
 
 This file deduces the comparison between the two settings
 (`AlgebraicGeometry.WeilComplex.exists_weilBoundedConstructible_comparison`) from its case of
-Weil sheaves, which is still sorried (see below), and deduces the trace formula for Weil
+Weil sheaves (see below) and deduces the trace formula for Weil
 complexes from `ProEtale.CondensedRing.weilTraceFormula`
 (`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison` and
 `AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction`).
@@ -43,8 +43,8 @@ the `𝔽_{q^{n+1}}`-rational points along the bijection
   point `y` with the trace function of `K` at `y`.
 
 It is deduced by dévissage (`AlgebraicGeometry.WeilComplex.hasWeilObjectComparison_of_toComplex`)
-from the case of Weil sheaves, `AlgebraicGeometry.WeilSheaf.exists_hasWeilObjectComparison`,
-which is stated without proof: it compares the Weil sheaves of the zeta-function chapter, which
+from the case of Weil sheaves, `AlgebraicGeometry.WeilSheaf.exists_hasWeilObjectComparison`.
+That case compares the Weil sheaves of the zeta-function chapter, which
 live on the geometric fiber `X₀ ⊗ k̄`, with the bounded constructible Weil objects of the trace
 formula chapter, which live on `X₀`.
 -/
