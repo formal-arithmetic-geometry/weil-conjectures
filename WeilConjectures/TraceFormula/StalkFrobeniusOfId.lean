@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Sections
 public import WeilConjectures.TraceFormula.BaseChange.WeilObject
-public import WeilConjectures.TraceFormula.WeilTrace
+public import WeilConjectures.TraceFormula.WeilIdentityStructureOfId
 
 /-!
 # The Frobenius on the stalks of a module object with the identity Weil structure
@@ -43,14 +43,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
 section OfId
 
 variable {X : Over (Spec (.of k))}
-
-/-- A module object `M` on `X` as a Weil sheaf for the identity of `X`, with the identity
-structure isomorphism `(𝟙)^* M ≅ M` (`ProEtale.CondensedRing.upperStarId`). -/
-noncomputable def WeilSheaf.ofId
-    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :
-    WeilSheaf ℓ (Iso.refl X) :=
-  IsoAlgebra.mk M ((upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).app M)
 
 /-- The structure isomorphism of `WeilSheaf.ofId M` is the identity isomorphism `(𝟙)^* M ≅ M`. -/
 lemma WeilSheaf.ofId_str
