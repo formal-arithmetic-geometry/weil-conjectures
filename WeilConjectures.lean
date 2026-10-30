@@ -13747,6 +13747,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Smooth
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.SmoothProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
