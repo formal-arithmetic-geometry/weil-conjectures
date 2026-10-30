@@ -11,6 +11,8 @@ public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.PurityBaseChangeRestriction
+public import WeilConjectures.AlgebraicGeometry.SmoothRelativeDimensionCover
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCoverIsIso
 
 /-!
 # Base change for `Rf^!` along closed and open immersions
@@ -282,5 +284,59 @@ theorem isIso_upperShriekBaseChange_of_isOpenImmersion_right (sq : IsPullback g'
   have : IsIso ((V ⋙ boundedConstructibleUpperShriek ℓ f').map η) :=
     inferInstanceAs (IsIso ((boundedConstructibleUpperShriek ℓ f').map (V.map η)))
   exact IsIso.of_isIso_comp_right _ ((V ⋙ boundedConstructibleUpperShriek ℓ f').map η)
+
+/-! ### Smooth morphisms of locally constant relative dimension -/
+
+/-- **Reduction to constant relative dimension**: for `f` smooth, the exceptional base change map
+of a cartesian square at `L` is an isomorphism as soon as it is one for the squares of the
+restrictions `U ⟶ X ⟶ Y` of `f` to the opens `U` on which `f` has constant relative dimension.
+The restrictions to a finite cover of `X'` by such opens jointly reflect isomorphisms
+(`isIso_of_isIso_upperStar_of_isOpenImmersion`), and the restriction of the exceptional base
+change map is that of the restricted square (`isIso_upperStar_map_upperShriekBaseChange_iff`). -/
+theorem isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension
+    (sq : IsPullback g' f' f g) [Smooth f.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (h : ∀ (U : X.left.Opens) (d : ℕ), SmoothOfRelativeDimension d (overRestrictι X U ≫ f).left →
+      IsIso (upperShriekBaseChange ℓ (IsPullback.of_hasPullback (overRestrictι X U ≫ f) g) L)) :
+    IsIso (upperShriekBaseChange ℓ sq L) := by
+  obtain ⟨ι, _, U, hU, hd⟩ := exists_finite_openCover_smoothOfRelativeDimension f
+  -- the restriction `o' i : (U i) ×_Y Y' ⟶ X'` of the square to the open `U i`
+  let o' (i : ι) : pullback (overRestrictι X (U i) ≫ f) g ⟶ X' :=
+    sq.lift (pullback.fst (overRestrictι X (U i) ≫ f) g ≫ overRestrictι X (U i))
+      (pullback.snd (overRestrictι X (U i) ≫ f) g) (by rw [Category.assoc, pullback.condition])
+  have sqo (i : ι) : IsPullback (pullback.fst (overRestrictι X (U i) ≫ f) g).left (o' i).left
+      (overRestrictι X (U i)).left g'.left := by
+    have t := IsPullback.of_hasPullback (overRestrictι X (U i) ≫ f) g
+    rw [← sq.lift_snd (pullback.fst (overRestrictι X (U i) ≫ f) g ≫ overRestrictι X (U i))
+      (pullback.snd (overRestrictι X (U i) ≫ f) g)
+      (by rw [Category.assoc, pullback.condition])] at t
+    have h := IsPullback.of_bot t (sq.lift_fst _ _ _).symm sq
+    simpa only [Over.forget_map] using h.map (Over.forget _)
+  have : ∀ i, IsOpenImmersion (o' i).left := fun i ↦
+    MorphismProperty.of_isPullback (sqo i) inferInstance
+  refine isIso_of_isIso_upperStar_of_isOpenImmersion ℓ o' ?_ _ fun i ↦ ?_
+  · refine Set.eq_univ_of_forall fun x ↦ ?_
+    obtain ⟨i, hi⟩ : ∃ i, g'.left.base x ∈ U i := by
+      have : g'.left.base x ∈ (⨆ i, U i : X.left.Opens) := by rw [hU]; trivial
+      simpa using this
+    refine Set.mem_iUnion.2 ⟨i, ?_⟩
+    have hr : Set.range (o' i).left.base =
+        g'.left.base ⁻¹' Set.range (overRestrictι X (U i)).left.base := by
+      rw [← (sqo i).isoPullback_hom_snd, Scheme.Hom.comp_base, TopCat.coe_comp,
+        Function.Surjective.range_comp (f := ⇑(sqo i).isoPullback.hom.base)
+          (sqo i).isoPullback.hom.homeomorph.surjective, Scheme.Pullback.range_snd]
+    rw [hr, range_overRestrictι]
+    exact hi
+  · obtain ⟨d, hd⟩ := hd i
+    exact (isIso_upperStar_map_upperShriekBaseChange_iff ℓ sq (overRestrictι X (U i)) L).2
+      (h (U i) d hd)
+
+/-- **Smooth base change for `Rf^!` along a closed immersion**, for `f` smooth (of locally constant
+relative dimension): the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an
+isomorphism for every bounded constructible `L` when `g` is a closed immersion. -/
+theorem isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion (sq : IsPullback g' f' f g)
+    [Smooth f.left] [IsClosedImmersion g.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (upperShriekBaseChange ℓ sq L) :=
+  isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension ℓ sq L fun _ d _ ↦
+    isIso_upperShriekBaseChange_of_isClosedImmersion ℓ _ d L
 
 end AlgebraicGeometry.ProEtale.CondensedRing
