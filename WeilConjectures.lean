@@ -12624,16 +12624,6 @@ public import WeilConjectures.RingTheory.Valuation.KummerHensel
 public import WeilConjectures.RingTheory.Valuation.KummerNormalForm
 public import WeilConjectures.RingTheory.Valuation.KummerNormalFormGeneral
 public import WeilConjectures.RingTheory.Valuation.KummerNormalFormStageOne
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.ArtinSchreier
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Decomposition
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Density
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Hensel
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.PartialFractionBasis
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.PartialFractions
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Residue
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.ResidueInertia
-public import WeilConjectures.RingTheory.Valuation.OhmGeneral.ResiduePth
 public import WeilConjectures.RingTheory.Valuation.ResiduallyIndependentRadicals
 public import WeilConjectures.RingTheory.Valuation.ResidueLinearIndependent
 public import WeilConjectures.RingTheory.Valuation.ResidueSubfield
@@ -13410,7 +13400,6 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
-public import WeilConjectures.SixFunctors.NearbyCycles.FiniteSupportCriterion
 public import WeilConjectures.SixFunctors.NearbyCycles.FiniteSupportVanishing
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
