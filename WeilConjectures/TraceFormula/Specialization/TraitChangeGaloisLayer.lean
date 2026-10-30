@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
-public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisationUnit
+public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitTensorCompositum
 
 /-!

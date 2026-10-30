@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisation
-public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariantsUnit
+public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariants
 
 /-!
 
@@ -40,40 +40,7 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- **Split units up to universal homeomorphisms on both sides**: for `g = r₁ ≫ q ≫ r₂` with `r₁`
-and `r₂` universal homeomorphisms, the unit of `Lg^* ⊣ Rg_*` is a split monomorphism at `G` as
-soon as the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `Lr₂^* G`. -/
-theorem isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp₃ {X Z₁ Z₂ Y : Scheme.{u}}
-    (r₁ : X ⟶ Z₁) (q : Z₁ ⟶ Z₂) (r₂ : Z₂ ⟶ Y) [IsUniversalHomeomorphism r₁]
-    [IsUniversalHomeomorphism r₂]
-    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((r₂)^*⟦Λ⟧)).obj G))) :
-    IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ (r₁ ≫ q ≫ r₂)).unit.app G) := by
-  have := isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ q r₂ G
-  exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ r₁ (q ≫ r₂) G
-
 namespace NearbyCyclesModel
-
-/-- **The change of geometric generic fibre up to universal homeomorphisms on both sides**: if
-`g = φ.toCartesian.generic` factors as `g = r₁ ≫ q ≫ r₂` with `r₁`, `r₂` universal homeomorphisms
-and the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `Lr₂^* Lε'^* C`, then the pullback
-exchange of `φ.toCartesian` is a split monomorphism at `C`. -/
-theorem Hom.isSplitMono_toCart_pullbackExchange_app_of_factor₃ {X X' Y Y' : Scheme.{u}}
-    {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    (φ : M.Hom N f f')
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    {Z₁ Z₂ : Scheme.{u}} (r₁ : M.generic ⟶ Z₁) (q : Z₁ ⟶ Z₂) (r₂ : Z₂ ⟶ φ.cartesianModel.generic)
-    [IsUniversalHomeomorphism r₁] [IsUniversalHomeomorphism r₂]
-    (h : r₁ ≫ q ≫ r₂ = φ.toCartesian.generic)
-    (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((r₂)^*⟦Λ⟧)).obj ((L((φ.cartesianModel.ε)^*⟦Λ⟧)).obj C)))) :
-    IsSplitMono ((φ.toCartesian.pullbackExchange Λ).app C) := by
-  refine φ.isSplitMono_toCart_pullbackExchange_app_of_isSplitMono_unit Λ C ?_
-  rw [← h]
-  exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp₃ Λ r₁ q r₂ _ hq
 
 variable {k' : Type u} [Field k'] [IsSepClosed k']
 

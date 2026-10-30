@@ -103,6 +103,25 @@ private lemma isIso_pullbackExchange_app_aux
     Functor.map_comp]
   infer_instance
 
+/-- The converse of `isIso_pullbackExchange_app_aux`: if `α` is invertible at `o`, so is `IM` of the
+base change morphism `β'` at `E_N o`. -/
+private lemma isIso_map_app_of_isIso_pullbackExchange_app_aux
+    {DY' DX' DTN DTM DGN DGM DY DX : Type*} [Category DY'] [Category DX'] [Category DTN]
+    [Category DTM] [Category DGN] [Category DGM] [Category DY] [Category DX]
+    {Fp' : DY' ⥤ DX'} {IN : DTN ⥤ DY'} {IM : DTM ⥤ DX'} {T : DTN ⥤ DTM}
+    {JNs : DGN ⥤ DTN} {JMs : DGM ⥤ DTM} {G : DGN ⥤ DGM} {EN : DY ⥤ DGN} {EM : DX ⥤ DGM}
+    {F : DY ⥤ DX} (θi : IN ⋙ Fp' ⟶ T ⋙ IM) [IsIso θi] (β β' : JNs ⋙ T ⟶ G ⋙ JMs)
+    (h : β' = β) (θε : EN ⋙ G ⟶ F ⋙ EM) [IsIso θε]
+    (α : (EN ⋙ JNs ⋙ IN) ⋙ Fp' ⟶ F ⋙ EM ⋙ JMs ⋙ IM)
+    (hα : α = Functor.whiskerLeft (EN ⋙ JNs) θi ≫
+      Functor.whiskerRight (Functor.whiskerLeft EN β ≫ Functor.whiskerRight θε JMs) IM)
+    (o : DY) (hα' : IsIso (α.app o)) : IsIso (IM.map (β'.app (EN.obj o))) := by
+  subst h hα
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.map_comp] at hα'
+  have h₁ := @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance hα'
+  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance h₁
+
 end Abstract
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -120,6 +139,29 @@ theorem isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app (φ : M.Hom N 
       (pullbackSquareComparison Λ φ.commSq_j)).app ((L((N.ε)^*⟦Λ⟧)).obj K)))) :
     IsIso ((φ.pullbackExchange Λ).app K) :=
   isIso_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
+    (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
+      (derivedUpperStarLowerStarAdjunction Λ M.j)
+      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+    _ ((baseChangeMap_eq_exchangeRight Λ φ.commSq_j).symm.trans
+      (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ))
+    (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K hK
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
+  {f : X ⟶ Y} {f' : X' ⟶ Y'} in
+/-- **The base change morphism on the special fibre from the pullback exchange**, the converse of
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app`: if the
+pullback exchange `α_f` of a morphism of models is invertible at `K`, the base change morphism
+`Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres, restricted to the special
+fibre by `Li_M^*`, is invertible at `Lε_N^* K`. -/
+theorem isIso_map_exchangeRight_app_of_isIso_pullbackExchange_app (φ : M.Hom N f f')
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)))
+    (hK : IsIso ((φ.pullbackExchange Λ).app K)) :
+    IsIso ((L((M.i)^*⟦Λ⟧)).map ((Adjunction.exchangeRight
+      (derivedUpperStarLowerStarAdjunction Λ N.j) (derivedUpperStarLowerStarAdjunction Λ M.j)
+      (pullbackSquareComparison Λ φ.commSq_j)).app ((L((N.ε)^*⟦Λ⟧)).obj K))) :=
+  isIso_map_app_of_isIso_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
       (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
