@@ -58,7 +58,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- In the derived category of `ℚ̲̄_ℓ`-module objects on `X`, multiplication by a nonzero natural
 number is invertible, the derived category being linear over the characteristic zero field
 `ℚ̄_ℓ`. -/
-lemma isIso_nsmul_id_padicAlgClRingObj (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) {n : ℕ}
+lemma isIso_nsmul_id_derived_padicAlgClRingObj (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) {n : ℕ}
     (hn : n ≠ 0) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))) :
     IsIso (n • 𝟙 K) := by
@@ -245,7 +245,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_padicAlgCl_of_isNoethe
             (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
   refine (N.exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl_of_isNoetherianObject h Ω
     ℓ hdeg C hC htors).elim fun L' hL' ↦ ⟨L', ?_⟩
-  have := isIso_nsmul_id_padicAlgClRingObj ℓ N.generic
+  have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ N.generic
     (Fintype.card_ne_zero (α := L'.toIntermediateField ≃ₐ[L] L'.toIntermediateField))
     (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)
   have e : C ≅ (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj C :=
