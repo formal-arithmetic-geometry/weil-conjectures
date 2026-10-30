@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SepClosedPoint
 
 /-!
 # Compactly supported cohomology of torsion complexes is perfect

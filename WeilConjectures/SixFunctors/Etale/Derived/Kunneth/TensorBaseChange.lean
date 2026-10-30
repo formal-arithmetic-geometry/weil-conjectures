@@ -6,8 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
 
 /-!

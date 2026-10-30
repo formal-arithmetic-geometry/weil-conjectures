@@ -8,13 +8,8 @@ module
 public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.Algebra.Ring.NegOnePow
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.HomologyUnit
-public import WeilConjectures.TraceFormula.Main
-public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 

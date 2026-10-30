@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoi
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 
 /-!
 # The closed-support triangle on `Dᵇc(-, 𝒪_E)`

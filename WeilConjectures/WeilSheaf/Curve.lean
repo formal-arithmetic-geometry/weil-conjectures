@@ -10,12 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.WeilSheaf.CohomologicalRange
-public import WeilConjectures.WeilSheaf.CurveTopCohomology
-public import WeilConjectures.WeilSheaf.Dual
-public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LFunction
-public import WeilConjectures.WeilSheaf.LowerStarId
-public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
 # Compactly supported cohomology of a lisse Weil sheaf on an affine curve
