@@ -14382,6 +14382,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialLiftUn
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.ContractingIdeals
+public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactification
 public import WeilConjectures.TraceFormula.Specialization.Defect
 public import WeilConjectures.TraceFormula.Specialization.DefectBoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
@@ -14518,6 +14519,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLo
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothUnit
 public import WeilConjectures.TraceFormula.Specialization.NearbyTwistCompat
 public import WeilConjectures.TraceFormula.Specialization.NearbyTwistProjectiveLine
+public import WeilConjectures.TraceFormula.Specialization.NearbyTwistProjectiveLineSlice
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenImmersionLowerShriekComp
