@@ -13350,6 +13350,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeGenericUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
+public import WeilConjectures.SixFunctors.NearbyCycles.FiniteSupportVanishing
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
