@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
-public import WeilConjectures.SixFunctors.Etale.Derived.Supports
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Generation of `Dctf`

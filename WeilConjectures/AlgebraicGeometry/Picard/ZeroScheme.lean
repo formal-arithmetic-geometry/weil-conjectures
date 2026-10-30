@@ -8,13 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
-public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
+import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 
 /-!
 # The zero-scheme dictionary and the representability of `F`

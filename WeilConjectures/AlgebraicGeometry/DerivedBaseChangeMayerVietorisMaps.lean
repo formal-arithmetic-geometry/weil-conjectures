@@ -6,11 +6,10 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisTriangle
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Concrete maps for relative Mayer--Vietoris base change
 

@@ -8877,6 +8877,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicFiniteIntermediateFieldIso
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextensionBasis
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.IntegersModPow
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
@@ -9971,6 +9972,7 @@ public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Field.IsField
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
 public import WeilConjectures.Mathlib.Algebra.Group.AddChar
+public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
@@ -10600,6 +10602,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.Finite
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
+public import WeilConjectures.Mathlib.Topology.Algebra.Group.DenseExtension
 public import WeilConjectures.Mathlib.Topology.Algebra.Module.ModuleTopology
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Limits.Pullbacks
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
@@ -10735,7 +10738,9 @@ public import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
+public import WeilConjectures.RepresentationTheory.WeilGroupContinuousExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupLattice
+public import WeilConjectures.RepresentationTheory.WeilGroupLatticeExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
@@ -13102,6 +13107,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLatticeTensor
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLocallyFree
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
@@ -13523,6 +13529,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ClosedImmersionExtendScalars
@@ -13815,6 +13822,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSectio
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicIntCokernelPowTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ProjectiveTensorUnitCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushFiniteFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
@@ -14592,6 +14600,7 @@ public import WeilConjectures.TraceFormula.WeilDistTriang
 public import WeilConjectures.TraceFormula.WeilDistTriangHomology
 public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
 public import WeilConjectures.TraceFormula.WeilDistTriangTrace
+public import WeilConjectures.TraceFormula.WeilIdentityStructure
 public import WeilConjectures.TraceFormula.WeilScalarUnit
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
@@ -14661,6 +14670,7 @@ public import WeilConjectures.WeilSheaf.CondensedLisseRepresentation
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChange
 public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
 public import WeilConjectures.WeilSheaf.CondensedModelBoundedConstructible
+public import WeilConjectures.WeilSheaf.CondensedModelCompactSupport
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevel
 public import WeilConjectures.WeilSheaf.CondensedModelFiniteLevelColimit
@@ -14867,6 +14877,8 @@ public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.WeilDescent
+public import WeilConjectures.WeilSheaf.WeilDescentArithmetic
+public import WeilConjectures.WeilSheaf.WeilGroupArithmetic
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 public import WeilConjectures.ZetaFunction

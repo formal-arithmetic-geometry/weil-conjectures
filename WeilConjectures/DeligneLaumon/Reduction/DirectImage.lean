@@ -6,12 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
-public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
-public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # The Deligne–Laumon direct-image bound
