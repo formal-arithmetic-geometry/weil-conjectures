@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleTransition
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTransitionComplex
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionTower
@@ -26,7 +26,7 @@ The reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` induces the morphis
 (`ProEtale.unit_comp_reductionTransition`) and with the connecting morphisms of the natural
 reduction triangles (`ProEtale.reductionδ_comp_shift_map_zsmul`). The latter is the
 naturality of the connecting morphisms of short exact sequences
-(`Mod.derivedExtendScalarsTriangleδ_comp_shift_map_zsmul`). Hence the tower
+(`Mod.derivedReductionTransition_app_comp_derivedExtendScalarsTriangleδ`). Hence the tower
 `⋯ ⟶ Res_2 (red_2 K) ⟶ Res_1 (red_1 K)` with the canonical transitions
 (`ProEtale.canonicalReductionTower`) has `K` as homotopy limit when `K` is derived complete
 (`ProEtale.isHomotopyLimit_canonicalReductionTowerCone`).
@@ -109,7 +109,7 @@ noncomputable def reductionTransitionNatTrans :
         (Mod.comap (integersModPowReduction X ℓ E (n + 1))).mapDerivedCategory ⟶
       (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctor ⋙
         (Mod.comap (integersModPowReduction X ℓ E n)).mapDerivedCategory :=
-  Mod.derivedExtendComapTransition _ (integersModPowTransition X ℓ E n) _
+  Mod.derivedReductionTransition _ (integersModPowTransition X ℓ E n) _
     (integersModPowReduction_comp_integersModPowTransition X ℓ E n)
 
 /-- The canonical transition `Res_{n+1} (red_{n+1} K) ⟶ Res_n (red_n K)` between the
@@ -146,7 +146,7 @@ lemma unit_comp_reductionTransition
         (integersModPowReduction X ℓ E (n + 1))).unit.app K ≫ reductionTransition E n K =
       (Mod.derivedExtendMapDerivedCategoryAdjunction
         (integersModPowReduction X ℓ E n)).unit.app K :=
-  Mod.unit_app_comp_derivedExtendComapTransition_app _ _ _ _ K
+  Mod.unit_app_comp_derivedReductionTransition_app _ _ _ _ K
 
 /-- The canonical transitions are compatible with the connecting morphisms of the natural
 reduction triangles `K --ℓⁿ--> K ⟶ Res_n (red_n K) ⟶ K⟦1⟧` and the multiplication by `ℓ`:
@@ -159,8 +159,9 @@ lemma reductionδ_comp_shift_map_zsmul
     (integersModPowReductionδ ℓ E (n + 1) X).app K ≫
         (shiftFunctor _ (1 : ℤ)).map ((ℓ : ℤ) • 𝟙 K) =
       reductionTransition E n K ≫ (integersModPowReductionδ ℓ E n X).app K :=
-  Mod.derivedExtendScalarsTriangleδ_comp_shift_map_zsmul _ _ _ _ _
-    (integersModPowReduction_comp_integersModPowTransition X ℓ E n) (ℓ : ℤ) (pow_succ' _ _) K
+  (Mod.derivedReductionTransition_app_comp_derivedExtendScalarsTriangleδ _
+    (integersModPowReduction_comp_integersModPowTransition X ℓ E n) _ _ (ℓ : ℤ) (pow_succ' _ _)
+    _ _ _ _ K).symm
 
 /-- The tower `⋯ ⟶ Res_3 (red_3 K) ⟶ Res_2 (red_2 K) ⟶ Res_1 (red_1 K)` of reductions modulo
 `ℓⁿ` of a complex `K` of `𝒪_{E,X}`-module objects, with the canonical transitions; its `n`-th
