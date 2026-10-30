@@ -55,9 +55,13 @@ embedding into `𝔸ᵐ_{R₁}`, with cartesian geometric generic fibre along `g
 along `p₁` over `b₂ ∘ ι`, a model `M` over `Spec R₂` with cartesian fibres along `g₂`, `p₂`, and a
 morphism of models `φ : M ⟶ N` with cartesian square of total spaces over `Spec ι` and compatible
 maps of fibres, the pullback exchange of `φ.toGeneric` is invertible at every complex on the
-geometric generic fibre of `N` which is bounded below of étale origin. -/
-def TraitChangeInvariance (m : ℕ) : Prop :=
-  ∀ ⦃R₁ R₂ : Type u⦄ [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRing R₁]
+geometric generic fibre of `N` which is bounded below of étale origin.
+
+This is a structure rather than a definition so that the instance proofs in its statement are not
+abstracted into auxiliary lemmas, which would make its instances hard to unify with statements
+elaborated elsewhere. -/
+structure TraitChangeInvariance (m : ℕ) : Prop where
+  isIso : ∀ ⦃R₁ R₂ : Type u⦄ [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRing R₁]
     [IsStrictlyHenselianLocalRing R₁] [CommRing R₂] [IsDomain R₂] [IsDiscreteValuationRing R₂]
     [IsStrictlyHenselianLocalRing R₂] (ι : R₁ →+* R₂) [IsLocalHom ι], Function.Injective ι →
     maximalIdeal R₂ = (maximalIdeal R₁).map ι →
