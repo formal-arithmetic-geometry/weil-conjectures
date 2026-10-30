@@ -211,6 +211,72 @@ theorem mono_frobAut_comp_pullbackStalkHom
   mono_pullbackPathIso_comp_upperStarStalkIso _ _ _ hc B.frobPath
     (by rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj])
     (F.toLisse hF) ⟨H, hH⟩ e (F.lisseFrobStr hF).hom hstr
+/-- The identification `H_{t ≫ p} = (p^* H)_t ≅ F_t` of stalks, as a `ℚ̄_ℓ`-linear
+isomorphism. -/
+noncomputable def pullbackStalkEquiv {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X}
+    (hH : IsAdicLisseSheaf H)
+    (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H) :
+    LisseMonodromy.StalkSpace (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj) ⟨H, hH⟩ ≃ₗ[PadicAlgCl l]
+      LisseMonodromy.StalkSpace B.t (F.toLisse hF) :=
+  WeilCoefficients.linearEquivOfIso
+    (upperStarStalkIso l (X ↘ Spec (.of K)).geometricFiberProj B.t H.X ≪≫
+      (lisseStalk l B.t).mapIso
+        (ObjectProperty.isoMk _ e.symm : LisseSheaf.upperStar l
+          (X ↘ Spec (.of K)).geometricFiberProj (⟨H, hH⟩ : LisseSheaf l X) ≅ F.toLisse hF))
+
+lemma pullbackStalkEquiv_apply {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X}
+    (hH : IsAdicLisseSheaf H)
+    (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H) (v) :
+    B.pullbackStalkEquiv hF hH e v =
+      ((WeilCoefficients.toModuleCat l).map (B.pullbackStalkHom hF hH e)).hom v :=
+  rfl
+
+/-- **The Weil fundamental representation of a sheaf pulled back from the model** (cf. Deligne,
+Weil II, 1.1.7–1.1.12): if `F ≅ p^* H` with its canonical Weil structure, then under
+`H_{t ≫ p} ≅ F_t` the Weil fundamental representation of `π₁(X, t) ⋊ ℤ` on `F_t` is the
+monodromy representation of `π₁(X₀, t ≫ p)` on `H_{t ≫ p}` restricted along `arithHom`. -/
+theorem pullbackStalkEquiv_fundamentalRep
+    (hc : LisseMonodromy.IsCompatible (X ↘ Spec (.of K)).geometricFiberProj M₀ M)
+    {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H)
+    (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H)
+    (hstr : F.adicFrobStr.hom ≫ e.hom =
+      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map e.hom ≫
+        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+          (X ↘ Spec (.of K)).geometricFiberProj).inv.app H ≫
+        (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
+          (X ↘ Spec (.of K)))).hom.app H) (w : B.WeilGroup)
+    (v : LisseMonodromy.StalkSpace (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj) ⟨H, hH⟩) :
+    B.pullbackStalkEquiv hF hH e (M₀.rep _ ⟨H, hH⟩ (B.arithHom w) v) =
+      B.weilData.fundamentalRep M F hF w (B.pullbackStalkEquiv hF hH e v) := by
+  refine B.weilData.intertwines_of_geometric_frobLift ((M₀.rep _ ⟨H, hH⟩).comp B.arithHom)
+    (B.weilData.fundamentalRep M F hF) (B.pullbackStalkEquiv hF hH e).toLinearMap
+    (fun u hu v ↦ ?_) (fun v ↦ ?_) w v
+  · obtain ⟨g, rfl⟩ : u ∈ (SemidirectProduct.inl : Aut (fiber B.t) →* B.WeilGroup).range := by
+      rw [SemidirectProduct.range_inl_eq_ker_rightHom]
+      exact hu
+    have hg : B.weilData.fundamentalRep M F hF (SemidirectProduct.inl g) =
+        M.rep B.t (F.toLisse hF) g := B.weilData.fundamentalRep_geomEquiv M F hF g
+    rw [MonoidHom.comp_apply, arithHom_inl, hg, geomAut_apply]
+    have h₁ := (M.mono g).hom.naturality
+      (ObjectProperty.isoMk _ e.symm : LisseSheaf.upperStar l
+        (X ↘ Spec (.of K)).geometricFiberProj (⟨H, hH⟩ : LisseSheaf l X) ≅ F.toLisse hF).hom
+    have h₂ := hc g ⟨H, hH⟩
+    have key : (M₀.mono (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj g)).hom.app
+        ⟨H, hH⟩ ≫ B.pullbackStalkHom hF hH e = B.pullbackStalkHom hF hH e ≫
+          (M.mono g).hom.app (F.toLisse hF) := by
+      rw [pullbackStalkHom, reassoc_of% h₂]
+      exact congrArg _ h₁.symm
+    have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) key
+    simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at this
+    exact this
+  · have hF₀ : B.arithHom B.weilData.frobLift = B.frobAut := by
+      rw [show B.weilData.frobLift = SemidirectProduct.inr (Multiplicative.ofAdd 1) from rfl,
+        arithHom_inr, toAdd_ofAdd, zpow_one]
+    rw [MonoidHom.comp_apply, hF₀, WeilData.fundamentalRep_frobLift]
+    have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v)
+      (B.mono_frobAut_comp_pullbackStalkHom M M₀ hc hF hH e hstr)
+    simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at this
+    exact this
 
 end FrobeniusBasePoint
 
