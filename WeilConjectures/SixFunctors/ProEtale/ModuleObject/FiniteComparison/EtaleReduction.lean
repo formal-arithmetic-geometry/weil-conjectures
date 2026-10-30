@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReading
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
 /-!
@@ -69,11 +70,6 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
-
-/-- The finite coefficient ring `𝒪_E ⧸ ℓⁿ`, lifted to the universe of étale sheaves of
-modules. -/
-abbrev integersModPowCoeff : Type (u + 1) :=
-  ULift.{u + 1} (PadicAlgCl.integersModPow ℓ E n)
 
 /-- **The reduction modulo `ℓⁿ`, read on the small étale site**: `K ↦ Rν_* (K ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`,
 from bounded constructible `𝒪_E`-complexes on `X_proét` to the derived category of étale sheaves
