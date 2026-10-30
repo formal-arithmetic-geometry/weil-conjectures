@@ -13066,6 +13066,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseBidual
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCondensedModel
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CompactOpenLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence

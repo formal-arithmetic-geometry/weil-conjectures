@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCondensedModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
@@ -52,7 +53,7 @@ theorem isConstructibleModuleObject_of_isAdicLisseSheaf {H : AdicSheaf l X}
     (hH : IsAdicLisseSheaf H) :
     IsConstructibleModuleObject (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) X)
       ((adicSheafEquivCondensedMod l X).functor.obj H) :=
-  sorry
+  hH.isConstructibleModuleObject_condensedMod
 
 end ProEtale
 
