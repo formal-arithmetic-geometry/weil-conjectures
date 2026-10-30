@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineEventualZero
 import Mathlib.Algebra.Category.Grp.FilteredColimits

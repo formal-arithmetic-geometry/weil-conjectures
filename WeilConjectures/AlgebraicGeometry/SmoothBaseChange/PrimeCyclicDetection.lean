@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.GeometricPointModuleConstant
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage

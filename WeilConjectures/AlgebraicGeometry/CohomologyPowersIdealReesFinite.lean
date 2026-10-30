@@ -6,16 +6,17 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.IdealPowersReesGradedData
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import WeilConjectures.AlgebraicGeometry.GradedFinitenessCohomology
-import WeilConjectures.Blowup.Affine.ReesGrading
 
 /-! # Finiteness of cohomology of ideal powers over the Rees algebra
 

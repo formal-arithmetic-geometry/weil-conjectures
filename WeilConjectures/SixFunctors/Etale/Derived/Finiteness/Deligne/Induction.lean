@@ -5,9 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GenericFiber.RadicialSmoothing
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.OpenBase
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.RadicialDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ThirdStep
 
 /-!

@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.SixFunctors.Etale.Gabber
+import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 /-! # Short-exact devissage with constructible outer terms
 

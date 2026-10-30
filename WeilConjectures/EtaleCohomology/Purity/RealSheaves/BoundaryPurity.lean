@@ -5,10 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
+public import Mathlib.LinearAlgebra.Matrix.FiniteDimensional
 
 /-!
 # Purity of a lisse sheaf extends over the missing points of a dense open

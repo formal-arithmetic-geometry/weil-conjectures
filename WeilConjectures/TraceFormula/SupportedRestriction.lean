@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.TraceClassDiagonal
+import WeilConjectures.TraceFormula.LocalTerm
 
 /-!
 
