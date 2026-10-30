@@ -8,24 +8,17 @@ module
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.Tensor
-public import WeilConjectures.WeilSheaf.WeilGroupArithmetic
+public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 
 /-!
-# Weil fundamental representations of twists and of pulled-back sheaves
+# Weil fundamental representations of constant twists
 
 Let `B = (t, β)` be base point data on the geometric fibre `p : X ⟶ X₀` of a scheme over a
-finite field, `M` a monodromy of lisse sheaves on `X`. This file computes the Weil fundamental
-representation `ρ_F` of `π₁(X, t) ⋊ ℤ` (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep`)
-in two cases:
-
-* constant twists: `ρ_{F ⊗ 𝓑_b} = ρ_F ⊗ b^{deg}`
-  (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep_constantTwist`), since the
-  Frobenius of `F ⊗ 𝓑_b` is `b` times that of `F`;
-* sheaves pulled back from the model: for a monodromy `M₀` on `X₀` compatible with `M` along `p`
-  and a lisse sheaf `H` on `X₀`, the Weil fundamental representation of `p^* H` with its
-  canonical Weil structure is the restriction of the monodromy representation of `π₁(X₀, t ≫ p)`
-  on `H_{t ≫ p} = (p^* H)_t` along `arithHom : π₁(X, t) ⋊ ℤ → π₁(X₀, t ≫ p)`
-  (`AlgebraicGeometry.FrobeniusBasePoint.fundamentalRep_geometricFiberPullback`).
+finite field, `M` a monodromy of lisse sheaves on `X`. The Weil fundamental representation
+`ρ_F` of `π₁(X, t) ⋊ ℤ` (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep`) of a
+constant twist is `ρ_{F ⊗ 𝓑_b} = ρ_F ⊗ b^{deg}`
+(`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep_constantTwist`), since the
+Frobenius of `F ⊗ 𝓑_b` is `b` times that of `F`.
 
 Moreover lisse Weil sheaves with isomorphic Weil fundamental representations are isomorphic
 (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.nonempty_iso_of_linearEquiv`).

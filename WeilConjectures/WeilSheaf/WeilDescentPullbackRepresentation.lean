@@ -16,8 +16,9 @@ monodromies of lisse sheaves on `X` and `X₀` compatible with `p`. For a lisse 
 the Weil sheaf `p^* H` with its canonical Weil structure `Fr^* p^* H ≅ (Fr ≫ p)^* H = p^* H`
 (`AlgebraicGeometry.WeilSheaf.geometricFiberPullback`) has Weil fundamental representation the
 restriction of the monodromy representation of `π₁(X₀, t ≫ p)` on `H_{t ≫ p} = (p^* H)_t` along
-`arithHom : π₁(X, t) ⋊ ℤ → π₁(X₀, t ≫ p)`
-(`AlgebraicGeometry.FrobeniusBasePoint.fundamentalRep_of_iso_upperStar`): on loops this is the
+`toArith : π₁(X, t) ⋊ ℤ → π₁(X₀, t ≫ p)`
+(`AlgebraicGeometry.FrobeniusBasePoint.fundamentalRep_geometricFiberPullback`, in
+`WeilConjectures.WeilSheaf.WeilDescentFundamentalRep`): on loops this is the
 compatibility of the monodromies, and on the Frobenius lift `F₀ = p_* β` it is a coherence of the
 pullback pseudofunctor (`AlgebraicGeometry.ProEtale.upperStarComp_frobenius_coherence`).
 
