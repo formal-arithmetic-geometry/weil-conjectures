@@ -72,7 +72,7 @@ second projection over a point `ξ : T ⟶ V'` of the dual, where `T` lies over 
 noncomputable def fibreToProduct {T : Scheme.{u}} (ξ : T ⟶ V') :
     pullback π (ξ ≫ π') ⟶ pullback π π' :=
   pullback.lift (pullback.fst π (ξ ≫ π')) (pullback.snd π (ξ ≫ π') ≫ ξ)
-    (by simp [pullback.condition])
+    (by rw [Category.assoc]; exact pullback.condition)
 
 @[reassoc (attr := simp)]
 lemma fibreToProduct_fst {T : Scheme.{u}} (ξ : T ⟶ V') :

@@ -175,3 +175,21 @@ theorem isConstructibleModuleObject_openImmersionLowerShriek
     exact Mod.hom_ext _ _ (hz.eq_of_src _ _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale
+
+section
+
+open CategoryTheory Limits MonoidalCategory
+open scoped CategoryTheory.Obj
+
+private lemma constructible_of_isZero {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    (M : Mod _ R) (hM : IsZero M) : IsConstructibleModuleObject R M := by
+  refine ⟨Scheme.Stratification.trivial X, fun i ↦ ?_⟩
+  exact localFinitePresentation_of_isZero _ _
+    (((𝟙 X)^*[Ab.{u + 1}].mapMod R).map_isZero hM)
+
+end
+
+end AlgebraicGeometry.ProEtale
