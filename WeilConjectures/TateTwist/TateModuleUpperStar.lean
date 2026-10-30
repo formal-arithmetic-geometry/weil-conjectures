@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Abelian.CokernelNSMul
 public import WeilConjectures.Mathlib.Algebra.GroupWithZero.Basic
 public import WeilConjectures.TateTwist.RootsOfUnityUpperStar
 public import WeilConjectures.TateTwist.TateModuleTrivialization
@@ -80,7 +81,7 @@ lemma preservesLimit_upperStar_of_isColimitCokernelCofork {Y Y' : Scheme.{u}} (h
       (isLimitCokernelPowTowerConeOfIso
         (((upperStarFromPointComp h).app (Profinite.continuousMapRingObj ℤ_[ℓ])).symm ≪≫
           (h)^*[Ab.{u + 1}].mapIso e.symm) (isLimitCokernelPowTowerCone ℓ Y')))
-  refine CokernelCofork.isColimitOfEq ?_ _ _
+  refine CokernelCofork.isColimitOfEq ?_
     (isColimitCoforkMapOfIsColimit' (h)^*[Ab.{u + 1}] (w n) (hc n))
   rw [Functor.map_zsmul, CategoryTheory.Functor.map_id]
   rfl

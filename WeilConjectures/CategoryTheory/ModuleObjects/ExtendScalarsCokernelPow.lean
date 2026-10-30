@@ -53,23 +53,17 @@ namespace CategoryTheory.Mod
 
 section FreeFunctor
 
-variable {C : Type u} [Category.{v} C] [MonoidalCategory C] (R : C) [MonObj R]
-
-/-- The free module functor `Mod.freeFunctor R` is left adjoint to the forgetful functor. -/
-def freeFunctorForgetAdjunction : freeFunctor R ⊣ forget R :=
-  freeForgetAdjunction R
-
-variable [BraidedCategory C] [HasCoequalizers C]
+variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C] [HasCoequalizers C]
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
-  {R} {S : C} [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
+  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
 
 /-- **Extension of scalars of a free module is free**: `S ⊗_R (R ⊗ X) ≅ S ⊗ X`, both functors
 being left adjoint to the forgetful functor `Mod C S ⥤ C`. -/
 noncomputable def freeFunctorCompExtendScalarsIso :
     freeFunctor R ⋙ extendScalars φ ≅ freeFunctor S :=
-  ((freeFunctorForgetAdjunction R).comp (extendRestrictAdjunction φ)).leftAdjointUniq
-    ((freeFunctorForgetAdjunction S).ofNatIsoRight (Iso.refl _))
+  ((freeForgetAdjunction R).comp (extendRestrictAdjunction φ)).leftAdjointUniq
+    ((freeForgetAdjunction S).ofNatIsoRight (Iso.refl _))
 
 end FreeFunctor
 

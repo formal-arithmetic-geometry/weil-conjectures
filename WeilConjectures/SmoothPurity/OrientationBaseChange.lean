@@ -88,11 +88,11 @@ orientation `γ_{f'}` and the base changed orientation
 checked after reduction to finite coefficients, which is how `smoothOrientation_baseChange` is
 meant to be proved. -/
 theorem smoothOrientation_baseChange_of_isIso (sq : IsPullback g' f' f g) (d : ℕ)
-    [IsIso (smoothOrientation ℓ f' d)]
-    [IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
+    (h₁ : IsIso (smoothOrientation ℓ f' d))
+    (h₂ : IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
           (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
           (boundedConstructibleUpperShriek ℓ f').map
-            (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))] :
+            (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))) :
     ∃ τ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
         (boundedConstructibleTateTwist ℓ X d (2 * d)) ≅
           boundedConstructibleTateTwist ℓ X' d (2 * d),
@@ -101,11 +101,7 @@ theorem smoothOrientation_baseChange_of_isIso (sq : IsPullback g' f' f g) (d : �
           (boundedConstructibleUpperShriek ℓ f').map
             (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)) =
         τ.hom ≫ smoothOrientation ℓ f' d := by
-  refine ⟨asIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
-      (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
-      (boundedConstructibleUpperShriek ℓ f').map
-        (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))) ≪≫
-    (asIso (smoothOrientation ℓ f' d)).symm, ?_⟩
+  refine ⟨@asIso _ _ _ _ _ h₂ ≪≫ (@asIso _ _ _ _ _ h₁).symm, ?_⟩
   simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv, Category.assoc,
     IsIso.inv_hom_id, Category.comp_id]
 

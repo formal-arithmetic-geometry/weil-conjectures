@@ -15,8 +15,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 - `CategoryTheory.Limits.Cofork.IsColimit.isIso_of_π_comp_eq`: a map between the points of two
   colimit coforks of the same pair of morphisms, compatible with the projections, is an
   isomorphism.
-- `CategoryTheory.Limits.CokernelCofork.isColimitOfEq`: transport of a colimit cokernel cofork
-  along an equality of morphisms.
 -/
 
 @[expose] public section
@@ -33,12 +31,5 @@ lemma Cofork.IsColimit.isIso_of_π_comp_eq {C : Type*} [Category* C] {X Y : C} {
     rw [w]
     exact (hc.comp_coconePointUniqueUpToIso_hom hc' WalkingParallelPair.one).symm)
   infer_instance
-
-/-- A colimit cokernel cofork of `f` is a colimit cokernel cofork of any `f'` equal to `f`. -/
-def CokernelCofork.isColimitOfEq {C : Type*} [Category* C] [HasZeroMorphisms C] {X Y Q : C}
-    {f f' : X ⟶ Y} (hf : f = f') {p : Y ⟶ Q} (hp : f ≫ p = 0) (hp' : f' ≫ p = 0)
-    (h : IsColimit (CokernelCofork.ofπ p hp)) : IsColimit (CokernelCofork.ofπ p hp') := by
-  subst hf
-  exact h
 
 end CategoryTheory.Limits

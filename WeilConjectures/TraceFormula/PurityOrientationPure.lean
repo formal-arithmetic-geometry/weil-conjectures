@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
+public import WeilConjectures.SmoothPurity.TateTwistPullback
 public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.TateTwist.LocallyFree
@@ -68,9 +69,7 @@ subsection `sk-prop-an`: "for `Λ ∈ {A, 𝒪_E, E, ℚ̄_ℓ}` the sheaf `Λ_X
 degree `0`, is a dualizable bounded constructible complex. -/
 theorem isDualizable_boundedConstructibleTateTwist (d : ℤ) :
     IsDualizable (boundedConstructibleTateTwist ℓ X d 0) := by
-  have : NeZero (ℓ : k) := ⟨fun h ↦ (Fact.out : ringChar k ≠ ℓ)
-    (((Fact.out : ℓ.Prime).eq_one_or_self_of_dvd _ ((ringChar.spec k ℓ).1 h)).resolve_left
-      (CharP.ringChar_ne_one))⟩
+  have := neZero_natCast_of_ringChar_ne ℓ (k := k)
   refine (isDualizable_singleFunctor_of_isLocallyFree ℓ X (tateTwist X.left ℓ d)
     (isLocallyFree_tateTwist ℓ X.hom d)).of_iso
     ((boundedConstructible _).fullyFaithfulι.preimageIso ?_)

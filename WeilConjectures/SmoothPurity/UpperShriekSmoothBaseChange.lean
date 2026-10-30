@@ -332,7 +332,9 @@ theorem isIso_upperShriekBaseChange_of_forall_smoothOfRelativeDimension
 
 /-- **Smooth base change for `Rf^!` along a closed immersion**, for `f` smooth (of locally constant
 relative dimension): the exceptional base change map `Lg'^* Rf^! L ⟶ Rf'^! Lg^* L` is an
-isomorphism for every bounded constructible `L` when `g` is a closed immersion. -/
+isomorphism for every bounded constructible `L` when `g` is a closed immersion. This is the
+`sorry`-free special case of `isIso_upperShriekBaseChange_of_smooth`, which rests on the `sorry`d
+`smoothOrientation_baseChange`. -/
 theorem isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion (sq : IsPullback g' f' f g)
     [Smooth f.left] [IsClosedImmersion g.left] (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (upperShriekBaseChange ℓ sq L) :=
