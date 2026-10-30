@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.CondensedModelBaseChangeCoherence
+public import WeilConjectures.WeilSheaf.CondensedModelBoundedConstructible
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 
 /-!
@@ -346,15 +346,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
-
-/-- The structure isomorphism `(Fr_X⁻¹)_* p^* ≅ Fr_X^* p^* ≅ (Fr_X ≫ p)^* = p^*`, unfolded. -/
-lemma geometricFiberProjLowerStarFrobeniusIso_eq :
-    geometricFiberProjLowerStarFrobeniusIso Λ f =
-      Functor.isoWhiskerLeft (upperStar Λ f.geometricFiberProj)
-          (upperStarIsoLowerStarInv Λ f.geometricGaloisFrobenius).symm ≪≫
-        (upperStarComp Λ f.geometricGaloisFrobenius.hom f.geometricFiberProj).symm ≪≫
-        upperStarCongr Λ (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj f) :=
-  rfl
 
 /-- The geometric fibre Weil objects are the algebras given by the pullback `p^*` and its
 structure isomorphism `(Fr_X⁻¹)_* p^* ≅ p^*`. -/
