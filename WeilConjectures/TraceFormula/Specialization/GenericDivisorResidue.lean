@@ -63,7 +63,7 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
     (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
-    (E : FiniteIntermediateField ℓ)
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (F : DerivedCategory (Mod (Sheaf (ProEt.topology (overRestrict X I.support.compl).left)
       Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj (integersResidueField ℓ E.1))
         (overRestrict X I.support.compl).left)))

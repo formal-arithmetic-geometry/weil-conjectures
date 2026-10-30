@@ -97,7 +97,7 @@ end Instances
 
 namespace NearbyCyclesModel
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {X X' U Y W : Scheme.{u}}
+variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X X' U Y W : Scheme.{u}}
   (M : NearbyCyclesModel X X') (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
   [IsOpenImmersion ι]
 
