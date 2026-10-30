@@ -5,14 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpaceEmbedding
-public import WeilConjectures.TraceFormula.ConstructibleGeneration
-public import WeilConjectures.TraceFormula.DualizableShift
-public import WeilConjectures.TraceFormula.KunnethVerdierDual
 public import WeilConjectures.TraceFormula.KunnethVerdierUnit
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
-public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.TraceFormula.PurityCompatibility
 
 /-!

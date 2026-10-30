@@ -5,9 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OverProper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.SwapEvPairing
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
 

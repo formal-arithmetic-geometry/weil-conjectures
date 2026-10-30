@@ -10,15 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-
 public import WeilConjectures.AlgebraicGeometry.FiniteStructureAdjointTransitions
-import WeilConjectures.AlgebraicGeometry.FiniteStructureProductCompatibility
-
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-
-import WeilConjectures.AlgebraicGeometry.FiniteStructureTensorPowersSupported
-import WeilConjectures.AlgebraicGeometry.GrothendieckExistence
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.FiniteStructureProductCompatibility
 
 /-! # Existence of a lifted finite-structure product
 

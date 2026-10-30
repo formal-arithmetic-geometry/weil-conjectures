@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
-public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 
 /-!
