@@ -54,8 +54,8 @@ lisse sheaves and the proper-exchange cases, they prove the finiteness theorem b
 
 ## Unfinished
 
-The slice step is proved from its two inputs (M1) and (M2), stated in
-`WeilConjectures.TraceFormula.Specialization.NearbySliceInputs`, where they are `sorry`ed. The
+The slice step is proved from Th. finitude 3.7 and the averaging splitting (M2), stated in
+`WeilConjectures.TraceFormula.Specialization.NearbySliceInputs`, where it is `sorry`ed. The
 criterion is `sorry`ed; no blueprint node states it (the blueprint has no node for the finiteness
 of nearby cycles). The criterion needs that the cohomology
 sheaves of `Ψ B` are ind-constructible, which for torsion coefficients holds for every étale
