@@ -121,6 +121,42 @@ theorem isIso_pullbackExchange_sliceTraitToGaloisLayer
         j, (sliceTraitModel D N cN).i, 𝟙 _⟩ : NearbyCyclesModel _ _)) hj)
     (sliceTraitToGaloisLayer D N cN hcN hNj hNi) HEq.rfl HEq.rfl C
 
+/-- The first components of the purely inseparable part `r₁`: `r₁ ≫ q ≫ r₂` is the change of
+generic fibres of the cartesian model. -/
+@[reassoc]
+lemma sliceTraitToGaloisLayer_generic_fst_fst :
+    (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic ≫
+        pullback.fst (sliceTraitGaloisResidue D N cN hcN hNj hNi)
+          (Spec.map (CommRingCat.ofHom (algebraMap D.compositum D.compositumSep))) ≫
+        pullback.fst ((sliceTraitGenericHom D N cN hcN hNj hNi).cartesianModelTensor
+          (sliceTraitStructure D N cN) q g hNj.w (sliceTrait_fst_comp D N cN hcN))
+          (traitTensorCompositumPoint R D.R Ω D.Ω) =
+      (sliceTraitGenericHom D N cN hcN hNj hNi).toCartesian.generic :=
+  (sliceTraitGenericHom D N cN hcN hNj hNi).traitChangeInsepMap_comp_traitChangeGaloisMap_comp
+    hNj.w (sliceTrait_fst_comp D N cN hcN) (isPullback_sliceTraitModel_j D N cN).w
+    (hNj.lift_snd _ _ _)
+
+/-- The component of `r₁` in `Spec L`. -/
+@[reassoc]
+lemma sliceTraitToGaloisLayer_generic_fst_snd :
+    (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic ≫
+        pullback.fst (sliceTraitGaloisResidue D N cN hcN hNj hNi)
+          (Spec.map (CommRingCat.ofHom (algebraMap D.compositum D.compositumSep))) ≫
+        pullback.snd ((sliceTraitGenericHom D N cN hcN hNj hNi).cartesianModelTensor
+          (sliceTraitStructure D N cN) q g hNj.w (sliceTrait_fst_comp D N cN hcN))
+          (traitTensorCompositumPoint R D.R Ω D.Ω) =
+      pullback.snd _ _ ≫ traitTensorSepPoint D.R Ω D.Ω ≫ traitTensorCompositumGalois D.R Ω D.Ω :=
+  (pullback.lift_fst_assoc _ _ _ _).trans (pullback.lift_snd _ _ _)
+
+/-- The component of `r₁` in `Spec L^sep`. -/
+@[reassoc]
+lemma sliceTraitToGaloisLayer_generic_snd :
+    (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic ≫
+        pullback.snd (sliceTraitGaloisResidue D N cN hcN hNj hNi)
+          (Spec.map (CommRingCat.ofHom (algebraMap D.compositum D.compositumSep))) =
+      pullback.snd _ _ ≫ traitTensorSepPoint D.R Ω D.Ω :=
+  pullback.lift_snd _ _ _
+
 end Single
 
 section Pair
@@ -155,14 +191,17 @@ noncomputable def sliceTraitCartesianGenericMap :
 
 @[reassoc (attr := simp)]
 lemma sliceTraitCartesianGenericMap_fst :
-    sliceTraitCartesianGenericMap H φ cN hcN hNj hNi cM hcM' hMj hMi hcM ≫ pullback.fst _ _ =
-      pullback.fst _ _ ≫ φ.generic :=
+    sliceTraitCartesianGenericMap H φ cN hcN hNj hNi cM hcM' hMj hMi hcM ≫
+        pullback.fst N.j (sliceTraitHom D₁ N cN hcN hNj hNi).total =
+      pullback.fst M.j (sliceTraitHom D₂ M cM hcM' hMj hMi).total ≫ φ.generic :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
 lemma sliceTraitCartesianGenericMap_snd :
-    sliceTraitCartesianGenericMap H φ cN hcN hNj hNi cM hcM' hMj hMi hcM ≫ pullback.snd _ _ =
-      pullback.snd _ _ ≫ sliceTraitChangeTotal H φ cN cM hcM :=
+    sliceTraitCartesianGenericMap H φ cN hcN hNj hNi cM hcM' hMj hMi hcM ≫
+        pullback.snd N.j (sliceTraitHom D₁ N cN hcN hNj hNi).total =
+      pullback.snd M.j (sliceTraitHom D₂ M cM hcM' hMj hMi).total ≫
+        sliceTraitChangeTotal H φ cN cM hcM :=
   pullback.lift_snd _ _ _
 
 include hgen in
@@ -239,6 +278,63 @@ lemma sliceTraitGaloisChangeHom_generic_comp_residue :
       sliceTraitGaloisResidue D₂ M cM hcM' hMj hMi ≫
         Spec.map (CommRingCat.ofHom H.compositumMap) :=
   sliceTraitGaloisGenericMap_snd H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen
+
+include hgen in
+/-- **The change of Galois layers** `τ' : N₂_{L₂^sep} ⟶ N₁_{L₁^sep}` induced by `τ` and the map
+`ω : L₁^sep ⟶ L₂^sep` of separable closures (`NearbyCyclesModel.galoisLayerMap`). -/
+noncomputable abbrev sliceTraitGaloisLayerMap :
+    (sliceTraitGaloisLayer D₂ M cM hcM' hMj hMi).Hom (sliceTraitGaloisLayer D₁ N cN hcN hNj hNi)
+      φ.generic (sliceTraitChangeSpecial H φ cN cM hcM) :=
+  galoisLayerMap D₁.compositumSep D₂.compositumSep H.compositumSepMap
+    H.compositumSepMap_comp_algebraMap
+    (sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen)
+    (sliceTraitGaloisChangeHom_generic_comp_residue H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen)
+
+include hgen in
+/-- The slices commute with the change of trait on geometric generic fibres:
+`φ'.generic ≫ σ_N.generic = σ_M.generic ≫ φ.generic`. -/
+@[reassoc]
+lemma sliceTraitChangeGeneric_comp_sliceTraitGeneric :
+    sliceTraitChangeGeneric H φ cN cM hcM ≫ sliceTraitGeneric D₁ N cN hcN hNj =
+      sliceTraitGeneric D₂ M cM hcM' hMj ≫ φ.generic := by
+  apply hNj.hom_ext
+  · simp only [Category.assoc, sliceTraitGeneric, IsPullback.lift_fst, φ.comm_j,
+      IsPullback.lift_fst_assoc]
+    simp [sliceTraitChangeGeneric]
+  · simp only [Category.assoc, sliceTraitGeneric, IsPullback.lift_snd, hgen,
+      IsPullback.lift_snd_assoc]
+    rw [sliceTraitChangeGeneric_snd_assoc, ← Spec.map_comp, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp, H.ΩMap_comp_ωS]
+
+include hgen in
+/-- The square of generic fibres of the second square: `φ'.generic ≫ r₁(N) = r₁(M) ≫ τ'.generic`. -/
+lemma sliceTraitChangeGeneric_comp_toGaloisLayer_generic :
+    sliceTraitChangeGeneric H φ cN cM hcM ≫
+        (sliceTraitToGaloisLayer D₁ N cN hcN hNj hNi).generic =
+      (sliceTraitToGaloisLayer D₂ M cM hcM' hMj hMi).generic ≫
+        (sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen).generic := by
+  apply pullback.hom_ext
+  · apply pullback.hom_ext
+    · apply pullback.hom_ext
+      · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_fst_fst_assoc,
+          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, sliceTraitGaloisChangeHom_generic,
+          sliceTraitGaloisGenericMap_fst_assoc, sliceTraitCartesianGenericMap_fst,
+          sliceTraitToGaloisLayer_generic_fst_fst_assoc, Hom.toCartesian_generic,
+          pullback.lift_fst_assoc, pullback.lift_fst]
+        exact sliceTraitChangeGeneric_comp_sliceTraitGeneric H φ cN hcN hNj cM hcM' hMj hcM hgen
+      · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_fst_fst_assoc,
+          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, sliceTraitGaloisChangeHom_generic,
+          sliceTraitGaloisGenericMap_fst_assoc, sliceTraitCartesianGenericMap_snd,
+          sliceTraitToGaloisLayer_generic_fst_fst_assoc, Hom.toCartesian_generic,
+          pullback.lift_snd_assoc, pullback.lift_snd]
+        exact (sliceTraitChangeHom H φ cN cM hcM).comm_j
+    · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_fst_snd_assoc,
+        galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, sliceTraitGaloisChangeHom_generic,
+        sliceTraitGaloisGenericMap_snd, sliceTraitToGaloisLayer_generic_fst_snd]
+      rw [sliceTraitChangeGeneric_snd_assoc, H.sepPoint_comp_assoc, H.compositumGalois_comp]
+  · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_snd_assoc, galoisLayerMap_generic,
+      galoisLayerGenericMap_snd, sliceTraitToGaloisLayer_generic_snd]
+    rw [sliceTraitChangeGeneric_snd_assoc, H.sepPoint_comp]
 
 end Pair
 
