@@ -10186,6 +10186,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.Mathlib.CategoryTheory.FintypeCat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
@@ -14867,6 +14868,7 @@ public import WeilConjectures.WeilSheaf.WeilDescent
 public import WeilConjectures.WeilSheaf.WeilDescentConnected
 public import WeilConjectures.WeilSheaf.WeilDescentConstantField
 public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroup
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroupAux
 public import WeilConjectures.WeilSheaf.WeilDescentFundamentalRep
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
