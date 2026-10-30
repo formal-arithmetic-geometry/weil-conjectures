@@ -8,6 +8,9 @@ module
 public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
+public import WeilConjectures.ZetaFunction.WeilObjectOfLisseLocalGalois
+public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 
 /-!
 # The local traces of the Weil object of a lisse sheaf
@@ -49,7 +52,9 @@ theorem endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse
           (weilObjectOfLisse (k₀ := k₀) hH b)) =
       (WeilSheaf.toComplex.obj
         ((WeilSheaf.geometricFiberPullback (k₀ := k₀) hH).constantTwist b)).traceFunction
-          (n + 1) y :=
-  sorry
+          (n + 1) y := by
+  rw [traceFunction_toComplex, WeilSheaf.traceFunction_constantTwist,
+    WeilSheaf.traceFunction_geometricFiberPullback_eq_trace,
+    endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse_eq]
 
 end AlgebraicGeometry.WeilComplex

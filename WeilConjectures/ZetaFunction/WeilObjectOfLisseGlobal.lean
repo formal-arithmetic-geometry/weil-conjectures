@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
+public import WeilConjectures.ZetaFunction.WeilObjectOfLisseSpecTrace
 
 /-!
 # The global traces of the Weil object of a lisse sheaf
@@ -49,7 +50,20 @@ theorem endTensorUnitRingEquiv_weilCompactSupportCohomology_weilObjectOfLisse
           ((weilCompactSupportCohomology l (Iso.refl _)).obj (weilObjectOfLisse (k₀ := k₀) hH 1))) =
       ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
         (((WeilSheaf.toComplex.obj (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH)
-          ).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) :=
-  sorry
+          ).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) := by
+  have hfin := finite_support_weilSheafStalkTrace_homology l (n + 1) (specAlgebraicClosure k₀)
+    (specAlgebraicClosure_comp_pow (n + 1))
+    ((weilCompactSupportCohomology l (Iso.refl _)).obj (weilObjectOfLisse (k₀ := k₀) hH 1))
+  rw [weilStalkTraceAlternatingSum, map_finsum _ (hfin.subset fun j hj h ↦ hj (by
+    beta_reduce at h ⊢
+    rw [h, smul_zero]))]
+  refine finsum_congr fun i ↦ ?_
+  rw [map_zsmul, weilSheafStalkTrace_congr l (n + 1) _ _
+    (homologyWeilCompactSupportCohomologyWeilObjectOfLisseIso hH i),
+    endTensorUnitRingEquiv_weilSheafStalkTrace_ofId_lowerShriekHomologyOfLisse hH n i]
+  congr 1
+  exact (WeilSheaf.globalSectionsEquivOfIso
+    (homologySheafDerivedLowerShriekGeometricFiberPullbackIso hH i)).trace_frobeniusEnd_pow
+      (n + 1)
 
 end AlgebraicGeometry.WeilComplex
