@@ -81,7 +81,7 @@ lemma bijective_comp_of_isIso_map (adj : L ⊣ R) {K K' : D} (φ : K ⟶ K') [Is
 
 /-- The counit of an adjunction whose left adjoint is isomorphic to the identity is an
 isomorphism. -/
-lemma isIso_counit_app_of_iso_id {L R : C ⥤ C} (adj : L ⊣ R) (e : L ≅ 𝟭 C) (Y : C) :
+lemma isIso_counit_app_of_leftAdjoint_iso_id {L R : C ⥤ C} (adj : L ⊣ R) (e : L ≅ 𝟭 C) (Y : C) :
     IsIso (adj.counit.app Y) := by
   let adj' := adj.ofNatIsoLeft e
   have : IsIso (adj'.unit.app Y) := by
@@ -262,7 +262,7 @@ theorem isIso_upperStar_map_lowerStarUpperShriekAdjunction_counit_app
     (Category.comp_id _) M).2 (isIso_upperShriekBaseChange_of_isOpenImmersion ℓ sqU M)
   rw [NatIso.isIso_map_iff (boundedConstructibleUpperStarId 𝐐 ℓ U)] at hβ
   have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq
-  have := (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 U)).isIso_counit_app_of_iso_id
+  have := (boundedConstructibleUpperShriekAdjunction ℓ (𝟙 U)).isIso_counit_app_of_leftAdjoint_iso_id
     (boundedConstructibleLowerShriekId ℓ U)
     ((boundedConstructibleUpperStar 𝐐 ℓ (j ≫ h)).obj M)
   have hβ' : IsIso (upperShriekBaseChange ℓ sq M) := hβ
