@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMilnor
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
-public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.RetractionLift
 
 /-!
 # Cohomology sheaves of derived complete complexes
@@ -102,6 +101,36 @@ lemma Fan.IsLimit.isZero_iff_mono_one_sub {C : Type*} [Category* C] [Preadditive
     exact Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP t ht c
 
 end CategoryTheory.Limits
+
+namespace CategoryTheory.Pretriangulated
+
+variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] {z : CatCenter C}
+
+/-- Complete objects are closed under extensions: in a distinguished triangle whose first and
+third objects are complete, so is the second. -/
+lemma IsCenterComplete.ext₂ (T : Triangle C) (hT : T ∈ distTriang C)
+    (h₁ : IsCenterComplete z T.obj₁) (h₃ : IsCenterComplete z T.obj₃) :
+    IsCenterComplete z T.obj₂ := by
+  intro Z hZ f
+  obtain ⟨g, rfl⟩ := Triangle.coyoneda_exact₂ T hT f (h₃ hZ _)
+  rw [h₁ hZ g, zero_comp]
+
+omit [HasZeroObject C] [Pretriangulated C] in
+/-- Complete objects are closed under shifts, for a central element commuting with the shifts. -/
+lemma IsCenterComplete.shift (hz : ∀ (X : C) (n : ℤ), z.app (X⟦n⟧) = (z.app X)⟦n⟧') {K : C}
+    (hK : IsCenterComplete z K) (n : ℤ) : IsCenterComplete z (K⟦n⟧) := by
+  intro Z hZ f
+  have : IsIso (z.app (Z⟦-n⟧)) := by
+    rw [hz]
+    infer_instance
+  have h : f⟦-n⟧' = 0 := (cancel_mono
+    ((shiftFunctorCompIsoId C n (-n) (add_neg_cancel n)).hom.app K)).1 (by
+      rw [zero_comp]
+      exact hK this _)
+  exact (shiftFunctor C (-n)).map_eq_zero_iff.1 h
+
+end CategoryTheory.Pretriangulated
 
 namespace CategoryTheory.CatCenter
 
