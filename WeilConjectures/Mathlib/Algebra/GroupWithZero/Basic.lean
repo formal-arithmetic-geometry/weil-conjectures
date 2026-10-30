@@ -23,6 +23,4 @@ public import Mathlib.Data.Nat.Cast.Basic
 is the image of `ℓ ^ n`. -/
 lemma NeZero.natCast_pow {R : Type*} [Semiring R] [NoZeroDivisors R] (ℓ n : ℕ)
     [NeZero (ℓ : R)] : NeZero ((ℓ ^ n : ℕ) : R) :=
-  ⟨by
-    rw [Nat.cast_pow]
-    exact pow_ne_zero _ (NeZero.ne _)⟩
+  Nat.cast_pow (α := R) ℓ n ▸ NeZero.pow
