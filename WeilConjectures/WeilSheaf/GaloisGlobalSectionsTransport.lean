@@ -116,6 +116,16 @@ lemma globalSectionsTransport_upperStarId_hom_app {S Y : Scheme.{u}} {τ : S ⟶
     upperStarComp_id_right_hom_app_comp_map_upperStarId_hom_app,
     upperStarCongr_hom_app_trans_eq A hY (Category.comp_id x) h]
 
+/-- `AlgebraicGeometry.ProEtale.adicUpperStarCongr_hom_app_hom`, elaborated with the shortcut
+instance `ModuleCat.isGrothendieckAbelian_of_commRing` (that lemma uses Mathlib's instance). The
+kernel compares the two forms of `(upperStarCongr _ h).hom.app` only by unfolding everything. -/
+lemma adicUpperStarCongr_hom_app_hom' {l : ℕ} [Fact l.Prime] {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
+    (h : g = g') (M : AdicSheaf l Y) :
+    ((adicUpperStarCongr l h).hom.app M).hom =
+      (upperStarCongr (WeilCoefficients.{u} l) h).hom.app M.X := by
+  subst h
+  rfl
+
 /-- The Galois action on global sections, written with the pullback of the underlying sheaf. -/
 lemma galoisGlobalSections_eq {l : ℕ} [Fact l.Prime] {S X : Scheme.{u}} (σ : S ⟶ S) (x : S ⟶ X)
     (h : σ ≫ x = x) (H : AdicSheaf l X) :
@@ -126,7 +136,7 @@ lemma galoisGlobalSections_eq {l : ℕ} [Fact l.Prime] {S X : Scheme.{u}} (σ : 
           ((upperStarComp (WeilCoefficients.{u} l) σ x).inv.app H.X ≫
             (upperStarCongr (WeilCoefficients.{u} l) h).hom.app H.X) := by
   rw [galoisGlobalSections, Mod.comp_hom', adicUpperStarComp_inv_app_hom,
-    adicUpperStarCongr_hom_app_hom]
+    adicUpperStarCongr_hom_app_hom']
   rfl
 
 end AlgebraicGeometry.ProEtale

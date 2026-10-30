@@ -192,7 +192,7 @@ lemma frobeniusStr_comp_forget_map_eq (F : WeilSheaf k₀ l X) {H : AdicSheaf l 
   have k := congrArg Mod.Hom.hom hF
   rw [Mod.comp_hom', Mod.comp_hom', adicUpperStarIsoLowerStarInv_hom_app_hom, Mod.comp_hom',
     Mod.comp_hom', adicUpperStar_map_hom, adicUpperStarComp_inv_app_hom,
-    adicUpperStarCongr_hom_app_hom] at k
+    adicUpperStarCongr_hom_app_hom'] at k
   exact k
 
 /-- `AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_galoisGlobalSections_of_iso` for an

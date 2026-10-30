@@ -39,6 +39,14 @@ noncomputable def geometricFiberPullbackObjCarrierIso {H : AdicSheaf l X}
       ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)^*ᵃ[l].obj H :=
   Iso.refl _
 
+/-- The congruence isomorphisms of `ℓ`-adic pullbacks along two proofs of `g = g'` agree. The
+proofs are compared as arguments of `adicUpperStarCongr`; the kernel compares them under
+`NatTrans.app` only by unfolding everything. -/
+lemma adicUpperStarCongr_hom_app_congr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (e e' : g = g')
+    (M : AdicSheaf l Y) :
+    (adicUpperStarCongr l e).hom.app M = (adicUpperStarCongr l e').hom.app M :=
+  congrArg (fun i : (g)^*ᵃ[l] ≅ (g')^*ᵃ[l] => i.hom.app M) rfl
+
 /-- The Weil structure of `p^* H` is the canonical one, `Fr^* p^* H ≅ (Fr ≫ p)^* H = p^* H`. -/
 lemma geometricFiberPullback_str_hom_comp_carrierIso_hom {H : AdicSheaf l X}
     (hH : IsAdicLisseSheaf H) :
@@ -65,8 +73,10 @@ lemma geometricFiberPullback_str_hom_comp_carrierIso_hom {H : AdicSheaf l X}
   rw [geometricFiberPullbackObjCarrierIso, Iso.refl_hom, Category.comp_id,
     CategoryTheory.Functor.map_id, Category.id_comp, hstr, h]
   simp only [ProEtaleWeilSheaf.geometricFiberPullbackFrobeniusIso, Iso.trans_hom, Iso.app_hom,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
-    Iso.hom_inv_id_app_assoc]
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
+  -- the two sides differ in the proof of `Fr ≫ p = p`
+  exact (Iso.hom_inv_id_app_assoc _ _ _).trans
+    (congrArg (_ ≫ ·) (adicUpperStarCongr_hom_app_congr _ _ H))
 
 /-- **The trace function of the Weil sheaf `p^* H` pulled back from the model**: at an
 `𝔽_{q^{n+1}}`-point `y` with geometric point `x̄`, it is the trace of the Galois action of
