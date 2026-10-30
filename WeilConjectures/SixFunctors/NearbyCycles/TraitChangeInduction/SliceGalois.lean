@@ -336,6 +336,32 @@ lemma sliceTraitChangeGeneric_comp_toGaloisLayer_generic :
       galoisLayerGenericMap_snd, sliceTraitToGaloisLayer_generic_snd]
     rw [sliceTraitChangeGeneric_snd_assoc, H.sepPoint_comp]
 
+include hgen in
+/-- **The change of Galois layers from the change of trait of the slices** (SGA 4½,
+[Th. finitude], proof of 3.7): the square `ρ_N ∘ φ' = τ' ∘ ρ_M` of morphisms of models, whose
+vertical sides `ρ` (identity on total spaces, universal homeomorphisms on generic fibres) have
+invertible pullback exchanges, shows that the exchange of the change of Galois layers `τ'` is
+invertible at `C` once the change of trait `φ'` of the slices is invertible at the restriction
+of `C`. -/
+theorem isIso_pullbackExchange_sliceTraitGaloisLayerMap
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+      (condensedRingObj Λ N.generic)))
+    (hIH : IsIso (((sliceTraitChangeHom H φ cN cM hcM).toGeneric.pullbackExchange Λ).app
+      (L((sliceTraitGeneric D₁ N cN hcN hNj)^*⟦Λ⟧).obj C))) :
+    IsIso (((sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen).pullbackExchange
+      Λ).app C) := by
+  have key := Hom.isIso_map_pullbackExchange_app_of_square_of_isIso Λ
+    (sliceTraitChangeHom H φ cN cM hcM).toGeneric (sliceTraitToGaloisLayer D₁ N cN hcN hNj hNi)
+    (sliceTraitToGaloisLayer D₂ M cM hcM' hMj hMi)
+    (sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen) (by simp)
+    (sliceTraitChangeGeneric_comp_toGaloisLayer_generic H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM
+      hgen)
+    (sliceTraitChangeGeneric_comp_sliceTraitGeneric H φ cN hcN hNj cM hcM' hMj hcM hgen)
+    (by simp) C (isIso_pullbackExchange_sliceTraitToGaloisLayer D₁ N cN hcN hNj hNi Λ C)
+    (isIso_pullbackExchange_sliceTraitToGaloisLayer D₂ M cM hcM' hMj hMi Λ _) hIH
+  exact (NatIso.isIso_map_iff (leftDerivedUpperStarId Λ _) _).mp key
+
 end Pair
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
