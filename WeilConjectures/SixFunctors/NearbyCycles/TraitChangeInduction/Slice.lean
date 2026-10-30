@@ -49,7 +49,7 @@ of the special fibre of `M`. Then there is a morphism `h : W ⟶ X'` whose image
 point of `X'` lying over the generic point of `𝔸¹_κ`, at which the pullback of the exchange of
 `φ.toGeneric` is invertible: `W` is the special fibre of the slice of `M` over the strict
 localization of `𝔸¹_{S₂}` at the generic point of its special fibre. -/
-theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeInvariance T m)
+theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeInvariance.{u} T m)
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (p : ℕ) [Fact p.Prime] (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n)
     (hpT : IsUnit (p : T)) (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
@@ -73,6 +73,7 @@ theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeI
     (hcM' : cM ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₂)) ↘ Spec (.of R₂) = q₂)
     (cX : X' ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of κ)))
     (hcX : cX ≫ AffineSpace.map _ (Spec.map (CommRingCat.ofHom b₂)) = M.i ≫ cM)
+    (hcXp : cX ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of κ)) ↘ Spec (.of κ) = p₂)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T) N.generic)))
     (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) N.generic
