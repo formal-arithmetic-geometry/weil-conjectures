@@ -39,10 +39,11 @@ The generic slices of `M` and `M'` are the same model `M''` over the same base `
   and `E : c^* A ≅ c'^* π^* A`
   (`ProEtale.CondensedRing.NearbyCyclesModel.boundedConstructibleUpperStarOfMapCompIso`).
 
-The bounded constructible version of the exchange factorization, and hence the concrete
-reduction, is not proved here: lifting the ambient identity to bounded constructible complexes
-compares terms that differ by thousands of instance proofs and by the two presentations
-`Spec (.of (FractionRing _))` of the base of the slice, which exhausts the kernel.
+The bounded constructible version of the exchange factorization and the concrete reduction
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_rebase`) are in
+`TraceFormula.Specialization.NearbyDualityGenericBaseSliceRebaseTwist`: lifting the ambient
+identity of this file directly compares terms that differ by instance proofs and by the two
+presentations `Spec (.of (FractionRing _))` of the base of the slice, which exhausts the kernel.
 
 -/
 
@@ -70,7 +71,7 @@ section Abstract
 /-- The diagram chase behind `genericSliceHom_pullbackExchange_app_rebase`, in the shape of
 `NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`: a composition isomorphism
 `cpI : P ≅ I ⋙ P` with `cpI ≫ P(eI) = 𝟙` (for `eI : I ≅ 𝟭`) is `P(eI⁻¹)`. -/
-private lemma rebase_exchange_aux {DX DXη DS Ds D₂ : Type*} [Category DX] [Category DXη]
+lemma rebase_exchange_aux {DX DXη DS Ds D₂ : Type*} [Category DX] [Category DXη]
     [Category DS] [Category Ds] [Category D₂] {Ψ : DX ⥤ DS} {I : DS ⥤ DS} {P : DS ⥤ Ds}
     {Pπ : DX ⥤ DXη} {Ψ' : DXη ⥤ DS} {Cc : DX ⥤ D₂} {C' : DXη ⥤ D₂} {Ψ'' : D₂ ⥤ Ds}
     (cpI : P ≅ I ⋙ P) (cmp : Cc ≅ Pπ ⋙ C') (eI : I ≅ 𝟭 DS) (ψN : Ψ ⋙ I ⟶ Pπ ⋙ Ψ')
@@ -278,9 +279,10 @@ noncomputable abbrev genericBaseChangeUpperStar :
 re-based model. -/
 noncomputable abbrev rebaseGenericSliceUpperStar :
     Dᵇc((genericBaseChange X₁ ι).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+      Dᵇc((genericSliceBase (M := M) (traitSliceCoord k') hb).left)⟦
+        Profinite.padicAlgClRingObj ℓ⟧ :=
   boundedConstructibleUpperStarOfMap ℓ (X := genericBaseChange X₁ ι)
-    (Y := genericSliceBase (traitSliceCoord k') hb)
+    (Y := genericSliceBase (M := M) (traitSliceCoord k') hb)
     (h.isTraitModelOfGenericBase_rebase.genericSliceBaseMap (traitSliceCoord k') hb)
 
 /-- The slice exchange `α' : p^* Ψ_{M'} ⟶ Ψ_{M''} c'^*` of the re-based model: the pullback

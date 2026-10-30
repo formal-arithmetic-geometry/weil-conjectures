@@ -13741,6 +13741,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedRegularEnd
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Closed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Comp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Finite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
