@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
+public import WeilConjectures.ZetaFunction.WeilObjectOfLisseGlobal
+public import WeilConjectures.ZetaFunction.WeilObjectOfLisseLocal
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonInduction
 
 /-!
@@ -66,6 +70,35 @@ theorem exists_iso_constantTwist_geometricFiberPullback (V : Scheme.{u})
       Nonempty (G ≅ (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH).constantTwist b) :=
   sorry
 
+/-- **Constant twists and the Grothendieck–Lefschetz formula**: if a Weil sheaf `G` satisfies the
+Grothendieck–Lefschetz formula, so does its constant twist `G ⊗ 𝓑_b`, both sides being
+multiplied by `b^{n+1}` in degree `n + 1`
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_constantTwist`,
+`AlgebraicGeometry.WeilSheaf.traceFunction_constantTwist`). -/
+theorem _root_.AlgebraicGeometry.WeilComplex.SatisfiesLefschetz.constantTwist
+    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {G : WeilSheaf k₀ l X}
+    (hG : WeilComplex.SatisfiesLefschetz (toComplex.obj G)) (b : (PadicAlgCl l)ˣ) :
+    WeilComplex.SatisfiesLefschetz (toComplex.obj (G.constantTwist b)) := fun n ↦ by
+  have h₁ (i : ℤ) : LinearMap.trace (PadicAlgCl l) _
+      (((toComplex.obj (G.constantTwist b)).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) =
+        (b : PadicAlgCl l) ^ (n + 1) * LinearMap.trace (PadicAlgCl l) _
+          (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^ (n + 1)) := by
+    obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_constantTwist G b i
+    rw [← FrobeniusModule.trace_frobeniusEnd_rescale_pow _ b.ne_zero]
+    exact (e.trace_frobeniusEnd_pow (n + 1)).symm
+  calc _ = ∑ᶠ i : ℤ, (b : PadicAlgCl l) ^ (n + 1) • ((i.negOnePow : ℤ) • LinearMap.trace
+        (PadicAlgCl l) _ (((toComplex.obj G).compactlySupportedCohomology i).frobeniusEnd ^
+          (n + 1))) :=
+        finsum_congr fun i ↦ by rw [h₁, smul_eq_mul, mul_smul_comm]
+    _ = _ := by
+      rw [← smul_finsum, hG n, smul_finsum]
+      refine finsum_congr fun y ↦ ?_
+      rw [WeilComplex.traceFunction_toComplex, WeilComplex.traceFunction_toComplex,
+        traceFunction_constantTwist, smul_eq_mul]
+
 /-- **Pulled-back lisse sheaves have the traces of Weil objects**: for a lisse `ℓ`-adic sheaf
 `H` on `X₀` and a unit `b ∈ ℚ̄_ℓ`, the constant twist `p^* H ⊗ 𝓑_b` of its pullback to
 `X₀ ⊗ k̄` has, through the canonical identification `End (𝟙_ Mod_{Spec k̄}) ≅ ℚ̄_ℓ`, the traces
@@ -79,7 +112,22 @@ theorem hasWeilObjectComparison_constantTwist_geometricFiberPullback
     WeilComplex.HasWeilObjectComparison
       (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom
       (toComplex.obj ((WeilSheaf.geometricFiberPullback (k₀ := k₀) hH).constantTwist b)) :=
-  sorry
+  by
+  have h₁ : WeilComplex.HasWeilObjectComparison
+      (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom
+      (toComplex.obj (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH)) :=
+    ⟨WeilComplex.weilObjectOfLisse hH 1,
+      WeilComplex.endTensorUnitRingEquiv_weilCompactSupportCohomology_weilObjectOfLisse hH,
+      fun n y ↦ by
+        have h := WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse
+          (k₀ := k₀) hH 1 n y
+        rw [WeilComplex.traceFunction_toComplex, traceFunction_constantTwist, Units.val_one,
+          one_pow, one_mul, ← WeilComplex.traceFunction_toComplex] at h
+        exact h⟩
+  refine (WeilComplex.hasWeilObjectComparison_iff _).2
+    ⟨⟨WeilComplex.weilObjectOfLisse hH b, fun n y ↦
+      WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse hH b n y⟩,
+      h₁.satisfiesLefschetz.constantTwist b⟩
 
 /-- The generic case of the Noetherian induction: irreducible lisse Weil sheaves on smooth
 irreducible affine `k₀`-schemes have the traces of Weil objects. -/
