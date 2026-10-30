@@ -13000,6 +13000,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.FiniteSupportCriterion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuityNoetherian
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsProjector
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
