@@ -9,8 +9,8 @@ public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
-public import WeilConjectures.ZetaFunction.WeilObjectOfLisseGlobal
-public import WeilConjectures.ZetaFunction.WeilObjectOfLisseLocal
+public import WeilConjectures.WeilSheaf.WeilDescent
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonPullback
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonInduction
 
 /-!
@@ -23,7 +23,8 @@ lisse Weil sheaves on smooth irreducible affine `k₀`-schemes
 (`AlgebraicGeometry.WeilSheaf.IrreducibleLisseComparisonHolds`). This file splits that case in
 two:
 
-* **Descent** (`AlgebraicGeometry.WeilSheaf.exists_iso_constantTwist_geometricFiberPullback`):
+* **Descent**
+  (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback`):
   an irreducible lisse Weil sheaf `G` on a smooth irreducible `V₀` is a constant twist
   `p^* H ⊗ 𝓑_b` of the pullback of a lisse `ℓ`-adic sheaf `H` on `V₀` itself, along the
   projection `p : V₀ ⊗ k̄ ⟶ V₀` (Deligne, Weil II, 1.3.14, and the dictionary between lisse
@@ -55,20 +56,6 @@ namespace AlgebraicGeometry.WeilSheaf
 open ProEtale ProEtale.CondensedRing
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- **Descent of irreducible lisse Weil sheaves** (Deligne, Weil II, 1.3.14): an irreducible
-lisse Weil sheaf `G` on a smooth irreducible affine separated `k₀`-scheme `V₀` of finite type is
-the constant twist `p^* H ⊗ 𝓑_b` of the pullback, with its canonical Weil structure, of a lisse
-`ℓ`-adic sheaf `H` on `V₀` along the projection `p : V₀ ⊗ k̄ ⟶ V₀`. -/
-theorem exists_iso_constantTwist_geometricFiberPullback (V : Scheme.{u})
-    [V.Over (Spec (CommRingCat.of k₀))]
-    [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] [Smooth (V ↘ Spec (CommRingCat.of k₀))]
-    [IrreducibleSpace V] [IsAffine V] (G : WeilSheaf k₀ l V) (hG : G.IsIrreducibleLisse) :
-    ∃ (H : AdicSheaf l V) (hH : IsAdicLisseSheaf H) (b : (PadicAlgCl l)ˣ),
-      Nonempty (G ≅ (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH).constantTwist b) :=
-  sorry
 
 /-- **Constant twists and the Grothendieck–Lefschetz formula**: if a Weil sheaf `G` satisfies the
 Grothendieck–Lefschetz formula, so does its constant twist `G ⊗ 𝓑_b`, both sides being
@@ -113,17 +100,7 @@ theorem hasWeilObjectComparison_constantTwist_geometricFiberPullback
       (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom
       (toComplex.obj ((WeilSheaf.geometricFiberPullback (k₀ := k₀) hH).constantTwist b)) :=
   by
-  have h₁ : WeilComplex.HasWeilObjectComparison
-      (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom
-      (toComplex.obj (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH)) :=
-    ⟨WeilComplex.weilObjectOfLisse hH 1,
-      WeilComplex.endTensorUnitRingEquiv_weilCompactSupportCohomology_weilObjectOfLisse hH,
-      fun n y ↦ by
-        have h := WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse
-          (k₀ := k₀) hH 1 n y
-        rw [WeilComplex.traceFunction_toComplex, traceFunction_constantTwist, Units.val_one,
-          one_pow, one_mul, ← WeilComplex.traceFunction_toComplex] at h
-        exact h⟩
+  have h₁ := hasWeilObjectComparison_toComplex_geometricFiberPullback (k₀ := k₀) hH
   refine (WeilComplex.hasWeilObjectComparison_iff _).2
     ⟨⟨WeilComplex.weilObjectOfLisse hH b, fun n y ↦
       WeilComplex.endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse hH b n y⟩,
@@ -135,7 +112,7 @@ theorem irreducibleLisseComparisonHolds :
     IrreducibleLisseComparisonHolds (k₀ := k₀) (l := l)
       (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom := by
   intro V _ _ _ _ _ _ _ G hG
-  obtain ⟨H, hH, b, ⟨e⟩⟩ := exists_iso_constantTwist_geometricFiberPullback V G hG
+  obtain ⟨H, hH, b, ⟨e⟩⟩ := hG.exists_iso_constantTwist_geometricFiberPullback
   exact (hasWeilObjectComparison_constantTwist_geometricFiberPullback hH b).of_iso
     (toComplex.mapIso e.symm)
 
