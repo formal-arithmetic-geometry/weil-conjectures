@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Homology
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterComplete
 
 /-!
 # Lifting compatible retractions to a complete object
@@ -37,7 +37,7 @@ distinguished.
 That complete objects are stable under shifts and extensions
 (`CategoryTheory.Pretriangulated.IsCenterComplete.shift`,
 `CategoryTheory.Pretriangulated.IsCenterComplete.ext₂`) is in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Homology`.
+`WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterComplete`.
 -/
 
 @[expose] public section

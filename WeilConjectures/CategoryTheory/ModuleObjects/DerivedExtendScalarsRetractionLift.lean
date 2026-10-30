@@ -103,6 +103,7 @@ variable {S : ℕ → C} [∀ n, MonObj (S n)] [∀ n, IsCommMonObj (S n)] {φ :
   [∀ n, IsMonHom (φ n)] {ψ : ∀ n, S (n + 1) ⟶ S n} [∀ n, IsMonHom (ψ n)]
   (hψ : ∀ n, φ (n + 1) ≫ ψ n = φ n) (m : ℤ) (w : ∀ n, ((m ^ (n + 1)) • 𝟙 R) ≫ φ n = 0)
   (hS : ∀ n, (ShortComplex.mk _ _ (w n)).ShortExact)
+  [HasCountableProducts (DerivedCategory (Mod C R))]
 
 include hS in
 /-- **Lifting compatible retractions from the reductions modulo `mⁿ⁺¹`.** Let `i : A ⟶ B` with
