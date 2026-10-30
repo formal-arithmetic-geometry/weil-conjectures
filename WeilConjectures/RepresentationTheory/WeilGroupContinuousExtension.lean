@@ -209,7 +209,7 @@ theorem exists_continuous_extension_of_isBoundedOn {P G₀ : Type*} [Group P] [T
       conv_lhs => rw [← Matrix.toLin_toMatrix b b (σ g), hσval, Matrix.toLin_apply]
       simp [map_sum, map_smul, smul_eq_mul]
     simp_rw [h]
-    exact continuous_finset_sum _ fun j _ ↦
+    exact continuous_finsetSum _ fun j _ ↦
       ((continuous_apply j).comp (hmat.matrix_mulVec continuous_const)).mul continuous_const
   · have h1 : σΓ (α w) = R' w := DFunLike.congr_fun hσα w
     change (LinearMap.toMatrixAlgEquiv b).symm (mat (α w)) = ρ w

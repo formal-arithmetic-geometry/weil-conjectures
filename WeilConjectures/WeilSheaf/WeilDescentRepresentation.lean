@@ -143,6 +143,20 @@ theorem nonempty_iso_of_linearEquiv (hM : M.IsEquivalenceAt B.t) {F G : WeilShea
     simp)
   exact ⟨⟨f.hom, g.hom, congrArg (fun φ ↦ φ.hom) h₁, congrArg (fun φ ↦ φ.hom) h₂⟩⟩
 
+open Representation in
+/-- A constant twist `F ⊗ 𝓑_b` of a lisse Weil sheaf is isomorphic to `G` as soon as the twist
+`ρ_F ⊗ b^{deg}` of the Weil fundamental representation of `F` is isomorphic to that of `G`. -/
+theorem nonempty_constantTwist_iso_of_linearEquiv (hM : M.IsEquivalenceAt B.t)
+    {F G : WeilSheaf K l X} (hF : F.IsLisse) (hG : G.IsLisse) (b : (PadicAlgCl l)ˣ)
+    (e : LisseMonodromy.StalkSpace B.t (F.toLisse hF) ≃ₗ[PadicAlgCl l]
+      LisseMonodromy.StalkSpace B.t (G.toLisse hG))
+    (he : ∀ w v, e ((D.fundamentalRep M F hF).twist (degreeCharacter D.deg b) w v) =
+      D.fundamentalRep M G hG w (e v)) :
+    Nonempty (F.constantTwist b ≅ G) :=
+  D.nonempty_iso_of_linearEquiv M hM hF hG e fun w v ↦ by
+    rw [fundamentalRep_constantTwist]
+    exact he w v
+
 end WeilData
 
 end FrobeniusBasePoint

@@ -277,6 +277,37 @@ theorem pullbackStalkEquiv_fundamentalRep
       (B.mono_frobAut_comp_pullbackStalkHom M M₀ hc hF hH e hstr)
     simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at this
     exact this
+/-- The underlying sheaf of the Weil sheaf `p^* H` pulled back from the model is `p^* H`. -/
+noncomputable def geometricFiberPullbackCarrierIso {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H) :
+    (WeilSheaf.geometricFiberPullback (k₀ := K) hH).obj.carrier ≅
+      ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H :=
+  Iso.refl _
+
+/-- The Weil structure of `p^* H` is the canonical one, `Fr^* p^* H ≅ (Fr ≫ p)^* H = p^* H`. -/
+lemma adicFrobStr_geometricFiberPullback {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H) :
+    (WeilSheaf.geometricFiberPullback (k₀ := K) hH).adicFrobStr.hom ≫
+        (geometricFiberPullbackCarrierIso hH).hom =
+      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+          (geometricFiberPullbackCarrierIso hH).hom ≫
+        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+          (X ↘ Spec (.of K)).geometricFiberProj).inv.app H ≫
+        (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
+          (X ↘ Spec (.of K)))).hom.app H := by
+  have hstr : (WeilSheaf.geometricFiberPullback (k₀ := K) hH).obj.str.hom =
+      ((ProEtaleWeilSheaf.geometricFiberPullbackFrobeniusIso K l X).app H).hom := by
+    rw [Endofunctor.IsoAlgebra.str_hom]
+    rfl
+  -- stated for a variable isomorphism `α`, so that the kernel does not unfold the concrete one
+  have h {P Q : AdicSheaf l (X ↘ Spec (.of K)).geometricFiber ⥤
+      AdicSheaf l (X ↘ Spec (.of K)).geometricFiber} (α : P ≅ Q) :
+      α.hom.app (WeilSheaf.geometricFiberPullback (k₀ := K) hH).obj.carrier =
+        α.hom.app (((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H) := rfl
+  rw [geometricFiberPullbackCarrierIso, Iso.refl_hom, Category.comp_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, WeilSheaf.adicFrobStr, Iso.trans_hom,
+    Iso.app_hom, hstr, h]
+  simp only [ProEtaleWeilSheaf.geometricFiberPullbackFrobeniusIso, Iso.trans_hom, Iso.app_hom,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
+    Iso.hom_inv_id_app_assoc]
 
 end FrobeniusBasePoint
 
