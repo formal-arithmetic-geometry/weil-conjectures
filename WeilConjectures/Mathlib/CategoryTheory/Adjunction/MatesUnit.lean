@@ -1,19 +1,40 @@
-import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Equivalence
-import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Equivalence
+public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
+
+/-!
+# Units of adjunctions and conjugate isomorphisms
+
+Compatibilities of the units of adjunctions with conjugates (`conjugateIsoEquiv`) and mates of
+natural isomorphisms, for adjunctions transported along equivalences.
+-/
+
+@[expose] public section
 
 open CategoryTheory Functor
 
 namespace CategoryTheory
 
 variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C} (adj₁ : L₁ ⊣ R₁)
+      (adj₂ : L₂ ⊣ R₂)
   (G : A ≌ C) (H : B ≌ D)
 
-/-- The exchange isomorphism `L₁ ⋙ H ≅ G ⋙ L₂` of left adjoints obtained by conjugation from an
-exchange isomorphism `H⁻¹ ⋙ R₁ ≅ R₂ ⋙ G⁻¹` of the right adjoints is characterized by the
-units: its inverse transposes to `G η₁ ≫ d`, for `d : R₁ ⋙ G ≅ H ⋙ R₂` inducing `d'`. -/
-theorem unit_app_comp_map_conjugateIsoEquiv_symm_inv_app (d : R₁ ⋙ G.functor ≅ H.functor ⋙ R₂)
+/-- The exchange isomorphism `L₁ ⋙ H ≅ G ⋙ L₂` of left adjoints obtained by conjugation
+    from an
+exchange isomorphism `H⁻¹ ⋙ R₁ ≅ R₂ ⋙ G⁻¹` of the right adjoints is characterized
+by the
+units: its inverse transposes to `G η₁ ≫ d`,
+for `d : R₁ ⋙ G ≅ H ⋙ R₂` inducing `d'`. -/
+theorem unit_app_comp_map_conjugateIsoEquiv_symm_inv_app (d : R₁ ⋙ G.functor ≅ H.functor ⋙
+R₂)
     (d' : H.inverse ⋙ R₁ ≅ R₂ ⋙ G.inverse)
     (hd' : ∀ b : D, d'.hom.app b = G.unitIso.hom.app (R₁.obj (H.inverse.obj b)) ≫
       G.inverse.map (d.hom.app (H.inverse.obj b) ≫ R₂.map (H.counitIso.hom.app b)))
@@ -51,13 +72,17 @@ section Compose
 
 variable {A B C A' B' C' : Type*} [Category A] [Category B] [Category C] [Category A']
   [Category B'] [Category C']
-  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : B ⥤ C} {R₂ : C ⥤ B} {L₃ : A ⥤ C} {R₃ : C ⥤ A}
-  {L₁' : A' ⥤ B'} {R₁' : B' ⥤ A'} {L₂' : B' ⥤ C'} {R₂' : C' ⥤ B'} {L₃' : A' ⥤ C'}
+  {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : B ⥤ C} {R₂ : C ⥤ B} {L₃ : A ⥤ C} {R₃ : C
+      ⥤ A}
+  {L₁' : A' ⥤ B'} {R₁' : B' ⥤ A'} {L₂' : B' ⥤ C'} {R₂' : C' ⥤ B'} {L₃' : A' ⥤
+      C'}
   {R₃' : C' ⥤ A'}
-  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂')
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃) (adj₁' : L₁' ⊣
+      R₁') (adj₂' : L₂' ⊣ R₂')
   (adj₃' : L₃' ⊣ R₃') (e : L₃ ≅ L₁ ⋙ L₂) (e' : L₃' ≅ L₁' ⋙ L₂')
   {G : A ⥤ A'} {H : B ⥤ B'} {K : C ⥤ C'}
-  (ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H) (ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K) (ν₃ : G ⋙ L₃' ⟶ L₃ ⋙ K)
+  (ν₁ : G ⋙ L₁' ⟶ L₁ ⋙ H) (ν₂ : H ⋙ L₂' ⟶ L₂ ⋙ K) (ν₃ : G ⋙ L₃'
+      ⟶ L₃ ⋙ K)
 
 /-- **Converse of the composition law for mates**: if the mates of exchange transformations
 satisfy the composition law under the conjugate isomorphisms of `e` and `e'`, then the exchange
@@ -66,7 +91,8 @@ theorem app_comp_map_hom_app_of_mateEquiv
     (hm : ∀ c : C, (mateEquiv adj₃ adj₃' ν₃).app c ≫
         (conjugateIsoEquiv adj₃' (adj₁'.comp adj₂') e'.symm).hom.app (K.obj c) =
       G.map ((conjugateIsoEquiv adj₃ (adj₁.comp adj₂) e.symm).hom.app c) ≫
-        (mateEquiv adj₁ adj₁' ν₁).app (R₂.obj c) ≫ R₁'.map ((mateEquiv adj₂ adj₂' ν₂).app c))
+        (mateEquiv adj₁ adj₁' ν₁).app (R₂.obj c) ≫
+            R₁'.map ((mateEquiv adj₂ adj₂' ν₂).app c))
     (a : A) :
     ν₃.app a ≫ K.map (e.hom.app a) =
       e'.hom.app (G.obj a) ≫ L₂'.map (ν₁.app a) ≫ ν₂.app (L₁.obj a) := by
@@ -78,7 +104,8 @@ theorem app_comp_map_hom_app_of_mateEquiv
   have hν₃' (a : A) : ν₃'.app a ≫ K.map (e.hom.app a) =
       e'.hom.app (G.obj a) ≫ L₂'.map (ν₁.app a) ≫ ν₂.app (L₁.obj a) := by
     simp [ν₃', ← K.map_comp]
-  have hm' := mateEquiv_app_comp_conjugateIsoEquiv_hom_app adj₁ adj₂ adj₃ adj₁' adj₂' adj₃' e e'
+  have hm' := mateEquiv_app_comp_conjugateIsoEquiv_hom_app adj₁ adj₂ adj₃ adj₁' adj₂'
+      adj₃' e e'
     ν₁ ν₂ ν₃' hν₃'
   have hmate : mateEquiv adj₃ adj₃' ν₃ = mateEquiv adj₃ adj₃' ν₃' := by
     ext c
@@ -93,14 +120,19 @@ section InverseComp
 variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
   {R₁ : B ⥤ A} {R₂ : D ⥤ C} (G : A ≌ C) (H : B ≌ D)
 
-/-- The components of the exchange isomorphism `H⁻¹ ⋙ R₁ ≅ R₂ ⋙ G⁻¹` induced by an exchange
+/-- The components of the exchange isomorphism `H⁻¹ ⋙ R₁ ≅ R₂ ⋙ G⁻¹` induced by an
+    exchange
 isomorphism `d : R₁ ⋙ G ≅ H ⋙ R₂` and the unit and counit of the equivalences. -/
 lemma inverseCompIso_hom_app (d : R₁ ⋙ G.functor ≅ H.functor ⋙ R₂) (b : D) :
-    ((Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft (H.inverse ⋙ R₁) G.unitIso ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (Functor.associator _ _ _).symm ≪≫
+    ((Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft (H.inverse ⋙ R₁) G.unitIso
+        ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (Functor.associator _ _ _).symm
+          ≪≫
       Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight d _) ≪≫
-      Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight H.counitIso (R₂ ⋙ G.inverse) ≪≫ Functor.leftUnitor _).hom.app b =
+      Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm
+          ≪≫
+      Functor.isoWhiskerRight H.counitIso (R₂ ⋙ G.inverse) ≪≫ Functor.leftUnitor
+          _).hom.app b =
       G.unitIso.hom.app (R₁.obj (H.inverse.obj b)) ≫
         G.inverse.map (d.hom.app (H.inverse.obj b) ≫ R₂.map (H.counitIso.hom.app b)) := by
   simp

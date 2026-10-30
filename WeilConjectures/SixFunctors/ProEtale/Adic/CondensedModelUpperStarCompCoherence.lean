@@ -1,6 +1,22 @@
-import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
-import WeilConjectures.Scratch.C1
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+
+/-!
+# Composition of pullbacks in the two models of ℓ-adic sheaves
+
+The comparison `adicUpperStarCompCondensedModIso` of the pullbacks of the two models is compatible
+with the composition isomorphisms of the pullbacks.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -13,7 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 variable {l : ℕ} [Fact l.Prime] {X Y : Scheme.{u}}
 
 /-- The pullback compatibility of the two models is the mate of the pushforward compatibility. -/
-theorem mateEquiv_adicUpperStarCompCondensedModIso_inv (f : Y ⟶ X) :
+theorem mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (f : Y ⟶ X) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l f)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
       (adicUpperStarCompCondensedModIso l f).inv).natTrans =
@@ -27,7 +43,7 @@ variable {Z : Scheme.{u}}
 
 /-- On underlying abelian sheaves, the composition isomorphism of pushforwards of sheaves of
 `ℚ̄_ℓ`-modules is that of pushforwards of abelian sheaves. -/
-lemma weilCoefficientsForgetAb_map_lowerStarComp_inv_app (g : Z ⟶ Y) (f : Y ⟶ X)
+lemma weilCoefficientsForgetAb_map_lowerStarComp_inv_app_eq (g : Z ⟶ Y) (f : Y ⟶ X)
     (N : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)) :
     (weilCoefficientsForgetAb l X).map ((lowerStarComp (WeilCoefficients.{u} l) g f).inv.app N) =
       (lowerStarComp Ab.{u + 1} g f).inv.app ((weilCoefficientsForgetAb l Z).obj N) := by
@@ -50,7 +66,8 @@ lemma adicLowerStarCompCondensedModIso_hom_app_comp_lowerStarComp_inv_app (g : Z
   apply Mod.hom_ext
   have hinv : ((CondensedRing.lowerStarComp (Profinite.padicAlgClRingObj l) g f).inv.app
       ((adicSheafEquivCondensedMod l Z).functor.obj c)).hom =
-      (lowerStarComp Ab.{u + 1} g f).inv.app ((adicSheafEquivCondensedMod l Z).functor.obj c).X := by
+      (lowerStarComp Ab.{u + 1} g f).inv.app ((adicSheafEquivCondensedMod l Z).functor.obj c).X :=
+          by
     rw [← cancel_epi ((lowerStarComp Ab.{u + 1} g f).hom.app
       ((adicSheafEquivCondensedMod l Z).functor.obj c).X), Iso.hom_inv_id_app,
       ← CondensedRing.lowerStarComp_hom_app_hom, ← Mod.comp_hom', Iso.hom_inv_id_app]
@@ -60,7 +77,7 @@ lemma adicLowerStarCompCondensedModIso_hom_app_comp_lowerStarComp_inv_app (g : Z
     adicLowerStarCompCondensedModIso_hom_app_hom, hinv]
   rw [Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  exact (weilCoefficientsForgetAb_map_lowerStarComp_inv_app g f c.X).symm
+  exact (weilCoefficientsForgetAb_map_lowerStarComp_inv_app_eq g f c.X).symm
 
 /-- **The pullback compatibility of the two models is compatible with composition**. -/
 theorem adicUpperStarCompCondensedModIso_inv_app_comp_map_adicUpperStarComp_hom_app
@@ -79,10 +96,12 @@ theorem adicUpperStarCompCondensedModIso_inv_app_comp_map_adicUpperStarComp_hom_
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) (g ≫ f))
     (adicUpperStarComp l g f) (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) g f)
     _ _ _ (fun c ↦ ?_) M
-  have h₁ := congrArg (fun α ↦ α.app c) (mateEquiv_adicUpperStarCompCondensedModIso_inv (l := l) (g ≫ f))
+  have h₁ := congrArg (fun α ↦ α.app c)
+      (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) (g ≫ f))
   have h₂ := congrArg (fun α ↦ α.app ((g)_*ᵃ[l].obj c))
-    (mateEquiv_adicUpperStarCompCondensedModIso_inv (l := l) f)
-  have h₃ := congrArg (fun α ↦ α.app c) (mateEquiv_adicUpperStarCompCondensedModIso_inv (l := l) g)
+    (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) f)
+  have h₃ := congrArg (fun α ↦ α.app c)
+      (mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (l := l) g)
   have ho : conjugateIsoEquiv (adicUpperStarLowerStarAdjunction l (g ≫ f))
       ((adicUpperStarLowerStarAdjunction l f).comp (adicUpperStarLowerStarAdjunction l g))
       (adicUpperStarComp l g f).symm = (adicLowerStarComp l g f).symm := by

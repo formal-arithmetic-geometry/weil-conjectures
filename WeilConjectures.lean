@@ -10170,6 +10170,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesUnit
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
@@ -12989,6 +12990,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerTopology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGaloisTrace
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
@@ -13217,6 +13222,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UniversalCoverTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStarFrobeniusCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.WeaklyEtaleLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModConstantRingSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowAbSheafCokernel
@@ -13888,6 +13894,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.K
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionCounit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionsGalois
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
@@ -14600,6 +14607,8 @@ public import WeilConjectures.TraceFormula.WeilDistTriang
 public import WeilConjectures.TraceFormula.WeilDistTriangHomology
 public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
 public import WeilConjectures.TraceFormula.WeilDistTriangTrace
+public import WeilConjectures.TraceFormula.WeilIdentityStalk
+public import WeilConjectures.TraceFormula.WeilIdentityStalkTrace
 public import WeilConjectures.TraceFormula.WeilIdentityStructure
 public import WeilConjectures.TraceFormula.WeilScalarUnit
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar

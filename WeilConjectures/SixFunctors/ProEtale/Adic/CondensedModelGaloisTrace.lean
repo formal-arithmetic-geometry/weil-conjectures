@@ -1,9 +1,26 @@
-import WeilConjectures.Scratch.C5
-import WeilConjectures.WeilObject.Sheaf.EndTensorUnitTrace
-import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelPointTrace
-import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
-import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedSection
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelSections
+public import WeilConjectures.WeilObject.Sheaf.EndTensorUnitTrace
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelPointTrace
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedSection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
+
+/-!
+# The trace of the Galois action at a separably closed point in the two models
+
+The categorical trace of the Galois action `x^* M ⟶ σ^* x^* M ≅ x^* M` on a module object,
+followed by a scalar `c`, is `c` times the trace of the Galois action on the global sections
+`Γ(x^* H)` of the corresponding ℓ-adic sheaf.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -17,7 +34,8 @@ variable {l : ℕ} [Fact l.Prime]
 
 /-- The pullback commutes with the multiplication by a scalar. -/
 lemma adicUpperStar_map_smul {X Z : Scheme.{u}} (g : Z ⟶ X) (c : ULift.{u + 1} (PadicAlgCl l))
-    (M : AdicSheaf l X) : (g)^*ᵃ[l].map (AdicSheaf.smul c M) = AdicSheaf.smul c ((g)^*ᵃ[l].obj M) :=
+    (M : AdicSheaf l X) : (g)^*ᵃ[l].map (AdicSheaf.smul c M) = AdicSheaf.smul c ((g)^*ᵃ[l].obj
+        M) :=
   Mod.hom_ext _ _ (by
     rw [adicUpperStar_map_hom, AdicSheaf.smul_hom, AdicSheaf.smul_hom, Functor.map_smul,
       CategoryTheory.Functor.map_id]
@@ -39,7 +57,8 @@ lemma galoisGlobalSections_globalSectionOfModHom {S X : Scheme.{u}} (σ : S ⟶ 
       globalSectionOfModHom (adicUpperStarSectionMap σ x h H v) := by
   rw [galoisGlobalSections, ModuleCat.hom_comp, LinearMap.comp_apply,
     globalSectionsToUpperStar_globalSectionOfModHom, adicUpperStarSectionMap,
-    ← Category.assoc, globalSectionOfModHom_comp ((adicUpperStarUnitIso l σ).inv ≫ (σ)^*ᵃ[l].map v)]
+    ← Category.assoc,
+        globalSectionOfModHom_comp ((adicUpperStarUnitIso l σ).inv ≫ (σ)^*ᵃ[l].map v)]
   rfl
 
 end AlgebraicGeometry.ProEtale
@@ -69,7 +88,8 @@ variable {l : ℕ} [Fact l.Prime]
 lemma adicSheafEquivCondensedModTensorUnitIso_eq (X : Scheme.{u}) :
     adicSheafEquivCondensedModTensorUnitIso l X = adicSheafEquivCondensedModUnitIso l X :=
   Iso.ext (Mod.hom_ext _ _ (by
-    rw [adicSheafEquivCondensedModTensorUnitIso_hom_hom, adicSheafEquivCondensedModUnitIso_hom_hom]))
+    rw [adicSheafEquivCondensedModTensorUnitIso_hom_hom,
+        adicSheafEquivCondensedModUnitIso_hom_hom]))
 
 /-- The image of the multiplication by `c` on `ℚ̄_ℓ` at a separably closed point is the scalar
 `c` on the unit. -/
@@ -89,7 +109,8 @@ lemma condensedSectionOfAdicSection_smul_comp (Ω : Type u) [Field Ω] [IsSepClo
     {T : Scheme.{u}} (x : Spec (.of Ω) ⟶ T) (H : AdicSheaf l T) (c : PadicAlgCl l)
     (v : AdicSheaf.unit l (Spec (.of Ω)) ⟶ (x)^*ᵃ[l].obj H) :
     condensedSectionOfAdicSection x H (AdicSheaf.smul (ULift.up c) _ ≫ v) =
-      CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c ≫ condensedSectionOfAdicSection x H v := by
+      CondensedRing.scalarEndRingHom l (Spec (.of Ω)) c ≫
+          condensedSectionOfAdicSection x H v := by
   rw [← adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_smul_comp_hom,
     condensedSectionOfAdicSection, condensedSectionOfAdicSection, Functor.map_comp]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
@@ -97,7 +118,8 @@ lemma condensedSectionOfAdicSection_smul_comp (Ω : Type u) [Field Ω] [IsSepClo
 lemma condensedSectionOfAdicSection_comp_map {S T : Scheme.{u}} (x : S ⟶ T) {H H' : AdicSheaf l T}
     (g : H ⟶ H') (v : AdicSheaf.unit l S ⟶ (x)^*ᵃ[l].obj H) :
     condensedSectionOfAdicSection x H v ≫
-        (x)^*⟦Profinite.padicAlgClRingObj l⟧.map ((adicSheafEquivCondensedMod l T).functor.map g) =
+        (x)^*⟦Profinite.padicAlgClRingObj l⟧.map ((adicSheafEquivCondensedMod l T).functor.map
+            g) =
       condensedSectionOfAdicSection x H' (v ≫ (x)^*ᵃ[l].map g) := by
   have n := (adicUpperStarCompCondensedModIso l x).hom.naturality g
   rw [Functor.comp_map, Functor.comp_map] at n
@@ -111,7 +133,8 @@ lemma globalSectionOfModHom_add {Z : Scheme.{u}} {M : AdicSheaf l Z}
   erw [Mod.add_hom, Functor.map_add]
   rfl
 
-/-- The global section `v(1)` of `v : ℚ̄_ℓ ⟶ M`, as an element of the `ℚ̄_ℓ`-vector space of global
+/-- The global section `v(1)` of `v : ℚ̄_ℓ ⟶ M`,
+as an element of the `ℚ̄_ℓ`-vector space of global
 sections. -/
 noncomputable def adicGlobalSectionOfHom {Z : Scheme.{u}} {M : AdicSheaf l Z}
     (v : AdicSheaf.unit l Z ⟶ M) : (adicGlobalSectionsModule l Z).obj M :=
@@ -119,7 +142,8 @@ noncomputable def adicGlobalSectionOfHom {Z : Scheme.{u}} {M : AdicSheaf l Z}
 
 lemma adicGlobalSectionOfHom_comp_smul {Z : Scheme.{u}} {M : AdicSheaf l Z}
     (v : AdicSheaf.unit l Z ⟶ M) (c : PadicAlgCl l) :
-    adicGlobalSectionOfHom (v ≫ AdicSheaf.smul (ULift.up c) M) = c • adicGlobalSectionOfHom v := by
+    adicGlobalSectionOfHom (v ≫
+    AdicSheaf.smul (ULift.up c) M) = c • adicGlobalSectionOfHom v := by
   rw [adicGlobalSectionOfHom, globalSectionOfModHom_comp]
   exact LinearMap.congr_fun (adicGlobalSections_map_smul Z c M) _
 
@@ -130,7 +154,8 @@ noncomputable def galoisUpperStarEnd {Ω : Type u} [Field Ω] [IsSepClosed Ω] {
     (τ : (σ)^*⟦Profinite.padicAlgClRingObj l⟧ ≅ 𝟭 _)
     (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj l) X)) (f : M ⟶ M) :
-    (x)^*⟦Profinite.padicAlgClRingObj l⟧.obj M ⟶ (x)^*⟦Profinite.padicAlgClRingObj l⟧.obj M :=
+    (x)^*⟦Profinite.padicAlgClRingObj l⟧.obj M ⟶ (x)^*⟦Profinite.padicAlgClRingObj
+        l⟧.obj M :=
   τ.inv.app
       ((x)^*⟦Profinite.padicAlgClRingObj l⟧.obj M) ≫
     (CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) σ x).inv.app M ≫
@@ -139,9 +164,11 @@ noncomputable def galoisUpperStarEnd {Ω : Type u} [Field Ω] [IsSepClosed Ω] {
 
 /-- **The local trace of a scaled Galois action in the two models.** -/
 theorem endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd {Ω : Type u} [Field Ω]
-    [IsSepClosed Ω] {X : Scheme.{u}} (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X)
+    [IsSepClosed Ω] {X : Scheme.{u}} (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω)
+        ⟶ X)
     (h : σ ≫ x = x) (τ : (σ)^*⟦Profinite.padicAlgClRingObj l⟧ ≅ 𝟭 _)
-    (hτ : τ.inv.app 𝟙ₘ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj l⟧).hom)
+    (hτ : τ.inv.app 𝟙ₘ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj
+        l⟧).hom)
     (H : AdicSheaf l X) {r : ℕ}
     (eH : (x)^*ᵃ[l].obj H ≅ ⨁ fun _ : Fin r ↦ AdicSheaf.unit l (Spec (.of Ω)))
     (c : PadicAlgCl l) :
@@ -166,7 +193,8 @@ theorem endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd {Ω : Type u} [Fie
       Module.finite_of_finrank_eq_succ h1
     have : ∀ j : Fin r, Module.Finite (PadicAlgCl l)
         (((adicGlobalSectionsModule l (Spec (.of Ω))).obj ∘
-          fun _ ↦ AdicSheaf.unit l (Spec (.of Ω))) j) := fun _ ↦ inferInstanceAs (Module.Finite _
+          fun _ ↦ AdicSheaf.unit l (Spec (.of Ω))) j) := fun _ ↦ inferInstanceAs
+              (Module.Finite _
           ((adicGlobalSectionsModule l (Spec (.of Ω))).obj (AdicSheaf.unit l (Spec (.of Ω)))))
     exact Module.Finite.equiv (((adicGlobalSectionsModule l (Spec (.of Ω))).mapIso eH ≪≫
       (adicGlobalSectionsModule l (Spec (.of Ω))).mapBiproduct _ ≪≫
@@ -219,7 +247,8 @@ theorem endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd {Ω : Type u} [Fie
     reassoc_of% (CondensedRing.comp_inv_app_comp_upperStarComp_inv_app_eq_upperStarSectionMap l σ x
       h τ hτ _
       (condensedSectionOfAdicSection x H v)),
-    ← condensedSectionOfAdicSection_adicUpperStarSectionMap, condensedSectionOfAdicSection_comp_map,
+    ← condensedSectionOfAdicSection_adicUpperStarSectionMap,
+        condensedSectionOfAdicSection_comp_map,
     adicUpperStar_map_smul, ← AdicSheaf.smul_comp, condensedSectionOfAdicSection_smul_comp]
 
 end AlgebraicGeometry.ProEtale

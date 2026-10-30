@@ -1,6 +1,22 @@
-import WeilConjectures.Scratch.C2
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
-import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalars
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalars
+
+/-!
+# Pullbacks of the unit in the two models of ℓ-adic sheaves
+
+The comparison of the pullbacks of the two models is compatible with the identifications `g^*
+ℚ̄_ℓ ≅ ℚ̄_ℓ` of the units.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -40,7 +56,8 @@ noncomputable def adicSheafEquivCondensedModTensorUnitIso :
 
 variable {l X} {Y : Scheme.{u}}
 
-/-- The adjoint `ℚ̄_ℓ,X ⟶ f_* ℚ̄_ℓ,Y` of the unit comparison of the pullback of `ℓ`-adic sheaves is
+/-- The adjoint `ℚ̄_ℓ,X ⟶ f_* ℚ̄_ℓ,Y` of the unit comparison of the pullback of
+`ℓ`-adic sheaves is
 the canonical morphism. -/
 lemma adicUpperStarLowerStarAdjunction_unit_app_unit_comp_map_adicUpperStarUnitIso_hom_hom
     (f : Y ⟶ X) :
@@ -59,7 +76,8 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
       (adicSheafEquivCondensedMod l Y).functor.map (adicUpperStarUnitIso l f).hom ≫
       (adicSheafEquivCondensedModTensorUnitIso l Y).hom =
       (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f)).inv := by
-  have nat := (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f).unit.naturality
+  have nat := (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
+      f).unit.naturality
     (adicSheafEquivCondensedModTensorUnitIso l X).inv
   have U := unit_app_comp_map_conjugateIsoEquiv_symm_inv_app (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
@@ -106,7 +124,8 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
           (f)_*ᵃ[l].map (adicUpperStarUnitIso l f).hom).hom := rfl
   have h₃ : (adicSheafEquivCondensedModTensorUnitIso l Y).hom.hom =
       (condensedRingObjIsoForgetAb l Y).inv := rfl
-  rw [h₁, h₂, h₃, adicUpperStarLowerStarAdjunction_unit_app_unit_comp_map_adicUpperStarUnitIso_hom_hom,
+  rw [h₁, h₂, h₃,
+      adicUpperStarLowerStarAdjunction_unit_app_unit_comp_map_adicUpperStarUnitIso_hom_hom,
     ]
   erw [Category.id_comp]
   rw [← Category.assoc, ← condensedPushforwardHom_comp_map_condensedRingObjIsoForgetAb_hom,

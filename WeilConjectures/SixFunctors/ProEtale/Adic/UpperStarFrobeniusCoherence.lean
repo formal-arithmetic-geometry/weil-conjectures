@@ -1,5 +1,21 @@
-import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
-import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
+
+/-!
+# Coherences of ℓ-adic pullbacks along squares
+
+Coherences of the composition isomorphisms of ℓ-adic pullbacks for endomorphisms `g` with `g ≫
+p = p` and squares `τ ≫ s = s ≫ g`.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -120,14 +136,17 @@ lemma adicUpperStarCongr_hom_app_comp_adicUpperStarComp_inv_app {X Z Z' : Scheme
 `g ≫ p = p`, through the identifications `g^* p^* ≅ p^*` and `s^* p^* ≅ x^*`, is the pullback
 along `τ` for `τ ≫ x = x`. -/
 lemma adicUpperStarComp_coherence_of_square {P Y Z : Scheme.{u}} (τ : P ⟶ P) (s : P ⟶ Y)
-    (g : Y ⟶ Y) (p : Y ⟶ Z) {x : P ⟶ Z} (hτ : τ ≫ s = s ≫ g) (hg : g ≫ p = p) (hx : s ≫ p = x)
+    (g : Y ⟶ Y) (p : Y ⟶ Z) {x : P ⟶ Z} (hτ : τ ≫ s = s ≫ g) (hg : g ≫
+        p = p) (hx : s ≫ p = x)
     (hτx : τ ≫ x = x) (M : AdicSheaf l Z) :
     (adicUpperStarComp l τ s).inv.app ((p)^*ᵃ[l].obj M) ≫
         (adicUpperStarCongr l hτ).hom.app ((p)^*ᵃ[l].obj M) ≫
         (adicUpperStarComp l s g).hom.app ((p)^*ᵃ[l].obj M) ≫
-        (s)^*ᵃ[l].map ((adicUpperStarComp l g p).inv.app M ≫ (adicUpperStarCongr l hg).hom.app M) ≫
+        (s)^*ᵃ[l].map ((adicUpperStarComp l g p).inv.app M ≫
+            (adicUpperStarCongr l hg).hom.app M) ≫
         (adicUpperStarComp l s p).inv.app M ≫ (adicUpperStarCongr l hx).hom.app M =
-      (τ)^*ᵃ[l].map ((adicUpperStarComp l s p).inv.app M ≫ (adicUpperStarCongr l hx).hom.app M) ≫
+      (τ)^*ᵃ[l].map ((adicUpperStarComp l s p).inv.app M ≫
+          (adicUpperStarCongr l hx).hom.app M) ≫
         (adicUpperStarComp l τ x).inv.app M ≫ (adicUpperStarCongr l hτx).hom.app M := by
   simp only [Functor.map_comp, Category.assoc]
   rw [

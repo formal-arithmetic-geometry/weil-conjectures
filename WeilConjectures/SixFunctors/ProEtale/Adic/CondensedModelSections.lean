@@ -1,5 +1,22 @@
-import WeilConjectures.Scratch.C3
-import WeilConjectures.Scratch.C4
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionsGalois
+
+/-!
+# Global sections of pullbacks in the two models of ℓ-adic sheaves
+
+Morphisms `ℚ̄_ℓ ⟶ x^* H` of ℓ-adic sheaves give sections `𝟙 ⟶ x^* (E H)` of module
+objects (`AlgebraicGeometry.ProEtale.condensedSectionOfAdicSection`), compatibly with the pullback
+of sections along `σ` with `σ ≫ x = t`.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -28,7 +45,8 @@ noncomputable def adicUpperStarSectionMap {R : Scheme.{u}} (σ : S ⟶ R) (x : R
     {t : S ⟶ T} (h : σ ≫ x = t)
     (H : AdicSheaf l T) (β : AdicSheaf.unit l R ⟶ (x)^*ᵃ[l].obj H) :
     AdicSheaf.unit l S ⟶ (t)^*ᵃ[l].obj H :=
-  (adicUpperStarUnitIso l σ).inv ≫ (σ)^*ᵃ[l].map β ≫ (adicUpperStarComp l σ x).inv.app H ≫
+  (adicUpperStarUnitIso l σ).inv ≫ (σ)^*ᵃ[l].map β ≫
+      (adicUpperStarComp l σ x).inv.app H ≫
     (adicUpperStarCongr l h).hom.app H
 
 /-- The global sections of the pullback of an `ℓ`-adic sheaf as global sections of the pullback
@@ -37,7 +55,8 @@ noncomputable def condensedSectionOfAdicSection (x : S ⟶ T) (H : AdicSheaf l T
     (β : AdicSheaf.unit l S ⟶ (x)^*ᵃ[l].obj H) :
     𝟙ₘ ⟶ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) x).obj
       ((adicSheafEquivCondensedMod l T).functor.obj H) :=
-  (adicSheafEquivCondensedModTensorUnitIso l S).inv ≫ (adicSheafEquivCondensedMod l S).functor.map β ≫
+  (adicSheafEquivCondensedModTensorUnitIso l S).inv ≫
+      (adicSheafEquivCondensedMod l S).functor.map β ≫
     (adicUpperStarCompCondensedModIso l x).hom.app H
 
 lemma adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_adicUpperStarUnitIso_inv (σ : S ⟶ T) :
@@ -91,12 +110,14 @@ theorem condensedSectionOfAdicSection_adicUpperStarSectionMap {R : Scheme.{u}} (
     (β : AdicSheaf.unit l R ⟶ (x)^*ᵃ[l].obj H) :
     condensedSectionOfAdicSection t H (adicUpperStarSectionMap σ x h H β) =
       CondensedRing.upperStarSectionMap (Profinite.padicAlgClRingObj l) σ h
-        ((adicSheafEquivCondensedMod l T).functor.obj H) (condensedSectionOfAdicSection x H β) := by
+        ((adicSheafEquivCondensedMod l T).functor.obj H) (condensedSectionOfAdicSection x H β) :=
+            by
   rw [condensedSectionOfAdicSection, adicUpperStarSectionMap, condensedSectionOfAdicSection,
     CondensedRing.upperStarSectionMap]
   simp only [Functor.map_comp, Category.assoc]
   rw [map_adicUpperStarCongr_hom_app_comp_adicUpperStarCompCondensedModIso_hom_app,
-    reassoc_of% (map_adicUpperStarComp_inv_app_comp_adicUpperStarCompCondensedModIso_hom_app σ x H),
+    reassoc_of% (map_adicUpperStarComp_inv_app_comp_adicUpperStarCompCondensedModIso_hom_app σ x
+    H),
     ]
   have hn := (adicUpperStarCompCondensedModIso l σ).hom.naturality β
   rw [Functor.comp_map, Functor.comp_map] at hn

@@ -1,4 +1,20 @@
-import WeilConjectures.TraceFormula.StalkFrobeniusOfId
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.TraceFormula.StalkFrobeniusOfId
+
+/-!
+# The Galois action on sections of module objects
+
+The Galois action `x^* M ⟶ σ^* x^* M ≅ (σ ≫ x)^* M = x^* M`, for a trivialization `σ^*
+≅ 𝟭` which is the unit comparison at the unit, pulls back global sections.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -10,13 +26,16 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {S T : Scheme.{u}}
 
-/-- The Galois action `x̄^* M ⟶ σ^* x̄^* M ≅ (σ ≫ x̄)^* M = x̄^* M`, for a trivialization
-`τ : σ^* ≅ 𝟭` which is the unit comparison at the unit, sends a global section to its pullback
+/-- The Galois action `x̄^* M ⟶ σ^* x̄^* M ≅ (σ ≫ x̄)^* M = x̄^* M`,
+for a trivialization
+`τ : σ^* ≅ 𝟭` which is the unit comparison at the unit,
+sends a global section to its pullback
 along `σ`. -/
 lemma comp_inv_app_comp_upperStarComp_inv_app_eq_upperStarSectionMap
     (σ : S ⟶ S) (x : S ⟶ T) (h : σ ≫ x = x)
     (τ : (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
-    (hτ : τ.inv.app 𝟙ₘ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom)
+    (hτ : τ.inv.app 𝟙ₘ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj
+        ℓ⟧).hom)
     (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))
     (v : 𝟙ₘ ⟶ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :

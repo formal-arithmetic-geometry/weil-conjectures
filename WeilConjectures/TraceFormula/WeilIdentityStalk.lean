@@ -1,7 +1,23 @@
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
-import WeilConjectures.WeilObject.Sheaf.Stalk
-import WeilConjectures.TraceFormula.FrobeniusIterate
-import WeilConjectures.TraceFormula.BaseChange.StalkTrace
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
+public import WeilConjectures.WeilObject.Sheaf.Stalk
+public import WeilConjectures.TraceFormula.FrobeniusIterate
+public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
+
+/-!
+# Stalks of Weil sheaves with structure through the identity
+
+Stalks and iterated structures of Weil sheaves for an automorphism `e` with `e.hom.left = 𝟙`,
+whose structure is `(𝟙)^* ≅ 𝟭` followed by an automorphism.
+-/
+
+@[expose] public section
 
 universe u
 
@@ -95,10 +111,13 @@ theorem _root_.CategoryTheory.Iso.powSuccStr_trans_hom_eq_of_pred {C D : Type*} 
       (comp f g).hom.app a ≫ (P f).map (κ g hg).hom ≫ (κ f hf).hom = (κ (f ≫ g) hfg).hom)
     (hcongr : ∀ (g g' : X ⟶ X) (h : g = g') (hg : G g) (hg' : G g'),
       eqToHom (congrArg (fun g ↦ (P g).obj a) h) ≫ (κ g' hg').hom = (κ g hg).hom)
-    (β : a ≅ a) (hβ : ∀ (g : X ⟶ X) (hg : G g), (P g).map β.hom ≫ (κ g hg).hom = (κ g hg).hom ≫ β.hom)
-    (he : G e.hom) (hpow : ∀ n : ℕ, G (e.pow (n + 1)).hom) (h1 : G (𝟙 X ≫ e.hom)) (n : ℕ) :
+    (β : a ≅ a) (hβ : ∀ (g : X ⟶ X) (hg : G g),
+        (P g).map β.hom ≫ (κ g hg).hom = (κ g hg).hom ≫ β.hom)
+    (he : G e.hom) (hpow : ∀ n : ℕ,
+        G (e.pow (n + 1)).hom) (h1 : G (𝟙 X ≫ e.hom)) (n : ℕ) :
     (e.powSuccStr P comp (κ e.hom he ≪≫ β) n).hom =
-      (κ (e.pow (n + 1)).hom (hpow n)).hom ≫ @HPow.hPow (End a) ℕ (End a) instHPow β.hom (n + 1) := by
+      (κ (e.pow (n + 1)).hom (hpow n)).hom ≫
+          @HPow.hPow (End a) ℕ (End a) instHPow β.hom (n + 1) := by
   induction n with
   | zero =>
     rw [Iso.powSuccStr_zero, Iso.trans_hom, Iso.trans_hom, eqToIso.hom, ← Category.assoc,
@@ -108,7 +127,8 @@ theorem _root_.CategoryTheory.Iso.powSuccStr_trans_hom_eq_of_pred {C D : Type*} 
     rw [Iso.powSuccStr_succ, Iso.trans_hom, Iso.trans_hom, ih, Iso.app_hom, Functor.mapIso_hom,
       Iso.trans_hom, Functor.map_comp, Category.assoc, ← Category.assoc ((P _).map β.hom),
       hβ, Category.assoc, ← Category.assoc ((P _).map (κ e.hom he).hom),
-      ← Category.assoc ((comp _ _).hom.app a), hκ _ _ (hpow n) he (hpow (n + 1)), _root_.pow_succ,
+      ← Category.assoc ((comp _ _).hom.app a), hκ _ _ (hpow n) he (hpow (n + 1)),
+          _root_.pow_succ,
       End.mul_def]
     rfl
 lemma upperStarComp_hom_app_comp_upperStarIsoIdOfEq_of_eq {Y : Scheme.{u}} {f g h : Y ⟶ Y}
@@ -144,7 +164,8 @@ lemma upperStarComp_hom_app_comp_upperStarIsoIdOfEq_of_eq' {Y : Scheme.{u}} {f g
 lemma upperStarComp_left_eq' {k : Type u} [Field k] {X : Over (Spec (.of k))} (f g : X ⟶ X) :
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left :
       ((f ≫ g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ _) =
-    eqToIso (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) (Over.comp_left _ _ _ f g)) ≪≫
+    eqToIso (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) (Over.comp_left _ _ _ f g))
+    ≪≫
       upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left := by
   rw [eqToIso_refl, Iso.refl_trans]
 
@@ -187,8 +208,10 @@ variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] {T : Scheme.{u}}
 `x̄ : Spec Ω ⟶ T` fixed by `σ`: `x̄^* ≅ x̄^* ⋙ σ^* ≅ (σ ≫ x̄)^* = x̄^*`. -/
 noncomputable def upperStarFixedPointIso (σ : Spec (.of Ω) ⟶ Spec (.of Ω))
     (x : Spec (.of Ω) ⟶ T) (h : σ ≫ x = x) :
-    (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ 𝟭 _ ≅ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).symm ≪≫
+    (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ 𝟭 _ ≅ (x)^*⟦Profinite.padicAlgClRingObj
+        ℓ⟧ :=
+  Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).symm
+      ≪≫
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).symm ≪≫
     upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) h
 
