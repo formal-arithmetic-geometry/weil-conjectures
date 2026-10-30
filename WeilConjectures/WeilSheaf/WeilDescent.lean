@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.WeilDescentConstantField
+public import WeilConjectures.WeilSheaf.WeilDescentGeometricallyConnected
 
 /-!
 # Irreducible lisse Weil sheaves are twists of sheaves on the model
@@ -46,6 +48,8 @@ theorem IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback
     {G : WeilSheaf k₀ l V} (hG : G.IsIrreducibleLisse) :
     ∃ (H : AdicSheaf l V) (hH : IsAdicLisseSheaf H) (b : (PadicAlgCl l)ˣ),
       Nonempty (G ≅ (geometricFiberPullback (k₀ := k₀) hH).constantTwist b) :=
-  sorry
+  hG.exists_iso_constantTwist_geometricFiberPullback_of_constantField
+    fun _ _ _ _ _ _ _ _ _ _ _ hG' ↦
+      hG'.exists_iso_constantTwist_geometricFiberPullback_of_geometricallyConnected
 
 end AlgebraicGeometry.WeilSheaf

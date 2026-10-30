@@ -115,7 +115,7 @@ lemma pieceMap_last_comp_frobenius :
 include hm in
 /-- The decomposition of the pro-étale sheaves on `V̄₀` into the `m + 1` pieces `jᵢ^*`, permuted
 cyclically by the Frobenius pullback. -/
-def cyclicDecomposition :
+abbrev cyclicDecomposition :
     IsoAlgebra.CyclicDecomposition (WeilSheaf.frobeniusPullback k₀ l V)
       (WeilSheaf.frobeniusPullback k' l V) m where
   J i := (pieceMap hc i)^*ᵃ[l]

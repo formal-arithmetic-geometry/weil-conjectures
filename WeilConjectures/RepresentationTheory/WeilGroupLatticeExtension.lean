@@ -9,6 +9,7 @@ public import Mathlib.NumberTheory.Padics.ProperSpace
 public import Mathlib.Topology.UniformSpace.UniformEmbedding
 public import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
 public import WeilConjectures.RepresentationTheory.WeilGroupLattice
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CompactLatticeBasis
 
 /-!
 # Bounded representations of Weil groups extend to the arithmetic fundamental group
@@ -59,12 +60,6 @@ theorem DenseRange.exists_continuous_extend_of_forall_mul_inv_mem {W P Y : Type*
     refine ⟨{p : P × P | p.2 * p.1⁻¹ ∈ O}, ⟨O, hO, fun _ hp ↦ hp⟩, fun p hp ↦ h p.1 p.2 hp⟩
   exact ⟨(he.isDenseInducing hα).extend f,
     (uniformContinuous_uniformly_extend he hα hfu).continuous, uniformly_extend_of_ind he hα hfu⟩
-
-/-- The map `ℤ_ℓ → ℚ̄_ℓ` is continuous. -/
-theorem PadicAlgCl.continuous_algebraMap_padicInt {ℓ : ℕ} [Fact ℓ.Prime] :
-    Continuous (algebraMap ℤ_[ℓ] (PadicAlgCl ℓ)) := by
-  rw [IsScalarTower.algebraMap_eq ℤ_[ℓ] ℚ_[ℓ] (PadicAlgCl ℓ)]
-  exact (continuous_algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)).comp continuous_subtype_val
 
 /-- The congruence ideals `ℓᵏ ℤ_ℓ` of `ℤ_ℓ` are open. -/
 theorem PadicInt.isOpen_span_pow {ℓ : ℕ} [Fact ℓ.Prime] (k : ℕ) :

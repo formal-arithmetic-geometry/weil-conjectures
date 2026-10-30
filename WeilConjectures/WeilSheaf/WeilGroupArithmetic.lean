@@ -193,6 +193,7 @@ theorem mem_weilGroup_frobAut
     simp only [pointOfFiber, Category.assoc] at key
     simp [-constantCover_obj_hom, arithmeticFrobenius, constantCoverIso, key]
 
+omit [GeometricallyConnected (X ↘ Spec (CommRingCat.of K))] in
 /-- `geomAut` is the map of fundamental groups induced by the base change isomorphism
 `F_t ∘ p^* ≅ F_{t ≫ p}`, for any (small) fundamental group `G'` of the fibre functor at `t`. -/
 lemma geomAut_eq_fundamentalGroupMap [ConnectedSpace (X ↘ Spec (.of K)).geometricFiber]
@@ -213,7 +214,7 @@ lemma geomAut_eq_fundamentalGroupMap [ConnectedSpace (X ↘ Spec (.of K)).geomet
   rw [toAutMulEquiv_apply, toAut_hom_app_apply, fundamentalGroupMap_smul, hg, geomAut_apply]
   simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
-  simp only [← ConcreteCategory.comp_apply, Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [← ConcreteCategory.comp_apply, Iso.hom_inv_id_app_assoc]
   exact ConcreteCategory.comp_apply _ _ _
 
 /-- The image of `π₁(X, t)` in `π₁(X₀, t ≫ p)` acts trivially on the constant covers, for a
@@ -269,8 +270,8 @@ lemma nonempty_fiber_constantCover {X₀ : Scheme.{u}} (p : X₀ ⟶ Spec (.of K
     [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X₀) (L : Type u) [Field L] [Algebra K L]
     [Module.Finite K L] [Algebra.Etale K L] :
     Nonempty ((fiber s).obj (constantCover p (FiniteEtaleAlgebra.of L))) := by
-  letI : Algebra K Ω := (baseRingHom p s).toAlgebra
-  haveI : Algebra.IsAlgebraic K L := Algebra.IsAlgebraic.of_finite K L
+  let : Algebra K Ω := (baseRingHom p s).toAlgebra
+  have : Algebra.IsAlgebraic K L := Algebra.IsAlgebraic.of_finite K L
   let ψ : L →ₐ[K] Ω := IsAlgClosed.lift
   exact ⟨(fiberConstantCoverEquiv p s _).symm ⟨ψ.toRingHom, RingHom.ext fun k ↦ ψ.commutes k⟩⟩
 
@@ -333,6 +334,7 @@ theorem denseRange_arithHom [LocallyOfFiniteType (X ↘ Spec (.of K))]
     MonoidHom.coe_range] at hx
   exact hx
 
+omit [CompactSpace X] [QuasiSeparatedSpace X] in
 /-- **`arithHom` detects the degree modulo `m`**: the stabiliser of a point of the geometric
 fibre of the constant cover `X₀ ×_K Spec L`, `[L : K] = m`, is an open subgroup of
 `π₁(X₀, t ≫ p)`, and an element `w` of the Weil group mapping into it has `m ∣ deg w`, since
@@ -345,15 +347,15 @@ theorem exists_isOpen_dvd_deg
   have := connectedSpace_geometricFiber (K := K) (X := X)
   obtain ⟨G, _, _⟩ := exists_isFundamentalGroup (B.t ≫ (X ↘ Spec (.of K)).geometricFiberProj)
   -- a field extension `L / K` of degree `m` inside `K̄`
-  haveI : Fact (ringChar K).Prime := ⟨CharP.char_is_prime K (ringChar K)⟩
-  haveI : NeZero m := ⟨hm.ne'⟩
+  have : Fact (ringChar K).Prime := ⟨CharP.char_is_prime K (ringChar K)⟩
+  have : NeZero m := ⟨hm.ne'⟩
   let φ : FiniteField.Extension K (ringChar K) m →ₐ[K] AlgebraicClosure K := IsAlgClosed.lift
   set L := φ.fieldRange
   let eL := AlgEquiv.ofInjectiveField φ
-  haveI : Module.Finite K L := Module.Finite.equiv eL.toLinearEquiv
+  have : Module.Finite K L := Module.Finite.equiv eL.toLinearEquiv
   have hL : Module.finrank K L = m :=
     eL.toLinearEquiv.finrank_eq.symm.trans (FiniteField.finrank_extension K _ m)
-  haveI : Algebra.Etale K L :=
+  have : Algebra.Etale K L :=
     ⟨Algebra.FormallyEtale.of_isSeparable K L, Algebra.FinitePresentation.of_finiteType.1
       inferInstance⟩
   -- a point of the geometric fibre of the constant cover
