@@ -1,0 +1,246 @@
+{
+ "id": "det-sp-tower-gamma",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Proof of det-sp-integral-adjunction-bijection, paragraphs *Normalization* (the assertion that f^!_bullet preserves normalized constructible towers) and *Purity* (the tower purity isomorphism gamma_{f,bullet})",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tower orientation and tower purity isomorphism",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$ with algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Derived categories, their shifts and derived tensor products are as in [def-weil-abstract-derived-category, def-weil-derived-tensor]. Use the coefficient tower categories and their normalized constructible subcategories [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers], with finite constructible finite-Tor objects defined in [def-weil-finite-tor-amplitude]. Let $F_\\bullet=Rf_{!,\\bullet}\\dashv G_\\bullet=f^!_\\bullet$ be the adjunction of [det-sp-tower-gluing], with its finite-level units and counits. Let $f^*_\\bullet$ denote finite-coefficient derived pullback level by level [def-weil-derived-pullback-tensor-hom], and use the Tate twists of [def-coefficient-twists-detailed], levelwise on towers. Put $\\omega_{f,\\bullet}=G_\\bullet(\\mathcal O_{E,Y}/\\ell^\\bullet)$.\n\n(1) The diagonal construction of [thm-pur-diagonal-dualizing-object] gives an orientation\n$$a_\\bullet:(\\mathcal O_{E,X}/\\ell^\\bullet)(d)[2d]\\xrightarrow{\\sim}\\omega_{f,\\bullet}$$\nin $D(\\operatorname{Tow}(X,\\mathcal O_E))$, whose level $n\\geq1$ is the finite orientation with coefficients $\\mathcal O_E/\\ell^n$ (the inverse of the finite diagonal isomorphism $\\omega_{f,n}\\simeq(\\mathcal O_E/\\ell^n)_X(d)[2d]$).\n\n(2) For $K_\\bullet\\in\\Dctf(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$, let $t_{K_\\bullet}:f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet}\\to G_\\bullet K_\\bullet$ be the adjoint transpose, under $F_\\bullet\\dashv G_\\bullet$, of the projection-formula composite\n$$F_\\bullet(f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet})\\simeq K_\\bullet\\otimes^L F_\\bullet\\omega_{f,\\bullet}\\xrightarrow{1\\otimes\\varepsilon^\\bullet}K_\\bullet,$$\nwhere the tensor and projection-formula notation is as in [def-exchange-projection]. The composite\n$$\\gamma_{f,\\bullet}(K_\\bullet):f^*_\\bullet K_\\bullet(d)[2d]\\simeq f^*_\\bullet K_\\bullet\\otimes^L(\\mathcal O_{E,X}/\\ell^\\bullet)(d)[2d]\\xrightarrow{1\\otimes a_\\bullet}f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet}\\xrightarrow{t_{K_\\bullet}}G_\\bullet K_\\bullet$$\nis an isomorphism, natural in $K_\\bullet\\in\\Dctf(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$, in $\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$. Its level $n$ is the finite purity comparison $\\gamma_{f,\\mathcal O_E/\\ell^n}(K_n)$ of [def-pur-smooth-purity-map].\n\n(3) Both $F_\\bullet$ and $G_\\bullet$ preserve normalized constructible towers.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.md",
+  "place": "Statement clauses (1)-(3), id det-sp-tower-gamma; clause (2) orientation direction corrected to match the displayed source and target; surrounding unit sk-prop-sp-tower-geometric"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "def-weil-finite-tor-amplitude",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "thm-pur-diagonal-dualizing-object",
+  "def-exchange-projection",
+  "def-pur-smooth-purity-map",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-p1-tensor-derived-coordinates",
+  "def-sp-p1-geometric-coordinates",
+  "def-sp-p1-level-words",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-sp-tower-p1-adjunction-data",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sp-chart-tate-tower-data",
+  "def-sp-coordinate-adjunction-categories",
+  "def-sp-coordinate-tate-tensor-comparisons",
+  "def-sp-coordinate-right-comparisons",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-sp-ordered-tower-orientation for the actual diagonal orientation and finite coefficient-unit squares. Use lem-sp-twisted-pullback-tower-domain on the common Tor interval of each input, transporting it by canonical exact evaluation. Its conclusions supply both source memberships and projection invertibility.",
+   "uses": [
+    "lem-sp-twisted-pullback-tower-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sp-tower-tensor-transpose-evaluation to the fixed orientation. Project its naturality and exact finite gamma square. lem-sp-finite-gamma-evaluation-isIso makes the finite map invertible; cancel the two invertible comparison arrows in the square and use the given ordinary system calculus conservativity to obtain invertibility of the actual tower gamma.",
+   "uses": [
+    "lem-sp-tower-tensor-transpose-evaluation",
+    "lem-sp-finite-gamma-evaluation-isIso",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-sp-tower-normalization-preservation for the two output normalization fields. Assemble every field of the unchanged Purity structure of def-sp-tower-gamma-data, retaining exactly the finite orientations and evaluation equations produced above.",
+   "uses": [
+    "def-sp-tower-gamma-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-twisted-pullback-tower-domain",
+  "lem-sp-tower-tensor-transpose-evaluation",
+  "lem-sp-finite-gamma-evaluation-isIso",
+  "det-sp-tower-shriek-levels",
+  "def-sp-tower-gamma-data",
+  "lem-route-ordered-tower-orientation",
+  "lem-route-tower-normalization-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1)--(3), assembly from ordered orientation, transpose evaluation, finite isomorphy and normalization substeps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tower exceptional pullback purity orientation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.UniversallyOpen.snd, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme; ordinary pullback, scheme base change, or module-sheaf adjunctions; none is tower exceptional smooth purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality extraordinary inverse image smooth morphism orientation on systems of sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; ordinary pullback, scheme base change, or module-sheaf adjunctions; none is tower exceptional smooth purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tower exceptional pullback smooth purity isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.IsFibered.pullbackPullbackIso, ContMDiffVectorBundle.pullback, AlgebraicGeometry.pullbackRestrictIsoRestrict, CategoryTheory.IsPullback.of_iso', AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, CategoryTheory.IsPullback.isoPullback, CategoryTheory.IsPullback.isoPullback_hom_fst_assoc; ordinary pullback, scheme base change, or module-sheaf adjunctions; none is tower exceptional smooth purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity; compiler purity, unrelated to smooth purity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*pullback|smooth.*purity|normalized.*tower|Tate.*twist",
+   "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean; only normalized field traces, not sheaf towers or exceptional inverse images.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*pullback|smooth.*purity|normalized.*tower|Tate.*twist",
+   "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth exceptional pullback on inverse systems of finite torsion sheaves equals shifted twisted pullback",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.pullback, SheafOfModules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.pullbackShiftFunctorZero_inv_app, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth purity orientation on derived towers of finite coefficient sheaves",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, Algebra.Smooth.flat. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality smooth exceptional inverse image Tate twist shifted pullback for coefficient towers",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-adjunction-bijection",
+  "date": "2026-10-16"
+ },
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "det-sp-tower-gamma",
+  "worker": "stage1",
+  "summary": "Q112 repairs the released 2026-10-22 re-split order. Six statement-only unsplit nodes distribute finite coefficient-unit orientation compatibility (old steps 1-2), strict-heart assembly (3), uniform source bounds and projection hypotheses (4-6), actual transpose and evaluation (7), compact-support reduction factorization (9), and exceptional reduction conjugacy (10). Old step 8 remains the short conservativity assembly. Every original argument is retained verbatim in report.md as a work allocation, and the parent statement and route are unchanged.",
+  "blueprint": "Ancestor det-sp-integral-adjunction-bijection, Normalization and Purity paragraphs. Tower-geometric gamma proof (1) is assembled from finite compatibility and strict-heart lifting; (2) from uniform domain checks, actual transpose and finite isomorphy; (3) from the two actual reduction formulas.",
+  "tool_uses": [
+   {
+    "node": "thm-pur-finite-coefficient-smooth-purity",
+    "why": "Supplies precisely finite-level isomorphy, upgraded only after a tower map is constructed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-co-smoothness",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "det-sp-reduction-compatibilities",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-finite-general-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-a7490036f",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a7490036f (reviewer sub-agent of L); spot-checked: Re-split for the 2026-10-22 note. The item statement, stmt_deps and source are byte-identical to the base (10 steps, 10925 characters, reviewed 2026-10-17); live and side-live are unchanged, so no other group has superseded it. Old steps 1-2 → lem-sp-finite-orientation-reduction (a_n=γ(unit) via θ(unit)=1, the reduction-compatibilities(3) square, gluing(3) ρ^ω=c_{n,m}). Step 3 → lem-sp-strict-line-heart-assembly (abstract lift of a compatible shifted line family; true: exact evaluation, single-degree identification, full faithfulness, flat line reduction). Steps 4-6 → lem-sp-twisted-pullback-tower-domain (pullback Tor [a,b], twist/shift [a-2d,b-2d], qcqs, etale-origin witnesses, (2a) projection). Step 7 → lem-sp-tower-tensor-transpose-evaluation (h, t=G(h)η, levels θ and γ, naturality). Step 9 → lem-sp-compact-support-tower-reduction (ρ^{FC}=Rf_!(ρ^C)∘b, bounds [a,b+2d] from tower-bound-uniform). Step 10 → lem-sp-purity-conjugates-tower-reduction (ρ^P, ρ^{GK}=f^!(ρ^K)c, purity square and solved conjugacy). Old step 8 stays as a 467-character conservativity assembly. The six statements are 1805-3025 characters each and none restates a parent clause; the assembly is 5 steps, 2262 characters, each only combining cited conclusions; nothing is shortened. I checked every new statement against the cited statements and blueprint gamma (1)-(3) (main-20261015); edge cases d=0, n=m, ramified e, empty scheme, zero-transition and nonflat quotient. B1-B9 fields are fine: unsplit, own unit, ancestor det-sp-integral-adjunction-bijection, searches recorded, no SGA. Duplicate search: the retagging, purity-mate and trace-purity-comparison nodes cite the item; lem-pur-adic-normalized-purity-lift is integral; lem-pur-finite-diagonal-orientation-reduction (Q72) partly overlaps the orientation square but not the γ(unit) or tower identification, so it is not a duplicate (noted as an alternative ingredient). Batch-5: every flagged edge (gluing, shriek-levels, reduction-direct-image, finite-general-ring, scalar-extension-functor, reduction-compatibilities) was already in the base item's proof_deps. The recomputed closure adds nothing, and the reached trf leaves (unit Leray chain formula, right-fraction dense subcategory, functorial flat resolution) are generic homological lemmas, not trace-formula or Poincaré-duality steps, so all are accepted. Tool use thm-pur-finite-coefficient-smooth-purity is accepted. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerGamma",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerGamma.tower_gamma",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerGamma.lean",
+  "statement": "theorem tower_gamma (D : FiniteFieldDatum.{u}) [CharP D.k D.p] (hne : l ≠ D.p) {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p] [(j ≫ p).IsOver (Spec (.of D.k))] [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ) [SmoothOfRelativeDimension d (j ≫ p)] (w : SpChartAdmissibility.Twists l E X) (hF : ∀ M : SpTowerCalculus.C l E b q X, spConstructibleTorTowers l E Y (q.abelian Y) ((SpTowerCalculus.F l E b o q (factorization j p)).obj M.obj)) (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X) (adj : SpTowerGluing.support l E b o q (factorization j p) hF ⊣ G) (lv : SpTowerGluing.Levels l E b o q (factorization j p) hF G adj) : Nonempty (Purity l E b o q j p d w hF G adj lv)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-25",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerGamma.tower_gamma"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb512467f",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on 440b0088. Lean module byte-identical to the returned head, which was found sound in substance. Only stmt_deps changed: dropped the 5 carrier ids (support-map-compat, pbc integral/finite, finite-proper-exchange, finite-index-splitting); added the 8 def-sp-* owner nodes (tower-p1-adjunction-data, coefficient-tower-shriek-interfaces, chart-tate-tower-data, coordinate-adjunction-categories, coordinate-tate-tensor-comparisons, coordinate-right-comparisons, tower-class-systems, tower-class-coefficients). All 8 are definition nodes on the base and own the declarations the statement uses. Dependency modules withdrawn. lean.statement matches the file verbatim; all declarations present; one sorry. Independent H3 reading: hypotheses no stronger (IsNoetherian and CharP derivable); clause 1 orientation levels pinned by OrientationNormalized/WordComparison; clause 2 gamma = (1⊗a) followed by the real adj.homEquiv transpose of projection/counit, iso and natural on all C_Y, levels = FiniteSmoothPurity.gamma over O_E/l^(n+1) (report explains vs def-pur-smooth-purity-map); clause 3 IsSpNormalizedTower for both adjoints. Existential TensorData pinned by RingedSiteDualityModel symmetry_model/unit_model. Edge cases d=0, n=0 as exponent 1, empty scheme OK. Report sections present. No compile (no file changed); worker reports clean scompile and OK dry run 2ad1a731e80."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-27694",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T202818-L-2755214",
+  "kind": "interface",
+  "note": "independent cc review: published SmoothPurityTowerGamma vs delivered Data module (verbatim apart from removed imports/theorem and one docstring addition) and item (tower_gamma statement byte-identical); 2 sorry nodes vs Purity/FiniteLevels clauses; 35-module sandbox incl. all item and adapted-module importers rc 0"
+ }
+}

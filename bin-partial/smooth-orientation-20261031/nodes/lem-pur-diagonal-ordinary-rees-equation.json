@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-diagonal-ordinary-rees-equation",
+ "kind": "statement",
+ "title": "Fixed-witness diagonal Rees equation",
+ "statement": "For a finite purity setting P, Noetherian X,Y, a separated quasi-compact compactifiable pure-d-smooth map f:X→Y and separated finite-type structure map aY:Y→Spec(P.field.k), let G be the actual closed-diagonal deformation geometry, e a dualizing-to-Tate isomorphism satisfying P.DiagonalOrientationNormalization, κ a normalized section deformation comparison for the diagonal, and sq the canonical Rees-to-symmetric-cone pullback square. Then the displayed finiteSmoothDiagonalFactor/specialization composite equals e followed by bundleSectionAdjoint and normalSectionMap. This is the fixed-witness equation underlying OrientationNormalized.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2), normalized diagonal/Rees/integration comparison"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-dualizing-data",
+  "def-pur-finite-smooth-canonical-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized coordinate counit on the closed diagonal chart. The DNC coordinate identity identifies its specialization with κ, while the vector-bundle chart equation identifies the remaining mate with the inverse normal-section map and the actual integration adjunct. Paste these identities and cancel the invertible locality and integration factors; the empty chart and rank-zero tensor give identities.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-diagonal-ordinary-orientation-normalization",
+    "lem-sp-finite-section-integrated-specialization-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "lem-pur-diagonal-ordinary-orientation-normalization",
+  "lem-sp-finite-section-integrated-specialization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2), normalized diagonal/Rees/integration comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fixed witness Rees equation from diagonal orientation normalization",
+   "results": "No exact geometric match; use the fixed categorical interfaces.",
+   "date": "2026-10-28",
+   "verdict": "No direct theorem; split the geometric equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback coneBundleIso_spec Normalized specialization",
+   "results": "Generic pullback and isomorphism cancellation lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No direct theorem; split the geometric equation."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSmoothDiagonalFactor bundleSectionAdjoint normalSectionMap",
+   "results": "Existing declarations in FiniteSmoothPurityMaps and FiniteRingSectionDeformation.",
+   "date": "2026-10-28",
+   "verdict": "No direct theorem; split the geometric equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryReesNormalization",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-diagonal-ordinary-rees-normalization",
+   "place": "fixed-witness form of the final diagonal/Rees equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryReesEquation",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryReesEquation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalOrdinaryReesEquation",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "statement": "theorem diagonalOrdinaryReesEquation (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (d : ℕ) (f : X ⟶ Y) [HasCompactification f]\n    [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]\n    [SmoothOfRelativeDimension d f]\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (G : Etale.FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (e : Etale.dualizingComplex P.Coefficient f ≅\n      P.diagonalTwistEtale X d)\n    (κ : AlgebraicGeometry.Etale.NoetherianSectionSpecialization.family P.Coefficient\n      (pullback.fst f f) (pullback.diagonal f) ≅\n      (Etale.ordinaryFinitePullback P.Coefficient\n        (AffineSpace (ULift.{u} (Fin 1)) X ↘ X)).obj\n        (AlgebraicGeometry.Etale.sectionInvariant\n          P.Coefficient (pullback.fst f f) (pullback.diagonal f)))\n    (hκ : AlgebraicGeometry.Etale.NoetherianSectionSpecialization.Normalized P.Coefficient\n      (pullback.fst f f) (pullback.diagonal f) (pullback.diagonal_fst f) κ)\n    (sq : IsPullback\n      ((AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison (pullback.diagonal f) ≪≫\n        AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coneBundleIso d\n          (pullback.fst f f) (pullback.diagonal f)).hom)\n      (Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f))\n      (VectorBundleZeroSection.π X d\n        (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)) (𝟙 X))\n    (he : P.DiagonalOrientationNormalization d f aY e) :\n    AlgebraicGeometry.Etale.finiteSmoothDiagonalFactor P.Coefficient f ≫\n      AlgebraicGeometry.Etale.NoetherianSectionSpecialization.specialization P.Coefficient\n        (pullback.fst f f) (pullback.diagonal f) κ =\n      e.hom ≫\n        AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleSectionAdjoint\n          P.diagonalExponent (pow_pos P.coefficients.prime.out.pos P.level)\n          P.Coefficient P.diagonalExponent_annihilates X\n          (P.diagonalExponent_isUnit (f ≫ aY)) d\n          (ConormalGradedAlgebra.piece (pullback.diagonal f) 1) ≫\n        normalSectionMap P.Coefficient d\n          (pullback.fst f f) (pullback.diagonal f)\n          (pullback.diagonal_fst f) sq",
+  "note": "upsync 2026-10-26: after #1694 the étale dualizing complex takes the finite ring directly, so the recorded signature now reads `Etale.dualizingComplex P.Coefficient f` instead of `Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) f`; P.Coefficient was already finite, so the declaration name and the natural-language statement are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T210122-L-1659305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T210122-L-1659305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-route-smooth-trace-representing-unique",
+ "kind": "statement",
+ "title": "The smooth trace normalized by an orientation is the unique representing counit",
+ "statement": "For a prime ell, a positive-characteristic field k with ell invertible, separated finite-type k-schemes X and Y, a morphism f smooth of pure relative dimension d, a bounded constructible coefficient object M on X identified with the shifted Tate twist, a bounded constructible U on Y, and an orientation isomorphism gamma : M -> Rf^! U [sk-def-sfb-dc-upper-shriek], there exists a unique morphism t : Rf_! M -> U whose adjunct under Rf_! -| Rf^! is gamma, and postcomposition with this t gives a bijection Hom(K,M) -> Hom(Rf_! K,U) for every bounded constructible K. The orientation is necessary: without it uniqueness fails, since precomposition with -1 preserves the Hom bijections [lem-pur-geometric-point-trace-not-unique].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace.proof.md",
+  "place": "def-route-smooth-trace, Steps 1--4: finite smooth-purity adjunction, normalized adic reconstruction, and condensed realization of the representing counit"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-geometric-point-trace-not-unique",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof": [
+  {
+   "text": "Take t = epsilon_U o Rf_!(gamma), the counit transpose of gamma. Its adjunct is gamma by the inverse law of the adjunction Hom equivalence, and any other morphism with adjunct gamma equals t by injectivity of that equivalence. For each K, the map a |-> Rf_!(a) o t is the composite of the bijection a |-> a o gamma with the inverse adjunction bijection, hence bijective. This is existsUnique_trace_of_orientation for the chosen adjunction.",
+   "uses": [
+    "lem-pur-representing-trace-classification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-representing-trace-classification",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof_origin": {
+  "by": "maintainer",
+  "date": "2026-10-29",
+  "note": "2026-10-29 maintainer statement correction (coord/changes/smooth-trace-orientation.md): smoothTrace is the blueprint composite eps o Rf_!(gamma_f) of the new orientation smoothOrientation; the unnormalized existsUnique_smoothTrace was false (precompose with -1) and now carries the orientation.",
+  "pruning": {
+   "by": "worker",
+   "group": "D4",
+   "date": "2026-10-29",
+   "note": "Rebased on maintainer correction 54b34df8f73. The public theorem and public imports stay unchanged. Remove the unused private native-reconstruction and open-trace sections and their proof-only imports. The complete proof uses only existsUnique_trace_of_orientation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique compact support trace representing Hom bijections smooth purity",
+   "results": "No smooth-purity or condensed exceptional trace declaration matched.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective (fun a => F.map a ≫ t)",
+   "results": "Only generic adjunction Hom equivalence declarations; no geometric trace constructor.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_smoothTrace|smoothTrace",
+   "results": "No existing condensed trace constructor; finite coefficient smoothTrace is in Sheaf.Paper.SmoothTrace and has a different category.",
+   "date": "2026-10-28",
+   "verdict": "new statement required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SmoothPurity.Defs",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "current blueprint node sk-def-sp-representing-pair (not imported into the DAG): the smooth trace as the unique representing counit",
+   "via": []
+  },
+  "same_as": [],
+  "from_before_20261029": {
+   "node": "def-route-smooth-trace",
+   "via": [],
+   "place": "The representing-pair construction is Step 2--4 of the trace route."
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.SmoothPurity.TraceExistence",
+  "file": "lean/Sheaf/SmoothPurity/TraceExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_smoothTrace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_smoothTrace"
+  ],
+  "statement": "theorem existsUnique_smoothTrace (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (d : ℕ) (_hsm : SmoothOfRelativeDimension d f.left) (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_hM : M.obj ≅ (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d)) (U : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (γ : M ≅ (boundedConstructibleUpperShriek ℓ f).obj U) : ∃! t : (boundedConstructibleLowerShriek ℓ f).obj M ⟶ U, (∀ K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧, Function.Bijective (fun a : K ⟶ M ↦ (boundedConstructibleLowerShriek ℓ f).map a ≫ t)) ∧ (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv M U t = γ.hom",
+  "branch": "sheaf-dag",
+  "by": "maintainer",
+  "date": "2026-10-29",
+  "note": "2026-10-29 maintainer statement correction (coord/changes/smooth-trace-orientation.md): smoothTrace is the blueprint composite eps o Rf_!(gamma_f) of the new orientation smoothOrientation; the unnormalized existsUnique_smoothTrace was false (precompose with -1) and now carries the orientation."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [],
+   "missing": [],
+   "open": []
+  }
+ },
+ "merged_into": null,
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T205753-L-1613179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "C-b322b",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261028T235023-L-2750188",
+  "kind": "interface",
+  "note": "independent cc review: TraceExistence.lean (3 new private conditional reconstruction helpers, privatized native-input/point helpers, local attributes) against node lem-route-smooth-trace-representing-unique, set build (interface identical), scratch #print axioms (sorryAx only via upstream condensed_exceptional_reconstruction/Conclusion.iso/OfCompactificationAdjunction/smoothTrace_nativeSystem)"
+ }
+}

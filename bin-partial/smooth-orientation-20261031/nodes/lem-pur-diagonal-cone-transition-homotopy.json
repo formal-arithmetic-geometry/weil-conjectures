@@ -1,0 +1,103 @@
+{
+ "id": "lem-pur-diagonal-cone-transition-homotopy",
+ "kind": "statement",
+ "title": "Nullhomotopy of a diagonally factored cone transition",
+ "statement": "Let T be a category and A an abelian category, C and D integer cochain complexes in Fun(T,A), alpha:C→D a chain map, and t:m→n a morphism of T. Suppose b:D(m)→C(n) is a chain map such that alpha(m) followed by b is C(t), and b followed by alpha(n) is D(t), in every degree. Form the mapping cone Z of alpha in Fun(T,A), then evaluate. The transition Z(t):Z(m)→Z(n) is nullhomotopic.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E (definition-cone) and 014F (lemma-functorial-cone); explicit off-diagonal homotopy calculation."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use h_i=snd_i at m, followed by b_i and the source inclusion into the cone at n in degree i-1; all other homotopy components are zero. Expand d h+h d with the cone differential. The chain-map identity for b cancels the two mixed terms. The factorization identities replace the two remaining terms by the source and target transitions. The cone decomposition of the identity and naturality identify their sum with the cone transition. These calculations are valid for unbounded complexes and also for zero objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E (definition-cone) and 014F (lemma-functorial-cone); explicit off-diagonal homotopy calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A square of cochain complexes factoring through its diagonal gives a nullhomotopic map of mapping cones",
+   "results": "Homotopy.nullHomotopicMap, nullHomotopy, mappingCone.descHomotopy and liftHomotopy construct homotopies, but no diagonal-factorization theorem was found.",
+   "date": "2026-10-27",
+   "verdict": "Use the explicit cone differential."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of chain maps with a diagonal factorization in both triangles induces a nullhomotopic map on mapping cones",
+   "results": "mappingCone.mapOfHomotopy, descHomotopy and liftHomotopy are generic APIs; no match for evaluated strict cone transitions or ramified scalar pullback.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*Homotopy|proZero|cofinal.*quotient",
+   "results": "Generic mapping-cone and homotopy-equivalence results only. Local searches of both library roots found consumers of pro-zero cones, not the required diagonal for these finite pullback reductions. Blueprint searches for cone transition homotopy and scalar pullback factorization found no matching imported node.",
+   "date": "2026-10-27",
+   "verdict": "No existing specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q3",
+  "item": "Sheaf.Paper.IntegralScalarPullbackConeProZero",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph, compatibility with extension of scalars; the finite-filtration part of the scalar pullback comparison.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pur-integral-scalar-pullback-roos-quasi-iso",
+    "lem-pur-integral-scalar-pullback-cone-pro-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DiagonalConeTransitionHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/DiagonalConeTransitionHomotopy.lean",
+  "declaration": "HomologicalComplex.diagonalConeTransitionHomotopy",
+  "statement": "theorem diagonalConeTransitionHomotopy\n    {T : Type*} [Category T] {A : Type*} [Category A] [Abelian A]\n    {C D : CochainComplex (T ⥤ A) ℤ} (α : C ⟶ D)\n    {m n : T} (t : m ⟶ n)\n    (b : D.asFunctor.obj m ⟶ C.asFunctor.obj n)\n    (h₁ : ∀ i : ℤ, (α.f i).app m ≫ b.f i = (C.X i).map t)\n    (h₂ : ∀ i : ℤ, b.f i ≫ (α.f i).app n = (D.X i).map t) :\n    Nonempty (Homotopy ((mappingCone α).asFunctor.map t) 0)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T064503-L-2188263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T064503-L-2188263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-diagonal-ordinary-realize-restriction",
+ "kind": "statement",
+ "title": "Restriction naturality of ordinary diagonal realization coordinates",
+ "statement": "Fix the finite coefficient datum $P$ of [def-pur-conventions]. Let $f:X\\to Y$ be separated and finite type with a compactification, let $a_Y:Y\\to\\operatorname{Spec}k$ be finite type, and let $d\\ge0$. Let $V^{\\prime}\\subseteq V$ be affine opens of $Y$. Write $j_V:f^{-1}V\\to X$, $j_{V^{\\prime}}:f^{-1}V^{\\prime}\\to X$ and $i:f^{-1}V^{\\prime}\\to f^{-1}V$ for the inclusions. Use the ordinary dualizing object $M$ and ordered Tate object $N=A_X(d)[2d]$ of [def-pur-diagonal-dualizing-data], and exact ordinary restriction $R_j$ and realization $\\operatorname{realize}_V$ of [lem-pur-diagonal-ordinary-chart-lift]. For every isomorphism $b:R_{j_V}M\\cong R_{j_V}N$, let $c:R_iR_{j_V}\\cong R_{j_{V^{\\prime}}}$ be the ordinary open compositor of [lem-pur-degree-zero-derived-map-gluing], and put $b^{\\prime}=c_N\\circ R_i(b)\\circ c_M^{-1}$. With the source-composition map $s$ of [lem-pur-diagonal-orientation-refinement], and the specified pullback and Tate transport of [def-pur-orientation-refinement-comparisons], one has $\\operatorname{realize}_{V^{\\prime}}(b^{\\prime})=\\operatorname{tate}(i,a_Y\\circ V.\\iota\\circ(f|_V),d)\\circ Li^*(\\operatorname{realize}_V(b))\\circ s^{-1}$. Composition in this paragraph has the usual mathematical order: the rightmost factor acts first. This is an identity for arbitrary b; it assumes no smoothness, chart, family, agreement equation or descent assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Combining/canonicity paragraph: base-change compatibility of the canonical factors, specialized to one nested affine restriction"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-ordinary-chart-lift",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-pur-orientation-refinement-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Expand realization. For comparison composition, use the proved comparison_pullback_coherent equation on ordinary sheaves and mapDerivedCategorySquareIso_hom_app_comp to derive it termwise. Naturality of leftDerivedFunctorIsoMapDerivedCategory converts the exact derived pro-etale compositor into leftDerivedUpperStarComp. Substitution of homOfLE_ι gives comparison_openComp. Naturality moves the specified unit conversion and arbitrary ordinary arrow b through this square.",
+   "uses": [
+    "lem-pur-diagonal-ordinary-chart-lift",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the specified Tate transport as the comparison square followed by the exact ordinary ordered Tate pullback. Apply the ordinary nested-open composition identity of lem-pur-ordered-tate-exact-open-composition. Naturality of comparison then proves tate_openComp. This is the only remaining mathematical input: it concerns only the ordered coefficient, not a dualizing object, site comparison or arbitrary arrow.",
+   "uses": [
+    "lem-pur-ordered-tate-exact-open-composition",
+    "def-pur-orientation-refinement-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the desired equality by sourceComposition. Use its naturality on the unit conversion and comparison_openComp on the ordinary source; cancel the ordinary open compositor and use comparison naturality on b. Use tate_openComp and comparison_openComp on the target, cancelling adjacent inverses. The structure maps agree by morphismRestrict_ι.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement",
+    "lem-pur-diagonal-ordinary-chart-lift",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-ordinary-chart-lift",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-ordered-tate-exact-open-composition",
+  "def-pur-orientation-refinement-comparisons",
+  "lem-pur-diagonal-orientation-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Combining/canonicity paragraph: base-change compatibility of the canonical factors, specialized to one nested affine restriction",
+  "group": "Q1",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale derived pullback comparison is coherent with composition and Tate twists",
+   "results": "8 results on module pullback composition and pseudofunctors, and Grothendieck over-category pullbacks. No realization or normalized finite Tate composition statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Use the project comparison/pullback coherence APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso_assoc",
+   "results": "0 results: this identifier is from the adopted project source rather than Mathlib. Project rg found the proved generic composition coherence in MapDerivedCategoryMate.",
+   "date": "2026-10-26",
+   "verdict": "Use the source-library generic coherence; there is no ready realization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationBaseCoefficientPullback|mapDerivedCategoryComparisonUpperStarCompUpperStarIso",
+   "results": "0 Mathlib results. Project rg found the definitions, comparison pullback coherence, and the section-only orderedTateSectionPullback. The latter requires a section retraction and does not apply to an arbitrary nested open inclusion.",
+   "date": "2026-10-26",
+   "verdict": "The remaining identity requires the explicit composition calculation with normalized finite Tate transports."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryOverlap",
+  "date": "2026-10-26",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Combining/canonicity paragraph: base-change compatibility of the canonical factors, specialized to one nested affine restriction",
+   "via": [
+    "lem-pur-diagonal-ordinary-overlap",
+    "lem-pur-diagonal-ordinary-orientation-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryRealizeRestriction",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryRealizeRestriction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.realize_restriction",
+  "statement": "theorem realize_restriction (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (d : ℕ) {V V' : Y.affineOpens} (h : V'.1 ≤ V.1)\n    (b : (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalOrdinaryDualizing f) ≅\n      (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalTwistEtale X d)) :\n    let c := DegreeZeroMapGluing.openComp\n      (fun T : Scheme.{u} ↦ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))\n      (fun {_ _} j ↦ Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) j)\n      (fun {_ _ _} i j ↦ Etale.upperStarComp (ModuleCat.{u + 1} P.Coefficient) i j)\n      X (f.preimage_mono h)\n    realize P f aY d V'\n        ((c.app (P.diagonalOrdinaryDualizing f)).symm ≪≫\n          (restrict P (OrientationRefinement.inclusion f h)).mapIso b ≪≫\n          c.app (P.diagonalTwistEtale X d)) =\n      (OrientationRefinement.sourceComposition P f aY h).symm ≪≫\n        (OrientationRefinement.pull P (OrientationRefinement.inclusion f h)).mapIso\n          (realize P f aY d V b) ≪≫\n        OrientationRefinement.tate P (OrientationRefinement.inclusion f h)\n          ((f ∣_ V.1) ≫ V.1.ι ≫ aY) d",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T002435-L-88184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T070529-L-3606021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

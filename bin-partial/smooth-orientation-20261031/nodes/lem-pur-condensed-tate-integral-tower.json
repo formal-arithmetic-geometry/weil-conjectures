@@ -1,0 +1,272 @@
+{
+ "id": "lem-pur-condensed-tate-integral-tower",
+ "kind": "statement",
+ "title": "Reconstruction of the normalized finite smooth-purity tower",
+ "statement": "Let $\\ell$ be a prime, let $k$ be a field of positive characteristic different from $\\ell$, and let $f:X\\to Y$ be a smooth morphism of pure relative dimension $d$ [def-sbc-smooth-morphisms] between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions]. For $n\\geq1$ put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, let $A_{n,T}$ be its constant sheaf on $T$, and let $A_{n,T}(d)=\\mu_{\\ell^n,T}^{\\otimes_{A_n}d}$ be the $d$-fold roots-of-unity twist [def-pur-roots-of-unity-sheaf]. Form the strict semilinear towers $M_n=A_{n,X}(d)[2d]$ and $L_n=A_{n,Y}$, with transitions the quotient maps (and $u\\mapsto u^\\ell$ on roots of unity). The canonical reductions $M_{n+1}\\otimes^L_{A_{n+1,X}}A_{n,X}\\cong M_n$ and $L_{n+1}\\otimes^L_{A_{n+1,Y}}A_{n,Y}\\cong L_n$ satisfy the quotient cocycle. Let $Rf_n^!$ and $\\gamma_n=\\gamma_{n,A_{n,Y}}:M_n\\xrightarrow{\\sim}Rf_n^!L_n$ be the finite constructible exceptional inverse image and the finite smooth-purity isomorphisms of [lem-pur-finite-smooth-adjunction-general-base], with its coefficient comparisons $c$ satisfying $c\\circ(\\gamma_{n+1}\\otimes^L A_{n,X})=\\gamma_n\\circ\\lambda$. Then the derived limits $M=R\\varprojlim_nM_n$ and $L=R\\varprojlim_nL_n$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit] are objects of the completed integral constructible categories of $X$ and $Y$ with coefficient ring $\\mathbf Z_\\ell$ [def-weil-pbc-bounded-constructible-complete], their canonical reductions are $M_n$ and $L_n$ [def-weil-pbc-adic-coefficient-datum, def-weil-pbc-bounded-constructible-tower, lem-weil-pbc-reconstruction-uniform-tower], and under these identifications the $\\gamma_n$ identify the finite reductions of $M$ with the tower $(Rf_n^!L_n)_n$ and its coefficient comparisons. Every level is concentrated in degree $-2d$ on $X$ and degree $0$ on $Y$, with constructible cohomology, and the finite levels have compatible etale-origin witnesses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.proof.md",
+  "place": "Steps 1-3: normalized finite tower, strict reconstruction and identification of finite reductions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-l-adic-numbers",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-origin-witness",
+  "def-trf-coordinate-counit-arrows",
+  "def-amb-finite-tate-site-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use finiteSmoothAdjunctionGeneralBase for the finite smooth system and compactification. Derive relative quasi-compactness and separatedness by composition. Map the nonzero coefficient prime from the base field into global sections to obtain both unit hypotheses.",
+   "uses": [
+    "lem-pur-finite-smooth-adjunction-general-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizedTateTensorTower on X at d and on Y at zero, retaining the actual strict towers and projection normalization. Identify the empty finite tensor on Y with the coefficient unit using finiteZeroIso.",
+   "uses": [
+    "lem-pur-normalized-tate-tensor-tower",
+    "def-pur-condensed-tate-integral-tower-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each tower apply singleDegreeUniformReconstruction. Its actual counits give complete constructible limits and canonical quotient squares; combine these with the normalized finite-twist and unit squares supplied by the model theorem. Concentration of the finite models and of the retained levels follows directly from finiteModelIso and the explicit single-complex model via Mathlib t-structure vanishing, rather than an additional hypothesis of the normalized-tower result.",
+   "uses": [
+    "lem-pur-single-degree-uniform-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pro-purity reduction square and naturality at unitReduction give the finite gamma square after finitePuritySourceUnitReduction identifies its source edge. Naturality of scalarComparison pastes this square with both reconstruction counit squares. Invertibility, constructibility and concentration follow from finite smooth purity and the invertible counits, producing IdentifiesExceptional.",
+   "uses": [
+    "lem-pur-finite-source-unit-reduction",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "def-pur-condensed-tate-integral-tower-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-normalized-tate-tensor-tower",
+  "def-pur-condensed-tate-integral-tower-data",
+  "lem-pur-single-degree-uniform-reconstruction",
+  "lem-pur-finite-source-unit-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "R1: typed assembly of Steps 1, 6-8 from separate strict tensor model and source unit coherence; complete reconstruction proof from the existing uniform reconstruction API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized inverse system of finite coefficient Tate twists reconstructs an integral l-adic object with canonical reductions",
+   "results": "BDeRhamPlus, InverseSystem.globalEquiv, AdicCompletion.piEquivOfFintype_apply, InverseSystem.invLimEquiv_apply_coe, InverseSystem.pEquivOnLim, InverseSystem.globalEquiv_compatibility, AdicCompletion.pi_apply_coe, AdicCompletion.piEquivFin_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations are generic category, inverse-system, condensed or smooth notions and do not state this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limit, ModuleCat, TensorProduct",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations are generic category, inverse-system, condensed or smooth notions and do not state this node"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseLimit|adic|tensor.*quotient|rootsOfUnity",
+   "results": "Mathlib/Algebra/GroupWithZero/NonZeroDivisors.lean, Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean, Mathlib/Algebra/ContinuedFractions/Computation/CorrectnessTerminating.lean, Mathlib/Algebra/ContinuedFractions/Computation/CorrectnessTerminating.lean, Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/GroupWithZero/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations are generic category, inverse-system, condensed or smooth notions and do not state this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of compatible finite coefficient Tate twist sheaves is complete and has the stated reductions",
+   "results": "InverseSystem.limit, ProfiniteGrp.isIso_toLimit, InverseSystem.piEquivLim.congr_simp, AdicCompletion.subring, InverseSystem.invLimEquiv_symm_apply_coe, instHasLimitsCondensedMod, AlgebraicGeometry.Scheme.Modules.instHasLimits, Profinite.lim",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations are generic category, inverse-system, condensed or smooth notions and do not state this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso",
+   "results": "{\"t\": \"2026-10-17T09:21:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: rejected unqualified IsIso; followed by valid limit/ModuleCat query"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|rootsOfUnity|normalizedTower",
+   "results": "{\"t\": \"2026-10-17T09:21:25Z\", \"tool\": \"grep\", \"query\": \"TateTwist|tateTwist|rootsOfUnity|normalizedTower\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic completion, limit or condensed-module ingredients do not state this pro-etale Tate tower and its reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of finite torsion roots of unity sheaves is an adic Tate line and reduces to its finite levels",
+   "results": "{\"t\": \"2026-10-17T09:21:26Z\", \"tool\": \"leansearch\", \"query\": \"The inverse limit of finite torsion roots of unity sheaves is an adic Tate line and reduces to its finite levels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.subring\", \"ProfiniteGrp.isIso_toLimit\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"AdicCompletion.sumInv_comp_sum\", \"Profinite.lim\", \"Profinite.asLimit\"], \"digest\": \"ee717da2023aaeb2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic completion, limit or condensed-module ingredients do not state this pro-etale Tate tower and its reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of finite coefficient Tate twist sheaves has derived complete integral inverse limit with canonical finite reductions and compatible etale origin",
+   "results": "{\"t\": \"2026-10-17T09:21:36Z\", \"tool\": \"leanfinder\", \"query\": \"A normalized tower of finite coefficient Tate twist sheaves has derived complete integral inverse limit with canonical finite reductions and compatible etale origin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"instCommRingBDeRhamPlus\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"caf54d25ee2a7ca7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic completion, limit or condensed-module ingredients do not state this pro-etale Tate tower and its reductions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, ModuleCat",
+   "results": "{\"t\": \"2026-10-17T09:22:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.limit, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂LinearMapIdObjIsFG\", \"PresheafOfModules.limitPresheafOfModules_obj\", \"PresheafOfModules.limitCone_π_app_app\", \"PresheafOfModules.limitPresheafOfModules_map\"], \"digest\": \"d2c8048d9118e7d9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic completion, limit or condensed-module ingredients do not state this pro-etale Tate tower and its reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of roots of unity give a rank one l-adic local system by inverse limit, and its derived tensor reductions are the finite Tate twists",
+   "results": "{\"t\": \"2026-10-17T09:22:27Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of roots of unity give a rank one l-adic local system by inverse limit, and its derived tensor reductions are the finite Tate twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondAb.ofSheafLightProfinite\", \"LightCondMod.LocallyConstant.functor\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"CondensedMod.LocallyConstant.functor\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"e1b661505b6adcac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic completion, limit or condensed-module ingredients do not state this pro-etale Tate tower and its reductions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "nt-target-smooth-purity-qbar",
+  "date": "2026-10-17",
+  "group": "Q33"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Unit sk-thm-purity-transport Step 2 and thm-pur-adic-reconstruction.proof.md: common bounds and local models for the finite Tate twist of the integral unit, then uniform-tower reconstruction; general-field case required by nt-target-smooth-purity-qbar Step 4",
+   "via": [
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-condensed-tate-integral-tower",
+  "worker": "stage1",
+  "summary": "Constructed the common local model from the existing integral Tate line and balanced quotients, verified K-flatness and all quotient cocycles, applied strict uniform-tower reconstruction and compatible finite-ring etale-origin witnesses. Kept arbitrary positive-characteristic k and completed coefficients. No new nodes or statement corrections.",
+  "blueprint": "Eight steps realize the normalized Tate-unit case of unit sk-thm-purity-transport Step 2 and the common-model/reconstruction sentence of current thm-pur-adic-reconstruction.proof.md. The single rank-one integral local model supplies data not implicit in a general constructible tower. Ancestry remains through nt-target-smooth-purity-qbar; blueprint_refs ancestor prints None, retained without inventing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finiteness needed to type the completed category. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-zl-noether-normalization-field",
+    "why": "Generic normalization for coordinate algebras, used only for finite dimension. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-zl-noether-normalization-dimension",
+    "why": "Generic dimension bound for the completed category domain. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction verifies K-flatness of locally free lines. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of scalar extension. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-reconstruction-uniform-tower",
+    "why": "The reconstruction theorem named in unit Step 2, after its full local-model hypotheses are verified. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The strict total derived limit used in that reconstruction. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic etale origins for arbitrary finite coefficient rings. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "why": "Generic lifting of normalization and cocycles to etale origins. No separate node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Only clause 1 is used: one cover with compatible primitive generators proves the projection-induced identification explicitly. It is a generic Tate-sheaf tool, not a replacement for purity or reconstruction."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Only the completed-ring quotient R/ell^n=A_n is used, to identify actual projections of the Tate line; no equivalence of ambient coefficient categories is taken."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-100a779a2",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-100a779a2 (reviewer sub-agent of L); spot-checked: The mathematics is correct: the statement holds and fits what its parent's Step 4 needs. I read the item, all 23 cited statements (plus the main-20261015 blueprint_update versions of the coefficient datum, bounded tower, completed category and reconstruction nodes), the unit sk-thm-purity-transport Step 2 and thm-pur-adic-reconstruction(.proof).md. Hypotheses checked: Step 1 (Noetherian, finite dimension, Z_ell datum, ell invertible); Step 2 (zeta_n compatibility, R/ell^n=A_n, projection isomorphism); Step 4 (adjoint transition gives the root-power map, three-level cocycle); Step 5 (single stratum, rank-one local model valid under both the old and new tower definitions, finite lisse); Step 6 (reconstruction hypotheses); Step 7 (finite-ring origin and normalized witness hypotheses); Step 8 (finite-adjunction square with lambda equal to the Kummer reduction rho). Small cases tested: d=0, empty X or Y, equal indices, k=F_p(t). No new nodes. No cycle. No duplicate: the only related node is lem-pur-condensed-tate-realization, which assumes this item's conclusion. No SGA source. All 11 tool_uses accepted as generic tools. Two repairs, in fixes/dag/nodes/sec-smooth-purity/lem-pur-condensed-tate-integral-tower.json: (1) Step 3 used (F tensor H)|_U = F|_U tensor H|_U without justification; I wrote out the adjunction argument. (2) Step 7 (E5 compression) asserted membership without moving the witnesses and uniform data from M_n to the coefficient-datum reductions K_n=M tensor^L A_n that def-weil-pbc-bounded-constructible-complete requires; I wrote the transport through the Step 6 isomorphisms kappa_n and added the two definition nodes to that step's uses. Statement, proof_deps and all other fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedTateIntegralTower",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.condensedTateIntegralTower",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.ReconstructionResult",
+   "AlgebraicGeometry.Scheme.PurityIntegralTower.condensedTateIntegralTower"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedTateIntegralTower.lean",
+  "statement": "theorem condensedTateIntegralTower\n    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]\n    (hchar : 0 < ringChar k)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f] :\n    ∃ (hfq : QuasiCompact f) (hfs : IsSeparated f) (c : Compactification f)\n      (hX : IsNoetherian X) (hY : IsNoetherian Y),\n      ReconstructionResult ell f d hfq hfs c hX hY",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "R1: all existing names through IdentifiesExceptional move verbatim to the publicly imported CondensedTateIntegralTowerData, attached to def-pur-condensed-tate-integral-tower-data. ReconstructionResult and the original main theorem stay here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-538466e47",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of 722ef048 (RETURN H2 R1). Only change: stmt_dep lem-amb-finite-tate-site-descent → def-amb-finite-tate-site-comparison-data (existing:true, on base, identical to live; lists finiteTateLimitRootValue/EtaleRootValue/EtalePowerGenerator, the only finiteTate* decls used at l.507-519; no .choose of finite_tate_site_descent) plus a report section. Lean file sha256 identical to 722e (whose H3 repair, hypotheses and edge cases d=0/ell=2/empty were accepted); lean record unchanged; statement verbatim; all 15 stmt_deps live; item not landed elsewhere; Worker report and Second reading by ND present. No file changed, nothing compiled; report records dry run 7231b639e6f clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-pur-condensed-tate-integral-tower plan and new nodes; extracted data module diffed against the old item (bodies identical); the two remaining sorry statements read against FiniteSmoothCoefficientArrows/FiniteSmoothPurityMaps definitions; node proof_deps vs Lean"
+ }
+}

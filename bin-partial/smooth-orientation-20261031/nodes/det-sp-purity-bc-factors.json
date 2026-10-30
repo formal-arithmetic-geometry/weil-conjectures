@@ -1,0 +1,489 @@
+{
+ "id": "det-sp-purity-bc-factors",
+ "blueprint": {
+  "is": "det-sp-purity-bc-factors",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change of the orientation and of the tensor map",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X,Y,Y'$ be separated finite-type $k$-schemes, let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$, and let $v:Y'\\to Y$ be any $k$-morphism [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Put $X'=X\\times_Y Y'$ with projections $u:X'\\to X$, $f':X'\\to Y'$ [def-pc-base-change].\n\nUse either (i) a finite commutative ring $A$ killed by a power of $\\ell$, with the ordinary constant-$A$ pro-etale module derived categories and bounded constructible finite-Tor subcategories of [det-sp-finite-general-ring], or (ii) a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$, $A_n=\\mathcal O_E/\\ell^n$, and the ordinary derived categories of varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian] and their full uniformly bounded constructible finite-Tor subcategories [sk-def-sp-normalized-towers]. No normalization of an input tower is assumed. Write $B$ for $A$ or for the coefficient system $A_\\bullet$, and $\\mathcal C_T(B)$ for the corresponding constructible finite-Tor category. Pullbacks, tensor products, shifts and twists are those of [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor, def-coefficient-twists-detailed], with the finite-$A$ twists specified in [det-sp-finite-general-ring] and tower operations as in [det-sp-tower-shriek-levels]. All tensor products here are ordinary derived tensor products over $B$, not completed tensor products.\n\nLet $F_f=Rf_{!,B}\\dashv G_f=f_B^!$ be the constructible adjunction, and put $\\omega_{f,B}=G_f B_Y$. At finite coefficients use [det-sp-finite-general-ring, def-pur-co-smoothness]; for towers use [det-sp-tower-gluing]. Let $\\beta:v_B^*F_f\\xrightarrow{\\sim}F_{f'}u_B^*$ be compact-support base change and define $e_K:u_B^*G_fK\\to G_{f'}v_B^*K$ to be the adjoint transpose of\n$$v_B^*\\varepsilon_{f,K}\\circ\\beta_{G_fK}^{-1}:F_{f'}u_B^*G_fK\\to v_B^*K.$$\nAt finite coefficients these are the canonical smooth exceptional exchanges of [thm-pur-cohomological-smoothness, def-exchange-projection]; for towers they are those of [det-sp-tower-exceptional-bc]. Identify $v_B^*B_Y=B_{Y'}$ and write $e_1:u_B^*\\omega_{f,B}\\xrightarrow{\\sim}\\omega_{f',B}$ for the unit component. Let $L_{f,B}=B_X(d)[2d]$ and $a_{f,B}:L_{f,B}\\xrightarrow{\\sim}\\omega_{f,B}$ be the inverse of the diagonal orientation: [thm-pur-diagonal-dualizing-object, det-sp-finite-general-ring] at finite coefficients and [det-sp-tower-gamma](1) for towers. Let $t_{f,K}:f_B^*K\\otimes^L\\omega_{f,B}\\to G_fK$ be the transpose of inverse projection formula followed by $1_K\\otimes\\varepsilon_{f,1}$, as in [def-pur-co-smoothness, det-sp-finite-general-ring, det-sp-tower-gamma](2). Define $\\gamma_{f,B}(K)$ by twist reassociation followed by $1\\otimes a_{f,B}$ and $t_{f,K}$, as in [def-pur-smooth-purity-map, det-sp-finite-general-ring, det-sp-tower-gamma]. Then:\n\n1. Under the canonical twist/pullback identification $u_B^*L_{f,B}=L_{f',B}$, one has $e_1\\circ u_B^*a_{f,B}=a_{f',B}$.\n2. For every $K\\in\\mathcal C_Y(B)$, under $u_B^*f_B^*=f_B'^*v_B^*$ and the monoidal pullback comparisons, one has\n$$e_K\\circ u_B^*t_{f,K}=t_{f',v_B^*K}\\circ(1_{f_B'^*v_B^*K}\\otimes e_1).$$\n\nConsequently, with the same source identifications,\n$$e_K\\circ u_B^*\\gamma_{f,B}(K)=\\gamma_{f',B}(v_B^*K).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "node det-sp-purity-bc-factors, order None"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "det-sp-finite-general-ring",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-shriek-levels",
+  "def-pur-co-smoothness",
+  "det-sp-tower-gluing",
+  "thm-pur-cohomological-smoothness",
+  "def-exchange-projection",
+  "det-sp-tower-exceptional-bc",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-tower-gamma",
+  "def-pur-smooth-purity-map",
+  "def-pur-purity-base-change-sources",
+  "def-sp-purity-bc-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "First take $R=\\mathbf Z/\\ell^r$. Put $C_f=\\Delta^*\\omega_{p_1}$. The diagonal exchange cube gives $\\kappa_{f\\prime}\\Delta\\prime{}^*b_{p_1}=e_1u^*\\kappa_f$. The chart normalization identifies the diagonal orientation of the stated dualizing theorem with $\\Pi_f=\\beta_f\\delta_f\\kappa_f^{-1}$; the orientation-charts theorem fixes its affine normalization. DNC invariance makes $\\delta$ natural under arbitrary base change, and vector-bundle purity makes $\\beta$ natural for the same counit-defined exchanges. Substitute these three squares in this composite to obtain $\\Pi_{f\\prime}e_1=u^*\\Pi_f$. Invert the two orientations to obtain clause (1) over $R$.",
+   "uses": [
+    "lem-sp-diagonal-exchange-cube",
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "thm-pur-diagonal-dualizing-object",
+    "det-sp-orientation-charts",
+    "thm-pur-dnc-invariance",
+    "cor-pur-vector-bundle-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(1), diagonal, normalized DNC and vector integration"
+   }
+  },
+  {
+   "text": "For finite $A$, write $c_f:(\\omega_{f,R})_A\\simeq\\omega_{f,A}$. Finite-general-ring gives $\\Pi_{f,A}c_f=(\\Pi_{f,R})_A$, and DNC coefficient transport gives $e_Au^*c_f=c_{f\\prime}(e_R)_A$. Substitute step 1 and cancel $u^*c_f$ to obtain $\\Pi_{f\\prime,A}e_A=u^*\\Pi_{f,A}$, hence clause (1). For towers, gamma (1) and exceptional base change (2) identify every evaluation with that finite square. Conjugate by $a_{f\\prime}$ to an endomorphism of $L_{f\\prime}$. This is a shifted sheaf tower, also after pullback. Full faithfulness of the single-complex functor identifies its endomorphisms with sheaf-tower maps; exact evaluation identifies their components. All components are identities, so the tower map is the identity. This proves (1).",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "lem-pur-dnc-coefficient-transport",
+    "det-sp-tower-gamma",
+    "det-sp-tower-exceptional-bc",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(1), finite scalars and equality of shifted sheaf-tower morphisms"
+   }
+  },
+  {
+   "text": "The ctf pullback-domain lemma puts $v^*K$ and both tensor sources in the restricted adjunction domains. Apply compact-projection base change with $M=\\omega_f$, invert the projection maps, and use tensor symmetry to put $K$ first. These inverse maps are precisely those defining the finite-ring and tower-gamma tensor maps.",
+   "uses": [
+    "lem-sp-proetale-ctf-pullback-domains",
+    "lem-sp-compact-projection-base-change",
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(2), domains and projection/exchange equation"
+   }
+  },
+  {
+   "text": "Transpose under $F_{f\\prime}\\dashv G_{f\\prime}$. The mate counit identity says $\\varepsilon\\prime_{v^*K}F_{f\\prime}(e_K)=v^*\\varepsilon_K\\,\\beta_{G_fK}^{-1}$; for towers this is the specified exceptional base change (2). Naturality of $\\beta$, step 3, and the definition of $t_f$ turn the transpose of $e_Ku^*t_f$ into $(1\\otimes v^*\\varepsilon_1\\beta_{\\omega_f}^{-1})q\\prime(v^*K,u^*\\omega_f)$. Naturality of the primed inverse projection map turns the transpose of $t_{f\\prime}(1\\otimes e_1)$ into the same map, since $\\varepsilon\\prime_1F_{f\\prime}(e_1)=v^*\\varepsilon_1\\beta_{\\omega_f}^{-1}$. Injectivity of the adjunction Hom bijection gives (2).",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "det-sp-tower-exceptional-bc",
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(2), equality of counit transposes"
+   }
+  },
+  {
+   "text": "Expand gamma as twist reassociation, $1\\otimes a_f$, then $t_{f,K}$. Naturality of the pullback/tensor comparison moves $u^*a_f$ next to $e_1$. Substituting clauses (2) and (1) yields exactly $\\gamma_{f\\prime}(v^*K)$.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-tower-gamma",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "final paragraph, composition of the two factors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-diagonal-exchange-cube",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-orientation-charts",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "det-sp-finite-general-ring",
+  "lem-pur-dnc-coefficient-transport",
+  "det-sp-tower-gamma",
+  "det-sp-tower-exceptional-bc",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sp-proetale-ctf-pullback-domains",
+  "lem-sp-compact-projection-base-change",
+  "lem-amb-mate-unit-counit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-route-tower-factor-orientation",
+  "lem-route-tower-factor-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Current proof (1), proof (2), final paragraph; explicit assembly using existing DAG statements, without tower-mate-evaluation-reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal.*(exchange|dualizing)|dualizing.*diagonal",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(torAmplitude|TorAmplitude).*pullback|pullback.*(TorAmplitude|torAmplitude|Constructible)",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*baseChange|baseChange.*projection|projection.*exchange",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*baseChange|baseChange.*purity",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula transformation for compact support commutes with base change",
+   "results": "Hits: IsBaseChange.of_comp, LinearEquiv.baseChange_trans, IsBaseChange.finsuppPow, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk' No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\", \"pullback\"",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal section comparison with the smooth relative dualizing object commutes with base change",
+   "results": "Hits: IsBaseChange.toDualBaseChange, IsBaseChange.dual, Module.Dual.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, Module.Dual.baseChange_baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, IsBaseChange.toDual_apply No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\", \"baseChange\"",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image preserves constructible complexes of finite Tor dimension over a finite constant coefficient ring",
+   "results": "Hits: PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.ConstructibleSetData.map, CategoryTheory.MorphismProperty.inverseImage, PrimeSpectrum.isConstructible_comap_C, PrimeSpectrum.ConstructibleSetData.toSet_map, Topology.IsConstructible.preimage_of_isClosedEmbedding, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.IsPullback",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.Limits.IsPullback' No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth purity isomorphism is compatible with exceptional base change",
+   "results": "Hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.FormallySmooth.respectsIso, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under arbitrary base change of the diagonal section dualizing-object comparison obtained from counit-defined exceptional exchange",
+   "results": "Hits: CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived direct image projection formula commutes with base change for finite coefficients and varying coefficient towers",
+   "results": "Hits: IsBaseChange.finitePow, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, KaehlerDifferential.isBaseChange, KaehlerDifferential.tensorKaehlerEquiv_left_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, Algebra.IsPushout.cancelBaseChange_symm_tmul, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity orientation and exceptional tensor map commute with arbitrary base change in derived categories of coefficient towers",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.tensorKaehlerEquivBase_tmul, KaehlerDifferential.tensorKaehlerEquiv_tmul, Algebra.IsPushout.cancelBaseChange_symm_tmul, KaehlerDifferential.isBaseChange, KaehlerDifferential.tensorKaehlerEquiv_tmul_D, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a bounded constructible finite Tor amplitude complex of sheaves over any finite constant ring is bounded constructible of finite Tor amplitude",
+   "results": "Hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackComp, SheafOfModules.instIsLeftAdjointPullback No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsPullback",
+   "results": "No hits. No hit supplies the stated orientation and exceptional tensor-map identities for finite coefficient sheaves or towers.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*baseChange|baseChange.*purity|dualizing.*baseChange",
+   "results": "No hits. None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth purity orientation and the exceptional tensor counit map commute with arbitrary base change for finite coefficient sheaves and coefficient towers",
+   "results": "Hits: RingHom.IsStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.IsStandardSmooth.baseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, IsBaseChange.finsuppPow None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "Hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth purity orientation and the exceptional tensor counit map commute with arbitrary base change for finite coefficient sheaves and coefficient towers",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv_left_inv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.moduleBaseChange', Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*pullback|exceptional.*base.?change|projection.*baseChange",
+   "results": "No hits. None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "No hits. None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the diagonal relative dualizing orientation and projection formula adjunction mate under pullback in derived sheaf categories",
+   "results": "Hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, CategoryTheory.ExponentiableMorphism.coev_naturality None states both factor identities for exceptional sheaf pullback and the specified orientation.",
+   "date": "2026-10-29",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-sp-tower-exceptional-bc",
+  "det-sp-tower-gamma",
+  "det-sp-orientation-charts",
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "uses_not_cited": [
+  "det-sp-tower-exceptional-bc",
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-29",
+  "item": "det-sp-purity-bc-factors",
+  "worker": "Q44",
+  "summary": "Repaired the released owner-order stage-1 item against latest blueprint d16858b6b. Preserved the statement and statement dependencies because the current local factor statement still explicitly concerns finite rings and ordinary towers. Replaced the previous finite/strict-coordinate factor proof by the current geometric diagonal/DNC/integration argument, finite scalar square and shifted-sheaf tower detection, followed by the projection/counit adjunction calculation. All ingredients already exist; no new nodes. No direct citation is withdrawn. No common-stage, Karoubi, rationalization, adic reconstruction, or general derived-evaluation faithfulness is used. No Lean edits or compilation.",
+  "blueprint": "Proof (1): steps 1-2; proof (2): steps 3-4; final paragraph: step 5. All four current blueprint dependencies occur where their statements are used.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-diagonal-dnc-chart-normalization",
+    "why": "Supplies the actual normalized diagonal assembly, not a new choice of orientation. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "det-sp-orientation-charts",
+    "why": "The current blueprint explicitly uses its affine coordinate normalization. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "thm-pur-diagonal-dualizing-object",
+    "why": "The current blueprint explicitly uses the canonical diagonal dualizing orientation. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "thm-pur-dnc-invariance",
+    "why": "Generic naturality of the normalized section comparison under arbitrary base change. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "Generic integration-normalized vector-bundle base-change square at the unit. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Generic finite-ring orientation scalar normalization and definition of the tensor/purity maps. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-pur-dnc-coefficient-transport",
+    "why": "Generic mixed finite-scalar and geometric exceptional-exchange square. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Current-blueprint input giving the actual tower orientations, transposes and gamma factorization. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "det-sp-tower-exceptional-bc",
+    "why": "Current-blueprint input identifying the actual exchange with the counit transpose and its finite levels. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic natural pullback/tensor isomorphism used to assemble the two factors. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic degree-zero embedding detects equality of shifted sheaf-tower maps; no derived evaluation faithfulness is assumed. No statement of this unit replaces this generic tool."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "The current tower category is abelian and its exact evaluations compute the components of sheaf-tower maps. No statement of this unit replaces this generic tool."
+   },
+   {
+    "node": "lem-amb-mate-unit-counit",
+    "why": "Generic counit characterization of the inverse-compact-support exchange mate. No statement of this unit replaces this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-diagonal-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pur-diagonal-regular-immersion",
+  "thm-pur-dnc-invariance",
+  "lem-pur-dnc-section-geometry",
+  "cor-pur-vector-bundle-purity",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-orientation-charts",
+  "det-sp-finite-general-ring",
+  "lem-pur-dnc-coefficient-transport",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-sp-tower-gamma",
+  "def-coefficient-twists-detailed",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "det-sp-tower-shriek-levels",
+  "def-exchange-projection",
+  "lem-sf-pullback-tor-amplitude",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-gluing",
+  "def-pur-co-smoothness",
+  "def-weil-pbc-adjunction-mate",
+  "def-pur-smooth-purity-map",
+  "fix-lem-exchanges",
+  "sk-lem-sf-flat-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-constructible-sheaf",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-tower-exceptional-bc",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-amb-mate-unit-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-29",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-b80cc273f",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-b80cc273f (reviewer sub-agent of L); spot-checked: Q44 det-sp-purity-bc-factors b80cc273: one commit (item + report), no new nodes. Statement, stmt_deps and tool_uses are byte-identical to the base; proof_deps = union of the step uses; steps total 2580 chars. No cited node is in route-pivot-dropped.txt, so the withdrawn lem-sp-tower-mate-evaluation-reduction is no longer cited. The 4 blueprint dependencies required by the repair note are cited where used. No cycle, no SGA. The steps follow the current blueprint .proof.md one-to-one: (1) geometric = step 1, (1) level-wise = step 2, (2) = steps 3-4, final paragraph = step 5. Checks: step 1, cube 2nd display κ'Δ'^*b_{p1}=e_1u^*κ, with κ_f=α_f because def-pur-co-smoothness(3) β_{f,g} is the counit transpose; chart-normalization/orientation-charts give ϑ=βδα^{-1} globally (X,Y separated); dnc-invariance and vector-bundle base change through the same mate; algebra verified. Step 2, finite-general-ring(1) plus dnc-coefficient-transport e_A u^*c=c'(e_R)_A gives the A case; towers via tower-gamma(1) and exceptional-bc(2) level-wise, then degree-zero full faithfulness in the abelian Tow (coefficient-towers-abelian) and per level: valid, no derived-evaluation faithfulness used. Step 3, ctf-pullback-domains plus compact-projection-base-change inverse form; the PF/β invertibility it needs comes from the cited definitions of t and from exceptional-bc(1). Step 4, lem-amb-mate-unit-counit with α=β^{-1}; both transposes expanded and equal to (1⊗v^*ε_1β_ω^{-1})PF'^{-1}. Step 5, γ by naturality of the tensor/pullback comparison. Edge cases: d=0, v=id, nonflat v, zero ring, ramified E, non-normalized towers. Batch-5 check: all 6 flagged citations are smooth-purity nodes that neither assumption gives (PD takes purity as a stmt_dep input). The trf nodes reached (def-trf-finite-pullback-coordinate-comparison, lem-trf-smooth-section-centred-coordinates, lem-trf-etale-shifted-line-normalized-descent, lem-trf-site-functorial-flat-resolution) are general definitions and lemmas, not steps of the Lefschetz formula. The item's unchanged stmt_deps already reach the same 700 trf/PD-chapter nodes. No new closure reaches thm-trf-grothendieck-lefschetz-qbar, sk-thm-trace-transport, sk-thm-sf-verdier-exchange or the assumption leaves. Report inaccuracy only: 'No direct citation is withdrawn' is false (6 old proof_deps dropped, as the repair intended). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityBaseChangeFactors",
+  "declaration": "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.finite_factors",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.finite_factors",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.tower_factors"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityBaseChangeFactors.lean",
+  "statement": "theorem finite_factors (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (_hne : ell ≠ D.p) (X Y Y' : Over (Spec (.of D.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsNoetherian X.left] [IsNoetherian Y.left] (f : X ⟶ Y) (v : Y' ⟶ Y) (d : ℕ) [IsSeparated f.left] [QuasiCompact f.left] [HasCompactification f.left] [SmoothOfRelativeDimension d f.left] [IsNoetherian (pullback f.left v.left)] (n : ℕ) (hn : 1 ≤ n) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ell ^ n : ℕ) : A) = 0) (g : Etale.FiniteRingSectionDeformation.Geometry d (pullback.fst f.left f.left) (pullback.diagonal f.left)) (g' : Etale.FiniteRingSectionDeformation.Geometry d (pullback.fst (pullback.snd f.left v.left) (pullback.snd f.left v.left)) (pullback.diagonal (pullback.snd f.left v.left))) (hX : IsUnit ((ell ^ n : ℕ) : Γ(X.left, ⊤))) (hX' : IsUnit ((ell ^ n : ℕ) : Γ(pullback f.left v.left, ⊤))) (alpha : Etale.dualizingComplex A f.left ≅ Etale.FiniteSmoothPurity.line A (ell ^ n) hA X.left d) (alpha' : Etale.dualizingComplex A (pullback.snd f.left v.left) ≅ Etale.FiniteSmoothPurity.line A (ell ^ n) hA (pullback f.left v.left) d) (_ha : Etale.FiniteSmoothPurity.OrientationNormalized A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA f.left d g hX alpha) (_ha' : Etale.FiniteSmoothPurity.OrientationNormalized A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA (pullback.snd f.left v.left) d g' hX' alpha') : (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.ordinaryFinitePullback A (pullback.fst f.left v.left)).map alpha.inv ≫ Etale.dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f.left v.left)) = (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.vectorIntegrationBaseCoefficientPullback A (ell ^ n) hA (PurityFiniteSetting.purityTwistTransport A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA) (pullback.fst f.left v.left) hX d).hom ≫ alpha'.inv) ∧ ∀ K : Etale.DerivedCategoryModule A Y.left, Etale.FiniteSmoothPurity.IsCtf A Y.left ((Etale.FiniteSmoothPurity.comparison A Y.left).obj K) → (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.ordinaryFinitePullback A (pullback.fst f.left v.left)).map (Etale.smoothTensorDualityMap A f.left (Etale.isIso_projectionMap_of_finite A f.left) K) ≫ (Etale.rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f.left v.left)).app K) = (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) (pullback.fst f.left v.left) ((Etale.ordinaryFinitePullback A f.left).obj K) (Etale.dualizingComplex A f.left)).hom ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} A) (pullback f.left v.left)).map (Etale.derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback f.left v.left).toCommSq K)).app _ ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} A) (pullback f.left v.left)).obj ((Etale.ordinaryFinitePullback A (pullback.snd f.left v.left)).obj ((Etale.ordinaryFinitePullback A v.left).obj K))).map (Etale.dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f.left v.left)) ≫ Etale.smoothTensorDualityMap A (pullback.snd f.left v.left) (Etale.isIso_projectionMap_of_finite A (pullback.snd f.left v.left)) ((Etale.ordinaryFinitePullback A v.left).obj K)) ∧ (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.ordinaryFinitePullback A (pullback.fst f.left v.left)).map (Etale.FiniteSmoothPurity.gamma A f.left _ alpha K) ≫ (Etale.rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f.left v.left)).app K) = (Etale.FiniteSmoothPurity.comparison A (pullback f.left v.left)).map ((Etale.ordinaryFiniteTwistedPullbackComparison A f.left (pullback.snd f.left v.left) v.left (pullback.fst f.left v.left) (Etale.FiniteSmoothPurity.line A (ell ^ n) hA X.left d) (Etale.FiniteSmoothPurity.line A (ell ^ n) hA (pullback f.left v.left) d) K ((Etale.derivedSquareUpperStarIso (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback f.left v.left).toCommSq).symm.app K) (Etale.vectorIntegrationBaseCoefficientPullback A (ell ^ n) hA (PurityFiniteSetting.purityTwistTransport A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA) (pullback.fst f.left v.left) hX d)).hom ≫ Etale.FiniteSmoothPurity.gamma A (pullback.snd f.left v.left) _ alpha' ((Etale.ordinaryFinitePullback A v.left).obj K))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Tower coordinate constructions moved, with the equivalent direct gamma factor formula, and publicly reexported from Sheaf.Paper.SmoothPurityBaseChangeData. tower_factors is proved from the two strict factor substatements, with the gamma composition complete. upsync 2026-10-26: after #1694 finite_factors takes alpha, alpha' : Etale.dualizingComplex A _ ≅ … and uses Etale.smoothTensorDualityMap A (finite ring A instead of ModuleCat A); same name, A was already finite, so the node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f4092eff",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after 3a6f RETURN H2; all four corrections are made. (a) Finite e_K/e_1 are now thm-pur-cohomological-smoothness's rightDerivedUpperShriekBaseChangeMap/dualizingComplexBaseChangeMap; the source iso is leftDerivedUpperStarTensorIso + derivedSquareUpperStarIsoInvApp (= derivedSquareUpperStarIso.inv.app, matching the consequence's e). (b) New existing:true def-pur-purity-base-change-sources re-exports vectorIntegrationBaseCoefficientPullback + ordinaryFiniteTwistedPullbackComparison (statement verbatim) and is the only stmt_dep added; no trf node cited; purityTwistTransport is pinned by its roots/line normalization fields. (c) AmbientDiagonalPurityBaseChange and SmoothExceptionalBaseChange imports removed. (d) Real Worker report and Second reading by NB. Clauses (1), (2) and the consequence checked in composition order; tower part unchanged except the transport. lean.statement verbatim; node statement/proof unchanged; only the 2 theorems are sorry; edge cases (d=0, empty, identity v/f, A=0, ramified E, non-normalized towers) not excluded. Advisory: smoothTensorDualityMap (thm-asd-smooth-tensor) enters via the cited FiniteSmoothPurity.gamma; SpTowerP1 words/GeometricCoordinates appear in the cited det-sp-tower-gamma data. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-30",
+  "by": "L",
+  "reviewer": "C-c0f13",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261030T023841-L-816871",
+  "kind": "proof",
+  "note": "independent cc review: import-only diff of SmoothPurityBaseChangeFactors.lean vs clone; set-build interface IDENTICAL; 3 direct importers OK; change record/report vs diff",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "lem-pur-diagonal-etale-beta-square",
+ "kind": "statement",
+ "title": "Etale compatibility of the normal integration factor",
+ "statement": "For the etale correspondence and normalized charts C and E, let m be the ordinary coefficient-twist transport conjugated by the two open/site restriction comparisons. Let n be the actual normal transport through the common source diagonal. Then m followed by vO*(twistToNormal E) equals jO*(twistToNormal C) followed by n. No delta, alpha, rho, compact-support normalization or dualizing comparison occurs in this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Step 2 and final base-change paragraph; orientation-charts proof Step 4"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-etale-normal-transport",
+  "lem-pur-diagonal-etale-local-inverse-factors",
+  "lem-pur-diagonal-orientation-refinement"
+ ],
+ "proof": [
+  {
+   "text": "Replace the supplied ordinary finite twist transport by the canonical purity transport, using uniqueness of the normalized roots and pure-tensor maps. Infer that jO and vO are etale and separated by cancelling the open inclusions. Set h=jO followed by f restricted to V; cancel the monic inclusion of V to identify vO followed by g restricted to V with h.",
+   "uses": [
+    "lem-amb-ordinary-finite-twist-transport-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalGeometry for each arrow to obtain the actual zero-preserving Cartesian normal-bundle square. Choose the supplied vector models for C and E and the symmetric-algebra normal model for the diagonal of h. On this last model form betaO from inverse integration and the identity-base section comparison. Its inverse followed by the model comparison is exactly vectorBetaInverse.",
+   "uses": [
+    "def-pur-diagonal-etale-section-comparisons",
+    "lem-trf-section-rees-base-change-etale",
+    "def-pur-diagonal-orientation-refinement-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved model_beta_compat helper of DiagonalOrientationCompatibility to each Cartesian normal square, the chosen target model, the common source model and the chart normalization. This helper pastes section base-change composition with vector_zero_section_integration_baseChange, then cancels the integration isomorphism. It yields jO*(betaC) followed by Tate(jO) = section(jO) followed by betaO, and the analogous equation for vO. No new compatibility hypothesis or unproved lemma is introduced.",
+   "uses": [
+    "lem-pur-vector-zero-section-integration-base-change",
+    "lem-pur-smooth-section-exchange-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the canonical derived site comparison to the two ordinary beta equations. After unfolding the specified normal comparison, cancel the common normal-site comparison. Invert each equation to express the pulled-back twistToNormal as the composed Tate restriction, inverse common betaO, and the respective actual normal comparison.",
+   "uses": [
+    "lem-pur-comparison-pullback-derived-coherence",
+    "def-pur-diagonal-etale-normal-transport",
+    "lem-pur-diagonal-etale-local-inverse-factors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove composition of the pro-etale Tate comparison from pullComparison_comp and orderedTateCoefficientComposition. Apply composition to the two factorizations k followed by the target open and the source open followed by j (or v), with their given equality. The resulting equations identify their outer comparison with restrictionAlong. Paste the j and v equations, cancel the inverse v coefficient comparison, then cancel the common betaO and the common-source normal comparison. The remaining equality is exactly the stated beta square. All steps use isomorphism and functor identities uniformly in dimension zero and on empty opens.",
+   "uses": [
+    "lem-pur-comparison-pullback-derived-coherence",
+    "lem-pur-ordered-tate-coefficient-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "def-pur-diagonal-etale-section-comparisons",
+  "lem-trf-section-rees-base-change-etale",
+  "def-pur-diagonal-orientation-refinement-data",
+  "lem-pur-vector-zero-section-integration-base-change",
+  "lem-pur-smooth-section-exchange-composition",
+  "lem-pur-comparison-pullback-derived-coherence",
+  "def-pur-diagonal-etale-normal-transport",
+  "lem-pur-diagonal-etale-local-inverse-factors",
+  "lem-pur-ordered-tate-coefficient-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T7",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Step 2 and final base-change paragraph; orientation-charts proof Step 4",
+  "note": "Lean proof from the existing vector integration, actual normalGeometry and comparison-coherence APIs; no split-off statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zero section vector integration base change naturality under the normal cone map induced by an etale morphism",
+   "results": "Eight results, including KaehlerDifferential.isBaseChange_of_formallyEtale; no DNC or integration compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the project geometric and vector-integration APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Six structural functor laws, including Functor.map_comp.",
+   "date": "2026-10-27",
+   "verdict": "Use map_comp and associativity in the pasting proof."
+  },
+  {
+   "tool": "grep",
+   "query": "normalConeToDeformationSpace|normalGeometry|sectionBaseChange",
+   "results": "No Mathlib matches via msearch; project rg finds the geometric constructions in GeneralChartComparisons, SectionReesBaseChangeEtale, and ChartNormalDifferential.",
+   "date": "2026-10-27",
+   "verdict": "Reuse their actual Rees-map construction without importing the downstream orientation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the canonical normal cone and deformation to the normal cone comparisons under an etale map of smooth diagonals, and compatibility of zero-section vector integration with pullback",
+   "results": "Eight hits: VectorField.mpullback_zero; Bundle.contMDiff_zeroSection; VectorField.mpullbackWithin_zero; Bundle.contMDiffWithinAt_zeroSection; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.Scheme.Etale; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat. No exceptional, DNC or integration comparison identity.",
+   "date": "2026-10-27",
+   "verdict": "No full match; only generic etale smoothness/base-change components and unrelated differential-geometric zero-section facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncEtaleNaturalityTwist",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-diagonal-dnc-etale-naturality-twist-square",
+   "place": "Step 2 and final base-change paragraph; orientation-charts proof Step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalDncEtaleBeta",
+  "file": "lean/Sheaf/Paper/DiagonalDncEtaleBeta.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalDncEtaleNaturality_beta",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.diagonalDncEtaleNaturality_beta"
+  ],
+  "statement": "theorem diagonalDncEtaleNaturality_beta (P : PurityFiniteSetting.{u})\n    {X Z Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) (g : Z ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    [SmoothOfRelativeDimension d g]\n    [IsNoetherian X] [IsNoetherian Z] [IsNoetherian Y]\n    [HasCompactification f] [HasCompactification g]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (C : OrientationRefinement.Chart P f aY d V)\n    (E : OrientationRefinement.Chart P g aY d V)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (U : Scheme.{u}) [IsNoetherian U]\n    (j : U ⟶ X) [Etale j] [IsSeparated j] [LocallyOfFiniteType j] [QuasiCompact j]\n    (v : U ⟶ Z) [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]\n    (w : v ≫ g = j ≫ f)\n    [HasCompactification (j ≫ f)] [HasCompactification (v ≫ g)]\n    (O : U.Opens) (jO : O.toScheme ⟶ (f ⁻¹ᵁ V.1).toScheme)\n    (vO : O.toScheme ⟶ (g ⁻¹ᵁ V.1).toScheme)\n    (hj : jO ≫ (f ⁻¹ᵁ V.1).ι = O.ι ≫ j)\n    (hv : vO ≫ (g ⁻¹ᵁ V.1).ι = O.ι ≫ v) :\n    let νU := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory\n    let T := OrientationRefinement.pull P O.ι\n    let cj := OrientationCounit.restrictionAlong P j (f ⁻¹ᵁ V.1) O jO hj\n    let cv := OrientationCounit.restrictionAlong P v (g ⁻¹ᵁ V.1) O vO hv\n    let a :=\n      (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t j (P.diagonalExponent_isUnit (f ≫ aY)) d).hom ≫\n      (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t v (P.diagonalExponent_isUnit (g ≫ aY)) d).inv\n    let m := (cj.app (P.diagonalTwistEtale X d)).hom ≫\n      T.map (νU.map a) ≫\n      (cv.app (P.diagonalTwistEtale Z d)).inv\n    let n := DiagonalEtaleComparison.normalTransport P d f g aY V C.geometry E.geometry U j v w\n      O jO vO hj hv\n    m ≫ (OrientationRefinement.pull P vO).map\n        (DiagonalEtaleComparison.twistToNormal P d g aY V E).hom =\n      (OrientationRefinement.pull P jO).map\n        (DiagonalEtaleComparison.twistToNormal P d f aY V C).hom ≫ n.hom",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T222548-L-668417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261027T012944-L-2351604",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

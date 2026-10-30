@@ -1,0 +1,276 @@
+{
+ "id": "thm-pur-rank-one-thom",
+ "blueprint": {
+  "is": "thm-pur-rank-one-thom",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rank-one Thom isomorphism",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a\nvector bundle of constant\nrank one, with the zero section $z:B\\hookrightarrow E$. The zero\nsection is an effective Cartier divisor of $E$ (the zero scheme of the\ntautological section of $\\pi^*E$); let\n\n$$\n\\operatorname{thom}(E):z_*\\Lambda_B\\longrightarrow\\Lambda_E(1)[2]\n$$\n\nbe its class $\\operatorname{cl}_{z(B)}$ of [lem-pur-divisor-class],\nand put\n\n$$\n\\tau_E:=\nR\\pi_!\\operatorname{thom}(E):\n\\Lambda_B\\longrightarrow R\\pi_!\\Lambda_E(1)[2].\n$$\n\nThen $\\tau_E$ is an isomorphism, compatible with base change. Its\ninverse $\\operatorname{tr}_\\pi$ is the *rank-one vector-bundle\ntrace*. In particular\n\n$$\nR\\pi_!\\Lambda_E\\;\\cong\\;\\Lambda_B(-1)[-2].\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.md",
+  "place": "node thm-pur-rank-one-thom, order 1985"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-pc-divisor-line-bundle",
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-weil-pbc-proetale-modules",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-divisor-class"
+ ],
+ "proof": [
+  {
+   "text": "In the datum [def-pur-conventions], use $\\Lambda_T=p_T^*\\underline\\Lambda$ [det-def-sfb-pulled-back-coefficients] and the twist notation [def-coefficient-twists-detailed]. The bundle and zero section are [def-pur-vector-bundle-zero-section]. By [lem-pur-line-zero-geometry], the morphism has the separated finite-type properties of [def-weil-scheme-morphism-properties], and the zero divisor stays Cartier after base change. The canonical class of [lem-pur-divisor-class] is frame-independent [lem-pur-frame-independence]. Apply [lem-pur-condensed-cartier-compact-exchange] with $f=\\pi,i=z$: the compact source is canonically $\\Lambda_B$ and its map is precisely $\\tau_E$.",
+   "uses": [
+    "det-def-sfb-pulled-back-coefficients",
+    "def-pur-conventions",
+    "def-coefficient-twists-detailed",
+    "def-pur-vector-bundle-zero-section",
+    "lem-pur-line-zero-geometry",
+    "def-weil-scheme-morphism-properties",
+    "lem-pur-divisor-class",
+    "lem-pur-frame-independence",
+    "lem-pur-condensed-cartier-compact-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global class"
+   }
+  },
+  {
+   "text": "For a geometric point $b$, [lem-pur-condensed-cartier-compact-exchange] identifies $Lb^*\\tau_E$ with the compact image of the origin class after a basis of the fibre line. At $A_n$ retain the morphism's witness [def-weil-pbc-etale-origin-witness]. The local calculation [thm-pur-rank-one-local-calculation] makes $\\partial\\kappa(t)$ a basis of the sole supported cohomology group, in degree two. Pulling back along the fibre, the local formula of [lem-pur-divisor-class] (naturality of the Kummer boundary) makes the restricted class the signed multiple $\\pm\\partial\\kappa(t)$ of this basis, with the sign stated there, again a basis, the sign being a unit at every coefficient. The derived comparison [lem-pur-affine-origin-support-compact-comparison] therefore makes the compact image an isomorphism. Its compatible derived limits and scalar extensions, with the source identifications stated there, give the same conclusion for $R,F,\\overline{\\mathbf Q}_\\ell$, in the pulled-back condensed categories.",
+   "uses": [
+    "lem-pur-condensed-cartier-compact-exchange",
+    "def-weil-pbc-etale-origin-witness",
+    "thm-pur-rank-one-local-calculation",
+    "lem-pur-divisor-class",
+    "lem-pur-affine-origin-support-compact-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2: fibre calculation"
+   }
+  },
+  {
+   "text": "The cone is bounded constructible by [lem-pur-condensed-constructible-point-detection]; its geometric inverse images vanish by Step 2. The same lemma and the cohomology-sheaf convention [def-weil-derived-cohomology-sheaves] give a zero cone, hence $\\tau_E$ is invertible. The exchange identity of [lem-pur-condensed-cartier-compact-exchange] proves base change; invert it to obtain the trace $\\operatorname{tr}_\\pi$.",
+   "uses": [
+    "lem-pur-condensed-constructible-point-detection",
+    "def-weil-derived-cohomology-sheaves",
+    "lem-pur-condensed-cartier-compact-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2, last sentence, and Step 3"
+   }
+  },
+  {
+   "text": "On the pro-etale ringed sites [def-weil-pbc-proetale-site], twists are invertible modules [sk-def-sp-tate-twist]. With the ring-sheaf tensor [sk-def-sfb-derived-tensor-hom] (finite notation [def-weil-derived-tensor]) and Tate pullback [sk-prop-sfb-cartesian-coefficients], apply [lem-sbc-ringed-site-perfect-projection-formula] to the proper factor of a compactification and [lem-sfb-open-immersion-derived-tensor-projection] to its open factor. For the base twist line this gives $R\\pi_!\\Lambda_E(1)[2]\\cong(R\\pi_!\\Lambda_E)(1)[2]$. Tensor the proved isomorphism with $\\Lambda_B(-1)[-2]$; evaluation cancels the line and shift, giving the asserted formula.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-def-sp-tate-twist",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-derived-tensor",
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-sfb-open-immersion-derived-tensor-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Statement final formula: untwist"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-b3-weil-projective-restriction",
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "det-def-sfb-pulled-back-coefficients",
+  "lem-pur-affine-origin-support-compact-comparison",
+  "lem-pur-b3-weil-affine-localization",
+  "lem-pur-b3-weil-projective-decomposition",
+  "lem-pur-condensed-cartier-compact-exchange",
+  "lem-pur-condensed-constructible-point-detection",
+  "lem-pur-divisor-class",
+  "lem-pur-frame-independence",
+  "lem-pur-line-zero-geometry",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-open-immersion-derived-tensor-projection",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sp-tate-twist",
+  "sk-prop-sfb-cartesian-coefficients",
+  "thm-pur-rank-one-local-calculation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Steps 1--3, with the missing supported-to-compact comparison and condensed constructible detection exposed as statement-only nodes; final formula by perfect projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rank one vector bundle Thom isomorphism compactly supported etale cohomology affine line zero section",
+   "results": "Topological vector-bundle trivializations, hom_trivializationAt and Trivialization.linearEquivAt; no algebraic etale Thom or compact-cohomology result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology Thom isomorphism line bundle zero section",
+   "results": "Bundle.zeroSection and topological or differentiable zero-section lemmas; no etale compact-cohomology Thom morphism.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Thom\"",
+   "results": "Substring hits such as instHomogeneousPowFloat, Int.ofNatHom and Rat.castHom; no Thom isomorphism.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "thom|compactSupport.*cohom|cohom.*compactSupport",
+   "results": "Tilde restrictHomEquivHom and names/authors containing thom; no matching declaration in AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support direct image of constant torsion sheaf on algebraic affine line is Tate twist shifted by two via Kummer class of origin",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit and quasi-compact clearing-denominators lemmas; none concerns etale compact cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b[Tt]hom\\b|[Rr]ank[Oo]ne[Tt]hom|[Cc]ompact[Ss]upport.*[Cc]ohom|[Cc]ohom.*[Cc]ompact[Ss]upport",
+   "results": "No hits across Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1985,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-vector-bundle-zero-section",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-cfiber-stalk",
+  "lem-pur-divisor-class",
+  "lem-pur-frame-independence",
+  "thm-pur-rank-one-local-calculation"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback",
+     "module": "WeilConjectures.WeilSheaf.FourierInversion.OtherSections",
+     "lines": [
+      87,
+      103
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-29",
+  "item": "thm-pur-rank-one-thom",
+  "worker": "stage1",
+  "summary": "Q33 repairs the released legacy-coefficient route: three new statement-only nodes separate normalized condensed Cartier exchange, the affine-origin supported-to-compact comparison (including coefficient comparisons), and constructible geometric inverse-image detection. The bound statement is unchanged, no withdrawn node is cited, and the assembly is under 3000 characters. The finite sign is the live divisor-class convention, not a silently changed class.",
+  "blueprint": "Step 1 follows current global-class paragraph; Step 2 follows geometric-fibre paragraph and supplies its missing supported-to-compact implication; Step 3 is its constructible-cone truncation plus base-change paragraph; Step 4 proves the displayed untwisted consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Generic ringed-topos projection formula with an invertible base line, used only to remove the Tate twist, not as a purity theorem."
+   },
+   {
+    "node": "lem-sfb-open-immersion-derived-tensor-projection",
+    "why": "Generic open-extension tensor comparison supplies the open factor of the same compactified projection formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "thm-sf-comp-composition",
+  "lem-sf-class-compact-support-comparison",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-open-immersion-derived-tensor-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-29",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-fc5ed3cce",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-fc5ed3cce (reviewer sub-agent of L); spot-checked: Read in full: the current blueprint thm-pur-rank-one-thom statement and proof, lem-pur-cfiber-stalk and sk-prop-an.proof; the item; the 3 new nodes; every cited statement. The route follows the current blueprint. Step 1 is the global class plus frame independence. Step 2 is the fibre calculation; the missing supported-to-compact step is now the node lem-pur-affine-origin-support-compact-comparison. Step 3 is the zero cone plus base change. Step 4 untwists using 2 generic projection formulas from other units (perfect ringed and open-immersion), which I accept as tool_uses. Coefficients are condensed (det-def-sfb-pulled-back-coefficients); nothing on the legacy route and no SGA. lem-pur-cfiber-stalk, which the blueprint cites in Step 2, is absent from the DAG: no file in any dagsnap. Its content (compact base change at a geometric point) is covered by the geometric-point clause of lem-pur-condensed-cartier-compact-exchange, so this is the same argument. Maintainer advisory: thm-pur-vector-bundle-thom still cites cfiber-stalk, a dangling citation. All 3 new statements are true. (a) Exchange node: Ex is invertible by det-sf-comp-composition-base-change, and the identity follows from naturality of Ex plus base change of the class; it asserts no invertibility, so it does not restate the item. (b) Affine-origin node checked at A_n: H^2_0(A^1)=H^2_0(P^1)≅H^2(P^1)≅H^2_c(A^1), since H^1 and H^2 of A^1 and of a point vanish; at R, j_!R(1) is derived complete, so the limit comparison holds. (c) Detection node: finite case by lem-cbc-proetale-stalk-conservative clause 3; R by reduction mod ϖ plus constructibility; F and Q̄ℓ by lisse rank. No duplicates; checked against lem-pur-closed-section-compact-origin, lem-pur-twisted-coordinate-section-normalization (finite-type bases only), lem-cbc-proetale-stalk-conservative, lem-zl-condensed-cover-restriction-conservative and det-pe-sections-conservative. No cycle (DFS over 17237 nodes). Two fixes. First, item Step 2 used the divisor-class sign without citing lem-pur-divisor-class (C1); it now cites it, with naturality of the Kummer boundary on the fibre, and the sign is written ± 'as stated there', which is robust to that node's pending blueprint_update flipping −∂κ to +∂κ. Second, the exchange node no longer hard-codes −∂κ(t). Parent proof is now 2749 characters.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.FourierInversion.OtherSections",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.WeilSheaf.FourierInversion.OtherSections: the blueprint item thm-pur-rank-one-thom's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work) | 2026-10-22 maintainer: branch master -> slopmaster2 (the declaration is in slopmaster2, which live imports verbatim, at the same module; with branch master tools/lean_status.py did not read the record and the upstream sorry had no node)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-28",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261028T072340-L-1935910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

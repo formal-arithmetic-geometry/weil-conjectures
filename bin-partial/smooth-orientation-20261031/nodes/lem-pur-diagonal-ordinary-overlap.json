@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-diagonal-ordinary-overlap",
+ "kind": "statement",
+ "title": "Overlap compatibility of ordinary diagonal lifts",
+ "statement": "In the finite setting [def-pur-conventions] and the ordinary dualizing/Tate coordinates [def-pur-diagonal-dualizing-data], let f:X→Y be separated finite type and smooth of pure relative dimension d between Noetherian schemes, with compactification and finite-type k-structure aY. Suppose D is a chart on every finite-type affine target open, satisfying Agrees on nested affine opens [lem-pur-diagonal-orientation-refinement]. Suppose b_V are ordinary local isomorphisms realizing the prescribed theta_V, as in [lem-pur-diagonal-ordinary-chart-lift]. For any two such opens V,V′, shift b_V and b_V′ by -2d using the exact restriction shift comparison. After restriction to f⁻¹(V)∩f⁻¹(V′) with the canonical open-composition isomorphisms, the resulting isomorphisms are equal. This only tests compatibility of local maps and asserts no global lift or glued object.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "lem-pur-diagonal-ordinary-chart-lift"
+ ],
+ "proof": [
+  {
+   "text": "Cover V intersect Vprime by all affine subopens W contained in it. Local finite type of the structural map implies finite type of each affine section ring. Their inverse images cover the source overlap by the affine-open basis property. This uses no assertion that the intersection itself is affine.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each W nested in V, use the realization restriction identity and the assumed Agrees equation. The shifted Tate target is concentrated in degree zero by the proved chart-lift module; hence the unshifted target is bounded below. Apply injectivity of ordinary/pro-etale comparison on Hom to cancel the realization coordinates and deduce equality of ordinary local isomorphisms on W. Repeat for Vprime.",
+   "uses": [
+    "lem-pur-diagonal-ordinary-realize-restriction",
+    "lem-pur-diagonal-ordinary-chart-lift",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "lem-pur-diagonal-orientation-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the associativity equation for exact ordinary restriction compositors from the ordinary inverse-image associativity and the generic exact-functor derivation compositor. Their shift compatibility follows from the CommShift natural-transformation API. Thus the restrictions of the two shifted overlap isomorphisms agree on each inverse-image W.",
+   "uses": [
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both overlap objects are concentrated in degree zero: use exactness of restriction and the shifted Tate concentration, then the first local isomorphism for the source. Apply H0 Hom injectivity. The H0 images agree after every pullback in the cover by homology naturality. Jointly surjective inverse images are jointly conservative on sheaves, hence jointly faithful since they are exact. Their equality test proves equality of the H0 maps, then of the derived maps and the isomorphisms. This also handles an empty cover of an empty overlap.",
+   "uses": [
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-pur-diagonal-ordinary-chart-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-orientation-refinement",
+  "lem-pur-diagonal-ordinary-realize-restriction",
+  "lem-pur-diagonal-ordinary-chart-lift",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lem-etale-sheaf-jointly-surjective-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Combining/canonicity paragraph: base-change compatibility of the canonical factors, specialized to one nested affine restriction",
+  "group": "R3",
+  "date": "2026-10-26",
+  "note": "Explicit affine refinement, bounded-below comparison injection, compositor/shift compatibility, and H0 equality test. Only the independent realization restriction identity remains a new obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between derived sheaves concentrated in degree zero agree if they agree on an open cover",
+   "results": "8 results, including Scheme.Modules.hom_ext_iff and TopCat.Sheaf.hom_ext; these concern sheaf maps, not exact derived restriction with the diagonal comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use existing degreeZeroDerivedMapGluing for the derived equality test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms of derived sheaves concentrated in one degree glue over open covers",
+   "results": "8 results including TopCat.Sheaf.existsUnique_gluing and presheafed-space gluing; none gives prescribed derived diagonal orientations. Loogle also found Functor.preimageIso_mapIso for undoing the shift.",
+   "date": "2026-10-25",
+   "verdict": "No replacement for the comparison/overlap calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "onSmallerOpen|sourceComposition|tate.*comp; derivedComparison full faithfulness; shifted Tate concentration",
+   "results": "Mathlib has no diagonal orientation notions. Project rg found DegreeZeroDerivedMapGluing, DiagonalOrientationRefinement.Agrees, the proved comparison Hom bijection, and the private base_normal_form proof in BundleSectionOrientationMapExt.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the declared gluing and comparison interfaces; reproduce the private finite-Tate induction with the same public ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryOrientationGluing",
+  "date": "2026-10-25",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": [
+    "lem-pur-diagonal-ordinary-orientation-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryOverlap",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryOverlap.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.overlap",
+  "statement": "theorem overlap (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\n    (d : ℕ) (f : X ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f] [IsNoetherian X] [IsNoetherian Y]\n    [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (D : ∀ (V : Y.affineOpens), (V.1.ι ≫ aY).appTop.hom.FiniteType →\n      OrientationRefinement.Chart P f aY d V)\n    (hD : ∀ (V V' : Y.affineOpens)\n      (hV : (V.1.ι ≫ aY).appTop.hom.FiniteType)\n      (hV' : (V'.1.ι ≫ aY).appTop.hom.FiniteType) (h : V'.1 ≤ V.1),\n      OrientationRefinement.Agrees P f aY d (D V hV) (D V' hV') h)\n    (b : ∀ (V : Y.affineOpens) (hV : (V.1.ι ≫ aY).appTop.hom.FiniteType),\n      (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalOrdinaryDualizing f) ≅\n        (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalTwistEtale X d))\n    (hb : ∀ V hV, realize P f aY d V (b V hV) =\n      OrientationRefinement.theta P f aY d V (D V hV).geometry (D V hV).betaEtale)\n    (V V' : Y.affineOpens)\n    (hV : (V.1.ι ≫ aY).appTop.hom.FiniteType)\n    (hV' : (V'.1.ι ≫ aY).appTop.hom.FiniteType) :\n    onSmallerIso P X (inf_le_left : f ⁻¹ᵁ V.1 ⊓ f ⁻¹ᵁ V'.1 ≤ f ⁻¹ᵁ V.1)\n        (shiftLocal P _ (b V hV) (-(2 * (d : ℤ)))) =\n      onSmallerIso P X (inf_le_right : f ⁻¹ᵁ V.1 ⊓ f ⁻¹ᵁ V'.1 ≤ f ⁻¹ᵁ V'.1)\n        (shiftLocal P _ (b V' hV') (-(2 * (d : ℤ))))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.shiftLocal",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.onSmallerIso",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.overlap"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T180925-L-4053581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T002435-L-88184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

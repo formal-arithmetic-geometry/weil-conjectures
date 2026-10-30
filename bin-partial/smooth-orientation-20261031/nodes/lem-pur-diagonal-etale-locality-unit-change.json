@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-diagonal-etale-locality-unit-change",
+ "kind": "statement",
+ "title": "Coefficient-unit change commutes with normalized etale locality",
+ "statement": "Let P be the finite purity setting [def-pur-conventions], N a normalized etale compact-support datum [def-sp-etale-compact-support-normalization], and U,X,Y Noetherian schemes. Let j:U→X be separated, quasi-compact, locally finite type and etale. Let f:X→Y, h:U→Y be compactifiable, with j≫f compactifiable and he:j≫f=h. Write unitChange for the specified isomorphism from monoidal-unit dualizing objects to degree-zero coefficient dualizing objects [def-pur-diagonal-counit-comparison-data], and write structural locality for the counit-normalized etale locality [lem-trf-section-exceptional-fibre-coherence]. Then j*(unitChange_f), followed by diagonalEtaleLocality(N,j,f) and diagonalDualizingCongr(he) [def-pur-diagonal-dualizing-data], equals structural locality for (j,f,h,he) followed by unitChange_h. No smoothness, rank, nonemptiness or affine-open hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-etale-compact-support-normalization",
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-diagonal-dualizing-data",
+  "lem-trf-section-exceptional-fibre-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The natural isomorphism given by the derived/exact pullback comparison followed by tensorMateEtalePrecompLocalityIso, evaluated on the monoidal unit, is structural locality by locality_tensorMate. Apply naturality of its hom transformation to the inverse of singleFunctorObjUnitIso. Its exceptional image is exactly unitChange, while the coefficient-object component is diagonalEtaleLocality.",
+   "uses": [
+    "lem-pur-diagonal-etale-span-source-endpoint",
+    "def-pur-diagonal-counit-comparison-data",
+    "def-pur-diagonal-dualizing-data",
+    "def-pur-etale-exceptional-precomp-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the equality he:j≫f=h. The equality-congruence isomorphism becomes the identity and the naturality equation gives the stated equality of isomorphisms. This is valid for empty schemes as well.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-etale-span-source-endpoint",
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-diagonal-dualizing-data",
+  "def-pur-etale-exceptional-precomp-locality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Step 2; orientation-charts proof Step 3: naturality in the coefficient object"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a natural isomorphism applied to a coefficient unit isomorphism",
+   "results": "8 hits, including NatIso.naturality_1 and equivalence unit naturality. No project-specific exceptional coefficient-unit statement.",
+   "date": "2026-10-27",
+   "verdict": "Use NatTrans.naturality on the existing tensor-mate locality isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; NatTrans.naturality supplies exactly the categorical square after choosing the existing locality natural isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "Apply this Mathlib theorem directly in the private helper."
+  },
+  {
+   "tool": "grep",
+   "query": "unitChange|tensorMateEtalePrecompLocalityIso",
+   "results": "0 Mathlib hits; the project definitions and proved locality_tensorMate supply the required components.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific wrapper lemma is fully proved here, with no new hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalEtaleRhoUnitSquare",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Step 2; coefficient-unit naturality for target-open/source-etale compatibility",
+   "via": [
+    "lem-pur-diagonal-etale-rho-unit-square",
+    "lem-pur-diagonal-etale-source-dualizing-square",
+    "lem-pur-diagonal-etale-dnc-dualizing-square",
+    "lem-pur-diagonal-dnc-etale-naturality-twist-square",
+    "lem-pur-diagonal-dnc-etale-naturality",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalEtaleLocalityUnitChange",
+  "file": "lean/Sheaf/Paper/DiagonalEtaleLocalityUnitChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalEtaleLocality_unitChange",
+  "statement": "theorem diagonalEtaleLocality_unitChange (P : PurityFiniteSetting.{u})\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    {U X Y : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian Y]\n    (j : U ⟶ X) [Etale j] [IsSeparated j] [LocallyOfFiniteType j] [QuasiCompact j]\n    (f : X ⟶ Y) [HasCompactification f] [HasCompactification (j ≫ f)]\n    (h : U ⟶ Y) [HasCompactification h] (he : j ≫ f = h) :\n    (Etale.ordinaryFinitePullback P.Coefficient j).mapIso\n        (OrientationCounit.unitChange P f) ≪≫\n      P.diagonalEtaleLocality N j f ≪≫ P.diagonalDualizingCongr he =\n    Etale.sectionStructuralLocalityIso P.Coefficient j f h he ≪≫\n      OrientationCounit.unitChange P h",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T094437-L-227565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T094437-L-227565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

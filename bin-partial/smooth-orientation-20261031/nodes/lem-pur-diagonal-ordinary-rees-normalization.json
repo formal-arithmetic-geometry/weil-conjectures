@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-diagonal-ordinary-rees-normalization",
+ "kind": "statement",
+ "title": "Coordinate-normalized prime-power orientations satisfy Rees normalization",
+ "statement": "For a finite purity setting P with bottom coefficient extension P.extension=⊥, Noetherian X,Y, a separated quasi-compact compactifiable pure-d-smooth map f:X→Y and a separated finite-type structure map aY:Y→Spec(P.field.k), let G be its actual closed-diagonal deformation geometry. Every ordinary dualizing-to-Tate isomorphism e satisfying P.DiagonalOrientationNormalization satisfies the full diagonal/Rees/integration equation OrientationNormalized for G. No arbitrary coefficient ring or exceptional reduction comparison occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2), normalized diagonal/Rees/integration comparison"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-dualizing-data",
+  "def-pur-finite-smooth-canonical-maps"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized section comparison by existsUnique_normalized and construct the cone-to-bundle pullback square from the canonical Rees and symmetric-cone comparisons. Apply the fixed-witness diagonal Rees equation to obtain the OrientationNormalized existential.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-diagonal-ordinary-rees-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "lem-pur-diagonal-ordinary-rees-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2), witness construction and final Rees equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth dualizing orientation under extension from prime-power coefficients to a finite ring",
+   "results": "No matching geometric purity theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Use the already stated geometric orientation comparison and categorical isomorphism APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "Functor.map_isIso and general inverse cancellation lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Useful for categorical assembly, not for the geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientKerEquivOfSurjective|map_ringEquiv_maximalIdeal",
+   "results": "PadicInt.ker_toZModPow, Ideal.quotientEquiv, RingHom.quotientKerEquivOfSurjective, IsLocalRing.map_ringEquiv_maximalIdeal.",
+   "date": "2026-10-28",
+   "verdict": "These directly construct the bottom coefficient quotient equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.FiniteGeneralRingOrientation",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-general-ring-orientation",
+   "place": "Diagonal/Rees normalization and scalar/site assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryReesNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryReesNormalization.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalOrdinaryReesNormalization",
+  "statement": "theorem diagonalOrdinaryReesNormalization (P : PurityFiniteSetting.{u})\n    (hP : P.extension = ⊥)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (d : ℕ) (f : X ⟶ Y) [HasCompactification f]\n    [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]\n    [SmoothOfRelativeDimension d f]\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (G : Etale.FiniteRingSectionDeformation.Geometry d\n      (pullback.fst f f) (pullback.diagonal f))\n    (e : Etale.dualizingComplex P.Coefficient f ≅\n      P.diagonalTwistEtale X d)\n    (he : P.DiagonalOrientationNormalization d f aY e) :\n    Etale.FiniteSmoothPurity.OrientationNormalized P.Coefficient P.diagonalExponent\n      (pow_pos P.coefficients.prime.out.pos P.level) P.diagonalExponent_annihilates\n      f d G (P.diagonalExponent_isUnit (f ≫ aY)) e",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28",
+  "note": "upsync 2026-10-26: after #1694 Etale.dualizingComplex takes the finite ring P.Coefficient instead of ModuleCat P.Coefficient, so the hypothesis e is restated accordingly; declaration and mathematical content unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T180556-L-3877961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T210122-L-1659305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
