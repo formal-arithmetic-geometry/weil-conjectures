@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUpperShriekFieldExtension
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TateTwist.UpperStarOne
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Smooth
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 
 /-!
 
@@ -191,9 +191,9 @@ theorem isIso_dualizingComplexBaseChange_of_projectiveSpace
   have : IsClosedImmersion i.left := ‹IsClosedImmersion c›
   have : IsClosedImmersion i'.left := ‹IsClosedImmersion c'›
   have : SmoothOfRelativeDimension n (toPoint P).left := by
-    rw [toPoint_left]; exact ProjectiveSpace.smoothOfRelativeDimension_fin n _
+    rw [toPoint_left]; exact ProjectiveSpace.smoothOfRelativeDimension _ _ (by simp)
   have : SmoothOfRelativeDimension n (toPoint P').left := by
-    rw [toPoint_left]; exact ProjectiveSpace.smoothOfRelativeDimension_fin n _
+    rw [toPoint_left]; exact ProjectiveSpace.smoothOfRelativeDimension _ _ (by simp)
   exact isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_smooth ℓ (i := i) (i' := i') e sqX
     n hP sq
 
