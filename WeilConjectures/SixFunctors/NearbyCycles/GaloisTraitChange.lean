@@ -236,10 +236,11 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap (τ : N₂.Hom N₁ f f
       ∀ σ₂ : Ω₂ ≃ₐ[L₂] Ω₂, N₂.galoisLayerAction Λ h₂ Ω₂ σ₂ (L((𝟙 X₂)^*⟦Λ⟧).obj C₂) ≫
           (r₂ ≫ ((N₂.galoisLayerHom h₂ Ω₂).pullbackExchange Λ).app C₂) =
         r₂ ≫ ((N₂.galoisLayerHom h₂ Ω₂).pullbackExchange Λ).app C₂)
-    [IsIso (((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app
-      (L((𝟙 X₁)^*⟦Λ⟧).obj C))] :
+    (hβ : IsIso (((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange Λ).app
+      (L((𝟙 X₁)^*⟦Λ⟧).obj C))) :
     IsIso ((τ.pullbackExchange Λ).app C) := by
   obtain ⟨r₁, hr₁, he₁⟩ := h₁split
+  have := hβ
   subst hC₂
   obtain ⟨r₂, hr₂, he₂⟩ := h₂split
   -- the composition isomorphisms

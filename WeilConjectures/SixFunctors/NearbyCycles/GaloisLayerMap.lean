@@ -177,7 +177,8 @@ variable {L₁ L₂ : Type u} [Field L₁] [Field L₂] (h₁ : M₁.generic ⟶
   (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l)
 
 /-- The square of spectra `Spec ω ≫ Spec(L₁ → Ω₁) = Spec(L₂ → Ω₂) ≫ Spec l`. -/
-lemma specMap_comp_specMap_algebraMap (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l) :
+lemma specMap_algebraMap_comp_specMap_of_comp_eq
+    (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l) :
     Spec.map (CommRingCat.ofHom (algebraMap L₂ Ω₂)) ≫ Spec.map (CommRingCat.ofHom l) =
       Spec.map (CommRingCat.ofHom ω) ≫ Spec.map (CommRingCat.ofHom (algebraMap L₁ Ω₁)) := by
   rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp, hω]
@@ -189,7 +190,7 @@ noncomputable def galoisLayerGenericMap (τ : M₂.Hom M₁ f f')
     (hτ : τ.generic ≫ h₁ = h₂ ≫ Spec.map (CommRingCat.ofHom l)) :
     (M₂.galoisLayer h₂ Ω₂).generic ⟶ (M₁.galoisLayer h₁ Ω₁).generic :=
   pullback.map h₂ _ h₁ _ τ.generic (Spec.map (CommRingCat.ofHom ω)) (Spec.map (CommRingCat.ofHom l))
-    hτ.symm (specMap_comp_specMap_algebraMap Ω₁ Ω₂ l ω hω)
+    hτ.symm (specMap_algebraMap_comp_specMap_of_comp_eq Ω₁ Ω₂ l ω hω)
 
 variable {h₁ h₂ l} in
 @[reassoc (attr := simp)]
