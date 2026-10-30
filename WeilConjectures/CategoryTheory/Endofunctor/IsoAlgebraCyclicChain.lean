@@ -70,3 +70,22 @@ lemma functorObjIsoMk_hom_hom_f (ψ : G.obj Y ≅ Y)
   rfl
 
 end CategoryTheory.Endofunctor.IsoAlgebra.CyclicDecomposition
+
+namespace CategoryTheory.Endofunctor.IsoAlgebra.CyclicDecomposition
+
+variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] {F : C ⥤ C}
+  {G : D ⥤ D} {m : ℕ} (P : CyclicDecomposition F G m)
+
+/-- `CyclicDecomposition.functorObjIsoMk` for the algebra `mk X φ`, with the hypotheses stated in
+terms of `X` and `φ`. -/
+def functorObjMkIsoMk (X : C) (φ : F.obj X ≅ X) {Y : D} (c : ∀ i : Fin (m + 1), (P.J i).obj X ≅ Y)
+    (hc : ∀ k : Fin m, (P.J k.castSucc).map φ.hom ≫ (c k.castSucc).hom =
+      (P.α k).hom.app X ≫ (c k.succ).hom)
+    (ψ : G.obj Y ≅ Y)
+    (hβ : (P.J (Fin.last m)).map φ.hom ≫ (c (Fin.last m)).hom =
+      P.β.hom.app X ≫ G.map (c 0).hom ≫ ψ.hom) :
+    P.functor.obj (IsoAlgebra.mk X φ) ≅ IsoAlgebra.mk Y ψ :=
+  P.functorObjIsoMk (IsoAlgebra.mk X φ) c (fun k ↦ by rw [mk_str]; exact hc k) ψ
+    (by rw [mk_str]; exact hβ)
+
+end CategoryTheory.Endofunctor.IsoAlgebra.CyclicDecomposition
