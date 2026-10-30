@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTower
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Homology
 
 /-!
 # Lifting compatible retractions to a complete object
@@ -33,9 +34,10 @@ distinguished.
   split monomorphism: for the lift `r` of `ρ₀`, `i ≫ r` is such an endomorphism, and
   `r ≫ (i ≫ r)⁻¹` is a retraction of `i`.
 
-We also record that complete objects are stable under shifts and extensions
+That complete objects are stable under shifts and extensions
 (`CategoryTheory.Pretriangulated.IsCenterComplete.shift`,
-`CategoryTheory.Pretriangulated.IsCenterComplete.ext₂`).
+`CategoryTheory.Pretriangulated.IsCenterComplete.ext₂`) is in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Homology`.
 -/
 
 @[expose] public section
@@ -58,35 +60,10 @@ end CategoryTheory.CatCenter
 
 namespace CategoryTheory.Pretriangulated
 
-open Category Limits Opposite
+open Category Limits _root_.Opposite
 
 variable {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-
-omit [HasZeroObject C] [Pretriangulated C] in
-/-- Complete objects are stable under shifts, for an element of the center commuting with the
-shifts. -/
-lemma IsCenterComplete.shift {z : CatCenter C}
-    (hz : ∀ (X : C) (n : ℤ), z.app (X⟦n⟧) = (z.app X)⟦n⟧') {K : C} (hK : IsCenterComplete z K)
-    (n : ℤ) : IsCenterComplete z (K⟦n⟧) := by
-  intro Z hZ f
-  have : IsIso (z.app (Z⟦-n⟧)) := by
-    rw [hz]
-    infer_instance
-  have h : f⟦-n⟧' = 0 := (cancel_mono
-    ((shiftFunctorCompIsoId C n (-n) (add_neg_cancel n)).hom.app K)).1 (by
-      rw [zero_comp]
-      exact hK this _)
-  exact (shiftFunctor C (-n)).map_eq_zero_iff.1 h
-
-/-- Complete objects are closed under extensions: in a distinguished triangle whose first and
-third objects are complete, so is the second. -/
-lemma IsCenterComplete.ext₂ {z : CatCenter C} (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₁ : IsCenterComplete z T.obj₁) (h₃ : IsCenterComplete z T.obj₃) :
-    IsCenterComplete z T.obj₂ := by
-  intro Z hZ f
-  obtain ⟨g, rfl⟩ := Triangle.coyoneda_exact₂ T hT f (h₃ hZ _)
-  rw [h₁ hZ g, zero_comp]
 
 /-- A family of maps `oₙ : B ⟶ K` into a complete object `K` such that `oₙ₊₁ ≫ z_K = oₙ`
 vanishes: it is a cone over the tower `⋯ --z--> K --z--> K`, whose homotopy limit vanishes. -/
