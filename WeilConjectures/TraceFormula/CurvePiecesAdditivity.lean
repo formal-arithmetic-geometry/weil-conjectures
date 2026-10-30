@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.PieceAdditivity
+public import WeilConjectures.TraceFormula.IntegralPointThickening
+public import WeilConjectures.TraceFormula.StalkFrobeniusGraph
 
 /-!
 
