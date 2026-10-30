@@ -700,11 +700,11 @@ lemma sum_single_some_mem [DecidableEq ι] (S : Subfield Ω) (s : Finset ι) {c 
 /-- **Kummer normal form**: a `1`-unit of `L₁` (approximated by a combination of lifted
 Frobenius monomials with coefficients in a discrete subfield `K*`) which is a `p`-th power in `L₂`
 is a `p`-th power in `L₁`. -/
-theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁c L₁ L₂ Kst : Subfield Ω)
     (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
-    (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
+    (hKL₁ : K ≤ L₁c) (hL₁c : L₁c ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
     (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
-    (hw : ∀ i, w i ∈ L₁) (hw1 : ∀ i, v (w i) = 1)
+    (hw : ∀ i, w i ∈ L₁c) (hw1 : ∀ i, v (w i) = 1)
     (hval : ∀ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) →
       ∀ j, v (c j) ≤ v (frobeniusComb p w c))
     (γ : Γ₀) (hγ0 : 0 < γ) (hγ1 : γ < 1)
@@ -715,19 +715,19 @@ theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
       (∀ j, v (c j) ≤ 1) → v (z ^ p - frobeniusComb p w c) < 1 →
         ∀ i : ι, v (c (some (i, 0))) < 1)
     (hhens : ∀ x ∈ L₁, v.IsKummerNegligible p x → ∃ y ∈ L₁, y ^ p = 1 + x)
-    (hexp : ∀ y ∈ L₁, ∃ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) ∧
+    (hexp : ∀ y ∈ L₁c, ∃ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) ∧
       v.IsKummerNegligible p (y - frobeniusComb p w c))
-    {u : Ω} (hu : u ∈ L₁) (c : Option (ι × ℕ) →₀ Ω) (hc : ∀ j, c j ∈ Kst)
+    {u : Ω} (hu : u ∈ L₁c) (c : Option (ι × ℕ) →₀ Ω) (hc : ∀ j, c j ∈ Kst)
     (hc1 : ∀ j, v (c j) < 1) (hu1 : v (u - 1 - frobeniusComb p w c) < v (p : Ω))
     (h₂ : ∃ y ∈ L₂, y ^ p = u) :
     ∃ y ∈ L₁, y ^ p = u := by
   classical
   have hp2 := hp.two_le
   have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
-  obtain ⟨g, hgL, hg0, hgv⟩ := exists_valuation_div_pow_sub_one_lt p K L₁ L₂ Kst hp hp1 hp0
-    hKL₁ hL hKst hroot hw hw1 hval γ hγ0 hγ1 hdisc N hN hprod hres1 hu c hc hc1 hu1 h₂
+  obtain ⟨g, hgL, hg0, hgv⟩ := exists_valuation_div_pow_sub_one_lt p K L₁c L₂ Kst hp hp1 hp0
+    hKL₁ (hL₁c.trans hL) hKst hroot hw hw1 hval γ hγ0 hγ1 hdisc N hN hprod hres1 hu c hc hc1 hu1 h₂
   set t := u / g ^ p - 1 with htdef
-  have htL : t ∈ L₁ := sub_mem (div_mem hu (pow_mem hgL _)) (one_mem _)
+  have htL : t ∈ L₁c := sub_mem (div_mem hu (pow_mem hgL _)) (one_mem _)
   obtain ⟨c', hc'K, hc'n⟩ := hexp t htL
   -- the coefficients of `c'` have value `< v p`
   have hneg_lt : ∀ x : Ω, v.IsKummerNegligible p x → v x < v (p : Ω) := by
@@ -753,9 +753,9 @@ theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
     exact zero_ne_one h1T
   have hnn : v.IsKummerNegligible p ((t - T') / (1 + T')) :=
     hn.of_le (by rw [map_div₀, h1T, div_one])
-  have hT'L : T' ∈ L₁ :=
-    sum_mem fun j _ ↦ mul_mem (hKL₁ (hc'K j)) (frobeniusMonomial_mem p L₁ hw j)
-  have hnL : (t - T') / (1 + T') ∈ L₁ := div_mem (sub_mem htL hT'L) (add_mem (one_mem _) hT'L)
+  have hT'L : T' ∈ L₁c :=
+    sum_mem fun j _ ↦ mul_mem (hKL₁ (hc'K j)) (frobeniusMonomial_mem p L₁c hw j)
+  have hnL : (t - T') / (1 + T') ∈ L₁c := div_mem (sub_mem htL hT'L) (add_mem (one_mem _) hT'L)
   have hfac : u / g ^ p = (1 + c' none + liftedSum p w c'.some) * (1 + (t - T') / (1 + T')) := by
     rw [add_assoc, ← frobeniusComb_eq, ← hT'def, htdef]
     field_simp
@@ -778,9 +778,10 @@ theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
         exact zero_le) (by rwa [frobeniusComb_sum_single]) i
     rwa [sum_single_some_apply s c₀ hi] at h
   obtain ⟨y, hyL, hyu⟩ := h₂
-  obtain ⟨y', hy'L, hy'⟩ := kummer_stage2 K L₁ L₂ hp hp1 hp0 hKL₁ hL hroot hw hw1 hval' hhens
-    hres' c'.some (fun j ↦ hc'K _) (fun j ↦ hc'v _) (hc'K none) (hc'v none) hnL hnn
-    ⟨y / g, div_mem hyL (hL hgL), by rw [div_pow, hyu, hfac]⟩
-  refine ⟨g * y', mul_mem hgL hy'L, ?_⟩
+  obtain ⟨y', hy'L, hy'⟩ := kummer_stage2 K L₁ L₂ hp hp1 hp0 (hKL₁.trans hL₁c) hL hroot
+    (fun i ↦ hL₁c (hw i)) hw1 hval' hhens
+    hres' c'.some (fun j ↦ hc'K _) (fun j ↦ hc'v _) (hc'K none) (hc'v none) (hL₁c hnL) hnn
+    ⟨y / g, div_mem hyL (hL (hL₁c hgL)), by rw [div_pow, hyu, hfac]⟩
+  refine ⟨g * y', mul_mem (hL₁c hgL) hy'L, ?_⟩
   rw [mul_pow, hy', ← hfac]
   field_simp

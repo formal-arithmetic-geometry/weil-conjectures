@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
 public import WeilConjectures.FieldTheory.GaloisRestriction
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStability
 
 /-!
 
@@ -71,7 +72,12 @@ theorem sliceTraitOfStrictLocalizationHom_mem_compositum [IsAlgClosed Ω₁] [Is
         (ker_comp_eq_maximalIdeal ι b₂ hb₂)).Ω) ∈
         (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁
           (ker_comp_eq_maximalIdeal ι b₂ hb₂)).compositum :=
-  sorry
+  letI := a₁.toAlgebra
+  letI := a₂.toAlgebra
+  fun x hx ↦ SliceTrait.Hom.mem_compositum_of_ΩMap_mem ha₁ halg₁ ha₂ halg₂
+    (ker_comp_eq_maximalIdeal ι b₂ hb₂) hb₂
+    (sliceTraitOfStrictLocalizationHom ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂) (fun _ ↦ rfl)
+    (mem_separableClosure_iff.1 x.2) hx
 
 include hι ha₁ halg₁ ha₂ halg₂ hc hb₂ in
 /-- The relative separable closedness of `L₁` in `L₂`, in the form used for the restriction of
