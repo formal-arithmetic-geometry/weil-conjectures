@@ -438,3 +438,110 @@ theorem kummer_stage2_base (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω)
       exact lt_irrefl _ this
 
 end Stage2Base
+
+section Stage2Main
+
+variable {v p} {ι : Type*} {w : ι → Ω} (K L₁ L₂ : Subfield Ω)
+
+/-- The lifted sum of a combination of depth zero. -/
+lemma liftedSum_eq_sum_image [DecidableEq ι] (d : ι × ℕ →₀ Ω) (h0 : ∀ j ∈ d.support, j.2 = 0) :
+    liftedSum p w d = ∑ i ∈ d.support.image Prod.fst, d (i, 0) * w i := by
+  rw [liftedSum, Finsupp.sum, Finset.sum_image]
+  · refine Finset.sum_congr rfl fun j hj ↦ ?_
+    obtain ⟨a, b⟩ := j
+    obtain rfl : b = 0 := h0 _ hj
+    simp
+  · intro j hj j' hj' h
+    exact Prod.ext h ((h0 j hj).trans (h0 j' hj').symm)
+
+lemma sum_snd_support_lt [DecidableEq ι] (d : ι × ℕ →₀ Ω) (i : ι) (k : ℕ)
+    (hj : (i, k + 1) ∈ d.support) (x : Ω) :
+    (d.erase (i, k + 1) + Finsupp.single (i, k) x).support.sum Prod.snd <
+      d.support.sum Prod.snd := by
+  classical
+  have hsub : (d.erase (i, k + 1) + Finsupp.single (i, k) x).support ⊆
+      insert (i, k) (d.support.erase (i, k + 1)) := by
+    refine Finsupp.support_add.trans ?_
+    rw [Finsupp.support_erase]
+    exact Finset.union_subset (Finset.subset_insert _ _)
+      (Finsupp.support_single_subset.trans (by simp))
+  calc (d.erase (i, k + 1) + Finsupp.single (i, k) x).support.sum Prod.snd
+      ≤ (insert (i, k) (d.support.erase (i, k + 1))).sum Prod.snd :=
+        Finset.sum_le_sum_of_subset hsub
+    _ ≤ k + (d.support.erase (i, k + 1)).sum Prod.snd := by
+        by_cases h : (i, k) ∈ d.support.erase (i, k + 1)
+        · rw [Finset.insert_eq_of_mem h]; omega
+        · rw [Finset.sum_insert h]
+    _ < d.support.sum Prod.snd := by
+        rw [← Finset.sum_erase_add d.support Prod.snd hj]
+        rw [add_comm]; exact Nat.add_lt_add_left (Nat.lt_succ_self k) _
+
+/-- **Stage 2 of the Kummer normal form.** -/
+theorem kummer_stage2 [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
+    (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
+    (hw : ∀ i, w i ∈ L₁) (hw1 : ∀ i, v (w i) = 1)
+    (hval : ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
+      ∀ i ∈ s, v (c i) ≤ v (∑ j ∈ s, c j * w j))
+    (hhens : ∀ x ∈ L₁, v.IsKummerNegligible p x → ∃ y ∈ L₁, y ^ p = 1 + x)
+    (hres : ∀ z ∈ L₂, v z ≤ 1 → ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
+      (∀ i ∈ s, v (c i) ≤ 1) → v (z ^ p - ∑ i ∈ s, c i * w i) < 1 → ∀ i ∈ s, v (c i) < 1)
+    (d : ι × ℕ →₀ Ω) (hd : ∀ j, d j ∈ K) (hdv : ∀ j, v (d j) < v (p : Ω))
+    {d₀ : Ω} (hd₀ : d₀ ∈ K) (hd₀v : v d₀ < v (p : Ω)) {n : Ω} (hnL : n ∈ L₁)
+    (hn : v.IsKummerNegligible p n)
+    (h₂ : ∃ y ∈ L₂, y ^ p = (1 + d₀ + liftedSum p w d) * (1 + n)) :
+    ∃ y ∈ L₁, y ^ p = (1 + d₀ + liftedSum p w d) * (1 + n) := by
+  have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
+  induction hN : d.support.sum Prod.snd using Nat.strong_induction_on generalizing d n with
+  | _ N ih =>
+  by_cases hex : ∃ j ∈ d.support, j.2 ≠ 0
+  · obtain ⟨⟨i, k'⟩, hj, hk⟩ := hex
+    obtain ⟨k, rfl⟩ : ∃ k, k' = k + 1 := ⟨k' - 1, by simp at hk; omega⟩
+    obtain ⟨e, heK, he⟩ := hroot _ (hd (i, k + 1))
+    obtain ⟨n', hn', heq, hc1, hd'v⟩ :=
+      kummer_stage2_step hp hp1 hp0 hw1 d hdv hd₀v hn i k he
+    set c := e * w i ^ p ^ k with hcdef
+    set d' := d.erase (i, k + 1) + Finsupp.single (i, k) (-(p : Ω) * e) with hd'def
+    have hcL : c ∈ L₁ := mul_mem (hKL₁ heK) (pow_mem (hw i) _)
+    have h1c : (1 + c) ^ p ≠ 0 := pow_ne_zero _ (by
+      intro h; have := valuation_one_add_eq_one hc1; rw [h, map_zero] at this
+      exact zero_ne_one this)
+    have hd'K : ∀ j, d' j ∈ K := fun j ↦ by
+      rw [hd'def, Finsupp.add_apply, Finsupp.erase_apply, Finsupp.single_apply]
+      refine add_mem (by split_ifs; exacts [zero_mem _, hd j]) (by
+        split_ifs; exacts [mul_mem (neg_mem (natCast_mem _ _)) heK, zero_mem _])
+    have hSL : liftedSum p w d' ∈ L₁ := sum_mem fun j _ ↦
+      mul_mem (hKL₁ (hd'K j)) (pow_mem (hw j.1) _)
+    have hT1 : v (d₀ + liftedSum p w d') < 1 := by
+      refine lt_of_le_of_lt (v.map_add _ _) (max_lt (hd₀v.trans hp1) ?_)
+      exact (v.map_sum_lt hvp.ne' fun j _ ↦ by
+        rw [map_mul, map_pow, hw1, one_pow, mul_one]; exact hd'v j).trans hp1
+    have hA0 : 1 + d₀ + liftedSum p w d' ≠ 0 := by
+      intro h; have := valuation_one_add_eq_one hT1; rw [← add_assoc, h, map_zero] at this
+      exact zero_ne_one this
+    have hn'L : n' ∈ L₁ := by
+      have h1n' : 1 + n' = (1 + d₀ + liftedSum p w d) * (1 + n) /
+          ((1 + c) ^ p * (1 + d₀ + liftedSum p w d')) := by
+        rw [heq]; field_simp
+      have : 1 + n' ∈ L₁ := by
+        rw [h1n']
+        refine div_mem (mul_mem (add_mem (add_mem (one_mem _) (hKL₁ hd₀)) (sum_mem fun j _ ↦
+          mul_mem (hKL₁ (hd j)) (pow_mem (hw j.1) _))) (add_mem (one_mem _) hnL))
+          (mul_mem (pow_mem (add_mem (one_mem _) hcL) _)
+            (add_mem (add_mem (one_mem _) (hKL₁ hd₀)) hSL))
+      simpa using sub_mem this (one_mem L₁)
+    have hlt := sum_snd_support_lt d i k hj (-(p : Ω) * e)
+    rw [hN] at hlt
+    obtain ⟨y', hy'L, hy'⟩ := ih _ hlt d' hd'K hd'v hn'L hn' (by
+      obtain ⟨y, hyL, hy⟩ := h₂
+      refine ⟨y / (1 + c), div_mem hyL (hL (add_mem (one_mem _) hcL)), ?_⟩
+      rw [div_pow, hy, heq]
+      field_simp) rfl
+    refine ⟨(1 + c) * y', mul_mem (add_mem (one_mem _) hcL) hy'L, ?_⟩
+    rw [mul_pow, hy', heq]
+  · push Not at hex
+    have h0 : ∀ j ∈ d.support, j.2 = 0 := hex
+    rw [liftedSum_eq_sum_image d h0] at h₂ ⊢
+    refine kummer_stage2_base K L₁ L₂ hp hp1 hp0 hKL₁ hL hroot hw hw1 hval hhens hres _
+      (fun i ↦ d (i, 0)) (fun i _ ↦ hd _) (fun i _ ↦ hdv _) hd₀ hd₀v hnL hn h₂
+
+end Stage2Main
