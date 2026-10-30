@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilIdentityStructure
+public import WeilConjectures.TraceFormula.ShriekTraceFunction
+public import WeilConjectures.TraceFormula.WeilIdentityStructureOfId
 public import WeilConjectures.WeilSheaf.CondensedModelBoundedConstructible
 public import WeilConjectures.WeilSheaf.CondensedModelGeometricFiberPullback
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
@@ -173,7 +174,7 @@ noncomputable def derivedLowerShriekGeometricFiberPullbackToCondensedIso {H : Ad
 
 /-- The pullback to the geometric fibre of `Mʲ = Hʲ(Ra_! H)`, as a condensed Weil object on
 `Spec k₀`, is the `j`-th cohomology sheaf of `Ra_! (p^* H)` through `toCondensed`. -/
-noncomputable def toCondensedHomologySheafDerivedLowerShriekIso {H : AdicSheaf l X}
+noncomputable def toCondensedHomologySheafDerivedLowerShriekPullbackIso {H : AdicSheaf l X}
     (hH : IsAdicLisseSheaf H) (j : ℤ) :
     (ProEtaleWeilSheaf.toCondensed k₀ l (Spec (CommRingCat.of k₀))).obj
         ((homologySheaf j).obj ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj
@@ -224,7 +225,7 @@ noncomputable def homologySheafDerivedLowerShriekGeometricFiberPullbackObjIso
       (ProEtaleWeilSheaf.geometricFiberPullback k₀ l (Spec (CommRingCat.of k₀))).obj
         (lowerShriekHomologyAdicOfLisse (k₀ := k₀) hH j) :=
   (ProEtaleWeilSheaf.toCondensed k₀ l (Spec (CommRingCat.of k₀))).preimageIso
-    (toCondensedHomologySheafDerivedLowerShriekIso hH j ≪≫
+    (toCondensedHomologySheafDerivedLowerShriekPullbackIso hH j ≪≫
       (toCondensedGeometricFiberPullbackLowerShriekHomologyIso hH j).symm)
 
 /-- **The cohomology sheaves of `Ra_! (p^* H)`**: the `j`-th cohomology sheaf of the compactly
@@ -266,6 +267,45 @@ noncomputable def weilObjectOfLisseOneIso {H : AdicSheaf l X} (hH : IsAdicLisseS
       weilObjectOfLisse_str, WeilBoundedConstructible.ofId_str, Iso.trans_hom,
       boundedConstructibleOfLisseSMulIso_one_hom]
     exact (Category.comp_id _).symm)
+
+/-- The isomorphism of Weil sheaves on `Spec k₀` between the `j`-th homology sheaf of the
+compactly supported cohomology of the Weil object `(H, 1)` and the Weil sheaf
+`Mʲ = Hʲ(Ra_! H)` with the identity structure. -/
+noncomputable def homologyWeilCompactSupportCohomologyWeilObjectOfLisseIso {H : AdicSheaf l X}
+    (hH : IsAdicLisseSheaf H) (j : ℤ) :
+    (WeilBoundedConstructible.homologyFunctor l (Iso.refl (point k₀)) j).obj
+        ((weilCompactSupportCohomology l (Iso.refl (overSpec (k₀ := k₀) X))).obj
+          (weilObjectOfLisse (k₀ := k₀) hH 1)) ≅
+      WeilSheaf.ofId l (X := point k₀) (lowerShriekHomologyOfLisse hH j) :=
+  (WeilBoundedConstructible.homologyFunctor l (Iso.refl (point k₀)) j).mapIso
+      ((weilCompactSupportCohomology l (Iso.refl (overSpec (k₀ := k₀) X))).mapIso
+          (weilObjectOfLisseOneIso hH) ≪≫
+        weilCompactSupportCohomologyOfIdIso l (boundedConstructibleOfLisse hH)) ≪≫
+    WeilBoundedConstructible.homologyFunctorOfIdIso l j _
+
+/-- The local trace of the Weil object `(H, 1)` is the trace of the Frobenius on the stalk of the
+Weil sheaf `H` with the identity structure. -/
+lemma weilStalkTraceAlternatingSum_weilObjectOfLisse_one {H : AdicSheaf l X}
+    (hH : IsAdicLisseSheaf H) (n : ℕ)
+    (x : Spec (.of (AlgebraicClosure k₀)) ⟶ X)
+    (hx : x ≫ ((Iso.refl (overSpec (k₀ := k₀) X)).pow (n + 1)).hom.left =
+      ((geometricFrobeniusField k₀).pow (n + 1)).hom ≫ x) :
+    weilStalkTraceAlternatingSum l (n + 1) x hx (weilObjectOfLisse (k₀ := k₀) hH 1) =
+      weilSheafStalkTrace l (n + 1) x hx (WeilSheaf.ofId l (X := overSpec (k₀ := k₀) X)
+        ((adicSheafEquivCondensedMod l X).functor.obj H)) := by
+  refine (weilStalkTraceAlternatingSum_congr (e := Iso.refl (overSpec (k₀ := k₀) X)) l n x hx
+    (weilObjectOfLisseOneIso hH)).trans ?_
+  refine (weilStalkTraceAlternatingSum_ofId_of_isZero (X := overSpec (k₀ := k₀) X) l (n + 1) x hx
+    (boundedConstructibleOfLisse hH)
+    fun i hi ↦ DerivedCategory.isZero_homologyFunctor_obj_of_iso_singleFunctor
+      (Iso.refl ((DerivedCategory.singleFunctor _ 0).obj
+        ((adicSheafEquivCondensedMod l X).functor.obj H))) hi).trans ?_
+  have e : (DerivedCategory.homologyFunctor _ 0).obj (boundedConstructibleOfLisse hH).obj ≅
+      (adicSheafEquivCondensedMod l X).functor.obj H :=
+    (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app _
+  have h₂ := weilSheafStalkTrace_congr (X := overSpec (k₀ := k₀) X) (e := Iso.refl _) l (n + 1) x hx
+    (WeilSheaf.ofIdMapIso (X := overSpec (k₀ := k₀) X) l e)
+  exact h₂
 
 end WeilComplex
 

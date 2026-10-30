@@ -150,4 +150,29 @@ noncomputable def weilCompactSupportCohomologyOfIdIso
     exact (weilCompactSupportCohomology_obj_ofId_str_hom ℓ A).symm.trans
       (Category.comp_id _).symm)
 
+section Trace
+
+variable [Finite k] (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
+  (hx : x ≫ ((Iso.refl X).pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x)
+
+/-- The local trace of the Weil object `ofId A` for `A` concentrated in degree `0` is the trace of
+the Frobenius on the stalk of the Weil sheaf `ofId H⁰(A)`. -/
+lemma weilStalkTraceAlternatingSum_ofId_of_isZero
+    (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (hA : ∀ i ≠ 0, Limits.IsZero ((DerivedCategory.homologyFunctor _ i).obj A.obj)) :
+    weilStalkTraceAlternatingSum ℓ n x hx (WeilBoundedConstructible.ofId ℓ A) =
+      weilSheafStalkTrace ℓ n x hx
+        (WeilSheaf.ofId ℓ ((DerivedCategory.homologyFunctor _ 0).obj A.obj)) := by
+  rw [weilStalkTraceAlternatingSum]
+  refine (finsum_eq_single _ 0 fun j hj ↦ ?_).trans ?_
+  · refine smul_eq_zero_of_right _ (traceOrZero_eq_zero_of_isZero ?_ _)
+    rw [Functor.id_obj, WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor, Functor.comp_obj,
+      WeilSheaf.stalkFunctor_obj_carrier, WeilSheaf.powFunctor_obj, WeilSheaf.pow_carrier]
+    exact Functor.map_isZero _ (hA j hj)
+  · rw [Int.negOnePow_zero, Units.val_one, one_smul]
+    exact weilSheafStalkTrace_congr ℓ n x hx
+      (WeilBoundedConstructible.homologyFunctorOfIdIso ℓ 0 A)
+
+end Trace
+
 end AlgebraicGeometry.ProEtale.CondensedRing
