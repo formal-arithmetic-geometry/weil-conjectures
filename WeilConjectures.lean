@@ -14437,6 +14437,7 @@ public import WeilConjectures.TateTwist.EtaleTateSheafPow
 public import WeilConjectures.TateTwist.FiniteRootsOfUnity
 public import WeilConjectures.TateTwist.Integral
 public import WeilConjectures.TateTwist.IntegralLocallyFree
+public import WeilConjectures.TateTwist.IntegralReduction
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
