@@ -8873,6 +8873,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdicFiniteIntermediateFieldIso
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextensionBasis
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.IntegersModPow
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
@@ -13508,6 +13509,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ClosedImmersionExtendScalars
@@ -13800,6 +13802,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSectio
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicIntCokernelPowTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ProjectiveTensorUnitCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushFiniteFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIdentify
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
