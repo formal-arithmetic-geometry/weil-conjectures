@@ -22,19 +22,23 @@ namespace CategoryTheory
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
-local instance : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
+local instance instIsGrothendieckAbelianRingedSingletonCoefficientCone :
+    IsGrothendieckAbelian.{u} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.isGrothendieckAbelian _
-local instance : MonoidalCategory (SheafOfModules.{u}
+local instance instMonoidalCategoryRingedSingletonCoefficientCone :
+    MonoidalCategory (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.monoidalCategory O
-local instance : SymmetricCategory (SheafOfModules.{u}
+local instance instSymmetricCategoryRingedSingletonCoefficientCone :
+    SymmetricCategory (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.symmetricCategory O
-local instance : MonoidalPreadditive (SheafOfModules.{u}
+local instance instMonoidalPreadditiveRingedSingletonCoefficientCone :
+    MonoidalPreadditive (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).1
-local instance : MonoidalClosed (SheafOfModules.{u}
+local instance instMonoidalClosedRingedSingletonCoefficientCone : MonoidalClosed (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).2.1
 

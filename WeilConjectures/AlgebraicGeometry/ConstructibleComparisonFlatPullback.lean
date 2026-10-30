@@ -55,7 +55,7 @@ theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     (M : ConstantCompletion.Mod (ConstantCompletion.constant
       (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A))
     (hM : SheafOfModules.IsFlat M) :
-    SheafOfModules.IsFlat ((constructibleComparisonPullback X A).obj M) := by
+    SheafOfModules.IsFlat ((constructibleComparisonPullback.{u, v} X A).obj M) := by
   classical
   let J := Scheme.smallModelComparisonEtaleTopology.{u, v} X
   let K := Scheme.coefficientProEtaleModelTopology.{u, v} X

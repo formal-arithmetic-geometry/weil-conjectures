@@ -22,7 +22,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
   {B : Type r} [CommRing B] [Linear B A] [MonoidalLinear B A]
 
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance instHasColimitsOfSizeReductionIsoShift :
+    HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
 open CochainComplex HomComplex mappingCone HomologicalComplex
 

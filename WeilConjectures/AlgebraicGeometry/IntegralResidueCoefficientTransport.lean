@@ -138,21 +138,22 @@ theorem integral_residue_coefficient_transport (l : ℕ) [Fact l.Prime]
   let := (residueTensorColimits X RA).1
   let := (residueTensorColimits X RA).2
   let := residueFlatResolution X RA
-  have hT : DerivedCategory.finiteTorAmplitude _ L ↔
+  have hT : _root_.DerivedCategory.finiteTorAmplitude _ L ↔
       Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u} X k M := by
-    have hi : DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) ↔
-        DerivedCategory.finiteTorAmplitude _ M :=
-      ⟨fun h ↦ (DerivedCategory.finiteTorAmplitude _).prop_of_iso i h,
-        fun h ↦ (DerivedCategory.finiteTorAmplitude _).prop_of_iso i.symm h⟩
-    have ht : DerivedCategory.finiteTorAmplitude _ L ↔
-        DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) := by
+    have hi : _root_.DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ M :=
+      ⟨fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso i h,
+        fun h ↦ (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso i.symm h⟩
+    have ht : _root_.DerivedCategory.finiteTorAmplitude _ L ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) := by
       exact exists_congr fun a ↦ exists_congr fun b ↦
         (DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff F a b L).symm
     apply ht.trans (hi.trans ?_)
     constructor
     · rintro ⟨a, b, h⟩
       exact ⟨min a b, b, (CategoryTheory.nativeTor_iff _ M (min a b) b
-        (min_le_right a b)).mp (DerivedCategory.torAmplitudeIn.mono (min_le_left a b) le_rfl h)⟩
+        (min_le_right a b)).mp
+          (_root_.DerivedCategory.torAmplitudeIn.mono (min_le_left a b) le_rfl h)⟩
     · rintro ⟨a, b, h⟩
       exact ⟨a, b, (CategoryTheory.nativeTor_iff _ M a b h.1).mpr h⟩
   exact and_congr hH hT

@@ -21,6 +21,10 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 open CategoryTheory.ConstantCompletion
 namespace AdicCoefficientProof
 
@@ -322,7 +326,6 @@ end AdicCoefficientProof
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The consecutive finite quotients form a short exact sequence whose kernel has
 an action of the residue coefficient sheaf, on the actual slice site.
 

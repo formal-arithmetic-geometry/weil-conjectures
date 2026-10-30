@@ -49,7 +49,8 @@ private instance etaleSheafify
   have : HasSheafify ((equivSmallModel.{max v (u + 1)} X.Etale).inverse.inducedTopology
       X.smallEtaleTopology) (ModuleCat.{max v (u + 1)} B) :=
     GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
-  exact hasSheafifyEssentiallySmallSite X.smallEtaleTopology (ModuleCat.{max v (u + 1)} B)
+  exact hasSheafifyEssentiallySmallSite.{u, max v (u + 1), u + 1, max v (u + 1) + 1, max v (u + 1)}
+    X.smallEtaleTopology (ModuleCat.{max v (u + 1)} B)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem geometric_fiber_flat

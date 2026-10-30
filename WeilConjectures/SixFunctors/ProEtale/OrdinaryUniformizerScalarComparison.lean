@@ -25,6 +25,9 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj TensorProduct
+
+-- Live's `InternalSectionTensorComparison` made these global; the port keeps them local there.
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 namespace AlgebraicGeometry.ProEtale.InternalCompletionTransport
 open IntegralModelsStacks
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
