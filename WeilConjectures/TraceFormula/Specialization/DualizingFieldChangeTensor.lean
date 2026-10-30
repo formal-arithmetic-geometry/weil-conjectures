@@ -130,7 +130,7 @@ lemma δ_comp_pullbackSquareComparison_hom_app {X Y X' Y' : Scheme.{u}} {p : X �
 
 /-- The base change morphism is the mate of the pullback comparison, on the ambient derived
 categories. -/
-lemma map_baseChangeMap_app_comp_counit {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y}
+lemma map_baseChangeMap_app_comp_counit_ambient {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y}
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' p' p g)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
@@ -233,7 +233,7 @@ lemma map_boundedConstructibleBaseChangeOfMap_app_comp_counit (sq : CommSq g' f'
   have h := map_liftExchange_app_comp_counit_aux ℓ
     (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq).hom
     (baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq)
-    (map_baseChangeMap_app_comp_counit (Profinite.padicAlgClRingObj ℓ) sq) A
+    (map_baseChangeMap_app_comp_counit_ambient (Profinite.padicAlgClRingObj ℓ) sq) A
   unfold boundedConstructibleBaseChangeOfMap boundedConstructiblePullbackComparisonOfMap
   cast_proofs h
 
