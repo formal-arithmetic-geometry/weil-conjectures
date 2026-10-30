@@ -12341,6 +12341,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.DirectImageBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.UpperShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
