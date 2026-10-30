@@ -12993,18 +12993,15 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerTopology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelDerived
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelEquivalenceFunctoriality
-<<<<<<< HEAD
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGaloisTrace
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelSections
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
-=======
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGalois
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelGaloisTrace
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelPointTrace
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalars
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarComp
->>>>>>> origin/trace2/wcl3-global
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelUpperStarUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
@@ -13905,11 +13902,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.K
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionCounit
-<<<<<<< HEAD
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionsGalois
-=======
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Sections
->>>>>>> origin/trace2/wcl3-global
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionsGalois
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
@@ -14948,11 +14942,8 @@ public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseCohomology
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseGlobal
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseLocal
-<<<<<<< HEAD
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseLocalGalois
-=======
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseSpecTrace
->>>>>>> origin/trace2/wcl3-global
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonConstant
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonInduction
