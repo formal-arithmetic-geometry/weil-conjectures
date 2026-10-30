@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.GeometricFiberPullback
-public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.AlgebraicGeometry.ConstantFieldOfSmooth
+public import WeilConjectures.WeilSheaf.WeilDescentConnected
+public import WeilConjectures.WeilSheaf.WeilDescentConstantField
 
 /-!
 # Irreducible lisse Weil sheaves are twists of sheaves on the model
@@ -45,7 +46,20 @@ lisse Weil sheaf is isomorphic to a constant twist `p^* H ⊗ 𝓑_b` of the pul
 theorem IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback
     {G : WeilSheaf k₀ l V} (hG : G.IsIrreducibleLisse) :
     ∃ (H : AdicSheaf l V) (hH : IsAdicLisseSheaf H) (b : (PadicAlgCl l)ˣ),
-      Nonempty (G ≅ (geometricFiberPullback (k₀ := k₀) hH).constantTwist b) :=
-  sorry
+      Nonempty (G ≅ (geometricFiberPullback (k₀ := k₀) hH).constantTwist b) := by
+  -- the separatedness and finiteness hypotheses of the statement are implied by smoothness and
+  -- affineness
+  have _ : IsSeparated (V ↘ Spec (CommRingCat.of k₀)) ∧
+      LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀)) ∧
+      QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := ⟨‹_›, ‹_›, ‹_›⟩
+  obtain ⟨k', _, _, _, c, hc, hsm, hgc⟩ := exists_constantField_of_smooth (V ↘ Spec (.of k₀))
+  let : V.Over (Spec (.of k')) := ⟨c⟩
+  have : Module.Finite k₀ k' := Module.Finite.of_finite
+  obtain ⟨m, hm⟩ := Nat.exists_eq_succ_of_ne_zero (Module.finrank_pos (R := k₀) (M := k')).ne'
+  refine exists_iso_constantTwist_geometricFiberPullback_of_constantField hc hm
+    (fun G' hG' ↦ ?_) hG
+  have : Smooth (V ↘ Spec (.of k')) := hsm
+  have : GeometricallyConnected (V ↘ Spec (.of k')) := hgc
+  exact hG'.exists_iso_constantTwist_of_geometricallyConnected
 
 end AlgebraicGeometry.WeilSheaf
