@@ -137,12 +137,12 @@ theorem nonempty_specializationDefect_lowerStar_iso [IsProper f.left]
       (siteIdeal_map_appLE_le_bot_centreMap f I))
     (boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X' (I.comap f.left)) L')
-  have h₃ := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ X.hom
+  have h₃ := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ X.hom
     (centre X I).hom
     (⟨centreι_comp_eq_centreMap_comp f I⟩ : CommSq (centreι X' (I.comap f.left)).left
       (centreMap f I).left f.left (centreι X I).left)
     (isPullback_centreMap f I).flip L'.obj L'.property
-  have h₄ := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ
+  have h₄ := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ
     (deformationSpecialFibre X I k').hom (deformationSpecialFibre (centre X I) ⊥ k').hom
     (⟨zeroSectionSpecialFibreMap_comp_eq f I k'⟩ :
       CommSq (zeroSectionSpecialFibreMap X' (I.comap f.left) k').left

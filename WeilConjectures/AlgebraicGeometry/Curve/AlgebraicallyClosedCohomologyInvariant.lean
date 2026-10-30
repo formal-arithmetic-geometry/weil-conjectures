@@ -9,6 +9,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions
 
 /-!

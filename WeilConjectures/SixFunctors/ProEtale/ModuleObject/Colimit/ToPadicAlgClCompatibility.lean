@@ -37,7 +37,7 @@ coefficient comparisons of blueprint `sk-prop-scalar-six` for `E ⟶ ℚ̄_ℓ` 
 The exchange for `f^!` is in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility`. This file
 does not import the exceptional inverse image, so that the existence of `Rg^!` over `ℚ̄_ℓ`
-(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit`) can use it.
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit`) can use it.
 -/
 
 @[expose] public section

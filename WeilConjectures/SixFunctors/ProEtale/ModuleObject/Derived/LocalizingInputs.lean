@@ -8,6 +8,11 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbientIntegral
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Inputs from other subsections for the projection formula on `Loc(Dbc)`
@@ -123,7 +128,11 @@ theorem properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (p :
       boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K →
         boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left) M →
           IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E) p.left).app K).app M)) :=
-  sorry
+  ⟨fun K hK ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩,
+    fun sq K hK ↦ isIso_baseChangeMap_app_padicIntegers_of_isProper ℓ E sq
+      ((Over.forget _).map_commSq sq.toCommSq) rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl K hK,
+    fun K M hK hM ↦
+      isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible ℓ E p K M hK hM⟩
 
 /-- Blueprint `det-prop-int-compactness-direct-sums`: Integral proper direct image on the
 localizing categories. Let `p : X ⟶ Y` be proper, with fibres of dimension `≤ d`.
@@ -293,6 +302,8 @@ theorem boundedConstructible_tensor_padicAlgClRingObj
     boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L) :=
   ObjectProperty.prop_tensor hK hL
 
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [IsSeparated Y'.hom] in
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
 projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = ℚ̲̄_ℓ`. Let `p : X ⟶ Y` be proper.
 
@@ -323,7 +334,18 @@ theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X 
     (∀ (K : 𝔻[𝐐](X.left)) (M : 𝔻[𝐐](Y.left)), boundedConstructible (condensedRingObj 𝐐 X.left) K →
       boundedConstructible (condensedRingObj 𝐐 Y.left) M →
         IsIso (((projectionMap 𝐐 p.left).app K).app M)) :=
-  sorry
+  ⟨fun K hK ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p ⟨K, hK⟩,
+    fun sq K hK ↦ by
+      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y) := isNoetherian_left Y
+      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y') := isNoetherian_left Y'
+      have : IsProper ((Over.forget (Spec (.of k))).map p) := ‹IsProper p.left›
+      exact isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ (Y := (Over.forget _).obj Y)
+        (Y' := (Over.forget _).obj Y') Y.hom Y'.hom ((Over.forget _).map_commSq sq.toCommSq)
+        (sq.map (Over.forget _)) K hK,
+    fun K M hK hM ↦ isIso_projectionMap_padicAlgClRingObj_of_integral ℓ p
+      (fun E K M hK hM ↦ by
+        exact_mod_proofs (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ
+          (X' := X) (Y' := Y) E.1 p).2.2 K M hK hM) K M hK hM⟩
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
 the case `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps

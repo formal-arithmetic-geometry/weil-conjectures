@@ -7,8 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
-public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 
 /-!
 # Torsion cohomological dimension of a scheme of finite type over a field

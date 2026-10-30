@@ -7,10 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ExactSequence
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
-public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
-public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Resolution
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
@@ -18,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.Linear
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-!
 # Serre duality on the projective line

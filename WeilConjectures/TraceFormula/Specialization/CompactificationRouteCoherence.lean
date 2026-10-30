@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
-public import WeilConjectures.TraceFormula.ProperPushforward
 
 /-!
 

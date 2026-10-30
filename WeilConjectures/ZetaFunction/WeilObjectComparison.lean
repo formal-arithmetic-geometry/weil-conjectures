@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
 public import WeilConjectures.TraceFormula.Statement
-public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
-public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.Cohomology
 
 /-!
 # Weil complexes as Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`

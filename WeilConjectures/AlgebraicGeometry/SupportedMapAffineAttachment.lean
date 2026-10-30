@@ -8,8 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.SupportedMapAffineUnionGluing
-import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
 import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 

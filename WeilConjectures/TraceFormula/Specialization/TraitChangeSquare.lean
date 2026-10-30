@@ -131,7 +131,7 @@ theorem Hom.isIso_pullbackExchange_app_of_square_of_isProper {k₀ k₁ k₂ : T
     (hR : ∀ {U V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z') Ab.{u + 1})
       (condensedRingObj 𝐐 Z'))} (a : U ⟶ V), IsIso (R((k')_*⟦𝐐⟧).map a) → IsIso a) :
     IsIso ((φ₀.pullbackExchange 𝐐).app A) := by
-  have hbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ a₁ a₂ ⟨hb⟩ hpb A
+  have hbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ a₁ a₂ ⟨hb⟩ hpb A
     hA
   have hχ' := ψ'.isIso_pushforwardExchange_app_of_isProper a₂ hP hP₁ hi' hε'
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₀ A hA)

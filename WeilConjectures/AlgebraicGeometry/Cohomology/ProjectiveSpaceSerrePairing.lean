@@ -7,8 +7,10 @@ module
 
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
-public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
+import WeilConjectures.Compactification.Defs
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # The Serre pairing on projective space

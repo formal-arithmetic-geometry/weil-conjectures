@@ -30,7 +30,7 @@ change morphism of the square of identifications, of the comparison of the two g
 images, and of the base change morphism of the square of special fibres at `Rj_{M*} Lε_M^* K`
 (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isIso_baseChangeMap`). The first is
 invertible by proper base change over noetherian bases mapping to fields
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`), the
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), the
 last by proper base change at generic direct images
 (`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_lowerStar`).
 
@@ -83,7 +83,7 @@ theorem isIso_pushforwardExchange_app_of_isProper {k : Type u} [Field k]
   obtain ⟨aN, hN'⟩ := hN
   have : IsNoetherian N.generic := hN'.isNoetherian_generic
   obtain ⟨q, -, -, -, -, -, -⟩ := hN'.exists_isPullback
-  have h₁ := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ aY
+  have h₁ := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ aY
     (N.j ≫ q ≫ traitToBase k' k') φ.commSq_ε hε K hK
   have h₂ := φ.isIso_baseChangeMap_commSq_i_app_lowerStar hM ⟨aN, hN'⟩ hi _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε K hK)

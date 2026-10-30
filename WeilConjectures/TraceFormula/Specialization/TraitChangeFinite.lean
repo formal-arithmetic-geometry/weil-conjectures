@@ -46,7 +46,7 @@ Lσ_s^*(χ_ψ) ∘ bc_s ∘ Rq''_{s*}(α_φ) = α_τ(Rq_{η*}) ∘ Ψ_{S'}(bc_η
   `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`);
 * `bc_s`, `bc_η` are the base change morphisms of the cartesian squares of special and of generic
   fibres, invertible by proper base change (blueprint `sk-thm-sfb-proper-base-change`,
-  `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`);
+  `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`);
 * `α_τ` is the change of trait for the trait itself, invertible on bounded constructible complexes
   (`NearbyCyclesModel.isIso_pullbackExchange_traitGenericModelMap_app`), and `Rq_{η*}` preserves
   them (`boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`).
@@ -229,7 +229,7 @@ theorem isIso_pullbackExchange_traitChangeGenericHom_app_of_isFinite [IsFinite q
       (IsPullback.of_horiz_isIso ⟨rfl⟩) hA
   -- proper base change on the special fibres
   have : Fact (ringChar K ≠ ℓ) := ⟨Algebra.ringChar_eq k' K ▸ Fact.out⟩
-  have hbc' := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ (𝟙 _) (𝟙 _)
+  have hbc' := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ (𝟙 _) (𝟙 _)
     ⟨hs⟩ (isPullback_baseChangeSpecialMap_traitChange K hN) ((N.toGeneric.nearbyCycles 𝐐).obj A)
     hΨ
   -- the change of trait of the trait

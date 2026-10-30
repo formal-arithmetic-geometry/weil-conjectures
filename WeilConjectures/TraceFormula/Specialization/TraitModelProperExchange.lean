@@ -30,7 +30,7 @@ invertible by blueprint `det-sp-nearby-cycles-exchanges` (2),
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
 base change (blueprint `sk-thm-sfb-proper-base-change`,
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`), and
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
 by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
 -/
@@ -247,7 +247,7 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
   have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
-  have pbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian ℓ
+  have pbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ
     (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
   -- the base change morphisms are invertible
   have : IsIso (baseChangeMap 𝐐 ⟨hs⟩) := by

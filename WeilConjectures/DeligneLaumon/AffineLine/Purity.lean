@@ -5,19 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
-public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
 public import WeilConjectures.DeligneLaumon.AffineLine.DualNonexceptional
 public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
-public import WeilConjectures.WeilSheaf.DenseOpen
-public import WeilConjectures.WeilSheaf.FiniteLength
-public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.RealPurity
-public import WeilConjectures.WeilSheaf.StalkIso
-public import WeilConjectures.WeilSheaf.UpperStarExact
-public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 
 /-!
 # The generic Fourier sheaf is pure of some weight

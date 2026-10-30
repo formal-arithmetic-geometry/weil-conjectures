@@ -56,7 +56,7 @@ lemma regularEndSMul_comp (a b : 𝟙_ (Mod C R) ⟶ 𝟙_ (Mod C R)) (M : Mod C
 /-- The action of endomorphisms of the regular module is `ℤ`-linear. -/
 lemma regularEndSMul_zsmul (m : ℤ) (a : 𝟙_ (Mod C R) ⟶ 𝟙_ (Mod C R)) (M : Mod C R) :
     regularEndSMul (m • a) M = m • regularEndSMul a M := by
-  have h : (m • a) ▷ M = m • (a ▷ M) := (tensorRight M).map_zsmul
+  have h : (m • a) ▷ M = m • (a ▷ M) := (MonoidalCategory.tensorRight M).map_zsmul
   rw [regularEndSMul, regularEndSMul, h, Preadditive.zsmul_comp, Preadditive.comp_zsmul]
 
 /-- The identity of the regular module acts on complexes as the identity. -/

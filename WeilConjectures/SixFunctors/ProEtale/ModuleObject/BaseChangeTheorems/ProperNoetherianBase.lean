@@ -27,7 +27,7 @@ with `p` proper, where `Y` is a noetherian `k`-scheme and `Y'` is a noetherian `
 possibly different fields `k` and `k₂` in which `ℓ` is invertible, and `g` is arbitrary. We show
 that the base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` on the ambient derived categories of
 `ℚ̄_ℓ`-module objects is invertible at every bounded constructible complex
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`).
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`).
 
 The proof follows blueprint `sk-thm-sbc-coefficients`, on the ambient derived categories since the
 square mixes the two base fields:
@@ -45,8 +45,9 @@ square mixes the two base fields:
 
 ## Main statements
 
-- `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_isProper`: the integral case.
-- `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian`:
+- `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian`:
+  the integral case.
+- `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`:
   `ℚ̄_ℓ` proper base change over noetherian bases over fields.
 
 ## Implementation notes
@@ -78,8 +79,8 @@ suffices that the first derived reduction is invertible; this is the base change
 coefficients `𝔽_E` (`nonempty_arrowIso_derivedReduction_map_exchangeRight`) at a complex of
 étale origin, invertible by finite-level proper base change
 (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
-theorem isIso_baseChangeMap_app_padicIntegers_of_isProper {k k₂ : Type u} [Field k] [Field k₂]
-    [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
+theorem isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian {k k₂ : Type u}
+    [Field k] [Field k₂] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
     {X Y X' Y' : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Y']
     (aY : Y ⟶ Spec (.of k)) (aY' : Y' ⟶ Spec (.of k₂)) {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'}
     {g' : X' ⟶ X} [IsProper p] (sq : CommSq g' p' p g) (hsq : IsPullback g' p' p g)
@@ -127,8 +128,8 @@ invertible at every bounded constructible complex `K`.
 As in the proof of blueprint `sk-thm-sbc-coefficients`: `K` has an integral model
 (`exists_padicAlgCl_iso_integralModel_obj`), which reduces the claim to the integral base change
 map (`isIso_baseChangeMap_app_padicAlgCl_of_isIso_integral`), invertible by
-`isIso_baseChangeMap_app_padicIntegers_of_isProper`. -/
-theorem isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian
+`isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian`. -/
+theorem isIso_baseChangeMap_app_padicAlgCl_of_isProper
     {k k₂ : Type u} [Field k] [Field k₂] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
     {X Y X' Y' : Scheme.{u}} [IsNoetherian Y] [IsNoetherian Y'] (aY : Y ⟶ Spec (.of k))
     (aY' : Y' ⟶ Spec (.of k₂)) {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -145,6 +146,7 @@ theorem isIso_baseChangeMap_app_of_isProper_padicAlgCl_of_isNoetherian
   have : K₀.obj.IsGE K₀.property.1.1.choose := ha
   exact isIso_baseChangeMap_app_padicAlgCl_of_isIso_integral ℓ sq E K₀.obj
     K₀.property.1.1.choose
-    (isIso_baseChangeMap_app_padicIntegers_of_isProper ℓ aY aY' sq hsq E K₀) he.some
+    (isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian ℓ aY aY' sq hsq E K₀)
+    he.some
 
 end AlgebraicGeometry.ProEtale.CondensedRing
