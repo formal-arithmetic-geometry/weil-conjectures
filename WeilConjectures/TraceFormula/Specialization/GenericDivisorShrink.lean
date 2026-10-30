@@ -72,7 +72,8 @@ theorem nearbyCyclesVanishNear_of_isOpenImmersion
   refine ⟨(centreMap g I).left ''ᵁ U', ⟨ζ', hζU', rfl⟩, ?_⟩
   rw [restrictedZeroSectionNearbyCycles_obj]
   exact isZero_leftDerivedUpperStar_ι_obj_of_le Λ
-    (centreSpecialFibreMap_image_preimage k' I g U').ge (isZero_leftDerivedUpperStar_image_ι_obj Λ _ _
-    (hU'.of_iso (Functor.mapIso _ (zeroSectionNearbyCyclesUpperStarIso g I k' Λ L).symm)))
+    (centreSpecialFibreMap_image_preimage k' I g U').ge
+    (isZero_leftDerivedUpperStar_image_ι_obj Λ _ _
+      (hU'.of_iso (Functor.mapIso _ (zeroSectionNearbyCyclesUpperStarIso g I k' Λ L).symm)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
