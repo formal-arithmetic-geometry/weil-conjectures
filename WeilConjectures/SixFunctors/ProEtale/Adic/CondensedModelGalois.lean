@@ -89,16 +89,6 @@ noncomputable def adicGlobalSectionsModuleUpperStarIso :
       exact congrArg (WeilCoefficients.toModuleCat l).map
         ((globalSectionsUpperStarIso _ σ).hom.naturality f.hom))
 
-/-- **The Galois action on a stalk, in the model of the `ℓ`-adic sheaves**: for an automorphism
-`σ` of `S` and `x : S ⟶ X` with `σ ≫ x = x`, the automorphism
-`Γ(x^* N) ≅ Γ(σ^* x^* N) ≅ Γ((σ ≫ x)^* N) = Γ(x^* N)` of the global sections of `x^* N`. -/
-noncomputable def galoisOld (N : AdicSheaf l X) :
-    (adicGlobalSectionsModule l S).obj ((x)^*ᵃ[l].obj N) ⟶
-      (adicGlobalSectionsModule l S).obj ((x)^*ᵃ[l].obj N) :=
-  (adicGlobalSectionsModuleUpperStarIso l σ).inv.app ((x)^*ᵃ[l].obj N) ≫
-    (adicGlobalSectionsModule l S).map
-      ((adicUpperStarComp l σ.hom x).inv.app N ≫ (adicUpperStarCongr l hσ).hom.app N)
-
 /-- The restriction of global sections along a morphism is compatible with the congruence
 isomorphisms of the pullbacks. -/
 lemma globalSectionsToUpperStar_app_comp_map_upperStarCongr {T Y : Scheme.{u}} {g g' : T ⟶ Y}
@@ -109,41 +99,26 @@ lemma globalSectionsToUpperStar_app_comp_map_upperStarCongr {T Y : Scheme.{u}} {
   subst h
   simp [upperStarCongr]
 
-set_option maxHeartbeats 1000000 in
--- the kernel checks the identification of the underlying sheaves of the pullbacks by unfolding
-/-- **The Galois action fixes the restrictions of global sections**: the restriction
-`Γ(X, N) ⟶ Γ(S, x^* N)` followed by `AlgebraicGeometry.ProEtale.galoisOld` is the
-restriction. -/
-lemma globalSectionsToUpperStar_comp_galoisOld (N : AdicSheaf l X) :
-    (WeilCoefficients.toModuleCat l).map ((globalSectionsToUpperStar _ x).app N.X) ≫
-        galoisOld l σ x hσ N =
-      (WeilCoefficients.toModuleCat l).map ((globalSectionsToUpperStar _ x).app N.X) := by
+/-- **The Galois action fixes the restrictions of global sections**, on the underlying sheaves of
+`ℚ̄_ℓ`-modules: the restriction `Γ(X, F) ⟶ Γ(S, x^* F)` followed by
+`Γ(x^* F) ≅ Γ(σ^* x^* F) ≅ Γ((σ ≫ x)^* F) = Γ(x^* F)` is the restriction. -/
+lemma globalSectionsToUpperStar_comp_galois (F : Sheaf (Scheme.ProEt.topology X)
+    (WeilCoefficients.{u} l)) :
+    (globalSectionsToUpperStar _ x).app F ≫
+        (globalSectionsUpperStarIso (WeilCoefficients.{u} l) σ).inv.app ((x)^*[_].obj F) ≫
+        (Sheaf.Γ _ _).map ((upperStarComp (WeilCoefficients.{u} l) σ.hom x).inv.app F ≫
+          (upperStarCongr (WeilCoefficients.{u} l) hσ).hom.app F) =
+      (globalSectionsToUpperStar _ x).app F := by
   have h0 := globalSectionsToUpperStar_app_comp_globalSectionsUpperStarIso
-    (WeilCoefficients.{u} l) σ ((x)^*ᵃ[l].obj N).X
-  have h1 : (globalSectionsUpperStarIso (WeilCoefficients.{u} l) σ).inv.app ((x)^*ᵃ[l].obj N).X =
-      (globalSectionsToUpperStar _ σ.hom).app ((x)^*ᵃ[l].obj N).X := by
+    (WeilCoefficients.{u} l) σ ((x)^*[_].obj F)
+  have h1 : (globalSectionsUpperStarIso (WeilCoefficients.{u} l) σ).inv.app ((x)^*[_].obj F) =
+      (globalSectionsToUpperStar _ σ.hom).app ((x)^*[_].obj F) := by
     rw [← Category.id_comp ((globalSectionsUpperStarIso _ σ).inv.app _), ← h0, Category.assoc,
       Iso.hom_inv_id_app, Category.comp_id]
-  have h2 : (globalSectionsToUpperStar _ (σ.hom ≫ x)).app N.X ≫
-      (Sheaf.Γ _ _).map ((upperStarComp (WeilCoefficients.{u} l) σ.hom x).hom.app N.X) =
-      (globalSectionsToUpperStar _ x).app N.X ≫
-        (globalSectionsToUpperStar _ σ.hom).app ((x)^*ᵃ[l].obj N).X :=
-    globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) σ.hom x N.X
-  have h3 := globalSectionsToUpperStar_app_comp_map_upperStarCongr l hσ N.X
-  simp only [galoisOld, adicGlobalSectionsModuleUpperStarIso, NatIso.ofComponents_inv_app,
-    Functor.mapIso_inv, Iso.app_inv, Functor.comp_map, ← Functor.map_comp]
-  refine congrArg (WeilCoefficients.toModuleCat l).map ?_
-  rw [h1, ← reassoc_of% h2, Functor.map_comp, Functor.map_comp]
-  have e1 : (AdicSheaf.forget S).map ((adicUpperStarComp l σ.hom x).inv.app N) =
-      (upperStarComp (WeilCoefficients.{u} l) σ.hom x).inv.app N.X :=
-    adicUpperStarComp_inv_app_hom σ.hom x N
-  have e2 : (AdicSheaf.forget S).map ((adicUpperStarCongr l hσ).hom.app N) =
-      (upperStarCongr (WeilCoefficients.{u} l) hσ).hom.app N.X :=
-    adicUpperStarCongr_hom_app_hom hσ N
-  rw [e1, e2]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp]
-  exact h3
+  rw [h1, ← reassoc_of% (globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) σ.hom x F),
+    Functor.map_comp, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  exact globalSectionsToUpperStar_app_comp_map_upperStarCongr l hσ F
 
 end Old
 
