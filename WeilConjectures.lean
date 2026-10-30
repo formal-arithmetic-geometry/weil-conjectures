@@ -13743,6 +13743,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Closed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Comp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Finite
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Proper
@@ -14513,6 +14514,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIn
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegralInput
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothUnit
+public import WeilConjectures.TraceFormula.Specialization.NearbyTwistCompat
+public import WeilConjectures.TraceFormula.Specialization.NearbyTwistProjectiveLine
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenImmersionLowerShriekComp
