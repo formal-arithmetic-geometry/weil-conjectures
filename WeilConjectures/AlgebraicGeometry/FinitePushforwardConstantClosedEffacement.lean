@@ -6,10 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.AlgebraicGeometry.FiniteCoverKillsConstantCohomology

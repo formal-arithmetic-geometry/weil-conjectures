@@ -5,11 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComparison
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Mumford's complex over a Noetherian affine base

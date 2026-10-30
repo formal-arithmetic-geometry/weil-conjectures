@@ -18,6 +18,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralDenominators
+import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralImage
+import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralModel
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarMapEq
+import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationOfModels
 
 /-!
 
@@ -78,11 +83,21 @@ and sequential colimits of abelian sheaves are exact
 functor of the extension of scalars preserves bounded constructible complexes
 (`ProEtale.boundedConstructible_leftDerivedExtendScalars_obj`).
 
-## Sorried input
+## The localization statement
 
-* `ProEtale.isLocalization_boundedConstructibleExtendScalars`: on bounded constructible
-  complexes, `L(extendScalars φ)` is a localization functor for the morphisms with
-  `ℓ`-power-torsion mapping cone.
+`ProEtale.isLocalization_boundedConstructibleExtendScalars` is an instance of
+`CategoryTheory.Rationalization.isLocalization_of_models`, for `E` with the norm restricted from
+`ℚ̄_ℓ` (`PadicAlgCl.normedFieldOfAlgebra`), whose closed unit ball `𝒪_E` gives the coefficient
+ring `CondensedRing.integralCoeff ℓ E`:
+
+* every bounded constructible `E_X`-complex has an integral model
+  (`CondensedRing.continuousConstructible_integral_model`; Bhatt–Scholze, Lemma 6.8.13 and
+  Proposition 6.8.14(2));
+* multiplication by `ℓ` is invertible on `D(Mod_{E_X})` (`CondensedRing.derived_nsmul_isIso`);
+* every morphism between the images of integral complexes is the image of an integral one after
+  multiplication by a power of `ℓ` (`CondensedRing.continuousConstructible_clear_denominators`),
+  and two integral morphisms with the same image agree after multiplication by a power of `ℓ`
+  (`CondensedRing.integral_scalar_map_eq`).
 
 The remaining `sorry`s are inherited from
 `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory`,
@@ -280,8 +295,30 @@ constructible `𝒪_E`-coefficient one with `ℓ` inverted. -/
 instance isLocalization_boundedConstructibleExtendScalars :
     (boundedConstructibleExtendScalars X ℓ E).IsLocalization
       (Rationalization.W (Submonoid.powers (ℓ : ℤ))
-        (Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)) :=
-  sorry
+        (Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+  let : NormedAlgebra ℚ_[ℓ] E.1 :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  let F := Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)
+  let L := F.leftDerivedFunctor
+  let D := F.mapDerivedCategory
+  let e : L ≅ D := F.leftDerivedFunctorIsoMapDerivedCategory
+  let : L.CommShift ℤ := Functor.CommShift.ofIso e.symm ℤ
+  let := Functor.CommShift.ofIso_compatibility e.symm ℤ
+  have : L.IsTriangulated := Functor.isTriangulated_of_iso e.symm
+  exact Rationalization.isLocalization_of_models ℓ
+    (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+    (boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X))
+    L (boundedConstructibleExtendScalars X ℓ E)
+    (boundedConstructibleExtendScalarsCompatibility X ℓ E)
+    (CondensedRing.continuousConstructible_integral_model ℓ E.1 X)
+    (CondensedRing.derived_nsmul_isIso ℓ E.1 X)
+    (CondensedRing.continuousConstructible_clear_denominators ℓ E.1 X)
+    (CondensedRing.integral_scalar_map_eq ℓ E.1 X)
 
 /-- The bounded constructible `E`-coefficient derived category `D_cons(X_proét, E)` is
 equivalent to the rationalization of the bounded constructible `𝒪_E`-coefficient derived

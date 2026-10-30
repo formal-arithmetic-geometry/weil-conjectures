@@ -99,7 +99,17 @@ lemma derivedHomUpperStarComparison_naturality_left {X Y : Scheme.{u}} (g : Y �
       derivedHomUpperStarComparison A g K' M ≫
         ((RHom(Y)[A]).map ((L((g)^*[A])).map f).op).app ((L((g)^*[A])).obj M) :=
   letI := leftDerivedUpperStarMonoidal A g
-  Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app _ f M
+  -- Rewriting to the form of the generic statement first (and giving `L((g)^*[A])` explicitly)
+  -- keeps the kernel from unfolding the derived internal hom to compare the two sides.
+  have h (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+      derivedHomUpperStarComparison A g K M =
+        (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.app M := rfl
+  have hX : (RHom(X)[A]).map f.op = MonoidalClosed.pre f := rfl
+  have hY : (RHom(Y)[A]).map ((L((g)^*[A])).map f).op =
+      MonoidalClosed.pre ((L((g)^*[A])).map f) := rfl
+  by
+    rw [hX, hY, h, h]
+    exact Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app L((g)^*[A]) f M
 
 /-- The canonical comparison `Lg^*(K^∨) ⟶ (Lg^* K)^∨` of coefficient duals: the internal-hom
 comparison `Lg^* RHom(K, Λ) ⟶ RHom(Lg^* K, Lg^* Λ)` followed by `Lg^* Λ ≅ Λ`. -/
@@ -208,6 +218,40 @@ lemma nonempty_homology_dual_iso_of_map' {T : Scheme.{u}}
     ((MonoidalClosed.internalHom).mapIso
       (asIso ((_root_.DerivedCategory.homologyFunctor _ (-q)).map φ)).symm.op).app (𝟙_ _)⟩
 
+-- The steps of the dévissages below are separate declarations, which keeps the memory used by
+-- each kernel check small.
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_homology`: below degree `-(m + 1)`, the dual of
+`C ⟶ Y` induces isomorphisms on cohomology. -/
+private lemma dual_step_homology_aux₁ {T : Scheme.{u}}
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hXz : ∀ q, m < q → IsZero ((homologyFunctor _ q).obj X))
+    (hXd : ∀ q, Nonempty ((homologyFunctor _ q).obj ((coefficientDual A T).obj (op X)) ≅
+      (ihom ((homologyFunctor _ (-q)).obj X)).obj (𝟙_ _))) (q : ℤ) (hq : q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map ((coefficientDual A T).map g'.op)) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
+  exact isIso_homologyMap_mor₁_of_isZero _ hw (q - 1) q (by omega)
+    (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega)))
+    (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega)))
+
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_homology`: above degree `-(m + 1)`, the dual of
+`X ⟶ C` induces isomorphisms on cohomology. -/
+private lemma dual_step_homology_aux₂ {T : Scheme.{u}}
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hYz : ∀ q, q ≠ m + 1 → IsZero ((homologyFunctor _ q).obj Y))
+    (hYd : ∀ q, Nonempty ((homologyFunctor _ q).obj ((coefficientDual A T).obj (op Y)) ≅
+      (ihom ((homologyFunctor _ (-q)).obj Y)).obj (𝟙_ _))) (q : ℤ) (hq : ¬q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map ((coefficientDual A T).map f.op)) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
+  exact isIso_homologyMap_mor₂_of_isZero _ hw q (q + 1) rfl
+    (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega)))
+    (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega)))
+
 omit [UpperStarPreservesFlat A] in
 open Pretriangulated _root_.DerivedCategory in
 /-- The inductive step of the dévissage, for the cohomology of the dual: for a distinguished
@@ -226,18 +270,11 @@ lemma dual_step_homology {T : Scheme.{u}}
       (ihom ((homologyFunctor _ (-q)).obj Y)).obj (𝟙_ _))) (q : ℤ) :
     Nonempty ((homologyFunctor _ q).obj ((coefficientDual A T).obj (op C)) ≅
       (ihom ((homologyFunctor _ (-q)).obj C)).obj (𝟙_ _)) := by
-  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
   by_cases hq : q ≤ -(m + 1)
-  · have : IsIso ((homologyFunctor _ q).map ((coefficientDual A T).map g'.op)) :=
-      isIso_homologyMap_mor₁_of_isZero _ hw (q - 1) q (by omega)
-        (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega)))
-        (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega)))
+  · have := dual_step_homology_aux₁ A f g' δ hT m hXz hXd q hq
     have := hCY (-q) (by omega)
     exact nonempty_homology_dual_iso_of_map A g' q (hYd q)
-  · have : IsIso ((homologyFunctor _ q).map ((coefficientDual A T).map f.op)) :=
-      isIso_homologyMap_mor₂_of_isZero _ hw q (q + 1) rfl
-        (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega)))
-        (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega)))
+  · have := dual_step_homology_aux₂ A f g' δ hT m hYz hYd q hq
     have := hXC (-q) (by omega)
     exact nonempty_homology_dual_iso_of_map' A f q (hXd q)
 
@@ -341,6 +378,89 @@ lemma dual_of_homology_concentrated (hP : DualizableSheafClass A P) {T : Scheme.
   · rw [isIso_coefficientDualComparison_iff_of_iso A g e]
     exact hρ g
 
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_comparison`: below degree `-(m + 1)`, the
+pullback of the dual of `C ⟶ Y` induces isomorphisms on cohomology. -/
+private lemma dual_step_comparison_aux₁ {T S : Scheme.{u}} (g : S ⟶ T)
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hXz : ∀ q, m < q → IsZero ((homologyFunctor _ q).obj X))
+    (hXd : ∀ q, Nonempty ((homologyFunctor _ q).obj ((coefficientDual A T).obj (op X)) ≅
+      (ihom ((homologyFunctor _ (-q)).obj X)).obj (𝟙_ _))) (q : ℤ) (hq : q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map
+      ((L((g)^*[A])).map ((coefficientDual A T).map g'.op))) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
+  exact isIso_homologyMap_mor₁_of_isZero _ ((L((g)^*[A])).map_distinguished _ hw) (q - 1) q
+    (by omega)
+    (isZero_homology_leftDerivedUpperStar_obj A g _ _
+      (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega))))
+    (isZero_homology_leftDerivedUpperStar_obj A g _ _
+      (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega))))
+
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_comparison`: below degree `-(m + 1)`, the
+dual of the pullback of `C ⟶ Y` induces isomorphisms on cohomology. -/
+private lemma dual_step_comparison_aux₂ {T S : Scheme.{u}} (g : S ⟶ T)
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hXz : ∀ q, m < q → IsZero ((homologyFunctor _ q).obj X))
+    (hXd' : ∀ q, Nonempty ((homologyFunctor _ q).obj
+      ((coefficientDual A S).obj (op ((L((g)^*[A])).obj X))) ≅
+        (ihom ((homologyFunctor _ (-q)).obj ((L((g)^*[A])).obj X))).obj (𝟙_ _)))
+    (q : ℤ) (hq : q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map
+      ((coefficientDual A S).map ((L((g)^*[A])).map g').op)) := by
+  obtain ⟨w', hw'⟩ := exists_distTriang_coefficientDual A _
+    ((L((g)^*[A])).map_distinguished _ hT)
+  exact isIso_homologyMap_mor₁_of_isZero _ hw' (q - 1) q (by omega)
+    (isZero_homology_of_nonempty_iso A _ _ _ (hXd' _)
+      (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hXz _ (by omega))))
+    (isZero_homology_of_nonempty_iso A _ _ _ (hXd' _)
+      (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hXz _ (by omega))))
+
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_comparison`: above degree `-(m + 1)`, the
+pullback of the dual of `X ⟶ C` induces isomorphisms on cohomology. -/
+private lemma dual_step_comparison_aux₃ {T S : Scheme.{u}} (g : S ⟶ T)
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hYz : ∀ q, q ≠ m + 1 → IsZero ((homologyFunctor _ q).obj Y))
+    (hYd : ∀ q, Nonempty ((homologyFunctor _ q).obj ((coefficientDual A T).obj (op Y)) ≅
+      (ihom ((homologyFunctor _ (-q)).obj Y)).obj (𝟙_ _))) (q : ℤ) (hq : ¬q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map
+      ((L((g)^*[A])).map ((coefficientDual A T).map f.op))) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
+  exact isIso_homologyMap_mor₂_of_isZero _ ((L((g)^*[A])).map_distinguished _ hw) q (q + 1) rfl
+    (isZero_homology_leftDerivedUpperStar_obj A g _ _
+      (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega))))
+    (isZero_homology_leftDerivedUpperStar_obj A g _ _
+      (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega))))
+
+omit [UpperStarPreservesFlat A] in
+open Pretriangulated _root_.DerivedCategory in
+/-- A step of `AlgebraicGeometry.Etale.dual_step_comparison`: above degree `-(m + 1)`, the
+dual of the pullback of `X ⟶ C` induces isomorphisms on cohomology. -/
+private lemma dual_step_comparison_aux₄ {T S : Scheme.{u}} (g : S ⟶ T)
+    {X C Y : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
+    (f : X ⟶ C) (g' : C ⟶ Y) (δ : Y ⟶ X⟦(1 : ℤ)⟧) (hT : Triangle.mk f g' δ ∈ distTriang _)
+    (m : ℤ) (hYz : ∀ q, q ≠ m + 1 → IsZero ((homologyFunctor _ q).obj Y))
+    (hYd' : ∀ q, Nonempty ((homologyFunctor _ q).obj
+      ((coefficientDual A S).obj (op ((L((g)^*[A])).obj Y))) ≅
+        (ihom ((homologyFunctor _ (-q)).obj ((L((g)^*[A])).obj Y))).obj (𝟙_ _)))
+    (q : ℤ) (hq : ¬q ≤ -(m + 1)) :
+    IsIso ((homologyFunctor _ q).map
+      ((coefficientDual A S).map ((L((g)^*[A])).map f).op)) := by
+  obtain ⟨w', hw'⟩ := exists_distTriang_coefficientDual A _
+    ((L((g)^*[A])).map_distinguished _ hT)
+  exact isIso_homologyMap_mor₂_of_isZero _ hw' q (q + 1) rfl
+    (isZero_homology_of_nonempty_iso A _ _ _ (hYd' _)
+      (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hYz _ (by omega))))
+    (isZero_homology_of_nonempty_iso A _ _ _ (hYd' _)
+      (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hYz _ (by omega))))
+
 open Pretriangulated _root_.DerivedCategory in
 /-- The inductive step of the dévissage, for the comparison of duals: for a distinguished
 triangle `X ⟶ C ⟶ Y ⟶ X[1]` with `X` in degrees `≤ m` and `Y` in degree `m + 1`, if the
@@ -364,27 +484,11 @@ lemma dual_step_comparison {T S : Scheme.{u}} (g : S ⟶ T)
         (ihom ((homologyFunctor _ (-q)).obj ((L((g)^*[A])).obj Y))).obj (𝟙_ _)))
     (hX : IsIso (coefficientDualComparison A g X)) (hY : IsIso (coefficientDualComparison A g Y)) :
     IsIso (coefficientDualComparison A g C) := by
-  obtain ⟨w, hw⟩ := exists_distTriang_coefficientDual A _ hT
-  have hF := (L((g)^*[A])).map_distinguished _ hw
-  obtain ⟨w', hw'⟩ := exists_distTriang_coefficientDual A _
-    ((L((g)^*[A])).map_distinguished _ hT)
   rw [isIso_iff]
   intro q
   by_cases hq : q ≤ -(m + 1)
-  · have h₁ : IsIso ((homologyFunctor _ q).map
-        ((L((g)^*[A])).map ((coefficientDual A T).map g'.op))) :=
-      isIso_homologyMap_mor₁_of_isZero _ hF (q - 1) q (by omega)
-        (isZero_homology_leftDerivedUpperStar_obj A g _ _
-          (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega))))
-        (isZero_homology_leftDerivedUpperStar_obj A g _ _
-          (isZero_homology_of_nonempty_iso A _ _ _ (hXd _) (hXz _ (by omega))))
-    have h₂ : IsIso ((homologyFunctor _ q).map
-        ((coefficientDual A S).map ((L((g)^*[A])).map g').op)) :=
-      isIso_homologyMap_mor₁_of_isZero _ hw' (q - 1) q (by omega)
-        (isZero_homology_of_nonempty_iso A _ _ _ (hXd' _)
-          (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hXz _ (by omega))))
-        (isZero_homology_of_nonempty_iso A _ _ _ (hXd' _)
-          (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hXz _ (by omega))))
+  · have h₁ := dual_step_comparison_aux₁ g f g' δ hT m hXz hXd q hq
+    have h₂ := dual_step_comparison_aux₂ g f g' δ hT m hXz hXd' q hq
     have h := (homologyFunctor _ q).congr_map (coefficientDualComparison_naturality A g g')
     simp only [Functor.map_comp] at h
     have : IsIso ((homologyFunctor _ q).map
@@ -394,20 +498,8 @@ lemma dual_step_comparison {T S : Scheme.{u}} (g : S ⟶ T)
       infer_instance
     exact IsIso.of_isIso_comp_left ((homologyFunctor _ q).map
       ((L((g)^*[A])).map ((coefficientDual A T).map g'.op))) _
-  · have h₁ : IsIso ((homologyFunctor _ q).map
-        ((L((g)^*[A])).map ((coefficientDual A T).map f.op))) :=
-      isIso_homologyMap_mor₂_of_isZero _ hF q (q + 1) rfl
-        (isZero_homology_leftDerivedUpperStar_obj A g _ _
-          (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega))))
-        (isZero_homology_leftDerivedUpperStar_obj A g _ _
-          (isZero_homology_of_nonempty_iso A _ _ _ (hYd _) (hYz _ (by omega))))
-    have h₂ : IsIso ((homologyFunctor _ q).map
-        ((coefficientDual A S).map ((L((g)^*[A])).map f).op)) :=
-      isIso_homologyMap_mor₂_of_isZero _ hw' q (q + 1) rfl
-        (isZero_homology_of_nonempty_iso A _ _ _ (hYd' _)
-          (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hYz _ (by omega))))
-        (isZero_homology_of_nonempty_iso A _ _ _ (hYd' _)
-          (isZero_homology_leftDerivedUpperStar_obj A g _ _ (hYz _ (by omega))))
+  · have h₁ := dual_step_comparison_aux₃ g f g' δ hT m hYz hYd q hq
+    have h₂ := dual_step_comparison_aux₄ g f g' δ hT m hYz hYd' q hq
     have h := (homologyFunctor _ q).congr_map (coefficientDualComparison_naturality A g f)
     simp only [Functor.map_comp] at h
     have : IsIso ((homologyFunctor _ q).map (coefficientDualComparison A g C) ≫

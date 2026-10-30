@@ -7,13 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoyoneda
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 
 /-!
 # Direct sums and finite cohomological dimension

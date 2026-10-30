@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.GenericPoint
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Leray
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Support
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.ProjectiveLine
 
 /-!
 # The affine Artin bound for affine space

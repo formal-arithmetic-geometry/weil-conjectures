@@ -10,27 +10,20 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.RingTheory.RamificationInertia.Basic
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.FiniteMapToLine
 public import WeilConjectures.AlgebraicGeometry.Curve.FiniteDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
-public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
-public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
-public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
-public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Local theory of smooth curves and finite morphisms to the projective line

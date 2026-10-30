@@ -8,11 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData
-import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-
 
 /-! # Connecting square for relative Mayer--Vietoris base change
 

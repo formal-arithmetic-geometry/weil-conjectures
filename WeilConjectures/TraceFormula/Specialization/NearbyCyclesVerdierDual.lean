@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingExistence
+import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 
 /-!
 
