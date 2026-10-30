@@ -58,7 +58,7 @@ theorem supported_kummer_chern_realization (T : Scheme.{u}) (N : ℕ)
     (hκ : SupportedKummerBoundary A N hA i hI hT κ) :
     (Ext.mk₀ (supportedIntegralUnit i)).comp
       ((Ext.mk₀ (supportedIntegralGenerator A i)).comp
-        (κ.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2))
+        (κ.mapExactFunctor (moduleAbelianForget A T)) (zero_add 2))
       (zero_add 2) = supportedKummerChern A N hA i hI hT := by
   classical
   let := hI.isInvertible_dual_toModules

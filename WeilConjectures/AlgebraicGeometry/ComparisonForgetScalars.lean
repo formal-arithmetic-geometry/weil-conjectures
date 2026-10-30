@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
-public import WeilConjectures.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackComparison
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -33,7 +34,7 @@ with site comparison in the two orders. Their right adjoints agree, so uniquenes
 gives the isomorphism. Apply the two Hom equivalences to its component; the left-adjoint uniqueness
 unit equation and naturality of the coinduction unit identify the component with the stated mate. -/
 def forgetComparisonIso (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    Etale.RawModuleScalarComparison.forget A Z ⋙
+    Etale.moduleAbelianForget A Z ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} Z ≅
       comparisonUpperStar (ModuleCat.{u + 1} A) Z ⋙
         sheafCompose (Scheme.ProEt.topology Z)
@@ -47,7 +48,7 @@ theorem forgetComparisonIso_hom (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u})
     (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (forgetComparisonIso A Z).hom.app M =
       ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).homEquiv _ _).symm
-        ((Etale.RawModuleScalarComparison.forget A Z).map
+        ((Etale.moduleAbelianForget A Z).map
           ((comparisonAdjunction (ModuleCat.{u + 1} A) Z).unit.app M)) := by
   apply ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).homEquiv _ _).injective
   rw [Equiv.apply_symm_apply]

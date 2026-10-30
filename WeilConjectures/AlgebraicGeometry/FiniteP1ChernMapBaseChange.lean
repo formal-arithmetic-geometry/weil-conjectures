@@ -102,7 +102,7 @@ private theorem integralGenerator_pullback (A : Type (u + 1)) [CommRing A]
   have h := coefficient_unit A f
   simpa only [supportedConstantUnit, supportedIntegralUnit, supportedIntegralGenerator,
     Adjunction.homEquiv_unit, Functor.map_comp, forget_lowerStar_map, Category.assoc,
-    RawModuleScalarComparison.forget] using h
+    moduleAbelianForget] using h
 
 private theorem class_ext_pullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

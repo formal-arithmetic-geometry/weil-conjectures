@@ -169,7 +169,7 @@ private theorem generator_apply (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
       ((Int.castAddHom A).comp AddEquiv.ulift.toAddMonoidHom))
   have h := (constantSheafAdj T.smallEtaleTopology AddCommGrpCat.{u + 1}
     terminal).homEquiv (AddCommGrpCat.of (ULift.{u + 1} ℤ))
-      ((RawModuleScalarComparison.forget A T).obj (ordinaryFiniteConstant A T))
+      ((moduleAbelianForget A T).obj (ordinaryFiniteConstant A T))
     |>.apply_symm_apply φ
   rw [constantSheafAdj_homEquiv_apply] at h
   have hT := ConcreteCategory.congr_hom h r
@@ -196,14 +196,14 @@ private theorem generator_apply (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
 private theorem coefficient_unit (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     ordinaryFiniteIntegralGenerator A T ≫
-      (RawModuleScalarComparison.forget A T).map (supportedConstantUnit A i) =
+      (moduleAbelianForget A T).map (supportedConstantUnit A i) =
     supportedIntegralUnit i ≫ supportedIntegralGenerator A i := by
   let terminal := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T
   apply ((constantSheafAdj T.smallEtaleTopology AddCommGrpCat.{u + 1}
     terminal).homEquiv _ _).injective
   rw [constantSheafAdj_homEquiv_apply, constantSheafAdj_homEquiv_apply]
   apply (AddCommGrpCat.uliftZMultiplesAddEquiv _).injective
-  change ((RawModuleScalarComparison.forget A T).map (supportedConstantUnit A i)).hom.app
+  change ((moduleAbelianForget A T).map (supportedConstantUnit A i)).hom.app
     (op (Scheme.Etale.mk (𝟙 T)))
       ((ordinaryFiniteIntegralGenerator A T).hom.app (op (Scheme.Etale.mk (𝟙 T)))
         (supportedIntegralOne T)) =
@@ -257,10 +257,10 @@ theorem supported_derived_unit_forget (A : Type (u + 1)) [CommRing A]
     (Ext.mk₀ (ordinaryFiniteIntegralGenerator A T)).comp
       ((Ext.homEquiv.symm (supportedDerivedUnit A i ≫ supportedExactDerivedMap
         (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) F κ)).mapExactFunctor
-          (RawModuleScalarComparison.forget A T)) (zero_add 2) =
+          (moduleAbelianForget A T)) (zero_add 2) =
     (Ext.mk₀ (supportedIntegralUnit i)).comp
       ((Ext.mk₀ (supportedIntegralGenerator A i)).comp
-        (κ.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2))
+        (κ.mapExactFunctor (moduleAbelianForget A T)) (zero_add 2))
       (zero_add 2) := by
   rw [derived_unit_class, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
   simp only [Ext.mk₀_comp_mk₀_assoc, coefficient_unit]

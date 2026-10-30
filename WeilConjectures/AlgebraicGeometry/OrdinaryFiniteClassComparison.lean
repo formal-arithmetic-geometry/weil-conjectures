@@ -63,10 +63,10 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem integralGenerator_bijective (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     Function.Bijective (fun f : ordinaryFiniteConstant A T ⟶ F ↦
-      ordinaryFiniteIntegralGenerator A T ≫ (RawModuleScalarComparison.forget A T).map f) := by
-  let e := constantAbelianHomEquiv T ((RawModuleScalarComparison.forget A T).obj F)
+      ordinaryFiniteIntegralGenerator A T ≫ (moduleAbelianForget A T).map f) := by
+  let e := constantAbelianHomEquiv T ((moduleAbelianForget A T).obj F)
   have h : e ∘ (fun f : ordinaryFiniteConstant A T ⟶ F ↦
-      ordinaryFiniteIntegralGenerator A T ≫ (RawModuleScalarComparison.forget A T).map f) =
+      ordinaryFiniteIntegralGenerator A T ≫ (moduleAbelianForget A T).map f) =
       constantModuleHomEquiv A T F := by
     funext f
     dsimp only [Function.comp_apply, e, constantAbelianHomEquiv, Equiv.trans_apply,
@@ -81,7 +81,7 @@ private theorem integralGenerator_bijective (A : Type (u + 1)) [CommRing A]
     simp [AddEquiv.ulift]
     rfl
   have hcomp : Function.Bijective (e ∘ (fun f : ordinaryFiniteConstant A T ⟶ F ↦
-      ordinaryFiniteIntegralGenerator A T ≫ (RawModuleScalarComparison.forget A T).map f)) :=
+      ordinaryFiniteIntegralGenerator A T ≫ (moduleAbelianForget A T).map f)) :=
     h ▸ (constantModuleHomEquiv A T F).bijective
   exact Function.Bijective.of_comp_left hcomp e.injective
 

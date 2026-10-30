@@ -68,7 +68,7 @@ private theorem quotientCast_shortExact (n : ℕ) (hn : 0 < n) :
 private def constantResidueForgetIso (T : Scheme.{u}) (n : ℕ) :
     (constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))) ≅
-      (RawModuleScalarComparison.forget (ULift.{u + 1} (ZMod n)) T).obj
+      (moduleAbelianForget (ULift.{u + 1} (ZMod n)) T).obj
         (ordinaryFiniteConstant (ULift.{u + 1} (ZMod n)) T) := by
   let R := ULift.{u + 1} (ZMod n)
   let U := forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}

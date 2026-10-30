@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.CategoryTheory.CountableCoproductsIdempotentComplete
+import WeilConjectures.CategoryTheory.Triangulated.IdempotentCompleteOfCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetract
 
 /-! # Cohomological Brown representability for Grothendieck derived categories
@@ -90,7 +90,7 @@ theorem grothendieckDerived_cohomological_isRepresentable
     (hH : ∀ I : Type (max w vA vH), PreservesLimitsOfShape (Discrete I) H) :
     (H ⋙ forget AddCommGrpCat).IsRepresentable := by
   have : IsIdempotentComplete (DerivedCategory A) :=
-    isIdempotentComplete_of_countableCoproducts.{max w vA vH} (DerivedCategory A)
+    Pretriangulated.isIdempotentComplete_of_hasCoproducts.{max w vA vH}
   obtain ⟨E, ⟨r⟩⟩ := grothendieckDerived_brown_retract H hH
   exact representable_of_uliftYoneda_retract (H ⋙ forget AddCommGrpCat) E r
 

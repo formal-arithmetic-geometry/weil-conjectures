@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.ProEtaleUnitsSheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleRootsOfUnity
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 /-!
@@ -111,9 +111,9 @@ and uniqueness of colimits prove invertibility on each affine pro-etale object;
 the affine dense subsite detects isomorphisms of sheaves. -/
 theorem proEtaleUnitsCounit_isIso (Z : Scheme.{u}) :
     IsIso ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).counit.app
-      (Scheme.proEtaleUnitsSheaf Z)) := by
+      (Scheme.ProEt.gmSheaf Z)) := by
   let A := AddCommGrpCat.{u + 1}
-  let G := Scheme.proEtaleUnitsSheaf Z
+  let G := Scheme.ProEt.gmSheaf Z
   have := isIso_comparisonAdjunction_unit A Z
   let a := ((comparisonAdjunction A Z).counit.app G).hom
   apply isIso_of_isIso_app_affineProEt A

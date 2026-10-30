@@ -7,7 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import WeilConjectures.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 
 /-!

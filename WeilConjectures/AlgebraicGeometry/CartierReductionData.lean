@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.GeoCartierCycleClassDefs
 public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
-public import WeilConjectures.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleRootsOfUnity
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import WeilConjectures.Algebra.Homology.LocalizedRestrictionAdjunction
 import WeilConjectures.AlgebraicGeometry.CartierComplementFrame
@@ -52,6 +52,9 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverMilnorAb
+public import WeilConjectures.CategoryTheory.Sites.ModuleLift
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Cartier boundary and normalized reduction constructions
@@ -216,37 +219,6 @@ abbrev cartierForget (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :=
   sheafCompose (Scheme.ProEt.topology Z)
     (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
 
-/-- Scalar forgetting is exact on the original pro-etale site.
-Source: Stacks 03D7 (auxiliary; not a blueprint node).
-Proof: kernels are sectionwise, and cokernels are the sheafifications of the same
-abelian presheaf cokernels. The scalar action descends uniquely to these cokernels. -/
-theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteLimits (cartierForget A Z) ∧
-      PreservesFiniteColimits (cartierForget A Z) := by
-  constructor
-  · have : PreservesFiniteLimits (cartierForget A Z ⋙ sheafToPresheaf _ _) :=
-      inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf _ _ ⋙
-        (Functor.whiskeringRight _ _ _).obj
-          (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})))
-    exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
-  · have := (Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology Z) A).isLeftAdjoint
-    infer_instance
-
-/-- Exactness on finite limits. Source: Stacks 03D7
-(auxiliary; not a blueprint node). -/
-instance cartierForgetLimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteLimits (cartierForget A Z) := (cartierForget_exact A Z).1
-
-/-- Exactness on finite colimits. Source: Stacks 03D7
-(auxiliary; not a blueprint node). -/
-instance cartierForgetColimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    PreservesFiniteColimits (cartierForget A Z) := (cartierForget_exact A Z).2
-
-/-- Additivity on sections. Source: Stacks 03D7
-(auxiliary; not a blueprint node). -/
-instance cartierForgetAdditive (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
-    (cartierForget A Z).Additive where
-
 /-- The unit-normalized comparison with scalar forgetting, as the adjoint of the
 module comparison unit after forgetting scalars.
 Source: Stacks 00WX and the Cartier opening comparison paragraph
@@ -254,10 +226,10 @@ Source: Stacks 00WX and the Cartier opening comparison paragraph
 def cartierForgetComparison (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u})
     (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj
-        ((Etale.RawModuleScalarComparison.forget A Z).obj M) ⟶
+        ((Etale.moduleAbelianForget A Z).obj M) ⟶
       (cartierForget A Z).obj ((comparisonUpperStar (ModuleCat.{u + 1} A) Z).obj M) :=
   ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).homEquiv _ _).symm
-    ((Etale.RawModuleScalarComparison.forget A Z).map
+    ((Etale.moduleAbelianForget A Z).map
       ((comparisonAdjunction (ModuleCat.{u + 1} A) Z).unit.app M))
 
 /-- The units comparison is adjoint to identity on the units of every etale object.
@@ -265,7 +237,7 @@ Source: blueprint Cartier opening comparison paragraph
 (auxiliary; not a blueprint node). -/
 def cartierUnitsComparison (Z : Scheme.{u}) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj Z.gmSheaf ⟶
-      Scheme.proEtaleUnitsSheaf Z :=
+      Scheme.ProEt.gmSheaf Z :=
   ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).homEquiv _ _).symm ⟨𝟙 _⟩
 
 /-- The canonical comparison on integral constants, normalized by its adjunction unit.
@@ -357,7 +329,7 @@ def cartierProBoundary {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
       (Etale.supportedIntegralConstant D)) Z.gmSheaf 1) :
     Ext.{u + 1} ((lowerStar AddCommGrpCat.{u + 1} i).obj
       ((constantSheaf (Scheme.ProEt.topology D) AddCommGrpCat.{u + 1}).obj
-        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) (Scheme.proEtaleUnitsSheaf Z) 1 :=
+        (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) (Scheme.ProEt.gmSheaf Z) 1 :=
   cartierBoundaryImage (comparisonUpperStar AddCommGrpCat.{u + 1} Z)
     (cartierIntegralSourceIso i).inv (cartierUnitsComparison Z) β
 
@@ -368,14 +340,14 @@ kernel equation on the etale side; exact inverse image preserves that equation. 
 theorem cartierRootsComparison_condition (Z : Scheme.{u}) (n : ℕ) :
     ((comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
         (kernel.ι (n • 𝟙 Z.gmSheaf)) ≫ cartierUnitsComparison Z) ≫
-      Scheme.proEtaleUnitsPower Z n = 0 := by
+      (n • 𝟙 (Scheme.ProEt.gmSheaf Z)) = 0 := by
   have h := congrArg (comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
     (kernel.condition (n • 𝟙 Z.gmSheaf))
   have hk : n • (comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
       (kernel.ι (n • 𝟙 Z.gmSheaf)) = 0 := by
     simpa only [Functor.map_comp, Functor.map_nsmul, Functor.map_id,
       Functor.map_zero, Preadditive.comp_nsmul, Category.comp_id] using h
-  simp only [Scheme.proEtaleUnitsPower, Preadditive.comp_nsmul, Category.comp_id,
+  simp only [Preadditive.comp_nsmul, Category.comp_id,
     ← Preadditive.nsmul_comp, hk, zero_comp]
 
 /-- The roots-induced target map, fixed by its inclusion in full pro-etale units.
@@ -383,8 +355,8 @@ Source: blueprint Cartier comparison paragraph, Stacks 0GLZ and 03PL
 (auxiliary; not a blueprint node). -/
 def cartierRootsComparison (Z : Scheme.{u}) (n : ℕ) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj (Z.rootsOfUnitySheaf n) ⟶
-      Scheme.proEtaleRootsOfUnitySheaf Z n :=
-  kernel.lift (Scheme.proEtaleUnitsPower Z n)
+      Scheme.ProEt.rootsOfUnitySheaf Z n :=
+  kernel.lift (n • 𝟙 (Scheme.ProEt.gmSheaf Z))
     ((comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
       (kernel.ι (n • 𝟙 Z.gmSheaf)) ≫ cartierUnitsComparison Z)
     (cartierRootsComparison_condition Z n)
@@ -393,7 +365,7 @@ private theorem unitsComparison_isIso (Z : Scheme.{u}) : IsIso (cartierUnitsComp
   unfold cartierUnitsComparison
   rw [Adjunction.homEquiv_counit]
   let e : Z.gmSheaf ≅
-      (comparisonLowerStar AddCommGrpCat.{u + 1} Z).obj (Scheme.proEtaleUnitsSheaf Z) :=
+      (comparisonLowerStar AddCommGrpCat.{u + 1} Z).obj (Scheme.ProEt.gmSheaf Z) :=
     ⟨⟨𝟙 _⟩, ⟨𝟙 _⟩, by ext U x; rfl, by ext U x; rfl⟩
   have : IsIso e.hom := e.isIso_hom
   have := proEtaleUnitsCounit_isIso Z
@@ -414,13 +386,13 @@ theorem cartierRootsComparison_isIso (Z : Scheme.{u}) (n : ℕ)
   clear hhn hhZ
   let F := comparisonUpperStar AddCommGrpCat.{u + 1} Z
   let f := n • 𝟙 Z.gmSheaf
-  let g := Scheme.proEtaleUnitsPower Z n
+  let g := n • 𝟙 (Scheme.ProEt.gmSheaf Z)
   let a := cartierUnitsComparison Z
   have : IsIso a := unitsComparison_isIso Z
   have w : F.map f ≫ a = a ≫ g := by
     dsimp only [f, g]
     rw [F.map_nsmul, F.map_id]
-    simp only [Scheme.proEtaleUnitsPower, Preadditive.nsmul_comp,
+    simp only [Preadditive.nsmul_comp,
       Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]
   let k := kernel.map (F.map f) g a a w
   have : IsIso k := inferInstance
@@ -442,7 +414,7 @@ Source: blueprint Cartier comparison paragraph
 def cartierRootsIso (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj (Z.rootsOfUnitySheaf n) ≅
-      Scheme.proEtaleRootsOfUnitySheaf Z n :=
+      Scheme.ProEt.rootsOfUnitySheaf Z n :=
   @asIso _ _ _ _ (cartierRootsComparison Z n) (cartierRootsComparison_isIso Z n hn hZ)
 
 attribute [local irreducible] cartierRootsComparison cartierRootsIso
@@ -452,7 +424,7 @@ Source: blueprint Cartier finite coefficient extension paragraph
 (auxiliary; not a blueprint node). -/
 def cartierProRootMap (A : Type (u + 1)) [CommRing A] (n : ℕ) (hA : (n : A) = 0)
     (Z : Scheme.{u}) (hn : 0 < n) (hZ : IsUnit (n : Γ(Z, ⊤))) :
-    Scheme.proEtaleRootsOfUnitySheaf Z n ⟶
+    Scheme.ProEt.rootsOfUnitySheaf Z n ⟶
       (cartierForget A Z).obj (geoCartierLine A n hA Z) :=
   (cartierRootsIso Z n hn hZ).inv ≫
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
@@ -482,8 +454,8 @@ attribute [local irreducible] cartierProRootMap cartierProIntegralGenerator
 Source: Stacks 03PL (auxiliary; not a blueprint node). -/
 def cartierProKummerComplex (Z : Scheme.{u}) (n : ℕ) :
     ShortComplex (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) :=
-  ShortComplex.mk (Scheme.proEtaleRootsOfUnityInclusion Z n)
-    (Scheme.proEtaleUnitsPower Z n) (kernel.condition (Scheme.proEtaleUnitsPower Z n))
+  ShortComplex.mk (kernel.ι (n • 𝟙 (Scheme.ProEt.gmSheaf Z)))
+    (n • 𝟙 (Scheme.ProEt.gmSheaf Z)) (kernel.condition (n • 𝟙 (Scheme.ProEt.gmSheaf Z)))
 
 /-- Kummer is exact on every pro-etale scheme object.
 Source: Stacks 03PL and blueprint Cartier reduction paragraph
@@ -504,19 +476,19 @@ theorem cartierProKummer_exact (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
   have : IsIso a := unitsComparison_isIso Z
   have : Epi f := (Z.kummerSequence_shortExact n hZ).epi_g
   have : Epi (F.map f) := F.map_epi f
-  have w : F.map f ≫ a = a ≫ Scheme.proEtaleUnitsPower Z n := by
+  have w : F.map f ≫ a = a ≫ (n • 𝟙 (Scheme.ProEt.gmSheaf Z)) := by
     dsimp only [f]
     rw [F.map_nsmul, F.map_id]
-    simp only [Scheme.proEtaleUnitsPower, Preadditive.nsmul_comp,
+    simp only [Preadditive.nsmul_comp,
       Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]
   have hepi : Epi (F.map f ≫ a) := by infer_instance
-  have : Epi (Scheme.proEtaleUnitsPower Z n) := epi_of_epi_fac w.symm
+  have : Epi (n • 𝟙 (Scheme.ProEt.gmSheaf Z)) := epi_of_epi_fac w.symm
   exact
     { exact := ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _)
-      mono_f := by dsimp [cartierProKummerComplex, Scheme.proEtaleRootsOfUnityInclusion]
+      mono_f := by dsimp [cartierProKummerComplex]
                    infer_instance
       epi_g := by
-        change Epi (Scheme.proEtaleUnitsPower Z n)
+        change Epi (n • 𝟙 (Scheme.ProEt.gmSheaf Z))
         infer_instance }
 
 /-- The normalized Kummer scalar unit on etale units, expressed in abelian Ext.
@@ -524,7 +496,7 @@ Source: blueprint Cartier reduction paragraph, Stacks 0152 and 03PL
 (auxiliary; not a blueprint node). -/
 def cartierEtaleKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) (Z : Scheme.{u}) (hZ : IsUnit (n : Γ(Z, ⊤))) :
-    Ext.{u + 1} Z.gmSheaf ((Etale.RawModuleScalarComparison.forget A Z).obj
+    Ext.{u + 1} Z.gmSheaf ((Etale.moduleAbelianForget A Z).obj
       (Scheme.finiteEtaleTateLine Z n A hA)) 1 :=
   cartierKummerClass (Z.kummerSequence_shortExact n hZ)
     (Etale.ordinaryFiniteRootMap A n hA Z)
@@ -535,7 +507,7 @@ Source: blueprint Cartier reduction paragraph, Stacks 0152 and 03PL
 def cartierProKummerUnit (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : (n : A) = 0) (Z : Scheme.{u}) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) :
-    Ext.{u + 1} (Scheme.proEtaleUnitsSheaf Z)
+    Ext.{u + 1} (Scheme.ProEt.gmSheaf Z)
       ((cartierForget A Z).obj (geoCartierLine A n hA Z)) 1 :=
   cartierKummerClass (cartierProKummer_exact Z n hn hZ)
     (cartierProRootMap A n hA Z hn hZ)
@@ -565,7 +537,7 @@ def CartierEtaleReductionSpec (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hI : i.ker.IsInvertible) (hZ : IsUnit (n : Γ(Z, ⊤)))
     (c : Ext.{u + 1} ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj
       (Etale.ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine Z n A hA) 2) : Prop :=
-  cartierScalarBoundaryEquation (Etale.RawModuleScalarComparison.forget A Z)
+  cartierScalarBoundaryEquation (Etale.moduleAbelianForget A Z)
     (Etale.supportedIntegralGenerator A i) c (Etale.cartierPoleBoundary i hI)
     (cartierEtaleKummerUnit A n hA Z hZ)
 
@@ -598,7 +570,7 @@ private theorem cartierProIntegralGenerator_ext_bijective
         (c.mapExactFunctor (cartierForget A Z)) (zero_add 2)) := by
   have hsource := Etale.supported_integral_derived_unit Z n hn A hA i
   have hU := scalar_unit_ext_bijective
-    (Etale.RawModuleScalarComparison.forget A Z)
+    (Etale.moduleAbelianForget A Z)
     (Q := Scheme.finiteEtaleTateLine Z n A hA)
     (Etale.supportedIntegralGenerator A i) hsource 2
   have : IsIso (geoCartierSourceComparison A i) := cartierSourceComparison_isIso A i
@@ -607,12 +579,12 @@ private theorem cartierProIntegralGenerator_ext_bijective
     (Scheme.finiteEtaleTateLine Z n A hA) 2
   have hG := comparison_mapExt_bijective AddCommGrpCat.{u + 1} Z
     ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant D))
-    ((Etale.RawModuleScalarComparison.forget A Z).obj
+    ((Etale.moduleAbelianForget A Z).obj
       (Scheme.finiteEtaleTateLine Z n A hA)) 2
   have h := Ext.scalar_unit_ext_comparison_bijective
     (comparisonUpperStar (ModuleCat.{u + 1} A) Z)
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z)
-    (Etale.RawModuleScalarComparison.forget A Z) (cartierForget A Z)
+    (Etale.moduleAbelianForget A Z) (cartierForget A Z)
     (forgetComparisonIso A Z) (Etale.supportedIntegralGenerator A i)
     (cartierIntegralSourceIso i) (asIso (geoCartierSourceComparison A i)) 2 hU hF hG
   unfold cartierProIntegralGenerator cartierForgetComparison
@@ -640,7 +612,7 @@ theorem cartierReduction_existsUnique (A : Type (u + 1)) [CommRing A] [Finite A]
       CartierProReductionSpec A n hA i hI hn hZ c) := by
   have hsource := Etale.supported_integral_derived_unit Z n hn A hA i
   have hE := scalar_unit_ext_bijective
-    (Etale.RawModuleScalarComparison.forget A Z)
+    (Etale.moduleAbelianForget A Z)
     (Q := Scheme.finiteEtaleTateLine Z n A hA)
     (Etale.supportedIntegralGenerator A i) hsource 2
   have hP := cartierProIntegralGenerator_ext_bijective A n hn hA i

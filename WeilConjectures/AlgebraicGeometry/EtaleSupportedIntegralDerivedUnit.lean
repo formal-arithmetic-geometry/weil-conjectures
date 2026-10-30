@@ -131,7 +131,7 @@ private theorem generator_scalar
         (ModuleCat.of R R))).app W r) =
       (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj
         (ModuleCat.of A A))).app W (φ r)) :
-    ordinaryFiniteIntegralGenerator R T ≫ (RawModuleScalarComparison.forget R T).map η =
+    ordinaryFiniteIntegralGenerator R T ≫ (moduleAbelianForget R T).map η =
       ordinaryFiniteIntegralGenerator A T := by
   let adj := constantSheafAdj T.smallEtaleTopology AddCommGrpCat.{u + 1}
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale T)
@@ -162,14 +162,14 @@ theorem supported_integral_derived_unit
     (T : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (n : A) = 0)
     {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] :
-    (RawModuleScalarComparison.forget A T).DerivedUnit
+    (moduleAbelianForget A T).DerivedUnit
       ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))
       ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))
       (supportedIntegralGenerator A i) := by
   let R := ULift.{u + 1} (ZMod n)
   let φ := supportedScalarMap n A hA
   let U := Sheaf.restrictScalars T.smallEtaleTopology φ
-  let V := RawModuleScalarComparison.forget R T
+  let V := moduleAbelianForget R T
   let F := (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D)
   let G := (lowerStar (ModuleCat.{u + 1} R) i).obj (ordinaryFiniteConstant R D)
   let H := (lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)
@@ -191,11 +191,11 @@ theorem supported_integral_derived_unit
       supportedIntegralGenerator A i := by
     change (lowerStar AddCommGrpCat.{u + 1} i).map (ordinaryFiniteIntegralGenerator R D) ≫
       (lowerStar AddCommGrpCat.{u + 1} i).map
-        ((RawModuleScalarComparison.forget R D).map ηD) = _
+        ((moduleAbelianForget R D).map ηD) = _
     rw [← Functor.map_comp, generator_scalar D φ ηD hD]
     rfl
   have hiso := CategoryTheory.Functor.scalar_unit_iso (U ⋙ V)
-    (RawModuleScalarComparison.forget A T) (Iso.refl _) F H
+    (moduleAbelianForget A T) (Iso.refl _) F H
     (supportedIntegralGenerator R i ≫ V.map θ) hcomp
   simp only [Iso.refl_hom, NatTrans.id_app, Category.comp_id, hγ] at hiso
   exact hiso

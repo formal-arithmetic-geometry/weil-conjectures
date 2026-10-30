@@ -70,7 +70,7 @@ Source: Stacks 03FD (auxiliary; not a blueprint node). -/
 def supportedIntegralGenerator (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D) ⟶
-      (RawModuleScalarComparison.forget A T).obj
+      (moduleAbelianForget A T).obj
         ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) :=
   (lowerStar AddCommGrpCat.{u + 1} i).map (ordinaryFiniteIntegralGenerator A D)
 
@@ -102,7 +102,7 @@ Source: Stacks 03PL (auxiliary; not a blueprint node). -/
 def supportedKummerChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) {D T : Scheme.{u}} (i : D ⟶ T)
     (hI : i.ker.IsInvertible) (hT : IsUnit (N : Γ(T, ⊤))) :
-    Sheaf.H ((RawModuleScalarComparison.forget A T).obj
+    Sheaf.H ((moduleAbelianForget A T).obj
       (Scheme.finiteEtaleTateLine T N A hA)) 2 :=
   letI := hI.isInvertible_dual_toModules
   Sheaf.H.map (ordinaryFiniteRootMap A N hA T) 2
@@ -151,7 +151,7 @@ def SupportedKummerBoundary (A : Type (u + 1)) [CommRing A] (N : ℕ)
       @id (E.obj.obj (op (Scheme.Etale.mk W.ι)))
         (f.hom.app (op (Scheme.Etale.mk W.ι)) τ) = 0 ∧
       (Ext.mk₀ (supportedIntegralGenerator A i)).comp
-          (c.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2) =
+          (c.mapExactFunctor (moduleAbelianForget A T)) (zero_add 2) =
         (hE.extClass.comp (T.kummerSequence_shortExact N hT).extClass (rfl : 1 + 1 = 2)).comp
           (Ext.mk₀ (ordinaryFiniteRootMap A N hA T)) (add_zero 2)
 

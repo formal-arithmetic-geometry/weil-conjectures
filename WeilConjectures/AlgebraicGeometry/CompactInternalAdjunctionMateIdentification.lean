@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionMateIde
 /-! Identification of the canonical maps in compact adjunction exchange.
 
 The mate calculus over a general coefficient category is in
-`WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionMateIdentificationCanonicalMaps` and
+`WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionMateCanonicalMaps` and
 `WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionMateIdentificationGeneral`
 (split for compile time). -/
 
