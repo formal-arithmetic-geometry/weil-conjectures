@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbientIntegral
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -126,7 +128,11 @@ theorem properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (p :
       boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K →
         boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left) M →
           IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E) p.left).app K).app M)) :=
-  sorry
+  ⟨fun K hK ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩,
+    fun sq K hK ↦ isIso_baseChangeMap_app_padicIntegers_of_isProper ℓ E sq
+      ((Over.forget _).map_commSq sq.toCommSq) rfl rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl K hK,
+    fun K M hK hM ↦
+      isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible ℓ E p K M hK hM⟩
 
 /-- Blueprint `det-prop-int-compactness-direct-sums`: Integral proper direct image on the
 localizing categories. Let `p : X ⟶ Y` be proper, with fibres of dimension `≤ d`.
