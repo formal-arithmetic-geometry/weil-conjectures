@@ -6,14 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
-public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import WeilConjectures.Topology.Sheaves.CechFlasque
 
 /-!
 # Finiteness and vanishing of coherent cohomology over a field

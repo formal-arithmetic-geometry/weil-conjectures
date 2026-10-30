@@ -6,17 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.RealLissePurity
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
-public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
-public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
-public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarFiniteEtale
-public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed

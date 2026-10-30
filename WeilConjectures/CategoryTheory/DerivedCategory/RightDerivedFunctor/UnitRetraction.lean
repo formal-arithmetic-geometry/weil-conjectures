@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
 
 /-!
 # Retractions of the unbounded derived unit
@@ -37,34 +37,6 @@ open CategoryTheory Category Limits MonoidalCategory Abelian
 
 namespace CategoryTheory
 
-namespace Functor
-
-variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
-  [HasDerivedCategory A] [HasDerivedCategory B] [EnoughInjectives A] [HasKInjectiveResolutions A]
-  (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
-
-/-- The unit `F(M) ⟶ RF(M)` of the unbounded right derived functor is an isomorphism at a bounded
-below complex `M` of `F`-acyclic objects: it identifies with the unit of the bounded below right
-derived functor (`Functor.rightDerivedFunctorPlusCompatibility`), which is an isomorphism by
-`Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic`. -/
-theorem isIso_rightDerivedFunctorUnit_app_quotient_of_rightAcyclic (M : CochainComplex A ℤ)
-    (a : ℤ) [M.IsStrictlyGE a] (hM : ∀ n, F.rightAcyclic (M.X n)) :
-    IsIso (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A _).obj M)) := by
-  let L : CochainComplex.Plus A := ⟨M, a, inferInstance⟩
-  have := F.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic L hM
-  have h : F.rightDerivedFunctorPlusιUnit.app ((HomotopyCategory.Plus.quotient A).obj L) ≫
-      F.rightDerivedFunctorPlusCompatibility.hom.app
-        (DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient A).obj L)) =
-      F.ιRightDerivedFunctorUnit.app ((HomotopyCategory.Plus.quotient A).obj L) := by
-    simp [rightDerivedFunctorPlusCompatibility]
-  have : IsIso (F.ιRightDerivedFunctorUnit.app ((HomotopyCategory.Plus.quotient A).obj L)) := by
-    rw [← h]
-    dsimp only [rightDerivedFunctorPlusιUnit, whiskerRight_app]
-    infer_instance
-  exact this
-
-end Functor
-
 namespace Adjunction
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -82,7 +54,15 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
 
 /-- The unit of the derived adjunction on the image `Qh(X)` of an object `X` of the homotopy
 category is the unit of `adj` followed by the unit of the right derived functor of `g`, modulo
-the counit of the left derived functor of `f`. -/
+the counit of the left derived functor of `f`, i.e. the square
+```
+      Qh(X)  ──── η_{Qh(X)} ────→  Rg(Lf(Qh(X)))
+        │                               │
+  Qh(adj.unit_X)                   Rg(ε_X)
+        ↓                               ↓
+   Qh(g(f(X))) ── unit of Rg ──→   Rg(Qh(f(X)))
+```
+commutes, where `η` is the unit of the derived adjunction and `ε` the counit of `Lf`. -/
 @[reassoc]
 theorem derivedAdjunction_unit_app_Qh_fac (adj : f ⊣ g)
     (X : HomotopyCategory C (ComplexShape.up ℤ)) :
@@ -105,7 +85,7 @@ functor of `g` at `f(K)` and the counit of the left derived functor of the exact
 noncomputable def derivedUnitIso :
     DerivedCategory.Q.obj ((g.mapHomologicalComplex _).obj ((f.mapHomologicalComplex _).obj K)) ≅
       g.rightDerivedFunctor.obj (f.leftDerivedFunctor.obj (DerivedCategory.Q.obj K)) :=
-  have := g.isIso_rightDerivedFunctorUnit_app_quotient_of_rightAcyclic
+  have := g.isIso_rightDerivedFunctorUnit_app_of_isStrictlyGE
     ((f.mapHomologicalComplex _).obj K) a hK
   ((DerivedCategory.quotientCompQhIso C).app _).symm ≪≫
     asIso (g.rightDerivedFunctorUnit.app
@@ -115,7 +95,15 @@ noncomputable def derivedUnitIso :
         f.leftDerivedFunctor.mapIso ((DerivedCategory.quotientCompQhIso C).app K))
 
 /-- Under the isomorphism `Adjunction.derivedUnitIso : g(f(K)) ≅ Rg(Lf(K))`, the unit of the
-derived adjunction at `K` is the levelwise unit `K ⟶ g(f(K))` of `adj`. -/
+derived adjunction at `K` is the levelwise unit `K ⟶ g(f(K))` of `adj`:
+```
+   Q(K) ── Q(adj.unit_K) ──→ Q(g(f(K)))
+      ╲                          │
+       η_{Q(K)}          derivedUnitIso.hom
+          ╲                      ↓
+           ╰──────────→   Rg(Lf(Q(K)))
+```
+-/
 @[reassoc]
 theorem Q_map_unit_comp_derivedUnitIso_hom (adj : f ⊣ g) :
     DerivedCategory.Q.map ((adj.mapHomologicalComplex _).unit.app K) ≫

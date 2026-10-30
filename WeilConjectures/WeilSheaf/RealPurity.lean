@@ -7,19 +7,13 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.Evaluation
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
-public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.LisseFiltration
-public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.MiddleExtension
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Stalk
-public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 

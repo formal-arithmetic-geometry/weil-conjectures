@@ -70,3 +70,41 @@ theorem boundedConstructible_leftDerivedExtendScalars_obj
       (constructible_extend R S φ (hK n))
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+section
+
+open CategoryTheory Limits MonoidalCategory MonObj
+open scoped CategoryTheory.Obj
+variable {X Y : Scheme.{u}} (g : Y ⟶ X)
+  (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+  [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+  (φ : R ⟶ S) [IsMonHom φ]
+
+omit [IsCommMonObj S] in
+private noncomputable def pullbackExtendScalarsIso :
+    Mod.extendScalars φ ⋙ (upperStar Ab.{u + 1} g).mapMod S ≅
+      (upperStar Ab.{u + 1} g).mapMod R ⋙
+        Mod.extendScalars ((upperStar Ab.{u + 1} g).map φ) := by
+  let F := upperStar Ab.{u + 1} g
+  let G := lowerStar Ab.{u + 1} g
+  let adj := upperStarLowerStarAdjunction Ab.{u + 1} g
+  let a := (Mod.extendRestrictAdjunction φ).comp (adj.mapModAdjunction S)
+  let b := (adj.mapModAdjunction R).comp
+    (Mod.extendRestrictAdjunction (F.map φ))
+  have e : Mod.comap (F.map φ) ⋙
+      (G.mapMod (F.obj R) ⋙ Mod.comap (adj.unitAlgHom R)) ≅
+      (G.mapMod (F.obj S) ⋙ Mod.comap (adj.unitAlgHom S)) ⋙ Mod.comap φ :=
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (G.mapModComapIso (F.map φ)) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (Mod.comapComp _ _).symm ≪≫
+    Functor.isoWhiskerLeft _ (Mod.comapCongr (adj.unit.naturality φ).symm) ≪≫
+    Functor.isoWhiskerLeft _ (Mod.comapComp _ _) ≪≫
+    (Functor.associator _ _ _).symm
+  exact a.leftAdjointUniq (b.ofNatIsoRight e)
+
+end
+
+end AlgebraicGeometry.ProEtale

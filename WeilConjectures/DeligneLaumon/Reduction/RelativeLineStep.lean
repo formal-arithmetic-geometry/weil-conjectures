@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 # The relative affine-line step of the Deligne–Laumon reduction

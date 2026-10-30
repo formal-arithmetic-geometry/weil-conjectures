@@ -918,6 +918,16 @@ private lemma derived_star_id_conjugate
 
 end IdentityComparisons
 
+private lemma composed_iso_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (R : C ⥤ D) (S : D ⥤ E) (T : C ⥤ E) (e : R ⋙ S ≅ T)
+    {K : D} {L M : C} (a : K ⟶ R.obj L) (b : L ⟶ M) :
+    S.map (a ≫ R.map b) ≫ e.hom.app M =
+      S.map a ≫ e.hom.app L ≫ T.map b := by
+  have hn := e.hom.naturality b
+  dsimp only [Functor.comp_map] at hn
+  rw [S.map_comp, Category.assoc, hn]
+
 private lemma conjugate_iso_symm_eq
     {C D : Type*} [Category C] [Category D]
     {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
@@ -955,6 +965,87 @@ private lemma unbounded_pf_comp
       (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) f g).symm := by
   rw [ExchangeFormalism.pfComp', unbounded_pb_comp']
   rfl
+
+private lemma exact_open_congr_symm
+    (A : Type (u + 1)) [CommRing A] {U Z : Scheme.{u}} {j j' : U ⟶ Z}
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : j = j') :
+    mapDerivedCategoryOpenImmersionLowerShriekCongr (ModuleCat.{u + 1} A) h.symm =
+      (mapDerivedCategoryOpenImmersionLowerShriekCongr (ModuleCat.{u + 1} A) h).symm := by
+  subst j'
+  rfl
+
+private lemma unbounded_comp_hom_app
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (T : Compactification.Triangle f g) (K : DerivedCategoryModule A X) :
+    ((unboundedFormalism A).compIso T).hom.app K =
+      (lowerStar (ModuleCat.{u + 1} A) T.cg.g).rightDerivedFunctor.map
+        ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) T.isPullback).app
+          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) T.cf.i).mapDerivedCategory.obj K) ≫
+        (lowerStar (ModuleCat.{u + 1} A) T.p).rightDerivedFunctor.map
+          ((mapDerivedCategoryOpenImmersionLowerShriekComp
+            (ModuleCat.{u + 1} A) T.cf.i T.q).inv.app K ≫
+          (mapDerivedCategoryOpenImmersionLowerShriekCongr
+            (ModuleCat.{u + 1} A) T.i_q).hom.app K)) ≫
+      (Functor.rightDerivedFunctorCompIso'
+        (lowerStar (ModuleCat.{u + 1} A) T.p)
+        (lowerStar (ModuleCat.{u + 1} A) T.cg.g)
+        (lowerStarComp (ModuleCat.{u + 1} A) T.p T.cg.g T.cfg.g T.p_g.symm)).hom.app
+          ((openImmersionLowerShriek (ModuleCat.{u + 1} A) T.cfg.i).mapDerivedCategory.obj K) := by
+  rw [CompactSupportFormalism.compIso_hom_app,
+    unbounded_open_exchange A T.isPullback, unbounded_sh_comp,
+    exact_open_congr_symm,
+    unbounded_pf_comp_inv A T.p T.cg.g T.cfg.g T.p_g]
+  · simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app]
+    rfl
+
+private lemma right_derived_star_comp_eq
+    (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (Functor.rightDerivedFunctorCompIso'
+      (lowerStar (ModuleCat.{u + 1} A) f) (lowerStar (ModuleCat.{u + 1} A) g)
+      (lowerStarComp (ModuleCat.{u + 1} A) f g)).hom =
+      (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) f g).hom := by
+  have h := unbounded_pf_comp_inv A f g (f ≫ g) rfl
+  rw [unbounded_pf_comp] at h
+  exact h.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma unbounded_comp_iso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (d : Compactification g) (e : Compactification (f ≫ d.i)) :
+    (unboundedFormalism A).compIso (Compactification.Triangle.ofRestrict d e) =
+      rightDerivedLowerShriekOfCompactificationCompIso A d e := by
+  let B := ModuleCat.{u + 1} A
+  have := isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring A
+    isAddTorsion_of_finite e.isPullback_restrict
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  change DerivedCategoryModule A X at K
+  change (_ : ((rightDerivedLowerShriekOfCompactification B e.restrict ⋙
+      rightDerivedLowerShriekOfCompactification B d).obj K ⟶
+      (rightDerivedLowerShriekOfCompactification B (d.comp e)).obj K)) = _
+  rw [unbounded_comp_hom_app]
+  dsimp only [Compactification.Triangle.ofRestrict, Compactification.comp,
+    Compactification.copy, Compactification.postcomp]
+  erw [right_derived_star_comp_eq]
+  simp only [rightDerivedLowerShriekOfCompactificationCompIso,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.assoc]
+  exact (composed_iso_naturality
+    (lowerStar B e.g).rightDerivedFunctor (lowerStar B d.g).rightDerivedFunctor
+    (lowerStar B (e.g ≫ d.g)).rightDerivedFunctor (rightDerivedLowerStarComp B e.g d.g)
+    ((openImmersionLowerShriekLowerStarExchange B e.isPullback_restrict).app
+      ((openImmersionLowerShriek B e.restrict.i).mapDerivedCategory.obj K))
+    ((mapDerivedCategoryOpenImmersionLowerShriekComp B e.restrict.i
+      (pullback.fst e.g d.i)).inv.app K ≫
+      (mapDerivedCategoryOpenImmersionLowerShriekCongr B e.restrict_i_fst).hom.app K)).trans
+      (Category.id_comp _).symm
 
 end OpenCompositionComparisons
 
@@ -1001,6 +1092,28 @@ private theorem unbounded_refinement_comparison
     (refinementLowerShriekBaseChangeDerivedIso (ModuleCat.{u + 1} A) r hr)
     (unbounded_base_change_refinement A r hr), unbounded_pf_comp_inv,
     ← refinementLowerStarComp_eq]
+  rfl
+
+private theorem unbounded_shriek_iso
+    (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [QuasiCompact f] (c d : Compactification f) :
+    (unboundedFormalism A).shriekIso c d =
+      rightDerivedLowerShriekOfCompactificationIso A c d := by
+  ext : 1
+  simp only [CompactSupportFormalism.shriekIso, rightDerivedLowerShriekOfCompactificationIso,
+    Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv, unbounded_refinement_comparison]
+
+private lemma unbounded_chosen_comp
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact (f ≫ g)] :
+    (unboundedFormalism A).lowerShriekCompIso f g =
+      unboundedEtaleLowerShriekCompIso A f g := by
+  rw [CompactSupportFormalism.lowerShriekCompIso]
+  rw [← CompactSupportFormalism.shriekIso_symm]
+  simp only [Compactification.Triangle.ofHasCompactification, unbounded_comp_iso,
+    unbounded_shriek_iso, unboundedEtaleLowerShriekCompIso, rightDerivedLowerShriekIso]
   rfl
 
 end UnboundedFormalism

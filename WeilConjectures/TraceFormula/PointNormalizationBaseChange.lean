@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
 public import WeilConjectures.TraceFormula.PointNormalizationKunneth
 public import WeilConjectures.TraceFormula.PointNormalizationTau
+public import WeilConjectures.TraceFormula.LocalTerm
 
 /-!
 

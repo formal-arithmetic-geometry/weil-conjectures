@@ -7,34 +7,10 @@ module
 
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.NumberTheory.Padics.Complex
-public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.ConstructibleSheaf.KernelCokernel
-public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.ConstructibleSheaf.Presentation
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.Point
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.Supports
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 # Finiteness of direct images

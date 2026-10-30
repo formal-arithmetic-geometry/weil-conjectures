@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.CategoryTheory.Filtered.Basic
@@ -14,7 +15,12 @@ import Mathlib.CategoryTheory.Triangulated.Yoneda
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 
-/-! # Closure of filtered Hom continuity under extensions -/
+/-! # Closure of filtered Hom continuity under extensions
+
+The objects `K` whose shifted Hom functors `Hom(K, -[n])` carry a cocone over a filtered diagram
+to a colimit (`CategoryTheory.homColimitProperty`) are closed under extensions
+(`CategoryTheory.homColimitProperty_extensions`), and form a triangulated subcategory
+(`CategoryTheory.isTriangulated_homColimitProperty`). -/
 
 @[expose] public section
 
@@ -170,5 +176,32 @@ theorem homColimitProperty_extensions (D : I ⥤ C) (c : Cocone D)
       ((preadditiveCoyoneda.obj (op (T.obj₃⟦(-1 : ℤ)⟧))).mapCocone c'))
     exact homColimitProperty_shift D c T.obj₃ h₃ (-1) n
   exact iso_middle_of_homological _ _ α S hS hA' hC hA hC'
+
+variable (D : I ⥤ C) (c : Cocone D)
+
+/-- `homColimitProperty D c` is closed under isomorphisms. -/
+instance isClosedUnderIsomorphisms_homColimitProperty :
+    (homColimitProperty D c).IsClosedUnderIsomorphisms where
+  of_iso e h n := desc_iso_transfer D c _ _
+    (Functor.isoWhiskerLeft (shiftFunctor C n) (preadditiveCoyoneda.mapIso e.symm.op)) (h n)
+
+/-- `homColimitProperty D c` is stable under shifts. -/
+instance isStableUnderShift_homColimitProperty : (homColimitProperty D c).IsStableUnderShift ℤ where
+  isStableUnderShiftBy n := ⟨fun K h ↦ homColimitProperty_shift D c K h n⟩
+
+open ZeroObject in
+/-- The objects whose shifted Hom functors carry the cocone `c` to a colimit form a triangulated
+subcategory: they contain `0`, and are stable under shifts and extensions
+(`homColimitProperty_extensions`). -/
+instance isTriangulated_homColimitProperty : (homColimitProperty D c).IsTriangulated where
+  exists_zero := by
+    refine ⟨0, isZero_zero C, fun n ↦ ?_⟩
+    have h (Y : C) : IsZero ((preadditiveCoyoneda.obj (op (0 : C))).obj Y) := by
+      apply (IsZero.iff_id_eq_zero _).2
+      ext f
+      exact (isZero_zero C).eq_of_src _ _
+    apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
+    exact ⟨IsColimit.ofIsZero _ ((Functor.isZero_iff _).2 (fun i ↦ h _)) (h _)⟩
+  toIsTriangulatedClosed₂ := .mk' (homColimitProperty_extensions D c)
 
 end CategoryTheory
