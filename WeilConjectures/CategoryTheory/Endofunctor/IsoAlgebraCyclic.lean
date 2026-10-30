@@ -110,11 +110,11 @@ lemma strZero_hom_naturality {A B : IsoAlgebra F} (f : A ⟶ B) :
 /-- **The first piece of an algebra**: `(A, φ) ↦ (J₀ A, ψ_A)`. -/
 def functor : IsoAlgebra F ⥤ IsoAlgebra G where
   obj := P.firstPiece
-  map {A B} f := ObjectProperty.homMk
+  map f := ObjectProperty.homMk
     { f := (P.J 0).map f.hom.f
       h := P.strZero_hom_naturality f }
-  map_id A := hom_ext ((P.J 0).map_id _)
-  map_comp f g := hom_ext ((P.J 0).map_comp _ _)
+  map_id _ := hom_ext ((P.J 0).map_id _)
+  map_comp _ _ := hom_ext ((P.J 0).map_comp _ _)
 
 @[simp]
 lemma functor_obj_carrier (A : IsoAlgebra F) :
@@ -168,7 +168,8 @@ def functorFullyFaithful : P.functor.FullyFaithful where
           have h0 : (P.J 0).map φ = g.hom.f := by simpa using hJ 0
           rw [e, h0, hJ, hg]
           simp [strZero]
-          simp only [← str_hom, ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id, Category.comp_id]
+          simp only [← str_hom, ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id,
+            Category.comp_id]
         | cast k =>
           have e : (P.J k.castSucc).map (F.map φ) =
               ((P.α k).app A.carrier).hom ≫ (P.J k.succ).map φ ≫
@@ -177,7 +178,8 @@ def functorFullyFaithful : P.functor.FullyFaithful where
             simp
           rw [e, hJ, hJ]
           simp [chain_succ]
-          simp only [← str_hom, ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id, Category.comp_id] }
+          simp only [← str_hom, ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id,
+            Category.comp_id] }
   map_preimage {A B} g := hom_ext <| by
     simp only [functor_map_hom_f, ObjectProperty.homMk_hom, map_preimageFamily, chain_zero,
       Iso.refl_hom, Iso.refl_inv, Category.id_comp]

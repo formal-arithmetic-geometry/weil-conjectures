@@ -79,7 +79,7 @@ lemma isClosed_range_pieceMap (i : Fin (m + 1)) : IsClosed (Set.range (pieceMap 
   have h : (Set.range (pieceMap hc i).base)ᶜ = ⋃ j ∈ ({i}ᶜ : Set (Fin (m + 1))),
       Set.range (pieceMap hc j).base := by
     ext x
-    simp only [Set.mem_compl_iff, Set.mem_iUnion, Set.mem_compl_singleton_iff, exists_prop]
+    simp only [Set.mem_compl_iff, Set.mem_iUnion, exists_prop]
     obtain ⟨j, hj, -⟩ := existsUnique_mem_range_pieceMap hc hm x
     refine ⟨fun hx ↦ ⟨j, fun h ↦ hx (h ▸ hj), hj⟩, fun ⟨k, hk, hx⟩ hx' ↦ ?_⟩
     exact hk ((existsUnique_mem_range_pieceMap hc hm x).unique hx hx')
@@ -93,7 +93,7 @@ lemma isClosedImmersion_pieceMap (i : Fin (m + 1)) : IsClosedImmersion (pieceMap
 lemma pieceMap_comp_frobenius (k : Fin m) :
     pieceMap hc k.castSucc ≫ (V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
       pieceMap hc k.succ := by
-  simp only [pieceMap, Category.assoc, Fin.coe_castSucc, Fin.val_succ, pow_succ',
+  simp only [pieceMap, Category.assoc, Fin.val_castSucc, Fin.val_succ, pow_succ',
     Aut.Aut_mul_def, Iso.trans_hom]
 
 include hm in

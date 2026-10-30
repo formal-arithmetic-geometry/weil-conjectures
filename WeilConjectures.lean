@@ -2106,6 +2106,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCokernelAux
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCokernelPresentation
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCover
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionPresentationLift
+public import WeilConjectures.AlgebraicGeometry.ConstantFieldDecomposition
 public import WeilConjectures.AlgebraicGeometry.ConstantFieldGeometricFiber
 public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 public import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
@@ -8460,6 +8461,7 @@ public import WeilConjectures.CategoryTheory.EffacingSequencePushout
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCompIso
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCyclic
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchangeCube
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
@@ -9680,6 +9682,7 @@ public import WeilConjectures.FieldTheory.ExistsPBasis
 public import WeilConjectures.FieldTheory.FgSeparableSmooth
 public import WeilConjectures.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras
 public import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
+public import WeilConjectures.FieldTheory.FiniteFieldEmbeddings
 public import WeilConjectures.FieldTheory.FiniteFieldGaloisCohomology
 public import WeilConjectures.FieldTheory.FiniteGaloisCocycleData
 public import WeilConjectures.FieldTheory.FiniteGaloisReceivingSeparableExtensions
@@ -12967,6 +12970,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafPadicIntExtendS
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClopenDecomposition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
@@ -14666,6 +14670,7 @@ public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedTwistedConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantFieldComponent
+public import WeilConjectures.WeilSheaf.ConstantFieldEquivalence
 public import WeilConjectures.WeilSheaf.ConstantFieldRestriction
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight

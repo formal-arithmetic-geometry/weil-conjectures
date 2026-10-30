@@ -49,17 +49,20 @@ def geometricFiberToConstantFieldFiber : f.geometricFiber ⟶ constantFieldFiber
   pullback.lift (f.geometricFiberProj ≫ c) f.geometricFiberToAlgebraicClosure (by
     rw [Category.assoc, hc, geometricFiber_condition])
 
+omit [Algebra.IsAlgebraic k₀ k'] in
 @[reassoc (attr := simp)]
 lemma geometricFiberToConstantFieldFiber_fst :
     geometricFiberToConstantFieldFiber c f hc ≫ pullback.fst _ _ = f.geometricFiberProj ≫ c :=
   pullback.lift_fst _ _ _
 
+omit [Algebra.IsAlgebraic k₀ k'] in
 @[reassoc (attr := simp)]
 lemma geometricFiberToConstantFieldFiber_snd :
     geometricFiberToConstantFieldFiber c f hc ≫ pullback.snd _ _ =
       f.geometricFiberToAlgebraicClosure :=
   pullback.lift_snd _ _ _
 
+omit [Algebra.IsAlgebraic k₀ k'] in
 /-- The geometric fibre `V ⊗_{k₀} k̄` is the base change of `c : V ⟶ Spec k'` along
 `S ⟶ Spec k'`. -/
 lemma isPullback_geometricFiberToConstantFieldFiber :
@@ -130,6 +133,7 @@ lemma isPullback_geometricFiberComponentMap :
       erw [reassoc_of% h1]
     · simp
 
+omit [Algebra.IsAlgebraic k₀ k'] in
 /-- The map to `S` is the base change of `c` to the algebraic closure. -/
 lemma geometricFiberToConstantFieldFiber_eq :
     geometricFiberToConstantFieldFiber c f hc = geometricFiberMap c hc :=
@@ -163,6 +167,7 @@ lemma locallyOfFiniteType_specMap_algebraMap :
   rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
   exact RingHom.finiteType_algebraMap.2 inferInstance
 
+omit [Algebra.IsAlgebraic k₀ k'] [Module.Finite k₀ k'] in
 variable (k₀ k') in
 /-- The projection `S ⟶ Spec k̄` is formally unramified and locally of finite type. -/
 lemma formallyUnramified_constantFieldFiber_snd :
@@ -204,6 +209,7 @@ def constantFieldEmbedding : k' →ₐ[k₀] AlgebraicClosure k₀ :=
   (algebraicClosureAlgEquiv k₀ k').toAlgHom.comp
     (IsScalarTower.toAlgHom k₀ k' (AlgebraicClosure k'))
 
+omit [Finite k₀] [Finite k'] in
 lemma constantFieldFiberSection_fst' :
     constantFieldFiberSection (k₀ := k₀) (k' := k') ≫ pullback.fst _ _ =
       Spec.map (CommRingCat.ofHom (constantFieldEmbedding k₀ k').toRingHom) := by
@@ -228,12 +234,14 @@ lemma specGeometricFrobenius_pow_inv [Fintype k₀] (n : ℕ) :
     pow_iterate]
 
 variable (k₀ k') in
-/-- The sections `tₙ = σ⁻ⁿ ≫ s₀ ≫ φⁿ : Spec k̄ ⟶ S` of the projection `S ⟶ Spec k̄`, where `φ` is the
-geometric Galois Frobenius of `S` and `σ` that of `Spec k̄`. -/
-def constantFieldFiberSectionPow (n : ℕ) : Spec (.of (AlgebraicClosure k₀)) ⟶ constantFieldFiber k₀ k' :=
+/-- The sections `tₙ = σ⁻ⁿ ≫ s₀ ≫ φⁿ : Spec k̄ ⟶ S` of the projection `S ⟶ Spec k̄`, where `φ`
+is the geometric Galois Frobenius of `S` and `σ` that of `Spec k̄`. -/
+def constantFieldFiberSectionPow (n : ℕ) :
+    Spec (.of (AlgebraicClosure k₀)) ⟶ constantFieldFiber k₀ k' :=
   (specGeometricFrobenius k₀ ^ n).inv ≫ constantFieldFiberSection ≫
     ((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^ n).hom
 
+omit [Finite k'] in
 lemma constantFieldFiberSectionPow_snd (n : ℕ) :
     constantFieldFiberSectionPow k₀ k' n ≫ pullback.snd _ _ = 𝟙 _ := by
   have h := geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure
@@ -246,6 +254,7 @@ lemma constantFieldFiberSectionPow_snd (n : ℕ) :
   change _ ≫ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricFiberToAlgebraicClosure = _
   simp only [constantFieldFiberSectionPow, Category.assoc, h, reassoc_of% h0, h1]
 
+omit [Finite k'] in
 lemma constantFieldFiberSectionPow_fst [Fintype k₀] (n : ℕ) :
     constantFieldFiberSectionPow k₀ k' n ≫ pullback.fst _ _ =
       Spec.map (CommRingCat.ofHom ((FiniteField.frobeniusAlgHom k₀ (AlgebraicClosure k₀) ^ n).comp
@@ -330,6 +339,7 @@ private lemma iso_hom_inv_apply {X Y : Scheme.{u}} (e : X ≅ Y) (y : Y) :
   rw [← comp_base_apply', e.inv_hom_id]
   rfl
 
+omit [Finite k'] in
 lemma mem_range_geometricFiberComponentMap_comp_iff (n : ℕ) (x : f.geometricFiber) :
     x ∈ Set.range (geometricFiberComponentMap c f hc ≫ (f.geometricGaloisFrobenius ^ n).hom).base ↔
       (geometricFiberToConstantFieldFiber c f hc).base x ∈
@@ -369,11 +379,13 @@ lemma mem_range_geometricFiberComponentMap_comp_iff (n : ℕ) (x : f.geometricFi
       change constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).inv.base u) =
         ((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^ n).inv.base
           (((Spec.map (CommRingCat.ofHom (algebraMap k₀ k'))).geometricGaloisFrobenius ^
-            n).hom.base (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).inv.base u)))
+            n).hom.base
+              (constantFieldFiberSection.base ((specGeometricFrobenius k₀ ^ n).inv.base u)))
       rw [iso_inv_hom_apply]
     obtain ⟨y, hy⟩ := hx
     refine ⟨y, ?_⟩
-    change (f.geometricGaloisFrobenius ^ n).hom.base ((geometricFiberComponentMap c f hc).base y) = x
+    change (f.geometricGaloisFrobenius ^ n).hom.base
+      ((geometricFiberComponentMap c f hc).base y) = x
     rw [hy, iso_hom_inv_apply]
 
 /-- **The geometric fibre over `k₀` is the disjoint union of the Frobenius translates of the
