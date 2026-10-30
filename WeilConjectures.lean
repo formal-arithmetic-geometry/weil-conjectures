@@ -13917,8 +13917,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.UnitTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.UpperStarLowerStarHom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralModule
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.HaarIntegralSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructure
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructureAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
@@ -14001,8 +13999,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedPoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedProjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.StalkZeroLocus
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TestObjectPushforwardSections
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TestObjectSectionsWContractible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolution
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionMod
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionProEtale
@@ -14102,7 +14098,6 @@ public import WeilConjectures.Topology.AbelianSheafFiniteGenerationExhaustion
 public import WeilConjectures.Topology.AbelianSheafFiniteGeneratorStages
 public import WeilConjectures.Topology.AbelianSheafLocalIntegerGenerator
 public import WeilConjectures.Topology.AbelianSheafShortExactStalkwise
-public import WeilConjectures.Topology.Algebra.ProPHaarIntegral
 public import WeilConjectures.Topology.BasisSheafCofinalCoverings
 public import WeilConjectures.Topology.ClosedEmbeddingRestrictionTransport
 public import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
