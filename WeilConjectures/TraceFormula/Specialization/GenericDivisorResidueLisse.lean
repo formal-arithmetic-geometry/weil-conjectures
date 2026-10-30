@@ -140,57 +140,11 @@ theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse [PerfectField k
     exact hdℓ
   have hsplit := isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_geometricFiber_card
     (integersResidueField ℓ E.1) v hd hcard K
-  obtain ⟨X', _, _, _, f, _, w, _, hX', hsq⟩ := exists_normalization_of_finite_etale hX I v
-  have hKo : DerivedCategory.plusEtaleOrigin
-      (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) _
-      ((finiteCoefficientDerivedEquivalence _ (integersResidueField ℓ E.1)).functor.obj K) :=
-    ⟨F', ⟨a, ha⟩, ⟨e.symm⟩⟩
-  have hMo := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj _ v hKo
-  have hjMo := ObjectProperty.prop_of_iso _
-    ((finiteCoefficientDerivedOpenImmersionLowerShriekIso (integersResidueField ℓ E.1)
-      (w ≫ (overRestrictι X' (I.comap f.left).support.compl).left)).app _)
-    (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek
-      (w ≫ (overRestrictι X' (I.comap f.left).support.compl).left) hMo)
-  obtain ⟨eiso⟩ := nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso
-    (integersResidueField ℓ E.1) f.left (overRestrictι X I.support.compl).left
-    (w ≫ (overRestrictι X' (I.comap f.left).support.compl).left) v hsq (centreι X I).left
-    (isCompl_range_overRestrictι_centreι I).symm _ hjMo
-  suffices hR : nearbyCyclesVanishNear X I k'
-      (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ζ
-      (R((f.left)_*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj
-        (D((w ≫ (overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
-          Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj
-          (L((v)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj K))) by
-    let r : Retract K _ :=
-      { i := (derivedUpperStarLowerStarAdjunction _ v).unit.app K
-        r := retraction ((derivedUpperStarLowerStarAdjunction _ v).unit.app K)
-        retract := IsSplitMono.id _ }
-    exact (nearbyCyclesVanishNear X I k' _ ζ).prop_of_retract
-      (r.map (D(((overRestrictι X I.support.compl).left)_!open⟦
-        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)))
-      ((nearbyCyclesVanishNear X I k' _ ζ).prop_of_iso eiso hR)
-  refine nearbyCyclesVanishNear_rightDerivedLowerStar_of_isFinite _ f I k' ζ _ hjMo
-    fun ζ' hζ' ↦ ?_
-  have : Nonempty W := ConnectedSpace.toNonempty
-  let P := (nearbyCyclesVanishNear X' (I.comap f.left) k'
-    (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ζ').inverseImage
-      (D((w ≫ (overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
-        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧))
-  refine prop_of_isBoundedFiniteEllGroupMonodromy_finiteCoefficient (integersResidueField ℓ E.1) ℓ
-    P (fun M n hM ↦ ?_) (fun Tr hTr h₁ h₃ ↦ ?_) ?_ _
-    ((D(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) v)).obj
-      F') ?_
-    (finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso _ v e)
-  · exact (nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').prop_of_iso
-      ((((D((w ≫ (overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
-        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).commShiftIso n).app M).symm)
-      ((nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').le_shift n _ hM)
-  · exact (nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').ext_of_isTriangulatedClosed₂ _
-      ((D((w ≫ (overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
-        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).map_distinguished _ hTr)
-      h₁ h₃
-  · sorry
-  · refine ⟨⟨a, b, (Etale.upperStar _ v).isGE_mapDerivedCategory_obj F' a,
+  -- the finite `ℓ`-group monodromy of the pullback to `W`
+  have hW : Etale.IsBoundedFiniteEllGroupMonodromy ℓ
+      ((D(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) v)).obj
+        F') := by
+    refine ⟨⟨a, b, (Etale.upperStar _ v).isGE_mapDerivedCategory_obj F' a,
       (Etale.upperStar _ v).isLE_mapDerivedCategory_obj F' b⟩, fun n ↦ ?_⟩
     refine Etale.HasFiniteEllGroupMonodromy.of_iso ?_
       (((Etale.upperStar _ v).mapDerivedCategoryHomologyFunctorIso n).app F')
@@ -213,5 +167,67 @@ theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse [PerfectField k
         (ModuleCat.isZero_of_subsingleton
           (ModuleCat.of (ULift.{u + 1} (integersResidueField ℓ E.1)) PUnit))
       exact ⟨G, _, _, hG, c, _, inferInstance, ⟨h₁.iso h₂⟩⟩
+  -- the normalisation of `X` in `W`, with `W ≅ U' = X' ∖ f⁻¹ Z`
+  obtain ⟨X', _, _, _, f, _, w, _, hX', hsq⟩ := exists_normalization_of_finite_etale hX I v
+  have hsq' : IsPullback (overRestrictι X' (I.comap f.left).support.compl).left (inv w ≫ v)
+      f.left (overRestrictι X I.support.compl).left :=
+    IsPullback.of_iso hsq (asIso w) (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
+      (by simp) (by simp)
+  have hsplit := isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_geometricFiber_card
+    (integersResidueField ℓ E.1) (inv w ≫ v) hd
+    (fun Ω _ _ s ↦ (nat_card_geometricFiber_iso_comp (inv w) v s).trans (hcard Ω s)) K
+  have hKo : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) _
+      ((finiteCoefficientDerivedEquivalence _ (integersResidueField ℓ E.1)).functor.obj K) :=
+    ⟨F', ⟨a, ha⟩, ⟨e.symm⟩⟩
+  have hMo := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj _
+    (inv w ≫ v) hKo
+  have hjMo := ObjectProperty.prop_of_iso _
+    ((finiteCoefficientDerivedOpenImmersionLowerShriekIso (integersResidueField ℓ E.1)
+      (overRestrictι X' (I.comap f.left).support.compl).left).app _)
+    (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek
+      (overRestrictι X' (I.comap f.left).support.compl).left hMo)
+  obtain ⟨eiso⟩ := nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso
+    (integersResidueField ℓ E.1) f.left (overRestrictι X I.support.compl).left
+    (overRestrictι X' (I.comap f.left).support.compl).left (inv w ≫ v) hsq' (centreι X I).left
+    (isCompl_range_overRestrictι_centreι I).symm _ hjMo
+  suffices hR : nearbyCyclesVanishNear X I k'
+      (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ζ
+      (R((f.left)_*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj
+        (D(((overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
+          Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj
+          (L((inv w ≫ v)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj
+            K))) by
+    let r : Retract K _ :=
+      { i := (derivedUpperStarLowerStarAdjunction _ (inv w ≫ v)).unit.app K
+        r := retraction ((derivedUpperStarLowerStarAdjunction _ (inv w ≫ v)).unit.app K)
+        retract := IsSplitMono.id _ }
+    exact (nearbyCyclesVanishNear X I k' _ ζ).prop_of_retract
+      (r.map (D(((overRestrictι X I.support.compl).left)_!open⟦
+        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)))
+      ((nearbyCyclesVanishNear X I k' _ ζ).prop_of_iso eiso hR)
+  refine nearbyCyclesVanishNear_rightDerivedLowerStar_of_isFinite _ f I k' ζ _ hjMo
+    fun ζ' hζ' ↦ ?_
+  have : Nonempty W := ConnectedSpace.toNonempty
+  have : ConnectedSpace (overRestrict X' (I.comap f.left).support.compl).left :=
+    (Scheme.homeoOfIso (asIso w)).surjective.connectedSpace (Scheme.homeoOfIso (asIso w)).continuous
+  let P := (nearbyCyclesVanishNear X' (I.comap f.left) k'
+    (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ζ').inverseImage
+      (D(((overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
+        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧))
+  refine P.prop_of_iso ((leftDerivedUpperStarComp _ (inv w) v).app K).symm ?_
+  refine prop_of_isBoundedFiniteEllGroupMonodromy_finiteCoefficient (integersResidueField ℓ E.1) ℓ
+    P (fun M n hM ↦ ?_) (fun Tr hTr h₁ h₃ ↦ ?_) ?_ _ _ (hW.mapDerivedCategoryUpperStar (inv w))
+    (finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso _ (inv w)
+      (finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso _ v e))
+  · exact (nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').prop_of_iso
+      ((((D(((overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
+        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).commShiftIso n).app M).symm)
+      ((nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').le_shift n _ hM)
+  · exact (nearbyCyclesVanishNear X' (I.comap f.left) k' _ ζ').ext_of_isTriangulatedClosed₂ _
+      ((D(((overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
+        Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).map_distinguished _ hTr)
+      h₁ h₃
+  · sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
