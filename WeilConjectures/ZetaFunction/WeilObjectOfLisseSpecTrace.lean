@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilTrace
+public import WeilConjectures.TraceFormula.StalkFrobeniusOfId
 public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
 public import WeilConjectures.WeilSheaf.CondensedModelWeil
 public import WeilConjectures.WeilSheaf.PointTraceComparison
@@ -23,28 +23,6 @@ universe u
 open CategoryTheory
 
 open scoped CategoryTheory.Obj
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] {X : Over (Spec (.of k))}
-
-/-- A module object `M` on `X` as a Weil sheaf for the identity of `X`, with the identity
-structure isomorphism `(𝟙)^* M ≅ M` (`ProEtale.CondensedRing.upperStarId`). -/
-noncomputable def WeilSheaf.ofId
-    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :
-    WeilSheaf ℓ (Iso.refl X) :=
-  Endofunctor.IsoAlgebra.mk M ((upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).app M)
-
-/-- The structure isomorphism of `WeilSheaf.ofId M` is the identity isomorphism `(𝟙)^* M ≅ M`. -/
-lemma WeilSheaf.ofId_str_hom
-    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :
-    (WeilSheaf.ofId ℓ M).str.hom =
-      (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).hom.app (WeilSheaf.ofId ℓ M).carrier :=
-  congrArg Iso.hom (Endofunctor.IsoAlgebra.mk_str _ _)
-
-end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.WeilComplex
 
