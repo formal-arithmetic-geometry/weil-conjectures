@@ -20,7 +20,8 @@ Let `L/F` be a field extension, `X` a proper `F`-scheme with base change `X' = X
 (`ProEtale.CondensedRing.dualizingComplexBaseChange`). If `X` admits a closed immersion
 `i : X ⟶ P` into an `F`-scheme `P` smooth of pure relative dimension `d` (for instance a
 projective space, `AlgebraicGeometry.ProjectiveSpace.smoothOfRelativeDimension`), then `φ` is an
-isomorphism (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_isClosedImmersion`),
+isomorphism
+(`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_tateTwistIso`),
 given the pullback of the Tate twists `π_P^* ℚ̄_ℓ(d)[2d] ≅ ℚ̄_ℓ(d)[2d]`.
 
 By `ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_iso` it suffices to find some
@@ -88,7 +89,8 @@ theorem nonempty_iso_dualizingComplex_of_isClosedImmersion (d : ℕ)
 `d`, and its base change along a field extension `L/F`, the comparison
 `φ : π^* ω_X ⟶ ω_{X'}` of the dualizing complexes is an isomorphism, given the pullback
 `π_P^* ℚ̄_ℓ(d)[2d] ≅ ℚ̄_ℓ(d)[2d]` of the Tate twists. -/
-theorem isIso_dualizingComplexBaseChange_of_isClosedImmersion [IsProper (toPoint X).left]
+theorem isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_tateTwistIso
+    [IsProper (toPoint X).left]
     [IsProper (toPoint X').left]
     (e : (boundedConstructibleUpperStarOfMap ℓ (X := point F) (Y := point L)
       (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso e]
@@ -146,7 +148,7 @@ theorem isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_smooth
     (hP : IsPullback πP P'.hom P.hom (Spec.map (CommRingCat.ofHom (algebraMap F L))))
     (sq : IsPullback π i'.left i.left πP) :
     IsIso (dualizingComplexBaseChange ℓ e sqX) :=
-  isIso_dualizingComplexBaseChange_of_isClosedImmersion ℓ e sqX d hP sq
+  isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_tateTwistIso ℓ e sqX d hP sq
     (boundedConstructibleUpperStarOfMapTateTwistIso ℓ πP d (2 * d))
 
 section Projective
