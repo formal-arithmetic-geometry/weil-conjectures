@@ -55,7 +55,8 @@ homeomorphisms (`AlgebraicGeometry.SliceTrait.exists_finrank_eq_pow`), so the un
 adjunction with `𝒪_E`-coefficients splits
 (`NearbyCyclesModel.Hom.isSplitMono_unit_toCartesian_generic_of_sliceTrait_padicIntegers`), hence
 the restricted base change morphism with `𝒪_E`-coefficients splits, and the splitting passes to
-`E` and `ℚ̄_ℓ` (`NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers`).
+`E` and `ℚ̄_ℓ`
+(`NearbyCyclesModel.Hom.isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers`).
 The reductions of `K₀` modulo `ℓⁿ⁺¹` are bounded constructible, hence of étale origin.
 -/
 
@@ -74,7 +75,7 @@ open Scheme PadicAlgCl
 /-- On a noetherian scheme, the reductions modulo `ℓⁿ` of a bounded constructible `𝒪_E`-complex
 are bounded below of étale origin. -/
 lemma plusEtaleOrigin_extendScalars_integersModPow_of_boundedConstructible {ℓ : ℕ}
-    [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (n : ℕ) {Y : Scheme.{u}}
+    [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) {Y : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace Y]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))}
@@ -118,7 +119,7 @@ theorem isSplitMono_unit_toCartesian_generic_of_sliceTrait_padicIntegers
     (hq : φ.total ≫ q₁ = q ≫ Spec.map (CommRingCat.ofHom D.φ))
     (hg : φ.generic ≫ g₁ = g ≫ Spec.map (CommRingCat.ofHom D.ωS))
     {p : ℕ} [Fact p.Prime] (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n)
-    {ℓ : ℕ} [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (E : FiniteIntermediateField ℓ)
+    {ℓ : ℕ} [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace φ.cartesianModel.generic]
     [QuasiSeparatedSpace φ.cartesianModel.generic]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -204,9 +205,9 @@ theorem isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom
     (IsPullback.of_hasPullback _ _) (IsPullback.of_hasPullback _ _) ?_ ?_ hp
     (Fact.out : ringChar k' ≠ ℓ) E K₀ hK₀ n₀
     (fun m ↦ plusEtaleOrigin_extendScalars_integersModPow_of_boundedConstructible E (m + 1) hK₀c)
-  · exact Hom.isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers
-      (genericSliceTraitHom D n i).toCartesian E K₀ n₀ e
-      (Hom.isSplitMono_map_exchangeRight_app_toCartesian_of_isSplitMono_unit _ _ K₀ hunit)
+  · have h𝒪 := Hom.isSplitMono_map_exchangeRight_app_toCartesian_of_isSplitMono_unit _ _ K₀ hunit
+    exact Hom.isSplitMono_pullbackExchange_app_of_isSplitMono_padicIntegers
+      (genericSliceTraitHom D n i).toCartesian E K₀ n₀ e (by exact_mod_proofs h𝒪)
   · change genericSliceTraitProj D n i ≫ _ = _
     rw [genericSliceTraitProj, genericSliceTrait_fst_comp_over]
     exact congrArg (genericSliceTraitStructure D n i ≫ ·) D.spec_φ.symm

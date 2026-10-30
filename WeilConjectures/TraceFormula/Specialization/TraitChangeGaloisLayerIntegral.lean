@@ -25,7 +25,7 @@ the finite Galois subextensions of `L^sep/L` are prime to `ℓ`, the unit of `Lg
 (`NearbyCyclesModel.Hom.isSplitMono_unit_toCartesian_generic_of_traitChange_padicIntegers`), by
 `ProEtale.CondensedRing.isSplitMono_derivedUnit_galois_padicIntegers`. Consequently the base
 change morphism of `Rj_*` restricted to the special fibre is a split monomorphism
-(`NearbyCyclesModel.Hom.isSplitMono_map_exchangeRight_app_toCartesian_of_traitChange_padicIntegers`):
+(`NearbyCyclesModel.Hom.isSplitMono_map_exchangeRight_app_toCartesian_of_isSplitMono_unit`):
 this is the integral form of SGA 4½, [Th. finitude], Lemme 3.4.
 -/
 
@@ -44,7 +44,7 @@ open Scheme PadicAlgCl
 /-- The reductions modulo `ℓⁿ` of the derived pullback of an `𝒪_E`-complex whose reduction is
 bounded below of étale origin are bounded below of étale origin. -/
 lemma plusEtaleOrigin_extendScalars_integersModPow_leftDerivedUpperStar_obj {ℓ : ℕ}
-    [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) (n : ℕ) {W Y : Scheme.{u}} (f : W ⟶ Y)
+    [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) {W Y : Scheme.{u}} (f : W ⟶ Y)
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))}
     (hC : DerivedCategory.plusEtaleOrigin
@@ -64,6 +64,29 @@ lemma plusEtaleOrigin_extendScalars_integersModPow_leftDerivedUpperStar_obj {ℓ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
+/-- A functor maps the component of a natural transformation `β' = β` at `x` to a split
+monomorphism if `β.app x` is one. -/
+lemma CategoryTheory.isSplitMono_map_app_of_eq {C D E : Type*} [Category C] [Category D]
+    [Category E] {F G : C ⥤ D} (β β' : F ⟶ G) (h : β' = β) (H : D ⥤ E) (x : C)
+    (hβ : IsSplitMono (β.app x)) : IsSplitMono (H.map (β'.app x)) := by
+  subst h
+  infer_instance
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Transport of a split unit along an equality of morphisms of schemes. -/
+lemma isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
+    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)))
+    (hf : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ f).unit.app G)) :
+    IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ g).unit.app G) := by
+  subst h
+  exact hf
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom
 
 open Scheme
@@ -74,6 +97,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f')
 
+set_option maxHeartbeats 800000 in
+-- the mate is matched against the large types of the nearby cycles functors
 /-- **The restricted base change morphism of the change of geometric generic fibre is split by
 the unit**: `Li^*` of the base change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of `φ.toCartesian` is
 a split monomorphism at `Lε'^* C` as soon as the unit of `Lg^* ⊣ Rg_*`,
@@ -99,8 +124,7 @@ theorem isSplitMono_map_exchangeRight_app_toCartesian_of_isSplitMono_unit
     ((L((φ.cartesianModel.ε)^*⟦Λ⟧)).obj C)
   have hβ := (baseChangeMap_eq_exchangeRight Λ φ.toCartesian.commSq_j).symm.trans
     (φ.toCartesian.baseChangeMap_commSq_j_eq_mateEquiv Λ)
-  rw [hβ]
-  infer_instance
+  exact isSplitMono_map_app_of_eq _ _ hβ _ _ key
 
 end Abstract
 
@@ -146,11 +170,13 @@ theorem isSplitMono_unit_toCartesian_generic_of_traitChange_padicIntegers [IsAlg
   have := isUniversalHomeomorphism_traitChangeInsepMap hq hM hN hg
   have : QuasiSeparatedSpace (φ.traitChangeGaloisBase Ω q q₁ g₁ hN.w hq) :=
     quasiSeparatedSpace_of_quasiSeparated (pullback.fst _ _)
-  rw [← traitChangeInsepMap_comp_traitChangeGaloisMap_comp hN.w hq hM.w hg]
+  refine isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_of_eq _
+    (traitChangeInsepMap_comp_traitChangeGaloisMap_comp hN.w hq hM.w hg) _ ?_
   refine isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp₃ _
     (φ.traitChangeInsepMap Ω q g q₁ g₁ hN.w hq hM.w hg) (φ.traitChangeGaloisMap Ω q q₁ g₁ hN.w hq)
     (φ.traitChangeThickening Ω q q₁ g₁ hN.w hq) _ ?_
-  have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) φ.cartesianModel.ε C m
+  have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1)
+    φ.cartesianModel.ε C m
   have := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1)
     (φ.traitChangeThickening Ω q q₁ g₁ hN.w hq)
     ((L((φ.cartesianModel.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj C) m
