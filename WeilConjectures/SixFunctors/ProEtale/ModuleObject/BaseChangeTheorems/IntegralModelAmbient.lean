@@ -34,7 +34,7 @@ set_option maxHeartbeats 1000000 in
 -- the existential statement is matched against the large types of the coefficient changes
 /-- **Integral models in the ambient derived category**: on a noetherian scheme, a bounded
 constructible `ℚ̄_ℓ`-complex `K` is `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)` for a derived complete, bounded
-below `𝒪_E`-complex `K₀`. -/
+constructible `𝒪_E`-complex `K₀`. -/
 theorem exists_derivedCompleteIntegers_iso_integralModel (ℓ : ℕ) [Fact ℓ.Prime]
     {X : Scheme.{u}} [IsNoetherian X] [TopologicalSpace.NoetherianSpace X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -43,7 +43,7 @@ theorem exists_derivedCompleteIntegers_iso_integralModel (ℓ : ℕ) [Fact ℓ.P
     ∃ (E : FiniteIntermediateField ℓ) (K₀ : DerivedCategory (Mod
         (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ),
-      derivedCompleteIntegers ℓ E X K₀ ∧ K₀.IsGE n ∧
+      derivedCompleteIntegers ℓ E X K₀ ∧ K₀.IsGE n ∧ boundedConstructible _ K₀ ∧
         Nonempty ((L(Mod.extendScalars (coefficientMap
           (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))).obj
             ((L(Mod.extendScalars (coefficientMap
@@ -63,7 +63,7 @@ theorem exists_derivedCompleteIntegers_iso_integralModel (ℓ : ℕ) [Fact ℓ.P
   obtain ⟨n, hn⟩ := hK₀.1.1
   have hc := derivedCompleteIntegers_of_boundedConstructible hK₀
   have hne := Nonempty.intro ((i₁ ≪≫ i₂).symm ≪≫ (ObjectProperty.ι _).mapIso e ≪≫ eqToIso hobj)
-  refine ⟨E, K₀.obj, n, by exact_mod_proofs hc, hn, ?_⟩
+  refine ⟨E, K₀.obj, n, by exact_mod_proofs hc, hn, hK₀, ?_⟩
   exact hne
 
 end AlgebraicGeometry.ProEtale.CondensedRing
