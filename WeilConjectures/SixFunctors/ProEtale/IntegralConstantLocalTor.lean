@@ -275,8 +275,7 @@ theorem integral_constant_local_tor
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A := Padic.coefficientExtensionIntegers l E
   have : IsDiscreteValuationRing A :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec.2.2.2.2.2.2.2.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.1
   let Λ := DerivedNakayama.integerRing l E
   obtain ⟨U, hU⟩ := (finiteConstantLocalModel_iff_exists_cover Λ M).mp hM
   have hε := integralCounitExtension_leftExact A

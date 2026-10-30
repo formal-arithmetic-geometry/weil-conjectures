@@ -136,8 +136,7 @@ private theorem integer_adic (l : ℕ) [Fact l.Prime]
     IsAdic ((Padic.coefficientExtensionMaximalIdeal l E).comap
       (integerEquiv l E).toRingHom) := by
   let a := Padic.coefficientExtensionAbsoluteValue l E
-  have h := (Padic.extension_integers_dvr l E a
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let π := Padic.coefficientExtensionUniformizer l E
   have hgen : Ideal.span ({π} : Set (Padic.coefficientExtensionIntegers l E)) =
       Padic.coefficientExtensionMaximalIdeal l E := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -276,8 +275,7 @@ private theorem integral_local_smith (l : ℕ) [Fact l.Prime]
     exact ⟨transportQuotientIso e (F z) (F y) a⟩
   let π := Padic.coefficientExtensionUniformizer l E
   have hp : Ideal.span ({π} : Set B) = J :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
         |>.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   obtain ⟨W, hW, hred⟩ :=
     Padic.continuous_integral_matrix_local_smith l E π hp Y m n G hG htG

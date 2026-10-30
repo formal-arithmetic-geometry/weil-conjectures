@@ -125,8 +125,7 @@ private theorem finite_field_image
 private theorem residue_killed (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     (l : Padic.coefficientExtensionRing l E 1) = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -151,8 +150,7 @@ private theorem residue_discrete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let I := Padic.coefficientExtensionIdeal l E 1
   apply QuotientAddGroup.discreteTopology (N := I.toAddSubgroup)
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

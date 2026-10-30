@@ -24,6 +24,35 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
+/-- Sheafification of the constant ring unit remains locally bijective after
+forgetting commutativity. Source: the constant-sheaf construction in Bhatt--Scholze
+7.3.1(1) (blueprint: def-weil-proetale-locally-constant-sheaf).
+Proof: the unit is locally bijective on underlying sets; forgetting commutativity
+leaves those sets and every restriction map unchanged. -/
+theorem proEtaleConstantRingUnit_locallyBijective (Y : Scheme.{u}) (A : Type u)
+    [CommRing A] :
+    Presheaf.IsLocallyInjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) ∧
+    Presheaf.IsLocallySurjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) := by
+  constructor
+  · apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
+    change Presheaf.IsLocallyInjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+        (CategoryTheory.forget CommRingCat.{u + 1}))
+    infer_instance
+  · apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
+    change Presheaf.IsLocallySurjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+        (CategoryTheory.forget CommRingCat.{u + 1}))
+    infer_instance
+
 variable (T : Scheme.{u}) (B : Type u) [CommRing B]
 
 /-- The canonical constant-section map, forgetting commutativity. -/

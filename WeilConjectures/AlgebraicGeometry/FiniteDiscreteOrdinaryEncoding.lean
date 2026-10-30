@@ -156,18 +156,6 @@ def Encoding.ordinaryDerived {T : Scheme.{u}} (e : Encoding A T) :
   letI := HasDerivedCategory.standard (Ordinary A T)
   e.ordinary.mapDerivedCategory
 
-/-- The canonical shift comparison on the actual termwise derived functor.
-Source: blueprint proof step 4 and Stacks 015F
-(auxiliary; not a blueprint node). -/
-instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
-    e.fixedDerived.functor.CommShift ℤ := by
-  letI : (e.ordinary.trans e.fixed).functor.Additive :=
-    inferInstanceAs (e.ordinary.functor ⋙ e.fixed.functor).Additive
-  letI : (e.ordinary.trans e.fixed).inverse.Additive :=
-    inferInstanceAs (e.fixed.inverse ⋙ e.ordinary.inverse).Additive
-  change (e.ordinary.trans e.fixed).functor.mapDerivedCategory.CommShift ℤ
-  infer_instance
-
 private instance pointConstants_locallySurjective [Finite A] [DiscreteTopology A] :
     Presheaf.IsLocallySurjective (coherentTopology Profinite.{u}) (pointConstants A) where
   imageSieve_mem {S} s := by

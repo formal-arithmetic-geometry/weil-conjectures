@@ -31,7 +31,6 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
 universe u
 
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategory
-open SheafOfModules.CanonicalTensorPullbackOfUniverses
 
 namespace AlgebraicGeometry.Scheme
 

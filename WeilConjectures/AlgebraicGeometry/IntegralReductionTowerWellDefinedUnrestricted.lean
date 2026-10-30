@@ -111,10 +111,6 @@ private noncomputable def towerCounit (n : ℕ) :
 
 attribute [local irreducible] towerCounit
 
-attribute [local irreducible] unrestrictedTowerResolutionIso
-
-attribute [local irreducible] unrestrictedTowerFiniteComparison
-
 attribute [local irreducible] unrestrictedTowerUnit
 
 end WeilConjectures

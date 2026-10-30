@@ -483,8 +483,7 @@ theorem continuous_integral_diagonal_rank_locus
   let I : Ideal A := coefficientExtensionMaximalIdeal l E
   let : TopologicalSpace A := I.adicTopology
   let : IsTopologicalRing A := I.ringFilterBasis.isTopologicalRing
-  have hdata := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hdata := (coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsLocalRing A := hdata.2.2.2.1
   have hmax : IsLocalRing.maximalIdeal A = I :=
     hdata.2.2.2.2.2.1 _ (IsLocalRing.maximalIdeal.isMaximal A)
