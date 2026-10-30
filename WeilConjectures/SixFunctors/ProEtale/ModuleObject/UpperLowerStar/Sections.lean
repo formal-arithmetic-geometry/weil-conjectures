@@ -35,11 +35,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 variable {S T B : Scheme.{u}}
 
-/-- The unit of module objects over `Λ_X`, in the syntactic form of the type of the unit
+/-- The unit of module objects, written in the syntactic form of the type of the unit
 comparisons `ε` of strong monoidal functors (see the implementation notes of
-`WeilConjectures.WeilObject.Sheaf.StalkUnit`). -/
-noncomputable abbrev modUnit (X : Scheme.{u}) :
-    CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
+`WeilConjectures.WeilObject.Sheaf.StalkUnit`): as a notation rather than a definition, since the
+kernel unfolds the pullbacks when a constant occurs as an argument of their components. -/
+scoped notation "𝟙ₘ" =>
   @MonoidalCategoryStruct.tensorUnit _ _ MonoidalCategory.toMonoidalCategoryStruct
 
 /-- The pullback of a global section `w : 𝟙_ ⟶ b^* N` along `a : S ⟶ T`, as a global section of
@@ -48,7 +48,7 @@ transport along `a ≫ b = t` is an `eqToHom` of objects, which keeps the kernel
 the pullbacks. -/
 noncomputable def upperStarSectionMap (a : S ⟶ T) {b : T ⟶ B} {t : S ⟶ B} (h : a ≫ b = t)
     (N : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B))
-    (w : modUnit Λ T ⟶ (b)^*⟦Λ⟧.obj N) : modUnit Λ S ⟶ (t)^*⟦Λ⟧.obj N :=
+    (w : 𝟙ₘ ⟶ (b)^*⟦Λ⟧.obj N) : 𝟙ₘ ⟶ (t)^*⟦Λ⟧.obj N :=
   (Functor.Monoidal.εIso (a)^*⟦Λ⟧).hom ≫ (a)^*⟦Λ⟧.map w ≫
     (upperStarComp Λ a b).inv.app N ≫ eqToHom (congrArg (fun s ↦ (s)^*⟦Λ⟧.obj N) h)
 
@@ -56,7 +56,7 @@ noncomputable def upperStarSectionMap (a : S ⟶ T) {b : T ⟶ B} {t : S ⟶ B} 
 lemma upperStarSectionMap_congr {a a' : S ⟶ T} (e : a = a') {b : T ⟶ B} {t : S ⟶ B}
     (h : a ≫ b = t) (h' : a' ≫ b = t)
     (N : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B))
-    (w : modUnit Λ T ⟶ (b)^*⟦Λ⟧.obj N) :
+    (w : 𝟙ₘ ⟶ (b)^*⟦Λ⟧.obj N) :
     upperStarSectionMap Λ a h N w = upperStarSectionMap Λ a' h' N w := by
   subst e
   rfl
@@ -78,7 +78,7 @@ lemma upperStarSectionMap_upperStarSectionMap {R : Scheme.{u}} (a : S ⟶ T) (a'
     {b : R ⟶ B} {t' : T ⟶ B} {t : S ⟶ B} (h₂ : a' ≫ b = t') (h₁ : a ≫ t' = t)
     (h₃ : (a ≫ a') ≫ b = t)
     (N : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B))
-    (w : modUnit Λ R ⟶ (b)^*⟦Λ⟧.obj N) :
+    (w : 𝟙ₘ ⟶ (b)^*⟦Λ⟧.obj N) :
     upperStarSectionMap Λ a h₁ N (upperStarSectionMap Λ a' h₂ N w) =
       upperStarSectionMap Λ (a ≫ a') h₃ N w := by
   subst h₂ h₁
