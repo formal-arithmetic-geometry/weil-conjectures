@@ -18,6 +18,10 @@ Two split monomorphisms onto "invariant summands" which are matched by an equiva
 isomorphism have isomorphic sources (`CategoryTheory.isIso_of_comp_eq_comp_of_coinvariant`), and
 a retraction of a unit transports along functors together with its invariant-projector property
 (`CategoryTheory.retraction_of_eq_comp_map_comp_of_coinvariant`).
+
+A retract of a split monomorphism, for instance a morphism isomorphic to it as an arrow, is a
+split monomorphism
+(`CategoryTheory.RetractArrow.isSplitMono`, `CategoryTheory.Arrow.isSplitMono_of_iso`).
 -/
 
 @[expose] public section
@@ -106,7 +110,6 @@ lemma isIso_of_comp_eq_comp_of_coinvariant {D : Type*} [Category D] {ι : Type*}
       Functor.map_comp (H q) (inv β), h₁, ← Functor.map_comp, ← Functor.map_comp,
       IsIso.inv_hom_id_assoc, ha₂, Functor.map_id]
 
-
 /-- **Transporting a retraction of a unit along two functors, with its invariant-projector
 property.** Let `α = i ≫ F₂ (F₁ η ≫ c)` for an isomorphism `i`, functors `F₁`, `F₂` and `c` with
 `F₂ c = κ` an isomorphism, and let `R` be a retraction of `η`. Then `r = κ⁻¹ ≫ F₂ (F₁ R) ≫ i⁻¹` is
@@ -150,3 +153,19 @@ lemma retraction_of_eq_comp_map_comp_of_coinvariant {C D E A : Type*} [Category 
 
 end CategoryTheory
 
+namespace CategoryTheory.RetractArrow
+
+variable {C : Type*} [Category* C] {X Y Z W : C} {f : X ⟶ Y} {g : Z ⟶ W}
+
+/-- A retract of a split monomorphism is a split monomorphism: if `f` is a retract of `g`, then
+`h.i.right ≫ retraction g ≫ h.r.left` is a retraction of `f`. -/
+lemma isSplitMono (h : RetractArrow f g) [IsSplitMono g] : IsSplitMono f :=
+  IsSplitMono.mk' ⟨h.i.right ≫ retraction g ≫ h.r.left, by
+    rw [← h.i_w_assoc, IsSplitMono.id_assoc, h.retract_left]⟩
+
+end CategoryTheory.RetractArrow
+
+/-- A morphism isomorphic, as an arrow, to a split monomorphism is a split monomorphism. -/
+lemma CategoryTheory.Arrow.isSplitMono_of_iso {C : Type*} [Category* C] {X Y X' Y' : C}
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (e : Arrow.mk f ≅ Arrow.mk g) [IsSplitMono g] : IsSplitMono f :=
+  RetractArrow.isSplitMono (Retract.ofIso e)
