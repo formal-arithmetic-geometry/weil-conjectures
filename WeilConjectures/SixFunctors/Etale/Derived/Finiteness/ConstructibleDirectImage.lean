@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Constructibility of direct images: the predicate `𝒞(f)`

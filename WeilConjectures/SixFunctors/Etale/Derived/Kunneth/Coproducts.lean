@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoyoneda
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimensionDefs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy

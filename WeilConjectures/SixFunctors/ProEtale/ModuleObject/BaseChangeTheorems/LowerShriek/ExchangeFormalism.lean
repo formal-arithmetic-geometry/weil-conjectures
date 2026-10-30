@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 

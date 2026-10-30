@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
-public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars

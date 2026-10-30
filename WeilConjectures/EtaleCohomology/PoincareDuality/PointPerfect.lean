@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
-public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget

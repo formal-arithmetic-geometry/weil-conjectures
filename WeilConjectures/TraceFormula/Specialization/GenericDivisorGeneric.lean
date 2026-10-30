@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
-public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreBaseChange
+public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangulated
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
 public import WeilConjectures.PoincareDuality.Verdier

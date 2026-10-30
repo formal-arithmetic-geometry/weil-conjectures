@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyExchange
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
-public import WeilConjectures.TraceFormula.WeilSheafLowerStarDefs
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology

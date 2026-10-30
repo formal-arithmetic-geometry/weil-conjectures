@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
-public import WeilConjectures.TraceFormula.SupportedRestrictionE
+public import WeilConjectures.TraceFormula.SupportedRestrictionRational
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
 public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian

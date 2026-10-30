@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
-public import WeilConjectures.CategoryTheory.Adjunction.ConjugateHomEquiv
+public import WeilConjectures.TraceFormula.TraceClassDiagonal
 import WeilConjectures.TraceFormula.LocalTerm
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 public import WeilConjectures.TraceFormula.PushforwardFamily
-public import WeilConjectures.TraceFormula.WeilSheafLowerStarDefs
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-!
 

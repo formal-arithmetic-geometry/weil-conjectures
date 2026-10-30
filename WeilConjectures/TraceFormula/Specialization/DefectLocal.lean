@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreBaseChange
+public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
 
 /-!

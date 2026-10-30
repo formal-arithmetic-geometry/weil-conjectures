@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 
 /-!
