@@ -2,6 +2,19 @@
 Copyright (c) 2026 Claude. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
+
+## Unfinished
+
+`not_immediate_of_inertiaField` is `sorry`ed. Proved ingredients: Hensel's lemma for
+Artin–Schreier and Kummer equations over the inertia field (`OhmGeneral/Hensel.lean`), the rank-one
+approximation of `K(x)` by partial-fraction monomials (`OhmGeneral/PartialFractions.lean`), and
+the residues of `K(x)` (`OhmGeneral/Residue.lean`). Missing: the residue field of the inertia
+field is separable over `k(x̄)` (`isSeparable_residue_of_mem_inertiaField`, which rests on the
+decomposition-field statement `exists_valuation_sub_lt_one_of_forall_decompositionSubgroup`),
+i.e. decomposition/inertia theory for general valuation rings; the approximation of elements of
+the inertia field (the henselisation lies in the completion only in rank one); and, in
+mixed characteristic, a substitute for the discreteness used to terminate the Kummer normal form.
+The case of `K` approximable by a discrete subfield is `GaussStability`.
 -/
 module
 
