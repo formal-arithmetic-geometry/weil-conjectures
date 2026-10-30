@@ -122,13 +122,13 @@ exchange from the layer model at `L_V` to `M''` is invertible), the passage from
 to `Ω_K` is proved, for any coefficients in which `[P' : V]` is invertible
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso`). Two inputs are
 missing:
-* the stabilization itself. With torsion coefficients, the layers exhaust the cohomology sheaves
-  of `Ψ_{M''} C` (continuity); a finite layer suffices once these are noetherian
-  (`CategoryTheory.exists_epi_ι_of_isNoetherianObject`), i.e. by Deligne's finiteness theorem
-  with torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), which is not available here (only
-  its `ℚ̄_ℓ` form). The torsion stabilization lifts to `ℚ̄_ℓ` by derived Nakayama, but the `ℚ̄_ℓ`
-  finiteness alone does not give it: it controls neither the torsion of the integral nearby
-  cycles nor the action in the derived category;
+* torsion finiteness. Given noetherian bounded cohomology sheaves of the torsion nearby cycles
+  of the layers (Deligne's finiteness theorem with torsion coefficients, SGA 4½, [Th. finitude],
+  Thm. 3.2, of which only the `ℚ̄_ℓ` form is available here), the stabilization, its lift to
+  `ℚ̄_ℓ` and the finite averaging are proved
+  (`exists_retraction_pullbackExchange_galoisLayerHom_padicAlgCl_of_isNoetherianObject`).
+  The `ℚ̄_ℓ` finiteness does not give the hypothesis: it does not control the torsion of the
+  integral nearby cycles;
 * the bottom layer: the restriction of `Ψ_{M_T} C` to the slice is the nearby cycles of `M''` with
   generic point over `Ω · K((t))`. Through the strict localization `S'` of `𝔸¹_S` this needs the
   surjectivity of `P'` onto the wild inertia of `S'`, a defect statement of the kind of
