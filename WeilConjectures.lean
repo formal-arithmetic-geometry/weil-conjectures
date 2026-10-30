@@ -12218,6 +12218,7 @@ public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Decomposition
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Hensel
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.PartialFractions
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Residue
+public import WeilConjectures.RingTheory.Valuation.OhmGeneral.ResidueInertia
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.ResiduePth
 public import WeilConjectures.RingTheory.Valuation.ResiduallyIndependentRadicals
 public import WeilConjectures.RingTheory.Valuation.ResidueLinearIndependent
