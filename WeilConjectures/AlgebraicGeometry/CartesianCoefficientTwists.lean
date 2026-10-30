@@ -140,7 +140,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ContinuousMapReduction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
-public import of
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 import all WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport

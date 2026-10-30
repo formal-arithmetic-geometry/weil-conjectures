@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientClassicalSingle
 import WeilConjectures.CategoryTheory.ModuleInverseImageUnitComparison
-import through
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -14,6 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Source: Stacks Tags 00YV, 03D2 and 09AL. The constant-ring presentation argument
 is the existing proof from ConstructibleComparisonModuleExact, without its cyclic
+import through the constructible comparison theorem.
 -/
 
 @[expose] public noncomputable section

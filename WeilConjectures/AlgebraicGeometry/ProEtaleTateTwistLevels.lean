@@ -221,7 +221,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalarsLowerStar
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
-import of
 public import Mathlib.AlgebraicGeometry.Sites.ElladicCohomology
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients

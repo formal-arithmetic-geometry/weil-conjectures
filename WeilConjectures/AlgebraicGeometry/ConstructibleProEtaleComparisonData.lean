@@ -17,6 +17,10 @@ The three constructions are retained verbatim from ConstructibleProEtaleComparis
 set_option autoImplicit false
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 namespace AlgebraicGeometry.ProEtale
 
 /-- The constant-section map on the recorded equivalent sites. This is sheafification of

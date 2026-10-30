@@ -14,6 +14,10 @@ Source: Stacks Tags 03RW and 00VC, inverse image and composition.
 set_option autoImplicit false
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 namespace AlgebraicGeometry.ProEtale
 private theorem model_preserves {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (Scheme.coefficientProEtaleModelBaseChange.{u, v} f) := by

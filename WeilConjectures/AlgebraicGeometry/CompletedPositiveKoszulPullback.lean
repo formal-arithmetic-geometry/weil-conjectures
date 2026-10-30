@@ -133,24 +133,24 @@ private noncomputable def transportedConstantHom (U : Dᵒᵖ) (A : CommRingCat.
 private theorem transportedConstantHom_naturality (U : Dᵒᵖ)
     {A B : CommRingCat.{v}} (f : A ⟶ B) :
     f ≫ transportedConstantHom F U B = transportedConstantHom F U A ≫
-      ((constantSheaf K CommRingCat).map f).hom.app U := by
+      ((constantSheaf K CommRingCat.{v}).map f).hom.app U := by
   apply CommRingCat.hom_ext
   ext a
   have hs (V : Cᵒᵖ) :
-      ((constantSheaf J CommRingCat).map f).hom.app V
+      ((constantSheaf J CommRingCat.{v}).map f).hom.app V
           ((constantSection (J := J) a).val V) =
         (constantSection (J := J) (f a)).val V := by
     exact (ConcreteCategory.congr_hom
       (NatTrans.congr_app (toSheafify_naturality J ((Functor.const Cᵒᵖ).map f)) V) a).symm
-  have hn := transportedSection_naturality F ((constantSheaf J CommRingCat).map f)
+  have hn := transportedSection_naturality F ((constantSheaf J CommRingCat.{v}).map f)
     (constantSection (J := J) a) (constantSection (J := J) (f a)) hs U
   have hc := congrArg (fun z ↦ z.hom.app U
     ((inverseImageSection F (constant J A) (constantSection (J := J) a)).val U))
       (F.constants.hom.naturality f)
   change (constantMap F B).hom.app U
-      ((F.rings.map ((constantSheaf J CommRingCat).map f)).hom.app U
+      ((F.rings.map ((constantSheaf J CommRingCat.{v}).map f)).hom.app U
         ((inverseImageSection F (constant J A) (constantSection (J := J) a)).val U)) =
-    ((constantSheaf K CommRingCat).map f).hom.app U
+    ((constantSheaf K CommRingCat.{v}).map f).hom.app U
       ((constantMap F A).hom.app U
         ((inverseImageSection F (constant J A) (constantSection (J := J) a)).val U)) at hc
   change (constantMap F B).hom.app U

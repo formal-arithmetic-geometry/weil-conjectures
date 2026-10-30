@@ -17,6 +17,10 @@ universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace AlgebraicGeometry.ProEtale
 
 /-- The kernel of the canonical closed unit is classical when the open restriction is.

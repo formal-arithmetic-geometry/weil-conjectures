@@ -22,6 +22,10 @@ universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finitely presented local constant models descend to the etale site, with no
