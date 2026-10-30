@@ -88,8 +88,8 @@ theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeI
       (∀ x : X', IsGenericPoint (cX x) ⊤ → x ∈ Set.range h) ∧
       IsIso ((L((h)^*⟦Profinite.continuousMapRingObj T⟧)).map
         ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K)) := by
-  letI := a₁.toAlgebra
-  letI := a₂.toAlgebra
+  let := a₁.toAlgebra
+  let := a₂.toAlgebra
   have hb₁ := ker_comp_eq_maximalIdeal ι b₂ hb₂
   refine ⟨_, 𝟙 _ ≫ sliceTraitSpecial
     (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂) M cM hcM' hMi,

@@ -134,12 +134,12 @@ theorem isIso_map_pullbackExchange_sliceTraitSpecial {m : ℕ} (ih : TraitChange
       ((finiteCoefficientDerivedEquivalence N.generic T).functor.obj K)) :
     IsIso (L((𝟙 _ ≫ sliceTraitSpecial D₂ M cM hcM' hMi)^*⟦Profinite.continuousMapRingObj T⟧).map
       ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K)) := by
-  have hK₀ := ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+  have hK₀ := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
     T (𝟙 N.generic ≫ 𝟙 N.generic) hK
   have hIH := isIso_pullbackExchange_sliceTraitChangeHom T ih H hun p hp hpT φ hφ cN hcN hm cM hcM
-    hcM' _ (ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+    hcM' _ (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       T (sliceTraitGeneric D₁ N cN hcN hNj)
-      (ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+      (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
         T (𝟙 N.generic) hK₀))
   have hB := isIso_pullbackExchange_sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi
     hcM hgen _ _ hIH
@@ -148,11 +148,11 @@ theorem isIso_map_pullbackExchange_sliceTraitSpecial {m : ℕ} (ih : TraitChange
         (L((𝟙 N.generic ≫ 𝟙 N.generic)^*⟦Profinite.continuousMapRingObj T⟧).obj K)) := by
     have := isAffineHom_sliceTraitGaloisModel_j (D₁ := D₁) cN hcN hNj hNi
     have := isAffineHom_sliceTraitGaloisModel_j (D₁ := D₂) cM hcM' hMj hMi
-    have hC₁ := ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+    have hC₁ := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       T (sliceTraitGaloisModel D₁ N cN hcN hNj hNi).ε hK₀
-    have hC₂ := ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
+    have hC₂ := plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
       T (sliceTraitGaloisModel D₂ M cM hcM' hMj hMi).ε
-      (ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T
+      (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T
         φ.generic hK₀)
     have hB' := Hom.isIso_pullbackExchange_app_of_heq _ (by rfl) (by rfl)
       (sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen)
@@ -175,8 +175,8 @@ theorem isIso_map_pullbackExchange_sliceTraitSpecial {m : ℕ} (ih : TraitChange
     exact_mod_proofs key
   -- the instances `MonObj` of the coefficients differ by deep instance proofs
   with_reducible
-    have key := isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM hcM'
-        hMj hMi hcM hgen κ₁₂ hs hκ (Profinite.continuousMapRingObj T) K
+    have key := isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM
+        hcM' hMj hMi hcM hgen κ₁₂ hs hκ (Profinite.continuousMapRingObj T) K
   have key' := key (by exact_mod_proofs hτ)
   exact_mod_proofs key'
 
