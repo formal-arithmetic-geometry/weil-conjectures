@@ -69,8 +69,8 @@ lisse: the smooth locus (`k₀` is perfect) and the lisse locus
 of the Noetherian space `X` contains a nonempty irreducible open. -/
 theorem exists_opens_smooth_irreducibleSpace_isLisse [IsReduced X] [Nonempty X]
     (G : WeilSheaf k₀ l X) :
-    ∃ V : X.Opens, Smooth (V.toScheme ↘ Spec (CommRingCat.of k₀)) ∧ IrreducibleSpace V ∧
-      ((WeilSheaf.upperStar V.ι).obj G).IsLisse := by
+    ∃ V : X.Opens, IsAffineOpen V ∧ Smooth (V.toScheme ↘ Spec (CommRingCat.of k₀)) ∧
+      IrreducibleSpace V ∧ ((WeilSheaf.upperStar V.ι).obj G).IsLisse := by
   have : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k₀))
@@ -78,12 +78,18 @@ theorem exists_opens_smooth_irreducibleSpace_isLisse [IsReduced X] [Nonempty X]
   obtain ⟨L, hLd, hL⟩ := exists_dense_isLisse_upperStar G
   set S := (X ↘ Spec (CommRingCat.of k₀)).smoothLocus
   have hS : Dense (S : Set X) := (X ↘ Spec (CommRingCat.of k₀)).dense_smoothLocus_of_perfectField
-  obtain ⟨V, hVo, hVi, hVsub⟩ := exists_isOpen_isIrreducible_subset_of_dense
+  obtain ⟨V₀, hVo, hVi₀, hVsub₀⟩ := exists_isOpen_isIrreducible_subset_of_dense
     (L ⊓ S).isOpen (hLd.inter_of_isOpen_left hS L.isOpen)
-  set V' : X.Opens := ⟨V, hVo⟩
+  obtain ⟨x, hx⟩ := hVi₀.nonempty
+  obtain ⟨_, ⟨W, hW, rfl⟩, hxW, hWV⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open hx hVo
+  set V := (W : Set X)
+  have hVi : IsIrreducible V := hVi₀.2.subset_irreducible ⟨x, hxW⟩ W.isOpen subset_rfl hWV
+  have hVsub : V ⊆ L ⊓ S := hWV.trans hVsub₀
+  set V' : X.Opens := W
   have hVL : V' ≤ L := fun x hx ↦ (hVsub hx).1
   have hVS : V' ≤ S := fun x hx ↦ (hVsub hx).2
-  refine ⟨V', ?_, isIrreducible_iff_irreducibleSpace.1 hVi, ?_⟩
+  refine ⟨V', hW, ?_, isIrreducible_iff_irreducibleSpace.1 hVi, ?_⟩
   · rw [← Scheme.Opens.ι_comp_over, ← Scheme.Hom.smoothLocus_eq_top_iff,
       ← Scheme.Hom.preimage_smoothLocus_eq, eq_top_iff]
     intro x _

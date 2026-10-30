@@ -124,7 +124,7 @@ def LisseComparisonHolds
     [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] [Smooth (V ↘ Spec (CommRingCat.of k₀))]
-    [IrreducibleSpace V] (G : WeilSheaf k₀ l V), G.IsLisse →
+    [IrreducibleSpace V] [IsAffine V] (G : WeilSheaf k₀ l V), G.IsLisse →
       WeilComplex.HasWeilObjectComparison ι (toComplex.obj G)
 
 /-- **Reduction.** For a surjective closed immersion `r : Z ↪ X` (for instance `X_red ↪ X`), a
@@ -160,7 +160,8 @@ theorem hasWeilObjectComparison_toComplex_of_isReduced (h : LisseComparisonHolds
   · exact hasWeilObjectComparison_toComplex_of_isEmpty G
   have : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
-  obtain ⟨V, hVs, hVi, hVl⟩ := exists_opens_smooth_irreducibleSpace_isLisse G
+  obtain ⟨V, hVa, hVs, hVi, hVl⟩ := exists_opens_smooth_irreducibleSpace_isLisse G
+  have : IsAffine V := hVa
   obtain ⟨v⟩ := hVi.toNonempty
   set C : TopologicalSpace.Closeds X := ⟨(V : Set X)ᶜ, V.isOpen.isClosed_compl⟩
   set i := (Scheme.IdealSheafData.vanishingIdeal C).subschemeι
@@ -278,7 +279,7 @@ def IrreducibleLisseComparisonHolds
     [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] [Smooth (V ↘ Spec (CommRingCat.of k₀))]
-    [IrreducibleSpace V] (G : WeilSheaf k₀ l V), G.IsIrreducibleLisse →
+    [IrreducibleSpace V] [IsAffine V] (G : WeilSheaf k₀ l V), G.IsIrreducibleLisse →
       WeilComplex.HasWeilObjectComparison ι (toComplex.obj G)
 
 /-- **Jordan–Hölder for lisse Weil sheaves**: a lisse Weil sheaf has a finite filtration by lisse
@@ -287,7 +288,7 @@ Weil subsheaves with irreducible lisse quotients
 irreducible lisse Weil sheaves gives the comparison for all lisse Weil sheaves. -/
 theorem lisseComparisonHolds_of_irreducibleLisseComparisonHolds
     (h : IrreducibleLisseComparisonHolds ι) : LisseComparisonHolds ι :=
-  fun V _ _ _ _ _ _ _ hG ↦ hasWeilObjectComparison_toComplex_of_filtrationClosure
+  fun V _ _ _ _ _ _ _ _ hG ↦ hasWeilObjectComparison_toComplex_of_filtrationClosure
     (fun H hH ↦ h V H hH) hG.filtrationClosure_isIrreducibleLisse
 
 end WeilSheaf
