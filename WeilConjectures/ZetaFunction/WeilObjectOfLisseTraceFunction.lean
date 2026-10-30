@@ -76,6 +76,9 @@ lemma galoisUpperStarEnd_eq_comp {Ω : Type u} [Field Ω] [IsSepClosed Ω] {Y : 
       galoisUpperStarEnd σ x h τ M f :=
   rfl
 
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **The trace function of a pulled-back lisse sheaf is the trace of the Galois action**: at an
 `𝔽_{q^{n+1}}`-point `y` with geometric point `x̄ = Spec ι ≫ y`, the trace function of `p^* H` is
 the trace of the action of `σ^{n+1}` on the global sections `Γ(Spec k̄, x̄^* H)`. -/

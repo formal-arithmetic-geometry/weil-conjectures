@@ -39,6 +39,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] [Smooth (V ↘ Spec (CommRingCat.of k₀))]
   [IrreducibleSpace V] [IsAffine V]
 
+omit [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] in
 open ProEtale in
 /-- **Irreducible lisse Weil sheaves come from the model up to twist** (Deligne, Weil II,
 1.3.14): on a smooth irreducible separated `k₀`-scheme `V₀` of finite type, every irreducible
