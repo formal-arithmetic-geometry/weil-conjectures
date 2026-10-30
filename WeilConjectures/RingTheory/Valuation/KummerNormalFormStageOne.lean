@@ -105,3 +105,53 @@ theorem exists_valuation_div_pow_sub_one_lt [DecidableEq ι] (K L₁ L₂ Kst : 
     (h₂ : ∃ y ∈ L₂, y ^ p = u) :
     ∃ g ∈ L₁, g ≠ 0 ∧ v (u / g ^ p - 1) < v (p : Ω) := by
   sorry
+
+/-- **Kummer normal form**: a `1`-unit of `L₁` (approximated by a combination of lifted
+Frobenius monomials with coefficients in a discrete subfield `K*`) which is a `p`-th power in `L₂`
+is a `p`-th power in `L₁`. -/
+theorem exists_pow_eq_of_kummer [DecidableEq ι] (K L₁ L₂ Kst : Subfield Ω)
+    (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
+    (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hKst : Kst ≤ K)
+    (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
+    (hw : ∀ i, w i ∈ L₁) (hw1 : ∀ i, v (w i) = 1)
+    (hval : ∀ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) →
+      ∀ j, v (c j) ≤ v (frobeniusComb p w c))
+    (γ : Γ₀) (hγ0 : 0 < γ) (hγ1 : γ < 1)
+    (hdisc : ∀ c ∈ Kst, c ≠ 0 → ∃ n : ℤ, v c = γ ^ n) (N : ℕ) (hN : γ ^ N < v (p : Ω))
+    (hprod : ∀ j j', ∃ e : Option (ι × ℕ) →₀ Ω, (∀ k, e k ∈ Kst) ∧
+      v (frobeniusMonomial p w j * frobeniusMonomial p w j' - frobeniusComb p w e) < v (p : Ω))
+    (hres1 : ∀ z ∈ L₂, v z ≤ 1 → ∀ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) →
+      (∀ j, v (c j) ≤ 1) → v (z ^ p - frobeniusComb p w c) < 1 →
+        ∀ i : ι, v (c (some (i, 0))) < 1)
+    (hhens : ∀ x ∈ L₁, v.IsKummerNegligible p x → ∃ y ∈ L₁, y ^ p = 1 + x)
+    (hexp : ∀ y ∈ L₁, ∃ c : Option (ι × ℕ) →₀ Ω, (∀ j, c j ∈ K) ∧
+      v.IsKummerNegligible p (y - frobeniusComb p w c))
+    {u : Ω} (hu : u ∈ L₁) (c : Option (ι × ℕ) →₀ Ω) (hc : ∀ j, c j ∈ Kst)
+    (hc1 : ∀ j, v (c j) < 1) (hu1 : v (u - 1 - frobeniusComb p w c) < v (p : Ω))
+    (h₂ : ∃ y ∈ L₂, y ^ p = u) :
+    ∃ y ∈ L₁, y ^ p = u := by
+  classical
+  have hp2 := hp.two_le
+  have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
+  obtain ⟨g, hgL, hg0, hgv⟩ := exists_valuation_div_pow_sub_one_lt p K L₁ L₂ Kst hp hp1 hp0
+    hKL₁ hL hKst hroot hw hw1 hval γ hγ0 hγ1 hdisc N hN hprod hres1 hu c hc hc1 hu1 h₂
+  set t := u / g ^ p - 1 with htdef
+  have htL : t ∈ L₁ := sub_mem (div_mem hu (pow_mem hgL _)) (one_mem _)
+  obtain ⟨c', hc'K, hc'n⟩ := hexp t htL
+  -- the coefficients of `c'` have value `< v p`
+  have hneg_lt : ∀ x : Ω, v.IsKummerNegligible p x → v x < v (p : Ω) := by
+    intro x hx
+    by_contra h
+    rw [not_lt] at h
+    have h1 : v (p : Ω) ^ (p - 1) ≤ v x ^ (p - 1) := pow_le_pow_left₀ zero_le h _
+    have h2 : v (p : Ω) ^ p < v (p : Ω) ^ (p - 1) :=
+      pow_lt_pow_right_of_lt_one₀ hvp hp1 (by omega)
+    exact (not_le.2 (h2.trans_le h1)) hx
+  have hcomb : v (frobeniusComb p w c') < v (p : Ω) := by
+    have : frobeniusComb p w c' = t - (t - frobeniusComb p w c') := by ring
+    rw [this]
+    exact lt_of_le_of_lt (v.map_sub _ _) (max_lt hgv (hneg_lt _ hc'n))
+  have hc'v : ∀ j, v (c' j) < v (p : Ω) := fun j ↦ (hval c' hc'K j).trans_lt hcomb
+  -- stage 2
+  have hn : v.IsKummerNegligible p (t - frobeniusComb p w c') := hc'n
+  sorry
