@@ -2106,6 +2106,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCokernelAux
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCokernelPresentation
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCover
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionPresentationLift
+public import WeilConjectures.AlgebraicGeometry.ConstantFieldGeometricFiber
 public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 public import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 public import WeilConjectures.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction
@@ -9648,6 +9649,7 @@ public import WeilConjectures.Evaluation
 public import WeilConjectures.FieldTheory.AlgClosedFiniteTypeTensorDomain
 public import WeilConjectures.FieldTheory.AlgebraicSeparableSmooth
 public import WeilConjectures.FieldTheory.AlgebraicTowerTriangularRelations
+public import WeilConjectures.FieldTheory.AlgebraicallyClosedInTensor
 public import WeilConjectures.FieldTheory.ArtinSchreierExtension
 public import WeilConjectures.FieldTheory.BrauerGaloisComparison
 public import WeilConjectures.FieldTheory.BrauerScalarDefect
@@ -10908,6 +10910,7 @@ public import WeilConjectures.RingTheory.ConormalIntersectionRegularQuotient
 public import WeilConjectures.RingTheory.ConormalModulePrincipalLocalization
 public import WeilConjectures.RingTheory.ConormalPolynomialInverse
 public import WeilConjectures.RingTheory.ConormalSpanClearing
+public import WeilConjectures.RingTheory.ConstantField
 public import WeilConjectures.RingTheory.CoverModuleExact
 public import WeilConjectures.RingTheory.CurveBranches
 public import WeilConjectures.RingTheory.CyclicExtensionFlatDescent
@@ -14662,6 +14665,8 @@ public import WeilConjectures.WeilSheaf.CondensedModelWeilCoherence
 public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedTwistedConstant
 public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.WeilSheaf.ConstantFieldComponent
+public import WeilConjectures.WeilSheaf.ConstantFieldRestriction
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurryIsoCriterion
@@ -14735,6 +14740,7 @@ public import WeilConjectures.WeilSheaf.FrobeniusTwistSubobject
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.GeometricConstituent
 public import WeilConjectures.WeilSheaf.GeometricConstituentMono
+public import WeilConjectures.WeilSheaf.GeometricFiberPullback
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
@@ -14795,6 +14801,7 @@ public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
+public import WeilConjectures.WeilSheaf.SmoothLisseOpen
 public import WeilConjectures.WeilSheaf.SplitTorsor
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkAtPurity
@@ -14854,6 +14861,7 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
+public import WeilConjectures.WeilSheaf.WeilDescent
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 public import WeilConjectures.ZetaFunction
@@ -14882,8 +14890,14 @@ public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
 public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonLocal
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonOpenClosed
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonPullback
+public import WeilConjectures.ZetaFunction.WeilObjectComparisonTwist
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparison
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonConstant
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonInduction
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonLisse
 public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonSpec
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct

@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilObject.Sheaf.EndTensorUnit
-public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
+public import WeilConjectures.ZetaFunction.WeilSheafObjectComparisonLisse
 
 /-!
 # Weil sheaves have the traces of Weil objects
@@ -65,7 +64,7 @@ semisimplification. -/
 theorem hasWeilObjectComparison_toComplex (G : WeilSheaf k₀ l X) :
     WeilComplex.HasWeilObjectComparison
       (endTensorUnitRingEquiv l (AlgebraicClosure k₀)).toAddMonoidHom (toComplex.obj G) :=
-  sorry
+  hasWeilObjectComparison_toComplex_of_lisseComparisonHolds lisseComparisonHolds G
 
 open ProEtale.CondensedRing MonoidalCategory in
 /-- There is an additive map `ι : End (𝟙_ Mod_{Spec k̄}) ⟶ ℚ̄_ℓ`, the canonical identification,
