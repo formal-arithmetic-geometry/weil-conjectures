@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DVRStalkLocalEquation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseCore
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
 
 /-!

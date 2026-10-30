@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SmoothUniformizer
 public import WeilConjectures.AlgebraicGeometry.NormalSchemeOpen
 public import WeilConjectures.ConstructibleSheaf.SylowGaloisCoverTrivializing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTraceDegree
@@ -16,7 +15,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteCo
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteGeneric
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorNormalization
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidue
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidueConstant
 
 /-!
 
@@ -105,7 +104,7 @@ set_option maxHeartbeats 2000000 in
 point of `Z`, and `K` a complex of `𝔽_E`-module objects on `U = X ∖ Z` corresponding to a bounded
 complex `F'` of étale sheaves with finite locally constant cohomology sheaves. Then
 `Le^* Ψ_X(j_! K)` vanishes near `ζ`. -/
-theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse [PerfectField k]
+theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
     (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
@@ -228,6 +227,18 @@ theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse [PerfectField k
       ((D(((overRestrictι X' (I.comap f.left).support.compl).left)_!open⟦
         Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧)).map_distinguished _ hTr)
       h₁ h₃
-  · sorry
+  · have hζ'g := closure_singleton_mem_irreducibleComponents_of_centreMap f I hζ' hζ
+    have hI' : I.comap f.left = IdealSheafData.ofIdealTop (Ideal.span {f.left.appTop h}) := by
+      rw [hI, IdealSheafData.comap_ofIdealTop, Ideal.map_span, Set.image_singleton]
+    have hh' : f.left.appTop h ≠ 0 := by
+      intro h0
+      obtain ⟨⟨x, hx⟩⟩ : Nonempty (overRestrict X' (I.comap f.left).support.compl).left :=
+        ⟨w (Classical.arbitrary W)⟩
+      apply hx
+      change x ∈ ((I.comap f.left).support : Set X'.left)
+      rw [← IdealSheafData.range_subschemeι, hI', h0,
+        IdealSheafData.range_subschemeι_ofIdealTop_span]
+      simp
+    exact nearbyCyclesVanishNear_lowerShriek_unit_residueField k' hX' hh' hI' ζ' hζ'g E
 
 end AlgebraicGeometry.ProEtale.CondensedRing

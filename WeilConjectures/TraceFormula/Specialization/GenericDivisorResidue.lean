@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseLocus
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidueLisse
 
 /-!
 
@@ -22,15 +22,20 @@ neighbourhood of `ζ`
 blueprint `det-sp-generic-divisor` for finite coefficients and complexes `L = j_! F` with
 `Li^* L = 0`.
 
-## Unfinished
+## Proof
 
-The statement is `sorry`ed. Its blueprint proof works with finite coefficients throughout: after
-shrinking `X` around `ζ`, `F` is lisse up to a finite étale cover of `X ∖ Z` (a finite étale
-trivialisation), which extends to a finite cover of `X` by normalisation; the exchange of nearby
-cycles with the proper pushforward along this cover reduces to the constant case, which is the
-computation of the nearby cycles of the deformation `x = t u` along the divisor, and the general
-case follows by induction on the degree of the cover. None of these steps is available for the
-pro-étale nearby cycles of this formalism.
+The blueprint argument, with finite coefficients throughout:
+
+* shrink `X` around `ζ` until the étale model of `F` has finite locally constant cohomology on
+  `X ∖ Z` (`exists_opens_lisse_reduction`, `GenericDivisorLisseLocus.lean`);
+* the lisse case (`nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse`,
+  `GenericDivisorResidueLisse.lean`): an `ℓ`-Sylow finite étale cover, its trace, the
+  normalisation of `X` in it, the proper exchange of nearby cycles, and the dévissage of
+  complexes with finite `ℓ`-group monodromy reduce to the constant case
+  (`nearbyCyclesVanishNear_lowerShriek_unit_residueField`, `GenericDivisorResidueConstant.lean`).
+
+The constant case over an imperfect base field is `sorry`ed (see
+`GenericDivisorResidueConstant.lean`).
 
 -/
 
@@ -55,9 +60,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 the divisor): let `X` be normal, `Z = V(h)` for a nonzero global function `h`,
 `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of an irreducible component of `Z`, and `F` a
 bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`. Then `Le^* Ψ_X(j_! F)` vanishes
-over a neighbourhood of `ζ`. Unfinished: its proof (finite étale trivialisation of `F` near `ζ`,
-normalisation, proper exchange, the constant case and induction on the degree) is not
-formalised. -/
+over a neighbourhood of `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
@@ -76,7 +79,10 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField
           (((deformationModel X I k').nearbyCycles
             (Profinite.continuousMapRingObj (integersResidueField ℓ E.1))).obj
             (D(((overRestrictι X I.support.compl).left)_!open⟦
-              Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F)))) :=
-  sorry
+              Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F)))) := by
+  have hred := exists_opens_lisse_reduction k' hX hh hI ζ hζ E F hF
+  obtain ⟨V, ζV, hζV, hXV, hhV, hIV, hζVg, K, F', -, ⟨a, b, ha, hb⟩, hl, ⟨e⟩, himp⟩ := hred
+  exact himp (nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse k' hXV hhV hIV ζV hζVg E K
+    F' a b ha hb hl e)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
