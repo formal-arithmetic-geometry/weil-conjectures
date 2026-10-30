@@ -12,6 +12,7 @@ public import WeilConjectures.RingTheory.Valuation.GaloisResidueRoot
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitCoordResidue
 public import WeilConjectures.RingTheory.DiscreteValuationRing.CompletionStrictlyHenselian
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceFrobeniusLift
 
 /-!
 
@@ -241,8 +242,38 @@ theorem exists_frobeniusLift_approx (p : ℕ) [Fact p.Prime] [CharP Ω p] {x : (
             ∑ k ∈ Finset.range N, y k ^ p * (∑ i ∈ s, c i * w i) ^ k) < 1) ∧
       ∃ (s : Finset (ι × ℕ)) (d : ι × ℕ → (𝒟).Ω) (d₀ : (𝒟).Ω),
         (∀ j ∈ s, d j ∈ (𝒟).ωS.fieldRange) ∧ d₀ ∈ (𝒟).ωS.fieldRange ∧
-        (𝒟).valuationSubring.valuation (α - d₀ - ∑ j ∈ s, d j * w j.1 ^ p ^ j.2) ≤ 1 :=
-  sorry
+        (𝒟).valuationSubring.valuation (α - d₀ - ∑ j ∈ s, d j * w j.1 ^ p ^ j.2) ≤ 1 := by
+  classical
+  letI := a.toAlgebra
+  have : CharP R p := ⟨fun n ↦ by rw [← map_eq_zero_iff a ha, map_natCast, CharP.cast_eq_zero_iff Ω p]⟩
+  have : CharP (ResidueField R) p :=
+    CharP.of_ringHom_of_ne_zero (residue R) p (Fact.out : p.Prime).ne_zero
+  obtain ⟨ι, w, A, Kst, hKst, hwA, hA, hw1, hval, hpb, -, -, hP6, -⟩ :=
+    exists_frobeniusLift_package ha halg hb p hx hα
+  refine ⟨ι, w, fun i ↦ (hA _ (hwA i)).1, hw1, fun s c hc i hi ↦ ?_, fun s c hc hc1 hci ↦ ?_, ?_⟩
+  · have h := hval (∑ j ∈ s, Finsupp.single (some (j, 0)) (c j))
+      (sum_single_some_mem _ s hc) (some (i, 0))
+    rwa [sum_single_some_apply s c hi, frobeniusComb_sum_single] at h
+  · obtain ⟨i, hi, hci⟩ := hci
+    obtain ⟨N, y, hy, hyv⟩ := hpb (∑ j ∈ s, Finsupp.single (some (j, 0)) (c j))
+      (sum_single_some_mem _ s hc) (fun j ↦ by
+        rw [Finsupp.finsetSum_apply]
+        refine (𝒟).valuationSubring.valuation.map_sum_le fun j' hj' ↦ ?_
+        rw [Finsupp.single_apply]
+        split_ifs
+        exacts [hc1 j' hj', by rw [map_zero]; exact zero_le])
+      ⟨i, by rwa [sum_single_some_apply s c hi]⟩
+    rw [frobeniusComb_sum_single] at hyv
+    exact ⟨N, y, hy, hyv⟩
+  · obtain ⟨e, he, hev⟩ := hP6 1 one_ne_zero
+    refine ⟨e.some.support, e.some, e none, fun j _ ↦ hKst (he _), hKst (he _), ?_⟩
+    rw [map_one] at hev
+    have h : α - e none - ∑ j ∈ e.some.support, e.some j * w j.1 ^ p ^ j.2 =
+        α - frobeniusComb p w e := by
+      rw [frobeniusComb_eq, liftedSum, Finsupp.sum]
+      ring
+    rw [h]
+    exact hev.le
 
 include ha halg hb in
 /-- The strict-localization slice trait has a coordinate: an element of `R'` evaluating to the

@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Slic
 
 # The wild inertia of the slice over a change of trait surjects
 
-Let `ι : R₁ ⟶ R₂` be an unramified local injection of strictly henselian discrete valuation rings,
+Let `ι : R₁ ⟶ R₂` be a local injection of strictly henselian discrete valuation rings,
 with algebraic geometric generic points `Ωᵢ`, and let `S₂(x) ⟶ S₁(x)` be the morphism of the
 strict localizations of `𝔸¹` at the generic points of the special fibres
 (`AlgebraicGeometry.sliceTraitOfStrictLocalizationHom`), with composita `Lᵢ = Ωᵢ(Sᵢ(x))`. Then
@@ -25,13 +25,11 @@ strict localizations of `𝔸¹` at the generic points of the special fibres
 surjectivity `P₂ ↠ P₁` used in Deligne's proof of SGA 4½, [Th. finitude], Prop. 3.7, to compare
 the invariant summands of the nearby cycles of the two slices.
 
-## Unfinished
-
-The relative separable closedness is `sorry`ed. With the Gauss valuation, `Lᵢ` is the inertia
-field of `Ωᵢ(x)`; an extension of `L₁` of degree `p` inside `L₂` would be immediate (residue fields
-and value groups agree), and excluding it needs the defectlessness of `L₁`, the stability theorem
-of Ohm and Kuhlmann (F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability
-theorem*, Trans. AMS 362 (2010), §4, the residue-transcendental case), which is not formalised.
+With the Gauss valuation, `Lᵢ` is the inertia field of `Ωᵢ(x)`; an extension of `L₁` of degree
+`p` inside `L₂` would be immediate (residue fields and value groups agree), and it is excluded by
+the defectlessness of `L₁`, the stability theorem of Ohm and Kuhlmann in the residue-transcendental
+case (F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability theorem*,
+Trans. AMS 362 (2010), §4), proved in `SliceTrait.Hom.mem_compositum_of_ΩMap_mem`.
 
 -/
 
@@ -57,11 +55,10 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuati
 
 include hι ha₁ halg₁ ha₂ halg₂ hc hb₂ in
 /-- **The compositum of the slice over `S₁` is relatively separably closed in that of the slice
-over `S₂`** (SGA 4½, [Th. finitude], proof of 3.7): for an unramified change of trait, an element
-of `Ω'₁` separable over `L₁ = Ω₁(S₁(x))` whose image lies in `L₂ = Ω₂(S₂(x))` lies in `L₁`.
-`sorry`ed, see the module docstring. -/
+over `S₂`** (SGA 4½, [Th. finitude], proof of 3.7): for a change of trait, an element
+of `Ω'₁` separable over `L₁ = Ω₁(S₁(x))` whose image lies in `L₂ = Ω₂(S₂(x))` lies in `L₁`. -/
 theorem sliceTraitOfStrictLocalizationHom_mem_compositum [IsAlgClosed Ω₁] [IsAlgClosed Ω₂]
-    [IsSepClosed κ] (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι) :
+    [IsSepClosed κ] :
     letI := a₁.toAlgebra
     letI := a₂.toAlgebra
     ∀ x : (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁
@@ -84,7 +81,7 @@ include hι ha₁ halg₁ ha₂ halg₂ hc hb₂ in
 Galois groups (`AlgEquiv.exists_restrictNormalHomAlong_eq`): an element of `L₁^sep` whose image
 under `ω : L₁^sep ⟶ L₂^sep` lies in `L₂` lies in `L₁`. -/
 theorem sliceTraitOfStrictLocalizationHom_mem_range_algebraMap [IsAlgClosed Ω₁] [IsAlgClosed Ω₂]
-    [IsSepClosed κ] (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι) :
+    [IsSepClosed κ] :
     letI := a₁.toAlgebra
     letI := a₂.toAlgebra
     ∀ x, (sliceTraitOfStrictLocalizationHom ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂).compositumSepMap x ∈
@@ -100,7 +97,7 @@ theorem sliceTraitOfStrictLocalizationHom_mem_range_algebraMap [IsAlgClosed Ω�
   let := a₂.toAlgebra
   rintro x ⟨y, hy⟩
   have hmem := sliceTraitOfStrictLocalizationHom_mem_compositum ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂
-    hun x (by
+    x (by
       rw [← SliceTrait.Hom.coe_compositumSepMap, ← hy]
       exact y.2)
   exact ⟨⟨x, hmem⟩, Subtype.ext rfl⟩

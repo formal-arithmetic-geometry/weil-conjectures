@@ -41,64 +41,6 @@ lemma frobeniusComb_mapRange {Ω Ω' : Type*} [Field Ω] [Field Ω'] {ι : Type*
   | none => simp [frobeniusMonomial]
   | some i => simp [frobeniusMonomial]
 
-namespace AlgebraicGeometry.SliceTrait
-
-attribute [local instance] algebraR algebraΩ algebraBaseΩ algebraRΩ
-
-section Stubs
-
-variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
-  [IsStrictlyHenselianLocalRing R] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {a : R →+* Ω}
-  (ha : Function.Injective a) (halg : letI := a.toAlgebra; Algebra.IsAlgebraic R Ω)
-  {κ : Type u} [Field κ] [IsSepClosed κ] {b : R →+* κ} (hb : RingHom.ker b = maximalIdeal R)
-
-local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) ha halg hb
-
-include ha halg hb in
-theorem stub_package (p : ℕ) [Fact p.Prime] [CharP (ResidueField R) p] {x : (𝒟).R}
-    (hx : (𝒟).b x = traitSliceCoord κ) {α : (𝒟).Ω}
-    (hα : letI := a.toAlgebra; α ∈ (𝒟).compositum) :
-    letI := a.toAlgebra
-    ∃ (ι : Type u) (w : ι → (𝒟).Ω) (A : Subring (𝒟).Ω) (Kst : Subfield (𝒟).Ω),
-      Kst ≤ (𝒟).ωS.fieldRange ∧ (∀ i, w i ∈ A) ∧
-      (∀ y ∈ A, y ∈ (𝒟).compositum ∧ (𝒟).valuationSubring.valuation y ≤ 1) ∧
-      (∀ i, (𝒟).valuationSubring.valuation (w i) = 1) ∧
-      (∀ c : Option (ι × ℕ) →₀ (𝒟).Ω, (∀ j, c j ∈ (𝒟).ωS.fieldRange) →
-        ∀ j, (𝒟).valuationSubring.valuation (c j) ≤
-          (𝒟).valuationSubring.valuation (frobeniusComb p w c)) ∧
-      (∀ c : Option (ι × ℕ) →₀ (𝒟).Ω, (∀ j, c j ∈ (𝒟).ωS.fieldRange) →
-        (∀ j, (𝒟).valuationSubring.valuation (c j) ≤ 1) →
-        (∃ i, (𝒟).valuationSubring.valuation (c (some (i, 0))) = 1) →
-        ∃ (N : ℕ) (y : ℕ → (𝒟).Ω), (∀ k, y k ∈ (𝒟).compositum ∧
-          (𝒟).valuationSubring.valuation (y k) ≤ 1) ∧
-          (𝒟).valuationSubring.valuation ((𝒟).a x -
-            ∑ k ∈ Finset.range N, y k ^ p * (frobeniusComb p w c) ^ k) < 1) ∧
-      (∃ ϖ ∈ Kst, 0 < (𝒟).valuationSubring.valuation ϖ ∧
-        (𝒟).valuationSubring.valuation ϖ < 1 ∧
-        (∀ c ∈ Kst, c ≠ 0 → ∃ n : ℤ, (𝒟).valuationSubring.valuation c =
-          (𝒟).valuationSubring.valuation ϖ ^ n) ∧
-        ∀ t : (𝒟).Ω, t ≠ 0 → ∃ N : ℕ, (𝒟).valuationSubring.valuation ϖ ^ N <
-          (𝒟).valuationSubring.valuation t) ∧
-      (∀ y ∈ A, ∀ t : (𝒟).Ω, t ≠ 0 → ∃ e : Option (ι × ℕ) →₀ (𝒟).Ω, (∀ k, e k ∈ Kst) ∧
-        (𝒟).valuationSubring.valuation (y - frobeniusComb p w e) <
-          (𝒟).valuationSubring.valuation t) ∧
-      (∀ t : (𝒟).Ω, t ≠ 0 → ∃ e : Option (ι × ℕ) →₀ (𝒟).Ω, (∀ k, e k ∈ Kst) ∧
-        (𝒟).valuationSubring.valuation (α - frobeniusComb p w e) <
-          (𝒟).valuationSubring.valuation t) ∧
-      (∀ y ∈ Subfield.closure ((𝒟).ωS.fieldRange ∪ A : Set (𝒟).Ω), ∀ t : (𝒟).Ω, t ≠ 0 →
-        ∃ c : Option (ι × ℕ) →₀ (𝒟).Ω, (∀ j, c j ∈ (𝒟).ωS.fieldRange) ∧
-          (𝒟).valuationSubring.valuation (y - frobeniusComb p w c) <
-            (𝒟).valuationSubring.valuation t) ∧
-      (∀ y ∈ A, (𝒟).valuationSubring.valuation y = 1 → y⁻¹ ∈ A) ∧
-      (∀ c ∈ Kst, (𝒟).valuationSubring.valuation c ≤ 1 → c ∈ A) ∧
-      (∀ c ∈ Kst, (𝒟).valuationSubring.valuation c ≤ 1 →
-        ∃ d ∈ Kst, (𝒟).valuationSubring.valuation (d ^ p - c) < 1) :=
-  sorry
-
-end Stubs
-
-end AlgebraicGeometry.SliceTrait
-
 namespace AlgebraicGeometry.SliceTrait.Hom
 
 attribute [local instance] algebraR algebraΩ algebraBaseΩ algebraRΩ
@@ -147,7 +89,8 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
   obtain ⟨x₁, hx₁⟩ := exists_b_eq_traitSliceCoord ha₁ halg₁ hb₁
   obtain ⟨x₂, hx₂⟩ := exists_b_eq_traitSliceCoord ha₂ halg₂ hb₂
   obtain ⟨ιw, w, A, Kst, hKst, hwA, hA, hw1, hval, hpb, ⟨ϖ, hϖK, hϖ0, hϖ1, hdisc, hϖN⟩,
-    hAapp, hαapp, hexp, hAinv, hKstA, hKstroot⟩ := stub_package ha₁ halg₁ hb₁ p hx₁ hα
+    hAapp, hαapp, hexp, hAinv, hKstA, hKstroot⟩ :=
+    exists_frobeniusLift_package ha₁ halg₁ hb₁ p hx₁ hα
   -- the subfields of `D₂.Ω`
   set K : Subfield (𝒟₂).Ω := (𝒟₁).ωS.fieldRange.map Γ with hKdef
   set L₁ : Subfield (𝒟₂).Ω := (𝒟₁).compositum.toSubfield.map Γ with hL₁def

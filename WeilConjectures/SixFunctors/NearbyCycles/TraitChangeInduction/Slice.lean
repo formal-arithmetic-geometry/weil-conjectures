@@ -114,7 +114,7 @@ theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeI
   have hdeg₂ := (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂
     hb₂).exists_finrank_eq_pow hp₂
   have hclosed := sliceTraitOfStrictLocalizationHom_mem_range_algebraMap ι hι c ha₁ halg₁ ha₂ halg₂
-    hc hb₂ hun
+    hc hb₂
   have : LocallyOfFiniteType (cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁)) := by
     rw [hcN]; infer_instance
   have : QuasiCompact (cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁)) := by
