@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariant
 public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.FieldTheory.GaloisRestriction
 
 /-!
 
@@ -97,5 +98,37 @@ theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin [Qua
       · exact_mod_proofs (hinv σ₂).1)
     (hω := hω) (by exact_mod_proofs hβ)
   exact_mod_proofs key
+
+set_option maxHeartbeats 1600000 in
+-- the statement involves several large derived functor objects
+/-- **Change of trait from change of Galois layers, from the map of inertia groups** (SGA 4½,
+[Th. finitude], proof of 3.7, 3.8).
+`Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin` with its lifting hypothesis
+replaced by the setting of the change of trait: with towers
+`Kᵢ ⊆ Lᵢ ⊆ Ωᵢ` (inertia `Iᵢ = Aut(Ωᵢ/Kᵢ)`, pro-`p` kernels `Pᵢ = Aut(Ωᵢ/Lᵢ)`), the induced map
+`I₂ ⟶ I₁` is surjective (`hI`) and injective on the quotients `Iᵢ/Pᵢ` (`htame`, e.g. identified
+tame inertia). Then the pro-`p` kernels map onto each other
+(`AlgEquiv.exists_eq_of_exists_comp_eq_of_fixes`), and the change of trait `α_τ` is invertible as
+soon as the change of Galois layers `α_{τ'}` is. -/
+theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_of_inertia
+    [QuasiCompact N₁.j] [QuasiSeparated N₁.j] {K₁ K₂ : Type u} [Field K₁] [Field K₂]
+    [Algebra K₁ L₁] [Algebra K₁ Ω₁] [IsScalarTower K₁ L₁ Ω₁] [Algebra K₂ Ω₂]
+    (τ : N₂.Hom N₁ f f') (hτ : τ.generic ≫ h₁ = h₂ ≫ Spec.map (CommRingCat.ofHom l))
+    (hp₁ : ∀ L' : FiniteGaloisIntermediateField L₁ Ω₁, IsUnit ((Module.finrank L₁ L' : ℕ) : T₀))
+    (hp₂ : ∀ L' : FiniteGaloisIntermediateField L₂ Ω₂, IsUnit ((Module.finrank L₂ L' : ℕ) : T₀))
+    (hI : ∀ σ₁ : Ω₁ ≃ₐ[K₁] Ω₁, ∃ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂, ∀ x, ω (σ₁ x) = σ₂ (ω x))
+    (htame : ∀ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂,
+      (∀ x : L₁, σ₂ (ω (algebraMap L₁ Ω₁ x)) = ω (algebraMap L₁ Ω₁ x)) →
+        ∀ y : L₂, σ₂ (algebraMap L₂ Ω₂ y) = algebraMap L₂ Ω₂ y)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X₁) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X₁)))
+    (hC : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T₀)) X₁
+      ((finiteCoefficientDerivedEquivalence X₁ T₀).functor.obj C))
+    (hβ : IsIso (((galoisLayerMap Ω₁ Ω₂ ω hω τ hτ).pullbackExchange
+      (Profinite.continuousMapRingObj T₀)).app
+        (L((𝟙 X₁)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))) :
+    IsIso ((τ.pullbackExchange (Profinite.continuousMapRingObj T₀)).app C) :=
+  Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin T₀ τ hτ hp₁ hp₂
+    (AlgEquiv.exists_eq_of_exists_comp_eq_of_fixes hI htame) C hC hβ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
