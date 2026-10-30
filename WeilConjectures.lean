@@ -10818,6 +10818,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsTensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalPurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DivisorComplementDirectImage
