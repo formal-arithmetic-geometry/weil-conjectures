@@ -15,8 +15,8 @@ public import WeilConjectures.WeilSheaf.WeilGroupArithmetic
 
 Let `B = (t, β)` be base point data on the geometric fibre `p : X ⟶ X₀` of a scheme over a
 finite field, `M` a monodromy of lisse sheaves on `X`. This file computes the Weil fundamental
-representation `ρ_F` of `π₁(X, t) ⋊ ℤ` (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep`)
-in two cases:
+representation `ρ_F` of `π₁(X, t) ⋊ ℤ`
+(`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep`) in two cases:
 
 * constant twists: `ρ_{F ⊗ 𝓑_b} = ρ_F ⊗ b^{deg}`
   (`AlgebraicGeometry.FrobeniusBasePoint.WeilData.fundamentalRep_constantTwist`), since the
