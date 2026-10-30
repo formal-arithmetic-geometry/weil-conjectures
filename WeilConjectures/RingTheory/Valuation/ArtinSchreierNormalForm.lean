@@ -39,8 +39,8 @@ open Finset
 
 variable {Ω : Type*} [Field Ω] (p : ℕ) [hp : Fact p.Prime] [CharP Ω p]
 
-/-- The telescoping identity `X ^ p ^ n - X = ∑_{m < n} ((X ^ p ^ m) ^ p - X ^ p ^ m)`. -/
 omit hp [CharP Ω p] in
+/-- The telescoping identity `X ^ p ^ n - X = ∑_{m < n} ((X ^ p ^ m) ^ p - X ^ p ^ m)`. -/
 lemma pow_prime_pow_sub_eq_sum (X : Ω) (n : ℕ) :
     X ^ p ^ n - X = ∑ m ∈ range n, ((X ^ p ^ m) ^ p - X ^ p ^ m) := by
   induction n with
@@ -171,7 +171,7 @@ theorem exists_artinSchreier_root_of_approx
       rintro rfl
       rw [zero_pow hp.out.ne_zero] at hγ
       rw [← hγ, map_zero] at hbig
-      exact absurd hbig (not_lt.2 zero_le')
+      exact absurd hbig (not_lt.2 zero_le)
     have hγL₂ : γ ∈ L₂ := hL (hKL₁ hγK)
     have hvγ0 : v γ ≠ 0 := by rwa [Ne, Valuation.zero_iff]
     let c : ι → Ω := fun i ↦ E i / γ ^ p
@@ -183,10 +183,10 @@ theorem exists_artinSchreier_root_of_approx
       exact hmax i hi
     have hc₀ : v (c i₀) = 1 := by
       rw [map_div₀, map_pow, ← map_pow, hγ, div_self (by
-        intro h0; rw [h0] at hbig; exact absurd hbig (not_lt.2 zero_le'))]
+        intro h0; rw [h0] at hbig; exact absurd hbig (not_lt.2 zero_le))]
     have hz : ϑ / γ ∈ L₂ := div_mem hϑ hγL₂
     have hvz : v (ϑ / γ) ≤ 1 := by rw [map_div₀, hvγ, div_self (by
-      intro h0; rw [h0] at hvϑ; exact absurd hvϑ (not_lt.2 zero_le'))]
+      intro h0; rw [h0] at hvϑ; exact absurd hvϑ (not_lt.2 zero_le))]
     have hkey : (ϑ / γ) ^ p - ∑ i ∈ t, c i * w i = ϑ / γ ^ p := by
       have : ∑ i ∈ t, c i * w i = r₀ / γ ^ p := by
         rw [hr₀def, div_eq_mul_inv, Finset.sum_mul]
