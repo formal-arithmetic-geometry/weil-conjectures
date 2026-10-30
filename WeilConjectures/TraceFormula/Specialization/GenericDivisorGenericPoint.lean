@@ -17,8 +17,8 @@ of `X` at `ζ` is a discrete valuation ring, so the only proper generization of 
 point of `X` (`AlgebraicGeometry.Scheme.specializes_eq_or_eq_genericPoint`); a set closed in
 `X ∖ Z` whose closure contains `ζ` therefore contains the generic point of `X`
 (`ProEtale.CondensedRing.genericPoint_mem_of_mem_closure`), and the image of a locally closed
-subscheme of `X ∖ Z` whose closure contains `ζ` covers `V ∖ Z` for a neighbourhood `V` of `ζ`, unless
-it is empty (`ProEtale.CondensedRing.isEmpty_or_exists_opens_subset_range`).
+subscheme of `X ∖ Z` whose closure contains `ζ` covers `V ∖ Z` for a neighbourhood `V`
+of `ζ`, unless it is empty (`ProEtale.CondensedRing.isEmpty_or_exists_opens_subset_range`).
 
 -/
 

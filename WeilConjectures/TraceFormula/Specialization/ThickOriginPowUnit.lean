@@ -350,10 +350,6 @@ instance : IsClosedImmersion (pullback.fst (thickOriginPowSpecialFibreMap k k' h
     (thickOriginPowImageOver k k' hm)).left :=
   MorphismProperty.of_isPullback (isPullback_thickOriginPowFibre_left k k' hm).flip inferInstance
 
-instance : LocallyOfFiniteType (point k').hom := inferInstanceAs (LocallyOfFiniteType (𝟙 _))
-instance : QuasiCompact (point k').hom := inferInstanceAs (QuasiCompact (𝟙 _))
-instance : IsSeparated (point k').hom := inferInstanceAs (IsSeparated (𝟙 _))
-
 instance : LocallyOfFiniteType (thickOriginPowFibre k k' hm).hom := by
   rw [← Over.w (pullback.snd (thickOriginPowSpecialFibreMap k k' hm)
     (thickOriginPowImageOver k k' hm))]

@@ -34,8 +34,11 @@ open Scheme
 variable {k : Type u} [Field k] {X X' : Over (Spec (.of k))} (f : X' ⟶ X)
   [LocallyQuasiFinite f.left] (I : X.left.IdealSheafData)
 
-instance : LocallyQuasiFinite (centreMap f I).left :=
+/-- The restriction of a locally quasi-finite morphism to the centres is locally quasi-finite. -/
+lemma locallyQuasiFinite_centreMap : LocallyQuasiFinite (centreMap f I).left :=
   MorphismProperty.of_isPullback (isPullback_centreMap f I).flip ‹_›
+
+attribute [local instance] locallyQuasiFinite_centreMap
 
 /-- **Points over a generic point of the centre are generic** (`f` locally quasi-finite): if
 `ζ'` lies over a point `ζ` whose closure is an irreducible component of `Z = V(I)`, then the

@@ -49,6 +49,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **The constant case over a perfect field** (blueprint `det-sp-generic-divisor-constant`, `k`
 perfect): the local ring at a generic point `ζ` of the divisor `V(h)` of the normal scheme `X`
 is a discrete valuation ring, so a uniformizer near `ζ` is a smooth morphism to `𝔸¹_k`
@@ -79,12 +80,16 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_perfectField [Pe
 /-- **The constant case over an imperfect field** (blueprint `det-sp-generic-divisor-constant`,
 which assumes `k` algebraically closed). Unfinished.
 
-Planned route: for `n ≫ 0` the normalization `X₁` of `X` in `K(X) · k^{1/pⁿ}` is a finite
-universal homeomorphism over `X`, normal, and smooth over `k₁ = k^{1/pⁿ}` at the point `ζ₁` over
-`ζ` (its residue field becoming separable over `k₁`, MacLane); `Le^* Ψ` is insensitive to the
-universal homeomorphism `X₁ ⟶ X` and to the purely inseparable change of trait
-`k'⟦t⟧ ⟶ (k' ⊗ k₁)_red⟦t⟧`, and over `k₁` the perfect-field argument applies with the chart
-`X₁ ⟶ 𝔸¹_{k₁}`. -/
+Planned route, with `q = pⁿ`:
+1. the power map `D_{(h)} X ⟶ D_{(h^q)} X` over `t ↦ t^q` is a universal homeomorphism of
+   models, so `Le^* Ψ` for `(h)` vanishes near `ζ` once it does for `(h^q)`;
+2. the relative Frobenius `X ⟶ X^{(q)}` factors through a finite universal homeomorphism
+   `g : X ⟶ Y` onto the normalization `Y` of `(X^{(q)})_red`, with `h^q = g^* h_Y` and
+   `Rg_* j_! Λ = j_! Λ`; vanishing near `g(ζ)` on `Y` gives vanishing near `ζ` on `X`, finite
+   pushforward being conservative;
+3. for `n ≫ 0`, `Y` is smooth over `k` at `g(ζ)`: its residue field there becomes separable over
+   `k` (MacLane), so the case with a smooth uniformizer applies.
+Step 3, the descent of smoothness from `k^{perf}` to a finite level, is the missing input. -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
     (hk : ¬ PerfectField k)
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}

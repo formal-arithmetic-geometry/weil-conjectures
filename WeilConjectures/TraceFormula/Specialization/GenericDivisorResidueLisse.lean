@@ -21,7 +21,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidueC
 
 # Generic vanishing along a divisor for lisse finite coefficients
 
-Let `X` be a normal scheme of finite type over a perfect field `k`, `Z = V(h)` a principal
+Let `X` be a normal scheme of finite type over a field `k`, `Z = V(h)` a principal
 divisor, `j : U = X ∖ Z ⟶ X`, `ζ` a generic point of `Z`, and `K` a complex of `𝔽_E`-module
 objects on `U` of étale origin `K ↔ F'`, where `F'` is a bounded complex of étale sheaves whose
 cohomology sheaves are finite locally constant on `U`. Then `Le^* Ψ_X(j_! K)` vanishes near `ζ`
@@ -45,8 +45,7 @@ trivialising cover replaced by the `ℓ`-Sylow reduction:
   (`closure_singleton_mem_irreducibleComponents_of_centreMap`);
 * on `X'` the dévissage of complexes with finite `ℓ`-group monodromy
   (`ProEtale.prop_of_isBoundedFiniteEllGroupMonodromy_finiteCoefficient`) reduces to `j'_! 𝔽_E`,
-  which is the constant case (`nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer`)
-  with a smooth uniformizer (`exists_smooth_polyAffine_irreducible_germ`).
+  which is the constant case (`nearbyCyclesVanishNear_lowerShriek_unit_residueField`).
 
 -/
 
@@ -80,6 +79,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- The complement `X ∖ V(h)` of the divisor of a nonzero function `h` on an integral scheme is
 nonempty. -/
 lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)
@@ -98,9 +99,11 @@ lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, �
     exact fun H ↦ H h rfl hx
   exact ⟨⟨x, hxU⟩⟩
 
-set_option maxHeartbeats 2000000 in
+set_option maxHeartbeats 1000000 in
+-- The finite `ℓ`-group monodromy of the pulled-back étale model is checked degree by degree on
+-- étale sheaves of `𝔽_E`-modules, whose instance search is slow.
 /-- **Generic vanishing along a divisor for lisse finite coefficients** (blueprint
-`det-sp-generic-divisor`, lisse case, `k` perfect): let `X` be normal, `Z = V(h)`, `ζ` a generic
+`det-sp-generic-divisor`, lisse case): let `X` be normal, `Z = V(h)`, `ζ` a generic
 point of `Z`, and `K` a complex of `𝔽_E`-module objects on `U = X ∖ Z` corresponding to a bounded
 complex `F'` of étale sheaves with finite locally constant cohomology sheaves. Then
 `Le^* Ψ_X(j_! K)` vanishes near `ζ`. -/
@@ -126,10 +129,10 @@ theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse
   have : Nonempty (overRestrict X I.support.compl).left := nonempty_overRestrict_compl hX hh hI
   have : IsIntegral (overRestrict X I.support.compl).left :=
     isIntegral_of_isOpenImmersion (overRestrictι X I.support.compl).left
-  haveI : CharP (integersResidueField ℓ E.1) ℓ :=
+  have : CharP (integersResidueField ℓ E.1) ℓ :=
     (CharP.charP_iff_prime_eq_zero Fact.out).2 (natCast_eq_zero_integersResidueField ℓ E.1)
   -- the `ℓ`-Sylow cover trivialising the cohomology sheaves
-  haveI : ∀ i : Set.Icc a b, IsFiniteLocallyConstantSheaf
+  have : ∀ i : Set.Icc a b, IsFiniteLocallyConstantSheaf
       ((DerivedCategory.homologyFunctor _ (i : ℤ)).obj F') := fun i ↦ hl i
   obtain ⟨W, v, _, _, _, d, hdℓ, hcard, G, _, _, hG, c, htriv⟩ :=
     Scheme.exists_sylow_galoisCover_trivializing (U := (overRestrict X I.support.compl).left) ℓ
@@ -235,7 +238,6 @@ theorem nearbyCyclesVanishNear_lowerShriek_residueField_of_lisse
       obtain ⟨⟨x, hx⟩⟩ : Nonempty (overRestrict X' (I.comap f.left).support.compl).left :=
         ⟨w (Classical.arbitrary W)⟩
       apply hx
-      change x ∈ ((I.comap f.left).support : Set X'.left)
       rw [← IdealSheafData.range_subschemeι, hI', h0,
         IdealSheafData.range_subschemeι_ofIdealTop_span]
       simp

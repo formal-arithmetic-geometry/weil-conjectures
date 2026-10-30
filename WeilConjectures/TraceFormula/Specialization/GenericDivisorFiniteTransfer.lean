@@ -104,11 +104,17 @@ lemma isZero_leftDerivedUpperStar_ι_rightDerivedLowerStar_obj_of_isProper {S S'
 variable {k : Type u} [Field k] {X X' : Over (Spec (.of k))} (f : X' ⟶ X)
   (I : X.left.IdealSheafData) (k' : Type u) [Field k'] [Algebra k k']
 
-instance [IsFinite f.left] : IsFinite (centreMap f I).left :=
+/-- The restriction of a finite morphism to the centres is finite. -/
+lemma isFinite_centreMap [IsFinite f.left] : IsFinite (centreMap f I).left :=
   MorphismProperty.of_isPullback (isPullback_centreMap f I).flip ‹_›
 
-instance [IsFinite f.left] : IsFinite (centreSpecialFibreMap f I k').left :=
-  MorphismProperty.of_isPullback (isPullback_centreSpecialFibreMap k' f I).flip inferInstance
+/-- The map of zero sections induced by a finite morphism is finite. -/
+lemma isFinite_centreSpecialFibreMap [IsFinite f.left] :
+    IsFinite (centreSpecialFibreMap f I k').left :=
+  MorphismProperty.of_isPullback (isPullback_centreSpecialFibreMap k' f I).flip
+    (isFinite_centreMap f I)
+
+attribute [local instance] isFinite_centreMap isFinite_centreSpecialFibreMap
 
 /-- **Transfer of the vanishing of the restricted specialization along a proper morphism**: let
 `f : X' ⟶ X` be proper and `K` a complex on `X'` of étale origin. If `Le'^* Ψ_{X'}(K)` vanishes
