@@ -46,21 +46,25 @@ private noncomputable def constantModuleFullyFaithful
   map_preimage φ := by ext U x; rfl
   preimage_map φ := by ext U x; rfl
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst1
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
     (constantModulePresheaf J Λ).Full := (constantModuleFullyFaithful J Λ).full
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst2
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
     (constantModulePresheaf J Λ).Faithful := (constantModuleFullyFaithful J Λ).faithful
 
 private noncomputable def moduleEmbedding (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :=
   sheafToPresheaf J (ModuleCat.{u} Λ) ⋙ constantModulePresheaf J Λ
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst3
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
     (moduleEmbedding J Λ).Full :=
   inferInstanceAs (sheafToPresheaf J (ModuleCat.{u} Λ) ⋙
     constantModulePresheaf J Λ).Full
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst4
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] :
     (moduleEmbedding J Λ).Faithful :=
   inferInstanceAs (sheafToPresheaf J (ModuleCat.{u} Λ) ⋙
     constantModulePresheaf J Λ).Faithful
@@ -101,14 +105,16 @@ private noncomputable def moduleEmbeddingUnitIso
     exact moduleEmbeddingUnitIsIso J Λ R α F
   exact asIso η
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst5
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
     (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
     [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
     (moduleExtension J Λ R α).Faithful :=
   Functor.Faithful.of_comp_iso (moduleEmbeddingUnitIso J Λ R α).symm
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst6
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
     (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
     [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :
@@ -146,7 +152,8 @@ private noncomputable def moduleRestriction
       exact PresheafOfModules.naturality_apply
         ((PresheafOfModules.restrictScalars α).map φ.val) f x }⟩
 
-private noncomputable instance (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
+private noncomputable instance siteModuleSheafConstantRingEquivalenceInst7
+    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
     (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
     [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :

@@ -184,16 +184,21 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 set_option hygiene false in
 local notation "WMod" => ModuleCategory.{u, c, v} R
 
-private instance : Category.{max c v u} WMod := inferInstanceAs (Category RawMod)
-private instance : Preadditive WMod := inferInstanceAs (Preadditive RawMod)
-private instance : Abelian WMod := inferInstanceAs (Abelian RawMod)
-private noncomputable instance : HasLimitsOfSize.{max c v u, max c v u} WMod :=
+private instance kInjectiveHomComplexOfUniversesInst1
+    : Category.{max c v u} WMod := inferInstanceAs (Category RawMod)
+private instance kInjectiveHomComplexOfUniversesInst2
+    : Preadditive WMod := inferInstanceAs (Preadditive RawMod)
+private instance kInjectiveHomComplexOfUniversesInst3
+    : Abelian WMod := inferInstanceAs (Abelian RawMod)
+private noncomputable instance kInjectiveHomComplexOfUniversesInst4
+    : HasLimitsOfSize.{max c v u, max c v u} WMod :=
   inferInstanceAs (HasLimitsOfSize.{max c v u, max c v u} RawMod)
-private noncomputable instance : HasColimitsOfSize.{max c v u, max c v u} WMod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst5
+    : HasColimitsOfSize.{max c v u, max c v u} WMod :=
   inferInstanceAs (HasColimitsOfSize.{max c v u, max c v u} RawMod)
-private noncomputable instance : MonoidalCategory WMod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst6 : MonoidalCategory WMod :=
   SheafOfModules.monoidalCategory R
-private noncomputable instance : SymmetricCategory WMod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst7 : SymmetricCategory WMod :=
   SheafOfModules.symmetricCategory R
 
 set_option hygiene false in
@@ -332,7 +337,8 @@ private lemma tensorHomEquiv_pre {A A' T N : RawMod} (f : A' ⟶ A) (φ : A ⊗ 
     { rightAdj := (SheafOfModules.homFunctor.{max c v u, v, c, max c v u} R).obj (op A)
       adj := tensorHomAdjunction.{u, c, v} R A }
 
-private noncomputable instance : MonoidalClosed Mod := moduleMonoidalClosed.{u, c, v} R
+private noncomputable instance kInjectiveHomComplexOfUniversesInst8
+    : MonoidalClosed Mod := moduleMonoidalClosed.{u, c, v} R
 
 private lemma uncurry_eq_tensorHomEquiv_symm {A T N : Mod}
     (g : T ⟶ SheafOfModules.homObj (R := R) A N) :
@@ -362,11 +368,12 @@ open CochainComplex
 
 variable {R}
 
-private noncomputable instance : MonoidalPreadditive Mod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst9 : MonoidalPreadditive Mod :=
   SheafOfModules.monoidalPreadditive_kfi.{max c v u, c, v} R
-private noncomputable instance : HasLimitsOfSize.{0, 0} Mod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst10 : HasLimitsOfSize.{0, 0} Mod :=
   hasLimitsOfSizeShrink.{0, 0, max c v u, max c v u} Mod
-private noncomputable instance : HasColimitsOfSize.{0, 0} Mod :=
+private noncomputable instance kInjectiveHomComplexOfUniversesInst11
+    : HasColimitsOfSize.{0, 0} Mod :=
   hasColimitsOfSizeShrink.{0, 0, max c v u, max c v u} Mod
 
 /-- The projection `homComplexπ` of the Hom complex, as a morphism to the internal hom

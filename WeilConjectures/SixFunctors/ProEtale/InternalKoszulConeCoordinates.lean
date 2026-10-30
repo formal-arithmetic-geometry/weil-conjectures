@@ -124,22 +124,22 @@ private theorem transport_cone_coordinates
 section Ringed
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
-local instance : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
+local instance internalKoszulConeCoordinatesInst1 : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.isGrothendieckAbelian _
-local instance : MonoidalCategory (SheafOfModules.{u}
+local instance internalKoszulConeCoordinatesInst2 : MonoidalCategory (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.monoidalCategory O
-local instance : SymmetricCategory (SheafOfModules.{u}
+local instance internalKoszulConeCoordinatesInst3 : SymmetricCategory (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.symmetricCategory O
-local instance : MonoidalPreadditive (SheafOfModules.{u}
+local instance internalKoszulConeCoordinatesInst4 : MonoidalPreadditive (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).1
-local instance : MonoidalClosed (SheafOfModules.{u}
+local instance internalKoszulConeCoordinatesInst5 : MonoidalClosed (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).2.1
-local instance (K L : ringedSiteComplex O) :
+local instance internalKoszulConeCoordinatesInst6 (K L : ringedSiteComplex O) :
     HomologicalComplex.HasMapBifunctor K L (curriedTensor _) (.up ℤ) := inferInstance
 
 private theorem coefficient_cone

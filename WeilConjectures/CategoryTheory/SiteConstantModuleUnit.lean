@@ -29,12 +29,12 @@ def siteConstantModuleUnit (M : ModuleCat.{u} Λ) :
       ((siteConstantModuleFunctor J Λ).obj M).val.presheaf :=
   toSheafify J ((siteConstantModulePresheaf (C := C) Λ).obj M).presheaf
 
-instance (M : ModuleCat.{u} Λ) :
+instance siteConstantModuleUnitInst1 (M : ModuleCat.{u} Λ) :
     Presheaf.IsLocallyInjective J (siteConstantModuleUnit J Λ M) :=
   inferInstanceAs (Presheaf.IsLocallyInjective J
     (toSheafify J ((siteConstantModulePresheaf (C := C) Λ).obj M).presheaf))
 
-instance (M : ModuleCat.{u} Λ) :
+instance siteConstantModuleUnitInst2 (M : ModuleCat.{u} Λ) :
     Presheaf.IsLocallySurjective J (siteConstantModuleUnit J Λ M) :=
   inferInstanceAs (Presheaf.IsLocallySurjective J
     (toSheafify J ((siteConstantModulePresheaf (C := C) Λ).obj M).presheaf))
@@ -69,12 +69,12 @@ def siteConstantModuleUnitSections (M : ModuleCat.{u} Λ) :
     ext x
     exact NatTrans.naturality_apply (siteConstantModuleUnit J Λ M) f x
 
-instance (M : ModuleCat.{u} Λ) :
+instance siteConstantModuleUnitInst3 (M : ModuleCat.{u} Λ) :
     Presheaf.IsLocallyInjective J (siteConstantModuleUnitSections J Λ M) where
   equalizerSieve_mem {U} x y h := by
     exact Presheaf.equalizerSieve_mem J (siteConstantModuleUnit J Λ M) x y h
 
-instance (M : ModuleCat.{u} Λ) :
+instance siteConstantModuleUnitInst4 (M : ModuleCat.{u} Λ) :
     Presheaf.IsLocallySurjective J (siteConstantModuleUnitSections J Λ M) where
   imageSieve_mem {U} x := by
     exact Presheaf.imageSieve_mem J (siteConstantModuleUnit J Λ M) x

@@ -205,7 +205,8 @@ def derivedSymmetric : SymmetricCategory (DerivedCategory A) := by
   let : SymmetricCategory H := homotopySymmetric
   exact localizedSymmetric L W
 
-local instance : SymmetricCategory (DerivedCategory A) := derivedSymmetric
+local instance ringedDerivedTensorNativeInst1
+    : SymmetricCategory (DerivedCategory A) := derivedSymmetric
 
 /-- The derived localization preserves the braiding with its canonical lax tensorator. -/
 @[instance_reducible]
@@ -267,7 +268,8 @@ Source: Stacks Project, Tags 06YS and 0FPT. -/
 @[instance_reducible]
 def monoidal : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) := inferInstance
 
-local instance : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
+local instance ringedDerivedTensorNativeInst2
+    : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   monoidal.{c, v, u, w} J R
 
 /-- The localization's canonical lax comparison, from derived tensor to total tensor.
@@ -285,7 +287,8 @@ theorem kFlat (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
       ((HomotopyCategory.quotient _ _).obj P) := by
   exact kFlat_of_acyclic P (fun Z hZ ↦ hP Z hZ)
 
-local instance : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤
+local instance ringedDerivedTensorNativeInst3
+    : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤
     DerivedCategory (Modules.{c, v, u} J R)).LaxMonoidal := lax.{c, v, u, w} J R
 
 /-- The native tensor comparison is invertible when either complex is K-flat.
@@ -350,7 +353,8 @@ Source: Stacks Project, Tag 0FPT. -/
 def symmetric : SymmetricCategory (DerivedCategory (Modules.{c, v, u} J R)) := by
   exact derivedSymmetric (A := Modules.{c, v, u} J R)
 
-local instance : SymmetricCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
+local instance ringedDerivedTensorNativeInst4
+    : SymmetricCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   symmetric.{c, v, u, w} J R
 
 end CategoryTheory.RingedDerivedNative

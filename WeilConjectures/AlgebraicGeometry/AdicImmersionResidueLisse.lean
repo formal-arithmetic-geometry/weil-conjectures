@@ -25,7 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-private instance : JointlySurjective etalePrecoverage.{u} :=
+private instance adicImmersionResidueLisseInst1 : JointlySurjective etalePrecoverage.{u} :=
   inferInstanceAs (JointlySurjective (precoverage @Etale))
 
 private theorem finiteValueCover {S : Scheme.{u}} (k : Type (u + 1)) [CommRing k]

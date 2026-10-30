@@ -98,7 +98,8 @@ private def sectionAb (T : Dᵒᵖ) : A ⥤ AddCommGrpCat.{u} :=
     (LeftExactFunctor.of (F ⋙ sheafToPresheaf K (Type u) ⋙
       (evaluation Dᵒᵖ (Type u)).obj T))).obj
 
-private instance (T : Dᵒᵖ) : PreservesFiniteLimits (sectionAb K F T) :=
+private instance constantLeftModuleTransportInst1
+    (T : Dᵒᵖ) : PreservesFiniteLimits (sectionAb K F T) :=
   ((AddCommGrpCat.leftExactFunctorForgetEquivalence A).inverse.obj
     (LeftExactFunctor.of (F ⋙ sheafToPresheaf K (Type u) ⋙
       (evaluation Dᵒᵖ (Type u)).obj T))).property

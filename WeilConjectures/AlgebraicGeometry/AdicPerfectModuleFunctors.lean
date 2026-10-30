@@ -36,7 +36,7 @@ def adicPerfectLocalFunctor (X : Scheme.{u})
     change (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J) ⋙
     SheafOfModules.overFunctor _ U
 
-instance (X : Scheme.{u})
+instance adicPerfectModuleFunctorsInst1 (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :
     (adicPerfectLocalFunctor X J U).Additive := by
@@ -57,7 +57,7 @@ def adicPerfectQuotientFunctor (X : Scheme.{u})
       Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) :=
   adicPerfectLocalFunctor X J U ⋙ change (adicResidueLocalProjection X J U n)
 
-instance (X : Scheme.{u})
+instance adicPerfectModuleFunctorsInst2 (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :
     (adicPerfectQuotientFunctor X J U n).Additive := by

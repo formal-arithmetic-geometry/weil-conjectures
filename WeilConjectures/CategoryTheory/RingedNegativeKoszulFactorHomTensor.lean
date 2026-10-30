@@ -461,11 +461,12 @@ attribute [local irreducible] homComplexFunctor
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.monoidalClosed
 
-local instance : MonoidalPreadditive (SheafOfModules.{u}
+local instance ringedNegativeKoszulFactorHomTensorInst1 : MonoidalPreadditive (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   (SheafOfModules.tensorClosed O).1.some
 
-local instance : HasColimitsOfSize.{0, 0} (SheafOfModules.{u}
+local instance ringedNegativeKoszulFactorHomTensorInst2
+    : HasColimitsOfSize.{0, 0} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   hasColimitsOfSizeShrink.{0, 0, u, u} _
 
