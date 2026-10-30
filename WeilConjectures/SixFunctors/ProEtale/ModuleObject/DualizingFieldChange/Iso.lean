@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChangeGlobal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Global
 public import WeilConjectures.CategoryTheory.Adjunction.IsIsoOfMap
 
 /-!

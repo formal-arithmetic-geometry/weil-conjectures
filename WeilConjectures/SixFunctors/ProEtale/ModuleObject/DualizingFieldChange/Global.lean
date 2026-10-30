@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChangeFinite
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChangeTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Finite
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Tensor
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!

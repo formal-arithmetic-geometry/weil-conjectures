@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChangeIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUpperShriekFieldExtension
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TateTwist.UpperStarOne

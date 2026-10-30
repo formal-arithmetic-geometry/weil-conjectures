@@ -8,7 +8,7 @@ module
 public import WeilConjectures.PoincareDuality.ProperProjectionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLaxMonoidal
 import WeilConjectures.Tactic.ExactModProofs
 

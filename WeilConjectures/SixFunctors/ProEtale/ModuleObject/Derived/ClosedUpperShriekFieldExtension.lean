@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedIm
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerStarFullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
-public import WeilConjectures.TraceFormula.Specialization.DualizingFieldChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!
