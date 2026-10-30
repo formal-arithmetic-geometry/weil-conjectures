@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Abelian.CokernelPowTower
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.MonoidalUnit
+public import WeilConjectures.CategoryTheory.Sites.MonoidalUnit
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal

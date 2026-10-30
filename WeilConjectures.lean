@@ -9399,6 +9399,7 @@ public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
 public import WeilConjectures.CategoryTheory.Sites.ModuleDirectedColimitUnderlyingSets
 public import WeilConjectures.CategoryTheory.Sites.ModuleLift
 public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.CategoryTheory.Sites.MonoidalUnit
 public import WeilConjectures.CategoryTheory.Sites.MonoidalUnitSections
 public import WeilConjectures.CategoryTheory.Sites.NormalizedFreeModuleComparison
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
@@ -10740,7 +10741,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Localization
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.MonoidalUnit
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Plus

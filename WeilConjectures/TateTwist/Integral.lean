@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendChangeTransfer
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsComp
 public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 
 /-!
 # Integral Tate twists `𝒪_E(d)` on the pro-étale site
@@ -75,11 +76,6 @@ instance : IsMonHom (padicIntRingObjToPadicIntegers.{u} ℓ E) :=
 
 variable [FiniteDimensional ℚ_[ℓ] E]
 
-/-- The image of a finite extension `E` of `ℚ_ℓ` embedded in `ℚ̄_ℓ` is a finite subextension. -/
-lemma finiteDimensional_fieldRange_toAlgHom :
-    FiniteDimensional ℚ_[ℓ] (IsScalarTower.toAlgHom ℚ_[ℓ] E (PadicAlgCl ℓ)).fieldRange :=
-  (IsScalarTower.toAlgHom ℚ_[ℓ] E (PadicAlgCl ℓ)).toLinearMap.finiteDimensional_range
-
 /-- The inclusion `C(-, 𝒪_E) ⟶ ℚ̲̄_ℓ` of presheaves of rings on profinite sets: a continuous map
 `S → 𝒪_E`, composed with the inclusions `𝒪_E ⊆ E ⊆ ℚ̄_ℓ`, takes values in the finite
 subextension `E ⊆ ℚ̄_ℓ`. -/
@@ -94,7 +90,8 @@ noncomputable def padicIntegersToPadicAlgClRingPresheaf :
         (PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop)
         (fun a ↦ (PadicAlgCl.mem_finiteIntermediateFieldValued_iff ℓ _ _).mpr
           ⟨(IsScalarTower.toAlgHom ℚ_[ℓ] E (PadicAlgCl ℓ)).fieldRange,
-            finiteDimensional_fieldRange_toAlgHom ℓ E, fun x ↦ ⟨(a x).1, rfl⟩⟩)).comp
+            AlgebraicGeometry.ProEtale.finiteDimensional_fieldRange_toAlgHom ℓ E,
+            fun x ↦ ⟨(a x).1, rfl⟩⟩)).comp
         ULift.ringEquiv.toRingHom))
     naturality _ _ _ := rfl }
 

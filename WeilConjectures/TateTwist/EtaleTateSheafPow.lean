@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 
 /-!
 # The étale Tate sheaves as tensor powers
@@ -55,12 +56,6 @@ noncomputable def tateSheafPow (X : Scheme.{u}) :
     ℕ → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
   | 0 => 𝟙_ _
   | d + 1 => tateSheafPow X d ⊗ tateSheaf Λ X
-
-/-- The characteristic of `Λ` is invertible on `Spec ℤ[1/n]`. -/
-lemma isUnit_ringChar_invertibleExponentBase :
-    IsUnit ((ringChar Λ : ℕ) : Γ(invertibleExponentBase.{u} Λ, ⊤)) := by
-  simpa using (isUnit_ringChar_invertibleExponentRing Λ).map
-    (Scheme.ΓSpecIso (.of (InvertibleExponentRing.{u} Λ))).inv.hom
 
 variable [NeZero (ringChar Λ)] (X : Scheme.{u}) [HasInvertibleExponent Λ X]
 
