@@ -14688,6 +14688,7 @@ public import WeilConjectures.WeilSheaf.CondensedTwistedConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantFieldComponent
 public import WeilConjectures.WeilSheaf.ConstantFieldEquivalence
+public import WeilConjectures.WeilSheaf.ConstantFieldEquivalencePullback
 public import WeilConjectures.WeilSheaf.ConstantFieldRestriction
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight

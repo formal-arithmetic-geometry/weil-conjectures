@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 
 For a factorisation `b ≫ c = a` of morphisms of schemes, the pullbacks of `ℓ`-adic sheaves
 satisfy `a^* ≅ c^* ⋙ b^*` (`AlgebraicGeometry.ProEtale.adicUpperStarFactor`). These isomorphisms
-are associative (`AlgebraicGeometry.ProEtale.adicUpperStarFactor_inv_app_assoc`): the equations
+are associative (`AlgebraicGeometry.ProEtale.map_adicUpperStarFactor_inv_app_comp_inv_app`): the equations
 of the factorisations are arbitrary hypotheses, so that the identities can be instantiated at
 concrete morphisms without unfolding them.
 -/
@@ -42,8 +42,23 @@ lemma adicUpperStarFactor_hom_app_hom {P Y Z : Scheme.{u}} {a : P ⟶ Y} {b : P 
   simp only [adicUpperStarFactor, upperStarFactor, Iso.trans_hom, NatTrans.comp_app,
     Mod.comp_hom', adicUpperStarCongr_hom_app_hom, adicUpperStarComp_hom_app_hom]
 
+variable (l) in
+/-- The component `a^* M ≅ b^* c^* M` of the factorisation isomorphism, with the target written
+without the composite functor. -/
+noncomputable def adicUpperStarFactorApp {P Y Z : Scheme.{u}} {a : P ⟶ Y} {b : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (M : AdicSheaf l Y) :
+    (a)^*ᵃ[l].obj M ≅ (b)^*ᵃ[l].obj ((c)^*ᵃ[l].obj M) :=
+  (adicUpperStarFactor l e).app M
+
+@[simp]
+lemma adicUpperStarFactorApp_inv {P Y Z : Scheme.{u}} {a : P ⟶ Y} {b : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (M : AdicSheaf l Y) :
+    (adicUpperStarFactorApp l e M).inv = (adicUpperStarFactor l e).inv.app M :=
+  rfl
+
 /-- The inverse of a factorisation isomorphism is the inverse of the composition isomorphism
 followed by the congruence isomorphism. -/
+@[reassoc]
 lemma adicUpperStarFactor_inv_app {P Y Z : Scheme.{u}} {a : P ⟶ Y} {b : P ⟶ Z}
     {c : Z ⟶ Y} (e : b ≫ c = a) (M : AdicSheaf l Y) :
     (adicUpperStarFactor l e).inv.app M =
@@ -57,10 +72,11 @@ lemma adicUpperStarFactor_rfl {P Y Z : Scheme.{u}} (b : P ⟶ Z) (c : Z ⟶ Y) :
   simp [adicUpperStarFactor, adicUpperStarCongr]
 
 /-- **Associativity of the factorisation isomorphisms** of `ℓ`-adic pullbacks. -/
-lemma adicUpperStarFactor_hom_app_assoc {P'' P' Z Y : Scheme.{u}} {a : P'' ⟶ Y} {x : P'' ⟶ P'}
-    {y : P' ⟶ Z} {z : Z ⟶ Y} {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b) (e_a : x ≫ b = a)
-    (e_c : x ≫ y = c) (e_a' : c ≫ z = a) (M : AdicSheaf l Y) :
-    (adicUpperStarFactor l e_a).hom.app M ≫ (x)^*ᵃ[l].map ((adicUpperStarFactor l e_b).hom.app M) =
+lemma adicUpperStarFactor_hom_app_comp_map_hom_app {P'' P' Z Y : Scheme.{u}} {a : P'' ⟶ Y}
+    {x : P'' ⟶ P'} {y : P' ⟶ Z} {z : Z ⟶ Y} {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b)
+    (e_a : x ≫ b = a) (e_c : x ≫ y = c) (e_a' : c ≫ z = a) (M : AdicSheaf l Y) :
+    (adicUpperStarFactor l e_a).hom.app M ≫
+        (x)^*ᵃ[l].map ((adicUpperStarFactor l e_b).hom.app M) =
       (adicUpperStarFactor l e_a').hom.app M ≫
         (adicUpperStarFactor l e_c).hom.app ((z)^*ᵃ[l].obj M) := by
   apply Mod.hom_ext
@@ -69,17 +85,17 @@ lemma adicUpperStarFactor_hom_app_assoc {P'' P' Z Y : Scheme.{u}} {a : P'' ⟶ Y
 
 /-- **Associativity of the factorisation isomorphisms** of `ℓ`-adic pullbacks, for the inverse
 isomorphisms. -/
-lemma adicUpperStarFactor_inv_app_assoc {P'' P' Z Y : Scheme.{u}} {a : P'' ⟶ Y} {x : P'' ⟶ P'}
-    {y : P' ⟶ Z} {z : Z ⟶ Y} {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b) (e_a : x ≫ b = a)
-    (e_c : x ≫ y = c) (e_a' : c ≫ z = a) (M : AdicSheaf l Y) :
+lemma map_adicUpperStarFactor_inv_app_comp_inv_app {P'' P' Z Y : Scheme.{u}} {a : P'' ⟶ Y}
+    {x : P'' ⟶ P'} {y : P' ⟶ Z} {z : Z ⟶ Y} {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b)
+    (e_a : x ≫ b = a) (e_c : x ≫ y = c) (e_a' : c ≫ z = a) (M : AdicSheaf l Y) :
     (x)^*ᵃ[l].map ((adicUpperStarFactor l e_b).inv.app M) ≫
         (adicUpperStarFactor l e_a).inv.app M =
       (adicUpperStarFactor l e_c).inv.app ((z)^*ᵃ[l].obj M) ≫
         (adicUpperStarFactor l e_a').inv.app M := by
   rw [← cancel_epi ((adicUpperStarFactor l e_c).hom.app ((z)^*ᵃ[l].obj M)),
     ← cancel_epi ((adicUpperStarFactor l e_a').hom.app M),
-    ← reassoc_of% adicUpperStarFactor_hom_app_assoc e_b e_a e_c e_a' M]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+    ← reassoc_of% adicUpperStarFactor_hom_app_comp_map_hom_app e_b e_a e_c e_a' M]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
   rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, Iso.hom_inv_id_app]
 
