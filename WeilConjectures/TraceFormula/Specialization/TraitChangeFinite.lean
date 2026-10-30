@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.TraceFormula.Specialization.FinitePointConservative
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
@@ -242,7 +243,8 @@ theorem isIso_pullbackExchange_traitChangeGenericHom_app_of_isFinite [IsFinite q
     (traitGenericPoint k' ≫ traitToBase k' k') (traitGenericPoint K ≫ traitToBase K K)
     (by exact ⟨_, ⟨hN''.isTraitModel.exists_isPullback⟩⟩) ⟨𝟙 _, isTraitModel_traitGenericModel K⟩
     (traitChangeGenericHom K hN) hN.toTraitGeneric hN''.toTraitGeneric (traitGenericModelMap k' K)
-    (by simp [pullback.condition]) (by simp [hb]) hb hs
+    (by simp [pullback.condition, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
+    (by simp [hb]) hb hs
     (isPullback_baseChangeGenericMap_traitChange K hN) hN''.isPullback_i
     (IsPullback.of_horiz_isIso ⟨rfl⟩) A hA hχ hbc' hτ
     fun a h ↦ isIso_of_isIso_map_rightDerivedLowerStar_of_isFinite 𝐐

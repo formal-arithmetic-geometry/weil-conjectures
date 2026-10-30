@@ -107,4 +107,18 @@ theorem abelian_closed_support {X U Z : Scheme.{u}}
       (isZero_upperStar_lowerStar_of_disjoint Ab.{u + 1} i j hdisj _).eq_of_src _ _⟩⟩
   exact abDetectIso i j hij _
 
+/-- The closed restriction counit `i^* i_* ⟶ 𝟭` of abelian sheaves is an isomorphism, and the unit
+`F ⟶ i_* i^* F` is an isomorphism for every abelian sheaf `F` vanishing on the open complement
+(`abelian_closed_support`). -/
+theorem abelian_closed_support_counit_and_unit {X U Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ) :
+    IsIso (upperStarLowerStarAdjunction Ab.{u + 1} i).counit ∧
+    ∀ F : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1},
+      IsZero ((upperStar Ab.{u + 1} j).obj F) →
+      IsIso ((upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app F) :=
+  ⟨isIso_upperStarLowerStarAdjunction_counit Ab.{u + 1} i,
+    fun F hF ↦ abelian_closed_support i j hij F hF⟩
+
 end AlgebraicGeometry.ProEtale

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
