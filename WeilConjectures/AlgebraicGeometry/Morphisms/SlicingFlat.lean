@@ -9,11 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Mathlib.CategoryTheory.ExtremalEpi
+import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Slicing a flat morphism with geometrically reduced fibres

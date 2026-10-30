@@ -7,8 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import WeilConjectures.Mathlib.RingTheory.Henselian
-
+public import Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion

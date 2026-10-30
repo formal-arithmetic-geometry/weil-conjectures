@@ -8,9 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.Algebra.Homology.KFlat
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationOverTransport
 import WeilConjectures.AlgebraicGeometry.KInjectiveSchemeEvaluationModels
 

@@ -39,9 +39,24 @@ universe u
 
 open CategoryTheory Limits Abelian
 
+/-! Without this, `ModuleCat (ULift (ZMod (l ^ m)))` elaborates with the ring structure
+`ULift.ring`, while the constructions on sheaves of modules over a commutative ring use
+`CommRing.toRing`; the kernel then has to unfold the sheaf categories to compare the two. -/
+attribute [local instance 2000] CommRing.toRing
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
+
+attribute [local instance high] hasExt_sheafEtaleModuleCatZMod hasExt_sheafEtaleAddCommGrpCat
+  hasExt_sheafProEtAddCommGrpCat
+
+/-! The constructions on sheaves of modules over a commutative ring `Λ` (such as
+`AlgebraicGeometry.Etale.upperStarConstantRingIso`) sheafify through `HasSheafify`; for
+`Λ = ULift (ZMod (l ^ m))`, instance synthesis would otherwise use the concrete sheafification
+`CategoryTheory.sheafToPresheaf_isRightAdjoint` in `Sheaf.constantRing`, and the kernel would
+have to unfold the sheaf categories to compare the two. -/
+attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
 
 variable (l : ℕ) [Fact l.Prime] (m : ℕ) {S : Scheme.{u}} (e : S ≅ S)
 

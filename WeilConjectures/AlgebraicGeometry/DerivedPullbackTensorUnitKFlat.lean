@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
-import WeilConjectures.AlgebraicGeometry.DerivedPullback
-import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnitNormalization
 
