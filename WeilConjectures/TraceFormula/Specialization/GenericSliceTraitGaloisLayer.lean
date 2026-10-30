@@ -33,21 +33,6 @@ open CategoryTheory Limits IsLocalRing
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry
-
-/-- The geometric generic point `k'⟦t⟧ ⟶ Ω = (Frac k'⟦t⟧)^alg` is algebraic. -/
-lemma isAlgebraic_traitGenericField (k' : Type u) [Field k'] :
-    letI := (algebraMap (PowerSeries k') (traitGenericField k')).toAlgebra
-    Algebra.IsAlgebraic (PowerSeries k') (traitGenericField k') := by
-  have := IsLocalization.isAlgebraic (FractionRing (PowerSeries k'))
-    (nonZeroDivisors (PowerSeries k'))
-  have := Algebra.IsAlgebraic.trans (PowerSeries k') (FractionRing (PowerSeries k'))
-    (traitGenericField k')
-  convert this
-  exact Algebra.algebra_ext _ _ fun _ ↦ rfl
-
-end AlgebraicGeometry
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme

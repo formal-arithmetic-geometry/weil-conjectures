@@ -54,8 +54,8 @@ lisse sheaves and the proper-exchange cases, they prove the finiteness theorem b
 
 ## Unfinished
 
-The slice step is proved from its two inputs (M1) and (M2), stated in
-`WeilConjectures.TraceFormula.Specialization.NearbySliceInputs`, where they are `sorry`ed. The
+The slice step is proved from Th. finitude 3.7 and the averaging splitting (M2), stated in
+`WeilConjectures.TraceFormula.Specialization.NearbySliceInputs`, where it is `sorry`ed. The
 criterion is `sorry`ed; no blueprint node states it (the blueprint has no node for the finiteness
 of nearby cycles). The criterion needs that the cohomology
 sheaves of `Ψ B` are ind-constructible, which for torsion coefficients holds for every étale
@@ -71,6 +71,28 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.GenericSliceTrait
+
+variable {k' : Type u} [Field k'] (D : GenericSliceTrait k')
+
+/-- The composite `k'⟦t⟧ ⟶ R ⟶ K⟦t⟧` of the structure map and the change of trait of a generic
+slice trait is the coefficientwise map. -/
+lemma ι_comp_φ : D.ι.comp D.φ = PowerSeries.map (algebraMap k' (traitSliceField k')) := by
+  have h : Spec.map (CommRingCat.ofHom (D.ι.comp D.φ)) = traitMap k' (traitSliceField k') := by
+    rw [CommRingCat.ofHom_comp, Spec.map_comp, D.spec_φ, reassoc_of% D.spec_ι_comp,
+      traitSlice_over]
+  exact congrArg CommRingCat.Hom.hom (Spec.map_injective h)
+
+/-- The change of trait `Spec K⟦t⟧ ⟶ S'` of a generic slice trait is unramified: `t` is a
+uniformizer of both. -/
+lemma maximalIdeal_eq_map_ι :
+    IsLocalRing.maximalIdeal (PowerSeries (traitSliceField k')) =
+      (IsLocalRing.maximalIdeal D.R).map D.ι := by
+  rw [D.maximalIdeal_eq, Ideal.map_map, ι_comp_φ,
+    maximalIdeal_powerSeries_eq_map k' (traitSliceField k')]
+
+end AlgebraicGeometry.GenericSliceTrait
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -123,7 +145,9 @@ theorem isIso_pullbackExchange_app_genericSliceTraitChangeHom (D : GenericSliceT
       pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom D.ωK) := pullback.lift_snd _ _ _
   exact Hom.isIso_pullbackExchange_app_of_isPullback_trait (ι := D.ι) (a₁ := D.a)
     (a₂ := algebraMap _ _) (c := D.ωK) (b₁ := D.b) (b₂ := PowerSeries.constantCoeff)
-    D.injective_ι D.injective_a (algebraMap_traitGenericField_injective _) D.ωK_comp_a D.ker_b
+    D.injective_ι D.maximalIdeal_eq_map_ι D.injective_a
+    (algebraMap_traitGenericField_injective _) D.isAlgebraic_a
+    (isAlgebraic_traitGenericField _) D.ωK_comp_a D.ker_b
     PowerSeries.ker_coeff_eq_max_ideal (genericSliceTraitChangeHom D n i)
     (genericSliceTraitStructure D n i) _ hNj _ hNi _ _ hMj _ hMi hφ hgen hB'
 
