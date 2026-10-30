@@ -1,5 +1,6 @@
 import WeilConjectures.Scratch.C2
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
+import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelScalars
 
 universe u
 
