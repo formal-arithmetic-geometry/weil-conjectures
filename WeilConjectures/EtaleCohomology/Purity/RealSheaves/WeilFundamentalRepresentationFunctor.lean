@@ -43,22 +43,22 @@ variable [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
 
 section StalkMap
 
-/-- The stalk at the base point of the identity is the identity. -/
-lemma stalkMap_id (X : LisseWeilSheaf K l C) :
-    stalkMap (B := B) (𝟙 X : X ⟶ X).hom X.property X.property = LinearMap.id := by
-  have h : WeilSheaf.toLisseMap (𝟙 X : X ⟶ X).hom X.property X.property = 𝟙 _ := rfl
-  rw [stalkMap, h, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+/-- The stalk map of a composite is the composite of the stalk maps. -/
+lemma stalkMap_comp {F G H : WeilSheaf K l C} (φ : F ⟶ G) (ψ : G ⟶ H) (hF : F.IsLisse)
+    (hG : G.IsLisse) (hH : H.IsLisse) :
+    stalkMap (B := B) (φ ≫ ψ) hF hH = stalkMap ψ hG hH ∘ₗ stalkMap (B := B) φ hF hG := by
+  simp only [stalkMap]
+  rw [show WeilSheaf.toLisseMap (φ ≫ ψ) hF hH =
+    WeilSheaf.toLisseMap φ hF hG ≫ WeilSheaf.toLisseMap ψ hG hH from rfl,
+    CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
   rfl
 
-/-- Stalks at the base point are compatible with composition. -/
-lemma stalkMap_comp {X Y Z : LisseWeilSheaf K l C} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    stalkMap (B := B) (f ≫ g).hom X.property Z.property =
-      stalkMap (B := B) g.hom Y.property Z.property ∘ₗ
-        stalkMap (B := B) f.hom X.property Y.property := by
-  have h : WeilSheaf.toLisseMap (f ≫ g).hom X.property Z.property =
-      WeilSheaf.toLisseMap f.hom X.property Y.property ≫
-        WeilSheaf.toLisseMap g.hom Y.property Z.property := rfl
-  rw [stalkMap, h, CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
+/-- The stalk map of the identity is the identity. -/
+lemma stalkMap_id {F : WeilSheaf K l C} (hF : F.IsLisse) :
+    stalkMap (B := B) (𝟙 F) hF hF = LinearMap.id := by
+  simp only [stalkMap]
+  rw [show WeilSheaf.toLisseMap (𝟙 F) hF hF = 𝟙 _ from rfl, CategoryTheory.Functor.map_id,
+    CategoryTheory.Functor.map_id]
   rfl
 
 /-- The stalk at the base point of `f ⊗ g = [f^∨, g]`. -/
@@ -113,18 +113,19 @@ end StalkMap
 
 variable (D : WeilMonodromyData B)
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the functor `ℱ ↦ (ℱ_t, ρ_ℱ)` from lisse Weil sheaves to representations of the Weil group,
-sending a lisse Weil sheaf to its Weil fundamental representation
-(`def-wf-fundamental-representation`, `AlgebraicGeometry.WeilGroup.fundamentalRep`) on its stalk
-at the base point, and a morphism to its stalk at the base point. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the functor `ℱ ↦ (ℱ_t, ρ_ℱ)` from lisse Weil
+sheaves to representations of the Weil group, sending a lisse Weil sheaf to its Weil fundamental
+representation (`def-wf-fundamental-representation`, `AlgebraicGeometry.WeilGroup.fundamentalRep`)
+on its stalk at the base point, and a morphism to its stalk at the base point. -/
 noncomputable def fundamentalRepFunctor :
     LisseWeilSheaf K l C ⥤ Rep.{u + 1} (PadicAlgCl l) W.carrier where
   obj X := Rep.of (fundamentalRep M D X.obj X.property)
   map {X Y} f := Rep.ofHom ⟨stalkMap f.hom X.property Y.property, fun w ↦
     LinearMap.ext fun v ↦ stalkMap_fundamentalRep D f.hom _ _ w v⟩
-  map_id X := Rep.hom_ext (Representation.IntertwiningMap.ext (stalkMap_id X))
-  map_comp f g := Rep.hom_ext (Representation.IntertwiningMap.ext (stalkMap_comp f g))
+  map_id X := Rep.hom_ext (Representation.IntertwiningMap.ext (stalkMap_id X.property))
+  map_comp f g := Rep.hom_ext (Representation.IntertwiningMap.ext
+    (stalkMap_comp f.hom g.hom _ _ _))
 
 lemma fundamentalRepFunctor_map_hom_apply {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y)
     (v : LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property)) :
@@ -169,11 +170,11 @@ lemma fundamentalRepTensorEquiv_naturality {X X' Y Y' : LisseWeilSheaf K l C} (f
   exact tensorStalkLinearMap_stalkMap_tensorHom f.hom g.hom X.property X'.property Y.property
     Y'.property z d
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the Weil fundamental representation is a tensor functor. The identification
-`(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t` (`AlgebraicGeometry.WeilGroup.fundamentalRepTensorEquiv`) is an
-isomorphism of bifunctors from pairs of lisse Weil sheaves to representations of the Weil
-group. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the Weil fundamental representation is a tensor
+functor. The identification `(ℱ ⊗ 𝒢)_t ≅ ℱ_t ⊗ 𝒢_t`
+(`AlgebraicGeometry.WeilGroup.fundamentalRepTensorEquiv`) is an isomorphism of bifunctors from pairs
+of lisse Weil sheaves to representations of the Weil group. -/
 noncomputable def fundamentalRepTensorIso :
     LisseWeilSheaf.tensor K l C ⋙ fundamentalRepFunctor M D ≅
       (fundamentalRepFunctor M D).prod (fundamentalRepFunctor M D) ⋙
@@ -210,9 +211,10 @@ lemma fundamentalRep_adicConstant_apply (w : W.carrier)
     rw [fundamentalRep_frobLift]
     exact congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) h
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the Weil fundamental representation of the constant sheaf `ℚ̄_ℓ` is the trivial representation
-on `ℚ̄_ℓ`: its stalk is a line, on which the Weil group acts trivially. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the Weil fundamental representation of the
+constant sheaf `ℚ̄_ℓ` is the trivial representation on `ℚ̄_ℓ`: its stalk is a line, on which the
+Weil group acts trivially. -/
 noncomputable def fundamentalRepUnitEquiv :
     (fundamentalRep M D (LisseWeilSheaf.unit K l C).obj (LisseWeilSheaf.unit K l C).property).Equiv
       (Representation.trivial (PadicAlgCl l) W.carrier (PadicAlgCl l)) :=

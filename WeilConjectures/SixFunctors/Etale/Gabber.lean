@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.ConstructibleSheaf.FinitePushforward
-public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
@@ -22,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic
 import WeilConjectures.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity
-import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
@@ -159,7 +154,6 @@ The blueprint applies this to the closed fibres `(T_λ)₀` of a system of finit
 presented covers `T_λ ⟶ T` of an affine henselian pair `(T, T₀)` whose limit is an integral
 strictly local cover, and a torsion sheaf; neither the special shape of the system nor the
 torsion hypothesis is used, so they are not assumed here.
-(blueprint: lemma-weil-pbc-finite-stage-killing)
 -/
 theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [IsCofiltered J]
     {S : Scheme.{u}} (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

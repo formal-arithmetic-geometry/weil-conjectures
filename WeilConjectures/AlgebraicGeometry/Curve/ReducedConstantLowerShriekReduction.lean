@@ -6,20 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
-import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenAssertions
-import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardAssertions
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
-import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-! # Reduction data for constant coefficients on reduced curves
 
@@ -98,7 +92,7 @@ component the open is dense. Use `lemma-weil-pbc-smooth-curve-kummer-localizatio
 r invertible in k and `lemma-weil-pbc-smooth-curve-artin-schreier` otherwise; these are
 the characteristic branches of `thm-sc-main`. Apply
 `lem-weil-pbc-curve-assertions-dense-open` to pass to extension by zero.
-4. Apply `lem-weil-pbc-curve-assertions-finite-pushforward` to the component inclusions,
+4. Apply the finite-pushforward case of the curve assertions to the component inclusions,
 and `lemma-weil-pbc-eight-curve-devissage` to assemble their finite direct sum.
 The quotient coefficient sheaf is the constant prime-field module sheaf, and all
 comparison maps respect that coefficient identification. Package the witnesses and

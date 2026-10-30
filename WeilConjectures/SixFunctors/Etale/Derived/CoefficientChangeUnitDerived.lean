@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitMate
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 
 /-!
 # Derived adjunctions and exact restriction functors
@@ -21,8 +21,7 @@ induced isomorphism of the derived left adjoints, both for the derived adjunctio
 (`CategoryTheory.Adjunction.mateEquiv_mapDerivedCategoryRightDerivedAdjunction_restrict`).
 
 This is the input for the compatibility of the derived base change map with the restriction of
-scalars along a morphism of coefficient rings (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+scalars along a morphism of coefficient rings.
 -/
 
 @[expose] public section

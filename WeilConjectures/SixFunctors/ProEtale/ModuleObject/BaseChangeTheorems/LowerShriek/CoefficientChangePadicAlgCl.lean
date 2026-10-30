@@ -5,17 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ObjectProperty.LiftSquareIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComponents
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClLowerStarHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 
 /-!
 # The extension of scalars `E ⟶ ℚ̄_ℓ` as a coefficient change
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. This file shows that the
 extension of scalars `T_X : Dᵇc(X)⟦E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧`, with the comparisons (Pull), (Shriek) and
-(Push) of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility`, is
+(Push) of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility`, is
 a coefficient change of the bounded constructible six functors
 (`ProEtale.CondensedRing.toPadicAlgClCoefficientChange`). The required compatibilities are
 restrictions of those on the ambient derived categories
@@ -39,18 +38,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-lemma boundedConstructibleToPadicAlgCl_map_hom (X : Scheme.{u})
-    {K L : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧} (φ : K ⟶ L) :
-    ((boundedConstructibleToPadicAlgCl X ℓ E).map φ).hom =
-      (derivedExtendScalarsToPadicAlgCl X ℓ E).map φ.hom :=
-  rfl
-
-lemma boundedConstructibleToPadicAlgCl_obj_obj (X : Scheme.{u})
-    (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
-    ((boundedConstructibleToPadicAlgCl X ℓ E).obj K).obj =
-      (derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj :=
-  rfl
 
 section Components
 
@@ -127,28 +114,5 @@ lemma boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso_inv_app_hom
     CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
 
 end OpenImmersion
-
-section Proper
-
-variable (p : X ⟶ Y) [IsProper p.left]
-
-lemma boundedConstructibleLowerStarToPadicAlgClIso_hom_app_hom
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    ((boundedConstructibleLowerStarToPadicAlgClIso ℓ E p).hom.app K).hom =
-      (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p.left).app K.obj := by
-  simp only [Functor.comp_obj, boundedConstructibleToPadicAlgCl_obj_obj,
-    ContinuousMapRingObj.boundedConstructibleLowerStar_obj_obj,
-    boundedConstructibleLowerStar_obj_obj, boundedConstructibleLowerStarToPadicAlgClIso,
-    Functor.whiskeringRight_obj_obj, boundedConstructibleToPadicAlgClCompatibility,
-    ObjectProperty.liftCompιIso, ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility,
-    boundedConstructibleLowerStarCompatibility, Functor.FullyFaithful.preimageIso_hom,
-    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom, Iso.symm_hom,
-    Functor.isoWhiskerRight_hom, asIso_hom, Iso.refl_inv,
-    Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, ObjectProperty.ι_obj,
-    Functor.associator_hom_app, Functor.whiskerLeft_app, NatTrans.id_app,
-    ObjectProperty.lift_obj_obj, Functor.associator_inv_app, Functor.whiskerRight_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp, ObjectProperty.homMk_hom]
-
-end Proper
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -6,10 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Analysis.Complex.Polynomial.Basic
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
-public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.PointCountBound
 
 /-!
@@ -765,7 +762,7 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
 
 /-- If `α` is an eigenvalue of the boundary Frobenius of `ℱ` at `s`, then `α ^ 2` is one of
 `ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector
-(`sk-p-linear-spectra`). -/
+(`p-linear-spectra`). -/
 theorem hasEigenvalue_boundaryFrobenius_tprod_self
     {ρ : Representation (PadicAlgCl l) WU.carrier V} {s : ↥((Set.range j.base)ᶜ)}
     {α : PadicAlgCl l} (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :

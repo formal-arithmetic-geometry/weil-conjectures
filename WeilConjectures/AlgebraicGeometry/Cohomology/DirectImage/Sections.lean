@@ -7,24 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionDenominators
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageSectionTorsion
-public import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
-
-
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
-public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
-public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
 public import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
@@ -64,7 +53,7 @@ Over an affine open `V` of `T`, `R^q f_* ℱ|_V` is the higher direct image alon
 images then shows quasi-coherence by induction on the number of affine opens
 (`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
 
-(blueprint: `sk-thm-picard-coherence`, `lem-pc-finite-support-hi`) -/
+(blueprint: `det-thm-picard-coherence`, `lem-pc-finite-support-hi`) -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top _
@@ -670,7 +659,7 @@ higher direct images gives `R^q f_* ℱ|_U = 0` for `q ≥ d` by induction on `d
 The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
 the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isZero_higherDirectImage_restrict (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
       ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -689,7 +678,7 @@ situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_r
 is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods
 given there cover `T`, and one takes for `N` the maximum of their bounds.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isZero_higherDirectImage [CompactSpace T] :
     ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) := by
   classical
@@ -744,7 +733,7 @@ The two assertions are stated in separate acyclic modules, with proofs through l
 of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
 
 (blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
-(blueprint: `sk-thm-picard-coherence`)
+(blueprint: `det-thm-picard-coherence`)
 (blueprint: new-higher-direct-image-affine-local-qcoherent) -/
 theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
     ∀ U : T.affineOpens,

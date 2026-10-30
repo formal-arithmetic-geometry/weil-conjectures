@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
@@ -155,7 +155,7 @@ lemma isZero_nearbyCycles_affineSpace_of_isZero (n : ℕ) {D : Scheme.{u}}
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Reduction along a closed embedding**: let `φ : M.geometric ⟶ N.geometric` be a morphism of
 the geometric models of two models of finite type over the trait, whose morphism of total spaces
 `t` is a closed immersion and whose squares of geometric generic fibres and of special fibres are
@@ -244,7 +244,7 @@ lemma boundedConstructible_lisseExtension (n : ℕ) (D : Scheme.{u})
   exact boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c
     (boundedConstructible_lisseExtension_closed n D c W E c' L hL)
 
-omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [Fact (ringChar k').Prime] in
 /-- **Deligne's finiteness theorem for nearby cycles on `𝔸⁰_S`**: the geometric nearby cycles of
 the standard model of `𝔸⁰_S` preserve bounded constructible complexes. The structure map
 `q : 𝔸⁰_S ⟶ S` is an isomorphism, hence a closed embedding with cartesian squares of fibres into
@@ -275,7 +275,7 @@ theorem boundedConstructible_nearbyCycles_affineSpaceModel_zero
     (IsPullback.of_hasPullback q (traitClosedPoint k'))
     (fun hB' ↦ preservesBoundedConstructible_traitSelfModel k' _ hB') hB
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Nearby cycles of a complex supported away from the special fibre vanish**: if the closed
 subscheme `c : D ⟶ 𝔸ⁿ_S` misses the special fibre `𝔸ⁿ_s`, then `Ψ (Rc_* K) = 0` for every bounded
 constructible `K` on `D`. By the proper exchange, `Ψ_{𝔸ⁿ} (Rc_* K) ≅ Rc_{s*} Ψ_D K`, and the
@@ -308,7 +308,7 @@ lemma isZero_nearbyCycles_affineSpace_of_disjoint (n : ℕ) {D : Scheme.{u}}
   exact (R((traitStdSpecialHom q hi c rfl)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
     (isZero_derivedCategory_of_isEmpty' _ _)
 
-omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [Fact (ringChar k').Prime] in
 /-- **Nearby cycles of a complex supported on a closed subscheme embedded in the trait**: if the
 closed subscheme `c : D ⟶ 𝔸ⁿ_S` maps by a closed immersion to the trait `S` (for instance the
 closure of an `S`-integral point of the generic fibre), then `Ψ (Rc_* K)` is bounded constructible

@@ -12,9 +12,9 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 # The lisse sheaf–representation equivalence is a tensor equivalence
 
 The lisse sheaf–representation equivalence (`prop-wf-weil-sheaf-representation-equivalence`,
-subsection `sk-i-real-sheaves`) between lisse Weil sheaves on the curve `C₀` and lisse
-representations of the Weil group `W(C₀)` is the functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, the Weil fundamental
-representation (`def-wf-fundamental-representation`), and it is a tensor equivalence:
+subsection `prop-wf-weil-sheaf-representation-equivalence`) between lisse Weil sheaves on the curve
+`C₀` and lisse representations of the Weil group `W(C₀)` is the functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, the Weil
+fundamental representation (`def-wf-fundamental-representation`), and it is a tensor equivalence:
 
 * the underlying representation of `e ℱ` is, naturally in `ℱ`, the Weil fundamental
   representation `ℱ ↦ (ℱ_t, ρ_ℱ)` on the stalk at the base point
@@ -50,8 +50,9 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
 omit [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] in
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the lisse sheaf–representation equivalence is the tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the lisse sheaf–representation equivalence is the
+tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`.
 
 For a monodromy `M` of lisse sheaves on the geometric curve which is an equivalence at the base
 point `t` of the base point data `B` (`cor-galois-lisse-representations`), there is an
@@ -93,7 +94,7 @@ theorem exists_equivalence_isLisse_tensor_of_lisseMonodromy
     (fun X ↦ fundamentalRep M D X.obj X.property)
     (fun X ↦ fundamentalRep_isContinuousOn D X.obj X.property hM)
     (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) ↦ stalkMap f.hom X.property Y.property)
-    (fun X ↦ stalkMap_id X) (fun f g ↦ stalkMap_comp f g)
+    (fun X ↦ stalkMap_id X.property) (fun f g ↦ stalkMap_comp f.hom g.hom _ _ _)
     (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) w v ↦ stalkMap_fundamentalRep D f.hom _ _ w v)
     (fun f f' h ↦ stalkMap_injective M hM f f' h)
     (fun φ hφ ↦ exists_stalkMap_eq D hM φ hφ)
@@ -157,11 +158,12 @@ theorem exists_equivalence_isLisse_tensor_of_lisseMonodromy
   exact ((TensorProduct.congr (f F) (f G)).apply_symm_apply
     (fundamentalRepTensorEquiv M D F G (f ((LisseWeilSheaf.tensor K l C).obj (F, G)) v))).symm
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-the lisse sheaf–representation equivalence is the tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, for some
-monodromy `M` of lisse sheaves on the geometric curve and some base point data `B`; see
-`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_of_lisseMonodromy` for the
-properties of `e`, `η` and `τ`. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the lisse sheaf–representation equivalence is the
+tensor functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)`, for some monodromy `M` of lisse sheaves on the geometric curve and
+some base point data `B`; see
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_of_lisseMonodromy` for the properties
+of `e`, `η` and `τ`. -/
 theorem exists_equivalence_isLisse_tensor :
     ∃ (M : ProEtale.LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K) (B : BasePointData W)
       (e : LisseWeilSheaf K l C ≌ (W.isLisseRep l).FullSubcategory)

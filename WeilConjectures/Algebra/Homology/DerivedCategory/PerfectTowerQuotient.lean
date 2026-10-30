@@ -20,8 +20,7 @@ intended case being `R = 𝒪_E` and `I = 𝔪_E`). This file specializes the re
 complexes over the tower of local rings `n ↦ R ⧸ Iⁿ⁺¹`: the derived limit of such a tower is
 represented by a bounded complex of finite free `R`-modules and reduces to the levels, compatible
 families of endomorphisms lift to the derived limit, and the trace of a lift is the limit of the
-levelwise traces (blueprint `prop-trf-adic-coefficient-morphism-systems` (2) and (4),
-blueprint `sk-prop-trace-adic` (ii) over the point).
+levelwise traces.
 
 ## Main definitions
 
@@ -101,9 +100,9 @@ lemma exists_isHomotopyLimit_restrict : ∃ c : Cone T.restrict, IsHomotopyLimit
   exists_isHomotopyLimit _
 
 include hϖ hI hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2), Stacks Tag 09AW, over the rings
-`R ⧸ Iⁿ⁺¹`: the derived limit `P = R lim_n Res Q_n` of a normalized tower of perfect complexes
-is represented by a bounded complex of finite free `R`-modules. -/
+/-- Stacks Tag 09AW, over the rings `R ⧸ Iⁿ⁺¹`: the derived limit `P = R lim_n Res Q_n` of a
+normalized tower of perfect complexes is represented by a bounded complex of finite free
+`R`-modules. -/
 theorem exists_iso_Q_obj_of_isAdicComplete :
     ∃ (M : CochainComplex (ModuleCat.{u + 1} R) ℤ) (a b : ℤ), M.IsStrictlyGE a ∧
       M.IsStrictlyLE b ∧ (∀ i, Module.Free R (M.X i) ∧ Module.Finite R (M.X i)) ∧
@@ -113,9 +112,8 @@ theorem exists_iso_Q_obj_of_isAdicComplete :
     Ideal.exists_powSuccMk_eq Ideal.eq_zero_of_forall_powSuccMk_eq_zero hc
 
 include hϖ hI hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2), over the rings `R ⧸ Iⁿ⁺¹`: every
-leg `pr_n : P ⟶ Res Q_n` of the derived limit exhibits `Q_n` as `P ⊗ᴸ_R R ⧸ Iⁿ⁺¹`, i.e. the
-adjoint map `π_n : P ⊗ᴸ_R R ⧸ Iⁿ⁺¹ ⟶ Q_n` is an isomorphism. -/
+/-- Over the rings `R ⧸ Iⁿ⁺¹`: every leg `pr_n : P ⟶ Res Q_n` of the derived limit exhibits `Q_n` as
+`P ⊗ᴸ_R R ⧸ Iⁿ⁺¹`, i.e. the adjoint map `π_n : P ⊗ᴸ_R R ⧸ Iⁿ⁺¹ ⟶ Q_n` is an isomorphism. -/
 theorem isDerivedBaseChange_π_app_of_isAdicComplete (n : ℕ) :
     IsDerivedBaseChange (f := I.powSuccMk n) (c.π.app (op n)) :=
   have := isLocalRing_quotient_pow_succ_of_mem hϖ hI
@@ -123,9 +121,8 @@ theorem isDerivedBaseChange_π_app_of_isAdicComplete (n : ℕ) :
     Ideal.exists_powSuccMk_eq Ideal.eq_zero_of_forall_powSuccMk_eq_zero hc n
 
 include hϖ hI hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2), lifts, over the rings
-`R ⧸ Iⁿ⁺¹`: every compatible family of endomorphisms of the levels lifts to an endomorphism `V`
-of the derived limit, i.e. the isomorphisms `P ⊗ᴸ_R R ⧸ Iⁿ⁺¹ ≅ Q_n` intertwine
+/-- Lifts over the rings `R ⧸ Iⁿ⁺¹`: every compatible family of endomorphisms of the levels lifts to
+an endomorphism `V` of the derived limit, i.e. the isomorphisms `P ⊗ᴸ_R R ⧸ Iⁿ⁺¹ ≅ Q_n` intertwine
 `V ⊗ᴸ R ⧸ Iⁿ⁺¹` with the levelwise endomorphisms. -/
 theorem exists_isLift_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f) :
     ∃ V : c.pt ⟶ c.pt, T.IsLift c f V :=
@@ -146,9 +143,8 @@ attribute [local instance] DerivedCategory.braidedCategory'
 variable [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
 
 include hϖ hI hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace
-`tr_R(V ∣ P)` of a lift `V` of a compatible family `f` reduces modulo `Iⁿ⁺¹` to the traces
-`tr_{R ⧸ Iⁿ⁺¹}(f n ∣ Q_n)`, so that it is the element `(tr(f n ∣ Q_n))_n` of
+/-- The categorical trace `tr_R(V ∣ P)` of a lift `V` of a compatible family `f` reduces modulo
+`Iⁿ⁺¹` to the traces `tr_{R ⧸ Iⁿ⁺¹}(f n ∣ Q_n)`, so that it is the element `(tr(f n ∣ Q_n))_n` of
 `lim_n R ⧸ Iⁿ⁺¹ = R`. -/
 theorem exists_trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n}
     (hf : T.IsCompatible f) {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) :
@@ -163,8 +159,7 @@ theorem exists_trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n}
     Ideal.exists_powSuccMk_eq Ideal.eq_zero_of_forall_powSuccMk_eq_zero hc hf hV
 
 include hϖ hI hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
-of a compatible family does not depend on the lift. -/
+/-- The categorical trace of a lift of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
     {V V' : c.pt ⟶ c.pt} (hV : T.IsLift c f V) (hV' : T.IsLift c f V') :
     MonoidalCategory.trace V = MonoidalCategory.trace V' :=

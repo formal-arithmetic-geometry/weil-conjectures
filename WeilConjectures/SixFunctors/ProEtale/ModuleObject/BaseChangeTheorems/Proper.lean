@@ -7,10 +7,14 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 
 /-!
 
-# The proper base change theorem for constructible `E`- and `ℚ̄_ℓ`-sheaves
+# The proper base change theorem for constructible `𝒪_E`-, `E`- and `ℚ̄_ℓ`-sheaves
 
 Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. Its
 condensed ring is `E̲ = C(-, E)` (`Profinite.continuousMapRingObj E`, of
@@ -35,11 +39,25 @@ holds for the condensed ring `ℚ̲̄_ℓ` of
 (`Profinite.padicAlgClRingObj`), whose sections are continuous maps into finite
 subextensions of `ℚ̄_ℓ`.
 
-The proof reduces to the torsion case, the étale proper base change theorem
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, by writing a constructible
-`𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` and inverting `ℓ`
-(Bhatt–Scholze, Section 6.7); the `ℚ̄_ℓ` case follows by passing to the colimit over the finite
-subextensions `E`. Both are currently `sorry`.
+The same holds for the condensed ring `𝒪̲_E` (`Profinite.padicIntegersRingObj`) of a finite
+extension `E` of `ℚ_ℓ` embedded in `ℚ̄_ℓ`.
+
+All three are deduced from the torsion case, as in the proof of blueprint
+`sk-thm-sbc-coefficients`.
+A bounded constructible `E`-complex is `E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible
+`𝒪_E`-complex `K₀` (`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), and a bounded
+constructible `ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and `K₀`
+(`ProEtale.exists_padicAlgCl_iso_integralModel`). The scalar comparisons identify the base-change
+morphism at these complexes with the extension of scalars of the integral base-change morphism at
+`K₀` (`nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational`,
+`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`). By derived Nakayama, the latter
+is invertible once its first derived reduction `- ⊗ᴸ_{𝒪_E} 𝔽_E` is
+(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). That reduction is the
+pro-étale base-change morphism with coefficients `𝔽_E` at a complex of étale origin
+(`ProEtale.boundedConstructible_derivedReduction_obj`), an isomorphism by finite-level
+pro-étale proper base change (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`), which is
+the étale proper base change theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`
+read on the pro-étale site.
 
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
@@ -48,6 +66,8 @@ morphisms are morphisms of `Over (Spec (.of k))`.
 
 ## Main statements
 
+- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`: proper
+  base change on bounded constructible `𝒪_E`-sheaves.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`: proper base
   change on bounded constructible `E`-sheaves.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`: proper
@@ -72,7 +92,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -80,8 +99,40 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
+constructible `𝒪_E`-sheaves, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of
+schemes
 
-include ℓ k in
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+Y' --g---> Y
+```
+
+with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
+isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. By derived Nakayama it suffices that the
+first derived reduction `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` is invertible
+(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`); this is the pro-étale
+base-change morphism with coefficients `𝔽_E` at a complex of étale origin, invertible by the
+étale proper base change theorem (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
+theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] [IsProper f.left]
+    (sq : IsPullback g' f' f g) :
+    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) := by
+  have hsq : IsPullback g'.left f'.left f.left g.left := sq.map (Over.forget _)
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := isNoetherian_of_locallyOfFiniteType Y'.hom
+  have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
+    inferInstanceAs (Finite (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E)))
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K₀
+  exact isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E sq.toCommSq hsq K₀
+    (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
+      (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
+
 /-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
 constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
 
@@ -95,10 +146,20 @@ Y' --g---> Y
 
 with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
-    (sq : IsPullback g' f' f g) :
-    IsIso (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) :=
-  sorry
+theorem isIso_boundedConstructibleBaseChange_of_isProper (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    [IsProper f.left] (sq : IsPullback g' f' f g) :
+    IsIso (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) := by
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  obtain ⟨K₀, ⟨e⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X.left ℓ E K
+  rw [← NatTrans.isIso_app_iff_of_iso _ e]
+  obtain ⟨α⟩ := nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational ℓ E
+    sq.toCommSq K₀
+  have := isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E.1 sq
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff α).1 (by
+    simp only [MorphismProperty.isomorphisms.iff]
+    infer_instance)
 
 /-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
 constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g` with
@@ -108,7 +169,11 @@ constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPul
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange ℓ sq.toCommSq) :=
-  sorry
+    IsIso (boundedConstructibleBaseChange ℓ sq.toCommSq) := by
+  have hsq : IsPullback g'.left f'.left f.left g.left := sq.map (Over.forget _)
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  exact isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral ℓ _ hsq fun E K₀ ↦
+    have := isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E.1 sq
+    inferInstance
 
 end AlgebraicGeometry.ProEtale.CondensedRing

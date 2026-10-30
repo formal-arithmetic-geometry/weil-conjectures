@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 Every operation of the six-functor formalism is defined on the ambient derived categories
 `D(X_ét, Λ)`; the functors between the small categories `Dctf(X, Λ)` are *restrictions* of the
-ambient ones, and that the restriction exists is a theorem (blueprint `rem-sf-typing-rule`,
-`sk-rem-sf-typing-rule`). This file
+ambient ones, and that the restriction exists is a theorem (blueprint `sk-rem-sf-typing-rule`). This
+file
 
 * proves the general fact behind the typing rule: a functor into an ambient category restricts
   to a full subcategory (closed under isomorphisms) exactly when it carries every object into
@@ -153,7 +153,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [QuasiCompact f]
   [HasCompactification f]
 
-/-- Blueprint `rem-sf-typing-rule`: The typing rule of this section.
+/-- Blueprint `sk-rem-sf-typing-rule`: The typing rule of this section.
 
 Every operation is defined on the ambient derived categories `D(-_ét, Λ)`, and its version on
 the small categories `Dctf(-, Λ)` is its restriction: for an algebraically closed field `k`, a

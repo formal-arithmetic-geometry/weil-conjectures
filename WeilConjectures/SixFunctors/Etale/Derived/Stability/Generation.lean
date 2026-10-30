@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
-public import WeilConjectures.SixFunctors.Etale.Derived.Supports
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Generation of `Dctf`
@@ -247,7 +243,7 @@ theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
         (Functor.PreservesFlat.flat_obj (F := (V.closedComplement)^*[_]) hF))
 
 /-- Blueprint `sk-lem-sf-flat-model`: Flat models and generators, the complement (generation
-over a Noetherian base; formerly `sk-lem-sf-ctf-generation`).
+over a Noetherian base; formerly `sk-lem-sf-flat-model`).
 
 Let `X` be a Noetherian scheme and `Λ` a finite ring. Then `Dctf(X, Λ)` is generated as a
 thick subcategory by the objects `Rg_* Rj_! L`, where `U` is a stratum of a stratification of

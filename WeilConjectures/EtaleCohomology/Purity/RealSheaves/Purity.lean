@@ -9,19 +9,13 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
-public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
-public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
+import Mathlib.LinearAlgebra.DirectSum.Basis
 
 /-!
 # Purity of real lisse Weil sheaves on curves
@@ -48,11 +42,11 @@ lemmas of `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction`).
 
 ## Implementation notes
 
-The arithmetic and geometric monodromy groups of `sk-d-real-monodromy` are the Zariski
+The arithmetic and geometric monodromy groups of `def-wf-geometric-monodromy-group` are the Zariski
 closures of `ρ (W (C₀))` and `ρ (π₁ C)` inside `GL V`. Zariski closures of subgroups of `GL V`
-are owned by the algebraic groups block (`sk-d-monodromy`, `sk-d-central`) and do not exist
+are owned by the algebraic groups block (`d-monodromy`, `d-central`) and do not exist
 here; only the map `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they are closures of
-is recorded, and the positive central Frobenius representative of `sk-d-central` is left to
+is recorded, and the positive central Frobenius representative of `d-central` is left to
 that block.
 
 An `AlgebraicGeometry.WeilGroup p` is presented through the étale fundamental group of the
@@ -113,12 +107,12 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ρ : Representation (PadicAlgCl l) W.carrier V)
 
-/-- Blueprint `sk-d-real-monodromy`: Arithmetic monodromy and a central representative.
+/-- Blueprint `def-wf-geometric-monodromy-group`: Arithmetic monodromy and a central representative.
 
 The Weil representation `ρ` viewed as a homomorphism to the automorphism group of `V`: every
 `ρ g` is invertible because `g` is invertible, so `ρ` factors through `GL V = (V →ₗ V)ˣ`,
 which is multiplicatively equivalent to `V ≃ₗ V`. The arithmetic and geometric monodromy
-groups of `sk-d-monodromy` are the Zariski closures of the images of `W (C₀)` and of `π₁ C`
+groups of `d-monodromy` are the Zariski closures of the images of `W (C₀)` and of `π₁ C`
 under this map. -/
 noncomputable def toLinearAut : W.carrier →* (V ≃ₗ[PadicAlgCl l] V) :=
   (LinearMap.GeneralLinearGroup.generalLinearEquiv (PadicAlgCl l) V).toMonoidHom.comp
@@ -611,7 +605,7 @@ to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
 (`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius`).
 
 The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
-`sk-d-real-setup` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
+`d-real-setup` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
 Euler-product form for middle extensions (`lem-wf-euler-product-middle-extension`), is the
 hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum` (see
 `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). The unconditional, sheaf-level
@@ -680,7 +674,7 @@ determinant weight at most `B + γ`, where `B` is the sum of the determinant wei
 factors counted with rank. The Rankin–Selberg bound (`sk-p-real-rankin`) then bounds every
 local eigenvalue of `E` by `B + γ`. At a closed point `x`, the product of an eigenvalue `β` of
 `Q j` with all eigenvalues of the factors of weight `> γ` is such an eigenvalue
-(`sk-p-linear-spectra`), of weight `wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues
+(`p-linear-spectra`), of weight `wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues
 of `Q j` sum to the weight `rank (Q j) * γ` of its determinant, so all of them equal `γ`. -/
 theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ)

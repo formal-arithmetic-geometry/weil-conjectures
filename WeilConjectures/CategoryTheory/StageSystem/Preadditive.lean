@@ -12,13 +12,12 @@ public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 /-!
 # The pair category of a system of preadditive categories is preadditive
 
-If the categories `C i` of a stage system are preadditive and the transition functors are
-additive, the Hom sets of the pair category, being filtered colimits of abelian groups, are
-abelian groups: addition, zero and negatives are computed after transport to a common stage
-(blueprint `prop-weil-pbc-common-stage-calculus`, "the common-stage operations are
-representative-independent and make `𝒫_T` an additive category"). The stage inclusions and the
-functors induced by additive morphisms of stage systems are additive, and the pair category has a
-zero object as soon as the stages do.
+If the categories `C i` of a stage system are preadditive and the transition functors are additive,
+the Hom sets of the pair category, being filtered colimits of abelian groups, are abelian groups:
+addition, zero and negatives are computed after transport to a common stage, and these common-stage
+operations are independent of the representatives. The stage inclusions and the functors induced by
+additive morphisms of stage systems are additive, and the pair category has a zero object as soon as
+the stages do.
 
 ## Main statements
 
@@ -147,7 +146,7 @@ noncomputable instance (X Y : S.PairCategory) : AddCommGroup (X ⟶ Y) where
   zsmul := zsmulRec
 
 /-- The pair category of a system of preadditive categories with additive transition functors is
-preadditive (blueprint `prop-weil-pbc-common-stage-calculus`). -/
+preadditive. -/
 noncomputable instance preadditive : Preadditive S.PairCategory where
   add_comp X Y Z f f' g := by
     obtain ⟨n, -, hX, hY, -, -, u, -, rfl, -⟩ := exists_common_stage f f X.stage

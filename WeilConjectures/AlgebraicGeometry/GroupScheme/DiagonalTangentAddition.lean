@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficie
 # Addition of tangent maps on the dual-number diagonal
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `sk-d-tangent`, the dual-number description.
+pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
 -/
 
 @[expose] public section

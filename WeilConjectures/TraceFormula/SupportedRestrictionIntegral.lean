@@ -5,7 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.SupportedRestrictionRational
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
+public import WeilConjectures.TraceFormula.SupportedRestrictionE
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-!
 
@@ -70,8 +76,6 @@ noncomputable def supportedRestrictionIntegral
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
     (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoIntegral E).inv)).natTrans.app P
 
-set_option maxRecDepth 8000 in
--- matching the coefficient compatibility unfolds the concrete coefficient rings
 /-- **The supported restriction under `𝒪_E ⟶ E`**: the extension of scalars `T` of the
 `𝒪_E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback
 comparison for `Δ`, is the pullback comparison for `ι`, then `Lι^*` of the `f^!`-exchange for `c`,
@@ -86,7 +90,16 @@ theorem map_supportedRestrictionIntegral_comp
         (boundedConstructibleUpperStar _ ℓ F.ι).map
           ((boundedConstructibleUpperShriekExtendScalars ℓ E c.support).app P) ≫
         F.supportedRestrictionE E ((boundedConstructibleExtendScalars (X ⨯ X).left ℓ E).obj P) := by
-  have h := Adjunction.map_mateEquiv_app_comp
+  -- The compatibility is stated for the named base changes; matching it against `σ.hom.app M`
+  -- (or matching the composite against `h` at default transparency) makes the elaborator unfold
+  -- the full-subcategory compositions, so pass `σ.hom = s` and compare reducibly.
+  have e : (F.lowerShriekBaseChangeIsoIntegral E).hom =
+      boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback :=
+    @asIso_hom _ _ _ _ _
+      (isIso_boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E.1 F.isPullback)
+  have e' : (F.lowerShriekBaseChangeIsoE E).hom =
+      boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E F.isPullback := asIso_hom _
+  have h := Adjunction.map_mateEquiv_app_comp_of_hom_eq
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 c.support)
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E.1 F.d)
     (boundedConstructibleUpperStar _ ℓ F.ι) (boundedConstructibleUpperStar _ ℓ (diag X))
@@ -103,9 +116,12 @@ theorem map_supportedRestrictionIntegral_comp
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E c.support)
     (boundedConstructibleLowerShriekExtendScalarsIso ℓ E F.d)
     (boundedConstructibleUpperStarExtendScalarsIso ℓ E F.ι)
-    (boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X))
-    (boundedConstructibleLowerShriekBaseChange_extendScalars ℓ E F.isPullback) P
-  exact h
+    (boundedConstructibleUpperStarExtendScalarsIso ℓ E (diag X)) e e'
+    (by with_reducible
+      exact boundedConstructibleLowerShriekBaseChange_extendScalars ℓ E F.isPullback) P
+  unfold supportedRestrictionIntegral supportedRestrictionE
+    boundedConstructibleUpperShriekExtendScalars
+  with_reducible exact h
 
 /-- **Transport of the vanishing of the supported restriction from `𝒪_E` to `E`**: if the stalk
 along `z : T ⟶ Fix(c)` of the extension of scalars to `E` of the `𝒪_E`-supported restriction of

@@ -29,9 +29,7 @@ When the `A n` are local and `R` is complete and separated for the tower, the de
 `P = R lim_n Q n` of this tower is represented by a bounded complex of finite free
 `R`-modules and reduces to the levels, `P ⊗ᴸ_R A n ≅ Q n` (Stacks, Tag 09AW). A compatible
 family of endomorphisms `f n` of the `Q n` lifts to an endomorphism `V` of `P`, and the
-categorical trace of any lift reduces to the traces of the `f n`. This is items (2) and (4) of
-blueprint `prop-trf-adic-coefficient-morphism-systems`, and the realization over a point of
-blueprint `sk-prop-trace-adic` (ii).
+categorical trace of any lift reduces to the traces of the `f n`.
 
 ## Main definitions
 
@@ -86,11 +84,10 @@ variable {R : Type u} [CommRing R] {A : ℕ → Type u} [∀ n, CommRing (A n)]
   {π : ∀ n, R →+* A n} {ρ : ∀ n, A (n + 1) →+* A n}
 
 variable (π ρ) in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems`: a *normalized tower of perfect
-complexes* over the tower of rings `A n` (with `π n : R →+* A n` and transitions
-`ρ n : A (n + 1) →+* A n`, `ρ n ∘ π (n + 1) = π n`) is a family of perfect complexes
-`Q n ∈ D(A n)` together with maps `Q (n + 1) ⟶ Res Q n` exhibiting `Q n` as the derived base
-change `Q (n + 1) ⊗ᴸ_{A (n + 1)} A n`. -/
+/-- A *normalized tower of perfect complexes* over the tower of rings `A n` (with `π n : R →+* A n`
+and transitions `ρ n : A (n + 1) →+* A n`, `ρ n ∘ π (n + 1) = π n`) is a family of perfect complexes
+`Q n ∈ D(A n)` together with maps `Q (n + 1) ⟶ Res Q n` exhibiting `Q n` as the derived base change
+`Q (n + 1) ⊗ᴸ_{A (n + 1)} A n`. -/
 structure NormalizedPerfectTower (hρ : ∀ n, π n = (ρ n).comp (π (n + 1))) where
   /-- The level `Q n ∈ D(A n)`. -/
   obj (n : ℕ) : DerivedCategory (ModuleCat.{u} (A n))
@@ -286,8 +283,7 @@ lemma MatrixModel.r_eq_zero (m : T.MatrixModel c) {i : ℤ} (hi : i ∉ Finset.I
   · exact m.r_hi i hi
 
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems`: a normalized tower and a homotopy
-limit cone over it admit a matrix model. -/
+/-- A normalized tower and a homotopy limit cone over it admit a matrix model. -/
 theorem nonempty_matrixModel : Nonempty (T.MatrixModel c) := by
   obtain ⟨r, lo, hi, M₀, hlo, hhi, hM₀, ⟨e₀⟩⟩ :=
     MatrixComplex.exists_iso_Q_obj_of_isPerfect (T.isPerfect 0)
@@ -393,9 +389,8 @@ lemma MatrixModel.Q_map_mapHom_comp (m : T.MatrixModel c) {f : ∀ n, T.obj n �
 
 
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2), Stacks Tag 09AW: the derived
-limit `P = R lim_n Res Q n` of a normalized tower of perfect complexes is represented by a
-bounded complex of finite free `R`-modules. -/
+/-- Stacks Tag 09AW: the derived limit `P = R lim_n Res Q n` of a normalized tower of perfect
+complexes is represented by a bounded complex of finite free `R`-modules. -/
 theorem exists_iso_Q_obj_of_isHomotopyLimit :
     ∃ (M : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ), M.IsStrictlyGE a ∧ M.IsStrictlyLE b ∧
       (∀ i, Module.Free R (M.X i) ∧ Module.Finite R (M.X i)) ∧
@@ -412,9 +407,8 @@ theorem isPerfect_pt : c.pt.IsPerfect := by
   exact ⟨M, a, b, ha, hb, fun i ↦ ⟨haveI := (hM i).1; Module.Projective.of_free, (hM i).2⟩, ⟨e⟩⟩
 
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2): every leg `pr_n : P ⟶ Res Q n`
-of the derived limit exhibits `Q n` as `P ⊗ᴸ_R A n`, i.e. the adjoint map
-`π_n : P ⊗ᴸ_R A n ⟶ Q n` is an isomorphism. -/
+/-- Every leg `pr_n : P ⟶ Res Q n` of the derived limit exhibits `Q n` as `P ⊗ᴸ_R A n`, i.e. the
+adjoint map `π_n : P ⊗ᴸ_R A n ⟶ Q n` is an isomorphism. -/
 theorem isDerivedBaseChange_π_app (n : ℕ) :
     IsDerivedBaseChange (f := π n) (c.π.app (op n)) := by
   obtain ⟨m⟩ := T.nonempty_matrixModel hπ hker hcomplete hsep hc
@@ -425,8 +419,8 @@ theorem isDerivedBaseChange_π_app (n : ℕ) :
   simpa only [Iso.symm_hom, Category.assoc] using h
 
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2): every compatible family of
-endomorphisms of the levels lifts to an endomorphism of the derived limit. -/
+/-- Every compatible family of endomorphisms of the levels lifts to an endomorphism of the derived
+limit. -/
 theorem exists_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f) :
     ∃ V : c.pt ⟶ c.pt, T.IsLift c f V := by
   obtain ⟨m⟩ := T.nonempty_matrixModel hπ hker hcomplete hsep hc
@@ -513,9 +507,9 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
 -- The compatibility `hf` of the blueprint statement is not needed.
 set_option linter.unusedVariables false in
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
-`V` of a compatible family `f` reduces to the traces of the `f n`: there is `r : R` with
-`tr_R(V ∣ P) = r` and `tr_{A n}(f n ∣ Q n) = r mod ϖⁿ⁺¹` for all `n`. -/
+/-- The categorical trace of a lift `V` of a compatible family `f` reduces to the traces of the
+`f n`: there is `r : R` with `tr_R(V ∣ P) = r` and `tr_{A n}(f n ∣ Q n) = r mod ϖⁿ⁺¹` for all `n`.
+-/
 theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
     {V : c.pt ⟶ c.pt} (hV : T.IsLift c f V) :
     ∃ r : R,
@@ -532,8 +526,7 @@ theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCom
 set_option linter.unusedVariables false in
 set_option linter.unusedSectionVars false in
 include hπ hker hcomplete hsep hc in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
-of a compatible family does not depend on the lift. -/
+/-- The categorical trace of a lift of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
     {V V' : c.pt ⟶ c.pt} (hV : T.IsLift c f V) (hV' : T.IsLift c f V') :
     MonoidalCategory.trace V = MonoidalCategory.trace V' := by

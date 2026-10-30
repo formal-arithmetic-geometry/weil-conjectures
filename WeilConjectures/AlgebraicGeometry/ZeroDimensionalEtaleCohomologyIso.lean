@@ -23,7 +23,7 @@ namespace AlgebraicGeometry
 /-- The canonical degree-zero comparison followed by the product of the chosen
 geometric stalk germs is invertible.
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03QO, 03SI and 03Q1.
 (blueprint: zero-dimensional-etale-cohomology-iso).

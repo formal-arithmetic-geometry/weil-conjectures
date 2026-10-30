@@ -224,7 +224,7 @@ variable {X Y : Scheme.{u}}
 
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism, i.e. `f` is *compactifiable*, such a factorization
-being a `Compactification f`. This is blueprint `def-asd-compactifiable`. -/
+being a `Compactification f`. This is blueprint `def-nagata-compactifiable`. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
   /-- Some compactification of `f` exists. -/
   nonempty_compactification : Nonempty (Compactification f)

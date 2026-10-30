@@ -7,8 +7,10 @@ module
 
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
-public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
+import WeilConjectures.Compactification.Defs
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # The Serre pairing on projective space
@@ -774,7 +776,7 @@ variable (A) in
 class of `H⁰` is a global section of `𝒪(D)` (`H.zeroLinearEquiv`), which is the section of a
 unique homogeneous polynomial of degree `D` (`homogeneousSubmoduleLinearEquivTwist`).
 
-(blueprint: `lem-pc-projective-space-twist-cohomology` (i), `sk-thm-picard-pn`) -/
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i), `det-thm-picard-pn`) -/
 def twistHZeroLinearEquiv [Nonempty n] (D : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) D) 0
     (twist n (Spec (.of A)) D).H 0 ≃ₗ[A] MvPolynomial.homogeneousSubmodule n A D :=

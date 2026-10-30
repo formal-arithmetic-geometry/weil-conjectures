@@ -39,7 +39,7 @@ namespace FiniteField
 
 variable (K L : Type*) [Field K] [Fintype K] [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
 
-/-- Blueprint `sk-d-ab-field`: Finite fields, Frobenius and abelian varieties.
+/-- Blueprint `d-ab-field`: Finite fields, Frobenius and abelian varieties.
 
 Fix a finite field `K` with `q` elements and an algebraic extension `L`. The *arithmetic
 Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`.

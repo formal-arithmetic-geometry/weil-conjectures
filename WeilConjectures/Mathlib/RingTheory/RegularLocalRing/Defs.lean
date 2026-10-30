@@ -49,7 +49,7 @@ they are open and closed, and they are the connected components.
 
 ## Blueprint
 
-- `sk-i-geometry`: regular local rings are domains.
+- `det-i-geometry`: regular local rings are domains.
 - `lem-sc-regular-local-domain`: regular local rings are domains.
 - `lem-wf-smooth-components-disjoint`: irreducible components of a smooth variety do not meet.
 -/
@@ -211,7 +211,7 @@ theorem IsRegularLocalRing.isDomain_of_spanFinrank_eq :
     have hbot : (⊥ : Ideal R).IsPrime := this ▸ hp'.1.1
     exact IsDomain.of_bot_isPrime R
 
-/-- A regular local ring is an integral domain. (blueprint: `sk-i-geometry`,
+/-- A regular local ring is an integral domain. (blueprint: `det-i-geometry`,
 `lem-sc-regular-local-domain`) -/
 instance IsRegularLocalRing.isDomain (R : Type*) [CommRing R] [IsRegularLocalRing R] :
     IsDomain R :=

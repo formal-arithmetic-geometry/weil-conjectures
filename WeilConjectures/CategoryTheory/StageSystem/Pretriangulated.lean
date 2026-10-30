@@ -17,18 +17,16 @@ triangulated (they commute with the shift and preserve distinguished triangles) 
 associators are compatible with the shifts. The pair category `S.PairCategory` carries the shift
 of `CategoryTheory.StageSystem.PairCategory.hasShift`, and a triangle of `S.PairCategory` is
 *distinguished* if it is isomorphic to the image under a stage inclusion `ι i` of a distinguished
-triangle of the stage `i` (blueprint `def-weil-pbc-common-stage-cones`).
+triangle of the stage `i`.
 
-These data make the pair category pretriangulated (blueprint `thm-weil-pbc-verdier-axioms`);
-the stage inclusions `ι i` are triangulated functors and the identifications
-`T_{j/i} ⋙ ι j ≅ ι i` commute with the shifts. The proofs of the axioms reduce, by transport to a
-common stage, to the corresponding axioms at a finite stage.
+These data make the pair category pretriangulated; the stage inclusions `ι i` are triangulated
+functors and the identifications `T_{j/i} ⋙ ι j ≅ ι i` commute with the shifts. The proofs of the
+axioms reduce, by transport to a common stage, to the corresponding axioms at a finite stage.
 
 The *common-stage cone triangle* `CategoryTheory.StageSystem.PairCategory.coneTriangle` of a
 representative `u` at a stage `n` of a morphism `f` and of a distinguished triangle on `u` is
 distinguished, and the cone triangles of two representatives of the same morphism are isomorphic
-by an isomorphism whose first two components are identities
-(blueprint `prop-weil-pbc-cone-independence`).
+by an isomorphism whose first two components are identities.
 
 ## Main definitions
 
@@ -62,9 +60,8 @@ instance (n : ℤ) : (shiftFunctor S.PairCategory n).Additive :=
 instance [Nonempty I] : HasZeroObject S.PairCategory := hasZeroObject
 
 variable (S) in
-/-- The distinguished triangles of the pair category (blueprint
-`def-weil-pbc-common-stage-cones`): the triangles which are isomorphic to the image under a stage
-inclusion `ι i` of a distinguished triangle of the stage `i`. -/
+/-- The distinguished triangles of the pair category: the triangles which are isomorphic to the
+image under a stage inclusion `ι i` of a distinguished triangle of the stage `i`. -/
 def distinguishedTriangles : Set (Triangle S.PairCategory) :=
   fun T ↦ ∃ (i : I) (τ : Triangle (C i)), τ ∈ distTriang (C i) ∧
     Nonempty (T ≅ (S.ι i).mapTriangle.obj τ)
@@ -98,11 +95,10 @@ lemma contractible_distinguished [Nonempty I] (X : S.PairCategory) :
   · exact (isZero_zero _).eq_of_src _ _
 
 variable (S) in
-/-- The *common-stage cone triangle* (blueprint `def-weil-pbc-common-stage-cones`): for a
-morphism of the pair category represented by `u : T x ⟶ T y` at a stage `n` and a triangle
-`u, v, w` of the stage `n`, the triangle `X ⟶ Y ⟶ (n, Z) ⟶ X⟦1⟧` of the pair category with first
-arrow represented by `u`, second arrow represented by `v` and third arrow represented by `w`
-followed by the shift comparison. -/
+/-- The *common-stage cone triangle*: for a morphism of the pair category represented by
+`u : T x ⟶ T y` at a stage `n` and a triangle `u, v, w` of the stage `n`, the triangle
+`X ⟶ Y ⟶ (n, Z) ⟶ X⟦1⟧` of the pair category with first arrow represented by `u`, second arrow
+represented by `v` and third arrow represented by `w` followed by the shift comparison. -/
 noncomputable def coneTriangle {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n)
     (hY : Y.stage ≤ n) (u : X.toStage hX ⟶ Y.toStage hY) {Z : C n} (v : Y.toStage hY ⟶ Z)
     (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧) : Triangle S.PairCategory :=
@@ -200,10 +196,10 @@ lemma complete_distinguished_triangle_morphism (T₁ T₂ : Triangle S.PairCateg
 
 variable [Nonempty I]
 
-/-- Blueprint `thm-weil-pbc-verdier-axioms` (the axioms TR1–TR3): the pair category of a stage
-system of pretriangulated categories with triangulated transition functors is pretriangulated,
-for the shift of `CategoryTheory.StageSystem.PairCategory.hasShift` and the triangles isomorphic
-to images of distinguished triangles of a single stage. -/
+/-- The axioms TR1–TR3: the pair category of a stage system of pretriangulated categories with
+triangulated transition functors is pretriangulated, for the shift of
+`CategoryTheory.StageSystem.PairCategory.hasShift` and the triangles isomorphic to images of
+distinguished triangles of a single stage. -/
 noncomputable instance pretriangulated : Pretriangulated S.PairCategory where
   distinguishedTriangles := distinguishedTriangles S
   isomorphic_distinguished := isomorphic_distinguished
@@ -219,8 +215,8 @@ lemma mem_distTriang_iff (T : Triangle S.PairCategory) :
 omit [IsDirectedOrder I] [Nonempty I]
   [∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ] in
 /-- The transport along `n ≤ p` of a distinguished triangle on a representative `u` at the stage
-`n` is a distinguished triangle on the transported representative `u_p` (blueprint
-`prop-weil-pbc-cone-independence`, scalar extension of cone triangles). -/
+`n` is a distinguished triangle on the transported representative `u_p` (scalar extension of
+cone triangles). -/
 lemma tr_triangle_mem_distTriang {X Y : S.PairCategory} {n p : I} (hX : X.stage ≤ n)
     (hY : Y.stage ≤ n) (h : n ≤ p) (u : X.toStage hX ⟶ Y.toStage hY) {Z : C n}
     (v : Y.toStage hY ⟶ Z) (w : Z ⟶ (X.toStage hX)⟦(1 : ℤ)⟧)
@@ -238,12 +234,12 @@ lemma tr_triangle_mem_distTriang {X Y : S.PairCategory} {n p : I} (hX : X.stage 
   · simp
   · simp [← Functor.map_comp]
 
-/-- Blueprint `prop-weil-pbc-cone-independence`: Compatibility and independence of common-stage
-cones. Let `T` be a triangle of the pair category whose first morphism is represented by `u` at
-a stage `n`, and let `u, v, w` be a distinguished triangle of the stage `n`. Then `T` is
-distinguished if and only if it is isomorphic to the common-stage cone triangle of `u, v, w` by an
-isomorphism whose first two components are identities. In particular distinguishedness does not
-depend on the representative, the stage or the cone chosen. -/
+/-- Compatibility and independence of common-stage cones. Let `T` be a triangle of the pair category
+whose first morphism is represented by `u` at a stage `n`, and let `u, v, w` be a distinguished
+triangle of the stage `n`. Then `T` is distinguished if and only if it is isomorphic to the
+common-stage cone triangle of `u, v, w` by an isomorphism whose first two components are identities.
+In particular distinguishedness does not depend on the representative, the stage or the cone chosen.
+-/
 theorem mem_distTriang_iff_exists_iso_coneTriangle (T : Triangle S.PairCategory) {n : I}
     (hX : T.obj₁.stage ≤ n) (hY : T.obj₂.stage ≤ n) (u : T.obj₁.toStage hX ⟶ T.obj₂.toStage hY)
     (hu : T.mor₁ = mkHom n hX hY u) {Z : C n} (v : T.obj₂.toStage hY ⟶ Z)
@@ -260,8 +256,7 @@ theorem mem_distTriang_iff_exists_iso_coneTriangle (T : Triangle S.PairCategory)
     exact isomorphic_distinguished _ (coneTriangle_mem_distinguishedTriangles hX hY u v w hT) _ e
 
 /-- Two common-stage cone triangles of representatives of the same morphism are isomorphic by an
-isomorphism whose first two components are identities (blueprint
-`prop-weil-pbc-cone-independence`). -/
+isomorphism whose first two components are identities. -/
 lemma exists_iso_coneTriangle {X Y : S.PairCategory} {n n' : I} {hX : X.stage ≤ n}
     {hY : Y.stage ≤ n} {hX' : X.stage ≤ n'} {hY' : Y.stage ≤ n'}
     (u : X.toStage hX ⟶ Y.toStage hY) (u' : X.toStage hX' ⟶ Y.toStage hY')

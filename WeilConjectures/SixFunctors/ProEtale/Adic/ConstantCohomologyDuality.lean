@@ -25,7 +25,7 @@ The ingredients are: finite generation of `Hⁿ(S, ℤ_ℓ)` and the Bockstein s
 `Hⁿ(S, ℚ̄_ℓ) = ℚ̄_ℓ ⊗ Hⁿ(S, ℤ_ℓ)`
 (`AlgebraicGeometry.ProEtale.isBaseChange_integralToAdicConstantH`)
 and the linear algebra of `LinearMap.exists_isPerfPair_of_finiteLevel`. This is the transport
-step of blueprint `thm-pod-qbar-coefficient-pairing` (`sk-thm-transport`), for the constant
+step of blueprint `thm-pod-derived-poincare-duality` (`sk-thm-transport`), for the constant
 coefficient sheaf.
 -/
 

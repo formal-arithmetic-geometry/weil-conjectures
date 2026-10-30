@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
 /-!
 # The ambient exceptional adjoint restricts to the constructible one
@@ -14,7 +15,7 @@ Blueprint `sk-def-sf-admissible` distinguishes the ambient exceptional right adj
 of a separated finite-type `f : X ⟶ Y` from the stronger admissibility datum (1)–(3), and
 observes that when (1)–(3) hold, the restriction to `Dctf` of a right adjoint `Rf^×` of
 `Rf_!` on the unbounded pro-étale derived categories coincides, by uniqueness of adjoints, with
-the constructible exceptional inverse image `Rf^!` of `sk-def-sf-operations` (vi)
+the constructible exceptional inverse image `Rf^!` of `det-def-sf-operations` (vi)
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
 
 The uniqueness is that of representing objects: for a bounded below `L` with `Rf^× L` bounded
@@ -119,7 +120,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- Blueprint `sk-def-sf-admissible`: under the admissibility datum (1)–(3), the restriction of
 every right adjoint `Rf^×` of `Rf_!` to `Dctf(Y, Λ)`, for a finite coefficient ring `Λ`, is the
-constructible exceptional inverse image `Rf^!` of `sk-def-sf-operations` (vi), by uniqueness of
+constructible exceptional inverse image `Rf^!` of `det-def-sf-operations` (vi), by uniqueness of
 adjoints: clause (3) puts `Rf^× L` in `Dctf(X, Λ)`, which consists of objects bounded below of
 étale origin, and there `Rf^×` and `Rf^!` represent the same functor
 (`AlgebraicGeometry.ProEtale.rightAdjointObjIsoRightDerivedUpperShriekObj`). -/

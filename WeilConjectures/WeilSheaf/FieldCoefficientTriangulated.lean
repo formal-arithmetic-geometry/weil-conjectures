@@ -23,8 +23,7 @@ constraints `G ⊗_F (F ⊗_E -) ≅ G ⊗_E -` commute with the shifts. Hence t
 (`CategoryTheory.StageSystem.PairCategory.pretriangulated`,
 `CategoryTheory.StageSystem.PairCategory.isTriangulated`), the distinguished triangles being the
 triangles isomorphic to images of distinguished triangles at a finite stage, and its canonical
-functor into its Karoubi envelope is an exact equivalence (blueprint
-`lem-weil-weil-complex-qbar-idempotent-complete`).
+functor into its Karoubi envelope is an exact equivalence.
 -/
 
 @[expose] public section
@@ -167,8 +166,7 @@ example (E : FiniteIntermediateField l) :
     ((FieldWeilComplex.stageSystem (l := l) k₀ X).ι E).IsTriangulated :=
   inferInstance
 
-/-- Blueprint `lem-weil-weil-complex-qbar-idempotent-complete`: Idempotent completeness of the
-common-stage Weil category.
+/-- Idempotent completeness of the common-stage Weil category.
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` (`AlgebraicGeometry.WeilComplexTwoColimit`) is
 idempotent complete, and the canonical functor into its Karoubi envelope is an exact

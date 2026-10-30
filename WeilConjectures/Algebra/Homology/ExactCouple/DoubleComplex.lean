@@ -287,7 +287,7 @@ noncomputable def firstSpectralSequencePageTwoIso (p q : ℕ) :
 /-- The first spectral sequence of a first quadrant double complex `K` abuts to the cohomology
 of the total complex of `K`, with the filtration induced by the column filtration.
 
-(blueprint: `thm-sp-double-complex-spectral-sequences`, `sk-def-groth-ss`) -/
+(blueprint: `thm-sp-double-complex-spectral-sequences`, `det-def-groth-ss`) -/
 lemma firstSpectralSequence_abutsTo :
     K.firstSpectralSequence.AbutsTo fun n ↦ (K.total (up ℕ)).homology n :=
   (K.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence_abutsTo
@@ -313,7 +313,7 @@ filtration of `Hⁿ(Tot K)` induced by the column filtration of the total comple
 pieces are the `E∞`-terms. Its filtration is described by
 `firstSpectralSequenceAbutment_filtration`.
 
-(blueprint: `sk-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
+(blueprint: `det-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
 noncomputable def firstSpectralSequenceAbutment :
     K.firstSpectralSequence.Abutment fun n ↦ (K.total (up ℕ)).homology n :=
   (K.extendNat.columnFiltration.exactCouple.firstQuadrantAbutment
@@ -328,7 +328,7 @@ noncomputable def firstSpectralSequenceAbutment :
 on the extension by zero `K.extendNat`, whose total cohomology in degree `n ≥ 0` is identified
 with that of `K` by `totalExtendNatHomologyIso`).
 
-(blueprint: `sk-def-groth-ss`) -/
+(blueprint: `det-def-groth-ss`) -/
 lemma firstSpectralSequenceAbutment_filtration (n p : ℕ) :
     K.firstSpectralSequenceAbutment.filtration n p =
       imageSubobject (HomologicalComplex.homologyMap
@@ -340,7 +340,7 @@ lemma firstSpectralSequenceAbutment_filtration (n p : ℕ) :
 filtration, transported along `Tot K.flip ≅ Tot K`. Its filtration is described by
 `flipFirstSpectralSequenceAbutment_filtration`.
 
-(blueprint: `sk-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
+(blueprint: `det-def-groth-ss`, `thm-sp-double-complex-spectral-sequences`) -/
 noncomputable def flipFirstSpectralSequenceAbutment :
     K.flip.firstSpectralSequence.Abutment fun n ↦ (K.total (up ℕ)).homology n :=
   K.flip.firstSpectralSequenceAbutment.ofIso fun n ↦
@@ -349,7 +349,7 @@ noncomputable def flipFirstSpectralSequenceAbutment :
 /-- The filtration of the abutment of the second spectral sequence is the image filtration
 `Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K.flip) ⟶ Hⁿ(Tot K.flip) ≅ Hⁿ(Tot K))` of the row filtration.
 
-(blueprint: `sk-def-groth-ss`) -/
+(blueprint: `det-def-groth-ss`) -/
 lemma flipFirstSpectralSequenceAbutment_filtration (n p : ℕ) :
     K.flipFirstSpectralSequenceAbutment.filtration n p =
       imageSubobject (HomologicalComplex.homologyMap

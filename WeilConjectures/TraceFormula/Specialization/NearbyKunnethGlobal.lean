@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.Tactic.ExactModProofs
 
@@ -16,8 +18,8 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 # Gabber's Künneth formula for nearby cycles: global sections
 
-Let `M`, `N` be models of finite type over the strictly henselian trait `S = Spec k'⟦t⟧`
-(`k'` separably closed) along proper structure morphisms `q_M`, `q_N`, and let `P` be their
+Let `M`, `N` be models of finite type over the henselian trait `S = Spec k'⟦t⟧`
+over an arbitrary field `k'` along proper structure morphisms `q_M`, `q_N`, and let `P` be their
 product over the trait. This file proves the global-sections step (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4)) of Illusie's proof of Gabber's Künneth
 formula: the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
@@ -58,6 +60,7 @@ with `exact_mod_proofs`, which identifies these proofs by casts.
 
 @[expose] public section
 
+
 universe u
 
 open CategoryTheory Limits MonoidalCategory
@@ -67,41 +70,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-! ### The ordinary Künneth formula over a separably closed field -/
-
-section OrdinaryKunneth
-
-variable {ℓ : ℕ} [Fact ℓ.Prime] {K : Type u} [Field K] [IsSepClosed K]
-  [Fact (ringChar K).Prime]
-  [Fact (ringChar K ≠ ℓ)] {X Y P : Over (Spec (.of K))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-
-/-- **The ordinary Künneth formula over a separably closed field** (blueprint
-`sk-lem-sf-kunneth-star`, for `f_i : X_i ⟶ Y_i = Spec K`; SGA 4½, [Th. finitude], Cor. 1.11;
-for the `ℓ`-adic coefficient rings by passage to the limit, Bhatt–Scholze §6.8): for
-separated `K`-schemes of finite type `X`, `Y` with product `P = X ×_K Y` and bounded
-constructible `A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)`
-(`ProEtale.CondensedRing.lowerStarKunnethMap'` of the two squares over `Spec K`) is an
-isomorphism. The blueprint node is stated over `k = 𝔽̄_q`; over a separably closed field it
-applies since passing to an algebraic closure does not change the étale topoi (blueprint
-`sk-prop-tf-nearby-external-kunneth`). -/
-theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left) (p₂ : P.left ⟶ Y.left)
-    (w₁ : p₁ ≫ X.hom = P.hom ≫ 𝟙 _) (w₂ : p₂ ≫ Y.hom = P.hom ≫ 𝟙 _)
-    (h : IsPullback p₁ p₂ X.hom Y.hom)
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) A)
-    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)))
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
-    IsIso (lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ)
-      (⟨w₁⟩ : CommSq p₁ P.hom X.hom (𝟙 _)) (⟨w₂⟩ : CommSq p₂ P.hom Y.hom (𝟙 _)) A B) :=
-  sorry
-
-end OrdinaryKunneth
 
 namespace NearbyCyclesModel
 
@@ -122,6 +90,14 @@ noncomputable def traitGenericModel :
   j := traitGenericPoint k'
   i := traitClosedPoint k'
   ε := 𝟙 _
+
+/-- The trait is a model of finite type over itself as a model of its geometric generic point. -/
+theorem isTraitModel_traitGenericModel :
+    (traitGenericModel k').IsTraitModel (X' := Over.mk (𝟙 (Spec (.of k')))) := by
+  have : IsIso (Over.mk (𝟙 (Spec (.of k')))).hom := inferInstanceAs (IsIso (𝟙 _))
+  exact ⟨⟨𝟙 _, 𝟙 _, inferInstance, inferInstance, inferInstance,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩⟩⟩
 
 variable {k'}
 
@@ -229,15 +205,17 @@ end Product
 
 section Exchange
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
-  [Fact (ringChar k' ≠ ℓ)] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)] {X : Scheme.{u}}
+  {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
+set_option maxHeartbeats 1000000 in
+-- the pushforward exchange of the model of the geometric generic fibre is slow to unify
 /-- **The proper exchange for the structure morphism** (blueprint
 `det-sp-nearby-cycles-exchanges` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
-XIII (2.1.7.1)): for a model `M` of finite type over the strictly henselian trait along a proper
-`q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
+XIII (2.1.7.1)): for a model `M` of finite type over the henselian trait `Spec k'⟦t⟧` along a
+proper `q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
 `χ : Ψ_S Rg_* (Lj^* C₀) ⟶ R(q_s)_* Ψ_M (Lj^* C₀)` of the structure morphism
 `(q, g) : M ⟶ S` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`) is an isomorphism. Here
 `Lj^* C₀` is the pullback to the geometric generic fibre of the complex `C₀|_{𝒳_η}` on the
@@ -256,8 +234,16 @@ theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)))
     (hC₀ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C₀) :
     IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
-        (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) :=
-  sorry
+        (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) := by
+  have : IsProper h.toTraitGeneric.total := ‹IsProper q›
+  have : IsProper g := MorphismProperty.of_isPullback h.isPullback_j ‹IsProper q›
+  have : IsIso (traitGenericModel k').ε :=
+    inferInstanceAs (IsIso (𝟙 (Spec (.of (traitGenericField k')))))
+  exact h.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper
+    (traitGenericPoint k' ≫ traitToBase k' k') ⟨_, ⟨h.isTraitModel.exists_isPullback⟩⟩
+    ⟨𝟙 _, isTraitModel_traitGenericModel k'⟩
+    h.isPullback_i (IsPullback.of_horiz_isIso ⟨rfl⟩)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.j C₀ hC₀)
 
 end Exchange
 
@@ -296,6 +282,8 @@ lemma nonempty_upperStar_obj_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T 
 variable {X Y Z X' Y' Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
+set_option maxHeartbeats 400000 in
+-- the monoidal structure of the derived categories of module objects is slow to unify
 /-- If the identifications `ε` of `M` and `N` factor through the total spaces, the external
 product `Lφ₁^* Lε_M^* A ⊗ Lφ₂^* Lε_N^* B` on the geometric generic fibre of `P` is the pullback
 `Lj_P^* C₀` of a bounded constructible complex `C₀` on the total space of `P`, provided bounded
@@ -440,7 +428,7 @@ end TraitGenericField
 
 section Global
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
@@ -454,8 +442,8 @@ set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): let `P` be the product over the strictly henselian trait of models
-`M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections are
+locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧` of
+models `M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections are
 compatible with the structure morphisms `g` of the geometric generic fibres to `Spec Ω`. For
 bounded constructible `A`, `B` (whose nearby cycles are bounded constructible, Deligne's
 finiteness theorem), the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles
@@ -547,10 +535,14 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
           boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
             (C ⊗ D) := by
-    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal := isMonoidal_boundedConstructible
-      (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
-    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+    have := hP.locallyOfFiniteType
+    have := hP.quasiCompact
+    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
+    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
+    have : IsNoetherian P.total := {}
+    exact fun C D hC hD ↦
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges

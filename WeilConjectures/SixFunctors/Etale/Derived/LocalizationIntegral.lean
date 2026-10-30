@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoi
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 
 /-!
 # The closed-support triangle on `Dᵇc(-, 𝒪_E)`
@@ -485,8 +486,7 @@ include hϖ hI in
 schemes of finite type over `k`: the image of the derived completion cone of `L` under `Rf^!` is
 a homotopy limit of the tower `n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, whose point lies in `Dᵇc(X, Λ)` by the
 construction of the integral exceptional adjoint
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`, blueprint
-`prop-coef-integral-exceptional-adjoint`). -/
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`). -/
 theorem boundedConstructibleIntegral_rightDerivedUpperShriek
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]

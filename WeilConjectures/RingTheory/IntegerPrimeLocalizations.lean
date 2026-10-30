@@ -40,7 +40,7 @@ Proof:
    rational primes. Each is maximal, and zero is strictly below it, giving dimension one
    and the Dedekind conclusion. The fraction field is the usual rational field.
 3. At zero all nonzero integers are inverted, giving the canonical `ℤ`-algebra identification
-   with `ℚ`. At a nonzero prime, `lem-weil-pbc-localization-prime-residue-field-iso` gives
+   with `ℚ`. At a nonzero prime, the prime correspondence for localizations gives
    exactly the zero and maximal primes; `def-weil-pbc-localization-at-prime` identifies the
    maximal ideal with the extension of the original prime. These primes form a strict
    inclusion, since the localization is a domain and the image of `p` is nonzero.

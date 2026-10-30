@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.IntegralModelPointStalk
 public import WeilConjectures.TraceFormula.CurveLocal.ReductionTransfer
 public import WeilConjectures.TraceFormula.PointFiberFunctorIntegralPerfect
 public import WeilConjectures.TraceFormula.SupportedRestrictionIntegral
+public import WeilConjectures.TraceFormula.SupportedRestrictionRational
 
 /-!
 
@@ -231,25 +232,19 @@ theorem upperStar_map_supportedRestriction_frobeniusGraph_eq_zero [IsAlgClosed k
       (z ≫ F.ι)).obj K)) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).map
     (F.supportedRestriction (externalProduct ℓ K (verdierDual ℓ K))) = 0 := by
-  have hM := exists_integralModel_isZero_upperStar K (z ≫ F.ι) hK
-  have h0 := pointIntegralSupportedRestriction_hom_eq_zero hΦ hm v F z hM.choose
-    hM.choose_spec.choose
-    (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ hM.choose.1 (toPoint X)
-        hM.choose_spec.choose)
-    hM.choose_spec.choose_spec.2
+  obtain ⟨E, M, ⟨e⟩, hM⟩ := exists_integralModel_isZero_upperStar K (z ≫ F.ι) hK
+  have h0 := pointIntegralSupportedRestriction_hom_eq_zero hΦ hm v F z E M
+    (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 (toPoint X) M) hM
   have hT := boundedConstructibleIntegersToPadicAlgCl_map_eq_zero ℓ k
-    ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ hM.choose.1) ℓ z).map
-      (F.supportedRestrictionIntegral hM.choose
-        (PadicIntegersRingObj.boundedConstructibleExternalProduct ℓ hM.choose.1
-            hM.choose_spec.choose
-          (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ hM.choose.1 (toPoint X)
-              hM.choose_spec.choose)))) h0
+    ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ z).map
+      (F.supportedRestrictionIntegral E
+        (PadicIntegersRingObj.boundedConstructibleExternalProduct ℓ E.1 M
+          (PadicIntegersRingObj.boundedConstructibleVerdierDual ℓ E.1 (toPoint X) M)))) h0
   have hz := NatIso.map_eq_zero_of_map_eq_zero
-    (boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ hM.choose z) hT
+    (boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E z) hT
   exact F.upperStar_map_supportedRestriction_eq_zero_of_iso z
-    (boundedConstructibleIntegersToPadicAlgClExternalProductVerdierDualIso ℓ hM.choose
-      hM.choose_spec.choose_spec.1.some)
-    (F.upperStar_map_supportedRestriction_eq_zero_of_integersToPadicAlgCl hM.choose z _ hz)
+    (boundedConstructibleIntegersToPadicAlgClExternalProductVerdierDualIso ℓ E e)
+    (F.upperStar_map_supportedRestriction_eq_zero_of_integersToPadicAlgCl E z _ hz)
 
 end Correspondence
 

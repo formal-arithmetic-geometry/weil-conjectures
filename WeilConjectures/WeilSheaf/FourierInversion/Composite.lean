@@ -34,8 +34,8 @@ theorem nonempty_iso_fourierKernel_artinSchreierOf (ψ : AddChar k₀ (PadicAlgC
     Nonempty (fourierKernel ψ ≅ artinSchreierOf ψ
       ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
         (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit))) := by
-  rw [fourierKernel, artinSchreierOf_eq]
-  exact ⟨(WeilSheaf.upperStarCongr affinePlane.mul_eq_homOfSection).app _⟩
+  rw [artinSchreierOf_eq]
+  exact ⟨fourierKernelIso ψ ≪≫ (WeilSheaf.upperStarCongr affinePlane.mul_eq_homOfSection).app _⟩
 
 /-- The Fourier kernels for `ψ` and `ψ⁻¹` pulled back to the triple product `𝔸³` with points
 `(x, ξ, y)` multiply to `ℒ_ψ((x - y) ξ)`: tensoring with `r₁₂^* μ^* ℒ_ψ` and then with
@@ -111,9 +111,8 @@ theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_sub
     (isLisse_artinSchreierOf ψ _)
   exact ⟨Functor.isoWhiskerRight eT₁ _ ≪≫ Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT⟩
 
-/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
-`sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
-`(x, ξ, y)`,
+/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`, without
+forming the convolution kernel). On `𝔸³` with points `(x, ξ, y)`,
 
 `FT_{ψ⁻¹} FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x - y) ξ) ⊗ r₁^* K)[1][1]`
 

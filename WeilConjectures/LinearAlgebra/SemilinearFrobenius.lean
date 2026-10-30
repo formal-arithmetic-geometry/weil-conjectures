@@ -54,7 +54,7 @@ surjective on `V ⧸ W` by induction. Surjectivity on `W` and on `V ⧸ W` gives
 
 Rather than equipping the fixed points with a `Module (ZMod p)` structure — which is not
 available by instance search for a bare `k`-vector space — the dimension bound of
-`sk-prop-av-fixed-points` is stated in the equivalent cardinality form
+`lem-sc-fixed-points-finite` is stated in the equivalent cardinality form
 `Nat.card (fixedPoints F) ≤ p ^ Module.finrank k V`.
 
 The `𝔽_p`-structure on the fixed points is realised by the prime subfield `⊥ : Subfield k`,
@@ -63,7 +63,7 @@ whose elements are exactly the `x` with `x ^ p = x`: the fixed points form the
 `LinearMap.Frobenius.linearIndependent_of_mem_fixedPoints` shows that `⊥`-linearly independent
 fixed points are `k`-linearly independent, which bounds the `⊥`-dimension by `dim_k V`.
 
-The base change of `sk-prop-av-fixed-base-change` is written as `k' ⊗[k] V` (rather than
+The base change of `lem-sc-frobenius-fixed-invariance` is written as `k' ⊗[k] V` (rather than
 `V ⊗[k] k'`), since that is the side on which Mathlib provides the `k'`-module structure. The
 base-changed map `F'` is taken as a hypothesis rather than constructed;
 `LinearMap.Frobenius.existsUnique_baseChange` records that exactly one such map exists, so that
@@ -258,7 +258,7 @@ theorem finrank_fixedPointsSubmodule_le [FiniteDimensional k V] (F : V →ₚ[k,
     Module.finrank (⊥ : Subfield k) (fixedPointsSubmodule F) ≤ Module.finrank k V :=
   Module.finrank_le_of_rank_le (rank_fixedPointsSubmodule_le F)
 
-/-- Blueprint `sk-prop-av-fixed-points`: Fixed points of `p`-linear maps are finite.
+/-- Blueprint `lem-sc-fixed-points-finite`: Fixed points of `p`-linear maps are finite.
 
 Let `k` be a field of characteristic `p > 0`, let `V` be a finite-dimensional `k`-vector space
 and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. Then the fixed points of `F` form a finite
@@ -270,7 +270,7 @@ instance finite_fixedPoints [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
   have := Module.finite_of_finite (⊥ : Subfield k) (M := fixedPointsSubmodule F)
   .of_equiv _ (fixedPointsEquivSubmodule F).symm
 
-/-- Blueprint `sk-prop-av-fixed-points`: Fixed points of `p`-linear maps are finite.
+/-- Blueprint `lem-sc-fixed-points-finite`: Fixed points of `p`-linear maps are finite.
 
 The `𝔽_p`-subspace of fixed points of a `p`-linear endomorphism `F` of a finite-dimensional
 `k`-vector space `V` has `𝔽_p`-dimension at most `Module.finrank k V`; equivalently, it has at
@@ -357,7 +357,7 @@ theorem exists_submodule_sub_id_surjOn [IsAlgClosed k] [FiniteDimensional k V]
     obtain ⟨x, hx⟩ := exists_sub_id_eq_of_iterate_eq F v a c ha.symm
     exact ⟨_, hS.mpr ⟨x, rfl⟩, hx⟩
 
-/-- Blueprint `sk-prop-av-lang-steinberg`: Lang–Steinberg for `p`-linear maps.
+/-- Blueprint `lem-sc-lang-steinberg`: Lang–Steinberg for `p`-linear maps.
 
 Let `k` be an algebraically closed field of characteristic `p > 0`, let `V` be a
 finite-dimensional `k`-vector space and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. Then
@@ -390,7 +390,7 @@ variable {k' : Type*} [Field k'] [CharP k' p] [Algebra k k']
 
 /-- A `p`-linear endomorphism `F` of `V` has exactly one `p`-linear extension to the base change
 `k' ⊗[k] V`, namely `a ⊗ₜ v ↦ a ^ p ⊗ₜ F v`. This is the map `F' = F ⊗ σ_{k'}` of blueprint
-`sk-prop-av-fixed-base-change`. -/
+`lem-sc-frobenius-fixed-invariance`. -/
 theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
     ∃! F' : (k' ⊗[k] V) →ₚ[k', p] (k' ⊗[k] V), ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v := by
   let f : k' →+ V →+ k' ⊗[k] V :=
@@ -418,7 +418,7 @@ theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
       simp [hG, TensorProduct.smul_tmul', _root_.frobenius_def]
     | add x y hx hy => simp only [map_add, hx, hy]
 
-/-- Blueprint `sk-prop-av-fixed-base-change` (proved as `lem-sc-frobenius-fixed-invariance`):
+/-- Blueprint `lem-sc-frobenius-fixed-invariance` (proved as `lem-sc-frobenius-fixed-invariance`):
 Fixed points are unchanged by algebraically closed base change.
 
 Let `k ⊆ k'` be an extension of algebraically closed fields of characteristic `p > 0`, let `V`

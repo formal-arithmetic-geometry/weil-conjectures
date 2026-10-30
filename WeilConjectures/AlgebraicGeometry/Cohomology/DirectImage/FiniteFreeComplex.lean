@@ -5,19 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFiniteExtension
-public import WeilConjectures.AlgebraicGeometry.CohomologyFiniteExtensionExtension
-public import WeilConjectures.AlgebraicGeometry.FiniteFreePullbackResidueCriterion
-public import WeilConjectures.AlgebraicGeometry.FiniteFreeResidueLocusOpen
-public import WeilConjectures.AlgebraicGeometry.FinitePresentationIntegralFiltration
 public import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeShortening
-public import WeilConjectures.AlgebraicGeometry.IntegralIdealProperCohomology
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
-
-
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
@@ -86,7 +77,7 @@ a nonzero `v ∈ V`. The sequence `0 ⟶ 𝒪_E ⊗_k V ⟶ ℒ ⟶ 𝒪_E ⟶ 0
 `k ⟶ H¹(E, 𝒪_E) ⊗_k V` sending `1` to `v`, so `f_* ℒ` corresponds to the module `V`, which is
 killed by `V` and infinite-dimensional over `k`, hence not of finite type over `k ⊕ V`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
@@ -198,7 +189,7 @@ general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV�
 Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
 Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
 
-(blueprint: `sk-thm-picard-coherence`) 
+(blueprint: `det-thm-picard-coherence`) 
 (blueprint: lem-pc-universal-finite-free-complex)
 -/
 theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFinitePresentation f]

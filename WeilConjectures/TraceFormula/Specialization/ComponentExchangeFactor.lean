@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
-public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnSeparatedBdc
 
 /-!
 

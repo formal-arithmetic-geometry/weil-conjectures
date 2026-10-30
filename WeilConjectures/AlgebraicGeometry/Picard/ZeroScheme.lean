@@ -8,13 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
-public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
-public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
+import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolutionDerived
 
 /-!
 # The zero-scheme dictionary and the representability of `F`
@@ -82,7 +81,7 @@ the category of `𝒪`-modules on a scheme is Grothendieck abelian
   morphism is a relative effective Cartier divisor, finite locally free of degree `g` (blueprint
   `lem-pc-zero-scheme-recd`).
 - `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf`: the zero-scheme
-  dictionary (blueprint `sk-lem-picard-zero-dictionary`);
+  dictionary (blueprint `det-lem-picard-zero-dictionary`);
   `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection`
   states it with the zero scheme `Z(s)` of the adjoint section.
 - `AlgebraicGeometry.comap_zeroLocus_directImageCounit`: the dictionary is natural in `T`.
@@ -400,7 +399,7 @@ adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` is the genus `g` of `X`.
 This is the degree computation of the blueprint proof of `lem-pc-zero-scheme-recd`: the rank
 at `t` is `dim_{κ(t)} Γ(D_t, 𝒪_{D_t}) = deg D_t = deg 𝒪(D_t)`, and `ℒ_t ≅ 𝒪(D_t) ⊗ f_t^* 𝒩_t`
 with `f_t^* 𝒩_t` pulled back from the point `Spec κ(t)`, hence of degree `0`. Finally
-`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` as in `sk-cor-picard-degree-g`: the fibre
+`deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t}) = 1 - (1 - g) = g` as in `det-cor-picard-degree-g`: the fibre
 cohomology of `ℒ ∈ F(T)` is `h⁰(ℒ_t) = 1`, `h^q(ℒ_t) = 0` for `q > 0` (cohomology and base
 change, `Modules.range_subset_setOf_hFiber_eq_iff`), and `χ(𝒪_{X_t}) = χ(𝒪_X) = 1 - g` by
 invariance of the fibre Euler characteristic under base change and Riemann–Roch. -/
@@ -554,7 +553,7 @@ i.e. the section `s` of `ℒ ⊗ f_T^* 𝒩^{-1}` of the blueprint. Then the zer
 and `D ⟶ T` is flat) which is finite locally free of degree `g` over `T`: it lies in the
 Hilbert functor `Hilb^g_{X/k}(T)`.
 
-(blueprint: `lem-pc-zero-scheme-recd`, `sk-lem-picard-zero-dictionary`) -/
+(blueprint: `lem-pc-zero-scheme-recd`, `det-lem-picard-zero-dictionary`) -/
 theorem isInvertible_zeroLocus_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -579,7 +578,7 @@ as: the zero scheme `Z(s)` of the adjunction morphism is the closed subscheme of
 the Hilbert functor `Hilb^g_{X/k}(T)`, and it is moreover an effective Cartier centre in `X_T`
 (`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`).
 
-(blueprint: `sk-lem-picard-zero-dictionary`) -/
+(blueprint: `det-lem-picard-zero-dictionary`) -/
 theorem exists_isEffectiveCartierCenter_hilbertPresheaf
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -604,7 +603,7 @@ on `X_T/T`, finite locally free of degree `g` over `T`, and an effective Cartier
 (`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`), to which
 `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf` applies.
 
-(blueprint: `sk-lem-picard-zero-dictionary`, `lem-pc-zero-scheme-recd`) -/
+(blueprint: `det-lem-picard-zero-dictionary`, `lem-pc-zero-scheme-recd`) -/
 theorem exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

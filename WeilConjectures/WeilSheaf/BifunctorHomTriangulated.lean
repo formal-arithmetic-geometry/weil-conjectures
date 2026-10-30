@@ -26,7 +26,7 @@ is identified with the image of the standard triangle of `φ`
 (`CochainComplex.bifunctorHomMappingConeTriangleIso`).
 
 This is used for the exactness of the Verdier dual of Weil complexes (blueprint
-`thm-coef-qbar-verdier`).
+`det-pd-biduality-coefficients`).
 -/
 
 @[expose] public section

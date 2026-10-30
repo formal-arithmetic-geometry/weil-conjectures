@@ -8,23 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.RingTheory.Etale.Field
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
-public import WeilConjectures.WeilSheaf.LisseLocus
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
-public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
-public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
-public import WeilConjectures.WeilSheaf.ConstantTwistWeight
-public import WeilConjectures.WeilSheaf.LowerStarId
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineGeometricallyIrreducible
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Weight bounds for direct images from an open of the relative affine line
@@ -180,7 +168,7 @@ with those of the compactly supported cohomology of the fibre: with `d = [κ(y) 
 
 `det (1 - T^d F_y ∣ (Rⁱh₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
 
-(blueprint: `lem-zl-relative-curve-punctual`, `thm-cbc-qbar`). -/
+(blueprint: `lem-zl-relative-curve-punctual`). -/
 theorem exists_fiber_charpolyRev_higherLowerShriek (hfib : ∀ y, IsAffine (h.fiber y))
     (y : Y.finitePoints) :
     haveI := SmoothOfRelativeDimension.smooth 1 h

@@ -9,6 +9,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.StalkExact
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Triangle
 
@@ -17,9 +18,9 @@ public import WeilConjectures.WeilSheaf.Triangle
 
 For a separated `k₀`-scheme `X` of finite type, the compactly supported cohomology `H_c^r(X, F)`
 of a Weil sheaf is `H_c^0` of the higher direct image `Rʳf₀!F` to `Spec k₀`, and for a separated
-quasi-finite morphism `f : X ⟶ Y` it is `H_c^r(Y, f₀!F)`. We also record that exact sequences of
-Weil sheaves give exact sequences of stalks, so that punctual upper weight bounds pass to the
-middle term of an exact sequence.
+quasi-finite morphism `f : X ⟶ Y` it is `H_c^r(Y, f₀!F)`. Exact sequences of Weil sheaves
+give exact sequences of stalks (`AlgebraicGeometry.WeilSheaf.range_stalkAtMap_eq_ker`), so that
+punctual upper weight bounds pass to the middle term of an exact sequence.
 
 ## Main statements
 
@@ -43,32 +44,6 @@ namespace WeilSheaf
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- The stalk functor of Weil sheaves at a geometric point preserves homology: it preserves
-finite limits and epimorphisms. -/
-instance preservesHomology_stalkFunctor
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    (stalkFunctor k₀ l s).PreservesHomology := by
-  have : PreservesFiniteLimits (C := WeilSheaf k₀ l X) (WeilSheaf.objectProperty k₀ l X).ι :=
-    inferInstance
-  have : PreservesFiniteLimits (stalkFunctor k₀ l s) := by
-    unfold stalkFunctor sheafFunctor
-    infer_instance
-  exact Functor.preservesHomology_of_preservesEpis_and_kernels _
-
-/-- The stalks of an exact sequence of Weil sheaves form an exact sequence. -/
-theorem range_stalkAtMap_eq_ker {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    LinearMap.range (stalkAtMap s m hs S.f) = LinearMap.ker (stalkAtMap s m hs S.g) := by
-  have h := (hS.map (stalkFunctor k₀ l s))
-  rw [ShortComplex.moduleCat_exact_iff] at h
-  refine le_antisymm ?_ fun y hy ↦ ?_
-  · rintro _ ⟨x, rfl⟩
-    rw [LinearMap.mem_ker, ← stalkAtMap_comp, S.zero, stalkAtMap_zero]
-  · obtain ⟨x, hx⟩ := h y hy
-    exact ⟨x, hx⟩
 
 variable {ι}
 

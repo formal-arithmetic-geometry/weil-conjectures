@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Idempotents.Karoubi
 # Triangulated categories with a bounded t-structure are idempotent complete
 
 Let `C` be a triangulated category with a bounded t-structure `t`. We show that every idempotent
-of `C` splits, so that the canonical fully faithful functor `C ⥤ Karoubi C` is an equivalence
-(blueprint `thm-weil-karoubian-bounded-t`).
+of `C` splits, so that the canonical fully faithful functor `C ⥤ Karoubi C` is an equivalence.
 
 The proof is by induction on the amplitude of an object `X` carrying an idempotent `p`. In
 amplitude zero, `X` is a shift of an object of the heart, which is abelian and hence idempotent
@@ -164,8 +163,8 @@ lemma isSplit_of_isGE_of_isLE (n : ℕ) :
     · exact t.isSplit_of_isLE_of_isGE (X := (t.truncGE (a + n + 1)).obj X) (a + n + 1)
         (by rw [← Functor.map_comp, hp])
 
-/-- Blueprint `thm-weil-karoubian-bounded-t`: a triangulated category with a bounded t-structure
-is idempotent complete, i.e. every idempotent splits. -/
+/-- A triangulated category with a bounded t-structure is idempotent complete, i.e. every idempotent
+splits. -/
 theorem isIdempotentComplete_of_bounded (ht : ∀ X : C, t.bounded X) : IsIdempotentComplete C := by
   rw [isIdempotentComplete_iff_isSplit]
   intro X p hp
@@ -173,8 +172,8 @@ theorem isIdempotentComplete_of_bounded (ht : ∀ X : C, t.bounded X) : IsIdempo
   have : t.IsLE X (a + ((b - a).toNat : ℕ)) := t.isLE_of_le X b _ (by lia)
   exact t.isSplit_of_isGE_of_isLE (b - a).toNat X a p hp
 
-/-- Blueprint `thm-weil-karoubian-bounded-t`: for a triangulated category with a bounded
-t-structure, the canonical fully faithful functor into the Karoubi envelope is an equivalence. -/
+/-- For a triangulated category with a bounded t-structure, the canonical fully faithful functor
+into the Karoubi envelope is an equivalence. -/
 theorem isEquivalence_toKaroubi_of_bounded (ht : ∀ X : C, t.bounded X) :
     (toKaroubi C).IsEquivalence := by
   have := t.isIdempotentComplete_of_bounded ht

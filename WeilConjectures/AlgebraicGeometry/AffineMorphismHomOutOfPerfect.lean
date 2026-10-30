@@ -8,10 +8,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorComparison
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
+import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-!
 # Affine base change for global Hom out of a perfect complex

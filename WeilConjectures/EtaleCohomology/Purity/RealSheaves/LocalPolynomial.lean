@@ -97,7 +97,7 @@ theorem localPolynomial_stalk_eq_charpolyRev_of_equiv
 
 variable (W l)
 
-/-- Blueprint `p-real-operations` (subsection `sk-p-real-operations`): Local Frobenius polynomials
+/-- Blueprint `p-real-operations` (subsection `p-real-operations`): Local Frobenius polynomials
 of the operations.
 
 Under the lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` of

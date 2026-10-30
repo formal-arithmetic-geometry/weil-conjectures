@@ -23,9 +23,8 @@ separated morphism `f : X ⟶ Y` of separated schemes of finite type over `k`.
 
 * `𝒪_E`: the integral `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`
   (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`) is the derived inverse limit
-  `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages. By blueprint
-  `prop-coef-integral-exceptional-adjoint`
-  (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) this is the
+  `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages. By
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint` this is the
   restriction of the exceptional inverse image `Rf^!` of `D(-_ét, Λ)`, which carries
   `Dᵇc(Y, 𝒪_E)` into `Dᵇc(X, 𝒪_E)`
   (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`). Its
@@ -117,9 +116,8 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
 variable (I) in
 /-- Blueprint `def-weil-exceptional-inverse-image` (at the integral stage `𝒪_E`): the
 exceptional inverse image `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`. The blueprint defines it as the
-derived inverse limit `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages; by blueprint
-`prop-coef-integral-exceptional-adjoint`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) this is the
+derived inverse limit `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages; by
+`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint` this is the
 restriction of the exceptional inverse image `Rf^!` of `D(-_ét, Λ)`, which carries
 `Dᵇc(Y, 𝒪_E)` into `Dᵇc(X, 𝒪_E)`
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`). It is
@@ -135,7 +133,7 @@ noncomputable abbrev boundedConstructibleIntegralUpperShriek :
 /-- Blueprint `def-weil-exceptional-inverse-image` (at the integral stage `𝒪_E`, the
 characterizing adjunction): for `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the
 `Λ`-linear bijection `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, the adjunction `Rf_! ⊣ Rf^!` on
-constructible complexes of blueprint `prop-coef-integral-exceptional-adjoint`. -/
+constructible complexes. -/
 noncomputable def boundedConstructibleIntegralUpperShriekHomEquiv
     (K : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
     (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory) :
@@ -182,7 +180,7 @@ inverse image `Rf^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)`, the rationalization of the i
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`). It is characterized by the
 adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`
 (`AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriekHomEquiv`), the rationalization
-of the integral one, as in blueprint `lem-coef-rational-operations`. -/
+of the integral one. -/
 noncomputable abbrev boundedConstructibleRationalUpperShriek : 𝐃ᵇc(Y) ⥤ 𝐃ᵇc(X) :=
   Rationalization.map M (boundedConstructibleIntegralUpperShriek I aX aY f hf)
 

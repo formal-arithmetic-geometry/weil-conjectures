@@ -13,13 +13,13 @@ public import WeilConjectures.SixFunctors.ClosedImmersionStages
 /-!
 # The rational coefficient stage `Dᵇc(X, E)`
 
-This file formalises item (iii) of blueprint proposition `sk-prop-trace-adic`, *rationalization
-and coefficient-field extension*: `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` has the same objects as the
-integral category and morphisms `Hom_{𝒪_E}(-, -) ⊗_{𝒪_E} E`; it is idempotent complete, so that
-the canonical functor to its Karoubi envelope is an equivalence; `𝒪_E`-linear triangulated
-functors and natural transformations between integral categories transport to the rational ones;
-every object of `Dᵇc(X, E)` is the rationalization of an integral object (a lattice), and every
-morphism is `ϖ⁻ᴺ u` for an integral morphism `u`.
+This file formalises *rationalization and coefficient-field extension*:
+`Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` has the same objects as the integral category and morphisms
+`Hom_{𝒪_E}(-, -) ⊗_{𝒪_E} E`; it is idempotent complete, so that the canonical functor to its Karoubi
+envelope is an equivalence; `𝒪_E`-linear triangulated functors and natural transformations between
+integral categories transport to the rational ones; every object of `Dᵇc(X, E)` is the
+rationalization of an integral object (a lattice), and every morphism is `ϖ⁻ᴺ u` for an integral
+morphism `u`.
 
 ## Modelling choices
 
@@ -42,8 +42,7 @@ morphism is `ϖ⁻ᴺ u` for an integral morphism `u`.
   rationalization (`CategoryTheory.Rationalization.tensorHomEquiv`,
   `CategoryTheory.Rationalization.exists_eq_inv_pow_smul_map`), using that `𝒪_E` is a discrete
   valuation ring (`PadicAlgCl.isDiscreteValuationRing_integers`).
-* Idempotent completeness is blueprint `lem-weil-rationalization-idempotent-complete`, which
-  belongs to another part of the blueprint and is only stated here
+* Idempotent completeness belongs to another part of the blueprint and is only stated here
   (`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`).
   The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
   with the Karoubi envelope is stated as an equivalence of categories.
@@ -111,9 +110,8 @@ namespace Etale.DerivedCategory
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `sk-prop-trace-adic` (iii), morphisms: the morphisms of `Dᵇc(X, E)` between the
-rationalizations of two objects `L`, `L'` of `Dᵇc(X, 𝒪_E)` are `Hom(L, L') ⊗_{𝒪_E} E`, through
-`a ⊗ f ↦ a • f`. -/
+/-- Morphisms: the morphisms of `Dᵇc(X, E)` between the rationalizations of two objects `L`, `L'` of
+`Dᵇc(X, 𝒪_E)` are `Hom(L, L') ⊗_{𝒪_E} E`, through `a ⊗ f ↦ a • f`. -/
 noncomputable def boundedConstructibleRationalHomEquiv
     (L L' : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E) :
     E ⊗[Shrink.{u + 1} (PadicAlgCl.integers l E)] (L ⟶ L') ≃ₗ[E]
@@ -121,7 +119,7 @@ noncomputable def boundedConstructibleRationalHomEquiv
         (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L') :=
   Rationalization.tensorHomEquiv _ E L L'
 
-/-- Blueprint `sk-prop-trace-adic` (iii), morphisms: the identification of
+/-- Morphisms: the identification of
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv` sends `a ⊗ f` to
 `a • f`. -/
 @[simp]
@@ -132,8 +130,7 @@ lemma boundedConstructibleRationalHomEquiv_tmul
       a • (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map f :=
   Rationalization.tensorHomEquiv_tmul _ E a f
 
-/-- Blueprint `sk-prop-trace-adic` (iii), objects: the rationalization of an object of
-`Dᵇc(X, 𝒪_E)` is an object of `Dᵇc(X, E)`. -/
+/-- Objects: the rationalization of an object of `Dᵇc(X, 𝒪_E)` is an object of `Dᵇc(X, E)`. -/
 lemma boundedConstructibleRational_obj
     {L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E}
     (hL : boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X
@@ -142,8 +139,8 @@ lemma boundedConstructibleRational_obj
       ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L) :=
   ⟨L, hL, ⟨Iso.refl _⟩⟩
 
-/-- Blueprint `sk-prop-trace-adic` (iii), descent of objects: every object of `Dᵇc(X, E)` is the
-rationalization of an object of `Dᵇc(X, 𝒪_E)` (a lattice). -/
+/-- Descent of objects: every object of `Dᵇc(X, E)` is the rationalization of an object of
+`Dᵇc(X, 𝒪_E)` (a lattice). -/
 theorem exists_iso_of_boundedConstructibleRational
     (K : (boundedConstructibleRational l E X).FullSubcategory) :
     ∃ L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E,
@@ -152,9 +149,9 @@ theorem exists_iso_of_boundedConstructibleRational
       Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K.obj) :=
   K.property
 
-/-- Blueprint `sk-prop-trace-adic` (iii), clearing denominators: for a uniformizer `ϖ` of
-`𝒪_E`, every morphism `φ : K ⟶ K'` of `Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral morphism
-`u : L ⟶ L'` between lattices `L`, `L'` of `K`, `K'` in `Dᵇc(X, 𝒪_E)`. -/
+/-- Clearing denominators: for a uniformizer `ϖ` of `𝒪_E`, every morphism `φ : K ⟶ K'` of
+`Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral morphism `u : L ⟶ L'` between lattices `L`, `L'` of `K`, `K'`
+in `Dᵇc(X, 𝒪_E)`. -/
 theorem boundedConstructibleRational_exists_eq_inv_pow_smul
     {ϖ : Shrink.{u + 1} (PadicAlgCl.integers l E)} (hϖ : Irreducible ϖ)
     {K K' : (boundedConstructibleRational l E X).FullSubcategory} (φ : K ⟶ K') :
@@ -198,11 +195,10 @@ private lemma eq_pow_smul_of_inv_pow_smul {A V : Type*} [Field A] [AddCommGroup 
   simp only [smul_smul, ← mul_pow, mul_inv_cancel₀ ha, one_pow] at h'
   simpa [← mul_assoc, ← mul_pow, mul_inv_cancel₀ ha] using h'
 
-/-- **The lattice lemma** (`lem-weil-rationalization-idempotent-complete`, the non-formal
-input). Let `L ∈ Dᵇc(X, 𝒪_E)` and `u : L ⟶ L` with `u ≫ u = ϖᴺ • u`, so that `ϖ⁻ᴺ u` is an
-idempotent of the rationalization of `L`. Then there is another lattice `L'` of the
-rationalization of `L` in `Dᵇc(X, 𝒪_E)` on which this idempotent is integral: an idempotent
-`ε` of `L'` corresponding to `ϖ⁻ᴺ u`.
+/-- **The lattice lemma** (the non-formal input to idempotent completeness). Let `L ∈ Dᵇc(X, 𝒪_E)`
+and `u : L ⟶ L` with `u ≫ u = ϖᴺ • u`, so that `ϖ⁻ᴺ u` is an idempotent of the rationalization of
+`L`. Then there is another lattice `L'` of the rationalization of `L` in `Dᵇc(X, 𝒪_E)` on which this
+idempotent is integral: an idempotent `ε` of `L'` corresponding to `ϖ⁻ᴺ u`.
 
 In the theory of `ℓ`-adic sheaves this follows from the existence of the rationalized standard
 `t`-structure on `Dᵇc(X, E)` (Ekedahl): the image of `ϖ⁻ᴺ u` has a lattice, and so does its
@@ -223,8 +219,7 @@ theorem exists_boundedConstructibleIntegral_idempotent
           (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map u) :=
   sorry
 
-/-- Blueprint `lem-weil-rationalization-idempotent-complete`: the rationalization
-`Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete.
+/-- The rationalization `Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete.
 
 An idempotent `p` of `K ∈ Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral `u` on a lattice `L` of `K`, and
 after multiplying `u` by a power of `ϖ`, `u ≫ u = ϖᴺ • u` holds integrally. By the lattice lemma
@@ -289,20 +284,19 @@ theorem isIdempotentComplete_boundedConstructibleRational :
     rw [reassoc_of% this]
     simp
 
-/-- Blueprint `sk-prop-trace-adic` (iii), idempotent completeness: `Dᵇc(X, E)` is idempotent
-complete (blueprint `lem-weil-rationalization-idempotent-complete`), so that the canonical
-functor to its Karoubi envelope
-`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleRational` is an equivalence. -/
+/-- Idempotent completeness: `Dᵇc(X, E)` is idempotent complete, so that the canonical functor to
+its Karoubi envelope `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleRational` is an
+equivalence. -/
 theorem isEquivalence_toKaroubi_boundedConstructibleRational :
     (Idempotents.toKaroubi (boundedConstructibleRational l E X).FullSubcategory).IsEquivalence :=
   have := isIdempotentComplete_boundedConstructibleRational l E X
   Rationalization.isEquivalence_toKaroubi _
 
-/-- Blueprint `sk-prop-trace-adic` (iii), transport of functors and natural transformations:
-an `𝒪_E`-linear triangulated functor `F` between derived complete integral categories induces an
-`E`-linear functor `Rationalization.map _ F` between the rational categories, and a natural
-transformation `τ : F ⟶ G` induces a natural transformation between the induced functors,
-compatible with `τ` on rationalizations of integral objects. -/
+/-- Transport of functors and natural transformations: an `𝒪_E`-linear triangulated functor `F`
+between derived complete integral categories induces an `E`-linear functor `Rationalization.map _ F`
+between the rational categories, and a natural transformation `τ : F ⟶ G` induces a natural
+transformation between the induced functors, compatible with `τ` on rationalizations of integral
+objects. -/
 theorem rationalization_transport {Y : Scheme.{u}}
     {F G : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E}

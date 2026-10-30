@@ -47,11 +47,35 @@ noncomputable def unitShiftAddEquivExt (X : Scheme.{u}) (n : ℕ) :
       simp [Iso.homCongr_apply]).trans
     (Ext.homAddEquiv (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm
 
+-- The unfoldings of `unitShiftAddEquivExt` and `unitShiftAddEquivH` are separate declarations,
+-- stated pointwise: the kernel then compares their bodies (whose instance proofs are abstracted
+-- into auxiliary lemmas) with the elaborated statement once, at a moderate memory cost.
+private lemma unitShiftAddEquivExt_apply (n : ℕ)
+    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
+    unitShiftAddEquivExt Λ X n x =
+      ((AddEquiv.mk' ((unitIsoSingleFunctorConstantSheaf Λ X).homCongr
+        ((shiftFunctor _ (n : ℤ)).mapIso (unitIsoSingleFunctorConstantSheaf Λ X))) fun f g ↦ by
+          simp [Iso.homCongr_apply]).trans
+        (Ext.homAddEquiv (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm) x :=
+  rfl
+
 lemma unitShiftAddEquivExt_hom (n : ℕ)
     (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
     (unitShiftAddEquivExt Λ X n x).hom = (unitIsoSingleFunctorConstantSheaf Λ X).inv ≫ x ≫
-      (unitIsoSingleFunctorConstantSheaf Λ X).hom⟦(n : ℤ)⟧' :=
-  Ext.homAddEquiv.apply_symm_apply _
+      (unitIsoSingleFunctorConstantSheaf Λ X).hom⟦(n : ℤ)⟧' := by
+  rw [unitShiftAddEquivExt_apply, AddEquiv.trans_apply, ← Ext.homAddEquiv_apply,
+    AddEquiv.apply_symm_apply]
+  rfl
+
+private lemma unitShiftAddEquivH_apply [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ)
+    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
+    unitShiftAddEquivH Λ X n x =
+      ((AddEquiv.mk' ((unitIsoSingleFunctorConstantSheaf Λ X).homCongr
+        ((shiftFunctor _ (n : ℤ)).mapIso (unitIsoSingleFunctorConstantSheaf Λ X))) fun f g ↦ by
+          simp [Iso.homCongr_apply]).trans
+        ((Ext.homAddEquiv (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm.trans <|
+          AddEquiv.ofBijective _ (bijective_mapExtComp_constantIntToRing Λ X _ n))) x :=
+  rfl
 
 /-- `unitShiftAddEquivH` is `unitShiftAddEquivExt` followed by the comparison of `Ext` over `Λ`
 with abelian cohomology. -/
@@ -59,8 +83,9 @@ lemma unitShiftAddEquivH_eq [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ)
     (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦(n : ℤ)⟧) :
     unitShiftAddEquivH Λ X n x = (sheafForget₂ Λ X).mapExtComp
       (Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ) _ n
-        (unitShiftAddEquivExt Λ X n x) :=
-  rfl
+        (unitShiftAddEquivExt Λ X n x) := by
+  rw [unitShiftAddEquivExt_apply, unitShiftAddEquivH_apply, AddEquiv.trans_apply,
+    AddEquiv.trans_apply, AddEquiv.trans_apply, AddEquiv.ofBijective_apply]
 
 variable (g : Z ⟶ X)
 
@@ -89,7 +114,16 @@ lemma leftDerivedUpperStarSingleConstantRingIso_hom :
       (leftDerivedUpperStarIsoMapDerivedCategory _ g).hom.app _ ≫
         (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).hom.app _ ≫
           (DerivedCategory.singleFunctor _ 0).map (upperStarConstantRingIso Λ g).hom := by
-  rw [upperStarConstantRingIso, Functor.preimageIso_hom, Functor.map_preimage]
+  -- Unfolding `upperStarConstantRingIso` at the level of isomorphisms is cheap for the kernel;
+  -- rewriting with its equation lemma instead compares the morphisms of the derived category.
+  have hU : upperStarConstantRingIso Λ g = (DerivedCategory.singleFunctor _ 0).preimageIso
+      (X := ((g)^*[ModuleCat.{u + 1} Λ]).obj (Sheaf.constantRing X.smallEtaleTopology Λ))
+      (Y := Sheaf.constantRing Z.smallEtaleTopology Λ)
+      (((((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app
+        (Sheaf.constantRing X.smallEtaleTopology Λ)).symm ≪≫
+        (leftDerivedUpperStarIsoMapDerivedCategory _ g).symm.app _ ≪≫
+          leftDerivedUpperStarSingleConstantRingIso Λ g) := rfl
+  rw [hU, Functor.preimageIso_hom, Functor.map_preimage]
   simp
 
 /-- **The derived pullback of cohomology classes is the pullback of `Ext`-classes.** For

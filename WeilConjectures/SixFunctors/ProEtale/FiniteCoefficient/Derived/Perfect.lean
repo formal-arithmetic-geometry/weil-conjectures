@@ -502,7 +502,7 @@ theorem isDualizable_iff_isLocallyPerfect
 variable {Λ}
 
 omit [Finite Λ] in
-/-- Being locally constant with finite stalks is local for the pro-étale topology. -/
+/-- Being locally constant with finitely generated stalks is local for the pro-étale topology. -/
 theorem isFiniteLocallyConstant_of_cover
     {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {ι : Type (u + 1)}
     {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
@@ -516,8 +516,8 @@ theorem isFiniteLocallyConstant_of_cover
   exact ⟨M, hM, ⟨(upperStarComp _ (f i j) (g i)).app F ≪≫ e⟩⟩
 
 /-- The cohomology sheaves of a complex of finite projective `Λ_W`-modules on the small pro-étale
-site of `W` are locally constant with finite stalks. The complex is `ν^*` of a complex `P'` of
-finite locally constant étale sheaves
+site of `W` are locally constant with finitely generated stalks. The complex is `ν^*` of a
+complex `P'` of finite locally constant étale sheaves
 (`exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract`); as `ν^*` is exact, its
 cohomology sheaves are `ν^*` of those of `P'`, which are finite locally constant. -/
 theorem isFiniteLocallyConstant_homology_of_retract {W : Scheme.{u}}
@@ -689,7 +689,7 @@ exponent is invertible on `X`. The coefficient dual `K^∨ = RHom(K, Λ_X)` of a
 `K ∈ Dctf(X, Λ)` of pro-étale `Λ`-sheaves lies in `Dctf(X, Λ)`.
 
 As `K` is of étale origin, `K ≅ ν^* K'` with `K' ∈ Dctf(X_ét, Λ)`
-(`lem-sf-comparison-tor-amplitude`), and `K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)`
+(`lem-exc-comparison-tor-interval`), and `K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)`
 (`thm-sf-hom-comparison-constructible`) is of étale origin, `RHom(K', Λ)` being bounded
 constructible on `X_ét` (`sk-thm-sf-hom-ctf`). As `K` is perfect, `K^∨` is its dual, whose Tor
 amplitude is that of `K` reflected

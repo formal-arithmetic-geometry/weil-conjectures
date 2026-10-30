@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import Mathlib.AlgebraicGeometry.Cover.Open
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionFiniteMatching
 import Mathlib.CategoryTheory.Filtered.Final

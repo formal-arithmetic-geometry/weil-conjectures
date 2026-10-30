@@ -6,12 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
-public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
-public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # The Deligne–Laumon direct-image bound
@@ -267,7 +262,7 @@ weights at most `w + r`, for every `r` (blueprint: `sk-thm-dl-general-sheaf`,
 Noetherian induction on the closed subsets of `X`: for a reduced closed subscheme `T` of `X`, the
 assertion holds for `T ⟶ Y` over a nonempty open `U` of `T`
 (`exists_hasDirectImageWeightBound_opensι_comp`) and, by induction, over the reduced complement of
-`U`; the open–closed reduction `sk-l-dl-general-excision` glues the two. -/
+`U`; the open–closed reduction `det-l-dl-general-excision` glues the two. -/
 theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]

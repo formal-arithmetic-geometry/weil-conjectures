@@ -6,13 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
-public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # Coherent cohomology of the projective line and of smooth projective curves
@@ -27,7 +24,7 @@ invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`; that they 
 structure sheaves of the standard cover, unique up to unique isomorphism, is
 `AlgebraicGeometry.ProjectiveLine.nonempty_twistData` (blueprint
 `lem-sc-p1-twist-exists`). The cohomology of the twists on `ℙ¹_k` is the case `d = 1` of
-Serre's computation of the cohomology of `ℙᵈ_k`, `sk-thm-picard-pn`.
+Serre's computation of the cohomology of `ℙᵈ_k`, `det-thm-picard-pn`.
 
 ## Main statements
 

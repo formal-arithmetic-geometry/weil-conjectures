@@ -55,7 +55,7 @@ modules. For `X = Spec K` we only need the vanishing direction of both, which is
 
 The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
 repository `formal-arithmetic-geometry/weil-conjectures-blueprint`; they belong to the
-subsection `sk-prop-hilbert90`.
+subsection `cor-sc-hilbert-90-field`.
 -/
 
 @[expose] public section

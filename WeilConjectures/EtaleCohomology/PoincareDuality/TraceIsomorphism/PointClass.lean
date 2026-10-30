@@ -10,6 +10,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseCha
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.Mathlib.CategoryTheory.Monad.Adjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsCounit
 
 /-!
 # All rational points have the same class
@@ -106,25 +107,6 @@ lemma pullbackLiftSection_tateShiftIso [HasInvertibleExponent Λ X] [HasInvertib
   simpa using U
 
 end Coherence
-
-/-- Forgetting the supports of a restricted class: the restriction of supports followed by the
-counit is the restriction of the class with forgotten supports. -/
-lemma restrictSupportedClass_comp_counit {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
-    {U X Z Z' : Scheme.{u}}
-    (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i']
-    (g : Z' ⟶ Z) (hg : IsPullback g i' i e) {K L : DerivedCategoryModule Λ X}
-    {K' L' : DerivedCategoryModule Λ U} (σ : K' ⟶ (L((e)^*[ModuleCat.{u + 1} Λ])).obj K)
-    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
-    (γ : K ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)) :
-    restrictSupportedClass Λ e i i' g hg σ τ γ ≫
-        (rightDerivedUpperShriekAdjunction _ i').counit.app L' =
-      σ ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map
-        (γ ≫ (rightDerivedUpperShriekAdjunction _ i).counit.app L) ≫ τ.hom := by
-  have h := (existsUnique_supportedRestriction Λ e i i' g hg L L'
-    τ).exists.choose_spec
-  rw [restrictSupportedClass, Category.assoc, Category.assoc]
-  erw [h]
-  rw [Functor.map_comp_assoc]
 
 /-- **The class of a section generates.** Let `x` be a section of `a : X ⟶ S` which is a closed
 immersion, and `γ : Λ_X ⟶ Rx_! Rx^! L` a class supported on `x` whose adjoint

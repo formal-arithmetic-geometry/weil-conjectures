@@ -15,7 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReading
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
 /-!
@@ -68,11 +70,6 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
-
-/-- The finite coefficient ring `𝒪_E ⧸ ℓⁿ`, lifted to the universe of étale sheaves of
-modules. -/
-abbrev integersModPowCoeff : Type (u + 1) :=
-  ULift.{u + 1} (PadicAlgCl.integersModPow ℓ E n)
 
 /-- **The reduction modulo `ℓⁿ`, read on the small étale site**: `K ↦ Rν_* (K ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`,
 from bounded constructible `𝒪_E`-complexes on `X_proét` to the derived category of étale sheaves
@@ -163,6 +160,8 @@ theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicI
         ((etaleReduction ℓ E n Y).obj K)).obj ((etaleReduction ℓ E n Y).obj M)) :=
   nonempty_etaleReductionTensorIso_of_components ℓ E n K M
 
+-- the coefficient hypotheses on `k` are part of the setting of the statement, unused by the proof
+set_option linter.unusedSectionVars false in
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-ctf`, (3), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
 site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` preserves `Dctf`**: for a bounded
@@ -172,6 +171,6 @@ theorem boundedConstructibleFiniteTor_etaleReduction
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     Etale.DerivedCategory.boundedConstructibleFiniteTor (integersModPowCoeff.{u} ℓ E n) Y.left
       ((etaleReduction ℓ E n Y).obj K) :=
-  sorry
+  boundedConstructibleFiniteTor_etaleReduction_of_components ℓ E n K
 
 end AlgebraicGeometry.ProEtale.CondensedRing

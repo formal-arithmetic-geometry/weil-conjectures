@@ -34,7 +34,7 @@ purely transcendental extension `E`. Then `K ⊗[k] E` is a localization of a po
 
 ## Blueprint
 
-- `sk-i-geometry`: products of reduced varieties over a perfect field are reduced.
+- `det-i-geometry`: products of reduced varieties over a perfect field are reduced.
 -/
 
 @[expose] public section
@@ -116,7 +116,7 @@ theorem isReduced_tensorProduct_of_field (k K L : Type*) [Field k] [PerfectField
     (Algebra.TensorProduct.map (AlgHom.id k K) (IsScalarTower.toAlgHom k D (FractionRing D)))
     (Module.Flat.lTensor_preserves_injective_linearMap _ (IsFractionRing.injective D _))
 /-- Over a perfect field `k`, the tensor product of two reduced `k`-algebras is reduced.
-(blueprint: `sk-i-geometry`)
+(blueprint: `det-i-geometry`)
 
 By `isReduced_tensorProduct_of_forall_residueField`, applied in both factors, this reduces to the
 tensor product of two field extensions, `isReduced_tensorProduct_of_field`. -/

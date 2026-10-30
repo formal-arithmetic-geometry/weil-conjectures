@@ -77,7 +77,7 @@ private lemma locallySurjective_gmSheafToLowerStar_of_thickening
     exact ha
 
 /-- The comparison from pulled-back units to units on the reduction is an epimorphism.
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
 lem-sc-brauer-zero-all-curves.md, Proof, Step 1 and the following Claim.
 (blueprint: lem-sc-reduction-units-epi)
 

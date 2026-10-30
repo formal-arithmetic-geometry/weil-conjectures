@@ -5,13 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.FiniteLength
-public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.UpperStarExact
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 
 /-!
 # Reduction of the affine-line estimate to irreducible factors

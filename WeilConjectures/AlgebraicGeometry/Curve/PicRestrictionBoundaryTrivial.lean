@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 /-!
 # Boundary-point classes restrict to the identity
 
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
 first paragraph, restriction and boundary divisors
 (blueprint: lem-sc-pic-restriction-boundary-trivial).
 -/
@@ -30,7 +30,7 @@ open scoped AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry
 
 /-- The point-ideal class of a point outside the open curve restricts to the identity.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph;
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph;
 restriction and boundary divisors, steps 3 and 4 of lem-sc-pic-restriction-exact
 (blueprint: lem-sc-pic-restriction-boundary-trivial).
 

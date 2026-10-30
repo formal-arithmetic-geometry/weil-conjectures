@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 # The completed integral coefficient sheaf on the pro-étale site
 
 Let `Λ` be a commutative ring with an ideal `I` (the intended case is `Λ = 𝒪_E`, `I = 𝔪_E`, so
-that `Λ ⧸ Iⁿ = A_{E,n}`). Blueprint `def-weil-completed-integral-coefficients` defines the
-completed coefficient sheaf on the small pro-étale site of a scheme `Y`,
+that `Λ ⧸ Iⁿ = A_{E,n}`). This file defines the completed coefficient sheaf on the small
+pro-étale site of a scheme `Y`,
 
 `𝒪̂_{E,Y} = lim_n (A_{E,n})_Y`,
 
@@ -100,7 +100,7 @@ noncomputable def reductionRingSheafSystem :
     ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
   Functor.ofOpSequence (reductionRingSheafMap Y I)
 
-/-- Blueprint `def-weil-completed-integral-coefficients`: Completed integral coefficient sheaf.
+/-- Completed integral coefficient sheaf.
 
 The completed coefficient sheaf `𝒪̂_{E,Y} = lim_n (A_{E,n})_Y` on the small pro-étale site of
 `Y`, the limit of the reductions `(Λ ⧸ Iⁿ)_Y` in the category of sheaves of rings. -/
@@ -122,8 +122,8 @@ lemma completedIntegralSheafπ_reductionRingSheafMap (n : ℕ) :
     using this
 
 /-- The category `Sh(Y_proét, 𝒪_E)` of sheaves of modules over the completed coefficient sheaf
-`𝒪̂_{E,Y}` (blueprint `def-weil-completed-integral-coefficients`, with
-`def-weil-sheaf-of-modules-category`, Mathlib's `SheafOfModules`). It is abelian. -/
+`𝒪̂_{E,Y}` (blueprint `def-weil-sheaf-of-modules-category`, Mathlib's `SheafOfModules`). It is
+abelian. -/
 abbrev CompletedIntegralModule : Type _ :=
   SheafOfModules.{u + 1} (completedIntegralSheaf Y I)
 
@@ -139,7 +139,7 @@ abbrev CompletedIntegralDerivedCategory : Type _ :=
 
 /-- The restriction of scalars `Res_n : Sh(Y_proét, A_{E,n}) ⥤ Sh(Y_proét, 𝒪_E)` along the
 projection `𝒪̂_{E,Y} ↠ (A_{E,n})_Y`, which makes every `A_{E,n}`-module an
-`𝒪̂_{E,Y}`-module (blueprint `def-weil-completed-integral-coefficients`). -/
+`𝒪̂_{E,Y}`-module. -/
 noncomputable def restrictScalarsReduction (n : ℕ) :
     SheafOfModules.{u + 1} (reductionRingSheaf Y I n) ⥤ CompletedIntegralModule Y I :=
   SheafOfModules.restrictScalars (completedIntegralSheafπ Y I n)
@@ -168,11 +168,11 @@ noncomputable def restrictScalarsReductionCompToSheafIso :
       toSheaf.{u + 1} (reductionRingSheaf Y I n) :=
   Iso.refl _
 
-/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars, the
-left exactness half. `Res_n` preserves finite limits: it is the identity on the underlying
-sheaves of abelian groups (`restrictScalarsReductionCompToSheafIso`), and the forgetful functor
-`SheafOfModules.toSheaf` to abelian sheaves preserves finite limits and reflects isomorphisms,
-hence reflects finite limits. -/
+/-- Exactness of restriction of scalars, the left exactness half. `Res_n` preserves finite
+limits: it is the identity on the underlying sheaves of abelian groups
+(`restrictScalarsReductionCompToSheafIso`), and the forgetful functor `SheafOfModules.toSheaf` to
+abelian sheaves preserves finite limits and reflects isomorphisms, hence reflects finite
+limits. -/
 instance preservesFiniteLimits_restrictScalarsReduction :
     PreservesFiniteLimits (restrictScalarsReduction Y I n) where
   preservesFiniteLimits J _ _ := by
@@ -184,11 +184,11 @@ instance preservesFiniteLimits_restrictScalarsReduction :
     exact preservesLimitsOfShape_of_reflects_of_preserves _
       (toSheaf.{u + 1} (completedIntegralSheaf Y I))
 
-/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars, the
-right exactness half. `Res_n` preserves finite colimits: it is the identity on the underlying
-sheaves of abelian groups (`restrictScalarsReductionCompToSheafIso`), and the forgetful functor
-`SheafOfModules.toSheaf` to abelian sheaves preserves finite colimits and reflects
-isomorphisms, hence reflects finite colimits. -/
+/-- Exactness of restriction of scalars, the right exactness half. `Res_n` preserves finite
+colimits: it is the identity on the underlying sheaves of abelian groups
+(`restrictScalarsReductionCompToSheafIso`), and the forgetful functor `SheafOfModules.toSheaf` to
+abelian sheaves preserves finite colimits and reflects isomorphisms, hence reflects finite
+colimits. -/
 instance preservesFiniteColimits_restrictScalarsReduction :
     PreservesFiniteColimits (restrictScalarsReduction Y I n) where
   preservesFiniteColimits J _ _ := by
@@ -200,9 +200,9 @@ instance preservesFiniteColimits_restrictScalarsReduction :
     exact preservesColimitsOfShape_of_reflects_of_preserves _
       (toSheaf.{u + 1} (completedIntegralSheaf Y I))
 
-/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars.
-`Res_n : Sh(Y_proét, A_{E,n}) ⥤ Sh(Y_proét, 𝒪_E)` is exact: it preserves finite limits and
-finite colimits (`preservesFiniteLimits_restrictScalarsReduction`,
+/-- Exactness of restriction of scalars. `Res_n : Sh(Y_proét, A_{E,n}) ⥤ Sh(Y_proét, 𝒪_E)` is
+exact: it preserves finite limits and finite colimits
+(`preservesFiniteLimits_restrictScalarsReduction`,
 `preservesFiniteColimits_restrictScalarsReduction`), so it sends short exact sequences to short
 exact sequences. -/
 theorem restrictScalarsReduction_exact :

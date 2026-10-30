@@ -7,32 +7,32 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
-public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.NumberTheory.Padics.Extension
 
 /-!
 # Normalized adic systems and the realization of their compact cohomology and stalks
 
 Let `R` be a ring with an ideal `I = (ϖ)` (the intended case being `R = 𝒪_E`, `I = 𝔪_E`) and
-`A_n = R ⧸ Iⁿ`. A *normalized adic system* on a scheme `X` (`AlgebraicGeometry.Etale.AdicSystem`,
-blueprint `def-trf-adic-system`) is a family `L_n ∈ Dᵇctf(X, A_n)` of complexes with transitions
-`L_{n+1} ⟶ Res L_n` exhibiting `L_n` as `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`.
+`A_n = R ⧸ Iⁿ`. A *normalized adic system* on a scheme `X` (`AlgebraicGeometry.Etale.AdicSystem`) is
+a family `L_n ∈ Dᵇctf(X, A_n)` of complexes with transitions `L_{n+1} ⟶ Res L_n` exhibiting `L_n` as
+`L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`.
 
 For a separated finite-type scheme `a_X : X ⟶ s` over a separably closed field, the compact
-cohomology complexes `P_n = RΓ_c(X, L_n) ∈ D(A_n)` and the geometric stalks
-`P_{x̄, n} = (L_n)_x̄` form normalized towers of perfect complexes (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (1)), whose derived limits over `R` are therefore
-perfect, reduce to the levels, and carry lifts of compatible families of endomorphisms whose
-traces are the limits of the levelwise traces (`prop-trf-adic-coefficient-morphism-systems` (2),
-(4); `sk-prop-trace-adic` (ii)).
+cohomology complexes `P_n = RΓ_c(X, L_n) ∈ D(A_n)` and the geometric stalks `P_{x̄, n} = (L_n)_x̄`
+form normalized towers of perfect complexes, whose derived limits over `R` are therefore perfect,
+reduce to the levels, and carry lifts of compatible families of endomorphisms whose traces are the
+limits of the levelwise traces.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.AdicSystem`: a normalized `A_•`-system (`def-trf-adic-system`).
+- `AlgebraicGeometry.Etale.AdicSystem`: a normalized `A_•`-system.
 - `AlgebraicGeometry.Etale.IsCoefficientChange`: a natural isomorphism `Res ∘ Φ ≅ Φ' ∘ Res`
   carrying derived base changes to derived base changes.
 - `AlgebraicGeometry.Etale.geometricStalk`: the geometric stalk `RΓ(s, Lx̄^* -)`.
@@ -191,18 +191,18 @@ section AdicSystem
 
 variable {R : Type (u + 1)} [CommRing R] (I : Ideal R) (X : Scheme.{u})
 
-/-- Blueprint `def-trf-adic-system`: a *normalized `A_•`-system* on `X`, for the rings
-`A_n = R ⧸ Iⁿ`: complexes `L_n ∈ Dᵇctf(X, A_n)` with transitions `L_{n+1} ⟶ Res L_n` compatible
-with the quotient maps `A_{n+1} ⟶ A_n`, exhibiting `L_n` as `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`. Its
-realization is the derived limit `R lim_n ν^* Res L_n` on the pro-étale site
+/-- A *normalized `A_•`-system* on `X`, for the rings `A_n = R ⧸ Iⁿ`: complexes
+`L_n ∈ Dᵇctf(X, A_n)` with transitions `L_{n+1} ⟶ Res L_n` compatible with the quotient maps
+`A_{n+1} ⟶ A_n`, exhibiting `L_n` as `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`. Its realization is the derived
+limit `R lim_n ν^* Res L_n` on the pro-étale site
 (`AlgebraicGeometry.Etale.AdicSystem.realization`).
 
 No Weil structure is part of the datum; the category `Dᵇctf,W,adic(X, 𝒪_E)` of the blueprint
 consists of such systems with a compatible strict Weil structure at every level
 (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.IsWeil`). Up to the indexing of the levels
 (`R ⧸ Iⁿ` instead of `R ⧸ Iⁿ⁺¹`), the underlying tower is a normalized DVR tower
-(`AlgebraicGeometry.Etale.NormalizedTower`, blueprint `def-coef-normalized-dvr-tower`) whose
-levels are constructible of finite Tor amplitude. -/
+(`AlgebraicGeometry.Etale.NormalizedTower`) whose levels are constructible of finite Tor
+amplitude. -/
 structure AdicSystem where
   /-- The level `L_n ∈ D(X_ét, R ⧸ Iⁿ)`. -/
   obj (n : ℕ) : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (R ⧸ I ^ n)))
@@ -298,10 +298,9 @@ variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [Local
   [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
 
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1): the normalized tower of perfect
-complexes `P_n = RΓ_c(X, L_n)` over the local rings `A_n = R ⧸ Iⁿ`, `n ≥ 1`, with transitions
-`RΓ_c(X, ν_n)` read through coefficient identifications `α n`
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections`). -/
+/-- The normalized tower of perfect complexes `P_n = RΓ_c(X, L_n)` over the local rings
+`A_n = R ⧸ Iⁿ`, `n ≥ 1`, with transitions `RΓ_c(X, ν_n)` read through coefficient identifications
+`α n` (`AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections`). -/
 noncomputable def compactSupportTower
     (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
@@ -318,10 +317,9 @@ noncomputable def compactSupportTower
   isDerivedBaseChange n :=
     hα n _ (S.boundedConstructibleFiniteTor (n + 1 + 1)) (S.isDerivedBaseChange (n + 1))
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1): the normalized tower of perfect
-complexes `P_{x̄, n} = (L_n)_x̄` of geometric stalks at a geometric point `x̄`, `n ≥ 1`, with
-transitions `(ν_n)_x̄` read through coefficient identifications `β n`
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`). -/
+/-- The normalized tower of perfect complexes `P_{x̄, n} = (L_n)_x̄` of geometric stalks at a
+geometric point `x̄`, `n ≥ 1`, with transitions `(ν_n)_x̄` read through coefficient identifications
+`β n` (`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`). -/
 noncomputable def stalkTower (x : Spec (.of k) ⟶ X)
     (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
         geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
@@ -340,8 +338,7 @@ variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} (hϖ : ϖ ∈ IsLocalRing
 
 omit [QuasiCompact aX] [IsSeparated aX] in
 include hϖ hI in
-/-- Blueprint `sk-prop-trace-adic` (ii) and `prop-trf-adic-coefficient-morphism-systems` (2),
-compact cohomology: the derived limit `P_𝒪 = R lim_n RΓ_c(X, L_n)` over `R` of the compact
+/-- Compact cohomology: the derived limit `P_𝒪 = R lim_n RΓ_c(X, L_n)` over `R` of the compact
 cohomology of a normalized system is perfect, represented by a bounded complex of finite free
 `R`-modules, and it reduces to the levels: each projection `P_𝒪 ⟶ Res RΓ_c(X, L_{n+1})` exhibits
 `RΓ_c(X, L_{n+1})` as `P_𝒪 ⊗ᴸ_R A_{n+1}`. -/
@@ -361,8 +358,7 @@ theorem compactSupportTower_realization
 
 omit [QuasiCompact aX] [IsSeparated aX] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
-/-- Blueprint `sk-prop-trace-adic` (ii) and `prop-trf-adic-coefficient-morphism-systems` (2),
-geometric stalks: the derived limit `P_{x̄, 𝒪} = R lim_n (L_n)_x̄` over `R` of the geometric
+/-- Geometric stalks: the derived limit `P_{x̄, 𝒪} = R lim_n (L_n)_x̄` over `R` of the geometric
 stalks of a normalized system is perfect, represented by a bounded complex of finite free
 `R`-modules, and each projection `P_{x̄, 𝒪} ⟶ Res (L_{n+1})_x̄` exhibits `(L_{n+1})_x̄` as
 `P_{x̄, 𝒪} ⊗ᴸ_R A_{n+1}`. -/
@@ -389,11 +385,11 @@ variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {X : Scheme.{u}} (S : Adi
   {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
 
 include hϖ hI in
-/-- Blueprint `sk-prop-trace-adic` (i), *realization* of a normalized system: the derived limit
-`K_R = R lim_n ν^* Res L_n` on the pro-étale site (the point of a homotopy limit cone `c` of the
-restricted tower `AlgebraicGeometry.Etale.AdicSystem.restrict` followed by the comparison
-`ν^*`) is derived complete, satisfies `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ ν^* L_n` compatibly with the
-transitions, and lies in every common range of degrees `[a, b]` of the levels. -/
+/-- *Realization* of a normalized system: the derived limit `K_R = R lim_n ν^* Res L_n` on the
+pro-étale site (the point of a homotopy limit cone `c` of the restricted tower
+`AlgebraicGeometry.Etale.AdicSystem.restrict` followed by the comparison `ν^*`) is derived complete,
+satisfies `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ ν^* L_n` compatibly with the transitions, and lies in every common
+range of degrees `[a, b]` of the levels. -/
 theorem realization {c : Cone (S.restrict ⋙
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory)}
     (hc : IsHomotopyLimit c) :

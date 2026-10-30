@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Center.Linear
 public import Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
+public import WeilConjectures.CategoryTheory.ModuleObjects.SMulNatTrans
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Conv
 
 /-!
@@ -56,10 +57,10 @@ on an `R`-module object `M`. -/
 def globalSmul (σ : 𝟙_ C ⟶ R) (M : Mod C R) : M.X ⟶ M.X :=
   (λ_ M.X).inv ≫ σ ▷ M.X ≫ act M.X
 
-lemma globalSmul_naturality (σ : 𝟙_ C ⟶ R) {M N : Mod C R} (f : M ⟶ N) :
-    globalSmul σ M ≫ f.hom = f.hom ≫ globalSmul σ N := by
-  rw [globalSmul, globalSmul, Category.assoc, Category.assoc, act_hom, ← whisker_exchange_assoc,
-    leftUnitor_inv_naturality_assoc]
+/-- The action `globalSmul σ M` is the multiplication `Mod.smulHom σ M` by the global section
+`σ`. -/
+lemma globalSmul_eq_smulHom (σ : 𝟙_ C ⟶ R) (M : Mod C R) : globalSmul σ M = smulHom σ M :=
+  rfl
 
 @[simp]
 lemma globalSmul_one (M : Mod C R) : globalSmul η[R] M = 𝟙 M.X := by
@@ -67,9 +68,9 @@ lemma globalSmul_one (M : Mod C R) : globalSmul η[R] M = 𝟙 M.X := by
 
 lemma globalSmul_mul (s t : Γ R) (M : Mod C R) :
     globalSmul (s * t).hom M = globalSmul t.hom M ≫ globalSmul s.hom M := by
-  rw [globalSmul, globalSmul, globalSmul, Γ.mul_hom, tensorHom_def, comp_whiskerRight,
-    comp_whiskerRight, Category.assoc, Category.assoc, mul_act, ← comp_whiskerRight_assoc,
-    ← whisker_exchange, Category.assoc, Category.assoc,
+  rw [globalSmul, globalSmul, globalSmul, Γ.mul_hom, MonoidalCategory.tensorHom_def,
+    comp_whiskerRight, comp_whiskerRight, Category.assoc, Category.assoc, mul_act,
+    ← comp_whiskerRight_assoc, ← whisker_exchange, Category.assoc, Category.assoc,
     leftUnitor_inv_naturality_assoc, whisker_exchange_assoc]
   monoidal
 
@@ -133,34 +134,11 @@ section Comm
 
 variable [BraidedCategory C] {R : C} [MonObj R] [IsCommMonObj R]
 
-/-- A global section of a commutative algebra object is central: multiplying by it on the left
-or on the right agree. -/
-lemma leftUnitor_inv_comp_whiskerRight_comp_mul (s : Γ R) :
-    (λ_ R).inv ≫ s.hom ▷ R ≫ μ = (ρ_ R).inv ≫ R ◁ s.hom ≫ μ := by
-  conv_rhs => rw [← IsCommMonObj.mul_comm R, BraidedCategory.braiding_naturality_right_assoc,
-    rightUnitor_inv_braiding_assoc]
-
-/-- The action of a global section of a commutative algebra object `R` on an `R`-module object
-commutes with the action of `R`. -/
-lemma act_comp_globalSmul (s : Γ R) (M : Mod C R) :
-    act M.X ≫ globalSmul s.hom M = R ◁ globalSmul s.hom M ≫ act M.X := by
-  have h : R ◁ act M.X ≫ act M.X = (α_ R R M.X).inv ≫ μ ▷ M.X ≫ act M.X := by
-    rw [mul_act, Iso.inv_hom_id_assoc]
-  have hc := congrArg (· ▷ M.X) (leftUnitor_inv_comp_whiskerRight_comp_mul s)
-  simp only [comp_whiskerRight] at hc
-  rw [globalSmul, leftUnitor_inv_naturality_assoc, whisker_exchange_assoc,
-    MonoidalCategory.whiskerLeft_comp_assoc, MonoidalCategory.whiskerLeft_comp_assoc, h]
-  calc _ = ((λ_ R).inv ▷ M.X ≫ (s.hom ▷ R) ▷ M.X ≫ μ ▷ M.X) ≫ act M.X := by monoidal
-    _ = ((ρ_ R).inv ▷ M.X ≫ (R ◁ s.hom) ▷ M.X ≫ μ ▷ M.X) ≫ act M.X := by rw [hc]
-    _ = _ := by monoidal
-
-/-- The action of a global section `s` of a commutative algebra object `R` on an `R`-module
-object `M`, as an endomorphism of module objects. -/
-def smulEnd (s : Γ R) (M : Mod C R) : M ⟶ M :=
-  homMk (globalSmul s.hom M) (act_comp_globalSmul s M)
-
+/-- The underlying morphism of the multiplication `Mod.smulNatTrans σ` by a global section `σ`
+on `M` is the action `globalSmul σ M`. -/
 @[simp]
-lemma smulEnd_hom (s : Γ R) (M : Mod C R) : (smulEnd s M).hom = globalSmul s.hom M :=
+lemma smulNatTrans_app_hom_eq_globalSmul (σ : 𝟙_ C ⟶ R) (M : Mod C R) :
+    ((smulNatTrans σ).app M).hom = globalSmul σ M :=
   rfl
 
 variable [Preadditive C] [MonoidalPreadditive C]
@@ -168,10 +146,8 @@ variable [Preadditive C] [MonoidalPreadditive C]
 variable (R) in
 /-- The global sections of a commutative algebra object `R` act on the category of `R`-module
 objects: a ring homomorphism to the center of `Mod C R`. -/
-def toCatCenter : Γ R →+* CatCenter (Mod C R) where
-  toFun s :=
-    { app M := smulEnd s M
-      naturality _ _ f := Mod.hom_ext _ _ (globalSmul_naturality s.hom f).symm }
+noncomputable def toCatCenter : Γ R →+* CatCenter (Mod C R) where
+  toFun s := smulNatTrans s.hom
   map_one' := CatCenter.ext _ _ fun M ↦ by
     refine Mod.hom_ext _ _ ?_
     exact (congrArg (globalSmul · M) (Γ.one_hom (R := R))).trans (globalSmul_one M)
@@ -187,7 +163,8 @@ def toCatCenter : Γ R →+* CatCenter (Mod C R) where
     exact globalSmul_add s.hom t.hom M
 
 @[simp]
-lemma toCatCenter_app (s : Γ R) (M : Mod C R) : (toCatCenter R s).app M = smulEnd s M :=
+lemma toCatCenter_app (s : Γ R) (M : Mod C R) :
+    (toCatCenter R s).app M = (smulNatTrans s.hom).app M :=
   rfl
 
 variable {K : Type*} [Ring K]
@@ -206,7 +183,7 @@ lemma linearOfRingHom_smul_hom (φ : K →+* Γ R) (a : K) {M N : Mod C R} (f : 
 
 lemma linearOfRingHom_smul_id (φ : K →+* Γ R) (a : K) (M : Mod C R) :
     letI := linearOfRingHom φ
-    a • 𝟙 M = smulEnd (φ a) M :=
+    a • 𝟙 M = (smulNatTrans (φ a).hom).app M :=
   Mod.hom_ext _ _ ((linearOfRingHom_smul_hom φ a (𝟙 M)).trans (Category.id_comp _))
 
 variable (R) in
@@ -219,10 +196,11 @@ noncomputable def linearGlobalSections : Linear (Γ R) (Mod C R) :=
 /-- A functor `F : Mod C R ⥤ Mod D S` of categories of module objects over commutative algebra
 objects, `K`-linear for `K →+* Γ R` and `K →+* Γ S`, is `K`-linear as soon as it sends the action
 of `φ a` to the action of `ψ a`. -/
-lemma functor_linear_of_map_smulEnd {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
-    [BraidedCategory D] [Preadditive D] [MonoidalPreadditive D] {S : D} [MonObj S]
-    [IsCommMonObj S] (F : Mod C R ⥤ Mod D S) (φ : K →+* Γ R) (ψ : K →+* Γ S)
-    (h : ∀ (a : K) (M : Mod C R), (F.map (smulEnd (φ a) M)).hom = globalSmul (ψ a).hom (F.obj M)) :
+lemma functor_linear_of_map_smulNatTrans_app {D : Type u₂} [Category.{v₂} D]
+    [MonoidalCategory D] [BraidedCategory D] [Preadditive D] [MonoidalPreadditive D] {S : D}
+    [MonObj S] [IsCommMonObj S] (F : Mod C R ⥤ Mod D S) (φ : K →+* Γ R) (ψ : K →+* Γ S)
+    (h : ∀ (a : K) (M : Mod C R),
+      (F.map ((smulNatTrans (φ a).hom).app M)).hom = globalSmul (ψ a).hom (F.obj M)) :
     letI := linearOfRingHom φ
     letI := linearOfRingHom ψ
     F.Linear K := by
@@ -239,7 +217,7 @@ lemma linear_comap {S : C} [MonObj S] [IsCommMonObj S] (f : R ⟶ S) [IsMonHom f
     letI := linearOfRingHom φ
     letI := linearOfRingHom ψ
     (comap (D := C) f).Linear K :=
-  functor_linear_of_map_smulEnd _ ψ φ fun a M ↦ by
+  functor_linear_of_map_smulNatTrans_app _ ψ φ fun a M ↦ by
     rw [globalSmul_comap, ← h a]
     rfl
 
@@ -260,7 +238,7 @@ lemma linear_mapMod_comp_comap {S : D} [MonObj S] [IsCommMonObj S] (f : S ⟶ G.
     letI := linearOfRingHom φ
     letI := linearOfRingHom ψ
     (G.mapMod R ⋙ comap f).Linear K :=
-  functor_linear_of_map_smulEnd _ φ ψ fun a M ↦ by
+  functor_linear_of_map_smulNatTrans_app _ φ ψ fun a M ↦ by
     simp only [Functor.comp_obj, Functor.comp_map]
     rw [globalSmul_comap, h a, globalSmul_mapMod]
     rfl
@@ -271,7 +249,7 @@ lemma linear_mapMod [G.Additive] [IsCommMonObj (G.obj R)] (φ : K →+* Γ R) :
     letI := linearOfRingHom φ
     letI := linearOfRingHom ((Γ.mapFunctor G).comp φ)
     (G.mapMod R).Linear K :=
-  functor_linear_of_map_smulEnd _ φ _ fun a M ↦ (globalSmul_mapMod G (φ a).hom M).symm
+  functor_linear_of_map_smulNatTrans_app _ φ _ fun a M ↦ (globalSmul_mapMod G (φ a).hom M).symm
 
 end MapMod
 

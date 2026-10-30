@@ -27,7 +27,7 @@ of the parity of `i` of absolute value `q^{-i/2}`.
   are coprime.
 - `AlgebraicGeometry.Scheme.roots_map_frobeniusCharpolyRev_eq_filter`: the roots of `ι P_{i,ℓ}`
   are the roots of `ι N_ℓ` or `ι D_ℓ` of absolute value `q^{-i/2}`.
-- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `sk-prop-separation` and
+- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `det-prop-separation` and
   `prop-weight-separation`.
 -/
 
@@ -116,7 +116,7 @@ theorem roots_map_frobeniusCharpolyRev_eq_filter (ι : PadicAlgCl l →+* ℂ) {
     exact (Polynomial.roots_prod_filter_norm_eq Finite.one_lt_card (fun j _ ↦ hP j)
       (Finset.mem_filter.2 ⟨hmem, Nat.not_even_iff_odd.1 h⟩)).symm
 
-/-- Blueprint `sk-prop-separation` and `prop-weight-separation` (weight separation and the
+/-- Blueprint `det-prop-separation` and `prop-weight-separation` (weight separation and the
 parity factorization): for `X₀` smooth, proper and geometrically connected of pure dimension
 `d`,
 

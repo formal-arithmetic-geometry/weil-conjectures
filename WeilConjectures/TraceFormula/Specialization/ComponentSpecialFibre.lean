@@ -8,7 +8,8 @@ module
 public import WeilConjectures.TraceFormula.IntegralPointThickening
 public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreComp
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
-public import WeilConjectures.TraceFormula.Specialization.SupportExchangeOnComponent
+public import WeilConjectures.TraceFormula.Specialization.ComponentModelHom
+public import WeilConjectures.TraceFormula.Specialization.DeformationProperPoint
 
 /-!
 
@@ -22,8 +23,10 @@ legs agree on `B''`, so `b''` factors through the special fixed locus `F'`
 
 If `B ⊂ F ⊂ C` is a closed immersion, the factorization `B'' ⟶ F'` is a closed immersion which is
 surjective (`F'` is a single point and `B''` contains the vertex), hence a finite universal
-homeomorphism, and by topological invariance the unit of `L(·)^* ⊣ R(·)_*` is an isomorphism
-(`ProEtale.CondensedRing.Correspondence.IsContractingAt.isIso_unit_componentSpecialLift`).
+homeomorphism (`isUniversalHomeomorphism_componentSpecialLift`). By topological invariance the
+unit of `L(·)^* ⊣ R(·)_*` is then an isomorphism
+(`ProEtale.CondensedRing.Correspondence.IsContractingAt.isIso_unit_componentSpecialLift`, in
+`ComponentSpecialLiftUnit`).
 
 -/
 
@@ -125,18 +128,6 @@ lemma isUniversalHomeomorphism_componentSpecialLift [IsClosedImmersion (j ≫ F.
   have := hc.isClosedImmersion_componentSpecialLift k' j hb
   have := hc.surjective_componentSpecialLift k' j hb
   {}
-
-/-- **Topological invariance on the special fibre of a component**: if `B ⊂ F ⊂ C` is a closed
-immersion, the factorization `r : B'' ⟶ F'` of `b''` through the special fixed locus is a finite
-universal homeomorphism, so the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of `Lr^* ⊣ Rr_*` is an isomorphism and
-`Lr^* : Dᵇc(F') ⥤ Dᵇc(B'')` is an equivalence. -/
-theorem isIso_unit_componentSpecialLift [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
-    [IsSeparated B.hom] [IsClosedImmersion (j ≫ F.ι).left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      (hc.componentSpecialLift k' j hb)).unit :=
-  have := hc.isClosedImmersion_componentSpecialLift k' j hb
-  have := hc.isUniversalHomeomorphism_componentSpecialLift k' j hb
-  isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction ℓ _
 
 end Correspondence.IsContractingAt
 

@@ -151,17 +151,17 @@ theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅
   have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
   rw [this, trace_comp_comm, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-/-- Blueprint `def-trf-karoubi-trace`: the trace of an endomorphism `v` on a summand of a
-dualizable object depends only on the summand. If `e = π ≫ i` is an idempotent of `P` split by
-`i : Q ⟶ P`, `π : P ⟶ Q` with `i ≫ π = 𝟙 Q`, the summand trace `tr(v ∘ e ∣ P)` is the trace of
-the induced endomorphism `i ≫ v ≫ π` of the summand `Q = eP`. -/
+/-- The trace of an endomorphism `v` on a summand of a dualizable object depends only on the
+summand. If `e = π ≫ i` is an idempotent of `P` split by `i : Q ⟶ P`, `π : P ⟶ Q` with
+`i ≫ π = 𝟙 Q`, the summand trace `tr(v ∘ e ∣ P)` is the trace of the induced endomorphism
+`i ≫ v ≫ π` of the summand `Q = eP`. -/
 theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P ⟶ P)
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
 
-/-- Blueprint `prop-trf-karoubi-independence`, representative independence of the summand trace:
-if an isomorphism `w : P ≅ P'` transports the idempotent `e` to `e'` and the endomorphism `v`
-to `v'`, the summand traces `tr(v ∘ e ∣ P)` and `tr(v' ∘ e' ∣ P')` agree. -/
+/-- Representative independence of the summand trace: if an isomorphism `w : P ≅ P'` transports the
+idempotent `e` to `e'` and the endomorphism `v` to `v'`, the summand traces `tr(v ∘ e ∣ P)` and
+`tr(v' ∘ e' ∣ P')` agree. -/
 theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
     (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
     (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=

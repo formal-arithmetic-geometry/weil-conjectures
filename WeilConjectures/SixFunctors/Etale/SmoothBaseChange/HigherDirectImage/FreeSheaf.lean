@@ -7,16 +7,14 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-public import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
+public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
@@ -484,10 +482,11 @@ lemma Etale.isZero_shiftedHomFunctor_obj_of_neg {Z : Scheme.{u}}
 
 end FilteredColimit
 
-/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection `sk-prop-h2`): Filtered
-colimits of étale cohomology. Let `Z` be a quasi-compact and quasi-separated scheme. Then étale
-cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with coefficients in sheaves of `Λ`-modules
-commutes with filtered colimits: `colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`.
+/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection
+`lem-sc-second-kummer-divisors`): Filtered colimits of étale cohomology. Let `Z` be a quasi-compact
+and quasi-separated scheme. Then étale cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with
+coefficients in sheaves of `Λ`-modules commutes with filtered colimits:
+`colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`.
 
 The same statement for abelian sheaves is
 `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. As in the blueprint, there is no

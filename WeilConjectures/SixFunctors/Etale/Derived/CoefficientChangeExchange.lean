@@ -105,7 +105,7 @@ end Abstract
 
 section DerivedLift
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {X X' Y Y' Z Z' : Type*} [Category X] [Category X'] [Category Y] [Category Y']
   [Category Z] [Category Z']
@@ -435,12 +435,11 @@ variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} (S : AdicSystem I X)
   [∀ n, Finite (R ⧸ I ^ n)] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
 
 include aX in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1), levelwise perfectness and
-normalization: each `P_n = RΓ_c(X, L_n)` and each geometric stalk `P_{x̄, n} = (L_n)_x̄` is a
-perfect complex of `A_n`-modules, and the transition `ν_n` induces, through an identification of
-`RΓ_c(X, -)` (resp. `(-)_x̄`) of a restriction of scalars with the restriction of scalars of
-`RΓ_c(X, -)` (resp. `(-)_x̄`), a map `P_{n+1} ⟶ Res P_n` exhibiting `P_n` as
-`P_{n+1} ⊗ᴸ_{A_{n+1}} A_n`, i.e. an isomorphism `P_{n+1} ⊗ᴸ_{A_{n+1}} A_n ≅ P_n`. -/
+/-- Levelwise perfectness and normalization: each `P_n = RΓ_c(X, L_n)` and each geometric stalk
+`P_{x̄, n} = (L_n)_x̄` is a perfect complex of `A_n`-modules, and the transition `ν_n` induces,
+through an identification of `RΓ_c(X, -)` (resp. `(-)_x̄`) of a restriction of scalars with the
+restriction of scalars of `RΓ_c(X, -)` (resp. `(-)_x̄`), a map `P_{n+1} ⟶ Res P_n` exhibiting `P_n`
+as `P_{n+1} ⊗ᴸ_{A_{n+1}} A_n`, i.e. an isomorphism `P_{n+1} ⊗ᴸ_{A_{n+1}} A_n ≅ P_n`. -/
 theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
     ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).obj
         (S.obj n)).IsPerfect ∧

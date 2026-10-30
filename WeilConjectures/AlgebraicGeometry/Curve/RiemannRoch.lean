@@ -11,35 +11,16 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.DensePoints
-public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
-public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
-public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
-public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 
@@ -189,7 +170,7 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
 invertible, the evaluation `ev : M ⊗ Mᵛ ⟶ 𝒪_X`, `x ⊗ φ ↦ φ(x)`, is an isomorphism, and the
 canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism.
 
-(blueprint: `lem-sc-invertible-dual`) -/
+(blueprint: `lem-pc-tensor-dual-invertible`) -/
 theorem Modules.isInvertible_dual_and_isIso_dualEvaluation_and_isIso_bidual {X : Scheme.{u}}
     (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ IsIso (Modules.dualEvaluation M) ∧
@@ -300,7 +281,7 @@ it is proper over `k`, being closed in `X`, and quasi-finite, since a local equa
 non-zerodivisor
 (`IdealSheafData.IsInvertible.locallyQuasiFinite_subschemeι_comp_of_field`).
 
-(blueprint: `def-sc-effective-cartier-divisor`) -/
+(blueprint: `def-pc-divisor-line-bundle`) -/
 theorem IdealSheafData.IsInvertible.isFinite_subschemeι_comp {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) :=
   have := hJ.locallyQuasiFinite_subschemeι_comp_of_field (X ↘ Spec (.of k))
@@ -791,7 +772,7 @@ The case `q = 1` is `AlgebraicGeometry.Scheme.nonempty_dual_H_one_iso`, obtained
 morphism `X ⟶ ℙ¹_k` and duality on `ℙ¹_k`; the case `q = 0` is
 `AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality.
 
-(blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
+(blueprint: `det-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] (p q : ℕ) (hpq : p + q = 1) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
@@ -898,7 +879,7 @@ commutes. The isomorphism is the one induced by the trace pairing
 `H^0(ℱ) ⊗ H^0(ℱᵛ) → H^0(𝒪_X) = A → k`, whose last map is the trace `Tr_{A/k}`. In degrees
 `q > 0` both sides vanish.
 
-(blueprint: `sk-thm-picard-duality`) -/
+(blueprint: `det-thm-picard-duality`) -/
 theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
@@ -939,7 +920,7 @@ locally free `ℱ` whose inverse is the trace pairing: a global section `x` of `
 morphism `ℱ ⟶ 𝒪_X`, is sent to the functional `m ↦ Tr_{A/k}(x(m))` on `H^0(X, ℱ)`. That is,
 the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`.
 
-(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+(blueprint: `det-thm-picard-duality`, case `n = 0`) -/
 theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     letI := (globalSectionsRingHom k (X := X)).toAlgebra
@@ -988,7 +969,7 @@ relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then
 locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
 `H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
 
-(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+(blueprint: `det-thm-picard-duality`, case `n = 0`) -/
 theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
     [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
@@ -1019,10 +1000,10 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
   rfl
 
 /-- **The two genera agree.** On a smooth proper curve over `k`, the genus
-`dim_k Γ(X, Ω¹_{X/k})` of `sk-def-curve` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`, the genus
+`dim_k Γ(X, Ω¹_{X/k})` of `def-sc-curves` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`, the genus
 of blueprint `def-pc-genus`.
 
-(blueprint: `sk-thm-picard-duality`, `lem-pc-genus-agrees-sc`) -/
+(blueprint: `det-thm-picard-duality`, `lem-pc-genus-agrees-sc`) -/
 theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
@@ -1776,7 +1757,7 @@ Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, thr
 `χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
 `𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
 
-(blueprint: `sk-cor-picard-degree-g`, `cor-picard-degree-g`) -/
+(blueprint: `det-cor-picard-degree-g`, `cor-picard-degree-g`) -/
 theorem degree_eq_genus [GlobalSectionsBijective k X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)

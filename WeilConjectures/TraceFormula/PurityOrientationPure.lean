@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.TateTwist.LocallyFree
@@ -24,16 +25,18 @@ for `ℚ̄_ℓ`-coefficients:
 - `ProEtale.CondensedRing.isDualizable_upperShriek_unit_of_smoothOfRelativeDimension`: `ω_f` is
   dualizable, the Tate twists being invertible;
 - `ProEtale.CondensedRing.isIso_upperShriekBaseChange_unit_of_smoothOfRelativeDimension`: the
-  formation of `ω_f` commutes with base change, the smooth trace being compatible with base change.
+  formation of `ω_f` commutes with base change, the orientation being compatible with base change.
 
 ## Inputs
 
 - `ProEtale.CondensedRing.isDualizable_boundedConstructibleTateTwist`: the Tate twist
   `ℚ̄_ℓ,X(d)` is invertible (blueprint `det-def-sp-tate-twist-locally-free` (3), subsection
   `sk-prop-an`).
-- `ProEtale.CondensedRing.exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange`: the
-  compatibility of the smooth trace with base change (SGA 4, Exposé XVIII, Théorème 2.9 (Var 4)),
-  a property of the sorried definition `smoothTrace`, required from the smooth purity section.
+- `ProEtale.CondensedRing.smoothOrientation_baseChange`: the compatibility of the orientation
+  `γ_f` with base change (SGA 4, Exposé XVIII, Théorème 2.9 (Var 4); blueprint
+  `sk-prop-sp-purity-bc` at the unit), required from the smooth purity section. Since the purity
+  map is the orientation, this is
+  `ProEtale.CondensedRing.exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange`.
 
 -/
 
@@ -102,13 +105,12 @@ theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y)
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- Compatibility required from the smooth purity section: **the smooth trace is compatible with
-base change** (SGA 4, Exposé XVIII, Théorème 2.9 (Var 4); blueprint `det-sp-purity-bc-factors`
-(1), with the identification `Lg'^* ℚ̄_ℓ,X(d) ≅ ℚ̄_ℓ,X'(d)` of
-`det-prop-sfb-cartesian-coefficients-twists`): for a cartesian square with `f` (hence `f'`)
-smooth of pure relative dimension `d`, the pullback of the purity map
-`ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ` (the adjoint of the trace), followed by the exceptional base change
-map at the unit, is the purity map of `f'` up to an isomorphism of the Tate twists. -/
+/-- **The purity map is compatible with base change** (SGA 4, Exposé XVIII, Théorème 2.9
+(Var 4); blueprint `sk-prop-sp-purity-bc` at the unit): for a cartesian square with `f` (hence
+`f'`) smooth of pure relative dimension `d`, the pullback of the purity map
+`ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ`, followed by the exceptional base change map at the unit, is the purity
+map of `f'` up to an isomorphism of the Tate twists. The purity map is the orientation
+(`smoothPurityMap_eq_smoothOrientation`), so this is `smoothOrientation_baseChange`. -/
 theorem exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange (sq : IsPullback g' f' f g)
     (d : ℕ) [SmoothOfRelativeDimension d f.left] [SmoothOfRelativeDimension d f'.left] :
     ∃ τ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
@@ -118,8 +120,8 @@ theorem exists_iso_map_smoothPurityMap_comp_upperShriekBaseChange (sq : IsPullba
           (smoothPurityMap ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
           (boundedConstructibleUpperShriek ℓ f').map
             (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)) =
-        τ.hom ≫ smoothPurityMap ℓ f' d :=
-  sorry
+        τ.hom ≫ smoothPurityMap ℓ f' d := by
+  simpa only [smoothPurityMap_eq_smoothOrientation] using smoothOrientation_baseChange ℓ sq d
 
 /-- **The formation of the relative dualizing complex of a morphism smooth of pure relative
 dimension commutes with base change**: the exceptional base change map at the unit is an

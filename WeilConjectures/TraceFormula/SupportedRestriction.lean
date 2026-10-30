@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.TraceClassDiagonal
+public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateHomEquiv
+import WeilConjectures.TraceFormula.LocalTerm
 
 /-!
 
@@ -136,12 +139,6 @@ lemma Iso.inv_app_comp_map_comp {C D : Type*} [Category* C] [Category* D] {S T :
       ε ≫ T.map (a ≫ b) ≫ T.map c ≫ T.map d ≫ φ.inv.app A₄ ≫ h := by
   simp only [Functor.map_comp, Category.assoc, NatTrans.naturality_assoc]
 
-
-/-- A morphism killed by a functor is killed by every isomorphic functor. -/
-lemma NatIso.map_eq_zero_of_map_eq_zero {C D : Type*} [Category* C] [Category* D]
-    [Preadditive D] {S T : C ⥤ D} (φ : S ≅ T) {M N : C} {f : M ⟶ N} (hf : S.map f = 0) :
-    T.map f = 0 := by
-  rw [← NatIso.naturality_1 φ f, hf, Limits.zero_comp, Limits.comp_zero]
 
 end CategoryTheory
 
