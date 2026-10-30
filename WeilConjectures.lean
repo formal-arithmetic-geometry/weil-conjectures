@@ -11918,6 +11918,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersModPowResidueField
+public import WeilConjectures.NumberTheory.Padics.IntegersModPowTransition
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.IntegersProfiniteTower
 public import WeilConjectures.NumberTheory.Padics.IntegersResidueField
