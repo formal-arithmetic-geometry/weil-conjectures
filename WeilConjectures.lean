@@ -4348,11 +4348,14 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamily
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamilySmooth
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Center
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficients
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalTangentAddition
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Adjoint
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.AdjointCenter
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image
@@ -4375,8 +4378,11 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Kernel
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativeFree
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativePoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDual
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
@@ -10243,6 +10249,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monad.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.GrpEqLocus
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
