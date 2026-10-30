@@ -8005,6 +8005,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCupProduct
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapEquivalence
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMateReflect
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
@@ -8277,9 +8278,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalOfIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.TensorComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBasis
@@ -8651,6 +8654,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingPresheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingPresheafMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheafMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.ConstantRingSheafTensorProj
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
@@ -13227,6 +13231,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStarMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Linear
@@ -13359,6 +13364,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Per
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaProperField
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProperFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RefinementComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
@@ -13482,6 +13488,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbientIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothFinite
@@ -13658,6 +13665,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProFinit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarAmplitude
@@ -13786,6 +13794,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacConjugate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacGeneric
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicIntCokernelPowTower
@@ -13817,9 +13826,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldDerivedMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafEquivalenceLift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafEquivalenceUpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldModuleSheafMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportBaseChangeIso
