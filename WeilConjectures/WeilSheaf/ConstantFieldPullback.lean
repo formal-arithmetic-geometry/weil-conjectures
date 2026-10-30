@@ -21,7 +21,8 @@ Let `k₀ ⊆ k'` be finite fields with `[k' : k₀] = m + 1` and `V` a `k'`-sch
 sheaves pulled back from `V` itself and twisted by a constant: the pullback `p₀^* H` of an
 `ℓ`-adic sheaf `H` on `V` with its canonical Weil structure relative to `k₀` multiplied by `b`
 goes to the pullback `p'^* H` with its canonical Weil structure relative to `k'` multiplied by
-`b^{m+1}` (`AlgebraicGeometry.ProEtaleWeilSheaf.constantFieldFunctorObjGeometricFiberPullbackTwistIso`).
+`b^{m+1}`
+(`ProEtaleWeilSheaf.constantFieldFunctorObjGeometricFiberPullbackTwistIso`).
 Indeed the Frobenius relative to `k'` is the `(m+1)`-st power of the one relative to `k₀`.
 
 ## Main definitions
@@ -79,7 +80,7 @@ lemma adicUpperStarFactorIso_map_hom_comp {X Y Z W : Scheme.{u}} (a : X ⟶ Y) {
   rw [e₁, e₂, ← cancel_epi ((adicUpperStarComp l (a ≫ b) f).hom.app M ≫
     (adicUpperStarComp l a b).hom.app _)]
   conv_lhs => rw [h]
-  simp only [adicUpperStarFactorIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+  simp only [adicUpperStarFactorIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 

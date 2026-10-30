@@ -18,7 +18,7 @@ and to `k'` correspond, compatibly with irreducibility, pullbacks from `V₀` an
 (`WeilConjectures.WeilSheaf.ConstantFieldIrreducible`). Hence the statement that irreducible
 lisse Weil sheaves are constant twists of pulled-back lisse sheaves reduces to geometrically
 connected schemes
-(`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback_of_constantField`).
+(`WeilSheaf.IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback_of_constantField`).
 -/
 
 @[expose] public section
@@ -47,13 +47,14 @@ theorem IsIrreducibleLisse.exists_iso_constantTwist_geometricFiberPullback_of_co
       [QuasiCompact (V ↘ Spec (CommRingCat.of k'))] [Smooth (V ↘ Spec (CommRingCat.of k'))]
       [GeometricallyConnected (V ↘ Spec (CommRingCat.of k'))] (G : WeilSheaf k' l V),
       G.IsIrreducibleLisse → ∃ (H : AdicSheaf l V) (hH : IsAdicLisseSheaf H)
-        (b : (PadicAlgCl l)ˣ), Nonempty (G ≅ (geometricFiberPullback (k₀ := k') hH).constantTwist b))
+        (b : (PadicAlgCl l)ˣ),
+          Nonempty (G ≅ (geometricFiberPullback (k₀ := k') hH).constantTwist b))
     {G : WeilSheaf k₀ l V} (hG : G.IsIrreducibleLisse) :
     ∃ (H : AdicSheaf l V) (hH : IsAdicLisseSheaf H) (b : (PadicAlgCl l)ˣ),
       Nonempty (G ≅ (geometricFiberPullback (k₀ := k₀) hH).constantTwist b) := by
   obtain ⟨k', _, _, _, c, hc, _, _⟩ :=
     exists_constantField_of_smooth (V ↘ Spec (CommRingCat.of k₀))
-  letI : V.Over (Spec (CommRingCat.of k')) := ⟨c⟩
+  let : V.Over (Spec (CommRingCat.of k')) := ⟨c⟩
   have : Fact (ringChar k' ≠ l) := ⟨by rw [← Algebra.ringChar_eq k₀ k']; exact Fact.out⟩
   have : Smooth (V ↘ Spec (CommRingCat.of k')) := inferInstanceAs (Smooth c)
   have : GeometricallyConnected (V ↘ Spec (CommRingCat.of k')) :=
