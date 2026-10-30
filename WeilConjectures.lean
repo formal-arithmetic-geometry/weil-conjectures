@@ -8605,6 +8605,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalOfIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.TensorComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
@@ -9036,6 +9037,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalizatio
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendChangeTransfer
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasis
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsCokernelPow
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
@@ -14430,6 +14432,11 @@ public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.Tactic.TransportModProofs
+public import WeilConjectures.TateTwist.ComparisonSingle
+public import WeilConjectures.TateTwist.EtaleTateSheafPow
+public import WeilConjectures.TateTwist.FiniteRootsOfUnity
+public import WeilConjectures.TateTwist.Integral
+public import WeilConjectures.TateTwist.IntegralLocallyFree
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
@@ -14438,6 +14445,7 @@ public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
 public import WeilConjectures.TateTwist.RootsOfUnityUpperStar
+public import WeilConjectures.TateTwist.TateModuleReduction
 public import WeilConjectures.TateTwist.TateModuleTrivialization
 public import WeilConjectures.TateTwist.TateModuleUpperStar
 public import WeilConjectures.TateTwist.UpperStarExtendScalars
