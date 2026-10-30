@@ -10098,6 +10098,7 @@ public import WeilConjectures.FieldTheory.GaloisMatrixCocycleDescent
 public import WeilConjectures.FieldTheory.GaloisMatrixCocycleSplit
 public import WeilConjectures.FieldTheory.GaloisMatrixHilbert90
 public import WeilConjectures.FieldTheory.GaloisMatrixHilbert90Normalized
+public import WeilConjectures.FieldTheory.GaloisRestriction
 public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 public import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 public import WeilConjectures.FieldTheory.GaloisUnitsScalarCoboundary
@@ -10309,6 +10310,7 @@ public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
 public import WeilConjectures.Mathlib.Algebra.Algebra.Subalgebra.Tower
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Finprod
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Group.Finset.Basic
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
 public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
 public import WeilConjectures.Mathlib.Algebra.Category.AlgCat.FilteredColimits
@@ -13354,9 +13356,13 @@ public import WeilConjectures.SixFunctors.NearbyCycles.FiniteSupportVanishing
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariant
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerAction
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChangeTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
@@ -14242,6 +14248,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.SheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.SheafIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.Tower
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerAverage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerContinuity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerLimit

@@ -28,9 +28,9 @@ If moreover `Ω₂ / L₂` is normal and `L₁` is relatively closed in `L₂` i
 it surjects onto `Gal(L'/L₁)` for every finite Galois subextension `L'` of `Ω₁ / L₁`
 (`AlgEquiv.exists_restrictNormalHomAlong_eq`, `AlgEquiv.exists_eq_of_forall_mem_range`).
 
-We also record the group-theoretic statement used to compare wild inertia subgroups:
-for a commutative square `q₁ ∘ r = ψ ∘ q₂` with `r` surjective and `ψ` injective, `r` maps
-`ker q₂` onto `ker q₁` (`MonoidHom.map_ker_eq_ker_of_comp_eq`).
+The group-theoretic form of "the wild kernels map onto each other" (for a commutative square
+`q₁ ∘ r = ψ ∘ q₂` of groups with `r` surjective and `ψ` injective, `r` maps `ker q₂` onto
+`ker q₁`) is `MonoidHom.map_ker_eq_ker_of_comp_eq`.
 -/
 
 @[expose] public section
@@ -124,17 +124,50 @@ theorem exists_eq_of_forall_mem_range [Normal L₁ Ω₁] [Normal L₂ Ω₂]
   obtain ⟨σ, hσ⟩ := exists_restrictNormalHomAlong_eq hω hclosed L' a
   exact ⟨σ, restrictNormalHomAlong hω σ, hσ, restrictNormalHomAlong_commutes hω σ⟩
 
+
+section Inertia
+
+variable {K₁ K₂ : Type*} [Field K₁] [Field K₂] [Algebra K₁ L₁] [Algebra K₁ Ω₁]
+  [IsScalarTower K₁ L₁ Ω₁] [Algebra K₂ Ω₂]
+
+/-- **The wild kernels map onto each other.** Let `K₁ ⊆ L₁ ⊆ Ω₁` and `K₂ ⊆ L₂ ⊆ Ω₂` be towers of
+fields and `ω : Ω₁ ⟶ Ω₂`. Assume that every `σ₁ ∈ Aut(Ω₁/K₁)` is the restriction of some
+`σ₂ ∈ Aut(Ω₂/K₂)` along `ω` (the map of inertia groups `I₂ ⟶ I₁` is surjective), and that an
+element of `Aut(Ω₂/K₂)` fixing `ω(L₁)` fixes `L₂` (the map of the quotients `I₂/P₂ ⟶ I₁/P₁` is
+injective, e.g. the tame inertia quotients are identified). Then every `σ₁ ∈ Aut(Ω₁/L₁)` is the
+restriction of some `σ₂ ∈ Aut(Ω₂/L₂)`: the kernels `Pᵢ = Aut(Ωᵢ/Lᵢ)` map onto each other (the
+Galois form of `MonoidHom.map_ker_eq_ker_of_comp_eq`). -/
+theorem exists_comp_eq_of_exists_comp_eq_of_fixes
+    (hI : ∀ σ₁ : Ω₁ ≃ₐ[K₁] Ω₁, ∃ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂, ∀ x, ω (σ₁ x) = σ₂ (ω x))
+    (htame : ∀ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂,
+      (∀ x : L₁, σ₂ (ω (algebraMap L₁ Ω₁ x)) = ω (algebraMap L₁ Ω₁ x)) →
+        ∀ y : L₂, σ₂ (algebraMap L₂ Ω₂ y) = algebraMap L₂ Ω₂ y)
+    (σ₁ : Ω₁ ≃ₐ[L₁] Ω₁) : ∃ σ₂ : Ω₂ ≃ₐ[L₂] Ω₂, ∀ x, ω (σ₁ x) = σ₂ (ω x) := by
+  obtain ⟨σ₂, hσ₂⟩ := hI (σ₁.restrictScalars K₁)
+  have hfix := htame σ₂ fun x ↦ by
+    rw [← hσ₂]
+    exact congrArg ω (σ₁.commutes x)
+  exact ⟨AlgEquiv.ofRingEquiv (f := σ₂.toRingEquiv) hfix, hσ₂⟩
+
+/-- The finite-quotient form of `AlgEquiv.exists_comp_eq_of_exists_comp_eq_of_fixes`: under the
+same hypotheses, with `Ω₁ / L₁` normal, every automorphism `a` of a finite Galois subextension
+`L'` of `Ω₁ / L₁` extends to some `σ₁ ∈ Aut(Ω₁/L₁)` which is the restriction of some
+`σ₂ ∈ Aut(Ω₂/L₂)` along `ω`. -/
+theorem exists_eq_of_exists_comp_eq_of_fixes [Normal L₁ Ω₁]
+    (hI : ∀ σ₁ : Ω₁ ≃ₐ[K₁] Ω₁, ∃ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂, ∀ x, ω (σ₁ x) = σ₂ (ω x))
+    (htame : ∀ σ₂ : Ω₂ ≃ₐ[K₂] Ω₂,
+      (∀ x : L₁, σ₂ (ω (algebraMap L₁ Ω₁ x)) = ω (algebraMap L₁ Ω₁ x)) →
+        ∀ y : L₂, σ₂ (algebraMap L₂ Ω₂ y) = algebraMap L₂ Ω₂ y)
+    (L' : FiniteGaloisIntermediateField L₁ Ω₁) (a : Gal(L'/L₁)) :
+    ∃ σ₂ : Gal(Ω₂/L₂), ∃ σ₁ : Gal(Ω₁/L₁),
+      (∀ x : L', σ₁ x = a x) ∧ ∀ x, ω (σ₁ x) = σ₂ (ω x) := by
+  obtain ⟨σ₁, hσ₁⟩ := AlgEquiv.restrictNormalHom_surjective (F := L₁)
+    (K₁ := (L' : IntermediateField L₁ Ω₁)) Ω₁ a
+  obtain ⟨σ₂, hσ₂⟩ := exists_comp_eq_of_exists_comp_eq_of_fixes hI htame σ₁
+  refine ⟨σ₂, σ₁, fun x ↦ ?_, hσ₂⟩
+  rw [← hσ₁]
+  exact (restrictNormalHom_apply (L' : IntermediateField L₁ Ω₁) σ₁ x).symm
+
+end Inertia
+
 end AlgEquiv
-
-namespace MonoidHom
-
-/-- Given a commutative square of groups `q₁ ∘ r = ψ ∘ q₂` with `r` surjective and `ψ`
-injective, `r` maps the kernel of `q₂` onto the kernel of `q₁`. -/
-theorem map_ker_eq_ker_of_comp_eq {I₂ I₁ Q₂ Q₁ : Type*} [Group I₂] [Group I₁] [Group Q₂]
-    [Group Q₁] {r : I₂ →* I₁} {q₂ : I₂ →* Q₂} {q₁ : I₁ →* Q₁} {ψ : Q₂ →* Q₁}
-    (hr : Function.Surjective r) (hψ : Function.Injective ψ) (h : q₁.comp r = ψ.comp q₂) :
-    q₂.ker.map r = q₁.ker := by
-  rw [← ker_comp_of_injective q₂ ψ hψ, ← h, ← comap_ker,
-    Subgroup.map_comap_eq_self_of_surjective hr]
-
-end MonoidHom

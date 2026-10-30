@@ -28,8 +28,9 @@ along the map of inertia groups `I₂ ⟶ I₁` (SGA 4½, [Th. finitude], proof 
 The pullback exchanges of the square of models
 ```
 N₂_{Ω₂} ──τ'──→ N₁_{Ω₁}
-   │               │
-   N₂ ────τ────→  N₁
+   │σ₂             │σ₁
+   ↓               ↓
+   N₂ ─────τ─────→ N₁
 ```
 satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the composition isomorphisms
 (`NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`), with `σᵢ : Nᵢ_{Ωᵢ} ⟶ Nᵢ` the
@@ -139,7 +140,14 @@ variable {X₁ X₁' X₂ X₂' : Scheme.{u}} {M₁ : NearbyCyclesModel X₁ X�
 `σ₂ : M₂ ⟶ M₂` and `σ₁ : M₁ ⟶ M₁` be morphisms of models over the identities and `τ : M₂ ⟶ M₁` a
 morphism of models with `σ₂ ≫ τ = τ ≫ σ₁` on total spaces and geometric generic fibres. Then the
 pullback exchange `α_τ : Lf'^* Ψ_{M₁} C ⟶ Ψ_{M₂} (Lf^* C)` satisfies
-`α_τ ≫ σ₂ = Lf'^* σ₁ ≫ α_τ` for the actions `NearbyCyclesModel.Hom.autAction`. -/
+`α_τ ≫ σ₂ = Lf'^* σ₁ ≫ α_τ` for the actions `NearbyCyclesModel.Hom.autAction`:
+```
+Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
+      │Lf'^* σ₁               │σ₂
+      ↓                       ↓
+Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
+```
+-/
 lemma Hom.pullbackExchange_app_comp_autAction_of_comm (τ : M₂.Hom M₁ f f')
     (σ₂ : M₂.Hom M₂ (𝟙 X₂) (𝟙 X₂')) (σ₁ : M₁.Hom M₁ (𝟙 X₁) (𝟙 X₁'))
     (htot : σ₂.total ≫ τ.total = τ.total ≫ σ₁.total)
@@ -177,7 +185,8 @@ variable {L₁ L₂ : Type u} [Field L₁] [Field L₂] (h₁ : M₁.generic ⟶
   (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l)
 
 /-- The square of spectra `Spec ω ≫ Spec(L₁ → Ω₁) = Spec(L₂ → Ω₂) ≫ Spec l`. -/
-lemma specMap_comp_specMap_algebraMap (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l) :
+lemma specMap_algebraMap_comp_specMap_of_comp_eq
+    (hω : ω.comp (algebraMap L₁ Ω₁) = (algebraMap L₂ Ω₂).comp l) :
     Spec.map (CommRingCat.ofHom (algebraMap L₂ Ω₂)) ≫ Spec.map (CommRingCat.ofHom l) =
       Spec.map (CommRingCat.ofHom ω) ≫ Spec.map (CommRingCat.ofHom (algebraMap L₁ Ω₁)) := by
   rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp, hω]
@@ -189,7 +198,7 @@ noncomputable def galoisLayerGenericMap (τ : M₂.Hom M₁ f f')
     (hτ : τ.generic ≫ h₁ = h₂ ≫ Spec.map (CommRingCat.ofHom l)) :
     (M₂.galoisLayer h₂ Ω₂).generic ⟶ (M₁.galoisLayer h₁ Ω₁).generic :=
   pullback.map h₂ _ h₁ _ τ.generic (Spec.map (CommRingCat.ofHom ω)) (Spec.map (CommRingCat.ofHom l))
-    hτ.symm (specMap_comp_specMap_algebraMap Ω₁ Ω₂ l ω hω)
+    hτ.symm (specMap_algebraMap_comp_specMap_of_comp_eq Ω₁ Ω₂ l ω hω)
 
 variable {h₁ h₂ l} in
 @[reassoc (attr := simp)]
