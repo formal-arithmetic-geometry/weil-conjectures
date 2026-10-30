@@ -46,7 +46,7 @@ the invariance of nearby cycles under change of trait
 (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`) and the
 generic-slicing identification with invariants
 (`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, from the unfinished
-`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`); the projection
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_geometricSliceTraitChangeHom`); the projection
 formula for invariants makes the retractions compatible with the Künneth maps
 (`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`).
 Since the slice of a local chart `V ⟶ 𝔸ᵐ_S` along one of its coordinates is a local chart of
@@ -298,7 +298,8 @@ pro-`p` kernel `P'` of the map of inertia groups
 `Π'` is the projection formula for invariants (blueprint `det-nearby-kunneth-invariants`): `Π'` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) and `P'` acts trivially on the nearby
 cycles of the change of trait of `N` (`NearbyCyclesModel.Hom.autAction_eq_id_of_isIso`, by the
-invariance under change of trait `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`),
+invariance under change of trait
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`),
 see `NearbyCyclesModel.isTensorRetract_of_average`. -/
 theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

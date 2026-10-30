@@ -10419,6 +10419,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+public import WeilConjectures.Mathlib.CategoryTheory.Subobject.NoetherianObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
@@ -13006,6 +13007,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMapInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilization
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
