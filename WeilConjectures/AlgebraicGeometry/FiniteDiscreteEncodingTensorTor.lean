@@ -23,6 +23,9 @@ universe u v w r
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj
 
+-- Upstream made these instances local in InternalSectionTensorComparison.
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 -- Match the ambient braiding used to construct the coefficient ring and relative tensor.

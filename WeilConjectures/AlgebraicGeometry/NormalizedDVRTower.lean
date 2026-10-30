@@ -48,6 +48,20 @@ noncomputable def normalizedDVRRestrictionCompIso
     SheafOfModules.restrictScalars.{s} g ⋙ SheafOfModules.restrictScalars.{s} f ≅
       SheafOfModules.restrictScalars.{s} (f ≫ g) := Iso.refl _
 
+private theorem normalizedDVRRestrictionExact
+    {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{r}} (f : R ⟶ S)
+    [HasSheafify J AddCommGrpCat.{s}] [J.WEqualsLocallyBijective AddCommGrpCat.{s}] :
+    PreservesFiniteLimits (SheafOfModules.restrictScalars.{s} f) ∧
+      PreservesFiniteColimits (SheafOfModules.restrictScalars.{s} f) := by
+  let U := SheafOfModules.toSheaf.{s} R
+  have : PreservesFiniteLimits (SheafOfModules.restrictScalars.{s} f ⋙ U) :=
+    inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf.{s} S))
+  have : PreservesFiniteColimits (SheafOfModules.restrictScalars.{s} f ⋙ U) :=
+    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf.{s} S))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
+    preservesFiniteColimits_of_reflects_of_preserves _ U⟩
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
@@ -81,6 +95,32 @@ instance normalizedDVRModuleRes_additive {m n : ℕ} (h : n ≤ m) :
     (normalizedDVRModuleRes l E X h).Additive := by
   unfold normalizedDVRModuleRes
   infer_instance
+
+/-- Exactness of finite-level restriction, asserted in the definition's second paragraph.
+Source: blueprint order 2131; Stacks Tag 03DA
+(blueprint: def-coef-normalized-dvr-tower).
+Proof: restriction leaves the underlying abelian sheaf and every underlying map unchanged.
+Kernels are sectionwise kernels with the restricted scalar action. Cokernels are the
+sheafifications of sectionwise cokernels, with that same restricted action. Thus the
+kernel and cokernel comparisons are identities on underlying sheaves. The functor is
+additive, so it preserves all finite limits and finite colimits. This also applies to
+identity quotients and to the empty scheme; no flatness is required. -/
+theorem normalizedDVRModuleRes_exact {m n : ℕ} (h : n ≤ m) :
+    PreservesFiniteLimits (normalizedDVRModuleRes l E X h) ∧
+      PreservesFiniteColimits (normalizedDVRModuleRes l E X h) := by
+  exact normalizedDVRRestrictionExact (normalizedDVRQuotient l E X h)
+
+/-- The finite-limit part of exact scalar restriction.
+Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+noncomputable instance normalizedDVRModuleRes_limits {m n : ℕ} (h : n ≤ m) :
+    PreservesFiniteLimits (normalizedDVRModuleRes l E X h) :=
+  (normalizedDVRModuleRes_exact l E X h).1
+
+/-- The finite-colimit part of exact scalar restriction.
+Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+noncomputable instance normalizedDVRModuleRes_colimits {m n : ℕ} (h : n ≤ m) :
+    PreservesFiniteColimits (normalizedDVRModuleRes l E X h) :=
+  (normalizedDVRModuleRes_exact l E X h).2
 
 /-- Termwise restriction descended through the actual derived localization.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/

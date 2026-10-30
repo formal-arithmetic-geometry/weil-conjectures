@@ -22,6 +22,9 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 universe u c v w
 open CategoryTheory CategoryTheory.Limits
+
+-- Upstream made these instances local in InternalSectionTensorComparison.
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 attribute [local instance] SheafOfModules.ScalarDerivedPair.extension_additive
 
 namespace CategoryTheory.InternalAbelianSheafModule

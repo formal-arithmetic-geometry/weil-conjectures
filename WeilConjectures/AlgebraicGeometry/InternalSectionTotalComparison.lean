@@ -93,8 +93,6 @@ Source: Stacks 03EK (auxiliary; not a blueprint node). -/
 abbrev sectionComparisonBraiding : BraidedCategory (Sheaf J AddCommGrpCat.{u + 1}) :=
   (Sheaf.symmetricCategory J AddCommGrpCat.{u + 1}).toBraidedCategory
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
@@ -213,12 +211,64 @@ Proof: use the generic section-functor additivity theorem. -/
 @[instance] theorem sectionForward_additive : (sectionForward Λ X).Additive :=
   sectionFunctorAdditiveForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
+/-- The primitive forward functor is an equivalence.
+Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
+Proof: use the generic section-functor equivalence theorem. -/
+@[instance] theorem sectionForward_isEquivalence : (sectionForward Λ X).IsEquivalence :=
+  sectionFunctorEquivalenceForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+
 /-- Additivity of the recorded section equivalence through its forward-functor API.
 Source: Stacks 00YV (auxiliary; not a blueprint node).
 Proof: rewrite by sectionForward_eq and use primitive section additivity. -/
 @[instance] theorem equivalenceAdditive : (equivalence Λ X).functor.Additive := by
   rw [← sectionForward_eq]
   infer_instance
+
+/-- Grothendieck abelianness supplies the small ordinary derived-category universe.
+Source: Stacks 07A5 (blueprint: def-sfb-internal-section-total-comparison).
+Proof: apply Grothendieck abelianness of module sheaves on a site small in
+the coefficient universe. Restriction of scalars from the commutative ring
+sheaf to its underlying ring sheaf does not change this category. -/
+@[instance] theorem sectionModulesGrothendieck {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u + 1}) :
+    IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) := by
+  classical
+  let S : Sheaf J RingCat.{u + 1} :=
+    (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  have : HasFilteredColimitsOfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : AB5OfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
+    ⟨fun K _ _ ↦ HasExactColimitsOfShape.domain_of_functor K (SheafOfModules.toSheaf S)⟩
+  let T (U : C) := (PresheafOfModules.sheafification.{u + 1} (𝟙 S.obj)).obj
+    ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U))
+  have hs : ObjectProperty.IsSeparating (.ofObj T) := by
+    intro M N f g h
+    apply (SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj).map_injective
+    ext ⟨U⟩ x
+    let adj := PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 S.obj)
+    let e (M : SheafOfModules.{u + 1} S) :=
+      (adj.homEquiv
+        ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U)) M).trans
+        (PresheafOfModules.freeHomEquiv.trans uliftYonedaEquiv)
+    have hn (a : T U ⟶ M) (k : M ⟶ N) :
+        (e N) (a ≫ k) = k.val.app (.op U) ((e M) a) := by
+      dsimp only [e, Equiv.trans_apply]
+      rw [adj.homEquiv_naturality_right]
+      let a' := (adj.homEquiv _ _) a
+      let k' := (SheafOfModules.forget S ⋙
+        PresheafOfModules.restrictScalars (𝟙 S.obj)).map k
+      change uliftYonedaEquiv (PresheafOfModules.freeHomEquiv (a' ≫ k')) = _
+      have hh := (PresheafOfModules.freeAdjunction S.obj).homEquiv_naturality_right a' k'
+      rw [PresheafOfModules.freeAdjunction_homEquiv,
+        PresheafOfModules.freeAdjunction_homEquiv] at hh
+      erw [hh, uliftYonedaEquiv_comp]
+    have hh := congrArg (e N) (h _ (ObjectProperty.ofObj_apply T U) ((e M).symm x))
+    rw [hn, hn, Equiv.apply_symm_apply] at hh
+    exact hh
+  have : HasSeparator (SheafOfModules.{u + 1} S) :=
+    ⟨_, hs.isSeparator_coproduct⟩
+  exact {}
 
 /-- Fix the dependency's existing totalization instance for this internal category.
 Source: Stacks 012Z; lem-pe-internal-section-tensor-comparison
