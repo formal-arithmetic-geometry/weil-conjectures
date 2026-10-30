@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The unit `ℓ`-adic sheaf corresponds to the unit module object over `Λ_X`. -/
-noncomputable def adicSheafEquivCondensedModUnitIso :
+noncomputable def adicSheafEquivCondensedModTensorUnitIso :
     (adicSheafEquivCondensedMod l X).functor.obj (AdicSheaf.unit l X) ≅
       𝟙_ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj l) X)) :=
@@ -54,13 +54,13 @@ lemma adicUpperStarLowerStarAdjunction_unit_app_unit_comp_map_adicUpperStarUnitI
 /-- **The pullback compatibility of the two models is compatible with the units.** -/
 theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f : Y ⟶ X) :
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f).map
-        (adicSheafEquivCondensedModUnitIso l X).inv ≫
+        (adicSheafEquivCondensedModTensorUnitIso l X).inv ≫
       (adicUpperStarCompCondensedModIso l f).inv.app (AdicSheaf.unit l X) ≫
       (adicSheafEquivCondensedMod l Y).functor.map (adicUpperStarUnitIso l f).hom ≫
-      (adicSheafEquivCondensedModUnitIso l Y).hom =
+      (adicSheafEquivCondensedModTensorUnitIso l Y).hom =
       (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f)).inv := by
   have nat := (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f).unit.naturality
-    (adicSheafEquivCondensedModUnitIso l X).inv
+    (adicSheafEquivCondensedModTensorUnitIso l X).inv
   have U := unit_app_comp_map_conjugateIsoEquiv_symm_inv_app (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
     (adicSheafEquivCondensedMod l X) (adicSheafEquivCondensedMod l Y)
@@ -74,17 +74,17 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
         (𝟙_ _) ≫
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).map
         ((CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f).map
-          (adicSheafEquivCondensedModUnitIso l X).inv ≫
+          (adicSheafEquivCondensedModTensorUnitIso l X).inv ≫
         (adicUpperStarCompCondensedModIso l f).inv.app (AdicSheaf.unit l X) ≫
         (adicSheafEquivCondensedMod l Y).functor.map (adicUpperStarUnitIso l f).hom ≫
-        (adicSheafEquivCondensedModUnitIso l Y).hom) =
-      (adicSheafEquivCondensedModUnitIso l X).inv ≫
+        (adicSheafEquivCondensedModTensorUnitIso l Y).hom) =
+      (adicSheafEquivCondensedModTensorUnitIso l X).inv ≫
         (adicSheafEquivCondensedMod l X).functor.map
           ((adicUpperStarLowerStarAdjunction l f).unit.app (AdicSheaf.unit l X) ≫
             (f)_*ᵃ[l].map (adicUpperStarUnitIso l f).hom) ≫
         (adicLowerStarCompCondensedModIso l f).hom.app (AdicSheaf.unit l Y) ≫
         (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).map
-          (adicSheafEquivCondensedModUnitIso l Y).hom := by
+          (adicSheafEquivCondensedModTensorUnitIso l Y).hom := by
     simp only [Functor.map_comp, Category.assoc]
     rw [← reassoc_of% nat]
     erw [reassoc_of% U]
@@ -96,7 +96,7 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
   rw [CondensedRing.homEquiv_εIso_inv_hom, Adjunction.homEquiv_unit, key, Mod.comp_hom',
     Mod.comp_hom', Mod.comp_hom', adicLowerStarCompCondensedModIso_hom_app_hom,
     CondensedRing.lowerStar_map_hom]
-  have h₁ : (adicSheafEquivCondensedModUnitIso l X).inv.hom =
+  have h₁ : (adicSheafEquivCondensedModTensorUnitIso l X).inv.hom =
       (condensedRingObjIsoForgetAb l X).hom := rfl
   have h₂ : ((adicSheafEquivCondensedMod l X).functor.map
       ((adicUpperStarLowerStarAdjunction l f).unit.app (AdicSheaf.unit l X) ≫
@@ -104,7 +104,7 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
       (weilCoefficientsForgetAb l X).map
         ((adicUpperStarLowerStarAdjunction l f).unit.app (AdicSheaf.unit l X) ≫
           (f)_*ᵃ[l].map (adicUpperStarUnitIso l f).hom).hom := rfl
-  have h₃ : (adicSheafEquivCondensedModUnitIso l Y).hom.hom =
+  have h₃ : (adicSheafEquivCondensedModTensorUnitIso l Y).hom.hom =
       (condensedRingObjIsoForgetAb l Y).inv := rfl
   rw [h₁, h₂, h₃, adicUpperStarLowerStarAdjunction_unit_app_unit_comp_map_adicUpperStarUnitIso_hom_hom,
     ]
@@ -112,5 +112,19 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
   rw [← Category.assoc, ← condensedPushforwardHom_comp_map_condensedRingObjIsoForgetAb_hom,
     Category.assoc, ← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
     Category.comp_id]
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+
+lemma adicSheafEquivCondensedModTensorUnitIso_hom_hom :
+    (adicSheafEquivCondensedModTensorUnitIso l X).hom.hom =
+      (condensedRingObjIsoForgetAb l X).inv := rfl
+
+lemma adicSheafEquivCondensedModTensorUnitIso_inv_hom :
+    (adicSheafEquivCondensedModTensorUnitIso l X).inv.hom =
+      (condensedRingObjIsoForgetAb l X).hom := rfl
 
 end AlgebraicGeometry.ProEtale

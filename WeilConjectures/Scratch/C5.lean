@@ -37,22 +37,22 @@ noncomputable def condensedSectionOfAdicSection (x : S ⟶ T) (H : AdicSheaf l T
     (β : AdicSheaf.unit l S ⟶ (x)^*ᵃ[l].obj H) :
     𝟙ₘ ⟶ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) x).obj
       ((adicSheafEquivCondensedMod l T).functor.obj H) :=
-  (adicSheafEquivCondensedModUnitIso l S).inv ≫ (adicSheafEquivCondensedMod l S).functor.map β ≫
+  (adicSheafEquivCondensedModTensorUnitIso l S).inv ≫ (adicSheafEquivCondensedMod l S).functor.map β ≫
     (adicUpperStarCompCondensedModIso l x).hom.app H
 
-lemma adicSheafEquivCondensedModUnitIso_inv_comp_map_adicUpperStarUnitIso_inv (σ : S ⟶ T) :
-    (adicSheafEquivCondensedModUnitIso l S).inv ≫
+lemma adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_adicUpperStarUnitIso_inv (σ : S ⟶ T) :
+    (adicSheafEquivCondensedModTensorUnitIso l S).inv ≫
         (adicSheafEquivCondensedMod l S).functor.map (adicUpperStarUnitIso l σ).inv ≫
         (adicUpperStarCompCondensedModIso l σ).hom.app (AdicSheaf.unit l T) =
       (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) σ)).hom ≫
         (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) σ).map
-          (adicSheafEquivCondensedModUnitIso l T).inv := by
+          (adicSheafEquivCondensedModTensorUnitIso l T).inv := by
   have h := upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (l := l) σ
   have hI : (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) σ).mapIso
-        (adicSheafEquivCondensedModUnitIso l T).symm ≪≫
+        (adicSheafEquivCondensedModTensorUnitIso l T).symm ≪≫
       ((adicUpperStarCompCondensedModIso l σ).app (AdicSheaf.unit l T)).symm ≪≫
       (adicSheafEquivCondensedMod l S).functor.mapIso (adicUpperStarUnitIso l σ) ≪≫
-      adicSheafEquivCondensedModUnitIso l S =
+      adicSheafEquivCondensedModTensorUnitIso l S =
       (Functor.Monoidal.εIso (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) σ)).symm :=
     Iso.ext (by simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv] using h)
   have h2 := congrArg (fun i ↦ i.inv) hI
@@ -101,6 +101,6 @@ theorem condensedSectionOfAdicSection_adicUpperStarSectionMap {R : Scheme.{u}} (
   have hn := (adicUpperStarCompCondensedModIso l σ).hom.naturality β
   rw [Functor.comp_map, Functor.comp_map] at hn
   rw [reassoc_of% hn,
-    reassoc_of% (adicSheafEquivCondensedModUnitIso_inv_comp_map_adicUpperStarUnitIso_inv σ)]
+    reassoc_of% (adicSheafEquivCondensedModTensorUnitIso_inv_comp_map_adicUpperStarUnitIso_inv σ)]
 
 end AlgebraicGeometry.ProEtale
