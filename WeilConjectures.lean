@@ -3225,6 +3225,7 @@ public import WeilConjectures.AlgebraicGeometry.DirectedPerfectHomIso
 public import WeilConjectures.AlgebraicGeometry.DiscreteCoefficientLocalModels
 public import WeilConjectures.AlgebraicGeometry.DiscreteCoefficientModel
 public import WeilConjectures.AlgebraicGeometry.DiscreteConstantPresentationLifting
+public import WeilConjectures.AlgebraicGeometry.DiscreteFieldTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.DiscreteInternalMatrixLocalLifting
 public import WeilConjectures.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
 public import WeilConjectures.AlgebraicGeometry.DiscretePointPresentationRefinement
@@ -11135,6 +11136,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Retract
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.Mathlib.CategoryTheory.NatIsoInvApp
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProducts

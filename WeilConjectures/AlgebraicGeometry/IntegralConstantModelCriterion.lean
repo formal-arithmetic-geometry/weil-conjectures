@@ -19,7 +19,7 @@ through the adic stratified perfect models (Bhatt–Scholze, Proposition 6.8.11(
 the local structure theorem `sk-prop-integral-local-structure` for finite constant models.
 
 Source: Bhatt–Scholze, Proposition 6.8.11; Stacks Tags 09C1 and 09C7
-(auxiliary; not a blueprint node).
+(blueprint: det-lem-integral-models-stacks).
 -/
 
 @[expose] public noncomputable section
@@ -32,10 +32,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- A complex over the continuous integers has bounded cohomology with finite constant
-stratified models iff its restriction to the constant integers is Stacks adic constructible.
+/-- The criterion part of `det-lem-integral-models-stacks`: a complex over the continuous
+integers is bounded constructible (bounded cohomology with finite constant stratified models)
+iff its restriction to the constant integers is Stacks adic constructible.
 Source: Bhatt–Scholze, Proposition 6.8.11(3); Stacks Tags 09C1 and 09C7
-(auxiliary; not a blueprint node).
+(blueprint: det-lem-integral-models-stacks).
 
 Proof:
 1. `IntegralConstantModel.constructible_iff` identifies finite constant models of the
@@ -46,7 +47,7 @@ Proof:
    amplitude.
 3. `completion_transport` and `residue_transport` identify completeness and the residue
    condition with the two clauses of `stacksConstructible` of the restriction. -/
-theorem constantModelBoundedConstructible_iff_stacksConstructible (l : ℕ) [Fact l.Prime]
+theorem integral_models_stacks_criterion (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
