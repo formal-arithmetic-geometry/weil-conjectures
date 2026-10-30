@@ -2108,6 +2108,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantExtensionCover
 public import WeilConjectures.AlgebraicGeometry.ConstantExtensionPresentationLift
 public import WeilConjectures.AlgebraicGeometry.ConstantFieldDecomposition
 public import WeilConjectures.AlgebraicGeometry.ConstantFieldGeometricFiber
+public import WeilConjectures.AlgebraicGeometry.ConstantFieldStructure
 public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 public import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 public import WeilConjectures.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction
@@ -10190,6 +10191,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.Mathlib.CategoryTheory.FintypeCat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
@@ -10738,6 +10740,7 @@ public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupLattice
+public import WeilConjectures.RepresentationTheory.WeilGroupProfiniteExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
@@ -14871,6 +14874,11 @@ public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.WeilDescent
+public import WeilConjectures.WeilSheaf.WeilDescentConnected
+public import WeilConjectures.WeilSheaf.WeilDescentConstantField
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroup
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroupAux
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalRep
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 public import WeilConjectures.ZetaFunction
