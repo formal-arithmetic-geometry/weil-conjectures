@@ -454,8 +454,9 @@ theorem isFreeAction_finiteLevelGaloisMap :
 `σ ↦ 𝟙 × Spec σ` of `Gal(K / k)` on `q_K : X₀ ⊗_k K ⟶ X₀` is Galois. -/
 theorem isGaloisAction_finiteLevelGaloisMap [FiniteDimensional k K] [IsGalois k K] :
     IsGaloisAction (f.finiteLevelProj K) (f.finiteLevelGaloisMap (K := K)) :=
-  IsGaloisAction.pullback f (isGaloisAction_spec_map _ (fun σ : Gal(K/k) ↦ σ) (fun _ ↦ rfl)
-    Function.surjective_id) _ (fun σ ↦ f.finiteLevelGaloisMap_comp_finiteLevelProj σ)
+  IsGaloisAction.pullback_of_comp_eq f
+    (isGaloisAction_spec_map _ (fun σ : Gal(K/k) ↦ σ) (fun _ ↦ rfl) Function.surjective_id) _
+    (fun σ ↦ f.finiteLevelGaloisMap_comp_finiteLevelProj σ)
     fun σ ↦ f.finiteLevelGaloisMap_comp_finiteLevelToSpec σ
 
 namespace CondensedRing
@@ -496,7 +497,7 @@ omit [Finite Γ] in
 /-- The action of `Γ ≃* Gal(K / k)` on the finite level `X₀ ⊗_k K` is Galois. -/
 theorem isGaloisAction_finiteLevelGaloisAction :
     IsGaloisAction (f.finiteLevelProj K) (f.finiteLevelGaloisAction χ) :=
-  IsGaloisAction.pullback f (isGaloisAction_spec_map _ (fun σ ↦ χ σ) (fun _ ↦ rfl)
+  IsGaloisAction.pullback_of_comp_eq f (isGaloisAction_spec_map _ (fun σ ↦ χ σ) (fun _ ↦ rfl)
     χ.surjective) _ (fun σ ↦ f.finiteLevelGaloisMap_comp_finiteLevelProj (χ σ))
     fun σ ↦ f.finiteLevelGaloisMap_comp_finiteLevelToSpec (χ σ)
 
