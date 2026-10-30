@@ -20,7 +20,7 @@ structures are preserved by the compactly supported cohomology and by the homolo
 
 ## Main results
 
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id`: the
+- `boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_horizontal_id`: the
   compact-support base change of the square `𝟙 ≫ f = f ≫ 𝟙` is
   `L(𝟙)^* Rf_! K ≅ Rf_! K ≅ Rf_! L(𝟙)^* K`. It follows from the idempotence of the square under
   horizontal pasting (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`).
@@ -59,7 +59,8 @@ variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X
 back, so that, after the identification `L(𝟙)^* ≅ 𝟭`, the base change is an idempotent
 isomorphism (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`), hence the
 identity. -/
-theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id {f : X ⟶ Y}
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_horizontal_id
+    {f : X ⟶ Y}
     (sq : IsPullback (𝟙 X) f f (𝟙 Y)) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K =
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app
@@ -148,7 +149,7 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 structure isomorphism of a Weil object `K` for the identity of `X` is the identity isomorphism
 `L(𝟙)^* K ≅ K`, then so is the structure isomorphism of `RΓ_c(X, K)`
 (`weilCompactSupportCohomology`), by
-`boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id`. -/
+`boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_horizontal_id`. -/
 theorem weilCompactSupportCohomology_obj_str_hom_of_id
     (K : WeilBoundedConstructible ℓ (Iso.refl X).hom)
     (hK : K.str.hom =
@@ -157,7 +158,8 @@ theorem weilCompactSupportCohomology_obj_str_hom_of_id
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).hom.app
         ((weilCompactSupportCohomology ℓ (Iso.refl X)).obj K).carrier := by
   rw [weilCompactSupportCohomology, weilLowerShriek_obj_str, Iso.trans_hom, Iso.app_hom,
-    weilLowerShriekComparison_hom, boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id,
+    weilLowerShriekComparison_hom,
+    boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_horizontal_id,
     Functor.mapIso_hom, hK, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
     ]
   exact (congrArg _ ((boundedConstructibleLowerShriek ℓ (toPoint X)).map_id _)).trans
