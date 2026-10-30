@@ -9685,6 +9685,7 @@ public import WeilConjectures.FieldTheory.GaloisMatrixCocycleDescent
 public import WeilConjectures.FieldTheory.GaloisMatrixCocycleSplit
 public import WeilConjectures.FieldTheory.GaloisMatrixHilbert90
 public import WeilConjectures.FieldTheory.GaloisMatrixHilbert90Normalized
+public import WeilConjectures.FieldTheory.GaloisRestriction
 public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 public import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 public import WeilConjectures.FieldTheory.GaloisUnitsScalarCoboundary
@@ -12909,6 +12910,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModel
+public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelWeaklyEtale
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
@@ -12917,9 +12919,13 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsProjector
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerAction
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMapInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
@@ -12935,9 +12941,23 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.SixFunctors.NearbyCycles.ProperTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.PushforwardExchangeSquare
+public import WeilConjectures.SixFunctors.NearbyCycles.RestrictOpens
 public import WeilConjectures.SixFunctors.NearbyCycles.StrictlyHenselianTrait
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChange
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Basic
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.BasicCharts
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Coordinates
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Defs
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Slice
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceChange
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGalois
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisRestriction
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisSquare
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SlicePoints
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStep
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitCompactification
+public import WeilConjectures.SixFunctors.NearbyCycles.UniversalHomeomorphismExchange
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.CohomologyVanishing
@@ -13292,6 +13312,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Alg
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AmbientAdjointClass
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CoefficientSetup
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactLocalizing
@@ -13762,6 +13783,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ProperBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ResidueFieldEtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.StrictlyHenselianBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
@@ -14467,7 +14489,6 @@ public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisati
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisationUnit
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceInputs
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariants
-public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariantsUnit
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegral
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeIntegralInput
