@@ -14543,6 +14543,7 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
+public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizationAssembly
 public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizationPadicAlgCl
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantCase
@@ -14638,6 +14639,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExchange
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
+public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SliceTrait
