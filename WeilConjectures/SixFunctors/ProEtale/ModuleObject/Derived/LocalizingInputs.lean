@@ -170,7 +170,8 @@ theorem properDirectImage_baseChange_projectionFormula_padicIntegersRingObj (p :
     fun K M hK hM ↦
       isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible ℓ E p K M hK hM⟩
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- Blueprint `det-prop-int-compactness-direct-sums`: Integral proper direct image on the
 localizing categories. Let `p : X ⟶ Y` be proper, with fibres of dimension `≤ d`.
 
