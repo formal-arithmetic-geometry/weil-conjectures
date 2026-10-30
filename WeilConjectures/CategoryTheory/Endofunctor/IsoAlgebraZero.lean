@@ -18,7 +18,7 @@ morphisms, the underlying object of a zero object of `IsoAlgebra F` is zero.
 ## Main results
 
 - `CategoryTheory.Endofunctor.IsoAlgebra.isZero_mk`
-- `CategoryTheory.Endofunctor.IsoAlgebra.isZero_carrier`
+- `CategoryTheory.Endofunctor.IsoAlgebra.carrier_isZero`
 -/
 
 @[expose] public section
@@ -41,7 +41,7 @@ lemma isZero_mk {a : C} (ha : IsZero a) (Φ : F.obj a ≅ a) : IsZero (mk a Φ) 
 
 /-- The underlying object of a zero algebra with invertible structure morphism is zero, for an
 endofunctor preserving zero morphisms of a category with a zero object. -/
-lemma isZero_carrier [HasZeroMorphisms C] [HasZeroObject C] [F.PreservesZeroMorphisms]
+lemma carrier_isZero [HasZeroMorphisms C] [HasZeroObject C] [F.PreservesZeroMorphisms]
     {K : IsoAlgebra F} (hK : IsZero K) : IsZero K.carrier :=
   (isZero_zero C).of_iso ((forget F).mapIso
     (hK.iso (isZero_mk (isZero_zero C) (F.map_isZero (isZero_zero C)).isoZero)))

@@ -100,7 +100,7 @@ connecting morphism: it is isomorphic to the contractible triangle of the zero o
 theorem WeilBoundedConstructible.isDistTriang_id_id {Z : WeilBoundedConstructible ℓ Φ}
     (hZ : IsZero Z) : WeilBoundedConstructible.IsDistTriang ℓ (𝟙 Z) (𝟙 Z) := by
   have hZ₀ := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-    V.left)).ι.map_isZero (IsoAlgebra.isZero_carrier hZ)
+    V.left)).ι.map_isZero (IsoAlgebra.carrier_isZero hZ)
   have hZ₁ := (shiftFunctor (DerivedCategory _) (1 : ℤ)).map_isZero hZ₀
   refine ⟨0, ?_, hZ₁.eq_of_tgt _ _⟩
   refine isomorphic_distinguished _ (contractible_distinguished _) _
