@@ -13008,7 +13008,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerAction
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMapInvariants
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerRestrictProjector
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilization
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerStabilizationTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
