@@ -8,11 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.SixFunctors.Finite.Exact
-public import WeilConjectures.SixFunctors.OpenClosed.Derived
+import WeilConjectures.SixFunctors.Etale.Derived.Supports
 
 /-!
 # Proper direct images and a finite boundary

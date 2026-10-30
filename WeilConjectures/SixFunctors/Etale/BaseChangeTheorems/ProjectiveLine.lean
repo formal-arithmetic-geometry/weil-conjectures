@@ -5,10 +5,8 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 

@@ -7,14 +7,10 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
-public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!

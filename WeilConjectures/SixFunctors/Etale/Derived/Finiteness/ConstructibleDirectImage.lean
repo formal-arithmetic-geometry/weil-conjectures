@@ -6,10 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 # Constructibility of direct images: the predicate `𝒞(f)`

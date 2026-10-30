@@ -7,10 +7,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
+import Mathlib.Algebra.Category.ModuleCat.Algebra
 
 /-! # Eight assertions for constructible prime coefficients on reduced curves
 

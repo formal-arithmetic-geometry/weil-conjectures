@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingApproximation
+public import WeilConjectures.RingTheory.GRing
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleHenselianGRingStage
 import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting

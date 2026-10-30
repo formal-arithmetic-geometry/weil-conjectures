@@ -8,16 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 public import Mathlib.CategoryTheory.Simple
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.WeilSheaf.FourierInversion
-public import WeilConjectures.WeilSheaf.StalkFunctor
-public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 public import WeilConjectures.DeligneLaumon.AffineLine.DirectImageUnit
-public import WeilConjectures.WeilSheaf.HomologyShift
-public import WeilConjectures.WeilSheaf.HomologySequence
-public import WeilConjectures.WeilSheaf.SupportSubobject
 public import WeilConjectures.Mathlib.CategoryTheory.Simple
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierTopSupport
 

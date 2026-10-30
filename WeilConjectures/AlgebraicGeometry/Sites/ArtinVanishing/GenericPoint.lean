@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Infinity
-public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 
 /-!
