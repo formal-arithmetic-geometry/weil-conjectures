@@ -67,6 +67,9 @@ attribute [local instance] fact_ringChar_prime_of_finite
 namespace WeilComplex
 
 variable (X) in
+omit [Finite k₀] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The structure morphism `X₀ ⟶ Spec k₀` factors through the identity of `Spec k₀`: the underlying
 morphism of `toPoint X₀` followed by the structure morphism of `Spec k₀`. -/
 lemma toPoint_overSpec_left_comp :
@@ -108,7 +111,8 @@ noncomputable def derivedEquivCondensedSingleGeometricFiberPullbackIso (H : Adic
           ((ProEtaleWeilSheaf.geometricFiberPullback k₀ l X).obj H)) ≅
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
           (X ↘ Spec (CommRingCat.of k₀))).mapDerivedCategory.obj
-        ((DerivedCategory.singleFunctor _ 0).obj ((adicSheafEquivCondensedMod l X).functor.obj H)) :=
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((adicSheafEquivCondensedMod l X).functor.obj H)) :=
   (ProEtaleWeilSheaf.singleFunctorCompDerivedEquivCondensedIso k₀ l X 0).app
       ((ProEtaleWeilSheaf.geometricFiberPullback k₀ l X).obj H) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso
@@ -180,13 +184,15 @@ noncomputable def toCondensedHomologySheafDerivedLowerShriekPullbackIso {H : Adi
         ((homologySheaf j).obj ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj
           (WeilSheaf.toComplex.obj (WeilSheaf.geometricFiberPullback (k₀ := k₀) hH)))).obj ≅
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
-          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).obj (lowerShriekHomologyOfLisse hH j) :=
+          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).obj
+        (lowerShriekHomologyOfLisse hH j) :=
   (ProEtaleWeilSheaf.homologyFunctorCompToCondensedIso k₀ l (Spec (CommRingCat.of k₀)) j).app
       _ ≪≫
     (DerivedCategory.homologyFunctor _ j).mapIso
       (derivedLowerShriekGeometricFiberPullbackToCondensedIso hH) ≪≫
     ((geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
-      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).mapDerivedCategoryHomologyFunctorIso j).symm.app _
+      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).mapDerivedCategoryHomologyFunctorIso
+        j).symm.app _
 
 /-- The `ℓ`-adic sheaf on `Spec k₀` corresponding to `Mʲ = Hʲ(Ra_! H)`. -/
 noncomputable abbrev lowerShriekHomologyAdicOfLisse {H : AdicSheaf l X}
@@ -208,7 +214,8 @@ noncomputable def toCondensedGeometricFiberPullbackLowerShriekHomologyIso {H : A
         ((ProEtaleWeilSheaf.geometricFiberPullback k₀ l (Spec (CommRingCat.of k₀))).obj
           (lowerShriekHomologyAdicOfLisse (k₀ := k₀) hH j)) ≅
       (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
-          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).obj (lowerShriekHomologyOfLisse hH j) :=
+          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).obj
+        (lowerShriekHomologyOfLisse hH j) :=
   (ProEtaleWeilSheaf.geometricFiberPullbackCompToCondensedIso k₀ l
       (Spec (CommRingCat.of k₀))).app (lowerShriekHomologyAdicOfLisse (k₀ := k₀) hH j) ≪≫
     (geometricFiberWeilLowerStar (Profinite.padicAlgClRingObj l)
