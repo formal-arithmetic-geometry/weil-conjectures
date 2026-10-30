@@ -85,15 +85,15 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {X X' Y Y' : Scheme.{u}} {M : NearbyCycles
   {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 set_option maxHeartbeats 1000000 in
--- the reductions modulo `ℓⁿ⁺¹` of `f₀` in the hypotheses are elaborated against large types
+-- the coefficient changes of the base change morphism are matched against large types
 open PadicAlgCl in
 /-- **Split pullback exchanges from unique torsion retractions** (the mechanism of SGA 4½,
 [Th. finitude], Lemme 3.4, for `ℚ̄_ℓ`-coefficients). Let `φ : M ⟶ N` be a morphism of models
 whose schemes are quasi-compact and quasi-separated, and let `B ≅ ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`
-with `K₀` a derived complete, bounded below `𝒪_E`-complex on `Y`. Let `f₀` be, as an arrow, the
-base change morphism `Li_M^* BC(Lε_N^* K₀)` of `Rj_*` with `𝒪_E`-coefficients, restricted to the
-special fibre of `M`. If each reduction `f₀ ⊗ᴸ 𝒪_E/ℓⁿ⁺¹` has a unique retraction with a property
-`Pₙ` preserved by reduction (for nearby cycles: invariance under the inertia group), then the
+with `K₀` a derived complete, bounded below `𝒪_E`-complex on `Y`. If the base change morphism
+`Li_M^* BC(Lε_N^* K₀)` of `Rj_*` with `𝒪_E`-coefficients, restricted to the special fibre of `M`,
+has unique torsion retractions (`ProEtale.CondensedRing.HasUniqueTorsionRetractions`; for nearby
+cycles, the retractions invariant under the inertia group), then the
 pullback exchange `α_φ` with `ℚ̄_ℓ`-coefficients is a split monomorphism at `B`. -/
 theorem isSplitMono_pullbackExchange_app_of_unique_retractions (φ : M.Hom N f f')
     [QuasiCompact N.j] [QuasiSeparated N.j] [QuasiCompact M.j] [QuasiSeparated M.j]
@@ -110,31 +110,17 @@ theorem isSplitMono_pullbackExchange_app_of_unique_retractions (φ : M.Hom N f f
     (e : (L(Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       Y))).obj ((L(Mod.extendScalars (coefficientMap
         (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y))).obj K₀) ≅ B)
-    {A₀ B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X'))} (f₀ : A₀ ⟶ B₀)
-    (hf₀ : Arrow.mk f₀ = Arrow.mk ((L((M.i)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).map
+    (hT : HasUniqueTorsionRetractions ℓ E ((L((M.i)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).map
       ((Adjunction.exchangeRight
         (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) N.j)
         (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) M.j)
         (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) φ.commSq_j)).app
-          ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀))))
-    (P : ∀ n, (L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1))).obj B₀ ⟶
-      L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1))).obj A₀) → Prop)
-    (hex : ∀ n, ∃ r, P n r ∧
-      L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1))).map f₀ ≫ r = 𝟙 _)
-    (huniq : ∀ n r r', P n r → P n r' →
-      L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1))).map f₀ ≫ r = 𝟙 _ →
-      L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1))).map f₀ ≫ r' = 𝟙 _ →
-      r = r')
-    (hred : ∀ n r, P (n + 1) r →
-      L(Mod.extendScalars (integersModPowReduction X' ℓ E.1 (n + 1 + 1))).map f₀ ≫ r = 𝟙 _ →
-      P n (Mod.derivedExtendScalarsReduction (integersModPowReduction X' ℓ E.1 (n + 1 + 1))
-        (modPowTransition X' ℓ E.1 (n + 1)) (integersModPowReduction X' ℓ E.1 (n + 1))
-        (integersModPowReduction_comp_modPowTransition X' ℓ E.1 (n + 1)) r)) :
+          ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀)))) :
     IsSplitMono ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) := by
-  have h𝒪 := isSplitMono_map_baseChangeMap_app_padicIntegers_of_unique_retractions ℓ E
-    φ.commSq_j M.i _ (derivedCompleteIntegers_leftDerivedUpperStar_obj N.ε hK₀) f₀ hf₀ P hex
-    huniq hred
+  have h𝒪 :=
+    isSplitMono_map_baseChangeMap_app_padicIntegers_of_hasUniqueTorsionRetractions ℓ E
+    φ.commSq_j M.i _ (derivedCompleteIntegers_leftDerivedUpperStar_obj N.ε hK₀) 
+    (by exact_mod_proofs hT)
   have hn₀ := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1) N.ε K₀ n₀
   have hE := isSplitMono_map_baseChangeMap_app_padicSubfield_of_padicIntegers ℓ E φ.commSq_j M.i
     ((L((N.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) n₀ hn₀ (by exact_mod_proofs h𝒪)
