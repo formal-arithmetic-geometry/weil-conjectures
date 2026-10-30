@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Retract
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerAverage
 
@@ -179,51 +180,6 @@ theorem map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant_of_iso (a : ℤ
     CategoryTheory.Functor.map_id, G.map_id, Category.id_comp]
 
 end AlgebraicGeometry.ProEtale.GaloisTower
-
-namespace CategoryTheory
-
-/-- **Transporting a retraction of a unit along two functors, with its invariant-projector
-property.** Let `α = i ≫ F₂ (F₁ η ≫ c)` for an isomorphism `i`, functors `F₁`, `F₂` and `c` with
-`F₂ c = κ` an isomorphism, and let `R` be a retraction of `η`. Then `r = κ⁻¹ ≫ F₂ (F₁ R) ≫ i⁻¹` is
-a retraction of `α`, and if `G (F₂ (F₁ (R ≫ η)))` fixes every map invariant under the
-`G (F₂ (F₁ (u σ)))`, then `G (r ≫ α)` fixes every map invariant under the
-`ρ σ = κ⁻¹ ≫ F₂ (F₁ (u σ)) ≫ κ`. -/
-lemma retraction_of_eq_comp_map_comp_of_coinvariant {C D E A : Type*} [Category C]
-    [Category D] [Category E] [Category A] (F₁ : C ⥤ D) (F₂ : D ⥤ E) (G : E ⥤ A) {A₀ T : C}
-    {W : D} {P : E} (α : P ⟶ F₂.obj W) (i : P ≅ F₂.obj (F₁.obj A₀)) (c : F₁.obj T ⟶ W)
-    (κ : F₂.obj (F₁.obj T) ≅ F₂.obj W) (hκ : κ.hom = F₂.map c) (η : A₀ ⟶ T) (R : T ⟶ A₀)
-    (hα : α = i.hom ≫ F₂.map (F₁.map η ≫ c)) (hR : η ≫ R = 𝟙 A₀) {ι : Type*}
-    (u : ι → (T ⟶ T)) (ρ : ι → (F₂.obj W ⟶ F₂.obj W))
-    (hρ : ∀ σ, ρ σ = κ.inv ≫ F₂.map (F₁.map (u σ)) ≫ κ.hom) :
-    α ≫ (κ.inv ≫ F₂.map (F₁.map R) ≫ i.inv) = 𝟙 P ∧
-      ∀ {B : A} (φ : G.obj (F₂.obj W) ⟶ B),
-        (∀ φ' : G.obj (F₂.obj (F₁.obj T)) ⟶ B,
-          (∀ σ, G.map (F₂.map (F₁.map (u σ))) ≫ φ' = φ') →
-            G.map (F₂.map (F₁.map (R ≫ η))) ≫ φ' = φ') →
-        (∀ σ, G.map (ρ σ) ≫ φ = φ) →
-        G.map ((κ.inv ≫ F₂.map (F₁.map R) ≫ i.inv) ≫ α) ≫ φ = φ := by
-  rw [F₂.map_comp, ← hκ] at hα
-  have he : (κ.inv ≫ F₂.map (F₁.map R) ≫ i.inv) ≫ α =
-      κ.inv ≫ F₂.map (F₁.map (R ≫ η)) ≫ κ.hom := by
-    rw [hα]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc, F₁.map_comp, F₂.map_comp]
-  refine ⟨?_, ?_⟩
-  · rw [hα]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc]
-    rw [← F₂.map_comp_assoc, ← F₁.map_comp, hR, F₁.map_id, F₂.map_id, Category.id_comp,
-      Iso.hom_inv_id]
-  · intro B φ hRco hφ
-    have key := hRco (G.map κ.hom ≫ φ) fun σ ↦ by
-      have h := hφ σ
-      rw [hρ σ, G.map_comp, G.map_comp] at h
-      simp only [Category.assoc] at h
-      calc _ = G.map κ.hom ≫ (G.map κ.inv ≫ G.map (F₂.map (F₁.map (u σ))) ≫ G.map κ.hom ≫ φ) := by
-            rw [← G.map_comp_assoc κ.hom κ.inv, κ.hom_inv_id, G.map_id, Category.id_comp]
-        _ = _ := by rw [h]
-    rw [he, G.map_comp, G.map_comp, Category.assoc, Category.assoc, key, ← G.map_comp_assoc,
-      Iso.inv_hom_id, G.map_id, Category.id_comp]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 

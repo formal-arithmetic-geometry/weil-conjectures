@@ -28,8 +28,9 @@ along the map of inertia groups `I₂ ⟶ I₁` (SGA 4½, [Th. finitude], proof 
 The pullback exchanges of the square of models
 ```
 N₂_{Ω₂} ──τ'──→ N₁_{Ω₁}
-   │               │
-   N₂ ────τ────→  N₁
+   │σ₂             │σ₁
+   ↓               ↓
+   N₂ ─────τ─────→ N₁
 ```
 satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the composition isomorphisms
 (`NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`), with `σᵢ : Nᵢ_{Ωᵢ} ⟶ Nᵢ` the
@@ -139,7 +140,14 @@ variable {X₁ X₁' X₂ X₂' : Scheme.{u}} {M₁ : NearbyCyclesModel X₁ X�
 `σ₂ : M₂ ⟶ M₂` and `σ₁ : M₁ ⟶ M₁` be morphisms of models over the identities and `τ : M₂ ⟶ M₁` a
 morphism of models with `σ₂ ≫ τ = τ ≫ σ₁` on total spaces and geometric generic fibres. Then the
 pullback exchange `α_τ : Lf'^* Ψ_{M₁} C ⟶ Ψ_{M₂} (Lf^* C)` satisfies
-`α_τ ≫ σ₂ = Lf'^* σ₁ ≫ α_τ` for the actions `NearbyCyclesModel.Hom.autAction`. -/
+`α_τ ≫ σ₂ = Lf'^* σ₁ ≫ α_τ` for the actions `NearbyCyclesModel.Hom.autAction`:
+```
+Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
+      │Lf'^* σ₁               │σ₂
+      ↓                       ↓
+Lf'^* Ψ_{M₁} C ──α_τ──→ Ψ_{M₂} (Lf^* C)
+```
+-/
 lemma Hom.pullbackExchange_app_comp_autAction_of_comm (τ : M₂.Hom M₁ f f')
     (σ₂ : M₂.Hom M₂ (𝟙 X₂) (𝟙 X₂')) (σ₁ : M₁.Hom M₁ (𝟙 X₁) (𝟙 X₁'))
     (htot : σ₂.total ≫ τ.total = τ.total ≫ σ₁.total)

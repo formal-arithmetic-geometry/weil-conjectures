@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
+public import WeilConjectures.Mathlib.CategoryTheory.Retract
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -18,7 +19,8 @@ homomorphism of extensions `Ωᵢ/Lᵢ` over `l`, with change of Galois layers
 ```
 N₂_{Ω₂} ──τ'──→ N₁_{Ω₁}
    │σ₂             │σ₁
-   N₂ ────τ────→  N₁
+   ↓               ↓
+   N₂ ─────τ─────→ N₁
 ```
 satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the composition isomorphisms
 (`NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`). By SGA 4½, [Th. finitude],
@@ -34,12 +36,11 @@ The identification of the summands uses that the projector `r₁ ≫ α_{σ₁}`
 the projector onto *all* the invariants, in the form: on cohomology sheaves (after pullback to the
 special fibre of `N₂`), every map out of `Hᵠ(Ψ_{N₁_{Ω₁}})` which is invariant under `P₁` is fixed
 by the projector. Of the second projector, only the invariance `ρ_σ ≫ (r₂ ≫ α_{σ₂}) = r₂ ≫ α_{σ₂}`
-is used.
+is used. The abstract statement is `CategoryTheory.isIso_of_comp_eq_comp_of_coinvariant`, in a
+category with a jointly conservative family of functors (the cohomology functors).
 
 ## Main results
 
-- `CategoryTheory.isIso_of_comp_eq_comp_of_coinvariant`: the abstract statement, in a category
-  with a jointly conservative family of functors (the cohomology functors).
 - `NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`: the square of pullback exchanges.
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`: the change of trait is
   invertible on the invariant summands once it is invertible on the Galois layers.
@@ -53,54 +54,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory
-
-/-- **Matching two invariant summands.** Let `a₁ : A₁ ⟶ B₁` and `a₂ : A₂ ⟶ B₂` be split
-monomorphisms with retractions `r₁`, `r₂`, let `β : B₁ ⟶ B₂` be an isomorphism and `α : A₁ ⟶ A₂`
-with `α ≫ a₂ = a₁ ≫ β`. Let `ρ₁`, `ρ₂` be families of endomorphisms of `B₁`, `B₂` such that `β`
-carries every `ρ₁ i` to some `ρ₂ i₂`, and such that `ρ₂ i₂ ≫ (r₂ ≫ a₂) = r₂ ≫ a₂`. If, for a
-jointly conservative family of functors `H q`, every map out of `H q B₁` invariant under the
-`H q (ρ₁ i)` is fixed by `H q (r₁ ≫ a₁)`, then `α` is an isomorphism.
-
-(Think of `a₁`, `a₂` as the inclusions of the invariants of two group actions, and of `β` as an
-equivariant isomorphism along a surjective group homomorphism.) -/
-lemma isIso_of_comp_eq_comp_of_coinvariant {D : Type*} [Category D] {ι : Type*}
-    {A : ι → Type*} [∀ q, Category (A q)] (H : ∀ q, D ⥤ A q)
-    (hcons : ∀ {X Y : D} (g : X ⟶ Y), (∀ q, IsIso ((H q).map g)) → IsIso g)
-    {A₁ A₂ B₁ B₂ : D} (α : A₁ ⟶ A₂) (a₁ : A₁ ⟶ B₁) (r₁ : B₁ ⟶ A₁) (ha₁ : a₁ ≫ r₁ = 𝟙 _)
-    (a₂ : A₂ ⟶ B₂) (r₂ : B₂ ⟶ A₂) (ha₂ : a₂ ≫ r₂ = 𝟙 _) (β : B₁ ⟶ B₂) [IsIso β]
-    (hsq : α ≫ a₂ = a₁ ≫ β) {κ₁ κ₂ : Type*} (ρ₁ : κ₁ → (B₁ ⟶ B₁)) (ρ₂ : κ₂ → (B₂ ⟶ B₂))
-    (hβ : ∀ i, ∃ i₂, ρ₁ i ≫ β = β ≫ ρ₂ i₂) (he₂ : ∀ i₂, ρ₂ i₂ ≫ r₂ ≫ a₂ = r₂ ≫ a₂)
-    (he₁ : ∀ q {W : A q} (φ : (H q).obj B₁ ⟶ W), (∀ i, (H q).map (ρ₁ i) ≫ φ = φ) →
-      (H q).map (r₁ ≫ a₁) ≫ φ = φ) :
-    IsIso α := by
-  refine hcons α fun q ↦ ?_
-  -- `β ≫ e₂` is invariant under the `ρ₁ i`, hence fixed by `e₁ = r₁ ≫ a₁`
-  have hfix : (H q).map (r₁ ≫ a₁) ≫ (H q).map (β ≫ r₂ ≫ a₂) = (H q).map (β ≫ r₂ ≫ a₂) := by
-    refine he₁ q _ fun i ↦ ?_
-    obtain ⟨i₂, hi⟩ := hβ i
-    rw [← Functor.map_comp, reassoc_of% hi, he₂]
-  have hfix' : r₁ ≫ α = r₁ ≫ a₁ ≫ β ≫ r₂ := by
-    rw [← reassoc_of% hsq, ha₂, Category.comp_id]
-  refine ⟨⟨(H q).map (a₂ ≫ inv β ≫ r₁), ?_, ?_⟩⟩
-  · rw [← Functor.map_comp, ← Functor.map_id]
-    congr 1
-    rw [reassoc_of% hsq, IsIso.hom_inv_id_assoc, ha₁]
-  · have k : β ≫ r₂ = (β ≫ r₂ ≫ a₂) ≫ r₂ := by
-      rw [Category.assoc, Category.assoc, ha₂, Category.comp_id]
-    have h₁ : (H q).map (r₁ ≫ α) = (H q).map (β ≫ r₂) := by
-      calc (H q).map (r₁ ≫ α) = (H q).map ((r₁ ≫ a₁) ≫ (β ≫ r₂ ≫ a₂) ≫ r₂) := by
-            rw [hfix', ← k, Category.assoc]
-        _ = (H q).map (r₁ ≫ a₁) ≫ (H q).map (β ≫ r₂ ≫ a₂) ≫ (H q).map r₂ := by
-            rw [Functor.map_comp (H q) (r₁ ≫ a₁), Functor.map_comp (H q) (β ≫ r₂ ≫ a₂)]
-        _ = (H q).map (β ≫ r₂) := by
-            rw [reassoc_of% hfix, ← Functor.map_comp, ← k]
-    rw [← Functor.map_comp, Category.assoc, Category.assoc, Functor.map_comp (H q) a₂,
-      Functor.map_comp (H q) (inv β), h₁, ← Functor.map_comp, ← Functor.map_comp,
-      IsIso.inv_hom_id_assoc, ha₂, Functor.map_id]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 

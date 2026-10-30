@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
@@ -44,6 +45,7 @@ For the `ℓ`-adic coefficient rings `Λ_X = p_X^* Λ` with `Λ` one of `𝒪̲_
 extension `E` of `ℚ_ℓ`, or `ℚ̲̄_ℓ`, the bounded constructible complexes on a topologically
 noetherian scheme form a triangulated subcategory. This is stated separately for each of these
 coefficient rings (`ProEtale.isTriangulated_boundedConstructible_padicIntegersRingObj`,
+`ProEtale.isTriangulated_boundedConstructible_integralCoeff`,
 `ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj`,
 `ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj`). It rests on the fact that
 constructible sheaves of `Λ_X`-modules on such a scheme are closed under kernels, cokernels and
@@ -276,6 +278,21 @@ instance isTriangulated_boundedConstructible_padicIntegersRingObj
   change ObjectProperty.IsClosedUnderExtensions
     (IsConstructibleModuleObject
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) at hext
+  exact triangulated_of_serre X _
+    (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
+      ObjectProperty.prop_cokernel _ f hM hN⟩)
+    (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
+
+/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `𝒪̲_E` given as the closed unit
+ball of a finite normed extension `E` of `ℚ_ℓ` (`CondensedRing.integralCoeff`): the bounded
+constructible complexes of `𝒪_{E,X}`-modules on a topologically noetherian scheme form a
+triangulated subcategory. -/
+instance isTriangulated_boundedConstructible_integralCoeff
+    [TopologicalSpace.NoetherianSpace X] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :
+    (boundedConstructible
+      (condensedRingObj (CondensedRing.integralCoeff.{u} ℓ E) X)).IsTriangulated := by
+  obtain ⟨hker, hcok, hext⟩ := CondensedRing.integralConstructible_serre ℓ E X
   exact triangulated_of_serre X _
     (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)

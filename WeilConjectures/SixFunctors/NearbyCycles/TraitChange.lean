@@ -56,7 +56,8 @@ statement proved by Deligne for torsion coefficients. The pullback exchange is i
 base change morphism of `Rj_*`, restricted to the special fibre, is; an integral model of the
 `ℚ̄_ℓ`-complex reduces this to `𝒪_E`-coefficients, and derived Nakayama (the complexes involved are
 derived `ϖ`-complete, PR #1792) to `𝔽_E`-coefficients
-(in `BaseChangeTheorems/CoefficientChangeRestricted.lean`).
+(the file
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted`).
 
 ## Unfinished
 
