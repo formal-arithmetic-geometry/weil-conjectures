@@ -16,7 +16,7 @@ along `σ`. -/
 lemma comp_inv_app_comp_upperStarComp_inv_app_eq_upperStarSectionMap
     (σ : S ⟶ S) (x : S ⟶ T) (h : σ ≫ x = x)
     (τ : (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _)
-    (hτ : τ.inv.app _ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom)
+    (hτ : τ.inv.app 𝟙ₘ = (Functor.Monoidal.εIso (σ)^*⟦Profinite.padicAlgClRingObj ℓ⟧).hom)
     (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T))
     (v : 𝟙ₘ ⟶ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj M) :
