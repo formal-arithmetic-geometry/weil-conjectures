@@ -78,7 +78,7 @@ theorem internal_integral_criterion_forward
     IsDerivedComplete l E X K ∧
       constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
         ((AdicCompletion.derivedReduction l E X 0).obj K) ∧
-      DerivedCategory.finiteTorAmplitude _
+      _root_.DerivedCategory.finiteTorAmplitude _
         ((AdicCompletion.derivedReduction l E X 0).obj K) := by
   sorry
 
