@@ -80,4 +80,33 @@ theorem smoothOrientation_baseChange (sq : IsPullback g' f' f g) (d : ℕ)
         τ.hom ≫ smoothOrientation ℓ f' d :=
   sorry
 
+/-- **Criterion for the base change of the orientation**: since the isomorphism `τ` of
+`smoothOrientation_baseChange` is not prescribed, the compatibility holds as soon as the
+orientation `γ_{f'}` and the base changed orientation
+`Lg'^* ℚ̄_ℓ,X(d)[2d] ⟶ Lg'^* Rf^! ℚ̄_ℓ,Y ⟶ Rf'^! Lg^* ℚ̄_ℓ,Y ≅ Rf'^! ℚ̄_ℓ,Y'` are isomorphisms;
+`τ` is then the composite of the second with the inverse of the first. Both conditions can be
+checked after reduction to finite coefficients, which is how `smoothOrientation_baseChange` is
+meant to be proved. -/
+theorem smoothOrientation_baseChange_of_isIso (sq : IsPullback g' f' f g) (d : ℕ)
+    [IsIso (smoothOrientation ℓ f' d)]
+    [IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
+          (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
+          (boundedConstructibleUpperShriek ℓ f').map
+            (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)))] :
+    ∃ τ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
+        (boundedConstructibleTateTwist ℓ X d (2 * d)) ≅
+          boundedConstructibleTateTwist ℓ X' d (2 * d),
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
+          (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
+          (boundedConstructibleUpperShriek ℓ f').map
+            (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)) =
+        τ.hom ≫ smoothOrientation ℓ f' d := by
+  refine ⟨asIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
+      (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
+      (boundedConstructibleUpperShriek ℓ f').map
+        (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g))) ≪≫
+    (asIso (smoothOrientation ℓ f' d)).symm, ?_⟩
+  simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv, Category.assoc,
+    IsIso.inv_hom_id, Category.comp_id]
+
 end AlgebraicGeometry.ProEtale.CondensedRing
