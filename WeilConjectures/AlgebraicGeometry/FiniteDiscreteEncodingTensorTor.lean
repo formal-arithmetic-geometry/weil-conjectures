@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
+import WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 import WeilConjectures.Algebra.Homology.RingIsomorphismTensorTransport
 import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory

@@ -615,6 +615,49 @@ open scoped CategoryTheory.Obj TensorProduct
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+private theorem presheafPushforward_isRightAdjoint
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    (G : C ⥤ D) (RX : Dᵒᵖ ⥤ RingCat.{u + 1}) (RY : Cᵒᵖ ⥤ RingCat.{u + 1})
+    (ψ : RY ⟶ G.op ⋙ RX) : (PresheafOfModules.pushforward.{u + 1} ψ).IsRightAdjoint := by
+  let eX : PresheafOfModules.{u + 1} RX ≌
+      PresheafOfModules.{u + 1} ((AsSmall.down.{u, u + 1, 0} (C := D)).op ⋙ RX) :=
+    { functor := PresheafOfModules.pushforward₀ (AsSmall.down.{u, u + 1, 0} (C := D)) RX
+      inverse := PresheafOfModules.pushforward₀ (AsSmall.up.{u, u + 1, 0} (C := D)) _
+      unitIso := Iso.refl _
+      counitIso := Iso.refl _ }
+  let eY : PresheafOfModules.{u + 1} RY ≌
+      PresheafOfModules.{u + 1} ((AsSmall.down.{u, u + 1, 0} (C := C)).op ⋙ RY) :=
+    { functor := PresheafOfModules.pushforward₀ (AsSmall.down.{u, u + 1, 0} (C := C)) RY
+      inverse := PresheafOfModules.pushforward₀ (AsSmall.up.{u, u + 1, 0} (C := C)) _
+      unitIso := Iso.refl _
+      counitIso := Iso.refl _ }
+  let F := AsSmall.down.{u, u + 1, 0} (C := C) ⋙ G ⋙
+    AsSmall.up.{u, u + 1, 0} (C := D)
+  let φ : (AsSmall.down.{u, u + 1, 0} (C := C)).op ⋙ RY ⟶
+      F.op ⋙ (AsSmall.down.{u, u + 1, 0} (C := D)).op ⋙ RX :=
+    Functor.whiskerLeft (AsSmall.down.{u, u + 1, 0} (C := C)).op ψ
+  have : (PresheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint := inferInstance
+  have : eX.functor.IsRightAdjoint := eX.symm.toAdjunction.isRightAdjoint
+  have : eY.inverse.IsRightAdjoint := eY.toAdjunction.isRightAdjoint
+  have : (eX.functor ⋙ PresheafOfModules.pushforward φ ⋙ eY.inverse).IsRightAdjoint :=
+    inferInstance
+  exact this
+
+/-- Presheaf pullback exists in the coefficient universe even though the small pro-etale
+site has object universe u+1 and morphism universe u.
+Source: the tensor-formula construction in Stacks 03D7
+(blueprint: lem-sfb-internal-module-operations-transport).
+Proof: transport both sites and their presheaves to coefficient-sized small models.
+On these models the presheaf pullback is the left Kan extension and sectionwise scalar
+extension; its Hom bijection sends m to 1 tensor m. Transport that adjunction back.
+No equality between the original site object and morphism universes is imposed. -/
+@[instance]
+theorem presheafLowerStar_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (PresheafOfModules.pushforward.{u + 1}
+      (F := siteMap f) (coefficientMap Λ f).hom).IsRightAdjoint := by
+  exact presheafPushforward_isRightAdjoint (siteMap f) (ring Λ X).obj (ring Λ Y).obj
+    (coefficientMap Λ f).hom
+
 /-- The canonical sectionwise ringed-topos pullback, constructed by presheaf pullback
 and sheafification: inverse image followed by B_X tensor_{f^{-1}B_Y} (-).
 Source: Stacks 03D7 (blueprint: lem-sfb-internal-module-operations-transport). -/
