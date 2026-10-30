@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.RingTheory.Henselian
-public import WeilConjectures.ConstructibleSheaf.FinitePushforward
-public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
@@ -22,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic
 import WeilConjectures.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity
-import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues

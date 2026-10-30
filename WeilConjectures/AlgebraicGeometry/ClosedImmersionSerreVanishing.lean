@@ -9,11 +9,12 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # Serre vanishing for the restricted projective-space twists
 

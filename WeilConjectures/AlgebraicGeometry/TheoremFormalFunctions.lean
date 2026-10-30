@@ -18,6 +18,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.AlgebraicGeometry.MLCohomologyPowersIdeal
 import WeilConjectures.AlgebraicGeometry.FormalFunctionsPowerKernel
 import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # The theorem on formal functions
 

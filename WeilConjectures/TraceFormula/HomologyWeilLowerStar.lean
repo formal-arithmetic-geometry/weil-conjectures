@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyExchange
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
 public import WeilConjectures.TraceFormula.WeilSheafLowerStar
-public import WeilConjectures.WeilObject.BoundedConstructible.Homology
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 
 /-!
 

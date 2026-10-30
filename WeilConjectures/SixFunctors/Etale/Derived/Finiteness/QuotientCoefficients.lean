@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 

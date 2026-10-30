@@ -6,11 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceEmbedding
-public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
-public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
 
 /-!

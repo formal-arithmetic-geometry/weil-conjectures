@@ -6,16 +6,15 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GenericConstructibility
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GeometricFibreStalk
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 
 /-!
 # Constant coefficients on projective families of curves

@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.RelativeMayerVietoris
 import WeilConjectures.AlgebraicGeometry.SingleComplexOpenNestedComparison
-import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Source-open union gluing for the single-complex comparison
 

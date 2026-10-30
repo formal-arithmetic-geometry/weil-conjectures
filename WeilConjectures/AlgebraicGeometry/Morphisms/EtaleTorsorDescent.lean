@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
-public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-!
 # Torsors under a finite constant sheaf are representable
