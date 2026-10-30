@@ -135,7 +135,6 @@ theorem exists_unramified_subfields [FaithfulSMul R Ω] [Algebra.IsAlgebraic R �
     · rintro ⟨s, rfl⟩
       rw [algebraMap_fractionRing_Ω]
       exact D.a_mem_valuationSubring s
-
   have hωS𝒪 {y : Ω} (hy : y ∈ IsDiscreteValuationRing.integralClosureValuationSubring R Ω) :
       D.ωS y ∈ 𝒪 := by
     rw [← D.comap_ωS_valuationSubring] at hy
@@ -196,8 +195,7 @@ theorem exists_unramified_subfields [FaithfulSMul R Ω] [Algebra.IsAlgebraic R �
     · have hz' : z = ∑ E, algebraMap D.R 𝒪 (r E) * mon E := by
         refine Subtype.ext ?_
         rw [hcz]
-        simp only [AddSubmonoidClass.coe_finsetSum, Subring.coe_mul, mon,
-          SubmonoidClass.coe_finsetProd, SubmonoidClass.coe_pow, coe_algebraMap_valuationSubring]
+        simp only [AddSubmonoidClass.coe_finsetSum, mon]
         refine Finset.sum_congr rfl fun E _ ↦ ?_
         rw [Algebra.smul_def, ← hr, algebraMap_fractionRing_Ω]
         push_cast

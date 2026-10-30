@@ -54,6 +54,7 @@ variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
 
 local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) ha halg hb
 
+omit [IsAlgClosed Ω] in
 include ha halg hb in
 /-- **The residue of the coordinate is not a `p`-th power** in the residue field of the
 compositum `L = Ω(S(x))`, `p` the residual characteristic. This reduces to the case of a complete
@@ -65,16 +66,21 @@ theorem valuation_coord_sub_pow_eq_one (p : ℕ) [Fact p.Prime] [CharP (ResidueF
     (hz1 : (𝒟).valuationSubring.valuation z ≤ 1) :
     (𝒟).valuationSubring.valuation ((𝒟).a x - z ^ p) = 1 := by
   obtain ⟨b₂, hb₂, rfl⟩ : ∃ (b₂ : IsDiscreteValuationRing.completion R →+* κ)
-      (_ : RingHom.ker b₂ = maximalIdeal (IsDiscreteValuationRing.completion R)), b₂.comp (IsDiscreteValuationRing.toCompletion R) = b :=
-    ⟨IsDiscreteValuationRing.completionLift R b hb, IsDiscreteValuationRing.ker_completionLift R b hb, IsDiscreteValuationRing.completionLift_comp R b hb⟩
+      (_ : RingHom.ker b₂ = maximalIdeal (IsDiscreteValuationRing.completion R)),
+        b₂.comp (IsDiscreteValuationRing.toCompletion R) = b :=
+    ⟨IsDiscreteValuationRing.completionLift R b hb,
+      IsDiscreteValuationRing.ker_completionLift R b hb,
+      IsDiscreteValuationRing.completionLift_comp R b hb⟩
   have : IsLocalHom (IsDiscreteValuationRing.toCompletion R) := ⟨fun r hr ↦ by
     by_contra hnu
-    have : IsDiscreteValuationRing.toCompletion R r ∈ maximalIdeal (IsDiscreteValuationRing.completion R) := by
+    have : IsDiscreteValuationRing.toCompletion R r ∈
+        maximalIdeal (IsDiscreteValuationRing.completion R) := by
       rw [IsDiscreteValuationRing.maximalIdeal_completion]
       exact Ideal.mem_map_of_mem _ ((IsLocalRing.mem_maximalIdeal r).2 hnu)
     exact (IsLocalRing.mem_maximalIdeal _).1 this hr⟩
-  haveI : CharP (ResidueField (IsDiscreteValuationRing.completion R)) p :=
-    charP_of_injective_ringHom (ResidueField.map (IsDiscreteValuationRing.toCompletion R)).injective p
+  have : CharP (ResidueField (IsDiscreteValuationRing.completion R)) p :=
+    charP_of_injective_ringHom
+      (ResidueField.map (IsDiscreteValuationRing.toCompletion R)).injective p
   obtain ⟨Ω₂, _, _, a₂, ha₂, halg₂, c, hc⟩ : ∃ (Ω₂ : Type u) (_ : Field Ω₂) (_ : IsAlgClosed Ω₂)
       (a₂ : IsDiscreteValuationRing.completion R →+* Ω₂) (_ : Function.Injective a₂)
       (_ : letI := a₂.toAlgebra; Algebra.IsAlgebraic (IsDiscreteValuationRing.completion R) Ω₂)
@@ -93,8 +99,8 @@ theorem valuation_coord_sub_pow_eq_one (p : ℕ) [Fact p.Prime] [CharP (ResidueF
     simp only [RingHom.comp_apply] at h
     rw [h, hx]
     rfl
-  letI := a.toAlgebra
-  letI := a₂.toAlgebra
+  let := a.toAlgebra
+  let := a₂.toAlgebra
   have h := valuation_a_sub_pow_eq_one_of_complete ha₂ halg₂ hb₂ p hψ (H.ΩMap_mem_compositum z hz)
     ((H.valuation_ΩMap_le_one_iff z).2 hz1)
   rw [← H.valuation_ΩMap_eq_one_iff, map_sub, map_pow]
@@ -115,18 +121,18 @@ theorem exists_artinSchreier_root (p : ℕ) [Fact p.Prime] [CharP Ω p] {β : D.
   set 𝒪 := D.valuationSubring with h𝒪
   set N : Subfield D.Ω := D.compositum.toSubfield with hN
   have hp0 : p ≠ 0 := (Fact.out : p.Prime).ne_zero
-  haveI : CharP D.Ω p := charP_of_injective_ringHom D.ωS.injective p
-  haveI : CharP D.R p := D.a.charP D.injective_a p
+  have : CharP D.Ω p := charP_of_injective_ringHom D.ωS.injective p
+  have : CharP D.R p := D.a.charP D.injective_a p
   -- the residue fields
   have haO : ∀ r : D.R, D.a r ∈ 𝒪 := D.a_mem_valuationSubring
   let ρ : D.R →+* 𝒪 := D.a.codRestrict 𝒪.toSubring haO
-  haveI : IsLocalHom ρ := ⟨fun r hr ↦ by
+  have : IsLocalHom ρ := ⟨fun r hr ↦ by
     by_contra hnu
     have : 𝒪.valuation (D.a r) < 1 := (D.valuation_a_lt_one_iff).2
       ((IsLocalRing.mem_maximalIdeal r).2 hnu)
     exact (IsLocalRing.mem_maximalIdeal _).1
       ((ValuationSubring.valuation_lt_one_iff 𝒪 ⟨_, haO r⟩).2 this) hr⟩
-  letI : Algebra (ResidueField D.R) (ResidueField 𝒪) := (ResidueField.map ρ).toAlgebra
+  let : Algebra (ResidueField D.R) (ResidueField 𝒪) := (ResidueField.map ρ).toAlgebra
   -- the residue field of `𝒪` is purely inseparable over that of `R'`
   have hint : ∀ y : 𝒪, _root_.IsIntegral (ResidueField D.R) (residue 𝒪 y) := by
     intro y
@@ -141,12 +147,12 @@ theorem exists_artinSchreier_root (p : ℕ) [Fact p.Prime] [CharP Ω p] {β : D.
     have : (algebraMap (ResidueField D.R) (ResidueField 𝒪)).comp (residue D.R) =
         (residue 𝒪).comp ρ := ResidueField.map_comp_residue ρ
     rw [this, ← Polynomial.hom_eval₂, h0, map_zero]
-  haveI : CharP (ResidueField D.R) p := (CharP.charP_iff_prime_eq_zero (Fact.out : p.Prime)).2
+  have : CharP (ResidueField D.R) p := (CharP.charP_iff_prime_eq_zero (Fact.out : p.Prime)).2
     (by rw [← map_natCast (residue D.R), CharP.cast_eq_zero, map_zero])
-  haveI : Algebra.IsAlgebraic (ResidueField D.R) (ResidueField 𝒪) := ⟨fun z ↦ by
+  have : Algebra.IsAlgebraic (ResidueField D.R) (ResidueField 𝒪) := ⟨fun z ↦ by
     obtain ⟨y, rfl⟩ := residue_surjective z
     exact (hint y).isAlgebraic⟩
-  haveI := Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (F := ResidueField D.R)
+  have := Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (F := ResidueField D.R)
     (E := ResidueField 𝒪)
   have hβO : β ∈ 𝒪 := (ValuationSubring.valuation_le_one_iff 𝒪 β).1 hβ1
   obtain ⟨k, rr, hrr⟩ := IsPurelyInseparable.pow_mem (ResidueField D.R) p
@@ -196,12 +202,12 @@ theorem exists_artinSchreier_root (p : ℕ) [Fact p.Prime] [CharP Ω p] {β : D.
     rw [this]
     exact lt_of_le_of_lt (𝒪.valuation.map_add _ _) (max_lt hs hr)
   -- the Galois–residue lemma
-  haveI : Algebra.IsAlgebraic N D.Ω := by
+  have : Algebra.IsAlgebraic N D.Ω := by
     refine ⟨fun z ↦ ?_⟩
     have hz := (D.isAlgebraic_a).isAlgebraic z
     let ι' : D.R →+* N := D.a.codRestrict N.toSubring fun r ↦ hmemR r
-    letI : Algebra D.R N := ι'.toAlgebra
-    haveI : IsScalarTower D.R N D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+    let : Algebra D.R N := ι'.toAlgebra
+    have : IsScalarTower D.R N D.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
     exact hz.extendScalars (S := N) (fun x y h ↦ D.injective_a (congrArg Subtype.val h))
   have h𝒪 : ∀ σ : D.Ω ≃ₐ[N] D.Ω, ∀ y ∈ 𝒪, σ y ∈ 𝒪 := fun σ y hy ↦
     (D.map_mem_valuationSubring_iff σ.toRingEquiv
@@ -219,6 +225,7 @@ variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
 
 local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) ha halg hb
 
+omit [IsSepClosed κ] in
 include ha halg hb in
 /-- **Approximation by lifts of a Frobenius-closed basis**, equal characteristic. Every element
 `α` of the compositum is approximated, up to an element of value `≤ 1`, by a combination of
@@ -244,8 +251,9 @@ theorem exists_frobeniusLift_approx (p : ℕ) [Fact p.Prime] [CharP Ω p] {x : (
         (∀ j ∈ s, d j ∈ (𝒟).ωS.fieldRange) ∧ d₀ ∈ (𝒟).ωS.fieldRange ∧
         (𝒟).valuationSubring.valuation (α - d₀ - ∑ j ∈ s, d j * w j.1 ^ p ^ j.2) ≤ 1 := by
   classical
-  letI := a.toAlgebra
-  have : CharP R p := ⟨fun n ↦ by rw [← map_eq_zero_iff a ha, map_natCast, CharP.cast_eq_zero_iff Ω p]⟩
+  let := a.toAlgebra
+  have : CharP R p := ⟨fun n ↦ by
+    rw [← map_eq_zero_iff a ha, map_natCast, CharP.cast_eq_zero_iff Ω p]⟩
   have : CharP (ResidueField R) p :=
     CharP.of_ringHom_of_ne_zero (residue R) p (Fact.out : p.Prime).ne_zero
   obtain ⟨ι, w, A, Kst, hKst, hwA, hA, hw1, hval, hpb, -, -, hP6, -⟩ :=
@@ -275,6 +283,7 @@ theorem exists_frobeniusLift_approx (p : ℕ) [Fact p.Prime] [CharP Ω p] {x : (
     rw [h]
     exact hev.le
 
+omit [IsAlgClosed Ω] [IsSepClosed κ] in
 include ha halg hb in
 /-- The strict-localization slice trait has a coordinate: an element of `R'` evaluating to the
 coordinate `x` of `κ(x)^alg`. -/
@@ -302,6 +311,7 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuati
 local notation "𝒟₁" => sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg₁ hb₁
 local notation "𝒟₂" => sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂
 
+omit [IsAlgClosed Ω₂] in
 include ha₁ halg₁ ha₂ halg₂ hb₁ hb₂ in
 /-- **Artin–Schreier equations over the slice composita, equal characteristic.** For a morphism
 `H : D₁ ⟶ D₂` of strict-localization slice traits which is the identity on the fields
@@ -314,14 +324,14 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
     letI := a₁.toAlgebra
     ∃ θ ∈ (𝒟₁).compositum, θ ^ p - θ = α := by
   classical
-  letI := a₁.toAlgebra
-  letI := a₂.toAlgebra
+  let := a₁.toAlgebra
+  let := a₂.toAlgebra
   set Γ := H.ΩMap with hΓ
   set v₁ := (𝒟₁).valuationSubring.valuation with hv₁
   set v₂ := (𝒟₂).valuationSubring.valuation with hv₂
   have hp0 : p ≠ 0 := (Fact.out : p.Prime).ne_zero
-  haveI : CharP (𝒟₁).Ω p := charP_of_injective_ringHom (𝒟₁).ωS.injective p
-  haveI : CharP (𝒟₂).Ω p := charP_of_injective_ringHom Γ.injective p
+  have : CharP (𝒟₁).Ω p := charP_of_injective_ringHom (𝒟₁).ωS.injective p
+  have : CharP (𝒟₂).Ω p := charP_of_injective_ringHom Γ.injective p
   obtain ⟨x₁, hx₁⟩ := exists_b_eq_traitSliceCoord ha₁ halg₁ hb₁
   obtain ⟨x₂, hx₂⟩ := exists_b_eq_traitSliceCoord ha₂ halg₂ hb₂
   obtain ⟨ιw, w, hwL, hw1, hval, hpb, s, d, d₀, hd, hd₀, happ⟩ :=
@@ -365,7 +375,8 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
         exact_mod_cast hp0)
     simp only [Polynomial.IsRoot, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
       Polynomial.eval_C, sub_eq_zero] at hω'
-    exact ⟨Γ ((𝒟₁).ωS ω'), ⟨_, ⟨ω', rfl⟩, rfl⟩, by rw [← map_pow, ← map_sub, ← map_pow, ← map_sub, hω']⟩
+    exact ⟨Γ ((𝒟₁).ωS ω'), ⟨_, ⟨ω', rfl⟩, rfl⟩, by
+      rw [← map_pow, ← map_sub, ← map_pow, ← map_sub, hω']⟩
   have hval' : ∀ (s' : Finset ιw) (c' : ιw → (𝒟₂).Ω), (∀ i ∈ s', c' i ∈ K) →
       ∀ i ∈ s', v₂ (c' i) ≤ v₂ (∑ j ∈ s', c' j * Γ (w j)) := by
     intro s' c' hc' i hi
@@ -391,7 +402,8 @@ theorem exists_artinSchreier_root_of_charP (p : ℕ) [Fact p.Prime] [CharP Ω₁
       rw [this]
       refine lt_of_le_of_lt (v₂.map_add _ _) (max_lt ?_ ?_)
       · rw [map_mul]; exact mul_lt_one_of_nonneg_of_lt_one_right hS zero_le ih
-      · rw [map_mul, map_pow]; exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
+      · rw [map_mul, map_pow]
+        exact mul_lt_one_of_nonneg_of_lt_one_right (pow_le_one' hT _) zero_le hST
   have hres' : ∀ z ∈ L₂, v₂ z ≤ 1 → ∀ (s' : Finset ιw) (c' : ιw → (𝒟₂).Ω), (∀ i ∈ s', c' i ∈ K) →
       (∀ i ∈ s', v₂ (c' i) ≤ 1) → v₂ (z ^ p - ∑ i ∈ s', c' i * Γ (w i)) < 1 →
         ∀ i ∈ s', v₂ (c' i) < 1 := by

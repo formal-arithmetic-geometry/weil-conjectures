@@ -74,8 +74,8 @@ lemma transcendental_residue_a [FaithfulSMul R Ω] [Algebra.IsAlgebraic R Ω] {x
     subst hω
     exact D.residue_mem_perfectClosure hy
   intro halg
-  letI : Algebra k P := (Subfield.inclusion hkP).toAlgebra
-  haveI : IsScalarTower k P ℓ := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  let : Algebra k P := (Subfield.inclusion hkP).toAlgebra
+  have : IsScalarTower k P ℓ := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   exact h1 ((halg.tower_top P).restrictScalars (ResidueField R))
 
 /-- **`R'` is algebraic over `K₀(x)`.** If `R'` is algebraic over `R[x]` (via `g`, with `x̄`
@@ -111,7 +111,7 @@ lemma isAlgebraic_a_adjoin_coord [FaithfulSMul R Ω] [Algebra.IsAlgebraic R Ω]
       (D.valuationSubring.residueSubfield_mono hK₀K) (D.transcendental_residue_a htr) P
     obtain ⟨i, hi⟩ : ∃ i, P.coeff i ≠ 0 := by
       by_contra h
-      push_neg at h
+      push Not at h
       exact hP0 (Polynomial.ext h)
     have hle := Finset.le_sup (f := fun i ↦ D.valuationSubring.valuation (P.coeff i : D.Ω))
       (Polynomial.mem_support_iff.2 hi)
@@ -183,6 +183,7 @@ attribute [local instance] algebraValuationSubring algebraBaseValuationSubring
 
 local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) ha halg hb
 
+omit [IsSepClosed κ] in
 include ha halg hb in
 /-- **Approximation by lifts of a Frobenius-closed basis in the slice compositum.** For `α` in
 the compositum `L = Ω(R')` there are a coordinate `x ∈ R'`, a subring `A ⊆ L ∩ 𝒪`, a discretely
@@ -230,7 +231,7 @@ theorem exists_frobeniusLift_package (p : ℕ) [Fact p.Prime] [CharP (ResidueFie
       (∀ c ∈ Kst, (𝒟).valuationSubring.valuation c ≤ 1 →
         ∃ d ∈ Kst, (𝒟).valuationSubring.valuation (d ^ p - c) < 1) := by
   classical
-  letI := a.toAlgebra
+  let := a.toAlgebra
   have : FaithfulSMul R Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 ha
   have : Algebra.IsAlgebraic R Ω := halg
   have := (𝒟).subsingleton_primeSpectrum ha halg
@@ -365,7 +366,6 @@ theorem exists_frobeniusLift_package (p : ℕ) [Fact p.Prime] [CharP (ResidueFie
   obtain ⟨w, A, Kst, hKst, hwA, hA, hw1, hval, hpb, hP4, hP5, hP6, hP7, hinv, hKstA, hroot⟩ :=
     ValuationSubring.exists_frobeniusLift_package 𝒪 K K₀ D L hK₀K hK₀D hDL hKL hϖK₀ hϖ0 hϖ1
       hdisc harch hKroot halgK hfull (x := x𝒪) hu hli hsp hpth hα'
-
   -- the residue of `x` is the residue of `x₀`
   have hxx₀ : 𝒪.valuation ((𝒟).a x - (𝒟).a x₀) < 1 := by
     rw [← map_sub, valuation_a_lt_one_iff, ← (𝒟).ker_b, RingHom.mem_ker, map_sub, sub_eq_zero,

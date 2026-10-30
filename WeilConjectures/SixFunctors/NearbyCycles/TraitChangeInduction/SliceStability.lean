@@ -116,6 +116,7 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuati
 local notation "𝒟₁" => sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg₁ hb₁
 local notation "𝒟₂" => sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂
 
+omit [IsAlgClosed Ω₂] in
 include ha₁ halg₁ ha₂ halg₂ hb₁ hb₂ in
 /-- **The compositum of a strict-localization slice is relatively separably closed in that of a
 finer one** (Ohm–Kuhlmann stability): for a morphism `H : D₁ ⟶ D₂` of strict-localization
@@ -127,8 +128,8 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
     letI := a₁.toAlgebra
     x ∈ (𝒟₁).compositum := by
   classical
-  letI := a₁.toAlgebra
-  letI := a₂.toAlgebra
+  let := a₁.toAlgebra
+  let := a₂.toAlgebra
   set L := (𝒟₁).compositum with hLdef
   by_contra hxL
   -- `H.ΩMap` maps `L⟮x⟯` into `L₂`
@@ -144,8 +145,8 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
     exact fun y hy ↦ this hy
   have hxint := hxsep.isIntegral
   set M := L⟮x⟯ with hMdef
-  haveI : FiniteDimensional L M := adjoin.finiteDimensional hxint
-  haveI : Algebra.IsSeparable L M := (isSeparable_adjoin_simple_iff_isSeparable L (𝒟₁).Ω).2 hxsep
+  have : FiniteDimensional L M := adjoin.finiteDimensional hxint
+  have : Algebra.IsSeparable L M := (isSeparable_adjoin_simple_iff_isSeparable L (𝒟₁).Ω).2 hxsep
   have hM : M ≠ ⊥ := by
     intro h
     have : x ∈ (⊥ : IntermediateField L (𝒟₁).Ω) := h ▸ mem_adjoin_simple_self L x
@@ -160,13 +161,13 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
   obtain ⟨q, hq⟩ := CharP.exists (ResidueField R₁)
   rcases CharP.char_is_prime_or_zero (ResidueField R₁) q with hqp | rfl
   · -- residual characteristic `q > 0`
-    haveI : Fact q.Prime := ⟨hqp⟩
+    have : Fact q.Prime := ⟨hqp⟩
     have hqdvd : ∀ n : ℕ, (n : ResidueField R₁) = 0 → q ∣ n := fun n hn ↦
       (CharP.cast_eq_zero_iff (ResidueField R₁) q n).1 hn
     obtain ⟨M', hM'M, hM'G, hM'deg⟩ := IntermediateField.exists_isGalois_finrank_eq_prime_le
       (hdeg q hqdvd) M hM
-    haveI : Module.Free L M' := Module.Free.of_divisionRing L M'
-    haveI : FiniteDimensional L M' := Module.finite_of_finrank_eq_succ (by
+    have : Module.Free L M' := Module.Free.of_divisionRing L M'
+    have : FiniteDimensional L M' := Module.finite_of_finrank_eq_succ (by
       rw [hM'deg]; exact (Nat.succ_pred_eq_of_pos hqp.pos).symm)
     obtain ⟨cΩ, hcΩ⟩ := CharP.exists Ω₁
     rcases CharP.char_is_prime_or_zero Ω₁ cΩ with hcp | rfl
@@ -178,12 +179,12 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
           rw [← map_natCast (residue R₁), h2, map_zero]
         exact ((Nat.prime_dvd_prime_iff_eq hqp hcp).1 (hqdvd cΩ h3)).symm
       subst hcq
-      haveI : CharP Ω₂ cΩ := charP_of_injective_ringHom c.injective cΩ
-      haveI : CharP R₂ cΩ := a₂.charP ha₂ cΩ
-      haveI : CharP (ResidueField R₂) cΩ := (CharP.charP_iff_prime_eq_zero hqp).2
+      have : CharP Ω₂ cΩ := charP_of_injective_ringHom c.injective cΩ
+      have : CharP R₂ cΩ := a₂.charP ha₂ cΩ
+      have : CharP (ResidueField R₂) cΩ := (CharP.charP_iff_prime_eq_zero hqp).2
         (by rw [← map_natCast (residue R₂), CharP.cast_eq_zero, map_zero])
-      haveI : CharP (𝒟₁).Ω cΩ := charP_of_injective_ringHom (𝒟₁).ωS.injective cΩ
-      haveI : CharP L cΩ := charP_of_injective_ringHom (algebraMap Ω₁ L).injective cΩ
+      have : CharP (𝒟₁).Ω cΩ := charP_of_injective_ringHom (𝒟₁).ωS.injective cΩ
+      have : CharP L cΩ := charP_of_injective_ringHom (algebraMap Ω₁ L).injective cΩ
       obtain ⟨θ, hθ, hθp⟩ := IsGalois.exists_not_mem_range_pow_sub_self_mem_range cΩ hM'deg
       obtain ⟨l, hl⟩ := hθp
       set θ₀ : (𝒟₁).Ω := ((θ : M') : (𝒟₁).Ω) with hθ₀
@@ -203,9 +204,9 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
         exact add_mem hθ₁L (intCast_mem L n)
       exact hθ ⟨⟨θ₀, hθ₀L⟩, Subtype.ext rfl⟩
     · -- mixed characteristic
-      haveI : CharZero Ω₁ := CharP.charP_to_charZero Ω₁
-      haveI : NeZero (q : Ω₁) := ⟨Nat.cast_ne_zero.2 hqp.ne_zero⟩
-      haveI : CharP (ResidueField R₂) q := (CharP.charP_iff_prime_eq_zero hqp).2 (by
+      have : CharZero Ω₁ := CharP.charP_to_charZero Ω₁
+      have : NeZero (q : Ω₁) := ⟨Nat.cast_ne_zero.2 hqp.ne_zero⟩
+      have : CharP (ResidueField R₂) q := (CharP.charP_iff_prime_eq_zero hqp).2 (by
         rw [← map_natCast (residue R₂), IsLocalRing.residue_eq_zero_iff,
           IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
         intro hu
@@ -251,12 +252,12 @@ theorem mem_compositum_of_ΩMap_mem (H : SliceTrait.Hom ι c 𝒟₁ 𝒟₂) (h
     have h0 : ∀ r : ℕ, (∀ n : ℕ, (n : ResidueField R₁) = 0 → r ∣ n) := fun r n hn ↦ by
       rw [CharP.cast_eq_zero_iff (ResidueField R₁) 0] at hn
       exact (Nat.eq_zero_of_zero_dvd hn) ▸ dvd_zero r
-    haveI : Fact (2 : ℕ).Prime := ⟨Nat.prime_two⟩
-    haveI : Fact (3 : ℕ).Prime := ⟨Nat.prime_three⟩
+    have : Fact (2 : ℕ).Prime := ⟨Nat.prime_two⟩
+    have : Fact (3 : ℕ).Prime := ⟨Nat.prime_three⟩
     obtain ⟨M', -, hM'G, hM'deg⟩ := IntermediateField.exists_isGalois_finrank_eq_prime_le
       (hdeg 2 (h0 2)) M hM
-    haveI : Module.Free L M' := Module.Free.of_divisionRing L M'
-    haveI : FiniteDimensional L M' := Module.finite_of_finrank_eq_succ hM'deg
+    have : Module.Free L M' := Module.Free.of_divisionRing L M'
+    have : FiniteDimensional L M' := Module.finite_of_finrank_eq_succ hM'deg
     obtain ⟨k, hk⟩ := hdeg 3 (h0 3) M' inferInstance hM'G
     rw [hM'deg] at hk
     have := congrArg (· % 2) hk

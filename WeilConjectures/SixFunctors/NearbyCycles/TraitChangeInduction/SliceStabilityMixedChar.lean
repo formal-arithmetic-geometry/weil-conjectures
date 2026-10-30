@@ -57,6 +57,7 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuati
 local notation "𝒟₁" => sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₁) ha₁ halg₁ hb₁
 local notation "𝒟₂" => sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂
 
+omit [IsAlgClosed Ω₂] in
 include ha₁ halg₁ ha₂ halg₂ hb₁ hb₂ in
 /-- **Kummer equations over the slice composita, mixed characteristic.** For a morphism
 `H : D₁ ⟶ D₂` of strict-localization slice traits which is the identity on the fields
@@ -69,14 +70,14 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
     letI := a₁.toAlgebra
     ∃ θ ∈ (𝒟₁).compositum, θ ^ p = α := by
   classical
-  letI := a₁.toAlgebra
-  letI := a₂.toAlgebra
+  let := a₁.toAlgebra
+  let := a₂.toAlgebra
   set Γ := H.ΩMap with hΓ
   set v₁ := (𝒟₁).valuationSubring.valuation with hv₁
   set v₂ := (𝒟₂).valuationSubring.valuation with hv₂
   have hp : p.Prime := Fact.out
-  haveI : CharZero (𝒟₁).Ω := charZero_of_injective_ringHom (𝒟₁).ωS.injective
-  haveI : CharZero (𝒟₂).Ω := charZero_of_injective_ringHom Γ.injective
+  have : CharZero (𝒟₁).Ω := charZero_of_injective_ringHom (𝒟₁).ωS.injective
+  have : CharZero (𝒟₂).Ω := charZero_of_injective_ringHom Γ.injective
   have hp0 : (p : (𝒟₂).Ω) ≠ 0 := Nat.cast_ne_zero.2 hp.ne_zero
   have hp1 : v₂ (p : (𝒟₂).Ω) < 1 := by
     have hpm : (p : R₂) ∈ maximalIdeal R₂ := by
@@ -216,7 +217,7 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
     rw [hcomb, ← map_sub]
     exact (H.valuation_ΩMap_lt_iff _ _).2 hlt
   -- Hensel's lemma for Kummer equations over `L₁`
-  haveI : CharP (ResidueField (𝒟₁).R) p :=
+  have : CharP (ResidueField (𝒟₁).R) p :=
     charP_of_injective_ringHom (ResidueField.map (𝒟₁).φ).injective p
   have hhens : ∀ x ∈ L₁, v₂.IsKummerNegligible p x → ∃ y ∈ L₁, y ^ p = 1 + x := by
     rintro _ ⟨x, hx, rfl⟩ hxn
@@ -310,7 +311,8 @@ theorem exists_pow_root_of_mixedChar (p : ℕ) [Fact p.Prime] [CharZero Ω₁]
     have h4 := valuation_coord_sub_pow_eq_one ha₂ halg₂ hb₂ p hx₂ hZL hZ1
     rw [h4] at h3
     exact lt_irrefl _ h3
-  obtain ⟨θ, hθL, hθ⟩ := exists_pow_eq_of_kummer_of_approx p K L₁ L₂ (Kst.map Γ) (A.map Γ) hp hp1 hp0 hKL₁ hL hKstK
+  obtain ⟨θ, hθL, hθ⟩ := exists_pow_eq_of_kummer_of_approx p K L₁ L₂ (Kst.map Γ) (A.map Γ) hp hp1
+    hp0 hKL₁ hL hKstK
     hAL₁ hroot hw₂A hw₂1 hA1 hval₂ (v₂ (Γ ϖ)) hγ0 hγ1 hdisc₂ hγN hAapp₂ hAinv₂ hKstA₂
     hKstroot₂ hexp₂ hres hhens ⟨α, hα, rfl⟩ hα₂ (by obtain ⟨θ, hθ, h⟩ := h₂; exact ⟨θ, hθ, h⟩)
   obtain ⟨θ', hθ'L, rfl⟩ := Subfield.mem_map.1 hθL
