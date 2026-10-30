@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 
 A morphism of models which is the identity on total spaces and special fibres and a universal
 homeomorphism on geometric generic fibres has an invertible pullback exchange
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism`): the exchange is
-`Li^* Rj_*` of the unit of `Lg^* ⊣ Rg_*`
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic`): the exchange
+is `Li^* Rj_*` of the unit of `Lg^* ⊣ Rg_*`
 (`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`), which is invertible for a universal
 homeomorphism `g` by topological invariance. The file also records two consequences of the square
 and composition laws of pullback exchanges
@@ -43,7 +43,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- **The pullback exchange along a universal homeomorphism of generic fibres is invertible.** For
 a morphism of models `φ` over the identities with `φ.total = 𝟙` and `φ.generic = g` a universal
 homeomorphism, from the model with generic fibre `G`, `j = g ≫ j_N` and `ε = e`. -/
-theorem Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism (N : NearbyCyclesModel X X')
+theorem Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic (N : NearbyCyclesModel X X')
     (g : G ⟶ N.generic) [IsUniversalHomeomorphism g] (e : G ⟶ X) (he : g ≫ N.ε = e)
     (φ : Hom ⟨N.total, G, g ≫ N.j, N.i, e⟩ N (𝟙 X) (𝟙 X')) (ht : φ.total = 𝟙 _)
     (hg : φ.generic = g) : IsIso (φ.pullbackExchange Λ) := by
@@ -60,7 +60,7 @@ fibres, where `M` has the total space and special fibre of `N`, generic fibre `G
 `j_M = r ≫ j_N` for a universal homeomorphism `r : G ⟶ 𝒳_{N,η̄}`, and `ρ` is the identity on total
 spaces and `r` on generic fibres. Then the pullback exchange of `ρ` is invertible: `ρ` factors
 through the model with `ε = r ≫ ε_N` by a morphism with invertible components and
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism`. -/
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic`. -/
 theorem Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism' {Z : Scheme.{u}}
     (N : NearbyCyclesModel X X') (r : G ⟶ N.generic) [IsUniversalHomeomorphism r]
     {j' : G ⟶ N.total} (hj : j' = r ≫ N.j) {ε' : G ⟶ Z} {f : Z ⟶ X}
@@ -85,7 +85,7 @@ theorem Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism' {Z : Scheme.
       comm_ε := by simp }
   have h₁ : IsIso (ρ₁.pullbackExchange Λ) := ρ₁.isIso_pullbackExchange_of_isIso Λ
   have h₂ : IsIso (ρ₂.pullbackExchange Λ) :=
-    Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism Λ N r _ rfl ρ₂ rfl rfl
+    Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic Λ N r _ rfl ρ₂ rfl rfl
   have w := ρ₁.pullbackExchange_comp_app_of_eq Λ ρ₂ ρ (Category.comp_id f) (Category.id_comp _)
     (by rw [ht]; exact Category.id_comp _) (by rw [hg]; exact Category.id_comp _) C
   have : IsIso ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))).hom.app
