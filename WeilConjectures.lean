@@ -14407,6 +14407,7 @@ public import WeilConjectures.SixFunctors.ProperOrderedProjectionExchange
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.TraceBaseChange
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
