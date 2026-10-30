@@ -16,9 +16,10 @@ at a finite level, the inclusion of the summand cut out by the averaging idempot
 group of Galois automorphisms of the slice model
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`). This is
 the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P` of SGA 4½, [Th. finitude], §3
-(Lemme 3.4 and 3.7), with the pro-`p` averaging. It is not proved here (see the docstring of the
-lemma).
-
+(Lemme 3.4 and 3.7), with the pro-`p` averaging. It is an input owned by the nearby-cycles slice
+tasks: Th. finitude 3.7 is #1790's (`trace2/nearby-finiteness-slice`), the slice traits and the
+equivariance along a change of trait are `trace2/nearby-slice-traits` and
+`trace2/nearby-trait-equivariance`.
 -/
 
 @[expose] public section
@@ -72,7 +73,8 @@ generic point `Spec Ω_K` through automorphisms `σ` over the generic point `η_
 with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
 The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`.
 
-Unfinished. This is stronger than the splitting (M2)
+Owned by the nearby-cycles slice tasks (#1790, `trace2/nearby-slice-traits`,
+`trace2/nearby-trait-equivariance`); not proved here. It is stronger than the splitting (M2)
 `NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom` of
 #1790, which is itself `sorry` there: besides a retraction it needs the action of `P` on
 `Ψ_{M''} c^* Aᵢ` to factor through a finite quotient realised by automorphisms of the slice model.
