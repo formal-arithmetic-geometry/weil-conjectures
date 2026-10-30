@@ -37,10 +37,6 @@ private abbrev ringSheaf {C : Type u} [Category.{u} C] {J : GrothendieckTopology
     (R : Sheaf J CommRingCat.{u}) :=
   (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 
-private noncomputable abbrev underlying {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) :=
-  toSheaf (ringSheaf R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})
-
 private noncomputable abbrev restriction
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
@@ -198,33 +194,5 @@ private noncomputable def tensorAdjunction
         rw [Equiv.apply_symm_apply, tensorHomEquiv_naturality_left,
           Equiv.apply_symm_apply]
       homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
-
-private noncomputable def tensorUnit
-    {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
-    {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) (M : SheafOfModules.{u} (ringSheaf A)) :
-    (underlying A).obj M ⟶ (underlying S).obj ((tensorFunctor c).obj M) :=
-  (underlying A).map ((tensorAdjunction c).unit.app M)
-
-private theorem tensorUnit_apply
-    {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
-    {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) (M : SheafOfModules.{u} (ringSheaf A))
-    (W : Dᵒᵖ) (m : M.val.obj W) :
-    (tensorUnit c M).hom.app W m =
-      (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).unit.app
-        (changeOfRingsPresheaf.{u, u, u} c M)).app W
-          ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) := by
-  change ((tensorAdjunction c).unit.app M).val.app W m = _
-  rw [← Adjunction.homEquiv_id, tensorAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
-  rfl
-
-private theorem tensorAdjunction_underlying
-    {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
-    {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S)
-    (M : SheafOfModules.{u} (ringSheaf A)) (H : SheafOfModules.{u} (ringSheaf S))
-    (f : (tensorFunctor c).obj M ⟶ H) :
-    (underlying A).map ((tensorAdjunction c).homEquiv M H f) =
-      tensorUnit c M ≫ (underlying S).map f := by
-  rw [Adjunction.homEquiv_unit, Functor.map_comp]
-  rfl
 
 end SheafOfModules

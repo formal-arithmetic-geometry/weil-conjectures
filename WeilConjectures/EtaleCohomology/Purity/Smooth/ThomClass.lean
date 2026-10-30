@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassAffineSpace
 
 /-!
 # The Thom class of the zero section of affine space
@@ -49,7 +50,7 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_coord (c : ℕ) (B : Schem
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin c); B).zeroLocusSubschemeι
         (Set.range fun a : Fin c ↦ AffineSpace.coord B (ULift.up a)))
       (kummerBoundaryProduct Λ fun a : Fin c ↦ AffineSpace.coord B (ULift.up a))) :=
-  sorry
+  isIso_supportedClassMap_kummerBoundaryProduct_coord_of_hasInvertibleExponent Λ c B
 
 end Etale
 

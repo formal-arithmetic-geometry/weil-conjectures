@@ -19,7 +19,7 @@ a smooth morphism `f` is an isomorphism *provided* it is one for
 
 * étale morphisms (`AlgebraicGeometry.Etale.EtaleBaseChange`): the elementary case (c) of the
   blueprint, where `Re^! ≅ Le^*` with counit the sum over the geometric sheets of `e_!`;
-* the affine-line projections `𝔸¹_S ⟶ S` over affine bases on which the exponent of `Λ` is
+* the affine-line projections `𝔸¹_S ⟶ S` over bases on which the exponent of `Λ` is
   invertible (`AlgebraicGeometry.Etale.AffineLineBaseChange`): the elementary case (a), from the
   explicit projective-line adjunction `thm-amb-p1-adjunction` and its compatibility with base
   change (`lem-amb-cartier-kummer-map`, `thm-amb-p1-decomposition`).
@@ -150,26 +150,26 @@ def EtaleBaseChange : Prop :=
     IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
 
 variable (Λ) in
-/-- *Base change for affine-line projections*: for every affine scheme `S` on which the
+/-- *Base change for affine-line projections*: for every scheme `S` on which the
 exponent of `Λ` is invertible and every cartesian square of the projection `p : 𝔸¹_S ⟶ S` with
 quasi-compact base change admitting a compactification, the canonical base change map
 `Lg'^* Rp^! ⟶ Rp'^! Lg^*` is an isomorphism. This is the elementary case (a) of the blueprint
 proof of `prop-asd-smooth-base-change`: the unit and counit of the affine-line adjunction
 `Rp_! ⊣ p^*(1)[2]` (from `thm-amb-p1-adjunction`) commute with base change. -/
 def AffineLineBaseChange : Prop :=
-  ∀ ⦃S : Scheme.{u}⦄ [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+  ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin 1); S)}
     (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin 1); S) ↘ S) g) [HasCompactification p']
     [QuasiCompact p'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
 
 /-- **Base change for affine-space projections from the affine line** (blueprint
 `prop-asd-smooth-base-change`, "for affine space by composing those adjunctions"): if the
-affine-line projections over affine bases satisfy base change, then so do the projections
-`p_d : 𝔸^d_S ⟶ S` over affine bases on which the exponent of `Λ` is invertible. For `d = 0` the
+affine-line projections satisfy base change, then so do the projections
+`p_d : 𝔸^d_S ⟶ S` over bases on which the exponent of `Λ` is invertible. For `d = 0` the
 projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the composite
 of the affine-line projection over `𝔸^d_S` and of `p_d`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace (h₁ : AffineLineBaseChange Λ)
-    (d : ℕ) (S : Scheme.{u}) [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+    (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)}
     (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g) [HasCompactification p']
     [QuasiCompact p'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
@@ -263,7 +263,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent {X Y
 
 /-- **Base change for smooth morphisms from the étale and affine-line cases** (Steps 2 and 3 of
 the proof of blueprint `prop-asd-smooth-base-change`): if étale morphisms and the affine-line
-projections over affine bases satisfy base change (`AlgebraicGeometry.Etale.EtaleBaseChange`,
+projections satisfy base change (`AlgebraicGeometry.Etale.EtaleBaseChange`,
 `AlgebraicGeometry.Etale.AffineLineBaseChange`), then for every smooth `f : X ⟶ Y` of relative
 dimension `d` admitting a compactification, over a quasi-separated `Y`, with the exponent of `Λ`
 invertible on `X`, and every cartesian square `g' ≫ f = f' ≫ g` with quasi-compact `f'`

@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.RingedToposMorphism
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 
+set_option linter.privateModule false
+
 /-! # Continuous ringed-topos module direct images
 
 Generic constructions extracted from the étale presentation so callers can use their
