@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
+public import WeilConjectures.TraceFormula.Specialization.SupportExchangeOnComponent
 
 /-!
 

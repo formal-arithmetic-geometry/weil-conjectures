@@ -10,9 +10,11 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
+public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
