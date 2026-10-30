@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseOverField
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.WeilIdentityStructureOfId
 public import WeilConjectures.WeilSheaf.CondensedModelBoundedConstructible
@@ -205,7 +206,10 @@ sheaf are lisse on `Spec k₀`: their pullbacks to `Spec k̄` are finite free. -
 theorem isAdicLisseSheaf_lowerShriekHomologyAdicOfLisse {H : AdicSheaf l X}
     (hH : IsAdicLisseSheaf H) (j : ℤ) :
     IsAdicLisseSheaf (lowerShriekHomologyAdicOfLisse (k₀ := k₀) hH j) :=
-  sorry
+  isAdicLisseSheaf_inverse_obj_of_isConstructibleModuleObject
+    (((boundedConstructibleLowerShriek l (toPoint (overSpec (k₀ := k₀) X))).obj
+      (boundedConstructibleOfLisse hH)).property.2 j)
+
 /-- The pullback to the geometric fibre of `Mʲ = Hʲ(Ra_! H)`, through `toCondensed`, is the
 Weil sheaf of the zeta-function chapter pulled back from the corresponding `ℓ`-adic sheaf. -/
 noncomputable def toCondensedGeometricFiberPullbackLowerShriekHomologyIso {H : AdicSheaf l X}

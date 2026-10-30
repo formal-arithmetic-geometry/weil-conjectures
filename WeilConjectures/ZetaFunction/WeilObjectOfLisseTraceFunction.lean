@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.WeilIdentityStalkTrace
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
+public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTrace
 public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
@@ -86,7 +87,7 @@ theorem _root_.AlgebraicGeometry.WeilSheaf.traceFunction_geometricFiberPullback_
         ((WeilCoefficients.toModuleCat l).map (galoisGlobalSections
           ((geometricFrobeniusField k₀).pow (n + 1)).hom
           (frobeniusFixedPointsReflOfFieldPoint (X := overSpec X) n y).1
-          (frobeniusFixedPointsReflOfFieldPoint_fixed n y) H)).hom := by
-  sorry
+          (frobeniusFixedPointsReflOfFieldPoint_fixed n y) H)).hom :=
+  WeilSheaf.traceFunction_geometricFiberPullback_eq_trace_galoisGlobalSections hH n y rfl _
 
 end AlgebraicGeometry.WeilComplex

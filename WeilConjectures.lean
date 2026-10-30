@@ -13577,6 +13577,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducibl
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseNilInvariance
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseOverField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRankCriterion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
@@ -15270,6 +15271,7 @@ public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.GeometricConstituent
 public import WeilConjectures.WeilSheaf.GeometricConstituentMono
 public import WeilConjectures.WeilSheaf.GeometricFiberPullback
+public import WeilConjectures.WeilSheaf.GeometricFiberPullbackTrace
 public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
