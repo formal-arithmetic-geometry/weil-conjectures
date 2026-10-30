@@ -31,7 +31,8 @@ reduce the change of trait on the slice to the change of trait `φ'` of the slic
 hypothesis, `NearbyCyclesModel.isIso_pullbackExchange_sliceTraitChangeHom`), through the change of
 Galois layers `τ'` (`NearbyCyclesModel.isIso_pullbackExchange_sliceTraitGaloisLayerMap`), the
 invariants under the wild inertia groups
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin`) and the
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic`)
+and the
 Galois-layer models (`NearbyCyclesModel.isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom`).
 
 -/
@@ -162,7 +163,7 @@ theorem isIso_map_pullbackExchange_sliceTraitSpecial {m : ℕ} (ih : TraitChange
         (sliceTraitGaloisChangeHom_generic_comp_residue H hc φ cN hcN hNj hNi cM hcM' hMj
           hMi hcM hgen)) HEq.rfl _ hB
     with_reducible
-      have key := Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin
+      have key := Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic
         (l := H.compositumMap) (ω := H.compositumSepMap) (hω := H.compositumSepMap_comp_algebraMap)
         T
         (sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen)
