@@ -54,6 +54,61 @@ theorem Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism (N : NearbyCycles
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
+/-- **The pullback exchange along a universal homeomorphism of generic fibres, over any map of the
+identified schemes.** Let `ρ : M ⟶ N` be a morphism of models over `f` and the identity of special
+fibres, where `M` has the total space and special fibre of `N`, generic fibre `G` with
+`j_M = r ≫ j_N` for a universal homeomorphism `r : G ⟶ 𝒳_{N,η̄}`, and `ρ` is the identity on total
+spaces and `r` on generic fibres. Then the pullback exchange of `ρ` is invertible: `ρ` factors
+through the model with `ε = r ≫ ε_N` by a morphism with invertible components and
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism`. -/
+theorem Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism' {Z : Scheme.{u}}
+    (N : NearbyCyclesModel X X') (r : G ⟶ N.generic) [IsUniversalHomeomorphism r]
+    {j' : G ⟶ N.total} (hj : j' = r ≫ N.j) {ε' : G ⟶ Z} {f : Z ⟶ X}
+    (ρ : Hom ⟨N.total, G, j', N.i, ε'⟩ N f (𝟙 X')) (ht : ρ.total = 𝟙 _) (hg : ρ.generic = r)
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    IsIso ((ρ.pullbackExchange Λ).app C) := by
+  subst hj
+  let ρ₁ : Hom ⟨N.total, G, r ≫ N.j, N.i, ε'⟩ ⟨N.total, G, r ≫ N.j, N.i, r ≫ N.ε⟩ f (𝟙 X') :=
+    { total := 𝟙 _
+      generic := 𝟙 _
+      comm_j := by simp
+      comm_i := by simp
+      comm_ε := by
+        have := ρ.comm_ε
+        rw [hg] at this
+        simpa using this }
+  let ρ₂ : Hom ⟨N.total, G, r ≫ N.j, N.i, r ≫ N.ε⟩ N (𝟙 X) (𝟙 X') :=
+    { total := 𝟙 _
+      generic := r
+      comm_j := by simp
+      comm_i := by simp
+      comm_ε := by simp }
+  have h₁ : IsIso (ρ₁.pullbackExchange Λ) := ρ₁.isIso_pullbackExchange_of_isIso Λ
+  have h₂ : IsIso (ρ₂.pullbackExchange Λ) :=
+    Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism Λ N r _ rfl ρ₂ rfl rfl
+  have w := ρ₁.pullbackExchange_comp_app_of_eq Λ ρ₂ ρ (Category.comp_id f) (Category.id_comp _)
+    (by rw [ht]; exact Category.id_comp _) (by rw [hg]; exact Category.id_comp _) C
+  have : IsIso ((leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))).hom.app
+      ((N.nearbyCycles Λ).obj C) ≫ L((𝟙 X')^*⟦Λ⟧).map ((ρ₂.pullbackExchange Λ).app C) ≫
+        (ρ₁.pullbackExchange Λ).app (L((𝟙 X)^*⟦Λ⟧).obj C)) := inferInstance
+  rw [← w] at this
+  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+
+/-- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism'` for a source
+model `M` which is only equal to the model with the total space and special fibre of `N` (so that
+the statement can be applied to models which are definitionally, but not syntactically, of that
+form without unifying large pullback exchanges). -/
+theorem Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism_of_eq {Z : Scheme.{u}}
+    (N : NearbyCyclesModel X X') (r : G ⟶ N.generic) [IsUniversalHomeomorphism r]
+    {ε' : G ⟶ Z} {f : Z ⟶ X} (M : NearbyCyclesModel Z X')
+    (hM : M = ⟨N.total, G, r ≫ N.j, N.i, ε'⟩) (ρ : M.Hom N f (𝟙 X'))
+    (ht : HEq ρ.total (𝟙 N.total)) (hg : HEq ρ.generic r)
+    (C : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    IsIso ((ρ.pullbackExchange Λ).app C) := by
+  subst hM
+  exact Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism' Λ N r rfl ρ (eq_of_heq ht)
+    (eq_of_heq hg) C
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

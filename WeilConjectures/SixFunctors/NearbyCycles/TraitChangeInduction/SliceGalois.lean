@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Slic
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeGaloisLayer
+public import WeilConjectures.SixFunctors.NearbyCycles.UniversalHomeomorphismExchange
 
 /-!
 
@@ -80,6 +81,45 @@ noncomputable abbrev sliceTraitGaloisResidue :
     (sliceTraitGaloisModel D N cN hcN hNj hNi).generic ⟶ Spec (.of D.compositum) :=
   (sliceTraitGenericHom D N cN hcN hNj hNi).traitChangeResidue D.Ω (sliceTraitStructure D N cN) q g
     hNj.w (sliceTrait_fst_comp D N cN hcN)
+
+/-- The Galois layer `N₁_{L^sep}` of the model `N₁` along `Z₂ ⟶ Spec L` and `L^sep / L`. -/
+noncomputable abbrev sliceTraitGaloisLayer : NearbyCyclesModel N.generic
+    (pullback (sliceTraitStructure D N cN) (Spec.map (CommRingCat.ofHom D.b))) :=
+  (sliceTraitGaloisModel D N cN hcN hNj hNi).galoisLayer
+    (sliceTraitGaloisResidue D N cN hcN hNj hNi) D.compositumSep
+
+/-- The morphism of models `N' ⟶ N₁_{L^sep}` from the slice to the Galois layer: the identity of
+total spaces and the purely inseparable part `r₁` on generic fibres. -/
+noncomputable abbrev sliceTraitToGaloisLayer :
+    (sliceTraitModel D N cN).toGeneric.Hom (sliceTraitGaloisLayer D N cN hcN hNj hNi)
+      (sliceTraitGeneric D N cN hcN hNj) (𝟙 _) :=
+  (sliceTraitGenericHom D N cN hcN hNj hNi).toTraitChangeGaloisLayer D.Ω
+    (sliceTraitStructure D N cN) (pullback.snd _ _) q g hNj.w (sliceTrait_fst_comp D N cN hcN)
+    (isPullback_sliceTraitModel_j D N cN).w (hNj.lift_snd _ _ _)
+
+/-- The pullback exchange of `N' ⟶ N₁_{L^sep}` is invertible: it is the identity of total spaces
+and the universal homeomorphism `r₁ : Spec Ω' ⟶ Spec L^sep`, base changed, on generic fibres. -/
+theorem isIso_pullbackExchange_sliceTraitToGaloisLayer
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+      (condensedRingObj Λ N.generic))) :
+    IsIso (((sliceTraitToGaloisLayer D N cN hcN hNj hNi).pullbackExchange Λ).app C) := by
+  have : FaithfulSMul D.R D.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D.injective_a
+  have : Algebra.IsAlgebraic D.R D.Ω := D.isAlgebraic_a
+  have : IsUniversalHomeomorphism (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic :=
+    (sliceTraitGenericHom D N cN hcN hNj hNi).isUniversalHomeomorphism_traitChangeInsepMap
+      (sliceTrait_fst_comp D N cN hcN) (isPullback_sliceTraitModel_j D N cN) hNj
+      (hNj.lift_snd _ _ _)
+  exact Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism_of_eq Λ
+    (sliceTraitGaloisLayer D N cN hcN hNj hNi) (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic
+    (sliceTraitModel D N cN).toGeneric
+    (by
+      have hj : (sliceTraitModel D N cN).j = (sliceTraitToGaloisLayer D N cN hcN hNj hNi).generic ≫
+          (sliceTraitGaloisLayer D N cN hcN hNj hNi).j := by
+        simpa using (sliceTraitToGaloisLayer D N cN hcN hNj hNi).comm_j.symm
+      exact congrArg (fun j ↦ (⟨(sliceTraitModel D N cN).total, (sliceTraitModel D N cN).generic,
+        j, (sliceTraitModel D N cN).i, 𝟙 _⟩ : NearbyCyclesModel _ _)) hj)
+    (sliceTraitToGaloisLayer D N cN hcN hNj hNi) HEq.rfl HEq.rfl C
 
 end Single
 
