@@ -12204,6 +12204,10 @@ public import WeilConjectures.RingTheory.Valuation.FrobeniusLiftApprox.Residue
 public import WeilConjectures.RingTheory.Valuation.FrobeniusLiftApprox.Span
 public import WeilConjectures.RingTheory.Valuation.GaloisResidueRoot
 public import WeilConjectures.RingTheory.Valuation.GaussResidue
+public import WeilConjectures.RingTheory.Valuation.GaussStability
+public import WeilConjectures.RingTheory.Valuation.GaussStability.ArtinSchreier
+public import WeilConjectures.RingTheory.Valuation.GaussStability.Kummer
+public import WeilConjectures.RingTheory.Valuation.GaussStability.Package
 public import WeilConjectures.RingTheory.Valuation.IntegralClosureHenselianDVR
 public import WeilConjectures.RingTheory.Valuation.KummerHensel
 public import WeilConjectures.RingTheory.Valuation.KummerNormalForm
