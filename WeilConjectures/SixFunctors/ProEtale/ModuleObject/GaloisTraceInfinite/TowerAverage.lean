@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerContinuity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfinite.TowerDerived
 
@@ -20,8 +23,6 @@ by the projector: the projector is the projector onto the invariants.
 
 ## Main results
 
-* `CategoryTheory.Limits.IsColimit.comp_eq_of_nsmul_comp_eq_sum`: an endomorphism of a colimit
-  which is levelwise an average of endomorphisms fixes every map invariant under them.
 * `AlgebraicGeometry.ProEtale.GaloisTower.card_nsmul_infTransport_comp_trace_comp_infUnit`: the
   projector `τ ≫ η` at the level `j` is the average of the Galois action.
 * `GaloisTower.sum_const_complexCocone_ι_app_comp_complexTrace_comp_unit`:
@@ -36,65 +37,11 @@ by the projector: the projector is the projector onto the invariants.
 -- several lemmas do not need all the instances of the section variables
 set_option linter.unusedSectionVars false
 
-universe w u
+universe u
 
 open CategoryTheory Category Limits
 
 open scoped CategoryTheory.Obj
-
-/-- Transport of an identity `∑ _a, g = ∑ a, y a` along equalities `f = g` and `y a = z a`.
-
-The additive structure is an implicit argument rather than an instance argument, so that it is
-determined by unification with the goal: this avoids comparing different (but definitionally
-equal) instances in the kernel. -/
-lemma Finset.sum_const_eq_sum_of_eq {β : Type*} {_ : AddCommMonoid β} {κ : Type*}
-    {_ : Fintype κ} {f g : β} (y z : κ → β) (hf : f = g) (hg : ∑ _a : κ, g = ∑ a, y a)
-    (hy : ∀ a, y a = z a) : ∑ _a : κ, f = ∑ a, z a := by
-  rw [hf, hg]
-  exact Finset.sum_congr rfl fun a _ ↦ hy a
-
-/-- The image under an additive functor of an identity `∑ _a, i ≫ E = ∑ a, i ≫ U a`. -/
-lemma CategoryTheory.Functor.sum_const_map_comp_map_eq_sum {C D : Type*} [Category C]
-    [Preadditive C] [Category D] [Preadditive D] (F : C ⥤ D) [F.Additive] {P Q R : C}
-    {κ : Type*} [Fintype κ] (i : P ⟶ Q) (E : Q ⟶ R) (U : κ → (Q ⟶ R))
-    (h : ∑ _a : κ, i ≫ E = ∑ a, i ≫ U a) :
-    ∑ _a : κ, F.map i ≫ F.map E = ∑ a, F.map i ≫ F.map (U a) := by
-  simp only [← F.map_comp, ← F.map_sum, h]
-
-namespace CategoryTheory.Limits
-
-/-- An endomorphism `E` of the point of a colimit cocone which, restricted to every leg, is (up to
-an invertible multiple) a sum of endomorphisms `ρ i` fixes every map `φ` invariant under all the
-`ρ i`. -/
-lemma IsColimit.comp_eq_of_sum_const_comp_eq_sum {C J : Type*} [Category C] [Preadditive C]
-    [Category J] {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) {ι : Type*} (E : c.pt ⟶ c.pt)
-    (ρ : ι → (c.pt ⟶ c.pt)) {W : C} (φ : c.pt ⟶ W) (hφ : ∀ i, ρ i ≫ φ = φ)
-    (havg : ∀ j, ∃ (κ : Type w) (_ : Fintype κ) (σ : κ → ι), IsIso (Fintype.card κ • 𝟙 W) ∧
-      ∑ _k : κ, c.ι.app j ≫ E = ∑ k, c.ι.app j ≫ ρ (σ k)) :
-    E ≫ φ = φ := by
-  refine hc.hom_ext fun j ↦ ?_
-  obtain ⟨κ, _, σ, hW, h⟩ := havg j
-  have h' := congrArg (· ≫ φ) h
-  simp only [Preadditive.sum_comp, Preadditive.nsmul_comp, assoc, hφ, Finset.sum_const,
-    Finset.card_univ] at h'
-  rw [← cancel_mono (Fintype.card κ • 𝟙 W)]
-  simpa only [Preadditive.comp_nsmul, comp_id, assoc] using h'
-
-/-- An endomorphism `E` of the point of a colimit cocone which, restricted to every leg, is (up to
-an invertible multiple) a sum of endomorphisms `ρ i` fixes every map `φ` invariant under all the
-`ρ i`. -/
-lemma IsColimit.comp_eq_of_nsmul_comp_eq_sum {C J : Type*} [Category C] [Preadditive C]
-    [Category J] {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) {ι : Type*} (E : c.pt ⟶ c.pt)
-    (ρ : ι → (c.pt ⟶ c.pt)) {W : C} (φ : c.pt ⟶ W) (hφ : ∀ i, ρ i ≫ φ = φ)
-    (havg : ∀ j, ∃ (κ : Type w) (_ : Fintype κ) (σ : κ → ι), IsIso (Fintype.card κ • 𝟙 W) ∧
-      Fintype.card κ • (c.ι.app j ≫ E) = ∑ k, c.ι.app j ≫ ρ (σ k)) :
-    E ≫ φ = φ :=
-  hc.comp_eq_of_sum_const_comp_eq_sum E ρ φ hφ fun j ↦ by
-    obtain ⟨κ, _, σ, hW, h⟩ := havg j
-    exact ⟨κ, inferInstance, σ, hW, by rw [Finset.sum_const, Finset.card_univ, h]⟩
-
-end CategoryTheory.Limits
-
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
