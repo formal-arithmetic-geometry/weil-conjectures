@@ -172,7 +172,8 @@ theorem coeff_X_pow_sub_X_sub_C_mem {S : Type*} [SetLike S Ω] [SubringClass S �
 theorem coeff_X_pow_sub_C_mem {S : Type*} [SetLike S Ω] [SubringClass S Ω] {s : S}
     (n : ℕ) {a : Ω} (ha : a ∈ s) (i : ℕ) : (X ^ n - C a : Ω[X]).coeff i ∈ s := by
   simp only [coeff_sub, coeff_X_pow, coeff_C]
-  refine sub_mem ?_ ?_ <;> split_ifs <;> first | exact OneMemClass.one_mem s | exact ZeroMemClass.zero_mem s | exact ha
+  refine sub_mem ?_ ?_ <;> split_ifs <;>
+    first | exact OneMemClass.one_mem s | exact ZeroMemClass.zero_mem s | exact ha
 
 /-- **Artin–Schreier lifting.** In characteristic `p`, if `a ∈ N ∩ 𝒪` and `X ^ p - X - a` has a
 residual root in `N ∩ 𝒪`, then it has a root in `N`. -/

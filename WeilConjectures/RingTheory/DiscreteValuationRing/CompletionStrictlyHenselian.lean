@@ -55,7 +55,8 @@ noncomputable abbrev toCompletion : R →+* completion R := algebraMap R (comple
 lemma injective_toCompletion : Function.Injective (toCompletion R) := by
   have : IsHausdorff (maximalIdeal R) R := inferInstance
   intro x y h
-  exact AdicCompletion.of_injective (maximalIdeal R) R (by simpa [AdicCompletion.algebraMap_apply] using h)
+  exact AdicCompletion.of_injective (maximalIdeal R) R
+    (by simpa [AdicCompletion.algebraMap_apply] using h)
 
 lemma maximalIdeal_completion :
     maximalIdeal (completion R) = (maximalIdeal R).map (toCompletion R) :=
