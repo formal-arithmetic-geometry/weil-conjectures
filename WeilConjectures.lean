@@ -15384,6 +15384,8 @@ public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.TateTwistPullback
 public import WeilConjectures.SmoothPurity.TraceBaseChange
+public import WeilConjectures.SmoothPurity.UpperShriekBaseChangePasting
+public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
 public import WeilConjectures.SpecialValues
