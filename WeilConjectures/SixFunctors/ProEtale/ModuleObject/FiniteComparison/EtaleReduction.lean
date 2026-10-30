@@ -44,7 +44,8 @@ It states the coefficient comparisons of blueprint `sk-prop-scalar-six` for the 
 finite coefficients (blueprint `sk-lem-tf-curve-restriction-zero`, last step). They are
 compatibilities required from section `sec-six-functors-basics`, each exactly one blueprint node:
 
-* `nonempty_etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1));
+* `nonempty_etaleReductionUpperStarIso`: pullback (`det-prop-scalar-six-pullback`, (1)), by the
+  canonical isomorphism `etaleReductionUpperStarIso`;
 * `exists_etaleReductionLowerShriekIso`: compactly supported direct image and exceptional
   inverse image, for proper morphisms (`det-prop-scalar-six-exceptional`, with the comparison
   `γ^!` of `det-prop-scalar-six-compact-support`), proved in the file
@@ -88,22 +89,24 @@ noncomputable def etaleReduction (Y : Over (Spec (.of k))) [LocallyOfFiniteType 
 variable {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-pullback`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with pullback**:
-`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`.
+/-- **The canonical isomorphism: reduction modulo `ℓⁿ` commutes with pullback**,
+`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})` (blueprint `det-prop-scalar-six-pullback`, (1), for
+the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site, `sk-def-sf-categories`).
 
-The reduction commutes with pullback on the condensed side
-(`boundedConstructibleUpperStarIntegersModPowReductionIso`), the comparison of the two
-finite-coefficient models commutes with pullback
-(`leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`), and `Rν_*` commutes with
-pullback on complexes of étale origin (`isIso_rightDerivedComparisonBaseChange_app`), which the
-reductions of bounded constructible complexes are (`isEtaleOrigin_of_isConstructible`). -/
-theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
-    Nonempty (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+It is the composite of the following canonical isomorphisms: the reduction commutes with
+pullback on the condensed side (`boundedConstructibleUpperStarIntegersModPowReductionIso`), the
+pullback of bounded constructible complexes is computed by the derived pullback
+(`boundedConstructibleUpperStarCompatibility`), the comparison of the two finite-coefficient
+models commutes with pullback (`leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso`),
+and the inverse of the canonical base change morphism `Lf^* Rν_* ⟶ Rν_* Lf^*`
+(`rightDerivedComparisonBaseChange`), which is invertible on complexes of étale origin
+(`isIso_rightDerivedComparisonBaseChange_app`), as the reductions of bounded constructible
+complexes are (`isEtaleOrigin_of_isConstructible`). -/
+noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
+    boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Z ≅
       etaleReduction ℓ E n Y ⋙
-        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left)) := by
+        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left) := by
   let T := PadicAlgCl.integersModPow ℓ E n
   let A := ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)
   let U := boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f
@@ -139,15 +142,19 @@ theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
       (leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso f.left T) _))
   let e₄ : P ⋙ LMC ⋙ νZ ≅ P ⋙ νY ⋙ Let :=
     (asIso (Functor.whiskerLeft P (rightDerivedComparisonBaseChange A f.left))).symm
-  exact ⟨e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄⟩
+  exact e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄
 
-/-- Reduction modulo `ℓⁿ` commutes with pullback (`nonempty_etaleReductionUpperStarIso`). -/
-noncomputable def etaleReductionUpperStarIso (f : Z ⟶ Y) :
-    boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
+`det-prop-scalar-six-pullback`, (1), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
+étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with pullback**:
+`(f^* K)_{𝒪_E ⧸ ℓⁿ} ≅ f^* (K_{𝒪_E ⧸ ℓⁿ})`, by the canonical isomorphism
+`etaleReductionUpperStarIso`. -/
+theorem nonempty_etaleReductionUpperStarIso (f : Z ⟶ Y) :
+    Nonempty (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f ⋙
         etaleReduction ℓ E n Z ≅
       etaleReduction ℓ E n Y ⋙
-        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left) :=
-  (nonempty_etaleReductionUpperStarIso ℓ E n f).some
+        L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f.left)) :=
+  ⟨etaleReductionUpperStarIso ℓ E n f⟩
 
 omit [Fact (ringChar k).Prime] in
 /-- Blueprint `det-prop-scalar-six-tensor-hom`, (1), for the coefficient map
