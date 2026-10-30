@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Defs
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SlicePoints
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStep
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisRestriction
 
 /-!
 
@@ -28,6 +31,9 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
+
+attribute [local instance] SliceTrait.algebraR SliceTrait.algebraΩ SliceTrait.algebraBaseΩ
+  SliceTrait.algebraRΩ
 
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
@@ -81,7 +87,71 @@ theorem Hom.exists_isIso_map_pullbackExchange_slice {m : ℕ} (ih : TraitChangeI
     ∃ (W : Scheme.{u}) (h : W ⟶ X'),
       (∀ x : X', IsGenericPoint (cX x) ⊤ → x ∈ Set.range h) ∧
       IsIso ((L((h)^*⟦Profinite.continuousMapRingObj T⟧)).map
-        ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K)) :=
-  sorry
+        ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K)) := by
+  letI := a₁.toAlgebra
+  letI := a₂.toAlgebra
+  have hb₁ := ker_comp_eq_maximalIdeal ι b₂ hb₂
+  refine ⟨_, 𝟙 _ ≫ sliceTraitSpecial
+    (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂) M cM hcM' hMi,
+    fun x hx ↦ ?_, ?_⟩
+  · obtain ⟨w, hw⟩ := mem_range_sliceTraitSpecial_of_isGenericPoint ha₂ halg₂ hb₂ M hMi cM hcM' cX
+      hcX hcXp x hx
+    exact ⟨w, by rw [Category.id_comp]; exact hw⟩
+  have hκ : IsIso (Spec.map (CommRingCat.ofHom
+      (sliceTraitOfStrictLocalizationHom ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂).κMap)) := by
+    rw [sliceTraitOfStrictLocalizationHom_κMap]
+    have : IsIso (CommRingCat.ofHom (RingHom.id (traitSliceField κ))) :=
+      ⟨CommRingCat.ofHom (RingHom.id _), by ext; rfl, by ext; rfl⟩
+    infer_instance
+  have hsub₁ := (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁
+    hb₁).subsingleton_primeSpectrum ha₁ halg₁
+  have hsub₂ := (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂
+    hb₂).subsingleton_primeSpectrum ha₂ halg₂
+  have hp₂ : ∀ n : ℕ, (n : ResidueField R₂) = 0 → p ∣ n := fun n hn ↦
+    hp n ((ResidueField.map ι).injective (by rw [map_natCast, map_zero, hn]))
+  have hdeg₁ := (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁
+    hb₁).exists_finrank_eq_pow hp
+  have hdeg₂ := (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂
+    hb₂).exists_finrank_eq_pow hp₂
+  have hclosed := sliceTraitOfStrictLocalizationHom_mem_range_algebraMap ι hι c ha₁ halg₁ ha₂ halg₂
+    hc hb₂ hun
+  have : LocallyOfFiniteType (cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁)) := by
+    rw [hcN]; infer_instance
+  have : QuasiCompact (cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁)) := by
+    rw [hcN]; infer_instance
+  have : IsSeparated (cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁)) := by
+    rw [hcN]; infer_instance
+  have : LocallyOfFiniteType cN :=
+    locallyOfFiniteType_of_comp cN (𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁))
+  have : QuasiCompact cN := QuasiCompact.of_comp cN
+    (𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁))
+  have : IsSeparated cN := IsSeparated.of_comp cN
+    (𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁))
+  have : FaithfulSMul (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁ hb₁).R
+      (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁ hb₁).Ω :=
+    (faithfulSMul_iff_algebraMap_injective _ _).2 (SliceTrait.injective_a _)
+  have : FaithfulSMul (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂).R
+      (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂).Ω :=
+    (faithfulSMul_iff_algebraMap_injective _ _).2 (SliceTrait.injective_a _)
+  have : Algebra.IsAlgebraic
+      (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁ hb₁).R
+      (sliceTraitOfStrictLocalization (a₁ := a₁) (b₁ := b₂.comp ι) ha₁ halg₁ hb₁).Ω :=
+    SliceTrait.isAlgebraic_a _
+  have : Algebra.IsAlgebraic (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂).R
+      (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂).Ω :=
+    SliceTrait.isAlgebraic_a _
+  have hs' : f' ≫ p₁ = p₂ ≫ Spec.map (CommRingCat.ofHom (RingHom.id κ)) := by
+    rw [hs, CommRingCat.ofHom_id, Spec.map_id, Category.comp_id]
+  have hc' : c.comp (algebraMap R₁ Ω₁) = (algebraMap R₂ Ω₂).comp ι := hc
+  have hNj' : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom (algebraMap R₁ Ω₁))) := hNj
+  have hMj' : IsPullback M.j g₂ q₂ (Spec.map (CommRingCat.ofHom (algebraMap R₂ Ω₂))) := hMj
+  with_reducible
+    have key := isIso_map_pullbackExchange_sliceTraitSpecial T
+      (sliceTraitOfStrictLocalizationHom ι hι c ha₁ halg₁ ha₂ halg₂ hc hb₂) hc' φ cN hcN hNj' hNi
+      cM hcM' hMj' hMi hcM hgen ih hun p hp hpT
+      (fun L' ↦ by obtain ⟨k, hk⟩ := hdeg₁ L'; rw [hk, Nat.cast_pow]; exact hpT.pow k)
+      (fun L' ↦ by obtain ⟨k, hk⟩ := hdeg₂ L'; rw [hk, Nat.cast_pow]; exact hpT.pow k)
+      hclosed hφ (hm _) (RingHom.id κ) hs' rfl K hK
+  exact_mod_proofs key
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
