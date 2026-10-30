@@ -10,6 +10,8 @@ import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineConstantCoefficientGenerator
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
 import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
+import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Finite Tate coefficients from the normalized projective-line Kummer class
 

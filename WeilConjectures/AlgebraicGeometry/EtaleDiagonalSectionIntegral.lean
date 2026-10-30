@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleSupportedDiagonalUnit
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.

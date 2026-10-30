@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
+public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
 import all WeilConjectures.AlgebraicGeometry.ProjectiveLineTateCoefficientGenerator
 import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine

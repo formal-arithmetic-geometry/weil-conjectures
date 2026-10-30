@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 
 /-!
 # The graph map from etale sum extension to compactified sheaf pushforward

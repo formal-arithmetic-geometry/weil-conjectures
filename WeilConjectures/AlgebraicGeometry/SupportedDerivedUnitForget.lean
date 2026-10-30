@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
 import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
 
 /-!

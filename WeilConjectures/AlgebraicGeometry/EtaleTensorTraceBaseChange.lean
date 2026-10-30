@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryS
 public import WeilConjectures.CategoryTheory.SectionProjectionUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.

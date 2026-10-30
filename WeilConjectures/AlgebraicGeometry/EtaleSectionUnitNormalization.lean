@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 /-!

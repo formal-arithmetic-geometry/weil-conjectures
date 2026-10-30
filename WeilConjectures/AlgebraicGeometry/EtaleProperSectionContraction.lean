@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.EtaleSupportedDiagonalUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 /-!
 # Tensor contraction of a proper section integral

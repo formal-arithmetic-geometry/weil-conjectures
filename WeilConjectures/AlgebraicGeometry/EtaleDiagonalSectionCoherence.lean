@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.CategoryTheory.SectionConjugateComparison
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.

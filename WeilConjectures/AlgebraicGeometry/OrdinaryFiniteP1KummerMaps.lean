@@ -5,6 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
 import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange

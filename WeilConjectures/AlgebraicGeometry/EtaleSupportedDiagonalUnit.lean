@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 public import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 public import WeilConjectures.CategoryTheory.AdjunctionUnitTransport
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
 (auxiliary; not a blueprint node).

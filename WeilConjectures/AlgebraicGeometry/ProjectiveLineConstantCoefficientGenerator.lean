@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
+public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
 

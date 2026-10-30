@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import WeilConjectures.SixFunctors.Etale.Gabber
 
 /-!
 # Torsion coefficient assembly for proper base change
