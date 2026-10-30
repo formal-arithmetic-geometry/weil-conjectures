@@ -10,6 +10,8 @@ public import WeilConjectures.TraceFormula.Specialization.SliceTraitValuation
 public import WeilConjectures.RingTheory.Valuation.ArtinSchreierNormalForm
 public import WeilConjectures.RingTheory.Valuation.GaloisResidueRoot
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitCoordResidue
+public import WeilConjectures.RingTheory.DiscreteValuationRing.CompletionStrictlyHenselian
 
 /-!
 
@@ -53,13 +55,49 @@ local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) 
 
 include ha halg hb in
 /-- **The residue of the coordinate is not a `p`-th power** in the residue field of the
-compositum `L = Ω(S(x))`, `p` the residual characteristic. -/
+compositum `L = Ω(S(x))`, `p` the residual characteristic. This reduces to the case of a complete
+`R` (`valuation_a_sub_pow_eq_one_of_complete`) along the morphism of slice traits induced by the
+completion `R ⟶ R̂`. -/
 theorem valuation_coord_sub_pow_eq_one (p : ℕ) [Fact p.Prime] [CharP (ResidueField R) p]
     {x : (𝒟).R} (hx : (𝒟).b x = traitSliceCoord κ) {z : (𝒟).Ω}
     (hz : letI := a.toAlgebra; z ∈ (𝒟).compositum)
     (hz1 : (𝒟).valuationSubring.valuation z ≤ 1) :
-    (𝒟).valuationSubring.valuation ((𝒟).a x - z ^ p) = 1 :=
-  sorry
+    (𝒟).valuationSubring.valuation ((𝒟).a x - z ^ p) = 1 := by
+  obtain ⟨b₂, hb₂, rfl⟩ : ∃ (b₂ : IsDiscreteValuationRing.completion R →+* κ)
+      (_ : RingHom.ker b₂ = maximalIdeal (IsDiscreteValuationRing.completion R)), b₂.comp (IsDiscreteValuationRing.toCompletion R) = b :=
+    ⟨IsDiscreteValuationRing.completionLift R b hb, IsDiscreteValuationRing.ker_completionLift R b hb, IsDiscreteValuationRing.completionLift_comp R b hb⟩
+  have : IsLocalHom (IsDiscreteValuationRing.toCompletion R) := ⟨fun r hr ↦ by
+    by_contra hnu
+    have : IsDiscreteValuationRing.toCompletion R r ∈ maximalIdeal (IsDiscreteValuationRing.completion R) := by
+      rw [IsDiscreteValuationRing.maximalIdeal_completion]
+      exact Ideal.mem_map_of_mem _ ((IsLocalRing.mem_maximalIdeal r).2 hnu)
+    exact (IsLocalRing.mem_maximalIdeal _).1 this hr⟩
+  haveI : CharP (ResidueField (IsDiscreteValuationRing.completion R)) p :=
+    charP_of_injective_ringHom (ResidueField.map (IsDiscreteValuationRing.toCompletion R)).injective p
+  obtain ⟨Ω₂, _, _, a₂, ha₂, halg₂, c, hc⟩ : ∃ (Ω₂ : Type u) (_ : Field Ω₂) (_ : IsAlgClosed Ω₂)
+      (a₂ : IsDiscreteValuationRing.completion R →+* Ω₂) (_ : Function.Injective a₂)
+      (_ : letI := a₂.toAlgebra; Algebra.IsAlgebraic (IsDiscreteValuationRing.completion R) Ω₂)
+      (c : Ω →+* Ω₂), c.comp a = a₂.comp (IsDiscreteValuationRing.toCompletion R) := by
+    obtain ⟨c, hc⟩ := exists_comp_eq_algebraMap_algebraicClosure_fractionRing
+      (IsDiscreteValuationRing.completion R) a ha halg (IsDiscreteValuationRing.toCompletion R)
+      (IsDiscreteValuationRing.injective_toCompletion R)
+    exact ⟨_, _, inferInstance, _,
+      injective_algebraMap_algebraicClosure_fractionRing (IsDiscreteValuationRing.completion R),
+      isAlgebraic_algebraicClosure_fractionRing (IsDiscreteValuationRing.completion R), c, hc⟩
+  let H := sliceTraitOfStrictLocalizationHom (IsDiscreteValuationRing.toCompletion R)
+    (IsDiscreteValuationRing.injective_toCompletion R) c ha halg ha₂ halg₂ hc hb₂
+  have hψ : (sliceTraitOfStrictLocalization (a₁ := a₂) (b₁ := b₂) ha₂ halg₂ hb₂).b (H.ψ x) =
+      traitSliceCoord κ := by
+    have h := RingHom.congr_fun H.b_comp_ψ x
+    simp only [RingHom.comp_apply] at h
+    rw [h, hx]
+    rfl
+  letI := a.toAlgebra
+  letI := a₂.toAlgebra
+  have h := valuation_a_sub_pow_eq_one_of_complete ha₂ halg₂ hb₂ p hψ (H.ΩMap_mem_compositum z hz)
+    ((H.valuation_ΩMap_le_one_iff z).2 hz1)
+  rw [← H.valuation_ΩMap_eq_one_iff, map_sub, map_pow]
+  rwa [← RingHom.comp_apply, H.ΩMap_comp_a, RingHom.comp_apply]
 
 end StrictLocalization
 
