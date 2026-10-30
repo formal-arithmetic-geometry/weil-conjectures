@@ -24,6 +24,10 @@ universe u v w t
 
 open CategoryTheory Opposite
 
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace CategoryTheory
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

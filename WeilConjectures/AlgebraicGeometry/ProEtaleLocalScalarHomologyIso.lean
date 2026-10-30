@@ -340,6 +340,7 @@ private def localRestrictionIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     (localFunctor i R U).mapDerivedCategory.mapIso
       (DerivedCategory.Q.objObjPreimageIso K)
 
+set_option linter.defProp false in
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
 private def sliceChangeData {X Y : Scheme.{u}} (i : Y ⟶ X)

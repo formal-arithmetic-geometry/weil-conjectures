@@ -100,6 +100,14 @@ set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
+
+-- Universe-polymorphic `{max u (t + 1)}` sheafification instances get stuck on `{u + 1}` searches.
+attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
+  WeilConjectures.integralCoefficientAbLocallyBijective
+  AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
+
 namespace AlgebraicGeometry.Scheme
 
 /-- The ordinary realization N ↦ A_T ⊗_A N, using the normalized coefficient comparison.
@@ -156,10 +164,9 @@ theorem integralConstantModule_exact (T : Scheme.{u}) {A : Type (u + 1)} [CommRi
       intro c hc
       exact ⟨_root_.PresheafOfModules.evaluationJointlyReflectsColimits _ _
         (fun X ↦ hc)⟩
-    exact ⟨comp_preservesFiniteLimits P
-      (PresheafOfModules.sheafification (adicLisseConstantUnit T A)),
-      comp_preservesFiniteColimits P
-        (PresheafOfModules.sheafification (adicLisseConstantUnit T A))⟩
+    let S : _root_.PresheafOfModules.{u + 1} ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) ⥤ _ :=
+      PresheafOfModules.sheafification (adicLisseConstantUnit T A)
+    exact ⟨comp_preservesFiniteLimits P S, comp_preservesFiniteColimits P S⟩
   have hE : PreservesFiniteLimits E ∧ PreservesFiniteColimits E := by
     let := dd.toCompleteCoefficientDatum.noetherian
     have h := completed_constant_algebra_flat_quotients T dd.ideal

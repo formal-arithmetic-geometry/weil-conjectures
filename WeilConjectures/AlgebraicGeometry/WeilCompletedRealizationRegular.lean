@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
 public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 
+set_option linter.privateModule false
+
 /-! # The regular module under completed constant realization
 
 Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,

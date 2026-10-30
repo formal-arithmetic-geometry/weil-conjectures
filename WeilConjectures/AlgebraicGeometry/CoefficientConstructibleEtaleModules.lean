@@ -23,6 +23,10 @@ set_option autoImplicit false
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace CategoryTheory
 
 /-- Restrict a constant-ring sheaf module to constant scalars, keeping its additive sheaf.

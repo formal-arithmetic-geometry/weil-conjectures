@@ -162,14 +162,14 @@ private theorem scalar_naturality
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} (F : InverseImageData L)
     {A B : CommRingCat.{u}} (f : A ⟶ B) :
-    L.map ((ringSets J).map ((constantSheaf J CommRingCat).map f)) ≫ scalar F B =
-      scalar F A ≫ (ringSets K).map ((constantSheaf K CommRingCat).map f) := by
+    L.map ((ringSets J).map ((constantSheaf J CommRingCat.{u}).map f)) ≫ scalar F B =
+      scalar F A ≫ (ringSets K).map ((constantSheaf K CommRingCat.{u}).map f) := by
   have hr :
-      L.map ((ringSets J).map ((constantSheaf J CommRingCat).map f)) ≫
+      L.map ((ringSets J).map ((constantSheaf J CommRingCat.{u}).map f)) ≫
           (F.algebra (constant J B)).ringUnderlying.hom =
         (F.algebra (constant J A)).ringUnderlying.hom ≫
-          (ringSets K).map (F.rings.map ((constantSheaf J CommRingCat).map f)) :=
-    F.ring_naturality ((constantSheaf J CommRingCat).map f)
+          (ringSets K).map (F.rings.map ((constantSheaf J CommRingCat.{u}).map f)) :=
+    F.ring_naturality ((constantSheaf J CommRingCat.{u}).map f)
   dsimp only [scalar]
   rw [← Category.assoc, hr]
   simp only [Category.assoc, ← Functor.map_comp]
@@ -186,13 +186,13 @@ private theorem constantAdjunctRingHom_naturality
     {A B : CommRingCat.{u}} (f : A ⟶ B) :
     f ≫ constantAdjunctRingHom J K G L adj F U B =
       constantAdjunctRingHom J K G L adj F U A ≫
-        ((constantSheaf K CommRingCat).map f).hom.app (G.op.obj U) := by
+        ((constantSheaf K CommRingCat.{u}).map f).hom.app (G.op.obj U) := by
   have hn :
-      (ringSets J).map ((constantSheaf J CommRingCat).map f) ≫
+      (ringSets J).map ((constantSheaf J CommRingCat.{u}).map f) ≫
           adj.homEquiv _ _ (scalar F B) =
         adj.homEquiv _ _ (scalar F A) ≫
           (G.sheafPushforwardContinuous (Type u) J K).map
-            ((ringSets K).map ((constantSheaf K CommRingCat).map f)) := by
+            ((ringSets K).map ((constantSheaf K CommRingCat.{u}).map f)) := by
     rw [← adj.homEquiv_naturality_left, ← adj.homEquiv_naturality_right]
     exact congrArg (adj.homEquiv _ _) (scalar_naturality F f)
   apply CommRingCat.hom_ext

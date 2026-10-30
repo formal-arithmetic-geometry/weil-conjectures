@@ -70,6 +70,8 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings TensorProduct
 
+attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace AlgebraicGeometry.Scheme.AdicPerfectModel
 
 variable {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
