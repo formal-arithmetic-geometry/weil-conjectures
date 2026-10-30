@@ -43,7 +43,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 private theorem finiteTypeIso {C : Type w} [SmallCategory C]
     (J : GrothendieckTopology C) (κ : Type w) [CommRing κ] [IsNoetherianRing κ]
-    {F G : ringedSiteModules ((constantSheaf J RingCat).obj (RingCat.of κ))}
+    {F G : ringedSiteModules ((constantSheaf J RingCat.{w}).obj (RingCat.of κ))}
     (e : F ≅ G) (h : SheafOfModules.IsFiniteTypeLocallyConstant J κ F) :
     SheafOfModules.IsFiniteTypeLocallyConstant J κ G := by
   intro U

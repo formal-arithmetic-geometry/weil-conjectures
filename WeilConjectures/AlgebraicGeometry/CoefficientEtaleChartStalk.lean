@@ -23,8 +23,7 @@ Source: Stacks Project, Tags 03PT, 04EQ and 094G.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-attribute [-instance] CategoryTheory.sfbSheafTensor_hasWeakSheafify
-  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 universe u v w a b
@@ -106,7 +105,8 @@ theorem coefficient_etale_chart_stalk
       (X.smallEtaleTopology.over U) := ei.isDenseSubsite_inverse_of_isCocontinuous _ _
   have : HasWeakSheafify (X.smallEtaleTopology.over U)
       (ModuleCat.{max v (u + 1)} B) :=
-    sfbSheafTensor_hasWeakSheafify (X.smallEtaleTopology.over U)
+    sfbSheafTensor_hasWeakSheafify.{u + 1, u, max v (u + 1) + 1, max v (u + 1)}
+      (X.smallEtaleTopology.over U)
   let Gi : Sheaf (J.over W) (ModuleCat.{max v (u + 1)} B) ⥤
       Sheaf (X.smallEtaleTopology.over U) (ModuleCat.{max v (u + 1)} B) :=
     ei.functor.sheafPushforwardContinuous (ModuleCat.{max v (u + 1)} B)

@@ -20,6 +20,10 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
@@ -115,7 +119,6 @@ private noncomputable def change_unit_iso {D : Type v} [SmallCategory D]
     asIso ((PresheafOfModules.sheafificationAdjunction (R := A) (𝟙 _)).counit.app
       (SheafOfModules.unit A))
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Each term of the actual ordinary quotient complex is projective on the slice.
 Source: Stacks Project, Tags 09C5 and 09C6 (exact sections on weakly contractible
 objects and finite-projective constant models).

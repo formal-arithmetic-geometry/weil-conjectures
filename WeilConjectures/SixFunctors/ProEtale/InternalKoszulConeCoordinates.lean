@@ -23,6 +23,9 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
+
+-- The tip's universe-shrinking `hasLimitsOfSize_of_succ` loops (typeclass timeout on `Mono b.hom`).
+attribute [-instance] CategoryTheory.Limits.hasLimitsOfSize_of_succ
 attribute [local irreducible] HomologicalComplex₂.total HomologicalComplex.mapBifunctorMap
 attribute [local irreducible] ringedKoszulDualTower
 attribute [local irreducible] ringedKoszulRightUnitIso ringedKoszulTensorUnitComponent

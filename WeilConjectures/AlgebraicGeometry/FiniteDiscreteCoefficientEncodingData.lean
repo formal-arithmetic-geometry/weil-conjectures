@@ -22,7 +22,8 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance instEssentiallySmallFiniteDiscreteCoefficientEncodingData :
+    EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -38,7 +39,8 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-local instance : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
+local instance instHasLimitsOfSizeFiniteDiscreteCoefficientEncodingData :
+    HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
   ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
 
 /-- Encode coefficient sheaves using a single sectionwise encoding and point ring.

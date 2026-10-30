@@ -69,7 +69,7 @@ theorem internal_residue_stacks_comparison
             (IntegralConstantModel.pointComparison l E).inv.hom X)).mapDerivedCategory.obj K)) ↔
     constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
       ((AdicCompletion.derivedReduction l E X 0).obj K) ∧
-    DerivedCategory.finiteTorAmplitude _
+    _root_.DerivedCategory.finiteTorAmplitude _
       ((AdicCompletion.derivedReduction l E X 0).obj K) := by
   obtain ⟨e, ⟨c⟩⟩ := internal_first_residue_reduction_comparison l E X
   let R := DerivedNakayama.quotientRing l E 1
@@ -99,10 +99,10 @@ theorem internal_residue_stacks_comparison
       ⟨fun hM ↦ constantModelConstructible_transport _ (h ≪≫ a.symm) hM,
         fun hM ↦ constantModelConstructible_transport _ (h ≪≫ a.symm).symm hM⟩).trans
       (constantModel_comap_iff e.inv.hom X _)
-  have hT : DerivedCategory.finiteTorAmplitude _ M ↔
-      DerivedCategory.finiteTorAmplitude _ L := by
-    have hi : DerivedCategory.finiteTorAmplitude _ M ↔
-        DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) :=
+  have hT : _root_.DerivedCategory.finiteTorAmplitude _ M ↔
+      _root_.DerivedCategory.finiteTorAmplitude _ L := by
+    have hi : _root_.DerivedCategory.finiteTorAmplitude _ M ↔
+        _root_.DerivedCategory.finiteTorAmplitude _ (F.mapDerivedCategory.obj L) :=
       ⟨fun hM ↦ ObjectProperty.prop_of_iso _ (c.app K) hM,
         fun hL ↦ ObjectProperty.prop_of_iso _ (c.app K).symm hL⟩
     apply hi.trans
@@ -113,7 +113,7 @@ theorem internal_residue_stacks_comparison
       exact ⟨a, b, DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj F hab⟩
   change ((∀ n : ℤ, IsConstantModelConstructible S X
     ((DerivedCategory.homologyFunctor _ n).obj M)) ∧
-    DerivedCategory.finiteTorAmplitude _ M) ↔ _
+    _root_.DerivedCategory.finiteTorAmplitude _ M) ↔ _
   rw [hH, hT]
   constructor
   · rintro ⟨hH, hT⟩

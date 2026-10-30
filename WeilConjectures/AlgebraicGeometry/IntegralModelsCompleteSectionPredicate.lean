@@ -21,6 +21,11 @@ set_option synthInstance.maxSize 2048
 universe u
 attribute [local instance] HasDerivedCategory.standard
 open CategoryTheory CategoryTheory.Limits Opposite
+
+-- The `max u (t + 1)` torsion-completion sheafification instances leave the coefficient universe
+-- of `X.proEtaleModelTopology` undetermined (stuck universe constraint).
+attribute [-instance] AlgebraicGeometry.Scheme.torsionCompletionSheafify
+  AlgebraicGeometry.Scheme.torsionCompletionSliceSheafify
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 

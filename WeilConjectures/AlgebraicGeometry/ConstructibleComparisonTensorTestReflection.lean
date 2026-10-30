@@ -21,6 +21,10 @@ Source: Stacks Project, Tag 07A4, and blueprint finite-Tor comparison.
 set_option autoImplicit false
 universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 open SheafOfModules
 namespace AlgebraicGeometry.ProEtale
 

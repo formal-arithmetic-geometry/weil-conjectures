@@ -144,17 +144,20 @@ noncomputable section Basis
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   (O : Sheaf J CommRingCat.{u})
 
-local instance : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
+local instance instIsGrothendieckAbelianSignedKoszulSummandDifferential :
+    IsGrothendieckAbelian.{u} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   SheafOfModules.isGrothendieckAbelian _
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-local instance : MonoidalPreadditive (SheafOfModules.{u}
+local instance instMonoidalPreadditiveSignedKoszulSummandDifferential :
+    MonoidalPreadditive (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).1
 
-local instance : MonoidalClosed (SheafOfModules.{u}
+local instance instMonoidalClosedSignedKoszulSummandDifferential :
+    MonoidalClosed (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   Classical.choice (SheafOfModules.tensorClosed O).2.1
 

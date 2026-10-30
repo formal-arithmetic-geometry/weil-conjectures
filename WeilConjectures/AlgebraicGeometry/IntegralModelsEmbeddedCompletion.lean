@@ -63,7 +63,6 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
-open WeilConjectures.SixFunctors
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 

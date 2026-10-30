@@ -34,6 +34,10 @@ attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
 
 universe u v w
 open CategoryTheory CategoryTheory.Limits
+
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `ModuleCat.{max v (u + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact constant realization followed by actual slice restriction for any coefficient
@@ -110,6 +114,11 @@ private theorem coefficient_lisse_stalk_finite
       (X.smallEtaleTopology.over V) := ei.isDenseSubsite_inverse_of_isCocontinuous _ _
   have : HasWeakSheafify (X.smallEtaleTopology.over V)
       (ModuleCat.{max v (u + 1)} B) :=
+    -- The tip instances `Etale.locallySmall`/`Etale.essentiallySmall` (fixed universe `u + 1`)
+    -- get stuck on `max v (u + 1)`; give the size instances explicitly.
+    have : Small.{max v (u + 1)} (Over V) := small_max.{max v (u + 1), u + 1} _
+    have : LocallySmall.{max v (u + 1)} (Over V) := locallySmall_max.{max v (u + 1), u, u + 1}
+    have : EssentiallySmall.{max v (u + 1)} (Over V) := essentiallySmall_of_small_of_locallySmall _
     sfbSheafTensor_hasWeakSheafify (X.smallEtaleTopology.over V)
   let Gi : Sheaf (J.over (e.functor.obj V)) (ModuleCat.{max v (u + 1)} B) ⥤
       Sheaf (X.smallEtaleTopology.over V) (ModuleCat.{max v (u + 1)} B) :=
