@@ -8,7 +8,8 @@ module
 public import WeilConjectures.TraceFormula.IntegralPointThickening
 public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreComp
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
-public import WeilConjectures.TraceFormula.Specialization.SupportExchangeOnComponent
+public import WeilConjectures.TraceFormula.Specialization.ComponentModelHom
+public import WeilConjectures.TraceFormula.Specialization.DeformationProperPoint
 
 /-!
 

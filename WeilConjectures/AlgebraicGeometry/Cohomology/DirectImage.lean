@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFre
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MumfordComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 
