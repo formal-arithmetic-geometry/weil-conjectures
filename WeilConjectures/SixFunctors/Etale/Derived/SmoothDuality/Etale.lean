@@ -67,7 +67,7 @@ theorem etaleBaseChange : EtaleBaseChange Λ := by
   exact compactificationEtaleUnit_baseChange Λ sq (HasCompactification.compactification e) N
 
 /-- **Base change for smooth morphisms from the affine-line case**: if the affine-line
-projections over affine bases satisfy base change (`AlgebraicGeometry.Etale.AffineLineBaseChange`,
+projections satisfy base change (`AlgebraicGeometry.Etale.AffineLineBaseChange`,
 the elementary case (a) of the proof of blueprint `prop-asd-smooth-base-change`), then for every
 smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, over a
 quasi-separated `Y`, with the exponent of `Λ` invertible on `X`, the canonical base change map

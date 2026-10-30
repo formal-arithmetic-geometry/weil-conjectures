@@ -5,9 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange
-
-
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
@@ -17,14 +14,13 @@ public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.ZariskiDimensionBound
 import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
+import Mathlib.Combinatorics.Quiver.ReflQuiver
+import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules

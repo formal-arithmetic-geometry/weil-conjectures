@@ -5,11 +5,11 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.FieldTheory.Finite.Extension
 public import WeilConjectures.AlgebraicGeometry.BertiniAux
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.ConstantExtension
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.FieldTheory.Finite.Extension
 
 /-!
 # Models over finite fields of closed subschemes of a geometric fiber
@@ -64,22 +64,6 @@ theorem exists_finset_forall_mem_range_map_val {k K R : Type*} [Field k] [Field 
     · exact subset_trans (by simp) hF
 
 end Algebra.TensorProduct
-
-namespace FiniteField
-
-/-- An algebraically closed extension of a finite field `k` contains an intermediate field of any
-given positive degree over `k`. -/
-theorem exists_intermediateField_finrank_eq (k K : Type*) [Field k] [Finite k] [Field K]
-    [Algebra k K] [IsAlgClosed K] {M : ℕ} (hM : 0 < M) :
-    ∃ F : IntermediateField k K, Module.finrank k F = M := by
-  have : NeZero M := ⟨hM.ne'⟩
-  obtain ⟨p, hp⟩ := CharP.exists k
-  have : Fact p.Prime := ⟨CharP.char_is_prime k p⟩
-  let ε : Extension k p M →ₐ[k] K := IsAlgClosed.lift
-  refine ⟨ε.fieldRange, ?_⟩
-  rw [← ε.equivFieldRange.toLinearEquiv.finrank_eq, finrank_extension]
-
-end FiniteField
 
 namespace AlgebraicGeometry
 

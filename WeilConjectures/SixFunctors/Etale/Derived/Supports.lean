@@ -6,14 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 
 /-!
 # Classes with supports: products and restriction

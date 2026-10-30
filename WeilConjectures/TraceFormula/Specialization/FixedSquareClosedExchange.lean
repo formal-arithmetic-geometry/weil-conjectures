@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+-- Must come first: it restores the instance order needed to avoid a heartbeat timeout below.
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal -- shake: keep
 public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange

@@ -6,8 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
-import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenUnit
+public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 
 /-! # Naturality in the coefficient of derived base change
 

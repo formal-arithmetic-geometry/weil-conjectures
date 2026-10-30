@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.NormalScheme
-public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorPointwise
 
 /-!
