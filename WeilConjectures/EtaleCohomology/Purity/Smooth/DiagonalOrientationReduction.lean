@@ -27,11 +27,17 @@ derived pullbacks (blueprint `det-sp-purity-coefficient-change`):
 * hence the transpose `Lf^* ⋙ Ψ ⟶ Ψ ⋙ Lf^*` of the commutation `Res ⋙ Lf^* ≅ Lf^* ⋙ Res` is an
   isomorphism (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackIso`), compatible with the
   composition of the derived pullbacks
-  (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackIso_comp`).
+  (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackMap_comp`) and with the identity
+  (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackMap_id`);
+* an identification `Ψ Λ_S ≅ Λ'_S` pulled back along morphisms `X ⟶ S` gives identifications
+  `Ψ Λ_X ≅ Λ'_X` compatible with the derived pullbacks
+  (`AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexIsoOfPullback_hom_pullback`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.derivedExtendScalarsPullbackIso`: `Lf^* ⋙ Ψ ≅ Ψ ⋙ Lf^*`.
+- `AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexIsoOfPullback`: the identification
+  `Ψ Λ_X ≅ Λ'_X` pulled back from `S`.
 -/
 
 @[expose] public section
