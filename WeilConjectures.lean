@@ -12214,6 +12214,7 @@ public import WeilConjectures.RingTheory.Valuation.KummerNormalForm
 public import WeilConjectures.RingTheory.Valuation.KummerNormalFormGeneral
 public import WeilConjectures.RingTheory.Valuation.KummerNormalFormStageOne
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral
+public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Decomposition
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Hensel
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.PartialFractions
 public import WeilConjectures.RingTheory.Valuation.OhmGeneral.Residue
