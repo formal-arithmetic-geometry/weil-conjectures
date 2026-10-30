@@ -242,38 +242,86 @@ lemma WeilSheaf.pow_mk_upperStarIsoIdOfEq_str_hom {e : X ≅ X} (he : e.hom.left
   unfold WeilSheaf.pow
   rw [IsoAlgebra.mk_str, powStr_succ_upperStar_eq_powSuccStr, IsoAlgebra.mk_str]
   erw [powSuccStr_upperStarIsoIdOfEq_trans_hom]
-  sorry
+  -- retyping, stated for a variable natural transformation to keep the kernel away from
+  -- unfolding the concrete one
+  have r {P Q : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) ⥤
+      CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)} (α : P ⟶ Q) :
+      α.app (IsoAlgebra.mk (IsoAlgebra.mk M ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β)).carrier
+        (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+          (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left)
+          ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) n) : WeilSheaf ℓ (e.pow (n + 1))).carrier =
+        α.app M := rfl
+  rw [r]
 
+
+/-- `AlgebraicGeometry.ProEtale.CondensedRing.stalkFunctor_obj_str_hom` for an endomorphism `σ`
+which is not given as the morphism of an isomorphism. -/
+lemma stalkFunctor_obj_str_hom_of_hom {e : X ≅ X} (σ : Spec (.of Ω) ⟶ Spec (.of Ω))
+    (x : Spec (.of Ω) ⟶ X.left) (hx : x ≫ e.hom.left = σ ≫ x) (W : WeilSheaf ℓ e) :
+    ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj W).str.hom =
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).inv.app
+          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).inv.app W.carrier ≫
+        eqToHom (congrArg (fun t : Spec (.of Ω) ⟶ X.left ↦
+          (t)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) hx.symm) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app W.carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom := by
+  have h1 : ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj W).str.hom =
+      (weilStalkComparison ℓ e σ x hx).hom.app W.carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom := by
+    rw [WeilSheaf.stalkFunctor_obj_str]
+    rfl
+  have h2 := isoWhiskerLeft_symm_trans_hom_app_aux ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x)
+    (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm)
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left) W.carrier
+  have h3 := (congrArg (fun i ↦ i.hom.app W.carrier)
+    (show weilStalkComparison ℓ e σ x hx = Functor.isoWhiskerLeft _
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).symm ≪≫
+      (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).symm ≪≫
+      upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) hx.symm ≪≫
+      upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left from rfl)).trans h2
+  refine h1.trans ((congrArg (· ≫ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom) h3).trans
+    ((congrArg (fun z ↦ ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).inv.app
+        ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj W.carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).inv.app W.carrier ≫ z ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left).hom.app W.carrier) ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map W.str.hom)
+      (upperStarEqToIso_hom_app _ hx.symm W.carrier)).trans ?_))
+  simp only [Category.assoc]
 
 lemma stalkFunctor_obj_str_hom_of_upperStarIsoIdOfEq {e : X ≅ X} (he : e.hom.left = 𝟙 X.left)
     (F : WeilSheaf ℓ e) (γ : F.carrier ⟶ F.carrier)
     (hF : F.str.hom = (upperStarIsoIdOfEq ℓ he).hom.app F.carrier ≫ γ)
-    (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
-    (hx : x ≫ e.hom.left = σ.hom ≫ x) :
-    ((WeilSheaf.stalkFunctor ℓ e σ.hom x hx).obj F).str.hom =
-      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ e.hom.left = σ ≫ x) :
+    ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj F).str.hom =
+      (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).inv.app
           ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier) ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app F.carrier ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).inv.app F.carrier ≫
         (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (hx.symm.trans
           ((congrArg (x ≫ ·) he).trans (Category.comp_id x)))).hom.app F.carrier ≫
         (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map γ := by
   have key := upperStarComp_hom_app_comp_map_upperStarIsoIdOfEq_hom_app ℓ x he F.carrier
-  rw [stalkFunctor_obj_str_hom, hF, Functor.map_comp,
+  rw [stalkFunctor_obj_str_hom_of_hom, hF, Functor.map_comp,
     ← upperStarEqToIso_hom_app (Profinite.padicAlgClRingObj ℓ) hx.symm, reassoc_of% key,
     upperStarEqToIso_hom_app_trans_assoc]
 
 lemma traceOrZero_stalkFunctor_obj_pow_mk {e : X ≅ X} (he : e.hom.left = 𝟙 X.left)
     (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) (β : M ≅ M) (n : ℕ)
-    (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
-    (hx : x ≫ (e.pow (n + 1)).hom.left = σ.hom ≫ x) :
-    traceOrZero ((WeilSheaf.stalkFunctor ℓ (e.pow (n + 1)) σ.hom x hx).obj
+    (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ (e.pow (n + 1)).hom.left = σ ≫ x) :
+    traceOrZero ((WeilSheaf.stalkFunctor ℓ (e.pow (n + 1)) σ x hx).obj
       (WeilSheaf.pow ℓ (IsoAlgebra.mk M ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) :
         WeilSheaf ℓ e) (n + 1))).str.hom =
-      traceOrZero ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+      traceOrZero ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).inv.app
           ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj (WeilSheaf.pow ℓ (IsoAlgebra.mk M
             ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier) ≫
-        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).inv.app
           (WeilSheaf.pow ℓ (IsoAlgebra.mk M
             ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier ≫
         (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (hx.symm.trans

@@ -105,9 +105,6 @@ theorem endTensorUnitRingEquiv_weilStalkTraceAlternatingSum_weilObjectOfLisse_eq
       ((adicSheafEquivCondensedMod l X).functor.map (WeilCoefficients.smulIso b H).hom))]
   · rw [weilSheafStalkTrace, WeilSheaf.frobeniusStalk, WeilSheaf.powStalkFunctor, Functor.comp_obj,
       WeilSheaf.powFunctor_obj]
-    -- remaining: `traceOrZero_stalkFunctor_obj_pow_mk`, `galoisUpperStarEnd_eq_comp` and
-    -- `endTensorUnitRingEquiv_traceOrZero_galoisUpperStarEnd`; instantiating the first one at the
-    -- concrete Frobenius makes the kernel time out
     sorry
   · obtain hj | hj := lt_or_gt_of_ne hj
     · exact ((DerivedCategory.singleFunctor _ 0).obj
