@@ -317,14 +317,16 @@ lemma sliceTraitChangeGeneric_comp_toGaloisLayer_generic :
   · apply pullback.hom_ext
     · apply pullback.hom_ext
       · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_fst_fst_assoc,
-          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, sliceTraitGaloisChangeHom_generic,
-          sliceTraitGaloisGenericMap_fst_assoc, sliceTraitCartesianGenericMap_fst,
+          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc,
+          sliceTraitGaloisChangeHom_generic, sliceTraitGaloisGenericMap_fst_assoc,
+          sliceTraitCartesianGenericMap_fst,
           sliceTraitToGaloisLayer_generic_fst_fst_assoc, Hom.toCartesian_generic,
           pullback.lift_fst_assoc, pullback.lift_fst]
         exact sliceTraitChangeGeneric_comp_sliceTraitGeneric H φ cN hcN hNj cM hcM' hMj hcM hgen
       · simp only [Category.assoc, sliceTraitToGaloisLayer_generic_fst_fst_assoc,
-          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, sliceTraitGaloisChangeHom_generic,
-          sliceTraitGaloisGenericMap_fst_assoc, sliceTraitCartesianGenericMap_snd,
+          galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc,
+          sliceTraitGaloisChangeHom_generic, sliceTraitGaloisGenericMap_fst_assoc,
+          sliceTraitCartesianGenericMap_snd,
           sliceTraitToGaloisLayer_generic_fst_fst_assoc, Hom.toCartesian_generic,
           pullback.lift_snd_assoc, pullback.lift_snd]
         exact (sliceTraitChangeHom H φ cN cM hcM).comm_j
@@ -349,8 +351,8 @@ theorem isIso_pullbackExchange_sliceTraitGaloisLayerMap
       (condensedRingObj Λ N.generic)))
     (hIH : IsIso (((sliceTraitChangeHom H φ cN cM hcM).toGeneric.pullbackExchange Λ).app
       (L((sliceTraitGeneric D₁ N cN hcN hNj)^*⟦Λ⟧).obj C))) :
-    IsIso (((sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen).pullbackExchange
-      Λ).app C) := by
+    IsIso (((sliceTraitGaloisLayerMap H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM
+      hgen).pullbackExchange Λ).app C) := by
   have key := Hom.isIso_map_pullbackExchange_app_of_square_of_isIso Λ
     (sliceTraitChangeHom H φ cN cM hcM).toGeneric (sliceTraitToGaloisLayer D₁ N cN hcN hNj hNi)
     (sliceTraitToGaloisLayer D₂ M cM hcM' hMj hMi)

@@ -187,11 +187,17 @@ theorem isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom
   have htot : (sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen).total ≫
       (sliceTraitGaloisModelHom D₁ N cN hcN hNj hNi).total =
       (sliceTraitGaloisModelHom D₂ M cM hcM' hMj hMi).total ≫ φ.toGeneric.total := by
-    sorry
+    simp only [sliceTraitGaloisModelHom, Hom.comp_total, Hom.traitChangeModelHom_total,
+      Hom.fromCartesian_total, sliceTraitGaloisChangeHom_total, Category.id_comp]
+    exact sliceTraitChangeTotal_fst H φ cN cM hcM
   have hgen' : (sliceTraitGaloisChangeHom H hc φ cN hcN hNj hNi cM hcM' hMj hMi hcM hgen).generic ≫
       (sliceTraitGaloisModelHom D₁ N cN hcN hNj hNi).generic =
       (sliceTraitGaloisModelHom D₂ M cM hcM' hMj hMi).generic ≫ φ.toGeneric.generic := by
-    sorry
+    simp only [sliceTraitGaloisModelHom, Hom.comp_generic, Hom.traitChangeModelHom_generic,
+      Hom.fromCartesian_generic, sliceTraitGaloisChangeHom_generic, Category.assoc,
+      Hom.traitChangeThickening, sliceTraitGaloisGenericMap_fst_assoc]
+    exact pullback.fst _ _ ≫=
+      sliceTraitCartesianGenericMap_fst H φ cN hcN hNj hNi cM hcM' hMj hMi hcM
   have hs : sliceTraitChangeSpecial H φ cN cM hcM ≫ (𝟙 _ ≫ sliceTraitSpecial D₁ N cN hcN hNi) =
       (𝟙 _ ≫ sliceTraitSpecial D₂ M cM hcM' hMi) ≫ f' := by
     rw [Category.id_comp, Category.id_comp,
