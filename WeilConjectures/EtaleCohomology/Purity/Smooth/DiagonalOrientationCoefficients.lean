@@ -84,6 +84,10 @@ open Scheme
 
 namespace Etale
 
+-- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the definitions of
+-- the derived tensor product, of the tensor maps of `R^!` and of the section invariant.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 set_option hygiene false in
 /-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
 local notation "𝐃(" X ", " Λ ")" =>
@@ -417,11 +421,10 @@ theorem map_rightDerivedUpperShriekTateObjectIsoOfSection {V B : Scheme.{u}} (c 
 
 end FundamentalClass
 
-section Orientation
+section SectionInvariant
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
-  [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
-  [HasKummerClass.IsNormalized Λ'] (Φ : SupportedCoefficientChange Λ Λ')
+  [HasTateTwist Λ] [HasTateTwist Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
 /-- The change of coefficients of `Λ_X(m)[2m] = twistShift (Λ_X)`: through
 `AlgebraicGeometry.Etale.twistShiftConstantComplexIso` it is the change of coefficients
@@ -457,6 +460,14 @@ def PreservesSectionInvariantIso {V B : Scheme.{u}} (s : B ⟶ V) [IsClosedImmer
           (Φ.pullbackIso s).hom.app T ≫ (L((s)^*[ModuleCat.{u + 1} Λ'])).map vT.hom =
         (Φ.pullbackIso s).hom.app ω ≫ (L((s)^*[ModuleCat.{u + 1} Λ'])).map vω.hom ≫
           (leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso Λ' s hω' hT' θ' ε').hom
+
+end SectionInvariant
+
+section Orientation
+
+variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
+  [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
+  [HasKummerClass.IsNormalized Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
@@ -560,7 +571,6 @@ theorem map_dualizingComplexTwistShiftIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : 
   rw [hS, ← Category.assoc, hC', Category.assoc]
 
 end Orientation
-
 
 end SupportedCoefficientChange
 
