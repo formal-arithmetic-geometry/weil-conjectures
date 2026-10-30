@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelLisse
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLocallyFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
@@ -24,9 +24,8 @@ those of the Weil sheaf `p^* H ⊗ 𝓑_b` on `X₀ ⊗ k̄`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilComplex.boundedConstructibleOfLisse`: `H` placed in degree `0`, a
-  bounded constructible complex by
-  `AlgebraicGeometry.ProEtale.isConstructibleModuleObject_of_isAdicLisseSheaf`.
+- `AlgebraicGeometry.ProEtale.isConstructibleModuleObject_of_isAdicLisseSheaf`: the module object
+  of a lisse `ℓ`-adic sheaf is constructible.
 - `AlgebraicGeometry.WeilComplex.weilObjectOfLisse`: the Weil object `(H, b)`.
 -/
 
@@ -41,6 +40,21 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry
 
 open ProEtale ProEtale.CondensedRing
+
+namespace ProEtale
+
+variable {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
+
+/-- The module object over `ℚ̲̄_ℓ,X` of a lisse `ℓ`-adic sheaf is constructible: pro-étale locally
+it is a finite free module, by the compatibility of `AdicSheaf ℓ X ≌ Mod_{ℚ̲̄_ℓ,X}` with
+pullbacks. -/
+theorem isConstructibleModuleObject_of_isAdicLisseSheaf {H : AdicSheaf l X}
+    (hH : IsAdicLisseSheaf H) :
+    IsConstructibleModuleObject (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) X)
+      ((adicSheafEquivCondensedMod l X).functor.obj H) :=
+  hH.isLocallyFree.isConstructibleModuleObject
+
+end ProEtale
 
 namespace WeilComplex
 
