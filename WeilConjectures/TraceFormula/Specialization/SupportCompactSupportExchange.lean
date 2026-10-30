@@ -620,7 +620,7 @@ lemma supportClosureSpecialι_comp :
     exact (deformationSpecialFibreMap_congr k' (supportClosureι c)
       (supportClosureMap c ≫ prod.snd) h₂ (f' := c.c₂) (by simp) hc.ker_map_le_c₂).symm
 
-omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [IsSepClosed k'] in
+omit [Fact (ringChar k').Prime] [IsSepClosed k'] in
 /-- The proper exchange `χ_p` of `𝒞̄ ⟶ 𝒳 ×_S 𝒳` is invertible on bounded constructible
 complexes, if the morphism of total spaces is proper. -/
 lemma isIsoOn_supportClosureProperModelHom_pushforwardExchange
@@ -629,7 +629,10 @@ lemma isIsoOn_supportClosureProperModelHom_pushforwardExchange
         (supportClosure c).left)).ι
       ((supportClosureProperModelHom c y k').pushforwardExchange
         (Profinite.padicAlgClRingObj ℓ)) :=
+  have := isNoetherian_of_locallyOfFiniteType (X ⨯ X).hom
   fun K ↦ (supportClosureProperModelHom c y k').isIso_pushforwardExchange_app_of_isProper
+    (X ⨯ X).hom (isTraitModel_deformationModel _ _ k').exists_over
+    (isTraitModel_deformationProdModel _ _ _ _ k').exists_over
     (isPullback_supportClosureSpecialMap k')
     (isPullback_deformationProdLiftModelHom_ε k' _ _ _ _) K.property
 

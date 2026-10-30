@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Preadditive.Basic
 
 In a preadditive category, a retract `X` of `Y` is the cokernel of the idempotent endomorphism
 `𝟙 Y - r ≫ i` of `Y` (`CategoryTheory.Retract.isoCokernel`).
+
+A retract of a split monomorphism, for instance a morphism isomorphic to it as an arrow, is a
+split monomorphism
+(`CategoryTheory.RetractArrow.isSplitMono`, `CategoryTheory.Arrow.isSplitMono_of_iso`).
 -/
 
 @[expose] public section
@@ -47,3 +51,20 @@ noncomputable def isoCokernel (e : Retract X Y) [HasCokernel (𝟙 Y - e.r ≫ e
     simpa using h.symm
 
 end CategoryTheory.Retract
+
+namespace CategoryTheory.RetractArrow
+
+variable {C : Type*} [Category* C] {X Y Z W : C} {f : X ⟶ Y} {g : Z ⟶ W}
+
+/-- A retract of a split monomorphism is a split monomorphism: if `f` is a retract of `g`, then
+`h.i.right ≫ retraction g ≫ h.r.left` is a retraction of `f`. -/
+lemma isSplitMono (h : RetractArrow f g) [IsSplitMono g] : IsSplitMono f :=
+  IsSplitMono.mk' ⟨h.i.right ≫ retraction g ≫ h.r.left, by
+    rw [← h.i_w_assoc, IsSplitMono.id_assoc, h.retract_left]⟩
+
+end CategoryTheory.RetractArrow
+
+/-- A morphism isomorphic, as an arrow, to a split monomorphism is a split monomorphism. -/
+lemma CategoryTheory.Arrow.isSplitMono_of_iso {C : Type*} [Category* C] {X Y X' Y' : C}
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (e : Arrow.mk f ≅ Arrow.mk g) [IsSplitMono g] : IsSplitMono f :=
+  RetractArrow.isSplitMono (Retract.ofIso e)

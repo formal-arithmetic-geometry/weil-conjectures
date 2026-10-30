@@ -197,4 +197,27 @@ private noncomputable def siteContinuousRingedTopos
 
 end
 
+/-- A continuous site functor and a structural ring map induce the specified module
+pushforward. Source: Stacks, Modules on Sites, ringed topoi and module direct images
+(auxiliary; not a blueprint node).
+Proof: transpose the structural map through the given sheaf adjunction. Transposition
+of product maps gives preservation of the ring operations and scalar multiplication.
+Take sectionwise module pushforward; its underlying set sheaf is precomposition, and
+linearity is exactly the transposed action-and-addition identity. -/
+theorem continuousRingedToposModuleDirectImage_exists
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : D ⥤ C) [F.IsContinuous K J]
+    (L : Sheaf K (Type u) ⥤ Sheaf J (Type u))
+    (adj : L ⊣ F.sheafPushforwardContinuous (Type u) K J)
+    [PreservesFiniteLimits L]
+    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})
+    (φ : S ⟶ (F.sheafPushforwardContinuous CommRingCat.{u} K J).obj R) :
+    ∃ p : RingedToposMorphism
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S),
+      p.modules = SheafOfModules.pushforward.{u} (F := F) (J := K) (K := J)
+        ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).map φ) :=
+  ⟨siteContinuousRingedTopos F L adj R S φ, rfl⟩
+
 end CategoryTheory

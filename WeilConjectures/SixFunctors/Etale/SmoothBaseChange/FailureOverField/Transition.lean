@@ -5,9 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 
 /-!
 # Transition maps of the base-change map

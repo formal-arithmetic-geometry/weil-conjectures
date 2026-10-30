@@ -11,8 +11,15 @@ public import WeilConjectures.NumberTheory.Padics.IntegersToAlgCl
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusModel
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZero
-public import WeilConjectures.TraceFormula.CurveSupportedPairing
 public import WeilConjectures.TraceFormula.PointFiberFunctor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
+public import WeilConjectures.AlgebraicGeometry.OverProduct
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
+public import WeilConjectures.TraceFormula.FixedPointScheme
+public import WeilConjectures.TraceFormula.Correspondence
 
 /-!
 
