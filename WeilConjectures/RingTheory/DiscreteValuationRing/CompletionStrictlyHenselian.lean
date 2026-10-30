@@ -98,8 +98,8 @@ lemma ker_completionLift {κ : Type u} [Field κ] (b : R →+* κ)
     RingHom.ker (completionLift R b hb) = maximalIdeal (completion R) := by
   ext z
   rw [RingHom.mem_ker, completionLift_apply, ← IsLocalRing.residue_eq_zero_iff]
-  obtain ⟨r, hr⟩ := (RingEquiv.ofBijective _ (AdicCompletion.residueField_map_bijective R)).surjective
-    (residue (completion R) z)
+  obtain ⟨r, hr⟩ := (RingEquiv.ofBijective _
+    (AdicCompletion.residueField_map_bijective R)).surjective (residue (completion R) z)
   rw [← hr, RingEquiv.symm_apply_apply]
   obtain ⟨s, rfl⟩ := residue_surjective r
   rw [map_eq_zero_iff _ (RingEquiv.injective _)]

@@ -94,18 +94,18 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsLocalRing R₁] [CommRing R₂]
 points: `ΩMap⁻¹(𝒪₂) = 𝒪₁`. -/
 theorem comap_valuationSubring :
     D₂.valuationSubring.comap H.ΩMap = D₁.valuationSubring := by
-  letI := D₁.a.toAlgebra
-  letI := D₂.a.toAlgebra
-  haveI : FaithfulSMul D₁.R D₁.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D₁.injective_a
-  haveI : FaithfulSMul D₂.R D₂.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D₂.injective_a
-  haveI := D₁.isAlgebraic_a
-  haveI := D₂.isAlgebraic_a
-  letI : Algebra D₁.R D₂.R := H.ψ.toAlgebra
-  letI : Algebra D₁.Ω D₂.Ω := H.ΩMap.toAlgebra
-  letI : Algebra D₁.R D₂.Ω := (D₂.a.comp H.ψ).toAlgebra
-  haveI : IsLocalHom (algebraMap D₁.R D₂.R) := H.isLocalHom_ψ
-  haveI : IsScalarTower D₁.R D₂.R D₂.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : IsScalarTower D₁.R D₁.Ω D₂.Ω := IsScalarTower.of_algebraMap_eq fun r ↦
+  let := D₁.a.toAlgebra
+  let := D₂.a.toAlgebra
+  have : FaithfulSMul D₁.R D₁.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D₁.injective_a
+  have : FaithfulSMul D₂.R D₂.Ω := (faithfulSMul_iff_algebraMap_injective _ _).2 D₂.injective_a
+  have := D₁.isAlgebraic_a
+  have := D₂.isAlgebraic_a
+  let : Algebra D₁.R D₂.R := H.ψ.toAlgebra
+  let : Algebra D₁.Ω D₂.Ω := H.ΩMap.toAlgebra
+  let : Algebra D₁.R D₂.Ω := (D₂.a.comp H.ψ).toAlgebra
+  have : IsLocalHom (algebraMap D₁.R D₂.R) := H.isLocalHom_ψ
+  have : IsScalarTower D₁.R D₂.R D₂.Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower D₁.R D₁.Ω D₂.Ω := IsScalarTower.of_algebraMap_eq fun r ↦
     (RingHom.congr_fun H.ΩMap_comp_a r).symm
   exact IsDiscreteValuationRing.comap_integralClosureValuationSubring
 

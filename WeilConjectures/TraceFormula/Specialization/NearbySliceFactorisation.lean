@@ -323,7 +323,7 @@ lemma affineSpaceSliceHom_toCart_generic_cartTensor :
   · simp [affineSpaceSliceCartTensor, affineSpaceSliceGeneric]
   · simp only [affineSpaceSliceCartTensor, Category.assoc, IsPullback.lift_snd,
       traitGenericTensorPoint_snd]
-    simp [pullback.condition]
+    simp
 
 /-- **The change of geometric generic fibre over the slice is a base change of
 `ρ : Spec Ω_K ⟶ Spec(Ω ⊗_F F_K)`**: the square
