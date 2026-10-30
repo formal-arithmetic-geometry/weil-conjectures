@@ -145,6 +145,7 @@ theorem isIso_deformationModel_polyAffineThickOrigin_one_unit :
   revert hφ h this
   normalize_precoherent
   intro hφ hN h
-  exact isIso_of_comp_eq_comp_comp h hφ
+  have := hφ
+  exact isIso_of_comp_eq_comp_comp h
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -115,7 +115,7 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app_padicIntegers
   have hℓ : IsUnit (ℓ : Γ((deformationModel Y I k').total, ⊤)) := by
     simpa using (hℓk.map (ΓSpecIso (.of k)).inv.hom).map
       (deformationTotalToBase Y I k' ≫ Y.hom).appTop.hom
-  exact isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E
+  exact isIso_baseChangeMap_app_padicIntegers_of_smooth ℓ E.1
     (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘ (deformationModel Y I k').total)
     (IsPullback.of_hasPullback (deformationModel Y I k').j _) hℓ _
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ K₀ hK₀)

@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekNoetherian
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
+import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Extensions by zero along étale maps of affine schemes are constructible

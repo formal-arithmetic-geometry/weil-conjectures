@@ -6,8 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorAssociativity
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnit

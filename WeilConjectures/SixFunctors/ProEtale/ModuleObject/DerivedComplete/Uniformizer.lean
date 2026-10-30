@@ -135,30 +135,32 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
-  (ϖ : PadicAlgCl.integers ℓ E.1)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+  (ϖ : PadicAlgCl.integers ℓ E)
 
 /-- The action of a constant `ϖ ∈ 𝒪_E` on `𝒪_{E,X}`-module objects, as an element of the center
 of the category of `𝒪_{E,X}`-module objects. -/
 noncomputable abbrev padicIntegersCenter :
     CatCenter (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :=
-  Mod.regularEndCenter (padicIntegersRegularEnd X ℓ E ϖ)
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :=
+  Mod.regularEndCenter (padicIntegersRegularEndOfAlgebra X ℓ E ϖ)
 
 /-- The action of a constant `ϖ ∈ 𝒪_E` on the derived category `D(X)` of `𝒪_{E,X}`-module
 objects, as an element of its center. -/
 noncomputable abbrev derivedUniformizer :
     CatCenter (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :=
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :=
   (padicIntegersCenter X ℓ E ϖ).derivedCategory
 
 variable {X ℓ E}
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The first derived reduction of a complex vanishes if and only if its derived extension of
 scalars along `𝒪_{E,X} ⟶ 𝔽_{E,X}` vanishes. -/
 lemma isZero_derivedReduction_iff
     (Z : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     IsZero ((derivedReduction X ℓ E).obj Z) ↔
       IsZero ((L(Mod.extendScalars (padicIntegersToResidueField X ℓ E))).obj Z) := by
   refine ⟨fun h ↦ ?_, fun h ↦ (residueFieldModuleSheaf X ℓ E).mapDerivedCategory.map_isZero h⟩
@@ -174,12 +176,13 @@ lemma isZero_derivedReduction_iff
   exact h₀.of_iso (asIso
     ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.map (0 : Z ⟶ 0)))
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- For a uniformizer `ϖ` of `𝒪_E`, the first derived reduction of a complex `Z` vanishes if
 and only if `ϖ` acts invertibly on `Z`. -/
-lemma isZero_derivedReduction_iff_isIso {ϖ : PadicAlgCl.integers ℓ E.1}
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
+lemma isZero_derivedReduction_iff_isIso {ϖ : PadicAlgCl.integers ℓ E}
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ})
     (Z : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     IsZero ((derivedReduction X ℓ E).obj Z) ↔ IsIso ((derivedUniformizer X ℓ E ϖ).app Z) := by
   rw [isZero_derivedReduction_iff]
   exact Mod.isZero_leftDerivedFunctor_extendScalars_iff_isIso _
@@ -191,33 +194,36 @@ namespace CondensedRing
 
 variable (ℓ E) {Y : Scheme.{u}} (f : X ⟶ Y)
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The pushforward of module objects commutes with the action of `ϖ`. -/
 lemma lowerStar_map_padicIntegersCenter_app
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :
-    (f)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.map ((padicIntegersCenter X ℓ E ϖ).app M) =
-      (padicIntegersCenter Y ℓ E ϖ).app ((f)_*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) :=
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :
+    (f)_*⟦Profinite.padicIntegersRingObj ℓ E⟧.map ((padicIntegersCenter X ℓ E ϖ).app M) =
+      (padicIntegersCenter Y ℓ E ϖ).app ((f)_*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) :=
   Mod.hom_ext _ _ (lowerStar_map_regularEndSMul ℓ E ϖ f M)
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **The pullback of module objects commutes with the action of `ϖ`**, by adjunction from the
 pushforward. -/
 lemma upperStar_map_padicIntegersCenter_app
     (M : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)) :
-    (f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.map ((padicIntegersCenter Y ℓ E ϖ).app M) =
-      (padicIntegersCenter X ℓ E ϖ).app ((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) :=
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y)) :
+    (f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.map ((padicIntegersCenter Y ℓ E ϖ).app M) =
+      (padicIntegersCenter X ℓ E ϖ).app ((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) :=
   (upperStarLowerStarAdjunction _ f).map_catCenter_app
     (lowerStar_map_padicIntegersCenter_app ℓ E ϖ f) M
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The levelwise pullback of complexes of module objects commutes with the action of `ϖ` on the
 derived categories. -/
 lemma mapDerivedCategory_upperStar_map_derivedUniformizer_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) :
-    ((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).mapDerivedCategory.map
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y))) :
+    ((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).mapDerivedCategory.map
         ((derivedUniformizer Y ℓ E ϖ).app K) =
       (derivedUniformizer X ℓ E ϖ).app
-        (((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).mapDerivedCategory.obj K) :=
+        (((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).mapDerivedCategory.obj K) :=
   CatCenter.mapDerivedCategory_map_derivedCategory_app _
     (upperStar_map_padicIntegersCenter_app ℓ E ϖ f) K
 
@@ -244,10 +250,10 @@ instance hasExactLimitsOfShape_discrete_nat_mod (X : Scheme.{u})
 /-- The derived category of `𝒪_{E,X}`-module objects has countable products. -/
 instance hasCountableProducts_derivedCategory_padicIntegers (X : Scheme.{u}) :
     HasCountableProducts (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) :=
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :=
   have := CountableAB4Star.of_hasExactLimitsOfShape_nat
     (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
   derivedCategory_hasCountableProducts _
 
 variable {W X : Scheme.{u}} (f : W ⟶ X) [CompactSpace W] [QuasiSeparatedSpace W] [CompactSpace X]
@@ -263,7 +269,7 @@ instance preservesLimitsOfShape_discrete_nat_upperStar_ab :
 /-- The pullback of `𝒪_E`-module objects along a morphism of quasi-compact quasi-separated schemes
 preserves countable products. -/
 instance preservesLimitsOfShape_discrete_nat_upperStar_padicIntegers :
-    PreservesLimitsOfShape (Discrete ℕ) ((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) := by
+    PreservesLimitsOfShape (Discrete ℕ) ((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧) := by
   unfold CondensedRing.upperStar
   infer_instance
 
@@ -271,7 +277,7 @@ instance preservesLimitsOfShape_discrete_nat_upperStar_padicIntegers :
 quasi-separated schemes preserves countable products. -/
 instance preservesLimitsOfShape_discrete_nat_mapDerivedCategory_upperStar_padicIntegers :
     PreservesLimitsOfShape (Discrete ℕ)
-      ((f)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).mapDerivedCategory :=
+      ((f)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).mapDerivedCategory :=
   Functor.preservesLimitsOfShape_discrete_mapDerivedCategory _
 
 end AlgebraicGeometry.ProEtale

@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.RingTheory.Jacobson.Semiprimary
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-!
 # Reduction of the coefficient sheaf to sheaves killed by the Jacobson radical

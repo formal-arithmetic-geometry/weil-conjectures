@@ -28,7 +28,7 @@ since the coefficient morphisms send constant sections to constant sections
 
 ## Implementation notes
 
-The ring object `Profinite.continuousMapRingObj (integersResidueField ℓ E.1)` elaborates with the
+The ring object `Profinite.continuousMapRingObj (integersResidueField ℓ E)` elaborates with the
 ring structure of `𝔽_E` coming from its field structure, while the constant sections
 (`ProEtale.continuousMapCoefficientSectionRingHom`) use its commutative ring structure. The two
 are definitionally equal, but kernel checks comparing the pullback of module objects
@@ -51,16 +51,18 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {A B : Scheme.{u}} (a : A ⟶ B)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {A B : Scheme.{u}} (a : A ⟶ B)
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The action of the constant section `c` of `𝔽_{E,B}` on the pushforward `a_* N` is the
 pushforward of the action of the constant section `c` of `𝔽_{E,A}` on `N`. -/
 lemma sectionActRingHom_lowerStar_residueFieldSectionRingHom
     (N : Mod (Sheaf (ProEt.topology A) Ab.{u + 1}) (residueFieldRingObj A ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
     Mod.sectionActRingHom
-        ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧.obj N)
+        ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)
         (residueFieldSectionRingHom B ℓ E c) =
       (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)) := by
   rw [residueFieldSectionRingHom_apply, residueFieldSectionRingHom_apply,
@@ -68,17 +70,18 @@ lemma sectionActRingHom_lowerStar_residueFieldSectionRingHom
   rfl
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The identification `lowerStarForgetIso` intertwines the actions of the constant sections. -/
 @[reassoc]
 lemma sectionActRingHom_comp_lowerStarForgetIso_inv_app
     (N : Mod (Sheaf (ProEt.topology A) Ab.{u + 1}) (residueFieldRingObj A ℓ E))
     (c : ResidueFieldCoeff.{u} ℓ E) :
     Mod.sectionActRingHom
-        ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧.obj N)
+        ((a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)
         (residueFieldSectionRingHom B ℓ E c) ≫
-      (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
+      (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E))
         a).inv.app N =
-    (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1))
+    (lowerStarForgetIso (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E))
         a).inv.app N ≫
       (a)_*[Ab.{u + 1}].map (Mod.sectionActRingHom N (residueFieldSectionRingHom A ℓ E c)) := by
   rw [sectionActRingHom_lowerStar_residueFieldSectionRingHom, lowerStarForgetIso, Iso.refl_inv,
@@ -101,6 +104,7 @@ lemma lowerStar_map_sheafCompose_map_smulEnd_comp_lowerStarSheafComposeForget₂
   exact (Category.comp_id _).trans (Category.id_comp _).symm
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The pushforward of the action of the constant section `c` corresponds to the multiplication
 by `c` on the pushforward of `residueFieldModuleSheaf A ℓ E`. -/
 @[reassoc]
@@ -127,7 +131,7 @@ pro-étale sheaves of `𝔽_E`-modules commutes with the pushforward along `a : 
 underlying abelian sheaves it is `residueFieldModuleSheafLowerStarForgetIso`
 (`ProEtale.sheafCompose_map_residueFieldModuleSheafLowerStarIso_hom_app`). -/
 noncomputable def residueFieldModuleSheafLowerStarIso :
-    (a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧ ⋙
+    (a)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧ ⋙
         residueFieldModuleSheaf B ℓ E ≅
       residueFieldModuleSheaf A ℓ E ⋙ (a)_*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)] :=
   Sheaf.isoOfSheafComposeForget₂ (J := ProEt.topology B) (Λ := ResidueFieldCoeff.{u} ℓ E)
@@ -141,6 +145,7 @@ noncomputable def residueFieldModuleSheafLowerStarIso :
       sectionActRingHom_comp_lowerStarForgetIso_inv_app_assoc]
     simp only [lowerStar_map_sectionActRingHom_comp_residueFieldModuleSheafCompForgetIso_inv_app]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- On underlying abelian sheaves, `residueFieldModuleSheafLowerStarIso` is
 `residueFieldModuleSheafLowerStarForgetIso`. -/
 @[simp]
@@ -183,25 +188,27 @@ lemma upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRin
 
 end Sections
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- `𝔽_E` is a topological ring. This restatement of
 `PadicAlgCl.isTopologicalRing_integersResidueField` for `E : FiniteIntermediateField ℓ` is used as
 a local instance so that all the instances of `IsTopologicalRing 𝔽_E` occurring below are
 syntactically equal, which avoids expensive kernel unfoldings. The final isomorphism
 `ProEtale.residueFieldModuleSheafUpperStarIso` is stated with the global instance. -/
 theorem isTopologicalRing_residueField :
-    IsTopologicalRing (integersResidueField ℓ E.1) :=
+    IsTopologicalRing (integersResidueField ℓ E) :=
   inferInstance
 
 attribute [local instance high] isTopologicalRing_residueField
 
 /- The condensed ring `C(-, 𝔽_E)`, with its ring structure taken through the commutative ring
 structure of `𝔽_E` as in `ProEtale.continuousMapCoefficientSectionRingHom`; it is definitionally
-`Profinite.continuousMapRingObj (integersResidueField ℓ E.1)`. -/
+`Profinite.continuousMapRingObj (integersResidueField ℓ E)`. -/
 set_option hygiene false in
 local notation "residueFieldCommRingObj" =>
-  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1) _ CommRing.toRing _
+  @Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E) _ CommRing.toRing _
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The unit `a^* M ⟶ (a^* M)` of the pullback of module objects intertwines the pullback of the
 action of the constant section `c` of `𝔽_{E,B}` with the action of the constant section `c`
 of `𝔽_{E,A}`. -/
@@ -217,14 +224,15 @@ lemma upperStarUnitHom_comp_sectionActRingHom_residueFieldSectionRingHom
       (a)^*[Ab.{u + 1}].map (Mod.sectionActRingHom M (residueFieldSectionRingHom B ℓ E c)) ≫
         upperStarUnitHom (residueFieldCommRingObj) a M := by
   have h := upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRingHom
-    (integersResidueField ℓ E.1) a M (algebraMap _ _ (ULift.ringEquiv c))
-  rw [show (algebraMap (integersResidueField ℓ E.1) C(B, integersResidueField ℓ E.1)
+    (integersResidueField ℓ E) a M (algebraMap _ _ (ULift.ringEquiv c))
+  rw [show (algebraMap (integersResidueField ℓ E) C(B, integersResidueField ℓ E)
       (ULift.ringEquiv c)).comp a.base.hom = algebraMap _ _ (ULift.ringEquiv c) from
     ContinuousMap.ext fun _ ↦ rfl] at h
   rw [residueFieldSectionRingHom_apply, residueFieldSectionRingHom_apply]
   exact h
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The identification `upperStarForgetIso` intertwines the actions of the constant sections. -/
 @[reassoc]
 lemma sectionActRingHom_comp_upperStarForgetIso_inv_app
@@ -271,6 +279,7 @@ lemma upperStar_map_sheafCompose_map_smulEnd_comp_sheafComposeForget₂CompUpper
   exact (sheafComposeForget₂CompUpperStarIso Λ a).hom.naturality (Sheaf.smulEnd F c)
 
 variable {ℓ E} in
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The pullback of the action of the constant section `c` corresponds to the multiplication by
 `c` on the pullback of `residueFieldModuleSheaf B ℓ E`. -/
 @[reassoc]
@@ -327,6 +336,7 @@ noncomputable def residueFieldModuleSheafUpperStarIsoAux :
       sectionActRingHom_comp_upperStarForgetIso_inv_app_assoc]
     simp only [upperStar_map_sectionActRingHom_comp_residueFieldModuleSheafCompForgetIso_inv_app]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- On underlying abelian sheaves, `residueFieldModuleSheafUpperStarIsoAux` is
 `residueFieldModuleSheafUpperStarForgetIso`. -/
 @[simp]
@@ -345,8 +355,8 @@ pro-étale sheaves of `𝔽_E`-modules commutes with the pullback along `a : A �
 underlying abelian sheaves it is `residueFieldModuleSheafUpperStarForgetIso`
 (`ProEtale.sheafCompose_map_residueFieldModuleSheafUpperStarIsoAux_hom_app`). -/
 noncomputable def residueFieldModuleSheafUpperStarIso :
-    (a)^*⟦@Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1) _ _
-        (PadicAlgCl.isTopologicalRing_integersResidueField ℓ E.1)⟧ ⋙
+    (a)^*⟦@Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E) _ _
+        (PadicAlgCl.isTopologicalRing_integersResidueField ℓ E)⟧ ⋙
         residueFieldModuleSheaf A ℓ E ≅
       residueFieldModuleSheaf B ℓ E ⋙ (a)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)] :=
   residueFieldModuleSheafUpperStarIsoAux ℓ E a

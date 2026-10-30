@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionPullCompatible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsZeroOfIsIsoZSMul
@@ -94,33 +95,24 @@ fully faithful, so the condensed reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes
 `ℓⁿ` acts invertibly on `K`, hence on its first derived reduction, where `ℓ` acts by zero; so the
 first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
 `sk-lem-pe-derived-nakayama`). -/
-theorem isZero_of_isZero_etaleReduction (E : PadicAlgCl.FiniteIntermediateField ℓ) {n : ℕ}
-    (hn : n ≠ 0) {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
-    (h : IsZero ((etaleReduction ℓ E.1 n X).obj K)) : IsZero K := by
+theorem isZero_of_isZero_etaleReduction (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+    [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {n : ℕ}
+    (hn : n ≠ 0) {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}
+    (h : IsZero ((etaleReduction ℓ E n X).obj K)) : IsZero K := by
   have := isNoetherian_of_locallyOfFiniteType X.hom
   -- the étale reading is fully faithful, so the condensed reduction of `K` vanishes
-  have hred : IsZero ((boundedConstructibleIntegersModPowReduction X.left ℓ E.1 n).obj K) := by
+  have hred : IsZero ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj K) := by
     rw [IsZero.iff_id_eq_zero]
-    exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E.1 n X)).map_injective
+    exact (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).map_injective
       (h.eq_of_src _ _)
-  have hext : IsZero (L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).obj K.obj) :=
+  have hext : IsZero (L(Mod.extendScalars (integersModPowReduction X.left ℓ E n)).obj K.obj) :=
     Functor.map_isZero (boundedConstructible _).ι hred
   -- by the reduction triangle, `ℓⁿ` acts invertibly on `K`
-  obtain ⟨g, δ, hT⟩ := exists_distinguished_integersModPowReduction X.left ℓ E.1 n K.obj
+  obtain ⟨g, δ, hT⟩ := exists_distinguished_integersModPowReduction X.left ℓ E n K.obj
   have hK : IsIso ((ℓ : ℤ) ^ n • 𝟙 K.obj) :=
     (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).1 (Functor.map_isZero _ hext)
-  -- hence on the first derived reduction of `K`, where `ℓ` acts by zero
-  have hK₁ : IsZero ((derivedReduction X.left ℓ E).obj K.obj) := by
-    refine DerivedCategory.isZero_of_isIso_zsmul_id
-      (Sheaf.zsmul_id_eq_zero_of_intCast_eq_zero ?_) (m := (ℓ : ℤ) ^ n) ?_
-    · rw [Int.cast_pow, Int.cast_natCast, natCast_eq_zero_residueFieldCoeff, zero_pow hn]
-    · have : (derivedReduction X.left ℓ E).Additive := inferInstanceAs (Functor.Additive (_ ⋙ _))
-      rw [← (derivedReduction X.left ℓ E).map_id, ← Functor.map_zsmul]
-      infer_instance
-  -- derived Nakayama
-  have := isIso_of_isIso_derivedReduction_map X.left ℓ E (0 : K ⟶ K)
-    (hK₁.isIso hK₁ _)
-  exact IsZero.of_mono_zero K K
+  -- hence `K = 0` by derived Nakayama
+  exact isZero_of_isIso_pow_zsmul_id X.left ℓ E hn hK
 
 end Conservative
 

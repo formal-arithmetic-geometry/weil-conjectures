@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModelPair
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 
@@ -17,9 +18,7 @@ commutes with the pushforward along any morphism of separated `k`-schemes of fin
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarIntegersToPadicAlgClIso`, blueprint
 `det-prop-scalar-six-direct-image` for `𝒪_E ⟶ ℚ̄_ℓ`) and with the extension by zero along an
 open immersion
-(`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`),
-and that bounded constructible `ℚ̄_ℓ`-complexes on two schemes have integral models over a common
-`𝒪_E` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`).
+(`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekIntegersToPadicAlgClIso`).
 
 The comparison for the pushforward is the composite of the ones for `𝒪_E ⟶ E`
 (`ProEtale.CondensedRing.boundedConstructibleLowerStarExtendScalarsIso`) and for `E ⟶ ℚ̄_ℓ`. The
@@ -39,35 +38,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
-
-/-- **Integral models over a common `𝒪_E`**: bounded constructible `ℚ̄_ℓ`-complexes `K` on `X` and
-`K'` on `X'` (topologically noetherian schemes) are isomorphic to `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` and
-`ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀'` for one finite subextension `E` and bounded constructible `𝒪_E`-complexes
-`K₀`, `K₀'` (blueprints `sk-thm-sfb-qlbar-two-colimit` and `sk-lem-tf-rational-model`): both
-descend to finite subextensions, hence to a common one containing both, where they have
-integral models. -/
-lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
-    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace X']
-    (K : PadicAlgClConstructible X ℓ) (K' : PadicAlgClConstructible X' ℓ) :
-    ∃ (E : FiniteIntermediateField ℓ)
-      (K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
-      (K₀' : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X')),
-      Nonempty ((constructibleToPadicAlgCl X ℓ E).obj
-        ((boundedConstructibleExtendScalars X ℓ E).obj K₀) ≅ K) ∧
-      Nonempty ((constructibleToPadicAlgCl X' ℓ E).obj
-        ((boundedConstructibleExtendScalars X' ℓ E).obj K₀') ≅ K') := by
-  obtain ⟨E₁, K₁, ⟨e₁⟩⟩ := constructibleCocone_essSurjObj X ℓ K
-  obtain ⟨E₂, K₂, ⟨e₂⟩⟩ := constructibleCocone_essSurjObj X' ℓ K'
-  obtain ⟨F, h₁, h₂⟩ := exists_ge_ge E₁ E₂
-  obtain ⟨K₀, ⟨e₀⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X ℓ F
-    ((constructibleExtendScalars X ℓ h₁).obj K₁)
-  obtain ⟨K₀', ⟨e₀'⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X' ℓ F
-    ((constructibleExtendScalars X' ℓ h₂).obj K₂)
-  exact ⟨F, K₀, K₀',
-    ⟨(constructibleToPadicAlgCl X ℓ F).mapIso e₀ ≪≫
-      (constructibleToPadicAlgClCompIso X ℓ h₁).app K₁ ≪≫ e₁⟩,
-    ⟨(constructibleToPadicAlgCl X' ℓ F).mapIso e₀' ≪≫
-      (constructibleToPadicAlgClCompIso X' ℓ h₂).app K₂ ≪≫ e₂⟩⟩
 
 namespace CondensedRing
 

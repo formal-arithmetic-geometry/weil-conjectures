@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.PurityPreservation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReading
 
 /-!
 # The étale reading of `𝒪_E ⧸ ℓⁿ`-coefficients and the exceptional inverse image
@@ -257,24 +257,5 @@ theorem hasEtaleReadingUpperShriekComparison_of_etaleOrigin (p : X ⟶ Y) [IsPro
   hasEtaleReadingUpperShriekComparison_of_essImage p hX hY
     (essImage_finiteEtaleReading_rightDerivedUpperShriek p hY hX')
 
-variable {ℓ E n} in
-/-- **The étale reduction `f^!` clause for a proper morphism** (`HasEtaleReductionLowerShriekIso`),
-from:
-* the compatibilities of (Pull) for `p` with the natural reduction triangles;
-* restriction of scalars along `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` preserves bounded constructible complexes on `X`
-  and `Y`;
-* the identification of bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes with bounded
-  constructible étale ones (`EtaleOriginReading` on `X` and `Y`, `BoundedConstructibleOfEtale` on
-  `X`). -/
-theorem hasEtaleReductionLowerShriekIso_of_isProper_of_comparisons (p : X ⟶ Y) [IsProper p.left]
-    (hη : IntegersModPowPullUnitCompatible ℓ E n p.left)
-    (hδ : IntegersModPowPullδCompatible ℓ E n p.left)
-    (hX : RestrictScalarsIntegersModPowBoundedConstructible ℓ E n X.left)
-    (hY : RestrictScalarsIntegersModPowBoundedConstructible ℓ E n Y.left)
-    (hXo : EtaleOriginReading ℓ E n X) (hYo : EtaleOriginReading ℓ E n Y)
-    (hXc : BoundedConstructibleOfEtale ℓ E n X) :
-    HasEtaleReductionLowerShriekIso ℓ E n p :=
-  hasEtaleReductionLowerShriekIso_of_isProper_of_compatible ℓ E n p hη hδ hX hY
-    (hasEtaleReadingUpperShriekComparison_of_etaleOrigin p hXo hYo hXc)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
