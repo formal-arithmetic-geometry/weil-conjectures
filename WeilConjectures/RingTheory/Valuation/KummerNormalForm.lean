@@ -143,6 +143,14 @@ lemma isKummerNegligible_binomial (hp : p.Prime) (hp1 : v (p : Ω) < 1) {c : Ω}
           (pow_le_pow_right_of_le_one' hc1.le hi.1)
     _ = v (p : Ω) * v c ^ 2 := by rw [mul_one]
 
+/-- The middle binomial terms of `(1 + c) ^ p` have value at most `v p * v c ^ i`. -/
+lemma valuation_choose_mul_pow_le (hp : p.Prime) (c : Ω) {i : ℕ} (hi : i ∈ Ico 2 p) :
+    v ((p.choose i : Ω) * c ^ i) ≤ v (p : Ω) * v c ^ i := by
+  rw [mem_Ico] at hi
+  obtain ⟨m, hm⟩ := hp.dvd_choose_self (by omega : i ≠ 0) hi.2
+  rw [hm, Nat.cast_mul, map_mul, map_mul, map_pow]
+  exact mul_le_mul' (mul_le_of_le_one_right' (map_natCast_le_one' m)) le_rfl
+
 end Valuation
 
 section Stage2
@@ -270,3 +278,163 @@ lemma kummer_stage2_step [DecidableEq ι] (hp : p.Prime) (hp1 : v (p : Ω) < 1) 
     ring
 
 end Stage2Step
+
+section Stage2Base
+
+variable {v p} {ι : Type*} {w : ι → Ω} (K L₁ L₂ : Subfield Ω)
+
+/-- **Stage 2, base case**: a `1`-unit `(1 + d₀ + ∑ᵢ Eᵢ wᵢ) (1 + n)` of `L₁` with coefficients of
+value `< v p` in `K` and `n` negligible, which is a `p`-th power in `L₂`, is a `p`-th power in
+`L₁`. -/
+theorem kummer_stage2_base (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω) ≠ 0)
+    (hKL₁ : K ≤ L₁) (hL : L₁ ≤ L₂) (hroot : ∀ c ∈ K, ∃ d ∈ K, d ^ p = c)
+    (hw : ∀ i, w i ∈ L₁) (hw1 : ∀ i, v (w i) = 1)
+    (hval : ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
+      ∀ i ∈ s, v (c i) ≤ v (∑ j ∈ s, c j * w j))
+    (hhens : ∀ x ∈ L₁, v.IsKummerNegligible p x → ∃ y ∈ L₁, y ^ p = 1 + x)
+    (hres : ∀ z ∈ L₂, v z ≤ 1 → ∀ (s : Finset ι) (c : ι → Ω), (∀ i ∈ s, c i ∈ K) →
+      (∀ i ∈ s, v (c i) ≤ 1) → v (z ^ p - ∑ i ∈ s, c i * w i) < 1 → ∀ i ∈ s, v (c i) < 1)
+    (s : Finset ι) (E : ι → Ω) (hE : ∀ i ∈ s, E i ∈ K) (hEv : ∀ i ∈ s, v (E i) < v (p : Ω))
+    {d₀ : Ω} (hd₀ : d₀ ∈ K) (hd₀v : v d₀ < v (p : Ω)) {n : Ω} (hnL : n ∈ L₁)
+    (hn : v.IsKummerNegligible p n)
+    (h₂ : ∃ y ∈ L₂, y ^ p = (1 + d₀ + ∑ i ∈ s, E i * w i) * (1 + n)) :
+    ∃ y ∈ L₁, y ^ p = (1 + d₀ + ∑ i ∈ s, E i * w i) * (1 + n) := by
+  classical
+  have hp2 := hp.two_le
+  have hvp : 0 < v (p : Ω) := v.pos_iff.2 hp0
+  have hd₀1 : v d₀ < 1 := hd₀v.trans hp1
+  have h1d : v (1 + d₀) = 1 := valuation_one_add_eq_one hd₀1
+  have h1d0 : 1 + d₀ ≠ 0 := by intro h; rw [h, map_zero] at h1d; exact zero_ne_one h1d
+  obtain ⟨g, hgK, hg⟩ := hroot (1 + d₀) (add_mem (one_mem _) hd₀)
+  have hg0 : g ≠ 0 := by rintro rfl; rw [zero_pow hp.ne_zero] at hg; exact h1d0 hg.symm
+  set E' : ι → Ω := fun i ↦ E i / (1 + d₀) with hE'def
+  set F := ∑ i ∈ s, E' i * w i with hFdef
+  have hE'K : ∀ i ∈ s, E' i ∈ K := fun i hi ↦ div_mem (hE i hi) (add_mem (one_mem _) hd₀)
+  have hE'v : ∀ i, v (E' i) = v (E i) := fun i ↦ by rw [hE'def, map_div₀, h1d, div_one]
+  have hfac : 1 + d₀ + ∑ i ∈ s, E i * w i = (1 + d₀) * (1 + F) := by
+    rw [hFdef, mul_add, mul_one, Finset.mul_sum]
+    congr 1
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [hE'def]; field_simp
+  have hFL : F ∈ L₁ := sum_mem fun i hi ↦ mul_mem (hKL₁ (hE'K i hi)) (hw i)
+  have hFv : v F < v (p : Ω) := v.map_sum_lt hvp.ne' fun i hi ↦ by
+    rw [map_mul, hw1, mul_one, hE'v]; exact hEv i hi
+  by_cases hFn : v.IsKummerNegligible p F
+  · -- the element is a `p`-th power by Hensel's lemma
+    have hx : v.IsKummerNegligible p (F + n + F * n) :=
+      (hFn.add hn).add (by rw [mul_comm]; exact hn.mul_of_le_one (hFv.trans hp1).le)
+    obtain ⟨y₀, hy₀, hy₀p⟩ := hhens _ (add_mem (add_mem hFL hnL) (mul_mem hFL hnL)) hx
+    refine ⟨g * y₀, mul_mem (hKL₁ hgK) hy₀, ?_⟩
+    rw [mul_pow, hg, hy₀p, hfac]
+    ring
+  · exfalso
+    rw [Valuation.IsKummerNegligible, not_le] at hFn
+    have hsne : s.Nonempty := by
+      by_contra h
+      rw [Finset.not_nonempty_iff_eq_empty] at h
+      rw [hFdef, h, Finset.sum_empty, map_zero, zero_pow (by omega)] at hFn
+      exact not_lt.2 zero_le hFn
+    obtain ⟨i₀, hi₀, hmax⟩ := s.exists_max_image (fun i ↦ v (E' i)) hsne
+    have hvF : v F = v (E' i₀) := le_antisymm
+      (v.map_sum_le fun i hi ↦ by rw [map_mul, hw1, mul_one]; exact hmax i hi)
+      (hval s E' hE'K i₀ hi₀)
+    obtain ⟨y, hyL, hyp⟩ := h₂
+    set Y := y / g with hYdef
+    have hYL : Y ∈ L₂ := div_mem hyL (hL (hKL₁ hgK))
+    set n₂ := n * (1 + F) with hn₂def
+    have hYp : Y ^ p = 1 + F + n₂ := by
+      rw [hYdef, div_pow, hyp, hfac, hg, hn₂def]
+      field_simp
+    have hn₂ : v.IsKummerNegligible p n₂ :=
+      hn.mul_of_le_one (v.map_add_le (by rw [map_one]) (hFv.trans hp1).le)
+    have hn₂F : v n₂ < v F := by
+      by_contra h
+      rw [not_lt] at h
+      exact (not_le.2 hFn) ((pow_le_pow_left₀ zero_le h _).trans hn₂)
+    set s₀ := Y - 1 with hs₀def
+    set B := ∑ i ∈ Ico 2 p, (p.choose i : Ω) * s₀ ^ i with hBdef
+    have hexp : F + n₂ = s₀ ^ p + ((p : Ω) * s₀ + B) := by
+      have h := Valuation.one_add_pow_eq p hp2 s₀
+      rw [show 1 + s₀ = Y by rw [hs₀def]; ring, hYp] at h
+      linear_combination h
+    have hvFn₂ : v (F + n₂) = v F := v.map_add_eq_of_lt_left hn₂F
+    set σ := v s₀ with hσdef
+    have hBle : ∀ i ∈ Ico 2 p, v ((p.choose i : Ω) * s₀ ^ i) ≤ v (p : Ω) * σ ^ i :=
+      fun i hi ↦ Valuation.valuation_choose_mul_pow_le p hp s₀ hi
+    have hFp : v F < 1 := hFv.trans hp1
+    -- `σ < 1`
+    have hσ1 : σ < 1 := by
+      by_contra h
+      rw [not_lt] at h
+      have hσpos : 0 < σ ^ (p - 1) := pow_pos (zero_lt_one.trans_le h) _
+      have hbig : v (p : Ω) * σ ^ (p - 1) < σ ^ p :=
+        calc v (p : Ω) * σ ^ (p - 1) < σ ^ (p - 1) := mul_lt_of_lt_one_left hσpos hp1
+          _ ≤ σ ^ p := pow_le_pow_right₀ h (by omega)
+      have hrest : v ((p : Ω) * s₀ + B) < σ ^ p := by
+        refine lt_of_le_of_lt (v.map_add _ _) (max_lt ?_ ?_)
+        · rw [map_mul]
+          exact lt_of_le_of_lt (mul_le_mul' le_rfl (le_self_pow₀ h (by omega))) hbig
+        · refine lt_of_le_of_lt (v.map_sum_le fun i hi ↦ (hBle i hi).trans ?_) hbig
+          exact mul_le_mul' le_rfl (pow_le_pow_right₀ h (by rw [mem_Ico] at hi; omega))
+      have := congrArg v hexp
+      rw [hvFn₂, v.map_add_eq_of_lt_left (by rwa [map_pow])] at this
+      rw [map_pow] at this
+      exact not_le.2 hFp (this ▸ one_le_pow₀ h)
+    have hrest : v ((p : Ω) * s₀ + B) ≤ v (p : Ω) * σ := by
+      refine v.map_add_le (by rw [map_mul]) (v.map_sum_le fun i hi ↦ (hBle i hi).trans ?_)
+      exact mul_le_mul' le_rfl (pow_le_of_le_one zero_le hσ1.le (by rw [mem_Ico] at hi; omega))
+    by_cases hsm : σ ^ (p - 1) ≤ v (p : Ω)
+    · -- then `F` would be negligible
+      have hle : v F ≤ v (p : Ω) * σ := by
+        rw [← hvFn₂, hexp]
+        refine v.map_add_le ?_ hrest
+        rw [map_pow, ← pow_sub_one_mul (by omega : p ≠ 0)]
+        exact mul_le_mul' hsm le_rfl
+      refine (not_le.2 hFn) ((pow_le_pow_left₀ zero_le hle _).trans ?_)
+      rw [mul_pow]
+      calc v (p : Ω) ^ (p - 1) * σ ^ (p - 1) ≤ v (p : Ω) ^ (p - 1) * v (p : Ω) :=
+            mul_le_mul' le_rfl hsm
+        _ = v (p : Ω) ^ p := by rw [← pow_succ]; congr 1; omega
+    · rw [not_le] at hsm
+      have hσ0 : σ ≠ 0 := by
+        intro h0
+        rw [h0, zero_pow (by omega)] at hsm
+        exact not_lt.2 zero_le hsm
+      have hlt : v (p : Ω) * σ < σ ^ p := by
+        rw [← pow_sub_one_mul (by omega : p ≠ 0)]
+        exact mul_lt_mul_of_pos_right hsm (zero_lt_iff.2 hσ0)
+      have hvFσ : v F = σ ^ p := by
+        rw [← hvFn₂, hexp, v.map_add_eq_of_lt_left (by rw [map_pow]; exact hrest.trans_lt hlt),
+          map_pow]
+      obtain ⟨γ, hγK, hγ⟩ := hroot (E' i₀) (hE'K i₀ hi₀)
+      have hvγ : v γ = σ := by
+        refine pow_left_injective (M := Γ₀) hp.ne_zero ?_
+        simp only
+        rw [← map_pow, hγ, ← hvF, hvFσ]
+      have hγ0 : γ ≠ 0 := by intro h; rw [h, map_zero] at hvγ; exact hσ0 hvγ.symm
+      set c : ι → Ω := fun i ↦ E' i / γ ^ p with hcdef
+      have hcK : ∀ i ∈ s, c i ∈ K := fun i hi ↦ div_mem (hE'K i hi) (pow_mem hγK _)
+      have hγp : v (γ ^ p) = v F := by rw [map_pow, hvγ, hvFσ]
+      have hFne : v F ≠ 0 := by rw [hvFσ]; exact pow_ne_zero _ hσ0
+      have hcv : ∀ i ∈ s, v (c i) ≤ 1 := fun i hi ↦ by
+        rw [hcdef, map_div₀, hγp, div_le_one₀ (zero_lt_iff.2 hFne), hvF]; exact hmax i hi
+      have hc₀ : v (c i₀) = 1 := by rw [hcdef, map_div₀, hγp, hvF, div_self (hvF ▸ hFne)]
+      have hzL : s₀ / γ ∈ L₂ := div_mem (sub_mem hYL (one_mem _)) (hL (hKL₁ hγK))
+      have hz1 : v (s₀ / γ) ≤ 1 := by rw [map_div₀, hvγ, div_self hσ0]
+      have hsum : ∑ i ∈ s, c i * w i = F / γ ^ p := by
+        rw [hFdef, div_eq_mul_inv, Finset.sum_mul]
+        exact Finset.sum_congr rfl fun i _ ↦ by rw [hcdef]; ring
+      have hident : (s₀ / γ) ^ p - ∑ i ∈ s, c i * w i = (n₂ - ((p : Ω) * s₀ + B)) / γ ^ p := by
+        rw [hsum, div_pow]
+        rw [div_sub_div_same]
+        congr 1
+        linear_combination -hexp
+      have hlt1 : v ((s₀ / γ) ^ p - ∑ i ∈ s, c i * w i) < 1 := by
+        rw [hident, map_div₀, hγp, div_lt_one₀ (zero_lt_iff.2 hFne)]
+        refine lt_of_le_of_lt (v.map_sub _ _) (max_lt hn₂F ?_)
+        rw [hvFσ]; exact hrest.trans_lt hlt
+      have := hres _ hzL hz1 s c hcK hcv hlt1 i₀ hi₀
+      rw [hc₀] at this
+      exact lt_irrefl _ this
+
+end Stage2Base
