@@ -9965,6 +9965,7 @@ public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.Field.IsField
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
 public import WeilConjectures.Mathlib.Algebra.Group.AddChar
+public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
