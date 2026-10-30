@@ -41,41 +41,45 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-! ### Derived complete complexes form a triangulated subcategory -/
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- Derived complete complexes are closed under isomorphisms. -/
 lemma derivedCompleteIntegers_of_iso {X : Scheme.{u}}
     {K K' : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hK : derivedCompleteIntegers ℓ E X K) (e : K ≅ K') : derivedCompleteIntegers ℓ E X K' := by
   intro Z hZ f
   rw [← cancel_mono e.inv, hK hZ (f ≫ e.inv), zero_comp]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- Zero objects are derived complete. -/
 lemma derivedCompleteIntegers_of_isZero {X : Scheme.{u}}
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (hK : IsZero K) : derivedCompleteIntegers ℓ E X K :=
   fun _ _ _ ↦ hK.eq_of_tgt _ _
 
 /-! ### Constructible module objects -/
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- Let `M` be an `𝒪_{E,X}`-module whose sheaf pullback along `j : Z ⟶ X` becomes finitely
 presented after further pullback along `h : Y ⟶ Z`. Then the pullback of `M` along `k ≫ h ≫ j` is
 finitely presented, for every `k : W ⟶ Y`. -/
 lemma isFinitelyPresented_upperStar_comp_comp_padicIntegers {X Y Z W : Scheme.{u}} (j : Z ⟶ X)
     (h : Y ⟶ Z) (k : W ⟶ Y)
     {M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)}
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)}
     (hM : Mod.IsFinitelyPresented ((h)^*[Ab.{u + 1}].obj ((j)^*[Ab.{u + 1}].obj
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
       (((h)^*[Ab.{u + 1}].mapMod ((j)^*[Ab.{u + 1}].obj
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))).obj
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))).obj
         (((j)^*[Ab.{u + 1}].mapMod
-          (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)).obj M))) :
-    Mod.IsFinitelyPresented _ ((k ≫ h ≫ j)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) :=
+          (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)).obj M))) :
+    Mod.IsFinitelyPresented _ ((k ≫ h ≫ j)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) :=
   (IsFinitelyPresented.upperStar _ k (isFinitelyPresented_upperStar_of_comap_iso _ h
     (condensedPullbackHom _ j) (comapUpperStarObjIso _ j M) hM)).of_iso
     ((k)^*⟦_⟧.mapIso ((CondensedRing.upperStarComp _ h j).app M).symm ≪≫
@@ -87,9 +91,9 @@ scheme: on the countable power of a constructible `𝒪_{E,X}`-module `M`,
 quasi-compact jointly surjective morphisms `g : W ⟶ X` from affine schemes along which `M`
 becomes finitely presented; the pullbacks preserve countable products and the action of `ϖ`. -/
 theorem isIso_sub_powShift_padicIntegersCenter_of_isConstructible {X : Scheme.{u}}
-    [IsNoetherian X] {ϖ : integers ℓ E.1} (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E.1))
+    [IsNoetherian X] {ϖ : integers ℓ E} (hϖ : ϖ ∈ IsLocalRing.maximalIdeal (integers ℓ E))
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
     (hM : IsConstructibleModuleObject _ M) :
     IsIso (𝟙 _ - powShift ((padicIntegersCenter X ℓ E ϖ).app M)) := by
   obtain ⟨S, hS⟩ := hM
@@ -124,7 +128,7 @@ theorem isIso_sub_powShift_padicIntegersCenter_of_isConstructible {X : Scheme.{u
     rw [hg_eq]
     rfl
   have hfp (p : Σ a : Fin S.n, Fin (N a)) :
-      Mod.IsFinitelyPresented _ ((g p)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) := by
+      Mod.IsFinitelyPresented _ ((g p)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) := by
     rw [hg_eq]
     exact isFinitelyPresented_upperStar_comp_comp_padicIntegers (S.immersion p.1)
       ((𝒰 p.1).f (j p.1 p.2)) (W p.1 p.2).ι (h𝒰 p.1 (j p.1 p.2))
@@ -133,11 +137,11 @@ theorem isIso_sub_powShift_padicIntegersCenter_of_isConstructible {X : Scheme.{u
     have := hW' p.1 p.2
     exact quasiCompact_of_compactSpace _
   have (p : Σ a : Fin S.n, Fin (N a)) : PreservesLimit (Discrete.functor fun _ : ℕ ↦ M)
-      ((g p)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧) := by
+      ((g p)^*⟦Profinite.padicIntegersRingObj ℓ E⟧) := by
     have := hW' p.1 p.2
     infer_instance
   have key (p : Σ a : Fin S.n, Fin (N a)) : IsIso (𝟙 _ - powShift
-      (((g p)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).map
+      (((g p)^*⟦Profinite.padicIntegersRingObj ℓ E⟧).map
         ((padicIntegersCenter X ℓ E ϖ).app M))) := by
     rw [upperStar_map_padicIntegersCenter_app]
     exact isIso_sub_powShift_padicIntegersCenter_of_isFinitelyPresented _ ℓ E hϖ (hfp p)
@@ -149,10 +153,10 @@ theorem isIso_sub_powShift_padicIntegersCenter_of_isConstructible {X : Scheme.{u
 (part of blueprint `sk-prop-integral-criterion`). -/
 theorem derivedCompleteIntegers_of_boundedConstructible {X : Scheme.{u}} [IsNoetherian X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X) K) :
     derivedCompleteIntegers ℓ E X K := by
-  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E
   rw [Ideal.submodule_span_eq] at hϖ
   refine prop_of_boundedConstructible (derivedCompleteIntegers ℓ E X)
     (fun _ h ↦ derivedCompleteIntegers_of_isZero h) derivedCompleteIntegers_of_iso

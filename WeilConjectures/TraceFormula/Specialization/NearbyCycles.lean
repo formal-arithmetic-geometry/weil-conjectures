@@ -8,14 +8,9 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
-public import WeilConjectures.TraceFormula.Specialization.DeformationModelGeneric
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
-public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
-public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionPoint
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionVanishing
-public import WeilConjectures.TraceFormula.KunnethVerdier
 
 /-!
 

@@ -7,10 +7,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
 import WeilConjectures.AlgebraicGeometry.QCqsSheafRHomAdjunction

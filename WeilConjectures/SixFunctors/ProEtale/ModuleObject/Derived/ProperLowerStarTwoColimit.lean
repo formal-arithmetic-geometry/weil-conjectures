@@ -8,10 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.FilteredTwoColimitAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldPushCocycle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldUpperShriekCompatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
 
 /-!
-# The proper direct image on `Dᵇc(-)⟦ℚ̄_ℓ⟧` is a left adjoint: the 2-colimit argument
+# The proper direct image on `Dᵇc(-)⟦ℚ̄_ℓ⟧` is a left adjoint if it is so over each `E`
 
 Let `ℓ` be a prime, `k` a field in which `ℓ` is invertible and `g : Z ⟶ Y` a proper morphism of
 separated `k`-schemes of finite type. If for every finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` the
@@ -30,8 +29,6 @@ This is the proof of blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar
 
 so `Rg_*` over `ℚ̄_ℓ` is a left adjoint
 (`CategoryTheory.CategoryCocone.LevelwiseLeftAdjoint.isLeftAdjoint_of_isFilteredTwoColimit`).
-In particular the case of `k` neither finite nor separably closed reduces to the case of `𝒪̲_E`
-(`ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not`).
 -/
 
 @[expose] public section
@@ -82,20 +79,5 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall 
   (boundedConstructibleLowerStarLevelwiseLeftAdjoint ℓ g).isLeftAdjoint_of_isFilteredTwoColimit
     (boundedConstructibleCocone_isFilteredTwoColimit Z.left ℓ)
     (boundedConstructibleCocone_isFilteredTwoColimit Y.left ℓ)
-
-omit [∀ E : FiniteIntermediateField ℓ,
-  (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint] in
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` neither finite nor
-separably closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
-`Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint. By the 2-colimit argument
-(`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall`) this follows from the
-case of the finite subextensions `E`
-(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not`). -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not
-    (hk : ¬(Finite k ∨ IsSepClosed k)) :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  have (E : FiniteIntermediateField ℓ) :=
-    isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not ℓ g E hk
-  isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall ℓ g
 
 end AlgebraicGeometry.ProEtale.CondensedRing

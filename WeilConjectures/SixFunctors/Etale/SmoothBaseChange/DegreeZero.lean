@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 import WeilConjectures.AlgebraicGeometry.EtaleChartSectionsArrowComparison
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 
 /-!
 # Degree-zero flat base change

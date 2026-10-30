@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
-public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
 public import WeilConjectures.TraceFormula.ConstructibleGenerationLowerStar

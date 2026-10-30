@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+import WeilConjectures.WeilSheaf.CurveTopCohomology
 
 /-!
 # Geometric coinvariants and `H_c²` of a lisse Weil sheaf
