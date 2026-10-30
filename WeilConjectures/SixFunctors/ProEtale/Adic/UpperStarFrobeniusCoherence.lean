@@ -156,6 +156,6 @@ lemma adicUpperStarComp_coherence_of_square {P Y Z : Scheme.{u}} (τ : P ⟶ P) 
     reassoc_of% adicUpperStarCongr_hom_app_comp_adicUpperStarComp_inv_app p hτ (by rw [hτ]),
     reassoc_of% map_adicUpperStarCongr_hom_app_comp_adicUpperStarComp_inv_app τ hx (by rw [hx]),
     reassoc_of% (map_adicUpperStarComp_inv_app_comp_adicUpperStarComp_inv_app τ s p M)]
-  simp only [adicUpperStarCongr_hom_app_eq_eqToHom, eqToHom_trans, eqToHom_trans_assoc]
+  simp only [adicUpperStarCongr_hom_app_eq_eqToHom, eqToHom_trans]
 
 end AlgebraicGeometry.ProEtale

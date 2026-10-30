@@ -107,7 +107,6 @@ theorem upperStar_map_inv_comp_adicUpperStarCompCondensedModIso_inv_app_unit (f 
     rw [← reassoc_of% nat]
     erw [reassoc_of% U]
     rw [reassoc_of% dn]
-
   apply ((CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f).homEquiv
     _ _).injective
   apply Mod.hom_ext

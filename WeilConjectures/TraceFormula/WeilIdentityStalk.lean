@@ -99,7 +99,6 @@ lemma upperStarComp_hom_app_comp_upperStarIsoIdOfEq {Y : Scheme.{u}} {f g : Y ‚ü
     Functor.map_comp]
   simp only [Category.assoc]
   rw [reassoc_of% upperStarComp_hom_app_comp_map_upperStarEqToIso_hom_app,
-
     upperStarComp_id_right_hom_app_assoc]
   rw [upperStarEqToIso_hom_app_trans_assoc, upperStarEqToIso_hom_app_trans_assoc]
 
