@@ -72,18 +72,12 @@ theorem weilStalkTraceAlternatingSum_mk_single
         (IsoAlgebra.mk ⟨(DerivedCategory.singleFunctor _ 0).obj A, hA⟩
           ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).app _ ≪≫
             ObjectProperty.isoMk _ ((DerivedCategory.singleFunctor _ 0).mapIso β))) =
-      traceOrZero
-        ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ)
-            ((geometricFrobeniusField k).pow (n + 1)).hom).inv.app
-            ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj A) ≫
-          (upperStarComp (Profinite.padicAlgClRingObj ℓ)
-            ((geometricFrobeniusField k).pow (n + 1)).hom x).inv.app A ≫
-          (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (hx.symm.trans
-            ((congrArg (x ≫ ·) (pow_hom_left_eq_id
-              (by rw [Iso.refl_hom, Over.id_left] : (Iso.refl X).hom.left = 𝟙 X.left) (n + 1))).trans
-              (Category.comp_id x)))).hom.app A ≫
-          (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
-            (@HPow.hPow (End A) ℕ (End A) instHPow β.hom (n + 1))) := by
+      traceOrZero (upperStarGaloisComp ℓ ((geometricFrobeniusField k).pow (n + 1)).hom x
+        (hx.symm.trans ((congrArg (x ≫ ·) (pow_hom_left_eq_id
+          (by rw [Iso.refl_hom, Over.id_left] : (Iso.refl X).hom.left = 𝟙 X.left) (n + 1))).trans
+            (Category.comp_id x))) A
+        ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+          (@HPow.hPow (End A) ℕ (End A) instHPow β.hom (n + 1)))) := by
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

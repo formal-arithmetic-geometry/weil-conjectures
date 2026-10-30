@@ -220,7 +220,7 @@ lemma WeilSheaf.pow_mk_upperStarIsoIdOfEq_str_hom {e : X ≅ X} (he : e.hom.left
   unfold WeilSheaf.pow
   rw [IsoAlgebra.mk_str, powStr_succ_upperStar_eq_powSuccStr, IsoAlgebra.mk_str]
   erw [powSuccStr_upperStarIsoIdOfEq_trans_hom]
-  rfl
+  sorry
 
 
 lemma stalkFunctor_obj_str_hom_of_upperStarIsoIdOfEq {e : X ≅ X} (he : e.hom.left = 𝟙 X.left)
@@ -240,6 +240,29 @@ lemma stalkFunctor_obj_str_hom_of_upperStarIsoIdOfEq {e : X ≅ X} (he : e.hom.l
     ← upperStarEqToIso_hom_app (Profinite.padicAlgClRingObj ℓ) hx.symm, reassoc_of% key,
     upperStarEqToIso_hom_app_trans_assoc]
 
+lemma traceOrZero_stalkFunctor_obj_pow_mk {e : X ≅ X} (he : e.hom.left = 𝟙 X.left)
+    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) (β : M ≅ M) (n : ℕ)
+    (σ : Spec (.of Ω) ≅ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
+    (hx : x ≫ (e.pow (n + 1)).hom.left = σ.hom ≫ x) :
+    traceOrZero ((WeilSheaf.stalkFunctor ℓ (e.pow (n + 1)) σ.hom x hx).obj
+      (WeilSheaf.pow ℓ (IsoAlgebra.mk M ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) :
+        WeilSheaf ℓ e) (n + 1))).str.hom =
+      traceOrZero ((upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ.hom).inv.app
+          ((x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj (WeilSheaf.pow ℓ (IsoAlgebra.mk M
+            ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier) ≫
+        (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ.hom x).inv.app
+          (WeilSheaf.pow ℓ (IsoAlgebra.mk M
+            ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier ≫
+        (upperStarEqToIso (Profinite.padicAlgClRingObj ℓ) (hx.symm.trans
+          ((congrArg (x ≫ ·) (pow_hom_left_eq_id he (n + 1))).trans
+            (Category.comp_id x)))).hom.app (WeilSheaf.pow ℓ (IsoAlgebra.mk M
+            ((upperStarIsoIdOfEq ℓ he).app M ≪≫ β) : WeilSheaf ℓ e) (n + 1)).carrier ≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
+          (@HPow.hPow (End M) ℕ (End M) instHPow β.hom (n + 1))) := by
+  rw [stalkFunctor_obj_str_hom_of_upperStarIsoIdOfEq ℓ (pow_hom_left_eq_id he (n + 1)) _ _
+    (WeilSheaf.pow_mk_upperStarIsoIdOfEq_str_hom ℓ he M β n) σ x hx]
+
 end Stalk
 
 lemma upperStarIsoIdOfEq_refl_hom_app {k : Type u} [Field k] {X : Over (Spec (.of k))}
@@ -249,5 +272,6 @@ lemma upperStarIsoIdOfEq_refl_hom_app {k : Type u} [Field k] {X : Over (Spec (.o
       (Iso.refl X).hom.left = 𝟙 X.left)).hom.app M =
       (upperStarId (Profinite.padicAlgClRingObj ℓ) X.left).hom.app M := by
   rw [upperStarIsoIdOfEq_hom_app, upperStarEqToIso_hom_app, eqToHom_refl, Category.id_comp]
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing
