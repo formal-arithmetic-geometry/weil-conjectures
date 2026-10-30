@@ -10733,6 +10733,7 @@ public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RepresentationTheory.TwistedClifford
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupLattice
+public import WeilConjectures.RepresentationTheory.WeilGroupProfiniteExtension
 public import WeilConjectures.RepresentationTheory.WeilGroupTwist
 public import WeilConjectures.RingTheory.AbsoluteIrreducibilitySpecialization
 public import WeilConjectures.RingTheory.AdicCompletion.ChangeIdeal
@@ -14862,6 +14863,9 @@ public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.WeilSheaf.WeilDescent
+public import WeilConjectures.WeilSheaf.WeilDescentConnected
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalGroup
+public import WeilConjectures.WeilSheaf.WeilDescentFundamentalRep
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
 public import WeilConjectures.ZetaFunction
