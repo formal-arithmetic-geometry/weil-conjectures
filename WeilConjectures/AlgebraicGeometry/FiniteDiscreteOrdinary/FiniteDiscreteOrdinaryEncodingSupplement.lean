@@ -99,7 +99,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
-universe u
+universe u v
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open CategoryTheory.MonObj
 open scoped CategoryTheory.Obj TensorProduct
@@ -363,8 +363,9 @@ private theorem schemeConstants_isMonHom (T : Scheme.{u}) :
     (canonicalAbelianMap A T) hc
   exact monHomCompExplicit mP _ _ _ _ hu hf
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory in
 private def constantSectionRingMapAux
-    {C : Type*} [Category C] (J : GrothendieckTopology C)
+    {C : Type*} [Category.{v} C] (J : GrothendieckTopology C)
     [UnivLE.{_, u + 1}] [HasSheafify J Ab.{u + 1}]
     [(J.W (A := Ab.{u + 1})).IsMonoidal]
     (B : Type (u + 1)) [CommRing B]

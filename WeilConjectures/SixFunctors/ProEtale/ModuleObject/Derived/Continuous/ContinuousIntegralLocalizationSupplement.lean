@@ -423,7 +423,13 @@ noncomputable def integralLocalizationLiftedCocone (X : Scheme.{u})
       (condensedRingObj (integralCoeff ℓ E) X))) :
     Cocone ((ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙
       integralLocalizationSequence ℓ K) :=
-  (integralLocalizationCocone ℓ E X K).whisker
-    (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor
+  (Cocone.precompose (Functor.whiskerLeft (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor
+    (NatTrans.ofSequence (F := integralLocalizationSequence ℓ K) (G := Mod.smulSequence K ℓ)
+      (fun _ ↦ 𝟙 K) (fun n ↦ by
+        simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
+          Nat.add_sub_cancel_left, pow_one]
+        exact (Category.comp_id _).trans (Category.id_comp _).symm)))).obj
+    ((integralLocalizationCocone ℓ E X K).whisker
+      (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -362,20 +362,8 @@ private lemma bounded_tri_of_serre {X : Scheme.{u}}
     (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
       S.ShortExact → IsConstructibleModuleObject R S.X₁ →
       IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
-    (boundedConstructible R).IsTriangulated := by
-  let P : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
-    IsConstructibleModuleObject R
-  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ constructible_of_iso e h⟩
-  have : P.IsClosedUnderKernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).1⟩
-  have : P.IsClosedUnderCokernels := ⟨by
-    rintro Z ⟨f, k, hk, h⟩
-    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
-      (hker _ _ f h.1 h.2).2⟩
-  have : P.IsClosedUnderExtensions := ⟨fun h h₁ h₃ ↦ hext _ h h₁ h₃⟩
-  exact isTriangulated_boundedConstructible_of_serre R
+    (boundedConstructible R).IsTriangulated :=
+  isTriangulated_boundedConstructible_of_serre R hker hext
 -- Build the specific condensed-field triangulated structures from their Serre closure
 -- statements; no arbitrary-coefficient closure assertion is used.
 /-- Bounded constructible complexes over a finite coefficient field form a triangulated

@@ -197,13 +197,23 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
+/-- The pullback of module objects over `Λ` is the pullback of underlying sheaves followed by
+restriction along the inverse of the comparison of coefficient rings. -/
+private noncomputable def CondensedRing.normalizedPullbackIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    CondensedRing.upperStar Λ f ≅
+      (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ X) ⋙
+        Mod.comap (inv (condensedPullbackHom Λ f)) :=
+  Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
+
 private theorem lisse_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsLisseCoefficientModule Λ M) :
     IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ f).obj M) := by
-  exact CondensedRing.locFree_pullback Λ f M hM
+  exact (isLocallyFree_iff _).1 (IsLocallyFree.upperStar Λ f ((isLocallyFree_iff M).2 hM))
 
 private theorem finitePresentation_fromPoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -246,7 +256,7 @@ private theorem lisse_of_raw_free
         (((upperStar Ab.{u + 1} (C.f a)).mapMod (condensedRingObj Λ X)).obj M)) :
     IsLisseCoefficientModule Λ M := by
   obtain ⟨C, hC⟩ := h
-  exact ⟨C, fun a ↦ CondensedRing.free_standardPullback Λ (C.f a) M (hC a)⟩
+  exact ⟨C, fun a ↦ (CondensedRing.isFree_mapMod_iff Λ (C.f a) M).1 (hC a)⟩
 
 private theorem lfp_lisse
     (ℓ : ℕ) [Fact ℓ.Prime]
