@@ -54,14 +54,14 @@ Tag 0F7B (the etale analogue), and proetale Tags 09AE and 09BN
 
 open CategoryTheory CategoryTheory.Limits
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 namespace AlgebraicGeometry.Scheme
 
 universe u
 
 set_option autoImplicit false
-
--- After pruning, this module only keeps private declarations.
-set_option linter.privateModule false
 
 @[expose] public section
 
