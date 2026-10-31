@@ -72,6 +72,8 @@ public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySuppl
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Ordinary geometric comparison on strict semilinear systems -/
 
@@ -173,6 +175,76 @@ def GeometricSystemOrdinaryData.derivedEvaluation
       (F.evaluation n : F.functor ⋙ systemEvaluation BX n ≅
         systemEvaluation BY n ⋙ F.levelInverseImage n) ≪≫
     Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelInverseImage n)
+
+/-- Exact termwise inverse image and its ordinary singleton comparison.
+Source: Zheng, Construction 4.1, printed p. 21; Stacks 03D2 and 03EL.
+(blueprint: lem-pur-system-geometric-ordinary-comparison).
+
+Proof: Conjugate each semilinear transition by the recorded underlying-sheaf
+isomorphisms. Test on the universal pairs of sections; the module addition and scalar
+operation diagrams imply additivity and semilinearity. The coefficient transition
+square supplies compatibility of scalars. Faithfulness of the underlying functors
+then proves identities, composition, and naturality. Finite limits and colimits are
+preserved levelwise, hence on strict systems by their componentwise universal properties.
+Use the balanced coefficient-square construction with identity structural coefficient
+maps, and remove identity scalar extensions by their tensor units. Its generator
+formula gives the scalar comparison. Take the mate of the exact evaluation square
+under the two ordinary singleton adjunctions. Below the selected index the scalar
+comparison makes this mate invertible, and above it both objects are zero. Its inverse
+is the ordinary comparison. The mate unit identity gives multiplication normalization;
+the scalar generator formula gives the specified generalized tensor equation. -/
+theorem geometricSystemOrdinaryComparison
+    (BY : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (BX : ℕᵒᵖ ⥤ Sheaf K CommRingCat.{w})
+    (u : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
+    (I : ∀ n : ℕ, AlgebraicInverseImage u.inverse (BY.obj (op n)) (BX.obj (op n)))
+    (htransition : ∀ {m n : ℕ} (h : m ≤ n),
+      u.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map
+          (BY.map (homOfLE h).op)) ≫ (I m).ringUnderlying.hom =
+        (I n).ringUnderlying.hom ≫
+          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map
+            (BX.map (homOfLE h).op))
+    (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
+    (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX) :
+    ∃ F : GeometricSystemOrdinaryData BY BX u I,
+  ∃ (ordinary : ∀ n : ℕ,
+      systemSingleFunctor SY TY BY n ⋙ F.functor ≅
+        F.levelInverseImage n ⋙ systemSingleFunctor SX TX BX n)
+    (tensor : ∀ {j n : ℕ} (h : j ≤ n),
+      systemTensor SY BY h ⋙ F.levelInverseImage j ≅
+        F.levelInverseImage n ⋙ systemTensor SX BX h),
+    (∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n),
+    (F.evaluation j).hom.app ((systemSingleFunctor SY TY BY n).obj P) ≫
+        (F.levelInverseImage j).map ((systemSingleBelow SY TY BY n h).hom.app P) ≫
+        (tensor h).hom.app P =
+      ((ordinary n).hom.app P).app j ≫
+        (systemSingleBelow SX TX BX n h).hom.app ((F.levelInverseImage n).obj P)) ∧
+    (∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n)
+    (Z : Sheaf J (Type w))
+    (b : Z ⟶ (sheafCompose J (CategoryTheory.forget CommRingCat.{w})).obj (BY.obj (op j)))
+    (x : Z ⟶ (geometricSystemUnderlying BY n).obj P)
+    (z : Z ⟶ (geometricSystemUnderlying BY j).obj ((systemTensor SY BY h).obj P)),
+    (∀ U t, z.hom.app U t =
+      systemModelTmul (SY (BY.map (homOfLE h).op)).model P U
+        (b.hom.app U t) (x.hom.app U t)) →
+    ∀ (W : Dᵒᵖ) (t : (u.inverse.obj Z).obj.obj W),
+      ((tensor h).hom.app P).val.app W
+          (((u.inverse.map z) ≫
+            (I j).moduleUnderlying.inv.app ((systemTensor SY BY h).obj P)).hom.app W t) =
+        systemModelTmul (SX (BX.map (homOfLE h).op)).model
+          ((F.levelInverseImage n).obj P) W
+          (((u.inverse.map b) ≫ (I j).ringUnderlying.hom).hom.app W t)
+          (((u.inverse.map x) ≫ (I n).moduleUnderlying.inv.app P).hom.app W t)) ∧
+    (∀ (n j : ℕ) (h : n < j) (P : systemLevel BY n),
+    ((ordinary n).hom.app P).app j = 0) ∧
+    (∀ (n : ℕ) (P : systemLevel BY n),
+    ((ordinary n).hom.app P).app n ≫
+        ((systemSingleBelow SX TX BX n (Nat.le_refl n) ≪≫ TX.ordinaryUnit BX n)).hom.app
+          ((F.levelInverseImage n).obj P) =
+      (F.evaluation n).hom.app ((systemSingleFunctor SY TY BY n).obj P) ≫
+        (F.levelInverseImage n).map
+          ((systemSingleBelow SY TY BY n (Nat.le_refl n) ≪≫
+            TY.ordinaryUnit BY n).hom.app P)) := by
+  sorry
 
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)

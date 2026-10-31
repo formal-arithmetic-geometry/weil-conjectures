@@ -62,6 +62,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.ProperBaseChange.RingedSliceExtensionTensorHomData
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-!
 # The open-immersion piece of the projection formula
@@ -151,6 +154,31 @@ private theorem localizedDerivedUnit_isIso {Z X : Scheme.{u}}
     (NatTrans.isIso_app_iff_of_iso adj.unit (DerivedCategory.Q.objObjPreimageIso M)).mp
       (hQ (DerivedCategory.Q.objPreimage M))
   exact NatIso.isIso_of_isIso_app adj.unit
+
+private theorem mixedTensor {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R)
+    (P Q : CochainComplex (Mod R) ℤ) (hq : resolving R Q) :
+    Nonempty (a.functor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≅
+      DerivedCategory.Q.obj ((total R).obj (P, Q))) := by
+  letI := SheafOfModules.monoidalCategory R
+  letI := a.preadditive
+  obtain ⟨A, f, hk, hf, hqf, _⟩ := CochainComplex.exists_isKFlatResolutionIndependentCoefficients P
+  let ha : resolving R A := ⟨hk, fun n ↦
+    (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (A.X n)).symm (hf n)⟩
+  haveI : QuasiIso f := hqf
+  haveI : IsIso (DerivedCategory.Q.map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).2 hqf
+  let g := HomologicalComplex.mapBifunctorMap f (𝟙 Q) (tensor R) (.up ℤ)
+  have hg : QuasiIso g := by
+    have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic f).1 hqf
+    have ht := hq.1 (CochainComplex.mappingCone f) hc
+    apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+    intro i
+    exact (ht i).of_iso (CochainComplex.mapBifunctorMappingCone₁Iso f Q (tensor R))
+  letI : IsIso (DerivedCategory.Q.map g) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ g).2 hg
+  exact ⟨a.functor.mapIso (Iso.prod (asIso (DerivedCategory.Q.map f)).symm
+      (Iso.refl _)) ≪≫
+    (a.representative.app (⟨A, ha⟩, ⟨Q, hq⟩)).symm ≪≫ asIso (DerivedCategory.Q.map g)⟩
 
 private theorem tensor_sheafification_naturality
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
@@ -307,5 +335,34 @@ private theorem extension_total_iso (R : Sheaf J CommRingCat.{u + 1}) (U : C)
         rw [V.map_id, tensorHom_id, tensorHom_id] at hh
         exact hh.symm)
   exact ⟨t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ)⟩
+
+private theorem tensor_extension_supported (R : Sheaf J CommRingCat.{u + 1}) (U : C)
+    (a : TensorModel R) (E : Der (R.over U)) (F : Der R) :
+    (localizedModuleExtension R U).mapDerivedCategory.essImage
+      (a.functor.obj ((localizedModuleExtension R U).mapDerivedCategory.obj E, F)) := by
+  let L := localizedModuleExtension R U
+  let P := DerivedCategory.Q.objPreimage E
+  let N := DerivedCategory.Q.objPreimage F
+  obtain ⟨Q, q, hk, hf, hq, _⟩ := CochainComplex.exists_isKFlatResolutionIndependentCoefficients N
+  haveI : IsIso (DerivedCategory.Q.map q) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).2 hq
+  let hQ : resolving R Q := ⟨hk, fun n ↦
+    (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (Q.X n)).symm (hf n)⟩
+  let eF : DerivedCategory.Q.obj Q ≅ F :=
+    asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso F
+  let eE : L.mapDerivedCategory.obj E ≅
+      DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) :=
+    L.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso E).symm ≪≫
+      L.mapDerivedCategoryFactors.app P
+  obtain ⟨mixed⟩ := mixedTensor a ((L.mapHomologicalComplex (.up ℤ)).obj P) Q hQ
+  obtain ⟨totalIso⟩ := extension_total_iso R U P Q
+  let W := (total (R.over U)).obj
+    (P, ((localizedModuleRestriction R U).mapHomologicalComplex (.up ℤ)).obj Q)
+  let e : a.functor.obj (L.mapDerivedCategory.obj E, F) ≅
+      L.mapDerivedCategory.obj (DerivedCategory.Q.obj W) :=
+    a.functor.mapIso (Iso.prod eE eF.symm) ≪≫ mixed ≪≫
+      DerivedCategory.Q.mapIso totalIso.symm ≪≫ (L.mapDerivedCategoryFactors.app W).symm
+  exact Functor.essImage.ofIso e.symm
+    (L.mapDerivedCategory.obj_mem_essImage (DerivedCategory.Q.obj W))
 
 end SheafOfModules

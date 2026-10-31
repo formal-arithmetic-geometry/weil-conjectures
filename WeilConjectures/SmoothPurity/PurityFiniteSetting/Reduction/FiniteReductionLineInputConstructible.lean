@@ -30,6 +30,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Finite-Tor constructibility of the shifted root-line input
 
@@ -83,6 +85,7 @@ theorem finiteReductionLineInput_constructible (P : PurityFiniteSetting.{u})
     change ((P.coefficients.l ^ P.level : ℕ) : P.field.k) ≠ 0
     rw [Nat.cast_pow]
     exact pow_ne_zero _ hl⟩
+  have : IsAlgClosed P.field.k := IsAlgClosure.isAlgClosed P.field.k₀
   obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot P.field.k P.diagonalExponent
   let A := P.Ring
   let R := Scheme.proEtaleConstantRing T A
@@ -104,6 +107,7 @@ theorem finiteReductionLineInput_constructible (P : PurityFiniteSetting.{u})
   have ht : Scheme.HasProEtaleTorAmplitude T A K 0 0 := by
     let := SheafOfModules.isMonoidal_W_independentCoefficients R
     let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
+    let : MonoidalPreadditive C := SheafOfModules.monoidalPreadditive_kfi R
     let M := (CochainComplex.singleFunctor C 0).obj U
     apply (Scheme.finiteCoefficient_torAmplitude_iff_flatModel P.field P.coefficients.l
       P.coefficients.different P.extension P.level P.level_pos T K hK 0 0 le_rfl).2
@@ -114,7 +118,7 @@ theorem finiteReductionLineInput_constructible (P : PurityFiniteSetting.{u})
         · exact ObjectProperty.prop_of_iso _
             (HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0 U i hi).symm
             (ObjectProperty.prop_unit _)
-        · exact ObjectProperty.prop_of_isZero _
+        · exact ObjectProperty.flat_of_isZero
             (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)
       exact (exactFunctor _ _).prop_of_iso
         (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1} R _).symm hflat.2
