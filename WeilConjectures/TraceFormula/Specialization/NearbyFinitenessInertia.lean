@@ -76,10 +76,8 @@ theorem exists_finiteIndex_homology_map_eq_id (K : DerivedCategory C) (a b : ℤ
     { carrier := {g | ∀ q, H g q = 𝟙 _}
       one_mem' := hH₁
       mul_mem' := fun {g h} hg hh q ↦ by
-        change H (g * h) q = 𝟙 _
         rw [hHmul, hg, hh, Category.comp_id]
       inv_mem' := fun {g} hg q ↦ by
-        change H g⁻¹ q = 𝟙 _
         have := hHmul g g⁻¹ q
         rw [mul_inv_cancel, hH₁, hg q, Category.comp_id] at this
         exact this.symm }
