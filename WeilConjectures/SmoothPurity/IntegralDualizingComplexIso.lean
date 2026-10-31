@@ -60,10 +60,12 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 noncomputable instance commShift_finiteEtaleReading : (finiteEtaleReading ℓ E n X).CommShift ℤ :=
   inferInstanceAs (((boundedConstructible _).ι ⋙
     (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
-      (ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]).rightDerivedFunctor).CommShift ℤ)
+      (ν_*(X.left)[ModuleCat.{u + 1}
+        (integersModPowCoeff.{u} ℓ E n)]).rightDerivedFunctor).CommShift ℤ)
 
 variable {ℓ E n X}
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Isomorphisms of étale readings, up to a shift, come from isomorphisms of bounded
 constructible `𝒪_E ⧸ ℓⁿ`-complexes. -/
 lemma nonempty_shift_iso_of_finiteEtaleReading
@@ -74,6 +76,7 @@ lemma nonempty_shift_iso_of_finiteEtaleReading
   ⟨(finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).preimageIso
     (((finiteEtaleReading ℓ E n X).commShiftIso m).app C ≪≫ e)⟩
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Morphisms between shifted bounded constructible `𝒪_E ⧸ ℓⁿ`-complexes are finite as soon as
 those between their étale readings are. -/
 lemma finite_shift_hom_of_finiteEtaleReading
@@ -81,7 +84,8 @@ lemma finite_shift_hom_of_finiteEtaleReading
     (h : Finite ((shiftFunctor _ m).obj ((finiteEtaleReading ℓ E n X).obj C) ⟶
       (finiteEtaleReading ℓ E n X).obj C')) :
     Finite (C⟦m⟧ ⟶ C') :=
-  @Finite.of_equiv _ _ h ((finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).homEquiv.trans
+  @Finite.of_equiv _ _ h
+    ((finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).homEquiv.trans
     ((((finiteEtaleReading ℓ E n X).commShiftIso m).app C).homCongr (Iso.refl _))).symm
 
 end Reading
@@ -99,7 +103,8 @@ lemma nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek :
     Nonempty ((shiftFunctor _ (2 * d : ℤ)).obj ((finiteEtaleReading ℓ E n X).obj
         ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj
           (integralTateTwistBoundedConstructible ℓ E X.hom d))) ≅
-      (finiteEtaleReading ℓ E n X).obj ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj
+      (finiteEtaleReading ℓ E n X).obj
+        ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj
         ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f).obj (𝟙_ _)))) := by
   have := HasCompactification.of_over f
   have : HasInvertibleExponent (integersModPowCoeff.{u} ℓ E n) X.left :=
@@ -145,12 +150,14 @@ theorem nonempty_iso_integralTateTwist_upperShriekUnit :
     ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app W).symm
   have hne (n : ℕ) : Nonempty ((Lred (n + 1)).obj ((shiftFunctor _ (2 * d : ℤ)).obj (ι.obj T)) ≅
       (Lred (n + 1)).obj (ι.obj W)) := by
-    obtain ⟨e⟩ := nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek (ℓ := ℓ) (E := E) (n + 1) f d
+    obtain ⟨e⟩ := nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek (ℓ := ℓ)
+      (E := E) (n + 1) f d
     obtain ⟨e'⟩ := nonempty_shift_iso_of_finiteEtaleReading (2 * d : ℤ) e
     exact ⟨A (n + 1) ≪≫ (ιn (n + 1)).mapIso e' ≪≫ (B (n + 1)).symm⟩
   have hfin' (n : ℕ) : Finite ((Lred (n + 1)).obj ((shiftFunctor _ (2 * d : ℤ)).obj (ι.obj T)) ⟶
       (Lred (n + 1)).obj (ι.obj W)) := by
-    obtain ⟨e⟩ := nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek (ℓ := ℓ) (E := E) (n + 1) f d
+    obtain ⟨e⟩ := nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek (ℓ := ℓ)
+      (E := E) (n + 1) f d
     have h₁ : Finite ((shiftFunctor _ (2 * d : ℤ)).obj ((finiteEtaleReading ℓ E (n + 1) X).obj
         ((red (n + 1)).obj T)) ⟶ (finiteEtaleReading ℓ E (n + 1) X).obj ((red (n + 1)).obj W)) :=
       let eT := (shiftFunctor _ (2 * d : ℤ)).mapIso
@@ -172,7 +179,8 @@ theorem nonempty_iso_integralTateTwist_upperShriekUnit :
     infer_instance
   have hg' : IsIso ((red 1).map g) := by
     have := hg
-    have h := (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E 1).hom.naturality g
+    have h :=
+      (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E 1).hom.naturality g
     have : IsIso ((ιn 1).map ((red 1).map g)) := by
       have : IsIso ((ιn 1).map ((red 1).map g) ≫
           (boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E 1).hom.app W) := by

@@ -24,7 +24,8 @@ complex `ω_f = Rf^! ℚ̄_ℓ` is a dualizable object of `Dᵇc(X)⟦ℚ̲̄_�
 
 Dualizability is local on `X` for open covers, so we may assume `X` connected and `f` of pure
 relative dimension `d`. Then `ω_f` is the extension of scalars along `𝒪_E ⟶ ℚ̄_ℓ` of the integral
-relative dualizing complex `Rf^! 𝒪_E` (`ProEtale.CondensedRing.integersToPadicAlgClUpperShriekUnitIso`,
+relative dualizing complex `Rf^! 𝒪_E`
+(`ProEtale.CondensedRing.integersToPadicAlgClUpperShriekUnitIso`,
 the coefficient comparison for `f^!`), which is isomorphic to the dualizable shifted integral Tate
 twist `𝒪_E(d)[2d]` (`ProEtale.CondensedRing.nonempty_iso_integralTateTwist_upperShriekUnit`, whose
 finiteness hypothesis holds on a connected scheme by
@@ -52,7 +53,8 @@ variable {X Y : Over (Spec (.of k))}
 
 /-- The extension of scalars along `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` of the integral relative dualizing complex is
 the relative dualizing complex: `T_X (Rf^! 𝒪_E) ≅ Rf^! ℚ̄_ℓ`, the coefficient comparisons for `f^!`
-(`boundedConstructibleUpperShriekExtendScalarsIso`, `isIso_boundedConstructibleUpperShriekToPadicAlgCl`)
+(`boundedConstructibleUpperShriekExtendScalarsIso`,
+`isIso_boundedConstructibleUpperShriekToPadicAlgCl`)
 at the unit, followed by the unit comparisons of the monoidal functors `T`. -/
 noncomputable def integersToPadicAlgClUpperShriekUnitIso (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (f : X ⟶ Y) :
