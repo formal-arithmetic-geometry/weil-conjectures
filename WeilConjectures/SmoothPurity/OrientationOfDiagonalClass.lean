@@ -46,6 +46,7 @@ instance smoothOfRelativeDimension_pullback_fst_left :
   have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
   MorphismProperty.of_isPullback (isPullback_pullback_left f f).flip ‹_›
 
+omit [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] in
 include d in
 /-- The purity map of the diagonal at `ω_{p₁}` is invertible, `ω_{p₁}` being dualizable. -/
 lemma isIso_upperShriekUnitTensorMap_diagonal_upperShriek_unit :
@@ -61,7 +62,8 @@ noncomputable def tateTwistIsoUpperShriekUnitOfDiagonal
     (cl : (boundedConstructibleUpperShriek ℓ (pullback.diagonal f)).obj
       (boundedConstructibleTateTwist ℓ (pullback f f) d (2 * d)) ≅ 𝟙_ _)
     (hbc : IsIso (diagonalBaseChangeMap ℓ f)) :
-    boundedConstructibleTateTwist ℓ X d (2 * d) ≅ (boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _) :=
+    boundedConstructibleTateTwist ℓ X d (2 * d) ≅
+      (boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _) :=
   (dualizingComplexTateTwistIsoOfDiagonal ℓ f d cl hbc
     (isIso_upperShriekUnitTensorMap_diagonal_upperShriek_unit ℓ f d)).symm
 
