@@ -14356,6 +14356,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMapInvariants
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChangeTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+public import WeilConjectures.SixFunctors.NearbyCycles.InvariantRetraction
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
