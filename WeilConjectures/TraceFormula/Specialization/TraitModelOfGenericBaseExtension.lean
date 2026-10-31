@@ -12,9 +12,10 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBas
 
 # Extending the coefficients of a trait model over the generic base to its total space
 
-Let `M` be a trait model of `X₁` over the generic base (`NearbyCyclesModel.IsTraitModelOfGenericBase`):
-its generic fibre `𝒳_η` is an open of `X₁ ×_F η`, and the identification `ε` of its geometric
-generic fibre factors through `𝒳_η ⟶ X₁`. For a bounded constructible complex `A` on `X₁`, the
+Let `M` be a trait model of `X₁` over the generic base
+(`NearbyCyclesModel.IsTraitModelOfGenericBase`): its generic fibre `𝒳_η` is an open of
+`X₁ ×_F η`, and the identification `ε` of its geometric generic fibre factors through
+`𝒳_η ⟶ X₁`. For a bounded constructible complex `A` on `X₁`, the
 extension by zero along the open immersion `𝒳_η ⟶ 𝒳` of the pullback of `A` to `𝒳_η` is a
 bounded constructible complex `B` on the total space with `j^* B ≅ ε^* A`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_extension_total`). This is the form of the
@@ -54,6 +55,18 @@ theorem IsTraitModelOfGenericBase.exists_extension_total
         (condensedRingObj Λ M.total)),
       boundedConstructible (condensedRingObj Λ M.total) B ∧
         Nonempty (L((M.j)^*⟦Λ⟧).obj B ≅ L((M.ε)^*⟦Λ⟧).obj A) := by
-  sorry
+  have hM := h.isTraitModelOver
+  obtain ⟨w, -, -, hw⟩ := h.exists_openImmersion_genericFibre
+  have := hM.isTraitModel.isNoetherian_total
+  let a : pullback q (traitGenericSpec k') ⟶ M.total := pullback.fst _ _
+  let s := genericFibreInclusion M q g hM.isPullback_j.w
+  let e := w ≫ pullback.fst X₁.hom ι
+  have hs : s ≫ a = M.j := genericFibreInclusion_fst _ _ _ _
+  refine ⟨D((a)_!open⟦Λ⟧).obj (L((e)^*⟦Λ⟧).obj A),
+    boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ a _
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ e A hA), ⟨?_⟩⟩
+  exact (leftDerivedUpperStarCompOfEq Λ hs).app _ ≪≫
+    (L((s)^*⟦Λ⟧)).mapIso (asIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction'
+      Λ a).unit.app _)).symm ≪≫ ((leftDerivedUpperStarCompOfEq Λ hw).app A).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
