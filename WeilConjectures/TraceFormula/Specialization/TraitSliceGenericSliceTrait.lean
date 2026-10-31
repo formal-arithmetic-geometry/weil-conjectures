@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeFiniteCoefficient
@@ -54,22 +55,6 @@ namespace AlgebraicGeometry
 namespace GenericSliceTrait
 
 variable {k' : Type u} [Field k'] (D : GenericSliceTrait k')
-
-/-- The local injection `R ⟶ K⟦t⟧` restricts to the coefficientwise map on `k'⟦t⟧`. -/
-lemma ι_comp_φ : D.ι.comp D.φ = PowerSeries.map (algebraMap k' (traitSliceField k')) := by
-  have h : Spec.map (CommRingCat.ofHom (D.ι.comp D.φ)) =
-      Spec.map (CommRingCat.ofHom (PowerSeries.map (algebraMap k' (traitSliceField k')))) := by
-    rw [CommRingCat.ofHom_comp, Spec.map_comp, D.spec_φ, ← Category.assoc, D.spec_ι_comp,
-      traitSlice_over]
-    rfl
-  exact congrArg CommRingCat.Hom.hom (Spec.map_injective h)
-
-/-- `t` is a uniformizer of `K⟦t⟧` coming from `R`: the change of trait `Spec K⟦t⟧ ⟶ S'` is
-unramified. -/
-lemma maximalIdeal_powerSeries_eq_map_ι :
-    maximalIdeal (PowerSeries (traitSliceField k')) = (maximalIdeal D.R).map D.ι := by
-  rw [D.maximalIdeal_eq, Ideal.map_map, ι_comp_φ,
-    AlgebraicGeometry.maximalIdeal_powerSeries_eq_map k' (traitSliceField k')]
 
 /-- The characteristic of `k'` divides every natural number vanishing in the residue field of a
 generic slice trait. -/
@@ -293,7 +278,7 @@ theorem isIso_pullbackExchange_traitSliceGenericSliceTraitHom_finite
     (N := sliceTraitModel D.toSliceTrait M b) (f := traitSliceGenericSliceTraitTotal b D)
     (f' := traitSliceGenericSliceTraitSpecial b D) (hq₁ := by exact_mod_proofs h₁)
     (hq₁' := by exact_mod_proofs h₂) (hq₁'' := by exact_mod_proofs h₃)
-    D.injective_ι D.maximalIdeal_powerSeries_eq_map_ι (ringChar k')
+    D.injective_ι D.maximalIdeal_eq_map_ι (ringChar k')
     D.ringChar_dvd_of_natCast_eq_zero hpT D.injective_a (algebraMap_traitGenericField_injective _)
     D.isAlgebraic_a (isAlgebraic_traitGenericField _) D.ωK_comp_a
     PowerSeries.ker_coeff_eq_max_ideal (traitSliceGenericSliceTraitHom hM b hb D)
