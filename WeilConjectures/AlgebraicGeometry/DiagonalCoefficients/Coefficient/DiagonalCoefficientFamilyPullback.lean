@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientDiagrams
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientPullback
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalScalarPullMap
 
 /-! # Pullback of the complete diagonal coefficient family
 
@@ -41,14 +42,7 @@ def QuotientPullMap (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (m : (upperStar Ab.{u + 1} f).obj (quotientLine l E π n S).X ⟶
       (quotientLine l E π n X).X) : Prop :=
-  (upperStar Ab.{u + 1} f).map
-      (Mod.extendπ (coefficientMap (quotientMap l E π n) S) (spIntegralTwist S l E)) ≫ m =
-    Functor.OplaxMonoidal.δ (upperStar Ab.{u + 1} f)
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} (completedResidue l E π n)) S)
-      (spIntegralTwist S l E).X ≫
-    (condensedPullbackHom
-        (Profinite.continuousMapRingObj.{u} (completedResidue l E π n)) f ⊗ₘ
-      spIntegralComparison f l E) ≫
-    Mod.extendπ (coefficientMap (quotientMap l E π n) X) (spIntegralTwist X l E)
+  ScalarPullMap (quotientMap l E π n) f (spIntegralTwist S l E)
+    (spIntegralTwist X l E) (spIntegralComparison f l E) m
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
