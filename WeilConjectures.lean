@@ -15047,7 +15047,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescentFiniteSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRetraction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit

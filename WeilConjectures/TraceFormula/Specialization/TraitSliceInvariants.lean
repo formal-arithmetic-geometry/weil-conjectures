@@ -184,7 +184,8 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
   have hD := exists_subgroup_pullbackExchange_sliceTraitChangeHom (ℓ := ℓ) hM hb
     (C := L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) hA'
   obtain ⟨V, hV, htriv, r, hr, havg⟩ := hD
-  have hs := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (ℓ := ℓ) hM (A := A) hA
+  have hs := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (ℓ := ℓ)
+    (K := traitSliceField k') hM (A := A) hA
   refine ⟨V, hV, fun σ hσ ↦ eq_id_of_naturality_of_iso _
     (fun g ↦ Hom.autAction_naturality _ _ g)
     ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
