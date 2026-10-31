@@ -692,11 +692,6 @@ abbrev TowerComparison.roos (d : TowerComparison l E j) :
     integralOperationsPullbackComplexFunctor l E j :=
   d.val.2.2.2
 
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 

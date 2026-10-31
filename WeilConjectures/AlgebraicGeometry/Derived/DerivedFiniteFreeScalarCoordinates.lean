@@ -663,8 +663,6 @@ variable {C' : Type u} [SmallCategory C'] {J' : GrothendieckTopology C'}
     IS.ringUnderlying.hom = IR.ringUnderlying.hom ≫
       (sheafCompose J' (CategoryTheory.forget CommRingCat)).map a')
 
-include ha in
-include ha in
 attribute [local irreducible] transportedPower transportedBasis
 
 attribute [local semireducible] tensorFunctor

@@ -787,7 +787,6 @@ noncomputable def pointDerivedTensorUnit :
     Functor.mapDerivedCategoryIdIso _
 
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsAlgClosed k] in
 attribute [local irreducible] completedScalarChangeData
   completedIntegralCoefficientSheafUnrestricted
 

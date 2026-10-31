@@ -296,8 +296,6 @@ Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison). -/
 abbrev sectionComparisonBraiding : BraidedCategory (Sheaf J AddCommGrpCat.{u + 1}) :=
   (Sheaf.symmetricCategory J AddCommGrpCat.{u + 1}).toBraidedCategory
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
@@ -439,8 +437,6 @@ section ProEtaleComparisonAPI
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-attribute [local instance 30000] sectionProEtaleBraiding
-attribute [local instance] sectionProEtaleRingComm
 
 end ProEtaleComparisonAPI
 

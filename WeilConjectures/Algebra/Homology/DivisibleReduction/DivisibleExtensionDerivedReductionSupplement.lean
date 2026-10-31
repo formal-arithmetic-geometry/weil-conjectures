@@ -962,8 +962,6 @@ variable {J} (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency false
 
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] in
 attribute [local irreducible] coefficientUnit
 
 section PresentationConstruction

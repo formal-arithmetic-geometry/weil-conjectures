@@ -349,10 +349,6 @@ private lemma good_shift (P : CochainComplex (integralTowerModules l E W) ℤ)
   exact SheafOfModules.KFlatFixedTensor.shift_kFlat
     (completedIntegralCommRingSheafUnrestricted l E W) P hP.1 m
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
 attribute [local irreducible] IntegralOnSlice.completion
   IntegralOnSlice.completionComparison IntegralOnSlice.completionUnit
 

@@ -330,7 +330,6 @@ private theorem ordinaryProjection
   erw [hsection, ha]
   rfl
 
-omit [EssentiallySmall.{w} C] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in

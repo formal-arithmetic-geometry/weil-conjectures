@@ -132,7 +132,6 @@ open AlgebraicGeometry.ProEtale.VaryingRing
 
 variable [UnivLE.{max c v, r}]
 
-omit [UnivLE.{max c v, r}] in
 attribute [local instance 2000] ringSheafCompose
 
 omit [UnivLE.{max c v, r}] in
@@ -173,7 +172,6 @@ private theorem setSheafFiniteLimits {C : Type c} [Category.{v} C]
 
 attribute [local instance 2000] setSheafFiniteLimits
 
-omit [UnivLE.{max c v, r}] in
 attribute [local instance 2000] setSheafFiniteProducts
 
 omit [UnivLE.{max c v, r}] in

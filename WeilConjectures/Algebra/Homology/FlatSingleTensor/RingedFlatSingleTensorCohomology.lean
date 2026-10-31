@@ -142,9 +142,7 @@ set_option backward.defeqAttrib.useBackward true in
 
 end GenericCollapse
 
-omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] totalTensor ordinaryTensor

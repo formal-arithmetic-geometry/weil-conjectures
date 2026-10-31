@@ -1231,7 +1231,6 @@ private theorem composition_site_square {X Y Z : Scheme.{u}}
 
 end
 
-omit [CommRing A] [Finite A] in
 attribute [local irreducible] compactExchangeTransportComparison
   leftDerivedUpperStarComparisonIso properTransportRefinement properTransportRefinementPlus
   coherenceProEtaleCompositor coherenceEtaleCompositor originComposition

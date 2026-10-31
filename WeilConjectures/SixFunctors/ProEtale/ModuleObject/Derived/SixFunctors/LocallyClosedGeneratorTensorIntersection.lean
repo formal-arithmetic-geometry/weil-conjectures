@@ -950,7 +950,6 @@ variable {D : Type uK} [Category.{vK} D] [Abelian D] [MonoidalCategory D]
 
 attribute [local instance] singleDerivedMonoidalExists
 
-omit [Abelian.HasFunctorialFlatResolution D] [HasDerivedCategory D] in
 attribute [local irreducible] Functor.LaxMonoidal.μ
 
 set_option backward.isDefEq.respectTransparency true in
