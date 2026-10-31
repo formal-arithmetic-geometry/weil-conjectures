@@ -401,4 +401,60 @@ theorem exists_retraction_pullbackExchange_of_comp_galoisLayer {X S S' : Scheme.
   exact exists_retraction_pullbackExchange_comp_of_isIso Λ (ρ.comp ψ) χ φ
     (Category.id_comp _) (by simp) htot hgen A hχ s σ n h₂
 
+/-- **Averages along a composite with invertible second exchange, over the identities**: if the
+pullback exchange of `ψ` is invertible at `C` and that of `χ` (with the components of `ρ ≫ ψ`, all
+over `𝟙 X`) is split at `C` with average the sum of the actions of the `σ i`, then so is that of
+`ρ` at `C`. -/
+theorem exists_retraction_pullbackExchange_of_comp_of_isIso_id {X S₀ S₁ S₂ : Scheme.{u}}
+    {M₀ : NearbyCyclesModel X S₀} {M₁ : NearbyCyclesModel X S₁} {M₂ : NearbyCyclesModel X S₂}
+    {f' : S₀ ⟶ S₁} {g' : S₁ ⟶ S₂} {fg' : S₀ ⟶ S₂} (ρ : M₀.Hom M₁ (𝟙 X) f')
+    (ψ : M₁.Hom M₂ (𝟙 X) g') (χ : M₀.Hom M₂ (𝟙 X) fg') (h' : f' ≫ g' = fg')
+    (htot : ρ.total ≫ ψ.total = χ.total) (hgen : ρ.generic ≫ ψ.generic = χ.generic)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) (hψi : IsIso ((ψ.pullbackExchange Λ).app C)) {ι : Type*}
+    (s : Finset ι) (σ : ι → M₀.Hom M₀ (𝟙 X) (𝟙 S₀)) (n : ℕ)
+    (hχ : ∃ r, (χ.pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
+      n • (r ≫ (χ.pullbackExchange Λ).app C) = ∑ i ∈ s, (σ i).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C)) :
+    ∃ r', (ρ.pullbackExchange Λ).app C ≫ r' = 𝟙 _ ∧
+      n • (r' ≫ (ρ.pullbackExchange Λ).app C) =
+        ∑ i ∈ s, (σ i).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  have t₁ : ∃ r, (ρ.pullbackExchange Λ).app (L((𝟙 X)^*⟦Λ⟧).obj C) ≫ r = 𝟙 _ ∧
+      n • (r ≫ (ρ.pullbackExchange Λ).app (L((𝟙 X)^*⟦Λ⟧).obj C)) =
+        ∑ i ∈ s, (σ i).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj (L((𝟙 X)^*⟦Λ⟧).obj C)) :=
+    exists_retraction_pullbackExchange_of_comp_of_isIso Λ (X₀ := X) (X₁ := X) (X₂ := X)
+      (S₀ := S₀) (S₁ := S₁) (S₂ := S₂) (M₀ := M₀) (M₁ := M₁) (M₂ := M₂) (f := 𝟙 X)
+      (f' := f') (g := 𝟙 X) (g' := g') (fg := 𝟙 X) (fg' := fg') ρ ψ χ (Category.id_comp _) h'
+      htot hgen C hψi s σ n hχ
+  have : IsIso ((leftDerivedUpperStarId Λ X).app C).hom := Iso.isIso_hom _
+  have t₂ := exists_retraction_pullbackExchange_app_of_isIso Λ (X₀ := X) (X₁ := X) (S₀ := S₀)
+    (S₁ := S₁) (f := 𝟙 X) ρ s σ (A := L((𝟙 X)^*⟦Λ⟧).obj C) (A' := C)
+    ((leftDerivedUpperStarId Λ X).app C).hom n t₁
+  exact t₂
+
+/-- `NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_id` for the actions of
+a group `G` through a quotient by a subgroup of finite index acting trivially: the form of the
+identification of nearby cycles with invariants. -/
+theorem exists_subgroup_pullbackExchange_of_comp_of_isIso_id {X S₀ S₁ S₂ : Scheme.{u}}
+    {M₀ : NearbyCyclesModel X S₀} {M₁ : NearbyCyclesModel X S₁} {M₂ : NearbyCyclesModel X S₂}
+    {f' : S₀ ⟶ S₁} {g' : S₁ ⟶ S₂} {fg' : S₀ ⟶ S₂} (ρ : M₀.Hom M₁ (𝟙 X) f')
+    (ψ : M₁.Hom M₂ (𝟙 X) g') (χ : M₀.Hom M₂ (𝟙 X) fg') (h' : f' ≫ g' = fg')
+    (htot : ρ.total ≫ ψ.total = χ.total) (hgen : ρ.generic ≫ ψ.generic = χ.generic)
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) (hψi : IsIso ((ψ.pullbackExchange Λ).app C)) {G : Type*}
+    [Group G] (act : G → M₀.Hom M₀ (𝟙 X) (𝟙 S₀))
+    (h : ∃ (V : Subgroup G) (_ : Fintype (G ⧸ V)),
+      (∀ σ ∈ V, (act σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _) ∧
+      ∃ r, (χ.pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
+        Fintype.card (G ⧸ V) • (r ≫ (χ.pullbackExchange Λ).app C) =
+          ∑ σ : G ⧸ V, (act σ.out).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C)) :
+    ∃ (V : Subgroup G) (_ : Fintype (G ⧸ V)),
+      (∀ σ ∈ V, (act σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) = 𝟙 _) ∧
+      ∃ r, (ρ.pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
+        Fintype.card (G ⧸ V) • (r ≫ (ρ.pullbackExchange Λ).app C) =
+          ∑ σ : G ⧸ V, (act σ.out).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
+  obtain ⟨V, hV, htriv, hχ⟩ := h
+  exact ⟨V, hV, htriv, exists_retraction_pullbackExchange_of_comp_of_isIso_id Λ (X := X)
+    (S₀ := S₀) (S₁ := S₁) (S₂ := S₂) (M₀ := M₀) (M₁ := M₁) (M₂ := M₂) ρ ψ χ h' htot hgen C hψi
+    Finset.univ (fun σ : G ⧸ V ↦ act σ.out) _ hχ⟩
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

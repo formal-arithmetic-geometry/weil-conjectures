@@ -62,9 +62,10 @@ the cartesian step**: the analogue of
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian` for the
 exchange `α_θ`, deduced from it through the invertible exchange of the change of trait.
 
-Unfinished: the transport of the average along that exchange
+The average is transported along that exchange
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso`, then
-`NearbyCyclesModel.exists_retraction_pullbackExchange_app_of_isIso`) times out when instantiated. -/
+`NearbyCyclesModel.exists_retraction_pullbackExchange_app_of_isIso`), combined in
+`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_id`. -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian [IsAlgClosed K]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -93,10 +94,21 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian 
         ∑ σ : GenericAut k' K ⧸ V,
           (baseChangeAut hM b hb (traitSlice x) (traitSlice_over x) σ.out).autAction
             (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
-  -- Missing: the transport of the average along the invertible exchange of the change of trait
-  -- (`exists_retraction_pullbackExchange_of_comp_of_isIso` and
-  -- `exists_retraction_pullbackExchange_app_of_isIso`); the instantiation times out.
-  sorry
+  have key := exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian
+    hM b hb (traitSlice x) (traitSlice_over x) hC hB eB hM1
+  have hψ := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (ℓ := ℓ) (K := K) hM
+    (A := C) hC
+  have t := exists_subgroup_pullbackExchange_of_comp_of_isIso_id (Profinite.padicAlgClRingObj ℓ)
+    (X := X) (M₀ := baseChange hM b hb (traitSlice x) (traitSlice_over x))
+    (M₁ := baseChange hM q (Category.comp_id q) (traitMap k' K) (Category.comp_id _)) (M₂ := M)
+    (geometricSliceTraitChangeHom hM x hb)
+    (baseChangeHom hM q (Category.comp_id q) (traitMap k' K) (Category.comp_id _))
+    (baseChangeHom hM b hb (traitSlice x) (traitSlice_over x))
+    (geometricSliceTraitChangeHom_special_comp hM x hb)
+    (geometricSliceTraitChangeHom_total_comp hM x hb)
+    (geometricSliceTraitChangeHom_generic_comp hM x hb) C (by exact_mod_proofs hψ)
+    (baseChangeAut hM b hb (traitSlice x) (traitSlice_over x)) (by exact_mod_proofs key)
+  exact_mod_proofs t
 
 variable [Fact (ringChar k').Prime]
 
