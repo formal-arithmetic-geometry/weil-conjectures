@@ -490,6 +490,8 @@ lemma Hom.boundedConstructibleAutAction_tensor (s : M.Hom M (𝟙 _) (𝟙 _))
   exact s.autAction_tensor _ A.obj B.obj
 
 
+omit [Fact (Nat.Prime (ringChar k))] [Fact (Nat.Prime (ringChar k'))] [IsSeparated X.hom]
+  [IsSeparated X'.hom] in
 /-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`** (blueprint
 `det-tf-nearby-duality-slice`, "`P` acts trivially on the twist"): `σ ∘ ρ(s) = σ`. The action
 commutes with the shifts (`NearbyCyclesModel.Hom.autAction_shift_comp`), so does `σ`
@@ -544,6 +546,7 @@ noncomputable def tateTwistDerivedZeroShiftTensorShiftIso (Z : Scheme.{u}) {a b 
       ((tateTwistDerivedZeroIso ℓ Z ⊗ᵢ tateTwistDerivedZeroIso ℓ Z) ≪≫ λ_ _) ≪≫
     (shiftFunctorZero' _ (a + b) h).app _
 
+omit [Fact (Nat.Prime (ringChar k))] [IsSeparated X.hom] in
 /-- **The twist `ℚ̄_ℓ(0)[n]` is invertible**: its inverse is `ℚ̄_ℓ(0)[-n]`
 (`ProEtale.CondensedRing.tateTwistDerivedZeroShiftTensorShiftIso`). -/
 theorem isInvertible_boundedConstructibleTateTwist_zero (n : ℤ) :
