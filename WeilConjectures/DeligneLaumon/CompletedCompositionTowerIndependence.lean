@@ -120,6 +120,8 @@ theorem sfCompletedCompositionTransport_independent
     (hfg' : SfCompletedRefinementSpec l E rfg' K.obj ρfg')
     : sfCompletedCompositionTransport l E cf cg cfg K.obj d e hη hLambda ρf ρg ρfg =
       sfCompletedCompositionTransport l E cf cg cfg K.obj d' e' hη' hLambda' ρf' ρg' ρfg' := by
+  -- BLUEPRINT QUESTION: The statement uses the withdrawn completed coefficient model.
+  -- coord/brief-stage3.md requires stopping here; see the delivery report.
   sorry
 
 end WeilConjectures

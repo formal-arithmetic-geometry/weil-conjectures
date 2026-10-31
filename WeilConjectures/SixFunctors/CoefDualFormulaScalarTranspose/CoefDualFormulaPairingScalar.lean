@@ -89,6 +89,8 @@ theorem formulaPairing_scalar
       ((sfConstructibleIntegralScalarExtension D.p l hl E L i Y).obj M)
       ((supportScalarIso D l hl E f c L i K).inv ≫
         (integralScalarExtension l E L i Y).map g) := by
+  -- BLUEPRINT QUESTION: this statement requires the withdrawn coefficient model.
+  -- See report.md for the current blueprint comparison; no proof is claimed.
   sorry
 
 end WeilConjectures.CoefDualFormulaScalarTranspose

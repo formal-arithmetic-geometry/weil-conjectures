@@ -57,6 +57,11 @@ theorem scalarReductionDerivedRestriction_bounds
         HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E (m + 1))
           ((scalarReductionDerivedExtension.{u, u} l E T m).obj
             ((scalarReductionDerivedRestriction.{u, u} l E T n).obj K)) a b := by
+  -- BLUEPRINT QUESTION: the released restatement order remains unresolved (2026-11-01).
+  -- The finite-Tor node now records condensedConstructibleFiniteTor, whereas this
+  -- signature and its consumer still use the former scalar-reduction categories.
+  -- See coord/repair-notes/lem-sf-regular-quotient-restriction-bounds.json and report.
+  -- Stop here under coord/brief-stage3.md; do not prove the withdrawn coefficient model.
   sorry
 
 end WeilConjectures
