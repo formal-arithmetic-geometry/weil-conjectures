@@ -792,4 +792,32 @@ private theorem descendTensorPresentation
 
 end Generic
 
+section ShiftKFlat
+
+variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+  {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
+
+/-- K-flatness for the canonical sheaf tensor is stable under shifts.
+Source: Stacks, Tag 06YU
+(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
+theorem shift_kFlat
+    (A : CochainComplex (Modules R) ℤ)
+    (hA : CochainComplex.IsKFlatIndependentCoefficients A) (n : ℤ) :
+    CochainComplex.IsKFlatIndependentCoefficients (A⟦n⟧) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let := tensorAdditive R
+  let := tensorObjAdditive R
+  intro E hE
+  have ht := hA E hE
+  have hs : (CochainComplex.mapBifunctor E A (ordinaryTensor R)⟦n⟧).Acyclic := by
+    rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at ht ⊢
+    rw [← HomotopyCategory.shift_quotient_obj]
+    exact (HomotopyCategory.subcategoryAcyclic (Modules R)).le_shift n _ ht
+  intro i
+  exact (hs i).of_iso (CochainComplex.mapBifunctorShift₂Iso E A (ordinaryTensor R) n).symm
+
+end ShiftKFlat
+
 end SheafOfModules.KFlatFixedTensor
