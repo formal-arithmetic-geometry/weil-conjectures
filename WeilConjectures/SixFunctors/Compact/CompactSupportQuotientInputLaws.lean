@@ -143,7 +143,7 @@ private theorem ordinaryId_apply (W : Scheme.{u}) (q : A →+* A)
     (eqToIso (congrArg (proEtaleCoefficientRestrictScalars W) hq))
     (sfOpenCoefficientRestrictionId W A) M U x x x
     (coefficientCast_apply W hq M U x)
-    (AlgebraicGeometry.Scheme.coefficient_id_apply W A M U x)
+    (AlgebraicGeometry.Scheme.coefficientRestrictionId_apply W A M U x)
 
 private theorem derivedId_eq (W : Scheme.{u}) (q : A →+* A)
     (hq : q = RingHom.id A) :
@@ -171,7 +171,7 @@ private theorem ordinaryComp_apply (W : Scheme.{u}) (φ : A →+* B) (ψ : B →
   exact basedEquality (ψ.comp φ)
     (fun χ h ↦ ((ordinaryComp W φ ψ χ h).hom.app M).val.app U x = x)
     (by simpa only [ordinaryComp, eqToIso_refl, Iso.trans_refl] using
-      AlgebraicGeometry.Scheme.restriction_comp_apply W φ ψ M U x) hχ
+      AlgebraicGeometry.Scheme.coefficientComp_hom_apply W φ ψ M U x) hχ
 
 omit [Finite A] [Finite B] [Finite C] in
 private theorem derivedComp_eq (W : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
