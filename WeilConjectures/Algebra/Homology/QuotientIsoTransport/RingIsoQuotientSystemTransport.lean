@@ -396,7 +396,6 @@ private def transportInverse {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
   systemScalarRestrictionComposition a.hom a.inv (𝟙 R) (by simp) ≪≫
     systemScalarRestrictionUnit (𝟙 R) rfl
 
-attribute [local irreducible] strictTransportFunctor
 
 private def scalarTransportEquivalence {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
     Modules R ≌ Modules S where
@@ -834,9 +833,6 @@ private def reductionEvaluation (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c :
     intro M N f
     exact (Category.comp_id _).trans (Category.id_comp _).symm)
 
-attribute [local semireducible] strictTransportFunctor in
-attribute [local semireducible] strictTransportFunctor in
-attribute [local semireducible] strictTransportFunctor in
 private theorem reductionTransition_normalized
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J)) (M : Modules c.pt) {m n : ℕ} (h : m ≤ n)

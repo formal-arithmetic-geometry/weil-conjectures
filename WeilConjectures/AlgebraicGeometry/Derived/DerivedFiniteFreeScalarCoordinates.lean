@@ -109,7 +109,7 @@ theorem coordinateAddCommGrpToTypeCompose {D : Type u} [SmallCategory D]
     (K : GrothendieckTopology D) :
     K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u}) := inferInstance
 
-attribute [local instance 100000] coordinateCommRingToRingCompose coordinateCommRingToTypeCompose
+attribute [local instance 100000] coordinateCommRingToTypeCompose
   coordinateAddCommGrpToTypeCompose
 
 /-- Finite products in a small-site module category, cached from the existing limits instance. -/
@@ -663,7 +663,6 @@ variable {C' : Type u} [SmallCategory C'] {J' : GrothendieckTopology C'}
     IS.ringUnderlying.hom = IR.ringUnderlying.hom ≫
       (sheafCompose J' (CategoryTheory.forget CommRingCat)).map a')
 
-attribute [local irreducible] transportedPower transportedBasis
 
 attribute [local semireducible] tensorFunctor
 
@@ -1001,8 +1000,7 @@ end InverseImageDescent
 
 end CoordinateDescent
 
-attribute [local irreducible] transportedPower transportedBasis
-  FiniteFreeCoordinatePullbackLaws FiniteFreeCoordinatesInverseImage
+attribute [local irreducible] FiniteFreeCoordinatePullbackLaws FiniteFreeCoordinatesInverseImage
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

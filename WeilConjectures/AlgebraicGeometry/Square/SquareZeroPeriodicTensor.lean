@@ -522,9 +522,6 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
-open MonoidalCategory in
-open MonoidalCategory in
-attribute [irreducible] periodicConstantFunctor
 
 end CategoryTheory
 

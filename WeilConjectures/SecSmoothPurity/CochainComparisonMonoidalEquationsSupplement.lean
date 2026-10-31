@@ -18,6 +18,9 @@ sites-cohomology.tex, Tag 07A4.
 (blueprint: lem-pur-cochain-comparison-monoidal-equations)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe w uC vC uD vD uE vE
@@ -54,8 +57,8 @@ private theorem gradedTensorRightR (X Y Z : GradedObject ℤ (Modules R)) :
     GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
 private theorem gradedTensorRightS (X Y Z : GradedObject ℤ (Modules S)) :
     GradedObject.HasGoodTensorTensor₂₃ X Y Z := inferInstance
-attribute [local instance] gradedTensorR gradedTensorS gradedTensorFourR gradedTensorFourS
-  gradedTensorLeftR gradedTensorLeftS gradedTensorRightR gradedTensorRightS
+attribute [local instance] gradedTensorLeftR gradedTensorLeftS gradedTensorRightR
+  gradedTensorRightS
 
 set_option maxHeartbeats 80000 in
 -- Normalize the uniquely determined module unit without unfolding the sheaf tensor.
