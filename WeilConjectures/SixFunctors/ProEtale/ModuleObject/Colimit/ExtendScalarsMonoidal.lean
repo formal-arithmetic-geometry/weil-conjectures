@@ -106,7 +106,7 @@ end Derived
 section BoundedConstructible
 
 variable {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦E⟧` on bounded
 constructible complexes is strong monoidal, with the comparison isomorphisms of

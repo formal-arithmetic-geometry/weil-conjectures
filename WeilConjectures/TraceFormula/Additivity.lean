@@ -98,15 +98,15 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
   have h₁' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ j)
       ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)).1
-    (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
+    (Functor.map_isIso (boundedConstructible _).ι
       ((boundedConstructibleUpperStar _ ℓ j).map
-        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)))))
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j).counit.app K)))
   have h₂' := (NatIso.isIso_map_iff (boundedConstructibleUpperStarCompatibility
     (Profinite.padicAlgClRingObj ℓ) ℓ i)
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)).1
-    (inferInstanceAs (IsIso ((boundedConstructible _).ι.map
+    (Functor.map_isIso (boundedConstructible _).ι
       ((boundedConstructibleUpperStar _ ℓ i).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)))))
+        ((boundedConstructibleUpperStarLowerStarAdjunction ℓ i).unit.app K)))
   have hN := ((boundedConstructible _).ι.map_isZero
     (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j i hcompl.disjoint
       ((boundedConstructibleUpperStar _ ℓ i).obj K))).of_iso

@@ -1,0 +1,247 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.SfWeilSheafComplex
+public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorHom
+public import WeilConjectures.AlgebraicGeometry.LocalFrobeniusTrace
+public import WeilConjectures.AlgebraicGeometry.SfConstructibleHeart
+public import WeilConjectures.AlgebraicGeometry.WeilIndSheafCategory
+public import WeilConjectures.AlgebraicGeometry.RationalStalkExact
+public import Mathlib.LinearAlgebra.Charpoly.Basic
+public import Mathlib.Algebra.Polynomial.Roots
+import WeilConjectures.AlgebraicGeometry.WeilPullbackFibreReturn
+import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
+import Mathlib.LinearAlgebra.Charpoly.ToMatrix
+import Mathlib.FieldTheory.Finiteness
+import WeilConjectures.AlgebraicGeometry.ClosedPointField
+
+/-! # Local Frobenius under rational Weil-sheaf pullback
+
+Source: blueprint main-20261015, sec-deligne-laumon-a1/sk-p-dl-a1-some-weight,
+lem-fd-realified-kernel-real.proof.md, Step 2
+(blueprint: lem-fd-weil-pullback-local-frobenius).
+
+The pullback, fibres and local geometric Frobenius are the existing common-stage
+constructions. Eigenvalues are characteristic-polynomial roots with algebraic multiplicity.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+universe u
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+namespace WeilConjectures
+
+attribute [local irreducible] Scheme.residueField
+
+variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+  (Y₀ : Over (Spec (.of D.k₀)))
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+
+/-- The multiset of local geometric Frobenius eigenvalues, retaining multiplicities.
+The finite-dimensionality used by charpoly is supplied by the actual point category.
+Source: blueprint Step 2, multiset E of local eigenvalues
+(blueprint: lem-fd-weil-pullback-local-frobenius). -/
+def fdWeilLocalEigenvalues (F : sfCommonStageWeilSheaf D c.l c.different Y₀ c.Qbar)
+    (y : {y : Y₀.left // y ∈ closedPoints Y₀.left})
+    (ι : Y₀.left.residueField y.val →+* D.k)
+    (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k) :
+    Multiset c.Qbar :=
+  letI : FiniteDimensional c.Qbar
+      ((wfSheafFibre c.l c.Qbar D c.different Y₀
+        (localClosedPoint D Y₀ y ι hι)).obj F) :=
+    DerivedCategory.coefficientQbarCohomology_finite c.l c.Qbar 0
+    ((wfPointFunctor c.l c.Qbar D c.different Y₀
+      (localClosedPoint D Y₀ y ι hι)).obj F.obj.carrier)
+  (wfSheafClosedFrobenius c.l c.Qbar D c.different Y₀ F y ι hι).hom.charpoly.roots
+
+private theorem roots_pow {K V : Type*} [Field K] [IsAlgClosed K]
+    [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (f : Module.End K V) (n : ℕ) :
+    (f ^ n).charpoly.roots = f.charpoly.roots.map (fun a ↦ a ^ n) := by
+  classical
+  obtain ⟨b, hb⟩ := Module.End.exists_basis_isUpperTriangular_toMatrix f
+  rw [← LinearMap.charpoly_toMatrix _ b, ← LinearMap.toMatrix_pow,
+    (hb.pow n).charpoly_roots_of_injective Function.injective_id,
+    ← LinearMap.charpoly_toMatrix f b,
+    hb.charpoly_roots_of_injective Function.injective_id, Multiset.map_map]
+  congr 1
+  funext i
+  dsimp only [Function.comp_apply]
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [pow_succ, Matrix.mul_apply, pow_succ, ← ih]
+    apply Finset.sum_eq_single i
+    · intro j _ hji
+      rcases lt_or_gt_of_ne hji with hji | hij
+      · rw [(hb.pow n) hji, zero_mul]
+      · rw [hb hij, mul_zero]
+    · simp
+
+private theorem closed_image (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (f₀ : X₀ ⟶ Y₀)
+    (z : {z : X₀.left // z ∈ closedPoints X₀.left}) :
+    f₀.left.base z.val ∈ closedPoints Y₀.left ∧
+      (f₀.left.residueFieldMap z.val).hom.Finite ∧
+      1 ≤ f₀.left.residueDegree z.val ∧
+      Nat.card (X₀.left.residueField z.val) =
+        Nat.card (Y₀.left.residueField (f₀.left.base z.val)) ^
+          f₀.left.residueDegree z.val := by
+  let := (X₀.hom.residueFieldAlgebraMap z.val).toAlgebra
+  have := ((closedPoint_iff_residueField_trdeg_zero_and_finite
+    X₀.hom z.val).2.1).mp z.property
+  have : Finite (X₀.left.residueField z.val) := Module.finite_of_finite D.k₀
+  have : Finite (Y₀.left.residueField (f₀.left.base z.val)) :=
+    Finite.of_injective _ (f₀.left.residueFieldMap z.val).hom.injective
+  let := (Y₀.hom.residueFieldAlgebraMap (f₀.left.base z.val)).toAlgebra
+  have hclosed : f₀.left.base z.val ∈ closedPoints Y₀.left :=
+    ((closedPoint_iff_residueField_trdeg_zero_and_finite Y₀.hom _).2.1).mpr
+      (Module.Finite.of_finite)
+  let := (f₀.left.residueFieldMap z.val).hom.toAlgebra
+  refine ⟨hclosed, ?_, ?_, ?_⟩
+  · exact Module.Finite.of_finite
+  · exact Module.finrank_pos
+  · exact Module.natCard_eq_pow_finrank (K := Y₀.left.residueField (f₀.left.base z.val))
+
+private theorem roots_conjugate_power {K : Type*} [Field K] [IsAlgClosed K]
+    {M N : ModuleCat.{u} K} [FiniteDimensional K M] [FiniteDimensional K N]
+    (e : M ≅ N) (f : M ⟶ M) (g : N ⟶ N) (n : ℕ)
+    (h : f ≫ e.hom = e.hom ≫ ModuleCat.ofHom (g.hom ^ n)) :
+    f.hom.charpoly.roots = g.hom.charpoly.roots.map (fun a ↦ a ^ n) := by
+  have hg : e.toLinearEquiv.conj f.hom = g.hom ^ n := by
+    ext x
+    have hx := congrArg (fun z : M ⟶ N ↦ z (e.inv x)) h
+    simpa using hx
+  rw [← LinearEquiv.charpoly_conj e.toLinearEquiv f.hom, hg]
+  exact roots_pow g.hom n
+
+/-- Derived inverse image preserves the constructible heart. A closed point maps to a
+closed point, its residue extension has positive finite degree e, and q_z = q_x^e.
+For every compatible pair of geometric lifts, the fibre comparison is natural in the
+Weil sheaf, intertwines geometric Frobenius with its e-th power, and raises every
+local eigenvalue to that power, with algebraic multiplicity.
+Source: blueprint main-20261015, sec-deligne-laumon-a1/sk-p-dl-a1-some-weight,
+lem-fd-realified-kernel-real.proof.md, Step 2
+(blueprint: lem-fd-weil-pullback-local-frobenius).
+Proof: (1) Apply constructible_pullback_t_exact at every finite coefficient field and
+in the common-stage category. The canonical Frobenius square defines the induced Weil
+structure on the pulled-back heart object, exactly zlWeilPull.
+(2) By lem-kun-closed-point-field, κ(z) is finite over k₀. Its subfield κ(x) is finite
+as well, so x is closed. The tower law and counting tuples in field bases give positive
+finite e and q_z = q_x^e.
+(3) At one finite coefficient field containing the object, Weil maps and their inverse
+equations, invert the canonical pullback-composition comparison for zbar followed by f.
+Apply the point-fibre functor. Naturality and scalar compatibility of
+lem-trf-integral-pullback-comparison-realization and
+lem-weil-point-sections-scalar-extension descend this isomorphism to common-stage fibres.
+(4) For n divisible by both residue degrees, naturality of the iterated point transports
+from lem-weil-frobenius-point-transport-natural and their associative composition
+comparisons give c G_Y^n(beta_n) t_X = t_Y c, with the appropriate point-fibre functors.
+(5) Induction on n gives theta_X^[n] = f^*(theta_Y^[n]) beta_n. At the degree of z,
+substitute this into the preceding square and use naturality for theta_Y^[n]. This
+identifies c F_z with the corresponding return operator at x followed by c.
+(6) Split the list of point transports into blocks of length d = [κ(x):k₀]. Naturality
+for theta_Y^[rd] and the Weil-iterate recurrence identify the (r+1)-block return with
+F_x times the r-block return. Induction identifies the e-block return with F_x^e.
+(7) The scalar/composition equation and the scalar equation of
+lem-trf-local-frobenius-transport-normalization identify every factor after coefficient
+extension, including identities and towers. Hence the equation holds in the common-stage
+category. Take H^0 to obtain the asserted equation on the rational fibres.
+(8) Triangularize F_x over Qbar. The diagonal of its e-th power is the e-th power of
+each diagonal entry, with repetitions retained. Conjugacy preserves the characteristic
+polynomial, giving the multiset equality; the empty diagonal covers the zero sheaf. -/
+theorem fdWeilPullbackLocalFrobenius
+    (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    [IsSeparated X₀.hom] [IsSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
+    (∀ F : sfCommonStageWeilSheaf D c.l c.different Y₀ c.Qbar,
+      sfCommonStageHeartProperty c.l (D.geometricFiber X₀).left c.Qbar
+        ((zlPull D c.l c.different c.Qbar f₀).obj F.obj.carrier)) ∧
+    ∀ z : {z : X₀.left // z ∈ closedPoints X₀.left},
+      ∃ hx : f₀.left.base z.val ∈ closedPoints Y₀.left,
+        (f₀.left.residueFieldMap z.val).hom.Finite ∧
+        1 ≤ f₀.left.residueDegree z.val ∧
+        Nat.card (X₀.left.residueField z.val) =
+          Nat.card (Y₀.left.residueField (f₀.left.base z.val)) ^
+            f₀.left.residueDegree z.val ∧
+        ∀ (ιz : X₀.left.residueField z.val →+* D.k)
+          (hz : ιz.comp (X₀.hom.residueFieldAlgebraMap z.val) = algebraMap D.k₀ D.k)
+          (ιx : Y₀.left.residueField (f₀.left.base z.val) →+* D.k)
+          (hxι : ιx.comp (Y₀.hom.residueFieldAlgebraMap (f₀.left.base z.val)) =
+            algebraMap D.k₀ D.k),
+          localClosedPoint D X₀ z ιz hz ≫ zlFiberMap D f₀ =
+            localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι →
+          ∃ comparison :
+            zlWeilPull D c.l c.different c.Qbar f₀ ⋙
+                wfSheafFibre c.l c.Qbar D c.different X₀
+                  (localClosedPoint D X₀ z ιz hz) ≅
+              wfSheafFibre c.l c.Qbar D c.different Y₀
+                (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι),
+            ∀ F : sfCommonStageWeilSheaf D c.l c.different Y₀ c.Qbar,
+              wfSheafClosedFrobenius c.l c.Qbar D c.different X₀
+                  ((zlWeilPull D c.l c.different c.Qbar f₀).obj F) z ιz hz ≫
+                  comparison.hom.app F =
+                comparison.hom.app F ≫
+                  ModuleCat.ofHom
+                    ((wfSheafClosedFrobenius c.l c.Qbar D c.different Y₀ F
+                      ⟨f₀.left.base z.val, hx⟩ ιx hxι).hom ^
+                        f₀.left.residueDegree z.val) ∧
+              fdWeilLocalEigenvalues D c X₀
+                  ((zlWeilPull D c.l c.different c.Qbar f₀).obj F) z ιz hz =
+                (fdWeilLocalEigenvalues D c Y₀ F
+                  ⟨f₀.left.base z.val, hx⟩ ιx hxι).map
+                    (fun α ↦ α ^ f₀.left.residueDegree z.val) := by
+  constructor
+  · intro F
+    exact zlPull_mem D c.l c.different c.Qbar f₀ ⟨F.obj.carrier, F.property⟩
+  · intro z
+    have harith := closed_image D Y₀ X₀ f₀ z
+    let hx := harith.1
+    have hfinite := harith.2.1
+    have hpos := harith.2.2.1
+    have hcard := harith.2.2.2
+    refine ⟨hx, ?_⟩
+    constructor
+    · exact hfinite
+    constructor
+    · exact hpos
+    constructor
+    · exact hcard
+    intro ιz hz ιx hxι h
+    let comparison := fdWeilPullbackFibreComparison D c X₀ Y₀ f₀
+      (localClosedPoint D X₀ z ιz hz)
+      (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι) h
+    refine ⟨comparison, ?_⟩
+    intro F
+    have hreturn := fdWeilPullbackFibreReturn D c X₀ Y₀ f₀ z hx ιz hz ιx hxι h F
+    refine ⟨hreturn, ?_⟩
+    let : FiniteDimensional c.Qbar
+        ((wfSheafFibre c.l c.Qbar D c.different X₀
+          (localClosedPoint D X₀ z ιz hz)).obj
+            ((zlWeilPull D c.l c.different c.Qbar f₀).obj F)) :=
+      DerivedCategory.coefficientQbarCohomology_finite c.l c.Qbar 0
+      ((wfPointFunctor c.l c.Qbar D c.different X₀
+        (localClosedPoint D X₀ z ιz hz)).obj
+          ((zlWeilPull D c.l c.different c.Qbar f₀).obj F).obj.carrier)
+    let : FiniteDimensional c.Qbar
+        ((wfSheafFibre c.l c.Qbar D c.different Y₀
+          (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι)).obj F) :=
+      DerivedCategory.coefficientQbarCohomology_finite c.l c.Qbar 0
+      ((wfPointFunctor c.l c.Qbar D c.different Y₀
+        (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι)).obj F.obj.carrier)
+    have : IsAlgClosed c.Qbar := IsAlgClosure.isAlgClosed (Padic c.l)
+    exact roots_conjugate_power
+      (M := (wfSheafFibre c.l c.Qbar D c.different X₀
+        (localClosedPoint D X₀ z ιz hz)).obj
+          ((zlWeilPull D c.l c.different c.Qbar f₀).obj F))
+      (N := (wfSheafFibre c.l c.Qbar D c.different Y₀
+        (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι)).obj F)
+      (comparison.app F) _ _ _ hreturn
+
+end WeilConjectures

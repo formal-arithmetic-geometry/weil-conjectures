@@ -498,7 +498,7 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     boundedConstructiblePullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom, eqToIso.hom, eqToIso.inv, Functor.map_comp,
     eqToHom_map, NatTrans.comp_app, eqToHom_app, Category.assoc, unit_iterateStr_hom]
-  exact stalkFrobenius_unit_aux
+  refine stalkFrobenius_unit_aux
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
     (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.RelativeFrobenius
+public import WeilConjectures.TraceFormula.CompactCohomologyFibres
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 
 /-!
