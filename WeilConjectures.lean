@@ -10881,6 +10881,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionConstantComplex
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionConstantComplexCompat
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionConstantComplexEta
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionConstantComplexPullback
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerDelta
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerTranspose
