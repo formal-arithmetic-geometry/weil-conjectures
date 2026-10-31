@@ -125,6 +125,7 @@ instance isIso_tateTwistSheafOneReductionMap :
   rw [tateTwistSheafOneReductionMap, Functor.map_comp, Category.assoc, hn]
   infer_instance
 
+omit [HasInvertibleExponent Λ' X] [NeZero (ringChar Λ')] in
 /-- `tateTwistSheafOneReductionMap` is the adjoint of the change of coefficients of the Tate
 sheaves `Λ_X(1) ⟶ Res (μ_{n'} ⊗ Λ')`. -/
 lemma tateTwistSheafOneReductionMap_eq :
@@ -154,7 +155,8 @@ theorem isDerivedBaseChange_tateTwistObjectOneChangeMap :
   have key : tateTwistObjectOneChangeMap ρ X e he =
       ((tateTwistObjectIsoSingleFunctor Λ X 1).hom ≫
         (DerivedCategory.singleFunctor _ 0).map
-            ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app (tateTwistSheaf Λ X 1)) ≫
+            ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app
+              (tateTwistSheaf Λ X 1)) ≫
           ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
             0).inv.app ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj (tateTwistSheaf Λ X 1))) ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map

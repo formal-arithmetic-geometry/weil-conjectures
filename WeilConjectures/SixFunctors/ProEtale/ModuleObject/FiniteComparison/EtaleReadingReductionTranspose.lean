@@ -11,7 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 /-!
 # The transpose of the étale reading of the reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ`
 
-The isomorphism `β : Ψ(ρ(red_{n+1} K)) ≅ ρ(red_n K)` (`ProEtale.CondensedRing.etaleReductionExtendScalarsIsoApp`)
+The isomorphism `β : Ψ(ρ(red_{n+1} K)) ≅ ρ(red_n K)`
+(`ProEtale.CondensedRing.etaleReductionExtendScalarsIsoApp`)
 is determined by its transpose under `Ψ ⊣ Res`, a morphism `ρ(red_{n+1} K) ⟶ Res ρ(red_n K)`.
 This file computes it: followed by the base change map `Res Rν_* ⟶ Rν_* Res`
 (`ProEtale.derivedRestrictScalarsCompComparisonLowerStarMap`), it is `Rν_*` of the image under the
@@ -80,22 +81,23 @@ lemma unit_app_comp_map_finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_
   simp only [Adjunction.comp_unit_app, Equivalence.toAdjunction_unit, Functor.comp_map,
     Category.assoc] at h'
   erw [h']
-  have n1 := Φ.unitIso.hom.naturality ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N ≫
-    (Mod.comap ψ).mapDerivedCategory.map
-      (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N)))
+  have n1 := Φ.unitIso.hom.naturality
+    ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N ≫
+      (Mod.comap ψ).mapDerivedCategory.map
+        (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N)))
   have n2 := i.hom.naturality (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))
   have t := Φ'.functor_unit_comp ((Mod.extendScalars ψ).leftDerivedFunctor.obj N)
   dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at n1 n2
   simp only [Iso.isoCompInverse_hom_app, Iso.trans_hom, NatTrans.comp_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
-    Functor.leftUnitor_hom_app, Iso.symm_hom, Category.id_comp, Category.comp_id, Functor.map_comp,
-    Category.assoc]
+    Functor.leftUnitor_hom_app, Iso.symm_hom, Category.id_comp, Functor.map_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
     Category.comp_id]
   have key : Φ.functor.map ((Mod.comap ψ).mapDerivedCategory.map
       (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) ≫
-        i.hom.app (Φ'.inverse.obj (Φ'.functor.obj ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) ≫
+        i.hom.app
+          (Φ'.inverse.obj (Φ'.functor.obj ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) ≫
         (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ.ulift).map
           (Φ'.counitIso.hom.app (Φ'.functor.obj ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) =
       i.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N) := by
@@ -155,14 +157,17 @@ theorem unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom
         ((finiteEtaleReading ℓ E (n + 1) X).obj
           ((boundedConstructibleIntegersModPowReduction X.left ℓ E (n + 1)).obj K)) ≫
       (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology
-        (integersModPowCoeffTransition ℓ E n)).map (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom ≫
+        (integersModPowCoeffTransition ℓ E n)).map
+          (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom ≫
       (derivedRestrictScalarsCompComparisonLowerStarMap (integersModPowCoeffTransition ℓ E n)
         X.left).app ((finiteCoefficientDerivedEquivalence X.left
           (PadicAlgCl.integersModPow ℓ E n)).functor.obj ((boundedConstructible _).ι.obj
             ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj K))) =
     (R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))])).map
-      ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.map
-          ((Mod.derivedExtendMapDerivedCategoryAdjunction (integersModPowTransition X.left ℓ E n)).unit.app
+      ((finiteCoefficientDerivedEquivalence X.left
+          (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.map
+          ((Mod.derivedExtendMapDerivedCategoryAdjunction
+              (integersModPowTransition X.left ℓ E n)).unit.app
               ((boundedConstructible _).ι.obj
                 ((boundedConstructibleIntegersModPowReduction X.left ℓ E (n + 1)).obj K)) ≫
             (Mod.comap (integersModPowTransition X.left ℓ E n)).mapDerivedCategory.map
@@ -172,7 +177,8 @@ theorem unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom
             ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj K))) := by
   have hstar := unit_app_comp_map_derivedExtendScalarsComparisonLowerStarMap_app X.left
     (integersModPowCoeffTransition_surjective ℓ E n) (ker_integersModPowCoeffTransition ℓ E n)
-    ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj
+    ((finiteCoefficientDerivedEquivalence X.left
+      (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj
       ((boundedConstructible _).ι.obj ((boundedConstructibleIntegersModPowReduction X.left ℓ E
         (n + 1)).obj K)))
   have hExt := unit_app_comp_map_finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_app X.left
@@ -196,7 +202,8 @@ theorem unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom
     (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology (integersModPowCoeffTransition ℓ E n))
     (R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]))
     (R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))]))
-    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X.left) (integersModPowCoeffTransition ℓ E n))
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X.left)
+      (integersModPowCoeffTransition ℓ E n))
     (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E (n + 1))).functor
     (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor
     (Mod.comap (integersModPowTransition X.left ℓ E n)).mapDerivedCategory

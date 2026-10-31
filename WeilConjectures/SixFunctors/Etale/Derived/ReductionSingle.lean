@@ -42,6 +42,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'
   (hρ : Function.Surjective ρ) {a : Λ} (ha : RingHom.ker ρ = Ideal.span {a}) (X : Scheme.{u})
 
 set_option synthInstance.maxHeartbeats 200000 in
+-- the flatness and K-flatness instances of the single complexes are found by a long search
 include hρ ha in
 /-- **The derived base change of a flat sheaf in degree zero is its extension of scalars**: for
 a flat étale sheaf of `Λ`-modules `F`, the unit `F ⟶ Res (Λ' ⊗_Λ F)` of extension of scalars,
@@ -66,7 +67,8 @@ lemma isDerivedBaseChange_singleFunctor_map_unit
     (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapCochainComplexSingleFunctor 0).app F)
   have hc : D.complexMap P ≫
       ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapHomologicalComplex (.up ℤ)).map
-        (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapCochainComplexSingleFunctor 0).hom.app F) ≫
+        (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapCochainComplexSingleFunctor 0).hom.app
+          F) ≫
       ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapCochainComplexSingleFunctor 0).hom.app _ =
       (HomologicalComplex.single _ (.up ℤ) 0).map
         ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app F) := by
@@ -74,9 +76,11 @@ lemma isDerivedBaseChange_singleFunctor_map_unit
     simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
       Functor.mapCochainComplexSingleFunctor, HomologicalComplex.single_map_f_self,
       D.complexMap_f]
-    simp [D, Sheaf.extendScalarsReductionDatum, HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.singleMapHomologicalComplex,
-      eqToHom_map]
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.whiskeringRight_obj_obj,
+      Sheaf.extendScalarsReductionDatum, HomologicalComplex.singleMapHomologicalComplex,
+      NatIso.ofComponents_hom_app, ↓reduceDIte, eqToHom_refl, Functor.id_obj,
+      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
+      Iso.refl_hom, Iso.refl_inv, Category.id_comp, D]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   have key : (DerivedCategory.singleFunctor _ 0).map
         ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app F) ≫
@@ -85,13 +89,15 @@ lemma isDerivedBaseChange_singleFunctor_map_unit
       (Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategoryFactors.inv.app
         ((D.Φ.mapHomologicalComplex (.up ℤ)).obj P)) ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map e.hom := by
-    refine (cancel_mono (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
-      0).hom.app ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj F))).1 ?_
+    refine (cancel_mono
+      (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).hom.app
+        ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj F))).1 ?_
     have n₁ := Functor.mapDerivedCategoryFactors_inv_naturality
       (Sheaf.restrictScalars X.smallEtaleTopology ρ)
       (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapCochainComplexSingleFunctor 0).hom.app F)
     have n₂ := Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app
-      (Sheaf.restrictScalars X.smallEtaleTopology ρ) ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj F)
+      (Sheaf.restrictScalars X.smallEtaleTopology ρ)
+      ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj F)
     have s₂ : DerivedCategory.Q.map ((HomologicalComplex.single _ (.up ℤ) 0).map
           ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app F)) =
         DerivedCategory.Q.map (D.complexMap P) ≫ DerivedCategory.Q.map
@@ -115,9 +121,9 @@ lemma isDerivedBaseChange_singleFunctor_map_unit
       rw [← n₂]
       erw [reassoc_of% n₁]
       rfl
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
     refine (Category.comp_id _).trans ((s₂.trans s₃).trans ?_)
-    simp only [Category.assoc]
+    simp only
   rw [key]
   exact h.comp_map_iso e
 

@@ -107,6 +107,7 @@ noncomputable def integersModPowReductionUnitIso (m : ℕ) :
   (boundedConstructibleIntegersModPowReductionCompatibility Y.left ℓ E m).app (𝟙_ _) ≪≫
     (Functor.Monoidal.εIso _).symm
 
+omit [Fact (ringChar k).Prime] in
 /-- `etaleReductionUnitIso`, unfolded through `integersModPowReductionUnitIso`. -/
 lemma etaleReductionUnitIso_hom_eq (m : ℕ) :
     (etaleReductionUnitIso ℓ E m Y).hom =
@@ -125,25 +126,29 @@ lemma etaleReductionUnitIso_hom_eq (m : ℕ) :
 
 set_option maxHeartbeats 4000000 in
 -- the monoidal structures of the derived functors on sheaf categories are slow to unfold
+omit [Fact (ringChar k).Prime] [IsSeparated Y.hom] in
 /-- The condensed unit comparisons, composed with the bounded constructible inclusion, are
 compatible with the transitivity of the derived extensions of scalars. -/
 lemma map_η_comp_η_integersModPowReduction :
     letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E (n + 1))
     letI := Mod.extendScalarsMonoidal (integersModPowTransition Y.left ℓ E n)
     letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E n)
-    letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctorMonoidal
+    letI :=
+      (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctorMonoidal
     letI := (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctorMonoidal
     letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctorMonoidal
     (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor.map
         (η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-          Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctor)) ≫
+          Y.left)).ι ⋙
+            (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctor)) ≫
       η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor =
     (Mod.derivedExtendScalarsCompIso _ _ _
         (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)).inv.app
         ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
           Y.left)).ι.obj (𝟙_ _)) ≫
       η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-          Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) := by
+          Y.left)).ι ⋙
+            (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) := by
   -- the condensed part: the transitivity isomorphism preserves the units
   have hc := map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η
     (integersModPowReduction Y.left ℓ E (n + 1)) (integersModPowTransition Y.left ℓ E n)
@@ -153,7 +158,8 @@ lemma map_η_comp_η_integersModPowReduction :
       letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E (n + 1))
       letI := Mod.extendScalarsMonoidal (integersModPowTransition Y.left ℓ E n)
       letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E n)
-      letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctorMonoidal
+      letI :=
+        (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctorMonoidal
       letI := (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctorMonoidal
       letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctorMonoidal
       (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor.map
@@ -176,6 +182,7 @@ lemma map_η_comp_η_integersModPowReduction :
 
 set_option maxHeartbeats 1000000 in
 -- the monoidal structures of the derived functors on sheaf categories are slow to unfold
+omit [Fact (ringChar k).Prime] [IsSeparated Y.hom] in
 /-- The condensed transition `(𝒪_E ⧸ ℓⁿ) ⊗ᴸ red_{n+1} K ≅ red_n K` at the unit, through the
 identifications `red_m 𝒪 ≅ 𝟙`, is the unit comparison of the derived extension of scalars along
 `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` (`map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η`). -/
@@ -196,9 +203,11 @@ lemma boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_unit :
       letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E n)
       letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctorMonoidal
       η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-          Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) ≫
+          Y.left)).ι ⋙
+            (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) ≫
         ε ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-          Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) =
+          Y.left)).ι ⋙
+            (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) =
         𝟙 _ := by
     simp only [Functor.OplaxMonoidal.comp_η, Functor.LaxMonoidal.comp_ε, Category.assoc,
       Functor.Monoidal.η_ε_assoc, ← Functor.map_comp, Functor.Monoidal.η_ε,

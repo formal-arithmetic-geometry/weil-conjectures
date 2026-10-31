@@ -191,7 +191,8 @@ theorem isIso_derivedExtendScalarsLowerStarComparison [IsProper g] (R_Y : 𝐃(Y
       ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g).app M).app R_Y ≫
         R((g)_*[ModuleCat.{u + 1} Λ]).map
           (((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj M).map c.hom) := by
-    apply ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).symm.injective
+    apply
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).symm.injective
     rw [Equiv.symm_apply_apply, rightDerivedLowerStarProjectionMap_app_app,
       Adjunction.homEquiv_naturality_right_symm]
     erw [Equiv.symm_apply_apply]

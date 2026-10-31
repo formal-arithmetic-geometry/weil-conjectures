@@ -57,7 +57,8 @@ lemma map_mateEquiv_app_comp_mateEquiv_app_comp_map_eq (γ₁ : Lc ⋙ rY₁ ≅
   have h' : (inv βf).app (rX₁.obj (Rc.obj N)) ≫ ΨY.map (γ₁.inv.app (Rc.obj N)) ≫
       βY.hom.app (Lc.obj (Rc.obj N)) = L₂.map (βX.hom.app (Rc.obj N)) ≫ γ₂.inv.app (Rc.obj N) := by
     have h₀ := h (Rc.obj N)
-    rw [← cancel_epi (βf.app (rX₁.obj (Rc.obj N))), ← NatTrans.comp_app_assoc, IsIso.hom_inv_id, NatTrans.id_app,
+    rw [← cancel_epi (βf.app (rX₁.obj (Rc.obj N))), ← NatTrans.comp_app_assoc, IsIso.hom_inv_id,
+      NatTrans.id_app,
       Category.id_comp,
       ← cancel_epi (ΨY.map (γ₁.hom.app (Rc.obj N))), ← ΨY.map_comp_assoc, Iso.hom_inv_id_app,
       ΨY.map_id, Category.id_comp, reassoc_of% h₀, Iso.hom_inv_id_app]
@@ -68,9 +69,11 @@ lemma map_mateEquiv_app_comp_mateEquiv_app_comp_map_eq (γ₁ : Lc ⋙ rY₁ ≅
   have m₂ := mateEquiv_counit adjc adj₂ (TwoSquare.mk _ _ _ _ γ₂.inv) N
   have m₃ := mateEquiv_counit adj₁ adj₂ (TwoSquare.mk _ _ _ _ (inv βf)) (rY₁.obj N)
   have n₁ := adj₂.counit.naturality (βY.hom.app N)
-  have n₂ := (inv βf).naturality ((mateEquiv adjc adj₁ (TwoSquare.mk _ _ _ _ γ₁.inv)).natTrans.app N)
+  have n₂ :=
+    (inv βf).naturality ((mateEquiv adjc adj₁ (TwoSquare.mk _ _ _ _ γ₁.inv)).natTrans.app N)
   have n₃ := βY.hom.naturality (adjc.counit.app N)
-  simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at m₁ m₂ m₃ n₁ n₂ n₃
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map]
+    at m₁ m₂ m₃ n₁ n₂ n₃
   rw [Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, n₁, reassoc_of% m₃,
     reassoc_of% n₂, ← ΨY.map_comp_assoc, m₁, ΨY.map_comp, Category.assoc, n₃, Functor.map_comp,
     Category.assoc, m₂, reassoc_of% h']

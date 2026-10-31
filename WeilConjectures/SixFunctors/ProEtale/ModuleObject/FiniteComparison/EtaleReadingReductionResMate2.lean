@@ -43,6 +43,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {φ : Λ →+* Λ'
 variable [IsNoetherianRing Λ] (hφ : Function.Surjective φ) {a : Λ}
   (ha : RingHom.ker φ = Ideal.span {a})
 
+omit [IsNoetherianRing Λ] in
 /-- The levelwise identity behind `comparisonUpperStarDerivedExtendScalarsIso_hom_eq`: on the
 homotopy category, the unit of extension–restriction of scalars intertwines the commutations of
 `ν^*` with extension and with restriction of scalars. -/
@@ -133,8 +134,10 @@ theorem comparisonUpperStarDerivedExtendScalarsIso_hom_eq :
   rw [homEquiv_comparisonUpperStarDerivedExtendScalarsCounit_app, NatTrans.comp_app,
     Functor.whiskerLeft_app,
     homEquiv_mateEquiv_symm_comp_derivedExtendScalarsComparisonUpperStarCounit_app]
-  refine congrArg (fun g ↦ (ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactorsh.hom.app _ ≫ g) ?_
-  erw [← (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactorsh.inv.naturality,
+  refine congrArg
+    (fun g ↦ (ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactorsh.hom.app _ ≫ g) ?_
+  erw [
+    ← (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactorsh.inv.naturality,
     ← (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactorsh.inv.naturality]
   simp only [Functor.comp_map, ← DerivedCategory.Qh.map_comp_assoc, Category.assoc]
   rw [mapHomotopyCategory_unit_app_comp_map_comparisonUpperStarCompExtendScalarsIso]

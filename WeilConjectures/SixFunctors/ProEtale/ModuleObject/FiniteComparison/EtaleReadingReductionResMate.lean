@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 Let `φ : Λ →+* Λ'` be a surjective morphism of rings with principal kernel and `Ψ` the derived
 extensions of scalars along `φ`, left adjoint to the restrictions of scalars `Res`. This file
-shows that the commutation `χ : ν^* Ψ ≅ Ψ ν^*` (`ProEtale.comparisonUpperStarDerivedExtendScalarsIso`)
+shows that the commutation `χ : ν^* Ψ ≅ Ψ ν^*`
+(`ProEtale.comparisonUpperStarDerivedExtendScalarsIso`)
 is the mate under `Ψ ⊣ Res` of the commutation `Res ν^* ≅ ν^* Res`
 (`ProEtale.comparisonUpperStarDerivedExtendScalarsIso_hom_eq`). Consequently the base change
 map `Rν_* L ⊗ᴸ Λ' ⟶ Rν_*(L ⊗ᴸ Λ')` has a simple transpose under `Ψ ⊣ Res`: it is `Rν_*` of the
@@ -49,6 +50,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {φ : Λ →+* Λ'
 variable [IsNoetherianRing Λ] (hφ : Function.Surjective φ) {a : Λ}
   (ha : RingHom.ker φ = Ideal.span {a})
 
+omit [IsNoetherianRing Λ] in
 /-- The unit of `Ψ ⊣ Res` on pro-étale sheaves, on the image of a complex. -/
 lemma derivedExtendScalarsAdjunction_unit_app_Qh (K : HomotopyCategory
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ)) :
@@ -65,6 +67,7 @@ lemma derivedExtendScalarsAdjunction_unit_app_Qh (K : HomotopyCategory
   have := ProEtale.preservesKFlatQuasiIso_extendScalars hφ ha X
   Adjunction.derivedAdjunction_ofNatIsoRight_unit_app_Qh _ K
 
+omit [IsNoetherianRing Λ] in
 /-- The unit of `Ψ ⊣ Res` on étale sheaves, on the image of a complex. -/
 lemma _root_.AlgebraicGeometry.Etale.derivedExtendScalarsAdjunction_unit_app_Qh
     (K : HomotopyCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ)) :
@@ -81,6 +84,7 @@ lemma _root_.AlgebraicGeometry.Etale.derivedExtendScalarsAdjunction_unit_app_Qh
   have := Etale.preservesKFlatQuasiIso_extendScalars hφ ha X
   Adjunction.derivedAdjunction_ofNatIsoRight_unit_app_Qh _ K
 
+omit [IsNoetherianRing Λ] in
 lemma comparisonUpperStarDerivedExtendScalarsCounit_app
     (Y : HomotopyCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ)) :
     have := ProEtale.preservesKFlatQuasiIso_extendScalars hφ ha X
@@ -92,11 +96,14 @@ lemma comparisonUpperStarDerivedExtendScalarsCounit_app
         DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
           (comparisonUpperStarCompExtendScalarsIso φ X) (ComplexShape.up ℤ)).hom.app Y) := by
   intro
-  simp [comparisonUpperStarDerivedExtendScalarsCounit,
-    Functor.mapDerivedCategoryCompLeftDerivedFunctorCounit]
+  simp only [Functor.comp_obj, comparisonUpperStarDerivedExtendScalarsCounit,
+    Functor.mapDerivedCategoryCompLeftDerivedFunctorCounit, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.id_comp]
   erw [Category.id_comp]
   rfl
 
+omit [IsNoetherianRing Λ] in
 /-- The transpose under `Ψ ⊣ Res` of the counit `comparisonUpperStarDerivedExtendScalarsCounit` on
 the image of a complex. -/
 lemma homEquiv_comparisonUpperStarDerivedExtendScalarsCounit_app
@@ -123,6 +130,7 @@ lemma homEquiv_comparisonUpperStarDerivedExtendScalarsCounit_app
   rw [reassoc_of% (derivedExtendScalarsAdjunction_unit_app_Qh X hφ ha
     (((ν^*(X)[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (ComplexShape.up ℤ)).obj Y))]
 
+omit [IsNoetherianRing Λ] in
 lemma derivedExtendScalarsComparisonUpperStarCounit_app
     (Y : HomotopyCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ)) :
     have := Etale.preservesKFlatQuasiIso_extendScalars hφ ha X
@@ -136,11 +144,14 @@ lemma derivedExtendScalarsComparisonUpperStarCounit_app
           (Iso.refl (Sheaf.extendScalars X.smallEtaleTopology φ ⋙ ν^*(X)[ModuleCat.{u + 1} Λ']))
           (ComplexShape.up ℤ)).hom.app Y) := by
   intro
-  simp [derivedExtendScalarsComparisonUpperStarCounit,
-    Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit]
+  simp only [Functor.comp_obj, derivedExtendScalarsComparisonUpperStarCounit,
+    Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.id_comp]
   erw [Category.id_comp]
 
 variable (φ) in
+omit [IsNoetherianRing Λ] in
 /-- The commutation `Res ν^* ≅ ν^* Res` on derived categories, on the image of a complex, modulo
 the factorizations of the functors induced by `ν^*` and `Res`. -/
 lemma derivedRestrictScalarsCompComparisonUpperStarIso_hom_app_Qh
@@ -151,7 +162,8 @@ lemma derivedRestrictScalarsCompComparisonUpperStarIso_hom_app_Qh
       (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ).map
         ((ν^*(X)[ModuleCat.{u + 1} Λ']).mapDerivedCategoryFactorsh.hom.app B) =
     (ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactorsh.hom.app
-        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategory (ComplexShape.up ℤ)).obj B) ≫
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategory
+          (ComplexShape.up ℤ)).obj B) ≫
       DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (ComplexShape.up ℤ)).hom.app B ≫
           (NatTrans.mapHomotopyCategory (restrictScalarsCompComparisonUpperStar φ X)
@@ -167,6 +179,7 @@ lemma derivedRestrictScalarsCompComparisonUpperStarIso_hom_app_Qh
   erw [Iso.hom_inv_id_app, Category.comp_id]
   rfl
 
+omit [IsNoetherianRing Λ] in
 /-- The transpose under `Ψ ⊣ Res` of the mate of `derivedRestrictScalarsCompComparisonUpperStarIso`
 followed by the counit `derivedExtendScalarsComparisonUpperStarCounit`, on the image of a
 complex. -/
@@ -216,7 +229,8 @@ lemma homEquiv_mateEquiv_symm_comp_derivedExtendScalarsComparisonUpperStarCounit
     Functor.map_comp_assoc]
   dsimp only [Functor.comp_obj]
   rw [reassoc_of% (derivedRestrictScalarsCompComparisonUpperStarIso_hom_app_Qh φ X
-      (((Sheaf.extendScalars X.smallEtaleTopology φ).mapHomotopyCategory (ComplexShape.up ℤ)).obj Y))]
+      (((Sheaf.extendScalars X.smallEtaleTopology φ).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj Y))]
   erw [(ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactorsh.hom.naturality_assoc]
   rw [Functor.comp_map, ← DerivedCategory.Qh.map_comp_assoc]
   rfl

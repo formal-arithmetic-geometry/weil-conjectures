@@ -148,7 +148,8 @@ lemma _root_.CategoryTheory.Sheaf.restrictCoextendScalarsAdj_unit_app_hom_app
   have h := NatTrans.congr_app (Adjunction.map_restrictFullyFaithful_unit_app
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).whiskerRight Cᵒᵖ)
     (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _)
-    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f)) (Iso.refl _)
+    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f))
+    (Iso.refl _)
     (Iso.refl _) F) U
   simpa [Sheaf.restrictCoextendScalarsAdj] using h
 
@@ -159,7 +160,8 @@ lemma _root_.CategoryTheory.Sheaf.restrictCoextendScalarsAdj_counit_app_hom_app
   have h := NatTrans.congr_app (Adjunction.map_restrictFullyFaithful_counit_app
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).whiskerRight Cᵒᵖ)
     (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _)
-    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f)) (Iso.refl _)
+    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f))
+    (Iso.refl _)
     (Iso.refl _) F) U
   refine h.trans ?_
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
@@ -173,14 +175,21 @@ a triangle identity of `Res ⊣ Coext` on modules. -/
 lemma mateEquiv_restrictCoextendScalarsAdj_id :
     (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
       (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ)
-      (TwoSquare.mk (ν_*(X)[ModuleCat.{u + 1} Λ']) (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
+      (TwoSquare.mk (ν_*(X)[ModuleCat.{u + 1} Λ'])
+        (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
         (Sheaf.restrictScalars X.smallEtaleTopology φ) (ν_*(X)[ModuleCat.{u + 1} Λ])
         (𝟙 _))).natTrans = 𝟙 _ := by
   ext M : 2
   apply (fullyFaithfulSheafToPresheaf _ _).map_injective
   ext U : 2
-  simp [mateEquiv, Sheaf.restrictCoextendScalarsAdj_unit_app_hom_app,
-    Sheaf.restrictCoextendScalarsAdj_counit_app_hom_app, comparisonLowerStar]
+  simp only [Functor.comp_obj, ObjectProperty.ι_obj, mateEquiv_apply, Functor.whiskerRight_id',
+    Functor.whiskerLeft_id', Category.id_comp, NatTrans.comp_app, Functor.id_obj,
+    Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.leftUnitor_hom_app, Category.comp_id, ObjectProperty.ι_map,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+    sheafCompose_map_hom, NatTrans.id_app,
+    Sheaf.restrictCoextendScalarsAdj_unit_app_hom_app]
   erw [Category.id_comp]
   exact (ModuleCat.restrictCoextendScalarsAdj φ).right_triangle_components _
 
@@ -197,7 +206,8 @@ instance isIso_restrictScalarsCompComparisonUpperStar :
     (restrictScalarsCompComparisonUpperStar φ X)
   have h₁ : mateEquiv (comparisonAdjunction (ModuleCat.{u + 1} Λ') X)
       (comparisonAdjunction (ModuleCat.{u + 1} Λ) X) (restrictScalarsCompComparisonUpperStar φ X) =
-        TwoSquare.mk (ν_*(X)[ModuleCat.{u + 1} Λ']) (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
+        TwoSquare.mk (ν_*(X)[ModuleCat.{u + 1} Λ'])
+          (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
           (Sheaf.restrictScalars X.smallEtaleTopology φ) (ν_*(X)[ModuleCat.{u + 1} Λ]) (𝟙 _) :=
     mateEquiv_comparisonAdjunction_restrictScalarsCompComparisonUpperStar φ X
   rw [h₁, mateEquiv_restrictCoextendScalarsAdj_id] at h

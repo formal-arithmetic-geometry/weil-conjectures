@@ -18,7 +18,7 @@ finite rings with principal kernel. This file shows that `Ψ` commutes with the 
 supported localization triangle `Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ [1]`
 (`AlgebraicGeometry.Etale.map_supportedLocalizationBoundary_comp`), hence with the localization
 boundaries on classes `H¹(U_f, Λ(1)) ⟶ H²_{V(f)}(U, Λ(1))`
-(`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange_mapSupportedClass_localizationBoundaryClass`,
+(`Etale.reductionSupportedCoefficientChange_mapSupportedClass_localizationBoundaryClass`,
 the hypothesis `hδ` of `MonoidalSupportedCoefficientChange.preservesKummerBoundaries`, blueprint
 `det-sp-purity-coefficient-change`), given identifications `σ X : Ψ Λ_X(1) ≅ Λ'_X(1)` compatible
 with restriction and with the Tate data. Along the way, the comparisons of `Ψ` with `Le^*` and
@@ -138,7 +138,8 @@ theorem map_supportedLocalizationBoundary_comp (j : V ⟶ X) [IsOpenImmersion j]
   have hT₂ := supportedLocalizationTriangle_mem_distTriang Λ' i j hij L'
   have e₂ : T₁.mor₂ = (derivedExtendScalars hρ ha X).map
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app L) := rfl
-  have e₃ : T₁.mor₃ = (derivedExtendScalars hρ ha X).map (supportedLocalizationBoundary Λ i j hij L) ≫
+  have e₃ : T₁.mor₃ =
+      (derivedExtendScalars hρ ha X).map (supportedLocalizationBoundary Λ i j hij L) ≫
       ((derivedExtendScalars hρ ha X).commShiftIso (1 : ℤ)).hom.app _ := rfl
   -- the first term is supported on `Z`
   have hz : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ'])).obj T₁.obj₁) :=
@@ -351,8 +352,9 @@ theorem derivedExtendScalars_map_localizationBoundaryClass
   have key₂s := (shiftFunctor _ (1 : ℤ)).congr_map key₂
   simp only [Functor.map_comp, Category.assoc] at key₁ key₂s key₃ h₂s ⊢
   rw [key₁, reassoc_of% key₂s, reassoc_of% key₃]
-  have hn := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') (U.basicOpen f).ι).unit.naturality
-    (derivedExtendScalarsConstantComplexIso hρ ha U).inv
+  have hn :=
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') (U.basicOpen f).ι).unit.naturality
+      (derivedExtendScalarsConstantComplexIso hρ ha U).inv
   have hν := ((derivedExtendScalars hρ ha (U.basicOpen f)).commShiftIso (1 : ℤ)).hom.naturality
     (leftDerivedUpperStarTateObjectIso (Λ := Λ) (U.basicOpen f).ι 1).inv
   have h₁' := (R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ'])).congr_map h₁
@@ -392,7 +394,8 @@ lemma reductionSupportedCoefficientChange_supportsMap
     rw [i.range_eq_compl_range_openComplement_ι]
     exact disjoint_compl_left
   have hz : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ'])).obj
-      ((derivedExtendScalars hρ ha X).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)))) :=
+      ((derivedExtendScalars hρ ha X).obj
+        ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)))) :=
     (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ')
       i i.openComplement.ι hd i.openComplement.ι subset_rfl
       ((derivedExtendScalars hρ ha Z).obj ((R(i)^![Λ]).obj L))).of_iso

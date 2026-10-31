@@ -75,7 +75,8 @@ theorem map_etaleReductionLowerShriekIso_hom_comp_derivedExtendScalarsLowerShrie
         (compactificationOverField f)).hom.app K := by
   sorry
 
-omit [HasCompactification f.left] [CompactSpace Y.left] in
+omit [HasCompactification f.left] [CompactSpace Y.left] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] in
 /-- The components of `etaleReductionExtendScalarsIso`, written with
 `etaleReductionExtendScalarsIsoApp`. -/
 lemma etaleReductionExtendScalarsIso_hom_app_eq {Z : Over (Spec (.of k))}

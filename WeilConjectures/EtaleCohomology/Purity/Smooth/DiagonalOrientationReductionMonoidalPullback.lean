@@ -202,7 +202,8 @@ lemma derivedExtendScalarsUnitIso_hom :
       Functor.OplaxMonoidal.η (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor :=
   rfl
 
-lemma leftDerivedFunctor_extendScalars_δ (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+lemma leftDerivedFunctor_extendScalars_δ
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
     letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
     Functor.OplaxMonoidal.δ (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor K M =
@@ -226,15 +227,17 @@ lemma derivedExtendScalarsAdjunction_counit_app_Qh
           ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategoryFactorsh.hom.app M) ≫
         (derivedExtendScalarsCounit hρ ha X).app
           (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)).obj M) ≫
-        DerivedCategory.Qh.map (((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).mapHomotopyCategory
-          (.up ℤ)).counit.app M) := by
+        DerivedCategory.Qh.map
+          (((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).mapHomotopyCategory
+            (.up ℤ)).counit.app M) := by
   have := preservesKFlatQuasiIso_extendScalars hρ ha X
   have h₁ := (Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)
     |>.derivedε_fac_app (HomotopyCategory.quasiIso _ (.up ℤ))
       (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorCounit
       (Sheaf.restrictScalars X.smallEtaleTopology ρ).rightDerivedFunctorUnit M
   have h₃ := NatTrans.congr_app
-    (Sheaf.restrictScalars X.smallEtaleTopology ρ).rightDerivedFunctorIsoMapDerivedCategory_hom_fac M
+    (Sheaf.restrictScalars X.smallEtaleTopology ρ).rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+      M
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h₃
   delta derivedExtendScalarsAdjunction derivedExtendScalars derivedExtendScalarsCounit
   dsimp only
@@ -242,8 +245,8 @@ lemma derivedExtendScalarsAdjunction_counit_app_Qh
   rw [Functor.whiskerRight_app, Adjunction.derived_counit]
   have hu : (Sheaf.restrictScalars X.smallEtaleTopology ρ).rightDerivedFunctorUnit.app M =
       (Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategoryFactorsh.inv.app M ≫
-        (Sheaf.restrictScalars X.smallEtaleTopology ρ).rightDerivedFunctorIsoMapDerivedCategory.inv.app
-          (DerivedCategory.Qh.obj M) := by
+        (Sheaf.restrictScalars X.smallEtaleTopology
+          ρ).rightDerivedFunctorIsoMapDerivedCategory.inv.app (DerivedCategory.Qh.obj M) := by
     rw [← h₃, Category.assoc, Iso.hom_inv_id_app]
     exact (Category.comp_id _).symm
   rw [hu, Functor.map_comp, Category.assoc] at h₁
@@ -309,7 +312,8 @@ noncomputable def extendScalarsUpperStarHomotopyIso :
       hom_inv_id := by
         rw [← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id, NatTrans.mapHomotopyCategory_id]
       inv_hom_id := by
-        rw [← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id, NatTrans.mapHomotopyCategory_id] } ≪≫
+        rw [← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
+          NatTrans.mapHomotopyCategory_id] } ≪≫
     (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).symm
 
 /-- The comparison `Le^* ⋙ Ψ_U ⟶ Ψ_X ⋙ Le^*` of left derived functors induced by the

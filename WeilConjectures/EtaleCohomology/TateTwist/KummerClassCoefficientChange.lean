@@ -173,7 +173,8 @@ lemma kummerδ_comp_changeMap_restrictScalars {C : Sheaf X.smallEtaleTopology Ad
         ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
           _ ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerδ Λ' φ hC) ≫
-          ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso (1 : ℤ)).hom.app _ := by
+          ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso
+            (1 : ℤ)).hom.app _ := by
   have h₁ := kummerδ_comp_changeMap ρ e he φ hC
   have h₂ := (shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).mapShiftedHom_singleδ
     (Sheaf.restrictScalars X.smallEtaleTopology ρ)
@@ -184,8 +185,9 @@ lemma kummerδ_comp_changeMap_restrictScalars {C : Sheaf X.smallEtaleTopology Ad
           ((extendScalars Λ' X).obj C) ≫
         ((shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).map_of_exact
           (Sheaf.restrictScalars X.smallEtaleTopology ρ)).singleδ ≫
-          (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-            ((extendScalars Λ' X).obj (X.rootsOfUnitySheaf (ringChar Λ'))))⟦(1 : ℤ)⟧' :=
+          (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
+            0).inv.app
+              ((extendScalars Λ' X).obj (X.rootsOfUnitySheaf (ringChar Λ'))))⟦(1 : ℤ)⟧' :=
     h₂
   calc _ = (kummerδ Λ φ hC ≫ ((DerivedCategory.singleFunctor _ 0).map
         ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫
@@ -210,17 +212,20 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 identifications `Λ_X ≅ (Λ ⊗ ℤ)[0]` of the Kummer classes
 (`AlgebraicGeometry.Etale.constantComplexIsoSingleFunctorExtendScalarsInt`). -/
 noncomputable def constantComplexChangeMap :
-    constantComplex Λ X ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj (constantComplex Λ' X) :=
+    constantComplex Λ X ⟶
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj (constantComplex Λ' X) :=
   (constantComplexIsoSingleFunctorExtendScalarsInt X Λ).hom ≫
     (DerivedCategory.singleFunctor _ 0).map ((extendScalarsChangeMap ρ X).app _) ≫
       ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app _ ≫
-        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (constantComplexIsoSingleFunctorExtendScalarsInt X Λ').inv
+        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
+          (constantComplexIsoSingleFunctorExtendScalarsInt X Λ').inv
 
 /-- The change of coefficients `Λ_X(1) ⟶ Res Λ'_X(1)` of the Tate twists: through
 `Λ_X(1) ≅ (μ_n ⊗ Λ)[0]` (`AlgebraicGeometry.Etale.tateTwistObjectOneIso`), the `e`-th power map
 `μ_n ⟶ μ_{n'}` (`n = n' e`) followed by the change of coefficients `μ_{n'} ⊗ Λ ⟶ μ_{n'} ⊗ Λ'`. -/
 noncomputable def tateTwistObjectOneChangeMap :
-    tateTwistObject Λ X 1 ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj (tateTwistObject Λ' X 1) :=
+    tateTwistObject Λ X 1 ⟶
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj (tateTwistObject Λ' X 1) :=
   (tateTwistObjectOneIso X Λ).hom ≫
     (DerivedCategory.singleFunctor _ 0).map
       ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫ (extendScalarsChangeMap ρ X).app _) ≫
@@ -234,7 +239,8 @@ is the change of coefficients of the constant complex followed by the restrictio
 the Kummer class `κ(u) : Λ'_X ⟶ Λ'_X(1)[1]`. -/
 theorem kummerClassOf_comp_tateTwistObjectOneChangeMap (v : Γ(X, ⊤)ˣ) :
     kummerClassOf X Λ v ≫ (tateTwistObjectOneChangeMap ρ X e he)⟦(1 : ℤ)⟧' =
-      constantComplexChangeMap ρ X ≫ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerClassOf X Λ' v) ≫
+      constantComplexChangeMap ρ X ≫
+        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerClassOf X Λ' v) ≫
         ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso (1 : ℤ)).hom.app _ := by
   have hK := kummerδ_comp_changeMap_restrictScalars ρ e he (unitToGmSheaf v)
     (fun x ↦ projective_sheafFiber_constantSheafInt (X.uliftPointSmallEtale x))

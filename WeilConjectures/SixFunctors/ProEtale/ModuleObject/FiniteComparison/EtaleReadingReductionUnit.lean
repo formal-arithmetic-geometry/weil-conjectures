@@ -17,7 +17,8 @@ For morphisms `φ : R ⟶ S`, `ψ : S ⟶ T` of commutative condensed ring objec
 `φ ≫ ψ = χ`, the transitivity isomorphism `L(Ext_χ) ≅ L(Ext_φ) ⋙ L(Ext_ψ)`
 (`Mod.derivedExtendScalarsCompIso`, the conjugate of the composition of the restrictions of
 scalars) is compatible with the unit comparisons of the monoidal functors
-`Functor.leftDerivedFunctorMonoidal` (`ProEtale.CondensedRing.map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η`).
+`Functor.leftDerivedFunctorMonoidal`
+(`ProEtale.CondensedRing.map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η`).
 No flatness is needed: through the counits of the left derived functors, both sides are computed
 on the unit complex by the underived transitivity isomorphism, which is monoidal
 (`Mod.isMonoidal_extendScalarsComp_hom`).

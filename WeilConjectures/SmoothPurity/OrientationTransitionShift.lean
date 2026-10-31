@@ -14,8 +14,9 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 The isomorphisms `β : Ψ(red_{n+1} K) ≅ red_n K` of the étale readings of the reductions
 modulo `ℓⁿ⁺¹` and `ℓⁿ` of a bounded constructible `𝒪_E`-complex `K`
 (`ProEtale.CondensedRing.etaleReductionExtendScalarsIsoApp`) commute with the shifts
-(`ProEtale.CondensedRing.map_reductionShift_comp_etaleReductionExtendScalarsIsoApp`), for the commutations of the
-reductions with the shifts (`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReductionShiftIso`),
+(`ProEtale.CondensedRing.map_reductionShift_comp_etaleReductionExtendScalarsIsoApp`), for the
+commutations of the reductions with the shifts
+(`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReductionShiftIso`),
 of the étale readings with the shifts and of `Ψ = - ⊗ᴸ_{𝒪_E ⧸ ℓⁿ⁺¹} 𝒪_E ⧸ ℓⁿ` with the shifts.
 -/
 
@@ -61,13 +62,16 @@ noncomputable def finiteEtaleReadingExtendScalarsMap' :
         R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])) ≫
     Functor.whiskerLeft _ (Functor.associator _ _ _).hom
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma finiteEtaleReadingExtendScalarsMap'_eq :
     finiteEtaleReadingExtendScalarsMap' ℓ E n X = finiteEtaleReadingExtendScalarsMap ℓ E n X := by
   ext M
-  simp [finiteEtaleReadingExtendScalarsMap', finiteEtaleReadingExtendScalarsMap]
+  simp only [Functor.comp_obj, ObjectProperty.ι_obj]
   exact Category.id_comp _
 
 set_option synthInstance.maxHeartbeats 400000 in
+-- The `CommShift` instance of a composite of many whiskered natural transformations is found by
+-- a long instance search.
 instance commShift_finiteEtaleReadingExtendScalarsMap' :
     NatTrans.CommShift (finiteEtaleReadingExtendScalarsMap' ℓ E n X) ℤ := by
   dsimp only [finiteEtaleReadingExtendScalarsMap']
@@ -87,7 +91,8 @@ noncomputable instance commShift_boundedConstructibleIntegersModPowReduction :
   infer_instance
 
 instance commShift_boundedConstructibleIntegersModPowReductionCompatibility_hom :
-    NatTrans.CommShift (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m).hom ℤ := by
+    NatTrans.CommShift
+      (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m).hom ℤ := by
   dsimp only [boundedConstructibleIntegersModPowReductionCompatibility,
     commShift_boundedConstructibleIntegersModPowReduction]
   infer_instance
@@ -101,8 +106,8 @@ lemma boundedConstructibleIntegersModPowReduction_commShiftIso_app
   apply Iso.ext
   apply (ObjectProperty.fullyFaithfulι _).map_injective
   have h : ((boundedConstructibleIntegersModPowReduction X ℓ E m).commShiftIso q) =
-      Functor.CommShift.OfComp.iso (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m)
-        q := rfl
+      Functor.CommShift.OfComp.iso
+        (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m) q := rfl
   rw [boundedConstructibleIntegersModPowReductionShiftIso, Functor.FullyFaithful.preimageIso_hom,
     Functor.FullyFaithful.map_preimage, h, Iso.app_hom, Functor.CommShift.OfComp.map_iso_hom_app]
   simp [Functor.commShiftIso_comp_hom_app]
@@ -115,9 +120,10 @@ lemma boundedConstructibleIntegersModPowReduction_commShiftIso_hom_app
 
 /-- The condensed transition `(𝒪_E ⧸ ℓⁿ) ⊗ᴸ red_{n+1} - ≅ red_n -` commutes with the shifts. -/
 instance commShift_boundedConstructibleIntegersModPowReductionTransitionIso_hom :
-    NatTrans.CommShift (boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X).hom ℤ := by
-  dsimp only [boundedConstructibleIntegersModPowReductionTransitionIso, Mod.derivedExtendScalarsCompIso,
-    Mod.mapDerivedCategoryComapCompIso]
+    NatTrans.CommShift
+      (boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X).hom ℤ := by
+  dsimp only [boundedConstructibleIntegersModPowReductionTransitionIso,
+    Mod.derivedExtendScalarsCompIso, Mod.mapDerivedCategoryComapCompIso]
   infer_instance
 
 end Condensed
@@ -142,13 +148,16 @@ noncomputable def etaleReductionExtendScalarsMap' :
     (Functor.associator _ _ _).hom
 
 set_option synthInstance.maxHeartbeats 400000 in
+-- The `CommShift` instance of a composite of many whiskered natural transformations is found by
+-- a long instance search.
 instance commShift_etaleReductionExtendScalarsMap' :
     NatTrans.CommShift (etaleReductionExtendScalarsMap' ℓ E n X) ℤ := by
   dsimp only [etaleReductionExtendScalarsMap']
   infer_instance
 
 lemma etaleReductionExtendScalarsMap'_app (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (etaleReductionExtendScalarsMap' ℓ E n X).app K = (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom := by
+    (etaleReductionExtendScalarsMap' ℓ E n X).app K =
+      (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom := by
   rw [etaleReductionExtendScalarsIsoApp_hom, ← finiteEtaleReadingExtendScalarsMap'_eq]
   simp [etaleReductionExtendScalarsMap']
 
@@ -173,7 +182,8 @@ theorem map_reductionShift_comp_etaleReductionExtendScalarsIsoApp
       ((finiteEtaleReading ℓ E n X).commShiftIso q).hom.app
         ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj K) := by
   have h := NatTrans.shift_app_comm (etaleReductionExtendScalarsMap' ℓ E n X) q K
-  simp only [Functor.commShiftIso_comp_hom_app, boundedConstructibleIntegersModPowReduction_commShiftIso_hom_app,
+  simp only [Functor.commShiftIso_comp_hom_app,
+    boundedConstructibleIntegersModPowReduction_commShiftIso_hom_app,
     etaleReductionExtendScalarsMap'_app] at h
   simpa [Functor.map_comp, Category.assoc] using h
 

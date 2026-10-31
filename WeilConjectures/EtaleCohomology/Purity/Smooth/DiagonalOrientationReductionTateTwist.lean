@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionTate
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionMonoidalTensor
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionMonoidalPullback
 
 /-!
 # The canonical Tate data of the reduction of coefficients
@@ -122,6 +122,8 @@ lemma reductionTateTwistIso_zero :
   letI := derivedExtendScalarsMonoidal hρ ha X
   IntTensorFamily.map_iso_zero _ _ _ _
 
+omit [NeZero (ringChar Λ)] [NeZero (ringChar Λ')] [HasInvertibleExponent Λ X]
+  [HasInvertibleExponent Λ' X] in
 /-- `Ψ Λ_X ≅ Λ'_X` is the unit comparison of `derivedExtendScalarsMonoidal`. -/
 lemma derivedExtendScalarsConstantComplexIso_hom_eq_η :
     letI := derivedExtendScalarsMonoidal hρ ha X
@@ -138,8 +140,7 @@ open Functor.OplaxMonoidal
 variable {U X : Scheme.{u}} (e : U ⟶ X)
 
 /-- The commutation `Le^* ⋙ Ψ_U ≅ Ψ_X ⋙ Le^*` is compatible with the tensor comparisons `δ`
-of `Ψ` and of the derived pullbacks
-(`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackOfCounit_app_tensor_comp`). -/
+of `Ψ` and of the derived pullbacks. -/
 @[reassoc]
 lemma derivedExtendScalarsPullbackIso_hom_app_tensor_comp
     (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -147,7 +148,8 @@ lemma derivedExtendScalarsPullbackIso_hom_app_tensor_comp
     letI := derivedExtendScalarsMonoidal hρ ha U
     letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
     letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ') e
-    (derivedExtendScalarsPullbackIso hρ ha e).hom.app (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj M) ≫
+    (derivedExtendScalarsPullbackIso hρ ha e).hom.app
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj M) ≫
         L((e)^*[ModuleCat.{u + 1} Λ']).map (δ (derivedExtendScalars hρ ha X) K M) ≫
           δ L((e)^*[ModuleCat.{u + 1} Λ']) _ _ =
       (derivedExtendScalars hρ ha U).map (δ L((e)^*[ModuleCat.{u + 1} Λ]) K M) ≫
@@ -174,6 +176,8 @@ lemma leftDerivedUpperStar_map_twistObjectAddIso_δ (Λ : Type (u + 1)) [CommRin
   exact leftDerivedUpperStar_map_tateTwistObjectAddIso Λ e m m'
 
 
+omit [NeZero (ringChar Λ)] [NeZero (ringChar Λ')] [HasInvertibleExponent Λ U]
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' U] [HasInvertibleExponent Λ' X] in
 /-- The naturality of `Le^* ⋙ Ψ_U ≅ Ψ_X ⋙ Le^*`, without composites of functors. -/
 @[reassoc]
 lemma derivedExtendScalarsPullbackIso_hom_naturality
@@ -184,6 +188,8 @@ lemma derivedExtendScalarsPullbackIso_hom_naturality
         L((e)^*[ModuleCat.{u + 1} Λ']).map ((derivedExtendScalars hρ ha X).map f) :=
   (derivedExtendScalarsPullbackIso hρ ha e).hom.naturality f
 
+omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' U]
+  [HasInvertibleExponent Λ' X] in
 /-- `AlgebraicGeometry.Etale.derivedExtendScalarsPullbackIso_hom_app_tensor_comp` for the Tate
 twists. -/
 @[reassoc]
@@ -215,6 +221,8 @@ noncomputable def reductionPullbackTateTwistIntTensorFamily :
   ((tateTwistIntTensorFamily Λ X).map L((e)^*[ModuleCat.{u + 1} Λ])).map
     (derivedExtendScalars hρ ha U)
 
+omit [NeZero (ringChar Λ')] [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U]
+  [HasInvertibleExponent Λ' X] in
 /-- The multiplication of the family `Ψ_U Le^* Λ_X(m)`. -/
 lemma reductionPullbackTateTwistIntTensorFamily_addIso_hom (m m' : ℤ) :
     letI := derivedExtendScalarsMonoidal hρ ha U
@@ -226,6 +234,7 @@ lemma reductionPullbackTateTwistIntTensorFamily_addIso_hom (m m' : ℤ) :
           L((e)^*[ModuleCat.{u + 1} Λ]).map (HasTateTwist.twistObjectAddIso (Λ := Λ) X m m').hom) :=
   rfl
 
+omit [HasInvertibleExponent Λ' X] in
 /-- The identifications `Ψ_U Le^* Λ_X(m) ≅ Ψ_U Λ_U(m) ≅ Λ'_U(m)` are multiplicative. -/
 lemma reductionTateTwistIso_pullback_left_mul (m m' : ℤ) :
     ((reductionPullbackTateTwistIntTensorFamily Λ hρ ha e).addIso m m').hom ≫
@@ -236,14 +245,15 @@ lemma reductionTateTwistIso_pullback_left_mul (m m' : ℤ) :
         ((derivedExtendScalars hρ ha U).map (leftDerivedUpperStarTateObjectIso e m').hom ≫
           (reductionTateTwistIso hρ ha k hk U m').hom)) ≫
         (HasTateTwist.twistObjectAddIso (Λ := Λ') U m m').hom := by
-  letI := derivedExtendScalarsMonoidal hρ ha U
-  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ (ModuleCat.{u + 1} Λ) e
+  let := derivedExtendScalarsMonoidal hρ ha U
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ (ModuleCat.{u + 1} Λ) e
   rw [reductionPullbackTateTwistIntTensorFamily_addIso_hom, Category.assoc,
     ← Functor.map_comp_assoc, Category.assoc, leftDerivedUpperStar_map_twistObjectAddIso_δ,
     IsIso.inv_hom_id_assoc, Functor.map_comp_assoc, reductionTateTwistIso_mul,
     ← δ_natural_assoc, IsIso.inv_hom_id_assoc, tensorHom_comp_tensorHom_assoc]
 
+omit [HasInvertibleExponent Λ U] in
 /-- The identifications `Ψ_U Le^* Λ_X(m) ≅ Le^* Ψ_X Λ_X(m) ≅ Le^* Λ'_X(m) ≅ Λ'_U(m)` are
 multiplicative. -/
 lemma reductionTateTwistIso_pullback_right_mul (m m' : ℤ) :
@@ -258,11 +268,11 @@ lemma reductionTateTwistIso_pullback_right_mul (m m' : ℤ) :
           L((e)^*[ModuleCat.{u + 1} Λ']).map (reductionTateTwistIso hρ ha k hk X m').hom ≫
             (leftDerivedUpperStarTateObjectIso e m').hom)) ≫
         (HasTateTwist.twistObjectAddIso (Λ := Λ') U m m').hom := by
-  letI := derivedExtendScalarsMonoidal hρ ha U
-  letI := derivedExtendScalarsMonoidal hρ ha X
-  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
-  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ') e
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ (ModuleCat.{u + 1} Λ) e
+  let := derivedExtendScalarsMonoidal hρ ha U
+  let := derivedExtendScalarsMonoidal hρ ha X
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ') e
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ (ModuleCat.{u + 1} Λ) e
   rw [reductionPullbackTateTwistIntTensorFamily_addIso_hom, Functor.map_comp, Category.assoc,
     Category.assoc, derivedExtendScalarsPullbackIso_hom_naturality_assoc hρ ha e
       (M := tateObject Λ X (m + m')) (HasTateTwist.twistObjectAddIso X m m').hom,
@@ -389,21 +399,24 @@ The hypothesis `hμ` of
 reduction of coefficients with its canonical Tate data, the tensor comparison of the change of
 coefficients being `δ : Ψ(K ⊗ᴸ M) ⟶ Ψ K ⊗ᴸ Ψ M`: the identifications
 `Ψ(Λ(m)[2m]) ≅ Λ'(m)[2m]` are compatible with the multiplications
-`Λ(m)[2m] ⊗ᴸ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')]` (`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
+`Λ(m)[2m] ⊗ᴸ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')]`
+(`AlgebraicGeometry.Etale.shiftTateObjectAddIso`). -/
 theorem reductionTateTwistShiftData_mul (U : Scheme.{u}) [HasInvertibleExponent Λ U]
     [HasInvertibleExponent Λ' U] (m m' : ℤ) :
     letI := derivedExtendScalarsMonoidal hρ ha U
     (derivedExtendScalars hρ ha U).map (shiftTateObjectAddIso Λ U m m').hom ≫
         ((reductionTateTwistShiftData hρ ha k hk).iso U (m + m')).hom =
       δ (derivedExtendScalars hρ ha U) _ _ ≫
-        derivedTensorHom (ModuleCat.{u + 1} Λ') ((reductionTateTwistShiftData hρ ha k hk).iso U m).hom
+        derivedTensorHom (ModuleCat.{u + 1} Λ')
+          ((reductionTateTwistShiftData hρ ha k hk).iso U m).hom
           ((reductionTateTwistShiftData hρ ha k hk).iso U m').hom ≫
           (shiftTateObjectAddIso Λ' U m m').hom := by
-  letI := derivedExtendScalarsMonoidal hρ ha U
+  let := derivedExtendScalarsMonoidal hρ ha U
   simp only [reductionTateTwistShiftData_iso_hom, shiftTateObjectAddIso, Iso.trans_hom,
     Functor.mapIso_hom, eqToIso.hom, Functor.map_comp, Category.assoc]
-  have h₁ : (derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectAddIso (Λ := Λ) U m m').hom ≫
-      (reductionTateTwistIso hρ ha k hk U (m + m')).hom =
+  have h₁ :
+      (derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectAddIso (Λ := Λ) U m m').hom ≫
+          (reductionTateTwistIso hρ ha k hk U (m + m')).hom =
         δ (derivedExtendScalars hρ ha U) (tateObject Λ U m) (tateObject Λ U m') ≫
           derivedTensorHom (ModuleCat.{u + 1} Λ') (reductionTateTwistIso hρ ha k hk U m).hom
             (reductionTateTwistIso hρ ha k hk U m').hom ≫
@@ -418,7 +431,8 @@ theorem reductionTateTwistShiftData_mul (U : Scheme.{u}) [HasInvertibleExponent 
   dsimp only [tateObject] at h₁ h₂ h₃ ⊢
   rw [Functor.map_eqToHom_comp_commShiftIso_hom_app_comp _ (by ring) rfl, eqToHom_refl,
     Category.id_comp, Functor.commShiftIso_hom_naturality_assoc,
-    ← Functor.map_comp_assoc, h₁, Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc,
+    ← Functor.map_comp_assoc, h₁, Functor.map_comp, Functor.map_comp, Category.assoc,
+    Category.assoc,
     reassoc_of% h₂, ← reassoc_of% h₃,
     derivedTensorHom_comp_assoc]
 

@@ -20,7 +20,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 Let `F : C ⥤ D` be an exact functor between monoidal Grothendieck abelian categories with
 functorial flat resolutions, which preserves flat objects and `ℤ`-indexed colimits, and let
 `G : D ⥤ E` preserve quasi-isomorphisms between K-flat complexes. Then `D(F) ⋙ LG` is a left
-derived functor of `F ⋙ G` (`Functor.isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor_of_preservesFlat`):
+derived functor of `F ⋙ G`
+(`Functor.isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor_of_preservesFlat`):
 it is computed on the complexes whose image under `F` is K-flat, which form a left derivability
 structure (`Functor.isLeftDerivabilityStructure_kFlatKFlatMap`). Unlike
 `Functor.leftDerivedFunctorCompMapDerivedCategoryIso`, this does not need `F` to preserve K-flat
@@ -65,6 +66,8 @@ noncomputable def mapDerivedCategoryCompLeftDerivedFunctorCounit :
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso e (ComplexShape.up ℤ)).hom Qh
 
+omit [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [HasFunctorialFlatResolution C] in
 /-- The counit `mapDerivedCategoryCompLeftDerivedFunctorCounit` is an isomorphism on the
 complexes whose image under `F` is K-flat. -/
 lemma isIso_mapDerivedCategoryCompLeftDerivedFunctorCounit_app
@@ -89,9 +92,9 @@ lemma isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor_of_preserv
       IsIso ((F.mapDerivedCategoryCompLeftDerivedFunctorCounit G e).app
         ((HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap).functor.obj X)) :=
     F.isIso_mapDerivedCategoryCompLeftDerivedFunctorCounit_app G e X.obj X.property.2
-  exact (LocalizerMorphism.Derives.of_isIso_app_functor_obj'
-    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap) _ hα).isLeftDerivedFunctor_of_isIso
-      _ hα
+  have hD := LocalizerMorphism.Derives.of_isIso_app_functor_obj'
+    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatKFlatMap) _ hα
+  exact hD.isLeftDerivedFunctor_of_isIso _ hα
 
 end CategoryTheory.Functor
 
@@ -159,8 +162,9 @@ instance isLeftDerivedFunctor_comparisonUpperStar_comp_derivedExtendScalars :
       (comparisonUpperStarDerivedExtendScalarsCounit hφ ha X)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
   have := ProEtale.preservesKFlatQuasiIso_extendScalars hφ ha X
-  (ν^*(X)[ModuleCat.{u + 1} Λ]).isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor_of_preservesFlat
-    (Sheaf.extendScalars (Scheme.ProEt.topology X) φ) (comparisonUpperStarCompExtendScalarsIso φ X)
+  Functor.isLeftDerivedFunctor_mapDerivedCategory_comp_leftDerivedFunctor_of_preservesFlat
+    (ν^*(X)[ModuleCat.{u + 1} Λ]) (Sheaf.extendScalars (Scheme.ProEt.topology X) φ)
+    (comparisonUpperStarCompExtendScalarsIso φ X)
 
 /-- The counit exhibiting `(- ⊗ᴸ_Λ Λ') ⋙ D(ν^*)` as a left derived functor of
 `F ↦ ν^*(Λ' ⊗_Λ F)` (`Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit`). -/

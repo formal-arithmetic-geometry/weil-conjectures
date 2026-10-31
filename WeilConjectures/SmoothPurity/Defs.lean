@@ -139,6 +139,7 @@ orientation (`isCanonicalSmoothOrientation_smoothOrientationOfSmooth`). -/
 theorem isCanonicalSmoothOrientation_smoothOrientation :
     haveI := neZero_natCast_of_ringChar_ne ℓ (k := k)
     IsCanonicalSmoothOrientation ℓ f d (smoothOrientation ℓ f d) := by
+  have := neZero_natCast_of_ringChar_ne ℓ (k := k)
   rw [smoothOrientation, dif_pos ‹_›]
   exact isCanonicalSmoothOrientation_smoothOrientationOfSmooth ℓ f d
 

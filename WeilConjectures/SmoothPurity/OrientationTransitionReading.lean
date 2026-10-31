@@ -58,9 +58,8 @@ lemma boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_comp
         (boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X).hom.app L := by
   simp only [boundedConstructibleIntegersModPowReductionTransitionIso_hom_app,
     Mod.derivedExtendScalarsReduction, derivedReductionMap, Category.assoc, Iso.app_inv,
-    Iso.app_hom, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id, Functor.map_comp]
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
-    Category.id_comp]
+    Iso.app_hom, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
 
 end Condensed
 
@@ -109,10 +108,13 @@ theorem derivedExtendScalarsReduction_derivedReductionMap_eq_of_comp
   let t₀ := (ObjectProperty.fullyFaithfulι _).preimage u
   have ht₀ : (boundedConstructible _).ι.map t₀ = u :=
     (ObjectProperty.fullyFaithfulι _).map_preimage u
-  have key := ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
-      R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])).comp_comp_map_eq_comp_map_comp_map
+  have key :=
+    ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
+      R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])
+      ).comp_comp_map_eq_comp_map_comp_map
     ((Mod.extendScalars (integersModPowTransition X.left ℓ E n)).leftDerivedFunctor.map
-      ((boundedConstructible _).ι.map t')) ((finiteEtaleReadingExtendScalarsMap ℓ E n X).naturality t')
+      ((boundedConstructible _).ι.map t'))
+    ((finiteEtaleReadingExtendScalarsMap ℓ E n X).naturality t')
     (boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_comp ℓ E n X.left t')
   have key₂ : (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom ≫
       ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
@@ -136,19 +138,22 @@ theorem derivedExtendScalarsReduction_derivedReductionMap_eq_of_comp
     (finiteEtaleReadingFullyFaithful (etaleOriginReading ℓ E n X)).map_injective
       ((cancel_epi (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom).1 key₃)
   calc _ = ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app K).inv ≫
-        u ≫ ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app L).hom := by
+        u ≫
+          ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app L).hom := by
         simp only [u, Iso.app_inv, Iso.app_hom, Category.assoc, Iso.inv_hom_id_app_assoc,
           Iso.inv_hom_id_app]
         exact (Category.comp_id _).symm
     _ = ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app K).inv ≫
         (boundedConstructible _).ι.map t₀ ≫
           ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app L).hom :=
-        congrArg (fun g ↦ ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app
-          K).inv ≫ g ≫ ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app
-            L).hom) ht₀.symm
+        congrArg (fun g ↦
+          ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app K).inv ≫
+            g ≫ ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app
+              L).hom) ht₀.symm
     _ = _ :=
-        congrArg (fun g ↦ ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app
-          K).inv ≫ (boundedConstructible _).ι.map g ≫
+        congrArg (fun g ↦
+          ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app K).inv ≫
+            (boundedConstructible _).ι.map g ≫
             ((boundedConstructibleIntegersModPowReductionCompatibility X.left ℓ E n).app L).hom) ht
 
 end Reading

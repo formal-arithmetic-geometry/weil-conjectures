@@ -135,18 +135,19 @@ instance isMonoidal_lowerStarCompRestrictScalarsIso_hom :
       Functor.LaxMonoidal.comp_ε]
     apply Sheaf.hom_ext_of_ε_comp
     ext V : 2
-    simp only [NatTrans.comp_app, Functor.map_comp, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
+    simp only [NatTrans.comp_app, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
       sheafCompose_map_hom, Functor.whiskerRight_app]
     rw [ε_sheafToPresheaf_app_comp_ε_sheafCompose_app_assoc, ← Functor.map_comp, ← Category.assoc]
     erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app,
-      Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app, Etale.lowerStar_map_hom_app,
+      Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app,
+      Etale.lowerStar_map_hom_app,
       ε_sheafToPresheaf_app_comp_ε_sheafCompose_app]
   tensor A B := by
     simp only [lowerStarCompRestrictScalarsIso, Iso.refl_hom, NatTrans.id_app, Category.comp_id,
       Functor.LaxMonoidal.comp_μ, MonoidalCategory.id_tensorHom_id, Category.id_comp]
     apply Sheaf.hom_ext_of_μ_comp
     ext V : 2
-    simp only [NatTrans.comp_app, Functor.map_comp, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
+    simp only [NatTrans.comp_app, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
       sheafCompose_map_hom, Functor.whiskerRight_app, Functor.comp_obj]
     rw [μ_sheafToPresheaf_app_comp_μ_sheafCompose_app_assoc, ← Functor.map_comp]
     have h₁ : (μ (sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
