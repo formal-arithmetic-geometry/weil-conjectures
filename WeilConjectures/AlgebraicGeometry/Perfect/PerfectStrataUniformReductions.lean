@@ -321,7 +321,8 @@ private theorem uniform_bounds_of_local_vanishing
     have hz : IsZero ((SheafOfModules.toSheaf ((adicLisseForget X).obj (R t))).obj
         (H t q)) := by
       apply (IsZero.iff_id_eq_zero _).2
-      apply AlgebraicGeometry.ProEtale.abDetectMaps S.immersion
+      apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+        S.immersion
       · intro x
         obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
           (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)

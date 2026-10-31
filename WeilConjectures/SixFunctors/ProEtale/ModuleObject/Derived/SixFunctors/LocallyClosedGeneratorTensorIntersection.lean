@@ -488,7 +488,7 @@ private theorem moduleClosedSupportedUnit
     IsIso ((upperStarLowerStarAdjunction Λ i).unit.app N) := by
   have hzero : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj N.X) :=
     ((Mod.forget _).map_isZero hj).of_iso (upperStarObjXIso Λ j N).symm
-  exact moduleUnitOfAbelian Λ i N ((ProEtale.abelian_closed_support i j hij).2 N.X hzero)
+  exact moduleUnitOfAbelian Λ i N ((ProEtale.abelian_closed_support_counit_and_unit i j hij).2 N.X hzero)
 
 private instance generatorExtension_additive
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

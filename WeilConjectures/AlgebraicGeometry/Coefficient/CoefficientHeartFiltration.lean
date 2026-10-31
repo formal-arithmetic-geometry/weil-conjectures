@@ -538,7 +538,7 @@ private theorem closedOpen_to_closure
   have houterAb := ((Mod.forget _).map_isZero (hs U.ι houter)).of_iso
     (upperStarObjXIso Λ U.ι N).symm
   have ho := moduleUnitOfAbelian Λ a.imageι N
-    ((ProEtale.abelian_closed_support a.imageι U.ι hU).2 N.X houterAb)
+    ((ProEtale.abelian_closed_support_counit_and_unit a.imageι U.ι hU).2 N.X houterAb)
   have hd : Disjoint (Set.range (a.toImage.closedComplement ≫ a.imageι))
       (Set.range a) := by
     rw [Set.disjoint_left]

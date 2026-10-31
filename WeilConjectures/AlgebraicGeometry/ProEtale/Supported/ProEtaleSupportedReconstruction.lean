@@ -28,6 +28,9 @@ to additive sheaves only to use the published module-object realization; no coef
 or functor is chosen privately.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -88,7 +91,7 @@ private theorem abelian_open_supported_counit {X Z U : Scheme.{u}}
     exact (hz _).eq_of_tgt _ _
   have hdetect (P : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (hp : IsZero (F.obj P)) (hq : IsZero (H.obj P)) : IsZero P := by
-    have : IsIso (ai.unit.app P) := (abelian_closed_support i j hij).2 P hq
+    have : IsIso (ai.unit.app P) := (abelian_closed_support_counit_and_unit i j hij).2 P hq
     exact (G.map_isZero hp).of_iso (asIso (ai.unit.app P))
   have : IsIso aj.unit := aj.unit_isIso_of_L_fully_faithful
   have hH : IsIso (H.map (aj.counit.app N)) := by

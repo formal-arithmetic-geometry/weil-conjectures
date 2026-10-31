@@ -546,7 +546,8 @@ private theorem stratified_perfect_bounded (T : Scheme.{u}) [IsNoetherian T]
       exact hz.of_iso (localHomologyIso (s.immersion i) R (V i j) K q)
     have hz : IsZero ((SheafOfModules.toSheaf ((adicLisseForget T).obj R)).obj H) := by
       apply (IsZero.iff_id_eq_zero _).2
-      apply AlgebraicGeometry.ProEtale.abDetectMaps s.immersion
+      apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+        s.immersion
       · intro x
         obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
           (s.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)

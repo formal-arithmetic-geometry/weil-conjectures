@@ -262,7 +262,7 @@ theorem coefficientHeart_curve_complement
       ((Mod.forget _).map_isZero hjM).of_iso
         ((profinitePointModuleForgetPullbackIso Λ U.ι).app M).symm
     have hunit := CondensedRing.moduleUnitOfAbelian Λ i M
-      ((abelian_closed_support i U.ι hij).2 M.X hab)
+      ((abelian_closed_support_counit_and_unit i U.ι hij).2 M.X hab)
     exact ((CondensedRing.lowerStar Λ i).map_isZero hiM).of_iso
       (asIso (b.unit.app M))
   have hdetect : JointlyReflectIsomorphisms

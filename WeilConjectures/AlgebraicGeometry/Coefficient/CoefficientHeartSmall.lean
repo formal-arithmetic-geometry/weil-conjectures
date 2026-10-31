@@ -252,7 +252,8 @@ private theorem stratifiedModelsSmall
         have : ∀ i : Fin S.n, TopologicalSpace.NoetherianSpace (S.domain i) :=
           fun i ↦ (S.immersion i).isEmbedding.noetherianSpace
         have : ∀ i : Fin S.n, QuasiCompact (S.immersion i) := fun i ↦ inferInstance
-        apply abDetectMaps S.immersion
+        apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
+          S.immersion
         · intro x
           obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
             (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
