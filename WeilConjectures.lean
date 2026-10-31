@@ -11898,6 +11898,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.Finite
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
 public import WeilConjectures.Mathlib.Topology.Algebra.Group.DenseExtension
+public import WeilConjectures.Mathlib.Topology.Algebra.Group.PowSurjective
 public import WeilConjectures.Mathlib.Topology.Algebra.Module.ModuleTopology
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Limits.Pullbacks
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
@@ -14326,6 +14327,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ModuleTraceAdjustment
+public import WeilConjectures.SixFunctors.NearbyCycles.ActionTrivialModEll
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
