@@ -621,8 +621,6 @@ theorem extension_exact (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F)
     have hall := heq_comp (congrArg J.obj hc) rfl hd him' hh
     exact hall.trans (heq_of_eq ((Category.id_comp _).trans (Category.comp_id _)))
 
-set_option linter.unusedSectionVars false in
-include triC triD triLC triLD hshiftC hshiftD hQC hQD hdistC hdistD in
 end Triangulated
 
 end CategoryTheory.ScalarLocalization

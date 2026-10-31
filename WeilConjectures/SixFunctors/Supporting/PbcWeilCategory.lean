@@ -154,7 +154,6 @@ section AdditiveTransport
 variable {D' : Type*} [Category D'] [Preadditive D']
   {G : D' ⥤ D'} [G.Additive] {L : C ⥤ D'} [L.Additive]
 
-set_option backward.isDefEq.respectTransparency false in
 end AdditiveTransport
 
 end CategoryTheory.Endofunctor.IsoAlgebra
@@ -162,7 +161,6 @@ end CategoryTheory.Endofunctor.IsoAlgebra
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 universe v z
 variable {C : Type z} [Category.{v} C] {F : C ⥤ C}
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace WeilConjectures

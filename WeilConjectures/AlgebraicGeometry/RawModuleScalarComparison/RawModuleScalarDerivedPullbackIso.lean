@@ -63,7 +63,4 @@ theorem pullback_unit (Λ : Type (u + 1)) [CommRing Λ]
     ((moduleAbelianUpperStarComparison Λ f).app F) = _
   exact Equiv.apply_symm_apply _ _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.Etale.RawModuleScalarComparison

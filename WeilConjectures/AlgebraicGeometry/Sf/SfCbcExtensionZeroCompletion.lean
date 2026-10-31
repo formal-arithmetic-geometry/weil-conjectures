@@ -276,5 +276,4 @@ attribute [local instance 1000] SheafOfModules.hasSheafify_coefficientUniverse
 attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Scheme

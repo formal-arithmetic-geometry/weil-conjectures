@@ -123,7 +123,6 @@ theorem isSheaf_latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
   exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
     Scheme.proetaleTopology_le_fpqcTopology
 
-set_option backward.isDefEq.respectTransparency false in
 section LatticePairImages
 
 set_option backward.isDefEq.respectTransparency false
@@ -580,7 +579,6 @@ private theorem integralMatrixSubgroup_mem_of_entries
   apply Units.ext
   rfl
 
-omit [TopologicalSpace K] [IsTopologicalRing K] in
 end MatrixImages
 
 end LatticeMatrixImages
@@ -776,7 +774,6 @@ private theorem freeBasisCoordinate
   · rw [if_neg hij] at hh ⊢
     exact hh
 
-omit [Fintype I] [DecidableEq I] in
 end FreeExtension
 
 section ConstantMatrix

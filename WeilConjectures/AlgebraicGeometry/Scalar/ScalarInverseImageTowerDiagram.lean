@@ -92,7 +92,6 @@ section ProofHelpers
 
 open SheafOfModules.GeometricConstruction
 
-attribute [local instance] towerComposeRing towerComposeSets towerComposeModules towerBinaryProduct
 
 private theorem towerAdjunction
     {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D) (R : D ⥤ C)
@@ -229,7 +228,7 @@ private noncomputable def restrictionComp (a : A ⟶ B) (b : B ⟶ C) :
 
 end ScalarCalculus
 
-attribute [local irreducible] scalarPure scalarReassoc restrictionComp
+attribute [local irreducible] scalarPure restrictionComp
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
@@ -254,7 +253,6 @@ variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
 
 attribute [local irreducible] mateIsoEquiv restrictHomEquiv
 
-include ha in
 end
 end TransportedHom
 
@@ -273,7 +271,6 @@ variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
     IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫
       (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX)
 
-include V adj ha in
 end
 
 set_option backward.isDefEq.respectTransparency false
@@ -291,7 +288,6 @@ variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
   (χAB : tensorFunctor aY ⋙ IB.modules ≅ IA.modules ⋙ tensorFunctor aX)
   (χBC : tensorFunctor bY ⋙ IC.modules ≅ IB.modules ⋙ tensorFunctor bX)
 
-attribute [local irreducible] compositeScalarComparison
 
 end CompositeComparison
 

@@ -402,10 +402,6 @@ private theorem principal_reflector
     rw [← hk, isIso_comp_right_iff]
     exact hi X
 
-omit [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ ringedSiteModules.{u}
-    (derivedChangeRingIndependentCoefficients J R))]
-  [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ ringedSiteModules.{u}
-    (derivedChangeRingIndependentCoefficients J S))] in
 private theorem finite_free_flat
     (A : SystemScalarModel.{u, u, u} a)
     (hfree : ∃ d : ℕ, Nonempty

@@ -664,8 +664,6 @@ def spFiniteKummer
           (ZMod (ℓ ^ (r + 1))))) ⟶ Scheme.tateFiniteLine X ℓ A r a :=
   (spFiniteKummer_existsUnique X ℓ A r n hrn a).exists.choose
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /-- All signed powers of an internal coefficient line, in the sectionwise module encoding.
 Zero is the coefficient unit; positive degrees use tensor powers and negative
 degrees use sheaf Hom into the unit. The equivalence keeps the underlying sheaf.

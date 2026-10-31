@@ -319,7 +319,6 @@ private def canonicalKappa (F : A ⥤ B) [F.Additive]
       simpa only [Functor.comp_map, asIso_hom, roosTowerAction] using
         roosAdditiveComparison_natural F f)
 
-omit [HasCountableProducts A] in
 omit [HasCountableProducts A] [HasCountableProducts B] in
 private theorem signedComparison (F : A ⥤ B) [F.Additive]
     {V P Q : A} {P' Q' : B} (c : V ⟶ P ⊞ Q)
@@ -422,8 +421,6 @@ private theorem descendComparison
     NatTrans.comp_app, Category.id_comp, Category.comp_id, Category.assoc,
     Functor.map_id] using hh
 
-omit [HasCountableProducts A] [HasCountableProducts B] in
-omit [HasCountableProducts A] [HasCountableProducts B] in
 end ProofHelpers
 
 private theorem conjugateUnit {A B : Type*} [Category* A] [Category* B]

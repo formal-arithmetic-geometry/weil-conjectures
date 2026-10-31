@@ -90,6 +90,5 @@ def ringedLocalizationRingUnit : R ⟶ ringedLocalizationRing R s :=
   ⟨ringedLocalizationRingPresheafUnit R s ≫
     toSheafify J (ringedLocalizationRingPresheaf R s)⟩
 
-set_option maxHeartbeats 1600000 in
 -- Budget for elaborating both ring and module sheafification constructions.
 end CategoryTheory

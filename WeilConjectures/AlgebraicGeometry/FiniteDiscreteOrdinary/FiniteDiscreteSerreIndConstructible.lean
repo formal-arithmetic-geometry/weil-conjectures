@@ -51,5 +51,4 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
     exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
       h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)⟩
 
-set_option synthInstance.maxSize 4096 in
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

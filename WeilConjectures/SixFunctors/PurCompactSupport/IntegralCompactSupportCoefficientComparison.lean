@@ -209,6 +209,13 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import all WeilConjectures.CategoryTheory.SmoothPurity.AdicBasisLimit
 import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.RingedToposPullbackFilteredColimits
 
 /-! # Integral compact-support coefficient comparison
 
@@ -1365,15 +1372,34 @@ theorem completedMap_composition (L : Type u) [Field L] [Algebra ℚ_[l] L]
     exact congrArg ULift.up (RingHom.congr_fun hq x.down)
   · exact (completedCoefficientMap_existsUnique l E L (j.comp i) W).exists.choose_spec
 
+/-- The ambient natural transformation is invertible on the full finite-Tor domain.
+Source: blueprint sk-thm-purity-transport, Step 3
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
+Proof: each component is invertible by integralCoefficientComparison. A natural
+transformation is invertible if all its components are; their inverses are natural. -/
+theorem comparisonOnFiniteTor_isIso (c : Compactification f) :
+    IsIso (Functor.whiskerLeft (finiteTorConstructibleIntegral l E X).ι
+      (comparison (completedChange l E F i) c)) := by
+  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _
+    (fun M ↦ (integralCoefficientComparison l E F i D hl f c M.obj M.property).2.2.2.1)
+
+/-- The requested canonical natural isomorphism with source C_Y P_E and target P_F C_X.
+Source: blueprint sk-thm-purity-transport, Step 3
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+def comparisonIso (c : Compactification f) :
+    (finiteTorConstructibleIntegral l E X).ι ⋙ image (completed l E) c ⋙
+        pbcDerivedExtend (completedCoefficientMap l E F i Y) ≅
+      (finiteTorConstructibleIntegral l E X).ι ⋙
+        pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ image (completed l F) c :=
+  @asIso _ _ _ _ (Functor.whiskerLeft (finiteTorConstructibleIntegral l E X).ι
+    (comparison (completedChange l E F i) c))
+      (comparisonOnFiniteTor_isIso l E F i D hl f c)
+
 attribute [local irreducible] ordinaryIntegralModulePull ordinaryIntegralModuleAdjunction
   ordinaryIntegralDirectRingMap
   proEtaleRingModulePullback proEtaleRingModuleAdjunction
   HasProEtaleTorAmplitude
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section Refinements
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -1396,8 +1422,6 @@ def finiteTorIntegralInclusion (W : Scheme.{u}) :
   obj M := ⟨M.obj, M.property.1⟩
   map v := ObjectProperty.homMk v.hom
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 end Refinements
 
 end WeilConjectures.PurCompactSupport

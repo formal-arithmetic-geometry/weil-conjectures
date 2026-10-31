@@ -258,9 +258,6 @@ structure Models (G : A ⥤ B) [G.Additive] where
     HasExactLimitsOfShape (Discrete ℕ) B →
       Nonempty (NormalizedRoos sourceLimit) ∧ Nonempty (NormalizedRoos targetLimit)
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasLimitsOfShape ℕᵒᵖ B]
-  [HasCountableProducts B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
 private def ordinaryIso :
     ExactProductsRoos.ordinary (B := A) ≅ roosLimitFunctor :=
   (NatIso.ofComponents (fun X ↦
@@ -342,13 +339,6 @@ private def limitIso (G : A ⥤ B) [G.Additive]
     exact (preservesLimitNatIso (G.mapHomologicalComplex (.up ℤ))).hom.naturality
       (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f))
 
-omit [HasDerivedCategory A] [HasDerivedCategory B]
-  [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasLimitsOfShape ℕᵒᵖ B]
-  [HasCountableProducts B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
 private def signCone (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     CochainComplex.mappingCone (-roosU X) ≅ CochainComplex.mappingCone (roosU X) where
   hom := CochainComplex.mappingCone.map _ _ (𝟙 _) (-𝟙 _) (by simp)
@@ -500,5 +490,4 @@ private theorem inclusion_sign : ExactProductsRoos.comparison ≫ signIso.hom =
       ← HomologicalComplex.comp_f, ordinaryIso_components]
     rfl
 
-omit [HasDerivedCategory A] [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A] in
 end CategoryTheory.ExactAdjointTowerModels

@@ -546,7 +546,6 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso s).hom)).natTrans
 
-omit [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D] in
 private theorem exactDerivedMate_factors
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
     (τ : R ⋙ G ≅ H ⋙ R')

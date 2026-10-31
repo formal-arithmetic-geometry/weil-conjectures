@@ -143,7 +143,6 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory A]
   (hzero : ∀ (M N : ∀ i, B i), G.map (fun i ↦ (0 : M i ⟶ N i)) = 0)
   (η : 𝟭 A ≅ Functor.pi' r ⋙ G) (ε : G ⋙ Functor.pi' r ≅ 𝟭 _)
 
-include G hzero η ε in
 end DerivedPi
 
 set_option maxHeartbeats 800000 in
@@ -264,6 +263,5 @@ def scalarComposite {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   N.derived ((rings.{t, u} j).map a) ((rings.{t, u} j).map b) ≪≫
     eqToIso (congrArg (fun f ↦ (p f).derived) ((rings.{t, u} j).map_comp a b).symm)
 
-set_option maxHeartbeats 800000 in
 -- The normalized comparison types carry several dependent localization instances.
 end AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor

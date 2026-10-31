@@ -570,9 +570,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] ordinaryEvaluationTensor
 
-set_option genInjectivity false in
-set_option genSizeOf false in
-set_option genSizeOfSpec false in
 namespace Data
 
 variable (A : Data.{c, v, r} J B τ)

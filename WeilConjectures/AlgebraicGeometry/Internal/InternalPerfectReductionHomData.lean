@@ -53,6 +53,19 @@ def internalPerfectScalarModel (W : Scheme.{u})
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W
   DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)
 
+/-- The scalar complex Q = P dual tensor P. The dual is the signed Hom complex
+into A placed in degree zero, and the tensor is the ordinary direct-sum total tensor.
+Source: current blueprint sk-prop-integral-local-structure, uniform-bound paragraph
+(blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+def internalPerfectScalarDualTensor
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
+    CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ :=
+  CochainComplex.mapBifunctor
+    (CochainComplex.moduleHomComplex P
+      ((CochainComplex.singleFunctor _ 0).obj
+        (ModuleCat.of (Padic.coefficientExtensionIntegers l E)
+          (Padic.coefficientExtensionIntegers l E)))) P (curriedTensor _)
+
 /-- Hom at exponent n+1, with the actual derived coefficient extensions.
 Source: current blueprint sk-prop-integral-local-structure, Hom tower
 (blueprint: def-pe-internal-perfect-reduction-hom-data). -/

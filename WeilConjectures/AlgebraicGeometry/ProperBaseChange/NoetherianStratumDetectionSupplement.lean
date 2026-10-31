@@ -79,8 +79,6 @@ private theorem modelRingAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   simp only [Iso.refl_hom, NatTrans.id_app]
   rfl
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable def modelAbelianPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse ⋙
       Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)

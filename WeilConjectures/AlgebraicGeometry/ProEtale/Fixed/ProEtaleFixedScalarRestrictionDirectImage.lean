@@ -717,8 +717,6 @@ theorem fixedScalarRestrictionDirectImage_inv
       fixedScalarRestrictionDirectImageMap φ f := by
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale
 
 attribute [instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint

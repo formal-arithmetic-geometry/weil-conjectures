@@ -191,9 +191,10 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
   (L : A ⥤ B) [L.Additive]
   (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
 
+universe wA wB
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-universe wA wB
 
 /-- Transport the homotopy right-derived comparison to the complex localization Q.
 Source: Stacks 070K (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
@@ -258,7 +259,6 @@ variable (c : A ⟶ B)
   (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} c M)).app W
       ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 end TensorSections
 
@@ -280,7 +280,6 @@ attribute [local irreducible] monoidalCategory
 
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 600000 in
 -- Compare bilinear maps through sheafification and the scalar-extension adjunctions.
 end TensorUniqueness
 

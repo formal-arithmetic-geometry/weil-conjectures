@@ -126,10 +126,6 @@ end FiniteCoefficientComparison
 Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 abbrev adicDatumDerived := completedConstantDerived (adicDatumModules T d)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section ScalarChange
 
 variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
@@ -189,8 +185,6 @@ def adicDatumScalarPair : AdicDatumScalarPair T φ where
   triangulated := (adicDatumScalarDerived_exists T φ).choose_spec.choose_spec.2.1
   computation := (adicDatumScalarDerived_exists T φ).choose_spec.choose_spec.2.2
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem completedExtension_obj (M : completedConstantModules T R) :
     (reductionChange T φ).obj M = SheafOfModules.changeOfRings φ M :=
   reductionChange_obj_eq T φ M
@@ -212,14 +206,6 @@ private theorem adicDatumOrdinaryAdjunction_formula :
   intro M U x
   exact reductionUnit_apply T φ M U x
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ScalarChange
 
 /-- The actual limit projection to the positive quotient level n+1.
@@ -263,18 +249,10 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [instance] adicDatumOrdinaryTower_additive
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section Balancing
 variable {R S B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
 variable (φ : R ⟶ S) (ψ : S ⟶ B)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section GenericKFlatTransport
 
 open SheafOfModules
@@ -335,10 +313,6 @@ theorem adicDatumExtension_kflat (C : CochainComplex (completedConstantModules T
     (completedExtension_obj T φ) (completedExtension_map T φ) C
     ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat C).2 hC)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Balancing
 
 end AlgebraicGeometry.Scheme

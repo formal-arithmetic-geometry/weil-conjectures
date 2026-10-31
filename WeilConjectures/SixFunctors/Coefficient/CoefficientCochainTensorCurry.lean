@@ -187,7 +187,8 @@ private theorem projection_native (A B : CochainComplex Mod ℤ)
     (n p q : ℤ) (h : p + n = q) :
     homTensorCurryProjection R A B n p q h =
       coefficientHomComponent.{0, u + 1, u} J R A B n p q h := by
-  exact (coefficientHomComponent_eq_native J R A B n p q h).symm
+  unfold homTensorCurryProjection coefficientHomComponent homComplexπ homComplex
+  with_unfolding_all rfl
 
 attribute [local irreducible] homTensorCurryProjection
 
