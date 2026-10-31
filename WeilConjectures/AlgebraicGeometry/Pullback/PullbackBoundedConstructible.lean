@@ -33,6 +33,9 @@ needed to name the canonical restriction; their arguments work for every finite
 commutative ring. The main statement retains the specified adic quotients `P_n`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -105,6 +108,5 @@ private noncomputable def derivedCoefficientComparisonPullbackIso
     Functor.mapDerivedCategoryNatIso (coefficientComparisonPullbackIso f Λ) ≪≫
       Functor.mapDerivedCategoryCompIso _ _
 
-attribute [instance] isBoundedConstructibleFiniteCoefficient_isTriangulated
 
 end AlgebraicGeometry.ProEtale

@@ -24,6 +24,9 @@ Source: blueprint, direct-image comparison, proof step 5; Stacks Tag 09A6.
 (blueprint: lem-pe-classical-direct-image-preservation).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -190,6 +193,5 @@ private noncomputable def restrictionDirectImageIso {X Y : Scheme.{u}} (g : X ‚ü
     ext W x
     rfl
 
-attribute [local instance] intrinsicHasDerivedCategory
 
 end AlgebraicGeometry.ProEtale

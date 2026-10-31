@@ -881,15 +881,15 @@ theorem pull_identity (A : Type (u + 1)) [CommRing A] [Finite A]
 
 section
 
-attribute [local irreducible] sourceStep targetStep sourceResC targetResC betaC
-  sourceRes targetRes openRes pullRes pushRes beta openResMap Scheme.proEtaleRingModulePullback
+attribute [local irreducible] sourceResC targetResC betaC sourceRes targetRes openRes pullRes
+  pushRes beta openResMap Scheme.proEtaleRingModulePullback
 
 end
 
 section
 
-attribute [local irreducible] ambientSourceStep ambientTargetStep ambientRes sourceStep targetStep
-  sourceResC targetResC betaC sourceRes targetRes openRes pullRes Scheme.proEtaleRingModulePullback
+attribute [local irreducible] ambientRes sourceResC targetResC betaC sourceRes targetRes openRes
+  pullRes Scheme.proEtaleRingModulePullback
 
 end
 

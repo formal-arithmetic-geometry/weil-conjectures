@@ -244,11 +244,6 @@ attribute [local instance 2000] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.sheafMonoidalClosed
   AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
 
-attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
-  AlgebraicGeometry.ProEtale.upperStarFromPointComp
-  AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint
-  AlgebraicGeometry.ProEtale.monoidal_pointUpperStar
-  AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar
 
 set_option backward.isDefEq.respectTransparency false
 

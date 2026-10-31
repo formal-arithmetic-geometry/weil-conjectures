@@ -30,7 +30,6 @@ def towerUnitSection {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local irreducible] moduleSquareG modulePullback moduleGComp moduleRComp
   Scheme.proEtaleRingModuleAdjunction constantRingIso towerUnitSection
 
-attribute [local irreducible] towerSiteSquare
 
 end AlgebraicGeometry.ProEtale.StrictTower
 

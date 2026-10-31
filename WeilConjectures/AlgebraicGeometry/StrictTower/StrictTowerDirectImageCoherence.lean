@@ -1286,7 +1286,6 @@ theorem strictTowerMatePasting :
   concrete_matePastingLaw B
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The four canonical direct-image and square-mate normalization equations.
 Source: Stacks, Tags 0D6D and 07A7
 (blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
