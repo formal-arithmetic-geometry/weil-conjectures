@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
-public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.TraceFormula.Basic
 
 /-!
@@ -153,18 +153,6 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
         (dualizingComplex' ℓ Y) ≅ dualizingComplex' ℓ X :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
-
-variable (X) in
-/-- **Smooth purity for the dualizing complex**: for `X` smooth of pure dimension `d` over `s`,
-`ω_X ≅ ℚ̄_ℓ,X(d)[2d]`, after the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. This is
-`ProEtale.CondensedRing.smoothPurityIso` for the structure morphism `a_X`. -/
-noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
-    (dualizingComplex' ℓ X).obj ≅
-      (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
-  haveI : SmoothOfRelativeDimension d (toPoint X).left := by
-    rw [toPoint_left]
-    infer_instance
-  smoothPurityIso ℓ (toPoint X) d
 
 /-- The identity isomorphism `Ra^! ℚ̄_ℓ,s ≅ ℚ̄_ℓ,s` for an endomorphism `a = 𝟙` of `s`. -/
 noncomputable def upperShriekUnitIsoOfEqId (a : point k ⟶ point k) (ha : a = 𝟙 (point k)) :

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.TateTwist.Pullback
 
 /-!
