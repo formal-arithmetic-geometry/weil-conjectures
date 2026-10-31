@@ -192,3 +192,4 @@ theorem map_etaleReductionSmoothOrientationIso_hom_comp_of (n : ℕ)
         f.left).mapIso (etaleReductionUnitIso ℓ E.1 (n + 1) Y)) tsc.hom vω hT hD hW
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+

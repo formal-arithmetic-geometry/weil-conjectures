@@ -101,9 +101,9 @@ lemma integersModPowReductionTateTwistIso_one :
       Etale.reductionTateTwistOneIso (integersModPowCoeffTransition_surjective ℓ E n)
         (ker_integersModPowCoeffTransition ℓ E n) ℓ (ringChar_integersModPowCoeff_succ ℓ E n)
         X.left := by
-  refine Iso.ext ?_
-  rw [Etale.reductionTateTwistOneIso_hom, Equiv.eq_symm_apply, Adjunction.homEquiv_unit,
-    integersModPowReductionTateTwistIso, Iso.trans_hom, Iso.trans_hom, Iso.symm_hom,
+  refine Iso.ext ((Equiv.eq_symm_apply _).mpr ?_)
+  refine (Adjunction.homEquiv_unit _ _ _ _).trans ?_
+  rw [integersModPowReductionTateTwistIso, Iso.trans_hom, Iso.trans_hom, Iso.symm_hom,
     Functor.mapIso_inv, CategoryTheory.Functor.map_comp]
   erw [← (Etale.derivedExtendScalarsAdjunction (integersModPowCoeffTransition_surjective ℓ E n)
     (ker_integersModPowCoeffTransition ℓ E n) X.left).unit.naturality_assoc]

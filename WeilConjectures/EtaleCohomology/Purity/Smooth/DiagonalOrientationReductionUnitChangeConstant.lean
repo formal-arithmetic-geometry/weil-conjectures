@@ -134,6 +134,35 @@ lemma homEquiv_extendScalarsConstantZModIso_hom_comp {n : ℕ} (hn : (n : Λ) = 
       terminalIsTerminal).homEquiv_naturality_left _ _)
 
 variable {X} in
+/-- The form of `AlgebraicGeometry.Etale.homEquiv_extendScalarsConstantZModIso_hom_comp` with the
+two adjunctions applied one after the other. -/
+lemma constantSheafAdj_homEquiv_extendScalarsAdjunction_homEquiv_zmod_comp {n : ℕ}
+    (hn : (n : Λ) = 0) {M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (g : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ⟶ M) :
+    (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).homEquiv _ _
+        ((extendScalarsAdjunction Λ X).homEquiv _ _
+          ((extendScalarsConstantZModIso X hn).hom ≫ g)) =
+      (ModuleCat.extendScalarsAddCommGrpAdj Λ).homEquiv _ _
+        ((ModuleCat.extendScalarsAddCommGrpZModIso hn).hom ≫
+          (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+            terminalIsTerminal).homEquiv _ _ g) :=
+  homEquiv_extendScalarsConstantZModIso_hom_comp hn g
+
+variable {X} in
+/-- The adjoint `ℤ/n ⟶ Γ(X, Λ_X)` of the identification `Λ ⊗ ℤ/n ≅ Λ_X`. -/
+lemma constantSheafAdj_homEquiv_extendScalarsAdjunction_homEquiv_zmod {n : ℕ}
+    (hn : (n : Λ) = 0) :
+    (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).homEquiv _ _
+        ((extendScalarsAdjunction Λ X).homEquiv _ _ (extendScalarsConstantZModIso X hn).hom) =
+      (ModuleCat.extendScalarsAddCommGrpAdj Λ).homEquiv _ _
+        ((ModuleCat.extendScalarsAddCommGrpZModIso hn).hom ≫
+          (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+            terminalIsTerminal).unit.app _) := by
+  have h := constantSheafAdj_homEquiv_extendScalarsAdjunction_homEquiv_zmod_comp (X := X) hn (𝟙 _)
+  rw [Category.comp_id, Adjunction.homEquiv_id] at h
+  exact h
+
+variable {X} in
 /-- The adjoint `F ⟶ Res(Λ' ⊗ F)` of the change of coefficients `Λ ⊗ F ⟶ Res(Λ' ⊗ F)` is the unit
 of the extension of scalars `Λ' ⊗ -`. -/
 lemma extendScalarsAdjunction_homEquiv_changeMap_app_comp
@@ -187,5 +216,81 @@ lemma extendScalarsConstantZModIso_inv_comp_changeMap_app_comp :
   exact (congrArg (fun x ↦ ((ModuleCat.restrictScalars ρ).map
     ((constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ') terminalIsTerminal).unit.app
       (𝟙_ _))).hom x) ((ModuleCat.restrictScalars_η ρ 1).trans (map_one ρ))).symm
+
+section Pullback
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- Transposing a morphism out of `f^* A_Y` through the identification `f^* A_Y ≅ A_X` of
+constant sheaves (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`): global sections over `Y`
+of the pushforward are global sections over `X`. -/
+lemma constantSheafAdj_homEquiv_upperStarLowerStarAdjunction_homEquiv
+    (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    [HasSmallSiteSheafify A] (a : A) {M : Sheaf X.smallEtaleTopology A}
+    (g : (constantSheaf X.smallEtaleTopology A).obj a ⟶ M) :
+    (constantSheafAdj Y.smallEtaleTopology A terminalIsTerminal).homEquiv _ _
+        ((upperStarLowerStarAdjunction A f).homEquiv _ _
+          ((upperStarConstantSheafIso A f).hom.app a ≫ g)) =
+      (constantSheafAdj X.smallEtaleTopology A terminalIsTerminal).homEquiv _ _ g ≫
+        (lowerStarCompSheafSectionsTerminalIso A f).inv.app M := by
+  rw [← Iso.app_inv, Iso.eq_comp_inv, Iso.app_hom, upperStarConstantSheafIso]
+  have h := Adjunction.homEquiv_ofNatIsoRight_apply
+    ((constantSheafAdj Y.smallEtaleTopology A terminalIsTerminal).comp
+      (upperStarLowerStarAdjunction A f)) (lowerStarCompSheafSectionsTerminalIso A f)
+    (((((constantSheafAdj Y.smallEtaleTopology A terminalIsTerminal).comp
+      (upperStarLowerStarAdjunction A f)).ofNatIsoRight
+        (lowerStarCompSheafSectionsTerminalIso A f)).leftAdjointUniq
+          (constantSheafAdj X.smallEtaleTopology A terminalIsTerminal)).hom.app a ≫ g)
+  simp only [Adjunction.comp_homEquiv] at h
+  refine h.symm.trans ?_
+  rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_leftAdjointUniq_hom_app,
+    ← Adjunction.homEquiv_unit]
+
+/-- Transposing a morphism out of `f^*(Λ ⊗ F)` through the identification
+`f^*(Λ ⊗ F) ≅ Λ ⊗ f^* F` (`AlgebraicGeometry.Etale.upperStarExtendScalarsIso`). -/
+lemma extendScalarsAdjunction_homEquiv_upperStarLowerStarAdjunction_homEquiv
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    {M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (g : (extendScalars Λ X).obj ((f)^*[AddCommGrpCat.{u + 1}].obj F) ⟶ M) :
+    (extendScalarsAdjunction Λ Y).homEquiv _ _
+        ((upperStarLowerStarAdjunction _ f).homEquiv _ _
+          ((upperStarExtendScalarsIso Λ f).hom.app F ≫ g)) =
+      (upperStarLowerStarAdjunction _ f).homEquiv _ _
+        ((extendScalarsAdjunction Λ X).homEquiv _ _ g) := by
+  have h := Adjunction.homEquiv_naturality_right
+    ((extendScalarsAdjunction Λ Y).comp (upperStarLowerStarAdjunction _ f))
+    ((upperStarExtendScalarsIso Λ f).hom.app F) g
+  rw [upperStarExtendScalarsIso, Adjunction.homEquiv_leftAdjointUniq_hom_app,
+    ← Adjunction.homEquiv_unit, Adjunction.homEquiv_ofNatIsoRight_apply] at h
+  simp only [NatIso.ofComponents_hom_app, Iso.refl_hom] at h
+  erw [Category.comp_id] at h
+  exact h
+
+/-- The identifications `Λ ⊗ ℤ ≅ Λ` are compatible with the pullback along `f : X ⟶ Y`: through
+`f^*(Λ ⊗ ℤ_Y) ≅ Λ ⊗ ℤ_X` and `f^* Λ_Y ≅ Λ_X`. -/
+lemma upperStarExtendScalarsConstantSheafIntIso_hom_comp :
+    (upperStarExtendScalarsConstantSheafIntIso Λ f).hom ≫
+        (extendScalarsConstantZModIso (Λ := Λ) X (n := 0) (by simp)).hom =
+      (f)^*[ModuleCat.{u + 1} Λ].map
+          (extendScalarsConstantZModIso (Λ := Λ) Y (n := 0) (by simp)).hom ≫
+        (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) f).hom.app (ModuleCat.of Λ Λ) := by
+  apply (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _ |>.injective
+  apply (extendScalarsAdjunction Λ Y).homEquiv _ _ |>.injective
+  apply (constantSheafAdj Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+    terminalIsTerminal).homEquiv _ _ |>.injective
+  rw [upperStarExtendScalarsConstantSheafIntIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+    Category.assoc, extendScalarsAdjunction_homEquiv_upperStarLowerStarAdjunction_homEquiv,
+    Adjunction.homEquiv_naturality_left, Iso.app_hom]
+  erw [constantSheafAdj_homEquiv_upperStarLowerStarAdjunction_homEquiv]
+  rw [Adjunction.homEquiv_naturality_left]
+  rw [constantSheafAdj_homEquiv_extendScalarsAdjunction_homEquiv_zmod,
+    constantSheafAdj_homEquiv_extendScalarsAdjunction_homEquiv_zmod_comp,
+    ← Category.comp_id ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) f).hom.app _)]
+  erw [constantSheafAdj_homEquiv_upperStarLowerStarAdjunction_homEquiv]
+  rw [Adjunction.homEquiv_id, ← Category.assoc, Adjunction.homEquiv_naturality_right,
+    Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_right]
+  rfl
+
+end Pullback
 
 end AlgebraicGeometry.Etale
