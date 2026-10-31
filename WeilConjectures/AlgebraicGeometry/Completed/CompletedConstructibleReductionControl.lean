@@ -81,6 +81,10 @@ Source: blueprint proper base change, constructible-preservation proof, steps 1,
 The conclusion records cohomology, before local models and etale witnesses are assembled.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
