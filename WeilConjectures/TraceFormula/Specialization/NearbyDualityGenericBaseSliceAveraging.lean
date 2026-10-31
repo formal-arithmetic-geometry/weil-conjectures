@@ -41,27 +41,36 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-attribute [-instance] monoidalCategory_boundedConstructible
-  ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
 namespace NearbyCyclesModel
 
+/-- If `k ≫ g' = L₀ f ≫ k` for an epimorphism `k` and `f = 𝟙`, then `g' = 𝟙`. -/
+lemma eq_id_of_comp_eq_map_comp {E : Type*} [Category E] {L₀ : E ⥤ E} {W Z' : E}
+    (k : L₀.obj W ⟶ Z') [Epi k] (f : W ⟶ W) (g' : Z' ⟶ Z') (hf : f = 𝟙 W)
+    (hk : k ≫ g' = L₀.map f ≫ k) : g' = 𝟙 Z' := by
+  subst hf
+  rw [L₀.map_id, Category.id_comp] at hk
+  exact (cancel_epi k).1 (hk.trans (Category.comp_id k).symm)
+
 /-- **Transport of an averaging splitting along a factorization**, for abstract categories: let
-`a : P₀ ⟶ Z` be identified with `L₀ β` (`L₀ ≅ 𝟭`) through isomorphisms `c₁`, `k`, `e`. If `β` is
-split by `rβ` with `n • (rβ ≫ β) = ∑ f i`, and the endomorphisms `f i` correspond under `k` and
-`e` to endomorphisms `g i` of `Z`, then `a` is split with `n` times its idempotent `∑ g i`. -/
+`a : P₁ ⟶ Z` be identified with `L₀ β` (`β : P₀ ⟶ W`, `L₀ ≅ 𝟭`) through isomorphisms `c₁`, `k`,
+`e`. If `β` is split by `rβ` with `n • (rβ ≫ β) = ∑ f i`, and the endomorphisms `f i` correspond
+under `k` and `e` to endomorphisms `g i` of `Z`, then `a` is split with `n` times its idempotent
+`∑ g i`. -/
 lemma exists_retraction_of_averaging_conj {E : Type*} [Category E] [Preadditive E] {L₀ : E ⥤ E}
-    (I : L₀ ≅ 𝟭 E) {P₀ W Z Z' : E} (a : P₀ ⟶ Z) (β : P₀ ⟶ W) (rβ : W ⟶ P₀)
+    (I : L₀ ≅ 𝟭 E) {P₀ P₁ W Z Z' : E} (a : P₁ ⟶ Z) (β : P₀ ⟶ W) (rβ : W ⟶ P₀)
     (hβ : β ≫ rβ = 𝟙 _) {ι : Type*} (s : Finset ι) (n : ℕ) (f : ι → (W ⟶ W))
-    (havg : n • (rβ ≫ β) = ∑ i ∈ s, f i) (c₁ : P₀ ⟶ L₀.obj P₀) [IsIso c₁]
+    (havg : n • (rβ ≫ β) = ∑ i ∈ s, f i) (c₁ : P₁ ⟶ L₀.obj P₀) [IsIso c₁]
     (k : L₀.obj W ⟶ Z') [IsIso k] (e : Z ⟶ Z') [IsIso e] (hx : a ≫ e = c₁ ≫ L₀.map β ≫ k)
     (g : ι → (Z ⟶ Z)) (g' : ι → (Z' ⟶ Z')) (hk : ∀ i, k ≫ g' i = L₀.map (f i) ≫ k)
     (he : ∀ i, g i ≫ e = e ≫ g' i) :
     ∃ r, a ≫ r = 𝟙 _ ∧ n • (r ≫ a) = ∑ i ∈ s, g i := by
   have ha : a = c₁ ≫ L₀.map β ≫ k ≫ inv e := by
     rw [← reassoc_of% hx, IsIso.hom_inv_id, Category.comp_id]
-  have hL : ∀ {U V : E} (h : U ⟶ V), L₀.map h = I.hom.app U ≫ h ≫ I.inv.app V := fun h ↦ by
-    rw [← I.hom.naturality_assoc, Functor.id_map, Iso.hom_inv_id_app, Category.comp_id]
+  have hL : ∀ {U V : E} (h : U ⟶ V), L₀.map h = I.hom.app U ≫ h ≫ I.inv.app V := by
+    intro U V h
+    rw [← Category.comp_id (L₀.map h), ← I.hom_inv_id_app V, ← Category.assoc, I.hom.naturality h,
+      Functor.id_map, Category.assoc]
   refine ⟨e ≫ inv k ≫ L₀.map rβ ≫ inv c₁, ?_, ?_⟩
   · rw [ha]
     simp only [Category.assoc, IsIso.inv_hom_id_assoc, IsIso.hom_inv_id_assoc]
@@ -72,7 +81,7 @@ lemma exists_retraction_of_averaging_conj {E : Type*} [Category E] [Preadditive 
       simp only [Category.assoc, IsIso.inv_hom_id_assoc]
       rw [← L₀.map_comp_assoc, hL]
       simp only [Category.assoc]
-    rw [hr, Preadditive.comp_nsmul, Preadditive.nsmul_comp, havg, Preadditive.sum_comp,
+    rw [hr, ← Preadditive.comp_nsmul, ← Preadditive.nsmul_comp, havg, Preadditive.sum_comp,
       Preadditive.comp_sum]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     have hi : (e ≫ inv k ≫ I.hom.app W) ≫ f i ≫ I.inv.app W ≫ k ≫ inv e =
@@ -81,6 +90,115 @@ lemma exists_retraction_of_averaging_conj {E : Type*} [Category E] [Preadditive 
       simp only [Category.assoc]
     rw [hi, ← reassoc_of% (hk i), IsIso.inv_hom_id_assoc, ← reassoc_of% (he i),
       IsIso.hom_inv_id, Category.comp_id]
+
+/-- `NearbyCyclesModel.exists_retraction_of_averaging_conj` in the shape of the composition law
+`NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq` for the factorization of the projection
+`χ : M'' ⟶ M` through `κ : M'' ⟶ M_b` and `ψ : M_b ⟶ M` (`hx`): if the exchange `αψ` of `ψ` is
+split with `n` times its idempotent `∑ f i`, the exchange `ακ` of `κ` is invertible and
+intertwines `f i` with `g' i`, then the exchange `αχ` of `χ` is split with `n` times its
+idempotent `∑ g i`, for natural endomorphisms `g`, `g'` of `Ψ_{M''}`. -/
+lemma exists_retraction_of_averaging_comp {DX DM DT D₂ : Type*} [Category DX] [Category DM]
+    [Category DT] [Preadditive DT] [Category D₂] {ΨM : DX ⥤ DM} {ΨB : DX ⥤ DT} {ΨG : D₂ ⥤ DT}
+    {Lp Lg : DM ⥤ DT} {L₀ : DT ⥤ DT} {L₀X : DX ⥤ DX} {Lc : DX ⥤ D₂}
+    (αχ : ΨM ⋙ Lp ⟶ Lc ⋙ ΨG) (αψ : ΨM ⋙ Lg ⟶ L₀X ⋙ ΨB) (ακ : ΨB ⋙ L₀ ⟶ Lc ⋙ ΨG)
+    (cp : Lp ≅ Lg ⋙ L₀) (cc : Lc ≅ L₀X ⋙ Lc) (I : L₀ ≅ 𝟭 DT) (A : DX)
+    (hx : αχ.app A ≫ ΨG.map (cc.hom.app A) =
+      cp.hom.app (ΨM.obj A) ≫ L₀.map (αψ.app A) ≫ ακ.app (L₀X.obj A))
+    (hiso : IsIso (ακ.app (L₀X.obj A))) (rψ : (L₀X ⋙ ΨB).obj A ⟶ (ΨM ⋙ Lg).obj A)
+    (hrψ : αψ.app A ≫ rψ = 𝟙 _) {ι : Type*} (s : Finset ι) (n : ℕ)
+    (f : ι → (ΨB.obj (L₀X.obj A) ⟶ ΨB.obj (L₀X.obj A)))
+    (m nV : ℕ) (hn : n = m * nV) (sV : ΨB.obj (L₀X.obj A) ⟶ ΨB.obj (L₀X.obj A))
+    (hs : ∑ i ∈ s, f i = m • sV) (havgV : nV • (rψ ≫ αψ.app A) = sV)
+    (g : ι → (ΨG.obj (Lc.obj A) ⟶ ΨG.obj (Lc.obj A)))
+    (g' : ι → (ΨG.obj (Lc.obj (L₀X.obj A)) ⟶ ΨG.obj (Lc.obj (L₀X.obj A))))
+    (hk : ∀ i, ακ.app (L₀X.obj A) ≫ g' i = L₀.map (f i) ≫ ακ.app (L₀X.obj A))
+    (he : ∀ i, g i ≫ ΨG.map (cc.hom.app A) = ΨG.map (cc.hom.app A) ≫ g' i) :
+    ∃ r, αχ.app A ≫ r = 𝟙 _ ∧ n • (r ≫ αχ.app A) = ∑ i ∈ s, g i :=
+  haveI := hiso
+  exists_retraction_of_averaging_conj I (αχ.app A) (αψ.app A) rψ hrψ s n f
+    (by rw [hn, mul_smul, havgV, hs])
+    (cp.hom.app (ΨM.obj A)) (ακ.app (L₀X.obj A)) (ΨG.map (cc.hom.app A)) hx g g' hk he
+
+section LiftExchange
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k₁] [Field k₁'] [Field k₂]
+  [Field k₂'] [Fact (ringChar k₁ ≠ ℓ)] [Fact (ringChar k₁' ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
+  [Fact (ringChar k₂' ≠ ℓ)]
+  {X : Over (Spec (.of k₁))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  {X' : Over (Spec (.of k₁'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  {Y : Over (Spec (.of k₂))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  {Y' : Over (Spec (.of k₂'))} [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
+  {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
+
+set_option maxHeartbeats 1600000 in
+/-- **Averaging splittings on bounded constructible complexes**: let `β` be the restriction
+`NearbyCyclesModel.liftExchange` of an exchange `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N` to bounded
+constructible complexes, and `ρ σ` the restrictions of the actions of self-maps `ψ σ` of `N`
+indexed by a group `G`, multiplicative and trivial on a normal subgroup `U` of finite index at
+`Lj^* A`. If `α` is split at `A` by `r` with `[G : U] • (r ≫ α) = ∑ ρ(ψ σ)` over representatives
+of `G ⧸ U`, then so is `β`, and the representatives of `a⁻¹` and `a` act inversely. -/
+private lemma exists_retraction_liftExchange_of_averaging
+    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (α : M.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
+        L((j')^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶
+      L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ N.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (β : boundedConstructibleNearbyCycles hM ⋙
+        boundedConstructibleUpperStarOfMap ℓ (X := X') (Y := Y') j' ⟶
+      boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := Y) j ⋙
+        boundedConstructibleNearbyCycles hN)
+    (hβ : β = liftExchange (PY := boundedConstructible _) (PX := boundedConstructible _)
+        (PY' := boundedConstructible _) (PX' := boundedConstructible _) α
+        (fun K ↦ hM K.obj K.property) (fun K ↦ hN K.obj K.property)
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ j' K.obj K.property)
+        (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ j K.obj K.property))
+    {G : Type*} [Group G] (ψ : G → N.Hom N (𝟙 _) (𝟙 _))
+    (ρ : G → (boundedConstructibleNearbyCycles hN ⟶ boundedConstructibleNearbyCycles hN))
+    (hρ : ∀ σ K, (ρ σ).app K =
+      ObjectProperty.homMk ((ψ σ).autAction (Profinite.padicAlgClRingObj ℓ) K.obj))
+    (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (U : Subgroup G) [U.Normal]
+    [Fintype (G ⧸ U)]
+    (hmul : ∀ σ τ : G, (ψ (σ * τ)).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj) =
+      (ψ τ).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj) ≫
+        (ψ σ).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj))
+    (htriv : ∀ σ ∈ U, (ψ σ).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj) = 𝟙 _)
+    {r : (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+        A.obj ⟶ (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
+          L((j')^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj A.obj}
+    (hr : α.app A.obj ≫ r = 𝟙 _)
+    (hravg : Fintype.card (G ⧸ U) • (r ≫ α.app A.obj) =
+      ∑ σ : G ⧸ U, (ψ σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
+        (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj)) :
+    ∃ r' : (boundedConstructibleNearbyCycles hN).obj
+        ((boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := Y) j).obj A) ⟶
+      (boundedConstructibleUpperStarOfMap ℓ (X := X') (Y := Y') j').obj
+        ((boundedConstructibleNearbyCycles hM).obj A),
+      β.app A ≫ r' = 𝟙 _ ∧
+      Fintype.card (G ⧸ U) • (r' ≫ β.app A) = ∑ σ : G ⧸ U, (ρ σ.out).app _ ∧
+      ∀ a : G ⧸ U, (ρ a⁻¹.out).app ((boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := Y)
+          j).obj A) ≫ (ρ a.out).app ((boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := Y)
+          j).obj A) = 𝟙 _ := by
+  subst hβ
+  refine ⟨ObjectProperty.homMk r, ObjectProperty.hom_ext _ hr, ?_, fun a ↦ ?_⟩
+  · apply (ObjectProperty.ι _).map_injective
+    rw [Functor.map_nsmul, Functor.map_sum]
+    simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
+      liftExchange_app_hom, ObjectProperty.homMk_hom, hρ]
+    exact hravg
+  · have hmem : a.out * a⁻¹.out ∈ U := by
+      rw [← QuotientGroup.eq_one_iff, QuotientGroup.mk_mul, QuotientGroup.out_eq',
+        QuotientGroup.out_eq', mul_inv_cancel]
+    apply ObjectProperty.hom_ext
+    rw [ObjectProperty.FullSubcategory.comp_hom, hρ, hρ, ObjectProperty.homMk_hom,
+      ObjectProperty.homMk_hom, ObjectProperty.FullSubcategory.id_hom]
+    exact (hmul _ _).symm.trans (htriv _ hmem)
+
+end LiftExchange
 
 variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of F))}
   {X' : Over (Spec (.of k'))} {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
@@ -96,44 +214,17 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
-/-- The morphism `κ : M'' ⟶ M_b` from the generic slice model to the base change of `M` along the
-slice, over the map of bases `c : X₂ ⟶ X₁` of the generic slice. -/
-noncomputable abbrev genericSliceToBaseChangeHom :=
-  genericSliceToBaseChange (traitSliceCoord k') h.isTraitModelOver hb
-    (h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb)
-
-/-- The projection `M'' ⟶ M` from the generic slice model is the composite of
-`κ : M'' ⟶ M_b` and of the projection `M_b ⟶ M` from the base change: composition law of the
-pullback exchanges. -/
-lemma genericSliceHom_pullbackExchange_app_comp
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (A : DerivedCategory (Mod (Sheaf (ProEt.topology X₁.left) Ab.{u + 1})
-      (condensedRingObj Λ X₁.left))) :
-    ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange Λ).app A ≫
-        ((genericSliceModel (traitSliceCoord k') hb).nearbyCycles Λ).map
-          ((leftDerivedUpperStarCompOfEq Λ
-            (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb))).hom.app A) =
-      (leftDerivedUpperStarCompOfEq Λ
-          (Category.id_comp (sliceSpecialMap (traitSliceCoord k') h.isTraitModelOver hb))).hom.app
-          ((M.nearbyCycles Λ).obj A) ≫
-        L((𝟙 _)^*⟦Λ⟧).map (((baseChangeHom h.isTraitModelOver b hb
-          (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange Λ).app A) ≫
-        ((genericSliceToBaseChangeHom h hb).pullbackExchange Λ).app
-          (L((𝟙 X₁.left)^*⟦Λ⟧).obj A) :=
-  (genericSliceToBaseChangeHom h hb).pullbackExchange_comp_app_of_eq Λ
-    (baseChangeHom h.isTraitModelOver b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
-    (h.genericSliceHom (traitSliceCoord k') hb) (Category.comp_id _) (Category.id_comp _)
-    (Category.id_comp _) (Category.id_comp _) A
-
+set_option maxHeartbeats 1600000 in
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
 constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
 acting trivially on `Ψ_{M''} (c^* A)`, and for every subgroup `U ≤ V` of finite index, the
 pullback exchange `α : p^* Ψ_M A ⟶ Ψ_{M''} (c^* A)` of the projection from the generic slice
 model is split, with `[P' : U]` times its idempotent the sum of the actions of representatives of
 `P' ⧸ U`. Deduced from the same statement for the base change `M_b`
-(`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice`) through the
-morphism `κ : M'' ⟶ M_b` with identity components. -/
-theorem exists_subgroup_genericSliceHom_pullbackExchange
+(`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice`): the projection
+`M'' ⟶ M` is the composite of the morphism `κ : M'' ⟶ M_b` with identity components
+(`NearbyCyclesModel.genericSliceToBaseChange`) and of the projection `M_b ⟶ M`. -/
+private theorem exists_subgroup_genericSliceHom_pullbackExchange
     (A : DerivedCategory (Mod (Sheaf (ProEt.topology X₁.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X₁.left)))
     (hA : boundedConstructible _ A) :
@@ -154,13 +245,21 @@ theorem exists_subgroup_genericSliceHom_pullbackExchange
                 (Profinite.padicAlgClRingObj ℓ)
                 (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦
                   Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
-  obtain ⟨V, hV, htriv, rB, hrB, havgB⟩ :=
-    exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) h.isTraitModelOver hb
-      (A := A) (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
+  have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA
+  have hM := h.isTraitModelOver
+  have hD := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ)
+    hM hb (A := A)
+  have hD2 := hD hA'
+  obtain ⟨V, hV, htriv, rB, hrB, havgB⟩ := hD2
+  have hc := h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb
   have hκ := fun σ ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
-    (traitSliceCoord k') h.isTraitModelOver hb
-    (h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb)
-    (Profinite.padicAlgClRingObj ℓ) σ (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+    (traitSliceCoord k') hM hb (Profinite.padicAlgClRingObj ℓ) hc σ
+    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  have hk := isIso_pullbackExchange_genericSliceToBaseChange (traitSliceCoord k')
+    hM hb (Profinite.padicAlgClRingObj ℓ) hc
+  have := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
+    hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
+    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
   -- triviality of the action of `V` on `Ψ_{M''} (c^* A)`
   have htrivG : ∀ σ ∈ V, (genericSliceAut (traitSliceCoord k') hb σ).autAction
       (Profinite.padicAlgClRingObj ℓ)
@@ -171,23 +270,55 @@ theorem exists_subgroup_genericSliceHom_pullbackExchange
       (fun f ↦ Hom.autAction_naturality _ _ f)
       ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
         (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb))).app A) ?_
-    have h₁ := hκ σ
-    rw [htriv σ hσ, CategoryTheory.Functor.map_id, Category.id_comp] at h₁
-    exact (cancel_epi _).1 (h₁.trans (Category.comp_id _).symm)
+    exact eq_id_of_comp_eq_map_comp _ _ _ (htriv σ hσ) (hκ σ)
   refine ⟨V, Subgroup.finiteIndex_of_finite_quotient, htrivG, fun U hUV _ ↦ ?_⟩
-  have havgU : Fintype.card (GenericAut k' (traitSliceField k') ⧸ U) •
-      (rB ≫ ((baseChangeHom h.isTraitModelOver b hb (traitSlice (traitSliceCoord k'))
-        (traitSlice_over _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A) =
-      ∑ σ : GenericAut k' (traitSliceField k') ⧸ U,
-        (baseChangeAut h.isTraitModelOver b hb (traitSlice (traitSliceCoord k'))
-          (traitSlice_over _) σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
-            (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) := by
-    rw [sum_autAction_baseChangeAut_eq_relIndex_nsmul _ _ _ _ _ _ hUV _ htriv, ← havgB,
-      smul_smul, ← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card,
-      ← Subgroup.index, ← Subgroup.index, Subgroup.relIndex_mul_index hUV]
-  exact exists_retraction_of_averaging_conj
-    (leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) _) _ _ rB hrB Finset.univ _ _ havgU
-    _ _ _ (genericSliceHom_pullbackExchange_app_comp h hb _ A)
+  have hs := sum_autAction_baseChangeAut_eq_relIndex_nsmul hM b hb
+    (traitSlice (traitSliceCoord k')) (traitSlice_over _) (Profinite.padicAlgClRingObj ℓ) hUV
+    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) htriv
+  have hn : Fintype.card (GenericAut k' (traitSliceField k') ⧸ U) =
+      U.relIndex V * Fintype.card (GenericAut k' (traitSliceField k') ⧸ V) := by
+    rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card, ← Subgroup.index,
+      ← Subgroup.index, Subgroup.relIndex_mul_index hUV]
+  -- the projection `M'' ⟶ M` is `κ` followed by the projection `M_b ⟶ M`
+  have hspec : 𝟙 _ ≫ baseChangeSpecialMap hM b hb
+      (traitSlice (traitSliceCoord k')) (traitSlice_over _) =
+        sliceSpecialMap (traitSliceCoord k') hM hb := by
+    rw [Category.id_comp]
+    apply hM.isPullback_i.hom_ext <;>
+      simp [sliceSpecialMap, baseChangeSpecialMap]
+  have htot : (genericSliceToBaseChange (traitSliceCoord k') hM hb hc).total ≫
+      (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).total = (h.genericSliceHom (traitSliceCoord k') hb).total := by
+    simp [genericSliceHom]
+  have hgen : (genericSliceToBaseChange (traitSliceCoord k') hM hb hc).generic ≫
+      (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).generic = (h.genericSliceHom (traitSliceCoord k') hb).generic := by
+    simp [genericSliceHom]
+  have hx := (genericSliceToBaseChange (traitSliceCoord k') hM hb
+    hc).pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ)
+    (baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _))
+    (h.genericSliceHom (traitSliceCoord k') hb) (Category.comp_id _) hspec htot hgen A
+  have hkA := NatIso.isIso_app_of_isIso ((genericSliceToBaseChange (traitSliceCoord k') hM hb
+    hc).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
+    (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  have key := exists_retraction_of_averaging_comp (ι := GenericAut k' (traitSliceField k') ⧸ U)
+    ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
+    ((baseChangeHom hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ))
+    ((genericSliceToBaseChange (traitSliceCoord k') hM hb hc).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ))
+    (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hspec)
+    (leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ)
+      (Category.comp_id (h.genericSliceBaseMap (traitSliceCoord k') hb)))
+    (leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ)
+      (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).left) A
+    (by exact_mod_proofs hx) (by exact_mod_proofs hkA) rB (by exact_mod_proofs hrB) Finset.univ
+    (Fintype.card (GenericAut k' (traitSliceField k') ⧸ U))
+    (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦ (baseChangeAut hM b hb
+      (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ.out).autAction
+        (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+    (U.relIndex V) (Fintype.card (GenericAut k' (traitSliceField k') ⧸ V)) hn _
+    (by exact_mod_proofs hs) (by exact_mod_proofs havgB)
     (fun σ : GenericAut k' (traitSliceField k') ⧸ U ↦
       (genericSliceAut (traitSliceCoord k') hb σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
         (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
@@ -196,7 +327,9 @@ theorem exists_subgroup_genericSliceHom_pullbackExchange
       (Profinite.padicAlgClRingObj ℓ)
         (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
           (L((𝟙 X₁.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)))
-    (fun σ ↦ hκ σ.out) (fun σ ↦ Hom.autAction_naturality _ _ _)
+    (fun σ ↦ by exact_mod_proofs hκ σ.out) (fun σ ↦ Hom.autAction_naturality _ _ _)
+  obtain ⟨r, hr₁, hr₂⟩ := key
+  exact ⟨r, by exact_mod_proofs hr₁, by exact_mod_proofs hr₂⟩
 
 end Ambient
 
@@ -216,6 +349,66 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
   [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
+set_option maxHeartbeats 1600000 in
+omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
+  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k')))).Prime]
+  [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom]
+  [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom] in
+/-- **The slice exchange is an averaging summand** (bounded constructible complexes): for a bounded
+constructible `A` on `X₁` there is a subgroup `V` of finite index of the pro-`p` kernel `P'` such
+that for every normal subgroup `U ≤ V` of finite index, the slice exchange
+`α_A : p^* Ψ_M A ⟶ Ψ_{M''} c^* A` is split by some `r` with `[P' : U] • (r ≫ α_A)` the sum of the
+actions (`NearbyCyclesModel.genericSliceAut`) of representatives of the elements of `P' ⧸ U`, and
+these actions are invertible, the representative of `a⁻¹` acting inversely to that of `a`.
+The bounded constructible form of
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_subgroup_genericSliceHom_pullbackExchange`. -/
+private theorem exists_subgroup_genericSliceExchange
+    (A : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ∃ V : Subgroup (GenericAut k' (traitSliceField k')), V.FiniteIndex ∧
+      ∀ (U : Subgroup (GenericAut k' (traitSliceField k'))) (_ : U.Normal)
+        (_ : Fintype (GenericAut k' (traitSliceField k') ⧸ U)), U ≤ V →
+        ∃ r : (genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).obj
+            ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) ⟶
+          (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj
+            ((boundedConstructibleNearbyCycles (h.preservesBoundedConstructible (ℓ := ℓ))).obj A),
+          (genericSliceExchange (traitSliceCoord k') ℓ h hb).app A ≫ r = 𝟙 _ ∧
+          Fintype.card (GenericAut k' (traitSliceField k') ⧸ U) •
+              (r ≫ (genericSliceExchange (traitSliceCoord k') ℓ h hb).app A) =
+            ∑ a : GenericAut k' (traitSliceField k') ⧸ U,
+              (genericSliceSelfAction (traitSliceCoord k') ℓ h hb
+                (genericSliceAut (traitSliceCoord k') hb a.out)).app _ ∧
+          ∀ a : GenericAut k' (traitSliceField k') ⧸ U,
+            (genericSliceSelfAction (traitSliceCoord k') ℓ h hb
+                (genericSliceAut (traitSliceCoord k') hb a⁻¹.out)).app
+              ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) ≫
+            (genericSliceSelfAction (traitSliceCoord k') ℓ h hb
+                (genericSliceAut (traitSliceCoord k') hb a.out)).app
+              ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) = 𝟙 _ := by
+  have hD := exists_subgroup_genericSliceHom_pullbackExchange ℓ h hb A.obj A.property
+  obtain ⟨V, hV, htriv, havg⟩ := hD
+  refine ⟨V, hV, fun U _ _ hUV ↦ ?_⟩
+  have hU := havg U hUV inferInstance
+  obtain ⟨r, hr, hravg⟩ := hU
+  exact exists_retraction_liftExchange_of_averaging
+    ((isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
+      h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ))
+    (h.preservesBoundedConstructible (ℓ := ℓ))
+    ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange (Profinite.padicAlgClRingObj ℓ))
+    (genericSliceExchange (traitSliceCoord k') ℓ h hb) rfl (genericSliceAut (traitSliceCoord k') hb)
+    (fun σ ↦ genericSliceSelfAction (traitSliceCoord k') ℓ h hb
+      (genericSliceAut (traitSliceCoord k') hb σ))
+    (fun σ K ↦ genericSliceSelfAction_app (traitSliceCoord k') ℓ h hb _ K) A U
+    (fun σ τ ↦ autAction_genericSliceAut_mul (traitSliceCoord k') hb _ σ τ _)
+    (fun σ hσ ↦ htriv σ (hUV hσ)) hr hravg
+
+-- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` in the users of this statement.
+attribute [-instance] monoidalCategory_boundedConstructible
+  ObjectProperty.instMonoidalCategoryStructFullSubcategory
+
+omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
+  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k')))).Prime]
+  [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom]
+  [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom] in
 /-- **The slice exchange is an averaging summand at a finite level** (blueprint
 `det-tf-nearby-duality-slice`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
 with `det-tf-invariants-duality`; SGA 4½, [Th. finitude], §3). For two bounded constructible
@@ -228,11 +421,10 @@ generic point `Spec Ω_K` through automorphisms `σ` over the generic point `η_
 with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
 The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`.
 
-`Γ` is the quotient of the group of generic automorphisms by the normal core of the intersection
-of the subgroups `Vᵢ` of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_subgroup_genericSliceHom_pullbackExchange`
-for `A₁` and `A₂`, and `ψ a` the action (`NearbyCyclesModel.genericSliceAut`) of a
-representative of `a`. -/
+`Γ` is the quotient of the group of generic automorphisms by the normal core `N` of the
+intersection of the subgroups `Vᵢ` of
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_subgroup_genericSliceExchange` for `A₁` and
+`A₂`, and `ψ a` is the action (`NearbyCyclesModel.genericSliceAut`) of a representative of `a`. -/
 theorem exists_averaging_genericSliceExchange
     (A₁ A₂ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (Γ : Type u) (_ : Group Γ) (_ : Fintype Γ)
@@ -258,10 +450,10 @@ theorem exists_averaging_genericSliceExchange
               ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) ≫
             (genericSliceSelfAction (traitSliceCoord k') ℓ h hb (ψ a)).app
               ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) = 𝟙 _ := by
-  obtain ⟨V₁, hV₁, htriv₁, havg₁⟩ :=
-    exists_subgroup_genericSliceHom_pullbackExchange ℓ h hb A₁.obj A₁.property
-  obtain ⟨V₂, hV₂, htriv₂, havg₂⟩ :=
-    exists_subgroup_genericSliceHom_pullbackExchange ℓ h hb A₂.obj A₂.property
+  have hD₁ := exists_subgroup_genericSliceExchange ℓ h hb A₁
+  have hD₂ := exists_subgroup_genericSliceExchange ℓ h hb A₂
+  obtain ⟨V₁, hV₁, h₁⟩ := hD₁
+  obtain ⟨V₂, hV₂, h₂⟩ := hD₂
   let N := (V₁ ⊓ V₂).normalCore
   let _ : Fintype (GenericAut k' (traitSliceField k') ⧸ N) :=
     Subgroup.fintypeQuotientOfFiniteIndex
@@ -275,37 +467,9 @@ theorem exists_averaging_genericSliceExchange
       rw [Functor.map_nsmul, CategoryTheory.Functor.map_id]
       exact isIso_nsmul_id_derived_padicAlgClRingObj ℓ _ Fintype.card_ne_zero _
     exact isIso_of_reflects_iso _ (ObjectProperty.ι _)
-  rintro A hA
-  obtain ⟨V, htriv, havg, hNV⟩ : ∃ V : Subgroup (GenericAut k' (traitSliceField k')),
-      (∀ σ ∈ V, (genericSliceAut (traitSliceCoord k') hb σ).autAction
-          (Profinite.padicAlgClRingObj ℓ)
-          (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-            A.obj) = 𝟙 _) ∧
-      (∀ U : Subgroup (GenericAut k' (traitSliceField k')), U ≤ V →
-        ∀ _ : Fintype (GenericAut k' (traitSliceField k') ⧸ U),
-        ∃ r, ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange
-            (Profinite.padicAlgClRingObj ℓ)).app A.obj ≫ r = 𝟙 _ ∧
-          Fintype.card (GenericAut k' (traitSliceField k') ⧸ U) •
-              (r ≫ ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange
-                (Profinite.padicAlgClRingObj ℓ)).app A.obj) =
-            ∑ σ : GenericAut k' (traitSliceField k') ⧸ U,
-              (genericSliceAut (traitSliceCoord k') hb σ.out).autAction
-                (Profinite.padicAlgClRingObj ℓ)
-                (L((h.genericSliceBaseMap (traitSliceCoord k') hb)^*⟦
-                  Profinite.padicAlgClRingObj ℓ⟧).obj A.obj)) ∧ N ≤ V := by
-    rcases hA with rfl | rfl
-    · exact ⟨V₁, htriv₁, havg₁, hN₁⟩
-    · exact ⟨V₂, htriv₂, havg₂, hN₂⟩
-  obtain ⟨r, hr, hravg⟩ := havg N hNV inferInstance
-  refine ⟨ObjectProperty.homMk r, ObjectProperty.hom_ext _ hr, ?_, fun a ↦ ?_⟩
-  · apply (ObjectProperty.ι _).map_injective
-    rw [Functor.map_nsmul, Functor.map_sum]
-    exact hravg
-  · apply ObjectProperty.hom_ext
-    refine ((autAction_genericSliceAut_mul (traitSliceCoord k') hb _ a.out (a⁻¹).out _).symm).trans
-      (htriv _ (hNV ?_))
-    rw [← QuotientGroup.eq_one_iff, QuotientGroup.mk_mul, QuotientGroup.out_eq',
-      QuotientGroup.out_eq', mul_inv_cancel]
+  rintro A (rfl | rfl)
+  · exact h₁ N inferInstance _ hN₁
+  · exact h₂ N inferInstance _ hN₂
 
 end IsTraitModelOfGenericBase
 
