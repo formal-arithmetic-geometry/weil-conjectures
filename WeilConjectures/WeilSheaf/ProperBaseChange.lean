@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.ProperBaseChangeFunctor
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
+import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Native.NativeProperNaturalBaseChange
 
 /-!
 # Proper base change for Weil complexes
@@ -93,8 +95,19 @@ theorem WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) (K : WeilComplex k₀ l X) :
     Nonempty ((WeilComplex.upperStar g).obj ((WeilComplex.derivedLowerStar f).obj K) ≅
       (WeilComplex.derivedLowerStar f').obj ((WeilComplex.upperStar g').obj K)) :=
-  let ⟨e⟩ := WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper (l := l) hf h
-  ⟨e.app K⟩
+  by
+    let : IsProper f := hf
+    have : IsLocallyNoetherian Y :=
+      LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+    have : IsLocallyNoetherian Y' :=
+      LocallyOfFiniteType.isLocallyNoetherian (Y' ↘ Spec (CommRingCat.of k₀))
+    let sq : ChosenCartesianSquare g' f' f g :=
+      { toCommSq := h.toCommSq
+        isoPullback := h.isoPullback
+        hom_fst := h.isoPullback_hom_fst
+        hom_snd := h.isoPullback_hom_snd }
+    obtain ⟨e⟩ := nativeWeil_proper_natural_baseChange k₀ l g' f' f g sq
+    exact ⟨ObjectProperty.isoMk _ (e.app K)⟩
 
 /-- **Proper base change for higher direct images**: for a cartesian square of `k₀`-schemes
 `X' = X ×_Y Y'` with `f : X ⟶ Y` proper, and a Weil sheaf `F` on `X`, there is an isomorphism of

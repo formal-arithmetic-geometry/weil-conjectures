@@ -13,6 +13,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLo
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicBound
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarHeart
 
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperHeartUniformBound
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperConstructibleCohomology
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperBoundedBelowCoproducts
+
 /-!
 # The proper direct image for the `ℓ`-adic coefficient rings: the inputs
 
@@ -68,6 +72,47 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
+
+/-- `Rp_*` preserves `Dᵇc` once it has a uniform bound on the ind-constructible heart and
+constructible cohomology on `Dᵇc` (both supplied per coefficient ring). -/
+private theorem boundedConstructible_proper_of_bound
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    (hbound : ∃ d : ℤ, ∀ M, constructibleCoproductClosure Λ Z M →
+      (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) (hK : boundedConstructible _ K)
+    (hcoh : ∀ q : ℤ, IsConstructibleModuleObject (condensedRingObj Λ Y)
+      ((DerivedCategory.homologyFunctor _ q).obj (R((p)_*⟦Λ⟧).obj K))) :
+    boundedConstructible _ (R((p)_*⟦Λ⟧).obj K) := by
+  obtain ⟨d, hd⟩ := hbound
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+  have : K.IsGE a := ha
+  have : K.IsLE b := hb
+  have hP : DerivedCategory.homologyProperty (constructibleCoproductClosure Λ Z) K :=
+    fun n ↦ ObjectProperty.le_weakSerreCoproductClosure _ _ (hK.2 n)
+  have hle := DerivedCategory.isLE_obj_of_isLE_of_homologyProperty
+    R((p)_*⟦Λ⟧) d (constructibleCoproductClosure Λ Z) hd K hK.1 hP b
+  have hge := Functor.isGE_rightDerivedFunctor_obj ((p)_*⟦Λ⟧) K a
+  exact ⟨⟨⟨a, hge⟩, ⟨b + d, hle⟩⟩, hcoh⟩
+
+/-- The proper heart hypotheses for `Rp_*`, given the uniform heart bound (supplied per
+coefficient ring). -/
+private theorem properHeart_of_bound
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]
+    (hbound : ∃ d : ℤ, ∀ M, constructibleCoproductClosure Λ Z M →
+      (R((p)_*⟦Λ⟧).obj ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d) :
+    ProperLowerStarHeartHypotheses Λ p := by
+  refine ⟨hbound, ?_⟩
+  intro J N _
+  have : PreservesColimit
+      (Discrete.functor (fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j)))
+      R((p)_*⟦Λ⟧) :=
+    condensed_boundedBelow_preservesCoproduct Λ p J 0 _ (fun _ ↦ inferInstance)
+  infer_instance
 
 /-! ### The coefficient ring `E` -/
 
