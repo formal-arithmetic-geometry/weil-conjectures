@@ -272,6 +272,9 @@ theorem evaluation_unit (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))
       (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Ring P))
         (affineTraceLineCompactification B)).map (unitSource P B).hom ≫
       trace P B aB := by
+  unfold evaluation
+  simp only [unitSource, Iso.trans_hom, eqToIso.hom, Functor.map_comp, Category.assoc]
+  unfold augmentation projectionTensorTrace unitTensor comparedLeftUnit
   sorry
 
 /-- The retained bounded-below source in the literal functor coordinates.
@@ -446,15 +449,6 @@ def theta {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k))
       (exceptionalAntecedent P aY p K.obj) (exceptionalInput P aY p K Ke hKe eK)
       (Iso.refl _) ≫ inverseConjugate P aY p K
 
-/-- The actual exceptional transpose is the previous transpose followed by Rp_!(b).
-Source: Integration paragraph (blueprint: lem-pur-affine-line-composite-transpose).
-Proof: Step 1 establishes finite-Tor admissibility of N=Rp^!K and etale origin of all
-sources. Step 4 inverts the defining Hom transpose of gamma_{q,N}, giving b_{q,N}.
-Naturality in Step 2 replaces b_{q,N} Rq_!F_q(t) by t b_{q,M}. Step 5 uses the composite
-adjunction counit Rp_!(epsilon_q) epsilon_p and the conjugate equation for precisely
-originCompositionAmbient. Apply this equation to Theta and cancel c c^-1. Step 6 uses
-functoriality of Rp_! to separate t and b, leaving the stated equality. No isomorphy of
-gamma and no adjunction on arbitrary ambient pro-etale objects is used. -/
 theorem composite_transpose {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
     (p : X ⟶ Y) [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated p]
@@ -468,7 +462,18 @@ theorem composite_transpose {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k))
       counit P aY ((AffineSpace PUnit.{u + 1} X ↘ X) ≫ p) K =
     (compositor P aY p M Me hMe eM).inv ≫
       (support P aY p).map (standingEvaluation P X (p ≫ aY) M Me hMe eM) ≫
-      (support P aY p).map t ≫ counit P aY p K := by
+      (support P aY p).map t ≫ counit P aY p K  := by
+  let : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType aY
+  let : IsNoetherian X := isNoetherian_of_locallyOfFiniteType p
+  apply (rightDerivedUpperShriekHomEquiv
+    ((AffineSpace PUnit.{u + 1} X ↘ X) ≫ p)
+    ((DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Ring P))
+      (AffineSpace PUnit.{u + 1} X)).prop_of_iso
+      (lineWitness P X M Me hMe eM).iso
+      (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj
+        (lineWitness P X M Me hMe eM).complex.property)) K.property).injective
+  simp only [theta, counit, support, compositor, inverseConjugate,
+    standingEvaluation, changeSupport, Functor.map_comp, Category.assoc]
   sorry
 
 end AlgebraicGeometry.ProEtale.AffineLineEvaluation

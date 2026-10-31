@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-!
 # Functorial complex embeddings through injective subobjects
@@ -30,21 +31,14 @@ In a Grothendieck abelian category there is a functorial termwise monomorphic
 quasi-isomorphism into a complex, factoring in each degree through an injective subobject.
 The subobject is represented by the monomorphism `b` from the injective object `I`.
 
-Proof:
-1. By `lem-weil-pbc-grothendieck-functorial-injective-embedding`, choose functorial
-   injective embeddings `i : id → I`. Set `J(M)^n = I(M^n) ⊕ I(M^(n+1))`, with
-   differential `(x,y) ↦ (y,0)`. The maps `(i, i ∘ d)` define a natural termwise
-   monomorphism `u : M → J(M)`. Let `v : J(M) → Q(M)` be its cokernel.
-2. Take `N(M)` to be the cone of `v` shifted by `-1`. Its degree `n` term is
-   `Q(M)^(n-1) ⊕ J(M)^n`, with differential matrix `[-d_Q, -v; 0, d_J]`.
-   The natural map `j = (0,u)` is termwise monic, and factors through the subobject
-   `0 ⊕ J(M)^n`. This subobject is injective, being a finite sum of injectives.
-3. The quotient of `N(M)` by `j(M)` is the shifted cone of the identity of `Q(M)`.
-   In degree `n` its terms are `Q(M)^(n-1) ⊕ Q(M)^n`, its differential is
-   `[-d_Q, -1; 0, d_Q]`, and `h(q,q') = (0,-q)` contracts it: `dh + hd = id`.
-   Thus it is acyclic. By `lem-weil-pbc-complex-ses-homology-long-exact`, the short
-   exact sequence with this quotient makes `j` a quasi-isomorphism. All constructions
-   are natural in `M`, giving the functor `N` and the natural transformation `j`. -/
+Proof: let `N` be the functorial K-injective replacement
+`CochainComplex.kInjectiveResolutionFunctor` (node lem-weil-pbc-kinjective-functorial-existence;
+Stacks, Injectives, Theorem 079P) and `j` its augmentation
+`CochainComplex.toKInjectiveResolution`. By `monoQuasiIso_toKInjectiveResolution_app`, each
+`j.app M` is a monomorphic quasi-isomorphism, so it is termwise monic and a quasi-isomorphism.
+By `injective_kInjectiveResolutionFunctor_obj_X`, every term `(N.obj M).X n` is injective
+(maps out of the acyclic two-term complex `X ⟶ X` lift against `N.obj M ⟶ 0`). The factorization
+clause takes `I = (N.obj M).X n`, `a = (j.app M).f n` and `b = 𝟙 I`. -/
 theorem exists_functorial_injective_complex_embedding
     (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] :
     ∃ (N : CochainComplex C ℤ ⥤ CochainComplex C ℤ)
@@ -53,6 +47,28 @@ theorem exists_functorial_injective_complex_embedding
         (∀ (n : ℤ), Mono ((j.app M).f n)) ∧ QuasiIso (j.app M) ∧
           ∀ (n : ℤ), ∃ (I : C) (a : M.X n ⟶ I) (b : I ⟶ (N.obj M).X n),
             Injective I ∧ Mono b ∧ a ≫ b = (j.app M).f n := by
-  sorry
+  let N : CochainComplex C ℤ ⥤ CochainComplex C ℤ :=
+    CochainComplex.kInjectiveResolutionFunctor C
+  let j : 𝟭 (CochainComplex C ℤ) ⟶ N :=
+    CochainComplex.toKInjectiveResolution C
+  refine ⟨N, j, ?_⟩
+  intro M
+  have hj := CochainComplex.monoQuasiIso_toKInjectiveResolution_app C M
+  let : Mono (j.app M) := hj.1
+  refine ⟨?_, hj.2, ?_⟩
+  · intro n
+    exact (inferInstance : Mono ((j.app M).f n))
+  · intro n
+    let I : C := (N.obj M).X n
+    let a : M.X n ⟶ I := (j.app M).f n
+    let b : I ⟶ (N.obj M).X n := 𝟙 I
+    have hI : Injective I := by
+      dsimp [I, N]
+      infer_instance
+    have hb : Mono b := by
+      dsimp [b]
+      infer_instance
+    refine ⟨I, a, b, hI, hb, ?_⟩
+    simp [I, a, b]
 
 end CochainComplex
