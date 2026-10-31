@@ -190,8 +190,9 @@ set_option linter.overlappingInstances false in
 adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism, for `f` smooth of
 relative dimension `d`. -/
 instance isIso_smoothPurityMap [SmoothOfRelativeDimension d f.left] :
-    IsIso (smoothPurityMap ℓ f d) :=
-  sorry
+    IsIso (smoothPurityMap ℓ f d) := by
+  rw [smoothPurityMap_eq_smoothOrientation]
+  infer_instance
 
 /-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type
 which is smooth of pure relative dimension `d`, the exceptional inverse image of the constant
