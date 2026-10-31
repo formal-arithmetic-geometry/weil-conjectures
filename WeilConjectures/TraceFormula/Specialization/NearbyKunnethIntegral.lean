@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRational
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
