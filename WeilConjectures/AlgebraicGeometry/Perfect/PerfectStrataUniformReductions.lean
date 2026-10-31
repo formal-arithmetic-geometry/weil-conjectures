@@ -187,7 +187,7 @@ private def commRingInverseImageUnderlying {X Y : Scheme.{u}} (f : X ⟶ Y)
   (proEtale_moduleInverseImage_comparison f R).1.some
 
 private theorem finite_lisse_of_cover_models {X Y : Scheme.{u}} (g : Y ⟶ X)
-    (B : Type (u + 1)) [CommRing B]
+    (B : Type (u + 1)) [CommRing B] [Finite B]
     (F : pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)))
     (J : Type (u + 1)) (U : J → Y.ProEt)
     (f : ∀ j, U j ⟶ ProEt.mk (𝟙 Y))
